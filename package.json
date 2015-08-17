@@ -1,0 +1,11 @@
+{
+  "name": "ob1",
+  "version": "0.1.0",
+  "description": "Open Bazaar Client",
+  "main": "main.js",
+  "dependencies": {
+    "backbone": "^1.2.1",
+    "jquery": "^2.1.4",
+    "underscore": "^1.8.3"
+  }
+}

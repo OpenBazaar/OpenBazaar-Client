@@ -1,0 +1,586 @@
+/*========== base styles ==========*/
+
+body {
+  margin: 0;
+  background: rgb(7,65,97);
+  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  position: absolute; /* fixes box shadow margin issue */
+  width: 100%; /* fixes box shadow margin issue */
+  min-height: 900px; /* fixes box shadow margin issue */
+  /*fonts*/
+  font-size: 14px;
+  line-height: 18px;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 1s;
+  cursor: pointer;
+}
+
+a:hover,
+a:focus {
+  opacity: 0.6;
+}
+
+input[type="text"] {
+  border: none;
+  color: #000;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+
+/*========== structure classes ==========*/
+
+#content {
+  width: 950px;
+  margin: 77px auto 50px;
+  position: relative;
+  z-index: 1;
+}
+
+#pageNav {
+  position: fixed;
+  top: 0;
+  z-index: 3;
+}
+
+#sideBar {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}
+
+.mainContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-rsp {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.bar {
+  height: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.bar.barFlush {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navBar {
+  /* use for horizontal nav structures */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.nav-ctrlGroup {
+  /* use for any cluster of nav controls */
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.nav-ctrlGroup:first-child {
+  padding-left: 0;
+}
+
+.flexContainer {
+  overflow: hidden;
+}
+
+.flexRow {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  /* reset styles if applied to a list item */
+  padding: 0;
+}
+
+.flexRow-center {
+  justify-content: center;
+}
+
+.flexRow [class |= "flexCol"] {
+  box-sizing: border-box;
+}
+
+.flexRow.pad [class |= "flexCol"] {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.flexRow.pad [class |= "flexCol"]:first-child {
+  padding-left: 0;
+}
+
+.flexRow.pad [class |= "flexCol"]:last-child {
+  padding-right: 0;
+}
+
+.flexRow .flexCol-6 {
+  width: 50%;
+}
+
+.flexRow .flexCol-4 {
+  flex-basis: 33.33333333333333%;
+}
+
+.flexExpand {
+  /* use to make only one item in a flex row expand */
+  flex-grow: 1;
+}
+
+.gridItem {
+  box-sizing: border-box;
+  padding: 25px 33px;
+}
+
+.rowItem {
+  flex-grow: 1;
+  padding: 10px 15px;
+}
+
+.rowItem input[type=radio] {
+  vertical-align: middle;
+  margin-top: 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.thumbnail {
+  float: left;
+  height: 30px;
+  width: 30px;
+  margin-right: 6px;
+  background-size: cover;
+  border-radius: 2px;
+}
+
+.row10 {
+  margin-bottom: 10px;
+}
+
+.row20 {
+  margin-bottom: 20px;
+}
+
+.rowTop20 {
+  margin-top: 20px;
+}
+
+.pad20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.popMenu {
+  position: absolute;
+  z-index: 1;
+}
+
+.modal {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.modal.modal-navOffset {
+  top: 50px;
+}
+
+.modal-child {
+  width: 525px;
+  height: 590px;
+  margin: 80px auto 0 auto;
+}
+
+.modal.modal-navOffset .modal-child {
+  margin-top: 25px;
+}
+
+.accordian {
+  overflow: hidden;
+  position: relative;
+}
+
+.accordian > .accordian-window {
+  position: absolute;
+}
+
+.accordian > .accordian-window > .accordian-child {
+  float: left;
+}
+
+/*========== typography ==========*/
+
+h1,h2,h3 {
+  font-family: "font-bold;"
+  margin: 20px 0;
+  line-height: 1;
+}
+
+h4,h5,h6 {
+  font-family: "font-medium";
+  margin: 10px 0;
+  line-height: 1;
+}
+
+.h5, h5 {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.h6, h6 {
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.txt-fade {
+  opacity: 0.75;
+}
+
+.txt-unleaded {
+  line-height: 1;
+}
+
+/*========== skin classes ==========*/
+
+.navBar {
+  background: #327EB8;
+}
+
+.mainContainer {
+  background: #086A9E;
+}
+
+.modal-opaque {
+  background: rgb(7,65,97);
+  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+}
+
+.modal-childMain {
+  border-radius: 3px;
+  background: #327eb8;
+  box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.flex-border {
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.flex-border > .flexRow {
+  /* hide the extra border on the right and bottom sides */
+  margin: 0 -2px -2px 0;
+  width: auto;
+}
+
+.flex-border > .flexRow [class |= "flexCol"] {
+  border-right: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.flex-border > .flexRow > .flexRow {
+  /* containing row has a list of rows inside it */
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.txtField {
+  width: 100%;
+  height: 32px;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  opacity: .85;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.txtFieldWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.txtFieldWrapper:before {
+  font-family: Ionicons;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  font-size: 18px;
+  color: #000;
+  opacity: 0.4;
+  z-index: 1;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+}
+
+.searchWrapper:before {
+  content: "\f4a5"
+}
+
+.searchWrapper .txtField {
+  text-indent: 24px; /* make room for icon */
+}
+
+.txtField-bar,
+input[type="text"].txtField-bar {
+  background: none;
+  border-radius: 0;
+  opacity: 1;
+  color: #fff;
+  padding: 13px;
+  height: 45px;
+  box-shadow: none;
+}
+
+.txtField-bar::-webkit-input-placeholder,
+input[type="text"].txtField-bar::-webkit-input-placeholder {
+  opacity: 1;
+  color: #79a9c9;
+}
+
+.txtField-bar:focus {
+  outline: none;
+}
+
+.txtFieldWrapper-bar:before {
+  color: #fff;
+  top: 15px;
+  left: 15px;
+  opacity: 1;
+}
+
+.btn {
+  display: block;
+  height: 32px;
+  min-width: 32px;
+  line-height: 32px;
+  float: left;
+  background: #086A9E;
+  padding:0;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn:before {
+  line-height: 32px;
+}
+
+.btn-txt {
+  /* button with text */
+  padding: 0 22px;
+}
+
+.btn-light {
+  background: rgba(255,255,255,0.2);
+}
+
+.btn-c1 {
+  background-color: #327EB8;
+}
+
+.btn-win {
+  border-radius: 6px;
+  width: 12px;
+  min-width: 0;
+  height: 12px;
+  background: #fff;
+  margin: 0 2px;
+  padding: 0;
+}
+
+.btn-win.btn-winClose {
+  background: #E45A5A;
+}
+
+.btn-win.btn-winMin {
+  background: #F8E71C;
+}
+
+.btn-win.btn-winMax {
+  background: #B8E986;
+}
+
+.btn-bar {
+  border-radius: 0;
+  min-width: 95px;
+  text-align: center;
+  background: #327EB8;
+  border-right: 1px solid #086A9E;
+  height: 50px;
+  line-height: 50px;
+}
+
+.btn-bar.active {
+  background: #086A9E;
+}
+
+.btn-wide {
+  width: 100%;
+  border: none;
+}
+
+.btn-half {
+  width: 50%;
+}
+
+.btn-togLeft,
+.btn-togMid,
+.btn-togRight {
+  /* creates a set of buttons flush with each other */
+  float: left;
+}
+
+.btn-togLeft {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-togRight {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn.btn-back:before,
+.btn.btn-fwd:before {
+  opacity: 0.3;
+}
+
+.btn.btn-back.active:before,
+.btn.btn-fwd.active:before {
+  opacity: 1;
+}
+
+.btn-profile {
+  background-image: url('../imgs/defaultUser.png');
+  background-size: contain;
+}
+
+.popMenu-navBar {
+  top: 36px;
+  right: 10px;
+  background: #252525;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 13px;
+  padding: 10px 15px;
+  width: 230px;
+}
+
+.popMenu-navBar a {
+  display: block;
+  line-height: 25px;
+  transition: opacity 1s;
+}
+
+.popMenu-navBar a:hover {
+  opacity: 0.6;
+}
+
+.popMenu-navBar hr {
+  margin: 0.5em -15px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/*========== one-off classes ==========*/
+
+.homeModal-hero {
+  height: 250px;
+  width: 525px;
+  background: url('../imgs/obSettingsHero.jpg') no-repeat;
+  position: relative;
+}
+
+.homeModal-heroText {
+  position: absolute;
+  bottom: 30px;
+  color: #fff;
+  width: 80%;
+  margin: 0 10%;
+  text-align: center;
+}
+
+.homeModal-accordian {
+  height: 340px;
+}
+
+.homeModal-settings {
+  height: 240px;
+  overflow-y: scroll;
+  background: #086A9E;
+}
+
+.homeModal-avatarPreview {
+  background: #327EB8;
+  border-radius: 70px;
+  height: 130px;
+  width: 130px;
+  margin-top: 30px;
+}
+
+
+/*========== utility classes ==========*/
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.vCentered {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
