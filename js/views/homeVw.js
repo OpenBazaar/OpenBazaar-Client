@@ -12,7 +12,7 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
-  el: '#content',
+  className:"homeView",
 
   events: {
     'click .js-homeItemsBtn': 'homeItemsClick',
@@ -42,6 +42,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function(tmpl){
+    this.$el.appendTo('#content');
     this.$el.html(tmpl());
     this.subRender();
   },

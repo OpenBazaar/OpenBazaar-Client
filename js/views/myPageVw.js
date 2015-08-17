@@ -8,7 +8,7 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
-  el: '#content',
+  tagname: "myPageView",
 
   events: {
     'click .btn': 'btnClick'
@@ -23,6 +23,7 @@ module.exports = Backbone.View.extend({
   render: function(){
     console.log("rendering myPageView");
     var self = this;
+    this.$el.appendTo('#content');
     var tmpl = loadTemplate('./js/templates/myPage.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
