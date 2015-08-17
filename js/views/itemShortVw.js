@@ -14,7 +14,6 @@ module.exports = Backbone.View.extend({
   className: "flexCol-4",
 
   events: {
-    'click .btn': 'btnClick'
   },
 
   initialize: function(){
@@ -26,10 +25,6 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;
-  },
-
-  btnClick: function(e){
-    console.log("nav button clicked");
   }
 
 });

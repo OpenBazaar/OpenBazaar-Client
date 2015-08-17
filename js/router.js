@@ -3,11 +3,13 @@ var _ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 
-var homeView = require('./views/homeVw');
+var homeView = require('./views/homeVw'),
+    myPageView = require('./views/myPageVw');
 
 module.exports = Backbone.Router.extend({
   routes: {
     "": "home",
+    "home": "home",
     "myPage": "myPage",
     "customizePage": "customizePage",
     "sellItem": "sellItem",
@@ -20,12 +22,17 @@ module.exports = Backbone.Router.extend({
     "support": "support"
   },
 
+  newView: function(view){
+    this.view && (this.view.close ? this.view.close() : this.view.remove());
+    this.view = view;
+  },
+
   home: function(){
-    var home = new homeView();
+    this.newView(new homeView());
   },
 
   myPage: function(){
-    console.log("myPage");
+    this.newView(new myPageView());
   },
 
   customizePage: function(){

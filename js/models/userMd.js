@@ -14,7 +14,6 @@ module.exports = Backbone.Model.extend({
   },
 
   initialize: function(){
-    console.log("user initialized");
     this.on('change', function(){
       console.log("user has changed values");
     })

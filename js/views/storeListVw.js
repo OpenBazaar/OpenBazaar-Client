@@ -35,6 +35,7 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     var self = this;
     this.storesShort = new storesShortCollection(fakeStores);
+    this.subViews = [];
     this.render();
   },
 
@@ -49,7 +50,19 @@ module.exports = Backbone.View.extend({
     var storeShort = new storeShortView({
       model: item
     });
+    this.subViews.push(storeShort);
     $('.js-list2').append(storeShort.render().el);
+  },
+
+  close: function(){
+    _.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.remove();
+      }
+    });
+    this.remove();
   }
 
 });
