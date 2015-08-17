@@ -21,6 +21,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self = this;
+    this.subViews = [];
     var tmpl = loadTemplate('./js/templates/home.html', function(loadedTemplate){
       self.render(loadedTemplate);
     });
@@ -48,6 +49,7 @@ module.exports = Backbone.View.extend({
   subRender: function(){
     var itemList = new itemListView();
     var storeList = new storeListView();
+    this.subViews.push(itemList,storeList);
     this.hideList1();
   },
 
@@ -57,6 +59,17 @@ module.exports = Backbone.View.extend({
 
   homeStoresClick: function(e){
     this.hideList2();
+  },
+
+  close: function(){
+    _.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.remove();
+      }
+    });
+    this.remove();
   }
 
 });

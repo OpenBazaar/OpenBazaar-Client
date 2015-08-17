@@ -11,7 +11,11 @@ module.exports = Backbone.View.extend({
   el: '#pageNav',
 
   events: {
-    'click .btn': 'btnClick',
+    'click .js-navClose': 'navCloseClick',
+    'click .js-navMin': 'navMinClick',
+    'click .js-navMax': 'navMaxClick',
+    'click .js-navBack': 'navBackClick',
+    'click .js-navFwd': 'navFwdClick',
     'click .js-navProfile': 'navProfileClick',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-timeSelect': 'timeSelect',
@@ -65,18 +69,46 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
-        $('.js-homeModal').hide();
+        this.$el.find('.js-homeModal').hide();
       }
     });
     return this;
   },
 
-  btnClick: function(e){
-    console.log("nav button clicked");
+  navProfileClick: function(e){
+    e.stopPropagation();
+    var targ = this.$el.find('.js-navProfileMenu');
+    if(targ.hasClass('hide')){
+      targ.removeClass('hide');
+      $('html').on('click.closeNav', function(e){
+        if($(e.target).closest(targ).length === 0){
+          targ.addClass('hide');
+          $(this).off('.closeNav');
+        }
+      });
+    }else{
+      targ.addClass('hide');
+    }
   },
 
-  navProfileClick: function(e){
-    $('.js-navProfileMenu').toggleClass('hide');
+  navCloseClick: function(){
+    console.log("Nav Close Clicked");
+  },
+
+  navMinClick: function(){
+    console.log("Nav Min Clicked");
+  },
+
+  navMaxClick: function(){
+    console.log("Nav Max Clicked");
+  },
+
+  navBackClick: function(){
+    console.log("Nav Back Clicked");
+  },
+
+  navFwdClick: function(){
+    console.log("Nav Fwd Clicked");
   },
 
   countrySelect: function(e){
@@ -92,28 +124,28 @@ module.exports = Backbone.View.extend({
     inpt.prop("checked", true);
     this.model.set('timeZone', tz);
   },
-  
+
   newHandle: function(e){
-    $('.js-homeModal-handleInput').closest('.flexRow').removeClass('hide');
-    $('.js-homeModal-existingHandle').parent().addClass('hide');
-    $('.js-homeModal-cancelHandle').parent().removeClass('hide');
+    this.$el.find('.js-homeModal-handleInput').closest('.flexRow').removeClass('hide');
+    this.$el.find('.js-homeModal-existingHandle').parent().addClass('hide');
+    this.$el.find('.js-homeModal-cancelHandle').parent().removeClass('hide');
   },
-  
+
   existingHandle: function(e){
     //TODO: add code to connect handle here
   },
 
   cancelHandle: function(e){
-    $('.js-homeModal-handleInput').closest('.flexRow').addClass('hide');
-    $('.js-homeModal-existingHandle').parent().removeClass('hide');
-    $('.js-homeModal-cancelHandle').parent().addClass('hide');
+    this.$el.find('.js-homeModal-handleInput').closest('.flexRow').addClass('hide');
+    this.$el.find('.js-homeModal-existingHandle').parent().removeClass('hide');
+    this.$el.find('.js-homeModal-cancelHandle').parent().addClass('hide');
   },
 
   uploadAvatar: function(e){
     var self = this;
     var reader = new FileReader();
     reader.onload = function (e) {
-      $('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
+      self.$el.find('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
       self.model.set('tempAvatar', e.target.result);
       //TODO: add canvas resizing here
     }
@@ -121,9 +153,8 @@ module.exports = Backbone.View.extend({
   },
 
   settingsDone: function(e){
-    console.log("done");
     this.model.set('beenSet',true);
-    $('.js-homeModal').hide();
+    this.$el.find('.js-homeModal').hide();
   }
 
 });

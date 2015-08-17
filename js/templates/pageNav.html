@@ -1,7 +1,7 @@
 <div class="nav-ctrlGroup">
-  <a class="btn btn-win btn-winClose"></a>
-  <a class="btn btn-win btn-winMin"></a>
-  <a class="btn btn-win btn-winMax"></a>
+  <a class="btn btn-win btn-winClose js-navClose"></a>
+  <a class="btn btn-win btn-winMin js-navMin"></a>
+  <a class="btn btn-win btn-winMax js-navMax"></a>
 </div>
 <div class="nav-ctrlGroup">
   <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack"></a>
@@ -13,7 +13,7 @@
   </div>
 </div>
 <div class="nav-ctrlGroup">
-  <a class="btn btn-home ion-home"></a>
+  <a class="btn btn-home ion-home" href="#home"></a>
 </div>
 <div class="nav-ctrlGroup nav-profile">
   <div class="btn btn-profile js-navProfile"
@@ -23,24 +23,25 @@
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>>
 </div>
-<div class="popMenu popMenu-navBar hide js-navProfileMenu">
-  <a href="/myPage">My page</a>
-  <a href="/customizePage">Customize Page</a>
-  <a href="/sellItem">Sell Item</a>
+<div class="
+popMenu popMenu-navBar hide js-navProfileMenu">
+  <a href="#myPage">My page</a>
+  <a href="#customizePage">Customize Page</a>
+  <a href="#sellItem">Sell Item</a>
   <hr/>
-  <a href="/purchases">Purchases</a>
-  <a href="/sales">Sales</a>
-  <a href="/cases">Cases</a>
+  <a href="#purchases">Purchases</a>
+  <a href="#sales">Sales</a>
+  <a href="#cases">Cases</a>
   <hr/>
-  <a href="/notifications">Notifications</a>
-  <a href="/settings">Settings</a>
+  <a href="#notifications">Notifications</a>
+  <a href="#settings">Settings</a>
   <hr/>
-  <a href="/about">About OpenBazaar</a>
-  <a href="/support">Support OpenBazaar</a>
+  <a href="#about">About OpenBazaar</a>
+  <a href="#support">Support OpenBazaar</a>
 </div>
 </div>
 
-<div class="modal modal-navOffset modal-opaque js-homeModal">
+<div class="modal modal-navBlock modal-opaque js-homeModal">
   <div class="modal-child modal-childMain">
     <div class="homeModal-hero">
       <p class="h6 homeModal-heroText">OpenBazaar is an open source project created by hundreds of people with the primary goal of giving the world free trade</p>

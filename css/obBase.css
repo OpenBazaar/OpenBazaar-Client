@@ -288,6 +288,10 @@ h4,h5,h6 {
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
 }
 
+.modal-opaque.modal-navBlock {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
+}
+
 .modal-childMain {
   border-radius: 3px;
   background: #327eb8;

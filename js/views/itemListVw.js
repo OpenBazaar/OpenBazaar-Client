@@ -45,6 +45,7 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     var self = this;
     this.itemsShort = new itemsShortlection(fakeItems);
+    this.subViews = [];
     this.render();
   },
 
@@ -59,8 +60,19 @@ module.exports = Backbone.View.extend({
     var itemShort = new itemShortView({
       model: item
     });
+    this.subViews.push(itemShort);
     $('.js-list1').append(itemShort.render().el);
-  }
+  },
 
+  close: function(){
+    _.each(this.subViews, function(subView) {
+      if(subView.close){
+       subView.close();
+      }else{
+        subView.remove();
+      }
+    });
+    this.remove();
+  }
 });
 
