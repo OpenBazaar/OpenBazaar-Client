@@ -1,0 +1,1430 @@
+<div class="nav-ctrlGroup">
+  <a class="btn btn-win btn-winClose"></a>
+  <a class="btn btn-win btn-winMin"></a>
+  <a class="btn btn-win btn-winMax"></a>
+</div>
+<div class="nav-ctrlGroup">
+  <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack"></a>
+  <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd"></a>
+</div>
+<div class="nav-ctrlGroup flexExpand">
+  <div class="txtFieldWrapper searchWrapper">
+    <input type="text" class="txtField" placeholder="Enter a handle or a keyword"/>
+  </div>
+</div>
+<div class="nav-ctrlGroup">
+  <a class="btn btn-home ion-home"></a>
+</div>
+<div class="nav-ctrlGroup nav-profile">
+  <div class="btn btn-profile js-navProfile"
+  <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
+  style="background-image: url(<%- avatar_hash %>);"
+  <% }else{ %>
+  style="background-image: url(imgs/defaultUser.png)"
+  <% } %>>
+</div>
+<div class="popMenu popMenu-navBar hide js-navProfileMenu">
+  <a href="/myPage">My page</a>
+  <a href="/customizePage">Customize Page</a>
+  <a href="/sellItem">Sell Item</a>
+  <hr/>
+  <a href="/purchases">Purchases</a>
+  <a href="/sales">Sales</a>
+  <a href="/cases">Cases</a>
+  <hr/>
+  <a href="/notifications">Notifications</a>
+  <a href="/settings">Settings</a>
+  <hr/>
+  <a href="/about">About OpenBazaar</a>
+  <a href="/support">Support OpenBazaar</a>
+</div>
+</div>
+
+<div class="modal modal-navOffset modal-opaque js-homeModal">
+  <div class="modal-child modal-childMain">
+    <div class="homeModal-hero">
+      <p class="h6 homeModal-heroText">OpenBazaar is an open source project created by hundreds of people with the primary goal of giving the world free trade</p>
+    </div>
+    <div class="homeModal-accordian accordian js-profileAccordian">
+      <div class="accordian-window">
+        <div class="accordian-child">
+          <div class="bar btn-bar h5 txt-center">
+            247 Contributors
+          </div>
+          <div class="flexContainer flex-border homeModal-settings">
+            <div class="flexRow">
+              <div class="flexRow">
+                <div class="rowItem">
+                  Luis Hammond &mdash; <span class="txt-fade">Developer</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Isabel Taylor &mdash; <span class="txt-fade">Marketing</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Tami Goodwin &mdash; <span class="txt-fade">Design</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Bert Pierce &mdash; <span class="txt-fade">Icon creator</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Jeffery Leonard &mdash; <span class="txt-fade">Windows installer</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Mike Wolf &mdash; <span class="txt-fade">Design Lead</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Dolores Bennett &mdash; <span class="txt-fade">Mobile</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Jose Patrick &mdash; <span class="txt-fade">Strategy</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Inez Stokes &mdash; <span class="txt-fade">Developer</span>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="rowItem">
+                  Cecelia Gonzalez &mdash; <span class="txt-fade">Developer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bar">
+            <a class="btn btn-bar btn-wide js-accordianNext">Configure Your Experience</a>
+          </div>
+        </div>
+        <div class="accordian-child">
+          <div class="bar btn-bar h5 txt-center">
+            Your Country
+          </div>
+
+          <div class="flexContainer flex-border homeModal-settings" id="homeModal-countryList">
+            <div class="flexRow">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper flexRow">
+                <input type="text" class="txtField txtField-bar search" />
+              </div>
+            </div>
+            <ul class="flexRow list">
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Afghanistan" name="country"> <label class="homeModal-country" for="Afghanistan">Afghanistan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Albania" name="country"> <label class="homeModal-country" for="Albania">Albania</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Algeria" name="country"> <label class="homeModal-country" for="Algeria">Algeria</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Andorra" name="country"> <label class="homeModal-country" for="Andorra">Andorra</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Angola" name="country"> <label class="homeModal-country" for="Angola">Angola</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Anguilla" name="country"> <label class="homeModal-country" for="Anguilla">Anguilla</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Antigua &amp; Barbuda" name="country"> <label class="homeModal-country" for="Antigua &amp; Barbuda">Antigua &amp; Barbuda</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Argentina" name="country"> <label class="homeModal-country" for="Argentina">Argentina</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Armenia" name="country"> <label class="homeModal-country" for="Armenia">Armenia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Aruba" name="country"> <label class="homeModal-country" for="Aruba">Aruba</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Australia" name="country"> <label class="homeModal-country" for="Australia">Australia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Austria" name="country"> <label class="homeModal-country" for="Austria">Austria</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Azerbaijan" name="country"> <label class="homeModal-country" for="Azerbaijan">Azerbaijan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bahamas" name="country"> <label class="homeModal-country" for="Bahamas">Bahamas</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bahrain" name="country"> <label class="homeModal-country" for="Bahrain">Bahrain</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bangladesh" name="country"> <label class="homeModal-country" for="Bangladesh">Bangladesh</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Barbados" name="country"> <label class="homeModal-country" for="Barbados">Barbados</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Belarus" name="country"> <label class="homeModal-country" for="Belarus">Belarus</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Belgium" name="country"> <label class="homeModal-country" for="Belgium">Belgium</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Belize" name="country"> <label class="homeModal-country" for="Belize">Belize</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Benin" name="country"> <label class="homeModal-country" for="Benin">Benin</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bermuda" name="country"> <label class="homeModal-country" for="Bermuda">Bermuda</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bhutan" name="country"> <label class="homeModal-country" for="Bhutan">Bhutan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bolivia" name="country"> <label class="homeModal-country" for="Bolivia">Bolivia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bosnia &amp; Herzegovina" name="country"> <label class="homeModal-country" for="Bosnia &amp; Herzegovina">Bosnia &amp; Herzegovina</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Botswana" name="country"> <label class="homeModal-country" for="Botswana">Botswana</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Brazil" name="country"> <label class="homeModal-country" for="Brazil">Brazil</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="British Virgin Islands" name="country"> <label class="homeModal-country" for="British Virgin Islands">British Virgin Islands</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Brunei" name="country"> <label class="homeModal-country" for="Brunei">Brunei</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Bulgaria" name="country"> <label class="homeModal-country" for="Bulgaria">Bulgaria</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Burkina Faso" name="country"> <label class="homeModal-country" for="Burkina Faso">Burkina Faso</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Burundi" name="country"> <label class="homeModal-country" for="Burundi">Burundi</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cambodia" name="country"> <label class="homeModal-country" for="Cambodia">Cambodia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cameroon" name="country"> <label class="homeModal-country" for="Cameroon">Cameroon</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Canada" name="country"> <label class="homeModal-country" for="Canada">Canada</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cape Verde" name="country"> <label class="homeModal-country" for="Cape Verde">Cape Verde</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cayman Islands" name="country"> <label class="homeModal-country" for="Cayman Islands">Cayman Islands</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Chad" name="country"> <label class="homeModal-country" for="Chad">Chad</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Chile" name="country"> <label class="homeModal-country" for="Chile">Chile</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="China" name="country"> <label class="homeModal-country" for="China">China</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Colombia" name="country"> <label class="homeModal-country" for="Colombia">Colombia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Congo" name="country"> <label class="homeModal-country" for="Congo">Congo</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cook Islands" name="country"> <label class="homeModal-country" for="Cook Islands">Cook Islands</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Costa Rica" name="country"> <label class="homeModal-country" for="Costa Rica">Costa Rica</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cote D Ivoire" name="country"> <label class="homeModal-country" for="Cote D Ivoire">Cote D Ivoire</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Croatia" name="country"> <label class="homeModal-country" for="Croatia">Croatia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cruise Ship" name="country"> <label class="homeModal-country" for="Cruise Ship">Cruise Ship</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cuba" name="country"> <label class="homeModal-country" for="Cuba">Cuba</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Cyprus" name="country"> <label class="homeModal-country" for="Cyprus">Cyprus</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Czech Republic" name="country"> <label class="homeModal-country" for="Czech Republic">Czech Republic</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Denmark" name="country"> <label class="homeModal-country" for="Denmark">Denmark</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Djibouti" name="country"> <label class="homeModal-country" for="Djibouti">Djibouti</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Dominica" name="country"> <label class="homeModal-country" for="Dominica">Dominica</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Dominican Republic" name="country"> <label class="homeModal-country" for="Dominican Republic">Dominican Republic</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Ecuador" name="country"> <label class="homeModal-country" for="Ecuador">Ecuador</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Egypt" name="country"> <label class="homeModal-country" for="Egypt">Egypt</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="El Salvador" name="country"> <label class="homeModal-country" for="El Salvador">El Salvador</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Equatorial Guinea" name="country"> <label class="homeModal-country" for="Equatorial Guinea">Equatorial Guinea</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Estonia" name="country"> <label class="homeModal-country" for="Estonia">Estonia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Ethiopia" name="country"> <label class="homeModal-country" for="Ethiopia">Ethiopia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Falkland Islands" name="country"> <label class="homeModal-country" for="Falkland Islands">Falkland Islands</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Faroe Islands" name="country"> <label class="homeModal-country" for="Faroe Islands">Faroe Islands</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Fiji" name="country"> <label class="homeModal-country" for="Fiji">Fiji</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Finland" name="country"> <label class="homeModal-country" for="Finland">Finland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="France" name="country"> <label class="homeModal-country" for="France">France</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="French Polynesia" name="country"> <label class="homeModal-country" for="French Polynesia">French Polynesia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="French West Indies" name="country"> <label class="homeModal-country" for="French West Indies">French West Indies</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Gabon" name="country"> <label class="homeModal-country" for="Gabon">Gabon</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Gambia" name="country"> <label class="homeModal-country" for="Gambia">Gambia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Georgia" name="country"> <label class="homeModal-country" for="Georgia">Georgia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Germany" name="country"> <label class="homeModal-country" for="Germany">Germany</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Ghana" name="country"> <label class="homeModal-country" for="Ghana">Ghana</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Gibraltar" name="country"> <label class="homeModal-country" for="Gibraltar">Gibraltar</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Greece" name="country"> <label class="homeModal-country" for="Greece">Greece</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Greenland" name="country"> <label class="homeModal-country" for="Greenland">Greenland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Grenada" name="country"> <label class="homeModal-country" for="Grenada">Grenada</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Guam" name="country"> <label class="homeModal-country" for="Guam">Guam</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Guatemala" name="country"> <label class="homeModal-country" for="Guatemala">Guatemala</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Guernsey" name="country"> <label class="homeModal-country" for="Guernsey">Guernsey</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Guinea" name="country"> <label class="homeModal-country" for="Guinea">Guinea</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Guinea Bissau" name="country"> <label class="homeModal-country" for="Guinea Bissau">Guinea Bissau</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Guyana" name="country"> <label class="homeModal-country" for="Guyana">Guyana</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Haiti" name="country"> <label class="homeModal-country" for="Haiti">Haiti</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Honduras" name="country"> <label class="homeModal-country" for="Honduras">Honduras</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Hong Kong" name="country"> <label class="homeModal-country" for="Hong Kong">Hong Kong</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Hungary" name="country"> <label class="homeModal-country" for="Hungary">Hungary</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Iceland" name="country"> <label class="homeModal-country" for="Iceland">Iceland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="India" name="country"> <label class="homeModal-country" for="India">India</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Indonesia" name="country"> <label class="homeModal-country" for="Indonesia">Indonesia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Iran" name="country"> <label class="homeModal-country" for="Iran">Iran</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Iraq" name="country"> <label class="homeModal-country" for="Iraq">Iraq</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Ireland" name="country"> <label class="homeModal-country" for="Ireland">Ireland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Isle of Man" name="country"> <label class="homeModal-country" for="Isle of Man">Isle of Man</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Israel" name="country"> <label class="homeModal-country" for="Israel">Israel</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Italy" name="country"> <label class="homeModal-country" for="Italy">Italy</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Jamaica" name="country"> <label class="homeModal-country" for="Jamaica">Jamaica</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Japan" name="country"> <label class="homeModal-country" for="Japan">Japan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Jersey" name="country"> <label class="homeModal-country" for="Jersey">Jersey</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Jordan" name="country"> <label class="homeModal-country" for="Jordan">Jordan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Kazakhstan" name="country"> <label class="homeModal-country" for="Kazakhstan">Kazakhstan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Kenya" name="country"> <label class="homeModal-country" for="Kenya">Kenya</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Kuwait" name="country"> <label class="homeModal-country" for="Kuwait">Kuwait</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Kyrgyz Republic" name="country"> <label class="homeModal-country" for="Kyrgyz Republic">Kyrgyz Republic</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Laos" name="country"> <label class="homeModal-country" for="Laos">Laos</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Latvia" name="country"> <label class="homeModal-country" for="Latvia">Latvia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Lebanon" name="country"> <label class="homeModal-country" for="Lebanon">Lebanon</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Lesotho" name="country"> <label class="homeModal-country" for="Lesotho">Lesotho</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Liberia" name="country"> <label class="homeModal-country" for="Liberia">Liberia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Libya" name="country"> <label class="homeModal-country" for="Libya">Libya</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Liechtenstein" name="country"> <label class="homeModal-country" for="Liechtenstein">Liechtenstein</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Lithuania" name="country"> <label class="homeModal-country" for="Lithuania">Lithuania</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Luxembourg" name="country"> <label class="homeModal-country" for="Luxembourg">Luxembourg</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Macau" name="country"> <label class="homeModal-country" for="Macau">Macau</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Macedonia" name="country"> <label class="homeModal-country" for="Macedonia">Macedonia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Madagascar" name="country"> <label class="homeModal-country" for="Madagascar">Madagascar</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Malawi" name="country"> <label class="homeModal-country" for="Malawi">Malawi</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Malaysia" name="country"> <label class="homeModal-country" for="Malaysia">Malaysia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Maldives" name="country"> <label class="homeModal-country" for="Maldives">Maldives</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Mali" name="country"> <label class="homeModal-country" for="Mali">Mali</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Malta" name="country"> <label class="homeModal-country" for="Malta">Malta</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Mauritania" name="country"> <label class="homeModal-country" for="Mauritania">Mauritania</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Mauritius" name="country"> <label class="homeModal-country" for="Mauritius">Mauritius</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Mexico" name="country"> <label class="homeModal-country" for="Mexico">Mexico</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Moldova" name="country"> <label class="homeModal-country" for="Moldova">Moldova</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Monaco" name="country"> <label class="homeModal-country" for="Monaco">Monaco</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Mongolia" name="country"> <label class="homeModal-country" for="Mongolia">Mongolia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Montenegro" name="country"> <label class="homeModal-country" for="Montenegro">Montenegro</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Montserrat" name="country"> <label class="homeModal-country" for="Montserrat">Montserrat</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Morocco" name="country"> <label class="homeModal-country" for="Morocco">Morocco</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Mozambique" name="country"> <label class="homeModal-country" for="Mozambique">Mozambique</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Namibia" name="country"> <label class="homeModal-country" for="Namibia">Namibia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Nepal" name="country"> <label class="homeModal-country" for="Nepal">Nepal</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Netherlands" name="country"> <label class="homeModal-country" for="Netherlands">Netherlands</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Netherlands Antilles" name="country"> <label class="homeModal-country" for="Netherlands Antilles">Netherlands Antilles</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="New Caledonia" name="country"> <label class="homeModal-country" for="New Caledonia">New Caledonia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="New Zealand" name="country"> <label class="homeModal-country" for="New Zealand">New Zealand</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Nicaragua" name="country"> <label class="homeModal-country" for="Nicaragua">Nicaragua</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Niger" name="country"> <label class="homeModal-country" for="Niger">Niger</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Nigeria" name="country"> <label class="homeModal-country" for="Nigeria">Nigeria</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Norway" name="country"> <label class="homeModal-country" for="Norway">Norway</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Oman" name="country"> <label class="homeModal-country" for="Oman">Oman</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Pakistan" name="country"> <label class="homeModal-country" for="Pakistan">Pakistan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Palestine" name="country"> <label class="homeModal-country" for="Palestine">Palestine</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Panama" name="country"> <label class="homeModal-country" for="Panama">Panama</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Papua New Guinea" name="country"> <label class="homeModal-country" for="Papua New Guinea">Papua New Guinea</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Paraguay" name="country"> <label class="homeModal-country" for="Paraguay">Paraguay</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Peru" name="country"> <label class="homeModal-country" for="Peru">Peru</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Philippines" name="country"> <label class="homeModal-country" for="Philippines">Philippines</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Poland" name="country"> <label class="homeModal-country" for="Poland">Poland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Portugal" name="country"> <label class="homeModal-country" for="Portugal">Portugal</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Puerto Rico" name="country"> <label class="homeModal-country" for="Puerto Rico">Puerto Rico</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Qatar" name="country"> <label class="homeModal-country" for="Qatar">Qatar</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Reunion" name="country"> <label class="homeModal-country" for="Reunion">Reunion</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Romania" name="country"> <label class="homeModal-country" for="Romania">Romania</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Russia" name="country"> <label class="homeModal-country" for="Russia">Russia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Rwanda" name="country"> <label class="homeModal-country" for="Rwanda">Rwanda</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Saint Pierre &amp; Miquelon" name="country"> <label class="homeModal-country" for="Saint Pierre &amp; Miquelon">Saint Pierre &amp;
+                  Miquelon</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Samoa" name="country"> <label class="homeModal-country" for="Samoa">Samoa</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="San Marino" name="country"> <label class="homeModal-country" for="San Marino">San Marino</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Satellite" name="country"> <label class="homeModal-country" for="Satellite">Satellite</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Saudi Arabia" name="country"> <label class="homeModal-country" for="Saudi Arabia">Saudi Arabia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Senegal" name="country"> <label class="homeModal-country" for="Senegal">Senegal</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Serbia" name="country"> <label class="homeModal-country" for="Serbia">Serbia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Seychelles" name="country"> <label class="homeModal-country" for="Seychelles">Seychelles</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Sierra Leone" name="country"> <label class="homeModal-country" for="Sierra Leone">Sierra Leone</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Singapore" name="country"> <label class="homeModal-country" for="Singapore">Singapore</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Slovakia" name="country"> <label class="homeModal-country" for="Slovakia">Slovakia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Slovenia" name="country"> <label class="homeModal-country" for="Slovenia">Slovenia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="South Africa" name="country"> <label class="homeModal-country" for="South Africa">South Africa</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="South Korea" name="country"> <label class="homeModal-country" for="South Korea">South Korea</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Spain" name="country"> <label class="homeModal-country" for="Spain">Spain</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Sri Lanka" name="country"> <label class="homeModal-country" for="Sri Lanka">Sri Lanka</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="St Kitts &amp; Nevis" name="country"> <label class="homeModal-country" for="St Kitts &amp; Nevis">St Kitts &amp; Nevis</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="St Lucia" name="country"> <label class="homeModal-country" for="St Lucia">St Lucia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="St Vincent" name="country"> <label class="homeModal-country" for="St Vincent">St Vincent</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="St. Lucia" name="country"> <label class="homeModal-country" for="St. Lucia">St. Lucia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Sudan" name="country"> <label class="homeModal-country" for="Sudan">Sudan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Suriname" name="country"> <label class="homeModal-country" for="Suriname">Suriname</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Swaziland" name="country"> <label class="homeModal-country" for="Swaziland">Swaziland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Sweden" name="country"> <label class="homeModal-country" for="Sweden">Sweden</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Switzerland" name="country"> <label class="homeModal-country" for="Switzerland">Switzerland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Syria" name="country"> <label class="homeModal-country" for="Syria">Syria</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Taiwan" name="country"> <label class="homeModal-country" for="Taiwan">Taiwan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Tajikistan" name="country"> <label class="homeModal-country" for="Tajikistan">Tajikistan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Tanzania" name="country"> <label class="homeModal-country" for="Tanzania">Tanzania</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Thailand" name="country"> <label class="homeModal-country" for="Thailand">Thailand</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Timor L'Este" name="country"> <label class="homeModal-country" for="Timor L'Este">Timor L'Este</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Togo" name="country"> <label class="homeModal-country" for="Togo">Togo</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Tonga" name="country"> <label class="homeModal-country" for="Tonga">Tonga</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Trinidad &amp; Tobago" name="country"> <label class="homeModal-country" for="Trinidad &amp; Tobago">Trinidad &amp; Tobago</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Tunisia" name="country"> <label class="homeModal-country" for="Tunisia">Tunisia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Turkey" name="country"> <label class="homeModal-country" for="Turkey">Turkey</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Turkmenistan" name="country"> <label class="homeModal-country" for="Turkmenistan">Turkmenistan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Turks &amp; Caicos" name="country"> <label class="homeModal-country" for="Turks &amp; Caicos">Turks &amp; Caicos</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Uganda" name="country"> <label class="homeModal-country" for="Uganda">Uganda</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Ukraine" name="country"> <label class="homeModal-country" for="Ukraine">Ukraine</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="United Arab Emirates" name="country"> <label class="homeModal-country" for="United Arab Emirates">United Arab Emirates</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="United Kingdom" name="country"> <label class="homeModal-country" for="United Kingdom">United Kingdom</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="United States" name="country"> <label class="homeModal-country" for="United States">United States</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Uruguay" name="country"> <label class="homeModal-country" for="Uruguay">Uruguay</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Uzbekistan" name="country"> <label class="homeModal-country" for="Uzbekistan">Uzbekistan</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Venezuela" name="country"> <label class="homeModal-country" for="Venezuela">Venezuela</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Vietnam" name="country"> <label class="homeModal-country" for="Vietnam">Vietnam</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Virgin Islands (US)" name="country"> <label class="homeModal-country" for="Virgin Islands (US)">Virgin Islands (US)</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Yemen" name="country"> <label class="homeModal-country" for="Yemen">Yemen</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Zambia" name="country"> <label class="homeModal-country" for="Zambia">Zambia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-countrySelect">
+                  <input type="radio" id="Zimbabwe" name="country"> <label class="homeModal-country" for="Zimbabwe">Zimbabwe</label>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="bar barFlush">
+            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
+            <a class="btn btn-bar btn-half js-accordianNext">Next</a>
+          </div>
+        </div>
+        <div class="accordian-child">
+          <div class="bar btn-bar h5 txt-center">
+            Time Zone
+          </div>
+          <div class="flexContainer flex-border homeModal-settings" id="homeModal-timeList">
+            <div class="flexRow">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper flexRow">
+                <input type="text" class="search txtField txtField-bar" />
+              </div>
+            </div>
+            <ul class="flexRow list">
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
+                  <label class="homeModal-time" for="(GMT -12:00) Eniwetok, Kwajalein">(GMT -12:00) Eniwetok, Kwajalein</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -11:00) Midway Island, Samoa" name="time">
+                  <label class="homeModal-time" for="(GMT -11:00) Midway Island, Samoa">(GMT -11:00) Midway Island, Samoa</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -10:00) Hawaii" name="time">
+                  <label class="homeModal-time" for="(GMT -10:00) Hawaii">(GMT -10:00) Hawaii</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -9:00) Alaska" name="time">
+                  <label class="homeModal-time" for="(GMT -9:00) Alaska">(GMT -9:00) Alaska</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -8:00) Pacific Time (US &amp; Canada)" name="time">
+                  <label class="homeModal-time" for="(GMT -8:00) Pacific Time (US &amp; Canada)">(GMT -8:00) Pacific Time (US &amp; Canada)</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -7:00) Mountain Time (US &amp; Canada)" name="time">
+                  <label class="homeModal-time" for="(GMT -7:00) Mountain Time (US &amp; Canada)">(GMT -7:00) Mountain Time (US &amp; Canada)</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -6:00) Central Time (US &amp; Canada), Mexico City" name="time">
+                  <label class="homeModal-time" for="(GMT -6:00) Central Time (US &amp; Canada), Mexico City">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima" name="time">
+                  <label class="homeModal-time" for="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz" name="time">
+                  <label class="homeModal-time" for="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -3:30) Newfoundland" name="time">
+                  <label class="homeModal-time" for="(GMT -3:30) Newfoundland">(GMT -3:30) Newfoundland</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -3:00) Brazil, Buenos Aires, Georgetown" name="time">
+                  <label class="homeModal-time" for="(GMT -3:00) Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -2:00) Mid-Atlantic" name="time">
+                  <label class="homeModal-time" for="(GMT -2:00) Mid-Atlantic">(GMT -2:00) Mid-Atlantic</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT -1:00 hour) Azores, Cape Verde Islands" name="time">
+                  <label class="homeModal-time" for="(GMT -1:00 hour) Azores, Cape Verde Islands">(GMT -1:00 hour) Azores, Cape Verde Islands</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT) Western Europe Time, London, Lisbon, Casablanca" name="time">
+                  <label class="homeModal-time" for="(GMT) Western Europe Time, London, Lisbon, Casablanca">(GMT) Western Europe Time, London, Lisbon, Casablanca</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris" name="time">
+                  <label class="homeModal-time" for="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +2:00) Kaliningrad, South Africa" name="time">
+                  <label class="homeModal-time" for="(GMT +2:00) Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg" name="time">
+                  <label class="homeModal-time" for="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +3:30) Tehran" name="time">
+                  <label class="homeModal-time" for="(GMT +3:30) Tehran">(GMT +3:30) Tehran</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi" name="time">
+                  <label class="homeModal-time" for="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +4:30) Kabul" name="time">
+                  <label class="homeModal-time" for="(GMT +4:30) Kabul">(GMT +4:30) Kabul</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent" name="time">
+                  <label class="homeModal-time" for="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent">(GMT  +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi" name="time">
+                  <label class="homeModal-time" for="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +5:45) Kathmandu" name="time">
+                  <label class="homeModal-time" for="(GMT +5:45) Kathmandu">(GMT +5:45) Kathmandu</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +6:00) Almaty, Dhaka, Colombo" name="time">
+                  <label class="homeModal-time" for="(GMT +6:00) Almaty, Dhaka, Colombo">(GMT +6:00) Almaty, Dhaka, Colombo</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +7:00) Bangkok, Hanoi, Jakarta" name="time">
+                  <label class="homeModal-time" for="(GMT +7:00) Bangkok, Hanoi, Jakarta">(GMT +7:00) Bangkok, Hanoi, Jakarta</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" name="time">
+                  <label class="homeModal-time" for="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk" name="time">
+                  <label class="homeModal-time" for="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +9:30) Adelaide, Darwin" name="time">
+                  <label class="homeModal-time" for="(GMT +9:30) Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +10:00) Eastern Australia, Guam, Vladivostok" name="time">
+                  <label class="homeModal-time" for="(GMT +10:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +11:00) Magadan, Solomon Islands, New Caledonia" name="time">
+                  <label class="homeModal-time" for="(GMT +11:00) Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</label>
+                </div>
+              </li>
+              <li class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <input type="radio" id="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka" name="time">
+                  <label class="homeModal-time" for="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</label>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="bar barFlush">
+            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
+            <a class="btn btn-bar btn-half js-accordianNext">Next</a>
+          </div>
+        </div>
+        <div class="accordian-child">
+          <div class="bar btn-bar h5 txt-center">
+            Handle
+          </div>
+          <div class="flexContainer flex-border homeModal-settings">
+            <div class="flexRow">
+              <div class="flexRow">
+                <div class="rowItem js-homeModal-timeSelect">
+                  <p>
+                    You're currently known as: <%= handle %>. Would you like to register an easy to remember handle?
+                  </p>
+                </div>
+              </div>
+              <div class="txtFieldWrapper txtFieldWrapper-bar flexRow hide">
+                <input type="text" class="txtField txtField-bar js-homeModal-handleInput" placeholder="Choose Handle" />
+              </div>
+            </div>
+            <div class="pad20 rowTop20">
+              <div class="flexRow pad">
+                <div class="flexCol-6">
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle">Register New Blockchain ID</a>
+                </div>
+                <div class="flexCol-6">
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle">Connect Existing Blockchain ID</a>
+                </div>
+                <div class="flexCol-6 hide">
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-cancelHandle">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bar barFlush">
+            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
+            <a class="btn btn-bar btn-half js-accordianNext">Skip</a>
+          </div>
+        </div>
+        <div class="accordian-child">
+          <div class="bar btn-bar h5 txt-center">
+            Avatar
+          </div>
+          <div class="flexContainer homeModal-settings">
+            <div class="flexRow flexRow-center">
+              <div>
+                <div class="homeModal-avatarPreview js-avatarPreview"></div>
+                <div class="rowTop10">
+                  <input type="file" id="avatarUpload" accept="image/*" class="hide js-homeModalAvatarUpload">
+                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop20">Choose Avatar</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bar barFlush">
+            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
+            <a class="btn btn-bar btn-half js-homeModalDone">Done</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
