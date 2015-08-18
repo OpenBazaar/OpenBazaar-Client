@@ -9,8 +9,6 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
-  tagname: "div",
-
   className: "flexRow",
 
   events: {

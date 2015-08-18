@@ -28,7 +28,7 @@ var fakeUserPage = {
 
 module.exports = Backbone.View.extend({
 
-  tagname: "userView",
+  classname: "userView",
 
   events: {
     'click .btn': 'btnClick'
