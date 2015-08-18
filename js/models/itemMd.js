@@ -3,7 +3,7 @@ var Backbone = require('backbone');
 module.exports = ItemModel = Backbone.Model.extend({
   defaults: {
     name: "NewItem",
-    ID: 0,
+    GUID: 0,
     price: 0,
     img: "",
     thb: "",

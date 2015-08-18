@@ -4,7 +4,7 @@ var _ = require('underscore'),
 Backbone.$ = $;
 
 var homeView = require('./views/homeVw'),
-    myPageView = require('./views/myPageVw');
+    userPageView = require('./views/userPageVw');
 
 module.exports = Backbone.Router.extend({
   routes: {
@@ -32,7 +32,7 @@ module.exports = Backbone.Router.extend({
   },
 
   myPage: function(){
-    this.newView(new myPageView());
+    this.newView(new userPageView());
   },
 
   customizePage: function(){

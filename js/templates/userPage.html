@@ -1,0 +1,42 @@
+<div class="mainContainer">
+  <div class="banner-large"
+  <% if(typeof(page.bannerImg) !== "undefined" && page.bannerImg) { %>
+  style="background-image: url(<%- page.bannerImg %>);"
+  <% }else{ %>
+  style="background-image: url(imgs/defaultBanner.png)"
+  <% } %>>
+    <div class="flexRow">
+      <div class="rowItem">
+        <div class="thumbnail thumbnail-large"
+        <% if(typeof(user.avatar_hash) !== "undefined" && user.avatar_hash) { %>
+        style="background-image: url(<%- user.avatar_hash %>);"
+        <% }else{ %>
+        style="background-image: url(imgs/defaultUser.png)"
+        <% } %>></div>
+        <div class="pull-left txt-unleaded">
+          <h1 class="h3"><%= user.name %></h1>
+          <div class="txt-fade"><%= user.handle %></div>
+          <% console.log(user.name) %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bar barFlush navBar">
+    <a class="btn btn-bar active js-homeItemsBtn">About</a>
+    <a class="btn btn-bar js-homeStoresBtn">Followers</a>
+    <a class="btn btn-bar js-homeStoresBtn">Following</a>
+    <a class="btn btn-bar js-homeStoresBtn">Store</a>
+    <div class="nav-ctrlGroup pull-right">
+      <a class="btn btn-txt">Edit</a>
+      <a class="btn btn-txt">Delete</a>
+    </div>
+  </div>
+  <div class="txtFieldWrapper searchWrapper">
+    <input type="text" class="txtField txtField-bar" />
+  </div>
+  <div class="flexContainer flex-border">
+    <div class="flexRow js-list1"></div>
+    <div class="flexRow js-list2"></div>
+  </div>
+  <div class="navBar"></div>
+</div>

@@ -22,7 +22,7 @@ var fakeItems = [
     contract_hash: 0,
     price: 32.91,
     thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: ""
+    avatar_hash: "imgs/defaultItem.png"
   },
   {
     title: "Item Three",

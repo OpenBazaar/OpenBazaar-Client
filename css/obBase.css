@@ -179,6 +179,11 @@ input[type="text"] {
   border-radius: 2px;
 }
 
+.thumbnail-large {
+  height: 80px;
+  width: 80px;;
+}
+
 .row10 {
   margin-bottom: 10px;
 }
@@ -242,7 +247,8 @@ input[type="text"] {
 h1,h2,h3 {
   font-family: "font-bold;"
   margin: 20px 0;
-  line-height: 1;
+  line-height: 1.2;
+  font-weight: 700;
 }
 
 h4,h5,h6 {
@@ -251,14 +257,16 @@ h4,h5,h6 {
   line-height: 1;
 }
 
+.h3, h3 {
+  font-style: 18px;
+}
+
 .h5, h5 {
   font-size: 16px;
-  line-height: 18px;
 }
 
 .h6, h6 {
   font-size: 15px;
-  line-height: 18px;
 }
 
 .txt-center {
@@ -273,6 +281,9 @@ h4,h5,h6 {
   line-height: 1;
 }
 
+.unbold {
+  font-weight: 400;
+}
 /*========== skin classes ==========*/
 
 .navBar {
@@ -511,6 +522,12 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 .popMenu-navBar hr {
   margin: 0.5em -15px;
   border: 1px solid rgba(255,255,255,0.2);
+}
+
+.banner-large {
+  position: relative;
+  height: 400px;
+  background-size: cover;
 }
 
 /*========== one-off classes ==========*/
