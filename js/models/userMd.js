@@ -3,14 +3,26 @@ Backbone = require('backbone');
 module.exports = Backbone.Model.extend({
   defaults: {
     beenSet: false,
-    firstName: "New",
-    lastName: "User",
-    avatar_hash: "",
+    name: "Your Name",
+    handle: "Blockchain ID",
+    avatar_hash: "imgs/defaultUser.png",
     tempAvatar: "",
+    bitcoinAddress: "",
     currency: "",
     country: "",
     timeZome: "",
-    handle: "No Handle Set"
+    notifications: true,
+    shipToName: "",
+    shipToStreet: "",
+    shipToCity: "",
+    shipToState: "",
+    shipToPostalCode: "",
+    shipToCountry: "",
+    blocked: ["handle1", "handle2", "handle3"],
+    server: "",
+    libbitcoinServer: "",
+    SSL: false,
+    seedPhrase: ""
   },
 
   initialize: function(){

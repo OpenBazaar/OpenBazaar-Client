@@ -7,7 +7,7 @@ Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
     itemListView = require('../views/itemListVw'),
-    storeListView = require('../views/storeListVw')
+    storeListView = require('../views/userListVw')
 
 
 module.exports = Backbone.View.extend({

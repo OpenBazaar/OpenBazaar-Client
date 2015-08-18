@@ -7,7 +7,7 @@ Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
     storesShortCollection = require('../collections/storesShortCL'),
-    storeShortView = require('./storeShortVw')
+    storeShortView = require('./userShortVw')
 
 var fakeStores = [
   {
