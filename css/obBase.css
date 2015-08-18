@@ -181,7 +181,7 @@ input[type="text"] {
 
 .thumbnail-large {
   height: 80px;
-  width: 80px;;
+  width: 80px;
 }
 
 .row10 {
@@ -286,12 +286,24 @@ h4,h5,h6 {
 }
 /*========== skin classes ==========*/
 
+.body-neutral {
+  background: #2a2a2a;
+}
+
 .navBar {
   background: #327EB8;
 }
 
+.body-neutral .navBar {
+  background: #575656;
+}
+
 .mainContainer {
   background: #086A9E;
+}
+
+.body-neutral .mainContainer {
+  background: #4a4848;
 }
 
 .modal-opaque {
@@ -452,8 +464,16 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   line-height: 50px;
 }
 
+.body-neutral .btn-bar {
+  background: #575656;
+}
+
 .btn-bar.active {
   background: #086A9E;
+}
+
+.body-neutral .btn-bar.active {
+  background: #4a4848;
 }
 
 .btn-wide {

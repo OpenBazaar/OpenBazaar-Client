@@ -69,7 +69,7 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
-        this.$el.find('.js-homeModal').hide();
+        self.$el.find('.js-homeModal').hide();
       }
     });
     return this;

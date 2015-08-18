@@ -7,7 +7,6 @@ var fs = require('fs'),
     pageNavView = require('./views/pageNavVw');
 
 /* first things first */
-
 var appRouter = new router();
 Backbone.history.start();
 
