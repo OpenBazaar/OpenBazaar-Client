@@ -10,6 +10,59 @@ var fs = require('fs'),
     storeListView = require('../views/userListVw')
 
 
+var fakeStores = [
+  {
+    name: "A Store",
+    handle: 0,
+    avatar_hash: "imgs/defaultUser.png",
+    nsfw: false
+  },
+  {
+    name: "A Second Store",
+    handle: 0,
+    avatar_hash: "imgs/defaultUser.png",
+    nsfw: false
+  },
+  {
+    name: "A Third Store",
+    handle: 0,
+    avatar_hash: "imgs/defaultUser.png",
+    nsfw: false
+  }
+];
+
+var fakeItems = [
+  {
+    title: "Item Name",
+    contract_hash: 0,
+    price: 32.91,
+    thumbnail_hash: "",
+    avatar_hash: ""
+  },
+  {
+    title: "Item Two",
+    contract_hash: 0,
+    price: 32.91,
+    thumbnail_hash: "imgs/defaultItem.png",
+    avatar_hash: "imgs/defaultItem.png"
+  },
+  {
+    title: "Item Three",
+    contract_hash: 0,
+    price: 32.91,
+    thumbnail_hash: "imgs/defaultItem.png",
+    avatar_hash: ""
+  },
+  {
+    title: "Item Four",
+    contract_hash: 0,
+    price: 32.91,
+    thumbnail_hash: "imgs/defaultItem.png",
+    avatar_hash: ""
+  }
+];
+
+
 module.exports = Backbone.View.extend({
 
   className:"homeView",
@@ -48,8 +101,8 @@ module.exports = Backbone.View.extend({
   },
 
   subRender: function(){
-    var itemList = new itemListView();
-    var storeList = new storeListView();
+    var itemList = new itemListView({model: fakeItems, el: '.js-list1'});
+    var storeList = new storeListView({model: fakeStores, el: '.js-list2'});
     this.subViews.push(itemList,storeList);
     this.hideList1();
   },

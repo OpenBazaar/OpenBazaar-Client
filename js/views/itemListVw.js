@@ -9,42 +9,12 @@ var fs = require('fs'),
     itemsShortlection = require('../collections/itemsShortCL'),
     itemShortView = require('./itemShortVw')
 
-var fakeItems = [
-  {
-    title: "Item Name",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "",
-    avatar_hash: ""
-  },
-  {
-    title: "Item Two",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: "imgs/defaultItem.png"
-  },
-  {
-    title: "Item Three",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: ""
-  },
-  {
-    title: "Item Four",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: ""
-  }
-];
-
 module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self = this;
-    this.itemsShort = new itemsShortlection(fakeItems);
+    //the model must be passed in by the constructor
+    this.itemsShort = new itemsShortlection(this.model);
     this.subViews = [];
     this.render();
   },
@@ -61,7 +31,8 @@ module.exports = Backbone.View.extend({
       model: item
     });
     this.subViews.push(itemShort);
-    $('.js-list1').append(itemShort.render().el);
+    //$el must be passed in by the constructor
+    this.$el.append(itemShort.render().el);
   },
 
   close: function(){
