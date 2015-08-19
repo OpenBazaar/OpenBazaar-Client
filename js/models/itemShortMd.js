@@ -13,5 +13,14 @@ module.exports = Backbone.Model.extend({
     ships_to: "",
     handle: 0,
     avatar_hash: "imgs/defaultUser.png"
+  },
+
+  initialize: function(){
+    this.updateAttributes();
+    this.on('change', this.updateAttributes, this);
+  },
+
+  updateAttributes: function(){
+    this.set("price", accounting.formatMoney(this.get("price")));
   }
 });

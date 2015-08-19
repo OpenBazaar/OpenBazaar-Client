@@ -1,11 +1,11 @@
 <div class="mainContainer">
-  <div class="banner-large"
+  <div class="banner-large shadow-inner1"
   <% if(typeof(page.bannerImg) !== "undefined" && page.bannerImg) { %>
   style="background-image: url(<%- page.bannerImg %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
-    <div class="flexRow">
+    <div class="flexRow align-bottom">
       <div class="rowItem">
         <div class="thumbnail thumbnail-large"
         <% if(typeof(user.avatar_hash) !== "undefined" && user.avatar_hash) { %>
@@ -13,27 +13,50 @@
         <% }else{ %>
         style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
-        <div class="pull-left txt-unleaded">
-          <h1 class="h3"><%= user.name %></h1>
-          <div class="txt-fade"><%= user.handle %></div>
-          <% console.log(user.name) %>
+        <div class="pull-left">
+          <div class="vCentered">
+            <h1 class="h3 unbold txt-unleaded"><%= user.name %></h1>
+            <div class="txt-fade"><%= user.handle %></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="bar barFlush navBar">
-    <a class="btn btn-bar active js-homeItemsBtn">About</a>
-    <a class="btn btn-bar js-homeStoresBtn">Followers</a>
-    <a class="btn btn-bar js-homeStoresBtn">Following</a>
-    <a class="btn btn-bar js-homeStoresBtn">Store</a>
-    <div class="nav-ctrlGroup pull-right">
-      <a class="btn btn-txt">Edit</a>
-      <a class="btn btn-txt">Delete</a>
+  <div class="bar navBar barFlush navBar">
+    <a class="btn btn-bar active js-about js-tab">About</a>
+    <a class="btn btn-bar js-followers js-tab">Followers</a>
+    <a class="btn btn-bar js-following js-tab">Following</a>
+    <a class="btn btn-bar js-stores js-tab">Store</a>
+    <div class="navEnd pad15">
+      <div class="nav-ctrlGroup">
+        <a class="btn btn-txt">Edit</a>
+      </div>
+      <div class="nav-ctrlGroup">
+        <a class="btn btn-txt">Delete</a>
+      </div>
     </div>
   </div>
-  <div class="flexContainer flex-border">
+<div>
+<div>
+  <div class="flexContainer js-about js-tabTarg">
+    <div class="flexRow">
+      <div class="rowItem">
+        <p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p>
+        <p>The software is open source and MIT licensed. You can <a href="https://github.com/OpenBazaar/">view the code on Github.</a></p>
+        <p>OpenBazaar is a community project, and we welcome participation in <a href="https://openbazaar-slackin-drwasho.herokuapp.com/">our Slack channel</a> or on <a href=http://www.reddit.com/r/openbazaar">our subreddit.</a></p>
+        <p>If you need help, read the OpenBazaar version 1.0 Tutorial [link]. If you still have questions, <a href="https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post">open an issue at our support desk</a>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="flexContainer flex-border js-followers js-tabTarg hide">
     <div class="flexRow js-list1"></div>
+  </div>
+  <div class="flexContainer flex-border js-following js-tabTarg hide">
     <div class="flexRow js-list2"></div>
   </div>
-  <div class="navBar"></div>
+  <div class="flexContainer flex-border js-store js-tabTarg hide">
+    <div class="flexRow js-list3"></div>
+  </div>
+
 </div>
+<div class="navBar"></div>

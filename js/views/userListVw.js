@@ -9,32 +9,12 @@ var fs = require('fs'),
     storesShortCollection = require('../collections/storesShortCL'),
     storeShortView = require('./userShortVw')
 
-var fakeStores = [
-  {
-    name: "A Store",
-    handle: 0,
-    avatar_hash: "imgs/defaultUser.png",
-    nsfw: false
-  },
-  {
-    name: "A Second Store",
-    handle: 0,
-    avatar_hash: "imgs/defaultUser.png",
-    nsfw: false
-  },
-  {
-    name: "A Third Store",
-    handle: 0,
-    avatar_hash: "imgs/defaultUser.png",
-    nsfw: false
-  }
-];
-
 module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self = this;
-    this.storesShort = new storesShortCollection(fakeStores);
+    //the model must be passed in by the constructor
+    this.storesShort = new storesShortCollection(this.model);
     this.subViews = [];
     this.render();
   },
@@ -51,7 +31,8 @@ module.exports = Backbone.View.extend({
       model: item
     });
     this.subViews.push(storeShort);
-    $('.js-list2').append(storeShort.render().el);
+    //$el must be passed in by the constructor
+    this.$el.append(storeShort.render().el);
   },
 
   close: function(){

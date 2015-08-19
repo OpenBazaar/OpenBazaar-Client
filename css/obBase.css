@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  background: rgb(7,65,97);
+  background-color: rgb(7,65,97);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
   position: absolute; /* fixes box shadow margin issue */
   width: 100%; /* fixes box shadow margin issue */
@@ -24,6 +24,11 @@ a {
 a:hover,
 a:focus {
   opacity: 0.6;
+  text-decoration: underline;
+}
+
+p a {
+  text-decoration: underline;
 }
 
 input[type="text"] {
@@ -86,11 +91,15 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
+.navBar .navEnd {
+  /* container for nav elements on the right side */
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
 .nav-ctrlGroup {
   /* use for any cluster of nav controls */
-  display: flex;
-  align-items: center;
-  height: 32px;
   padding-left: 10px;
   position: relative;
 }
@@ -151,6 +160,15 @@ input[type="text"] {
   padding: 25px 33px;
 }
 
+.itemImg {
+  height: 250px;
+  width: 250px;
+  background-image: url(../imgs/defaultItem.png);
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px;
+}
+
 .rowItem {
   flex-grow: 1;
   padding: 10px 15px;
@@ -194,6 +212,11 @@ input[type="text"] {
 
 .rowTop20 {
   margin-top: 20px;
+}
+
+.pad15 {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .pad20 {
@@ -258,7 +281,7 @@ h4,h5,h6 {
 }
 
 .h3, h3 {
-  font-style: 18px;
+  font-size: 18px;
 }
 
 .h5, h5 {
@@ -287,27 +310,27 @@ h4,h5,h6 {
 /*========== skin classes ==========*/
 
 .body-neutral {
-  background: #2a2a2a;
+  background-color: #2a2a2a;
 }
 
 .navBar {
-  background: #327EB8;
+  background-color: #327EB8;
 }
 
 .body-neutral .navBar {
-  background: #575656;
+  background-color: #575656;
 }
 
 .mainContainer {
-  background: #086A9E;
+  background-color: #086A9E;
 }
 
 .body-neutral .mainContainer {
-  background: #4a4848;
+  background-color: #4a4848;
 }
 
 .modal-opaque {
-  background: rgb(7,65,97);
+  background-color: rgb(7,65,97);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
 }
 
@@ -317,7 +340,7 @@ h4,h5,h6 {
 
 .modal-childMain {
   border-radius: 3px;
-  background: #327eb8;
+  background-color: #327eb8;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -409,14 +432,23 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   min-width: 32px;
   line-height: 32px;
   float: left;
-  background: #086A9E;
+  background-color: #086A9E; /* default color */
   padding:0;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
+.btn:hover,
+.btn:focus {
+  text-decoration: none;
+}
+
 .btn:before {
   line-height: 32px;
+}
+
+.body-neutral .btn {
+  background-color: #4a4848;
 }
 
 .btn-txt {
@@ -425,7 +457,8 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 }
 
 .btn-light {
-  background: rgba(255,255,255,0.2);
+  /* 20% over background */
+  background-color: rgba(255,255,255,0.2);
 }
 
 .btn-c1 {
@@ -437,43 +470,44 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   width: 12px;
   min-width: 0;
   height: 12px;
-  background: #fff;
+  background-color: #fff;
   margin: 0 2px;
   padding: 0;
 }
 
 .btn-win.btn-winClose {
-  background: #E45A5A;
+  background-color: #E45A5A;
 }
 
 .btn-win.btn-winMin {
-  background: #F8E71C;
+  background-color: #F8E71C;
 }
 
 .btn-win.btn-winMax {
-  background: #B8E986;
+  background-color: #B8E986;
 }
 
 .btn-bar {
   border-radius: 0;
   min-width: 95px;
   text-align: center;
-  background: #327EB8;
+  background-color: #327EB8;
   border-right: 1px solid #086A9E;
   height: 50px;
   line-height: 50px;
 }
 
 .body-neutral .btn-bar {
-  background: #575656;
+  background-color: #575656;
+  border-right: 1px solid #4a4848;
 }
 
 .btn-bar.active {
-  background: #086A9E;
+  background-color: #086A9E;
 }
 
 .body-neutral .btn-bar.active {
-  background: #4a4848;
+  background-color: #4a4848;
 }
 
 .btn-wide {
@@ -520,7 +554,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 .popMenu-navBar {
   top: 36px;
   right: 10px;
-  background: #252525;
+  background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
   border-radius: 4px;
   color: #fff;
@@ -550,12 +584,17 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   background-size: cover;
 }
 
+.shadow-inner1 {
+  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,1);
+}
+
 /*========== one-off classes ==========*/
 
 .homeModal-hero {
   height: 250px;
   width: 525px;
-  background: url('../imgs/obSettingsHero.jpg') no-repeat;
+  background-image: url('../imgs/obSettingsHero.jpg');
+  background-repeat: no-repeat;
   position: relative;
 }
 
@@ -575,11 +614,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 .homeModal-settings {
   height: 240px;
   overflow-y: scroll;
-  background: #086A9E;
+  background-color: #086A9E;
 }
 
 .homeModal-avatarPreview {
-  background: #327EB8;
+  background-color: #327EB8;
   border-radius: 70px;
   height: 130px;
   width: 130px;
@@ -588,6 +627,15 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 
 /*========== utility classes ==========*/
+
+/* the #ov1 id is on the HTML tag. It is used to force specificity
+   higher than other class combinations on the page. This is preferable
+   to using an important tag. Only use it on rules that must override
+   all other rules. */
+
+/* be aware that float and clear have no affect on flex items. */
+
+
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -598,30 +646,34 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   clear: both;
 }
 
-.pull-right {
-  float: right !important;
+#ov1 .pull-right {
+  float: right;
 }
 
-.pull-left {
-  float: left !important;
+#ov1 .pull-left {
+  float: left;
 }
 
-.hide {
-  display: none !important;
+#ov1 .align-bottom {
+  position: absolute;
+  bottom: 0;
 }
 
-.show {
-  display: block !important;
+#ov1 .hide {
+  display: none;
 }
 
-.invisible {
+#ov1 .show {
+  display: block;
+}
+
+#ov1 .invisible {
   visibility: hidden;
 }
 
 .vCentered {
-  position: relative;
+  /* must be inside a relatively positioned containing element */
+  position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }

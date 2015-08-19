@@ -1,12 +1,8 @@
 <div class="gridItem clearfix">
-  <div>
-    <img class="img-rsp row10"
-    <% if(typeof(thumbnail_hash) !== "undefined" && thumbnail_hash) { %>
-    src="<%- thumbnail_hash %>"
-    <% }else{ %>
-    src="imgs/defaultItem.png"
-    <% } %>>
-  </div>
+  <div class="itemImg row10"
+  <% if(typeof(thumbnail_hash) !== "undefined" && thumbnail_hash) { %>
+  style="background-image: url(<%- thumbnail_hash %>);"
+  <%}%>></div>
   <div>
     <div class="thumbnail"
     <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
