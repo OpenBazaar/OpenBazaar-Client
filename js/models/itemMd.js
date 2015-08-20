@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 
-module.exports = ItemModel = Backbone.Model.extend({
+module.exports = Backbone.Model.extend({
   defaults: {
     name: "NewItem",
     GUID: 0,

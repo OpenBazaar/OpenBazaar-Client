@@ -44,13 +44,13 @@ popMenu popMenu-navBar hide js-navProfileMenu">
 <div class="modal modal-navBlock modal-opaque js-homeModal">
   <div class="modal-child modal-childMain">
     <div class="homeModal-hero">
-      <p class="h6 homeModal-heroText">OpenBazaar is an open source project created by hundreds of people with the primary goal of giving the world free trade</p>
+      <p class="h6 homeModal-heroText"><%= polyglot.t('onboarding.intro') %></p>
     </div>
     <div class="homeModal-accordian accordian js-profileAccordian">
       <div class="accordian-window">
         <div class="accordian-child">
           <div class="bar btn-bar h5 txt-center">
-            247 Contributors
+            <%= polyglot.t('onboarding.contributors', {smart_count: 247}) %>
           </div>
           <div class="flexContainer flex-border homeModal-settings">
             <div class="flexRow">
@@ -107,7 +107,7 @@ popMenu popMenu-navBar hide js-navProfileMenu">
             </div>
           </div>
           <div class="bar">
-            <a class="btn btn-bar btn-wide js-accordianNext">Configure Your Experience</a>
+            <a class="btn btn-bar btn-wide js-accordianNext"><%= polyglot.t('onboarding.configure') %></a>
           </div>
         </div>
         <div class="accordian-child">
