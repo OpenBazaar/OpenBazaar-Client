@@ -23,16 +23,16 @@
     </div>
   </div>
   <div class="bar navBar barFlush navBar">
-    <a class="btn btn-bar active js-about js-tab">About</a>
-    <a class="btn btn-bar js-followers js-tab">Followers</a>
-    <a class="btn btn-bar js-following js-tab">Following</a>
-    <a class="btn btn-bar js-stores js-tab">Store</a>
+    <a class="btn btn-bar active js-about js-tab"><%= polyglot.t('About') %></a>
+    <a class="btn btn-bar js-followers js-tab"><%= polyglot.t('Followers') %></a>
+    <a class="btn btn-bar js-following js-tab"><%= polyglot.t('Following') %></a>
+    <a class="btn btn-bar js-stores js-tab"><%= polyglot.t('Store') %></a>
     <div class="navEnd pad15">
       <div class="nav-ctrlGroup">
-        <a class="btn btn-txt">Edit</a>
+        <a class="btn btn-txt"><%= polyglot.t('Edit') %></a>
       </div>
       <div class="nav-ctrlGroup">
-        <a class="btn btn-txt">Delete</a>
+        <a class="btn btn-txt"><%= polyglot.t('Delete') %></a>
       </div>
     </div>
   </div>
@@ -41,10 +41,7 @@
   <div class="flexContainer js-about js-tabTarg">
     <div class="flexRow">
       <div class="rowItem">
-        <p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p>
-        <p>The software is open source and MIT licensed. You can <a href="https://github.com/OpenBazaar/">view the code on Github.</a></p>
-        <p>OpenBazaar is a community project, and we welcome participation in <a href="https://openbazaar-slackin-drwasho.herokuapp.com/">our Slack channel</a> or on <a href=http://www.reddit.com/r/openbazaar">our subreddit.</a></p>
-        <p>If you need help, read the OpenBazaar version 1.0 Tutorial [link]. If you still have questions, <a href="https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post">open an issue at our support desk</a>.</p>
+        <%= polyglot.t('userPage.about') %>
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@
 </div>
 <div class="nav-ctrlGroup flexExpand">
   <div class="txtFieldWrapper searchWrapper">
-    <input type="text" class="txtField" placeholder="Enter a handle or a keyword"/>
+    <input type="text" class="txtField" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>"/>
   </div>
 </div>
 <div class="nav-ctrlGroup">
@@ -25,19 +25,19 @@
 </div>
 <div class="
 popMenu popMenu-navBar hide js-navProfileMenu">
-  <a href="#myPage">My page</a>
-  <a href="#customizePage">Customize Page</a>
-  <a href="#sellItem">Sell Item</a>
+  <a href="#myPage"><%= polyglot.t('nav.myPage') %></a>
+  <a href="#customizePage"><%= polyglot.t('nav.customizePage') %></a>
+  <a href="#sellItem"><%= polyglot.t('nav.sellItem') %></a>
   <hr/>
-  <a href="#purchases">Purchases</a>
-  <a href="#sales">Sales</a>
-  <a href="#cases">Cases</a>
+  <a href="#purchases"><%= polyglot.t('nav.purchases') %></a>
+  <a href="#sales"><%= polyglot.t('nav.sales') %></a>
+  <a href="#cases"><%= polyglot.t('nav.cases') %></a>
   <hr/>
-  <a href="#notifications">Notifications</a>
-  <a href="#settings">Settings</a>
+  <a href="#notifications"><%= polyglot.t('nav.notifications') %></a>
+  <a href="#settings"><%= polyglot.t('nav.settings') %></a>
   <hr/>
-  <a href="#about">About OpenBazaar</a>
-  <a href="#support">Support OpenBazaar</a>
+  <a href="#about"><%= polyglot.t('nav.about') %></a>
+  <a href="#support"><%= polyglot.t('nav.support') %></a>
 </div>
 </div>
 
@@ -112,23 +112,23 @@ popMenu popMenu-navBar hide js-navProfileMenu">
         </div>
         <div class="accordian-child">
           <div class="bar btn-bar h5 txt-center">
-            Disclaimer
+            <%= polyglot.t('onboarding.disclaimer_title') %>
           </div>
           <div class="flexContainer homeModal-settings">
             <div class="flexRow">
               <div class="rowItem">
-                <p>Some disclaimer text will go here.</p>
+                <p><%= polyglot.t('onboarding.disclaimer_body') %></p>
               </div>
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
-            <a class="btn btn-bar btn-half js-accordianNext">Next</a>
+            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordian-child">
           <div class="bar btn-bar h5 txt-center">
-            Your Country
+            <%= polyglot.t('onboarding.yourCountry') %>
           </div>
           <div class="flexContainer flex-border homeModal-settings" id="homeModal-countryList">
             <div class="flexRow">
@@ -1176,13 +1176,13 @@ popMenu popMenu-navBar hide js-navProfileMenu">
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
-            <a class="btn btn-bar btn-half js-accordianNext">Next</a>
+            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordian-child">
           <div class="bar btn-bar h5 txt-center">
-            Time Zone
+            <%= polyglot.t('onboarding.timeZone') %>
           </div>
           <div class="flexContainer flex-border homeModal-settings" id="homeModal-timeList">
             <div class="flexRow">
@@ -1380,20 +1380,20 @@ popMenu popMenu-navBar hide js-navProfileMenu">
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
-            <a class="btn btn-bar btn-half js-accordianNext">Next</a>
+            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordian-child">
           <div class="bar btn-bar h5 txt-center">
-            Handle
+            <%= polyglot.t('onboarding.handle') %>
           </div>
           <div class="flexContainer flex-border homeModal-settings">
             <div class="flexRow">
               <div class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect">
                   <p>
-                    You're currently known as: <%= handle %>. Would you like to register an easy to remember handle?
+                    <%= polyglot.t('onboarding.knownAs') %> <%= handle %>. <%= polyglot.t('onboarding.wouldYou') %>
                   </p>
                 </div>
               </div>
@@ -1404,10 +1404,10 @@ popMenu popMenu-navBar hide js-navProfileMenu">
             <div class="pad20 rowTop20">
               <div class="flexRow pad">
                 <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle">Register New Blockchain ID</a>
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle"><%= polyglot.t('onboarding.registerNew') %> Blockchain ID</a>
                 </div>
                 <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle">Connect Existing Blockchain ID</a>
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle"><%= polyglot.t('onboarding.connectExisting') %> Blockchain ID</a>
                 </div>
                 <div class="flexCol-6 hide">
                   <a class="btn btn-txt btn-wide btn-c1 js-homeModal-cancelHandle">Cancel</a>
@@ -1416,13 +1416,13 @@ popMenu popMenu-navBar hide js-navProfileMenu">
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
-            <a class="btn btn-bar btn-half js-accordianNext">Skip</a>
+            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Skip') %></a>
           </div>
         </div>
         <div class="accordian-child">
           <div class="bar btn-bar h5 txt-center">
-            Avatar
+            <%= polyglot.t('onboarding.avatar') %>
           </div>
           <div class="flexContainer homeModal-settings">
             <div class="flexRow flexRow-center">
@@ -1430,14 +1430,14 @@ popMenu popMenu-navBar hide js-navProfileMenu">
                 <div class="homeModal-avatarPreview js-avatarPreview"></div>
                 <div class="rowTop10">
                   <input type="file" id="avatarUpload" accept="image/*" class="hide js-homeModalAvatarUpload">
-                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop20">Choose Avatar</label>
+                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('onboarding.chooseAvatar') %></label>
                 </div>
               </div>
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev">Back</a>
-            <a class="btn btn-bar btn-half js-homeModalDone">Done</a>
+            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-homeModalDone"><%= polyglot.t('Done') %></a>
           </div>
         </div>
       </div>
