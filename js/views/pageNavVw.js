@@ -33,9 +33,9 @@ module.exports = Backbone.View.extend({
     this.model = new userModel();
     this.languages = new languagesModel();
     var loc = this.model.get("language");
+    //put polyglot in the window so all templates can reach it
     window.polyglot = new Polyglot({locale: loc});
     polyglot.extend(this.languages.get(loc));
-    console.log(polyglot.t('onboarding.intro'));
     this.render();
   },
 
