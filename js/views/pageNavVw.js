@@ -1,10 +1,12 @@
-var _ = require('underscore');
-var Backbone = require('backbone');
-var $ = require('jquery');
+var _ = require('underscore'),
+    Polyglot = require('node-polyglot'),
+    Backbone = require('backbone'),
+    $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
-    userModel = require('../models/userMd')
+    userModel = require('../models/userMd'),
+    languagesModel = require('../models/languagesMd')
 
 module.exports = Backbone.View.extend({
 
@@ -29,6 +31,11 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     var self = this;
     this.model = new userModel();
+    this.languages = new languagesModel();
+    var loc = this.model.get("language");
+    window.polyglot = new Polyglot({locale: loc});
+    polyglot.extend(this.languages.get(loc));
+    console.log(polyglot.t('onboarding.intro'));
     this.render();
   },
 
