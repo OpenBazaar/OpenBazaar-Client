@@ -7,14 +7,16 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
-  className: "aboutView",
+  className: "flexRow",
+
+  tagName: "li",
 
   initialize: function(){
   },
 
   render: function(){
     var self = this;
-    var tmpl = loadTemplate('./js/templates/about.html', function(loadedTemplate) {
+    var tmpl = loadTemplate('./js/templates/chooseCurrency.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;

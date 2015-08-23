@@ -1,12 +1,11 @@
 var _ = require('underscore'),
-    Polyglot = require('node-polyglot'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
-    userModel = require('../models/userMd'),
-    languagesModel = require('../models/languagesMd')
+    countryListView = require('../views/countryListVw'),
+    currencyListView = require('../views/currencyListVw')
 
 module.exports = Backbone.View.extend({
 
@@ -20,6 +19,7 @@ module.exports = Backbone.View.extend({
     'click .js-navFwd': 'navFwdClick',
     'click .js-navProfile': 'navProfileClick',
     'click .js-homeModal-countrySelect': 'countrySelect',
+    'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-timeSelect': 'timeSelect',
     'click .js-homeModal-newHandle': 'newHandle',
     'click .js-homeModal-existingHandle': 'existingHandle',
@@ -30,12 +30,9 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self = this;
-    this.model = new userModel();
-    this.languages = new languagesModel();
-    var loc = this.model.get("language");
-    //put polyglot in the window so all templates can reach it
-    window.polyglot = new Polyglot({locale: loc});
-    polyglot.extend(this.languages.get(loc));
+    this.subViews = [],
+
+
     this.render();
   },
 
@@ -66,14 +63,20 @@ module.exports = Backbone.View.extend({
       };
     });
     //set up filterable lists
-    var countryList = new List('homeModal-countryList', {valueNames: [ 'homeModal-country' ]});
-    var timeList = new List('homeModal-timeList', {valueNames: [ 'homeModal-time' ]});
+    //TODO: this is terrible, redo so it runs when all subviews are done rendering
+    setTimeout(function(){
+      var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
+      var timeList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
+      var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});
+    }, 1000);
   },
 
   render: function(){
     var self = this;
     var tmpl = loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      var countryList = new countryListView({el: '.js-homeModal-countryList'});
+      var currencyList = new currencyListView({el: '.js-homeModal-currencyList'});
       self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
@@ -123,6 +126,13 @@ module.exports = Backbone.View.extend({
     var ctry = inpt.attr('id');
     inpt.prop("checked", true);
     this.model.set('country', ctry);
+  },
+
+  currencySelect: function(e){
+    var inpt = $(e.target).find('input[type=radio]');
+    var crcy = inpt.attr('data-currencyCode');
+    inpt.prop("checked", true);
+    this.model.set('currency', crcy);
   },
 
   timeSelect: function(e){
