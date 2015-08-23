@@ -1,5 +1,7 @@
 var Backbone = require('backbone');
 
+/* use BCP 47 language tags as the key for each language http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry */
+
 module.exports = Backbone.Model.extend({
   defaults: {
     en: {
@@ -38,6 +40,7 @@ module.exports = Backbone.Model.extend({
         "disclaimer_title": "Disclaimer",
         "disclaimer_body": "disclaimer text",
         "yourCountry": "Your Country",
+        "localCurrency": "Local Currency",
         "timeZone": "Time Zone",
         "handle": "Handle",
         "knownAs": "You're currently known as:",
@@ -87,6 +90,7 @@ module.exports = Backbone.Model.extend({
         "disclaimer_title": "Nota Legal",
         "disclaimer_body": "disclaimer text",
         "yourCountry": "Tu país",
+        "localCurrency": "Moneda Local",
         "timeZone": "Zona Horaria",
         "handle": "Apodo",
         "knownAs": "Estás conocido como:",

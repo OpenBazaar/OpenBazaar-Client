@@ -1,43 +1,44 @@
-/* shows grid of items */
-
 var _ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
-    itemsShortCollection = require('../collections/itemsShortCL'),
-    itemShortView = require('./itemShortVw')
+    loadTemplate = require('../utils/loadTemplate'),
+    countriesModel = require('../models/countriesMd'),
+    chooseCountriesCollection = require('../collections/chooseCountryCl'),
+    chooseCountryView = require('../views/chooseCountryVw');
 
 module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self = this;
-    //the model must be passed in by the constructor
-    this.itemsShort = new itemsShortCollection(this.model);
+    this.countries = new countriesModel();
+    this.chooseCountries = new chooseCountriesCollection(this.countries.get('countries'));
     this.subViews = [];
     this.render();
   },
 
   render: function(){
     var self = this;
-    _.each(this.itemsShort.models, function(item){
+    _.each(this.chooseCountries.models, function(item){
+
       self.renderItem(item);
     },this);
   },
 
   renderItem: function(item){
-    var itemShort = new itemShortView({
+    var chooseCountry = new chooseCountryView({
       model: item
     });
-    this.subViews.push(itemShort);
+    this.subViews.push(chooseCountry);
     //$el must be passed in by the constructor
-    this.$el.append(itemShort.render().el);
+    this.$el.append(chooseCountry.render().el);
   },
 
   close: function(){
     _.each(this.subViews, function(subView) {
       if(subView.close){
-       subView.close();
+        subView.close();
       }else{
         subView.remove();
       }

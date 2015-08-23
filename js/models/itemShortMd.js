@@ -7,7 +7,7 @@ module.exports = Backbone.Model.extend({
     thumbnail_hash: "imgs/defaultItem.png",
     category: "",
     price: 0,
-    currency_code: 0,
+    currency_code: "USD",
     nsfw: false,
     origin: "",
     ships_to: "",
@@ -21,6 +21,6 @@ module.exports = Backbone.Model.extend({
   },
 
   updateAttributes: function(){
-    this.set("price", accounting.formatMoney(this.get("price")));
+    this.set("price", new Intl.NumberFormat('en-EN', {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
   }
 });

@@ -81,6 +81,11 @@ input[type="text"] {
   padding-right: 0;
 }
 
+.barTxt {
+  height: 50px;
+  line-height: 50px;
+}
+
 .navBar {
   /* use for horizontal nav structures */
   display: flex;
