@@ -5,7 +5,8 @@ Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
     countryListView = require('../views/countryListVw'),
-    currencyListView = require('../views/currencyListVw')
+    currencyListView = require('../views/currencyListVw'),
+    languageListView = require('../views/languageListVw')
 
 module.exports = Backbone.View.extend({
 
@@ -20,6 +21,7 @@ module.exports = Backbone.View.extend({
     'click .js-navProfile': 'navProfileClick',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-currencySelect': 'currencySelect',
+    'click .js-homeModal-languageSelect': 'languageSelect',
     'click .js-homeModal-timeSelect': 'timeSelect',
     'click .js-homeModal-newHandle': 'newHandle',
     'click .js-homeModal-existingHandle': 'existingHandle',
@@ -32,6 +34,13 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.subViews = [],
 
+  //when language is changed, re-render
+    this.listenTo(this.model, 'change:language', function(){
+      var newLang = this.model.get("language");
+      polyglot = new Polyglot({locale: newLang});
+      polyglot.extend(_.where(this.languages.get('languages'), {langCode: newLang})[0]);
+      this.render();
+    });
 
     this.render();
   },
@@ -66,8 +75,9 @@ module.exports = Backbone.View.extend({
     //TODO: this is terrible, redo so it runs when all subviews are done rendering
     setTimeout(function(){
       var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
-      var timeList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
+      var currencyList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
       var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});
+      var languageList = new List('homeModal-languageList', {valueNames: ['homeModal-language']});
     }, 1000);
   },
 
@@ -77,6 +87,7 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       var countryList = new countryListView({el: '.js-homeModal-countryList'});
       var currencyList = new currencyListView({el: '.js-homeModal-currencyList'});
+      var languageList = new languageListView({el: '.js-homeModal-languageList'});
       self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
@@ -122,22 +133,33 @@ module.exports = Backbone.View.extend({
   },
 
   countrySelect: function(e){
-    var inpt = $(e.target).find('input[type=radio]');
-    var ctry = inpt.attr('id');
-    inpt.prop("checked", true);
+    var targ = $(e.currentTarget);
+    var ctry = targ.attr('data-code');
+    $('.js-homeModal-countryList').find('input[type=radio]').prop("checked", false);
+    targ.find('input[type=radio]').prop("checked", true);
     this.model.set('country', ctry);
   },
 
   currencySelect: function(e){
-    var inpt = $(e.target).find('input[type=radio]');
-    var crcy = inpt.attr('data-currencyCode');
-    inpt.prop("checked", true);
+    var targ = $(e.currentTarget);
+    var crcy = targ.attr('data-code');
+    $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
+    targ.find('input[type=radio]').prop("checked", true);
     this.model.set('currency', crcy);
   },
 
+  languageSelect: function(e){
+    var targ = $(e.currentTarget);
+    var lang = targ.attr('data-code');
+    $('.js-homeModal-languageList').find('input[type=radio]').prop("checked", false);
+    targ.find('input[type=radio]').prop("checked", true);
+    this.model.set('language', lang);
+  },
+
   timeSelect: function(e){
-    var inpt = $(e.target).find('input[type=radio]');
+    var inpt = $(e.target).closest('input[type=radio]');
     var tz = inpt.attr('id');
+    $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
     this.model.set('timeZone', tz);
   },

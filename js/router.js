@@ -7,6 +7,11 @@ var homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw');
 
 module.exports = Backbone.Router.extend({
+
+  initialize: function(baseView){
+    this.baseView = baseView;
+  },
+
   routes: {
     "": "home",
     "home": "home",
@@ -26,6 +31,7 @@ module.exports = Backbone.Router.extend({
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     $('body').removeClass("body-neutral");//add other body style classes if they are created
+    console.log("new view");
   },
 
   home: function(){

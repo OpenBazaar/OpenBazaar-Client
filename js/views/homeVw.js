@@ -6,8 +6,8 @@ var _ = require('underscore'),
 Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
-    itemListView = require('../views/itemListVw'),
-    storeListView = require('../views/userListVw')
+    itemListView = require('./itemListVw'),
+    storeListView = require('./userListVw')
 
 
 var fakeStores = [
@@ -75,9 +75,7 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     var self = this;
     this.subViews = [];
-    var tmpl = loadTemplate('./js/templates/home.html', function(loadedTemplate){
-      self.render(loadedTemplate);
-    });
+    this.render();
   },
 
   hideList1: function(e){
@@ -95,9 +93,12 @@ module.exports = Backbone.View.extend({
   },
 
   render: function(tmpl){
+    var self = this;
     this.$el.appendTo('#content');
-    this.$el.html(tmpl());
-    this.subRender();
+    var tmpl = loadTemplate('./js/templates/home.html', function(loadedTemplate) {
+      self.$el.html(loadedTemplate());
+      self.subRender();
+    });
   },
 
   subRender: function(){
