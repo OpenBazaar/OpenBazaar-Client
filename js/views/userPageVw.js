@@ -130,8 +130,9 @@ module.exports = Backbone.View.extend({
     'click .js-stores': 'storeClick'
   },
 
-  initialize: function(){
+  initialize: function(options){
     var self = this;
+    this.options = options;
     this.subViews = [];
     this.model = new Backbone.Model();
     this.userModel = new userModel();
@@ -151,7 +152,7 @@ module.exports = Backbone.View.extend({
   },
 
   subRender: function(){
-    var itemList = new itemListView({model:fakeItems, el: '.js-list3'});
+    var itemList = new itemListView({model:fakeItems, el: '.js-list3', userModel: this.options.userModel});
     var followerList = new personListView({model:fakeFollowers, el: '.js-list1'});
     var followingList = new personListView({model:fakeFollowing, el: '.js-list2'});
     this.subViews.push(itemList);

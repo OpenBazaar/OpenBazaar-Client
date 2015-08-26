@@ -47,7 +47,7 @@ setTimeout(function(){
 setBitcoin(function(){
     var pageNav = new pageNavView({model: user});
 
-    this.router = new router(this);
+    this.router = new router({userModel: user});
     Backbone.history.start();
 });
 

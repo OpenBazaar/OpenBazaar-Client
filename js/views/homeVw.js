@@ -72,8 +72,9 @@ module.exports = Backbone.View.extend({
     'click .js-homeStoresBtn': 'homeStoresClick'
   },
 
-  initialize: function(){
+  initialize: function(options){
     var self = this;
+    this.options = options;
     this.subViews = [];
     this.render();
   },
@@ -102,7 +103,7 @@ module.exports = Backbone.View.extend({
   },
 
   subRender: function(){
-    var itemList = new itemListView({model: fakeItems, el: '.js-list1'});
+    var itemList = new itemListView({model: fakeItems, el: '.js-list1', userModel: this.options.userModel});
     var storeList = new storeListView({model: fakeStores, el: '.js-list2'});
     this.subViews.push(itemList,storeList);
     this.hideList1();

@@ -145,10 +145,12 @@ module.exports = Backbone.View.extend({
 
   currencySelect: function(e){
     var targ = $(e.currentTarget);
-    var crcy = targ.attr('data-code');
+    var crcy = targ.attr('data-name');
+    var ccode = targ.attr('data-code');
     $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
     this.model.set('currency', crcy);
+    this.model.set('currencyCode', ccode);
   },
 
   languageSelect: function(e){
