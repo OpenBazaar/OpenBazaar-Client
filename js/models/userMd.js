@@ -2,7 +2,7 @@ Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
   defaults: {
-    beenSet: false, //set this back to false when done testing
+    beenSet: true, //set this back to false when done testing
     name: "Your Name",
     handle: "Blockchain ID",
     avatar_hash: "imgs/defaultUser.png",
