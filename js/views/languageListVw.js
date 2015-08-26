@@ -10,8 +10,9 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
-  initialize: function(){
+  initialize: function(options){
     var self = this;
+    this.options = options;
     this.languages = new languagesModel();
     this.chooseLanguages = new chooseLanguagesCollection(this.languages.get('languages'));
     this.subViews = [];
@@ -27,7 +28,8 @@ module.exports = Backbone.View.extend({
 
   renderItem: function(item){
     var chooseLanguage = new chooseLanguageView({
-      model: item
+      model: item,
+      selected: this.options.selected
     });
     this.subViews.push(chooseLanguage);
     //$el must be passed in by the constructor

@@ -50,13 +50,13 @@
           <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.chooseLanguage') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings" id="homeModal-languageList">
+          <div class="flexContainer flex-border" id="homeModal-languageList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper flexRow">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
                 <input type="text" class="txtField txtField-bar search" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-languageList">
+            <ul class="flexRow list js-homeModal-languageList homeModal-settings">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -67,7 +67,7 @@
           <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.contributors', {smart_count: 247}) %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch">
             <div class="flexRow">
               <div class="flexRow">
                 <div class="rowItem">
@@ -130,7 +130,7 @@
           <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.disclaimer_title') %>
           </div>
-          <div class="flexContainer homeModal-settings">
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
             <div class="flexRow">
               <div class="rowItem">
                 <p><%= polyglot.t('onboarding.disclaimer_body') %></p>
@@ -146,13 +146,13 @@
           <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.yourCountry') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings" id="homeModal-countryList">
+          <div class="flexContainer flex-border" id="homeModal-countryList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper flexRow">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
                 <input type="text" class="txtField txtField-bar search" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-countryList">
+            <ul class="flexRow list js-homeModal-countryList homeModal-settings">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -164,13 +164,13 @@
           <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.localCurrency') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings" id="homeModal-currencyList">
+          <div class="flexContainer flex-border" id="homeModal-currencyList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper flexRow">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
                 <input type="text" class="txtField txtField-bar search" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-currencyList">
+            <ul class="flexRow list js-homeModal-currencyList homeModal-settings">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -182,13 +182,13 @@
           <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.timeZone') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings" id="homeModal-timeList">
+          <div class="flexContainer flex-border" id="homeModal-timeList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper flexRow">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
                 <input type="text" class="search txtField txtField-bar" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-timeZoneList">
+            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings">
               <li class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect">
                   <input type="radio" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
@@ -386,7 +386,7 @@
           <div class="bar barTxt h5 txt-center">
             <%= polyglot.t('onboarding.handle') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch">
             <div class="flexRow">
               <div class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect">
@@ -395,7 +395,7 @@
                   </p>
                 </div>
               </div>
-              <div class="txtFieldWrapper txtFieldWrapper-bar flexRow hide">
+              <div class="txtFieldWrapper txtFieldWrapper-bar hide">
                 <input type="text" class="txtField txtField-bar js-homeModal-handleInput" placeholder="Choose Handle" />
               </div>
             </div>
@@ -422,7 +422,7 @@
           <div class="bar barTxt h5 txt-center">
             <%= polyglot.t('onboarding.avatar') %>
           </div>
-          <div class="flexContainer homeModal-settings">
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
             <div class="flexRow flexRow-center">
               <div>
                 <div class="homeModal-avatarPreview js-avatarPreview"></div>

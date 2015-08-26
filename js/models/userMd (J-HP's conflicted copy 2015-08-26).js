@@ -10,7 +10,7 @@ module.exports = Backbone.Model.extend({
     bitcoinAddress: "",
     currency: "US Dollar",
     currencyCode: "USD",
-    country: "",
+    country: "UNITED_STATES",
     language: "en",
     timeZome: "",
     notifications: true,

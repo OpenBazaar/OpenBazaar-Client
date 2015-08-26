@@ -14,15 +14,18 @@ var fs = require('fs'),
 
 var user = new userModel();
 
+//put in a call to the server here to get an updated user model
+
 var languages = new languagesModel();
 
-var lang = user.get("language");
+//put language in the window so all templates and models can reach it
+window.lang = user.get("language");
 
 //put polyglot in the window so all templates can reach it
-window.polyglot = new Polyglot({locale: lang});
+window.polyglot = new Polyglot({locale: window.lang});
 
 //retrieve the object that has a matching language code
-polyglot.extend(_.where(languages.get('languages'), {langCode: lang})[0]);
+polyglot.extend(_.where(languages.get('languages'), {langCode: window.lang})[0]);
 
 var currentBitcoin = new currentBitcoinModel();
 currentBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+user.get('currencyCode');
@@ -30,7 +33,7 @@ currentBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+user.get('c
 var setBitcoin = function(callback){
     //put currentBitcoin into the window so we don't have to pipe it into each model
     currentBitcoin.fetch({success: function(){
-        window.currentBitcoin = currentBitcoin.get('24h_avg'); console.log("set bitcoin");
+        window.currentBitcoin = currentBitcoin.get('24h_avg');
         typeof callback === 'function' && callback();
     }});
 };

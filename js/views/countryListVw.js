@@ -10,8 +10,9 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
-  initialize: function(){
+  initialize: function(options){
     var self = this;
+    this.options = options;
     this.countries = new countriesModel();
     this.chooseCountries = new chooseCountriesCollection(this.countries.get('countries'));
     this.subViews = [];
@@ -28,7 +29,8 @@ module.exports = Backbone.View.extend({
 
   renderItem: function(item){
     var chooseCountry = new chooseCountryView({
-      model: item
+      model: item,
+      selected: this.options.selected
     });
     this.subViews.push(chooseCountry);
     //$el must be passed in by the constructor

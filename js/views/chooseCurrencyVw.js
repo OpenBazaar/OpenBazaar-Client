@@ -11,7 +11,9 @@ module.exports = Backbone.View.extend({
 
   tagName: "li",
 
-  initialize: function(){
+  initialize: function(options){
+    this.options = options;
+    this.model.set('selected', this.options.selected);
   },
 
   render: function(){
