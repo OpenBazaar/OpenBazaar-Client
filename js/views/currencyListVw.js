@@ -10,8 +10,9 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
-  initialize: function(){
+  initialize: function(options){
     var self = this;
+    this.options = options;
     this.countries = new countriesModel();
     //create a list of currencies from the country list, so we can maintain a single set of data
     var uniqueCurrencies = _.uniq(this.countries.get('countries'), function(item){return item.code});
@@ -31,14 +32,14 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     _.each(this.chooseCurrencies.models, function(item){
-
       self.renderItem(item);
     },this);
   },
 
   renderItem: function(item){
     var chooseCurrency = new chooseCurrencyView({
-      model: item
+      model: item,
+      selected: this.options.selected
     });
     this.subViews.push(chooseCurrency);
     //$el must be passed in by the constructor

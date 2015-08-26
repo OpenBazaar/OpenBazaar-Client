@@ -120,6 +120,7 @@ input[type="text"] {
 .flexRow {
   display: flex;
   align-items: flex-start;
+  align-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
   /* reset styles if applied to a list item */
@@ -524,6 +525,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   width: 50%;
 }
 
+.btn.btn-half.btn-bar:last-child,
+.btn.btn-wide.btn-bar:last-child {
+  border-right: none;
+}
+
 .btn.btn-togLeft,
 .btn.btn-togMid,
 .btn.btn-togRight {
@@ -617,9 +623,13 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 }
 
 .homeModal-settings {
-  height: 240px;
-  overflow-y: scroll;
+  height: 198px;
+  overflow-y: auto;
   background-color: #086A9E;
+}
+
+.homeModal-settings.homeModal-settings-noSearch {
+  height: 240px;
 }
 
 .homeModal-avatarPreview {

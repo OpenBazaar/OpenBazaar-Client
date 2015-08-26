@@ -31,7 +31,6 @@ module.exports = Backbone.Router.extend({
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     $('body').removeClass("body-neutral");//add other body style classes if they are created
-    console.log("new view");
   },
 
   home: function(){

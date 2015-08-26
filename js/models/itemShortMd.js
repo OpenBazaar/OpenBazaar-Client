@@ -24,6 +24,6 @@ module.exports = Backbone.Model.extend({
 
   updateAttributes: function(){
     this.set("btcPrice", (this.get("price") / window.currentBitcoin).toFixed(4));
-    this.set("price", new Intl.NumberFormat('en-EN', {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
+    this.set("price", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
   }
 });

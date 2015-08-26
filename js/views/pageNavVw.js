@@ -4,9 +4,11 @@ var _ = require('underscore'),
 Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
+    Polyglot = require('node-polyglot'),
+    languagesModel = require('../models/languagesMd'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
-    languageListView = require('../views/languageListVw')
+    languageListView = require('../views/languageListVw');
 
 module.exports = Backbone.View.extend({
 
@@ -32,13 +34,14 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self = this;
-    this.subViews = [],
+    this.subViews = [];
+    this.languages = new languagesModel();
 
   //when language is changed, re-render
     this.listenTo(this.model, 'change:language', function(){
       var newLang = this.model.get("language");
-      polyglot = new Polyglot({locale: newLang});
-      polyglot.extend(_.where(this.languages.get('languages'), {langCode: newLang})[0]);
+      window.polyglot = new Polyglot({locale: newLang});
+      window.polyglot.extend(_.where(this.languages.get('languages'), {langCode: newLang})[0]);
       this.render();
     });
 
@@ -85,9 +88,9 @@ module.exports = Backbone.View.extend({
     var self = this;
     var tmpl = loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      var countryList = new countryListView({el: '.js-homeModal-countryList'});
-      var currencyList = new currencyListView({el: '.js-homeModal-currencyList'});
-      var languageList = new languageListView({el: '.js-homeModal-languageList'});
+      var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
+      var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
+      var languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
       self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
