@@ -7,6 +7,7 @@ module.exports = Backbone.Model.extend({
     thumbnail_hash: "imgs/defaultItem.png",
     category: "",
     price: 0,
+    displayPrice: 0,
     btcPrice: 0,
     currency_code: "USD",
     nsfw: false,
@@ -24,6 +25,6 @@ module.exports = Backbone.Model.extend({
 
   updateAttributes: function(){
     this.set("btcPrice", (this.get("price") / window.currentBitcoin).toFixed(4));
-    this.set("price", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
+    this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
   }
 });

@@ -8,8 +8,8 @@ var homeView = require('./views/homeVw'),
 
 module.exports = Backbone.Router.extend({
 
-  initialize: function(baseView){
-    this.baseView = baseView;
+  initialize: function(options){
+    this.options = options;
   },
 
   routes: {
@@ -34,11 +34,11 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(){
-    this.newView(new homeView());
+    this.newView(new homeView({userModel: this.options.userModel}));
   },
 
   myPage: function(){
-    this.newView(new userPageView());
+    this.newView(new userPageView({userModel: this.options.userModel}));
     $('body').addClass("body-neutral");
   },
 
