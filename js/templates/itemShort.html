@@ -1,7 +1,7 @@
 <div class="gridItem clearfix">
   <div class="itemImg row10"
   <% if(typeof(thumbnail_hash) !== "undefined" && thumbnail_hash) { %>
-  style="background-image: url(<%- thumbnail_hash %>);"
+  style="background-image: url(<%- server %>get_image?hash=<%- thumbnail_hash %>);"
   <%}%>></div>
   <div>
     <div class="thumbnail"

@@ -23,6 +23,11 @@ module.exports = Backbone.Model.extend({
         Store: "Store",
         Edit: "Edit",
         Delete: "Delete",
+        Website: "Website",
+        Email: "Email",
+        Facebook: "Facebook",
+        Instagram: "Instagram",
+        Snapchat: "Snapchat",
         nav: {
           searchPlaceholder: "Enter a handle or a keyword",
           myPage: "My Page",
@@ -53,9 +58,6 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Avatar",
           chooseAvatar: "Choose Avatar"
-        },
-        userPage: {
-          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can <a href='https://github.com/OpenBazaar/'>view the code on Github.</a></p><p>OpenBazaar is a community project, and we welcome participation in <a href='https://openbazaar-slackin-drwasho.herokuapp.com/'>our Slack channel</a> or on <a href='http://www.reddit.com/r/openbazaar'>our subreddit.</a></p><p>If you need help, read the OpenBazaar version 1.0 Tutorial [link]. If you still have questions, <a href='https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post'>open an issue at our support desk</a>.</p>"
         }
       },
       {
@@ -76,6 +78,11 @@ module.exports = Backbone.Model.extend({
         Store: "Tienda",
         Edit: "Editar",
         Delete: "Borrar",
+        Website: "Sitio Web",
+        Email: "Correo electrónico",
+        Facebook: "Facebook",
+        Instagram: "Instagram",
+        Snapchat: "Snapchat",
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi página",
@@ -106,9 +113,6 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Conecte Existente",
           avatar: "Avatar",
           chooseAvatar: "Elija Avatar"
-        },
-        userPage: {
-          about: "<p>OpenBazaar es una red de usuarios que compran y venden bienes y servicios directamente entre sí, utilizando Bitcoin Esta red es descentralizada y no está controlada por ninguna organización</p><p> El. software es de código abierto y licencia MIT. puede <a href='https://github.com/OpenBazaar/'> ver el código en Github.</a></p><p> OpenBazaar es un proyecto comunitario, y damos la bienvenida a la participación en <a href='https://openbazaar-slackin-drwasho.herokuapp.com/'>nuestra</a> canal Slack o <a href='http://www.reddit.com/r/openbazaar> nuestra subreddit. </a> </ p> <p> Si usted necesita ayuda, leer la versión 1.0 Tutorial openBazaar [link]. Si usted todavía tiene preguntas, <a href='https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post'>open un problema en nuestra </a> servicio de soporte. </p>"
         }
       }
     ]

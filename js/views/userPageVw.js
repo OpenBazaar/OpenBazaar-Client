@@ -4,28 +4,10 @@ var $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
-    userModel = require('../models/userMd'),
     userPageModel = require('../models/userPageMd'),
+    listingsModel = require('../models/listingsMd'),
     itemListView = require('../views/itemListVw'),
     personListView = require('../views/userListVw')
-
-var fakeUserPage = {
-  active: true,
-  categories: ["ponies", "autonomous collectives"],
-  moderators: ["ob1", "Name of a Moderator Here"],
-  shipsTo: "Bolivia",
-  bannerImg: "/imgs/defaultBanner.png",
-  about: "Example about text. This is plain text only. It can be as long or as short as a user wants it to be.",
-  website: "http://www.exampleOfWebsite.com",
-  email: "example@exampleOfEmail.com",
-  facebook: "https://www.facebook.com/bitcoins",
-  twitter: "https://twitter.com/bitcoin",
-  instagram: "https://instagram.com/bitcoin/",
-  followers: ["handle1", "handle2", "handle3"],
-  following: ["handle4", "handle5", "handle6"],
-  customization: "",
-  contracts: ["ID1", "ID2", "ID3"]
-}
 
 var fakeFollowers = [
   {
@@ -135,10 +117,15 @@ module.exports = Backbone.View.extend({
     this.options = options;
     this.subViews = [];
     this.model = new Backbone.Model();
-    this.userModel = new userModel();
-    this.userPageModel = new userPageModel();
-    this.model.set({user: this.userModel.toJSON(), page: this.userPageModel.toJSON()});
-    this.render();
+    this.userModel = options.userModel;
+    this.userPage = new userPageModel();
+
+    this.userPage.fetch({success: function(model){
+      self.model.set({user: self.userModel.toJSON(), page: model.toJSON()});
+      self.render();
+    }});
+
+    this.listings = new listingsModel();
   },
 
   render: function(){
@@ -147,14 +134,22 @@ module.exports = Backbone.View.extend({
     var tmpl = loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.subRender();
+      self.listings.fetch({success: function(model){
+        self.renderItems(model.get('listings'));
+      }});
     });
     return this;
   },
 
   subRender: function(){
-    var itemList = new itemListView({model:fakeItems, el: '.js-list3', userModel: this.options.userModel});
     var followerList = new personListView({model:fakeFollowers, el: '.js-list1'});
+    this.subViews.push(followerList);
     var followingList = new personListView({model:fakeFollowing, el: '.js-list2'});
+    this.subViews.push(followingList);
+  },
+
+  renderItems: function(model){
+    var itemList = new itemListView({model:model, el: '.js-list3', userModel: this.options.userModel});
     this.subViews.push(itemList);
   },
 
