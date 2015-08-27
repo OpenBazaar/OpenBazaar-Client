@@ -34,12 +34,12 @@ module.exports = Backbone.View.extend({
   renderItem: function(item){
     var itemShort = new itemShortView({
       model: item,
-      currencyCode:  this.options.userModel.get('currencyCode')
+      currencyCode:  this.options.userModel.get('currencyCode'),
+      server: this.options.userModel.get('server')
     });
     this.subViews.push(itemShort);
     //$el must be passed in by the constructor
     this.$el.append(itemShort.render().el);
-    console.log("append");
   },
 
   close: function(){

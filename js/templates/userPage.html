@@ -1,4 +1,4 @@
-<div class="mainContainer">
+<div class="mainContainer custCol-background">
   <div class="banner-large shadow-inner1"
   <% if(typeof(page.bannerImg) !== "undefined" && page.bannerImg) { %>
   style="background-image: url(<%- page.bannerImg %>);"
@@ -22,36 +22,103 @@
       </div>
     </div>
   </div>
-  <div class="bar navBar barFlush navBar">
+  <div class="bar navBar barFlush navBar custCol-primary">
     <a class="btn btn-bar active js-about js-tab"><%= polyglot.t('About') %></a>
     <a class="btn btn-bar js-followers js-tab"><%= polyglot.t('Followers') %></a>
     <a class="btn btn-bar js-following js-tab"><%= polyglot.t('Following') %></a>
     <a class="btn btn-bar js-stores js-tab"><%= polyglot.t('Store') %></a>
     <div class="navEnd pad15">
       <div class="nav-ctrlGroup">
-        <a class="btn btn-txt"><%= polyglot.t('Edit') %></a>
+        <a class="btn btn-txt custCol-background"><%= polyglot.t('Edit') %></a>
       </div>
       <div class="nav-ctrlGroup">
-        <a class="btn btn-txt"><%= polyglot.t('Delete') %></a>
+        <a class="btn btn-txt custCol-background"><%= polyglot.t('Delete') %></a>
       </div>
     </div>
   </div>
 <div>
 <div>
-  <div class="flexContainer js-about js-tabTarg">
+  <div class="flexContainer flex-border custCol-primary js-about js-tabTarg">
     <div class="flexRow">
-      <div class="rowItem">
-        <%= polyglot.t('userPage.about') %>
+      <div class="flexCol-9">
+        <div class="rowItem">
+          <%= page.profile.about %>
+        </div>
+      </div>
+      <div class="flexCol-3 flex-border">
+        <div class="flexRow">
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Website') %></div>
+              <div>
+                <% if(page.profile.website) { %>
+                <%=page.profile.website %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Email') %></div>
+              <div>
+                <% if(page.profile.email) { %>
+                <%=page.profile.email %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Facebook') %></div>
+              <div>
+                <% if(page.profile.social_accounts.facebook && page.profile.social_accounts.facebook.username) { %>
+                <%=page.profile.social_accounts.facebook.username %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Instagram') %></div>
+              <div>
+                <% if(page.profile.social_accounts.instagram && page.profile.social_accounts.instagram.username) { %>
+                <%=page.profile.social_accounts.instagram.username %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Snapchat') %></div>
+              <div>
+                <% if(page.profile.social_accounts.snapchat && page.profile.social_accounts.snapchat.username) { %>
+                <%=page.profile.social_accounts.snapchat.username %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
-  <div class="flexContainer flex-border js-followers js-tabTarg hide">
+  <div class="flexContainer flex-border custCol-primary js-followers js-tabTarg hide">
     <div class="flexRow js-list1"></div>
   </div>
-  <div class="flexContainer flex-border js-following js-tabTarg hide">
+  <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide">
     <div class="flexRow js-list2"></div>
   </div>
-  <div class="flexContainer flex-border js-store js-tabTarg hide">
+  <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide">
     <div class="flexRow js-list3"></div>
   </div>
 

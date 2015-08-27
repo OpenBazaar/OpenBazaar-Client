@@ -6,6 +6,7 @@ var _ = require('underscore'),
 Backbone.$ = $;
 var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
+    listingsModel = require('../models/listingsMd'),
     itemListView = require('./itemListVw'),
     storeListView = require('./userListVw')
 
