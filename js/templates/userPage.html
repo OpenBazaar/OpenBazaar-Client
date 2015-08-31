@@ -1,7 +1,7 @@
 <div class="mainContainer custCol-background">
   <div class="banner-large shadow-inner1"
   <% if(typeof(page.bannerImg) !== "undefined" && page.bannerImg) { %>
-  style="background-image: url(<%- page.bannerImg %>);"
+  style="background-image: url(<%- user.server %>get_image?hash=<%- page.bannerImg %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
@@ -9,7 +9,7 @@
       <div class="rowItem">
         <div class="thumbnail thumbnail-large"
         <% if(typeof(user.avatar_hash) !== "undefined" && user.avatar_hash) { %>
-        style="background-image: url(<%- user.avatar_hash %>);"
+        style="background-image: url(<%- user.server %>get_image?hash=<%- user.avatar_hash %>);"
         <% }else{ %>
         style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
@@ -23,10 +23,10 @@
     </div>
   </div>
   <div class="bar navBar barFlush navBar custCol-primary">
-    <a class="btn btn-bar active js-about js-tab"><%= polyglot.t('About') %></a>
-    <a class="btn btn-bar js-followers js-tab"><%= polyglot.t('Followers') %></a>
-    <a class="btn btn-bar js-following js-tab"><%= polyglot.t('Following') %></a>
-    <a class="btn btn-bar js-stores js-tab"><%= polyglot.t('Store') %></a>
+    <a class="btn btn-bar btn-tab active js-about js-tab"><%= polyglot.t('About') %></a>
+    <a class="btn btn-bar btn-tab js-followers js-tab"><%= polyglot.t('Followers') %></a>
+    <a class="btn btn-bar btn-tab js-following js-tab"><%= polyglot.t('Following') %></a>
+    <a class="btn btn-bar btn-tab js-stores js-tab"><%= polyglot.t('Store') %></a>
     <div class="navEnd pad15">
       <div class="nav-ctrlGroup">
         <a class="btn btn-txt custCol-background"><%= polyglot.t('Edit') %></a>

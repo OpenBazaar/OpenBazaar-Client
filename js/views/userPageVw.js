@@ -6,8 +6,9 @@ var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
     userPageModel = require('../models/userPageMd'),
     listingsModel = require('../models/listingsMd'),
-    itemListView = require('../views/itemListVw'),
-    personListView = require('../views/userListVw')
+    itemListView = require('./itemListVw'),
+    personListView = require('./userListVw'),
+    simpleMessageView = require('./simpleMessageVw')
 
 var fakeFollowers = [
   {
@@ -119,13 +120,15 @@ module.exports = Backbone.View.extend({
     this.model = new Backbone.Model();
     this.userModel = options.userModel;
     this.userPage = new userPageModel();
+    console.log(options.userModel.get('server'));
+    this.listings = new listingsModel();
+    this.listings.url = options.userModel.get('server')+"/get_listings";
 
     this.userPage.fetch({success: function(model){
       self.model.set({user: self.userModel.toJSON(), page: model.toJSON()});
+      console.log(self.model);
       self.render();
     }});
-
-    this.listings = new listingsModel();
   },
 
   render: function(){
@@ -134,9 +137,15 @@ module.exports = Backbone.View.extend({
     var tmpl = loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.subRender();
-      self.listings.fetch({success: function(model){
-        self.renderItems(model.get('listings'));
-      }});
+      console.log(self.listings);
+      self.listings.fetch({
+        success: function(model){
+          self.renderItems(model.get('listings'));
+        },
+        error: function(model, response){
+          self.showError("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
+        }
+      });
     });
     return this;
   },
@@ -151,6 +160,11 @@ module.exports = Backbone.View.extend({
   renderItems: function(model){
     var itemList = new itemListView({model:model, el: '.js-list3', userModel: this.options.userModel});
     this.subViews.push(itemList);
+  },
+
+  showError: function(title, message){
+    var errorView = new simpleMessageView({title: title, message: message, el: '.js-list3'});
+    this.subViews.push(errorView);
   },
 
   aboutClick: function(e){
