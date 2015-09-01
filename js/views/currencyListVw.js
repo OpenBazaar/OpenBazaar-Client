@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options){
     var self = this;
-    this.options = options;
+    this.options = options || {};
     this.countries = new countriesModel();
     //create a list of currencies from the country list, so we can maintain a single set of data
     var uniqueCurrencies = _.uniq(this.countries.get('countries'), function(item){return item.code});
