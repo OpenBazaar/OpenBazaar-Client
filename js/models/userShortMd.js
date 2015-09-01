@@ -5,7 +5,7 @@ module.exports = ShortItemModel = Backbone.Model.extend({
     name: "A Store",
     GUID: "",
     handle: 0,
-    avatar_hash: "/imgs/defaultUser.png",
+    avatar_hash: "",
     nsfw: false
   }
 });

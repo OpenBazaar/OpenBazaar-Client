@@ -12,7 +12,7 @@ module.exports = Backbone.View.extend({
   tagName: "li",
 
   initialize: function(options){
-    this.options = options;
+    this.options = options || {};
     this.model.set('selected', this.options.selected);
   },
 

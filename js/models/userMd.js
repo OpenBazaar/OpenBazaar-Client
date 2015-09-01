@@ -5,7 +5,7 @@ module.exports = Backbone.Model.extend({
     beenSet: true, //set this back to false when done testing
     name: "Your Name",
     handle: "Blockchain ID",
-    avatar_hash: "imgs/defaultUser.png",
+    avatar_hash: "",
     tempAvatar: "",
     bitcoinAddress: "",
     currency: "US Dollar",
@@ -26,8 +26,8 @@ module.exports = Backbone.Model.extend({
     SSL: false,
     seedPhrase: "",
     //values below for testing. Real value should be dynamically set
-    server: "http://205.186.154.163:18469/api/v1/"
-    //server: "http://bitcoinauthenticator.org:18469/api/v1"
+    server: "http://seed.openbazaar.org:18469/api/v1/"
+    //server: "http://bitcoinauthenticator.org:18469/api/v1/"
   },
 
   initialize: function(){

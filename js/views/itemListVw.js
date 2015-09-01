@@ -12,9 +12,10 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options){
     var self = this;
-    this.options = options;
+    this.options = options || {};
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
+    this.itemsShort.url = options.userModel.get('server')+"get_listings";
     this.listenTo(this.options.userModel, 'change', function(){
       self.render();
     });
@@ -35,7 +36,8 @@ module.exports = Backbone.View.extend({
     var itemShort = new itemShortView({
       model: item,
       currencyCode:  this.options.userModel.get('currencyCode'),
-      server: this.options.userModel.get('server')
+      server: this.options.userModel.get('server'),
+      showAvatar: this.options.showAvatar
     });
     this.subViews.push(itemShort);
     //$el must be passed in by the constructor
