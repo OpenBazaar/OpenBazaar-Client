@@ -11,7 +11,7 @@ module.exports = Backbone.Model.extend({
       moderator: false,
       moderators: ["moderator 1", "moderator 2"],
       shipsTo: "",
-      headerhash: "imgs/defaultBanner.png",
+      headerhash: "imgs/defaultBanner.png", //remove this when header images are available
       about: "default about text",
       website: "",
       email: "",
@@ -49,9 +49,5 @@ module.exports = Backbone.Model.extend({
       email: "",
       encryption_key: ""
     }
-  },
-
-  //url just for testing
-  url: "http://bitcoinauthenticator.org:18469/api/v1/get_profile"
-
+  }
 });

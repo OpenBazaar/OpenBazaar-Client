@@ -1,5 +1,3 @@
-/* shows grid of items */
-
 var _ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
@@ -15,19 +13,19 @@ var fakeStores = [
   {
     name: "A Store",
     handle: 0,
-    avatar_hash: "imgs/defaultUser.png",
+    avatar_hash: "",
     nsfw: false
   },
   {
     name: "A Second Store",
     handle: 0,
-    avatar_hash: "imgs/defaultUser.png",
+    avatar_hash: "",
     nsfw: false
   },
   {
     name: "A Third Store",
     handle: 0,
-    avatar_hash: "imgs/defaultUser.png",
+    avatar_hash: "",
     nsfw: false
   }
 ];
@@ -44,21 +42,21 @@ var fakeItems = [
     title: "Item Two",
     contract_hash: 0,
     price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: "imgs/defaultItem.png"
+    thumbnail_hash: "",
+    avatar_hash: ""
   },
   {
     title: "Item Three",
     contract_hash: 0,
     price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
+    thumbnail_hash: "",
     avatar_hash: ""
   },
   {
     title: "Item Four",
     contract_hash: 0,
     price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
+    thumbnail_hash: "",
     avatar_hash: ""
   }
 ];
@@ -75,7 +73,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options){
     var self = this;
-    this.options = options;
+    this.options = options || {};
     this.subViews = [];
     this.render();
   },
@@ -104,7 +102,7 @@ module.exports = Backbone.View.extend({
   },
 
   subRender: function(){
-    var itemList = new itemListView({model: fakeItems, el: '.js-list1', userModel: this.options.userModel});
+    var itemList = new itemListView({model: fakeItems, el: '.js-list1', userModel: this.options.userModel, showAvatar: true});
     var storeList = new storeListView({model: fakeStores, el: '.js-list2'});
     this.subViews.push(itemList,storeList);
     this.hideList1();

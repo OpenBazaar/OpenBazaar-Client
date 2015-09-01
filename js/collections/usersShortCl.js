@@ -1,6 +1,6 @@
 var Backbone = require('backbone'),
-    StoreShort = require('../models/userShortMd');
+    userShort = require('../models/userShortMd');
 
 module.exports = Backbone.Collection.extend({
-  model: StoreShort
+  model: userShort
 });

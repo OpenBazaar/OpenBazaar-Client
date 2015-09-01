@@ -15,9 +15,11 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(options){
-    this.options = options;
+    this.options = options || {};
+    console.log(options.showAvatar);
     this.model.set('currency_code', options.currencyCode);
     this.model.set('server', options.server);
+    this.model.set('showAvatar', options.showAvatar);
   },
 
   render: function(){

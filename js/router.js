@@ -9,7 +9,7 @@ var homeView = require('./views/homeVw'),
 module.exports = Backbone.Router.extend({
 
   initialize: function(options){
-    this.options = options;
+    this.options = options || {};
   },
 
   routes: {

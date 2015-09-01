@@ -11,7 +11,10 @@ module.exports = Backbone.View.extend({
   classname: "alertView",
 
   initialize: function(options){
-    //expects options.message to be passed
+    /*expected options:
+      options.title: title for no users found
+      options.message: message for no users found
+    */
     this.model = {title: options.title, message: options.message};
     this.render();
   },
