@@ -15,7 +15,6 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
-    this.itemsShort.url = options.userModel.get('server')+"get_listings";
     this.listenTo(this.options.userModel, 'change', function(){
       self.render();
     });

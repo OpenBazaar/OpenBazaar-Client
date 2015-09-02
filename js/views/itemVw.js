@@ -9,6 +9,21 @@ var fs = require('fs'),
 
 module.exports = Backbone.View.extend({
 
+    events: {
 
+    },
 
+    initialize: function(options){
+        this.options = options || {};
+        this.model.set({server: options.server});
+        this.render();
+    },
+
+    render: function(){
+        var self = this;
+        var tmpl = loadTemplate('./js/templates/item.html', function(loadedTemplate) {
+            self.$el.html(loadedTemplate(self.model.toJSON()));
+        });
+        return this;
+    }
 });
