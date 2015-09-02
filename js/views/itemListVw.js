@@ -37,7 +37,9 @@ module.exports = Backbone.View.extend({
       model: item,
       currencyCode:  this.options.userModel.get('currencyCode'),
       server: this.options.userModel.get('server'),
-      showAvatar: this.options.showAvatar
+      showAvatar: this.options.showAvatar,
+      avatar_hash: this.options.userModel.get('avatar_hash'),
+      handle: this.options.userModel.get('handle')
     });
     this.subViews.push(itemShort);
     //$el must be passed in by the constructor
