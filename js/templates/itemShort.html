@@ -1,5 +1,5 @@
 <div class="gridItem clearfix">
-  <div class="itemImg row10 js-item"
+  <div class="itemImg row10 js-item" data-id="<%= contract_hash %>"
     <% if(typeof(thumbnail_hash) !== "undefined" && thumbnail_hash) { %>
     style="background-image: url(<%- server %>get_image?hash=<%- thumbnail_hash %>);"
     <%}%>>
@@ -13,7 +13,7 @@
     style="background-image: url(imgs/defaultUser.png)"
     <% } %>></div>
     <% } %>
-    <div class="pull-left txt-unleaded js-item">
+    <div class="pull-left txt-unleaded js-item" data-id="<%= contract_hash %>">
       <div><%= title %></div>
       <div class="txt-fade"><%= displayPrice %> (<%= btcPrice %>btc)</div>
     </div>

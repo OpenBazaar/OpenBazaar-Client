@@ -7,9 +7,11 @@ var fs = require('fs'),
     userPageModel = require('../models/userPageMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
+    itemModel = require('../models/itemMd'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
-    simpleMessageView = require('./simpleMessageVw')
+    simpleMessageView = require('./simpleMessageVw'),
+    itemView = require('./itemVw')
 
 module.exports = Backbone.View.extend({
 
@@ -73,7 +75,7 @@ module.exports = Backbone.View.extend({
           self.showError("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText, '.js-list2');
         }
       });
-      self.setState(self.options.state);
+      self.setState(self.options.state, self.options.hash);
     });
     return this;
   },
@@ -93,15 +95,33 @@ module.exports = Backbone.View.extend({
     this.subViews.push(followingList);
   },
 
+  renderItem: function(hash){
+    var self = this;
+    this.item = new itemModel();
+    this.item.url = this.options.userModel.get('server')+"get_contract";
+    this.item.fetch({
+      data: $.param({'id': hash}),
+      success: function(model){
+        var item = new itemView({model:model, el: '.js-list4', server: self.options.userModel.get('server')});
+        self.subViews.push(item);
+        self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'), "item/"+hash);
+      },
+      error: function(model, response){
+        self.showError("There Has Been An Error","Followers are not available. The error code is: "+response.statusText, '.js-list4');
+      }
+    });
+  },
+
   showError: function(title, message, target){
     var errorView = new simpleMessageView({title: title, message: message, el: target});
     this.subViews.push(errorView);
   },
 
-  setState: function(state) {
-    if(state)
-    {
-      this.tabClick($(".js-" + state + "Tab"), this.$el.find(".js-" + state), state);
+  setState: function(state, hash) {
+    if(state == "item") {
+      this.renderItem(hash);
+    }else if (state){
+      this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state), state);
     }
   },
 
@@ -127,7 +147,7 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-tabTarg').addClass('hide');
     showContent.removeClass('hide');
     //add action to history
-    Backbone.history.navigate('#myPage/'+state);
+    Backbone.history.navigate('#userPage/'+state);
   },
 
   close: function(){

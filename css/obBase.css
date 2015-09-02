@@ -147,21 +147,32 @@ input[type="text"] {
   padding-right: 0;
 }
 
-.flexRow .flexCol-9 {
-  width: 75%;
+.flexRow .flexCol-12 {
+  /* normally you can make it 100% wide by not using a column. This is here if you need to switch column sizes dynamically. */
+  width: 100%;
 }
 
-.flexRow .flexCol-6 {
-  width: 50%;
-}
+.flexRow .flexCol-11 { flex-basis: 91.66666666666666%; }
 
-.flexRow .flexCol-4 {
-  flex-basis: 33.33333333333333%;
-}
+.flexRow .flexCol-10 { flex-basis: 83.33333333333334%; }
 
-.flexRow .flexCol-3 {
-  width: 25%;
-}
+.flexRow .flexCol-9 { flex-basis: 75%; }
+
+.flexRow .flexCol-8 { flex-basis: 66.66666666666666%; }
+
+.flexRow .flexCol-7 { flex-basis: 58.333333333333336%; }
+
+.flexRow .flexCol-6 { flex-basis: 50%; }
+
+.flexRow .flexCol-5 { flex-basis: 41.66666666666667%; }
+
+.flexRow .flexCol-4 { flex-basis: 33.33333333333333%; }
+
+.flexRow .flexCol-3 { flex-basis: 25%; }
+
+.flexRow .flexCol-2 { flex-basis: 16.666666666666664%;; }
+
+.flexRow .flexCol-1 { flex-basis: 8.333333333333332%; }
 
 .flexExpand {
   /* use to make only one item in a flex row expand */
@@ -179,7 +190,18 @@ input[type="text"] {
   background-image: url(../imgs/defaultItem.png);
   background-size: cover;
   background-position: center;
-  border-radius: 2px;
+  border-radius: 4px;
+}
+
+.itemImg.itemImg-large {
+  /* flex row collapses unless a specific height is set */
+  height: 357px;
+  width: 357px;
+}
+
+.itemImg.itemImg-small {
+  height: 82px;
+  width: 82px;
 }
 
 .rowItem {

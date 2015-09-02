@@ -16,7 +16,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options){
     this.options = options || {};
-    console.log(options.showAvatar);
     this.model.set('currency_code', options.currencyCode);
     this.model.set('server', options.server);
     this.model.set('showAvatar', options.showAvatar);
@@ -30,8 +29,9 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
-  itemClick: function(){
-    console.log("itemClick");
+  itemClick: function(e){
+    console.log('#myPage/item/'+$(e.target).data('id'));
+    Backbone.history.navigate('#userPage/item/'+$(e.target).data('id'), {trigger: true});
   },
 
   avatarClick: function(){
