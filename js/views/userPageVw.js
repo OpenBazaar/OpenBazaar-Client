@@ -16,10 +16,10 @@ module.exports = Backbone.View.extend({
   classname: "userView",
 
   events: {
-    'click .js-about': 'aboutClick',
-    'click .js-followers': 'followersClick',
-    'click .js-following': 'followingClick',
-    'click .js-stores': 'storeClick'
+    'click .js-aboutTab': 'aboutClick',
+    'click .js-followersTab': 'followersClick',
+    'click .js-followingTab': 'followingClick',
+    'click .js-storeTab': 'storeClick'
   },
 
   initialize: function(options){
@@ -29,6 +29,7 @@ module.exports = Backbone.View.extend({
     this.model = new Backbone.Model();
     this.userModel = options.userModel;
     this.userPage = new userPageModel();
+    //models have to be passed the dynamic URL
     this.userPage.url = options.userModel.get('server')+"get_profile";
     this.listings = new listingsModel();
     this.listings.url = options.userModel.get('server')+"get_listings";
@@ -72,6 +73,7 @@ module.exports = Backbone.View.extend({
           self.showError("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText, '.js-list2');
         }
       });
+      self.setState(self.options.state);
     });
     return this;
   },
@@ -96,27 +98,36 @@ module.exports = Backbone.View.extend({
     this.subViews.push(errorView);
   },
 
+  setState: function(state) {
+    if(state)
+    {
+      this.tabClick($(".js-" + state + "Tab"), this.$el.find(".js-" + state), state);
+    }
+  },
+
   aboutClick: function(e){
-    this.tabClick(e, this.$el.find('.js-about'));
+    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-about'), 'about');
   },
 
   followersClick: function(e){
-    this.tabClick(e, this.$el.find('.js-following'));
+    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'), 'followers');
   },
 
   followingClick: function(e){
-    this.tabClick(e, this.$el.find('.js-followers'));
+    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-following'), 'following');
   },
 
   storeClick: function(e){
-    this.tabClick(e, this.$el.find('.js-store'));
+    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'), 'store');
   },
 
-  tabClick: function(e, showTab){
+  tabClick: function(activeTab, showContent, state){
     this.$el.find('.js-tab').removeClass('active');
-    $(e.target).closest('.js-tab').addClass('active');
+    activeTab.addClass('active');
     this.$el.find('.js-tabTarg').addClass('hide');
-    showTab.removeClass('hide');
+    showContent.removeClass('hide');
+    //add action to history
+    Backbone.history.navigate('#myPage/'+state);
   },
 
   close: function(){

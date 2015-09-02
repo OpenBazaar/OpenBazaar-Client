@@ -10,6 +10,8 @@ module.exports = Backbone.View.extend({
   className: "flexCol-4",
 
   events: {
+    'click .js-item': 'itemClick',
+    'click .js-avatar': 'avatarClick'
   },
 
   initialize: function(options){
@@ -26,6 +28,14 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;
+  },
+
+  itemClick: function(){
+    console.log("itemClick");
+  },
+
+  avatarClick: function(){
+    console.log("avatarClick");
   }
 
 });

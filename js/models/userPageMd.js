@@ -4,7 +4,7 @@ var _ = require('underscore'),
 module.exports = Backbone.Model.extend({
   defaults: {
     profile: {
-      GUID: "",
+      guid: "",
       vendor: false,
       name: "Default Name",
       categories: ["category 1", "category 2"],

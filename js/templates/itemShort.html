@@ -1,19 +1,19 @@
-<div class="gridItem clearfix js-item">
-  <div class="itemImg row10"
+<div class="gridItem clearfix">
+  <div class="itemImg row10 js-item"
     <% if(typeof(thumbnail_hash) !== "undefined" && thumbnail_hash) { %>
     style="background-image: url(<%- server %>get_image?hash=<%- thumbnail_hash %>);"
     <%}%>>
   </div>
   <div>
     <% if(showAvatar) { %>
-    <div class="thumbnail"
+    <div class="thumbnail js-avatar" data-handle="<%= handle %>"
     <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
     style="background-image: url(<%- avatar_hash %>);"
     <% }else{ %>
     style="background-image: url(imgs/defaultUser.png)"
     <% } %>></div>
     <% } %>
-    <div class="pull-left txt-unleaded">
+    <div class="pull-left txt-unleaded js-item">
       <div><%= title %></div>
       <div class="txt-fade"><%= displayPrice %> (<%= btcPrice %>btc)</div>
     </div>
