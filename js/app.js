@@ -32,8 +32,13 @@ currentBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+user.get('c
 
 var setBitcoin = function(callback){
     //put currentBitcoin into the window so we don't have to pipe it into each model
-    currentBitcoin.fetch({success: function(){
+    currentBitcoin.fetch({
+      success: function(){
         window.currentBitcoin = currentBitcoin.get('24h_avg');
+        typeof callback === 'function' && callback();
+    },
+      error: function(){
+        alert("Connect Error: Current Price of Bitcoin Not Available");
         typeof callback === 'function' && callback();
     }});
 };
@@ -46,7 +51,6 @@ setTimeout(function(){
 //get things started
 setBitcoin(function(){
     var pageNav = new pageNavView({model: user});
-
     this.router = new router({userModel: user});
     Backbone.history.start();
 });

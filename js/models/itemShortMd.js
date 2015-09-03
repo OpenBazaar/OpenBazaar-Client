@@ -1,21 +1,23 @@
-var Backbone = require('backbone');
+var Backbone = require('backbone'),
+    currentBitcoinModel = require('./currentBitcoinMd');
 
 module.exports = Backbone.Model.extend({
   defaults: {
     title: "NewItem",
-    contract_hash: 0,
-    thumbnail_hash: "imgs/defaultItem.png",
+    contract_hash: "Error, Item ID Not Found",
+    thumbnail_hash: "",
     category: "",
     price: 0,
-    displayPrice: 0,
-    btcPrice: 0,
+    displayPrice: 0, //set locally, not by server
+    btcPrice: 0, //set locally, not by server
+    userCurrencyCode: "", //set locally, not by server
     currency_code: "USD",
     nsfw: false,
     origin: "",
     ships_to: "",
     GUID: "",
     handle: 0,
-    avatar_hash: "imgs/defaultUser.png"
+    avatar_hash: ""
   },
 
   initialize: function(){
@@ -24,7 +26,15 @@ module.exports = Backbone.Model.extend({
   },
 
   updateAttributes: function(){
-    this.set("btcPrice", (this.get("price") / window.currentBitcoin).toFixed(4));
-    this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
+    var self = this;
+    var vendorCCode = this.get('currencyCode');
+    var currentVendorBitcoin = new currentBitcoinModel();
+    currentVendorBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+vendorCCode;
+    currentVendorBitcoin.fetch({success: function(){
+      var vendBTC = currentVendorBitcoin.get('24h_avg');
+      this.set("btcPrice", (this.get("price") / vendBTC).toFixed(4));
+      this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(this.get("price")));
+    }});
+
   }
 });

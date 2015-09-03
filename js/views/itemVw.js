@@ -16,6 +16,7 @@ module.exports = Backbone.View.extend({
     initialize: function(options){
         this.options = options || {};
         this.model.set({server: options.server});
+        this.model.set({userCurrencyCode: options.userCurrencyCode});
         this.render();
     },
 
