@@ -549,6 +549,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   border: none;
   height: 46px;
   line-height: 46px;
+  padding: 0 20px;
   margin-top: 4px;
 }
 
