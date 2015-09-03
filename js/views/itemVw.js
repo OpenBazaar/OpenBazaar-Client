@@ -3,8 +3,7 @@ var _ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
-    loadTemplate = require('../utils/loadTemplate'),
-    itemModel = require('../models/itemMd');
+    loadTemplate = require('../utils/loadTemplate');
 
 
 module.exports = Backbone.View.extend({
@@ -13,10 +12,7 @@ module.exports = Backbone.View.extend({
 
     },
 
-    initialize: function(options){
-        this.options = options || {};
-        this.model.set({server: options.server});
-        this.model.set({userCurrencyCode: options.userCurrencyCode});
+    initialize: function(){
         this.render();
     },
 

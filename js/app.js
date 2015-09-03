@@ -39,6 +39,7 @@ var setBitcoin = function(callback){
     },
       error: function(){
         alert("Connect Error: Current Price of Bitcoin Not Available");
+        console.log("app call to bitcoinaverage failed");
         typeof callback === 'function' && callback();
     }});
 };
