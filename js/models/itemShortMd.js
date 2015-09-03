@@ -9,7 +9,7 @@ module.exports = Backbone.Model.extend({
     category: "",
     price: 0,
     displayPrice: 0, //set locally, not by server
-    btcPrice: 0, //set locally, not by server
+    venderBTCPrice: 0, //set locally, not by server
     userCurrencyCode: "", //set locally, not by server
     currency_code: "",
     nsfw: false,
@@ -33,9 +33,10 @@ module.exports = Backbone.Model.extend({
     currentVendorBitcoin.fetch({
       success: function(){
         var vendBTC = currentVendorBitcoin.get('24h_avg');
+        var vendToUserBTCRatio = vendBTC/window.currentBitcoin;
         var newAttributes = {};
-        newAttributes.btcPrice = (this.get("price") / vendBTC).toFixed(4);
-        newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(this.get("price"));
+        newAttributes.venderBTCPrice = (this.get("price") * vendBTC).toFixed(4);
+        newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(venderBTCPrice * vendToUserBTCRatio);
         this.set(newAttributes);
       },
       error: function(){
