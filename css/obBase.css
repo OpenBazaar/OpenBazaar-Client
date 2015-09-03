@@ -281,6 +281,7 @@ input[type="text"] {
   width: 525px;
   height: 590px;
   margin: 80px auto 0 auto;
+  position: relative;
 }
 
 .modal.modal-navOffset .modal-child {
@@ -732,4 +733,19 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.hCentered {
+  /* must be inside a relatively positioned containing element */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.fullCentered {
+  /* must be inside a relatively positioned containing element */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

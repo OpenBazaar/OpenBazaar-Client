@@ -50,6 +50,7 @@ setTimeout(function(){
 
 //get things started
 setBitcoin(function(){
+  $('.js-loadingModal').hide();
     var pageNav = new pageNavView({model: user});
     this.router = new router({userModel: user});
     Backbone.history.start();

@@ -27,7 +27,7 @@ module.exports = Backbone.Model.extend({
 
   updateAttributes: function(){
     var self = this;
-    var vendorCCode = this.get('currencyCode');
+    var vendorCCode = this.get('currency_code');
     var currentVendorBitcoin = new currentBitcoinModel();
     currentVendorBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+vendorCCode;
     currentVendorBitcoin.fetch({success: function(){
