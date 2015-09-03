@@ -32,32 +32,56 @@ var fakeStores = [
 
 var fakeItems = [
   {
-    title: "Item Name",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "",
-    avatar_hash: ""
+    "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
+    "category": "Test",
+    "nsfw": false,
+    "title": "Test Item One",
+    "thumbnail_hash": "d53cffb48beb8c5685cbd2740fe0df07cc44a0a2",
+    "price": 12,
+    "origin": "UNITED_STATES",
+    "currency_code": "usd",
+    "ships_to": [
+      "UNITED_STATES"
+    ]
   },
   {
-    title: "Item Two",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "",
-    avatar_hash: ""
+    "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
+    "category": "Test",
+    "nsfw": false,
+    "title": "Test Item Two with a Longer Title To See How That Fits in the UI",
+    "thumbnail_hash": "d53cffb48beb8c5685cbd2740fe0df07cc44a0a2",
+    "price": 379.0,
+    "origin": "UNITED_STATES",
+    "currency_code": "usd",
+    "ships_to": [
+      "UNITED_STATES"
+    ]
   },
   {
-    title: "Item Three",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "",
-    avatar_hash: ""
+    "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
+    "category": "Test",
+    "nsfw": false,
+    "title": "Test Item Four",
+    "thumbnail_hash": "d53cffb48beb8c5685cbd2740fe0df07cc44a0a2",
+    "price": 2.0,
+    "origin": "UNITED_STATES",
+    "currency_code": "usd",
+    "ships_to": [
+      "UNITED_STATES"
+    ]
   },
   {
-    title: "Item Four",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "",
-    avatar_hash: ""
+    "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
+    "category": "Test",
+    "nsfw": false,
+    "title": "Test Item Four",
+    "thumbnail_hash": "d53cffb48beb8c5685cbd2740fe0df07cc44a0a2",
+    "price": 323479.0,
+    "origin": "UNITED_STATES",
+    "currency_code": "usd",
+    "ships_to": [
+      "UNITED_STATES"
+    ]
   }
 ];
 
