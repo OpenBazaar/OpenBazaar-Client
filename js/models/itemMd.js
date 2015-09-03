@@ -73,5 +73,15 @@ module.exports = Backbone.Model.extend({
         }
       }
     }
+  },
+
+  initialize: function(){
+    this.updateAttributes();
+    this.on('change', this.updateAttributes, this);
+  },
+
+  updateAttributes: function(){
+    this.set("btcPrice", (this.get("vendor_offer.listing.item.price_per_unit.fiat.price") / window.currentBitcoin).toFixed(4));
+    this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
   }
 });

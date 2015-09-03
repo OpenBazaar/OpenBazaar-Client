@@ -34,7 +34,7 @@ module.exports = Backbone.View.extend({
   renderItem: function(item){
     var itemShort = new itemShortView({
       model: item,
-      currencyCode:  this.options.userModel.get('currencyCode'),
+      userCurrencyCode:  this.options.userModel.get('currencyCode'),
       server: this.options.userModel.get('server'),
       showAvatar: this.options.showAvatar,
       avatar_hash: this.options.userModel.get('avatar_hash'),
