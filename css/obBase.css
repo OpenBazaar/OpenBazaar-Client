@@ -304,14 +304,12 @@ input[type="text"] {
 /*========== typography ==========*/
 
 h1,h2,h3 {
-  font-family: "font-bold;"
   margin: 20px 0;
   line-height: 1.2;
   font-weight: 700;
 }
 
 h4,h5,h6 {
-  font-family: "font-medium";
   margin: 10px 0;
   line-height: 1;
 }
@@ -387,7 +385,7 @@ h4,h5,h6 {
   overflow: hidden;
 }
 
-.flex-border > .flexRow [class |= "flexCol"] {
+.flex-border > .flexRow > [class |= "flexCol"] {
   border-right: 1px solid rgba(255,255,255,0.2);
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }

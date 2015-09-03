@@ -1,5 +1,3 @@
-/* shows grid of items */
-
 var _ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
@@ -27,18 +25,13 @@ module.exports = Backbone.View.extend({
     //clear the list
     this.$el.empty();
     _.each(this.itemsShort.models, function(item){
-      self.renderItem(item);
+      self.renderContract(item);
     },this);
   },
 
-  renderItem: function(item){
+  renderContract: function(item){
     var itemShort = new itemShortView({
-      model: item,
-      userCurrencyCode:  this.options.userModel.get('currencyCode'),
-      server: this.options.userModel.get('server'),
-      showAvatar: this.options.showAvatar,
-      avatar_hash: this.options.userModel.get('avatar_hash'),
-      handle: this.options.userModel.get('handle')
+      model: item
     });
     this.subViews.push(itemShort);
     //$el must be passed in by the constructor

@@ -1,26 +1,23 @@
-<div class="flex-border flexExpand">
-  <div class="flexRow">
-    <div class="flexRow bar barTxt">
-      <a href="#userPage/store">All Items</a> > <%= vendor_offer.listing.item.title %>
+<div class="flexRow">
+  <div class="flexRow bar barTxt pad20">
+    <a href="#userPage/store">All Items</a> > <%= vendor_offer.listing.item.title %>
+  </div>
+</div>
+<div class="flexRow">
+  <div class="flexCol-5 pad20">
+    <div class="itemImg itemImg-large row10 rowTop20"
+    <% if(vendor_offer.listing.item.image_hashes.length > 0) { %>
+    style="background-image: url(<%- server %>get_image?hash=<%- vendor_offer.listing.item.image_hashes[0] %>);"
+    <%}%>></div>
+    <div class="flexRow row20">
+      <% _.each(vendor_offer.listing.item.image_hashes, function(data, i) {
+           if(i != 0){%>
+      <div class="itemImg itemImg-small" style="background-image: url(<%- server %>get_image?hash=<%- data %>);"></div>
+      <% } }); %>
     </div>
   </div>
-  <div class="flexRow">
-    <div class="flexCol-5 pad20">
-      <div class="itemImg itemImg-large row10 rowTop20"
-      <% if(vendor_offer.listing.item.image_hashes.length > 0) { %>
-      style="background-image: url(<%- server %>get_image?hash=<%- vendor_offer.listing.item.image_hashes[0] %>);"
-      <%}%>></div>
-      <div class="flexRow row20">
-        <% _.each(vendor_offer.listing.item.image_hashes, function(data, i) {
-             if(i != 3){%>
-        <div class="itemImg itemImg-small" style="background-image: url(<%- server %>get_image?hash=<%- data %>);"></div>
-        <% } }); %>
-      </div>
-    </div>
-    <div class="flexCol-7">
-      <h5><%= vendor_offer.listing.item.title %></h5>
-
-    </div>
+  <div class="flexCol-7">
+    <h5><%= vendor_offer.listing.item.title %></h5>
 
   </div>
 </div>

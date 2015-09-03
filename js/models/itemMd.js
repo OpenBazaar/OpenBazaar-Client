@@ -22,7 +22,7 @@ module.exports = Backbone.Model.extend({
               "description": "",
               "price_per_unit": {
             "fiat": {
-              "price": "",
+              "price": 0,
                   "currency_code": "usd"
             }
           },
@@ -81,7 +81,12 @@ module.exports = Backbone.Model.extend({
   },
 
   updateAttributes: function(){
-    this.set("btcPrice", (this.get("vendor_offer.listing.item.price_per_unit.fiat.price") / window.currentBitcoin).toFixed(4));
-    this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
+    if(this.get("vendor_offer.listing.item.price_per_unit.fiat.price") && this.get("currency_code"))
+    {
+      this.set("btcPrice", (this.get("vendor_offer.listing.item.price_per_unit.fiat.price")/window.currentBitcoin).toFixed(4));
+      this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
+    }else{
+      alert("Error: Currency Not Available");
+    }
   }
 });

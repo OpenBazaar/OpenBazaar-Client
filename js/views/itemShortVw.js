@@ -15,10 +15,13 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(options){
-    this.options = options || {};
-    this.model.set('currency_code', options.userCurrencyCode);
-    this.model.set('server', options.server);
-    this.model.set('showAvatar', options.showAvatar);
+    /*this.options = options || {};
+    var modelParams = {
+      userCurrencyCode: options.userCurrencyCode,
+      server: options.server,
+      showAvatar: options.showAvatar
+    };
+    this.model.set(modelParams);*/
   },
 
   render: function(){
@@ -30,7 +33,6 @@ module.exports = Backbone.View.extend({
   },
 
   itemClick: function(e){
-    console.log('#myPage/item/'+$(e.target).data('id'));
     Backbone.history.navigate('#userPage/item/'+$(e.target).data('id'), {trigger: true});
   },
 

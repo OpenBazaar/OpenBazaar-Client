@@ -11,7 +11,7 @@ module.exports = Backbone.Model.extend({
     displayPrice: 0, //set locally, not by server
     btcPrice: 0, //set locally, not by server
     userCurrencyCode: "", //set locally, not by server
-    currency_code: "USD",
+    currency_code: "",
     nsfw: false,
     origin: "",
     ships_to: "",
@@ -30,11 +30,18 @@ module.exports = Backbone.Model.extend({
     var vendorCCode = this.get('currency_code');
     var currentVendorBitcoin = new currentBitcoinModel();
     currentVendorBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+vendorCCode;
-    currentVendorBitcoin.fetch({success: function(){
-      var vendBTC = currentVendorBitcoin.get('24h_avg');
-      this.set("btcPrice", (this.get("price") / vendBTC).toFixed(4));
-      this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(this.get("price")));
-    }});
-
+    currentVendorBitcoin.fetch({
+      success: function(){
+        var vendBTC = currentVendorBitcoin.get('24h_avg');
+        var newAttributes = {};
+        newAttributes.btcPrice = (this.get("price") / vendBTC).toFixed(4);
+        newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(this.get("price"));
+        this.set(newAttributes);
+      },
+      error: function(){
+        console.log("itemShortMd call to bitcoinaverage failed");
+        alert("Error: Bitcoin Prices are Not Currently Available")
+      }
+    });
   }
 });

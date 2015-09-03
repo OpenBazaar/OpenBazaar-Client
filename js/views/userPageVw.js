@@ -29,7 +29,6 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.subViews = [];
     this.model = new Backbone.Model();
-    this.userModel = options.userModel;
     this.userPage = new userPageModel();
     //models have to be passed the dynamic URL
     this.userPage.url = options.userModel.get('server')+"get_profile";
@@ -41,7 +40,7 @@ module.exports = Backbone.View.extend({
     this.following.url = options.userModel.get('server')+"get_following";
 
     this.userPage.fetch({success: function(model){
-      self.model.set({user: self.userModel.toJSON(), page: model.toJSON()});
+      self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
       self.render();
     }});
   },
@@ -81,7 +80,15 @@ module.exports = Backbone.View.extend({
   },
 
   renderItems: function(model){
-    var itemList = new itemListView({model:model, el: '.js-list3', userModel: this.options.userModel, showAvatar: false});
+    var self = this;
+    _.each(model, function(arrayItem){
+      arrayItem.userCurrencyCode = self.options.userModel.get('currencyCode');
+      arrayItem.server = self.options.userModel.get('server');
+      arrayItem.showAvatar = false;
+      arrayItem.avatar_hash = self.options.userModel.get('avatar_hash');
+      arrayItem.handle = self.options.userModel.get('handle');
+    });
+    var itemList = new itemListView({model:model, el: '.js-list3', userModel: this.options.userModel});
     this.subViews.push(itemList);
   },
 
@@ -97,17 +104,24 @@ module.exports = Backbone.View.extend({
 
   renderItem: function(hash){
     var self = this;
-    this.item = new itemModel();
+    this.item = new itemModel({
+      userCurrencyCode: self.options.userModel.get('currencyCode'),
+      server: self.options.userModel.get('server'),
+      showAvatar: false,
+      avatar_hash: self.options.userModel.get('avatar_hash'),
+      handle: self.options.userModel.get('handle')
+    });
     this.item.url = this.options.userModel.get('server')+"get_contract";
     this.item.fetch({
       data: $.param({'id': hash}),
       success: function(model){
-        var item = new itemView({model:model, el: '.js-list4', server: self.options.userModel.get('server')});
+        var item = new itemView({model:model, el: '.js-list4'});
         self.subViews.push(item);
         self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'), "item/"+hash);
       },
       error: function(model, response){
-        self.showError("There Has Been An Error","Followers are not available. The error code is: "+response.statusText, '.js-list4');
+        console.log("Fetch of itemModel from userPageView has failed");
+        self.showError("There Has Been An Error","Items are not available. The error code is: "+response.statusText, '.js-list4');
       }
     });
   },
