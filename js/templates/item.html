@@ -1,6 +1,6 @@
 <div class="flexRow">
   <div class="flexRow bar barTxt pad20">
-    <a href="#userPage/store">All Items</a> > <%= vendor_offer.listing.item.title %>
+    <a href="#userPage/store">All Items</a>&nbsp;>&nbsp;<%= vendor_offer.listing.item.title %>
   </div>
 </div>
 <div class="flexRow">
@@ -18,6 +18,36 @@
   </div>
   <div class="flexCol-7">
     <h5><%= vendor_offer.listing.item.title %></h5>
-    <p></p>
+    <p><%= displayPrice %> (<%= venderBTCPrice %> btc) &#8226; <%= vendor_offer.listing.item.condition %></p>
+    <div class="btn"><%= polyglot.t('BUY NOW') %></div>
+
+    <div class="bar navBar barFlush navBar custCol-primary">
+      <a class="btn btn-bar btn-tab active js-descriptionTab js-tab"><%= polyglot.t('Description') %></a>
+      <a class="btn btn-bar btn-tab active js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
+      <a class="btn btn-bar btn-tab active js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
+    </div>
+    <div class="flexContainer flex-border custCol-primary js-description js-tabTarg">
+      <div class="flexRow">
+        <div class="rowItem">
+          <%= vendor_offer.listing.item.description %>
+        </div>
+      </div>
+    </div>
+    <div class="flexContainer flex-border custCol-primary js-reviews js-tabTarg hide">
+      <div class="flexRow">
+        <div class="rowItem">
+          Placeholder for reviews
+        </div>
+      </div>
+    </div>
+    <div class="flexContainer flex-border custCol-primary js-shipping js-tabTarg hide">
+      <div class="flexRow">
+        <div class="rowItem">
+          <p><%= polyglot.t('ShipsFrom') %>: <%= vendor_offer.listing.shipping.shipping_origin %></p>
+          <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('domestic') %>): <%= vendor_offer.listing.shipping.est_delivery.domestic %></p>
+          <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('international') %>): <%= vendor_offer.listing.shipping.est_delivery.international %></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
