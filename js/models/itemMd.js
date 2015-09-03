@@ -1,7 +1,11 @@
-var Backbone = require('backbone');
+var Backbone = require('backbone'),
+    currentBitcoinModel = require('./currentBitcoinMd');
 
 module.exports = Backbone.Model.extend({
   defaults: {
+    displayPrice: 0, //set locally, not by server
+    venderBTCPrice: 0, //set locally, not by server
+    userCurrencyCode: "", //set locally, not by server
     "vendor_offer": {
       "signature": "",
           "listing": {
@@ -23,7 +27,7 @@ module.exports = Backbone.Model.extend({
               "price_per_unit": {
             "fiat": {
               "price": 0,
-                  "currency_code": "usd"
+              "currency_code": "usd"
             }
           },
           "title": "",
@@ -81,10 +85,26 @@ module.exports = Backbone.Model.extend({
   },
 
   updateAttributes: function(){
-    if(this.get("vendor_offer.listing.item.price_per_unit.fiat.price") && this.get("currency_code"))
+    var self = this;
+    if(this.get("vendor_offer.listing.item.price_per_unit.fiat.price") && this.get("userCurrencyCode"))
     {
-      this.set("btcPrice", (this.get("vendor_offer.listing.item.price_per_unit.fiat.price")/window.currentBitcoin).toFixed(4));
-      this.set("displayPrice", new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("currency_code")}).format(this.get("price")));
+      var vendorCCode = this.get('vendor_offer.listing.item.price_per_unit.fiat.currency_code');
+      var currentVendorBitcoin = new currentBitcoinModel();
+      currentVendorBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+vendorCCode;
+      currentVendorBitcoin.fetch({
+        success: function(){
+          var vendBTC = currentVendorBitcoin.get('24h_avg');
+          var vendToUserBTCRatio = vendBTC/window.currentBitcoin;
+          var newAttributes = {};
+          newAttributes.venderBTCPrice = (this.get("price") * vendBTC).toFixed(4);
+          newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(venderBTCPrice * vendToUserBTCRatio);
+          this.set(newAttributes);
+        },
+        error: function(){
+          console.log("itemMd call to bitcoinaverage failed");
+          alert("Error: Bitcoin Prices are Not Currently Available")
+        }
+      });
     }else{
       alert("Error: Currency Not Available");
     }
