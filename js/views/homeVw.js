@@ -42,7 +42,12 @@ var fakeItems = [
     "currency_code": "usd",
     "ships_to": [
       "UNITED_STATES"
-    ]
+    ],
+    "userCurrencyCode": "USD",
+    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "showAvatar": true,
+    "avatar_hash": "",
+    "handle": "test user 1"
   },
   {
     "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
@@ -55,7 +60,12 @@ var fakeItems = [
     "currency_code": "usd",
     "ships_to": [
       "UNITED_STATES"
-    ]
+    ],
+    "userCurrencyCode": "USD",
+    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "showAvatar": true,
+    "avatar_hash": "",
+    "handle": "test user 1"
   },
   {
     "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
@@ -68,7 +78,12 @@ var fakeItems = [
     "currency_code": "usd",
     "ships_to": [
       "UNITED_STATES"
-    ]
+    ],
+    "userCurrencyCode": "USD",
+    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "showAvatar": true,
+    "avatar_hash": "",
+    "handle": "test user 1"
   },
   {
     "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
@@ -81,7 +96,12 @@ var fakeItems = [
     "currency_code": "usd",
     "ships_to": [
       "UNITED_STATES"
-    ]
+    ],
+    "userCurrencyCode": "USD",
+    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "showAvatar": true,
+    "avatar_hash": "",
+    "handle": "test user 1"
   }
 ];
 
