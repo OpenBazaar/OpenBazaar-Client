@@ -9,7 +9,7 @@ body {
   min-height: 900px; /* fixes box shadow margin issue */
   /*fonts*/
   font-size: 14px;
-  line-height: 18px;
+  line-height: 1.2;
   font-family: 'Source Sans Pro', sans-serif;
   color: rgb(255, 255, 255);
 }
@@ -214,6 +214,20 @@ input[type="text"] {
   margin-top: 0;
 }
 
+.table {
+  display: table;
+  table-layout: fixed;
+}
+
+.table > div {
+  display: table-row;
+}
+
+.table > div > div {
+  display: table-cell;
+  vertical-align: top;
+}
+
 .btn {
   display: inline-block;
   padding: 6px 12px;
@@ -224,7 +238,6 @@ input[type="text"] {
 }
 
 .thumbnail {
-  float: left;
   height: 30px;
   width: 30px;
   margin-right: 6px;
@@ -256,6 +269,10 @@ input[type="text"] {
 
 .pad20 {
   padding-left: 20px;
+  padding-right: 20px;
+}
+
+.pad20Right {
   padding-right: 20px;
 }
 
@@ -304,13 +321,13 @@ input[type="text"] {
 /*========== typography ==========*/
 
 h1,h2,h3 {
-  margin: 20px 0;
+  margin: 0 0 20px 0;
   line-height: 1.2;
   font-weight: 700;
 }
 
 h4,h5,h6 {
-  margin: 10px 0;
+  margin: 0 0 10px 0;
   line-height: 1;
 }
 
@@ -334,6 +351,9 @@ h4,h5,h6 {
   opacity: 0.75;
 }
 
+.txt-lowleading {
+  line-height: 1.2;
+}
 .txt-unleaded {
   line-height: 1;
 }
@@ -352,7 +372,7 @@ h4,h5,h6 {
 }
 
 .body-neutral .navBar {
-  background-color: #575656;
+  background-color: #575757;
 }
 
 .mainContainer {
@@ -386,13 +406,17 @@ h4,h5,h6 {
 }
 
 .flex-border > .flexRow > [class |= "flexCol"] {
-  border-right: 1px solid rgba(255,255,255,0.2);
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .flex-border > .flexRow > .flexRow {
   /* containing row has a list of rows inside it */
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.box-border {
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .txtField {
@@ -489,7 +513,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-light {
   /* 20% over background */
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255,255,255,0.08);
 }
 
 .btn.btn-c1 {
@@ -529,7 +553,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 }
 
 .body-neutral .btn.btn-bar {
-  background-color: #575656;
+  background-color: #575757;
   border-right: 1px solid #4a4848;
 }
 
@@ -627,7 +651,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .popMenu-navBar hr {
   margin: 0.5em -15px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .banner-large {
