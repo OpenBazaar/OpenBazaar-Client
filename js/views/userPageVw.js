@@ -121,7 +121,7 @@ module.exports = Backbone.View.extend({
       },
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
-        self.showError("There Has Been An Error","Items are not available. The error code is: "+response.statusText, '.js-list4');
+        self.showError("There Has Been An Error","This item is not available. The error code is: "+response.statusText, '.js-list4');
       }
     });
   },

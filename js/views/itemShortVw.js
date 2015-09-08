@@ -14,14 +14,8 @@ module.exports = Backbone.View.extend({
     'click .js-avatar': 'avatarClick'
   },
 
-  initialize: function(options){
-    /*this.options = options || {};
-    var modelParams = {
-      userCurrencyCode: options.userCurrencyCode,
-      server: options.server,
-      showAvatar: options.showAvatar
-    };
-    this.model.set(modelParams);*/
+  initialize: function(){
+    this.listenTo(this.model, 'change', this.render);
   },
 
   render: function(){
