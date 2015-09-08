@@ -1,5 +1,5 @@
 var Backbone = require('backbone'),
-    currentBitcoinModel = require('./currentBitcoinMd');
+    getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.Model.extend({
   defaults: {
@@ -27,22 +27,26 @@ module.exports = Backbone.Model.extend({
 
   updateAttributes: function(){
     var self = this;
-    var vendorCCode = this.get('currency_code');
-    var currentVendorBitcoin = new currentBitcoinModel();
-    currentVendorBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+vendorCCode;
-    currentVendorBitcoin.fetch({
-      success: function(){
-        var vendBTC = currentVendorBitcoin.get('24h_avg');
-        var vendToUserBTCRatio = vendBTC/window.currentBitcoin;
-        var newAttributes = {};
-        newAttributes.venderBTCPrice = (this.get("price") * vendBTC).toFixed(4);
-        newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(venderBTCPrice * vendToUserBTCRatio);
-        this.set(newAttributes);
-      },
-      error: function(){
-        console.log("itemShortMd call to bitcoinaverage failed");
-        alert("Error: Bitcoin Prices are Not Currently Available")
+    if(this.get("userCurrencyCode")) {
+      var vendorCCode = (this.get('currency_code')).toUpperCase();
+      var vendorBitCoinRatio = 0;
+      var vendorBitCoinPrice = 0;
+      if (vendorCCode !== "BTC") {
+        getBTPrice(vendorCCode, function(btAve){
+          vendorBitCoinRatio = btAve;
+          vendorBitCoinPrice = Number((self.get("price") * btAve).toFixed(4));
+          var vendToUserBTCRatio = window.currentBitcoin/vendorBitCoinRatio;
+          var newAttributes = {};
+          newAttributes.venderBTCPrice = vendorBitCoinPrice;
+          newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: self.get("userCurrencyCode")}).format(self.get("price") * vendToUserBTCRatio);
+          self.set(newAttributes);
+        });
+      }else{
+        vendorBitCoinRatio = 1;
+        vendorBitCoinPrice = vendorPrice;
       }
-    });
+    }else{
+      this.set({displayPrice: "Price Unavailable"});
+    }
   }
 });

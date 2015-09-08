@@ -17,16 +17,18 @@
     </div>
   </div>
   <div class="flexCol-7 pad20Right">
-    <div class="row20 clearfix">
+    <div class="row20 rowTop20 clearfix">
       <h5><%= vendor_offer.listing.item.title %></h5>
       <p><%= displayPrice %> (<%= venderBTCPrice %> btc) &#8226; <%= vendor_offer.listing.item.condition %></p>
-      <div class="btn"><%= polyglot.t('BUY NOW') %></div>
+      <% if(itemBuyable) { %>
+      <div class="btn btn-light btn-txt js-buyButton"><%= polyglot.t('BUY NOW') %></div>
+      <% } %>
     </div>
     <div class="box-border">
       <div class="bar navBar barFlush navBar custCol-primary">
         <a class="btn btn-bar btn-tab active js-descriptionTab js-tab"><%= polyglot.t('Description') %></a>
-        <a class="btn btn-bar btn-tab active js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
-        <a class="btn btn-bar btn-tab active js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
+        <a class="btn btn-bar btn-tab js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
+        <a class="btn btn-bar btn-tab js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
       </div>
       <div class="flexContainer flex-border custCol-primary js-description js-tabTarg">
         <div class="flexRow">

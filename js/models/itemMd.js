@@ -1,11 +1,12 @@
 var Backbone = require('backbone'),
-    currentBitcoinModel = require('./currentBitcoinMd');
+    getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.Model.extend({
   defaults: {
     displayPrice: 0, //set locally, not by server
     venderBTCPrice: 0, //set locally, not by server
     userCurrencyCode: "", //set locally, not by server
+    itemBuyable: true, //set locally, not by server
     "vendor_offer": {
       "signature": "",
           "listing": {
@@ -86,27 +87,31 @@ module.exports = Backbone.Model.extend({
 
   updateAttributes: function(){
     var self = this;
-    if(this.get("vendor_offer.listing.item.price_per_unit.fiat.price") && this.get("userCurrencyCode"))
-    {
-      var vendorCCode = this.get('vendor_offer.listing.item.price_per_unit.fiat.currency_code');
-      var currentVendorBitcoin = new currentBitcoinModel();
-      currentVendorBitcoin.url = "https://api.bitcoinaverage.com/ticker/global/"+vendorCCode;
-      currentVendorBitcoin.fetch({
-        success: function(){
-          var vendBTC = currentVendorBitcoin.get('24h_avg');
-          var vendToUserBTCRatio = vendBTC/window.currentBitcoin;
+    var vendorPrice = Number(this.get("vendor_offer").listing.item.price_per_unit.fiat.price);
+    if(vendorPrice && this.get("userCurrencyCode")) {
+      var vendorCCode = (this.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code).toUpperCase();
+      var vendorBitCoinRatio = 0;
+      var vendorBitCoinPrice = 0;
+      if (vendorCCode !== "BTC") {
+        getBTPrice(vendorCCode, function(btAve){
+          vendorBitCoinRatio = btAve;
+          vendorBitCoinPrice = Number((vendorPrice * btAve).toFixed(4));
+          var vendToUserBTCRatio = window.currentBitcoin/vendorBitCoinRatio;
           var newAttributes = {};
-          newAttributes.venderBTCPrice = (this.get("price") * vendBTC).toFixed(4);
-          newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: this.get("userCurrencyCode")}).format(venderBTCPrice * vendToUserBTCRatio);
-          this.set(newAttributes);
-        },
-        error: function(){
-          console.log("itemMd call to bitcoinaverage failed");
-          alert("Error: Bitcoin Prices are Not Currently Available")
-        }
-      });
+          newAttributes.venderBTCPrice = vendorBitCoinPrice;
+          newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', minimumFractionDigits: 2, maximumFractionDigits: 2, currency: self.get("userCurrencyCode")}).format(vendorPrice * vendToUserBTCRatio);
+          newAttributes.itemBuyable = true;
+          self.set(newAttributes);
+        });
+      }else{
+        vendorBitCoinRatio = 1;
+        vendorBitCoinPrice = vendorPrice;
+      }
+
+
+
     }else{
-      alert("Error: Currency Not Available");
+      this.set({displayPrice: "Price Unavailable", itemBuyable: false});
     }
   }
 });
