@@ -9,3 +9,8 @@
 .idea/workspace.xml
 node_modules/
 
+.idea/codeStyleSettings.xml
+.idea/jsLinters/jslint.xml
+.idea/jsLinters/jshint.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
