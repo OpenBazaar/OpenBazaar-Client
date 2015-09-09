@@ -1,8 +1,6 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
@@ -16,12 +14,14 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     this.listenTo(this.model, 'change', this.render);
-    this.userID = this.model.get('guid');
+    console.log("item guid: "+this.model.get('userID'));
+    this.userID = this.model.get('userID');
   },
 
   render: function(){
+    console.log("itemShortVw render");
     var self = this;
-    var tmpl = loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
+    loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;

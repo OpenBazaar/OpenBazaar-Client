@@ -1,12 +1,9 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    listingsModel = require('../models/listingsMd'),
     itemListView = require('./itemListVw'),
-    storeListView = require('./userListVw')
+    storeListView = require('./userListVw');
 
 
 var fakeStores = [
@@ -143,7 +140,7 @@ module.exports = Backbone.View.extend({
   render: function(tmpl){
     var self = this;
     this.$el.appendTo('#content');
-    var tmpl = loadTemplate('./js/templates/home.html', function(loadedTemplate) {
+    loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       self.subRender();
     });
@@ -165,7 +162,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    _.each(this.subViews, function(subView) {
+    __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{

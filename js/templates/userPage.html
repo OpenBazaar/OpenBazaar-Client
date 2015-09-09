@@ -29,11 +29,17 @@
   <a class="btn btn-bar btn-tab js-storeTab js-tab"><%= polyglot.t('Store') %></a>
   <% if(ownPage === true) { %>
   <div class="navEnd pad15">
-    <div class="nav-ctrlGroup">
-      <a class="btn btn-txt custCol-background"><%= polyglot.t('Edit') %></a>
+    <div class="nav-ctrlGroup js-pageButtons">
+      <a class="btn btn-txt custCol-background js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
     </div>
-    <div class="nav-ctrlGroup">
-      <a class="btn btn-txt custCol-background"><%= polyglot.t('Delete') %></a>
+    <div class="nav-ctrlGroup js-pageButtons">
+      <a class="btn btn-txt custCol-background js-customize"><%= polyglot.t('Customize') %> </a>
+    </div>
+    <div class="nav-ctrlGroup js-itemButtons hide">
+      <a class="btn btn-txt custCol-background js-editItem"><%= polyglot.t('Edit') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemButtons hide">
+      <a class="btn btn-txt custCol-background js-deleteItem"><%= polyglot.t('Delete') %></a>
     </div>
   </div>
   <% } %>

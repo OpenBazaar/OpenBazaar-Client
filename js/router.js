@@ -1,4 +1,4 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
@@ -17,9 +17,7 @@ module.exports = Backbone.Router.extend({
     "home": "home",
     "myPage": "userPage",
     "userPage": "userPage",
-    "userPage/:userID": "userPage",
-    "userPage/:userID/:state": "userPage",
-    "userPage/:userID/:state/:itemHash": "userPage",
+    "userPage/:userID(/:state)(/:itemHash)": "userPage",
     "customizePage": "customizePage",
     "sellItem": "sellItem",
     "purchases": "purchases",

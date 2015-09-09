@@ -1,10 +1,8 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
-var fs = require('fs'),
-    Polyglot = require('node-polyglot'),
-    loadTemplate = require('./utils/loadTemplate'),
+var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
     userModel = require('./models/userMd'),
@@ -25,7 +23,7 @@ window.lang = user.get("language");
 window.polyglot = new Polyglot({locale: window.lang});
 
 //retrieve the object that has a matching language code
-polyglot.extend(_.where(languages.get('languages'), {langCode: window.lang})[0]);
+polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
 
 //every 15 minutes update the bitcoin price
 setTimeout(function(){

@@ -3,7 +3,7 @@ var Backbone = require('backbone');
 module.exports = Backbone.Model.extend({
   defaults: {
     beenSet: true, //set this back to false when done testing
-    guid: "",
+    guid: "3bebe036e03f7be1658075398f12266501950b91", //for testing with test server only
     name: "Your Name",
     handle: "Blockchain ID",
     avatar_hash: "",

@@ -1,8 +1,6 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     languagesModel = require('../models/languagesMd'),
     chooseLanguagesCollection = require('../collections/chooseLanguageCl'),
@@ -21,7 +19,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    _.each(this.chooseLanguages.models, function(item){
+    __.each(this.chooseLanguages.models, function(item){
       self.renderItem(item);
     },this);
   },
@@ -37,7 +35,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    _.each(this.subViews, function(subView) {
+    __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{

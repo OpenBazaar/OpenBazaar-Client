@@ -1,10 +1,9 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
+    loadTemplate = require('../utils/loadTemplate'),
     itemsShortCollection = require('../collections/itemsShortCL'),
-    itemShortView = require('./itemShortVw')
+    itemShortView = require('./itemShortVw');
 
 module.exports = Backbone.View.extend({
 
@@ -24,7 +23,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     //clear the list
     this.$el.empty();
-    _.each(this.itemsShort.models, function(item){
+    __.each(this.itemsShort.models, function(item){
       self.renderContract(item);
     },this);
   },
@@ -39,7 +38,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    _.each(this.subViews, function(subView) {
+    __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{

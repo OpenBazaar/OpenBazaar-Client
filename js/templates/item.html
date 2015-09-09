@@ -10,7 +10,7 @@
     style="background-image: url(<%- server %>get_image?hash=<%- vendor_offer.listing.item.image_hashes[0] %>);"
     <%}%>></div>
   <div class="flexRow row20">
-    <% _.each(vendor_offer.listing.item.image_hashes, function(data, i) {
+    <% __.each(vendor_offer.listing.item.image_hashes, function(data, i) {
     if(i != 0){%>
     <div class="itemImg itemImg-small" style="background-image: url(<%- server %>get_image?hash=<%- data %>);"></div>
     <% } }); %>

@@ -1,8 +1,6 @@
-var _ = require('underscore');
-var Backbone = require('backbone');
-var $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+var __ = require('underscore'),
+    Backbone = require('backbone'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate');
 
 
@@ -21,7 +19,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    var tmpl = loadTemplate('./js/templates/simpleMessage.html', function(loadedTemplate) {
+    loadTemplate('./js/templates/simpleMessage.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model));
     });
     return this;

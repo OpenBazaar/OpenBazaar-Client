@@ -1,8 +1,6 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
@@ -18,7 +16,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    var tmpl = loadTemplate('./js/templates/chooseCurrency.html', function(loadedTemplate) {
+    loadTemplate('./js/templates/chooseCurrency.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;

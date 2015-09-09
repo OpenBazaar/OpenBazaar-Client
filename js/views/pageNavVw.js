@@ -1,8 +1,6 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     Polyglot = require('node-polyglot'),
     languagesModel = require('../models/languagesMd'),
@@ -41,7 +39,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(this.model, 'change:language', function(){
       var newLang = this.model.get("language");
       window.polyglot = new Polyglot({locale: newLang});
-      window.polyglot.extend(_.where(this.languages.get('languages'), {langCode: newLang})[0]);
+      window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
       this.render();
     });
 
@@ -64,7 +62,7 @@ module.exports = Backbone.View.extend({
         accWin.css('left', function(){
           return parseInt(accWin.css('left').replace("px","")) - accWidth;
         });
-      };
+      }
     });
     acc.find('.js-accordianPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
@@ -72,9 +70,9 @@ module.exports = Backbone.View.extend({
         accWin.css('left', function(){
           return parseInt(accWin.css('left').replace("px","")) + accWidth;
         });
-      };
+      }
     });
-    //set up filterable lists
+    //set up filterable lists.
     //TODO: this is terrible, redo so it runs when all subviews are done rendering
     setTimeout(function(){
       var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
@@ -86,7 +84,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    var tmpl = loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
+    loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
       var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
@@ -192,7 +190,7 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
       self.model.set('tempAvatar', e.target.result);
       //TODO: add canvas resizing here
-    }
+    };
     reader.readAsDataURL($(e.target)[0].files[0]);
   },
 
