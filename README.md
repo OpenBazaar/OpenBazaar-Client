@@ -1,5 +1,7 @@
 # openbazaar-client
 
+[![Build Status](https://travis-ci.org/OpenBazaar/OpenBazaar-Client.svg)](https://travis-ci.org/OpenBazaar/OpenBazaar-Client)
+
 In Progress
 -----------
 
