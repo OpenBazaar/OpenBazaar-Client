@@ -3,6 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 
+/*eslint no-use-before-define:0*/
 module.exports = function(currency, callback){
 
   //some APIs require currency to be upper case

@@ -1,6 +1,6 @@
 var Backbone = require('backbone');
 
-module.exports = ShortItemModel = Backbone.Model.extend({
+var ShortItemModel = module.exports = Backbone.Model.extend({
   defaults: {
     name: "A Store",
     GUID: "",

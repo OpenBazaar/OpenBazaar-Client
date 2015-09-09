@@ -10,4 +10,4 @@ module.exports = function(templateFile, callback){
     var tmpl = __.template(data);
     callback(tmpl);
   });
-}
+};

@@ -76,6 +76,7 @@ module.exports = Backbone.View.extend({
     //set up filterable lists.
     //TODO: this is terrible, redo so it runs when all subviews are done rendering
     setTimeout(function(){
+      var List = window.List;
       var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
       var currencyList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
       var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});

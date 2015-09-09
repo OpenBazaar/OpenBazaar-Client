@@ -46,7 +46,6 @@ module.exports = Backbone.Model.extend({
       avatar_hash: "",
       handle: "",
       GUID: "",
-      email: "",
       encryption_key: ""
     }
   }

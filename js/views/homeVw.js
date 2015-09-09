@@ -137,7 +137,7 @@ module.exports = Backbone.View.extend({
     $('.js-homeStoresBtn').addClass('active');
   },
 
-  render: function(tmpl){
+  render: function(){
     var self = this;
     $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
