@@ -1,3 +1,7 @@
+// Check that the deps in node_modules match what's in package.json.
+var safestart = require('safestart');
+safestart(__dirname);
+
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
