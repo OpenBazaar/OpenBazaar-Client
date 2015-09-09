@@ -4,7 +4,9 @@
   "description": "Open Bazaar Client",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "test": "exit 0",
+    "valiquire": "valiquire --redirect valiquire-redirect.js ."
   },
   "dependencies": {
     "backbone": "^1.2.1",
@@ -13,6 +15,12 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.31.1"
-  }
+    "electron-prebuilt": "^0.31.1",
+    "pre-commit": "^1.1.1",
+    "valiquire": "^0.3.0"
+  },
+  "pre-commit": [
+    "valiquire",
+    "test"
+  ]
 }
