@@ -17,8 +17,9 @@ module.exports = Backbone.Router.extend({
     "home": "home",
     "myPage": "userPage",
     "userPage": "userPage",
-    "userPage/:state": "userPage",
-    "userPage/:state/:hash": "userPage",
+    "userPage/:userID": "userPage",
+    "userPage/:userID/:state": "userPage",
+    "userPage/:userID/:state/:itemHash": "userPage",
     "customizePage": "customizePage",
     "sellItem": "sellItem",
     "purchases": "purchases",
@@ -40,8 +41,8 @@ module.exports = Backbone.Router.extend({
     this.newView(new homeView({userModel: this.options.userModel}));
   },
 
-  userPage: function(state, hash){
-    this.newView(new userPageView({userModel: this.options.userModel, state: state, hash: hash}));
+  userPage: function(userID, state, itemHash){
+    this.newView(new userPageView({userModel: this.options.userModel, userID: userID, state: state, itemHash: itemHash}));
     $('body').addClass("body-neutral");
   },
 

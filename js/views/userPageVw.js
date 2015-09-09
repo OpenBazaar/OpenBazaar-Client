@@ -39,10 +39,22 @@ module.exports = Backbone.View.extend({
     this.following = new usersModel();
     this.following.url = options.userModel.get('server')+"get_following";
 
-    this.userPage.fetch({success: function(model){
-      self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-      self.render();
-    }});
+    //if this is the user's own page, set flag to true
+    if(!options.userID || options.userID === options.userModel.get('guid')) {
+      this.options.ownPage = true;
+    }
+
+    this.userPage.fetch({
+      data: $.param({'id': options.userID}),
+      success: function(model){
+        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON(), ownPage: self.options.ownPage});
+        self.render();
+      },
+      error: function(model, response){
+        console.log("User page information fetch failed: " + response.statusText);
+        alert("User Page cannot be read");
+      }
+    });
   },
 
   render: function(){
@@ -74,7 +86,7 @@ module.exports = Backbone.View.extend({
           self.showError("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText, '.js-list2');
         }
       });
-      self.setState(self.options.state, self.options.hash);
+      self.setState(self.options.state, self.options.itemHash);
     });
     return this;
   },
@@ -109,7 +121,8 @@ module.exports = Backbone.View.extend({
       server: self.options.userModel.get('server'),
       showAvatar: false,
       avatar_hash: self.options.userModel.get('avatar_hash'),
-      handle: self.options.userModel.get('handle')
+      handle: self.options.userModel.get('handle'),
+      userID: self.options.userModel.get('guid')
     });
     this.item.url = this.options.userModel.get('server')+"get_contract";
     this.item.fetch({

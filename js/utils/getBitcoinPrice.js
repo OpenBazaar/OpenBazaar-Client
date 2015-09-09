@@ -28,10 +28,10 @@ module.exports = function(currency, callback){
         })
         .fail(function (jqXHR, textStatus, errorThrown)
         {
-          console.log("bitcoinAverage request failed:");
-          console.log(jqXHR);
-          console.log(textStatus);
-          console.log(errorThrown);
+          //console.log("bitcoinAverage request failed:");
+          //console.log(jqXHR);
+          //console.log(textStatus);
+          //console.log(errorThrown);
         })
         .always(function ()
         {
@@ -54,10 +54,10 @@ module.exports = function(currency, callback){
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("coinDesk request failed:");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+            //console.log("coinDesk request failed:");
+            //console.log(jqXHR);
+            //console.log(textStatus);
+            //console.log(errorThrown);
           })
           .always(function ()
           {
@@ -80,10 +80,10 @@ module.exports = function(currency, callback){
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("blockChain request failed: ");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+            //console.log("blockChain request failed: ");
+            //console.log(jqXHR);
+            //console.log(textStatus);
+            //console.log(errorThrown);
           })
           .always(function ()
           {
@@ -106,10 +106,10 @@ module.exports = function(currency, callback){
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("coinKite request failed: ");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+            //console.log("coinKite request failed: ");
+            //console.log(jqXHR);
+            //console.log(textStatus);
+            //console.log(errorThrown);
           })
           .always(function ()
           {
@@ -127,6 +127,10 @@ module.exports = function(currency, callback){
         sum = sum + Number(btPrices[i]);
       }
       btAve = sum/btPrices.length;
+
+      if(btPrices.length == 0){
+        alert("Bitcoin exchange rates are not available.");
+      }
       //console.log("Average is " + btAve);
 
       typeof callback === 'function' && callback(btAve);

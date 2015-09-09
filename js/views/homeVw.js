@@ -47,7 +47,8 @@ var fakeItems = [
     "server": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
-    "handle": "test user 1"
+    "handle": "test user 1",
+    "guid": "1"
   },
   {
     "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
@@ -65,7 +66,8 @@ var fakeItems = [
     "server": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
-    "handle": "test user 1"
+    "handle": "test user 1",
+    "guid": "1"
   },
   {
     "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
@@ -83,7 +85,8 @@ var fakeItems = [
     "server": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
-    "handle": "test user 1"
+    "handle": "test user 1",
+    "guid": "1"
   },
   {
     "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
@@ -101,7 +104,8 @@ var fakeItems = [
     "server": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
-    "handle": "test user 1"
+    "handle": "test user 1",
+    "guid": "1"
   }
 ];
 

@@ -3,7 +3,7 @@ var _ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
-    itemsShortCollection = require('../collections/itemsShortCl'),
+    itemsShortCollection = require('../collections/itemsShortCL'),
     itemShortView = require('./itemShortVw')
 
 module.exports = Backbone.View.extend({
@@ -13,9 +13,9 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
-    this.listenTo(this.options.userModel, 'change', function(){
-      self.render();
-    });
+    //this.listenTo(this.options.userModel, 'change', function(){
+    //  self.render();
+    //});
     this.subViews = [];
     this.render();
   },
@@ -41,7 +41,7 @@ module.exports = Backbone.View.extend({
   close: function(){
     _.each(this.subViews, function(subView) {
       if(subView.close){
-       subView.close();
+        subView.close();
       }else{
         subView.remove();
       }

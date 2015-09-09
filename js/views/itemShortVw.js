@@ -16,6 +16,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     this.listenTo(this.model, 'change', this.render);
+    this.userID = this.model.get('guid');
   },
 
   render: function(){
@@ -27,7 +28,8 @@ module.exports = Backbone.View.extend({
   },
 
   itemClick: function(e){
-    Backbone.history.navigate('#userPage/item/'+$(e.target).data('id'), {trigger: true});
+    console.log("itemclick #userPage/"+this.userID+'/item/'+$(e.target).data('id'));
+    Backbone.history.navigate('#userPage/'+this.userID+'/item/'+$(e.target).data('id'), {trigger: true});
   },
 
   avatarClick: function(){

@@ -9,10 +9,10 @@
       <div>
         <% if(showAvatar) { %>
         <div class="thumbnail js-avatar" data-handle="<%= handle %>"
-        <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
-        style="background-image: url(<%- avatar_hash %>);"
-        <% }else{ %>
-        style="background-image: url(imgs/defaultUser.png)"
+          <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
+          style="background-image: url(<%- avatar_hash %>);"
+          <% }else{ %>
+          style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
         <% } %>
       </div>
