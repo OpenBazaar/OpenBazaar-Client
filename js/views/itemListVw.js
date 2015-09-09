@@ -3,7 +3,7 @@ var _ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
-    itemsShortCollection = require('../collections/itemsShortCL'),
+    itemsShortCollection = require('../collections/itemsShortCl'),
     itemShortView = require('./itemShortVw')
 
 module.exports = Backbone.View.extend({
