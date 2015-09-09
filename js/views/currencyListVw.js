@@ -15,14 +15,10 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.countries = new countriesModel();
     //create a list of currencies from the country list, so we can maintain a single set of data
-    var uniqueCurrencies = _.uniq(this.countries.get('countries'), function(item){return item.code});
+    var uniqueCurrencies = _.uniq(this.countries.get('countries'), function(item){return item.code;});
     var orderedCurrencies = uniqueCurrencies.sort(function(a,b){
       var cA = a.currency.toLowerCase(), cB = b.currency.toLowerCase();
-      if (cA < cB)
-        return -1
-      if (cA > cB)
-        return 1
-      return 0
+      return cA < cB ? -1 : cA > cB ? 1 : 0;
     });
     this.chooseCurrencies = new chooseCurrenciesCollection(orderedCurrencies);
     this.subViews = [];

@@ -43,7 +43,8 @@ module.exports = Backbone.Model.extend({
         });
       }else{
         vendorBitCoinRatio = 1;
-        vendorBitCoinPrice = vendorPrice;
+        // FIXME: where should this come from?
+        // vendorBitCoinPrice = vendorPrice;
       }
     }else{
       this.set({displayPrice: "Price Unavailable"});

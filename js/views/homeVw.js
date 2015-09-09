@@ -6,7 +6,7 @@ var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
     listingsModel = require('../models/listingsMd'),
     itemListView = require('./itemListVw'),
-    storeListView = require('./userListVw')
+    storeListView = require('./userListVw');
 
 
 var fakeStores = [
@@ -136,7 +136,7 @@ module.exports = Backbone.View.extend({
     $('.js-homeStoresBtn').addClass('active');
   },
 
-  render: function(tmpl){
+  render: function(){
     var self = this;
     this.$el.appendTo('#content');
     var tmpl = loadTemplate('./js/templates/home.html', function(loadedTemplate) {

@@ -11,7 +11,7 @@ var fs = require('fs'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
     simpleMessageView = require('./simpleMessageVw'),
-    itemView = require('./itemVw')
+    itemView = require('./itemVw');
 
 module.exports = Backbone.View.extend({
 

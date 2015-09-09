@@ -4,7 +4,7 @@ var _ = require('underscore'),
 Backbone.$ = $;
 var fs = require('fs'),
     itemsShortCollection = require('../collections/itemsShortCl'),
-    itemShortView = require('./itemShortVw')
+    itemShortView = require('./itemShortVw');
 
 module.exports = Backbone.View.extend({
 

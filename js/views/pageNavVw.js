@@ -64,7 +64,7 @@ module.exports = Backbone.View.extend({
         accWin.css('left', function(){
           return parseInt(accWin.css('left').replace("px","")) - accWidth;
         });
-      };
+      }
     });
     acc.find('.js-accordianPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
@@ -72,11 +72,12 @@ module.exports = Backbone.View.extend({
         accWin.css('left', function(){
           return parseInt(accWin.css('left').replace("px","")) + accWidth;
         });
-      };
+      }
     });
     //set up filterable lists
     //TODO: this is terrible, redo so it runs when all subviews are done rendering
     setTimeout(function(){
+      var List = window.List;
       var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
       var currencyList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
       var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});
@@ -192,7 +193,7 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
       self.model.set('tempAvatar', e.target.result);
       //TODO: add canvas resizing here
-    }
+    };
     reader.readAsDataURL($(e.target)[0].files[0]);
   },
 

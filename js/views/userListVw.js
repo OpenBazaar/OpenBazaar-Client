@@ -8,7 +8,7 @@ var fs = require('fs'),
     loadTemplate = require('../utils/loadTemplate'),
     usersShortCollection = require('../collections/usersShortCl'),
     userShortView = require('./userShortVw'),
-    simpleMessageView = require('./simpleMessageVw')
+    simpleMessageView = require('./simpleMessageVw');
 
 module.exports = Backbone.View.extend({
 

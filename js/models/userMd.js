@@ -22,7 +22,7 @@ module.exports = Backbone.Model.extend({
     shipToPostalCode: "",
     shipToCountry: "",
     blocked: ["handle1", "handle2", "handle3"],
-    server: "",
+    // server: "",
     libbitcoinServer: "",
     SSL: false,
     seedPhrase: "",
@@ -33,6 +33,6 @@ module.exports = Backbone.Model.extend({
 
   initialize: function(){
     this.on('change', function(){
-    })
+    });
   }
 });

@@ -8,4 +8,4 @@ module.exports = function(templateFile, callback){
     var tmpl = _.template(data);
     callback(tmpl);
   });
-}
+};

@@ -3,6 +3,7 @@ var _ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 
+/*eslint no-use-before-define:0*/
 module.exports = function(currency, callback){
 
   //some APIs require currency to be upper case
@@ -63,7 +64,7 @@ module.exports = function(currency, callback){
           {
             callBlockchain();
           });
-    }
+    };
 
     var callBlockchain = function ()
     {
@@ -89,7 +90,7 @@ module.exports = function(currency, callback){
           {
             callCoinKite();
           });
-    }
+    };
 
     var callCoinKite = function ()
     {
@@ -115,7 +116,7 @@ module.exports = function(currency, callback){
           {
             makeAveragePrice();
           });
-    }
+    };
 
 
     var makeAveragePrice = function ()
@@ -135,4 +136,4 @@ module.exports = function(currency, callback){
   }else{
     typeof callback === 'function' && callback(1);
   }
-}
+};

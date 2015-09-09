@@ -3,7 +3,7 @@
   "extends": "eslint:recommended",
   "rules": {
     "strict": 0,
-    "quotes": [1, "single"],
+    "quotes": 0,
     "curly": [1, "multi-line"],
     "camelcase": 0,
     "comma-dangle": 0,
@@ -13,7 +13,6 @@
     "no-underscore-dangle": 0,
     "no-unused-vars": 0,
     "new-cap": 0,
-    "react/jsx-uses-vars": 1,
     "semi": [1, "always"]
   },
   env: {
