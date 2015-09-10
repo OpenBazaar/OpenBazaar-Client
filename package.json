@@ -1,7 +1,7 @@
 {
-  "name": "ob1",
+  "name": "OpenBazaar",
   "version": "0.1.0",
-  "description": "Open Bazaar Client",
+  "description": "OpenBazaar Client",
   "main": "main.js",
   "repository": {
     "type": "git",
