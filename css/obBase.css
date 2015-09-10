@@ -3,16 +3,20 @@
 
 body {
   margin: 0;
-  background-color: rgb(7,65,97);
+  background-color: rgb(6,55,83);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
   position: absolute; /* fixes box shadow margin issue */
   width: 100%; /* fixes box shadow margin issue */
-  min-height: 900px; /* fixes box shadow margin issue */
+  min-height: 700px; /* fixes box shadow margin issue */
+  overflow: hidden; 
   /*fonts*/
-  font-size: 14px;
-  line-height: 1.2;
-  font-family: 'Source Sans Pro', sans-serif;
   color: rgb(255, 255, 255);
+  font-family: "Helvetica Neue", Helvetica, "Open Sans";
+  font-size: 13px;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: .5px;
+  line-height: 1.2;
 }
 
 a {
@@ -43,7 +47,7 @@ input[type="text"] {
 
 #content {
   width: 950px;
-  margin: 77px auto 50px;
+  margin: 25px auto 50px;
   position: relative;
   z-index: 1;
 }
@@ -51,6 +55,7 @@ input[type="text"] {
 #pageNav {
   position: fixed;
   top: 0;
+  -webkit-app-region: drag;
   z-index: 3;
 }
 
@@ -63,6 +68,8 @@ input[type="text"] {
 .mainContainer {
   position: relative;
   overflow: hidden;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .img-rsp {
@@ -95,6 +102,16 @@ input[type="text"] {
   padding-top: 10px;
   padding-bottom: 10px;
   box-sizing: border-box;
+}
+
+.navBar-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.footerBar {
+  padding: 3px 0;
 }
 
 .navBar .navEnd {
@@ -182,16 +199,17 @@ input[type="text"] {
 
 .gridItem {
   box-sizing: border-box;
-  padding: 25px 33px;
+  padding: 33px;
+  cursor: pointer;
 }
 
 .itemImg {
-  height: 250px;
-  width: 250px;
   background-image: url(../imgs/defaultItem.png);
-  background-size: cover;
   background-position: center;
-  border-radius: 4px;
+  background-size: cover;
+  border-radius: 3px;
+  height: 230px;
+  width: 250px;
 }
 
 .itemImg.itemImg-large {
@@ -372,8 +390,24 @@ h4,h5,h6 {
   background-color: #327EB8;
 }
 
+.welcomeBar {
+  background-color: #215175;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 15px;
+}
+
 .body-neutral .navBar {
   background-color: #575757;
+}
+
+.container {
+  height: 650px;
+  overflow-y: auto;
+  position: relative;
+  top: 50px;
 }
 
 .mainContainer {
@@ -421,12 +455,13 @@ h4,h5,h6 {
 }
 
 .txtField {
-  width: 100%;
-  height: 32px;
   border-radius: 4px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  height: 32px;
   opacity: .85;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+  width: 100%;
 }
 
 .txtFieldWrapper {
@@ -452,17 +487,24 @@ h4,h5,h6 {
 
 .searchWrapper .txtField {
   text-indent: 24px; /* make room for icon */
+  opacity: .75;
+}
+
+.searchWrapper .txtField:hover,
+.searchWrapper .txtField:focus {
+  opacity: 1;
 }
 
 .txtField-bar,
 input[type="text"].txtField-bar {
   background: none;
   border-radius: 0;
-  opacity: 1;
-  color: #fff;
-  padding: 13px;
-  height: 45px;
   box-shadow: none;
+  color: #fff;
+  height: 45px;
+  font-size: 13px;
+  opacity: 1;
+  padding: 13px;
 }
 
 .txtField-bar::-webkit-input-placeholder,
@@ -527,7 +569,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   min-width: 0;
   height: 12px;
   background-color: #fff;
-  margin: 0 2px;
+  margin: 0 3px;
   padding: 0;
 }
 
@@ -545,12 +587,16 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-bar {
   border-radius: 0;
-  min-width: 95px;
+  min-width: 115px;
   text-align: center;
   background-color: #327EB8;
-  border-right: 1px solid #086A9E;
-  height: 50px;
-  line-height: 50px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  height: 47px;
+  font-size: 14px;
+  line-height: 47px;
+  margin-top: 3px;
+  opacity: .50;
 }
 
 .body-neutral .btn.btn-bar {
@@ -560,6 +606,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-bar.active {
   background-color: #086A9E;
+  opacity: 1;
 }
 
 .body-neutral .btn.btn-bar.active {
@@ -656,9 +703,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 }
 
 .banner-large {
-  position: relative;
-  height: 400px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   background-size: cover;
+  height: 400px;
+  position: relative;
 }
 
 .shadow-inner1 {
@@ -704,6 +753,13 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   height: 130px;
   width: 130px;
   margin-top: 30px;
+}
+
+.page-userNameLarge {
+  font-weight: 100;
+  font-size: 34px;
+  opacity: .8;
+  margin-bottom: 0;
 }
 
 
@@ -772,4 +828,24 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.textOpacity75 {
+  opacity: .75;
+}
+
+.textSize14px {
+  font-size: 14px;
+}
+
+.textSize13px {
+  font-size: 13px;
+}
+
+.textFirstCharUppercase {
+  text-transform: lowercase;
+}
+
+.textFirstCharUppercase::first-letter {
+  text-transform: uppercase;
 }

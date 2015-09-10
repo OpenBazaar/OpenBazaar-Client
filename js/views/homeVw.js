@@ -53,7 +53,7 @@ var fakeItems = [
     "contract_hash": "6d48a290e538de40f0ee9f22f13bf31c7c4b33ef",
     "category": "Test",
     "nsfw": false,
-    "title": "Test Item Two with a Longer Title To See How That Fits in the UI",
+    "title": "Test item #2 should truncat...",
     "thumbnail_hash": "d53cffb48beb8c5685cbd2740fe0df07cc44a0a2",
     "price": 379.0,
     "origin": "UNITED_STATES",
