@@ -19,7 +19,7 @@
   <div class="flexCol-7 pad20Right">
     <div class="row20 rowTop20 clearfix">
       <h5><%= vendor_offer.listing.item.title %></h5>
-      <p><%= displayPrice %> (<%= venderBTCPrice %> btc) &#8226; <%= vendor_offer.listing.item.condition %></p>
+    <p><%= venderBTCPrice %> btc (<%= displayPrice %>) &#8226; <%= vendor_offer.listing.item.condition %></p>
       <% if(itemBuyable) { %>
       <div class="btn btn-light btn-txt js-buyButton"><%= polyglot.t('BUY NOW') %></div>
       <% } %>
