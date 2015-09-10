@@ -138,7 +138,7 @@ module.exports = Backbone.View.extend({
       success: function(model){
         var item = new itemView({model:model, el: '.js-list4'});
         self.subViews.push(item);
-        self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'), "item/"+hash);
+        self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'), "item");
       },
       error: function(model, response){
         //console.log("Fetch of itemModel from userPageView has failed");
@@ -166,18 +166,22 @@ module.exports = Backbone.View.extend({
 
   aboutClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-about'), 'about');
+    this.addTabToHistory('about');
   },
 
   followersClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'), 'followers');
+    this.addTabToHistory('followers');
   },
 
   followingClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-following'), 'following');
+    this.addTabToHistory('following');
   },
 
   storeClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'), 'store');
+    this.addTabToHistory('store');
   },
 
   tabClick: function(activeTab, showContent, state){
@@ -197,11 +201,12 @@ module.exports = Backbone.View.extend({
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
     }
-    if(state !== "item") {
-      //add action to history if not an item
-      console.log("tabClick nav to "+ '#userPage/'+this.model.get('page').profile.guid + "/" + state);
-      Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
-    }
+  },
+
+  addTabToHistory: function(state){
+    //add action to history if not an item
+    console.log("tabClick nav to "+ '#userPage/'+this.model.get('page').profile.guid + "/" + state);
+    Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
   },
 
   close: function(){
