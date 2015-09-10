@@ -1,0 +1,43 @@
+<div class="flexRow">
+  <div class="flexRow bar barTxt pad20">
+    <a class="js-returnToStore"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a>&nbsp;>&nbsp;<%= vendor_offer.listing.item.title %>
+  </div>
+</div>
+<div class="flexRow flex-border">
+  <div class="flexRow flexExpand">
+    <div class="flexCol-5 pad20">
+      <div class="itemImg itemImg-large row10 rowTop20 box-border"
+      <% if(vendor_offer.listing.item.image_hashes.length > 0) { %>
+      style="background-image: url(<%- server %>get_image?hash=<%- vendor_offer.listing.item.image_hashes[0] %>);"
+      <%}%>></div>
+      <div class="flexRow row20">
+        <% _.each(vendor_offer.listing.item.image_hashes, function(data, i) {
+        if(i != 0){%>
+        <div class="itemImg itemImg-small" style="background-image: url(<%- server %>get_image?hash=<%- data %>);"></div>
+        <% } }); %>
+        <div class="itemImg itemImg-small box-border"><i class="ion-plus-circled"></i> </div>
+      </div>
+    </div>
+    <div class="flexCol-7">
+      <div class="flex-border">
+        <div class="flexRow">
+          <div class="flexRow">
+            <div class="fieldItem">
+              <span class="h5 allCaps"><%= polyglot.t('Item') %></span>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Name') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <input type="text" class="fieldItem">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

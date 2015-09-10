@@ -214,6 +214,43 @@ input[type="text"] {
   margin-top: 0;
 }
 
+.fieldItem {
+  min-height: 50px;
+  line-height: 50px;
+  padding: 0 15px;
+}
+
+.fieldItem h1,
+.fieldItem .h1,
+.fieldITem h2
+.fieldItem .h2,
+.fieldItem h3,
+.fieldITem .h3,
+.fieldItem h4,
+.fieldItem .h4,
+.fieldItem h5,
+.fieldItem .h5,
+.fieldItem h6,
+.fieldItem .h6 {
+  margin: 0;
+  line-height: 50px;
+}
+
+input[type="text"].fieldItem {
+  width: 100%;
+  color: #fff;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  padding: 0 15px;
+  background: none;
+}
+
+input[type="text"].fieldItem:focus {
+  border: 2px solid #fff;
+  transition: border 0.3s;
+  outline: none;
+}
+
 .table {
   display: table;
   table-layout: fixed;
@@ -320,15 +357,16 @@ input[type="text"] {
 
 /*========== typography ==========*/
 
-h1,h2,h3 {
+h1,.h1,h2,.h2,h3, .h3 {
   margin: 0 0 20px 0;
   line-height: 1.2;
   font-weight: 700;
 }
 
-h4,h5,h6 {
+h4,.h4,h5,.h5,h6, .h6 {
   margin: 0 0 10px 0;
   line-height: 1;
+  font-weight: 700;
 }
 
 .h3, h3 {
@@ -360,6 +398,10 @@ h4,h5,h6 {
 
 .unbold {
   font-weight: 400;
+}
+
+.allCaps {
+  text-transform: uppercase;
 }
 /*========== skin classes ==========*/
 
@@ -400,7 +442,7 @@ h4,h5,h6 {
 
 .flex-border > .flexRow {
   /* hide the extra border on the right and bottom sides */
-  margin: 0 -2px -2px 0;
+  margin: 0 -1px -1px 0;
   width: auto;
   overflow: hidden;
 }
@@ -408,6 +450,7 @@ h4,h5,h6 {
 .flex-border > .flexRow > [class |= "flexCol"] {
   border-right: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 1px 1px 0;
 }
 
 .flex-border > .flexRow > .flexRow {

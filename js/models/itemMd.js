@@ -7,6 +7,7 @@ module.exports = Backbone.Model.extend({
     venderBTCPrice: 0, //set locally, not by server
     userCurrencyCode: "", //set locally, not by server
     itemBuyable: true, //set locally, not by server
+    itemHash: "", //set locally, not by server
     "vendor_offer": {
       "signature": "",
           "listing": {
@@ -31,7 +32,7 @@ module.exports = Backbone.Model.extend({
               "currency_code": "usd"
             }
           },
-          "title": "",
+          "title": "New Item",
               "process_time": "",
               "image_hashes": [],
               "nsfw": false,
@@ -95,7 +96,7 @@ module.exports = Backbone.Model.extend({
       if (vendorCCode !== "BTC") {
         getBTPrice(vendorCCode, function(btAve){
           vendorBitCoinRatio = btAve;
-          vendorBitCoinPrice = Number((vendorPrice * btAve).toFixed(4));
+          vendorBitCoinPrice = Number((vendorPrice / btAve).toFixed(4));
           var vendToUserBTCRatio = window.currentBitcoin/vendorBitCoinRatio;
           var newAttributes = {};
           newAttributes.venderBTCPrice = vendorBitCoinPrice;

@@ -2,14 +2,15 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-  userPageModel = require('../models/userPageMd'),
-  listingsModel = require('../models/listingsMd'),
-  usersModel = require('../models/usersMd'),
-  itemModel = require('../models/itemMd'),
-  itemListView = require('./itemListVw'),
-  personListView = require('./userListVw'),
-  simpleMessageView = require('./simpleMessageVw'),
-  itemView = require('./itemVw');
+    userPageModel = require('../models/userPageMd'),
+    listingsModel = require('../models/listingsMd'),
+    usersModel = require('../models/usersMd'),
+    itemModel = require('../models/itemMd'),
+    itemListView = require('./itemListVw'),
+    personListView = require('./userListVw'),
+    simpleMessageView = require('./simpleMessageVw'),
+    itemView = require('./itemVw'),
+    itemEditView = require('./itemEditVw');
 
 module.exports = Backbone.View.extend({
 
@@ -19,7 +20,12 @@ module.exports = Backbone.View.extend({
     'click .js-aboutTab': 'aboutClick',
     'click .js-followersTab': 'followersClick',
     'click .js-followingTab': 'followingClick',
-    'click .js-storeTab': 'storeClick'
+    'click .js-storeTab': 'storeClick',
+    'click .js-returnToStore': 'storeClick',
+    'click .js-sellItem': 'sellItem',
+    'click .js-customize': 'customizePage',
+    'click .js-editItem': 'editItem',
+    'click .js-deleteItem': 'deleteItem'
   },
 
   initialize: function (options) {
@@ -37,6 +43,7 @@ module.exports = Backbone.View.extend({
     this.followers.url = options.userModel.get('server') + "get_followers";
     this.following = new usersModel();
     this.following.url = options.userModel.get('server') + "get_following";
+    this.options.ownPage = false;
 
     this.userPage.fetch({
       data: $.param({'id': options.userID}),
@@ -49,14 +56,13 @@ module.exports = Backbone.View.extend({
         self.render();
       },
       error: function(model, response){
-        //console.log("User page information fetch failed: " + response.statusText);
+        console.log("User page information fetch failed: " + response.statusText);
         alert("User Page cannot be read");
       }
     });
   },
 
   render: function(){
-    //console.log("render userPageVw");
     var self = this;
     this.$el.appendTo('#content');
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
@@ -96,8 +102,7 @@ module.exports = Backbone.View.extend({
   },
 
   renderItems: function (model) {
-    var self = this,
-        itemList;
+    var self = this;
 
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currencyCode');
@@ -105,21 +110,20 @@ module.exports = Backbone.View.extend({
       arrayItem.showAvatar = false;
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
-      arrayItem.userID = self.model.get('page').profile.guid;
+      //arrayItem.userID = self.model.get('page').profile.guid;
     });
-    //console.log("userPageView set guid on items "+ self.options.userModel.get('guid'));
-    itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
-    this.subViews.push(itemList);
+    this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
+    this.subViews.push(this.itemList);
   },
 
   renderFollowers: function (model) {
-    var followerList = new personListView({model: model, el: '.js-list1', title: "No Followers Yet", message: ""});
-    this.subViews.push(followerList);
+    this.followerList = new personListView({model: model, el: '.js-list1', title: "No Followers Yet", message: ""});
+    this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
-    var followingList = new personListView({model: model, el: '.js-list2', title: "Not Following Anyone Yet", message: ""});
-    this.subViews.push(followingList);
+    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not Following Anyone Yet", message: ""});
+    this.subViews.push(this.followingList);
   },
 
   renderItem: function(hash){
@@ -130,21 +134,41 @@ module.exports = Backbone.View.extend({
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,
       handle: self.model.get('page').profile.handle,
-      userID: self.model.get('page').profile.guid
+      //userID: self.model.get('page').profile.guid,
+      itemHash: hash
     });
     this.item.url = this.options.userModel.get('server')+"get_contract";
     this.item.fetch({
       data: $.param({'id': hash}),
       success: function(model){
-        var item = new itemView({model:model, el: '.js-list4'});
-        self.subViews.push(item);
+        self.itemView = new itemView({model:model, el: '.js-list4'});
+        self.subViews.push(self.itemView);
         self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'), "item");
       },
       error: function(model, response){
-        //console.log("Fetch of itemModel from userPageView has failed");
+        console.log("Fetch of itemModel from userPageView has failed");
         self.showError("There Has Been An Error","This item is not available. The error code is: "+response.statusText, '.js-list4');
       }
     });
+  },
+
+  renderItemEdit: function(model){
+    var self = this,
+        hash = "";
+    if(model) {
+      hash = model.get('itemHash');
+      //if editing existing product, clone the model
+      this.itemEdit = model.clone();
+    } else {
+      this.itemEdit = new itemModel({
+        'server': self.options.userModel.get('server'),
+        'vendor_offer.listing.item.price_per_unit.fiat.currency_code': self.options.userModel.get('currencyCode'),
+        'vendor_offer.listing.id.pubkeys.guid': self.model.get('page').profile.guid
+      });
+    }
+    this.itemEdit.url = this.options.userModel.get('server')+"set_contract";
+    this.itemEditView = new itemEditView({model:model, el: '.js-list5'});
+    self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'), "itemEdit");
   },
 
   showError: function(title, message, target){
@@ -154,12 +178,9 @@ module.exports = Backbone.View.extend({
 
   setState: function(state, hash) {
     console.log("setState url "+ Backbone.history.getFragment());
-    //console.log("setState state "+ state);
-    if(state === "item") {
-      console.log("item state");
+    if(state === "item"){
       this.renderItem(hash);
     }else if (state){
-      //console.log("set not item state "+ state);
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state), state);
     }
   },
@@ -185,31 +206,52 @@ module.exports = Backbone.View.extend({
   },
 
   tabClick: function(activeTab, showContent, state){
-    //console.log("tabClick state: "+ state);
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');
     this.$el.find('.js-tabTarg').addClass('hide');
     showContent.removeClass('hide');
     //if user owns page, hide/show control buttons
-    console.log("set page controls "+ this.options.ownPage === true);
     if(this.options.ownPage === true) {
       if(state === "item") {
         this.$el.find('.js-itemButtons').removeClass('hide');
         this.$el.find('.js-pageButtons').addClass('hide');
+        this.$el.find('.js-itemEditButtons').addClass('hide');
+      } else if(state === "itemEdit") {
+        this.$el.find('.js-itemButtons').addClass('hide');
+        this.$el.find('.js-pageButtons').addClass('hide');
+        this.$el.find('.js-itemEditButtons').removeClass('hide');
       } else {
         this.$el.find('.js-itemButtons').addClass('hide');
         this.$el.find('.js-pageButtons').removeClass('hide');
+        this.$el.find('.js-itemEditButtons').addClass('hide');
       }
     }
   },
 
   addTabToHistory: function(state){
     //add action to history if not an item
-    console.log("tabClick nav to "+ '#userPage/'+this.model.get('page').profile.guid + "/" + state);
     Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
   },
 
-  close: function(){
+  sellItem: function(){
+
+  },
+
+  customizePage: function(){
+
+  },
+
+  editItem: function(){
+    console.log(this.item);
+    this.renderItemEdit(this.item);
+  },
+
+  deleteItem: function(){
+
+  },
+
+
+close: function(){
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
