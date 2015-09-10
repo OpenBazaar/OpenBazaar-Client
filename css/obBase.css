@@ -47,9 +47,9 @@ input[type="number"] {
 /*========== structure classes ==========*/
 
 #content {
-  width: 950px;
   margin: 23px auto 100px;
   position: relative;
+  width: 950px;
   z-index: 1;
 }
 
@@ -69,6 +69,7 @@ input[type="number"] {
 .mainContainer {
   position: relative;
   overflow: hidden;
+  min-height: 800px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -290,6 +291,7 @@ input[type="number"] {
 }
 
 .thumbnail-large {
+  border-radius: 2px;
   height: 80px;
   width: 80px;
 }
@@ -411,6 +413,7 @@ h6 {
   line-height: 1.2;
 }
 .txt-unleaded {
+  margin-left: 10px;
   line-height: 1;
 }
 
@@ -644,7 +647,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-txt {
   /* button with text */
-  padding: 0 22px;
+  padding: 0 16px;
 }
 
 .btn.btn-txtHalf {
@@ -1211,6 +1214,14 @@ input[type="radio"].fieldItem:checked + label:before {
   font-size: 14px;
 }
 
+.textSize15px {
+  font-size: 15px;
+}
+
+.textSize17px {
+  font-size: 17px;
+}
+
 .textSize13px {
   font-size: 13px;
 }
@@ -1233,4 +1244,7 @@ input[type="radio"].fieldItem:checked + label:before {
 
 .right10 {
   right: 10px;
+}
+.marginRight5 {
+  margin-right: 5px;
 }
