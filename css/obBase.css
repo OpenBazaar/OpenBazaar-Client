@@ -22,7 +22,7 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-  transition: opacity 1s;
+  /*transition: opacity 1s;*/
   cursor: pointer;
 }
 
@@ -47,7 +47,7 @@ input[type="text"] {
 
 #content {
   width: 950px;
-  margin: 25px auto 50px;
+  margin: 23px auto 100px;
   position: relative;
   z-index: 1;
 }
@@ -391,12 +391,34 @@ h4,h5,h6 {
 }
 
 .welcomeBar {
+  background-color: rgb(6,55,83);
+  height: 85px;
+  line-height: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.welcomeBar:before {
+  background: url('../imgs/icon.png');
+  background-size: cover;
+  bottom: 0;
+  content: " ";
+  height: 84.3px;
+  left: 30px;
+  position: absolute;
+  width: 60px;
+  z-index: 2;
+}
+
+.welcomeBar div {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  top: 35px;
   height: 50px;
-  line-height: 50px;
-  padding: 0 15px;
+  padding-left: 100px;
+  position: relative;
+  z-index: 1;
 }
 
 .body-neutral .navBar {
@@ -472,11 +494,11 @@ h4,h5,h6 {
 .txtFieldWrapper:before {
   font-family: Ionicons;
   position: absolute;
-  top: 7px;
-  left: 7px;
+  top: 13px;
+  left: 15px;
   font-size: 18px;
-  color: #000;
-  opacity: 0.4;
+  color: #fff;
+  opacity: 0.7;
   z-index: 1;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
@@ -503,6 +525,7 @@ input[type="text"].txtField-bar {
   color: #fff;
   height: 45px;
   font-size: 13px;
+  letter-spacing: .4px;
   opacity: 1;
   padding: 13px;
 }
@@ -597,11 +620,16 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   line-height: 47px;
   margin-top: 3px;
   opacity: .50;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .body-neutral .btn.btn-bar {
   background-color: #575757;
   border-right: 1px solid #4a4848;
+}
+
+.btn.btn-bar:hover {
+  opacity: .75;
 }
 
 .btn.btn-bar.active {
@@ -848,4 +876,16 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .textFirstCharUppercase::first-letter {
   text-transform: uppercase;
+}
+
+.floatLeft {
+  float: left;
+}
+
+.floatRight {
+  float: right;
+}
+
+.right10 {
+  right: 10px;
 }
