@@ -46,9 +46,9 @@ input[type="text"] {
 /*========== structure classes ==========*/
 
 #content {
-  width: 950px;
   margin: 23px auto 100px;
   position: relative;
+  width: 950px;
   z-index: 1;
 }
 
@@ -68,6 +68,7 @@ input[type="text"] {
 .mainContainer {
   position: relative;
   overflow: hidden;
+  min-height: 800px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -265,6 +266,7 @@ input[type="text"] {
 }
 
 .thumbnail-large {
+  border-radius: 2px;
   height: 80px;
   width: 80px;
 }
@@ -374,6 +376,7 @@ h4,h5,h6 {
   line-height: 1.2;
 }
 .txt-unleaded {
+  margin-left: 10px;
   line-height: 1;
 }
 
@@ -587,7 +590,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-txt {
   /* button with text */
-  padding: 0 22px;
+  padding: 0 16px;
 }
 
 .btn.btn-light {
@@ -879,6 +882,14 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   font-size: 14px;
 }
 
+.textSize15px {
+  font-size: 15px;
+}
+
+.textSize17px {
+  font-size: 17px;
+}
+
 .textSize13px {
   font-size: 13px;
 }
@@ -901,4 +912,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .right10 {
   right: 10px;
+}
+.marginRight5 {
+  margin-right: 5px;
 }

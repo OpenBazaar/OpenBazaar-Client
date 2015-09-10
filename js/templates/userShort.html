@@ -1,16 +1,12 @@
 <div class="rowItem">
-  <div class="thumbnail pull-left"
+  <div class="thumbnail-large pull-left"
   <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
   style="background-image: url(<%- avatar_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
   <div class="pull-left txt-unleaded">
-    <div><%= name %></div>
-    <div class="txt-fade"><%= handle %></div>
-  </div>
-  <div class="pull-right">
-    <a class="btn btn-txt btn-light js-storeListFollow"><%= polyglot.t('Follow') %></a>
+    <div class="textSize17px floatLeft marginRight5"><%= name %></div>
+    <div class="textSize15px txt-fade floatLeft"><%= handle %></div>
   </div>
 </div>
-
