@@ -123,7 +123,7 @@ input[type="text"] {
 
 .nav-ctrlGroup {
   /* use for any cluster of nav controls */
-  padding-left: 10px;
+  padding-left: 5px;
   position: relative;
 }
 
@@ -492,15 +492,15 @@ h4,h5,h6 {
 }
 
 .txtFieldWrapper:before {
-  font-family: Ionicons;
-  position: absolute;
-  top: 13px;
-  left: 15px;
-  font-size: 18px;
   color: #fff;
+  font-family: Ionicons;
+  font-size: 18px;
+  left: 15px;
   opacity: 0.7;
-  z-index: 1;
+  position: absolute;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  top: 13px;
+  z-index: 1;
 }
 
 .searchWrapper:before {
@@ -508,6 +508,7 @@ h4,h5,h6 {
 }
 
 .searchWrapper .txtField {
+  letter-spacing: 0;
   text-indent: 24px; /* make room for icon */
   opacity: .75;
 }
@@ -515,6 +516,18 @@ h4,h5,h6 {
 .searchWrapper .txtField:hover,
 .searchWrapper .txtField:focus {
   opacity: 1;
+}
+
+.mainSearchWrapper:before {
+  color: #000;
+  top: 6px;
+  left: 8px;
+}
+
+.mainSearchWrapper .txtField {
+  font-size: 12px;
+  letter-spacing: 0;
+  text-indent: 26px;
 }
 
 .txtField-bar,
