@@ -226,7 +226,7 @@ input[type="text"] {
 
 .rowItem {
   flex-grow: 1;
-  padding: 10px 15px;
+  padding: 25px 15px;
 }
 
 .rowItem input[type=radio] {
@@ -900,6 +900,18 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .textFirstCharUppercase::first-letter {
   text-transform: uppercase;
+}
+
+.textWeightLight {
+  font-weight: 100;
+}
+
+.textWeightNormal {
+  font-weight: 400;
+}
+
+.textWeightMedium {
+  font-weight: 500;
 }
 
 .floatLeft {
