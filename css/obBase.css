@@ -361,7 +361,7 @@ h4,h5,h6 {
 }
 
 .h6, h6 {
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .txt-center {
@@ -535,7 +535,8 @@ h4,h5,h6 {
 
 .txtField-bar,
 input[type="text"].txtField-bar {
-  background: none;
+  background: #086A9E;
+  border-bottom: solid 1px #327EB8;
   border-radius: 0;
   box-shadow: none;
   color: #fff;
@@ -761,19 +762,21 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 /*========== one-off classes ==========*/
 
 .homeModal-hero {
-  height: 250px;
-  width: 525px;
   background-image: url('../imgs/obSettingsHero.jpg');
   background-repeat: no-repeat;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 250px;
   position: relative;
+  width: 525px;
 }
 
 .homeModal-heroText {
   position: absolute;
   bottom: 30px;
   color: #fff;
-  width: 80%;
-  margin: 0 10%;
+  width: 70%;
+  margin: 0 15%;
   text-align: center;
 }
 
@@ -925,6 +928,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 .right10 {
   right: 10px;
 }
+
 .marginRight5 {
   margin-right: 5px;
+}
+
+.padding17px {
+  padding: 17px;
 }

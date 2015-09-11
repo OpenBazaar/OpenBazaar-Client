@@ -27,6 +27,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome to OpenBazaar",
         CreateStore: "Create store",
         SearchForItemsPlaceholder: "Search for items",
+        LanguagePlaceholder: "Search for a language",
         Email: "Email",
         Facebook: "Facebook",
         Instagram: "Instagram",
@@ -52,22 +53,22 @@ module.exports = Backbone.Model.extend({
           support:"Support OpenBazaar"
         },
         onboarding: {
-          intro: "OpenBazaar is an open source project created by hundreds of people with the primary goal of giving the world free trade",
-          chooseLanguage: "Choose Your Language",
+          intro: "OpenBazaar is a permissionless market for the world to buy and sell online without fees",
+          chooseLanguage: "Choose your language",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
-          configure: "Configure Your Experience",
+          configure: "Configure your experience",
           disclaimer_title: "Disclaimer",
           disclaimer_body: "disclaimer text",
           yourCountry: "Your Country",
-          localCurrency: "Local Currency",
-          timeZone: "Time Zone",
+          localCurrency: "Local currency",
+          timeZone: "Time zone",
           handle: "Handle",
           knownAs: "You're currently known as:",
           wouldYou: "Would you like to register an easy to remember handle?",
           registerNew: "Register New",
           connectExisting: "Connect Existing",
           avatar: "Avatar",
-          chooseAvatar: "Choose Avatar"
+          chooseAvatar: "Choose avatar"
         }
       },
       {
@@ -92,6 +93,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "", 
         CreateStore: "",
         SearchForItemsPlaceholder: "",
+        LanguagePlaceholder: "",
         Email: "Correo electrónico",
         Facebook: "Facebook",
         Instagram: "Instagram",

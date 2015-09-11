@@ -47,13 +47,13 @@
     <div class="homeModal-accordian accordian js-profileAccordian">
       <div class="accordian-window">
         <div class="accordian-child">
-          <div class="bar barTxt h5">
+          <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.chooseLanguage') %>
           </div>
           <div class="flexContainer flex-border" id="homeModal-languageList">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="txtField txtField-bar search" />
+                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('LanguagePlaceholder') %>" />
               </div>
             </div>
             <ul class="flexRow list js-homeModal-languageList homeModal-settings">
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="accordian-child">
-          <div class="bar barTxt h5">
+          <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.contributors', {smart_count: 247}) %>
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch">
@@ -127,7 +127,7 @@
           </div>
         </div>
         <div class="accordian-child">
-          <div class="bar barTxt h5">
+          <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.disclaimer_title') %>
           </div>
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
@@ -143,7 +143,7 @@
           </div>
         </div>
         <div class="accordian-child">
-          <div class="bar barTxt h5">
+          <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.yourCountry') %>
           </div>
           <div class="flexContainer flex-border" id="homeModal-countryList">
@@ -161,7 +161,7 @@
           </div>
         </div>
         <div class="accordian-child">
-          <div class="bar barTxt h5">
+          <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.localCurrency') %>
           </div>
           <div class="flexContainer flex-border" id="homeModal-currencyList">
@@ -179,7 +179,7 @@
           </div>
         </div>
         <div class="accordian-child">
-          <div class="bar barTxt h5">
+          <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.timeZone') %>
           </div>
           <div class="flexContainer flex-border" id="homeModal-timeList">
