@@ -33,23 +33,25 @@
               </div>
             </div>
             <div class="flexCol-10">
-              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.title %>">
+              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.title %>" required>
             </div>
           </div>
-          <div class="flexRow">
+          <div class="flexRow js-inputParent">
             <div class="flexCol-2">
               <div class="fieldItem">
                 <%= polyglot.t('Price') %>
               </div>
             </div>
             <div class="flexCol-7">
-              <input type="text" class="fieldItem js-priceLocal"  value="<%= vendor_offer.listing.item.price_per_unit.fiat.price %>">
-              <input type="text" class="fieldItem js-priceBtc hide" value="<%= venderBTCPrice %>">
+              <input type="number" step="any" min="0" class="fieldItem js-priceLocal"  id="priceLocal" value="<%= vendor_offer.listing.item.price_per_unit.fiat.price %>" required>
+              <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="priceBtc" value="<%= venderBTCPrice %>" required>
             </div>
             <div class="flexCol-3">
               <div class="fieldItem pull-right">
-                <a class="btn btn-togLeft btn-txtHalf btn-dark js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
-                <a class="btn btn-togRight btn-txtHalf btn-med btn-darkBorder js-priceBtn-btc">btc</a>
+                <div class="btn-togWrapper btn-togWrapper-c1">
+                  <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+                  <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
+                </div>
               </div>
             </div>
           </div>
@@ -60,7 +62,7 @@
               </div>
             </div>
             <div class="flexCol-10">
-              <input type="text" class="fieldItem">
+              <input type="number" step="any" min="0" class="fieldItem"  value="0" required>
             </div>
           </div>
           <div class="flexRow">
@@ -84,6 +86,25 @@
                 <div class="fieldItem-selectWrapper">
                   <select>
                     <option>--</option>
+                    <option>Physical Item</option>
+                    <option>Digital Item</option>
+                    <option>Service</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Category') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <div class="fieldItem">
+                <div class="fieldItem-selectWrapper">
+                  <select>
+                    <option>--</option>
                     <option>Placeholder</option>
                     <option>Placeholder</option>
                   </select>
@@ -100,10 +121,10 @@
             <div class="flexCol-10">
               <div class="fieldItem">
                 <div class="fieldItem-selectWrapper">
-                  <select>
+                  <select id="selectCondition">
                     <option>--</option>
-                    <option>New</option>
-                    <option>Used</option>
+                    <option value="New">New</option>
+                    <option value="Used">Used</option>
                   </select>
                 </div>
               </div>
@@ -118,10 +139,10 @@
             <div class="flexCol-10">
               <div class="fieldItem">
                 <div class="fieldItem-selectWrapper">
-                  <select>
+                  <select id="selectNSFW">
                     <option>--</option>
-                    <option>Yes</option>
-                    <option>No</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
                   </select>
                 </div>
               </div>
@@ -134,7 +155,17 @@
               </div>
             </div>
             <div class="flexCol-10">
-              <textarea rows="8" class="fieldItem-textarea"></textarea>
+              <textarea rows="8" class="fieldItem-textarea"><%= vendor_offer.listing.item.description %></textarea>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                SKU
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.sku %>">
             </div>
           </div>
           <div class="flexRow">
@@ -143,23 +174,107 @@
             </div>
           </div>
           <div class="flexRow">
-            <div class="flexCol-2">
+            <div class="flexCol-5">
               <div class="fieldItem">
-                <%= polyglot.t('Local') %>
+                <%= polyglot.t('ProcessingTime') %>
               </div>
             </div>
-            <div class="flexCol-10">
-              <input type="text" class="fieldItem">
+            <div class="flexCol-7">
+              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.process_time %>">
             </div>
           </div>
           <div class="flexRow">
-            <div class="flexCol-2">
+            <div class="flexCol-5">
               <div class="fieldItem">
-                <%= polyglot.t('International') %>
+                <%= polyglot.t('Free') %> <%= polyglot.t('Shipping') %>
               </div>
             </div>
-            <div class="flexCol-10">
-              <input type="text" class="fieldItem">
+            <div class="flexCol-7">
+              <input type="radio" class="fieldItem" id="shippingFreeTrue" name="shippingFree" /><label for="shippingFreeTrue">Yes</label>
+              <input type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" checked/><label for="shippingFreeFalse">No</label>
+            </div>
+          </div>
+          <div class="flexRow js-inputParent">
+            <div class="flexCol-5">
+              <div class="fieldItem">
+                <%= polyglot.t('Local') %> <%= polyglot.t('Price') %>
+              </div>
+            </div>
+            <div class="flexCol-4">
+              <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceLocalLocal"  value="0">
+              <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceLocalBtc" value="0">
+            </div>
+            <div class="flexCol-3">
+              <div class="fieldItem pull-right">
+                <div class="btn-togWrapper btn-togWrapper-c1">
+                  <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+                  <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow js-inputParent js-shippingPriceRow">
+            <div class="flexCol-5">
+              <div class="fieldItem">
+                <%= polyglot.t('International') %> <%= polyglot.t('Price') %>
+              </div>
+            </div>
+            <div class="flexCol-4">
+              <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceInternationalLocal"  value="0">
+              <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc value="0">
+            </div>
+            <div class="flexCol-3">
+              <div class="fieldItem pull-right">
+                <div class="btn-togWrapper btn-togWrapper-c1">
+                  <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+                  <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-5">
+              <div class="fieldItem">
+                <%= polyglot.t('Local') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %>
+              </div>
+            </div>
+            <div class="flexCol-7">
+              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.domestic %>"  required>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-5">
+              <div class="fieldItem">
+                <%= polyglot.t('International') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %>
+              </div>
+            </div>
+            <div class="flexCol-7">
+              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.international %>">
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="fieldItem">
+              <h5 class="allCaps"><%= polyglot.t('Policy') %></h5>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-5">
+              <div class="fieldItem">
+                <%= polyglot.t('Terms and Conditions') %>
+              </div>
+            </div>
+            <div class="flexCol-7">
+              <textarea rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.terms_conditions %></textarea>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-5">
+              <div class="fieldItem">
+                <%= polyglot.t('Returns') %>
+              </div>
+            </div>
+            <div class="flexCol-7">
+              <textarea rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.returns %></textarea>
             </div>
           </div>
         </div>

@@ -51,6 +51,10 @@ module.exports = Backbone.Model.extend({
         NSFW: "NSFW",
         Local: "Local",
         International: "International",
+        Time: "Time",
+        Free: "Free",
+        Category: "Category",
+        ProcessingTime: "Processing Time",
         nav: {
           searchPlaceholder: "Enter a handle or a keyword",
           myPage: "My Page",
@@ -129,6 +133,10 @@ module.exports = Backbone.Model.extend({
         NSFW: "NSFW",
         Local: "Local",
         International: "Internacional",
+        Time: "Hora",
+        Free: "Gratis",
+        Category: "Categoría",
+        ProcessingTime: "Tiempo de procesamiento",
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi página",

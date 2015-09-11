@@ -10,7 +10,9 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-priceBtn-local': 'priceToLocal',
-    'click .js-priceBtn-btc': 'priceToBTC'
+    'click .js-priceBtn-btc': 'priceToBTC',
+    'click #shippingFreeTrue': 'disableShipping',
+    'click #shippingFreeFalse': 'enableShipping'
   },
 
   initialize: function(){
@@ -23,32 +25,49 @@ module.exports = Backbone.View.extend({
     var self = this;
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.setFormValues();
     });
     return this;
   },
 
-  priceToLocal: function(){
-    //getBTPrice(vendorCCode, function(btAve){});
-    this.$el.find('.js-priceLocal').removeClass('hide');
-    this.$el.find('.js-priceBtc').addClass('hide');
-    this.$el.find('.js-priceBtn-local').removeClass('btn-med, btn-darkBorder').addClass('btn-dark');
-    this.$el.find('.js-priceBtn-btc').addClass('btn-med, btn-darkBorder').removeClass('btn-dark');
-    this.updatePrice('local');
+  setFormValues: function(){
+    this.$el.find('#selectCondition').val(this.model.get('vendor_offer').listing.item.condition);
+    this.$el.find('#selectNSFW').val(String(this.model.get('vendor_offer').listing.item.nsfw));
   },
 
-  priceToBTC: function(){
-    this.$el.find('.js-priceLocal').addClass('hide');
-    this.$el.find('.js-priceBtc').removeClass('hide');
-    this.$el.find('.js-priceBtn-local').addClass('btn-med, btn-darkBorder').removeClass('btn-dark');
-    this.$el.find('.js-priceBtn-btc').removeClass('btn-med, btn-darkBorder').addClass('btn-dark');
-    this.updatePrice('btc');
+  priceToLocal: function(e){
+    var parentRow = $(e.target).closest('.js-inputParent');
+    parentRow.find('.js-priceLocal').removeClass('hide');
+    parentRow.find('.js-priceBtc').addClass('hide');
+    $(e.target).removeClass('inactive');
+    parentRow.find('.js-priceBtn-btc').addClass('inactive');
+    this.updatePrice('local', parentRow);
   },
 
-  updatePrice: function(priceType){
+  priceToBTC: function(e){
+    var parentRow = $(e.target).closest('.js-inputParent');
+    parentRow.find('.js-priceLocal').addClass('hide');
+    parentRow.find('.js-priceBtc').removeClass('hide');
+    parentRow.find('.js-priceBtn-local').addClass('inactive');
+    $(e.target).removeClass('inactive');
+    this.updatePrice('btc', parentRow);
+  },
+
+  updatePrice: function(priceType, inputParent){
     if(priceType === "local"){
-      this.$el.find('.js-priceLocal').val(this.$el.find('.js-priceBtc').val() * window.currentBitcoin);
+      inputParent.find('.js-priceLocal').val(inputParent.find('.js-priceBtc').val() * window.currentBitcoin);
     }else{
-      this.$el.find('.js-priceBtc').val(this.$el.find('.js-priceLocal').val() / window.currentBitcoin);
+      inputParent.find('.js-priceBtc').val(inputParent.find('.js-priceLocal').val() / window.currentBitcoin);
     }
+  },
+
+  disableShipping: function(){
+    this.$el.find('.js-shippingPriceRow').addClass('hide');
+    this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc').prop('disabled', true);
+  },
+
+  enableShipping: function(){
+    this.$el.find('.js-shippingPriceRow').removeClass('hide');
+    this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc').prop('disabled', false);
   }
 });
