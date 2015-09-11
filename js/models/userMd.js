@@ -22,17 +22,11 @@ module.exports = Backbone.Model.extend({
     shipToPostalCode: "",
     shipToCountry: "",
     blocked: ["handle1", "handle2", "handle3"],
-    server: "",
     libbitcoinServer: "",
     SSL: false,
     seedPhrase: "",
     //values below for testing. Real value should be dynamically set
     server: "http://seed.openbazaar.org:18469/api/v1/"
     //server: "http://bitcoinauthenticator.org:18469/api/v1/"
-  },
-
-  initialize: function(){
-    this.on('change', function(){
-    })
   }
 });

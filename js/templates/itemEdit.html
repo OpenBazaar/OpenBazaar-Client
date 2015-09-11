@@ -33,7 +33,7 @@
               </div>
             </div>
             <div class="flexCol-10">
-              <input type="text" class="fieldItem">
+              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.title %>">
             </div>
           </div>
           <div class="flexRow">
@@ -43,11 +43,12 @@
               </div>
             </div>
             <div class="flexCol-7">
-              <input type="text" class="fieldItem">
+              <input type="text" class="fieldItem js-priceLocal"  value="<%= vendor_offer.listing.item.price_per_unit.fiat.price %>">
+              <input type="text" class="fieldItem js-priceBtc hide" value="<%= venderBTCPrice %>">
             </div>
             <div class="flexCol-3">
-              <div class="fieldItem">
-                <a class="btn btn-togLeft btn-txtHalf btn-dark btn-darkBorder js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+              <div class="fieldItem pull-right">
+                <a class="btn btn-togLeft btn-txtHalf btn-dark js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
                 <a class="btn btn-togRight btn-txtHalf btn-med btn-darkBorder js-priceBtn-btc">btc</a>
               </div>
             </div>
@@ -133,7 +134,7 @@
               </div>
             </div>
             <div class="flexCol-10">
-              <input type="text" class="fieldItem">
+              <textarea rows="8" class="fieldItem-textarea"></textarea>
             </div>
           </div>
           <div class="flexRow">

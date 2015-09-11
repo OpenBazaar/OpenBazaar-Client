@@ -164,7 +164,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         hash = "";
     if(model) {
-      hash = model.get('itemHash');
+      //hash = model.get('itemHash');
       //if editing existing product, clone the model
       this.itemEdit = model.clone();
     } else {
@@ -175,7 +175,7 @@ module.exports = Backbone.View.extend({
       });
     }
     this.itemEdit.url = this.options.userModel.get('server')+"set_contract";
-    this.itemEditView = new itemEditView({model:model, el: '.js-list5'});
+    this.itemEditView = new itemEditView({model:this.itemEdit, el: '.js-list5'});
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'), "itemEdit");
   },
 
@@ -242,7 +242,7 @@ module.exports = Backbone.View.extend({
   },
 
   sellItem: function(){
-
+    this.renderItemEdit();
   },
 
   customizePage: function(){
@@ -250,7 +250,6 @@ module.exports = Backbone.View.extend({
   },
 
   editItem: function(){
-    console.log(this.item);
     this.renderItemEdit(this.item);
   },
 

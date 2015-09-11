@@ -108,9 +108,6 @@ module.exports = Backbone.Model.extend({
         vendorBitCoinRatio = 1;
         vendorBitCoinPrice = vendorPrice;
       }
-
-
-
     }else{
       this.set({displayPrice: "Price Unavailable", itemBuyable: false});
     }

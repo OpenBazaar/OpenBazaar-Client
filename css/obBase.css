@@ -436,6 +436,11 @@ h6 {
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
+.flex-border .flex-border > .flexRow > .flexRow:last-child {
+  /* when nested, the last row should not have a border */
+  border-bottom: none;
+}
+
 .box-border {
   border: 1px solid rgba(255,255,255,0.08);
 }
@@ -721,6 +726,27 @@ input[type="text"].fieldItem:focus {
   line-height: 50px;
   top: 0;
   right: 20px;
+  pointer-events: none;
+}
+
+.fieldItem-textarea {
+  background: none;
+  border: 2px solid transparent;
+  color: #fff;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 14px;
+  font-family: inherit;
+  font-size: inherit;
+  resize: none;
+}
+
+.fieldItem-textarea:focus {
+  border: 2px solid #fff;
+  transition: border 0.3s;
+  outline: none;
 }
 
 .body-neutral .fieldItem-selectWrapper select option {
