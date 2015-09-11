@@ -98,6 +98,14 @@ module.exports = Backbone.View.extend({
       });
       self.setState(self.options.state, self.options.itemHash);
     });
+
+    //set custom color values in stylesheet
+    var pageStyleSheet = $('#obBase')[0].sheet;
+    pageStyleSheet.insertRule(".body-neutral .custCol-background { background-color: #"+this.model.get('page').profile.background_color+";}", pageStyleSheet.cssRules.length);
+    pageStyleSheet.insertRule(".body-neutral .custCol-primary { background-color: #"+this.model.get('page').profile.primary_color+";}", pageStyleSheet.cssRules.length);
+    pageStyleSheet.insertRule(".body-neutral .custCol-secondary { background-color: #"+this.model.get('page').profile.secondary_color+";}", pageStyleSheet.cssRules.length);
+    pageStyleSheet.insertRule(".body-neutral .custCol-text { color: #"+this.model.get('page').profile.text_color+";}", pageStyleSheet.cssRules.length);
+
     return this;
   },
 

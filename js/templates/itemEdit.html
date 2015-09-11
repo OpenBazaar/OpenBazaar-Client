@@ -15,7 +15,7 @@
         if(i != 0){%>
         <div class="itemImg itemImg-small" style="background-image: url(<%- server %>get_image?hash=<%- data %>);"></div>
         <% } }); %>
-        <div class="itemImg itemImg-small box-border"><i class="ion-plus-circled"></i> </div>
+        <div class="itemImg itemImg-small box-border"><i class="ion-plus-circled icon-centered icon-large txt-fade"></i> </div>
       </div>
     </div>
     <div class="flexCol-7">
@@ -23,13 +23,138 @@
         <div class="flexRow">
           <div class="flexRow">
             <div class="fieldItem">
-              <span class="h5 allCaps"><%= polyglot.t('Item') %></span>
+              <h5 class="allCaps"><%= polyglot.t('Item') %></h5>
             </div>
           </div>
           <div class="flexRow">
             <div class="flexCol-2">
               <div class="fieldItem">
                 <%= polyglot.t('Name') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <input type="text" class="fieldItem">
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Price') %>
+              </div>
+            </div>
+            <div class="flexCol-7">
+              <input type="text" class="fieldItem">
+            </div>
+            <div class="flexCol-3">
+              <div class="fieldItem">
+                <a class="btn btn-togLeft btn-txtHalf btn-dark btn-darkBorder js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+                <a class="btn btn-togRight btn-txtHalf btn-med btn-darkBorder js-priceBtn-btc">btc</a>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Available') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <input type="text" class="fieldItem">
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Keywords') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <input type="text" class="fieldItem">
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Type') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <div class="fieldItem">
+                <div class="fieldItem-selectWrapper">
+                  <select>
+                    <option>--</option>
+                    <option>Placeholder</option>
+                    <option>Placeholder</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Condition') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <div class="fieldItem">
+                <div class="fieldItem-selectWrapper">
+                  <select>
+                    <option>--</option>
+                    <option>New</option>
+                    <option>Used</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('NSFW') %>?
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <div class="fieldItem">
+                <div class="fieldItem-selectWrapper">
+                  <select>
+                    <option>--</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Description') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <input type="text" class="fieldItem">
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="fieldItem">
+              <h5 class="allCaps"><%= polyglot.t('Shipping') %></h5>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('Local') %>
+              </div>
+            </div>
+            <div class="flexCol-10">
+              <input type="text" class="fieldItem">
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <div class="fieldItem">
+                <%= polyglot.t('International') %>
               </div>
             </div>
             <div class="flexCol-10">

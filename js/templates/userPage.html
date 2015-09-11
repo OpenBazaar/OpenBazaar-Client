@@ -8,15 +8,15 @@
     <div class="flexRow align-bottom">
       <div class="rowItem">
         <div class="thumbnail thumbnail-large pull-left"
-        <% if(typeof(user.avatar_hash) !== "undefined" && user.avatar_hash) { %>
-        style="background-image: url(<%- user.server %>get_image?hash=<%- user.avatar_hash %>);"
+        <% if(typeof(page.profile.avatar_hash) !== "undefined" && page.profile.avatar_hash) { %>
+        style="background-image: url(<%- user.server %>get_image?hash=<%- page.profile.avatar_hash %>);"
         <% }else{ %>
         style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
       <div class="pull-left">
         <div class="vCentered">
-          <h1 class="h3 unbold txt-unleaded"><%= user.name %></h1>
-          <div class="txt-fade"><%= user.handle %></div>
+          <h1 class="h3 unbold txt-unleaded"><%= page.profile.name %></h1>
+          <div class="txt-fade"><%= page.profile.handle %></div>
         </div>
       </div>
     </div>

@@ -49,6 +49,8 @@ module.exports = Backbone.Model.extend({
         Type: "Type",
         Condition: "Condition",
         NSFW: "NSFW",
+        Local: "Local",
+        International: "International",
         nav: {
           searchPlaceholder: "Enter a handle or a keyword",
           myPage: "My Page",
@@ -125,6 +127,8 @@ module.exports = Backbone.Model.extend({
         Type: "Tipo",
         Condition: "Condición",
         NSFW: "NSFW",
+        Local: "Local",
+        International: "Internacional",
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi página",

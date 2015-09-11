@@ -187,10 +187,10 @@ input[type="text"] {
 .itemImg {
   height: 250px;
   width: 250px;
-  background-image: url(../imgs/defaultItem.png);
   background-size: cover;
   background-position: center;
   border-radius: 4px;
+  position: relative;
 }
 
 .itemImg.itemImg-large {
@@ -218,37 +218,6 @@ input[type="text"] {
   min-height: 50px;
   line-height: 50px;
   padding: 0 15px;
-}
-
-.fieldItem h1,
-.fieldItem .h1,
-.fieldITem h2
-.fieldItem .h2,
-.fieldItem h3,
-.fieldITem .h3,
-.fieldItem h4,
-.fieldItem .h4,
-.fieldItem h5,
-.fieldItem .h5,
-.fieldItem h6,
-.fieldItem .h6 {
-  margin: 0;
-  line-height: 50px;
-}
-
-input[type="text"].fieldItem {
-  width: 100%;
-  color: #fff;
-  box-sizing: border-box;
-  border: 2px solid transparent;
-  padding: 0 15px;
-  background: none;
-}
-
-input[type="text"].fieldItem:focus {
-  border: 2px solid #fff;
-  transition: border 0.3s;
-  outline: none;
 }
 
 .table {
@@ -279,6 +248,7 @@ input[type="text"].fieldItem:focus {
   width: 30px;
   margin-right: 6px;
   background-size: cover;
+  background-position: center;
   border-radius: 2px;
 }
 
@@ -357,27 +327,27 @@ input[type="text"].fieldItem:focus {
 
 /*========== typography ==========*/
 
-h1,.h1,h2,.h2,h3, .h3 {
+h1,h2,h3 {
   margin: 0 0 20px 0;
   line-height: 1.2;
   font-weight: 700;
 }
 
-h4,.h4,h5,.h5,h6, .h6 {
+h4,h5,h6 {
   margin: 0 0 10px 0;
   line-height: 1;
   font-weight: 700;
 }
 
-.h3, h3 {
+h3 {
   font-size: 18px;
 }
 
-.h5, h5 {
+h5 {
   font-size: 16px;
 }
 
-.h6, h6 {
+h6 {
   font-size: 15px;
 }
 
@@ -451,6 +421,14 @@ h4,.h4,h5,.h5,h6, .h6 {
   border-right: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 0 1px 1px 0;
+}
+
+.flex-border > .flexRow > [class |= "flexCol"].pad10 {
+  padding: 0 11px 1px 10px;
+}
+
+.flex-border > .flexRow > [class |= "flexCol"].pad20 {
+  padding: 0 21px 1px 20px;
 }
 
 .flex-border > .flexRow > .flexRow {
@@ -554,9 +532,25 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   padding: 0 22px;
 }
 
+.btn.btn-txtHalf {
+  /* button with text */
+  padding: 0 11px;
+}
+
 .btn.btn-light {
-  /* 20% over background */
   background-color: rgba(255,255,255,0.08);
+}
+
+.btn.btn-med {
+  background-color: rgba(0,0,0,0.04);
+}
+
+.btn.btn-dark {
+  background-color: rgba(0,0,0,0.1);
+}
+
+.btn.btn-darkBorder {
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 .btn.btn-c1 {
@@ -666,9 +660,73 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 }
 
 .btn.btn-profile {
-  background-image: url('../imgs/defaultUser.png');
   background-size: contain;
 }
+
+.fieldItem h1,
+.fieldITem h2
+.fieldItem h3,
+.fieldItem h4,
+.fieldItem h5,
+.fieldItem h6 {
+  margin: 0;
+  line-height: 50px;
+}
+
+input[type="text"].fieldItem {
+  width: 100%;
+  color: #fff;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  padding: 0 15px;
+  background: none;
+}
+
+input[type="text"].fieldItem:focus {
+  border: 2px solid #fff;
+  transition: border 0.3s;
+  outline: none;
+}
+
+.fieldItem .btn {
+  margin-top: 9px;
+}
+
+.fieldItem .fieldItem-selectWrapper {
+  position: relative;
+}
+
+.fieldItem .fieldItem-selectWrapper select {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  margin: 0;
+  background: none;
+  border: 1px solid transparent;
+  outline: none;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  color: #fff;
+}
+
+.fieldItem .fieldItem-selectWrapper select:focus {
+  outline: none;
+}
+
+.fieldItem .fieldItem-selectWrapper:after {
+  content: "\f104";
+  font-family: "Ionicons";
+  position: absolute;
+  line-height: 50px;
+  top: 0;
+  right: 20px;
+}
+
+.body-neutral .fieldItem-selectWrapper select option {
+  background-color: #4a4848;
+}
+
 
 .popMenu-navBar {
   top: 36px;
@@ -705,6 +763,17 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .shadow-inner1 {
   box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,1);
+}
+
+.icon-centered {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon-large {
+  font-size: 32px;
 }
 
 /*========== one-off classes ==========*/
