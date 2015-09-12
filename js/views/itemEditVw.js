@@ -3,7 +3,8 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
-    getBTPrice = require('../utils/getBitcoinPrice');
+    getBTPrice = require('../utils/getBitcoinPrice'),
+    taggle = require('taggle');
 
 
 module.exports = Backbone.View.extend({
@@ -26,6 +27,8 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
+      //activate tags plugin
+      self.inputKeyword = new Taggle('inputKeyword');
     });
     return this;
   },
@@ -69,5 +72,10 @@ module.exports = Backbone.View.extend({
   enableShipping: function(){
     this.$el.find('.js-shippingPriceRow').removeClass('hide');
     this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc').prop('disabled', false);
+  },
+
+  saveChanges: function(){
+    console.log("save changes");
+    console.log(this.inputKeyword.getTags());
   }
 });

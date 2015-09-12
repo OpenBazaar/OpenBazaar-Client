@@ -219,6 +219,7 @@ input[type="number"] {
   min-height: 50px;
   line-height: 50px;
   padding: 0 15px;
+  position: relative;
 }
 
 .table {
@@ -830,6 +831,67 @@ input[type="radio"].fieldItem:checked + label:before {
   background-color: #4a4848;
 }
 
+.fieldItem .taggle_placeholder {
+  position: absolute;
+  transition: opacity,.25s;
+  -webkit-user-select: none;
+  color: rgba(255,255,255,0.4);
+}
+
+.fieldItem .taggle_list {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fieldItem .taggle_list li {
+  float: left;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 38px;
+  position: relative;
+}
+
+.fieldItem .taggle {
+  margin: 6px 6px 0 0;
+  padding: 0 34px 0 18px;
+  border-radius: 4px;
+  background-color: rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.fieldItem .taggle .taggle_text {
+
+}
+
+.fieldItem .taggle .close {
+  display: inline-block;
+  position: absolute;
+  right: 12px;
+}
+
+.fieldItem .taggle_list .taggle_input {
+  line-height: 50px;
+  margin-left: 4px;
+  float: left;
+  background: 0;
+  max-width: 100%;
+  border: 0;
+  outline: 0;
+  color: inherit;
+}
+
+.fieldItem .taggle_sizer {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: -500px;
+  z-index: -1;
+  visibility: hidden;
+}
 
 .popMenu-navBar {
   top: 36px;

@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Open Bazaar Client",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/OpenBazaar/OpenBazaar-Client.git"
+  },
   "scripts": {
     "start": "electron main.js"
   },
@@ -10,6 +14,7 @@
     "backbone": "^1.2.1",
     "jquery": "^2.1.4",
     "node-polyglot": "^0.4.3",
+    "taggle": "^1.5.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

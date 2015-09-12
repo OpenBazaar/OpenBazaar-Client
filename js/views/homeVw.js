@@ -139,7 +139,7 @@ module.exports = Backbone.View.extend({
 
   render: function(tmpl){
     var self = this;
-    this.$el.appendTo('#content');
+    $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       self.subRender();

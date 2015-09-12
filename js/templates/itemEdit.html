@@ -58,21 +58,11 @@
           <div class="flexRow">
             <div class="flexCol-2">
               <div class="fieldItem">
-                <%= polyglot.t('Available') %>
-              </div>
-            </div>
-            <div class="flexCol-10">
-              <input type="number" step="any" min="0" class="fieldItem"  value="0" required>
-            </div>
-          </div>
-          <div class="flexRow">
-            <div class="flexCol-2">
-              <div class="fieldItem">
                 <%= polyglot.t('Keywords') %>
               </div>
             </div>
             <div class="flexCol-10">
-              <input type="text" class="fieldItem">
+              <div class="fieldItem" id="inputKeyword"></div>
             </div>
           </div>
           <div class="flexRow">
@@ -101,15 +91,7 @@
               </div>
             </div>
             <div class="flexCol-10">
-              <div class="fieldItem">
-                <div class="fieldItem-selectWrapper">
-                  <select>
-                    <option>--</option>
-                    <option>Placeholder</option>
-                    <option>Placeholder</option>
-                  </select>
-                </div>
-              </div>
+              <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.category %>">
             </div>
           </div>
           <div class="flexRow">

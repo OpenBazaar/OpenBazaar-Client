@@ -25,7 +25,9 @@ module.exports = Backbone.View.extend({
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
     'click .js-editItem': 'editItem',
-    'click .js-deleteItem': 'deleteItem'
+    'click .js-deleteItem': 'deleteItem',
+    'click .js-cancelItem': 'storeClick',
+    'click .js-saveItem': 'saveItem'
   },
 
   initialize: function (options) {
@@ -64,7 +66,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    this.$el.appendTo('#content');
+    $('#content').html(this.$el);
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       var userPageID;
@@ -176,6 +178,7 @@ module.exports = Backbone.View.extend({
     }
     this.itemEdit.url = this.options.userModel.get('server')+"set_contract";
     this.itemEditView = new itemEditView({model:this.itemEdit, el: '.js-list5'});
+    this.subViews.push(this.itemEditView);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'), "itemEdit");
   },
 
@@ -255,6 +258,13 @@ module.exports = Backbone.View.extend({
 
   deleteItem: function(){
 
+  },
+
+  saveItem: function(){
+    if(this.itemEditView){
+      console.log("saveItem");
+      this.itemEditView.saveChanges();
+    }
   },
 
 
