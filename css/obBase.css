@@ -472,11 +472,11 @@ h4,h5,h6 {
 
 .flex-border > .flexRow > .flexRow {
   /* containing row has a list of rows inside it */
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid #327EB8;
 }
 
 .box-border {
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid #327EB8;
 }
 
 .txtField {
@@ -949,6 +949,14 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   margin-right: 5px;
 }
 
+.margin0 {
+  margin: 0;
+}
+
 .padding17px {
   padding: 17px;
+}
+
+.scrollOverflow {
+  overflow: scroll !important;
 }

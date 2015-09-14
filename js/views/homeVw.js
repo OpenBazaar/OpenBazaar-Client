@@ -1,5 +1,6 @@
 var _ = require('underscore'),
     Backbone = require('backbone'),
+    Moment = require('moment'),
     $ = require('jquery');
 Backbone.$ = $;
 var fs = require('fs'),
@@ -150,6 +151,9 @@ module.exports = Backbone.View.extend({
     var storeList = new storeListView({model: fakeStores, el: '.js-list2'});
     this.subViews.push(itemList,storeList);
     this.hideList1();
+
+    //render current date
+    $('.js-currentDate').html(Moment().format('MMMM Do, YYYY'));
   },
 
   homeItemsClick: function(e){
