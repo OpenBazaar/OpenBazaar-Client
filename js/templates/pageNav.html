@@ -53,77 +53,14 @@
           <div class="flexContainer flex-border" id="homeModal-languageList">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
+                <input type="text" autofocus="autofocus" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-languageList homeModal-settings">
+            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflow">
             </ul>
           </div>
           <div class="bar barFlush">
             <a class="btn btn-bar btn-wide js-accordianNext"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
-        <div class="accordian-child">
-          <div class="bar barTxt h6">
-            <%= polyglot.t('onboarding.contributors', {smart_count: 247}) %>
-          </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch">
-            <div class="flexRow">
-              <div class="flexRow">
-                <div class="rowItem">
-                  Luis Hammond &mdash; <span class="txt-fade">Developer</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Isabel Taylor &mdash; <span class="txt-fade">Marketing</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Tami Goodwin &mdash; <span class="txt-fade">Design</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Bert Pierce &mdash; <span class="txt-fade">Icon creator</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Jeffery Leonard &mdash; <span class="txt-fade">Windows installer</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Mike Wolf &mdash; <span class="txt-fade">Design Lead</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Dolores Bennett &mdash; <span class="txt-fade">Mobile</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Jose Patrick &mdash; <span class="txt-fade">Strategy</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Inez Stokes &mdash; <span class="txt-fade">Developer</span>
-                </div>
-              </div>
-              <div class="flexRow">
-                <div class="rowItem">
-                  Cecelia Gonzalez &mdash; <span class="txt-fade">Developer</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bar">
-            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('onboarding.configure') %></a>
           </div>
         </div>
         <div class="accordian-child">
@@ -133,7 +70,7 @@
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
             <div class="flexRow">
               <div class="rowItem">
-                <p><%= polyglot.t('onboarding.disclaimer_body') %></p>
+                <p class="margin0"><%= polyglot.t('onboarding.disclaimer_body') %></p>
               </div>
             </div>
           </div>
@@ -152,7 +89,7 @@
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-countryList homeModal-settings">
+            <ul class="flexRow list js-homeModal-countryList homeModal-settings scrollOverflow">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -170,7 +107,7 @@
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-currencyList homeModal-settings">
+            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflow">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -188,7 +125,7 @@
                 <input type="text" class="search txtField txtField-bar" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings">
+            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflow">
               <li class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
@@ -383,16 +320,14 @@
           </div>
         </div>
         <div class="accordian-child">
-          <div class="bar barTxt h5 txt-center">
+          <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.handle') %>
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch">
             <div class="flexRow">
               <div class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect">
-                  <p>
-                    <%= polyglot.t('onboarding.knownAs') %> <%= handle %>. <%= polyglot.t('onboarding.wouldYou') %>
-                  </p>
+                  <p class="margin0"><%= polyglot.t('onboarding.knownAs') %> <%= handle %>.</p>
                 </div>
               </div>
               <div class="txtFieldWrapper txtFieldWrapper-bar hide">

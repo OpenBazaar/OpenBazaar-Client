@@ -81,7 +81,7 @@ module.exports = Backbone.Model.extend({
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
           configure: "Configure your experience",
           disclaimer_title: "Disclaimer",
-          disclaimer_body: "disclaimer text",
+          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.<br /><br />OpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.<br /><br />OpenBazaar users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.<br /><br />The OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.<br /><br />By using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
           yourCountry: "Your country",
           localCurrency: "Local currency",
           LanguagePlaceholder: "Search for a language",

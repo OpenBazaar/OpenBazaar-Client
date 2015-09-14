@@ -64,6 +64,8 @@ module.exports = Backbone.View.extend({
           return parseInt(accWin.css('left').replace("px","")) - accWidth;
         });
       }
+      // focus search input
+      $(this).closest('.accordian-child').next('.accordian-child').find('.search').focus();
     });
     acc.find('.js-accordianPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
