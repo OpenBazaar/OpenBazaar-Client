@@ -17,6 +17,8 @@ module.exports = Backbone.View.extend({
     'change .js-itemImageUpload': 'uploadImage',
     'dragenter .js-dropImage': 'dropImageEnter',
     'dragover .js-dropImage': 'dropImageOver',
+    'dragend .js-dropImage': 'dropImageEnd',
+    'dragleave .js-dropImage': 'dropImageEnd',
     'drop .js-dropImage': 'dropImageDrop'
   },
 
@@ -27,7 +29,6 @@ module.exports = Backbone.View.extend({
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server')+"get_image?hash="+hash);
     });
-    console.log(this.combinedImagesArray);
     //add images hashes to the images model
     this.model.set('combinedImagesArray', this.combinedImagesArray);
     //add empty images array for new imges
@@ -44,6 +45,17 @@ module.exports = Backbone.View.extend({
       self.setFormValues();
       //activate tags plugin
       self.inputKeyword = new Taggle('inputKeyword');
+      // prevent the body from picking up drag actions
+      //TODO: make these nice backbone events
+      $(document.body).bind("dragover", function(e) {
+        e.preventDefault();
+        return false;
+      });
+
+      $(document.body).bind("drop", function(e){
+        e.preventDefault();
+        return false;
+      });
     });
     return this;
   },
@@ -93,7 +105,6 @@ module.exports = Backbone.View.extend({
     var self = this;
     var newFiles = $(e.target)[0].files;
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
-    console.log(imageArray);
     __.each(newFiles, function(newFile){
       var fileURL = URL.createObjectURL(newFile);
       imageArray.push(fileURL);
@@ -110,30 +121,52 @@ module.exports = Backbone.View.extend({
   dropImageOver: function(e){
     e.stopPropagation();
     e.preventDefault();
+    $(e.target).closest('.js-dropImage').find('.itemImg').addClass('box-Dashed');
+  },
+
+  dropImageEnd: function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    $('.js-dropImage').find('.itemImg').removeClass('box-Dashed');
   },
 
   dropImageDrop: function(e){
+    var self = this;
     e.stopPropagation();
     e.preventDefault();
-    var dt = e.dataTransfer;
-    var files = dt.files;
-    //handleFiles(files);
+    var dt = e.originalEvent.dataTransfer;
+    var newFiles = dt.files;
+    var imageArray = __.clone(this.model.get("combinedImagesArray"));
+    __.each(newFiles, function(newFile){
+      var fileURL = URL.createObjectURL(newFile);
+      imageArray.push(fileURL);
+    });
+    console.log("dropImageDrop array");
+    console.log(imageArray);
+    this.model.set("combinedImagesArray", imageArray);
+    this.updateImages();
+    $('.js-dropImage').find('.itemImg').removeClass('box-Dashed');
   },
 
   updateImages: function(){
     var self = this;
     var subImageDivs = this.$el.find('.js-editItemSubImage');
-    console.log("subImageDivs "+ subImageDivs);
     var imageArray = this.model.get("combinedImagesArray");
+    console.log("updateImages array");
+    console.log(imageArray);
+    console.log("subImageDivs.length "+ subImageDivs.length);
     __.each(imageArray, function(imageURL, i){
+      console.log(i + imageURL);
       if(i === 0){
         self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')');
       }else{
-        if(i < subImageDivs.length) {
-          $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
+        if(i <= subImageDivs.length) {
+          $(subImageDivs[i-1]).css('background-image', 'url(' + imageURL + ')');
+          console.log("add to subImage "+ i-1);
         }else{
           $('<div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url('+imageURL+');"></div>')
               .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
+          console.log("new subImage "+ i-1);
         }
       }
     });
