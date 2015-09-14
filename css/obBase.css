@@ -149,6 +149,12 @@ input[type="number"] {
   padding-right: 0;
 }
 
+.flexRow.negPad {
+  /* use to compensate for first and last margins to items in the row if you can't use flex justification */
+  margin: 0 -5px 0 -10px;
+  width: auto;
+}
+
 .flexRow .flexCol-12 {
   /* normally you can make it 100% wide by not using a column. This is here if you need to switch column sizes dynamically. */
   width: 100%;
@@ -187,8 +193,8 @@ input[type="number"] {
 }
 
 .itemImg {
-  height: 250px;
-  width: 250px;
+  height: 240px;
+  width: 240px;
   background-size: cover;
   background-position: center;
   border-radius: 4px;
@@ -204,6 +210,7 @@ input[type="number"] {
 .itemImg.itemImg-small {
   height: 82px;
   width: 82px;
+  margin: 0 5px 10px 5px;
 }
 
 .rowItem {
@@ -270,6 +277,15 @@ input[type="number"] {
 
 .rowTop20 {
   margin-top: 20px;
+}
+
+.pad10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pad10Right {
+  padding-right: 10px;
 }
 
 .pad15 {

@@ -1,30 +1,31 @@
-<form action="<%- server %>set_contract" method="post" enctype="multipart/form-data" id="contract">
-  <div class="flexRow">
-    <div class="flexRow bar barTxt pad20">
-      <a class="js-returnToStore"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a>&nbsp;>&nbsp;<%= vendor_offer.listing.item.title %>
-    </div>
+
+<div class="flexRow">
+  <div class="flexRow bar barTxt pad20">
+    <a class="js-returnToStore"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a>&nbsp;>&nbsp;<%= vendor_offer.listing.item.title %>
   </div>
-  <div class="flexRow flex-border">
-    <div class="flexRow flexExpand">
-      <div class="flexCol-5 pad20">
-        <div class="uploadPhotoControls">
-          <p class="txt-center"><%= polyglot.t('UploadPhotos') %></p>
-          <input type="file" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
-          <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
-        </div>
-        <div class="itemImg itemImg-large row10 rowTop20 box-border js-editItemMainImage js-dropImage"
-        <% if(vendor_offer.listing.item.image_hashes.length > 0) { %>
-        style="background-image: url(<%- combinedImagesArray[0] %>);"
-        <%}%>></div>
-        <div class="flexRow row20 js-editItemSubImagesWrapper">
-          <% _.each(combinedImagesArray, function(data, i) {
-          if(i != 0){%>
-          <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);"></div>
-          <% } }); %>
-          <div class="itemImg itemImg-small box-border js-editItemEmptyImage"><i class="ion-plus-circled icon-centered icon-large txt-fade"></i> </div>
-        </div>
+</div>
+<div class="flexRow flex-border">
+  <div class="flexRow flexExpand">
+    <div class="flexCol-5 pad20">
+      <div class="uploadPhotoControls">
+        <p class="txt-center"><%= polyglot.t('UploadPhotos') %></p>
+        <input type="file" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
+        <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
       </div>
-      <div class="flexCol-7">
+      <div class="itemImg itemImg-large row10 rowTop20 box-border js-editItemMainImage js-dropImage"
+      <% if(vendor_offer.listing.item.image_hashes.length > 0) { %>
+      style="background-image: url(<%- combinedImagesArray[0] %>);"
+      <%}%>></div>
+      <div class="flexRow row20 negPad js-editItemSubImagesWrapper">
+        <% _.each(combinedImagesArray, function(data, i) {
+        if(i != 0){%>
+        <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);"></div>
+        <% } }); %>
+        <div class="itemImg itemImg-small box-border js-editItemEmptyImage"><i class="ion-plus-circled icon-centered icon-large txt-fade"></i> </div>
+      </div>
+    </div>
+    <div class="flexCol-7">
+      <form action="<%- server %>set_contract" method="post" enctype="multipart/form-data" id="contract">
         <div class="flex-border">
           <div class="flexRow">
             <div class="flexRow">
@@ -267,7 +268,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
-</form>
+</div>
