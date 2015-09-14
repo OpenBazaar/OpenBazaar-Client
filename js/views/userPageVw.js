@@ -58,7 +58,7 @@ module.exports = Backbone.View.extend({
         self.render();
       },
       error: function(model, response){
-        console.log("User page information fetch failed: " + response.statusText);
+        console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
         alert("User Page cannot be read");
       }
     });

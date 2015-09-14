@@ -55,6 +55,8 @@ module.exports = Backbone.Model.extend({
         Free: "Free",
         Category: "Category",
         ProcessingTime: "Processing Time",
+        UploadPhotos: "Upload Photos",
+        DragOrUploadPhotos: "Drag or upload photos",
         nav: {
           searchPlaceholder: "Enter a handle or a keyword",
           myPage: "My Page",
@@ -137,6 +139,8 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categoría",
         ProcessingTime: "Tiempo de procesamiento",
+        UploadPhotos: "Subir fotos",
+        DragOrUploadPhotos: "Arrastre o subir fotos",
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi página",

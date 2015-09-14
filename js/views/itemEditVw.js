@@ -13,10 +13,25 @@ module.exports = Backbone.View.extend({
     'click .js-priceBtn-local': 'priceToLocal',
     'click .js-priceBtn-btc': 'priceToBTC',
     'click #shippingFreeTrue': 'disableShipping',
-    'click #shippingFreeFalse': 'enableShipping'
+    'click #shippingFreeFalse': 'enableShipping',
+    'change .js-itemImageUpload': 'uploadImage',
+    'dragenter .js-dropImage': 'dropImageEnter',
+    'dragover .js-dropImage': 'dropImageOver',
+    'drop .js-dropImage': 'dropImageDrop'
   },
 
   initialize: function(){
+    var self=this;
+    var hashArray = this.model.get('vendor_offer').listing.item.image_hashes;
+    this.combinedImagesArray = [];
+    __.each(hashArray, function(hash){
+      self.combinedImagesArray.push(self.model.get('server')+"get_image?hash="+hash);
+    });
+    console.log(this.combinedImagesArray);
+    //add images hashes to the images model
+    this.model.set('combinedImagesArray', this.combinedImagesArray);
+    //add empty images array for new imges
+    this.model.set({'uploadedImages': []});
     this.render();
     this.listenTo('this.model:displayPrice', 'change', this.updatePrice);
     this.listenTo('this.model:venderBTCPrice', 'change', this.updatePrice);
@@ -74,8 +89,59 @@ module.exports = Backbone.View.extend({
     this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc').prop('disabled', false);
   },
 
+  uploadImage: function(e){
+    var self = this;
+    var newFiles = $(e.target)[0].files;
+    var imageArray = __.clone(this.model.get("combinedImagesArray"));
+    console.log(imageArray);
+    __.each(newFiles, function(newFile){
+      var fileURL = URL.createObjectURL(newFile);
+      imageArray.push(fileURL);
+    });
+    this.model.set("combinedImagesArray", imageArray);
+    this.updateImages();
+  },
+
+  dropImageEnter: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+  },
+
+  dropImageOver: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+  },
+
+  dropImageDrop: function(e){
+    e.stopPropagation();
+    e.preventDefault();
+    var dt = e.dataTransfer;
+    var files = dt.files;
+    //handleFiles(files);
+  },
+
+  updateImages: function(){
+    var self = this;
+    var subImageDivs = this.$el.find('.js-editItemSubImage');
+    console.log("subImageDivs "+ subImageDivs);
+    var imageArray = this.model.get("combinedImagesArray");
+    __.each(imageArray, function(imageURL, i){
+      if(i === 0){
+        self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')');
+      }else{
+        if(i < subImageDivs.length) {
+          $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
+        }else{
+          $('<div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url('+imageURL+');"></div>')
+              .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
+        }
+      }
+    });
+  },
+
   saveChanges: function(){
     console.log("save changes");
     console.log(this.inputKeyword.getTags());
+    //just use normal ajax here
   }
 });

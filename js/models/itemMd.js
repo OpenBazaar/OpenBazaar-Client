@@ -8,6 +8,8 @@ module.exports = Backbone.Model.extend({
     userCurrencyCode: "", //set locally, not by server
     itemBuyable: true, //set locally, not by server
     itemHash: "", //set locally, not by server
+    images: [], //array of uploaded images to be sent to the server
+    combinedImagesArray: [], //tracks uploaded and old images
     "vendor_offer": {
       "signature": "",
           "listing": {
