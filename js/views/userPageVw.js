@@ -177,6 +177,11 @@ module.exports = Backbone.View.extend({
       });
     }
     this.itemEdit.url = this.options.userModel.get('server')+"set_contract";
+    //add the user information
+    this.itemEdit.set({user: self.options.userModel.toJSON()});
+    if(this.itemEditView){
+      this.itemEditView.undelegateEvents();
+    }
     this.itemEditView = new itemEditView({model:this.itemEdit, el: '.js-list5'});
     this.subViews.push(this.itemEditView);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'), "itemEdit");
@@ -188,7 +193,6 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state, hash) {
-    console.log("setState url "+ Backbone.history.getFragment());
     if(state === "item"){
       this.renderItem(hash);
     }else if (state){
@@ -262,7 +266,6 @@ module.exports = Backbone.View.extend({
 
   saveItem: function(){
     if(this.itemEditView){
-      console.log("saveItem");
       this.itemEditView.saveChanges();
     }
   },

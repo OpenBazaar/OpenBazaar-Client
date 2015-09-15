@@ -25,9 +25,9 @@ module.exports = Backbone.Model.extend({
               "free": true
         },
         "item": {
-          "category": "",
-              "sku": "",
-              "description": "",
+          "category": "None",
+              "sku": "0",
+              "description": "None",
               "price_per_unit": {
             "fiat": {
               "price": 0,
@@ -35,7 +35,7 @@ module.exports = Backbone.Model.extend({
             }
           },
           "title": "New Item",
-              "process_time": "",
+              "process_time": "0",
               "image_hashes": [],
               "nsfw": false,
               "keywords": [],
@@ -63,7 +63,7 @@ module.exports = Backbone.Model.extend({
         ],
             "policy": {
           "terms_conditions": "None",
-              "returns": ""
+              "returns": "None"
         },
         "id": {
           "pubkeys": {
@@ -74,7 +74,7 @@ module.exports = Backbone.Model.extend({
               "blockchain_id": ""
         },
         "metadata": {
-          "category": "",
+          "category": "None",
               "version": "",
               "category_sub": "",
               "expiry": ""

@@ -38,6 +38,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Returns",
         Ampersand: "&",
         ShipsFrom: "Ships From",
+        ShipsTo: "Ships To",
         Customize: "Customize",
         Save: "Save",
         Changes: "Changes",
@@ -57,6 +58,7 @@ module.exports = Backbone.Model.extend({
         ProcessingTime: "Processing Time",
         UploadPhotos: "Upload Photos",
         DragOrUploadPhotos: "Drag or upload photos",
+        ExpirationDate: "Expiration Date",
         nav: {
           searchPlaceholder: "Enter a handle or a keyword",
           myPage: "My Page",
@@ -122,6 +124,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Devoluciones",
         Ampersand: "y",
         ShipsFrom: "Ships From",
+        ShipsTo: "Realiza envíos a",
         Customize: "Personaliza",
         Save: "Guardar",
         Changes: "Cambios",
@@ -141,6 +144,7 @@ module.exports = Backbone.Model.extend({
         ProcessingTime: "Tiempo de procesamiento",
         UploadPhotos: "Subir fotos",
         DragOrUploadPhotos: "Arrastre o subir fotos",
+        ExpirationDate: "Fecha de caducidad",
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi página",

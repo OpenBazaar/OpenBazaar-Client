@@ -792,6 +792,14 @@ input[type="number"].fieldItem:focus:invalid {
   outline: none;
 }
 
+.fieldItem .fieldItem-selectWrapper select[multiple] {
+  height: 150px;
+}
+
+.fieldItem .fieldItem-selectWrapper select[multiple]:focus {
+  height: 500px;
+}
+
 .fieldItem .fieldItem-selectWrapper:after {
   content: "\f104";
   font-family: "Ionicons";
@@ -800,6 +808,10 @@ input[type="number"].fieldItem:focus:invalid {
   top: 0;
   right: 20px;
   pointer-events: none;
+}
+
+.fieldItem .fieldItem-selectWrapper.noIcon:after {
+  content: "";
 }
 
 .fieldItem-textarea {

@@ -20,7 +20,6 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     __.each(this.chooseCountries.models, function(item){
-
       self.renderItem(item);
     },this);
   },

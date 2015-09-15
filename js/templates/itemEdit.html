@@ -10,7 +10,6 @@
       <div class="row10 rowTop20 js-dropImage">
         <div class="uploadPhotoControls">
           <p class="txt-center"><%= polyglot.t('UploadPhotos') %></p>
-          <input type="file" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
           <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
         </div>
         <div class="itemImg itemImg-large box-border js-editItemMainImage"
@@ -27,7 +26,9 @@
       </div>
     </div>
     <div class="flexCol-7">
-      <form action="<%- server %>set_contract" method="post" enctype="multipart/form-data" id="contract">
+      <form action="<%- server %>set_contract" method="post" enctype="multipart/form-data" id="contractForm">
+        <input type="text" name="shipping_origin" id="inputShippingOrigin" class="hide" />
+        <input type="file" name="images" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
         <div class="flex-border">
           <div class="flexRow">
             <div class="flexRow">
@@ -42,7 +43,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.title %>" required>
+                <input name="title" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.title %>" required>
               </div>
             </div>
             <div class="flexRow js-inputParent">
@@ -52,6 +53,8 @@
                 </div>
               </div>
               <div class="flexCol-7">
+                <input type="text" name="price" id="inputPrice" class="hide" />
+                <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
                 <input type="number" step="any" min="0" class="fieldItem js-priceLocal"  id="priceLocal" value="<%= vendor_offer.listing.item.price_per_unit.fiat.price %>" required>
                 <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="priceBtc" value="<%= venderBTCPrice %>" required>
               </div>
@@ -67,10 +70,21 @@
             <div class="flexRow">
               <div class="flexCol-2">
                 <div class="fieldItem">
+                  <%= polyglot.t('ExpirationDate') %>
+                </div>
+              </div>
+              <div class="flexCol-10">
+                <input type="datetime-local" name="expiration_date">
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-2">
+                <div class="fieldItem">
                   <%= polyglot.t('Keywords') %>
                 </div>
               </div>
               <div class="flexCol-10">
+                <input type="text" name="keywords" id="realInputKeywords" class="hide" />
                 <div class="fieldItem" id="inputKeyword"></div>
               </div>
             </div>
@@ -83,7 +97,7 @@
               <div class="flexCol-10">
                 <div class="fieldItem">
                   <div class="fieldItem-selectWrapper">
-                    <select>
+                    <select name="metadata_category" >
                       <option>--</option>
                       <option>Physical Item</option>
                       <option>Digital Item</option>
@@ -100,7 +114,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.category %>">
+                <input name="category" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.category %>">
               </div>
             </div>
             <div class="flexRow">
@@ -110,15 +124,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <div class="fieldItem">
-                  <div class="fieldItem-selectWrapper">
-                    <select id="selectCondition">
-                      <option>--</option>
-                      <option value="New">New</option>
-                      <option value="Used">Used</option>
-                    </select>
-                  </div>
-                </div>
+                <input name="condition" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.condition %>" required>
               </div>
             </div>
             <div class="flexRow">
@@ -129,13 +135,8 @@
               </div>
               <div class="flexCol-10">
                 <div class="fieldItem">
-                  <div class="fieldItem-selectWrapper">
-                    <select id="selectNSFW">
-                      <option>--</option>
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
-                    </select>
-                  </div>
+                  <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
+                  <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
                 </div>
               </div>
             </div>
@@ -146,7 +147,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <textarea rows="8" class="fieldItem-textarea"><%= vendor_offer.listing.item.description %></textarea>
+                <textarea name="description" rows="8" class="fieldItem-textarea"><%= vendor_offer.listing.item.description %></textarea>
               </div>
             </div>
             <div class="flexRow">
@@ -156,7 +157,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.sku %>">
+                <input name="sku" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.sku %>">
               </div>
             </div>
             <div class="flexRow">
@@ -171,7 +172,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <input type="text" class="fieldItem" value="<%= vendor_offer.listing.item.process_time %>">
+                <input name="process_time" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.process_time %>">
               </div>
             </div>
             <div class="flexRow">
@@ -181,8 +182,8 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <input type="radio" class="fieldItem" id="shippingFreeTrue" name="shippingFree" /><label for="shippingFreeTrue">Yes</label>
-                <input type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" checked/><label for="shippingFreeFalse">No</label>
+                <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" name="shippingFree" value="true" /><label for="shippingFreeTrue">Yes</label>
+                <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" value="false" checked/><label for="shippingFreeFalse">No</label>
               </div>
             </div>
             <div class="flexRow js-inputParent">
@@ -192,6 +193,8 @@
                 </div>
               </div>
               <div class="flexCol-4">
+                <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
+                <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
                 <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceLocalLocal"  value="0">
                 <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceLocalBtc" value="0">
               </div>
@@ -211,6 +214,7 @@
                 </div>
               </div>
               <div class="flexCol-4">
+                <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
                 <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceInternationalLocal"  value="0">
                 <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc value="0">
               </div>
@@ -224,13 +228,28 @@
               </div>
             </div>
             <div class="flexRow">
+              <div class="flexCol-2">
+                <div class="fieldItem">
+                  <%= polyglot.t('ShipsTo') %>
+                </div>
+              </div>
+              <div class="flexCol-10">
+                <div class="fieldItem">
+                  <div class="fieldItem-selectWrapper noIcon">
+                    <select name="ships_to" id="shipsTo" multiple size="5">
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow">
               <div class="flexCol-5">
                 <div class="fieldItem">
                   <%= polyglot.t('Local') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %>
                 </div>
               </div>
               <div class="flexCol-7">
-                <input type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.domestic %>"  required>
+                <input name="est_delivery_domestic" type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.domestic %>"  required>
               </div>
             </div>
             <div class="flexRow">
@@ -240,7 +259,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <input type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.international %>">
+                <input name="est_delivery_international" type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.international %>">
               </div>
             </div>
             <div class="flexRow">
@@ -255,7 +274,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <textarea rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.terms_conditions %></textarea>
+                <textarea name="terms_conditions" rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.terms_conditions %></textarea>
               </div>
             </div>
             <div class="flexRow">
@@ -265,7 +284,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <textarea rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.returns %></textarea>
+                <textarea name="returns" rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.returns %></textarea>
               </div>
             </div>
           </div>

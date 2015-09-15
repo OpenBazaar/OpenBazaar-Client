@@ -3,7 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
-    getBTPrice = require('../utils/getBitcoinPrice'),
+    countriesModel = require('../models/countriesMd'),
     taggle = require('taggle');
 
 
@@ -34,8 +34,6 @@ module.exports = Backbone.View.extend({
     //add empty images array for new imges
     this.model.set({'uploadedImages': []});
     this.render();
-    this.listenTo('this.model:displayPrice', 'change', this.updatePrice);
-    this.listenTo('this.model:venderBTCPrice', 'change', this.updatePrice);
   },
 
   render: function(){
@@ -62,7 +60,15 @@ module.exports = Backbone.View.extend({
 
   setFormValues: function(){
     this.$el.find('#selectCondition').val(this.model.get('vendor_offer').listing.item.condition);
-    this.$el.find('#selectNSFW').val(String(this.model.get('vendor_offer').listing.item.nsfw));
+    this.$el.find('input[name=nsfw]').val(String(this.model.get('vendor_offer').listing.item.nsfw));
+    this.$el.find('input[name=free_shipping]').val(String(this.model.get('vendor_offer').listing.shipping.free));
+    //add all countries to the Ships To select list
+    var countries = new countriesModel();
+    var countryList = countries.get('countries');
+    var shipsTo = this.$el.find('#shipsTo');
+    __.each(countryList, function(country){
+      shipsTo.append('<option value="'+country.dataName+'">'+country.name+'</option>');
+    });
   },
 
   priceToLocal: function(e){
@@ -141,8 +147,6 @@ module.exports = Backbone.View.extend({
       var fileURL = URL.createObjectURL(newFile);
       imageArray.push(fileURL);
     });
-    console.log("dropImageDrop array");
-    console.log(imageArray);
     this.model.set("combinedImagesArray", imageArray);
     this.updateImages();
     $('.js-dropImage').find('.itemImg').removeClass('box-Dashed');
@@ -152,29 +156,39 @@ module.exports = Backbone.View.extend({
     var self = this;
     var subImageDivs = this.$el.find('.js-editItemSubImage');
     var imageArray = this.model.get("combinedImagesArray");
-    console.log("updateImages array");
-    console.log(imageArray);
-    console.log("subImageDivs.length "+ subImageDivs.length);
     __.each(imageArray, function(imageURL, i){
-      console.log(i + imageURL);
       if(i === 0){
         self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')');
       }else{
         if(i <= subImageDivs.length) {
           $(subImageDivs[i-1]).css('background-image', 'url(' + imageURL + ')');
-          console.log("add to subImage "+ i-1);
         }else{
           $('<div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url('+imageURL+');"></div>')
               .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
-          console.log("new subImage "+ i-1);
         }
       }
     });
   },
 
   saveChanges: function(){
-    console.log("save changes");
-    console.log(this.inputKeyword.getTags());
-    //just use normal ajax here
+    var cCode = this.model.get('user').currencyCode;
+    this.$el.find('#inputCurrencyCode').val(cCode);
+    this.$el.find('#inputShippingCurrencyCode').val(cCode);
+    this.$el.find('#inputShippingOrigin').val(this.model.get('user').country);
+    this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
+    if(cCode === "BTC"){
+      this.$el.find('#inputPrice').val(this.$el.find('.js-priceBtc').val());
+      this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalBtc').val());
+      this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalBtc').val());
+    }else{
+      this.$el.find('#inputPrice').val(this.$el.find('.js-priceLocal').val());
+      this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
+      this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
+    }
+    this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
+
+    this.$el.find('#contractForm').submit();
+    //trigger the store tab in the parent view
+    $('.js-cancelItem').trigger();
   }
 });
