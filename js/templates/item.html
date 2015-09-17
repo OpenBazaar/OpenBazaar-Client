@@ -1,16 +1,16 @@
 <div class="flexRow">
   <div class="flexRow bar barTxt pad20">
-    <a class="js-returnToStore"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a>&nbsp;>&nbsp;<%= vendor_offer.listing.item.title %>
+    <a class="js-returnToStore">All Items</a>&nbsp;>&nbsp;<%= vendor_offer__listing__item__title %>
   </div>
 </div>
 <div class="flexRow">
   <div class="flexCol-5 pad20">
     <div class="itemImg itemImg-large row10 rowTop20"
-    <% if(vendor_offer.listing.item.image_hashes.length > 0) { %>
-    style="background-image: url(<%- server %>get_image?hash=<%- vendor_offer.listing.item.image_hashes[0] %>);"
+    <% if(vendor_offer__listing__item__image_hashes.length > 0) { %>
+    style="background-image: url(<%- server %>get_image?hash=<%- vendor_offer__listing__item__image_hashes[0] %>);"
     <%}%>></div>
   <div class="flexRow row20">
-    <% _.each(vendor_offer.listing.item.image_hashes, function(data, i) {
+    <% _.each(vendor_offer__listing__item__image_hashes, function(data, i) {
     if(i != 0){%>
     <div class="itemImg itemImg-small" style="background-image: url(<%- server %>get_image?hash=<%- data %>);"></div>
     <% } }); %>
@@ -18,8 +18,8 @@
 </div>
 <div class="flexCol-7 pad20Right">
   <div class="row20 rowTop20 clearfix">
-    <h5><%= vendor_offer.listing.item.title %></h5>
-    <p><%= venderBTCPrice %> btc (<%= displayPrice %>) &#8226; <%= vendor_offer.listing.item.condition %></p>
+    <h5><%= vendor_offer__listing__item__title %></h5>
+    <p><%= venderBTCPrice %> btc (<%= displayPrice %>) &#8226; <%= vendor_offer__listing__item__condition %></p>
     <% if(itemBuyable) { %>
     <div class="btn btn-light btn-txt js-buyButton"><%= polyglot.t('BUY NOW') %></div>
     <% } %>
@@ -33,7 +33,7 @@
     <div class="flexContainer flex-border custCol-primary js-description js-tabTarg">
       <div class="flexRow">
         <div class="rowItem">
-          <%= vendor_offer.listing.item.description %>
+          <%= vendor_offer__listing__item__description %>
         </div>
       </div>
     </div>
@@ -47,9 +47,9 @@
     <div class="flexContainer flex-border custCol-primary js-shipping js-tabTarg hide">
       <div class="flexRow">
         <div class="rowItem">
-          <p><%= polyglot.t('ShipsFrom') %>: <%= vendor_offer.listing.shipping.shipping_origin %></p>
-          <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('domestic') %>): <%= vendor_offer.listing.shipping.est_delivery.domestic %></p>
-          <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('international') %>): <%= vendor_offer.listing.shipping.est_delivery.international %></p>
+          <p><%= polyglot.t('ShipsFrom') %>: <%= vendor_offer__listing__shipping__shipping_origin %></p>
+          <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('domestic') %>): <%= vendor_offer__listing__shipping__est_delivery__domestic %></p>
+          <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('international') %>): <%= vendor_offer__listing__shipping__est_delivery__international %></p>
         </div>
       </div>
     </div>

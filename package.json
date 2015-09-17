@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "backbone": "^1.2.1",
+    "backbone.linear": "^1.0.3",
     "jquery": "^2.1.4",
     "node-polyglot": "^0.4.3",
     "taggle": "^1.5.1",

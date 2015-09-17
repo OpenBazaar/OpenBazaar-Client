@@ -43,7 +43,7 @@ module.exports = Backbone.Model.extend({
         });
       }else{
         vendorBitCoinRatio = 1;
-        vendorBitCoinPrice = vendorPrice;
+        vendorBitCoinPrice = Number((self.get("price")));
       }
     }else{
       this.set({displayPrice: "Price Unavailable"});

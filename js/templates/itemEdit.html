@@ -1,7 +1,7 @@
 
 <div class="flexRow">
   <div class="flexRow bar barTxt pad20">
-    <a class="js-returnToStore"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a>&nbsp;>&nbsp;<%= vendor_offer.listing.item.title %>
+    <a class="js-returnToStore"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a>&nbsp;>&nbsp;<%= vendor_offer__listing__item__title %>
   </div>
 </div>
 <div class="flexRow flex-border">
@@ -13,7 +13,7 @@
           <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
         </div>
         <div class="itemImg itemImg-large box-border js-editItemMainImage"
-        <% if(vendor_offer.listing.item.image_hashes.length > 0) { %>
+        <% if(vendor_offer__listing__item__image_hashes.length > 0) { %>
         style="background-image: url(<%- combinedImagesArray[0] %>);"
         <%}%>></div>
       </div>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="flexCol-7">
-      <form action="<%- server %>set_contract" method="post" enctype="multipart/form-data" id="contractForm">
+      <form action="<%- server %>contracts" method="post" enctype="multipart/form-data" id="contractForm">
         <input type="text" name="shipping_origin" id="inputShippingOrigin" class="hide" />
         <input type="file" name="images" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
         <div class="flex-border">
@@ -43,7 +43,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input name="title" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.title %>" required>
+                <input name="title" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__title %>" required>
               </div>
             </div>
             <div class="flexRow js-inputParent">
@@ -55,26 +55,26 @@
               <div class="flexCol-7">
                 <input type="text" name="price" id="inputPrice" class="hide" />
                 <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
-                <input type="number" step="any" min="0" class="fieldItem js-priceLocal"  id="priceLocal" value="<%= vendor_offer.listing.item.price_per_unit.fiat.price %>" required>
+                <input type="number" step="any" min="0" class="fieldItem js-priceLocal"  id="priceLocal" value="<%= vendor_offer__listing__item__price_per_unit__fiat__price %>" required>
                 <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="priceBtc" value="<%= venderBTCPrice %>" required>
               </div>
               <div class="flexCol-3">
                 <div class="fieldItem pull-right">
                   <div class="btn-togWrapper btn-togWrapper-c1">
-                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
                     <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
                   </div>
                 </div>
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-5">
                 <div class="fieldItem">
                   <%= polyglot.t('ExpirationDate') %>
                 </div>
               </div>
-              <div class="flexCol-10">
-                <input type="datetime-local" name="expiration_date">
+              <div class="flexCol-7">
+                <input type="datetime-local" name="expiration_date" required>
               </div>
             </div>
             <div class="flexRow">
@@ -97,11 +97,10 @@
               <div class="flexCol-10">
                 <div class="fieldItem">
                   <div class="fieldItem-selectWrapper">
-                    <select name="metadata_category" >
-                      <option>--</option>
-                      <option>Physical Item</option>
-                      <option>Digital Item</option>
-                      <option>Service</option>
+                    <select name="metadata_category" id="inputType">
+                      <option value="physical good" selected="selected">Physical Item</option>
+                      <option value="digital good">Digital Item</option>
+                      <option value="service">Service</option>
                     </select>
                   </div>
                 </div>
@@ -114,7 +113,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input name="category" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.category %>">
+                <input name="category" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__category %>">
               </div>
             </div>
             <div class="flexRow">
@@ -124,7 +123,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input name="condition" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.condition %>" required>
+                <input name="condition" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__condition %>" required>
               </div>
             </div>
             <div class="flexRow">
@@ -147,7 +146,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <textarea name="description" rows="8" class="fieldItem-textarea"><%= vendor_offer.listing.item.description %></textarea>
+                <textarea name="description" rows="8" class="fieldItem-textarea"><%= vendor_offer__listing__item__description %></textarea>
               </div>
             </div>
             <div class="flexRow">
@@ -157,7 +156,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input name="sku" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.sku %>">
+                <input name="sku" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__sku %>">
               </div>
             </div>
             <div class="flexRow">
@@ -172,7 +171,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <input name="process_time" type="text" class="fieldItem" value="<%= vendor_offer.listing.item.process_time %>">
+                <input name="process_time" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__process_time %>">
               </div>
             </div>
             <div class="flexRow">
@@ -201,7 +200,7 @@
               <div class="flexCol-3">
                 <div class="fieldItem pull-right">
                   <div class="btn-togWrapper btn-togWrapper-c1">
-                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
                     <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
                   </div>
                 </div>
@@ -221,7 +220,7 @@
               <div class="flexCol-3">
                 <div class="fieldItem pull-right">
                   <div class="btn-togWrapper btn-togWrapper-c1">
-                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer.listing.item.price_per_unit.fiat.currency_code %></a>
+                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
                     <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
                   </div>
                 </div>
@@ -249,7 +248,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <input name="est_delivery_domestic" type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.domestic %>"  required>
+                <input name="est_delivery_domestic" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__domestic %>"  required>
               </div>
             </div>
             <div class="flexRow">
@@ -259,7 +258,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <input name="est_delivery_international" type="text" class="fieldItem" value="<%= vendor_offer.listing.shipping.est_delivery.international %>">
+                <input name="est_delivery_international" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__international %>">
               </div>
             </div>
             <div class="flexRow">
@@ -274,7 +273,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <textarea name="terms_conditions" rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.terms_conditions %></textarea>
+                <textarea name="terms_conditions" rows="6" class="fieldItem-textarea"><%= vendor_offer__listing__policy__terms_conditions %></textarea>
               </div>
             </div>
             <div class="flexRow">
@@ -284,7 +283,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <textarea name="returns" rows="6" class="fieldItem-textarea"><%= vendor_offer.listing.policy.returns %></textarea>
+                <textarea name="returns" rows="6" class="fieldItem-textarea"><%= vendor_offer__listing__policy__returns %></textarea>
               </div>
             </div>
           </div>

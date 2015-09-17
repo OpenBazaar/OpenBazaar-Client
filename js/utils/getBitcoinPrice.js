@@ -15,31 +15,33 @@ module.exports = function(currency, callback){
     var btPrices = [];
 
     //initial call
-    $.ajax({
-      method: "GET",
-      url: "https://api.bitcoinaverage.com/ticker/global/" + currency
-    })
-        .done(function (response)
-        {
-          //console.log("bitcoinAverage: " + response['24h_avg']);
-          if($.isNumeric(response['24h_avg'])) {
-            btPrices.push(response['24h_avg']);
-          }
-        })
-        .fail(function (jqXHR, textStatus, errorThrown)
-        {
-          //console.log("bitcoinAverage request failed:");
-          //console.log(jqXHR);
-          //console.log(textStatus);
-          //console.log(errorThrown);
-        })
-        .always(function ()
-        {
-          callCoindesk();
-        });
+    //bitcoin average is hitting the rate limit
+    /*
+  $.ajax({
+    method: "GET",
+    url: "https://api.bitcoinaverage.com/ticker/global/" + currency
+  })
+      .done(function (response)
+      {
+        //console.log("bitcoinAverage: " + response['24h_avg']);
+        if($.isNumeric(response['24h_avg'])) {
+          btPrices.push(response['24h_avg']);
+        }
+      })
+      .fail(function (jqXHR, textStatus, errorThrown)
+      {
+        //console.log("bitcoinAverage request failed:");
+        //console.log(jqXHR);
+        //console.log(textStatus);
+        //console.log(errorThrown);
+      })
+      .always(function ()
+      {
+        callCoindesk();
+      });
 
-    var callCoindesk = function ()
-    {
+  var callCoindesk = function ()
+  {*/
       $.ajax({
         method: "GET",
         dataType: "json",
@@ -63,7 +65,7 @@ module.exports = function(currency, callback){
           {
             callBlockchain();
           });
-    };
+    //};
 
     var callBlockchain = function ()
     {
