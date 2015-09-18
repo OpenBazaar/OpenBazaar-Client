@@ -243,9 +243,9 @@ module.exports = Backbone.View.extend({
     //unbind any old view
     if(this.itemEditView){
       this.itemEditView.undelegateEvents();
-      this.itemEditView.remove();
     }
     this.itemEditView = new itemEditView({model:this.itemEdit, el: '.js-list5'});
+    this.listenTo(this.itemEditView, 'saveDone', this.cancelClick);
     this.subViews.push(this.itemEditView);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
@@ -301,11 +301,13 @@ module.exports = Backbone.View.extend({
   },
 
   cancelClick: function(){
+    console.log("cancelClick");
     //consider calling delete here.
     if(this.lastTab === "item") {
       this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
     } else {
       this.tabClick(this.$el.find('.js-' + this.lastTab + 'Tab'), this.$el.find('.js-' + this.lastTab));
+      this.setState(this.lastTab);
     }
   },
 

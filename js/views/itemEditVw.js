@@ -42,8 +42,7 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
-      //activate tags plugin
-      self.inputKeyword = new Taggle('inputKeyword');
+
       // prevent the body from picking up drag actions
       //TODO: make these nice backbone events
       $(document.body).bind("dragover", function(e) {
@@ -60,10 +59,9 @@ module.exports = Backbone.View.extend({
   },
 
   setFormValues: function(){
-    var typeValue = String(this.model.get('vendor_offer__listing__metadata__category'));
+    var typeValue = String(this.model.get('vendor_offer__listing__metadata__category')) || "physical good";
     this.$el.find('input[name=nsfw]').val(String(this.model.get('vendor_offer__listing__item__nsfw')));
     this.$el.find('input[name=free_shipping]').val(String(this.model.get('vendor_offer__listing__shipping__free')));
-    console.log("set type to: "+ String(this.model.get('vendor_offer__listing__metadata__category')));
     this.$el.find('#inputType').val(typeValue);
     //hide or unhide shipping based on product type
     if(typeValue === "physical good") {
@@ -80,7 +78,13 @@ module.exports = Backbone.View.extend({
     });
 
     var shipsToValue = this.model.get('vendor_offer__listing__shipping__shipping_regions');
+    //if shipsToValue is empty, set it to the user's country
+    shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
     shipsTo.val(shipsToValue);
+
+
+    //activate tags plugin
+    this.inputKeyword = new Taggle('inputKeyword');
   },
 
   priceToLocal: function(e){
@@ -223,7 +227,6 @@ module.exports = Backbone.View.extend({
       this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
       this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
     }
-    this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
 
     var formData = new FormData(this.$el.find('#contractForm')[0]);
 
@@ -237,13 +240,16 @@ module.exports = Backbone.View.extend({
         data = JSON.parse(data);
         if(self.model.get('id') && data.success === true){
           deleteThisItem();
-        }else{
-          if(data.success === false){
+          self.trigger('saveDone');
+          console.log('saveDone');
+        } else if(data.success === false){
             var errorModal = $('.js-messageModal');
             errorModal.removeClass('hide');
             errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
             errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
-          }
+        } else {
+          self.trigger('saveDone');
+          console.log('saveDone');
         }
       },
       error: function(jqXHR, status, errorThrown){
