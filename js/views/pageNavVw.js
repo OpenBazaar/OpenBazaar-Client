@@ -27,7 +27,8 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-existingHandle': 'existingHandle',
     'click .js-homeModal-cancelHandle': 'cancelHandle',
     'change .js-homeModalAvatarUpload': 'uploadAvatar',
-    'click .js-homeModalDone': 'settingsDone'
+    'click .js-homeModalDone': 'settingsDone',
+    'click .js-closeModal': 'closeModal'
   },
 
   initialize: function(){
@@ -197,6 +198,10 @@ module.exports = Backbone.View.extend({
   settingsDone: function(e){
     this.model.set('beenSet',true);
     this.$el.find('.js-homeModal').hide();
+  },
+
+  closeModal: function(e){
+    $(e.target).closest('.modal').addClass('hide');
   }
 
 });

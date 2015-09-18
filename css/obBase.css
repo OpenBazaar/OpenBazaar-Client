@@ -253,6 +253,13 @@ input[type="number"] {
   cursor: pointer;
 }
 
+.btn-cornerTR {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 .thumbnail {
   height: 30px;
   width: 30px;
@@ -324,7 +331,9 @@ input[type="number"] {
   width: 525px;
   height: 590px;
   margin: 80px auto 0 auto;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .modal.modal-navOffset .modal-child {

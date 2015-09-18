@@ -21,7 +21,7 @@
   style="background-image: url(<%- avatar_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
-  <% } %>>
+  <% } %>></div>
 </div>
 <div class="popMenu popMenu-navBar hide js-navProfileMenu">
   <a href="#userPage"><%= polyglot.t('nav.myPage') %></a>
@@ -440,5 +440,17 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="modal modal-navBlock modal-opaque js-messageModal hide">
+  <div class="modal-child modal-childMain pad20">
+    <div class="btn-cornerTR js-closeModal">
+      <h2 class="ion-close-circled"></h2>
+    </div>
+    <div class="row20 rowTop20">
+      <h1 class="txt-center js-messageModal-title"></h1>
+    </div>
+    <p class="txt-center js-messageModal-message"></p>
   </div>
 </div>

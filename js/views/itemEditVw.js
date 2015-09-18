@@ -237,6 +237,13 @@ module.exports = Backbone.View.extend({
         data = JSON.parse(data);
         if(self.model.get('id') && data.success === true){
           deleteThisItem();
+        }else{
+          if(data.success === false){
+            var errorModal = $('.js-messageModal');
+            errorModal.removeClass('hide');
+            errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+            errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          }
         }
       },
       error: function(jqXHR, status, errorThrown){
