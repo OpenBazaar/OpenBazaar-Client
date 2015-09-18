@@ -74,7 +74,7 @@
                 </div>
               </div>
               <div class="flexCol-7">
-                <input type="datetime-local" name="expiration_date" required>
+                <input type="datetime-local" name="expiration_date">
               </div>
             </div>
             <div class="flexRow">
@@ -98,7 +98,7 @@
                 <div class="fieldItem">
                   <div class="fieldItem-selectWrapper">
                     <select name="metadata_category" id="inputType">
-                      <option value="physical good" selected="selected">Physical Item</option>
+                      <option value="physical good" selected>Physical Item</option>
                       <option value="digital good">Digital Item</option>
                       <option value="service">Service</option>
                     </select>
@@ -123,7 +123,7 @@
                 </div>
               </div>
               <div class="flexCol-10">
-                <input name="condition" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__condition %>" required>
+                <input name="condition" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__condition %>">
               </div>
             </div>
             <div class="flexRow">
@@ -159,22 +159,23 @@
                 <input name="sku" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__sku %>">
               </div>
             </div>
-            <div class="flexRow">
+
+            <div class="flexRow js-shippingRow">
               <div class="fieldItem">
                 <h5 class="allCaps"><%= polyglot.t('Shipping') %></h5>
               </div>
             </div>
-            <div class="flexRow">
+            <div class="flexRow js-shippingRow">
               <div class="flexCol-5">
                 <div class="fieldItem">
                   <%= polyglot.t('ProcessingTime') %>
                 </div>
               </div>
               <div class="flexCol-7">
-                <input name="process_time" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__process_time %>">
+                <input name="process_time" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__process_time %>" required>
               </div>
             </div>
-            <div class="flexRow">
+            <div class="flexRow js-shippingRow">
               <div class="flexCol-5">
                 <div class="fieldItem">
                   <%= polyglot.t('Free') %> <%= polyglot.t('Shipping') %>
@@ -185,7 +186,7 @@
                 <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" value="false" checked/><label for="shippingFreeFalse">No</label>
               </div>
             </div>
-            <div class="flexRow js-inputParent">
+            <div class="flexRow js-inputParent js-shippingPriceRow">
               <div class="flexCol-5">
                 <div class="fieldItem">
                   <%= polyglot.t('Local') %> <%= polyglot.t('Price') %>
@@ -194,8 +195,8 @@
               <div class="flexCol-4">
                 <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
                 <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
-                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceLocalLocal"  value="0">
-                <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceLocalBtc" value="0">
+                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceLocalLocal"  value="0" required>
+                <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceLocalBtc" value="0" required>
               </div>
               <div class="flexCol-3">
                 <div class="fieldItem pull-right">
@@ -214,8 +215,8 @@
               </div>
               <div class="flexCol-4">
                 <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
-                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceInternationalLocal"  value="0">
-                <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc value="0">
+                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceInternationalLocal"  value="0"required>
+                <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc" value="0" required>
               </div>
               <div class="flexCol-3">
                 <div class="fieldItem pull-right">
@@ -226,7 +227,7 @@
                 </div>
               </div>
             </div>
-            <div class="flexRow">
+            <div class="flexRow js-shippingRow">
               <div class="flexCol-2">
                 <div class="fieldItem">
                   <%= polyglot.t('ShipsTo') %>
@@ -241,7 +242,7 @@
                 </div>
               </div>
             </div>
-            <div class="flexRow">
+            <div class="flexRow js-shippingRow">
               <div class="flexCol-5">
                 <div class="fieldItem">
                   <%= polyglot.t('Local') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %>
@@ -251,16 +252,17 @@
                 <input name="est_delivery_domestic" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__domestic %>"  required>
               </div>
             </div>
-            <div class="flexRow">
+            <div class="flexRow js-shippingRow">
               <div class="flexCol-5">
                 <div class="fieldItem">
                   <%= polyglot.t('International') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %>
                 </div>
               </div>
               <div class="flexCol-7">
-                <input name="est_delivery_international" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__international %>">
+                <input name="est_delivery_international" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__international %>" required>
               </div>
             </div>
+
             <div class="flexRow">
               <div class="fieldItem">
                 <h5 class="allCaps"><%= polyglot.t('Policy') %></h5>

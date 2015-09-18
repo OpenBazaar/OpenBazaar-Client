@@ -5,38 +5,37 @@ var Backbone = require('backbone'),
 module.exports = Backbone.LinearModel.extend({
   flatOptions : {delimiter: "__"},
   defaults: {
-    displayPrice: 0, //set locally, not by server
-    venderBTCPrice: 0, //set locally, not by server
-    userCurrencyCode: "", //set locally, not by server
-    itemBuyable: true, //set locally, not by server
-    itemHash: "", //set locally, not by server
+    displayPrice: 0, //set by userPage View
+    venderBTCPrice: 0, //set by userPage View
+    userCurrencyCode: "", //set by userPage View. This is for editing the product
+    userCountry: "", //set by userPage View. This is a country code. This is used for editing.
+    itemBuyable: true, //set by userPage View
+    itemHash: "", //set by userPage View
     images: [], //array of uploaded images to be sent to the server
     combinedImagesArray: [], //tracks uploaded and old images
 
     vendor_offer__signature: "",
-    vendor_offer__listing__shipping__shipping_regions: [
-        "UNITED_STATES"
-      ],
-    vendor_offer__listing__shipping__est_delivery__international: "N/A",
-    vendor_offer__listing__shipping__est_delivery__domestic: "N/A",
-    vendor_offer__listing__shipping__shipping_origin: "UNITED_STATES",
+    vendor_offer__listing__shipping__shipping_regions: [],
+    vendor_offer__listing__shipping__est_delivery__international: "",
+    vendor_offer__listing__shipping__est_delivery__domestic: "",
+    vendor_offer__listing__shipping__shipping_origin: "",
     vendor_offer__listing__shipping__free: true,
-    vendor_offer__listing__item__category: "None",
-    vendor_offer__listing__item__sku: "0",
-    vendor_offer__listing__item__description: "None",
+    vendor_offer__listing__item__category: "",
+    vendor_offer__listing__item__sku: "",
+    vendor_offer__listing__item__description: "",
 
     vendor_offer__listing__item__price_per_unit__fiat__price: 0,
-    vendor_offer__listing__item__price_per_unit__fiat__currency_code: "usd",
-    vendor_offer__listing__item__title: "New Item",
-    vendor_offer__listing__item__process_time: "0",
+    vendor_offer__listing__item__price_per_unit__fiat__currency_code: "",
+    vendor_offer__listing__item__title: "",
+    vendor_offer__listing__item__process_time: "",
     vendor_offer__listing__item__image_hashes: [],
     vendor_offer__listing__item__nsfw: false,
     vendor_offer__listing__item__keywords: [],
-    vendor_offer__listing__item__condition: "New",
+    vendor_offer__listing__item__condition: "",
     vendor_offer__listing__moderators: [],
-    vendor_offer__listing__policy__terms_conditions: "None",
-    vendor_offer__listing__policy__returns: "None",
-    vendor_offer__listing__metadata__category: "None",
+    vendor_offer__listing__policy__terms_conditions: "",
+    vendor_offer__listing__policy__returns: "",
+    vendor_offer__listing__metadata__category: "",
     vendor_offer__listing__metadata__version: "",
     vendor_offer__listing__metadata__category_sub: "",
     vendor_offer__listing__metadata__expiry: "",

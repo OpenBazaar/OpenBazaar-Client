@@ -12,19 +12,20 @@ module.exports = Backbone.View.extend({
   events: {
     'click .js-priceBtn-local': 'priceToLocal',
     'click .js-priceBtn-btc': 'priceToBTC',
-    'click #shippingFreeTrue': 'disableShipping',
-    'click #shippingFreeFalse': 'enableShipping',
+    'click #shippingFreeTrue': 'setFreeShipping',
+    'click #shippingFreeFalse': 'unsetFreeShipping',
     'change .js-itemImageUpload': 'uploadImage',
     'dragenter .js-dropImage': 'dropImageEnter',
     'dragover .js-dropImage': 'dropImageOver',
     'dragend .js-dropImage': 'dropImageEnd',
     'dragleave .js-dropImage': 'dropImageEnd',
-    'drop .js-dropImage': 'dropImageDrop'
+    'drop .js-dropImage': 'dropImageDrop',
+    'change #inputType': 'changeType'
   },
 
   initialize: function(){
     var self=this;
-    var hashArray = this.model.get('vendor_offer').listing.item.image_hashes;
+    var hashArray = this.model.get('vendor_offer__listing__item__image_hashes');
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server')+"get_image?hash="+hash);
@@ -59,16 +60,27 @@ module.exports = Backbone.View.extend({
   },
 
   setFormValues: function(){
-    this.$el.find('#selectCondition').val(this.model.get('vendor_offer').listing.item.condition);
-    this.$el.find('input[name=nsfw]').val(String(this.model.get('vendor_offer').listing.item.nsfw));
-    this.$el.find('input[name=free_shipping]').val(String(this.model.get('vendor_offer').listing.shipping.free));
+    var typeValue = String(this.model.get('vendor_offer__listing__metadata__category'));
+    this.$el.find('input[name=nsfw]').val(String(this.model.get('vendor_offer__listing__item__nsfw')));
+    this.$el.find('input[name=free_shipping]').val(String(this.model.get('vendor_offer__listing__shipping__free')));
+    console.log("set type to: "+ String(this.model.get('vendor_offer__listing__metadata__category')));
+    this.$el.find('#inputType').val(typeValue);
+    //hide or unhide shipping based on product type
+    if(typeValue === "physical good") {
+      this.enableShipping();
+    } else {
+      this.disableShipping();
+    }
     //add all countries to the Ships To select list
     var countries = new countriesModel();
     var countryList = countries.get('countries');
     var shipsTo = this.$el.find('#shipsTo');
-    __.each(countryList, function(country){
+    __.each(countryList, function(country, i){
       shipsTo.append('<option value="'+country.dataName+'">'+country.name+'</option>');
     });
+
+    var shipsToValue = this.model.get('vendor_offer__listing__shipping__shipping_regions');
+    shipsTo.val(shipsToValue);
   },
 
   priceToLocal: function(e){
@@ -97,14 +109,39 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  disableShipping: function(){
+  setFreeShipping: function(){
     this.$el.find('.js-shippingPriceRow').addClass('hide');
-    this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc').prop('disabled', true);
+    this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc')
+        .prop({disabled: true, require: false});
   },
 
-  enableShipping: function(){
+  unsetFreeShipping: function(){
     this.$el.find('.js-shippingPriceRow').removeClass('hide');
-    this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc').prop('disabled', false);
+    this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc')
+        .prop({disabled: false, require: true});
+  },
+
+  disableShipping: function(){
+    this.$el.find('.js-shippingRow').addClass('hide');
+    this.$el.find('.js-shippingRow input')
+        .prop({disabled: true, require: false});
+    this.setFreeShipping();
+  },
+
+  enableShipping: function() {
+    this.$el.find('.js-shippingRow').removeClass('hide');
+    this.$el.find('.js-shippingRow input')
+        .prop({disabled: false, require: true});
+    this.unsetFreeShipping();
+  },
+
+  changeType: function(e) {
+    var typeValue = $(e.target).val();
+    if(typeValue === "physical good") {
+      this.enableShipping();
+    } else {
+      this.disableShipping();
+    }
   },
 
   uploadImage: function(e){
@@ -171,10 +208,11 @@ module.exports = Backbone.View.extend({
   },
 
   saveChanges: function(){
-    var cCode = this.model.get('user').currencyCode;
+    var self = this;
+    var cCode = this.model.get('userCurrencyCode');
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
-    this.$el.find('#inputShippingOrigin').val(this.model.get('user').country);
+    this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
     this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
     if(cCode === "BTC"){
       this.$el.find('#inputPrice').val(this.$el.find('.js-priceBtc').val());
@@ -187,8 +225,42 @@ module.exports = Backbone.View.extend({
     }
     this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
 
-    this.$el.find('#contractForm').submit();
-    //trigger the store tab in the parent view
-    $('.js-cancelItem').trigger();
+    var formData = new FormData(this.$el.find('#contractForm')[0]);
+
+    $.ajax({
+      type: "POST",
+      url: self.model.get('server') + "contracts",
+      contentType: false,
+      processData: false,
+      data: formData,
+      success: function(data) {
+        data = JSON.parse(data);
+        if(self.model.get('id') && data.success === true){
+          deleteThisItem();
+        }
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+
+    var deleteThisItem = function(){
+      $.ajax({
+        type: "DELETE",
+        url: self.model.get('server') + "contracts",
+        data: {"id": self.model.get('id')},
+        success: function() {
+          alert("deleted old item");
+        },
+        error: function(jqXHR, status, errorThrown){
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
+        }
+      });
+    };
+
   }
 });
