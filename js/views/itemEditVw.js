@@ -216,6 +216,7 @@ module.exports = Backbone.View.extend({
     var cCode = this.model.get('userCurrencyCode');
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
+    console.log(this.model.get('userCountry'));
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
     this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
     if(cCode === "BTC"){
@@ -239,9 +240,9 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         data = JSON.parse(data);
         if(self.model.get('id') && data.success === true){
-          deleteThisItem();
           self.trigger('saveDone');
           console.log('saveDone');
+          deleteThisItem();
         } else if(data.success === false){
             var errorModal = $('.js-messageModal');
             errorModal.removeClass('hide');
@@ -265,7 +266,7 @@ module.exports = Backbone.View.extend({
         url: self.model.get('server') + "contracts",
         data: {"id": self.model.get('id')},
         success: function() {
-          alert("deleted old item");
+          //alert("deleted old item");
         },
         error: function(jqXHR, status, errorThrown){
           console.log(jqXHR);

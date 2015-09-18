@@ -192,6 +192,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currencyCode'),
+      userCountry: self.options.userModel.get('country'),
       server: self.options.userModel.get('server'),
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,
