@@ -351,7 +351,7 @@ input[type="number"] {
 
 .modal-child {
   width: 525px;
-  height: 590px;
+  height: 540px;
   margin: 80px auto 0 auto;
   position: absolute;
   left: 50%;
@@ -522,7 +522,7 @@ h5 {
 
 .flex-border > .flexRow > .flexRow {
   /* containing row has a list of rows inside it */
-  border-bottom: 1px solid #327EB8;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .flex-border .flex-border > .flexRow > .flexRow:last-child {
@@ -531,8 +531,7 @@ h5 {
 }
 
 .box-border {
-  /*border: 1px solid rgba(255,255,255,0.08);*/
-  border: 1px solid #327EB8;
+  border: 1px solid rgba(255,255,255,0.08);
   box-sizing: border-box;
 }
 
@@ -597,8 +596,7 @@ h5 {
 
 .txtField-bar,
 input[type="text"].txtField-bar {
-  background: #086A9E;
-  border-bottom: solid 1px #327EB8;
+  background: none;
   border-radius: 0;
   box-shadow: none;
   color: #fff;
@@ -1085,11 +1083,11 @@ input[type="radio"].fieldItem:checked + label:before {
 /*========== one-off classes ==========*/
 
 .homeModal-hero {
-  background-image: url('../imgs/obSettingsHero.jpg');
+  background-image: url('../imgs/obSettingsHeroB.jpg');
   background-repeat: no-repeat;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  height: 250px;
+  height: 220px;
   position: relative;
   width: 525px;
 }
@@ -1104,7 +1102,7 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 .homeModal-accordian {
-  height: 340px;
+  height: 320px;
 }
 
 .homeModal-accordian .btn-bar{
@@ -1119,14 +1117,20 @@ input[type="radio"].fieldItem:checked + label:before {
   border-left: solid 1px #086A9E;
 }
 
-.homeModal-settings {
-  height: 198px;
+.homeModal-accordian .searchWrapper {
+  background: #086A9E;
+  border-bottom: solid 1px #327EB8;
+}
+
+.homeModal-settings,
+.homeModal-settings.flexRow {
+  height: 178px;
   overflow-y: auto;
   background-color: #086A9E;
 }
 
 .homeModal-settings.homeModal-settings-noSearch {
-  height: 240px;
+  height: 220px;
 }
 
 .homeModal-avatarPreview {
@@ -1288,8 +1292,4 @@ input[type="radio"].fieldItem:checked + label:before {
 
 .padding17px {
   padding: 17px;
-}
-
-.scrollOverflow {
-  overflow: scroll !important;
 }
