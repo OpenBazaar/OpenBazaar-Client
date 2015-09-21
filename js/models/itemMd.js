@@ -2,7 +2,8 @@ var Backbone = require('backbone'),
     backboneLinear = require('backbone.linear'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
-module.exports = Backbone.LinearModel.extend({
+//note: Backbone.Linear looks for Backbone in the window. It's placed there by index.html
+module.exports = window.Backbone.LinearModel.extend({
   flatOptions : {delimiter: "__"},
   defaults: {
     displayPrice: 0, //set by userPage View
@@ -175,7 +176,7 @@ module.exports = Backbone.LinearModel.extend({
       if (vendorCCode !== "BTC"){
         getBTPrice(vendorCCode, function (btAve) {
           vendorBitCoinRatio = btAve;
-          vendorBitCoinPrice = Number((vendorPrice/btAve).toFixed(4));
+          vendorBitCoinPrice = Number((vendorPrice / btAve).toFixed(4));
           var vendToUserBTCRatio = window.currentBitcoin/vendorBitCoinRatio;
           var newAttributes = {};
           newAttributes.venderBTCPrice = vendorBitCoinPrice;

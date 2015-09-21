@@ -654,7 +654,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-txtHalf {
   /* button with text */
-  padding: 0 11px;
+  padding: 0 16px;
 }
 
 .body-neutral .btn {

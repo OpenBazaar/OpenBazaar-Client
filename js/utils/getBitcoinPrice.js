@@ -68,6 +68,7 @@ module.exports = function(currency, callback){
           });
     //};
 
+
     var callBlockchain = function ()
     {
       $.ajax({
