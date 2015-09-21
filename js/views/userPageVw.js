@@ -99,8 +99,15 @@ module.exports = Backbone.View.extend({
     if(state === "item"){
       this.renderItem(hash);
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
-    }else if (state){
+    }else if(state === "itemNew") {
+      console.log("itemNew");
+      this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
+      this.sellItem();
+    }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
+    }else{
+      //if no state was set for some reason
+      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
     }
     this.setControls(state);
     this.subRender(state);

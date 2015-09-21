@@ -49,7 +49,8 @@ module.exports = Backbone.Router.extend({
   },
 
   sellItem: function(){
-    console.log("sellItem");
+    this.newView(new userPageView({userModel: this.options.userModel, userID: this.options.userModel.get('guid'), state: 'itemNew'}));
+    $('body').addClass("body-neutral");
   },
 
   purchases: function(){
