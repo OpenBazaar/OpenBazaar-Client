@@ -8,35 +8,48 @@
     <div class="flexRow align-bottom">
       <div class="rowItem">
         <div class="thumbnail thumbnail-large pull-left"
-        <% if(typeof(user.avatar_hash) !== "undefined" && user.avatar_hash) { %>
-        style="background-image: url(<%- user.server %>get_image?hash=<%- user.avatar_hash %>);"
+        <% if(typeof(page.profile.avatar_hash) !== "undefined" && page.profile.avatar_hash) { %>
+        style="background-image: url(<%- user.server %>get_image?hash=<%- page.profile.avatar_hash %>);"
         <% }else{ %>
         style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
-        <div class="pull-left">
-          <div class="vCentered">
-            <h1 class="h3 unbold txt-unleaded"><%= user.name %></h1>
-            <div class="txt-fade"><%= user.handle %></div>
-          </div>
+      <div class="pull-left">
+        <div class="vCentered">
+          <h1 class="h3 unbold txt-unleaded page-userNameLarge"><%= page.profile.name %></h1>
+          <div class="txt-fade"><%= page.profile.handle %></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="bar navBar barFlush navBar custCol-primary">
-    <a class="btn btn-bar btn-tab active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
-    <a class="btn btn-bar btn-tab js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
-    <a class="btn btn-bar btn-tab js-followingTab js-tab"><%= polyglot.t('Following') %></a>
-    <a class="btn btn-bar btn-tab js-storeTab js-tab"><%= polyglot.t('Store') %></a>
-    <div class="navEnd pad15">
-      <div class="nav-ctrlGroup">
-        <a class="btn btn-txt custCol-background"><%= polyglot.t('Edit') %></a>
-      </div>
-      <div class="nav-ctrlGroup">
-        <a class="btn btn-txt custCol-background"><%= polyglot.t('Delete') %></a>
-      </div>
+</div>
+<div class="bar navBar barFlush navBar custCol-primary">
+  <a class="btn btn-bar btn-tab active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
+  <a class="btn btn-bar btn-tab js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
+  <a class="btn btn-bar btn-tab js-followingTab js-tab"><%= polyglot.t('Following') %></a>
+  <a class="btn btn-bar btn-tab js-storeTab js-tab"><%= polyglot.t('Store') %></a>
+  <% if(ownPage === true) { %>
+  <div class="navEnd pad15">
+    <div class="nav-ctrlGroup js-pageButtons">
+      <a class="btn btn-txt custCol-background js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-pageButtons">
+      <a class="btn btn-txt custCol-background js-customize"><%= polyglot.t('Customize') %> </a>
+    </div>
+    <div class="nav-ctrlGroup js-itemButtons hide">
+      <a class="btn btn-txt custCol-background js-editItem"><%= polyglot.t('Edit') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemButtons hide">
+      <a class="btn btn-txt custCol-background js-deleteItem"><%= polyglot.t('Delete') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemEditButtons hide">
+      <a class="btn btn-txt custCol-background js-cancelItem"><%= polyglot.t('Cancel') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemEditButtons hide">
+      <a class="btn btn-txt custCol-background js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
     </div>
   </div>
-<div>
+  <% } %>
+</div>
 <div>
   <div class="flexContainer flex-border custCol-primary js-about js-tabTarg">
     <div class="flexRow">
@@ -145,6 +158,8 @@
   <div class="flexContainer flex-border custCol-primary js-item js-tabTarg hide">
     <div class="flexRow js-list4"></div>
   </div>
-
+  <div class="flexContainer flex-border custCol-primary js-itemEdit js-tabTarg hide">
+    <div class="flexRow js-list5"></div>
+  </div>
 </div>
 <div class="navBar"></div>

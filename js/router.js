@@ -1,4 +1,4 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
@@ -17,8 +17,7 @@ module.exports = Backbone.Router.extend({
     "home": "home",
     "myPage": "userPage",
     "userPage": "userPage",
-    "userPage/:state": "userPage",
-    "userPage/:state/:hash": "userPage",
+    "userPage/:userID(/:state)(/:itemHash)": "userPage",
     "customizePage": "customizePage",
     "sellItem": "sellItem",
     "purchases": "purchases",
@@ -40,8 +39,8 @@ module.exports = Backbone.Router.extend({
     this.newView(new homeView({userModel: this.options.userModel}));
   },
 
-  userPage: function(state, hash){
-    this.newView(new userPageView({userModel: this.options.userModel, state: state, hash: hash}));
+  userPage: function(userID, state, itemHash){
+    this.newView(new userPageView({userModel: this.options.userModel, userID: userID, state: state, itemHash: itemHash}));
     $('body').addClass("body-neutral");
   },
 
@@ -50,7 +49,8 @@ module.exports = Backbone.Router.extend({
   },
 
   sellItem: function(){
-    console.log("sellItem");
+    this.newView(new userPageView({userModel: this.options.userModel, userID: this.options.userModel.get('guid'), state: 'itemNew'}));
+    $('body').addClass("body-neutral");
   },
 
   purchases: function(){

@@ -1,4 +1,4 @@
-<div class="rowItem js-homeModal-countrySelect" data-code="<%= dataName %>">
-  <input type="radio" id="<%= dataName %>" name="<%= dataName %>" data-currencyCode="<%= code %>" <% if(typeof(selected) !== "undefined" && selected == dataName){%>checked="checked"<%}%>>
-  <label class="homeModal-country" for="<%= dataName %>"><%- name %></label>
+<div class="rowItem js-homeModal-countrySelect padding17px" data-code="<%= dataName %>">
+  <input type="radio" id="country-<%= dataName %>" name="<%= dataName %>" data-currencyCode="<%= code %>" <% if(typeof(selected) !== "undefined" && selected == dataName){%>checked="checked"<%}%>>
+  <label class="homeModal-country" for="country-<%= dataName %>"><%- name %></label>
 </div>

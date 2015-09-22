@@ -1,8 +1,6 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCountriesCollection = require('../collections/chooseCountryCl'),
@@ -21,8 +19,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    _.each(this.chooseCountries.models, function(item){
-
+    __.each(this.chooseCountries.models, function(item){
       self.renderItem(item);
     },this);
   },
@@ -38,7 +35,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    _.each(this.subViews, function(subView) {
+    __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{

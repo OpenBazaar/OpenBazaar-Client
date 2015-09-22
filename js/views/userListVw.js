@@ -1,10 +1,6 @@
-/* shows grid of items */
-
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     usersShortCollection = require('../collections/usersShortCl'),
     userShortView = require('./userShortVw'),
@@ -29,7 +25,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     if(this.usersShort.models.length > 0)
     {
-      _.each(this.usersShort.models, function (item)
+      __.each(this.usersShort.models, function (item)
       {
         self.renderItem(item);
       }, this);
@@ -53,7 +49,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    _.each(this.subViews, function(subView) {
+    __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{

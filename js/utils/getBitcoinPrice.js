@@ -1,4 +1,4 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
@@ -16,31 +16,33 @@ module.exports = function(currency, callback){
     var btPrices = [];
 
     //initial call
-    $.ajax({
-      method: "GET",
-      url: "https://api.bitcoinaverage.com/ticker/global/" + currency
-    })
-        .done(function (response)
-        {
-          //console.log("bitcoinAverage: " + response['24h_avg']);
-          if($.isNumeric(response['24h_avg'])) {
-            btPrices.push(response['24h_avg']);
-          }
-        })
-        .fail(function (jqXHR, textStatus, errorThrown)
-        {
-          console.log("bitcoinAverage request failed:");
-          console.log(jqXHR);
-          console.log(textStatus);
-          console.log(errorThrown);
-        })
-        .always(function ()
-        {
-          callCoindesk();
-        });
+    //bitcoin average is hitting the rate limit
+    /*
+  $.ajax({
+    method: "GET",
+    url: "https://api.bitcoinaverage.com/ticker/global/" + currency
+  })
+      .done(function (response)
+      {
+        //console.log("bitcoinAverage: " + response['24h_avg']);
+        if($.isNumeric(response['24h_avg'])) {
+          btPrices.push(response['24h_avg']);
+        }
+      })
+      .fail(function (jqXHR, textStatus, errorThrown)
+      {
+        //console.log("bitcoinAverage request failed:");
+        //console.log(jqXHR);
+        //console.log(textStatus);
+        //console.log(errorThrown);
+      })
+      .always(function ()
+      {
+        callCoindesk();
+      });
 
-    var callCoindesk = function ()
-    {
+  var callCoindesk = function ()
+  {*/
       $.ajax({
         method: "GET",
         dataType: "json",
@@ -49,22 +51,23 @@ module.exports = function(currency, callback){
           .done(function (response)
           {
             //console.log("coinDesk: " + response.bpi[currency]['rate']);
-            if($.isNumeric(response.bpi[currency]['rate'])) {
-              btPrices.push(response.bpi[currency]['rate']);
+            if($.isNumeric(response.bpi[currency].rate)) {
+              btPrices.push(response.bpi[currency].rate);
             }
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("coinDesk request failed:");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+            //console.log("coinDesk request failed:");
+            //console.log(jqXHR);
+            //console.log(textStatus);
+            //console.log(errorThrown);
           })
           .always(function ()
           {
             callBlockchain();
           });
-    };
+    //};
+
 
     var callBlockchain = function ()
     {
@@ -81,10 +84,10 @@ module.exports = function(currency, callback){
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("blockChain request failed: ");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+            //console.log("blockChain request failed: ");
+            //console.log(jqXHR);
+            //console.log(textStatus);
+            //console.log(errorThrown);
           })
           .always(function ()
           {
@@ -101,16 +104,16 @@ module.exports = function(currency, callback){
           .done(function (response)
           {
             //console.log("coinKite: " + response.rates.BTC[currency]['rate']);
-            if ($.isNumeric(response.rates.BTC[currency]['rate'])) {
-              btPrices.push(response.rates.BTC[currency]['rate']);
+            if ($.isNumeric(response.rates.BTC[currency].rate)) {
+              btPrices.push(response.rates.BTC[currency].rate);
             }
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("coinKite request failed: ");
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
+            //console.log("coinKite request failed: ");
+            //console.log(jqXHR);
+            //console.log(textStatus);
+            //console.log(errorThrown);
           })
           .always(function ()
           {
@@ -128,6 +131,10 @@ module.exports = function(currency, callback){
         sum = sum + Number(btPrices[i]);
       }
       btAve = sum/btPrices.length;
+
+      if(btPrices.length === 0){
+        alert("Bitcoin exchange rates are not available.");
+      }
       //console.log("Average is " + btAve);
 
       typeof callback === 'function' && callback(btAve);

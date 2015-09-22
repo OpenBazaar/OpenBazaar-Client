@@ -1,8 +1,6 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     Polyglot = require('node-polyglot'),
     languagesModel = require('../models/languagesMd'),
@@ -29,7 +27,8 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-existingHandle': 'existingHandle',
     'click .js-homeModal-cancelHandle': 'cancelHandle',
     'change .js-homeModalAvatarUpload': 'uploadAvatar',
-    'click .js-homeModalDone': 'settingsDone'
+    'click .js-homeModalDone': 'settingsDone',
+    'click .js-closeModal': 'closeModal'
   },
 
   initialize: function(){
@@ -41,7 +40,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(this.model, 'change:language', function(){
       var newLang = this.model.get("language");
       window.polyglot = new Polyglot({locale: newLang});
-      window.polyglot.extend(_.where(this.languages.get('languages'), {langCode: newLang})[0]);
+      window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
       this.render();
     });
 
@@ -65,6 +64,8 @@ module.exports = Backbone.View.extend({
           return parseInt(accWin.css('left').replace("px","")) - accWidth;
         });
       }
+      // focus search input
+      $(this).closest('.accordian-child').next('.accordian-child').find('.search').focus();
     });
     acc.find('.js-accordianPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
@@ -74,7 +75,7 @@ module.exports = Backbone.View.extend({
         });
       }
     });
-    //set up filterable lists
+    //set up filterable lists.
     //TODO: this is terrible, redo so it runs when all subviews are done rendering
     setTimeout(function(){
       var List = window.List;
@@ -87,7 +88,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    var tmpl = loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
+    loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
       var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
@@ -200,6 +201,10 @@ module.exports = Backbone.View.extend({
   settingsDone: function(e){
     this.model.set('beenSet',true);
     this.$el.find('.js-homeModal').hide();
+  },
+
+  closeModal: function(e){
+    $(e.target).closest('.modal').addClass('hide');
   }
 
 });

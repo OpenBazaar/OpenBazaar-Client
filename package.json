@@ -1,8 +1,12 @@
 {
-  "name": "ob1",
+  "name": "OpenBazaar",
   "version": "0.1.0",
-  "description": "Open Bazaar Client",
+  "description": "OpenBazaar Client",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/OpenBazaar/OpenBazaar-Client.git"
+  },
   "scripts": {
     "start": "electron main.js",
     "test": "exit 0",
@@ -11,8 +15,11 @@
   },
   "dependencies": {
     "backbone": "^1.2.1",
+    "backbone.linear": "^1.0.3",
     "jquery": "^2.1.4",
+    "moment": "^2.10.6",
     "node-polyglot": "^0.4.3",
+    "taggle": "^1.5.1",
     "safestart": "^0.8.0",
     "underscore": "^1.8.3"
   },

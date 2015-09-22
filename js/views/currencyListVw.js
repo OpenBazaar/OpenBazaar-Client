@@ -1,8 +1,7 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
+    loadTemplate = require('../utils/loadTemplate'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCurrenciesCollection = require('../collections/chooseCurrencyCl'),
@@ -15,10 +14,16 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.countries = new countriesModel();
     //create a list of currencies from the country list, so we can maintain a single set of data
-    var uniqueCurrencies = _.uniq(this.countries.get('countries'), function(item){return item.code;});
+    var uniqueCurrencies = __.uniq(this.countries.get('countries'), function(item){return item.code;});
     var orderedCurrencies = uniqueCurrencies.sort(function(a,b){
       var cA = a.currency.toLowerCase(), cB = b.currency.toLowerCase();
-      return cA < cB ? -1 : cA > cB ? 1 : 0;
+      if (cA < cB){
+        return -1;
+      }
+      if (cA > cB){
+        return 1;
+      }
+      return 0;
     });
     this.chooseCurrencies = new chooseCurrenciesCollection(orderedCurrencies);
     this.subViews = [];
@@ -27,7 +32,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    _.each(this.chooseCurrencies.models, function(item){
+    __.each(this.chooseCurrencies.models, function(item){
       self.renderItem(item);
     },this);
   },
@@ -43,7 +48,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    _.each(this.subViews, function(subView) {
+    __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{

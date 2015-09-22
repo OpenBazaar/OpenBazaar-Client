@@ -1,10 +1,8 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
-var fs = require('fs'),
-    loadTemplate = require('../utils/loadTemplate');
-
+var loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
 
@@ -17,12 +15,15 @@ module.exports = Backbone.View.extend({
 
     initialize: function(){
         //don't render immediately, wait for the model to update itself with converted prices
-        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'change:priceSet', this.render);
     },
 
     render: function(){
         var self = this;
-        var tmpl = loadTemplate('./js/templates/item.html', function(loadedTemplate) {
+        console.log(this.model);
+        //console.log(this.model.get('vendor_offer__listing__item__image_hashes'));
+
+        loadTemplate('./js/templates/item.html', function(loadedTemplate) {
             self.$el.html(loadedTemplate(self.model.toJSON()));
         });
         return this;

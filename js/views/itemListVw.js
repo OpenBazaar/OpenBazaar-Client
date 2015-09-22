@@ -1,9 +1,8 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
-    itemsShortCollection = require('../collections/itemsShortCl'),
+    $ = require('jquery'),
+    loadTemplate = require('../utils/loadTemplate'),
+    itemsShortCollection = require('../collections/itemsShortCL'),
     itemShortView = require('./itemShortVw');
 
 module.exports = Backbone.View.extend({
@@ -13,9 +12,9 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
-    this.listenTo(this.options.userModel, 'change', function(){
-      self.render();
-    });
+    //this.listenTo(this.options.userModel, 'change', function(){
+    //  self.render();
+    //});
     this.subViews = [];
     this.render();
   },
@@ -24,7 +23,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     //clear the list
     this.$el.empty();
-    _.each(this.itemsShort.models, function(item){
+    __.each(this.itemsShort.models, function(item){
       self.renderContract(item);
     },this);
   },
@@ -39,9 +38,9 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    _.each(this.subViews, function(subView) {
+    __.each(this.subViews, function(subView) {
       if(subView.close){
-       subView.close();
+        subView.close();
       }else{
         subView.remove();
       }

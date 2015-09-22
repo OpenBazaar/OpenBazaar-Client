@@ -9,16 +9,16 @@
       <div>
         <% if(showAvatar) { %>
         <div class="thumbnail js-avatar" data-handle="<%= handle %>"
-        <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
-        style="background-image: url(<%- avatar_hash %>);"
-        <% }else{ %>
-        style="background-image: url(imgs/defaultUser.png)"
+          <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
+          style="background-image: url(<%- avatar_hash %>);"
+          <% }else{ %>
+          style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
         <% } %>
       </div>
       <div class="js-item" data-id="<%= contract_hash %>">
-        <div><%= title %></div>
-        <div class="txt-fade"><%= venderBTCPrice %>btc (<%= displayPrice %>)</div>
+        <div class="textSize14px textFirstCharUppercase"><%= title %></div>
+        <div class="textSize13px txt-fade textWeightNormal"><%= venderBTCPrice %>btc (<%= displayPrice %>)</div>
       </div>
     </div>
   </div>
