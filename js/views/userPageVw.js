@@ -204,6 +204,7 @@ module.exports = Backbone.View.extend({
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,
       handle: self.model.get('page').profile.handle,
+      ownPage: self.options.ownPage,
       //userID: self.model.get('page').profile.guid,
       itemHash: hash,
       id: hash

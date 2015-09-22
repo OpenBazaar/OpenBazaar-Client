@@ -10,10 +10,11 @@ module.exports = window.Backbone.LinearModel.extend({
     venderBTCPrice: 0, //set by userPage View
     userCurrencyCode: "", //set by userPage View. This is for editing the product
     userCountry: "", //set by userPage View. This is a country code. This is used for editing.
-    itemBuyable: true, //set by userPage View
+    ownPage: false, //set by userPage View
     itemHash: "", //set by userPage View
     images: [], //array of uploaded images to be sent to the server
     combinedImagesArray: [], //tracks uploaded and old images
+    priceSet: false, //set in Update Attribute below, so view can listen for it
 
     vendor_offer__signature: "",
     vendor_offer__listing__shipping__shipping_regions: [],
@@ -163,7 +164,7 @@ module.exports = window.Backbone.LinearModel.extend({
 */
   initialize: function(){
     //this.updateAttributes();
-    this.on('change', this.updateAttributes, this);
+    this.on('change:vendor_offer__listing__item__price_per_unit__fiat__price', this.updateAttributes, this);
   },
 
   updateAttributes: function(){
@@ -186,18 +187,21 @@ module.exports = window.Backbone.LinearModel.extend({
             maximumFractionDigits: 2,
             currency: self.get("userCurrencyCode")
           }).format(vendorPrice*vendToUserBTCRatio);
-          newAttributes.itemBuyable = true;
+          newAttributes.priceSet = true;
           self.set(newAttributes);
         });
       }else{
-        vendorBitCoinRatio = 1;
-        vendorBitCoinPrice = vendorPrice;
+        var newAttributes = {};
+        newAttributes.venderBTCPrice = vendorBitCoinPrice;
+        newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
+          style: 'currency',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+          currency: self.get("userCurrencyCode")
+        }).format(vendorPrice*window.currentBitcoin);
+        newAttributes.priceSet = true;
+        self.set(newAttributes);
       }
-      this.set({itemBuyable: true});
-    }else if(vendorPrice === 0){
-      this.set({itemBuyable: false});
-    }else{
-      this.set({itemBuyable: false});
     }
   }
 });

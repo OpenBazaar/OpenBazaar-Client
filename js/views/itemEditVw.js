@@ -2,6 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
+
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     taggle = require('taggle');
@@ -151,12 +152,15 @@ module.exports = Backbone.View.extend({
   uploadImage: function(e){
     var self = this;
     var newFiles = $(e.target)[0].files;
+    console.log("item Edit View newFiles");
+    console.log(newFiles);
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
     __.each(newFiles, function(newFile){
       var fileURL = URL.createObjectURL(newFile);
       imageArray.push(fileURL);
     });
     this.model.set("combinedImagesArray", imageArray);
+    console.log(this.model.get('combinedImagesArray'));
     this.updateImages();
   },
 
@@ -184,6 +188,7 @@ module.exports = Backbone.View.extend({
     var dt = e.originalEvent.dataTransfer;
     var newFiles = dt.files;
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
+
     __.each(newFiles, function(newFile){
       var fileURL = URL.createObjectURL(newFile);
       imageArray.push(fileURL);
@@ -196,12 +201,14 @@ module.exports = Backbone.View.extend({
   updateImages: function(){
     var self = this;
     var subImageDivs = this.$el.find('.js-editItemSubImage');
-    var imageArray = this.model.get("combinedImagesArray");
-    __.each(imageArray, function(imageURL, i){
+    var combinedImagesArray = this.model.get("combinedImagesArray");
+    __.each(combinedImagesArray, function(imageURL, i){
       if(i === 0){
+        console.log("set main image to "+imageURL);
         self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')');
       }else{
         if(i <= subImageDivs.length) {
+          console.log("set sub image to "+imageURL);
           $(subImageDivs[i-1]).css('background-image', 'url(' + imageURL + ')');
         }else{
           $('<div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url('+imageURL+');"></div>')
@@ -230,6 +237,19 @@ module.exports = Backbone.View.extend({
     }
 
     var formData = new FormData(this.$el.find('#contractForm')[0]);
+
+    //get the images to upload
+    var imagesToSend = this.model.get("combinedImagesArray");
+    var imageInput = $('#itemImageUploadMain');
+    //clear the images input element by replacing it with a duplicate
+    imageInput.replaceWith(imageInput.clone());
+    __.each(imagesToSend, function(imageURL) {
+      //do something to add images to formData here
+      console.log(imageURL);
+    });
+
+
+
 
     $.ajax({
       type: "POST",
@@ -263,8 +283,7 @@ module.exports = Backbone.View.extend({
     var deleteThisItem = function(){
       $.ajax({
         type: "DELETE",
-        url: self.model.get('server') + "contracts",
-        data: {"id": self.model.get('id')},
+        url: self.model.get('server') + "contracts?"+self.model.get('id'),
         success: function() {
           //alert("deleted old item");
         },

@@ -18,9 +18,9 @@
 </div>
 <div class="flexCol-7 pad20Right">
   <div class="row20 rowTop20 clearfix">
-    <h5><%= vendor_offer__listing__item__title %></h5>
+    <h5><%= vendor_offer__listing__item__title %></h5><%= userCurrencyCode %>
     <p><%= venderBTCPrice %> btc (<%= displayPrice %>) &#8226; <%= vendor_offer__listing__item__condition %></p>
-    <% if(itemBuyable) { %>
+    <% if(ownPage !== true) { %>
     <div class="btn btn-light btn-txt js-buyButton"><%= polyglot.t('BUY NOW') %></div>
     <% } %>
   </div>
@@ -29,15 +29,6 @@
       <a class="btn btn-bar btn-tab active js-descriptionTab js-tab"><%= polyglot.t('Description') %></a>
       <a class="btn btn-bar btn-tab js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
       <a class="btn btn-bar btn-tab js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
-<!--
-  <div class="flexCol-7 pad20Right">
-    <div class="row20 rowTop20 clearfix">
-      <h5><%= vendor_offer.listing.item.title %></h5>
-    <p><%= venderBTCPrice %> btc (<%= displayPrice %>) &#8226; <%= vendor_offer.listing.item.condition %></p>
-      <% if(itemBuyable) { %>
-      <div class="btn btn-light btn-txt js-buyButton"><%= polyglot.t('BUY NOW') %></div>
-      <% } %>
--->
     </div>
     <div class="flexContainer flex-border custCol-primary js-description js-tabTarg">
       <div class="flexRow">

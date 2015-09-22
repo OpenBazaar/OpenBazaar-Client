@@ -4,7 +4,6 @@ var __ = require('underscore'),
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate');
 
-
 module.exports = Backbone.View.extend({
 
     events: {
@@ -16,13 +15,13 @@ module.exports = Backbone.View.extend({
 
     initialize: function(){
         //don't render immediately, wait for the model to update itself with converted prices
-        this.listenTo(this.model, 'change', this.render);
+        this.listenTo(this.model, 'change:priceSet', this.render);
     },
 
     render: function(){
         var self = this;
         console.log(this.model);
-        console.log(this.model.get('vendor_offer__listing__item__image_hashes'));
+        //console.log(this.model.get('vendor_offer__listing__item__image_hashes'));
 
         loadTemplate('./js/templates/item.html', function(loadedTemplate) {
             self.$el.html(loadedTemplate(self.model.toJSON()));

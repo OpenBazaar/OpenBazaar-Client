@@ -1,7 +1,7 @@
-var __ = require('underscore'),
-    Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
+var __ = window.__ = require('underscore'),
+    Backbone = window.Backbone = require('backbone'),
+    $ = window.jQuery = require('jquery');
+Backbone.$ = window.Backbone.$ = $;
 var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
