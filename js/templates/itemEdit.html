@@ -15,15 +15,28 @@
             <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
           </form>
         </div>
-        <div class="itemImg itemImg-large box-border js-editItemMainImage"
-        <% if(vendor_offer__listing__item__image_hashes.length > 0) { %>
-        style="background-image: url(<%- combinedImagesArray[0] %>);"
-        <%}%>></div>
+        <div class="itemImg itemImg-large js-editItemMainImage"
+          <% if(vendor_offer__listing__item__image_hashes.length > 0) { %>
+          style="background-image: url(<%- combinedImagesArray[0] %>);" data-index="0"
+          <%} else {%>
+          style="border: 1px solid rgba(255,255,255,0.08); box-sizing: border-box;"
+          <% } %>
+        >
+        <div class="btn btn-cornerTR btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage
+        <% if(vendor_offer__listing__item__image_hashes.length === 0) { %> hide <% } %>">
+          <i class="ion-close-round icon-centered"></i>
+        </div>
+
+        </div>
       </div>
       <div class="flexRow row20 negPad js-editItemSubImagesWrapper">
         <% _.each(combinedImagesArray, function(data, i) {
         if(i != 0){%>
-        <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);"></div>
+        <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);" data-index="<% i %>">
+          <div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage">
+            <i class="ion-close-round icon-centered icon-small"></i>
+          </div>
+        </div>
         <% } }); %>
         <!--taken out until we improve image upload-->
         <label for="itemImageUploadMain" class="itemImg itemImg-small js-dropImage js-editItemEmptyImage"><i class="ion-plus-circled icon-centered icon-large txt-fade"></i> </label>
@@ -78,7 +91,7 @@
                 </div>
               </div>
               <div class="flexCol-9">
-                <input class="fieldItem" type="date" name="expiration_date">
+                <input class="fieldItem" type="datetime-local" name="expiration_date">
               </div>
             </div>
             <div class="flexRow">

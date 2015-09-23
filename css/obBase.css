@@ -274,12 +274,24 @@ input[type="number"] {
   cursor: pointer;
 }
 
+/* don't prefix with .btn, sometimes it is used on icons without a .btn class */
 .btn-cornerTR {
   display: block;
   position: absolute;
   top: 10px;
   right: 10px;
 }
+
+.btn-cornerTR .btn-cornerTRSmall {
+  top: 5px;
+  right: 5px;
+}
+
+.btn-cornerTR.btn-flushTop {
+  top: 0px;
+}
+
+
 
 .thumbnail {
   height: 30px;
@@ -668,11 +680,19 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 }
 
 .btn.btn-c1 {
-  background-color: rgb(50,126,184);
-}
+   background-color: rgb(50,126,184);
+ }
 
 .body-neutral .btn.btn-c1 {
   background-color: rgb(87,87,87);
+}
+
+.btn.btn-c1.fade {
+  background-color: rgba(50,126,184,0.8);
+}
+
+.body-neutral .btn.btn-c1.fade {
+  background-color: rgba(87,87,87,0.8);
 }
 
 .btn.btn-win {
@@ -782,6 +802,10 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   border: 1px solid rgb(87,87,87);
 }
 
+.btn.btn-shadow1 {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.40);
+}
+
 .fieldItem .btn-togWrapper {
   margin-top: 9px;
 }
@@ -805,6 +829,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 .btn.btn-togRight {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.btn.btn-flushTop {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .btn.btn-back:before,
@@ -833,7 +862,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 input[type="text"].fieldItem,
 input[type="number"].fieldItem,
-input[type="date"].fieldItem {
+input[type="datetime-local"].fieldItem {
   width: 100%;
   color: #fff;
   box-sizing: border-box;
@@ -842,21 +871,20 @@ input[type="date"].fieldItem {
   background: none;
 }
 
-input[type="date"].fieldItem {
+input[type="datetime-local"].fieldItem {
   font-family: inherit;
   line-height: 42px;
 }
 
-input[type="date"].fieldItem::-webkit-inner-spin-button {
+input[type="datetime-local"].fieldItem::-webkit-inner-spin-button {
   height: 50px;
   position: absolute;
   right: 45px;
 }
 
-input[type="date"].fieldItem::-webkit-clear-button {
-  font-size: 30px;
-  line-height: 50px;
-  color: #fff;
+input[type="datetime-local"].fieldItem::-webkit-clear-button {
+  -webkit-appearance: none;
+  display: none;
 }
 
 input[type="number"].fieldItem {
@@ -872,7 +900,7 @@ input[type="number"].fieldItem::-webkit-inner-spin-button {
 
 input[type="text"].fieldItem:focus,
 input[type="number"].fieldItem:focus,
-input[type="date"].fieldItem:focus {
+input[type="datetime-local"].fieldItem:focus {
   border: 2px solid #fff;
   transition: border 0.3s;
   outline: none;
@@ -1097,6 +1125,10 @@ input[type="radio"].fieldItem:checked + label:before {
 
 .icon-large {
   font-size: 32px;
+}
+
+.icon-small {
+  font-size: 11px;
 }
 
 /*========== one-off classes ==========*/

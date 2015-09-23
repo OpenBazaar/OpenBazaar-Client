@@ -16,7 +16,8 @@ module.exports = Backbone.View.extend({
     'click #shippingFreeTrue': 'setFreeShipping',
     'click #shippingFreeFalse': 'unsetFreeShipping',
     'change .js-itemImageUpload': 'uploadImage',
-    'change #inputType': 'changeType'
+    'change #inputType': 'changeType',
+    'click .js-editItemDeleteImage': 'deleteImage'
   },
 
   initialize: function(){
@@ -149,6 +150,7 @@ module.exports = Backbone.View.extend({
 
   uploadImage: function(e){
     var self = this;
+
     var formData = new FormData(this.$el.find('#imageForm')[0]);
     $.ajax({
       type: "POST",
@@ -157,13 +159,14 @@ module.exports = Backbone.View.extend({
       processData: false,
       data: formData,
       success: function(data) {
-        console.log(data);
+        data = JSON.parse(data);
         var imageArray = __.clone(self.model.get("combinedImagesArray"));
-        imageArray.push(self.model.get('server')+"get_image?hash="+data);
-        self.model.set("combinedImagesArray", imageArray);
-
         var hashArray = __.clone(self.model.get("imageHashesToUpload"));
-        hashArray.push(data);
+        __.each(data.image_hashes, function(hash){
+          imageArray.push(self.model.get('server')+"get_image?hash="+hash);
+          hashArray.push(hash);
+        })
+        self.model.set("combinedImagesArray", imageArray);
         self.model.set("imageHashesToUpload", hashArray);
 
         self.updateImages();
@@ -187,23 +190,39 @@ module.exports = Backbone.View.extend({
   },
 
   updateImages: function(){
+    //TODO: this would be better as a sub-view with it's own render
     var self = this;
     var subImageDivs = this.$el.find('.js-editItemSubImage');
     var imageArray = this.model.get("combinedImagesArray");
-    __.each(imageArray, function(imageURL, i){
-      if(i === 0){
-        self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')');
-      }else{
-        if(i <= subImageDivs.length) {
-          $(subImageDivs[i-1]).css('background-image', 'url(' + imageURL + ')');
-          }else{
-          //removed until we add enhancements to the image upload
-            $('<div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url('+imageURL+');"></div>')
-                .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
+    //remove extra subImage divs
+    subImageDivs.slice(imageArray.length-1).remove();
 
+    if(imageArray.length > 0){
+      __.each(imageArray, function (imageURL, i) {
+        if (i === 0){
+          self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')').removeClass('box-border').attr("data-index", "0")
+          .find('.js-editItemDeleteImage').removeClass('hide');
+        }else{
+          if (i <= subImageDivs.length){
+            $(subImageDivs[i - 1]).css('background-image', 'url(' + imageURL + ')');
+          }else{
+            $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+                .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
+          }
         }
-      }
-    });
+      });
+    } else {
+      //if there are no images, reset the main image area
+      self.$el.find('.js-editItemMainImage').css('background-image', 'none').addClass('box-border').find('.js-editItemDeleteImage').addClass('hide');
+    }
+  },
+
+  deleteImage: function(e) {
+    var imgIndex = $(e.target).closest('.itemImg').data('index');
+    var imageArray = __.clone(this.model.get("combinedImagesArray"));
+    imageArray.splice(imgIndex, 1);
+    this.model.set("combinedImagesArray", imageArray);
+    this.updateImages();
   },
 
   saveChanges: function(){
@@ -211,7 +230,6 @@ module.exports = Backbone.View.extend({
     var cCode = this.model.get('userCurrencyCode');
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
-    console.log(this.model.get('userCountry'));
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
     this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
     if(cCode === "BTC"){
@@ -227,49 +245,39 @@ module.exports = Backbone.View.extend({
     var formData = new FormData(this.$el.find('#contractForm')[0]);
     formData.append('images', this.model.get('imageHashesToUpload'));
 
-    /*
-    //get the images to upload
-    var imagesToSend = this.model.get("combinedImagesArray");
-    var imageInput = $('#itemImageUploadMain');
-    //clear the images input element by replacing it with a duplicate
-    imageInput.replaceWith(imageInput.clone());
-    __.each(imagesToSend, function(imageURL) {
-      //do something to add images to formData here
-      console.log(imageURL);
-    });
-    */
-
-
-
-
-    $.ajax({
-      type: "POST",
-      url: self.model.get('server') + "contracts",
-      contentType: false,
-      processData: false,
-      data: formData,
-      success: function(data) {
-        data = JSON.parse(data);
-        if(self.model.get('id') && data.success === true){
-          self.trigger('saveDone');
-          console.log('saveDone');
-          deleteThisItem();
-        } else if(data.success === false){
+    if(document.getElementById('contractForm').checkValidity()){
+      $.ajax({
+        type: "POST",
+        url: self.model.get('server') + "contracts",
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function (data) {
+          data = JSON.parse(data);
+          if (self.model.get('id') && data.success === true){
+            self.trigger('saveDone');
+            deleteThisItem();
+          }else if (data.success === false){
             var errorModal = $('.js-messageModal');
             errorModal.removeClass('hide');
             errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
             errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
-        } else {
-          self.trigger('saveDone');
-          console.log('saveDone');
+          }else{
+            self.trigger('saveDone');
+          }
+        },
+        error: function (jqXHR, status, errorThrown) {
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
         }
-      },
-      error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      }
-    });
+      });
+    }else{
+      var errorModal = $('.js-messageModal');
+      errorModal.removeClass('hide');
+      errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+      errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.</i>");
+    }
 
     var deleteThisItem = function(){
       $.ajax({
