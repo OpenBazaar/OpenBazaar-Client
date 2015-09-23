@@ -16,11 +16,6 @@ module.exports = Backbone.View.extend({
     'click #shippingFreeTrue': 'setFreeShipping',
     'click #shippingFreeFalse': 'unsetFreeShipping',
     'change .js-itemImageUpload': 'uploadImage',
-    'dragenter .js-dropImage': 'dropImageEnter',
-    'dragover .js-dropImage': 'dropImageOver',
-    'dragend .js-dropImage': 'dropImageEnd',
-    'dragleave .js-dropImage': 'dropImageEnd',
-    'drop .js-dropImage': 'dropImageDrop',
     'change #inputType': 'changeType'
   },
 
@@ -31,10 +26,13 @@ module.exports = Backbone.View.extend({
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server')+"get_image?hash="+hash);
     });
-    //add images hashes to the images model
+    //add images urls to the combinedImagesArray for rendering
     this.model.set('combinedImagesArray', this.combinedImagesArray);
-    //add empty images array for new imges
-    this.model.set({'uploadedImages': []});
+
+    //add existing hashes to the list to be uploaded on save
+    var anotherHashArray = __.clone(self.model.get("vendor_offer__listing__item__image_hashes"));
+    self.model.set("imageHashesToUpload", anotherHashArray);
+
     this.render();
   },
 
@@ -151,68 +149,58 @@ module.exports = Backbone.View.extend({
 
   uploadImage: function(e){
     var self = this;
+    var formData = new FormData(this.$el.find('#imageForm')[0]);
+    $.ajax({
+      type: "POST",
+      url: self.model.get('server') + "upload_image",
+      contentType: false,
+      processData: false,
+      data: formData,
+      success: function(data) {
+        console.log(data);
+        var imageArray = __.clone(self.model.get("combinedImagesArray"));
+        imageArray.push(self.model.get('server')+"get_image?hash="+data);
+        self.model.set("combinedImagesArray", imageArray);
+
+        var hashArray = __.clone(self.model.get("imageHashesToUpload"));
+        hashArray.push(data);
+        self.model.set("imageHashesToUpload", hashArray);
+
+        self.updateImages();
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+
+/*
     var newFiles = $(e.target)[0].files;
-    console.log("item Edit View newFiles");
-    console.log(newFiles);
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
     __.each(newFiles, function(newFile){
       var fileURL = URL.createObjectURL(newFile);
       imageArray.push(fileURL);
     });
     this.model.set("combinedImagesArray", imageArray);
-    console.log(this.model.get('combinedImagesArray'));
-    this.updateImages();
-  },
-
-  dropImageEnter: function(e){
-    e.stopPropagation();
-    e.preventDefault();
-  },
-
-  dropImageOver: function(e){
-    e.stopPropagation();
-    e.preventDefault();
-    $(e.target).closest('.js-dropImage').find('.itemImg').addClass('box-Dashed');
-  },
-
-  dropImageEnd: function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    $('.js-dropImage').find('.itemImg').removeClass('box-Dashed');
-  },
-
-  dropImageDrop: function(e){
-    var self = this;
-    e.stopPropagation();
-    e.preventDefault();
-    var dt = e.originalEvent.dataTransfer;
-    var newFiles = dt.files;
-    var imageArray = __.clone(this.model.get("combinedImagesArray"));
-
-    __.each(newFiles, function(newFile){
-      var fileURL = URL.createObjectURL(newFile);
-      imageArray.push(fileURL);
-    });
-    this.model.set("combinedImagesArray", imageArray);
-    this.updateImages();
-    $('.js-dropImage').find('.itemImg').removeClass('box-Dashed');
+    this.updateImages();*/
   },
 
   updateImages: function(){
     var self = this;
     var subImageDivs = this.$el.find('.js-editItemSubImage');
-    var combinedImagesArray = this.model.get("combinedImagesArray");
-    __.each(combinedImagesArray, function(imageURL, i){
+    var imageArray = this.model.get("combinedImagesArray");
+    __.each(imageArray, function(imageURL, i){
       if(i === 0){
-        console.log("set main image to "+imageURL);
         self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')');
       }else{
         if(i <= subImageDivs.length) {
-          console.log("set sub image to "+imageURL);
           $(subImageDivs[i-1]).css('background-image', 'url(' + imageURL + ')');
-        }else{
-          $('<div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url('+imageURL+');"></div>')
-              .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
+          }else{
+          //removed until we add enhancements to the image upload
+            $('<div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url('+imageURL+');"></div>')
+                .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
+
         }
       }
     });
@@ -237,7 +225,9 @@ module.exports = Backbone.View.extend({
     }
 
     var formData = new FormData(this.$el.find('#contractForm')[0]);
+    formData.append('images', this.model.get('imageHashesToUpload'));
 
+    /*
     //get the images to upload
     var imagesToSend = this.model.get("combinedImagesArray");
     var imageInput = $('#itemImageUploadMain');
@@ -247,6 +237,7 @@ module.exports = Backbone.View.extend({
       //do something to add images to formData here
       console.log(imageURL);
     });
+    */
 
 
 

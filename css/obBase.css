@@ -832,13 +832,31 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 }
 
 input[type="text"].fieldItem,
-input[type="number"].fieldItem {
+input[type="number"].fieldItem,
+input[type="date"].fieldItem {
   width: 100%;
   color: #fff;
   box-sizing: border-box;
   border: 2px solid transparent;
   padding: 0 15px;
   background: none;
+}
+
+input[type="date"].fieldItem {
+  font-family: inherit;
+  line-height: 42px;
+}
+
+input[type="date"].fieldItem::-webkit-inner-spin-button {
+  height: 50px;
+  position: absolute;
+  right: 45px;
+}
+
+input[type="date"].fieldItem::-webkit-clear-button {
+  font-size: 30px;
+  line-height: 50px;
+  color: #fff;
 }
 
 input[type="number"].fieldItem {
@@ -853,7 +871,8 @@ input[type="number"].fieldItem::-webkit-inner-spin-button {
 }
 
 input[type="text"].fieldItem:focus,
-input[type="number"].fieldItem:focus {
+input[type="number"].fieldItem:focus,
+input[type="date"].fieldItem:focus {
   border: 2px solid #fff;
   transition: border 0.3s;
   outline: none;

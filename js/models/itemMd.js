@@ -12,8 +12,8 @@ module.exports = window.Backbone.LinearModel.extend({
     userCountry: "", //set by userPage View. This is a country code. This is used for editing.
     ownPage: false, //set by userPage View
     itemHash: "", //set by userPage View
-    images: [], //array of uploaded images to be sent to the server
     combinedImagesArray: [], //tracks uploaded and old images
+    imageHashesToUpload: [],
     priceSet: false, //set in Update Attribute below, so view can listen for it
 
     vendor_offer__signature: "",
@@ -28,7 +28,7 @@ module.exports = window.Backbone.LinearModel.extend({
 
     vendor_offer__listing__item__price_per_unit__fiat__price: 0,
     vendor_offer__listing__item__price_per_unit__fiat__currency_code: "",
-    vendor_offer__listing__item__title: "",
+    vendor_offer__listing__item__title: "New Item",
     vendor_offer__listing__item__process_time: "",
     vendor_offer__listing__item__image_hashes: [],
     vendor_offer__listing__item__nsfw: false,
