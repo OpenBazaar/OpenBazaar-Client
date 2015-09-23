@@ -10,7 +10,10 @@
       <div class="row10 rowTop20 js-dropImage">
         <div class="uploadPhotoControls">
           <p class="txt-center"><%= polyglot.t('UploadPhotos') %></p>
-          <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
+          <form action="<%- server %>upload_image" method="post" enctype="multipart/form-data" id="imageForm">
+            <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
+            <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
+          </form>
         </div>
         <div class="itemImg itemImg-large box-border js-editItemMainImage"
         <% if(vendor_offer__listing__item__image_hashes.length > 0) { %>
@@ -22,13 +25,14 @@
         if(i != 0){%>
         <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);"></div>
         <% } }); %>
-        <div class="itemImg itemImg-small box-border js-dropImage js-editItemEmptyImage"><i class="ion-plus-circled icon-centered icon-large txt-fade"></i> </div>
+        <!--taken out until we improve image upload-->
+        <label for="itemImageUploadMain" class="itemImg itemImg-small js-dropImage js-editItemEmptyImage"><i class="ion-plus-circled icon-centered icon-large txt-fade"></i> </label>
       </div>
     </div>
     <div class="flexCol-7">
       <form action="<%- server %>contracts" method="post" enctype="multipart/form-data" id="contractForm">
         <input type="text" name="shipping_origin" id="inputShippingOrigin" class="hide" />
-        <input type="file" name="images" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
+
         <div class="flex-border">
           <div class="flexRow">
             <div class="flexRow">
@@ -37,22 +41,22 @@
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('Name') %>
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <input name="title" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__title %>" required>
               </div>
             </div>
             <div class="flexRow js-inputParent">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('Price') %>
                 </div>
               </div>
-              <div class="flexCol-6">
+              <div class="flexCol-5">
                 <input type="text" name="price" id="inputPrice" class="hide" />
                 <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
                 <input type="number" step="any" min="0" class="fieldItem js-priceLocal"  id="priceLocal" value="<%= vendor_offer__listing__item__price_per_unit__fiat__price %>" required>
@@ -68,33 +72,33 @@
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-5">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('ExpirationDate') %>
                 </div>
               </div>
-              <div class="flexCol-7">
-                <input type="datetime-local" name="expiration_date">
+              <div class="flexCol-9">
+                <input class="fieldItem" type="date" name="expiration_date">
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('Keywords') %>
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <input type="text" name="keywords" id="realInputKeywords" class="hide" />
                 <div class="fieldItem" id="inputKeyword"></div>
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('Type') %>
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <div class="fieldItem">
                   <div class="fieldItem-selectWrapper">
                     <select name="metadata_category" id="inputType">
@@ -107,32 +111,32 @@
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('Category') %>
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <input name="category" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__category %>">
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('Condition') %>
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <input name="condition" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__condition %>">
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('NSFW') %>?
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <div class="fieldItem">
                   <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
                   <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
@@ -140,22 +144,22 @@
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   <%= polyglot.t('Description') %>
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <textarea name="description" rows="8" class="fieldItem-textarea"><%= vendor_offer__listing__item__description %></textarea>
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-2">
+              <div class="flexCol-3">
                 <div class="fieldItem">
                   SKU
                 </div>
               </div>
-              <div class="flexCol-10">
+              <div class="flexCol-9">
                 <input name="sku" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__sku %>">
               </div>
             </div>
