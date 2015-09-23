@@ -100,7 +100,6 @@ module.exports = Backbone.View.extend({
       this.renderItem(hash);
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }else if(state === "itemNew") {
-      console.log("itemNew");
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       this.sellItem();
     }else if(state){
@@ -312,7 +311,7 @@ module.exports = Backbone.View.extend({
   cancelClick: function(){
     console.log("cancelClick");
     //consider calling delete here.
-    if(this.lastTab === "item") {
+    if(this.lastTab === "item" || this.lastTab === "itemNew") {
       this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
     } else {
       this.tabClick(this.$el.find('.js-' + this.lastTab + 'Tab'), this.$el.find('.js-' + this.lastTab));
