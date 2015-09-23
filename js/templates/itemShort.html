@@ -1,22 +1,25 @@
 <div class="gridItem clearfix">
-  <div>
-    <img class="img-rsp row10"
+  <div class="itemImg row10 js-item" data-id="<%= contract_hash %>"
     <% if(typeof(thumbnail_hash) !== "undefined" && thumbnail_hash) { %>
-    src="<%- thumbnail_hash %>"
-    <% }else{ %>
-    src="imgs/defaultItem.png"
-    <% } %>>
+    style="background-image: url(<%- server %>get_image?hash=<%- thumbnail_hash %>);"
+    <%}%>>
   </div>
-  <div>
-    <div class="thumbnail"
-    <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
-    style="background-image: url(<%- avatar_hash %>);"
-    <% }else{ %>
-    style="background-image: url(imgs/defaultUser.png)"
-    <% } %>></div>
-    <div class="pull-left txt-unleaded">
-      <div><%= title %></div>
-      <div class="txt-fade"><%= price %></div>
+  <div class="table">
+    <div>
+      <div>
+        <% if(showAvatar) { %>
+        <div class="thumbnail js-avatar" data-handle="<%= handle %>"
+          <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
+          style="background-image: url(<%- avatar_hash %>);"
+          <% }else{ %>
+          style="background-image: url(imgs/defaultUser.png)"
+        <% } %>></div>
+        <% } %>
+      </div>
+      <div class="js-item" data-id="<%= contract_hash %>">
+        <div class="textSize14px textFirstCharUppercase"><%= title %></div>
+        <div class="textSize13px txt-fade textWeightNormal"><%= venderBTCPrice %>btc (<%= displayPrice %>)</div>
+      </div>
     </div>
   </div>
 </div>

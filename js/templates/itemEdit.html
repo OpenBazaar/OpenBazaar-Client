@@ -1,0 +1,300 @@
+
+<div class="flexRow">
+  <div class="flexRow bar barTxt pad20">
+    <a class="js-returnToStore"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a>&nbsp;>&nbsp;<%= vendor_offer__listing__item__title %>
+  </div>
+</div>
+<div class="flexRow flex-border">
+  <div class="flexRow flexExpand">
+    <div class="flexCol-5 pad20">
+      <div class="row10 rowTop20 js-dropImage">
+        <div class="uploadPhotoControls">
+          <p class="txt-center"><%= polyglot.t('UploadPhotos') %></p>
+          <form action="<%- server %>upload_image" method="post" enctype="multipart/form-data" id="imageForm">
+            <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
+            <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
+          </form>
+        </div>
+        <div class="itemImg itemImg-large box-border js-editItemMainImage"
+        <% if(vendor_offer__listing__item__image_hashes.length > 0) { %>
+        style="background-image: url(<%- combinedImagesArray[0] %>);"
+        <%}%>></div>
+      </div>
+      <div class="flexRow row20 negPad js-editItemSubImagesWrapper">
+        <% _.each(combinedImagesArray, function(data, i) {
+        if(i != 0){%>
+        <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);"></div>
+        <% } }); %>
+        <!--taken out until we improve image upload-->
+        <label for="itemImageUploadMain" class="itemImg itemImg-small js-dropImage js-editItemEmptyImage"><i class="ion-plus-circled icon-centered icon-large txt-fade"></i> </label>
+      </div>
+    </div>
+    <div class="flexCol-7">
+      <form action="<%- server %>contracts" method="post" enctype="multipart/form-data" id="contractForm">
+        <input type="text" name="shipping_origin" id="inputShippingOrigin" class="hide" />
+
+        <div class="flex-border">
+          <div class="flexRow">
+            <div class="flexRow">
+              <div class="fieldItem">
+                <h5 class="allCaps"><%= polyglot.t('Item') %></h5>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('Name') %>
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <input name="title" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__title %>" required>
+              </div>
+            </div>
+            <div class="flexRow js-inputParent">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('Price') %>
+                </div>
+              </div>
+              <div class="flexCol-5">
+                <input type="text" name="price" id="inputPrice" class="hide" />
+                <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
+                <input type="number" step="any" min="0" class="fieldItem js-priceLocal"  id="priceLocal" value="<%= vendor_offer__listing__item__price_per_unit__fiat__price %>" required>
+                <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="priceBtc" value="<%= venderBTCPrice %>" required>
+              </div>
+              <div class="flexCol-4">
+                <div class="fieldItem pull-right">
+                  <div class="btn-togWrapper btn-togWrapper-c1">
+                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
+                    <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('ExpirationDate') %>
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <input class="fieldItem" type="date" name="expiration_date">
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('Keywords') %>
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <input type="text" name="keywords" id="realInputKeywords" class="hide" />
+                <div class="fieldItem" id="inputKeyword"></div>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('Type') %>
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <div class="fieldItem">
+                  <div class="fieldItem-selectWrapper">
+                    <select name="metadata_category" id="inputType">
+                      <option value="physical good" selected>Physical Item</option>
+                      <option value="digital good">Digital Item</option>
+                      <option value="service">Service</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('Category') %>
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <input name="category" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__category %>">
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('Condition') %>
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <input name="condition" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__condition %>">
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('NSFW') %>?
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
+                  <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  <%= polyglot.t('Description') %>
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <textarea name="description" rows="8" class="fieldItem-textarea"><%= vendor_offer__listing__item__description %></textarea>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3">
+                <div class="fieldItem">
+                  SKU
+                </div>
+              </div>
+              <div class="flexCol-9">
+                <input name="sku" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__sku %>">
+              </div>
+            </div>
+
+            <div class="flexRow js-shippingRow">
+              <div class="fieldItem">
+                <h5 class="allCaps"><%= polyglot.t('Shipping') %></h5>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('ProcessingTime') %>
+                </div>
+              </div>
+              <div class="flexCol-7">
+                <input name="process_time" type="text" class="fieldItem" value="<%= vendor_offer__listing__item__process_time %>" required>
+              </div>
+            </div>
+            <div class="flexRow js-shippingRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('Free') %> <%= polyglot.t('Shipping') %>
+                </div>
+              </div>
+              <div class="flexCol-7">
+                <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" name="shippingFree" value="true" /><label for="shippingFreeTrue">Yes</label>
+                <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" value="false" checked/><label for="shippingFreeFalse">No</label>
+              </div>
+            </div>
+            <div class="flexRow js-inputParent js-shippingPriceRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('Local') %> <%= polyglot.t('Price') %>
+                </div>
+              </div>
+              <div class="flexCol-3">
+                <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
+                <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
+                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceLocalLocal"  value="0" required>
+                <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceLocalBtc" value="0" required>
+              </div>
+              <div class="flexCol-4">
+                <div class="fieldItem pull-right">
+                  <div class="btn-togWrapper btn-togWrapper-c1">
+                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
+                    <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow js-inputParent js-shippingPriceRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('International') %> <%= polyglot.t('Price') %>
+                </div>
+              </div>
+              <div class="flexCol-3">
+                <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
+                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceInternationalLocal"  value="0"required>
+                <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc" value="0" required>
+              </div>
+              <div class="flexCol-4">
+                <div class="fieldItem pull-right">
+                  <div class="btn-togWrapper btn-togWrapper-c1">
+                    <a class="btn btn-togLeft btn-txtHalf btn-c1 js-priceBtn-local"><%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
+                    <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow js-shippingRow">
+              <div class="flexCol-2">
+                <div class="fieldItem">
+                  <%= polyglot.t('ShipsTo') %>
+                </div>
+              </div>
+              <div class="flexCol-10">
+                <div class="fieldItem">
+                  <div class="fieldItem-selectWrapper noIcon">
+                    <select name="ships_to" id="shipsTo" multiple size="5">
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow js-shippingRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('Local') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %>
+                </div>
+              </div>
+              <div class="flexCol-7">
+                <input name="est_delivery_domestic" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__domestic %>"  required>
+              </div>
+            </div>
+            <div class="flexRow js-shippingRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('International') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %>
+                </div>
+              </div>
+              <div class="flexCol-7">
+                <input name="est_delivery_international" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__international %>" required>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="fieldItem">
+                <h5 class="allCaps"><%= polyglot.t('Policy') %></h5>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('Terms and Conditions') %>
+                </div>
+              </div>
+              <div class="flexCol-7">
+                <textarea name="terms_conditions" rows="6" class="fieldItem-textarea"><%= vendor_offer__listing__policy__terms_conditions %></textarea>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-5">
+                <div class="fieldItem">
+                  <%= polyglot.t('Returns') %>
+                </div>
+              </div>
+              <div class="flexCol-7">
+                <textarea name="returns" rows="6" class="fieldItem-textarea"><%= vendor_offer__listing__policy__returns %></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,66 +1,51 @@
-/* shows grid of items */
-
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-var fs = require('fs'),
+    $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    itemsShortlection = require('../collections/itemsShortCL'),
-    itemShortView = require('./itemShortVw')
-
-var fakeItems = [
-  {
-    title: "Item Name",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "",
-    avatar_hash: ""
-  },
-  {
-    title: "Item Two",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: ""
-  },
-  {
-    title: "Item Three",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: ""
-  },
-  {
-    title: "Item Four",
-    contract_hash: 0,
-    price: 32.91,
-    thumbnail_hash: "imgs/defaultItem.png",
-    avatar_hash: ""
-  }
-];
+    itemsShortCollection = require('../collections/itemsShortCL'),
+    itemShortView = require('./itemShortVw');
 
 module.exports = Backbone.View.extend({
 
-  initialize: function(){
+  initialize: function(options){
     var self = this;
-    this.itemsShort = new itemsShortlection(fakeItems);
+    this.options = options || {};
+    //the model must be passed in by the constructor
+    this.itemsShort = new itemsShortCollection(this.model);
+    //this.listenTo(this.options.userModel, 'change', function(){
+    //  self.render();
+    //});
+    this.subViews = [];
     this.render();
   },
 
   render: function(){
     var self = this;
-    _.each(this.itemsShort.models, function(item){
-      self.renderItem(item);
+    //clear the list
+    this.$el.empty();
+    __.each(this.itemsShort.models, function(item){
+      self.renderContract(item);
     },this);
   },
 
-  renderItem: function(item){
+  renderContract: function(item){
     var itemShort = new itemShortView({
       model: item
     });
-    $('.js-list1').append(itemShort.render().el);
-  }
+    this.subViews.push(itemShort);
+    //$el must be passed in by the constructor
+    this.$el.append(itemShort.render().el);
+  },
 
+  close: function(){
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.remove();
+      }
+    });
+    this.remove();
+  }
 });
 

@@ -1,3 +1,7 @@
+// Check that the deps in node_modules match what's in package.json.
+var safestart = require('safestart');
+safestart(__dirname);
+
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
@@ -23,7 +27,8 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1200,
-    height: 900
+    height: 700/*,
+    frame: false*/ //uncomment for release
   });
 
   // and load the index.html of the app.

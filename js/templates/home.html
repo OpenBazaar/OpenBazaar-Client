@@ -1,14 +1,24 @@
 <div class="mainContainer">
-  <div class="bar barFlush navBar">
-    <a class="btn btn-bar active js-homeItemsBtn">Items</a>
-    <a class="btn btn-bar js-homeStoresBtn">Stores</a>
+  <div class="welcomeBar">
+    <div>
+      <%= polyglot.t('Welcome') %>: <span class="js-currentDate textOpacity75"></span>
+      <a class="btn btn-txt custCol-background vCentered right10"><%= polyglot.t('CreateStore') %></a>
+    </div>
   </div>
-  <div class="txtFieldWrapper searchWrapper">
-    <input type="text" class="txtField txtField-bar" />
+  <div class="bar barFlush navBar">
+    <a class="btn btn-bar active js-homeItemsBtn"><%= polyglot.t('Items') %></a>
+    <a class="btn btn-bar js-homeStoresBtn"><%= polyglot.t('Stores') %></a>
   </div>
   <div class="flexContainer flex-border">
-    <div class="flexRow js-list1"></div>
+    <div class="flexRow">
+      <div class="flexRow">
+        <div class="txtFieldWrapper searchWrapper">
+          <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
+        </div>
+      </div>
+    </div>
+    <div class="flexRow flexRow-wrap js-list1"></div>
     <div class="flexRow js-list2"></div>
   </div>
-  <div class="navBar"></div>
+  <div class="navBar footerBar"></div>
 </div>

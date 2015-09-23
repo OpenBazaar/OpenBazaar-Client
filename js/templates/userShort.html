@@ -1,0 +1,12 @@
+<div class="rowItem">
+  <div class="thumbnail-large pull-left"
+  <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
+  style="background-image: url(<%- avatar_hash %>);"
+  <% }else{ %>
+  style="background-image: url(imgs/defaultUser.png)"
+  <% } %>></div>
+  <div class="pull-left txt-unleaded">
+    <div class="textSize17px floatLeft marginRight5"><%= name %></div>
+    <div class="textSize15px txt-fade floatLeft"><%= handle %></div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div class="mainContainer custCol-background">
+  <div class="banner-large shadow-inner1"
+  <% if(typeof(page.bannerImg) !== "undefined" && page.bannerImg) { %>
+  style="background-image: url(<%- user.server %>get_image?hash=<%- page.bannerImg %>);"
+  <% }else{ %>
+  style="background-image: url(imgs/defaultBanner.png)"
+  <% } %>>
+    <div class="flexRow align-bottom">
+      <div class="rowItem">
+        <div class="thumbnail thumbnail-large pull-left"
+        <% if(typeof(page.profile.avatar_hash) !== "undefined" && page.profile.avatar_hash) { %>
+        style="background-image: url(<%- user.server %>get_image?hash=<%- page.profile.avatar_hash %>);"
+        <% }else{ %>
+        style="background-image: url(imgs/defaultUser.png)"
+        <% } %>></div>
+      <div class="pull-left">
+        <div class="vCentered">
+          <h1 class="h3 unbold txt-unleaded page-userNameLarge"><%= page.profile.name %></h1>
+          <div class="txt-fade"><%= page.profile.handle %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bar navBar barFlush navBar custCol-primary">
+  <a class="btn btn-bar btn-tab active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
+  <a class="btn btn-bar btn-tab js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
+  <a class="btn btn-bar btn-tab js-followingTab js-tab"><%= polyglot.t('Following') %></a>
+  <a class="btn btn-bar btn-tab js-storeTab js-tab"><%= polyglot.t('Store') %></a>
+  <% if(ownPage === true) { %>
+  <div class="navEnd pad15">
+    <div class="nav-ctrlGroup js-pageButtons">
+      <a class="btn btn-txt custCol-background js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-pageButtons">
+      <a class="btn btn-txt custCol-background js-customize"><%= polyglot.t('Customize') %> </a>
+    </div>
+    <div class="nav-ctrlGroup js-itemButtons hide">
+      <a class="btn btn-txt custCol-background js-editItem"><%= polyglot.t('Edit') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemButtons hide">
+      <a class="btn btn-txt custCol-background js-deleteItem"><%= polyglot.t('Delete') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemEditButtons hide">
+      <a class="btn btn-txt custCol-background js-cancelItem"><%= polyglot.t('Cancel') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemEditButtons hide">
+      <a class="btn btn-txt custCol-background js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+    </div>
+  </div>
+  <% } %>
+</div>
+<div>
+  <div class="flexContainer flex-border custCol-primary js-about js-tabTarg">
+    <div class="flexRow">
+      <div class="flexCol-9">
+        <div class="rowItem">
+          <%= page.profile.about %>
+        </div>
+      </div>
+      <div class="flexCol-3 flex-border">
+        <div class="flexRow">
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Website') %></div>
+              <div>
+                <% if(page.profile.website) { %>
+                <%=page.profile.website %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Email') %></div>
+              <div>
+                <% if(page.profile.email) { %>
+                <%=page.profile.email %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Facebook') %></div>
+              <div>
+                <% if(page.profile.social_accounts.facebook && page.profile.social_accounts.facebook.username) { %>
+                <%=page.profile.social_accounts.facebook.username %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Instagram') %></div>
+              <div>
+                <% if(page.profile.social_accounts.instagram && page.profile.social_accounts.instagram.username) { %>
+                <%=page.profile.social_accounts.instagram.username %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="rowItem">
+              <div><%= polyglot.t('Snapchat') %></div>
+              <div>
+                <% if(page.profile.social_accounts.snapchat && page.profile.social_accounts.snapchat.username) { %>
+                <%=page.profile.social_accounts.snapchat.username %>
+                <%}else{%>
+                Not Provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flexContainer flex-border custCol-primary js-followers js-tabTarg hide">
+    <div class="flexRow">
+      <div class="flexRow">
+        <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+          <input type="text" class="txtField txtField-bar search" />
+        </div>
+      </div>
+    </div>
+    <div class="flexRow js-list1"></div>
+  </div>
+  <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide">
+    <div class="flexRow">
+      <div class="flexRow">
+        <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+          <input type="text" class="txtField txtField-bar search" />
+        </div>
+      </div>
+    </div>
+    <div class="flexRow js-list2"></div>
+  </div>
+  <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide">
+    <div class="flexRow">
+      <div class="flexRow">
+        <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+          <input type="text" class="txtField txtField-bar search" />
+        </div>
+      </div>
+    </div>
+    <div class="flexRow js-list3"></div>
+  </div>
+  <div class="flexContainer flex-border custCol-primary js-item js-tabTarg hide">
+    <div class="flexRow js-list4"></div>
+  </div>
+  <div class="flexContainer flex-border custCol-primary js-itemEdit js-tabTarg hide">
+    <div class="flexRow js-list5"></div>
+  </div>
+</div>
+<div class="navBar"></div>

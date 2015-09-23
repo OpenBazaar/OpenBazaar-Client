@@ -1,14 +1,23 @@
-var _ = require('underscore'),
+var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
 
-var homeView = require('./views/homeVw');
+var homeView = require('./views/homeVw'),
+    userPageView = require('./views/userPageVw');
 
 module.exports = Backbone.Router.extend({
+
+  initialize: function(options){
+    this.options = options || {};
+  },
+
   routes: {
     "": "home",
-    "myPage": "myPage",
+    "home": "home",
+    "myPage": "userPage",
+    "userPage": "userPage",
+    "userPage/:userID(/:state)(/:itemHash)": "userPage",
     "customizePage": "customizePage",
     "sellItem": "sellItem",
     "purchases": "purchases",
@@ -20,12 +29,19 @@ module.exports = Backbone.Router.extend({
     "support": "support"
   },
 
-  home: function(){
-    var home = new homeView();
+  newView: function(view){
+    this.view && (this.view.close ? this.view.close() : this.view.remove());
+    this.view = view;
+    $('body').removeClass("body-neutral");//add other body style classes if they are created
   },
 
-  myPage: function(){
-    console.log("myPage");
+  home: function(){
+    this.newView(new homeView({userModel: this.options.userModel}));
+  },
+
+  userPage: function(userID, state, itemHash){
+    this.newView(new userPageView({userModel: this.options.userModel, userID: userID, state: state, itemHash: itemHash}));
+    $('body').addClass("body-neutral");
   },
 
   customizePage: function(){
@@ -33,7 +49,8 @@ module.exports = Backbone.Router.extend({
   },
 
   sellItem: function(){
-    console.log("sellItem");
+    this.newView(new userPageView({userModel: this.options.userModel, userID: this.options.userModel.get('guid'), state: 'itemNew'}));
+    $('body').addClass("body-neutral");
   },
 
   purchases: function(){
