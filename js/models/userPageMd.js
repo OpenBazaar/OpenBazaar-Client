@@ -1,5 +1,6 @@
 var __ = require('underscore'),
-    Backbone = require('backbone');
+    Backbone = require('backbone'),
+    is = require('is_js');
 
 module.exports = Backbone.Model.extend({
   defaults: {
@@ -48,5 +49,28 @@ module.exports = Backbone.Model.extend({
       GUID: "",
       encryption_key: ""
     }
+  },
+
+  convertColor: function(color){
+    if(is.not.hexColor(color)) {
+      //convert string to a number, then to a hex string
+      color = (Number(color)).toString(16);
+      //if the color had leading zeroes, they were cut off. Restore them.
+      while (color.length < 6){
+        color = "0" + color;
+      }
+      color = "#" + color;
+    }
+    return color;
+  },
+
+  parse: function(response) {
+    //check if colors are in hex, if not convert. This assumes non-hex colors are numbers or strings of numbers.
+    response.profile.background_color = this.convertColor(response.profile.background_color);
+    response.profile.primary_color = this.convertColor(response.profile.primary_color);
+    response.profile.secondary_color = this.convertColor(response.profile.secondary_color);
+    response.profile.text_color = this.convertColor(response.profile.text_color);
+
+    return response;
   }
 });

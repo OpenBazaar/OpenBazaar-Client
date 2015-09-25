@@ -32,7 +32,7 @@ module.exports = Backbone.Router.extend({
   newView: function(view){
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
-    $('body').removeClass("body-neutral");//add other body style classes if they are created
+    $('body').removeClass("userPage");//add other body style classes if they are created
   },
 
   home: function(){
@@ -41,7 +41,7 @@ module.exports = Backbone.Router.extend({
 
   userPage: function(userID, state, itemHash){
     this.newView(new userPageView({userModel: this.options.userModel, userID: userID, state: state, itemHash: itemHash}));
-    $('body').addClass("body-neutral");
+    $('body').addClass("userPage");
   },
 
   customizePage: function(){
@@ -50,7 +50,7 @@ module.exports = Backbone.Router.extend({
 
   sellItem: function(){
     this.newView(new userPageView({userModel: this.options.userModel, userID: this.options.userModel.get('guid'), state: 'itemNew'}));
-    $('body').addClass("body-neutral");
+    $('body').addClass("userPage");
   },
 
   purchases: function(){
