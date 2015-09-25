@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     userPageModel = require('../models/userPageMd'),
     listingsModel = require('../models/listingsMd'),
@@ -27,7 +28,9 @@ module.exports = Backbone.View.extend({
     'click .js-editItem': 'editItem',
     'click .js-deleteItem': 'deleteItem',
     'click .js-cancelItem': 'cancelClick',
-    'click .js-saveItem': 'saveItem'
+    'click .js-saveItem': 'saveItem',
+    'click .js-saveCustomization': 'saveCustomizePage',
+    'click .js-cancelCustomization': 'cancelCustomizePage'
   },
 
   initialize: function (options) {
@@ -53,6 +56,15 @@ module.exports = Backbone.View.extend({
     this.following.urlRoot = options.userModel.get('server') + "get_following";
     this.lastTab = "about"; //track the last tab clicked
     this.pageID = "";
+    //hold changes to the page for undoing, such as custom colors
+    this.undoCustomAttributes = {
+      profile: {
+        primary_color: "",
+        secondary_color: "",
+        text_color: "",
+        background_color: ""
+      }
+    };
 
     //if no userID is passed in, or it matches the user's ID, then this is their page
     if(options.userID === '' || options.userID === options.userModel.get('guid')) {
@@ -84,15 +96,33 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setState(self.options.state, self.options.itemHash);
     });
-
-    //set custom color values in stylesheet
-    var pageStyleSheet = $('#obBase')[0].sheet;
-    pageStyleSheet.insertRule(".body-neutral .custCol-background { background-color: #"+this.model.get('page').profile.background_color+";}", pageStyleSheet.cssRules.length);
-    pageStyleSheet.insertRule(".body-neutral .custCol-primary { background-color: #"+this.model.get('page').profile.primary_color+";}", pageStyleSheet.cssRules.length);
-    pageStyleSheet.insertRule(".body-neutral .custCol-secondary { background-color: #"+this.model.get('page').profile.secondary_color+";}", pageStyleSheet.cssRules.length);
-    pageStyleSheet.insertRule(".body-neutral .custCol-text { color: #"+this.model.get('page').profile.text_color+";}", pageStyleSheet.cssRules.length);
+    this.setCustomStyles();
 
     return this;
+  },
+
+  setCustomStyles: function() {
+    console.log("set custom");
+    if(this.model.get('page')){
+      //check if colors are in hex, if not convert
+      var backgroundColor = this.model.get('page').profile.background_color;
+      backgroundColor = is.hexColor(backgroundColor) ? backgroundColor : "#"+(backgroundColor).toString(16);
+      var primaryColor = this.model.get('page').profile.primary_color;
+      primaryColor = is.hexColor(primaryColor) ? primaryColor : "#"+(primaryColor).toString(16);
+      var secondaryColor = this.model.get('page').profile.secondary_color;
+      secondaryColor = is.hexColor(secondaryColor) ? secondaryColor : "#"+(secondaryColor).toString(16);
+      var textColor = this.model.get('page').profile.text_color;
+      textColor = is.hexColor(textColor) ? textColor : "#"+(textColor).toString(16);
+
+      var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
+      customStyleTag.setAttribute('id', 'customStyle');
+      customStyleTag.innerHTML =
+          "#ov1 .body-neutral .custCol-background { background-color: " + backgroundColor + ";}" +
+          "#ov1 .body-neutral .custCol-primary { background-color: " + primaryColor + ";}" +
+          "#ov1 .body-neutral .custCol-secondary { background-color: " + secondaryColor + ";}" +
+          "#ov1 .body-neutral .custCol-text { color: " + textColor + ";}";
+      document.body.appendChild(customStyleTag);
+    }
   },
 
   setState: function(state, hash) {
@@ -116,18 +146,36 @@ module.exports = Backbone.View.extend({
   setControls: function(state){
     //if user owns page, hide/show control buttons
     if(this.options.ownPage === true) {
+      console.log("set state");
       if(state === "item") {
         this.$el.find('.js-itemButtons').removeClass('hide');
         this.$el.find('.js-pageButtons').addClass('hide');
         this.$el.find('.js-itemEditButtons').addClass('hide');
+        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
+        this.$el.find('#customizeControls').addClass('hide');
+        document.getElementById('obBody').classList.remove("box-borderDashed");
       } else if(state === "itemEdit") {
         this.$el.find('.js-itemButtons').addClass('hide');
         this.$el.find('.js-pageButtons').addClass('hide');
         this.$el.find('.js-itemEditButtons').removeClass('hide');
+        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
+        this.$el.find('#customizeControls').addClass('hide');
+        document.getElementById('obBody').classList.remove("box-borderDashed");
+      } else if(state === "customize") {
+        console.log("state is customize");
+        this.$el.find('.js-itemButtons').addClass('hide');
+        this.$el.find('.js-pageButtons').addClass('hide');
+        this.$el.find('.js-itemEditButtons').addClass('hide');
+        this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
+        this.$el.find('#customizeControls').removeClass('hide');
+        document.getElementById('obBody').classList.add("box-borderDashed");
       } else {
         this.$el.find('.js-itemButtons').addClass('hide');
         this.$el.find('.js-pageButtons').removeClass('hide');
         this.$el.find('.js-itemEditButtons').addClass('hide');
+        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
+        this.$el.find('#customizeControls').addClass('hide');
+        document.getElementById('obBody').classList.remove("box-borderDashed");
       }
     }
   },
@@ -305,7 +353,78 @@ module.exports = Backbone.View.extend({
   },
 
   customizePage: function(){
+    console.log("customize page");
+    this.setControls('customize');
+    //save state of the page
+    this.undoCustomAttributes.background_color = this.model.get('page').profile.background_color;
+    this.undoCustomAttributes.primary_color = this.model.get('page').profile.primary_color;
+    this.undoCustomAttributes.secondary_color = this.model.get('page').profile.secondary_color;
+    this.undoCustomAttributes.text_color = this.model.get('page').profile.text_color;
+    //make temp copy of the page
+    var tempPage  =  __.clone(this.model.get('page'));
+    tempPage.profile.background_color ="blue";
+    tempPage.profile.primary_color = "red";
+    tempPage.profile.secondary_color = "purple";
+    tempPage.profile.text_color = "yellow";
+    this.model.set('page', tempPage);
+    this.setCustomStyles();
+  },
 
+  saveCustomizePage: function() {
+    console.log("save custom");
+    this.setControls();
+    this.saveUserPageModel();
+  },
+
+  saveUserPageModel: function(){
+    var self = this;
+    var formData = new FormData();
+    var pageData = this.model.get('page').profile;
+    for(var profileKey in pageData) {
+      if(pageData.hasOwnProperty(profileKey)){
+        //don't include nested objects in the form
+        if(pageData[profileKey] !== 'object'){
+          if(profileKey == 'background_color' || profileKey == 'primary_color' || profileKey == 'text_color' || profileKey == 'secondary_color'){
+            //convert hex to decimal
+            var profileColor = pageData[profileKey];
+            profileColor = is.hexColor(profileColor) ? parseInt(profileColor, 16) : profileColor;
+            formData.append(profileKey, profileColor);
+          } else {
+            formData.append(profileKey, String(pageData[profileKey]));
+          }
+        }
+      }
+    }
+    $.ajax({
+      type: "POST",
+      url: self.model.get('user').server + "profile",
+      contentType: false,
+      processData: false,
+      data: formData,
+      success: function(data) {
+        data = JSON.parse(data);
+        if(data.success === true){
+          console.log("saved");
+        }else if(data.success === false){
+          console.log("failed");
+        }
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+  },
+
+  cancelCustomizePage: function() {
+    console.log("cancel custom");
+    this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
+    this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
+    this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;
+    this.model.get('page').profile.text_color = this.undoCustomAttributes.text_color;
+    this.setControls();
+    this.setCustomStyles();
   },
 
   cancelClick: function(){

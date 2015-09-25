@@ -47,6 +47,12 @@
     <div class="nav-ctrlGroup js-itemEditButtons hide">
       <a class="btn btn-txt custCol-background js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
     </div>
+    <div class="nav-ctrlGroup js-itemCustomizationButtons hide">
+      <a class="btn btn-txt custCol-background js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemCustomizationButtons hide">
+      <a class="btn btn-txt custCol-background js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
+    </div>
   </div>
   <% } %>
 </div>
@@ -163,3 +169,10 @@
   </div>
 </div>
 <div class="navBar"></div>
+
+<div id="customizeControls" class="hide">
+  <a class="btn btn-square box-borderBright row5 custCol-primary js-customizePrimary"></a>
+  <a class="btn btn-square box-borderBright row5 custCol-secondary js-customizeSecondary"></a>
+  <a class="btn btn-square box-borderBright row5 custCol-text js-customizeText"></a>
+  <a class="btn btn-square box-borderBright custCol-background js-customizeBackground"></a>
+</div>

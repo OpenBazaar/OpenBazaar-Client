@@ -312,6 +312,10 @@ input[type="number"] {
   margin-bottom: 10px;
 }
 
+.row5 {
+  margin-bottom: 5px;
+}
+
 .row20 {
   margin-bottom: 20px;
 }
@@ -544,6 +548,16 @@ h5 {
 
 .box-border {
   border: 1px solid rgba(255,255,255,0.08);
+  box-sizing: border-box;
+}
+
+.box-borderBright {
+  border: 1px solid #fff;
+  box-sizing: border-box;
+}
+
+.box-borderDashed {
+  border: 2px dashed #fff;
   box-sizing: border-box;
 }
 
@@ -848,6 +862,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-profile {
   background-size: contain;
+}
+
+.btn-square {
+  width: 44px;
+  height: 44px;
 }
 
 .fieldItem h1,
@@ -1208,6 +1227,13 @@ input[type="radio"].fieldItem:checked + label:before {
   font-size: 34px;
   opacity: .8;
   margin-bottom: 0;
+}
+
+#customizeControls {
+  position: fixed;
+  left: 40px;
+  bottom: 10px;
+  width: 40px;
 }
 
 /*========== utility classes ==========*/
