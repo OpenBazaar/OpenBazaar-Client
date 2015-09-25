@@ -30,7 +30,8 @@ module.exports = Backbone.View.extend({
     'click .js-cancelItem': 'cancelClick',
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
-    'click .js-cancelCustomization': 'cancelCustomizePage'
+    'click .js-cancelCustomization': 'cancelCustomizePage',
+    'change .js-customizeColor': 'setCustomColor'
   },
 
   initialize: function (options) {
@@ -56,6 +57,8 @@ module.exports = Backbone.View.extend({
     this.following.urlRoot = options.userModel.get('server') + "get_following";
     this.lastTab = "about"; //track the last tab clicked
     this.pageID = "";
+    //flag to hold state when customizing
+    this.customizing = false;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -94,34 +97,34 @@ module.exports = Backbone.View.extend({
     $('#content').html(this.$el);
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      //save state of the page
+      self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
+      self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
+      self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
+      self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
+      self.setCustomStyles();
       self.setState(self.options.state, self.options.itemHash);
     });
-    this.setCustomStyles();
-
     return this;
   },
 
   setCustomStyles: function() {
-    console.log("set custom");
+    var self = this;
+    //only do the following if page has been set in the model
     if(this.model.get('page')){
-      //check if colors are in hex, if not convert
-      var backgroundColor = this.model.get('page').profile.background_color;
-      backgroundColor = is.hexColor(backgroundColor) ? backgroundColor : "#"+(backgroundColor).toString(16);
-      var primaryColor = this.model.get('page').profile.primary_color;
-      primaryColor = is.hexColor(primaryColor) ? primaryColor : "#"+(primaryColor).toString(16);
-      var secondaryColor = this.model.get('page').profile.secondary_color;
-      secondaryColor = is.hexColor(secondaryColor) ? secondaryColor : "#"+(secondaryColor).toString(16);
-      var textColor = this.model.get('page').profile.text_color;
-      textColor = is.hexColor(textColor) ? textColor : "#"+(textColor).toString(16);
-
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
       customStyleTag.innerHTML =
-          "#ov1 .body-neutral .custCol-background { background-color: " + backgroundColor + ";}" +
-          "#ov1 .body-neutral .custCol-primary { background-color: " + primaryColor + ";}" +
-          "#ov1 .body-neutral .custCol-secondary { background-color: " + secondaryColor + ";}" +
-          "#ov1 .body-neutral .custCol-text { color: " + textColor + ";}";
+          "#ov1 .userPage .custCol-background { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 .userPage .custCol-primary { background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .btn-tab.active { background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .custCol-secondary { background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 .userPage .custCol-text { color: " + this.model.get('page').profile.text_color + ";}";
       document.body.appendChild(customStyleTag);
+      //set custom color input values
+      $('.js-customizeColor').each(function(){
+        $(this).val(self.model.get('page').profile[$(this).attr('id')]);
+      });
     }
   },
 
@@ -146,36 +149,38 @@ module.exports = Backbone.View.extend({
   setControls: function(state){
     //if user owns page, hide/show control buttons
     if(this.options.ownPage === true) {
-      console.log("set state");
+      console.log("set state " + state);
       if(state === "item") {
         this.$el.find('.js-itemButtons').removeClass('hide');
         this.$el.find('.js-pageButtons').addClass('hide');
         this.$el.find('.js-itemEditButtons').addClass('hide');
         this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
-        document.getElementById('obBody').classList.remove("box-borderDashed");
+        document.getElementById('obContainer').classList.remove("box-borderDashed");
+        this.undoColorCustomization();
       } else if(state === "itemEdit") {
         this.$el.find('.js-itemButtons').addClass('hide');
         this.$el.find('.js-pageButtons').addClass('hide');
         this.$el.find('.js-itemEditButtons').removeClass('hide');
         this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
-        document.getElementById('obBody').classList.remove("box-borderDashed");
+        document.getElementById('obContainer').classList.remove("box-borderDashed");
+        this.undoColorCustomization();
       } else if(state === "customize") {
-        console.log("state is customize");
         this.$el.find('.js-itemButtons').addClass('hide');
         this.$el.find('.js-pageButtons').addClass('hide');
         this.$el.find('.js-itemEditButtons').addClass('hide');
         this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
-        document.getElementById('obBody').classList.add("box-borderDashed");
+        document.getElementById('obContainer').classList.add("box-borderDashed");
       } else {
         this.$el.find('.js-itemButtons').addClass('hide');
         this.$el.find('.js-pageButtons').removeClass('hide');
         this.$el.find('.js-itemEditButtons').addClass('hide');
         this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
-        document.getElementById('obBody').classList.remove("box-borderDashed");
+        document.getElementById('obContainer').classList.remove("box-borderDashed");
+        this.undoColorCustomization();
       }
     }
   },
@@ -352,27 +357,24 @@ module.exports = Backbone.View.extend({
     this.setControls("itemEdit");
   },
 
-  customizePage: function(){
-    console.log("customize page");
+  customizePage: function(e){
+    this.customizing = true;
     this.setControls('customize');
-    //save state of the page
-    this.undoCustomAttributes.background_color = this.model.get('page').profile.background_color;
-    this.undoCustomAttributes.primary_color = this.model.get('page').profile.primary_color;
-    this.undoCustomAttributes.secondary_color = this.model.get('page').profile.secondary_color;
-    this.undoCustomAttributes.text_color = this.model.get('page').profile.text_color;
+  },
+
+  setCustomColor: function(e) {
+    var colorButton = $(e.target);
+    var colorKey = colorButton.attr('id');
     //make temp copy of the page
     var tempPage  =  __.clone(this.model.get('page'));
-    tempPage.profile.background_color ="blue";
-    tempPage.profile.primary_color = "red";
-    tempPage.profile.secondary_color = "purple";
-    tempPage.profile.text_color = "yellow";
+    tempPage.profile[colorKey] = colorButton.val();
     this.model.set('page', tempPage);
     this.setCustomStyles();
   },
 
   saveCustomizePage: function() {
-    console.log("save custom");
-    this.setControls();
+    //this.setControls();
+    this.customizing = false;
     this.saveUserPageModel();
   },
 
@@ -386,7 +388,7 @@ module.exports = Backbone.View.extend({
         if(pageData[profileKey] !== 'object'){
           if(profileKey == 'background_color' || profileKey == 'primary_color' || profileKey == 'text_color' || profileKey == 'secondary_color'){
             //convert hex to decimal
-            var profileColor = pageData[profileKey];
+            var profileColor = pageData[profileKey].slice(1);
             profileColor = is.hexColor(profileColor) ? parseInt(profileColor, 16) : profileColor;
             formData.append(profileKey, profileColor);
           } else {
@@ -395,6 +397,7 @@ module.exports = Backbone.View.extend({
         }
       }
     }
+
     $.ajax({
       type: "POST",
       url: self.model.get('user').server + "profile",
@@ -404,7 +407,7 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         data = JSON.parse(data);
         if(data.success === true){
-          console.log("saved");
+          self.render();
         }else if(data.success === false){
           console.log("failed");
         }
@@ -418,17 +421,22 @@ module.exports = Backbone.View.extend({
   },
 
   cancelCustomizePage: function() {
-    console.log("cancel custom");
-    this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
-    this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
-    this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;
-    this.model.get('page').profile.text_color = this.undoCustomAttributes.text_color;
+    this.undoColorCustomization();
     this.setControls();
-    this.setCustomStyles();
+  },
+
+  undoColorCustomization: function(){
+    if(this.customizing === true) {
+      this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
+      this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
+      this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;
+      this.model.get('page').profile.text_color = this.undoCustomAttributes.text_color;
+      this.customizing = false;
+      this.setCustomStyles();
+    }
   },
 
   cancelClick: function(){
-    console.log("cancelClick");
     //consider calling delete here.
     if(this.lastTab === "item" || this.lastTab === "itemNew") {
       this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
