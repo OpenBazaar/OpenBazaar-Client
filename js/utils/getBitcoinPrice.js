@@ -34,18 +34,18 @@ module.exports = function(currency, callback){
       })
       .fail(function (jqXHR, textStatus, errorThrown)
       {
-        console.log("blockChain request failed: ");
+        console.log("Blockchain request failed: ");
         console.log(jqXHR);
         console.log(textStatus);
         console.log(errorThrown);
       })
       .always(function ()
       {
-        callCoinKite();
+        callCoinkite();
       });
     };
 
-    var callCoinKite = function ()
+    var callCoinkite = function ()
     {
       $.ajax({
         method: "GET",
@@ -68,12 +68,12 @@ module.exports = function(currency, callback){
           })
           .always(function ()
           {
-            callBitCoinAvg();
+            callBitcoinAvg();
           });
 
     };
 
-    var callBitCoinAvg = function ()
+    var callBitcoinAvg = function ()
     {
       $.ajax({
         method: "GET",
@@ -91,18 +91,18 @@ module.exports = function(currency, callback){
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("Bit coin average request failed: ");
+            console.log("Bitcoin average request failed: ");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
           })
           .always(function ()
           {
-            callBitCoinCharts();
+            callBitcoinCharts();
           });
     };
 
-    var callBitCoinCharts = function ()
+    var callBitcoinCharts = function ()
     {
       $.ajax({
         method: "GET",
