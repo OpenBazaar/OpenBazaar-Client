@@ -17,7 +17,6 @@ module.exports = function(currency, callback){
     var btPrices = [];
     var btcAverages = {rates: {}};
 
-
     var callBlockchain = function ()
     {
       $.ajax({
@@ -26,11 +25,13 @@ module.exports = function(currency, callback){
       })
       .done(function (response)
       {
-        var blockChainCurrencies = {};
-        for (var currency in response) {
-        blockChainCurrencies[currency] = response[currency]['15m'];
+        var BlockchainCurrencies = {};
+        for (var bcCurrency in response) {
+            if(response.hasOwnProperty(bcCurrency)){
+            BlockchainCurrencies[bcCurrency] = response[bcCurrency]['15m'];
+            }
         }
-        btPrices.push(blockChainCurrencies);
+        btPrices.push(BlockchainCurrencies);
       })
       .fail(function (jqXHR, textStatus, errorThrown)
       {
@@ -53,15 +54,17 @@ module.exports = function(currency, callback){
       })
           .done(function (response)
           {
-            var coinKiteCurrencies = {};
-            for (var currency in response.rates.BTC) {
-                coinKiteCurrencies[currency] = response.rates.BTC[currency].rate;
+            var CoinkiteCurrencies = {};
+            for (var ckCurrency in response.rates.BTC) {
+                if(response.hasOwnProperty(ckCurrency)){
+                CoinkiteCurrencies[ckCurrency] = response.rates.BTC[ckCurrency].rate;
+                }
             }
-            btPrices.push(coinKiteCurrencies);
+            btPrices.push(CoinkiteCurrencies);
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("coinKite request failed: ");
+            console.log("Coinkite request failed: ");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
@@ -81,13 +84,13 @@ module.exports = function(currency, callback){
       })
           .done(function (response)
           {
-            var bitCoinAvgCurrencies = {};
-            for (var currency in response) {
-                if(response[currency].averages) {
-                    bitCoinAvgCurrencies[currency] = response[currency].averages['24h_avg'];
+            var BitcoinAvgCurrencies = {};
+            for (var bcaCurrency in response) {
+                if(response[bcaCurrency].averages) {
+                    BitcoinAvgCurrencies[bcaCurrency] = response[bcaCurrency].averages['24h_avg'];
                 }
             }
-            btPrices.push(bitCoinAvgCurrencies);
+            btPrices.push(BitcoinAvgCurrencies);
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
@@ -110,15 +113,18 @@ module.exports = function(currency, callback){
       })
           .done(function (response)
           {
-            var bitCoinChartsCurrencies = {};
-            for (var currency in response) {
-                bitCoinChartsCurrencies[currency] = response[currency]['24h'];
+            response = JSON.parse(response);
+            var BitcoinChartsCurrencies = {};
+            for (var bccCurrency in response) {
+                if(response.hasOwnProperty(bccCurrency)){
+                    BitcoinChartsCurrencies[bccCurrency] = response[bccCurrency]['24h'];
+                }
             }
-            btPrices.push(bitCoinChartsCurrencies);
+            btPrices.push(BitcoinChartsCurrencies);
           })
           .fail(function (jqXHR, textStatus, errorThrown)
           {
-            console.log("Bit coin average request failed: ");
+            console.log("Bitcoin average request failed: ");
             console.log(jqXHR);
             console.log(textStatus);
             console.log(errorThrown);
