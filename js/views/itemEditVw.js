@@ -160,16 +160,23 @@ module.exports = Backbone.View.extend({
       data: formData,
       success: function(data) {
         data = JSON.parse(data);
-        var imageArray = __.clone(self.model.get("combinedImagesArray"));
-        var hashArray = __.clone(self.model.get("imageHashesToUpload"));
-        __.each(data.image_hashes, function(hash){
-          imageArray.push(self.model.get('server')+"get_image?hash="+hash);
-          hashArray.push(hash);
-        })
-        self.model.set("combinedImagesArray", imageArray);
-        self.model.set("imageHashesToUpload", hashArray);
+        if (data.success === true){
+          var imageArray = __.clone(self.model.get("combinedImagesArray"));
+          var hashArray = __.clone(self.model.get("imageHashesToUpload"));
+          __.each(data.image_hashes, function (hash) {
+            imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
+            hashArray.push(hash);
+          })
+          self.model.set("combinedImagesArray", imageArray);
+          self.model.set("imageHashesToUpload", hashArray);
 
-        self.updateImages();
+          self.updateImages();
+        }else if (data.success === false){
+          var errorModal = $('.js-messageModal');
+          errorModal.removeClass('hide');
+          errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+          errorModal.find('.js-messageModal-message').html("Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        }
       },
       error: function(jqXHR, status, errorThrown){
         console.log(jqXHR);
@@ -177,16 +184,6 @@ module.exports = Backbone.View.extend({
         console.log(errorThrown);
       }
     });
-
-/*
-    var newFiles = $(e.target)[0].files;
-    var imageArray = __.clone(this.model.get("combinedImagesArray"));
-    __.each(newFiles, function(newFile){
-      var fileURL = URL.createObjectURL(newFile);
-      imageArray.push(fileURL);
-    });
-    this.model.set("combinedImagesArray", imageArray);
-    this.updateImages();*/
   },
 
   updateImages: function(){

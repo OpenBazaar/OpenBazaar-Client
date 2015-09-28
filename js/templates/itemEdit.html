@@ -10,7 +10,7 @@
       <div class="row10 rowTop20 js-dropImage">
         <div class="uploadPhotoControls">
           <p class="txt-center"><%= polyglot.t('UploadPhotos') %></p>
-          <form action="<%- server %>upload_image" method="post" enctype="multipart/form-data" id="imageForm">
+          <form id="imageForm">
             <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
             <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
           </form>
