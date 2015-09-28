@@ -36,6 +36,10 @@ p a {
   text-decoration: underline;
 }
 
+input {
+  outline: none;
+}
+
 input[type="text"],
 input[type="number"] {
   border: none;
@@ -280,9 +284,11 @@ input[type="number"] {
   position: absolute;
   top: 10px;
   right: 10px;
+  float: none;
+  z-index: 1;
 }
 
-.btn-cornerTR .btn-cornerTRSmall {
+.btn-cornerTR.btn-cornerTRSmall {
   top: 5px;
   right: 5px;
 }
@@ -291,7 +297,19 @@ input[type="number"] {
   top: 0px;
 }
 
+.btn-cornerTL {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  float: none;
+  z-index: 1;
+}
 
+.btn-cornerTL.btn-flushTL {
+  top: 0;
+  left: 0;
+}
 
 .thumbnail {
   height: 30px;
@@ -310,6 +328,10 @@ input[type="number"] {
 
 .row10 {
   margin-bottom: 10px;
+}
+
+.row5 {
+  margin-bottom: 5px;
 }
 
 .row20 {
@@ -387,6 +409,11 @@ input[type="number"] {
   float: left;
 }
 
+.positionWrapper {
+  /* use when you need a generic element around one or more elements where one is absolutely positioned */
+  position: relative;
+}
+
 /*========== typography ==========*/
 
 h1,h2,h3 {
@@ -438,7 +465,7 @@ h5 {
 }
 /*========== skin classes ==========*/
 
-.body-neutral {
+.userPage {
   background-color: #2a2a2a;
 }
 
@@ -477,22 +504,15 @@ h5 {
   z-index: 1;
 }
 
-.body-neutral .navBar {
+.userPage .navBar {
   background-color: #575757;
-}
-
-.container {
-  height: 650px;
-  overflow-y: auto;
-  position: relative;
-  top: 50px;
 }
 
 .mainContainer {
   background-color: #086A9E;
 }
 
-.body-neutral .mainContainer {
+.userPage .mainContainer {
   background-color: #4a4848;
 }
 
@@ -544,6 +564,16 @@ h5 {
 
 .box-border {
   border: 1px solid rgba(255,255,255,0.08);
+  box-sizing: border-box;
+}
+
+.box-borderBright {
+  border: 1px solid #fff;
+  box-sizing: border-box;
+}
+
+.box-borderDashed {
+  border: 4px dashed #fff;
   box-sizing: border-box;
 }
 
@@ -667,11 +697,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   padding: 0 16px;
 }
 
-.body-neutral .btn {
+.userPage .btn {
   background-color: rgb(74,72,72);
 }
 
-.body-neutral .btn.inactive {
+.userPage .btn.inactive {
   opacity: 0.4;
 }
 
@@ -683,7 +713,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
    background-color: rgb(50,126,184);
  }
 
-.body-neutral .btn.btn-c1 {
+.userPage .btn.btn-c1 {
   background-color: rgb(87,87,87);
 }
 
@@ -691,7 +721,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   background-color: rgba(50,126,184,0.8);
 }
 
-.body-neutral .btn.btn-c1.fade {
+.userPage .btn.btn-c1.fade {
   background-color: rgba(87,87,87,0.8);
 }
 
@@ -732,7 +762,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.body-neutral .btn.btn-bar {
+.userPage .btn.btn-bar {
   background-color: #575757;
   border-right: 1px solid #4a4848;
 }
@@ -746,7 +776,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   opacity: 1;
 }
 
-.body-neutral .btn.btn-bar.active {
+.userPage .btn.btn-bar.active {
   background-color: #4a4848;
 }
 
@@ -786,7 +816,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   float: left;
 }
 
-.body-neutral .btn-togWrapper {
+.userPage .btn-togWrapper {
   border: 1px solid rgb(74,72,72);
 }
 
@@ -798,7 +828,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   border: 1px solid rgb(50,126,184);
 }
 
-.body-neutral .btn-togWrapper.btn-togWrapper-c1 {
+.userPage .btn-togWrapper.btn-togWrapper-c1 {
   border: 1px solid rgb(87,87,87);
 }
 
@@ -848,6 +878,31 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-profile {
   background-size: contain;
+}
+
+.btn-square {
+  width: 44px;
+  height: 44px;
+}
+
+.labelWrap {
+  display: block;
+  background: rgba(0,0,0,0.6);
+  padding: 7px 84px 7px 52px;
+  height: 44px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.6);
+  transition: opacity 1s;
+}
+
+.labelWrap.fade {
+  opacity: 0;
+}
+
+input:hover + .labelWrap.fadeIn {
+  opacity: 1;
 }
 
 .fieldItem h1,
@@ -1011,7 +1066,7 @@ input[type="radio"].fieldItem:checked + label:before {
   box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
 }
 
-.body-neutral .fieldItem-selectWrapper select option {
+.userPage .fieldItem-selectWrapper select option {
   background-color: #4a4848;
 }
 
@@ -1208,6 +1263,24 @@ input[type="radio"].fieldItem:checked + label:before {
   font-size: 34px;
   opacity: .8;
   margin-bottom: 0;
+}
+
+#customizeControls {
+  position: fixed;
+  left: 40px;
+  bottom: 20px;
+  width: 40px;
+}
+
+#obContainer::-webkit-scrollbar {
+  display: none;
+  box-sizing: border-box;
+}
+
+#obContainer {
+  height: 592px;
+  overflow-y: auto;
+  margin-top: 50px;
 }
 
 /*========== utility classes ==========*/

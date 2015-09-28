@@ -22,7 +22,7 @@
     </div>
   </div>
 </div>
-<div class="bar navBar barFlush navBar custCol-primary">
+<div class="bar navBar barFlush navBar custCol-secondary">
   <a class="btn btn-bar btn-tab active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
   <a class="btn btn-bar btn-tab js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
   <a class="btn btn-bar btn-tab js-followingTab js-tab"><%= polyglot.t('Following') %></a>
@@ -30,22 +30,28 @@
   <% if(ownPage === true) { %>
   <div class="navEnd pad15">
     <div class="nav-ctrlGroup js-pageButtons">
-      <a class="btn btn-txt custCol-background js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
+      <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
     </div>
     <div class="nav-ctrlGroup js-pageButtons">
-      <a class="btn btn-txt custCol-background js-customize"><%= polyglot.t('Customize') %> </a>
+      <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
     </div>
     <div class="nav-ctrlGroup js-itemButtons hide">
-      <a class="btn btn-txt custCol-background js-editItem"><%= polyglot.t('Edit') %></a>
+      <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
     </div>
     <div class="nav-ctrlGroup js-itemButtons hide">
-      <a class="btn btn-txt custCol-background js-deleteItem"><%= polyglot.t('Delete') %></a>
+      <a class="btn btn-txt custCol-primary js-deleteItem"><%= polyglot.t('Delete') %></a>
     </div>
     <div class="nav-ctrlGroup js-itemEditButtons hide">
-      <a class="btn btn-txt custCol-background js-cancelItem"><%= polyglot.t('Cancel') %></a>
+      <a class="btn btn-txt custCol-primary js-cancelItem"><%= polyglot.t('Cancel') %></a>
     </div>
     <div class="nav-ctrlGroup js-itemEditButtons hide">
-      <a class="btn btn-txt custCol-background js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+      <a class="btn btn-txt custCol-primary js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemCustomizationButtons hide">
+      <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+    </div>
+    <div class="nav-ctrlGroup js-itemCustomizationButtons hide">
+      <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
     </div>
   </div>
   <% } %>
@@ -162,4 +168,24 @@
     <div class="flexRow js-list5"></div>
   </div>
 </div>
-<div class="navBar"></div>
+<div class="navBar custCol-secondary"></div>
+
+<div id="customizeControls" class="hide">
+
+  <div class="positionWrapper">
+    <input type="color" class="btn btn-square btn-cornerTL btn-flushTL js-customizeColor" id="primary_color">
+    <label class="labelWrap row5 fade fadeIn" for="primary_color">Primary Color</label>
+  </div>
+  <div class="positionWrapper">
+    <input type="color" class="btn btn-square row5 btn-cornerTL btn-flushTL js-customizeColor" id="secondary_color">
+    <label class="labelWrap row5 fade fadeIn" for="secondary_color">Secondary Color</label>
+  </div>
+  <div class="positionWrapper">
+    <input type="color" class="btn btn-square btn-cornerTL btn-flushTL js-customizeColor" id="background_color">
+    <label class="labelWrap row5 fade fadeIn" for="background_color">Background Color</label>
+  </div>
+  <div class="positionWrapper">
+    <input type="color" class="btn btn-square row5 btn-cornerTL btn-flushTL js-customizeColor" id="text_color">
+    <label class="labelWrap row5 fade fadeIn" for="text_color">Text Color</label>
+  </div>
+</div>
