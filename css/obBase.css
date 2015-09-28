@@ -1268,7 +1268,7 @@ input[type="radio"].fieldItem:checked + label:before {
 #customizeControls {
   position: fixed;
   left: 40px;
-  bottom: 20px;
+  top: 410px;
   width: 40px;
 }
 
