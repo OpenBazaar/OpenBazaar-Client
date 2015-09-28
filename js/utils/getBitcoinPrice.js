@@ -31,10 +31,7 @@ module.exports = function (currency, callback) {
                     btPrices.push(BlockchainCurrencies);
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("Blockchain request failed: ");
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
+                    logAPIErrorInfo("Blockchain", jqXHR, textStatus, errorThrown);
                 })
                 .always(function () {
                     callCoinkite();
@@ -56,10 +53,7 @@ module.exports = function (currency, callback) {
                     btPrices.push(CoinkiteCurrencies);
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("Coinkite request failed: ");
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
+                    logAPIErrorInfo("Coinkite", jqXHR, textStatus, errorThrown);
                 })
                 .always(function () {
                     callBitcoinAvg();
@@ -82,10 +76,7 @@ module.exports = function (currency, callback) {
                     btPrices.push(BitcoinAvgCurrencies);
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("Bitcoin average request failed: ");
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
+                    logAPIErrorInfo("BitcoinAverage", jqXHR, textStatus, errorThrown);
                 })
                 .always(function () {
                     callBitcoinCharts();
@@ -108,10 +99,7 @@ module.exports = function (currency, callback) {
                     btPrices.push(BitcoinChartsCurrencies);
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
-                    console.log("Bitcoin average request failed: ");
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
+                    logAPIErrorInfo("Bitcoin Charts", jqXHR, textStatus, errorThrown);
                 })
                 .always(function () {
                     makeAveragePrice();
@@ -163,5 +151,13 @@ module.exports = function (currency, callback) {
 
     } else {
         typeof callback === 'function' && callback(1);
+    }
+    
+    function logAPIErrorInfo(APIname, jqXHR, textStatus, errorThrown)
+    {
+        console.log(APIname + " request failed: ");
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
     }
 };
