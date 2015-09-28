@@ -4,143 +4,160 @@ var __ = require('underscore'),
 Backbone.$ = $;
 
 /*eslint no-use-before-define:0*/
-module.exports = function(currency, callback){
+module.exports = function (currency, callback) {
 
-  //some APIs require currency to be upper case
-  currency = currency.toUpperCase();
+    //some APIs require currency to be upper case
+    currency = currency.toUpperCase();
 
-  //if currency is Bitcoin, don't bother with finding the Bitcoin value
-  if(currency !== 'BTC')
-  {
+    //if currency is Bitcoin, don't bother with finding the Bitcoin value
+    if (currency !== 'BTC') {
 
-    var btPrices = [];
+        window.btcAverages = {};
+        var btPrices = [];
+        var btcAverages = {rates: {}};
 
-    //initial call
-    //bitcoin average is hitting the rate limit
-    /*
-  $.ajax({
-    method: "GET",
-    url: "https://api.bitcoinaverage.com/ticker/global/" + currency
-  })
-      .done(function (response)
-      {
-        //console.log("bitcoinAverage: " + response['24h_avg']);
-        if($.isNumeric(response['24h_avg'])) {
-          btPrices.push(response['24h_avg']);
-        }
-      })
-      .fail(function (jqXHR, textStatus, errorThrown)
-      {
-        //console.log("bitcoinAverage request failed:");
-        //console.log(jqXHR);
-        //console.log(textStatus);
-        //console.log(errorThrown);
-      })
-      .always(function ()
-      {
-        callCoindesk();
-      });
+        var callBlockchain = function () {
+            $.ajax({
+                method: "GET",
+                url: "https://blockchain.info/ticker"
+            })
+                .done(function (response) {
+                    var BlockchainCurrencies = {};
+                    for (var bcCurrency in response) {
+                        if (response.hasOwnProperty(bcCurrency)) {
+                            BlockchainCurrencies[bcCurrency] = response[bcCurrency]['15m'];
+                        }
+                    }
+                    btPrices.push(BlockchainCurrencies);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    logAPIErrorInfo("Blockchain", jqXHR, textStatus, errorThrown);
+                })
+                .always(function () {
+                    callCoinkite();
+                });
+        };
 
-  var callCoindesk = function ()
-  {*/
-      $.ajax({
-        method: "GET",
-        dataType: "json",
-        url: "https://api.coindesk.com/v1/bpi/currentprice/" + currency + ".json"
-      })
-          .done(function (response)
-          {
-            //console.log("coinDesk: " + response.bpi[currency]['rate']);
-            if($.isNumeric(response.bpi[currency].rate)) {
-              btPrices.push(response.bpi[currency].rate);
-            }
-          })
-          .fail(function (jqXHR, textStatus, errorThrown)
-          {
-            //console.log("coinDesk request failed:");
-            //console.log(jqXHR);
-            //console.log(textStatus);
-            //console.log(errorThrown);
-          })
-          .always(function ()
-          {
+        var callCoinkite = function () {
+            $.ajax({
+                method: "GET",
+                url: "https://api.coinkite.com/public/rates"
+            })
+                .done(function (response) {
+                    var CoinkiteCurrencies = {};
+                    for (var ckCurrency in response.rates.BTC) {
+                        if (response.rates.BTC.hasOwnProperty(ckCurrency)) {
+                            CoinkiteCurrencies[ckCurrency] = response.rates.BTC[ckCurrency].rate;
+                        }
+                    }
+                    btPrices.push(CoinkiteCurrencies);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    logAPIErrorInfo("Coinkite", jqXHR, textStatus, errorThrown);
+                })
+                .always(function () {
+                    callBitcoinAvg();
+                });
+
+        };
+
+        var callBitcoinAvg = function () {
+            $.ajax({
+                method: "GET",
+                url: "https://api.bitcoinaverage.com/all"
+            })
+                .done(function (response) {
+                    var BitcoinAvgCurrencies = {};
+                    for (var bcaCurrency in response) {
+                        if (response[bcaCurrency].averages) {
+                            BitcoinAvgCurrencies[bcaCurrency] = response[bcaCurrency].averages['24h_avg'];
+                        }
+                    }
+                    btPrices.push(BitcoinAvgCurrencies);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    logAPIErrorInfo("BitcoinAverage", jqXHR, textStatus, errorThrown);
+                })
+                .always(function () {
+                    callBitcoinCharts();
+                });
+        };
+
+        var callBitcoinCharts = function () {
+            $.ajax({
+                method: "GET",
+                url: "http://api.bitcoincharts.com/v1/weighted_prices.json"
+            })
+                .done(function (response) {
+                    response = JSON.parse(response);
+                    var BitcoinChartsCurrencies = {};
+                    for (var bccCurrency in response) {
+                        if (response.hasOwnProperty(bccCurrency)) {
+                            BitcoinChartsCurrencies[bccCurrency] = response[bccCurrency]['24h'];
+                        }
+                    }
+                    btPrices.push(BitcoinChartsCurrencies);
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    logAPIErrorInfo("Bitcoin Charts", jqXHR, textStatus, errorThrown);
+                })
+                .always(function () {
+                    makeAveragePrice();
+                });
+        };
+
+        if (window.btcAverages.timeStamp && Math.floor((new Date() - window.btcAverages.timeStamp) / 60000) < 15) {
+            typeof callback === 'function' && callback(window.btcAverages.rates[currency]);
+        } else {
             callBlockchain();
-          });
-    //};
+        }
 
-
-    var callBlockchain = function ()
-    {
-      $.ajax({
-        method: "GET",
-        url: "https://blockchain.info/ticker"
-      })
-          .done(function (response)
-          {
-            //console.log("blockChain: " + response[currency]['15m']);
-            if($.isNumeric(response[currency]['15m'])) {
-              btPrices.push(response[currency]['15m']);
+        var makeAveragePrice = function () {
+            btcAverages.timeStamp = new Date();
+            var keys = {};
+            for (var i in btPrices) {
+                if (btPrices.hasOwnProperty(i)) {
+                    keys = $.extend(keys, btPrices[i]);
+                }
             }
-          })
-          .fail(function (jqXHR, textStatus, errorThrown)
-          {
-            //console.log("blockChain request failed: ");
-            //console.log(jqXHR);
-            //console.log(textStatus);
-            //console.log(errorThrown);
-          })
-          .always(function ()
-          {
-            callCoinKite();
-          });
-    };
-
-    var callCoinKite = function ()
-    {
-      $.ajax({
-        method: "GET",
-        url: "https://api.coinkite.com/public/rates"
-      })
-          .done(function (response)
-          {
-            //console.log("coinKite: " + response.rates.BTC[currency]['rate']);
-            if ($.isNumeric(response.rates.BTC[currency].rate)) {
-              btPrices.push(response.rates.BTC[currency].rate);
+            if (btPrices.length === 0) {
+                alert("Bitcoin exchange rates are not available.");
             }
-          })
-          .fail(function (jqXHR, textStatus, errorThrown)
-          {
-            //console.log("coinKite request failed: ");
-            //console.log(jqXHR);
-            //console.log(textStatus);
-            //console.log(errorThrown);
-          })
-          .always(function ()
-          {
-            makeAveragePrice();
-          });
-    };
+            var currencyKeys = Object.keys(keys);
+            var sum, currencyPrices, currencyCode;
+            for (var index in currencyKeys) {
+                if (currencyKeys.hasOwnProperty(index)) {
+                    currencyCode = currencyKeys[index];
+                    currencyPrices = [];
+                    for (var j in btPrices) {
+                        if (btPrices[j][currencyCode]) {
+                            currencyPrices.push(btPrices[j][currencyCode]);
+                        }
+                    }
+                    sum = 0;
+                    for (var jIndex in currencyPrices) {
+                        if (currencyPrices.hasOwnProperty(jIndex)) {
+                            sum += Number(currencyPrices[jIndex]);
+                        }
+                    }
+                    var averagePrice = sum / currencyPrices.length;
+                    btcAverages.rates[currencyCode] = averagePrice;
+                }
+            }
+            window.btcAverages = btcAverages;
+            var btAve = btcAverages.rates[currency];
+            typeof callback === 'function' && callback(btAve);
+        };
 
-
-    var makeAveragePrice = function ()
+    } else {
+        typeof callback === 'function' && callback(1);
+    }
+    
+    function logAPIErrorInfo(APIname, jqXHR, textStatus, errorThrown)
     {
-      var sum = 0,
-          btAve = 0;
-      for (var i = 0; i < btPrices.length; i++)
-      {
-        sum = sum + Number(btPrices[i]);
-      }
-      btAve = sum/btPrices.length;
-
-      if(btPrices.length === 0){
-        alert("Bitcoin exchange rates are not available.");
-      }
-      //console.log("Average is " + btAve);
-
-      typeof callback === 'function' && callback(btAve);
-    };
-
-  }else{
-    typeof callback === 'function' && callback(1);
-  }
+        console.log(APIname + " request failed: ");
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
+    }
 };
