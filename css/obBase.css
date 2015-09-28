@@ -1311,6 +1311,11 @@ input[type="radio"].fieldItem:checked + label:before {
   float: left;
 }
 
+#ov1 .pull-up50 {
+  position: relative;
+  top: -50px;
+}
+
 #ov1 .align-bottom {
   position: absolute;
   bottom: 0;

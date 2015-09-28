@@ -1,7 +1,7 @@
 <div class="mainContainer custCol-background">
-  <div class="banner-large shadow-inner1"
-  <% if(typeof(page.bannerImg) !== "undefined" && page.bannerImg) { %>
-  style="background-image: url(<%- user.server %>get_image?hash=<%- page.bannerImg %>);"
+  <div class="banner-large shadow-inner1 js-userPageBanner"
+  <% if(typeof(page.profile.header_hash) !== "undefined" && page.profile.header_hash) { %>
+  style="background-image: url(<%- user.server %>get_image?hash=<%- page.profile.header_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
@@ -21,6 +21,10 @@
       </div>
     </div>
   </div>
+<form id="userPageImageForm">
+  <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+  <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
+</form>
 </div>
 <div class="bar navBar barFlush navBar custCol-secondary">
   <a class="btn btn-bar btn-tab active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
@@ -47,16 +51,16 @@
     <div class="nav-ctrlGroup js-itemEditButtons hide">
       <a class="btn btn-txt custCol-primary js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
     </div>
-    <div class="nav-ctrlGroup js-itemCustomizationButtons hide">
+    <div class="nav-ctrlGroup js-itemCustomizationButtons pull-up50 hide">
       <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
     </div>
-    <div class="nav-ctrlGroup js-itemCustomizationButtons hide">
+    <div class="nav-ctrlGroup js-itemCustomizationButtons pull-up50 hide">
       <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
     </div>
   </div>
   <% } %>
 </div>
-<div>
+<div class="userPage-subViews">
   <div class="flexContainer flex-border custCol-primary js-about js-tabTarg">
     <div class="flexRow">
       <div class="flexCol-9">
