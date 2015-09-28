@@ -407,7 +407,8 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         data = JSON.parse(data);
         if(data.success === true){
-          self.render();
+          self.setCustomStyles();
+          self.setState(self.lastTab);
         }else if(data.success === false){
           console.log("failed");
         }
