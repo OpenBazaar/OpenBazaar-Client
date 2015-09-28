@@ -1268,7 +1268,7 @@ input[type="radio"].fieldItem:checked + label:before {
 #customizeControls {
   position: fixed;
   left: 40px;
-  bottom: 20px;
+  top: 410px;
   width: 40px;
 }
 
@@ -1309,6 +1309,11 @@ input[type="radio"].fieldItem:checked + label:before {
 
 #ov1 .pull-left {
   float: left;
+}
+
+#ov1 .pull-up50 {
+  position: relative;
+  top: -50px;
 }
 
 #ov1 .align-bottom {

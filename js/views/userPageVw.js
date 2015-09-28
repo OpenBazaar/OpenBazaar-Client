@@ -31,7 +31,8 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    'change .js-customizeColor': 'setCustomColor'
+    'change .js-customizeColor': 'setCustomColor',
+    'change .js-userPageImageUpload': 'uploadUserPageImage'
   },
 
   initialize: function (options) {
@@ -149,7 +150,6 @@ module.exports = Backbone.View.extend({
   setControls: function(state){
     //if user owns page, hide/show control buttons
     if(this.options.ownPage === true) {
-      console.log("set state " + state);
       if(state === "item") {
         this.$el.find('.js-itemButtons').removeClass('hide');
         this.$el.find('.js-pageButtons').addClass('hide');
@@ -372,6 +372,44 @@ module.exports = Backbone.View.extend({
     this.setCustomStyles();
   },
 
+  uploadUserPageImage: function() {
+    var self = this;
+    var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
+    var server = self.options.userModel.get('server');
+    $.ajax({
+      type: "POST",
+      url: server + "upload_image",
+      contentType: false,
+      processData: false,
+      data: formData,
+      success: function(data) {
+        data = JSON.parse(data);
+        var imageHash = data.image_hashes[0];
+        if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+          var tempPage  =  __.clone(self.model.get('page'));
+          tempPage.profile.header = imageHash;
+          self.model.set('page', tempPage);
+          self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server + "get_image?hash=" + imageHash + ')');
+        }else if (data.success === false){
+          var errorModal = $('.js-messageModal');
+          errorModal.removeClass('hide');
+          errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+          errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
+          var errorModal = $('.js-messageModal');
+          errorModal.removeClass('hide');
+          errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+          errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+        }
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+  },
+
   saveCustomizePage: function() {
     //this.setControls();
     this.customizing = false;
@@ -407,7 +445,8 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         data = JSON.parse(data);
         if(data.success === true){
-          self.render();
+          self.setCustomStyles();
+          self.setState(self.lastTab);
         }else if(data.success === false){
           console.log("failed");
         }
