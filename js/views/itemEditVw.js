@@ -5,7 +5,8 @@ Backbone.$ = $;
 
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
-    taggle = require('taggle');
+    taggle = require('taggle'),
+    chosen = require('../utils/chosen.jquery.min.js');
 
 
 module.exports = Backbone.View.extend({
@@ -88,6 +89,7 @@ module.exports = Backbone.View.extend({
 
     //activate tags plugin
     this.inputKeyword = new Taggle('inputKeyword');
+    $('#inputType').chosen();
   },
 
   priceToLocal: function(e){

@@ -1,7 +1,14 @@
 var __ = window.__ = require('underscore'),
-    Backbone = window.Backbone = require('backbone'),
-    $ = window.jQuery = require('jquery');
-Backbone.$ = window.Backbone.$ = $;
+    Backbone = require('backbone');
+//add to global scope for non-modular libraries
+window.Backbone = Backbone;
+$ = require('jquery');
+//add to global scope for non-modular libraries
+window.$ = $;
+window.jQuery = $;
+Backbone.$ = $;
+window.Backbone.$ = $;
+
 var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
