@@ -20,9 +20,6 @@ module.exports = Backbone.View.extend({
 
     render: function(){
         var self = this;
-        console.log(this.model);
-        //console.log(this.model.get('vendor_offer__listing__item__image_hashes'));
-
         loadTemplate('./js/templates/item.html', function(loadedTemplate) {
             self.$el.html(loadedTemplate(self.model.toJSON()));
         });

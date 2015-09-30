@@ -27,7 +27,8 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1200,
-    height: 700/*,
+    height: 700,
+    title: "Open Bazaar"/*,
     frame: false*/ //uncomment for release
   });
 
