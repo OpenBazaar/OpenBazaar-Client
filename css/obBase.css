@@ -4,9 +4,6 @@
 body {
   margin: 0;
   background-color: rgb(6,55,83);
-  position: absolute; /* fixes box shadow margin issue */
-  width: 100%; /* fixes box shadow margin issue */
-  min-height: 700px; /* fixes box shadow margin issue */
   /*fonts*/
   color: rgb(255, 255, 255);
   font-family: "Helvetica Neue", Helvetica, "Open Sans";
@@ -49,7 +46,8 @@ input[type="number"] {
 /*========== structure classes ==========*/
 
 #content {
-  margin: 23px auto 100px;
+  margin: 23px auto 0;
+  padding-bottom: 100px;
   position: relative;
   width: 950px;
   z-index: 1;
@@ -71,7 +69,6 @@ input[type="number"] {
 .mainContainer {
   position: relative;
   overflow: hidden;
-  min-height: 800px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -1320,7 +1317,7 @@ input[type="radio"].fieldItem:checked + label:before {
 #customizeControls {
   position: fixed;
   left: 40px;
-  top: 410px;
+  bottom: 40px;
   width: 40px;
 }
 
@@ -1330,7 +1327,8 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 #obContainer {
-  margin-top: 80px;
+  margin-top: 50px;
+  padding-top: 30px;
 }
 
 /*========== utility classes ==========*/

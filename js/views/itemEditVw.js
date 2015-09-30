@@ -265,15 +265,17 @@ module.exports = Backbone.View.extend({
         success: function (data) {
           data = JSON.parse(data);
           //if the itemEdit model has an id, it was cloned from an existing item
-          if (self.model.get('id') && data.success === true){
-            deleteThisItem();
+          //if the id returned is the same, an edit was made with no changes, don't delete it
+          var returnedId = self.model.get('id');
+          if (returnedId && data.success === true && returnedId != data.id){
+            deleteThisItem(data.id);
           }else if (data.success === false){
             var errorModal = $('.js-messageModal');
             errorModal.removeClass('hide');
             errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
             errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
-            //item is new
+            //item is new or unchanged
             self.trigger('saveNewDone');
           }
         },
@@ -290,12 +292,12 @@ module.exports = Backbone.View.extend({
       errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.</i>");
     }
 
-    var deleteThisItem = function(){
+    var deleteThisItem = function(newHash){
       $.ajax({
         type: "DELETE",
         url: self.model.get('server') + "contracts?id="+self.model.get('id'),
         success: function() {
-          self.trigger('deleteOldDone');
+          self.trigger('deleteOldDone', newHash);
         },
         error: function(jqXHR, status, errorThrown){
           console.log(jqXHR);
