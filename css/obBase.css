@@ -4,7 +4,6 @@
 body {
   margin: 0;
   background-color: rgb(6,55,83);
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
   position: absolute; /* fixes box shadow margin issue */
   width: 100%; /* fixes box shadow margin issue */
   min-height: 700px; /* fixes box shadow margin issue */
@@ -1187,6 +1186,14 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 /*========== one-off classes ==========*/
+
+#obShadow {
+  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 115px;
+}
 
 .homeModal-hero {
   background-image: url('../imgs/obSettingsHeroB.jpg');

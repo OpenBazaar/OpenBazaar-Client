@@ -26,6 +26,7 @@ module.exports = Backbone.View.extend({
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server')+"get_image?hash="+hash);
+      console.log("combinedImagesArray push "+ self.model.get('server')+"get_image?hash="+hash);
     });
     //add images urls to the combinedImagesArray for rendering
     this.model.set('combinedImagesArray', this.combinedImagesArray);
@@ -39,6 +40,8 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
+    console.log("itemView Render");
+    console.log(this.model.toJSON());
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
@@ -163,10 +166,14 @@ module.exports = Backbone.View.extend({
         if (data.success === true){
           var imageArray = __.clone(self.model.get("combinedImagesArray"));
           var hashArray = __.clone(self.model.get("imageHashesToUpload"));
+          console.log("imageArray " + imageArray);
+          console.log("hashArray " + hashArray);
           __.each(data.image_hashes, function (hash) {
             imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
             hashArray.push(hash);
           })
+          console.log("imageArray " + imageArray);
+          console.log("hashArray " + hashArray);
           self.model.set("combinedImagesArray", imageArray);
           self.model.set("imageHashesToUpload", hashArray);
 
@@ -194,13 +201,16 @@ module.exports = Backbone.View.extend({
     //remove extra subImage divs
     subImageDivs.slice(imageArray.length-1).remove();
 
+    console.log("imageArray"+imageArray);
     if(imageArray.length > 0){
       __.each(imageArray, function (imageURL, i) {
         if (i === 0){
+          console.log("Putting " + imageURL + "in main holder");
           self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')').removeClass('box-border').attr("data-index", "0")
           .find('.js-editItemDeleteImage').removeClass('hide');
         }else{
           if (i <= subImageDivs.length){
+            console.log("Putting " + imageURL + "in sub holder");
             $(subImageDivs[i - 1]).css('background-image', 'url(' + imageURL + ')');
           }else{
             $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
@@ -209,6 +219,7 @@ module.exports = Backbone.View.extend({
         }
       });
     } else {
+      console.log("No images, reset the main holder");
       //if there are no images, reset the main image area
       self.$el.find('.js-editItemMainImage').css('background-image', 'none').addClass('box-border').find('.js-editItemDeleteImage').addClass('hide');
     }
@@ -219,6 +230,9 @@ module.exports = Backbone.View.extend({
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
     imageArray.splice(imgIndex, 1);
     this.model.set("combinedImagesArray", imageArray);
+    var imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
+    imageUploadArray.splice(imgIndex, 1);
+    this.model.set("imageHashesToUpload", imageUploadArray);
     this.updateImages();
   },
 
@@ -240,7 +254,14 @@ module.exports = Backbone.View.extend({
     }
 
     var formData = new FormData(this.$el.find('#contractForm')[0]);
-    formData.append('images', this.model.get('imageHashesToUpload'));
+    //formData.append('images', this.model.get('imageHashesToUpload'));
+    __.each(this.model.get('imageHashesToUpload'), function(imHash){
+      formData.append('images', imHash);
+    });
+
+    if (self.model.get('id')) {
+      formData.append('delete_images', false);
+    }
 
     if(document.getElementById('contractForm').checkValidity()){
       $.ajax({
@@ -251,8 +272,8 @@ module.exports = Backbone.View.extend({
         data: formData,
         success: function (data) {
           data = JSON.parse(data);
+          //if the itemEdit model has an id, it was cloned from an existing item
           if (self.model.get('id') && data.success === true){
-            self.trigger('saveDone');
             deleteThisItem();
           }else if (data.success === false){
             var errorModal = $('.js-messageModal');
@@ -260,7 +281,8 @@ module.exports = Backbone.View.extend({
             errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
             errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
-            self.trigger('saveDone');
+            //item is new
+            self.trigger('saveNewDone');
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -279,9 +301,9 @@ module.exports = Backbone.View.extend({
     var deleteThisItem = function(){
       $.ajax({
         type: "DELETE",
-        url: self.model.get('server') + "contracts?"+self.model.get('id'),
+        url: self.model.get('server') + "contracts?id="+self.model.get('id'),
         success: function() {
-          //alert("deleted old item");
+          self.trigger('deleteOldDone');
         },
         error: function(jqXHR, status, errorThrown){
           console.log(jqXHR);

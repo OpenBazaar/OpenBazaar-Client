@@ -30,7 +30,9 @@
   <a class="btn btn-bar btn-tab active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
   <a class="btn btn-bar btn-tab js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
   <a class="btn btn-bar btn-tab js-followingTab js-tab"><%= polyglot.t('Following') %></a>
+  <% if(page.profile.vendor == true) { %>
   <a class="btn btn-bar btn-tab js-storeTab js-tab"><%= polyglot.t('Store') %></a>
+  <% } %>
   <% if(ownPage === true) { %>
   <div class="navEnd pad15">
     <div class="nav-ctrlGroup js-pageButtons">
