@@ -121,7 +121,8 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-primary { background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .custCol-secondary { background-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 .userPage .custCol-text { color: " + this.model.get('page').profile.text_color + ";}";
+          "#ov1 .userPage .custCol-text { color: " + this.model.get('page').profile.text_color + ";}" +
+          "#ov1 .userPage input { color: " + this.model.get('page').profile.text_color + ";}";
       document.body.appendChild(customStyleTag);
       //set custom color input values
       $('.js-customizeColor').each(function(){
@@ -133,7 +134,6 @@ module.exports = Backbone.View.extend({
   setState: function(state, hash) {
     if(state === "item"){
       this.renderItem(hash);
-      this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
     }else if(state === "itemNew") {
@@ -260,7 +260,7 @@ module.exports = Backbone.View.extend({
     //remove old item before rendering
     if(this.itemView){
       this.itemView.undelegateEvents();
-      this.itemView.remove();
+      //this.itemView.remove();
     }
     this.itemView = new itemView({model:this.item, el: '.js-list4'});
     this.subViews.push(this.itemView);
@@ -475,16 +475,19 @@ module.exports = Backbone.View.extend({
 
   saveNewDone: function() {
     //go back to store, because the hash of the new item is unknown
-    this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+    //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
   },
 
-  deleteOldDone: function() {
-    //go back to store, because the hash of the new item is unknown
-    this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
-    this.addTabToHistory('store');
-    this.setState('store');
+  deleteOldDone: function(newHash) {
+    if(newHash) {
+      this.setState('item', newHash);
+    } else {
+      //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+      this.addTabToHistory('store');
+      this.setState('store');
+    }
   },
 
   cancelClick: function(){
