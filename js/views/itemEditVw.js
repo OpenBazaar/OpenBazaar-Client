@@ -5,8 +5,8 @@ Backbone.$ = $;
 
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
+    // chosen = require('chosen-jquery-browserify'),
     taggle = require('taggle');
-
 
 module.exports = Backbone.View.extend({
 
@@ -82,9 +82,14 @@ module.exports = Backbone.View.extend({
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
     shipsTo.val(shipsToValue);
 
-
     //activate tags plugin
     this.inputKeyword = new Taggle('inputKeyword');
+
+    //set chosen inputs
+    // $('.chosen').chosen();
+
+    //focus main input
+    this.$el.find('input[name=title]').focus();
   },
 
   priceToLocal: function(e){

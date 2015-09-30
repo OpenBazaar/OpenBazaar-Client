@@ -114,11 +114,14 @@ module.exports = Backbone.View.extend({
     if(this.model.get('page')){
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
+      console.log(this.model.get('page').profile.primary_color );
       customStyleTag.innerHTML =
           "#ov1 .userPage .custCol-background { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 .userPage .custCol-primary-light { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.03) + ";}" +
           "#ov1 .userPage .custCol-primary { background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .custCol-secondary { background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .custCol-text { color: " + this.model.get('page').profile.text_color + ";}";
       document.body.appendChild(customStyleTag);
       //set custom color input values
@@ -126,6 +129,11 @@ module.exports = Backbone.View.extend({
         $(this).val(self.model.get('page').profile[$(this).attr('id')]);
       });
     }
+  },
+
+  shadeColor2: function shadeColor2(color, percent) {   
+    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
   },
 
   setState: function(state, hash) {
@@ -445,6 +453,8 @@ module.exports = Backbone.View.extend({
       this.setState(this.lastTab);
     }
   },
+
+
 
   editItem: function(){
     this.renderItemEdit(this.item);

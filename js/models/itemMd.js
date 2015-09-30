@@ -28,7 +28,7 @@ module.exports = window.Backbone.LinearModel.extend({
 
     vendor_offer__listing__item__price_per_unit__fiat__price: 0,
     vendor_offer__listing__item__price_per_unit__fiat__currency_code: "",
-    vendor_offer__listing__item__title: "New Item",
+    vendor_offer__listing__item__title: "",
     vendor_offer__listing__item__process_time: "",
     vendor_offer__listing__item__image_hashes: [],
     vendor_offer__listing__item__nsfw: false,
