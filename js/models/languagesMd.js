@@ -108,7 +108,7 @@ module.exports = Backbone.Model.extend({
         Skip: "Omitir",
         Done: "Hecho",
         Cancel: "Cancelar",
-        Sell: "Vender",
+        Sell: "vendor",
         New: "Nuevo",
         Item: "Artículo",
         Items: "Artículos",
