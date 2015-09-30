@@ -70,23 +70,17 @@ module.exports = Backbone.View.extend({
       }
     };
 
-    console.log("userPageView Init options.userID " + options.userID);
-    console.log(typeof options.userID);
-    console.log("userPageView Init options.userModel.get('guid') " + options.userModel.get('guid'));
-
     //if no userID is passed in, or it matches the user's ID, then this is their page
     //sometimes it can be set to the string 'null', check for that too
     if(!options.userID || options.userID == options.userModel.get('guid') || options.userID == 'null') {
       this.pageID = options.userModel.get('guid');
       this.options.ownPage = true;
     } else {
-      console.log("userID was true");
       this.pageID = options.userID;
       this.options.ownPage = false;
     }
     this.options.ownPage = true;
 
-    console.log('userPageView init pageID ' + this.pageID);
     this.userProfile.fetch({
       data: $.param({'id': this.pageID}),
       success: function(model){
@@ -137,7 +131,6 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state, hash) {
-    console.log("setState "+state+" " +hash);
     if(state === "item"){
       this.renderItem(hash);
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
@@ -250,7 +243,6 @@ module.exports = Backbone.View.extend({
   },
 
   renderItem: function(hash){
-    console.log("render item "+hash);
     var self = this;
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currencyCode'),
@@ -272,7 +264,6 @@ module.exports = Backbone.View.extend({
     }
     this.itemView = new itemView({model:this.item, el: '.js-list4'});
     this.subViews.push(this.itemView);
-    console.log(this.item.urlRoot);
     this.item.fetch({
       data: $.param({'id': hash}),
       success: function(model){
@@ -497,7 +488,6 @@ module.exports = Backbone.View.extend({
   },
 
   cancelClick: function(){
-    console.log("cancel click");
     this.setState(this.lastTab);
   },
 

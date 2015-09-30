@@ -27,7 +27,6 @@ module.exports = Backbone.View.extend({
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server')+"get_image?hash="+hash);
-      console.log("combinedImagesArray push "+ self.model.get('server')+"get_image?hash="+hash);
     });
     //add images urls to the combinedImagesArray for rendering
     this.model.set('combinedImagesArray', this.combinedImagesArray);
@@ -41,8 +40,6 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    console.log("itemView Render");
-    console.log(this.model.toJSON());
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
@@ -168,14 +165,10 @@ module.exports = Backbone.View.extend({
         if (data.success === true){
           var imageArray = __.clone(self.model.get("combinedImagesArray"));
           var hashArray = __.clone(self.model.get("imageHashesToUpload"));
-          console.log("imageArray " + imageArray);
-          console.log("hashArray " + hashArray);
           __.each(data.image_hashes, function (hash) {
             imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
             hashArray.push(hash);
           })
-          console.log("imageArray " + imageArray);
-          console.log("hashArray " + hashArray);
           self.model.set("combinedImagesArray", imageArray);
           self.model.set("imageHashesToUpload", hashArray);
 
@@ -203,16 +196,13 @@ module.exports = Backbone.View.extend({
     //remove extra subImage divs
     subImageDivs.slice(imageArray.length-1).remove();
 
-    console.log("imageArray"+imageArray);
     if(imageArray.length > 0){
       __.each(imageArray, function (imageURL, i) {
         if (i === 0){
-          console.log("Putting " + imageURL + "in main holder");
           self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')').removeClass('box-border').attr("data-index", "0")
           .find('.js-editItemDeleteImage').removeClass('hide');
         }else{
           if (i <= subImageDivs.length){
-            console.log("Putting " + imageURL + "in sub holder");
             $(subImageDivs[i - 1]).css('background-image', 'url(' + imageURL + ')');
           }else{
             $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
@@ -221,7 +211,6 @@ module.exports = Backbone.View.extend({
         }
       });
     } else {
-      console.log("No images, reset the main holder");
       //if there are no images, reset the main image area
       self.$el.find('.js-editItemMainImage').css('background-image', 'none').addClass('box-border').find('.js-editItemDeleteImage').addClass('hide');
     }

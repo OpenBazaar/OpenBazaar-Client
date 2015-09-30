@@ -14,17 +14,12 @@ module.exports = Backbone.View.extend({
     },
 
     initialize: function(){
-        console.log("item view init");
         //don't render immediately, wait for the model to update itself with converted prices
         this.listenTo(this.model, 'change:priceSet', this.render);
     },
 
     render: function(){
         var self = this;
-        console.log("item view render");
-        console.log(this.model);
-        //console.log(this.model.get('vendor_offer__listing__item__image_hashes'));
-
         loadTemplate('./js/templates/item.html', function(loadedTemplate) {
             self.$el.html(loadedTemplate(self.model.toJSON()));
         });
