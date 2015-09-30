@@ -7,7 +7,7 @@ module.exports = window.Backbone.LinearModel.extend({
   flatOptions : {delimiter: "__"},
   defaults: {
     displayPrice: 0, //set by userPage View
-    venderBTCPrice: 0, //set by userPage View
+    vendorBTCPrice: 0, //set by userPage View
     userCurrencyCode: "", //set by userPage View. This is for editing the product
     userCountry: "", //set by userPage View. This is a country code. This is used for editing.
     ownPage: false, //set by userPage View
@@ -180,7 +180,7 @@ module.exports = window.Backbone.LinearModel.extend({
           vendorBitCoinPrice = Number((vendorPrice / btAve).toFixed(4));
           var vendToUserBTCRatio = window.currentBitcoin/vendorBitCoinRatio;
           var newAttributes = {};
-          newAttributes.venderBTCPrice = vendorBitCoinPrice;
+          newAttributes.vendorBTCPrice = vendorBitCoinPrice;
           newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
@@ -192,7 +192,7 @@ module.exports = window.Backbone.LinearModel.extend({
         });
       }else{
         var newAttributes = {};
-        newAttributes.venderBTCPrice = vendorBitCoinPrice;
+        newAttributes.vendorBTCPrice = vendorBitCoinPrice;
         newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
@@ -204,7 +204,7 @@ module.exports = window.Backbone.LinearModel.extend({
       }
     }else {
       var newAttributes = {};
-      newAttributes.venderBTCPrice = 0;
+      newAttributes.vendorBTCPrice = 0;
       newAttributes.displayPrice = 0;
       newAttributes.priceSet = true;
       self.set(newAttributes);

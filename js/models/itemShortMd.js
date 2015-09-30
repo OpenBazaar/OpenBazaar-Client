@@ -9,7 +9,7 @@ module.exports = Backbone.Model.extend({
     category: "",
     price: 0,
     displayPrice: 0, //set locally, not by server
-    venderBTCPrice: 0, //set locally, not by server
+    vendorBTCPrice: 0, //set locally, not by server
     userCurrencyCode: "", //set locally, not by server
     currency_code: "",
     nsfw: false,
@@ -37,7 +37,7 @@ module.exports = Backbone.Model.extend({
           vendorBitCoinPrice = Number((self.get("price") / btAve).toFixed(4));
           var vendToUserBTCRatio = window.currentBitcoin/vendorBitCoinRatio;
           var newAttributes = {};
-          newAttributes.venderBTCPrice = vendorBitCoinPrice;
+          newAttributes.vendorBTCPrice = vendorBitCoinPrice;
           newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: self.get("userCurrencyCode")}).format(self.get("price") * vendToUserBTCRatio);
           self.set(newAttributes);
         });
