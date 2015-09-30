@@ -1018,6 +1018,52 @@ input[type="number"].fieldItem:focus:invalid {
   content: "";
 }
 
+/* custom chosen styles */
+.fieldItem .fieldItem-selectWrapper .chosen-single {
+  height: 50px;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  line-height: 50px;
+  color: #fff;
+}
+
+.fieldItem .fieldItem-selectWrapper .chosen-container-single div b {
+  background: none;
+}
+
+.fieldItem .fieldItem-selectWrapper .chosen-container-single div b:after {
+  content: "\f104";
+  font-family: "Ionicons";
+  position: absolute;
+  line-height: 50px;
+  top: 0;
+  right: 20px;
+  pointer-events: none;
+}
+
+.fieldItem .fieldItem-selectWrapper .chosen-container-single.chosen-container-active div b:after {
+  content: "\f10d";
+}
+
+.fieldItem .fieldItem-selectWrapper .chosen-drop {
+  background: #353535;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0;
+  box-shadow: none;
+  line-height: 50px;
+  color: #fff;
+}
+
+.fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li {
+  color: #fff;
+}
+
+.fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li.highlighted {
+  background: rgb(87,87,87);
+}
+
 .fieldItem-textarea {
   background: none;
   border: 2px solid transparent;
