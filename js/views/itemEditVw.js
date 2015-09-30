@@ -221,6 +221,9 @@ module.exports = Backbone.View.extend({
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
     imageArray.splice(imgIndex, 1);
     this.model.set("combinedImagesArray", imageArray);
+    var imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
+    imageUploadArray.splice(imgIndex, 1);
+    this.model.set("imageHashesToUpload", imageUploadArray);
     this.updateImages();
   },
 
@@ -242,7 +245,15 @@ module.exports = Backbone.View.extend({
     }
 
     var formData = new FormData(this.$el.find('#contractForm')[0]);
-    formData.append('images', this.model.get('imageHashesToUpload'));
+    //formData.append('images', this.model.get('imageHashesToUpload'));
+    __.each(this.model.get('imageHashesToUpload'), function(imHash){
+      formData.append('images', imHash);
+    });
+
+    //if this is an existing product, do not delete the images
+    if (self.model.get('id')) {
+      formData.append('delete_images', false);
+    }
 
     if(document.getElementById('contractForm').checkValidity()){
       $.ajax({
@@ -253,8 +264,8 @@ module.exports = Backbone.View.extend({
         data: formData,
         success: function (data) {
           data = JSON.parse(data);
+          //if the itemEdit model has an id, it was cloned from an existing item
           if (self.model.get('id') && data.success === true){
-            self.trigger('saveDone');
             deleteThisItem();
           }else if (data.success === false){
             var errorModal = $('.js-messageModal');
@@ -262,7 +273,8 @@ module.exports = Backbone.View.extend({
             errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
             errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
-            self.trigger('saveDone');
+            //item is new
+            self.trigger('saveNewDone');
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -281,9 +293,9 @@ module.exports = Backbone.View.extend({
     var deleteThisItem = function(){
       $.ajax({
         type: "DELETE",
-        url: self.model.get('server') + "contracts?"+self.model.get('id'),
+        url: self.model.get('server') + "contracts?id="+self.model.get('id'),
         success: function() {
-          //alert("deleted old item");
+          self.trigger('deleteOldDone');
         },
         error: function(jqXHR, status, errorThrown){
           console.log(jqXHR);

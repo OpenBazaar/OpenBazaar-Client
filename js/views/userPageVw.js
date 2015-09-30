@@ -3,7 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
-    userPageModel = require('../models/userPageMd'),
+    userProfileModel = require('../models/userProfile'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
     itemModel = require('../models/itemMd'),
@@ -47,9 +47,9 @@ module.exports = Backbone.View.extend({
      */
     this.subViews = [];
     this.model = new Backbone.Model();
-    this.userPage = new userPageModel();
+    this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
-    this.userPage.urlRoot = options.userModel.get('server') + "profile";
+    this.userProfile.urlRoot = options.userModel.get('server') + "profile";
     this.listings = new listingsModel();
     this.listings.urlRoot = options.userModel.get('server') + "get_listings";
     this.followers = new usersModel();
@@ -71,7 +71,8 @@ module.exports = Backbone.View.extend({
     };
 
     //if no userID is passed in, or it matches the user's ID, then this is their page
-    if(options.userID === '' || options.userID === options.userModel.get('guid')) {
+    //sometimes it can be set to the string 'null', check for that too
+    if(!options.userID || options.userID == options.userModel.get('guid') || options.userID == 'null') {
       this.pageID = options.userModel.get('guid');
       this.options.ownPage = true;
     } else {
@@ -80,7 +81,7 @@ module.exports = Backbone.View.extend({
     }
     this.options.ownPage = true;
 
-    this.userPage.fetch({
+    this.userProfile.fetch({
       data: $.param({'id': this.pageID}),
       success: function(model){
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON(), ownPage: self.options.ownPage});
@@ -133,6 +134,8 @@ module.exports = Backbone.View.extend({
     if(state === "item"){
       this.renderItem(hash);
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
+    }else if(state === "itemOld") {
+      this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
     }else if(state === "itemNew") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       this.sellItem();
@@ -150,34 +153,26 @@ module.exports = Backbone.View.extend({
   setControls: function(state){
     //if user owns page, hide/show control buttons
     if(this.options.ownPage === true) {
-      if(state === "item") {
+      if(state === "item" || state === "itemOld") {
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-itemButtons').removeClass('hide');
-        this.$el.find('.js-pageButtons').addClass('hide');
-        this.$el.find('.js-itemEditButtons').addClass('hide');
-        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();
       } else if(state === "itemEdit") {
-        this.$el.find('.js-itemButtons').addClass('hide');
-        this.$el.find('.js-pageButtons').addClass('hide');
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-itemEditButtons').removeClass('hide');
-        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();
       } else if(state === "customize") {
-        this.$el.find('.js-itemButtons').addClass('hide');
-        this.$el.find('.js-pageButtons').addClass('hide');
-        this.$el.find('.js-itemEditButtons').addClass('hide');
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         document.getElementById('obContainer').classList.add("box-borderDashed");
       } else {
-        this.$el.find('.js-itemButtons').addClass('hide');
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-pageButtons').removeClass('hide');
-        this.$el.find('.js-itemEditButtons').addClass('hide');
-        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();
@@ -231,7 +226,7 @@ module.exports = Backbone.View.extend({
       arrayItem.showAvatar = false;
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
-      //arrayItem.userID = self.model.get('page').profile.guid;
+      arrayItem.userID = self.pageID;
     });
     this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
     this.subViews.push(this.itemList);
@@ -259,7 +254,7 @@ module.exports = Backbone.View.extend({
       ownPage: self.options.ownPage,
       //userID: self.model.get('page').profile.guid,
       itemHash: hash,
-      id: hash
+      //id: hash
     });
     this.item.urlRoot = this.options.userModel.get('server')+"contracts";
     //remove old item before rendering
@@ -273,6 +268,8 @@ module.exports = Backbone.View.extend({
       data: $.param({'id': hash}),
       success: function(model){
         self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
+        //set id after fetch, otherwise Backbone includes it in the fetch url
+        model.set('id', hash);
         //model may arrive empty, set this flag to trigger a change event
         model.set({fetched: true});
       },
@@ -298,15 +295,16 @@ module.exports = Backbone.View.extend({
         vendor_offer__listing__id__pubkeys__guid: self.model.get('page').profile.guid
       });
     }
-    this.itemEdit.urlRoot = this.options.userModel.get('server')+"contracts";
+    //this.itemEdit.urlRoot = this.options.userModel.get('server')+"contracts";
     //add the user information
-    this.itemEdit.set({user: self.options.userModel.toJSON()});
+    //this.itemEdit.set({user: self.options.userModel.toJSON()});
     //unbind any old view
     if(this.itemEditView){
       this.itemEditView.undelegateEvents();
     }
     this.itemEditView = new itemEditView({model:this.itemEdit, el: '.js-list5'});
-    this.listenTo(this.itemEditView, 'saveDone', this.cancelClick);
+    this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
+    this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
     this.subViews.push(this.itemEditView);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
@@ -475,20 +473,28 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  saveNewDone: function() {
+    //go back to store, because the hash of the new item is unknown
+    this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+    this.addTabToHistory('store');
+    this.setState('store');
+  },
+
+  deleteOldDone: function() {
+    //go back to store, because the hash of the new item is unknown
+    this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+    this.addTabToHistory('store');
+    this.setState('store');
+  },
+
   cancelClick: function(){
-    //consider calling delete here.
-    if(this.lastTab === "item" || this.lastTab === "itemNew") {
-      this.tabClick(this.$el.find('.js-storeTab'), this.$el.find('.js-item'));
-    } else {
-      this.tabClick(this.$el.find('.js-' + this.lastTab + 'Tab'), this.$el.find('.js-' + this.lastTab));
-      this.setState(this.lastTab);
-    }
+    this.setState(this.lastTab);
   },
 
   editItem: function(){
     this.renderItemEdit(this.item);
     this.setControls("itemEdit");
-    this.lastTab = "item";
+    this.lastTab = "itemOld";
   },
 
   deleteItem: function(){

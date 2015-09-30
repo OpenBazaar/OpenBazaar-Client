@@ -155,9 +155,9 @@ module.exports = function (currency, callback) {
     
     function logAPIErrorInfo(APIname, jqXHR, textStatus, errorThrown)
     {
-        console.log(APIname + " request failed: ");
-        console.log(jqXHR);
-        console.log(textStatus);
-        console.log(errorThrown);
+        //console.log(APIname + " request failed: ");
+        //console.log(jqXHR);
+        //console.log(textStatus);
+        //console.log(errorThrown);
     }
 };
