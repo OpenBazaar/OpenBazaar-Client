@@ -161,33 +161,25 @@ module.exports = Backbone.View.extend({
     //if user owns page, hide/show control buttons
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-itemButtons').removeClass('hide');
-        this.$el.find('.js-pageButtons').addClass('hide');
-        this.$el.find('.js-itemEditButtons').addClass('hide');
-        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();
       } else if(state === "itemEdit") {
-        this.$el.find('.js-itemButtons').addClass('hide');
-        this.$el.find('.js-pageButtons').addClass('hide');
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-itemEditButtons').removeClass('hide');
-        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();
       } else if(state === "customize") {
-        this.$el.find('.js-itemButtons').addClass('hide');
-        this.$el.find('.js-pageButtons').addClass('hide');
-        this.$el.find('.js-itemEditButtons').addClass('hide');
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         document.getElementById('obContainer').classList.add("box-borderDashed");
       } else {
-        this.$el.find('.js-itemButtons').addClass('hide');
+        this.$el.find('.js-userPageControls').addClass('hide');
         this.$el.find('.js-pageButtons').removeClass('hide');
-        this.$el.find('.js-itemEditButtons').addClass('hide');
-        this.$el.find('.js-itemCustomizationButtons').addClass('hide');
         this.$el.find('#customizeControls').addClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();

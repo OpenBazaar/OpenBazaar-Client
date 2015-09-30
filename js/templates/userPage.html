@@ -30,33 +30,31 @@
   <a class="btn btn-bar btn-tab active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
   <a class="btn btn-bar btn-tab js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
   <a class="btn btn-bar btn-tab js-followingTab js-tab"><%= polyglot.t('Following') %></a>
-  <% if(page.profile.vendor == true) { %>
   <a class="btn btn-bar btn-tab js-storeTab js-tab"><%= polyglot.t('Store') %></a>
-  <% } %>
   <% if(ownPage === true) { %>
   <div class="navEnd pad15">
-    <div class="nav-ctrlGroup js-pageButtons">
+    <div class="nav-ctrlGroup js-pageButtons js-userPageControls">
       <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
     </div>
-    <div class="nav-ctrlGroup js-pageButtons">
+    <div class="nav-ctrlGroup js-pageButtons js-userPageControls">
       <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
     </div>
-    <div class="nav-ctrlGroup js-itemButtons hide">
+    <div class="nav-ctrlGroup js-itemButtons js-userPageControls hide">
       <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
     </div>
-    <div class="nav-ctrlGroup js-itemButtons hide">
+    <div class="nav-ctrlGroup js-itemButtons js-userPageControls hide">
       <a class="btn btn-txt custCol-primary js-deleteItem"><%= polyglot.t('Delete') %></a>
     </div>
-    <div class="nav-ctrlGroup js-itemEditButtons hide">
+    <div class="nav-ctrlGroup js-itemEditButtons js-userPageControls hide">
       <a class="btn btn-txt custCol-primary js-cancelItem"><%= polyglot.t('Cancel') %></a>
     </div>
-    <div class="nav-ctrlGroup js-itemEditButtons hide">
+    <div class="nav-ctrlGroup js-itemEditButtons js-userPageControls hide">
       <a class="btn btn-txt custCol-primary js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
     </div>
-    <div class="nav-ctrlGroup js-itemCustomizationButtons pull-up50 hide">
+    <div class="nav-ctrlGroup js-itemCustomizationButtons pull-up50 js-userPageControls hide">
       <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
     </div>
-    <div class="nav-ctrlGroup js-itemCustomizationButtons pull-up50 hide">
+    <div class="nav-ctrlGroup js-itemCustomizationButtons pull-up50 js-userPageControls hide">
       <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
     </div>
   </div>

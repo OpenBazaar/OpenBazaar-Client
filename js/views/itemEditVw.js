@@ -261,6 +261,7 @@ module.exports = Backbone.View.extend({
       formData.append('images', imHash);
     });
 
+    //if this is an existing product, do not delete the images
     if (self.model.get('id')) {
       formData.append('delete_images', false);
     }
