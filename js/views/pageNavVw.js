@@ -19,6 +19,7 @@ module.exports = Backbone.View.extend({
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
     'click .js-navProfile': 'navProfileClick',
+    'click .js-navProfileMenu a': 'closeNav',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
@@ -86,6 +87,11 @@ module.exports = Backbone.View.extend({
     }, 1000);
   },
 
+  closeNav: function(){
+    var targ = this.$el.find('.js-navProfileMenu');
+    targ.addClass('hide');
+  },
+
   render: function(){
     var self = this;
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
@@ -151,7 +157,7 @@ module.exports = Backbone.View.extend({
     var ccode = targ.attr('data-code');
     $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
-    this.model.set('currency', crcy);
+    //this.model.set('currency', crcy);
     this.model.set('currencyCode', ccode);
   },
 

@@ -8,7 +8,17 @@
   <div class="flexRow flexExpand">
 <!--     <div class="flexCol-5 pad20">
       <div class="row10 rowTop20 js-dropImage">
+<<<<<<< HEAD
 
+=======
+        <div class="uploadPhotoControls">
+          <p class="txt-center"><%= polyglot.t('UploadPhotos') %></p>
+          <form id="imageForm">
+            <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('UploadPhotos') %></label>
+            <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
+          </form>
+        </div>
+>>>>>>> OpenBazaar-Client-Production/master
         <div class="itemImg itemImg-large js-editItemMainImage"
           <% if(vendor_offer__listing__item__image_hashes.length > 0) { %>
           style="background-image: url(<%- combinedImagesArray[0] %>);" data-index="0"
@@ -84,7 +94,6 @@
             <input type="text" name="price" id="inputPrice" class="hide" />
             <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
             <input type="number" step="any" min="0" class="fieldItem js-priceLocal"  id="priceLocal" value="<%= vendor_offer__listing__item__price_per_unit__fiat__price %>" required>
-            <!-- <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="priceBtc" value="<%= venderBTCPrice %>" required> -->
           </div>
           <div class="flexCol-4">
             <div class="fieldItem pull-right">

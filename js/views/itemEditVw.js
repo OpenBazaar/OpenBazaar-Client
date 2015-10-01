@@ -5,8 +5,8 @@ Backbone.$ = $;
 
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
-    // chosen = require('chosen-jquery-browserify'),
-    taggle = require('taggle');
+    taggle = require('taggle'),
+    chosen = require('../utils/chosen.jquery.min.js');
 
 module.exports = Backbone.View.extend({
 
@@ -86,7 +86,7 @@ module.exports = Backbone.View.extend({
     this.inputKeyword = new Taggle('inputKeyword');
 
     //set chosen inputs
-    // $('.chosen').chosen();
+    $('.chosen').chosen();
 
     //focus main input
     this.$el.find('input[name=title]').focus();
@@ -165,16 +165,23 @@ module.exports = Backbone.View.extend({
       data: formData,
       success: function(data) {
         data = JSON.parse(data);
-        var imageArray = __.clone(self.model.get("combinedImagesArray"));
-        var hashArray = __.clone(self.model.get("imageHashesToUpload"));
-        __.each(data.image_hashes, function(hash){
-          imageArray.push(self.model.get('server')+"get_image?hash="+hash);
-          hashArray.push(hash);
-        })
-        self.model.set("combinedImagesArray", imageArray);
-        self.model.set("imageHashesToUpload", hashArray);
+        if (data.success === true){
+          var imageArray = __.clone(self.model.get("combinedImagesArray"));
+          var hashArray = __.clone(self.model.get("imageHashesToUpload"));
+          __.each(data.image_hashes, function (hash) {
+            imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
+            hashArray.push(hash);
+          })
+          self.model.set("combinedImagesArray", imageArray);
+          self.model.set("imageHashesToUpload", hashArray);
 
-        self.updateImages();
+          self.updateImages();
+        }else if (data.success === false){
+          var errorModal = $('.js-messageModal');
+          errorModal.removeClass('hide');
+          errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+          errorModal.find('.js-messageModal-message').html("Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        }
       },
       error: function(jqXHR, status, errorThrown){
         console.log(jqXHR);
@@ -182,16 +189,6 @@ module.exports = Backbone.View.extend({
         console.log(errorThrown);
       }
     });
-
-/*
-    var newFiles = $(e.target)[0].files;
-    var imageArray = __.clone(this.model.get("combinedImagesArray"));
-    __.each(newFiles, function(newFile){
-      var fileURL = URL.createObjectURL(newFile);
-      imageArray.push(fileURL);
-    });
-    this.model.set("combinedImagesArray", imageArray);
-    this.updateImages();*/
   },
 
   updateImages: function(){
@@ -227,6 +224,9 @@ module.exports = Backbone.View.extend({
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
     imageArray.splice(imgIndex, 1);
     this.model.set("combinedImagesArray", imageArray);
+    var imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
+    imageUploadArray.splice(imgIndex, 1);
+    this.model.set("imageHashesToUpload", imageUploadArray);
     this.updateImages();
   },
 
@@ -248,7 +248,15 @@ module.exports = Backbone.View.extend({
     }
 
     var formData = new FormData(this.$el.find('#contractForm')[0]);
-    formData.append('images', this.model.get('imageHashesToUpload'));
+    //formData.append('images', this.model.get('imageHashesToUpload'));
+    __.each(this.model.get('imageHashesToUpload'), function(imHash){
+      formData.append('images', imHash);
+    });
+
+    //if this is an existing product, do not delete the images
+    if (self.model.get('id')) {
+      formData.append('delete_images', false);
+    }
 
     if(document.getElementById('contractForm').checkValidity()){
       $.ajax({
@@ -259,8 +267,8 @@ module.exports = Backbone.View.extend({
         data: formData,
         success: function (data) {
           data = JSON.parse(data);
+          //if the itemEdit model has an id, it was cloned from an existing item
           if (self.model.get('id') && data.success === true){
-            self.trigger('saveDone');
             deleteThisItem();
           }else if (data.success === false){
             var errorModal = $('.js-messageModal');
@@ -268,7 +276,8 @@ module.exports = Backbone.View.extend({
             errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
             errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
-            self.trigger('saveDone');
+            //item is new
+            self.trigger('saveNewDone');
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -287,9 +296,9 @@ module.exports = Backbone.View.extend({
     var deleteThisItem = function(){
       $.ajax({
         type: "DELETE",
-        url: self.model.get('server') + "contracts?"+self.model.get('id'),
+        url: self.model.get('server') + "contracts?id="+self.model.get('id'),
         success: function() {
-          //alert("deleted old item");
+          self.trigger('deleteOldDone');
         },
         error: function(jqXHR, status, errorThrown){
           console.log(jqXHR);

@@ -62,6 +62,7 @@ module.exports = Backbone.Model.extend({
         UploadPhotos: "Upload photos",
         DragOrUploadPhotos: "Drag or upload photos",
         ExpirationDate: "Expires on",
+        UploadCoverPhoto: "Upload a cover photo",
         nav: {
           searchPlaceholder: "Enter handle or search",
           myPage: "My Page",
@@ -107,7 +108,7 @@ module.exports = Backbone.Model.extend({
         Skip: "Omitir",
         Done: "Hecho",
         Cancel: "Cancelar",
-        Sell: "Vender",
+        Sell: "vendor",
         New: "Nuevo",
         Item: "Artículo",
         Items: "Artículos",
@@ -154,6 +155,7 @@ module.exports = Backbone.Model.extend({
         ProcessingTime: "Tiempo de procesamiento",
         UploadPhotos: "Subir fotos",
         DragOrUploadPhotos: "Arrastre o subir fotos",
+        UploadCoverPhoto: "Sube una foto de portada",
         ExpirationDate: "Fecha de caducidad",
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",

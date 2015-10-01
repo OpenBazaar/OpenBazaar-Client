@@ -2,6 +2,7 @@
 <head>
   <title>OpenBazaar</title>
   <link href="css/ionicons.min.css" rel="stylesheet">
+  <link href="css/chosen.css" rel="stylesheet">
   <link href="css/obBase.css" rel="stylesheet" id="obBase">
 </head>
 <body id="obBody">
@@ -16,14 +17,10 @@
     </div>
   </div>
 </div>
+<div id="obShadow"></div>
 
 <!--TODO: modularize non-modular scripts -->
 <script src="js/utils/list.min.js"></script>
-
-<!-- scripts loaded here for non-modular js libraries-->
-<script src="js/libs/underscore-min.js"></script>
-<script src="js/libs/backbone-min.js"></script>
-<script src="js/libs/jquery.min.js"></script>
 
 <script>
   var app = require('./js/app');
