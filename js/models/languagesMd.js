@@ -54,6 +54,7 @@ module.exports = Backbone.Model.extend({
         Condition: "Condition",
         NSFW: "NSFW",
         Local: "Local",
+        Domestic: "Domestic",
         International: "International",
         Time: "Time",
         Free: "Free",

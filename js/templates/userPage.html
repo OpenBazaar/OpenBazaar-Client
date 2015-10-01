@@ -62,7 +62,7 @@
 </div>
 <div class="userPage-subViews">
   <div class="flexContainer flex-border custCol-primary js-about js-tabTarg minHeight650">
-    <div class="flexRow">
+    <div class="flexRow minHeight650">
       <div class="flexCol-8 custCol-border-secondary">
         <div class="rowItem">
           <%= page.profile.about %>
@@ -72,60 +72,60 @@
         <div class="flexRow">
           <div class="flexRow custCol-border-secondary">
             <div class="rowItem">
-              <div><%= polyglot.t('Website') %></div>
+              <div class="textOpacity75"><%= polyglot.t('Website') %></div>
               <div>
                 <% if(page.profile.website) { %>
                 <%=page.profile.website %>
                 <%}else{%>
-                Not Provided
+                not provided
                 <%}%>
               </div>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
             <div class="rowItem">
-              <div><%= polyglot.t('Email') %></div>
+              <div class="textOpacity75"><%= polyglot.t('Email') %></div>
               <div>
                 <% if(page.profile.email) { %>
                 <%=page.profile.email %>
                 <%}else{%>
-                Not Provided
+                not provided
                 <%}%>
               </div>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
             <div class="rowItem">
-              <div><%= polyglot.t('Facebook') %></div>
+              <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
               <div>
                 <% if(page.profile.social_accounts.facebook && page.profile.social_accounts.facebook.username) { %>
                 <%=page.profile.social_accounts.facebook.username %>
                 <%}else{%>
-                Not Provided
+                not provided
                 <%}%>
               </div>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
             <div class="rowItem">
-              <div><%= polyglot.t('Instagram') %></div>
+              <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
               <div>
                 <% if(page.profile.social_accounts.instagram && page.profile.social_accounts.instagram.username) { %>
                 <%=page.profile.social_accounts.instagram.username %>
                 <%}else{%>
-                Not Provided
+                not provided
                 <%}%>
               </div>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
             <div class="rowItem">
-              <div><%= polyglot.t('Snapchat') %></div>
+              <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
               <div>
                 <% if(page.profile.social_accounts.snapchat && page.profile.social_accounts.snapchat.username) { %>
                 <%=page.profile.social_accounts.snapchat.username %>
                 <%}else{%>
-                Not Provided
+                not provided
                 <%}%>
               </div>
             </div>
@@ -138,15 +138,15 @@
   <div class="flexContainer flex-border custCol-primary js-followers js-tabTarg hide minHeight650">
     <div class="flexRow">
       <div class="flexRow">
-        <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-          <input type="text" class="txtField txtField-bar search" />
+        <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-primary">
+          <input type="text" class="txtField txtField-bar search custCol-border-primary" />
         </div>
       </div>
     </div>
     <div class="flexRow js-list1"></div>
   </div>
   <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide minHeight650">
-    <div class="flexRow">
+    <div class="flexRow minHeight650">
       <div class="flexRow">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
           <input type="text" class="txtField txtField-bar search" />
@@ -156,7 +156,7 @@
     <div class="flexRow js-list2"></div>
   </div>
   <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide minHeight650">
-    <div class="flexRow">
+    <div class="flexRow minHeight650">
       <div class="flexRow">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
           <input type="text" class="txtField txtField-bar search" />
@@ -166,13 +166,13 @@
     <div class="flexRow js-list3"></div>
   </div>
   <div class="flexContainer flex-border custCol-primary js-item js-tabTarg hide minHeight650">
-    <div class="flexRow js-list4"></div>
+    <div class="flexRow js-list4 minHeight650"></div>
   </div>
   <div class="flexContainer flex-border custCol-primary js-itemEdit js-tabTarg hide minHeight650">
-    <div class="flexRow js-list5"></div>
+    <div class="flexRow js-list5 minHeight650"></div>
   </div>
 </div>
-<div class="navBar custCol-secondary"></div>
+<div class="navBar custCol-secondary" style="padding: 4px 0"></div>
 
 <div id="customizeControls" class="hide">
 

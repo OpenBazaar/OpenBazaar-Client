@@ -1106,11 +1106,14 @@ input[type="number"].fieldItem:focus:invalid {
 }
 
 select {
-  border: 2px solid transparent;
+  border: 2px solid transparent !important;
+  border-radius: 0;
+  padding: 0 15px;
+  -webkit-appearance: none;
 }
 
 select:focus {
-  border: 2px solid #fff;
+  border: 2px solid #fff !important;
 }
 
 input[type="radio"].fieldItem {
@@ -1522,6 +1525,10 @@ input[type="radio"].fieldItem:checked + label:before {
   margin-right: 5px;
 }
 
+.marginTop15 {
+  margin-top: 15px;
+}
+
 .marginTop20 {
   margin-top: 20px !important;
 }
@@ -1532,6 +1539,14 @@ input[type="radio"].fieldItem:checked + label:before {
 
 .minHeight650 {
   min-height: 650px;
+}
+
+.lineHeightReset{
+  line-height: normal;
+}
+
+.padding0 {
+  padding: 0;
 }
 
 .padding17px {

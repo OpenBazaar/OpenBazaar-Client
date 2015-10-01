@@ -118,12 +118,16 @@ module.exports = Backbone.View.extend({
       customStyleTag.setAttribute('id', 'customStyle');
       customStyleTag.innerHTML =
           "#ov1 .userPage .custCol-background { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.03) + ";}" +
-          "#ov1 .userPage .custCol-primary { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + ";}" +
+          "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
           "#ov1 .userPage .custCol-border-secondary { transition: border-color .3s cubic-bezier(0, 0, 0.2, 1); border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
-          "#ov1 .userPage .custCol-text { color: " + this.model.get('page').profile.text_color + ";}";
+          "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 15px}" +
+          "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
+          "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
       document.body.appendChild(customStyleTag);
       //set custom color input values
       $('.js-customizeColor').each(function(){
