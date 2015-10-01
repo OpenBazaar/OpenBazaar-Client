@@ -4,9 +4,6 @@
 body {
   margin: 0;
   background-color: rgb(6,55,83);
-  position: absolute; /* fixes box shadow margin issue */
-  width: 100%; /* fixes box shadow margin issue */
-  min-height: 700px; /* fixes box shadow margin issue */
   /*fonts*/
   color: rgb(255, 255, 255);
   font-family: "Helvetica Neue", Helvetica, "Open Sans";
@@ -49,7 +46,8 @@ input[type="number"] {
 /*========== structure classes ==========*/
 
 #content {
-  margin: 23px auto 100px;
+  margin: 23px auto 0;
+  padding-bottom: 100px;
   position: relative;
   width: 950px;
   z-index: 1;
@@ -71,7 +69,6 @@ input[type="number"] {
 .mainContainer {
   position: relative;
   overflow: hidden;
-  min-height: 800px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -886,21 +883,30 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 .labelWrap {
   display: block;
   background: rgba(0,0,0,0.6);
-  padding: 7px 84px 7px 52px;
+  padding: 4px 4px 7px 52px;
   height: 44px;
   border-radius: 6px;
   box-sizing: border-box;
   border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.6);
   transition: opacity 1s;
+  width: 185px;
 }
 
 .labelWrap.fade {
   opacity: 0;
 }
 
-input:hover + .labelWrap.fadeIn {
+.labelWrap.fadeIn {
   opacity: 1;
+}
+
+.labelWrap input {
+  margin-top: 2px;
+  color: rgba(255,255,255,0.6);
+  background: none;
+  font-size: 12px;
+  width: 100%;
 }
 
 .fieldItem h1,
@@ -1320,8 +1326,50 @@ input[type="radio"].fieldItem:checked + label:before {
 #customizeControls {
   position: fixed;
   left: 40px;
-  top: 410px;
+  top: 90px;
   width: 40px;
+  z-index: 1;
+}
+
+/* protect customize controls from custom page styles */
+#ov1 #customizeControls .labelWrap input {
+  color: rgba(255,255,255,0.6);
+}
+
+.colpick {
+  z-index: 10;
+}
+
+#ov1 #obBody .colpick input {
+  color: #616161;
+}
+
+.colpick_rgbhex .colpick_new_color,
+.colpick_rgbhex .colpick_current_color {
+  height: 20px;
+}
+
+.colpick_rgbhex .colpick_rgb_r {
+  top: 33px;
+}
+
+.colpick_rgbhex .colpick_rgb_g {
+  top: 60px;
+}
+
+.colpick_rgbhex .colpick_rgb_b {
+  top: 87px;
+}
+
+.colpick_rgbhex .colpick_hex_field {
+  top: 114px;
+}
+
+.colpick_dark .colpick_submit {
+  top: 142px;
+  color: #B5B5B5;
+  font-weight: 400;
+  border-color: #616161;
 }
 
 #obBody::-webkit-scrollbar {
@@ -1330,7 +1378,8 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 #obContainer {
-  margin-top: 80px;
+  margin-top: 50px;
+  padding-top: 30px;
 }
 
 /*========== utility classes ==========*/
