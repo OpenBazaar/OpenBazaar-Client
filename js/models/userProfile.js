@@ -4,6 +4,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.Model.extend({
   defaults: {
+    beenSet: false, //set to true when the user has set up their profile
     profile: {
       guid: "",
       vendor: false,
@@ -46,7 +47,6 @@ module.exports = Backbone.Model.extend({
       location: "UNITED_STATES",
       avatar_hash: "",
       handle: "",
-      GUID: "",
       encryption_key: ""
     }
   },

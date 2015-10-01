@@ -28,7 +28,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 700,
-    title: "Open Bazaar"/*,
+    title: "OpenBazaar"/*,
     frame: false*/ //uncomment for release
   });
 

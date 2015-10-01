@@ -1,0 +1,44 @@
+<div class="modal modal-navBlock modal-opaque js-homeModal">
+  <div class="modal-child modal-childMain">
+    <div class="homeModal-hero">
+      <p class="h6 homeModal-heroText"><%= polyglot.t('onboarding.intro') %></p>
+    </div>
+    <div class="homeModal-accordian accordian js-profileAccordian">
+      <div class="accordian-window">
+        <div class="accordian-child">
+          <div class="bar barTxt h6">
+            <%= polyglot.t('onboarding.chooseLanguage') %>
+          </div>
+          <div class="flexContainer flex-border" id="homeModal-languageList">
+            <div class="flexRow">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+                <input type="text" autofocus="autofocus" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
+              </div>
+            </div>
+            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflow">
+            </ul>
+          </div>
+          <div class="bar barFlush">
+            <a class="btn btn-bar btn-wide js-accordianNext"><%= polyglot.t('Next') %></a>
+          </div>
+        </div>
+        <div class="accordian-child">
+          <div class="bar barTxt h6">
+            <%= polyglot.t('onboarding.disclaimer_title') %>
+          </div>
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
+            <div class="flexRow">
+              <div class="rowItem">
+                <p class="margin0"><%= polyglot.t('onboarding.disclaimer_body') %></p>
+              </div>
+            </div>
+          </div>
+          <div class="bar barFlush">
+            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

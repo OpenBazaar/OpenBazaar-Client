@@ -11,8 +11,9 @@ var __ = require('underscore'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
     simpleMessageView = require('./simpleMessageVw'),
-    itemView = require('./itemVw'),
-    itemEditView = require('./itemEditVw');
+    itemVw = require('./itemVw'),
+    itemEditVw = require('./itemEditVw'),
+    storeWizardVw = require('./storeWizardVw');
 
 module.exports = Backbone.View.extend({
 
@@ -33,7 +34,8 @@ module.exports = Backbone.View.extend({
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
     'change .js-userPageImageUpload': 'uploadUserPageImage',
-    'click .js-customizeColor': 'customizeColorClick'
+    'click .js-customizeColor': 'customizeColorClick',
+    'click .js-createStore': 'createStore'
   },
 
   initialize: function (options) {
@@ -199,6 +201,14 @@ module.exports = Backbone.View.extend({
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();
       }
+      //if store has been created, swap create button for sell button
+      if(this.model.get('page').beenSet === true) {
+        this.$el.find('.js-sellItem').removeClass('hide');
+        this.$el.find('.js-createStore').addClass('hide');
+      } else {
+        this.$el.find('.js-sellItem').addClass('hide');
+        this.$el.find('.js-createStore').removeClass('hide');
+      }
     }
   },
 
@@ -284,7 +294,7 @@ module.exports = Backbone.View.extend({
       this.itemView.undelegateEvents();
       //this.itemView.remove();
     }
-    this.itemView = new itemView({model:this.item, el: '.js-list4'});
+    this.itemView = new itemVw({model:this.item, el: '.js-list4'});
     this.subViews.push(this.itemView);
     this.item.fetch({
       data: $.param({'id': hash}),
@@ -324,7 +334,7 @@ module.exports = Backbone.View.extend({
     if(this.itemEditView){
       this.itemEditView.undelegateEvents();
     }
-    this.itemEditView = new itemEditView({model:this.itemEdit, el: '.js-list5'});
+    this.itemEditView = new itemEditVw({model:this.itemEdit, el: '.js-list5'});
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
     this.subViews.push(this.itemEditView);
@@ -550,6 +560,12 @@ module.exports = Backbone.View.extend({
     if(this.itemEditView){
       this.itemEditView.saveChanges();
     }
+  },
+
+  createStore: function() {
+    var self = this;
+    this.storeWizardView = new storeWizardVw({model:this.model.get('page'), el: '#modalHolder'});
+    this.subViews.push(this.storeWizardView);
   },
 
 
