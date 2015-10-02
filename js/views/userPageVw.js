@@ -98,13 +98,13 @@ module.exports = Backbone.View.extend({
     var self = this;
     $('#content').html(this.$el);
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
+      self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
       //save state of the page
       self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
       self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
       self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
-      self.setCustomStyles();
       self.setState(self.options.state, self.options.itemHash);
     });
     return this;
@@ -117,12 +117,12 @@ module.exports = Backbone.View.extend({
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
       customStyleTag.innerHTML =
-          "#ov1 .userPage .custCol-background { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + ";}" +
-          "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.2, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 .userPage .custCol-border-secondary { transition: border-color .3s cubic-bezier(0, 0, 0.2, 1); border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 .userPage .custCol-background, body { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + ";}" +
+          "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 .userPage .custCol-border-secondary { transition: border-color .3s cubic-bezier(0, 0, 0.0, 1); border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 15px}" +
           "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +

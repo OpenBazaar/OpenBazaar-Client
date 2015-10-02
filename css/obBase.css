@@ -68,7 +68,7 @@ textarea{
 /*========== structure classes ==========*/
 
 #content {
-  margin: 23px auto 100px;
+  margin: 23px auto;
   position: relative;
   width: 950px;
   z-index: 1;
@@ -91,6 +91,7 @@ textarea{
   position: relative;
   overflow: hidden;
   min-height: 800px;
+  margin-bottom: 100px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -103,8 +104,8 @@ textarea{
 
 .bar {
   height: 50px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .bar.barFlush {
@@ -341,7 +342,7 @@ textarea{
 
 .thumbnail-large {
   border-radius: 2px;
-  height: 80px;
+  height: 76px;
   width: 80px;
 }
 
@@ -687,7 +688,7 @@ input[type="text"].txtField-bar {
   float: left;
   background-color: #086A9E; /* default color */
   padding:0;
-  border-radius: 4px;
+  border-radius: 2px;
   box-sizing: border-box;
 }
 
@@ -1167,13 +1168,13 @@ input[type="radio"].fieldItem:checked + label:before {
   float: left;
   display: inline-block;
   white-space: nowrap;
-  line-height: 34px;
+  line-height: 32px;
   position: relative;
 }
 
 .fieldItem .taggle {
   margin: 6px 6px 0 0;
-  padding: 0 28px 0 14px;
+  padding: 0 28px 0 10px;
   border-radius: 4px;
   background-color: rgba(255,255,255,0.1);
   cursor: pointer;

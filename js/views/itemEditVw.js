@@ -90,6 +90,7 @@ module.exports = Backbone.View.extend({
 
     //focus main input
     this.$el.find('input[name=title]').focus();
+    $('body').scrollTop(375); // we need to change this to scroll the container div instead of body once the header is fixed
   },
 
   priceToLocal: function(e){
