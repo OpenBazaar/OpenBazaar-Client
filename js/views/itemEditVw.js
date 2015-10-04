@@ -111,7 +111,7 @@ module.exports = Backbone.View.extend({
     if(priceType === "local"){
       inputParent.find('.js-priceLocal').val(inputParent.find('.js-priceBtc').val() * window.currentBitcoin);
     }else{
-      inputParent.find('.js-priceBtc').val(inputParent.find('.js-priceLocal').val() / window.currentBitcoin);  //TOOD: Eliminate division because of floating point math
+      inputParent.find('.js-priceBtc').val(inputParent.find('.js-priceLocal').val() / window.currentBitcoin);
     }
   },
 
@@ -143,7 +143,7 @@ module.exports = Backbone.View.extend({
 
   changeType: function(e) {
     var typeValue = $(e.target).val();
-    if(typeValue === "physical good") { //TODO: remove magic text, make constant or lookup
+    if(typeValue === "physical good") {
       this.enableShipping();
     } else {
       this.disableShipping();
@@ -170,7 +170,7 @@ module.exports = Backbone.View.extend({
           imageArray = __.clone(self.model.get("combinedImagesArray"));
           hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
-            imageArray.push(self.model.get('server') + "get_image?hash=" + hash); //TODO: Change to more formal URL reference from config file
+            imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
             hashArray.push(hash);
           });
           self.model.set("combinedImagesArray", imageArray);

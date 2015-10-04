@@ -382,7 +382,6 @@ module.exports = Backbone.View.extend({
       data: formData,
       success: function(data) {
         var errorModal = $('.js-messageModal');
-        errorModal.removeClass('hide');
         data = JSON.parse(data);
         var imageHash = data.image_hashes[0];
         if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
@@ -391,10 +390,12 @@ module.exports = Backbone.View.extend({
           self.model.set('page', tempPage);
           self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server + "get_image?hash=" + imageHash + ')');
         }else if (data.success === false){
-          //TODO: Extract these lines to a more generic showModal-type function
+          errorModal.removeClass('hide');
+            //TODO: Extract these lines to a more generic showModal-type function
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
           errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
-        }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") { //TODO: Remove magic number
+        }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
+          errorModal.removeClass('hide');
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
           errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
         }
@@ -504,7 +505,7 @@ module.exports = Backbone.View.extend({
 
     $.ajax({
       type: "DELETE",
-      url: self.item.get('server') + "contracts/?id="+ self.item.get('id'), //TODO: Change from GET to POST for safe methods, http://restcookbook.com/HTTP%20Methods/idempotency/
+      url: self.item.get('server') + "contracts/?id="+ self.item.get('id'),
       success: function() {
         //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
         self.item.trigger('destroy', self.item);
