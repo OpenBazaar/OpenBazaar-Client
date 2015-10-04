@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
-  setFormValues: function(){
+  setFormValues: function(){ //TODO: Refactor to a generic enumeration pattern
     var typeValue = String(this.model.get('vendor_offer__listing__metadata__category')) || "physical good";
     this.$el.find('input[name=nsfw]').val(String(this.model.get('vendor_offer__listing__item__nsfw')));
     this.$el.find('input[name=free_shipping]').val(String(this.model.get('vendor_offer__listing__shipping__free')));
@@ -111,7 +111,7 @@ module.exports = Backbone.View.extend({
     if(priceType === "local"){
       inputParent.find('.js-priceLocal').val(inputParent.find('.js-priceBtc').val() * window.currentBitcoin);
     }else{
-      inputParent.find('.js-priceBtc').val(inputParent.find('.js-priceLocal').val() / window.currentBitcoin);
+      inputParent.find('.js-priceBtc').val(inputParent.find('.js-priceLocal').val() / window.currentBitcoin);  //TOOD: Eliminate division because of floating point math
     }
   },
 
@@ -143,7 +143,7 @@ module.exports = Backbone.View.extend({
 
   changeType: function(e) {
     var typeValue = $(e.target).val();
-    if(typeValue === "physical good") {
+    if(typeValue === "physical good") { //TODO: remove magic text, make constant or lookup
       this.enableShipping();
     } else {
       this.disableShipping();
@@ -160,23 +160,26 @@ module.exports = Backbone.View.extend({
       contentType: false,
       processData: false,
       data: formData,
-      success: function(data) {
+      success: function(data) { //TODO: Have JQuery parse the JSON directly in ajax call
+        var errorModal, hashArray, imageArray;
         data = JSON.parse(data);
+
         if (data.success === true){
-          var imageArray = __.clone(self.model.get("combinedImagesArray"));
-          var hashArray = __.clone(self.model.get("imageHashesToUpload"));
+          imageArray = __.clone(self.model.get("combinedImagesArray"));
+          hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
-            imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
+            imageArray.push(self.model.get('server') + "get_image?hash=" + hash); //TODO: Change to more formal URL reference from config file
             hashArray.push(hash);
-          })
+          });
           self.model.set("combinedImagesArray", imageArray);
           self.model.set("imageHashesToUpload", hashArray);
 
           self.updateImages();
         }else if (data.success === false){
-          var errorModal = $('.js-messageModal');
+          errorModal = $('.js-messageModal');
           errorModal.removeClass('hide');
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+          //TODO: Change from .html() to .text() for higher security to prevent content injection attacks
           errorModal.find('.js-messageModal-message').html("Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }
       },
@@ -217,19 +220,33 @@ module.exports = Backbone.View.extend({
   },
 
   deleteImage: function(e) {
-    var imgIndex = $(e.target).closest('.itemImg').data('index');
+    var imageUploadArray, imgIndex = $(e.target).closest('.itemImg').data('index');
     var imageArray = __.clone(this.model.get("combinedImagesArray"));
+
     imageArray.splice(imgIndex, 1);
     this.model.set("combinedImagesArray", imageArray);
-    var imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
+    imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
     imageUploadArray.splice(imgIndex, 1);
     this.model.set("imageHashesToUpload", imageUploadArray);
     this.updateImages();
   },
 
   saveChanges: function(){
-    var self = this;
-    var cCode = this.model.get('userCurrencyCode');
+    var errorModal, self = this, cCode = this.model.get('userCurrencyCode');
+    var deleteThisItem = function(newHash){
+      $.ajax({
+          type: "DELETE",
+          url: self.model.get('server') + "contracts?id="+self.model.get('id'), //TODO: Change to send data in POST to be safe, http://restcookbook.com/HTTP%20Methods/idempotency/
+          success: function() {
+              self.trigger('deleteOldDone', newHash);
+          },
+          error: function(jqXHR, status, errorThrown){
+              console.log(jqXHR);
+              console.log(status);
+              console.log(errorThrown);
+          }
+      });
+    };
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
@@ -263,10 +280,10 @@ module.exports = Backbone.View.extend({
         processData: false,
         data: formData,
         success: function (data) {
+          var returnedId = self.model.get('id');
           data = JSON.parse(data);
           //if the itemEdit model has an id, it was cloned from an existing item
           //if the id returned is the same, an edit was made with no changes, don't delete it
-          var returnedId = self.model.get('id');
           if (returnedId && data.success === true && returnedId != data.id){
             deleteThisItem(data.id);
           }else if (data.success === false){
@@ -286,26 +303,10 @@ module.exports = Backbone.View.extend({
         }
       });
     }else{
-      var errorModal = $('.js-messageModal');
+      errorModal = $('.js-messageModal');
       errorModal.removeClass('hide');
       errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
       errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.</i>");
     }
-
-    var deleteThisItem = function(newHash){
-      $.ajax({
-        type: "DELETE",
-        url: self.model.get('server') + "contracts?id="+self.model.get('id'),
-        success: function() {
-          self.trigger('deleteOldDone', newHash);
-        },
-        error: function(jqXHR, status, errorThrown){
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
-      });
-    };
-
   }
 });
