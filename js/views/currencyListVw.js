@@ -2,7 +2,6 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCurrenciesCollection = require('../collections/chooseCurrencyCl'),
     chooseCurrencyView = require('../views/chooseCurrencyVw');
@@ -15,7 +14,7 @@ module.exports = Backbone.View.extend({
     this.countries = new countriesModel();
     //create a list of currencies from the country list, so we can maintain a single set of data
     var uniqueCurrencies = __.uniq(this.countries.get('countries'), function(item){return item.code;});
-    var orderedCurrencies = uniqueCurrencies.sort(function(a,b){
+    var orderedCurrencies = uniqueCurrencies.sort(function(a,b){ //TODO: Replace with _.sortBy?
       var cA = a.currency.toLowerCase(), cB = b.currency.toLowerCase();
       if (cA < cB){
         return -1;

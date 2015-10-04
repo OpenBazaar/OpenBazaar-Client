@@ -199,8 +199,11 @@
                 </div>
               </div>
               <div class="flexCol-7">
+                <!-- TODO: Fix duplicate attribute names! -->
                 <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" name="shippingFree" value="true" /><label for="shippingFreeTrue">Yes</label>
                 <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" value="false" checked/><label for="shippingFreeFalse">No</label>
+                <!-- TODO: Fix duplicate attribute names! -->
+
               </div>
             </div>
             <div class="flexRow js-inputParent js-shippingPriceRow">
@@ -232,7 +235,7 @@
               </div>
               <div class="flexCol-3">
                 <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
-                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceInternationalLocal"  value="0"required>
+                <input type="number" step="any" min="0" class="fieldItem js-priceLocal" id="shippingPriceInternationalLocal"  value="0" required>
                 <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc" value="0" required>
               </div>
               <div class="flexCol-4">
