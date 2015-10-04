@@ -22,7 +22,7 @@ module.exports = window.Backbone.LinearModel.extend({
     vendor_offer__listing__shipping__est_delivery__domestic: "",
     vendor_offer__listing__shipping__shipping_origin: "",
     vendor_offer__listing__shipping__free: true,
-    vendor_offeropenbazaar__listing__item__category: "",
+    vendor_offer__listing__item__category: "",
     vendor_offer__listing__item__sku: "",
     vendor_offer__listing__item__description: "",
 
