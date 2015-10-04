@@ -161,7 +161,9 @@ module.exports = Backbone.View.extend({
       processData: false,
       data: formData,
       success: function(data) { //TODO: Have JQuery parse the JSON directly in ajax call
-        var errorModal, hashArray, imageArray;
+        var errorModal,
+            hashArray,
+            imageArray;
         data = JSON.parse(data);
 
         if (data.success === true){
