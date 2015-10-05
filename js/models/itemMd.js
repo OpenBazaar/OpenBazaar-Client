@@ -40,7 +40,7 @@ module.exports = window.Backbone.LinearModel.extend({
     vendor_offer__listing__metadata__category: "",
     vendor_offer__listing__metadata__version: "",
     vendor_offer__listing__metadata__category_sub: "",
-    vendor_offer__listing__metadata__expiry: "",
+    vendor_offer__listing__metadata__expiry: ""
   },
 
     /* //this is what the data looks like when it arrives from the API
@@ -123,6 +123,7 @@ module.exports = window.Backbone.LinearModel.extend({
   },
 
   updateAttributes: function(){
+    var newAttributes;
     var self = this;
     var vendorPrice = this.get("vendor_offer__listing__item__price_per_unit__fiat__price") ? Number(this.get("vendor_offer__listing__item__price_per_unit__fiat__price")) : 0;
     if(vendorPrice && this.get("userCurrencyCode")){
@@ -144,11 +145,10 @@ module.exports = window.Backbone.LinearModel.extend({
           }).format(vendorPrice*vendToUserBTCRatio);
           //set to random so a change event is always fired
           newAttributes.priceSet = Math.random();
-          console.log(newAttributes.priceSet);
           self.set(newAttributes);
         });
       }else{
-        var newAttributes = {};
+        newAttributes = {};
         newAttributes.vendorBTCPrice = vendorBitCoinPrice;
         newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
           style: 'currency',
@@ -161,7 +161,7 @@ module.exports = window.Backbone.LinearModel.extend({
         self.set(newAttributes);
       }
     }else {
-      var newAttributes = {};
+      newAttributes = {};
       newAttributes.vendorBTCPrice = 0;
       newAttributes.displayPrice = 0;
       //set to random so a change event is always fired
