@@ -219,8 +219,14 @@ module.exports = Backbone.View.extend({
       //this is the default state of the page. Activate tab
       this.tabClick(self.$el.find('.js-aboutTab'), this.$el.find('.js-about'));
     } else if (state === "store") {
+
       this.listings.fetch({
-        data: $.param({'id': self.pageID}),
+        data: function(){
+          //don't send the guid if this is the user's own page
+          if(this.options.ownPage == true) {
+            return $.param({'guid': self.pageID});
+          }
+        },
         success: function(model){
           self.renderItems(model.get('listings'));
         },
@@ -563,8 +569,9 @@ module.exports = Backbone.View.extend({
   },
 
   createStore: function() {
-    var self = this;
-    this.storeWizardView = new storeWizardVw({model:this.model.get('page'), el: '#modalHolder'});
+    var self = this,
+        storeWizardModel = new Backbone.Model(this.model.get('page'));
+    this.storeWizardView = new storeWizardVw({model:storeWizardModel, el: '#modalHolder'});
     this.subViews.push(this.storeWizardView);
   },
 

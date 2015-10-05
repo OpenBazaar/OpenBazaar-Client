@@ -255,6 +255,9 @@ module.exports = Backbone.View.extend({
       formData.append('delete_images', false);
     }
 
+    //add formChecked class to form so invalid fields are styled as invalid
+    this.$el.find('#contractForm').addClass('formChecked');
+
     if(document.getElementById('contractForm').checkValidity()){
       $.ajax({
         type: "POST",

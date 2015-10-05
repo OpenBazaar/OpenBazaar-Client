@@ -42,6 +42,10 @@ input[type="number"] {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
+form {
+  margin: 0;
+}
+
 
 /*========== structure classes ==========*/
 
@@ -248,6 +252,16 @@ input[type="number"] {
   line-height: 50px;
   padding: 0 15px;
   position: relative;
+  display: block;
+}
+
+.fieldItem.fieldItem-multiLine {
+  line-height: normal;
+  padding: 15px;
+}
+
+[class |= "flexCol"] > .fieldItem {
+  margin: 0 -1 -1 0;
 }
 
 .table {
@@ -304,6 +318,10 @@ input[type="number"] {
 .btn-cornerTL.btn-flushTL {
   top: 0;
   left: 0;
+}
+
+.btn-cornerTR.btn-cornerTROutR {
+  right: -30px;
 }
 
 .thumbnail {
@@ -372,6 +390,7 @@ input[type="number"] {
   height: 100%;
   top: 0;
   left: 0;
+  padding-top: 80px;
 }
 
 .modal.modal-navOffset {
@@ -381,7 +400,7 @@ input[type="number"] {
 .modal-child {
   width: 525px;
   height: 540px;
-  margin: 80px auto 0 auto;
+  margin: 0 auto;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -391,16 +410,16 @@ input[type="number"] {
   margin-top: 25px;
 }
 
-.accordian {
+.accordion {
   overflow: hidden;
   position: relative;
 }
 
-.accordian > .accordian-window {
+.accordion > .accordion-window {
   position: absolute;
 }
 
-.accordian > .accordian-window > .accordian-child {
+.accordion > .accordion-window > .accordion-child {
   float: left;
 }
 
@@ -524,6 +543,15 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.modal-hero {
+  background: linear-gradient(to bottom, rgb(209,209,209), rgb(55,55,55) 60px, rgb(55,55,55) 108px, rgb(0,0,0));
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 220px;
+  position: relative;
+  width: 525px;
 }
 
 .flex-border > .flexRow {
@@ -880,6 +908,11 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   height: 44px;
 }
 
+.btn-squareSm {
+  width: 30px;
+  height: 30px;
+}
+
 .labelWrap {
   display: block;
   background: rgba(0,0,0,0.6);
@@ -924,10 +957,10 @@ input[type="number"].fieldItem,
 input[type="datetime-local"].fieldItem {
   width: 100%;
   color: #fff;
-  box-sizing: border-box;
   border: 2px solid transparent;
   padding: 0 15px;
   background: none;
+  line-height: 46px;
 }
 
 input[type="datetime-local"].fieldItem {
@@ -965,13 +998,20 @@ input[type="datetime-local"].fieldItem:focus {
   outline: none;
 }
 
-input[type="text"].fieldItem:invalid,
-input[type="number"].fieldItem:invalid,
-input[type="text"].fieldItem:focus:invalid,
-input[type="number"].fieldItem:focus:invalid {
+/* add formChecked class after form has been checked for validity */
+.formChecked input[type="text"].fieldItem:invalid,
+.formChecked input[type="number"].fieldItem:invalid,
+.formChecked input[type="text"].fieldItem:focus:invalid,
+.formChecked input[type="number"].fieldItem:focus:invalid {
   border: 2px dashed rgba(89,1,1,0.8);;
   background-color: rgba(89,1,1,0.2);
   transition: border 0.3s, background-color 0.4s;
+}
+
+input[type="text"].fieldItem.fieldItem-withButton,
+input[type="number"].fieldItem.fieldItem-withButton {
+  position: absolute;
+  padding-left: 50px;
 }
 
 .fieldItem .btn {
@@ -1182,6 +1222,13 @@ input[type="radio"].fieldItem:checked + label:before {
   visibility: hidden;
 }
 
+.fieldItem.btn {
+  margin: 10px;
+  min-height: 0;
+  min-width: 0;
+  height: 30px;
+}
+
 .popMenu-navBar {
   top: 36px;
   right: 10px;
@@ -1246,17 +1293,12 @@ input[type="radio"].fieldItem:checked + label:before {
   height: 115px;
 }
 
-.homeModal-hero {
+.modal .homeModal-hero {
   background-image: url('../imgs/obSettingsHeroB.jpg');
   background-repeat: no-repeat;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  height: 220px;
-  position: relative;
-  width: 525px;
 }
 
-.homeModal-heroText {
+.modal .homeModal-heroText {
   position: absolute;
   bottom: 30px;
   color: #fff;
@@ -1265,39 +1307,47 @@ input[type="radio"].fieldItem:checked + label:before {
   text-align: center;
 }
 
-.homeModal-accordian {
+.modal .homeModal-accordion {
   height: 320px;
 }
 
-.homeModal-accordian .btn-bar{
+.modal .homeModal-accordion .btn-bar{
   border-radius: 0;
   font-size: 13px;
   height: 50px;
   margin: 0;
   opacity: 1;
-
 }
-.homeModal-accordian .btn-bar:nth-child(2){
+
+.modal .homeModal-accordion .btn {
+  background-color: rgb(50,126,184);
+}
+
+.modal .homeModal-accordion .btn-bar{
+  border-right: none;
+}
+
+.modal .homeModal-accordion .btn-bar:nth-child(2){
   border-left: solid 1px #086A9E;
 }
 
-.homeModal-accordian .searchWrapper {
+.modal .homeModal-accordion .searchWrapper {
   background: #086A9E;
   border-bottom: solid 1px #327EB8;
 }
 
-.homeModal-settings,
-.homeModal-settings.flexRow {
+.modal .homeModal-settings,
+.modal .homeModal-settings.flexRow {
   height: 178px;
   overflow-y: auto;
   background-color: #086A9E;
 }
 
-.homeModal-settings.homeModal-settings-noSearch {
+.modal .homeModal-settings.homeModal-settings-noSearch {
   height: 220px;
 }
 
-.homeModal-avatarPreview {
+.modal .homeModal-avatarPreview {
   background-color: #327EB8;
   border-radius: 70px;
   height: 130px;
