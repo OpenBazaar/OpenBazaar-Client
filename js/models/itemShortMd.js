@@ -3,7 +3,7 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.Model.extend({
   defaults: {
-    title: "NewItem",
+    title: "New Item",
     contract_hash: "Error, Item ID Not Found",
     thumbnail_hash: "",
     category: "",

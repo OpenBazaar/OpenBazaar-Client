@@ -2,7 +2,9 @@
   <div class="itemImg row10 js-item" data-id="<%= ob.contract_hash %>"
     <% if(ob.thumbnail_hash) { %>
     style="background-image: url(<%- ob.server %>get_image?hash=<%- ob.thumbnail_hash %>);"
-    <%}%>>
+    <% } else { %>
+    style="background-image: url(imgs/defaultItem.png);"
+    <% } %>>
   </div>
   <div class="table">
     <div>
@@ -11,7 +13,7 @@
         <div class="thumbnail js-avatar" data-handle="<%= ob.handle %>"
           <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
           style="background-image: url(<%- avatar_hash %>);"
-          <% }else{ %>
+          <% } else { %>
           style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
         <% } %>
