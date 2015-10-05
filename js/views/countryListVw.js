@@ -9,7 +9,6 @@ var __ = require('underscore'),
 module.exports = Backbone.View.extend({
 
   initialize: function(options){
-    var self = this;
     this.options = options || {};
     this.countries = new countriesModel();
     this.chooseCountries = new chooseCountriesCollection(this.countries.get('countries'));

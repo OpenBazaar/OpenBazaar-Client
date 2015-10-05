@@ -23,7 +23,7 @@ module.exports = function (currency, callback) {
             })
                 .done(function (response) {
                     var BlockchainCurrencies = {};
-                    for (var bcCurrency in response) {
+                    for (var bcCurrency in response) {  //TODO: Use _.forOwn
                         if (response.hasOwnProperty(bcCurrency)) {
                             BlockchainCurrencies[bcCurrency] = response[bcCurrency]['15m'];
                         }
@@ -45,7 +45,7 @@ module.exports = function (currency, callback) {
             })
                 .done(function (response) {
                     var CoinkiteCurrencies = {};
-                    for (var ckCurrency in response.rates.BTC) {
+                    for (var ckCurrency in response.rates.BTC) {  //TODO: Use _.forOwn
                         if (response.rates.BTC.hasOwnProperty(ckCurrency)) {
                             CoinkiteCurrencies[ckCurrency] = response.rates.BTC[ckCurrency].rate;
                         }
@@ -68,7 +68,7 @@ module.exports = function (currency, callback) {
             })
                 .done(function (response) {
                     var BitcoinAvgCurrencies = {};
-                    for (var bcaCurrency in response) {
+                    for (var bcaCurrency in response) {  //TODO: Use _.forOwn ??
                         if (response[bcaCurrency].averages) {
                             BitcoinAvgCurrencies[bcaCurrency] = response[bcaCurrency].averages['24h_avg'];
                         }
@@ -91,7 +91,7 @@ module.exports = function (currency, callback) {
                 .done(function (response) {
                     response = JSON.parse(response);
                     var BitcoinChartsCurrencies = {};
-                    for (var bccCurrency in response) {
+                    for (var bccCurrency in response) {  //TODO: Use _.forOwn
                         if (response.hasOwnProperty(bccCurrency)) {
                             BitcoinChartsCurrencies[bccCurrency] = response[bccCurrency]['24h'];
                         }
@@ -113,9 +113,9 @@ module.exports = function (currency, callback) {
         }
 
         var makeAveragePrice = function () {
+            var sum, currencyPrices, currencyCode, currencyKeys, averagePrice, keys = {}, btAve;
             btcAverages.timeStamp = new Date();
-            var keys = {};
-            for (var i in btPrices) {
+            for (var i in btPrices) { //TODO: Use _.forOwn
                 if (btPrices.hasOwnProperty(i)) {
                     keys = $.extend(keys, btPrices[i]);
                 }
@@ -123,29 +123,28 @@ module.exports = function (currency, callback) {
             if (btPrices.length === 0) {
                 alert("Bitcoin exchange rates are not available.");
             }
-            var currencyKeys = Object.keys(keys);
-            var sum, currencyPrices, currencyCode;
-            for (var index in currencyKeys) {
+            currencyKeys = Object.keys(keys);
+            for (var index in currencyKeys) {  //TODO: Use _.forOwn
                 if (currencyKeys.hasOwnProperty(index)) {
                     currencyCode = currencyKeys[index];
                     currencyPrices = [];
-                    for (var j in btPrices) {
+                    for (var j in btPrices) {  //TODO: Use _.forOwn or _.each?
                         if (btPrices[j][currencyCode]) {
                             currencyPrices.push(btPrices[j][currencyCode]);
                         }
                     }
                     sum = 0;
-                    for (var jIndex in currencyPrices) {
+                    for (var jIndex in currencyPrices) {  //TODO: Use _.forOwn
                         if (currencyPrices.hasOwnProperty(jIndex)) {
                             sum += Number(currencyPrices[jIndex]);
                         }
                     }
-                    var averagePrice = sum / currencyPrices.length;
+                    averagePrice = sum / currencyPrices.length;  //TODO: Eliminate division due to floating point math
                     btcAverages.rates[currencyCode] = averagePrice;
                 }
             }
             window.btcAverages = btcAverages;
-            var btAve = btcAverages.rates[currency];
+            btAve = btcAverages.rates[currency];
             typeof callback === 'function' && callback(btAve);
         };
 
