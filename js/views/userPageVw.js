@@ -291,8 +291,8 @@ module.exports = Backbone.View.extend({
       handle: self.model.get('page').profile.handle,
       ownPage: self.options.ownPage,
       //userID: self.model.get('page').profile.guid,
-      itemHash: hash,
-      //id: hash
+      itemHash: hash
+        //id: hash
     });
     this.item.urlRoot = this.options.userModel.get('server')+"contracts";
     //remove old item before rendering
@@ -424,6 +424,7 @@ module.exports = Backbone.View.extend({
       processData: false,
       data: formData,
       success: function(data) {
+        var errorModal = $('.js-messageModal');
         data = JSON.parse(data);
         var imageHash = data.image_hashes[0];
         if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
@@ -432,12 +433,11 @@ module.exports = Backbone.View.extend({
           self.model.set('page', tempPage);
           self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server + "get_image?hash=" + imageHash + ')');
         }else if (data.success === false){
-          var errorModal = $('.js-messageModal');
           errorModal.removeClass('hide');
+            //TODO: Extract these lines to a more generic showModal-type function
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
           errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
-          var errorModal = $('.js-messageModal');
           errorModal.removeClass('hide');
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
           errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
@@ -506,7 +506,7 @@ module.exports = Backbone.View.extend({
   },
 
   undoColorCustomization: function(){
-    if(this.customizing === true) {
+    if(this.customizing === true) { //TODO: Enumerate over array or entity with loop
       this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
       this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
       this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;

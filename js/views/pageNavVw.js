@@ -57,21 +57,21 @@ module.exports = Backbone.View.extend({
 
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
-    acc.find('.js-accordionNext').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
+    acc.find('.js-accordianNext').on('click', function(){
+      var oldPos = accWin.css('left').replace("px",""); //TODO: Fix implicit casting to Number
       if(oldPos > (accWidth * accNum * -1 + accWidth)){
         accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) - accWidth;
+          return parseInt(accWin.css('left').replace("px","")) - accWidth; //TODO: Change parseInt to Number to avoid radix
         });
       }
       // focus search input
       $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
     });
-    acc.find('.js-accordionPrev').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
+    acc.find('.js-accordianPrev').on('click', function(){
+      var oldPos = accWin.css('left').replace("px","");  //TODO: Fix implicit casting to Number
       if(oldPos < (0)){
         accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) + accWidth;
+          return parseInt(accWin.css('left').replace("px","")) + accWidth; //TODO: Change parseInt to Number to avoid radix
         });
       }
     });
@@ -146,7 +146,7 @@ module.exports = Backbone.View.extend({
   },
 
   currencySelect: function(e){
-    var targ = $(e.currentTarget);
+    var targ = $(e.currentTarget); //TODO: Rename variables to be more readable
     var crcy = targ.attr('data-name');
     var ccode = targ.attr('data-code');
     $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
@@ -156,7 +156,7 @@ module.exports = Backbone.View.extend({
   },
 
   languageSelect: function(e){
-    var targ = $(e.currentTarget);
+    var targ = $(e.currentTarget); //TODO: Rename variables to be more readable
     var lang = targ.attr('data-code');
     $('.js-homeModal-languageList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
@@ -164,7 +164,7 @@ module.exports = Backbone.View.extend({
   },
 
   timeSelect: function(e){
-    var inpt = $(e.target).closest('input[type=radio]');
+    var inpt = $(e.target).closest('input[type=radio]'); //TODO: Rename variables to be more readable
     var tz = inpt.attr('id');
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);

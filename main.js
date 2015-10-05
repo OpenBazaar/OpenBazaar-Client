@@ -1,3 +1,5 @@
+"use strict";
+
 // Check that the deps in node_modules match what's in package.json.
 var safestart = require('safestart');
 safestart(__dirname);

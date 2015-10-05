@@ -9,7 +9,6 @@ var __ = require('underscore'),
 module.exports = Backbone.View.extend({
 
   initialize: function(options){
-    var self = this;
     this.options = options || {};
     this.languages = new languagesModel();
     this.chooseLanguages = new chooseLanguagesCollection(this.languages.get('languages'));
