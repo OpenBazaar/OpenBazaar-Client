@@ -145,7 +145,6 @@ module.exports = window.Backbone.LinearModel.extend({
           }).format(vendorPrice*vendToUserBTCRatio);
           //set to random so a change event is always fired
           newAttributes.priceSet = Math.random();
-          console.log(newAttributes.priceSet);
           self.set(newAttributes);
         });
       }else{
