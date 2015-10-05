@@ -741,7 +741,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         "name": "Guinea-Bissau",
-        "dataName": "GUINEA-BISSAU",
+        "dataName": "GUINEA_BISSAU",
         "currency": "CFA Franc BCEAO",
         "code": "XOF",
         "number": "952",
@@ -1757,7 +1757,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         "name": "Timor-Leste",
-        "dataName": "TIMOR-LESTE",
+        "dataName": "TIMOR_LESTE",
         "currency": "US Dollar",
         "code": "USD",
         "number": "840",
