@@ -1,4 +1,4 @@
-<div class="rowItem js-homeModal-currencySelect padding17px" data-code="<%= ob.code %>" data-name="<%= ob.dataName %>">
-  <input type="radio" id="currency-<%= ob.dataName %>" name="<%= ob.code %>" <% if(typeof(selected) !== "undefined" && selected == ob.code){%>checked="checked"<%}%>>
-  <label class="homeModal-currency" for="currency-<%= ob.dataName %>"><%- ob.currency %></label>
+<div class="rowItem js-homeModal-currencySelect padding17px" data-code="<%= code %>" data-name="<%= dataName %>">
+  <input type="radio" id="currency-<%= dataName %>" name="<%= code %>" <% if(typeof(selected) !== "undefined" && selected == code){%>checked="checked"<%}%>>
+  <label class="homeModal-currency" for="currency-<%= dataName %>"><%- currency %></label>
 </div>

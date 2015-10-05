@@ -3,7 +3,6 @@ var __ = require('underscore'),
     $ = require('jquery'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
-    colpicker = require('../utils/colpick.js'),
     userProfileModel = require('../models/userProfile'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -32,8 +31,8 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    'change .js-userPageImageUpload': 'uploadUserPageImage',
-    'click .js-customizeColor': 'customizeColorClick'
+    'change .js-customizeColor': 'setCustomColor',
+    'change .js-userPageImageUpload': 'uploadUserPageImage'
   },
 
   initialize: function (options) {
@@ -97,7 +96,6 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    //make sure container is cleared
     $('#content').html(this.$el);
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -108,24 +106,6 @@ module.exports = Backbone.View.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.options.state, self.options.itemHash);
-      $('.js-customizeColorInput').colpick({
-        layout: "rgbhex", //can also be full, or hex
-        colorScheme: "dark", //can also be light
-        submitText: "Change",
-        onShow: function(el) {
-          var colorKey = $(this).attr('id');
-          $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
-        },
-        onSubmit: function(hsb,hex,rgb,el) {
-          self.setCustomColor(hex, $(el).attr('id'));
-          $(el).closest('.positionWrapper').find('.js-customizeColor').css('background-color', '#' + hex);
-          $(el).colpickHide();
-          $('.labelWrap').removeClass('fadeIn');
-        },
-        onHide: function(){
-          $('.labelWrap').removeClass('fadeIn');
-        }
-      });
     });
     return this;
   },
@@ -145,10 +125,8 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage input { color: " + this.model.get('page').profile.text_color + ";}";
       document.body.appendChild(customStyleTag);
       //set custom color input values
-      $('.js-customizeColorInput').each(function(){
-        var newColor = self.model.get('page').profile[$(this).attr('id')];
-        $(this).val(newColor);
-        $(this).closest('.positionWrapper').find('.js-customizeColor').css('background-color', newColor);
+      $('.js-customizeColor').each(function(){
+        $(this).val(self.model.get('page').profile[$(this).attr('id')]);
       });
     }
   },
@@ -382,17 +360,12 @@ module.exports = Backbone.View.extend({
     this.setControls('customize');
   },
 
-  customizeColorClick: function(e) {
-    var colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
-        colorKey = colorInput.attr('id'),
-        newColor = this.model.get('page').profile[colorKey].slice(1);
-    $(e.target).closest('.positionWrapper').find('.labelWrap').addClass('fadeIn');
-    $('.colpick').colpickSetColor(newColor, true);
-  },
-
-  setCustomColor: function(newColor, colorKey) {
+  setCustomColor: function(e) {
+    var colorButton = $(e.target);
+    var colorKey = colorButton.attr('id');
+    //make temp copy of the page
     var tempPage  =  __.clone(this.model.get('page'));
-    tempPage.profile[colorKey] = '#'+newColor;
+    tempPage.profile[colorKey] = colorButton.val();
     this.model.set('page', tempPage);
     this.setCustomStyles();
   },

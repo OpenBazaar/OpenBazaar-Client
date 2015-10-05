@@ -7,7 +7,6 @@ module.exports = function(templateFile, callback){
     if (err) {
       throw err;
     }
-    __.templateSettings.variable = "ob";
     var tmpl = __.template(data);
     callback(tmpl);
   });
