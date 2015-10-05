@@ -55,7 +55,7 @@ var fakeItems = [
     "category": "Test",
     "nsfw": false,
     "title": "Test Item Two with a Longer Title To See How That Fits in the UI",
-    "thumbnail_hash": "",
+    "thumbnail_hash": "63d7f80ce14357d6355150481f81c84356cea2f7",
     "price": 379.0,
     "origin": "UNITED_STATES",
     "currency_code": "usd",
