@@ -1432,6 +1432,10 @@ input[type="radio"].fieldItem:checked + label:before {
   visibility: hidden;
 }
 
+#ov1 .scrollOverflowY {
+  overflow-y: scroll;
+}
+
 .vCentered {
   /* must be inside a relatively positioned containing element */
   position: absolute;

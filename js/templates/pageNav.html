@@ -41,7 +41,7 @@
 
 <div class="modal modal-navBlock modal-opaque js-homeModal">
   <div class="modal-child modal-childMain">
-    <div class="modahomeModal-hero">
+    <div class="homeModal-hero">
       <p class="h6 homeModal-heroText"><%= polyglot.t('onboarding.intro') %></p>
     </div>
     <div class="homeModal-accordian accordian js-profileAccordian">
@@ -56,7 +56,7 @@
                 <input type="text" autofocus="autofocus" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflow">
+            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflowY">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -89,7 +89,7 @@
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-countryList homeModal-settings scrollOverflow">
+            <ul class="flexRow list flex-border js-homeModal-countryList homeModal-settings">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -107,7 +107,7 @@
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflow">
+            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflowY">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -125,7 +125,7 @@
                 <input type="text" class="search txtField txtField-bar" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflow">
+            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY">
               <li class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
