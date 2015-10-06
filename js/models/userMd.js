@@ -25,9 +25,9 @@ module.exports = Backbone.Model.extend({
     libbitcoinServer: "",
     SSL: false,
     seedPhrase: "",
-    //server: "http://localhost:18469/api/v1/"
+    server: "http://localhost:18469/api/v1/"
     //values below for testing. Real value should be dynamically set
-    server: "http://seed.openbazaar.org:18469/api/v1/"
+    //server: "http://seed.openbazaar.org:18469/api/v1/"
     //server: "http://bitcoinauthenticator.org:18469/api/v1/"
   }
 });
