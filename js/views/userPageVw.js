@@ -110,24 +110,6 @@ module.exports = Backbone.View.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.options.state, self.options.itemHash);
-      $('.js-customizeColorInput').colpick({
-        layout: "rgbhex", //can also be full, or hex
-        colorScheme: "dark", //can also be light
-        submitText: "Change",
-        onShow: function(el) {
-          var colorKey = $(this).attr('id');
-          $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
-        },
-        onSubmit: function(hsb,hex,rgb,el) {
-          self.setCustomColor(hex, $(el).attr('id'));
-          $(el).closest('.positionWrapper').find('.js-customizeColor').css('background-color', '#' + hex);
-          $(el).colpickHide();
-          $('.labelWrap').removeClass('fadeIn');
-        },
-        onHide: function(){
-          $('.labelWrap').removeClass('fadeIn');
-        }
-      });
     });
     return this;
   },
@@ -399,11 +381,30 @@ module.exports = Backbone.View.extend({
   },
 
   customizeColorClick: function(e) {
-    var colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
+    var self = this,
+        colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
         colorKey = colorInput.attr('id'),
         newColor = this.model.get('page').profile[colorKey].slice(1);
     $(e.target).closest('.positionWrapper').find('.labelWrap').addClass('fadeIn');
-    $('.colpick').colpickSetColor(newColor, true);
+    colorInput.colpick({
+      layout: "rgbhex", //can also be full, or hex
+      colorScheme: "dark", //can also be light
+      submitText: "Change",
+      onShow: function(el) {
+        var colorKey = $(this).attr('id');
+        $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
+      },
+      onSubmit: function(hsb,hex,rgb,el) {
+        self.setCustomColor(hex, $(el).attr('id'));
+        $(el).closest('.positionWrapper').find('.js-customizeColor').css('background-color', '#' + hex);
+        $(el).colpickHide();
+        $('.labelWrap').removeClass('fadeIn');
+      },
+      onHide: function(){
+        $('.labelWrap').removeClass('fadeIn');
+      }
+    });
+    colorInput.colpickSetColor(newColor, true);
   },
 
   setCustomColor: function(newColor, colorKey) {
@@ -464,12 +465,16 @@ module.exports = Backbone.View.extend({
     for(var profileKey in pageData) {
       if(pageData.hasOwnProperty(profileKey)){
         //don't include nested objects in the form
-        if(pageData[profileKey] !== 'object'){
+        if(pageData[profileKey] !== 'object' && pageData[profileKey]){
           if(profileKey == 'background_color' || profileKey == 'primary_color' || profileKey == 'text_color' || profileKey == 'secondary_color'){
             //convert hex to decimal
             var profileColor = pageData[profileKey].slice(1);
             profileColor = is.hexColor(profileColor) ? parseInt(profileColor, 16) : profileColor;
             formData.append(profileKey, profileColor);
+            //these values get turned into strings, fix them
+          } else if(profileKey == 'vendor' || profileKey == 'moderator' || profileKey == 'nsfw'){
+            console.log("converting to Boolean " + profileKey);
+            formData.append(profileKey, Boolean(pageData[profileKey]));
           } else {
             formData.append(profileKey, String(pageData[profileKey]));
           }
@@ -570,8 +575,9 @@ module.exports = Backbone.View.extend({
 
   createStore: function() {
     var self = this,
-        storeWizardModel = new Backbone.Model(this.model.get('page'));
-    this.storeWizardView = new storeWizardVw({model:storeWizardModel, el: '#modalHolder'});
+        storeWizardModel = new Backbone.Model();
+    storeWizardModel.set(this.model.attributes);
+    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder'});
     this.subViews.push(this.storeWizardView);
   },
 

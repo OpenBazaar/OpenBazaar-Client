@@ -4,20 +4,22 @@ var __ = require('underscore'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     userProfileModel = require('../models/userProfile'),
-    colpicker = require('../utils/colpick.js');
+    colpicker = require('../utils/colpick.js'),
+    countryListView = require('../views/countryListVw');
 
 module.exports = Backbone.View.extend({
 
   classname: "storeWizard",
 
   events: {
-    'click .js-customizeColorWrapper': 'openColorPicker'
+    'click .js-storeWizardModal': 'blockClicks',
+    'click .js-closeStoreWizardModal': 'closeWizard'
   },
 
-  initialize: function() {
+  initialize: function(options) {
     "use strict";
-    console.log("init store wizard");
-    console.log(this.model);
+    this.options = options || {};
+    this.parentEl = $(options.parentEl);
     this.render();
   },
 
@@ -56,37 +58,76 @@ module.exports = Backbone.View.extend({
 
   render: function() {
     "use strict";
-    var self = this;
+    var self = this,
+        countryList;
+
     loadTemplate('./js/templates/storeWizard.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model));
+      self.$el.html(loadedTemplate(self.model.toJSON()));
+      //append the view to the passed in parent
+      self.parentEl.append(self.$el);
       self.initAccordion('.js-storeWizardAccordion');
-      self.$el.find('.js-customizeColorWrapper').colpick({
+      self.setValues();
+      self.setCustomStyles();
+      self.$el.find('.js-customizeColorInput').colpick({
         layout: "rgbhex", //can also be full, or hex
         colorScheme: "dark", //can also be light
         submitText: "Change",
         //flat: true,
         onShow: function (el) {
-          var colorKey = $(this).find('.js-customizeColorInput').attr('id');
-          console.log(self.model.get('profile')[colorKey]);
-          if(self.model.get('profile')[colorKey]){
-            $(this).colpickSetColor(self.model.get('profile')[colorKey].slice(1), true);
+          console.log("show");
+          var colorKey = $(this).attr('id');
+          if(self.model.get('page').profile[colorKey]){
+            $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
           }
         },
         onSubmit: function (hsb, hex, rgb, el) {
-          //self.setCustomColor(hex, $(el).attr('id'));
+          self.setCustomColor(hex, $(el).attr('id'));
           $(el).closest('.js-customizeColorWrapper').find('.js-customizeColorLabel').css('background-color', '#' + hex);
           $(el).colpickHide();
         },
         onHide: function () {
         }
       });
+
+      countryList = new countryListView({el: '.js-storeWizardModal-countryList', selected: self.model.get('user').country});
     });
   },
 
-  openColorPicker: function(e) {
+  setValues: function() {
+    var self = this;
+    //set custom color input values
+  },
+
+  setCustomStyles: function() {
+    var self = this;
+    //set custom color input values
+    $('.js-customizeColorInput').each(function(){
+      var newColor = self.model.get('page').profile[$(this).attr('id')];
+      $(this).val(newColor);
+      $(this).closest('.js-customizeColorWrapper').find('.js-customizeColorLabel').css('background-color', newColor);
+    });
+  },
+
+  setCustomColor: function(newColor, colorKey) {
+    var tempPage  =  __.clone(this.model.get('page'));
+    tempPage.profile[colorKey] = '#'+newColor;
+    this.model.set('page', tempPage);
+    this.setCustomStyles();
+  },
+
+  blockClicks: function(e) {
     "use strict";
-    console.log(e.target);
-    //$('.js-customizeColorWrapper').colpickShow();
+    e.stopPropagation();
+  },
+
+  closeWizard: function() {
+    "use strict";
+    this.close();
+  },
+
+  saveProfile: function() {
+    "use strict";
+    //remember to use is to check hex color in color fields
   },
 
   close: function(){

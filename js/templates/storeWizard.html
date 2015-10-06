@@ -28,6 +28,17 @@
             </div>
             <div class="flexRow \">
               <div class="flexCol-4">
+                <label class="fieldItem" for="storeName">
+                  <%= polyglot.t('Store') %> <%= polyglot.t('Name') %>
+                </label>
+              </div>
+              <div class="flexCol-8">
+                <input name="storeName" id="storeName" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="My Store" required>
+              </div>
+            </div>
+            <!--
+            <div class="flexRow \">
+              <div class="flexCol-4">
                 <label class="fieldItem fieldItem-multiLine" for="storeDescription">
                   <%= polyglot.t('ShortDescription') %><br/>
                   <span class="txt-fade">(<%= polyglot.t('UpTo140Characters') %>)</span>
@@ -37,6 +48,7 @@
                 <textarea name="storeDescription" rows="8" id="storeDescription" class="fieldItem-textarea" maxlength="140" required></textarea>
               </div>
             </div>
+            -->
             <div class="flexRow \">
               <div class="flexCol-4">
                 <div class="fieldItem">
@@ -68,7 +80,10 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="storeName" type="text" class="fieldItem" value="" required>
+                <div class="flexCol-8 js-customizeColorWrapper">
+                  <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="text_color"></label>
+                  <input class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="text_color" size="7"/>
+                </div>
               </div>
             </div>
             <div class="flexRow \">
@@ -78,7 +93,10 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="storeName" type="text" class="fieldItem" value="" required>
+                <div class="flexCol-8 js-customizeColorWrapper">
+                  <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="background_color"></label>
+                  <input class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="background_color" size="7"/>
+                </div>
               </div>
             </div>
             <div class="flexRow \">
@@ -101,12 +119,14 @@
           <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.disclaimer_title') %>
           </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
+          <div class="flexContainer flex-border" id="homeModal-countryList">
             <div class="flexRow">
-              <div class="rowItem">
-                <p class="margin0"><%= polyglot.t('onboarding.disclaimer_body') %></p>
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
               </div>
             </div>
+            <ul class="flexRow list js-storeWizardModal-countryList homeModal-settings scrollOverflow">
+            </ul>
           </div>
           <div class="bar barFlush">
             <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
