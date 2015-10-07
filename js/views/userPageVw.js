@@ -122,7 +122,9 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 .userPage .custCol-border-secondary { transition: border-color .3s cubic-bezier(0, 0, 0.0, 1); border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 15px}" +
           "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
@@ -244,12 +246,13 @@ module.exports = Backbone.View.extend({
   },
 
   renderFollowers: function (model) {
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No Followers Yet", message: ""});
+    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers yet", message: ""}); // to fix - this copy needs to be localized
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not Following Anyone Yet", message: ""});
+    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone yet", message: ""}); // to fix - this copy needs to be localized
+    this.subViews.push(this.followerList);
     this.subViews.push(this.followingList);
   },
 
@@ -335,18 +338,21 @@ module.exports = Backbone.View.extend({
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'));
     this.addTabToHistory('followers');
     this.setState('followers');
+    $('#inputFollowers').focus();
   },
 
   followingClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-following'));
     this.addTabToHistory('following');
     this.setState('following');
+    $('#inputFollowing').focus();
   },
 
   storeClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
+    $('#inputStore').focus();
   },
 
   tabClick: function(activeTab, showContent){

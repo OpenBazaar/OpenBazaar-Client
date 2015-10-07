@@ -47,7 +47,7 @@ textarea::-webkit-input-placeholder{
   opacity: .5;
   color: #fff;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: .5px;
 }
 
@@ -688,7 +688,7 @@ input[type="text"].txtField-bar {
   float: left;
   background-color: #086A9E; /* default color */
   padding:0;
-  border-radius: 2px;
+  border-radius: 3px;
   box-sizing: border-box;
 }
 
@@ -1135,14 +1135,21 @@ input[type="radio"].fieldItem + label:before {
   position: absolute;
   left: 10px;
   top: 15px;
-  height: 20px;
-  width: 20px;
-  border-radius: 15px;
-  box-shadow: inset 0 0 0 10px rgba(255,255,255,0.4);
+  height: 16px;
+  width: 16px;
+  border-radius: 12px;
+  border: solid 1px blue;
+  box-shadow: none;
+  opacity: 1;
 }
 
 input[type="radio"].fieldItem:checked + label:before {
-  box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
+  background: #575656;
+  box-shadow: inset 0 0 0 4px #514F4F;
+}
+
+.radioLabel {
+  opacity: .75;
 }
 
 .userPage .fieldItem-selectWrapper select option {
@@ -1267,6 +1274,18 @@ input[type="radio"].fieldItem:checked + label:before {
 
 .icon-small {
   font-size: 11px;
+}
+
+.photos-empty {
+  height: 110px; 
+  margin-top: 58px;
+  padding: 15px; 
+  text-align: center;
+  width: 100%; 
+}
+
+.helper-text {
+  padding: 5px 15px 30px 15px;
 }
 
 /*========== one-off classes ==========*/
@@ -1445,7 +1464,11 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 .borderRight {
-  border-right: solid 1px rgba(255,255,255,0.08);
+  border-right: solid 1px rgba(255,255,255,0.08) !important;
+}
+
+.borderBottom {
+  border-bottom: solid 1px rgba(255,255,255,0.08) !important;
 }
 
 .border0 {
@@ -1534,6 +1557,10 @@ input[type="radio"].fieldItem:checked + label:before {
   margin-top: 20px !important;
 }
 
+.marginBottom50 {
+  margin-bottom: 50px;
+}
+
 .margin0 {
   margin: 0;
 }
@@ -1552,4 +1579,12 @@ input[type="radio"].fieldItem:checked + label:before {
 
 .padding17px {
   padding: 17px;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.cursorDefault {
+  cursor: default;
 }

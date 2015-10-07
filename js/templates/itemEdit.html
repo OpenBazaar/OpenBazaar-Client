@@ -4,11 +4,14 @@
     <a class="js-returnToStore textOpacity75"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a><span class="textOpacity75">&nbsp;>&nbsp;<%= vendor_offer__listing__item__title %></span>
   </div>
 </div>
-<div class="flexRow border0" style="margin-bottom: 50px">
+<div class="flexRow border0 marginBottom50">
   <div class="flexRow flexExpand">
-<!--     <div class="flexCol-5 pad20">
+<!--     
+  I left this because I'm not sure how to fix it 
+
+<div class="flexCol-5 pad20">
       <div class="row10 rowTop20 js-dropImage">
-<<<<<<< HEAD
+<<<<<<< HEAD 
 
 =======
         <div class="uploadPhotoControls">
@@ -63,7 +66,7 @@
             </div>
           </div>
           <div class="flexCol-9">
-            <input name="title" id="inputName" type="text" class="fieldItem custCol-text" value="<%= vendor_offer__listing__item__title %>" required>
+            <input name="title" id="inputName" type="text" class="fieldItem custCol-text" placeholder="<%= polyglot.t('TitlePlaceholder') %>" value="<%= vendor_offer__listing__item__title %>" >
           </div>
         </div>
         <div class="flexRow custCol-border-secondary">
@@ -76,9 +79,9 @@
             <div class="fieldItem padding0">
               <div class="fieldItem-selectWrapper">
                 <select name="metadata_category" id="inputType" class="custCol-text">
-                  <option value="physical good" selected>Physical Item</option>
-                  <option value="digital good">Digital Item</option>
-                  <option value="service">Service</option>
+                  <option value="physical good" selected><%= polyglot.t('Physical') %> <%= polyglot.t('Item') %></option>
+                  <option value="digital good"><%= polyglot.t('Digital') %> <%= polyglot.t('Item') %></option>
+                  <option value="service"><%= polyglot.t('Service') %></option>
                 </select>
               </div>
             </div>
@@ -93,12 +96,12 @@
           <div class="flexCol-5">
             <input type="text" name="price" id="inputPrice" class="hide" />
             <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
-            <input type="number" step="any" min="0" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= vendor_offer__listing__item__price_per_unit__fiat__price %>" required>
+            <input type="number" step="any" min="0" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= vendor_offer__listing__item__price_per_unit__fiat__price %>">
           </div>
           <div class="flexCol-4">
             <div class="fieldItem pull-right">
               <div class="btn-togWrapper btn-togWrapper-c1 border0">
-                <a class="btn btn-txtHalf btn-c1 custCol-secondary">In: <%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
+                <a class="btn btn-txtHalf btn-c1 custCol-secondary cursorDefault">In: <%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
                 <!-- <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a> -->
               </div>
             </div>
@@ -115,11 +118,11 @@
               <div class="fieldItem-selectWrapper">
                 <select name="condition" id="inputCondition" class="custCol-text">
                   <option value="" selected>--</option>
-                  <option value="New">New</option>
-                  <option value="Used - excellent">Used - excellent</option>
-                  <option value="Used - good">Used - good</option>
-                  <option value="Used - poor">Used - poor</option>
-                  <option value="Refurbished">Refurbished</option>
+                  <option value="New"><%= polyglot.t('New') %></option>
+                  <option value="Used - excellent"><%= polyglot.t('Used') %> - <%= polyglot.t('Excellent') %></option>
+                  <option value="Used - good"><%= polyglot.t('Used') %> - <%= polyglot.t('Good') %></option>
+                  <option value="Used - poor"><%= polyglot.t('Used') %> - <%= polyglot.t('Poor') %></option>
+                  <option value="Refurbished"><%= polyglot.t('Refurbished') %></option>
                 </select>
               </div>
             </div>
@@ -129,11 +132,11 @@
         <div class="flexRow custCol-border-secondary">
           <div class="flexCol-3  borderRight custCol-border-secondary">
             <div class="fieldItem">
-              <label for="inputSku">SKU</label>
+              <label for="inputSku"><%= polyglot.t('SKU') %> </label>
             </div>
           </div>
           <div class="flexCol-9">
-            <input name="sku" type="text" id="inputSku" placeholder="Optional" class="fieldItem custCol-text" value="<%= vendor_offer__listing__item__sku %>">
+            <input name="sku" type="text" id="inputSku" placeholder="<%= polyglot.t('Optional') %>" class="fieldItem custCol-text" value="<%= vendor_offer__listing__item__sku %>">
           </div>
         </div>
         <div class="flexRow custCol-border-secondary">
@@ -143,7 +146,7 @@
             </div>
           </div>
           <div class="flexCol-9">
-            <textarea name="description" rows="8" class="fieldItem-textarea custCol-text" id="inputDescription" placeholder="Enter description..."><%= vendor_offer__listing__item__description %></textarea>
+            <textarea name="description" rows="8" class="fieldItem-textarea custCol-text" id="inputDescription" placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%= vendor_offer__listing__item__description %></textarea>
           </div>
         </div>
       </div>
@@ -163,7 +166,7 @@
               </div>
             </div>
             <div class="flexCol-8">
-              <input name="process_time" type="text" id="inputProcessingTime" placeholder="Enter order processing time e.g. 1-2 days" class="fieldItem custCol-text" value="<%= vendor_offer__listing__item__process_time %>" required>
+              <input name="process_time" type="text" id="inputProcessingTime" placeholder="<%= polyglot.t('OrderProcessingTimePlaceholder') %>" class="fieldItem custCol-text" value="<%= vendor_offer__listing__item__process_time %>">
             </div>
           </div>
           <div class="flexRow custCol-border-secondary js-shippingRow">
@@ -188,8 +191,8 @@
               </div>
             </div>
             <div class="flexCol-8">
-              <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" name="shippingFree" value="true" /><label for="shippingFreeTrue">Yes</label>
-              <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" value="false" checked/><label for="shippingFreeFalse">No</label>
+              <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" name="shippingFree" value="true" /><label for="shippingFreeTrue" class="radioLabel">Yes</label>
+              <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" name="shippingFree" value="false" checked/><label for="shippingFreeFalse" class="radioLabel">No</label>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary js-inputParent js-shippingPriceRow">
@@ -201,13 +204,13 @@
             <div class="flexCol-4">
               <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
               <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
-              <input type="number" step="any" min="0" class="fieldItem js-priceLocal custCol-text" id="shippingPriceLocalLocal"  value="0" required>
-              <!-- <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceLocalBtc" value="0" required> -->
+              <input type="number" step="any" min="0" class="fieldItem js-priceLocal custCol-text" id="shippingPriceLocalLocal"  value="0">
+              <!-- <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceLocalBtc" value="0"> -->
             </div>
             <div class="flexCol-4">
               <div class="fieldItem pull-right">
                 <div class="btn-togWrapper btn-togWrapper-c1 border0">
-                  <a class="btn btn-txtHalf btn-c1 custCol-secondary">In: <%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
+                  <a class="btn btn-txtHalf btn-c1 custCol-secondary cursorDefault">In: <%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
                   <!-- <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a> -->
                 </div>
               </div>
@@ -221,13 +224,13 @@
             </div>
             <div class="flexCol-4">
               <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
-              <input type="number" step="any" min="0" class="fieldItem js-priceLocal custCol-text" id="shippingPriceInternationalLocal" value="0" required>
-              <!-- <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc" value="0" required> -->
+              <input type="number" step="any" min="0" class="fieldItem js-priceLocal custCol-text" id="shippingPriceInternationalLocal" value="0">
+              <!-- <input type="number" step="any" min="0" class="fieldItem js-priceBtc hide" id="shippingPriceInternationalBtc" value="0"> -->
             </div>
             <div class="flexCol-4 borderRight custCol-border-secondary">
               <div class="fieldItem pull-right">
                 <div class="btn-togWrapper btn-togWrapper-c1 border0">
-                  <a class="btn btn-txtHalf btn-c1 custCol-secondary">In: <%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
+                  <a class="btn btn-txtHalf btn-c1 custCol-secondary cursorDefault">In: <%= vendor_offer__listing__item__price_per_unit__fiat__currency_code %></a>
                   <!-- <a class="btn btn-togRight btn-txtHalf btn-c1 inactive  js-priceBtn-btc">btc</a> -->
                 </div>
               </div>
@@ -241,7 +244,7 @@
               </div>
             </div>
             <div class="flexCol-8">
-              <input name="est_delivery_domestic" id="inputLocalShippingTime" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__domestic %>" placeholder="Enter domestic shipping time e.g. 3-5 days" required>
+              <input name="est_delivery_domestic" id="inputLocalShippingTime" type="text" class="fieldItem" value="<%= vendor_offer__listing__shipping__est_delivery__domestic %>" placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
             </div>
           </div>
           <div class="flexRow custCol-border-secondary js-shippingRow">
@@ -251,7 +254,7 @@
               </div>
             </div>
             <div class="flexCol-8">
-              <input name="est_delivery_international" id="inputInternationalShippingTime" type="text" class="fieldItem custCol-text" value="<%= vendor_offer__listing__shipping__est_delivery__international %>" placeholder="Enter international shipping time e.g. 7-15 days" required>
+              <input name="est_delivery_international" id="inputInternationalShippingTime" type="text" class="fieldItem custCol-text" value="<%= vendor_offer__listing__shipping__est_delivery__international %>" placeholder="<%= polyglot.t('EstDeliveryInternationalPlaceholder') %>">
             </div>
           </div>
         </div>
@@ -260,12 +263,12 @@
         <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20 custCol-primary-light">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
-              <h5><%= polyglot.t('Terms and conditions (optional)') %></h5>
+              <h5><%= polyglot.t('TermsAndConditions') %> (<%= polyglot.t('Optional') %>)</h5>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
             <div class="flexCol-12 custCol-border-secondary">
-              <textarea name="terms_conditions" rows="6" placeholder="Enter terms and conditions..." class="fieldItem-textarea custCol-text"><%= vendor_offer__listing__policy__terms_conditions %></textarea>
+              <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= vendor_offer__listing__policy__terms_conditions %></textarea>
             </div>
           </div>
         </div>
@@ -274,12 +277,12 @@
         <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20 custCol-primary-light">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
-              <h5><%= polyglot.t('Return policy (optional)') %></h5>
+              <h5><%= polyglot.t('ReturnPolicy') %> (<%= polyglot.t('Optional') %>)</h5>
             </div>
           </div>
           <div class="flexRow">
             <div class="flexCol-12">
-              <textarea name="returns" rows="6" placeholder="Enter return policy..." class="fieldItem-textarea custCol-text"><%= vendor_offer__listing__policy__returns %></textarea>
+              <textarea name="returns" rows="6" placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= vendor_offer__listing__policy__returns %></textarea>
             </div>
           </div>
       </div>
@@ -290,19 +293,17 @@
       <!-- Photos -->
       <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
         <div class="flexRow custCol-secondary border0">
-          <div class="fieldItem" style="width: 100%">
-            <h5 class="floatLeft"><%= polyglot.t('Photos (optional)') %></h5>
+          <div class="fieldItem width100">
+            <h5 class="floatLeft"><%= polyglot.t('Photos') %> (<%= polyglot.t('Optional') %>)</h5>
             <form action="<%- server %>upload_image" method="post" enctype="multipart/form-data" id="imageForm" class="floatRight">
-              <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20 custCol-primary" style="opacity: 1"><%= polyglot.t('UploadPhotos') %></label>
+              <label for="itemImageUploadMain" class="btn btn-c1 btn-txt rowTop20 custCol-primary textOpacity1"><%= polyglot.t('UploadPhotos') %></label>
               <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
             </form>
           </div>
         </div>
-        <div style="height: 170px; width: 100%; padding: 15px; text-align: center;">
-          <div class="photosEmpty" style="margin-top: 58px;">
-            <div class="textSize14px">No photos added</div>
-            <div class="textOpacity50">Drag photos here or click button above.</div>
-          </div>
+        <div class="photos-empty">
+          <div class="textSize14px"><%= polyglot.t('No') %> <%= polyglot.t('Photos') %> <%= polyglot.t('Added') %></div>
+          <div class="textOpacity50">Drag photos here or click button above.</div>
         </div>
       </div>
 
@@ -310,7 +311,7 @@
       <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
         <div class="flexRow custCol-secondary border0">        
           <div class="fieldItem">
-            <h5><%= polyglot.t('Categorization (optional)') %></h5>
+            <h5><%= polyglot.t('Categorization') %> (<%= polyglot.t('Optional') %>)</h5>
           </div>
         </div>  
         <div class="flexRow custCol-border-secondary">
@@ -320,11 +321,11 @@
             </div>
           </div>
           <div class="flexCol-8">
-            <input name="category" type="text" id="inputCategory" placeholder="Enter category" class="fieldItem custCol-text" value="<%= vendor_offer__listing__item__category %>">
+            <input name="category" type="text" id="inputCategory" placeholder="<%= polyglot.t('CategoryPlaceholder') %>" class="fieldItem custCol-text" value="<%= vendor_offer__listing__item__category %>">
           </div>
         </div>
         <div class="flexRow">
-          <p class="textOpacity50" style="padding: 5px 15px 30px 15px;">Categories are used to organize items within your store.</p>
+          <p class="textOpacity50 helper-text"><%= polyglot.t('CategoryHelperText') %></p>
         </div>
       </div>
 
@@ -332,19 +333,19 @@
       <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
         <div class="flexRow custCol-secondary border0">
           <div class="fieldItem">
-            <h5><%= polyglot.t('Search (optional)') %></h5>
+            <h5><%= polyglot.t('Search') %> (<%= polyglot.t('Optional') %>)</h5>
           </div>
         </div>
         <div class="flexRow custCol-border-secondary">
           <div class="flexCol-4  borderRight custCol-border-secondary">
             <div class="fieldItem">
-              <label for="nsfwFalse"><%= polyglot.t('NSFW') %>?</label>
+              <label for="nsfwFalse"><%= polyglot.t('NSFW') %></label>
             </div>
           </div>
           <div class="flexCol-8">
             <div class="fieldItem">
-              <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
-              <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
+              <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
+              <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel"><%= polyglot.t('No') %></label>
             </div>
           </div>
         </div>
@@ -360,7 +361,7 @@
           </div>
         </div>
         <div class="flexRow">
-          <p class="textOpacity50" style="padding: 5px 15px 30px 15px;">Setting keywords helps your item be discovered in the market.</p>
+          <p class="textOpacity50 helper-text"<%= polyglot.t('KeywordsHelperText') %></p>
         </div>
       </div>
 
@@ -368,7 +369,7 @@
       <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
         <div class="flexRow custCol-secondary border0">        
           <div class="fieldItem">
-            <h5><%= polyglot.t('Expiration (optional)') %></h5>
+            <h5><%= polyglot.t('Expiration') %> (<%= polyglot.t('Optional') %>)</h5>
           </div>
         </div>
         <div class="flexRow custCol-border-secondary">
@@ -382,7 +383,7 @@
           </div>
         </div>
         <div class="flexRow">
-          <p class="textOpacity50" style="padding: 5px 15px 30px 15px;">Set a date for the item to automatically be pulled from your store.</p>
+          <p class="textOpacity50 helper-text"><%= polyglot.t('ExpirationDateHelperText') %></p>
         </div>
       </div>
 

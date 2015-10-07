@@ -130,7 +130,14 @@
               </div>
             </div>
           </div>
-
+          <div class="flexRow borderBottom custCol-border-secondary">
+            <div class="rowItem">
+              <div class="textOpacity75"><%= polyglot.t('PGP Key') %></div>
+              <div>
+                not provided
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -139,27 +146,27 @@
     <div class="flexRow">
       <div class="flexRow">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-primary">
-          <input type="text" class="txtField txtField-bar search custCol-border-primary" />
+          <input type="text" id="inputFollowers" class="txtField txtField-bar search custCol-border-primary" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
         </div>
       </div>
     </div>
     <div class="flexRow js-list1"></div>
   </div>
   <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide minHeight650">
-    <div class="flexRow minHeight650">
+    <div class="flexRow">
       <div class="flexRow">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-          <input type="text" class="txtField txtField-bar search" />
+          <input type="text" id="inputFollowing" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>"  />
         </div>
       </div>
     </div>
     <div class="flexRow js-list2"></div>
   </div>
   <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide minHeight650">
-    <div class="flexRow minHeight650">
+    <div class="flexRow">
       <div class="flexRow">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-          <input type="text" class="txtField txtField-bar search" />
+          <input type="text" id="inputStore" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>"  />
         </div>
       </div>
     </div>
