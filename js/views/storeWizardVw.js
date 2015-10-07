@@ -5,7 +5,10 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     userProfileModel = require('../models/userProfile'),
     colpicker = require('../utils/colpick.js'),
-    countryListView = require('../views/countryListVw');
+    countriesModel = require('../models/countriesMd'),
+    taggle = require('taggle'),
+    uuid = require('node-uuid'),
+    chosen = require('../utils/chosen.jquery.min.js');
 
 module.exports = Backbone.View.extend({
 
@@ -16,11 +19,29 @@ module.exports = Backbone.View.extend({
     'click .js-closeStoreWizardModal': 'closeWizard'
   },
 
+  getModerators: function() {
+    "use strict";
+    var id = uuid.v4();
+    var connection = new WebSocket('ws://seed.openbazaar.org:18466');
+    connection.onopen = function(){
+      console.log("connection open");
+      connection.send({"request": {"api": "v1", "id": id, "command": "get_moderators" }});
+    };
+    connection.onerror = function(error){
+      console.log("connection error "+ error);
+    };
+    connection.onmessage = function(e){
+      console.log("connection message "+ e.data);
+    };
+  },
+
   initialize: function(options) {
     "use strict";
     this.options = options || {};
     this.parentEl = $(options.parentEl);
+    this.getModerators();
     this.render();
+    console.log(this.model);
   },
 
   initAccordion: function(targ){
@@ -58,8 +79,7 @@ module.exports = Backbone.View.extend({
 
   render: function() {
     "use strict";
-    var self = this,
-        countryList;
+    var self = this;
 
     loadTemplate('./js/templates/storeWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -88,17 +108,29 @@ module.exports = Backbone.View.extend({
         onHide: function () {
         }
       });
-
-      countryList = new countryListView({el: '.js-storeWizardModal-countryList', selected: self.model.get('user').country});
     });
   },
 
   setValues: function() {
+    "use strict";
     var self = this;
-    //set custom color input values
+    //add all countries to the Ships To select list
+    var countries = new countriesModel(),
+        countryList = countries.get('countries'),
+        locationSelect = this.$el.find('#locationSelect');
+    
+    __.each(countryList, function(country, i){
+      locationSelect.append('<option value="'+country.dataName+'">'+country.name+'</option>');
+    });
+
+    locationSelect.val(this.model.get('user').country);
+    locationSelect.chosen();
+    //activate tags plugin
+    this.categoriesInput = new Taggle('categoriesInput');
   },
 
   setCustomStyles: function() {
+    "use strict";
     var self = this;
     //set custom color input values
     $('.js-customizeColorInput').each(function(){
@@ -109,6 +141,7 @@ module.exports = Backbone.View.extend({
   },
 
   setCustomColor: function(newColor, colorKey) {
+    "use strict";
     var tempPage  =  __.clone(this.model.get('page'));
     tempPage.profile[colorKey] = '#'+newColor;
     this.model.set('page', tempPage);

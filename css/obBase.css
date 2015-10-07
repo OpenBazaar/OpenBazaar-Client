@@ -36,7 +36,9 @@ input {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="email"],
+input[type="url"] {
   border: none;
   color: #000;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
@@ -954,6 +956,8 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 input[type="text"].fieldItem,
 input[type="number"].fieldItem,
+input[type="email"].fieldItem,
+input[type="url"].fieldItem,
 input[type="datetime-local"].fieldItem {
   width: 100%;
   color: #fff;
@@ -992,6 +996,8 @@ input[type="number"].fieldItem::-webkit-inner-spin-button {
 
 input[type="text"].fieldItem:focus,
 input[type="number"].fieldItem:focus,
+input[type="email"].fieldItem:focus,
+input[type="url"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
   border: 2px solid #fff;
   transition: border 0.3s;
@@ -1000,8 +1006,12 @@ input[type="datetime-local"].fieldItem:focus {
 
 /* add formChecked class after form has been checked for validity */
 .formChecked input[type="text"].fieldItem:invalid,
+.formChecked input[type="email"].fieldItem:invalid,
+.formChecked input[type="url"].fieldItem:invalid,
 .formChecked input[type="number"].fieldItem:invalid,
 .formChecked input[type="text"].fieldItem:focus:invalid,
+.formChecked input[type="email"].fieldItem:focus:invalid,
+.formChecked input[type="url"].fieldItem:focus:invalid,
 .formChecked input[type="number"].fieldItem:focus:invalid {
   border: 2px dashed rgba(89,1,1,0.8);;
   background-color: rgba(89,1,1,0.2);
@@ -1009,6 +1019,8 @@ input[type="datetime-local"].fieldItem:focus {
 }
 
 input[type="text"].fieldItem.fieldItem-withButton,
+input[type="email"].fieldItem.fieldItem-withButton,
+input[type="url"].fieldItem.fieldItem-withButton,
 input[type="number"].fieldItem.fieldItem-withButton {
   position: absolute;
   padding-left: 50px;
@@ -1153,6 +1165,34 @@ input[type="radio"].fieldItem + label:before {
 }
 
 input[type="radio"].fieldItem:checked + label:before {
+  box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
+}
+
+input[type="checkbox"].fieldItem {
+  display: none;
+}
+
+input[type="checkbox"].fieldItem + label {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  line-height: 50px;
+  padding: 0 20px 0 40px;
+}
+
+input[type="checkbox"].fieldItem + label:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  height: 20px;
+  width: 20px;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 10px rgba(255,255,255,0.4);
+}
+
+input[type="checkbox"].fieldItem:checked + label:before {
   box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
 }
 

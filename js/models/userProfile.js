@@ -71,6 +71,12 @@ module.exports = Backbone.Model.extend({
     response.profile.secondary_color = this.convertColor(response.profile.secondary_color);
     response.profile.text_color = this.convertColor(response.profile.text_color);
 
+    //if an empty social_accounts object is returned, put the defaults back into it
+    response.profile.social_accounts.facebook = response.profile.social_accounts.facebook || {username: "", proof_url: ""};
+    response.profile.social_accounts.twitter = response.profile.social_accounts.facebook || {twitter: "", proof_url: ""};
+    response.profile.social_accounts.instagram = response.profile.social_accounts.instagram || {username: "", proof_url: ""};
+    response.profile.social_accounts.snapchat = response.profile.social_accounts.snapchat || {username: "", proof_url: ""};
+
     return response;
   }
 });
