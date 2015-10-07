@@ -3,10 +3,16 @@
     <div class="btn-cornerTR btn-cornerTROutR btn-flushTop js-closeStoreWizardModal">
       <h2 class="ion-close-round"></h2>
     </div>
-    <div class="modal-hero">
-      <form id="userPageImageForm">
-        <label for="userPageImageUpload" class="btn btn-c1 btn-txt fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
-        <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
+    <div class="modal-hero js-storeWizardHero"
+    <% if(ob.page.profile.header_hash) { %>
+    style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
+    <% }else{ %>
+    style="background-image: url(imgs/defaultBanner.png)"
+    <% } %>
+      >
+      <form id="storeWizardImageForm">
+        <label for="storeWizardImageUpload" class="btn btn-c1 btn-txt fullCentered"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+        <input type="file" name="image" id="storeWizardImageUpload" accept="image/*" class="hide js-storeWizardImageUpload">
       </form>
     </div>
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
@@ -15,7 +21,9 @@
           <div class="bar barTxt h6">
             <%= polyglot.t('CreateStore') %>
           </div>
-          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow">
+          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow" id="storeWizardForm">
+            <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>">
+
             <div class="flexRow">
               <div class="flexRow">
                   <div class="flexCol-4">
@@ -26,16 +34,6 @@
                   <div class="flexCol-8">
                     <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
                   </div>
-              </div>
-              <div class="flexRow">
-                <div class="flexCol-4">
-                  <label class="fieldItem" for="handleInput">
-                    <%= polyglot.t('Handle') %>
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <input name="handle" id="handleInput" type="text" class="fieldItem" value="<%= ob.page.profile.handle %>" placeholder="@<%= polyglot.t('Handle') %>" pattern="^@([A-Za-z0-9_-]{1,34}$)">
-                </div>
               </div>
               <div class="flexRow">
                 <div class="flexCol-4">
@@ -50,6 +48,16 @@
                       </select>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="flexRow">
+                <div class="flexCol-4">
+                  <label class="fieldItem" for="websiteInput">
+                    <%= polyglot.t('About') %>
+                  </label>
+                </div>
+                <div class="flexCol-8">
+                  <textarea name="about" rows="8" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
                 </div>
               </div>
               <div class="flexRow">
@@ -131,7 +139,7 @@
               </div>
               <div class="flexRow">
                 <div class="flexCol-4">
-                  <label class="fieldItem" for="emailInput">
+                  <label class="fieldItem" for="realCategoriesInput">
                     <%= polyglot.t('Categories') %> (<%= polyglot.t('UpTo3') %>)
                   </label>
                 </div>
@@ -140,19 +148,6 @@
                   <div class="fieldItem" id="categoriesInput"></div>
                 </div>
               </div>
-              <!--
-              <div class="flexRow \">
-                <div class="flexCol-4">
-                  <label class="fieldItem fieldItem-multiLine" for="storeDescription">
-                    <%= polyglot.t('ShortDescription') %><br/>
-                    <span class="txt-fade">(<%= polyglot.t('UpTo140Characters') %>)</span>
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <textarea name="storeDescription" rows="8" id="storeDescription" class="fieldItem-textarea" maxlength="140" required></textarea>
-                </div>
-              </div>
-              -->
               <div class="flexRow">
                 <div class="flexCol-4">
                   <div class="fieldItem">
@@ -161,7 +156,7 @@
                 </div>
                 <div class="flexCol-8 js-customizeColorWrapper">
                   <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="primary_color"></label>
-                  <input class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="primary_color" size="7"/>
+                  <input name="primary_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="primary_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                 </div>
               </div>
               <div class="flexRow">
@@ -173,7 +168,7 @@
                 <div class="flexCol-8">
                   <div class="flexCol-8 js-customizeColorWrapper">
                     <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="secondary_color"></label>
-                    <input class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="secondary_color" size="7"/>
+                    <input name="secondary_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="secondary_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                   </div>
                 </div>
               </div>
@@ -186,7 +181,7 @@
                 <div class="flexCol-8">
                   <div class="flexCol-8 js-customizeColorWrapper">
                     <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="text_color"></label>
-                    <input class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="text_color" size="7"/>
+                    <input name="text_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="text_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                   </div>
                 </div>
               </div>
@@ -199,7 +194,7 @@
                 <div class="flexCol-8">
                   <div class="flexCol-8 js-customizeColorWrapper">
                     <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="background_color"></label>
-                    <input class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="background_color" size="7"/>
+                    <input name="background_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="background_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                   </div>
                 </div>
               </div>
@@ -214,16 +209,16 @@
           <div class="bar barTxt h6">
             <%= polyglot.t('Store') %> <%= polyglot.t('Moderators') %>
           </div>
-          <div class="flexContainer flex-border" id="homeModal-countryList">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForCategory') %>" />
+                <input type="text" class="txtField txtField-bar search" />
               </div>
             </div>
           </div>
           <div class="bar barFlush">
             <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-storeWizardSave"><%= polyglot.t('Save') %></a>
           </div>
         </div>
       </div>

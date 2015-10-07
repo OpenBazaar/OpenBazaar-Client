@@ -74,6 +74,7 @@ module.exports = Backbone.Model.extend({
         Moderators: "Moderators",
         Categories: "Categories",
         UpTo3: "Up to 3",
+        AboutYourStore: "A description of your store",
         nav: {
           searchPlaceholder: "Enter handle or search",
           myPage: "My Page",
@@ -179,6 +180,7 @@ module.exports = Backbone.Model.extend({
         Moderators: "Moderadores",
         Categories: "Categorías",
         UpTo3: "Hasta 3",
+        AboutYourStore: "Una descripción de su tienda",
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi página",

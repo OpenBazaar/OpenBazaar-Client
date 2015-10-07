@@ -471,10 +471,6 @@ module.exports = Backbone.View.extend({
             var profileColor = pageData[profileKey].slice(1);
             profileColor = is.hexColor(profileColor) ? parseInt(profileColor, 16) : profileColor;
             formData.append(profileKey, profileColor);
-            //these values get turned into strings, fix them
-          } else if(profileKey == 'vendor' || profileKey == 'moderator' || profileKey == 'nsfw'){
-            console.log("converting to Boolean " + profileKey);
-            formData.append(profileKey, Boolean(pageData[profileKey]));
           } else {
             formData.append(profileKey, String(pageData[profileKey]));
           }

@@ -13,7 +13,7 @@ module.exports = Backbone.Model.extend({
       moderator: false,
       moderators: ["moderator 1", "moderator 2"],
       shipsTo: "",
-      headerhash: "",
+      header_hash: "",
       about: "default about text",
       website: "",
       email: "",
