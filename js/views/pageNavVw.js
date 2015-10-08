@@ -6,7 +6,8 @@ var __ = require('underscore'),
     languagesModel = require('../models/languagesMd'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
-    languageListView = require('../views/languageListVw');
+    languageListView = require('../views/languageListVw'),
+    remote = require('remote');
 
 module.exports = Backbone.View.extend({
 
@@ -47,13 +48,13 @@ module.exports = Backbone.View.extend({
     this.render();
   },
 
-  initAccordion: function(targ){
+  initAccordian: function(targ){
     var acc = $(targ);
     var accWidth = acc.width();
     var accHeight = acc.height();
-    var accChildren = acc.find('.accordion-child');
+    var accChildren = acc.find('.accordian-child');
     var accNum = accChildren.length;
-    var accWin = acc.find('.accordion-window');
+    var accWin = acc.find('.accordian-window');
 
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
@@ -65,7 +66,7 @@ module.exports = Backbone.View.extend({
         });
       }
       // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+      $(this).closest('.accordian-child').next('.accordian-child').find('.search').focus();
     });
     acc.find('.js-accordianPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");  //TODO: Fix implicit casting to Number
@@ -93,7 +94,7 @@ module.exports = Backbone.View.extend({
       var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
       var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
       var languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-      self.initAccordion('.js-profileAccordion');
+      self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
       }
@@ -119,14 +120,25 @@ module.exports = Backbone.View.extend({
 
   navCloseClick: function(){
     console.log("Nav Close Clicked");
+    var win = remote.getCurrentWindow();
+    var process = remote.process;
+    if (process.platform != 'darwin') {
+      win.close();
+    } else {
+      win.minimize();
+    }
   },
 
   navMinClick: function(){
     console.log("Nav Min Clicked");
+    var win = remote.getCurrentWindow();
+    win.minimize();
   },
 
   navMaxClick: function(){
     console.log("Nav Max Clicked");
+    var win = remote.getCurrentWindow();
+    win.maximize();
   },
 
   navBackClick: function(){

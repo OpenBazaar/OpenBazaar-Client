@@ -764,14 +764,17 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMin {
   background-color: #F8E71C;
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-bar {
@@ -830,6 +833,10 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-half {
   width: 50%;
+}
+
+.btn.btn-home {
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -905,6 +912,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
 
 .btn.btn-profile {
   background-size: contain;
+  -webkit-app-region: no-drag;
 }
 
 .btn-square {
