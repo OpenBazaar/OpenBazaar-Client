@@ -30,8 +30,8 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 700,
-    title: "OpenBazaar"/*,
-    frame: false*/ //uncomment for release
+    title: "OpenBazaar",
+    frame: false
   });
 
   // and load the index.html of the app.
