@@ -35,6 +35,7 @@
   <div class="navEnd pad15">
     <div class="nav-ctrlGroup js-pageButtons js-userPageControls">
       <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
+      <a class="btn btn-txt custCol-primary js-createStore"><%= polyglot.t('CreateStore') %></a>
     </div>
     <div class="nav-ctrlGroup js-pageButtons js-userPageControls">
       <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
@@ -179,29 +180,30 @@
   <div class="positionWrapper">
     <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="primary_color"></label>
     <div class="labelWrap row5 fade">
-      <div>Primary Color</div>
+      <div><%= polyglot.t('PrimaryColor') %></div>
       <div><input class="js-customizeColorInput" type="text" id="primary_color" size="7"/></div>
     </div>
   </div>
   <div class="positionWrapper">
     <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="secondary_color"></label>
     <div class="labelWrap row5 fade">
-      <div>Secondary Color</div>
+      <div><%= polyglot.t('SecondaryColor') %></div>
       <div><input class="js-customizeColorInput" type="text" id="secondary_color" size="7"/></div>
     </div>
   </div>
   <div class="positionWrapper">
     <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="background_color"></label>
     <div class="labelWrap row5 fade">
-      <div>Background Color</div>
+      <div><%= polyglot.t('BackgroundColor') %></div>
       <div><input class="js-customizeColorInput" type="text" id="background_color" size="7"/></div>
     </div>
   </div>
   <div class="positionWrapper">
     <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="text_color"></label>
     <div class="labelWrap row5 fade">
-      <div>Text Color</div>
+      <div><%= polyglot.t('TextColor') %></div>
       <div><input class="js-customizeColorInput" type="text" id="text_color" size="7"/></div>
     </div>
   </div>
 </div>
+<div id="modalHolder"></div>
