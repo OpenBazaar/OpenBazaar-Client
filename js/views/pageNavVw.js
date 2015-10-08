@@ -47,13 +47,13 @@ module.exports = Backbone.View.extend({
     this.render();
   },
 
-  initAccordian: function(targ){
+  initAccordion: function(targ){
     var acc = $(targ);
     var accWidth = acc.width();
     var accHeight = acc.height();
-    var accChildren = acc.find('.accordian-child');
+    var accChildren = acc.find('.accordion-child');
     var accNum = accChildren.length;
-    var accWin = acc.find('.accordian-window');
+    var accWin = acc.find('.accordion-window');
 
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
@@ -65,7 +65,7 @@ module.exports = Backbone.View.extend({
         });
       }
       // focus search input
-      $(this).closest('.accordian-child').next('.accordian-child').find('.search').focus();
+      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
     });
     acc.find('.js-accordianPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");  //TODO: Fix implicit casting to Number
@@ -93,7 +93,7 @@ module.exports = Backbone.View.extend({
       var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
       var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
       var languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-      self.initAccordian('.js-profileAccordian');
+      self.initAccordion('.js-profileAccordion');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
       }

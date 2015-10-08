@@ -181,7 +181,6 @@ module.exports = Backbone.View.extend({
           errorModal = $('.js-messageModal');
           errorModal.removeClass('hide');
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
-          //TODO: Change from .html() to .text() for higher security to prevent content injection attacks
           errorModal.find('.js-messageModal-message').html("Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }
       },
@@ -234,8 +233,13 @@ module.exports = Backbone.View.extend({
   },
 
   saveChanges: function(){
-    var errorModal, self = this, cCode = this.model.get('userCurrencyCode');
-    var deleteThisItem = function(newHash){
+    var errorModal,
+        self = this,
+        formData,
+        deleteThisItem,
+        cCode = this.model.get('userCurrencyCode');
+
+    deleteThisItem = function(newHash){
       $.ajax({
           type: "DELETE",
           url: self.model.get('server') + "contracts?id="+self.model.get('id'), //TODO: Change to send data in POST to be safe, http://restcookbook.com/HTTP%20Methods/idempotency/
@@ -263,7 +267,7 @@ module.exports = Backbone.View.extend({
       this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
     }
 
-    var formData = new FormData(this.$el.find('#contractForm')[0]);
+    formData = new FormData(this.$el.find('#contractForm')[0]);
     //formData.append('images', this.model.get('imageHashesToUpload'));
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
       formData.append('images', imHash);
@@ -273,6 +277,9 @@ module.exports = Backbone.View.extend({
     if (self.model.get('id')) {
       formData.append('delete_images', false);
     }
+
+    //add formChecked class to form so invalid fields are styled as invalid
+    this.$el.find('#contractForm').addClass('formChecked');
 
     if(document.getElementById('contractForm').checkValidity()){
       $.ajax({
