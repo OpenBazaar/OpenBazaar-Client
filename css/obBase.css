@@ -549,6 +549,8 @@ h5 {
 
 .modal-hero {
   background: linear-gradient(to bottom, rgb(209,209,209), rgb(55,55,55) 60px, rgb(55,55,55) 108px, rgb(0,0,0));
+  background-position: center;
+  background-size: cover;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   height: 220px;
@@ -1419,6 +1421,11 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 90px;
   width: 40px;
   z-index: 1;
+}
+
+#modalHolder {
+  position: fixed;
+  z-index: 10;
 }
 
 /* protect customize controls from custom page styles */

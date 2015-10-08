@@ -243,8 +243,8 @@ module.exports = Backbone.View.extend({
       });
 
       //add data not in the form
-      //formData.append('vendor', true);
-      //formData.append('moderator', dataModerator);
+      formData.append('vendor', true);
+      formData.append('moderator', dataModerator);
 
       $.ajax({
         type: "POST",
@@ -255,11 +255,11 @@ module.exports = Backbone.View.extend({
         dataType: "json",
         success: function (data) {
           if (data.success === true){
+            self.trigger('storeCreated');
           }else if (data.success === false){
             self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
-            //item is new or unchanged
-            self.trigger('saveNewDone');
+            self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>Incorrect reply from server.</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {

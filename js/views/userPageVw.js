@@ -84,6 +84,7 @@ module.exports = Backbone.View.extend({
     }
     this.options.ownPage = true;
 
+
     this.userProfile.fetch({
       data: $.param({'id': this.pageID}),
       success: function(model){
@@ -92,12 +93,13 @@ module.exports = Backbone.View.extend({
       },
       error: function(model, response){
         console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
-        alert("User Page cannot be read");
+        alert("User Profile cannot be read");
       }
     });
   },
 
   render: function(){
+    "use strict";
     var self = this;
     //make sure container is cleared
     $('#content').html(this.$el);
@@ -115,6 +117,7 @@ module.exports = Backbone.View.extend({
   },
 
   setCustomStyles: function() {
+    "use strict";
     var self = this;
     //only do the following if page has been set in the model
     if(this.model.get('page')){
@@ -138,6 +141,7 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state, hash) {
+    "use strict";
     if(state === "item"){
       this.renderItem(hash);
     }else if(state === "itemOld") {
@@ -157,6 +161,7 @@ module.exports = Backbone.View.extend({
   },
 
   setControls: function(state){
+    "use strict";
     //if user owns page, hide/show control buttons
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
@@ -184,7 +189,7 @@ module.exports = Backbone.View.extend({
         this.undoColorCustomization();
       }
       //if store has been created, swap create button for sell button
-      if(this.model.get('page').beenSet === true) {
+      if(this.model.get('page').profile.vendor === true) {
         this.$el.find('.js-sellItem').removeClass('hide');
         this.$el.find('.js-createStore').addClass('hide');
       } else {
@@ -195,8 +200,8 @@ module.exports = Backbone.View.extend({
   },
 
   subRender: function(state) {
+    "use strict";
     var self = this;
-
     if(state === "about" || !state) {
       //this is the default state of the page. Activate tab
       this.tabClick(self.$el.find('.js-aboutTab'), this.$el.find('.js-about'));
@@ -238,8 +243,8 @@ module.exports = Backbone.View.extend({
   },
 
   renderItems: function (model) {
+    "use strict";
     var self = this;
-
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currencyCode');
       arrayItem.server = self.options.userModel.get('server');
@@ -253,16 +258,19 @@ module.exports = Backbone.View.extend({
   },
 
   renderFollowers: function (model) {
+    "use strict";
     this.followerList = new personListView({model: model, el: '.js-list1', title: "No Followers Yet", message: ""});
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
+    "use strict";
     this.followingList = new personListView({model: model, el: '.js-list2', title: "Not Following Anyone Yet", message: ""});
     this.subViews.push(this.followingList);
   },
 
   renderItem: function(hash){
+    "use strict";
     var self = this;
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currencyCode'),
@@ -301,6 +309,7 @@ module.exports = Backbone.View.extend({
   },
 
   renderItemEdit: function(model){
+    "use strict";
     var self = this,
         hash = "";
     if(model) {
@@ -330,35 +339,41 @@ module.exports = Backbone.View.extend({
   },
 
   showError: function(title, message, target){
+    "use strict";
     var errorView = new simpleMessageView({title: title, message: message, el: target});
     this.subViews.push(errorView);
   },
 
   aboutClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-about'));
     this.addTabToHistory('about');
     this.setState('about');
   },
 
   followersClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'));
     this.addTabToHistory('followers');
     this.setState('followers');
   },
 
   followingClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-following'));
     this.addTabToHistory('following');
     this.setState('following');
   },
 
   storeClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
   },
 
   tabClick: function(activeTab, showContent){
+    "use strict";
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');
     this.$el.find('.js-tabTarg').addClass('hide');
@@ -366,21 +381,25 @@ module.exports = Backbone.View.extend({
   },
 
   addTabToHistory: function(state){
+    "use strict";
     //add action to history if not an item
     Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
   },
 
   sellItem: function(){
+    "use strict";
     this.renderItemEdit();
     this.setControls("itemEdit");
   },
 
   customizePage: function(e){
+    "use strict";
     this.customizing = true;
     this.setControls('customize');
   },
 
   customizeColorClick: function(e) {
+    "use strict";
     var self = this,
         colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
         colorKey = colorInput.attr('id'),
@@ -408,6 +427,7 @@ module.exports = Backbone.View.extend({
   },
 
   setCustomColor: function(newColor, colorKey) {
+    "use strict";
     var tempPage  =  __.clone(this.model.get('page'));
     tempPage.profile[colorKey] = '#'+newColor;
     this.model.set('page', tempPage);
@@ -415,6 +435,7 @@ module.exports = Backbone.View.extend({
   },
 
   uploadUserPageImage: function() {
+    "use strict";
     var self = this;
     var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
     var server = self.options.userModel.get('server');
@@ -453,12 +474,13 @@ module.exports = Backbone.View.extend({
   },
 
   saveCustomizePage: function() {
-    //this.setControls();
+    "use strict";
     this.customizing = false;
     this.saveUserPageModel();
   },
 
   saveUserPageModel: function(){
+    "use strict";
     var self = this;
     var formData = new FormData();
     var pageData = this.model.get('page').profile;
@@ -502,11 +524,13 @@ module.exports = Backbone.View.extend({
   },
 
   cancelCustomizePage: function() {
+    "use strict";
     this.undoColorCustomization();
     this.setControls();
   },
 
   undoColorCustomization: function(){
+    "use strict";
     if(this.customizing === true) { //TODO: Enumerate over array or entity with loop
       this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
       this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
@@ -518,13 +542,13 @@ module.exports = Backbone.View.extend({
   },
 
   saveNewDone: function() {
-    //go back to store, because the hash of the new item is unknown
-    //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+    "use strict";
     this.addTabToHistory('store');
     this.setState('store');
   },
 
   deleteOldDone: function(newHash) {
+    "use strict";
     if(newHash) {
       this.setState('item', newHash);
     } else {
@@ -535,16 +559,19 @@ module.exports = Backbone.View.extend({
   },
 
   cancelClick: function(){
+    "use strict";
     this.setState(this.lastTab);
   },
 
   editItem: function(){
+    "use strict";
     this.renderItemEdit(this.item);
     this.setControls("itemEdit");
     this.lastTab = "itemOld";
   },
 
   deleteItem: function(){
+    "use strict";
     var self=this;
 
     $.ajax({
@@ -564,21 +591,33 @@ module.exports = Backbone.View.extend({
   },
 
   saveItem: function(){
+    "use strict";
     if(this.itemEditView){
       this.itemEditView.saveChanges();
     }
   },
 
   createStore: function() {
+    "use strict";
     var self = this,
         storeWizardModel = new Backbone.Model();
     storeWizardModel.set(this.model.attributes);
     this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder'});
+    this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.subViews.push(this.storeWizardView);
+  },
+
+  storeCreated: function() {
+    "use strict";
+    var currentState = this.lastTab || "about";
+    this.storeWizardView.closeWizard();
+    //recreate the entire page with the new data
+    Backbone.history.navigate('#userPage/'+this.userID+'/'+currentState, {trigger: true});
   },
 
 
 close: function(){
+    "use strict";
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
