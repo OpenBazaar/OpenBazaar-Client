@@ -1,19 +1,19 @@
 <div class="mainContainer custCol-background">
-  <div class="banner-large shadow-inner1 js-userPageBanner"
+  <div class="banner-large js-userPageBanner"
   <% if(ob.page.profile.header_hash) { %>
   style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
-</div>
 <form id="userPageImageForm">
   <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
   <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
 </form>
 </div>
 <div class="user-page-content">
-  <div class="flexRow">
-    <div class="rowItem" style="padding: 0 20px">
+  <div class="user-slim">sdfsdadsf</div>
+  <div class="flexRow shadow-inner1" style="position: relative; height: 400px">
+    <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
       style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
@@ -26,6 +26,7 @@
         <div class="txt-fade"><%= ob.page.profile.handle %></div>
       </div>
     </div>
+  </div>
   </div>
 
   <div class="bar navBar barFlush navBar custCol-secondary">

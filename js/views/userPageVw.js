@@ -96,6 +96,21 @@ module.exports = Backbone.View.extend({
         alert("User Profile cannot be read");
       }
     });
+
+    // Josh not sure where this should go, move wherever needed
+    var slimVisible = false;
+    $("#obContainer").scroll(function(){
+      if ($(this).scrollTop() > 392 && slimVisible === false ) {
+        slimVisible = true;
+        console.log('sdf');
+        $('.user-slim').fadeTo(0, 1);
+      }
+      if ($(this).scrollTop() < 392 && slimVisible === true ) {
+        slimVisible = false;
+        console.log('sdfaaa');
+        $('.user-slim').fadeTo(0, 0);
+      }
+    });
   },
 
   render: function(){

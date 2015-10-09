@@ -556,6 +556,18 @@ h5 {
   background-color: #086A9E;
 }
 
+.user-slim {
+  background: #281B2E url(user-info-slim.png) no-repeat;
+  background-size: 100%;
+  height: 102px;
+  position: fixed;
+  top: 0;
+  border-bottom: solid 6px #3B2840;
+  width: 950px;
+  opacity: 0;
+  z-index: 200;
+}
+
 .userPage .mainContainer {
   background-color: #4a4848;
 }
@@ -1379,12 +1391,13 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .user-page-content {
   position: relative;
+  width: 950px;
   z-index: 99;
-  /*margin-top: 400px;*/
 }
 
 .shadow-inner1 {
-  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,1);
+  /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,.75)));*/
+  box-shadow: inset 0px -400px 222px -282px rgba(25,25,25,1);
 }
 
 .icon-centered {
@@ -1507,9 +1520,9 @@ input[type="checkbox"].fieldItem:checked + label:before {
 #customizeControls {
   position: fixed;
   left: 40px;
-  top: 90px;
+  bottom: 30px;
   width: 40px;
-  z-index: 1;
+  z-index: 100;
 }
 
 .editItemImageHolder {
@@ -1778,12 +1791,28 @@ input[type="checkbox"].fieldItem:checked + label:before {
   padding: 0;
 }
 
+.bottom0 {
+  bottom: 0;
+}
+
+.positionAbsolute {
+  position: absolute;
+}
+
+.positionRelative {
+  position: relative;
+}
+
 .padding17px {
   padding: 17px;
 }
 
 .width100 {
   width: 100%;
+}
+
+.width600 {
+  width: 600px;
 }
 
 .cursorDefault {
