@@ -6,7 +6,8 @@ Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     taggle = require('taggle'),
-    chosen = require('../utils/chosen.jquery.min.js');
+    chosen = require('../utils/chosen.jquery.min.js'),
+    customScrollBar = require('malihu-custom-scrollbar-plugin')($);
 
 module.exports = Backbone.View.extend({
 
@@ -89,6 +90,11 @@ module.exports = Backbone.View.extend({
 
     //set chosen inputs
     $('.chosen').chosen();
+
+    //create custom scrollbar
+    $('.js-editItemSubImagesWrapper').mCustomScrollbar({
+      theme: "dark"
+    });
 
     //focus main input
     this.$el.find('input[name=title]').focus();
@@ -238,7 +244,6 @@ module.exports = Backbone.View.extend({
 
   validateInput: function(e) {
     "use strict";
-    console.log(e.target);
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
