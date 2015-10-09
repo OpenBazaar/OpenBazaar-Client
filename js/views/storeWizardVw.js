@@ -205,7 +205,7 @@ module.exports = Backbone.View.extend({
   validateInput: function(e) {
     "use strict";
     e.target.checkValidity();
-    $(e.target).closest('flexRow').addClass('formChecked');
+    $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   showErrorModal: function(errorTitle, errorMessage) {

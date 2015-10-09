@@ -19,6 +19,7 @@ module.exports = Backbone.View.extend({
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
     'click .js-navProfile': 'navProfileClick',
+    'click .js-navProfileMenu a': 'closeNav',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
@@ -84,6 +85,11 @@ module.exports = Backbone.View.extend({
       var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});
       var languageList = new List('homeModal-languageList', {valueNames: ['homeModal-language']});
     }, 1000);
+  },
+
+  closeNav: function(){
+    var targ = this.$el.find('.js-navProfileMenu');
+    targ.addClass('hide');
   },
 
   render: function(){
