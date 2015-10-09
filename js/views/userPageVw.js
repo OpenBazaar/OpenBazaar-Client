@@ -125,7 +125,7 @@ module.exports = Backbone.View.extend({
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
       customStyleTag.innerHTML =
-          "#ov1 .userPage .custCol-background, body { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
           "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + ";}" +
           "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +

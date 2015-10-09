@@ -37,7 +37,6 @@ module.exports = Backbone.Router.extend({
 
   home: function(){
     this.newView(new homeView({userModel: this.options.userModel}));
-    $('#customStyle').remove();
   },
 
   userPage: function(userID, state, itemHash){

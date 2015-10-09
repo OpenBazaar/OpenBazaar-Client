@@ -1040,10 +1040,12 @@ input[type="datetime-local"].fieldItem:focus {
 .formChecked input[type="text"].fieldItem:invalid,
 .formChecked input[type="email"].fieldItem:invalid,
 .formChecked input[type="url"].fieldItem:invalid,
+.formChecked .fieldItem-textarea:invalid,
 .formChecked input[type="number"].fieldItem:invalid,
 .formChecked input[type="text"].fieldItem:focus:invalid,
 .formChecked input[type="email"].fieldItem:focus:invalid,
 .formChecked input[type="url"].fieldItem:focus:invalid,
+.formChecked .fieldItem-textarea:focus:invalid,
 .formChecked input[type="number"].fieldItem:focus:invalid {
   border: 2px dashed rgba(89,1,1,0.8);;
   background-color: rgba(89,1,1,0.2);

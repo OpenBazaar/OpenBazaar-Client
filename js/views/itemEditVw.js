@@ -18,7 +18,8 @@ module.exports = Backbone.View.extend({
     'change .js-itemImageUpload': 'uploadImage',
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
-    'blur input': 'validateInput'
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput'
   },
 
   initialize: function(){
@@ -237,9 +238,9 @@ module.exports = Backbone.View.extend({
 
   validateInput: function(e) {
     "use strict";
-    console.log("validity checked");
+    console.log(e.target);
     e.target.checkValidity();
-    $(e.target).closest('flexRow').addClass('formChecked');
+    $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   saveChanges: function(){
