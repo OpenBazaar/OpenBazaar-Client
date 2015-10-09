@@ -1371,7 +1371,16 @@ input[type="checkbox"].fieldItem:checked + label:before {
   border-top-right-radius: 3px;
   background-size: cover;
   height: 400px;
+  position: fixed;
+  top: 70px;
+  width: 950px;
+  padding: 0;
+}
+
+.user-page-content {
   position: relative;
+  z-index: 99;
+  /*margin-top: 400px;*/
 }
 
 .shadow-inner1 {
@@ -1569,9 +1578,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 #obContainer {
-  padding-top: 30px;
   height: 96%;
+  margin-top: 50px;
   overflow-y: scroll;
+  padding-top: 20px;
 }
 
 /*========== utility classes ==========*/
