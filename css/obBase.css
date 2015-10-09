@@ -661,6 +661,7 @@ h5 {
   font-size: 12px;
   letter-spacing: 0;
   text-indent: 26px;
+  -webkit-app-region: no-drag;
 }
 
 .txtField-bar,
