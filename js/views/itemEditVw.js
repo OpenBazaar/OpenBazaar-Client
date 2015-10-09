@@ -8,7 +8,6 @@ var loadTemplate = require('../utils/loadTemplate'),
     taggle = require('taggle'),
     chosen = require('../utils/chosen.jquery.min.js');
 
-
 module.exports = Backbone.View.extend({
 
   events: {
@@ -18,7 +17,9 @@ module.exports = Backbone.View.extend({
     'click #shippingFreeFalse': 'unsetFreeShipping',
     'change .js-itemImageUpload': 'uploadImage',
     'change #inputType': 'changeType',
-    'click .js-editItemDeleteImage': 'deleteImage'
+    'click .js-editItemDeleteImage': 'deleteImage',
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput'
   },
 
   initialize: function(){
@@ -83,10 +84,15 @@ module.exports = Backbone.View.extend({
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
     shipsTo.val(shipsToValue);
 
-
     //activate tags plugin
     this.inputKeyword = new Taggle('inputKeyword');
-    $('#inputType').chosen();
+
+    //set chosen inputs
+    $('.chosen').chosen();
+
+    //focus main input
+    this.$el.find('input[name=title]').focus();
+    $('body').scrollTop(375); // we need to change this to scroll the container div instead of body once the header is fixed
   },
 
   priceToLocal: function(e){
@@ -159,12 +165,12 @@ module.exports = Backbone.View.extend({
       url: self.model.get('server') + "upload_image",
       contentType: false,
       processData: false,
+      dataType: "json",
       data: formData,
       success: function(data) { //TODO: Have JQuery parse the JSON directly in ajax call
         var errorModal,
             hashArray,
             imageArray;
-        data = JSON.parse(data);
 
         if (data.success === true){
           imageArray = __.clone(self.model.get("combinedImagesArray"));
@@ -194,35 +200,33 @@ module.exports = Backbone.View.extend({
 
   updateImages: function(){
     //TODO: this would be better as a sub-view with it's own render
-    var self = this;
-    var subImageDivs = this.$el.find('.js-editItemSubImage');
-    var imageArray = this.model.get("combinedImagesArray");
+    var self = this,
+        subImageDivs = this.$el.find('.js-editItemSubImage'),
+        imageArray = this.model.get("combinedImagesArray"),
+        uploadMsg = this.$el.find('.js-itemEditLoadPhotoMessage');
+
     //remove extra subImage divs
-    subImageDivs.slice(imageArray.length-1).remove();
+    subImageDivs.slice(imageArray.length).remove();
 
     if(imageArray.length > 0){
       __.each(imageArray, function (imageURL, i) {
-        if (i === 0){
-          self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')').removeClass('box-border').attr("data-index", "0")
-          .find('.js-editItemDeleteImage').removeClass('hide');
+        if (i < subImageDivs.length){
+          $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
-          if (i <= subImageDivs.length){
-            $(subImageDivs[i - 1]).css('background-image', 'url(' + imageURL + ')');
-          }else{
-            $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
-                .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
-          }
+          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+              .appendTo(self.$el.find('.js-editItemSubImagesWrapper'));
         }
       });
+      uploadMsg.addClass('hide');
     } else {
-      //if there are no images, reset the main image area
-      self.$el.find('.js-editItemMainImage').css('background-image', 'none').addClass('box-border').find('.js-editItemDeleteImage').addClass('hide');
+      uploadMsg.removeClass('hide');
     }
   },
 
   deleteImage: function(e) {
-    var imageUploadArray, imgIndex = $(e.target).closest('.itemImg').data('index');
-    var imageArray = __.clone(this.model.get("combinedImagesArray"));
+    var imageUploadArray,
+        imgIndex = $(e.target).closest('.itemImg').data('index'),
+        imageArray = __.clone(this.model.get("combinedImagesArray"));
 
     imageArray.splice(imgIndex, 1);
     this.model.set("combinedImagesArray", imageArray);
@@ -230,6 +234,13 @@ module.exports = Backbone.View.extend({
     imageUploadArray.splice(imgIndex, 1);
     this.model.set("imageHashesToUpload", imageUploadArray);
     this.updateImages();
+  },
+
+  validateInput: function(e) {
+    "use strict";
+    console.log(e.target);
+    e.target.checkValidity();
+    $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   saveChanges: function(){
@@ -268,7 +279,6 @@ module.exports = Backbone.View.extend({
     }
 
     formData = new FormData(this.$el.find('#contractForm')[0]);
-    //formData.append('images', this.model.get('imageHashesToUpload'));
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
       formData.append('images', imHash);
     });

@@ -28,9 +28,12 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 700,
-    title: "OpenBazaar",
+    "width": 1200,
+    "height": 700,
+    "min-width": 1024,
+    "min-height": 700,
+    "center": true,
+    "title": "OpenBazaar",
     frame: false
   });
 
