@@ -80,6 +80,6 @@ module.exports = Backbone.Router.extend({
 
   support: function(){
     console.log("support");
-  },
+  }
 
 });

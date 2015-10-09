@@ -4,9 +4,6 @@
 body {
   margin: 0;
   background-color: rgb(6,55,83);
-  position: absolute; /* fixes box shadow margin issue */
-  width: 100%; /* fixes box shadow margin issue */
-  min-height: 700px; /* fixes box shadow margin issue */
   /*fonts*/
   color: rgb(255, 255, 255);
   font-family: "Helvetica Neue", Helvetica, "Open Sans";
@@ -54,8 +51,10 @@ textarea::-webkit-input-placeholder{
 input,
 input[type="text"],
 input[type="number"],
+input[type="email"],
+input[type="url"],
 select,
-textarea{
+textarea {
   border: none;
   color: #000;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
@@ -63,12 +62,17 @@ textarea{
   font-weight: 500;
 }
 
+form {
+  margin: 0;
+}
+
 
 
 /*========== structure classes ==========*/
 
 #content {
-  margin: 23px auto;
+  margin: 23px auto 0;
+  padding-bottom: 100px;
   position: relative;
   width: 950px;
   z-index: 1;
@@ -271,6 +275,16 @@ textarea{
   line-height: 50px;
   padding: 0 15px;
   position: relative;
+  display: block;
+}
+
+.fieldItem.fieldItem-multiLine {
+  line-height: normal;
+  padding: 15px;
+}
+
+[class |= "flexCol"] > .fieldItem {
+  margin: 0 -1 -1 0;
 }
 
 .table {
@@ -331,6 +345,10 @@ textarea{
   left: 0;
 }
 
+.btn-cornerTR.btn-cornerTROutR {
+  right: -30px;
+}
+
 .thumbnail {
   height: 30px;
   width: 30px;
@@ -360,6 +378,11 @@ textarea{
 
 .rowTop20 {
   margin-top: 20px;
+}
+
+.rowTop271 {
+  /* special class for the itemEdit view */
+  margin-top: 271px;
 }
 
 .pad10 {
@@ -397,6 +420,7 @@ textarea{
   height: 100%;
   top: 0;
   left: 0;
+  padding-top: 80px;
 }
 
 .modal.modal-navOffset {
@@ -406,7 +430,7 @@ textarea{
 .modal-child {
   width: 525px;
   height: 540px;
-  margin: 80px auto 0 auto;
+  margin: 0 auto;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -416,16 +440,16 @@ textarea{
   margin-top: 25px;
 }
 
-.accordian {
+.accordion {
   overflow: hidden;
   position: relative;
 }
 
-.accordian > .accordian-window {
+.accordion > .accordion-window {
   position: absolute;
 }
 
-.accordian > .accordian-window > .accordian-child {
+.accordion > .accordion-window > .accordion-child {
   float: left;
 }
 
@@ -549,6 +573,17 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.modal-hero {
+  background: linear-gradient(to bottom, rgb(209,209,209), rgb(55,55,55) 60px, rgb(55,55,55) 108px, rgb(0,0,0));
+  background-position: center;
+  background-size: cover;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 220px;
+  position: relative;
+  width: 525px;
 }
 
 .flex-border > .flexRow {
@@ -901,23 +936,29 @@ input[type="text"].txtField-bar {
   height: 44px;
 }
 
+.btn-squareSm {
+  width: 30px;
+  height: 30px;
+}
+
 .labelWrap {
   display: block;
   background: rgba(0,0,0,0.6);
-  padding: 7px 84px 7px 52px;
+  padding: 4px 4px 7px 52px;
   height: 44px;
   border-radius: 6px;
   box-sizing: border-box;
   border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.6);
   transition: opacity 1s;
+  width: 185px;
 }
 
 .labelWrap.fade {
   opacity: 0;
 }
 
-input:hover + .labelWrap.fadeIn {
+.labelWrap.fadeIn {
   opacity: 1;
 }
 
@@ -925,6 +966,14 @@ label {
   font-size: 14px;
   letter-spacing: .4px;
   opacity: .75;
+}
+
+.labelWrap input {
+  margin-top: 2px;
+  color: rgba(255,255,255,0.6);
+  background: none;
+  font-size: 12px;
+  width: 100%;
 }
 
 .fieldItem h1,
@@ -939,13 +988,15 @@ label {
 
 input[type="text"].fieldItem,
 input[type="number"].fieldItem,
+input[type="email"].fieldItem,
+input[type="url"].fieldItem,
 input[type="datetime-local"].fieldItem {
   width: 100%;
   color: #fff;
-  box-sizing: border-box;
   border: 2px solid transparent;
   padding: 0 15px;
   background: none;
+  line-height: 46px;
 }
 
 input[type="datetime-local"].fieldItem {
@@ -977,19 +1028,34 @@ input[type="number"].fieldItem::-webkit-inner-spin-button {
 
 input[type="text"].fieldItem:focus,
 input[type="number"].fieldItem:focus,
+input[type="email"].fieldItem:focus,
+input[type="url"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
   border: 2px solid #fff;
   transition: border 0.3s;
   outline: none;
 }
 
-input[type="text"].fieldItem:invalid,
-input[type="number"].fieldItem:invalid,
-input[type="text"].fieldItem:focus:invalid,
-input[type="number"].fieldItem:focus:invalid {
+/* add formChecked class after form has been checked for validity */
+.formChecked input[type="text"].fieldItem:invalid,
+.formChecked input[type="email"].fieldItem:invalid,
+.formChecked input[type="url"].fieldItem:invalid,
+.formChecked input[type="number"].fieldItem:invalid,
+.formChecked input[type="text"].fieldItem:focus:invalid,
+.formChecked input[type="email"].fieldItem:focus:invalid,
+.formChecked input[type="url"].fieldItem:focus:invalid,
+.formChecked input[type="number"].fieldItem:focus:invalid {
   border: 2px dashed rgba(89,1,1,0.8);;
   background-color: rgba(89,1,1,0.2);
   transition: border 0.3s, background-color 0.4s;
+}
+
+input[type="text"].fieldItem.fieldItem-withButton,
+input[type="email"].fieldItem.fieldItem-withButton,
+input[type="url"].fieldItem.fieldItem-withButton,
+input[type="number"].fieldItem.fieldItem-withButton {
+  position: absolute;
+  padding-left: 50px;
 }
 
 .fieldItem .btn {
@@ -1152,6 +1218,34 @@ input[type="radio"].fieldItem:checked + label:before {
   opacity: .75;
 }
 
+input[type="checkbox"].fieldItem {
+  display: none;
+}
+
+input[type="checkbox"].fieldItem + label {
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  line-height: 50px;
+  padding: 0 20px 0 40px;
+}
+
+input[type="checkbox"].fieldItem + label:before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  height: 20px;
+  width: 20px;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 10px rgba(255,255,255,0.4);
+}
+
+input[type="checkbox"].fieldItem:checked + label:before {
+  box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
+}
+
 .userPage .fieldItem-selectWrapper select option {
   background-color: #4a4848;
 }
@@ -1216,6 +1310,13 @@ input[type="radio"].fieldItem:checked + label:before {
   top: -500px;
   z-index: -1;
   visibility: hidden;
+}
+
+.fieldItem.btn {
+  margin: 10px;
+  min-height: 0;
+  min-width: 0;
+  height: 30px;
 }
 
 .popMenu-navBar {
@@ -1298,17 +1399,12 @@ input[type="radio"].fieldItem:checked + label:before {
   height: 115px;
 }
 
-.homeModal-hero {
+.modal .homeModal-hero {
   background-image: url('../imgs/obSettingsHeroB.jpg');
   background-repeat: no-repeat;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  height: 220px;
-  position: relative;
-  width: 525px;
 }
 
-.homeModal-heroText {
+.modal .homeModal-heroText {
   position: absolute;
   bottom: 30px;
   color: #fff;
@@ -1317,39 +1413,47 @@ input[type="radio"].fieldItem:checked + label:before {
   text-align: center;
 }
 
-.homeModal-accordian {
+.modal .homeModal-accordion {
   height: 320px;
 }
 
-.homeModal-accordian .btn-bar{
+.modal .homeModal-accordion .btn-bar{
   border-radius: 0;
   font-size: 13px;
   height: 50px;
   margin: 0;
   opacity: 1;
-
 }
-.homeModal-accordian .btn-bar:nth-child(2){
+
+.modal .homeModal-accordion .btn {
+  background-color: rgb(50,126,184);
+}
+
+.modal .homeModal-accordion .btn-bar{
+  border-right: none;
+}
+
+.modal .homeModal-accordion .btn-bar:nth-child(2){
   border-left: solid 1px #086A9E;
 }
 
-.homeModal-accordian .searchWrapper {
+.modal .homeModal-accordion .searchWrapper {
   background: #086A9E;
   border-bottom: solid 1px #327EB8;
 }
 
-.homeModal-settings,
-.homeModal-settings.flexRow {
+.modal .homeModal-settings,
+.modal .homeModal-settings.flexRow {
   height: 178px;
   overflow-y: auto;
   background-color: #086A9E;
 }
 
-.homeModal-settings.homeModal-settings-noSearch {
+.modal .homeModal-settings.homeModal-settings-noSearch {
   height: 220px;
 }
 
-.homeModal-avatarPreview {
+.modal .homeModal-avatarPreview {
   background-color: #327EB8;
   border-radius: 70px;
   height: 130px;
@@ -1378,8 +1482,68 @@ input[type="radio"].fieldItem:checked + label:before {
 #customizeControls {
   position: fixed;
   left: 40px;
-  top: 410px;
+  top: 90px;
   width: 40px;
+  z-index: 1;
+}
+
+.editItemImageHolder {
+  height: 168px;
+  overflow-y: scroll;
+}
+
+.editItemImageLoadPhotoMessage {
+  height: 168px;
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  left: 0;
+}
+
+#modalHolder {
+  position: fixed;
+  z-index: 10;
+}
+
+/* protect customize controls from custom page styles */
+#ov1 #customizeControls .labelWrap input {
+  color: rgba(255,255,255,0.6);
+}
+
+.colpick {
+  z-index: 10;
+}
+
+#ov1 #obBody .colpick input {
+  color: #616161;
+}
+
+.colpick_rgbhex .colpick_new_color,
+.colpick_rgbhex .colpick_current_color {
+  height: 20px;
+}
+
+.colpick_rgbhex .colpick_rgb_r {
+  top: 33px;
+}
+
+.colpick_rgbhex .colpick_rgb_g {
+  top: 60px;
+}
+
+.colpick_rgbhex .colpick_rgb_b {
+  top: 87px;
+}
+
+.colpick_rgbhex .colpick_hex_field {
+  top: 114px;
+}
+
+.colpick_dark .colpick_submit {
+  top: 142px;
+  color: #B5B5B5;
+  font-weight: 400;
+  border-color: #616161;
 }
 
 #obBody::-webkit-scrollbar {
@@ -1388,7 +1552,8 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 #obContainer {
-  padding-top: 40px;
+  margin-top: 50px;
+  padding-top: 30px;
 }
 
 /*========== utility classes ==========*/
@@ -1439,6 +1604,10 @@ input[type="radio"].fieldItem:checked + label:before {
 
 #ov1 .invisible {
   visibility: hidden;
+}
+
+#ov1 .scrollOverflowY {
+  overflow-y: scroll;
 }
 
 .vCentered {

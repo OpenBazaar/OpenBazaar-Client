@@ -17,7 +17,8 @@ module.exports = Backbone.View.extend({
     'click #shippingFreeFalse': 'unsetFreeShipping',
     'change .js-itemImageUpload': 'uploadImage',
     'change #inputType': 'changeType',
-    'click .js-editItemDeleteImage': 'deleteImage'
+    'click .js-editItemDeleteImage': 'deleteImage',
+    'blur input': 'validateInput'
   },
 
   initialize: function(){
@@ -58,7 +59,7 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
-  setFormValues: function(){
+  setFormValues: function(){ //TODO: Refactor to a generic enumeration pattern
     var typeValue = String(this.model.get('vendor_offer__listing__metadata__category')) || "physical good";
     this.$el.find('input[name=nsfw]').val(String(this.model.get('vendor_offer__listing__item__nsfw')));
     this.$el.find('input[name=free_shipping]').val(String(this.model.get('vendor_offer__listing__shipping__free')));
@@ -163,22 +164,26 @@ module.exports = Backbone.View.extend({
       url: self.model.get('server') + "upload_image",
       contentType: false,
       processData: false,
+      dataType: "json",
       data: formData,
-      success: function(data) {
-        data = JSON.parse(data);
+      success: function(data) { //TODO: Have JQuery parse the JSON directly in ajax call
+        var errorModal,
+            hashArray,
+            imageArray;
+
         if (data.success === true){
-          var imageArray = __.clone(self.model.get("combinedImagesArray"));
-          var hashArray = __.clone(self.model.get("imageHashesToUpload"));
+          imageArray = __.clone(self.model.get("combinedImagesArray"));
+          hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
             imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
             hashArray.push(hash);
-          })
+          });
           self.model.set("combinedImagesArray", imageArray);
           self.model.set("imageHashesToUpload", hashArray);
 
           self.updateImages();
         }else if (data.success === false){
-          var errorModal = $('.js-messageModal');
+          errorModal = $('.js-messageModal');
           errorModal.removeClass('hide');
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
           errorModal.find('.js-messageModal-message').html("Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
@@ -194,46 +199,70 @@ module.exports = Backbone.View.extend({
 
   updateImages: function(){
     //TODO: this would be better as a sub-view with it's own render
-    var self = this;
-    var subImageDivs = this.$el.find('.js-editItemSubImage');
-    var imageArray = this.model.get("combinedImagesArray");
+    var self = this,
+        subImageDivs = this.$el.find('.js-editItemSubImage'),
+        imageArray = this.model.get("combinedImagesArray"),
+        uploadMsg = this.$el.find('.js-itemEditLoadPhotoMessage');
+
     //remove extra subImage divs
-    subImageDivs.slice(imageArray.length-1).remove();
+    subImageDivs.slice(imageArray.length).remove();
 
     if(imageArray.length > 0){
       __.each(imageArray, function (imageURL, i) {
-        if (i === 0){
-          self.$el.find('.js-editItemMainImage').css('background-image', 'url(' + imageURL + ')').removeClass('box-border').attr("data-index", "0")
-          .find('.js-editItemDeleteImage').removeClass('hide');
+        if (i < subImageDivs.length){
+          $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
-          if (i <= subImageDivs.length){
-            $(subImageDivs[i - 1]).css('background-image', 'url(' + imageURL + ')');
-          }else{
-            $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
-                .insertBefore(self.$el.find('.js-editItemSubImagesWrapper .js-editItemEmptyImage'));
-          }
+          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+              .appendTo(self.$el.find('.js-editItemSubImagesWrapper'));
         }
       });
+      uploadMsg.addClass('hide');
     } else {
-      //if there are no images, reset the main image area
-      self.$el.find('.js-editItemMainImage').css('background-image', 'none').addClass('box-border').find('.js-editItemDeleteImage').addClass('hide');
+      uploadMsg.removeClass('hide');
     }
   },
 
   deleteImage: function(e) {
-    var imgIndex = $(e.target).closest('.itemImg').data('index');
-    var imageArray = __.clone(this.model.get("combinedImagesArray"));
+    var imageUploadArray,
+        imgIndex = $(e.target).closest('.itemImg').data('index'),
+        imageArray = __.clone(this.model.get("combinedImagesArray"));
+
     imageArray.splice(imgIndex, 1);
     this.model.set("combinedImagesArray", imageArray);
-    var imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
+    imageUploadArray = __.clone(this.model.get("imageHashesToUpload"));
     imageUploadArray.splice(imgIndex, 1);
     this.model.set("imageHashesToUpload", imageUploadArray);
     this.updateImages();
   },
 
+  validateInput: function(e) {
+    "use strict";
+    console.log("validity checked");
+    e.target.checkValidity();
+    $(e.target).closest('flexRow').addClass('formChecked');
+  },
+
   saveChanges: function(){
-    var self = this;
-    var cCode = this.model.get('userCurrencyCode');
+    var errorModal,
+        self = this,
+        formData,
+        deleteThisItem,
+        cCode = this.model.get('userCurrencyCode');
+
+    deleteThisItem = function(newHash){
+      $.ajax({
+          type: "DELETE",
+          url: self.model.get('server') + "contracts?id="+self.model.get('id'), //TODO: Change to send data in POST to be safe, http://restcookbook.com/HTTP%20Methods/idempotency/
+          success: function() {
+              self.trigger('deleteOldDone', newHash);
+          },
+          error: function(jqXHR, status, errorThrown){
+              console.log(jqXHR);
+              console.log(status);
+              console.log(errorThrown);
+          }
+      });
+    };
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
@@ -248,8 +277,7 @@ module.exports = Backbone.View.extend({
       this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
     }
 
-    var formData = new FormData(this.$el.find('#contractForm')[0]);
-    //formData.append('images', this.model.get('imageHashesToUpload'));
+    formData = new FormData(this.$el.find('#contractForm')[0]);
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
       formData.append('images', imHash);
     });
@@ -259,6 +287,9 @@ module.exports = Backbone.View.extend({
       formData.append('delete_images', false);
     }
 
+    //add formChecked class to form so invalid fields are styled as invalid
+    this.$el.find('#contractForm').addClass('formChecked');
+
     if(document.getElementById('contractForm').checkValidity()){
       $.ajax({
         type: "POST",
@@ -267,17 +298,19 @@ module.exports = Backbone.View.extend({
         processData: false,
         data: formData,
         success: function (data) {
+          var returnedId = self.model.get('id');
           data = JSON.parse(data);
           //if the itemEdit model has an id, it was cloned from an existing item
-          if (self.model.get('id') && data.success === true){
-            deleteThisItem();
+          //if the id returned is the same, an edit was made with no changes, don't delete it
+          if (returnedId && data.success === true && returnedId != data.id){
+            deleteThisItem(data.id);
           }else if (data.success === false){
             var errorModal = $('.js-messageModal');
             errorModal.removeClass('hide');
             errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
             errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
-            //item is new
+            //item is new or unchanged
             self.trigger('saveNewDone');
           }
         },
@@ -288,26 +321,10 @@ module.exports = Backbone.View.extend({
         }
       });
     }else{
-      var errorModal = $('.js-messageModal');
+      errorModal = $('.js-messageModal');
       errorModal.removeClass('hide');
       errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
       errorModal.find('.js-messageModal-message').html("Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.</i>");
     }
-
-    var deleteThisItem = function(){
-      $.ajax({
-        type: "DELETE",
-        url: self.model.get('server') + "contracts?id="+self.model.get('id'),
-        success: function() {
-          self.trigger('deleteOldDone');
-        },
-        error: function(jqXHR, status, errorThrown){
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
-      });
-    };
-
   }
 });

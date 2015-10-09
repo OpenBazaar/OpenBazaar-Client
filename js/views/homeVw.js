@@ -3,10 +3,12 @@ var __ = require('underscore'),
     Moment = require('moment'),
     $ = require('jquery');
 Backbone.$ = $;
-var fs = require('fs'),
+var fs = require('fs'),//TODO: Remove FS - it is not used?
     loadTemplate = require('../utils/loadTemplate'),
     itemListView = require('./itemListVw'),
-    storeListView = require('./userListVw');
+    storeListView = require('./userListVw'),
+    userProfileModel = require('../models/userProfile'),
+    storeWizardVw = require('./storeWizardVw');
 
 
 var fakeStores = [
@@ -55,7 +57,7 @@ var fakeItems = [
     "category": "Test",
     "nsfw": false,
     "title": "Test Item Two with a Longer Title To See How That Fits in the UI",
-    "thumbnail_hash": "63d7f80ce14357d6355150481f81c84356cea2f7",
+    "thumbnail_hash": "",
     "price": 379.0,
     "origin": "UNITED_STATES",
     "currency_code": "usd",
@@ -116,14 +118,30 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-homeItemsBtn': 'homeItemsClick',
-    'click .js-homeStoresBtn': 'homeStoresClick'
+    'click .js-homeStoresBtn': 'homeStoresClick',
+    'click .js-homeCreateStore': 'createStore'
   },
 
   initialize: function(options){
     var self = this;
+    this.model = new Backbone.Model();
     this.options = options || {};
+    this.userModel = options.userModel;
+    this.userProfile = new userProfileModel();
+    this.userProfile.urlRoot = this.userModel.get('server') + "profile";
     this.subViews = [];
-    this.render();
+
+    this.userProfile.fetch({
+      //no id is passed, this will always be a request for the user's own profile
+      success: function(model){
+        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+        self.render();
+      },
+      error: function(model, response){
+        console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
+        alert("loading the user profile has failed");
+      }
+    });
   },
 
   hideList1: function(e){
@@ -146,6 +164,9 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       self.subRender();
+      if(self.model.get('page').profile.vendor == true) {
+        self.$el.find('.js-homeCreateStore').addClass('hide');
+      }
     });
   },
 
@@ -165,6 +186,24 @@ module.exports = Backbone.View.extend({
 
   homeStoresClick: function(e){
     this.hideList2();
+  },
+
+  createStore: function() {
+    "use strict";
+    var self = this,
+        storeWizardModel = new Backbone.Model();
+    //copy the view model into the new wizard model
+    storeWizardModel.set(this.model.attributes);
+    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder'});
+    this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
+    this.subViews.push(this.storeWizardView);
+  },
+
+  storeCreated: function() {
+    "use strict";
+    this.storeWizardView.closeWizard();
+    //if updates to this page change the page, it will need to be reloaded with the code below
+    //Backbone.history.navigate('#home', {trigger: true});
   },
 
   close: function(){

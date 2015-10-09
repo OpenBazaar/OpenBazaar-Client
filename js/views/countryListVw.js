@@ -9,7 +9,6 @@ var __ = require('underscore'),
 module.exports = Backbone.View.extend({
 
   initialize: function(options){
-    var self = this;
     this.options = options || {};
     this.countries = new countriesModel();
     this.chooseCountries = new chooseCountriesCollection(this.countries.get('countries'));
@@ -19,9 +18,11 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
+    this.listWrapper = $('<div class="flexRow scrollOverflowY"></div>');
     __.each(this.chooseCountries.models, function(item){
       self.renderItem(item);
     },this);
+    this.$el.append(this.listWrapper);
   },
 
   renderItem: function(item){
@@ -30,8 +31,8 @@ module.exports = Backbone.View.extend({
       selected: this.options.selected
     });
     this.subViews.push(chooseCountry);
-    //$el must be passed in by the constructor
-    this.$el.append(chooseCountry.render().el);
+    //appending to the DOM one by one is too slow, and the last 1/3 of the items won't be added. Add to a holder element instead.
+    this.listWrapper.append(chooseCountry.render().el);
   },
 
   close: function(){

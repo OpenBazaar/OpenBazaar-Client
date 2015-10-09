@@ -17,8 +17,8 @@
 </div>
 <div class="nav-ctrlGroup nav-profile">
   <div class="btn btn-profile js-navProfile custCol-primary"
-  <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
-  style="background-image: url(<%- avatar_hash %>);"
+  <% if(ob.avatar_hash) { %>
+  style="background-image: url(<%- ob.avatar_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
@@ -56,7 +56,7 @@
                 <input type="text" autofocus="autofocus" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflow">
+            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflowY">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -89,7 +89,7 @@
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-countryList homeModal-settings scrollOverflow">
+            <ul class="flexRow list flex-border js-homeModal-countryList homeModal-settings">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -107,7 +107,7 @@
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflow">
+            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflowY">
             </ul>
           </div>
           <div class="bar barFlush">
@@ -125,7 +125,7 @@
                 <input type="text" class="search txtField txtField-bar" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflow">
+            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY">
               <li class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
@@ -327,7 +327,7 @@
             <div class="flexRow">
               <div class="flexRow">
                 <div class="rowItem js-homeModal-timeSelect">
-                  <p class="margin0"><%= polyglot.t('onboarding.knownAs') %> <%= handle %>.</p>
+                  <p class="margin0"><%= polyglot.t('onboarding.knownAs') %> <%= ob.handle %>.</p>
                 </div>
               </div>
               <div class="txtFieldWrapper txtFieldWrapper-bar hide">

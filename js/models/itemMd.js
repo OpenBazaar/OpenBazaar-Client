@@ -14,7 +14,7 @@ module.exports = window.Backbone.LinearModel.extend({
     itemHash: "", //set by userPage View
     combinedImagesArray: [], //tracks uploaded and old images
     imageHashesToUpload: [],
-    priceSet: false, //set in Update Attribute below, so view can listen for it
+    priceSet: 0, //set in Update Attribute below, so view can listen for it
 
     vendor_offer__signature: "",
     vendor_offer__listing__shipping__shipping_regions: [],
@@ -26,7 +26,7 @@ module.exports = window.Backbone.LinearModel.extend({
     vendor_offer__listing__item__sku: "",
     vendor_offer__listing__item__description: "",
 
-    vendor_offer__listing__item__price_per_unit__fiat__price: 0,
+    vendor_offer__listing__item__price_per_unit__fiat__price: "",
     vendor_offer__listing__item__price_per_unit__fiat__currency_code: "",
     vendor_offer__listing__item__title: "",
     vendor_offer__listing__item__process_time: "",
@@ -40,7 +40,7 @@ module.exports = window.Backbone.LinearModel.extend({
     vendor_offer__listing__metadata__category: "",
     vendor_offer__listing__metadata__version: "",
     vendor_offer__listing__metadata__category_sub: "",
-    vendor_offer__listing__metadata__expiry: "",
+    vendor_offer__listing__metadata__expiry: ""
   },
 
     /* //this is what the data looks like when it arrives from the API
@@ -116,58 +116,14 @@ module.exports = window.Backbone.LinearModel.extend({
       }
     }
   },*/
-/*
-  parse: function(response){
-    response.vendor_offer = response.vendor_offer || {};
-    response.vendor_offer.listing = response.vendor_offer.listing || {};
-    //make sure item exists
-    response.vendor_offer.listing.item = response.vendor_offer.listing.item || {
-          "category": "None",
-          "sku": "0",
-          "description": "None",
-          "price_per_unit": {
-            "fiat": {
-              "price": 0,
-              "currency_code": "usd"
-            }
-          },
-          "title": "New Item",
-          "process_time": "0",
-          "image_hashes": [],
-          "nsfw": false,
-          "keywords": [],
-          "condition": "New"
-        };
-    //make sure shipping exists
-    response.vendor_offer.listing.shipping = response.vendor_offer.listing.shipping || {
-          "flat_fee": {
-            "fiat": {
-              "price": {
-                "international": "0",
-                "domestic": "0"
-              },
-              "currency_code": "usd"
-            }
-          },
-          "shipping_regions": [
-            ""
-          ],
-          "est_delivery": {
-            "international": "",
-            "domestic": ""
-          },
-          "shipping_origin": "",
-          "free": false
-        };
-    return response;
-  },
-*/
+
   initialize: function(){
-    //this.updateAttributes();
-    this.on('change:vendor_offer__listing__item__price_per_unit__fiat__price', this.updateAttributes, this);
+    //listen for fetched. This is set by the view after fetch is successful, to prevent multiple fires of changed.
+    this.on('change:fetched', this.updateAttributes, this);
   },
 
   updateAttributes: function(){
+    var newAttributes;
     var self = this;
     var vendorPrice = this.get("vendor_offer__listing__item__price_per_unit__fiat__price") ? Number(this.get("vendor_offer__listing__item__price_per_unit__fiat__price")) : 0;
     if(vendorPrice && this.get("userCurrencyCode")){
@@ -187,11 +143,12 @@ module.exports = window.Backbone.LinearModel.extend({
             maximumFractionDigits: 2,
             currency: self.get("userCurrencyCode")
           }).format(vendorPrice*vendToUserBTCRatio);
-          newAttributes.priceSet = true;
+          //set to random so a change event is always fired
+          newAttributes.priceSet = Math.random();
           self.set(newAttributes);
         });
       }else{
-        var newAttributes = {};
+        newAttributes = {};
         newAttributes.vendorBTCPrice = vendorBitCoinPrice;
         newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
           style: 'currency',
@@ -199,14 +156,16 @@ module.exports = window.Backbone.LinearModel.extend({
           maximumFractionDigits: 2,
           currency: self.get("userCurrencyCode")
         }).format(vendorPrice*window.currentBitcoin);
-        newAttributes.priceSet = true;
+        //set to random so a change event is always fired
+        newAttributes.priceSet = Math.random();
         self.set(newAttributes);
       }
     }else {
-      var newAttributes = {};
+      newAttributes = {};
       newAttributes.vendorBTCPrice = 0;
       newAttributes.displayPrice = 0;
-      newAttributes.priceSet = true;
+      //set to random so a change event is always fired
+      newAttributes.priceSet = Math.random();
       self.set(newAttributes);
     }
   }

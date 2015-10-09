@@ -1,22 +1,22 @@
 <div class="mainContainer custCol-background">
   <div class="banner-large shadow-inner1 js-userPageBanner"
-  <% if(typeof(page.profile.header_hash) !== "undefined" && page.profile.header_hash) { %>
-  style="background-image: url(<%- user.server %>get_image?hash=<%- page.profile.header_hash %>);"
+  <% if(ob.page.profile.header_hash) { %>
+  style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
     <div class="flexRow align-bottom">
       <div class="rowItem" style="padding: 0 20px">
         <div class="thumbnail thumbnail-large pull-left"
-        <% if(typeof(page.profile.avatar_hash) !== "undefined" && page.profile.avatar_hash) { %>
-        style="background-image: url(<%- user.server %>get_image?hash=<%- page.profile.avatar_hash %>);"
+        <% if(ob.page.profile.avatar_hash) { %>
+        style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
         <% }else{ %>
         style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
       <div class="pull-left">
         <div class="vCentered">
-          <h1 class="h3 unbold txt-unleaded page-userNameLarge"><%= page.profile.name %></h1>
-          <div class="txt-fade"><%= page.profile.handle %></div>
+          <h1 class="h3 unbold txt-unleaded page-userNameLarge"><%= ob.page.profile.name %></h1>
+          <div class="txt-fade"><%= ob.page.profile.handle %></div>
         </div>
       </div>
     </div>
@@ -31,10 +31,11 @@
   <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
   <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
   <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
-  <% if(ownPage === true) { %>
+  <% if(ob.ownPage === true) { %>
   <div class="navEnd pad15">
     <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up50">
       <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
+      <a class="btn btn-txt custCol-primary js-createStore"><%= polyglot.t('CreateStore') %></a>
     </div>
     <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up50">
       <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
@@ -65,7 +66,7 @@
     <div class="flexRow minHeight650">
       <div class="flexCol-8 custCol-border-secondary">
         <div class="rowItem">
-          <%= page.profile.about %>
+          <%= ob.page.profile.about %>
         </div>
       </div>
       <div class="flexCol-4 flex-border">
@@ -74,8 +75,8 @@
             <div class="rowItem">
               <div class="textOpacity75"><%= polyglot.t('Website') %></div>
               <div>
-                <% if(page.profile.website) { %>
-                <%=page.profile.website %>
+                <% if(ob.page.profile.website) { %>
+                <%= ob.page.profile.website %>
                 <%}else{%>
                 not provided
                 <%}%>
@@ -86,8 +87,8 @@
             <div class="rowItem">
               <div class="textOpacity75"><%= polyglot.t('Email') %></div>
               <div>
-                <% if(page.profile.email) { %>
-                <%=page.profile.email %>
+                <% if(ob.page.profile.email) { %>
+                <%= ob.page.profile.email %>
                 <%}else{%>
                 not provided
                 <%}%>
@@ -98,8 +99,8 @@
             <div class="rowItem">
               <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
               <div>
-                <% if(page.profile.social_accounts.facebook && page.profile.social_accounts.facebook.username) { %>
-                <%=page.profile.social_accounts.facebook.username %>
+                <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
+                <%= ob.page.profile.social_accounts.facebook.username %>
                 <%}else{%>
                 not provided
                 <%}%>
@@ -110,8 +111,8 @@
             <div class="rowItem">
               <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
               <div>
-                <% if(page.profile.social_accounts.instagram && page.profile.social_accounts.instagram.username) { %>
-                <%=page.profile.social_accounts.instagram.username %>
+                <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
+                <%= ob.page.profile.social_accounts.instagram.username %>
                 <%}else{%>
                 not provided
                 <%}%>
@@ -122,8 +123,8 @@
             <div class="rowItem">
               <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
               <div>
-                <% if(page.profile.social_accounts.snapchat && page.profile.social_accounts.snapchat.username) { %>
-                <%=page.profile.social_accounts.snapchat.username %>
+                <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
+                <%= ob.page.profile.social_accounts.snapchat.username %>
                 <%}else{%>
                 not provided
                 <%}%>
@@ -176,27 +177,39 @@
     <div class="flexRow js-list4 minHeight650"></div>
   </div>
   <div class="flexContainer flex-border custCol-primary js-itemEdit js-tabTarg hide minHeight650">
-    <div class="flexRow js-list5 minHeight650"></div>
+    <div class="flexRow js-list5 minHeight650 positionWrapper"></div>
   </div>
 </div>
 <div class="navBar custCol-secondary" style="padding: 4px 0"></div>
 
 <div id="customizeControls" class="hide">
-
   <div class="positionWrapper">
-    <input type="color" class="btn btn-square btn-cornerTL btn-flushTL js-customizeColor" id="primary_color">
-    <label class="labelWrap row5 fade fadeIn" for="primary_color">Primary Color</label>
+    <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="primary_color"></label>
+    <div class="labelWrap row5 fade">
+      <div><%= polyglot.t('PrimaryColor') %></div>
+      <div><input class="js-customizeColorInput" type="text" id="primary_color" size="7"/></div>
+    </div>
   </div>
   <div class="positionWrapper">
-    <input type="color" class="btn btn-square row5 btn-cornerTL btn-flushTL js-customizeColor" id="secondary_color">
-    <label class="labelWrap row5 fade fadeIn" for="secondary_color">Secondary Color</label>
+    <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="secondary_color"></label>
+    <div class="labelWrap row5 fade">
+      <div><%= polyglot.t('SecondaryColor') %></div>
+      <div><input class="js-customizeColorInput" type="text" id="secondary_color" size="7"/></div>
+    </div>
   </div>
   <div class="positionWrapper">
-    <input type="color" class="btn btn-square btn-cornerTL btn-flushTL js-customizeColor" id="background_color">
-    <label class="labelWrap row5 fade fadeIn" for="background_color">Background Color</label>
+    <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="background_color"></label>
+    <div class="labelWrap row5 fade">
+      <div><%= polyglot.t('BackgroundColor') %></div>
+      <div><input class="js-customizeColorInput" type="text" id="background_color" size="7"/></div>
+    </div>
   </div>
   <div class="positionWrapper">
-    <input type="color" class="btn btn-square row5 btn-cornerTL btn-flushTL js-customizeColor" id="text_color">
-    <label class="labelWrap row5 fade fadeIn" for="text_color">Text Color</label>
+    <label class="btn btn-square btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="text_color"></label>
+    <div class="labelWrap row5 fade">
+      <div><%= polyglot.t('TextColor') %></div>
+      <div><input class="js-customizeColorInput" type="text" id="text_color" size="7"/></div>
+    </div>
   </div>
 </div>
+<div id="modalHolder"></div>

@@ -38,14 +38,14 @@ setTimeout(function(){
     //put the current bitcoin price in the window so it doesn't have to be passed to models
     window.currentBitcoin = btAve;
   });
-},54000000);
+},54000000); //TODO: Extract magic number to config file
 
 //get things started
 getBTPrice(user.get('currencyCode'), function(btAve){
   window.currentBitcoin = btAve;
   $('.js-loadingModal').hide();
-  var pageNav = new pageNavView({model: user});
-  this.router = new router({userModel: user});
+    new pageNavView({model: user});
+    this.router = new router({userModel: user});
   Backbone.history.start();
 });
 

@@ -48,31 +48,31 @@ module.exports = Backbone.View.extend({
     this.render();
   },
 
-  initAccordian: function(targ){
+  initAccordion: function(targ){
     var acc = $(targ);
     var accWidth = acc.width();
     var accHeight = acc.height();
-    var accChildren = acc.find('.accordian-child');
+    var accChildren = acc.find('.accordion-child');
     var accNum = accChildren.length;
-    var accWin = acc.find('.accordian-window');
+    var accWin = acc.find('.accordion-window');
 
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
     acc.find('.js-accordianNext').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
+      var oldPos = accWin.css('left').replace("px",""); //TODO: Fix implicit casting to Number
       if(oldPos > (accWidth * accNum * -1 + accWidth)){
         accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) - accWidth;
+          return parseInt(accWin.css('left').replace("px","")) - accWidth; //TODO: Change parseInt to Number to avoid radix
         });
       }
       // focus search input
-      $(this).closest('.accordian-child').next('.accordian-child').find('.search').focus();
+      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
     });
     acc.find('.js-accordianPrev').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
+      var oldPos = accWin.css('left').replace("px","");  //TODO: Fix implicit casting to Number
       if(oldPos < (0)){
         accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) + accWidth;
+          return parseInt(accWin.css('left').replace("px","")) + accWidth; //TODO: Change parseInt to Number to avoid radix
         });
       }
     });
@@ -99,7 +99,7 @@ module.exports = Backbone.View.extend({
       var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
       var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
       var languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-      self.initAccordian('.js-profileAccordian');
+      self.initAccordion('.js-profileAccordion');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
       }
@@ -152,7 +152,7 @@ module.exports = Backbone.View.extend({
   },
 
   currencySelect: function(e){
-    var targ = $(e.currentTarget);
+    var targ = $(e.currentTarget); //TODO: Rename variables to be more readable
     var crcy = targ.attr('data-name');
     var ccode = targ.attr('data-code');
     $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
@@ -162,7 +162,7 @@ module.exports = Backbone.View.extend({
   },
 
   languageSelect: function(e){
-    var targ = $(e.currentTarget);
+    var targ = $(e.currentTarget); //TODO: Rename variables to be more readable
     var lang = targ.attr('data-code');
     $('.js-homeModal-languageList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
@@ -170,7 +170,7 @@ module.exports = Backbone.View.extend({
   },
 
   timeSelect: function(e){
-    var inpt = $(e.target).closest('input[type=radio]');
+    var inpt = $(e.target).closest('input[type=radio]'); //TODO: Rename variables to be more readable
     var tz = inpt.attr('id');
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
