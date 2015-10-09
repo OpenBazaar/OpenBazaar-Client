@@ -1,4 +1,4 @@
-<div class="mainContainer custCol-background">
+<div class="mainContainer custCol-background marginTop50">
   <div class="banner-large shadow-inner1 js-userPageBanner"
   <% if(ob.page.profile.header_hash) { %>
   style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
@@ -145,7 +145,7 @@
   </div>
   <div class="flexContainer flex-border custCol-primary js-followers js-tabTarg hide minHeight650">
     <div class="flexRow">
-      <div class="flexRow">
+      <div class="flexRow custCol-border-secondary">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-primary">
           <input type="text" id="inputFollowers" class="txtField txtField-bar search custCol-border-primary" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
         </div>
@@ -155,7 +155,7 @@
   </div>
   <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide minHeight650">
     <div class="flexRow">
-      <div class="flexRow">
+      <div class="flexRow custCol-border-secondary">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
           <input type="text" id="inputFollowing" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>"  />
         </div>
@@ -165,7 +165,7 @@
   </div>
   <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide minHeight650">
     <div class="flexRow">
-      <div class="flexRow">
+      <div class="flexRow custCol-border-secondary">
         <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
           <input type="text" id="inputStore" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>"  />
         </div>
