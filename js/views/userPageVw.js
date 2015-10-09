@@ -3,6 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
+    colpicker = require('../utils/colpick.js'),
     userProfileModel = require('../models/userProfile'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -10,8 +11,9 @@ var __ = require('underscore'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
     simpleMessageView = require('./simpleMessageVw'),
-    itemView = require('./itemVw'),
-    itemEditView = require('./itemEditVw');
+    itemVw = require('./itemVw'),
+    itemEditVw = require('./itemEditVw'),
+    storeWizardVw = require('./storeWizardVw');
 
 module.exports = Backbone.View.extend({
 
@@ -31,8 +33,9 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    'change .js-customizeColor': 'setCustomColor',
-    'change .js-userPageImageUpload': 'uploadUserPageImage'
+    'change .js-userPageImageUpload': 'uploadUserPageImage',
+    'click .js-customizeColor': 'customizeColorClick',
+    'click .js-createStore': 'createStore'
   },
 
   initialize: function (options) {
@@ -81,6 +84,7 @@ module.exports = Backbone.View.extend({
     }
     this.options.ownPage = true;
 
+
     this.userProfile.fetch({
       data: $.param({'id': this.pageID}),
       success: function(model){
@@ -89,13 +93,15 @@ module.exports = Backbone.View.extend({
       },
       error: function(model, response){
         console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
-        alert("User Page cannot be read");
+        alert("User Profile cannot be read");
       }
     });
   },
 
   render: function(){
+    "use strict";
     var self = this;
+    //make sure container is cleared
     $('#content').html(this.$el);
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
@@ -105,12 +111,14 @@ module.exports = Backbone.View.extend({
       self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
       self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
+      self.setCustomStyles();
       self.setState(self.options.state, self.options.itemHash);
     });
     return this;
   },
 
   setCustomStyles: function() {
+    "use strict";
     var self = this;
     //only do the following if page has been set in the model
     if(this.model.get('page')){
@@ -126,14 +134,17 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 15px}" +
+          "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
           "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
+
       document.body.appendChild(customStyleTag);
       //set custom color input values
-      $('.js-customizeColor').each(function(){
-        $(this).val(self.model.get('page').profile[$(this).attr('id')]);
+      self.$el.find('.js-customizeColorInput').each(function(){
+        var newColor = self.model.get('page').profile[$(this).attr('id')];
+        $(this).val(newColor);
+        $(this).closest('.positionWrapper').find('.js-customizeColor').css('background-color', newColor);
       });
     }
   },
@@ -144,9 +155,9 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state, hash) {
+    "use strict";
     if(state === "item"){
       this.renderItem(hash);
-      this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
     }else if(state === "itemNew") {
@@ -164,6 +175,7 @@ module.exports = Backbone.View.extend({
   },
 
   setControls: function(state){
+    "use strict";
     //if user owns page, hide/show control buttons
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
@@ -190,18 +202,32 @@ module.exports = Backbone.View.extend({
         document.getElementById('obContainer').classList.remove("box-borderDashed");
         this.undoColorCustomization();
       }
+      //if store has been created, swap create button for sell button
+      if(this.model.get('page').profile.vendor === true) {
+        this.$el.find('.js-sellItem').removeClass('hide');
+        this.$el.find('.js-createStore').addClass('hide');
+      } else {
+        this.$el.find('.js-sellItem').addClass('hide');
+        this.$el.find('.js-createStore').removeClass('hide');
+      }
     }
   },
 
   subRender: function(state) {
+    "use strict";
     var self = this;
-
     if(state === "about" || !state) {
       //this is the default state of the page. Activate tab
       this.tabClick(self.$el.find('.js-aboutTab'), this.$el.find('.js-about'));
     } else if (state === "store") {
+
       this.listings.fetch({
-        data: $.param({'id': self.pageID}),
+        data: function(){
+          //don't send the guid if this is the user's own page
+          if(this.options.ownPage == true) {
+            return $.param({'guid': self.pageID});
+          }
+        },
         success: function(model){
           self.renderItems(model.get('listings'));
         },
@@ -231,8 +257,8 @@ module.exports = Backbone.View.extend({
   },
 
   renderItems: function (model) {
+    "use strict";
     var self = this;
-
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currencyCode');
       arrayItem.server = self.options.userModel.get('server');
@@ -246,17 +272,19 @@ module.exports = Backbone.View.extend({
   },
 
   renderFollowers: function (model) {
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers yet", message: ""}); // to fix - this copy needs to be localized
+    "use strict";
+    this.followerList = new personListView({model: model, el: '.js-list1', title: "No Followers Yet", message: ""});
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone yet", message: ""}); // to fix - this copy needs to be localized
-    this.subViews.push(this.followerList);
+    "use strict";
+    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not Following Anyone Yet", message: ""});
     this.subViews.push(this.followingList);
   },
 
   renderItem: function(hash){
+    "use strict";
     var self = this;
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currencyCode'),
@@ -267,16 +295,16 @@ module.exports = Backbone.View.extend({
       handle: self.model.get('page').profile.handle,
       ownPage: self.options.ownPage,
       //userID: self.model.get('page').profile.guid,
-      itemHash: hash,
-      //id: hash
+      itemHash: hash
+        //id: hash
     });
     this.item.urlRoot = this.options.userModel.get('server')+"contracts";
     //remove old item before rendering
     if(this.itemView){
       this.itemView.undelegateEvents();
-      this.itemView.remove();
+      //this.itemView.remove();
     }
-    this.itemView = new itemView({model:this.item, el: '.js-list4'});
+    this.itemView = new itemVw({model:this.item, el: '.js-list4'});
     this.subViews.push(this.itemView);
     this.item.fetch({
       data: $.param({'id': hash}),
@@ -295,6 +323,7 @@ module.exports = Backbone.View.extend({
   },
 
   renderItemEdit: function(model){
+    "use strict";
     var self = this,
         hash = "";
     if(model) {
@@ -316,7 +345,7 @@ module.exports = Backbone.View.extend({
     if(this.itemEditView){
       this.itemEditView.undelegateEvents();
     }
-    this.itemEditView = new itemEditView({model:this.itemEdit, el: '.js-list5'});
+    this.itemEditView = new itemEditVw({model:this.itemEdit, el: '.js-list5'});
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
     this.subViews.push(this.itemEditView);
@@ -324,17 +353,20 @@ module.exports = Backbone.View.extend({
   },
 
   showError: function(title, message, target){
+    "use strict";
     var errorView = new simpleMessageView({title: title, message: message, el: target});
     this.subViews.push(errorView);
   },
 
   aboutClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-about'));
     this.addTabToHistory('about');
     this.setState('about');
   },
 
   followersClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'));
     this.addTabToHistory('followers');
     this.setState('followers');
@@ -342,6 +374,7 @@ module.exports = Backbone.View.extend({
   },
 
   followingClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-following'));
     this.addTabToHistory('following');
     this.setState('following');
@@ -349,6 +382,7 @@ module.exports = Backbone.View.extend({
   },
 
   storeClick: function(e){
+    "use strict";
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
@@ -356,6 +390,7 @@ module.exports = Backbone.View.extend({
   },
 
   tabClick: function(activeTab, showContent){
+    "use strict";
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');
     this.$el.find('.js-tabTarg').addClass('hide');
@@ -363,31 +398,61 @@ module.exports = Backbone.View.extend({
   },
 
   addTabToHistory: function(state){
+    "use strict";
     //add action to history if not an item
     Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
   },
 
   sellItem: function(){
+    "use strict";
     this.renderItemEdit();
     this.setControls("itemEdit");
   },
 
   customizePage: function(e){
+    "use strict";
     this.customizing = true;
     this.setControls('customize');
   },
 
-  setCustomColor: function(e) {
-    var colorButton = $(e.target);
-    var colorKey = colorButton.attr('id');
-    //make temp copy of the page
+  customizeColorClick: function(e) {
+    "use strict";
+    var self = this,
+        colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
+        colorKey = colorInput.attr('id'),
+        newColor = this.model.get('page').profile[colorKey].slice(1);
+    $(e.target).closest('.positionWrapper').find('.labelWrap').addClass('fadeIn');
+    colorInput.colpick({
+      layout: "rgbhex", //can also be full, or hex
+      colorScheme: "dark", //can also be light
+      submitText: "Change",
+      onShow: function(el) {
+        var colorKey = $(this).attr('id');
+        $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
+      },
+      onSubmit: function(hsb,hex,rgb,el) {
+        self.setCustomColor(hex, $(el).attr('id'));
+        $(el).closest('.positionWrapper').find('.js-customizeColor').css('background-color', '#' + hex);
+        $(el).colpickHide();
+        $('.labelWrap').removeClass('fadeIn');
+      },
+      onHide: function(){
+        $('.labelWrap').removeClass('fadeIn');
+      }
+    });
+    colorInput.colpickSetColor(newColor, true);
+  },
+
+  setCustomColor: function(newColor, colorKey) {
+    "use strict";
     var tempPage  =  __.clone(this.model.get('page'));
-    tempPage.profile[colorKey] = colorButton.val();
+    tempPage.profile[colorKey] = '#'+newColor;
     this.model.set('page', tempPage);
     this.setCustomStyles();
   },
 
   uploadUserPageImage: function() {
+    "use strict";
     var self = this;
     var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
     var server = self.options.userModel.get('server');
@@ -398,6 +463,7 @@ module.exports = Backbone.View.extend({
       processData: false,
       data: formData,
       success: function(data) {
+        var errorModal = $('.js-messageModal');
         data = JSON.parse(data);
         var imageHash = data.image_hashes[0];
         if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
@@ -406,12 +472,11 @@ module.exports = Backbone.View.extend({
           self.model.set('page', tempPage);
           self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server + "get_image?hash=" + imageHash + ')');
         }else if (data.success === false){
-          var errorModal = $('.js-messageModal');
           errorModal.removeClass('hide');
+            //TODO: Extract these lines to a more generic showModal-type function
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
           errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
-          var errorModal = $('.js-messageModal');
           errorModal.removeClass('hide');
           errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
           errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
@@ -426,19 +491,20 @@ module.exports = Backbone.View.extend({
   },
 
   saveCustomizePage: function() {
-    //this.setControls();
+    "use strict";
     this.customizing = false;
     this.saveUserPageModel();
   },
 
   saveUserPageModel: function(){
+    "use strict";
     var self = this;
     var formData = new FormData();
     var pageData = this.model.get('page').profile;
     for(var profileKey in pageData) {
       if(pageData.hasOwnProperty(profileKey)){
         //don't include nested objects in the form
-        if(pageData[profileKey] !== 'object'){
+        if(pageData[profileKey] !== 'object' && pageData[profileKey]){
           if(profileKey == 'background_color' || profileKey == 'primary_color' || profileKey == 'text_color' || profileKey == 'secondary_color'){
             //convert hex to decimal
             var profileColor = pageData[profileKey].slice(1);
@@ -475,12 +541,14 @@ module.exports = Backbone.View.extend({
   },
 
   cancelCustomizePage: function() {
+    "use strict";
     this.undoColorCustomization();
     this.setControls();
   },
 
   undoColorCustomization: function(){
-    if(this.customizing === true) {
+    "use strict";
+    if(this.customizing === true) { //TODO: Enumerate over array or entity with loop
       this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
       this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
       this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;
@@ -491,32 +559,38 @@ module.exports = Backbone.View.extend({
   },
 
   saveNewDone: function() {
-    //go back to store, because the hash of the new item is unknown
-    this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+    "use strict";
     this.addTabToHistory('store');
     this.setState('store');
   },
 
-  deleteOldDone: function() {
-    //go back to store, because the hash of the new item is unknown
-    this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
-    this.addTabToHistory('store');
-    this.setState('store');
+  deleteOldDone: function(newHash) {
+    "use strict";
+    if(newHash) {
+      this.setState('item', newHash);
+    } else {
+      //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+      this.addTabToHistory('store');
+      this.setState('store');
+    }
   },
 
   cancelClick: function(){
+    "use strict";
     this.setState(this.lastTab);
   },
 
 
 
   editItem: function(){
+    "use strict";
     this.renderItemEdit(this.item);
     this.setControls("itemEdit");
     this.lastTab = "itemOld";
   },
 
   deleteItem: function(){
+    "use strict";
     var self=this;
 
     $.ajax({
@@ -536,13 +610,33 @@ module.exports = Backbone.View.extend({
   },
 
   saveItem: function(){
+    "use strict";
     if(this.itemEditView){
       this.itemEditView.saveChanges();
     }
   },
 
+  createStore: function() {
+    "use strict";
+    var self = this,
+        storeWizardModel = new Backbone.Model();
+    storeWizardModel.set(this.model.attributes);
+    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder'});
+    this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
+    this.subViews.push(this.storeWizardView);
+  },
+
+  storeCreated: function() {
+    "use strict";
+    var currentState = this.lastTab || "about";
+    this.storeWizardView.closeWizard();
+    //recreate the entire page with the new data
+    Backbone.history.navigate('#userPage/'+this.userID+'/'+currentState, {trigger: true});
+  },
+
 
 close: function(){
+    "use strict";
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
