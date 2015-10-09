@@ -2,16 +2,18 @@
 
 
 body {
-  margin: 0;
   background-color: rgb(6,55,83);
   /*fonts*/
   color: rgb(255, 255, 255);
   font-family: "Helvetica Neue", Helvetica, "Open Sans";
   font-size: 13px;
   font-weight: 500;
-  -webkit-font-smoothing: antialiased;
   letter-spacing: .5px;
   line-height: 1.2;
+  margin: 0;
+  overflow: hidden; 
+  -webkit-font-smoothing: antialiased;
+
 }
 
 a {
@@ -52,7 +54,7 @@ form {
 /*========== structure classes ==========*/
 
 #content {
-  margin: 23px auto 0;
+  margin: 0 auto 0;
   padding-bottom: 100px;
   position: relative;
   width: 950px;
@@ -1484,8 +1486,11 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 #obContainer {
-  margin-top: 50px;
   padding-top: 30px;
+  height: 93%;
+  overflow-y: scroll;
+  top: 50px;
+  position: relative;
 }
 
 /*========== utility classes ==========*/

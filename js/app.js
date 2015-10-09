@@ -14,8 +14,9 @@ var Polyglot = require('node-polyglot'),
     router = require('./router'),
     userModel = require('./models/userMd'),
     languagesModel = require('./models/languagesMd'),
+    mouseWheel = require('jquery-mousewheel'),
+    mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     pageNavView = require('./views/pageNavVw');
-
 
 var user = new userModel();
 
@@ -44,9 +45,11 @@ setTimeout(function(){
 getBTPrice(user.get('currencyCode'), function(btAve){
   window.currentBitcoin = btAve;
   $('.js-loadingModal').hide();
-    new pageNavView({model: user});
-    this.router = new router({userModel: user});
+  new pageNavView({model: user});
+  this.router = new router({userModel: user});
   Backbone.history.start();
+
+  $('#obContainer').mCustomScrollbar({ theme:"minimal-dark", scrollInertia: 0 });
 });
 
 
