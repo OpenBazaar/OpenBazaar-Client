@@ -34,7 +34,7 @@ app.on('ready', function() {
     "min-height": 700,
     "center": true,
     "title": "OpenBazaar",
-    frame: false //uncomment for release
+    frame: false
   });
 
   // and load the index.html of the app.
@@ -50,4 +50,9 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  app.on('activate-with-no-open-windows', function() {
+    mainWindow.show();
+  });
+
 });

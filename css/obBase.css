@@ -689,6 +689,7 @@ h5 {
   font-size: 12px;
   letter-spacing: 0;
   text-indent: 26px;
+  -webkit-app-region: no-drag;
 }
 
 .txtField-bar,
@@ -786,14 +787,17 @@ input[type="text"].txtField-bar {
 
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMin {
   background-color: #F8E71C;
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-bar {
@@ -854,6 +858,10 @@ input[type="text"].txtField-bar {
 
 .btn.btn-half {
   width: 50%;
+}
+
+.btn.btn-home {
+  -webkit-app-region: no-drag;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -929,6 +937,7 @@ input[type="text"].txtField-bar {
 
 .btn.btn-profile {
   background-size: contain;
+  -webkit-app-region: no-drag;
 }
 
 .btn-square {
