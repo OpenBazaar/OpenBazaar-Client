@@ -125,7 +125,7 @@ module.exports = Backbone.View.extend({
     if (process.platform != 'darwin') {
       win.close();
     } else {
-      win.minimize();
+      win.hide();
     }
   },
 
