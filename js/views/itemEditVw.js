@@ -6,8 +6,7 @@ Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     taggle = require('taggle'),
-    chosen = require('../utils/chosen.jquery.min.js'),
-    customScrollBar = require('malihu-custom-scrollbar-plugin')($);
+    chosen = require('../utils/chosen.jquery.min.js');
 
 module.exports = Backbone.View.extend({
 
@@ -91,14 +90,9 @@ module.exports = Backbone.View.extend({
     //set chosen inputs
     $('.chosen').chosen();
 
-    //create custom scrollbar
-    $('.js-editItemSubImagesWrapper').mCustomScrollbar({
-      theme: "dark"
-    });
-
     //focus main input
     this.$el.find('input[name=title]').focus();
-    $('body').scrollTop(375); // we need to change this to scroll the container div instead of body once the header is fixed
+    $('#obContainer').scrollTop(375); // we need to change this to scroll the container div instead of body once the header is fixed
   },
 
   priceToLocal: function(e){

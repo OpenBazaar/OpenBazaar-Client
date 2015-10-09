@@ -44,8 +44,8 @@ setTimeout(function(){
 getBTPrice(user.get('currencyCode'), function(btAve){
   window.currentBitcoin = btAve;
   $('.js-loadingModal').hide();
-    new pageNavView({model: user});
-    this.router = new router({userModel: user});
+  new pageNavView({model: user});
+  this.router = new router({userModel: user});
   Backbone.history.start();
 });
 

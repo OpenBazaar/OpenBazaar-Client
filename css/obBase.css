@@ -4,6 +4,7 @@
 body {
   margin: 0;
   background-color: rgb(6,55,83);
+  overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
   font-family: "Helvetica Neue", Helvetica, "Open Sans";
@@ -71,8 +72,7 @@ form {
 /*========== structure classes ==========*/
 
 #content {
-  margin: 23px auto 0;
-  padding-bottom: 100px;
+  margin: auto;
   position: relative;
   width: 950px;
   z-index: 1;
@@ -1569,8 +1569,9 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 #obContainer {
-  margin-top: 50px;
   padding-top: 30px;
+  height: 96%;
+  overflow-y: scroll;
 }
 
 /*========== utility classes ==========*/
@@ -1741,6 +1742,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .marginTop20 {
   margin-top: 20px !important;
+}
+
+.marginTop50 {
+  margin-top: 50px;
 }
 
 .marginBottom50 {
