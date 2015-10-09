@@ -47,4 +47,9 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  app.on('activate-with-no-open-windows', function() {
+    mainWindow.show();
+  });
+
 });
