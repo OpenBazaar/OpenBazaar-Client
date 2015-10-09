@@ -33,8 +33,8 @@ app.on('ready', function() {
     "min-width": 1024,
     "min-height": 700,
     "center": true,
-    "title": "OpenBazaar"//,
-    //frame: false //uncomment for release
+    "title": "OpenBazaar",
+    frame: false //uncomment for release
   });
 
   // and load the index.html of the app.
