@@ -11,8 +11,26 @@
 </form>
 </div>
 <div class="user-page-content">
-  <div class="user-slim">sdfsdadsf</div>
-  <div class="flexRow shadow-inner1" style="position: relative; height: 400px">
+
+  <div class="flexRow user-page-header-slim hide">
+    <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
+      <div class="thumbnail thumbnail-large pull-left"
+      <% if(ob.page.profile.avatar_hash) { %>
+      style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
+      <% }else{ %>
+      style="background-image: url(imgs/defaultUser.png)"
+      <% } %>>
+    </div>
+    <div class="pull-left">
+      <div class="vCentered">
+        <h1 class="page-userNameLarge"><%= ob.page.profile.name %></h1>
+        <div><%= ob.page.profile.handle %></div>
+      </div>
+    </div>
+    </div>    
+  </div>
+
+  <div class="flexRow shadow-inner1 user-page-header">
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
@@ -22,14 +40,14 @@
       <% } %>></div>
     <div class="pull-left">
       <div class="vCentered">
-        <h1 class="h3 unbold txt-unleaded page-userNameLarge"><%= ob.page.profile.name %></h1>
-        <div class="txt-fade"><%= ob.page.profile.handle %></div>
+        <h1 class="page-userNameLarge"><%= ob.page.profile.name %></h1>
+        <div><%= ob.page.profile.handle %></div>
       </div>
     </div>
   </div>
   </div>
 
-  <div class="bar navBar barFlush navBar custCol-secondary">
+  <div class="bar navBar barFlush user-page-navigation custCol-secondary">
     <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
@@ -72,7 +90,7 @@
             <%= ob.page.profile.about %>
           </div>
         </div>
-        <div class="flexCol-4 flex-border">
+        <div class="flexCol-4 flex-border border0">
           <div class="flexRow">
             <div class="flexRow custCol-border-secondary">
               <div class="rowItem">

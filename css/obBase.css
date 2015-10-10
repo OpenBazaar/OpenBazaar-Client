@@ -122,6 +122,15 @@ form {
   line-height: 50px;
 }
 
+#overlay {
+  position: fixed;
+  top: 50px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(25,25,25,0.65);
+  z-index: 2;
+}
+
 .navBar {
   /* use for horizontal nav structures */
   display: flex;
@@ -562,7 +571,6 @@ h5 {
   height: 102px;
   position: fixed;
   top: 0;
-  border-bottom: solid 6px #3B2840;
   width: 950px;
   opacity: 0;
   z-index: 200;
@@ -1407,6 +1415,33 @@ input[type="checkbox"].fieldItem:checked + label:before {
   transform: translate(-50%, -50%);
 }
 
+.user-page-navigation {
+  width: 950px;
+}
+
+.user-page-navigation-slim {
+  position: fixed;
+  top: 98px;
+  z-index: 100;
+  /*border-bottom: 6px solid #3b2840;*/
+}
+
+.user-page-header {
+  position: relative; 
+  height: 400px;
+}
+
+.user-page-header-slim {
+  position: fixed;
+  top: 50px;
+  height: 50px;
+  width: 950px;
+  background: #281B2E;
+  z-index: 100;
+  padding: 0;
+
+}
+
 .icon-large {
   font-size: 32px;
 }
@@ -1511,7 +1546,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 .page-userNameLarge {
-  font-weight: 100;
+  font-weight: 200;
   font-size: 34px;
   opacity: .8;
   margin-bottom: 0;
@@ -1817,4 +1852,8 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .cursorDefault {
   cursor: default;
+}
+
+.blur {
+  -webkit-filter: blur(4px);
 }

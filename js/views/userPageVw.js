@@ -97,18 +97,20 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    // Josh not sure where this should go, move wherever needed
+    // Josh, not sure where this should go, move wherever needed
     var slimVisible = false;
     $("#obContainer").scroll(function(){
-      if ($(this).scrollTop() > 392 && slimVisible === false ) {
+      if ($(this).scrollTop() > 322 && slimVisible === false ) {
         slimVisible = true;
-        console.log('sdf');
-        $('.user-slim').fadeTo(0, 1);
+        $('.page-userNameLarge').css('font-size','20px');
+        $('.user-page-navigation').addClass('user-page-navigation-slim');
+        $('.user-page-header-slim').show();
       }
-      if ($(this).scrollTop() < 392 && slimVisible === true ) {
+      if ($(this).scrollTop() < 322 && slimVisible === true ) {
         slimVisible = false;
-        console.log('sdfaaa');
-        $('.user-slim').fadeTo(0, 0);
+        $('.page-userNameLarge').css('font-size','34px');
+        $('.user-page-navigation').removeClass('user-page-navigation-slim');
+        $('.user-page-header-slim').hide();
       }
     });
   },
