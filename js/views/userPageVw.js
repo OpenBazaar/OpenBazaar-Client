@@ -100,17 +100,21 @@ module.exports = Backbone.View.extend({
     // Josh, not sure where this should go, move wherever needed
     var slimVisible = false;
     $("#obContainer").scroll(function(){
-      if ($(this).scrollTop() > 322 && slimVisible === false ) {
+      if ($(this).scrollTop() > 368 && slimVisible === false ) {
         slimVisible = true;
-        $('.page-userNameLarge').css('font-size','20px');
+        $('.page-userNameLarge').addClass('fontSize20');
+        $('.user-page-navigation-filler').show();
         $('.user-page-navigation').addClass('user-page-navigation-slim');
         $('.user-page-header-slim').show();
+        $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
       }
-      if ($(this).scrollTop() < 322 && slimVisible === true ) {
+      if ($(this).scrollTop() < 368 && slimVisible === true ) {
         slimVisible = false;
-        $('.page-userNameLarge').css('font-size','34px');
+        $('.page-userNameLarge').removeClass('fontSize20');
+        $('.user-page-navigation-filler').hide();
         $('.user-page-navigation').removeClass('user-page-navigation-slim');
         $('.user-page-header-slim').hide();
+        $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
       }
     });
   },
@@ -153,6 +157,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
           "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
 

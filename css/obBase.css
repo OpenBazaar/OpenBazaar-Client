@@ -374,6 +374,13 @@ form {
   border-radius: 2px;
   height: 76px;
   width: 80px;
+  transition: all .1s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.thumbnail-large-slim {
+  height: 58px;
+  width: 62px;
+  transition: all .1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .row10 {
@@ -1424,9 +1431,11 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .user-page-navigation-slim {
   position: fixed;
-  top: 98px;
+  top: 102px;
   z-index: 100;
-  /*border-bottom: 6px solid #3b2840;*/
+  box-shadow: 0px 10px 43px -10px rgba(0,0,0,0.20);
+
+
 }
 
 .user-page-header {
@@ -1437,7 +1446,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 .user-page-header-slim {
   position: fixed;
   top: 50px;
-  height: 50px;
+  border-top: solid 8px black;
+/*  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;*/
+  height: 54px;
   width: 950px;
   background: #281B2E;
   z-index: 100;
@@ -1668,6 +1680,16 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: -50px;
 }
 
+#ov1 .pull-up48 {
+  position: relative;
+  top: -48px;
+}
+
+#ov1 .pull-up4 {
+  position: relative;
+  top: -4px;
+}
+
 #ov1 .align-bottom {
   position: absolute;
   bottom: 0;
@@ -1781,6 +1803,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-weight: 500;
 }
 
+.fontSize20 {
+  font-size: 20px;
+}
+
 .floatLeft {
   float: left;
 }
@@ -1797,8 +1823,24 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-right: 5px;
 }
 
+.marginTop2 {
+  margin-top: 2px;
+}
+
+.marginTop6 {
+  margin-top: 6px;
+}
+
+.marginTop10 {
+  margin-top: 10px;
+}
+
 .marginTop15 {
   margin-top: 15px;
+}
+
+.marginLeft6 {
+  margin-left: 6px;
 }
 
 .marginTop20 {
