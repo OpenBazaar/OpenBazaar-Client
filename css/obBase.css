@@ -1392,7 +1392,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 .banner-large {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  background-size: cover;
+  background: 50% 50% / cover no-repeat;
   height: 400px;
   position: fixed;
   top: 70px;

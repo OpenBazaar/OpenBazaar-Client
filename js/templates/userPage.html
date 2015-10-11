@@ -1,5 +1,5 @@
 <div class="mainContainer custCol-background">
-  <div class="banner-large js-userPageBanner"
+  <div class="banner-large js-userPageBanner custCol-secondary"
   <% if(ob.page.profile.header_hash) { %>
   style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
   <% }else{ %>
@@ -10,8 +10,8 @@
   <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
 </form>
 </div>
-<div class="user-page-content">
 
+<div class="user-page-content">
   <div class="flexRow user-page-header-slim hide">
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
@@ -55,16 +55,16 @@
     <% if(ob.ownPage === true) { %>
     <div class="navEnd pad15">
       <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up50">
-        <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
+        <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('nav.createListing') %></a>
         <a class="btn btn-txt custCol-primary js-createStore"><%= polyglot.t('CreateStore') %></a>
       </div>
       <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up50">
         <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
       </div>
-      <div class="nav-ctrlGroup js-itemButtons js-userPageControls hide">
+      <div class="nav-ctrlGroup js-itemButtons js-userPageControls pull-up50 hide">
         <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
       </div>
-      <div class="nav-ctrlGroup js-itemButtons js-userPageControls hide">
+      <div class="nav-ctrlGroup js-itemButtons js-userPageControls pull-up50 hide">
         <a class="btn btn-txt custCol-primary js-deleteItem"><%= polyglot.t('Delete') %></a>
       </div>
       <div class="nav-ctrlGroup js-itemEditButtons pull-up50 js-userPageControls hide textOpacity75">
