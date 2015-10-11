@@ -1,7 +1,7 @@
 <div class="mainContainer custCol-background">
   <div class="banner-large shadow-inner1 js-userPageBanner"
   <% if(ob.page.profile.header_hash) { %>
-  style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
+  style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.header_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
@@ -9,7 +9,7 @@
       <div class="rowItem" style="padding: 0 20px">
         <div class="thumbnail thumbnail-large pull-left"
         <% if(ob.page.profile.avatar_hash) { %>
-        style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
+        style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
         <% }else{ %>
         style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>

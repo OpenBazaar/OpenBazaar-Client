@@ -3,7 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
-    userProfileModel = require('../models/userProfile'),
+    userProfileModel = require('../models/userProfileMd'),
     colpicker = require('../utils/colpick.js'),
     countriesModel = require('../models/countriesMd'),
     taggle = require('taggle'),
@@ -126,7 +126,7 @@ module.exports = Backbone.View.extend({
     var formData = new FormData(this.$el.find('#storeWizardImageForm')[0]);
     $.ajax({
       type: "POST",
-      url: self.model.get('user').server + "upload_image",
+      url: self.model.get('user').server_url + "upload_image",
       contentType: false,
       processData: false,
       dataType: "json",
@@ -135,11 +135,8 @@ module.exports = Backbone.View.extend({
         var errorModal,
             imageHash = data.image_hashes[0];
 
-        console.log(imageHash)
-
         if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-          console.log("url("+self.model.get('user').server+"get_image?hash="+imageHash+");");
-          self.$el.find('.js-storeWizardHero').css("background-image", "url("+self.model.get('user').server+"get_image?hash="+imageHash+")");
+          self.$el.find('.js-storeWizardHero').css("background-image", "url("+self.model.get('user').server_url+"get_image?hash="+imageHash+")");
           self.$el.find('#headerInput').val(imageHash);
         }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
           self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
@@ -248,7 +245,7 @@ module.exports = Backbone.View.extend({
 
       $.ajax({
         type: "POST",
-        url: self.model.get('user').server + "profile",
+        url: self.model.get('user').server_url + "profile",
         contentType: false,
         processData: false,
         data: formData,

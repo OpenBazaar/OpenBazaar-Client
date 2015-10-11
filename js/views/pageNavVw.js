@@ -7,6 +7,7 @@ var __ = require('underscore'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
     languageListView = require('../views/languageListVw'),
+    adminPanelView = require('../views/adminPanelVw'),
     remote = require('remote');
 
 module.exports = Backbone.View.extend({
@@ -20,6 +21,7 @@ module.exports = Backbone.View.extend({
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
     'click .js-navProfile': 'navProfileClick',
+    'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-currencySelect': 'currencySelect',
@@ -97,13 +99,19 @@ module.exports = Backbone.View.extend({
     var self = this;
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
-      var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
-      var languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
+      self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
+      self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
+      self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
+      self.subViews.push(this.countryList);
+      self.subViews.push(this.currencyList);
+      self.subViews.push(this.languageList);
       self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
       }
+      //add the admin panel
+      self.adminPanel = new adminPanelView({model: self.model});
+      self.subViews.push(self.adminPanel);
     });
     return this;
   },
@@ -223,6 +231,22 @@ module.exports = Backbone.View.extend({
 
   closeModal: function(e){
     $(e.target).closest('.modal').addClass('hide');
+  },
+
+  navAdminPanel: function(){
+    this.$el.find('#adminPanel').removeClass('hide');
+  },
+
+  close: function(){
+    "use strict";
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.remove();
+      }
+    });
+    this.remove();
   }
 
 });

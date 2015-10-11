@@ -4,7 +4,7 @@ var __ = require('underscore'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
-    userProfileModel = require('../models/userProfile'),
+    userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
     itemModel = require('../models/itemMd'),
@@ -52,13 +52,13 @@ module.exports = Backbone.View.extend({
     this.model = new Backbone.Model();
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
-    this.userProfile.urlRoot = options.userModel.get('server') + "profile";
+    this.userProfile.urlRoot = options.userModel.get('server_url') + "profile";
     this.listings = new listingsModel();
-    this.listings.urlRoot = options.userModel.get('server') + "get_listings";
+    this.listings.urlRoot = options.userModel.get('server_url') + "get_listings";
     this.followers = new usersModel();
-    this.followers.urlRoot = options.userModel.get('server') + "get_followers";
+    this.followers.urlRoot = options.userModel.get('server_url') + "get_followers";
     this.following = new usersModel();
-    this.following.urlRoot = options.userModel.get('server') + "get_following";
+    this.following.urlRoot = options.userModel.get('server_url') + "get_following";
     this.lastTab = "about"; //track the last tab clicked
     this.pageID = "";
     //flag to hold state when customizing
@@ -83,7 +83,6 @@ module.exports = Backbone.View.extend({
       this.options.ownPage = false;
     }
     this.options.ownPage = true;
-
 
     this.userProfile.fetch({
       data: $.param({'id': this.pageID}),
@@ -256,7 +255,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currencyCode');
-      arrayItem.server = self.options.userModel.get('server');
+      arrayItem.server_url = self.options.userModel.get('server_url');
       arrayItem.showAvatar = false;
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
@@ -284,7 +283,7 @@ module.exports = Backbone.View.extend({
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currencyCode'),
       userCountry: self.options.userModel.get('country'),
-      server: self.options.userModel.get('server'),
+      server_url: self.options.userModel.get('server_url'),
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,
       handle: self.model.get('page').profile.handle,
@@ -293,7 +292,7 @@ module.exports = Backbone.View.extend({
       itemHash: hash
         //id: hash
     });
-    this.item.urlRoot = this.options.userModel.get('server')+"contracts";
+    this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //remove old item before rendering
     if(this.itemView){
       this.itemView.undelegateEvents();
@@ -326,14 +325,14 @@ module.exports = Backbone.View.extend({
       this.itemEdit = model.clone();
     } else {
       this.itemEdit = new itemModel({
-        server: self.options.userModel.get('server'),
+        server_url: self.options.userModel.get('server_url'),
         userCountry: self.options.userModel.get('country'),
         userCurrencyCode: self.options.userModel.get('currencyCode'),
         vendor_offer__listing__item__price_per_unit__fiat__currency_code: self.options.userModel.get('currencyCode'),
         vendor_offer__listing__id__pubkeys__guid: self.model.get('page').profile.guid
       });
     }
-    //this.itemEdit.urlRoot = this.options.userModel.get('server')+"contracts";
+    //this.itemEdit.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //add the user information
     //this.itemEdit.set({user: self.options.userModel.toJSON()});
     //unbind any old view
@@ -450,10 +449,10 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
-    var server = self.options.userModel.get('server');
+    var server_url = self.options.userModel.get('server_url');
     $.ajax({
       type: "POST",
-      url: server + "upload_image",
+      url: server_url + "upload_image",
       contentType: false,
       processData: false,
       data: formData,
@@ -465,7 +464,7 @@ module.exports = Backbone.View.extend({
           var tempPage  =  __.clone(self.model.get('page'));
           tempPage.profile.header = imageHash;
           self.model.set('page', tempPage);
-          self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server + "get_image?hash=" + imageHash + ')');
+          self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
         }else if (data.success === false){
           errorModal.removeClass('hide');
             //TODO: Extract these lines to a more generic showModal-type function
@@ -514,7 +513,7 @@ module.exports = Backbone.View.extend({
 
     $.ajax({
       type: "POST",
-      url: self.model.get('user').server + "profile",
+      url: self.model.get('user').server_url + "profile",
       contentType: false,
       processData: false,
       data: formData,
@@ -590,7 +589,7 @@ module.exports = Backbone.View.extend({
 
     $.ajax({
       type: "DELETE",
-      url: self.item.get('server') + "contracts/?id="+ self.item.get('id'),
+      url: self.item.get('server_url') + "contracts/?id="+ self.item.get('id'),
       success: function() {
         //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
         self.item.trigger('destroy', self.item);
