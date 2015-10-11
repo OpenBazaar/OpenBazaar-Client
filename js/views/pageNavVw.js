@@ -92,7 +92,6 @@ module.exports = Backbone.View.extend({
     var targ = this.$el.find('.js-navProfileMenu');
     targ.addClass('hide');
     $('#overlay').hide();
-    $('#obContainer').removeClass('blur');
   },
 
   render: function(){
@@ -116,7 +115,6 @@ module.exports = Backbone.View.extend({
     if(targ.hasClass('hide')){
       targ.removeClass('hide');
       $('#overlay').show();
-      $('#obContainer').addClass('blur');
       $('html').on('click.closeNav', function(e){
         if($(e.target).closest(targ).length === 0){
           targ.addClass('hide');
