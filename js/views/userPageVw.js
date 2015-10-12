@@ -430,6 +430,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.customizing = true;
     this.setControls('customize');
+    $('.user-page-content').addClass('pull-up4');
   },
 
   customizeColorClick: function(e) {
@@ -561,6 +562,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.undoColorCustomization();
     this.setControls();
+    $('.user-page-content').removeClass('pull-up4');
   },
 
   undoColorCustomization: function(){
@@ -595,9 +597,8 @@ module.exports = Backbone.View.extend({
   cancelClick: function(){
     "use strict";
     this.setState(this.lastTab);
+    $('#obContainer').animate({ scrollTop: 0 });
   },
-
-
 
   editItem: function(){
     "use strict";

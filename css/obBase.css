@@ -371,16 +371,17 @@ form {
 }
 
 .thumbnail-large {
-  border-radius: 2px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   height: 76px;
   width: 80px;
-  transition: all .1s cubic-bezier(0, 0, 0.2, 1);
+  transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
 .thumbnail-large-slim {
   height: 58px;
-  width: 62px;
-  transition: all .1s cubic-bezier(0, 0, 0.2, 1);
+  width: 58px;
+  transition: all .1  s cubic-bezier(0, 0, 0.5, 1);
 }
 
 .row10 {
@@ -530,6 +531,12 @@ h5 {
 
 .userPage {
   /*background-color: #2a2a2a;*/
+}
+
+.userPageImageUpload {
+  background: transparent !important;
+  opacity: 1;
+  font-size: 26px;
 }
 
 .navBar {
