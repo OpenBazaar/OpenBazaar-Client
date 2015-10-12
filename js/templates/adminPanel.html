@@ -1,5 +1,5 @@
 <div class="modal modal-navBlock modal-opaque js-adminModal">
-  <div class="modal-child modal-childMain pad20">
+  <div class="modal-child modal-childMain pad20 scrollOverflowY">
     <div class="btn-cornerTR js-closeModal">
       <h2 class="ion-close-circled"></h2>
     </div>
@@ -7,61 +7,117 @@
       <h1 class="txt-center">Admin Panel</h1>
     </div>
     <p class="txt-center">Use for testing</p>
-    <p class="txt-center">Server is <span class="js-adminCurrentServer"><%= ob.server_url %></span></p>
 
-    <form id="adminPanelServer" class="rowTop20">
-      <div class="flex-border">
-        <div class="flexRow">
-          <div class="flexCol-5">
-            <div class="fieldItem">
-              <label for="changeServerInput">Change Server</label>
-              <div class="js-adminServerMsg"></div>
+    <div class="box-border row20">
+      <form id="adminPanelServer">
+        <div class="flex-border">
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminServerInput">Change Server</label>
+                <div class="js-adminServerMsg"></div>
+              </div>
             </div>
-          </div>
-          <div class="flexCol-7 positionWrapper">
-            <input type="text" name="server_url" class="fieldItem" id="changeServerInput"/>
-            <a class="btn btn-txt btn-cornerTR js-adminServer">Set</a>
-          </div>
-        </div>
-      </div>
-    </form>
-
-    <form id="adminPanelModerator" class="rowTop20">
-      <div class="flex-border">
-        <div class="flexRow">
-          <div class="flexCol-5">
-            <div class="fieldItem">
-              <label>Moderator:</label>
-              <div class="js-adminModeratorMsg"></div>
-            </div>
-          </div>
-          <div class="flexCol-7">
-            <div class="fieldItem">
-              <a class="btn btn-txt pull-left marginRight5 js-adminMakeModerator">Become Moderator</a>
-              <a class="btn btn-txt pull-left js-adminUnmakeModerator">Stop being Moderator</a>
+            <div class="flexCol-8">
+              <input type="text" name="server_url" class="fieldItem" id="adminServerInput"/>
+              <div class="fieldItem">
+                <a class="btn btn-txt btn-cornerTR js-adminServer">Set</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
 
-    <form id="adminPanelAvatar" class="rowTop20">
-      <div class="flex-border">
-        <div class="flexRow">
-          <div class="flexCol-5">
-            <div class="fieldItem">
-              <label for="adminAvatarImageInput">Upload Avatar Image:</label>
-              <div class="js-adminAvatarMsg"></div>
+    <div class="box-border row20">
+      <form id="adminPanelModerator">
+        <div class="flex-border">
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label>Moderator:</label>
+                <div class="js-adminModeratorMsg"></div>
+              </div>
             </div>
-          </div>
-          <div class="flexCol-7">
-            <div>
-              <input type="file" name="avatar" class="js-adminAvatarImage" id="adminAvatarImageInput"/>
+            <div class="flexCol-8">
+              <div class="fieldItem">
+                <a class="btn btn-txt pull-left marginRight5 js-adminMakeModerator">Become Moderator</a>
+                <a class="btn btn-txt pull-left js-adminUnmakeModerator">Stop being Moderator</a>
+              </div>
             </div>
-            <div class="rowTop20 thumbnail thumbnail-large js-avatarHolder box-borderBright"></div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
+    <div class="box-border row20">
+      <form id="adminPanelAvatar">
+        <div class="flex-border">
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminAvatarImageInput">Upload Avatar Image:</label>
+                <div class="js-adminAvatarMsg"></div>
+              </div>
+            </div>
+            <div class="flexCol-8">
+              <div class="pad20 rowTop20">
+                <input type="file" name="avatar" class="js-adminAvatarImage" id="adminAvatarImageInput"/>
+              </div>
+              <div class="rowTop20 thumbnail thumbnail-large js-avatarHolder box-border row20"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="box-border row20">
+      <form id="adminPanelProfile">
+        <div class="flex-border">
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminNameInput">Name</label>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input type="text" name="name" class="fieldItem" id="adminNameInput"/>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="handleInput">Handle</label>
+                <div class="js-adminServerMsg"></div>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input name="handle" id="handleInput" type="text" class="fieldItem" pattern="^@([A-Za-z0-9_-]{1,34}$)">
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label>Vendor</label>
+                <div class="js-adminServerMsg"></div>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="shippingFree" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
+              <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="shippingFree" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-12">
+              <div class="fieldItem">
+                <a class="btn btn-txt js-adminUpdateProfile">Change Profile</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
   </div>
 </div>

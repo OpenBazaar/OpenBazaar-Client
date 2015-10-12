@@ -14,7 +14,8 @@ module.exports = Backbone.View.extend({
     'click .js-adminMakeModerator': 'makeModerator',
     'click .js-adminUnmakeModerator': 'unMakeModerator',
     'change .js-adminAvatarImage': 'uploadAvatar',
-    'click .js-adminServer': 'setServer'
+    'click .js-adminServer': 'setServer',
+    'click .js-adminUpdateProfile': 'updateProfile'
   },
 
   initialize: function (options) {
@@ -43,7 +44,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.userProfile.fetch({
       success: function(model){
-        console.log(model.profile);
+        var modelJSON = model.toJSON();
         if(model.get('profile').moderator == true){
           self.$el.find('.js-adminMakeModerator').hide();
           self.$el.find('.js-adminUnmakeModerator').show();
@@ -51,6 +52,13 @@ module.exports = Backbone.View.extend({
           self.$el.find('.js-adminMakeModerator').show();
           self.$el.find('.js-adminUnmakeModerator').hide();
         }
+        __.each(self.$el.find('#adminPanelProfile input'), function(inputTarget){
+          __.each(modelJSON.profile, function(modelValue, modelName) {
+            if(inputTarget.name == modelName){
+              $(inputTarget).val(modelValue);
+            }
+          })
+        });
       },
       error: function(model, response){
         console.log("User fetch failed: " + response.statusText);
@@ -58,8 +66,14 @@ module.exports = Backbone.View.extend({
     });
     this.userSettings.fetch({
       success: function(model){
-        console.log(model);
-        self.$el.find('.js-adminCurrentServer').text(model.server_url);
+        var modelJSON = model.toJSON();
+        __.each(self.$el.find('#adminPanelServer input'), function(inputTarget){
+          __.each(modelJSON, function(modelValue, modelName) {
+            if(inputTarget.name == modelName){
+              $(inputTarget).val(modelValue);
+            }
+          })
+        });
       },
       error: function(model, response){
         console.log("User fetch failed: " + response.statusText);
@@ -119,8 +133,17 @@ module.exports = Backbone.View.extend({
 
   setServer: function() {
     "use strict";
-    var self = this;
-    this.postData(new FormData(this.$el.find('#adminPanelServer')[0]), "settings",
+    var self = this,
+        targetForm = this.$el.find('#adminPanelServer'),
+        formData = new FormData(targetForm[0]),
+        existingKeys = {};
+
+    targetForm.find('input').each(function(){
+      existingKeys[$(this).attr('name')] = $(this).val();
+    });
+
+    formData = this.modelToFormData(this.userSettings, formData, existingKeys);
+    this.postData(formData, "settings",
         function(data){
           self.updatePage();
         },
@@ -130,9 +153,43 @@ module.exports = Backbone.View.extend({
     );
   },
 
+  updateProfile: function() {
+    "use strict";
+    var self = this,
+        targetForm = this.$el.find('#adminPanelProfile'),
+        formData = new FormData(targetForm[0]),
+        existingKeys = {};
+
+    targetForm.find('input').each(function(){
+      existingKeys[$(this).attr('name')] = $(this).val();
+    });
+
+    formData = this.modelToFormData(this.userProfile, formData, existingKeys);
+
+    this.postData(formData, "profile",
+        function(data){
+          self.updatePage();
+        },
+        function(data){
+          alert("Failed. "+ data.reason);
+        }
+    );
+  },
+
+  modelToFormData: function(model, formData, existingKeys) {
+    "use strict";
+    //only works with flat models
+    var newFormData = formData || new FormData();
+    __.each(model.toJSON(), function(value, key) {
+      if(!__.has(existingKeys, key)) {
+        newFormData.append(key, value);
+      }
+    });
+    return newFormData;
+  },
+
   postData: function(formData, endPoint, onSucceed, onFail) {
     "use strict";
-    console.log("postData " + endPoint);
     var self = this,
         errorModal = $('.js-messageModal');
     $.ajax({

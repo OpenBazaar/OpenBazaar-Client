@@ -34,7 +34,7 @@ window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.la
 /* this code is no longer needed
 setTimeout(function(){
 
-  getBTPrice(user.get('currencyCode'), function(btAve){
+  getBTPrice(user.get('currency_code'), function(btAve){
     //put the current bitcoin price in the window so it doesn't have to be passed to models
     window.currentBitcoin = btAve;
   });

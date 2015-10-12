@@ -73,21 +73,21 @@ module.exports = Backbone.View.extend({
       }
     };
 
-    //if no userID is passed in, or it matches the user's ID, then this is their page
-    //sometimes it can be set to the string 'null', check for that too
-    if(!options.userID || options.userID == options.userModel.get('guid') || options.userID == 'null') {
-      this.pageID = options.userModel.get('guid');
-      this.options.ownPage = true;
-    } else {
-      this.pageID = options.userID;
-      this.options.ownPage = false;
-    }
-    this.options.ownPage = true;
-
     this.userProfile.fetch({
       data: $.param({'id': this.pageID}),
       success: function(model){
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON(), ownPage: self.options.ownPage});
+        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+        //if no userID is passed in, or it matches the user's ID, then this is their page
+        //sometimes it can be set to the string 'null', check for that too
+        if(!options.userID || options.userID == self.model.get('page').profile.guid || options.userID == 'null') {
+          self.pageID = options.userModel.get('guid');
+          self.options.ownPage = true;
+        } else {
+          self.pageID = options.userID;
+          self.options.ownPage = false;
+        }
+        self.model.set({ownPage: self.options.ownPage});
+
         self.render();
       },
       error: function(model, response){
@@ -178,7 +178,7 @@ module.exports = Backbone.View.extend({
     //hide all the state controls
     this.$el.find('.js-userPageControls, .js-itemButtons, #customizeControls, .js-itemCustomizationButtons, .js-pageButtons').addClass('hide');
     //unhide the ones that are needed
-    if(this.options.ownPage === true) {
+    if(this.options.ownPage == true) {
       if(state === "item" || state === "itemOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
@@ -254,7 +254,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     __.each(model, function (arrayItem) {
-      arrayItem.userCurrencyCode = self.options.userModel.get('currencyCode');
+      arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.server_url = self.options.userModel.get('server_url');
       arrayItem.showAvatar = false;
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
@@ -281,7 +281,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.item = new itemModel({
-      userCurrencyCode: self.options.userModel.get('currencyCode'),
+      userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
       server_url: self.options.userModel.get('server_url'),
       showAvatar: false,
@@ -327,8 +327,8 @@ module.exports = Backbone.View.extend({
       this.itemEdit = new itemModel({
         server_url: self.options.userModel.get('server_url'),
         userCountry: self.options.userModel.get('country'),
-        userCurrencyCode: self.options.userModel.get('currencyCode'),
-        vendor_offer__listing__item__price_per_unit__fiat__currency_code: self.options.userModel.get('currencyCode'),
+        userCurrencyCode: self.options.userModel.get('currency_code'),
+        vendor_offer__listing__item__price_per_unit__fiat__currency_code: self.options.userModel.get('currency_code'),
         vendor_offer__listing__id__pubkeys__guid: self.model.get('page').profile.guid
       });
     }
