@@ -5,7 +5,7 @@
     </div>
     <div class="modal-hero js-storeWizardHero"
     <% if(ob.page.profile.header_hash) { %>
-    style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
+    style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.header_hash %>);"
     <% }else{ %>
     style="background-image: url(imgs/defaultBanner.png)"
     <% } %>
