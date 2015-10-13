@@ -23,9 +23,9 @@ module.exports = Backbone.Model.extend({
     blocked: [], //a list of guids to block (LIST of 40 character hex strings)
     libbitcoin_server: "", //the server address (url string)
     ssl: true, //use ssl on the openbazaar server (“True” or “False”)
-    //server_url: "http://localhost:18469/api/v1/", //the address of the openbazaar server (url string)
+    server_url: "http://localhost:18469/api/v1/", //set from localStorage
     //value below for testing. Real value should be dynamically set
-    server_url: "http://seed.openbazaar.org:18469/api/v1/",
+    //server_url: "http://seed.openbazaar.org:18469/api/v1/",
     terms_conditions: "No terms or conditions", //default terms/conditions (string)
     refund_policy: "No refund policy" //default refund policy (string)
   }

@@ -15,18 +15,19 @@ module.exports = Backbone.View.extend({
     'click .js-adminUnmakeModerator': 'unMakeModerator',
     'change .js-adminAvatarImage': 'uploadAvatar',
     'click .js-adminServer': 'setServer',
-    'click .js-adminUpdateProfile': 'updateProfile'
+    'click .js-adminUpdateProfile': 'updateProfile',
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput'
   },
 
   initialize: function (options) {
     "use strict";
-    this.render();
     this.avatarHash = "";
     this.server_url = this.model.get('server_url');
     this.userSettings = new userSettingsModel();
-    this.userSettings.urlRoot = this.server_url + "settings";
     this.userProfile = new userProfileModel();
-    this.userProfile.urlRoot = this.server_url + "profile";
+
+    this.render();
   },
 
   render: function () {
@@ -42,6 +43,8 @@ module.exports = Backbone.View.extend({
   updatePage: function() {
     "use strict";
     var self = this;
+    this.userProfile.urlRoot = this.model.get('server_url')+ "profile";
+    this.userSettings.urlRoot = this.model.get('server_url') + "settings";
     this.userProfile.fetch({
       success: function(model){
         var modelJSON = model.toJSON();
@@ -69,13 +72,7 @@ module.exports = Backbone.View.extend({
     this.userSettings.fetch({
       success: function(model){
         var modelJSON = model.toJSON();
-        __.each(self.$el.find('#adminPanelServer input'), function(inputTarget){
-          __.each(modelJSON, function(modelValue, modelName) {
-            if(inputTarget.name == modelName){
-              $(inputTarget).val(modelValue);
-            }
-          })
-        });
+        self.$el.find('#adminServerInput').val(modelJSON.server_url);
       },
       error: function(model, response){
         console.log("User Settings fetch failed: " + response.statusText);
@@ -84,7 +81,8 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
-    $(e.target).closest('.js-adminModal').addClass('hide');
+    //$(e.target).closest('.js-adminModal').addClass('hide');
+    Backbone.history.loadUrl();
   },
 
   makeModerator: function() {
@@ -120,7 +118,7 @@ module.exports = Backbone.View.extend({
       function(data){
         var imageHash = data.image_hashes[0];
         if (imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-          self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.server_url + "get_image?hash=" + imageHash + ')');
+          self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('server_url') + "get_image?hash=" + imageHash + ')');
           self.$el.find('.js-adminAvatarMsg').html("Avatar has been set");
         }else {
           alert("image hash is blank");
@@ -137,51 +135,62 @@ module.exports = Backbone.View.extend({
     var self = this,
         targetForm = this.$el.find('#adminPanelServer'),
         formData = new FormData(targetForm[0]),
-        existingKeys = {};
+        newServer = this.$el.find('#adminServerInput').val(),
+        existingKeys = {'server_url': newServer};
 
-    targetForm.find('input').each(function(){
-      existingKeys[$(this).attr('name')] = $(this).val();
-    });
+    //change model so everything else points at new server before REST call
+    this.model.set({server_url: newServer});
+    //set local storage to the new server
+    localStorage.setItem("server_url", newServer);
 
-    formData = this.modelToFormData(this.userSettings, formData, existingKeys);
-    this.postData(formData, "settings",
-        function(data){
-          self.updatePage();
-        },
-        function(data){
-          alert("Failed. "+ data.reason);
-        }
-    );
+    //TODO: when API is updated to remove server_url from settings, remove this code
+    formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
+
+    if(targetForm[0].checkValidity()){
+      this.postData(formData, "settings",
+          function (data) {
+            self.updatePage();
+          },
+          function (data) {
+            alert("Failed. " + data.reason);
+          }
+      );
+    }
   },
 
   updateProfile: function() {
     "use strict";
     var self = this,
         targetForm = this.$el.find('#adminPanelProfile'),
-        formData = new FormData(targetForm[0]),
-        existingKeys = {};
+        formData = new FormData(targetForm[0]);
+        //existingKeys = {};
 
-    targetForm.find('input').each(function(){
-      existingKeys[$(this).attr('name')] = $(this).val();
-    });
+    //targetForm.find('input').each(function(){
+      //existingKeys[$(this).attr('name')] = $(this).val();
+    //});
 
-    formData = this.modelToFormData(this.userProfile, formData, existingKeys);
+    //formData = this.modelToFormData(this.userProfile.get("profile"), formData, existingKeys);
 
-    this.postData(formData, "profile",
-        function(data){
-          self.updatePage();
-        },
-        function(data){
-          alert("Failed. "+ data.reason);
-        }
-    );
+    //add location data in case this is a new profile
+    formData.append("location", this.userProfile.get("profile").location);
+
+    if(targetForm[0].checkValidity()){
+      this.postData(formData, "profile",
+          function (data) {
+            self.updatePage();
+          },
+          function (data) {
+            alert("Failed. " + data.reason);
+          }
+      );
+    }
   },
 
-  modelToFormData: function(model, formData, existingKeys) {
+  modelToFormData: function(modelJSON, formData, existingKeys) {
     "use strict";
-    //only works with flat models
+    //only works with flat JSON objects. Use toJSON on models before passing them in
     var newFormData = formData || new FormData();
-    __.each(model.toJSON(), function(value, key) {
+    __.each(modelJSON, function(value, key) {
       if(!__.has(existingKeys, key)) {
         newFormData.append(key, value);
       }
@@ -195,7 +204,7 @@ module.exports = Backbone.View.extend({
         errorModal = $('.js-messageModal');
     $.ajax({
       type: "POST",
-      url: self.server_url + endPoint,
+      url: self.model.get('server_url') + endPoint,
       contentType: false,
       processData: false,
       data: formData,
@@ -203,7 +212,6 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         if (data.success === true){
           onSucceed(data);
-          self.updatePage();
         }else if (data.success === false){
           onFail(data)
         }
@@ -214,6 +222,12 @@ module.exports = Backbone.View.extend({
         console.log(errorThrown);
       }
     });
+  },
+
+  validateInput: function(e) {
+    "use strict";
+    e.target.checkValidity();
+    $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   close: function () {
