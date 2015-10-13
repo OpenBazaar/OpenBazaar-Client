@@ -59,6 +59,10 @@ module.exports = Backbone.Model.extend({
         color = "0" + color;
       }
       color = "#" + color;
+    } else {
+      if (color[0] != "#") {
+        color = "#" + color;
+      }
     }
     return color;
   },
