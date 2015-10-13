@@ -236,7 +236,8 @@ module.exports = Backbone.View.extend({
   },
 
   navAdminPanel: function(){
-    this.$el.find('#adminPanel').removeClass('hide');
+    this.$el.find('.js-adminModal').removeClass('hide');
+    this.adminPanel.updatePage();
   },
 
   close: function(){

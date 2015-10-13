@@ -54,14 +54,19 @@ module.exports = Backbone.View.extend({
         }
         __.each(self.$el.find('#adminPanelProfile input'), function(inputTarget){
           __.each(modelJSON.profile, function(modelValue, modelName) {
-            if(inputTarget.name == modelName){
+            console.log(inputTarget.type);
+            if(inputTarget.name == modelName && inputTarget.type != "radio"){
               $(inputTarget).val(modelValue);
             }
           })
         });
+        console.log(modelJSON.profile.vendor);
+        console.log(!modelJSON.profile.vendor);
+        self.$el.find('#vendorTrue').prop('checked', modelJSON.profile.vendor);
+        self.$el.find('#vendorFalse').prop('checked', !modelJSON.profile.vendor);
       },
       error: function(model, response){
-        console.log("User fetch failed: " + response.statusText);
+        console.log("User Profile fetch failed: " + response.statusText);
       }
     });
     this.userSettings.fetch({
@@ -76,14 +81,13 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(model, response){
-        console.log("User fetch failed: " + response.statusText);
+        console.log("User Settings fetch failed: " + response.statusText);
       }
     });
   },
 
   closeModal: function(e){
-    $(e.target).closest('.modal').addClass('hide');
-    this.close();
+    $(e.target).closest('.js-adminModal').addClass('hide');
   },
 
   makeModerator: function() {

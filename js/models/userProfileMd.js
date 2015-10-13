@@ -18,19 +18,19 @@ module.exports = Backbone.Model.extend({
       email: "",
       social_accounts: {
         twitter: {
-          username: "not provided",
+          username: "",
           proof_url: ""
         },
         facebook: {
-          username: "not provided",
+          username: "",
           proof_url: ""
         },
         instagram: {
-          username: "not provided",
+          username: "",
           proof_url: ""
         },
         snapchat: {
-          username: "not provided",
+          username: "",
           proof_url: ""
         }
       },
