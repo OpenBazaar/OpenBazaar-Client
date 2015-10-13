@@ -54,14 +54,11 @@ module.exports = Backbone.View.extend({
         }
         __.each(self.$el.find('#adminPanelProfile input'), function(inputTarget){
           __.each(modelJSON.profile, function(modelValue, modelName) {
-            console.log(inputTarget.type);
             if(inputTarget.name == modelName && inputTarget.type != "radio"){
               $(inputTarget).val(modelValue);
             }
           })
         });
-        console.log(modelJSON.profile.vendor);
-        console.log(!modelJSON.profile.vendor);
         self.$el.find('#vendorTrue').prop('checked', modelJSON.profile.vendor);
         self.$el.find('#vendorFalse').prop('checked', !modelJSON.profile.vendor);
       },
