@@ -95,6 +95,27 @@ module.exports = Backbone.View.extend({
         alert("User Profile cannot be read");
       }
     });
+
+    // Josh, not sure where this should go, move wherever needed
+    var slimVisible = false;
+    $("#obContainer").scroll(function(){
+      if ($(this).scrollTop() > 368 && slimVisible === false ) {
+        slimVisible = true;
+        $('.page-userNameLarge').addClass('fontSize20');
+        $('.user-page-navigation-filler').show();
+        $('.user-page-navigation').addClass('user-page-navigation-slim');
+        $('.user-page-header-slim').show();
+        $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
+      }
+      if ($(this).scrollTop() < 368 && slimVisible === true ) {
+        slimVisible = false;
+        $('.page-userNameLarge').removeClass('fontSize20');
+        $('.user-page-navigation-filler').hide();
+        $('.user-page-navigation').removeClass('user-page-navigation-slim');
+        $('.user-page-header-slim').hide();
+        $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+      }
+    });
   },
 
   render: function(){
@@ -125,16 +146,18 @@ module.exports = Backbone.View.extend({
       customStyleTag.setAttribute('id', 'customStyle');
       customStyleTag.innerHTML =
           "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + ";}" +
+          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
           "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
           "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
           "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
           "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
 
@@ -267,13 +290,13 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No Followers Yet", message: ""});
+    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: ""});
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
     "use strict";
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not Following Anyone Yet", message: ""});
+    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: ""});
     this.subViews.push(this.followingList);
   },
 
@@ -407,6 +430,9 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.customizing = true;
     this.setControls('customize');
+    $('.user-page-content').addClass('pull-up4');
+    $('.user-customize-cover-photo').show();
+    $('.user-page-header').addClass('shadow-inner1-strong');
   },
 
   customizeColorClick: function(e) {
@@ -538,6 +564,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.undoColorCustomization();
     this.setControls();
+    $('.user-page-content').removeClass('pull-up4');
+    $('.user-page-header').removeClass('shadow-inner1-strong');
   },
 
   undoColorCustomization: function(){
@@ -572,9 +600,8 @@ module.exports = Backbone.View.extend({
   cancelClick: function(){
     "use strict";
     this.setState(this.lastTab);
+    $('#obContainer').animate({ scrollTop: 0 });
   },
-
-
 
   editItem: function(){
     "use strict";
