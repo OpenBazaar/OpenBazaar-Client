@@ -130,7 +130,7 @@ form {
   background-color: rgba(25,25,25,0.65);
   opacity: 0;
   z-index: 2;
-  transition: all .5s cubic-bezier(0, 0, 0.2, 1);
+  transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 
 }
 
