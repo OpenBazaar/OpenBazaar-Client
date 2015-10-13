@@ -144,45 +144,53 @@ module.exports = Backbone.View.extend({
     localStorage.setItem("server_url", newServer);
 
     //TODO: when API is updated to remove server_url from settings, remove this code
-    formData = this.modelToFormData(this.userSettings, formData, existingKeys);
-    this.postData(formData, "settings",
-        function(data){
-          self.updatePage();
-        },
-        function(data){
-          alert("Failed. "+ data.reason);
-        }
-    );
+    formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
+
+    if(targetForm[0].checkValidity()){
+      this.postData(formData, "settings",
+          function (data) {
+            self.updatePage();
+          },
+          function (data) {
+            alert("Failed. " + data.reason);
+          }
+      );
+    }
   },
 
   updateProfile: function() {
     "use strict";
     var self = this,
         targetForm = this.$el.find('#adminPanelProfile'),
-        formData = new FormData(targetForm[0]),
-        existingKeys = {};
+        formData = new FormData(targetForm[0]);
+        //existingKeys = {};
 
-    targetForm.find('input').each(function(){
-      existingKeys[$(this).attr('name')] = $(this).val();
-    });
+    //targetForm.find('input').each(function(){
+      //existingKeys[$(this).attr('name')] = $(this).val();
+    //});
 
-    formData = this.modelToFormData(this.userProfile, formData, existingKeys);
+    //formData = this.modelToFormData(this.userProfile.get("profile"), formData, existingKeys);
 
-    this.postData(formData, "profile",
-        function(data){
-          self.updatePage();
-        },
-        function(data){
-          alert("Failed. "+ data.reason);
-        }
-    );
+    //add location data in case this is a new profile
+    formData.append("location", this.userProfile.get("profile").location);
+
+    if(targetForm[0].checkValidity()){
+      this.postData(formData, "profile",
+          function (data) {
+            self.updatePage();
+          },
+          function (data) {
+            alert("Failed. " + data.reason);
+          }
+      );
+    }
   },
 
-  modelToFormData: function(model, formData, existingKeys) {
+  modelToFormData: function(modelJSON, formData, existingKeys) {
     "use strict";
-    //only works with flat models
+    //only works with flat JSON objects. Use toJSON on models before passing them in
     var newFormData = formData || new FormData();
-    __.each(model.toJSON(), function(value, key) {
+    __.each(modelJSON, function(value, key) {
       if(!__.has(existingKeys, key)) {
         newFormData.append(key, value);
       }

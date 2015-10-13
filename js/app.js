@@ -53,7 +53,12 @@ user.fetch({
   },
   error: function(model, response){
     console.log("Information for user could not be loaded: " + response.statusText);
-    alert("No user was found. Your server may not be working right.");
+    alert("No user was found. Your server may not be working correctly. Loading using default settings.");
+    $('.js-loadingModal').hide();
+    user.set('server_url', server_urlLocal);
+    new pageNavView({model: user});
+    new router({userModel: user});
+    Backbone.history.start();
   }
 });
 
