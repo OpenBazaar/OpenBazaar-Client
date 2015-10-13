@@ -75,8 +75,8 @@ module.exports = Backbone.View.extend({
     var countries = new countriesModel();
     var countryList = countries.get('countries');
     var shipsTo = this.$el.find('#shipsTo');
-    __.each(countryList, function(country, i){
-      shipsTo.append('<option value="'+country.dataName+'">'+country.name+'</option>');
+    __.each(countryList, function(countryFromList, i){
+      shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
     });
 
     var shipsToValue = this.model.get('vendor_offer__listing__shipping__shipping_regions');

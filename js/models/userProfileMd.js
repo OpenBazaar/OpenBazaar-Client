@@ -51,19 +51,16 @@ module.exports = Backbone.Model.extend({
   },
 
   convertColor: function(color){
-    if(is.not.hexColor(color)) {
-      //convert string to a number, then to a hex string
-      color = (Number(color)).toString(16);
-      //if the color had leading zeroes, they were cut off. Restore them.
-      while (color.length < 6){
-        color = "0" + color;
-      }
-      color = "#" + color;
-    } else {
-      if (color[0] != "#") {
+    //make sure color is not truncated to a 6 digit number, that will fool is.js
+    if (color[0] != "#" || is.not.hexColor(color)) {
+        //convert string to a number, then to a hex string
+        color = (Number(color)).toString(16);
+        //if the color had leading zeroes, they were cut off. Restore them.
+        while (color.length < 6){
+          color = "0" + color;
+        }
         color = "#" + color;
       }
-    }
     return color;
   },
 

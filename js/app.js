@@ -16,10 +16,11 @@ var Polyglot = require('node-polyglot'),
     languagesModel = require('./models/languagesMd'),
     pageNavView = require('./views/pageNavVw'),
     user = new userModel(),
-    languages = new languagesModel();
+    languages = new languagesModel(),
+    server_urlLocal = localStorage.getItem("server_url") || "http://localhost:18469/api/v1/";
 
-//set the urlRoot of the user model. This will default to localhost in production.
-user.urlRoot = user.get('server_url') + "settings";
+//set the urlRoot of the user model. Defaults to local host if not found
+user.urlRoot = server_urlLocal + "settings";
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 window.lang = user.get("language");
@@ -45,13 +46,14 @@ user.fetch({
   //no id is passed, this will always be a request for the user's own profile
   success: function(model){
     $('.js-loadingModal').hide();
+    user.set('server_url', server_urlLocal);
     new pageNavView({model: user});
     new router({userModel: user});
     Backbone.history.start();
   },
   error: function(model, response){
     console.log("Information for user could not be loaded: " + response.statusText);
-    alert("loading the user settings has failed");
+    alert("No user was found. Your server may not be working right.");
   }
 });
 
