@@ -135,7 +135,6 @@ module.exports = Backbone.View.extend({
   },
 
   navCloseClick: function(){
-    console.log("Nav Close Clicked");
     var win = remote.getCurrentWindow();
     var process = remote.process;
     if (process.platform != 'darwin') {
@@ -146,13 +145,11 @@ module.exports = Backbone.View.extend({
   },
 
   navMinClick: function(){
-    console.log("Nav Min Clicked");
     var win = remote.getCurrentWindow();
     win.minimize();
   },
 
   navMaxClick: function(){
-    console.log("Nav Max Clicked");
     var win = remote.getCurrentWindow();
     win.maximize();
   },
