@@ -5,10 +5,6 @@
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
-<form id="userPageImageForm">
-  <label for="userPageImageUpload" class="btn btn-c1 btn-txt fullCentered js-itemCustomizationButtons userPageImageUpload"><%= polyglot.t('UploadCoverPhoto') %> (959px by 400px)</label>
-  <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
-</form>
 </div>
 
 <div class="user-page-content">
@@ -31,6 +27,13 @@
   </div>
 
   <div class="flexRow shadow-inner1 user-page-header">
+    <div class="user-customize-cover-photo hide">
+      <form id="userPageImageForm">
+        <label for="userPageImageUpload" class="btn btn-c1 btn-txt fullCentered js-itemCustomizationButtons userPageImageUpload"><%= polyglot.t('UploadCoverPhoto') %> (959px by 400px)</label>
+        <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
+      </form> 
+    </div>
+
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
@@ -47,7 +50,7 @@
   </div>
   </div>
 
-  <div class="bar user-page-navigation-filler hidden custCol-primary" style="display: none"></div>
+  <div class="bar user-page-navigation-filler custCol-primary hide"></div>
   <div class="bar navBar barFlush user-page-navigation custCol-secondary">
     <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>

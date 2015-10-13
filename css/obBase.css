@@ -536,7 +536,12 @@ h5 {
 .userPageImageUpload {
   background: transparent !important;
   opacity: 1;
-  font-size: 26px;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.userPageImageUpload:hover {
+  text-decoration: underline !important;
 }
 
 .navBar {
@@ -582,15 +587,8 @@ h5 {
   background-color: #086A9E;
 }
 
-.user-slim {
-  background: #281B2E url(user-info-slim.png) no-repeat;
-  background-size: 100%;
-  height: 102px;
-  position: fixed;
-  top: 0;
+.user-customize-cover-photo {
   width: 950px;
-  opacity: 0;
-  z-index: 200;
 }
 
 .userPage .mainContainer {
@@ -1425,11 +1423,37 @@ input[type="checkbox"].fieldItem:checked + label:before {
   box-shadow: inset 0px -400px 222px -282px rgba(25,25,25,1);
 }
 
+.shadow-inner1-strong {
+  box-shadow: inset 0px -400px 222px -182px rgba(25,25,25,.85);
+}
+
 .icon-centered {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.home-page-navigation {
+  width: 950px;
+}
+
+.home-page-header-slim {
+  position: fixed;
+  top: 50;
+  width: 950px;
+  z-index: 3;
+}
+
+.home-page-navigation-filler {
+  height: 136px;
+}
+
+.home-page-navigation-slim {
+  position: fixed;
+  top: 135px;
+  z-index: 3;
+  box-shadow: 0px 10px 43px -10px rgba(0,0,0,0.20);
 }
 
 .user-page-navigation {
@@ -1441,8 +1465,6 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 102px;
   z-index: 100;
   box-shadow: 0px 10px 43px -10px rgba(0,0,0,0.20);
-
-
 }
 
 .user-page-header {
@@ -1577,7 +1599,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 #customizeControls {
   position: fixed;
   left: 40px;
-  bottom: 30px;
+  top: 80px;
   width: 40px;
   z-index: 100;
 }

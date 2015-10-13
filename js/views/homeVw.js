@@ -142,6 +142,23 @@ module.exports = Backbone.View.extend({
         alert("loading the user profile has failed");
       }
     });
+
+    // Josh, not sure where this should go, move wherever needed
+    var slimVisible = false;
+    $("#obContainer").scroll(function(){
+      if ($(this).scrollTop() > 20 && slimVisible === false ) {
+        slimVisible = true;
+        $('.home-page-header').addClass('home-page-header-slim');
+        $('.home-page-navigation-filler').show();
+        $('.home-page-navigation').addClass('home-page-navigation-slim');
+      }
+      if ($(this).scrollTop() < 20 && slimVisible === true ) {
+        slimVisible = false;
+        $('.home-page-header').removeClass('home-page-header-slim');
+        $('.home-page-navigation-filler').hide();
+        $('.home-page-navigation').removeClass('home-page-navigation-slim');
+      }
+    });
   },
 
   hideList1: function(e){

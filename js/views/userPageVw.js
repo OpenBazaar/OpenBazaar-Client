@@ -147,12 +147,13 @@ module.exports = Backbone.View.extend({
       customStyleTag.setAttribute('id', 'customStyle');
       customStyleTag.innerHTML =
           "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + ";}" +
+          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
           "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
           "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
           "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
@@ -290,13 +291,13 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No Followers Yet", message: ""});
+    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: ""});
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
     "use strict";
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not Following Anyone Yet", message: ""});
+    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: ""});
     this.subViews.push(this.followingList);
   },
 
@@ -431,6 +432,8 @@ module.exports = Backbone.View.extend({
     this.customizing = true;
     this.setControls('customize');
     $('.user-page-content').addClass('pull-up4');
+    $('.user-customize-cover-photo').show();
+    $('.user-page-header').addClass('shadow-inner1-strong');
   },
 
   customizeColorClick: function(e) {
@@ -563,6 +566,7 @@ module.exports = Backbone.View.extend({
     this.undoColorCustomization();
     this.setControls();
     $('.user-page-content').removeClass('pull-up4');
+    $('.user-page-header').removeClass('shadow-inner1-strong');
   },
 
   undoColorCustomization: function(){

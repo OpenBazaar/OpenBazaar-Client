@@ -1,14 +1,18 @@
 <div class="mainContainer">
-  <div class="welcomeBar">
-    <div>
-      <%= polyglot.t('Welcome') %>: <span class="js-currentDate textOpacity75"></span>
-      <a class="btn btn-txt custCol-background vCentered right10 js-homeCreateStore"><%= polyglot.t('CreateStore') %></a>
+  <div class="home-page-header">
+    <div class="welcomeBar">
+      <div>
+        <%= polyglot.t('Welcome') %>: <span class="js-currentDate textOpacity75"></span>
+        <a class="btn btn-txt custCol-background vCentered right10 js-homeCreateStore"><%= polyglot.t('CreateStore') %></a>
+      </div>
+    </div>
+
+    <div class="bar barFlush navBar home-page-navigation">
+      <a class="btn btn-bar active js-homeItemsBtn"><%= polyglot.t('Items') %></a>
+      <a class="btn btn-bar js-homeStoresBtn"><%= polyglot.t('Stores') %></a>
     </div>
   </div>
-  <div class="bar barFlush navBar">
-    <a class="btn btn-bar active js-homeItemsBtn"><%= polyglot.t('Items') %></a>
-    <a class="btn btn-bar js-homeStoresBtn"><%= polyglot.t('Stores') %></a>
-  </div>
+  <div class="bar home-page-navigation-filler hide custCol-primary"></div>
   <div class="flexContainer flex-border">
     <div class="flexRow">
       <div class="flexRow">
