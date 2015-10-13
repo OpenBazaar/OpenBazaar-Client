@@ -1493,6 +1493,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-size: 34px;
   opacity: .8;
   margin-bottom: 0;
+  margin-left: 0;
 }
 
 #customizeControls {
