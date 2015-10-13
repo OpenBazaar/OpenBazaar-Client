@@ -96,7 +96,7 @@ module.exports = Backbone.Model.extend({
         DragOrUploadPhotos: "Drag or upload photos",
         ExpirationDate: "Expires On",
         UploadCoverPhoto: "Upload a cover photo",
-        ExpirationDate: "Expiration Date",
+        ExpirationDate: "Expires on",
         ShortDescription: "Short Description",
         UpTo140Characters: "Up to 140 Characters",
         PrimaryColor: "Primary Color",
