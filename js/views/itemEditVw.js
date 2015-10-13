@@ -27,7 +27,7 @@ module.exports = Backbone.View.extend({
     var hashArray = this.model.get('vendor_offer__listing__item__image_hashes');
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
-      self.combinedImagesArray.push(self.model.get('server')+"get_image?hash="+hash);
+      self.combinedImagesArray.push(self.model.get('server_url')+"get_image?hash="+hash);
     });
     //add images urls to the combinedImagesArray for rendering
     this.model.set('combinedImagesArray', this.combinedImagesArray);
@@ -162,7 +162,7 @@ module.exports = Backbone.View.extend({
     var formData = new FormData(this.$el.find('#imageForm')[0]);
     $.ajax({
       type: "POST",
-      url: self.model.get('server') + "upload_image",
+      url: self.model.get('server_url') + "upload_image",
       contentType: false,
       processData: false,
       dataType: "json",
@@ -176,7 +176,7 @@ module.exports = Backbone.View.extend({
           imageArray = __.clone(self.model.get("combinedImagesArray"));
           hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
-            imageArray.push(self.model.get('server') + "get_image?hash=" + hash);
+            imageArray.push(self.model.get('server_url') + "get_image?hash=" + hash);
             hashArray.push(hash);
           });
           self.model.set("combinedImagesArray", imageArray);
@@ -252,7 +252,7 @@ module.exports = Backbone.View.extend({
     deleteThisItem = function(newHash){
       $.ajax({
           type: "DELETE",
-          url: self.model.get('server') + "contracts?id="+self.model.get('id'), //TODO: Change to send data in POST to be safe, http://restcookbook.com/HTTP%20Methods/idempotency/
+          url: self.model.get('server_url') + "contracts?id="+self.model.get('id'), //TODO: Change to send data in POST to be safe, http://restcookbook.com/HTTP%20Methods/idempotency/
           success: function() {
               self.trigger('deleteOldDone', newHash);
           },
@@ -293,7 +293,7 @@ module.exports = Backbone.View.extend({
     if(document.getElementById('contractForm').checkValidity()){
       $.ajax({
         type: "POST",
-        url: self.model.get('server') + "contracts",
+        url: self.model.get('server_url') + "contracts",
         contentType: false,
         processData: false,
         data: formData,

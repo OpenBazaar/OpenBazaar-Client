@@ -1,7 +1,7 @@
 <div class="gridItem clearfix">
   <div class="itemImg row10 js-item" data-id="<%= ob.contract_hash %>"
     <% if(ob.thumbnail_hash) { %>
-    style="background-image: url(<%- ob.server %>get_image?hash=<%- ob.thumbnail_hash %>);"
+    style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.thumbnail_hash %>);"
     <% } else { %>
     style="background-image: url(imgs/defaultItem.png);"
     <% } %>>

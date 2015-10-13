@@ -37,11 +37,13 @@
   <hr/>
   <a href="#about"><%= polyglot.t('nav.about') %></a>
   <a href="#support"><%= polyglot.t('nav.support') %></a>
+  <hr/>
+  <a class="js-navAdminPanel">Admin Panel</a>
 </div>
 
 <div class="modal modal-navBlock modal-opaque js-homeModal">
   <div class="modal-child modal-childMain">
-    <div class="homeModal-hero">
+    <div class="homeModal-hero modal-hero">
       <p class="h6 homeModal-heroText"><%= polyglot.t('onboarding.intro') %></p>
     </div>
     <div class="homeModal-accordion accordion js-profileAccordion">
@@ -389,3 +391,5 @@
     <p class="txt-center js-messageModal-message"></p>
   </div>
 </div>
+
+<div id="adminPanel"></div>

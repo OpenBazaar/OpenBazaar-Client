@@ -7,7 +7,7 @@ var fs = require('fs'),//TODO: Remove FS - it is not used?
     loadTemplate = require('../utils/loadTemplate'),
     itemListView = require('./itemListVw'),
     storeListView = require('./userListVw'),
-    userProfileModel = require('../models/userProfile'),
+    userProfileModel = require('../models/userProfileMd'),
     storeWizardVw = require('./storeWizardVw');
 
 
@@ -46,7 +46,7 @@ var fakeItems = [
       "UNITED_STATES"
     ],
     "userCurrencyCode": "USD",
-    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "server_url": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
     "handle": "test user 1",
@@ -65,7 +65,7 @@ var fakeItems = [
       "UNITED_STATES"
     ],
     "userCurrencyCode": "USD",
-    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "server_url": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
     "handle": "test user 1",
@@ -84,7 +84,7 @@ var fakeItems = [
       "UNITED_STATES"
     ],
     "userCurrencyCode": "USD",
-    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "server_url": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
     "handle": "test user 1",
@@ -103,7 +103,7 @@ var fakeItems = [
       "UNITED_STATES"
     ],
     "userCurrencyCode": "USD",
-    "server": "http://seed.openbazaar.org:18469/api/v1/",
+    "server_url": "http://seed.openbazaar.org:18469/api/v1/",
     "showAvatar": true,
     "avatar_hash": "",
     "handle": "test user 1",
@@ -128,7 +128,7 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.userModel = options.userModel;
     this.userProfile = new userProfileModel();
-    this.userProfile.urlRoot = this.userModel.get('server') + "profile";
+    this.userProfile.urlRoot = this.userModel.get('server_url') + "profile";
     this.subViews = [];
 
     this.userProfile.fetch({
