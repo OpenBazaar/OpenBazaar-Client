@@ -18,10 +18,10 @@
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
       <div class="accordion-window">
         <div class="accordion-child">
-          <div class="bar barTxt h6 paddingLeft15">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <%= polyglot.t('CreateStore') %>
           </div>
-          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow" id="storeWizardForm">
+          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary" id="storeWizardForm">
             <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>">
 
             <div class="flexRow">
@@ -200,9 +200,9 @@
               </div>
             </div>
           </form>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-closeStoreWizardModal"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
+          <div class="bar barFlush custCol-secondary">
+            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child">

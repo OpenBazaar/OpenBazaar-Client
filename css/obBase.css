@@ -561,7 +561,7 @@ h5 {
 }
 
 .modal-opaque {
-  background-color: rgb(7,65,97);
+  background-color: rgba(25,25,25,.75);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
 }
 
@@ -1783,4 +1783,8 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .cursorDefault {
   cursor: default;
+}
+
+.blur {
+  -webkit-filter: blur(4px);
 }

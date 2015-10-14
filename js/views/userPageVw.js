@@ -618,6 +618,7 @@ module.exports = Backbone.View.extend({
     this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder'});
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.subViews.push(this.storeWizardView);
+    // $('#obContainer').addClass('blur');
   },
 
   storeCreated: function() {
