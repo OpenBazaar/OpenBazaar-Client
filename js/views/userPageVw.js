@@ -112,6 +112,10 @@ module.exports = Backbone.View.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.options.state, self.options.itemHash);
+      self.$el.find('.js-externalLink').on('click', function(e){
+        e.preventDefault();
+        require("shell").openExternal($(this).attr('href'));
+      })
     });
     return this;
   },

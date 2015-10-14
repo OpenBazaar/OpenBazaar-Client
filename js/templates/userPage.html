@@ -76,7 +76,7 @@
               <div class="textOpacity75"><%= polyglot.t('Website') %></div>
               <div>
                 <% if(ob.page.profile.website) { %>
-                <%= ob.page.profile.website %>
+                <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a>
                 <%}else{%>
                 not provided
                 <%}%>
@@ -100,9 +100,17 @@
               <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
-                <%= ob.page.profile.social_accounts.facebook.username %>
+                  <div>
+                    <%= ob.page.profile.social_accounts.facebook.username %>
+                  </div>
+                  <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.proof) { %>
+                    <h3>Proof</h3>
+                    <div>
+                      <a href="<%= ob.page.profile.social_accounts.facebook.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.facebook.proof %></a>
+                    </div>
+                  <%}%>
                 <%}else{%>
-                not provided
+                  not provided
                 <%}%>
               </div>
             </div>
@@ -112,9 +120,33 @@
               <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
-                <%= ob.page.profile.social_accounts.instagram.username %>
+                  <a href="<%= ob.page.profile.social_accounts.instagram.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.instagram.username %></a>
+                  <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.proof) { %>
+                    <h3>Proof</h3>
+                    <div>
+                      <a href="<%= ob.page.profile.social_accounts.instagram.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.instagram.proof %></a>
+                    </div>
+                  <%}%>
                 <%}else{%>
-                not provided
+                  not provided
+                <%}%>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow custCol-border-secondary">
+            <div class="rowItem">
+              <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
+              <div>
+                <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
+                  <a href="<%= ob.page.profile.social_accounts.snapchat.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.snapchat.username %></a>
+                  <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.proof) { %>
+                    <h3>Proof</h3>
+                    <div>
+                      <a href="<%= ob.page.profile.social_accounts.twitter.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.twitter.proof %></a>
+                    </div>
+                  <%}%>
+                <%}else{%>
+                  not provided
                 <%}%>
               </div>
             </div>
@@ -124,9 +156,15 @@
               <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
-                <%= ob.page.profile.social_accounts.snapchat.username %>
+                  <a href="<%= ob.page.profile.social_accounts.snapchat.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.snapchat.username %></a>
+                    <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.proof) { %>
+                      <h3>Proof</h3>
+                      <div>
+                        <a href="<%= ob.page.profile.social_accounts.snapchat.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.snapchat.proof %></a>
+                      </div>
+                    <%}%>
                 <%}else{%>
-                not provided
+                  not provided
                 <%}%>
               </div>
             </div>
