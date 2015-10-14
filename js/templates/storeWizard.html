@@ -10,10 +10,10 @@
     style="background-image: url(imgs/defaultBanner.png)"
     <% } %>
       >
-      <form id="storeWizardImageForm">
+<!--       <form id="storeWizardImageForm">
         <label for="storeWizardImageUpload" class="btn btn-c1 btn-txt fullCentered"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
         <input type="file" name="image" id="storeWizardImageUpload" accept="image/*" class="hide js-storeWizardImageUpload">
-      </form>
+      </form> -->
     </div>
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
       <div class="accordion-window">
@@ -64,8 +64,8 @@
                 </div>
                 <div class="flexCol-9">
                   <div class="fieldItem">
-                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
-                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
+                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
+                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
                   </div>
                 </div>
               </div>
@@ -200,9 +200,9 @@
               </div> -->
             </div>
           </form>
-          <div class="bar barFlush custCol-secondary">
-            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary"><%= polyglot.t('Next') %></a>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child">
@@ -212,13 +212,13 @@
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="txtField txtField-bar search" />
+                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Search') %> <%= polyglot.t('for') %> <%= polyglot.t('moderators') %>" />
               </div>
             </div>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-storeWizardSave"><%= polyglot.t('Save') %></a>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Save') %></a>
           </div>
         </div>
       </div>

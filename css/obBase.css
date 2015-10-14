@@ -18,14 +18,19 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-  /*transition: opacity 1s;*/
+  opacity: .85;
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
   cursor: pointer;
 }
 
 a:hover,
 a:focus {
-  opacity: 0.6;
+  opacity: 1;
   text-decoration: underline;
+}
+
+a:active {
+  opacity: .75;
 }
 
 p a {
@@ -426,11 +431,13 @@ form {
 
 .modal {
   position: fixed;
-  display: block;
+  display: none;
   width: 100%;
   height: 100%;
+  opacity: 0;
   top: 0;
   left: 0;
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
   padding-top: 25px;
 }
 
@@ -574,9 +581,7 @@ h5 {
 .modal-opaque {
   background-color: rgba(25,25,25,.75);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  /*opacity: 0;*/
   top: 50px;
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
 }
 
 .modal-opaque.modal-navBlock {
@@ -1234,14 +1239,14 @@ input[type="radio"].fieldItem + label:before {
   height: 16px;
   width: 16px;
   border-radius: 12px;
-  border: solid 1px blue;
+  border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
 }
 
 input[type="radio"].fieldItem:checked + label:before {
-  background: #575656;
-  box-shadow: inset 0 0 0 4px #514F4F;
+  background: #fff;
+  box-shadow: inset 0 0 0 4px #086A9E;
 }
 
 .radioLabel {
@@ -1455,6 +1460,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
   border-radius: 0;
   font-size: 13px;
   height: 50px;
+  line-height: 50px;
   margin: 0;
   opacity: 1;
 }
@@ -1474,6 +1480,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
 .modal .homeModal-accordion .searchWrapper {
   background: #086A9E;
   border-bottom: solid 1px #327EB8;
+}
+
+.modal .homeModal-accordion .flexRow {
+  width: 100%;
+}
+
+.modal .homeModal-accordion .accordion-child {
+  width: 525px !important;
 }
 
 .modal .homeModal-settings,
@@ -1803,6 +1817,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
   cursor: default;
 }
 
+.borderBottomLeftRaidus3 {
+  border-bottom-left-radius: 3px !important;
+}
+
+.borderBottomRightRaidus3 {
+  border-bottom-right-radius: 3px !important;
+}
+
 .blur {
-  -webkit-filter: blur(4px);
+  -webkit-filter: blur(2px);
 }

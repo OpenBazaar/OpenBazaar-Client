@@ -117,6 +117,10 @@ module.exports = Backbone.View.extend({
         }
       }).colpickHide();
       self.errorModal = $('.js-messageModal');
+
+      // fade the modal in after it loads and focus the input
+      $('#obContainer').addClass('blur');
+      $('#modalHolder .modal').fadeTo(0 , 1);
       $('#storeNameInput').focus();
     });
   },
@@ -193,6 +197,7 @@ module.exports = Backbone.View.extend({
   blockClicks: function(e) {
     "use strict";
     e.stopPropagation();
+
   },
 
   closeWizard: function() {
@@ -275,14 +280,17 @@ module.exports = Backbone.View.extend({
 
   close: function(){
     "use strict";
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.remove();
-      }
+    $('#obContainer').removeClass('blur');
+    $('#modalHolder .modal').fadeTo(0 , 0, function(){
+      __.each(this.subViews, function(subView) {
+        if(subView.close){
+          subView.close();
+        }else{
+          subView.remove();
+        }
+      });
+      this.remove();
     });
-    this.remove();
   }
 
 });

@@ -159,7 +159,8 @@ module.exports = Backbone.View.extend({
   },
 
   render: function(){
-    var self = this;
+    var self = this,
+        storeWizardModel = new Backbone.Model();
     $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
