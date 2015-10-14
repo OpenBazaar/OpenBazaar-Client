@@ -120,7 +120,7 @@
               <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
-                  <a href="<%= ob.page.profile.social_accounts.instagram.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.instagram.username %></a>
+                  <%= ob.page.profile.social_accounts.instagram.username %>
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.proof) { %>
                     <h3>Proof</h3>
                     <div>
@@ -138,7 +138,7 @@
               <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
-                  <a href="<%= ob.page.profile.social_accounts.snapchat.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.snapchat.username %></a>
+                  <a href="http://twitter.com/<%= ob.page.profile.social_accounts.twitter.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.twitter.username %></a>
                   <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.proof) { %>
                     <h3>Proof</h3>
                     <div>
@@ -156,7 +156,7 @@
               <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
-                  <a href="<%= ob.page.profile.social_accounts.snapchat.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.snapchat.username %></a>
+                  <%= ob.page.profile.social_accounts.snapchat.username %>
                     <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.proof) { %>
                       <h3>Proof</h3>
                       <div>
