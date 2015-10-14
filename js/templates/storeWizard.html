@@ -25,7 +25,7 @@
             <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>">
 
             <div class="flexRow">
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                   <div class="flexCol-4 borderRight custCol-border-secondary">
                     <label class="fieldItem" for="storeNameInput">
                       <%= polyglot.t('Store') %> <%= polyglot.t('Name') %>
@@ -35,7 +35,7 @@
                     <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
                   </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="locationselect">
                     <%= polyglot.t('Location') %>
@@ -50,7 +50,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="websiteInput">
                     <%= polyglot.t('About') %>
@@ -60,7 +60,7 @@
                   <textarea name="about" rows="8" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="websiteInput">
                     <%= polyglot.t('Website') %>
@@ -70,7 +70,7 @@
                   <input name="website" id="websiteInput" type="url" class="fieldItem" value="<%= ob.page.profile.website %>" pattern="https?://.+" placeholder="http://www.yourwebsite.com">
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="emailInput">
                     <%= polyglot.t('Email') %>
@@ -80,7 +80,7 @@
                   <input name="email" id="emailInput" type="email" class="fieldItem" value="<%= ob.page.profile.email %>" placeholder="you@email.com">
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem">
                     <%= polyglot.t('NSFW') %>
@@ -93,7 +93,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="facebookInput">
                     <%= polyglot.t('Facebook') %>
@@ -104,7 +104,7 @@
                          value="<%= ob.page.profile.social_accounts.facebook.username %>" placeholder="<%= polyglot.t('Facebook') %> <%= polyglot.t('Name') %>">
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="twitterInput">
                     <%= polyglot.t('Twitter') %>
@@ -115,7 +115,7 @@
                          value="<%= ob.page.profile.social_accounts.twitter.username %>" placeholder="@Handle" pattern="^@([A-Za-z0-9_-]{1,15}$)">
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="instagramInput">
                     <%= polyglot.t('Instagram') %>
@@ -126,7 +126,7 @@
                          value="<%= ob.page.profile.social_accounts.instagram.username %>" placeholder="Instagram Name">
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="snapchatInput">
                     <%= polyglot.t('Snapchat') %>
@@ -137,7 +137,7 @@
                          value="<%= ob.page.profile.social_accounts.instagram.username %>" placeholder="Snapchat name">
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="realCategoriesInput">
                     <%= polyglot.t('Categories') %> (<%= polyglot.t('UpTo3') %>)
@@ -148,7 +148,7 @@
                   <div class="fieldItem" id="categoriesInput"></div>
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('PrimaryColor') %>
@@ -159,7 +159,7 @@
                   <input name="primary_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="primary_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('SecondaryColor') %>
@@ -172,7 +172,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('TextColor') %>
@@ -185,7 +185,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('BackgroundColor') %>
