@@ -420,7 +420,7 @@ form {
   height: 100%;
   top: 0;
   left: 0;
-  padding-top: 75px;
+  padding-top: 25px;
 }
 
 .modal.modal-navOffset {
@@ -563,6 +563,7 @@ h5 {
 .modal-opaque {
   background-color: rgba(25,25,25,.75);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  top: 50px;
 }
 
 .modal-opaque.modal-navBlock {
