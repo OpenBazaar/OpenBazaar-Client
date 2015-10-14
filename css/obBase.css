@@ -420,7 +420,7 @@ form {
   height: 100%;
   top: 0;
   left: 0;
-  padding-top: 80px;
+  padding-top: 75px;
 }
 
 .modal.modal-navOffset {
@@ -429,7 +429,7 @@ form {
 
 .modal-child {
   width: 525px;
-  height: 540px;
+  height: 624px;
   margin: 0 auto;
   position: absolute;
   left: 50%;
@@ -581,7 +581,7 @@ h5 {
   background-size: cover;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  height: 220px;
+  height: 250px;
   position: relative;
   width: 525px;
 }
@@ -1430,7 +1430,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 .modal .homeModal-accordion {
-  height: 320px;
+  height: 374px;
 }
 
 .modal .homeModal-accordion .btn-bar{
@@ -1466,7 +1466,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 .modal .homeModal-settings.homeModal-settings-noSearch {
-  height: 220px;
+  height: 274px;
 }
 
 .modal .homeModal-avatarPreview {
@@ -1771,6 +1771,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .padding17px {
   padding: 17px;
+}
+
+.paddingLeft15 {
+  padding-left: 15px;
 }
 
 .width100 {
