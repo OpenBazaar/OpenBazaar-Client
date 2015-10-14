@@ -39,7 +39,7 @@ module.exports = Backbone.Model.extend({
         Delete: "Delete",
         Website: "Website",
         Welcome: "Welcome to OpenBazaar",
-        CreateStore: "Create store",
+        CreateStore: "Create Store",
         SearchForItemsPlaceholder: "Search for items",
         SearchForFollowersPlaceholder: "Search for users",
         EstDeliveryDomesticPlaceholder: "Enter domestic shipping time e.g. 3-5 days",

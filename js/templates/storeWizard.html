@@ -19,29 +19,63 @@
       <div class="accordion-window">
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <%= polyglot.t('CreateStore') %>
+            <%= polyglot.t('Store Details') %>
           </div>
           <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary" id="storeWizardForm">
             <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>">
 
             <div class="flexRow">
               <div class="flexRow custCol-border-secondary">
-                  <div class="flexCol-4 borderRight custCol-border-secondary">
+                  <div class="flexCol-3 borderRight custCol-border-secondary">
                     <label class="fieldItem" for="storeNameInput">
-                      <%= polyglot.t('Store') %> <%= polyglot.t('Name') %>
+                      <%= polyglot.t('Name') %>
                     </label>
                   </div>
-                  <div class="flexCol-8">
+                  <div class="flexCol-9">
                     <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
                   </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
+                  <label class="fieldItem" for="websiteInput">
+                    <%= polyglot.t('Description') %>
+                  </label>
+                </div>
+                <div class="flexCol-9">
+                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
+                </div>
+              </div>
+              <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
+                  <label class="fieldItem" for="realCategoriesInput">
+                    <%= polyglot.t('Keywords') %><!--  (<%= polyglot.t('UpTo3') %>) -->
+                  </label>
+                </div>
+                <div class="flexCol-9">
+                  <input type="text" name="categories" id="realCategoriesInput" class="hide" />
+                  <div class="fieldItem" id="categoriesInput"></div>
+                </div>
+              </div>
+              <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
+                  <label class="fieldItem">
+                    <%= polyglot.t('NSFW') %>
+                  </label>
+                </div>
+                <div class="flexCol-9">
+                  <div class="fieldItem">
+                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
+                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
+                  </div>
+                </div>
+              </div>
+<!--               <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="locationselect">
                     <%= polyglot.t('Location') %>
                   </label>
                 </div>
-                <div class="flexCol-8">
+                <div class="flexCol-9">
                   <div class="fieldItem">
                     <div class="fieldItem-selectWrapper noIcon">
                       <select name="location" id="locationSelect" required>
@@ -49,155 +83,121 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
-                  <label class="fieldItem" for="websiteInput">
-                    <%= polyglot.t('About') %>
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <textarea name="about" rows="8" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
-                </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              </div> -->
+              <!-- <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="websiteInput">
                     <%= polyglot.t('Website') %>
                   </label>
                 </div>
-                <div class="flexCol-8">
+                <div class="flexCol-9">
                   <input name="website" id="websiteInput" type="url" class="fieldItem" value="<%= ob.page.profile.website %>" pattern="https?://.+" placeholder="http://www.yourwebsite.com">
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="emailInput">
                     <%= polyglot.t('Email') %>
                   </label>
                 </div>
-                <div class="flexCol-8">
+                <div class="flexCol-9">
                   <input name="email" id="emailInput" type="email" class="fieldItem" value="<%= ob.page.profile.email %>" placeholder="you@email.com">
                 </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
-                  <label class="fieldItem">
-                    <%= polyglot.t('NSFW') %>
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <div class="fieldItem">
-                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
-                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
-                  </div>
-                </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              </div> -->
+              <!-- <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="facebookInput">
                     <%= polyglot.t('Facebook') %>
                   </label>
                 </div>
-                <div class="flexCol-8">
+                <div class="flexCol-9">
                   <input name="facebook" id="facebookInput" type="text" class="fieldItem"
                          value="<%= ob.page.profile.social_accounts.facebook.username %>" placeholder="<%= polyglot.t('Facebook') %> <%= polyglot.t('Name') %>">
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="twitterInput">
                     <%= polyglot.t('Twitter') %>
                   </label>
                 </div>
-                <div class="flexCol-8">
+                <div class="flexCol-9">
                   <input name="twitter" id="twitterInput" type="text" class="fieldItem"
                          value="<%= ob.page.profile.social_accounts.twitter.username %>" placeholder="@Handle" pattern="^@([A-Za-z0-9_-]{1,15}$)">
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="instagramInput">
                     <%= polyglot.t('Instagram') %>
                   </label>
                 </div>
-                <div class="flexCol-8">
+                <div class="flexCol-9">
                   <input name="instagram" id="instagramInput" type="text" class="fieldItem"
                          value="<%= ob.page.profile.social_accounts.instagram.username %>" placeholder="Instagram Name">
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="snapchatInput">
                     <%= polyglot.t('Snapchat') %>
                   </label>
                 </div>
-                <div class="flexCol-8">
+                <div class="flexCol-9">
                   <input name="snapchat" id="snapchatInput" type="text" class="fieldItem"
                          value="<%= ob.page.profile.social_accounts.instagram.username %>" placeholder="Snapchat name">
                 </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
-                  <label class="fieldItem" for="realCategoriesInput">
-                    <%= polyglot.t('Categories') %> (<%= polyglot.t('UpTo3') %>)
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <input type="text" name="categories" id="realCategoriesInput" class="hide" />
-                  <div class="fieldItem" id="categoriesInput"></div>
-                </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              </div> -->
+              <!-- <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('PrimaryColor') %>
                   </div>
                 </div>
-                <div class="flexCol-8 js-customizeColorWrapper">
+                <div class="flexCol-9 js-customizeColorWrapper">
                   <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="primary_color"></label>
                   <input name="primary_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="primary_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('SecondaryColor') %>
                   </div>
                 </div>
-                <div class="flexCol-8">
-                  <div class="flexCol-8 js-customizeColorWrapper">
+                <div class="flexCol-9">
+                  <div class="flexCol-9 js-customizeColorWrapper">
                     <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="secondary_color"></label>
                     <input name="secondary_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="secondary_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                   </div>
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('TextColor') %>
                   </div>
                 </div>
-                <div class="flexCol-8">
-                  <div class="flexCol-8 js-customizeColorWrapper">
+                <div class="flexCol-9">
+                  <div class="flexCol-9 js-customizeColorWrapper">
                     <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="text_color"></label>
                     <input name="text_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="text_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                   </div>
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
                   <div class="fieldItem">
                     <%= polyglot.t('BackgroundColor') %>
                   </div>
                 </div>
-                <div class="flexCol-8">
-                  <div class="flexCol-8 js-customizeColorWrapper">
+                <div class="flexCol-9">
+                  <div class="flexCol-9 js-customizeColorWrapper">
                     <label class="fieldItem btn btn-squareSm box-borderBright js-customizeColorLabel" for="background_color"></label>
                     <input name="background_color" class="fieldItem fieldItem-withButton js-customizeColorInput" type="text" id="background_color" size="7" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"/>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </form>
           <div class="bar barFlush custCol-secondary">

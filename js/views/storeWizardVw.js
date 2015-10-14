@@ -117,6 +117,7 @@ module.exports = Backbone.View.extend({
         }
       }).colpickHide();
       self.errorModal = $('.js-messageModal');
+      $('#storeNameInput').focus();
     });
   },
 
