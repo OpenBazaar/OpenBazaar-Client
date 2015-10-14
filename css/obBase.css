@@ -314,12 +314,23 @@ form {
 
 /* don't prefix with .btn, sometimes it is used on icons without a .btn class */
 .btn-cornerTR {
+  cursor: pointer;
   display: block;
   position: absolute;
   top: 10px;
+  opacity: .75;
   right: 10px;
   float: none;
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
   z-index: 1;
+}
+
+.btn-cornerTR:hover {
+  opacity: 1;
+}
+
+.btn-cornerTR:active {
+  opacity: .5;
 }
 
 .btn-cornerTR.btn-cornerTRSmall {
@@ -563,7 +574,9 @@ h5 {
 .modal-opaque {
   background-color: rgba(25,25,25,.75);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  /*opacity: 0;*/
   top: 50px;
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
 }
 
 .modal-opaque.modal-navBlock {
@@ -1373,6 +1386,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   background-size: cover;
   height: 400px;
   position: relative;
+}
+
+.shadow-inner1-light {
+  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.65);
 }
 
 .shadow-inner1 {

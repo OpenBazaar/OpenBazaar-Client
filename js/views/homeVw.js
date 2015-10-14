@@ -166,6 +166,7 @@ module.exports = Backbone.View.extend({
       self.subRender();
       if(self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
+        self.$el.find('.js-homeMyPage').addClass('show');
       }
     });
   },

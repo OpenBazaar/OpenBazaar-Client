@@ -254,6 +254,7 @@ module.exports = Backbone.View.extend({
         success: function (data) {
           if (data.success === true){
             self.trigger('storeCreated');
+            new Notification('You\'ve added a store to your page!'); //TO DO: We need to localize this
           }else if (data.success === false){
             self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{

@@ -3,7 +3,7 @@
     <div class="btn-cornerTR btn-cornerTROutR btn-flushTop js-closeStoreWizardModal">
       <h2 class="ion-close-round"></h2>
     </div>
-    <div class="modal-hero js-storeWizardHero"
+    <div class="modal-hero js-storeWizardHero shadow-inner1-light"
     <% if(ob.page.profile.header_hash) { %>
     style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.header_hash %>);"
     <% }else{ %>
@@ -37,7 +37,7 @@
               </div>
               <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-3 borderRight custCol-border-secondary">
-                  <label class="fieldItem" for="websiteInput">
+                  <label class="fieldItem" for="aboutInput">
                     <%= polyglot.t('Description') %>
                   </label>
                 </div>

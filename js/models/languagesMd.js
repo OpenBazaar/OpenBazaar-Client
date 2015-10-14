@@ -112,7 +112,7 @@ module.exports = Backbone.Model.extend({
           searchPlaceholder: "Enter handle or search",
           myPage: "My Page",
           customizePage:"Customize Page",
-          sellItem:"Sell Item",
+          sellItem:"Create Listing",
           purchases:"Purchases",
           sales:"Sales",
           cases:"Cases",
