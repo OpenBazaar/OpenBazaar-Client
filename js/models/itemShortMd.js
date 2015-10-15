@@ -17,7 +17,8 @@ module.exports = Backbone.Model.extend({
     ships_to: "",
     GUID: "",
     handle: 0,
-    avatar_hash: ""
+    avatar_hash: "",
+    priceSet: 0, //set in Update Attribute below, so view can listen for it
   },
 
   initialize: function(){

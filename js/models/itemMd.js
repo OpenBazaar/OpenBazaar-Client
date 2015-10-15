@@ -5,8 +5,13 @@ var Backbone = require('backbone'),
 //note: Backbone.Linear looks for Backbone in the window. It's placed there by index.html
 module.exports = window.Backbone.Model.extend({
   defaults: {
-    displayPrice: 0, //set by userPage View
-    vendorBTCPrice: 0, //set by userPage View
+    price: 0, //set below
+    displayPrice: 0, //set below
+    vendorBTCPrice: 0, //set below
+    domesticShipping: 0, //set below
+    displayDomesticShipping: 0, //set below
+    internationalShipping: 0, //set below
+    displayInternationalShipping: 0, //set below
     userCurrencyCode: "", //set by userPage View. This is for editing the product
     userCountry: "", //set by userPage View. This is a country code. This is used for editing.
     ownPage: false, //set by userPage View
@@ -15,6 +20,9 @@ module.exports = window.Backbone.Model.extend({
     imageHashesToUpload: [],
     priceSet: 0, //set in Update Attribute below, so view can listen for it
 
+    //the object below is just a reference for a typical response from the server.
+    //Backbone will only set vendor_offer {} with no contents, because it doesn't recognize
+    //nested values as being new data.
     "vendor_offer": {
       "signature": "",
       "listing": {
@@ -27,6 +35,14 @@ module.exports = window.Backbone.Model.extend({
             "domestic": "3-5 Business Days"
           },
           "shipping_origin": "UNITED_STATES",
+          "flat_fee": {
+              "fiat": {
+                  "price": {
+                    "international": 0,
+                    "domestic": 0
+                  }
+              }
+          },
           "free": true
         },
         "item": {
@@ -118,28 +134,53 @@ module.exports = window.Backbone.Model.extend({
         userCCode = this.get("userCurrencyCode"),
         vendorCCode = this.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code,
         vendorPrice = this.get('vendor_offer').listing.item.price_per_unit.fiat.price,
-        vendorCurrencyInBitcoin = 0,
-        vendorBitCoinPrice = 0,
+        vendorDomesticShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic,
+        vendorInternationalShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international,
+        vendorCurrencyToBitcoinRatio = 0,
+        vendorPriceInBitCoin = 0,
+        vendorDomesticShippingInBitCoin = 0,
+        vendorInternationalShippingInBitCoin = 0,
         vendToUserBTCRatio = 0,
         newAttributes = {};
 
     if(userCCode) {
       getBTPrice(vendorCCode, function(btAve){
-        vendorBitCoinRatio = btAve;
-        vendorCurrencyInBitcoin = btAve;
-        vendorBitCoinPrice = Number((vendorPrice / btAve).toFixed(4));
-        vendToUserBTCRatio = window.currentBitcoin/vendorCurrencyInBitcoin;
-        newAttributes.vendorBTCPrice = vendorBitCoinPrice;
+        vendorCurrencyToBitcoinRatio = btAve;
+        vendorPriceInBitCoin = Number((vendorPrice / btAve).toFixed(4));
+        vendorDomesticShippingInBitCoin = Number((vendorDomesticShipping / btAve.toFixed(4)));
+        vendorInternationalShippingInBitCoin = Number((vendorInternationalShipping / btAve.toFixed(4)));
+        vendToUserBTCRatio = window.currentBitcoin/vendorCurrencyToBitcoinRatio;
+        newAttributes.vendorBTCPrice = vendorPriceInBitCoin;
 
         if(userCCode != 'BTC'){
+          newAttributes.price = (vendorPrice*vendToUserBTCRatio).toFixed(2);
           newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             currency: userCCode
-          }).format(vendorPrice*vendToUserBTCRatio);
+          }).format(newAttributes.price);
+          newAttributes.domesticShipping = (vendorDomesticShippingInBitCoin*vendToUserBTCRatio).toFixed(2);
+          newAttributes.displayDomesticShipping = new Intl.NumberFormat(window.lang, {
+            style: 'currency',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            currency: userCCode
+          }).format(newAttributes.domesticShipping);
+          newAttributes.internationalShipping = (vendorInternationalShippingInBitCoin*vendToUserBTCRatio).toFixed(2);
+          newAttributes.displayInternationalShipping = new Intl.NumberFormat(window.lang, {
+            style: 'currency',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            currency: userCCode
+          }).format(newAttributes.internationalShipping);
         } else {
-          newAttributes.displayPrice = vendorBitCoinPrice + "btc";
+          newAttributes.price = vendorPriceInBitCoin;
+          newAttributes.displayPrice = vendorPriceInBitCoin + "btc";
+          newAttributes.domesticShipping = vendorDomesticShippingInBitCoin;
+          newAttributes.displayDomesticShipping = vendorDomesticShippingInBitCoin + "btc";
+          newAttributes.internationalShipping = vendorInternationalShippingInBitCoin;
+          newAttributes.displayInternationalShipping = vendorInternationalShippingInBitCoin + "btc";
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
