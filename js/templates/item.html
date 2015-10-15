@@ -47,16 +47,18 @@
     <div class="flexContainer flex-border custCol-primary js-shipping js-tabTarg hide">
       <div class="flexRow">
         <div class="rowItem">
-          <p><%= polyglot.t('ShipsFrom') %>: <%= ob.vendor_offer.listing.shipping.shipping_origin %></p>
-          <hr/>
-          <h3><%= polyglot.t('Domestic') %></h3>
-          <p><%= polyglot.t('Shipping') %>: <%= ob.displayDomesticShipping %></p>
-          <p><%= polyglot.t('EstimatedDelivery') %>: <%= ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
-          <hr/>
-          <h3><%= polyglot.t('International') %></h3>
-          <p><%= polyglot.t('Shipping') %>: <%= ob.displayInternationalShipping %></p>
-          <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('international') %>): <%= ob.vendor_offer.listing.shipping.est_delivery.international %></p>
-          <hr/>
+          <% if(ob.vendor_offer.listing.shipping.free == false) { %>
+            <p><%= polyglot.t('ShipsFrom') %>: <%= ob.vendor_offer.listing.shipping.shipping_origin %></p>
+            <hr/>
+            <h3><%= polyglot.t('Domestic') %></h3>
+            <p><%= polyglot.t('Shipping') %>: <%= ob.displayDomesticShipping %></p>
+            <p><%= polyglot.t('EstimatedDelivery') %>: <%= ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
+            <hr/>
+            <h3><%= polyglot.t('International') %></h3>
+            <p><%= polyglot.t('Shipping') %>: <%= ob.displayInternationalShipping %></p>
+            <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('international') %>): <%= ob.vendor_offer.listing.shipping.est_delivery.international %></p>
+            <hr/>
+          <% } %>
           <h3><%= polyglot.t('ReturnsPolicy') %></h3>
           <p><%= ob.vendor_offer.listing.policy.returns %></p>
         </div>
