@@ -43,7 +43,7 @@ module.exports = window.Backbone.Model.extend({
                   }
               }
           },
-          "free": true
+          "free": false
         },
         "item": {
           "category": "None",
@@ -107,19 +107,54 @@ module.exports = window.Backbone.Model.extend({
   parse: function(response) {
     "use strict";
     //when vendor currency code is in bitcoins, the json returned is different. Put the value in the expected place so the templates don't break.
-    if(response.vendor_offer.listing.item.price_per_unit.bitcoin){
-      response.vendor_offer.listing.item.price_per_unit.fiat = {
-        "price": response.vendor_offer.listing.item.price_per_unit.bitcoin,
-        "currency_code": "BTC"
-      };
-      response.vendor_offer.listing.shipping.flat_fee.fiat = {
-        price: {
-          "international": response.vendor_offer.listing.shipping.flat_fee.bitcoin.international,
-          "domestic": response.vendor_offer.listing.shipping.flat_fee.bitcoin.domestic
-        },
-        "currency_code": "BTC"
-      };
-
+    //check to make sure a blank result wasn't returned from the server
+    if(response.vendor_offer){
+      if(response.vendor_offer.listing.item.price_per_unit.bitcoin){
+        response.vendor_offer.listing.item.price_per_unit.fiat = {
+          "price": response.vendor_offer.listing.item.price_per_unit.bitcoin,
+          "currency_code": "BTC"
+        };
+        response.vendor_offer.listing.shipping.flat_fee.fiat = {
+          price: {
+            "international": response.vendor_offer.listing.shipping.flat_fee.bitcoin.international,
+            "domestic": response.vendor_offer.listing.shipping.flat_fee.bitcoin.domestic
+          },
+          "currency_code": "BTC"
+        };
+      }
+      //if the shipping section is not returned it breaks the edit template. Restore it here
+      if(!response.vendor_offer.listing.shipping){
+        response.vendor_offer.listing.shipping = {
+          "shipping_regions": [
+            "UNITED_STATES"
+          ],
+              "est_delivery": {
+            "international": "",
+                "domestic": ""
+          },
+          "shipping_origin": "UNITED_STATES",
+            "flat_fee": {
+              "fiat": {
+                "price": {
+                  "international": 0,
+                  "domestic": 0
+                }
+              }
+            },
+            "free": true
+          }
+        }
+      //if the shipping flat_fee  section is not returned it breaks the edit template. Restore it here
+      if(!response.vendor_offer.listing.shipping.flat_fee){
+        response.vendor_offer.listing.shipping.flat_fee = {
+          "fiat": {
+            "price": {
+              "international": 0,
+              "domestic": 0
+            }
+          }
+        }
+      }
     }
     return response;
   },
@@ -134,14 +169,19 @@ module.exports = window.Backbone.Model.extend({
         userCCode = this.get("userCurrencyCode"),
         vendorCCode = this.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code,
         vendorPrice = this.get('vendor_offer').listing.item.price_per_unit.fiat.price,
-        vendorDomesticShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic,
-        vendorInternationalShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international,
+        vendorDomesticShipping = 0,
+        vendorInternationalShipping = 0,
         vendorCurrencyToBitcoinRatio = 0,
         vendorPriceInBitCoin = 0,
         vendorDomesticShippingInBitCoin = 0,
         vendorInternationalShippingInBitCoin = 0,
         vendToUserBTCRatio = 0,
         newAttributes = {};
+
+    if(this.get('vendor_offer').listing.shipping) {
+      vendorDomesticShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic;
+      vendorInternationalShipping = this.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international;
+    }
 
     if(userCCode) {
       getBTPrice(vendorCCode, function(btAve){
@@ -160,14 +200,14 @@ module.exports = window.Backbone.Model.extend({
             maximumFractionDigits: 2,
             currency: userCCode
           }).format(newAttributes.price);
-          newAttributes.domesticShipping = (vendorDomesticShippingInBitCoin*vendToUserBTCRatio).toFixed(2);
+          newAttributes.domesticShipping = (vendorDomesticShipping*vendToUserBTCRatio).toFixed(2);
           newAttributes.displayDomesticShipping = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
             currency: userCCode
           }).format(newAttributes.domesticShipping);
-          newAttributes.internationalShipping = (vendorInternationalShippingInBitCoin*vendToUserBTCRatio).toFixed(2);
+          newAttributes.internationalShipping = (vendorInternationalShipping*vendToUserBTCRatio).toFixed(2);
           newAttributes.displayInternationalShipping = new Intl.NumberFormat(window.lang, {
             style: 'currency',
             minimumFractionDigits: 2,
