@@ -132,16 +132,19 @@ module.exports = Backbone.View.extend({
       dataType: "json",
       data: formData,
       success: function(data) {
-        var errorModal,
-            imageHash = data.image_hashes[0];
-
-        if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-          self.$el.find('.js-storeWizardHero').css("background-image", "url("+self.model.get('user').server_url+"get_image?hash="+imageHash+")");
-          self.$el.find('#headerInput').val(imageHash);
-        }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+        var imageHash;
+        if (data.success === true) {
+          imageHash = data.image_hashes[0];
+          if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
+            self.$el.find('.js-storeWizardHero').css("background-image", "url("+self.model.get('user').server_url+"get_image?hash="+imageHash+")");
+            self.$el.find('#headerInput').val(imageHash);
+          }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+          }else{
+            self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>No image has returned.</i>");
+          }
         }else if (data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){

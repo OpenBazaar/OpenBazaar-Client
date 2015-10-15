@@ -11,8 +11,8 @@ var loadTemplate = require('../utils/loadTemplate'),
 module.exports = Backbone.View.extend({
 
   events: {
-    'click .js-priceBtn-local': 'priceToLocal',
-    'click .js-priceBtn-btc': 'priceToBTC',
+    //'click .js-priceBtn-local': 'priceToLocal',
+    //'click .js-priceBtn-btc': 'priceToBTC',
     'click #shippingFreeTrue': 'setFreeShipping',
     'click #shippingFreeFalse': 'unsetFreeShipping',
     'change .js-itemImageUpload': 'uploadImage',
@@ -24,7 +24,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self=this;
-    var hashArray = this.model.get('vendor_offer__listing__item__image_hashes');
+    var hashArray = this.model.get('vendor_offer').listing.item.image_hashes;
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server_url')+"get_image?hash="+hash);
@@ -33,7 +33,7 @@ module.exports = Backbone.View.extend({
     this.model.set('combinedImagesArray', this.combinedImagesArray);
 
     //add existing hashes to the list to be uploaded on save
-    var anotherHashArray = __.clone(self.model.get("vendor_offer__listing__item__image_hashes"));
+    var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
 
     this.render();
@@ -61,9 +61,10 @@ module.exports = Backbone.View.extend({
   },
 
   setFormValues: function(){ //TODO: Refactor to a generic enumeration pattern
-    var typeValue = String(this.model.get('vendor_offer__listing__metadata__category')) || "physical good";
-    this.$el.find('input[name=nsfw]').val(String(this.model.get('vendor_offer__listing__item__nsfw')));
-    this.$el.find('input[name=free_shipping]').val(String(this.model.get('vendor_offer__listing__shipping__free')));
+    var typeValue = String(this.model.get('vendor_offer').listing.metadata.category) || "physical good";
+    this.$el.find('input[name=nsfw]').val([String(this.model.get('vendor_offer').listing.item.nsfw)]);
+    this.$el.find('input[name=free_shipping]').val([String(this.model.get('vendor_offer').listing.shipping.free)]);
+    this.$el.find('#inputCondition').val(String(this.model.get('vendor_offer').listing.item.condition));
     this.$el.find('#inputType').val(typeValue);
     //hide or unhide shipping based on product type
     if(typeValue === "physical good") {
@@ -79,7 +80,7 @@ module.exports = Backbone.View.extend({
       shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
     });
 
-    var shipsToValue = this.model.get('vendor_offer__listing__shipping__shipping_regions');
+    var shipsToValue = this.model.get('vendor_offer').listing.shipping.shipping_regions;
     //if shipsToValue is empty, set it to the user's country
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
     shipsTo.val(shipsToValue);
@@ -94,7 +95,7 @@ module.exports = Backbone.View.extend({
     this.$el.find('input[name=title]').focus();
     $('#obContainer').scrollTop(375); // we need to change this to scroll the container div instead of body once the header is fixed
   },
-
+/*
   priceToLocal: function(e){
     var parentRow = $(e.target).closest('.js-inputParent');
     parentRow.find('.js-priceLocal').removeClass('hide');
@@ -113,6 +114,7 @@ module.exports = Backbone.View.extend({
     this.updatePrice('btc', parentRow);
   },
 
+
   updatePrice: function(priceType, inputParent){
     if(priceType === "local"){
       inputParent.find('.js-priceLocal').val(inputParent.find('.js-priceBtc').val() * window.currentBitcoin);
@@ -120,7 +122,7 @@ module.exports = Backbone.View.extend({
       inputParent.find('.js-priceBtc').val(inputParent.find('.js-priceLocal').val() / window.currentBitcoin);
     }
   },
-
+    */
   setFreeShipping: function(){
     this.$el.find('.js-shippingPriceRow').addClass('hide');
     this.$el.find('#shippingPriceLocalLocal, #shippingPriceLocalBtc, #shippingPriceInternationalLocal, #shippingPriceInternationalBtc')
@@ -267,6 +269,11 @@ module.exports = Backbone.View.extend({
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
     this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
+    //convert number field to string field
+    this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
+    this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
+    this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
+    /*
     if(cCode === "BTC"){
       this.$el.find('#inputPrice').val(this.$el.find('.js-priceBtc').val());
       this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalBtc').val());
@@ -276,6 +283,7 @@ module.exports = Backbone.View.extend({
       this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
       this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
     }
+    */
 
     formData = new FormData(this.$el.find('#contractForm')[0]);
     __.each(this.model.get('imageHashesToUpload'), function(imHash){

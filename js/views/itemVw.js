@@ -23,6 +23,7 @@ module.exports = Backbone.View.extend({
         //el must be passed in from the parent view
         loadTemplate('./js/templates/item.html', function(loadedTemplate) {
             self.$el.html(loadedTemplate(self.model.toJSON()));
+            console.log(self.model.toJSON());
         });
         return this;
     },

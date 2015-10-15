@@ -5,7 +5,7 @@ Backbone.$ = $;
 
 /*eslint no-use-before-define:0*/
 module.exports = function (currency, callback) {
-
+console.log(currency);
     //some APIs require currency to be upper case
     currency = currency.toUpperCase();
 
