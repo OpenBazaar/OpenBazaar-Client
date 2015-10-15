@@ -1622,6 +1622,21 @@ input[type="checkbox"].fieldItem:checked + label:before {
   display: none;
 }
 
+#ov1 .invisible {
+  visibility: hidden;
+}
+
+#ov1 .visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 #ov1 .show {
   display: block;
 }
