@@ -510,10 +510,12 @@ module.exports = Backbone.View.extend({
         var colorKey = $(this).attr('id');
         $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
       },
-      onSubmit: function(hsb,hex,rgb,el) {
+      onSubmit: function(hsb, hex, rgb, el, visible) {
         self.setCustomColor(hex, $(el).attr('id'));
         $(el).closest('.positionWrapper').find('.js-customizeColor').css('background-color', '#' + hex);
-        $(el).colpickHide();
+        if(visible) {
+          $(el).colpickHide();
+        }
         $('.labelWrap').removeClass('fadeIn');
       },
       onHide: function(){
@@ -598,7 +600,7 @@ module.exports = Backbone.View.extend({
             var profileColor = pageData[profileKey].slice(1);
             profileColor = is.hexColor(profileColor) ? parseInt(profileColor, 16) : profileColor;
             formData.append(profileKey, profileColor);
-          } else {
+          } else if(profileKey == "header") {
             formData.append(profileKey, String(pageData[profileKey]));
           }
         }
