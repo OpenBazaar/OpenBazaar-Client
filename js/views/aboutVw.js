@@ -10,8 +10,7 @@ module.exports = Backbone.View.extend({
   className: "aboutView",
 
   initialize: function(){
-    this.model = new Backbone.Model();
-    this.about = new aboutModel();
+    this.model = new aboutModel();
     this.render();
     console.log("About view created.");
   },

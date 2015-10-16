@@ -10,8 +10,7 @@ module.exports = Backbone.View.extend({
   className: "donateView",
 
   initialize: function(){
-    this.model = new Backbone.Model();
-    this.donate = new donateModel();
+    this.model = new donateModel();
     this.render();
     console.log("Donate view created.");     // Test statement to verify creation
   },

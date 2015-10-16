@@ -28,7 +28,6 @@ module.exports = Backbone.Router.extend({
     "notifications": "notifications",
     "settings": "settings",
     "about": "about",
-    "donate": "donate",
     "support": "donate"
   },
 
@@ -78,13 +77,11 @@ module.exports = Backbone.Router.extend({
 
   about: function(){
     this.newView(new aboutView());
-    $('body').addClass("aboutView");
     console.log("about");
   },
   
   support: function(){
     this.newView(new donateView());
-    $('body').addClass("donateView");
     console.log("support");
   }
 
