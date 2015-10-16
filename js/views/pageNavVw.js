@@ -229,11 +229,12 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
-    $(e.target).closest('.modal').addClass('hide');
+    $(e.target).closest('.modal').addClass('hide').fadeTo(0,0);
   },
 
   navAdminPanel: function(){
     this.$el.find('.js-adminModal').removeClass('hide');
+    this.$el.find('.js-adminModal').fadeTo(0,1);
     this.adminPanel.updatePage();
   },
 

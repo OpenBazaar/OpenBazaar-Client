@@ -16,6 +16,7 @@ module.exports = Backbone.View.extend({
     'change .js-adminAvatarImage': 'uploadAvatar',
     'click .js-adminServer': 'setServer',
     'click .js-adminUpdateProfile': 'updateProfile',
+    'click .js-adminUpdateSettings': 'updateSettings',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -73,6 +74,7 @@ module.exports = Backbone.View.extend({
       success: function(model){
         var modelJSON = model.toJSON();
         self.$el.find('#adminServerInput').val(modelJSON.server_url);
+        self.$el.find('#adminCurrencyInput').val(modelJSON.currency_code);
       },
       error: function(model, response){
         console.log("User Settings fetch failed: " + response.statusText);
@@ -81,7 +83,7 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
-    //$(e.target).closest('.js-adminModal').addClass('hide');
+    $(e.target).closest('.js-adminModal').addClass('hide').fadeTo(0,0);
     Backbone.history.loadUrl();
   },
 
@@ -176,6 +178,31 @@ module.exports = Backbone.View.extend({
 
     if(targetForm[0].checkValidity()){
       this.postData(formData, "profile",
+          function (data) {
+            self.updatePage();
+          },
+          function (data) {
+            alert("Failed. " + data.reason);
+          }
+      );
+    }
+  },
+
+  updateSettings: function() {
+    "use strict";
+    var self = this,
+        targetForm = this.$el.find('#adminPanelSettings'),
+        formData = new FormData(targetForm[0]),
+        existingKeys = {};
+
+    targetForm.find('input').each(function(){
+      existingKeys[$(this).attr('name')] = $(this).val();
+    });
+
+    formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
+
+    if(targetForm[0].checkValidity()){
+      this.postData(formData, "settings",
           function (data) {
             self.updatePage();
           },
