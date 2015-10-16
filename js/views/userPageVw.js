@@ -15,6 +15,89 @@ var __ = require('underscore'),
     itemEditVw = require('./itemEditVw'),
     storeWizardVw = require('./storeWizardVw');
 
+//create a default item because a new itemModel will be created with only flat attributes
+var defaultItem = {
+  "vendor_offer": {
+    "signature": "",
+    "listing": {
+      "shipping": {
+        "shipping_regions": [
+          "UNITED_STATES"
+        ],
+        "est_delivery": {
+          "international": "N/A",
+          "domestic": "3-5 Business Days"
+        },
+        "shipping_origin": "UNITED_STATES",
+        "flat_fee": {
+          "fiat": {
+            "price": {
+              "international": 0,
+              "domestic": 0
+            }
+          }
+        },
+        "free": false
+      },
+      "item": {
+        "category": "None",
+        "sku": "0",
+        "description": "None",
+        "price_per_unit": {
+          "fiat": {
+            "price": "",
+            "currency_code": "usd"
+          }
+        },
+        "title": "New Item",
+        "process_time": "0",
+        "image_hashes": [],
+        "nsfw": false,
+        "keywords": [],
+        "condition": "New"
+      },
+      "moderators": [
+        {
+          "pubkeys": {
+            "encryption": {
+              "key": "",
+              "signature": ""
+            },
+            "signing": {
+              "key": "",
+              "signature": ""
+            },
+            "bitcoin": {
+              "key": "",
+              "signature": ""
+            }
+          },
+          "guid": "",
+          "blockchain_id": ""
+        }
+      ],
+      "policy": {
+        "terms_conditions": "None",
+        "returns": "None"
+      },
+      "id": {
+        "pubkeys": {
+          "guid": "",
+          "bitcoin": ""
+        },
+        "guid": "",
+        "blockchain_id": ""
+      },
+      "metadata": {
+        "category": "",
+        "version": "",
+        "category_sub": "",
+        "expiry": ""
+      }
+    }
+  }
+}
+
 module.exports = Backbone.View.extend({
 
   classname: "userView",
@@ -329,12 +412,12 @@ module.exports = Backbone.View.extend({
       //if editing existing product, clone the model
       this.itemEdit = model.clone();
     } else {
-      this.itemEdit = new itemModel({
-        server_url: self.options.userModel.get('server_url'),
-        userCountry: self.options.userModel.get('country'),
-        userCurrencyCode: self.options.userModel.get('currency_code'),
-        vendor_offer: {'listing': {'item': {'price_per_unit': {'fiat': {'currency_code': self.options.userModel.get('currency_code')}}},'id': {'pubkeys__guid': self.model.get('page').profile.guid }}},
-      });
+      defaultItem.server_url =self.options.userModel.get('server_url');
+      defaultItem.userCountry = self.options.userModel.get('country');
+      defaultItem.userCurrencyCode = self.options.userModel.get('currency_code');
+      defaultItem.vendor_offer.listing.item.price_per_unit.fiat.currency_code =self.options.userModel.get('currency_code');
+      defaultItem.vendor_offer.listing.id.pubkeys.guid = self.model.get('page').profile.guid;
+      this.itemEdit = new itemModel(defaultItem);
     }
     //this.itemEdit.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //add the user information

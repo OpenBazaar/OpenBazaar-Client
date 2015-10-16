@@ -30,11 +30,11 @@ module.exports = Backbone.View.extend({
 
   renderContract: function(item){
     var itemShort = new itemShortView({
-      model: item
+      model: item,
+      el: this.$el
     });
     this.subViews.push(itemShort);
-    //$el must be passed in by the constructor
-    this.$el.append(itemShort.render().el);
+    //this.$el.append(itemShort.render().el);
   },
 
   close: function(){
