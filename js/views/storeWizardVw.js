@@ -108,10 +108,12 @@ module.exports = Backbone.View.extend({
           //override annoying placement function TODO: fix in source code
           $(el).css({left: 0, top: 0});
         },
-        onSubmit: function (hsb, hex, rgb, el) {
+        onSubmit: function (hsb, hex, rgb, el, visible) {
           self.setCustomColor(hex, $(el).attr('id'));
           $(el).closest('.js-customizeColorWrapper').find('.js-customizeColorLabel').css('background-color', '#' + hex);
-          $(el).colpickHide();
+          if(visible) {
+            $(el).colpickHide();
+          }
         },
         onHide: function () {
         }
