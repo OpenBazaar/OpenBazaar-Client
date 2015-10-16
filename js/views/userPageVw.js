@@ -507,7 +507,7 @@ module.exports = Backbone.View.extend({
             var profileColor = pageData[profileKey].slice(1);
             profileColor = is.hexColor(profileColor) ? parseInt(profileColor, 16) : profileColor;
             formData.append(profileKey, profileColor);
-          } else {
+          } else if(profileKey == "header") {
             formData.append(profileKey, String(pageData[profileKey]));
           }
         }
