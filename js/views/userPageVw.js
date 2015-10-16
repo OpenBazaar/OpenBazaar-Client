@@ -4,7 +4,7 @@ var __ = require('underscore'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
-    userProfileModel = require('../models/userProfileMd'),
+    userProfileModel = require('../models/userProfile'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
     itemModel = require('../models/itemMd'),
@@ -14,89 +14,6 @@ var __ = require('underscore'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
     storeWizardVw = require('./storeWizardVw');
-
-//create a default item because a new itemModel will be created with only flat attributes
-var defaultItem = {
-  "vendor_offer": {
-    "signature": "",
-    "listing": {
-      "shipping": {
-        "shipping_regions": [
-          "UNITED_STATES"
-        ],
-        "est_delivery": {
-          "international": "N/A",
-          "domestic": "3-5 Business Days"
-        },
-        "shipping_origin": "UNITED_STATES",
-        "flat_fee": {
-          "fiat": {
-            "price": {
-              "international": 0,
-              "domestic": 0
-            }
-          }
-        },
-        "free": false
-      },
-      "item": {
-        "category": "None",
-        "sku": "0",
-        "description": "None",
-        "price_per_unit": {
-          "fiat": {
-            "price": "",
-            "currency_code": "usd"
-          }
-        },
-        "title": "New Item",
-        "process_time": "0",
-        "image_hashes": [],
-        "nsfw": false,
-        "keywords": [],
-        "condition": "New"
-      },
-      "moderators": [
-        {
-          "pubkeys": {
-            "encryption": {
-              "key": "",
-              "signature": ""
-            },
-            "signing": {
-              "key": "",
-              "signature": ""
-            },
-            "bitcoin": {
-              "key": "",
-              "signature": ""
-            }
-          },
-          "guid": "",
-          "blockchain_id": ""
-        }
-      ],
-      "policy": {
-        "terms_conditions": "None",
-        "returns": "None"
-      },
-      "id": {
-        "pubkeys": {
-          "guid": "",
-          "bitcoin": ""
-        },
-        "guid": "",
-        "blockchain_id": ""
-      },
-      "metadata": {
-        "category": "",
-        "version": "",
-        "category_sub": "",
-        "expiry": ""
-      }
-    }
-  }
-}
 
 module.exports = Backbone.View.extend({
 
@@ -135,13 +52,13 @@ module.exports = Backbone.View.extend({
     this.model = new Backbone.Model();
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
-    this.userProfile.urlRoot = options.userModel.get('server_url') + "profile";
+    this.userProfile.urlRoot = options.userModel.get('server') + "profile";
     this.listings = new listingsModel();
-    this.listings.urlRoot = options.userModel.get('server_url') + "get_listings";
+    this.listings.urlRoot = options.userModel.get('server') + "get_listings";
     this.followers = new usersModel();
-    this.followers.urlRoot = options.userModel.get('server_url') + "get_followers";
+    this.followers.urlRoot = options.userModel.get('server') + "get_followers";
     this.following = new usersModel();
-    this.following.urlRoot = options.userModel.get('server_url') + "get_following";
+    this.following.urlRoot = options.userModel.get('server') + "get_following";
     this.lastTab = "about"; //track the last tab clicked
     this.pageID = "";
     //flag to hold state when customizing
@@ -156,20 +73,22 @@ module.exports = Backbone.View.extend({
       }
     };
 
+    //if no userID is passed in, or it matches the user's ID, then this is their page
+    //sometimes it can be set to the string 'null', check for that too
+    if(!options.userID || options.userID == options.userModel.get('guid') || options.userID == 'null') {
+      this.pageID = options.userModel.get('guid');
+      this.options.ownPage = true;
+    } else {
+      this.pageID = options.userID;
+      this.options.ownPage = false;
+    }
+    this.options.ownPage = true;
+
+
     this.userProfile.fetch({
       data: $.param({'id': this.pageID}),
       success: function(model){
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        //if no userID is passed in, or it matches the user's ID, then this is their page
-        //sometimes it can be set to the string 'null', check for that too
-        if(!options.userID || options.userID == self.model.get('page').profile.guid || options.userID == 'null') {
-          self.pageID = self.model.get('page').profile.guid;
-          self.options.ownPage = true;
-        } else {
-          self.pageID = options.userID;
-          self.options.ownPage = false;
-        }
-        self.model.set({ownPage: self.options.ownPage});
+        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON(), ownPage: self.options.ownPage});
         self.render();
       },
       error: function(model, response){
@@ -194,12 +113,7 @@ module.exports = Backbone.View.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.options.state, self.options.itemHash);
-      self.$el.find('.js-externalLink').on('click', function(e){
-        e.preventDefault();
-        require("shell").openExternal($(this).attr('href'));
-      })
     });
-    self.errorModal = $('.js-messageModal');
     return this;
   },
 
@@ -265,7 +179,7 @@ module.exports = Backbone.View.extend({
     //hide all the state controls
     this.$el.find('.js-userPageControls, .js-itemButtons, #customizeControls, .js-itemCustomizationButtons, .js-pageButtons').addClass('hide');
     //unhide the ones that are needed
-    if(this.options.ownPage == true) {
+    if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
@@ -305,7 +219,7 @@ module.exports = Backbone.View.extend({
       this.listings.fetch({
         data: function(){
           //don't send the guid if this is the user's own page
-          if(this.options.ownPage != true) {
+          if(this.options.ownPage == true) {
             return $.param({'guid': self.pageID});
           }
         },
@@ -341,8 +255,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     __.each(model, function (arrayItem) {
-      arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
-      arrayItem.server_url = self.options.userModel.get('server_url');
+      arrayItem.userCurrencyCode = self.options.userModel.get('currencyCode');
+      arrayItem.server = self.options.userModel.get('server');
       arrayItem.showAvatar = false;
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
@@ -368,9 +282,9 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.item = new itemModel({
-      userCurrencyCode: self.options.userModel.get('currency_code'),
+      userCurrencyCode: self.options.userModel.get('currencyCode'),
       userCountry: self.options.userModel.get('country'),
-      server_url: self.options.userModel.get('server_url'),
+      server: self.options.userModel.get('server'),
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,
       handle: self.model.get('page').profile.handle,
@@ -379,7 +293,7 @@ module.exports = Backbone.View.extend({
       itemHash: hash
         //id: hash
     });
-    this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
+    this.item.urlRoot = this.options.userModel.get('server')+"contracts";
     //remove old item before rendering
     if(this.itemView){
       this.itemView.undelegateEvents();
@@ -411,14 +325,15 @@ module.exports = Backbone.View.extend({
       //if editing existing product, clone the model
       this.itemEdit = model.clone();
     } else {
-      defaultItem.server_url =self.options.userModel.get('server_url');
-      defaultItem.userCountry = self.options.userModel.get('country');
-      defaultItem.userCurrencyCode = self.options.userModel.get('currency_code');
-      defaultItem.vendor_offer.listing.item.price_per_unit.fiat.currency_code =self.options.userModel.get('currency_code');
-      defaultItem.vendor_offer.listing.id.pubkeys.guid = self.model.get('page').profile.guid;
-      this.itemEdit = new itemModel(defaultItem);
+      this.itemEdit = new itemModel({
+        server: self.options.userModel.get('server'),
+        userCountry: self.options.userModel.get('country'),
+        userCurrencyCode: self.options.userModel.get('currencyCode'),
+        vendor_offer__listing__item__price_per_unit__fiat__currency_code: self.options.userModel.get('currencyCode'),
+        vendor_offer__listing__id__pubkeys__guid: self.model.get('page').profile.guid
+      });
     }
-    //this.itemEdit.urlRoot = this.options.userModel.get('server_url')+"contracts";
+    //this.itemEdit.urlRoot = this.options.userModel.get('server')+"contracts";
     //add the user information
     //this.itemEdit.set({user: self.options.userModel.toJSON()});
     //unbind any old view
@@ -531,43 +446,35 @@ module.exports = Backbone.View.extend({
     this.setCustomStyles();
   },
 
-  showErrorModal: function(errorTitle, errorMessage) {
-    "use strict";
-    this.errorModal.removeClass('hide');
-    this.errorModal.find('.js-messageModal-title').text(errorTitle);
-    this.errorModal.find('.js-messageModal-message').html(errorMessage);
-  },
-
   uploadUserPageImage: function() {
     "use strict";
     var self = this;
     var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
-    var server_url = self.options.userModel.get('server_url');
+    var server = self.options.userModel.get('server');
     $.ajax({
       type: "POST",
-      url: server_url + "upload_image",
+      url: server + "upload_image",
       contentType: false,
       processData: false,
       data: formData,
-      dataType: "json",
       success: function(data) {
-        var errorModal = $('.js-messageModal'),
-            imageHash,
-            tempPage;
-        if(data.success == true){
-          imageHash = data.image_hashes[0];
-          if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
-            tempPage  =  __.clone(self.model.get('page'));
-            tempPage.profile.header = imageHash;
-            self.model.set('page', tempPage);
-            self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
-          } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
-          } else {
-            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
-          }
-        } else if (data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        var errorModal = $('.js-messageModal');
+        data = JSON.parse(data);
+        var imageHash = data.image_hashes[0];
+        if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+          var tempPage  =  __.clone(self.model.get('page'));
+          tempPage.profile.header = imageHash;
+          self.model.set('page', tempPage);
+          self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server + "get_image?hash=" + imageHash + ')');
+        }else if (data.success === false){
+          errorModal.removeClass('hide');
+            //TODO: Extract these lines to a more generic showModal-type function
+          errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+          errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
+          errorModal.removeClass('hide');
+          errorModal.find('.js-messageModal-title').text("Changes Could Not Be Saved");
+          errorModal.find('.js-messageModal-message').html("Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -607,7 +514,7 @@ module.exports = Backbone.View.extend({
 
     $.ajax({
       type: "POST",
-      url: self.model.get('user').server_url + "profile",
+      url: self.model.get('user').server + "profile",
       contentType: false,
       processData: false,
       data: formData,
@@ -618,8 +525,6 @@ module.exports = Backbone.View.extend({
           self.setState(self.lastTab);
         }else if(data.success === false){
           console.log("failed");
-          self.showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
-
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -685,7 +590,7 @@ module.exports = Backbone.View.extend({
 
     $.ajax({
       type: "DELETE",
-      url: self.item.get('server_url') + "contracts/?id="+ self.item.get('id'),
+      url: self.item.get('server') + "contracts/?id="+ self.item.get('id'),
       success: function() {
         //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
         self.item.trigger('destroy', self.item);
@@ -721,7 +626,7 @@ module.exports = Backbone.View.extend({
     var currentState = this.lastTab || "about";
     this.storeWizardView.closeWizard();
     //recreate the entire page with the new data
-    Backbone.history.loadUrl();
+    Backbone.history.navigate('#userPage/'+this.userID+'/'+currentState, {trigger: true});
   },
 
 

@@ -1,25 +1,25 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    aboutModel = require('../models/aboutMd'), 
+    donateModel = require('../models/donateMd'),    
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
-  className: "aboutView",
+  className: "donateView",
 
   initialize: function(){
     this.model = new Backbone.Model();
-    this.about = new aboutModel();
+    this.donate = new donateModel();
     this.render();
-    console.log("About view created.");
+    console.log("Donate view created.");     // Test statement to verify creation
   },
 
   render: function(){
     var self = this;
-
-    loadTemplate('./js/templates/about.html', function(loadedTemplate) {
+    
+    loadTemplate('./js/templates/donate.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;

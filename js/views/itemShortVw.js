@@ -13,14 +13,14 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(){
-    this.listenTo(this.model, 'change:priceSet', this.render);
+    this.listenTo(this.model, 'change', this.render);
     this.userID = this.model.get('userID');
   },
 
   render: function(){
     var self = this;
     loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
-      self.$el.append(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;
   },
