@@ -1,7 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    aboutModel = require('../models/aboutMd'), 
+    aboutModel = require('../models/aboutMd'),
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
 
@@ -17,7 +17,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-
+    $('#content').html(this.$el);
     loadTemplate('./js/templates/about.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
