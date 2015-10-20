@@ -1,7 +1,7 @@
 <div class="mainContainer custCol-background marginTop50">
   <div class="banner-large shadow-inner1 js-userPageBanner"
   <% if(ob.page.profile.header_hash) { %>
-  style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.header_hash %>);"
+  style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.header_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
@@ -9,7 +9,7 @@
       <div class="rowItem" style="padding: 0 20px">
         <div class="thumbnail thumbnail-large pull-left"
         <% if(ob.page.profile.avatar_hash) { %>
-        style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
+        style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
         <% }else{ %>
         style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
@@ -31,7 +31,7 @@
   <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
   <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
   <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
-  <% if(ob.ownPage == true) { %>
+  <% if(ob.ownPage === true) { %>
   <div class="navEnd pad15">
     <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up50">
       <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
@@ -76,7 +76,7 @@
               <div class="textOpacity75"><%= polyglot.t('Website') %></div>
               <div>
                 <% if(ob.page.profile.website) { %>
-                <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a>
+                <%= ob.page.profile.website %>
                 <%}else{%>
                 not provided
                 <%}%>
@@ -100,17 +100,9 @@
               <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
-                  <div>
-                    <%= ob.page.profile.social_accounts.facebook.username %>
-                  </div>
-                  <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.proof) { %>
-                    <h3>Proof</h3>
-                    <div>
-                      <a href="<%= ob.page.profile.social_accounts.facebook.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.facebook.proof %></a>
-                    </div>
-                  <%}%>
+                <%= ob.page.profile.social_accounts.facebook.username %>
                 <%}else{%>
-                  not provided
+                not provided
                 <%}%>
               </div>
             </div>
@@ -120,33 +112,9 @@
               <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
-                  <%= ob.page.profile.social_accounts.instagram.username %>
-                  <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.proof) { %>
-                    <h3>Proof</h3>
-                    <div>
-                      <a href="<%= ob.page.profile.social_accounts.instagram.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.instagram.proof %></a>
-                    </div>
-                  <%}%>
+                <%= ob.page.profile.social_accounts.instagram.username %>
                 <%}else{%>
-                  not provided
-                <%}%>
-              </div>
-            </div>
-          </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="rowItem">
-              <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
-              <div>
-                <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
-                  <a href="http://twitter.com/<%= ob.page.profile.social_accounts.twitter.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.twitter.username %></a>
-                  <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.proof) { %>
-                    <h3>Proof</h3>
-                    <div>
-                      <a href="<%= ob.page.profile.social_accounts.twitter.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.twitter.proof %></a>
-                    </div>
-                  <%}%>
-                <%}else{%>
-                  not provided
+                not provided
                 <%}%>
               </div>
             </div>
@@ -156,15 +124,9 @@
               <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
               <div>
                 <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
-                  <%= ob.page.profile.social_accounts.snapchat.username %>
-                    <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.proof) { %>
-                      <h3>Proof</h3>
-                      <div>
-                        <a href="<%= ob.page.profile.social_accounts.snapchat.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.snapchat.proof %></a>
-                      </div>
-                    <%}%>
+                <%= ob.page.profile.social_accounts.snapchat.username %>
                 <%}else{%>
-                  not provided
+                not provided
                 <%}%>
               </div>
             </div>

@@ -4,7 +4,9 @@ var __ = require('underscore'),
 Backbone.$ = $;
 
 var homeView = require('./views/homeVw'),
-    userPageView = require('./views/userPageVw');
+    userPageView = require('./views/userPageVw'),
+    aboutView = require('./views/aboutVw');
+    donateView = require('./views/donateVw');
 
 module.exports = Backbone.Router.extend({
 
@@ -26,14 +28,13 @@ module.exports = Backbone.Router.extend({
     "notifications": "notifications",
     "settings": "settings",
     "about": "about",
-    "support": "support"
+    "support": "donate"
   },
 
   newView: function(view){
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     $('body').removeClass("userPage");//add other body style classes if they are created
-    $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
   },
 
   home: function(){
@@ -75,10 +76,12 @@ module.exports = Backbone.Router.extend({
   },
 
   about: function(){
+    this.newView(new aboutView());
     console.log("about");
   },
-
-  support: function(){
+  
+  donate: function(){
+    this.newView(new donateView());
     console.log("support");
   }
 

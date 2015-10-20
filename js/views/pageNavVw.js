@@ -7,7 +7,6 @@ var __ = require('underscore'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
     languageListView = require('../views/languageListVw'),
-    adminPanelView = require('../views/adminPanelVw'),
     remote = require('remote');
 
 module.exports = Backbone.View.extend({
@@ -21,7 +20,6 @@ module.exports = Backbone.View.extend({
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
     'click .js-navProfile': 'navProfileClick',
-    'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-currencySelect': 'currencySelect',
@@ -46,43 +44,41 @@ module.exports = Backbone.View.extend({
       window.polyglot = new Polyglot({locale: newLang});
       window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
       this.render();
-      //refresh the current page
-      Backbone.history.loadUrl();
     });
 
     this.render();
   },
 
-  initAccordion: function(targ){
+  initAccordian: function(targ){
     var acc = $(targ);
     var accWidth = acc.width();
     var accHeight = acc.height();
-    var accChildren = acc.find('.accordion-child');
+    var accChildren = acc.find('.accordian-child');
     var accNum = accChildren.length;
-    var accWin = acc.find('.accordion-window');
+    var accWin = acc.find('.accordian-window');
 
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
-    acc.find('.js-accordionNext').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
+    acc.find('.js-accordianNext').on('click', function(){
+      var oldPos = accWin.css('left').replace("px",""); //TODO: Fix implicit casting to Number
       if(oldPos > (accWidth * accNum * -1 + accWidth)){
         accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) - accWidth;
+          return parseInt(accWin.css('left').replace("px","")) - accWidth; //TODO: Change parseInt to Number to avoid radix
         });
       }
       // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+      $(this).closest('.accordian-child').next('.accordian-child').find('.search').focus();
     });
-    acc.find('.js-accordionPrev').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
+    acc.find('.js-accordianPrev').on('click', function(){
+      var oldPos = accWin.css('left').replace("px","");  //TODO: Fix implicit casting to Number
       if(oldPos < (0)){
         accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) + accWidth;
+          return parseInt(accWin.css('left').replace("px","")) + accWidth; //TODO: Change parseInt to Number to avoid radix
         });
       }
     });
     //set up filterable lists.
-    //TODO: this is terrible, change to run when an event is emmitted from the subviews marking them as done rendering
+    //TODO: this is terrible, redo so it runs when all subviews are done rendering
     setTimeout(function(){
       var List = window.List;
       var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
@@ -101,19 +97,13 @@ module.exports = Backbone.View.extend({
     var self = this;
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
-      self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
-      self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-      self.subViews.push(this.countryList);
-      self.subViews.push(this.currencyList);
-      self.subViews.push(this.languageList);
-      self.initAccordion('.js-profileAccordion');
+      var countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
+      var currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currencyCode')});
+      var languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
+      self.initAccordian('.js-profileAccordian');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
       }
-      //add the admin panel
-      self.adminPanel = new adminPanelView({model: self.model});
-      self.subViews.push(self.adminPanel);
     });
     return this;
   },
@@ -135,6 +125,7 @@ module.exports = Backbone.View.extend({
   },
 
   navCloseClick: function(){
+    console.log("Nav Close Clicked");
     var win = remote.getCurrentWindow();
     var process = remote.process;
     if (process.platform != 'darwin') {
@@ -145,11 +136,13 @@ module.exports = Backbone.View.extend({
   },
 
   navMinClick: function(){
+    console.log("Nav Min Clicked");
     var win = remote.getCurrentWindow();
     win.minimize();
   },
 
   navMaxClick: function(){
+    console.log("Nav Max Clicked");
     var win = remote.getCurrentWindow();
     win.maximize();
   },
@@ -172,12 +165,12 @@ module.exports = Backbone.View.extend({
 
   currencySelect: function(e){
     var targ = $(e.currentTarget); //TODO: Rename variables to be more readable
-    //var crcy = targ.attr('data-name');
+    var crcy = targ.attr('data-name');
     var ccode = targ.attr('data-code');
     $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
     //this.model.set('currency', crcy);
-    this.model.set('currency_code', ccode);
+    this.model.set('currencyCode', ccode);
   },
 
   languageSelect: function(e){
@@ -193,7 +186,7 @@ module.exports = Backbone.View.extend({
     var tz = inpt.attr('id');
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
-    this.model.set('time_zone', tz);
+    this.model.set('timeZone', tz);
   },
 
   newHandle: function(e){
@@ -217,7 +210,7 @@ module.exports = Backbone.View.extend({
     var reader = new FileReader();
     reader.onload = function (e) {
       self.$el.find('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
-      //self.model.set('tempAvatar', e.target.result);
+      self.model.set('tempAvatar', e.target.result);
       //TODO: add canvas resizing here
     };
     reader.readAsDataURL($(e.target)[0].files[0]);
@@ -230,23 +223,6 @@ module.exports = Backbone.View.extend({
 
   closeModal: function(e){
     $(e.target).closest('.modal').addClass('hide');
-  },
-
-  navAdminPanel: function(){
-    this.$el.find('.js-adminModal').removeClass('hide');
-    this.adminPanel.updatePage();
-  },
-
-  close: function(){
-    "use strict";
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.remove();
-      }
-    });
-    this.remove();
   }
 
 });
