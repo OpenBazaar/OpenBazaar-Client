@@ -841,7 +841,7 @@ input[type="text"].txtField-bar {
   line-height: 47px;
   margin-top: 3px;
   opacity: .50;
-  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage .btn.btn-bar {
@@ -1531,6 +1531,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 90px;
   width: 40px;
   z-index: 1;
+}
+
+#customizeControls .btn-square {
+  box-shadow: 0px 1px 2px #898989;
+  margin-bottom: 0;
+  width: 40px;
+  height: 40px;
+  border: solid 2px #fff;
 }
 
 .editItemImageHolder {
