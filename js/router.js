@@ -33,6 +33,7 @@ module.exports = Backbone.Router.extend({
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     $('body').removeClass("userPage");//add other body style classes if they are created
+    $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
   },
 
   home: function(){

@@ -17,34 +17,46 @@ module.exports = Backbone.Model.extend({
     ships_to: "",
     GUID: "",
     handle: 0,
-    avatar_hash: ""
+    avatar_hash: "",
+    priceSet: 0, //set in Update Attribute below, so view can listen for it
   },
 
   initialize: function(){
     this.updateAttributes();
-    this.on('change', this.updateAttributes, this);
+    //this.on('change', this.updateAttributes, this);
   },
 
   updateAttributes: function(){
-    var self = this;
-    if(this.get("userCurrencyCode")) {
-      var vendorCCode = (this.get('currency_code')).toUpperCase();
-      var vendorBitCoinRatio = 0;
-      var vendorBitCoinPrice = 0;
-      if (vendorCCode !== "BTC") {
-        getBTPrice(vendorCCode, function(btAve){
-          vendorBitCoinRatio = btAve;
-          vendorBitCoinPrice = Number((self.get("price") / btAve).toFixed(4));
-          var vendToUserBTCRatio = window.currentBitcoin/vendorBitCoinRatio;
-          var newAttributes = {};
-          newAttributes.vendorBTCPrice = vendorBitCoinPrice;
-          newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {style: 'currency', currency: self.get("userCurrencyCode")}).format(self.get("price") * vendToUserBTCRatio);
-          self.set(newAttributes);
-        });
-      }else{
-        vendorBitCoinRatio = 1;
-        vendorBitCoinPrice = Number((self.get("price")));
-      }
+    var self = this,
+        userCCode = this.get("userCurrencyCode"),
+        vendorCCode = (this.get('currency_code')).toUpperCase(),
+        vendorPrice = self.get("price"),
+        vendorCurrencyInBitcoin = 0,
+        vendorBitCoinPrice = 0,
+        vendToUserBTCRatio = 0,
+        newAttributes = {};
+
+    if(userCCode) {
+      getBTPrice(vendorCCode, function(btAve){
+        vendorCurrencyInBitcoin = btAve;
+        vendorBitCoinPrice = Number((vendorPrice / btAve).toFixed(4));
+        vendToUserBTCRatio = window.currentBitcoin/vendorCurrencyInBitcoin;
+        newAttributes.vendorBTCPrice = vendorBitCoinPrice;
+
+        if(userCCode != 'BTC'){
+          newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
+            style: 'currency',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            currency: userCCode
+          }).format(vendorPrice*vendToUserBTCRatio);
+        } else {
+          newAttributes.displayPrice = vendorBitCoinPrice + "btc";
+        }
+        //set to random so a change event is always fired
+        newAttributes.priceSet = Math.random();
+        self.set(newAttributes);
+      });
     }else{
       this.set({displayPrice: "Price Unavailable"});
     }
