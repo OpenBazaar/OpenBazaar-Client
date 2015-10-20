@@ -80,7 +80,7 @@ module.exports = Backbone.Router.extend({
     console.log("about");
   },
   
-  support: function(){
+  donate: function(){
     this.newView(new donateView());
     console.log("support");
   }

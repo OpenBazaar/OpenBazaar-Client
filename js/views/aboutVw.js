@@ -17,11 +17,15 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-
+    $('#content').html(this.$el);
     loadTemplate('./js/templates/about.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;
+  },
+
+  close: function(){
+    this.remove();
   }
 
 });
