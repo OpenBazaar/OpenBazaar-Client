@@ -5,11 +5,17 @@ Backbone.$ = $;
 
 var homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw');
+    //socketView = require('./views/socketVw');
 
 module.exports = Backbone.Router.extend({
 
   initialize: function(options){
     this.options = options || {};
+    /*
+    expects options.userModel from app.js
+     */
+    //this.socketView = new socketView({model: options.userModel});
+    this.socketView = options.socketView;
   },
 
   routes: {
@@ -37,11 +43,11 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(){
-    this.newView(new homeView({userModel: this.options.userModel}));
+    this.newView(new homeView({userModel: this.options.userModel, socketView: this.socketView}));
   },
 
   userPage: function(userID, state, itemHash){
-    this.newView(new userPageView({userModel: this.options.userModel, userID: userID, state: state, itemHash: itemHash}));
+    this.newView(new userPageView({userModel: this.options.userModel, userID: userID, state: state, itemHash: itemHash, socketView: this.socketView}));
     $('body').addClass("userPage");
   },
 

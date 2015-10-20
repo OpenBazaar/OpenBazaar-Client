@@ -142,6 +142,7 @@ module.exports = Backbone.View.extend({
     this.followers.urlRoot = options.userModel.get('server_url') + "get_followers";
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('server_url') + "get_following";
+    this.socketView = options.socketView;
     this.lastTab = "about"; //track the last tab clicked
     this.pageID = "";
     //flag to hold state when customizing
@@ -713,7 +714,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         storeWizardModel = new Backbone.Model();
     storeWizardModel.set(this.model.attributes);
-    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder'});
+    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder', socketView: this.socketView});
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.subViews.push(this.storeWizardView);
   },

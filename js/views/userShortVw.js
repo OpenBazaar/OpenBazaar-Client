@@ -11,10 +11,15 @@ module.exports = Backbone.View.extend({
     'click .js-storeListFollow': 'followUser'
   },
 
+  initialize: function() {
+    "use strict";
+    this.render();
+  },
+
   render: function(){
     var self = this;
     loadTemplate('./js/templates/userShort.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.append(loadedTemplate(self.model.toJSON()));
     });
     return this;
   },

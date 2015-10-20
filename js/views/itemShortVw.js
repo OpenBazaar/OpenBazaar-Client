@@ -13,11 +13,13 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(){
+    console.log(this.model);
     this.listenTo(this.model, 'change:priceSet', this.render);
-    this.userID = this.model.get('userID');
+    this.userID = this.model.get('guid');
   },
 
   render: function(){
+    console.log("item render");
     var self = this;
     loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
       self.$el.append(loadedTemplate(self.model.toJSON()));
