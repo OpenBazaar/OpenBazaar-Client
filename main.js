@@ -8,9 +8,15 @@ var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 // Check if we need to kick off the python server-daemon (Desktop app)
-if(process.argv[2].toUpperCase() == "startserver".toUpperCase()) {
+if(process.argv.length > 2 && (process.argv[2].toUpperCase() == "startserver".toUpperCase())) {
   // Kick it off
-  var subpy = require('child_process').spawn('python', [__dirname + '/OpenBazaar-Server/openbazaard.py', 'start', '--testnet'], {detach: true});
+  console.log('Starting OpenBazaar Server');
+  var subpy = '';
+  if(process.argv.length > 3 && process.argv[3].toUpperCase() == "testnet".toUpperCase()) {
+    subpy = require('child_process').spawn('python', [__dirname + '/OpenBazaar-Server/openbazaard.py', 'start', '--testnet'], {detach: true});
+  } else {
+    subpy = require('child_process').spawn('python', [__dirname + '/OpenBazaar-Server/openbazaard.py', 'start'], {detach: true});
+  }
   var stdout = '';
   var stderr = '';
   subpy.stdout.on('data', function(buf) {
