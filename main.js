@@ -7,6 +7,28 @@ safestart(__dirname);
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
+// Check if we need to kick off the python server-daemon (Desktop app)
+if(process.argv[2].toUpperCase() == "startserver".toUpperCase()) {
+  // Kick it off
+  var subpy = require('child_process').spawn('python', [__dirname + '/OpenBazaar-Server/openbazaard.py', 'start', '--testnet'], {detach: true});
+  var stdout = '';
+  var stderr = '';
+  subpy.stdout.on('data', function(buf) {
+    console.log('[STR] stdout "%s"', String(buf));
+    stdout += buf;
+  });
+  subpy.stderr.on('data', function(buf) {
+    console.log('[STR] stderr "%s"', String(buf));
+    stderr += buf;
+  });
+  subpy.on('close', function(code) {
+    console.log('exited with ' + code);
+    console.log('[END] stdout "%s"', stdout);
+    console.log('[END] stderr "%s"', stderr);
+  });
+  subpy.unref();
+}
+
 // Report crashes to our server.
 require('crash-reporter').start();
 
@@ -26,6 +48,7 @@ app.on('window-all-closed', function() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     "width": 1200,
@@ -49,6 +72,9 @@ app.on('ready', function() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+    if(subpy) {
+      subpy.kill('SIGHUP');
+    }
   });
 
   app.on('activate-with-no-open-windows', function() {
