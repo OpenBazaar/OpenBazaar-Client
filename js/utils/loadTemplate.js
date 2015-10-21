@@ -3,7 +3,11 @@ var fs = require('fs');
 
 module.exports = function(templateFile, callback){
 
-  fs.readFile(templateFile, "utf8", function(err, ob){
+  var loc = window.location.pathname;
+  var cur_dir = loc.substring(0, loc.lastIndexOf('/'));
+
+  fs.readFile(cur_dir + '/' + templateFile, "utf8", function(err, ob){
+
     if (err) {
       throw err;
     }
