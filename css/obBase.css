@@ -2,7 +2,6 @@
 
 
 body {
-  margin: 0;
   background-color: rgb(6,55,83);
   overflow: hidden;
   /*fonts*/
@@ -13,6 +12,10 @@ body {
   -webkit-font-smoothing: antialiased;
   letter-spacing: .4px;
   line-height: 1.2;
+  margin: 0;
+  overflow: hidden; 
+  -webkit-font-smoothing: antialiased;
+
 }
 
 a {
@@ -1616,8 +1619,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #obContainer {
   padding-top: 30px;
-  height: 96%;
+  height: 93%;
   overflow-y: scroll;
+  top: 50px;
+  position: relative;
 }
 
 /*========== utility classes ==========*/
