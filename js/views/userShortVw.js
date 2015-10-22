@@ -8,19 +8,25 @@ module.exports = Backbone.View.extend({
   className: "flexRow",
 
   events: {
-    'click .js-storeListFollow': 'followUser'
+    'click .js-userShort': 'userClick'
+  },
+
+  initialize: function() {
+    "use strict";
+    this.render();
   },
 
   render: function(){
     var self = this;
     loadTemplate('./js/templates/userShort.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.append(loadedTemplate(self.model.toJSON()));
     });
     return this;
   },
 
-  followUser: function(e){
-    console.log("follow user button clicked");
+  userClick: function(e){
+    var self = this;
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/store', {trigger: true});
   }
 
 });

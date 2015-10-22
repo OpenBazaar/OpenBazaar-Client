@@ -48,5 +48,10 @@ module.exports = Backbone.View.extend({
 
     buyClick: function(){
         console.log("placeholder for buy button clicked");
+    },
+
+    close: function(){
+        "use strict";
+        this.remove();
     }
 });

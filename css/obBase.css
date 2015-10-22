@@ -241,6 +241,7 @@ form {
   box-sizing: border-box;
   padding: 33px;
   cursor: pointer;
+  width: 316px;
 }
 
 .itemImg {
@@ -461,6 +462,10 @@ form {
 .positionWrapper {
   /* use when you need a generic element around one or more elements where one is absolutely positioned */
   position: relative;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 /*========== typography ==========*/

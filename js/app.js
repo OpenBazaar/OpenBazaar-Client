@@ -19,6 +19,7 @@ var Polyglot = require('node-polyglot'),
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
+    socketView = require('./views/socketVw');
     guid = "",
     cCode = '',
     server_urlLocal = localStorage.getItem("server_url") || "http://localhost:18469/api/v1/";
@@ -38,6 +39,9 @@ window.polyglot = new Polyglot({locale: window.lang});
 
 //retrieve the object that has a matching language code
 window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
+
+//put the event bus into the window so it's available everywhere
+window.obEventBus =  __.extend({}, Backbone.Events);
 
 //get the guid from the user profile to put in the user model
 
@@ -63,7 +67,7 @@ userProfile.fetch({
 
           $('.js-loadingModal').hide();
           new pageNavView({model: user});
-          new router({userModel: user});
+          new router({userModel: user, socketView: new socketView({model: user})});
           Backbone.history.start();
         });
       },
