@@ -4,8 +4,9 @@ var __ = require('underscore'),
 Backbone.$ = $;
 
 var homeView = require('./views/homeVw'),
-    userPageView = require('./views/userPageVw');
-    //socketView = require('./views/socketVw');
+    userPageView = require('./views/userPageVw'),
+    aboutView = require('./views/aboutVw');
+    donateView = require('./views/donateVw');
 
 module.exports = Backbone.Router.extend({
 
@@ -32,7 +33,7 @@ module.exports = Backbone.Router.extend({
     "notifications": "notifications",
     "settings": "settings",
     "about": "about",
-    "support": "support"
+    "support": "donate"
   },
 
   newView: function(view){
@@ -81,10 +82,12 @@ module.exports = Backbone.Router.extend({
   },
 
   about: function(){
+    this.newView(new aboutView());
     console.log("about");
   },
 
-  support: function(){
+  donate: function(){
+    this.newView(new donateView());
     console.log("support");
   }
 
