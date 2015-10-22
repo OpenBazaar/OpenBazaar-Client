@@ -10,7 +10,6 @@ var __ = require('underscore'),
     itemModel = require('../models/itemMd'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
-    simpleMessageView = require('./simpleMessageVw'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
     storeWizardVw = require('./storeWizardVw');
@@ -318,7 +317,7 @@ module.exports = Backbone.View.extend({
           self.renderItems(model.get('listings'));
         },
         error: function(model, response){
-          self.showError("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText, '.js-list3');
+          self.showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
         }
       });
     } else if (state === "followers") {
@@ -328,7 +327,7 @@ module.exports = Backbone.View.extend({
           self.renderFollowers(model.get('followers'));
         },
         error: function(model, response){
-          self.showError("There Has Been An Error","Followers are not available. The error code is: "+response.statusText, '.js-list1');
+          self.showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
         }
       });
     } else if (state === "following") {
@@ -338,7 +337,7 @@ module.exports = Backbone.View.extend({
           self.renderFollowing(model.get('following'));
         },
         error: function(model, response){
-          self.showError("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText, '.js-list2');
+          self.showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
         }
       });
     }
@@ -403,16 +402,27 @@ module.exports = Backbone.View.extend({
     }
     this.item.fetch({
       data: self.itemFetchParameters,
-      success: function(model){
-        self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
-        //set id after fetch, otherwise Backbone includes it in the fetch url
-        model.set('id', hash);
-        //model may arrive empty, set this flag to trigger a change event
-        model.set({fetched: true});
+      timeout: 3000,
+      complete: function(model, response){
+        if(response == "success" && response.vendor_offer){
+          self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
+          //set id after fetch, otherwise Backbone includes it in the fetch url
+          model.set('id', hash);
+          //model may arrive empty, set this flag to trigger a change event
+          model.set({fetched: true});
+        } else if(response == "success"){
+          self.showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
+        } else {
+          self.showErrorModal("There Has Been An Error","This item is not available. The error code is: "+response);
+        }
       },
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
-        self.showError("There Has Been An Error","This item is not available. The error code is: "+response.statusText, '.js-list4');
+        if(response.statusText){
+          self.showErrorModal("There Has Been An Error", "This item is not available. The error code is: " + response.statusText);
+        } else {
+          self.showErrorModal("There Has Been An Error","This item is not available or a blank object was returned by the server");
+        }
       }
     });
   },
@@ -446,10 +456,11 @@ module.exports = Backbone.View.extend({
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
 
-  showError: function(title, message, target){
+  showErrorModal: function(errorTitle, errorMessage) {
     "use strict";
-    var errorView = new simpleMessageView({title: title, message: message, el: target});
-    this.subViews.push(errorView);
+    this.errorModal.removeClass('hide');
+    this.errorModal.find('.js-messageModal-title').text(errorTitle);
+    this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
 
   aboutClick: function(e){
@@ -545,13 +556,6 @@ module.exports = Backbone.View.extend({
     tempPage.profile[colorKey] = '#'+newColor;
     this.model.set('page', tempPage);
     this.setCustomStyles();
-  },
-
-  showErrorModal: function(errorTitle, errorMessage) {
-    "use strict";
-    this.errorModal.removeClass('hide');
-    this.errorModal.find('.js-messageModal-title').text(errorTitle);
-    this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
 
   uploadUserPageImage: function() {

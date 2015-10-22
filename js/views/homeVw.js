@@ -110,7 +110,9 @@ module.exports = Backbone.View.extend({
     item.server_url = this.userModel.get('server_url');
     item.userID = item.guid;
     var newItemModel = new itemShortModel(item);
-    var itemShort = new itemShortView({model: newItemModel, el: '.js-list1'});
+    //var itemShort = new itemShortView({model: newItemModel, el: '.js-list1'});
+    var itemShort = new itemShortView({model: newItemModel});
+    this.$el.find('.js-list1').append(itemShort.el);
     this.subViews.push(itemShort);
   },
 
@@ -119,7 +121,9 @@ module.exports = Backbone.View.extend({
     user.server_url = this.userModel.get('server_url');
     user.userID = user.guid;
     var newUserModel = new userShortModel(user)
-    var storeShort = new userShortView({model: newUserModel, el: '.js-list2'});
+    //var storeShort = new userShortView({model: newUserModel, el: '.js-list2'});
+    var storeShort = new userShortView({model: newUserModel});
+    this.$el.find('.js-list2').append(storeShort.el);
     this.subViews.push(storeShort);
   },
 
