@@ -34,6 +34,14 @@ module.exports = Backbone.View.extend({
     this.userProfile.urlRoot = this.userModel.get('server_url') + "profile";
     this.socketView = options.socketView;
     this.subViews = [];
+    this.lookingCount = 0;
+    this.homeLookingTimeout = setInterval(function(){
+      if(self.lookingCount < 10){
+        self.lookingCount++;
+      } else {
+        self.endLookingCount();
+      }
+    }, 1000);
 
     this.userProfile.fetch({
       //no id is passed, this will always be a request for the user's own profile
@@ -52,6 +60,17 @@ module.exports = Backbone.View.extend({
     this.socketVendorID = Math.random().toString(36).slice(2);
     this.socketView.getItems(this.socketItemID);
     this.socketView.getVendors(this.socketVendorID);
+  },
+
+  resetLookingCount: function(){
+    "use strict";
+    this.lookingCount = 0;
+  },
+
+  endLookingCount: function(){
+    "use strict";
+    this.$el.find('.js-loadingMsg').addClass('hide');
+    clearInterval(this.homeLookingTimeout);
   },
 
   hideList1: function(e){
@@ -76,6 +95,7 @@ module.exports = Backbone.View.extend({
     } else if(data.id == this.socketVendorID) {
       this.renderUser(data.vendor);
     }
+    this.resetLookingCount();
   },
 
   render: function(){

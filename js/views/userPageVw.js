@@ -205,7 +205,12 @@ module.exports = Backbone.View.extend({
       self.setState(self.options.state, self.options.itemHash);
       self.$el.find('.js-externalLink').on('click', function(e){
         e.preventDefault();
-        require("shell").openExternal($(this).attr('href'));
+        var extUrl = $(this).attr('href');
+        if (!/^https?:\/\//i.test(extUrl)) {
+          extUrl = 'http://' + extUrl;
+        }
+        console.log(extUrl);
+        require("shell").openExternal(extUrl);
       })
     });
     self.errorModal = $('.js-messageModal');
@@ -402,18 +407,16 @@ module.exports = Backbone.View.extend({
     }
     this.item.fetch({
       data: self.itemFetchParameters,
-      timeout: 3000,
-      complete: function(model, response){
-        if(response == "success" && response.vendor_offer){
+      timeout: 5000,
+      success: function(model, response){
+        if(response.vendor_offer){
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           //set id after fetch, otherwise Backbone includes it in the fetch url
           model.set('id', hash);
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
-        } else if(response == "success"){
-          self.showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
         } else {
-          self.showErrorModal("There Has Been An Error","This item is not available. The error code is: "+response);
+          self.showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
         }
       },
       error: function(model, response){
