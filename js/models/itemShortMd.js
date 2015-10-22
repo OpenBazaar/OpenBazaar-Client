@@ -36,8 +36,6 @@ module.exports = Backbone.Model.extend({
         vendToUserBTCRatio = 0,
         newAttributes = {};
 
-    console.log("item short model update attributes. userCCode is "+userCCode);
-
     if(userCCode) {
       getBTPrice(vendorCCode, function(btAve){
         vendorCurrencyInBitcoin = btAve;
@@ -57,7 +55,6 @@ module.exports = Backbone.Model.extend({
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
-        console.log("priceSet is "+newAttributes.priceSet);
         self.set(newAttributes);
       });
     }else{

@@ -126,11 +126,17 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.options = options || {};
     /* expected options are:
-    userModel: this is set by app.js, then by a call to the settings API. (not complete yet)
+    userModel: this is set by app.js, then by a call to the settings API.
     userID: if userID is in the route, it is set here
     state: if state is in the route, it is set here
     itemHash: if itemHash is in the route, it is set here
      */
+    //if userID was passed by router, set it as pageID
+    this.pageID = options.userID;
+    //set view's userID from the userModel;
+    this.userID = options.userModel.get('guid');
+    this.userProfileFetchParameters = {};
+    this.itemFetchParameters = {};
     this.subViews = [];
     this.model = new Backbone.Model();
     this.userProfile = new userProfileModel();
@@ -144,7 +150,6 @@ module.exports = Backbone.View.extend({
     this.following.urlRoot = options.userModel.get('server_url') + "get_following";
     this.socketView = options.socketView;
     this.lastTab = "about"; //track the last tab clicked
-    this.pageID = "";
     //flag to hold state when customizing
     this.customizing = false;
     //hold changes to the page for undoing, such as custom colors
@@ -157,19 +162,23 @@ module.exports = Backbone.View.extend({
       }
     };
 
+    //determine if this is the user's own page or another profile's page
+    //if no userID is passed in, or it matches the user's ID, then this is their page
+    //sometimes it can be set to the string 'null', check for that too
+    if(!this.pageID || this.pageID == this.userID || this.pageID == 'null'){
+      //set page ID to be the user's own ID
+      this.pageID = this.userID;
+      this.options.ownPage = true;
+    } else {
+      this.options.ownPage = false;
+      this.userProfileFetchParameters = $.param({'guid': this.pageID});
+    }
+
     this.userProfile.fetch({
-      data: $.param({'id': this.pageID}),
+      data: self.userProfileFetchParameters,
+      processData: true,
       success: function(model){
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        //if no userID is passed in, or it matches the user's ID, then this is their page
-        //sometimes it can be set to the string 'null', check for that too
-        if(!options.userID || options.userID == self.model.get('page').profile.guid || options.userID == 'null') {
-          self.pageID = self.model.get('page').profile.guid;
-          self.options.ownPage = true;
-        } else {
-          self.pageID = options.userID;
-          self.options.ownPage = false;
-        }
         self.model.set({ownPage: self.options.ownPage});
         self.render();
       },
@@ -270,11 +279,11 @@ module.exports = Backbone.View.extend({
       if(state === "item" || state === "itemOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
-        this.undoColorCustomization();
+        //this.undoColorCustomization();
       } else if(state === "itemEdit") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
-        this.undoColorCustomization();
+        //this.undoColorCustomization();
       } else if(state === "customize") {
         this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
@@ -282,7 +291,7 @@ module.exports = Backbone.View.extend({
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
         document.getElementById('obContainer').classList.remove("box-borderDashed");
-        this.undoColorCustomization();
+        //this.undoColorCustomization();
       }
       //if store has been created, swap create button for sell button
       if(this.model.get('page').profile.vendor === true) {
@@ -304,12 +313,7 @@ module.exports = Backbone.View.extend({
     } else if (state === "store") {
 
       this.listings.fetch({
-        data: function(){
-          //don't send the guid if this is the user's own page
-          if(this.options.ownPage != true) {
-            return $.param({'guid': self.pageID});
-          }
-        },
+        data: self.userProfileFetchParameters,
         success: function(model){
           self.renderItems(model.get('listings'));
         },
@@ -319,6 +323,7 @@ module.exports = Backbone.View.extend({
       });
     } else if (state === "followers") {
       this.followers.fetch({
+        data: self.userProfileFetchParameters,
         success: function(model){
           self.renderFollowers(model.get('followers'));
         },
@@ -328,6 +333,7 @@ module.exports = Backbone.View.extend({
       });
     } else if (state === "following") {
       this.following.fetch({
+        data: self.userProfileFetchParameters,
         success: function(model){
           self.renderFollowing(model.get('following'));
         },
@@ -368,6 +374,7 @@ module.exports = Backbone.View.extend({
   renderItem: function(hash){
     "use strict";
     var self = this;
+    console.log("render item hash "+hash);
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
@@ -388,8 +395,14 @@ module.exports = Backbone.View.extend({
     }
     this.itemView = new itemVw({model:this.item, el: '.js-list4'});
     this.subViews.push(this.itemView);
+    //set the parameters for the fetch
+    if(this.options.ownPage == true){
+      this.itemFetchParameters = $.param({'id': hash});
+    } else {
+      this.itemFetchParameters = $.param({'id': hash, 'guid': this.pageID});
+    }
     this.item.fetch({
-      data: $.param({'id': hash}),
+      data: self.itemFetchParameters,
       success: function(model){
         self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
         //set id after fetch, otherwise Backbone includes it in the fetch url
@@ -635,13 +648,17 @@ module.exports = Backbone.View.extend({
 
   cancelCustomizePage: function() {
     "use strict";
-    this.undoColorCustomization();
-    this.setControls();
+    //this.undoColorCustomization();
+    //this.setControls();
+    //refresh the current page
+    Backbone.history.loadUrl();
   },
 
+  //TODO: remove code below
+/*
   undoColorCustomization: function(){
     "use strict";
-    if(this.customizing === true) { //TODO: Enumerate over array or entity with loop
+    if(this.customizing === true) {
       this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
       this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
       this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;
@@ -650,6 +667,7 @@ module.exports = Backbone.View.extend({
       this.setCustomStyles();
     }
   },
+  */
 
   saveNewDone: function() {
     "use strict";
@@ -661,6 +679,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     if(newHash) {
       this.setState('item', newHash);
+      console.log("new hash "+newHash);
     } else {
       //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
       this.addTabToHistory('store');

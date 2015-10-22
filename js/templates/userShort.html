@@ -1,12 +1,13 @@
-<div class="rowItem">
-  <div class="thumbnail-large pull-left"
-  <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
-  style="background-image: url(<%- avatar_hash %>);"
+<div class="rowItem js-userShort clickable" data-guid="<%= ob.guid %>">
+  <div class="thumbnail thumbnail-large pull-left box-border"
+  <% if(ob.avatar_hash) { %>
+  style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.avatar_hash %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
   <div class="pull-left txt-unleaded">
     <div class="textSize17px floatLeft marginRight5"><%= ob.name %></div>
-    <div class="textSize15px txt-fade floatLeft"><%= ob.handle %></div>
+    <div class="textSize15px txt-fade pull-left"><%= ob.handle %></div>
+    <div class="testSize15px txt-fade"><%= ob.short_description %></div>
   </div>
 </div>

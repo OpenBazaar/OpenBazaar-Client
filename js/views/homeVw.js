@@ -71,10 +71,8 @@ module.exports = Backbone.View.extend({
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    console.log(data);
     if(data.id == this.socketItemID){
-      console.log("call render item");
-      this.renderItem(data.listing);
+      this.renderItem(data);
     } else if(data.id == this.socketVendorID) {
       this.renderUser(data.vendor);
     }
@@ -106,7 +104,11 @@ module.exports = Backbone.View.extend({
 
   renderItem: function(item){
     "use strict";
+    //get data from inside the listing object
+    item = item.listing;
     item.userCurrencyCode = this.userModel.get('currency_code');
+    item.server_url = this.userModel.get('server_url');
+    item.userID = item.guid;
     var newItemModel = new itemShortModel(item);
     var itemShort = new itemShortView({model: newItemModel, el: '.js-list1'});
     this.subViews.push(itemShort);
@@ -114,6 +116,8 @@ module.exports = Backbone.View.extend({
 
   renderUser: function(user){
     "use strict";
+    user.server_url = this.userModel.get('server_url');
+    user.userID = user.guid;
     var newUserModel = new userShortModel(user)
     var storeShort = new userShortView({model: newUserModel, el: '.js-list2'});
     this.subViews.push(storeShort);
