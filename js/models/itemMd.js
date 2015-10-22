@@ -114,13 +114,6 @@ module.exports = window.Backbone.Model.extend({
           "price": response.vendor_offer.listing.item.price_per_unit.bitcoin,
           "currency_code": "BTC"
         };
-        response.vendor_offer.listing.shipping.flat_fee.fiat = {
-          price: {
-            "international": response.vendor_offer.listing.shipping.flat_fee.bitcoin.international,
-            "domestic": response.vendor_offer.listing.shipping.flat_fee.bitcoin.domestic
-          },
-          "currency_code": "BTC"
-        };
       }
       //if the shipping section is not returned it breaks the edit template. Restore it here
       if(!response.vendor_offer.listing.shipping){
@@ -153,6 +146,17 @@ module.exports = window.Backbone.Model.extend({
               "domestic": 0
             }
           }
+        }
+      }
+      if(!response.vendor_offer.listing.shipping.free == true && response.vendor_offer.listing.shipping.flat_fee){
+        if (response.vendor_offer.listing.shipping.flat_fee.bitcoin){
+          response.vendor_offer.listing.shipping.flat_fee.fiat = {
+            price: {
+              "international": response.vendor_offer.listing.shipping.flat_fee.bitcoin.international,
+              "domestic": response.vendor_offer.listing.shipping.flat_fee.bitcoin.domestic
+            },
+            "currency_code": "BTC"
+          };
         }
       }
     }

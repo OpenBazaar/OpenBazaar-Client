@@ -14,7 +14,11 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     this.listenTo(this.model, 'change:priceSet', this.render);
-    this.userID = this.model.get('userID');
+    //this.userID = this.model.get('guid');
+    //if price has already been set, render
+    if(this.model.get('priceSet') != 0){
+      this.render();
+    }
   },
 
   render: function(){
@@ -26,7 +30,8 @@ module.exports = Backbone.View.extend({
   },
 
   itemClick: function(e){
-    Backbone.history.navigate('#userPage/'+this.userID+'/item/'+$(e.target).data('id'), {trigger: true});
+    var self = this;
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+$(e.target).data('id'), {trigger: true});
   },
 
   avatarClick: function(){
