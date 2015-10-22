@@ -26,7 +26,7 @@ module.exports = Backbone.View.extend({
 
   userClick: function(e){
     var self = this;
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/store', {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/about', {trigger: true});
   }
 
 });
