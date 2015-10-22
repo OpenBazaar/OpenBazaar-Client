@@ -107,6 +107,7 @@ module.exports = Backbone.View.extend({
       self.subRender();
       if(self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
+        self.$el.find('.js-homeMyPage').addClass('show');
       }
     });
   },
@@ -177,6 +178,8 @@ module.exports = Backbone.View.extend({
   storeCreated: function() {
     "use strict";
     this.storeWizardView.closeWizard();
+    this.$el.find('.js-homeCreateStore').addClass('hide');
+    this.$el.find('.js-homeMyPage').removeClass('hide');
     //if updates to this page change the page, it will need to be reloaded with the code below
     //Backbone.history.navigate('#home', {trigger: true});
   },
