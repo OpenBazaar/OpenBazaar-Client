@@ -5,9 +5,13 @@
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
-  <div class="pull-left txt-unleaded marginLeft10">
-    <div class="textSize17px floatLeft marginRight5"><%= ob.name %></div>
-    <div class="textSize15px txt-fade pull-left"><%= ob.handle %></div>
-    <div class="testSize15px txt-fade"><%= ob.short_description %></div>
+  <div class="pull-left txt-unleaded">
+    <div class="marginLeft10 row10 clearfix">
+      <div class="textSize17px pull-left marginRight5"><%= ob.name %></div>
+      <div class="textSize15px txt-fade pull-left"><%= ob.handle %></div>
+    </div>
+    <div class="marginLeft10">
+      <div class="testSize15px txt-fade"><%= ob.short_description %></div>
+    </div>
   </div>
 </div>
