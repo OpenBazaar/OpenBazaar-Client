@@ -2,33 +2,34 @@
 <head>
   <title>OpenBazaar</title>
   <link href="css/ionicons.min.css" rel="stylesheet">
+  <link href="css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
   <link href="css/chosen.css" rel="stylesheet">
   <link href="css/colpick.css" rel="stylesheet">
   <link href="css/obBase.css" rel="stylesheet" id="obBase">
 </head>
 <body id="obBody">
 
-<div id="pageNav" class="bar navBar navBar-main custCol-secondary"></div>
-<div id="modalHolder"></div>
-<div class="container  custCol-background custCol-text" id="obContainer">
-  <div id="content"></div>
-  <div id="sideBar"></div>
-  <div class="modal modal-navBlock modal-opaque js-loadingModal">
-    <div class="modal-child modal-childMain">
-      <h1 class="txt-center rowTop20"><i class="ion-loop spinner"></i> Loading...</h1>
-      <p class="txt-center js-indexLoadingMsg1"></p>
-      <p class="txt-center js-indexLoadingMsg2"></p>
-      <p class="txt-center js-indexLoadingMsg3"></p>
+  <div id="pageNav" class="bar navBar navBar-main custCol-secondary"></div>
+  <div class="container custCol-background custCol-text" id="obContainer">
+    <div id="content"></div>
+    <div id="sideBar"></div>
+    <div class="modal modal-navBlock modal-opaque js-loadingModal">
+      <div class="modal-child modal-childMain">
+        <h1 class="txt-center rowTop20"><i class="ion-loop spinner"></i> Loading...</h1>
+        <p class="txt-center js-indexLoadingMsg1"></p>
+        <p class="txt-center js-indexLoadingMsg2"></p>
+        <p class="txt-center js-indexLoadingMsg3"></p>
+      </div>
     </div>
   </div>
-</div>
+  <div id="obShadow"></div>
 
-<!--TODO: modularize non-modular scripts -->
-<script src="js/utils/list.min.js"></script>
+  <!--TODO: modularize non-modular scripts -->
+  <script src="js/utils/list.min.js"></script>
 
-<script>
-  var app = require('./js/app');
-</script>
+  <script>
+    var app = require('./js/app');
+  </script>
 
 </body>
 </html>
