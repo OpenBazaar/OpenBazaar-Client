@@ -66,7 +66,7 @@ module.exports = Backbone.Model.extend({
 
   parse: function(response) {
     //first check to make sure server sent data in the response. Sometimes it doesn't.
-    if(response){
+    if(response.profile){
       //check if colors are in hex, if not convert. This assumes non-hex colors are numbers or strings of numbers.
       response.profile.background_color = this.convertColor(response.profile.background_color);
       response.profile.primary_color = this.convertColor(response.profile.primary_color);
