@@ -22,28 +22,12 @@ module.exports = Backbone.View.extend({
     'blur input': 'validateInput'
   },
 
-  getModerators: function() {
-    "use strict";
-    var id = Math.random().toString(36).slice(2)
-    var connection = new WebSocket('ws://seed.openbazaar.org:18466');
-    connection.onopen = function(){
-      console.log("connection open");
-      connection.send({"request": {"api": "v1", "id": id, "command": "get_moderators" }});
-    };
-    connection.onerror = function(error){
-      console.log("connection error "+ error);
-    };
-    connection.onmessage = function(e){
-      console.log("connection message "+ e.data);
-    };
-  },
-
   initialize: function(options) {
     "use strict";
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
-    this.getModerators();
+    //this.getModerators();
     this.render();
   },
 
@@ -59,6 +43,7 @@ module.exports = Backbone.View.extend({
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
     acc.find('.js-accordionNext').on('click', function(){
+      console.log("click");
       var oldPos = accWin.css('left').replace("px","");
       if(oldPos > (accWidth * accNum * -1 + accWidth)){
         accWin.css('left', function(){
@@ -122,9 +107,9 @@ module.exports = Backbone.View.extend({
       self.errorModal = $('.js-messageModal');
 
       // fade the modal in after it loads and focus the input
+      self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
+      self.$el.find('#storeNameInput').focus();
       $('#obContainer').addClass('blur');
-      $('#modalHolder .modal').fadeTo(0 , 1);
-      $('#storeNameInput').focus();
     });
   },
 
@@ -265,7 +250,7 @@ module.exports = Backbone.View.extend({
         success: function (data) {
           if (data.success === true){
             self.trigger('storeCreated');
-            new Notification('You\'ve added a store to your page!'); //TO DO: We need to localize this
+            //new Notification('You\'ve added a store to your page!'); //TO DO: We need to localize this
           }else if (data.success === false){
             self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
@@ -287,16 +272,15 @@ module.exports = Backbone.View.extend({
   close: function(){
     "use strict";
     $('#obContainer').removeClass('blur');
-    $('#modalHolder .modal').fadeTo(0 , 0, function(){
-      __.each(this.subViews, function(subView) {
-        if(subView.close){
-          subView.close();
-        }else{
-          subView.remove();
-        }
-      });
-      this.remove();
+    $('.js-storeWizardModal').addClass('fadeOut');
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.remove();
+      }
     });
+    this.remove();
   }
 
 });
