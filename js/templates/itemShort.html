@@ -1,7 +1,7 @@
 <div class="gridItem clearfix">
   <div class="itemImg row10 js-item" data-id="<%= ob.contract_hash %>"
     <% if(ob.thumbnail_hash) { %>
-    style="background-image: url(<%- ob.server %>get_image?hash=<%- ob.thumbnail_hash %>);"
+    style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.thumbnail_hash %>);"
     <% } else { %>
     style="background-image: url(imgs/defaultItem.png);"
     <% } %>>
@@ -20,7 +20,7 @@
       </div>
       <div class="js-item" data-id="<%= ob.contract_hash %>">
         <div class="textSize14px textFirstCharUppercase"><%= ob.title %></div>
-        <div class="textSize13px txt-fade textWeightNormal"><%= ob.vendorBTCPrice %>btc (<%= ob.displayPrice %>)</div>
+        <div class="textSize13px txt-fade textWeightNormal"><%= ob.displayPrice %> (<%= ob.vendorBTCPrice %>btc)</div>
       </div>
     </div>
   </div>

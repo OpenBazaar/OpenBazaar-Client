@@ -4,19 +4,19 @@
   <a class="btn btn-win btn-winMax js-navMax"></a>
 </div>
 <div class="nav-ctrlGroup">
-  <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack"></a>
-  <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd"></a>
+  <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack custCol-primary"></a>
+  <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd custCol-primary"></a>
 </div>
 <div class="nav-ctrlGroup flexExpand">
   <div class="txtFieldWrapper searchWrapper mainSearchWrapper">
-    <input type="text" class="txtField" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>"/>
+    <input type="text" class="txtField" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" style="height: 30px;" />
   </div>
 </div>
 <div class="nav-ctrlGroup">
-  <a class="btn btn-home ion-home" href="#home"></a>
+  <a class="btn btn-home ion-home custCol-primary" href="#home"></a>
 </div>
 <div class="nav-ctrlGroup nav-profile">
-  <div class="btn btn-profile js-navProfile"
+  <div class="btn btn-profile js-navProfile custCol-primary"
   <% if(ob.avatar_hash) { %>
   style="background-image: url(<%- ob.avatar_hash %>);"
   <% }else{ %>
@@ -37,16 +37,18 @@
   <hr/>
   <a href="#about"><%= polyglot.t('nav.about') %></a>
   <a href="#support"><%= polyglot.t('nav.support') %></a>
+  <hr/>
+  <a class="js-navAdminPanel">Admin Panel</a>
 </div>
 
 <div class="modal modal-navBlock modal-opaque js-homeModal">
   <div class="modal-child modal-childMain">
-    <div class="homeModal-hero">
+    <div class="homeModal-hero modal-hero">
       <p class="h6 homeModal-heroText"><%= polyglot.t('onboarding.intro') %></p>
     </div>
-    <div class="homeModal-accordian accordian js-profileAccordian">
-      <div class="accordian-window">
-        <div class="accordian-child">
+    <div class="homeModal-accordion accordion js-profileAccordion">
+      <div class="accordion-window">
+        <div class="accordion-child">
           <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.chooseLanguage') %>
           </div>
@@ -60,10 +62,10 @@
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-wide js-accordianNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-wide js-accordionNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordian-child">
+        <div class="accordion-child">
           <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.disclaimer_title') %>
           </div>
@@ -75,11 +77,11 @@
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordian-child">
+        <div class="accordion-child">
           <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.yourCountry') %>
           </div>
@@ -93,11 +95,11 @@
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordian-child">
+        <div class="accordion-child">
           <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.localCurrency') %>
           </div>
@@ -111,11 +113,11 @@
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordian-child">
+        <div class="accordion-child">
           <div class="bar barTxt h6">
             <%= polyglot.t('onboarding.timeZone') %>
           </div>
@@ -315,11 +317,11 @@
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordian-child">
+        <div class="accordion-child">
           <div class="bar barTxt h5">
             <%= polyglot.t('onboarding.handle') %>
           </div>
@@ -349,11 +351,11 @@
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordianNext"><%= polyglot.t('Skip') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Skip') %></a>
           </div>
         </div>
-        <div class="accordian-child">
+        <div class="accordion-child">
           <div class="bar barTxt h5 txt-center">
             <%= polyglot.t('onboarding.avatar') %>
           </div>
@@ -369,7 +371,7 @@
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordianPrev"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
             <a class="btn btn-bar btn-half js-homeModalDone"><%= polyglot.t('Done') %></a>
           </div>
         </div>
@@ -389,3 +391,5 @@
     <p class="txt-center js-messageModal-message"></p>
   </div>
 </div>
+
+<div id="adminPanel"></div>

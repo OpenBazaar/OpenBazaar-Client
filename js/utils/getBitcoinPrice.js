@@ -5,7 +5,6 @@ Backbone.$ = $;
 
 /*eslint no-use-before-define:0*/
 module.exports = function (currency, callback) {
-
     //some APIs require currency to be upper case
     currency = currency.toUpperCase();
 
@@ -113,7 +112,7 @@ module.exports = function (currency, callback) {
         }
 
         var makeAveragePrice = function () {
-            var sum, currencyPrices, currencyCode, currencyKeys, averagePrice, keys = {}, btAve;
+            var sum, currencyPrices, currency_code, currencyKeys, averagePrice, keys = {}, btAve;
             btcAverages.timeStamp = new Date();
             for (var i in btPrices) { //TODO: Use _.forOwn
                 if (btPrices.hasOwnProperty(i)) {
@@ -126,11 +125,11 @@ module.exports = function (currency, callback) {
             currencyKeys = Object.keys(keys);
             for (var index in currencyKeys) {  //TODO: Use _.forOwn
                 if (currencyKeys.hasOwnProperty(index)) {
-                    currencyCode = currencyKeys[index];
+                    currency_code = currencyKeys[index];
                     currencyPrices = [];
                     for (var j in btPrices) {  //TODO: Use _.forOwn or _.each?
-                        if (btPrices[j][currencyCode]) {
-                            currencyPrices.push(btPrices[j][currencyCode]);
+                        if (btPrices[j][currency_code]) {
+                            currencyPrices.push(btPrices[j][currency_code]);
                         }
                     }
                     sum = 0;
@@ -140,7 +139,7 @@ module.exports = function (currency, callback) {
                         }
                     }
                     averagePrice = sum / currencyPrices.length;  //TODO: Eliminate division due to floating point math
-                    btcAverages.rates[currencyCode] = averagePrice;
+                    btcAverages.rates[currency_code] = averagePrice;
                 }
             }
             window.btcAverages = btcAverages;

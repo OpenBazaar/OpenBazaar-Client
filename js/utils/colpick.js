@@ -60,6 +60,8 @@ For usage and examples: colpick.com/plugin
 			},
 			setNewColor = function (hsb, cal) {
 				$(cal).data('colpick').newColor.css('backgroundColor', '#' + hsbToHex(hsb));
+				var col = $(cal).data('colpick').color;
+				$(cal).data('colpick').onSubmit(col, hsbToHex(col), hsbToRgb(col), $(cal).data('colpick').el, false);
 			},
 			//Called when the new color is changed
 			change = function (ev) {
@@ -225,7 +227,7 @@ For usage and examples: colpick.com/plugin
 				var col = cal.data('colpick').color;
 				cal.data('colpick').origColor = col;
 				setCurrentColor(col, cal.get(0));
-				cal.data('colpick').onSubmit(col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el);
+				cal.data('colpick').onSubmit(col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el, true);
 			},
 			//Show/hide the color picker
 			show = function (ev) {

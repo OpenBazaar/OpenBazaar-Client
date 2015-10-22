@@ -3,7 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
-    userProfileModel = require('../models/userProfile'),
+    userProfileModel = require('../models/userProfileMd'),
     colpicker = require('../utils/colpick.js'),
     countriesModel = require('../models/countriesMd'),
     taggle = require('taggle'),
@@ -42,6 +42,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.options = options || {};
     this.parentEl = $(options.parentEl);
+    this.socketView = options.socketView;
     this.getModerators();
     this.render();
   },
@@ -108,10 +109,12 @@ module.exports = Backbone.View.extend({
           //override annoying placement function TODO: fix in source code
           $(el).css({left: 0, top: 0});
         },
-        onSubmit: function (hsb, hex, rgb, el) {
+        onSubmit: function (hsb, hex, rgb, el, visible) {
           self.setCustomColor(hex, $(el).attr('id'));
           $(el).closest('.js-customizeColorWrapper').find('.js-customizeColorLabel').css('background-color', '#' + hex);
-          $(el).colpickHide();
+          if(visible) {
+            $(el).colpickHide();
+          }
         },
         onHide: function () {
         }
@@ -126,25 +129,25 @@ module.exports = Backbone.View.extend({
     var formData = new FormData(this.$el.find('#storeWizardImageForm')[0]);
     $.ajax({
       type: "POST",
-      url: self.model.get('user').server + "upload_image",
+      url: self.model.get('user').server_url + "upload_image",
       contentType: false,
       processData: false,
       dataType: "json",
       data: formData,
       success: function(data) {
-        var errorModal,
-            imageHash = data.image_hashes[0];
-
-        console.log(imageHash)
-
-        if (data.success === true && imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-          console.log("url("+self.model.get('user').server+"get_image?hash="+imageHash+");");
-          self.$el.find('.js-storeWizardHero').css("background-image", "url("+self.model.get('user').server+"get_image?hash="+imageHash+")");
-          self.$el.find('#headerInput').val(imageHash);
-        }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+        var imageHash;
+        if (data.success === true) {
+          imageHash = data.image_hashes[0];
+          if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
+            self.$el.find('.js-storeWizardHero').css("background-image", "url("+self.model.get('user').server_url+"get_image?hash="+imageHash+")");
+            self.$el.find('#headerInput').val(imageHash);
+          }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+          }else{
+            self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>No image has returned.</i>");
+          }
         }else if (data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -205,7 +208,7 @@ module.exports = Backbone.View.extend({
   validateInput: function(e) {
     "use strict";
     e.target.checkValidity();
-    $(e.target).closest('flexRow').addClass('formChecked');
+    $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   showErrorModal: function(errorTitle, errorMessage) {
@@ -248,7 +251,7 @@ module.exports = Backbone.View.extend({
 
       $.ajax({
         type: "POST",
-        url: self.model.get('user').server + "profile",
+        url: self.model.get('user').server_url + "profile",
         contentType: false,
         processData: false,
         data: formData,

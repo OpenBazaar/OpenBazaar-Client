@@ -3,12 +3,14 @@
 
 body {
   background-color: rgb(6,55,83);
+  overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
   font-family: "Helvetica Neue", Helvetica, "Open Sans";
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: .5px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
   overflow: hidden; 
@@ -33,17 +35,40 @@ p a {
   text-decoration: underline;
 }
 
-input {
-  outline: none;
+hr {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
+input {
+  outline: none;
+  font-size: 14px;
+}
+
+input::-webkit-input-placeholder,
+input[type="text"]::-webkit-input-placeholder,
+input[type="number"]::-webkit-input-placeholder,
+select::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{
+  opacity: .5;
+  color: #fff;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .5px;
+}
+
+input,
 input[type="text"],
 input[type="number"],
 input[type="email"],
-input[type="url"] {
+input[type="url"],
+select,
+textarea {
   border: none;
   color: #000;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  font-size: 14px;
+  font-weight: 500;
 }
 
 form {
@@ -51,11 +76,11 @@ form {
 }
 
 
+
 /*========== structure classes ==========*/
 
 #content {
-  margin: 0 auto 0;
-  padding-bottom: 100px;
+  margin: auto;
   position: relative;
   width: 950px;
   z-index: 1;
@@ -77,6 +102,8 @@ form {
 .mainContainer {
   position: relative;
   overflow: hidden;
+  min-height: 800px;
+  margin-bottom: 100px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
@@ -89,8 +116,8 @@ form {
 
 .bar {
   height: 50px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .bar.barFlush {
@@ -217,6 +244,7 @@ form {
   box-sizing: border-box;
   padding: 33px;
   cursor: pointer;
+  width: 316px;
 }
 
 .itemImg {
@@ -283,12 +311,14 @@ form {
 }
 
 .btn {
+  font-size: 13px;
   display: inline-block;
   padding: 6px 12px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
+   -webkit-user-select: none;
 }
 
 /* don't prefix with .btn, sometimes it is used on icons without a .btn class */
@@ -339,16 +369,16 @@ form {
 
 .thumbnail-large {
   border-radius: 2px;
-  height: 80px;
+  height: 76px;
   width: 80px;
-}
-
-.row10 {
-  margin-bottom: 10px;
 }
 
 .row5 {
   margin-bottom: 5px;
+}
+
+.row10 {
+  margin-bottom: 10px;
 }
 
 .row20 {
@@ -357,6 +387,11 @@ form {
 
 .rowTop20 {
   margin-top: 20px;
+}
+
+.rowTop271 {
+  /* special class for the itemEdit view */
+  margin-top: 271px;
 }
 
 .pad10 {
@@ -432,6 +467,10 @@ form {
   position: relative;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 /*========== typography ==========*/
 
 h1,h2,h3 {
@@ -451,7 +490,7 @@ h3 {
 }
 
 h5 {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .h6, h6 {
@@ -470,8 +509,8 @@ h5 {
   line-height: 1.2;
 }
 .txt-unleaded {
-  margin-left: 10px;
   line-height: 1;
+  margin-bottom: 0;
 }
 
 .unbold {
@@ -484,7 +523,7 @@ h5 {
 /*========== skin classes ==========*/
 
 .userPage {
-  background-color: #2a2a2a;
+  /*background-color: #2a2a2a;*/
 }
 
 .navBar {
@@ -591,6 +630,11 @@ h5 {
   border-bottom: none;
 }
 
+.flexRow-noBorderBottom {
+  /* when the row needs to not have a bottom and no other way works */
+  border-bottom: none;
+}
+
 .box-border {
   border: 1px solid rgba(255,255,255,0.08);
   box-sizing: border-box;
@@ -673,16 +717,10 @@ input[type="text"].txtField-bar {
   box-shadow: none;
   color: #fff;
   height: 45px;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: .4px;
   opacity: 1;
   padding: 13px;
-}
-
-.txtField-bar::-webkit-input-placeholder,
-input[type="text"].txtField-bar::-webkit-input-placeholder {
-  opacity: 1;
-  color: #79a9c9;
 }
 
 .txtField-bar:focus {
@@ -704,7 +742,7 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   float: left;
   background-color: #086A9E; /* default color */
   padding:0;
-  border-radius: 4px;
+  border-radius: 3px;
   box-sizing: border-box;
 }
 
@@ -818,8 +856,10 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   border-top-left-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+  -webkit-user-select: none;
   border: none;
   height: 46px;
+  font-weight: 500;
   line-height: 46px;
   padding: 0 20px;
   margin-top: 4px;
@@ -949,6 +989,12 @@ input[type="text"].txtField-bar::-webkit-input-placeholder {
   opacity: 1;
 }
 
+label {
+  font-size: 14px;
+  letter-spacing: .4px;
+  opacity: .75;
+}
+
 .labelWrap input {
   margin-top: 2px;
   color: rgba(255,255,255,0.6);
@@ -1021,10 +1067,12 @@ input[type="datetime-local"].fieldItem:focus {
 .formChecked input[type="text"].fieldItem:invalid,
 .formChecked input[type="email"].fieldItem:invalid,
 .formChecked input[type="url"].fieldItem:invalid,
+.formChecked .fieldItem-textarea:invalid,
 .formChecked input[type="number"].fieldItem:invalid,
 .formChecked input[type="text"].fieldItem:focus:invalid,
 .formChecked input[type="email"].fieldItem:focus:invalid,
 .formChecked input[type="url"].fieldItem:focus:invalid,
+.formChecked .fieldItem-textarea:focus:invalid,
 .formChecked input[type="number"].fieldItem:focus:invalid {
   border: 2px dashed rgba(89,1,1,0.8);;
   background-color: rgba(89,1,1,0.2);
@@ -1153,6 +1201,17 @@ input[type="number"].fieldItem.fieldItem-withButton {
   outline: none;
 }
 
+select {
+  border: 2px solid transparent !important;
+  border-radius: 0;
+  padding: 0 15px;
+  -webkit-appearance: none;
+}
+
+select:focus {
+  border: 2px solid #fff !important;
+}
+
 input[type="radio"].fieldItem {
   display: none;
 }
@@ -1171,14 +1230,21 @@ input[type="radio"].fieldItem + label:before {
   position: absolute;
   left: 10px;
   top: 15px;
-  height: 20px;
-  width: 20px;
-  border-radius: 15px;
-  box-shadow: inset 0 0 0 10px rgba(255,255,255,0.4);
+  height: 16px;
+  width: 16px;
+  border-radius: 12px;
+  border: solid 1px blue;
+  box-shadow: none;
+  opacity: 1;
 }
 
 input[type="radio"].fieldItem:checked + label:before {
-  box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
+  background: #575656;
+  box-shadow: inset 0 0 0 4px #514F4F;
+}
+
+.radioLabel {
+  opacity: .75;
 }
 
 input[type="checkbox"].fieldItem {
@@ -1232,13 +1298,13 @@ input[type="checkbox"].fieldItem:checked + label:before {
   float: left;
   display: inline-block;
   white-space: nowrap;
-  line-height: 38px;
+  line-height: 32px;
   position: relative;
 }
 
 .fieldItem .taggle {
   margin: 6px 6px 0 0;
-  padding: 0 34px 0 18px;
+  padding: 0 28px 0 10px;
   border-radius: 4px;
   background-color: rgba(255,255,255,0.1);
   cursor: pointer;
@@ -1283,29 +1349,33 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 .popMenu-navBar {
-  top: 36px;
+  top: 50px;
   right: 10px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
-  border-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
   color: #fff;
   font-size: 13px;
-  padding: 10px 15px;
+  padding: 10px 0;
   width: 230px;
 }
 
 .popMenu-navBar a {
   display: block;
   line-height: 25px;
-  transition: opacity 1s;
+  padding: 0 15px;
+  transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .popMenu-navBar a:hover {
-  opacity: 0.6;
+  opacity: 1;
+  background: #353535;
+  text-decoration: none;
 }
 
 .popMenu-navBar hr {
-  margin: 0.5em -15px;
+  width: 100%;
   border: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -1334,6 +1404,53 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .icon-small {
   font-size: 11px;
+}
+
+.photos-empty {
+  height: 110px; 
+  margin-top: 58px;
+  padding: 15px; 
+  text-align: center;
+  width: 100%; 
+}
+
+.helper-text {
+  padding: 5px 15px 30px 15px;
+}
+
+/*========== spinners ==========*/
+
+.spinner {
+  position: relative;
+}
+
+.spinner:before {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  animation: spinnerAnimation 3s infinite linear;
+}
+
+.spinner:after {
+  content: "\00a0 \00a0 \00a0 \00a0";
+  /* non-breaking spaces, creates room for the spinning icon */
+}
+
+@-webkit-keyframes spinnerAnimation {
+  0% {
+    transform: translate(50%,-50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%,-50%) rotate(359deg);
+  }
+}
+@keyframes spinnerAnimation {
+  0% {
+    transform: translate(50%,-50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%,-50%) rotate(359deg);
+  }
 }
 
 /*========== one-off classes ==========*/
@@ -1424,6 +1541,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-size: 34px;
   opacity: .8;
   margin-bottom: 0;
+  margin-left: 0;
 }
 
 #customizeControls {
@@ -1432,6 +1550,20 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 90px;
   width: 40px;
   z-index: 1;
+}
+
+.editItemImageHolder {
+  height: 168px;
+  overflow: auto;
+  /*scroll bar is added with JS */
+}
+
+.editItemImageLoadPhotoMessage {
+  height: 168px;
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  left: 0;
 }
 
 #modalHolder {
@@ -1535,6 +1667,21 @@ input[type="checkbox"].fieldItem:checked + label:before {
   display: none;
 }
 
+#ov1 .invisible {
+  visibility: hidden;
+}
+
+#ov1 .visuallyHidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 #ov1 .show {
   display: block;
 }
@@ -1567,6 +1714,32 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.borderRight {
+  border-right: solid 1px rgba(255,255,255,0.08) !important;
+}
+
+.borderBottom {
+  border-bottom: solid 1px rgba(255,255,255,0.08) !important;
+}
+
+.border0 {
+  border: 0 !important;
+}
+
+.borderRadiusTop {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.podBorder {
+  border: solid 1px rgba(255,255,255,0.08);
+  border-bottom: solid 2px rgba(255,255,255,0.08);
+}
+
+.textOpacity50 {
+  opacity: .50;
 }
 
 .textOpacity75 {
@@ -1629,10 +1802,58 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-right: 5px;
 }
 
+.marginLeft10 {
+  margin-left: 10px;
+}
+
+.marginTop15 {
+  margin-top: 15px;
+}
+
+.marginTop20 {
+  margin-top: 20px !important;
+}
+
+.marginTop50 {
+  margin-top: 50px;
+}
+
+.marginBottom50 {
+  margin-bottom: 50px;
+}
+
 .margin0 {
   margin: 0;
 }
 
+.minHeight650 {
+  min-height: 650px;
+}
+
+.lineHeightReset{
+  line-height: normal;
+}
+
+.padding0 {
+  padding: 0;
+}
+
+.padding5 {
+  padding: 5px;
+}
+
+.padding10 {
+  padding: 10px;
+}
+
 .padding17px {
   padding: 17px;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.cursorDefault {
+  cursor: default;
 }
