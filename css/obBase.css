@@ -506,8 +506,8 @@ h5 {
   line-height: 1.2;
 }
 .txt-unleaded {
-  margin-left: 10px;
   line-height: 1;
+  margin-bottom: 0;
 }
 
 .unbold {
@@ -1415,6 +1415,41 @@ input[type="checkbox"].fieldItem:checked + label:before {
   padding: 5px 15px 30px 15px;
 }
 
+/*========== spinners ==========*/
+
+.spinner {
+  position: relative;
+}
+
+.spinner:before {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  animation: spinnerAnimation 3s infinite linear;
+}
+
+.spinner:after {
+  content: "\00a0 \00a0 \00a0 \00a0";
+  /* non-breaking spaces, creates room for the spinning icon */
+}
+
+@-webkit-keyframes spinnerAnimation {
+  0% {
+    transform: translate(50%,-50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%,-50%) rotate(359deg);
+  }
+}
+@keyframes spinnerAnimation {
+  0% {
+    transform: translate(50%,-50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%,-50%) rotate(359deg);
+  }
+}
+
 /*========== one-off classes ==========*/
 
 #obShadow {
@@ -1762,6 +1797,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-right: 5px;
 }
 
+.marginLeft10 {
+  margin-left: 10px;
+}
+
 .marginTop15 {
   margin-top: 15px;
 }
@@ -1792,6 +1831,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .padding0 {
   padding: 0;
+}
+
+.padding5 {
+  padding: 5px;
+}
+
+.padding10 {
+  padding: 10px;
 }
 
 .padding17px {
