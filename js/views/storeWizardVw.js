@@ -42,6 +42,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.options = options || {};
     this.parentEl = $(options.parentEl);
+    this.socketView = options.socketView;
     this.getModerators();
     this.render();
   },

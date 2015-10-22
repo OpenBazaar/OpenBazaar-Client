@@ -155,11 +155,11 @@ module.exports = Backbone.View.extend({
   },
 
   navBackClick: function(){
-    console.log("Nav Back Clicked");
+    window.history.back();
   },
 
   navFwdClick: function(){
-    console.log("Nav Fwd Clicked");
+    window.history.forward();
   },
 
   countrySelect: function(e){
