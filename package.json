@@ -19,6 +19,7 @@
     "chosen": "0.0.2",
     "is_js": "^0.7.4",
     "jquery": "^2.1.4",
+    "jquery-mousewheel": "^3.1.13",
     "moment": "^2.10.6",
     "node-polyglot": "^0.4.3",
     "safestart": "^0.8.0",

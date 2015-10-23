@@ -15,17 +15,20 @@ var Polyglot = require('node-polyglot'),
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
     languagesModel = require('./models/languagesMd'),
+    mouseWheel = require('jquery-mousewheel'),
+    mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     pageNavView = require('./views/pageNavVw'),
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
-    socketView = require('./views/socketVw');
+    socketView = require('./views/socketVw'),
     guid = "",
     cCode = "",
     server_urlLocal = "",
-    loadProfileCount = 0;
-
-var loadProfileTimeout;
+    loadProfileCount = 0,
+    loadProfileTimeout,
+    loadProfileCountdownInterval,
+    loadProfileCountdown = 5;
 
 server_urlLocal = localStorage.getItem("server_url") || "http://localhost:18469/api/v1/",
 
@@ -55,42 +58,31 @@ var loadProfile = function() {
       //make sure profile is not blank
       if (response.profile){
         guid = model.get('profile').guid;
-        console.log(guid);
         //get the user
         user.fetch({
           success: function (model, response) {
-            console.log(response);
-            if (response.ssl){
-              user.set('server_url', server_urlLocal);
-              user.set('guid', guid);
-              cCode = model.get('currency_code');
+            user.set('server_url', server_urlLocal);
+            user.set('guid', guid);
+            cCode = model.get('currency_code');
 
-              //get user bitcoin price before loading pages
-              getBTPrice(cCode, function (btAve) {
-                //put the current bitcoin price in the window so it doesn't have to be passed to models
-                window.currentBitcoin = btAve;
-                //every 15 minutes update the bitcoin price
-                setTimeout(function () {
-                  getBTPrice(cCode, function (btAve) {
-                    window.currentBitcoin = btAve;
-                  });
-                }, 54000000);
+            //get user bitcoin price before loading pages
+            getBTPrice(cCode, function (btAve) {
+              //put the current bitcoin price in the window so it doesn't have to be passed to models
+              window.currentBitcoin = btAve;
+              //every 15 minutes update the bitcoin price
+              setTimeout(function () {
+                getBTPrice(cCode, function (btAve) {
+                  window.currentBitcoin = btAve;
+                });
+              }, 54000000);
 
-                $('.js-loadingModal').hide();
-                new pageNavView({model: user});
-                new router({userModel: user, socketView: new socketView({model: user})});
-                Backbone.history.start();
-              });
-            }else{
-              $('.js-indexLoadingMsg1').text("User model did not load.");
-              $('.js-indexLoadingMsg2').text("Attempting to reach " + server_urlLocal);
-              $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
-              reloadProfile();
-              console.log("failed user ssl");
-            }
+              $('.js-loadingModal').hide();
+              new pageNavView({model: user});
+              new router({userModel: user, socketView: new socketView({model: user})});
+              Backbone.history.start();
+            });
           },
           error: function (model, response) {
-            console.log("Information for user could not be loaded: " + response.statusText);
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
             $('.js-loadingModal').hide();
             user.set('server_url', server_urlLocal);
@@ -104,7 +96,6 @@ var loadProfile = function() {
         $('.js-indexLoadingMsg2').text("Attempting to reach " + server_urlLocal);
         $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
         reloadProfile();
-        console.log("failed user profile");
       }
     },
     error: function (model, response) {
@@ -112,22 +103,34 @@ var loadProfile = function() {
       $('.js-indexLoadingMsg2').text("Attempting to reach " + server_urlLocal);
       $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
       reloadProfile();
-      console.log("error on main fetch");
     }
   });
 };
 
 var reloadProfile = function(){
   "use strict";
+  loadProfileCountdown=5;
+  loadProfileCountdownInterval = setInterval(function(){
+    if(loadProfileCountdown > 0){
+      $('.js-indexLoadingMsg4').text(loadProfileCountdown);
+      loadProfileCountdown--
+    } else {
+      $('.js-indexLoadingMsg4').text("");
+      clearInterval(loadProfileCountdownInterval);
+    }
+  }, 1000);
   if(loadProfileCount < 10){
     loadProfileTimeout = window.setTimeout(function(){
       loadProfileCount++;
       loadProfile();
-    }, 3000);
+    }, 5000);
   } else {
-    $('.js-indexLoadingMsg1').text(server_urlLocal + "cannot be reached.");
-    $('.js-indexLoadingMsg2').text("Check your server and restart the client application");
-    $('.js-indexLoadingMsg3').text("");
+    alert("Your server may not be working correctly. Loading using default settings.");
+    $('.js-loadingModal').hide();
+    user.set('server_url', server_urlLocal);
+    new pageNavView({model: user});
+    new router({userModel: user});
+    Backbone.history.start();
     window.clearTimeout(loadProfileTimeout);
   }
 };

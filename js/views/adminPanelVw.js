@@ -83,7 +83,7 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
-    //$(e.target).closest('.js-adminModal').addClass('hide');
+    $(e.target).closest('.js-adminModal').fadeTo(0,0).removeAttr('style');
     Backbone.history.loadUrl();
   },
 
