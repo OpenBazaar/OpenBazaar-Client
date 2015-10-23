@@ -12,7 +12,7 @@
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
-      style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
+      style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash  %>);"
       <% }else{ %>
       style="background-image: url(imgs/defaultUser.png)"
       <% } %>>
@@ -299,4 +299,3 @@
     </div>
   </div>
 </div>
-<div id="modalHolder"></div>

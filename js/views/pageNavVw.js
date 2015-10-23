@@ -159,11 +159,11 @@ module.exports = Backbone.View.extend({
   },
 
   navBackClick: function(){
-    console.log("Nav Back Clicked");
+    window.history.back();
   },
 
   navFwdClick: function(){
-    console.log("Nav Fwd Clicked");
+    window.history.forward();
   },
 
   countrySelect: function(e){
@@ -233,11 +233,11 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
-    $(e.target).closest('.modal').addClass('hide');
+    $(e.target).closest('.modal').addClass('fadeOut');
   },
 
   navAdminPanel: function(){
-    this.$el.find('.js-adminModal').removeClass('hide');
+    this.$el.find('.js-adminModal').removeClass('fadeOut');
     this.adminPanel.updatePage();
   },
 

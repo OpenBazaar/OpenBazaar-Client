@@ -2,7 +2,6 @@
 
 
 body {
-  margin: 0;
   background-color: rgb(6,55,83);
   overflow: hidden;
   /*fonts*/
@@ -13,19 +12,28 @@ body {
   -webkit-font-smoothing: antialiased;
   letter-spacing: .4px;
   line-height: 1.2;
+  margin: 0;
+  overflow: hidden; 
+  -webkit-font-smoothing: antialiased;
+
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  /*transition: opacity 1s;*/
+  opacity: .85;
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
   cursor: pointer;
 }
 
 a:hover,
 a:focus {
-  opacity: 0.6;
+  opacity: 1;
   text-decoration: underline;
+}
+
+a:active {
+  opacity: .75;
 }
 
 p a {
@@ -253,6 +261,7 @@ form {
   box-sizing: border-box;
   padding: 33px;
   cursor: pointer;
+  width: 316px;
 }
 
 .itemImg {
@@ -331,12 +340,23 @@ form {
 
 /* don't prefix with .btn, sometimes it is used on icons without a .btn class */
 .btn-cornerTR {
+  cursor: pointer;
   display: block;
   position: absolute;
   top: 10px;
+  opacity: .75;
   right: 10px;
   float: none;
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
   z-index: 1;
+}
+
+.btn-cornerTR:hover {
+  opacity: 1;
+}
+
+.btn-cornerTR:active {
+  opacity: .5;
 }
 
 .btn-cornerTR.btn-cornerTRSmall {
@@ -389,12 +409,12 @@ form {
   transition: all .1  s cubic-bezier(0, 0, 0.5, 1);
 }
 
-.row10 {
-  margin-bottom: 10px;
-}
-
 .row5 {
   margin-bottom: 5px;
+}
+
+.row10 {
+  margin-bottom: 10px;
 }
 
 .row20 {
@@ -445,7 +465,9 @@ form {
   height: 100%;
   top: 0;
   left: 0;
-  padding-top: 80px;
+  /* use fadeIn and fadeOut to change opacity */
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
+  padding-top: 25px;
 }
 
 .modal.modal-navOffset {
@@ -454,7 +476,7 @@ form {
 
 .modal-child {
   width: 525px;
-  height: 540px;
+  height: 624px;
   margin: 0 auto;
   position: absolute;
   left: 50%;
@@ -463,6 +485,11 @@ form {
 
 .modal.modal-navOffset .modal-child {
   margin-top: 25px;
+}
+
+.modal.fadeOut {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .accordion {
@@ -481,6 +508,10 @@ form {
 .positionWrapper {
   /* use when you need a generic element around one or more elements where one is absolutely positioned */
   position: relative;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 /*========== typography ==========*/
@@ -521,8 +552,8 @@ h5 {
   line-height: 1.2;
 }
 .txt-unleaded {
-  margin-left: 10px;
   line-height: 1;
+  margin-bottom: 0;
 }
 
 .unbold {
@@ -566,7 +597,7 @@ h5 {
   background-size: cover;
   bottom: 0;
   content: " ";
-  height: 84.3px;
+  height: 80px;
   left: 30px;
   position: absolute;
   width: 60px;
@@ -601,8 +632,9 @@ h5 {
 }
 
 .modal-opaque {
-  background-color: rgb(7,65,97);
+  background-color: rgba(25,25,25,.75);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  top: 50px;
 }
 
 .modal-opaque.modal-navBlock {
@@ -621,7 +653,7 @@ h5 {
   background-size: cover;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  height: 220px;
+  height: 250px;
   position: relative;
   width: 525px;
 }
@@ -857,7 +889,7 @@ input[type="text"].txtField-bar {
   line-height: 47px;
   margin-top: 3px;
   opacity: .50;
-  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage .btn.btn-bar {
@@ -1260,14 +1292,14 @@ input[type="radio"].fieldItem + label:before {
   height: 16px;
   width: 16px;
   border-radius: 12px;
-  border: solid 1px blue;
+  border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
 }
 
 input[type="radio"].fieldItem:checked + label:before {
-  background: #575656;
-  box-shadow: inset 0 0 0 4px #514F4F;
+  background: #fff;
+  box-shadow: inset 0 0 0 4px #086A9E;
 }
 
 .radioLabel {
@@ -1423,6 +1455,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   z-index: 99;
 }
 
+.shadow-inner1-light {
+  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.65);
+}
+
 .shadow-inner1 {
   /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,.75)));*/
   box-shadow: inset 0px -400px 222px -282px rgba(25,25,25,1);
@@ -1511,15 +1547,42 @@ input[type="checkbox"].fieldItem:checked + label:before {
   padding: 5px 15px 30px 15px;
 }
 
-/*========== one-off classes ==========*/
+/*========== spinners ==========*/
 
-#obShadow {
-  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 115px;
+.spinner {
+  position: relative;
 }
+
+.spinner:before {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  animation: spinnerAnimation 3s infinite linear;
+}
+
+.spinner:after {
+  content: "\00a0 \00a0 \00a0 \00a0";
+  /* non-breaking spaces, creates room for the spinning icon */
+}
+
+@-webkit-keyframes spinnerAnimation {
+  0% {
+    transform: translate(50%,-50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%,-50%) rotate(359deg);
+  }
+}
+@keyframes spinnerAnimation {
+  0% {
+    transform: translate(50%,-50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%,-50%) rotate(359deg);
+  }
+}
+
+/*========== one-off classes ==========*/
 
 .modal .homeModal-hero {
   background-image: url('../imgs/obSettingsHeroB.jpg');
@@ -1536,13 +1599,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 .modal .homeModal-accordion {
-  height: 320px;
+  height: 374px;
 }
 
 .modal .homeModal-accordion .btn-bar{
   border-radius: 0;
   font-size: 13px;
   height: 50px;
+  line-height: 50px;
   margin: 0;
   opacity: 1;
 }
@@ -1564,6 +1628,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
   border-bottom: solid 1px #327EB8;
 }
 
+.modal .homeModal-accordion .flexRow {
+  width: 100%;
+}
+
+.modal .homeModal-accordion .accordion-child {
+  width: 525px;
+}
+
 .modal .homeModal-settings,
 .modal .homeModal-settings.flexRow {
   height: 178px;
@@ -1572,7 +1644,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 .modal .homeModal-settings.homeModal-settings-noSearch {
-  height: 220px;
+  height: 274px;
 }
 
 .modal .homeModal-avatarPreview {
@@ -1608,6 +1680,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 80px;
   width: 40px;
   z-index: 100;
+}
+
+#customizeControls .btn-square {
+  box-shadow: 0px 1px 2px #898989;
+  margin-bottom: 0;
+  width: 40px;
+  height: 40px;
+  border: solid 2px #fff;
 }
 
 .editItemImageHolder {
@@ -1761,21 +1841,21 @@ input[type="checkbox"].fieldItem:checked + label:before {
   overflow-y: scroll;
 }
 
-.vCentered {
+#ov1 .vCentered {
   /* must be inside a relatively positioned containing element */
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.hCentered {
+#ov1 .hCentered {
   /* must be inside a relatively positioned containing element */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.fullCentered {
+#ov1 .fullCentered {
   /* must be inside a relatively positioned containing element */
   position: absolute;
   top: 50%;
@@ -1783,73 +1863,77 @@ input[type="checkbox"].fieldItem:checked + label:before {
   transform: translate(-50%, -50%);
 }
 
-.borderRight {
-  border-right: solid 1px rgba(255,255,255,0.08) !important;
+#ov1  .borderRight {
+  border-right: solid 1px rgba(255,255,255,0.08);
 }
 
-.borderBottom {
-  border-bottom: solid 1px rgba(255,255,255,0.08) !important;
+#ov1  .borderBottom {
+  border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
-.border0 {
-  border: 0 !important;
+#ov1  .border0 {
+  border: 0;
 }
 
-.borderRadiusTop {
+#ov1  .borderRadiusTop {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
 
-.podBorder {
+#ov1  .podBorder {
   border: solid 1px rgba(255,255,255,0.08);
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
-.textOpacity50 {
+#ov1  .textOpacity50 {
   opacity: .50;
 }
 
-.textOpacity75 {
+#ov1  .textOpacity75 {
   opacity: .75;
 }
 
-.textOpacity1 {
+#ov1  .textOpacity1 {
   opacity: 1;
 }
 
-.textSize14px {
+#ov1  .textSize14px {
   font-size: 14px;
 }
 
-.textSize15px {
+#ov1  .textSize15px {
   font-size: 15px;
 }
 
-.textSize17px {
+#ov1  .textSize17px {
   font-size: 17px;
 }
 
-.textSize13px {
+#ov1  .textSize20px {
+  font-size: 20px;
+}
+
+#ov1  .textSize13px {
   font-size: 13px;
 }
 
-.textFirstCharUppercase {
+#ov1  .textFirstCharUppercase {
   text-transform: lowercase;
 }
 
-.textFirstCharUppercase::first-letter {
+#ov1  .textFirstCharUppercase::first-letter {
   text-transform: uppercase;
 }
 
-.textWeightLight {
+#ov1  .textWeightLight {
   font-weight: 100;
 }
 
-.textWeightNormal {
+#ov1  .textWeightNormal {
   font-weight: 400;
 }
 
-.textWeightMedium {
+#ov1  .textWeightMedium {
   font-weight: 500;
 }
 
@@ -1857,71 +1941,68 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-size: 20px;
 }
 
-.floatLeft {
+#ov1  .alignCenter {
+  text-align: center;
+}
+
+#ov1  .floatLeft {
   float: left;
 }
 
-.floatRight {
+#ov1  .floatRight {
   float: right;
 }
 
-.right10 {
+#ov1  .right10 {
   right: 10px;
 }
 
-.marginRight5 {
+#ov1  .marginRight5 {
   margin-right: 5px;
 }
 
-.marginTop2 {
-  margin-top: 2px;
+
+#ov1  .marginLeft10 {
+  margin-left: 10px;
 }
 
-.marginTop6 {
-  margin-top: 6px;
-}
-
-.marginTop10 {
-  margin-top: 10px;
-}
-
-.marginTop15 {
+#ov1  .marginTop15 {
   margin-top: 15px;
 }
 
-.marginLeft6 {
-  margin-left: 6px;
+#ov1  .marginTop20 {
+  margin-top: 20px;
 }
 
-.marginTop20 {
-  margin-top: 20px !important;
-}
-
-.marginTop50 {
+#ov1  .marginTop50 {
   margin-top: 50px;
 }
 
-.marginBottom50 {
+#ov1  .marginBottom50 {
   margin-bottom: 50px;
 }
 
-.margin0 {
+#ov1  .margin0 {
   margin: 0;
 }
 
-.minHeight650 {
+#ov1  .marginAuto {
+  margin: auto;
+}
+
+#ov1  .minHeight650 {
   min-height: 650px;
 }
 
-.lineHeightReset{
+#ov1  .lineHeightReset{
   line-height: normal;
 }
 
-.padding0 {
+#ov1  .padding0 {
   padding: 0;
 }
 
-.bottom0 {
+#ov1 .bottom0 {
   bottom: 0;
 }
 
@@ -1933,22 +2014,39 @@ input[type="checkbox"].fieldItem:checked + label:before {
   position: relative;
 }
 
-.padding17px {
+
+#ov1  .padding5 {
+  padding: 5px;
+}
+
+#ov1  .padding10 {
+  padding: 10px;
+}
+
+#ov1  .padding17px {
   padding: 17px;
 }
 
-.width100 {
+#ov1  .paddingLeft15 {
+  padding-left: 15px;
+}
+
+#ov1  .width100 {
   width: 100%;
 }
 
-.width600 {
+#ov1 .width600 {
   width: 600px;
 }
 
-.cursorDefault {
+#ov1  .cursorDefault {
   cursor: default;
 }
 
-.blur {
-  -webkit-filter: blur(4px);
+#ov1  .borderBottomLeftRaidus3 {
+  border-bottom-left-radius: 3px !important;
+}
+
+#ov1  .borderBottomRightRaidus3 {
+  border-bottom-right-radius: 3px !important;
 }

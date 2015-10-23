@@ -22,27 +22,12 @@ module.exports = Backbone.View.extend({
     'blur input': 'validateInput'
   },
 
-  getModerators: function() {
-    "use strict";
-    var id = Math.random().toString(36).slice(2)
-    var connection = new WebSocket('ws://seed.openbazaar.org:18466');
-    connection.onopen = function(){
-      console.log("connection open");
-      connection.send({"request": {"api": "v1", "id": id, "command": "get_moderators" }});
-    };
-    connection.onerror = function(error){
-      console.log("connection error "+ error);
-    };
-    connection.onmessage = function(e){
-      console.log("connection message "+ e.data);
-    };
-  },
-
   initialize: function(options) {
     "use strict";
     this.options = options || {};
     this.parentEl = $(options.parentEl);
-    this.getModerators();
+    this.socketView = options.socketView;
+    //this.getModerators();
     this.render();
   },
 
@@ -58,6 +43,7 @@ module.exports = Backbone.View.extend({
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
     acc.find('.js-accordionNext').on('click', function(){
+      console.log("click");
       var oldPos = accWin.css('left').replace("px","");
       if(oldPos > (accWidth * accNum * -1 + accWidth)){
         accWin.css('left', function(){
@@ -119,6 +105,11 @@ module.exports = Backbone.View.extend({
         }
       }).colpickHide();
       self.errorModal = $('.js-messageModal');
+
+      // fade the modal in after it loads and focus the input
+      self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
+      self.$el.find('#storeNameInput').focus();
+      $('#obContainer').addClass('blur');
     });
   },
 
@@ -160,17 +151,8 @@ module.exports = Backbone.View.extend({
   setValues: function() {
     "use strict";
     var self = this;
-    //add all countries to the Ships To select list
-    var countries = new countriesModel(),
-        countryList = countries.get('countries'),
-        locationSelect = this.$el.find('#locationSelect');
-    
-    __.each(countryList, function(country, i){
-      locationSelect.append('<option value="'+country.dataName+'">'+country.name+'</option>');
-    });
 
-    locationSelect.val(this.model.get('user').country);
-    locationSelect.chosen();
+    this.$el.find('#locationSelect').val(this.model.get('user').country);
     //activate tags plugin
     this.categoriesInput = new Taggle('categoriesInput');
   },
@@ -197,6 +179,7 @@ module.exports = Backbone.View.extend({
   blockClicks: function(e) {
     "use strict";
     e.stopPropagation();
+
   },
 
   closeWizard: function() {
@@ -258,6 +241,7 @@ module.exports = Backbone.View.extend({
         success: function (data) {
           if (data.success === true){
             self.trigger('storeCreated');
+            //new Notification('You\'ve added a store to your page!'); //TO DO: We need to localize this
           }else if (data.success === false){
             self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
@@ -278,6 +262,8 @@ module.exports = Backbone.View.extend({
 
   close: function(){
     "use strict";
+    $('#obContainer').removeClass('blur');
+    $('.js-storeWizardModal').addClass('fadeOut');
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();

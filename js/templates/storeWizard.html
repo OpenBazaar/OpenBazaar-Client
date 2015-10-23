@@ -1,116 +1,75 @@
-<div class="modal modal-opaque js-storeWizardModal">
+<div class="modal modal-opaque js-storeWizardModal fadeOut">
   <div class="modal-child modal-childMain">
     <div class="btn-cornerTR btn-cornerTROutR btn-flushTop js-closeStoreWizardModal">
       <h2 class="ion-close-round"></h2>
     </div>
-    <div class="modal-hero js-storeWizardHero"
+    <div class="modal-hero js-storeWizardHero shadow-inner1-light"
     <% if(ob.page.profile.header_hash) { %>
     style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.header_hash %>);"
     <% }else{ %>
     style="background-image: url(imgs/defaultBanner.png)"
     <% } %>
-      >
-      <form id="storeWizardImageForm">
-        <label for="storeWizardImageUpload" class="btn btn-c1 btn-txt fullCentered"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
-        <input type="file" name="image" id="storeWizardImageUpload" accept="image/*" class="hide js-storeWizardImageUpload">
-      </form>
-    </div>
+    ></div>
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
       <div class="accordion-window">
         <div class="accordion-child">
-          <div class="bar barTxt h6">
-            <%= polyglot.t('CreateStore') %>
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+            <%= polyglot.t('Store Details') %>
           </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch scrollOverflow">
-            <form id="storeWizardForm" class="flex-border">
-              <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>">
+          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary" id="storeWizardForm">
+            <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>" />
+            <input name="location" id="locationSelect" type="text" class="hide"/>
 
-              <div class="flexRow">
-                <div class="flexRow">
-                    <div class="flexCol-4">
-                      <label class="fieldItem" for="storeNameInput">
-                        <%= polyglot.t('Store') %> <%= polyglot.t('Name') %>
-                      </label>
-                    </div>
-                    <div class="flexCol-8">
-                      <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
-                    </div>
-                </div>
-                <div class="flexRow">
-                  <div class="flexCol-4">
-                    <label class="fieldItem" for="locationselect">
-                      <%= polyglot.t('Location') %>
+            <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
+                  <div class="flexCol-3 borderRight custCol-border-secondary">
+                    <label class="fieldItem" for="storeNameInput">
+                      <%= polyglot.t('Name') %>
                     </label>
                   </div>
-                  <div class="flexCol-8">
-                    <div class="fieldItem">
-                      <div class="fieldItem-selectWrapper noIcon">
-                        <select name="location" id="locationSelect" required>
-                        </select>
-                      </div>
-                    </div>
+                  <div class="flexCol-9">
+                    <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
                   </div>
+              </div>
+              <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
+                  <label class="fieldItem" for="aboutInput">
+                    <%= polyglot.t('Description') %>
+                  </label>
                 </div>
-                <div class="flexRow">
-                  <div class="flexCol-4">
-                    <label class="fieldItem" for="websiteInput">
-                      <%= polyglot.t('Website') %>
-                    </label>
-                  </div>
-                  <div class="flexCol-8">
-                    <input name="website" id="websiteInput" type="url" class="fieldItem" value="<%= ob.page.profile.website %>" pattern="https?://.+" placeholder="http://www.yourwebsite.com">
-                  </div>
+                <div class="flexCol-9">
+                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
                 </div>
-                <div class="flexRow">
-                  <div class="flexCol-4">
-                    <label class="fieldItem" for="emailInput">
-                      <%= polyglot.t('Email') %>
-                    </label>
-                  </div>
-                  <div class="flexCol-8">
-                    <input name="email" id="emailInput" type="email" class="fieldItem" value="<%= ob.page.profile.email %>" placeholder="you@email.com">
-                  </div>
+              </div>
+              <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
+                  <label class="fieldItem" for="realCategoriesInput">
+                    <%= polyglot.t('Keywords') %><!--  (<%= polyglot.t('UpTo3') %>) -->
+                  </label>
                 </div>
-                <div class="flexRow">
-                  <div class="flexCol-4">
-                    <label class="fieldItem">
-                      <%= polyglot.t('NSFW') %>
-                    </label>
-                  </div>
-                  <div class="flexCol-8">
-                    <div class="fieldItem">
-                      <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue">Yes</label>
-                      <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse">No</label>
-                    </div>
-                  </div>
+                <div class="flexCol-9">
+                  <input type="text" name="categories" id="realCategoriesInput" class="hide" />
+                  <div class="fieldItem" id="categoriesInput"></div>
                 </div>
-                <div class="flexRow">
-                  <div class="flexCol-4">
-                    <label class="fieldItem" for="realCategoriesInput">
-                      <%= polyglot.t('Categories') %> (<%= polyglot.t('UpTo3') %>)
-                    </label>
-                  </div>
-                  <div class="flexCol-8">
-                    <input type="text" name="categories" id="realCategoriesInput" class="hide" />
-                    <div class="fieldItem" id="categoriesInput"></div>
-                  </div>
+              </div>
+              <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-3 borderRight custCol-border-secondary">
+                  <label class="fieldItem">
+                    <%= polyglot.t('NSFW') %>
+                  </label>
                 </div>
-                <div class="flexRow">
-                  <div class="flexCol-4">
-                    <label class="fieldItem" for="websiteInput">
-                      <%= polyglot.t('About') %>
-                    </label>
-                  </div>
-                  <div class="flexCol-8">
-                    <textarea name="about" rows="8" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
+                <div class="flexCol-9">
+                  <div class="fieldItem">
+                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
+                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-closeStoreWizardModal"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
+            </div>
+          </form>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child">
@@ -120,13 +79,13 @@
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="txtField txtField-bar search" />
+                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Search') %> <%= polyglot.t('for') %> <%= polyglot.t('moderators') %>" />
               </div>
             </div>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-storeWizardSave"><%= polyglot.t('Save') %></a>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Save') %></a>
           </div>
         </div>
       </div>

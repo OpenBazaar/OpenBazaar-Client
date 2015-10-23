@@ -15,7 +15,7 @@ module.exports = Backbone.Model.extend({
     nsfw: false,
     origin: "",
     ships_to: "",
-    GUID: "",
+    guid: "",
     handle: 0,
     avatar_hash: "",
     priceSet: 0, //set in Update Attribute below, so view can listen for it

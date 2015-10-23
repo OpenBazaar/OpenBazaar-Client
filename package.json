@@ -11,13 +11,15 @@
     "start": "electron main.js",
     "test": "exit 0",
     "lint": "eslint .",
-    "valiquire": "valiquire --redirect valiquire-redirect.js ."
+    "valiquire": "valiquire --redirect valiquire-redirect.js .",
+    "startwithserver": "electron main.js"
   },
   "dependencies": {
     "backbone": "^1.2.1",
     "chosen": "0.0.2",
     "is_js": "^0.7.4",
     "jquery": "^2.1.4",
+    "jquery-mousewheel": "^3.1.13",
     "moment": "^2.10.6",
     "node-polyglot": "^0.4.3",
     "safestart": "^0.8.0",

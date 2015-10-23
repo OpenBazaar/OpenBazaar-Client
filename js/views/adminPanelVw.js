@@ -83,7 +83,7 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
-    //$(e.target).closest('.js-adminModal').addClass('hide');
+    $(e.target).closest('.js-adminModal').fadeTo(0,0).removeAttr('style');
     Backbone.history.loadUrl();
   },
 
@@ -118,10 +118,20 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.postData(new FormData(this.$el.find('#adminPanelAvatar')[0]), "upload_image",
       function(data){
-        var imageHash = data.image_hashes[0];
+        var imageHash = data.image_hashes[0],
+            formData = new FormData();
         if (imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-          self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('server_url') + "get_image?hash=" + imageHash + ')');
-          self.$el.find('.js-adminAvatarMsg').html("Avatar has been set");
+          formData.append("avatar", imageHash);
+          self.postData(formData, "profile",
+              function (data) {
+                self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('server_url') + "get_image?hash=" + imageHash + ')');
+                self.userProfile.set('avatar', imageHash);
+                self.$el.find('.js-adminAvatarMsg').html("Avatar has been set");
+              },
+              function (data) {
+                alert("Failed. " + data.reason);
+              }
+          );
         }else {
           alert("image hash is blank");
         }
