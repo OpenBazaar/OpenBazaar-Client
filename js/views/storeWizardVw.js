@@ -151,17 +151,8 @@ module.exports = Backbone.View.extend({
   setValues: function() {
     "use strict";
     var self = this;
-    //add all countries to the Ships To select list
-    var countries = new countriesModel(),
-        countryList = countries.get('countries'),
-        locationSelect = this.$el.find('#locationSelect');
-    
-    __.each(countryList, function(country, i){
-      locationSelect.append('<option value="'+country.dataName+'">'+country.name+'</option>');
-    });
 
-    locationSelect.val(this.model.get('user').country);
-    locationSelect.chosen();
+    this.$el.find('#locationSelect').val(this.model.get('user').country);
     //activate tags plugin
     this.categoriesInput = new Taggle('categoriesInput');
   },

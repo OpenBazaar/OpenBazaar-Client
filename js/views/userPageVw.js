@@ -379,7 +379,6 @@ module.exports = Backbone.View.extend({
   renderItem: function(hash){
     "use strict";
     var self = this;
-    console.log("render item hash "+hash);
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
