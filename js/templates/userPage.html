@@ -5,6 +5,10 @@
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
+<form id="userPageImageForm">
+  <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+  <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
+</form>
 </div>
 
 <div class="user-page-content">
@@ -12,7 +16,7 @@
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
-      style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash  %>);"
+      style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
       <% }else{ %>
       style="background-image: url(imgs/defaultUser.png)"
       <% } %>>
@@ -25,42 +29,12 @@
     </div>
     </div>    
   </div>
-<form id="userPageImageForm">
-  <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
-  <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
-</form>
-</div>
-<div class="bar navBar barFlush navBar custCol-secondary">
-  <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
-  <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
-  <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
-  <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
-  <% if(ob.ownPage == true) { %>
-  <div class="navEnd pad15">
-    <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up50">
-      <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('Sell') %> <%= polyglot.t('Item') %></a>
-      <a class="btn btn-txt custCol-primary js-createStore"><%= polyglot.t('CreateStore') %></a>
-    </div>
-    <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up50">
-      <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
-    </div>
-    <div class="nav-ctrlGroup js-itemButtons js-userPageControls hide">
-      <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
-    </div>
-    <div class="nav-ctrlGroup js-itemButtons js-userPageControls hide">
-      <a class="btn btn-txt custCol-primary js-deleteItem"><%= polyglot.t('Delete') %></a>
-    </div>
-    <div class="nav-ctrlGroup js-itemEditButtons pull-up50 js-userPageControls hide textOpacity75">
-      <a class="btn btn-txt custCol-primary js-cancelItem"><%= polyglot.t('Cancel') %></a>
-    </div>
-    <div class="nav-ctrlGroup js-itemCustomizationButtons pull-up50 js-userPageControls hide textOpacity75">
-      <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
-    </div>
 
+  <div class="flexRow shadow-inner1 user-page-header">
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
-      style="background-image: url(<%- ob.user.server %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
+      style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
       <% }else{ %>
       style="background-image: url(imgs/defaultUser.png)"
       <% } %>></div>
@@ -73,7 +47,7 @@
   </div>
   </div>
 
-  <div class="bar user-page-navigation-filler custCol-primary hide"></div>
+  <div class="bar user-page-navigation-filler hidden custCol-primary" style="display: none"></div>
   <div class="bar navBar barFlush user-page-navigation custCol-secondary">
     <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
@@ -117,18 +91,18 @@
             <%= ob.page.profile.about %>
           </div>
         </div>
-      </div>
-      <div class="flexCol-4 flex-border">
-        <div class="flexRow">
-          <div class="flexRow custCol-border-secondary">
-            <div class="rowItem">
-              <div class="textOpacity75"><%= polyglot.t('Website') %></div>
-              <div>
-                <% if(ob.page.profile.website) { %>
-                <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a>
-                <%}else{%>
-                not provided
-                <%}%>
+        <div class="flexCol-4 flex-border border0">
+          <div class="flexRow">
+            <div class="flexRow custCol-border-secondary">
+              <div class="rowItem">
+                <div class="textOpacity75"><%= polyglot.t('Website') %></div>
+                <div>
+                  <% if(ob.page.profile.website) { %>
+                  <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a>
+                  <%}else{%>
+                  not provided
+                  <%}%>
+                </div>
               </div>
             </div>
             <div class="flexRow custCol-border-secondary">
@@ -143,78 +117,40 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="rowItem">
-              <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
-              <div>
-                <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
-                  <div>
-                    <%= ob.page.profile.social_accounts.facebook.username %>
-                  </div>
-                  <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.proof) { %>
-                    <h3>Proof</h3>
-                    <div>
-                      <a href="<%= ob.page.profile.social_accounts.facebook.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.facebook.proof %></a>
-                    </div>
-                  <%}%>
-                <%}else{%>
+            <div class="flexRow custCol-border-secondary">
+              <div class="rowItem">
+                <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
+                <div>
+                  <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
+                  <%= ob.page.profile.social_accounts.facebook.username %>
+                  <%}else{%>
                   not provided
-                <%}%>
+                  <%}%>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="rowItem">
-              <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
-              <div>
-                <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
+            <div class="flexRow custCol-border-secondary">
+              <div class="rowItem">
+                <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
+                <div>
+                  <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
                   <%= ob.page.profile.social_accounts.instagram.username %>
-                  <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.proof) { %>
-                    <h3>Proof</h3>
-                    <div>
-                      <a href="<%= ob.page.profile.social_accounts.instagram.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.instagram.proof %></a>
-                    </div>
-                  <%}%>
-                <%}else{%>
+                  <%}else{%>
                   not provided
-                <%}%>
+                  <%}%>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="rowItem">
-              <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
-              <div>
-                <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
-                  <a href="http://twitter.com/<%= ob.page.profile.social_accounts.twitter.username %>" class="js-externalLink"><%= ob.page.profile.social_accounts.twitter.username %></a>
-                  <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.proof) { %>
-                    <h3>Proof</h3>
-                    <div>
-                      <a href="<%= ob.page.profile.social_accounts.twitter.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.twitter.proof %></a>
-                    </div>
-                  <%}%>
-                <%}else{%>
-                  not provided
-                <%}%>
-              </div>
-            </div>
-          </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="rowItem">
-              <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
-              <div>
-                <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
+            <div class="flexRow custCol-border-secondary">
+              <div class="rowItem">
+                <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
+                <div>
+                  <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
                   <%= ob.page.profile.social_accounts.snapchat.username %>
-                    <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.proof) { %>
-                      <h3>Proof</h3>
-                      <div>
-                        <a href="<%= ob.page.profile.social_accounts.snapchat.proof %>" class="js-externalLink"><%= ob.page.profile.social_accounts.snapchat.proof %></a>
-                      </div>
-                    <%}%>
-                <%}else{%>
+                  <%}else{%>
                   not provided
-                <%}%>
+                  <%}%>
+                </div>
               </div>
             </div>
             <div class="flexRow borderBottom custCol-border-secondary">
@@ -299,3 +235,4 @@
     </div>
   </div>
 </div>
+<div id="modalHolder"></div>

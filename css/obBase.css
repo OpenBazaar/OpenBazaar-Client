@@ -141,7 +141,6 @@ form {
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.65);
-  opacity: 0;
   z-index: 2;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 
@@ -1447,6 +1446,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 70px;
   width: 950px;
   padding: 0;
+  z-index: 0;
 }
 
 .user-page-content {
@@ -1505,7 +1505,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
   position: fixed;
   top: 102px;
   z-index: 100;
-  box-shadow: 0px 10px 43px -10px rgba(0,0,0,0.20);
+  box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
 }
 
 .user-page-header {
@@ -1557,7 +1557,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
   position: absolute;
   top: 50%;
   right: 50%;
-  animation: spinnerAnimation 3s infinite linear;
+  animation: spinnerAnimation 1.75s infinite linear;
 }
 
 .spinner:after {
@@ -1913,6 +1913,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-size: 20px;
 }
 
+#ov1  .textSize24px {
+  font-size: 24px;
+}
+
 #ov1  .textSize13px {
   font-size: 13px;
 }
@@ -1962,8 +1966,16 @@ input[type="checkbox"].fieldItem:checked + label:before {
 }
 
 
+#ov1  .marginLeft6 {
+  margin-left: 6px;
+}
+
 #ov1  .marginLeft10 {
   margin-left: 10px;
+}
+
+#ov1  .marginTop2 {
+  margin-top: 2px;
 }
 
 #ov1  .marginTop15 {
@@ -2021,6 +2033,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .padding10 {
   padding: 10px;
+}
+
+#ov1  .padding20 {
+  padding: 20px;
 }
 
 #ov1  .padding17px {
