@@ -5,7 +5,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  className: "flexCol-4",
+  className: "flexCol-4 custCol-border-secondary",
 
   events: {
     'click .js-item': 'itemClick',
