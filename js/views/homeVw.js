@@ -55,6 +55,25 @@ module.exports = Backbone.View.extend({
       }
     });
 
+    // Josh, not sure where this should go, move wherever needed
+    var slimVisible = false;
+    $("#obContainer").scroll(function(){
+      if ($(this).scrollTop() > 20 && slimVisible === false ) {
+        slimVisible = true;
+        $('.home-page-navigation-filler').show();
+        $('.home-page-header').addClass('home-page-header-slim');
+        $('.home-page-header-slim').show();
+        $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
+      }
+      if ($(this).scrollTop() < 20 && slimVisible === true ) {
+        slimVisible = false;
+        $('.home-page-navigation-filler').hide();
+        $('.home-page-header').removeClass('home-page-header-slim');
+        $('.home-page-header-slim').hide();
+        $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+      }
+    });
+
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){this.handleSocketMessage(response)});
     this.socketItemID = Math.random().toString(36).slice(2);
     this.socketVendorID = Math.random().toString(36).slice(2);
