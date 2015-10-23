@@ -1421,8 +1421,9 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .popMenu-navBar a {
   display: block;
-  line-height: 25px;
-  padding: 0 15px;
+  font-size: 14px;
+  line-height: 26px;
+  padding: 0 16px;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
 }
 
