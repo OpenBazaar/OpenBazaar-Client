@@ -177,8 +177,16 @@ module.exports = Backbone.View.extend({
       data: self.userProfileFetchParameters,
       processData: true,
       success: function(model){
+        if(self.options.ownPage == true){
+          model.set('headerURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').header_hash);
+          model.set('avatarURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').avatar_hash);
+        } else {
+          model.set('headerURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').header_hash+"&guid="+self.pageID);
+          model.set('avatarURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').avatar_hash+"&guid="+self.pageID);
+        }
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
         self.model.set({ownPage: self.options.ownPage});
+        console.log(model);
         self.render();
       },
       error: function(model, response){
@@ -359,6 +367,11 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
+      if(self.options.ownPage == true){
+        arrayItem.imageURL = self.options.userModel.get('server_url')+"get_image?hash="+arrayItem.thumbnail_hash;
+      } else {
+        arrayItem.imageURL = self.options.userModel.get('server_url')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+arrayItem.guid;
+      }
     });
     this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
     this.subViews.push(this.itemList);
@@ -391,6 +404,9 @@ module.exports = Backbone.View.extend({
       itemHash: hash
         //id: hash
     });
+    if(self.options.ownPage == true){
+      this.item.set('imageExtension', "&guid="+this.item.get('id').pubkeys.guid);
+    }
     this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //remove old item before rendering
     if(this.itemView){

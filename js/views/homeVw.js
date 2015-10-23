@@ -128,10 +128,11 @@ module.exports = Backbone.View.extend({
     //get data from inside the listing object
     item = item.listing;
     item.userCurrencyCode = this.userModel.get('currency_code');
-    item.server_url = this.userModel.get('server_url');
+    item.imageURL = this.userModel.get('server_url')+"get_image?hash="+item.thumbnail_hash+"&guid="+item.guid;
+    item.avatarURL = this.userModel.get('server_url')+"get_image?hash="+item.avatar_hash+"&guid="+item.guid;
+    item.showAvatar = true;
     item.userID = item.guid;
     var newItemModel = new itemShortModel(item);
-    //var itemShort = new itemShortView({model: newItemModel, el: '.js-list1'});
     var itemShort = new itemShortView({model: newItemModel});
     this.$el.find('.js-list1').append(itemShort.el);
     this.subViews.push(itemShort);
@@ -141,8 +142,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     user.server_url = this.userModel.get('server_url');
     user.userID = user.guid;
+    user.avatarURL = this.userModel.get('server_url')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
     var newUserModel = new userShortModel(user)
-    //var storeShort = new userShortView({model: newUserModel, el: '.js-list2'});
     var storeShort = new userShortView({model: newUserModel});
     this.$el.find('.js-list2').append(storeShort.el);
     this.subViews.push(storeShort);
