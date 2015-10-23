@@ -1,7 +1,7 @@
 <div class="gridItem clearfix">
   <div class="itemImg row10 js-item" data-id="<%= ob.contract_hash %>"
     <% if(ob.thumbnail_hash) { %>
-    style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.thumbnail_hash %>);"
+    style="background-image: url(<%- ob.imageURL %>);"
     <% } else { %>
     style="background-image: url(imgs/defaultItem.png);"
     <% } %>>
@@ -10,9 +10,9 @@
     <div>
       <div>
         <% if(ob.showAvatar) { %>
-        <div class="thumbnail js-avatar" data-handle="<%= ob.handle %>"
-          <% if(typeof(avatar_hash) !== "undefined" && avatar_hash) { %>
-          style="background-image: url(<%- avatar_hash %>);"
+        <div class="thumbnail box-border js-avatar" data-handle="<%= ob.handle %>"
+          <% if(ob.avatar_hash) { %>
+          style="background-image: url(<%- ob.avatarURL %>);"
           <% } else { %>
           style="background-image: url(imgs/defaultUser.png)"
         <% } %>></div>
