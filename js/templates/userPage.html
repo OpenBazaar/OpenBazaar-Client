@@ -1,14 +1,10 @@
 <div class="mainContainer custCol-background">
   <div class="banner-large js-userPageBanner custCol-secondary"
   <% if(ob.page.profile.header_hash) { %>
-  style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.header_hash %>);"
+  style="background-image: url(<%- ob.page.headerURL %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
-<form id="userPageImageForm">
-  <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
-  <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
-</form>
 </div>
 
 <div class="user-page-content">
@@ -27,10 +23,14 @@
         <div class="floatLeft marginLeft6 marginTop2"><%= ob.page.profile.handle %></div>
       </div>
     </div>
-    </div>    
+    </div>
   </div>
 
   <div class="flexRow shadow-inner1 user-page-header">
+    <form id="userPageImageForm">
+      <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+      <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
+    </form>
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
