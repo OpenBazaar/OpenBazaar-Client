@@ -1,7 +1,7 @@
 <div class="rowItem js-userShort clickable" data-guid="<%= ob.guid %>">
   <div class="thumbnail thumbnail-large pull-left box-border"
   <% if(ob.avatar_hash) { %>
-  style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.avatar_hash %>);"
+  style="background-image: url(<%- ob.avatarURL %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
