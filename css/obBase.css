@@ -1452,7 +1452,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 .user-page-content {
   position: relative;
   width: 950px;
-  z-index: 99;
+  /*z-index: 99;*/
 }
 
 .shadow-inner1-light {

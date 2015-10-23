@@ -1,9 +1,12 @@
 var __ = require('underscore');
 var fs = require('fs');
+var path = require('path');
 
 module.exports = function(templateFile, callback){
 
-  fs.readFile(templateFile, "utf8", function(err, ob){
+  var cur_dir = path.dirname(require.main.filename);
+  fs.readFile(cur_dir + path.sep + templateFile, "utf8", function(err, ob){
+
     if (err) {
       throw err;
     }

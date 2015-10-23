@@ -4,35 +4,37 @@
 var safestart = require('safestart');
 safestart(__dirname);
 
+var fs = require('fs');
+var path = require('path');
+
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 // Check if we need to kick off the python server-daemon (Desktop app)
-if(process.argv.length > 2 && (process.argv[2].toUpperCase() == "startserver".toUpperCase())) {
-  // Kick it off
+if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
   console.log('Starting OpenBazaar Server');
-  var subpy = '';
-  if(process.argv.length > 3 && process.argv[3].toUpperCase() == "testnet".toUpperCase()) {
-    subpy = require('child_process').spawn('python', [__dirname + '/OpenBazaar-Server/openbazaard.py', 'start', '--testnet'], {detach: true});
-  } else {
-    subpy = require('child_process').spawn('python', [__dirname + '/OpenBazaar-Server/openbazaard.py', 'start'], {detach: true});
+  var platform = process.platform;
+
+  if(platform == "darwin" || platform == "linux") {
+    var subpy = require('child_process').spawn('/usr/local/bin/python', [__dirname + '/OpenBazaar-Server/bootstrap.py', 'testnet'], {detach: true});
+    var stdout = '';
+    var stderr = '';
+
+    subpy.stdout.on('data', function (buf) {
+      console.log('[STR] stdout "%s"', String(buf));
+      stdout += buf;
+    });
+    subpy.stderr.on('data', function (buf) {
+      console.log('[STR] stderr "%s"', String(buf));
+      stderr += buf;
+    });
+    subpy.on('close', function (code) {
+      console.log('exited with ' + code);
+      console.log('[END] stdout "%s"', stdout);
+      console.log('[END] stderr "%s"', stderr);
+    });
+    subpy.unref();
   }
-  var stdout = '';
-  var stderr = '';
-  subpy.stdout.on('data', function(buf) {
-    console.log('[STR] stdout "%s"', String(buf));
-    stdout += buf;
-  });
-  subpy.stderr.on('data', function(buf) {
-    console.log('[STR] stderr "%s"', String(buf));
-    stderr += buf;
-  });
-  subpy.on('close', function(code) {
-    console.log('exited with ' + code);
-    console.log('[END] stdout "%s"', stdout);
-    console.log('[END] stderr "%s"', stderr);
-  });
-  subpy.unref();
 }
 
 // Report crashes to our server.
@@ -78,6 +80,7 @@ app.on('ready', function() {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+
     if(subpy) {
       subpy.kill('SIGHUP');
     }
