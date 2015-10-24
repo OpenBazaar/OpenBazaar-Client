@@ -427,9 +427,6 @@ module.exports = Backbone.View.extend({
       itemHash: hash
         //id: hash
     });
-    if(self.options.ownPage == true){
-      this.item.set('imageExtension', "&guid="+this.item.get('id').pubkeys.guid);
-    }
     this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //remove old item before rendering
     if(this.itemView){
@@ -452,6 +449,10 @@ module.exports = Backbone.View.extend({
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           //set id after fetch, otherwise Backbone includes it in the fetch url
           model.set('id', hash);
+          console.log(model);
+          if(self.options.ownPage == true){
+            model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.pubkeys.guid);
+          }
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
         } else {
