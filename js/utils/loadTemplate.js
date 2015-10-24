@@ -4,9 +4,7 @@ var path = require('path');
 
 module.exports = function(templateFile, callback){
 
-  var loc = window.location.pathname;
-  var cur_dir = loc.substring(0, loc.lastIndexOf(path.sep));
-
+  var cur_dir = path.dirname(require.main.filename);
   fs.readFile(cur_dir + path.sep + templateFile, "utf8", function(err, ob){
 
     if (err) {
