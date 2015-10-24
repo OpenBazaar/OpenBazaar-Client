@@ -233,7 +233,6 @@ module.exports = Backbone.View.extend({
 
   showErrorModal: function(errorTitle, errorMessage) {
     "use strict";
-    console.log("show error modal");
     this.errorModal.removeClass('fadeOut');
     this.errorModal.find('.js-messageModal-title').text(errorTitle);
     this.errorModal.find('.js-messageModal-message').html(errorMessage);
@@ -298,7 +297,6 @@ module.exports = Backbone.View.extend({
     //add formChecked class to form so invalid fields are styled as invalid
     this.$el.find('#contractForm').addClass('formChecked');
 
-    console.log("save attempted");
     if(submitForm.checkValidity()){
       $.ajax({
         type: "POST",
@@ -314,7 +312,6 @@ module.exports = Backbone.View.extend({
           if (returnedId && data.success === true && returnedId != data.id){
             deleteThisItem(data.id);
           }else if (data.success === false){
-            console.log("failed");
             self.showErrorModal("Changes Could Not Be Saved","Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
@@ -328,7 +325,6 @@ module.exports = Backbone.View.extend({
         }
       });
     }else{
-      console.log("form invalid");
       var invalidInputList = "";
       $(submitForm).find('input').each(function() {
         if($(this).is(":invalid")){
