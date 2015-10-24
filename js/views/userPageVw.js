@@ -198,7 +198,7 @@ module.exports = Backbone.View.extend({
     // Josh, not sure where this should go, move wherever needed
     var slimVisible = false;
     $("#obContainer").scroll(function(){
-      if ($(this).scrollTop() > 348 && slimVisible === false ) {
+      if ($(this).scrollTop() > 363 && slimVisible === false ) {
         slimVisible = true;
         $('.page-userNameLarge').addClass('fontSize20');
         $('.user-page-navigation-filler').show();
@@ -206,7 +206,7 @@ module.exports = Backbone.View.extend({
         $('.user-page-header-slim').show();
         $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
       }
-      if ($(this).scrollTop() < 348 && slimVisible === true ) {
+      if ($(this).scrollTop() < 363 && slimVisible === true ) {
         slimVisible = false;
         $('.page-userNameLarge').removeClass('fontSize20');
         $('.user-page-navigation-filler').hide();
