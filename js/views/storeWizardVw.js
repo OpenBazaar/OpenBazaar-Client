@@ -196,7 +196,7 @@ module.exports = Backbone.View.extend({
 
   showErrorModal: function(errorTitle, errorMessage) {
     "use strict";
-    this.errorModal.removeClass('hide');
+    this.errorModal.removeClass('fadeOut');
     this.errorModal.find('.js-messageModal-title').text(errorTitle);
     this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
@@ -205,7 +205,6 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         formData = new FormData(),
-        errorModal,
         profileForm = this.$el.find('#storeWizardForm'),
         formArray = profileForm.serializeArray(),
         dataModerator = this.model.get('page').profile.moderator;
