@@ -1679,6 +1679,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-weight: 200;
   font-size: 34px;
   opacity: .8;
+  letter-spacing: 1.5px;
   margin-bottom: 0;
   margin-left: 0;
 }
