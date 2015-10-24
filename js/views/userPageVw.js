@@ -186,7 +186,6 @@ module.exports = Backbone.View.extend({
         }
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
         self.model.set({ownPage: self.options.ownPage});
-        console.log(model);
         self.render();
       },
       error: function(model, response){
@@ -238,7 +237,6 @@ module.exports = Backbone.View.extend({
         if (!/^https?:\/\//i.test(extUrl)) {
           extUrl = 'http://' + extUrl;
         }
-        console.log(extUrl);
         require("shell").openExternal(extUrl);
       })
     });
@@ -427,9 +425,6 @@ module.exports = Backbone.View.extend({
       itemHash: hash
         //id: hash
     });
-    if(self.options.ownPage == true){
-      this.item.set('imageExtension', "&guid="+this.item.get('id').pubkeys.guid);
-    }
     this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //remove old item before rendering
     if(this.itemView){
@@ -452,6 +447,9 @@ module.exports = Backbone.View.extend({
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           //set id after fetch, otherwise Backbone includes it in the fetch url
           model.set('id', hash);
+          if(self.options.ownPage == true){
+            model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.pubkeys.guid);
+          }
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
         } else {
@@ -500,7 +498,7 @@ module.exports = Backbone.View.extend({
 
   showErrorModal: function(errorTitle, errorMessage) {
     "use strict";
-    this.errorModal.removeClass('hide');
+    this.errorModal.removeClass('fadeOut');
     this.errorModal.find('.js-messageModal-title').text(errorTitle);
     this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
@@ -616,8 +614,7 @@ module.exports = Backbone.View.extend({
       data: formData,
       dataType: "json",
       success: function(data) {
-        var errorModal = $('.js-messageModal'),
-            imageHash,
+        var imageHash,
             tempPage;
         if(data.success == true){
           imageHash = data.image_hashes[0];
@@ -682,7 +679,6 @@ module.exports = Backbone.View.extend({
           self.setCustomStyles();
           self.setState(self.lastTab);
         }else if(data.success === false){
-          console.log("failed");
           self.showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
 
         }
@@ -728,7 +724,6 @@ module.exports = Backbone.View.extend({
     "use strict";
     if(newHash) {
       this.setState('item', newHash);
-      console.log("new hash "+newHash);
     } else {
       //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
       this.addTabToHistory('store');
