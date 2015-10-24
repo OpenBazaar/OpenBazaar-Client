@@ -501,7 +501,7 @@ module.exports = Backbone.View.extend({
 
   showErrorModal: function(errorTitle, errorMessage) {
     "use strict";
-    this.errorModal.removeClass('hide');
+    this.errorModal.removeClass('fadeOut');
     this.errorModal.find('.js-messageModal-title').text(errorTitle);
     this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
@@ -617,8 +617,7 @@ module.exports = Backbone.View.extend({
       data: formData,
       dataType: "json",
       success: function(data) {
-        var errorModal = $('.js-messageModal'),
-            imageHash,
+        var imageHash,
             tempPage;
         if(data.success == true){
           imageHash = data.image_hashes[0];
