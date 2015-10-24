@@ -8,7 +8,7 @@
 </div>
 
 <div class="user-page-content">
-  <div class="flexRow user-page-header-slim hide custCol-border-background">
+  <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
@@ -39,9 +39,9 @@
       style="background-image: url(imgs/defaultUser.png)"
       <% } %>></div>
     <div class="pull-left">
-      <div class="vCentered marginLeft6">
+      <div class="marginLeft6 push-down5">
         <h1 class="page-userNameLarge"><%= ob.page.profile.name %></h1>
-        <div><%= ob.page.profile.handle %></div>
+        <div class="textSize16px"><%= ob.page.profile.handle %></div>
       </div>
     </div>
   </div>
