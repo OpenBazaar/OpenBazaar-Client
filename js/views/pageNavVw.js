@@ -169,7 +169,11 @@ module.exports = Backbone.View.extend({
 
   navMaxClick: function(){
     "use strict";
-    this.currentWindow.maximize();
+    if(this.currentWindow.isMaximized()){
+      this.currentWindow.unmaximize();
+    } else {
+      this.currentWindow.maximize();
+    }
   },
 
   navBackClick: function(){
@@ -213,7 +217,6 @@ module.exports = Backbone.View.extend({
 
   addressBarProcess: function(addressBarText){
     "use strict";
-    console.log("process "+addressBarText);
     if(addressBarText.charAt(0) == "@"){
       this.showStatusBar('Navigation by handle is not supported yet.');
     } else if(addressBarText.length === 40){
@@ -225,7 +228,6 @@ module.exports = Backbone.View.extend({
 
   showStatusBar: function(msgText){
     "use strict";
-    console.log("show statusbar");
     this.statusBar.find('.js-statusBarMessage').text(msgText);
     this.statusBar.removeClass('fadeOut');
   },
@@ -312,7 +314,6 @@ module.exports = Backbone.View.extend({
 
   closeModal: function(e){
     "use strict";
-    console.log("close modal")
     $(e.target).closest('.modal').addClass('fadeOut');
   },
 

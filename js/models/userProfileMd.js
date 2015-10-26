@@ -81,7 +81,6 @@ module.exports = Backbone.Model.extend({
 
       //check to make sure avatar hash is valid
       if(response.profile.avatar_hash === "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" || response.profile.avatar_hash.length !== 40) {
-        console.log(responese.profile.avatar_hash);
         response.profile.avatar_hash = "";
       }
 
