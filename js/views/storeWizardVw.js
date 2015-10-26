@@ -129,7 +129,7 @@ module.exports = Backbone.View.extend({
         var imageHash;
         if (data.success === true) {
           imageHash = data.image_hashes[0];
-          if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
+          if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length === 40){
             self.$el.find('.js-storeWizardHero').css("background-image", "url("+self.model.get('user').server_url+"get_image?hash="+imageHash+")");
             self.$el.find('#headerInput').val(imageHash);
           }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){

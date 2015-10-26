@@ -640,10 +640,6 @@ h5 {
   background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
 }
 
-.userPage .modal-opaque {
-  top: 0;
-}
-
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;

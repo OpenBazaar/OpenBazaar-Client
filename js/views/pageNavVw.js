@@ -233,6 +233,7 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
+    console.log("close modal")
     $(e.target).closest('.modal').addClass('fadeOut');
   },
 

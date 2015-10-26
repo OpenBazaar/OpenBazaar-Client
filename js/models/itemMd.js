@@ -1,8 +1,7 @@
-var Backbone = require('backbone'),
-   // backboneLinear = require('backbone.linear'),
+var __ = require('underscore'),
+    Backbone = require('backbone'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
-//note: Backbone.Linear looks for Backbone in the window. It's placed there by index.html
 module.exports = window.Backbone.Model.extend({
   defaults: {
     price: 0, //set below
@@ -160,6 +159,11 @@ module.exports = window.Backbone.Model.extend({
         }
       }
     }
+    //make sure image hashes are valid
+    response.vendor_offer.listing.item.image_hashes = response.vendor_offer.listing.item.image_hashes.filter(function(hash){
+      return hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40;
+    });
+
     return response;
   },
 

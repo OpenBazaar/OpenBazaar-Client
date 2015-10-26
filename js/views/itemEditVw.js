@@ -168,8 +168,10 @@ module.exports = Backbone.View.extend({
           imageArray = __.clone(self.model.get("combinedImagesArray"));
           hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
-            imageArray.push(self.model.get('server_url') + "get_image?hash=" + hash);
-            hashArray.push(hash);
+            if(hash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40){
+              imageArray.push(self.model.get('server_url') + "get_image?hash=" + hash);
+              hashArray.push(hash);
+            }
           });
           self.model.set("combinedImagesArray", imageArray);
           self.model.set("imageHashesToUpload", hashArray);
@@ -188,7 +190,6 @@ module.exports = Backbone.View.extend({
   },
 
   updateImages: function(){
-    //TODO: this would be better as a sub-view with it's own render
     var self = this,
         subImageDivs = this.$el.find('.js-editItemSubImage'),
         imageArray = this.model.get("combinedImagesArray"),
@@ -280,8 +281,12 @@ module.exports = Backbone.View.extend({
     */
 
     formData = new FormData(submitForm);
+    //add old and new image hashes
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
-      formData.append('images', imHash);
+      //make sure all hashes are valid
+      if(imHash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imHash.length === 40){
+        formData.append('images', imHash);
+      }
     });
 
     //if this is an existing product, do not delete the images
