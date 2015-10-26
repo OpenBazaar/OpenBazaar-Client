@@ -1,28 +1,30 @@
 var __ = window.__ = require('underscore'),
-    Backbone = require('backbone');
+    Backbone = require('backbone'),
+    $ = require('jquery');
+Backbone.$ = $;
 //add to global scope for non-modular libraries
 window.Backbone = Backbone;
-$ = require('jquery');
-//add to global scope for non-modular libraries
 window.$ = $;
 window.jQuery = $;
-Backbone.$ = $;
 window.Backbone.$ = $;
 
 var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
+    newRouter,
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
     languagesModel = require('./models/languagesMd'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     pageNavView = require('./views/pageNavVw'),
+    newPageNavView,
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
     socketView = require('./views/socketVw'),
     guid = "",
+    avatar_hash = "",
     cCode = "",
     server_urlLocal = "",
     loadProfileCount = 0,
@@ -30,7 +32,7 @@ var Polyglot = require('node-polyglot'),
     loadProfileCountdownInterval,
     loadProfileCountdown = 5;
 
-server_urlLocal = localStorage.getItem("server_url") || "http://localhost:18469/api/v1/",
+server_urlLocal = localStorage.getItem("server_url") || "http://localhost:18469/api/v1/";
 
 //set the urlRoot of the user model. Defaults to local host if not found
 user.urlRoot = server_urlLocal + "settings";
@@ -58,11 +60,13 @@ var loadProfile = function() {
       //make sure profile is not blank
       if (response.profile){
         guid = model.get('profile').guid;
+        avatar_hash = model.get('profile').avatar_hash;
         //get the user
         user.fetch({
           success: function (model, response) {
             user.set('server_url', server_urlLocal);
             user.set('guid', guid);
+            user.set('avatar_hash', avatar_hash);
             cCode = model.get('currency_code');
 
             //get user bitcoin price before loading pages
@@ -77,8 +81,8 @@ var loadProfile = function() {
               }, 54000000);
 
               $('.js-loadingModal').hide();
-              new pageNavView({model: user});
-              new router({userModel: user, socketView: new socketView({model: user})});
+              newPageNavView = new pageNavView({model: user});
+              newRouter = new router({userModel: user, socketView: new socketView({model: user})});
               Backbone.history.start();
             });
           },
@@ -86,8 +90,8 @@ var loadProfile = function() {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
             $('.js-loadingModal').hide();
             user.set('server_url', server_urlLocal);
-            new pageNavView({model: user});
-            new router({userModel: user});
+            newPageNavView = new pageNavView({model: user});
+            newRouter = new router({userModel: user});
             Backbone.history.start();
           }
         });
@@ -113,7 +117,7 @@ var reloadProfile = function(){
   loadProfileCountdownInterval = setInterval(function(){
     if(loadProfileCountdown > 0){
       $('.js-indexLoadingMsg4').text(loadProfileCountdown);
-      loadProfileCountdown--
+      loadProfileCountdown--;
     } else {
       $('.js-indexLoadingMsg4').text("");
       clearInterval(loadProfileCountdownInterval);
@@ -128,8 +132,8 @@ var reloadProfile = function(){
     alert("Your server may not be working correctly. Loading using default settings.");
     $('.js-loadingModal').hide();
     user.set('server_url', server_urlLocal);
-    new pageNavView({model: user});
-    new router({userModel: user});
+    newPageNavView = new pageNavView({model: user});
+    newRouter = new router({userModel: user});
     Backbone.history.start();
     window.clearTimeout(loadProfileTimeout);
   }
