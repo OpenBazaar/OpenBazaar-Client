@@ -425,6 +425,10 @@ form {
   margin-top: 20px;
 }
 
+.row60 {
+  margin-bottom: 60px;
+}
+
 .rowTop271 {
   /* special class for the itemEdit view */
   margin-top: 271px;
@@ -639,6 +643,10 @@ h5 {
 
 .modal-opaque.modal-navBlock {
   background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
+}
+
+.userPage .modal-opaque {
+  top: 0;
 }
 
 .modal-childMain {
@@ -1422,8 +1430,9 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .popMenu-navBar a {
   display: block;
-  line-height: 25px;
-  padding: 0 15px;
+  font-size: 14px;
+  line-height: 26px;
+  padding: 0 16px;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
 }
 
