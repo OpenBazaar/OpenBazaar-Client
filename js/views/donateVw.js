@@ -12,7 +12,6 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     this.model = new donateModel();
     this.render();
-    console.log("Donate view created.");     // Test statement to verify creation
   },
 
   render: function(){

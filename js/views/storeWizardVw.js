@@ -44,7 +44,6 @@ module.exports = Backbone.View.extend({
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
     acc.find('.js-accordionNext').on('click', function(){
-      console.log("click");
       var oldPos = accWin.css('left').replace("px","");
       if(oldPos > (accWidth * accNum * -1 + accWidth)){
         accWin.css('left', function(){
