@@ -169,7 +169,11 @@ module.exports = Backbone.View.extend({
 
   navMaxClick: function(){
     "use strict";
-    this.currentWindow.maximize();
+    if(this.currentWindow.isMaximized()){
+      this.currentWindow.unmaximize();
+    } else {
+      this.currentWindow.maximize();
+    }
   },
 
   navBackClick: function(){
