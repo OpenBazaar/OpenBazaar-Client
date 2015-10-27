@@ -49,7 +49,7 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       success: function(model){
         var modelJSON = model.toJSON();
-        if(model.get('profile').moderator == true){
+        if(model.get('profile').moderator === true){
           self.$el.find('.js-adminMakeModerator').hide();
           self.$el.find('.js-adminUnmakeModerator').show();
         } else {
@@ -61,7 +61,7 @@ module.exports = Backbone.View.extend({
             if(inputTarget.name == modelName && inputTarget.type != "radio"){
               $(inputTarget).val(modelValue);
             }
-          })
+          });
         });
         self.$el.find('#vendorTrue').prop('checked', modelJSON.profile.vendor);
         self.$el.find('#vendorFalse').prop('checked', !modelJSON.profile.vendor);
@@ -80,11 +80,29 @@ module.exports = Backbone.View.extend({
         console.log("User Settings fetch failed: " + response.statusText);
       }
     });
+    $.ajax({
+      url: self.model.get('server_url')+ "connected_peers",
+      success: function(data){
+        self.$el.find('.js-adminPeers').text(data);
+      },
+      error: function(){
+        self.$el.find('.js-adminPeers').text("Call to peers API failed.");
+      }
+    });
+    $.ajax({
+      url: self.model.get('server_url')+ "routing_table",
+      success: function(data){
+        self.$el.find('.js-adminRoutingTable').text(data);
+      },
+      error: function(){
+        self.$el.find('.js-adminRoutingTable').text("Call to routing table API failed.");
+      }
+    });
   },
 
   closeModal: function(e){
     $(e.target).closest('.js-adminModal').fadeTo(0,0).removeAttr('style');
-    Backbone.history.loadUrl();
+    window.location.reload();
   },
 
   makeModerator: function() {
@@ -97,7 +115,7 @@ module.exports = Backbone.View.extend({
       function(data){
         alert("Failed. "+ data.reason);
       }
-    )
+    );
   },
 
   unMakeModerator: function() {
@@ -110,7 +128,7 @@ module.exports = Backbone.View.extend({
       function(data){
         alert("Failed. "+ data.reason);
       }
-    )
+    );
   },
 
   uploadAvatar: function() {
@@ -250,7 +268,7 @@ module.exports = Backbone.View.extend({
         if (data.success === true){
           onSucceed(data);
         }else if (data.success === false){
-          onFail(data)
+          onFail(data);
         }
       },
       error: function(jqXHR, status, errorThrown){

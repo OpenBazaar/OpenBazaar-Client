@@ -2,7 +2,6 @@
   "root": true,
   "extends": "eslint:recommended",
   "rules": {
-    "strict": [2, "global"],
     "quotes": 0,
     "curly": [1, "multi-line"],
     "camelcase": 0,
@@ -15,11 +14,11 @@
     "new-cap": 0,
     "semi": [1, "always"]
   },
-  env: {
+  "env": {
     "browser": true,
     "node": true
   },
   "globals": {
-    "$": true,
+    "$": true
   }
 }

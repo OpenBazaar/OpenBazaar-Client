@@ -56,7 +56,9 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){this.handleSocketMessage(response)});
+    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      this.handleSocketMessage(response);
+    });
     this.socketItemID = Math.random().toString(36).slice(2);
     this.socketVendorID = Math.random().toString(36).slice(2);
     this.socketView.getItems(this.socketItemID);
