@@ -5,24 +5,25 @@
   <% }else{ %>
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
-</div>
+  </div>
 
-<div class="user-page-content">
-  <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
-    <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-      <div class="thumbnail thumbnail-large pull-left"
-      <% if(ob.page.profile.avatar_hash) { %>
-      style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
-      <% }else{ %>
-      style="background-image: url(imgs/defaultUser.png)"
-      <% } %>>
-    </div>
-    <div class="pull-left">
-      <div class="vCentered marginLeft6">
-        <h1 class="page-userNameLarge floatLeft pull-up4"><%= ob.page.profile.name %></h1>
-        <div class="floatLeft marginLeft6 marginTop2"><%= ob.page.profile.handle %></div>
+  <div class="user-page-content">
+    <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
+      <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
+        <div class="thumbnail thumbnail-large pull-left"
+        <% if(ob.page.profile.avatar_hash) { %>
+        style="background-image: url(<%- ob.page.avatarURL %>);"
+        <% }else{ %>
+        style="background-image: url(imgs/defaultUser.png)"
+        <% } %>>
+        </div>
       </div>
-    </div>
+      <div class="pull-left">
+        <div class="vCentered marginLeft6">
+          <h1 class="page-userNameLarge floatLeft pull-up4"><%= ob.page.profile.name %></h1>
+          <div class="floatLeft marginLeft6 marginTop2"><%= ob.page.profile.handle %></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -150,6 +151,14 @@
                   <%}else{%>
                   not provided
                   <%}%>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <div class="rowItem">
+                <div class="textOpacity75">GUID</div>
+                <div class="textSize11px">
+                  <%= ob.page.profile.guid %>
                 </div>
               </div>
             </div>
