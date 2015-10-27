@@ -17,6 +17,7 @@ module.exports = Backbone.View.extend({
   },
 
   render: function(){
+    "use strict";
     var self = this;
     loadTemplate('./js/templates/userShort.html', function(loadedTemplate) {
       self.$el.append(loadedTemplate(self.model.toJSON()));
@@ -25,8 +26,8 @@ module.exports = Backbone.View.extend({
   },
 
   userClick: function(e){
-    var self = this;
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/about', {trigger: true});
+    "use strict";
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/store', {trigger: true});
   }
 
 });

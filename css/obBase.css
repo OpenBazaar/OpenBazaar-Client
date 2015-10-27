@@ -1050,7 +1050,7 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-profile {
-  background-size: contain;
+  background-size: cover;
   background-position: center;
   -webkit-app-region: no-drag;
 }
