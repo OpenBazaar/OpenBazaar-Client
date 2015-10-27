@@ -175,7 +175,7 @@ form {
 
 .nav-ctrlGroup {
   /* use for any cluster of nav controls */
-  padding-left: 5px;
+  padding-left: 4px;
   position: relative;
 }
 
@@ -629,7 +629,7 @@ h5 {
   border-top-right-radius: 3px;
   top: 35px;
   height: 50px;
-  padding-left: 100px;
+  padding-left: 106px;
   position: relative;
   z-index: 1;
 }
@@ -785,7 +785,12 @@ h5 {
   font-size: 12px;
   letter-spacing: 0;
   text-indent: 26px;
+  transition: opacity .75s cubic-bezier(0, 0, 0.2, 1);
   -webkit-app-region: no-drag;
+}
+
+.mainSearchWrapper .txtField:focus {
+  border: solid 2px #086A9E;
 }
 
 .txtField-bar,
@@ -821,8 +826,14 @@ input[type="text"].txtField-bar {
   background-color: #086A9E; /* default color */
   padding:0;
   border-radius: 3px;
+  opacity: .85;
   box-sizing: border-box;
-  transition: opacity 1s;
+  /*transition: opacity 1s cubic-bezier(0, 0, 0.2, 1);*/
+  transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn:hover {
+  opacity: 1;
 }
 
 .btn:hover,
@@ -963,6 +974,7 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-home {
+  transition: opacity 1s ease-in-out;
   -webkit-app-region: no-drag;
 }
 
@@ -2005,7 +2017,19 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-weight: 500;
 }
 
-.fontSize20 {
+#ov1 .fontSize14 {
+  font-size: 14px;
+}
+
+#ov1 .fontSize15 {
+  font-size: 15px;
+}
+
+#ov1 .fontSize16 {
+  font-size: 16px;
+}
+
+#ov1 .fontSize20 {
   font-size: 20px;
 }
 
