@@ -148,6 +148,7 @@ module.exports = Backbone.View.extend({
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('server_url') + "get_following";
     this.socketView = options.socketView;
+    this.slimVisible = false;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
@@ -176,42 +177,28 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
-      success: function(model){
-        if(self.options.ownPage == true){
-          model.set('headerURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').header_hash);
-          model.set('avatarURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').avatar_hash);
-        } else {
-          model.set('headerURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').header_hash+"&guid="+self.pageID);
-          model.set('avatarURL', self.options.userModel.get('server_url')+"get_image?hash="+model.get('profile').avatar_hash+"&guid="+self.pageID);
+      success: function(model, response){
+        if(response.profile){
+          if (self.options.ownPage == true){
+            model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
+            model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
+          }else{
+            model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
+            model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
+          }
+          self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+          self.model.set({ownPage: self.options.ownPage});
+          self.render();
+        }else{
+          //model was returned as a blank object
+          alert("Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
+          window.history.back();
         }
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        self.model.set({ownPage: self.options.ownPage});
-        self.render();
       },
       error: function(model, response){
         console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
         alert("User Profile cannot be read");
-      }
-    });
-
-    // Josh, not sure where this should go, move wherever needed
-    var slimVisible = false;
-    $("#obContainer").scroll(function(){
-      if ($(this).scrollTop() > 363 && slimVisible === false ) {
-        slimVisible = true;
-        $('.page-userNameLarge').addClass('fontSize20');
-        $('.user-page-navigation-filler').show();
-        $('.user-page-navigation').addClass('user-page-navigation-slim');
-        $('.user-page-header-slim').show();
-        $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
-      }
-      if ($(this).scrollTop() < 363 && slimVisible === true ) {
-        slimVisible = false;
-        $('.page-userNameLarge').removeClass('fontSize20');
-        $('.user-page-navigation-filler').hide();
-        $('.user-page-navigation').removeClass('user-page-navigation-slim');
-        $('.user-page-header-slim').hide();
-        $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+        window.history.back();
       }
     });
   },
@@ -238,7 +225,26 @@ module.exports = Backbone.View.extend({
           extUrl = 'http://' + extUrl;
         }
         require("shell").openExternal(extUrl);
-      })
+      });
+
+      $("#obContainer").scroll(function(){
+        if ($(this).scrollTop() > 363 && self.slimVisible === false ) {
+          self.slimVisible = true;
+          $('.page-userNameLarge').addClass('fontSize20');
+          $('.user-page-navigation-filler').show();
+          $('.user-page-navigation').addClass('user-page-navigation-slim');
+          $('.user-page-header-slim').show();
+          $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
+        }
+        if ($(this).scrollTop() < 363 && self.slimVisible === true ) {
+          self.slimVisible = false;
+          $('.page-userNameLarge').removeClass('fontSize20');
+          $('.user-page-navigation-filler').hide();
+          $('.user-page-navigation').removeClass('user-page-navigation-slim');
+          $('.user-page-header-slim').hide();
+          $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+        }
+      });
     });
     self.errorModal = $('.js-messageModal');
     return this;
@@ -286,6 +292,9 @@ module.exports = Backbone.View.extend({
 
   setState: function(state, hash) {
     "use strict";
+    var currentAddress,
+        currentHandle = this.model.get('page').profile.handle;
+
     if(state === "item"){
       this.renderItem(hash);
     }else if(state === "itemOld") {
@@ -302,6 +311,18 @@ module.exports = Backbone.View.extend({
     this.setControls(state);
     this.subRender(state);
     this.lastTab = state;
+    //set address bar
+    console.log(currentHandle);
+    console.log(this.model.get('page').profile.guid);
+    if(currentHandle){
+      currentAddress = currentHandle + "/" + state;
+    } else {
+      currentAddress = this.model.get('page').profile.guid + "/" + state;
+    }
+    if(state === "item") {
+      currentAddress += "/"+ hash;
+    }
+    window.obEventBus.trigger("setAddressBar", currentAddress);
   },
 
   setControls: function(state){
@@ -454,6 +475,7 @@ module.exports = Backbone.View.extend({
           model.set({fetched: true});
         } else {
           self.showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
+          window.history.back();
         }
       },
       error: function(model, response){

@@ -83,9 +83,6 @@ module.exports = Backbone.Model.extend({
       if(response.profile.avatar_hash === "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" || response.profile.avatar_hash.length !== 40) {
         response.profile.avatar_hash = "";
       }
-
-    } else {
-      alert("Server returned blank user profile");
     }
 
     return response;

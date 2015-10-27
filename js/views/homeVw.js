@@ -33,6 +33,7 @@ module.exports = Backbone.View.extend({
     this.userProfile = new userProfileModel();
     this.userProfile.urlRoot = this.userModel.get('server_url') + "profile";
     this.socketView = options.socketView;
+    this.slimVisible = false;
     this.subViews = [];
     this.lookingCount = 0;
     this.homeLookingTimeout = setInterval(function(){
@@ -52,25 +53,6 @@ module.exports = Backbone.View.extend({
       error: function(model, response){
         console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
         alert("loading the user profile has failed");
-      }
-    });
-
-    // Josh, not sure where this should go, move wherever needed
-    var slimVisible = false;
-    $("#obContainer").scroll(function(){
-      if ($(this).scrollTop() > 20 && slimVisible === false ) {
-        slimVisible = true;
-        $('.home-page-navigation-filler').show();
-        $('.home-page-header').addClass('home-page-header-slim');
-        $('.home-page-header-slim').show();
-        $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
-      }
-      if ($(this).scrollTop() < 20 && slimVisible === true ) {
-        slimVisible = false;
-        $('.home-page-navigation-filler').hide();
-        $('.home-page-header').removeClass('home-page-header-slim');
-        $('.home-page-header-slim').hide();
-        $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
       }
     });
 
@@ -123,23 +105,33 @@ module.exports = Backbone.View.extend({
     $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
-      self.subRender();
       if(self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
         self.$el.find('.js-homeMyPage').addClass('show');
       }
+
+      $("#obContainer").scroll(function(){
+        if ($(this).scrollTop() > 20 && self.slimVisible === false ) {
+          self.slimVisible = true;
+          $('.home-page-navigation-filler').show();
+          $('.home-page-header').addClass('home-page-header-slim');
+          $('.home-page-header-slim').show();
+          $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
+        }
+        if ($(this).scrollTop() < 20 && self.slimVisible === true ) {
+          self.slimVisible = false;
+          $('.home-page-navigation-filler').hide();
+          $('.home-page-header').removeClass('home-page-header-slim');
+          $('.home-page-header-slim').hide();
+          $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+        }
+      });
+
+      self.hideList1();
+
+      //render current date
+      $('.js-currentDate').html(Moment().format('MMMM Do, YYYY'));
     });
-  },
-
-  subRender: function(){
-    "use strict";
-    //var itemList = new itemListView({model: fakeItems, el: '.js-list1', userModel: this.options.userModel, showAvatar: true});
-    //var storeList = new storeListView({model: fakeStores, el: '.js-list2'});
-    //this.subViews.push(itemList,storeList);
-    this.hideList1();
-
-    //render current date
-    $('.js-currentDate').html(Moment().format('MMMM Do, YYYY'));
   },
 
   renderItem: function(item){

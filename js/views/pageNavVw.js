@@ -47,7 +47,7 @@ module.exports = Backbone.View.extend({
     this.languages = new languagesModel();
     this.currentWindow = remote.getCurrentWindow();
 
-  //when language is changed, re-render
+    //when language is changed, re-render
     this.listenTo(this.model, 'change:language', function(){
       var newLang = this.model.get("language");
       window.polyglot = new Polyglot({locale: newLang});
@@ -128,6 +128,8 @@ module.exports = Backbone.View.extend({
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.addressBarGoBtn = self.$el.find('.js-navAddressBarGo');
       self.statusBar = self.$el.find('.js-navStatusBar');
+      //listen for address bar set events
+      self.listenTo(window.obEventBus, "setAddressBar", function(setText){self.addressInput.val(setText)});
     });
     return this;
   },
@@ -217,13 +219,25 @@ module.exports = Backbone.View.extend({
 
   addressBarProcess: function(addressBarText){
     "use strict";
-    if(addressBarText.charAt(0) == "@"){
+    var guid = "",
+        handle = "",
+        state = "",
+        itemHash = "",
+        addressTextArray = addressBarText.split("/");
+
+    state = "/" + addressTextArray[1];
+    itemHash = "/" + addressTextArray[2];
+
+    if(addressTextArray[0].charAt(0) == "@"){
+      handle = addressTextArray[0];
       this.showStatusBar('Navigation by handle is not supported yet.');
-    } else if(addressBarText.length === 40){
-      Backbone.history.navigate('#userPage/'+addressBarText, {trigger:true});
+    } else if(addressTextArray[0].length === 40){
+      guid = addressTextArray[0];
+      Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
     } else {
       this.showStatusBar('This is not a valid user GUID or handle.');
     }
+
   },
 
   showStatusBar: function(msgText){
