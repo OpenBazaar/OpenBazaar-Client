@@ -15,3 +15,4 @@ node_modules/
 .idea/inspectionProfiles/profiles_settings.xml
 npm-debug.log
 
+.idea/jsLinters/eslint.xml

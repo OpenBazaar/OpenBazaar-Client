@@ -312,8 +312,6 @@ module.exports = Backbone.View.extend({
     this.subRender(state);
     this.lastTab = state;
     //set address bar
-    console.log(currentHandle);
-    console.log(this.model.get('page').profile.guid);
     if(currentHandle){
       currentAddress = currentHandle + "/" + state;
     } else {
