@@ -155,7 +155,6 @@ module.exports = Backbone.View.extend({
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
-    this.followed = false;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
