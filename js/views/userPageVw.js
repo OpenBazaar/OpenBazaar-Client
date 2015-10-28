@@ -117,7 +117,10 @@ module.exports = Backbone.View.extend({
     'click .js-cancelCustomization': 'cancelCustomizePage',
     'change .js-userPageImageUpload': 'uploadUserPageImage',
     'click .js-customizeColor': 'customizeColorClick',
-    'click .js-createStore': 'createStore'
+    'click .js-createStore': 'createStore',
+    'click .js-follow': 'followUser',
+    'click .js-unfollow': 'unfollowUser',
+    'click .js-message': 'sendMessage'
   },
 
   initialize: function (options) {
@@ -179,12 +182,13 @@ module.exports = Backbone.View.extend({
       processData: true,
       success: function(model, response){
         if(response.profile){
-          if (self.options.ownPage == true){
+          if (self.options.ownPage === true){
             model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
             model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
           }else{
             model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
             model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
+
           }
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
@@ -192,13 +196,13 @@ module.exports = Backbone.View.extend({
         }else{
           //model was returned as a blank object
           alert("Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
-          window.history.back();
+          //window.history.back();
         }
       },
       error: function(model, response){
         console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
         alert("User Profile cannot be read");
-        window.history.back();
+        //window.history.back();
       }
     });
   },
@@ -226,6 +230,8 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
+
+      self.subRender();
 
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 363 && self.slimVisible === false ) {
@@ -306,10 +312,10 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
       //if no state was set for some reason
+      state="about";
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
     }
     this.setControls(state);
-    this.subRender(state);
     this.lastTab = state;
     //set address bar
     if(currentHandle){
@@ -326,25 +332,20 @@ module.exports = Backbone.View.extend({
   setControls: function(state){
     "use strict";
     //hide all the state controls
-    this.$el.find('.js-userPageControls, .js-itemButtons, #customizeControls, .js-itemCustomizationButtons, .js-pageButtons').addClass('hide');
+    this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons').addClass('hide');
+    document.getElementById('obContainer').classList.remove("box-borderDashed");
     //unhide the ones that are needed
-    if(this.options.ownPage == true) {
+    if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
-        document.getElementById('obContainer').classList.remove("box-borderDashed");
-        //this.undoColorCustomization();
       } else if(state === "itemEdit") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
-        document.getElementById('obContainer').classList.remove("box-borderDashed");
-        //this.undoColorCustomization();
       } else if(state === "customize") {
         this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         document.getElementById('obContainer').classList.add("box-borderDashed");
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
-        document.getElementById('obContainer').classList.remove("box-borderDashed");
-        //this.undoColorCustomization();
       }
       //if store has been created, swap create button for sell button
       if(this.model.get('page').profile.vendor === true) {
@@ -354,47 +355,59 @@ module.exports = Backbone.View.extend({
         this.$el.find('.js-sellItem').addClass('hide');
         this.$el.find('.js-createStore').removeClass('hide');
       }
+    }else{
+      this.$el.find('.js-notOwnPageButtons').removeClass('hide');
     }
   },
 
-  subRender: function(state) {
+  toggleFollowButtons: function(followed) {
+    "use strict";
+    var followBtn = this.$el.find('.js-follow'),
+        unfollowBtn = this.$el.find('.js-unfollow');
+    if(followed === true){
+      followBtn.addClass('hide');
+      unfollowBtn.removeClass('hide');
+    } else {
+      followBtn.removeClass('hide');
+      unfollowBtn.addClass('hide');
+    }
+  },
+
+  subRender: function() {
     "use strict";
     var self = this;
-    if(state === "about" || !state) {
-      //this is the default state of the page. Activate tab
-      this.tabClick(self.$el.find('.js-aboutTab'), this.$el.find('.js-about'));
-    } else if (state === "store") {
-
-      this.listings.fetch({
-        data: self.userProfileFetchParameters,
-        success: function(model){
-          self.renderItems(model.get('listings'));
-        },
-        error: function(model, response){
-          self.showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
+    this.listings.fetch({
+      data: self.userProfileFetchParameters,
+      success: function(model){
+        self.renderItems(model.get('listings'));
+      },
+      error: function(model, response){
+        self.showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
+      }
+    });
+    this.followers.fetch({
+      data: self.userProfileFetchParameters,
+      success: function(model){
+        var followerArray = model.get('followers');
+        self.renderFollowers(followerArray);
+        //if this is not their page, see if they are being followed
+        if(self.options.ownPage === false){
+          self.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: self.userID})));
         }
-      });
-    } else if (state === "followers") {
-      this.followers.fetch({
-        data: self.userProfileFetchParameters,
-        success: function(model){
-          self.renderFollowers(model.get('followers'));
-        },
-        error: function(model, response){
-          self.showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
-        }
-      });
-    } else if (state === "following") {
-      this.following.fetch({
-        data: self.userProfileFetchParameters,
-        success: function(model){
-          self.renderFollowing(model.get('following'));
-        },
-        error: function(model, response){
-          self.showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
-        }
-      });
-    }
+      },
+      error: function(model, response){
+        self.showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
+      }
+    });
+    this.following.fetch({
+      data: self.userProfileFetchParameters,
+      success: function(model){
+        self.renderFollowing(model.get('following'));
+      },
+      error: function(model, response){
+        self.showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
+      }
+    });
   },
 
   renderItems: function (model) {
@@ -407,7 +420,7 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
-      if(self.options.ownPage == true){
+      if(self.options.ownPage === true){
         arrayItem.imageURL = self.options.userModel.get('server_url')+"get_image?hash="+arrayItem.thumbnail_hash;
       } else {
         arrayItem.imageURL = self.options.userModel.get('server_url')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+arrayItem.guid;
@@ -419,13 +432,13 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: ""});
+    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: "", server_url: this.options.userModel.get('server_url')});
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
     "use strict";
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: ""});
+    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: "", server_url: this.options.userModel.get('server_url')});
     this.subViews.push(this.followingList);
   },
 
@@ -466,7 +479,7 @@ module.exports = Backbone.View.extend({
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           //set id after fetch, otherwise Backbone includes it in the fetch url
           model.set('id', hash);
-          if(self.options.ownPage == true){
+          if(self.options.ownPage === true){
             model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.pubkeys.guid);
           }
           //model may arrive empty, set this flag to trigger a change event
@@ -808,6 +821,49 @@ module.exports = Backbone.View.extend({
     this.storeWizardView.closeWizard();
     //recreate the entire page with the new data
     Backbone.history.loadUrl();
+  },
+
+  followUser: function(){
+    "use strict";
+    var self = this;
+    $.ajax({
+      type: "POST",
+      data: this.userProfileFetchParameters,
+      dataType: 'json',
+      url: this.options.userModel.get('server_url') + "follow",
+      success: function(data) {
+        self.subRender();
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+  },
+
+  unfollowUser: function(){
+    "use strict";
+    var self = this;
+    $.ajax({
+      type: "POST",
+      data: this.userProfileFetchParameters,
+      dataType: 'json',
+      url: this.options.userModel.get('server_url') + "unfollow",
+      success: function() {
+        self.subRender();
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+  },
+
+  sendMessage: function(){
+    "use strict";
+
   },
 
 

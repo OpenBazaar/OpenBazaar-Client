@@ -27,7 +27,7 @@ module.exports = Backbone.View.extend({
 
   userClick: function(e){
     "use strict";
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/store', {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
   }
 
 });

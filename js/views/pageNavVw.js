@@ -129,7 +129,10 @@ module.exports = Backbone.View.extend({
       self.addressBarGoBtn = self.$el.find('.js-navAddressBarGo');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
-      self.listenTo(window.obEventBus, "setAddressBar", function(setText){self.addressInput.val(setText);});
+      self.listenTo(window.obEventBus, "setAddressBar", function(setText){
+        self.addressInput.val(setText);
+        self.closeStatusBar();
+      });
     });
     return this;
   },

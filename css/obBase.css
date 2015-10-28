@@ -98,6 +98,10 @@ form {
   z-index: 3;
 }
 
+#pageNav .btn {
+  -webkit-app-region: no-drag;
+}
+
 #sideBar {
   position: absolute;
   right: 0;
@@ -818,7 +822,6 @@ input[type="text"].txtField-bar {
 }
 
 .btn {
-  display: block;
   height: 32px;
   min-width: 32px;
   line-height: 32px;
@@ -828,8 +831,8 @@ input[type="text"].txtField-bar {
   border-radius: 3px;
   opacity: .85;
   box-sizing: border-box;
-  /*transition: opacity 1s cubic-bezier(0, 0, 0.2, 1);*/
-  transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity 1s cubic-bezier(0, 0, 0.2, 1);
+  /*transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);*/
 }
 
 .btn:hover {
@@ -860,8 +863,8 @@ input[type="text"].txtField-bar {
   padding: 0 16px;
 }
 
-.userPage .btn {
-  background-color: rgb(74,72,72);
+.btn.btn-txtOnly {
+  background: none;
 }
 
 .userPage .btn.inactive {
@@ -900,17 +903,14 @@ input[type="text"].txtField-bar {
 
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMin {
   background-color: #F8E71C;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-bar {
@@ -975,7 +975,6 @@ input[type="text"].txtField-bar {
 
 .btn.btn-home {
   transition: opacity 1s ease-in-out;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -1052,7 +1051,6 @@ input[type="text"].txtField-bar {
 .btn.btn-profile {
   background-size: cover;
   background-position: center;
-  -webkit-app-region: no-drag;
 }
 
 .btn-square {
@@ -2031,6 +2029,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1 .fontSize20 {
   font-size: 20px;
+}
+
+#ov1 .txt-darkest {
+  color: #000;
 }
 
 #ov1  .alignCenter {

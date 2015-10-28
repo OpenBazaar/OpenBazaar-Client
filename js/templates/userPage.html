@@ -54,7 +54,6 @@
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
-    <% if(ob.ownPage === true) { %>
     <div class="navEnd pad15">
       <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('nav.createListing') %></a>
@@ -62,6 +61,13 @@
       </div>
       <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
+      </div>
+      <div class="nav-ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
+        <a class="btn btn-txt custCol-primary js-follow"><%= polyglot.t('Follow') %> </a>
+        <a class="btn btn-txt custCol-primary js-unfollow"><%= polyglot.t('Unfollow') %> </a>
+      </div>
+      <div class="nav-ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
+        <a class="btn btn-txt custCol-primary js-message"><%= polyglot.t('Message') %> </a>
       </div>
       <div class="nav-ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
         <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
@@ -82,7 +88,6 @@
         <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
       </div>
     </div>
-    <% } %>
   </div>
   <div class="userPage-subViews">
     <div class="flexContainer flex-border custCol-primary js-about js-tabTarg minHeight650">
@@ -182,7 +187,11 @@
           </div>
         </div>
       </div>
-      <div class="flexRow js-list1"></div>
+      <div class="flexRow js-list1">
+        <div class="padding10 width100 alignCenter js-loadingMsg borderBottom">
+          <i class="ion-loop spinner textSize24px textOpacity50"></i>
+        </div>
+      </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide minHeight650">
       <div class="flexRow">
@@ -192,7 +201,11 @@
           </div>
         </div>
       </div>
-      <div class="flexRow js-list2"></div>
+      <div class="flexRow flex-border js-list2">
+        <div class="padding10 width100 alignCenter js-loadingMsg borderBottom">
+          <i class="ion-loop spinner textSize24px textOpacity50"></i>
+        </div>
+      </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide minHeight650">
       <div class="flexRow">
@@ -202,10 +215,18 @@
           </div>
         </div>
       </div>
-      <div class="flexRow js-list3"></div>
+      <div class="flexRow js-list3">
+        <div class="padding10 width100 alignCenter js-loadingMsg borderBottom">
+          <i class="ion-loop spinner textSize24px textOpacity50"></i>
+        </div>
+      </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-item js-tabTarg hide minHeight650">
-      <div class="flexRow js-list4 minHeight650"></div>
+      <div class="flexRow js-list4 minHeight650">
+        <div class="padding10 width100 alignCenter js-loadingMsg borderBottom">
+          <i class="ion-loop spinner textSize24px textOpacity50"></i>
+        </div>
+      </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-itemEdit js-tabTarg hide minHeight650">
       <div class="flexRow js-list5 minHeight650 positionWrapper"></div>
