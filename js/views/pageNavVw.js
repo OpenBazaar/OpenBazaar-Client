@@ -9,7 +9,9 @@ var __ = require('underscore'),
     languageListView = require('../views/languageListVw'),
     adminPanelView = require('../views/adminPanelVw'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
-    remote = require('remote');
+    remote = require('remote'),
+    cropit = require('../utils/jquery.cropit');
+
 
 module.exports = Backbone.View.extend({
 
@@ -149,6 +151,7 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
+      self.$el.find('#avatarUploadDiv').cropit();
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
@@ -368,16 +371,171 @@ module.exports = Backbone.View.extend({
     var self = this;
     var reader = new FileReader();
     reader.onload = function (e) {
+
       self.$el.find('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
-      //self.model.set('tempAvatar', e.target.result);
+      self.model.set('tempAvatar', e.target.result);
+
       //TODO: add canvas resizing here
     };
     reader.readAsDataURL($(e.target)[0].files[0]);
   },
 
   settingsDone: function(e){
+
     "use strict";
+
+
     this.model.set('beenSet',true);
+    var self = this;
+    var server = this.model.get('serverUrl');
+    var profileFormData = new FormData();
+    var settingsFormData = new FormData();
+    var uploadImageFormData = new FormData();
+
+
+    if($('textarea#aboutInput').val() != ""){
+        self.model.set('about', $('textarea#aboutInput').val());
+    }
+
+    if($('#storeHandleInput').val() != "" && /^@/.test($('#storeHandleInput').val()) ){
+        self.model.set('handle', $('#storeHandleInput').val());
+    }
+
+    if($('#storeNameInput').val() != ""){
+        self.model.set('name', $('#storeNameInput').val());
+    }else if (self.model.get('name') == undefined){
+        //otherwise error since the profile api needs the name parameter and as of now it is not set in the userMd.js
+        self.model.set('name', "");
+    }
+
+    var themeRadioButtons = $('input[name=theme-selection]');
+    var themeSelected =   ($(themeRadioButtons.filter(':checked'))[0] !=undefined);
+    if(themeSelected){
+       var themeId = $(themeRadioButtons.filter(':checked')[0]).attr('id');
+
+        var primaryColor =  parseInt($($("label[for='"+themeId+"']")[0]).data('primary-color').replace("#","0x"));
+        var secondaryColor =   parseInt($($("label[for='"+themeId+"']")[0]).data('secondary-color').replace("#","0x"));
+        var backgroundColor =  parseInt($($("label[for='"+themeId+"']")[0]).data('background-color').replace("#","0x"));
+        var textColor =   parseInt($($("label[for='"+themeId+"']")[0]).data('text-color').replace("#","0x"));
+        var header = $($("label[for='"+themeId+"']")[0]).data('header');
+
+
+        self.model.set('primary_color', primaryColor);
+        self.model.set('secondary_color', secondaryColor);
+        self.model.set('text_color', backgroundColor);
+        self.model.set('background_color', textColor);
+        //TODO upload Image header
+        //From profile api : header= the hash of the header image. must have been previously uploaded using the upload_image api call. (40 character hex string)
+        //self.model.set('header', header);
+
+    }
+
+    $.each(this.model.attributes,
+            function(i,el) {
+                if(i == "country") {
+                    profileFormData.append("location",el);
+                }
+                if(i == "name" || i == "handle" || i =="about"|| (themeSelected && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+                    profileFormData.append(i,""+el);
+                } else if(i == "tempAvatar") {
+                    var imageURI = $('#avatarUploadDiv').cropit('export', {
+                        type: 'image/jpeg',
+                        quality: 0.75,
+                        originalSize: false
+                    });
+                    if(imageURI) {
+                        imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+                        uploadImageFormData.append('image', imageURI);
+                    }
+                } else {
+                    settingsFormData.append(i,el);
+                }
+
+            }
+        );
+
+      settingsFormData.append("shipping_addresses","");
+
+
+   var submit = function(img_hash) {
+            if(img_hash) {
+                profileFormData.append("avatar",img_hash);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: server + "settings",
+                contentType: false,
+                processData: false,
+                data: settingsFormData,
+                success: function(data) {
+                    if(JSON.parse(data).success) {
+                        $.ajax({
+                            type: "POST",
+                            url: server + "profile",
+                            contentType: false,
+                            processData: false,
+                            data: profileFormData,
+                            success: function(data) {
+                                 if(data.success === true) {
+                                     if(img_hash) {
+                                        //TODO store img_hash for all images of profile
+                                        //self.model.set("avatar_hash",img_hash);
+                                        //console.log("here we are");
+                                        //$(".topThumb").css("background-image",
+                                        //    "url(" + server + "get_image?hash=" +
+                                        //             img_hash + ")");
+                                        //("#avatar").val("");
+                                     }
+                                    self.showErrorModal("Saved", "Your settings have been successfully saved");
+                                 }
+                            },
+                            error: function(jqXHR, status, errorThrown){
+                                console.log(jqXHR);
+                                console.log(status);
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
+                },
+                error: function(jqXHR, status, errorThrown){
+                    console.log(jqXHR);
+                    console.log(status);
+                    console.log(errorThrown);
+                }
+            });
+
+        };
+
+        //Lets upload the image first, if there is one
+        //to get the hash
+
+
+
+        if(this.model.get('tempAvatar') != "") {
+            $.ajax({
+                type: "POST",
+                url: server + "upload_image",
+                contentType: false,
+                processData: false,
+                data: uploadImageFormData,
+                dataType: "JSON",
+                success: function(data) {
+                     var img_hash = data.image_hashes[0];
+                    if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
+                        submit(img_hash);
+                    }
+                },
+                error: function(jqXHR, status, errorThrown){
+                    console.log(jqXHR);
+                    console.log(status);
+                    console.log(errorThrown);
+                }
+            });
+
+        } else { //Otherwise lets just submit right away
+            submit();
+        }
     this.$el.find('.js-homeModal').hide();
     
     // Start application walkthrough (coming soon once I have better designs)
