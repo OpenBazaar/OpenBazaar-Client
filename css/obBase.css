@@ -98,6 +98,10 @@ form {
   z-index: 3;
 }
 
+#pageNav .btn {
+  -webkit-app-region: no-drag;
+}
+
 #sideBar {
   position: absolute;
   right: 0;
@@ -900,17 +904,14 @@ input[type="text"].txtField-bar {
 
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMin {
   background-color: #F8E71C;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-bar {
@@ -975,7 +976,6 @@ input[type="text"].txtField-bar {
 
 .btn.btn-home {
   transition: opacity 1s ease-in-out;
-  -webkit-app-region: no-drag;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -1052,7 +1052,6 @@ input[type="text"].txtField-bar {
 .btn.btn-profile {
   background-size: cover;
   background-position: center;
-  -webkit-app-region: no-drag;
 }
 
 .btn-square {

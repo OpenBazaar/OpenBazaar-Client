@@ -14,6 +14,7 @@ module.exports = Backbone.View.extend({
     /*expected options:
       options.title: title for no users found
       options.message: message for no users found
+      options.server_url: server url to pass into each user view
     */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
@@ -23,24 +24,29 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
+    this.listWrapper = $('<div class="flexRow scrollOverflowY"></div>');
     if(this.usersShort.models.length > 0)
     {
-      __.each(this.usersShort.models, function (item)
+      __.each(this.usersShort.models, function (user)
       {
-        self.renderItem(item);
+        user.set('avatarURL', self.options.server_url+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
+        self.renderUser(user);
       }, this);
+      this.$el.html(this.listWrapper);
     }else{
       self.renderNoneFound();
     }
   },
 
-  renderItem: function(item){
+  renderUser: function(item){
     var storeShort = new userShortView({
       model: item
     });
     this.subViews.push(storeShort);
     //$el must be passed in by the constructor
-    this.$el.append(storeShort.render().el);
+    //this.$el.append(storeShort.el);
+    //appending to the DOM one by one is too slow, and the last 1/3 of the items won't be added. Add to a holder element instead.
+    this.listWrapper.append(storeShort.el);
   },
 
   renderNoneFound: function(){
