@@ -4,6 +4,7 @@ var __ = require('underscore'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
+    picEditor = require('../utils/picedit.js'),
     userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -115,7 +116,7 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    'change .js-userPageImageUpload': 'uploadUserPageImage',
+    //'change .js-userPageImageUpload': 'uploadUserPageImage',
     'click .js-customizeColor': 'customizeColorClick',
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUser',
@@ -230,6 +231,7 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
+      self.$el.find('.js-userPageImageUpload').picEdit();
 
       self.subRender();
 
