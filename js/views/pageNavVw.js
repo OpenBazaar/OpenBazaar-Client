@@ -36,7 +36,6 @@ module.exports = Backbone.View.extend({
     'click .js-homeModalDone': 'settingsDone',
     'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
-    'click .js-navAddressBarGo': 'addressBarGoClick',
     'click .js-closeStatus': 'closeStatusBar'
   },
 
@@ -212,12 +211,6 @@ module.exports = Backbone.View.extend({
       this.addressBarGoBtn.addClass("fadeOut");
       this.closeStatusBar();
     }
-  },
-
-  addressBarGoClick: function(){
-    "use strict";
-    this.addressBarProcess(this.addressInput.val());
-    this.addressBarGoBtn.addClass("fadeOut");
   },
 
   addressBarProcess: function(addressBarText){

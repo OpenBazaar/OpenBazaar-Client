@@ -234,7 +234,7 @@ module.exports = Backbone.View.extend({
       self.subRender();
 
       $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 363 && self.slimVisible === false ) {
+        if ($(this).scrollTop() > 366 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.page-userNameLarge').addClass('fontSize20');
           $('.user-page-navigation-filler').show();
@@ -242,7 +242,7 @@ module.exports = Backbone.View.extend({
           $('.user-page-header-slim').show();
           $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
         }
-        if ($(this).scrollTop() < 363 && self.slimVisible === true ) {
+        if ($(this).scrollTop() < 366 && self.slimVisible === true ) {
           self.slimVisible = false;
           $('.page-userNameLarge').removeClass('fontSize20');
           $('.user-page-navigation-filler').hide();

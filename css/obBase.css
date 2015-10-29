@@ -406,7 +406,7 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
-.thumbnail-large-slim {
+  .thumbnail-large-slim {
   height: 58px;
   width: 58px;
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
@@ -633,7 +633,7 @@ h5 {
   border-top-right-radius: 3px;
   top: 35px;
   height: 50px;
-  padding-left: 106px;
+  padding-left: 102px;
   position: relative;
   z-index: 1;
 }
@@ -794,7 +794,7 @@ h5 {
 }
 
 .mainSearchWrapper .txtField:focus {
-  border: solid 2px #086A9E;
+  box-shadow: 0 0 0 2px #086A9E;
 }
 
 .txtField-bar,
@@ -2015,6 +2015,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-weight: 500;
 }
 
+#ov1 .fontSize13 {
+  font-size: 13px;
+}
+
 #ov1 .fontSize14 {
   font-size: 14px;
 }
@@ -2062,6 +2066,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .marginLeft10 {
   margin-left: 10px;
+}
+
+#ov1  .marginLeft88 {
+  margin-left: 88px;
 }
 
 #ov1  .marginTop2 {
