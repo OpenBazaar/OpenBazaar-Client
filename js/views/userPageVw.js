@@ -4,7 +4,6 @@ var __ = require('underscore'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
-    picEditor = require('../utils/picedit.js'),
     userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -231,7 +230,6 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
-      self.$el.find('.js-userPageImageUpload').picEdit();
 
       self.subRender();
 
@@ -651,7 +649,7 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         var imageHash,
             tempPage;
-        if(data.success == true){
+        if(data.success === true){
           imageHash = data.image_hashes[0];
           if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
             tempPage  =  __.clone(self.model.get('page'));
