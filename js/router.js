@@ -41,6 +41,8 @@ module.exports = Backbone.Router.extend({
     this.view = view;
     $('body').removeClass("userPage");//add other body style classes if they are created
     $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
+    //clear address bar. This will be replaced on the user page
+    window.obEventBus.trigger("setAddressBar", "");
   },
 
   home: function(){

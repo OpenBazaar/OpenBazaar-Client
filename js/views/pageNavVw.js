@@ -230,7 +230,6 @@ module.exports = Backbone.View.extend({
 
     state = addressTextArray[1] ? "/" + addressTextArray[1] : "";
     itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
-    console.log(state);
 
     if(addressTextArray[0].charAt(0) == "@"){
       handle = addressTextArray[0];
