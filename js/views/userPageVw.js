@@ -4,6 +4,7 @@ var __ = require('underscore'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
+    cropit = require('../utils/jquery.cropit'),
     userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -230,6 +231,18 @@ module.exports = Backbone.View.extend({
           extUrl = 'http://' + extUrl;
         }
         require("shell").openExternal(extUrl);
+      });
+
+      self.$el.find('#image-cropper').cropit({
+        smallImage: "stretch",
+        onFileReaderError: function(data){console.log(data);},
+        onImageLoading: function(){self.$el.find('.js-headerLoading').removeClass('fadeOut');},
+        onImageLoaded: function(){self.$el.find('.js-headerLoading').addClass('fadeOut');},
+        onImageError: function(errorObject, errorCode, errorMessage){
+          console.log(errorObject);
+          console.log(errorCode);
+          console.log(errorMessage);
+        }
       });
 
       $("#obContainer").scroll(function(){

@@ -595,9 +595,9 @@ h5 {
   background-color: #327EB8;
 }
 
-.navBar.statusBar {
+.navBar.statusBar,
+.userPage .navBar.statusBar {
   background-color: rgba(0,0,0,0.6);
-  margin-top: 50px;
   transition: opacity 1s;
   overflow: hidden;
 }
@@ -605,6 +605,10 @@ h5 {
 .navBar.statusBar.fadeOut {
   opacity: 0;
   pointer-events: none;
+}
+
+.navBar-main.navBar.statusBar {
+  margin-top: 50px;
 }
 
 .welcomeBar {
@@ -1749,6 +1753,22 @@ input[type="checkbox"].fieldItem:checked + label:before {
   width: 40px;
   height: 40px;
   border: solid 2px #fff;
+}
+
+.headerCropper.banner-large {
+  width: 950px;
+  height: 400px;
+  z-index: 1;
+}
+
+.headerCropper .cropit-image-preview {
+  width: 950px;
+  height: 400px;
+}
+
+.headerCropper .cropit-image-zoom-input {
+  position: absolute;
+  top: 20px;
 }
 
 .editItemImageHolder {

@@ -6,6 +6,15 @@
   style="background-image: url(imgs/defaultBanner.png)"
   <% } %>>
   </div>
+  <div id="image-cropper" class="headerCropper banner-large js-itemCustomizationButtons js-headerCropper">
+    <div class="statusBar navBar fadeOut positionAbsolute js-headerLoading">
+      <div class="pad20 js-statusBarMessage"><h2 class="txt-center row20">Loading Image...</h2></div>
+    </div>
+    <div class="cropit-image-preview"></div>
+    <input type="range" class="cropit-image-zoom-input hCentered" />
+    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+    <input id="headerImageInput" type="file" class="cropit-image-input hide" />
+  </div>
 
   <div class="user-page-content">
     <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
@@ -28,10 +37,11 @@
   </div>
 
   <div class="flexRow shadow-inner1 user-page-header">
-    <form id="userPageImageForm">
+    <!--<form id="userPageImageForm">
       <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
       <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
-    </form>
+    </form>-->
+    <!-- This wraps the whole cropper -->
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left"
       <% if(ob.page.profile.avatar_hash) { %>
