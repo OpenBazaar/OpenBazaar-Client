@@ -228,8 +228,8 @@ module.exports = Backbone.View.extend({
         itemHash = "",
         addressTextArray = addressBarText.split("/");
 
-    state = "/" + addressTextArray[1];
-    itemHash = "/" + addressTextArray[2];
+    state = addressTextArray[1] ? "/" + addressTextArray[1] : "";
+    itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
 
     if(addressTextArray[0].charAt(0) == "@"){
       handle = addressTextArray[0];
