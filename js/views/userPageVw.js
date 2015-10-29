@@ -215,6 +215,7 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.subRender();
       //save state of the page
       self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
       self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
@@ -230,8 +231,6 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
-
-      self.subRender();
 
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 363 && self.slimVisible === false ) {
@@ -312,8 +311,8 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
       //if no state was set for some reason
-      state="about";
-      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      state="store";
+      this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }
     this.setControls(state);
     this.lastTab = state;
@@ -749,6 +748,7 @@ module.exports = Backbone.View.extend({
 
   saveNewDone: function() {
     "use strict";
+    this.subRender();
     this.addTabToHistory('store');
     this.setState('store');
   },
@@ -787,6 +787,7 @@ module.exports = Backbone.View.extend({
       success: function() {
         //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
         self.item.trigger('destroy', self.item);
+        self.subRender();
         self.setState("store");
       },
       error: function(jqXHR, status, errorThrown){
