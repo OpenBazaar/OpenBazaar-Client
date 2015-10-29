@@ -91,7 +91,7 @@ var loadProfile = function() {
             $('.js-loadingModal').hide();
             user.set('server_url', server_urlLocal);
             newPageNavView = new pageNavView({model: user});
-            newRouter = new router({userModel: user});
+            newRouter = new router({userModel: user, socketView: new socketView({model: user})});
             Backbone.history.start();
           }
         });
