@@ -236,8 +236,8 @@ module.exports = Backbone.View.extend({
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
         onFileReaderError: function(data){console.log(data);},
-        onImageLoading: function(){self.$el.find('.js-headerLoading').removeClass('fadeOut');},
-        onImageLoaded: function(){self.$el.find('.js-headerLoading').addClass('fadeOut');},
+        onFileChange: function(){$('.js-headerLoading').removeClass('fadeOut');},
+        onImageLoaded: function(){$('.js-headerLoading').addClass('fadeOut');},
         onImageError: function(errorObject, errorCode, errorMessage){
           console.log(errorObject);
           console.log(errorCode);
@@ -653,14 +653,19 @@ module.exports = Backbone.View.extend({
   uploadUserPageImage: function() {
     "use strict";
     var self = this;
-    var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
+    //var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
     var server_url = self.options.userModel.get('server_url');
+    var imageURI = self.$el.find('#image-cropper').cropit('export', {
+      type: 'image/jpeg',
+      quality: 0.75,
+      originalSize: false
+    });
     $.ajax({
       type: "POST",
       url: server_url + "upload_image",
       contentType: false,
       processData: false,
-      data: formData,
+      data: imageURI,
       dataType: "json",
       success: function(data) {
         var imageHash,
@@ -672,6 +677,7 @@ module.exports = Backbone.View.extend({
             tempPage.profile.header = imageHash;
             self.model.set('page', tempPage);
             self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
+            self.saveUserPageModel();
           } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
             self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
           } else {
@@ -692,14 +698,16 @@ module.exports = Backbone.View.extend({
   saveCustomizePage: function() {
     "use strict";
     this.customizing = false;
-    this.saveUserPageModel();
+    //this.saveUserPageModel();
+    this.uploadUserPageImage();
   },
 
   saveUserPageModel: function(){
     "use strict";
-    var self = this;
-    var formData = new FormData();
-    var pageData = this.model.get('page').profile;
+    var self = this,
+        formData = new FormData(),
+        pageData = this.model.get('page').profile;
+
     for(var profileKey in pageData) {
       if(pageData.hasOwnProperty(profileKey)){
         //don't include nested objects in the form

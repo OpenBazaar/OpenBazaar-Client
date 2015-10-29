@@ -326,7 +326,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'onFileReaderLoaded',
 	    value: function onFileReaderLoaded(e) {
-				console.log("cropit file loaded");
 	      this.loadImage(e.target.result);
 	    }
 	  }, {
@@ -364,7 +363,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'loadImage',
 	    value: function loadImage(imageSrc) {
-				console.log("loadImage");
 	      if (!imageSrc) {
 	        return;
 	      }
@@ -382,7 +380,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'onPreImageLoaded',
 	    value: function onPreImageLoaded() {
-				console.log("preImageLoaded");
 	      if (this.options.smallImage === 'reject' && (this.preImage.width * this.options.maxZoom < this.previewSize.w * this.options.exportZoom || this.preImage.height * this.options.maxZoom < this.previewSize.h * this.options.exportZoom)) {
 	        this.onImageError(_constants.ERRORS.SMALL_IMAGE);
 	        if (this.image.src) {
@@ -396,12 +393,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      this.image.src = this.imageSrc = this.preImage.src;
-				console.log("image.src " + this.image.src);
 	    }
 	  }, {
 	    key: 'onImageLoaded',
 	    value: function onImageLoaded() {
-				console.log("onImageLoaded");
 	      this.imageSize = {
 	        w: this.image.width,
 	        h: this.image.height

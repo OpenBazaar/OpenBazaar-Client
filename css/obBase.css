@@ -76,6 +76,36 @@ textarea {
   font-weight: 500;
 }
 
+input[type=range]{
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 90%;
+  height: 6px;
+  background: #ccc;
+  border: none;
+  border-radius: 4px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: #777;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #eee;
+  margin-top: -4px;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: rgba(255,255,255,0.9);
+}
+
 form {
   margin: 0;
 }
@@ -313,7 +343,7 @@ form {
 }
 
 [class |= "flexCol"] > .fieldItem {
-  margin: 0 -1 -1 0;
+  margin: 0 -1px -1px 0;
 }
 
 .table {
@@ -734,6 +764,10 @@ h5 {
 .box-borderDashed {
   border: 4px dashed #fff;
   box-sizing: border-box;
+}
+
+#obContainer.box-borderDashed {
+  padding-top: 16px;
 }
 
 .box-dashed {
@@ -1755,20 +1789,25 @@ input[type="checkbox"].fieldItem:checked + label:before {
   border: solid 2px #fff;
 }
 
-.headerCropper.banner-large {
+.headerCropper.banner-large,
+.headerCropperPreview.banner-large {
   width: 950px;
   height: 400px;
-  z-index: 1;
 }
 
-.headerCropper .cropit-image-preview {
-  width: 950px;
-  height: 400px;
+.headerCropper.banner-large {
+  z-index: 1;
 }
 
 .headerCropper .cropit-image-zoom-input {
   position: absolute;
-  top: 20px;
+  top: 240px;
+  width: 400px;
+}
+
+.userPage .headerCropper .bar.navBar {
+  background: none;
+  height: 48px;
 }
 
 .editItemImageHolder {
@@ -2167,6 +2206,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .width100 {
   width: 100%;
+  box-sizing: border-box;
 }
 
 #ov1 .width600 {
