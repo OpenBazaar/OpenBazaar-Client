@@ -233,7 +233,7 @@ module.exports = Backbone.View.extend({
       });
 
       $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 363 && self.slimVisible === false ) {
+        if ($(this).scrollTop() > 366 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.page-userNameLarge').addClass('fontSize20');
           $('.user-page-navigation-filler').show();
@@ -241,7 +241,7 @@ module.exports = Backbone.View.extend({
           $('.user-page-header-slim').show();
           $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
         }
-        if ($(this).scrollTop() < 363 && self.slimVisible === true ) {
+        if ($(this).scrollTop() < 366 && self.slimVisible === true ) {
           self.slimVisible = false;
           $('.page-userNameLarge').removeClass('fontSize20');
           $('.user-page-navigation-filler').hide();
@@ -271,6 +271,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
           "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
+          "#ov1 .userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
           "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
