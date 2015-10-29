@@ -155,6 +155,8 @@ module.exports = Backbone.View.extend({
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
+    //normally this should be in render. It works here because the modal is on a parent view
+    this.errorModal = $('.js-messageModal');
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -188,21 +190,19 @@ module.exports = Backbone.View.extend({
           }else{
             model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
             model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
-
           }
-          self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-          self.model.set({ownPage: self.options.ownPage});
-          self.render();
         }else{
           //model was returned as a blank object
-          alert("Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
-          //window.history.back();
+          self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
         }
+        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+        self.model.set({ownPage: self.options.ownPage});
+        self.render();
       },
       error: function(model, response){
-        console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
-        alert("User Profile cannot be read");
-        //window.history.back();
+        self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
+        self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
+        self.render();
       }
     });
   },
@@ -215,6 +215,7 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.subRender();
       //save state of the page
       self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
       self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
@@ -230,8 +231,6 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
-
-      self.subRender();
 
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 363 && self.slimVisible === false ) {
@@ -252,7 +251,6 @@ module.exports = Backbone.View.extend({
         }
       });
     });
-    self.errorModal = $('.js-messageModal');
     return this;
   },
 
@@ -312,17 +310,21 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
       //if no state was set for some reason
-      state="about";
-      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      state="store";
+      this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }
     this.setControls(state);
     this.lastTab = state;
     //set address bar
+    //taking out handle for now, since lookup by handle is not available yet
+    /*
     if(currentHandle){
       currentAddress = currentHandle + "/" + state;
     } else {
       currentAddress = this.model.get('page').profile.guid + "/" + state;
     }
+    */
+    currentAddress = this.model.get('page').profile.guid + "/" + state;
     if(state === "item") {
       currentAddress += "/"+ hash;
     }
@@ -749,6 +751,7 @@ module.exports = Backbone.View.extend({
 
   saveNewDone: function() {
     "use strict";
+    this.subRender();
     this.addTabToHistory('store');
     this.setState('store');
   },
@@ -787,6 +790,7 @@ module.exports = Backbone.View.extend({
       success: function() {
         //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
         self.item.trigger('destroy', self.item);
+        self.subRender();
         self.setState("store");
       },
       error: function(jqXHR, status, errorThrown){
