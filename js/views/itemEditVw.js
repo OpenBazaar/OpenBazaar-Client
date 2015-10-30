@@ -104,7 +104,7 @@ module.exports = Backbone.View.extend({
 
     //focus main input
     this.$el.find('input[name=title]').focus();
-    $('#obContainer').animate({ scrollTop: "354px" });
+    $('#obContainer').animate({ scrollTop: "415px" });
   },
 
   disableShippingPrice: function(){
@@ -249,7 +249,7 @@ module.exports = Backbone.View.extend({
     deleteThisItem = function(newHash){
       $.ajax({
           type: "DELETE",
-          url: self.model.get('server_url') + "contracts?id="+self.model.get('id'), //TODO: Change to send data in POST to be safe, http://restcookbook.com/HTTP%20Methods/idempotency/
+          url: self.model.get('server_url') + "contracts?id="+self.model.get('id'),
           success: function() {
               self.trigger('deleteOldDone', newHash);
           },
@@ -320,7 +320,7 @@ module.exports = Backbone.View.extend({
             self.showErrorModal("Changes Could Not Be Saved","Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
-            self.trigger('saveNewDone');
+            self.trigger('saveNewDone', returnedId);
           }
         },
         error: function (jqXHR, status, errorThrown) {

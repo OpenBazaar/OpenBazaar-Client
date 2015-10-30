@@ -152,6 +152,7 @@ module.exports = Backbone.View.extend({
     this.following.urlRoot = options.userModel.get('server_url') + "get_following";
     this.socketView = options.socketView;
     this.slimVisible = false;
+    this.confirmDelete = false;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
@@ -261,11 +262,14 @@ module.exports = Backbone.View.extend({
     if(this.model.get('page')){
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
+
       customStyleTag.innerHTML =
           "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
           "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
           "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
+          "#ov1 .userPage .btn-tab:active { -webkit-box-shadow: none;}" +
           "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
           "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
@@ -279,7 +283,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
-
+          
       document.body.appendChild(customStyleTag);
       //set custom color input values
       self.$el.find('.js-customizeColorInput').each(function(){
@@ -298,6 +302,7 @@ module.exports = Backbone.View.extend({
   setState: function(state, hash) {
     "use strict";
     var currentAddress,
+        addressState,
         currentHandle = this.model.get('page').profile.handle;
 
     if(state === "item"){
@@ -325,8 +330,13 @@ module.exports = Backbone.View.extend({
       currentAddress = this.model.get('page').profile.guid + "/" + state;
     }
     */
-    currentAddress = this.model.get('page').profile.guid + "/" + state;
-    if(state === "item") {
+    if(state == "itemOld" || state == "itemNew") {
+      addressState = "item";
+    } else {
+      addressState = state;
+    }
+    currentAddress = this.model.get('page').profile.guid + "/" + addressState;
+    if(addressState === "item") {
       currentAddress += "/"+ hash;
     }
     window.obEventBus.trigger("setAddressBar", currentAddress);
@@ -750,11 +760,10 @@ module.exports = Backbone.View.extend({
   },
   */
 
-  saveNewDone: function() {
+  saveNewDone: function(newHash) {
     "use strict";
     this.subRender();
-    this.addTabToHistory('store');
-    this.setState('store');
+    this.setState('item', newHash);
   },
 
   deleteOldDone: function(newHash) {
@@ -762,7 +771,7 @@ module.exports = Backbone.View.extend({
     if(newHash) {
       this.setState('item', newHash);
     } else {
-      //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+      this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
       this.addTabToHistory('store');
       this.setState('store');
     }
@@ -785,21 +794,26 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self=this;
 
-    $.ajax({
-      type: "DELETE",
-      url: self.item.get('server_url') + "contracts/?id="+ self.item.get('id'),
-      success: function() {
-        //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
-        self.item.trigger('destroy', self.item);
-        self.subRender();
-        self.setState("store");
-      },
-      error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      }
-    });
+    if(this.confirmDelete === false){
+      this.$el.find('.js-deleteItem').addClass('confirm');
+      this.confirmDelete = true;
+    } else {
+      $.ajax({
+        type: "DELETE",
+        url: self.item.get('server_url') + "contracts/?id=" + self.item.get('id'),
+        success: function () {
+          //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
+          self.item.trigger('destroy', self.item);
+          self.subRender();
+          self.setState("store");
+        },
+        error: function (jqXHR, status, errorThrown) {
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
+        }
+      });
+    }
   },
 
   saveItem: function(){
