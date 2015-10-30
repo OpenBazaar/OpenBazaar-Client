@@ -1,14 +1,14 @@
-<div class="rowItem js-userShort clickable" data-guid="<%= ob.guid %>">
-  <div class="thumbnail thumbnail-large pull-left box-border"
+<div class="rowItem js-userShort clickable padding15" data-guid="<%= ob.guid %>">
+  <div class="thumbnail pull-left box-border custCol-border-secondary"
   <% if(ob.avatar_hash) { %>
   style="background-image: url(<%- ob.avatarURL %>);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
   <div class="pull-left txt-unleaded">
-    <div class="marginLeft10 row10 clearfix">
-      <div class="textSize17px pull-left marginRight5"><%= ob.name %></div>
-      <div class="textSize15px txt-fade pull-left"><%= ob.handle %></div>
+    <div class="marginLeft10 marginTop2 clearfix">
+      <div class="textSize14px marginRight5 marginBottom2"><%= ob.name %></div>
+      <div class="textSize14px txt-fade textWeightNormal"><%= ob.handle %></div>
     </div>
     <div class="marginLeft10">
       <div class="testSize15px txt-fade"><%= ob.short_description %></div>

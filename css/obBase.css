@@ -389,9 +389,8 @@ form {
 }
 
 .thumbnail {
-  height: 30px;
-  width: 30px;
-  margin-right: 6px;
+  height: 36px;
+  width: 36px;
   background-size: cover;
   background-position: center;
   border-radius: 2px;
@@ -2096,6 +2095,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-top: 50px;
 }
 
+#ov1  .marginBottom2 {
+  margin-bottom: 2px;
+}
+
 #ov1  .marginBottom50 {
   margin-bottom: 50px;
 }
@@ -2139,6 +2142,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .padding10 {
   padding: 10px;
+}
+
+#ov1  .padding15 {
+  padding: 15px;
 }
 
 #ov1  .padding20 {
