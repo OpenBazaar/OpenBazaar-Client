@@ -492,7 +492,7 @@ module.exports = Backbone.View.extend({
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           //set id after fetch, otherwise Backbone includes it in the fetch url
           model.set('id', hash);
-          if(self.options.ownPage === true){
+          if(self.options.ownPage === false){
             model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.pubkeys.guid);
           }
           //model may arrive empty, set this flag to trigger a change event
