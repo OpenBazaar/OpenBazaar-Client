@@ -177,13 +177,13 @@ form {
   justify-content: flex-end;
 }
 
-.nav-ctrlGroup {
+.ctrlGroup {
   /* use for any cluster of nav controls */
   padding-left: 4px;
   position: relative;
 }
 
-.nav-ctrlGroup:first-child {
+.ctrlGroup:first-child {
   padding-left: 0;
 }
 
