@@ -829,10 +829,9 @@ input[type="text"].txtField-bar {
   background-color: #086A9E; /* default color */
   padding:0;
   border-radius: 3px;
-  opacity: .85;
+  opacity: .80;
   box-sizing: border-box;
-  transition: opacity 1s cubic-bezier(0, 0, 0.2, 1);
-  /*transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);*/
+  transition: opacity .25s;
 }
 
 .btn:hover {
@@ -851,6 +850,11 @@ input[type="text"].txtField-bar {
 .btn.fadeOut {
   opacity: 0;
   pointer-events: none;
+}
+
+.btn:active {
+  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+  opacity: .75;
 }
 
 .btn.btn-txt {
@@ -962,6 +966,10 @@ input[type="text"].txtField-bar {
 
 .btn.btn-bar.btn-tab:first-child {
   border-top-left-radius: 0px;
+}
+
+.btn.btn-bar.btn-tab:active{
+  -webkit-box-shadow: none;
 }
 
 .btn.btn-wide {
