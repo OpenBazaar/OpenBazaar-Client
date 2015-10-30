@@ -671,7 +671,7 @@ module.exports = Backbone.View.extend({
         var imageHash,
             tempPage;
         if(data.success === true){
-          imageHash = data.image_hashes[0];
+          imageHash = data.image_hashes[0] || [];
           if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
             tempPage  =  __.clone(self.model.get('page'));
             tempPage.profile.header = imageHash;
