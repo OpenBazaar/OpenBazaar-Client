@@ -261,11 +261,14 @@ module.exports = Backbone.View.extend({
     if(this.model.get('page')){
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
+
       customStyleTag.innerHTML =
           "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
           "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
           "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
+          "#ov1 .userPage .btn-tab:active { -webkit-box-shadow: none;}" +
           "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
           "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
@@ -279,7 +282,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
-
+          
       document.body.appendChild(customStyleTag);
       //set custom color input values
       self.$el.find('.js-customizeColorInput').each(function(){
