@@ -152,11 +152,14 @@ module.exports = Backbone.View.extend({
     this.following.urlRoot = options.userModel.get('server_url') + "get_following";
     this.socketView = options.socketView;
     this.slimVisible = false;
+    this.confirmDelete = false;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
     //normally this should be in render. It works here because the modal is on a parent view
     this.errorModal = $('.js-messageModal');
+    this.preloadedBanner = false;
+    this.preloadedAvatar = false;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -166,6 +169,14 @@ module.exports = Backbone.View.extend({
         background_color: ""
       }
     };
+
+    //show loading modal before fetching user data
+    $('.js-loadingModal').removeClass('fadeOut');
+    $('.js-indexLoadingMsg1').text("Loading User Profile");
+    $('.js-indexLoadingMsg2').text("Attempting to reach " + this.pageID);
+    $('.js-indexLoadingMsg3').text("");
+    $('.js-indexLoadingMsg4').text("");
+    $('.js-closeIndexApp').hide();
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -191,10 +202,27 @@ module.exports = Backbone.View.extend({
             model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
             model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
           }
+          $('.js-loadingModal').addClass('fadeOut');
         }else{
           //model was returned as a blank object
           self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
         }
+
+        self.preLoadBanner = $('<img>').on('load', function(){
+          self.preloadedBanner = true;
+          //if view renders after image is loaded
+          $('.banner-large').addClass('bannerLoaded');
+        });
+        //asign source after asigning load event so event fires if source is cached.
+        self.preLoadBanner.attr('src', model.get('headerURL'));
+
+        self.preLoadAvatar = $('<img>').on('load', function(){
+          self.preloadedAvatar = true;
+          //if view renders after image is loaded
+          $('.js-userPageAvatar').addClass('thumbnailLoaded');
+        });
+        self.preLoadAvatar.attr('src', model.get('avatarURL'));
+
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
         self.model.set({ownPage: self.options.ownPage});
         self.render();
@@ -231,7 +259,6 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
-
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 366 && self.slimVisible === false ) {
           self.slimVisible = true;
@@ -250,6 +277,7 @@ module.exports = Backbone.View.extend({
           $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
         }
       });
+
     });
     return this;
   },
@@ -301,6 +329,7 @@ module.exports = Backbone.View.extend({
   setState: function(state, hash) {
     "use strict";
     var currentAddress,
+        addressState,
         currentHandle = this.model.get('page').profile.handle;
 
     if(state === "item"){
@@ -328,8 +357,13 @@ module.exports = Backbone.View.extend({
       currentAddress = this.model.get('page').profile.guid + "/" + state;
     }
     */
-    currentAddress = this.model.get('page').profile.guid + "/" + state;
-    if(state === "item") {
+    if(state == "itemOld" || state == "itemNew") {
+      addressState = "item";
+    } else {
+      addressState = state;
+    }
+    currentAddress = this.model.get('page').profile.guid + "/" + addressState;
+    if(addressState === "item") {
       currentAddress += "/"+ hash;
     }
     window.obEventBus.trigger("setAddressBar", currentAddress);
@@ -414,6 +448,14 @@ module.exports = Backbone.View.extend({
         self.showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
       }
     });
+    if(self.preloadedBanner === true){
+      //if image loaded before view was rendered
+      self.$el.find('.banner-large').addClass('bannerLoaded');
+    }
+    if(self.preloadedAvatar === true){
+      //if image loaded before view was rendered
+      self.$el.find('.js-userPageAvatar').addClass('thumbnailLoaded');
+    }
   },
 
   renderItems: function (model) {
@@ -485,7 +527,7 @@ module.exports = Backbone.View.extend({
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           //set id after fetch, otherwise Backbone includes it in the fetch url
           model.set('id', hash);
-          if(self.options.ownPage === true){
+          if(self.options.ownPage === false){
             model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.pubkeys.guid);
           }
           //model may arrive empty, set this flag to trigger a change event
@@ -753,11 +795,10 @@ module.exports = Backbone.View.extend({
   },
   */
 
-  saveNewDone: function() {
+  saveNewDone: function(newHash) {
     "use strict";
     this.subRender();
-    this.addTabToHistory('store');
-    this.setState('store');
+    this.setState('item', newHash);
   },
 
   deleteOldDone: function(newHash) {
@@ -765,7 +806,7 @@ module.exports = Backbone.View.extend({
     if(newHash) {
       this.setState('item', newHash);
     } else {
-      //this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
+      this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
       this.addTabToHistory('store');
       this.setState('store');
     }
@@ -788,21 +829,26 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self=this;
 
-    $.ajax({
-      type: "DELETE",
-      url: self.item.get('server_url') + "contracts/?id="+ self.item.get('id'),
-      success: function() {
-        //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
-        self.item.trigger('destroy', self.item);
-        self.subRender();
-        self.setState("store");
-      },
-      error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      }
-    });
+    if(this.confirmDelete === false){
+      this.$el.find('.js-deleteItem').addClass('confirm');
+      this.confirmDelete = true;
+    } else {
+      $.ajax({
+        type: "DELETE",
+        url: self.item.get('server_url') + "contracts/?id=" + self.item.get('id'),
+        success: function () {
+          //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
+          self.item.trigger('destroy', self.item);
+          self.subRender();
+          self.setState("store");
+        },
+        error: function (jqXHR, status, errorThrown) {
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
+        }
+      });
+    }
   },
 
   saveItem: function(){
