@@ -980,10 +980,6 @@ input[type="text"].txtField-bar {
   width: 50%;
 }
 
-.btn.btn-home {
-  transition: opacity 1s ease-in-out;
-}
-
 .btn.btn-half.btn-bar:last-child,
 .btn.btn-wide.btn-bar:last-child {
   border-right: none;
