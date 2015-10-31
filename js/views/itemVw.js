@@ -24,12 +24,13 @@ module.exports = Backbone.View.extend({
     var self = this;
     __.each(self.model.get('vendor_offer').listing.item.image_hashes, function(imageHash, i){
       "use strict";
-      console.log("item loop");
-      var preLoadImg = $('<img>').attr('src', self.model.get('server_url') + "get_image?hash=" + imageHash + self.model.get('imageExtension')).on('load', function(){
+      var imageExtension = self.model.get('imageExtension') || "";
+      var preLoadImg = $('<img>').on('load', function(){
         self.preloaded[i] = true;
         //if view renders after image is loaded
         self.$el.find('.itemImg').eq(i).addClass('imageLoaded');
       });
+      preLoadImg.attr('src', self.model.get('server_url') + "get_image?hash=" + imageHash + imageExtension);
     });
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {

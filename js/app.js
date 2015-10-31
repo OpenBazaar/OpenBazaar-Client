@@ -80,7 +80,7 @@ var loadProfile = function() {
                 });
               }, 54000000);
 
-              $('.js-loadingModal').hide();
+              $('.js-loadingModal').addClass('fadeOut');
               newPageNavView = new pageNavView({model: user});
               newRouter = new router({userModel: user, socketView: new socketView({model: user})});
               Backbone.history.start();
@@ -88,7 +88,7 @@ var loadProfile = function() {
           },
           error: function (model, response) {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
-            $('.js-loadingModal').hide();
+            $('.js-loadingModal').addClass('fadeOut');
             user.set('server_url', server_urlLocal);
             newPageNavView = new pageNavView({model: user});
             newRouter = new router({userModel: user, socketView: new socketView({model: user})});
@@ -130,7 +130,7 @@ var reloadProfile = function(){
     }, 5000);
   } else {
     alert("Your server may not be working correctly. Loading using default settings.");
-    $('.js-loadingModal').hide();
+    $('.js-loadingModal').addClass('fadeOut');
     user.set('server_url', server_urlLocal);
     newPageNavView = new pageNavView({model: user});
     newRouter = new router({userModel: user});

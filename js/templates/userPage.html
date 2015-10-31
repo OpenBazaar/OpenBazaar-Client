@@ -10,7 +10,7 @@
   <div class="user-page-content">
     <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail thumbnail-large pull-left"
+        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
         <% if(ob.page.profile.avatar_hash) { %>
         style="background-image: url(<%- ob.page.avatarURL %>);"
         <% }else{ %>
@@ -33,7 +33,7 @@
       <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
     </form>
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-      <div class="thumbnail thumbnail-large pull-left"
+      <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
       <% if(ob.page.profile.avatar_hash) { %>
       style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
       <% }else{ %>
@@ -73,8 +73,8 @@
         <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
       </div>
       <div class="ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
-        <a class="btn btn-txt custCol-primary js-deleteItem">
-          <span class="preSpacer"><%= polyglot.t('Delete') %></span><span class="preConfirm"><%= polyglot.t('Delete') %></span><span class="postConfirm"><%= polyglot.t('Confirm') %></span>
+        <a class="btn btn-txt custCol-primary confirmable js-deleteItem">
+          <span class="preSpacer"><%= polyglot.t('Delete') %></span><span class="preConfirm"><%= polyglot.t('Delete') %></span><span class="postConfirm"><%= polyglot.t('ConfirmDelete') %></span>
         </a>
       </div>
       <div class="ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide textOpacity75">
