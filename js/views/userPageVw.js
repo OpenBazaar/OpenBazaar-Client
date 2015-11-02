@@ -563,6 +563,8 @@ module.exports = Backbone.View.extend({
       defaultItem.vendor_offer.listing.id.pubkeys.guid = self.model.get('page').profile.guid;
       this.itemEdit = new itemModel(defaultItem);
     }
+    //add the moderator list to the item model
+    this.itemEdit.set('moderator_list', self.model.get('page').profile.moderator_list);
     //this.itemEdit.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //add the user information
     //this.itemEdit.set({user: self.options.userModel.toJSON()});
@@ -920,8 +922,7 @@ module.exports = Backbone.View.extend({
 
   },
 
-
-close: function(){
+  close: function(){
     "use strict";
     __.each(this.subViews, function(subView) {
       if(subView.close){

@@ -501,6 +501,10 @@ form {
   margin-bottom: 10px;
 }
 
+.rowTop10 {
+  margin-top: 10px;
+}
+
 .row20 {
   margin-bottom: 20px;
 }
@@ -1515,6 +1519,12 @@ input[type="checkbox"].fieldItem:checked + label:before {
   box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
 }
 
+input[type="checkbox"].fieldItem + label div,
+input[type="checkbox"].fieldItem + label span {
+  /* if the label has elements inside it, remove line height */
+  line-height: normal;
+}
+
 .userPage .fieldItem-selectWrapper select option {
   background-color: #4a4848;
 }
@@ -2302,6 +2312,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .width100 {
   width: 100%;
+  box-sizing: border-box;
 }
 
 #ov1 .width600 {

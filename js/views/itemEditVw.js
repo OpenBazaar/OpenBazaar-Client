@@ -97,7 +97,7 @@ module.exports = Backbone.View.extend({
     shipsTo.val(shipsToValue);
 
     //activate tags plugin
-    this.inputKeyword = new Taggle('inputKeyword');
+    this.inputKeyword = new window.Taggle('inputKeyword');
 
     //set chosen inputs
     $('.chosen').chosen();
@@ -299,6 +299,9 @@ module.exports = Backbone.View.extend({
       formData.append('condition', 'New');
     }
 
+    //add moderator list from profile
+    formData.append('moderator_list', this.model.get('moderator_list'));
+
     //add formChecked class to form so invalid fields are styled as invalid
     this.$el.find('#contractForm').addClass('formChecked');
 
@@ -320,7 +323,7 @@ module.exports = Backbone.View.extend({
             self.showErrorModal("Changes Could Not Be Saved","Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
-            self.trigger('saveNewDone', returnedId);
+            self.trigger('saveNewDone', data.id);
           }
         },
         error: function (jqXHR, status, errorThrown) {
