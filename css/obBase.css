@@ -425,9 +425,8 @@ form {
 }
 
 .thumbnail {
-  height: 30px;
-  width: 30px;
-  margin-right: 6px;
+  height: 36px;
+  width: 36px;
   background-size: cover;
   background-position: center;
   border-radius: 2px;
@@ -1060,10 +1059,6 @@ input[type="text"].txtField-bar {
 
 .btn.btn-half {
   width: 50%;
-}
-
-.btn.btn-home {
-  transition: opacity 1s ease-in-out;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -2223,6 +2218,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-left: 10px;
 }
 
+#ov1  .marginLeft12 {
+  margin-left: 12px;
+}
+
 #ov1  .marginLeft88 {
   margin-left: 88px;
 }
@@ -2241,6 +2240,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .marginTop50 {
   margin-top: 50px;
+}
+
+#ov1  .marginBottom2 {
+  margin-bottom: 2px;
 }
 
 #ov1  .marginBottom50 {
@@ -2288,8 +2291,16 @@ input[type="checkbox"].fieldItem:checked + label:before {
   padding: 10px;
 }
 
+#ov1  .padding15 {
+  padding: 15px;
+}
+
 #ov1  .padding20 {
   padding: 20px;
+}
+
+#ov1  .padding2015 {
+  padding: 20px 15px;
 }
 
 #ov1  .padding17px {
