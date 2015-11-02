@@ -44,7 +44,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome to OpenBazaar",
         CreateStore: "Create Store",
         SearchForItemsPlaceholder: "Search for items",
-        SearchForFollowersPlaceholder: "Search for users",
+        SearchForFollowersPlaceholder: "Search by name or handle",
         EstDeliveryDomesticPlaceholder: "Enter domestic shipping time e.g. 3-5 days",
         EstDeliveryInternationalPlaceholder: "Enter international shipping time e.g. 7-15 days",
         OrderProcessingTimePlaceholder: "Enter order processing time e.g. 1-2 days",
