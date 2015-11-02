@@ -207,13 +207,13 @@ form {
   justify-content: flex-end;
 }
 
-.nav-ctrlGroup {
+.ctrlGroup {
   /* use for any cluster of nav controls */
   padding-left: 4px;
   position: relative;
 }
 
-.nav-ctrlGroup:first-child {
+.ctrlGroup:first-child {
   padding-left: 0;
 }
 
@@ -307,16 +307,52 @@ form {
   width: 250px;
 }
 
+.itemImg:before {
+  content: "\f201";
+  font-family: Ionicons;
+  font-size: 180px;
+  text-align: center;
+  position: absolute;
+  background-color: #000;
+  border-radius: 3px;
+  height: 230px;
+  width: 250px;
+  line-height: 230px;
+  transition: 1s opacity;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
   height: 357px;
   width: 357px;
 }
 
+.itemImg.itemImg-large:before {
+  /* flex row collapses unless a specific height is set */
+  height: 357px;
+  width: 357px;
+  line-height: 357px;
+  font-size: 300px;
+}
+
 .itemImg.itemImg-small {
   height: 82px;
   width: 82px;
   margin: 0 5px 10px 5px;
+}
+
+.itemImg.itemImg-small:before {
+  height: 82px;
+  width: 82px;
+  line-height: 82px;
+  font-size: 64px;
+}
+
+.imageLoaded.itemImg:before,
+.itemEdit .itemImg:before {
+  opacity: 0;
 }
 
 .rowItem {
@@ -425,6 +461,7 @@ form {
   background-size: cover;
   background-position: center;
   border-radius: 2px;
+  position: relative;
 }
 
 .thumbnail-large {
@@ -436,10 +473,54 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
-  .thumbnail-large-slim {
+.thumbnail-large-slim {
   height: 58px;
   width: 58px;
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
+}
+
+.thumbnail:before {
+  content: "\f201";
+  font-family: Ionicons;
+  font-size: 20px;
+  text-align: center;
+  position: absolute;
+  background-color: #000;
+  border-radius: 2px;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  transition: 1s opacity;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.thumbnail.thumbnail-large:before {
+  font-size: 54px;
+  border-radius: 0;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 76px;
+  width: 80px;
+  line-height: 76px;
+}
+
+.thumbnail.thumbnail-large-slim:before {
+  height: 58px;
+  width: 58px;
+  line-height: 58px;
+  font-style: 44px;
+}
+
+.thumbnail.box-border:before,
+.thumbnail.box-borderBright:before {
+  margin: -1px;
+}
+
+.thumbnailLoaded.thumbnail:before,
+.thumbnailLoaded.thumbnail.thumbnail-large:before
+.thumbnailLoaded.thumbnail.thumbnail-large-slim:before {
+  opacity: 0;
 }
 
 .row5 {
@@ -867,10 +948,9 @@ input[type="text"].txtField-bar {
   background-color: #086A9E; /* default color */
   padding:0;
   border-radius: 3px;
-  opacity: .85;
+  opacity: .80;
   box-sizing: border-box;
-  transition: opacity 1s cubic-bezier(0, 0, 0.2, 1);
-  /*transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);*/
+  transition: opacity .25s, background-color 2s;
 }
 
 .btn:hover {
@@ -889,6 +969,11 @@ input[type="text"].txtField-bar {
 .btn.fadeOut {
   opacity: 0;
   pointer-events: none;
+}
+
+.btn:active {
+  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+  opacity: .75;
 }
 
 .btn.btn-txt {
@@ -1002,6 +1087,10 @@ input[type="text"].txtField-bar {
   border-top-left-radius: 0px;
 }
 
+.btn.btn-bar.btn-tab:active{
+  -webkit-box-shadow: none;
+}
+
 .btn.btn-wide {
   width: 100%;
   border: none;
@@ -1109,6 +1198,52 @@ input[type="text"].txtField-bar {
   top: 2px;
   right: 2px;
   line-height: 26px;
+}
+
+#ov1 .btn.confirmable,
+#ov1 .userPage .btn.confirmable {
+  transition: 2s background-color;
+}
+
+.btn .postConfirm,
+.btn .preConfirm,
+.btn .preSpacer {
+  display: inline-block;
+  overflow: hidden;
+  transition: 2s max-width ease, 2s opacity ease;
+}
+
+.btn .preConfirm {
+  max-width: 200px;
+  transition: 1s opacity;
+}
+
+.btn .postConfirm {
+  max-width: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.btn .preSpacer {
+  /*this keeps the width the same as the preconfirm is shrinking*/
+  display: block;
+  height: 0;
+}
+
+.confirm.btn .preConfirm {
+  max-width: 0;
+  opacity: 0;
+}
+
+.confirm.btn .postConfirm {
+  max-width: 200px;
+  width: auto;
+  opacity: 1;
+}
+
+#ov1 .confirm.btn,
+#ov1 .userPage .confirm.btn {
+  background-color: rgba(200,25,25,1);
 }
 
 .labelWrap {
@@ -1533,6 +1668,26 @@ input[type="checkbox"].fieldItem:checked + label:before {
   width: 950px;
   padding: 0;
   z-index: 0;
+}
+
+.banner-large:before {
+  content: "\f201";
+  font-family: Ionicons;
+  font-size: 180px;
+  text-align: center;
+  position: absolute;
+  background-color: #000;
+  border-radius: 3px;
+  height: 400px;
+  width: 950px;
+  line-height: 400px;
+  transition: 1s opacity;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.bannerLoaded.banner-large:before {
+  opacity: 0;
 }
 
 .user-page-content {

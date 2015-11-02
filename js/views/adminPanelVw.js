@@ -2,6 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    remote = require('remote'),
     userSettingsModel = require('../models/userMd'),
     userProfileModel = require('../models/userProfileMd');
 
@@ -18,7 +19,9 @@ module.exports = Backbone.View.extend({
     'click .js-adminUpdateProfile': 'updateProfile',
     'click .js-adminUpdateSettings': 'updateSettings',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'click .js-adminShutdown': 'shutdown',
+    'click .js-adminCloseApp': 'closeApp'
   },
 
   initialize: function (options) {
@@ -283,6 +286,30 @@ module.exports = Backbone.View.extend({
     "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
+  },
+
+  shutdown: function(e){
+    "use strict";
+    var self = this,
+        targetButton = $(e.target);
+    $.ajax({
+      type: "GET",
+      url: self.model.get('server_url') + "shutdown",
+      complete: function () {
+        targetButton.parent().find('.adminMsg').text("Server has been shut down");
+      }
+    });
+  },
+
+  closeApp: function(){
+    "use strict";
+    var win = remote.getCurrentWindow();
+    var process = remote.process;
+    if (process.platform != 'darwin') {
+      win.close();
+    } else {
+      win.hide();
+    }
   },
 
   close: function () {

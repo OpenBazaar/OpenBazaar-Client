@@ -30,7 +30,7 @@
   <div class="user-page-content">
     <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail thumbnail-large pull-left"
+        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
         <% if(ob.page.profile.avatar_hash) { %>
         style="background-image: url(<%- ob.page.avatarURL %>);"
         <% }else{ %>
@@ -76,31 +76,39 @@
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
     <div class="navEnd pad15">
-      <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up48">
+      <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('nav.createListing') %></a>
         <a class="btn btn-txt custCol-primary js-createStore"><%= polyglot.t('CreateStore') %></a>
       </div>
-      <div class="nav-ctrlGroup js-pageButtons js-userPageControls pull-up48">
+      <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
       </div>
-      <div class="nav-ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
+      <div class="ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-follow"><%= polyglot.t('Follow') %> </a>
         <a class="btn btn-txt custCol-primary js-unfollow"><%= polyglot.t('Unfollow') %> </a>
       </div>
-      <div class="nav-ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
+      <div class="ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-message"><%= polyglot.t('Message') %> </a>
       </div>
-      <div class="nav-ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
+      <div class="ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
         <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
       </div>
-      <div class="nav-ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
-        <a class="btn btn-txt custCol-primary js-deleteItem"><%= polyglot.t('Delete') %></a>
+      <div class="ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
+        <a class="btn btn-txt custCol-primary confirmable js-deleteItem">
+          <span class="preSpacer"><%= polyglot.t('Delete') %></span><span class="preConfirm"><%= polyglot.t('Delete') %></span><span class="postConfirm"><%= polyglot.t('ConfirmDelete') %></span>
+        </a>
       </div>
-      <div class="nav-ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide textOpacity75">
+      <div class="ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide textOpacity75">
         <a class="btn btn-txt custCol-primary js-cancelItem"><%= polyglot.t('Cancel') %></a>
       </div>
-      <div class="nav-ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide">
+      <div class="ctrlGroup js-itemCustomizationButtons pull-up48 js-userPageControls hide textOpacity75">
+        <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
+      </div>
+      <div class="ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide">
         <a class="btn btn-txt custCol-primary js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+      </div>
+      <div class="ctrlGroup js-itemCustomizationButtons pull-up48 js-userPageControls hide">
+        <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
       </div>
     </div>
   </div>
@@ -244,7 +252,7 @@
       </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-itemEdit js-tabTarg hide minHeight650">
-      <div class="flexRow js-list5 minHeight650 positionWrapper"></div>
+      <div class="flexRow itemEdit js-list5 minHeight650 positionWrapper"></div>
     </div>
   </div>
   <div class="navBar custCol-secondary" style="padding: 4px 0"></div>
