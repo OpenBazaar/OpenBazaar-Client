@@ -40,10 +40,14 @@ module.exports = Backbone.View.extend({
       if(subView.close){
         subView.close();
       }else{
+        subView.unbind();
         subView.remove();
       }
     });
+    this.unbind();
     this.remove();
+    delete this.$el;
+    delete this.el;
   }
 });
 

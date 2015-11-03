@@ -39,6 +39,21 @@ module.exports = Backbone.View.extend({
   avatarClick: function(){
     console.log("avatarClick");
     Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/store', {trigger: true});
+  },
+
+  close: function(){
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.unbind();
+        subView.remove();
+      }
+    });
+    this.unbind();
+    this.remove();
+    delete this.$el;
+    delete this.el;
   }
 
 });

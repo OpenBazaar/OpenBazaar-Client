@@ -1,4 +1,5 @@
-var Backbone = require('backbone'),
+var __ = require('underscore'),
+    Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate');
@@ -29,6 +30,21 @@ module.exports = Backbone.View.extend({
   userClick: function(e){
     "use strict";
     Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
+  },
+
+  close: function(){
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.unbind();
+        subView.remove();
+      }
+    });
+    this.unbind();
+    this.remove();
+    delete this.$el;
+    delete this.el;
   }
 
 });
