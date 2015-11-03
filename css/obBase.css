@@ -664,10 +664,10 @@ h5 {
   top: 50px;
 }
 
-.modal-fullOpaque {
-  background-color: rgba(25,25,25,.75);
+.modal-opaqueDark {
+  background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
-  z-index: 10;
+  top: 50px;
 }
 
 .modal-opaque.modal-navBlock {
