@@ -76,10 +76,24 @@ textarea {
   font-weight: 500;
 }
 
+input[type="file"] {
+    padding-left:10px;
+    padding-top:15px;
+    color: #fff;
+}
+
+input[type="checkbox"] {
+    margin-left:15px;
+    margin-top:20px;
+}
+
 form {
   margin: 0;
 }
 
+#settingsForm {
+    width:100%;
+}
 
 
 /*========== structure classes ==========*/
@@ -412,16 +426,49 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
-.row5 {
-  margin-bottom: 5px;
+.thumbnail-small {
+  border-radius: 2px;
+  height: 55px;
+  width: 55px;
 }
 
 .row10 {
   margin-bottom: 10px;
 }
 
+.row5 {
+  margin-bottom: 5px;
+}
+
 .row20 {
   margin-bottom: 20px;
+}
+
+.topThumb {
+  width:55px;
+  height:55px;
+  background-size: cover;
+  top: 24px;
+  content: " ";
+  left: 30px;
+  position: absolute;
+  z-index: 3;
+}
+
+.smPageHeader {
+  background-color: rgb(6,55,83);
+  height: 85px;
+  line-height: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.smPageHeader div {
+  top: 35px;
+  padding-left: 100px;
+  padding-right: 15px;
+  position: relative;
+  background-color: rgb(33, 81, 117);
 }
 
 .rowTop20 {
@@ -1578,6 +1625,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 .shadow-inner1-strong {
   box-shadow: inset 0px -400px 222px -182px rgba(25,25,25,.85);
+}
+
+.shadow-inner1 {
+  box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,1);
 }
 
 .icon-centered {
