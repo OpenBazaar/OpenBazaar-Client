@@ -307,52 +307,16 @@ form {
   width: 250px;
 }
 
-.itemImg:before {
-  content: "\f201";
-  font-family: Ionicons;
-  font-size: 180px;
-  text-align: center;
-  position: absolute;
-  background-color: #000;
-  border-radius: 3px;
-  height: 230px;
-  width: 250px;
-  line-height: 230px;
-  transition: 1s opacity;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
   height: 357px;
   width: 357px;
 }
 
-.itemImg.itemImg-large:before {
-  /* flex row collapses unless a specific height is set */
-  height: 357px;
-  width: 357px;
-  line-height: 357px;
-  font-size: 300px;
-}
-
 .itemImg.itemImg-small {
   height: 82px;
   width: 82px;
   margin: 0 5px 10px 5px;
-}
-
-.itemImg.itemImg-small:before {
-  height: 82px;
-  width: 82px;
-  line-height: 82px;
-  font-size: 64px;
-}
-
-.imageLoaded.itemImg:before,
-.itemEdit .itemImg:before {
-  opacity: 0;
 }
 
 .rowItem {
@@ -455,9 +419,8 @@ form {
 }
 
 .thumbnail {
-  height: 30px;
-  width: 30px;
-  margin-right: 6px;
+  height: 36px;
+  width: 36px;
   background-size: cover;
   background-position: center;
   border-radius: 2px;
@@ -477,50 +440,6 @@ form {
   height: 58px;
   width: 58px;
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
-}
-
-.thumbnail:before {
-  content: "\f201";
-  font-family: Ionicons;
-  font-size: 20px;
-  text-align: center;
-  position: absolute;
-  background-color: #000;
-  border-radius: 2px;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-  transition: 1s opacity;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-.thumbnail.thumbnail-large:before {
-  font-size: 54px;
-  border-radius: 0;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  height: 76px;
-  width: 80px;
-  line-height: 76px;
-}
-
-.thumbnail.thumbnail-large-slim:before {
-  height: 58px;
-  width: 58px;
-  line-height: 58px;
-  font-style: 44px;
-}
-
-.thumbnail.box-border:before,
-.thumbnail.box-borderBright:before {
-  margin: -1px;
-}
-
-.thumbnailLoaded.thumbnail:before,
-.thumbnailLoaded.thumbnail.thumbnail-large:before
-.thumbnailLoaded.thumbnail.thumbnail-large-slim:before {
-  opacity: 0;
 }
 
 .row5 {
@@ -551,6 +470,10 @@ form {
 .pad10 {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.pad10Left {
+  padding-left: 10px;
 }
 
 .pad10Right {
@@ -771,6 +694,12 @@ h5 {
 
 .modal-opaque {
   background-color: rgba(25,25,25,.75);
+  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  top: 50px;
+}
+
+.modal-opaqueDark {
+  background-color: rgba(25,25,25,0.9);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
   top: 50px;
 }
@@ -1098,10 +1027,6 @@ input[type="text"].txtField-bar {
 
 .btn.btn-half {
   width: 50%;
-}
-
-.btn.btn-home {
-  transition: opacity 1s ease-in-out;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -1670,26 +1595,6 @@ input[type="checkbox"].fieldItem:checked + label:before {
   z-index: 0;
 }
 
-.banner-large:before {
-  content: "\f201";
-  font-family: Ionicons;
-  font-size: 180px;
-  text-align: center;
-  position: absolute;
-  background-color: #000;
-  border-radius: 3px;
-  height: 400px;
-  width: 950px;
-  line-height: 400px;
-  transition: 1s opacity;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-.bannerLoaded.banner-large:before {
-  opacity: 0;
-}
-
 .user-page-content {
   position: relative;
   width: 950px;
@@ -2205,6 +2110,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-size: 24px;
 }
 
+#ov1  .textSize90px {
+  font-size: 90px;
+}
+
 #ov1  .textSize13px {
   font-size: 13px;
 }
@@ -2282,6 +2191,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-left: 10px;
 }
 
+#ov1  .marginLeft12 {
+  margin-left: 12px;
+}
+
 #ov1  .marginLeft88 {
   margin-left: 88px;
 }
@@ -2300,6 +2213,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .marginTop50 {
   margin-top: 50px;
+}
+
+#ov1  .marginBottom2 {
+  margin-bottom: 2px;
 }
 
 #ov1  .marginBottom50 {
@@ -2347,8 +2264,16 @@ input[type="checkbox"].fieldItem:checked + label:before {
   padding: 10px;
 }
 
+#ov1  .padding15 {
+  padding: 15px;
+}
+
 #ov1  .padding20 {
   padding: 20px;
+}
+
+#ov1  .padding2015 {
+  padding: 20px 15px;
 }
 
 #ov1  .padding17px {

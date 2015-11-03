@@ -159,8 +159,6 @@ module.exports = Backbone.View.extend({
     this.customizing = false;
     //normally this should be in render. It works here because the modal is on a parent view
     this.errorModal = $('.js-messageModal');
-    this.preloadedBanner = false;
-    this.preloadedAvatar = false;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -173,11 +171,6 @@ module.exports = Backbone.View.extend({
 
     //show loading modal before fetching user data
     $('.js-loadingModal').removeClass('fadeOut');
-    $('.js-indexLoadingMsg1').text("Loading User Profile");
-    $('.js-indexLoadingMsg2').text("Attempting to reach " + this.pageID);
-    $('.js-indexLoadingMsg3').text("");
-    $('.js-indexLoadingMsg4').text("");
-    $('.js-closeIndexApp').hide();
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -196,6 +189,7 @@ module.exports = Backbone.View.extend({
       processData: true,
       success: function(model, response){
         if(response.profile){
+          $('.js-loadingModal').addClass('fadeOut');
           if (self.options.ownPage === true){
             model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
             model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
@@ -203,26 +197,10 @@ module.exports = Backbone.View.extend({
             model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
             model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
           }
-          $('.js-loadingModal').addClass('fadeOut');
         }else{
           //model was returned as a blank object
           self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
         }
-
-        self.preLoadBanner = $('<img>').on('load', function(){
-          self.preloadedBanner = true;
-          //if view renders after image is loaded
-          $('.banner-large').addClass('bannerLoaded');
-        });
-        //asign source after asigning load event so event fires if source is cached.
-        self.preLoadBanner.attr('src', model.get('headerURL'));
-
-        self.preLoadAvatar = $('<img>').on('load', function(){
-          self.preloadedAvatar = true;
-          //if view renders after image is loaded
-          $('.js-userPageAvatar').addClass('thumbnailLoaded');
-        });
-        self.preLoadAvatar.attr('src', model.get('avatarURL'));
 
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
         self.model.set({ownPage: self.options.ownPage});
@@ -462,14 +440,6 @@ module.exports = Backbone.View.extend({
         self.showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
       }
     });
-    if(self.preloadedBanner === true){
-      //if image loaded before view was rendered
-      self.$el.find('.banner-large').addClass('bannerLoaded');
-    }
-    if(self.preloadedAvatar === true){
-      //if image loaded before view was rendered
-      self.$el.find('.js-userPageAvatar').addClass('thumbnailLoaded');
-    }
   },
 
   renderItems: function (model) {

@@ -14,7 +14,7 @@
   <div class="container custCol-background custCol-text" id="obContainer">
     <div id="content"></div>
     <div id="sideBar"></div>
-    <div class="modal modal-navBlock modal-opaque js-loadingModal">
+    <div class="modal modal-navBlock modal-opaque fadeOut js-loadingMessageModal">
       <div class="modal-child modal-childMain">
         <div class="btn-corner btn-cornerTR js-closeIndexModal">
           <h2 class="ion-close-circled"></h2>
@@ -32,6 +32,9 @@
   </div>
   <div id="obShadow"></div>
   <div id="modalHolder"></div>
+  <div class="modal modal-navBlock modal-opaqueDark js-loadingModal">
+    <i class="ion-loop spinner textSize90px textOpacity50 fullCentered"></i>
+  </div>
 
   <!--TODO: modularize non-modular scripts -->
   <script src="js/utils/list.min.js"></script>
