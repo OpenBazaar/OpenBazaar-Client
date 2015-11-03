@@ -96,7 +96,7 @@ var defaultItem = {
       }
     }
   }
-}
+};
 
 module.exports = Backbone.View.extend({
 
@@ -141,6 +141,7 @@ module.exports = Backbone.View.extend({
     this.userProfileFetchParameters = {};
     this.itemFetchParameters = {};
     this.subViews = [];
+    this.subModels = [];
     this.model = new Backbone.Model();
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
@@ -151,6 +152,7 @@ module.exports = Backbone.View.extend({
     this.followers.urlRoot = options.userModel.get('server_url') + "get_followers";
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('server_url') + "get_following";
+    this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
     this.socketView = options.socketView;
     this.slimVisible = false;
     this.confirmDelete = false;
@@ -188,26 +190,29 @@ module.exports = Backbone.View.extend({
       data: self.userProfileFetchParameters,
       processData: true,
       success: function(model, response){
-        if(response.profile){
-          $('.js-loadingModal').addClass('fadeOut');
-          if (self.options.ownPage === true){
-            model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
-            model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
+        //don't render if view has been closed and the $el has been deleted
+        if(self.$el){
+          if (response.profile){
+            $('.js-loadingModal').addClass('fadeOut');
+            if (self.options.ownPage === true){
+              model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
+              model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
+            }else{
+              model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
+              model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
+            }
           }else{
-            model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
-            model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
+            //model was returned as a blank object
+            self.showErrorModal("User Not Found", "Information for user " + self.pageID + " cannot be loaded. They may have gone offline.");
           }
-        }else{
-          //model was returned as a blank object
-          self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
-        }
 
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        self.model.set({ownPage: self.options.ownPage});
-        self.render();
+          self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+          self.model.set({ownPage: self.options.ownPage});
+          self.render();
+        }
       },
       error: function(model, response){
-        self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
+        self.showErrorModal("User Not Found", "Information for user "+self.pageID+" cannot be loaded. They may have gone offline.");
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
       }
@@ -498,7 +503,7 @@ module.exports = Backbone.View.extend({
     this.itemView = new itemVw({model:this.item, el: '.js-list4'});
     this.subViews.push(this.itemView);
     //set the parameters for the fetch
-    if(this.options.ownPage == true){
+    if(this.options.ownPage === true){
       this.itemFetchParameters = $.param({'id': hash});
     } else {
       this.itemFetchParameters = $.param({'id': hash, 'guid': this.pageID});
@@ -558,6 +563,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
     this.subViews.push(this.itemEditView);
+    this.subModels.push(this.itemEdit);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
 
@@ -772,21 +778,6 @@ module.exports = Backbone.View.extend({
     Backbone.history.loadUrl();
   },
 
-  //TODO: remove code below
-/*
-  undoColorCustomization: function(){
-    "use strict";
-    if(this.customizing === true) {
-      this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
-      this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
-      this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;
-      this.model.get('page').profile.text_color = this.undoCustomAttributes.text_color;
-      this.customizing = false;
-      this.setCustomStyles();
-    }
-  },
-  */
-
   saveNewDone: function(newHash) {
     "use strict";
     this.subRender();
@@ -858,6 +849,7 @@ module.exports = Backbone.View.extend({
     this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder', socketView: this.socketView});
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.subViews.push(this.storeWizardView);
+    this.subModels.push(storeWizardModel);
     // $('#obContainer').addClass('blur');
   },
 
@@ -912,17 +904,25 @@ module.exports = Backbone.View.extend({
 
   },
 
+  close: function(){
+    __.each(this.subModels, function(subModel) {
+      subModel.off();
+    });
 
-close: function(){
-    "use strict";
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{
+        subView.unbind();
         subView.remove();
       }
     });
+
+    this.model.off();
+    this.off();
     this.remove();
+    delete this.$el;
+    delete this.el;
   }
 
 });
