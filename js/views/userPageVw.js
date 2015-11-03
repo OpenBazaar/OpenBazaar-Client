@@ -682,6 +682,7 @@ module.exports = Backbone.View.extend({
       quality: 0.75,
       originalSize: false
     });
+    imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
     var formData = new FormData();
     formData.append('image', imageURI);
     $.ajax({
