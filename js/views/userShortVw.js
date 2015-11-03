@@ -14,13 +14,6 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     "use strict";
     var self = this;
-    this.preloadedAvatar = false;
-    this.preLoadAvatar = $('<img>').on('load', function(){
-      self.preloadedAvatar = true;
-      //if view renders after image is loaded
-      self.$el.find('.thumbnail').addClass('thumbnailLoaded');
-    });
-    this.preLoadAvatar.attr('src', this.model.get('avatarURL'));
     this.render();
   },
 
@@ -29,10 +22,6 @@ module.exports = Backbone.View.extend({
     var self = this;
     loadTemplate('./js/templates/userShort.html', function(loadedTemplate) {
       self.$el.append(loadedTemplate(self.model.toJSON()));
-      if(self.preloadedAvatar === true){
-        //if image loaded before view was rendered
-        self.$el.find('.thumbnail').addClass('thumbnailLoaded');
-      }
     });
     return this;
   },
