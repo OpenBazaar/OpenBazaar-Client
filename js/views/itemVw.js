@@ -56,7 +56,17 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    "use strict";
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.unbind();
+        subView.remove();
+      }
+    });
+    this.unbind();
     this.remove();
+    delete this.$el;
+    delete this.el;
   }
 });
