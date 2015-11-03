@@ -1,6 +1,6 @@
 <div class="flexRow custCol-border-secondary">
   <div class="flexRow bar barTxt pad20">
-    <a class="js-returnToStore textOpacity75"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a><span class="textOpacity75">&nbsp;>&nbsp;<%= ob.vendor_offer.listing.item.title %></span>
+    <a class="js-returnToStore textOpacity75"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a><span class="textOpacity75">&nbsp;>&nbsp;<%- ob.vendor_offer.listing.item.title %></span>
   </div>
 </div>
 
@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="flexCol-9">
-              <input name="title" id="inputName" type="text" class="fieldItem custCol-text" required placeholder="<%= polyglot.t('TitlePlaceholder') %>" value="<%= ob.vendor_offer.listing.item.title %>">
+              <input name="title" id="inputName" type="text" class="fieldItem custCol-text" required placeholder="<%= polyglot.t('TitlePlaceholder') %>" value="<%- ob.vendor_offer.listing.item.title %>">
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
@@ -86,7 +86,7 @@
             <div class="flexCol-5">
               <input type="number" step="any" name="price" id="inputPrice" class="hide" />
               <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
-              <input type="number" name="priceLocal" step="any" min="0.01" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= ob.price %>" required>
+              <input type="number" name="priceLocal" step="any" min="0.01" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%- ob.price %>" required>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary js-shippingRow">
@@ -116,7 +116,7 @@
               </div>
             </div>
             <div class="flexCol-9">
-              <input name="sku" type="text" id="inputSku" placeholder="<%= polyglot.t('Optional') %>" class="fieldItem custCol-text" value="<%= ob.vendor_offer.listing.item.sku %>">
+              <input name="sku" type="text" id="inputSku" placeholder="<%= polyglot.t('Optional') %>" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.item.sku %>">
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
@@ -126,7 +126,7 @@
               </div>
             </div>
             <div class="flexCol-9">
-              <textarea name="description" rows="8" class="fieldItem-textarea custCol-text" id="inputDescription" required placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%= ob.vendor_offer.listing.item.description %></textarea>
+              <textarea name="description" rows="8" class="fieldItem-textarea custCol-text" id="inputDescription" required placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%- ob.vendor_offer.listing.item.description %></textarea>
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="process_time" type="text" id="inputProcessingTime" placeholder="<%= polyglot.t('OrderProcessingTimePlaceholder') %>" class="fieldItem custCol-text" value="<%= ob.vendor_offer.listing.item.process_time %>" required>
+                <input name="process_time" type="text" id="inputProcessingTime" placeholder="<%= polyglot.t('OrderProcessingTimePlaceholder') %>" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.item.process_time %>" required>
               </div>
             </div>
             <div class="flexRow custCol-border-secondary js-shippingRow">
@@ -184,18 +184,18 @@
               <div class="flexCol-4">
                 <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
                 <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
-                <input type="number" step="any" min="0.01" class="fieldItem js-priceLocal custCol-text" id="shippingPriceLocalLocal"  value="<%= ob.domesticShipping %>">
+                <input type="number" step="any" min="0.01" class="fieldItem js-priceLocal custCol-text" id="shippingPriceLocalLocal"  value="<%- ob.domesticShipping %>">
               </div>
             </div>
             <div class="flexRow custCol-border-secondary js-inputParent js-shippingPriceRow">
               <div class="flexCol-4 borderRight custCol-border-secondary">
                 <div class="fieldItem marginTop15">
-                  <label for="shippingPriceInternationalLocal" class="lineHeightReset"><%= polyglot.t('International') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)</label>
+                  <label for="shippingPriceInternationalLocal" class="lineHeightReset"><%= polyglot.t('International') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Price') %> (<%- ob.userCurrencyCode %>)</label>
                 </div>
               </div>
               <div class="flexCol-4">
                 <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
-                <input type="number" step="any" min="0.01" class="fieldItem js-priceLocal custCol-text" id="shippingPriceInternationalLocal" value="<%= ob.internationalShipping %>">
+                <input type="number" step="any" min="0.01" class="fieldItem js-priceLocal custCol-text" id="shippingPriceInternationalLocal" value="<%- ob.internationalShipping %>">
               </div>
             </div>
             <div class="flexRow custCol-border-secondary js-shippingRow">
@@ -205,7 +205,7 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="est_delivery_domestic" id="inputLocalShippingTime" type="text" class="fieldItem" value="<%= ob.vendor_offer.listing.shipping.est_delivery.domestic %>" placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
+                <input name="est_delivery_domestic" id="inputLocalShippingTime" type="text" class="fieldItem" value="<%- ob.vendor_offer.listing.shipping.est_delivery.domestic %>" placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
               </div>
             </div>
             <div class="flexRow custCol-border-secondary js-shippingRow">
@@ -215,7 +215,7 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="est_delivery_international" id="inputInternationalShippingTime" type="text" class="fieldItem custCol-text" value="<%= ob.vendor_offer.listing.shipping.est_delivery.international %>" placeholder="<%= polyglot.t('EstDeliveryInternationalPlaceholder') %>">
+                <input name="est_delivery_international" id="inputInternationalShippingTime" type="text" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.shipping.est_delivery.international %>" placeholder="<%= polyglot.t('EstDeliveryInternationalPlaceholder') %>">
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@
             </div>
             <div class="flexRow custCol-border-secondary">
               <div class="flexCol-12 custCol-border-secondary">
-                <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
+                <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%- ob.vendor_offer.listing.policy.terms_conditions %></textarea>
               </div>
             </div>
           </div>
@@ -243,7 +243,7 @@
             </div>
             <div class="flexRow">
               <div class="flexCol-12">
-                <textarea name="returns" rows="6" placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.returns %></textarea>
+                <textarea name="returns" rows="6" placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>" class="fieldItem-textarea custCol-text"><%- ob.vendor_offer.listing.policy.returns %></textarea>
               </div>
             </div>
         </div>
@@ -266,7 +266,7 @@
               </div>
             </div>
             <div class="flexCol-8">
-              <input name="category" type="text" id="inputCategory" placeholder="<%= polyglot.t('CategoryPlaceholder') %>" class="fieldItem custCol-text" value="<%= ob.vendor_offer.listing.item.category %>">
+              <input name="category" type="text" id="inputCategory" placeholder="<%= polyglot.t('CategoryPlaceholder') %>" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.item.category %>">
             </div>
           </div>
           <div class="flexRow">
