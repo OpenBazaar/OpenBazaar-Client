@@ -682,12 +682,14 @@ module.exports = Backbone.View.extend({
       quality: 0.75,
       originalSize: false
     });
+    var formData = new FormData();
+    formData.append('image', imageURI);
     $.ajax({
       type: "POST",
       url: server_url + "upload_image",
       contentType: false,
       processData: false,
-      data: imageURI,
+      data: formData,
       dataType: "json",
       success: function(data) {
         var imageHash,
