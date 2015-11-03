@@ -33,7 +33,7 @@ module.exports = Backbone.View.extend({
 
   itemClick: function(e){
     var self = this;
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+$(e.target).data('id'), {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+$(e.target).closest('.js-item').data('id'), {trigger: true});
   },
 
   avatarClick: function(){
