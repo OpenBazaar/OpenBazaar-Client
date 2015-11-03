@@ -164,7 +164,7 @@ module.exports = Backbone.View.extend({
 
       //add data not in the form
       formData.append('vendor', true);
-      $('.js-storeWizardModeratorList input').each(function(){
+      $('.js-storeWizardModeratorList input:checked').each(function(){
         formData.append('moderator_list', $(this).data('guid'));
       });
 
