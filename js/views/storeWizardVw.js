@@ -28,7 +28,6 @@ module.exports = Backbone.View.extend({
     this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
     this.model.set('headerURL', this.model.get('user').server_url+"get_image?hash="+this.model.get('page').profile.header_hash);
-    //this.getModerators();
     this.render();
   },
 
