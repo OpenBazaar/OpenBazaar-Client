@@ -46,11 +46,20 @@ module.exports = Backbone.Router.extend({
   },
 
   home: function(){
-    this.newView(new homeView({userModel: this.options.userModel, socketView: this.socketView}));
+    this.newView(new homeView({
+      userModel: this.options.userModel,
+      socketView: this.socketView
+    }));
   },
 
   userPage: function(userID, state, itemHash){
-    this.newView(new userPageView({userModel: this.options.userModel, userID: userID, state: state, itemHash: itemHash, socketView: this.socketView}));
+    this.newView(new userPageView({
+      userModel: this.options.userModel,
+      userID: userID,
+      state: state,
+      itemHash: itemHash,
+      socketView: this.socketView
+    }));
     $('body').addClass("userPage");
   },
 
@@ -59,7 +68,11 @@ module.exports = Backbone.Router.extend({
   },
 
   sellItem: function(){
-    this.newView(new userPageView({userModel: this.options.userModel, userID: this.options.userModel.get('guid'), state: 'itemNew'}));
+    this.newView(new userPageView({
+      userModel: this.options.userModel,
+      userID: this.options.userModel.get('guid'),
+      state: 'itemNew'
+    }));
     $('body').addClass("userPage");
   },
 

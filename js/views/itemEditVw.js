@@ -96,7 +96,10 @@ module.exports = Backbone.View.extend({
     shipsTo.val(shipsToValue);
 
     //activate tags plugin
-    this.inputKeyword = new Taggle('inputKeyword');
+    this.inputKeyword = new Taggle('inputKeyword', {
+      tags: this.model.get('vendor_offer').listing.item.keywords,
+      saveOnBlur: true
+    });
 
     //set chosen inputs
     $('.chosen').chosen();
@@ -339,6 +342,11 @@ module.exports = Backbone.View.extend({
     if($('#inputCondition:disabled').length > 0){
       formData.append('condition', 'New');
     }
+
+    //add moderator list from profile
+    __.each(this.model.get('moderator_list'), function(moderator){
+      formData.append('moderators', moderator);
+    });
 
     //add formChecked class to form so invalid fields are styled as invalid
     this.$el.find('#contractForm').addClass('formChecked');

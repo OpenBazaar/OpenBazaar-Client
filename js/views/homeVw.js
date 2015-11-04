@@ -184,7 +184,7 @@ module.exports = Backbone.View.extend({
         storeWizardModel = new Backbone.Model();
     //copy the view model into the new wizard model
     storeWizardModel.set(this.model.attributes);
-    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder'});
+    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder', socketView: this.socketView});
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.subViews.push(this.storeWizardView);
   },
