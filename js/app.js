@@ -56,7 +56,7 @@ var loadProfile = function() {
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
     success: function (model, response) {
-      $('.js-loadingModal').addClass('fadeOut');
+      $('.js-loadingModal').addClass('hide');
       "use strict";
       //make sure profile is not blank
       if (response.profile){
@@ -81,7 +81,7 @@ var loadProfile = function() {
                 });
               }, 54000000);
 
-              $('.js-loadingMessageModal').addClass('fadeOut');
+              $('.js-loadingMessageModal').addClass('hide');
               newPageNavView = new pageNavView({model: user});
               newRouter = new router({userModel: user, socketView: new socketView({model: user})});
               Backbone.history.start();
@@ -89,7 +89,7 @@ var loadProfile = function() {
           },
           error: function (model, response) {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
-            $('.js-loadingMessageModal').addClass('fadeOut');
+            $('.js-loadingMessageModal').addClass('hide');
             user.set('server_url', server_urlLocal);
             newPageNavView = new pageNavView({model: user});
             newRouter = new router({userModel: user, socketView: new socketView({model: user})});
@@ -104,7 +104,7 @@ var loadProfile = function() {
       }
     },
     error: function (model, response) {
-      $('.js-loadingModal').addClass('fadeOut');
+      $('.js-loadingModal').addClass('hide');
       $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded: " + response.statusText);
       $('.js-indexLoadingMsg2').text("Attempting to reach " + server_urlLocal);
       $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
@@ -115,7 +115,7 @@ var loadProfile = function() {
 
 var reloadProfile = function(){
   "use strict";
-  $('.js-loadingMessageModal').removeClass('fadeOut').find('.js-closeIndexModal').addClass('hide');
+  $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
   loadProfileCountdown=3;
 
   if(loadProfileCount < 10){
@@ -132,7 +132,7 @@ var reloadProfile = function(){
     }, 2000);
   } else {
     alert("Your server may not be working correctly. Loading using default settings.");
-    $('.js-loadingMessageModal').addClass('fadeOut');
+    $('.js-loadingMessageModal').addClass('hide');
     user.set('server_url', server_urlLocal);
     newPageNavView = new pageNavView({model: user});
     newRouter = new router({userModel: user});
@@ -142,8 +142,3 @@ var reloadProfile = function(){
 };
 
 loadProfile();
-
-
-
-
-
