@@ -27,7 +27,7 @@ var Polyglot = require('node-polyglot'),
     avatar_hash = "",
     cCode = "",
     server_urlLocal = "",
-    loadProfileCount = 0,
+    loadProfileCount = 1,
     loadProfileTimeout,
     loadProfileCountdownInterval,
     loadProfileCountdown = 5;
@@ -56,6 +56,7 @@ var loadProfile = function() {
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
     success: function (model, response) {
+      $('.js-loadingModal').addClass('fadeOut');
       "use strict";
       //make sure profile is not blank
       if (response.profile){
@@ -80,7 +81,7 @@ var loadProfile = function() {
                 });
               }, 54000000);
 
-              $('.js-loadingModal').addClass('fadeOut');
+              $('.js-loadingMessageModal').addClass('fadeOut');
               newPageNavView = new pageNavView({model: user});
               newRouter = new router({userModel: user, socketView: new socketView({model: user})});
               Backbone.history.start();
@@ -88,7 +89,7 @@ var loadProfile = function() {
           },
           error: function (model, response) {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
-            $('.js-loadingModal').addClass('fadeOut');
+            $('.js-loadingMessageModal').addClass('fadeOut');
             user.set('server_url', server_urlLocal);
             newPageNavView = new pageNavView({model: user});
             newRouter = new router({userModel: user, socketView: new socketView({model: user})});
@@ -103,6 +104,7 @@ var loadProfile = function() {
       }
     },
     error: function (model, response) {
+      $('.js-loadingModal').addClass('fadeOut');
       $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded: " + response.statusText);
       $('.js-indexLoadingMsg2').text("Attempting to reach " + server_urlLocal);
       $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
@@ -113,24 +115,24 @@ var loadProfile = function() {
 
 var reloadProfile = function(){
   "use strict";
-  loadProfileCountdown=5;
-  loadProfileCountdownInterval = setInterval(function(){
-    if(loadProfileCountdown > 0){
-      $('.js-indexLoadingMsg4').text(loadProfileCountdown);
-      loadProfileCountdown--;
-    } else {
-      $('.js-indexLoadingMsg4').text("");
-      clearInterval(loadProfileCountdownInterval);
-    }
-  }, 1000);
+  $('.js-loadingMessageModal').removeClass('fadeOut').find('.js-closeIndexModal').addClass('hide');
+  loadProfileCountdown=3;
+
   if(loadProfileCount < 10){
-    loadProfileTimeout = window.setTimeout(function(){
-      loadProfileCount++;
-      loadProfile();
-    }, 5000);
+    loadProfileCountdownInterval = setInterval(function(){
+      if(loadProfileCountdown > 0){
+        $('.js-indexLoadingMsg4').text(loadProfileCountdown);
+        loadProfileCountdown--;
+      } else {
+        $('.js-indexLoadingMsg4').text("");
+        clearInterval(loadProfileCountdownInterval);
+        loadProfileCount++;
+        loadProfile();
+      }
+    }, 2000);
   } else {
     alert("Your server may not be working correctly. Loading using default settings.");
-    $('.js-loadingModal').addClass('fadeOut');
+    $('.js-loadingMessageModal').addClass('fadeOut');
     user.set('server_url', server_urlLocal);
     newPageNavView = new pageNavView({model: user});
     newRouter = new router({userModel: user});

@@ -24,7 +24,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    this.listWrapper = $('<div class="flexRow flexExpand"></div>');
+    this.listWrapper = $('<div class="flexRow flexExpand border0 custCol-border-secondary"></div>');
     if(this.usersShort.models.length > 0)
     {
       __.each(this.usersShort.models, function (user)
@@ -59,11 +59,14 @@ module.exports = Backbone.View.extend({
       if(subView.close){
         subView.close();
       }else{
+        subView.unbind();
         subView.remove();
       }
     });
+    this.unbind();
     this.remove();
+    delete this.$el;
+    delete this.el;
   }
-
 });
 

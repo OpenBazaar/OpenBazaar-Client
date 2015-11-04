@@ -15,7 +15,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     var self = this;
-    this.preloaded = [];
     //don't render immediately, wait for the model to update itself with converted prices
     this.listenTo(this.model, 'change:priceSet', this.render);
   },
@@ -25,23 +24,10 @@ module.exports = Backbone.View.extend({
     __.each(self.model.get('vendor_offer').listing.item.image_hashes, function(imageHash, i){
       "use strict";
       var imageExtension = self.model.get('imageExtension') || "";
-      var preLoadImg = $('<img>').on('load', function(){
-        self.preloaded[i] = true;
-        //if view renders after image is loaded
-        self.$el.find('.itemImg').eq(i).addClass('imageLoaded');
-      });
-      preLoadImg.attr('src', self.model.get('server_url') + "get_image?hash=" + imageHash + imageExtension);
     });
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
         self.$el.html(loadedTemplate(self.model.toJSON()));
-          __.each(self.model.get('vendor_offer').listing.item.image_hashes, function(imageHash, i){
-            "use strict";
-            if(self.preloaded[i] === true){
-              //if view renders after image is loaded
-              self.$el.find('.itemImg').eq(i).addClass('imageLoaded');
-            }
-          });
     });
     return this;
   },
@@ -70,7 +56,17 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    "use strict";
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.unbind();
+        subView.remove();
+      }
+    });
+    this.unbind();
     this.remove();
+    delete this.$el;
+    delete this.el;
   }
 });

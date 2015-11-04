@@ -17,7 +17,7 @@
             <%= polyglot.t('Store Details') %>
           </div>
           <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary" id="storeWizardForm">
-            <input name="header" id="headerInput" type="text" class="hide" value="<%= ob.page.profile.header_hash %>" />
+            <input name="header" id="headerInput" type="text" class="hide" value="<%- ob.page.profile.header_hash %>" />
             <input name="location" id="locationSelect" type="text" class="hide"/>
 
             <div class="flexRow">
@@ -28,7 +28,7 @@
                     </label>
                   </div>
                   <div class="flexCol-9">
-                    <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
+                    <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
                   </div>
               </div>
               <div class="flexRow custCol-border-secondary">
@@ -38,7 +38,7 @@
                   </label>
                 </div>
                 <div class="flexCol-9">
-                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
+                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%- ob.page.profile.about %></textarea>
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">

@@ -264,33 +264,21 @@ form {
   box-sizing: border-box;
   padding: 33px;
   cursor: pointer;
-  width: 316px;
+  width: 317px;
+}
+
+.userPage-subViews .gridItem {
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
 }
 
 .itemImg {
   position: relative;
-  background-image: url(../imgs/defaultItem.png);
   background-position: center;
   background-size: cover;
   border-radius: 3px;
   height: 230px;
   width: 250px;
-}
-
-.itemImg:before {
-  content: "\f201";
-  font-family: Ionicons;
-  font-size: 180px;
-  text-align: center;
-  position: absolute;
-  background-color: #000;
-  border-radius: 3px;
-  height: 230px;
-  width: 250px;
-  line-height: 230px;
-  transition: 1s opacity;
-  pointer-events: none;
-  opacity: 0.8;
 }
 
 .itemImg.itemImg-large {
@@ -299,30 +287,10 @@ form {
   width: 357px;
 }
 
-.itemImg.itemImg-large:before {
-  /* flex row collapses unless a specific height is set */
-  height: 357px;
-  width: 357px;
-  line-height: 357px;
-  font-size: 300px;
-}
-
 .itemImg.itemImg-small {
   height: 82px;
   width: 82px;
-  margin: 0 5px 10px 5px;
-}
-
-.itemImg.itemImg-small:before {
-  height: 82px;
-  width: 82px;
-  line-height: 82px;
-  font-size: 64px;
-}
-
-.imageLoaded.itemImg:before,
-.itemEdit .itemImg:before {
-  opacity: 0;
+  margin: 0 10px 10px 0;
 }
 
 .rowItem {
@@ -425,9 +393,8 @@ form {
 }
 
 .thumbnail {
-  height: 30px;
-  width: 30px;
-  margin-right: 6px;
+  height: 36px;
+  width: 36px;
   background-size: cover;
   background-position: center;
   border-radius: 2px;
@@ -447,50 +414,6 @@ form {
   height: 58px;
   width: 58px;
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
-}
-
-.thumbnail:before {
-  content: "\f201";
-  font-family: Ionicons;
-  font-size: 20px;
-  text-align: center;
-  position: absolute;
-  background-color: #000;
-  border-radius: 2px;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-  transition: 1s opacity;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-.thumbnail.thumbnail-large:before {
-  font-size: 54px;
-  border-radius: 0;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  height: 76px;
-  width: 80px;
-  line-height: 76px;
-}
-
-.thumbnail.thumbnail-large-slim:before {
-  height: 58px;
-  width: 58px;
-  line-height: 58px;
-  font-style: 44px;
-}
-
-.thumbnail.box-border:before,
-.thumbnail.box-borderBright:before {
-  margin: -1px;
-}
-
-.thumbnailLoaded.thumbnail:before,
-.thumbnailLoaded.thumbnail.thumbnail-large:before
-.thumbnailLoaded.thumbnail.thumbnail-large-slim:before {
-  opacity: 0;
 }
 
 .row5 {
@@ -517,14 +440,22 @@ form {
   margin-bottom: 60px;
 }
 
-.rowTop271 {
+.rowTop241 {
   /* special class for the itemEdit view */
-  margin-top: 271px;
+  margin-top: 241px;
 }
 
 .pad10 {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.pad8Left {
+  padding-left: 8px;
+}
+
+.pad10Left {
+  padding-left: 10px;
 }
 
 .pad10Right {
@@ -745,6 +676,12 @@ h5 {
   top: 50px;
 }
 
+.modal-opaqueDark {
+  background-color: rgba(25,25,25,0.9);
+  box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
+  top: 50px;
+}
+
 .modal-opaque.modal-navBlock {
   background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
 }
@@ -764,6 +701,16 @@ h5 {
   height: 250px;
   position: relative;
   width: 525px;
+}
+
+.modal-hero-icon {
+  background: url(../imgs/openbazaar-icon.png);
+  background-size: cover;
+  height: 145px;
+  margin: auto;
+  top: 30px;
+  position: relative;
+  width: 145px;
 }
 
 .flex-border > .flexRow {
@@ -864,6 +811,10 @@ h5 {
   opacity: 1;
 }
 
+.searchWrapper .txtField:focus {
+  outline: 2px solid #fff;
+}
+
 .mainSearchWrapper:before {
   color: #000;
   top: 6px;
@@ -892,6 +843,7 @@ input[type="text"].txtField-bar {
   font-size: 14px;
   letter-spacing: .4px;
   opacity: 1;
+  outline: none;
   padding: 13px;
 }
 
@@ -950,6 +902,16 @@ input[type="text"].txtField-bar {
 .btn.btn-txtHalf {
   /* button with text */
   padding: 0 16px;
+}
+
+.btn.btn-buyNow {
+  margin-top: 10px;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  opacity: 1;
+  font-size: 14px;
 }
 
 .btn.btn-txtOnly {
@@ -1064,10 +1026,6 @@ input[type="text"].txtField-bar {
 
 .btn.btn-half {
   width: 50%;
-}
-
-.btn.btn-home {
-  transition: opacity 1s ease-in-out;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -1642,30 +1600,14 @@ input[type="checkbox"].fieldItem + label span {
   z-index: 0;
 }
 
-.banner-large:before {
-  content: "\f201";
-  font-family: Ionicons;
-  font-size: 180px;
-  text-align: center;
-  position: absolute;
-  background-color: #000;
-  border-radius: 3px;
-  height: 400px;
-  width: 950px;
-  line-height: 400px;
-  transition: 1s opacity;
-  pointer-events: none;
-  opacity: 0.8;
-}
-
-.bannerLoaded.banner-large:before {
-  opacity: 0;
-}
-
 .user-page-content {
   position: relative;
   width: 950px;
   /*z-index: 99;*/
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .shadow-inner1-ultra-light {
@@ -1701,6 +1643,8 @@ input[type="checkbox"].fieldItem + label span {
   top: 50px;
   width: 950px;
   z-index: 3;
+  box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
+
 }
 
 .home-page-navigation-filler {
@@ -1810,8 +1754,7 @@ input[type="checkbox"].fieldItem + label span {
 /*========== one-off classes ==========*/
 
 .modal .homeModal-hero {
-  background-image: url('../imgs/obSettingsHeroB.jpg');
-  background-repeat: no-repeat;
+  background: #063753;
 }
 
 .modal .homeModal-heroText {
@@ -1891,13 +1834,21 @@ input[type="checkbox"].fieldItem + label span {
   float: none;
 }
 
-.page-userNameLarge {
+.page-userNameLarge{
   font-weight: 200;
   font-size: 34px;
   opacity: .8;
   letter-spacing: 1.5px;
   margin-bottom: 0;
   margin-left: 0;
+}
+
+.page-contractTitle {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin-bottom: 0;
+  opacity: 1;
 }
 
 #customizeControls {
@@ -2031,6 +1982,11 @@ input[type="checkbox"].fieldItem + label span {
   top: -48px;
 }
 
+#ov1 .pull-up1 {
+  position: relative;
+  top: -1px;
+}
+
 #ov1 .pull-up4 {
   position: relative;
   top: -4px;
@@ -2102,6 +2058,10 @@ input[type="checkbox"].fieldItem + label span {
   border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .borderTop {
+  border-top: solid 1px rgba(255,255,255,0.08);
+}
+
 #ov1  .border0 {
   border: 0;
 }
@@ -2132,6 +2092,10 @@ input[type="checkbox"].fieldItem + label span {
   font-size: 11px;
 }
 
+#ov1 .textSize12px {
+  font-size: 12px;
+}
+
 #ov1  .textSize14px {
   font-size: 14px;
 }
@@ -2154,6 +2118,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .textSize24px {
   font-size: 24px;
+}
+
+#ov1  .textSize90px {
+  font-size: 90px;
 }
 
 #ov1  .textSize13px {
@@ -2180,6 +2148,15 @@ input[type="checkbox"].fieldItem + label span {
   font-weight: 500;
 }
 
+
+#ov1 .fontSize10 {
+  font-size: 10px;
+}
+
+#ov1 .fontSize11 {
+  font-size: 11px;
+}
+
 #ov1 .fontSize13 {
   font-size: 13px;
 }
@@ -2198,6 +2175,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .fontSize20 {
   font-size: 20px;
+}
+
+#ov1 .fontSize34 {
+  font-size: 34px;
 }
 
 #ov1 .txt-darkest {
@@ -2220,8 +2201,16 @@ input[type="checkbox"].fieldItem + label span {
   right: 10px;
 }
 
+#ov1  .margin0 {
+  margin: 0;
+}
+
 #ov1  .marginRight5 {
   margin-right: 5px;
+}
+
+#ov1  .marginRight10 {
+  margin-right: 10px;
 }
 
 
@@ -2233,12 +2222,20 @@ input[type="checkbox"].fieldItem + label span {
   margin-left: 10px;
 }
 
+#ov1  .marginLeft12 {
+  margin-left: 12px;
+}
+
 #ov1  .marginLeft88 {
   margin-left: 88px;
 }
 
 #ov1  .marginTop2 {
   margin-top: 2px;
+}
+
+#ov1  .marginTop4 {
+  margin-top: 4px;
 }
 
 #ov1  .marginTop15 {
@@ -2253,13 +2250,18 @@ input[type="checkbox"].fieldItem + label span {
   margin-top: 50px;
 }
 
+#ov1  .marginBottom2 {
+  margin-bottom: 2px;
+}
+
+#ov1  .marginBottom40 {
+  margin-bottom: 40px;
+}
+
 #ov1  .marginBottom50 {
   margin-bottom: 50px;
 }
 
-#ov1  .margin0 {
-  margin: 0;
-}
 
 #ov1  .marginAuto {
   margin: auto;
@@ -2267,6 +2269,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .minHeight650 {
   min-height: 650px;
+}
+
+#ov1  .minHeight420 {
+  min-height: 420px;
 }
 
 #ov1  .lineHeightReset{
@@ -2298,8 +2304,16 @@ input[type="checkbox"].fieldItem + label span {
   padding: 10px;
 }
 
+#ov1  .padding15 {
+  padding: 15px;
+}
+
 #ov1  .padding20 {
   padding: 20px;
+}
+
+#ov1  .padding2015 {
+  padding: 20px 15px;
 }
 
 #ov1  .padding17px {
@@ -2321,6 +2335,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .cursorDefault {
   cursor: default;
+}
+
+#ob1 .fontWeight200 {
+  font-weight: 200;
 }
 
 #ov1  .borderBottomLeftRaidus3 {

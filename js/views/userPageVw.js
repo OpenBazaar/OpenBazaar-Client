@@ -12,6 +12,7 @@ var __ = require('underscore'),
     personListView = require('./userListVw'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
+    showErrorModal = require('../utils/showErrorModal.js'),
     storeWizardVw = require('./storeWizardVw');
 
 //create a default item because a new itemModel will be created with only flat attributes
@@ -95,7 +96,7 @@ var defaultItem = {
       }
     }
   }
-}
+};
 
 module.exports = Backbone.View.extend({
 
@@ -140,6 +141,7 @@ module.exports = Backbone.View.extend({
     this.userProfileFetchParameters = {};
     this.itemFetchParameters = {};
     this.subViews = [];
+    this.subModels = [];
     this.model = new Backbone.Model();
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
@@ -150,16 +152,13 @@ module.exports = Backbone.View.extend({
     this.followers.urlRoot = options.userModel.get('server_url') + "get_followers";
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('server_url') + "get_following";
+    this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
     this.socketView = options.socketView;
     this.slimVisible = false;
     this.confirmDelete = false;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
-    //normally this should be in render. It works here because the modal is on a parent view
-    this.errorModal = $('.js-messageModal');
-    this.preloadedBanner = false;
-    this.preloadedAvatar = false;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -172,11 +171,6 @@ module.exports = Backbone.View.extend({
 
     //show loading modal before fetching user data
     $('.js-loadingModal').removeClass('fadeOut');
-    $('.js-indexLoadingMsg1').text("Loading User Profile");
-    $('.js-indexLoadingMsg2').text("Attempting to reach " + this.pageID);
-    $('.js-indexLoadingMsg3').text("");
-    $('.js-indexLoadingMsg4').text("");
-    $('.js-closeIndexApp').hide();
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -194,41 +188,29 @@ module.exports = Backbone.View.extend({
       data: self.userProfileFetchParameters,
       processData: true,
       success: function(model, response){
-        if(response.profile){
-          if (self.options.ownPage === true){
-            model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
-            model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
+        //don't render if view has been closed and the $el has been deleted
+        if(self.$el){
+          if (response.profile){
+            $('.js-loadingModal').addClass('fadeOut');
+            if (self.options.ownPage === true){
+              model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
+              model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
+            }else{
+              model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
+              model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
+            }
           }else{
-            model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
-            model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
+            //model was returned as a blank object
+            showErrorModal("User Not Found", "Information for user " + self.pageID + " cannot be loaded. They may have gone offline.");
           }
-          $('.js-loadingModal').addClass('fadeOut');
-        }else{
-          //model was returned as a blank object
-          self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
+
+          self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+          self.model.set({ownPage: self.options.ownPage});
+          self.render();
         }
-
-        self.preLoadBanner = $('<img>').on('load', function(){
-          self.preloadedBanner = true;
-          //if view renders after image is loaded
-          $('.banner-large').addClass('bannerLoaded');
-        });
-        //asign source after asigning load event so event fires if source is cached.
-        self.preLoadBanner.attr('src', model.get('headerURL'));
-
-        self.preLoadAvatar = $('<img>').on('load', function(){
-          self.preloadedAvatar = true;
-          //if view renders after image is loaded
-          $('.js-userPageAvatar').addClass('thumbnailLoaded');
-        });
-        self.preLoadAvatar.attr('src', model.get('avatarURL'));
-
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        self.model.set({ownPage: self.options.ownPage});
-        self.render();
       },
       error: function(model, response){
-        self.showErrorModal("User Not Found", "Information for user "+options.userID+" cannot be loaded. They may have gone offline.");
+        showErrorModal("User Not Found", "Information for user "+self.pageID+" cannot be loaded. They may have gone offline.");
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
       }
@@ -334,10 +316,13 @@ module.exports = Backbone.View.extend({
 
     if(state === "item"){
       this.renderItem(hash);
+      $('#obContainer').scrollTop(367);
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
+      $('#obContainer').scrollTop(367);
     }else if(state === "itemNew") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
+      $('#obContainer').scrollTop(367);
       this.sellItem();
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
@@ -422,7 +407,7 @@ module.exports = Backbone.View.extend({
         self.renderItems(model.get('listings'));
       },
       error: function(model, response){
-        self.showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
+        showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
       }
     });
     this.followers.fetch({
@@ -436,7 +421,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        self.showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
+        showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
       }
     });
     this.following.fetch({
@@ -445,17 +430,9 @@ module.exports = Backbone.View.extend({
         self.renderFollowing(model.get('following'));
       },
       error: function(model, response){
-        self.showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
+        showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
       }
     });
-    if(self.preloadedBanner === true){
-      //if image loaded before view was rendered
-      self.$el.find('.banner-large').addClass('bannerLoaded');
-    }
-    if(self.preloadedAvatar === true){
-      //if image loaded before view was rendered
-      self.$el.find('.js-userPageAvatar').addClass('thumbnailLoaded');
-    }
   },
 
   renderItems: function (model) {
@@ -514,7 +491,7 @@ module.exports = Backbone.View.extend({
     this.itemView = new itemVw({model:this.item, el: '.js-list4'});
     this.subViews.push(this.itemView);
     //set the parameters for the fetch
-    if(this.options.ownPage == true){
+    if(this.options.ownPage === true){
       this.itemFetchParameters = $.param({'id': hash});
     } else {
       this.itemFetchParameters = $.param({'id': hash, 'guid': this.pageID});
@@ -533,16 +510,16 @@ module.exports = Backbone.View.extend({
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
         } else {
-          self.showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
+          showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
           window.history.back();
         }
       },
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
         if(response.statusText){
-          self.showErrorModal("There Has Been An Error", "This item is not available. The error code is: " + response.statusText);
+          showErrorModal("There Has Been An Error", "This item is not available. The error code is: " + response.statusText);
         } else {
-          self.showErrorModal("There Has Been An Error","This item is not available or a blank object was returned by the server");
+          showErrorModal("There Has Been An Error","This item is not available or a blank object was returned by the server");
         }
       }
     });
@@ -576,14 +553,8 @@ module.exports = Backbone.View.extend({
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
     this.subViews.push(this.itemEditView);
+    this.subModels.push(this.itemEdit);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
-  },
-
-  showErrorModal: function(errorTitle, errorMessage) {
-    "use strict";
-    this.errorModal.removeClass('fadeOut');
-    this.errorModal.find('.js-messageModal-title').text(errorTitle);
-    this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
 
   aboutClick: function(e){
@@ -699,7 +670,7 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         var imageHash,
             tempPage;
-        if(data.success == true){
+        if(data.success === true){
           imageHash = data.image_hashes[0];
           if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
             tempPage  =  __.clone(self.model.get('page'));
@@ -707,12 +678,12 @@ module.exports = Backbone.View.extend({
             self.model.set('page', tempPage);
             self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
           } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
           } else {
-            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
+            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
           }
         } else if (data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -762,7 +733,7 @@ module.exports = Backbone.View.extend({
           self.setCustomStyles();
           self.setState(self.lastTab);
         }else if(data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
 
         }
       },
@@ -781,21 +752,6 @@ module.exports = Backbone.View.extend({
     //refresh the current page
     Backbone.history.loadUrl();
   },
-
-  //TODO: remove code below
-/*
-  undoColorCustomization: function(){
-    "use strict";
-    if(this.customizing === true) {
-      this.model.get('page').profile.background_color = this.undoCustomAttributes.background_color;
-      this.model.get('page').profile.primary_color = this.undoCustomAttributes.primary_color;
-      this.model.get('page').profile.secondary_color = this.undoCustomAttributes.secondary_color;
-      this.model.get('page').profile.text_color = this.undoCustomAttributes.text_color;
-      this.customizing = false;
-      this.setCustomStyles();
-    }
-  },
-  */
 
   saveNewDone: function(newHash) {
     "use strict";
@@ -868,6 +824,7 @@ module.exports = Backbone.View.extend({
     this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder', socketView: this.socketView});
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
     this.subViews.push(this.storeWizardView);
+    this.subModels.push(storeWizardModel);
     // $('#obContainer').addClass('blur');
   },
 
@@ -924,14 +881,23 @@ module.exports = Backbone.View.extend({
 
   close: function(){
     "use strict";
+    __.each(this.subModels, function(subModel) {
+      subModel.off();
+    });
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
       }else{
+        subView.unbind();
         subView.remove();
       }
     });
+
+    this.model.off();
+    this.off();
     this.remove();
+    delete this.$el;
+    delete this.el;
   }
 
 });

@@ -1,27 +1,19 @@
 <div class="mainContainer custCol-background">
   <div class="banner-large js-userPageBanner custCol-secondary"
-  <% if(ob.page.profile.header_hash) { %>
-  style="background-image: url(<%- ob.page.headerURL %>);"
-  <% }else{ %>
-  style="background-image: url(imgs/defaultBanner.png)"
-  <% } %>>
+  style="background-image: url(<%- ob.page.headerURL %>),url(imgs/defaultBanner.png);">
   </div>
 
   <div class="user-page-content">
     <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
         <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
-        <% if(ob.page.profile.avatar_hash) { %>
-        style="background-image: url(<%- ob.page.avatarURL %>);"
-        <% }else{ %>
-        style="background-image: url(imgs/defaultUser.png)"
-        <% } %>>
+        style="background-image: url(<%- ob.page.avatarURL %>),url(imgs/defaultUser.png);">
         </div>
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft88">
-          <h1 class="page-userNameLarge floatLeft pull-up4"><%= ob.page.profile.name %></h1>
-          <div class="floatLeft marginLeft6 marginTop2"><%= ob.page.profile.handle %></div>
+          <h1 class="page-userNameLarge floatLeft pull-up4"><%- ob.page.profile.name %></h1>
+          <div class="floatLeft marginLeft6 marginTop2"><%- ob.page.profile.handle %></div>
         </div>
       </div>
     </div>
@@ -34,15 +26,11 @@
     </form>
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
       <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
-      <% if(ob.page.profile.avatar_hash) { %>
-      style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"
-      <% }else{ %>
-      style="background-image: url(imgs/defaultUser.png)"
-      <% } %>></div>
+      style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>),url(imgs/defaultUser.png);"></div>
     <div class="pull-left">
-      <div class="marginLeft6 push-down5">
-        <h1 class="page-userNameLarge"><%= ob.page.profile.name %></h1>
-        <div class="textSize16px"><%= ob.page.profile.handle %></div>
+      <div class="marginLeft12 push-down5">
+        <h1 class="page-userNameLarge"><%- ob.page.profile.name %></h1>
+        <div class="textSize16px"><%- ob.page.profile.handle %></div>
       </div>
     </div>
   </div>
@@ -56,25 +44,57 @@
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
     <div class="navEnd pad15">
       <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
-        <a class="btn btn-txt custCol-primary js-sellItem"><%= polyglot.t('nav.createListing') %></a>
-        <a class="btn btn-txt custCol-primary js-createStore"><%= polyglot.t('CreateStore') %></a>
+        <a class="btn btn-txt custCol-primary js-sellItem">
+          <span class="ion-plus-round fontSize10 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('nav.createListing') %>
+        </a>
+        <a class="btn btn-txt custCol-primary js-createStore">
+          <span class="ion-plus-round fontSize10 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('CreateStore') %>
+        </a>
       </div>
       <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
-        <a class="btn btn-txt custCol-primary js-customize"><%= polyglot.t('Customize') %> </a>
+        <a class="btn btn-txt custCol-primary js-customize">
+          <span class="ion-paintbrush fontSize10 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('Customize') %> 
+        </a>
       </div>
       <div class="ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
-        <a class="btn btn-txt custCol-primary js-follow"><%= polyglot.t('Follow') %> </a>
-        <a class="btn btn-txt custCol-primary js-unfollow"><%= polyglot.t('Unfollow') %> </a>
+        <a class="btn btn-txt custCol-primary js-follow">
+          <span class="ion-person-add fontSize11 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('Follow') %> 
+        </a>
+        <a class="btn btn-txt custCol-primary js-unfollow">
+          <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('Unfollow') %> 
+        </a>
       </div>
       <div class="ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
-        <a class="btn btn-txt custCol-primary js-message"><%= polyglot.t('Message') %> </a>
+        <a class="btn btn-txt custCol-primary js-message">
+          <span class="ion-email fontSize11 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('Message') %> 
+        </a>
       </div>
       <div class="ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
-        <a class="btn btn-txt custCol-primary js-editItem"><%= polyglot.t('Edit') %></a>
+        <a class="btn btn-txt custCol-primary js-editItem">
+          <span class="ion-edit fontSize10 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('Edit') %>
+        </a>
       </div>
       <div class="ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
         <a class="btn btn-txt custCol-primary confirmable js-deleteItem">
-          <span class="preSpacer"><%= polyglot.t('Delete') %></span><span class="preConfirm"><%= polyglot.t('Delete') %></span><span class="postConfirm"><%= polyglot.t('ConfirmDelete') %></span>
+          <span class="preSpacer">
+            <span class="ion-trash-b fontSize11 marginRight2 textOpacity75"></span>
+            <%= polyglot.t('Delete') %>
+          </span>
+          <span class="preConfirm">
+            <span class="ion-trash-b fontSize11 marginRight2 textOpacity75"></span>
+            <%= polyglot.t('Delete') %>
+          </span>
+          <span class="postConfirm">
+            <span class="ion-trash-b fontSize11 marginRight2 textOpacity75"></span>
+            <%= polyglot.t('ConfirmDelete') %>
+          </span>
         </a>
       </div>
       <div class="ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide textOpacity75">
@@ -84,10 +104,16 @@
         <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
       </div>
       <div class="ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide">
-        <a class="btn btn-txt custCol-primary js-saveItem"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+        <a class="btn btn-txt custCol-primary js-saveItem">
+          <span class="ion-checkmark-round fontSize10 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
+        </a>
       </div>
       <div class="ctrlGroup js-itemCustomizationButtons pull-up48 js-userPageControls hide">
-        <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+        <a class="btn btn-txt custCol-primary js-saveCustomization">
+          <span class="ion-checkmark-round fontSize10 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
+        </a>
       </div>
     </div>
   </div>
@@ -96,17 +122,29 @@
       <div class="flexRow minHeight650">
         <div class="flexCol-8 custCol-border-secondary">
           <div class="rowItem">
-            <%= ob.page.profile.about %>
+            <% if(ob.page.profile.about) { %>
+              <%- ob.page.profile.about %>
+            <%}else{%>
+              <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
+            <%}%>
           </div>
         </div>
         <div class="flexCol-4 flex-border border0">
           <div class="flexRow">
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <div class="rowItem">
+                <div class="textOpacity75"><%= polyglot.t('Guid') %></div>
+                <div class="textSize12px">
+                  <%- ob.page.profile.guid %>
+                </div>
+              </div>
+            </div>
             <div class="flexRow custCol-border-secondary">
               <div class="rowItem">
                 <div class="textOpacity75"><%= polyglot.t('Website') %></div>
                 <div>
                   <% if(ob.page.profile.website) { %>
-                  <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a>
+                  <a href="<%- ob.page.profile.website %>" class="js-externalLink"><%- ob.page.profile.website %></a>
                   <%}else{%>
                   not provided
                   <%}%>
@@ -118,7 +156,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Email') %></div>
                 <div>
                   <% if(ob.page.profile.email) { %>
-                  <%= ob.page.profile.email %>
+                  <%- ob.page.profile.email %>
                   <%}else{%>
                   not provided
                   <%}%>
@@ -130,7 +168,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
-                  <%= ob.page.profile.social_accounts.facebook.username %>
+                  <%- ob.page.profile.social_accounts.facebook.username %>
                   <%}else{%>
                   not provided
                   <%}%>
@@ -142,7 +180,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
-                  <%= ob.page.profile.social_accounts.instagram.username %>
+                  <%- ob.page.profile.social_accounts.instagram.username %>
                   <%}else{%>
                   not provided
                   <%}%>
@@ -154,18 +192,10 @@
                 <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
-                  <%= ob.page.profile.social_accounts.snapchat.username %>
+                  <%- ob.page.profile.social_accounts.snapchat.username %>
                   <%}else{%>
                   not provided
                   <%}%>
-                </div>
-              </div>
-            </div>
-            <div class="flexRow borderBottom custCol-border-secondary">
-              <div class="rowItem">
-                <div class="textOpacity75">GUID</div>
-                <div class="textSize11px">
-                  <%= ob.page.profile.guid %>
                 </div>
               </div>
             </div>
@@ -203,7 +233,7 @@
           </div>
         </div>
       </div>
-      <div class="flexRow flex-border js-list2">
+      <div class="flexRow js-list2">
         <div class="padding10 width100 alignCenter js-loadingMsg borderBottom">
           <i class="ion-loop spinner textSize24px textOpacity50"></i>
         </div>
