@@ -554,6 +554,8 @@ module.exports = Backbone.View.extend({
       defaultItem.vendor_offer.listing.id.pubkeys.guid = self.model.get('page').profile.guid;
       this.itemEdit = new itemModel(defaultItem);
     }
+    //add the moderator list to the item model
+    this.itemEdit.set('moderator_list', self.model.get('page').profile.moderator_list);
     //this.itemEdit.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //add the user information
     //this.itemEdit.set({user: self.options.userModel.toJSON()});
@@ -853,8 +855,8 @@ module.exports = Backbone.View.extend({
 
   storeCreated: function() {
     "use strict";
+    //this.storeWizardView.closeWizard();
     var currentState = this.lastTab || "about";
-    this.storeWizardView.closeWizard();
     //recreate the entire page with the new data
     Backbone.history.loadUrl();
   },
@@ -903,10 +905,10 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
+    "use strict";
     __.each(this.subModels, function(subModel) {
       subModel.off();
     });
-
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
