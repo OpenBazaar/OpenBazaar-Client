@@ -24,7 +24,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    this.listWrapper = $('<div class="flexRow flexExpand"></div>');
+    this.listWrapper = $('<div class="flexRow flexExpand border0"></div>');
     if(this.usersShort.models.length > 0)
     {
       __.each(this.usersShort.models, function (user)

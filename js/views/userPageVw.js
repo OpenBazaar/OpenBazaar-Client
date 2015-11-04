@@ -451,6 +451,7 @@ module.exports = Backbone.View.extend({
     });
     this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
     this.subViews.push(this.itemList);
+    $('#obContainer').animate({ scrollTop: "367px" }, 0); // Josh not feeling great about the location of this. Basically I want to scroll past the header instantly when hitting a item detail view. With it here, it results in a strange loading flash.
   },
 
   renderFollowers: function (model) {
