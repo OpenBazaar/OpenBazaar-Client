@@ -634,6 +634,7 @@ h5 {
   background-color: rgba(0,0,0,0.6);
   transition: opacity 1s;
   overflow: hidden;
+  z-index: 10;
 }
 
 .navBar.statusBar.fadeOut {
@@ -931,7 +932,8 @@ input[type="text"].txtField-bar {
    background-color: rgb(50,126,184);
  }
 
-.userPage .btn.btn-c1 {
+.userPage .btn.btn-c1,
+.btn.btn-dark {
   background-color: rgb(87,87,87);
 }
 

@@ -11,11 +11,10 @@ var loadTemplate = require('../utils/loadTemplate'),
 module.exports = Backbone.View.extend({
 
   events: {
-    //'click .js-priceBtn-local': 'priceToLocal',
-    //'click .js-priceBtn-btc': 'priceToBTC',
     'click #shippingFreeTrue': 'disableShippingPrice',
     'click #shippingFreeFalse': 'enableShippingPrice',
-    'change .js-itemImageUpload': 'uploadImage',
+    //'change .js-itemImageUpload': 'uploadImage',
+    'change .js-itemImageUpload': 'resizeImage',
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
     'blur input': 'validateInput',
@@ -149,10 +148,59 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  uploadImage: function(e){
-    var self = this;
+  resizeImage: function(){
+    "use strict";
+    var self = this,
+        imageFiles = this.$el.find('.js-itemImageUpload')[0].files,
+        maxH = 357,
+        maxW = 357,
+        imageList = [],
+        imageCount = imageFiles.length;
 
-    var formData = new FormData(this.$el.find('#imageForm')[0]);
+    this.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
+
+    __.each(imageFiles, function(imageFile, i){
+      var newImage = document.createElement("img"),
+          ctx;
+
+      newImage.src = imageFile.path;
+      newImage.onload = function() {
+        var imgH = newImage.height,
+            imgW = newImage.width,
+            dataURI,
+            canvas = document.createElement("canvas");
+
+        if (imgW < imgH){
+          //if image width is smaller than height, set width to max
+          imgH *= maxW/imgW;
+          imgW = maxW;
+        }else{
+          imgW *= maxH/imgH;
+          imgH = maxH;
+        }
+
+        canvas.width = imgW;
+        canvas.height = imgH;
+        ctx = canvas.getContext('2d');
+        ctx.drawImage(newImage, 0, 0, imgW, imgH);
+        dataURI = canvas.toDataURL('image/jpeg', 0.75);
+        dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+        imageList.push(dataURI);
+        if(i+1 === imageCount) {
+          self.uploadImage(imageList);
+        }
+      };
+    });
+  },
+
+  uploadImage: function(imageList){
+    var self = this,
+        formData = new FormData();
+    __.each(imageList, function(dataURL){
+      "use strict";
+      formData.append('image', dataURL);
+    });
+
     $.ajax({
       type: "POST",
       url: self.model.get('server_url') + "upload_image",
@@ -175,7 +223,7 @@ module.exports = Backbone.View.extend({
           });
           self.model.set("combinedImagesArray", imageArray);
           self.model.set("imageHashesToUpload", hashArray);
-
+          self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         }else if (data.success === false){
           self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
@@ -203,7 +251,7 @@ module.exports = Backbone.View.extend({
         if (i < subImageDivs.length){
           $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
-          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
               .appendTo(self.$el.find('.js-editItemSubImagesWrapper'));
         }
       });
