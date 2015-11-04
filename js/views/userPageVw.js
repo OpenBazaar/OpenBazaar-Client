@@ -246,7 +246,12 @@ module.exports = Backbone.View.extend({
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
         onFileReaderError: function(data){console.log(data);},
-        onFileChange: function(){$('.js-headerLoading').removeClass('fadeOut');},
+        onFileChange: function(){
+          $('.js-headerLoading').removeClass('fadeOut');
+          if(self.$el.find('#image-cropper').cropit('isZoomable')){
+            $('.js-bannerRangeInput').removeClass('hide');
+          }
+        },
         onImageLoaded: function(){$('.js-headerLoading').addClass('fadeOut');},
         onImageError: function(errorObject, errorCode, errorMessage){
           console.log(errorObject);
@@ -679,42 +684,47 @@ module.exports = Backbone.View.extend({
       quality: 0.75,
       originalSize: false
     });
-    imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-    var formData = new FormData();
-    formData.append('image', imageURI);
-    $.ajax({
-      type: "POST",
-      url: server_url + "upload_image",
-      contentType: false,
-      processData: false,
-      data: formData,
-      dataType: "json",
-      success: function(data) {
-        var imageHash,
-            tempPage;
-        if(data.success === true){
-          imageHash = data.image_hashes[0] || [];
-          if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
-            tempPage  =  __.clone(self.model.get('page'));
-            tempPage.profile.header = imageHash;
-            self.model.set('page', tempPage);
-            self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
-            self.saveUserPageModel();
-          } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
-          } else {
-            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
+    console.log(imageURI);
+    if(imageURI){
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+      var formData = new FormData();
+      formData.append('image', imageURI);
+      $.ajax({
+        type: "POST",
+        url: server_url + "upload_image",
+        contentType: false,
+        processData: false,
+        data: formData,
+        dataType: "json",
+        success: function (data) {
+          var imageHash,
+              tempPage;
+          if (data.success === true){
+            imageHash = data.image_hashes[0] || [];
+            if (imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
+              tempPage = __.clone(self.model.get('page'));
+              tempPage.profile.header = imageHash;
+              self.model.set('page', tempPage);
+              self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
+              self.saveUserPageModel();
+            }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+              showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+            }else{
+              showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
+            }
+          }else if (data.success === false){
+            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }
-        } else if (data.success === false){
-          showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+        },
+        error: function (jqXHR, status, errorThrown) {
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
         }
-      },
-      error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      }
-    });
+      });
+    } else {
+      self.saveUserPageModel();
+    }
   },
 
   saveCustomizePage: function() {
@@ -722,6 +732,7 @@ module.exports = Backbone.View.extend({
     this.customizing = false;
     //this.saveUserPageModel();
     this.uploadUserPageImage();
+    $('.js-bannerRangeInput').addClass('hide');
   },
 
   saveUserPageModel: function(){
