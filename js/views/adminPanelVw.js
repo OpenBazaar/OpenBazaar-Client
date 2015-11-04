@@ -3,6 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     remote = require('remote'),
+    cropit = require('../utils/jquery.cropit'),
     userSettingsModel = require('../models/userMd'),
     userProfileModel = require('../models/userProfileMd');
 
@@ -14,7 +15,7 @@ module.exports = Backbone.View.extend({
     'click .js-closeModal': 'closeModal',
     'click .js-adminMakeModerator': 'makeModerator',
     'click .js-adminUnmakeModerator': 'unMakeModerator',
-    'change .js-adminAvatarImage': 'uploadAvatar',
+    'click .js-avatarSubmit': 'uploadAvatar',
     'click .js-adminServer': 'setServer',
     'click .js-adminUpdateProfile': 'updateProfile',
     'click .js-adminUpdateSettings': 'updateSettings',
@@ -101,6 +102,21 @@ module.exports = Backbone.View.extend({
         self.$el.find('.js-adminRoutingTable').text("Call to routing table API failed.");
       }
     });
+
+    this.$el.find('#image-cropper').cropit({
+      smallImage: "stretch",
+      onFileReaderError: function(data){console.log(data);},
+      onFileChange: function(){
+        self.$el.find('.js-avatarLoading').removeClass('fadeOut');
+        self.$el.find('.js-avatarSubmit').removeClass('fadeOut');
+      },
+      onImageLoaded: function(){self.$el.find('.js-avatarLoading').addClass('fadeOut');},
+      onImageError: function(errorObject, errorCode, errorMessage){
+        console.log(errorObject);
+        console.log(errorCode);
+        console.log(errorMessage);
+      }
+    });
   },
 
   closeModal: function(e){
@@ -134,10 +150,23 @@ module.exports = Backbone.View.extend({
     );
   },
 
+  showAvatarUploadBtn: function(){
+    "use strict";
+    this.$el.find('.js-avatarSubmit').removeClass('fadeOut');
+  },
+
   uploadAvatar: function() {
     "use strict";
     var self = this;
-    this.postData(new FormData(this.$el.find('#adminPanelAvatar')[0]), "upload_image",
+    var imageURI = self.$el.find('#image-cropper').cropit('export', {
+      type: 'image/jpeg',
+      quality: 0.75,
+      originalSize: false
+    });
+    imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+    var formData = new FormData();
+    formData.append('image', imageURI);
+    this.postData(formData, "upload_image",
       function(data){
         var imageHash = data.image_hashes[0],
             formData = new FormData();

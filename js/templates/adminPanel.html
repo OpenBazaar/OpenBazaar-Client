@@ -61,15 +61,21 @@
           <div class="flexRow">
             <div class="flexCol-4">
               <div class="fieldItem">
-                <label for="adminAvatarImageInput">Upload Avatar Image:</label>
+                <label for="avatarImageInput">Upload Avatar Image:</label>
                 <div class="js-adminAvatarMsg"></div>
               </div>
             </div>
             <div class="flexCol-8">
-              <div class="pad20 rowTop20">
-                <input type="file" name="avatar" class="js-adminAvatarImage" id="adminAvatarImageInput"/>
+              <div id="image-cropper" class="positionWrapper js-avatarCropper">
+                <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
+                  <div class="pad20 rowTop20 width100"><h4 class="txt-center">Loading Image...</h4></div>
+                </div>
+                <div class="cropit-image-preview rowTop20 thumbnail thumbnail-large box-border row20 marginLeft12"></div>
+                <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12" />
+                <input id="avatarImageInput" type="file" class="cropit-image-input hide" />
+                <label for="avatarImageInput" class="btn btn-txt rowTop20 marginLeft12 row20"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
               </div>
-              <div class="rowTop20 thumbnail thumbnail-large js-avatarHolder box-border row20"></div>
+              <a class="btn btn-txt rowTop20 row20 marginLeft12 js-avatarSubmit fadeOut">Save Avatar</a>
             </div>
           </div>
         </div>

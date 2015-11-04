@@ -4,6 +4,7 @@ var __ = require('underscore'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
+    cropit = require('../utils/jquery.cropit'),
     userProfileModel = require('../models/userProfileMd'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
@@ -116,7 +117,7 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    'change .js-userPageImageUpload': 'uploadUserPageImage',
+    //'change .js-userPageImageUpload': 'uploadUserPageImage',
     'click .js-customizeColor': 'customizeColorClick',
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUser',
@@ -241,6 +242,19 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
+
+      self.$el.find('#image-cropper').cropit({
+        smallImage: "stretch",
+        onFileReaderError: function(data){console.log(data);},
+        onFileChange: function(){$('.js-headerLoading').removeClass('fadeOut');},
+        onImageLoaded: function(){$('.js-headerLoading').addClass('fadeOut');},
+        onImageError: function(errorObject, errorCode, errorMessage){
+          console.log(errorObject);
+          console.log(errorCode);
+          console.log(errorMessage);
+        }
+      });
+
       $("#obContainer").scroll(function(){
         if ($(this).scrollTop() > 366 && self.slimVisible === false ) {
           self.slimVisible = true;
@@ -658,8 +672,16 @@ module.exports = Backbone.View.extend({
   uploadUserPageImage: function() {
     "use strict";
     var self = this;
-    var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
+    //var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
     var server_url = self.options.userModel.get('server_url');
+    var imageURI = self.$el.find('#image-cropper').cropit('export', {
+      type: 'image/jpeg',
+      quality: 0.75,
+      originalSize: false
+    });
+    imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+    var formData = new FormData();
+    formData.append('image', imageURI);
     $.ajax({
       type: "POST",
       url: server_url + "upload_image",
@@ -671,12 +693,13 @@ module.exports = Backbone.View.extend({
         var imageHash,
             tempPage;
         if(data.success === true){
-          imageHash = data.image_hashes[0];
+          imageHash = data.image_hashes[0] || [];
           if(imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
             tempPage  =  __.clone(self.model.get('page'));
             tempPage.profile.header = imageHash;
             self.model.set('page', tempPage);
             self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
+            self.saveUserPageModel();
           } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
             showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
           } else {
@@ -697,14 +720,16 @@ module.exports = Backbone.View.extend({
   saveCustomizePage: function() {
     "use strict";
     this.customizing = false;
-    this.saveUserPageModel();
+    //this.saveUserPageModel();
+    this.uploadUserPageImage();
   },
 
   saveUserPageModel: function(){
     "use strict";
-    var self = this;
-    var formData = new FormData();
-    var pageData = this.model.get('page').profile;
+    var self = this,
+        formData = new FormData(),
+        pageData = this.model.get('page').profile;
+
     for(var profileKey in pageData) {
       if(pageData.hasOwnProperty(profileKey)){
         //don't include nested objects in the form
