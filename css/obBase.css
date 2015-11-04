@@ -436,9 +436,9 @@ form {
   margin-bottom: 60px;
 }
 
-.rowTop271 {
+.rowTop241 {
   /* special class for the itemEdit view */
-  margin-top: 271px;
+  margin-top: 241px;
 }
 
 .pad10 {
@@ -809,6 +809,7 @@ h5 {
 
 .searchWrapper .txtField:focus {
   outline: 2px solid #fff;
+  outline-style:inset;
 }
 
 .mainSearchWrapper:before {
