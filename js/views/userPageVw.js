@@ -855,8 +855,8 @@ module.exports = Backbone.View.extend({
 
   storeCreated: function() {
     "use strict";
+    //this.storeWizardView.closeWizard();
     var currentState = this.lastTab || "about";
-    this.storeWizardView.closeWizard();
     //recreate the entire page with the new data
     Backbone.history.loadUrl();
   },

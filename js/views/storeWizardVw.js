@@ -105,8 +105,6 @@ module.exports = Backbone.View.extend({
 
   addModerator: function(data){
     "use strict";
-    console.log("new moderator");
-    console.log(data);
     var moderatorAvatarURL = this.model.get('user').server_url+"get_image?hash=" + data.moderator.avatar_hash;
     var newModerator = $(
         '<div class="pad10 flexRow">' +
@@ -132,6 +130,7 @@ module.exports = Backbone.View.extend({
 
   closeWizard: function() {
     "use strict";
+    console.log("close wizard");
     this.close();
   },
 
@@ -152,7 +151,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         profileForm = this.$el.find('#storeWizardForm'),
-        formData = new FormData(profileForm[0]);
+        formData = new FormData(profileForm[0]),
+        moderatorsChecked = $('.js-storeWizardModeratorList input:checked');
 
     //add formChecked class to form so invalid fields are styled as invalid
     profileForm.addClass('formChecked');
@@ -164,9 +164,13 @@ module.exports = Backbone.View.extend({
 
       //add data not in the form
       formData.append('vendor', true);
-      $('.js-storeWizardModeratorList input:checked').each(function(){
-        formData.append('moderator_list', $(this).data('guid'));
-      });
+      if(moderatorsChecked.length > 0){
+        moderatorsChecked.each(function () {
+          formData.append('moderator_list', $(this).data('guid'));
+        });
+      } else {
+        formData.append('moderator_list', "");
+      }
 
       $.ajax({
         type: "POST",
@@ -178,7 +182,6 @@ module.exports = Backbone.View.extend({
         success: function (data) {
           if (data.success === true){
             self.trigger('storeCreated');
-            //new Notification('You\'ve added a store to your page!'); //TO DO: We need to localize this
           }else if (data.success === false){
             self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
@@ -198,15 +201,9 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
+    console.log("close function")
     this.unbind();
+    console.log(this);
     this.remove();
     delete this.$el;
     delete this.el;
