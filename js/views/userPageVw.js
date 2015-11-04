@@ -13,6 +13,7 @@ var __ = require('underscore'),
     personListView = require('./userListVw'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
+    showErrorModal = require('../utils/showErrorModal.js'),
     storeWizardVw = require('./storeWizardVw');
 
 //create a default item because a new itemModel will be created with only flat attributes
@@ -159,8 +160,6 @@ module.exports = Backbone.View.extend({
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
-    //normally this should be in render. It works here because the modal is on a parent view
-    this.errorModal = $('.js-messageModal');
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -203,7 +202,7 @@ module.exports = Backbone.View.extend({
             }
           }else{
             //model was returned as a blank object
-            self.showErrorModal("User Not Found", "Information for user " + self.pageID + " cannot be loaded. They may have gone offline.");
+            showErrorModal("User Not Found", "Information for user " + self.pageID + " cannot be loaded. They may have gone offline.");
           }
 
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
@@ -212,7 +211,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        self.showErrorModal("User Not Found", "Information for user "+self.pageID+" cannot be loaded. They may have gone offline.");
+        showErrorModal("User Not Found", "Information for user "+self.pageID+" cannot be loaded. They may have gone offline.");
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
       }
@@ -331,10 +330,13 @@ module.exports = Backbone.View.extend({
 
     if(state === "item"){
       this.renderItem(hash);
+      $('#obContainer').scrollTop(367);
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
+      $('#obContainer').scrollTop(367);
     }else if(state === "itemNew") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
+      $('#obContainer').scrollTop(367);
       this.sellItem();
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
@@ -419,7 +421,7 @@ module.exports = Backbone.View.extend({
         self.renderItems(model.get('listings'));
       },
       error: function(model, response){
-        self.showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
+        showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
       }
     });
     this.followers.fetch({
@@ -433,7 +435,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        self.showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
+        showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
       }
     });
     this.following.fetch({
@@ -442,7 +444,7 @@ module.exports = Backbone.View.extend({
         self.renderFollowing(model.get('following'));
       },
       error: function(model, response){
-        self.showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
+        showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
       }
     });
   },
@@ -522,16 +524,16 @@ module.exports = Backbone.View.extend({
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
         } else {
-          self.showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
+          showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
           window.history.back();
         }
       },
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
         if(response.statusText){
-          self.showErrorModal("There Has Been An Error", "This item is not available. The error code is: " + response.statusText);
+          showErrorModal("There Has Been An Error", "This item is not available. The error code is: " + response.statusText);
         } else {
-          self.showErrorModal("There Has Been An Error","This item is not available or a blank object was returned by the server");
+          showErrorModal("There Has Been An Error","This item is not available or a blank object was returned by the server");
         }
       }
     });
@@ -565,13 +567,6 @@ module.exports = Backbone.View.extend({
     this.subViews.push(this.itemEditView);
     this.subModels.push(this.itemEdit);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
-  },
-
-  showErrorModal: function(errorTitle, errorMessage) {
-    "use strict";
-    this.errorModal.removeClass('fadeOut');
-    this.errorModal.find('.js-messageModal-title').text(errorTitle);
-    this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
 
   aboutClick: function(e){
@@ -704,12 +699,12 @@ module.exports = Backbone.View.extend({
             self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
             self.saveUserPageModel();
           } else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
           } else {
-            self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
+            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
           }
         } else if (data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -761,7 +756,7 @@ module.exports = Backbone.View.extend({
           self.setCustomStyles();
           self.setState(self.lastTab);
         }else if(data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
 
         }
       },

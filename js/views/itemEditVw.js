@@ -6,6 +6,7 @@ Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     taggle = require('taggle'),
+    showErrorModal = require('../utils/showErrorModal.js'),
     chosen = require('../utils/chosen.jquery.min.js');
 
 module.exports = Backbone.View.extend({
@@ -55,8 +56,7 @@ module.exports = Backbone.View.extend({
         e.preventDefault();
         return false;
       });
-
-      self.errorModal = $('.js-messageModal');
+      
     });
     return this;
   },
@@ -226,7 +226,7 @@ module.exports = Backbone.View.extend({
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         }else if (data.success === false){
-          self.showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -278,13 +278,6 @@ module.exports = Backbone.View.extend({
     "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
-  },
-
-  showErrorModal: function(errorTitle, errorMessage) {
-    "use strict";
-    this.errorModal.removeClass('fadeOut');
-    this.errorModal.find('.js-messageModal-title').text(errorTitle);
-    this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
 
   saveChanges: function(){
@@ -365,7 +358,7 @@ module.exports = Backbone.View.extend({
           if (returnedId && data.success === true && returnedId != data.id){
             deleteThisItem(data.id);
           }else if (data.success === false){
-            self.showErrorModal("Changes Could Not Be Saved","Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+            showErrorModal("Changes Could Not Be Saved","Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
             self.trigger('saveNewDone', data.id);
@@ -384,7 +377,7 @@ module.exports = Backbone.View.extend({
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
-      self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.<br/><br/>"+invalidInputList+"</i>");
+      showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.<br/><br/>"+invalidInputList+"</i>");
     }
   },
 

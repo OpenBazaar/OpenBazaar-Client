@@ -6,7 +6,7 @@
 
 <!-- Photos -->
 
-<form id="imageForm" class="flexRow flexExpand flexRow-noBorderBottom"
+<form id="imageForm" class="flexRow flexExpand border0"
   style="    position: absolute;
     right: 0;
     top: 51px;">
@@ -17,7 +17,10 @@
       <div class="flexRow custCol-secondary border0">
         <label for="itemImageUploadMain" class="fieldItem width100">
           <h5 class="floatLeft"><%= polyglot.t('Photos') %></h5>
-          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1"><%= polyglot.t('UploadPhotos') %></span>
+          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1">
+            <span class="ion-images fontSize11 marginRight2 textOpacity75"></span>
+            <%= polyglot.t('UploadPhotos') %>
+          </span>
           <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
         </label>
       </div>
@@ -253,7 +256,7 @@
       </div>
 
       <!-- Right side -->
-      <div class="flexCol-5 pad15 flex-border rowTop271">
+      <div class="flexCol-5 pad15 flex-border rowTop241">
 
         <!-- Categorization -->
         <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">

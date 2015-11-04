@@ -294,12 +294,16 @@ form {
   box-sizing: border-box;
   padding: 33px;
   cursor: pointer;
-  width: 316px;
+  width: 317px;
+}
+
+.userPage-subViews .gridItem {
+  border-bottom: 1px solid #fff;
+  border-right: 1px solid #fff;
 }
 
 .itemImg {
   position: relative;
-  background-image: url(../imgs/defaultItem.png);
   background-position: center;
   background-size: cover;
   border-radius: 3px;
@@ -316,7 +320,7 @@ form {
 .itemImg.itemImg-small {
   height: 82px;
   width: 82px;
-  margin: 0 5px 10px 5px;
+  margin: 0 10px 10px 0;
 }
 
 .rowItem {
@@ -462,14 +466,18 @@ form {
   margin-bottom: 60px;
 }
 
-.rowTop271 {
+.rowTop241 {
   /* special class for the itemEdit view */
-  margin-top: 271px;
+  margin-top: 241px;
 }
 
 .pad10 {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.pad8Left {
+  padding-left: 8px;
 }
 
 .pad10Left {
@@ -726,6 +734,16 @@ h5 {
   width: 525px;
 }
 
+.modal-hero-icon {
+  background: url(../imgs/openbazaar-icon.png);
+  background-size: cover;
+  height: 145px;
+  margin: auto;
+  top: 30px;
+  position: relative;
+  width: 145px;
+}
+
 .flex-border > .flexRow {
   /* hide the extra border on the right and bottom sides */
   margin: 0 -1px -1px 0;
@@ -828,6 +846,10 @@ h5 {
   opacity: 1;
 }
 
+.searchWrapper .txtField:focus {
+  outline: 2px solid #fff;
+}
+
 .mainSearchWrapper:before {
   color: #000;
   top: 6px;
@@ -856,6 +878,7 @@ input[type="text"].txtField-bar {
   font-size: 14px;
   letter-spacing: .4px;
   opacity: 1;
+  outline: none;
   padding: 13px;
 }
 
@@ -914,6 +937,16 @@ input[type="text"].txtField-bar {
 .btn.btn-txtHalf {
   /* button with text */
   padding: 0 16px;
+}
+
+.btn.btn-buyNow {
+  margin-top: 10px;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  opacity: 1;
+  font-size: 14px;
 }
 
 .btn.btn-txtOnly {
@@ -1603,6 +1636,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   /*z-index: 99;*/
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .shadow-inner1-ultra-light {
   box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.35);
 }
@@ -1636,6 +1673,8 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: 50px;
   width: 950px;
   z-index: 3;
+  box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
+
 }
 
 .home-page-navigation-filler {
@@ -1745,8 +1784,7 @@ input[type="checkbox"].fieldItem:checked + label:before {
 /*========== one-off classes ==========*/
 
 .modal .homeModal-hero {
-  background-image: url('../imgs/obSettingsHeroB.jpg');
-  background-repeat: no-repeat;
+  background: #063753;
 }
 
 .modal .homeModal-heroText {
@@ -1826,13 +1864,21 @@ input[type="checkbox"].fieldItem:checked + label:before {
   float: none;
 }
 
-.page-userNameLarge {
+.page-userNameLarge{
   font-weight: 200;
   font-size: 34px;
   opacity: .8;
   letter-spacing: 1.5px;
   margin-bottom: 0;
   margin-left: 0;
+}
+
+.page-contractTitle {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin-bottom: 0;
+  opacity: 1;
 }
 
 #customizeControls {
@@ -1987,6 +2033,11 @@ input[type="checkbox"].fieldItem:checked + label:before {
   top: -48px;
 }
 
+#ov1 .pull-up1 {
+  position: relative;
+  top: -1px;
+}
+
 #ov1 .pull-up4 {
   position: relative;
   top: -4px;
@@ -2058,6 +2109,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .borderTop {
+  border-top: solid 1px rgba(255,255,255,0.08);
+}
+
 #ov1  .border0 {
   border: 0;
 }
@@ -2086,6 +2141,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1 .textSize11px {
   font-size: 11px;
+}
+
+#ov1 .textSize12px {
+  font-size: 12px;
 }
 
 #ov1  .textSize14px {
@@ -2140,6 +2199,15 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-weight: 500;
 }
 
+
+#ov1 .fontSize10 {
+  font-size: 10px;
+}
+
+#ov1 .fontSize11 {
+  font-size: 11px;
+}
+
 #ov1 .fontSize13 {
   font-size: 13px;
 }
@@ -2158,6 +2226,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1 .fontSize20 {
   font-size: 20px;
+}
+
+#ov1 .fontSize34 {
+  font-size: 34px;
 }
 
 #ov1 .txt-darkest {
@@ -2180,8 +2252,16 @@ input[type="checkbox"].fieldItem:checked + label:before {
   right: 10px;
 }
 
+#ov1  .margin0 {
+  margin: 0;
+}
+
 #ov1  .marginRight5 {
   margin-right: 5px;
+}
+
+#ov1  .marginRight10 {
+  margin-right: 10px;
 }
 
 
@@ -2205,6 +2285,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-top: 2px;
 }
 
+#ov1  .marginTop4 {
+  margin-top: 4px;
+}
+
 #ov1  .marginTop15 {
   margin-top: 15px;
 }
@@ -2221,13 +2305,14 @@ input[type="checkbox"].fieldItem:checked + label:before {
   margin-bottom: 2px;
 }
 
+#ov1  .marginBottom40 {
+  margin-bottom: 40px;
+}
+
 #ov1  .marginBottom50 {
   margin-bottom: 50px;
 }
 
-#ov1  .margin0 {
-  margin: 0;
-}
 
 #ov1  .marginAuto {
   margin: auto;
@@ -2235,6 +2320,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .minHeight650 {
   min-height: 650px;
+}
+
+#ov1  .minHeight420 {
+  min-height: 420px;
 }
 
 #ov1  .lineHeightReset{
@@ -2297,6 +2386,10 @@ input[type="checkbox"].fieldItem:checked + label:before {
 
 #ov1  .cursorDefault {
   cursor: default;
+}
+
+#ob1 .fontWeight200 {
+  font-weight: 200;
 }
 
 #ov1  .borderBottomLeftRaidus3 {
