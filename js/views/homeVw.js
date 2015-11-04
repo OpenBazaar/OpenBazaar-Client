@@ -147,7 +147,7 @@ module.exports = Backbone.View.extend({
     item.userID = item.guid;
     var newItemModel = new itemShortModel(item);
     var itemShort = new itemShortView({model: newItemModel});
-    this.$el.find('.js-list1').append(itemShort.el);
+    this.$el.find('.js-list1 .js-loadingMsg').before(itemShort.el);
     this.subViews.push(itemShort);
   },
 
@@ -158,7 +158,7 @@ module.exports = Backbone.View.extend({
     user.avatarURL = this.userModel.get('server_url')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
     var newUserModel = new userShortModel(user)
     var storeShort = new userShortView({model: newUserModel});
-    this.$el.find('.js-list2').append(storeShort.el);
+    this.$el.find('.js-list2 .js-loadingMsg').before(storeShort.el);
     this.subViews.push(storeShort);
   },
 
