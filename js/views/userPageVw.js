@@ -371,7 +371,7 @@ module.exports = Backbone.View.extend({
   setControls: function(state){
     "use strict";
     //hide all the state controls
-    this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons').addClass('hide');
+    this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
@@ -380,7 +380,7 @@ module.exports = Backbone.View.extend({
       } else if(state === "itemEdit") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
       } else if(state === "customize") {
-        this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
+        this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         document.getElementById('obContainer').classList.add("box-borderDashed");
       } else {
@@ -554,6 +554,8 @@ module.exports = Backbone.View.extend({
       defaultItem.vendor_offer.listing.id.pubkeys.guid = self.model.get('page').profile.guid;
       this.itemEdit = new itemModel(defaultItem);
     }
+    //add the moderator list to the item model
+    this.itemEdit.set('moderator_list', self.model.get('page').profile.moderator_list);
     //this.itemEdit.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //add the user information
     //this.itemEdit.set({user: self.options.userModel.toJSON()});
@@ -854,8 +856,8 @@ module.exports = Backbone.View.extend({
 
   storeCreated: function() {
     "use strict";
+    //this.storeWizardView.closeWizard();
     var currentState = this.lastTab || "about";
-    this.storeWizardView.closeWizard();
     //recreate the entire page with the new data
     Backbone.history.loadUrl();
   },
@@ -904,10 +906,10 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
+    "use strict";
     __.each(this.subModels, function(subModel) {
       subModel.off();
     });
-
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();

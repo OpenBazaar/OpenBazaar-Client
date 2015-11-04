@@ -45,21 +45,21 @@ module.exports = window.Backbone.Model.extend({
           "free": false
         },
         "item": {
-          "category": "None",
+          "category": "",
           "sku": "0",
-          "description": "None",
+          "description": "",
           "price_per_unit": {
             "fiat": {
               "price": 0,
               "currency_code": "usd"
             }
           },
-          "title": "New Item",
+          "title": "",
           "process_time": "0",
           "image_hashes": [],
           "nsfw": false,
           "keywords": [],
-          "condition": "New"
+          "condition": ""
         },
         "moderators": [
           {
@@ -82,8 +82,8 @@ module.exports = window.Backbone.Model.extend({
           }
         ],
         "policy": {
-          "terms_conditions": "None",
-          "returns": "None"
+          "terms_conditions": "",
+          "returns": ""
         },
         "id": {
           "pubkeys": {
@@ -94,7 +94,7 @@ module.exports = window.Backbone.Model.extend({
           "blockchain_id": ""
         },
         "metadata": {
-          "category": "None",
+          "category": "",
           "version": "",
           "category_sub": "",
           "expiry": ""
@@ -128,8 +128,8 @@ module.exports = window.Backbone.Model.extend({
             "flat_fee": {
               "fiat": {
                 "price": {
-                  "international": 0,
-                  "domestic": 0
+                  "international": "",
+                  "domestic": ""
                 }
               }
             },
@@ -141,8 +141,8 @@ module.exports = window.Backbone.Model.extend({
         response.vendor_offer.listing.shipping.flat_fee = {
           "fiat": {
             "price": {
-              "international": 0,
-              "domestic": 0
+              "international": "",
+              "domestic": ""
             }
           }
         }
