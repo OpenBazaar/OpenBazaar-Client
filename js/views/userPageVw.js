@@ -371,7 +371,7 @@ module.exports = Backbone.View.extend({
   setControls: function(state){
     "use strict";
     //hide all the state controls
-    this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons').addClass('hide');
+    this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
@@ -380,7 +380,7 @@ module.exports = Backbone.View.extend({
       } else if(state === "itemEdit") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
       } else if(state === "customize") {
-        this.$el.find('.js-itemCustomizationButtons').removeClass('hide');
+        this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         document.getElementById('obContainer').classList.add("box-borderDashed");
       } else {
