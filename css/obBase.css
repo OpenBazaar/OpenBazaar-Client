@@ -809,7 +809,6 @@ h5 {
 
 .searchWrapper .txtField:focus {
   outline: 2px solid #fff;
-  outline-style:inset;
 }
 
 .mainSearchWrapper:before {
