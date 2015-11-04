@@ -96,7 +96,10 @@ module.exports = Backbone.View.extend({
     shipsTo.val(shipsToValue);
 
     //activate tags plugin
-    this.inputKeyword = new window.Taggle('inputKeyword');
+    this.inputKeyword = new Taggle('inputKeyword', {
+      tags: this.model.get('vendor_offer').listing.item.keywords,
+      saveOnBlur: true
+    });
 
     //set chosen inputs
     $('.chosen').chosen();
