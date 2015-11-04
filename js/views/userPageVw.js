@@ -25,8 +25,8 @@ var defaultItem = {
           "UNITED_STATES"
         ],
         "est_delivery": {
-          "international": "N/A",
-          "domestic": "3-5 Business Days"
+          "international": "",
+          "domestic": ""
         },
         "shipping_origin": "UNITED_STATES",
         "flat_fee": {
@@ -40,21 +40,21 @@ var defaultItem = {
         "free": false
       },
       "item": {
-        "category": "None",
-        "sku": "0",
-        "description": "None",
+        "category": "",
+        "sku": "",
+        "description": "",
         "price_per_unit": {
           "fiat": {
             "price": "",
             "currency_code": "usd"
           }
         },
-        "title": "New Item",
-        "process_time": "0",
+        "title": "",
+        "process_time": "",
         "image_hashes": [],
         "nsfw": false,
         "keywords": [],
-        "condition": "New"
+        "condition": ""
       },
       "moderators": [
         {
@@ -77,8 +77,8 @@ var defaultItem = {
         }
       ],
       "policy": {
-        "terms_conditions": "None",
-        "returns": "None"
+        "terms_conditions": "",
+        "returns": ""
       },
       "id": {
         "pubkeys": {
@@ -613,6 +613,7 @@ module.exports = Backbone.View.extend({
     $('.user-page-content').addClass('pull-up4');
     $('.user-customize-cover-photo').show();
     $('.user-page-header').addClass('shadow-inner1-strong');
+    $('#obContainer').animate({ scrollTop: "0" });
   },
 
   customizeColorClick: function(e) {
