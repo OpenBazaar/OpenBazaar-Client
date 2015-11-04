@@ -122,7 +122,11 @@
       <div class="flexRow minHeight650">
         <div class="flexCol-8 custCol-border-secondary">
           <div class="rowItem">
-            <%- ob.page.profile.about %>
+            <% if(ob.page.profile.about) { %>
+              <%- ob.page.profile.about %>
+            <%}else{%>
+              <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
+            <%}%>
           </div>
         </div>
         <div class="flexCol-4 flex-border border0">
