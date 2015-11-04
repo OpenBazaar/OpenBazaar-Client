@@ -2138,6 +2138,15 @@ input[type="checkbox"].fieldItem:checked + label:before {
   font-weight: 500;
 }
 
+
+#ov1 .fontSize10 {
+  font-size: 10px;
+}
+
+#ov1 .fontSize11 {
+  font-size: 11px;
+}
+
 #ov1 .fontSize13 {
   font-size: 13px;
 }
