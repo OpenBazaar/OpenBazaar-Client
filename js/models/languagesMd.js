@@ -132,6 +132,7 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Personalize Your OpenBazaar",
+          theme: "Your Page Theme",
           chooseLanguage: "Choose Your Language",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
           configure: "Configure your experience",
@@ -276,6 +277,7 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Personalice Su OpenBazaar",
+          theme: "El tema de la página",
           chooseLanguage: "Elige tu idioma",
           contributors: "%{smart_count} Colaboradores |||| %{smart_count} Colaboradores",
           configure: "Configure su Experiencia",

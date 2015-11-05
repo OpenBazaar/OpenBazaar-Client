@@ -62,7 +62,9 @@
     <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
+    <% if(ob.page.profile.vendor) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
+    <% } %>
     <div class="navEnd pad15">
       <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-sellItem">

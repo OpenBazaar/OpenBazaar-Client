@@ -32,11 +32,19 @@
 <div class="popMenu popMenu-navBar hide js-navProfileMenu">
   <a href="#userPage"><%= polyglot.t('nav.myPage') %></a>
   <a href="#customizePage"><%= polyglot.t('nav.customizePage') %></a>
-  <a href="#sellItem"><%= polyglot.t('nav.sellItem') %></a>
+  <% if(ob.vendor) { %>
+    <a href="#sellItem" ><%= polyglot.t('nav.sellItem') %></a>
+  <% }else{ %>
+    <a class="js-homeCreateStore"><%= polyglot.t('CreateStore') %></a>
+  <% } %>
   <hr/>
   <a href="#purchases"><%= polyglot.t('nav.purchases') %></a>
-  <a href="#sales"><%= polyglot.t('nav.sales') %></a>
-  <a href="#cases"><%= polyglot.t('nav.cases') %></a>
+  <% if(ob.vendor) { %>
+    <a href="#sales"><%= polyglot.t('nav.sales') %></a>
+  <% } %>
+  <% if(ob.moderator) { %>
+    <a href="#cases"><%= polyglot.t('nav.cases') %></a>
+  <% } %>
   <hr/>
   <a href="#settings"><%= polyglot.t('nav.settings') %></a>
   <hr/>
@@ -68,7 +76,7 @@
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child custCol-primary">
@@ -82,9 +90,9 @@
               </div>
             </div>
           </div>
-          <div class="bar barFlush custCol-secondary">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('IAgree') %></a>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('IAgree') %></a>
           </div>
         </div>
         <div class="accordion-child custCol-primary">
@@ -100,9 +108,9 @@
             <ul class="flexRow list flex-border js-homeModal-countryList homeModal-settings custCol-primary">
             </ul>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Next') %></a>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child custCol-primary">
@@ -118,9 +126,9 @@
             <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflowY custCol-primary">
             </ul>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Next') %></a>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child custCol-primary">
@@ -322,9 +330,9 @@
               </li>
             </ul>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Next') %></a>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child custCol-primary">
@@ -345,10 +353,10 @@
             <div class="pad20 rowTop20">
               <div class="flexRow pad">
                 <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle custCol-secondary"><%= polyglot.t('onboarding.registerNew') %> Blockchain ID</a>
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle custCol-secondary"><%= polyglot.t('onboarding.registerNew') %></a>
                 </div>
                 <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle custCol-secondary"><%= polyglot.t('onboarding.connectExisting') %> Blockchain ID</a>
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle custCol-secondary"><%= polyglot.t('onboarding.connectExisting') %></a>
                 </div>
                 <div class="flexCol-6 hide">
                   <a class="btn btn-txt btn-wide btn-c1 js-homeModal-cancelHandle">Cancel</a>
@@ -356,11 +364,111 @@
               </div>
             </div>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Skip') %></a>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Skip') %></a>
           </div>
         </div>
+
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
+            <%= polyglot.t('onboarding.theme') %>
+          </div>
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+            <div class="pad20">
+              <div class="flexRow marginTop20">
+
+                <div class="theme-container">
+                  <label for="theme-1" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div> 
+                    </div>
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-1" checked />
+                </div>
+
+                <div class="theme-container">
+                  <label for="theme-2" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div>
+                    </div> 
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-2" />
+                </div>
+
+                <div class="theme-container">
+                  <label for="theme-3" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div> 
+                    </div>
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-3" />
+                </div>
+
+                <div class="theme-container">
+                  <label for="theme-4" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div> 
+                    </div>
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-4" />
+                </div>
+
+                <div class="theme-container">
+                  <label for="theme-5" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div> 
+                    </div>
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-5" />
+                </div>
+
+                <div class="theme-container">
+                  <label for="theme-6" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div>
+                    </div> 
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-6" />
+                </div>
+
+                <div class="theme-container">
+                  <label for="theme-7" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div> 
+                    </div>
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-7" />
+                </div>
+
+                <div class="theme-container">
+                  <label for="theme-8" class="js-homeModal-themeSelected">
+                    <div class="theme-background custCol-border-secondary">
+                      <div class="theme-header"></div> 
+                      <div class="theme-body"></div> 
+                    </div>
+                  </label>
+                  <input type="radio" name="theme-selection" class="marginBottom20" id="theme-8" />
+                </div>
+
+
+                <div class=""></div>
+              </div>
+            </div>
+          </div>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+          </div>
+        </div>
+
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.avatar') %>
@@ -371,7 +479,7 @@
                 <div class="homeModal-avatarPreview js-avatarPreview custCol-secondary"></div>
                 <div class="rowTop10">
                   <input type="file" id="avatarUpload" accept="image/*" class="hide js-homeModalAvatarUpload">
-                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop20 custCol-secondary">
+                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop10 custCol-secondary">
                     <span class="ion-image marginRight2 fontSize11"></span>
                     <%= polyglot.t('onboarding.chooseAvatar') %>
                   </label>
@@ -379,11 +487,12 @@
               </div>
             </div>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary"><%= polyglot.t('Done') %></a>
+          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Done') %></a>
           </div>
         </div>
+
       </div>
     </div>
   </div>

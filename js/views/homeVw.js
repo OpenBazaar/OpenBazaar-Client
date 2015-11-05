@@ -182,6 +182,10 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         storeWizardModel = new Backbone.Model();
+
+    //create store modal opens on user page
+    Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/about', {trigger: true});
+    
     //copy the view model into the new wizard model
     storeWizardModel.set(this.model.attributes);
     this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder', socketView: this.socketView});
