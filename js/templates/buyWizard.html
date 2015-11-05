@@ -4,7 +4,7 @@
       <h2 class="ion-close-round"></h2>
     </div>
     <div class="modal-hero js-buyWizardHero shadow-inner1-light"
-         style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>),url(imgs/defaultItem.png);"></div>
+         style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);"></div>
     <form  id="buyWizardForm">
       <div class="homeModal-accordion accordion js-buyWizardAccordion">
         <div class="accordion-window">
@@ -14,25 +14,30 @@
             </div>
             <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
               <div class="flexRow">
-                <div class="flexRow custCol-border-secondary">
-                  <div class="flexCol-12">
-                    <div class="fieldItem">
-                      <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
-                      <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
-                    </div>
-                  </div>
-                </div>
                 <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                   <div class="pad10 flexRow">
                     <input type="radio" class="fieldItem" name="moderator" id="buyWizardModeratorRadio<%- i %>"/>
                     <label for="buyWizardModeratorRadio<%- i %>" class="row10 rowTop10 width100">
-                      <div class="thumbnail thumbnail-large-slim pull-left box-border"></div>
+                      <div class="thumbnail thumbnail-large-slim pull-left box-border"
+                           style="background-image: url(<%- ob.server_url %>get_image?hash=<%- moderator.avatar_hash %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);"></div>
                       <div class="pull-left">
-                        <div class="row10"><strong>Moderated by </strong></div>
+                        <div class="row10"><strong>Moderated by <%- moderator.blockchain_id %></strong></div>
+                        <div><%- moderator.short_description %></div>
                       </div>
                     </label>
                   </div>
                 <% }); %>
+                <div class="pad10 flexRow">
+                  <input type="radio" class="fieldItem" name="moderator" id="buyWizardNoModerator"/>
+                  <label for="buyWizardNoModerator" class="row10 rowTop10 width100">
+                    <div class="thumbnail thumbnail-large-slim pull-left box-border"
+                         style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.avatar_hash %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"></div>
+                    <div class="pull-left">
+                      <div class="row10"><strong>Direct</strong></div>
+                      <div>Send fund directly to <%- ob.handle %></div>
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
             <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
