@@ -1736,6 +1736,7 @@ input[type="checkbox"].fieldItem + label span {
 
 .userPage-subViews {
   position: relative;
+  z-index: 5;
 }
 
 .icon-large {
