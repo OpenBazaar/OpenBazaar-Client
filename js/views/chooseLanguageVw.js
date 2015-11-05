@@ -5,7 +5,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  className: "flexRow",
+  className: "flexRow custCol-border-secondary",
 
   tagName: "li",
 

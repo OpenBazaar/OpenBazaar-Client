@@ -120,6 +120,8 @@ module.exports = Backbone.View.extend({
       self.initAccordion('.js-profileAccordion');
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
+      }else{
+        Backbone.history.navigate('#userPage/'+self.model.attributes.guid+'/about', {trigger: true});
       }
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});

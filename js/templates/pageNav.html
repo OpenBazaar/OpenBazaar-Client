@@ -46,275 +46,275 @@
   <a class="js-navAdminPanel">Admin Panel</a>
 </div>
 
-<div class="modal modal-navBlock modal-opaque js-homeModal">
-  <div class="modal-child modal-childMain">
-    <div class="homeModal-hero modal-hero">
+<div class="modal modal-opaque js-homeModal">
+  <div class="modal-child modal-childMain custCol-primary">
+    <div class="homeModal-hero modal-hero custCol-primary-darken">
       <div class="modal-hero-icon"></div>
       <p class="h6 homeModal-heroText"><%= polyglot.t('onboarding.intro') %></p>
     </div>
     <div class="homeModal-accordion accordion js-profileAccordion">
       <div class="accordion-window">
-        <div class="accordion-child">
-          <div class="bar barTxt h6">
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.chooseLanguage') %>
           </div>
           <div class="flexContainer flex-border" id="homeModal-languageList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" autofocus="autofocus" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper  custCol-border-secondary">
+                <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border-secondary" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflowY">
+            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflowY custCol-primary">
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-wide js-accordionNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordion-child">
-          <div class="bar barTxt h6">
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.disclaimer_title') %>
           </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow">
-              <div class="rowItem">
+              <div class="rowItem padding20">
                 <p class="margin0"><%= polyglot.t('onboarding.disclaimer_body') %></p>
               </div>
             </div>
           </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
+          <div class="bar barFlush custCol-secondary">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('IAgree') %></a>
           </div>
         </div>
-        <div class="accordion-child">
-          <div class="bar barTxt h6">
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.yourCountry') %>
           </div>
-          <div class="flexContainer flex-border" id="homeModal-countryList">
+          <div class="flexContainer flex-border custCol-primary" id="homeModal-countryList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
+                <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list flex-border js-homeModal-countryList homeModal-settings">
+            <ul class="flexRow list flex-border js-homeModal-countryList homeModal-settings custCol-primary">
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordion-child">
-          <div class="bar barTxt h6">
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.localCurrency') %>
           </div>
           <div class="flexContainer flex-border" id="homeModal-currencyList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
+                <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflowY">
+            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflowY custCol-primary">
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordion-child">
-          <div class="bar barTxt h6">
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.timeZone') %>
           </div>
           <div class="flexContainer flex-border" id="homeModal-timeList">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                <input type="text" class="search txtField txtField-bar" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
+                <input type="text" class="search txtField txtField-bar custCol-primary custCol-border-secondary" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY">
-              <li class="flexRow">
+            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
                   <label class="homeModal-time" for="(GMT -12:00) Eniwetok, Kwajalein">(GMT -12:00) Eniwetok, Kwajalein</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -11:00) Midway Island, Samoa" name="time">
                   <label class="homeModal-time" for="(GMT -11:00) Midway Island, Samoa">(GMT -11:00) Midway Island, Samoa</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -10:00) Hawaii" name="time">
                   <label class="homeModal-time" for="(GMT -10:00) Hawaii">(GMT -10:00) Hawaii</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -9:00) Alaska" name="time">
                   <label class="homeModal-time" for="(GMT -9:00) Alaska">(GMT -9:00) Alaska</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -8:00) Pacific Time (US &amp; Canada)" name="time">
                   <label class="homeModal-time" for="(GMT -8:00) Pacific Time (US &amp; Canada)">(GMT -8:00) Pacific Time (US &amp; Canada)</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -7:00) Mountain Time (US &amp; Canada)" name="time">
                   <label class="homeModal-time" for="(GMT -7:00) Mountain Time (US &amp; Canada)">(GMT -7:00) Mountain Time (US &amp; Canada)</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -6:00) Central Time (US &amp; Canada), Mexico City" name="time">
                   <label class="homeModal-time" for="(GMT -6:00) Central Time (US &amp; Canada), Mexico City">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima" name="time">
                   <label class="homeModal-time" for="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz" name="time">
                   <label class="homeModal-time" for="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -3:30) Newfoundland" name="time">
                   <label class="homeModal-time" for="(GMT -3:30) Newfoundland">(GMT -3:30) Newfoundland</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -3:00) Brazil, Buenos Aires, Georgetown" name="time">
                   <label class="homeModal-time" for="(GMT -3:00) Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -2:00) Mid-Atlantic" name="time">
                   <label class="homeModal-time" for="(GMT -2:00) Mid-Atlantic">(GMT -2:00) Mid-Atlantic</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT -1:00 hour) Azores, Cape Verde Islands" name="time">
                   <label class="homeModal-time" for="(GMT -1:00 hour) Azores, Cape Verde Islands">(GMT -1:00 hour) Azores, Cape Verde Islands</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT) Western Europe Time, London, Lisbon, Casablanca" name="time">
                   <label class="homeModal-time" for="(GMT) Western Europe Time, London, Lisbon, Casablanca">(GMT) Western Europe Time, London, Lisbon, Casablanca</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris" name="time">
                   <label class="homeModal-time" for="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +2:00) Kaliningrad, South Africa" name="time">
                   <label class="homeModal-time" for="(GMT +2:00) Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg" name="time">
                   <label class="homeModal-time" for="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +3:30) Tehran" name="time">
                   <label class="homeModal-time" for="(GMT +3:30) Tehran">(GMT +3:30) Tehran</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi" name="time">
                   <label class="homeModal-time" for="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +4:30) Kabul" name="time">
                   <label class="homeModal-time" for="(GMT +4:30) Kabul">(GMT +4:30) Kabul</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent" name="time">
                   <label class="homeModal-time" for="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent">(GMT  +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi" name="time">
                   <label class="homeModal-time" for="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +5:45) Kathmandu" name="time">
                   <label class="homeModal-time" for="(GMT +5:45) Kathmandu">(GMT +5:45) Kathmandu</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +6:00) Almaty, Dhaka, Colombo" name="time">
                   <label class="homeModal-time" for="(GMT +6:00) Almaty, Dhaka, Colombo">(GMT +6:00) Almaty, Dhaka, Colombo</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +7:00) Bangkok, Hanoi, Jakarta" name="time">
                   <label class="homeModal-time" for="(GMT +7:00) Bangkok, Hanoi, Jakarta">(GMT +7:00) Bangkok, Hanoi, Jakarta</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" name="time">
                   <label class="homeModal-time" for="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk" name="time">
                   <label class="homeModal-time" for="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +9:30) Adelaide, Darwin" name="time">
                   <label class="homeModal-time" for="(GMT +9:30) Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +10:00) Eastern Australia, Guam, Vladivostok" name="time">
                   <label class="homeModal-time" for="(GMT +10:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +11:00) Magadan, Solomon Islands, New Caledonia" name="time">
                   <label class="homeModal-time" for="(GMT +11:00) Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</label>
                 </div>
               </li>
-              <li class="flexRow">
+              <li class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect padding17px">
                   <input type="radio" id="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka" name="time">
                   <label class="homeModal-time" for="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</label>
@@ -323,19 +323,19 @@
             </ul>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Next') %></a>
           </div>
         </div>
-        <div class="accordion-child">
-          <div class="bar barTxt h5">
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.handle') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow">
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="rowItem js-homeModal-timeSelect">
-                  <p class="margin0"><%= polyglot.t('onboarding.knownAs') %> <%- ob.handle %>.</p>
+                  <p class="margin0"><%= polyglot.t('onboarding.knownAs') %> <%- ob.guid %></p>
                 </div>
               </div>
               <div class="txtFieldWrapper txtFieldWrapper-bar hide">
@@ -345,10 +345,10 @@
             <div class="pad20 rowTop20">
               <div class="flexRow pad">
                 <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle"><%= polyglot.t('onboarding.registerNew') %> Blockchain ID</a>
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle custCol-secondary"><%= polyglot.t('onboarding.registerNew') %> Blockchain ID</a>
                 </div>
                 <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle"><%= polyglot.t('onboarding.connectExisting') %> Blockchain ID</a>
+                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle custCol-secondary"><%= polyglot.t('onboarding.connectExisting') %> Blockchain ID</a>
                 </div>
                 <div class="flexCol-6 hide">
                   <a class="btn btn-txt btn-wide btn-c1 js-homeModal-cancelHandle">Cancel</a>
@@ -357,28 +357,31 @@
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext"><%= polyglot.t('Skip') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary"><%= polyglot.t('Skip') %></a>
           </div>
         </div>
-        <div class="accordion-child">
-          <div class="bar barTxt h5 txt-center">
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('onboarding.avatar') %>
           </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch">
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow flexRow-center">
               <div>
-                <div class="homeModal-avatarPreview js-avatarPreview"></div>
+                <div class="homeModal-avatarPreview js-avatarPreview custCol-secondary"></div>
                 <div class="rowTop10">
                   <input type="file" id="avatarUpload" accept="image/*" class="hide js-homeModalAvatarUpload">
-                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop20"><%= polyglot.t('onboarding.chooseAvatar') %></label>
+                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop20 custCol-secondary">
+                    <span class="ion-image marginRight2 fontSize11"></span>
+                    <%= polyglot.t('onboarding.chooseAvatar') %>
+                  </label>
                 </div>
               </div>
             </div>
           </div>
           <div class="bar barFlush">
-            <a class="btn btn-bar btn-half js-accordionPrev"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-homeModalDone"><%= polyglot.t('Done') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary"><%= polyglot.t('Done') %></a>
           </div>
         </div>
       </div>

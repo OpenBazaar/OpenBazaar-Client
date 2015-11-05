@@ -586,11 +586,11 @@ h3 {
 }
 
 h5 {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .h6, h6 {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 [class *= "ion-"]:before {
@@ -1799,8 +1799,9 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 30px;
+  bottom: 46px;
   color: #fff;
+  font-size: 17px;
   width: 70%;
   margin: 0 15%;
   text-align: center;
@@ -1812,10 +1813,17 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-accordion .btn-bar{
   border-radius: 0;
-  font-size: 13px;
+  font-size: 14px;
   height: 50px;
   line-height: 50px;
   margin: 0;
+  opacity: .75;
+}
+.modal .homeModal-accordion .btn-bar .btn{
+  opacity: .75;
+}
+
+.modal .homeModal-accordion .btn-bar:hover{
   opacity: 1;
 }
 
@@ -1846,7 +1854,7 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-settings,
 .modal .homeModal-settings.flexRow {
-  height: 178px;
+  height: 230px;
   overflow-y: auto;
   background-color: #086A9E;
 }
@@ -1857,7 +1865,7 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-avatarPreview {
   background-color: #327EB8;
-  border-radius: 70px;
+  border-radius: 4px;
   height: 130px;
   width: 130px;
   margin-top: 30px;
@@ -2266,6 +2274,10 @@ input[type="checkbox"].fieldItem + label span {
   margin: 0;
 }
 
+#ov1  .marginRight3 {
+  margin-right: 3px;
+}
+
 #ov1  .marginRight5 {
   margin-right: 5px;
 }
@@ -2396,6 +2408,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .cursorDefault {
   cursor: default;
+}
+
+#ob1 .backgroundTransparent {
+  background: transparent;
 }
 
 #ob1 .fontWeight200 {
