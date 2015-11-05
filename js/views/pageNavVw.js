@@ -21,6 +21,7 @@ module.exports = Backbone.View.extend({
     'click .js-navMax': 'navMaxClick',
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
+    'click .js-navNotifications': 'navNotificationsClick',
     'click .js-navProfile': 'navProfileClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
@@ -154,10 +155,32 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
+  navNotificationsClick: function(e){
+    "use strict";
+    e.stopPropagation();
+    var targ = this.$el.find('.js-navNotificationsMenu');
+    targ.siblings('.popMenu').addClass('hide');
+    if(targ.hasClass('hide')){
+      targ.removeClass('hide');
+      $('#overlay').removeClass('fadeOut hide');
+      $('html').on('click.closeNav', function(e){
+        if($(e.target).closest(targ).length === 0){
+          targ.addClass('hide');
+          $('#overlay').addClass('fadeOut hide');
+          $(this).off('.closeNav');
+        }
+      });
+    }else{
+      targ.addClass('hide');
+      $('#overlay').addClass('fadeOut hide');
+    }
+  },
+
   navProfileClick: function(e){
     "use strict";
     e.stopPropagation();
     var targ = this.$el.find('.js-navProfileMenu');
+    targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
       targ.removeClass('hide');
       $('#overlay').removeClass('fadeOut hide');
