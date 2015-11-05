@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git://github.com/OpenBazaar/OpenBazaar-Client.git"
   },
+  "homepage": "https://openbazaar.org/",
+  "bugs": "https://github.com/OpenBazaar/OpenBazaar-Client/issues/",
+  "license": "MIT",
   "scripts": {
     "start": "electron main.js",
     "test": "exit 0",
@@ -28,7 +31,7 @@
     "underscore": "1.8.3"
   },
   "devDependencies": {
-    "electron-prebuilt": "0.31.1",
+    "electron-prebuilt": "0.34.2",
     "eslint": "1.3.1",
     "pre-commit": "1.1.1",
     "valiquire": "0.3.0"
