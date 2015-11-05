@@ -525,7 +525,7 @@ module.exports = Backbone.View.extend({
           //set id after fetch, otherwise Backbone includes it in the fetch url
           model.set('id', hash);
           if(self.options.ownPage === false){
-            model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.pubkeys.guid);
+            model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.guid);
           }
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
@@ -557,7 +557,7 @@ module.exports = Backbone.View.extend({
       defaultItem.userCountry = self.options.userModel.get('country');
       defaultItem.userCurrencyCode = self.options.userModel.get('currency_code');
       defaultItem.vendor_offer.listing.item.price_per_unit.fiat.currency_code =self.options.userModel.get('currency_code');
-      defaultItem.vendor_offer.listing.id.pubkeys.guid = self.model.get('page').profile.guid;
+      defaultItem.vendor_offer.listing.id.guid = self.model.get('page').profile.guid;
       this.itemEdit = new itemModel(defaultItem);
     }
     //add the moderator list to the item model
