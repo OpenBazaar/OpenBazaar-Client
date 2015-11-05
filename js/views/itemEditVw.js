@@ -19,12 +19,27 @@ module.exports = Backbone.View.extend({
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'focus #inputExpirationDate': 'addDefaultTime',
+    'click .js-itemEditClearDate': 'clearDate'
   },
 
   initialize: function(){
-    var self=this;
-    var hashArray = this.model.get('vendor_offer').listing.item.image_hashes;
+    var self=this,
+        hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
+        nowDate = new Date(),
+        nowMonth = nowDate.getMonth()+ 1;
+
+    function padTime(val){
+      "use strict";
+      if(val >= 10){
+        return val;
+      } else {
+        return "0" + val;
+      }
+    }
+
+    this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server_url')+"get_image?hash="+hash);
@@ -35,6 +50,7 @@ module.exports = Backbone.View.extend({
     //add existing hashes to the list to be uploaded on save
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
+    self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
 
     this.render();
   },
@@ -149,6 +165,21 @@ module.exports = Backbone.View.extend({
       this.disableShipping();
       this.disableShippingPrice();
     }
+  },
+
+  addDefaultTime: function(e){
+    "use strict";
+    var timeInput = this.$el.find('#inputExpirationDate'),
+        currentValue = timeInput.val();
+    if(!currentValue){
+      timeInput.val(this.defaultDate);
+    }
+    this.$el.find('.js-itemEditClearDateWrapper').removeClass('hide');
+  },
+
+  clearDate: function(){
+    "use strict";
+    this.$el.find('#inputExpirationDate').val('');
   },
 
   resizeImage: function(){
