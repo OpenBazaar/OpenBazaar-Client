@@ -142,17 +142,17 @@ module.exports = Backbone.View.extend({
     var targ = this.$el.find('.js-navProfileMenu');
     if(targ.hasClass('hide')){
       targ.removeClass('hide');
-      $('#overlay').removeClass('fadeOut hide');
+      $('#overlay').removeClass('fadeOut');
       $('html').on('click.closeNav', function(e){
         if($(e.target).closest(targ).length === 0){
           targ.addClass('hide');
-          $('#overlay').addClass('fadeOut hide');
+          $('#overlay').addClass('fadeOut');
           $(this).off('.closeNav');
         }
       });
     }else{
       targ.addClass('hide');
-      $('#overlay').addClass('fadeOut hide');
+      $('#overlay').addClass('fadeOut');
     }
   },
 

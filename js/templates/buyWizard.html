@@ -1,0 +1,110 @@
+<div class="modal modal-opaque js-buyWizardModal fadeOut">
+  <div class="modal-child modal-childMain">
+    <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeBuyWizardModal">
+      <h2 class="ion-close-round"></h2>
+    </div>
+    <div class="modal-hero js-buyWizardHero shadow-inner1-light"
+         style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>),url(imgs/defaultItem.png);"></div>
+    <form  id="buyWizardForm">
+      <div class="homeModal-accordion accordion js-buyWizardAccordion">
+        <div class="accordion-window">
+          <div class="accordion-child">
+            <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+              <%= polyglot.t('PaymentType') %>
+            </div>
+            <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+              <div class="flexRow">
+                <div class="flexRow custCol-border-secondary">
+                  <div class="flexCol-12">
+                    <div class="fieldItem">
+                      <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
+                      <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
+                    </div>
+                  </div>
+                </div>
+                <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
+                  <div class="pad10 flexRow">
+                    <input type="radio" class="fieldItem" name="moderator" id="buyWizardModeratorRadio<%- i %>"/>
+                    <label for="buyWizardModeratorRadio<%- i %>" class="row10 rowTop10 width100">
+                      <div class="thumbnail thumbnail-large-slim pull-left box-border"></div>
+                      <div class="pull-left">
+                        <div class="row10"><strong>Moderated by </strong></div>
+                      </div>
+                    </label>
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            </div>
+          </div>
+          <div class="accordion-child">
+            <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+              <%= polyglot.t('ShipTo') %>
+            </div>
+            <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+              <div class="flexRow">
+                <div class="flexRow custCol-border-secondary">
+                  <div class="flexCol-12">
+                    <div class="fieldItem">
+                      <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
+                      <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            </div>
+          </div>
+          <div class="accordion-child">
+            <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+              <%= polyglot.t('OrderDetails') %>
+            </div>
+            <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+              <div class="flexRow">
+                <div class="flexRow custCol-border-secondary">
+                  <div class="flexCol-12">
+                    <div class="fieldItem">
+                      <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
+                      <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            </div>
+          </div>
+          <div class="accordion-child">
+            <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+              <%= polyglot.t('OrderSummary') %>
+            </div>
+            <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+              <div class="flexRow">
+                <div class="flexRow custCol-border-secondary">
+                  <div class="flexCol-12">
+                    <div class="fieldItem">
+                      <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
+                      <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,8 +1,9 @@
 var __ = require('underscore'),
   Backbone = require('backbone'),
-  $ = require('jquery');
+  $ = require('jquery'),
+  loadTemplate = require('../utils/loadTemplate'),
+  buyWizardVw = require('./buyWizardVw');
 Backbone.$ = $;
-var loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
 
@@ -17,6 +18,8 @@ module.exports = Backbone.View.extend({
     var self = this;
     //don't render immediately, wait for the model to update itself with converted prices
     this.listenTo(this.model, 'change:priceSet', this.render);
+    this.subViews = [];
+    this.subModels = [];
   },
 
   render: function(){
@@ -52,10 +55,20 @@ module.exports = Backbone.View.extend({
   },
 
   buyClick: function(){
-    console.log("placeholder for buy button clicked");
+    "use strict";
+    var self = this,
+        buyModel = new Backbone.Model();
+    buyModel.set(this.model.attributes);
+    this.buyWizardView = new buyWizardVw({model:buyModel, parentEl: '#modalHolder'});
+    this.subViews.push(this.buyWizardView);
+    this.subModels.push(buyModel);
   },
 
   close: function(){
+    "use strict";
+    __.each(this.subModels, function(subModel) {
+      subModel.off();
+    });
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
@@ -64,7 +77,9 @@ module.exports = Backbone.View.extend({
         subView.remove();
       }
     });
-    this.unbind();
+
+    this.model.off();
+    this.off();
     this.remove();
     delete this.$el;
     delete this.el;

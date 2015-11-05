@@ -4,12 +4,7 @@
       <h2 class="ion-close-round"></h2>
     </div>
     <div class="modal-hero js-storeWizardHero shadow-inner1-light"
-    <% if(ob.page.profile.header_hash) { %>
-    style="background-image: url(<%- ob.headerURL %>);"
-    <% }else{ %>
-    style="background-image: url(imgs/defaultBanner.png)"
-    <% } %>
-    ></div>
+    style="background-image: url(<%- ob.headerURL %>),url(imgs/defaultBanner.png);"></div>
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
       <div class="accordion-window">
         <div class="accordion-child">
