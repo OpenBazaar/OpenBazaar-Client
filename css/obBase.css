@@ -1674,7 +1674,7 @@ input[type="checkbox"].fieldItem + label span {
 .user-page-content {
   position: relative;
   width: 950px;
-  /*z-index: 99;*/
+  z-index: 3;
 }
 
 .capitalize {
@@ -1732,12 +1732,13 @@ input[type="checkbox"].fieldItem + label span {
 .user-page-navigation {
   width: 950px;
   position: relative;
+  z-index: 3;
 }
 
 .user-page-navigation-slim {
   position: fixed;
   top: 102px;
-  z-index: 100;
+  z-index: 5;
   box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
 }
 
@@ -1748,6 +1749,7 @@ input[type="checkbox"].fieldItem + label span {
 .user-page-header {
   position: relative; 
   height: 400px;
+  z-index: 2;
 }
 
 .user-page-header-slim {
@@ -1759,12 +1761,13 @@ input[type="checkbox"].fieldItem + label span {
   height: 54px;
   width: 950px;
   background: #281B2E;
-  z-index: 100;
+  z-index: 4;
   padding: 0;
 }
 
 .userPage-subViews {
   position: relative;
+  z-index: 5;
 }
 
 .icon-large {
@@ -1956,7 +1959,7 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .headerCropper.banner-large {
-  z-index: 1;
+  z-index: 3;
 }
 
 .headerCropper .cropit-image-zoom-input {
