@@ -155,8 +155,8 @@ form {
 
 .bar {
   height: 50px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .bar.barFlush {
@@ -567,6 +567,37 @@ form {
   cursor: pointer;
 }
 
+.theme-container {
+  margin-right: 2%;
+  width: 23%;
+  text-align: center;
+}
+
+.theme-background {
+  border: solid 1px #063753;
+  background: black;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  height: 120px;
+  width: 100%;
+}
+
+.theme-header {
+  background-color: #317DB8;
+  height: 40px;
+  margin: auto;
+  margin-top: 8px;
+  width: 85%;
+}
+
+.theme-body {
+  height: 65px;
+  background-color: #086A9E;
+  margin: auto;
+  width: 85%;
+}
+
 /*========== typography ==========*/
 
 h1,h2,h3 {
@@ -586,11 +617,11 @@ h3 {
 }
 
 h5 {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .h6, h6 {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 [class *= "ion-"]:before {
@@ -1802,8 +1833,9 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 30px;
+  bottom: 46px;
   color: #fff;
+  font-size: 17px;
   width: 70%;
   margin: 0 15%;
   text-align: center;
@@ -1815,10 +1847,17 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-accordion .btn-bar{
   border-radius: 0;
-  font-size: 13px;
+  font-size: 14px;
   height: 50px;
   line-height: 50px;
   margin: 0;
+  opacity: .75;
+}
+.modal .homeModal-accordion .btn-bar .btn{
+  opacity: .75;
+}
+
+.modal .homeModal-accordion .btn-bar:hover{
   opacity: 1;
 }
 
@@ -1845,11 +1884,13 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-accordion .accordion-child {
   width: 525px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .modal .homeModal-settings,
 .modal .homeModal-settings.flexRow {
-  height: 178px;
+  height: 230px;
   overflow-y: auto;
   background-color: #086A9E;
 }
@@ -1859,10 +1900,11 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .modal .homeModal-avatarPreview {
-  background-color: #327EB8;
-  border-radius: 70px;
+  background: url('../imgs/defaultUser.png') 100% 100%;
+  background-size: cover;
+  border-radius: 3px;
   height: 130px;
-  width: 130px;
+  width: 142px;
   margin-top: 30px;
 }
 
@@ -2269,6 +2311,10 @@ input[type="checkbox"].fieldItem + label span {
   margin: 0;
 }
 
+#ov1  .marginRight3 {
+  margin-right: 3px;
+}
+
 #ov1  .marginRight5 {
   margin-right: 5px;
 }
@@ -2316,6 +2362,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .marginBottom2 {
   margin-bottom: 2px;
+}
+
+#ov1  .marginBottom20 {
+  margin-bottom: 20px;
 }
 
 #ov1  .marginBottom40 {
@@ -2399,6 +2449,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .cursorDefault {
   cursor: default;
+}
+
+#ob1 .backgroundTransparent {
+  background: transparent;
 }
 
 #ob1 .fontWeight200 {
