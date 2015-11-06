@@ -340,10 +340,14 @@ module.exports = Backbone.View.extend({
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
       $('#obContainer').scrollTop(367);
-    }else if(state === "itemNew") {
+    }else if(state === "itemNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(367);
       this.sellItem();
+    } else if(state === "createStore") {
+      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      this.addTabToHistory('about');
+      this.createStore();
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
@@ -370,6 +374,8 @@ module.exports = Backbone.View.extend({
     currentAddress = this.model.get('page').profile.guid + "/" + addressState;
     if(addressState === "item") {
       currentAddress += "/"+ hash;
+    } else if(addressState === "createStore"){
+      currentAddress = this.model.get('page').profile.guid;
     }
     window.obEventBus.trigger("setAddressBar", currentAddress);
   },

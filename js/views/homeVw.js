@@ -8,7 +8,6 @@ var fs = require('fs'),//TODO: Remove FS - it is not used?
     itemListView = require('./itemListVw'),
     storeListView = require('./userListVw'),
     userProfileModel = require('../models/userProfileMd'),
-    storeWizardVw = require('./storeWizardVw'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
@@ -180,26 +179,7 @@ module.exports = Backbone.View.extend({
 
   createStore: function() {
     "use strict";
-    var self = this,
-        storeWizardModel = new Backbone.Model();
-
-    //create store modal opens on user page
-    Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/about', {trigger: true});
-    
-    //copy the view model into the new wizard model
-    storeWizardModel.set(this.model.attributes);
-    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder', socketView: this.socketView});
-    this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
-    this.subViews.push(this.storeWizardView);
-  },
-
-  storeCreated: function() {
-    "use strict";
-    this.storeWizardView.closeWizard();
-    this.$el.find('.js-homeCreateStore').addClass('hide');
-    this.$el.find('.js-homeMyPage').removeClass('hide');
-    //if updates to this page change the page, it will need to be reloaded with the code below
-    //Backbone.history.navigate('#home', {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/createStore', {trigger: true});
   },
 
   close: function(){
