@@ -1744,7 +1744,8 @@ input[type="checkbox"].fieldItem + label span {
   color: #fff;
   font-size: 13px;
   padding: 10px 0;
-  width: 450px;
+  width: 425px;
+  min-height: 250px;
 }
 
 .popMenu-notificationsHeader {
