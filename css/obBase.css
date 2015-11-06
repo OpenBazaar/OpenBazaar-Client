@@ -387,7 +387,7 @@ form {
   position: absolute;
   opacity: .75;
   float: none;
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   z-index: 1;
 }
 
@@ -533,7 +533,7 @@ form {
   top: 0;
   left: 0;
   /* use fadeIn and fadeOut to change opacity */
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   padding-top: 25px;
   z-index: 1;
 }
@@ -1881,7 +1881,7 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .user-page-header {
-  position: relative; 
+  position: relative;
   height: 400px;
   z-index: 2;
 }
@@ -1913,11 +1913,11 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .photos-empty {
-  height: 110px; 
+  height: 110px;
   margin-top: 58px;
-  padding: 15px; 
+  padding: 15px;
   text-align: center;
-  width: 100%; 
+  width: 100%;
 }
 
 .helper-text {
