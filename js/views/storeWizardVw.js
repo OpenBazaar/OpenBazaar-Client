@@ -121,7 +121,7 @@ module.exports = Backbone.View.extend({
     this.moderatorCount++;
     this.$el.find('.js-storeWizardModeratorList').append(newModerator);
   },
-
+  
   blockClicks: function(e) {
     "use strict";
     e.stopPropagation();
