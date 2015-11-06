@@ -69,7 +69,9 @@ module.exports = Backbone.View.extend({
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    console.log(data);
+    if(data.id == this.socketNotificationID){
+      console.log(data);
+    }
   },
 
   initAccordion: function(targ){
