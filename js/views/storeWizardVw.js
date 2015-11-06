@@ -110,7 +110,7 @@ module.exports = Backbone.View.extend({
         '<div class="pad10 flexRow">' +
           '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
           '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100">' +
-            '<div class="thumbnail thumbnail-large-slim pull-left box-border"></div>' +
+            '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);"></div>' +
               '<div class="pull-left">' +
               '<div class="row10"><strong>' + data.moderator.name + '</strong></div>' +
               '<div>' + data.moderator.short_description + '</div>' +

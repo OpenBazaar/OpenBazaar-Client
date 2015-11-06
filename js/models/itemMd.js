@@ -158,6 +158,13 @@ module.exports = window.Backbone.Model.extend({
           };
         }
       }
+      //make sure policy exists
+      if(!response.vendor_offer.listing.policy){
+        response.vendor_offer.listing.policy = {
+          "terms_conditions": "",
+          "returns": ""
+        };
+      }
       //make sure image hashes are valid
       response.vendor_offer.listing.item.image_hashes = response.vendor_offer.listing.item.image_hashes.filter(function(hash){
         return hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40;
