@@ -5,7 +5,7 @@ Backbone.$ = $;
 
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
-    taggle = require('taggle'),
+    Taggle = require('taggle'),
     showErrorModal = require('../utils/showErrorModal.js'),
     chosen = require('../utils/chosen.jquery.min.js');
 
@@ -111,9 +111,13 @@ module.exports = Backbone.View.extend({
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
     shipsTo.val(shipsToValue);
 
+    var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
+    console.log(keywordTags);
+    keywordTags = keywordTags.filter(Boolean);
+    console.log(keywordTags);
     //activate tags plugin
     this.inputKeyword = new Taggle('inputKeyword', {
-      tags: this.model.get('vendor_offer').listing.item.keywords,
+      tags: keywordTags,
       saveOnBlur: true
     });
 
@@ -338,7 +342,6 @@ module.exports = Backbone.View.extend({
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
-    this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
     //convert number field to string field
     this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
     this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
@@ -362,6 +365,11 @@ module.exports = Backbone.View.extend({
       if(imHash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imHash.length === 40){
         formData.append('images', imHash);
       }
+    });
+
+    __.each(this.inputKeyword.getTagValues(), function(keyword){
+      "use strict";
+      formData.append('keywords', keyword);
     });
 
     //if this is an existing product, do not delete the images
