@@ -2,7 +2,7 @@ var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
   defaults: {
-    beenSet: false, //set this back to false when done testing
+    beenSet: true, //set this back to false when done testing
     guid: "", //set by app.js
     //name: "Your Name",
     //handle: "Blockchain ID",
