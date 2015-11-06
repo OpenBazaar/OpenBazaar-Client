@@ -26,8 +26,8 @@ var defaultItem = {
           "UNITED_STATES"
         ],
         "est_delivery": {
-          "international": "N/A",
-          "domestic": "3-5 Business Days"
+          "international": "",
+          "domestic": ""
         },
         "shipping_origin": "UNITED_STATES",
         "flat_fee": {
@@ -41,21 +41,21 @@ var defaultItem = {
         "free": false
       },
       "item": {
-        "category": "None",
-        "sku": "0",
-        "description": "None",
+        "category": "",
+        "sku": "",
+        "description": "",
         "price_per_unit": {
           "fiat": {
             "price": "",
             "currency_code": "usd"
           }
         },
-        "title": "New Item",
-        "process_time": "0",
+        "title": "",
+        "process_time": "",
         "image_hashes": [],
         "nsfw": false,
         "keywords": [],
-        "condition": "New"
+        "condition": ""
       },
       "moderators": [
         {
@@ -78,8 +78,8 @@ var defaultItem = {
         }
       ],
       "policy": {
-        "terms_conditions": "None",
-        "returns": "None"
+        "terms_conditions": "",
+        "returns": ""
       },
       "id": {
         "pubkeys": {
@@ -310,6 +310,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
           "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
+          "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
           
       document.body.appendChild(customStyleTag);
@@ -339,10 +340,14 @@ module.exports = Backbone.View.extend({
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
       $('#obContainer').scrollTop(367);
-    }else if(state === "itemNew") {
+    }else if(state === "itemNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(367);
       this.sellItem();
+    } else if(state === "createStore") {
+      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      this.addTabToHistory('about');
+      this.createStore();
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
@@ -369,6 +374,8 @@ module.exports = Backbone.View.extend({
     currentAddress = this.model.get('page').profile.guid + "/" + addressState;
     if(addressState === "item") {
       currentAddress += "/"+ hash;
+    } else if(addressState === "createStore"){
+      currentAddress = this.model.get('page').profile.guid;
     }
     window.obEventBus.trigger("setAddressBar", currentAddress);
   },
@@ -634,6 +641,7 @@ module.exports = Backbone.View.extend({
     $('.user-page-content').addClass('pull-up4');
     $('.user-customize-cover-photo').show();
     $('.user-page-header').addClass('shadow-inner1-strong');
+    $('#obContainer').animate({ scrollTop: "0" });
   },
 
   customizeColorClick: function(e) {

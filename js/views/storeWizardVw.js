@@ -108,20 +108,20 @@ module.exports = Backbone.View.extend({
     var moderatorAvatarURL = this.model.get('user').server_url+"get_image?hash=" + data.moderator.avatar_hash;
     var newModerator = $(
         '<div class="pad10 flexRow">' +
-          '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
-          '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100">' +
-            '<div class="thumbnail thumbnail-large-slim pull-left box-border"></div>' +
-              '<div class="pull-left">' +
-              '<div class="row10"><strong>' + data.moderator.name + '</strong></div>' +
-              '<div>' + data.moderator.short_description + '</div>' +
-            '</div>' +
-          '</label>' +
+        '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
+        '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100">' +
+        '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);"></div>' +
+        '<div class="pull-left">' +
+        '<div class="row10"><strong>' + data.moderator.name + '</strong></div>' +
+        '<div>' + data.moderator.short_description + '</div>' +
+        '</div>' +
+        '</label>' +
         '</div>'
     );
     this.moderatorCount++;
     this.$el.find('.js-storeWizardModeratorList').append(newModerator);
   },
-
+  
   blockClicks: function(e) {
     "use strict";
     e.stopPropagation();
