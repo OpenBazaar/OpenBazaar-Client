@@ -10,7 +10,8 @@ module.exports = Backbone.View.extend({
     'click .js-descriptionTab': 'descriptionClick',
     'click .js-reviewsTab': 'reviewsClick',
     'click .js-shippingTab': 'shippingClick',
-    'click .js-buyButton': 'buyClick'
+    'click .js-buyButton': 'buyClick',
+    'click .js-viewFullTitle': 'viewFullTitle'
   },
 
   initialize: function(){
@@ -34,6 +35,10 @@ module.exports = Backbone.View.extend({
 
   descriptionClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-description'));
+  },
+
+  viewFullTitle: function(e){
+    $(e.target).closest('.page-contractTitle').html(this.model.get('vendor_offer').listing.item.title);
   },
 
   reviewsClick: function(e){
