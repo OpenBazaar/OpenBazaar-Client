@@ -1,6 +1,6 @@
 <div class="flexRow custCol-border-secondary">
   <div class="flexRow bar barTxt pad20">
-    <a class="js-returnToStore textOpacity75"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a><span class="textOpacity75">&nbsp;>&nbsp;<%- ob.vendor_offer.listing.item.title %></span>
+    <a class="js-returnToStore textOpacity75"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a><span class="textOpacity75" title='<%- ob.vendor_offer.listing.item.title %>'>&nbsp;>&nbsp;<%- ob.vendor_offer.listing.item.truncated_title || ob.vendor_offer.listing.item.title %></span>
   </div>
 </div>
 

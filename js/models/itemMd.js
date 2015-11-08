@@ -165,6 +165,9 @@ module.exports = window.Backbone.Model.extend({
           "returns": ""
         };
       }
+      if(response.vendor_offer.listing.item.title.length > 60){
+        response.vendor_offer.listing.item.truncated_title = response.vendor_offer.listing.item.title.substring(0,60);
+      }
       //make sure image hashes are valid
       response.vendor_offer.listing.item.image_hashes = response.vendor_offer.listing.item.image_hashes.filter(function(hash){
         return hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40;
