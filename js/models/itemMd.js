@@ -134,7 +134,7 @@ module.exports = window.Backbone.Model.extend({
               }
             },
             "free": true
-          }
+          };
         }
       //if the shipping flat_fee  section is not returned it breaks the edit template. Restore it here
       if(!response.vendor_offer.listing.shipping.flat_fee){
@@ -145,7 +145,7 @@ module.exports = window.Backbone.Model.extend({
               "domestic": ""
             }
           }
-        }
+        };
       }
       if(!response.vendor_offer.listing.shipping.free == true && response.vendor_offer.listing.shipping.flat_fee){
         if (response.vendor_offer.listing.shipping.flat_fee.bitcoin){
