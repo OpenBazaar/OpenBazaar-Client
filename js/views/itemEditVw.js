@@ -262,7 +262,7 @@ module.exports = Backbone.View.extend({
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         }else if (data.success === false){
-          showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          showErrorModal(window.polyglot.t('errors.saveError') + ": <br/><br/><i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -408,7 +408,7 @@ module.exports = Backbone.View.extend({
           if (returnedId && data.success === true && returnedId != data.id){
             deleteThisItem(data.id);
           }else if (data.success === false){
-            showErrorModal("Changes Could Not Be Saved","Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+            showErrorModal(window.polyglot.t('errors.saveError') + ": <br/><br/><i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
             self.trigger('saveNewDone', data.id);
@@ -427,7 +427,7 @@ module.exports = Backbone.View.extend({
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
-      showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.<br/><br/>"+invalidInputList+"</i>");
+      showErrorModal(window.polyglot.t('errors.missingError') + "<br/><br/><i>"+invalidInputList+"</i>");
     }
   },
 

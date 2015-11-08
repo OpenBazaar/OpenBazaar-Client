@@ -116,6 +116,13 @@ module.exports = Backbone.Model.extend({
         Categories: "Categories",
         UpTo3: "Up to 3",
         AboutYourStore: "A description of your store",
+        errorMessages: {
+          saveError: "Data could not be saved.",
+          missingError: "Data could not be saved. Some fields are missing or incorrect.",
+          serverError: "An incorrect reply was received from the server.",
+          userNotFoundError: "This person's information could not be loaded. They may have gone offline.",
+          notFoundError: "Data could not be loaded for:"
+        },
         nav: {
           searchPlaceholder: "Enter handle or search",
           myPage: "My Page",
@@ -263,6 +270,13 @@ module.exports = Backbone.Model.extend({
         Categories: "Categorías",
         UpTo3: "Hasta 3",
         AboutYourStore: "Una descripción de su tienda",
+        errorMessages: {
+          saveError: "Los datos no pudo ser salvado.",
+          missingError: "Los datos no podía ser salvado Algunos campos no están presentes o incorrecta.",
+          serverError: "Una respuesta incorrecta se recibió desde el servidor.",
+          userNotFoundError: "La información de este persona no se pudo cargar Ellos pueden haber ido fuera de línea.",
+          notFoundError: "Los datos no pudo ser cargado para:"
+        },
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi página",

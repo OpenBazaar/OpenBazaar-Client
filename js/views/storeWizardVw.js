@@ -183,9 +183,9 @@ module.exports = Backbone.View.extend({
           if (data.success === true){
             self.trigger('storeCreated');
           }else if (data.success === false){
-            self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+            self.showErrorModal(window.polyglot.t('errors.saveError') + ": <br/><br/><i>" + data.reason + "</i>");
           }else{
-            self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>Incorrect reply from server.</i>");
+            self.showErrorModal(window.polyglot.t('errors.saveError') + ": <br/><br/><i>" + window.polyglot.t('errors.serverError') + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -195,7 +195,7 @@ module.exports = Backbone.View.extend({
         }
       });
     }else{
-      self.showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.</i>");
+      self.showErrorModal(window.polyglot.t('errors.saveError'));
     }
 
   },
