@@ -112,9 +112,7 @@ module.exports = Backbone.View.extend({
     shipsTo.val(shipsToValue);
 
     var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
-    console.log(keywordTags);
-    keywordTags = keywordTags.filter(Boolean);
-    console.log(keywordTags);
+    keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
     //activate tags plugin
     this.inputKeyword = new Taggle('inputKeyword', {
       tags: keywordTags,
@@ -323,7 +321,8 @@ module.exports = Backbone.View.extend({
         formData,
         deleteThisItem,
         cCode = this.model.get('userCurrencyCode'),
-        submitForm = this.$el.find('#contractForm')[0];
+        submitForm = this.$el.find('#contractForm')[0],
+        keywordsArray = this.inputKeyword.getTagValues();
 
     deleteThisItem = function(newHash){
       $.ajax({
@@ -367,10 +366,14 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    __.each(this.inputKeyword.getTagValues(), function(keyword){
-      "use strict";
-      formData.append('keywords', keyword);
-    });
+    if(keywordsArray.length > 0){
+      __.each(keywordsArray, function(keyword){
+        "use strict";
+        formData.append('keywords', keyword);
+      });
+    } else {
+      formData.append('keywords', "");
+    }
 
     //if this is an existing product, do not delete the images
     if (self.model.get('id')) {
