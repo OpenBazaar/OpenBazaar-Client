@@ -2455,6 +2455,10 @@ input[type="checkbox"].fieldItem + label span {
   box-sizing: border-box;
 }
 
+#ov1 .width75px {
+  width: 75px;
+}
+
 #ov1 .width600 {
   width: 600px;
 }
