@@ -1,6 +1,15 @@
 <div class="flexRow custCol-border-secondary">
   <div class="flexRow bar barTxt pad20 textOpacity75">
-    <a class="js-returnToStore textOpacity1">All Items</a>&nbsp;>&nbsp;<%- ob.vendor_offer.listing.item.title %>
+    <div class="table">
+      <div>
+        <div class="width75px">
+          <a class="js-returnToStore textOpacity1">All Items</a>&nbsp;>&nbsp;
+        </div>
+        <div class="noOverflow">
+          <%- ob.vendor_offer.listing.item.title %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="flexRow border0">
@@ -17,7 +26,7 @@
 </div>
 <div class="flexCol-7 pad20Right">
   <div class="row20 rowTop20 clearfix">
-    <h1 class="page-contractTitle"><%- ob.vendor_offer.listing.item.title %></h1>
+    <h1 class="page-contractTitle noOverflow" title="<%- ob.vendor_offer.listing.item.title %>"><%- ob.vendor_offer.listing.item.title %></h1>
     <p class="margin0 marginTop2 textOpacity75 fontSize14">
       <%- ob.displayPrice %> (<%- ob.vendorBTCPrice %> btc) 
       <% if(ob.vendor_offer.listing.item.condition) { %>

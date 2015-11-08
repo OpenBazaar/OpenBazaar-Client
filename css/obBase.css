@@ -353,6 +353,7 @@ form {
 .table {
   display: table;
   table-layout: fixed;
+  width: 100%;
 }
 
 .table > div {
@@ -650,6 +651,12 @@ h5 {
 
 .allCaps {
   text-transform: uppercase;
+}
+
+.noOverflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /*========== skin classes ==========*/
 
@@ -2446,6 +2453,10 @@ input[type="checkbox"].fieldItem + label span {
 #ov1  .width100 {
   width: 100%;
   box-sizing: border-box;
+}
+
+#ov1 .width75px {
+  width: 75px;
 }
 
 #ov1 .width600 {
