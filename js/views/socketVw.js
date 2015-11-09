@@ -1,7 +1,6 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery'),
-    showErrorModal = require('../utils/showErrorModal.js');
+    $ = require('jquery');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -14,23 +13,42 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     //model is userModel passed in from router
-    var socketAddress = (this.model.get('server_url')).replace(/^(.*:)\/{2}([A-Za-z0-9\-\.]+)(:[0-9]+)?(.*)$/, 'ws://$2:18466');
+    var socketAddress = (this.model.get('server_url')).replace(/^(.*:)\/{2}([A-Za-z0-9\-\.]+)(:[0-9]+)?(.*)$/, 'wasdfsds://$2:18466');
     //socket should be opened when view is created, and stay open
     try{
       this.socketConnection = new WebSocket(socketAddress);
+      this.socketConnection.onopen = this.socketOpen();
+      this.socketConnection.onmessage = function (e) {
+        self.socketMessage(e);
+      };
+      this.socketConnection.onerror = function (e) {
+        self.socketError(e);
+      };
+      this.socketConnection.onclose = this.socketClose();
     } catch(exception){
-      console.log("Socket address of " + socketAddress + "has failed due to " + exception + ". Trying again with default address of ws://localhost:18466");
-      //use default socket
-      this.socketConnection = new WebSocket('ws://localhost:18466');
+      try{
+        console.log(socketAddress, window.polyglot.t('errorMessages.socketError') + "<br/><br/>" + exception);
+        //use default socket
+        this.socketConnection = new WebSocket('dsafsdws://localhost:18466');
+        this.socketConnection.onopen = this.socketOpen();
+        this.socketConnection.onmessage = function (e) {
+          self.socketMessage(e);
+        };
+        this.socketConnection.onerror = function (e) {
+          self.socketError(e);
+        };
+        this.socketConnection.onclose = this.socketClose();
+      }catch(exception){
+        console.log(exception);
+        //create a fake object so the rest of the view doesn't error out
+        this.socketConnection = {readyState: 0};
+        $('.js-loadingMessageModal').removeClass('hide');
+        $('.js-indexLoadingMsg1').text("WebSockets Cannot be reached.");
+        $('.js-indexLoadingMsg2').text("Stored URL of " + socketAddress + "has failed. Default address of ws://localhost:18466 has also failed.");
+        $('.js-indexLoadingMsg3').text("Interface will continue loading, but some functionality will not be available.");
+      }
     }
-    this.socketConnection.onopen = this.socketOpen();
-    this.socketConnection.onmessage = function (e) {
-      self.socketMessage(e);
-    };
-    this.socketConnection.onerror = function (e) {
-      self.socketError(e);
-    };
-    this.socketConnection.onclose = this.socketClose();
+
   },
 
   socketOpen: function() {

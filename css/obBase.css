@@ -522,6 +522,7 @@ form {
   /* use fadeIn and fadeOut to change opacity */
   transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
   padding-top: 25px;
+  z-index: 1;
 }
 
 .modal.modal-navOffset {
