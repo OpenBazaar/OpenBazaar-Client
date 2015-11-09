@@ -40,21 +40,20 @@
   </div>
 
   <div class="flexRow shadow-inner1 user-page-header">
-    <!--<form id="userPageImageForm">
-      <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
-      <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
-    </form>-->
-    <!-- This wraps the whole cropper -->
-    <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-      <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
-           style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);"></div>
-    <div class="pull-left">
-      <div class="marginLeft12 push-down5">
-        <h1 class="page-userNameLarge"><%- ob.page.profile.name %></h1>
-        <div class="textSize16px"><%- ob.page.profile.handle %></div>
+    <div class="rowItem positionAbsolute bottom0 width600 pad20">
+      <div class="table">
+        <div>
+          <div class="thumbnail thumbnail-large js-userPageAvatar"
+               style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+          </div>
+          <div class="pad15 push-down5 noOverflow">
+            <span class="h1 page-userNameLarge"><%- ob.page.profile.name %></span>
+            <br />
+            <span class="textSize16px"><%- ob.page.profile.handle %></span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <div class="bar user-page-navigation-filler hidden custCol-primary" style="display: none"></div>
@@ -62,47 +61,49 @@
     <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
+    <% if(ob.page.profile.vendor) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
+    <% } %>
     <div class="navEnd pad15">
-      <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
+      <div class="ctrlGroup hide js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-sellItem">
-          <span class="ion-plus-round fontSize10 marginRight2 textOpacity75"></span>
+          <span class="ion-social-bitcoin fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('nav.createListing') %>
         </a>
         <a class="btn btn-txt custCol-primary js-createStore">
-          <span class="ion-plus-round fontSize10 marginRight2 textOpacity75"></span>
-          <%= polyglot.t('CreateStore') %>
+          <span class="ion-social-bitcoin  fontSize11 marginRight2 textOpacity75"></span>
+          <%= polyglot.t('CreateStore') %>  
         </a>
       </div>
-      <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
+      <div class="ctrlGroup hide js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-customize">
-          <span class="ion-paintbrush fontSize10 marginRight2 textOpacity75"></span>
+          <span class="ion-paintbucket fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('Customize') %> 
         </a>
       </div>
-      <div class="ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
-        <a class="btn btn-txt custCol-primary js-follow">
+      <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls pull-up48">
+        <a class="btn btn-txt custCol-primary hide js-follow">
           <span class="ion-person-add fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('Follow') %> 
         </a>
-        <a class="btn btn-txt custCol-primary js-unfollow">
+        <a class="btn btn-txt custCol-primary hide js-unfollow">
           <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('Unfollow') %> 
         </a>
       </div>
-      <div class="ctrlGroup js-notOwnPageButtons js-userPageControls pull-up48">
+      <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-message">
           <span class="ion-email fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('Message') %> 
         </a>
       </div>
-      <div class="ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
+      <div class="ctrlGroup hide js-itemButtons js-userPageControls pull-up48 hide">
         <a class="btn btn-txt custCol-primary js-editItem">
-          <span class="ion-edit fontSize10 marginRight2 textOpacity75"></span>
+          <span class="ion-edit fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('Edit') %>
         </a>
       </div>
-      <div class="ctrlGroup js-itemButtons js-userPageControls pull-up48 hide">
+      <div class="ctrlGroup hide js-itemButtons js-userPageControls pull-up48 hide">
         <a class="btn btn-txt custCol-primary confirmable js-deleteItem">
           <span class="preSpacer">
             <span class="ion-trash-b fontSize11 marginRight2 textOpacity75"></span>
@@ -118,21 +119,21 @@
           </span>
         </a>
       </div>
-      <div class="ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide textOpacity75">
+      <div class="ctrlGroup hide js-itemEditButtons pull-up48 js-userPageControls hide textOpacity75">
         <a class="btn btn-txt custCol-primary js-cancelItem"><%= polyglot.t('Cancel') %></a>
       </div>
-      <div class="ctrlGroup js-itemCustomizationButtons pull-up48 js-userPageControls hide textOpacity75">
+      <div class="ctrlGroup hide js-itemCustomizationButtons pull-up48 js-userPageControls hide textOpacity75">
         <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
       </div>
-      <div class="ctrlGroup js-itemEditButtons pull-up48 js-userPageControls hide">
+      <div class="ctrlGroup hide js-itemEditButtons pull-up48 js-userPageControls hide">
         <a class="btn btn-txt custCol-primary js-saveItem">
-          <span class="ion-checkmark-round fontSize10 marginRight2 textOpacity75"></span>
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
         </a>
       </div>
-      <div class="ctrlGroup js-itemCustomizationButtons pull-up48 js-userPageControls hide">
+      <div class="ctrlGroup hide js-itemCustomizationButtons pull-up48 js-userPageControls hide">
         <a class="btn btn-txt custCol-primary js-saveCustomization">
-          <span class="ion-checkmark-round fontSize10 marginRight2 textOpacity75"></span>
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
         </a>
       </div>

@@ -5,7 +5,7 @@ Backbone.$ = $;
 
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
-    taggle = require('taggle'),
+    Taggle = require('taggle'),
     showErrorModal = require('../utils/showErrorModal.js'),
     chosen = require('../utils/chosen.jquery.min.js');
 
@@ -14,17 +14,31 @@ module.exports = Backbone.View.extend({
   events: {
     'click #shippingFreeTrue': 'disableShippingPrice',
     'click #shippingFreeFalse': 'enableShippingPrice',
-    //'change .js-itemImageUpload': 'uploadImage',
     'change .js-itemImageUpload': 'resizeImage',
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'focus #inputExpirationDate': 'addDefaultTime',
+    'click .js-itemEditClearDate': 'clearDate'
   },
 
   initialize: function(){
-    var self=this;
-    var hashArray = this.model.get('vendor_offer').listing.item.image_hashes;
+    var self=this,
+        hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
+        nowDate = new Date(),
+        nowMonth = nowDate.getMonth()+ 1;
+
+    function padTime(val){
+      "use strict";
+      if(val >= 10){
+        return val;
+      } else {
+        return "0" + val;
+      }
+    }
+
+    this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
       self.combinedImagesArray.push(self.model.get('server_url')+"get_image?hash="+hash);
@@ -35,6 +49,7 @@ module.exports = Backbone.View.extend({
     //add existing hashes to the list to be uploaded on save
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
+    self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
 
     this.render();
   },
@@ -95,9 +110,11 @@ module.exports = Backbone.View.extend({
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
     shipsTo.val(shipsToValue);
 
+    var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
+    keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
     //activate tags plugin
     this.inputKeyword = new Taggle('inputKeyword', {
-      tags: this.model.get('vendor_offer').listing.item.keywords,
+      tags: keywordTags,
       saveOnBlur: true
     });
 
@@ -149,6 +166,21 @@ module.exports = Backbone.View.extend({
       this.disableShipping();
       this.disableShippingPrice();
     }
+  },
+
+  addDefaultTime: function(e){
+    "use strict";
+    var timeInput = this.$el.find('#inputExpirationDate'),
+        currentValue = timeInput.val();
+    if(!currentValue){
+      timeInput.val(this.defaultDate);
+    }
+    this.$el.find('.js-itemEditClearDateWrapper').removeClass('hide');
+  },
+
+  clearDate: function(){
+    "use strict";
+    this.$el.find('#inputExpirationDate').val('');
   },
 
   resizeImage: function(){
@@ -229,7 +261,7 @@ module.exports = Backbone.View.extend({
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         }else if (data.success === false){
-          showErrorModal("Changes Could Not Be Saved", "Uploading image(s) has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+          showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -288,7 +320,8 @@ module.exports = Backbone.View.extend({
         formData,
         deleteThisItem,
         cCode = this.model.get('userCurrencyCode'),
-        submitForm = this.$el.find('#contractForm')[0];
+        submitForm = this.$el.find('#contractForm')[0],
+        keywordsArray = this.inputKeyword.getTagValues();
 
     deleteThisItem = function(newHash){
       $.ajax({
@@ -307,7 +340,6 @@ module.exports = Backbone.View.extend({
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
-    this.$el.find('#realInputKeywords').val(this.inputKeyword.getTagValues().join(","));
     //convert number field to string field
     this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
     this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
@@ -332,6 +364,15 @@ module.exports = Backbone.View.extend({
         formData.append('images', imHash);
       }
     });
+
+    if(keywordsArray.length > 0){
+      __.each(keywordsArray, function(keyword){
+        "use strict";
+        formData.append('keywords', keyword);
+      });
+    } else {
+      formData.append('keywords', "");
+    }
 
     //if this is an existing product, do not delete the images
     if (self.model.get('id')) {
@@ -366,7 +407,7 @@ module.exports = Backbone.View.extend({
           if (returnedId && data.success === true && returnedId != data.id){
             deleteThisItem(data.id);
           }else if (data.success === false){
-            showErrorModal("Changes Could Not Be Saved","Saving has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
             self.trigger('saveNewDone', data.id);
@@ -385,7 +426,7 @@ module.exports = Backbone.View.extend({
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
-      showErrorModal("Changes Could Not Be Saved", "Saving has failed due to the following error: <br/><br/><i>Some required fields are missing or invalid.<br/><br/>"+invalidInputList+"</i>");
+      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
     }
   },
 

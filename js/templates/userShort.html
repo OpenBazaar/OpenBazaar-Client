@@ -1,19 +1,23 @@
 <div class="rowItem js-userShort clickable padding2015" data-guid="<%= ob.guid %>">
-  <div class="thumbnail pull-left custCol-border-secondary"
-  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
-  <div class="pull-left txt-unleaded">
-    <div class="marginLeft10 marginTop2 clearfix">
-      <div class="textSize14px marginRight5 marginBottom2"><%- ob.name %></div>
-      <div class="textSize14px txt-fade textWeightNormal">
-        <% if(ob.handle) { %>
-          <%- ob.handle %>
-        <% }else{ %>
-          <%- ob.guid %>
-        <% } %>
+  <div class="table">
+    <div>
+      <div class="thumbnail custCol-border-secondary"
+                     style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
+      <div class="txt-unleaded">
+        <div class="marginLeft10 marginTop2 clearfix">
+          <div class="textSize14px marginRight5 marginBottom2 noOverflow" title="<%- ob.name %>"><%- ob.name %></div>
+          <div class="textSize14px txt-fade textWeightNormal">
+            <% if(ob.handle) { %>
+            <%- ob.handle %>
+            <% }else{ %>
+            <%- ob.guid %>
+            <% } %>
+          </div>
+        </div>
+        <div class="marginLeft10">
+          <div class="testSize15px txt-fade"><%- ob.short_description %></div>
+        </div>
       </div>
-    </div>
-    <div class="marginLeft10">
-      <div class="testSize15px txt-fade"><%- ob.short_description %></div>
     </div>
   </div>
 </div>

@@ -20,7 +20,7 @@ module.exports = Backbone.Router.extend({
   },
 
   routes: {
-    "": "home",
+    "": "userPage",
     "home": "home",
     "myPage": "userPage",
     "userPage": "userPage",

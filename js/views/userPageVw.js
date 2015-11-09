@@ -26,8 +26,8 @@ var defaultItem = {
           "UNITED_STATES"
         ],
         "est_delivery": {
-          "international": "N/A",
-          "domestic": "3-5 Business Days"
+          "international": "",
+          "domestic": ""
         },
         "shipping_origin": "UNITED_STATES",
         "flat_fee": {
@@ -41,21 +41,21 @@ var defaultItem = {
         "free": false
       },
       "item": {
-        "category": "None",
-        "sku": "0",
-        "description": "None",
+        "category": "",
+        "sku": "",
+        "description": "",
         "price_per_unit": {
           "fiat": {
             "price": "",
             "currency_code": "usd"
           }
         },
-        "title": "New Item",
-        "process_time": "0",
+        "title": "",
+        "process_time": "",
         "image_hashes": [],
         "nsfw": false,
         "keywords": [],
-        "condition": "New"
+        "condition": ""
       },
       "moderators": [
         {
@@ -78,8 +78,8 @@ var defaultItem = {
         }
       ],
       "policy": {
-        "terms_conditions": "None",
-        "returns": "None"
+        "terms_conditions": "",
+        "returns": ""
       },
       "id": {
         "pubkeys": {
@@ -171,7 +171,7 @@ module.exports = Backbone.View.extend({
     };
 
     //show loading modal before fetching user data
-    $('.js-loadingModal').removeClass('fadeOut');
+    $('.js-loadingModal').removeClass('hide');
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -192,7 +192,7 @@ module.exports = Backbone.View.extend({
         //don't render if view has been closed and the $el has been deleted
         if(self.$el){
           if (response.profile){
-            $('.js-loadingModal').addClass('fadeOut');
+            $('.js-loadingModal').addClass('hide');
             if (self.options.ownPage === true){
               model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
               model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
@@ -202,7 +202,7 @@ module.exports = Backbone.View.extend({
             }
           }else{
             //model was returned as a blank object
-            showErrorModal("User Not Found", "Information for user " + self.pageID + " cannot be loaded. They may have gone offline.");
+            showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           }
 
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
@@ -211,7 +211,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        showErrorModal("User Not Found", "Information for user "+self.pageID+" cannot be loaded. They may have gone offline.");
+        showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
       }
@@ -310,6 +310,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
           "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
+          "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
           
       document.body.appendChild(customStyleTag);
@@ -339,10 +340,14 @@ module.exports = Backbone.View.extend({
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
       $('#obContainer').scrollTop(367);
-    }else if(state === "itemNew") {
+    }else if(state === "itemNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(367);
       this.sellItem();
+    } else if(state === "createStore") {
+      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      this.addTabToHistory('about');
+      this.createStore();
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
@@ -369,6 +374,8 @@ module.exports = Backbone.View.extend({
     currentAddress = this.model.get('page').profile.guid + "/" + addressState;
     if(addressState === "item") {
       currentAddress += "/"+ hash;
+    } else if(addressState === "createStore"){
+      currentAddress = this.model.get('page').profile.guid;
     }
     window.obEventBus.trigger("setAddressBar", currentAddress);
   },
@@ -426,7 +433,7 @@ module.exports = Backbone.View.extend({
         self.renderItems(model.get('listings'));
       },
       error: function(model, response){
-        showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
+        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
       }
     });
     this.followers.fetch({
@@ -440,7 +447,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
+        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
       }
     });
     this.following.fetch({
@@ -449,7 +456,7 @@ module.exports = Backbone.View.extend({
         self.renderFollowing(model.get('following'));
       },
       error: function(model, response){
-        showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
+        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
       }
     });
   },
@@ -529,16 +536,16 @@ module.exports = Backbone.View.extend({
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
         } else {
-          showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
+          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
           window.history.back();
         }
       },
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
         if(response.statusText){
-          showErrorModal("There Has Been An Error", "This item is not available. The error code is: " + response.statusText);
+          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         } else {
-          showErrorModal("There Has Been An Error","This item is not available or a blank object was returned by the server");
+          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         }
       }
     });
@@ -634,6 +641,7 @@ module.exports = Backbone.View.extend({
     $('.user-page-content').addClass('pull-up4');
     $('.user-customize-cover-photo').show();
     $('.user-page-header').addClass('shadow-inner1-strong');
+    $('#obContainer').animate({ scrollTop: "0" });
   },
 
   customizeColorClick: function(e) {
@@ -708,12 +716,12 @@ module.exports = Backbone.View.extend({
               self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
               self.saveUserPageModel();
             }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }else{
-              showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
+              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }
           }else if (data.success === false){
-            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+            showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -769,8 +777,7 @@ module.exports = Backbone.View.extend({
           self.setCustomStyles();
           self.setState(self.lastTab);
         }else if(data.success === false){
-          showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
-
+          showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){

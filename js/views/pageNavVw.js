@@ -39,9 +39,10 @@ module.exports = Backbone.View.extend({
     'click .js-closeStatus': 'closeStatusBar'
   },
 
-  initialize: function(){
+  initialize: function(options){
     "use strict";
     var self = this;
+    this.socketView = options.socketView;
     this.subViews = [];
     this.languages = new languagesModel();
     this.currentWindow = remote.getCurrentWindow();
@@ -56,7 +57,21 @@ module.exports = Backbone.View.extend({
       Backbone.history.loadUrl();
     });
 
+    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      this.handleSocketMessage(response);
+    });
+    this.socketNotificationID = Math.random().toString(36).slice(2);
+    this.socketView.getNotifications(this.socketNotificationID);
+
     this.render();
+  },
+
+  handleSocketMessage: function(response) {
+    "use strict";
+    var data = JSON.parse(response.data);
+    if(data.id == this.socketNotificationID){
+      console.log(data);
+    }
   },
 
   initAccordion: function(targ){
