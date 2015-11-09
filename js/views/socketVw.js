@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    showErrorModal = require('../utils/showErrorModal.js');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -15,10 +16,20 @@ module.exports = Backbone.View.extend({
     //model is userModel passed in from router
     var socketAddress = (this.model.get('server_url')).replace(/^(.*:)\/{2}([A-Za-z0-9\-\.]+)(:[0-9]+)?(.*)$/, 'ws://$2:18466');
     //socket should be opened when view is created, and stay open
-    this.socketConnection = new WebSocket(socketAddress);
+    try{
+      this.socketConnection = new WebSocket(socketAddress);
+    } catch(exception){
+      console.log("Socket address of " + socketAddress + "has failed due to " + exception + ". Trying again with default address of ws://localhost:18466");
+      //use default socket
+      this.socketConnection = new WebSocket('ws://localhost:18466');
+    }
     this.socketConnection.onopen = this.socketOpen();
-    this.socketConnection.onmessage = function(e){self.socketMessage(e)};
-    this.socketConnection.onerror = function(e){self.socketError(e)};
+    this.socketConnection.onmessage = function (e) {
+      self.socketMessage(e);
+    };
+    this.socketConnection.onerror = function (e) {
+      self.socketError(e);
+    };
     this.socketConnection.onclose = this.socketClose();
   },
 
@@ -52,7 +63,7 @@ module.exports = Backbone.View.extend({
 
   socketError: function(e) {
     "use strict";
-    console.log("error: "+ e)
+    console.log("error: "+ e);
   },
 
   socketClose: function(e) {
