@@ -123,7 +123,8 @@ module.exports = Backbone.Model.extend({
           serverError: "An incorrect reply was received from the server.",
           userError: "Information for this ID could not be found",
           userNotFoundError: "This person's information is not available. They may have gone offline.",
-          notFoundError: "Data could not be loaded for:"
+          notFoundError: "Data could not be loaded for:",
+          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466"
         },
         nav: {
           searchPlaceholder: "Enter handle or search",
@@ -279,7 +280,8 @@ module.exports = Backbone.Model.extend({
           serverError: "Una respuesta incorrecta se recibi&oacute; desde el servidor.",
           userError: "La informaci&oacute;n para este ID no se pudo encontrar",
           userNotFoundError: "La informaci&oacute;n de esta persona no est&aacute; disponible Es posible que hayan ido fuera de l&iacute;nea.",
-          notFoundError: "Los datos no pudo ser cargado para:"
+          notFoundError: "Los datos no pudo ser cargado para:",
+          socketError: "URL para WebSocket fall&oacute; Conexi&oacute;n a la toma con la direcci&oacute;n por defecto de ws://localhost:18466 "
         },
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
