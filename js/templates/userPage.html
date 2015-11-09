@@ -40,21 +40,20 @@
   </div>
 
   <div class="flexRow shadow-inner1 user-page-header">
-    <!--<form id="userPageImageForm">
-      <label for="userPageImageUpload" class="btn btn-c1 btn-txt rowTop20 fullCentered js-itemCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
-      <input type="file" name="image" id="userPageImageUpload" accept="image/*" class="hide js-userPageImageUpload">
-    </form>-->
-    <!-- This wraps the whole cropper -->
-    <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-      <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
-           style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);"></div>
-    <div class="pull-left">
-      <div class="marginLeft12 push-down5">
-        <h1 class="page-userNameLarge"><%- ob.page.profile.name %></h1>
-        <div class="textSize16px"><%- ob.page.profile.handle %></div>
+    <div class="rowItem positionAbsolute bottom0 width600 pad20">
+      <div class="table">
+        <div>
+          <div class="thumbnail thumbnail-large js-userPageAvatar"
+               style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+          </div>
+          <div class="pad15 push-down5 noOverflow">
+            <span class="h1 page-userNameLarge"><%- ob.page.profile.name %></span>
+            <br />
+            <span class="textSize16px"><%- ob.page.profile.handle %></span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <div class="bar user-page-navigation-filler hidden custCol-primary" style="display: none"></div>

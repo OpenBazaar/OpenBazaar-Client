@@ -171,7 +171,7 @@ module.exports = Backbone.View.extend({
     };
 
     //show loading modal before fetching user data
-    $('.js-loadingModal').removeClass('fadeOut');
+    $('.js-loadingModal').removeClass('hide');
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -192,7 +192,7 @@ module.exports = Backbone.View.extend({
         //don't render if view has been closed and the $el has been deleted
         if(self.$el){
           if (response.profile){
-            $('.js-loadingModal').addClass('fadeOut');
+            $('.js-loadingModal').addClass('hide');
             if (self.options.ownPage === true){
               model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
               model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
@@ -202,7 +202,7 @@ module.exports = Backbone.View.extend({
             }
           }else{
             //model was returned as a blank object
-            showErrorModal("User Not Found", "Information for user " + self.pageID + " cannot be loaded. They may have gone offline.");
+            showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           }
 
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
@@ -211,7 +211,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        showErrorModal("User Not Found", "Information for user "+self.pageID+" cannot be loaded. They may have gone offline.");
+        showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
       }
@@ -433,7 +433,7 @@ module.exports = Backbone.View.extend({
         self.renderItems(model.get('listings'));
       },
       error: function(model, response){
-        showErrorModal("There Has Been An Error","Store listings are not available. The error code is: "+response.statusText);
+        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
       }
     });
     this.followers.fetch({
@@ -447,7 +447,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        showErrorModal("There Has Been An Error","Followers are not available. The error code is: "+response.statusText);
+        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
       }
     });
     this.following.fetch({
@@ -456,7 +456,7 @@ module.exports = Backbone.View.extend({
         self.renderFollowing(model.get('following'));
       },
       error: function(model, response){
-        showErrorModal("There Has Been An Error","Users your are following are not available. The error code is: "+response.statusText);
+        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
       }
     });
   },
@@ -536,16 +536,16 @@ module.exports = Backbone.View.extend({
           //model may arrive empty, set this flag to trigger a change event
           model.set({fetched: true});
         } else {
-          showErrorModal("There Has Been An Error","This item is not available. The server returned a blank object.");
+          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
           window.history.back();
         }
       },
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
         if(response.statusText){
-          showErrorModal("There Has Been An Error", "This item is not available. The error code is: " + response.statusText);
+          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         } else {
-          showErrorModal("There Has Been An Error","This item is not available or a blank object was returned by the server");
+          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         }
       }
     });
@@ -716,12 +716,12 @@ module.exports = Backbone.View.extend({
               self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
               self.saveUserPageModel();
             }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>Image hash returned is blank.</i>");
+              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }else{
-              showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>No image hash was returned.</i>");
+              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }
           }else if (data.success === false){
-            showErrorModal("Changes Could Not Be Saved", "Uploading the image has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
+            showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -777,8 +777,7 @@ module.exports = Backbone.View.extend({
           self.setCustomStyles();
           self.setState(self.lastTab);
         }else if(data.success === false){
-          showErrorModal("Changes Could Not Be Saved", "Customization has failed due to the following error: <br/><br/><i>" + data.reason + "</i>");
-
+          showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
