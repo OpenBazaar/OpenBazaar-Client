@@ -118,9 +118,10 @@ module.exports = Backbone.Model.extend({
         AboutYourStore: "A description of your store",
         errorMessages: {
           saveError: "Data could not be saved.",
-          missingError: "Data could not be saved. Some fields are missing or incorrect.",
+          getError: "Data could not be retrieved.",
+          missingError: "Some fields are missing or incorrect.",
           serverError: "An incorrect reply was received from the server.",
-          userNotFoundError: "This person's information could not be loaded. They may have gone offline.",
+          userNotFoundError: "This person's information is not available. They may have gone offline.",
           notFoundError: "Data could not be loaded for:"
         },
         nav: {

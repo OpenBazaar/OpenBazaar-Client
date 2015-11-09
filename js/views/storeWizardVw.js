@@ -183,9 +183,9 @@ module.exports = Backbone.View.extend({
           if (data.success === true){
             self.trigger('storeCreated');
           }else if (data.success === false){
-            self.showErrorModal(window.polyglot.t('errors.saveError') + ": <br/><br/><i>" + data.reason + "</i>");
+            self.showErrorModal(window.polyglot.t('errorMessages.saveError') + ": <br/><br/><i>" + data.reason + "</i>");
           }else{
-            self.showErrorModal(window.polyglot.t('errors.saveError') + ": <br/><br/><i>" + window.polyglot.t('errors.serverError') + "</i>");
+            self.showErrorModal(window.polyglot.t('errorMessages.saveError') + ": <br/><br/><i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -195,7 +195,7 @@ module.exports = Backbone.View.extend({
         }
       });
     }else{
-      self.showErrorModal(window.polyglot.t('errors.saveError'));
+      self.showErrorModal(window.polyglot.t('errorMessages.saveError'));
     }
 
   },
