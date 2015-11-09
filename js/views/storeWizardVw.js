@@ -6,7 +6,8 @@ var __ = require('underscore'),
     userProfileModel = require('../models/userProfileMd'),
     colpicker = require('../utils/colpick.js'),
     countriesModel = require('../models/countriesMd'),
-    taggle = require('taggle'),
+    showErrorModal = require('../utils/showErrorModal.js'),
+    Taggle = require('taggle'),
     chosen = require('../utils/chosen.jquery.min.js');
 
 module.exports = Backbone.View.extend({
@@ -79,7 +80,6 @@ module.exports = Backbone.View.extend({
       self.parentEl.append(self.$el);
       self.initAccordion('.js-storeWizardAccordion');
       self.setValues();
-      self.errorModal = $('.js-messageModal');
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
@@ -92,7 +92,9 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.$el.find('#locationSelect').val(this.model.get('user').country);
     //activate tags plugin
-    this.categoriesInput = new Taggle('categoriesInput');
+    this.categoriesInput = new Taggle('categoriesInput', {
+      saveOnBlur: true
+    });
   },
 
   handleSocketMessage: function(response) {
@@ -140,13 +142,6 @@ module.exports = Backbone.View.extend({
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
-  showErrorModal: function(errorTitle, errorMessage) {
-    "use strict";
-    this.errorModal.removeClass('fadeOut');
-    this.errorModal.find('.js-messageModal-title').text(errorTitle);
-    this.errorModal.find('.js-messageModal-message').html(errorMessage);
-  },
-
   saveWizard: function() {
     "use strict";
     var self = this,
@@ -183,9 +178,9 @@ module.exports = Backbone.View.extend({
           if (data.success === true){
             self.trigger('storeCreated');
           }else if (data.success === false){
-            self.showErrorModal(window.polyglot.t('errorMessages.saveError') + ": <br/><br/><i>" + data.reason + "</i>");
+            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
           }else{
-            self.showErrorModal(window.polyglot.t('errorMessages.saveError') + ": <br/><br/><i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -195,7 +190,7 @@ module.exports = Backbone.View.extend({
         }
       });
     }else{
-      self.showErrorModal(window.polyglot.t('errorMessages.saveError'));
+      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
     }
 
   },

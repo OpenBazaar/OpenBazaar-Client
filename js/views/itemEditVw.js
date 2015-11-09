@@ -14,7 +14,6 @@ module.exports = Backbone.View.extend({
   events: {
     'click #shippingFreeTrue': 'disableShippingPrice',
     'click #shippingFreeFalse': 'enableShippingPrice',
-    //'change .js-itemImageUpload': 'uploadImage',
     'change .js-itemImageUpload': 'resizeImage',
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
@@ -427,7 +426,7 @@ module.exports = Backbone.View.extend({
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
-      showErrorModal(window.polyglot.t('errorMessages.saveError'),window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
+      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
     }
   },
 
