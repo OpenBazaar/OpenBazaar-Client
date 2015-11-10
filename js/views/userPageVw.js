@@ -504,9 +504,8 @@ module.exports = Backbone.View.extend({
       avatar_hash: self.model.get('page').profile.avatar_hash,
       handle: self.model.get('page').profile.handle,
       ownPage: self.options.ownPage,
-      //userID: self.model.get('page').profile.guid,
-      itemHash: hash
-        //id: hash
+      itemHash: hash,
+      user: self.model.get('user')
     });
     this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //remove old item before rendering
@@ -939,8 +938,6 @@ module.exports = Backbone.View.extend({
     this.model.off();
     this.off();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 
 });

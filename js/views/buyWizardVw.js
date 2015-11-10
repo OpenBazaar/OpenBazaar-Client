@@ -1,7 +1,9 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    countriesModel = require('../models/countriesMd'),
+    chosen = require('../utils/chosen.jquery.min.js');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -11,13 +13,30 @@ module.exports = Backbone.View.extend({
   events: {
     'click .js-buyWizardModal': 'blockClicks',
     'click .js-closeBuyWizardModal': 'closeWizard',
+    'click .js-buyWizardNewAddressBtn': 'createNewAddress',
+    'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'blur input': 'validateInput'
   },
 
   initialize: function(options){
-    var self = this;
+    var self = this,
+        initialStreetAddress = this.model.get('user').ship_to_street + " " +
+            this.model.get('user').ship_to_city + " " +
+            this.model.get('user').ship_to_state + " " +
+            this.model.get('user').ship_to_postal_code + " " +
+            this.model.get('user').ship_to_country,
+        countries = new countriesModel();
+    initialStreetAddress = encodeURIComponent(initialStreetAddress);
     this.options = options || {};
     this.parentEl = $(options.parentEl);
+    //create the country select list
+    this.countryList = countries.get('countries');
+    this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput"></select>');
+    __.each(this.countryList, function(countryFromList, i){
+      self.countriesSelect.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
+    });
+    console.log(this.countriesSelect);
+    this.model.set("initialStreetAddress", initialStreetAddress);
     console.log(this.model);
     this.render();
   },
@@ -66,8 +85,29 @@ module.exports = Backbone.View.extend({
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-buyWizardModal').removeClass('fadeOut');
       $('#obContainer').addClass('blur');
+      //add all countries to the Ships To select list
+      self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
     });
     return this;
+  },
+
+  createNewAddress: function(){
+    "use strict";
+    this.$el.find('.js-buyWizardAddress').addClass('hide');
+    this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
+    //set chosen inputs
+    $('.chosen').chosen();
+  },
+
+  hideNewAddress: function(){
+    "use strict";
+    this.$el.find('.js-buyWizardAddress').removeClass('hide');
+    this.$el.find('.js-buyWizardNewAddress').addClass('hide');
+  },
+
+  saveNewAddress: function(){
+    "use strict";
+
   },
 
   blockClicks: function(e) {
@@ -98,8 +138,6 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 
 });

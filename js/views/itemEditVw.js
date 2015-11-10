@@ -441,7 +441,5 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });

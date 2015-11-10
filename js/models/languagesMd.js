@@ -120,6 +120,7 @@ module.exports = Backbone.Model.extend({
         ShipTo: "Ship To",
         OrderDetails: "Order Details",
         OrderSummary: "Order Summary",
+        NewAddress: "New Address",
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -281,6 +282,7 @@ module.exports = Backbone.Model.extend({
         OrderDetails: "Detalles Orden",
         OrderSummary : " Resumen Orden",
         AboutYourStore: "Una descripci&oacute;n de su tienda",
+        NewAddress: "Nueva direcci&oacute;n",
         errorMessages: {
           saveError: "Los datos no pudo ser salvado.",
           getError: "Los datos no se pudo recuperar.",

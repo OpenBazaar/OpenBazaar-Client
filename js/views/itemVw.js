@@ -81,7 +81,5 @@ module.exports = Backbone.View.extend({
     this.model.off();
     this.off();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });

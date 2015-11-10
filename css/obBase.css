@@ -818,7 +818,9 @@ h5 {
   border-bottom: none;
 }
 
-.flexRow-noBorderBottom {
+.flexRow-noBorderBottom,
+.flex-border > .flexRow.flexRow-noBorderBottom,
+.flex-border > .flexRow > .flexRow.flexRow-noBorderBottom {
   /* when the row needs to not have a bottom and no other way works */
   border-bottom: none;
 }

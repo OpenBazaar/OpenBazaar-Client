@@ -79,6 +79,12 @@ module.exports = Backbone.View.extend({
         var modelJSON = model.toJSON();
         self.$el.find('#adminServerInput').val(modelJSON.server_url);
         self.$el.find('#adminCurrencyInput').val(modelJSON.currency_code);
+        self.$el.find('#adminShipToNameInput').val(modelJSON.ship_to_name);
+        self.$el.find('#adminShipToStreetInput').val(modelJSON.ship_to_street);
+        self.$el.find('#adminShipToCityInput').val(modelJSON.ship_to_city);
+        self.$el.find('#adminShipToStateInput').val(modelJSON.ship_to_state);
+        self.$el.find('#adminShipToPostalCodeInput').val(modelJSON.ship_to_postal_code);
+        self.$el.find('#adminShipToCountryInput').val(modelJSON.ship_to_country);
       },
       error: function(model, response){
         console.log("User Settings fetch failed: " + response.statusText);
@@ -352,7 +358,5 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });
