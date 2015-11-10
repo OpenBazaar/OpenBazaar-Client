@@ -1,9 +1,9 @@
 <div class="modal modal-opaque js-storeWizardModal fadeOut">
   <div class="modal-child modal-childMain">
     <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeStoreWizardModal">
-      <h2 class="ion-close-round"></h2>
+      <h2 class="ion-android-close"></h2>
     </div>
-    <div class="modal-hero js-storeWizardHero shadow-inner1-light"
+    <div class="modal-hero js-storeWizardHero modal-shadow-inner1"
     <% if(ob.page.profile.header_hash) { %>
     style="background-image: url(<%- ob.headerURL %>);"
     <% }else{ %>
@@ -73,7 +73,7 @@
           </div>
         </div>
         <div class="accordion-child">
-          <div class="bar barTxt h6">
+          <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('Store') %> <%= polyglot.t('Moderators') %>
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow">

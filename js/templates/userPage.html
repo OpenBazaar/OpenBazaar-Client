@@ -26,9 +26,11 @@
   <div class="user-page-content">
     <div class="flexRow user-page-header-slim hide custCol-border-background shadow-inner1-ultra-light">
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
-        style="background-image: url(<%- ob.page.avatarURL %>), url(imgs/defaultUser.png);">
-        </div>
+        <% if(ob.page.profile.avatar_hash) { %>
+          <div class="thumbnail thumbnail-large pull-left js-userPageAvatar" style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"></div>
+        <% } else { %>
+          <div class="border1 custCol-font-secondary custCol-border-secondary default-avatar thumbnail-large"></div>
+        <% } %>
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft88">
@@ -46,8 +48,12 @@
     </form>-->
     <!-- This wraps the whole cropper -->
     <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-      <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
-           style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);"></div>
+      <% if(ob.page.profile.avatar_hash) { %>
+        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
+           style="background-image: url(<%- ob.user.server_url %>get_image?hash=<%- ob.page.profile.avatar_hash %>);"></div>
+      <% } else { %>
+        <div class="border1 custCol-font-secondary custCol-border-secondary default-avatar push-down22"></div>
+      <% } %>
     <div class="pull-left">
       <div class="marginLeft12 push-down5">
         <h1 class="page-userNameLarge"><%- ob.page.profile.name %></h1>
@@ -59,7 +65,7 @@
 
   <div class="bar user-page-navigation-filler hidden custCol-primary" style="display: none"></div>
   <div class="bar navBar barFlush user-page-navigation custCol-secondary">
-    <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('About') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary active js-aboutTab js-tab"><%= polyglot.t('Feed') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
     <% if(ob.page.profile.vendor) { %>
@@ -68,7 +74,7 @@
     <div class="navEnd pad15">
       <div class="ctrlGroup js-pageButtons js-userPageControls pull-up48">
         <a class="btn btn-txt custCol-primary js-sellItem">
-          <span class="ion-social-bitcoin fontSize11 marginRight2 textOpacity75"></span>
+          <span class="ion-android-add fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('nav.createListing') %>
         </a>
         <a class="btn btn-txt custCol-primary js-createStore">
@@ -144,16 +150,26 @@
     <div class="flexContainer flex-border custCol-primary js-about js-tabTarg minHeight650">
       <div class="flexRow minHeight650">
         <div class="flexCol-8 custCol-border-secondary">
-          <div class="rowItem">
-            <% if(ob.page.profile.about) { %>
+          <div class="rowItem alignCenter">
+            <span class="textOpacity75"><%= polyglot.t('FeedPlaceholder') %></span>
+<!--             <% if(ob.page.profile.about) { %>
               <%- ob.page.profile.about %>
             <%}else{%>
               <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
-            <%}%>
+            <%}%> -->
           </div>
         </div>
         <div class="flexCol-4 flex-border border0">
           <div class="flexRow">
+            <% if(ob.page.profile.about){ %>
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <div class="rowItem">
+                <div class="textSize12px">
+                  <%- ob.page.profile.about %>
+                </div>
+              </div>
+            </div>
+            <% } %>
             <div class="flexRow borderBottom custCol-border-secondary">
               <div class="rowItem">
                 <div class="textOpacity75"><%= polyglot.t('Guid') %></div>

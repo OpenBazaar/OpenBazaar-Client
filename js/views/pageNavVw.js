@@ -36,7 +36,8 @@ module.exports = Backbone.View.extend({
     'click .js-homeModalDone': 'settingsDone',
     'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
-    'click .js-closeStatus': 'closeStatusBar'
+    'click .js-closeStatus': 'closeStatusBar',
+    'click .js-homeModal-themeSelected': 'setSelectedTheme'
   },
 
   initialize: function(){
@@ -78,7 +79,7 @@ module.exports = Backbone.View.extend({
         });
       }
       // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+      $(this).closest('.accordion-child').next('.accordion-child').find('input:visible:first').focus();
     });
     acc.find('.js-accordionPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
@@ -87,6 +88,8 @@ module.exports = Backbone.View.extend({
           return parseInt(accWin.css('left').replace("px","")) + accWidth;
         });
       }
+      // focus search input
+       $(this).closest('.accordion-child').prev('.accordion-child').find('input:visible:first').focus();
     });
     //set up filterable lists.
     //TODO: this is terrible, change to run when an event is emmitted from the subviews marking them as done rendering
@@ -320,11 +323,13 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.model.set('beenSet',true);
     this.$el.find('.js-homeModal').hide();
+    $('#onboarding-overlay').show();
   },
 
   closeModal: function(e){
     "use strict";
     $(e.target).closest('.modal').addClass('fadeOut');
+    console.log('sdfdsf');
   },
 
   navAdminPanel: function(){
@@ -343,6 +348,50 @@ module.exports = Backbone.View.extend({
       }
     });
     this.remove();
+  },
+
+  setSelectedTheme: function(e){
+    "use strict"
+    var text_color = $(e.currentTarget).data('text-color');
+    var primary_color = $(e.currentTarget).data('primary-color');
+    var secondary_color = $(e.currentTarget).data('secondary-color');
+    var background_color = $(e.currentTarget).data('background-color');
+      var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
+            customStyleTag.setAttribute('id', 'customStyle');
+
+      $('.user-page-header').css('background', 'url(' + $(e.currentTarget).data('header') + ')').css('background-size', 'cover');
+
+      customStyleTag.innerHTML =
+          "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + background_color + ";}" +
+          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(primary_color, 0.05) + ";}" +
+          "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primary_color + ";}" +
+          "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primary_color + ";}" +
+          "#ov1 .userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(primary_color, -0.35) +  ";}" +
+          "#ov1 .userPage .btn-tab:active { -webkit-box-shadow: none;}" +
+          "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + secondary_color + ";}" +
+          "#ov1 .userPage .custCol-border-secondary { border-color: " + secondary_color + " !important;}" +
+          "#ov1 .userPage .custCol-border-primary { border-color: " + primary_color + " !important;}" +
+          "#ov1 .userPage .radioLabel:before { border-color: " + text_color + " !important;}" +
+          "#ov1 .userPage .checkboxLabel:before { border-color: " + text_color + " !important; opacity: .75 !important;}" +
+          "#ov1 .userPage .user-page-header-slim { background: " + this.shadeColor2(primary_color, -0.15) + ";}" +
+          "#ov1 .userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(primary_color, -0.35) + ";}" +
+          "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + text_color + " !important; box-shadow: inset 0 0 0 4px " + primary_color + " !important;}" +
+          "#ov1 .userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + text_color + " !important; box-shadow: inset 0 0 0 3px " + primary_color + " !important;}" +
+          "#ov1 .userPage .custCol-font-secondary { color: " + secondary_color + " !important;}" +
+          "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + text_color + " !important;}" +
+          "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
+          "#ov1 .userPage .search-choice { background-color: " + secondary_color + "; background-image: none; border: none; padding: 10px; color: " + text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 .userPage .custCol-border-background { border-color: " + background_color + " }" +
+          "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + secondary_color + "}" +
+          "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(primary_color, -0.35) + " !important;}" +
+          "#ov1 .userPage .custCol-text, .search-field input { color: " + text_color + "!important;}";
+          
+      document.body.appendChild(customStyleTag);
+  },
+
+  shadeColor2: function shadeColor2(color, percent) {   
+    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
   }
 
 });

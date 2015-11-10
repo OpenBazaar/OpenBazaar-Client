@@ -2,7 +2,7 @@
   <div class="home-page-header">
     <div class="welcomeBar">
       <div>
-        <%= polyglot.t('Welcome') %>: <span class="js-currentDate textOpacity75"></span>
+        <h1 class="fancy-heading fontSize20 vCentered"><%= polyglot.t('Discover') %></h1>
         <a class="btn btn-txt custCol-background vCentered right10 js-homeCreateStore">
           <span class="ion-social-bitcoin  fontSize11 marginRight2 textOpacity75"></span>
           <%= polyglot.t('CreateStore') %>
@@ -11,17 +11,46 @@
     </div>
 
     <div class="bar barFlush navBar home-page-navigation">
+      <a class="btn btn-bar btn-tab js-homeFeedBtn"><%= polyglot.t('Feed') %></a>
       <a class="btn btn-bar btn-tab active js-homeItemsBtn"><%= polyglot.t('Items') %></a>
-      <a class="btn btn-bar btn-tab js-homeStoresBtn"><%= polyglot.t('Stores') %></a>
+      <a class="btn btn-bar btn-tab js-homeStoresBtn"><%= polyglot.t('Pages') %></a>
     </div>
   </div>
   <div class="bar home-page-navigation-filler hide custCol-primary"></div>
-  <div class="flexContainer flex-border">
+  <div class="flexContainer flex-border height54">
     <div class="flexRow">
       <div class="flexRow">
-        <div class="txtFieldWrapper searchWrapper">
-          <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
+        <div class="js-homeItemsSearch width100">
+          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+            <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
+          </div>
+          <div class="selectPill pull-up41">
+            <select class="custCol-secondary">
+              <option value="following">From pages I follow</option>
+              <option value="network">From all pages</option>
+            </select>
+          </div>
         </div>
+
+        <div class="js-homeStoresSearch width100 hide">
+          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+            <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForPagesPlaceholder') %>" />
+          </div>
+          <div class="selectPill pull-up41">
+            <select class="custCol-secondary">
+              <option value="all">All pages</option>
+              <option value="basic">Basic pages</option>
+              <option value="moderators">Moderator pages</option>
+              <option value="stores">Store pages</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="txtFieldWrapper searchWrapper js-homeFeedSearch borderBottom hide">
+          <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchFeedPlaceholder') %>" />
+        </div>
+
+      </div>
       </div>
     </div>
     <div class="flexRow flexRow-wrap js-list1 minHeight650">
@@ -29,10 +58,13 @@
         <i class="ion-loop spinner textSize24px textOpacity50"></i>
       </div>
     </div>
-    <div class="flexRow js-list2 minHeight650">
+    <div class="flexRow js-list2 minHeight650 hide">
       <div class="padding10 width100 alignCenter js-loadingMsg borderBottom borderTop pull-up1">
         <i class="ion-loop spinner textSize24px textOpacity50"></i>
       </div> 
+    </div>
+    <div class="flexRow js-list3 minHeight650 padding20 hide alignCenter fontSize14 textOpacity75">
+      <%= polyglot.t('FeedPlaceholder') %>
     </div>
   </div>
   <div class="navBar custCol-secondary" style="padding: 4px 0"></div>

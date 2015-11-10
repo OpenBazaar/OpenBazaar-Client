@@ -20,6 +20,7 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-homeItemsBtn': 'homeItemsClick',
+    'click .js-homeFeedBtn': 'homeFeedClick',
     'click .js-homeStoresBtn': 'homeStoresClick',
     'click .js-homeCreateStore': 'createStore'
   },
@@ -75,18 +76,10 @@ module.exports = Backbone.View.extend({
     clearInterval(this.homeLookingTimeout);
   },
 
-  hideList1: function(e){
-    $('.js-list1').show();
-    $('.js-list2').hide();
-    $('.js-homeItemsBtn').addClass('active');
-    $('.js-homeStoresBtn').removeClass('active');
-  },
-
-  hideList2: function(e){
-    $('.js-list1').hide();
-    $('.js-list2').show();
-    $('.js-homeItemsBtn').removeClass('active');
-    $('.js-homeStoresBtn').addClass('active');
+  hideList: function(e){
+    $('.js-list1, .js-list2, .js-list3').hide();
+    $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').hide();
+    $('.js-homeItemsBtn, .js-homeStoresBtn, .js-homeFeedBtn').removeClass('active');
   },
 
   handleSocketMessage: function(response) {
@@ -128,10 +121,10 @@ module.exports = Backbone.View.extend({
         }
       });
 
-      self.hideList1();
+      // Auto focus the search input
+      $('.js-homeItemsSearch input').focus();
 
-      //render current date
-      $('.js-currentDate').html(Moment().format('MMMM Do, YYYY'));
+      self.hideList1();
     });
   },
 
@@ -169,13 +162,36 @@ module.exports = Backbone.View.extend({
 
   homeItemsClick: function(e){
     "use strict";
-    this.hideList1();
+    this.hideList();
+    $('.js-list1').show();
+    $('.js-homeItemsBtn').addClass('active');
+
+    // Auto focus the search input
+    $('.js-homeItemsSearch').show();
+    $('.js-homeItemsSearch input').focus();
   },
 
   homeStoresClick: function(e){
     "use strict";
-    this.hideList2();
+    this.hideList();
+    $('.js-list2').show();
+    $('.js-homeStoresBtn').addClass('active');
+
+    // Auto focus the search input
+    $('.js-homeStoresSearch').show();
+    $('.js-homeStoresSearch input').focus();
   },
+
+  homeFeedClick: function(e){
+    "use strict";
+    this.hideList();
+    $('.js-list3').show();
+    $('.js-homeFeedBtn').addClass('active');
+
+    // Auto focus the search input
+    $('.js-homeFeedSearch').show();
+    $('.js-homeFeedSearch input').focus();    
+  },  
 
   createStore: function() {
     "use strict";
