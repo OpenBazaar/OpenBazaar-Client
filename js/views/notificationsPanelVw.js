@@ -24,6 +24,7 @@ module.exports = Backbone.View.extend({
           self.renderNotification(notification);
         });
         self.parentEl.html(self.listWrapper);
+        self.trigger('notificationsCounted', notifications.length);
       }
     });
 

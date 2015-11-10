@@ -18,7 +18,6 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    console.log(this.model.toJSON());
     loadTemplate('./js/templates/notification.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });

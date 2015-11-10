@@ -2771,14 +2771,13 @@ input[type="checkbox"].fieldItem + label span {
     content:attr(data-count);
     position: absolute;
     background: rgba(0,0,255,0.5);
-    height:1rem;
-    top:-0.3rem;
-    right:0rem;
-    width:1rem;
+    top:-4px;
+    right:-2px;
+    width:16px;
     text-align: center;
-    line-height: 1rem;;
-    font-size: 0.75rem;
+    line-height: 16px;
+    font-size: 10px;
     border-radius: 50%;
     color:white;
-    border:1px solid blue;
+  /* don't put a border on this or it will be visible when it has no content */
 }
