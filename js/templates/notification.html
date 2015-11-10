@@ -1,15 +1,28 @@
-<div>
-    <div class="thumbnail custCol-border-secondary"
-         style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
-    <div class="notification-body">
-        <div class="notification-text"><%- ob.title %></div>
-        <%- ob.handle %>
-        <%- ob.guid %>
-        <%- ob.type %>
-        <div class="notification-timestamp"><%- ob.timestamp %></div>
-    </div>
-    <div class="notification-orderActions hide">
-        <button class="notification-orderActionYes"><%= polyglot.t('yes') %></button>
-        <button class="notification-orderActionNo"><%= polyglot.t('no') %></button>
+<div class="rowItem js-notification clickable padding2015">
+    <div class="table">
+        <div>
+            <div class="thumbnail thumbnail-large-slim custCol-border-secondary"
+                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
+            <div class="txt-lowleading">
+                <div class="marginLeft10 marginTop2 clearfix">
+                    <div class="textSize15px marginRight5 marginBottom2 noOverflow" title="<%- ob.title %>">
+                        <strong>Title: <%- ob.title %></strong>
+                    </div>
+                    <div class="textSize14px txt-fade textWeightNormal">
+                        From:
+                        <% if(ob.handle) { %>
+                        <%- ob.handle %>
+                        <% }else{ %>
+                        <%- ob.guid %>
+                        <% } %>
+                    </div>
+                    <div class="testSize14px txt-fade">Type: <%- ob.type %></div>
+                    <div class="testSize15px txt-fade">Time: <%- ob.timestamp %></div>
+                    <% if(ob.order_id){ %>
+                    <div class="testSize15px txt-fade"><%- ob.order_id %></div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

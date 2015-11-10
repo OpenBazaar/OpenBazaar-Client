@@ -13,7 +13,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.options = options || {};
     this.parentEl = $(options.parentEl);
-    this.listWrapper = $('<div class="border0 custCol-border-secondary"></div>');
+    this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
     this.notifications = new notificationsCollection();
     this.notifications.url = options.server_url + "get_notifications";
     this.notifications.fetch({

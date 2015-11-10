@@ -5,7 +5,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  className: "notification",
+  className: "notification flexRow",
 
   events: {
     //'click .js-item': 'itemClick'
