@@ -145,7 +145,7 @@ module.exports = Backbone.View.extend({
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
         socketView: self.socketView,
-        url: self.options.model.attributes.server_url + "get_notifications"
+        server_url: self.options.model.attributes.server_url
       });
       self.subViews.push(self.notificationsPanel);
       //add the admin panel
@@ -169,13 +169,12 @@ module.exports = Backbone.View.extend({
     var targ = this.$el.find('.js-navNotificationsMenu');
     targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
-      //this.notifications.fetch();
       targ.removeClass('hide');
-      $('#overlay').removeClass('fadeOut hide');
+      $('#overlay').removeClass('hide');
       $('html').on('click.closeNav', function(e){
         if($(e.target).closest(targ).length === 0){
           targ.addClass('hide');
-          $('#overlay').addClass('fadeOut hide');
+          $('#overlay').addClass('hide');
           $(this).off('.closeNav');
         }
       });
