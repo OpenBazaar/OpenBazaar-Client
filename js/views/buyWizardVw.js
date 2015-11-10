@@ -3,6 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
+    showErrorModal = require('../utils/showErrorModal.js'),
     chosen = require('../utils/chosen.jquery.min.js');
 Backbone.$ = $;
 
@@ -120,7 +121,39 @@ module.exports = Backbone.View.extend({
 
   saveNewAddress: function(){
     "use strict";
+    var self = this,
+        targetForm = this.$el.find('#buyWizardNewAddressForm'),
+        formData = new FormData(targetForm[0]);
 
+    if(targetForm[0].checkValidity()){
+      $.ajax({
+        type: "POST",
+        url: self.model.get('server_url') + "settings",
+        contentType: false,
+        processData: false,
+        data: formData,
+        dataType: "json",
+        success: function(data) {
+          if (data.success === true){
+            self.hideNewAddress();
+            self.addNewAddress(data);
+          }else if (data.success === false){
+            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          }
+        },
+        error: function(jqXHR, status, errorThrown){
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
+        }
+      });
+    }
+  },
+
+  addNewAddress: function(data){
+    "use strict";
+    console.log(data);
+    //render addresses as a sub view?
   },
 
   blockClicks: function(e) {
