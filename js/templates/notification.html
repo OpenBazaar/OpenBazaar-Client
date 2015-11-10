@@ -1,0 +1,16 @@
+<div>
+    <div class="notification-avatar">
+        <% if(ob.avatarURL) { %>
+        <div class="thumbnail js-avatar" data-handle="<%- ob.avatarURL %>"
+          style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
+        <% } %>
+    </div>
+    <div class="notification-body">
+        <div class="notification-text"><%- ob.title %></div>
+        <div class="notification-timestamp"></div>
+    </div>
+    <div class="notification-orderActions hide">
+        <button class="notification-orderActionYes"><%= polyglot.t('yes') %></button>
+        <button class="notification-orderActionNo"><%= polyglot.t('no') %></button>
+    </div>
+</div>

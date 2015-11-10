@@ -2759,3 +2759,19 @@ input[type="checkbox"].fieldItem + label span {
 #ov1 .overflowVisible {
   overflow: visible;
 }
+
+.badge:after{
+    content:attr(data-count);
+    position: absolute;
+    background: rgba(0,0,255,0.5);
+    height:1rem;
+    top:-0.3rem;
+    right:0rem;
+    width:1rem;
+    text-align: center;
+    line-height: 1rem;;
+    font-size: 0.75rem;
+    border-radius: 50%;
+    color:white;
+    border:1px solid blue;
+}
