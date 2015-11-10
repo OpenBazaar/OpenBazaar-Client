@@ -14,7 +14,10 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardModal': 'blockClicks',
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
+    'click .js-buyWizardModalModDone': 'modSelected',
+    'click .js-buyWizardAddressBack': 'addressBack',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
+    'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'blur input': 'validateInput'
   },
 
@@ -89,6 +92,16 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
     });
     return this;
+  },
+
+  modSelected: function(){
+    "use strict";
+    this.$el.find('.js-buyWizardMap').removeClass('hide');
+  },
+
+  addressBack: function(){
+    "use strict";
+    this.$el.find('.js-buyWizardMap').addClass('hide');
   },
 
   createNewAddress: function(){

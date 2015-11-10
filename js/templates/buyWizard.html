@@ -5,7 +5,7 @@
     </div>
     <div class="modal-hero js-buyWizardHero shadow-inner1-light"
          style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);">
-      <iframe
+      <iframe class="hide js-buyWizardMap"
         width="525"
         height="250"
         frameborder="0" style="border:0"
@@ -32,7 +32,8 @@
                                  style="background-image: url(<%- ob.server_url %>get_image?hash=<%- moderator.avatar_hash %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
                             </div>
                             <div class="pad10Left txt-unleaded">
-                              <div class="row10"><strong>Moderated by <%- moderator.blockchain_id %></strong></div>
+                              <div class="row10"><strong>Moderated by <%- moderator.name %> <%- moderator.blockchain_id %> <%- moderator.fee %></strong></div>
+                              <div><%- moderator.guid %></div>
                               <div><%- moderator.short_description %></div>
                             </div>
                           </div>
@@ -63,7 +64,7 @@
             </div>
             <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
               <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
-              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext js-buyWizardModalModDone custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
             </div>
           </div>
           <div class="accordion-child">
@@ -86,99 +87,83 @@
                         <div>
                           <div class="txt-unleaded">
                             <div class="row10"><strong><%- ob.user.ship_to_name %></strong></div>
-                            <div><%- ob.user.ship_to_street %><%- ob.user.ship_to_city %>, <%- ob.user.ship_to_state %><%- ob.user.ship_to_postal_code %>, <%- ob.user.ship_to_country %></div>
+                            <div><%- ob.user.ship_to_street %> <%- ob.user.ship_to_city %>, <%- ob.user.ship_to_state %><%- ob.user.ship_to_postal_code %>, <%- ob.user.ship_to_country %></div>
                           </div>
                         </div>
                       </div>
                     </label>
                   </div>
                 </div>
-                <div class="flexRow js-buyWizardAddress">
-                  <div class="rowItem padding2015">
-                    <input type="radio" class="fieldItem" name="address" id="buyWizardNewAddress"/>
-                    <label for="buyWizardNewAddress">
-                      <div class="table">
-                        <div>
-                          <div class="txt-unleaded">
-                            <div class="row10"><strong><span class="js-buyWizardInsertNewName"></span></strong></div>
-                            <div class="js-buyWizardInsertNewAddress"></div>
-                          </div>
-                        </div>
+                <form id="buyWizardNewAddressForm">
+                  <div class="flexRow js-buyWizardNewAddress hide">
+                    <div class="flexCol-4">
+                      <div class="fieldItem">
+                        <label for="buyWizardNameInput">Name</label>
                       </div>
-                    </label>
-                  </div>
-                </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
-                  <div class="flexCol-4">
-                    <div class="fieldItem">
-                      <label for="buyWizardNameInput">Name</label>
+                    </div>
+                    <div class="flexCol-8 positionWrapper">
+                      <input type="text" name="new_ship_to_name" class="fieldItem" id="buyWizardNameInput"/>
                     </div>
                   </div>
-                  <div class="flexCol-8 positionWrapper">
-                    <input type="text" name="new_ship_to_name" class="fieldItem" id="buyWizardNameInput"/>
-                  </div>
-                </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
-                  <div class="flexCol-4">
-                    <div class="fieldItem">
-                      <label for="buyWizardStreetInput">Street Address</label>
+                  <div class="flexRow js-buyWizardNewAddress hide">
+                    <div class="flexCol-4">
+                      <div class="fieldItem">
+                        <label for="buyWizardStreetInput">Street Address</label>
+                      </div>
+                    </div>
+                    <div class="flexCol-8 positionWrapper">
+                      <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardStreetInput"/>
                     </div>
                   </div>
-                  <div class="flexCol-8 positionWrapper">
-                    <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardStreetInput"/>
-                  </div>
-                </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
-                  <div class="flexCol-4">
-                    <div class="fieldItem">
-                      <label for="buyWizardCityInput">City</label>
+                  <div class="flexRow js-buyWizardNewAddress hide">
+                    <div class="flexCol-4">
+                      <div class="fieldItem">
+                        <label for="buyWizardCityInput">City</label>
+                      </div>
+                    </div>
+                    <div class="flexCol-8 positionWrapper">
+                      <input type="text" name="new_ship_to_city" class="fieldItem" id="buyWizardCityInput"/>
                     </div>
                   </div>
-                  <div class="flexCol-8 positionWrapper">
-                    <input type="text" name="new_ship_to_city" class="fieldItem" id="buyWizardCityInput"/>
-                  </div>
-                </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
-                  <div class="flexCol-4">
-                    <div class="fieldItem">
-                      <label for="buyWizardStateInput">State</label>
+                  <div class="flexRow js-buyWizardNewAddress hide">
+                    <div class="flexCol-4">
+                      <div class="fieldItem">
+                        <label for="buyWizardStateInput">State</label>
+                      </div>
+                    </div>
+                    <div class="flexCol-8 positionWrapper">
+                      <input type="text" name="new_ship_to_state" class="fieldItem" id="buyWizardStateInput"/>
                     </div>
                   </div>
-                  <div class="flexCol-8 positionWrapper">
-                    <input type="text" name="new_ship_to_state" class="fieldItem" id="buyWizardStateInput"/>
-                  </div>
-                </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
-                  <div class="flexCol-4">
-                    <div class="fieldItem">
-                      <label for="buyWizardPostalInput">Postal Code</label>
+                  <div class="flexRow js-buyWizardNewAddress hide">
+                    <div class="flexCol-4">
+                      <div class="fieldItem">
+                        <label for="buyWizardPostalInput">Postal Code</label>
+                      </div>
+                    </div>
+                    <div class="flexCol-8 positionWrapper">
+                      <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardPostalInput"/>
                     </div>
                   </div>
-                  <div class="flexCol-8 positionWrapper">
-                    <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardPostalInput"/>
-                  </div>
-                </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
-                  <div class="flexCol-4">
-                    <div class="fieldItem">
-                      <label for="buyWizardStreetInput">Country</label>
+                  <div class="flexRow js-buyWizardNewAddress hide">
+                    <div class="flexCol-4">
+                      <div class="fieldItem">
+                        <label for="buyWizardStreetInput">Country</label>
+                      </div>
+                    </div>
+                    <div class="flexCol-8 positionWrapper">
+                      <div class="fieldItem padding0">
+                        <div class="fieldItem-selectWrapper noIcon js-buyWizardCountryWrapper"></div>
+                      </div>
                     </div>
                   </div>
-                  <div class="flexCol-8 positionWrapper">
-                    <div class="fieldItem padding0">
-                      <div class="fieldItem-selectWrapper noIcon js-buyWizardCountryWrapper"></div>
-                    </div>
-                  </div>
-                </div>
-                <!--spacer for chosen-->
-                <div class="flexRow flexRow-noBorderBottom rowtop20 row60"></div>
-                <div class="flexRow flexRow-noBorderBottom rowtop20 row60"></div>
-                <div class="flexRow flexRow-noBorderBottom rowtop20 row60"></div>
-                <div class="flexRow flexRow-noBorderBottom rowtop20 row60"></div>
+                </form>
+                <!--spacer for chosen. Kind of horrible. TODO: find way to expand container when Chosen opens-->
+                <div class="flexRow flexRow-noBorderBottom row320"></div>
               </div>
             </div>
             <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev js-buyWizardAddress custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionPrev js-buyWizardAddress js-buyWizardAddressBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
               <a class="btn btn-bar btn-half js-accordionNext js-buyWizardAddress custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
               <a class="btn btn-bar btn-half js-buyWizardNewAddressCancel js-buyWizardNewAddress hide custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
               <a class="btn btn-bar btn-half js-buyWizardNewAddressSave js-buyWizardNewAddress hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Save') %></a>
