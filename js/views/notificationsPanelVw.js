@@ -12,51 +12,35 @@ module.exports = Backbone.View.extend({
   initialize: function(options){
     var self = this;
     this.options = options || {};
-    //the model must be passed in by the constructor
-    this.notifications = new notificationsCollection({url: options.url});
-    this.notifications.fetch(
-        {
+    this.parentEl = $(options.parentEl);
+    this.socketView = options.socketView;
+    this.listWrapper = $('<div class="border0 custCol-border-secondary"></div>');
+    this.notifications = new notificationsCollection();
+    this.notifications.url = options.url;
+    this.notifications.fetch({
       success: function(notifications, response) {
         notifications.each(function(model) {
           console.log('Async Item:', model.toJSON());
           self.renderNotification(model);
         });
-        this.$el.html(this.listWrapper);
-        self.render();
+        self.parentEl.html(this.listWrapper);
+        //self.render();
       }
-    }
-    );
+    });
+
+    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      this.handleSocketMessage(response);
+    });
+    this.socketNotificationsID = Math.random().toString(36).slice(2);
+    this.socketView.getNotifications(this.socketNotificationsID);
 
     this.subViews = [];
 
   },
 
-  render: function(){
-    var self = this;
-    this.listWrapper = $('<div class="border0 custCol-border-secondary"></div>')
-
-    console.log('In Render:', this.notifications.toJSON());
-    this.$el.html(this.notifications);
-
-    //if(this.notifications.models.length > 0)
-    //{
-    //  console.log(this.notifications.models);
-    //  __.each(this.notifications.models, function (notification)
-    //  {
-    //    server_url = self.options.model.attributes.server_url;
-    //    console.log('sat', notification);
-    //    notification.set('avatarURL', server_url+"get_image?hash="+notification.get('image_hash')+"&guid="+notification.get('guid'));
-    //    self.renderNotification(notification);
-    //  }, this);
-    //  this.$el.html(this.listWrapper);
-    //}else{
-    //  self.renderNoneFound();
-    //}
-  },
-
-  renderNotification: function(item){
+  renderNotification: function(notification){
     var notification = new notificationView({
-      model: item
+      model: notification
     });
     this.subViews.push(notification);
     //$el must be passed in by the constructor
@@ -71,6 +55,19 @@ module.exports = Backbone.View.extend({
     //this.subViews.push(simpleMessage);
   },
 
+  handleSocketMessage: function(response) {
+    "use strict";
+    var data = JSON.parse(response.data);
+    if(data.hasOwnProperty('notification')) {
+      console.log('Got Notification from Websocket:', data.notification);
+    }
+    //if(data.id == this.socketItemID){
+    //  this.renderItem(data);
+    //} else if(data.id == this.socketVendorID) {
+    //  this.renderUser(data.vendor);
+    //}
+  },
+
   close: function(){
     __.each(this.subViews, function(subView) {
       if(subView.close){
@@ -82,8 +79,6 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });
 

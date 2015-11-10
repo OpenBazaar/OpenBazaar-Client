@@ -14,9 +14,6 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     var self=this;
     this.render();
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
-      this.handleSocketMessage(response);
-    });
   },
 
   render: function(){
@@ -25,19 +22,6 @@ module.exports = Backbone.View.extend({
       self.$el.append(loadedTemplate(self.model.toJSON()));
     });
     return this;
-  },
-
-  handleSocketMessage: function(response) {
-    "use strict";
-    var data = JSON.parse(response.data);
-    if(data.hasOwnProperty('notification')) {
-      console.log('Got Notification from Websocket:', data.notification);
-    }
-    //if(data.id == this.socketItemID){
-    //  this.renderItem(data);
-    //} else if(data.id == this.socketVendorID) {
-    //  this.renderUser(data.vendor);
-    //}
   },
 
   close: function(){

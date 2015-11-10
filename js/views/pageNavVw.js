@@ -9,8 +9,7 @@ var __ = require('underscore'),
     languageListView = require('../views/languageListVw'),
     adminPanelView = require('../views/adminPanelVw'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
-    remote = require('remote'),
-    currentWindow;
+    remote = require('remote');
 
 module.exports = Backbone.View.extend({
 
@@ -143,7 +142,11 @@ module.exports = Backbone.View.extend({
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
       }
-      self.notificationsPanel = new notificationsPanelView({model: self.model, url: self.options.model.attributes.server_url + "get_notifications"});
+      self.notificationsPanel = new notificationsPanelView({
+        parentEl: '#notificationsPanel',
+        socketView: self.socketView,
+        url: self.options.model.attributes.server_url + "get_notifications"
+      });
       self.subViews.push(self.notificationsPanel);
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
@@ -166,7 +169,7 @@ module.exports = Backbone.View.extend({
     var targ = this.$el.find('.js-navNotificationsMenu');
     targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
-      this.notifications.fetch();
+      //this.notifications.fetch();
       targ.removeClass('hide');
       $('#overlay').removeClass('fadeOut hide');
       $('html').on('click.closeNav', function(e){

@@ -7,7 +7,6 @@ module.exports = Backbone.Collection.extend({
   model: notification,
 
   initialize: function(options) {
-    this.url = options.url;
   }
 
 });
