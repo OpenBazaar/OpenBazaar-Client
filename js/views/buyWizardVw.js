@@ -3,6 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
+    buyDetailsVw = require('./buyDetailsVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
     chosen = require('../utils/chosen.jquery.min.js');
 Backbone.$ = $;
@@ -15,7 +16,8 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardModal': 'blockClicks',
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
-    'click .js-buyWizardModalModDone': 'modSelected',
+    'click .js-buyWizardModeratorRadio': 'modSelected',
+    'click .js-buyWizardModalModDone': 'modDone',
     'click .js-buyWizardAddressBack': 'addressBack',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
@@ -30,6 +32,8 @@ module.exports = Backbone.View.extend({
             this.model.get('user').ship_to_postal_code + " " +
             this.model.get('user').ship_to_country,
         countries = new countriesModel();
+    this.buyDetailsView = new buyDetailsVw({model: this.model});
+
     initialStreetAddress = encodeURIComponent(initialStreetAddress);
     this.options = options || {};
     this.parentEl = $(options.parentEl);
@@ -39,7 +43,6 @@ module.exports = Backbone.View.extend({
     __.each(this.countryList, function(countryFromList, i){
       self.countriesSelect.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
     });
-    console.log(this.countriesSelect);
     this.model.set("initialStreetAddress", initialStreetAddress);
     console.log(this.model);
     this.render();
@@ -85,17 +88,25 @@ module.exports = Backbone.View.extend({
       //append the view to the passed in parent
       self.parentEl.append(self.$el);
       self.initAccordion('.js-buyWizardAccordion');
-      self.errorModal = $('.js-messageModal');
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-buyWizardModal').removeClass('fadeOut');
       $('#obContainer').addClass('blur');
       //add all countries to the Ships To select list
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
+      //add details view
+      self.$el.find('.js-buyWizardDetails').append(self.buyDetailsView.el);
     });
     return this;
   },
 
-  modSelected: function(){
+  modSelected: function(e){
+    "use strict";
+    console.log("mod selected");
+    this.$el.find('.js-buyWizardModalModDone').removeClass('disabled');
+    this.model.set('currentModerator', $(e.target).val());
+  },
+
+  modDone: function(){
     "use strict";
     this.$el.find('.js-buyWizardMap').removeClass('hide');
   },
@@ -107,10 +118,13 @@ module.exports = Backbone.View.extend({
 
   createNewAddress: function(){
     "use strict";
+    console.log("New Address Disabled until API updated");
+    /*
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     //set chosen inputs
     $('.chosen').chosen();
+    */
   },
 
   hideNewAddress: function(){

@@ -1,0 +1,81 @@
+<div class="flexRow">
+  <div class="flexRow custCol-border-secondary">
+    <div class="flexCol-7 borderRight">
+      <div class="rowItem padding2015">
+        <div class="table">
+          <div>
+            <div class="thumbnail thumbnail-large-slim box-border"
+                 style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+            </div>
+            <div class="pad10left txt-unleaded">
+              <div class="row10"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
+              <div>Sold by <% if(ob.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flexCol-2 borderRight">
+      <div class="rowItem padding2015">
+        <input type="number" step="1" min="1" class="fieldItem spinButtons js-buyWizardQuantity" value="1"/>
+      </div>
+    </div>
+    <div class="flexCol-3">
+      <div class="rowItem padding2015">
+        <span class="fieldItem js-buyWizardPrice"><%- ob.displayPrice %></span>
+      </div>
+    </div>
+  </div>
+  <div class="flexRow custCol-border-secondary">
+    <div class="flexCol-7 borderRight">
+      <div class="rowItem padding2015">
+        <div class="table">
+          <div>
+            <div class="thumbnail thumbnail-large-slim box-border"
+                 style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultItem.png);">
+            </div>
+            <div class="pad10left txt-unleaded">
+              <div class="row10"><strong>Ship To</strong></div>
+              <div>Placeholder until address API ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flexCol-2 borderRight">
+      <div class="rowItem padding2015">
+      </div>
+    </div>
+    <div class="flexCol-3">
+      <div class="rowItem padding2015">
+        <span class="js-buyWizardShippingPrice"><%- ob.currentShippingDisplayPrice %></span>
+      </div>
+    </div>
+  </div>
+  <div class="flexRow custCol-border-secondary">
+    <div class="flexCol-7 borderRight">
+      <div class="rowItem padding2015">
+        <div class="table">
+          <div>
+            <div class="thumbnail thumbnail-large-slim box-border"
+                 style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultItem.png);">
+            </div>
+            <div class="pad10left txt-unleaded">
+              <div class="row10"><strong>Ship To</strong></div>
+              <div>Placeholder until address API ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flexCol-2 borderRight">
+      <div class="rowItem padding2015">
+      </div>
+    </div>
+    <div class="flexCol-3">
+      <div class="rowItem padding2015">
+        <span class="js-buyWizardShippingPrice"><%- ob.currentShippingDisplayPrice %></span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1374,6 +1374,46 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding-left: 50px;
 }
 
+input[type="number"].fieldItem.spinButtons {
+  background: none;
+  box-sizing: border-box;
+  width: 100%;;
+}
+
+input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button {
+  cursor:pointer;
+  display:block;
+  width:14px;
+  position:relative;
+  opacity: 1;
+}
+
+input[type=number].spinButtons::-webkit-inner-spin-button:before,
+input[type=number].spinButtons::-webkit-inner-spin-button:after {
+  position:absolute;
+  right: 6px;
+  font-family: "Ionicons";
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 30px;
+  width:14px;
+}
+
+input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:before {
+  content: "\f10d";
+  top:0px;
+}
+
+input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:after {
+  content: "\f104";
+  bottom:0px;
+}
+
+input[type="number"].fieldItem.spinButtons:focus {
+  border: none;
+}
+
 .fieldItem .btn {
   margin-top: 9px;
 }
@@ -2488,4 +2528,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .borderBottomRightRaidus3 {
   border-bottom-right-radius: 3px !important;
+}
+
+#ov1 a.disabled,
+#ov1 button.disabled {
+  pointer-events: none;
+  opacity: 0.6;
 }

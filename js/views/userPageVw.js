@@ -505,7 +505,8 @@ module.exports = Backbone.View.extend({
       handle: self.model.get('page').profile.handle,
       ownPage: self.options.ownPage,
       itemHash: hash,
-      user: self.model.get('user')
+      user: self.model.get('user'),
+      page: self.model.get('page')
     });
     this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
     //remove old item before rendering
