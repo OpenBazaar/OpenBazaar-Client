@@ -41,7 +41,12 @@ module.exports = Backbone.View.extend({
       model: model
     });
     this.subViews.push(notification);
-    this.listWrapper.append(notification.el);
+    this.listWrapper.prepend(notification.el);
+    var server_url = this.options.server_url;
+
+    $.post(server_url + "mark_notification_as_read", {
+      "id": model.get('id')
+    });
   },
 
   renderNoneFound: function(){
