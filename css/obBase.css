@@ -1504,8 +1504,9 @@ input[type="number"].fieldItem.fieldItem-withButton {
 }
 
 select {
-  border: 2px solid transparent !important;
+  border: 2px solid transparent;
   border-radius: 0;
+  font-family: "Helvetica Neue", Helvetica, "Open Sans";
   padding: 0 15px;
   -webkit-appearance: none;
 }
@@ -1566,7 +1567,7 @@ input[type="checkbox"].fieldItem + label:before {
   display: inline-block;
   position: absolute;
   left: 10px;
-  top: 2px;
+  top: 20px;
   height: 14px;
   width: 14px;
   border-radius: 1px;
@@ -2046,9 +2047,11 @@ input[type="checkbox"].fieldItem + label span {
   cursor: pointer;  
   font-size: 12px;
   margin-left: 10px;
+  letter-spacing: .4px;
   padding: 4px;
   width: 144px;
   z-index: 2;
+
 } 
 
 .selectPill:before {
@@ -2455,6 +2458,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .marginTop4 {
   margin-top: 4px;
+}
+
+#ov1  .marginTop6 {
+  margin-top: 6px;
 }
 
 #ov1  .marginTop12 {
