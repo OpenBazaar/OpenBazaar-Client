@@ -935,12 +935,12 @@ h5 {
 }
 
 .homeView .searchWrapperWithPill .txtField {
-  text-indent: 172px;
+  text-indent: 176px;
 }
 
 .homeView .searchWrapperWithPill:before {
   top: 17px;
-  left: 164px;
+  left: 168px;
 }
 
 .txtField-bar,
@@ -2083,7 +2083,7 @@ input[type="checkbox"].fieldItem + label span {
 .selectPill {
   opacity: .75;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
-  width: 152px;
+  width: 156px;
   text-align: right;
 }
 
@@ -2096,7 +2096,7 @@ input[type="checkbox"].fieldItem + label span {
   margin-left: 10px;
   letter-spacing: .4px;
   padding: 6px;
-  width: 144px;
+  width: 148px;
   z-index: 2;
 
 } 

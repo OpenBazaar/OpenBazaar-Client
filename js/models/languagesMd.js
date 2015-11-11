@@ -137,8 +137,8 @@ module.exports = Backbone.Model.extend({
           pagesStores: "Stores",
           pagesMods: "Moderator services",
           pagesBasic: "Basic users",
-          listingsCurated: "Stores I follow",
-          listingsAll: "All stores"
+          listingsCurated: "From stores I follow",
+          listingsAll: "From all stores"
         },
         nav: {
           searchPlaceholder: "Enter handle or search",
