@@ -4,14 +4,12 @@
   </div>
   <div class="table">
     <div>
-      <div>
-        <% if(ob.showAvatar) { %>
-        <div class="thumbnail js-avatar" data-handle="<%- ob.handle %>"
-          style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
-        <% } %> 
-      </div>
+      <% if(ob.showAvatar) { %>
+      <div class="thumbnail js-avatar" data-handle="<%- ob.handle %>"
+        style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
+      <% } %>
       <div class="js-item pad8Left" data-id="<%- ob.contract_hash %>">
-        <div class="textSize14px textFirstCharUppercase"><%- ob.title %></div>
+        <div class="textSize14px textFirstCharUppercase noOverflow" title="<%- ob.title %>"><%- ob.title %></div>
         <div class="textSize13px txt-fade textWeightNormal"><%- ob.displayPrice %> (<%- ob.vendorBTCPrice %> btc)</div>
       </div>
     </div>

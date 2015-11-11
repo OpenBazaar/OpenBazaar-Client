@@ -362,6 +362,7 @@ form {
 .table {
   display: table;
   table-layout: fixed;
+  width: 100%;
 }
 
 .table > div {
@@ -530,6 +531,7 @@ form {
   /* use fadeIn and fadeOut to change opacity */
   transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
   padding-top: 25px;
+  z-index: 1;
 }
 
 .modal.modal-navOffset {
@@ -668,6 +670,12 @@ h5 {
 
 .allCaps {
   text-transform: uppercase;
+}
+
+.noOverflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /*========== skin classes ==========*/
 
@@ -1628,7 +1636,12 @@ input[type="checkbox"].fieldItem + label span {
 .fieldItem .taggle .close {
   display: inline-block;
   position: absolute;
-  right: 12px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.8);
+  right: 2px;
+  top: 6px;
+  font-size: 16px;
 }
 
 .fieldItem .taggle_list .taggle_input {
@@ -2593,6 +2606,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .width360 {
   width: 360px;
+}
+
+#ov1 .width75px {
+  width: 75px;
 }
 
 #ov1 .width600 {

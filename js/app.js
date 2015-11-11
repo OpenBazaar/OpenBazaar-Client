@@ -19,6 +19,7 @@ var Polyglot = require('node-polyglot'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     pageNavView = require('./views/pageNavVw'),
     newPageNavView,
+    newSocketView,
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
@@ -82,8 +83,9 @@ var loadProfile = function() {
               }, 54000000);
 
               $('.js-loadingMessageModal').addClass('hide');
-              newPageNavView = new pageNavView({model: user});
-              newRouter = new router({userModel: user, socketView: new socketView({model: user})});
+              newSocketView = new socketView({model: user});
+              newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+              newRouter = new router({userModel: user, socketView: newSocketView});
               Backbone.history.start();
             });
           },
@@ -91,8 +93,9 @@ var loadProfile = function() {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
             $('.js-loadingMessageModal').addClass('hide');
             user.set('server_url', server_urlLocal);
-            newPageNavView = new pageNavView({model: user});
-            newRouter = new router({userModel: user, socketView: new socketView({model: user})});
+            newSocketView = new socketView({model: user});
+            newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+            newRouter = new router({userModel: user, socketView: newSocketView});
             Backbone.history.start();
           }
         });
@@ -134,8 +137,9 @@ var reloadProfile = function(){
     alert("Your server may not be working correctly. Loading using default settings.");
     $('.js-loadingMessageModal').addClass('hide');
     user.set('server_url', server_urlLocal);
-    newPageNavView = new pageNavView({model: user});
-    newRouter = new router({userModel: user});
+    newSocketView = new socketView({model: user});
+    newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+    newRouter = new router({userModel: user, socketView: newSocketView});
     Backbone.history.start();
     window.clearTimeout(loadProfileTimeout);
   }
