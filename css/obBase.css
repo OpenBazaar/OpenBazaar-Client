@@ -178,17 +178,6 @@ form {
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
 
-#onboarding-overlay {
-  transition: all .25s cubic-bezier(0, 0, 0.2, .5);
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 50px;
-  background: rgba(25,25,25,0.75) url('../imgs/onboarding-overlay.png');
-  background-size: cover;
-  z-index: 2;
-}
-
 .navBar {
   /* use for horizontal nav structures */
   display: flex;
@@ -306,9 +295,15 @@ form {
   width: 317px;
 }
 
-.userPage-subViews .gridItem {
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
+.userPage-subViews .gridItem,
+.homeView .gridItem {
+  border-bottom: 1px solid #327EB8;
+  border-right: 1px solid #327EB8;
+}
+
+.userPage-subViews .gridItem:nth-child(3n),
+.homeView .gridItem:nth-child(3n) {
+  border-right: 0;
 }
 
 .itemImg {
@@ -430,6 +425,15 @@ form {
 
 .btn-corner.btn-cornerTR.btn-cornerTROutR {
   right: -30px;
+}
+
+.thumbnail-small {
+  height: 30px;
+  width: 30px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px;
+  position: relative;
 }
 
 .thumbnail {
@@ -579,9 +583,9 @@ form {
 }
 
 .theme-container {
-  margin-right: 2%;
-  width: 23%;
+  height: 150px;
   text-align: center;
+  width: 33%;
 }
 
 .theme-nav {
@@ -591,12 +595,12 @@ form {
 }
 
 .theme-background {
-  border: solid 1px;
+  border: solid 1px #327EB8;
   border-radius: 3px;
   cursor: pointer;
-  margin-bottom: 5px;
+  margin: 20px auto 5px auto;
   height: 87px;
-  width: 100%;
+  width: 80%;
 }
 
 .theme-header {
@@ -717,21 +721,21 @@ h5 {
 
 .welcomeBar {
   background-color: rgb(6,55,83);
-  height: 85px;
+  height: 58px;
   line-height: 50px;
   position: relative;
   z-index: 2;
 }
 
 .welcomeBar:before {
-  background: url('../imgs/icon.png');
+  background: url('../imgs/openbazaar-icon-no-border.png');
   background-size: cover;
   bottom: 0;
   content: " ";
-  height: 80px;
+  height: 58px;
   left: 30px;
   position: absolute;
-  width: 60px;
+  width: 58px;
   z-index: 2;
 }
 
@@ -739,7 +743,7 @@ h5 {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  top: 35px;
+  top: 8px;
   height: 50px;
   padding-left: 102px;
   position: relative;
@@ -1272,6 +1276,10 @@ input[type="text"].txtField-bar {
   opacity: 1;
 }
 
+.btn-secondary {
+  background-color: #327EB8;
+}
+
 #ov1 .confirm.btn,
 #ov1 .userPage .confirm.btn {
   background-color: rgba(200,25,25,1);
@@ -1550,6 +1558,32 @@ input[type="radio"].fieldItem + label:before {
 }
 
 input[type="radio"].fieldItem:checked + label:before {
+  background: #fff;
+  box-shadow: inset 0 0 0 4px #086A9E;
+}
+
+.theme-container input[type="radio"].fieldItem + label {
+  padding: 0;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+
+.theme-container input[type="radio"].fieldItem + label:before {
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  top: 118px;
+  left: 50%;
+  margin-left: -8px;
+  border-radius: 12px;
+  border: solid 1px #fff;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.theme-container input[type="radio"].fieldItem:checked + label:before {
   background: #fff;
   box-shadow: inset 0 0 0 4px #086A9E;
 }
@@ -2061,7 +2095,7 @@ input[type="checkbox"].fieldItem + label span {
   font-size: 12px;
   margin-left: 10px;
   letter-spacing: .4px;
-  padding: 4px;
+  padding: 6px;
   width: 144px;
   z-index: 2;
 
@@ -2071,7 +2105,8 @@ input[type="checkbox"].fieldItem + label span {
   content: "\f104";
   font-family: Ionicons;
   position: absolute;
-  line-height: 27px;
+  line-height: 31px;
+  opacity: .5;
   top: 0;
   right: 6px;
 }
@@ -2171,6 +2206,11 @@ input[type="checkbox"].fieldItem + label span {
   top: 22px;
 }
 
+#ov1 .push-down25 {
+  position: relative;
+  top: 25px;
+}
+
 #ov1 .pull-up50 {
   position: relative;
   top: -50px;
@@ -2181,9 +2221,9 @@ input[type="checkbox"].fieldItem + label span {
   top: -48px;
 }
 
-#ov1 .pull-up41 {
+#ov1 .pull-up43 {
   position: relative;
-  top: -41px;
+  top: -43px;
 }
 
 #ov1 .pull-up1 {
@@ -2281,6 +2321,10 @@ input[type="checkbox"].fieldItem + label span {
 #ov1  .borderRadiusTop {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+}
+
+#ov1 .borderRadius2 {
+  border-radius: 2px;
 }
 
 #ov1  .podBorder {
@@ -2457,6 +2501,10 @@ input[type="checkbox"].fieldItem + label span {
   margin-left: 12px;
 }
 
+#ov1  .marginLeft15 {
+  margin-left: 15px;
+}
+
 #ov1  .marginLeft88 {
   margin-left: 88px;
 }
@@ -2475,6 +2523,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .marginTop6 {
   margin-top: 6px;
+}
+
+#ov1  .marginTop9 {
+  margin-top: 9px;
 }
 
 #ov1  .marginTop12 {
@@ -2587,6 +2639,10 @@ input[type="checkbox"].fieldItem + label span {
   padding-left: 15px;
 }
 
+#ov1  .paddingLeft20 {
+  padding-left: 20px;
+}
+
 #ov1  .paddingTop20 {
   padding-top: 20px;
 }
@@ -2610,6 +2666,14 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .width75px {
   width: 75px;
+}
+
+#ov1 .width87px {
+  width: 87px;
+}
+
+#ov1 .width110 {
+  width: 110px;
 }
 
 #ov1 .width600 {

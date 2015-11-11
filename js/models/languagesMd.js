@@ -33,7 +33,7 @@ module.exports = Backbone.Model.extend({
         Stores: "Stores",
         Follow: "Follow",
         Feed: "Feed",
-        FeedPlaceholder: "Feed coming soon",
+        FeedPlaceholder: "A feed of updates from all the pages you follow",
         Unfollow: "Unfollow",
         About: "About",
         AboutEmpty: "About is blank...",
@@ -49,8 +49,9 @@ module.exports = Backbone.Model.extend({
         Guid: "OpenBazaar ID (GUID)",
         Welcome: "Welcome",
         CreateStore: "Become a Store",
-        SearchForItemsPlaceholder: "Search for items",
-        SearchForPagesPlaceholder: "Search by keyword or name",
+        GoToMyPage: "Go to my page",
+        SearchForItemsPlaceholder: "Search by name or keyword",
+        SearchForPagesPlaceholder: "Search by name or keyword",
         SearchFeedPlaceholder: "Search by name or handle",
         SearchForFollowersPlaceholder: "Search by name or handle",
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
@@ -131,6 +132,14 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Data could not be loaded for:",
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466"
         },
+        filters: {
+          pagesAllTypes: "All types",
+          pagesStores: "Stores",
+          pagesMods: "Moderator services",
+          pagesBasic: "Basic users",
+          listingsCurated: "Stores I follow",
+          listingsAll: "All stores"
+        },
         nav: {
           searchPlaceholder: "Enter handle or search",
           myPage: "My Page",
@@ -168,8 +177,8 @@ module.exports = Backbone.Model.extend({
           recommended: "Recommended Pages to Follow",
           connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
-          chooseAvatar: "Upload Avatar"
-        }
+          chooseAvatar: "Select Avatar"
+        },
       },
       {
         langName: "Espanol",
@@ -215,6 +224,7 @@ module.exports = Backbone.Model.extend({
         Guid: "OpenBazaar ID (GUID)",
         Welcome: "Bienvenida",
         CreateStore: "Crear Tienda",
+        GoToMyPage: "",
         SearchForItemsPlaceholder: "Búsqueda de artículos",
         SearchForPagesPlaceholder: "Búsqueda por palabra clave",
         SearchFeedPlaceholder: "Búsqueda por nombre o mango",
@@ -295,6 +305,14 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Los datos no pudo ser cargado para:",
           socketError: "URL para WebSocket fall&oacute; Conexi&oacute;n a la toma con la direcci&oacute;n por defecto de ws://localhost:18466 "
         },
+        filters: {
+          pagesAllTypes: "Todos los tipos",
+          pagesStores: "Tiendas",
+          pagesMods: "Servicios moderador",
+          pagesBasic: "Usuarios básicos",
+          listingsCurated: "Tiendas sigo",
+          listingsAll: "Todas las tiendas"
+        },
         nav: {
           searchPlaceholder: "Introduzca un mango o una palabra clave",
           myPage: "Mi p&aacute;gina",
@@ -331,7 +349,7 @@ module.exports = Backbone.Model.extend({
           recommended: "Páginas Recomienda Seguir",
           connectExisting: "Conecte Existente",
           avatar: "Establecer un Avatar",
-          chooseAvatar: "Elija Avatar"
+          chooseAvatar: "Seleccione avatar"
         }
       }
     ]

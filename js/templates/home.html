@@ -3,14 +3,12 @@
     <div class="welcomeBar">
       <div>
         <h1 class="fancy-heading fontSize20 vCentered"><%= polyglot.t('Discover') %></h1>
-        <a class="btn btn-txt custCol-background vCentered right10 js-homeCreateStore" style="right: 150px">
-          <span class="fontSize11 marginRight2 textOpacity75"></span>
-          Go to my page
-        </a>        
-        <a class="btn btn-txt custCol-background vCentered right10 js-homeCreateStore">
-          <span class="fontSize11 marginRight2 textOpacity75"></span>
-          <%= polyglot.t('CreateStore') %>
+        <a href="#userPage" class="btn btn-txt custCol-background positionRelative pull-right right10 marginTop9 marginLeft6">
+          <%= polyglot.t('GoToMyPage') %>
         </a>
+        <a  class="btn btn-txt custCol-background positionRelative pull-right marginTop9 right10 js-homeCreateStore">
+          <%= polyglot.t('CreateStore') %>
+        </a>        
       </div>
     </div>
 
@@ -23,15 +21,15 @@
   <div class="bar home-page-navigation-filler hide custCol-primary"></div>
   <div class="flexContainer flex-border height54">
     <div class="flexRow">
-      <div class="flexRow">
+      <div class="flexRow border0">
         <div class="js-homeItemsSearch width100">
           <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
             <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
           </div>
-          <div class="selectPill pull-up41">
+          <div class="selectPill pull-up43">
             <select class="custCol-secondary">
-              <option value="following">from stores I follow</option>
-              <option value="network">from all stores</option>
+              <option value="following"><%= polyglot.t('filters.listingsCurated') %></option>
+              <option value="network"><%= polyglot.t('filters.listingsAll') %></option>
             </select>
           </div>
         </div>
@@ -40,20 +38,15 @@
           <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
             <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForPagesPlaceholder') %>" />
           </div>
-          <div class="selectPill pull-up41">
+          <div class="selectPill pull-up43">
             <select class="custCol-secondary">
-              <option value="all">of all types</option>
-              <option value="basic">only basics</option>
-              <option value="moderators">only moderators</option>
-              <option value="stores">only stores</option>
+              <option value="all"><%= polyglot.t('filters.pagesAllTypes') %></option>
+              <option value="stores"><%= polyglot.t('filters.pagesStores') %></option>
+              <option value="moderators"><%= polyglot.t('filters.pagesMods') %></option>
+              <option value="basic"><%= polyglot.t('filters.pagesBasic') %></option>
             </select>
           </div>
         </div>
-
-        <div class="txtFieldWrapper searchWrapper js-homeFeedSearch borderBottom hide">
-          <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchFeedPlaceholder') %>" />
-        </div>
-
       </div>
       </div>
     </div>
@@ -67,9 +60,12 @@
         <i class="ion-loop spinner textSize24px textOpacity50"></i>
       </div> 
     </div>
-    <div class="flexRow js-list3 minHeight650 padding20 hide alignCenter fontSize14 textOpacity75">
-      <%= polyglot.t('FeedPlaceholder') %>
+    <div class="flexRow js-list3 minHeight650 hide alignCenter fontSize14">
+      <h1 class="fancy-heading"><%= polyglot.t('Coming Soon') %></h1>
+      <span class="fontSize16"><%= polyglot.t('FeedPlaceholder') %></span><br />
+      <br />
+      <img src="./imgs/feed-coming-soon.png" style="width: 497px;" />
     </div>
+    <div class="navBar custCol-secondary" style="padding: 4px 0"></div>
   </div>
-  <div class="navBar custCol-secondary" style="padding: 4px 0"></div>
 </div>

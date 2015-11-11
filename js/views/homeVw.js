@@ -104,27 +104,25 @@ module.exports = Backbone.View.extend({
         self.$el.find('.js-homeMyPage').addClass('show');
       }
 
-      $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 20 && self.slimVisible === false ) {
-          self.slimVisible = true;
-          $('.home-page-navigation-filler').show();
-          $('.home-page-header').addClass('home-page-header-slim');
-          $('.home-page-header-slim').show();
-          $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
-        }
-        if ($(this).scrollTop() < 20 && self.slimVisible === true ) {
-          self.slimVisible = false;
-          $('.home-page-navigation-filler').hide();
-          $('.home-page-header').removeClass('home-page-header-slim');
-          $('.home-page-header-slim').hide();
-          $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
-        }
-      });
+      // $("#obContainer").scroll(function(){
+      //   if ($(this).scrollTop() > 20 && self.slimVisible === false ) {
+      //     self.slimVisible = true;
+      //     $('.home-page-navigation-filler').show();
+      //     $('.home-page-header').addClass('home-page-header-slim');
+      //     $('.home-page-header-slim').show();
+      //     $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
+      //   }
+      //   if ($(this).scrollTop() < 20 && self.slimVisible === true ) {
+      //     self.slimVisible = false;
+      //     $('.home-page-navigation-filler').hide();
+      //     $('.home-page-header').removeClass('home-page-header-slim');
+      //     $('.home-page-header-slim').hide();
+      //     $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+      //   }
+      // });
 
       // Auto focus the search input
       $('.js-homeItemsSearch input').focus();
-
-      self.hideList1();
     });
   },
 
