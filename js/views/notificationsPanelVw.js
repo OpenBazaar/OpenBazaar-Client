@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
       success: function(notifications, response) {
         __.each(notifications.models, function(notification){
           "use strict";
-          notification.avatarURL = self.options.server_url +"get_image?hash="+notification.image_hash+"&guid="+notification.guid;
+          notification.set('avatarURL', self.options.server_url +"get_image?hash="+notification.get('image_hash')+"&guid="+notification.get('guid'));
           self.renderNotification(notification);
         });
         self.parentEl.html(self.listWrapper);

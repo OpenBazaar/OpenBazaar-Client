@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    moment = require('moment'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
@@ -8,7 +9,8 @@ module.exports = Backbone.View.extend({
   className: "notification flexRow",
 
   events: {
-    //'click .js-item': 'itemClick'
+    'click .js-avatar': 'avatarClick',
+    'click .js-username': 'avatarClick'
   },
 
   initialize: function(){
@@ -19,9 +21,22 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     loadTemplate('./js/templates/notification.html', function(loadedTemplate) {
+      var timestamp = self.model.get('timestamp');
+      var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMMM Do YYYY, h:mm a');
+      console.log(formatted_timestamp);
+      self.model.set('formattedTimestamp', formatted_timestamp);
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;
+  },
+
+  avatarClick: function(){
+    console.log("avatarClick");
+    var targ = $('.js-navNotificationsMenu');
+    targ.addClass('hide');
+    $('#overlay').addClass('hide');
+    Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
+
   },
 
   close: function(){
