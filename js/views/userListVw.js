@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
     /*expected options:
       options.title: title for no users found
       options.message: message for no users found
-      options.server_url: server url to pass into each user view
+      options.serverUrl: server url to pass into each user view
     */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
@@ -29,7 +29,7 @@ module.exports = Backbone.View.extend({
     {
       __.each(this.usersShort.models, function (user)
       {
-        user.set('avatarURL', self.options.server_url+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
+        user.set('avatarURL', self.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
         self.renderUser(user);
       }, this);
       this.$el.html(this.listWrapper);

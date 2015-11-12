@@ -1,6 +1,14 @@
-var Backbone = require('backbone');
+var __ = require('underscore'),
+    Backbone = require('backbone'),
+    countriesMd = require('./countriesMd');
 
 module.exports = Backbone.Model.extend({
+
+  initialize: function(){
+    this.countries = new countriesMd();
+    this.countryArray = this.countries.get('countries');
+  },
+
   defaults: {
     beenSet: true, //set this back to false when done testing
     guid: "", //set by app.js
@@ -14,19 +22,29 @@ module.exports = Backbone.Model.extend({
     language: "en", //user’s prefered language (string)
     time_zone: "", //the user’s time zone (string)
     notifications: true, //display notifications (“True” or “False”)
-    ship_to_name: "", //default shipping (string)
-    ship_to_street: "", //default shipping (string)
-    ship_to_city: "", //default shipping (string)
-    ship_to_state: "", //default shipping (string)
-    ship_to_postal_code: "", //default shipping (string)
-    ship_to_country: "", //default shipping (string)
+    shipping_addresses: [], //array of addresses
     blocked: [], //a list of guids to block (LIST of 40 character hex strings)
     libbitcoin_server: "", //the server address (url string)
     ssl: true, //use ssl on the openbazaar server (“True” or “False”)
-    server_url: "http://localhost:18469/api/v1/", //set from localStorage
+    serverUrl: "http://localhost:18469/api/v1/", //set from localStorage
     //value below for testing. Real value should be dynamically set
-    //server_url: "http://seed.openbazaar.org:18469/api/v1/",
+    //serverUrl: "http://seed.openbazaar.org:18469/api/v1/",
     terms_conditions: "No terms or conditions", //default terms/conditions (string)
     refund_policy: "No refund policy" //default refund policy (string)
+  },
+
+  parse: function(response) {
+    "use strict";
+
+    //find the human readable name for the country
+    var matchedCountry = this.countryArray.filter(function(value, i){
+      return value.dataName == response.country;
+    });
+    response.displayCountry = matchedCountry[0] ? matchedCountry[0].name : "";
+
+    //addresses come from the server as a string. Parse the string
+    response.shipping_addresses = response.shipping_addresses ? JSON.parse(response.shipping_addresses[0]) : [];
+
+    return response;
   }
 });
