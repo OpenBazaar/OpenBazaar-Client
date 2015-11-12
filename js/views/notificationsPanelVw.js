@@ -50,7 +50,6 @@ module.exports = Backbone.View.extend({
   },
 
   renderNotification: function(model){
-    console.log('model', model);
     var notification = new notificationView({
       model: model
     });
@@ -73,16 +72,14 @@ module.exports = Backbone.View.extend({
     if(data.hasOwnProperty('notification')) {
       console.log('Got Notification from Websocket:', data.notification);
       var n = data.notification;
-      var username = (n.handle != "") ? n.handle : n.guid;
-      var avatar = (n.image_hash) ? this.options.serverUrl + 'get_image?hash=' + n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
-      console.log(window.polyglot);
+      var username = n.handle ? n.handle : n.guid;
+      var avatar = n.image_hash ? this.options.serverUrl + 'get_image?hash=' + n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
       new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
         icon: avatar
       });
       var new_notification = new Backbone.Model(n);
       this.renderNotification(new_notification);
       var unread_count = $('.js-navNotifications:first').attr('data-count');
-      console.log($('.js-navNotifications:first').attr('data-count'));
       if(unread_count) {
         unread_count = parseInt(unread_count) + 1;
       } else {

@@ -145,7 +145,7 @@ module.exports = Backbone.View.extend({
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
         socketView: self.socketView,
-        serverUrl: self.options.model.attributes.serverUrl
+        serverUrl: self.options.model.get('serverUrl')
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
@@ -188,7 +188,6 @@ module.exports = Backbone.View.extend({
 
   setNotificationCount: function(count){
     "use strict";
-    console.log("setnotificationscount " + count);
     if(count > 99) {
       count = "..";
     }
@@ -387,7 +386,6 @@ module.exports = Backbone.View.extend({
   closeModal: function(e){
     "use strict";
     $(e.target).closest('.modal').addClass('fadeOut');
-    console.log('sdfdsf');
   },
 
   navAdminPanel: function(){
