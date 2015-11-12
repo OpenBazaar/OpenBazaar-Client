@@ -185,6 +185,8 @@ module.exports = Backbone.View.extend({
             formData = new FormData();
         if (imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
           formData.append("avatar", imageHash);
+          formData.append("name", self.userProfile.get('profile').name);
+          formData.append("location", self.userProfile.get('profile').location);
           self.postData(formData, "profile",
               function (data) {
                 self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('serverUrl') + "get_image?hash=" + imageHash + ')');
