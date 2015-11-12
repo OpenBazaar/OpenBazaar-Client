@@ -134,6 +134,7 @@ module.exports = Backbone.Model.extend({
         SecondaryColor: "Secondary Color",
         TextColor: "Text Color",
         BackgroundColor: "Background Color",
+        NotificationFollow: "is now following you",
         SearchForCategory: "Search for category",
         Moderators: "Moderators",
         Categories: "Categories",
