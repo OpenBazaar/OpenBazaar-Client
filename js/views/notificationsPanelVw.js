@@ -4,7 +4,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     notificationsCollection = require('../collections/notificationsCl'),
     notificationView = require('./notificationVw'),
-    notification = require('../models/notificationMd');
+    notifications = require('../models/notificationsMd');
 
 module.exports = Backbone.View.extend({
 
@@ -68,7 +68,10 @@ module.exports = Backbone.View.extend({
     var data = JSON.parse(response.data);
     if(data.hasOwnProperty('notification')) {
       console.log('Got Notification from Websocket:', data.notification);
-      this.renderNotification(data.notification);
+      var new_notification = new Backbone.Model(data.notification);
+      this.renderNotification(new_notification);
+      var unread_count = this.$el.find('.js-navNotifications').attr('data-count');
+      this.trigger('notificationsCounted', unread_count+1);
     }
   },
 

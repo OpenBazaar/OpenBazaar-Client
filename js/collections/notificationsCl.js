@@ -1,10 +1,10 @@
 var Backbone = require('backbone'),
-    notification = require('../models/notificationMd');
+    notifications = require('../models/notificationsMd');
 
 
 module.exports = Backbone.Collection.extend({
 
-  model: notification,
+  model: notifications,
 
   initialize: function(options) {
   }

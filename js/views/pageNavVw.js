@@ -167,6 +167,7 @@ module.exports = Backbone.View.extend({
   navNotificationsClick: function(e){
     "use strict";
     e.stopPropagation();
+    this.setNotificationCount("");
     var targ = this.$el.find('.js-navNotificationsMenu');
     targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
