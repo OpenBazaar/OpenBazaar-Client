@@ -1235,6 +1235,18 @@ input[type="text"].txtField-bar {
   line-height: 26px;
 }
 
+.btn-latched {
+  width: 80px;
+  margin: 0;
+  border-radius: 0;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  position: relative;
+  font-size: 12px;
+  height: 28px;
+  line-height: 28px;
+}
+
 #ov1 .btn.confirmable,
 #ov1 .userPage .btn.confirmable {
   transition: 2s background-color;
@@ -1777,7 +1789,7 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .shadow-inner1-strong {
-  box-shadow: inset 0px -400px 222px -182px rgba(25,25,25,.85);
+  box-shadow: inset 0px -240px 92px -162px rgba(25,25,25,.55);
 }
 
 .icon-centered {
@@ -2327,6 +2339,11 @@ input[type="checkbox"].fieldItem + label span {
   border-radius: 2px;
 }
 
+#ov1 .borderRadiusBottom0 {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 #ov1  .podBorder {
   border: solid 1px rgba(255,255,255,0.08);
   border-bottom: solid 2px rgba(255,255,255,0.08);
@@ -2566,6 +2583,11 @@ input[type="checkbox"].fieldItem + label span {
   margin: auto;
 }
 
+#ov1  .height43 {
+  height: 43px;
+  line-height: 43px;
+}
+
 #ov1  .height54 {
   height: 54px;
 }
@@ -2674,6 +2696,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .width110 {
   width: 110px;
+}
+
+#ov1 .width160 {
+  width: 160px;
 }
 
 #ov1 .width600 {
