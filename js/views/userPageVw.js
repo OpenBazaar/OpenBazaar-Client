@@ -202,6 +202,7 @@ module.exports = Backbone.View.extend({
             }
           }else{
             //model was returned as a blank object
+            $('.js-loadingModal').addClass('hide');
             showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           }
 
@@ -211,6 +212,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
+        $('.js-loadingModal').addClass('hide');
         showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
