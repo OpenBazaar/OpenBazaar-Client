@@ -35,15 +35,15 @@ module.exports = Backbone.Model.extend({
 
   parse: function(response) {
     "use strict";
-    var tempShippingArray;
+
     //find the human readable name for the country
     var matchedCountry = this.countryArray.filter(function(value, i){
       return value.dataName == response.country;
     });
-    response.displayCountry = matchedCountry[0].name;
-    //addresses come from the server as a string. Parse the string
-    response.shipping_addresses = JSON.parse(response.shipping_addresses[0]);
+    response.displayCountry = matchedCountry[0] ? matchedCountry[0].name : "";
 
+    //addresses come from the server as a string. Parse the string
+    response.shipping_addresses = response.shipping_addresses ? JSON.parse(response.shipping_addresses[0]) : [];
 
     return response;
   }
