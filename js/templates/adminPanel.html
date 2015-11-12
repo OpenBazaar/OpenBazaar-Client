@@ -136,6 +136,7 @@
     <div class="box-border row20">
       <form id="adminPanelSettings">
         <div class="flex-border">
+          <% if(ob.shipping_addresses.length > 0) { %>
           <div class="flexRow">
             <div class="flexCol-12 padding2015">
               <h4>Current Addresses</h4>
@@ -156,6 +157,7 @@
             </div>
           </div>
           <% }); %>
+          <% } %>
 
           <div class="flexRow">
             <div class="flexCol-4">
