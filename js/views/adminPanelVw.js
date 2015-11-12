@@ -12,6 +12,7 @@ module.exports = Backbone.View.extend({
   el: '#adminPanel',
 
   events: {
+    'click .js-adminModal': 'blockClicks',
     'click .js-closeModal': 'closeModal',
     'click .js-adminMakeModerator': 'makeModerator',
     'click .js-adminUnmakeModerator': 'unMakeModerator',
@@ -43,6 +44,12 @@ module.exports = Backbone.View.extend({
       self.updatePage();
     });
     return this;
+  },
+
+  blockClicks: function(e) {
+    "use strict";
+    e.stopPropagation();
+
   },
 
   updatePage: function() {
@@ -244,7 +251,7 @@ module.exports = Backbone.View.extend({
         formData = new FormData(),
         existingKeys = {},
         newAddress = {},
-        newAddresses = this.model.get('shipping_addresses');
+        newAddresses = [];
 
     targetForm.find('input').each(function(){
       existingKeys[$(this).attr('name')] = $(this).val();
@@ -257,9 +264,16 @@ module.exports = Backbone.View.extend({
     newAddress.postal_code = this.$el.find('#adminShipToPostalCodeInput').val();
     newAddress.country = this.$el.find('#adminShipToCountryInput').val();
 
-    newAddresses.push(newAddress);
-    formData.append('shipping_addresses', newAddresses);
-    existingKeys.newAddresses = newAddresses;
+    if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+      newAddresses.push(newAddress);
+    }
+
+    $('.js-adminPanelAddress:checked').each(function(){
+        newAddresses.push(self.model.get('shipping_addresses')[$(this).val()]);
+      });
+
+    formData.append('shipping_addresses', JSON.stringify(newAddresses));
+    existingKeys.shipping_addresses = newAddresses;
 
     formData.append('currency_code', this.$el.find('#adminCurrencyInput').val());
 
