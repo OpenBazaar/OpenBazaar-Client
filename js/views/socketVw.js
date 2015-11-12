@@ -128,7 +128,7 @@ module.exports = Backbone.View.extend({
     var message = {"request": {
       "api": "v1",
       "id": wsID,
-      "command": "get_notifications" //this call doesn't exist yet
+      "command": "get_notifications"
     }};
     this.waitForSocket(JSON.stringify(message));
   },

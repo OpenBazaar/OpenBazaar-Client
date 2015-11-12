@@ -15,6 +15,8 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
+
+    this.notificationLimit = 30;
     this.notifications = new notificationsCollection();
     this.notifications.url = options.serverUrl + "get_notifications";
     this.notifications.fetch({
@@ -23,7 +25,7 @@ module.exports = Backbone.View.extend({
         __.each(notifications.models, function(notification){
           "use strict";
           if(notification.get('read') != true) {
-            unread_count += 1;
+            unread_count = parseInt(unread_count) + 1;
           }
           notification.set('avatarURL', self.options.serverUrl +"get_image?hash="+notification.get('image_hash')+"&guid="+notification.get('guid'));
           self.renderNotification(notification);
@@ -68,10 +70,23 @@ module.exports = Backbone.View.extend({
     var data = JSON.parse(response.data);
     if(data.hasOwnProperty('notification')) {
       console.log('Got Notification from Websocket:', data.notification);
-      var new_notification = new Backbone.Model(data.notification);
+      var n = data.notification;
+      var username = (n.handle != "") ? n.handle : n.guid;
+      var avatar = (n.image_hash) ? this.options.serverUrl + 'get_image?hash=' + n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
+      console.log(window.polyglot);
+      new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
+        icon: avatar
+      });
+      var new_notification = new Backbone.Model(n);
       this.renderNotification(new_notification);
-      var unread_count = this.$el.find('.js-navNotifications').attr('data-count');
-      this.trigger('notificationsCounted', unread_count+1);
+      var unread_count = $('.js-navNotifications:first').attr('data-count');
+      console.log($('.js-navNotifications:first').attr('data-count'));
+      if(unread_count) {
+        unread_count = parseInt(unread_count) + 1;
+      } else {
+        unread_count = 1;
+      }
+      this.trigger('notificationsCounted', unread_count);
     }
   },
 
