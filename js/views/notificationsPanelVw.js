@@ -19,13 +19,19 @@ module.exports = Backbone.View.extend({
     this.notifications.url = options.serverUrl + "get_notifications";
     this.notifications.fetch({
       success: function(notifications, response) {
+        var unread_count = 0;
         __.each(notifications.models, function(notification){
           "use strict";
+          if(notification.get('read') != true) {
+            unread_count += 1;
+          }
           notification.set('avatarURL', self.options.serverUrl +"get_image?hash="+notification.get('image_hash')+"&guid="+notification.get('guid'));
           self.renderNotification(notification);
         });
         self.parentEl.html(self.listWrapper);
-        self.trigger('notificationsCounted', notifications.length);
+        if(unread_count > 0) {  // Don't show badge if less than 1 notification
+          self.trigger('notificationsCounted', unread_count);
+        }
       }
     });
 
@@ -38,7 +44,7 @@ module.exports = Backbone.View.extend({
   },
 
   renderNotification: function(model){
-    
+    console.log('model', model);
     var notification = new notificationView({
       model: model
     });
