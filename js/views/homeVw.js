@@ -20,6 +20,7 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-homeItemsBtn': 'homeItemsClick',
+    'click .js-homeFeedBtn': 'homeFeedClick',
     'click .js-homeStoresBtn': 'homeStoresClick',
     'click .js-homeCreateStore': 'createStore'
   },
@@ -75,18 +76,10 @@ module.exports = Backbone.View.extend({
     clearInterval(this.homeLookingTimeout);
   },
 
-  hideList1: function(e){
-    $('.js-list1').show();
-    $('.js-list2').hide();
-    $('.js-homeItemsBtn').addClass('active');
-    $('.js-homeStoresBtn').removeClass('active');
-  },
-
-  hideList2: function(e){
-    $('.js-list1').hide();
-    $('.js-list2').show();
-    $('.js-homeItemsBtn').removeClass('active');
-    $('.js-homeStoresBtn').addClass('active');
+  hideList: function(e){
+    $('.js-list1, .js-list2, .js-list3').addClass('hide');;
+    $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').addClass('hide');;
+    $('.js-homeItemsBtn, .js-homeStoresBtn, .js-homeFeedBtn').removeClass('active');
   },
 
   handleSocketMessage: function(response) {
@@ -111,27 +104,25 @@ module.exports = Backbone.View.extend({
         self.$el.find('.js-homeMyPage').addClass('show');
       }
 
-      $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 20 && self.slimVisible === false ) {
-          self.slimVisible = true;
-          $('.home-page-navigation-filler').show();
-          $('.home-page-header').addClass('home-page-header-slim');
-          $('.home-page-header-slim').show();
-          $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
-        }
-        if ($(this).scrollTop() < 20 && self.slimVisible === true ) {
-          self.slimVisible = false;
-          $('.home-page-navigation-filler').hide();
-          $('.home-page-header').removeClass('home-page-header-slim');
-          $('.home-page-header-slim').hide();
-          $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
-        }
-      });
+      // $("#obContainer").scroll(function(){
+      //   if ($(this).scrollTop() > 20 && self.slimVisible === false ) {
+      //     self.slimVisible = true;
+      //     $('.home-page-navigation-filler').show();
+      //     $('.home-page-header').addClass('home-page-header-slim');
+      //     $('.home-page-header-slim').show();
+      //     $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
+      //   }
+      //   if ($(this).scrollTop() < 20 && self.slimVisible === true ) {
+      //     self.slimVisible = false;
+      //     $('.home-page-navigation-filler').hide();
+      //     $('.home-page-header').removeClass('home-page-header-slim');
+      //     $('.home-page-header-slim').hide();
+      //     $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+      //   }
+      // });
 
-      self.hideList1();
-
-      //render current date
-      $('.js-currentDate').html(Moment().format('MMMM Do, YYYY'));
+      // Auto focus the search input
+      $('.js-homeItemsSearch input').focus();
     });
   },
 
@@ -169,13 +160,36 @@ module.exports = Backbone.View.extend({
 
   homeItemsClick: function(e){
     "use strict";
-    this.hideList1();
+    this.hideList();
+    $('.js-list1').removeClass('hide');;
+    $('.js-homeItemsBtn').addClass('active');
+
+    // Auto focus the search input
+    $('.js-homeItemsSearch').removeClass('hide');;
+    $('.js-homeItemsSearch input').focus();
   },
 
   homeStoresClick: function(e){
     "use strict";
-    this.hideList2();
+    this.hideList();
+    $('.js-list2').removeClass('hide');;
+    $('.js-homeStoresBtn').addClass('active');
+
+    // Auto focus the search input
+    $('.js-homeStoresSearch').removeClass('hide');;
+    $('.js-homeStoresSearch input').focus();
   },
+
+  homeFeedClick: function(e){
+    "use strict";
+    this.hideList();
+    $('.js-list3').removeClass('hide');;
+    $('.js-homeFeedBtn').addClass('active');
+
+    // Auto focus the search input
+    $('.js-homeFeedSearch').removeClass('hide');;
+    $('.js-homeFeedSearch input').focus();    
+  },  
 
   createStore: function() {
     "use strict";

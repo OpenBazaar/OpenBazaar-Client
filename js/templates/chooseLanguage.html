@@ -1,4 +1,4 @@
-<div class="rowItem js-homeModal-languageSelect padding17px" data-code="<%= ob.langCode %>">
-  <input type="radio" id="<%= ob.langCode %>" name="<%= ob.langCode %>" <% if(ob.selected == ob.langCode){%>checked="checked"<%}%>>
-  <label class="homeModal-language" for="<%= ob.langCode %>"><%- ob.langName %></label>
+<div class="rowItem js-homeModal-languageSelect padding0 paddingLeft6" data-code="<%= ob.langCode %>">
+  <input type="radio" class="fieldItem" id="<%= ob.langCode %>" name="<%= ob.langCode %>" <% if(ob.selected == ob.langCode){%>checked="checked"<%}%>>
+  <label class="homeModal-language radioLabel" for="<%= ob.langCode %>"><%- ob.langName %></label>
 </div>
