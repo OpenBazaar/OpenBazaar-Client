@@ -622,6 +622,33 @@ form {
   width: 75%;
 }
 
+.topThumb {
+  width:55px;
+  height:55px;
+  background-size: cover;
+  top: 24px;
+  content: " ";
+  left: 30px;
+  position: absolute;
+  z-index: 3;
+}
+
+.smPageHeader {
+  background-color: rgb(6,55,83);
+  height: 85px;
+  line-height: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.smPageHeader .smPageHeaderInner {
+  top: 35px;
+  padding-left: 100px;
+  padding-right: 15px;
+  position: relative;
+  background-color: rgb(33, 81, 117);
+}
+
 /*========== typography ==========*/
 
 h1,h2,h3 {
@@ -681,6 +708,7 @@ h5 {
   white-space: nowrap;
   overflow: hidden;
 }
+
 /*========== skin classes ==========*/
 
 .userPage {
@@ -1333,6 +1361,7 @@ label {
 input[type="text"].fieldItem,
 input[type="number"].fieldItem,
 input[type="email"].fieldItem,
+input[type="file"].fieldItem,
 input[type="url"].fieldItem,
 input[type="datetime-local"].fieldItem {
   background: none;
@@ -2702,4 +2731,8 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .borderBottomRightRaidus3 {
   border-bottom-right-radius: 3px !important;
+}
+
+#ov1 .overflowVisible {
+  overflow: visible;
 }
