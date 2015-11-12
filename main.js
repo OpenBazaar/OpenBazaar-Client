@@ -66,7 +66,8 @@ app.on('ready', function() {
     "center": true,
     "title": "OpenBazaar",
     "frame": false,
-    "icon": "imgs/openbazaar-icon.png"
+    "icon": "imgs/openbazaar-icon.png",
+    "title-bar-style": "hidden"
   });
 
   // and load the index.html of the app.
