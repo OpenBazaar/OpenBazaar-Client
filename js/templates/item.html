@@ -15,12 +15,12 @@
 <div class="flexRow border0">
   <div class="flexCol-5 pad20">
     <div class="itemImg itemImg-large row10 rowTop20"
-    style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
     </div>
   <div class="flexRow row20">
     <% _.each(ob.vendor_offer.listing.item.image_hashes, function(data, i) {
     if(i != 0){%>
-    <div class="itemImg itemImg-small" style="background-image: url(<%- ob.server_url %>get_image?hash=<%- data %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"></div>
+    <div class="itemImg itemImg-small" style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"></div>
     <% } }); %>
   </div>
 </div>
