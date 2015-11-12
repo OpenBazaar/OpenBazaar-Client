@@ -3,7 +3,8 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     notificationsCollection = require('../collections/notificationsCl'),
-    notificationView = require('./notificationVw');
+    notificationView = require('./notificationVw'),
+    notification = require('../models/notificationMd');
 
 module.exports = Backbone.View.extend({
 
@@ -15,12 +16,12 @@ module.exports = Backbone.View.extend({
     this.parentEl = $(options.parentEl);
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
     this.notifications = new notificationsCollection();
-    this.notifications.url = options.server_url + "get_notifications";
+    this.notifications.url = options.serverUrl + "get_notifications";
     this.notifications.fetch({
       success: function(notifications, response) {
         __.each(notifications.models, function(notification){
           "use strict";
-          notification.set('avatarURL', self.options.server_url +"get_image?hash="+notification.get('image_hash')+"&guid="+notification.get('guid'));
+          notification.set('avatarURL', self.options.serverUrl +"get_image?hash="+notification.get('image_hash')+"&guid="+notification.get('guid'));
           self.renderNotification(notification);
         });
         self.parentEl.html(self.listWrapper);
@@ -37,14 +38,15 @@ module.exports = Backbone.View.extend({
   },
 
   renderNotification: function(model){
+    
     var notification = new notificationView({
       model: model
     });
     this.subViews.push(notification);
     this.listWrapper.prepend(notification.el);
-    var server_url = this.options.server_url;
+    var serverUrl = this.options.serverUrl;
 
-    $.post(server_url + "mark_notification_as_read", {
+    $.post(serverUrl + "mark_notification_as_read", {
       "id": model.get('id')
     });
   },

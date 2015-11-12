@@ -145,7 +145,7 @@ module.exports = Backbone.View.extend({
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
         socketView: self.socketView,
-        server_url: self.options.model.attributes.server_url
+        serverUrl: self.options.model.attributes.serverUrl
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
