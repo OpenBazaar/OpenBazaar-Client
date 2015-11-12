@@ -36,7 +36,8 @@ module.exports = Backbone.View.extend({
     'click .js-homeModalDone': 'settingsDone',
     'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
-    'click .js-closeStatus': 'closeStatusBar'
+    'click .js-closeStatus': 'closeStatusBar',
+    'click .js-homeModal-themeSelected': 'setSelectedTheme'
   },
 
   initialize: function(options){
@@ -93,7 +94,7 @@ module.exports = Backbone.View.extend({
         });
       }
       // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+      $(this).closest('.accordion-child').next('.accordion-child').find('input:visible:first').focus();
     });
     acc.find('.js-accordionPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
@@ -102,6 +103,8 @@ module.exports = Backbone.View.extend({
           return parseInt(accWin.css('left').replace("px","")) + accWidth;
         });
       }
+      // focus search input
+       $(this).closest('.accordion-child').prev('.accordion-child').find('input:visible:first').focus();
     });
     //set up filterable lists.
     //TODO: this is terrible, change to run when an event is emmitted from the subviews marking them as done rendering
@@ -335,11 +338,14 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.model.set('beenSet',true);
     this.$el.find('.js-homeModal').hide();
+    
+    // Start application walkthrough (coming soon once I have better designs)
   },
 
   closeModal: function(e){
     "use strict";
     $(e.target).closest('.modal').addClass('fadeOut');
+    console.log('sdfdsf');
   },
 
   navAdminPanel: function(){
@@ -358,6 +364,16 @@ module.exports = Backbone.View.extend({
       }
     });
     this.remove();
+  },
+
+  setSelectedTheme: function(e){
+    "use strict"
+    // Needs to save to the object and update the dom
+  },
+
+  shadeColor2: function shadeColor2(color, percent) {   
+    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
   }
 
 });
