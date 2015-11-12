@@ -29,7 +29,6 @@ module.exports = Backbone.View.extend({
   },
 
   avatarClick: function(){
-    console.log("avatarClick");
     var targ = $('.js-navNotificationsMenu');
     targ.addClass('hide');
     $('#overlay').addClass('hide');
