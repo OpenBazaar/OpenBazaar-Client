@@ -69,6 +69,19 @@ module.exports = Backbone.View.extend({
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
+  },
+
+  close: function(){
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.unbind();
+        subView.remove();
+      }
+    });
+    this.unbind();
+    this.remove();
   }
 
 });

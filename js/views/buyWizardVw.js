@@ -4,6 +4,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     buyDetailsVw = require('./buyDetailsVw'),
+    buyAddressesVw = require('./buyAddressesVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
     chosen = require('../utils/chosen.jquery.min.js');
 Backbone.$ = $;
@@ -26,15 +27,8 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options){
     var self = this,
-        initialStreetAddress = this.model.get('user').ship_to_street + " " +
-            this.model.get('user').ship_to_city + " " +
-            this.model.get('user').ship_to_state + " " +
-            this.model.get('user').ship_to_postal_code + " " +
-            this.model.get('user').ship_to_country,
         countries = new countriesModel();
-    this.buyDetailsView = new buyDetailsVw({model: this.model});
 
-    initialStreetAddress = encodeURIComponent(initialStreetAddress);
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     //create the country select list
@@ -43,7 +37,6 @@ module.exports = Backbone.View.extend({
     __.each(this.countryList, function(countryFromList, i){
       self.countriesSelect.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
     });
-    this.model.set("initialStreetAddress", initialStreetAddress);
     console.log(this.model);
     this.render();
   },
@@ -83,6 +76,9 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
+    this.buyDetailsView = new buyDetailsVw({model: this.model});
+    this.buyAddressesView = new buyAddressesVw({model: this.model});
+
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       //append the view to the passed in parent
@@ -93,9 +89,13 @@ module.exports = Backbone.View.extend({
       $('#obContainer').addClass('blur');
       //add all countries to the Ships To select list
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
+      //add address view
+      console.log(self.buyAddressesView.el);
+      self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardDetails').append(self.buyDetailsView.el);
     });
+
     return this;
   },
 
@@ -142,7 +142,7 @@ module.exports = Backbone.View.extend({
     if(targetForm[0].checkValidity()){
       $.ajax({
         type: "POST",
-        url: self.model.get('server_url') + "settings",
+        url: self.model.get('serverUrl') + "settings",
         contentType: false,
         processData: false,
         data: formData,

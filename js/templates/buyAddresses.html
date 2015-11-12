@@ -1,0 +1,17 @@
+<% _.each(ob.user.shipping_addresses, function(address, i){ %>
+<div class="flexRow js-buyWizardAddress">
+  <div class="rowItem padding2015">
+    <input type="radio" class="fieldItem" name="address" id="buyWizardAddress<%- i %>"/>
+    <label for="buyWizardAddress<%- i %>">
+      <div class="table">
+        <div>
+          <div class="txt-unleaded">
+            <div class="row10"><strong><%- address.name %></strong></div>
+            <div><%- address.street %> <%- address.city %>, <%- address.state %> <%- address.postal_code %>, <%- address.country %></div>
+          </div>
+        </div>
+      </div>
+    </label>
+  </div>
+</div>
+<% }); %>

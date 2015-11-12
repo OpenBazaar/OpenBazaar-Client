@@ -4,7 +4,7 @@
       <h2 class="ion-close-round"></h2>
     </div>
     <div class="modal-hero js-buyWizardHero shadow-inner1-light"
-         style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);">
+         style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);">
       <iframe class="hide js-buyWizardMap"
         width="525"
         height="250"
@@ -28,7 +28,11 @@
                       <div class="table">
                         <div>
                           <div class="thumbnail thumbnail-large-slim box-border"
-                               style="background-image: url(<%- ob.server_url %>get_image?hash=<%- moderator.avatar_hash %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
+                               <% if(moderator.avatar != ""){ %>
+                               style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
+                               <% } else { %>
+                               style="background-image: url(imgs/defaultUser.png);">
+                               <% } %>
                           </div>
                           <div class="pad10Left txt-unleaded">
                             <div class="row10"><strong>Moderated by <%- moderator.name %> <%- moderator.blockchain_id %> <%- moderator.fee %></strong></div>
@@ -48,7 +52,7 @@
                     <div class="table">
                       <div>
                         <div class="thumbnail thumbnail-large-slim box-border"
-                             style="background-image: url(<%- ob.server_url %>get_image?hash=<%- ob.avatar_hash %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+                             style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
                         </div>
                         <div class="pad10left txt-unleaded">
                           <div class="row10"><strong>Direct</strong></div>
@@ -78,23 +82,11 @@
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
-              <div class="flexRow js-buyWizardAddress">
-                <div class="rowItem padding2015">
-                  <input type="radio" class="fieldItem" name="address" id="buyWizardAddress"/>
-                  <label for="buyWizardAddress">
-                    <div class="table">
-                      <div>
-                        <div class="txt-unleaded">
-                          <div class="row10"><strong><%- ob.user.ship_to_name %></strong></div>
-                          <div><%- ob.user.ship_to_street %> <%- ob.user.ship_to_city %>, <%- ob.user.ship_to_state %><%- ob.user.ship_to_postal_code %>, <%- ob.user.ship_to_country %></div>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
+              <div class="js-buyWizardAddresses">
+                <!--insert addresses-->
               </div>
-              <form id="buyWizardNewAddressForm">
-                <div class="flexRow js-buyWizardNewAddress hide">
+              <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress hide">
+                <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
                       <label for="buyWizardNameInput">Name</label>
@@ -104,7 +96,7 @@
                     <input type="text" name="new_ship_to_name" class="fieldItem" id="buyWizardNameInput" required/>
                   </div>
                 </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
+                <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
                       <label for="buyWizardStreetInput">Street Address</label>
@@ -114,7 +106,7 @@
                     <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardStreetInput" required/>
                   </div>
                 </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
+                <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
                       <label for="buyWizardCityInput">City</label>
@@ -124,7 +116,7 @@
                     <input type="text" name="new_ship_to_city" class="fieldItem" id="buyWizardCityInput" required/>
                   </div>
                 </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
+                <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
                       <label for="buyWizardStateInput">State</label>
@@ -134,7 +126,7 @@
                     <input type="text" name="new_ship_to_state" class="fieldItem" id="buyWizardStateInput" required/>
                   </div>
                 </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
+                <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
                       <label for="buyWizardPostalInput">Postal Code</label>
@@ -144,7 +136,7 @@
                     <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardPostalInput" required/>
                   </div>
                 </div>
-                <div class="flexRow js-buyWizardNewAddress hide">
+                <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
                       <label for="buyWizardStreetInput">Country</label>
@@ -156,9 +148,9 @@
                     </div>
                   </div>
                 </div>
+                <!--spacer for chosen. Kind of horrible. TODO: find way to expand container when Chosen opens-->
+                <div class="flexRow flexRow-noBorderBottom row320"></div>
               </form>
-              <!--spacer for chosen. Kind of horrible. TODO: find way to expand container when Chosen opens-->
-              <div class="flexRow flexRow-noBorderBottom row320"></div>
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
