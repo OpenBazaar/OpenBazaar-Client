@@ -132,10 +132,96 @@
       </form>
     </div>
 
-    <h3>Set Currency</h3>
+    <h3>Set Settings</h3>
     <div class="box-border row20">
       <form id="adminPanelSettings">
         <div class="flex-border">
+          <div class="flexRow">
+            <div class="flexCol-12 padding2015">
+              <h4>Current Addresses</h4>
+              <h5>Check the ones you want to keep. Unchecked addresses will be deleted.</h5>
+            </div>
+          </div>
+          <% _.each(ob.shipping_addresses, function(address, i){ %>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <input type="checkbox" class="fieldItem js-adminPanelAddress" id="adminPanelAddress<%- i %>" value="<%- i %>">
+              <label for="adminPanelAddress<%- i %>"></label>
+            </div>
+            <div class="flexCol-10 padding2015">
+              <div><%- address.name %></div>
+              <div><%- address.street %></div>
+              <div><%- address.state %> <%- address.postal_code %></div>
+              <div><%- address.country %></div>
+            </div>
+          </div>
+          <% }); %>
+
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminShipToNameInput">Ship to Name</label>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input type="text" name="ship_to_name" class="fieldItem" id="adminShipToNameInput"/>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminShipToStreetInput">Ship to Street</label>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input type="text" name="ship_to_street" class="fieldItem" id="adminShipToStreetInput"/>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminShipToCityInput">Ship to City</label>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input type="text" name="ship_to_city" class="fieldItem" id="adminShipToCityInput"/>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminShipToStateInput">Ship to State</label>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input type="text" name="ship_to_state" class="fieldItem" id="adminShipToStateInput"/>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminShipToPostalCodeInput">Ship to Postal Code</label>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <input type="text" name="ship_to_postal_code" class="fieldItem" id="adminShipToPostalCodeInput"/>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminShipToCountryInput">Ship to Country</label>
+              </div>
+            </div>
+            <div class="flexCol-8 positionWrapper">
+              <select id="adminShipToCountryInput" name="ship_to_country" required>
+                <option value="UNITED_STATES">United States</option>
+                <option value="UNITED_KINGDOM">United Kingdom</option>
+                <option value="AUSTRALIA">Australia</option>
+                <option value="MEXICO">Mexico</option>
+              </select>
+            </div>
+          </div>
           <div class="flexRow">
             <div class="flexCol-4">
               <div class="fieldItem">
