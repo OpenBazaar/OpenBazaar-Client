@@ -13,7 +13,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     //model is userModel passed in from router
-    var socketAddress = (this.model.get('server_url')).replace(/^(.*:)\/{2}([A-Za-z0-9\-\.]+)(:[0-9]+)?(.*)$/, 'ws://$2:18466');
+    var socketAddress = (this.model.get('serverUrl')).replace(/^(.*:)\/{2}([A-Za-z0-9\-\.]+)(:[0-9]+)?(.*)$/, 'ws://$2:18466');
     //socket should be opened when view is created, and stay open
     try{
       this.socketConnection = new WebSocket(socketAddress);

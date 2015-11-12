@@ -28,8 +28,7 @@ module.exports = Backbone.View.extend({
   initialize: function (options) {
     "use strict";
     this.avatarHash = "";
-    this.server_url = this.model.get('server_url');
-    console.log(this.model);
+    this.serverUrl = this.model.get('serverUrl');
     this.userSettings = new userSettingsModel();
     this.userProfile = new userProfileModel();
 
@@ -49,8 +48,8 @@ module.exports = Backbone.View.extend({
   updatePage: function() {
     "use strict";
     var self = this;
-    this.userProfile.urlRoot = this.model.get('server_url')+ "profile";
-    this.userSettings.urlRoot = this.model.get('server_url') + "settings";
+    this.userProfile.urlRoot = this.model.get('serverUrl')+ "profile";
+    this.userSettings.urlRoot = this.model.get('serverUrl') + "settings";
     this.userProfile.fetch({
       success: function(model){
         var modelJSON = model.toJSON();
@@ -78,7 +77,7 @@ module.exports = Backbone.View.extend({
     this.userSettings.fetch({
       success: function(model){
         var modelJSON = model.toJSON();
-        self.$el.find('#adminServerInput').val(modelJSON.server_url);
+        self.$el.find('#adminServerInput').val(modelJSON.serverUrl);
         self.$el.find('#adminCurrencyInput').val(modelJSON.currency_code);
         self.$el.find('#adminShipToNameInput').val(modelJSON.ship_to_name);
         self.$el.find('#adminShipToStreetInput').val(modelJSON.ship_to_street);
@@ -92,7 +91,7 @@ module.exports = Backbone.View.extend({
       }
     });
     $.ajax({
-      url: self.model.get('server_url')+ "connected_peers",
+      url: self.model.get('serverUrl')+ "connected_peers",
       success: function(data){
         self.$el.find('.js-adminPeers').text(data);
       },
@@ -101,7 +100,7 @@ module.exports = Backbone.View.extend({
       }
     });
     $.ajax({
-      url: self.model.get('server_url')+ "routing_table",
+      url: self.model.get('serverUrl')+ "routing_table",
       success: function(data){
         self.$el.find('.js-adminRoutingTable').text(data);
       },
@@ -181,7 +180,7 @@ module.exports = Backbone.View.extend({
           formData.append("avatar", imageHash);
           self.postData(formData, "profile",
               function (data) {
-                self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('server_url') + "get_image?hash=" + imageHash + ')');
+                self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('serverUrl') + "get_image?hash=" + imageHash + ')');
                 self.userProfile.set('avatar', imageHash);
                 self.$el.find('.js-adminAvatarMsg').html("Avatar has been set");
               },
@@ -202,29 +201,12 @@ module.exports = Backbone.View.extend({
   setServer: function() {
     "use strict";
     var self = this,
-        targetForm = this.$el.find('#adminPanelServer'),
-        formData = new FormData(targetForm[0]),
-        newServer = this.$el.find('#adminServerInput').val(),
-        existingKeys = {'server_url': newServer};
+        newServer = this.$el.find('#adminServerInput').val();
 
     //change model so everything else points at new server before REST call
-    this.model.set({server_url: newServer});
+    this.model.set({serverUrl: newServer});
     //set local storage to the new server
-    localStorage.setItem("server_url", newServer);
-
-    //TODO: when API is updated to remove server_url from settings, remove this code
-    formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
-
-    if(targetForm[0].checkValidity()){
-      this.postData(formData, "settings",
-          function (data) {
-            self.updatePage();
-          },
-          function (data) {
-            alert("Failed. " + data.reason);
-          }
-      );
-    }
+    localStorage.setItem("serverUrl", newServer);
   },
 
   updateProfile: function() {
@@ -313,7 +295,7 @@ module.exports = Backbone.View.extend({
         errorModal = $('.js-messageModal');
     $.ajax({
       type: "POST",
-      url: self.model.get('server_url') + endPoint,
+      url: self.model.get('serverUrl') + endPoint,
       contentType: false,
       processData: false,
       data: formData,
@@ -345,7 +327,7 @@ module.exports = Backbone.View.extend({
         targetButton = $(e.target);
     $.ajax({
       type: "GET",
-      url: self.model.get('server_url') + "shutdown",
+      url: self.model.get('serverUrl') + "shutdown",
       complete: function () {
         targetButton.parent().find('.adminMsg').text("Server has been shut down");
       }
