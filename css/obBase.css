@@ -13,9 +13,6 @@ body {
   letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
-  overflow: hidden; 
-  -webkit-font-smoothing: antialiased;
-
 }
 
 a {
@@ -1357,7 +1354,7 @@ label {
 }
 
 .fieldItem h1,
-.fieldITem h2
+.fieldITem h2,
 .fieldItem h3,
 .fieldItem h4,
 .fieldItem h5,
@@ -2783,5 +2780,7 @@ input[type="checkbox"].fieldItem + label span {
     font-size: 10px;
     border-radius: 50%;
     color:white;
+    background-opacity: .75;
+    background-color: #B22222;
   /* don't put a border on this or it will be visible when it has no content */
 }
