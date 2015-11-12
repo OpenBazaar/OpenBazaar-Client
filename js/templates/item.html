@@ -3,7 +3,7 @@
     <div class="table">
       <div>
         <div class="width87px">
-          <a class="js-returnToStore textOpacity1">All Listings</a>&nbsp;>&nbsp;
+          <a class="js-returnToStore textOpacity1"><%= polyglot.t('AllListings') %></a>&nbsp;>&nbsp;
         </div>
         <div class="noOverflow">
           <%- ob.vendor_offer.listing.item.title %>
@@ -37,7 +37,7 @@
       <% } %>
     </p>
     <% if(ob.ownPage !== true) { %>
-    <div class="btn btn-light btn-txt btn-buyNow js-buyButton"><span class="ion-ios-cart marginRight5"></span><%= polyglot.t('BUY NOW') %></div>
+    <div class="btn btn-light btn-txt btn-buyNow js-buyButton"><span class="ion-ios-cart marginRight5"></span><%= polyglot.t('BUYNOW') %></div>
     <% } %>
   </div>
   <div class="box-border custCol-border-secondary marginBottom40">
