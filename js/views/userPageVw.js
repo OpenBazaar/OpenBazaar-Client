@@ -386,6 +386,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
+    this.$el.find('.js-deleteItem').removeClass('confirm');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
