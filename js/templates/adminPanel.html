@@ -137,11 +137,25 @@
       <form id="adminPanelSettings">
         <div class="flex-border">
           <div class="flexRow">
-            <div class="flexCol-12">
+            <div class="flexCol-12 padding2015">
               <h4>Current Addresses</h4>
+              <h5>Check the ones you want to keep. Unchecked addresses will be deleted.</h5>
             </div>
           </div>
-
+          <% _.each(ob.shipping_addresses, function(address, i){ %>
+          <div class="flexRow">
+            <div class="flexCol-2">
+              <input type="checkbox" class="fieldItem js-adminPanelAddress" id="adminPanelAddress<%- i %>" value="<%- i %>">
+              <label for="adminPanelAddress<%- i %>"></label>
+            </div>
+            <div class="flexCol-10 padding2015">
+              <div><%- address.name %></div>
+              <div><%- address.street %></div>
+              <div><%- address.state %> <%- address.postal_code %></div>
+              <div><%- address.country %></div>
+            </div>
+          </div>
+          <% }); %>
 
           <div class="flexRow">
             <div class="flexCol-4">

@@ -1,4 +1,5 @@
-var Backbone = require('backbone'),
+var __ = require('underscore'),
+    Backbone = require('backbone'),
     countriesMd = require('./countriesMd');
 
 module.exports = Backbone.Model.extend({
@@ -34,13 +35,17 @@ module.exports = Backbone.Model.extend({
 
   parse: function(response) {
     "use strict";
-    //TODO: test code, remove when settings API works again
-    if(!response.country){response.country = "UNITED_STATES";}
+    var tempShippingArray;
+    //find the human readable name for the country
     var matchedCountry = this.countryArray.filter(function(value, i){
-      console.log(value.dataName);
       return value.dataName == response.country;
     });
-    response.displayCountry = matchedCountry.name;
+    response.displayCountry = matchedCountry[0].name;
+    //addresses come from the server as a string. Parse the string, then parse each string inside it.
+    response.shipping_addresses = JSON.parse(response.shipping_addresses[0]);
+    __.each(response.shipping_addresses, function(address, i, list){
+      list[i] = JSON.parse(address);
+    });
 
     return response;
   }
