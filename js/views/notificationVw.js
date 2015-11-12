@@ -14,7 +14,6 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(){
-    var self=this;
     this.render();
   },
 
