@@ -31,7 +31,7 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.userModel = options.userModel;
     this.userProfile = new userProfileModel();
-    this.userProfile.urlRoot = this.userModel.get('server_url') + "profile";
+    this.userProfile.urlRoot = this.userModel.get('serverUrl') + "profile";
     this.socketView = options.socketView;
     this.slimVisible = false;
     this.subViews = [];
@@ -131,8 +131,8 @@ module.exports = Backbone.View.extend({
     //get data from inside the listing object
     item = item.listing;
     item.userCurrencyCode = this.userModel.get('currency_code');
-    item.imageURL = this.userModel.get('server_url')+"get_image?hash="+item.thumbnail_hash+"&guid="+item.guid;
-    item.avatarURL = this.userModel.get('server_url')+"get_image?hash="+item.avatar_hash+"&guid="+item.guid;
+    item.imageURL = this.userModel.get('serverUrl')+"get_image?hash="+item.thumbnail_hash+"&guid="+item.guid;
+    item.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+item.avatar_hash+"&guid="+item.guid;
     item.showAvatar = true;
     item.userID = item.guid;
     var newItemModel = new itemShortModel(item);
@@ -143,9 +143,9 @@ module.exports = Backbone.View.extend({
 
   renderUser: function(user){
     "use strict";
-    user.server_url = this.userModel.get('server_url');
+    user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
-    user.avatarURL = this.userModel.get('server_url')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
+    user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
     var newUserModel = new userShortModel(user)
     var storeShort = new userShortView({model: newUserModel});
     this.$el.find('.js-list2 .js-loadingMsg').before(storeShort.el);

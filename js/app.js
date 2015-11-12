@@ -27,19 +27,19 @@ var Polyglot = require('node-polyglot'),
     guid = "",
     avatar_hash = "",
     cCode = "",
-    server_urlLocal = "",
+    serverUrlLocal = "",
     loadProfileCount = 1,
     loadProfileTimeout,
     loadProfileCountdownInterval,
     loadProfileCountdown = 5;
 
-server_urlLocal = localStorage.getItem("server_url") || "http://localhost:18469/api/v1/";
+serverUrlLocal = localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
 
 //set the urlRoot of the user model. Defaults to local host if not found
-user.urlRoot = server_urlLocal + "settings";
+user.urlRoot = serverUrlLocal + "settings";
 
 //set the urlRoot of the user model. Defaults to local host if not found
-userProfile.urlRoot = server_urlLocal + "profile";
+userProfile.urlRoot = serverUrlLocal + "profile";
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 window.lang = user.get("language");
@@ -66,7 +66,7 @@ var loadProfile = function() {
         //get the user
         user.fetch({
           success: function (model, response) {
-            user.set('server_url', server_urlLocal);
+            user.set('serverUrl', serverUrlLocal);
             user.set('guid', guid);
             user.set('avatar_hash', avatar_hash);
             cCode = model.get('currency_code');
@@ -92,7 +92,7 @@ var loadProfile = function() {
           error: function (model, response) {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
             $('.js-loadingMessageModal').addClass('hide');
-            user.set('server_url', server_urlLocal);
+            user.set('serverUrl', serverUrlLocal);
             newSocketView = new socketView({model: user});
             newPageNavView = new pageNavView({model: user, socketView: newSocketView});
             newRouter = new router({userModel: user, socketView: newSocketView});
@@ -101,7 +101,7 @@ var loadProfile = function() {
         });
       }else{
         $('.js-indexLoadingMsg1').text("User profile did not load.");
-        $('.js-indexLoadingMsg2').text("Attempting to reach " + server_urlLocal);
+        $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
         $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
         reloadProfile();
       }
@@ -109,7 +109,7 @@ var loadProfile = function() {
     error: function (model, response) {
       $('.js-loadingModal').addClass('hide');
       $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded: " + response.statusText);
-      $('.js-indexLoadingMsg2').text("Attempting to reach " + server_urlLocal);
+      $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
       $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
       reloadProfile();
     }
@@ -136,7 +136,7 @@ var reloadProfile = function(){
   } else {
     alert("Your server may not be working correctly. Loading using default settings.");
     $('.js-loadingMessageModal').addClass('hide');
-    user.set('server_url', server_urlLocal);
+    user.set('serverUrl', serverUrlLocal);
     newSocketView = new socketView({model: user});
     newPageNavView = new pageNavView({model: user, socketView: newSocketView});
     newRouter = new router({userModel: user, socketView: newSocketView});
