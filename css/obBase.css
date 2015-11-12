@@ -57,9 +57,8 @@ select::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder{
   opacity: .5;
   color: #fff;
+  font-size: 14px;
   font-weight: 400;
-  font-size: 13px;
-  letter-spacing: .5px;
 }
 
 input,
@@ -174,10 +173,9 @@ form {
   top: 50px;
   height: 100%;
   width: 100%;
-  background-color: rgba(25,25,25,0.65);
+  background-color: rgba(25,25,25,0.80);
   z-index: 2;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
-
 }
 
 .navBar {
@@ -297,9 +295,15 @@ form {
   width: 317px;
 }
 
-.userPage-subViews .gridItem {
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
+.userPage-subViews .gridItem,
+.homeView .gridItem {
+  border-bottom: 1px solid #327EB8;
+  border-right: 1px solid #327EB8;
+}
+
+.userPage-subViews .gridItem:nth-child(3n),
+.homeView .gridItem:nth-child(3n) {
+  border-right: 0;
 }
 
 .itemImg {
@@ -423,9 +427,18 @@ form {
   right: -30px;
 }
 
+.thumbnail-small {
+  height: 30px;
+  width: 30px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 2px;
+  position: relative;
+}
+
 .thumbnail {
-  height: 36px;
-  width: 36px;
+  height: 54px;
+  width: 54px;
   background-size: cover;
   background-position: center;
   border-radius: 2px;
@@ -570,34 +583,43 @@ form {
 }
 
 .theme-container {
-  margin-right: 2%;
-  width: 23%;
+  height: 150px;
   text-align: center;
+  width: 33%;
+}
+
+.theme-nav {
+  height: 7px;
+  width: 75%;
+  margin: auto;
 }
 
 .theme-background {
-  border: solid 1px #063753;
-  background: black;
+  border: solid 1px #327EB8;
   border-radius: 3px;
   cursor: pointer;
-  margin-bottom: 5px;
-  height: 120px;
-  width: 100%;
+  margin: 20px auto 5px auto;
+  height: 87px;
+  width: 80%;
 }
 
 .theme-header {
-  background-color: #317DB8;
   height: 40px;
   margin: auto;
   margin-top: 8px;
-  width: 85%;
+  width: 75%;
+}
+
+.theme-global-header {
+  height: 7px;
+  width: 100%;
+  margin: auto;
 }
 
 .theme-body {
-  height: 65px;
-  background-color: #086A9E;
+  height: 25px;
   margin: auto;
-  width: 85%;
+  width: 75%;
 }
 
 /*========== typography ==========*/
@@ -699,21 +721,21 @@ h5 {
 
 .welcomeBar {
   background-color: rgb(6,55,83);
-  height: 85px;
+  height: 58px;
   line-height: 50px;
   position: relative;
   z-index: 2;
 }
 
 .welcomeBar:before {
-  background: url('../imgs/icon.png');
+  background: url('../imgs/openbazaar-icon-no-border.png');
   background-size: cover;
   bottom: 0;
   content: " ";
-  height: 80px;
+  height: 58px;
   left: 30px;
   position: absolute;
-  width: 60px;
+  width: 58px;
   z-index: 2;
 }
 
@@ -721,7 +743,7 @@ h5 {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  top: 35px;
+  top: 8px;
   height: 50px;
   padding-left: 102px;
   position: relative;
@@ -745,7 +767,7 @@ h5 {
 }
 
 .modal-opaque {
-  background-color: rgba(25,25,25,.75);
+  background-color: rgba(25,25,25,0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
   top: 50px;
 }
@@ -778,13 +800,13 @@ h5 {
 }
 
 .modal-hero-icon {
-  background: url(../imgs/openbazaar-icon.png);
+  background: url(../imgs/openbazaar-icon-no-border.png);
   background-size: cover;
-  height: 145px;
+  height: 135px;
   margin: auto;
-  top: 30px;
+  top: 40px;
   position: relative;
-  width: 145px;
+  width: 135px;
 }
 
 .flex-border > .flexRow {
@@ -867,7 +889,8 @@ h5 {
   font-family: Ionicons;
   font-size: 18px;
   left: 15px;
-  opacity: 0.7;
+  opacity: 0.75;
+  padding-left: 2px;
   position: absolute;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   top: 13px;
@@ -911,15 +934,24 @@ h5 {
   box-shadow: 0 0 0 2px #086A9E;
 }
 
+.homeView .searchWrapperWithPill .txtField {
+  text-indent: 176px;
+}
+
+.homeView .searchWrapperWithPill:before {
+  top: 17px;
+  left: 168px;
+}
+
 .txtField-bar,
 input[type="text"].txtField-bar {
   background: none;
   border-radius: 0;
   box-shadow: none;
   color: #fff;
-  height: 45px;
+  height: 53px;
   font-size: 14px;
-  letter-spacing: .4px;
+  letter-spacing: 0;
   opacity: 1;
   outline: none;
   padding: 13px;
@@ -931,7 +963,7 @@ input[type="text"].txtField-bar {
 
 .txtFieldWrapper-bar:before {
   color: #fff;
-  top: 12px;
+  top: 17px;
   left: 15px;
   opacity: 1;
 }
@@ -1244,6 +1276,10 @@ input[type="text"].txtField-bar {
   opacity: 1;
 }
 
+.btn-secondary {
+  background-color: #327EB8;
+}
+
 #ov1 .confirm.btn,
 #ov1 .userPage .confirm.btn {
   background-color: rgba(200,25,25,1);
@@ -1299,12 +1335,13 @@ input[type="number"].fieldItem,
 input[type="email"].fieldItem,
 input[type="url"].fieldItem,
 input[type="datetime-local"].fieldItem {
-  width: 100%;
-  color: #fff;
-  border: 2px solid transparent;
-  padding: 0 15px;
   background: none;
-  line-height: 46px;
+  border: 2px solid transparent;
+  color: #fff;
+  height: 53px;
+  line-height: 53px;
+  padding: 0 15px;
+  width: 100%;
 }
 
 input[type="datetime-local"].fieldItem {
@@ -1483,8 +1520,9 @@ input[type="number"].fieldItem.fieldItem-withButton {
 }
 
 select {
-  border: 2px solid transparent !important;
+  border: 2px solid transparent;
   border-radius: 0;
+  font-family: "Helvetica Neue", Helvetica, "Open Sans";
   padding: 0 15px;
   -webkit-appearance: none;
 }
@@ -1524,6 +1562,32 @@ input[type="radio"].fieldItem:checked + label:before {
   box-shadow: inset 0 0 0 4px #086A9E;
 }
 
+.theme-container input[type="radio"].fieldItem + label {
+  padding: 0;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+
+.theme-container input[type="radio"].fieldItem + label:before {
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  top: 118px;
+  left: 50%;
+  margin-left: -8px;
+  border-radius: 12px;
+  border: solid 1px #fff;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.theme-container input[type="radio"].fieldItem:checked + label:before {
+  background: #fff;
+  box-shadow: inset 0 0 0 4px #086A9E;
+}
+
 .radioLabel {
   opacity: .75;
 }
@@ -1536,7 +1600,7 @@ input[type="checkbox"].fieldItem + label {
   display: inline-block;
   cursor: pointer;
   position: relative;
-  line-height: 50px;
+  line-height: 53px;
   padding: 0 20px 0 40px;
 }
 
@@ -1545,15 +1609,16 @@ input[type="checkbox"].fieldItem + label:before {
   display: inline-block;
   position: absolute;
   left: 10px;
-  top: 15px;
-  height: 20px;
-  width: 20px;
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 10px rgba(255,255,255,0.4);
+  top: 20px;
+  height: 14px;
+  width: 14px;
+  border-radius: 1px;
+  border: solid 1px #fff;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
-  box-shadow: inset 0 0 0 5px rgba(255,255,255,0.8);
+  background: #fff;
+  box-shadow: inset 0 0 0 3px #086A9E;
 }
 
 input[type="checkbox"].fieldItem + label div,
@@ -1676,6 +1741,7 @@ input[type="checkbox"].fieldItem + label span {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   background: 50% 50% / cover no-repeat;
+  border-radius: 4px;
   height: 400px;
   position: fixed;
   top: 70px;
@@ -1702,9 +1768,12 @@ input[type="checkbox"].fieldItem + label span {
   box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.65);
 }
 
+.modal-shadow-inner1 {
+  box-shadow: inset 0px -20px 50px 0px rgba(25,25,25,.35);
+}
 .shadow-inner1 {
   /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,.75)));*/
-  box-shadow: inset 0px -400px 222px -282px rgba(25,25,25,1);
+  box-shadow: inset 0px -350px 222px -282px rgba(25,25,25,.75);
 }
 
 .shadow-inner1-strong {
@@ -1846,9 +1915,9 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 46px;
+  bottom: 40px;
   color: #fff;
-  font-size: 17px;
+  font-size: 24px;
   width: 70%;
   margin: 0 15%;
   text-align: center;
@@ -1903,7 +1972,7 @@ input[type="checkbox"].fieldItem + label span {
 
 .modal .homeModal-settings,
 .modal .homeModal-settings.flexRow {
-  height: 230px;
+  height: 222px;
   overflow-y: auto;
   background-color: #086A9E;
 }
@@ -1913,11 +1982,8 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .modal .homeModal-avatarPreview {
-  background: url('../imgs/defaultUser.png') 100% 100%;
-  background-size: cover;
-  border-radius: 3px;
-  height: 130px;
-  width: 142px;
+/*  background: url('../imgs/defaultUser.png') 100% 100%;
+  background-size: cover;*/
   margin-top: 30px;
 }
 
@@ -1932,7 +1998,16 @@ input[type="checkbox"].fieldItem + label span {
   float: none;
 }
 
-.page-userNameLarge{
+.default-avatar {
+  border-radius: 3px;
+  color: #086a9e; 
+  font-size: 73px; 
+  height: 76px;
+  text-align: center;
+  width: 80px;
+}
+
+.fancy-heading {
   font-weight: 200;
   font-size: 34px;
   opacity: .8;
@@ -2003,6 +2078,41 @@ input[type="checkbox"].fieldItem + label span {
 #modalHolder {
   position: fixed;
   z-index: 10;
+}
+
+.selectPill {
+  opacity: .75;
+  transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
+  width: 156px;
+  text-align: right;
+}
+
+.selectPill select {
+  background-color: #327EB8;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;  
+  font-size: 12px;
+  margin-left: 10px;
+  letter-spacing: .4px;
+  padding: 6px;
+  width: 148px;
+  z-index: 2;
+
+} 
+
+.selectPill:before {
+  content: "\f104";
+  font-family: Ionicons;
+  position: absolute;
+  line-height: 31px;
+  opacity: .5;
+  top: 0;
+  right: 6px;
+}
+
+.selectPill:hover {
+  opacity: 1;
 }
 
 /* protect customize controls from custom page styles */
@@ -2091,6 +2201,16 @@ input[type="checkbox"].fieldItem + label span {
   top: 5px;
 }
 
+#ov1 .push-down22 {
+  position: relative;
+  top: 22px;
+}
+
+#ov1 .push-down25 {
+  position: relative;
+  top: 25px;
+}
+
 #ov1 .pull-up50 {
   position: relative;
   top: -50px;
@@ -2099,6 +2219,11 @@ input[type="checkbox"].fieldItem + label span {
 #ov1 .pull-up48 {
   position: relative;
   top: -48px;
+}
+
+#ov1 .pull-up43 {
+  position: relative;
+  top: -43px;
 }
 
 #ov1 .pull-up1 {
@@ -2181,13 +2306,25 @@ input[type="checkbox"].fieldItem + label span {
   border-top: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .border1 {
+  border: solid 1px rgba(255,255,255,0.08);
+}
+
 #ov1  .border0 {
   border: 0;
 }
 
 #ov1  .borderRadiusTop {
+  border-radius: 3px;
+}
+
+#ov1  .borderRadiusTop {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+}
+
+#ov1 .borderRadius2 {
+  border-radius: 2px;
 }
 
 #ov1  .podBorder {
@@ -2292,6 +2429,14 @@ input[type="checkbox"].fieldItem + label span {
   font-size: 16px;
 }
 
+#ov1 .fontSize17 {
+  font-size: 17px;
+}
+
+#ov1 .fontSize18 {
+  font-size: 18px;
+}
+
 #ov1 .fontSize20 {
   font-size: 20px;
 }
@@ -2336,6 +2481,13 @@ input[type="checkbox"].fieldItem + label span {
   margin-right: 10px;
 }
 
+#ov1  .marginLeft2 {
+  margin-left: 2px;
+}
+
+#ov1  .marginLeft5 {
+  margin-left: 5px;
+}
 
 #ov1  .marginLeft6 {
   margin-left: 6px;
@@ -2349,8 +2501,16 @@ input[type="checkbox"].fieldItem + label span {
   margin-left: 12px;
 }
 
+#ov1  .marginLeft15 {
+  margin-left: 15px;
+}
+
 #ov1  .marginLeft88 {
   margin-left: 88px;
+}
+
+#ov1  .marginTop1 {
+  margin-top: 1px;
 }
 
 #ov1  .marginTop2 {
@@ -2359,6 +2519,18 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .marginTop4 {
   margin-top: 4px;
+}
+
+#ov1  .marginTop6 {
+  margin-top: 6px;
+}
+
+#ov1  .marginTop9 {
+  margin-top: 9px;
+}
+
+#ov1  .marginTop12 {
+  margin-top: 12px;
 }
 
 #ov1  .marginTop15 {
@@ -2394,12 +2566,20 @@ input[type="checkbox"].fieldItem + label span {
   margin: auto;
 }
 
+#ov1  .height54 {
+  height: 54px;
+}
+
 #ov1  .minHeight650 {
   min-height: 650px;
 }
 
 #ov1  .minHeight420 {
   min-height: 420px;
+}
+
+#ov1  .lineHeight20{
+  line-height: 20px;
 }
 
 #ov1  .lineHeightReset{
@@ -2447,8 +2627,32 @@ input[type="checkbox"].fieldItem + label span {
   padding: 17px;
 }
 
+#ov1  .paddingLeft5 {
+  padding-left: 5px;
+}
+
+#ov1  .paddingLeft6 {
+  padding-left: 6px;
+}
+
 #ov1  .paddingLeft15 {
   padding-left: 15px;
+}
+
+#ov1  .paddingLeft20 {
+  padding-left: 20px;
+}
+
+#ov1  .paddingTop20 {
+  padding-top: 20px;
+}
+
+#ov1  .paddingBottom20 {
+  padding-bottom: 20px;
+}
+
+#ov1  .widthAuto {
+  width: auto;
 }
 
 #ov1  .width100 {
@@ -2456,8 +2660,20 @@ input[type="checkbox"].fieldItem + label span {
   box-sizing: border-box;
 }
 
+#ov1 .width360 {
+  width: 360px;
+}
+
 #ov1 .width75px {
   width: 75px;
+}
+
+#ov1 .width87px {
+  width: 87px;
+}
+
+#ov1 .width110 {
+  width: 110px;
 }
 
 #ov1 .width600 {
@@ -2474,6 +2690,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ob1 .fontWeight200 {
   font-weight: 200;
+}
+
+.fontWeight400 {
+  font-weight: 400;
 }
 
 #ov1  .borderBottomLeftRaidus3 {

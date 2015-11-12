@@ -55,7 +55,7 @@ module.exports = Backbone.View.extend({
           return parseInt(accWin.css('left').replace("px","")) - accWidth;
         });
         // focus search input
-        $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+        $(this).closest('.accordion-child').next('.accordion-child').find('input:visible:first').focus();
       }
     });
     acc.find('.js-accordionPrev').on('click', function(){
@@ -65,7 +65,7 @@ module.exports = Backbone.View.extend({
           return parseInt(accWin.css('left').replace("px","")) + accWidth;
         });
         // focus search input
-        $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
+        $(this).closest('.accordion-child').prev('.accordion-child').find('input:visible:first').focus();
       }
     });
   },
@@ -83,7 +83,6 @@ module.exports = Backbone.View.extend({
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
-      $('#obContainer').addClass('blur');
     });
   },
 
