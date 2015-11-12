@@ -41,7 +41,7 @@ module.exports = Backbone.View.extend({
     this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
-      self.combinedImagesArray.push(self.model.get('server_url')+"get_image?hash="+hash);
+      self.combinedImagesArray.push(self.model.get('serverUrl')+"get_image?hash="+hash);
     });
     //add images urls to the combinedImagesArray for rendering
     this.model.set('combinedImagesArray', this.combinedImagesArray);
@@ -238,7 +238,7 @@ module.exports = Backbone.View.extend({
 
     $.ajax({
       type: "POST",
-      url: self.model.get('server_url') + "upload_image",
+      url: self.model.get('serverUrl') + "upload_image",
       contentType: false,
       processData: false,
       dataType: "json",
@@ -252,7 +252,7 @@ module.exports = Backbone.View.extend({
           hashArray = __.clone(self.model.get("imageHashesToUpload"));
           __.each(data.image_hashes, function (hash) {
             if(hash != "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40){
-              imageArray.push(self.model.get('server_url') + "get_image?hash=" + hash);
+              imageArray.push(self.model.get('serverUrl') + "get_image?hash=" + hash);
               hashArray.push(hash);
             }
           });
@@ -326,7 +326,7 @@ module.exports = Backbone.View.extend({
     deleteThisItem = function(newHash){
       $.ajax({
           type: "DELETE",
-          url: self.model.get('server_url') + "contracts?id="+self.model.get('id'),
+          url: self.model.get('serverUrl') + "contracts?id="+self.model.get('id'),
           success: function() {
               self.trigger('deleteOldDone', newHash);
           },
@@ -395,7 +395,7 @@ module.exports = Backbone.View.extend({
     if(submitForm.checkValidity()){
       $.ajax({
         type: "POST",
-        url: self.model.get('server_url') + "contracts",
+        url: self.model.get('serverUrl') + "contracts",
         contentType: false,
         processData: false,
         data: formData,

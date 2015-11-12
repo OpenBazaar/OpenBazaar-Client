@@ -26,7 +26,7 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
-    this.model.set('headerURL', this.model.get('user').server_url+"get_image?hash="+this.model.get('page').profile.header_hash);
+    this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
@@ -107,7 +107,7 @@ module.exports = Backbone.View.extend({
 
   addModerator: function(data){
     "use strict";
-    var moderatorAvatarURL = this.model.get('user').server_url+"get_image?hash=" + data.moderator.avatar_hash;
+    var moderatorAvatarURL = this.model.get('user').serverUrl+"get_image?hash=" + data.moderator.avatar_hash;
     var newModerator = $(
         '<div class="pad10 flexRow">' +
           '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
@@ -169,7 +169,7 @@ module.exports = Backbone.View.extend({
 
       $.ajax({
         type: "POST",
-        url: self.model.get('user').server_url + "profile",
+        url: self.model.get('user').serverUrl + "profile",
         contentType: false,
         processData: false,
         data: formData,

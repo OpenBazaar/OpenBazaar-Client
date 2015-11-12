@@ -146,13 +146,13 @@ module.exports = Backbone.View.extend({
     this.model = new Backbone.Model();
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
-    this.userProfile.urlRoot = options.userModel.get('server_url') + "profile";
+    this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
     this.listings = new listingsModel();
-    this.listings.urlRoot = options.userModel.get('server_url') + "get_listings";
+    this.listings.urlRoot = options.userModel.get('serverUrl') + "get_listings";
     this.followers = new usersModel();
-    this.followers.urlRoot = options.userModel.get('server_url') + "get_followers";
+    this.followers.urlRoot = options.userModel.get('serverUrl') + "get_followers";
     this.following = new usersModel();
-    this.following.urlRoot = options.userModel.get('server_url') + "get_following";
+    this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
     this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
     this.socketView = options.socketView;
     this.slimVisible = false;
@@ -194,11 +194,11 @@ module.exports = Backbone.View.extend({
           if (response.profile){
             $('.js-loadingModal').addClass('hide');
             if (self.options.ownPage === true){
-              model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash);
-              model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash);
+              model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash);
+              model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash);
             }else{
-              model.set('headerURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
-              model.set('avatarURL', self.options.userModel.get('server_url') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
+              model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
+              model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
             }
           }else{
             //model was returned as a blank object
@@ -466,15 +466,15 @@ module.exports = Backbone.View.extend({
     var self = this;
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
-      arrayItem.server_url = self.options.userModel.get('server_url');
+      arrayItem.serverUrl = self.options.userModel.get('serverUrl');
       arrayItem.showAvatar = false;
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
       if(self.options.ownPage === true){
-        arrayItem.imageURL = self.options.userModel.get('server_url')+"get_image?hash="+arrayItem.thumbnail_hash;
+        arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
       } else {
-        arrayItem.imageURL = self.options.userModel.get('server_url')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+arrayItem.guid;
+        arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+arrayItem.guid;
       }
     });
     this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
@@ -483,13 +483,13 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: "", server_url: this.options.userModel.get('server_url')});
+    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: "", serverUrl: this.options.userModel.get('serverUrl')});
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
     "use strict";
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: "", server_url: this.options.userModel.get('server_url')});
+    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: "", serverUrl: this.options.userModel.get('serverUrl')});
     this.subViews.push(this.followingList);
   },
 
@@ -499,7 +499,7 @@ module.exports = Backbone.View.extend({
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
-      server_url: self.options.userModel.get('server_url'),
+      serverUrl: self.options.userModel.get('serverUrl'),
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,
       handle: self.model.get('page').profile.handle,
@@ -508,7 +508,7 @@ module.exports = Backbone.View.extend({
       itemHash: hash
         //id: hash
     });
-    this.item.urlRoot = this.options.userModel.get('server_url')+"contracts";
+    this.item.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
     //remove old item before rendering
     if(this.itemView){
       this.itemView.undelegateEvents();
@@ -559,7 +559,7 @@ module.exports = Backbone.View.extend({
       //if editing existing product, clone the model
       this.itemEdit = model.clone();
     } else {
-      defaultItem.server_url =self.options.userModel.get('server_url');
+      defaultItem.serverUrl =self.options.userModel.get('serverUrl');
       defaultItem.userCountry = self.options.userModel.get('country');
       defaultItem.userCurrencyCode = self.options.userModel.get('currency_code');
       defaultItem.vendor_offer.listing.item.price_per_unit.fiat.currency_code =self.options.userModel.get('currency_code');
@@ -568,7 +568,7 @@ module.exports = Backbone.View.extend({
     }
     //add the moderator list to the item model
     this.itemEdit.set('moderator_list', self.model.get('page').profile.moderator_list);
-    //this.itemEdit.urlRoot = this.options.userModel.get('server_url')+"contracts";
+    //this.itemEdit.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
     //add the user information
     //this.itemEdit.set({user: self.options.userModel.toJSON()});
     //unbind any old view
@@ -686,7 +686,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     //var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
-    var server_url = self.options.userModel.get('server_url');
+    var serverUrl = self.options.userModel.get('serverUrl');
     var imageURI = self.$el.find('#image-cropper').cropit('export', {
       type: 'image/jpeg',
       quality: 0.75,
@@ -699,7 +699,7 @@ module.exports = Backbone.View.extend({
       formData.append('image', imageURI);
       $.ajax({
         type: "POST",
-        url: server_url + "upload_image",
+        url: serverUrl + "upload_image",
         contentType: false,
         processData: false,
         data: formData,
@@ -713,7 +713,7 @@ module.exports = Backbone.View.extend({
               tempPage = __.clone(self.model.get('page'));
               tempPage.profile.header = imageHash;
               self.model.set('page', tempPage);
-              self.$el.find('.js-userPageBanner').css('background-image', 'url(' + server_url + "get_image?hash=" + imageHash + ')');
+              self.$el.find('.js-userPageBanner').css('background-image', 'url(' + serverUrl + "get_image?hash=" + imageHash + ')');
               self.saveUserPageModel();
             }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
               showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
@@ -767,7 +767,7 @@ module.exports = Backbone.View.extend({
 
     $.ajax({
       type: "POST",
-      url: self.model.get('user').server_url + "profile",
+      url: self.model.get('user').serverUrl + "profile",
       contentType: false,
       processData: false,
       data: formData,
@@ -836,7 +836,7 @@ module.exports = Backbone.View.extend({
     } else {
       $.ajax({
         type: "DELETE",
-        url: self.item.get('server_url') + "contracts/?id=" + self.item.get('id'),
+        url: self.item.get('serverUrl') + "contracts/?id=" + self.item.get('id'),
         success: function () {
           //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
           self.item.trigger('destroy', self.item);
@@ -886,7 +886,7 @@ module.exports = Backbone.View.extend({
       type: "POST",
       data: this.userProfileFetchParameters,
       dataType: 'json',
-      url: this.options.userModel.get('server_url') + "follow",
+      url: this.options.userModel.get('serverUrl') + "follow",
       success: function(data) {
         self.subRender();
       },
@@ -905,7 +905,7 @@ module.exports = Backbone.View.extend({
       type: "POST",
       data: this.userProfileFetchParameters,
       dataType: 'json',
-      url: this.options.userModel.get('server_url') + "unfollow",
+      url: this.options.userModel.get('serverUrl') + "unfollow",
       success: function() {
         self.subRender();
       },
