@@ -82,6 +82,8 @@ var loadProfile = function() {
                 });
               }, 54000000);
 
+              console.log(user);
+
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView});

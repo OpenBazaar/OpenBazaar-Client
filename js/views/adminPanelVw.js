@@ -29,6 +29,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.avatarHash = "";
     this.server_url = this.model.get('server_url');
+    console.log(this.model);
     this.userSettings = new userSettingsModel();
     this.userProfile = new userProfileModel();
 
@@ -79,6 +80,12 @@ module.exports = Backbone.View.extend({
         var modelJSON = model.toJSON();
         self.$el.find('#adminServerInput').val(modelJSON.server_url);
         self.$el.find('#adminCurrencyInput').val(modelJSON.currency_code);
+        self.$el.find('#adminShipToNameInput').val(modelJSON.ship_to_name);
+        self.$el.find('#adminShipToStreetInput').val(modelJSON.ship_to_street);
+        self.$el.find('#adminShipToCityInput').val(modelJSON.ship_to_city);
+        self.$el.find('#adminShipToStateInput').val(modelJSON.ship_to_state);
+        self.$el.find('#adminShipToPostalCodeInput').val(modelJSON.ship_to_postal_code);
+        self.$el.find('#adminShipToCountryInput').val(modelJSON.ship_to_country);
       },
       error: function(model, response){
         console.log("User Settings fetch failed: " + response.statusText);
@@ -252,12 +259,27 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         targetForm = this.$el.find('#adminPanelSettings'),
-        formData = new FormData(targetForm[0]),
-        existingKeys = {};
+        formData = new FormData(),
+        existingKeys = {},
+        newAddress = {},
+        newAddresses = this.model.get('shipping_addresses');
 
     targetForm.find('input').each(function(){
       existingKeys[$(this).attr('name')] = $(this).val();
     });
+
+    newAddress.name = this.$el.find('#adminShipToNameInput').val();
+    newAddress.street = this.$el.find('#adminShipToStreetInput').val();
+    newAddress.city = this.$el.find('#adminShipToCityInput').val();
+    newAddress.state = this.$el.find('#adminShipToStateInput').val();
+    newAddress.postal_code = this.$el.find('#adminShipToPostalCodeInput').val();
+    newAddress.country = this.$el.find('#adminShipToCountryInput').val();
+
+    newAddresses.push(newAddress);
+    formData.append('shipping_addresses', newAddresses);
+    existingKeys.newAddresses = newAddresses;
+
+    formData.append('currency_code', this.$el.find('#adminCurrencyInput').val());
 
     formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
 
@@ -352,7 +374,5 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });
