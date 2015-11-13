@@ -37,16 +37,24 @@ module.exports = Backbone.Router.extend({
     "support": "donate"
   },
 
+  cleanup: function(){
+    "use strict";
+    $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
+  },
+
   newView: function(view){
-    this.view && (this.view.close ? this.view.close() : this.view.remove());
-    this.view = view;
+    "use strict";
     $('body').removeClass("userPage");//add other body style classes if they are created
     $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
+    this.view && (this.view.close ? this.view.close() : this.view.remove());
+    this.view = view;
     //clear address bar. This will be replaced on the user page
     window.obEventBus.trigger("setAddressBar", "");
   },
 
   home: function(){
+    "use strict";
+    this.cleanup();
     this.newView(new homeView({
       userModel: this.options.userModel,
       socketView: this.socketView
@@ -54,6 +62,8 @@ module.exports = Backbone.Router.extend({
   },
 
   userPage: function(userID, state, itemHash){
+    "use strict";
+    this.cleanup();
     this.newView(new userPageView({
       userModel: this.options.userModel,
       userID: userID,
@@ -65,10 +75,14 @@ module.exports = Backbone.Router.extend({
   },
 
   customizePage: function(){
+    "use strict";
+    this.cleanup();
     console.log("customizePage");
   },
 
   sellItem: function(){
+    "use strict";
+    this.cleanup();
     this.newView(new userPageView({
       userModel: this.options.userModel,
       userID: this.options.userModel.get('guid'),
@@ -78,33 +92,45 @@ module.exports = Backbone.Router.extend({
   },
 
   purchases: function(){
+    "use strict";
+    this.cleanup();
     console.log("purchases");
   },
 
   sales: function(){
+    "use strict";
+    this.cleanup();
     console.log("sales");
   },
 
   cases: function(){
+    "use strict";
+    this.cleanup();
     console.log("cases");
   },
 
   notifications: function(){
+    "use strict";
+    this.cleanup();
     console.log("notifications");
   },
 
   settings: function(){
+    "use strict";
+    this.cleanup();
     this.newView(new settingsView({userModel: this.options.userModel}));
   },
 
   about: function(){
+    "use strict";
+    this.cleanup();
     this.newView(new aboutView());
-    console.log("about");
   },
 
   donate: function(){
+    "use strict";
+    this.cleanup();
     this.newView(new donateView());
-    console.log("support");
   }
 
 });
