@@ -74,9 +74,14 @@ module.exports = Backbone.View.extend({
       var n = data.notification;
       var username = n.handle ? n.handle : n.guid;
       var avatar = n.image_hash ? this.options.serverUrl + 'get_image?hash=' + n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
-      new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
-        icon: avatar
-      });
+      switch(n.type) {
+        case "follow":
+          new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
+            icon: avatar
+          });
+          break;
+      }
+
       var new_notification = new Backbone.Model(n);
       this.renderNotification(new_notification);
       var unread_count = $('.js-navNotifications:first').attr('data-count');
