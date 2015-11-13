@@ -31,8 +31,8 @@
 
 <div class="ctrlGroup nav-profile">
   <div class="btn btn-profile js-navProfile custCol-primary"
-  <% if(ob.avatar_hash) { %>
-  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>);"
+  <% if(ob.avatar_hash != "") { %>
+  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>

@@ -407,7 +407,7 @@ module.exports = Backbone.View.extend({
   },
 
   setSelectedTheme: function(e){
-    "use strict"
+    "use strict";
     // Needs to save to the object and update the dom
   },
 

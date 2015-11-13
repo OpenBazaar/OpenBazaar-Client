@@ -21,7 +21,7 @@ module.exports = Backbone.Router.extend({
   },
 
   routes: {
-    "": "userPage",
+    "": "index",
     "home": "home",
     "myPage": "userPage",
     "userPage": "userPage",
@@ -50,6 +50,15 @@ module.exports = Backbone.Router.extend({
     this.view = view;
     //clear address bar. This will be replaced on the user page
     window.obEventBus.trigger("setAddressBar", "");
+  },
+
+  index: function(){
+    "use strict";
+    if(this.options.userModel.get('beenSet') === true){
+      this.home();
+    } else {
+      this.userPage();
+    }
   },
 
   home: function(){
