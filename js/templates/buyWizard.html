@@ -17,12 +17,12 @@
               <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                 <div class="flexRow">
                   <div class="rowItem padding2015">
-                    <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<% i %>"/>
+                    <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
                     <label for="buyWizardModeratorRadio<%- i %>">
                       <div class="table">
                         <div>
                           <div class="thumbnail thumbnail-large-slim box-border"
-                               <% if(moderator.avatar != ""){ %>
+                               <% if(moderator.avatar){ %>
                                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
                                <% } else { %>
                                style="background-image: url(imgs/defaultUser.png);">
@@ -74,12 +74,12 @@
               <%= polyglot.t('NewAddress') %>
             </div>
           </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
-              <div class="js-buyWizardAddresses">
+              <div class="flex-border js-buyWizardAddresses">
                 <!--insert addresses-->
               </div>
-              <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress hide">
+              <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress flex-border flexExpand hide">
                 <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
@@ -130,7 +130,7 @@
                     <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardPostalInput" required/>
                   </div>
                 </div>
-                <div class="flexRow">
+                <div class="flexRow overflowVisible">
                   <div class="flexCol-4">
                     <div class="fieldItem">
                       <label for="buyWizardStreetInput">Country</label>
@@ -142,9 +142,9 @@
                     </div>
                   </div>
                 </div>
-                <!--spacer for chosen. Kind of horrible. TODO: find way to expand container when Chosen opens-->
-                <div class="flexRow flexRow-noBorderBottom row320"></div>
               </form>
+              <!--spacer for chosen. Kind of horrible. TODO: find way to expand container when Chosen opens-->
+              <div class="flexRow flexRow-noBorderBottom overflowVisible js-buyWizardNewAddress hide row320"></div>
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">

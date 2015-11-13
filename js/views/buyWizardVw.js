@@ -35,6 +35,8 @@ module.exports = Backbone.View.extend({
     parentEl: this is set by itemVw, and is the element this view is rendered into
      */
     this.parentEl = $(options.parentEl);
+    this.hideMap = true;
+
     //create the country select list
     this.countryList = countries.get('countries');
     this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput"></select>');
@@ -81,7 +83,8 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     this.buyDetailsView = new buyDetailsVw({model: this.model});
-    this.buyAddressesView = new buyAddressesVw({model: new Backbone.Model(this.options.userModel.get('shipping_addresses'))});
+    this.buyAddressesView = new buyAddressesVw({model: this.options.userModel});
+    this.listenTo(this.buyAddressesView, 'setAddress', this.addressSelected);
 
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -94,7 +97,7 @@ module.exports = Backbone.View.extend({
       //add all countries to the Ships To select list
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
       //add address view
-      console.log(self.buyAddressesView.el);
+      self.buyAddressesView.render(0);
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardDetails').append(self.buyDetailsView.el);
@@ -105,19 +108,25 @@ module.exports = Backbone.View.extend({
 
   modSelected: function(e){
     "use strict";
-    console.log("mod selected");
+    var modIndex = $(e.target).val();
     this.$el.find('.js-buyWizardModalModDone').removeClass('disabled');
-    this.model.set('currentModerator', $(e.target).val());
+    if(modIndex != "direct"){
+      this.model.set('selectedModerator', this.model.get('vendor_offer').listing.moderators[modIndex].guid);
+    } else {
+      this.model.set('selectedModerator', "");
+    }
   },
 
   modDone: function(){
     "use strict";
     this.$el.find('.js-buyWizardMap').removeClass('hide');
+    this.hideMap = false;
   },
 
   addressBack: function(){
     "use strict";
     this.$el.find('.js-buyWizardMap').addClass('hide');
+    this.hideMap = true;
   },
 
   createNewAddress: function(){
@@ -132,6 +141,12 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.$el.find('.js-buyWizardAddress').removeClass('hide');
     this.$el.find('.js-buyWizardNewAddress').addClass('hide');
+  },
+
+  addressSelected: function(selectedAddress){
+    "use strict";
+    this.model.set('selectedAddress', selectedAddress);
+    this.displayMap(selectedAddress);
   },
 
   modelToFormData: function(modelJSON, formData, existingKeys) {
@@ -152,6 +167,7 @@ module.exports = Backbone.View.extend({
         formData = new FormData(),
         newAddress = {},
         newAddresses = this.options.userModel.get('shipping_addresses');
+    console.log("save address");
 
     newAddress.name = this.$el.find('#buyWizardNameInput').val();
     newAddress.street = this.$el.find('#buyWizardStreetInput').val();
@@ -159,16 +175,16 @@ module.exports = Backbone.View.extend({
     newAddress.state = this.$el.find('#buyWizardStateInput').val();
     newAddress.postal_code = this.$el.find('#buyWizardPostalInput').val();
     newAddress.country = this.$el.find('#buyWizardCountryInput').val();
-    console.log(newAddress);
 
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
       newAddresses.push(newAddress);
     }
-    console.log(newAddresses);
 
     formData.append('shipping_addresses', JSON.stringify(newAddresses));
 
     formData = this.modelToFormData(this.model.get('user'), formData, {'shipping_addresses': newAddresses});
+
+    targetForm.addClass('formChecked');
 
     if(targetForm[0].checkValidity()){
       $.ajax({
@@ -180,6 +196,14 @@ module.exports = Backbone.View.extend({
         dataType: "json",
         success: function(data) {
           if (data.success === true){
+            //clear form
+            self.$el.find('#buyWizardNameInput').val("");
+            self.$el.find('#buyWizardStreetInput').val("");
+            self.$el.find('#buyWizardCityInput').val("");
+            self.$el.find('#buyWizardStateInput').val("");
+            self.$el.find('#buyWizardPostalInput').val("");
+            self.$el.find('#buyWizardCountryInput').val("");
+            targetForm.removeClass('formChecked').find('.formChecked').removeClass('formChecked');
             self.hideNewAddress();
             self.addNewAddress();
           }else if (data.success === false){
@@ -192,6 +216,8 @@ module.exports = Backbone.View.extend({
           console.log(errorThrown);
         }
       });
+    } else {
+      console.log("new address form invalid");
     }
   },
 
@@ -200,16 +226,26 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.options.userModel.fetch({
       success: function(data){
-        self.buyAddressesView.render(data);
+        var selected = data.attributes.shipping_addresses.length -1;
+        //this will refresh the userModel, buyAddressView has a reference to it
+        self.buyAddressesView.render(selected);
       }
     });
   },
 
   displayMap: function(address){
     "use strict";
-    var newMap = $('<iframe class="js-buyWizardMap"' +
+    var addressString = "";
+    __.each(address, function(value){
+      addressString += value + " ";
+    });
+    console.log(addressString);
+    addressString = encodeURIComponent(addressString);
+    console.log(addressString);
+    var hideClass = this.hideMap ? "hide" : "";
+    var newMap = '<iframe class="' + hideClass + ' js-buyWizardMap"' +
         'width="525" height="250" frameborder="0" style="border:0"' +
-        'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + address + '"></iframe>');
+        'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe>';
     this.$el.find('.js-buyWizardHero').html(newMap);
   },
 

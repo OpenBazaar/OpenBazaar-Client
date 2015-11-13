@@ -32,7 +32,7 @@
         <div class="table">
           <div>
             <div class="thumbnail thumbnail-large-slim box-border"
-            <% if(ob.user.avatar_hash != ""){ %>
+            <% if(ob.user.avatar_hash){ %>
             style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultItem.png);">
             <% } else { %>
             style="background-image: url(imgs/defaultItem.png);">

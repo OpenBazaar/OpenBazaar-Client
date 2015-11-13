@@ -7,28 +7,36 @@ Backbone.$ = $;
 module.exports = Backbone.View.extend({
 
   events: {
+    'change .js-buyWizardAddressRadio': 'selectAddress'
   },
 
   initialize: function() {
     "use strict";
-    console.log("buy addresses view init");
-    console.log(this.model);
-    this.render(this.model);
+    //don't render on init, let parent trigger the render
   },
 
-  render: function(renderModel){
+  render: function(selected){
     var self = this;
+    var modelData = this.model.toJSON();
+    modelData.selected = selected;
+    this.setAddress(selected);
     loadTemplate('./js/templates/buyAddresses.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(renderModel.toJSON()));
+      self.$el.html(loadedTemplate(modelData));
       //this does not add it to the DOM, that is done by the parent view
     });
     return this;
   },
 
-  setAddress: function(){
+  selectAddress: function(){
     "use strict";
-    var addressData = "";
-    this.trigger('setBuyAddress', addressData);
+    var index = this.$el.find('.js-buyWizardAddressRadio:checked').val();
+    this.setAddress(index);
+  },
+
+  setAddress: function(index){
+    "use strict";
+    var selectedAddress = this.model.get('shipping_addresses')[index];
+    this.trigger("setAddress", selectedAddress);
   },
 
   close: function(){

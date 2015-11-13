@@ -1,17 +1,19 @@
-<% _.each(ob, function(address, i){ %>
-<div class="flexRow js-buyWizardAddress">
-  <div class="rowItem padding2015">
-    <input type="radio" class="fieldItem" name="address" id="buyWizardAddress<%- i %>"/>
-    <label for="buyWizardAddress<%- i %>">
-      <div class="table">
-        <div>
-          <div class="txt-unleaded">
-            <div class="row10"><strong><%- address.name %></strong></div>
-            <div><%- address.street %> <%- address.city %>, <%- address.state %> <%- address.postal_code %>, <%- address.country %></div>
+<div class="flexRow">
+  <% _.each(ob.shipping_addresses, function(address, i){ %>
+  <div class="flexRow js-buyWizardAddress">
+    <div class="rowItem padding2015">
+      <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
+      <label for="buyWizardAddress<%- i %>">
+        <div class="table">
+          <div>
+            <div class="txt-unleaded">
+              <div class="row10"><strong><%- address.name %></strong></div>
+              <div><%- address.street %> <%- address.city %>, <%- address.state %> <%- address.postal_code %>, <%- address.country %></div>
+            </div>
           </div>
         </div>
-      </div>
-    </label>
+      </label>
+    </div>
   </div>
+  <% }); %>
 </div>
-<% }); %>
