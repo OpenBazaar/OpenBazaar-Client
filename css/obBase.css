@@ -299,6 +299,13 @@ form {
 .homeView .gridItem {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
+  opacity: .85;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.userPage-subViews .gridItem:hover,
+.homeView .gridItem:hover {
+  opacity: 1;
 }
 
 .userPage-subViews .gridItem:nth-child(3n),
