@@ -188,6 +188,7 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
+      timeout: 10000,
       success: function(model, response){
         //don't render if view has been closed and the $el has been deleted
         if(self.$el){

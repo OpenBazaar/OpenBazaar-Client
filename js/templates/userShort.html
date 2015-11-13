@@ -1,8 +1,13 @@
 <div class="rowItem js-userShort clickable padding2015" data-guid="<%= ob.guid %>">
   <div class="flexRow">
     <div class="flexCol-1">
-      <div class="thumbnail-large custCol-border-secondary borderRadius2"
-                   style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); background-size: cover"></div>
+      <div class="thumbnail thumbnail-large custCol-border-secondary borderRadius2"
+            <% if(ob.avatar_hash) { %>
+            style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);">
+            <% } else { %>
+            style="background-image: url(imgs/defaultUser.png);">
+            <% } %>
+    </div>
     </div>
     <div class="flexCol-9">
       <div class="marginLeft15 marginTop2 clearfix">

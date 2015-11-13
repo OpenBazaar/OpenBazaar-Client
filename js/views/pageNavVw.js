@@ -8,8 +8,8 @@ var __ = require('underscore'),
     currencyListView = require('../views/currencyListVw'),
     languageListView = require('../views/languageListVw'),
     adminPanelView = require('../views/adminPanelVw'),
-    remote = require('remote'),
-    currentWindow;
+    notificationsPanelView = require('../views/notificationsPanelVw'),
+    remote = require('remote');
 
 module.exports = Backbone.View.extend({
 
@@ -21,6 +21,7 @@ module.exports = Backbone.View.extend({
     'click .js-navMax': 'navMaxClick',
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
+    'click .js-navNotifications': 'navNotificationsClick',
     'click .js-navProfile': 'navProfileClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
@@ -46,6 +47,8 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.subViews = [];
     this.languages = new languagesModel();
+    this.options = options || {};
+
     this.currentWindow = remote.getCurrentWindow();
 
     //when language is changed, re-render
@@ -139,6 +142,13 @@ module.exports = Backbone.View.extend({
       if(self.model.get('beenSet')){
         self.$el.find('.js-homeModal').hide();
       }
+      self.notificationsPanel = new notificationsPanelView({
+        parentEl: '#notificationsPanel',
+        socketView: self.socketView,
+        serverUrl: self.options.model.get('serverUrl')
+      });
+      self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
+      self.subViews.push(self.notificationsPanel);
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
@@ -154,10 +164,41 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
+  navNotificationsClick: function(e){
+    "use strict";
+    e.stopPropagation();
+    this.setNotificationCount("");
+    var targ = this.$el.find('.js-navNotificationsMenu');
+    targ.siblings('.popMenu').addClass('hide');
+    if(targ.hasClass('hide')){
+      targ.removeClass('hide');
+      $('#overlay').removeClass('hide');
+      $('html').on('click.closeNav', function(e){
+        if($(e.target).closest(targ).length === 0){
+          targ.addClass('hide');
+          $('#overlay').addClass('hide');
+          $(this).off('.closeNav');
+        }
+      });
+    }else{
+      targ.addClass('hide');
+      $('#overlay').addClass('fadeOut hide');
+    }
+  },
+
+  setNotificationCount: function(count){
+    "use strict";
+    if(count > 99) {
+      count = "..";
+    }
+    this.$el.find('.js-navNotifications').attr('data-count', count);
+  },
+
   navProfileClick: function(e){
     "use strict";
     e.stopPropagation();
     var targ = this.$el.find('.js-navProfileMenu');
+    targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
       targ.removeClass('hide');
       $('#overlay').removeClass('fadeOut');
@@ -345,7 +386,6 @@ module.exports = Backbone.View.extend({
   closeModal: function(e){
     "use strict";
     $(e.target).closest('.modal').addClass('fadeOut');
-    console.log('sdfdsf');
   },
 
   navAdminPanel: function(){
@@ -367,7 +407,7 @@ module.exports = Backbone.View.extend({
   },
 
   setSelectedTheme: function(e){
-    "use strict"
+    "use strict";
     // Needs to save to the object and update the dom
   },
 

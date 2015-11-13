@@ -19,12 +19,20 @@
   <a class="btn btn-home ion-eye custCol-primary fontSize15" href="#home"></a>
 </div>
 <div class="ctrlGroup">
-  <a class="btn btn-notifications ion-android-notifications custCol-primary fontSize14" href="#notifications"></a>
+  <div class="btn btn-notifications ion-android-notifications custCol-primary fontSize14 js-navNotifications badge"></div>
 </div>
+<div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
+    <div class="popMenu-notificationsHeader"><%= polyglot.t('nav.notifications') %></div>
+    <hr/>
+    <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
+    <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
+
+</div>
+
 <div class="ctrlGroup nav-profile">
   <div class="btn btn-profile js-navProfile custCol-primary"
-  <% if(ob.avatar_hash) { %>
-  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>);"
+  <% if(ob.avatar_hash != "") { %>
+  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
