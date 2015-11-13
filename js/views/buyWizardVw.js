@@ -205,6 +205,14 @@ module.exports = Backbone.View.extend({
     });
   },
 
+  displayMap: function(address){
+    "use strict";
+    var newMap = $('<iframe class="js-buyWizardMap"' +
+        'width="525" height="250" frameborder="0" style="border:0"' +
+        'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + address + '"></iframe>');
+    this.$el.find('.js-buyWizardHero').html(newMap);
+  },
+
   blockClicks: function(e) {
     "use strict";
     e.stopPropagation();

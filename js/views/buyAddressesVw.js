@@ -25,6 +25,12 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
+  setAddress: function(){
+    "use strict";
+    var addressData = "";
+    this.trigger('setBuyAddress', addressData);
+  },
+
   close: function(){
     __.each(this.subViews, function(subView) {
       if(subView.close){
