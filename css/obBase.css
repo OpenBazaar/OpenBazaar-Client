@@ -953,7 +953,7 @@ h5 {
 }
 
 .searchWrapper .txtField:focus {
-  outline: 2px solid #fff;
+  outline: 1px solid rgba(255,255,255,0.50);
 }
 
 .mainSearchWrapper:before {
@@ -1285,6 +1285,7 @@ input[type="text"].txtField-bar {
   font-size: 12px;
   height: 28px;
   line-height: 28px;
+  opacity: 1;
 }
 
 #ov1 .btn.confirmable,
@@ -2650,9 +2651,9 @@ input[type="checkbox"].fieldItem + label span {
   margin: auto;
 }
 
-#ov1  .height43 {
-  height: 43px;
-  line-height: 43px;
+#ov1  .height36 {
+  height: 36px;
+  line-height: 36px;
 }
 
 #ov1  .height54 {
@@ -2765,8 +2766,8 @@ input[type="checkbox"].fieldItem + label span {
   width: 110px;
 }
 
-#ov1 .width160 {
-  width: 160px;
+#ov1 .width120 {
+  width: 120px;
 }
 
 #ov1 .width600 {
