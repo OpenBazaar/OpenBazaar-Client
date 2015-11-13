@@ -153,7 +153,7 @@
               <div><%- address.name %></div>
               <div><%- address.street %></div>
               <div><%- address.state %> <%- address.postal_code %></div>
-              <div><%- address.country %></div>
+              <div><%- address.displayCountry %></div>
             </div>
           </div>
           <% }); %>
@@ -217,10 +217,10 @@
             </div>
             <div class="flexCol-8 positionWrapper">
               <select id="adminShipToCountryInput" name="ship_to_country" required>
-                <option value="UNITED_STATES">United States</option>
-                <option value="UNITED_KINGDOM">United Kingdom</option>
-                <option value="AUSTRALIA">Australia</option>
-                <option value="MEXICO">Mexico</option>
+                <option value="UNITED_STATES" data-name="United States, The">United States</option>
+                <option value="UNITED_KINGDOM" data-name="United Kingdom, The">United Kingdom</option>
+                <option value="AUSTRALIA" data-name="Australia">Australia</option>
+                <option value="MEXICO" data-name="Mexico">Mexico</option>
               </select>
             </div>
           </div>

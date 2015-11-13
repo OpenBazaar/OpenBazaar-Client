@@ -41,7 +41,7 @@ module.exports = Backbone.View.extend({
     this.countryList = countries.get('countries');
     this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput"></select>');
     __.each(this.countryList, function(countryFromList, i){
-      self.countriesSelect.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
+      self.countriesSelect.append('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
     });
     console.log(this.model);
     this.render();
@@ -175,6 +175,7 @@ module.exports = Backbone.View.extend({
     newAddress.state = this.$el.find('#buyWizardStateInput').val();
     newAddress.postal_code = this.$el.find('#buyWizardPostalInput').val();
     newAddress.country = this.$el.find('#buyWizardCountryInput').val();
+    newAddress.displayCountry = this.$el.find('#buyWizardCountryInput option:selected').data('name');
 
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
       newAddresses.push(newAddress);
@@ -236,9 +237,13 @@ module.exports = Backbone.View.extend({
   displayMap: function(address){
     "use strict";
     var addressString = "";
-    __.each(address, function(value){
-      addressString += value + " ";
-    });
+    for(var addressKey in address) {
+      if(address.hasOwnProperty(addressKey)){
+        if(addressKey != 'name' && addressKey != 'country'){
+          addressString +=  address[addressKey] + " ";
+        }
+      }
+    }
     console.log(addressString);
     addressString = encodeURIComponent(addressString);
     console.log(addressString);

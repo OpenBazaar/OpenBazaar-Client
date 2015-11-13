@@ -265,6 +265,7 @@ module.exports = Backbone.View.extend({
     newAddress.state = this.$el.find('#adminShipToStateInput').val();
     newAddress.postal_code = this.$el.find('#adminShipToPostalCodeInput').val();
     newAddress.country = this.$el.find('#adminShipToCountryInput').val();
+    newAddress.displayCountry = this.$el.find('#adminShipToCountryInput option:selected').data('name');
 
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
       newAddresses.push(newAddress);
