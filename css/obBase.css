@@ -132,11 +132,11 @@ form {
 
 #sideBar {
   position: absolute;
-  right: 0;
+  right: -360px;
   top: 50px;
-  width:40px;
+  width:400px;
   background-color: #252525;
-  height: 100%;
+  height: calc(100% - 50px);
   z-index: 2;
 }
 
