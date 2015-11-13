@@ -13,9 +13,6 @@ body {
   letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
-  overflow: hidden; 
-  -webkit-font-smoothing: antialiased;
-
 }
 
 a {
@@ -394,7 +391,7 @@ form {
   position: absolute;
   opacity: .75;
   float: none;
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   z-index: 1;
 }
 
@@ -513,6 +510,10 @@ form {
   padding-right: 10px;
 }
 
+.pad10Top {
+  padding-top: 10px;
+}
+
 .pad15 {
   padding-left: 15px;
   padding-right: 15px;
@@ -540,7 +541,7 @@ form {
   top: 0;
   left: 0;
   /* use fadeIn and fadeOut to change opacity */
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   padding-top: 25px;
   z-index: 1;
 }
@@ -629,6 +630,33 @@ form {
   width: 75%;
 }
 
+.topThumb {
+  width:55px;
+  height:55px;
+  background-size: cover;
+  top: 24px;
+  content: " ";
+  left: 30px;
+  position: absolute;
+  z-index: 3;
+}
+
+.smPageHeader {
+  background-color: rgb(6,55,83);
+  height: 85px;
+  line-height: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.smPageHeader .smPageHeaderInner {
+  top: 35px;
+  padding-left: 100px;
+  padding-right: 15px;
+  position: relative;
+  background-color: rgb(33, 81, 117);
+}
+
 /*========== typography ==========*/
 
 h1,h2,h3 {
@@ -667,6 +695,10 @@ h5 {
   opacity: 0.75;
 }
 
+.div-fade {
+  opacity: 0.50;
+}
+
 .txt-lowleading {
   line-height: 1.2;
 }
@@ -688,6 +720,7 @@ h5 {
   white-space: nowrap;
   overflow: hidden;
 }
+
 /*========== skin classes ==========*/
 
 .userPage {
@@ -1340,7 +1373,7 @@ label {
 }
 
 .fieldItem h1,
-.fieldITem h2
+.fieldITem h2,
 .fieldItem h3,
 .fieldItem h4,
 .fieldItem h5,
@@ -1352,6 +1385,7 @@ label {
 input[type="text"].fieldItem,
 input[type="number"].fieldItem,
 input[type="email"].fieldItem,
+input[type="file"].fieldItem,
 input[type="url"].fieldItem,
 input[type="datetime-local"].fieldItem {
   background: none;
@@ -1724,6 +1758,32 @@ input[type="checkbox"].fieldItem + label span {
   height: 30px;
 }
 
+.popMenu-notifications {
+  top: 50px;
+  right: 45px;
+  background-color: #252525;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px 0;
+  width: 425px;
+  min-height: 250px;
+  max-height: 635px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.popMenu-notificationsHeader {
+  padding: 0 15px;
+}
+
+.popMenu-notificationsEmpty {
+  opacity: .75;
+  padding: 0 15px;
+}
+
 .popMenu-navBar {
   top: 50px;
   right: 10px;
@@ -1848,7 +1908,7 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .user-page-header {
-  position: relative; 
+  position: relative;
   height: 400px;
   z-index: 2;
 }
@@ -1880,11 +1940,11 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .photos-empty {
-  height: 110px; 
+  height: 110px;
   margin-top: 58px;
-  padding: 15px; 
+  padding: 15px;
   text-align: center;
-  width: 100%; 
+  width: 100%;
 }
 
 .helper-text {
@@ -2735,4 +2795,25 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .borderBottomRightRaidus3 {
   border-bottom-right-radius: 3px !important;
+}
+
+#ov1 .overflowVisible {
+  overflow: visible;
+}
+
+.badge:after{
+    content:attr(data-count);
+    position: absolute;
+    background: rgba(0,0,255,0.5);
+    top:-4px;
+    right:-2px;
+    width:16px;
+    text-align: center;
+    line-height: 16px;
+    font-size: 10px;
+    border-radius: 50%;
+    color:white;
+    background-opacity: .75;
+    background-color: #B22222;
+  /* don't put a border on this or it will be visible when it has no content */
 }
