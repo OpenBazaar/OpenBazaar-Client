@@ -202,6 +202,7 @@ module.exports = Backbone.View.extend({
             }
           }else{
             //model was returned as a blank object
+            $('.js-loadingModal').addClass('hide');
             showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           }
 
@@ -211,6 +212,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
+        $('.js-loadingModal').addClass('hide');
         showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
@@ -387,6 +389,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
+    this.$el.find('.js-deleteItem').removeClass('confirm');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {

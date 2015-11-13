@@ -12,6 +12,7 @@ module.exports = Backbone.View.extend({
   el: '#adminPanel',
 
   events: {
+    'click .js-adminModal': 'blockClicks',
     'click .js-closeModal': 'closeModal',
     'click .js-adminMakeModerator': 'makeModerator',
     'click .js-adminUnmakeModerator': 'unMakeModerator',
@@ -43,6 +44,12 @@ module.exports = Backbone.View.extend({
       self.updatePage();
     });
     return this;
+  },
+
+  blockClicks: function(e) {
+    "use strict";
+    e.stopPropagation();
+
   },
 
   updatePage: function() {
@@ -79,6 +86,12 @@ module.exports = Backbone.View.extend({
         var modelJSON = model.toJSON();
         self.$el.find('#adminServerInput').val(modelJSON.serverUrl);
         self.$el.find('#adminCurrencyInput').val(modelJSON.currency_code);
+        self.$el.find('#adminShipToNameInput').val(modelJSON.ship_to_name);
+        self.$el.find('#adminShipToStreetInput').val(modelJSON.ship_to_street);
+        self.$el.find('#adminShipToCityInput').val(modelJSON.ship_to_city);
+        self.$el.find('#adminShipToStateInput').val(modelJSON.ship_to_state);
+        self.$el.find('#adminShipToPostalCodeInput').val(modelJSON.ship_to_postal_code);
+        self.$el.find('#adminShipToCountryInput').val(modelJSON.ship_to_country);
       },
       error: function(model, response){
         console.log("User Settings fetch failed: " + response.statusText);
@@ -172,6 +185,8 @@ module.exports = Backbone.View.extend({
             formData = new FormData();
         if (imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
           formData.append("avatar", imageHash);
+          formData.append("name", self.userProfile.get('profile').name);
+          formData.append("location", self.userProfile.get('profile').location);
           self.postData(formData, "profile",
               function (data) {
                 self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('serverUrl') + "get_image?hash=" + imageHash + ')');
@@ -235,12 +250,34 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         targetForm = this.$el.find('#adminPanelSettings'),
-        formData = new FormData(targetForm[0]),
-        existingKeys = {};
+        formData = new FormData(),
+        existingKeys = {},
+        newAddress = {},
+        newAddresses = [];
 
     targetForm.find('input').each(function(){
       existingKeys[$(this).attr('name')] = $(this).val();
     });
+
+    newAddress.name = this.$el.find('#adminShipToNameInput').val();
+    newAddress.street = this.$el.find('#adminShipToStreetInput').val();
+    newAddress.city = this.$el.find('#adminShipToCityInput').val();
+    newAddress.state = this.$el.find('#adminShipToStateInput').val();
+    newAddress.postal_code = this.$el.find('#adminShipToPostalCodeInput').val();
+    newAddress.country = this.$el.find('#adminShipToCountryInput').val();
+
+    if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+      newAddresses.push(newAddress);
+    }
+
+    $('.js-adminPanelAddress:checked').each(function(){
+        newAddresses.push(self.model.get('shipping_addresses')[$(this).val()]);
+      });
+
+    formData.append('shipping_addresses', JSON.stringify(newAddresses));
+    existingKeys.shipping_addresses = newAddresses;
+
+    formData.append('currency_code', this.$el.find('#adminCurrencyInput').val());
 
     formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
 
@@ -335,7 +372,5 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });

@@ -123,6 +123,8 @@ module.exports = Backbone.Model.extend({
         Categories: "Categories",
         UpTo3: "Up to 3",
         AboutYourStore: "A description of your store",
+        AllListings: "All Listings",
+        ComingSoon: "Coming Soon",
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -297,6 +299,8 @@ module.exports = Backbone.Model.extend({
         Categories: "Categor&iacute;as",
         UpTo3: "Hasta 3",
         AboutYourStore: "Una descripci&oacute;n de su tienda",
+        AllListings: "Todas las listas",
+        ComingSoon: "Próximamente",
         errorMessages: {
           saveError: "Los datos no pudo ser salvado.",
           getError: "Los datos no se pudo recuperar.",

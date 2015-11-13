@@ -77,8 +77,8 @@ module.exports = Backbone.View.extend({
   },
 
   hideList: function(e){
-    $('.js-list1, .js-list2, .js-list3').hide();
-    $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').hide();
+    $('.js-list1, .js-list2, .js-list3').addClass('hide');;
+    $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').addClass('hide');;
     $('.js-homeItemsBtn, .js-homeStoresBtn, .js-homeFeedBtn').removeClass('active');
   },
 
@@ -161,33 +161,33 @@ module.exports = Backbone.View.extend({
   homeItemsClick: function(e){
     "use strict";
     this.hideList();
-    $('.js-list1').show();
+    $('.js-list1').removeClass('hide');;
     $('.js-homeItemsBtn').addClass('active');
 
     // Auto focus the search input
-    $('.js-homeItemsSearch').show();
+    $('.js-homeItemsSearch').removeClass('hide');;
     $('.js-homeItemsSearch input').focus();
   },
 
   homeStoresClick: function(e){
     "use strict";
     this.hideList();
-    $('.js-list2').show();
+    $('.js-list2').removeClass('hide');;
     $('.js-homeStoresBtn').addClass('active');
 
     // Auto focus the search input
-    $('.js-homeStoresSearch').show();
+    $('.js-homeStoresSearch').removeClass('hide');;
     $('.js-homeStoresSearch input').focus();
   },
 
   homeFeedClick: function(e){
     "use strict";
     this.hideList();
-    $('.js-list3').show();
+    $('.js-list3').removeClass('hide');;
     $('.js-homeFeedBtn').addClass('active');
 
     // Auto focus the search input
-    $('.js-homeFeedSearch').show();
+    $('.js-homeFeedSearch').removeClass('hide');;
     $('.js-homeFeedSearch input').focus();    
   },  
 
