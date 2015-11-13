@@ -133,6 +133,10 @@ form {
 #sideBar {
   position: absolute;
   right: 0;
+  top: 50px;
+  width:40px;
+  background-color: #252525;
+  height: 100%;
   z-index: 2;
 }
 
