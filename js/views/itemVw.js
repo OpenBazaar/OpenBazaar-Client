@@ -14,8 +14,11 @@ module.exports = Backbone.View.extend({
     'click .js-buyButton': 'buyClick'
   },
 
-  initialize: function(){
-    var self = this;
+  initialize: function(options){
+    this.options = options || {};
+    /* expected options are:
+    userModel: this is set by app.js, then by a call to the settings API.
+     */
     //don't render immediately, wait for the model to update itself with converted prices
     this.listenTo(this.model, 'change:priceSet', this.render);
     this.subViews = [];
@@ -59,7 +62,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         buyModel = new Backbone.Model();
     buyModel.set(this.model.attributes);
-    this.buyWizardView = new buyWizardVw({model:buyModel, parentEl: '#modalHolder'});
+    this.buyWizardView = new buyWizardVw({model:buyModel, parentEl: '#modalHolder', userModel: this.options.userModel});
     this.subViews.push(this.buyWizardView);
     this.subModels.push(buyModel);
   },

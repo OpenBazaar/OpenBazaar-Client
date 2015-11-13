@@ -512,7 +512,7 @@ module.exports = Backbone.View.extend({
       ownPage: self.options.ownPage,
       itemHash: hash,
       user: self.model.get('user'),
-      page: self.model.get('page')
+      page: self.model.get('page'),
     });
     this.item.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
     //remove old item before rendering
@@ -520,7 +520,7 @@ module.exports = Backbone.View.extend({
       this.itemView.undelegateEvents();
       //this.itemView.remove();
     }
-    this.itemView = new itemVw({model:this.item, el: '.js-list4'});
+    this.itemView = new itemVw({model:this.item, el: '.js-list4', userModel: self.options.userModel});
     this.subViews.push(this.itemView);
     //set the parameters for the fetch
     if(this.options.ownPage === true){

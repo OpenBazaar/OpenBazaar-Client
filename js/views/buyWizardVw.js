@@ -30,6 +30,10 @@ module.exports = Backbone.View.extend({
         countries = new countriesModel();
 
     this.options = options || {};
+    /* expected options are:
+    userModel: this is set by app.js, then by a call to the settings API.
+    parentEl: this is set by itemVw, and is the element this view is rendered into
+     */
     this.parentEl = $(options.parentEl);
     //create the country select list
     this.countryList = countries.get('countries');
@@ -77,7 +81,7 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     this.buyDetailsView = new buyDetailsVw({model: this.model});
-    this.buyAddressesView = new buyAddressesVw({model: this.model});
+    this.buyAddressesView = new buyAddressesVw({model: new Backbone.Model(this.options.userModel.get('shipping_addresses'))});
 
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -118,13 +122,10 @@ module.exports = Backbone.View.extend({
 
   createNewAddress: function(){
     "use strict";
-    console.log("New Address Disabled until API updated");
-    /*
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     //set chosen inputs
     $('.chosen').chosen();
-    */
   },
 
   hideNewAddress: function(){
@@ -133,11 +134,41 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardNewAddress').addClass('hide');
   },
 
+  modelToFormData: function(modelJSON, formData, existingKeys) {
+    "use strict";
+    var newFormData = formData || new FormData();
+    __.each(modelJSON, function(value, key) {
+      if(!__.has(existingKeys, key)) {
+        newFormData.append(key, value);
+      }
+    });
+    return newFormData;
+  },
+
   saveNewAddress: function(){
     "use strict";
     var self = this,
         targetForm = this.$el.find('#buyWizardNewAddressForm'),
-        formData = new FormData(targetForm[0]);
+        formData = new FormData(),
+        newAddress = {},
+        newAddresses = this.options.userModel.get('shipping_addresses');
+
+    newAddress.name = this.$el.find('#buyWizardNameInput').val();
+    newAddress.street = this.$el.find('#buyWizardStreetInput').val();
+    newAddress.city = this.$el.find('#buyWizardCityInput').val();
+    newAddress.state = this.$el.find('#buyWizardStateInput').val();
+    newAddress.postal_code = this.$el.find('#buyWizardPostalInput').val();
+    newAddress.country = this.$el.find('#buyWizardCountryInput').val();
+    console.log(newAddress);
+
+    if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+      newAddresses.push(newAddress);
+    }
+    console.log(newAddresses);
+
+    formData.append('shipping_addresses', JSON.stringify(newAddresses));
+
+    formData = this.modelToFormData(this.model.get('user'), formData, {'shipping_addresses': newAddresses});
 
     if(targetForm[0].checkValidity()){
       $.ajax({
@@ -150,7 +181,7 @@ module.exports = Backbone.View.extend({
         success: function(data) {
           if (data.success === true){
             self.hideNewAddress();
-            self.addNewAddress(data);
+            self.addNewAddress();
           }else if (data.success === false){
             showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
           }
@@ -164,10 +195,14 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  addNewAddress: function(data){
+  addNewAddress: function(){
     "use strict";
-    console.log(data);
-    //render addresses as a sub view?
+    var self = this;
+    this.options.userModel.fetch({
+      success: function(data){
+        self.buyAddressesView.render(data);
+      }
+    });
   },
 
   blockClicks: function(e) {

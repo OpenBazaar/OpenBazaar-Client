@@ -11,14 +11,15 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     "use strict";
-console.log("buy addresses view init");
-    this.render();
+    console.log("buy addresses view init");
+    console.log(this.model);
+    this.render(this.model);
   },
 
-  render: function(){
+  render: function(renderModel){
     var self = this;
     loadTemplate('./js/templates/buyAddresses.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(renderModel.toJSON()));
       //this does not add it to the DOM, that is done by the parent view
     });
     return this;
