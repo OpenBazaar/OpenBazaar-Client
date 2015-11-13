@@ -18,8 +18,10 @@ var Polyglot = require('node-polyglot'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     pageNavView = require('./views/pageNavVw'),
+    chatAppView = require('./views/chatAppVw'),
     newPageNavView,
     newSocketView,
+    newChatAppView,
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
@@ -121,6 +123,7 @@ var loadProfile = function() {
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+              newChatAppView = new chatAppView({socketView: newSocketView})
               newRouter = new router({userModel: user, socketView: newSocketView});
               Backbone.history.start();
             });
@@ -136,6 +139,7 @@ var loadProfile = function() {
             user.set('serverUrl', serverUrlLocal);
             newSocketView = new socketView({model: user});
             newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+            newChatAppView = new chatAppView({socketView: newSocketView})
             newRouter = new router({userModel: user, socketView: newSocketView});
             Backbone.history.start();
           }
