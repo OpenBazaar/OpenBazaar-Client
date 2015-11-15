@@ -201,9 +201,9 @@ module.exports = window.Backbone.Model.extend({
     if(userCCode) {
       getBTPrice(vendorCCode, function(btAve){
         vendorCurrencyToBitcoinRatio = btAve;
-        vendorPriceInBitCoin = Number((vendorPrice / btAve).toFixed(4));
-        vendorDomesticShippingInBitCoin = Number((vendorDomesticShipping / btAve.toFixed(4)));
-        vendorInternationalShippingInBitCoin = Number((vendorInternationalShipping / btAve.toFixed(4)));
+        vendorPriceInBitCoin = Number(vendorPrice / btAve).toFixed(4);
+        vendorDomesticShippingInBitCoin = Number(vendorDomesticShipping / btAve).toFixed(4);
+        vendorInternationalShippingInBitCoin = Number(vendorInternationalShipping / btAve).toFixed(4);
         vendToUserBTCRatio = window.currentBitcoin/vendorCurrencyToBitcoinRatio;
         newAttributes.vendorBTCPrice = vendorPriceInBitCoin;
 

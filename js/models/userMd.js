@@ -36,6 +36,9 @@ module.exports = Backbone.Model.extend({
   parse: function(response) {
     "use strict";
 
+    //make sure currency code is in all caps
+    response.currency_code = response.currency_code.toUpperCase();
+
     //find the human readable name for the country
     var matchedCountry = this.countryArray.filter(function(value, i){
       return value.dataName == response.country;

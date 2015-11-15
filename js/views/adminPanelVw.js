@@ -274,23 +274,23 @@ module.exports = Backbone.View.extend({
         newAddresses.push(self.model.get('shipping_addresses')[$(this).val()]);
       });
 
-    formData.append('shipping_addresses', JSON.stringify(newAddresses));
-    existingKeys.shipping_addresses = newAddresses;
+    if(newAddresses){
+      formData.append('shipping_addresses', JSON.stringify(newAddresses));
+      existingKeys.shipping_addresses = newAddresses;
+      }
 
     formData.append('currency_code', this.$el.find('#adminCurrencyInput').val());
 
     formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
 
-    if(targetForm[0].checkValidity()){
-      this.postData(formData, "settings",
-          function (data) {
-            self.updatePage();
-          },
-          function (data) {
-            alert("Failed. " + data.reason);
-          }
-      );
-    }
+    this.postData(formData, "settings",
+        function (data) {
+          self.updatePage();
+        },
+        function (data) {
+          alert("Failed. " + data.reason);
+        }
+    );
   },
 
   modelToFormData: function(modelJSON, formData, existingKeys) {
