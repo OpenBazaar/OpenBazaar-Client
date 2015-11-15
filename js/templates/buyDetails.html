@@ -9,7 +9,7 @@
             </div>
             <div class="pad10left txt-unleaded">
               <div class="row10"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
-              <div>Sold by <% if(ob.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
+              <div class="noOverflow">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
             </div>
           </div>
         </div>
@@ -33,14 +33,19 @@
           <div>
             <div class="thumbnail thumbnail-large-slim box-border"
             <% if(ob.user.avatar_hash){ %>
-            style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultItem.png);">
+            style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultUser.png);">
             <% } else { %>
             style="background-image: url(imgs/defaultItem.png);">
             <% } %>
             </div>
             <div class="pad10left txt-unleaded">
+              <% if(ob.selectedAddress) { %>
               <div class="row10"><strong>Ship To</strong></div>
-              <div>Placeholder until address API ready</div>
+              <div><%- ob.selectedAddress.name %></div>
+              <div><%- ob.selectedAddress.street %></div>
+              <div><%- ob.selectedAddress.city %>, <%- ob.selectedAddress.state %> <% ob.selectedAddress.postal_code %></div>
+              <div><%- ob.selectedAddress.displayCountry %></div>
+              <% } %>
             </div>
           </div>
         </div>
@@ -61,13 +66,27 @@
       <div class="rowItem padding2015">
         <div class="table">
           <div>
+            <% if(ob.selectedModerator){ %>
             <div class="thumbnail thumbnail-large-slim box-border"
-                 style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultItem.png);">
+                <% if(ob.selectedModerator.avatar){ %>
+                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultItem.png);">
+                <% } else { %>
+                style="background-image: url(imgs/defaultItem.png);">
+                <% } %>
             </div>
             <div class="pad10left txt-unleaded">
-              <div class="row10"><strong>Ship To</strong></div>
-              <div>Placeholder until address API ready</div>
+              <div class="row10"><strong>Secure Transaction</strong></div>
+              <div class="noOverflow">Service by
+                <% if(ob.selectedModerator.blockchain_id){ %>
+                <%- ob.selectedModerator.blockchain_id %>
+                <% } else { %>
+                <%- ob.selectedModerator.guid %>
+                <% } %>
+              </div>
             </div>
+            <% } else { %>
+            Direct Purchase <%- ob.selectedModerator %>
+            <% } %>
           </div>
         </div>
       </div>
@@ -78,7 +97,7 @@
     </div>
     <div class="flexCol-3">
       <div class="rowItem padding2015">
-        <span class="js-buyWizardShippingPrice"><%- ob.currentShippingDisplayPrice %></span>
+        <span class="js-buyWizardShippingPrice"></span>
       </div>
     </div>
   </div>

@@ -29,7 +29,7 @@ module.exports = Backbone.View.extend({
       currency: this.model.get('userCurrencyCode')
     }).format(currentShippingPrice));
 
-    this.listenTo(this.model, 'currentModerator', this.moderatorSet);
+    this.listenTo(this.model, 'change:selectedModerator change:selectedAddress', this.render);
 
     this.render();
   },
@@ -41,12 +41,6 @@ module.exports = Backbone.View.extend({
       //this does not add it to the DOM, that is done by the parent view
     });
     return this;
-  },
-
-  moderatorSet: function(){
-    "use strict";
-    console.log(this.model.get('currentModerator'));
-    this.render();
   },
 
   changeQuantity: function(e){
@@ -69,6 +63,7 @@ module.exports = Backbone.View.extend({
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
+    this.model.set('quantity', quantity);
   },
 
   close: function(){

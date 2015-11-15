@@ -148,6 +148,8 @@ module.exports = Backbone.Model.extend({
         NewAddress: "New Address",
         AllListings: "All Listings",
         ComingSoon: "Coming Soon",
+        PaymentPending: "Payment Pending",
+        FinalizePurchase: "Finalize Purchase",
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -345,6 +347,8 @@ module.exports = Backbone.Model.extend({
         EnableSSL: "",
         LibbitcoinServerAddress: "",
         ServerIPPort: "",
+        PaymentPending: "En espera del pago",
+        FinalizePurchase: "Finalizar Compra",
         errorMessages: {
           saveError: "Los datos no pudo ser salvado.",
           getError: "Los datos no se pudo recuperar.",

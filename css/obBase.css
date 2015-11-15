@@ -1462,6 +1462,7 @@ input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button {
 input[type=number].spinButtons::-webkit-inner-spin-button:before,
 input[type=number].spinButtons::-webkit-inner-spin-button:after {
   position:absolute;
+  display: block;
   right: 6px;
   font-family: "Ionicons";
   color: #fff;
@@ -2342,9 +2343,14 @@ input[type="checkbox"].fieldItem + label span {
   top: -4px;
 }
 
-#ov1 .align-bottom {
+#ov1 .positionBottom {
   position: absolute;
   bottom: 0;
+}
+
+#ov1 .positionTop {
+  position: absolute;
+  top: 0;
 }
 
 #ov1 .hide {

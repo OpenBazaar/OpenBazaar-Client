@@ -10,6 +10,8 @@ module.exports = Backbone.View.extend({
     'change .js-buyWizardAddressRadio': 'selectAddress'
   },
 
+  className: "flexRow",
+
   initialize: function() {
     "use strict";
     //don't render on init, let parent trigger the render

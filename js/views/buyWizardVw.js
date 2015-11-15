@@ -6,7 +6,8 @@ var __ = require('underscore'),
     buyDetailsVw = require('./buyDetailsVw'),
     buyAddressesVw = require('./buyAddressesVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
-    chosen = require('../utils/chosen.jquery.min.js');
+    chosen = require('../utils/chosen.jquery.min.js'),
+    qr = require('qr-encode');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -18,10 +19,12 @@ module.exports = Backbone.View.extend({
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
     'click .js-buyWizardModeratorRadio': 'modSelected',
-    'click .js-buyWizardModalModDone': 'modDone',
-    'click .js-buyWizardAddressBack': 'addressBack',
+    'click .js-buyWizardModalModDone': 'hideMaps',
+    'click .js-buyWizardAddressBack': 'showMaps',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
+    'click .js-buyWizardAddressNext': 'addressDone',
+    'click .js-buyWizardSendPurchase': 'sendPurchase',
     'blur input': 'validateInput'
   },
 
@@ -111,21 +114,23 @@ module.exports = Backbone.View.extend({
     var modIndex = $(e.target).val();
     this.$el.find('.js-buyWizardModalModDone').removeClass('disabled');
     if(modIndex != "direct"){
-      this.model.set('selectedModerator', this.model.get('vendor_offer').listing.moderators[modIndex].guid);
+      this.model.set('selectedModerator', this.model.get('vendor_offer').listing.moderators[modIndex]);
     } else {
       this.model.set('selectedModerator', "");
     }
   },
 
-  modDone: function(){
+  hideMaps: function(){
     "use strict";
     this.$el.find('.js-buyWizardMap').removeClass('hide');
+    this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
     this.hideMap = false;
   },
 
-  addressBack: function(){
+  showMaps: function(){
     "use strict";
     this.$el.find('.js-buyWizardMap').addClass('hide');
+    this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
     this.hideMap = true;
   },
 
@@ -244,14 +249,38 @@ module.exports = Backbone.View.extend({
         }
       }
     }
-    console.log(addressString);
     addressString = encodeURIComponent(addressString);
-    console.log(addressString);
     var hideClass = this.hideMap ? "hide" : "";
     var newMap = '<iframe class="' + hideClass + ' js-buyWizardMap"' +
         'width="525" height="250" frameborder="0" style="border:0"' +
         'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe>';
-    this.$el.find('.js-buyWizardHero').html(newMap);
+    this.$el.find('.js-buyWizardMap').html(newMap);
+  },
+
+  addressDone: function(){
+    "use strict";
+    this.hideMaps();
+  },
+
+  sendPurchase: function(){
+    "use strict";
+    var self = this,
+        formData = new formData();
+
+    formData.append("id", this.model.get('id'));
+    //formData.append("quantity", )
+    $.post({
+      url: this.options.userModel.get('serverUrl') + "/purchase_contract",
+      data: formData,
+      dataType: 'json',
+      success: function(data){
+        console.log(data);
+      },
+      error: function(data){
+        console.log(data);
+      }
+    });
+
   },
 
   blockClicks: function(e) {
