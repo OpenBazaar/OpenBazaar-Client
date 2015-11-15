@@ -5,7 +5,11 @@
         <div class="table">
           <div>
             <div class="thumbnail thumbnail-large-slim box-border"
-                 style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+                <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
+                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+                <% } else { %>
+                style="background-image: url(imgs/defaultItem.png);">
+                <% } %>
             </div>
             <div class="pad10left txt-unleaded">
               <div class="row10"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
@@ -35,7 +39,7 @@
             <% if(ob.user.avatar_hash){ %>
             style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultUser.png);">
             <% } else { %>
-            style="background-image: url(imgs/defaultItem.png);">
+            style="background-image: url(imgs/defaultUser.png);">
             <% } %>
             </div>
             <div class="pad10left txt-unleaded">
@@ -69,9 +73,9 @@
             <% if(ob.selectedModerator){ %>
             <div class="thumbnail thumbnail-large-slim box-border"
                 <% if(ob.selectedModerator.avatar){ %>
-                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultItem.png);">
+                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultUser.png);">
                 <% } else { %>
-                style="background-image: url(imgs/defaultItem.png);">
+                style="background-image: url(imgs/defaultUser.png);">
                 <% } %>
             </div>
             <div class="pad10left txt-unleaded">
@@ -97,7 +101,7 @@
     </div>
     <div class="flexCol-3">
       <div class="rowItem padding2015">
-        <span class="js-buyWizardShippingPrice"></span>
+        <span class="js-buyWizardModeratorPrice"></span>
       </div>
     </div>
   </div>

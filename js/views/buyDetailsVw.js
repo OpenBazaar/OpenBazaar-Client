@@ -39,30 +39,45 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/buyDetails.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       //this does not add it to the DOM, that is done by the parent view
+      self.setQuantity(1);
     });
     return this;
   },
 
-  changeQuantity: function(e){
+  changeQuantity: function(e) {
+    "use strict";
+    this.setQuantity($(e.target).val());
+  },
+
+  setQuantity: function(quantity){
     "use strict";
     var self = this,
         userCurrency = this.model.get('userCurrencyCode'),
-        quantity = $(e.target).val(),
+        totalPrice = this.model.get('price') * quantity,
+        moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") : 0,
+        minDigits = (userCurrency == "BTC") ? 6 : 2,
         newDisplayPrice = new Intl.NumberFormat(window.lang, {
           style: 'currency',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          minimumFractionDigits: minDigits,
+          maximumFractionDigits: minDigits,
           currency: userCurrency
-        }).format(this.model.get('price') * quantity),
+        }).format(totalPrice),
         newDisplayShippingPrice = new Intl.NumberFormat(window.lang, {
           style: 'currency',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          minimumFractionDigits: minDigits,
+          maximumFractionDigits: minDigits,
           currency: userCurrency
-        }).format(this.model.get('currentShippingPrice') * quantity);
+        }).format(this.model.get('currentShippingPrice') * quantity),
+        newDisplayModeratorPrice = new Intl.NumberFormat(window.lang, {
+          style: 'currency',
+          minimumFractionDigits: minDigits,
+          maximumFractionDigits: minDigits,
+          currency: userCurrency
+        }).format(totalPrice / moderatorPercentage);
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
+    this.$el.find('.js-buyWizardModeratorPrice').html(newDisplayModeratorPrice);
     this.model.set('quantity', quantity);
   },
 

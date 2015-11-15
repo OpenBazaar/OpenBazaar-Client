@@ -1463,7 +1463,7 @@ input[type=number].spinButtons::-webkit-inner-spin-button:before,
 input[type=number].spinButtons::-webkit-inner-spin-button:after {
   position:absolute;
   display: block;
-  right: 6px;
+  right: 0;
   font-family: "Ionicons";
   color: #fff;
   font-size: 14px;
