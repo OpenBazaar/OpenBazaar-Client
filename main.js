@@ -10,8 +10,6 @@ var path = require('path');
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
-var globalShortcut = require('global-shortcut');
-
 // Check if we need to kick off the python server-daemon (Desktop app)
 if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
   console.log('Starting OpenBazaar Server');
@@ -88,10 +86,6 @@ app.on('ready', function() {
     if(subpy) {
       subpy.kill('SIGHUP');
     }
-  });
-
-  globalShortcut.register('shift+Return', function(){
-    //do nothing. This prevents a bug where Chromium spawns a new window
   });
 
   app.on('activate-with-no-open-windows', function() {
