@@ -94,13 +94,13 @@
               <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
               <input type="number" name="priceLocal" step="any" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%- ob.price %>" required
                 <% if(ob.userCurrencyCode == "BTC"){ %>
-                min="0.001"
+                min="0.0001"
                 <% } else { %>
                 min="0.01"<% } %>
               >
             </div>
             <div class="flexCol-4">
-              <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.001<% } %></span>
+              <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary js-shippingRow">
@@ -200,13 +200,13 @@
                 <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
                 <input type="number" step="any" class="fieldItem js-priceLocal custCol-text" id="shippingPriceLocalLocal"  value="<%- ob.domesticShipping %>"
                   <% if(ob.userCurrencyCode == "BTC"){ %>
-                  min="0.001"
+                  min="0.0001"
                   <% } else { %>
                   min="0.01"<% } %>
                 >
               </div>
               <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.001<% } %></span>
+                <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
               </div>
             </div>
             <div class="flexRow custCol-border-secondary js-inputParent js-shippingPriceRow">
@@ -219,13 +219,13 @@
                 <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
                 <input type="number" step="any" class="fieldItem js-priceLocal custCol-text" id="shippingPriceInternationalLocal" value="<%- ob.internationalShipping %>"
                   <% if(ob.userCurrencyCode == "BTC"){ %>
-                  min="0.001"
+                  min="0.0001"
                   <% } else { %>
                   min="0.01"<% } %>
                 >
               </div>
               <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.001<% } %></span>
+                <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
               </div>
             </div>
             <div class="flexRow custCol-border-secondary js-shippingRow">

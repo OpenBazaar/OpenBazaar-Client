@@ -40,7 +40,7 @@ module.exports = Backbone.Model.extend({
     if(userCCode) {
       getBTPrice(vendorCCode, function(btAve){
         vendorCurrencyInBitcoin = btAve;
-        vendorBitCoinPrice = Number(vendorPrice / btAve).toFixed(6);
+        vendorBitCoinPrice = Number(vendorPrice / btAve).toFixed(4);
         vendToUserBTCRatio = window.currentBitcoin/vendorCurrencyInBitcoin;
         newAttributes.vendorBTCPrice = vendorBitCoinPrice;
 
