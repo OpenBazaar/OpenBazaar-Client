@@ -46,7 +46,7 @@ module.exports = Backbone.Model.extend({
     response.displayCountry = matchedCountry[0] ? matchedCountry[0].name : "";
 
     //addresses come from the server as a string. Parse the string
-    response.shipping_addresses = response.shipping_addresses ? JSON.parse(response.shipping_addresses[0]) : [];
+    response.shipping_addresses = response.shipping_addresses[0] ? JSON.parse(response.shipping_addresses[0]) : [];
 
     return response;
   }
