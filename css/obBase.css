@@ -459,6 +459,12 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
+.thumbnail-huge {
+  border-radius: 4px;
+  height: 162px;
+  width: 162px;
+}
+
 .row5 {
   margin-bottom: 5px;
 }
@@ -1525,6 +1531,10 @@ input[type="number"].fieldItem.fieldItem-withButton {
   box-shadow: none;
   line-height: 50px;
   color: #fff;
+}
+
+.fieldItem .fieldItem-selectWrapper.chosen-relative .chosen-with-drop .chosen-drop {
+  position: relative;
 }
 
 .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li {
