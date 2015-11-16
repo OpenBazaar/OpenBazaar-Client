@@ -7,6 +7,7 @@ var __ = require('underscore'),
     languagesModel = require('../models/languagesMd.js'),
     personListView = require('./userListVw'),
     countriesModel = require('../models/countriesMd'),
+    showErrorModal = require('../utils/showErrorModal.js'),
     cropit = require('../utils/jquery.cropit');
 
 module.exports = Backbone.View.extend({
@@ -39,8 +40,7 @@ module.exports = Backbone.View.extend({
         self.render();
       },
       error: function(model, response){
-        alert("Information for the current user cannot be loaded.");
-        self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
+        showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
     this.subModels.push(this.userProfile);
@@ -49,13 +49,24 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     $('#content').html(self.$el);
-    this.errorModal = $('.js-messageModal');
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
       self.renderBlocked(self.model.get("user").blocked);
       $(".chosen").chosen({ width: '100%' });
-      self.$el.find('#avatar-cropit').cropit();
+      self.$el.find('#image-cropper').cropit({
+        smallImage: "stretch",
+        onFileReaderError: function(data){console.log(data);},
+        onFileChange: function(){
+          self.$el.find('.js-avatarLoading').removeClass('fadeOut');
+        },
+        onImageLoaded: function(){self.$el.find('.js-avatarLoading').addClass('fadeOut');},
+        onImageError: function(errorObject, errorCode, errorMessage){
+          console.log(errorObject);
+          console.log(errorCode);
+          console.log(errorMessage);
+        }
+      });
     });
     return this;
   },
@@ -67,13 +78,6 @@ module.exports = Backbone.View.extend({
                                            title: "No one blocked Yet",
                                            message: ""});
     this.subViews.push(this.blockedList);
-  },
-
-  showErrorModal: function(errorTitle, errorMessage) {
-    "use strict";
-    this.errorModal.removeClass('fadeOut');
-    this.errorModal.find('.js-messageModal-title').text(errorTitle);
-    this.errorModal.find('.js-messageModal-message').html(errorMessage);
   },
 
   setFormValues: function(){
@@ -179,11 +183,12 @@ module.exports = Backbone.View.extend({
             settingsFormData = new FormData(),
             uploadImageFormData = new FormData(),
             newAddress = {},
-            newAddresses = [];
+            newAddresses = [],
+            imageURI;
 
         settings_form.addClass('formChecked');
         if(!settings_form[0].checkValidity()) {
-            self.showErrorModal("Errors in form", "Please fix all errors in the form attempting to save again");
+            showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
             return;
         }
 
@@ -214,16 +219,6 @@ module.exports = Backbone.View.extend({
                 }
                 if(id == "name" || id == "handle") {
                     profileFormData.append(id,$(el).val());
-                } else if(id == "avatar") {
-                    var imageURI = self.$el.find('#avatar-cropit').cropit('export', {
-                        type: 'image/jpeg',
-                        quality: 0.75,
-                        originalSize: false
-                    });
-                    if(imageURI) {
-                        imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-                        uploadImageFormData.append('image', imageURI);
-                    }
                 } else if($(el).attr("type") == "checkbox") {
                     settingsFormData.append(id,$(el).is(":checked"));
                 } else {
@@ -259,6 +254,8 @@ module.exports = Backbone.View.extend({
                             success: function(data) {
                                 if(data.success === true) {
                                   window.location.reload();
+                                } else {
+                                  showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
                                 }
                             },
                             error: function(jqXHR, status, errorThrown){
@@ -268,6 +265,8 @@ module.exports = Backbone.View.extend({
                                 self.showErrorModal("Server error", "Profile API endpoint return an error");
                             }
                         });
+                    } else {
+                      showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
                     }
                 },
                 error: function(jqXHR, status, errorThrown){
@@ -282,7 +281,15 @@ module.exports = Backbone.View.extend({
 
         //Lets upload the image first, if there is one
         //to get the hash
-        if($("#avatar").val()) {
+        if($("#settingsAvatarInput").val()) {
+
+          imageURI = self.$el.find('#image-cropper').cropit('export', {
+            type: 'image/jpeg',
+            quality: 0.75,
+            originalSize: false
+          });
+          imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+          uploadImageFormData.append('image', imageURI);
 
             $.ajax({
                 type: "POST",
@@ -296,6 +303,8 @@ module.exports = Backbone.View.extend({
                     if(data.success === true &&
                        img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
                         submit(img_hash);
+                    } else {
+                      showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
                     }
                 },
                 error: function(jqXHR, status, errorThrown){

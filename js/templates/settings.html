@@ -70,13 +70,22 @@
 
               <div class="flexCol-3  borderRight">
                 <div class="fieldItem" id="avatar-field">
-                  <label for="avatar"><%= polyglot.t('Avatar') %></label>
+                  <label for="settingsAvatarInput"><%= polyglot.t('Avatar') %></label>
                 </div>
               </div>
 
-              <div class="flexCol-9" id="avatar-cropit">
-                <div class="cropit-image-preview thumbnail hide"></div>
-                <input id="avatar" name="avatar" type="file" class="fieldItem cropit-image-input" />
+              <div class="flexCol-9">
+                <div id="image-cropper" class="positionWrapper">
+                  <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
+                    <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
+                  </div>
+                  <div class="cropit-image-preview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
+                  <div>
+                    <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12" />
+                  </div>
+                  <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
+                  <label for="settingsAvatarInput" class="btn btn-txt btn-c1 rowTop20 marginLeft12 row20"><%= polyglot.t('UploadAvatar') %></label>
+                </div>
               </div>
 
             </div>

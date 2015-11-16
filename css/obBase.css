@@ -459,6 +459,12 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
+.thumbnail-huge {
+  border-radius: 4px;
+  height: 162px;
+  width: 162px;
+}
+
 .row5 {
   margin-bottom: 5px;
 }
