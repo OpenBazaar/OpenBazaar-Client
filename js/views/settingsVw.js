@@ -84,7 +84,7 @@ module.exports = Backbone.View.extend({
     var timezoneList = timezones.get('timezones');
     var languageList = languages.get('languages');
     var country = this.$el.find('#country');
-    var ship_country = this.$el.find('#ship_to_country');
+    var ship_country = this.$el.find('#settingsShipToCountry');
     var currency = this.$el.find('#currency_code');
     var timezone = this.$el.find('#time_zone');
     var language = this.$el.find('#language');
@@ -103,7 +103,8 @@ module.exports = Backbone.View.extend({
       var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
       currency_option.attr("selected",user.currency_code== c.code);
       country_option.attr("selected",user.country == c.dataName);
-      ship_country_option.attr("selected",user.ship_to_country== c.dataName);
+      //if user has a country in their profile, preselect it in the new address section
+      ship_country_option.attr("selected",user.country== c.dataName);
 
       ship_country_str += ship_country_option[0].outerHTML;
       currency_str += currency_option[0].outerHTML;
@@ -168,23 +169,44 @@ module.exports = Backbone.View.extend({
   },
 
   saveClick: function(e){
-        var self = this;
-        var server = self.options.userModel.get('serverUrl');
+        var self = this,
+            server = self.options.userModel.get('serverUrl'),
+            settings_form = this.$el.find("#settingsForm"),
+            //As there are 3 different API urls we need to call,
+            //we need to split up our form data into 3 parts,
+            //depending on which API call each value belongs to
+            profileFormData = new FormData(),
+            settingsFormData = new FormData(),
+            uploadImageFormData = new FormData(),
+            newAddress = {},
+            newAddresses = [];
 
-        var settings_form = this.$el.find("#settingsForm");
         settings_form.addClass('formChecked');
         if(!settings_form[0].checkValidity()) {
             self.showErrorModal("Errors in form", "Please fix all errors in the form attempting to save again");
             return;
         }
 
-        //As there are 3 different API urls we need to call,
-        //we need to split up our form data into 3 parts,
-        //depending on which API call each value belongs to
-        var profileFormData = new FormData();
-        var settingsFormData = new FormData();
-        var uploadImageFormData = new FormData();
-        $.each(settings_form.find("input,select,textarea"),
+        newAddress.name = this.$el.find('#settingsShipToName').val();
+        newAddress.street = this.$el.find('#settingsShipToStreet').val();
+        newAddress.city = this.$el.find('#settingsShipToCity').val();
+        newAddress.state = this.$el.find('#settingsShipToState').val();
+        newAddress.postal_code = this.$el.find('#settingsShipToPostalCode').val();
+        newAddress.country = this.$el.find('#settingsShipToCountry').val();
+
+        if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+          newAddresses.push(newAddress);
+        }
+
+        this.$el.find('.js-settingsAddress:not(:checked)').each(function(){
+          newAddresses.push(self.model.get('user').shipping_addresses[$(this).val()]);
+        });
+
+        if(newAddresses){
+          settingsFormData.append('shipping_addresses', JSON.stringify(newAddresses));
+        }
+
+        $.each(settings_form.find("input,select,textarea").not(".settingsAddressInput"),
             function(i,el) {
                 var id = $(el).attr("id");
                 if(id == "country") {
@@ -210,7 +232,7 @@ module.exports = Backbone.View.extend({
             }
         );
         //Remove this line when multiple shipping addresses has been implemented
-        settingsFormData.append("shipping_addresses","");
+        //settingsFormData.append("shipping_addresses","");
 
         var submit = function(img_hash) {
 
@@ -236,13 +258,7 @@ module.exports = Backbone.View.extend({
                             dataType: "json",
                             success: function(data) {
                                 if(data.success === true) {
-                                    if(img_hash) {
-                                        $(".topThumb, .btn-profile").css("background-image",
-                                            "url(" + server + "get_image?hash=" +
-                                                    img_hash + ")");
-                                        $("#avatar").val("");
-                                    }
-                                    self.showErrorModal("Saved", "Your settings have been successfully saved");
+                                  window.location.reload();
                                 }
                             },
                             error: function(jqXHR, status, errorThrown){
