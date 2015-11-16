@@ -1533,7 +1533,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   color: #fff;
 }
 
-.fieldItem .fieldItem-selectWrapper.chosen-relative .chosen-container-active .chosen-drop {
+.fieldItem .fieldItem-selectWrapper.chosen-relative .chosen-with-drop .chosen-drop {
   position: relative;
 }
 

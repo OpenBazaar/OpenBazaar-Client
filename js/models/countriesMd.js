@@ -38,7 +38,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "American Samoa",
         "dataName": "AMERICAN_SAMOA",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -214,7 +214,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Bonaire, Sint Eustatius and Saba",
         "dataName": "BONAIRE_SINT_EUSTATIUS_SABA",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -254,7 +254,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "British Indian Ocean Territory (The)",
         "dataName": "BRITISH_INDIAN_OCEAN_TERRITORY",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -510,7 +510,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Ecuador",
         "dataName": "ECUADOR",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -710,7 +710,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Guam",
         "dataName": "GUAM",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1102,7 +1102,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Marshall Islands (The)",
         "dataName": "MARSHALL_ISLANDS",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1150,7 +1150,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Micronesia (Federated States of)",
         "dataName": "MICRONESIA",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1310,7 +1310,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Northern Mariana Islands (The)",
         "dataName": "Northern_Mariana_Islands",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1342,7 +1342,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Palau",
         "dataName": "PALAU",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1414,7 +1414,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Puerto Rico",
         "dataName": "PUERTO_RICO",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1758,7 +1758,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Timor-Leste",
         "dataName": "TIMOR_LESTE",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1822,7 +1822,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Turks and Caicos Islands (The)",
         "dataName": "TURKS_AND_CAICOS_ISLANDS",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1870,7 +1870,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "United States of America (The)",
         "dataName": "UNITED_STATES",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1918,7 +1918,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Virgin Islands (British)",
         "dataName": "VIRGIN_ISLANDS_BRITISH",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"
@@ -1926,7 +1926,7 @@ module.exports = Backbone.Model.extend({
       {
         "name": "Virgin Islands (U.S.)",
         "dataName": "VIRGIN_ISLANDS_US",
-        "currency": "US Dollar",
+        "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
         "currencyUnits": "2"

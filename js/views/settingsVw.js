@@ -81,38 +81,53 @@ module.exports = Backbone.View.extend({
   },
 
   setFormValues: function(){
-    var countries = new countriesModel();
-    var timezones = new timezonesModel();
-    var languages = new languagesModel();
-    var countryList = countries.get('countries');
-    var timezoneList = timezones.get('timezones');
-    var languageList = languages.get('languages');
-    var country = this.$el.find('#country');
-    var ship_country = this.$el.find('#settingsShipToCountry');
-    var currency = this.$el.find('#currency_code');
-    var timezone = this.$el.find('#time_zone');
-    var language = this.$el.find('#language');
-    var user = this.model.get('user');
-    var avatar = user.avatar_hash;
+    var countries = new countriesModel(),
+        timezones = new timezonesModel(),
+        languages = new languagesModel(),
+        countryList = countries.get('countries'),
+        currecyList = countries.get('countries'),
+        timezoneList = timezones.get('timezones'),
+        languageList = languages.get('languages'),
+        country = this.$el.find('#country'),
+        ship_country = this.$el.find('#settingsShipToCountry'),
+        currency = this.$el.find('#currency_code'),
+        timezone = this.$el.find('#time_zone'),
+        language = this.$el.find('#language'),
+        user = this.model.get('user'),
+        avatar = user.avatar_hash,
+        ship_country_str = "",
+        country_str = "",
+        currency_str = "",
+        timezone_str = "",
+        language_str = "";
 
-    var ship_country_str = "";
-    var country_str = "";
-    var currency_str = "";
-    var timezone_str = "";
-    var language_str = "";
+    currecyList = __.uniq(currecyList, function(item){return item.code;});
+    currecyList = currecyList.sort(function(a,b){
+      var cA = a.currency.toLowerCase(),
+          cB = b.currency.toLowerCase();
+      if (cA < cB){
+        return -1;
+      }
+      if (cA > cB){
+        return 1;
+      }
+      return 0;
+    });
 
     __.each(countryList, function(c, i){
       var country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
       var ship_country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
-      var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
-      currency_option.attr("selected",user.currency_code== c.code);
       country_option.attr("selected",user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected",user.country== c.dataName);
-
       ship_country_str += ship_country_option[0].outerHTML;
-      currency_str += currency_option[0].outerHTML;
       country_str += country_option[0].outerHTML;
+    });
+
+    __.each(currecyList, function(c, i){
+      var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
+      currency_option.attr("selected",user.currency_code == c.code);
+      currency_str += currency_option[0].outerHTML;
     });
 
     __.each(timezoneList, function(t, i){
