@@ -9,7 +9,8 @@ var __ = require('underscore'),
     languageListView = require('../views/languageListVw'),
     adminPanelView = require('../views/adminPanelVw'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
-    remote = require('remote');
+    remote = require('remote'),
+    tooltip = require('../utils/tooltip');
 
 module.exports = Backbone.View.extend({
 
@@ -38,7 +39,10 @@ module.exports = Backbone.View.extend({
     'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
-    'click .js-homeModal-themeSelected': 'setSelectedTheme'
+    'click .js-homeModal-themeSelected': 'setSelectedTheme',
+    'mouseover [simple-tooltip]': tooltip.show,
+    'mouseout [simple-tooltip]': tooltip.hide,
+    'click [simple-tooltip]': tooltip.hide
   },
 
   initialize: function(options){

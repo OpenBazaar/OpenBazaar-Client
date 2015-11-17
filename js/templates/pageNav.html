@@ -16,10 +16,10 @@
   </div>
 </div>
 <div class="ctrlGroup">
-  <a class="btn btn-home ion-eye custCol-primary fontSize15" href="#home"></a>
+  <a class="btn btn-home ion-eye custCol-primary fontSize15" href="#home" simple-tooltip="Discover"></a>
 </div>
 <div class="ctrlGroup">
-  <div class="btn btn-notifications ion-android-notifications custCol-primary fontSize14 js-navNotifications badge"></div>
+  <div class="btn btn-notifications ion-android-notifications custCol-primary fontSize14 js-navNotifications badge" simple-tooltip="Notifications"></div>
 </div>
 <div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
     <div class="popMenu-notificationsHeader"><%= polyglot.t('nav.notifications') %></div>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="ctrlGroup nav-profile">
-  <div class="btn btn-profile js-navProfile custCol-primary"
+  <div class="btn btn-profile js-navProfile custCol-primary" simple-tooltip="Menu"
   <% if(ob.avatar_hash != "") { %>
   style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
   <% }else{ %>
