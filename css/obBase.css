@@ -139,14 +139,11 @@ form {
   background-color: #252525;
   height: calc(100% - 50px);
   z-index: 2;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  transition: right 0.5s ease;
 }
 
-.sideBarSlid {
-  right: 0px !important;
+#sideBar.sideBarSlid {
+  right: 0px;
 }
 
 .chatSearch {
@@ -1219,10 +1216,7 @@ input[type="text"].txtField-bar {
   background-color: #efefef;
   bottom: 0;
   position: absolute;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  transition: bottom 0.5s ease;
 }
 
 .chatConversationHidden {
