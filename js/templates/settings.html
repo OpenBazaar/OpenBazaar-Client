@@ -1,14 +1,16 @@
-<div class="mainContainer marginTop50">
+<div class="mainContainer">
 
-  <div class="topThumb"
-       style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>),
-                                 url(imgs/defaultUser.png);">
-
+  <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
+       <% if(ob.page.profile.avatar_hash) { %>
+       style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+       <% } else { %>
+       style="background-image: url(imgs/defaultUser.png);">
+       <% } %>
   </div>
 
-  <div class="smPageHeader">
-    <div class="navEnd pad15 smPageHeaderInner">
-            <span class="allCaps">
+  <div class="smPageHeader ">
+    <div class="navEnd pad15 smPageHeaderInner custCol-border-background shadow-inner1-ultra-light">
+            <span class=" fancy-heading colorWhiteForce fontSize20">
                 <%= polyglot.t('Settings') %>
             </span>
       <a class="btn btn-txt pull-right js-saveSettings rowTop10 marginRight5">
@@ -20,7 +22,7 @@
     </div>
   </div>
 
-  <div class="bar navBar barFlush navBar">
+  <div class="bar barFlush navBar custCol-secondary">
 
     <a class="btn btn-bar btn-tab js-tab js-generalTab active">
       <%= polyglot.t('General') %>
@@ -221,12 +223,11 @@
           </div>
 
           <div class="flexCol-12 flex-border hide js-tabTarg js-shipping">
-
+            <% if(ob.user.shipping_addresses) { %>
             <div class="flexRow">
               <div class="flexRow">
                 <h4 class="padding2015">Current Addresses</h4>
               </div>
-              <% if(ob.user.shipping_addresses) { %>
               <% _.each(ob.user.shipping_addresses, function(address, i){ %>
               <div class="flexRow">
                 <div class="flexCol-2">
@@ -244,8 +245,8 @@
                 </div>
               </div>
               <% }); %>
-              <% } %>
             </div>
+            <% } %>
 
             <div class="flexRow">
 
