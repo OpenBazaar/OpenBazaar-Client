@@ -117,6 +117,7 @@ module.exports = Backbone.View.extend({
     var chatButton = $(this.$el).find('.btn-newChat');
     chatButton.removeClass('btn-newChatOut', 500);
     chatButton.find('span').addClass('hide');
+    this.closeConversation();
   },
 
   handleSocketMessage: function(response) {
