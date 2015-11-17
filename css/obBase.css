@@ -2796,3 +2796,14 @@ input[type="checkbox"].fieldItem + label span {
     background-color: #B22222;
   /* don't put a border on this or it will be visible when it has no content */
 }
+
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    background-color: rgba(45,45,45,0.9);
+    padding: 4px 6px;
+    pointer-events: none;
+    border: 1px solid rgba(55, 55, 55, 0.6);
+    border-radius: 3px;
+    color: #f7f7f7;
+}
