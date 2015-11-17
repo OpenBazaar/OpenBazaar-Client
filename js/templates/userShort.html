@@ -11,13 +11,13 @@
       <a class="btn btn-txt btn-secondary custCol-secondary textOpacity65 btn-latched"><%= polyglot.t('follow') %></a>  
     </div>
     <div class="flexCol-9">
-      <div class="marginLeft15 marginTop2 clearfix">
-        <a class="textSize16px marginBottom2 noOverflow capitalize js-userShort" title="<%- ob.name %>"><%- ob.name.toLowerCase() %>
-        </a>
+      <div class="marginLeft15 marginTop2 clearFix">
+        <div class="floatLeft noOverflow marginBottom2 marginRight5"><a class="textSize16px capitalize" title="<%- ob.name %>"><%- ob.name.toLowerCase() %>
+        </a></div>
         <% if(ob.handle) { %>
-          <a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a>
+          <div class="floatLeft lineHeight21"><a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a></div>
         <% }else{ %>
-          <a class="textSize14px txt-fade width110 noOverflow js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a>
+          <div class="width110 noOverflow floatLeft lineHeight21"><a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a></div>
         <% } %>
       </div>
       <div class="marginLeft15 marginTop2">
