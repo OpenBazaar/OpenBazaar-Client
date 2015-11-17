@@ -77,8 +77,8 @@ module.exports = Backbone.View.extend({
   },
 
   hideList: function(e){
-    $('.js-list1, .js-list2, .js-list3').addClass('hide');;
-    $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').addClass('hide');;
+    $('.js-list1, .js-list2, .js-list3').addClass('hide');
+    $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').addClass('hide');
     $('.js-homeItemsBtn, .js-homeStoresBtn, .js-homeFeedBtn').removeClass('active');
   },
 
@@ -146,7 +146,7 @@ module.exports = Backbone.View.extend({
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
     user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
-    var newUserModel = new userShortModel(user)
+    var newUserModel = new userShortModel(user);
     var storeShort = new userShortView({model: newUserModel});
     this.$el.find('.js-list2 .js-loadingMsg').before(storeShort.el);
     this.subViews.push(storeShort);
@@ -161,33 +161,33 @@ module.exports = Backbone.View.extend({
   homeItemsClick: function(e){
     "use strict";
     this.hideList();
-    $('.js-list1').removeClass('hide');;
+    $('.js-list1').removeClass('hide');
     $('.js-homeItemsBtn').addClass('active');
 
     // Auto focus the search input
-    $('.js-homeItemsSearch').removeClass('hide');;
+    $('.js-homeItemsSearch').removeClass('hide');
     $('.js-homeItemsSearch input').focus();
   },
 
   homeStoresClick: function(e){
     "use strict";
     this.hideList();
-    $('.js-list2').removeClass('hide');;
+    $('.js-list2').removeClass('hide');
     $('.js-homeStoresBtn').addClass('active');
 
     // Auto focus the search input
-    $('.js-homeStoresSearch').removeClass('hide');;
+    $('.js-homeStoresSearch').removeClass('hide');
     $('.js-homeStoresSearch input').focus();
   },
 
   homeFeedClick: function(e){
     "use strict";
     this.hideList();
-    $('.js-list3').removeClass('hide');;
+    $('.js-list3').removeClass('hide');
     $('.js-homeFeedBtn').addClass('active');
 
     // Auto focus the search input
-    $('.js-homeFeedSearch').removeClass('hide');;
+    $('.js-homeFeedSearch').removeClass('hide');
     $('.js-homeFeedSearch input').focus();    
   },  
 
