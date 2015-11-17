@@ -1,7 +1,7 @@
-<div class="rowItem js-userShort clickable padding2015" data-guid="<%= ob.guid %>">
+<div class="rowItem padding2015" data-guid="<%= ob.guid %>">
   <div class="flexRow">
     <div class="flexCol-1">
-      <div class="thumbnail thumbnail-large custCol-border-secondary borderRadius2 borderRadiusBottom0 height70 textOpacity90"
+      <div class="thumbnail thumbnail-large custCol-border-secondary borderRadius2 borderRadiusBottom0 height70 textOpacity90 clickable"
         <% if(ob.avatar_hash) { %>
         style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);">
         <% } else { %>
@@ -12,22 +12,25 @@
     </div>
     <div class="flexCol-9">
       <div class="marginLeft15 marginTop2 clearfix">
-        <div class="textSize16px marginRight5 marginBottom2 noOverflow capitalize floatLeft" title="<%- ob.name %>">
-          <%- ob.name.toLowerCase() %>
-        </div>
+        <a class="textSize16px marginBottom2 noOverflow capitalize js-userShort" title="<%- ob.name %>"><%- ob.name.toLowerCase() %>
+        </a>
         <% if(ob.handle) { %>
-          <div class="textSize14px txt-fade lineHeight21"><%- ob.handle %></div>
+          <a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a>
         <% }else{ %>
-          <div class="textSize14px txt-fade width110 noOverflow floatLeft lineHeight21" title="<%- ob.guid %>"><%- ob.guid %></div>
+          <a class="textSize14px txt-fade width110 noOverflow js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a>
         <% } %>
       </div>
       <div class="marginLeft15 marginTop2">
-        <div class="fontSize14 txt-fade textWeightNormal"><%- ob.short_description %></div>
+        <% if(ob.short_description) { %>
+          <div class="fontSize14 txt-fade textWeightNormal"><%- ob.short_description %></div>
+        <% } else { %>
+          <div class="fontSize14 txt-fade textWeightNormal"><%= polyglot.t('NoDescriptionAdded') %></div>
+        <% } %>
       </div>
     </div>
 
     <div class="flexCol-2">
-      <a class="btn btn-txt btn-secondary custCol-secondary pull-right height36 width120 fontSize14"><%= polyglot.t('Visit') %></a>
+      <a class="btn btn-txt btn-secondary custCol-secondary pull-right height36 width120 fontSize14 js-userShort"><%= polyglot.t('Visit') %></a>
     </div> 
   </div>
 </div>
