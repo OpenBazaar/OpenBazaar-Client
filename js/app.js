@@ -82,6 +82,22 @@ var reloadProfile = function(){
   }
 };
 
+var setCurrentBitCoin = function(cCode, userModel, callback) {
+  "use strict";
+  getBTPrice(cCode, function (btAve, currencyList) {
+    //put the current bitcoin price in the window so it doesn't have to be passed to models
+    if (!btAve){
+      currencyList = currencyList.join("\n");
+      alert("Bitcoin prices for your selected currency are not available. Your currency has been set to BTC. " +
+          "You can change this in the settings console. \n\n The following currencies are available: \n\n" + currencyList);
+      window.currentBitcoin = 1;
+      userModel.set('currency_code', 'BTC');
+    }
+    window.currentBitcoin = btAve;
+    typeof callback === 'function' && callback();
+  });
+}
+
 var loadProfile = function() {
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
@@ -101,31 +117,18 @@ var loadProfile = function() {
             cCode = model.get('currency_code');
 
             //get user bitcoin price before loading pages
-            getBTPrice(cCode, function (btAve, currencyList) {
-              //put the current bitcoin price in the window so it doesn't have to be passed to models
-              if(!btAve){
-                currencyList = currencyList.join("\n");
-                alert("Bitcoin prices for your selected currency are not available. Your currency has been set to BTC. " +
-                    "You can change this in the settings console. \n\n The following currencies are available: \n\n" + currencyList);
-                window.currentBitcoin = 1;
-                user.set('currency_code', 'BTC');
-                cCode = "BTC";
-              }
-              window.currentBitcoin = btAve;
-
-              //every 15 minutes update the bitcoin price
-              window.bitCoinPriceChecker = setInterval(function () {
-                getBTPrice(cCode, function (btAve) {
-                  window.currentBitcoin = btAve;
-                });
-              }, 54000000);
-
+            setCurrentBitCoin(cCode, user, function(){
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView});
               newRouter = new router({userModel: user, socketView: newSocketView});
               Backbone.history.start();
             });
+
+            //every 15 minutes update the bitcoin price for the currently selected currency
+            window.bitCoinPriceChecker = setInterval(function () {
+              setCurrentBitCoin(model.get('currency_code'), user);
+            }, 54000000);
           },
           error: function (model, response) {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
