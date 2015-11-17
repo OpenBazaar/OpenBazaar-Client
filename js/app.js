@@ -35,7 +35,7 @@ var Polyglot = require('node-polyglot'),
     loadProfileCountdownInterval,
     loadProfileCountdown = 5;
 
-serverUrlLocal = localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
+serverUrlLocal = "http://192.168.1.22:18469/api/v1/" || localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
 
 //set the urlRoot of the user model. Defaults to local host if not found
 user.urlRoot = serverUrlLocal + "settings";
@@ -123,7 +123,7 @@ var loadProfile = function() {
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-              newChatAppView = new chatAppView({socketView: newSocketView})
+              newChatAppView = new chatAppView({model: user, socketView: newSocketView})
               newRouter = new router({userModel: user, socketView: newSocketView});
               Backbone.history.start();
             });
@@ -139,7 +139,7 @@ var loadProfile = function() {
             user.set('serverUrl', serverUrlLocal);
             newSocketView = new socketView({model: user});
             newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-            newChatAppView = new chatAppView({socketView: newSocketView})
+            newChatAppView = new chatAppView({model: user, socketView: newSocketView})
             newRouter = new router({userModel: user, socketView: newSocketView});
             Backbone.history.start();
           }

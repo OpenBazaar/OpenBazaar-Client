@@ -117,6 +117,7 @@ form {
   position: relative;
   width: 950px;
   z-index: 1;
+
 }
 
 #pageNav {
@@ -132,12 +133,24 @@ form {
 
 #sideBar {
   position: absolute;
-  right: -360px;
+  right: -180px;
   top: 50px;
-  width:400px;
+  width:220px;
   background-color: #252525;
   height: calc(100% - 50px);
   z-index: 2;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.sideBarSlid {
+  right: 0px !important;
+}
+
+.chatSearch {
+  margin-left: 40px;
 }
 
 .mainContainer {
@@ -1149,6 +1162,85 @@ input[type="text"].txtField-bar {
   margin-top: 3px;
   opacity: .50;
   transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn-newChat {
+  background-color: unset;
+  margin: 5px;
+  width: 30px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.btn-newChatOut {
+  background-color: #2D2D2D;
+  width: 60px;
+  text-align: left;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.btn-closeChat {
+  margin: 5px;
+  right: 0;
+  float: right;
+  background-color: unset;
+}
+
+.btn-chatSearch {
+  background-color: unset;
+  text-align: center;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.chatSearch input {
+  width: calc(100% - 30px);
+  outline: none;
+  margin-left: 5px;
+  font-size: 13px;
+  background-color: unset;
+  color: white;
+}
+.chatSearch input::-webkit-input-placeholder {
+  font-size: 13px;
+}
+
+.chatSearchOut {
+  padding-left: 10px;
+  width: calc(100% - 10px);
+  margin-left: 0;
+}
+
+.chatConversation {
+  width: 100%;
+  height: 250px;
+  background-color: #efefef;
+  bottom: 0;
+  position: absolute;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.chatConversationHidden {
+  bottom: -250px;
+}
+
+.chatConversationHeader {
+  padding: 10px;
+  background-color: #292929;
+}
+
+.chatConversationLabel {
+  width: calc(100% - 15px);
+  float:left;
+}
+
+.btn-closeConversation {
+
 }
 
 .userPage .btn.btn-bar {
