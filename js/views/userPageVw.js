@@ -340,6 +340,9 @@ module.exports = Backbone.View.extend({
         addressState,
         currentHandle = this.model.get('page').profile.handle;
 
+    //clear old templates
+    this.$el.find('.js-list4').html("");
+
     if(state === "item"){
       this.renderItem(hash);
       $('#obContainer').scrollTop(367);
@@ -805,8 +808,8 @@ module.exports = Backbone.View.extend({
 
   saveNewDone: function(newHash) {
     "use strict";
-    this.subRender();
     this.setState('item', newHash);
+    this.subRender();
   },
 
   deleteOldDone: function(newHash) {
