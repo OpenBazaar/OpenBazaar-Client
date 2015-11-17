@@ -1,464 +1,513 @@
 <div class="mainContainer marginTop50">
 
-    <div class="topThumb"
-        style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>),
+  <div class="topThumb"
+       style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>),
                                  url(imgs/defaultUser.png);">
 
-    </div>
+  </div>
 
-    <div class="smPageHeader">
-        <div class="navEnd pad15 smPageHeaderInner">
+  <div class="smPageHeader">
+    <div class="navEnd pad15 smPageHeaderInner">
             <span class="allCaps">
                 <%= polyglot.t('Settings') %>
             </span>
-            <a class="btn btn-txt pull-right js-saveSettings rowTop10 marginRight5">
-                <%= polyglot.t('SaveChanges') %>
-            </a>
-            <a class="btn btn-txt pull-right textOpacity75 js-cancelSettings rowTop10 marginRight5">
-                <%= polyglot.t('Cancel') %>
-            </a>
-        </div>
+      <a class="btn btn-txt pull-right js-saveSettings rowTop10 marginRight5">
+        <%= polyglot.t('SaveChanges') %>
+      </a>
+      <a class="btn btn-txt pull-right textOpacity75 js-cancelSettings rowTop10 marginRight5">
+        <%= polyglot.t('Cancel') %>
+      </a>
     </div>
+  </div>
+
+  <div class="bar navBar barFlush navBar">
+
+    <a class="btn btn-bar btn-tab js-tab js-generalTab active">
+      <%= polyglot.t('General') %>
+    </a>
+    <a class="btn btn-bar btn-tab js-tab js-shippingTab">
+      <%= polyglot.t('Shipping') %>
+    </a>
+    <a class="btn btn-bar btn-tab js-tab js-storeTab">
+      <%= polyglot.t('Store') %>
+    </a>
+    <a class="btn btn-bar btn-tab js-tab js-blockedTab">
+      <%= polyglot.t('Blocked') %>
+    </a>
+    <a class="btn btn-bar btn-tab js-tab js-advancedTab">
+      <%= polyglot.t('Advanced') %>
+    </a>
+
+  </div>
+
+  <div class="flexContainer flex-border">
+    <div class="flexRow border0 minHeight650">
+      <div class="flexRow flexExpand">
+        <form class="width100" name="settingsForm" id="settingsForm">
+          <div class="flexCol-12 flex-border js-tabTarg js-general">
+
+            <div class="flexRow">
+
+              <div class="flexCol-3 borderRight">
+                <div class="fieldItem">
+                  <label for="name"><%= polyglot.t('Name') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="name"
+                       type="text"
+                       id="name"
+                       placeholder="<%= polyglot.t('YourName') %>"
+                       class="fieldItem"
+                       required
+                       value="<%= ob.page.profile.name %>">
+              </div>
 
-    <div class="bar navBar barFlush navBar">
-
-        <a class="btn btn-bar btn-tab js-tab js-generalTab active">
-            <%= polyglot.t('General') %>
-        </a>
-        <a class="btn btn-bar btn-tab js-tab js-shippingTab">
-            <%= polyglot.t('Shipping') %>
-        </a>
-        <a class="btn btn-bar btn-tab js-tab js-storeTab">
-            <%= polyglot.t('Store') %>
-        </a>
-        <a class="btn btn-bar btn-tab js-tab js-blockedTab">
-            <%= polyglot.t('Blocked') %>
-        </a>
-        <a class="btn btn-bar btn-tab js-tab js-advancedTab">
-            <%= polyglot.t('Advanced') %>
-        </a>
-
-    </div>
-
-    <div class="flexContainer flex-border">
-        <div class="flexRow border0 marginBottom50 minHeight650">
-            <div class="flexRow flexExpand">
-                <form class="width100" name="settingsForm" id="settingsForm">
-                    <div class="flexCol-12 flex-border js-tabTarg js-general">
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3 borderRight">
-                                    <div class="fieldItem">
-                                        <label for="name"><%= polyglot.t('Name') %></label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="name"
-                                        type="text"
-                                        id="name"
-                                        placeholder="<%= polyglot.t('YourName') %>"
-                                        class="fieldItem"
-                                        required
-                                        value="<%= ob.page.profile.name %>">
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem" id="avatar-field">
-                                        <label for="avatar"><%= polyglot.t('Avatar') %></label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9" id="avatar-cropit">
-                                    <div class="cropit-image-preview thumbnail hide"></div>
-                                    <input id="avatar" name="avatar" type="file" class="fieldItem cropit-image-input" />
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3 borderRight">
-                                    <div class="fieldItem">
-                                        <label for="handle"><%= polyglot.t('Handle') %></label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="handle"
-                                        type="text"
-                                        id="handle"
-                                        placeholder="@john"
-                                        class="fieldItem"
-                                        pattern="@[a-zA-Z0-9]+"
-                                        value="<%= ob.page.profile.handle %>">
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="refund_address">
-                                            <%= polyglot.t('BitcoinReturnAddress') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="refund_address"
-                                        type="text"
-                                        id="refund_address"
-                                        placeholder="<%= polyglot.t('Address') %>"
-                                        class="fieldItem"
-                                        required
-                                        pattern=".{26,}"
-                                        value="<%= ob.user.refund_address %>">
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow overflowVisible">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="country">
-                                            <%= polyglot.t('Country') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                        <div class="fieldItem-selectWrapper noIcon">
-                                            <select name="country" class="chosen" id="country">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow overflowVisible">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="language">
-                                            <%= polyglot.t('Language') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                        <div class="fieldItem-selectWrapper noIcon">
-                                            <select name="language" class="chosen" id="language">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow overflowVisible">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="currency_code">
-                                            <%= polyglot.t('LocalCurrency') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                        <div class="fieldItem-selectWrapper noIcon">
-                                            <select name="currency_code" class="chosen" id="currency_code">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow overflowVisible">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="time_zone">
-                                            <%= polyglot.t('TimeZone') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                        <div class="fieldItem-selectWrapper noIcon">
-                                            <select name="time_zone" class="chosen" id="time_zone">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="flexCol-12 flex-border hide js-tabTarg js-shipping">
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="ship_to_name">
-                                            <%= polyglot.t('ShipToName') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="ship_to_name"
-                                        id="ship_to_name"
-                                        type="text"
-                                        placeholder="<%= polyglot.t('Name') %>"
-                                        class="fieldItem"
-                                        value="<%= ob.user.ship_to_name%>">
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="ship_to_street">
-                                            <%= polyglot.t('ShipToStreet') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="ship_to_street"
-                                        id="ship_to_street"
-                                        type="text"
-                                        placeholder="<%= polyglot.t('Street') %>"
-                                        class="fieldItem"
-                                        value="<%= ob.user.ship_to_street%>">
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="ship_to_city">
-                                            <%= polyglot.t('ShipToCity') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="ship_to_city"
-                                        id="ship_to_city"
-                                        type="text"
-                                        placeholder="<%= polyglot.t('City') %>"
-                                        class="fieldItem"
-                                        value="<%= ob.user.ship_to_city%>">
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="ship_to_state">
-                                            <%= polyglot.t('ShipToState') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="ship_to_state"
-                                        id="ship_to_state"
-                                        type="text"
-                                        placeholder="<%= polyglot.t('State') %>"
-                                        class="fieldItem"
-                                        value="<%= ob.user.ship_to_state%>">
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="ship_to_postal_code">
-                                            <%= polyglot.t('ShipToPostalCode') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="ship_to_postal_code"
-                                        id="ship_to_postal_code"
-                                        type="text"
-                                        placeholder="<%= polyglot.t('PostalCode') %>"
-                                        class="fieldItem"
-                                        value="<%= ob.user.ship_to_postal_code%>">
-                                </div>
-
-                            </div>
-
-                            <div class="flexRow overflowVisible">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="ship_to_country">
-                                            <%= polyglot.t('ShipToCountry') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                        <div class="fieldItem-selectWrapper noIcon">
-                                            <select name="ship_to_country" class="chosen" id="ship_to_country">
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <div class="flexCol-12 flex-border hide js-tabTarg js-store">
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="term_conditions">
-                                            <%= polyglot.t('TermsAndConditions') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                            <textarea name="terms_conditions" id="terms_conditions" rows="6" class="fieldItem-textarea" value=""><%= ob.user.terms_conditions %></textarea>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="refund_policy">
-                                            <%= polyglot.t('ReturnPolicy') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                            <textarea name="refund_policy" id="refund_policy" rows="6" class="fieldItem-textarea" value=""><%= ob.user.refund_policy%></textarea>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="flexCol-12 flex-border hide js-tabTarg js-blocked">
-                            <div class="flexRow">
-                                <div class="flexRow custCol-border-secondary">
-                                    <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-                                        <input type="text"
-                                            name="blocked"
-                                            id="blocked"
-                                            class="txtField txtField-bar search"
-                                            placeholder="<%= polyglot.t('SearchForUsersPlaceholder') %>"  />
-                                    </div>
-                                </div>
-                                <div class="flexRow js-list1"></div>
-                            </div>
-                        </div>
-                        <div class="flexCol-12 flex-border hide js-tabTarg js-advanced">
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="notifications">
-                                            <%= polyglot.t('EnableNotifications') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="padding0 fieldItem">
-                                            <input type="checkbox" name="notifications" id="notifications"
-                                                <% if(ob.user.notifications) { %>
-                                                checked="checked"
-                                                <% } %>
-                                            value="true">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="ssl">
-                                            <%= polyglot.t('EnableSSL') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <div class="fieldItem padding0">
-                                            <input type="checkbox" name="ssl" id="ssl"
-                                                <% if(ob.user.ssl) { %>
-                                                checked="checked"
-                                                <% } %>
-                                                value="true">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="flexRow">
-
-                                <div class="flexCol-3  borderRight">
-                                    <div class="fieldItem">
-                                        <label for="libbitcoin_server">
-                                            <%= polyglot.t('Libbitcoin server address') %>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="flexCol-9">
-                                    <input name="libbitcoin_server"
-                                        id="libbitcoin_server"
-                                        type="text"
-                                        placeholder="<%= polyglot.t('ServerIPPort') %>"
-                                        class="fieldItem"
-                                        pattern="[.a-z0-9,A-Z]+|[.a-z0-9,A-Z]+:[0-9]+"
-                                        value="<%= ob.user.libbitcoin_server %>">
-                                </div>
-
-                            </div>
-                        </div>
-                </form>
             </div>
 
-        </div>
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem" id="avatar-field">
+                  <label for="settingsAvatarInput"><%= polyglot.t('Avatar') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div id="image-cropper" class="positionWrapper">
+                  <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
+                    <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
+                  </div>
+                  <div class="cropit-image-preview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
+                  <div>
+                    <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12" />
+                  </div>
+                  <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
+                  <label for="settingsAvatarInput" class="btn btn-txt btn-c1 rowTop20 marginLeft12 row20"><%= polyglot.t('UploadAvatar') %></label>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3 borderRight">
+                <div class="fieldItem">
+                  <label for="handle"><%= polyglot.t('Handle') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="handle"
+                       type="text"
+                       id="handle"
+                       placeholder="@john"
+                       class="fieldItem"
+                       pattern="@[a-zA-Z0-9]+"
+                       value="<%= ob.page.profile.handle %>">
+              </div>
+
+            </div>
+
+
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="refund_address">
+                    <%= polyglot.t('BitcoinReturnAddress') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="refund_address"
+                       type="text"
+                       id="refund_address"
+                       placeholder="<%= polyglot.t('Address') %>"
+                       class="fieldItem"
+                       required
+                       pattern=".{26,}"
+                       value="<%= ob.user.refund_address %>">
+              </div>
+
+            </div>
+
+            <div class="flexRow overflowVisible">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="country">
+                    <%= polyglot.t('Country') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper noIcon">
+                    <select name="country" class="chosen" id="country">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flexRow overflowVisible">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="language">
+                    <%= polyglot.t('Language') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper noIcon">
+                    <select name="language" class="chosen" id="language">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flexRow overflowVisible">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="currency_code">
+                    <%= polyglot.t('LocalCurrency') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper chosen-relative noIcon">
+                    <select name="currency_code" class="chosen" id="currency_code">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flexRow overflowVisible">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="time_zone">
+                    <%= polyglot.t('TimeZone') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper chosen-relative noIcon">
+                    <select name="time_zone" class="chosen" id="time_zone">
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="flexCol-12 flex-border hide js-tabTarg js-shipping">
+
+            <div class="flexRow">
+              <div class="flexRow">
+                <h4 class="padding2015">Current Addresses</h4>
+              </div>
+              <% if(ob.user.shipping_addresses) { %>
+              <% _.each(ob.user.shipping_addresses, function(address, i){ %>
+              <div class="flexRow">
+                <div class="flexCol-2">
+                  <input type="checkbox"
+                         class="fieldItem js-settingsAddress"
+                         id="settingsAddress<%- i %>"
+                         value="<%- i %>">
+                  <label for="settingsAddress<%- i %>"><%= polyglot.t('Delete') %></label>
+                </div>
+                <div class="flexCol-10 padding2015">
+                  <div><%- address.name %></div>
+                  <div><%- address.street %></div>
+                  <div><%- address.state %> <%- address.postal_code %></div>
+                  <div><%- address.country %></div>
+                </div>
+              </div>
+              <% }); %>
+              <% } %>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexRow">
+                <h4 class="padding2015">New Address</h4>
+              </div>
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="settingsShipToName">
+                    <%= polyglot.t('ShipToName') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="ship_to_name"
+                       id="settingsShipToName"
+                       type="text"
+                       placeholder="<%= polyglot.t('Name') %>"
+                       class="fieldItem settingsAddressInput">
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="settingsShipToStreet">
+                    <%= polyglot.t('ShipToStreet') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="ship_to_street"
+                       id="settingsShipToStreet"
+                       type="text"
+                       placeholder="<%= polyglot.t('Street') %>"
+                       class="fieldItem settingsAddressInput">
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="settingsShipToCity">
+                    <%= polyglot.t('ShipToCity') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="ship_to_city"
+                       id="settingsShipToCity"
+                       type="text"
+                       placeholder="<%= polyglot.t('City') %>"
+                       class="fieldItem settingsAddressInput">
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="settingsShipToState">
+                    <%= polyglot.t('ShipToState') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="ship_to_state"
+                       id="settingsShipToState"
+                       type="text"
+                       placeholder="<%= polyglot.t('State') %>"
+                       class="fieldItem settingsAddressInput">
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="settingsShipToPostalCode">
+                    <%= polyglot.t('ShipToPostalCode') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="ship_to_postal_code"
+                       id="settingsShipToPostalCode"
+                       type="text"
+                       placeholder="<%= polyglot.t('PostalCode') %>"
+                       class="fieldItem settingsAddressInput">
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="settingsShipToCountry">
+                    <%= polyglot.t('ShipToCountry') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper chosen-relative noIcon">
+                    <select
+                      name="ship_to_country"
+                      class="chosen settingsAddressInput"
+                      id="settingsShipToCountry">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+          <div class="flexCol-12 flex-border hide js-tabTarg js-store">
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="terms_conditions">
+                    <%= polyglot.t('TermsAndConditions') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                                            <textarea
+                                              name="terms_conditions"
+                                              id="terms_conditions"
+                                              rows="6"
+                                              class="fieldItem-textarea"
+                                              value=""><%= ob.user.terms_conditions %></textarea>
+                </div>
+              </div>
+
+            </div>
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="refund_policy">
+                    <%= polyglot.t('ReturnPolicy') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                  <textarea name="refund_policy" id="refund_policy" rows="6" class="fieldItem-textarea" value=""><%= ob.user.refund_policy%></textarea>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="flexCol-12 flex-border hide js-tabTarg js-blocked">
+            <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
+                <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+                  <input type="text"
+                         name="blocked"
+                         id="blocked"
+                         class="txtField txtField-bar search"
+                         placeholder="<%= polyglot.t('SearchForUsersPlaceholder') %>"  />
+                </div>
+              </div>
+              <div class="flexRow js-list1"></div>
+            </div>
+          </div>
+          <div class="flexCol-12 flex-border hide js-tabTarg js-advanced">
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="notifications">
+                    <%= polyglot.t('EnableNotifications') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="padding0 fieldItem">
+                  <input type="checkbox"
+                         name="notifications"
+                         id="notifications"
+                         class="fieldItem"
+                  <% if(ob.user.notifications) { %>
+                  checked="checked"
+                  <% } %>
+                  value="true">
+                  <label for="notifications"></label>
+                </div>
+              </div>
+
+            </div>
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="ssl">
+                    <%= polyglot.t('EnableSSL') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <div class="fieldItem padding0">
+                  <input type="checkbox"
+                         name="ssl"
+                         id="ssl"
+                         class="fieldItem"
+                  <% if(ob.user.ssl) { %>
+                  checked="checked"
+                  <% } %>
+                  value="true">
+                  <label for="ssl"></label>
+                </div>
+              </div>
+
+            </div>
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight">
+                <div class="fieldItem">
+                  <label for="libbitcoin_server">
+                    <%= polyglot.t('Libbitcoin server address') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9">
+                <input name="libbitcoin_server"
+                       id="libbitcoin_server"
+                       type="text"
+                       placeholder="<%= polyglot.t('ServerIPPort') %>"
+                       class="fieldItem"
+                       pattern="[.a-z0-9,A-Z]+|[.a-z0-9,A-Z]+:[0-9]+"
+                       value="<%= ob.user.libbitcoin_server %>">
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+
     </div>
+  </div>
 </div>
