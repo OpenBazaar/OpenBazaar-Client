@@ -363,6 +363,9 @@ module.exports = Backbone.View.extend({
         addressState,
         currentHandle = this.model.get('page').profile.handle;
 
+    //clear old templates
+    this.$el.find('.js-list4').html("");
+
     if(state === "item"){
       this.renderItem(hash);
       $('#obContainer').scrollTop(367);
@@ -504,7 +507,7 @@ module.exports = Backbone.View.extend({
       if(self.options.ownPage === true){
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
       } else {
-        arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+arrayItem.guid;
+        arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
     this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
@@ -828,8 +831,8 @@ module.exports = Backbone.View.extend({
 
   saveNewDone: function(newHash) {
     "use strict";
-    this.subRender();
     this.setState('item', newHash);
+    this.subRender();
   },
 
   deleteOldDone: function(newHash) {

@@ -8,7 +8,8 @@ var __ = require('underscore'),
     personListView = require('./userListVw'),
     countriesModel = require('../models/countriesMd'),
     showErrorModal = require('../utils/showErrorModal.js'),
-    cropit = require('../utils/jquery.cropit');
+    cropit = require('../utils/jquery.cropit'),
+    getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({
 
@@ -37,7 +38,12 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       success: function(model){
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        self.render();
+        //use default currency to return list of supported currencies
+        getBTPrice("USD", function (btAve, currencyList) {
+          "use strict";
+          self.availableCurrenciesList = currencyList;
+          self.render();
+        });
       },
       error: function(model, response){
         showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
@@ -81,7 +87,8 @@ module.exports = Backbone.View.extend({
   },
 
   setFormValues: function(){
-    var countries = new countriesModel(),
+    var self = this,
+        countries = new countriesModel(),
         timezones = new timezonesModel(),
         languages = new languagesModel(),
         countryList = countries.get('countries'),
@@ -113,6 +120,8 @@ module.exports = Backbone.View.extend({
       }
       return 0;
     });
+    //add BTC
+    currecyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
 
     __.each(countryList, function(c, i){
       var country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
@@ -125,9 +134,12 @@ module.exports = Backbone.View.extend({
     });
 
     __.each(currecyList, function(c, i){
-      var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
-      currency_option.attr("selected",user.currency_code == c.code);
-      currency_str += currency_option[0].outerHTML;
+      //only show currently available currencies
+      if(self.availableCurrenciesList.indexOf(c.code) > -1 || c.code === "BTC"){
+        var currency_option = $('<option value="'+c.code+'">'+c.currency+'</option>');
+        currency_option.attr("selected",user.currency_code == c.code);
+        currency_str += currency_option[0].outerHTML;
+      }
     });
 
     __.each(timezoneList, function(t, i){
