@@ -195,12 +195,8 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    console.log("close function");
     this.unbind();
-    console.log(this);
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 
 });
