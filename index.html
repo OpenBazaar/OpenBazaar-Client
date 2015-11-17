@@ -43,7 +43,9 @@
   <script>
     var app = require('./js/app'),
         remote = require('remote');
-    $('.js-closeIndexModal').on('click', function(){$(this).closest('.modal').addClass('fadeOut')});
+    $('.js-closeIndexModal').on('click', function(){
+      $(this).closest('.modal').addClass('fadeOut');
+    });
     $('.js-closeIndexApp').on('click', function(){
       var win = remote.getCurrentWindow();
       var process = remote.process;

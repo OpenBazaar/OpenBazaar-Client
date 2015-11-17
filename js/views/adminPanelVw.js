@@ -16,7 +16,6 @@ module.exports = Backbone.View.extend({
     'click .js-closeModal': 'closeModal',
     'click .js-adminMakeModerator': 'makeModerator',
     'click .js-adminUnmakeModerator': 'unMakeModerator',
-    'click .js-avatarSubmit': 'uploadAvatar',
     'click .js-adminServer': 'setServer',
     'click .js-adminUpdateProfile': 'updateProfile',
     'click .js-adminUpdateSettings': 'updateSettings',
@@ -81,22 +80,17 @@ module.exports = Backbone.View.extend({
         console.log("User Profile fetch failed: " + response.statusText);
       }
     });
+    /*
     this.userSettings.fetch({
       success: function(model){
         var modelJSON = model.toJSON();
         self.$el.find('#adminServerInput').val(modelJSON.serverUrl);
-        self.$el.find('#adminCurrencyInput').val(modelJSON.currency_code);
-        self.$el.find('#adminShipToNameInput').val(modelJSON.ship_to_name);
-        self.$el.find('#adminShipToStreetInput').val(modelJSON.ship_to_street);
-        self.$el.find('#adminShipToCityInput').val(modelJSON.ship_to_city);
-        self.$el.find('#adminShipToStateInput').val(modelJSON.ship_to_state);
-        self.$el.find('#adminShipToPostalCodeInput').val(modelJSON.ship_to_postal_code);
-        self.$el.find('#adminShipToCountryInput').val(modelJSON.ship_to_country);
       },
       error: function(model, response){
         console.log("User Settings fetch failed: " + response.statusText);
       }
     });
+    */
     $.ajax({
       url: self.model.get('serverUrl')+ "connected_peers",
       success: function(data){
@@ -115,21 +109,6 @@ module.exports = Backbone.View.extend({
         self.$el.find('.js-adminRoutingTable').text("Call to routing table API failed.");
       }
     });
-
-    this.$el.find('#image-cropper').cropit({
-      smallImage: "stretch",
-      onFileReaderError: function(data){console.log(data);},
-      onFileChange: function(){
-        self.$el.find('.js-avatarLoading').removeClass('fadeOut');
-        self.$el.find('.js-avatarSubmit').removeClass('fadeOut');
-      },
-      onImageLoaded: function(){self.$el.find('.js-avatarLoading').addClass('fadeOut');},
-      onImageError: function(errorObject, errorCode, errorMessage){
-        console.log(errorObject);
-        console.log(errorCode);
-        console.log(errorMessage);
-      }
-    });
   },
 
   closeModal: function(e){
@@ -143,6 +122,7 @@ module.exports = Backbone.View.extend({
     this.postData("", "make_moderator",
       function(){
         self.$el.find('.js-adminModeratorMsg').html("You are a moderator");
+        self.updatePage();
       },
       function(data){
         alert("Failed. "+ data.reason);
@@ -156,50 +136,7 @@ module.exports = Backbone.View.extend({
     this.postData("", "unmake_moderator",
       function(){
         self.$el.find('.js-adminModeratorMsg').html("You are not a moderator");
-      },
-      function(data){
-        alert("Failed. "+ data.reason);
-      }
-    );
-  },
-
-  showAvatarUploadBtn: function(){
-    "use strict";
-    this.$el.find('.js-avatarSubmit').removeClass('fadeOut');
-  },
-
-  uploadAvatar: function() {
-    "use strict";
-    var self = this;
-    var imageURI = self.$el.find('#image-cropper').cropit('export', {
-      type: 'image/jpeg',
-      quality: 0.75,
-      originalSize: false
-    });
-    imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-    var formData = new FormData();
-    formData.append('image', imageURI);
-    this.postData(formData, "upload_image",
-      function(data){
-        var imageHash = data.image_hashes[0],
-            formData = new FormData();
-        if (imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-          formData.append("avatar", imageHash);
-          formData.append("name", self.userProfile.get('profile').name);
-          formData.append("location", self.userProfile.get('profile').location);
-          self.postData(formData, "profile",
-              function (data) {
-                self.$el.find('.js-avatarHolder').css('background-image', 'url(' + self.model.get('serverUrl') + "get_image?hash=" + imageHash + ')');
-                self.userProfile.set('avatar', imageHash);
-                self.$el.find('.js-adminAvatarMsg').html("Avatar has been set");
-              },
-              function (data) {
-                alert("Failed. " + data.reason);
-              }
-          );
-        }else {
-          alert("image hash is blank");
-        }
+        self.updatePage();
       },
       function(data){
         alert("Failed. "+ data.reason);
@@ -223,66 +160,12 @@ module.exports = Backbone.View.extend({
     var self = this,
         targetForm = this.$el.find('#adminPanelProfile'),
         formData = new FormData(targetForm[0]);
-        //existingKeys = {};
-
-    //targetForm.find('input').each(function(){
-      //existingKeys[$(this).attr('name')] = $(this).val();
-    //});
-
-    //formData = this.modelToFormData(this.userProfile.get("profile"), formData, existingKeys);
 
     //add location data in case this is a new profile
     formData.append("location", this.userProfile.get("profile").location);
 
     if(targetForm[0].checkValidity()){
       this.postData(formData, "profile",
-          function (data) {
-            self.updatePage();
-          },
-          function (data) {
-            alert("Failed. " + data.reason);
-          }
-      );
-    }
-  },
-
-  updateSettings: function() {
-    "use strict";
-    var self = this,
-        targetForm = this.$el.find('#adminPanelSettings'),
-        formData = new FormData(),
-        existingKeys = {},
-        newAddress = {},
-        newAddresses = [];
-
-    targetForm.find('input').each(function(){
-      existingKeys[$(this).attr('name')] = $(this).val();
-    });
-
-    newAddress.name = this.$el.find('#adminShipToNameInput').val();
-    newAddress.street = this.$el.find('#adminShipToStreetInput').val();
-    newAddress.city = this.$el.find('#adminShipToCityInput').val();
-    newAddress.state = this.$el.find('#adminShipToStateInput').val();
-    newAddress.postal_code = this.$el.find('#adminShipToPostalCodeInput').val();
-    newAddress.country = this.$el.find('#adminShipToCountryInput').val();
-
-    if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
-      newAddresses.push(newAddress);
-    }
-
-    $('.js-adminPanelAddress:checked').each(function(){
-        newAddresses.push(self.model.get('shipping_addresses')[$(this).val()]);
-      });
-
-    formData.append('shipping_addresses', JSON.stringify(newAddresses));
-    existingKeys.shipping_addresses = newAddresses;
-
-    formData.append('currency_code', this.$el.find('#adminCurrencyInput').val());
-
-    formData = this.modelToFormData(this.userSettings.toJSON(), formData, existingKeys);
-
-    if(targetForm[0].checkValidity()){
-      this.postData(formData, "settings",
           function (data) {
             self.updatePage();
           },
