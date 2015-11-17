@@ -19,20 +19,18 @@
   <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15" href="#home"></a>
 </div>
 <div class="ctrlGroup">
-  <div class="btn btn-notifications ion-android-notifications custCol-primary fontSize14 js-navNotifications badge"></div>
+  <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications badge"></div>
 </div>
 <div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
-    <div class="popMenu-notificationsHeader"><%= polyglot.t('nav.notifications') %></div>
-    <hr/>
+    <div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
     <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
     <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
-
 </div>
 
 <div class="ctrlGroup nav-profile">
   <div class="btn btn-profile js-navProfile custCol-primary"
-  <% if(ob.avatar_hash) { %>
-  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>);"
+  <% if(ob.avatar_hash != "") { %>
+  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
   <% }else{ %>
   style="background-image: url(imgs/defaultUser.png)"
   <% } %>></div>
@@ -91,8 +89,26 @@
 
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.yourCountry') %>
+            <%= polyglot.t('onboarding.disclaimer_title') %>
             <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 9</span>
+          </div>
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+            <div class="flexRow">
+              <div class="rowItem padding20">
+                <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.disclaimer_body') %></p>
+              </div>
+            </div>
+          </div>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+          </div>
+        </div>
+
+        <div class="accordion-child custCol-primary">
+          <div class="bar barTxt h6 custCol-secondary custCol-text">
+            <%= polyglot.t('onboarding.yourCountry') %>
+            <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
           </div>
           <div class="flexContainer flex-border custCol-primary" id="homeModal-countryList">
             <div class="flexRow">
@@ -111,7 +127,7 @@
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary custCol-text">
             <%= polyglot.t('onboarding.localCurrency') %>
-            <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
+            <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 9</span>
           </div>
           <div class="flexContainer flex-border" id="homeModal-currencyList">
             <div class="flexRow">
@@ -130,7 +146,7 @@
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary custCol-text">
             <%= polyglot.t('onboarding.timeZone') %>
-            <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 9</span>
+            <span class="textOpacity75 fontSize14 floatRight">5 <%= polyglot.t('of') %> 9</span>
           </div>
           <div class="flexContainer flex-border" id="homeModal-timeList">
             <div class="flexRow">
@@ -335,7 +351,7 @@
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary custCol-text">
             <%= polyglot.t('onboarding.yourDetails') %> (<%= polyglot.t('Optional') %>)
-            <span class="textOpacity75 fontSize14 floatRight">5 <%= polyglot.t('of') %> 9</span>
+            <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 9</span>
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch custCol-primary custCol-text">
             <div class="flexRow">
@@ -400,43 +416,49 @@
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary custCol-text">
             <%= polyglot.t('onboarding.theme') %>
-            <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 9</span>
+            <span class="textOpacity75 fontSize14 floatRight">7 <%= polyglot.t('of') %> 9</span>
           </div>
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow">
-              
-              <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+
+             <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
                 <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1" />
-                <label for="theme-1" class="js-homeModal-themeSelected radioLabel" data-primary-color="#344E31" data-secondary-color="#3B5F2B" data-background-color="#15180F" data-text-color="#fff" data-header="imgs/themes/1/header.png">
-                  <div class="theme-background custCol-border-secondary" style="background: #15180F">
-                    <div class="theme-global-header" style="background: #3B5F2B"></div>
+                <label for="theme-1" class="js-homeModal-themeSelected radioLabel" data-primary-color="#461222" data-secondary-color="#641630" data-background-color="#291318" data-text-color="#fff" data-header="imgs/themes/1/header.png">
+                  <div class="theme-background" style="background: #291318">
+                    <div class="theme-global-header" style="background: #641630"></div>
                     <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #3B5F2B"></div>
-                    <div class="theme-body" style="background: #344E31"></div> 
+                    <div class="theme-nav" style="background: #641630">
+                      <div class="theme-tab" style="background: #461222"></div>
+                    </div>
+                    <div class="theme-body" style="background: #461222"></div> 
                   </div>
                 </label>
               </div>
 
               <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
                 <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-2" />
-                <label for="theme-2" class="js-homeModal-themeSelected radioLabel" data-primary-color="#128092" data-secondary-color="#007088" data-background-color="#02334E" data-text-color="#fff" data-header="imgs/themes/2/header.png">
-                  <div class="theme-background custCol-border-secondary" style="background: #02334E">
-                    <div class="theme-global-header" style="background: #007088"></div>
+                <label for="theme-2" class="js-homeModal-themeSelected radioLabel" data-primary-color="#e8e8e8" data-secondary-color="#d1d1d1" data-background-color="#787878" data-text-color="#545454" data-header="imgs/themes/2/header.png">
+                  <div class="theme-background" style="background: #787878">
+                    <div class="theme-global-header" style="background: #d1d1d1"></div>
                     <div class="theme-header" style="background: url(imgs/themes/2/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #007088"></div>
-                    <div class="theme-body" style="background: #128092"></div> 
+                    <div class="theme-nav" style="background: #d1d1d1">
+                      <div class="theme-tab" style="background: #e8e8e8"></div>                      
+                    </div>
+                    <div class="theme-body" style="background: #e8e8e8"></div> 
                   </div>
                 </label>
               </div>
 
-              <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+              <div class="theme-container clearfix custCol-border-secondary borderBottom">
                 <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-3" />
-                <label for="theme-3" class="js-homeModal-themeSelected radioLabel" data-primary-color="#344E31" data-secondary-color="#3B5F2B" data-background-color="#15180F" data-text-color="#fff" data-header="imgs/themes/3/header.png">
-                  <div class="theme-background custCol-border-secondary" style="background: #15180F">
-                    <div class="theme-global-header" style="background: #3B5F2B"></div>
+                <label for="theme-3" class="js-homeModal-themeSelected radioLabel" data-primary-color="#3F4641" data-secondary-color="#515752" data-background-color="#272B24" data-text-color="#fff" data-header="imgs/themes/3/header.png">
+                  <div class="theme-background" style="background: #272B24">
+                    <div class="theme-global-header" style="background: #515752"></div>
                     <div class="theme-header" style="background: url(imgs/themes/3/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #3B5F2B"></div>
-                    <div class="theme-body" style="background: #344E31"></div> 
+                    <div class="theme-nav" style="background: #515752">
+                      <div class="theme-tab" style="background: #3F4641"></div>
+                    </div>
+                    <div class="theme-body" style="background: #3F4641"></div> 
                   </div>
                 </label>
               </div>
@@ -444,10 +466,12 @@
               <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
                 <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-4" />
                 <label for="theme-4" class="js-homeModal-themeSelected radioLabel" data-primary-color="#344E31" data-secondary-color="#3B5F2B" data-background-color="#15180F" data-text-color="#fff" data-header="imgs/themes/4/header.png">
-                  <div class="theme-background custCol-border-secondary" style="background: #15180F">
+                  <div class="theme-background" style="background: #15180F">
                     <div class="theme-global-header" style="background: #3B5F2B"></div>
                     <div class="theme-header" style="background: url(imgs/themes/4/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #3B5F2B"></div>
+                    <div class="theme-nav" style="background: #3B5F2B">
+                      <div class="theme-tab" style="background: #344E31"></div>
+                    </div>
                     <div class="theme-body" style="background: #344E31"></div> 
                   </div>
                 </label>
@@ -455,23 +479,27 @@
 
               <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
                 <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-5" />
-                <label for="theme-5" class="js-homeModal-themeSelected radioLabel" data-primary-color="#344E31" data-secondary-color="#3B5F2B" data-background-color="#15180F" data-text-color="#fff" data-header="imgs/themes/5/header.png">
-                  <div class="theme-background custCol-border-secondary" style="background: #15180F">
-                    <div class="theme-global-header" style="background: #3B5F2B"></div>
+                <label for="theme-5" class="js-homeModal-themeSelected radioLabel" data-primary-color="#128092" data-secondary-color="#007088" data-background-color="#02334E" data-text-color="#fff" data-header="imgs/themes/5/header.png">
+                  <div class="theme-background" style="background: #02334E">
+                    <div class="theme-global-header" style="background: #007088"></div>
                     <div class="theme-header" style="background: url(imgs/themes/5/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #3B5F2B"></div>
-                    <div class="theme-body" style="background: #344E31"></div> 
+                    <div class="theme-nav" style="background: #007088">
+                      <div class="theme-tab" style="background: #128092"></div>
+                    </div>
+                    <div class="theme-body" style="background: #128092"></div> 
                   </div>
                 </label>
               </div>
 
-              <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+              <div class="theme-container clearfix custCol-border-secondary borderBottom">
                 <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-6" />
                 <label for="theme-6" class="js-homeModal-themeSelected radioLabel" data-primary-color="#121212" data-secondary-color="#0D0A0D" data-background-color="#181818" data-text-color="#fff" data-header="imgs/themes/6/header.png">
-                  <div class="theme-background custCol-border-secondary" style="background: #181818">
+                  <div class="theme-background" style="background: #181818">
                     <div class="theme-global-header" style="background: #0D0A0D"></div>
                     <div class="theme-header" style="background: url(imgs/themes/6/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #0D0A0D"></div>
+                    <div class="theme-nav" style="background: #0D0A0D">
+                      <div class="theme-tab" style="background: #121212"></div>
+                    </div>
                     <div class="theme-body" style="background: #121212"></div> 
                   </div>
                 </label>
@@ -488,12 +516,12 @@
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary custCol-text">
             <%= polyglot.t('onboarding.avatar') %> (<%= polyglot.t('Optional') %>)
-            <span class="textOpacity75 fontSize14 floatRight">7 <%= polyglot.t('of') %> 9</span>
+            <span class="textOpacity75 fontSize14 floatRight">8 <%= polyglot.t('of') %> 9</span>
           </div>
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow flexRow-center positionRelative">
               <div>
-                <div class="homeModal-avatarPreview js-avatarPreview border1 custCol-font-secondary custCol-border-secondary default-avatar" style="margin: 55px auto 0"></div>
+                <div class="homeModal-avatarPreview js-avatarPreview custCol-font-secondary default-avatar" style="margin: 55px auto 0"></div>
                 <div class="rowTop10">
                   <input type="file" id="avatarUpload" accept="image/*" class="hide js-homeModalAvatarUpload">
                   <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop10 custCol-secondary custCol-text">
@@ -512,7 +540,7 @@
         <div class="accordion-child custCol-primary">
           <div class="bar barTxt h6 custCol-secondary custCol-text">
             Recommended Pages to Follow (<%= polyglot.t('Optional') %>)
-            <span class="textOpacity75 fontSize14 floatRight">8 <%= polyglot.t('of') %> 9</span>
+            <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 9</span>
           </div>
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow">
@@ -570,26 +598,7 @@
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
-
-
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.disclaimer_title') %>
-            <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
-            <div class="flexRow">
-              <div class="rowItem padding20">
-                <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.disclaimer_body') %></p>
-              </div>
-            </div>
-          </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('IAgree') %></a>
+            <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Finished') %></a>
           </div>
         </div>
 

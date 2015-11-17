@@ -170,7 +170,7 @@ form {
   top: 50px;
   height: 100%;
   width: 100%;
-  background-color: rgba(25,25,25,0.80);
+  background-color: rgba(25,25,25,0.50);
   z-index: 2;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
@@ -384,6 +384,7 @@ form {
    -webkit-user-select: none;
 }
 
+
 /* don't prefix with .btn, sometimes it is used on icons without a .btn class */
 .btn-corner {
   cursor: pointer;
@@ -591,27 +592,38 @@ form {
 }
 
 .theme-container {
-  height: 150px;
+  height: 140px;
   text-align: center;
-  width: 33%;
+  width: 33.3%;
+  -webkit-box-sizing: border-box;
 }
 
 .theme-nav {
   height: 7px;
   width: 75%;
   margin: auto;
+  position: relative;
+}
+
+.theme-tab {
+  height: 6px;
+  width: 20px;
+  position: absolute;
+  top: 1px;
 }
 
 .theme-background {
-  border: solid 1px #327EB8;
-  border-radius: 3px;
+  border: 0;
+  border-radius: 2px;
   cursor: pointer;
-  margin: 20px auto 5px auto;
+  margin: 16px auto 5px auto;
   height: 87px;
   width: 80%;
 }
 
 .theme-header {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
   height: 40px;
   margin: auto;
   margin-top: 8px;
@@ -790,10 +802,6 @@ h5 {
   z-index: 1;
 }
 
-.userPage .navBar {
-  background-color: #575757;
-}
-
 .mainContainer {
   background-color: #086A9E;
 }
@@ -807,7 +815,7 @@ h5 {
 }
 
 .modal-opaque {
-  background-color: rgba(25,25,25,0.80);
+  background-color: rgba(6, 55, 83, 0.80);
   box-shadow: inset 0px -70px 112px -62px rgba(37,37,37,.9);
   top: 50px;
 }
@@ -953,7 +961,8 @@ h5 {
 }
 
 .searchWrapper .txtField:focus {
-  outline: 1px solid rgba(255,255,255,0.50);
+  outline: 2px solid rgba(255,255,255,0.35);
+  -webkit-background-clip: border;
 }
 
 .mainSearchWrapper:before {
@@ -974,11 +983,11 @@ h5 {
   box-shadow: 0 0 0 2px #086A9E;
 }
 
-.homeView .searchWrapperWithPill .txtField {
+.searchWrapperWithPill .txtField {
   text-indent: 176px;
 }
 
-.homeView .searchWrapperWithPill:before {
+.searchWrapperWithPill:before {
   top: 17px;
   left: 168px;
 }
@@ -1018,11 +1027,11 @@ input[type="text"].txtField-bar {
   border-radius: 3px;
   opacity: .80;
   box-sizing: border-box;
-  transition: opacity .25s, background-color 2s;
 }
 
 .btn:hover {
   opacity: 1;
+  transition: opacity .15s, background-color 1s;
 }
 
 .btn:hover,
@@ -1275,7 +1284,7 @@ input[type="text"].txtField-bar {
   line-height: 26px;
 }
 
-.btn-latched {
+.btn-latched  {
   width: 80px;
   margin: 0;
   border-radius: 0;
@@ -1285,7 +1294,12 @@ input[type="text"].txtField-bar {
   font-size: 12px;
   height: 28px;
   line-height: 28px;
-  opacity: 1;
+  transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn-latched:hover {
+  opacity: 1 !important; 
+  /* added important here because I couldn't get it to work without it */
 }
 
 #ov1 .btn.confirmable,
@@ -1628,7 +1642,7 @@ input[type="radio"].fieldItem:checked + label:before {
   position: absolute;
   height: 16px;
   width: 16px;
-  top: 118px;
+  top: 112px;
   left: 50%;
   margin-left: -8px;
   border-radius: 12px;
@@ -1768,16 +1782,13 @@ input[type="checkbox"].fieldItem + label span {
   border-bottom-right-radius: 4px;
   color: #fff;
   font-size: 15px;
-  padding: 10px 0;
-  width: 425px;
-  min-height: 250px;
-  max-height: 635px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  padding: 0;
+  width: 390px;
 }
 
 .popMenu-notificationsHeader {
   padding: 0 15px;
+  border-bottom: solid 2px #363636;
 }
 
 .popMenu-notificationsEmpty {
@@ -1818,10 +1829,11 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .banner-large {
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: 50% 50% / cover no-repeat;
-  border-radius: 4px;
   height: 400px;
   position: fixed;
   top: 70px;
@@ -1834,6 +1846,12 @@ input[type="checkbox"].fieldItem + label span {
   position: relative;
   width: 950px;
   z-index: 3;
+}
+
+#notificationsPanel {
+  height: 390px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .capitalize {
@@ -1962,7 +1980,7 @@ input[type="checkbox"].fieldItem + label span {
   position: absolute;
   top: 50%;
   right: 50%;
-  animation: spinnerAnimation 1.75s infinite linear;
+  animation: spinnerAnimation 1.15s infinite linear;
 }
 
 .spinner:after {
@@ -1970,20 +1988,35 @@ input[type="checkbox"].fieldItem + label span {
   /* non-breaking spaces, creates room for the spinning icon */
 }
 
+.spinner-with-logo {
+  background: url('../imgs/icon-with-opening.png') 100% 100%;
+  background-size: cover;
+  width: 215px;
+  height: 215px;
+  position: relative;
+}
+
+.spinner-with-logo i {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  opacity: .90;
+}
+
 @-webkit-keyframes spinnerAnimation {
   0% {
-    transform: translate(50%,-50%) rotate(0deg);
+    transform: translate(50%,-50%) rotate(359deg);
   }
   100% {
-    transform: translate(50%,-50%) rotate(359deg);
+    transform: translate(50%,-50%) rotate(0deg);
   }
 }
 @keyframes spinnerAnimation {
   0% {
-    transform: translate(50%,-50%) rotate(0deg);
+    transform: translate(50%,-50%) rotate(359deg);
   }
   100% {
-    transform: translate(50%,-50%) rotate(359deg);
+    transform: translate(50%,-50%) rotate(0deg);
   }
 }
 
@@ -2062,8 +2095,8 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .modal .homeModal-avatarPreview {
-/*  background: url('../imgs/defaultUser.png') 100% 100%;
-  background-size: cover;*/
+  background: url('../imgs/defaultUser.png') 100% 100%;
+  background-size: cover;
   margin-top: 30px;
 }
 
@@ -2417,12 +2450,24 @@ input[type="checkbox"].fieldItem + label span {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
+#ov1  .textOpacity25 {
+  opacity: .25;
+}
+
 #ov1  .textOpacity50 {
   opacity: .50;
 }
 
+#ov1  .textOpacity65 {
+  opacity: .65;
+}
+
 #ov1  .textOpacity75 {
   opacity: .75;
+}
+
+#ov1  .textOpacity90 {
+  opacity: .90;
 }
 
 #ov1  .textOpacity1 {
@@ -2524,6 +2569,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .fontSize20 {
   font-size: 20px;
+}
+
+#ov1 .fontSize30 {
+  font-size: 30px;
 }
 
 #ov1 .fontSize34 {
@@ -2651,6 +2700,16 @@ input[type="checkbox"].fieldItem + label span {
   margin: auto;
 }
 
+#ov1  .top0 {
+  top: 0;
+}
+
+
+#ov1  .height40 {
+  height: 40px;
+  line-height: 40px;
+}
+
 #ov1  .height36 {
   height: 36px;
   line-height: 36px;
@@ -2658,6 +2717,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .height54 {
   height: 54px;
+}
+
+#ov1  .height70 {
+  height: 70px;
 }
 
 #ov1  .minHeight650 {
@@ -2670,6 +2733,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .lineHeight20{
   line-height: 20px;
+}
+
+#ov1  .lineHeight21{
+  line-height: 21px;
 }
 
 #ov1  .lineHeightReset{
@@ -2794,6 +2861,10 @@ input[type="checkbox"].fieldItem + label span {
   border-bottom-left-radius: 3px !important;
 }
 
+#ov1 .colorWhiteForce {
+  color: #fff !important; /* This text must always remain white */
+}
+
 #ov1  .borderBottomRightRaidus3 {
   border-bottom-right-radius: 3px !important;
 }
@@ -2802,12 +2873,15 @@ input[type="checkbox"].fieldItem + label span {
   overflow: visible;
 }
 
+#ov1 .hoverUnderline:hover {
+  text-decoration: underline !important;
+}
+
 .badge:after{
     content:attr(data-count);
     position: absolute;
-    background: rgba(0,0,255,0.5);
-    top:-4px;
-    right:-2px;
+    top:-5px;
+    right:-3px;
     width:16px;
     text-align: center;
     line-height: 16px;
@@ -2815,6 +2889,7 @@ input[type="checkbox"].fieldItem + label span {
     border-radius: 50%;
     color:white;
     background-opacity: .75;
-    background-color: #B22222;
+    background-color: #FFA41C;
+
   /* don't put a border on this or it will be visible when it has no content */
 }
