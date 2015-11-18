@@ -35,7 +35,7 @@ var Polyglot = require('node-polyglot'),
     loadProfileCountdownInterval,
     loadProfileCountdown = 5;
 
-serverUrlLocal = "http://192.168.1.22:18469/api/v1/" || localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
+serverUrlLocal = localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
 
 //set the urlRoot of the user model. Defaults to local host if not found
 user.urlRoot = serverUrlLocal + "settings";
