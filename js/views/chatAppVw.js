@@ -20,9 +20,6 @@ module.exports = Backbone.View.extend({
   initialize: function(options){
     var self = this;
     this.options = options || {};
-    this.parentEl = $(options.parentEl);
-    this.slidOut = false;
-
 
     // Render chat list items
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
