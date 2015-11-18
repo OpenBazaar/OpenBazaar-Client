@@ -1,2 +1,4 @@
 node_modules/
 **/*.min.js
+**/colpick.js
+**/jquery.*.js
