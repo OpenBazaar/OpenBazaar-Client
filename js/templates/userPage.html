@@ -13,7 +13,7 @@
       <div class="pad20 rowTop20 width100"><h2 class="txt-center">Loading Image...</h2></div>
     </div>
     <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
-    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
     <input id="headerImageInput" type="file" class="cropit-image-input hide" />
     <div class="bar navBar barFlush user-page-navigation align-bottom">
       <div class="navEnd pad15">
@@ -40,8 +40,8 @@
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft88">
-          <h1 class="page-userNameLarge floatLeft pull-up4 capitalize fancy-heading"><%- ob.page.profile.name.toLowerCase() %></h1>
-          <div class="floatLeft marginLeft6 marginTop2"><%- ob.page.profile.handle %></div>
+          <h1 class="page-userNameLarge floatLeft pull-up4 capitalize fancy-heading colorWhiteForce"><%- ob.page.profile.name.toLowerCase() %></h1>
+          <div class="floatLeft marginLeft6 marginTop2 colorWhiteForce"><%- ob.page.profile.handle %></div>
         </div>
       </div>
     </div>
@@ -59,9 +59,9 @@
               <% } %>
           </div>
           <div class="pad15 push-down5 noOverflow">
-            <span class="h1 page-userNameLarge capitalize fancy-heading"><%- ob.page.profile.name.toLowerCase() %></span>
+            <span class="h1 page-userNameLarge capitalize fancy-heading colorWhiteForce"><%- ob.page.profile.name.toLowerCase() %></span>
             <br />
-            <span class="textSize16px"><%- ob.page.profile.handle %></span>
+            <span class="textSize16px colorWhiteForce"><%- ob.page.profile.handle %></span>
           </div>
         </div>
       </div>
@@ -246,11 +246,17 @@
       </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-followers js-tabTarg hide minHeight650">
-      <div class="flexRow">
-        <div class="flexRow custCol-border-secondary">
-          <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-primary">
-            <input type="text" id="inputFollowers" class="txtField txtField-bar search custCol-border-primary" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
-          </div>
+      <div class="flexRow height54">
+        <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+          <input type="text" id="inputFollowers" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
+        </div>
+        <div class="selectPill pull-up43">
+          <select class="custCol-secondary">
+            <option value="all" selected><%= polyglot.t('filters.pagesAllTypes') %></option>
+            <option value="stores"><%= polyglot.t('filters.pagesStores') %></option>
+            <option value="moderators"><%= polyglot.t('filters.pagesMods') %></option>
+            <option value="basic"><%= polyglot.t('filters.pagesBasic') %></option>
+          </select>
         </div>
       </div>
       <div class="flexRow js-list1">
@@ -260,11 +266,17 @@
       </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide minHeight650">
-      <div class="flexRow">
-        <div class="flexRow custCol-border-secondary">
-          <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
-            <input type="text" id="inputFollowing" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>"  />
-          </div>
+      <div class="flexRow height54">
+        <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+          <input type="text" id="inputFollowing" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
+        </div>
+        <div class="selectPill pull-up43">
+          <select class="custCol-secondary">
+            <option value="all" selected><%= polyglot.t('filters.pagesAllTypes') %></option>
+            <option value="stores"><%= polyglot.t('filters.pagesStores') %></option>
+            <option value="moderators"><%= polyglot.t('filters.pagesMods') %></option>
+            <option value="basic"><%= polyglot.t('filters.pagesBasic') %></option>
+          </select>
         </div>
       </div>
       <div class="flexRow js-list2">
