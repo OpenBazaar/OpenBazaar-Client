@@ -40,9 +40,10 @@ module.exports = Backbone.Model.extend({
     if(userCCode) {
       getBTPrice(vendorCCode, function(btAve){
         vendorCurrencyInBitcoin = btAve;
-        vendorBitCoinPrice = Number(vendorPrice / btAve).toFixed(4);
-        vendToUserBTCRatio = window.currentBitcoin/vendorCurrencyInBitcoin;
-        newAttributes.vendorBTCPrice = vendorBitCoinPrice;
+        vendorBitCoinPrice = Number(vendorPrice / btAve);
+        //if vendor and user currency codes are the same, multiply by one to avoid rounding errors
+        vendToUserBTCRatio = (userCCode == vendorCCode) ? 1 : window.currentBitcoin/vendorCurrencyInBitcoin;
+        newAttributes.vendorBTCPrice = vendorBitCoinPrice.toFixed(4);
 
         if(userCCode != 'BTC'){
           newAttributes.displayPrice = new Intl.NumberFormat(window.lang, {
@@ -52,7 +53,7 @@ module.exports = Backbone.Model.extend({
             currency: userCCode
           }).format(vendorPrice*vendToUserBTCRatio);
         } else {
-          newAttributes.displayPrice = vendorBitCoinPrice + "btc";
+          newAttributes.displayPrice = vendorBitCoinPrice.toFixed(4) + "btc";
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
