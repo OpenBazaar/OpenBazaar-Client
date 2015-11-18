@@ -171,6 +171,7 @@ module.exports = Backbone.View.extend({
     };
 
     //show loading modal before fetching user data
+    $('#customStyle').remove();
     $('.js-loadingModal').removeClass('hide');
 
     //determine if this is the user's own page or another profile's page
@@ -291,6 +292,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     //only do the following if page has been set in the model
     if(this.model.get('page')){
+      var opaque = this.hexToRgb(this.model.get('page').profile.background_color);
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
 
@@ -310,6 +312,9 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
           "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
           "#ov1 .userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 .userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .container .txtField { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
           "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
@@ -317,8 +322,17 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
           "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
           "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
-          "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}";
+          "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
+          "#ov1 .userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" + 
+          "#ov1 .userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}"; 
           
+      // if text is white the highlight color needs to darken instead of lighten
+      if (this.model.get('page').profile.text_color === 'undefined' || this.model.get('page').profile.text_color === "#ffffff"){
+        customStyleTag.innerHTML += "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2("#ffffff", -0.5) + " !important;}";
+      }else{
+        customStyleTag.innerHTML += "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2(this.model.get('page').profile.text_color, 0.5) + " !important;}";
+      }
+
       document.body.appendChild(customStyleTag);
       //set custom color input values
       self.$el.find('.js-customizeColorInput').each(function(){
@@ -334,11 +348,23 @@ module.exports = Backbone.View.extend({
     return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
   },
 
+  hexToRgb: function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  },
+
   setState: function(state, hash) {
     "use strict";
     var currentAddress,
         addressState,
         currentHandle = this.model.get('page').profile.handle;
+
+    //clear old templates
+    this.$el.find('.js-list4').html("");
 
     if(state === "item"){
       this.renderItem(hash);
@@ -805,8 +831,8 @@ module.exports = Backbone.View.extend({
 
   saveNewDone: function(newHash) {
     "use strict";
-    this.subRender();
     this.setState('item', newHash);
+    this.subRender();
   },
 
   deleteOldDone: function(newHash) {

@@ -381,6 +381,7 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-homeModal').hide();
     
     // Start application walkthrough (coming soon once I have better designs)
+    new Notification(window.polyglot.t('WelcomeToYourPage'));
   },
 
   closeModal: function(e){
