@@ -225,6 +225,7 @@
           <div class="flexCol-12 flex-border hide js-tabTarg js-shipping">
             <% if(ob.user.shipping_addresses) { %>
             <div class="flexRow">
+              <% if(ob.user.shipping_addresses && ob.user.shipping_addresses.length > 0) { %>
               <div class="flexRow">
                 <h4 class="padding2015">Current Addresses</h4>
               </div>

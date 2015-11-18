@@ -22,7 +22,7 @@ module.exports = function (currency, callback) {
             })
                 .done(function (response) {
                     var BlockchainCurrencies = {};
-                    for (var bcCurrency in response) {  //TODO: Use _.forOwn
+                    for (var bcCurrency in response) {
                         if (response.hasOwnProperty(bcCurrency)) {
                             BlockchainCurrencies[bcCurrency] = response[bcCurrency]['15m'];
                         }
@@ -44,7 +44,7 @@ module.exports = function (currency, callback) {
             })
                 .done(function (response) {
                     var CoinkiteCurrencies = {};
-                    for (var ckCurrency in response.rates.BTC) {  //TODO: Use _.forOwn
+                    for (var ckCurrency in response.rates.BTC) {
                         if (response.rates.BTC.hasOwnProperty(ckCurrency)) {
                             CoinkiteCurrencies[ckCurrency] = response.rates.BTC[ckCurrency].rate;
                         }
@@ -67,7 +67,7 @@ module.exports = function (currency, callback) {
             })
                 .done(function (response) {
                     var BitcoinAvgCurrencies = {};
-                    for (var bcaCurrency in response) {  //TODO: Use _.forOwn ??
+                    for (var bcaCurrency in response) {
                         if (response[bcaCurrency].averages) {
                             BitcoinAvgCurrencies[bcaCurrency] = response[bcaCurrency].averages['24h_avg'];
                         }
@@ -90,7 +90,7 @@ module.exports = function (currency, callback) {
                 .done(function (response) {
                     response = JSON.parse(response);
                     var BitcoinChartsCurrencies = {};
-                    for (var bccCurrency in response) {  //TODO: Use _.forOwn
+                    for (var bccCurrency in response) {
                         if (response.hasOwnProperty(bccCurrency)) {
                             BitcoinChartsCurrencies[bccCurrency] = response[bccCurrency]['24h'];
                         }
@@ -112,9 +112,15 @@ module.exports = function (currency, callback) {
         }
 
         var makeAveragePrice = function () {
-            var sum, currencyPrices, currency_code, currencyKeys, averagePrice, keys = {}, btAve;
+            var sum,
+                currencyPrices,
+                currency_code,
+                currencyKeys,
+                averagePrice,
+                keys = {},
+                btAve;
             btcAverages.timeStamp = new Date();
-            for (var i in btPrices) { //TODO: Use _.forOwn
+            for (var i in btPrices) {
                 if (btPrices.hasOwnProperty(i)) {
                     keys = $.extend(keys, btPrices[i]);
                 }
@@ -123,17 +129,17 @@ module.exports = function (currency, callback) {
                 alert("Bitcoin exchange rates are not available.");
             }
             currencyKeys = Object.keys(keys);
-            for (var index in currencyKeys) {  //TODO: Use _.forOwn
+            for (var index in currencyKeys) {
                 if (currencyKeys.hasOwnProperty(index)) {
                     currency_code = currencyKeys[index];
                     currencyPrices = [];
-                    for (var j in btPrices) {  //TODO: Use _.forOwn or _.each?
+                    for (var j in btPrices) {
                         if (btPrices[j][currency_code]) {
                             currencyPrices.push(btPrices[j][currency_code]);
                         }
                     }
                     sum = 0;
-                    for (var jIndex in currencyPrices) {  //TODO: Use _.forOwn
+                    for (var jIndex in currencyPrices) {
                         if (currencyPrices.hasOwnProperty(jIndex)) {
                             sum += Number(currencyPrices[jIndex]);
                         }
@@ -144,7 +150,7 @@ module.exports = function (currency, callback) {
             }
             window.btcAverages = btcAverages;
             btAve = btcAverages.rates[currency];
-            typeof callback === 'function' && callback(btAve);
+            typeof callback === 'function' && callback(btAve, currencyKeys);
         };
 
     } else {

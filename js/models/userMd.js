@@ -40,7 +40,7 @@ module.exports = Backbone.Model.extend({
     response.currency_code = response.currency_code ? response.currency_code.toUpperCase() : "BTC";
 
     //find the human readable name for the country
-    var matchedCountry = this.countryArray.filter(function(value, i){
+    var matchedCountry = this.countryArray.filter(function(value){
       return value.dataName == response.country;
     });
     response.displayCountry = matchedCountry[0] ? matchedCountry[0].name : "";
