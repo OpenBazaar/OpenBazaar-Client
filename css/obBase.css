@@ -747,10 +747,6 @@ h5 {
 
 /*========== skin classes ==========*/
 
-.userPage {
-  /*background-color: #2a2a2a;*/
-}
-
 .userPageImageUpload {
   background: transparent !important;
   opacity: 1;
@@ -767,7 +763,7 @@ h5 {
 }
 
 .navBar.statusBar,
-.userPage .navBar.statusBar {
+#userPage .navBar.statusBar {
   background-color: rgba(0,0,0,0.6);
   transition: opacity 1s;
   overflow: hidden;
@@ -822,7 +818,7 @@ h5 {
   width: 950px;
 }
 
-.userPage .mainContainer {
+#userPage .mainContainer {
   background-color: #4a4848;
 }
 
@@ -1091,7 +1087,7 @@ input[type="text"].txtField-bar {
   background: none;
 }
 
-.userPage .btn.inactive {
+#userPage .btn.inactive {
   opacity: 0.4;
 }
 
@@ -1103,7 +1099,7 @@ input[type="text"].txtField-bar {
    background-color: rgb(50,126,184);
  }
 
-.userPage .btn.btn-c1,
+#userPage .btn.btn-c1,
 .btn.btn-dark {
   background-color: rgb(87,87,87);
 }
@@ -1112,7 +1108,7 @@ input[type="text"].txtField-bar {
   background-color: rgba(50,126,184,0.8);
 }
 
-.userPage .btn.btn-c1.fade {
+#userPage .btn.btn-c1.fade {
   background-color: rgba(87,87,87,0.8);
 }
 
@@ -1153,7 +1149,7 @@ input[type="text"].txtField-bar {
   transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.userPage .btn.btn-bar {
+#userPage .btn.btn-bar {
   background-color: #575757;
   border-right: 1px solid #4a4848;
 }
@@ -1167,7 +1163,7 @@ input[type="text"].txtField-bar {
   opacity: 1;
 }
 
-.userPage .btn.btn-bar.active {
+#userPage .btn.btn-bar.active {
   background-color: #4a4848;
 }
 
@@ -1213,7 +1209,7 @@ input[type="text"].txtField-bar {
   float: left;
 }
 
-.userPage .btn-togWrapper {
+#userPage .btn-togWrapper {
   border: 1px solid rgb(74,72,72);
 }
 
@@ -1225,7 +1221,7 @@ input[type="text"].txtField-bar {
   border: 1px solid rgb(50,126,184);
 }
 
-.userPage .btn-togWrapper.btn-togWrapper-c1 {
+#userPage .btn-togWrapper.btn-togWrapper-c1 {
   border: 1px solid rgb(87,87,87);
 }
 
@@ -1317,7 +1313,7 @@ input[type="text"].txtField-bar {
 }
 
 #ov1 .btn.confirmable,
-#ov1 .userPage .btn.confirmable {
+#ov1 #userPage .btn.confirmable {
   transition: 2s background-color;
 }
 
@@ -1362,7 +1358,7 @@ input[type="text"].txtField-bar {
 }
 
 #ov1 .confirm.btn,
-#ov1 .userPage .confirm.btn {
+#ov1 #userPage .confirm.btn {
   background-color: rgba(200,25,25,1);
 }
 
@@ -1490,6 +1486,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
 input[type="number"].fieldItem.spinButtons {
   background: none;
   box-sizing: border-box;
+  border: none;
   width: 100%;;
 }
 
@@ -1526,6 +1523,7 @@ input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:after {
 
 input[type="number"].fieldItem.spinButtons:focus {
   border: none;
+  outline: none;
 }
 
 .fieldItem .btn {
@@ -1655,7 +1653,7 @@ select {
 }
 
 select:focus {
-  border: 2px solid #fff !important;
+  border: 2px solid #fff;
 }
 
 input[type="radio"].fieldItem {
@@ -1754,7 +1752,7 @@ input[type="checkbox"].fieldItem + label span {
   line-height: normal;
 }
 
-.userPage .fieldItem-selectWrapper select option {
+#userPage .fieldItem-selectWrapper select option {
   background-color: #4a4848;
 }
 
@@ -2228,7 +2226,7 @@ input[type="checkbox"].fieldItem + label span {
   width: 400px;
 }
 
-.userPage .headerCropper .bar.navBar {
+#userPage .headerCropper .bar.navBar {
   background: none;
   height: 48px;
 }
@@ -2296,7 +2294,7 @@ input[type="checkbox"].fieldItem + label span {
   z-index: 10;
 }
 
-#ov1 #obBody .colpick input {
+#ov1 .colpick input {
   color: #616161;
 }
 
@@ -2328,7 +2326,7 @@ input[type="checkbox"].fieldItem + label span {
   border-color: #616161;
 }
 
-#obBody::-webkit-scrollbar {
+#ov1::-webkit-scrollbar {
   display: none;
   box-sizing: border-box;
 }
@@ -2933,10 +2931,9 @@ input[type="checkbox"].fieldItem + label span {
   border-bottom-right-radius: 3px !important;
 }
 
-#ov1 a.disabled,
-#ov1 button.disabled {
+#ov1 .disabled {
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 
 #ov1 .overflowVisible {

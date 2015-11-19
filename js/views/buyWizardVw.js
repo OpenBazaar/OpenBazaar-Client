@@ -25,6 +25,8 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'click .js-buyWizardAddressNext': 'addressDone',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
+    'click .js-accordionNext': 'accNext',
+    'click .js-accordionPrev': 'accPrev',
     'blur input': 'validateInput'
   },
 
@@ -47,46 +49,55 @@ module.exports = Backbone.View.extend({
       self.countriesSelect.append('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
     });
     console.log(this.model);
+    this.listenTo(this.model, 'change:quantity', this.setTotalPrice);
     this.render();
   },
 
   initAccordion: function(targ){
     "use strict";
-    var acc = $(targ),
-        accWidth = acc.width(),
-        accHeight = acc.height(),
-        accChildren = acc.find('.accordion-child'),
-        accNum = accChildren.length,
-        accWin = acc.find('.accordion-window');
+    this.acc = $(targ);
+    this.accWidth = this.acc.width();
+    this.accHeight = this.acc.height();
+    this.accChildren = this.acc.find('.accordion-child');
+    this.accNum = this.accChildren.length;
+    this.accWin = this.acc.find('.accordion-window');
+    this.accWin.css({'left':0, 'width': function(){return this.accWidth * this.accNum;}});
+    this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
+  },
 
-    accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
-    accChildren.css({'width':accWidth, 'height':accHeight});
-    acc.find('.js-accordionNext').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
-      if(oldPos > (accWidth * accNum * -1 + accWidth)){
-        accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) - accWidth;
-        });
-        // focus search input
-        $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
-      }
-    });
-    acc.find('.js-accordionPrev').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
-      if(oldPos < (0)){
-        accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) + accWidth;
-        });
-        // focus search input
-        $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
-      }
-    });
+  accNext: function(){
+    "use strict";
+    console.log("this.accNext");
+    var self = this,
+        oldPos = this.accWin.css('left').replace("px","");
+
+    if(oldPos > (this.accWidth * this.accNum * -1 + this.accWidth)){
+      this.accWin.css('left', function(){
+        return parseInt(self.accWin.css('left').replace("px","")) - self.accWidth;
+      });
+      // focus search input
+      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+    }
+  },
+
+  accPrev: function(){
+    "use strict";
+    console.log("this.accPrev");
+    var self = this,
+        oldPos = this.accWin.css('left').replace("px","");
+    if(oldPos < (0)){
+      this.accWin.css('left', function(){
+        return parseInt(self.accWin.css('left').replace("px","")) + self.accWidth;
+      });
+      // focus search input
+      $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
+    }
   },
 
   render: function(){
     var self = this;
     this.buyDetailsView = new buyDetailsVw({model: this.model});
-    this.buyAddressesView = new buyAddressesVw({model: this.options.userModel});
+    this.buyAddressesView = new buyAddressesVw({model: this.model});
     this.listenTo(this.buyAddressesView, 'setAddress', this.addressSelected);
 
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
@@ -172,7 +183,6 @@ module.exports = Backbone.View.extend({
         formData = new FormData(),
         newAddress = {},
         newAddresses = this.options.userModel.get('shipping_addresses');
-    console.log("save address");
 
     newAddress.name = this.$el.find('#buyWizardNameInput').val();
     newAddress.street = this.$el.find('#buyWizardStreetInput').val();
@@ -242,19 +252,16 @@ module.exports = Backbone.View.extend({
   displayMap: function(address){
     "use strict";
     var addressString = "";
-    for(var addressKey in address) {
-      if(address.hasOwnProperty(addressKey)){
-        if(addressKey != 'name' && addressKey != 'country'){
-          addressString +=  address[addressKey] + " ";
-        }
-      }
+    //only create new map if address is valid
+    if(address && address.street && address.city && address.state && address.postal_code && address.displayCountry) {
+      addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
+      addressString = encodeURIComponent(addressString);
+      var hideClass = this.hideMap ? "hide" : "";
+      var newMap = '<iframe class="' + hideClass + ' js-buyWizardMap"' +
+          'width="525" height="250" frameborder="0" style="border:0"' +
+          'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe>';
+      this.$el.find('.js-buyWizardMap').html(newMap);
     }
-    addressString = encodeURIComponent(addressString);
-    var hideClass = this.hideMap ? "hide" : "";
-    var newMap = '<iframe class="' + hideClass + ' js-buyWizardMap"' +
-        'width="525" height="250" frameborder="0" style="border:0"' +
-        'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe>';
-    this.$el.find('.js-buyWizardMap').html(newMap);
   },
 
   addressDone: function(){
@@ -265,21 +272,59 @@ module.exports = Backbone.View.extend({
   sendPurchase: function(){
     "use strict";
     var self = this,
-        formData = new formData();
+        formData = new FormData(),
+        moderatorID = this.model.get('selectedModerator').guid;
 
     formData.append("id", this.model.get('id'));
-    //formData.append("quantity", )
-    $.post({
-      url: this.options.userModel.get('serverUrl') + "/purchase_contract",
+    formData.append("quantity", this.$el.find('.js-buyWizardQuantity').val());
+    formData.append("ship_to", this.model.get('selectedAddress').name);
+    formData.append("address", this.model.get('selectedAddress').street);
+    formData.append("city", this.model.get('selectedAddress').city);
+    formData.append("state", this.model.get('selectedAddress').state);
+    formData.append("postal_code", this.model.get('selectedAddress').postal_code);
+    formData.append("country", this.model.get('selectedAddress').country);
+    if(moderatorID){
+      formData.append("moderator", moderatorID);
+    }
+
+    $.ajax({
+      type: "POST",
+      url: self.model.get('serverUrl') + "purchase_contract",
+      contentType: false,
+      processData: false,
       data: formData,
       dataType: 'json',
       success: function(data){
         console.log(data);
+        self.showPayAddress(data);
       },
-      error: function(data){
-        console.log(data);
+      error: function (jqXHR, status, errorThrown) {
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
       }
     });
+
+  },
+
+  showPayAddress: function(data){
+    "use strict";
+    //TODO is this domestic or international?
+    var totalBTCPrice = this.model.get('vendorBTCPrice') + this.model.get('domesticShippingBTC') + this.model.get('internationalShippingBTC') * this.model.get('quantity');
+    var storeName = encodeURI(this.model.get('page').profile.name);
+    var message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id);
+    var payURL = "bitcoin:"+data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
+    var dataURI = qr(payURL, {type: 10, size: 10, level: 'M'});
+    this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
+    this.$el.find('.js-buyWizardPayPrice').text();
+    this.$el.find('.js-buyWizardPayURL').text(data.payment_address).attr('href', payURL);
+    console.log(payURL);
+    this.hideMaps();
+  },
+
+  setTotalPrice: function(){
+    "use strict";
+    var totalBTCPrice = this.model.get('price') + this.model.get('domesticShippingBTC') + this.model.get('internationalShippingBTC') * this.model.get('quantity');
 
   },
 

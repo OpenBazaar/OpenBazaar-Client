@@ -9,8 +9,11 @@ module.exports = window.Backbone.Model.extend({
     vendorBTCPrice: 0, //set below
     domesticShipping: 0, //set below
     displayDomesticShipping: 0, //set below
+    domesticShippingBTC: 0, //set below
     internationalShipping: 0, //set below
     displayInternationalShipping: 0, //set below
+    internationalShippingBTC: 0, //set below
+    quantity: 1, //set in order process
     userCurrencyCode: "", //set by userPage View. This is for editing the product
     userCountry: "", //set by userPage View. This is a country code. This is used for editing.
     ownPage: false, //set by userPage View
@@ -206,7 +209,9 @@ module.exports = window.Backbone.Model.extend({
         vendorInternationalShippingInBitCoin = Number(vendorInternationalShipping / btAve);
         //if vendor and user currency codes are the same, multiply by one to avoid rounding errors
         vendToUserBTCRatio = (userCCode == vendorCCode) ? 1 : window.currentBitcoin/vendorCurrencyInBitcoin;
-        newAttributes.vendorBTCPrice = vendorPriceInBitCoin.toFixed(4);
+        newAttributes.vendorBTCPrice = vendorPriceInBitCoin;
+        newAttributes.domesticShippingBTC = vendorDomesticShippingInBitCoin;
+        newAttributes.internationalShippingBTC = vendorInternationalShippingInBitCoin;
 
         if(userCCode != 'BTC'){
           newAttributes.price = (vendorPrice*vendToUserBTCRatio).toFixed(2);

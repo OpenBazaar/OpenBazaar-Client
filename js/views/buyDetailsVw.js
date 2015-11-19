@@ -54,6 +54,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         userCurrency = this.model.get('userCurrencyCode'),
         totalPrice = this.model.get('price') * quantity,
+        //totalBTCPRice = this.model.get()
         moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") : 0,
         minDigits = (userCurrency == "BTC") ? 6 : 2,
         newDisplayPrice = new Intl.NumberFormat(window.lang, {
@@ -79,6 +80,7 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
     this.$el.find('.js-buyWizardModeratorPrice').html(newDisplayModeratorPrice);
     this.model.set('quantity', quantity);
+    //this.model.set('selectedPrice', )
   },
 
   close: function(){

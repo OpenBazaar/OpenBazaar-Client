@@ -14,6 +14,13 @@
         </iframe>
       </div>
       <div class="js-buyWizardMap positionTop"></div>
+      <div class="js-buyWizardPay positionTop">
+        <div class="txt-center">Send <span class="js-buyWizardPayPrice"></span> to</div>
+        <img class="txt-center js-buyWizardPayQRCode" width="200px" height="200px" />
+        <div class="">
+          <a class="txt-center js-buyWizardPayURL"></a>
+        </div>
+      </div>
     </div>
     <div class="homeModal-accordion accordion js-buyWizardAccordion">
       <div class="accordion-window">
@@ -70,7 +77,10 @@
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext js-buyWizardModalModDone disabled custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext js-buyWizardModalModDone
+                      disabled custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Next') %>
+            </a>
           </div>
         </div>
         <div class="accordion-child">
@@ -85,14 +95,14 @@
           </div>
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
-              <div class="flex-border js-buyWizardAddresses">
+              <div class="flex-border flexExpand js-buyWizardAddresses">
                 <!--insert addresses-->
               </div>
               <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress flex-border flexExpand hide">
                 <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
-                      <label for="buyWizardNameInput">Name</label>
+                      <label for="buyWizardNameInput"><%= polyglot.t('ShipToName') %></label>
                     </div>
                   </div>
                   <div class="flexCol-8 positionWrapper">
@@ -102,7 +112,7 @@
                 <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
-                      <label for="buyWizardStreetInput">Street Address</label>
+                      <label for="buyWizardStreetInput"><%= polyglot.t('ShipToStreet') %></label>
                     </div>
                   </div>
                   <div class="flexCol-8 positionWrapper">
@@ -112,7 +122,7 @@
                 <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
-                      <label for="buyWizardCityInput">City</label>
+                      <label for="buyWizardCityInput"><%= polyglot.t('ShipToCity') %></label>
                     </div>
                   </div>
                   <div class="flexCol-8 positionWrapper">
@@ -122,7 +132,7 @@
                 <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
-                      <label for="buyWizardStateInput">State</label>
+                      <label for="buyWizardStateInput"><%= polyglot.t('ShipToState') %></label>
                     </div>
                   </div>
                   <div class="flexCol-8 positionWrapper">
@@ -132,7 +142,7 @@
                 <div class="flexRow">
                   <div class="flexCol-4">
                     <div class="fieldItem">
-                      <label for="buyWizardPostalInput">Postal Code</label>
+                      <label for="buyWizardPostalInput"><%= polyglot.t('ShipToPostalCode') %></label>
                     </div>
                   </div>
                   <div class="flexCol-8 positionWrapper">
@@ -142,18 +152,16 @@
                 <div class="flexRow overflowVisible">
                   <div class="flexCol-4">
                     <div class="fieldItem">
-                      <label for="buyWizardStreetInput">Country</label>
+                      <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %></label>
                     </div>
                   </div>
                   <div class="flexCol-8 positionWrapper">
                     <div class="fieldItem padding0">
-                      <div class="fieldItem-selectWrapper noIcon js-buyWizardCountryWrapper"></div>
+                      <div class="fieldItem-selectWrapper chosen-relative noIcon js-buyWizardCountryWrapper"></div>
                     </div>
                   </div>
                 </div>
               </form>
-              <!--spacer for chosen. Kind of horrible. TODO: find way to expand container when Chosen opens-->
-              <div class="flexRow flexRow-noBorderBottom overflowVisible js-buyWizardNewAddress hide row320"></div>
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
@@ -165,14 +173,14 @@
         </div>
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <%= polyglot.t('OrderDetails') %>
+            <%= polyglot.t('OrderDetails') %> <div class="pull-right">Total: <span class="js-buyWizardDetailsTotal"></span> </div>
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch js-buyWizardDetails scrollOverflow custCol-primary">
           <!--inser details view-->
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-accordionBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionNext js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
           </div>
         </div>
         <div class="accordion-child">
@@ -193,7 +201,7 @@
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('FinalizePurchase') %></a>
+            <a class="btn btn-bar btn-half custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('FinalizePurchase') %></a>
             <span class="btn btn-bar btn-half js-buyWizardPurchasePending custCol-secondary custCol-border-primary borderBottomRightRaidus3 hide"><%= polyglot.t('PaymentPending') %></span>
           </div>
         </div>
