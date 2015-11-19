@@ -186,7 +186,7 @@ module.exports = window.Backbone.Model.extend({
         vendorPrice = this.get('vendor_offer').listing.item.price_per_unit.fiat.price,
         vendorDomesticShipping = 0,
         vendorInternationalShipping = 0,
-        vendorCurrencyToBitcoinRatio = 0,
+        vendorCurrencyInBitcoin = 0,
         vendorPriceInBitCoin = 0,
         vendorDomesticShippingInBitCoin = 0,
         vendorInternationalShippingInBitCoin = 0,
@@ -200,12 +200,13 @@ module.exports = window.Backbone.Model.extend({
 
     if(userCCode) {
       getBTPrice(vendorCCode, function(btAve){
-        vendorCurrencyToBitcoinRatio = btAve;
-        vendorPriceInBitCoin = Number(vendorPrice / btAve).toFixed(4);
-        vendorDomesticShippingInBitCoin = Number(vendorDomesticShipping / btAve).toFixed(4);
-        vendorInternationalShippingInBitCoin = Number(vendorInternationalShipping / btAve).toFixed(4);
-        vendToUserBTCRatio = window.currentBitcoin/vendorCurrencyToBitcoinRatio;
-        newAttributes.vendorBTCPrice = vendorPriceInBitCoin;
+        vendorCurrencyInBitcoin = btAve;
+        vendorPriceInBitCoin = Number(vendorPrice / btAve);
+        vendorDomesticShippingInBitCoin = Number(vendorDomesticShipping / btAve);
+        vendorInternationalShippingInBitCoin = Number(vendorInternationalShipping / btAve);
+        //if vendor and user currency codes are the same, multiply by one to avoid rounding errors
+        vendToUserBTCRatio = (userCCode == vendorCCode) ? 1 : window.currentBitcoin/vendorCurrencyInBitcoin;
+        newAttributes.vendorBTCPrice = vendorPriceInBitCoin.toFixed(4);
 
         if(userCCode != 'BTC'){
           newAttributes.price = (vendorPrice*vendToUserBTCRatio).toFixed(2);
@@ -231,11 +232,11 @@ module.exports = window.Backbone.Model.extend({
           }).format(newAttributes.internationalShipping);
         } else {
           newAttributes.price = vendorPriceInBitCoin;
-          newAttributes.displayPrice = vendorPriceInBitCoin + "btc";
+          newAttributes.displayPrice = vendorPriceInBitCoin.toFixed(4) + "btc";
           newAttributes.domesticShipping = vendorDomesticShippingInBitCoin;
-          newAttributes.displayDomesticShipping = vendorDomesticShippingInBitCoin + "btc";
+          newAttributes.displayDomesticShipping = vendorDomesticShippingInBitCoin.toFixed(4) + "btc";
           newAttributes.internationalShipping = vendorInternationalShippingInBitCoin;
-          newAttributes.displayInternationalShipping = vendorInternationalShippingInBitCoin + "btc";
+          newAttributes.displayInternationalShipping = vendorInternationalShippingInBitCoin.toFixed(4) + "btc";
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();

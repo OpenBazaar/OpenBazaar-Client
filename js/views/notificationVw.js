@@ -21,7 +21,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     loadTemplate('./js/templates/notification.html', function(loadedTemplate) {
       var timestamp = self.model.get('timestamp');
-      var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMMM Do YYYY, h:mm a');
+      var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMM D, h:mm A');
       self.model.set('formattedTimestamp', formatted_timestamp);
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
