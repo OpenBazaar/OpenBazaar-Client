@@ -19,11 +19,11 @@ module.exports = Backbone.View.extend({
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
     'click .js-buyWizardModeratorRadio': 'modSelected',
-    'click .js-buyWizardModalModDone': 'hideMaps',
-    'click .js-buyWizardAddressBack': 'showMaps',
+    'click .js-buyWizardModNext': 'modNext',
+    'click .js-buyWizardAddressBack': 'addressPrev',
+    'click .js-buyWizardAddressNext': 'addressNext',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
-    'click .js-buyWizardAddressNext': 'addressDone',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
@@ -65,29 +65,29 @@ module.exports = Backbone.View.extend({
     this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
   },
 
-  accNext: function(){
+  accNext: function(advanceTo){
     "use strict";
-    console.log("this.accNext");
     var self = this,
-        oldPos = this.accWin.css('left').replace("px","");
+        oldPos = parseInt(this.accWin.css('left').replace("px","")),
+        moveBy = advanceTo ? this.accWidth * advanceTo - oldPos : this.accWidth;
 
-    if(oldPos > (this.accWidth * this.accNum * -1 + this.accWidth)){
+    if(oldPos > (this.accWidth * (this.accNum -1) * -1)){
       this.accWin.css('left', function(){
-        return parseInt(self.accWin.css('left').replace("px","")) - self.accWidth;
+        return oldPos - moveBy;
       });
       // focus search input
       $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
     }
   },
 
-  accPrev: function(){
+  accPrev: function(rewindTo){
     "use strict";
-    console.log("this.accPrev");
     var self = this,
-        oldPos = this.accWin.css('left').replace("px","");
+        oldPos = parseInt(this.accWin.css('left').replace("px","")),
+        moveBy = rewindTo ? oldPos - this.accWidth * rewindTo : this.accWidth;
     if(oldPos < (0)){
       this.accWin.css('left', function(){
-        return parseInt(self.accWin.css('left').replace("px","")) + self.accWidth;
+        return oldPos + moveBy;
       });
       // focus search input
       $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
@@ -123,7 +123,7 @@ module.exports = Backbone.View.extend({
   modSelected: function(e){
     "use strict";
     var modIndex = $(e.target).val();
-    this.$el.find('.js-buyWizardModalModDone').removeClass('disabled');
+    this.$el.find('.js-buyWizardModNext').removeClass('disabled');
     if(modIndex != "direct"){
       this.model.set('selectedModerator', this.model.get('vendor_offer').listing.moderators[modIndex]);
     } else {
@@ -264,8 +264,25 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  addressDone: function(){
+  modNext: function(){
     "use strict";
+    if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
+      this.accNext();
+      this.showMaps();
+    } else {
+      this.accNext(2);
+    }
+  },
+
+  addressPrev: function(){
+    "use strict";
+    this.accPrev();
+    this.hideMaps();
+  },
+
+  addressNext: function(){
+    "use strict";
+    this.accNext();
     this.hideMaps();
   },
 
