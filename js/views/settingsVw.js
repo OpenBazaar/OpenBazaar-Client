@@ -18,6 +18,7 @@ module.exports = Backbone.View.extend({
   events: {
     'click .js-generalTab': 'generalClick',
     'click .js-shippingTab': 'shippingClick',
+    'click .js-pageTab': 'pageClick',
     'click .js-storeTab': 'storeClick',
     'click .js-blockedTab': 'blockedClick',
     'click .js-advancedTab': 'advancedClick',
@@ -43,6 +44,7 @@ module.exports = Backbone.View.extend({
           "use strict";
           self.availableCurrenciesList = currencyList;
           self.render();
+          $('.js-loadingModal').removeClass('show');
         });
       },
       error: function(model, response){
@@ -73,6 +75,7 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
+        $('#content').find('input:visible:first').focus();
     });
     return this;
   },
@@ -81,7 +84,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.blockedList = new personListView({model: model,
                                            el: '.js-list1',
-                                           title: "No one blocked Yet",
+                                           title: "No one blocked",
                                            message: ""});
     this.subViews.push(this.blockedList);
   },
@@ -177,22 +180,32 @@ module.exports = Backbone.View.extend({
 
   generalClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-general'));
+    $('#content').find('input:visible:first').focus();
   },
 
   shippingClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-shipping'));
+    $('#content').find('input:visible:first').focus();
+  },
+
+  pageClick: function(e){
+    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-page'));
+    $('#content').find('input:visible:first').focus();
   },
 
   storeClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
+    $('#content').find('input:visible:first').focus();
   },
 
   blockedClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-blocked'));
+    $('#content').find('input:visible:first').focus();
   },
 
   advancedClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-advanced'));
+    $('#content').find('input:visible:first').focus();
   },
 
   cancelClick: function(e){

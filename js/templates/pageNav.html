@@ -23,7 +23,7 @@
 </div>
 <div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
     <div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
-    <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
+    <div id="noNotifications" class="hide paddingLeft15 paddingTop15 textOpacity50 fontSize13"><%= polyglot.t('NoNotifications') %></div>
     <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
 </div>
 
@@ -388,7 +388,7 @@
                       </label>
                     </div>
                     <div class="flexCol-9">
-                      <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea custCol-text" placeholder="Say something interesting... (160 char max)"></textarea>
+                      <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea custCol-text" placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"></textarea>
                     </div>
                   </div>
                 </div>

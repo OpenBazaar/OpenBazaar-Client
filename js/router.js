@@ -50,6 +50,7 @@ module.exports = Backbone.Router.extend({
     this.view = view;
     //clear address bar. This will be replaced on the user page
     window.obEventBus.trigger("setAddressBar", "");
+    $('body').addClass("userPage");
   },
 
   index: function(){
@@ -126,6 +127,7 @@ module.exports = Backbone.Router.extend({
 
   settings: function(){
     "use strict";
+    $('.js-loadingModal').addClass('show');
     this.cleanup();
     this.newView(new settingsView({userModel: this.options.userModel}));
   },

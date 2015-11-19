@@ -296,42 +296,44 @@ module.exports = Backbone.View.extend({
       var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
       customStyleTag.setAttribute('id', 'customStyle');
 
-      customStyleTag.innerHTML =
-          "#ov1 .custCol-background, #ov1.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
-          "#ov1 .custCol-primary, #ov1 .chosen-drop, #ov1 .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
-          "#ov1 .btn-tab:active { -webkit-box-shadow: none;}" +
-          "#ov1 .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
-          "#ov1 .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important; opacity: .75 !important;}" +
-          "#ov1 .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
-          "#ov1 .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
-          "#ov1 input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .container .txtField { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + " !important;}" +
-          "#ov1 .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
-          "#ov1 .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
-          "#ov1 .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
-          "#ov1 .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
-          "#ov1 .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
-          "#ov1 .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
-          "#ov1 .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" + 
-          "#ov1 #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}"; 
-          
       // if text is white the highlight color needs to darken instead of lighten
       if (this.model.get('page').profile.text_color === 'undefined' || this.model.get('page').profile.text_color === "#ffffff"){
-        customStyleTag.innerHTML += "#ov1 .txtField:focus, #ov1 .fieldItem:focus , #ov1 .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2("#ffffff", -0.5) + " !important;}";
+        customStyleTag.innerHTML = "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 1px solid " + this.shadeColor2("#ffffff", -0.5) + " !important;}";
       }else{
-        customStyleTag.innerHTML += "#ov1 .txtField:focus, #ov1 .fieldItem:focus , #ov1 .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2(this.model.get('page').profile.text_color, 0.5) + " !important;}";
+        customStyleTag.innerHTML = "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 1px solid " + this.shadeColor2(this.model.get('page').profile.text_color, 0.5) + " !important;}";
       }
+
+      customStyleTag.innerHTML +=
+          "#ov1 .userPage .custCol-background, #ov1 .body { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
+          "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 .userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
+          "#ov1 .userPage .btn-tab:active { -webkit-box-shadow: none;}" +
+          "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 .userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important; opacity: .75 !important;}" +
+          "#ov1 .userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
+          "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 .userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 .userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .container .txtField { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
+          "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
+          "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
+          "#ov1 .userPage .chosen-container .chosen-results li:hover {background: " + this.model.get('page').profile.secondary_color + " !important}", 
+          "#ov1 .userPage .custCol-primary-semi-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + " !important;}" +
+          "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
+          "#ov1 .userPage .custCol-text, .search-field input, .chosen-search input { color: " + this.model.get('page').profile.text_color + "!important;}" +
+          "#ov1 .userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" + 
+          "#ov1 .userPage .mainSearchWrapper .txtField:focus { box-shadow: none !important; outline: none !important; border: solid 1px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
+          "#ov1 .userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}"; 
 
       document.body.appendChild(customStyleTag);
       //set custom color input values
