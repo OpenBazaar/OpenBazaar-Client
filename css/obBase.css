@@ -625,6 +625,7 @@ form {
   border-radius: 2px;
   cursor: pointer;
   margin: 16px auto 5px auto;
+  max-width: 160px;
   height: 87px;
   width: 80%;
 }
@@ -1054,7 +1055,7 @@ input[type="text"].txtField-bar {
 .btn-large {
   height: 42px;
   font-size: 15px;
-  min-width: 170px;
+  min-width: 160px;
   line-height: 42px;
   float: left;
   background-color: #086A9E; /* default color */
@@ -2787,6 +2788,10 @@ input[type="checkbox"].fieldItem + label span {
   height: 70px;
 }
 
+#ov1  .height250 {
+  height: 250px;
+}
+
 #ov1  .minHeight650 {
   min-height: 650px;
 }
@@ -2898,6 +2903,7 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 #ov1 .width87px {
+  min-width: 87px;
   width: 87px;
 }
 

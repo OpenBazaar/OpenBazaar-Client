@@ -24,6 +24,7 @@ module.exports = Backbone.View.extend({
     'click .js-advancedTab': 'advancedClick',
     'click .js-cancelSettings': 'cancelClick',
     'click .js-saveSettings': 'saveClick',
+    'change .js-settingsThemeSelection' : 'themeClick',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -75,7 +76,6 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-        $('#content').find('input:visible:first').focus();
     });
     return this;
   },
@@ -180,7 +180,6 @@ module.exports = Backbone.View.extend({
 
   generalClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-general'));
-    $('#content').find('input:visible:first').focus();
   },
 
   shippingClick: function(e){
@@ -209,7 +208,18 @@ module.exports = Backbone.View.extend({
   },
 
   cancelClick: function(e){
-      Backbone.history.loadUrl();
+    Backbone.history.loadUrl();
+  },
+
+  themeClick: function(e){
+    var theme = $(e.currentTarget).data();
+
+    // Populate the color inputs on theme change
+    $('#primary_color').val(theme["primaryColor"]);
+    $('#secondary_color').val(theme["secondaryColor"]);
+    $('#background_color').val(theme["backgroundColor"]);
+    $('#text_color').val(theme["textColor"]);
+    $('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
   },
 
   saveClick: function(e){
