@@ -6,7 +6,7 @@ body {
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, "Open Sans";
+  font-family: "Helvetica Neue", Helvetica, Arial;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
