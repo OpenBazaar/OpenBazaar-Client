@@ -159,6 +159,10 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Data could not be loaded for:",
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466"
         },
+        saveMessages: {
+          Saved: "Saved",
+          SaveSuccess: "Your changes have been saved."
+        },
         filters: {
           pagesAllTypes: "All types",
           pagesStores: "Stores",
@@ -357,6 +361,10 @@ module.exports = Backbone.Model.extend({
           userNotFoundError: "La informaci&oacute;n de esta persona no est&aacute; disponible. Es posible que se hayan desconectado.",
           notFoundError: "Los datos no se pudieron cargar para:",
           socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466"
+        },
+        saveMessages: {
+          Saved: "Salvado",
+          SaveSuccess: "Se han guardado los cambios."
         },
         filters: {
           pagesAllTypes: "Todos los tipos",

@@ -110,14 +110,12 @@
             <%= polyglot.t('onboarding.yourCountry') %>
             <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
           </div>
-          <div class="flexContainer flex-border custCol-primary" id="homeModal-countryList">
+          <div class="flexContainer flex-border custCol-primary js-homeModal-countryList" id="homeModal-countryList">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
                 <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list flex-border js-homeModal-countryList homeModal-settings custCol-primary custCol-text">
-            </ul>
           </div>
           <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
@@ -129,14 +127,12 @@
             <%= polyglot.t('onboarding.localCurrency') %>
             <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 9</span>
           </div>
-          <div class="flexContainer flex-border" id="homeModal-currencyList">
+          <div class="flexContainer flex-border js-homeModal-currencyList" id="homeModal-currencyList">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
                 <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
               </div>
             </div>
-            <ul class="flexRow list js-homeModal-currencyList homeModal-settings scrollOverflowY custCol-primary custCol-text">
-            </ul>
           </div>
           <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
@@ -520,15 +516,16 @@
           </div>
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow flexRow-center positionRelative">
-              <div>
-                <div class="homeModal-avatarPreview js-avatarPreview border1 custCol-font-secondary custCol-border-secondary default-avatar" style="margin: 55px auto 0"></div>
-                <div class="rowTop10" id="avatarUploadDiv">
-                     <div class="cropit-image-preview thumbnail hide"></div>
-                     <input id="avatarUpload" name="avatarUpload" type="file" class="fieldItem cropit-image-input hide js-homeModalAvatarUpload" />
-                     <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop10 custCol-secondary">
-                    <%= polyglot.t('onboarding.chooseAvatar') %>
-                  </label>
+              <div id="image-cropper" class="positionWrapper">
+                <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
+                  <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
                 </div>
+                <div class="cropit-image-preview rowTop10 thumbnail thumbnail-huge box-borderBright row10"></div>
+                <div>
+                  <input type="range" class="cropit-image-zoom-input rowTop10 row10 width100" />
+                </div>
+                <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
+                <label for="settingsAvatarInput" class="btn btn-txt btn-c1 btn-wide rowTop10 row20"><%= polyglot.t('UploadAvatar') %></label>
               </div>
             </div>
           </div>
