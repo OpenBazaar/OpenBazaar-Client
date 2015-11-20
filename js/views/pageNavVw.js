@@ -92,6 +92,13 @@ module.exports = Backbone.View.extend({
       this.currencyReady = true;
     }
     if(this.countryReady && this.currencyReady){
+      //set up filterable lists.
+      setTimeout(function(){
+      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country']});
+      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
+      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time']});
+      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language']});
+      }, 3000);
       this.initAccordion('.js-profileAccordion');
     }
   },
@@ -127,15 +134,6 @@ module.exports = Backbone.View.extend({
       // focus search input
        $(this).closest('.accordion-child').prev('.accordion-child').find('input:visible:first').focus();
     });
-    //set up filterable lists.
-    //TODO: this is terrible, change to run when an event is emmitted from the subviews marking them as done rendering
-    setTimeout(function(){
-      var List = window.List;
-      var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
-      var currencyList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
-      var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});
-      var languageList = new List('homeModal-languageList', {valueNames: ['homeModal-language']});
-    }, 2000);
   },
 
   closeNav: function(){
