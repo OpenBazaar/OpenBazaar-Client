@@ -72,6 +72,7 @@ module.exports = Backbone.View.extend({
 
     this.listenTo(window.obEventBus, "countryListRendered", function(){this.accordionReady("country")});
     this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency")});
+    this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language")});
 
     this.render();
   },
@@ -90,16 +91,17 @@ module.exports = Backbone.View.extend({
       this.countryReady = true;
     } else if(listReady == "currency") {
       this.currencyReady = true;
+    } else if(listReady == "language") {
+      this.languageReady = true;
     }
-    if(this.countryReady && this.currencyReady){
+    if(this.countryReady && this.currencyReady && this.languageReady){
       //set up filterable lists.
-      setTimeout(function(){
-      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country']});
-      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
-      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time']});
-      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language']});
-      }, 3000);
+      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
+      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
+      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
+      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       this.initAccordion('.js-profileAccordion');
+      //console.log(currencyList.items);
     }
   },
 

@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    this.listWrapper = $('<div class="flexRow scrollOverflowY"></div>');
+    this.listWrapper = $('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text"></ul>');
     __.each(this.chooseCountries.models, function(item){
       self.renderItem(item);
     },this);
@@ -34,6 +34,7 @@ module.exports = Backbone.View.extend({
     this.subViews.push(chooseCountry);
     //appending to the DOM one by one is too slow, and the last 1/3 of the items won't be added. Add to a holder element instead.
     this.listWrapper.append(chooseCountry.render().el);
+    //this.$el.append(chooseCountry.render().el);
   },
 
   close: function(){
