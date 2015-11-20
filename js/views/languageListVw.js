@@ -18,6 +18,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
+    console.log("languages rendered");
     __.each(this.chooseLanguages.models, function(item){
       self.renderItem(item);
     },this);

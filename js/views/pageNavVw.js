@@ -51,7 +51,7 @@ module.exports = Backbone.View.extend({
     this.subViews = [];
     this.languages = new languagesModel();
     this.options = options || {};
-
+    
     this.currentWindow = remote.getCurrentWindow();
 
     //when language is changed, re-render
@@ -148,6 +148,10 @@ module.exports = Backbone.View.extend({
   render: function(){
     "use strict";
     var self = this;
+    //reset tests for applying lists or List.js will fail on a re-render
+    this.countryReady = false;
+    this.currencyReady = false;
+    this.languageReady = false;
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
@@ -463,17 +467,19 @@ module.exports = Backbone.View.extend({
                 contentType: false,
                 processData: false,
                 data: settingsFormData,
+                dataType: "json",
                 success: function(data) {
-                    if(JSON.parse(data).success) {
+                    if(data.success) {
                         $.ajax({
                             type: "POST",
                             url: server + "profile",
                             contentType: false,
                             processData: false,
                             data: profileFormData,
+                            dataType: "json",
                             success: function(data) {
-                                 if(data.success === true) {
-                                   Backbone.history.loadUrl();
+                                 if(data.success == true) {
+                                   self.currentWindow.reload();
                                  }
                             },
                             error: function(jqXHR, status, errorThrown){
