@@ -81,6 +81,7 @@ module.exports = Backbone.View.extend({
     var chatButton = $(this.$el).find('.btn-newChat');
     chatButton.addClass('btn-newChatOut', 500);
     chatButton.find('span').removeClass('hide');
+    $('.chatConversationTo').removeClass('hide');
 
     this.openConversation();
 
@@ -98,12 +99,16 @@ module.exports = Backbone.View.extend({
     // Slide app out
     $(this.$el).addClass('sideBarSlid', 500);
 
+    $('.container').addClass('compressed');
+
     // Adjust elements
     $(this.$el).find('.chatSearch').addClass('chatSearchOut');
   },
 
   slideChatIn: function() {
     $(this.$el).removeClass('sideBarSlid', 500);
+
+    $('.container').removeClass('compressed');
 
     // Adjust elements
     $(this.$el).find('.chatSearch').removeClass('chatSearchOut');

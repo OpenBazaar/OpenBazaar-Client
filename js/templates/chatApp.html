@@ -18,8 +18,15 @@
         </div>
     </div>
     <div class="chatConversationContent"></div>
-    <div class="chatConversationTo">
 
+    <div class="chatConversationTo hide">
+        <div class="chatConversationToLabel">To:</div>
+        <div class="chatConversationToInput">
+            <input type="text" name="conversation_recipient" id="inputConversationRecipient" placeholder="Enter GUID"/>
+        </div>
+        <br clear="both"/>
     </div>
-    <div class="chatConversationMessage"></div>
+    <div class="chatConversationMessage">
+        <textarea name="conversation_message" id="inputConversationMessage" class="" rows="3" placeholder="<%= polyglot.t('EnterMessage') %>"></textarea>
+    </div>
 </div>

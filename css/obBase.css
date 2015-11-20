@@ -117,7 +117,14 @@ form {
   position: relative;
   width: 950px;
   z-index: 1;
+}
 
+#obContainer {
+  transition: width 0.5s ease;
+}
+
+#obContainer.compressed {
+  width: calc(100% - 220px);
 }
 
 #pageNav {
@@ -1212,20 +1219,21 @@ input[type="text"].txtField-bar {
 
 .chatConversation {
   width: 100%;
-  height: 250px;
-  background-color: #efefef;
-  bottom: 0;
+  height: 300px;
+  bottom: 0px;
   position: absolute;
   transition: bottom 0.5s ease;
+  border: 1px solid #333;
 }
 
 .chatConversationHidden {
-  bottom: -250px;
+  bottom: -300px;
 }
 
 .chatConversationHeader {
   padding: 10px;
   background-color: #292929;
+  border-bottom: 1px solid #333;
 }
 
 .chatConversationLabel {
@@ -1235,6 +1243,45 @@ input[type="text"].txtField-bar {
 
 .btn-closeConversation {
 
+}
+
+.chatConversationContent {
+  height: calc(100% - 120px - 36px);
+  border-bottom: 1px solid #333;
+}
+
+.chatConversationTo {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.chatConversationToLabel {
+  width: 30px;
+  float:left;
+  height: 20px;
+  line-height: 19px;
+  color: #999;
+}
+
+.chatConversationToInput {
+  width: calc(100% - 50px);
+  float: left;
+}
+
+#inputConversationRecipient {
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.chatConversationMessage {
+  height: 60px;
+  padding: 10px;
+}
+
+.chatConversation textarea, .chatConversation input {
+  color: white;
+  background-color: unset;
+  width: 100%;
 }
 
 .userPage .btn.btn-bar {
