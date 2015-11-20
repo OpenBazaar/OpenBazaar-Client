@@ -159,6 +159,10 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Data could not be loaded for:",
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466"
         },
+        saveMessages: {
+          Saved: "Saved",
+          SaveSuccess: "Your changes have been saved."
+        },
         filters: {
           pagesAllTypes: "All types",
           pagesStores: "Stores",
@@ -236,10 +240,10 @@ module.exports = Backbone.Model.extend({
         Stores: "Tiendas",
         Follow: "Seguir",
         Feed: "Feed",
-        FeedPlaceholder: "RSS próximamente",
+        FeedPlaceholder: "RSS prï¿½ximamente",
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
-        NoDescriptionAdded: "No hay descripción añadida",
+        NoDescriptionAdded: "No hay descripciï¿½n aï¿½adida",
         AboutEmpty: "Acerca de la secci&oacute;n est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
@@ -254,11 +258,11 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenida",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Búsqueda de artículos",
-        SearchForPagesPlaceholder: "Búsqueda por palabra clave",
-        SearchFeedPlaceholder: "Búsqueda por nombre o apodo",
-        SearchForFollowersPlaceholder: "Búsqueda por nombre o apodo",
-        SearchForUsersPlaceholder: "Búsqueda por nombre o apodo",
+        SearchForItemsPlaceholder: "Bï¿½squeda de artï¿½culos",
+        SearchForPagesPlaceholder: "Bï¿½squeda por palabra clave",
+        SearchFeedPlaceholder: "Bï¿½squeda por nombre o apodo",
+        SearchForFollowersPlaceholder: "Bï¿½squeda por nombre o apodo",
+        SearchForUsersPlaceholder: "Bï¿½squeda por nombre o apodo",
         EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
@@ -321,7 +325,7 @@ module.exports = Backbone.Model.extend({
         SecondaryColor : "Color secundario",
         TextColor : "Color del texto",
         BackgroundColor : "Color de fondo",
-        WelcomeToYourPage: "La bienvenida a su página",
+        WelcomeToYourPage: "La bienvenida a su pï¿½gina",
         SearchForCategory: "B&uacute;squeda de categor&iacute;a",
         Moderators: "Moderadores",
         Categories: "Categor&iacute;as",
@@ -343,7 +347,7 @@ module.exports = Backbone.Model.extend({
         ShipToCountry: "Env&iacute;r a pa&iacute;s",
         EnableNotifications: "Activar notificaciones",
         EnableSSL: "Habilitar SSL",
-        LibbitcoinServerAddress: "Dirección del servidor Libbitcoin",
+        LibbitcoinServerAddress: "Direcciï¿½n del servidor Libbitcoin",
         ServerIPPort: "Server IP : Puerto",
         LoadingImage: "Cargando Imagen ... ",
         UploadAvatar: "Subir Avatar ",
@@ -357,6 +361,10 @@ module.exports = Backbone.Model.extend({
           userNotFoundError: "La informaci&oacute;n de esta persona no est&aacute; disponible. Es posible que se hayan desconectado.",
           notFoundError: "Los datos no se pudieron cargar para:",
           socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466"
+        },
+        saveMessages: {
+          Saved: "Salvado",
+          SaveSuccess: "Se han guardado los cambios."
         },
         filters: {
           pagesAllTypes: "Todos los tipos",

@@ -23,6 +23,7 @@ module.exports = Backbone.View.extend({
       self.renderItem(item);
     },this);
     this.$el.append(this.listWrapper);
+    window.obEventBus.trigger("countryListRendered");
   },
 
   renderItem: function(item){

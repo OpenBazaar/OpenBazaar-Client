@@ -520,15 +520,16 @@
           </div>
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow flexRow-center positionRelative">
-              <div>
-                <div class="homeModal-avatarPreview js-avatarPreview border1 custCol-font-secondary custCol-border-secondary default-avatar" style="margin: 55px auto 0"></div>
-                <div class="rowTop10" id="avatarUploadDiv">
-                     <div class="cropit-image-preview thumbnail hide"></div>
-                     <input id="avatarUpload" name="avatarUpload" type="file" class="fieldItem cropit-image-input hide js-homeModalAvatarUpload" />
-                     <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop10 custCol-secondary">
-                    <%= polyglot.t('onboarding.chooseAvatar') %>
-                  </label>
+              <div id="image-cropper" class="positionWrapper">
+                <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
+                  <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
                 </div>
+                <div class="cropit-image-preview rowTop10 thumbnail thumbnail-huge box-borderBright row10"></div>
+                <div>
+                  <input type="range" class="cropit-image-zoom-input rowTop10 row10 width100" />
+                </div>
+                <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
+                <label for="settingsAvatarInput" class="btn btn-txt btn-c1 btn-wide rowTop10 row20"><%= polyglot.t('UploadAvatar') %></label>
               </div>
             </div>
           </div>

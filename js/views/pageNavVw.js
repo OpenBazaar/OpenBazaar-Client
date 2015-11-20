@@ -10,7 +10,8 @@ var __ = require('underscore'),
     adminPanelView = require('../views/adminPanelVw'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
     remote = require('remote'),
-    cropit = require('../utils/jquery.cropit');
+    cropit = require('../utils/jquery.cropit'),
+    showErrorModal = require('../utils/showErrorModal.js');
 
 
 module.exports = Backbone.View.extend({
@@ -35,7 +36,7 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-newHandle': 'newHandle',
     'click .js-homeModal-existingHandle': 'existingHandle',
     'click .js-homeModal-cancelHandle': 'cancelHandle',
-    'change .js-homeModalAvatarUpload': 'uploadAvatar',
+    //'change .js-homeModalAvatarUpload': 'uploadAvatar',
     'click .js-homeModalDone': 'settingsDone',
     'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
@@ -69,6 +70,9 @@ module.exports = Backbone.View.extend({
     this.socketNotificationID = Math.random().toString(36).slice(2);
     this.socketView.getNotifications(this.socketNotificationID);
 
+    this.listenTo(window.obEventBus, "countryListRendered", function(){this.accordionReady("country")});
+    this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency")});
+
     this.render();
   },
 
@@ -77,6 +81,18 @@ module.exports = Backbone.View.extend({
     var data = JSON.parse(response.data);
     if(data.id == this.socketNotificationID){
       console.log(data);
+    }
+  },
+
+  accordionReady: function(listReady) {
+    "use strict";
+    if(listReady == "country") {
+      this.countryReady = true;
+    } else if(listReady == "currency") {
+      this.currencyReady = true;
+    }
+    if(this.countryReady && this.currencyReady){
+      this.initAccordion('.js-profileAccordion');
     }
   },
 
@@ -119,7 +135,7 @@ module.exports = Backbone.View.extend({
       var currencyList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
       var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});
       var languageList = new List('homeModal-languageList', {valueNames: ['homeModal-language']});
-    }, 1000);
+    }, 2000);
   },
 
   closeNav: function(){
@@ -140,9 +156,8 @@ module.exports = Backbone.View.extend({
       self.subViews.push(self.countryList);
       self.subViews.push(self.currencyList);
       self.subViews.push(self.languageList);
-      self.initAccordion('.js-profileAccordion');
-      if(self.model.get('beenSet')){
-        self.$el.find('.js-homeModal').hide();
+      if(localStorage.getItem("onboardingComplete") === "true") {
+      self.$el.find('.js-homeModal').hide();
       }
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
@@ -151,7 +166,7 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
-      self.$el.find('#avatarUploadDiv').cropit();
+      self.$el.find('#image-cropper').cropit();
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
@@ -366,32 +381,16 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-homeModal-cancelHandle').parent().addClass('hide');
   },
 
-  uploadAvatar: function(e){
-    "use strict";
-    var self = this;
-    var reader = new FileReader();
-    reader.onload = function (e) {
-
-      self.$el.find('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
-      self.model.set('tempAvatar', e.target.result);
-
-      //TODO: add canvas resizing here
-    };
-    reader.readAsDataURL($(e.target)[0].files[0]);
-  },
-
   settingsDone: function(e){
-
     "use strict";
 
+    var self = this,
+        server = this.model.get('serverUrl'),
+        profileFormData = new FormData(),
+        settingsFormData = new FormData(),
+        uploadImageFormData = new FormData();
 
-    this.model.set('beenSet',true);
-    var self = this;
-    var server = this.model.get('serverUrl');
-    var profileFormData = new FormData();
-    var settingsFormData = new FormData();
-    var uploadImageFormData = new FormData();
-
+    localStorage.setItem("onboardingComplete", "true");
 
     if($('textarea#aboutInput').val() != ""){
         self.model.set('about', $('textarea#aboutInput').val());
@@ -405,13 +404,12 @@ module.exports = Backbone.View.extend({
         self.model.set('name', $('#storeNameInput').val());
     }else if (self.model.get('name') == undefined){
         //otherwise error since the profile api needs the name parameter and as of now it is not set in the userMd.js
-        self.model.set('name', "");
+        self.model.set('name', "ob" + Math.random().toString(36).slice(2));
     }
 
-    var themeRadioButtons = $('input[name=theme-selection]');
-    var themeSelected =   ($(themeRadioButtons.filter(':checked'))[0] !=undefined);
-    if(themeSelected){
-       var themeId = $(themeRadioButtons.filter(':checked')[0]).attr('id');
+
+    var themeId = $('input[name=theme-selection]:checked').attr('id');
+    if(themeId){
 
         var primaryColor =  parseInt($($("label[for='"+themeId+"']")[0]).data('primary-color').replace("#","0x"));
         var secondaryColor =   parseInt($($("label[for='"+themeId+"']")[0]).data('secondary-color').replace("#","0x"));
@@ -435,26 +433,23 @@ module.exports = Backbone.View.extend({
                 if(i == "country") {
                     profileFormData.append("location",el);
                 }
-                if(i == "name" || i == "handle" || i =="about"|| (themeSelected && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+                if(i == "name" || i == "handle" || i =="about"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
                     profileFormData.append(i,""+el);
-                } else if(i == "tempAvatar") {
-                    var imageURI = $('#avatarUploadDiv').cropit('export', {
-                        type: 'image/jpeg',
-                        quality: 0.75,
-                        originalSize: false
-                    });
-                    if(imageURI) {
-                        imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-                        uploadImageFormData.append('image', imageURI);
-                    }
                 } else {
                     settingsFormData.append(i,el);
                 }
-
             }
         );
 
-      settingsFormData.append("shipping_addresses","");
+    var imageURI = $('#image-cropper').cropit('export', {
+      type: 'image/jpeg',
+      quality: 0.75,
+      originalSize: false
+    });
+    if(imageURI) {
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+      uploadImageFormData.append('image', imageURI);
+    }
 
 
    var submit = function(img_hash) {
@@ -478,16 +473,7 @@ module.exports = Backbone.View.extend({
                             data: profileFormData,
                             success: function(data) {
                                  if(data.success === true) {
-                                     if(img_hash) {
-                                        //TODO store img_hash for all images of profile
-                                        //self.model.set("avatar_hash",img_hash);
-                                        //console.log("here we are");
-                                        //$(".topThumb").css("background-image",
-                                        //    "url(" + server + "get_image?hash=" +
-                                        //             img_hash + ")");
-                                        //("#avatar").val("");
-                                     }
-                                    self.showErrorModal("Saved", "Your settings have been successfully saved");
+                                   Backbone.history.loadUrl();
                                  }
                             },
                             error: function(jqXHR, status, errorThrown){
@@ -510,9 +496,7 @@ module.exports = Backbone.View.extend({
         //Lets upload the image first, if there is one
         //to get the hash
 
-
-
-        if(this.model.get('tempAvatar') != "") {
+        if(imageURI) {
             $.ajax({
                 type: "POST",
                 url: server + "upload_image",
@@ -522,7 +506,7 @@ module.exports = Backbone.View.extend({
                 dataType: "JSON",
                 success: function(data) {
                      var img_hash = data.image_hashes[0];
-                    if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
+                    if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
                         submit(img_hash);
                     }
                 },
