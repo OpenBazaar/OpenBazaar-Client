@@ -51,7 +51,7 @@ module.exports = Backbone.View.extend({
     this.subViews = [];
     this.languages = new languagesModel();
     this.options = options || {};
-    
+
     this.currentWindow = remote.getCurrentWindow();
 
     //when language is changed, re-render
