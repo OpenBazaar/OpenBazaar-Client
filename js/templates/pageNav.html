@@ -521,10 +521,11 @@
           <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
             <div class="flexRow flexRow-center positionRelative">
               <div>
-                <div class="homeModal-avatarPreview js-avatarPreview custCol-font-secondary default-avatar" style="margin: 55px auto 0"></div>
-                <div class="rowTop10">
-                  <input type="file" id="avatarUpload" accept="image/*" class="hide js-homeModalAvatarUpload">
-                  <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop10 custCol-secondary custCol-text">
+                <div class="homeModal-avatarPreview js-avatarPreview border1 custCol-font-secondary custCol-border-secondary default-avatar" style="margin: 55px auto 0"></div>
+                <div class="rowTop10" id="avatarUploadDiv">
+                     <div class="cropit-image-preview thumbnail hide"></div>
+                     <input id="avatarUpload" name="avatarUpload" type="file" class="fieldItem cropit-image-input hide js-homeModalAvatarUpload" />
+                     <label for="avatarUpload" class="btn btn-c1 btn-txt rowTop10 custCol-secondary">
                     <%= polyglot.t('onboarding.chooseAvatar') %>
                   </label>
                 </div>

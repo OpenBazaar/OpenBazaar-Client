@@ -10,27 +10,32 @@ module.exports = Backbone.Model.extend({
   },
 
   defaults: {
-    beenSet: true, //set this back to false when done testing
+
+
+  beenSet: true, //set this back to false when done testing
     guid: "", //set by app.js
     //name: "Your Name",
     //handle: "Blockchain ID",
     //currency: "US Dollar", //set by user action, not by server
 
-    refund_address: "", //buyer’s refund address (string)
-    currency_code: "BTC", //may either be “btc” or a currency from this list. (formatted string)
+    refund_address: "", //buyerâ€™s refund address (string)
+    currency_code: "BTC", //may either be â€œbtcâ€ or a currency from this list. (formatted string)
     country: "UNITED_STATES", //the location of the user. must be a formatted string from this list. (formatted string)
-    language: "en", //user’s prefered language (string)
-    time_zone: "", //the user’s time zone (string)
-    notifications: true, //display notifications (“True” or “False”)
+
+    language: "en", //userï¿½s prefered language (string)
+    time_zone: "", //the userï¿½s time zone (string)
+    notifications: true, //display notifications (ï¿½Trueï¿½ or ï¿½Falseï¿½)
     shipping_addresses: [], //array of addresses
     blocked: [], //a list of guids to block (LIST of 40 character hex strings)
     libbitcoin_server: "", //the server address (url string)
-    ssl: true, //use ssl on the openbazaar server (“True” or “False”)
+    ssl: true, //use ssl on the openbazaar server (ï¿½Trueï¿½ or ï¿½Falseï¿½)
     serverUrl: "http://localhost:18469/api/v1/", //set from localStorage
+
     //value below for testing. Real value should be dynamically set
     //serverUrl: "http://seed.openbazaar.org:18469/api/v1/",
     terms_conditions: "No terms or conditions", //default terms/conditions (string)
     refund_policy: "No refund policy" //default refund policy (string)
+
   },
 
   parse: function(response) {
@@ -50,5 +55,6 @@ module.exports = Backbone.Model.extend({
     response.shipping_addresses = response.shipping_addresses[0] ? JSON.parse(response.shipping_addresses[0]) : [];
 
     return response;
+
   }
 });
