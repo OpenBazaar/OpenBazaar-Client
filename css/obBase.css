@@ -2493,8 +2493,8 @@ input[type="checkbox"].fieldItem + label span {
   border-top-right-radius: 3px;
 }
 
-#ov1 .borderRadius2 {
-  border-radius: 2px;
+#ov1 .borderRadius3 {
+  border-radius: 3px;
 }
 
 #ov1 .borderRadiusBottom0 {
