@@ -147,10 +147,19 @@ form {
   height: calc(100% - 50px);
   z-index: 2;
   transition: right 0.5s ease;
+  color: #DDD;
 }
 
 #sideBar.sideBarSlid {
   right: 0px;
+}
+
+#sideBar input::-webkit-input-placeholder {
+  color: white;
+}
+
+#sideBar.btn {
+  color: white;
 }
 
 .chatSearch {
@@ -1171,22 +1180,25 @@ input[type="text"].txtField-bar {
 .btn-newChat {
   background-color: unset;
   margin: 5px;
-  width: 30px;
+  width: 32px;
+  height: 19px;
+  line-height: 19px;
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
+  color: white;
   font-weight: normal;
 }
 
 .btn-newChatOut {
   background-color: #2D2D2D;
-  width: 60px;
+  width: 70px;
   text-align: left;
+  margin-top: 7px;
   padding: 0 10px;
   font-size: 13px;
 }
 
 .btn-closeChat {
-  margin: 5px;
   right: 0;
   float: right;
   background-color: unset;
@@ -1211,10 +1223,20 @@ input[type="text"].txtField-bar {
   font-size: 13px;
 }
 
+.chatSearchIcon {
+  margin-left: -25px;
+  margin-right: 10px;
+}
+
 .chatSearchOut {
   padding-left: 10px;
   width: calc(100% - 10px);
   margin-left: 0;
+}
+
+div.chatSearchOut .chatSearchIcon {
+  margin-left: unset;
+  margin-right: unset;
 }
 
 .chatConversation {
@@ -1260,7 +1282,7 @@ input[type="text"].txtField-bar {
   float:left;
   height: 20px;
   line-height: 19px;
-  color: #999;
+  color: #2D2D2D;
 }
 
 .chatConversationToInput {
