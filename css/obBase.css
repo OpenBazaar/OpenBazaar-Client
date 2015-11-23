@@ -2181,6 +2181,11 @@ input[type="checkbox"].fieldItem + label span {
   width: 400px;
 }
 
+.cropit-image-zoom-input {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .userPage .headerCropper .bar.navBar {
   background: none;
   height: 48px;
