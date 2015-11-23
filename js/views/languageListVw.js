@@ -21,6 +21,7 @@ module.exports = Backbone.View.extend({
     __.each(this.chooseLanguages.models, function(item){
       self.renderItem(item);
     },this);
+    window.obEventBus.trigger("languageListRendered");
   },
 
   renderItem: function(item){

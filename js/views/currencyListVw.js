@@ -4,7 +4,8 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCurrenciesCollection = require('../collections/chooseCurrencyCl'),
-    chooseCurrencyView = require('../views/chooseCurrencyVw');
+    chooseCurrencyView = require('../views/chooseCurrencyVw'),
+    getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({
 
@@ -25,26 +26,38 @@ module.exports = Backbone.View.extend({
       }
       return 0;
     });
+    orderedCurrencies.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4"});
     this.chooseCurrencies = new chooseCurrenciesCollection(orderedCurrencies);
     this.subViews = [];
-    this.render();
+    //use default currency to return list of supported currencies
+    getBTPrice("USD", function (btAve, currencyList) {
+      "use strict";
+      self.availableCurrenciesList = currencyList;
+      self.render();
+    });
   },
 
   render: function(){
     var self = this;
+    this.listWrapper = $('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text"></ul>');
     __.each(this.chooseCurrencies.models, function(item){
       self.renderItem(item);
     },this);
+    this.$el.append(this.listWrapper);
+    window.obEventBus.trigger("currencyListRendered");
   },
 
   renderItem: function(item){
-    var chooseCurrency = new chooseCurrencyView({
-      model: item,
-      selected: this.options.selected
-    });
-    this.subViews.push(chooseCurrency);
-    //$el must be passed in by the constructor
-    this.$el.append(chooseCurrency.render().el);
+    if(this.availableCurrenciesList.indexOf(item.get('code')) > -1 || item.get('code') === "BTC"){
+      var chooseCurrency = new chooseCurrencyView({
+        model: item,
+        selected: this.options.selected
+      });
+      this.subViews.push(chooseCurrency);
+      //$el must be passed in by the constructor
+      this.listWrapper.append(chooseCurrency.render().el);
+      //this.$el.append(chooseCurrency.render().el);
+    }
   },
 
   close: function(){
