@@ -164,7 +164,9 @@ module.exports = Backbone.Model.extend({
           userError: "Information for this ID could not be found",
           userNotFoundError: "This person's information is not available. They may have gone offline.",
           notFoundError: "Data could not be loaded for:",
-          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466"
+          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
+          contractError: "This Item Cannot be Purchased",
+          sellerError: "The seller's server has rejected the purchase request"
         },
         saveMessages: {
           Saved: "Saved",
@@ -374,7 +376,9 @@ module.exports = Backbone.Model.extend({
           userError: "La informaci&oacute;n para este ID no se pudo encontrar",
           userNotFoundError: "La informaci&oacute;n de esta persona no est&aacute; disponible. Es posible que se hayan desconectado.",
           notFoundError: "Los datos no se pudieron cargar para:",
-          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466"
+          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466",
+          contractError: "Este artículo no puede ser comprado" ,
+          sellerError: "El servidor del vendedor ha rechazado la solicitud de compra"
         },
         saveMessages: {
           Saved: "Salvado",
@@ -576,7 +580,9 @@ module.exports = Backbone.Model.extend({
           userError: "Informationen f&uuml;r diese ID konnten nicht gefunden werden",
           userNotFoundError: "Die Informationen dieser Person sind nicht verf&uuml;gbar. M&ouml;glicherweise ist sie offline gegangen.",
           notFoundError: "Daten konnten nicht geladen werden f&uuml;r:",
-          socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut."
+          socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
+          contractError: "Dieser Artikel kann nicht gekauft werden",
+          sellerError: "Server des Verkäufers die Kaufanfrage abgelehnt wurde"
         },
         filters: {
           pagesAllTypes: "Alle Arten",

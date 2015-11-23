@@ -131,14 +131,14 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  hideMaps: function(){
+  showMaps: function(){
     "use strict";
     this.$el.find('.js-buyWizardMap').removeClass('hide');
     this.$el.find('.js-buyWizardMapPlaceHolder').removeClass('hide');
     this.hideMap = false;
   },
 
-  showMaps: function(){
+  hideMaps: function(){
     "use strict";
     this.$el.find('.js-buyWizardMap').addClass('hide');
     this.$el.find('.js-buyWizardMapPlaceHolder').addClass('hide');
@@ -314,7 +314,12 @@ module.exports = Backbone.View.extend({
       dataType: 'json',
       success: function(data){
         console.log(data);
-        self.showPayAddress(data);
+        console.log(data.success);
+        if(data.success == true){
+          self.showPayAddress(data);
+        } else {
+          showErrorModal(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError'));
+        }
       },
       error: function (jqXHR, status, errorThrown) {
         console.log(jqXHR);
@@ -338,6 +343,9 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardPayURL').text(data.payment_address).attr('href', payURL);
     console.log(payURL);
     this.hideMaps();
+    this.$el.find('.js-buyWizardPay').removeClass('hide');
+    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
+    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
   },
 
   setTotalPrice: function(){

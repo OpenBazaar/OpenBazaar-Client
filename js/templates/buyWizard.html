@@ -16,7 +16,9 @@
       <div class="js-buyWizardMap positionTop"></div>
       <div class="js-buyWizardPay positionTop hCentered rowTop10 hide">
         <div class="txt-center">Send <span class="js-buyWizardPayPrice"></span> to</div>
-        <img class="txt-center js-buyWizardPayQRCode" width="200px" height="200px" src="imgs/defaultItem.png"/>
+        <div class="txt-center">
+          <img class="js-buyWizardPayQRCode" width="200px" height="200px" src="imgs/defaultItem.png"/>
+        </div>
         <div class="txt-center">
           <a class="js-buyWizardPayURL"><i class="ion-link"></i></a>
         </div>
@@ -179,8 +181,9 @@
           <!--inser details view-->
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <span class="btn btn-bar btn-half js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
           </div>
         </div>
         <div class="accordion-child">
@@ -202,7 +205,6 @@
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
             <a class="btn btn-bar btn-half custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('FinalizePurchase') %></a>
-            <span class="btn btn-bar btn-half js-buyWizardPurchasePending custCol-secondary custCol-border-primary borderBottomRightRaidus3 hide"><%= polyglot.t('PaymentPending') %></span>
           </div>
         </div>
       </div>
