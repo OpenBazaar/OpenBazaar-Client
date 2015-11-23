@@ -60,7 +60,9 @@ module.exports = Backbone.View.extend({
       self.setFormValues();
       self.renderBlocked(self.model.get("user").blocked);
       $(".chosen").chosen({ width: '100%' });
-      self.$el.find('#image-cropper').cropit({
+      $('#settings-image-cropper').cropit({
+        $preview: $('.js-settingsAvatarPreview'),
+        $fileInput: $('#settingsAvatarInput'),
         smallImage: "stretch",
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
@@ -310,7 +312,7 @@ module.exports = Backbone.View.extend({
         //to get the hash
         if($("#settingsAvatarInput").val()) {
 
-          imageURI = self.$el.find('#image-cropper').cropit('export', {
+          imageURI = self.$el.find('#settings-image-cropper').cropit('export', {
             type: 'image/jpeg',
             quality: 0.75,
             originalSize: false
