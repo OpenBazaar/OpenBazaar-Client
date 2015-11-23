@@ -38,7 +38,10 @@ module.exports = Backbone.View.extend({
   setAddress: function(index){
     "use strict";
     var selectedAddress = this.model.get('user').shipping_addresses[index];
-    this.trigger("setAddress", selectedAddress);
+    if(selectedAddress){
+      this.trigger("setAddress", selectedAddress);
+    }
+    console.log("selected "+ index);
   },
 
   close: function(){

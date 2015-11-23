@@ -163,6 +163,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.model.set('selectedAddress', selectedAddress);
     this.displayMap(selectedAddress);
+    this.$el.find('.js-buyWizardAddressNext').removeClass('disabled');
   },
 
   modelToFormData: function(modelJSON, formData, existingKeys) {
