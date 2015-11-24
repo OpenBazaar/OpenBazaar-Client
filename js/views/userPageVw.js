@@ -155,6 +155,7 @@ module.exports = Backbone.View.extend({
     this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
     this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
     this.socketView = options.socketView;
+    this.chatAppView = options.chatAppView;
     this.slimVisible = false;
     this.confirmDelete = false;
     this.lastTab = "about"; //track the last tab clicked
@@ -951,7 +952,7 @@ module.exports = Backbone.View.extend({
 
   sendMessage: function(){
     "use strict";
-
+    this.chatAppView.newChat();
   },
 
   close: function(){

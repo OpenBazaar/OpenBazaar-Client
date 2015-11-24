@@ -78,7 +78,8 @@ var reloadProfile = function(){
     user.set('serverUrl', serverUrlLocal);
     newSocketView = new socketView({model: user});
     newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-    newRouter = new router({userModel: user, socketView: newSocketView});
+    newChatAppView = new chatAppView({model: user, socketView: newSocketView});
+    newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
     Backbone.history.start();
     window.clearTimeout(loadProfileTimeout);
   }
@@ -123,8 +124,8 @@ var loadProfile = function() {
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-              newChatAppView = new chatAppView({model: user, socketView: newSocketView})
-              newRouter = new router({userModel: user, socketView: newSocketView});
+              newChatAppView = new chatAppView({model: user, socketView: newSocketView});
+              newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
               Backbone.history.start();
             });
 
@@ -140,7 +141,7 @@ var loadProfile = function() {
             newSocketView = new socketView({model: user});
             newPageNavView = new pageNavView({model: user, socketView: newSocketView});
             newChatAppView = new chatAppView({model: user, socketView: newSocketView})
-            newRouter = new router({userModel: user, socketView: newSocketView});
+            newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
             Backbone.history.start();
           }
         });

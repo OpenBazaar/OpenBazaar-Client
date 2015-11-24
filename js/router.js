@@ -18,6 +18,7 @@ module.exports = Backbone.Router.extend({
      */
     //this.socketView = new socketView({model: options.userModel});
     this.socketView = options.socketView;
+    this.chatAppView = options.chatAppView;
   },
 
   routes: {
@@ -78,7 +79,8 @@ module.exports = Backbone.Router.extend({
       userID: userID,
       state: state,
       itemHash: itemHash,
-      socketView: this.socketView
+      socketView: this.socketView,
+      chatAppView: this.chatAppView
     }));
     $('body').addClass("userPage");
   },
