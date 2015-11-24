@@ -15,12 +15,14 @@ module.exports = Backbone.View.extend({
     'click .js-newChat': 'newChat',
     'click .js-closeChat': 'closeChat',
     'click .js-closeConversation': 'closeConversation',
-    'click .js-chatSearch': 'chatSearch'
+    'click .js-chatSearch': 'chatSearch',
+    'keyup .js-chatMessage': 'sendChat'
   },
 
   initialize: function(options){
     var self = this;
     this.options = options || {};
+    this.socketView = options.socketView;
 
     // Render chat list items
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
@@ -58,7 +60,6 @@ module.exports = Backbone.View.extend({
     console.log(this.$el);
 
     loadTemplate('./js/templates/chatApp.html', function(loadedTemplate) {
-      console.log(loadedTemplate());
       self.$el.html(loadedTemplate());
     });
 
@@ -84,6 +85,41 @@ module.exports = Backbone.View.extend({
 
     this.openConversation();
 
+  },
+
+  sendChat: function(e) {
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if(code == 13) {
+      var self = this;
+      var targetForm = this.$el.find('#chatConversation');
+
+      // Chat details
+      var chat_guid = targetForm.find('#inputConversationRecipient')[0].value;
+      //var chat_handle = targetForm.find('#inputConversationHandle').value;
+      var chat_body = targetForm.find('#inputConversationMessage')[0].value;
+      var chat_subject = "test";
+      var chat_msgtype = "chat";
+      var chat_key = "163ec30a409fc9fe2c752192cea212316a29d02c9c3c85430ac90501b3987412" || document.getElementById('chat_key').value;
+
+      var socketMessageId = Math.random().toString(36).slice(2);
+
+      var chatMessage = {"request": {
+          "api" : "v1",
+          "id": socketMessageId,
+          "command" : "send_message",
+          "guid" : chat_guid,
+          "handle" : "@brian",
+          "message" : chat_body,
+          "subject" : chat_subject,
+          "message_type" : chat_msgtype,
+          "recipient_key" : "163ec30a409fc9fe2c752192cea212316a29d02c9c3c85430ac90501b3987412"
+      }};
+      console.log(this.socketView.socketConnection);
+
+      //this.socketView.socketConnection.send(JSON.stringify(chatMessage));
+      this.socketView.sendMessage(JSON.stringify(chatMessage));
+
+    }
   },
 
   openConversation: function() {

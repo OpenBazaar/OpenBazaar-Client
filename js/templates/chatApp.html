@@ -9,24 +9,25 @@
 </div>
 <hr/>
 
-
 <div class="chatConversation chatConversationHidden">
-    <div class="chatConversationHeader">
-        <div class="chatConversationLabel">New Conversation</div>
-        <div class="btn-closeConversation">
-            <a class="ion-close-round js-closeConversation"></a>
+    <form id="chatConversation">
+        <div class="chatConversationHeader">
+            <div class="chatConversationLabel">New Conversation</div>
+            <div class="btn-closeConversation">
+                <a class="ion-close-round js-closeConversation"></a>
+            </div>
         </div>
-    </div>
-    <div class="chatConversationContent"></div>
+        <div class="chatConversationContent"></div>
 
-    <div class="chatConversationTo hide">
-        <div class="chatConversationToLabel">To:</div>
-        <div class="chatConversationToInput">
-            <input type="text" name="conversation_recipient" id="inputConversationRecipient" placeholder="Enter GUID"/>
+        <div class="chatConversationTo hide">
+            <div class="chatConversationToLabel">To:</div>
+            <div class="chatConversationToInput">
+                <input type="text" name="conversation_recipient" id="inputConversationRecipient" placeholder="Enter GUID"/>
+            </div>
+            <br clear="both"/>
         </div>
-        <br clear="both"/>
-    </div>
-    <div class="chatConversationMessage">
-        <textarea name="conversation_message" id="inputConversationMessage" class="" rows="3" placeholder="<%= polyglot.t('EnterMessage') %>"></textarea>
-    </div>
+        <div class="chatConversationMessage">
+            <textarea name="conversation_message" id="inputConversationMessage" class="js-chatMessage" rows="3" placeholder="<%= polyglot.t('EnterMessage') %>"></textarea>
+        </div>
+    </form>
 </div>
