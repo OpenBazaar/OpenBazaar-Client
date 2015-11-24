@@ -47,6 +47,10 @@ module.exports = Backbone.View.extend({
       this.handleSocketMessage(response);
     });
 
+    this.listenTo(window.obEventBus, "openChat", function(guid, key) {
+      this.openChat(guid, key);
+    });
+
     this.subViews = [];
 
     this.render();
@@ -78,28 +82,31 @@ module.exports = Backbone.View.extend({
     // Decide what to do here
   },
 
+  openChat: function(guid, key) {
+    this.newChat();
+    $('#inputConversationRecipient').val(guid);
+    $('#inputConversationKey').val(key);
+    $('#inputConversationMessage').focus();
+  },
+
   newChat: function() {
     this.slideChatOut();
-
     $('.chatConversationTo').removeClass('hide');
-
     this.openConversation();
-
   },
 
   sendChat: function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
     if(code == 13) {
-      var self = this;
       var targetForm = this.$el.find('#chatConversation');
 
       // Chat details
       var chat_guid = targetForm.find('#inputConversationRecipient')[0].value;
       //var chat_handle = targetForm.find('#inputConversationHandle').value;
       var chat_body = targetForm.find('#inputConversationMessage')[0].value;
-      var chat_subject = "test";
+      var chat_subject = "";
       var chat_msgtype = "chat";
-      var chat_key = "163ec30a409fc9fe2c752192cea212316a29d02c9c3c85430ac90501b3987412" || document.getElementById('chat_key').value;
+      var chat_key = targetForm.find('#inputConversationKey')[0].value;
 
       var socketMessageId = Math.random().toString(36).slice(2);
 
@@ -108,16 +115,16 @@ module.exports = Backbone.View.extend({
           "id": socketMessageId,
           "command" : "send_message",
           "guid" : chat_guid,
-          "handle" : "@brian",
+          "handle" : "",
           "message" : chat_body,
           "subject" : chat_subject,
           "message_type" : chat_msgtype,
-          "recipient_key" : "163ec30a409fc9fe2c752192cea212316a29d02c9c3c85430ac90501b3987412"
+          "recipient_key" : chat_key
       }};
-      console.log(this.socketView.socketConnection);
 
-      //this.socketView.socketConnection.send(JSON.stringify(chatMessage));
       this.socketView.sendMessage(JSON.stringify(chatMessage));
+
+      targetForm.find('#inputConversationMessage')[0].value = "";
 
     }
   },

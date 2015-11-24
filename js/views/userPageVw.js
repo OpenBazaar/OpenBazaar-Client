@@ -952,7 +952,9 @@ module.exports = Backbone.View.extend({
 
   sendMessage: function(){
     "use strict";
-    this.chatAppView.newChat();
+    var key = this.userProfile.get('profile').encryption_key;
+    var guid = this.userProfile.get('profile').guid;
+    window.obEventBus.trigger("openChat", guid, key);
   },
 
   close: function(){
