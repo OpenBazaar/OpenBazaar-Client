@@ -2030,7 +2030,19 @@ input[type="checkbox"].fieldItem + label span {
 
 .icon-circle-background1 {
   border-radius: 50%;
-  background-color: #428a38;
+  background-color: #fff;
+  text-align: center;
+  display: inline-block;
+}
+
+.icon-huge.icon-circle-background1 {
+  width: 160px;
+  height: 160px;
+}
+
+.icon-huge.icon-circle-background1:before {
+  line-height:160px;
+  font-size:0.8em;
 }
 
 .photos-empty {
@@ -2666,6 +2678,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .txt-darkest {
   color: #000;
+}
+
+#ov1 .txt-col3 {
+  color: #428a38;
 }
 
 #ov1  .alignCenter {

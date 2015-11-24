@@ -30,8 +30,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardPayCopy': 'copyPayAddress',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
-    'blur input': 'validateInput',
-    'click .js-testBtn': 'showSummary'
+    'blur input': 'validateInput'
   },
 
   initialize: function(options){
@@ -373,7 +372,12 @@ module.exports = Backbone.View.extend({
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
     this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
     this.$el.find('.js-buyWizardPayPrice').text();
-    this.$el.find('.js-buyWizardPayURL').text(data.payment_address).parent().attr('href', payHREF);
+    this.$el.find('.js-buyWizardPayURL').text(data.payment_address);
+    this.$el.find('.js-buyWizardPayLink').attr('href', payHREF).on('click', function(e){
+      e.preventDefault();
+      var extUrl = payHREF;
+      require("shell").openExternal(extUrl);
+    });
     this.buyDetailsView.lockForm();
   },
 
@@ -416,9 +420,8 @@ module.exports = Backbone.View.extend({
 
   showSummary: function(){
     "use strict";
-    this.$el.find('.js-buyWizardDetails').addClass('hide');
-    this.$el.find('.js-buyWizardPay').addClass('hide');
-    this.$el.find('.js-buyWizardSummary').removeClass('hide');
+    this.$el.find('.js-buyWizardPay, .js-buyWizardOrderDetails').addClass('hide');
+    this.$el.find('.js-buyWizardOrderSummary').removeClass('hide');
   },
 
   blockClicks: function(e) {
