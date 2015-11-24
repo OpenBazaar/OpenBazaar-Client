@@ -30,7 +30,8 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardPayCopy': 'copyPayAddress',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
-    'blur input': 'validateInput'
+    'blur input': 'validateInput',
+    'click .js-testBtn': 'showSummary'
   },
 
   initialize: function(options){
@@ -43,7 +44,6 @@ module.exports = Backbone.View.extend({
     parentEl: this is set by itemVw, and is the element this view is rendered into
     socketView: this is a reference to the socketView
      */
-    this.socketView = options.socketView;
     this.parentEl = $(options.parentEl);
     this.hideMap = true;
 
@@ -80,12 +80,12 @@ module.exports = Backbone.View.extend({
     this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
   },
 
-  accNext: function(advanceTo){
+  accNext: function(advanceBy){
     "use strict";
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        moveBy = advanceTo ? this.accWidth * advanceTo - oldPos : this.accWidth;
-    advanceTo = advanceTo || 1;
+        moveBy = advanceBy ? this.accWidth * advanceBy : this.accWidth;
+
     if(oldPos > (this.accWidth * (this.accNum -1) * -1)){
       this.accWin.css('left', function(){
         return oldPos - moveBy;
@@ -95,12 +95,13 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  accPrev: function(rewindTo){
+  accPrev: function(rewindBy){
     "use strict";
+    console.log(rewindBy);
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        moveBy = rewindTo ? oldPos - this.accWidth * rewindTo : this.accWidth;
-    rewindTo = rewindTo || 1;
+        moveBy = rewindBy ? this.accWidth * rewindBy : this.accWidth;
+
     if(oldPos < (0)){
       this.accWin.css('left', function(){
         return oldPos + moveBy;
@@ -130,7 +131,7 @@ module.exports = Backbone.View.extend({
       self.buyAddressesView.render(0);
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
-      self.$el.find('.js-buyWizardDetails').append(self.buyDetailsView.el);
+      self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
       //set the initial total price
       self.setTotalPrice();
     });
@@ -309,16 +310,20 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         formData = new FormData(),
-        moderatorID = this.model.get('selectedModerator').guid;
+        moderatorID = this.model.get('selectedModerator').guid,
+        selectedAddress = this.model.get('selectedAddress');
 
     formData.append("id", this.model.get('id'));
     formData.append("quantity", this.$el.find('.js-buyWizardQuantity').val());
-    formData.append("ship_to", this.model.get('selectedAddress').name);
-    formData.append("address", this.model.get('selectedAddress').street);
-    formData.append("city", this.model.get('selectedAddress').city);
-    formData.append("state", this.model.get('selectedAddress').state);
-    formData.append("postal_code", this.model.get('selectedAddress').postal_code);
-    formData.append("country", this.model.get('selectedAddress').country);
+    if(selectedAddress){
+      formData.append("ship_to", selectedAddress.name);
+      formData.append("address", selectedAddress.street);
+      formData.append("city", selectedAddress.city);
+      formData.append("state", selectedAddress.state);
+      formData.append("postal_code", selectedAddress.postal_code);
+      formData.append("country", selectedAddress.country);
+    }
+
     if(moderatorID){
       formData.append("moderator", moderatorID);
     }
@@ -331,8 +336,6 @@ module.exports = Backbone.View.extend({
       data: formData,
       dataType: 'json',
       success: function(data){
-        console.log(data);
-        console.log(data.success);
         if(data.success == true){
           self.showPayAddress(data);
         } else {
@@ -350,21 +353,27 @@ module.exports = Backbone.View.extend({
 
   showPayAddress: function(data){
     "use strict";
-    //TODO is this domestic or international?
-    var totalBTCPrice = this.model.get('vendorBTCPrice') + this.model.get('domesticShippingBTC') + this.model.get('internationalShippingBTC') * this.model.get('quantity');
-    var storeName = encodeURI(this.model.get('page').profile.name);
-    var message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id);
-    this.payURL = data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
-    var payHREF = "bitcoin:"+ this.payURL;
-    var dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
-    this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
-    this.$el.find('.js-buyWizardPayPrice').text();
-    this.$el.find('.js-buyWizardPayURL').text(data.payment_address).attr('href', payHREF);
-    console.log(payHREF);
+    var totalBTCPrice = 0,
+        storeName = encodeURI(this.model.get('page').profile.name),
+        message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id),
+        payHREF = "",
+        dataURI;
+    console.log(this.model);
+    if(this.model.get('shippingType') == "domestic"){
+      totalBTCPrice = (this.model.get('vendorBTCPrice') + this.model.get('domesticShippingBTC')) * this.model.get('quantity');
+    } else {
+      totalBTCPrice = (this.model.get('vendorBTCPrice') + this.model.get('internationalShippingBTC')) * this.model.get('quantity');
+    }
+    this.payURL = data.payment_address;
+    payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
     this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
     this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
+    dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
+    this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
+    this.$el.find('.js-buyWizardPayPrice').text();
+    this.$el.find('.js-buyWizardPayURL').text(data.payment_address).parent().attr('href', payHREF);
     this.buyDetailsView.lockForm();
   },
 
@@ -395,10 +404,21 @@ module.exports = Backbone.View.extend({
   backPurchase: function(){
     "use strict";
     this.hidePayAddress();
-    this.accPrev();
+    if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
+      this.accPrev();
+    } else {
+      this.accPrev(2);
+    }
     this.buyDetailsView.render();
     this.$el.find('.js-buyWizardSendPurchase').removeClass('hide');
     this.$el.find('.js-buyWizardPendingMsg').addClass('hide');
+  },
+
+  showSummary: function(){
+    "use strict";
+    this.$el.find('.js-buyWizardDetails').addClass('hide');
+    this.$el.find('.js-buyWizardPay').addClass('hide');
+    this.$el.find('.js-buyWizardSummary').removeClass('hide');
   },
 
   blockClicks: function(e) {

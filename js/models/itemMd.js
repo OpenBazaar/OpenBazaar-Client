@@ -14,6 +14,7 @@ module.exports = window.Backbone.Model.extend({
     displayInternationalShipping: 0, //set below
     internationalShippingBTC: 0, //set below
     quantity: 1, //set in order process
+    totalPrice: 0, //set in order process
     userCurrencyCode: "", //set by userPage View. This is for editing the product
     userCountry: "", //set by userPage View. This is a country code. This is used for editing.
     ownPage: false, //set by userPage View

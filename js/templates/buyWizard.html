@@ -14,17 +14,24 @@
         </iframe>
       </div>
       <div class="js-buyWizardMap positionTop"></div>
-      <div class="modal-hero js-buyWizardPay hide background1">
-        <div class="positionTop width100 rowTop10">
-          <div class="txt-center row10">Send <span class="js-buyWizardDetailsTotal"></span> to</div>
+      <div class="modal-hero modal-heroFullHeight js-buyWizardPay hide background1">
+        <div class="positionTop width100 rowTop20">
+          <div class="txt-center row20">Send <span class="js-buyWizardDetailsTotal"></span> to</div>
+          <div class="txt-center row20">
+            <img class="js-buyWizardPayQRCode" height="400" width="400" src="imgs/defaultItem.png"/>
+          </div>
           <div class="txt-center row10">
-            <img class="js-buyWizardPayQRCode" width="180px" height="180px" src="imgs/defaultItem.png"/>
+            <a class="js-externalLink"><span class="js-buyWizardPayURL"></span> <i class="ion-link"></i></a>
+            <a class="js-testBtn">Sum</a>
           </div>
           <div class="txt-center">
-            <a class="js-externalLink"><span class="js-buyWizardPayURL"></span> <i class="ion-link"></i></a>
-            <a class="btn btn-txt js-buyWizardPayCopy">Copy to Clipboard</a>
+            <a class="js-buyWizardPayCopy">Copy Pay Address to Clipboard <i class="ion-clipboard"></i></a>
           </div>
         </div>
+      </div>
+      <div class="modal-herojs-buyWizardOrderSummary background1 hide">
+        <div class="ion-checkmark-circled icon-centered icon-huge icon-circle-background1"></div>
+        <div>Payment Sent!</div>
       </div>
     </div>
     <div class="homeModal-accordion accordion js-buyWizardAccordion">
@@ -178,36 +185,20 @@
         </div>
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <%= polyglot.t('OrderDetails') %> <div class="pull-right">Total: <span class="js-buyWizardDetailsTotal"></span> </div>
+            <div class="js-buyWizardDetails">
+              <%= polyglot.t('OrderDetails') %> <div class="pull-right">Total: <span class="js-buyWizardDetailsTotal"></span> </div>
+            </div>
+            <div class="js-buyWizardOrderSummary hide">
+              <%= polyglot.t('OrderSummary') %>
+            </div>
           </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch js-buyWizardDetails scrollOverflow custCol-primary">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch js-buyWizardInsertDetails scrollOverflow custCol-primary">
           <!--inser details view-->
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-buyWizardPurchaseBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
             <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
             <span class="btn btn-bar btn-half disabled js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
-          </div>
-        </div>
-        <div class="accordion-child">
-          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <%= polyglot.t('OrderSummary') %>
-          </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
-            <div class="flexRow">
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-12">
-                  <div class="fieldItem">
-                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
-                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('FinalizePurchase') %></a>
           </div>
         </div>
       </div>

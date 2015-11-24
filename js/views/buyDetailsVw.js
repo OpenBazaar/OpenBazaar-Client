@@ -13,11 +13,14 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     "use strict";
     var currentShippingPrice = 0;
-    if(this.model.get('userCountry') != this.model.get('vendor_offer').listing.shipping.shipping_origin &&
-       this.model.get('vendor_offer').listing.shipping.free !== true) {
-      currentShippingPrice = this.model.get('internationalShipping');
-    } else if(this.model.get('vendor_offer').listing.shipping.free !== true) {
-      currentShippingPrice = this.model.get('domesticShipping');
+    if(this.model.get('vendor_offer').listing.shipping.free !== true) {
+      if(this.model.get('userCountry') != this.model.get('vendor_offer').listing.shipping.shipping_origin) {
+        currentShippingPrice = this.model.get('internationalShipping');
+        this.model.set('shippingType', 'international');
+      } else {
+        currentShippingPrice = this.model.get('domesticShipping');
+        this.model.set('shippingType', 'domestic');
+      }
     }
 
     this.model.set('currentShippingPrice', currentShippingPrice);

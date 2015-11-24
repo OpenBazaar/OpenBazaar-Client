@@ -865,6 +865,11 @@ h5 {
   width: 135px;
 }
 
+.modal-hero.modal-heroFullHeight {
+  height: 573px;
+  z-index: 1;
+}
+
 .background1 {
   background: linear-gradient(to bottom, rgba(72,78,93,1), rgba(23,24,31,1) 75%, rgba(0,0,0,1) 100%);
 }
@@ -2011,12 +2016,21 @@ input[type="checkbox"].fieldItem + label span {
   z-index: 5;
 }
 
+.icon-huge {
+  font-size: 160px;
+}
+
 .icon-large {
   font-size: 32px;
 }
 
 .icon-small {
   font-size: 11px;
+}
+
+.icon-circle-background1 {
+  border-radius: 50%;
+  background-color: #428a38;
 }
 
 .photos-empty {
