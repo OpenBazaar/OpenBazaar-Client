@@ -7,7 +7,8 @@ var __ = require('underscore'),
     buyAddressesVw = require('./buyAddressesVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
     chosen = require('../utils/chosen.jquery.min.js'),
-    qr = require('qr-encode');
+    qr = require('qr-encode'),
+    clipboard = require('clipboard');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
@@ -25,6 +26,8 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
+    'click .js-buyWizardPurchaseBack': 'backPurchase',
+    'click .js-buyWizardPayCopy': 'copyPayAddress',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'blur input': 'validateInput'
@@ -38,7 +41,9 @@ module.exports = Backbone.View.extend({
     /* expected options are:
     userModel: this is set by app.js, then by a call to the settings API.
     parentEl: this is set by itemVw, and is the element this view is rendered into
+    socketView: this is a reference to the socketView
      */
+    this.socketView = options.socketView;
     this.parentEl = $(options.parentEl);
     this.hideMap = true;
 
@@ -49,8 +54,18 @@ module.exports = Backbone.View.extend({
       self.countriesSelect.append('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
     });
     console.log(this.model);
-    this.listenTo(this.model, 'change:quantity', this.setTotalPrice);
+    this.listenTo(this.model, 'change:totalPrice', this.setTotalPrice);
+    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      this.handleSocketMessage(response);
+    });
     this.render();
+  },
+
+  handleSocketMessage: function(response) {
+    "use strict";
+    var data = JSON.parse(response.data);
+    console.log(data);
+    //look for message type "payment received" and orderID
   },
 
   initAccordion: function(targ){
@@ -70,7 +85,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
         moveBy = advanceTo ? this.accWidth * advanceTo - oldPos : this.accWidth;
-
+    advanceTo = advanceTo || 1;
     if(oldPos > (this.accWidth * (this.accNum -1) * -1)){
       this.accWin.css('left', function(){
         return oldPos - moveBy;
@@ -85,6 +100,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
         moveBy = rewindTo ? oldPos - this.accWidth * rewindTo : this.accWidth;
+    rewindTo = rewindTo || 1;
     if(oldPos < (0)){
       this.accWin.css('left', function(){
         return oldPos + moveBy;
@@ -115,6 +131,8 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardDetails').append(self.buyDetailsView.el);
+      //set the initial total price
+      self.setTotalPrice();
     });
 
     return this;
@@ -336,22 +354,51 @@ module.exports = Backbone.View.extend({
     var totalBTCPrice = this.model.get('vendorBTCPrice') + this.model.get('domesticShippingBTC') + this.model.get('internationalShippingBTC') * this.model.get('quantity');
     var storeName = encodeURI(this.model.get('page').profile.name);
     var message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id);
-    var payURL = "bitcoin:"+data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
-    var dataURI = qr(payURL, {type: 10, size: 10, level: 'M'});
+    this.payURL = data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
+    var payHREF = "bitcoin:"+ this.payURL;
+    var dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
     this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
     this.$el.find('.js-buyWizardPayPrice').text();
-    this.$el.find('.js-buyWizardPayURL').text(data.payment_address).attr('href', payURL);
-    console.log(payURL);
+    this.$el.find('.js-buyWizardPayURL').text(data.payment_address).attr('href', payHREF);
+    console.log(payHREF);
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
     this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
     this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
+    this.buyDetailsView.lockForm();
+  },
+
+  hidePayAddress: function(){
+    "use strict";
+    this.$el.find('.js-buyWizardPay').addClass('hide');
   },
 
   setTotalPrice: function(){
     "use strict";
-    var totalBTCPrice = this.model.get('price') + this.model.get('domesticShippingBTC') + this.model.get('internationalShippingBTC') * this.model.get('quantity');
+    var totalPrice = this.model.get('totalPrice'),
+        userCurrency = this.model.get('userCurrencyCode'),
+        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
+          style: 'currency',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+          currency: userCurrency
+        }).format(totalPrice);
+    this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
+  },
 
+  copyPayAddress: function(){
+    "use strict";
+    clipboard.writeText(this.payURL);
+    console.log(clipboard.readText('selection'));
+  },
+
+  backPurchase: function(){
+    "use strict";
+    this.hidePayAddress();
+    this.accPrev();
+    this.buyDetailsView.render();
+    this.$el.find('.js-buyWizardSendPurchase').removeClass('hide');
+    this.$el.find('.js-buyWizardPendingMsg').addClass('hide');
   },
 
   blockClicks: function(e) {

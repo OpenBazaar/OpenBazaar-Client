@@ -53,35 +53,43 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         userCurrency = this.model.get('userCurrencyCode'),
-        totalPrice = this.model.get('price') * quantity,
-        //totalBTCPRice = this.model.get()
+        totalItemPrice = this.model.get('price') * quantity,
+        totalShipping = this.model.get('currentShippingPrice') * quantity,
+        totalPrice = totalItemPrice + totalShipping,
         moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") : 0,
-        moderatorPrice = moderatorPercentage ? totalPrice / moderatorPercentage : 0,
-        minDigits = (userCurrency == "BTC") ? 6 : 2,
-        newDisplayPrice = new Intl.NumberFormat(window.lang, {
+        moderatorPrice = moderatorPercentage ? totalItemPrice / moderatorPercentage : 0,
+        moderatorTotal = moderatorPrice * quantity,
+        newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
-          minimumFractionDigits: minDigits,
-          maximumFractionDigits: minDigits,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
           currency: userCurrency
-        }).format(totalPrice),
-        newDisplayShippingPrice = new Intl.NumberFormat(window.lang, {
+        }).format(totalItemPrice),
+        newDisplayShippingPrice = (userCurrency == "BTC") ? totalShipping.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
-          minimumFractionDigits: minDigits,
-          maximumFractionDigits: minDigits,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
           currency: userCurrency
-        }).format(this.model.get('currentShippingPrice') * quantity),
-        newDisplayModeratorPrice = new Intl.NumberFormat(window.lang, {
+        }).format(totalShipping),
+        newDisplayModeratorPrice = (userCurrency == "BTC") ? moderatorTotal.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
-          minimumFractionDigits: minDigits,
-          maximumFractionDigits: minDigits,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
           currency: userCurrency
-        }).format(moderatorPrice);
+        }).format(moderatorTotal);
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
     this.$el.find('.js-buyWizardModeratorPrice').html(newDisplayModeratorPrice);
+    this.$el.find('.js-buyWizardQuantityDisplay').text(quantity);
     this.model.set('quantity', quantity);
-    //this.model.set('selectedPrice', )
+    this.model.set('totalPrice', totalPrice);
+  },
+
+  lockForm: function(){
+    "use strict";
+    this.$el.find('.js-buyWizardQuantity').addClass('hide');
+    this.$el.find('.js-buyWizardQuantityDisplay').removeClass('hide');
   },
 
   close: function(){

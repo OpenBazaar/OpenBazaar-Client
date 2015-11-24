@@ -14,13 +14,16 @@
         </iframe>
       </div>
       <div class="js-buyWizardMap positionTop"></div>
-      <div class="js-buyWizardPay positionTop hCentered rowTop10 hide">
-        <div class="txt-center">Send <span class="js-buyWizardPayPrice"></span> to</div>
-        <div class="txt-center">
-          <img class="js-buyWizardPayQRCode" width="200px" height="200px" src="imgs/defaultItem.png"/>
-        </div>
-        <div class="txt-center">
-          <a class="js-buyWizardPayURL"><i class="ion-link"></i></a>
+      <div class="modal-hero js-buyWizardPay hide background1">
+        <div class="positionTop width100 rowTop10">
+          <div class="txt-center row10">Send <span class="js-buyWizardDetailsTotal"></span> to</div>
+          <div class="txt-center row10">
+            <img class="js-buyWizardPayQRCode" width="180px" height="180px" src="imgs/defaultItem.png"/>
+          </div>
+          <div class="txt-center">
+            <a class="js-externalLink"><span class="js-buyWizardPayURL"></span> <i class="ion-link"></i></a>
+            <a class="btn btn-txt js-buyWizardPayCopy">Copy to Clipboard</a>
+          </div>
         </div>
       </div>
     </div>
@@ -181,9 +184,9 @@
           <!--inser details view-->
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-buyWizardPurchaseBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
             <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
-            <span class="btn btn-bar btn-half js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
+            <span class="btn btn-bar btn-half disabled js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
           </div>
         </div>
         <div class="accordion-child">

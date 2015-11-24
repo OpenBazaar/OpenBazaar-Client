@@ -547,7 +547,7 @@ module.exports = Backbone.View.extend({
       this.itemView.undelegateEvents();
       //this.itemView.remove();
     }
-    this.itemView = new itemVw({model:this.item, el: '.js-list4', userModel: self.options.userModel});
+    this.itemView = new itemVw({model:this.item, el: '.js-list4', userModel: self.options.userModel, socketView: this.socketView});
     this.subViews.push(this.itemView);
     //set the parameters for the fetch
     if(this.options.ownPage === true){
