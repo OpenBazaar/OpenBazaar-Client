@@ -503,10 +503,6 @@ form {
   margin-top: 241px;
 }
 
-
-
-
-
 .pad10 {
   padding-left: 10px;
   padding-right: 10px;
@@ -749,17 +745,6 @@ h5 {
 
 /*========== skin classes ==========*/
 
-#userPageImageUpload {
-  background: transparent !important;
-  opacity: 1;
-  font-size: 24px;
-  margin-top: 20px;
-}
-
-#userPageImageUpload:hover {
-  text-decoration: underline !important;
-}
-
 .navBar {
   background-color: #327EB8;
 }
@@ -814,13 +799,9 @@ h5 {
   z-index: 1;
 }
 
-
-
 .settingsBar .title-section {
   padding-left: 102px;
 }
-
-
 
 .settingsBar .thumbnail {
   background-size: cover;
@@ -834,8 +815,6 @@ h5 {
   width: 58px;
   z-index: 2;
 }
-
-
 
 .user-customize-cover-photo {
   width: 950px;
@@ -1030,7 +1009,6 @@ h5 {
 }
 
 .mainSearchWrapper .txtField:focus {
-
   border: solid 1px #086A9E;
   outline: none;
   text-indent: 25px;
@@ -1214,15 +1192,6 @@ input[type="text"].txtField-bar {
 .btn.btn-bar:hover {
   opacity: .75;
 }
-
-
-
-
-
-
-
-
-
 
 .btn.btn-bar.btn-tab {
   background: #327EB8;
@@ -1517,10 +1486,8 @@ input[type="number"].fieldItem:focus,
 input[type="email"].fieldItem:focus,
 input[type="url"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
-
   outline: 1px solid rgba(255,255,255,0.35);
   transition: border 0.3s;
-
 }
 
 /* add formChecked class after form has been checked for validity */
@@ -2087,7 +2054,7 @@ input[type="checkbox"].fieldItem + label span {
   padding: 0;
 }
 
-#userPage-subViews {
+.userPage-subViews {
   position: relative;
   z-index: 5;
 }
@@ -2379,7 +2346,6 @@ input[type="checkbox"].fieldItem + label span {
   padding: 6px;
   width: 148px;
   z-index: 2;
-
 }
 
 .selectPill:before {
@@ -2518,7 +2484,6 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 #ov1 .positionBottom {
-
   position: absolute;
   bottom: 0;
 }
@@ -3106,7 +3071,6 @@ input[type="checkbox"].fieldItem + label span {
   color:white;
   background-opacity: .75;
   background-color: #FFA41C;
-
   /* don't put a border on this or it will be visible when it has no content */
 }
 

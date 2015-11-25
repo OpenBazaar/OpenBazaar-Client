@@ -118,7 +118,6 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    //'change .js-userPageImageUpload': 'uploadUserPageImage',
     'click .js-customizeColor': 'customizeColorClick',
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUser',
@@ -619,7 +618,7 @@ module.exports = Backbone.View.extend({
     this.customizing = true;
     this.setControls('customize');
     $('.user-page-content').addClass('pull-up4');
-    $('.user-customize-cover-photo').show();
+    //$('.user-customize-cover-photo').show();
     $('.user-page-header').addClass('shadow-inner1-strong');
     $('#obContainer').animate({ scrollTop: "0" });
   },
