@@ -23,8 +23,16 @@ module.exports = Backbone.View.extend({
     'click .js-storeTab': 'storeClick',
     'click .js-blockedTab': 'blockedClick',
     'click .js-advancedTab': 'advancedClick',
-    'click .js-cancelSettings': 'cancelClick',
-    'click .js-saveSettings': 'saveClick',
+    'click .js-cancelSettings': 'cancelSettings',
+    'click .js-saveSettings': 'saveSettings',
+    'click .js-cancelProfile': 'cancelProfile',
+    'click .js-saveProfile': 'saveProfile',
+    'click .js-cancelAddress': 'cancelAddress',
+    'click .js-saveAddress': 'saveAddress',
+    'click .js-cancelStore': 'cancelStore',
+    'click .js-saveStore': 'saveStore',
+    'click .js-cancelAdvanced': 'cancelAdvanced',
+    'click .js-saveAdvanced': 'saveAdvanced',
     'change .js-settingsThemeSelection' : 'themeClick',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
@@ -210,7 +218,7 @@ module.exports = Backbone.View.extend({
     $('#content').find('input:visible:first').focus();
   },
 
-  cancelClick: function(e){
+  cancelSettings: function(e){
     Backbone.history.loadUrl();
   },
 
@@ -225,7 +233,7 @@ module.exports = Backbone.View.extend({
     $('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
   },
 
-  saveClick: function(e){
+  saveSettings: function(e){
         var self = this,
             server = self.options.userModel.get('serverUrl'),
             settings_form = this.$el.find("#settingsForm"),
