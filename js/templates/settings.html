@@ -241,14 +241,13 @@
                   <label for="settingsAvatarInput"><%= polyglot.t('Avatar') %></label>
                 </div>
               </div>
-
               <div class="flexCol-9 custCol-border-secondary">
-                <div id="image-cropper" class="positionWrapper">
+                <div id="settings-image-cropper" class="positionWrapper">
                   <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
                     <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
                   </div>
-                  <div class="cropit-image-preview rowTop20 thumbnail thumbnail-large box-border pull-left row20 marginLeft12 custCol-border-secondary"></div>
-                  <div class="hide">
+                  <div class="cropit-image-preview js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
+                  <div>
                     <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12" />
                   </div>
                   <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
@@ -392,7 +391,7 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="standard_themes"><%= polyglot.t('Standard themes') %></label>
+                  <label><%= polyglot.t('Standard themes') %></label>
                 </div>
               </div>
 
@@ -489,7 +488,7 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="cover_photo"><%= polyglot.t('CoverPhoto') %></label>
+                  <label><%= polyglot.t('CoverPhoto') %></label>
                 </div>
               </div>
 
@@ -589,7 +588,7 @@
                      class="fieldItem js-settingsAddress"
                      id="settingsAddress<%- i %>"
                      value="<%- i %>"> -->
-                  <div class="btn btn-txt marginTop6 custCol-primary clickable"><label class="fontSize12 clickable" for="settingsAddress<%- i %>"><%= polyglot.t('Delete') %></label></div>
+                  <div class="btn btn-txt marginTop6 custCol-primary clickable"><label class="fontSize12 clickable"><%= polyglot.t('Delete') %></label></div>
                 </div>
               </div>
               <% }); %>
@@ -735,7 +734,7 @@
             <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="store_active">
+                  <label>
                     <%= polyglot.t('Visibility') %>
                   </label>
                 </div>
@@ -752,7 +751,7 @@
             <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="store-nsfw">
+                  <label>
                     <%= polyglot.t('NSFW') %>
                   </label>
                 </div>
@@ -769,7 +768,7 @@
             <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="moderators">
+                  <label> <!--for="moderators"-->
                     <%= polyglot.t('Moderators') %>
                   </label>
                 </div>
@@ -777,6 +776,7 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
+                  <!--TODO: moderators input here-->
                 </div>
               </div>
             </div>
@@ -792,6 +792,7 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
+                  <!--TODO: keywords input here -->
                 </div>
               </div>
             </div>

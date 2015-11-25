@@ -9,7 +9,10 @@ var __ = require('underscore'),
     languageListView = require('../views/languageListVw'),
     adminPanelView = require('../views/adminPanelVw'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
-    remote = require('remote');
+    remote = require('remote'),
+    cropit = require('../utils/jquery.cropit'),
+    showErrorModal = require('../utils/showErrorModal.js');
+
 
 module.exports = Backbone.View.extend({
 
@@ -33,7 +36,7 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-newHandle': 'newHandle',
     'click .js-homeModal-existingHandle': 'existingHandle',
     'click .js-homeModal-cancelHandle': 'cancelHandle',
-    'change .js-homeModalAvatarUpload': 'uploadAvatar',
+    //'change .js-homeModalAvatarUpload': 'uploadAvatar',
     'click .js-homeModalDone': 'settingsDone',
     'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
@@ -67,6 +70,10 @@ module.exports = Backbone.View.extend({
     this.socketNotificationID = Math.random().toString(36).slice(2);
     this.socketView.getNotifications(this.socketNotificationID);
 
+    this.listenTo(window.obEventBus, "countryListRendered", function(){this.accordionReady("country")});
+    this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency")});
+    this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language")});
+
     this.render();
   },
 
@@ -75,6 +82,26 @@ module.exports = Backbone.View.extend({
     var data = JSON.parse(response.data);
     if(data.id == this.socketNotificationID){
       console.log(data);
+    }
+  },
+
+  accordionReady: function(listReady) {
+    "use strict";
+    if(listReady == "country") {
+      this.countryReady = true;
+    } else if(listReady == "currency") {
+      this.currencyReady = true;
+    } else if(listReady == "language") {
+      this.languageReady = true;
+    }
+    if(this.countryReady && this.currencyReady && this.languageReady){
+      //set up filterable lists.
+      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
+      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
+      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
+      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
+      this.initAccordion('.js-profileAccordion');
+      //console.log(currencyList.items);
     }
   },
 
@@ -109,15 +136,6 @@ module.exports = Backbone.View.extend({
       // focus search input
        $(this).closest('.accordion-child').prev('.accordion-child').find('input:visible:first').focus();
     });
-    //set up filterable lists.
-    //TODO: this is terrible, change to run when an event is emmitted from the subviews marking them as done rendering
-    setTimeout(function(){
-      var List = window.List;
-      var countryList = new List('homeModal-countryList', {valueNames: ['homeModal-country']});
-      var currencyList = new List('homeModal-currencyList', {valueNames: ['homeModal-currency']});
-      var timeList = new List('homeModal-timeList', {valueNames: ['homeModal-time']});
-      var languageList = new List('homeModal-languageList', {valueNames: ['homeModal-language']});
-    }, 1000);
   },
 
   closeNav: function(){
@@ -130,6 +148,10 @@ module.exports = Backbone.View.extend({
   render: function(){
     "use strict";
     var self = this;
+    //reset tests for applying lists or List.js will fail on a re-render
+    this.countryReady = false;
+    this.currencyReady = false;
+    this.languageReady = false;
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
@@ -138,9 +160,8 @@ module.exports = Backbone.View.extend({
       self.subViews.push(self.countryList);
       self.subViews.push(self.currencyList);
       self.subViews.push(self.languageList);
-      self.initAccordion('.js-profileAccordion');
-      if(self.model.get('beenSet')){
-        self.$el.find('.js-homeModal').hide();
+      if(localStorage.getItem("onboardingComplete") === "true") {
+      self.$el.find('.js-homeModal').hide();
       }
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
@@ -149,6 +170,7 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
+      self.$el.find('#image-cropper').cropit();
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
@@ -363,21 +385,147 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-homeModal-cancelHandle').parent().addClass('hide');
   },
 
-  uploadAvatar: function(e){
-    "use strict";
-    var self = this;
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      self.$el.find('.js-avatarPreview').css('background', 'url(' + e.target.result + ') 50% 50% / cover no-repeat');
-      //self.model.set('tempAvatar', e.target.result);
-      //TODO: add canvas resizing here
-    };
-    reader.readAsDataURL($(e.target)[0].files[0]);
-  },
-
   settingsDone: function(e){
     "use strict";
-    this.model.set('beenSet',true);
+
+    var self = this,
+        server = this.model.get('serverUrl'),
+        profileFormData = new FormData(),
+        settingsFormData = new FormData(),
+        uploadImageFormData = new FormData();
+
+    localStorage.setItem("onboardingComplete", "true");
+
+    if($('textarea#aboutInput').val() != ""){
+        self.model.set('about', $('textarea#aboutInput').val());
+    }
+
+    if($('#storeHandleInput').val() != "" && /^@/.test($('#storeHandleInput').val()) ){
+        self.model.set('handle', $('#storeHandleInput').val());
+    }
+
+    if($('#storeNameInput').val() != ""){
+        self.model.set('name', $('#storeNameInput').val());
+    }else if (self.model.get('name') == undefined){
+        //otherwise error since the profile api needs the name parameter and as of now it is not set in the userMd.js
+        self.model.set('name', "ob" + Math.random().toString(36).slice(2));
+    }
+
+
+    var themeId = $('input[name=theme-selection]:checked').attr('id');
+    if(themeId){
+
+        var primaryColor =  parseInt($($("label[for='"+themeId+"']")[0]).data('primary-color').replace("#","0x"));
+        var secondaryColor =   parseInt($($("label[for='"+themeId+"']")[0]).data('secondary-color').replace("#","0x"));
+        var backgroundColor =  parseInt($($("label[for='"+themeId+"']")[0]).data('background-color').replace("#","0x"));
+        var textColor =   parseInt($($("label[for='"+themeId+"']")[0]).data('text-color').replace("#","0x"));
+        var header = $($("label[for='"+themeId+"']")[0]).data('header');
+
+
+        self.model.set('primary_color', primaryColor);
+        self.model.set('secondary_color', secondaryColor);
+        self.model.set('text_color', backgroundColor);
+        self.model.set('background_color', textColor);
+        //TODO upload Image header
+        //From profile api : header= the hash of the header image. must have been previously uploaded using the upload_image api call. (40 character hex string)
+        //self.model.set('header', header);
+
+    }
+
+    $.each(this.model.attributes,
+            function(i,el) {
+                if(i == "country") {
+                    profileFormData.append("location",el);
+                }
+                if(i == "name" || i == "handle" || i =="about"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+                    profileFormData.append(i,""+el);
+                } else {
+                    settingsFormData.append(i,el);
+                }
+            }
+        );
+
+    var imageURI = $('#image-cropper').cropit('export', {
+      type: 'image/jpeg',
+      quality: 0.75,
+      originalSize: false
+    });
+    if(imageURI) {
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+      uploadImageFormData.append('image', imageURI);
+    }
+
+
+   var submit = function(img_hash) {
+            if(img_hash) {
+                profileFormData.append("avatar",img_hash);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: server + "settings",
+                contentType: false,
+                processData: false,
+                data: settingsFormData,
+                dataType: "json",
+                success: function(data) {
+                    if(data.success) {
+                        $.ajax({
+                            type: "POST",
+                            url: server + "profile",
+                            contentType: false,
+                            processData: false,
+                            data: profileFormData,
+                            dataType: "json",
+                            success: function(data) {
+                                 if(data.success == true) {
+                                   self.currentWindow.reload();
+                                 }
+                            },
+                            error: function(jqXHR, status, errorThrown){
+                                console.log(jqXHR);
+                                console.log(status);
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
+                },
+                error: function(jqXHR, status, errorThrown){
+                    console.log(jqXHR);
+                    console.log(status);
+                    console.log(errorThrown);
+                }
+            });
+
+        };
+
+        //Lets upload the image first, if there is one
+        //to get the hash
+
+        if(imageURI) {
+            $.ajax({
+                type: "POST",
+                url: server + "upload_image",
+                contentType: false,
+                processData: false,
+                data: uploadImageFormData,
+                dataType: "JSON",
+                success: function(data) {
+                     var img_hash = data.image_hashes[0];
+                    if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
+                        submit(img_hash);
+                    }
+                },
+                error: function(jqXHR, status, errorThrown){
+                    console.log(jqXHR);
+                    console.log(status);
+                    console.log(errorThrown);
+                }
+            });
+
+        } else { //Otherwise lets just submit right away
+            submit();
+        }
     this.$el.find('.js-homeModal').hide();
     
     // Start application walkthrough (coming soon once I have better designs)
