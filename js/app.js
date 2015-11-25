@@ -17,6 +17,7 @@ var Polyglot = require('node-polyglot'),
     languagesModel = require('./models/languagesMd'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
+    setTheme = require('./utils/setTheme.js'),
     pageNavView = require('./views/pageNavVw'),
     newPageNavView,
     newSocketView,
@@ -106,8 +107,9 @@ var loadProfile = function() {
       "use strict";
       //make sure profile is not blank
       if (response.profile){
-        guid = model.get('profile').guid;
-        avatar_hash = model.get('profile').avatar_hash;
+        guid = response.profile.guid;
+        avatar_hash = response.profile.avatar_hash;
+        setTheme(response.profile.primary_color, response.profile.secondary_color, response.profile.text_color, response.profile.background_color);
         //get the user
         user.fetch({
           success: function (model, response) {

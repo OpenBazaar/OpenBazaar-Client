@@ -97,7 +97,6 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     $('#content').html(this.$el);
-    $('#customStyle').remove();
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       if(self.model.get('page').profile.vendor == true) {

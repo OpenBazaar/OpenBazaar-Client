@@ -16,24 +16,6 @@
     </div>
   </div>
 
-<!--   <div class="user-page-content">
-    <div class="flexRow user-page-header-slim custCol-border-background shadow-inner1-ultra-light">
-      <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail pull-left js-userPageAvatar"
-             <% if(ob.page.profile.avatar_hash) { %>
-             style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
-             <% } else { %>
-             style="background-image: url(imgs/defaultUser.png);">
-             <% } %>
-        </div>
-      </div>
-      <div class="pull-left">
-        <div class="vCentered marginLeft88">
-          <h1 class="fancy-heading colorWhiteForce fontSize20"><%= polyglot.t('Settings') %></h1>
-      </div>
-    </div>
-  </div> -->
-
   <div class="bar navBar barFlush custCol-secondary clearFix">
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-generalTab active"><%= polyglot.t('General') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-pageTab"><%= polyglot.t('Page') %></a>
@@ -154,10 +136,10 @@
               </div>
             </div>
 
-            <div class="flexRow">
+            <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="display_nsfw_content">
+                  <label>
                     <%= polyglot.t('Display NSFW content?') %>
                   </label>
                 </div>
@@ -176,6 +158,8 @@
             <a class="btn btn-large js-cancelSettings custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
 
           </div>
+        </form>
+        <form class="width100" name="profileForm" id="profileForm">
 
           <div class="flexCol-12 flex-border js-tabTarg js-page hide">
             <div class="flexRow borderBottom custCol-border-secondary">
@@ -232,6 +216,23 @@
                        placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"
                        class="fieldItem"
                        value="<%= ob.page.profile.about %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('NSFW') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0 marginLeft6">
+                  <input type="radio" class="fieldItem" id="store_nsfw_yes" name="store-nsfw" value="true" /><label for="store_nsfw_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="store_nsfw_no" name="store-nsfw" value="false" checked /><label for="store_nsfw_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                </div>
               </div>
             </div>
 
@@ -731,7 +732,7 @@
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Basic') %></h3>
             </div>
 
-            <div class="flexRow">
+            <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label>
@@ -748,24 +749,7 @@
               </div>
             </div>
 
-            <div class="flexRow">
-              <div class="flexCol-3  borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label>
-                    <%= polyglot.t('NSFW') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0 marginLeft6">
-                  <input type="radio" class="fieldItem" id="store_nsfw_yes" name="store-nsfw" value="true" /><label for="store_nsfw_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                  <input type="radio" class="fieldItem" id="store_nsfw_no" name="store-nsfw" value="false" checked /><label for="store_nsfw_no" class="radioLabel"><%= polyglot.t('No') %></label>
-                </div>
-              </div>
-            </div>
-
-            <div class="flexRow">
+            <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label> <!--for="moderators"-->
@@ -781,7 +765,7 @@
               </div>
             </div>
 
-            <div class="flexRow">
+            <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="store-keywords">

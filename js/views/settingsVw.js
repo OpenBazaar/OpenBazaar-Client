@@ -9,6 +9,7 @@ var __ = require('underscore'),
     countriesModel = require('../models/countriesMd'),
     showErrorModal = require('../utils/showErrorModal.js'),
     cropit = require('../utils/jquery.cropit'),
+    setTheme = require('../utils/setTheme.js'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({

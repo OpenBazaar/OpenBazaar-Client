@@ -44,13 +44,12 @@ module.exports = Backbone.Router.extend({
 
   newView: function(view){
     "use strict";
-    $('body').removeClass("userPage");//add other body style classes if they are created
+    $('body').attr("id", "");//add other body style classes if they are created
     $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     //clear address bar. This will be replaced on the user page
     window.obEventBus.trigger("setAddressBar", "");
-    $('body').addClass("userPage");
   },
 
   index: function(){
@@ -81,7 +80,7 @@ module.exports = Backbone.Router.extend({
       itemHash: itemHash,
       socketView: this.socketView
     }));
-    $('body').addClass("userPage");
+    $('body').attr("id", "userPage");
   },
 
   customizePage: function(){
@@ -95,10 +94,10 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new userPageView({
       userModel: this.options.userModel,
-      userID: this.options.userModel.get('guid'),
-      state: 'itemNew'
+      state: 'itemNew',
+      socketView: this.socketView
     }));
-    $('body').addClass("userPage");
+    $('body').attr("id", "userPage");
   },
 
   purchases: function(){
@@ -130,6 +129,7 @@ module.exports = Backbone.Router.extend({
     $('.js-loadingModal').addClass('show');
     this.cleanup();
     this.newView(new settingsView({userModel: this.options.userModel}));
+    $('body').attr("id", "userPage");
   },
 
   about: function(){
