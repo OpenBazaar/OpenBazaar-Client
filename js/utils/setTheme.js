@@ -16,6 +16,7 @@ function shadeColor2(color, percent) {
 
 module.exports = function(primaryColor, secondaryColor, backgroundColor, textColor) {
   "use strict";
+  console.log(primaryColor, secondaryColor, backgroundColor, textColor);
   var opaque = hexToRgb(backgroundColor);
   var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
   customStyleTag.setAttribute('id', 'customStyle');

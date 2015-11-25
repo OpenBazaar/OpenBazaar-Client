@@ -109,7 +109,7 @@ var loadProfile = function() {
       if (response.profile){
         guid = response.profile.guid;
         avatar_hash = response.profile.avatar_hash;
-        setTheme(response.profile.primary_color, response.profile.secondary_color, response.profile.text_color, response.profile.background_color);
+        setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
         //get the user
         user.fetch({
           success: function (model, response) {

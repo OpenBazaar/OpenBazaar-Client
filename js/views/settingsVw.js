@@ -237,7 +237,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         settings_form = this.$el.find("#settingsForm");
 
-    this.saveData(settings_form, "settings", function(){
+    this.saveData(settings_form, this.model.get('user'), "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
     },
@@ -247,16 +247,27 @@ module.exports = Backbone.View.extend({
     })
   },
 
-  saveData: function(form, endPoint, onSucceed, onFail) {
+  saveData: function(form, modelJSON, endPoint, onSucceed, onFail) {
     "use strict";
     var self = this,
-        formData = new FormData(form[0]);
+        formData = new FormData(form[0]),
+        formKeys = [];
 
     form.addClass('formChecked');
     if(!form[0].checkValidity()) {
       showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return;
     }
+
+    __.each(form.serializeArray(), function(value){
+      formKeys.push(value.name);
+    });
+
+    __.each(modelJSON, function(value, key){
+      if(formKeys.indexOf(key) == -1){
+        formData.append(key, value);
+      }
+    });
 
     $.ajax({
       type: "POST",

@@ -126,8 +126,8 @@ module.exports = Backbone.Router.extend({
 
   settings: function(){
     "use strict";
-    //$('.js-loadingModal').addClass('show');
-    //this.cleanup();
+    $('.js-loadingModal').addClass('show');
+    this.cleanup();
     this.newView(new settingsView({userModel: this.options.userModel}), "userPage");
   },
 
