@@ -60,10 +60,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     if (this.socketConnection.readyState === 1){
-      //this.socketConnection.send(message);
-      setTimeout(function(){
-        self.socketConnection.send(message);
-      }, 1000);
+      this.socketConnection.send(message);
       return;
     }else{
       //if socket is not ready yet, try again
