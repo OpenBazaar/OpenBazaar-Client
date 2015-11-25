@@ -126,6 +126,11 @@ form {
   z-index: 3;
 }
 
+.pageNavContainer {
+  width: 100%;
+  z-index: 3;
+}
+
 #pageNav .btn {
   -webkit-app-region: no-drag;
 }
@@ -1809,7 +1814,7 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .popMenu-navBar {
-  top: 50px;
+  top: -238px;
   right: 10px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -1819,6 +1824,18 @@ input[type="checkbox"].fieldItem + label span {
   font-size: 13px;
   padding: 10px 0;
   width: 230px;
+  z-index: -1;
+
+}
+
+.popMenu-navBar-opened {
+  animation: menuSlide .12s normal linear;
+  top: 50px;
+}
+
+@-webkit-keyframes menuSlide {
+    0%   {top: -238px;}
+    100% {top: 50px;}
 }
 
 .popMenu-navBar a {
