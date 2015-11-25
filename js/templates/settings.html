@@ -136,6 +136,23 @@
               </div>
             </div>
 
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('EnableNotifications') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="enableNotificationsYes" name="notifications" value="true" checked /><label for="enableNotificationsYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="enableNotificationsNo" name="notifications" value="false"/><label for="enableNotificationsNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                </div>
+              </div>
+            </div>
+
             <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">

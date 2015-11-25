@@ -233,7 +233,54 @@ module.exports = Backbone.View.extend({
     $('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
   },
 
-  saveSettings: function(e){
+  saveSettings: function(e) {
+    var self = this,
+        settings_form = this.$el.find("#settingsForm");
+
+    this.saveData(settings_form, "settings", function(){
+      "use strict";
+      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+    },
+    function(data){
+      "use strict";
+      showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+    })
+  },
+
+  saveData: function(form, endPoint, onSucceed, onFail) {
+    "use strict";
+    var self = this,
+        formData = new FormData(form[0]);
+
+    form.addClass('formChecked');
+    if(!form[0].checkValidity()) {
+      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      return;
+    }
+
+    $.ajax({
+      type: "POST",
+      url: self.options.userModel.get('serverUrl') + endPoint,
+      contentType: false,
+      processData: false,
+      data: formData,
+      dataType: "json",
+      success: function(data) {
+        if (data.success === true){
+          onSucceed(data);
+        }else if (data.success === false){
+          onFail(data);
+        }
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+  },
+
+  saveClick: function(e){
         var self = this,
             server = self.options.userModel.get('serverUrl'),
             settings_form = this.$el.find("#settingsForm"),
@@ -287,8 +334,6 @@ module.exports = Backbone.View.extend({
                 }
             }
         );
-        //Remove this line when multiple shipping addresses has been implemented
-        //settingsFormData.append("shipping_addresses","");
 
         var submit = function(img_hash) {
 

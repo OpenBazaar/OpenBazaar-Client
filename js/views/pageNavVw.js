@@ -142,7 +142,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var targ = this.$el.find('.js-navProfileMenu');
     targ.addClass('hide');
-    $('#overlay').addClass('fadeOut hide');
+    $('#overlay').addClass('hide');
   },
 
   render: function(){
@@ -204,7 +204,7 @@ module.exports = Backbone.View.extend({
       });
     }else{
       targ.addClass('hide');
-      $('#overlay').addClass('fadeOut hide');
+      $('#overlay').addClass('hide');
     }
   },
 
@@ -223,17 +223,17 @@ module.exports = Backbone.View.extend({
     targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
       targ.removeClass('hide');
-      $('#overlay').removeClass('fadeOut hide');
+      $('#overlay').removeClass('hide');
       $('html').on('click.closeNav', function(e){
         if($(e.target).closest(targ).length === 0){
           targ.addClass('hide');
-          $('#overlay').addClass('fadeOut hide');
+          $('#overlay').addClass('hide');
           $(this).off('.closeNav');
         }
       });
     }else{
       targ.addClass('hide');
-      $('#overlay').addClass('fadeOut hide');
+      $('#overlay').addClass('hide');
     }
   },
 

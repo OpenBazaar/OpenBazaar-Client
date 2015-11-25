@@ -42,9 +42,11 @@ module.exports = Backbone.Router.extend({
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
   },
 
-  newView: function(view){
+  newView: function(view, bodyClass){
     "use strict";
-    $('body').attr("id", "");//add other body style classes if they are created
+    if($('body').attr('id') != bodyClass){
+      $('body').attr("id", bodyClass || "");
+    }
     $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
@@ -79,8 +81,7 @@ module.exports = Backbone.Router.extend({
       state: state,
       itemHash: itemHash,
       socketView: this.socketView
-    }));
-    $('body').attr("id", "userPage");
+    }),"userPage");
   },
 
   customizePage: function(){
@@ -96,8 +97,7 @@ module.exports = Backbone.Router.extend({
       userModel: this.options.userModel,
       state: 'itemNew',
       socketView: this.socketView
-    }));
-    $('body').attr("id", "userPage");
+    }),"userPage");
   },
 
   purchases: function(){
@@ -126,10 +126,9 @@ module.exports = Backbone.Router.extend({
 
   settings: function(){
     "use strict";
-    $('.js-loadingModal').addClass('show');
-    this.cleanup();
-    this.newView(new settingsView({userModel: this.options.userModel}));
-    $('body').attr("id", "userPage");
+    //$('.js-loadingModal').addClass('show');
+    //this.cleanup();
+    this.newView(new settingsView({userModel: this.options.userModel}), "userPage");
   },
 
   about: function(){
