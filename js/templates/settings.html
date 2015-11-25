@@ -153,7 +153,6 @@
               </div>
             </div>
 
-
             <a class="btn btn-large js-saveSettings custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
             <a class="btn btn-large js-cancelSettings custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
 
@@ -564,11 +563,109 @@
               </div>
             </div>
 
-            <a class="btn btn-large js-saveSettings custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelSettings custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-saveProfile custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelProfile custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
 
           </div>
+          <div class="flexCol-12 flex-border hide js-tabTarg js-store">
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Basic') %></h3>
+            </div>
 
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('Visibility') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0 marginLeft6">
+                  <input type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
+                  <input type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label> <!--for="moderators"-->
+                    <%= polyglot.t('Moderators') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <!--TODO: moderators input here-->
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="store-keywords">
+                    <%= polyglot.t('Keywords') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <!--TODO: keywords input here -->
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow borderBottom custCol-border-secondary marginTop20">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Content') %></h3>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="terms_conditions">
+                    <%= polyglot.t('TermsAndConditions') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <textarea
+                    name="terms_conditions"
+                    id="terms_conditions"
+                    rows="6"
+                    class="fieldItem-textarea"
+                    placeholder="<%= ob.user.terms_conditions %>"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="refund_policy">
+                    <%= polyglot.t('ReturnPolicy') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <textarea name="refund_policy" id="refund_policy" rows="6" class="fieldItem-textarea" placeholder="<%= ob.user.refund_policy%>"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <a class="btn btn-large js-saveStore custCol-secondary pull-right marginRight15 marginTop15 marginBottom5 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelStore custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+          </div>
 
           <div class="flexCol-12 flex-border hide js-tabTarg js-shipping custCol-border-secondary">
             <% if(ob.user.shipping_addresses && ob.user.shipping_addresses.length > 0) { %>
@@ -723,109 +820,11 @@
               </div>
             </div>
 
-            <a class="btn btn-large js-saveSettings custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelSettings custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-saveAddress custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelAddress custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
 
           </div>
-          <div class="flexCol-12 flex-border hide js-tabTarg js-store">
-            <div class="flexRow borderBottom custCol-border-secondary">
-              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Basic') %></h3>
-            </div>
 
-            <div class="flexRow TODO">
-              <div class="flexCol-3  borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label>
-                    <%= polyglot.t('Visibility') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0 marginLeft6">
-                  <input type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
-                  <input type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
-                </div>
-              </div>
-            </div>
-
-            <div class="flexRow TODO">
-              <div class="flexCol-3  borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label> <!--for="moderators"-->
-                    <%= polyglot.t('Moderators') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0">
-                  <!--TODO: moderators input here-->
-                </div>
-              </div>
-            </div>
-
-            <div class="flexRow TODO">
-              <div class="flexCol-3  borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label for="store-keywords">
-                    <%= polyglot.t('Keywords') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0">
-                  <!--TODO: keywords input here -->
-                </div>
-              </div>
-            </div>
-
-            <div class="flexRow borderBottom custCol-border-secondary marginTop20">
-              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Content') %></h3>
-            </div>
-
-            <div class="flexRow">
-              <div class="flexCol-3  borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label for="terms_conditions">
-                    <%= polyglot.t('TermsAndConditions') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0">
-                  <textarea
-                    name="terms_conditions"
-                    id="terms_conditions"
-                    rows="6"
-                    class="fieldItem-textarea"
-                    placeholder="<%= ob.user.terms_conditions %>"></textarea>
-                </div>
-              </div>
-            </div>
-
-            <div class="flexRow">
-
-              <div class="flexCol-3  borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label for="refund_policy">
-                    <%= polyglot.t('ReturnPolicy') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0">
-                  <textarea name="refund_policy" id="refund_policy" rows="6" class="fieldItem-textarea" placeholder="<%= ob.user.refund_policy%>"></textarea>
-                </div>
-              </div>
-            </div>
-
-            <a class="btn btn-large js-saveSettings custCol-secondary pull-right marginRight15 marginTop15 marginBottom5 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelSettings custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
-          </div>
           <div class="flexCol-12 flex-border hide js-tabTarg js-blocked">
             <div class="flexRow">
               <% if(ob.user.blocked.length > 0) { %>
@@ -919,8 +918,8 @@
 
             </div>
 
-            <a class="btn btn-large js-saveSettings custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelSettings custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-saveAdvanced custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelAdvanced custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
           </div>
         </form>
 
