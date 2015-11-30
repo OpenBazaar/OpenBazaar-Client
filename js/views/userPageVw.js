@@ -211,7 +211,6 @@ module.exports = Backbone.View.extend({
 
           // Cache user avatar in localStorage
           var profile = model.toJSON().profile;
-          console.log(profile.avatar_hash);
           window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
 
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});

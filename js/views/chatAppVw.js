@@ -4,6 +4,9 @@ var __ = require('underscore'),
     chatCollection = require('../collections/chatCl'),
     chatView = require('./chatVw'),
     chat = require('../models/chatMd'),
+    chatMessageCollection = require('../collections/chatMessageCl'),
+    chatMessageView = require('./chatMessageVw'),
+    chatMessage = require('../models/chatMessageMd'),
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
 
@@ -30,6 +33,10 @@ module.exports = Backbone.View.extend({
     this.chats = new chatCollection();
     var model = this.options.model;
 
+    this.subViews = [];
+    this.subViewsChat = [];
+    this.render();
+
     this.chats.url = model.get('serverUrl') + "get_chat_conversations";
     this.chats.fetch({
       success: function(chats, response) {
@@ -40,7 +47,6 @@ module.exports = Backbone.View.extend({
             "use strict";
             if(chat.image_hash === undefined) {
               var hash = window.localStorage.getItem("avatar_" + chat.get('guid'));
-              console.log('Hash for ', chat.get('guid'), ' ', hash);
               if(hash !== "") {
                 chat.set('image_hash', hash);
               }
@@ -48,7 +54,6 @@ module.exports = Backbone.View.extend({
             chat.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chat.get('image_hash') + "&guid=" + chat.get('guid'));
             self.renderChat(chat);
           });
-          console.log(self.parentEl);
           $('#chatHeads').html(self.listWrapper);
         }
       }
@@ -62,17 +67,11 @@ module.exports = Backbone.View.extend({
       this.openChat(guid, key);
     });
 
-    this.subViews = [];
-
-    this.render();
-
   },
 
   render: function(){
     "use strict";
     var self = this;
-    //make sure container is cleared
-    console.log(this.$el);
 
     loadTemplate('./js/templates/chatApp.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
@@ -89,6 +88,14 @@ module.exports = Backbone.View.extend({
     this.listWrapper.prepend(chat.el);
   },
 
+  renderChatMessage: function(model){
+    var chatMessage = new chatMessageView({
+      model: model
+    });
+    this.subViewsChat.push(chatMessage);
+    this.listWrapperChat.prepend(chatMessage.el);
+  },
+
   renderNoneFound: function(){
     // Decide what to do here
   },
@@ -98,10 +105,45 @@ module.exports = Backbone.View.extend({
   },
 
   openChat: function(guid, key) {
+    var self = this;
     this.newChat();
     $('#inputConversationRecipient').val(guid);
     $('#inputConversationKey').val(key);
     $('#inputConversationMessage').focus();
+
+    // Load conversation from DB
+    this.chatMessages = new chatMessageCollection();
+    this.chatMessages.url = this.options.model.get('serverUrl') + "get_chat_messages?guid=" + guid;
+    var model = this.options.model;
+
+    this.listWrapperChat = $('<div class="border0 custCol-border-secondary flexRow"></div>');
+
+    this.chatMessages.fetch({
+      success: function(chatMessages, response) {
+        if(chatMessages.models.length < 1) {
+          console.log('none found');
+        } else {
+          __.each(chatMessages.models, function (chatMessage) {
+            "use strict";
+            if(chatMessage.image_hash === undefined) {
+              var hash = window.localStorage.getItem("avatar_" + chatMessage.get('guid'));
+              if(hash !== "") {
+                chatMessage.set('image_hash', hash);
+              }
+            }
+            if(chatMessage.get('outgoing')) {
+              chatMessage.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + model.get('avatar_hash'));
+            } else {
+              chatMessage.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chatMessage.get('image_hash') + "&guid=" + chatMessage.get('guid'));
+            }
+            self.renderChatMessage(chatMessage);
+          });
+
+          $('#chatConversation .chatConversationContent').html(self.listWrapperChat).animate({ scrollTop: $('#chatConversation .chatConversationContent').prop("scrollHeight")}, 100);
+        }
+      }
+    });
+
   },
 
   newChat: function() {

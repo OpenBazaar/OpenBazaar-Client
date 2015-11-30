@@ -1,0 +1,28 @@
+<div class="chatConversationMessageLine">
+    <table width="100%">
+        <% if(ob.outgoing) { %>
+        <tr>
+            <td class="chatConversationMessageBody"><%- ob.message%></td>
+            <td class="chatConversationMessageAvatar">
+                <div class="thumbnail custcol-border-secondary"
+                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
+        </tr>
+        <% } else { %>
+        <tr>
+            <td class="chatConversationMessageAvatar">
+                <div class="thumbnail custcol-border-secondary"
+                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
+            </td>
+            <td class="chatConversationMessageBody"><%- ob.message%></td>
+        </tr>
+        <tr>
+            <td align="right" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
+        </tr>
+        <% } %>
+    </table>
+</div>
+

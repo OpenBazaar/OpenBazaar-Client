@@ -1279,6 +1279,7 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationContent {
   height: calc(100% - 120px - 36px);
   border-bottom: 1px solid #333;
+  overflow: auto;
 }
 
 .chatConversationTo {
@@ -1315,13 +1316,23 @@ div.chatSearchOut .chatSearchIcon {
   width: 100%;
 }
 
+.chatConversationMessageLine {
+  padding: 5px;
+  width: 100%;
+}
+
+.chatConversationMessageLine table {
+  padding: 0;
+  width: 100%;
+}
+
 .chatHeadIcon {
   float:left;
 }
 
 .chatPreview {
   width: calc(100% - 60px);
-  font-size: 10px;
+  font-size: 11px;
   float:left;
   padding:0 5px;
 }
@@ -1329,6 +1340,7 @@ div.chatSearchOut .chatSearchIcon {
 .chatPreviewSender {
   font-size:13px;
   font-weight:bold;
+  color: white;
   text-overflow: ellipsis;
   overflow: hidden;
   width: 170px;
@@ -1336,6 +1348,30 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatPreviewSender:hover {
   overflow: visible;
+}
+
+.chatPreviewLastMessage {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 170px;
+  white-space: nowrap;
+  color: #999;
+}
+
+.chatConversationMessageBody {
+  background-color: #333;
+  font-size: 11px;
+  padding: 5px;
+}
+
+.chatConversationMessageAvatar {
+  width: 25px;
+  vertical-align: top;
+}
+
+.chatConversationMessageTimestamp {
+  font-size: 10px;
+  color: #DDD;
 }
 
 .userPage .btn.btn-bar {
