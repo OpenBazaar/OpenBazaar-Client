@@ -315,51 +315,72 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="facebook"><%= polyglot.t('Facebook') %></label>
+                  <label for="settingsFacebookInput"><%= polyglot.t('Facebook') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
                 <input name="handle"
                        type="text"
-                       id="facebook"
+                       id="settingsFacebookInput"
+                       data-type="facebook"
                        placeholder="<%= polyglot.t('Facebook') %>"
                        class="fieldItem"
-                       value="<%= ob.page.profile.facebook %>">
+                       value="<%= ob.page.profile.social_accounts.facebook.username %>">
               </div>
             </div>
 
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="instagram"><%= polyglot.t('Instagram') %></label>
+                  <label for="settingsTwitterInput"><%= polyglot.t('Twitter') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
                 <input name="handle"
                        type="text"
-                       id="instagram"
+                       id="settingsTwitterInput"
+                       data-type="twitter"
+                       placeholder="<%= polyglot.t('Twitter') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.social_accounts.twitter.username %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="settingsInstagramInput"><%= polyglot.t('Instagram') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="handle"
+                       type="text"
+                       id="settingsInstagramInput"
+                       data-type="instagram"
                        placeholder="<%= polyglot.t('Instagram') %>"
                        class="fieldItem"
-                       value="<%= ob.page.profile.instagram %>">
+                       value="<%= ob.page.profile.social_accounts.instagram.username %>">
               </div>
             </div>
 
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="snapchat"><%= polyglot.t('Snapchat') %></label>
+                  <label for="settingsSnapchatInput"><%= polyglot.t('Snapchat') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
                 <input name="handle"
                        type="text"
-                       id="snapchat"
+                       id="settingsSnapchatInput"
+                       data-type="snapchat"
                        placeholder="<%= polyglot.t('Snapchat') %>"
                        class="fieldItem"
-                       value="<%= ob.page.profile.snapchat %>">
+                       value="<%= ob.page.profile.social_accounts.snapchat.username %>">
               </div>
             </div>
 

@@ -342,14 +342,46 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#pageForm"),
         imageURI,
-        addData = {};
+        img64Data = {},
+        imgData = {},
+        socialInputCount = 0,
+        socialInputs = self.$el.find('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput');
 
-    var sendPage = function(imageData){
+    var sendPage = function(){
+      console.log("sendPage");
       self.saveData(form, self.model.get('page'), "profile", function(){
         "use strict";
         showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
-      }, "", imageData);
+      }, "", imgData);
     };
+
+    var checkSocialCount = function(){
+      if(socialInputCount < socialInputs.length){
+        socialSend($(socialInputs[socialInputCount]));
+      } else {
+        sendPage();
+      }
+    };
+
+    var socialSend = function (socialInput) {
+        var socialData = {};
+        socialInputCount++;
+        if(socialInput && socialInput.val()){
+          socialData.account_type = socialInput.data('type');
+          socialData.username = socialInput.val();
+          socialData.proof = "--";
+          self.saveData("", "", "social_accounts",
+            function(data){
+              "use strict";
+              checkSocialCount();
+            },
+            function(data){
+              showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+            }, socialData);
+        } else {
+          checkSocialCount();
+        }
+      };
 
     //if an avatar has been set, upload it first and get the hash
     if($("#settingsAvatarInput").val()){
@@ -360,18 +392,18 @@ module.exports = Backbone.View.extend({
         originalSize: false
       });
       imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-      addData.image = imageURI;
+      img64Data.image = imageURI;
 
       this.saveData('', '', "upload_image", function (data) {
             "use strict";
             var img_hash = data.image_hashes[0];
             if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              var imageData = {"avatar": img_hash};
-              sendPage(imageData);
+              imgData.avatar = img_hash;
+              checkSocial();
             }
-          },"", addData);
+          },"", img64Data);
     } else {
-      sendPage();
+      checkSocialCount();
     }
   },
 
