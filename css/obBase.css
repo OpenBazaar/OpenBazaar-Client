@@ -1346,10 +1346,6 @@ div.chatSearchOut .chatSearchIcon {
   width: 170px;
 }
 
-.chatPreviewSender:hover {
-  overflow: visible;
-}
-
 .chatPreviewLastMessage {
   overflow: hidden;
   text-overflow: ellipsis;
