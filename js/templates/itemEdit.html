@@ -367,11 +367,16 @@
         </div>
       </div>
 
-      <div class="ctrlGroup js-itemEditButtons">
-        <a class="btn btn-txt custCol-secondary js-saveItem">
-          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
-        </a>
+      <div class="marginTop15 marginLeft15">
+        <div class="ctrlGroup js-itemEditButtons textOpacity1 floatLeft">
+          <a class="btn btn-txt custCol-secondary js-cancelItem"><%= polyglot.t('Cancel') %></a>
+        </div>
+        <div class="ctrlGroup js-itemEditButtons floatLeft">
+          <a class="btn btn-txt custCol-secondary js-saveItem">
+            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
+          </a>
+        </div>
       </div>
 
     </div>
