@@ -209,6 +209,11 @@ module.exports = Backbone.View.extend({
             showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           }
 
+          // Cache user avatar in localStorage
+          var profile = model.toJSON().profile;
+          console.log(profile.avatar_hash);
+          window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
+
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
           self.render();
@@ -505,6 +510,7 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
+
       if(self.options.ownPage === true){
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
       } else {

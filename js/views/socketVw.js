@@ -60,7 +60,6 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     if (this.socketConnection.readyState === 1){
-      //this.socketConnection.send(message);
       self.socketConnection.send(message);
       return;
     }else{

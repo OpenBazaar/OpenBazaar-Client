@@ -22,12 +22,15 @@ module.exports = Backbone.View.extend({
   initialize: function(options){
     var self = this;
     this.options = options || {};
+    this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
 
     // Render chat list items
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
     this.chats = new chatCollection();
-    this.chats.url = options.model.get('serverUrl') + "get_chat_messages?guid=" + options.model.get('guid');
+    var model = this.options.model;
+
+    this.chats.url = model.get('serverUrl') + "get_chat_conversations";
     this.chats.fetch({
       success: function(chats, response) {
         if(chats.models.length < 1) {
@@ -35,10 +38,18 @@ module.exports = Backbone.View.extend({
         } else {
           __.each(chats.models, function (chat) {
             "use strict";
-            chat.set('avatarURL', self.options.serverUrl + "get_image?hash=" + chat.get('image_hash') + "&guid=" + chat.get('guid'));
+            if(chat.image_hash === undefined) {
+              var hash = window.localStorage.getItem("avatar_" + chat.get('guid'));
+              console.log('Hash for ', chat.get('guid'), ' ', hash);
+              if(hash !== "") {
+                chat.set('image_hash', hash);
+              }
+            }
+            chat.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chat.get('image_hash') + "&guid=" + chat.get('guid'));
             self.renderChat(chat);
           });
-          self.parentEl.html(self.listWrapper);
+          console.log(self.parentEl);
+          $('#chatHeads').html(self.listWrapper);
         }
       }
     });
@@ -80,6 +91,10 @@ module.exports = Backbone.View.extend({
 
   renderNoneFound: function(){
     // Decide what to do here
+  },
+
+  refreshConversations: function() {
+
   },
 
   openChat: function(guid, key) {

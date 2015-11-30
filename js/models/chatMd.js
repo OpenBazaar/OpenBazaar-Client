@@ -3,13 +3,8 @@ var __ = require('underscore'),
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
-    handle: "",
-    encryption_key: "",
-    message: "",
-    timestamp: "",
+    unread: 0,
     avatar_hash: "",
-    guid: "",
-    outgoing: "",
-    read: ""
+    guid: ""
   }
 });

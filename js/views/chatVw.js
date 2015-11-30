@@ -10,7 +10,8 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-avatar': 'avatarClick',
-    'click .js-username': 'avatarClick'
+    'click .js-username': 'avatarClick',
+    'click .js-chatHead': 'chatHeadClick'
   },
 
   initialize: function(){
@@ -19,11 +20,12 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    loadTemplate('./js/templates/notification.html', function(loadedTemplate) {
-      var timestamp = self.model.get('timestamp');
-      var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMMM Do YYYY, h:mm a');
-      self.model.set('formattedTimestamp', formatted_timestamp);
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+    loadTemplate('./js/templates/chat.html', function(loadedTemplate) {
+      //var timestamp = self.model.get('timestamp');
+      //var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMMM Do YYYY, h:mm a');
+      //self.model.set('formattedTimestamp', formatted_timestamp);
+      var chat = self.model.toJSON();
+      self.$el.html(loadedTemplate(chat));
     });
     return this;
   },
@@ -34,6 +36,12 @@ module.exports = Backbone.View.extend({
     $('#overlay').addClass('hide');
     Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
 
+  },
+
+  chatHeadClick: function() {
+    var guid = this.model.guid;
+    var key = "test";
+    window.obEventBus.trigger("openChat", guid, key);
   },
 
   close: function(){

@@ -139,7 +139,7 @@ form {
 }
 
 #sideBar {
-  position: absolute;
+  position: fixed;
   right: -180px;
   top: 50px;
   width:220px;
@@ -1304,6 +1304,29 @@ div.chatSearchOut .chatSearchIcon {
   color: white;
   background-color: unset;
   width: 100%;
+}
+
+.chatHeadIcon {
+  float:left;
+}
+
+.chatPreview {
+  width: calc(100% - 60px);
+  font-size: 10px;
+  float:left;
+  padding:0 5px;
+}
+
+.chatPreviewSender {
+  font-size:13px;
+  font-weight:bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 170px;
+}
+
+.chatPreviewSender:hover {
+  overflow: visible;
 }
 
 .userPage .btn.btn-bar {
