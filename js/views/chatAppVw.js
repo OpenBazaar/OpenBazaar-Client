@@ -146,10 +146,12 @@ module.exports = Backbone.View.extend({
 
   openConversation: function() {
     $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
+    $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed');
   },
 
   closeConversation: function() {
     $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
+    $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed');
   },
 
   chatSearch: function() {

@@ -1246,10 +1246,19 @@ div.chatSearchOut .chatSearchIcon {
   position: absolute;
   transition: bottom 0.5s ease;
   border: 1px solid #333;
+  background-color: #252525;
 }
 
 .chatConversationHidden {
   bottom: -300px;
+}
+
+.chatConversationHeads {
+}
+
+.chatConversationHeadsCompressed {
+  height: calc(100% - 370px);
+  overflow: auto;
 }
 
 .chatConversationHeader {
