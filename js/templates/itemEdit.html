@@ -13,7 +13,7 @@
   <div class="flexCol-7 pad15"></div>
 
   <div class="flexCol-5 pad15">
-    <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light positionWrapper" style="opacity: 1;">
+    <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary positionWrapper" style="opacity: 1;">
       <div class="flexRow custCol-secondary border0">
         <label for="itemImageUploadMain" class="fieldItem width100">
           <h5 class="floatLeft"><%= polyglot.t('Photos') %></h5>
@@ -49,7 +49,7 @@
   <div class="flexRow border0 marginBottom50">
     <div class="flexRow flexExpand">
       <div class="flexCol-7 pad15 flex-border">
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Listing') %></h5>
@@ -146,7 +146,7 @@
         </div>
 
         <!-- Shipping -->
-        <div class="flexRow marginTop20 podBorder custCol-border-secondary borderRadiusTop custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder custCol-border-secondary borderRadiusTop">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Shipping') %></h5>
@@ -251,7 +251,7 @@
           </div>
 
           <!-- Terms and Conditions -->
-          <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20 custCol-primary-light">
+          <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20">
             <div class="flexRow custCol-secondary border0">
               <div class="fieldItem">
                 <h5><%= polyglot.t('TermsAndConditions') %> (<%= polyglot.t('Optional') %>)</h5>
@@ -265,7 +265,7 @@
           </div>
 
           <!-- Return policy -->
-          <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20 custCol-primary-light">
+          <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20">
             <div class="flexRow custCol-secondary border0">
               <div class="fieldItem">
                 <h5><%= polyglot.t('ReturnPolicy') %> (<%= polyglot.t('Optional') %>)</h5>
@@ -283,7 +283,7 @@
       <div class="flexCol-5 pad15 flex-border rowTop241">
 
         <!-- Categorization -->
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Categorization') %> (<%= polyglot.t('Optional') %>)</h5>
@@ -305,10 +305,10 @@
         </div>
 
         <!-- search -->
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
-              <h5><%= polyglot.t('Search') %> (<%= polyglot.t('Optional') %>)</h5>
+              <h5><%= polyglot.t('Discover') %> (<%= polyglot.t('Optional') %>)</h5>
             </div>
           </div>
           <div class="flexRow custCol-border-secondary">
@@ -340,7 +340,7 @@
         </div>
 
         <!-- Expiration -->
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Expiration') %> (<%= polyglot.t('Optional') %>)</h5>
@@ -366,6 +366,14 @@
           </div>
         </div>
       </div>
+
+      <div class="ctrlGroup js-itemEditButtons">
+        <a class="btn btn-txt custCol-secondary js-saveItem">
+          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
+        </a>
+      </div>
+
     </div>
   </div>
 </form>

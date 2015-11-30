@@ -14,7 +14,7 @@
       <div class="accordion-window">
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <%= polyglot.t('Store Details') %>
+            <%= polyglot.t('CreateStore') %>
           </div>
           <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary" id="storeWizardForm">
             <input name="header" id="headerInput" type="text" class="hide" value="<%- ob.page.profile.header_hash %>" />
@@ -22,43 +22,23 @@
 
             <div class="flexRow">
               <div class="flexRow custCol-border-secondary">
-                  <div class="flexCol-3 borderRight custCol-border-secondary">
-                    <label class="fieldItem" for="storeNameInput">
-                      <%= polyglot.t('Name') %>
-                    </label>
-                  </div>
-                  <div class="flexCol-9">
-                    <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
-                  </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-3 borderRight custCol-border-secondary">
-                  <label class="fieldItem" for="aboutInput">
-                    <%= polyglot.t('Description') %>
-                  </label>
-                </div>
-                <div class="flexCol-9">
-                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%- ob.page.profile.about %></textarea>
-                </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="realCategoriesInput">
                     <%= polyglot.t('Keywords') %><!--  (<%= polyglot.t('UpTo3') %>) -->
                   </label>
                 </div>
-                <div class="flexCol-9">
+                <div class="flexCol-8">
                   <input type="text" name="categories" id="realCategoriesInput" class="hide" />
                   <div class="fieldItem" id="categoriesInput"></div>
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem">
                     <%= polyglot.t('NSFW') %>
                   </label>
                 </div>
-                <div class="flexCol-9">
+                <div class="flexCol-8">
                   <div class="fieldItem">
                     <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
                     <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>

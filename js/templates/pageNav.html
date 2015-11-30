@@ -1,4 +1,4 @@
-<!-- pulled these divs up so that they render under the header -->
+<!-- pulled this div up so that it slides under the header and not over -->
 <div class="popMenu hide popMenu-navBar js-navProfileMenu">
   <a href="#userPage"><%= polyglot.t('nav.myPage') %></a>
   <a href="#customizePage"><%= polyglot.t('nav.customizePage') %></a>
@@ -24,6 +24,13 @@
   <a class="js-navAdminPanel">Admin Panel</a>
 </div>
 
+<!-- pulled this div up so that it slides under the header and not over -->
+<div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
+  <div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
+  <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
+  <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
+</div>
+
 <div class="bar navBar pageNavContainer custCol-secondary">
   <div class="ctrlGroup">
     <a class="btn btn-win btn-winClose js-navClose"></a>
@@ -39,7 +46,7 @@
   </div>
   <div class="ctrlGroup flexExpand">
     <div class="txtFieldWrapper searchWrapper mainSearchWrapper">
-      <input type="text" class="txtField js-navAddressBar" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" style="height: 30px;" />
+      <input type="text" class="txtField js-navAddressBar borderRadius3" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" style="height: 32px;" />
     </div>
   </div>
   <div class="ctrlGroup">
@@ -47,11 +54,6 @@
   </div>
   <div class="ctrlGroup">
     <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications badge"></div>
-  </div>
-  <div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
-      <div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
-      <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
-      <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
   </div>
 
   <div class="ctrlGroup nav-profile">
