@@ -18,20 +18,20 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-generalTab': 'generalClick',
-    'click .js-shippingTab': 'shippingClick',
+    'click .js-addressesTab': 'addressesClick',
     'click .js-pageTab': 'pageClick',
     'click .js-storeTab': 'storeClick',
     'click .js-blockedTab': 'blockedClick',
     'click .js-advancedTab': 'advancedClick',
-    'click .js-cancelSettings': 'cancelSettings',
-    'click .js-saveSettings': 'saveSettings',
-    'click .js-cancelProfile': 'cancelProfile',
+    'click .js-cancelGeneral': 'cancelView',
+    'click .js-saveGeneral': 'saveGeneral',
+    'click .js-cancelProfile': 'cancelView',
     'click .js-saveProfile': 'saveProfile',
-    'click .js-cancelAddress': 'cancelAddress',
+    'click .js-cancelAddress': 'cancelView',
     'click .js-saveAddress': 'saveAddress',
-    'click .js-cancelStore': 'cancelStore',
+    'click .js-cancelStore': 'cancelView',
     'click .js-saveStore': 'saveStore',
-    'click .js-cancelAdvanced': 'cancelAdvanced',
+    'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvanced',
     'change .js-settingsThemeSelection' : 'themeClick',
     'blur input': 'validateInput',
@@ -41,6 +41,10 @@ module.exports = Backbone.View.extend({
   initialize: function(options){
     var self = this;
     this.options = options || {};
+    /* expected options:
+       userModel
+       state
+     */
     this.userProfile = new userProfileModel();
     this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
     this.model = new Backbone.Model();
@@ -70,6 +74,7 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
+      self.setState(self.options.state);
       self.renderBlocked(self.model.get("user").blocked);
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
@@ -181,7 +186,13 @@ module.exports = Backbone.View.extend({
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
-  tabClick: function(activeTab, showContent){
+  addTabToHistory: function(state){
+    "use strict";
+    //add action to history
+    Backbone.history.navigate("#settings/" + state);
+  },
+
+  setTab: function(activeTab, showContent, state){
     "use strict";
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');
@@ -189,36 +200,54 @@ module.exports = Backbone.View.extend({
     showContent.removeClass('hide');
   },
 
-  generalClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-general'));
-  },
-
-  shippingClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-shipping'));
+  setState: function(state){
+    "use strict";
+    if(state){
+      this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
+    } else {
+      this.setTab(this.$el.find('.js-generalTab'), this.$el.find('.js-general'));
+    }
     $('#content').find('input:visible:first').focus();
   },
 
-  pageClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-page'));
-    $('#content').find('input:visible:first').focus();
+  generalClick: function(){
+    "use strict";
+    this.setState("general");
+    this.addTabToHistory("general");
   },
 
-  storeClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
-    $('#content').find('input:visible:first').focus();
+  addressesClick: function(){
+    "use strict";
+    this.setState("general");
+    this.addTabToHistory("general");
   },
 
-  blockedClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-blocked'));
-    $('#content').find('input:visible:first').focus();
+  pageClick: function(){
+    "use strict";
+    this.setState("page");
+    this.addTabToHistory("page");
   },
 
-  advancedClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-advanced'));
-    $('#content').find('input:visible:first').focus();
+  storeClick: function(){
+    "use strict";
+    this.setState("store");
+    this.addTabToHistory("store");
   },
 
-  cancelSettings: function(e){
+  blockedClick: function(){
+    "use strict";
+    this.setState("blocked");
+    this.addTabToHistory("blocked");
+  },
+
+  advancedClick: function(){
+    "use strict";
+    this.setState("advanced");
+    this.addTabToHistory("advanced");
+  },
+
+  cancelView: function(e){
+    "use strict";
     Backbone.history.loadUrl();
   },
 
@@ -231,20 +260,6 @@ module.exports = Backbone.View.extend({
     $('#background_color').val(theme["backgroundColor"]);
     $('#text_color').val(theme["textColor"]);
     $('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
-  },
-
-  saveSettings: function(e) {
-    var self = this,
-        settings_form = this.$el.find("#settingsForm");
-
-    this.saveData(settings_form, this.model.get('user'), "settings", function(){
-      "use strict";
-      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
-    },
-    function(data){
-      "use strict";
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-    })
   },
 
   saveData: function(form, modelJSON, endPoint, onSucceed, onFail) {
@@ -280,7 +295,11 @@ module.exports = Backbone.View.extend({
         if (data.success === true){
           onSucceed(data);
         }else if (data.success === false){
-          onFail(data);
+          if(onFail){
+            onFail(data);
+          } else{
+            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          }
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -289,6 +308,21 @@ module.exports = Backbone.View.extend({
         console.log(errorThrown);
       }
     });
+  },
+
+  saveGeneral: function() {
+    var self = this,
+        settings_form = this.$el.find("#settingsForm");
+
+    this.saveData(settings_form, this.model.get('user'), "settings", function(){
+      "use strict";
+      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+    });
+  },
+
+  savePage: function(){
+    "use strict";
+
   },
 
   saveClick: function(e){

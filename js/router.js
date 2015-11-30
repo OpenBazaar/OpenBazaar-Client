@@ -33,6 +33,7 @@ module.exports = Backbone.Router.extend({
     "cases": "cases",
     "notifications": "notifications",
     "settings": "settings",
+    "settings/:state": "settings",
     "about": "about",
     "support": "donate"
   },
@@ -124,11 +125,14 @@ module.exports = Backbone.Router.extend({
     console.log("notifications");
   },
 
-  settings: function(){
+  settings: function(state){
     "use strict";
     $('.js-loadingModal').addClass('show');
     this.cleanup();
-    this.newView(new settingsView({userModel: this.options.userModel}), "userPage");
+    this.newView(new settingsView({
+      userModel: this.options.userModel,
+      state: state
+    }), "userPage");
   },
 
   about: function(){

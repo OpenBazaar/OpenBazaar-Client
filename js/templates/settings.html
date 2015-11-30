@@ -20,7 +20,7 @@
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-generalTab active"><%= polyglot.t('General') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-pageTab"><%= polyglot.t('Page') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-storeTab"><%= polyglot.t('Store') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-shippingTab"><%= polyglot.t('Shipping') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-addressesTab"><%= polyglot.t('Addresses') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-blockedTab"><%= polyglot.t('Blocked') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-advancedTab"><%= polyglot.t('Advanced') %></a>
   </div>
@@ -132,7 +132,7 @@
                        placeholder="<%= polyglot.t('Address') %>"
                        class="fieldItem"
                        pattern=".{26,}"
-                       value="<%= ob.user.refund_address %>">
+                       value="<%= ob.user.refund_address %>" required>
               </div>
             </div>
 
@@ -170,8 +170,8 @@
               </div>
             </div>
 
-            <a class="btn btn-large js-saveSettings custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelSettings custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-saveGeneral custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelGeneral custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
 
           </div>
         </form>
@@ -684,7 +684,7 @@
             <a class="btn btn-large js-cancelStore custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
           </div>
 
-          <div class="flexCol-12 flex-border hide js-tabTarg js-shipping custCol-border-secondary">
+          <div class="flexCol-12 flex-border hide js-tabTarg js-addresses custCol-border-secondary">
             <% if(ob.user.shipping_addresses && ob.user.shipping_addresses.length > 0) { %>
             <div class="flexRow marginBottom20">
               <div class="flexRow">
