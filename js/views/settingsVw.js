@@ -25,8 +25,8 @@ module.exports = Backbone.View.extend({
     'click .js-advancedTab': 'advancedClick',
     'click .js-cancelGeneral': 'cancelView',
     'click .js-saveGeneral': 'saveGeneral',
-    'click .js-cancelProfile': 'cancelView',
-    'click .js-saveProfile': 'saveProfile',
+    'click .js-cancelPage': 'cancelView',
+    'click .js-savePage': 'savePage',
     'click .js-cancelAddress': 'cancelView',
     'click .js-saveAddress': 'saveAddress',
     'click .js-cancelStore': 'cancelView',
@@ -51,8 +51,13 @@ module.exports = Backbone.View.extend({
     this.subViews = [];
     this.subModels = [];
     this.userProfile.fetch({
-      success: function(model){
+      success: function(model) {
+        var profile = model.get('profile');
+        if (profile){
+          setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
+        }
         self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+
         //use default currency to return list of supported currencies
         getBTPrice("USD", function (btAve, currencyList) {
           "use strict";
@@ -262,27 +267,38 @@ module.exports = Backbone.View.extend({
     $('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
   },
 
-  saveData: function(form, modelJSON, endPoint, onSucceed, onFail) {
+  saveData: function(form, modelJSON, endPoint, onSucceed, onFail, addData) {
     "use strict";
     var self = this,
-        formData = new FormData(form[0]),
+        formData = new FormData(form[0] || ""),
         formKeys = [];
 
-    form.addClass('formChecked');
-    if(!form[0].checkValidity()) {
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-      return;
+    if(form){
+      form.addClass('formChecked');
+      if (!form[0].checkValidity()){
+        showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        return;
+      }
+
+      __.each(form.serializeArray(), function (value) {
+        formKeys.push(value.name);
+      });
     }
 
-    __.each(form.serializeArray(), function(value){
+    __.each(addData, function(value, key){
+      console.log(value);
+      console.log(key);
       formKeys.push(value.name);
+      formData.append(key, value);
     });
 
-    __.each(modelJSON, function(value, key){
-      if(formKeys.indexOf(key) == -1){
-        formData.append(key, value);
-      }
-    });
+    if(modelJSON){
+      __.each(modelJSON, function (value, key) {
+        if (formKeys.indexOf(key) == -1){
+          formData.append(key, value);
+        }
+      });
+    }
 
     $.ajax({
       type: "POST",
@@ -311,10 +327,11 @@ module.exports = Backbone.View.extend({
   },
 
   saveGeneral: function() {
+    "use strict";
     var self = this,
-        settings_form = this.$el.find("#settingsForm");
+        form = this.$el.find("#generalForm");
 
-    this.saveData(settings_form, this.model.get('user'), "settings", function(){
+    this.saveData(form, this.model.get('user'), "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
     });
@@ -322,7 +339,40 @@ module.exports = Backbone.View.extend({
 
   savePage: function(){
     "use strict";
+    var self = this,
+        form = this.$el.find("#pageForm"),
+        imageURI,
+        addData = {};
 
+    var sendPage = function(imageData){
+      self.saveData(form, self.model.get('page'), "profile", function(){
+        "use strict";
+        showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      }, "", imageData);
+    };
+
+    //if an avatar has been set, upload it first and get the hash
+    if($("#settingsAvatarInput").val()){
+
+      imageURI = self.$el.find('#settings-image-cropper').cropit('export', {
+        type: 'image/jpeg',
+        quality: 0.75,
+        originalSize: false
+      });
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+      addData.image = imageURI;
+
+      this.saveData('', '', "upload_image", function (data) {
+            "use strict";
+            var img_hash = data.image_hashes[0];
+            if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+              var imageData = {"avatar": img_hash};
+              sendPage(imageData);
+            }
+          },"", addData);
+    } else {
+      sendPage();
+    }
   },
 
   saveClick: function(e){
