@@ -21,17 +21,17 @@
                 <a class="ion-close-round js-closeConversation"></a>
             </div>
         </div>
-        <div class="chatConversationContent"></div>
+        <div id="chatConversationContent" class="chatConversationContent"></div>
 
         <div class="chatConversationTo hide">
             <div class="chatConversationToLabel">To:</div>
             <div class="chatConversationToInput">
-                <input type="text" name="conversation_recipient" id="inputConversationRecipient" placeholder="Enter GUID"/>
+                <input type="text" name="conversation_recipient" disabled="disabled" id="inputConversationRecipient" placeholder="Enter GUID"/>
             </div>
             <br clear="both"/>
         </div>
         <div class="chatConversationMessage">
-            <textarea name="conversation_message" disabled="disabled" id="inputConversationMessage" class="js-chatMessage" rows="3" placeholder="<%= polyglot.t('EnterMessage') %>"></textarea>
+            <textarea name="conversation_message" id="inputConversationMessage" class="js-chatMessage" rows="3" placeholder="<%= polyglot.t('EnterMessage') %>"></textarea>
         </div>
     </form>
 </div>
