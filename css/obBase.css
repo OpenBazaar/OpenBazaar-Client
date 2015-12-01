@@ -1177,7 +1177,7 @@ input[type="text"].txtField-bar {
   transition: opacity 0s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.btn-newChat {
+.btn-chatOpen {
   background-color: unset;
   margin: 5px;
   width: 32px;
@@ -1189,8 +1189,7 @@ input[type="text"].txtField-bar {
   font-weight: normal;
 }
 
-.btn-newChatOut {
-  background-color: #2D2D2D;
+.btn-chatOpenOut {
   width: 70px;
   text-align: left;
   margin-top: 7px;
@@ -1253,6 +1252,13 @@ div.chatSearchOut .chatSearchIcon {
   bottom: -300px;
 }
 
+.chatMessagesLabel {
+  float:left;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+}
+
 .chatConversationHeads {
 }
 
@@ -1268,8 +1274,11 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationLabel {
-  width: calc(100% - 15px);
+  width: calc(100% - 20px);
+  margin-right:5px;
   float:left;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .btn-closeConversation {
@@ -1277,7 +1286,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationContent {
-  height: calc(100% - 120px - 36px);
+  height: calc(100% - 120px);
   border-bottom: 1px solid #333;
   overflow: auto;
 }
@@ -1358,6 +1367,10 @@ div.chatSearchOut .chatSearchIcon {
   background-color: #333;
   font-size: 11px;
   padding: 5px;
+}
+
+#inputConversationMessage {
+  border: 1px solid #333;
 }
 
 .chatConversationMessageAvatar {

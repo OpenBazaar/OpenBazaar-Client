@@ -15,11 +15,12 @@ module.exports = Backbone.View.extend({
   el: '#sideBar',
 
   events: {
-    'click .js-newChat': 'newChat',
+    'click .js-chatOpen': 'slideChatOut',
     'click .js-closeChat': 'closeChat',
     'click .js-closeConversation': 'closeConversation',
     'click .js-chatSearch': 'chatSearch',
-    'keyup .js-chatMessage': 'sendChat'
+    'keyup .js-chatMessage': 'sendChat',
+    'click .js-username': 'usernameClick'
   },
 
   initialize: function(options){
@@ -106,8 +107,9 @@ module.exports = Backbone.View.extend({
 
   openChat: function(guid, key) {
     var self = this;
-    this.newChat();
+    this.openConversation();
     $('#inputConversationRecipient').val(guid);
+    $('.chatConversationLabel').html(guid);
     $('#inputConversationKey').val(key);
     $('#inputConversationMessage').focus();
 
@@ -146,10 +148,12 @@ module.exports = Backbone.View.extend({
 
   },
 
-  newChat: function() {
-    this.slideChatOut();
-    $('.chatConversationTo').removeClass('hide');
-    this.openConversation();
+  usernameClick: function(){
+    var targ = $('.js-navNotificationsMenu');
+    targ.addClass('hide');
+    $('#overlay').addClass('hide');
+    console.log(this);
+    Backbone.history.navigate('#userPage/'+$('#inputConversationRecipient').val()+'/store', {trigger: true});
   },
 
   sendChat: function(e) {
@@ -187,6 +191,7 @@ module.exports = Backbone.View.extend({
   },
 
   openConversation: function() {
+    this.slideChatOut();
     $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
     $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed');
   },
@@ -210,8 +215,9 @@ module.exports = Backbone.View.extend({
     // Adjust elements
     $(this.$el).find('.chatSearch').addClass('chatSearchOut');
 
-    var chatButton = $(this.$el).find('.btn-newChat');
-    chatButton.addClass('btn-newChatOut', 500);
+    var chatButton = $(this.$el).find('.btn-chatOpen');
+    chatButton.addClass('hide');
+    $('.chatMessagesLabel').removeClass('hide');
     chatButton.find('span').removeClass('hide');
   },
 
@@ -226,8 +232,8 @@ module.exports = Backbone.View.extend({
 
   closeChat: function(){
     this.slideChatIn();
-    var chatButton = $(this.$el).find('.btn-newChat');
-    chatButton.removeClass('btn-newChatOut', 500);
+    var chatButton = $(this.$el).find('.btn-chatOpen');
+    chatButton.removeClass('hide');
     chatButton.find('span').addClass('hide');
     this.closeConversation();
   },
