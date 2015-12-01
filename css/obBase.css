@@ -503,6 +503,10 @@ form {
   margin-bottom: 60px;
 }
 
+.row100 {
+  margin-bottom: 100px;
+}
+
 .rowTop241 {
   /* special class for the itemEdit view */
   margin-top: 241px;
@@ -1946,6 +1950,11 @@ input[type="checkbox"].fieldItem + label span {
   width: 950px;
   padding: 0;
   z-index: 0;
+}
+
+.banner-settings {
+  height: 300px;
+  width: 712px;
 }
 
 .user-page-content {

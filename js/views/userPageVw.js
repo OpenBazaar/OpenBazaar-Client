@@ -248,6 +248,7 @@ module.exports = Backbone.View.extend({
 
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
+        maxZoom: 5,
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
           $('.js-headerLoading').removeClass('fadeOut');

@@ -286,7 +286,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="website"
                        type="text"
                        id="website"
                        placeholder="http://mywebsite.com"
@@ -303,7 +303,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="email"
                        type="text"
                        id="email"
                        placeholder="me@email.com"
@@ -320,7 +320,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="facebook"
                        type="text"
                        id="settingsFacebookInput"
                        data-type="facebook"
@@ -338,7 +338,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="twitter"
                        type="text"
                        id="settingsTwitterInput"
                        data-type="twitter"
@@ -356,7 +356,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="instagram"
                        type="text"
                        id="settingsInstagramInput"
                        data-type="instagram"
@@ -374,7 +374,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="snapchat"
                        type="text"
                        id="settingsSnapchatInput"
                        data-type="snapchat"
@@ -392,7 +392,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="pgp_key"
                        type="text"
                        id="pgp_key"
                        placeholder="<%= polyglot.t('PGP Key') %>"
@@ -436,7 +436,13 @@
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="flexRow">
                  <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
-                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20" id="settings-theme-1" data-primary-color="#461222" data-secondary-color="#641630" data-background-color="#291318" data-text-color="#ffffff" data-cover-photo="imgs/themes/1/header.png" />
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
+                           id="settings-theme-1"
+                           data-primary-color="#461222"
+                           data-secondary-color="#641630"
+                           data-background-color="#291318"
+                           data-text-color="#ffffff"
+                           data-cover-photo="imgs/themes/1/header.png" />
                     <label for="settings-theme-1" class="radioLabel">
                       <div class="theme-background" style="background: #291318">
                         <div class="theme-global-header" style="background: #641630"></div>
@@ -450,7 +456,13 @@
                   </div>
 
                   <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
-                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20" id="settings-theme-2" data-primary-color="#e8e8e8" data-secondary-color="#d1d1d1" data-background-color="#787878" data-text-color="#545454" data-cover-photo="imgs/themes/2/header.png" />
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
+                           id="settings-theme-2"
+                           data-primary-color="#e8e8e8"
+                           data-secondary-color="#d1d1d1"
+                           data-background-color="#787878"
+                           data-text-color="#545454"
+                           data-cover-photo="imgs/themes/2/header.png" />
                     <label for="settings-theme-2" class="radioLabel">
                       <div class="theme-background" style="background: #787878">
                         <div class="theme-global-header" style="background: #d1d1d1"></div>
@@ -464,7 +476,13 @@
                   </div>
 
                   <div class="theme-container clearfix custCol-border-secondary borderBottom">
-                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20" id="settings-theme-3" data-primary-color="#3F4641" data-secondary-color="#515752" data-background-color="#272B24" data-text-color="#ffffff" data-cover-photo="imgs/themes/3/header.png" />
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
+                           id="settings-theme-3"
+                           data-primary-color="#3F4641"
+                           data-secondary-color="#515752"
+                           data-background-color="#272B24"
+                           data-text-color="#ffffff"
+                           data-cover-photo="imgs/themes/3/header.png" />
                     <label for="settings-theme-3" class="radioLabel">
                       <div class="theme-background" style="background: #272B24">
                         <div class="theme-global-header" style="background: #515752"></div>
@@ -530,9 +548,18 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border-secondary height250 js-settingsCoverPhoto">
-                <input type="file" id="settingsCoverPhotoInput" class="hide" />
-                <label for="settingsCoverPhotoInput" class="btn btn-txt rowTop20 marginLeft15 color-secondary custCol-secondary"><%= polyglot.t('CoverPhotoButton') %></label>
+              <div class="flexCol-9 custCol-border-secondary js-settingsCoverPhoto">
+                <div id="settings-image-cropperBanner" class="banner-settings positionWrapper">
+                  <div class="statusBar navBar fadeOut positionAbsolute js-bannerLoading">
+                    <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
+                  </div>
+                  <div class="cropit-image-preview banner-settings positionTop js-settingsBannerPreview"></div>
+                  <div class="positionBottom hCentered row100">
+                    <input type="range" class="cropit-image-zoom-input" />
+                  </div>
+                  <input type="file" id="settingsBannerInput" class="cropit-image-input hide" />
+                  <label for="settingsBannerInput" class="btn btn-txt positionBottom hCentered row20 color-secondary custCol-secondary"><%= polyglot.t('CoverPhotoButton') %></label>
+                </div>
               </div>
             </div>
 
@@ -544,7 +571,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="primary_color"
                        type="text"
                        id="primary_color"
                        class="fieldItem"
@@ -560,7 +587,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="secondary_color"
                        type="text"
                        id="secondary_color"
                        class="fieldItem"
@@ -577,7 +604,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="background_color"
                        type="text"
                        id="background_color"
                        class="fieldItem"
@@ -593,7 +620,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="handle"
+                <input name="text_color"
                        type="text"
                        id="text_color"
                        class="fieldItem"

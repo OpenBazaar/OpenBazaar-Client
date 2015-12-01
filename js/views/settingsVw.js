@@ -86,11 +86,30 @@ module.exports = Backbone.View.extend({
         $preview: $('.js-settingsAvatarPreview'),
         $fileInput: $('#settingsAvatarInput'),
         smallImage: "stretch",
+        maxZoom: 2,
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
           self.$el.find('.js-avatarLoading').removeClass('fadeOut');
         },
         onImageLoaded: function(){self.$el.find('.js-avatarLoading').addClass('fadeOut');},
+        onImageError: function(errorObject, errorCode, errorMessage){
+          console.log(errorObject);
+          console.log(errorCode);
+          console.log(errorMessage);
+        }
+      });
+      $('#settings-image-cropperBanner').cropit({
+        $preview: $('.js-settingsBannerPreview'),
+        $fileInput: $('#settingsBannerInput'),
+        smallImage: "stretch",
+        exportZoom: 2,
+        maxZoom: 5,
+        onFileReaderError: function(data){console.log(data);},
+        onFileChange: function(){
+          console.log("foo");
+          self.$el.find('.js-bannerLoading').removeClass('fadeOut');
+        },
+        onImageLoaded: function(){self.$el.find('.js-bannerLoading').addClass('fadeOut');},
         onImageError: function(errorObject, errorCode, errorMessage){
           console.log(errorObject);
           console.log(errorCode);
@@ -256,7 +275,7 @@ module.exports = Backbone.View.extend({
     Backbone.history.loadUrl();
   },
 
-  themeClick: function(e){
+  themeClick: function(e) {
     var theme = $(e.currentTarget).data();
 
     // Populate the color inputs on theme change
@@ -264,7 +283,8 @@ module.exports = Backbone.View.extend({
     $('#secondary_color').val(theme["secondaryColor"]);
     $('#background_color').val(theme["backgroundColor"]);
     $('#text_color').val(theme["textColor"]);
-    $('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
+    //$('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
+    $('#settings-image-cropperBanner').cropit('imageSrc', theme["coverPhoto"]);
   },
 
   saveData: function(form, modelJSON, endPoint, onSucceed, onFail, addData) {
@@ -284,6 +304,7 @@ module.exports = Backbone.View.extend({
         formKeys.push(value.name);
       });
     }
+    console.log(addData);
 
     __.each(addData, function(value, key){
       console.log(value);
@@ -341,17 +362,39 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         form = this.$el.find("#pageForm"),
+        avatarCrop = this.$el.find('#settings-image-cropper'),
         imageURI,
+        bannerURI,
         img64Data = {},
+        banner64Data = {},
         imgData = {},
         socialInputCount = 0,
-        socialInputs = self.$el.find('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput');
+        socialInputs = self.$el.find('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput'),
+        pColor = self.$el.find('#primary_color'),
+        sColor = self.$el.find('#secondary_color'),
+        bColor = self.$el.find('#background_color'),
+        tColor = self.$el.find('#text_color'),
+        pColorVal = pColor.val(),
+        bColorVal = bColor.val(),
+        sColorVal = sColor.val(),
+        tColorVal = tColor.val();
 
     var sendPage = function(){
       console.log("sendPage");
+      //change color inputs to hex values
+      pColor.val(parseInt(pColorVal.slice(1), 16));
+      sColor.val(parseInt(sColorVal.slice(1), 16));
+      bColor.val(parseInt(bColorVal.slice(1), 16));
+      tColor.val(parseInt(tColorVal.slice(1), 16));
+
       self.saveData(form, self.model.get('page'), "profile", function(){
         "use strict";
         showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        //set color inputs back to original values
+        pColor.val(pColorVal);
+        sColor.val(sColorVal);
+        bColor.val(bColorVal);
+        tColor.val(tColorVal);
       }, "", imgData);
     };
 
@@ -383,10 +426,36 @@ module.exports = Backbone.View.extend({
         }
       };
 
-    //if an avatar has been set, upload it first and get the hash
-    if($("#settingsAvatarInput").val()){
+    var checkBanner = function(){
+      var bannerCrop = self.$el.find('#settings-image-cropperBanner');
+      if(bannerCrop.cropit('imageSrc')){
 
-      imageURI = self.$el.find('#settings-image-cropper').cropit('export', {
+        bannerURI = bannerCrop.cropit('export', {
+          type: 'image/jpeg',
+          quality: 0.75,
+          originalSize: false
+        });
+        bannerURI = bannerURI.replace(/^data:image\/(png|jpeg);base64,/, "");
+        banner64Data.image = bannerURI;
+
+        self.saveData('', '', "upload_image", function (data) {
+          "use strict";
+          var img_hash = data.image_hashes[0];
+          console.log("==============banner saved");
+          if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+            imgData.header = img_hash;
+            checkSocialCount();
+          }
+        },"", banner64Data);
+      } else {
+        checkSocialCount();
+      }
+    };
+
+    //if an avatar has been set, upload it first and get the hash
+    if(avatarCrop.cropit('imageSrc')){
+
+      imageURI = avatarCrop.cropit('export', {
         type: 'image/jpeg',
         quality: 0.75,
         originalSize: false
@@ -399,11 +468,11 @@ module.exports = Backbone.View.extend({
             var img_hash = data.image_hashes[0];
             if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
               imgData.avatar = img_hash;
-              checkSocial();
+              checkBanner();
             }
           },"", img64Data);
     } else {
-      checkSocialCount();
+      checkBanner();
     }
   },
 
