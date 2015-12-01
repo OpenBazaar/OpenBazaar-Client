@@ -19,6 +19,7 @@ module.exports = Backbone.View.extend({
     'click .js-closeChat': 'closeChat',
     'click .js-closeConversation': 'closeConversation',
     'click .js-chatSearch': 'chatSearch',
+    'keydown .js-chatMessage': 'checkShift',
     'keyup .js-chatMessage': 'sendChat',
     'click .js-username': 'usernameClick'
   },
@@ -37,6 +38,8 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
+
+    this.shiftDown = false; // Detect shift key down
 
     // Render chat list items
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
@@ -172,37 +175,57 @@ module.exports = Backbone.View.extend({
     Backbone.history.navigate('#userPage/'+$('#inputConversationRecipient').val()+'/store', {trigger: true});
   },
 
+  checkShift: function(e) {
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if(code == 16) {
+      this.shiftDown = true;
+    }
+  },
+
   sendChat: function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
-    if(code == 13) {
-      var targetForm = this.$el.find('#chatConversation');
 
-      // Chat details
-      var chat_guid = targetForm.find('#inputConversationRecipient')[0].value;
-      //var chat_handle = targetForm.find('#inputConversationHandle').value;
-      var chat_body = targetForm.find('#inputConversationMessage')[0].value;
-      var chat_subject = "";
-      var chat_msgtype = "chat";
-      var chat_key = targetForm.find('#inputConversationKey')[0].value;
+    if(!this.shiftDown) {
 
-      var socketMessageId = Math.random().toString(36).slice(2);
+      if(code == 13) {
+        var targetForm = this.$el.find('#chatConversation');
+        var chat_body = targetForm.find('#inputConversationMessage')[0].value;
 
-      var chatMessage = {"request": {
-          "api" : "v1",
-          "id": socketMessageId,
-          "command" : "send_message",
-          "guid" : chat_guid,
-          "handle" : "",
-          "message" : chat_body,
-          "subject" : chat_subject,
-          "message_type" : chat_msgtype,
-          "recipient_key" : chat_key
-      }};
+        if (chat_body != "" && chat_body != '\n') {
 
-      this.socketView.sendMessage(JSON.stringify(chatMessage));
+          // Chat details
+          var chat_guid = targetForm.find('#inputConversationRecipient')[0].value;
+          //var chat_handle = targetForm.find('#inputConversationHandle').value;
+          var chat_subject = "";
+          var chat_msgtype = "chat";
+          var chat_key = targetForm.find('#inputConversationKey')[0].value;
 
-      targetForm.find('#inputConversationMessage')[0].value = "";
+          var socketMessageId = Math.random().toString(36).slice(2);
 
+          var chatMessage = {
+            "request": {
+              "api": "v1",
+              "id": socketMessageId,
+              "command": "send_message",
+              "guid": chat_guid,
+              "handle": "",
+              "message": chat_body,
+              "subject": chat_subject,
+              "message_type": chat_msgtype,
+              "recipient_key": chat_key
+            }
+          };
+
+          this.socketView.sendMessage(JSON.stringify(chatMessage));
+        }
+
+        targetForm.find('#inputConversationMessage')[0].value = "";
+
+      }
+    } else {
+      if(code == 16) {
+        this.shiftDown = false;
+      }
     }
   },
 
