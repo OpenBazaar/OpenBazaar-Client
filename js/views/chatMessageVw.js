@@ -23,6 +23,11 @@ module.exports = Backbone.View.extend({
       var timestamp = self.model.get('timestamp');
       var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMM D, h:mm A');
       self.model.set('formattedTimestamp', formatted_timestamp);
+
+      // Handle line breaks
+      var msg = self.model.get('message').replace(/\n$/, "").split(/[\r\n]/g).join("<br/><br/>");
+      self.model.set('formattedMessage', msg);
+
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;

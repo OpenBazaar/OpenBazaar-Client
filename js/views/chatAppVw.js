@@ -161,9 +161,6 @@ module.exports = Backbone.View.extend({
           console.log('none found');
         } else {
           __.each(chatMessages.models, function (chatMessage) {
-            // Handle line breaks
-            var msg = chatMessage.get('message').split(/[\r\n]/g).join("<br/>");
-            chatMessage.set('message', msg);
 
             "use strict";
             if(chatMessage.image_hash === undefined) {

@@ -2,7 +2,7 @@
     <table width="100%">
         <% if(ob.outgoing) { %>
         <tr>
-            <td class="chatConversationMessageBody"><%- ob.message%></td>
+            <td class="chatConversationMessageBody"><%= ob.formattedMessage%></td>
             <td class="chatConversationMessageAvatar">
                 <div class="thumbnail custcol-border-secondary"
                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
@@ -17,7 +17,7 @@
                 <div class="thumbnail custcol-border-secondary"
                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
             </td>
-            <td class="chatConversationMessageBody"><%= ob.message %></td>
+            <td class="chatConversationMessageBody"><%= ob.formattedMessage %></td>
         </tr>
         <tr>
             <td align="right" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
