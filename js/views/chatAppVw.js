@@ -26,13 +26,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function(options){
     __.bindAll(this, 'beforeRender', 'render', 'afterRender');
-    var _this = this;
-    this.render = __.wrap(this.render, function(render) {
-        _this.beforeRender();
-        render();
-        _this.afterRender();
-        return _this;
-    });
 
     var self = this;
     this.options = options || {};
@@ -65,6 +58,7 @@ module.exports = Backbone.View.extend({
 
     loadTemplate('./js/templates/chatApp.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
+      self.afterRender();
     });
 
     return this;
