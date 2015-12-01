@@ -155,6 +155,8 @@ module.exports = Backbone.Model.extend({
         LoadingImage: "Loading Image...",
         UploadAvatar: "Upload Avatar",
         SaveAvatar: "Save Avatar",
+        NewAvatar: "Select New Avatar",
+        NewCoverImage: "Select New Cover Image",
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -362,6 +364,8 @@ module.exports = Backbone.Model.extend({
         LoadingImage: "Cargando Imagen ... ",
         UploadAvatar: "Subir Avatar ",
         SaveAvatar: "Guardar Avatar ",
+        NewAvatar: "Seleccione Nuevo Avatar",
+        NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
           getError: "Los datos no se pudieron recuperar.",
@@ -565,6 +569,8 @@ module.exports = Backbone.Model.extend({
         LoadingImage: "Bild wird geladen...",
         UploadAvatar: "Avatar hochladen",
         SaveAvatar: "Avatar speichern",
+        NewAvatar: "W&auml;hlen Sie New Avatar",
+        NewCoverImage: "W&auml;hlen Sie New Cover Image",
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
           getError: "Daten konnten nicht empfangen werden.",
@@ -768,6 +774,8 @@ module.exports = Backbone.Model.extend({
         LoadingImage: "Caricamento immagine...",
         UploadAvatar: "Carica Avatar",
         SaveAvatar: "Salva Avatar",
+        NewAvatar: "Selezionare Nuovo Avatar",
+        NewCoverImage: "Selezionare Nuovo Copertina",
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
           getError: "I dati non sono stati recuperati.",

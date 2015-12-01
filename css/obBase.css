@@ -144,7 +144,6 @@ form {
 .mainContainer {
   background-color: #063753;
   position: relative;
-  overflow: hidden;
   min-height: 800px;
   margin-bottom: 100px;
   border-top-left-radius: 3px;
@@ -778,7 +777,7 @@ h5 {
 .welcomeBar,
 .settingsBar {
   background-color: transparent;
-  height: 58px;
+  height: 50px;
   line-height: 50px;
   position: relative;
   z-index: 2;
@@ -796,12 +795,11 @@ h5 {
   z-index: 2;
 }
 
-.welcomeBar div,
+.welcomeBar .welcomeBar-inner,
 .settingsBar .title-section {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  top: 8px;
   height: 50px;
   padding-left: 102px;
   position: relative;
@@ -2006,6 +2004,10 @@ input[type="checkbox"].fieldItem + label span {
 
 .color-secondary {
   background: #327EB8;
+}
+
+.homeView {
+  margin-top: 8px;
 }
 
 .home-page-navigation {

@@ -412,7 +412,6 @@ module.exports = Backbone.View.extend({
         if(socialInput && socialInput.val()){
           socialData.account_type = socialInput.data('type');
           socialData.username = socialInput.val();
-          socialData.proof = "--";
           self.saveData("", "", "social_accounts",
             function(data){
               "use strict";
