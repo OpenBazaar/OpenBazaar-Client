@@ -87,6 +87,7 @@ module.exports = Backbone.View.extend({
             }
             chat.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chat.get('image_hash') + "&guid=" + chat.get('guid'));
             self.renderChat(chat);
+
           });
           $('#chatHeads').html(self.listWrapper);
         }
@@ -120,6 +121,7 @@ module.exports = Backbone.View.extend({
 
   openChat: function(guid, key) {
     var self = this;
+    var numberOfChatMessages = 0;
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
     $('.chatConversationLabel').html(guid);
@@ -152,12 +154,22 @@ module.exports = Backbone.View.extend({
               chatMessage.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chatMessage.get('image_hash') + "&guid=" + chatMessage.get('guid'));
             }
             self.renderChatMessage(chatMessage);
+            numberOfChatMessages++;
           });
 
-          $('#chatConversation .chatConversationContent').html(self.listWrapperChat).animate({ scrollTop: $('#chatConversation .chatConversationContent').prop("scrollHeight")}, 100);
+          $('#chatConversation .chatConversationContent').html(self.listWrapperChat).promise().done(function() {
+            "use strict";
+            $(this).animate({ scrollTop: numberOfChatMessages*100}, 100);
+          });
+          //$('#chatConversation .chatConversationContent').html(self.listWrapperChat).animate({ scrollTop: $('#chatConversation .chatConversationContent').prop("scrollHeight")}, 100);
         }
       }
     });
+
+    // Mark as read
+    $.post(model.get('serverUrl') + "mark_chat_message_as_read", {guid: guid});
+    $('#chatHead_' + guid).attr('data-count', 0);
+    $('#chatHead_' + guid).removeClass('badge');
 
   },
 
