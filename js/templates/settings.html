@@ -762,23 +762,31 @@
               <div class="flexRow">
                 <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('CurrentAddress') %></h3>
               </div>
-              <% _.each(ob.user.shipping_addresses, function(address, i){ %>
               <div class="flexRow marginLeft15 marginTop15">
-                <div class="flexCol-4 padding15 color-secondary custCol-secondary borderRadius3 fontSize16">
-                  <div class="textOpacity75">
-                    <div><%- address.name %></div>
-                    <div><%- address.street %></div>
-                    <div><%- address.city %>, <%- address.state %> <%- address.postal_code %></div>
-                    <div class="capitalize"><%- address.country.toLowerCase().replace("_", " ") %></div>
+                <% _.each(ob.user.shipping_addresses, function(address, i){ %>
+                <div class="flexCol-4 padding5">
+                  <div class="padding15 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
+                    <div class="textOpacity75">
+                      <div><%- address.name %></div>
+                      <div><%- address.street %></div>
+                      <div><%- address.city %>, <%- address.state %> <%- address.postal_code %></div>
+                      <div class="capitalize"><%- address.country.toLowerCase().replace("_", " ") %></div>
+                    </div>
+
+                    <div class="btn marginTop6 custCol-primary clickable">
+                      <input type="checkbox"
+                             class="hide js-settingsAddress"
+                             id="settingsAddress<%- i %>"
+                             value="<%- i %>">
+                      <label for="settingsAddress<%- i %>">
+                        <span class="fontSize12 clickable togLabelOff js-settingsAddressDelete"><%= polyglot.t('Delete') %></span>
+                        <span class="fontSize12 clickable togLabelOn js-settingsAddressUnDelete"><%= polyglot.t('DontDelete') %></span>
+                      </label>
+                    </div>
                   </div>
-<!--                   <input type="checkbox"
-                     class="fieldItem js-settingsAddress"
-                     id="settingsAddress<%- i %>"
-                     value="<%- i %>"> -->
-                  <div class="btn btn-txt marginTop6 custCol-primary clickable"><label class="fontSize12 clickable"><%= polyglot.t('Delete') %></label></div>
                 </div>
+                <% }); %>
               </div>
-              <% }); %>
             </div>
             <% } %>
 
@@ -886,7 +894,7 @@
 
             </div>
 
-            <div class="flexRow">
+            <div class="flexRow overflowVisible">
 
               <div class="flexCol-2 borderRight custCol-border-secondary">
                 <div class="fieldItem">

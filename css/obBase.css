@@ -733,6 +733,10 @@ h5 {
   opacity: 0.50;
 }
 
+.div-fadeExtra {
+  opacity: 0.3;
+}
+
 .txt-lowleading {
   line-height: 1.2;
 }
@@ -1810,6 +1814,45 @@ input[type="checkbox"].fieldItem + label div,
 input[type="checkbox"].fieldItem + label span {
   /* if the label has elements inside it, remove line height */
   line-height: normal;
+}
+
+input[type="checkbox"] + label .togLabelOn,
+input[type="checkbox"].fieldItem + label .togLabelOn,
+input[type="checkbox"] + label .togLabelOff,
+input[type="checkbox"].fieldItem + label .togLabelOff {
+  padding: 0 16px;
+}
+
+input[type="checkbox"] + label .togLabelOn,
+input[type="checkbox"].fieldItem + label .togLabelOn {
+  display: none;
+}
+
+input[type="checkbox"] + label .togLabelOff,
+input[type="checkbox"].fieldItem + label .togLabelOff {
+  display: inline-block
+}
+
+input[type="checkbox"]:checked + label .togLabelOn,
+input[type="checkbox"].fieldItem:checked + label .togLabelOn {
+  display: inline-block;
+}
+
+input[type="checkbox"]:checked + label .togLabelOff,
+input[type="checkbox"].fieldItem:checked + label .togLabelOff {
+  display: none;
+}
+
+.btn input[type="checkbox"].fieldItem + label {
+  line-height: inherit;
+  display: inline;
+  padding: 0 0 0 26px;
+  left: -7px;
+}
+
+.btn input[type="checkbox"].fieldItem + label:before {
+  top: 0;
+  left: 0;
 }
 
 #userPage .fieldItem-selectWrapper select option {

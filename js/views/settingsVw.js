@@ -35,7 +35,9 @@ module.exports = Backbone.View.extend({
     'click .js-saveStore': 'saveStore',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvanced',
-    'change .js-settingsThemeSelection' : 'themeClick',
+    'change .js-settingsThemeSelection': 'themeClick',
+    'click .js-settingsAddressDelete': 'addressDelete',
+    'click .js-settingsAddressUnDelete': 'addressUnDelete',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -297,8 +299,8 @@ module.exports = Backbone.View.extend({
 
   addressesClick: function(){
     "use strict";
-    this.setState("general");
-    this.addTabToHistory("general");
+    this.setState("addresses");
+    this.addTabToHistory("addresses");
   },
 
   pageClick: function(){
@@ -540,8 +542,6 @@ module.exports = Backbone.View.extend({
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [];
 
-    console.log(moderatorsChecked);
-
     moderatorsChecked.each(function() {
       modList.push($(this).data('guid'));
     });
@@ -553,6 +553,40 @@ module.exports = Backbone.View.extend({
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
     }, "", modData);
+  },
+
+  saveAddress: function(){
+    "use strict";
+    var self = this,
+        form = this.$el.find("#addressesForm"),
+        newAddress = {},
+        newAddresses = [],
+        addressData = {};
+
+    newAddress.name = this.$el.find('#settingsShipToName').val();
+    newAddress.street = this.$el.find('#settingsShipToStreet').val();
+    newAddress.city = this.$el.find('#settingsShipToCity').val();
+    newAddress.state = this.$el.find('#settingsShipToState').val();
+    newAddress.postal_code = this.$el.find('#settingsShipToPostalCode').val();
+    newAddress.country = this.$el.find('#settingsShipToCountry').val();
+
+    if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
+      newAddresses.push(newAddress);
+    }
+
+    this.$el.find('.js-settingsAddress:not(:checked)').each(function(){
+      newAddresses.push(self.model.get('user').shipping_addresses[$(this).val()]);
+    });
+
+    if(newAddresses){
+      addressData.shipping_addresses = JSON.stringify(newAddresses);
+    }
+
+    this.saveData(form, this.model.get('user'), "settings", function(){
+      "use strict";
+      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.refreshView();
+    }, "", addressData);
   },
 
   refreshView: function(){
@@ -705,6 +739,16 @@ module.exports = Backbone.View.extend({
             submit();
         }
 
+  },
+
+  addressDelete: function(e){
+    "use strict";
+    $(e.target).closest('.js-address').addClass('div-fadeExtra');
+  },
+
+  addressUnDelete: function(e){
+    "use strict";
+    $(e.target).closest('.js-address').removeClass('div-fadeExtra');
   },
 
   close: function(){
