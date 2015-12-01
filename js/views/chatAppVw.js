@@ -24,6 +24,15 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(options){
+    __.bindAll(this, 'beforeRender', 'render', 'afterRender');
+    var _this = this;
+    this.render = __.wrap(this.render, function(render) {
+        _this.beforeRender();
+        render();
+        _this.afterRender();
+        return _this;
+    });
+
     var self = this;
     this.options = options || {};
     this.parentEl = $(options.parentEl);
@@ -32,12 +41,39 @@ module.exports = Backbone.View.extend({
     // Render chat list items
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
     this.chats = new chatCollection();
-    var model = this.options.model;
 
     this.subViews = [];
     this.subViewsChat = [];
     this.render();
 
+    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      this.handleSocketMessage(response);
+    });
+
+    this.listenTo(window.obEventBus, "openChat", function(guid, key) {
+      this.openChat(guid, key);
+    });
+
+  },
+
+  render: function(){
+    "use strict";
+    var self = this;
+
+    loadTemplate('./js/templates/chatApp.html', function(loadedTemplate) {
+      self.$el.html(loadedTemplate());
+    });
+
+    return this;
+  },
+
+  beforeRender: function() {
+    // NOOP
+  },
+
+  afterRender: function() {
+    var model = this.options.model;
+    var self = this;
     this.chats.url = model.get('serverUrl') + "get_chat_conversations";
     this.chats.fetch({
       success: function(chats, response) {
@@ -59,26 +95,6 @@ module.exports = Backbone.View.extend({
         }
       }
     });
-
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
-      this.handleSocketMessage(response);
-    });
-
-    this.listenTo(window.obEventBus, "openChat", function(guid, key) {
-      this.openChat(guid, key);
-    });
-
-  },
-
-  render: function(){
-    "use strict";
-    var self = this;
-
-    loadTemplate('./js/templates/chatApp.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate());
-    });
-
-    return this;
   },
 
   renderChat: function(model){
