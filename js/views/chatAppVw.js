@@ -182,11 +182,14 @@ module.exports = Backbone.View.extend({
 
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat).promise().done(function() {
             "use strict";
-            $(this).animate({ scrollTop: 99999999999}, 100);
+            $(this).animate({ scrollTop: 99999999999}, 100); // Arbitrary long value
           });
         }
       }
     });
+
+    $('.chatHead').removeClass('chatHeadSelected');
+    $('#chatHead_' + guid).parent().addClass('chatHeadSelected');
 
     // Mark as read
     $.post(model.get('serverUrl') + "mark_chat_message_as_read", {guid: guid});
@@ -199,7 +202,6 @@ module.exports = Backbone.View.extend({
     var targ = $('.js-navNotificationsMenu');
     targ.addClass('hide');
     $('#overlay').addClass('hide');
-    console.log(this);
     Backbone.history.navigate('#userPage/'+$('#inputConversationRecipient').val()+'/store', {trigger: true});
   },
 

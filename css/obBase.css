@@ -1335,6 +1335,14 @@ div.chatSearchOut .chatSearchIcon {
   width: 100%;
 }
 
+.chatHead {
+  padding:5px;
+}
+
+.chatHeadSelected {
+  background-color: #444;
+}
+
 .chatHeadIcon {
   float:left;
 }
