@@ -1245,6 +1245,7 @@ div.chatSearchOut .chatSearchIcon {
   position: absolute;
   transition: bottom 0.5s ease;
   border: 1px solid #333;
+  border-top: 1px solid #BBB;
   background-color: #252525;
 }
 
@@ -1375,6 +1376,7 @@ div.chatSearchOut .chatSearchIcon {
   background-color: #333;
   font-size: 11px;
   padding: 5px;
+  word-break: break-all;
 }
 
 #inputConversationMessage {

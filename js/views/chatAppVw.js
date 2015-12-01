@@ -141,17 +141,35 @@ module.exports = Backbone.View.extend({
 
   openChat: function(guid, key) {
     var self = this;
+    var model = this.options.model;
+
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
     $('.chatConversationLabel').html(guid);
     $('#inputConversationKey').val(key);
     $('#inputConversationMessage').focus();
 
+    this.updateChat(guid);
+
+    $('.chatHead').removeClass('chatHeadSelected');
+    $('#chatHead_' + guid).parent().addClass('chatHeadSelected');
+
+    // Mark as read
+    $.post(model.get('serverUrl') + "mark_chat_message_as_read", {guid: guid});
+    $('#chatHead_' + guid).attr('data-count', 0);
+    $('#chatHead_' + guid).removeClass('badge');
+
+  },
+
+  updateChat: function(guid) {
+    var model = this.options.model;
+    var self = this;
+
+    this.subViewsChat = [];
+
     // Load conversation from DB
     this.chatMessages = new chatMessageCollection();
     this.chatMessages.url = this.options.model.get('serverUrl') + "get_chat_messages?guid=" + guid;
-
-    var model = this.options.model;
 
     this.listWrapperChat = $('<div class="border0 custCol-border-secondary flexRow"></div>');
 
@@ -161,7 +179,6 @@ module.exports = Backbone.View.extend({
           console.log('none found');
         } else {
           __.each(chatMessages.models, function (chatMessage) {
-
             "use strict";
             if(chatMessage.image_hash === undefined) {
               var hash = window.localStorage.getItem("avatar_" + chatMessage.get('guid'));
@@ -184,15 +201,6 @@ module.exports = Backbone.View.extend({
         }
       }
     });
-
-    $('.chatHead').removeClass('chatHeadSelected');
-    $('#chatHead_' + guid).parent().addClass('chatHeadSelected');
-
-    // Mark as read
-    $.post(model.get('serverUrl') + "mark_chat_message_as_read", {guid: guid});
-    $('#chatHead_' + guid).attr('data-count', 0);
-    $('#chatHead_' + guid).removeClass('badge');
-
   },
 
   usernameClick: function(){
@@ -243,11 +251,14 @@ module.exports = Backbone.View.extend({
             }
           };
 
+          console.log(chatMessage);
+
           this.socketView.sendMessage(JSON.stringify(chatMessage));
         }
 
         targetForm.find('#inputConversationMessage')[0].value = "";
 
+        this.updateChat(chat_guid);
       }
     } else {
       if(code == 16) {
@@ -298,6 +309,7 @@ module.exports = Backbone.View.extend({
 
   closeChat: function(){
     this.slideChatIn();
+    $('.chatHeadSelected').removeClass('chatHeadSelected');
     var chatButton = $(this.$el).find('.btn-chatOpen');
     chatButton.removeClass('hide');
     chatButton.find('span').addClass('hide');
