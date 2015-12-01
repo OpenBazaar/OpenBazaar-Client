@@ -21,7 +21,8 @@ module.exports = Backbone.View.extend({
     'click .js-chatSearch': 'chatSearch',
     'keydown .js-chatMessage': 'checkShift',
     'keyup .js-chatMessage': 'sendChat',
-    'click .js-username': 'usernameClick'
+    'click .js-username': 'usernameClick',
+    'keyup .js-chatSearchText': 'chatSearchText'
   },
 
   initialize: function(options){
@@ -33,9 +34,6 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
 
     this.shiftDown = false; // Detect shift key down
-
-    // Render chat list items
-    this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
     this.chats = new chatCollection();
 
     this.subViews = [];
@@ -74,25 +72,40 @@ module.exports = Backbone.View.extend({
     this.chats.url = model.get('serverUrl') + "get_chat_conversations";
     this.chats.fetch({
       success: function(chats, response) {
-        if(chats.models.length < 1) {
-          self.renderNoneFound();
-        } else {
-          __.each(chats.models, function (chat) {
-            "use strict";
-            if(chat.image_hash === undefined) {
-              var hash = window.localStorage.getItem("avatar_" + chat.get('guid'));
-              if(hash !== "") {
-                chat.set('image_hash', hash);
-              }
-            }
-            chat.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chat.get('image_hash') + "&guid=" + chat.get('guid'));
-            self.renderChat(chat);
 
-          });
-          $('#chatHeads').html(self.listWrapper);
-        }
+        this.chats = chats;
+        self.renderChats();
       }
     });
+  },
+
+  renderChats: function() {
+    var self = this;
+    var model = this.options.model;
+    this.chats.comparator = function( model ) {
+      return model.get('timestamp');
+    };
+    this.chats.sort();
+
+    this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
+
+    if(this.chats.models.length < 1) {
+      self.renderNoneFound();
+    } else {
+      __.each(this.chats.models, function (chat) {
+        "use strict";
+        if(chat.image_hash === undefined) {
+          var hash = window.localStorage.getItem("avatar_" + chat.get('guid'));
+          if(hash !== "") {
+            chat.set('image_hash', hash);
+          }
+        }
+        chat.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chat.get('image_hash') + "&guid=" + chat.get('guid'));
+        self.renderChat(chat);
+
+      });
+      $('#chatHeads').html(self.listWrapper);
+    }
   },
 
   renderChat: function(model){
@@ -115,13 +128,19 @@ module.exports = Backbone.View.extend({
     // Decide what to do here
   },
 
-  refreshConversations: function() {
-
+  chatSearchText: function(e) {
+    var search = e.currentTarget.value;
+    if(search !== "") {
+      var t = this.chats.where({"guid": search});
+      this.chats = new chatCollection(t);
+    } else {
+      this.afterRender();
+    }
+    this.renderChats();
   },
 
   openChat: function(guid, key) {
     var self = this;
-    var numberOfChatMessages = 0;
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
     $('.chatConversationLabel').html(guid);
@@ -131,6 +150,7 @@ module.exports = Backbone.View.extend({
     // Load conversation from DB
     this.chatMessages = new chatMessageCollection();
     this.chatMessages.url = this.options.model.get('serverUrl') + "get_chat_messages?guid=" + guid;
+
     var model = this.options.model;
 
     this.listWrapperChat = $('<div class="border0 custCol-border-secondary flexRow"></div>');
@@ -141,6 +161,10 @@ module.exports = Backbone.View.extend({
           console.log('none found');
         } else {
           __.each(chatMessages.models, function (chatMessage) {
+            // Handle line breaks
+            var msg = chatMessage.get('message').split(/[\r\n]/g).join("<br/>");
+            chatMessage.set('message', msg);
+
             "use strict";
             if(chatMessage.image_hash === undefined) {
               var hash = window.localStorage.getItem("avatar_" + chatMessage.get('guid'));
@@ -154,14 +178,12 @@ module.exports = Backbone.View.extend({
               chatMessage.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chatMessage.get('image_hash') + "&guid=" + chatMessage.get('guid'));
             }
             self.renderChatMessage(chatMessage);
-            numberOfChatMessages++;
           });
 
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat).promise().done(function() {
             "use strict";
-            $(this).animate({ scrollTop: numberOfChatMessages*100}, 100);
+            $(this).animate({ scrollTop: 99999999999}, 100);
           });
-          //$('#chatConversation .chatConversationContent').html(self.listWrapperChat).animate({ scrollTop: $('#chatConversation .chatConversationContent').prop("scrollHeight")}, 100);
         }
       }
     });
