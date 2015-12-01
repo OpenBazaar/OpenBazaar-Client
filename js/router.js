@@ -131,7 +131,8 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new settingsView({
       userModel: this.options.userModel,
-      state: state
+      state: state,
+      socketView: this.socketView
     }), "userPage");
   },
 

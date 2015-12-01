@@ -5,7 +5,9 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
-    personListView = require('./userListVw'),
+    //personListView = require('./userListVw'),
+    userShortView = require('./userShortVw'),
+    userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
     showErrorModal = require('../utils/showErrorModal.js'),
     cropit = require('../utils/jquery.cropit'),
@@ -44,7 +46,9 @@ module.exports = Backbone.View.extend({
     /* expected options:
        userModel
        state
+       socketView
      */
+    this.socketView = options.socketView;
     this.userProfile = new userProfileModel();
     this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
     this.model = new Backbone.Model();
@@ -71,6 +75,12 @@ module.exports = Backbone.View.extend({
       }
     });
     this.subModels.push(this.userProfile);
+
+    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      this.handleSocketMessage(response);
+    });
+    this.socketModeratorID = Math.random().toString(36).slice(2);
+    this.moderatorCount = 0;
   },
 
   render: function(){
@@ -80,7 +90,7 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
       self.setState(self.options.state);
-      self.renderBlocked(self.model.get("user").blocked);
+      //self.renderBlocked(self.model.get("user").blocked);
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
         $preview: $('.js-settingsAvatarPreview'),
@@ -102,7 +112,7 @@ module.exports = Backbone.View.extend({
         $preview: $('.js-settingsBannerPreview'),
         $fileInput: $('#settingsBannerInput'),
         smallImage: "stretch",
-        exportZoom: 2,
+        exportZoom: 1.33,
         maxZoom: 5,
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
@@ -116,10 +126,12 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
+
+      self.socketView.getModerators(self.socketModeratorID);
     });
     return this;
   },
-
+/* this is not how this should work
   renderBlocked: function (model) {
     "use strict";
     this.blockedList = new personListView({model: model,
@@ -128,6 +140,7 @@ module.exports = Backbone.View.extend({
                                            message: ""});
     this.subViews.push(this.blockedList);
   },
+  */
 
   setFormValues: function(){
     var self = this,
@@ -202,6 +215,48 @@ module.exports = Backbone.View.extend({
     country.html(country_str);
     timezone.html(timezone_str);
     language.html(language_str);
+
+    __.each(this.model.get('page').profile.moderator_list, function(modID){
+      "use strict";
+      if(modID) {
+        self.renderModerator({'guid': modID, "isBlank": true});
+      }
+    });
+  },
+
+  handleSocketMessage: function(response) {
+    "use strict";
+    var data = JSON.parse(response.data);
+    if(data.id == this.socketModeratorID){
+      this.renderModerator(data.moderator);
+    }
+  },
+
+  renderModerator: function(moderator){
+    console.log(moderator);
+    "use strict";
+    var serverUrl = this.model.get('user').serverUrl,
+        existingMods = this.model.get('page').profile.moderator_list,
+        isExistingMod = existingMods.indexOf(moderator.guid) > -1 ? true : false;
+
+    moderator.serverUrl = serverUrl;
+    moderator.userID = moderator.guid;
+    moderator.avatarURL = serverUrl+"get_image?hash="+moderator.avatar_hash+"&guid="+moderator.guid;
+    moderator.isModerator = true; //flag for template
+    moderator.existingModerator = isExistingMod; //flag for template
+    moderator.micro = true; //flag for template
+    moderator.userCount = this.moderatorCount;
+    var newModModel = new userShortModel(moderator);
+    var modShort = new userShortView({model: newModModel});
+    if(isExistingMod){
+      //remove blank version that was already added
+      this.$el.find('.js-blankMod[data-guid="'+moderator.guid+'"]').remove();
+      this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+    } else {
+      this.$el.find('.js-settingsNewMods').append(modShort.el);
+    }
+    this.moderatorCount++;
+    this.subViews.push(modShort);
   },
 
   validateInput: function(e) {
@@ -355,6 +410,7 @@ module.exports = Backbone.View.extend({
     this.saveData(form, this.model.get('user'), "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.refreshView();
     });
   },
 
@@ -395,6 +451,7 @@ module.exports = Backbone.View.extend({
         sColor.val(sColorVal);
         bColor.val(bColorVal);
         tColor.val(tColorVal);
+        self.refreshView();
       }, "", imgData);
     };
 
@@ -473,6 +530,34 @@ module.exports = Backbone.View.extend({
     } else {
       checkBanner();
     }
+  },
+
+  saveStore: function(){
+    "use strict";
+    var self = this,
+        form = this.$el.find("#storeForm"),
+        modData = {},
+        moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
+        modList = [];
+
+    console.log(moderatorsChecked);
+
+    moderatorsChecked.each(function() {
+      modList.push($(this).data('guid'));
+    });
+
+    modData.moderator_list = modList;
+
+    this.saveData(form, this.model.get('page'), "profile", function(){
+      "use strict";
+      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.refreshView();
+    }, "", modData);
+  },
+
+  refreshView: function(){
+    "use strict";
+    window.location.reload();
   },
 
   saveClick: function(e){

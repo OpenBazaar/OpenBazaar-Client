@@ -656,17 +656,39 @@
               </div>
             </div>
 
-            <div class="flexRow TODO">
+            <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label> <!--for="moderators"-->
-                    <%= polyglot.t('Moderators') %>
+                    <%= polyglot.t('CurrentModerators') %>
                   </label>
+                  <div class="row20">
+                    <label class="textSize11px txt-unleaded"><%= polyglot.t('DeselectToRemoveModerator') %></label>
+                  </div>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0">
+                <div class="hideTopAndBottomBorder js-settingsCurrentMods">
+                  <!--TODO: moderators input here-->
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label> <!--for="moderators"-->
+                    <%= polyglot.t('AddModerators') %>
+                  </label>
+                  <div class="row20">
+                    <label class="textSize11px txt-unleaded"><%= polyglot.t('SelectToAddModerator') %></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="hideTopAndBottomBorder js-settingsNewMods">
                   <!--TODO: moderators input here-->
                 </div>
               </div>
@@ -692,7 +714,7 @@
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Content') %></h3>
             </div>
 
-            <div class="flexRow">
+            <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="terms_conditions">
@@ -713,8 +735,7 @@
               </div>
             </div>
 
-            <div class="flexRow">
-
+            <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="refund_policy">

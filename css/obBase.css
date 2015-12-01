@@ -466,6 +466,10 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
+.thumbnail-largeTrimmed {
+  height: 70px;
+}
+
 .thumbnail-large-slim {
   height: 58px;
   width: 58px;
@@ -896,6 +900,11 @@ h5 {
   margin: 0 -1px -1px 0;
   width: auto;
   overflow: hidden;
+}
+
+.hideTopAndBottomBorder {
+  /* use to hide the first and last border of the flexRows inside this element */
+  margin: -1px 0 -2px 0;
 }
 
 .flex-border > .flexRow > [class |= "flexCol"] {

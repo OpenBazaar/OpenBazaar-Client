@@ -32,7 +32,6 @@ module.exports = Backbone.View.extend({
       this.handleSocketMessage(response);
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);
-    this.socketView.getModerators(this.socketModeratorID);
     this.moderatorCount = 0;
     this.render();
   },
@@ -83,6 +82,7 @@ module.exports = Backbone.View.extend({
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
+      self.socketView.getModerators(self.socketModeratorID);
     });
   },
 
