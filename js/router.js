@@ -44,7 +44,7 @@ module.exports = Backbone.Router.extend({
 
   newView: function(view){
     "use strict";
-    $('body').removeClass("userPage");//add other body style classes if they are created
+    $('body').attr("id", "");//add other body style classes if they are created
     $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
@@ -80,7 +80,7 @@ module.exports = Backbone.Router.extend({
       itemHash: itemHash,
       socketView: this.socketView
     }));
-    $('body').addClass("userPage");
+    $('body').attr("id", "userPage");
   },
 
   customizePage: function(){
@@ -97,7 +97,7 @@ module.exports = Backbone.Router.extend({
       userID: this.options.userModel.get('guid'),
       state: 'itemNew'
     }));
-    $('body').addClass("userPage");
+    $('body').attr("id", "userPage");
   },
 
   purchases: function(){

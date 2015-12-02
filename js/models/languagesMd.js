@@ -149,8 +149,15 @@ module.exports = Backbone.Model.extend({
         Categories: "Categories",
         UpTo3: "Up to 3",
         AboutYourStore: "A description of your store",
+        PaymentType: "Payment Type",
+        ShipTo: "Ship To",
+        OrderDetails: "Order Details",
+        OrderSummary: "Order Summary",
+        NewAddress: "New Address",
         AllListings: "Listings",
         ComingSoon: "Coming Soon",
+        PaymentPending: "Payment Pending",
+        FinalizePurchase: "Finalize Purchase",
         LoadingImage: "Loading Image...",
         UploadAvatar: "Upload Avatar",
         SaveAvatar: "Save Avatar",
@@ -162,7 +169,9 @@ module.exports = Backbone.Model.extend({
           userError: "Information for this ID could not be found",
           userNotFoundError: "This person's information is not available. They may have gone offline.",
           notFoundError: "Data could not be loaded for:",
-          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466"
+          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
+          contractError: "This Item Cannot be Purchased",
+          sellerError: "The seller's server has rejected the purchase request"
         },
         filters: {
           pagesAllTypes: "All types",
@@ -212,6 +221,10 @@ module.exports = Backbone.Model.extend({
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar"
         },
+        buyFlow: {
+          MustAddAddress: "You must add an address to ship to",
+          VendorShipsTo: "This vendor ships to these countries"
+        }
       },
       {
         langName: "Espa&ntilde;ol",
@@ -333,7 +346,12 @@ module.exports = Backbone.Model.extend({
         Moderators: "Moderadores",
         Categories: "Categor&iacute;as",
         UpTo3: "Hasta 3",
+        PaymentType: "Tipo de pago",
+        ShipTo: "Nave",
+        OrderDetails: "Detalles Orden",
+        OrderSummary : " Resumen Orden",
         AboutYourStore: "Una descripci&oacute;n de su tienda",
+        NewAddress: "Nueva direcci&oacute;n",
         AllListings: "Todos los listados",
         ComingSoon: "Pr&oacute;ximamente",
         SaveChanges: "Guardar Cambios",
@@ -352,6 +370,8 @@ module.exports = Backbone.Model.extend({
         EnableSSL: "Habilitar SSL",
         LibbitcoinServerAddress: "Direcci�n del servidor Libbitcoin",
         ServerIPPort: "Server IP : Puerto",
+        PaymentPending: "En espera del pago",
+        FinalizePurchase: "Finalizar Compra",
         LoadingImage: "Cargando Imagen ... ",
         UploadAvatar: "Subir Avatar ",
         SaveAvatar: "Guardar Avatar ",
@@ -363,7 +383,9 @@ module.exports = Backbone.Model.extend({
           userError: "La informaci&oacute;n para este ID no se pudo encontrar",
           userNotFoundError: "La informaci&oacute;n de esta persona no est&aacute; disponible. Es posible que se hayan desconectado.",
           notFoundError: "Los datos no se pudieron cargar para:",
-          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466"
+          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466",
+          contractError: "Este artículo no puede ser comprado" ,
+          sellerError: "El servidor del vendedor ha rechazado la solicitud de compra"
         },
         filters: {
           pagesAllTypes: "Todos los tipos",
@@ -411,6 +433,10 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Conectar Existente",
           avatar: "Establecer un Avatar",
           chooseAvatar: "Seleccione avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "Usted debe agregar una dirección para enviar a",
+          VendorShipsTo: "este proveedor buques a estos países"
         }
       },
       {
@@ -562,7 +588,9 @@ module.exports = Backbone.Model.extend({
           userError: "Informationen f&uuml;r diese ID konnten nicht gefunden werden",
           userNotFoundError: "Die Informationen dieser Person sind nicht verf&uuml;gbar. M&ouml;glicherweise ist sie offline gegangen.",
           notFoundError: "Daten konnten nicht geladen werden f&uuml;r:",
-          socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut."
+          socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
+          contractError: "Dieser Artikel kann nicht gekauft werden",
+          sellerError: "Server des Verkäufers die Kaufanfrage abgelehnt wurde"
         },
         filters: {
           pagesAllTypes: "Alle Arten",
@@ -610,6 +638,10 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Verbinde existierenden",
           avatar: "Setze einen Avatar",
           chooseAvatar: "W&auml;hle einen Avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "Sie m&uuml;ssen eine Adresse zu versenden hinzuzuf&uuml;gen",
+          VendorShipsTo: "dieses Anbieters Schiffe in diese L&auml;nde"
         }
       },
       {
@@ -816,6 +848,10 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
+          VendorShipsTo: "Questo fornitore navi a questi paesi"
         }
       }
     ]
