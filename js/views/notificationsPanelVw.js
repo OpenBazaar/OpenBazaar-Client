@@ -83,7 +83,9 @@ module.exports = Backbone.View.extend({
       }
 
       var new_notification = new Backbone.Model(n);
+      new_notification.set('avatarURL', avatar);
       this.renderNotification(new_notification);
+      console.log(new_notification);
       var unread_count = $('.js-navNotifications:first').attr('data-count');
       if(unread_count) {
         unread_count = parseInt(unread_count) + 1;
