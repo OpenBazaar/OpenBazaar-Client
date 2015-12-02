@@ -177,6 +177,7 @@ module.exports = Backbone.View.extend({
       success: function(chatMessages, response) {
         if(chatMessages.models.length < 1) {
           console.log('none found');
+          $('#chatConversation .chatConversationContent').html(self.listWrapperChat);
         } else {
           __.each(chatMessages.models, function (chatMessage) {
             "use strict";
