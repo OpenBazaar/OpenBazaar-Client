@@ -43,7 +43,6 @@ module.exports = Backbone.View.extend({
     if(selectedAddress){
       this.trigger("setAddress", selectedAddress);
     }
-    console.log("selected "+ index);
   },
 
   close: function(){

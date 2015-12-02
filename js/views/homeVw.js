@@ -85,7 +85,6 @@ module.exports = Backbone.View.extend({
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    console.log(data);
     if(data.id == this.socketItemID){
       this.renderItem(data);
     } else if(data.id == this.socketVendorID) {

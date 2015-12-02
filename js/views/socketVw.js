@@ -53,7 +53,7 @@ module.exports = Backbone.View.extend({
 
   socketOpen: function() {
     "use strict";
-    console.log("socket is open");
+    //placeholder
   },
 
   waitForSocket: function(message) {

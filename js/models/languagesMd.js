@@ -221,6 +221,10 @@ module.exports = Backbone.Model.extend({
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar"
         },
+        buyFlow: {
+          MustAddAddress: "You must add an address to ship to",
+          VendorShipsTo: "This vendor ships to these countries"
+        }
       },
       {
         langName: "Espa&ntilde;ol",
@@ -429,6 +433,10 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Conectar Existente",
           avatar: "Establecer un Avatar",
           chooseAvatar: "Seleccione avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "Usted debe agregar una dirección para enviar a",
+          VendorShipsTo: "este proveedor buques a estos países"
         }
       },
       {
@@ -630,6 +638,10 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Verbinde existierenden",
           avatar: "Setze einen Avatar",
           chooseAvatar: "W&auml;hle einen Avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "Sie m&uuml;ssen eine Adresse zu versenden hinzuzuf&uuml;gen",
+          VendorShipsTo: "dieses Anbieters Schiffe in diese L&auml;nde"
         }
       },
       {
@@ -836,6 +848,10 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
+          VendorShipsTo: "Questo fornitore navi a questi paesi"
         }
       }
     ]

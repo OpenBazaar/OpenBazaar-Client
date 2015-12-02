@@ -52,7 +52,6 @@ module.exports = Backbone.View.extend({
     __.each(this.countryList, function(countryFromList, i){
       self.countriesSelect.append('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
     });
-    console.log(this.model);
     this.listenTo(this.model, 'change:totalPrice', this.setTotalPrice);
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
