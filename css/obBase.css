@@ -38,8 +38,10 @@ p a {
 }
 
 hr {
+  background-color: rgba(255,255,255,0.08);
+  border: 0;
+  height: 1px;
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.08);
 }
 
 input {
@@ -124,7 +126,7 @@ form {
 }
 
 #obContainer.compressed {
-  width: calc(100% - 220px);
+  width: calc(100% - 230px);
 }
 
 #pageNav {
@@ -142,8 +144,9 @@ form {
   position: fixed;
   right: -180px;
   top: 50px;
-  width:220px;
+  width:230px;
   background-color: #252525;
+  border-left: solid 1px #333333;
   height: calc(100% - 50px);
   z-index: 2;
   transition: right 0.5s ease;
@@ -164,6 +167,10 @@ form {
 
 .chatSearch {
   margin-left: 40px;
+}
+
+.chatRead {
+  opacity: .35;
 }
 
 .mainContainer {
@@ -1231,6 +1238,8 @@ input[type="text"].txtField-bar {
   padding-left: 10px;
   width: calc(100% - 10px);
   margin-left: 0;
+  height: 25px;
+  line-height: 25px;
 }
 
 div.chatSearchOut .chatSearchIcon {
@@ -1240,7 +1249,7 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversation {
   width: 100%;
-  height: 300px;
+  height: 360px;
   bottom: 0px;
   position: absolute;
   transition: bottom 0.5s ease;
@@ -1255,9 +1264,11 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatMessagesLabel {
   float:left;
-  padding: 10px;
   color: white;
-  font-weight: bold;
+  font-size: 14px;
+  height: 43px;
+  line-height: 43px;
+  padding-left: 10px;
 }
 
 .chatConversationHeads {
@@ -1269,9 +1280,12 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeader {
-  padding: 10px;
-  background-color: #292929;
-  border-bottom: 1px solid #333;
+    padding: 0;
+    background-color: #333333;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 7px;
+    color: #fff;
 }
 
 .chatConversationLabel {
@@ -1337,11 +1351,12 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatHead {
-  padding:5px;
+  padding: 0 5px;
 }
 
 .chatHeadSelected {
   background-color: #444;
+  opacity: 1;
 }
 
 .chatHeadIcon {
@@ -1353,6 +1368,7 @@ div.chatSearchOut .chatSearchIcon {
   font-size: 11px;
   float:left;
   padding:0 5px;
+  margin-top: 5px;
 }
 
 .chatPreviewSender {
@@ -1369,14 +1385,17 @@ div.chatSearchOut .chatSearchIcon {
   text-overflow: ellipsis;
   width: 170px;
   white-space: nowrap;
-  color: #999;
+  color: #fff;
+  opacity: .75;
+  font-size: 12px
 }
 
 .chatConversationMessageBody {
-  background-color: #333;
-  font-size: 11px;
-  padding: 5px;
-  word-break: break-all;
+  background-color: #2D2D2D;
+  border-radius: 2px;
+  font-size: 12px;
+  padding: 6px 8px;
+  word-break: break-word;
 }
 
 #inputConversationMessage {
@@ -1389,8 +1408,11 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessageTimestamp {
-  font-size: 10px;
-  color: #DDD;
+  font-size: 11px;
+  color: #fff;
+  opacity: .35;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 .userPage .btn.btn-bar {
@@ -2717,6 +2739,10 @@ input[type="checkbox"].fieldItem + label span {
   opacity: .25;
 }
 
+#ov1  .textOpacity35 {
+  opacity: .35;
+}
+
 #ov1  .textOpacity50 {
   opacity: .50;
 }
@@ -2864,6 +2890,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .margin0 {
   margin: 0;
+}
+
+#ov1  .marginRight2 {
+  margin-right: 2px;
 }
 
 #ov1  .marginRight3 {
@@ -3045,6 +3075,14 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .padding17px {
   padding: 17px;
+}
+
+#ov1  .paddingRight2 {
+  padding-right: 2px;
+}
+
+#ov1  .paddingLeft2 {
+  padding-left: 2px;
 }
 
 #ov1  .paddingLeft5 {

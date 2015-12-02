@@ -4,20 +4,20 @@
         <tr>
             <td class="chatConversationMessageBody"><%= ob.formattedMessage%></td>
             <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border-secondary"
-                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
+                <div class="thumbnail custcol-border-secondary marginLeft2"
+                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
             </td>
         </tr>
         <tr>
-            <td align="left" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
+            <td align="left" class="chatConversationMessageTimestamp paddingLeft2" colspan="100%"><%- ob.formattedTimestamp %></td>
         </tr>
         <% } else { %>
         <tr>
             <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border-secondary"
-                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
+                <div class="thumbnail custcol-border-secondary marginRight2"
+                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
             </td>
-            <td class="chatConversationMessageBody"><%= ob.formattedMessage %></td>
+            <td class="chatConversationMessageBody paddingRight2"><%= ob.formattedMessage %></td>
         </tr>
         <tr>
             <td align="right" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
