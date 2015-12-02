@@ -320,20 +320,10 @@ module.exports = Backbone.View.extend({
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    if(data.hasOwnProperty('chat')) {
-      console.log('Got Chat Message from Websocket:', data.chat);
-      var chat_message = data.chat;
-      var username = chat_message.handle ? chat_message.handle : chat_message.guid;
-      var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
-      new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
-        icon: avatar
-      });
-
-      var new_chat_message = new Backbone.Model(chat_message);
-      this.renderChat(new_chat_message);
-
-      // Figure out how many unread messages
-      //this.trigger('notificationsCounted', unread_count);
+    if(data.hasOwnProperty('message')) {
+      var chat_message = data.message;
+      this.afterRender();
+      this.updateChat(chat_message.sender);
     }
   },
 

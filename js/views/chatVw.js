@@ -21,9 +21,6 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     loadTemplate('./js/templates/chat.html', function(loadedTemplate) {
-      //var timestamp = self.model.get('timestamp');
-      //var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMMM Do YYYY, h:mm a');
-      //self.model.set('formattedTimestamp', formatted_timestamp);
       var chat = self.model.toJSON();
       self.$el.html(loadedTemplate(chat));
     });
