@@ -9,51 +9,53 @@
       <div class="accordion-window">
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <%= polyglot.t('Store Details') %>
+            <%= polyglot.t('CreateStore') %>
           </div>
           <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary" id="storeWizardForm">
             <input name="header" id="headerInput" type="text" class="hide" value="<%- ob.page.profile.header_hash %>" />
             <input name="location" id="locationSelect" type="text" class="hide"/>
 
             <div class="flexRow">
-              <div class="flexRow custCol-border-secondary">
-                  <div class="flexCol-3 borderRight custCol-border-secondary">
-                    <label class="fieldItem" for="storeNameInput">
-                      <%= polyglot.t('Name') %>
-                    </label>
-                  </div>
-                  <div class="flexCol-9">
-                    <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
-                  </div>
-              </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-3 borderRight custCol-border-secondary">
-                  <label class="fieldItem" for="aboutInput">
-                    <%= polyglot.t('Description') %>
+
+            <div class="flexRow custCol-border-secondary">
+
+              <div class="flexCol-4 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="refund_address">
+                    <%= polyglot.t('BitcoinReturnAddress') %>
                   </label>
                 </div>
-                <div class="flexCol-9">
-                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%- ob.page.profile.about %></textarea>
-                </div>
               </div>
+
+              <div class="flexCol-8">
+                <input name="refund_address"
+                       type="text"
+                       id="refund_address"
+                       placeholder="<%= polyglot.t('Address') %>"
+                       class="fieldItem"
+                       required
+                       pattern=".{26,}">
+              </div>
+            </div>
+
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem" for="realCategoriesInput">
                     <%= polyglot.t('Keywords') %><!--  (<%= polyglot.t('UpTo3') %>) -->
                   </label>
                 </div>
-                <div class="flexCol-9">
+                <div class="flexCol-8">
                   <input type="text" name="categories" id="realCategoriesInput" class="hide" />
                   <div class="fieldItem" id="categoriesInput"></div>
                 </div>
               </div>
               <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="flexCol-4 borderRight custCol-border-secondary">
                   <label class="fieldItem">
                     <%= polyglot.t('NSFW') %>
                   </label>
                 </div>
-                <div class="flexCol-9">
+                <div class="flexCol-8">
                   <div class="fieldItem">
                     <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
                     <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
@@ -71,18 +73,18 @@
           <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('Store') %> <%= polyglot.t('Moderators') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border-secondary">
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Search') %> <%= polyglot.t('for') %> <%= polyglot.t('moderators') %>" />
               </div>
             </div>
             <div class="flexRow js-storeWizardModeratorList">
             </div>
           </div>
-          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Save') %></a>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary"><%= polyglot.t('Save') %></a>
           </div>
         </div>
       </div>

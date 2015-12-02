@@ -265,21 +265,23 @@ module.exports = Backbone.View.extend({
       });
 
       $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 366 && self.slimVisible === false ) {
+        if ($(this).scrollTop() > 351 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.page-userNameLarge').addClass('fontSize20');
-          $('.user-page-navigation-filler').show();
-          $('.user-page-navigation').addClass('user-page-navigation-slim');
           $('.user-page-header-slim').show();
           $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
+          $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
+          $('.user-page-header .rowItem').hide();
+          $('.user-page-navigation-buttons').addClass('positionFixed positionTop66')
         }
-        if ($(this).scrollTop() < 366 && self.slimVisible === true ) {
+        if ($(this).scrollTop() < 351 && self.slimVisible === true ) {
           self.slimVisible = false;
           $('.page-userNameLarge').removeClass('fontSize20');
-          $('.user-page-navigation-filler').hide();
-          $('.user-page-navigation').removeClass('user-page-navigation-slim');
           $('.user-page-header-slim').hide();
           $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
+          $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
+          $('.user-page-header .rowItem').show();
+          $('.user-page-navigation-buttons').removeClass('positionFixed positionTop66');
         }
       });
 
@@ -325,7 +327,36 @@ module.exports = Backbone.View.extend({
           "#ov1 #userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + ";}" +
           "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85);}" +
           "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5);}";
-          
+          "#ov1 #userPage .custCol-background, #ov1 #userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
+          "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
+          "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
+          "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 #userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 #userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 #userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important; opacity: .75 !important;}" +
+          "#ov1 #userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
+          "#ov1 #userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
+          "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 #userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .container .txtField { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
+          "#ov1 #userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 #userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
+          "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
+          "#ov1 #userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
+          "#ov1 #userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
+          "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" +
+          "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + this.shadeColor2(this.model.get('page').profile.background_color, 0.25) + " !important;}" +
+          "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}";
+
       // if text is white the highlight color needs to darken instead of lighten
       if (this.model.get('page').profile.text_color === 'undefined' || this.model.get('page').profile.text_color === "#ffffff"){
         customStyleTag.innerHTML += "#ov1 #userPage .txtField:focus, #ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2("#ffffff", -0.5) + ";}";
@@ -368,13 +399,13 @@ module.exports = Backbone.View.extend({
 
     if(state === "item"){
       this.renderItem(hash);
-      $('#obContainer').scrollTop(367);
+      $('#obContainer').scrollTop(352);
     }else if(state === "itemOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
-      $('#obContainer').scrollTop(367);
+      $('#obContainer').scrollTop(352);
     }else if(state === "itemNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
-      $('#obContainer').scrollTop(367);
+      $('#obContainer').scrollTop(352);
       this.sellItem();
     } else if(state === "createStore") {
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));

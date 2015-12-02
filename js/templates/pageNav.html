@@ -1,41 +1,5 @@
-<div class="ctrlGroup">
-  <a class="btn btn-win btn-winClose js-navClose"></a>
-  <a class="btn btn-win btn-winMin js-navMin"></a>
-  <a class="btn btn-win btn-winMax js-navMax"></a>
-</div>
-<div class="ctrlGroup">
-  <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack custCol-primary custCol-text fontSize13"></a>
-  <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd custCol-primary custCol-text fontSize13"></a>
-</div>
-<div class="ctrlGroup">
-  <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh"></a>
-</div>
-<div class="ctrlGroup flexExpand">
-  <div class="txtFieldWrapper searchWrapper mainSearchWrapper">
-    <input type="text" class="txtField js-navAddressBar" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" style="height: 30px;" />
-  </div>
-</div>
-<div class="ctrlGroup">
-  <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15" href="#home"></a>
-</div>
-<div class="ctrlGroup">
-  <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications badge"></div>
-</div>
-<div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
-    <div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
-    <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
-    <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
-</div>
-
-<div class="ctrlGroup nav-profile">
-  <div class="btn btn-profile js-navProfile custCol-primary"
-  <% if(ob.avatar_hash != "") { %>
-  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
-  <% }else{ %>
-  style="background-image: url(imgs/defaultUser.png)"
-  <% } %>></div>
-</div>
-<div class="popMenu popMenu-navBar hide js-navProfileMenu">
+<!-- pulled this div up so that it slides under the header and not over -->
+<div class="popMenu hide popMenu-navBar js-navProfileMenu">
   <a href="#userPage"><%= polyglot.t('nav.myPage') %></a>
   <a href="#customizePage"><%= polyglot.t('nav.customizePage') %></a>
   <% if(ob.vendor) { %>
@@ -60,566 +24,610 @@
   <a class="js-navAdminPanel">Admin Panel</a>
 </div>
 
-<div class="modal modal-opaque js-homeModal">
-  <div class="modal-child modal-childMain custCol-primary">
-    <div class="homeModal-hero modal-hero modal-shadow-inner1 custCol-primary-darken">
-      <div class="modal-hero-icon"></div>
-      <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('Welcome') %></p>
+<!-- pulled this div up so that it slides under the header and not over -->
+<div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
+  <div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
+  <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
+  <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
+</div>
+
+<div class="bar navBar pageNavContainer custCol-secondary">
+  <div class="ctrlGroup">
+    <a class="btn btn-win btn-winClose js-navClose"></a>
+    <a class="btn btn-win btn-winMin js-navMin"></a>
+    <a class="btn btn-win btn-winMax js-navMax"></a>
+  </div>
+  <div class="ctrlGroup">
+    <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack custCol-primary custCol-text fontSize13"></a>
+    <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd custCol-primary custCol-text fontSize13"></a>
+  </div>
+  <div class="ctrlGroup">
+    <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh"></a>
+  </div>
+  <div class="ctrlGroup flexExpand">
+    <div class="txtFieldWrapper searchWrapper mainSearchWrapper">
+      <input type="text" class="txtField js-navAddressBar borderRadius3" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" style="height: 32px;" />
     </div>
-    <div class="homeModal-accordion accordion js-profileAccordion">
-      <div class="accordion-window">
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.chooseLanguage') %>
-            <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer flex-border" id="homeModal-languageList">
-            <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper  custCol-border-secondary">
-                <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
-              </div>
-            </div>
-            <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflowY custCol-primary custCol-text">
-            </ul>
-          </div>
-          <div class="bar barFlush">
-            <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
+  </div>
+  <div class="ctrlGroup">
+    <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15" href="#home"></a>
+  </div>
+  <div class="ctrlGroup">
+    <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications badge"></div>
+  </div>
 
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.disclaimer_title') %>
-            <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
-            <div class="flexRow">
-              <div class="rowItem padding20">
-                <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.disclaimer_body') %></p>
-              </div>
-            </div>
-          </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
+  <div class="ctrlGroup nav-profile">
+    <div class="btn btn-profile js-navProfile custCol-primary"
+    <% if(ob.avatar_hash != "") { %>
+    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
+    <% }else{ %>
+    style="background-image: url(imgs/defaultUser.png)"
+    <% } %>></div>
+  </div>
 
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.yourCountry') %>
-            <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer flex-border custCol-primary js-homeModal-countryList" id="homeModal-countryList">
-            <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
-                <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
+  <div class="modal modal-opaque js-homeModal">
+    <div class="modal-child modal-childMain custCol-primary">
+      <div class="homeModal-hero modal-hero modal-shadow-inner1 custCol-primary-darken">
+        <div class="modal-hero-icon"></div>
+        <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('Welcome') %></p>
+      </div>
+      <div class="homeModal-accordion accordion js-profileAccordion">
+        <div class="accordion-window">
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.chooseLanguage') %>
+              <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer flex-border" id="homeModal-languageList">
+              <div class="flexRow">
+                <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper  custCol-border-secondary">
+                  <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
+                </div>
               </div>
+              <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflowY custCol-primary custCol-text">
+              </ul>
+            </div>
+            <div class="bar barFlush">
+              <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
             </div>
           </div>
-          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.localCurrency') %>
-            <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer flex-border js-homeModal-currencyList" id="homeModal-currencyList">
-            <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
-                <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
+
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.disclaimer_title') %>
+              <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+              <div class="flexRow">
+                <div class="rowItem padding20">
+                  <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.disclaimer_body') %></p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.timeZone') %>
-            <span class="textOpacity75 fontSize14 floatRight">5 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer flex-border" id="homeModal-timeList">
-            <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
-                <input type="text" class="search txtField txtField-bar custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
-              </div>
-            </div>
-            <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text">
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -12:00) Eniwetok, Kwajalein">(GMT -12:00) Eniwetok, Kwajalein</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -11:00) Midway Island, Samoa" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -11:00) Midway Island, Samoa">(GMT -11:00) Midway Island, Samoa</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -10:00) Hawaii" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -10:00) Hawaii">(GMT -10:00) Hawaii</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -9:00) Alaska" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -9:00) Alaska">(GMT -9:00) Alaska</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -8:00) Pacific Time (US &amp; Canada)" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -8:00) Pacific Time (US &amp; Canada)">(GMT -8:00) Pacific Time (US &amp; Canada)</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -7:00) Mountain Time (US &amp; Canada)" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -7:00) Mountain Time (US &amp; Canada)">(GMT -7:00) Mountain Time (US &amp; Canada)</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -6:00) Central Time (US &amp; Canada), Mexico City" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -6:00) Central Time (US &amp; Canada), Mexico City">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -3:30) Newfoundland" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -3:30) Newfoundland">(GMT -3:30) Newfoundland</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -3:00) Brazil, Buenos Aires, Georgetown" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -3:00) Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -2:00) Mid-Atlantic" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -2:00) Mid-Atlantic">(GMT -2:00) Mid-Atlantic</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT -1:00 hour) Azores, Cape Verde Islands" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT -1:00 hour) Azores, Cape Verde Islands">(GMT -1:00 hour) Azores, Cape Verde Islands</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT) Western Europe Time, London, Lisbon, Casablanca" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT) Western Europe Time, London, Lisbon, Casablanca">(GMT) Western Europe Time, London, Lisbon, Casablanca</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +2:00) Kaliningrad, South Africa" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +2:00) Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +3:30) Tehran" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +3:30) Tehran">(GMT +3:30) Tehran</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +4:30) Kabul" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +4:30) Kabul">(GMT +4:30) Kabul</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent">(GMT  +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +5:45) Kathmandu" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +5:45) Kathmandu">(GMT +5:45) Kathmandu</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +6:00) Almaty, Dhaka, Colombo" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +6:00) Almaty, Dhaka, Colombo">(GMT +6:00) Almaty, Dhaka, Colombo</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +7:00) Bangkok, Hanoi, Jakarta" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +7:00) Bangkok, Hanoi, Jakarta">(GMT +7:00) Bangkok, Hanoi, Jakarta</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +9:30) Adelaide, Darwin" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +9:30) Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +10:00) Eastern Australia, Guam, Vladivostok" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +10:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +11:00) Magadan, Solomon Islands, New Caledonia" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +11:00) Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</label>
-                </div>
-              </li>
-              <li class="flexRow custCol-border-secondary">
-                <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
-                  <input type="radio" class="fieldItem" id="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka" name="time">
-                  <label class="homeModal-time radioLabel" for="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</label>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.yourDetails') %> (<%= polyglot.t('Optional') %>)
-            <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch custCol-primary custCol-text">
-            <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar hide">
-                <input type="text" class="txtField txtField-bar js-homeModal-handleInput custCol-text" placeholder="Choose Handle" />
-              </div>
-            </div>
-            <div>
-                <div class="flexRow marginTop1">
-                  <div class="flexRow borderBottom custCol-border-secondary">
-                      <div class="flexCol-3 borderRight custCol-border-secondary">
-                        <label class="fieldItem" for="storeNameInput">
-                          <%= polyglot.t('Name') %>
-                        </label>
-                      </div>
-                      <div class="flexCol-9">
-                        <input name="name" id="storeNameInput" type="text" class="fieldItem custCol-text"  placeholder="<%= polyglot.t('Your') %> <%= polyglot.t('name') %>" required>
-                      </div>
-                  </div>
-                  <div class="flexRow borderBottom custCol-border-secondary">
-                      <div class="flexCol-3 borderRight custCol-border-secondary">
-                        <label class="fieldItem" for="storeHandleInput">
-                          <%= polyglot.t('Handle') %>
-                        </label>
-                      </div>
-                      <div class="flexCol-9">
-                        <input name="handle" id="storeHandleInput" type="text" class="fieldItem custCol-text" placeholder="<%= polyglot.t('Choose a handle') %> (@joe123)" required>
-                      </div>
-                  </div>
-                  <div class="flexRow borderBottom custCol-border-secondary">
-                    <div class="flexCol-3 borderRight custCol-border-secondary">
-                      <label class="fieldItem" for="aboutInput">
-                        <%= polyglot.t('Description') %>
-                      </label>
-                    </div>
-                    <div class="flexCol-9">
-                      <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea custCol-text" placeholder="Say something interesting... (160 char max)"></textarea>
-                    </div>
-                  </div>
-                </div>
-
-
-<!--               <div class="flexRow pad">
-                <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle custCol-secondary"><%= polyglot.t('onboarding.registerNew') %></a>
-                </div>
-                <div class="flexCol-6">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle custCol-secondary"><%= polyglot.t('onboarding.connectExisting') %></a>
-                </div>
-                <div class="flexCol-6 hide">
-                  <a class="btn btn-txt btn-wide btn-c1 js-homeModal-cancelHandle">Cancel</a>
-                </div>
-              </div> -->
+            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
             </div>
           </div>
-          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
 
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.theme') %>
-            <span class="textOpacity75 fontSize14 floatRight">7 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
-            <div class="flexRow">
-
-             <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
-                <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1" />
-                <label for="theme-1" class="js-homeModal-themeSelected radioLabel" data-primary-color="#461222" data-secondary-color="#641630" data-background-color="#291318" data-text-color="#fff" data-header="imgs/themes/1/header.png">
-                  <div class="theme-background" style="background: #291318">
-                    <div class="theme-global-header" style="background: #641630"></div>
-                    <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #641630">
-                      <div class="theme-tab" style="background: #461222"></div>
-                    </div>
-                    <div class="theme-body" style="background: #461222"></div> 
-                  </div>
-                </label>
-              </div>
-
-              <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
-                <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-2" />
-                <label for="theme-2" class="js-homeModal-themeSelected radioLabel" data-primary-color="#e8e8e8" data-secondary-color="#d1d1d1" data-background-color="#787878" data-text-color="#545454" data-header="imgs/themes/2/header.png">
-                  <div class="theme-background" style="background: #787878">
-                    <div class="theme-global-header" style="background: #d1d1d1"></div>
-                    <div class="theme-header" style="background: url(imgs/themes/2/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #d1d1d1">
-                      <div class="theme-tab" style="background: #e8e8e8"></div>                      
-                    </div>
-                    <div class="theme-body" style="background: #e8e8e8"></div> 
-                  </div>
-                </label>
-              </div>
-              <div class="theme-container clearfix custCol-border-secondary borderBottom">
-                <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-3" />
-                <label for="theme-3" class="js-homeModal-themeSelected radioLabel" data-primary-color="#3F4641" data-secondary-color="#515752" data-background-color="#272B24" data-text-color="#fff" data-header="imgs/themes/3/header.png">
-                  <div class="theme-background" style="background: #272B24">
-                    <div class="theme-global-header" style="background: #515752"></div>
-                    <div class="theme-header" style="background: url(imgs/themes/3/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #515752">
-                      <div class="theme-tab" style="background: #3F4641"></div>
-                    </div>
-                    <div class="theme-body" style="background: #3F4641"></div> 
-                  </div>
-                </label>
-              </div>
-
-              <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
-                <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-4" />
-                <label for="theme-4" class="js-homeModal-themeSelected radioLabel" data-primary-color="#344E31" data-secondary-color="#3B5F2B" data-background-color="#15180F" data-text-color="#fff" data-header="imgs/themes/4/header.png">
-                  <div class="theme-background" style="background: #15180F">
-                    <div class="theme-global-header" style="background: #3B5F2B"></div>
-                    <div class="theme-header" style="background: url(imgs/themes/4/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #3B5F2B">
-                      <div class="theme-tab" style="background: #344E31"></div>
-                    </div>
-                    <div class="theme-body" style="background: #344E31"></div> 
-                  </div>
-                </label>
-              </div>
-
-              <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
-                <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-5" />
-                <label for="theme-5" class="js-homeModal-themeSelected radioLabel" data-primary-color="#128092" data-secondary-color="#007088" data-background-color="#02334E" data-text-color="#fff" data-header="imgs/themes/5/header.png">
-                  <div class="theme-background" style="background: #02334E">
-                    <div class="theme-global-header" style="background: #007088"></div>
-                    <div class="theme-header" style="background: url(imgs/themes/5/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #007088">
-                      <div class="theme-tab" style="background: #128092"></div>
-                    </div>
-                    <div class="theme-body" style="background: #128092"></div> 
-                  </div>
-                </label>
-              </div>
-
-              <div class="theme-container clearfix custCol-border-secondary borderBottom">
-                <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-6" />
-                <label for="theme-6" class="js-homeModal-themeSelected radioLabel" data-primary-color="#121212" data-secondary-color="#0D0A0D" data-background-color="#181818" data-text-color="#fff" data-header="imgs/themes/6/header.png">
-                  <div class="theme-background" style="background: #181818">
-                    <div class="theme-global-header" style="background: #0D0A0D"></div>
-                    <div class="theme-header" style="background: url(imgs/themes/6/header-thumbnail.png); background-size: cover"></div> 
-                    <div class="theme-nav" style="background: #0D0A0D">
-                      <div class="theme-tab" style="background: #121212"></div>
-                    </div>
-                    <div class="theme-body" style="background: #121212"></div> 
-                  </div>
-                </label>
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.yourCountry') %>
+              <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer flex-border custCol-primary js-homeModal-countryList" id="homeModal-countryList">
+              <div class="flexRow">
+                <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
+                  <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
-          </div>
-        </div>
-
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            <%= polyglot.t('onboarding.avatar') %> (<%= polyglot.t('Optional') %>)
-            <span class="textOpacity75 fontSize14 floatRight">8 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
-            <div class="flexRow flexRow-center positionRelative">
-              <div id="image-cropper" class="positionWrapper">
-                <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
-                  <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
-                </div>
-                <div class="cropit-image-preview rowTop10 thumbnail thumbnail-huge box-borderBright row10"></div>
-                <div>
-                  <input type="range" class="cropit-image-zoom-input rowTop10 row10 width100" />
-                </div>
-                <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
-                <label for="settingsAvatarInput" class="btn btn-txt btn-c1 btn-wide rowTop10 row20"><%= polyglot.t('UploadAvatar') %></label>
-              </div>
+            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
             </div>
           </div>
-          <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.localCurrency') %>
+              <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer flex-border js-homeModal-currencyList" id="homeModal-currencyList">
+              <div class="flexRow">
+                <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
+                  <input type="text" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
+                </div>
+              </div>
+            </div>
+            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+            </div>
           </div>
-        </div>        
-
-        <div class="accordion-child custCol-primary">
-          <div class="bar barTxt h6 custCol-secondary custCol-text">
-            Recommended Pages to Follow (<%= polyglot.t('Optional') %>)
-            <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 9</span>
-          </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
-            <div class="flexRow">
-              <ul class="width100 padding0 margin0 custCol-text">
-              
-                <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border-secondary">
-                  <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithobguid" checked />
-                  <label for="replacewithobguid" class="textOpacity1 checkboxLabel">
-                    <div class="pull-left marginRight10">
-                      <div class="thumbnail pull-left" style="background-image: url(imgs/openbazaar-icon-no-border.png);"></div>                  
-                    </div>
-                    <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
-                      <div class="marginBottom2">
-                        OpenBazaar 
-                        <span class="fontSize15 textOpacity50">@openbazaar</span>
-                      </div>
-                      <span class="fontSize14 textOpacity75">The offical OpenBazaar page and merch store.</span>
-                    </div>
-                  </label>
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.timeZone') %>
+              <span class="textOpacity75 fontSize14 floatRight">5 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer flex-border" id="homeModal-timeList">
+              <div class="flexRow">
+                <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border-secondary">
+                  <input type="text" class="search txtField txtField-bar custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
+                </div>
+              </div>
+              <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text">
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -12:00) Eniwetok, Kwajalein">(GMT -12:00) Eniwetok, Kwajalein</label>
+                  </div>
                 </li>
-
-                <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border-secondary">
-                  <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithtemplatesguid" checked />
-                  <label for="replacewithtemplatesguid" class="textOpacity1 checkboxLabel">
-                    <div class="pull-left marginRight10">
-                      <div class="thumbnail pull-left" style="background-image: url(imgs/themes-icon.png);"></div>                  
-                    </div>
-                    <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
-                      <div class="marginBottom2">
-                        Themes 
-                        <span class="fontSize15 textOpacity50">@themes</span>
-                      </div>
-                      <span class="fontSize14 textOpacity75">Additional themes for your OpenBazaar page.</span>
-                    </div>
-                  </label>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -11:00) Midway Island, Samoa" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -11:00) Midway Island, Samoa">(GMT -11:00) Midway Island, Samoa</label>
+                  </div>
                 </li>
-
-                <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border-secondary">
-                  <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithob1guid" checked />
-                  <label for="replacewithob1guid" class="textOpacity1 checkboxLabel">
-                    <div class="pull-left marginRight10">
-                      <div class="thumbnail pull-left" style="background-image: url(imgs/ob1-icon.png);"></div>                  
-                    </div>
-                    <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
-                      <div class="marginBottom2">
-                        OB1 
-                        <span class="fontSize15 textOpacity50">@ob1</span>
-                      </div>
-                      <span class="fontSize14 textOpacity75">The first OpenBazaar company.</span>
-                    </div>
-                  </label>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -10:00) Hawaii" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -10:00) Hawaii">(GMT -10:00) Hawaii</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -9:00) Alaska" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -9:00) Alaska">(GMT -9:00) Alaska</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -8:00) Pacific Time (US &amp; Canada)" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -8:00) Pacific Time (US &amp; Canada)">(GMT -8:00) Pacific Time (US &amp; Canada)</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -7:00) Mountain Time (US &amp; Canada)" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -7:00) Mountain Time (US &amp; Canada)">(GMT -7:00) Mountain Time (US &amp; Canada)</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -6:00) Central Time (US &amp; Canada), Mexico City" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -6:00) Central Time (US &amp; Canada), Mexico City">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -3:30) Newfoundland" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -3:30) Newfoundland">(GMT -3:30) Newfoundland</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -3:00) Brazil, Buenos Aires, Georgetown" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -3:00) Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -2:00) Mid-Atlantic" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -2:00) Mid-Atlantic">(GMT -2:00) Mid-Atlantic</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT -1:00 hour) Azores, Cape Verde Islands" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT -1:00 hour) Azores, Cape Verde Islands">(GMT -1:00 hour) Azores, Cape Verde Islands</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT) Western Europe Time, London, Lisbon, Casablanca" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT) Western Europe Time, London, Lisbon, Casablanca">(GMT) Western Europe Time, London, Lisbon, Casablanca</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +2:00) Kaliningrad, South Africa" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +2:00) Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +3:30) Tehran" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +3:30) Tehran">(GMT +3:30) Tehran</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +4:30) Kabul" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +4:30) Kabul">(GMT +4:30) Kabul</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent">(GMT  +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +5:45) Kathmandu" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +5:45) Kathmandu">(GMT +5:45) Kathmandu</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +6:00) Almaty, Dhaka, Colombo" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +6:00) Almaty, Dhaka, Colombo">(GMT +6:00) Almaty, Dhaka, Colombo</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +7:00) Bangkok, Hanoi, Jakarta" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +7:00) Bangkok, Hanoi, Jakarta">(GMT +7:00) Bangkok, Hanoi, Jakarta</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +9:30) Adelaide, Darwin" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +9:30) Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +10:00) Eastern Australia, Guam, Vladivostok" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +10:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +11:00) Magadan, Solomon Islands, New Caledonia" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +11:00) Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</label>
+                  </div>
+                </li>
+                <li class="flexRow custCol-border-secondary">
+                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                    <input type="radio" class="fieldItem" id="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka" name="time">
+                    <label class="homeModal-time radioLabel" for="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</label>
+                  </div>
                 </li>
               </ul>
             </div>
+            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+            </div>
           </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Finished') %></a>
-          </div>
-        </div>
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.yourDetails') %> (<%= polyglot.t('Optional') %>)
+              <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch custCol-primary custCol-text">
+              <div class="flexRow">
+                <div class="txtFieldWrapper txtFieldWrapper-bar hide">
+                  <input type="text" class="txtField txtField-bar js-homeModal-handleInput custCol-text" placeholder="Choose Handle" />
+                </div>
+              </div>
+              <div>
+                  <div class="flexRow marginTop1">
+                    <div class="flexRow borderBottom custCol-border-secondary">
+                        <div class="flexCol-3 borderRight custCol-border-secondary">
+                          <label class="fieldItem" for="storeNameInput">
+                            <%= polyglot.t('Name') %>
+                          </label>
+                        </div>
+                        <div class="flexCol-9">
+                          <input name="name" id="storeNameInput" type="text" class="fieldItem custCol-text"  placeholder="<%= polyglot.t('Your') %> <%= polyglot.t('name') %>" required>
+                        </div>
+                    </div>
+                    <div class="flexRow borderBottom custCol-border-secondary">
+                        <div class="flexCol-3 borderRight custCol-border-secondary">
+                          <label class="fieldItem" for="storeHandleInput">
+                            <%= polyglot.t('Handle') %>
+                          </label>
+                        </div>
+                        <div class="flexCol-9">
+                          <input name="handle" id="storeHandleInput" type="text" class="fieldItem custCol-text" placeholder="<%= polyglot.t('Choose a handle') %> (@joe123)" required>
+                        </div>
+                    </div>
+                    <div class="flexRow borderBottom custCol-border-secondary">
+                      <div class="flexCol-3 borderRight custCol-border-secondary">
+                        <label class="fieldItem" for="aboutInput">
+                          <%= polyglot.t('Description') %>
+                        </label>
+                      </div>
+                      <div class="flexCol-9">
+                        <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea custCol-text" placeholder="Say something interesting... (160 char max)"></textarea>
+                      </div>
+                    </div>
+                  </div>
 
+
+  <!--               <div class="flexRow pad">
+                  <div class="flexCol-6">
+                    <a class="btn btn-txt btn-wide btn-c1 js-homeModal-newHandle custCol-secondary"><%= polyglot.t('onboarding.registerNew') %></a>
+                  </div>
+                  <div class="flexCol-6">
+                    <a class="btn btn-txt btn-wide btn-c1 js-homeModal-existingHandle custCol-secondary"><%= polyglot.t('onboarding.connectExisting') %></a>
+                  </div>
+                  <div class="flexCol-6 hide">
+                    <a class="btn btn-txt btn-wide btn-c1 js-homeModal-cancelHandle">Cancel</a>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+            </div>
+          </div>
+
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.theme') %>
+              <span class="textOpacity75 fontSize14 floatRight">7 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+              <div class="flexRow">
+
+               <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1" />
+                  <label for="theme-1" class="js-homeModal-themeSelected radioLabel" data-primary-color="#461222" data-secondary-color="#641630" data-background-color="#291318" data-text-color="#fff" data-header="imgs/themes/1/header.png">
+                    <div class="theme-background" style="background: #291318">
+                      <div class="theme-global-header" style="background: #641630"></div>
+                      <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div> 
+                      <div class="theme-nav" style="background: #641630">
+                        <div class="theme-tab" style="background: #461222"></div>
+                      </div>
+                      <div class="theme-body" style="background: #461222"></div> 
+                    </div>
+                  </label>
+                </div>
+
+                <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-2" />
+                  <label for="theme-2" class="js-homeModal-themeSelected radioLabel" data-primary-color="#e8e8e8" data-secondary-color="#d1d1d1" data-background-color="#787878" data-text-color="#545454" data-header="imgs/themes/2/header.png">
+                    <div class="theme-background" style="background: #787878">
+                      <div class="theme-global-header" style="background: #d1d1d1"></div>
+                      <div class="theme-header" style="background: url(imgs/themes/2/header-thumbnail.png); background-size: cover"></div> 
+                      <div class="theme-nav" style="background: #d1d1d1">
+                        <div class="theme-tab" style="background: #e8e8e8"></div>                      
+                      </div>
+                      <div class="theme-body" style="background: #e8e8e8"></div> 
+                    </div>
+                  </label>
+                </div>
+
+                <div class="theme-container clearfix custCol-border-secondary borderBottom">
+                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-3" />
+                  <label for="theme-3" class="js-homeModal-themeSelected radioLabel" data-primary-color="#3F4641" data-secondary-color="#515752" data-background-color="#272B24" data-text-color="#fff" data-header="imgs/themes/3/header.png">
+                    <div class="theme-background" style="background: #272B24">
+                      <div class="theme-global-header" style="background: #515752"></div>
+                      <div class="theme-header" style="background: url(imgs/themes/3/header-thumbnail.png); background-size: cover"></div> 
+                      <div class="theme-nav" style="background: #515752">
+                        <div class="theme-tab" style="background: #3F4641"></div>
+                      </div>
+                      <div class="theme-body" style="background: #3F4641"></div> 
+                    </div>
+                  </label>
+                </div>
+
+                <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-4" />
+                  <label for="theme-4" class="js-homeModal-themeSelected radioLabel" data-primary-color="#344E31" data-secondary-color="#3B5F2B" data-background-color="#15180F" data-text-color="#fff" data-header="imgs/themes/4/header.png">
+                    <div class="theme-background" style="background: #15180F">
+                      <div class="theme-global-header" style="background: #3B5F2B"></div>
+                      <div class="theme-header" style="background: url(imgs/themes/4/header-thumbnail.png); background-size: cover"></div> 
+                      <div class="theme-nav" style="background: #3B5F2B">
+                        <div class="theme-tab" style="background: #344E31"></div>
+                      </div>
+                      <div class="theme-body" style="background: #344E31"></div> 
+                    </div>
+                  </label>
+                </div>
+
+                <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-5" />
+                  <label for="theme-5" class="js-homeModal-themeSelected radioLabel" data-primary-color="#128092" data-secondary-color="#007088" data-background-color="#02334E" data-text-color="#fff" data-header="imgs/themes/5/header.png">
+                    <div class="theme-background" style="background: #02334E">
+                      <div class="theme-global-header" style="background: #007088"></div>
+                      <div class="theme-header" style="background: url(imgs/themes/5/header-thumbnail.png); background-size: cover"></div> 
+                      <div class="theme-nav" style="background: #007088">
+                        <div class="theme-tab" style="background: #128092"></div>
+                      </div>
+                      <div class="theme-body" style="background: #128092"></div> 
+                    </div>
+                  </label>
+                </div>
+
+                <div class="theme-container clearfix custCol-border-secondary borderBottom">
+                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-6" />
+                  <label for="theme-6" class="js-homeModal-themeSelected radioLabel" data-primary-color="#121212" data-secondary-color="#0D0A0D" data-background-color="#181818" data-text-color="#fff" data-header="imgs/themes/6/header.png">
+                    <div class="theme-background" style="background: #181818">
+                      <div class="theme-global-header" style="background: #0D0A0D"></div>
+                      <div class="theme-header" style="background: url(imgs/themes/6/header-thumbnail.png); background-size: cover"></div> 
+                      <div class="theme-nav" style="background: #0D0A0D">
+                        <div class="theme-tab" style="background: #121212"></div>
+                      </div>
+                      <div class="theme-body" style="background: #121212"></div> 
+                    </div>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+            </div>
+          </div>
+
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.avatar') %> (<%= polyglot.t('Optional') %>)
+              <span class="textOpacity75 fontSize14 floatRight">8 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+              <div class="flexRow flexRow-center positionRelative">
+                <div id="image-cropper" class="positionWrapper">
+                  <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
+                    <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
+                  </div>
+                  <div class="cropit-image-preview rowTop10 thumbnail thumbnail-huge box-borderBright row10"></div>
+                  <div>
+                    <input type="range" class="cropit-image-zoom-input rowTop10 row10 width100" />
+                  </div>
+                  <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
+                  <label for="settingsAvatarInput" class="btn btn-txt btn-c1 btn-wide rowTop10 row20"><%= polyglot.t('UploadAvatar') %></label>
+                </div>
+              </div>
+            </div>
+            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+            </div>
+          </div>        
+
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              Recommended Pages to Follow (<%= polyglot.t('Optional') %>)
+              <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 9</span>
+            </div>
+            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+              <div class="flexRow">
+                <ul class="width100 padding0 margin0 custCol-text">
+                
+                  <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border-secondary">
+                    <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithobguid" checked />
+                    <label for="replacewithobguid" class="textOpacity1 checkboxLabel">
+                      <div class="pull-left marginRight10">
+                        <div class="thumbnail pull-left" style="background-image: url(imgs/openbazaar-icon-no-border.png);"></div>                  
+                      </div>
+                      <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
+                        <div class="marginBottom2">
+                          OpenBazaar 
+                          <span class="fontSize15 textOpacity50">@openbazaar</span>
+                        </div>
+                        <span class="fontSize14 textOpacity75">The offical OpenBazaar page and merch store.</span>
+                      </div>
+                    </label>
+                  </li>
+
+                  <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border-secondary">
+                    <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithtemplatesguid" checked />
+                    <label for="replacewithtemplatesguid" class="textOpacity1 checkboxLabel">
+                      <div class="pull-left marginRight10">
+                        <div class="thumbnail pull-left" style="background-image: url(imgs/themes-icon.png);"></div>                  
+                      </div>
+                      <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
+                        <div class="marginBottom2">
+                          Themes 
+                          <span class="fontSize15 textOpacity50">@themes</span>
+                        </div>
+                        <span class="fontSize14 textOpacity75">Additional themes for your OpenBazaar page.</span>
+                      </div>
+                    </label>
+                  </li>
+
+                  <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border-secondary">
+                    <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithob1guid" checked />
+                    <label for="replacewithob1guid" class="textOpacity1 checkboxLabel">
+                      <div class="pull-left marginRight10">
+                        <div class="thumbnail pull-left" style="background-image: url(imgs/ob1-icon.png);"></div>                  
+                      </div>
+                      <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
+                        <div class="marginBottom2">
+                          OB1 
+                          <span class="fontSize15 textOpacity50">@ob1</span>
+                        </div>
+                        <span class="fontSize14 textOpacity75">The first OpenBazaar company.</span>
+                      </div>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
+              <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Finished') %></a>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="modal modal-opaque js-messageModal fadeOut">
-  <div class="modal-child modal-childMain pad20">
-    <div class="btn-corner btn-cornerTR js-closeModal">
-      <h2 class="ion-close-circled"></h2>
+  <div class="modal modal-opaque js-messageModal fadeOut">
+    <div class="modal-child modal-childMain pad20 custCol-secondary custCol-text">
+      <div class="btn-corner btn-cornerTR js-closeModal">
+        <h2 class="ion-close-circled"></h2>
+      </div>
+      <div class="row20 rowTop20">
+        <h1 class="txt-center js-messageModal-title"></h1>
+      </div>
+      <p class="txt-center js-messageModal-message"></p>
     </div>
-    <div class="row20 rowTop20">
-      <h1 class="txt-center js-messageModal-title"></h1>
+  </div>
+
+  <div class="statusBar navBar navBar-main fadeOut js-navStatusBar">
+    <div class="pad20 js-statusBarMessage"></div>
+    <div class="btn-corner btn-cornerTR btn-cornerTRSmall js-closeStatus">
+      <h3 class="txt-unleaded ion-close-circled"></h3>
     </div>
-    <p class="txt-center js-messageModal-message"></p>
   </div>
-</div>
 
-<div class="statusBar navBar navBar-main fadeOut js-navStatusBar">
-  <div class="pad20 js-statusBarMessage"></div>
-  <div class="btn-corner btn-cornerTR btn-cornerTRSmall js-closeStatus">
-    <h3 class="txt-unleaded ion-close-circled"></h3>
-  </div>
+  <div id="adminPanel"></div>
 </div>
-
-<div id="adminPanel"></div>
