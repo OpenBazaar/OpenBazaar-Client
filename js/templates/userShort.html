@@ -1,7 +1,7 @@
 <div class="rowItem padding2015" data-guid="<%= ob.guid %>">
   <div class="flexRow">
     <div class="flexCol-1">
-      <div class="thumbnail thumbnail-large custCol-border-secondary borderRadius2 borderRadiusBottom0 height70 textOpacity90 clickable"
+      <div class="thumbnail thumbnail-large custCol-border-secondary borderRadius2 borderRadiusBottom0 height70 textOpacity90 clickable js-userShort"
         <% if(ob.avatar_hash) { %>
         style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);">
         <% } else { %>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="flexCol-2">
-      <a class="btn btn-txt btn-secondary custCol-secondary pull-right height36 width120 fontSize14 js-userShort"><%= polyglot.t('Visit') %></a>
+      <a class="btn btn-txt btn-secondary custCol-secondary pull-right height36 width105 fontSize14 js-userShort"><%= polyglot.t('Visit') %></a>
     </div> 
   </div>
 </div>
