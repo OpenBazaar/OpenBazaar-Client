@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    getBTPrice = require('../utils/getBitcoinPrice');
+    getBTPrice = require('../utils/getBitcoinPrice'),
+    countriesMd = require('./countriesMd');
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -109,6 +110,7 @@ module.exports = window.Backbone.Model.extend({
 
   parse: function(response) {
     "use strict";
+    var self = this;
     //when vendor currency code is in bitcoins, the json returned is different. Put the value in the expected place so the templates don't break.
     //check to make sure a blank result wasn't returned from the server
     if(response.vendor_offer){
@@ -173,6 +175,17 @@ module.exports = window.Backbone.Model.extend({
       response.vendor_offer.listing.item.image_hashes = response.vendor_offer.listing.item.image_hashes.filter(function(hash){
         return hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && hash.length === 40;
       });
+      //add pretty country names to shipping regions
+      response.vendor_offer.listing.shipping.shipping_regionsDisplay = [];
+      __.each(response.vendor_offer.listing.shipping.shipping_regions, function(region, i){
+        var matchedCountry = self.countryArray.filter(function(value){
+          return value.dataName == region;
+        });
+        response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
+
+      });
+
+
     }
 
     return response;
@@ -181,6 +194,8 @@ module.exports = window.Backbone.Model.extend({
   initialize: function(){
     //listen for fetched. This is set by the view after fetch is successful, to prevent multiple fires of changed.
     this.on('change:fetched', this.updateAttributes, this);
+    this.countries = new countriesMd();
+    this.countryArray = this.countries.get('countries');
   },
 
   updateAttributes: function(){

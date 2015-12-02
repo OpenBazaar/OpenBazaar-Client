@@ -15,6 +15,8 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     "use strict";
     //don't render on init, let parent trigger the render
+    //add list of countries the vendor ships to
+    this.model.set('shipsToList', (this.model.get('vendor_offer').listing.shipping.shipping_regionsDisplay).join(","));
   },
 
   render: function(selected){

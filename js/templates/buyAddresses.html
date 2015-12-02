@@ -1,31 +1,42 @@
+<div class="flexRow">
+  <div class="rowItem padding10 txt-center">
+    <div class="textSize11px txt-fade">This vendor ships to these countries:</div>
+    <div class="textsize12px">
+        <%- ob.shipsToList %>
+    </div>
+  </div>
+</div>
 <% if(ob.user.shipping_addresses.length < 1) { %>
 <div class="flexRow ">
   <div class="rowItem padding2015 txt-center">
     You must add an address to ship to.
   </div>
 </div>
-<% } %>
+<% } else { %>
 
-<% _.each(ob.user.shipping_addresses, function(address, i){ %>
-<div class="flexRow js-buyWizardAddress
-<% if(address.country.indexOf(ob.vendor_offer.listing.shipping.shipping_regions) < 0){ %> disabled <% } %>">
-  <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
-  <label for="buyWizardAddress<%- i %>" class="flexCol-8">
-    <div class="padding10">
-      <div class="row10 txt-unleaded"><strong><%- address.name %></strong></div>
-      <div class="txt-unleaded"><%- address.street %><br/><%- address.city %>, <%- address.state %> <%- address.postal_code %><br/><%- address.displayCountry %></div>
+  <% _.each(ob.user.shipping_addresses, function(address, i){ %>
+    <% if(address.city && address.country && address.displayCountry && address.name && address.postal_code && address.state && address.street) { %>
+    <div class="flexRow js-buyWizardAddress
+    <% if(address.country.indexOf(ob.vendor_offer.listing.shipping.shipping_regions) < 0){ %> disabled <% } %>">
+      <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
+      <label for="buyWizardAddress<%- i %>" class="flexCol-8">
+        <div class="padding10">
+          <div class="row10 txt-unleaded"><strong><%- address.name %></strong></div>
+          <div class="txt-unleaded"><%- address.street %><br/><%- address.city %>, <%- address.state %> <%- address.postal_code %><br/><%- address.displayCountry %></div>
+        </div>
+      </label>
+      <div class="flexCol-4 txt-unleaded padding10">
+        <% if(address.country.indexOf(ob.vendor_offer.listing.shipping.shipping_regions) < 0){ %>
+        Does not ship here
+        <% } else { %>
+        <% if(address.country == ob.vendor_offer.listing.shipping.shipping_origin){ %>
+        <%- ob.displayDomesticShipping %>
+        <% } else { %>
+        <%- ob.displayInternationalShipping %>
+        <% } %>
+        <% } %>
+      </div>
     </div>
-  </label>
-  <div class="flexCol-4 txt-unleaded padding10">
-    <% if(address.country.indexOf(ob.vendor_offer.listing.shipping.shipping_regions) < 0){ %>
-    Does not ship here
-    <% } else { %>
-    <% if(address.country == ob.vendor_offer.listing.shipping.shipping_origin){ %>
-    <%- ob.displayDomesticShipping %>
-    <% } else { %>
-    <%- ob.displayInternationalShipping %>
     <% } %>
-    <% } %>
-  </div>
-</div>
-<% }); %>
+  <% });%>
+<% } %>
