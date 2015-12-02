@@ -2544,6 +2544,10 @@ input[type="checkbox"].fieldItem + label span {
   padding-top: 20px;
 }
 
+.chatConversationMessageLine .chatConversationMessageBody a {
+  text-decoration: underline;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity

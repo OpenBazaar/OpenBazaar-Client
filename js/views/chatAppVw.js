@@ -30,11 +30,21 @@ module.exports = Backbone.View.extend({
 
     var self = this;
     this.options = options || {};
-    this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
+    this.serverUrl = this.options.model.get('serverUrl');
+    this.currentChatId = ""; //keep track of the currently active chat guid
 
     this.shiftDown = false; // Detect shift key down
     this.chats = new chatCollection();
+    this.chats.url = this.serverUrl + "get_chat_conversations";
+    this.chats.comparator = function(model) {
+      return model.get('timestamp');
+    };
+    this.listenTo(this.chats, 'update', function(){
+      this.renderChats();
+    });
+
+
 
     this.subViews = [];
     this.subViewsChat = [];
@@ -67,25 +77,12 @@ module.exports = Backbone.View.extend({
   },
 
   afterRender: function() {
-    var model = this.options.model;
-    var self = this;
-    this.chats.url = model.get('serverUrl') + "get_chat_conversations";
-    this.chats.fetch({
-      success: function(chats, response) {
-
-        this.chats = chats;
-        self.renderChats();
-      }
-    });
+    this.chats.fetch();
   },
 
   renderChats: function() {
     var self = this;
     var model = this.options.model;
-    this.chats.comparator = function( model ) {
-      return model.get('timestamp');
-    };
-    this.chats.sort();
 
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
 
@@ -94,13 +91,15 @@ module.exports = Backbone.View.extend({
     } else {
       __.each(this.chats.models, function (chat) {
         "use strict";
-        if(chat.image_hash === undefined) {
+        if(!chat.get('avatar_hash')) {
           var hash = window.localStorage.getItem("avatar_" + chat.get('guid'));
           if(hash !== "") {
             chat.set('image_hash', hash);
+            chat.set('avatarURL', self.serverUrl + "get_image?hash=" + hash + "&guid=" + chat.get('guid'));
           }
+        } else {
+          chat.set('avatarURL', self.serverUrl + "get_image?hash=" + chat.get('avatar_hash') + "&guid=" + chat.get('guid'));
         }
-        chat.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chat.get('image_hash') + "&guid=" + chat.get('guid'));
         self.renderChat(chat);
 
       });
@@ -143,6 +142,8 @@ module.exports = Backbone.View.extend({
     var self = this;
     var model = this.options.model;
 
+    this.currentChatId = guid;
+
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
     $('.chatConversationLabel').html(guid);
@@ -155,7 +156,7 @@ module.exports = Backbone.View.extend({
     $('#chatHead_' + guid).parent().addClass('chatHeadSelected');
 
     // Mark as read
-    $.post(model.get('serverUrl') + "mark_chat_message_as_read", {guid: guid});
+    $.post(self.serverUrl + "mark_chat_message_as_read", {guid: guid});
     $('#chatHead_' + guid).attr('data-count', 0);
     $('#chatHead_' + guid).removeClass('badge');
 
@@ -169,7 +170,7 @@ module.exports = Backbone.View.extend({
 
     // Load conversation from DB
     this.chatMessages = new chatMessageCollection();
-    this.chatMessages.url = this.options.model.get('serverUrl') + "get_chat_messages?guid=" + guid;
+    this.chatMessages.url = this.serverUrl + "get_chat_messages?guid=" + guid;
 
     this.listWrapperChat = $('<div class="border0 custCol-border-secondary flexRow"></div>');
 
@@ -188,9 +189,9 @@ module.exports = Backbone.View.extend({
               }
             }
             if(chatMessage.get('outgoing')) {
-              chatMessage.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + model.get('avatar_hash'));
+              chatMessage.set('avatarURL', self.serverUrl + "get_image?hash=" + model.get('avatar_hash'));
             } else {
-              chatMessage.set('avatarURL', model.get('serverUrl') + "get_image?hash=" + chatMessage.get('image_hash') + "&guid=" + chatMessage.get('guid'));
+              chatMessage.set('avatarURL', self.serverUrl  + "get_image?hash=" + chatMessage.get('image_hash') + "&guid=" + chatMessage.get('guid'));
             }
             self.renderChatMessage(chatMessage);
           });
@@ -252,14 +253,13 @@ module.exports = Backbone.View.extend({
             }
           };
 
-          console.log(chatMessage);
-
           this.socketView.sendMessage(JSON.stringify(chatMessage));
         }
 
         targetForm.find('#inputConversationMessage')[0].value = "";
 
         this.updateChat(chat_guid);
+        this.afterRender();
       }
     } else {
       if(code == 16) {
@@ -323,7 +323,9 @@ module.exports = Backbone.View.extend({
     if(data.hasOwnProperty('message')) {
       var chat_message = data.message;
       this.afterRender();
-      this.updateChat(chat_message.sender);
+      if(chat_message.sender == this.currentChatId){
+        this.updateChat(chat_message.sender);
+      }
     }
   },
 
