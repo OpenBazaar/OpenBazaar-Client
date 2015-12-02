@@ -1261,11 +1261,11 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeads {
+  overflow: auto;
 }
 
 .chatConversationHeadsCompressed {
   height: calc(100% - 370px);
-  overflow: auto;
 }
 
 .chatConversationHeader {
