@@ -1,6 +1,23 @@
+/*========== scroll bars ==========*/
+#obContainer::-webkit-scrollbar {
+  width: 6px;
+}
+ 
+#obContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #44697E; 
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #3E3E3E;
+}
+
 /*========== base styles ==========*/
-
-
 body {
   background-color: rgb(6,55,83);
   overflow: hidden;
