@@ -1,6 +1,16 @@
+/*========== scroll bars ==========*/
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #44697E; 
+}
+
 /*========== base styles ==========*/
-
-
 body {
   background-color: rgb(6,55,83);
   overflow: hidden;
