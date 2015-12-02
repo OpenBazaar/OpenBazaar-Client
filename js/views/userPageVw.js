@@ -299,41 +299,69 @@ module.exports = Backbone.View.extend({
       customStyleTag.setAttribute('id', 'customStyle');
 
       customStyleTag.innerHTML =
-          "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
-          "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 .userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
-          "#ov1 .userPage .btn-tab:active { -webkit-box-shadow: none;}" +
-          "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
-          "#ov1 .userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .userPage .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important; opacity: .75 !important;}" +
-          "#ov1 .userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
-          "#ov1 .userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
-          "#ov1 .userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 .userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 .userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .userPage .container .txtField { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + " !important;}" +
-          "#ov1 .userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 .userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
-          "#ov1 .userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
-          "#ov1 .userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
-          "#ov1 .userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
-          "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
-          "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
-          "#ov1 .userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" + 
-          "#ov1 .userPage #obContainer::-webkit-scrollbar-thumb { background: " + this.shadeColor2(this.model.get('page').profile.background_color, 0.25) + " !important;}" + 
-          "#ov1 .userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}"; 
-          
+          "#ov1 #userPage .custCol-background, #ov1 #userPage { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
+          "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
+          "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
+          "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 #userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 #userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + ";}" +
+          "#ov1 #userPage .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + "; opacity: .75;}" +
+          "#ov1 #userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
+          "#ov1 #userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
+          "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + "; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + "; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + ";}" +
+          "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + ";}" +
+          "#ov1 #userPage .container .txtField { color: " + this.model.get('page').profile.text_color + ";}" +
+          "#ov1 #userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + ";}" +
+          "#ov1 #userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
+          "#ov1 #userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 #userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
+          "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
+          "#ov1 #userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
+          "#ov1 #userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + ";}" +
+          "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85);}" +
+          "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5);}";
+          "#ov1 #userPage .custCol-background, #ov1 #userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
+          "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
+          "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
+          "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
+          "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 #userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 #userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 #userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important; opacity: .75 !important;}" +
+          "#ov1 #userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
+          "#ov1 #userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
+          "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + " !important;}" +
+          "#ov1 #userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .container .txtField { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + " !important;}" +
+          "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
+          "#ov1 #userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
+          "#ov1 #userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
+          "#ov1 #userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
+          "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
+          "#ov1 #userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
+          "#ov1 #userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
+          "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" +
+          "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + this.shadeColor2(this.model.get('page').profile.background_color, 0.25) + " !important;}" +
+          "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}";
+
       // if text is white the highlight color needs to darken instead of lighten
       if (this.model.get('page').profile.text_color === 'undefined' || this.model.get('page').profile.text_color === "#ffffff"){
-        customStyleTag.innerHTML += "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2("#ffffff", -0.5) + " !important;}";
+        customStyleTag.innerHTML += "#ov1 #userPage .txtField:focus, #ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2("#ffffff", -0.5) + ";}";
       }else{
-        customStyleTag.innerHTML += "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2(this.model.get('page').profile.text_color, 0.5) + " !important;}";
+        customStyleTag.innerHTML += "#ov1 #userPage .txtField:focus, #ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2(this.model.get('page').profile.text_color, 0.5) + ";}";
       }
 
       document.body.appendChild(customStyleTag);
@@ -540,9 +568,9 @@ module.exports = Backbone.View.extend({
       avatar_hash: self.model.get('page').profile.avatar_hash,
       handle: self.model.get('page').profile.handle,
       ownPage: self.options.ownPage,
-      //userID: self.model.get('page').profile.guid,
-      itemHash: hash
-        //id: hash
+      itemHash: hash,
+      user: self.model.get('user'),
+      page: self.model.get('page'),
     });
     this.item.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
     //remove old item before rendering
@@ -550,7 +578,7 @@ module.exports = Backbone.View.extend({
       this.itemView.undelegateEvents();
       //this.itemView.remove();
     }
-    this.itemView = new itemVw({model:this.item, el: '.js-list4'});
+    this.itemView = new itemVw({model:this.item, el: '.js-list4', userModel: self.options.userModel, socketView: this.socketView});
     this.subViews.push(this.itemView);
     //set the parameters for the fetch
     if(this.options.ownPage === true){
@@ -974,8 +1002,6 @@ module.exports = Backbone.View.extend({
     this.model.off();
     this.off();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 
 });

@@ -53,7 +53,7 @@ module.exports = Backbone.View.extend({
 
   socketOpen: function() {
     "use strict";
-    console.log("socket is open");
+    //placeholder
   },
 
   waitForSocket: function(message) {
@@ -61,10 +61,9 @@ module.exports = Backbone.View.extend({
     var self = this;
     if (this.socketConnection.readyState === 1){
       this.socketConnection.send(message);
-      return;
     }else{
       //if socket is not ready yet, try again
-      setTimeout(function(){
+      this.socketTimer = setTimeout(function(){
         self.waitForSocket(message);
       }, 1000);
     }

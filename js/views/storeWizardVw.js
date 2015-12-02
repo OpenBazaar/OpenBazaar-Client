@@ -133,7 +133,6 @@ module.exports = Backbone.View.extend({
 
   closeWizard: function() {
     "use strict";
-    console.log("close wizard");
     this.close();
   },
 
