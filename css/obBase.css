@@ -1,13 +1,20 @@
 /*========== scroll bars ==========*/
-/* Let's get this party started */
-::-webkit-scrollbar {
-    width: 6px;
+#obContainer::-webkit-scrollbar {
+  width: 6px;
 }
  
-/* Handle */
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #44697E; 
+#obContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #44697E; 
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #3E3E3E;
 }
 
 /*========== base styles ==========*/

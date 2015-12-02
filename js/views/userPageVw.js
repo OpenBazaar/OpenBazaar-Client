@@ -324,7 +324,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
           "#ov1 .userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" + 
-          "#ov1 .userPage ::-webkit-scrollbar-thumb { background: " + this.shadeColor2(this.model.get('page').profile.background_color, 0.25) + " !important;}" + 
+          "#ov1 .userPage #obContainer::-webkit-scrollbar-thumb { background: " + this.shadeColor2(this.model.get('page').profile.background_color, 0.25) + " !important;}" + 
           "#ov1 .userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}"; 
           
       // if text is white the highlight color needs to darken instead of lighten
