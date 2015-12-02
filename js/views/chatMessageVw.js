@@ -2,6 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     moment = require('moment'),
+    sanitizeHTML = require('sanitize-html'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
@@ -14,21 +15,28 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(){
+    var timestamp = this.model.get('timestamp');
+    var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMM D, h:mm A');
+    this.model.set('formattedTimestamp', formatted_timestamp);
+
+    // Handle line breaks
+    var msg = sanitizeHTML(this.model.get('message').replace(/\n$/, "").split(/[\r\n]/g).join("<br/><br/>"));
+    this.model.set('formattedMessage', msg);
     this.render();
   },
 
   render: function(){
     var self = this;
     loadTemplate('./js/templates/chatMessage.html', function(loadedTemplate) {
-      var timestamp = self.model.get('timestamp');
-      var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMM D, h:mm A');
-      self.model.set('formattedTimestamp', formatted_timestamp);
-
-      // Handle line breaks
-      var msg = self.model.get('message').replace(/\n$/, "").split(/[\r\n]/g).join("<br/><br/>");
-      self.model.set('formattedMessage', msg);
-
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.find('a').on('click', function(e){
+        e.preventDefault();
+        var extUrl = $(this).attr('href');
+        if (!/^https?:\/\//i.test(extUrl)) {
+          extUrl = 'http://' + extUrl;
+        }
+        require("shell").openExternal(extUrl);
+      });
     });
     return this;
   },
