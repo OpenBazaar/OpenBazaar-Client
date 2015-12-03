@@ -61,8 +61,6 @@ module.exports = Backbone.View.extend({
     });
     this.socketItemID = Math.random().toString(36).slice(2);
     this.socketVendorID = Math.random().toString(36).slice(2);
-    this.socketView.getItems(this.socketItemID);
-    this.socketView.getVendors(this.socketVendorID);
   },
 
   resetLookingCount: function(){
@@ -97,13 +95,16 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     $('#content').html(this.$el);
-    $('#customStyle').remove();
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
       if(self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
         self.$el.find('.js-homeMyPage').addClass('show');
       }
+
+      //get vendors and items
+      self.socketView.getItems(self.socketItemID);
+      self.socketView.getVendors(self.socketVendorID);
 
       // $("#obContainer").scroll(function(){
       //   if ($(this).scrollTop() > 20 && self.slimVisible === false ) {

@@ -46,7 +46,7 @@ module.exports = Backbone.View.extend({
     //$el must be passed in by the constructor
     //this.$el.append(storeShort.el);
     //appending to the DOM one by one is too slow, and the last 1/3 of the items won't be added. Add to a holder element instead.
-    this.listWrapper.append(storeShort.el);
+    this.listWrapper.prepend(storeShort.el);
   },
 
   renderNoneFound: function(){

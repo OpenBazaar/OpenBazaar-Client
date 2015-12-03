@@ -33,6 +33,7 @@ module.exports = Backbone.Router.extend({
     "cases": "cases",
     "notifications": "notifications",
     "settings": "settings",
+    "settings/:state": "settings",
     "about": "about",
     "support": "donate"
   },
@@ -42,9 +43,11 @@ module.exports = Backbone.Router.extend({
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
   },
 
-  newView: function(view){
+  newView: function(view, bodyClass){
     "use strict";
-    $('body').attr("id", "");//add other body style classes if they are created
+    if($('body').attr('id') != bodyClass){
+      $('body').attr("id", bodyClass || "");
+    }
     $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
@@ -79,8 +82,7 @@ module.exports = Backbone.Router.extend({
       state: state,
       itemHash: itemHash,
       socketView: this.socketView
-    }));
-    $('body').attr("id", "userPage");
+    }),"userPage");
   },
 
   customizePage: function(){
@@ -94,10 +96,9 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new userPageView({
       userModel: this.options.userModel,
-      userID: this.options.userModel.get('guid'),
-      state: 'itemNew'
-    }));
-    $('body').attr("id", "userPage");
+      state: 'itemNew',
+      socketView: this.socketView
+    }),"userPage");
   },
 
   purchases: function(){
@@ -124,10 +125,15 @@ module.exports = Backbone.Router.extend({
     console.log("notifications");
   },
 
-  settings: function(){
+  settings: function(state){
     "use strict";
+    $('.js-loadingModal').addClass('show');
     this.cleanup();
-    this.newView(new settingsView({userModel: this.options.userModel}));
+    this.newView(new settingsView({
+      userModel: this.options.userModel,
+      state: state,
+      socketView: this.socketView
+    }), "userPage");
   },
 
   about: function(){

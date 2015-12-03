@@ -14,6 +14,7 @@ var __ = require('underscore'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
+    setTheme = require('../utils/setTheme.js'),
     storeWizardVw = require('./storeWizardVw');
 
 //create a default item because a new itemModel will be created with only flat attributes
@@ -117,7 +118,6 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    //'change .js-userPageImageUpload': 'uploadUserPageImage',
     'click .js-customizeColor': 'customizeColorClick',
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUser',
@@ -171,7 +171,6 @@ module.exports = Backbone.View.extend({
     };
 
     //show loading modal before fetching user data
-    $('#customStyle').remove();
     $('.js-loadingModal').removeClass('hide');
 
     //determine if this is the user's own page or another profile's page
@@ -249,6 +248,7 @@ module.exports = Backbone.View.extend({
 
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
+        maxZoom: 5,
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
           $('.js-headerLoading').removeClass('fadeOut');
@@ -291,80 +291,12 @@ module.exports = Backbone.View.extend({
 
   setCustomStyles: function() {
     "use strict";
-    var self = this;
+    var self = this,
+        profile = this.model.get('page').profile;
     //only do the following if page has been set in the model
-    if(this.model.get('page')){
-      var opaque = this.hexToRgb(this.model.get('page').profile.background_color);
-      var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
-      customStyleTag.setAttribute('id', 'customStyle');
+    if(profile){
+      setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
 
-      customStyleTag.innerHTML =
-          "#ov1 #userPage .custCol-background, #ov1 #userPage { background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
-          "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
-          "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
-          "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 #userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 #userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 #userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + ";}" +
-          "#ov1 #userPage .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + "; opacity: .75;}" +
-          "#ov1 #userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
-          "#ov1 #userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
-          "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + "; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + "; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 #userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + ";}" +
-          "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + ";}" +
-          "#ov1 #userPage .container .txtField { color: " + this.model.get('page').profile.text_color + ";}" +
-          "#ov1 #userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + ";}" +
-          "#ov1 #userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
-          "#ov1 #userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
-          "#ov1 #userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
-          "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
-          "#ov1 #userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
-          "#ov1 #userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + ";}" +
-          "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85);}" +
-          "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5);}";
-          "#ov1 #userPage .custCol-background, #ov1 #userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
-          "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
-          "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
-          "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
-          "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
-          "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
-          "#ov1 #userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
-          "#ov1 #userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 #userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 #userPage .checkboxLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important; opacity: .75 !important;}" +
-          "#ov1 #userPage .user-page-header-slim { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.15) + ";}" +
-          "#ov1 #userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + ";}" +
-          "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 4px " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + this.model.get('page').profile.text_color + " !important; box-shadow: inset 0 0 0 3px " + this.model.get('page').profile.primary_color + " !important;}" +
-          "#ov1 #userPage input::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 #userPage .container .txtField { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 #userPage .custCol-font-secondary { color: " + this.model.get('page').profile.secondary_color + " !important;}" +
-          "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + this.model.get('page').profile.text_color + " !important;}" +
-          "#ov1 #userPage .chosen-choices { background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
-          "#ov1 #userPage .search-choice { background-color: " + this.model.get('page').profile.secondary_color + "; background-image: none; border: none; padding: 10px; color: " + this.model.get('page').profile.text_color + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
-          "#ov1 #userPage .custCol-border-background { border-color: " + this.model.get('page').profile.background_color + " }" +
-          "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + this.model.get('page').profile.secondary_color + "}" +
-          "#ov1 #userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
-          "#ov1 #userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
-          "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" +
-          "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + this.shadeColor2(this.model.get('page').profile.background_color, 0.25) + " !important;}" +
-          "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}";
-
-      // if text is white the highlight color needs to darken instead of lighten
-      if (this.model.get('page').profile.text_color === 'undefined' || this.model.get('page').profile.text_color === "#ffffff"){
-        customStyleTag.innerHTML += "#ov1 #userPage .txtField:focus, #ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2("#ffffff", -0.5) + ";}";
-      }else{
-        customStyleTag.innerHTML += "#ov1 #userPage .txtField:focus, #ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2(this.model.get('page').profile.text_color, 0.5) + ";}";
-      }
-
-      document.body.appendChild(customStyleTag);
       //set custom color input values
       self.$el.find('.js-customizeColorInput').each(function(){
         var newColor = self.model.get('page').profile[$(this).attr('id')];
@@ -372,20 +304,6 @@ module.exports = Backbone.View.extend({
         $(this).closest('.positionWrapper').find('.js-customizeColor').css('background-color', newColor);
       });
     }
-  },
-
-  shadeColor2: function shadeColor2(color, percent) {   
-    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
-    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
-  },
-
-  hexToRgb: function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
   },
 
   setState: function(state, hash) {
@@ -703,7 +621,7 @@ module.exports = Backbone.View.extend({
     this.customizing = true;
     this.setControls('customize');
     $('.user-page-content').addClass('pull-up4');
-    $('.user-customize-cover-photo').show();
+    //$('.user-customize-cover-photo').show();
     $('.user-page-header').addClass('shadow-inner1-strong');
     $('#obContainer').animate({ scrollTop: "0" });
   },
