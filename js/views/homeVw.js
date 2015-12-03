@@ -123,7 +123,7 @@ module.exports = Backbone.View.extend({
       // });
 
       // Auto focus the search input
-      $('.js-homeItemsSearch input').focus();
+      // $('.js-homeItemsSearch input').focus();
     });
   },
 
@@ -167,7 +167,7 @@ module.exports = Backbone.View.extend({
 
     // Auto focus the search input
     $('.js-homeItemsSearch').removeClass('hide');
-    $('.js-homeItemsSearch input').focus();
+    // $('.js-homeItemsSearch input').focus();
   },
 
   homeStoresClick: function(e){
@@ -178,7 +178,7 @@ module.exports = Backbone.View.extend({
 
     // Auto focus the search input
     $('.js-homeStoresSearch').removeClass('hide');
-    $('.js-homeStoresSearch input').focus();
+    // $('.js-homeStoresSearch input').focus();
   },
 
   homeFeedClick: function(e){
@@ -189,7 +189,7 @@ module.exports = Backbone.View.extend({
 
     // Auto focus the search input
     $('.js-homeFeedSearch').removeClass('hide');
-    $('.js-homeFeedSearch input').focus();    
+    // $('.js-homeFeedSearch input').focus();    
   },  
 
   createStore: function() {

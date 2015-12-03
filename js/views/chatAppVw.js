@@ -158,6 +158,7 @@ module.exports = Backbone.View.extend({
     $.post(model.get('serverUrl') + "mark_chat_message_as_read", {guid: guid});
     $('#chatHead_' + guid).attr('data-count', 0);
     $('#chatHead_' + guid).removeClass('badge');
+    $('#chatHead_' + guid).addClass('chatRead');
 
   },
 
@@ -268,12 +269,12 @@ module.exports = Backbone.View.extend({
   openConversation: function() {
     this.slideChatOut();
     $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed');
+    $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity35');
   },
 
   closeConversation: function() {
     $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed');
+    $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity35');
   },
 
   chatSearch: function() {
@@ -286,6 +287,9 @@ module.exports = Backbone.View.extend({
     $(this.$el).addClass('sideBarSlid', 500);
 
     $('.container').addClass('compressed');
+    $('.modal-child').addClass('modalCompressed');
+    $('.spinner-with-logo').addClass('modalCompressed');
+    $('#obContainer').addClass('noScrollBar');
 
     // Adjust elements
     $(this.$el).find('.chatSearch').addClass('chatSearchOut');
@@ -300,6 +304,9 @@ module.exports = Backbone.View.extend({
     $(this.$el).removeClass('sideBarSlid', 500);
 
     $('.container').removeClass('compressed');
+    $('.modal-child').removeClass('modalCompressed');
+    $('.spinner-with-logo').removeClass('modalCompressed');
+    $('#obContainer').removeClass('noScrollBar');
 
     // Adjust elements
     $(this.$el).find('.chatSearch').removeClass('chatSearchOut');

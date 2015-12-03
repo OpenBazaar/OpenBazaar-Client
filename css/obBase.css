@@ -1,3 +1,30 @@
+/*========== scroll bars ==========*/
+#obContainer::-webkit-scrollbar {
+  width: 3px;
+}
+ 
+#obContainer::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #44697E; 
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar,
+.chatConversationHeads::-webkit-scrollbar,
+.chatConversationContent::-webkit-scrollbar {
+  width: 3px;
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar-thumb,
+.chatConversationHeads::-webkit-scrollbar-thumb,
+.chatConversationContent::-webkit-scrollbar {
+  border-radius: 20px;
+  background: #3E3E3E;
+}
+
+
+.noScrollBar::-webkit-scrollbar {
+  width: 0 !important;
+}
 /*========== base styles ==========*/
 
 
@@ -38,9 +65,7 @@ p a {
 }
 
 hr {
-  background-color: rgba(255,255,255,0.08);
-  border: 0;
-  height: 1px;
+  border: solid 1px rgba(255,255,255,0.08);
   width: 100%;
 }
 
@@ -123,10 +148,12 @@ form {
 
 #obContainer {
   transition: width 0.5s ease;
+  width: calc(100% - 47px);
+
 }
 
 #obContainer.compressed {
-  width: calc(100% - 230px);
+  width: calc(100% - 231px);
 }
 
 #pageNav {
@@ -142,13 +169,13 @@ form {
 
 #sideBar {
   position: fixed;
-  right: -180px;
+  right: -184px;
   top: 50px;
   width:230px;
   background-color: #252525;
   border-left: solid 1px #333333;
   height: calc(100% - 50px);
-  z-index: 2;
+  z-index: 1;
   transition: right 0.5s ease;
   color: #DDD;
 }
@@ -209,7 +236,7 @@ form {
   top: 50px;
   height: 100%;
   width: 100%;
-  background-color: rgba(25,25,25,0.50);
+  background-color: rgba(25,25,25,0.65);
   z-index: 2;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
@@ -323,6 +350,7 @@ form {
   /* use to make only one item in a flex row expand */
   flex-grow: 1;
 }
+
 
 .gridItem {
   box-sizing: border-box;
@@ -879,6 +907,7 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
+  transition: left .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modal-hero {
@@ -1185,15 +1214,15 @@ input[type="text"].txtField-bar {
 }
 
 .btn-chatOpen {
-  background-color: unset;
-  margin: 5px;
-  width: 32px;
-  height: 19px;
-  line-height: 19px;
+  background-color: transparent;
   text-align: center;
   font-size: 20px;
   color: white;
   font-weight: normal;
+}
+
+.btn-chatOpen:before {
+  line-height: 42px;
 }
 
 .btn-chatOpenOut {
@@ -1215,6 +1244,14 @@ input[type="text"].txtField-bar {
   text-align: center;
   font-size: 18px;
   font-weight: normal;
+}
+
+.newChatButton {
+  border-bottom: solid 1px rgba(255,255,255,0.08);
+}
+
+.chatSearch {
+  border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
 .chatSearch input {
@@ -1248,43 +1285,45 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversation {
-  width: 100%;
+  width: calc(100% - 1px);
   height: 360px;
   bottom: 0px;
   position: absolute;
   transition: bottom 0.5s ease;
-  border: 1px solid #333;
-  border-top: 1px solid #BBB;
+  outline: 1px solid #565656;
   background-color: #252525;
 }
 
 .chatConversationHidden {
-  bottom: -300px;
+  bottom: -362px;
 }
 
 .chatMessagesLabel {
   float:left;
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   height: 43px;
   line-height: 43px;
   padding-left: 10px;
 }
 
 .chatConversationHeads {
+  overflow: scroll;
 }
 
 .chatConversationHeadsCompressed {
-  height: calc(100% - 370px);
+  height: calc(100% - 460px);
   overflow: auto;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-filter: blur(.25px);
 }
 
 .chatConversationHeader {
     padding: 0;
-    background-color: #333333;
+    background-color: #565656;
     height: 45px;
     line-height: 45px;
-    padding-left: 7px;
+    padding-left: 10px;
     color: #fff;
 }
 
@@ -1301,9 +1340,10 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationContent {
-  height: calc(100% - 120px);
+  height: calc(100% - 134px);
   border-bottom: 1px solid #333;
   overflow: auto;
+  padding: 6px 2px;
 }
 
 .chatConversationTo {
@@ -1341,7 +1381,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessageLine {
-  padding: 5px;
+  padding: 4px 5px;
   width: 100%;
 }
 
@@ -1351,7 +1391,8 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatHead {
-  padding: 0 5px;
+  padding: 7px 5px;
+  border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
 .chatHeadSelected {
@@ -1368,16 +1409,17 @@ div.chatSearchOut .chatSearchIcon {
   font-size: 11px;
   float:left;
   padding:0 5px;
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 .chatPreviewSender {
   font-size:13px;
-  font-weight:bold;
+  font-weight:500;
   color: white;
   text-overflow: ellipsis;
   overflow: hidden;
   width: 170px;
+  margin-left: 2px;
 }
 
 .chatPreviewLastMessage {
@@ -1387,15 +1429,19 @@ div.chatSearchOut .chatSearchIcon {
   white-space: nowrap;
   color: #fff;
   opacity: .75;
-  font-size: 12px
+  font-size: 12px;
+  margin-left: 2px;
 }
 
-.chatConversationMessageBody {
+.chatConversationMessageBody div {
   background-color: #2D2D2D;
-  border-radius: 2px;
+  border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
   word-break: break-word;
+  display: inline-block;
+  font-weight: 500;
+  letter-spacing: .2;
 }
 
 #inputConversationMessage {
@@ -1413,6 +1459,14 @@ div.chatSearchOut .chatSearchIcon {
   opacity: .35;
   font-weight: 500;
   letter-spacing: 0;
+}
+
+.chatConversationMessageTimestamp div {
+  margin-top: 2px;
+}
+
+.modalCompressed {
+  left: calc(50% - 115.5px);
 }
 
 .userPage .btn.btn-bar {
@@ -1720,7 +1774,7 @@ input[type="number"].fieldItem:focus,
 input[type="email"].fieldItem:focus,
 input[type="url"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
-  border: 2px solid #fff;
+  border: 2px solid #277FAF;
   transition: border 0.3s;
   outline: none;
 }
@@ -3002,6 +3056,10 @@ input[type="checkbox"].fieldItem + label span {
   height: 40px;
   line-height: 40px;
 }
+#ov1  .height43 {
+  height: 43px;
+  line-height: 43px;
+}
 
 #ov1  .height36 {
   height: 36px;
@@ -3120,6 +3178,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .width360 {
   width: 360px;
+}
+
+#ov1 .width46px {
+  width: 46px;
 }
 
 #ov1 .width75px {

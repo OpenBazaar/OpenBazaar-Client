@@ -302,7 +302,7 @@ module.exports = Backbone.View.extend({
       customStyleTag.setAttribute('id', 'customStyle');
 
       customStyleTag.innerHTML =
-          "#ov1 .userPage .custCol-background, #ov1 .userPage.body { background-color: " + this.model.get('page').profile.background_color + ";}" +
+          "#ov1 .userPage .custCol-background, #ov1 body { background-color: " + this.model.get('page').profile.background_color + ";}" +
           "#ov1 .userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.05) + ";}" +
           "#ov1 .userPage .custCol-primary, #ov1 .userPage .chosen-drop, #ov1 .userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
           "#ov1 .userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.primary_color + ";}" +
@@ -329,15 +329,10 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .custCol-primary-darken { background: " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) + " !important;}" +
           "#ov1 .userPage .custCol-text, .search-field input { color: " + this.model.get('page').profile.text_color + "!important;}" +
           "#ov1 .userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85) !important;}" + 
-          "#ov1 .userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.5) !important;}"; 
+          "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.15) + " !important;}" +
+          "#ov1 .userPage #obContainer::-webkit-scrollbar-thumb { background: " + this.shadeColor2(this.model.get('page').profile.background_color, 0.25) + " !important;}" + 
+          "#ov1 .userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.65) !important;}"; 
           
-      // if text is white the highlight color needs to darken instead of lighten
-      if (this.model.get('page').profile.text_color === 'undefined' || this.model.get('page').profile.text_color === "#ffffff"){
-        customStyleTag.innerHTML += "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2("#ffffff", -0.5) + " !important;}";
-      }else{
-        customStyleTag.innerHTML += "#ov1 .userPage .txtField:focus, #ov1 .userPage .fieldItem:focus , #ov1 .userPage .fieldItem-textarea:focus { outline: 2px solid " + this.shadeColor2(this.model.get('page').profile.text_color, 0.5) + " !important;}";
-      }
-
       document.body.appendChild(customStyleTag);
       //set custom color input values
       self.$el.find('.js-customizeColorInput').each(function(){
@@ -634,7 +629,7 @@ module.exports = Backbone.View.extend({
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'));
     this.addTabToHistory('followers');
     this.setState('followers');
-    $('#inputFollowers').focus();
+    // $('#inputFollowers').focus();
   },
 
   followingClick: function(e){
@@ -642,7 +637,7 @@ module.exports = Backbone.View.extend({
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-following'));
     this.addTabToHistory('following');
     this.setState('following');
-    $('#inputFollowing').focus();
+    // $('#inputFollowing').focus();
   },
 
   storeClick: function(e){
@@ -650,7 +645,7 @@ module.exports = Backbone.View.extend({
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
-    $('#inputStore').focus();
+    // $('#inputStore').focus();
   },
 
   tabClick: function(activeTab, showContent){

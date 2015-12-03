@@ -2,25 +2,25 @@
     <table width="100%">
         <% if(ob.outgoing) { %>
         <tr>
-            <td class="chatConversationMessageBody"><%= ob.formattedMessage%></td>
+            <td align="right" class="chatConversationMessageTimestamp paddingLeft2" colspan="100%"><div><%- ob.formattedTimestamp %></div></td>
+        </tr>
+        <tr>
+            <td class="chatConversationMessageBody"><div class="floatRight"><%= ob.formattedMessage%></div></td>
             <td class="chatConversationMessageAvatar">
                 <div class="thumbnail custcol-border-secondary marginLeft2"
                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
             </td>
         </tr>
-        <tr>
-            <td align="left" class="chatConversationMessageTimestamp paddingLeft2" colspan="100%"><%- ob.formattedTimestamp %></td>
-        </tr>
         <% } else { %>
+        <tr>
+            <td align="left" class="chatConversationMessageTimestamp" colspan="100%"><div><%- ob.formattedTimestamp %></div></td>
+        </tr>
         <tr>
             <td class="chatConversationMessageAvatar">
                 <div class="thumbnail custcol-border-secondary marginRight2"
                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
             </td>
-            <td class="chatConversationMessageBody paddingRight2"><%= ob.formattedMessage %></td>
-        </tr>
-        <tr>
-            <td align="right" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
+            <td class="chatConversationMessageBody paddingRight2"><div class="floatLeft"><%= ob.formattedMessage %></div></td>
         </tr>
         <% } %>
     </table>
