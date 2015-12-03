@@ -164,8 +164,8 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem">
-                  <input type="radio" class="fieldItem" id="display_nsfw_content_yes" name="nsfw" value="true" checked /><label for="display_nsfw_content_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                  <input type="radio" class="fieldItem" id="display_nsfw_content_no" name="nsfw" value="false"/><label for="display_nsfw_content_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                  <input disabled type="radio" class="fieldItem" id="display_nsfw_content_yes" name="nsfw" value="true" checked /><label for="display_nsfw_content_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input disabled type="radio" class="fieldItem" id="display_nsfw_content_no" name="nsfw" value="false"/><label for="display_nsfw_content_no" class="radioLabel"><%= polyglot.t('No') %></label>
                 </div>
               </div>
             </div>
@@ -650,8 +650,8 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0 marginLeft6">
-                  <input type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
-                  <input type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
+                  <input disabled type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
+                  <input disabled type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
                 </div>
               </div>
             </div>
@@ -689,7 +689,6 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="hideTopAndBottomBorder js-settingsNewMods">
-                  <!--TODO: moderators input here-->
                 </div>
               </div>
             </div>
@@ -725,7 +724,7 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
-                  <textarea
+                  <textarea disabled
                     name="terms_conditions"
                     id="terms_conditions"
                     rows="6"
@@ -746,7 +745,12 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
-                  <textarea name="refund_policy" id="refund_policy" rows="6" class="fieldItem-textarea" placeholder="<%= ob.user.refund_policy%>"></textarea>
+                  <textarea disabled
+                    name="refund_policy"
+                    id="refund_policy"
+                    rows="6"
+                    class="fieldItem-textarea"
+                    placeholder="<%= ob.user.refund_policy%>"></textarea>
                 </div>
               </div>
             </div>
@@ -765,12 +769,13 @@
               <div class="flexRow marginLeft15 marginTop15">
                 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
                 <div class="flexCol-4 padding5">
+                  <% console.log(ob.user.shipping_addresses) %>
                   <div class="padding15 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
                     <div class="textOpacity75">
                       <div><%- address.name %></div>
                       <div><%- address.street %></div>
                       <div><%- address.city %>, <%- address.state %> <%- address.postal_code %></div>
-                      <div class="capitalize"><%- address.country.toLowerCase().replace("_", " ") %></div>
+                      <div><%- address.displayCountry %></div>
                     </div>
 
                     <div class="btn marginTop6 custCol-primary clickable">

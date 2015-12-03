@@ -4,61 +4,71 @@
        <% } %>"
        data-guid="<%= ob.guid %>">
   <div class="flexRow">
-    <% if(ob.isModerator){ %>
-    <div>
-      <input type="checkbox" id="userCheckInput<%- ob.userCount %>" class="fieldItem" data-guid="<%- ob.guid %>"
-      <% if(ob.existingModerator){ %>
-      checked
-      <% } %>
-      >
-      <label for="userCheckInput<%- ob.userCount %>">
-    </div>
-    <% } %>
-    <div>
-      <div class="thumbnail
-      <% if(!ob.micro){ %>
-      thumbnail-large
-      thumbnail-largeTrimmed
-      <% } else { %>
-      thumbnail-small
-      <% } %>
-      custCol-border-secondary borderRadius2 borderRadiusBottom0 textOpacity90 clickable js-userShort"
-        <% if(ob.avatar_hash) { %>
-        style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);">
-        <% } else { %>
-        style="background-image: url(imgs/defaultUser.png);">
-        <% } %>
-      </div>
-    <% if(!ob.micro){ %>
-      <a class="btn btn-txt btn-secondary custCol-secondary textOpacity65 btn-latched"><%= polyglot.t('follow') %></a>
-    <% } %>
-    </div>
-    <div class="flexexpand">
-      <div class="marginLeft15 marginTop2 clearFix">
-        <div class="floatLeft noOverflow marginBottom2 marginRight5 maxWidth200">
-          <a class="textSize16px capitalize js-userShort" title="<%- ob.name %>"><%- ob.name.toLowerCase() %></a>
+    <div class="table">
+      <div>
+        <% if(ob.isModerator){ %>
+        <div style="width: 38px;">
+          <input type="checkbox" id="userCheckInput<%- ob.userCount %>" class="fieldItem" data-guid="<%- ob.guid %>"
+          <% if(ob.existingModerator){ %>
+          checked
+          <% } %>
+          >
+          <label for="userCheckInput<%- ob.userCount %>">
         </div>
-        <% if(ob.handle) { %>
-          <div class="pull-left lineHeight21 maxWidth200">
-            <a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a>
-          </div>
-        <% }else{ %>
-          <div class="noOverflow pull-left lineHeight21 maxWidth200">
-            <a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a>
-          </div>
         <% } %>
-      </div>
-      <div class="marginLeft15 marginTop2">
-        <% if(ob.short_description) { %>
-          <div class="fontSize14 txt-fade textWeightNormal"><%- ob.short_description %></div>
+        <div
+        <% if(ob.micro){ %>
+        style="width: 54px;"
         <% } else { %>
-          <div class="fontSize14 txt-fade textWeightNormal"><%= polyglot.t('NoDescriptionAdded') %></div>
+        style="width: 80px;"
         <% } %>
-      </div>
-    </div>
+        >
+          <div class="thumbnail
+          <% if(!ob.micro){ %>
+          thumbnail-large
+          thumbnail-largeTrimmed
+          <% } else { %>
+          thumbnail-small
+          <% } %>
+          custCol-border-secondary borderRadius2 borderRadiusBottom0 textOpacity90 clickable js-userShort"
+            <% if(ob.avatar_hash) { %>
+            style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);">
+            <% } else { %>
+            style="background-image: url(imgs/defaultUser.png);">
+            <% } %>
+          </div>
+        <% if(!ob.micro){ %>
+          <a class="btn btn-txt btn-secondary custCol-secondary textOpacity65 btn-latched"><%= polyglot.t('follow') %></a>
+        <% } %>
+        </div>
+        <div>
+          <div class="marginLeft15 marginTop2 clearFix">
+            <div class="floatLeft noOverflow marginBottom2 marginRight5">
+              <a class="textSize16px capitalize js-userShort" title="<%- ob.name %>"><%- ob.name.toLowerCase() %></a>
+            </div>
+            <% if(ob.handle) { %>
+              <div class="pull-left lineHeight21">
+                <a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a>
+              </div>
+            <% }else{ %>
+              <div class="noOverflow pull-left lineHeight21">
+                <a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a>
+              </div>
+            <% } %>
+          </div>
+          <div class="marginLeft15 marginTop2">
+            <% if(ob.short_description) { %>
+              <div class="fontSize14 txt-fade textWeightNormal"><%- ob.short_description %></div>
+            <% } else { %>
+              <div class="fontSize14 txt-fade textWeightNormal"><%= polyglot.t('NoDescriptionAdded') %></div>
+            <% } %>
+          </div>
+        </div>
 
-    <div>
-      <a class="btn btn-txt btn-secondary custCol-secondary pull-right height36 width120 fontSize14 js-userShort"><%= polyglot.t('Visit') %></a>
+        <div style="width: 120px;">
+          <a class="btn btn-txt btn-secondary custCol-secondary pull-right height36 width120 fontSize14 js-userShort"><%= polyglot.t('Visit') %></a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

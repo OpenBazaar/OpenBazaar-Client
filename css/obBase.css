@@ -3078,18 +3078,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 600px;
 }
 
-#ov1 .maxWidth100 {
-  max-width: 100px;
-}
-
-#ov1 .maxWidth150 {
-  max-width: 150px;
-}
-
-#ov1 .maxWidth200 {
-  max-width: 200px;
-}
-
 #ov1  .cursorDefault {
   cursor: default;
 }

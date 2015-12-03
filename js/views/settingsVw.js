@@ -182,8 +182,8 @@ module.exports = Backbone.View.extend({
     currecyList.unshift({code: "BTC", currency:"Bitcoin", currencyUnits: "4"});
 
     __.each(countryList, function(c, i){
-      var country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
-      var ship_country_option = $('<option value="'+c.dataName+'">'+c.name+'</option>');
+      var country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
+      var ship_country_option = $('<option value="'+c.dataName+'" data-name="'+c.name+'">'+c.name+'</option>');
       country_option.attr("selected",user.country == c.dataName);
       //if user has a country in their profile, preselect it in the new address section
       ship_country_option.attr("selected",user.country== c.dataName);
@@ -241,24 +241,26 @@ module.exports = Backbone.View.extend({
         existingMods = this.model.get('page').profile.moderator_list,
         isExistingMod = existingMods.indexOf(moderator.guid) > -1 ? true : false;
 
-    moderator.serverUrl = serverUrl;
-    moderator.userID = moderator.guid;
-    moderator.avatarURL = serverUrl+"get_image?hash="+moderator.avatar_hash+"&guid="+moderator.guid;
-    moderator.isModerator = true; //flag for template
-    moderator.existingModerator = isExistingMod; //flag for template
-    moderator.micro = true; //flag for template
-    moderator.userCount = this.moderatorCount;
-    var newModModel = new userShortModel(moderator);
-    var modShort = new userShortView({model: newModModel});
-    if(isExistingMod){
-      //remove blank version that was already added
-      this.$el.find('.js-blankMod[data-guid="'+moderator.guid+'"]').remove();
-      this.$el.find('.js-settingsCurrentMods').append(modShort.el);
-    } else {
-      this.$el.find('.js-settingsNewMods').append(modShort.el);
+    if(moderator.guid != this.model.get('page').profile.guid){
+      moderator.serverUrl = serverUrl;
+      moderator.userID = moderator.guid;
+      moderator.avatarURL = serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
+      moderator.isModerator = true; //flag for template
+      moderator.existingModerator = isExistingMod; //flag for template
+      moderator.micro = true; //flag for template
+      moderator.userCount = this.moderatorCount;
+      var newModModel = new userShortModel(moderator);
+      var modShort = new userShortView({model: newModModel});
+      if (isExistingMod){
+        //remove blank version that was already added
+        this.$el.find('.js-blankMod[data-guid="' + moderator.guid + '"]').remove();
+        this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+      }else{
+        this.$el.find('.js-settingsNewMods').append(modShort.el);
+      }
+      this.moderatorCount++;
+      this.subViews.push(modShort);
     }
-    this.moderatorCount++;
-    this.subViews.push(modShort);
   },
 
   validateInput: function(e) {
@@ -348,7 +350,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         formData = new FormData(form[0] || ""),
-        formKeys = [];
+        formKeys = [],
+        tempDisabledFields = [];
 
     if(form){
       form.addClass('formChecked');
@@ -357,19 +360,32 @@ module.exports = Backbone.View.extend({
         return;
       }
 
+      //temporarily disable any blank fields so they aren't picked up by the serializeArray
+      form.find(":input:not(:disabled)").each(function(){
+        if($(this).val() == "") {
+          $(this).attr('disabled', true);
+          tempDisabledFields.push($(this).attr('id'));
+        };
+      });
+
       __.each(form.serializeArray(), function (value) {
         formKeys.push(value.name);
       });
     }
-    console.log(addData);
 
+    //add manual data not in the form
     __.each(addData, function(value, key){
-      console.log(value);
-      console.log(key);
       formKeys.push(value.name);
-      formData.append(key, value);
+      if(value.constructor === Array){
+        __.each(value, function(val){
+          formData.append(key, val);
+        })
+      }else{
+        formData.append(key, value);
+      }
     });
 
+    //if key is not in formKeys, get value from the model
     if(modelJSON){
       __.each(modelJSON, function (value, key) {
         if (formKeys.indexOf(key) == -1){
@@ -400,6 +416,12 @@ module.exports = Backbone.View.extend({
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
+      },
+      complete: function(){
+        //re-enable any disabled fields
+        __.each(tempDisabledFields, function(element){
+          form.find('#'+element).attr('disabled', false);
+        })
       }
     });
   },
@@ -538,7 +560,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         form = this.$el.find("#storeForm"),
-        modData = {},
+        storeData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [];
 
@@ -546,13 +568,13 @@ module.exports = Backbone.View.extend({
       modList.push($(this).data('guid'));
     });
 
-    modData.moderator_list = modList;
+    storeData.moderator_list = modList;
 
-    this.saveData(form, this.model.get('page').profile, "profile", function(){
+    this.saveData(form, "", "profile", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
-    }, "", modData);
+    }, "", storeData);
   },
 
   saveAddress: function(){
@@ -569,6 +591,7 @@ module.exports = Backbone.View.extend({
     newAddress.state = this.$el.find('#settingsShipToState').val();
     newAddress.postal_code = this.$el.find('#settingsShipToPostalCode').val();
     newAddress.country = this.$el.find('#settingsShipToCountry').val();
+    newAddress.displayCountry = this.$el.find('#settingsShipToCountry option:selected').data('name');
 
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
       newAddresses.push(newAddress);
