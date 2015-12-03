@@ -118,7 +118,6 @@ module.exports = Backbone.View.extend({
         maxZoom: 5,
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
-          console.log("foo");
           self.$el.find('.js-bannerLoading').removeClass('fadeOut');
         },
         onImageLoaded: function(){self.$el.find('.js-bannerLoading').addClass('fadeOut');},
@@ -235,7 +234,6 @@ module.exports = Backbone.View.extend({
   },
 
   renderModerator: function(moderator){
-    console.log(moderator);
     "use strict";
     var serverUrl = this.model.get('user').serverUrl,
         existingMods = this.model.get('page').profile.moderator_list,
@@ -385,6 +383,12 @@ module.exports = Backbone.View.extend({
       }
     });
 
+    //add addresses in correct format or they will be destroyed by the server
+    if(endPoint == "settings" && modelJSON){
+      formKeys.push("shipping_addresses");
+      formData.append("shipping_addresses", JSON.stringify(modelJSON.shipping_addresses));
+    }
+
     //if key is not in formKeys, get value from the model
     if(modelJSON){
       __.each(modelJSON, function (value, key) {
@@ -460,7 +464,6 @@ module.exports = Backbone.View.extend({
         tColorVal = tColor.val();
 
     var sendPage = function(){
-      console.log("sendPage");
       //change color inputs to hex values
       pColor.val(parseInt(pColorVal.slice(1), 16));
       sColor.val(parseInt(sColorVal.slice(1), 16));
@@ -521,7 +524,6 @@ module.exports = Backbone.View.extend({
         self.saveData('', '', "upload_image", function (data) {
           "use strict";
           var img_hash = data.image_hashes[0];
-          console.log("==============banner saved");
           if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
             imgData.header = img_hash;
             checkSocialCount();
@@ -612,156 +614,21 @@ module.exports = Backbone.View.extend({
     }, "", addressData);
   },
 
+  saveAdvanced: function(){
+    "use strict";
+    var self = this,
+        form = this.$el.find("#advancedForm");
+
+    this.saveData(form, this.model.get('user'), "settings", function(){
+      "use strict";
+      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.refreshView();
+    });
+  },
+
   refreshView: function(){
     "use strict";
     window.location.reload();
-  },
-
-  saveClick: function(e){
-        var self = this,
-            server = self.options.userModel.get('serverUrl'),
-            settings_form = this.$el.find("#settingsForm"),
-            //As there are 3 different API urls we need to call,
-            //we need to split up our form data into 3 parts,
-            //depending on which API call each value belongs to
-            profileFormData = new FormData(),
-            settingsFormData = new FormData(),
-            uploadImageFormData = new FormData(),
-            newAddress = {},
-            newAddresses = [],
-            imageURI;
-
-        settings_form.addClass('formChecked');
-        if(!settings_form[0].checkValidity()) {
-            showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-            return;
-        }
-
-        newAddress.name = this.$el.find('#settingsShipToName').val();
-        newAddress.street = this.$el.find('#settingsShipToStreet').val();
-        newAddress.city = this.$el.find('#settingsShipToCity').val();
-        newAddress.state = this.$el.find('#settingsShipToState').val();
-        newAddress.postal_code = this.$el.find('#settingsShipToPostalCode').val();
-        newAddress.country = this.$el.find('#settingsShipToCountry').val();
-
-        if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
-          newAddresses.push(newAddress);
-        }
-
-        this.$el.find('.js-settingsAddress:not(:checked)').each(function(){
-          newAddresses.push(self.model.get('user').shipping_addresses[$(this).val()]);
-        });
-
-        if(newAddresses){
-          settingsFormData.append('shipping_addresses', JSON.stringify(newAddresses));
-        }
-
-        $.each(settings_form.find("input,select,textarea").not(".settingsAddressInput"),
-            function(i,el) {
-                var id = $(el).attr("id");
-                if(id == "country") {
-                    profileFormData.append("location",$(el).val());
-                }
-                if(id == "name" || id == "handle") {
-                    profileFormData.append(id,$(el).val());
-                } else if($(el).attr("type") == "checkbox") {
-                    settingsFormData.append(id,$(el).is(":checked"));
-                } else {
-                    settingsFormData.append(id,$(el).val());
-                }
-            }
-        );
-
-        var submit = function(img_hash) {
-
-            if(img_hash) {
-                profileFormData.append("avatar",img_hash);
-            }
-
-            $.ajax({
-                type: "POST",
-                url: server + "settings",
-                contentType: false,
-                processData: false,
-                data: settingsFormData,
-                dataType: "json",
-                success: function(data) {
-                    if(data.success === true) {
-                        $.ajax({
-                            type: "POST",
-                            url: server + "profile",
-                            contentType: false,
-                            processData: false,
-                            data: profileFormData,
-                            dataType: "json",
-                            success: function(data) {
-                                if(data.success === true) {
-                                  window.location.reload();
-                                } else {
-                                  showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-                                }
-                            },
-                            error: function(jqXHR, status, errorThrown){
-                                console.log(jqXHR);
-                                console.log(status);
-                                console.log(errorThrown);
-                                self.showErrorModal("Server error", "Profile API endpoint return an error");
-                            }
-                        });
-                    } else {
-                      showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-                    }
-                },
-                error: function(jqXHR, status, errorThrown){
-                    console.log(jqXHR);
-                    console.log(status);
-                    console.log(errorThrown);
-                    self.showErrorModal("Server error", "Settings API endpoint return an error");
-                }
-            });
-
-        };
-
-        //Lets upload the image first, if there is one
-        //to get the hash
-        if($("#settingsAvatarInput").val()) {
-
-          imageURI = self.$el.find('#settings-image-cropper').cropit('export', {
-            type: 'image/jpeg',
-            quality: 0.75,
-            originalSize: false
-          });
-          imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-          uploadImageFormData.append('image', imageURI);
-
-            $.ajax({
-                type: "POST",
-                url: server + "upload_image",
-                contentType: false,
-                processData: false,
-                data: uploadImageFormData,
-                dataType: "json",
-                success: function(data) {
-                    var img_hash = data.image_hashes[0];
-                    if(data.success === true &&
-                       img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb") {
-                        submit(img_hash);
-                    } else {
-                      showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-                    }
-                },
-                error: function(jqXHR, status, errorThrown){
-                    console.log(jqXHR);
-                    console.log(status);
-                    console.log(errorThrown);
-                    self.showErrorModal("Server error", "Failed to upload image");
-                }
-            });
-
-        } else { //Otherwise lets just submit right away
-            submit();
-        }
-
   },
 
   addressDelete: function(e){

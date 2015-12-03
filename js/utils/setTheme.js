@@ -55,7 +55,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
     "#ov1 #userPage .search-choice { background-color: " + secondaryColor + "; background-image: none; border: none; padding: 10px; color: " + textColor + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
     "#ov1 #userPage .custCol-border-background { border-color: " + backgroundColor + " }" +
     "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + secondaryColor + "}" +
-    "#ov1 #userPage .chosen-container .chosen-results li:hover {background: " + secondaryColor + " }", +
+    "#ov1 #userPage .chosen-container .chosen-results li:hover {background: " + secondaryColor + " }" +
     "#ov1 #userPage .custCol-primary-semi-darken { background: " + shadeColor2(primaryColor, -0.15) + " ;}" +
     "#ov1 #userPage .custCol-primary-darken { background: " + shadeColor2(primaryColor, -0.35) + " ;}" +
     "#ov1 #userPage .custCol-text, .search-field input, .chosen-search input { color: " + textColor + ";}" +

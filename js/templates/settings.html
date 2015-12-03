@@ -769,7 +769,6 @@
               <div class="flexRow marginLeft15 marginTop15">
                 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
                 <div class="flexCol-4 padding5">
-                  <% console.log(ob.user.shipping_addresses) %>
                   <div class="padding15 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
                     <div class="textOpacity75">
                       <div><%- address.name %></div>
@@ -970,33 +969,8 @@
                        pattern="[.a-z0-9,A-Z]+|[.a-z0-9,A-Z]+:[0-9]+"
                        value="<%= ob.user.libbitcoin_server %>">
               </div>
-
             </div>
-            <div class="flexRow">
 
-              <div class="flexCol-3  borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label for="notifications">
-                    <%= polyglot.t('EnableNotifications') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border-secondary">
-                <div class="padding0 fieldItem">
-                  <input type="checkbox"
-                         name="notifications"
-                         id="notifications"
-                         class="fieldItem"
-                  <% if(ob.user.notifications) { %>
-                  checked="checked"
-                  <% } %>
-                  value="true">
-                  <label for="notifications"></label>
-                </div>
-              </div>
-
-            </div>
             <div class="flexRow">
 
               <div class="flexCol-3  borderRight custCol-border-secondary">
@@ -1009,15 +983,19 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
-                  <input type="checkbox"
-                         name="ssl"
-                         id="ssl"
-                         class="fieldItem"
-                  <% if(ob.user.ssl) { %>
-                  checked="checked"
-                  <% } %>
-                  value="true">
-                  <label for="ssl"></label>
+                  <input type="radio" class="fieldItem" id="sslYes" name="ssl" value="true"
+                    <% if(ob.user.ssl) { %>
+                    checked
+                    <% } %>
+                  />
+                  <label for="sslYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="sslNo" name="ssl" value="false"
+                    <% if(!ob.user.ssl) { %>
+                    checked
+                    <% } %>
+                  />
+                  <label for="sslNo" class="radioLabel"><%= polyglot.t('No') %></label>
+
                 </div>
               </div>
 
