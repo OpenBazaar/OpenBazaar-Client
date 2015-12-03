@@ -23,20 +23,25 @@ body {
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, "Open Sans";
+  font-family: "Helvetica Neue", Helvetica, Arial;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 a {
   color: inherit;
   text-decoration: none;
   opacity: .85;
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   cursor: pointer;
 }
 
@@ -159,8 +164,8 @@ form {
 }
 
 .mainContainer {
+  background-color: #063753;
   position: relative;
-  overflow: hidden;
   min-height: 800px;
   margin-bottom: 100px;
   border-top-left-radius: 3px;
@@ -287,6 +292,7 @@ form {
   width: 100%;
 }
 
+.flexRow .flexCol-11,
 .flexRow .flexCol-11 { flex-basis: 91.66666666666666%; }
 
 .flexRow .flexCol-10 { flex-basis: 83.33333333333334%; }
@@ -321,7 +327,7 @@ form {
   width: 317px;
 }
 
-.userPage-subViews .gridItem,
+#userPage-subViews .gridItem,
 .homeView .gridItem {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
@@ -329,12 +335,12 @@ form {
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.userPage-subViews .gridItem:hover,
+#userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
   opacity: 1;
 }
 
-.userPage-subViews .gridItem:nth-child(3n),
+#userPage-subViews .gridItem:nth-child(3n),
 .homeView .gridItem:nth-child(3n) {
   border-right: 0;
 }
@@ -489,6 +495,10 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
+.thumbnail-largeTrimmed {
+  height: 70px;
+}
+
 .thumbnail-large-slim {
   height: 58px;
   width: 58px;
@@ -523,6 +533,10 @@ form {
 
 .row60 {
   margin-bottom: 60px;
+}
+
+.row100 {
+  margin-bottom: 100px;
 }
 
 .rowTop241 {
@@ -657,6 +671,7 @@ form {
   border-radius: 2px;
   cursor: pointer;
   margin: 16px auto 5px auto;
+  max-width: 160px;
   height: 87px;
   width: 80%;
 }
@@ -751,6 +766,10 @@ h5 {
   opacity: 0.50;
 }
 
+.div-fadeExtra {
+  opacity: 0.3;
+}
+
 .txt-lowleading {
   line-height: 1.2;
 }
@@ -807,9 +826,10 @@ h5 {
   margin-top: 50px;
 }
 
-.welcomeBar {
-  background-color: rgb(6,55,83);
-  height: 58px;
+.welcomeBar,
+.settingsBar {
+  background-color: transparent;
+  height: 50px;
   line-height: 50px;
   position: relative;
   z-index: 2;
@@ -827,15 +847,36 @@ h5 {
   z-index: 2;
 }
 
-.welcomeBar div {
+.welcomeBar .welcomeBar-inner,
+.settingsBar .title-section {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  top: 8px;
   height: 50px;
   padding-left: 102px;
   position: relative;
   z-index: 1;
+}
+
+.settingsBar .title-section {
+  padding-left: 102px;
+}
+
+.settingsBar .thumbnail {
+  background-size: cover;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  bottom: 0;
+  content: " ";
+  height: 58px;
+  left: 30px;
+  position: absolute;
+  width: 58px;
+  z-index: 2;
+}
+
+.user-customize-cover-photo {
+  width: 950px;
 }
 
 .mainContainer {
@@ -907,6 +948,11 @@ h5 {
   margin: 0 -1px -1px 0;
   width: auto;
   overflow: hidden;
+}
+
+.hideTopAndBottomBorder {
+  /* use to hide the first and last border of the flexRows inside this element */
+  margin: -1px 0 -2px 0;
 }
 
 .flex-border > .flexRow > [class |= "flexCol"] {
@@ -1008,14 +1054,14 @@ h5 {
 }
 
 .searchWrapper .txtField:focus {
-  outline: 2px solid rgba(255,255,255,0.35);
+  outline: 1px solid rgba(255,255,255,0.35);
   -webkit-background-clip: border;
 }
 
 .mainSearchWrapper:before {
   color: #000;
-  top: 6px;
-  left: 8px;
+  top: 5px;
+  left: 6px;
 }
 
 .mainSearchWrapper .txtField {
@@ -1027,7 +1073,10 @@ h5 {
 }
 
 .mainSearchWrapper .txtField:focus {
-  box-shadow: 0 0 0 2px #086A9E;
+  border: solid 1px #086A9E;
+  outline: none;
+  text-indent: 25px;
+  box-shadow: none;
 }
 
 .searchWrapperWithPill .txtField {
@@ -1068,6 +1117,19 @@ input[type="text"].txtField-bar {
   height: 32px;
   min-width: 32px;
   line-height: 32px;
+  float: left;
+  background-color: #086A9E; /* default color */
+  padding:0;
+  border-radius: 3px;
+  opacity: .80;
+  box-sizing: border-box;
+}
+
+.btn-large {
+  height: 42px;
+  font-size: 15px;
+  min-width: 160px;
+  line-height: 42px;
   float: left;
   background-color: #086A9E; /* default color */
   padding:0;
@@ -1133,8 +1195,8 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-c1 {
-   background-color: rgb(50,126,184);
- }
+  background-color: rgb(50,126,184);
+}
 
 #userPage .btn.btn-c1,
 .btn.btn-dark {
@@ -1206,6 +1268,7 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-bar.btn-tab {
+  background: #327EB8;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
   border-bottom-right-radius: 0;
@@ -1217,6 +1280,11 @@ input[type="text"].txtField-bar {
   line-height: 46px;
   padding: 0 20px;
   margin-top: 4px;
+}
+
+.btn.btn-bar.active {
+  background-color: #106DA3;
+  opacity: 1;
 }
 
 .btn.btn-bar.btn-tab:first-child {
@@ -1347,7 +1415,7 @@ input[type="text"].txtField-bar {
 }
 
 .btn-latched:hover {
-  opacity: 1 !important; 
+  opacity: 1 !important;
   /* added important here because I couldn't get it to work without it */
 }
 
@@ -1493,9 +1561,8 @@ input[type="number"].fieldItem:focus,
 input[type="email"].fieldItem:focus,
 input[type="url"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
-  border: 2px solid #fff;
+  outline: 1px solid rgba(255,255,255,0.35);
   transition: border 0.3s;
-  outline: none;
 }
 
 /* add formChecked class after form has been checked for validity */
@@ -1622,10 +1689,13 @@ input[type="number"].fieldItem.spinButtons:focus {
   box-shadow: none;
   line-height: 50px;
   color: #fff;
+  opacity: 1;
 }
 
-.fieldItem .fieldItem-selectWrapper .chosen-container-single div b {
+.fieldItem .fieldItem-selectWrapper .chosen-container-single div b,
+.fieldItem .fieldItem-selectWrapper .chosen-container-single span b {
   background: none;
+  height: 0;
 }
 
 .fieldItem .fieldItem-selectWrapper .chosen-container-single div b:after {
@@ -1661,6 +1731,16 @@ input[type="number"].fieldItem.spinButtons:focus {
 
 .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li.highlighted {
   background: rgb(87,87,87);
+}
+
+.chosen-container-single .chosen-single span {
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.chosen-container .chosen-results {
+  padding: 0;
 }
 
 .fieldItem-textarea {
@@ -1789,6 +1869,45 @@ input[type="checkbox"].fieldItem + label div,
 input[type="checkbox"].fieldItem + label span {
   /* if the label has elements inside it, remove line height */
   line-height: normal;
+}
+
+input[type="checkbox"] + label .togLabelOn,
+input[type="checkbox"].fieldItem + label .togLabelOn,
+input[type="checkbox"] + label .togLabelOff,
+input[type="checkbox"].fieldItem + label .togLabelOff {
+  padding: 0 16px;
+}
+
+input[type="checkbox"] + label .togLabelOn,
+input[type="checkbox"].fieldItem + label .togLabelOn {
+  display: none;
+}
+
+input[type="checkbox"] + label .togLabelOff,
+input[type="checkbox"].fieldItem + label .togLabelOff {
+  display: inline-block
+}
+
+input[type="checkbox"]:checked + label .togLabelOn,
+input[type="checkbox"].fieldItem:checked + label .togLabelOn {
+  display: inline-block;
+}
+
+input[type="checkbox"]:checked + label .togLabelOff,
+input[type="checkbox"].fieldItem:checked + label .togLabelOff {
+  display: none;
+}
+
+.btn input[type="checkbox"].fieldItem + label {
+  line-height: inherit;
+  display: inline;
+  padding: 0 0 0 26px;
+  left: -7px;
+}
+
+.btn input[type="checkbox"].fieldItem + label:before {
+  top: 0;
+  left: 0;
 }
 
 #userPage .fieldItem-selectWrapper select option {
@@ -1954,6 +2073,11 @@ input[type="checkbox"].fieldItem + label span {
   z-index: 0;
 }
 
+.banner-settings {
+  height: 300px;
+  width: 712px;
+}
+
 .user-page-content {
   position: relative;
   width: 950px;
@@ -1995,6 +2119,18 @@ input[type="checkbox"].fieldItem + label span {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.color-primary {
+  background: #106DA3;
+}
+
+.color-secondary {
+  background: #327EB8;
+}
+
+.homeView {
+  margin-top: 8px;
 }
 
 .home-page-navigation {
@@ -2064,6 +2200,10 @@ input[type="checkbox"].fieldItem + label span {
 .userPage-subViews {
   position: relative;
   z-index: 1;
+}
+
+.icon-huge {
+  font-size: 160px;
 }
 
 .icon-huge {
@@ -2250,8 +2390,8 @@ input[type="checkbox"].fieldItem + label span {
 
 .default-avatar {
   border-radius: 3px;
-  color: #086a9e; 
-  font-size: 73px; 
+  color: #086a9e;
+  font-size: 73px;
   height: 76px;
   text-align: center;
   width: 80px;
@@ -2311,7 +2451,7 @@ input[type="checkbox"].fieldItem + label span {
   margin-right: 0;
 }
 
-.userPage .headerCropper .bar.navBar {
+#userPage .headerCropper .bar.navBar {
   background: none;
   height: 48px;
 }
@@ -2347,7 +2487,7 @@ input[type="checkbox"].fieldItem + label span {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
   border-radius: 3px;
   color: #fff;
-  cursor: pointer;  
+  cursor: pointer;
   font-size: 12px;
   margin-left: 10px;
   letter-spacing: .4px;
@@ -2700,6 +2840,10 @@ input[type="checkbox"].fieldItem + label span {
   font-size: 11px;
 }
 
+#ov1 .fontSize12 {
+  font-size: 12px;
+}
+
 #ov1 .fontSize13 {
   font-size: 13px;
 }
@@ -2774,6 +2918,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .marginRight10 {
   margin-right: 10px;
+}
+
+#ov1  .marginRight15 {
+  margin-right: 15px;
 }
 
 #ov1  .marginLeft2 {
@@ -2884,6 +3032,10 @@ input[type="checkbox"].fieldItem + label span {
   height: 70px;
 }
 
+#ov1  .height250 {
+  height: 250px;
+}
+
 #ov1  .minHeight650 {
   min-height: 650px;
 }
@@ -2965,6 +3117,14 @@ input[type="checkbox"].fieldItem + label span {
   padding-left: 20px;
 }
 
+#ov1  .paddingTop4 {
+  padding-top: 4px;
+}
+
+#ov1  .paddingTop15 {
+  padding-top: 15px;
+}
+
 #ov1  .paddingTop20 {
   padding-top: 20px;
 }
@@ -3000,6 +3160,7 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .width105 {
   width: 105px;
+>>>>>>> refs/remotes/origin/master
 }
 
 #ov1 .width110 {
@@ -3032,6 +3193,10 @@ input[type="checkbox"].fieldItem + label span {
 
 .fontWeight400 {
   font-weight: 400;
+}
+
+#ov1  .borderBottom0 {
+  border-bottom: 0;
 }
 
 #ov1 .fontWeight500 {
@@ -3068,18 +3233,25 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .badge:after{
-    content:attr(data-count);
-    position: absolute;
-    top:-5px;
-    right:-3px;
-    width:16px;
-    text-align: center;
-    line-height: 16px;
-    font-size: 10px;
-    border-radius: 50%;
-    color:white;
-    background-opacity: .75;
-    background-color: #FFA41C;
-
+  content:attr(data-count);
+  position: absolute;
+  top:-5px;
+  right:-3px;
+  width:16px;
+  text-align: center;
+  line-height: 16px;
+  font-size: 10px;
+  border-radius: 50%;
+  color:white;
+  background-opacity: .75;
+  background-color: #FFA41C;
   /* don't put a border on this or it will be visible when it has no content */
+}
+
+/* terrible hack, TODO: remove before production */
+
+#ov1 .TODO.TODO.TODO.TODO.TODO {
+  background: #535353;
+  opacity: 0.2;
+  pointer-events: none;
 }
