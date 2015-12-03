@@ -548,7 +548,7 @@ module.exports = Backbone.View.extend({
 
     modData.moderator_list = modList;
 
-    this.saveData(form, this.model.get('page'), "profile", function(){
+    this.saveData(form, this.model.get('page').profile, "profile", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();

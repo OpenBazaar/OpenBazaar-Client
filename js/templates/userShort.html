@@ -35,12 +35,17 @@
     </div>
     <div class="flexexpand">
       <div class="marginLeft15 marginTop2 clearFix">
-        <div class="floatLeft noOverflow marginBottom2 marginRight5"><a class="textSize16px capitalize js-userShort" title="<%- ob.name %>"><%- ob.name.toLowerCase() %>
-        </a></div>
+        <div class="floatLeft noOverflow marginBottom2 marginRight5 maxWidth200">
+          <a class="textSize16px capitalize js-userShort" title="<%- ob.name %>"><%- ob.name.toLowerCase() %></a>
+        </div>
         <% if(ob.handle) { %>
-          <div class="floatLeft lineHeight21"><a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a></div>
+          <div class="pull-left lineHeight21 maxWidth200">
+            <a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a>
+          </div>
         <% }else{ %>
-          <div class="noOverflow floatLeft lineHeight21"><a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a></div>
+          <div class="noOverflow pull-left lineHeight21 maxWidth200">
+            <a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a>
+          </div>
         <% } %>
       </div>
       <div class="marginLeft15 marginTop2">
