@@ -1,6 +1,23 @@
+/*========== scroll bars ==========*/
+#obContainer::-webkit-scrollbar {
+  width: 6px;
+}
+ 
+#obContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #44697E; 
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #3E3E3E;
+}
+
 /*========== base styles ==========*/
-
-
 body {
   background-color: rgb(6,55,83);
   overflow: hidden;
@@ -131,6 +148,11 @@ form {
   z-index: 3;
 }
 
+.pageNavContainer {
+  width: 100%;
+  z-index: 3;
+}
+
 #pageNav .btn {
   -webkit-app-region: no-drag;
 }
@@ -213,6 +235,11 @@ form {
   /* use for any cluster of nav controls */
   padding-left: 4px;
   position: relative;
+}
+
+.ctrlGroup .btn {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+
 }
 
 .ctrlGroup:first-child {
@@ -389,7 +416,8 @@ form {
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  -webkit-user-select: none;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+   -webkit-user-select: none;
 }
 
 
@@ -514,6 +542,10 @@ form {
 .rowTop241 {
   /* special class for the itemEdit view */
   margin-top: 241px;
+}
+
+.row320 {
+  margin-bottom: 320px;
 }
 
 .pad10 {
@@ -761,6 +793,17 @@ h5 {
 }
 
 /*========== skin classes ==========*/
+
+.userPageImageUpload {
+  background: transparent !important;
+  opacity: 1;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.userPageImageUpload:hover {
+  text-decoration: underline !important;
+}
 
 .navBar {
   background-color: #327EB8;
@@ -1194,6 +1237,7 @@ input[type="text"].txtField-bar {
   border-radius: 0;
   min-width: 115px;
   text-align: center;
+  box-shadow: none;
   background-color: #327EB8;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -1212,6 +1256,15 @@ input[type="text"].txtField-bar {
 
 .btn.btn-bar:hover {
   opacity: .75;
+}
+
+.btn.btn-bar.active {
+  background-color: #086A9E;
+  opacity: 1;
+}
+
+#userPage .btn.btn-bar.active {
+  background-color: #4a4848;
 }
 
 .btn.btn-bar.btn-tab {
@@ -1357,6 +1410,7 @@ input[type="text"].txtField-bar {
   font-size: 12px;
   height: 28px;
   line-height: 28px;
+  text-transform: capitalize;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -1717,7 +1771,7 @@ select {
   -webkit-appearance: none;
 }
 
-#ov1 select:focus {
+select:focus {
   border: 2px solid #fff;
 }
 
@@ -1935,8 +1989,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications {
-  top: 50px;
-  right: 51px;
+  top: -238px;
+  right: 45px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
   border-bottom-left-radius: 4px;
@@ -1957,8 +2011,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 0 15px;
 }
 
-.popMenu-navBar {
+.popMenu-notifications-opened {
+  animation: menuSlide .12s normal linear;
   top: 50px;
+}
+
+.popMenu-navBar {
+  top: -238px;
   right: 10px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -1968,6 +2027,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 13px;
   padding: 10px 0;
   width: 230px;
+  z-index: -1;
+}
+
+.popMenu-navBar-opened {
+  animation: menuSlide .12s normal linear;
+  top: 50px;
+}
+
+@-webkit-keyframes menuSlide {
+    0%   {top: -238px;}
+    100% {top: 50px;}
 }
 
 .popMenu-navBar a {
@@ -2090,7 +2160,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .user-page-navigation {
   width: 950px;
   position: relative;
-  z-index: 3;
+  z-index: 1;
 }
 
 .user-page-navigation-slim {
@@ -2098,10 +2168,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 102px;
   z-index: 5;
   box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
-}
-
-.user-page-navigation-filler {
-  height: 46px;
 }
 
 .user-page-header {
@@ -2112,20 +2178,32 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .user-page-header-slim {
   position: fixed;
-  top: 50px;
-  border-top: solid 8px black;
-  /*  border-top-left-radius: 3px;
-    border-top-right-radius: 3px;*/
+  top: 64px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   height: 54px;
   width: 950px;
   background: #281B2E;
+  box-shadow: 0px 0 0 rgba(0, 0, 0, 0.35);
   z-index: 4;
   padding: 0;
 }
 
+.user-page-header-slim-bg-cover {
+  position: fixed;
+  top: 50px;
+  height: 20px;
+  z-index: 4;
+  width: 950px;
+}
+
 .userPage-subViews {
   position: relative;
-  z-index: 5;
+  z-index: 1;
+}
+
+.icon-huge {
+  font-size: 160px;
 }
 
 .icon-huge {
@@ -2406,6 +2484,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .selectPill select {
   background-color: #327EB8;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
   border-radius: 3px;
   color: #fff;
   cursor: pointer;
@@ -2415,7 +2494,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 6px;
   width: 148px;
   z-index: 2;
-}
+  -webkit-user-select: none;
+  outline: none;
+} 
 
 .selectPill:before {
   content: "\f104";
@@ -2621,6 +2702,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .borderBottom {
   border-bottom: solid 1px rgba(255,255,255,0.08);
+}
+
+#ov1  .borderBottom2 {
+  border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
 #ov1  .borderTop {
@@ -2979,11 +3064,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   bottom: 0;
 }
 
-.positionAbsolute {
+#ov1 .positionAbsolute {
   position: absolute;
 }
 
-.positionRelative {
+#ov1 .positionFixed {
+  position: fixed;
+}
+
+#ov1 .positionRelative {
   position: relative;
 }
 
@@ -3040,6 +3129,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
 }
 
+#ov1  .positionTop66 {
+  top: 66px;
+}
+
 #ov1  .paddingBottom20 {
   padding-bottom: 20px;
 }
@@ -3061,9 +3154,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 75px;
 }
 
-#ov1 .width87px {
-  min-width: 87px;
-  width: 87px;
+#ov1 .width65px {
+  width: 65px;
+}
+
+#ov1 .width105 {
+  width: 105px;
+>>>>>>> refs/remotes/origin/master
 }
 
 #ov1 .width110 {
@@ -3078,11 +3175,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 600px;
 }
 
+#ov1 .width950 {
+  width: 950px;
+}
+
 #ov1  .cursorDefault {
   cursor: default;
 }
 
-#ob1 .backgroundTransparent {
+#ov1 .backgroundTransparent {
   background: transparent;
 }
 
@@ -3094,12 +3195,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-weight: 400;
 }
 
-.fontWeight500 {
-  font-weight: 500;
-}
-
 #ov1  .borderBottom0 {
   border-bottom: 0;
+}
+
+#ov1 .fontWeight500 {
+  font-weight: 500;
 }
 
 #ov1  .borderBottomLeftRaidus3 {
@@ -3125,6 +3226,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .hoverUnderline:hover {
   text-decoration: underline !important;
+}
+
+#ov1 .zIndex4 {
+  z-index: 4;
 }
 
 .badge:after{

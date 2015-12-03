@@ -1,0 +1,208 @@
+<div class="modal modal-opaque js-buyWizardModal fadeOut">
+  <div class="modal-child modal-childMain">
+    <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeBuyWizardModal">
+      <h2 class="ion-close-round"></h2>
+    </div>
+    <div class="modal-hero js-buyWizardHero shadow-inner1-light"
+         style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);">
+      <div class="js-buyWizardMapPlaceholder hide">
+        <iframe
+          width="525"
+          height="250"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=placeholder">
+        </iframe>
+      </div>
+      <div class="js-buyWizardMap positionTop"></div>
+      <div class="modal-hero modal-heroFullHeight js-buyWizardPay hide background1">
+        <div class="positionTop width100 rowTop20">
+          <div class="txt-center row20">Send <span class="js-buyWizardDetailsTotal"></span> to</div>
+          <div class="txt-center row20">
+            <img class="js-buyWizardPayQRCode" height="400" width="400" src="imgs/defaultItem.png"/>
+          </div>
+          <div class="txt-center row10">
+            <a class="js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span> <i class="ion-link"></i></a>
+          </div>
+          <div class="txt-center">
+            <a class="js-buyWizardPayCopy">Copy Pay Address to Clipboard <i class="ion-clipboard"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-hero js-buyWizardOrderSummary background1 hide">
+        <div class="width100 txt-center">
+          <div class="txt-col3 ion-checkmark icon-huge icon-circle-background1 rowtop20 row20"></div>
+          <h3>Payment Sent!</h3>
+        </div>
+      </div>
+    </div>
+    <div class="homeModal-accordion accordion js-buyWizardAccordion">
+      <div class="accordion-window">
+        <div class="accordion-child">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+            <%= polyglot.t('PaymentType') %>
+          </div>
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+            <div class="flexRow">
+              <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
+                <div class="flexRow">
+                  <div class="rowItem padding2015">
+                    <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
+                    <label for="buyWizardModeratorRadio<%- i %>">
+                      <div class="table">
+                        <div>
+                          <div class="thumbnail thumbnail-large-slim box-border"
+                               <% if(moderator.avatar){ %>
+                               style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
+                               <% } else { %>
+                               style="background-image: url(imgs/defaultUser.png);">
+                               <% } %>
+                          </div>
+                          <div class="pad10Left txt-unleaded">
+                            <div class="row10"><strong>Moderated by <%- moderator.name %> <%- moderator.blockchain_id %> <%- moderator.fee %></strong></div>
+                            <div><%- moderator.guid %></div>
+                            <div><%- moderator.short_description %></div>
+                          </div>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              <% }); %>
+              <div class="flexRow">
+                <div class="rowItem padding2015">
+                  <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardNoModerator" value="direct"/>
+                  <label for="buyWizardNoModerator">
+                    <div class="table">
+                      <div>
+                        <div class="thumbnail thumbnail-large-slim box-border"
+                             style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+                        </div>
+                        <div class="pad10left txt-unleaded">
+                          <div class="row10"><strong>Direct</strong></div>
+                          <div>Send fund directly to <%- ob.handle %></div>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-bar btn-half js-buyWizardModNext
+                      disabled custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Next') %>
+            </a>
+          </div>
+        </div>
+        <div class="accordion-child">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+            <div class="js-buyWizardAddress">
+              <%= polyglot.t('ShipTo') %>
+              <a class="btn btn-txt custCol-primary rowTop10 pull-right js-buyWizardNewAddressBtn">New</a>
+            </div>
+            <div class="js-buyWizardNewAddress hide">
+              <%= polyglot.t('NewAddress') %>
+            </div>
+          </div>
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+            <div class="flexRow">
+              <div class="flex-border flexExpand js-buyWizardAddresses">
+                <!--insert addresses-->
+              </div>
+              <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress flex-border flexExpand hide">
+                <div class="flexRow">
+                  <div class="flexCol-4">
+                    <div class="fieldItem">
+                      <label for="buyWizardNameInput"><%= polyglot.t('ShipToName') %></label>
+                    </div>
+                  </div>
+                  <div class="flexCol-8 positionWrapper">
+                    <input type="text" name="new_ship_to_name" class="fieldItem" id="buyWizardNameInput" required/>
+                  </div>
+                </div>
+                <div class="flexRow">
+                  <div class="flexCol-4">
+                    <div class="fieldItem">
+                      <label for="buyWizardStreetInput"><%= polyglot.t('ShipToStreet') %></label>
+                    </div>
+                  </div>
+                  <div class="flexCol-8 positionWrapper">
+                    <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardStreetInput" required/>
+                  </div>
+                </div>
+                <div class="flexRow">
+                  <div class="flexCol-4">
+                    <div class="fieldItem">
+                      <label for="buyWizardCityInput"><%= polyglot.t('ShipToCity') %></label>
+                    </div>
+                  </div>
+                  <div class="flexCol-8 positionWrapper">
+                    <input type="text" name="new_ship_to_city" class="fieldItem" id="buyWizardCityInput" required/>
+                  </div>
+                </div>
+                <div class="flexRow">
+                  <div class="flexCol-4">
+                    <div class="fieldItem">
+                      <label for="buyWizardStateInput"><%= polyglot.t('ShipToState') %></label>
+                    </div>
+                  </div>
+                  <div class="flexCol-8 positionWrapper">
+                    <input type="text" name="new_ship_to_state" class="fieldItem" id="buyWizardStateInput" required/>
+                  </div>
+                </div>
+                <div class="flexRow">
+                  <div class="flexCol-4">
+                    <div class="fieldItem">
+                      <label for="buyWizardPostalInput"><%= polyglot.t('ShipToPostalCode') %></label>
+                    </div>
+                  </div>
+                  <div class="flexCol-8 positionWrapper">
+                    <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardPostalInput" required/>
+                  </div>
+                </div>
+                <div class="flexRow overflowVisible">
+                  <div class="flexCol-4">
+                    <div class="fieldItem">
+                      <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %></label>
+                    </div>
+                  </div>
+                  <div class="flexCol-8 positionWrapper">
+                    <div class="fieldItem padding0">
+                      <div class="fieldItem-selectWrapper chosen-relative noIcon js-buyWizardCountryWrapper"></div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-buyWizardAddress js-buyWizardAddressBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half disabled js-buyWizardAddress js-buyWizardAddressNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-buyWizardNewAddressCancel js-buyWizardNewAddress hide custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-bar btn-half js-buyWizardNewAddressSave js-buyWizardNewAddress hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Save') %></a>
+          </div>
+        </div>
+        <div class="accordion-child">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+            <div class="js-buyWizardOrderDetails">
+              <%= polyglot.t('OrderDetails') %> <div class="pull-right">Total: <span class="js-buyWizardDetailsTotal"></span> </div>
+            </div>
+            <div class="js-buyWizardOrderSummary hide">
+              <%= polyglot.t('OrderSummary') %>
+            </div>
+          </div>
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch js-buyWizardInsertDetails scrollOverflow custCol-primary">
+          <!--inser details view-->
+          </div>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-buyWizardPurchaseBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
+            <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <span class="btn btn-bar btn-half disabled js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

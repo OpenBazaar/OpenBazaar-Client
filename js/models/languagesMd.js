@@ -8,7 +8,7 @@ module.exports = Backbone.Model.extend({
       {
         langName: "English",
         langCode: "en",
-       /* Use capitalized keys for widely reused text that must be capitalized */
+        /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Next",
         IAgree: "I Agree",
         Back: "Back",
@@ -34,7 +34,7 @@ module.exports = Backbone.Model.extend({
         Stores: "Stores",
         Follow: "Follow",
         Feed: "Feed",
-        FeedPlaceholder: "A feed of updates from all the pages you follow",
+        FeedPlaceholder: "A feed of updates from all of the pages you follow",
         Unfollow: "Unfollow",
         About: "About",
         NoDescriptionAdded: "No description added",
@@ -53,7 +53,7 @@ module.exports = Backbone.Model.extend({
         Guid: "OpenBazaar ID (GUID)",
         Welcome: "Welcome",
         CreateStore: "Become a Store",
-        GoToMyPage: "Go to my page",
+        GoToMyPage: "My Page",
         SearchForItemsPlaceholder: "Search by name or keyword",
         SearchForPagesPlaceholder: "Search by name or keyword",
         SearchFeedPlaceholder: "Search by handle or GUID",
@@ -101,7 +101,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
-        BitcoinReturnAddress: "Bitcoin return address",
+        BitcoinReturnAddress: "Bitcoin address",
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -122,7 +122,7 @@ module.exports = Backbone.Model.extend({
         Keywords: "Keywords",
         Type: "Type",
         Condition: "Condition",
-        NSFW: "NSFW?",
+        NSFW: "18+ (Adult content)",
         Local: "Local",
         Domestic: "Domestic",
         Location: "Location",
@@ -155,8 +155,15 @@ module.exports = Backbone.Model.extend({
         Categories: "Categories",
         UpTo3: "Up to 3",
         AboutYourStore: "A description of your store",
-        AllListings: "All Listings",
+        PaymentType: "Payment Type",
+        ShipTo: "Ship To",
+        OrderDetails: "Order Details",
+        OrderSummary: "Order Summary",
+        NewAddress: "New Address",
+        AllListings: "Listings",
         ComingSoon: "Coming Soon",
+        PaymentPending: "Payment Pending",
+        FinalizePurchase: "Finalize Purchase",
         LoadingImage: "Loading Image...",
         UploadAvatar: "Upload Avatar",
         SaveAvatar: "Save Avatar",
@@ -170,11 +177,9 @@ module.exports = Backbone.Model.extend({
           userError: "Information for this ID could not be found",
           userNotFoundError: "This person's information is not available. They may have gone offline.",
           notFoundError: "Data could not be loaded for:",
-          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466"
-        },
-        saveMessages: {
-          Saved: "Saved",
-          SaveSuccess: "Your changes have been saved."
+          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
+          contractError: "This Item Cannot be Purchased",
+          sellerError: "The seller's server has rejected the purchase request"
         },
         filters: {
           pagesAllTypes: "All types",
@@ -224,11 +229,14 @@ module.exports = Backbone.Model.extend({
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar"
         },
+        buyFlow: {
+          MustAddAddress: "You must add an address to ship to",
+          VendorShipsTo: "This vendor ships to these countries"
+        }
       },
       {
-        langName: "Espanol",
+        langName: "Espa&ntilde;ol",
         langCode: "sp",
-        /* this is just for reference. It was created by Google translate, and is probably very inaccurate. */
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
@@ -248,16 +256,16 @@ module.exports = Backbone.Model.extend({
         Physical: "F&iacute;sico",
         Digital: "Digital",
         Service: "Servicio",
-        Visit: "Ver pagina",
+        Visit: "Ver p&aacute;gina",
         Item: "Art&iacute;culo",
         Items: "Art&iacute;culos",
         Stores: "Tiendas",
         Follow: "Seguir",
         Feed: "Feed",
-        FeedPlaceholder: "RSS próximamente",
+        FeedPlaceholder: "RSS pr�ximamente",
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
-        NoDescriptionAdded: "No hay descripción añadida",
+        NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
         AboutEmpty: "Acerca de la secci&oacute;n est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
@@ -273,11 +281,11 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenida",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Búsqueda de artículos",
-        SearchForPagesPlaceholder: "Búsqueda por palabra clave",
-        SearchFeedPlaceholder: "Búsqueda por nombre o apodo",
-        SearchForFollowersPlaceholder: "Búsqueda por nombre o apodo",
-        SearchForUsersPlaceholder: "Búsqueda por nombre o apodo",
+        SearchForItemsPlaceholder: "B&uacute;squeda de art&iacute;culos",
+        SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
+        SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
+        SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
+        SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
         EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
@@ -324,7 +332,7 @@ module.exports = Backbone.Model.extend({
         Keywords: "Palabras claves",
         Type: "Tipo",
         Condition: "Condici&oacute;n",
-        NSFW: "NSFW?",
+        NSFW: "18+ (contenido para adultos)",
         Local: "Local",
         Domestic: "Interno",
         Location: "Localizaci&oacute;n",
@@ -343,7 +351,7 @@ module.exports = Backbone.Model.extend({
         SecondaryColor : "Color secundario",
         TextColor : "Color del texto",
         BackgroundColor : "Color de fondo",
-        WelcomeToYourPage: "La bienvenida a su página",
+        WelcomeToYourPage: "La bienvenida a su p&aacute;gina",
         SearchForCategory: "B&uacute;squeda de categor&iacute;a",
         Moderators: "Moderadores",
         CurrentModerators: "Moderadores Actuales",
@@ -352,7 +360,12 @@ module.exports = Backbone.Model.extend({
         SelectToAddModerator: "Seleccionar los moderadores que desee agregar",
         Categories: "Categor&iacute;as",
         UpTo3: "Hasta 3",
+        PaymentType: "Tipo de pago",
+        ShipTo: "Nave",
+        OrderDetails: "Detalles Orden",
+        OrderSummary : " Resumen Orden",
         AboutYourStore: "Una descripci&oacute;n de su tienda",
+        NewAddress: "Nueva direcci&oacute;n",
         AllListings: "Todos los listados",
         ComingSoon: "Pr&oacute;ximamente",
         SaveChanges: "Guardar Cambios",
@@ -369,8 +382,10 @@ module.exports = Backbone.Model.extend({
         ShipToCountry: "Env&iacute;r a pa&iacute;s",
         EnableNotifications: "Activar notificaciones",
         EnableSSL: "Habilitar SSL",
-        LibbitcoinServerAddress: "Dirección del servidor Libbitcoin",
+        LibbitcoinServerAddress: "Direcci�n del servidor Libbitcoin",
         ServerIPPort: "Server IP : Puerto",
+        PaymentPending: "En espera del pago",
+        FinalizePurchase: "Finalizar Compra",
         LoadingImage: "Cargando Imagen ... ",
         UploadAvatar: "Subir Avatar ",
         SaveAvatar: "Guardar Avatar ",
@@ -384,11 +399,9 @@ module.exports = Backbone.Model.extend({
           userError: "La informaci&oacute;n para este ID no se pudo encontrar",
           userNotFoundError: "La informaci&oacute;n de esta persona no est&aacute; disponible. Es posible que se hayan desconectado.",
           notFoundError: "Los datos no se pudieron cargar para:",
-          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466"
-        },
-        saveMessages: {
-          Saved: "Salvado",
-          SaveSuccess: "Se han guardado los cambios."
+          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n por defecto de ws://localhost:18466",
+          contractError: "Este artículo no puede ser comprado" ,
+          sellerError: "El servidor del vendedor ha rechazado la solicitud de compra"
         },
         filters: {
           pagesAllTypes: "Todos los tipos",
@@ -402,8 +415,9 @@ module.exports = Backbone.Model.extend({
           searchPlaceholder: "Introduzca un apodo o una palabra clave",
           myPage: "Mi p&aacute;gina",
           customizePage:"Personalizar P&aacute;gina",
-          sellItem:"Venta de art&iacute;culos",
-          purchases:"Las compras",
+          sellItem:"Nuevo",
+          createListing:"Nuevo Listado",
+          purchases:"Compras",
           sales:"Ventas",
           cases:"Casos",
           notifications:"Notificaciones",
@@ -429,12 +443,16 @@ module.exports = Backbone.Model.extend({
           yourDetails: "Establecer su informaci&oacute;n",
           handle: "Apodo",
           knownAs: "A Ud. se le conoce como:",
-          wouldYou: "Desea registrar un apodo facil de recordar?",
+          wouldYou: "Desea registrar un apodo f&aacute;cil de recordar?",
           registerNew: "Registrar Nuevo",
           recommended: "P&aacute;ginas Recomendadas a Seguir",
           connectExisting: "Conectar Existente",
           avatar: "Establecer un Avatar",
           chooseAvatar: "Seleccione avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "Usted debe agregar una dirección para enviar a",
+          VendorShipsTo: "este proveedor buques a estos países"
         }
       },
       {
@@ -549,7 +567,7 @@ module.exports = Backbone.Model.extend({
         Keywords: "Schlagwort",
         Type: "Typ",
         Condition: "Beschaffenheit",
-        NSFW: "NSFW",
+        NSFW: "18+ (Adult content)",
         Local: "Lokal",
         Domestic: "Inland",
         Location: "Standort",
@@ -594,7 +612,9 @@ module.exports = Backbone.Model.extend({
           userError: "Informationen f&uuml;r diese ID konnten nicht gefunden werden",
           userNotFoundError: "Die Informationen dieser Person sind nicht verf&uuml;gbar. M&ouml;glicherweise ist sie offline gegangen.",
           notFoundError: "Daten konnten nicht geladen werden f&uuml;r:",
-          socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut."
+          socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
+          contractError: "Dieser Artikel kann nicht gekauft werden",
+          sellerError: "Server des Verkäufers die Kaufanfrage abgelehnt wurde"
         },
         filters: {
           pagesAllTypes: "Alle Arten",
@@ -642,12 +662,16 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Verbinde existierenden",
           avatar: "Setze einen Avatar",
           chooseAvatar: "W&auml;hle einen Avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "Sie m&uuml;ssen eine Adresse zu versenden hinzuzuf&uuml;gen",
+          VendorShipsTo: "dieses Anbieters Schiffe in diese L&auml;nde"
         }
       },
       {
         langName: "Italiano",
         langCode: "it",
-       /* Use capitalized keys for widely reused text that must be capitalized */
+        /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Avanti",
         IAgree: "Sono d'accordo",
         Back: "Indietro",
@@ -677,7 +701,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
-        AboutEmpty: "L'about è vuoto...",
+        AboutEmpty: "L'about &egrave; vuoto...",
         Followers: "Seguaci",
         Following: "Segue",
         Message: "Messaggio",
@@ -737,12 +761,12 @@ module.exports = Backbone.Model.extend({
         Changes: "Modifiche",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
-        BitcoinReturnAddress: "Bitcoin return address",
+        BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
         ShipToStreet: "Invia all'indirizzo",
-        ShipToCity: "Invia alla città",
+        ShipToCity: "Invia alla citt&agrave;",
         ShipToState: "Invia alla regione",
         ShipToPostalCode: "Invia al codice postale",
         PostalCode: "Codice postale",
@@ -758,7 +782,7 @@ module.exports = Backbone.Model.extend({
         Keywords: "Parole chiave",
         Type: "Tipo",
         Condition: "Condizione",
-        NSFW: "NSFW",
+        NSFW: "18+ (Adult content)?",
         Local: "Locale",
         Domestic: "Nazionale",
         Location: "Locazione",
@@ -801,7 +825,7 @@ module.exports = Backbone.Model.extend({
           getError: "I dati non sono stati recuperati.",
           missingError: "Alcuni campi sono mancanti o non corretti.",
           serverError: "E' stata ricevuta dal server una risposta non corretta.",
-          userError: "Non è stato possibile trovare le informazioni di questo ID.",
+          userError: "Non &egrave; stato possibile trovare le informazioni di questo ID.",
           userNotFoundError: "Le informazioni di questa persona non sono disponibili. Potrebbero essere scollegati.",
           notFoundError: "I dati non sono stati caricati per:",
           socketError: "Connessione all'URL per WebSocket fallita. Connettere al socket con l'indirizzo di default ws://localhost:18466"
@@ -839,7 +863,7 @@ module.exports = Backbone.Model.extend({
           contributors: "%{smart_count} Contributore |||| %{smart_count} Contributori",
           configure: "Imposta la tua esperienza",
           disclaimer_title: "Disclaimer",
-          disclaimer_body: "OpenBazaar è un network per scambi di beni e servizi direttamente fra le persone - usando Bitcoin - senza nessuna organizzazione centrale che controlli la piattaforma. Questo significa che tu sei responsabile per le tue attività sul network.<br /><br />Gli utenti di OpenBazaar non sono anonimi di default. La maggior parte delle comunicazioni fra le parti sono cifrate, ma gli indirizzi IP sono pubblici e possono essere associati con le attività sul network. Parti malevole potrebbero utilizzare queste informazioni contro di voi; proteggere la tua privay è una tua responsabilità.<br /><br />Gli utenti di OpenBazaar devono rispettare le leggi nella propria giurisdizione legale così come la loro coscienza. Gli sviluppatori di OpenBazaar non perdonano - e non sono responsabili - per alcun uso illegale della piattaforma.<br /><br />La comunità deglo sviluppatori di OpenBazaar ha lavorato duramente per fornire una piattaforma libera per il commercio nel mondo. Ma come per ogni software, si troveranno bug. Gli sviluppatori non sono responsabili per alcuna perdita monetaria associata a problemi nel software.<br /><br />Usando OpenBazaar sei responsabile per le tue azioni sul network OpenBazaar.",
+          disclaimer_body: "OpenBazaar &egrave; un network per scambi di beni e servizi direttamente fra le persone - usando Bitcoin - senza nessuna organizzazione centrale che controlli la piattaforma. Questo significa che tu sei responsabile per le tue attività sul network.<br /><br />Gli utenti di OpenBazaar non sono anonimi di default. La maggior parte delle comunicazioni fra le parti sono cifrate, ma gli indirizzi IP sono pubblici e possono essere associati con le attivit&agrave; sul network. Parti malevole potrebbero utilizzare queste informazioni contro di voi; proteggere la tua privay è una tua responsabilit&agrave;.<br /><br />Gli utenti di OpenBazaar devono rispettare le leggi nella propria giurisdizione legale cos&igrave; come la loro coscienza. Gli sviluppatori di OpenBazaar non perdonano - e non sono responsabili - per alcun uso illegale della piattaforma.<br /><br />La comunit&agrave; deglo sviluppatori di OpenBazaar ha lavorato duramente per fornire una piattaforma libera per il commercio nel mondo. Ma come per ogni software, si troveranno bug. Gli sviluppatori non sono responsabili per alcuna perdita monetaria associata a problemi nel software.<br /><br />Usando OpenBazaar sei responsabile per le tue azioni sul network OpenBazaar.",
           yourCountry: "Seleziona il tuo paese",
           localCurrency: "Seleziona la tua moneta",
           LanguagePlaceholder: "Seleziona la tua lingua",
@@ -856,6 +880,10 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar"
+        },
+        buyFlow: {
+          MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
+          VendorShipsTo: "Questo fornitore navi a questi paesi"
         }
       }
     ]

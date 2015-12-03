@@ -210,8 +210,6 @@ module.exports = Backbone.View.extend({
     clearInterval(this.homeLookingTimeout);
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 
 });

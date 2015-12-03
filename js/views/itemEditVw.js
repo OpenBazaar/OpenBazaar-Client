@@ -123,7 +123,7 @@ module.exports = Backbone.View.extend({
 
     //focus main input
     this.$el.find('input[name=title]').focus();
-    $('#obContainer').animate({ scrollTop: "415px" });
+    $('#obContainer').animate({ scrollTop: "452px" });
   },
 
   disableShippingPrice: function(){
@@ -441,7 +441,5 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });
