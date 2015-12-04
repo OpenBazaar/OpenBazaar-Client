@@ -32,7 +32,6 @@ module.exports = Backbone.View.extend({
       this.handleSocketMessage(response);
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);
-    this.socketView.getModerators(this.socketModeratorID);
     this.moderatorCount = 0;
     this.render();
   },
@@ -83,6 +82,7 @@ module.exports = Backbone.View.extend({
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
+      self.socketView.getModerators(self.socketModeratorID);
     });
   },
 
@@ -107,14 +107,16 @@ module.exports = Backbone.View.extend({
   addModerator: function(data){
     "use strict";
     var moderatorAvatarURL = this.model.get('user').serverUrl+"get_image?hash=" + data.moderator.avatar_hash;
+    var moderatorDescription = (data.moderator.short_description) ? data.moderator.short_description : window.polyglot.t('NoDescriptionAdded');
+    var moderatorHandle = (data.moderator.handle) ? data.moderator.handle : data.moderator.guid;
     var newModerator = $(
-        '<div class="pad10 flexRow">' +
+        '<div class="pad10 flexRow custCol-border-secondary">' +
           '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
           '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100">' +
             '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);"></div>' +
-              '<div class="pull-left">' +
-              '<div class="row10"><strong>' + data.moderator.name + '</strong></div>' +
-              '<div>' + data.moderator.short_description + '</div>' +
+              '<div class="pull-left marginLeft6">' +
+              '<div class="clearfix"><div class="capitalize marginBottom2 marginRight5 floatLeft marginRight5 textOpacity1">' + data.moderator.name + '</div> <div class="floatLeft txt-fade">' + moderatorHandle + '</div></div>' +
+              '<div class="fontSize14 txt-fade textWeightNormal">' + moderatorDescription + '</div>' +
             '</div>' +
           '</label>' +
         '</div>'
@@ -131,7 +133,6 @@ module.exports = Backbone.View.extend({
 
   closeWizard: function() {
     "use strict";
-    console.log("close wizard");
     this.close();
   },
 
