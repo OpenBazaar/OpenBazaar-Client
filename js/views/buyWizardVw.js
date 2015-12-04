@@ -9,7 +9,6 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
     clipboard = require('clipboard');
-
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
