@@ -1,0 +1,32 @@
+<div class="newChatButton">
+    <a class="btn btn-chatOpen js-chatOpen">+</a>
+    <div class="chatMessagesLabel hide">Messages</div>
+    <div class="btn btn-closeChat js-closeChat ion-close-round"></div>
+</div>
+<hr/>
+<div class="chatSearch">
+    <a class="chatSearchIcon ion-search js-chatSearch"></a>
+    <input id="chatSearchField" class="js-chatSearchText" type="text" placeholder="Search by GUID" value=""/>
+</div>
+<hr/>
+
+<div class="chatConversationHeads" id="chatHeads"></div>
+
+<div class="chatConversation chatConversationHidden">
+    <form id="chatConversation">
+        <input type="hidden" name="conversation_key" id="inputConversationKey" />
+        <input type="hidden" name="conversation_recipient" id="inputConversationRecipient"/>
+
+        <div class="chatConversationHeader">
+            <div class="chatConversationLabel js-username clickable"></div>
+            <div class="btn-closeConversation">
+                <a class="ion-close-round js-closeConversation"></a>
+            </div>
+        </div>
+        <div id="chatConversationContent" class="chatConversationContent"></div>
+
+        <div class="chatConversationMessage">
+            <textarea name="conversation_message" id="inputConversationMessage" class="js-chatMessage" rows="3"></textarea>
+        </div>
+    </form>
+</div>

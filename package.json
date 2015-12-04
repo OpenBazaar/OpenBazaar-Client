@@ -28,6 +28,7 @@
     "node-polyglot": "0.4.3",
     "qr-encode": "^0.3.0",
     "safestart": "0.8.0",
+    "sanitize-html": "^1.11.2",
     "taggle": "1.6.1",
     "underscore": "1.8.3"
   },

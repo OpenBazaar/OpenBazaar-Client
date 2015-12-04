@@ -155,6 +155,7 @@ module.exports = Backbone.View.extend({
     this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
     this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
     this.socketView = options.socketView;
+    this.chatAppView = options.chatAppView;
     this.slimVisible = false;
     this.confirmDelete = false;
     this.lastTab = "about"; //track the last tab clicked
@@ -206,6 +207,10 @@ module.exports = Backbone.View.extend({
             $('.js-loadingModal').addClass('hide');
             showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           }
+
+          // Cache user avatar in localStorage
+          var profile = model.toJSON().profile;
+          window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
 
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
@@ -453,6 +458,7 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
+
       if(self.options.ownPage === true){
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
       } else {
@@ -900,7 +906,9 @@ module.exports = Backbone.View.extend({
 
   sendMessage: function(){
     "use strict";
-
+    var key = this.userProfile.get('profile').encryption_key;
+    var guid = this.userProfile.get('profile').guid;
+    window.obEventBus.trigger("openChat", guid, key);
   },
 
   close: function(){

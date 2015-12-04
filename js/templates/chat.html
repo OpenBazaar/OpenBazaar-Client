@@ -1,0 +1,12 @@
+<div class="chatHead js-chatHead clickable ">
+    <div id="chatHead_<%-ob.guid%>" class="thumbnail clickable custcol-border-secondary chatHeadIcon badge" title="<%- ob.guid %>"
+         style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"
+         <% if(ob.unread > 0) { %>data-count="<%- ob.unread %>"<% } %>></div>
+    <div class="chatPreview">
+        <div class="chatPreviewSender">
+            <%- ob.guid %>
+        </div>
+        <div class="chatPreviewLastMessage"><%- ob.last_message %></div>
+    </div>
+</div>
+<hr/>

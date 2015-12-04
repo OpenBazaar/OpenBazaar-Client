@@ -12,6 +12,7 @@ module.exports = Backbone.Model.extend({
         Next: "Next",
         IAgree: "I Agree",
         Back: "Back",
+        EnterMessage: "Enter message...",
         Skip: "Skip",
         Done: "Done",
         Cancel: "Cancel",
