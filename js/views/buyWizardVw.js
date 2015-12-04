@@ -30,6 +30,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardPayCopy': 'copyPayAddress',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
+    'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'blur input': 'validateInput'
   },
 
@@ -126,7 +127,7 @@ module.exports = Backbone.View.extend({
       //add all countries to the Ships To select list
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
       //add address view
-      self.buyAddressesView.render(0);
+      self.buyAddressesView.render();
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
@@ -164,6 +165,7 @@ module.exports = Backbone.View.extend({
 
   createNewAddress: function(){
     "use strict";
+    var self = this;
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
     //set chosen inputs
@@ -362,6 +364,7 @@ module.exports = Backbone.View.extend({
     } else {
       totalBTCPrice = (this.model.get('vendorBTCPrice') + this.model.get('internationalShippingBTC')) * this.model.get('quantity');
     }
+    this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
     this.hideMaps();
@@ -420,6 +423,13 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.$el.find('.js-buyWizardPay, .js-buyWizardOrderDetails').addClass('hide');
     this.$el.find('.js-buyWizardOrderSummary').removeClass('hide');
+  },
+
+  openCountrySelect: function(){
+    "use strict";
+    //scroll to bottom
+    var scrollParent = $('.js-buyWizardAddressScroller');
+    scrollParent.scrollTop(scrollParent[0].scrollHeight);
   },
 
   blockClicks: function(e) {
