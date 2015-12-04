@@ -70,9 +70,9 @@ module.exports = Backbone.View.extend({
     this.socketNotificationID = Math.random().toString(36).slice(2);
     this.socketView.getNotifications(this.socketNotificationID);
 
-    this.listenTo(window.obEventBus, "countryListRendered", function(){this.accordionReady("country")});
-    this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency")});
-    this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language")});
+    this.listenTo(window.obEventBus, "countryListRendered", function(){this.accordionReady("country");});
+    this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency");});
+    this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language");});
 
     this.render();
   },
