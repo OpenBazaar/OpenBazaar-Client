@@ -6,7 +6,7 @@ var loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
 
-  className: "flexRow borderBottom custCol-border-secondary",
+  className: "flexRow borderBottom custCol-border",
 
   events: {
     'click .js-userShort': 'userClick'

@@ -1,4 +1,4 @@
-<div class="flexRow custCol-border-secondary">
+<div class="flexRow custCol-border">
   <div class="flexRow bar barTxt pad20">
     <a class="js-returnToStore textOpacity75"><%= polyglot.t('All') %> <%= polyglot.t('Items') %></a><span class="textOpacity75">&nbsp;>&nbsp;<%- ob.vendor_offer.listing.item.title %></span>
   </div>
@@ -13,7 +13,7 @@
   <div class="flexCol-7 pad15"></div>
 
   <div class="flexCol-5 pad15">
-    <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light positionWrapper" style="opacity: 1;">
+    <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary-light positionWrapper" style="opacity: 1;">
       <div class="flexRow custCol-secondary border0">
         <label for="itemImageUploadMain" class="fieldItem width100">
           <h5 class="floatLeft"><%= polyglot.t('Photos') %></h5>
@@ -49,14 +49,14 @@
   <div class="flexRow border0 marginBottom50">
     <div class="flexRow flexExpand">
       <div class="flexCol-7 pad15 flex-border">
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary-light">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Listing') %></h5>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-3 borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-3 borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputName"><%= polyglot.t('Title') %></label>
               </div>
@@ -65,8 +65,8 @@
               <input name="title" id="inputName" type="text" class="fieldItem custCol-text" required placeholder="<%= polyglot.t('TitlePlaceholder') %>" value="<%- ob.vendor_offer.listing.item.title %>">
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-3 borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-3 borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputType"><%= polyglot.t('Type') %></label>
               </div>
@@ -83,8 +83,8 @@
               </div>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary js-inputParent">
-            <div class="flexCol-3  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border js-inputParent">
+            <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="priceLocal"><%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)</label>
               </div>
@@ -103,8 +103,8 @@
               <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary js-shippingRow">
-            <div class="flexCol-3  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border js-shippingRow">
+            <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputCondition"><%= polyglot.t('Condition') %></label>
               </div>
@@ -123,8 +123,8 @@
               </div>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-3  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputSku"><%= polyglot.t('SKU') %> </label>
               </div>
@@ -133,8 +133,8 @@
               <input name="sku" type="text" id="inputSku" placeholder="<%= polyglot.t('Optional') %>" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.item.sku %>">
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-3  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputDescription"><%= polyglot.t('Description') %></label>
               </div>
@@ -146,15 +146,15 @@
         </div>
 
         <!-- Shipping -->
-        <div class="flexRow marginTop20 podBorder custCol-border-secondary borderRadiusTop custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder custCol-border borderRadiusTop custCol-primary-light">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Shipping') %></h5>
             </div>
           </div>
 
-            <div class="flexRow custCol-border-secondary">
-              <div class="flexCol-4 borderRight custCol-border-secondary">
+            <div class="flexRow custCol-border">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="inputProcessingTime"><%= polyglot.t('ProcessingTime') %></label>
                 </div>
@@ -163,8 +163,8 @@
                 <input name="process_time" type="text" id="inputProcessingTime" placeholder="<%= polyglot.t('OrderProcessingTimePlaceholder') %>" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.item.process_time %>" required>
               </div>
             </div>
-            <div class="flexRow custCol-border-secondary js-shippingRow">
-              <div class="flexCol-4 borderRight custCol-border-secondary">
+            <div class="flexRow custCol-border js-shippingRow">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="shipsTo"><%= polyglot.t('ShipsTo') %></label>
                 </div>
@@ -178,8 +178,8 @@
                 </div>
               </div>
             </div>
-            <div class="flexRow custCol-border-secondary js-shippingRowFree">
-              <div class="flexCol-4 borderRight custCol-border-secondary">
+            <div class="flexRow custCol-border js-shippingRowFree">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="shippingFreeTrue"><%= polyglot.t('Free') %> <%= polyglot.t('Shipping') %></label>
                 </div>
@@ -189,8 +189,8 @@
                 <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" value="false" checked/><label for="shippingFreeFalse" class="radioLabel">No</label>
               </div>
             </div>
-            <div class="flexRow custCol-border-secondary js-inputParent js-shippingPriceRow">
-              <div class="flexCol-4 borderRight custCol-border-secondary">
+            <div class="flexRow custCol-border js-inputParent js-shippingPriceRow">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem marginTop15">
                   <label for="shippingPriceLocalLocal" class="lineHeightReset"><%= polyglot.t('Domestic') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)</label>
                 </div>
@@ -209,8 +209,8 @@
                 <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
               </div>
             </div>
-            <div class="flexRow custCol-border-secondary js-inputParent js-shippingPriceRow">
-              <div class="flexCol-4 borderRight custCol-border-secondary">
+            <div class="flexRow custCol-border js-inputParent js-shippingPriceRow">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem marginTop15">
                   <label for="shippingPriceInternationalLocal" class="lineHeightReset"><%= polyglot.t('International') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Price') %> (<%- ob.userCurrencyCode %>)</label>
                 </div>
@@ -228,8 +228,8 @@
                 <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
               </div>
             </div>
-            <div class="flexRow custCol-border-secondary js-shippingRow">
-              <div class="flexCol-4 borderRight custCol-border-secondary">
+            <div class="flexRow custCol-border js-shippingRow">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem marginTop15">
                   <label for="inputLocalShippingTime" class="lineHeightReset"><%= polyglot.t('Domestic') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %></label>
                 </div>
@@ -238,8 +238,8 @@
                 <input name="est_delivery_domestic" id="inputLocalShippingTime" type="text" class="fieldItem" value="<%- ob.vendor_offer.listing.shipping.est_delivery.domestic %>" placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
               </div>
             </div>
-            <div class="flexRow custCol-border-secondary js-shippingRow">
-              <div class="flexCol-4 borderRight custCol-border-secondary">
+            <div class="flexRow custCol-border js-shippingRow">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem marginTop15">
                   <label for="inputInternationalShippingTime" class="lineHeightReset"><%= polyglot.t('International') %> <%= polyglot.t('Shipping') %> <%= polyglot.t('Time') %></label>
                 </div>
@@ -251,21 +251,21 @@
           </div>
 
           <!-- Terms and Conditions -->
-          <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20 custCol-primary-light">
+          <div class="flexRow podBorder custCol-border borderRadiusTop marginTop20 custCol-primary-light">
             <div class="flexRow custCol-secondary border0">
               <div class="fieldItem">
                 <h5><%= polyglot.t('TermsAndConditions') %> (<%= polyglot.t('Optional') %>)</h5>
               </div>
             </div>
-            <div class="flexRow custCol-border-secondary">
-              <div class="flexCol-12 custCol-border-secondary">
+            <div class="flexRow custCol-border">
+              <div class="flexCol-12 custCol-border">
                 <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%- ob.vendor_offer.listing.policy.terms_conditions %></textarea>
               </div>
             </div>
           </div>
 
           <!-- Return policy -->
-          <div class="flexRow podBorder custCol-border-secondary borderRadiusTop marginTop20 custCol-primary-light">
+          <div class="flexRow podBorder custCol-border borderRadiusTop marginTop20 custCol-primary-light">
             <div class="flexRow custCol-secondary border0">
               <div class="fieldItem">
                 <h5><%= polyglot.t('ReturnPolicy') %> (<%= polyglot.t('Optional') %>)</h5>
@@ -283,14 +283,14 @@
       <div class="flexCol-5 pad15 flex-border rowTop241">
 
         <!-- Categorization -->
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary-light">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Categorization') %> (<%= polyglot.t('Optional') %>)</h5>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-4  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputCategory"><%= polyglot.t('Category') %></label>
               </div>
@@ -305,14 +305,14 @@
         </div>
 
         <!-- search -->
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary-light">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Search') %> (<%= polyglot.t('Optional') %>)</h5>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-4  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="nsfwFalse"><%= polyglot.t('NSFW') %></label>
               </div>
@@ -324,8 +324,8 @@
               </div>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-4  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label><%= polyglot.t('Keywords') %></label>
               </div>
@@ -340,14 +340,14 @@
         </div>
 
         <!-- Expiration -->
-        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border-secondary custCol-primary-light">
+        <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary-light">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
               <h5><%= polyglot.t('Expiration') %> (<%= polyglot.t('Optional') %>)</h5>
             </div>
           </div>
-          <div class="flexRow custCol-border-secondary">
-            <div class="flexCol-4  borderRight custCol-border-secondary">
+          <div class="flexRow custCol-border">
+            <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputExpirationDate"><%= polyglot.t('ExpirationDate') %></label>
               </div>

@@ -142,6 +142,7 @@ module.exports = Backbone.View.extend({
   openChat: function(guid, key) {
     var self = this;
     var model = this.options.model;
+    console.log(model);
 
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
@@ -221,12 +222,12 @@ module.exports = Backbone.View.extend({
 
   sendChat: function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
+    var targetForm = this.$el.find('#chatConversation');
+    var chat_body = targetForm.find('#inputConversationMessage')[0].value;
 
     if(!this.shiftDown) {
 
-      if(code == 13) {
-        var targetForm = this.$el.find('#chatConversation');
-        var chat_body = targetForm.find('#inputConversationMessage')[0].value;
+      if(code == 13 && chat_body.trim() != "") {
 
         if (chat_body != "" && chat_body != '\n') {
 
@@ -328,6 +329,15 @@ module.exports = Backbone.View.extend({
       var chat_message = data.message;
       this.afterRender();
       this.updateChat(chat_message.sender);
+      var username = chat_message.handle ? chat_message.handle : chat_message.guid;
+      var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
+      var audioElement = document.createElement('audio');
+      audioElement.setAttribute('src', './audio/notification.aif');
+      audioElement.play();
+      new Notification(username + ":", { 
+        body: data.message.message, 
+        icon: avatar 
+      });    
     }
   },
 

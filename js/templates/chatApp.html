@@ -1,5 +1,5 @@
 <div class="newChatButton clearFix">
-    <div class="btn btn-chatOpen height43 js-chatOpen ion-chatbubbles fontSize12 width46px textOpacity50"></div>
+    <div class="btn btn-chatOpen height43 js-chatOpen ion-chatbubbles fontSize18 width46px textOpacity50"></div>
     <div class="chatMessagesLabel hide"><%= polyglot.t('Messages') %></div>
     <div class="btn btn-closeChat js-closeChat ion-close-round marginTop6"></div>
 </div>
@@ -16,15 +16,15 @@
         <input type="hidden" name="conversation_recipient" id="inputConversationRecipient"/>
 
         <div class="chatConversationHeader">
-            <div class="chatConversationLabel js-username clickable"></div>
-            <div class="btn-closeConversation">
+            <div class="chatConversationLabel floatLeft"></div>
+            <div class="btn-closeConversation floatRight marginTop13 marginRight10 textOpacity75">
                 <a class="ion-close-round js-closeConversation"></a>
             </div>
         </div>
         <div id="chatConversationContent" class="chatConversationContent"></div>
 
         <div class="chatConversationMessage">
-            <textarea name="conversation_message" id="inputConversationMessage" class="js-chatMessage" rows="3"></textarea>
+            <textarea name="conversation_message" id="inputConversationMessage" class="fontSize12 padding4 txtAreaField js-chatMessage" rows="3"></textarea>
         </div>
     </form>
 </div>

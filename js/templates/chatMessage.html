@@ -7,7 +7,7 @@
         <tr>
             <td class="chatConversationMessageBody"><div class="floatRight"><%= ob.formattedMessage%></div></td>
             <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border-secondary marginLeft2"
+                <div class="thumbnail custcol-border-secondary marginLeft2 js-username clickable"
                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
             </td>
         </tr>
@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border-secondary marginRight2"
+                <div class="thumbnail custcol-border-secondary marginRight2 js-username clickable"
                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
             </td>
             <td class="chatConversationMessageBody paddingRight2"><div class="floatLeft"><%= ob.formattedMessage %></div></td>

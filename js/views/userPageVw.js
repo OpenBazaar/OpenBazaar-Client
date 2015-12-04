@@ -309,6 +309,7 @@ module.exports = Backbone.View.extend({
           "#ov1 .userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + this.shadeColor2(this.model.get('page').profile.primary_color, -0.35) +  ";}" +
           "#ov1 .userPage .btn-tab:active { -webkit-box-shadow: none;}" +
           "#ov1 .userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + this.model.get('page').profile.secondary_color + ";}" +
+          "#ov1 .userPage .custCol-border { border-color: " + this.shadeColor2(this.model.get('page').profile.primary_color, 0.1) + " !important;}" +
           "#ov1 .userPage .custCol-border-secondary { border-color: " + this.model.get('page').profile.secondary_color + " !important;}" +
           "#ov1 .userPage .custCol-border-primary { border-color: " + this.model.get('page').profile.primary_color + " !important;}" +
           "#ov1 .userPage .radioLabel:before { border-color: " + this.model.get('page').profile.text_color + " !important;}" +
