@@ -56,36 +56,6 @@ window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.la
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
 
-var reloadProfile = function(){
-  "use strict";
-  $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
-  loadProfileCountdown=3;
-
-  if(loadProfileCount < 10){
-    loadProfileCountdownInterval = setInterval(function(){
-      if(loadProfileCountdown > 0){
-        $('.js-indexLoadingMsg4').text(loadProfileCountdown);
-        loadProfileCountdown--;
-      } else {
-        $('.js-indexLoadingMsg4').text("");
-        clearInterval(loadProfileCountdownInterval);
-        loadProfileCount++;
-        loadProfile();
-      }
-    }, 2000);
-  } else {
-    alert("Your server may not be working correctly. Loading using default settings.");
-    $('.js-loadingMessageModal').addClass('hide');
-    user.set('serverUrl', serverUrlLocal);
-    newSocketView = new socketView({model: user});
-    newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-    newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-    newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
-    Backbone.history.start();
-    window.clearTimeout(loadProfileTimeout);
-  }
-};
-
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
   getBTPrice(cCode, function (btAve, currencyList) {
@@ -100,9 +70,40 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
     window.currentBitcoin = btAve;
     typeof callback === 'function' && callback();
   });
-}
+};
 
 var loadProfile = function() {
+
+  var reloadProfile = function(){
+    "use strict";
+    $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
+    loadProfileCountdown=3;
+
+    if(loadProfileCount < 10){
+      loadProfileCountdownInterval = setInterval(function(){
+        if(loadProfileCountdown > 0){
+          $('.js-indexLoadingMsg4').text(loadProfileCountdown);
+          loadProfileCountdown--;
+        } else {
+          $('.js-indexLoadingMsg4').text("");
+          clearInterval(loadProfileCountdownInterval);
+          loadProfileCount++;
+          loadProfile();
+        }
+      }, 2000);
+    } else {
+      alert("Your server may not be working correctly. Loading using default settings.");
+      $('.js-loadingMessageModal').addClass('hide');
+      user.set('serverUrl', serverUrlLocal);
+      newSocketView = new socketView({model: user});
+      newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+      newChatAppView = new chatAppView({model: user, socketView: newSocketView});
+      newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
+      Backbone.history.start();
+      window.clearTimeout(loadProfileTimeout);
+    }
+  };
+
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
     success: function (model, response) {
@@ -142,7 +143,7 @@ var loadProfile = function() {
             user.set('serverUrl', serverUrlLocal);
             newSocketView = new socketView({model: user});
             newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-            newChatAppView = new chatAppView({model: user, socketView: newSocketView})
+            newChatAppView = new chatAppView({model: user, socketView: newSocketView});
             newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
             Backbone.history.start();
           }
