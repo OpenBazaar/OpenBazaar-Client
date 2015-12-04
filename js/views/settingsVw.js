@@ -363,7 +363,7 @@ module.exports = Backbone.View.extend({
         if($(this).val() == "") {
           $(this).attr('disabled', true);
           tempDisabledFields.push($(this).attr('id'));
-        };
+        }
       });
 
       __.each(form.serializeArray(), function (value) {
@@ -377,7 +377,7 @@ module.exports = Backbone.View.extend({
       if(value.constructor === Array){
         __.each(value, function(val){
           formData.append(key, val);
-        })
+        });
       }else{
         formData.append(key, value);
       }
@@ -425,7 +425,7 @@ module.exports = Backbone.View.extend({
         //re-enable any disabled fields
         __.each(tempDisabledFields, function(element){
           form.find('#'+element).attr('disabled', false);
-        })
+        });
       }
     });
   },
@@ -483,31 +483,31 @@ module.exports = Backbone.View.extend({
     };
 
     var checkSocialCount = function(){
+      var socialSend = function (socialInput) {
+        var socialData = {};
+        socialInputCount++;
+        if(socialInput){
+          socialData.account_type = socialInput.data('type');
+          socialData.username = socialInput.val();
+          self.saveData("", "", "social_accounts",
+              function(data){
+                "use strict";
+                checkSocialCount();
+              },
+              function(data){
+                showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+              }, socialData);
+        } else {
+          checkSocialCount();
+        }
+      };
+
       if(socialInputCount < socialInputs.length){
         socialSend($(socialInputs[socialInputCount]));
       } else {
         sendPage();
       }
     };
-
-    var socialSend = function (socialInput) {
-        var socialData = {};
-        socialInputCount++;
-        if(socialInput && socialInput.val()){
-          socialData.account_type = socialInput.data('type');
-          socialData.username = socialInput.val();
-          self.saveData("", "", "social_accounts",
-            function(data){
-              "use strict";
-              checkSocialCount();
-            },
-            function(data){
-              showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-            }, socialData);
-        } else {
-          checkSocialCount();
-        }
-      };
 
     var checkBanner = function(){
       var bannerCrop = self.$el.find('#settings-image-cropperBanner');

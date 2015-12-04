@@ -401,7 +401,6 @@ module.exports = Backbone.View.extend({
   copyPayAddress: function(){
     "use strict";
     clipboard.writeText(this.payURL);
-    console.log(clipboard.readText('selection'));
   },
 
   backPurchase: function(){

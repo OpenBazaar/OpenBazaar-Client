@@ -277,7 +277,7 @@ module.exports = Backbone.View.extend({
           $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
           $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
           $('.user-page-header .rowItem').hide();
-          $('.user-page-navigation-buttons').addClass('positionFixed positionTop66')
+          $('.user-page-navigation-buttons').addClass('positionFixed positionTop66');
         }
         if ($(this).scrollTop() < 351 && self.slimVisible === true ) {
           self.slimVisible = false;
