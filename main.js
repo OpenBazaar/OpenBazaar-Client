@@ -67,9 +67,9 @@ app.on('window-all-closed', function() {
 // You can use 'before-quit' instead of (or with) the close event
 app.on('before-quit', function (e) {
     // Handle menu-item or keyboard shortcut quit here
-    console.log('Closing Application', launched_from_installer);
+    console.log('Closing Application');
     if(launched_from_installer) {
-      console.log('Shutting down Server Daemon');
+      console.log('Shutting down server daemon');
       request('http://localhost:18469/api/v1/shutdown', function (error, response, body) {
         if (!error && response.statusCode == 200) {
           console.log('Shutting down server');
@@ -105,7 +105,7 @@ app.on('ready', function() {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   // Open the devtools.
-  mainWindow.openDevTools({detached: true});
+  mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

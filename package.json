@@ -18,7 +18,7 @@
     "startwithserver": "electron main.js"
   },
   "dependencies": {
-    "backbone": "1.2.1",
+    "backbone": ">=1.2.1",
     "chosen": "0.0.2",
     "cropit": "0.4.5",
     "is_js": "0.7.4",
@@ -31,8 +31,7 @@
     "sanitize-html": "^1.11.2",
     "taggle": "1.6.1",
     "underscore": "1.8.3",
-    "request": ">=2.67.0",
-    "clipboard": ">=1.5.5"
+    "request": ">=2.67.0"
   },
   "devDependencies": {
     "electron-prebuilt": "0.34.2",
