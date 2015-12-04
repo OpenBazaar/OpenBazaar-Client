@@ -613,6 +613,10 @@ form {
   padding-right: 20px;
 }
 
+.pad20Left {
+  padding-left: 20px;
+}
+
 .popMenu {
   position: absolute;
   z-index: 1;
@@ -1153,6 +1157,12 @@ input[type="text"].txtField-bar {
   border-radius: 3px;
   opacity: .80;
   box-sizing: border-box;
+}
+
+.btn i[class *= "ion-"]:before {
+  position: relative;
+  top: 2px;
+  margin-right: 6px;
 }
 
 .btn-large {
@@ -2804,6 +2814,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   box-sizing: border-box;
 }
 
+.qrCode {
+  background-color: #fff;
+  padding: 15px;
+}
+
+.buyView .chosen-container .chosen-results {
+  max-height: 180px;
+}
+
 #obContainer {
   height: 96%;
   margin-top: 50px;
@@ -3128,6 +3147,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .fontSize34 {
   font-size: 34px;
+}
+
+#ov1 .txt-bright {
+  color: #fff;
 }
 
 #ov1 .txt-darkest {
