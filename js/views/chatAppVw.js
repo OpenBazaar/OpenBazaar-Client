@@ -87,7 +87,7 @@ module.exports = Backbone.View.extend({
     };
     this.chats.sort();
 
-    this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
+    this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow marginLeft1 marginTop1"></div>');
 
     if(this.chats.models.length < 1) {
       self.renderNoneFound();
@@ -173,7 +173,7 @@ module.exports = Backbone.View.extend({
     this.chatMessages = new chatMessageCollection();
     this.chatMessages.url = this.options.model.get('serverUrl') + "get_chat_messages?guid=" + guid;
 
-    this.listWrapperChat = $('<div class="border0 custCol-border-secondary flexRow"></div>');
+    this.listWrapperChat = $('<div class="border0 custCol-border-secondary flexRow marginLeft1 marginTop1"></div>');
 
     this.chatMessages.fetch({
       success: function(chatMessages, response) {
@@ -270,12 +270,13 @@ module.exports = Backbone.View.extend({
   openConversation: function() {
     this.slideChatOut();
     $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity35');
+    $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
   },
 
   closeConversation: function() {
     $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity35');
+    $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
+    $(this.$el).find('.chatHead').removeClass('chatHeadSelected');
   },
 
   chatSearch: function() {
@@ -331,13 +332,14 @@ module.exports = Backbone.View.extend({
       this.updateChat(chat_message.sender);
       var username = chat_message.handle ? chat_message.handle : chat_message.guid;
       var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
-      var audioElement = document.createElement('audio');
-      audioElement.setAttribute('src', './audio/notification.aif');
-      audioElement.play();
       new Notification(username + ":", { 
         body: data.message.message, 
         icon: avatar 
-      });    
+      });   
+      // play notification sound
+      var notifcationSound = document.createElement('audio');
+      notifcationSound.setAttribute('src', './audio/notification.mp3');
+      notifcationSound.play(); 
     }
   },
 

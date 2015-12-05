@@ -1255,7 +1255,7 @@ input[type="text"].txtField-bar {
 }
 
 .chatSearch {
-  border-bottom: solid 1px rgba(255,255,255,0.08);
+  /*border-bottom: solid 1px rgba(255,255,255,0.08);*/
 }
 
 .chatSearch input {
@@ -1273,6 +1273,11 @@ input[type="text"].txtField-bar {
 .chatSearchIcon {
   margin-left: -25px;
   margin-right: 10px;
+  float: left;
+  margin-top: 13px;
+  cursor: pointer;
+  font-size: 15px;
+  opacity: .50;
 }
 
 .chatSearchOut {
@@ -1293,8 +1298,7 @@ div.chatSearchOut .chatSearchIcon {
   height: 360px;
   bottom: 0px;
   position: absolute;
-  transition: bottom 0.5s ease;
-  outline: 1px solid #565656;
+  transition: bottom 0.35s ease;
   background-color: #252525;
 }
 
@@ -1312,13 +1316,19 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeads {
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  clear: both;
+  border-top: solid 1px #363636;
+  height: calc(100% - 88px);
 }
 
 .chatConversationHeadsCompressed {
-  height: calc(100% - 460px);
-  overflow: auto;
+  height: calc(100% - 430px);
+  overflow-x: hidden;
+  overflow-y: auto;
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+  transition: height 1s cubic-bezier(0, 0, 0.2, 1);
   -webkit-filter: blur(.25px);
 }
 
@@ -1329,6 +1339,8 @@ div.chatSearchOut .chatSearchIcon {
     line-height: 45px;
     padding-left: 10px;
     color: #fff;
+    border-top-left-radius: 4px;
+    margin-left: 2px;
 }
 
 .chatConversationLabel {
@@ -1345,9 +1357,10 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationContent {
   height: calc(100% - 134px);
-  border-bottom: 1px solid #333;
+  border: 1px solid #565656;
   overflow: auto;
   padding: 6px 2px;
+  margin-left: 2px;
 }
 
 .chatConversationTo {
@@ -1376,6 +1389,9 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationMessage {
   height: 60px;
   padding: 10px;
+  border: 1px solid #565656;
+  border-top: 0;
+  margin-left: 2px;
 }
 
 .chatConversation textarea, .chatConversation input {
@@ -1405,8 +1421,16 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatHeadSelected {
-  background-color: #444;
   opacity: 1;
+  outline: solid 1px #ccc;
+  background: #3E3E3E;
+  z-index:3;
+}
+
+
+#chatSearchField {
+  height: 44px;
+  float: left;
 }
 
 .chatHeadIcon {
@@ -2977,6 +3001,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .marginRight10 {
   margin-right: 10px;
+}
+
+#ov1  .marginLeft1 {
+  margin-left: 1px;
 }
 
 #ov1  .marginLeft2 {
