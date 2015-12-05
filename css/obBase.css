@@ -1251,7 +1251,7 @@ input[type="text"].txtField-bar {
 }
 
 .newChatButton {
-  border-bottom: solid 1px rgba(255,255,255,0.08);
+  border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
 .chatSearch {
