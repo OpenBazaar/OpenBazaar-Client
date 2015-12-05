@@ -12,6 +12,7 @@ var BrowserWindow = require('browser-window');  // Module to create native brows
 var request = require('request');
 
 var launched_from_installer = false;
+var force_quit = false;
 
 // Check if we need to kick off the python server-daemon (Desktop app)
 if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
