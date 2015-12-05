@@ -277,6 +277,11 @@ module.exports = Backbone.View.extend({
     $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
     $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
     $(this.$el).find('.chatHead').removeClass('chatHeadSelected');
+
+    // let's clear the form on close
+    $('#chatConversation').trigger('reset');
+    $('#inputConversationKey').val('');
+    $('#inputConversationRecipient').val('');
   },
 
   chatSearch: function() {
