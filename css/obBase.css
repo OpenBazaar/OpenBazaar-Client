@@ -1254,6 +1254,15 @@ input[type="text"].txtField-bar {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
+.newChatButton .btn {
+  opacity: .5;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.newChatButton:hover .btn {
+  opacity: 1;
+}
+
 .chatSearch {
   /*border-bottom: solid 1px rgba(255,255,255,0.08);*/
 }
@@ -1278,6 +1287,11 @@ input[type="text"].txtField-bar {
   cursor: pointer;
   font-size: 15px;
   opacity: .50;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.chatSearchIcon:hover {
+  opacity: 1;
 }
 
 .chatSearchOut {
