@@ -1416,6 +1416,10 @@ div.chatSearchOut .chatSearchIcon {
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
+.chatHead .thumbnail {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.20);
+}
+
 .chatHead:hover {
   opacity: 1;
 }
@@ -1427,6 +1431,9 @@ div.chatSearchOut .chatSearchIcon {
   z-index:3;
 }
 
+/*.chatConversationHeadsCompressed .chatHead {
+  border: solid 1px transparent;
+}*/
 
 #chatSearchField {
   height: 44px;
