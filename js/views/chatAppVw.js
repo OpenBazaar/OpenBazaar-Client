@@ -332,10 +332,16 @@ module.exports = Backbone.View.extend({
       this.updateChat(chat_message.sender);
       var username = chat_message.handle ? chat_message.handle : chat_message.guid;
       var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
-      new Notification(username + ":", { 
-        body: data.message.message, 
-        icon: avatar 
-      });   
+
+      // lets not bother them with a notification if they're already actively talking to this person
+      if ($('#inputConversationRecipient').val() != chat_message.sender){
+        // send notification to recipient
+        new Notification(username + ":", { 
+          body: data.message.message, 
+          icon: avatar 
+        }); 
+      }  
+
       // play notification sound
       var notifcationSound = document.createElement('audio');
       notifcationSound.setAttribute('src', './audio/notification.mp3');
