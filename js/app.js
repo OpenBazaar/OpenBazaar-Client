@@ -7,6 +7,16 @@ window.Backbone = Backbone;
 window.$ = $;
 window.jQuery = $;
 window.Backbone.$ = $;
+window.focused = true;
+
+// we need to know this for notifications
+window.onfocus = function() {
+  window.focused = true;
+};
+
+window.onblur = function() {
+  window.focused = false;
+};
 
 var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),

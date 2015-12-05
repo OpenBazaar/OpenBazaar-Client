@@ -339,7 +339,8 @@ module.exports = Backbone.View.extend({
       var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
 
       // lets not bother them with a notification if they're already actively talking to this person
-      if ($('#inputConversationRecipient').val() != chat_message.sender){
+      // however, let's bother them if the window isn't active
+      if (!window.focused || $('#inputConversationRecipient').val() != chat_message.sender){
         // send notification to recipient
         new Notification(username + ":", { 
           body: data.message.message, 
