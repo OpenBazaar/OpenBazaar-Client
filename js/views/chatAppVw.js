@@ -143,9 +143,12 @@ module.exports = Backbone.View.extend({
     var self = this;
     var model = this.options.model;
     console.log(model);
+    // Josh how do I get the recipients avatar here? It's currently showing the senders 
+    var avatar = model.attributes.avatar_hash ? this.options.model.get('serverUrl') + 'get_image?hash=' + model.attributes.avatar_hash + '&guid=' + model.attributes.guid : 'imgs/defaultUser.png';
 
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
+    $('.chatConversationAvatar').css('background-image', 'url(' + avatar + ')');
     $('.chatConversationLabel').html(guid);
     $('#inputConversationKey').val(key);
     $('#inputConversationMessage').focus();
@@ -199,7 +202,7 @@ module.exports = Backbone.View.extend({
 
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat).promise().done(function() {
             "use strict";
-            $(this).animate({ scrollTop: 99999999999}, 100); // Arbitrary long value
+            $(this).animate({ scrollTop: 99999999999}, 1); // Arbitrary long value
           });
         }
       }

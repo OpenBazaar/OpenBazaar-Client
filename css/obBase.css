@@ -173,7 +173,7 @@ form {
 
 #sideBar {
   position: fixed;
-  right: -184px;
+  right: -182px;
   top: 50px;
   width:230px;
   background-color: #252525;
@@ -197,11 +197,11 @@ form {
 }
 
 .chatSearch {
-  margin-left: 40px;
+  margin-left: 41px;
 }
 
 .chatRead {
-  opacity: .35;
+  opacity: .5;
 }
 
 .mainContainer {
@@ -1241,8 +1241,13 @@ input[type="text"].txtField-bar {
   right: 0;
   float: right;
   background-color: unset;
-}
+  margin-right: 5px;
 
+}
+.btn-closeChat:hover {
+  outline: solid 1px #363636;
+  border-radius: 0;
+}
 .btn-chatSearch {
   background-color: unset;
   text-align: center;
@@ -1366,12 +1371,18 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-closeConversation {
+  padding: 10px;
+}
 
+.btn-closeConversation:hover {
+  outline: solid 1px #4C4C4C;
+  border-radius: 0;
 }
 
 .chatConversationContent {
   height: calc(100% - 134px);
   border: 1px solid #565656;
+  border-top: 0;
   overflow: auto;
   padding: 6px 2px;
   margin-left: 2px;
@@ -1406,6 +1417,16 @@ div.chatSearchOut .chatSearchIcon {
   border: 1px solid #565656;
   border-top: 0;
   margin-left: 2px;
+}
+
+.chatConversationAvatar {
+    margin-top: -3px;
+    width: 48px;
+    height: 48px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 6px;
+    margin-left: -2px;
 }
 
 .chatConversation textarea, .chatConversation input {
@@ -3072,6 +3093,10 @@ input[type="checkbox"].fieldItem + label span {
   margin-top: 6px;
 }
 
+#ov1  .marginTop7 {
+  margin-top: 7px;
+}
+
 #ov1  .marginTop9 {
   margin-top: 9px;
 }
@@ -3314,18 +3339,18 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .badge:after{
-    content:attr(data-count);
-    position: absolute;
-    top:-5px;
-    right:-3px;
-    width:16px;
-    text-align: center;
-    line-height: 16px;
-    font-size: 10px;
-    border-radius: 50%;
-    color:white;
-    background-opacity: .75;
-    background-color: #FFA41C;
+  content: attr(data-count);
+  position: absolute;
+  top: -5px;
+  right: -4px;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 13px;
+  border-radius: 50%;
+  color: white;
+  background-opacity: .75;
+  background-color: #FFA41C;
 
   /* don't put a border on this or it will be visible when it has no content */
 }
