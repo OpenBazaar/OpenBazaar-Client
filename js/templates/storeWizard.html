@@ -17,26 +17,46 @@
 
             <div class="flexRow">
 
-            <div class="flexRow custCol-border-secondary">
-
-              <div class="flexCol-4 borderRight custCol-border-secondary">
-                <div class="fieldItem">
-                  <label for="refund_address">
-                    <%= polyglot.t('BitcoinReturnAddress') %>
+              <div class="flexRow custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
+                  <label class="fieldItem" for="storeNameInput">
+                    <%= polyglot.t('Name') %>
                   </label>
                 </div>
+                <div class="flexCol-8">
+                  <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
+                </div>
               </div>
-
-              <div class="flexCol-8">
-                <input name="refund_address"
-                       type="text"
-                       id="refund_address"
-                       placeholder="<%= polyglot.t('Address') %>"
-                       class="fieldItem"
-                       required
-                       pattern=".{26,}">
+              <div class="flexRow custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
+                  <label class="fieldItem" for="aboutInput">
+                    <%= polyglot.t('Description') %>
+                  </label>
+                </div>
+                <div class="flexCol-8">
+                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%- ob.page.profile.about %></textarea>
+                </div>
               </div>
-            </div>
+              <!--
+              <div class="flexRow custCol-border-secondary">
+                <div class="flexCol-4 borderRight custCol-border-secondary">
+                  <div class="fieldItem">
+                    <label for="refund_address">
+                      <%= polyglot.t('BitcoinReturnAddress') %>
+                    </label>
+                  </div>
+                </div>
+                <div class="flexCol-8">
+                  <input name="refund_address"
+                         type="text"
+                         id="refund_address"
+                         placeholder="<%= polyglot.t('Address') %>"
+                         class="fieldItem"
+                         required
+                         pattern=".{26,}">
+                </div>
+              </div>
+              -->
 
               <div class="flexRow custCol-border-secondary">
                 <div class="flexCol-4 borderRight custCol-border-secondary">
