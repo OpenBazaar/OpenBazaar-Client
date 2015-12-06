@@ -148,12 +148,12 @@ form {
 
 #obContainer {
   transition: width 0.5s ease;
-  width: calc(100% - 47px);
+  width: calc(100% - 49px);
 
 }
 
 #obContainer.compressed {
-  width: calc(100% - 231px);
+  width: calc(100% - 235px);
 }
 
 #pageNav {
