@@ -53,6 +53,7 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = new userProfileModel();
     this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
+    this.user = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
     this.subModels = [];
@@ -62,14 +63,20 @@ module.exports = Backbone.View.extend({
         if (profile){
           setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
         }
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+        self.model.set({page: model.toJSON()});
+        self.user.fetch({
+          success: function(model){
+            "use strict";
+            self.model.set({user: model.toJSON()});
 
-        //use default currency to return list of supported currencies
-        getBTPrice("USD", function (btAve, currencyList) {
-          "use strict";
-          self.availableCurrenciesList = currencyList;
-          self.render();
-          $('.js-loadingModal').removeClass('show');
+            //use default currency to return list of supported currencies
+            getBTPrice("USD", function (btAve, currencyList) {
+              "use strict";
+              self.availableCurrenciesList = currencyList;
+              self.render();
+              $('.js-loadingModal').removeClass('show');
+            });
+          }
         });
       },
       error: function(model, response){
@@ -571,6 +578,7 @@ module.exports = Backbone.View.extend({
     });
 
     storeData.moderator_list = modList;
+    storeData.vendor = true;
 
     this.saveData(form, "", "profile", function(){
       "use strict";
