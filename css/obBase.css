@@ -1419,6 +1419,10 @@ div.chatSearchOut .chatSearchIcon {
   margin-left: 2px;
 }
 
+.chatConversationMessageBody img {
+  max-width: 150px;
+}
+
 .chatConversationAvatar {
     margin-top: -3px;
     width: 48px;
