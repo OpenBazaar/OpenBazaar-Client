@@ -95,4 +95,4 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData)
       });
     }
   });
-}
+};
