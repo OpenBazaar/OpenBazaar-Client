@@ -50,15 +50,18 @@ module.exports = Backbone.Model.extend({
 
     //addresses come from the server as a string. Parse the string
     response.shipping_addresses = response.shipping_addresses || [];
-    try{
-      var shipAddr = JSON.parse(response.shipping_addresses[0]);
-      if(shipAddr && typeof shipAddr === "object" && shipAddr !== null){
-        response.shipping_addresses = shipAddr;
+    if(response.shipping_addresses){
+      try{
+        var shipAddr = JSON.parse(response.shipping_addresses[0]);
+        if (shipAddr && typeof shipAddr === "object" && shipAddr !== null){
+          response.shipping_addresses = shipAddr;
+        }
       }
-    }
-    catch(e){
-      //server may set a malformed shipping_address value
-      console.log(e);
+      catch (e){
+        //server may set a malformed shipping_address value
+        console.log("Error in shipping_addresses:")
+        console.log(e);
+      }
     }
 
     return response;
