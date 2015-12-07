@@ -56,7 +56,6 @@ module.exports = Backbone.View.extend({
       this.subViews.push(chooseCurrency);
       //$el must be passed in by the constructor
       this.listWrapper.append(chooseCurrency.render().el);
-      //this.$el.append(chooseCurrency.render().el);
     }
   },
 

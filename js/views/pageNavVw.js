@@ -60,8 +60,6 @@ module.exports = Backbone.View.extend({
       window.polyglot = new Polyglot({locale: newLang});
       window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
       this.render();
-      //refresh the current page
-      Backbone.history.loadUrl();
     });
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
@@ -101,7 +99,6 @@ module.exports = Backbone.View.extend({
       var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
       var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       this.initAccordion('.js-profileAccordion');
-      //console.log(currencyList.items);
     }
   },
 
@@ -339,7 +336,7 @@ module.exports = Backbone.View.extend({
 
   currencySelect: function(e){
     "use strict";
-    var targ = $(e.currentTarget); //TODO: Rename variables to be more readable
+    var targ = $(e.currentTarget); 
     //var crcy = targ.attr('data-name');
     var ccode = targ.attr('data-code');
     $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
@@ -350,7 +347,7 @@ module.exports = Backbone.View.extend({
 
   languageSelect: function(e){
     "use strict";
-    var targ = $(e.currentTarget); //TODO: Rename variables to be more readable
+    var targ = $(e.currentTarget); 
     var lang = targ.attr('data-code');
     $('.js-homeModal-languageList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
@@ -359,7 +356,7 @@ module.exports = Backbone.View.extend({
 
   timeSelect: function(e){
     "use strict";
-    var inpt = $(e.target).closest('input[type=radio]'); //TODO: Rename variables to be more readable
+    var inpt = $(e.target).closest('input[type=radio]'); 
     var tz = inpt.attr('id');
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
