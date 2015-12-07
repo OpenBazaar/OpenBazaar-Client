@@ -321,7 +321,7 @@ module.exports = Backbone.Model.extend({
         ShipsFrom: "Ships From",
         ShipsTo: "Realiza env&iacute;os a",
         Optional: "",
-        Customize: "Personaliza",
+        Customize: "Personalizar",
         Save: "Guardar",
         Changes: "Cambios",
         All: "Todo",
