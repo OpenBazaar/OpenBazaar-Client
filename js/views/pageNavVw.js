@@ -100,12 +100,12 @@ module.exports = Backbone.View.extend({
       this.languageReady = true;
     }
     if(this.countryReady && this.currencyReady && this.languageReady){
-      //set up filterable lists.
-      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
-      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
-      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
-      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
-      this.initAccordion('.js-profileAccordion');
+        //set up filterable lists.
+        var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
+        var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
+        var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
+        var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
+        this.initAccordion('.js-profileAccordion');
     }
   },
 
