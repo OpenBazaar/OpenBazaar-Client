@@ -1,16 +1,14 @@
-<div class="newChatButton">
-    <a class="btn btn-chatOpen js-chatOpen">+</a>
-    <div class="chatMessagesLabel hide">Messages</div>
-    <div class="btn btn-closeChat js-closeChat ion-close-round"></div>
+<div class="newChatButton clearFix">
+    <div class="btn btn-chatOpen height43 js-chatOpen ion-chatbubbles fontSize18 width46px"></div>
+    <div class="chatMessagesLabel hide"><%= polyglot.t('Messages') %></div>
+    <div class="btn btn-closeChat js-closeChat ion-close-round marginTop6"></div>
 </div>
-<hr/>
-<div class="chatSearch">
-    <a class="chatSearchIcon ion-search js-chatSearch"></a>
-    <input id="chatSearchField" class="js-chatSearchText" type="text" placeholder="Search by GUID" value=""/>
+<div class="chatSearch clearFix height43">
+    <div class="chatSearchIcon ion-ios-search-strong js-chatSearch"></div>
+    <input id="chatSearchField" class="js-chatSearchText" type="text" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" value=""/>
 </div>
-<hr/>
 
-<div class="chatConversationHeads" id="chatHeads"></div>
+<div class="chatConversationHeads noScrollBar" id="chatHeads"></div>
 
 <div class="chatConversation chatConversationHidden">
     <form id="chatConversation">
@@ -18,15 +16,16 @@
         <input type="hidden" name="conversation_recipient" id="inputConversationRecipient"/>
 
         <div class="chatConversationHeader">
-            <div class="chatConversationLabel js-username clickable"></div>
-            <div class="btn-closeConversation">
+            <div class="chatConversationAvatar thumbnail-small marginRight5 floatLeft js-username clickable"></div>
+            <div class="chatConversationLabel floatLeft"></div>
+            <div class="btn-closeConversation floatRight marginTop4 marginRight5 textOpacity75">
                 <a class="ion-close-round js-closeConversation"></a>
             </div>
         </div>
         <div id="chatConversationContent" class="chatConversationContent"></div>
 
         <div class="chatConversationMessage">
-            <textarea name="conversation_message" id="inputConversationMessage" class="js-chatMessage" rows="3"></textarea>
+            <textarea name="conversation_message" id="inputConversationMessage" class="fontSize12 padding4 txtAreaField js-chatMessage" rows="3"></textarea>
         </div>
     </form>
 </div>

@@ -20,7 +20,9 @@ module.exports = Backbone.View.extend({
     this.model.set('formattedTimestamp', formatted_timestamp);
 
     // Handle line breaks
-    var msg = sanitizeHTML(this.model.get('message').replace(/\n$/, "").split(/[\r\n]/g).join("<br/><br/>"));
+    var msg = sanitizeHTML(this.model.get('message').replace(/\n$/, "").split(/[\r\n]/g).join("<br/><br/>"), {
+      allowedTags: [ 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ]
+    });
     this.model.set('formattedMessage', msg);
     this.render();
   },
