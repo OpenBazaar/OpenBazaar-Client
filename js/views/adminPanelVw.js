@@ -22,7 +22,8 @@ module.exports = Backbone.View.extend({
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'click .js-adminShutdown': 'shutdown',
-    'click .js-adminCloseApp': 'closeApp'
+    'click .js-adminCloseApp': 'closeApp',
+    'click .js-adminClearLocalStorage': 'clearStorage'
   },
 
   initialize: function (options) {
@@ -242,6 +243,12 @@ module.exports = Backbone.View.extend({
     } else {
       win.hide();
     }
+  },
+
+  clearStorage: function(){
+    "use strict";
+    this.$el.find('.js-adminClearLocalMsg').text("Local Storage Cleared");
+    localStorage.clear();
   },
 
   close: function(){

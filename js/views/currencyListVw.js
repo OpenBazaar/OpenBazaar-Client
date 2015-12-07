@@ -35,28 +35,32 @@ module.exports = Backbone.View.extend({
       self.availableCurrenciesList = currencyList;
       self.render();
     });
+    this.totalCurrencies = 0;
   },
 
   render: function(){
     var self = this;
-    this.listWrapper = $('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text"></ul>');
+    this.listContents = [];
     __.each(this.chooseCurrencies.models, function(item){
       self.renderItem(item);
     },this);
-    this.$el.append(this.listWrapper);
-    window.obEventBus.trigger("currencyListRendered");
+
+    this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text">'+ this.listContents.join('') +'</ul>');
+    window.obEventBus.trigger("currencyListRendered", this.totalCurrencies);
   },
 
   renderItem: function(item){
     if(this.availableCurrenciesList.indexOf(item.get('code')) > -1 || item.get('code') === "BTC"){
-      var chooseCurrency = new chooseCurrencyView({
-        model: item,
-        selected: this.options.selected
-      });
-      this.subViews.push(chooseCurrency);
-      //$el must be passed in by the constructor
-      this.listWrapper.append(chooseCurrency.render().el);
-      //this.$el.append(chooseCurrency.render().el);
+      var itemJSON = item.toJSON();
+      this.listContents.push('<li class="flexRow custCol-border-secondary">');
+      this.listContents.push('<div class="rowItem js-homeModal-currencySelect padding0 paddingLeft6" data-code="'+ itemJSON.code +'" data-name="'+ itemJSON.dataName +'">');
+      this.listContents.push('<input type="radio" class="fieldItem" id="currency-'+ itemJSON.dataName +'" name="'+ itemJSON.code +'"');
+      if(itemJSON.selected == itemJSON.code){
+        this.listContents.push('checked="checked"');
+      }
+      this.listContents.push('>');
+      this.listContents.push('<label class="homeModal-currency radioLabel" for="currency-'+ itemJSON.dataName +'">'+ itemJSON.currency +'</label>');
+      this.listContents.push('</div></li>');
     }
   },
 
@@ -71,8 +75,6 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 });
 

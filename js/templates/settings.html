@@ -1,164 +1,41 @@
-<div class="mainContainer marginTop50">
+<div class="mainContainer custCol-background">
 
-  <div class="topThumb"
-       style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>),
-                                 url(imgs/defaultUser.png);">
-
-  </div>
-
-  <div class="smPageHeader">
-    <div class="navEnd pad15 smPageHeaderInner">
-            <span class="allCaps">
-                <%= polyglot.t('Settings') %>
-            </span>
-      <a class="btn btn-txt pull-right js-saveSettings rowTop10 marginRight5">
-        <%= polyglot.t('SaveChanges') %>
-      </a>
-      <a class="btn btn-txt pull-right textOpacity75 js-cancelSettings rowTop10 marginRight5">
-        <%= polyglot.t('Cancel') %>
+  <div class="settingsBar">
+    <div class="title-section custCol-primary shadow-inner1-ultra-light">
+      <div class="thumbnail pull-left"
+        <% if(ob.page.profile.avatar_hash) { %>
+        style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+        <% } else { %>
+        style="background-image: url(imgs/defaultUser.png);">
+        <% } %>
+      </div>
+      <h1 class="fancy-heading fontSize20 vCentered"><%= polyglot.t('Settings') %></h1>
+      <a href="#userPage" class="btn btn-txt custCol-primary positionRelative pull-right right10 marginTop9 marginLeft6">
+        <%= polyglot.t('GoToMyPage') %>
       </a>
     </div>
   </div>
 
-  <div class="bar navBar barFlush navBar">
-
-    <a class="btn btn-bar btn-tab js-tab js-generalTab active">
-      <%= polyglot.t('General') %>
-    </a>
-    <a class="btn btn-bar btn-tab js-tab js-shippingTab">
-      <%= polyglot.t('Shipping') %>
-    </a>
-    <a class="btn btn-bar btn-tab js-tab js-storeTab">
-      <%= polyglot.t('Store') %>
-    </a>
-    <a class="btn btn-bar btn-tab js-tab js-blockedTab">
-      <%= polyglot.t('Blocked') %>
-    </a>
-    <a class="btn btn-bar btn-tab js-tab js-advancedTab">
-      <%= polyglot.t('Advanced') %>
-    </a>
-
+  <div class="bar navBar barFlush custCol-secondary clearFix">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-generalTab active"><%= polyglot.t('General') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-pageTab"><%= polyglot.t('Page') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-storeTab"><%= polyglot.t('Store') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-addressesTab"><%= polyglot.t('Addresses') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-blockedTab"><%= polyglot.t('Blocked') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-advancedTab"><%= polyglot.t('Advanced') %></a>
   </div>
 
-  <div class="flexContainer flex-border">
+  <div class="flexContainer flex-border color-primary custCol-primary">
     <div class="flexRow border0 minHeight650">
       <div class="flexRow flexExpand">
-        <form class="width100" name="settingsForm" id="settingsForm">
+        <form class="width100" name="generalForm" id="generalForm">
           <div class="flexCol-12 flex-border js-tabTarg js-general">
-
-            <div class="flexRow">
-
-              <div class="flexCol-3 borderRight">
-                <div class="fieldItem">
-                  <label for="name"><%= polyglot.t('Name') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <input name="name"
-                       type="text"
-                       id="name"
-                       placeholder="<%= polyglot.t('YourName') %>"
-                       class="fieldItem"
-                       required
-                       value="<%= ob.page.profile.name %>">
-              </div>
-
-            </div>
-
-            <div class="flexRow">
-
-              <div class="flexCol-3  borderRight">
-                <div class="fieldItem" id="avatar-field">
-                  <label for="settingsAvatarInput"><%= polyglot.t('Avatar') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <div id="settings-image-cropper" class="positionWrapper">
-                  <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
-                    <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
-                  </div>
-                  <div class="cropit-image-preview js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
-                  <div>
-                    <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12" />
-                  </div>
-                  <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
-                  <label for="settingsAvatarInput" class="btn btn-txt btn-c1 rowTop20 marginLeft12 row20"><%= polyglot.t('UploadAvatar') %></label>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="flexRow">
-
-              <div class="flexCol-3 borderRight">
-                <div class="fieldItem">
-                  <label for="handle"><%= polyglot.t('Handle') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <input name="handle"
-                       type="text"
-                       id="handle"
-                       placeholder="@john"
-                       class="fieldItem"
-                       pattern="@[a-zA-Z0-9]+"
-                       value="<%= ob.page.profile.handle %>">
-              </div>
-
-            </div>
-
-
-
-            <div class="flexRow">
-
-              <div class="flexCol-3  borderRight">
-                <div class="fieldItem">
-                  <label for="refund_address">
-                    <%= polyglot.t('BitcoinReturnAddress') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <input name="refund_address"
-                       type="text"
-                       id="refund_address"
-                       placeholder="<%= polyglot.t('Address') %>"
-                       class="fieldItem"
-                       required
-                       pattern=".{26,}"
-                       value="<%= ob.user.refund_address %>">
-              </div>
-
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('General') %></h3>
             </div>
 
             <div class="flexRow overflowVisible">
-
-              <div class="flexCol-3  borderRight">
-                <div class="fieldItem">
-                  <label for="country">
-                    <%= polyglot.t('Country') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <div class="fieldItem padding0">
-                  <div class="fieldItem-selectWrapper noIcon">
-                    <select name="country" class="chosen" id="country">
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="flexRow overflowVisible">
-
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="language">
                     <%= polyglot.t('Language') %>
@@ -166,7 +43,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper noIcon">
                     <select name="language" class="chosen" id="language">
@@ -179,7 +56,28 @@
 
             <div class="flexRow overflowVisible">
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="country">
+                    <%= polyglot.t('Country') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper noIcon">
+                    <select name="country" class="chosen" id="country">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flexRow overflowVisible">
+
+              <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="currency_code">
                     <%= polyglot.t('LocalCurrency') %>
@@ -187,7 +85,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper chosen-relative noIcon">
                     <select name="currency_code" class="chosen" id="currency_code">
@@ -200,7 +98,7 @@
 
             <div class="flexRow overflowVisible">
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="time_zone">
                     <%= polyglot.t('TimeZone') %>
@@ -208,7 +106,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper chosen-relative noIcon">
                     <select name="time_zone" class="chosen" id="time_zone">
@@ -218,42 +116,691 @@
               </div>
             </div>
 
-          </div>
-
-          <div class="flexCol-12 flex-border hide js-tabTarg js-shipping">
-
             <div class="flexRow">
-              <% if(ob.user.shipping_addresses && ob.user.shipping_addresses.length > 0) { %>
-              <div class="flexRow">
-                <h4 class="padding2015">Current Addresses</h4>
-              </div>
-              <% _.each(ob.user.shipping_addresses, function(address, i){ %>
-              <div class="flexRow">
-                <div class="flexCol-2">
-                  <input type="checkbox"
-                         class="fieldItem js-settingsAddress"
-                         id="settingsAddress<%- i %>"
-                         value="<%- i %>">
-                  <label for="settingsAddress<%- i %>"><%= polyglot.t('Delete') %></label>
-                </div>
-                <div class="flexCol-10 padding2015">
-                  <div><%- address.name %></div>
-                  <div><%- address.street %></div>
-                  <div><%- address.state %> <%- address.postal_code %></div>
-                  <div><%- address.country %></div>
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="refund_address">
+                    <%= polyglot.t('BitcoinReturnAddress') %>
+                  </label>
                 </div>
               </div>
-              <% }); %>
-              <% } %>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="refund_address"
+                       type="text"
+                       id="refund_address"
+                       placeholder="<%= polyglot.t('Address') %>"
+                       class="fieldItem"
+                       pattern=".{26,}"
+                       value="<%= ob.user.refund_address %>" required>
+              </div>
             </div>
 
             <div class="flexRow">
-
-              <div class="flexRow">
-                <h4 class="padding2015">New Address</h4>
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('EnableNotifications') %>
+                  </label>
+                </div>
               </div>
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="enableNotificationsYes" name="notifications" value="true" checked /><label for="enableNotificationsYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="enableNotificationsNo" name="notifications" value="false"/><label for="enableNotificationsNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('Display NSFW content?') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem">
+                  <input disabled type="radio" class="fieldItem" id="display_nsfw_content_yes" name="nsfw" value="true" checked /><label for="display_nsfw_content_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input disabled type="radio" class="fieldItem" id="display_nsfw_content_no" name="nsfw" value="false"/><label for="display_nsfw_content_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                </div>
+              </div>
+            </div>
+
+            <a class="btn btn-large js-saveGeneral custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelGeneral custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+
+          </div>
+        </form>
+        <form class="width100" name="pageForm" id="pageForm">
+
+          <div class="flexCol-12 flex-border js-tabTarg js-page hide">
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Basic') %></h3>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="name"><%= polyglot.t('Name') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="name"
+                       type="text"
+                       id="name"
+                       placeholder="<%= polyglot.t('YourName') %>"
+                       class="fieldItem"
+                       required
+                       value="<%= ob.page.profile.name %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="handle"><%= polyglot.t('Handle') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="handle"
+                       type="text"
+                       id="handle"
+                       placeholder="@john"
+                       class="fieldItem"
+                       pattern="@[a-zA-Z0-9]+"
+                       value="<%= ob.page.profile.handle %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="short_description"><%= polyglot.t('Short description') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="short_description"
+                       type="text"
+                       id="short_description"
+                       placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.about %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('NSFW') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0 marginLeft6">
+                  <input type="radio" class="fieldItem" id="store_nsfw_yes" name="store-nsfw" value="true" /><label for="store_nsfw_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="store_nsfw_no" name="store-nsfw" value="false" checked /><label for="store_nsfw_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem" id="avatar-field">
+                  <label for="settingsAvatarInput"><%= polyglot.t('Avatar') %></label>
+                </div>
+              </div>
+              <div class="flexCol-9 custCol-border-secondary">
+                <div id="settings-image-cropper" class="positionWrapper">
+                  <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
+                    <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
+                  </div>
+                  <div class="cropit-image-preview js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
+                  <div>
+                    <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12" />
+                  </div>
+                  <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
+                  <label for="settingsAvatarInput" class="btn btn-txt rowTop20 marginLeft12 row20 color-secondary custCol-secondary"><%= polyglot.t('NewAvatar') %></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow borderBottom custCol-border-secondary marginTop20">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Social') %></h3>
+            </div>
+
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="website"><%= polyglot.t('Website') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="website"
+                       type="text"
+                       id="website"
+                       placeholder="http://mywebsite.com"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.website %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="email"><%= polyglot.t('Email') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="email"
+                       type="text"
+                       id="email"
+                       placeholder="me@email.com"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.email %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="settingsFacebookInput"><%= polyglot.t('Facebook') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="facebook"
+                       type="text"
+                       id="settingsFacebookInput"
+                       data-type="facebook"
+                       placeholder="<%= polyglot.t('Facebook') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.social_accounts.facebook.username %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="settingsTwitterInput"><%= polyglot.t('Twitter') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="twitter"
+                       type="text"
+                       id="settingsTwitterInput"
+                       data-type="twitter"
+                       placeholder="<%= polyglot.t('Twitter') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.social_accounts.twitter.username %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="settingsInstagramInput"><%= polyglot.t('Instagram') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="instagram"
+                       type="text"
+                       id="settingsInstagramInput"
+                       data-type="instagram"
+                       placeholder="<%= polyglot.t('Instagram') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.social_accounts.instagram.username %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="settingsSnapchatInput"><%= polyglot.t('Snapchat') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="snapchat"
+                       type="text"
+                       id="settingsSnapchatInput"
+                       data-type="snapchat"
+                       placeholder="<%= polyglot.t('Snapchat') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.social_accounts.snapchat.username %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="pgp_key"><%= polyglot.t('PGP Key') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="pgp_key"
+                       type="text"
+                       id="pgp_key"
+                       placeholder="<%= polyglot.t('PGP Key') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.pgp_key %>">
+              </div>
+            </div>
+
+            <div class="flexRow borderBottom custCol-border-secondary marginTop20">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('About') %></h3>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="about"><%= polyglot.t('About') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+               <textarea
+                    name="about"
+                    id="about"
+                    rows="10"
+                    class="fieldItem-textarea"
+                    placeholder="<%= polyglot.t('AboutPlaceholder') %>"><%= ob.user.about %></textarea>              
+              </div>
+            </div>
+
+            <div class="flexRow borderBottom custCol-border-secondary marginTop20">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Theme') %></h3>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label><%= polyglot.t('Standard themes') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="flexRow">
+                 <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
+                           id="settings-theme-1"
+                           data-primary-color="#461222"
+                           data-secondary-color="#641630"
+                           data-background-color="#291318"
+                           data-text-color="#ffffff"
+                           data-cover-photo="imgs/themes/1/header.png" />
+                    <label for="settings-theme-1" class="radioLabel">
+                      <div class="theme-background" style="background: #291318">
+                        <div class="theme-global-header" style="background: #641630"></div>
+                        <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-nav" style="background: #641630">
+                          <div class="theme-tab" style="background: #461222"></div>
+                        </div>
+                        <div class="theme-body" style="background: #461222"></div> 
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="theme-container clearfix custCol-border-secondary borderRight borderBottom">
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
+                           id="settings-theme-2"
+                           data-primary-color="#e8e8e8"
+                           data-secondary-color="#d1d1d1"
+                           data-background-color="#787878"
+                           data-text-color="#545454"
+                           data-cover-photo="imgs/themes/2/header.png" />
+                    <label for="settings-theme-2" class="radioLabel">
+                      <div class="theme-background" style="background: #787878">
+                        <div class="theme-global-header" style="background: #d1d1d1"></div>
+                        <div class="theme-header" style="background: url(imgs/themes/2/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-nav" style="background: #d1d1d1">
+                          <div class="theme-tab" style="background: #e8e8e8"></div>                      
+                        </div>
+                        <div class="theme-body" style="background: #e8e8e8"></div> 
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="theme-container clearfix custCol-border-secondary borderBottom">
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
+                           id="settings-theme-3"
+                           data-primary-color="#3F4641"
+                           data-secondary-color="#515752"
+                           data-background-color="#272B24"
+                           data-text-color="#ffffff"
+                           data-cover-photo="imgs/themes/3/header.png" />
+                    <label for="settings-theme-3" class="radioLabel">
+                      <div class="theme-background" style="background: #272B24">
+                        <div class="theme-global-header" style="background: #515752"></div>
+                        <div class="theme-header" style="background: url(imgs/themes/3/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-nav" style="background: #515752">
+                          <div class="theme-tab" style="background: #3F4641"></div>
+                        </div>
+                        <div class="theme-body" style="background: #3F4641"></div> 
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="theme-container clearfix custCol-border-secondary borderRight">
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20" id="settings-theme-4" data-primary-color="#344E31" data-secondary-color="#3B5F2B" data-background-color="#15180F" data-text-color="#ffffff" data-cover-photo="imgs/themes/4/header.png" />
+                    <label for="settings-theme-4" class="radioLabel">
+                      <div class="theme-background" style="background: #15180F">
+                        <div class="theme-global-header" style="background: #3B5F2B"></div>
+                        <div class="theme-header" style="background: url(imgs/themes/4/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-nav" style="background: #3B5F2B">
+                          <div class="theme-tab" style="background: #344E31"></div>
+                        </div>
+                        <div class="theme-body" style="background: #344E31"></div> 
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="theme-container clearfix custCol-border-secondary borderRight">
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20" id="settings-theme-5" data-primary-color="#128092" data-secondary-color="#007088" data-background-color="#02334E" data-text-color="#ffffff" data-cover-photo="imgs/themes/5/header.png" />
+                    <label for="settings-theme-5" class="radioLabel">
+                      <div class="theme-background" style="background: #02334E">
+                        <div class="theme-global-header" style="background: #007088"></div>
+                        <div class="theme-header" style="background: url(imgs/themes/5/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-nav" style="background: #007088">
+                          <div class="theme-tab" style="background: #128092"></div>
+                        </div>
+                        <div class="theme-body" style="background: #128092"></div> 
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="theme-container clearfix custCol-border-secondary">
+                    <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20" id="settings-theme-6"  data-primary-color="#121212" data-secondary-color="#0D0A0D" data-background-color="#181818" data-text-color="#ffffff" data-cover-photo="imgs/themes/6/header.png" />
+                    <label for="settings-theme-6" class="radioLabel">
+                      <div class="theme-background" style="background: #181818">
+                        <div class="theme-global-header" style="background: #0D0A0D"></div>
+                        <div class="theme-header" style="background: url(imgs/themes/6/header-thumbnail.png); background-size: cover"></div> 
+                        <div class="theme-nav" style="background: #0D0A0D">
+                          <div class="theme-tab" style="background: #121212"></div>
+                        </div>
+                        <div class="theme-body" style="background: #121212"></div> 
+                      </div>
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label><%= polyglot.t('CoverPhoto') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary js-settingsCoverPhoto">
+                <div id="settings-image-cropperBanner" class="banner-settings positionWrapper">
+                  <div class="statusBar navBar fadeOut positionAbsolute js-bannerLoading">
+                    <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
+                  </div>
+                  <div class="cropit-image-preview banner-settings positionTop js-settingsBannerPreview"></div>
+                  <div class="positionBottom hCentered row100">
+                    <input type="range" class="cropit-image-zoom-input" />
+                  </div>
+                  <input type="file" id="settingsBannerInput" class="cropit-image-input hide" />
+                  <label for="settingsBannerInput" class="btn btn-txt positionBottom hCentered row20 color-secondary custCol-secondary"><%= polyglot.t('NewCoverImage') %></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="primary_color"><%= polyglot.t('PrimaryColor') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="primary_color"
+                       type="text"
+                       id="primary_color"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.primary_color %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="secondary_color"><%= polyglot.t('SecondaryColor') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="secondary_color"
+                       type="text"
+                       id="secondary_color"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.secondary_color %>">
+              </div>
+            </div>
+
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="background_color"><%= polyglot.t('BackgroundColor') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="background_color"
+                       type="text"
+                       id="background_color"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.background_color %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="text_color"><%= polyglot.t('TextColor') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <input name="text_color"
+                       type="text"
+                       id="text_color"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.text_color %>">
+              </div>
+            </div>
+
+            <a class="btn btn-large js-savePage custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelPage custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+
+          </div>
+        </form>
+        <form class="width100" name="storeForm" id="storeForm">
+          <div class="flexCol-12 flex-border hide js-tabTarg js-store">
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Basic') %></h3>
+            </div>
+
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('Visibility') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0 marginLeft6">
+                  <input disabled type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
+                  <input disabled type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label> <!--for="moderators"-->
+                    <%= polyglot.t('CurrentModerators') %>
+                  </label>
+                  <div class="row20">
+                    <label class="textSize11px txt-unleaded"><%= polyglot.t('DeselectToRemoveModerator') %></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="hideTopAndBottomBorder js-settingsCurrentMods">
+                  <!--TODO: moderators input here-->
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label> <!--for="moderators"-->
+                    <%= polyglot.t('AddModerators') %>
+                  </label>
+                  <div class="row20">
+                    <label class="textSize11px txt-unleaded"><%= polyglot.t('SelectToAddModerator') %></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="hideTopAndBottomBorder js-settingsNewMods">
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="store-keywords">
+                    <%= polyglot.t('Keywords') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <!--TODO: keywords input here -->
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow borderBottom custCol-border-secondary marginTop20">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Content') %></h3>
+            </div>
+
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="terms_conditions">
+                    <%= polyglot.t('TermsAndConditions') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <textarea disabled
+                    name="terms_conditions"
+                    id="terms_conditions"
+                    rows="6"
+                    class="fieldItem-textarea"
+                    placeholder="<%= ob.user.terms_conditions %>"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="flexRow TODO">
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="refund_policy">
+                    <%= polyglot.t('ReturnPolicy') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <textarea disabled
+                    name="refund_policy"
+                    id="refund_policy"
+                    rows="6"
+                    class="fieldItem-textarea"
+                    placeholder="<%= ob.user.refund_policy%>"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <a class="btn btn-large js-saveStore custCol-secondary pull-right marginRight15 marginTop15 marginBottom5 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelStore custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+          </div>
+        </form>
+        <form class="width100" name="addressesForm" id="addressesForm">
+          <div class="flexCol-12 flex-border hide js-tabTarg js-addresses custCol-border-secondary">
+            <% if(ob.user.shipping_addresses && ob.user.shipping_addresses.length > 0) { %>
+            <div class="flexRow marginBottom20">
+              <div class="flexRow">
+                <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('CurrentAddress') %></h3>
+              </div>
+              <div class="flexRow marginLeft15 marginTop15">
+                <% _.each(ob.user.shipping_addresses, function(address, i){ %>
+                <div class="flexCol-4 padding5">
+                  <div class="padding15 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
+                    <div class="textOpacity75">
+                      <div><%- address.name %></div>
+                      <div><%- address.street %></div>
+                      <div><%- address.city %>, <%- address.state %> <%- address.postal_code %></div>
+                      <div><%- address.displayCountry %></div>
+                    </div>
+
+                    <div class="btn marginTop6 custCol-primary clickable">
+                      <input type="checkbox"
+                             class="hide js-settingsAddress"
+                             id="settingsAddress<%- i %>"
+                             value="<%- i %>">
+                      <label for="settingsAddress<%- i %>">
+                        <span class="fontSize12 clickable togLabelOff js-settingsAddressDelete"><%= polyglot.t('Delete') %></span>
+                        <span class="fontSize12 clickable togLabelOn js-settingsAddressUnDelete"><%= polyglot.t('DontDelete') %></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <% }); %>
+              </div>
+            </div>
+            <% } %>
+
+            <div class="flexRow">
+
+              <div class="flexRow custCol-border-secondary">
+                <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('NewAddress') %></h3>
+              </div>
+
+              <div class="flexCol-2 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToName">
                     <%= polyglot.t('ShipToName') %>
@@ -261,7 +808,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-10 custCol-border-secondary">
                 <input name="ship_to_name"
                        id="settingsShipToName"
                        type="text"
@@ -273,7 +820,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-2 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToStreet">
                     <%= polyglot.t('ShipToStreet') %>
@@ -281,7 +828,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-10 custCol-border-secondary">
                 <input name="ship_to_street"
                        id="settingsShipToStreet"
                        type="text"
@@ -293,7 +840,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-2 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToCity">
                     <%= polyglot.t('ShipToCity') %>
@@ -301,7 +848,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-10 custCol-border-secondary">
                 <input name="ship_to_city"
                        id="settingsShipToCity"
                        type="text"
@@ -313,7 +860,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-2 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToState">
                     <%= polyglot.t('ShipToState') %>
@@ -321,7 +868,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-10 custCol-border-secondary">
                 <input name="ship_to_state"
                        id="settingsShipToState"
                        type="text"
@@ -333,7 +880,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-2 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToPostalCode">
                     <%= polyglot.t('ShipToPostalCode') %>
@@ -341,7 +888,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-10 custCol-border-secondary">
                 <input name="ship_to_postal_code"
                        id="settingsShipToPostalCode"
                        type="text"
@@ -351,9 +898,9 @@
 
             </div>
 
-            <div class="flexRow">
+            <div class="flexRow overflowVisible">
 
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-2 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToCountry">
                     <%= polyglot.t('ShipToCountry') %>
@@ -361,7 +908,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-10 custCol-border-secondary">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper chosen-relative noIcon">
                     <select
@@ -372,54 +919,17 @@
                   </div>
                 </div>
               </div>
-
-
             </div>
 
+            <a class="btn btn-large js-saveAddress custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelAddress custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
           </div>
-          <div class="flexCol-12 flex-border hide js-tabTarg js-store">
-            <div class="flexRow">
+        </form>
+        <form class="width100" name="blockedForm" id="blockedForm">
 
-              <div class="flexCol-3  borderRight">
-                <div class="fieldItem">
-                  <label for="terms_conditions">
-                    <%= polyglot.t('TermsAndConditions') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <div class="fieldItem padding0">
-                                            <textarea
-                                              name="terms_conditions"
-                                              id="terms_conditions"
-                                              rows="6"
-                                              class="fieldItem-textarea"
-                                              value=""><%= ob.user.terms_conditions %></textarea>
-                </div>
-              </div>
-
-            </div>
-            <div class="flexRow">
-
-              <div class="flexCol-3  borderRight">
-                <div class="fieldItem">
-                  <label for="refund_policy">
-                    <%= polyglot.t('ReturnPolicy') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <div class="fieldItem padding0">
-                  <textarea name="refund_policy" id="refund_policy" rows="6" class="fieldItem-textarea" value=""><%= ob.user.refund_policy%></textarea>
-                </div>
-              </div>
-
-            </div>
-          </div>
           <div class="flexCol-12 flex-border hide js-tabTarg js-blocked">
             <div class="flexRow">
+              <% if(ob.user.blocked.length > 0) { %>
               <div class="flexRow custCol-border-secondary">
                 <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
                   <input type="text"
@@ -429,63 +939,20 @@
                          placeholder="<%= polyglot.t('SearchForUsersPlaceholder') %>"  />
                 </div>
               </div>
+              <% } %>
               <div class="flexRow js-list1"></div>
             </div>
           </div>
+        </form>
+        <form class="width100" name="advancedForm" id="advancedForm">
           <div class="flexCol-12 flex-border hide js-tabTarg js-advanced">
-            <div class="flexRow">
-
-              <div class="flexCol-3  borderRight">
-                <div class="fieldItem">
-                  <label for="notifications">
-                    <%= polyglot.t('EnableNotifications') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <div class="padding0 fieldItem">
-                  <input type="checkbox"
-                         name="notifications"
-                         id="notifications"
-                         class="fieldItem"
-                  <% if(ob.user.notifications) { %>
-                  checked="checked"
-                  <% } %>
-                  value="true">
-                  <label for="notifications"></label>
-                </div>
-              </div>
-
+            <div class="flexRow borderBottom custCol-border-secondary">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Advanced') %></h3>
             </div>
+
             <div class="flexRow">
 
-              <div class="flexCol-3  borderRight">
-                <div class="fieldItem">
-                  <label for="ssl">
-                    <%= polyglot.t('EnableSSL') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9">
-                <div class="fieldItem padding0">
-                  <input type="checkbox"
-                         name="ssl"
-                         id="ssl"
-                         class="fieldItem"
-                  <% if(ob.user.ssl) { %>
-                  checked="checked"
-                  <% } %>
-                  value="true">
-                  <label for="ssl"></label>
-                </div>
-              </div>
-
-            </div>
-            <div class="flexRow">
-
-              <div class="flexCol-3  borderRight">
+              <div class="flexCol-3  borderRight  custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="libbitcoin_server">
                     <%= polyglot.t('Libbitcoin server address') %>
@@ -493,7 +960,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9">
+              <div class="flexCol-9 custCol-border-secondary">
                 <input name="libbitcoin_server"
                        id="libbitcoin_server"
                        type="text"
@@ -502,12 +969,46 @@
                        pattern="[.a-z0-9,A-Z]+|[.a-z0-9,A-Z]+:[0-9]+"
                        value="<%= ob.user.libbitcoin_server %>">
               </div>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight custCol-border-secondary">
+                <div class="fieldItem">
+                  <label for="ssl">
+                    <%= polyglot.t('EnableSSL') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border-secondary">
+                <div class="fieldItem padding0">
+                  <input type="radio" class="fieldItem" id="sslYes" name="ssl" value="true"
+                    <% if(ob.user.ssl) { %>
+                    checked
+                    <% } %>
+                  />
+                  <label for="sslYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="sslNo" name="ssl" value="false"
+                    <% if(!ob.user.ssl) { %>
+                    checked
+                    <% } %>
+                  />
+                  <label for="sslNo" class="radioLabel"><%= polyglot.t('No') %></label>
+
+                </div>
+              </div>
 
             </div>
+
+            <a class="btn btn-large js-saveAdvanced custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
+            <a class="btn btn-large js-cancelAdvanced custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
           </div>
         </form>
+
       </div>
 
     </div>
   </div>
+  <div class="navBar custCol-secondary" style="padding: 4px 0"></div>
 </div>

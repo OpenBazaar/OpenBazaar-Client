@@ -9,14 +9,22 @@ var path = require('path');
 
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var request = require('request');
+
+var launched_from_installer = false;
 
 // Check if we need to kick off the python server-daemon (Desktop app)
 if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
+  launched_from_installer = true;
+
   console.log('Starting OpenBazaar Server');
   var platform = process.platform;
 
   if(platform == "darwin" || platform == "linux") {
-    var subpy = require('child_process').spawn('/usr/local/bin/python', [__dirname + '/OpenBazaar-Server/bootstrap.py', 'testnet'], {detach: true});
+    var subpy = require('child_process').spawn('/usr/local/bin/python', ['bootstrap.py', 'testnet', '--loglevel', 'debug'], {
+      detach: true,
+      cwd: __dirname + '/OpenBazaar-Server'
+    });
     var stdout = '';
     var stderr = '';
 
@@ -27,6 +35,9 @@ if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
     subpy.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf));
       stderr += buf;
+    });
+    subpy.on('error', function(err) {
+      console.log('Python error %s', String(err));
     });
     subpy.on('close', function (code) {
       console.log('exited with ' + code);
@@ -53,6 +64,22 @@ app.on('window-all-closed', function() {
   }
 });
 
+// You can use 'before-quit' instead of (or with) the close event
+app.on('before-quit', function (e) {
+    // Handle menu-item or keyboard shortcut quit here
+    console.log('Closing Application');
+    if(launched_from_installer) {
+      console.log('Shutting down server daemon');
+      request('http://localhost:18469/api/v1/shutdown', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          console.log('Shutting down server');
+        } else {
+          console.log('Server does not seem to be running.');
+        }
+      });
+    }
+});
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
@@ -74,7 +101,7 @@ app.on('ready', function() {
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
   // Open the devtools.
-  mainWindow.openDevTools();
+  mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

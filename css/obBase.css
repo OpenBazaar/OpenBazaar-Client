@@ -25,28 +25,41 @@
 .noScrollBar::-webkit-scrollbar {
   width: 0 !important;
 }
+
+.popMenu-notificationsContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #3E3E3E;
+}
+
 /*========== base styles ==========*/
-
-
 body {
   background-color: rgb(6,55,83);
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, "Open Sans";
+  font-family: "Helvetica Neue", Helvetica, Arial;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 a {
   color: inherit;
   text-decoration: none;
   opacity: .85;
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);  
+  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
   cursor: pointer;
 }
 
@@ -163,6 +176,11 @@ form {
   z-index: 3;
 }
 
+.pageNavContainer {
+  width: 100%;
+  z-index: 3;
+}
+
 #pageNav .btn {
   -webkit-app-region: no-drag;
 }
@@ -205,8 +223,8 @@ form {
 }
 
 .mainContainer {
+  background-color: #063753;
   position: relative;
-  overflow: hidden;
   min-height: 800px;
   margin-bottom: 100px;
   border-top-left-radius: 3px;
@@ -278,6 +296,11 @@ form {
   position: relative;
 }
 
+.ctrlGroup .btn {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+
+}
+
 .ctrlGroup:first-child {
   padding-left: 0;
 }
@@ -328,6 +351,7 @@ form {
   width: 100%;
 }
 
+.flexRow .flexCol-11,
 .flexRow .flexCol-11 { flex-basis: 91.66666666666666%; }
 
 .flexRow .flexCol-10 { flex-basis: 83.33333333333334%; }
@@ -363,7 +387,7 @@ form {
   width: 317px;
 }
 
-.userPage-subViews .gridItem,
+#userPage-subViews .gridItem,
 .homeView .gridItem {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
@@ -371,12 +395,12 @@ form {
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.userPage-subViews .gridItem:hover,
+#userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
   opacity: 1;
 }
 
-.userPage-subViews .gridItem:nth-child(3n),
+#userPage-subViews .gridItem:nth-child(3n),
 .homeView .gridItem:nth-child(3n) {
   border-right: 0;
 }
@@ -452,6 +476,7 @@ form {
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
    -webkit-user-select: none;
 }
 
@@ -530,6 +555,10 @@ form {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
+.thumbnail-largeTrimmed {
+  height: 70px;
+}
+
 .thumbnail-large-slim {
   height: 58px;
   width: 58px;
@@ -566,9 +595,17 @@ form {
   margin-bottom: 60px;
 }
 
+.row100 {
+  margin-bottom: 100px;
+}
+
 .rowTop241 {
   /* special class for the itemEdit view */
   margin-top: 241px;
+}
+
+.row320 {
+  margin-bottom: 320px;
 }
 
 .pad10 {
@@ -604,6 +641,10 @@ form {
 
 .pad20Right {
   padding-right: 20px;
+}
+
+.pad20Left {
+  padding-left: 20px;
 }
 
 .popMenu {
@@ -694,6 +735,7 @@ form {
   border-radius: 2px;
   cursor: pointer;
   margin: 16px auto 5px auto;
+  max-width: 160px;
   height: 87px;
   width: 80%;
 }
@@ -788,6 +830,10 @@ h5 {
   opacity: 0.50;
 }
 
+.div-fadeExtra {
+  opacity: 0.3;
+}
+
 .txt-lowleading {
   line-height: 1.2;
 }
@@ -812,10 +858,6 @@ h5 {
 
 /*========== skin classes ==========*/
 
-.userPage {
-  /*background-color: #2a2a2a;*/
-}
-
 .userPageImageUpload {
   background: transparent !important;
   opacity: 1;
@@ -832,7 +874,7 @@ h5 {
 }
 
 .navBar.statusBar,
-.userPage .navBar.statusBar {
+#userPage .navBar.statusBar {
   background-color: rgba(0,0,0,0.6);
   transition: opacity 1s;
   overflow: hidden;
@@ -848,9 +890,10 @@ h5 {
   margin-top: 50px;
 }
 
-.welcomeBar {
-  background-color: rgb(6,55,83);
-  height: 58px;
+.welcomeBar,
+.settingsBar {
+  background-color: transparent;
+  height: 50px;
   line-height: 50px;
   position: relative;
   z-index: 2;
@@ -868,15 +911,36 @@ h5 {
   z-index: 2;
 }
 
-.welcomeBar div {
+.welcomeBar .welcomeBar-inner,
+.settingsBar .title-section {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  top: 8px;
   height: 50px;
   padding-left: 102px;
   position: relative;
   z-index: 1;
+}
+
+.settingsBar .title-section {
+  padding-left: 102px;
+}
+
+.settingsBar .thumbnail {
+  background-size: cover;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  bottom: 0;
+  content: " ";
+  height: 58px;
+  left: 30px;
+  position: absolute;
+  width: 58px;
+  z-index: 2;
+}
+
+.user-customize-cover-photo {
+  width: 950px;
 }
 
 .mainContainer {
@@ -887,7 +951,7 @@ h5 {
   width: 950px;
 }
 
-.userPage .mainContainer {
+#userPage .mainContainer {
   background-color: #4a4848;
 }
 
@@ -935,11 +999,25 @@ h5 {
   width: 135px;
 }
 
+.modal-hero.modal-heroFullHeight {
+  height: 573px;
+  z-index: 1;
+}
+
+.background1 {
+  background: linear-gradient(to bottom, rgba(72,78,93,1), rgba(23,24,31,1) 75%, rgba(0,0,0,1) 100%);
+}
+
 .flex-border > .flexRow {
   /* hide the extra border on the right and bottom sides */
   margin: 0 -1px -1px 0;
   width: auto;
   overflow: hidden;
+}
+
+.hideTopAndBottomBorder {
+  /* use to hide the first and last border of the flexRows inside this element */
+  margin: -1px 0 -2px 0;
 }
 
 .flex-border > .flexRow > [class |= "flexCol"] {
@@ -966,7 +1044,9 @@ h5 {
   border-bottom: none;
 }
 
-.flexRow-noBorderBottom {
+.flexRow-noBorderBottom,
+.flex-border > .flexRow.flexRow-noBorderBottom,
+.flex-border > .flexRow > .flexRow.flexRow-noBorderBottom {
   /* when the row needs to not have a bottom and no other way works */
   border-bottom: none;
 }
@@ -1039,14 +1119,14 @@ h5 {
 }
 
 .searchWrapper .txtField:focus {
-  outline: 2px solid rgba(255,255,255,0.35);
+  outline: 1px solid rgba(255,255,255,0.35);
   -webkit-background-clip: border;
 }
 
 .mainSearchWrapper:before {
   color: #000;
-  top: 6px;
-  left: 8px;
+  top: 5px;
+  left: 6px;
 }
 
 .mainSearchWrapper .txtField {
@@ -1058,7 +1138,10 @@ h5 {
 }
 
 .mainSearchWrapper .txtField:focus {
-  box-shadow: 0 0 0 2px #086A9E;
+  border: solid 1px #086A9E;
+  outline: none;
+  text-indent: 25px;
+  box-shadow: none;
 }
 
 .searchWrapperWithPill .txtField {
@@ -1099,6 +1182,25 @@ input[type="text"].txtField-bar {
   height: 32px;
   min-width: 32px;
   line-height: 32px;
+  float: left;
+  background-color: #086A9E; /* default color */
+  padding:0;
+  border-radius: 3px;
+  opacity: .80;
+  box-sizing: border-box;
+}
+
+.btn i[class *= "ion-"]:before {
+  position: relative;
+  top: 2px;
+  margin-right: 6px;
+}
+
+.btn-large {
+  height: 42px;
+  font-size: 15px;
+  min-width: 160px;
+  line-height: 42px;
   float: left;
   background-color: #086A9E; /* default color */
   padding:0;
@@ -1155,7 +1257,7 @@ input[type="text"].txtField-bar {
   background: none;
 }
 
-.userPage .btn.inactive {
+#userPage .btn.inactive {
   opacity: 0.4;
 }
 
@@ -1164,10 +1266,10 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-c1 {
-   background-color: rgb(50,126,184);
- }
+  background-color: rgb(50,126,184);
+}
 
-.userPage .btn.btn-c1,
+#userPage .btn.btn-c1,
 .btn.btn-dark {
   background-color: rgb(87,87,87);
 }
@@ -1176,7 +1278,7 @@ input[type="text"].txtField-bar {
   background-color: rgba(50,126,184,0.8);
 }
 
-.userPage .btn.btn-c1.fade {
+#userPage .btn.btn-c1.fade {
   background-color: rgba(87,87,87,0.8);
 }
 
@@ -1206,6 +1308,7 @@ input[type="text"].txtField-bar {
   border-radius: 0;
   min-width: 115px;
   text-align: center;
+  box-shadow: none;
   background-color: #327EB8;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -1519,10 +1622,9 @@ div.chatSearchOut .chatSearchIcon {
   border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
-  word-break: break-word;
   display: inline-block;
   font-weight: 500;
-  letter-spacing: .2;
+  letter-spacing: 0.2em;
 }
 
 #inputConversationMessage {
@@ -1550,7 +1652,7 @@ div.chatSearchOut .chatSearchIcon {
   left: calc(50% - 115.5px);
 }
 
-.userPage .btn.btn-bar {
+#userPage .btn.btn-bar {
   background-color: #575757;
   border-right: 1px solid #4a4848;
 }
@@ -1564,11 +1666,12 @@ div.chatSearchOut .chatSearchIcon {
   opacity: 1;
 }
 
-.userPage .btn.btn-bar.active {
+#userPage .btn.btn-bar.active {
   background-color: #4a4848;
 }
 
 .btn.btn-bar.btn-tab {
+  background: #327EB8;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
   border-bottom-right-radius: 0;
@@ -1580,6 +1683,11 @@ div.chatSearchOut .chatSearchIcon {
   line-height: 46px;
   padding: 0 20px;
   margin-top: 4px;
+}
+
+.btn.btn-bar.active {
+  background-color: #106DA3;
+  opacity: 1;
 }
 
 .btn.btn-bar.btn-tab:first-child {
@@ -1610,7 +1718,7 @@ div.chatSearchOut .chatSearchIcon {
   float: left;
 }
 
-.userPage .btn-togWrapper {
+#userPage .btn-togWrapper {
   border: 1px solid rgb(74,72,72);
 }
 
@@ -1622,7 +1730,7 @@ div.chatSearchOut .chatSearchIcon {
   border: 1px solid rgb(50,126,184);
 }
 
-.userPage .btn-togWrapper.btn-togWrapper-c1 {
+#userPage .btn-togWrapper.btn-togWrapper-c1 {
   border: 1px solid rgb(87,87,87);
 }
 
@@ -1705,16 +1813,17 @@ div.chatSearchOut .chatSearchIcon {
   font-size: 12px;
   height: 28px;
   line-height: 28px;
+  text-transform: capitalize;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .btn-latched:hover {
-  opacity: 1 !important; 
+  opacity: 1 !important;
   /* added important here because I couldn't get it to work without it */
 }
 
 #ov1 .btn.confirmable,
-#ov1 .userPage .btn.confirmable {
+#ov1 #userPage .btn.confirmable {
   transition: 2s background-color;
 }
 
@@ -1759,7 +1868,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 #ov1 .confirm.btn,
-#ov1 .userPage .confirm.btn {
+#ov1 #userPage .confirm.btn {
   background-color: rgba(200,25,25,1);
 }
 
@@ -1857,7 +1966,6 @@ input[type="url"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
   border: 2px solid #277FAF;
   transition: border 0.3s;
-  outline: none;
 }
 
 .txtAreaField:focus {
@@ -1886,6 +1994,49 @@ input[type="url"].fieldItem.fieldItem-withButton,
 input[type="number"].fieldItem.fieldItem-withButton {
   position: absolute;
   padding-left: 50px;
+}
+
+input[type="number"].fieldItem.spinButtons {
+  background: none;
+  box-sizing: border-box;
+  border: none;
+  width: 100%;;
+}
+
+input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button {
+  cursor:pointer;
+  display:block;
+  width:14px;
+  position:relative;
+  opacity: 1;
+}
+
+input[type=number].spinButtons::-webkit-inner-spin-button:before,
+input[type=number].spinButtons::-webkit-inner-spin-button:after {
+  position:absolute;
+  display: block;
+  right: 0;
+  font-family: "Ionicons";
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 30px;
+  width:14px;
+}
+
+input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:before {
+  content: "\f10d";
+  top:0px;
+}
+
+input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:after {
+  content: "\f104";
+  bottom:0px;
+}
+
+input[type="number"].fieldItem.spinButtons:focus {
+  border: none;
+  outline: none;
 }
 
 .fieldItem .btn {
@@ -1945,10 +2096,13 @@ input[type="number"].fieldItem.fieldItem-withButton {
   box-shadow: none;
   line-height: 50px;
   color: #fff;
+  opacity: 1;
 }
 
-.fieldItem .fieldItem-selectWrapper .chosen-container-single div b {
+.fieldItem .fieldItem-selectWrapper .chosen-container-single div b,
+.fieldItem .fieldItem-selectWrapper .chosen-container-single span b {
   background: none;
+  height: 0;
 }
 
 .fieldItem .fieldItem-selectWrapper .chosen-container-single div b:after {
@@ -1986,6 +2140,16 @@ input[type="number"].fieldItem.fieldItem-withButton {
   background: rgb(87,87,87);
 }
 
+.chosen-container-single .chosen-single span {
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.chosen-container .chosen-results {
+  padding: 0;
+}
+
 .fieldItem-textarea {
   background: none;
   border: 2px solid transparent;
@@ -2015,7 +2179,7 @@ select {
 }
 
 select:focus {
-  border: 2px solid #fff !important;
+  border: 2px solid #fff;
 }
 
 input[type="radio"].fieldItem {
@@ -2114,7 +2278,46 @@ input[type="checkbox"].fieldItem + label span {
   line-height: normal;
 }
 
-.userPage .fieldItem-selectWrapper select option {
+input[type="checkbox"] + label .togLabelOn,
+input[type="checkbox"].fieldItem + label .togLabelOn,
+input[type="checkbox"] + label .togLabelOff,
+input[type="checkbox"].fieldItem + label .togLabelOff {
+  padding: 0 16px;
+}
+
+input[type="checkbox"] + label .togLabelOn,
+input[type="checkbox"].fieldItem + label .togLabelOn {
+  display: none;
+}
+
+input[type="checkbox"] + label .togLabelOff,
+input[type="checkbox"].fieldItem + label .togLabelOff {
+  display: inline-block
+}
+
+input[type="checkbox"]:checked + label .togLabelOn,
+input[type="checkbox"].fieldItem:checked + label .togLabelOn {
+  display: inline-block;
+}
+
+input[type="checkbox"]:checked + label .togLabelOff,
+input[type="checkbox"].fieldItem:checked + label .togLabelOff {
+  display: none;
+}
+
+.btn input[type="checkbox"].fieldItem + label {
+  line-height: inherit;
+  display: inline;
+  padding: 0 0 0 26px;
+  left: -7px;
+}
+
+.btn input[type="checkbox"].fieldItem + label:before {
+  top: 0;
+  left: 0;
+}
+
+#userPage .fieldItem-selectWrapper select option {
   background-color: #4a4848;
 }
 
@@ -2193,7 +2396,7 @@ input[type="checkbox"].fieldItem + label span {
 }
 
 .popMenu-notifications {
-  top: 50px;
+  top: -238px;
   right: 45px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -2215,9 +2418,15 @@ input[type="checkbox"].fieldItem + label span {
   padding: 0 15px;
 }
 
-.popMenu-navBar {
+.popMenu-notifications-opened {
+  animation: menuSlide .12s normal linear;
   top: 50px;
-  right: 6px;
+}
+
+.popMenu-navBar {
+  top: -238px;
+  right: 10px;
+>>>>>>> refs/remotes/OpenBazaar/master
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
   border-bottom-left-radius: 4px;
@@ -2226,6 +2435,17 @@ input[type="checkbox"].fieldItem + label span {
   font-size: 13px;
   padding: 10px 0;
   width: 230px;
+  z-index: -1;
+}
+
+.popMenu-navBar-opened {
+  animation: menuSlide .12s normal linear;
+  top: 50px;
+}
+
+@-webkit-keyframes menuSlide {
+    0%   {top: -238px;}
+    100% {top: 50px;}
 }
 
 .popMenu-navBar a {
@@ -2259,6 +2479,11 @@ input[type="checkbox"].fieldItem + label span {
   width: 950px;
   padding: 0;
   z-index: 0;
+}
+
+.banner-settings {
+  height: 300px;
+  width: 712px;
 }
 
 .user-page-content {
@@ -2304,6 +2529,18 @@ input[type="checkbox"].fieldItem + label span {
   transform: translate(-50%, -50%);
 }
 
+.color-primary {
+  background: #106DA3;
+}
+
+.color-secondary {
+  background: #327EB8;
+}
+
+.homeView {
+  margin-top: 8px;
+}
+
 .home-page-navigation {
   width: 950px;
 }
@@ -2331,7 +2568,7 @@ input[type="checkbox"].fieldItem + label span {
 .user-page-navigation {
   width: 950px;
   position: relative;
-  z-index: 3;
+  z-index: 1;
 }
 
 .user-page-navigation-slim {
@@ -2339,10 +2576,6 @@ input[type="checkbox"].fieldItem + label span {
   top: 102px;
   z-index: 5;
   box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
-}
-
-.user-page-navigation-filler {
-  height: 46px;
 }
 
 .user-page-header {
@@ -2353,20 +2586,36 @@ input[type="checkbox"].fieldItem + label span {
 
 .user-page-header-slim {
   position: fixed;
-  top: 50px;
-  border-top: solid 8px black;
-/*  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;*/
+  top: 64px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   height: 54px;
   width: 950px;
   background: #281B2E;
+  box-shadow: 0px 0 0 rgba(0, 0, 0, 0.35);
   z-index: 4;
   padding: 0;
 }
 
+.user-page-header-slim-bg-cover {
+  position: fixed;
+  top: 50px;
+  height: 20px;
+  z-index: 4;
+  width: 950px;
+}
+
 .userPage-subViews {
   position: relative;
-  z-index: 5;
+  z-index: 1;
+}
+
+.icon-huge {
+  font-size: 160px;
+}
+
+.icon-huge {
+  font-size: 160px;
 }
 
 .icon-large {
@@ -2375,6 +2624,23 @@ input[type="checkbox"].fieldItem + label span {
 
 .icon-small {
   font-size: 11px;
+}
+
+.icon-circle-background1 {
+  border-radius: 50%;
+  background-color: #fff;
+  text-align: center;
+  display: inline-block;
+}
+
+.icon-huge.icon-circle-background1 {
+  width: 160px;
+  height: 160px;
+}
+
+.icon-huge.icon-circle-background1:before {
+  line-height:160px;
+  font-size:0.8em;
 }
 
 .photos-empty {
@@ -2532,8 +2798,8 @@ input[type="checkbox"].fieldItem + label span {
 
 .default-avatar {
   border-radius: 3px;
-  color: #086a9e; 
-  font-size: 73px; 
+  color: #086a9e;
+  font-size: 73px;
   height: 76px;
   text-align: center;
   width: 80px;
@@ -2593,7 +2859,7 @@ input[type="checkbox"].fieldItem + label span {
   margin-right: 0;
 }
 
-.userPage .headerCropper .bar.navBar {
+#userPage .headerCropper .bar.navBar {
   background: none;
   height: 48px;
 }
@@ -2626,16 +2892,18 @@ input[type="checkbox"].fieldItem + label span {
 
 .selectPill select {
   background-color: #327EB8;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
   border-radius: 3px;
   color: #fff;
-  cursor: pointer;  
+  cursor: pointer;
   font-size: 12px;
   margin-left: 10px;
   letter-spacing: .4px;
   padding: 6px;
   width: 148px;
   z-index: 2;
-
+  -webkit-user-select: none;
+  outline: none;
 } 
 
 .selectPill:before {
@@ -2661,7 +2929,7 @@ input[type="checkbox"].fieldItem + label span {
   z-index: 10;
 }
 
-#ov1 #obBody .colpick input {
+#ov1 .colpick input {
   color: #616161;
 }
 
@@ -2693,9 +2961,18 @@ input[type="checkbox"].fieldItem + label span {
   border-color: #616161;
 }
 
-#obBody::-webkit-scrollbar {
+#ov1::-webkit-scrollbar {
   display: none;
   box-sizing: border-box;
+}
+
+.qrCode {
+  background-color: #fff;
+  padding: 15px;
+}
+
+.buyView .chosen-container .chosen-results {
+  max-height: 180px;
 }
 
 #obContainer {
@@ -2703,6 +2980,10 @@ input[type="checkbox"].fieldItem + label span {
   margin-top: 50px;
   overflow-y: scroll;
   padding-top: 20px;
+}
+
+.chatConversationMessageLine .chatConversationMessageBody a {
+  text-decoration: underline;
 }
 
 /*========== utility classes ==========*/
@@ -2773,9 +3054,14 @@ input[type="checkbox"].fieldItem + label span {
   top: -4px;
 }
 
-#ov1 .align-bottom {
+#ov1 .positionBottom {
   position: absolute;
   bottom: 0;
+}
+
+#ov1 .positionTop {
+  position: absolute;
+  top: 0;
 }
 
 #ov1 .hide {
@@ -2839,6 +3125,10 @@ input[type="checkbox"].fieldItem + label span {
   border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .borderBottom2 {
+  border-bottom: solid 2px rgba(255,255,255,0.08);
+}
+
 #ov1  .borderTop {
   border-top: solid 1px rgba(255,255,255,0.08);
 }
@@ -2862,6 +3152,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1 .borderRadius2 {
   border-radius: 2px;
+}
+
+#ov1 .borderRadius3 {
+  border-radius: 3px;
 }
 
 #ov1 .borderRadiusBottom0 {
@@ -3011,8 +3305,16 @@ input[type="checkbox"].fieldItem + label span {
   font-size: 34px;
 }
 
+#ov1 .txt-bright {
+  color: #fff;
+}
+
 #ov1 .txt-darkest {
   color: #000;
+}
+
+#ov1 .txt-col3 {
+  color: #428a38;
 }
 
 #ov1  .alignCenter {
@@ -3049,6 +3351,10 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .marginRight10 {
   margin-right: 10px;
+}
+
+#ov1  .marginRight15 {
+  margin-right: 15px;
 }
 
 #ov1  .marginLeft1 {
@@ -3175,6 +3481,10 @@ input[type="checkbox"].fieldItem + label span {
   height: 70px;
 }
 
+#ov1  .height250 {
+  height: 250px;
+}
+
 #ov1  .minHeight650 {
   min-height: 650px;
 }
@@ -3203,11 +3513,15 @@ input[type="checkbox"].fieldItem + label span {
   bottom: 0;
 }
 
-.positionAbsolute {
+#ov1 .positionAbsolute {
   position: absolute;
 }
 
-.positionRelative {
+#ov1 .positionFixed {
+  position: fixed;
+}
+
+#ov1 .positionRelative {
   position: relative;
 }
 
@@ -3263,8 +3577,20 @@ input[type="checkbox"].fieldItem + label span {
   padding-left: 20px;
 }
 
+#ov1  .paddingTop4 {
+  padding-top: 4px;
+}
+
+#ov1  .paddingTop15 {
+  padding-top: 15px;
+}
+
 #ov1  .paddingTop20 {
   padding-top: 20px;
+}
+
+#ov1  .positionTop66 {
+  top: 66px;
 }
 
 #ov1  .paddingBottom20 {
@@ -3292,8 +3618,12 @@ input[type="checkbox"].fieldItem + label span {
   width: 75px;
 }
 
-#ov1 .width87px {
-  width: 87px;
+#ov1 .width65px {
+  width: 65px;
+}
+
+#ov1 .width105 {
+  width: 105px;
 }
 
 #ov1 .width110 {
@@ -3308,11 +3638,15 @@ input[type="checkbox"].fieldItem + label span {
   width: 600px;
 }
 
+#ov1 .width950 {
+  width: 950px;
+}
+
 #ov1  .cursorDefault {
   cursor: default;
 }
 
-#ob1 .backgroundTransparent {
+#ov1 .backgroundTransparent {
   background: transparent;
 }
 
@@ -3322,6 +3656,14 @@ input[type="checkbox"].fieldItem + label span {
 
 .fontWeight400 {
   font-weight: 400;
+}
+
+#ov1  .borderBottom0 {
+  border-bottom: 0;
+}
+
+#ov1 .fontWeight500 {
+  font-weight: 500;
 }
 
 #ov1  .borderBottomLeftRaidus3 {
@@ -3334,6 +3676,11 @@ input[type="checkbox"].fieldItem + label span {
 
 #ov1  .borderBottomRightRaidus3 {
   border-bottom-right-radius: 3px !important;
+}
+
+#ov1 .disabled {
+  pointer-events: none;
+  opacity: 0.2;
 }
 
 #ov1 .overflowVisible {
@@ -3357,6 +3704,12 @@ input[type="checkbox"].fieldItem + label span {
   color: white;
   background-opacity: .75;
   background-color: #FFA41C;
+}
 
-  /* don't put a border on this or it will be visible when it has no content */
+/* terrible hack, TODO: remove before production */
+
+#ov1 .TODO.TODO.TODO.TODO.TODO {
+  background: #535353;
+  opacity: 0.2;
+  pointer-events: none;
 }

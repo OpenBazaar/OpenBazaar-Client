@@ -6,7 +6,7 @@ var loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
 
-  className: "flexRow borderBottom custCol-border",
+  className: "flexRow borderBottom custCol-border js-userShortView",
 
   events: {
     'click .js-userShort': 'userClick'
@@ -43,8 +43,6 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    delete this.$el;
-    delete this.el;
   }
 
 });

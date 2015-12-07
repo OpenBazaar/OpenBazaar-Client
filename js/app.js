@@ -27,6 +27,7 @@ var Polyglot = require('node-polyglot'),
     languagesModel = require('./models/languagesMd'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
+    setTheme = require('./utils/setTheme.js'),
     pageNavView = require('./views/pageNavVw'),
     chatAppView = require('./views/chatAppVw'),
     newPageNavView,
@@ -65,36 +66,6 @@ window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.la
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
 
-var reloadProfile = function(){
-  "use strict";
-  $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
-  loadProfileCountdown=3;
-
-  if(loadProfileCount < 10){
-    loadProfileCountdownInterval = setInterval(function(){
-      if(loadProfileCountdown > 0){
-        $('.js-indexLoadingMsg4').text(loadProfileCountdown);
-        loadProfileCountdown--;
-      } else {
-        $('.js-indexLoadingMsg4').text("");
-        clearInterval(loadProfileCountdownInterval);
-        loadProfileCount++;
-        loadProfile();
-      }
-    }, 2000);
-  } else {
-    alert("Your server may not be working correctly. Loading using default settings.");
-    $('.js-loadingMessageModal').addClass('hide');
-    user.set('serverUrl', serverUrlLocal);
-    newSocketView = new socketView({model: user});
-    newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-    newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-    newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
-    Backbone.history.start();
-    window.clearTimeout(loadProfileTimeout);
-  }
-};
-
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
   getBTPrice(cCode, function (btAve, currencyList) {
@@ -109,9 +80,40 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
     window.currentBitcoin = btAve;
     typeof callback === 'function' && callback();
   });
-}
+};
 
 var loadProfile = function() {
+
+  var reloadProfile = function(){
+    "use strict";
+    $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
+    loadProfileCountdown=3;
+
+    if(loadProfileCount < 10){
+      loadProfileCountdownInterval = setInterval(function(){
+        if(loadProfileCountdown > 0){
+          $('.js-indexLoadingMsg4').text(loadProfileCountdown);
+          loadProfileCountdown--;
+        } else {
+          $('.js-indexLoadingMsg4').text("");
+          clearInterval(loadProfileCountdownInterval);
+          loadProfileCount++;
+          loadProfile();
+        }
+      }, 2000);
+    } else {
+      alert("Your server may not be working correctly. Loading using default settings.");
+      $('.js-loadingMessageModal').addClass('hide');
+      user.set('serverUrl', serverUrlLocal);
+      newSocketView = new socketView({model: user});
+      newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
+      newChatAppView = new chatAppView({model: user, socketView: newSocketView});
+      newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
+      Backbone.history.start();
+      window.clearTimeout(loadProfileTimeout);
+    }
+  };
+
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
     success: function (model, response) {
@@ -119,23 +121,24 @@ var loadProfile = function() {
       "use strict";
       //make sure profile is not blank
       if (response.profile){
-        guid = model.get('profile').guid;
-        avatar_hash = model.get('profile').avatar_hash;
+        //guid = response.profile.guid;
+        //avatar_hash = response.profile.avatar_hash;
+        setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
         //get the user
         user.fetch({
           success: function (model, response) {
             user.set('serverUrl', serverUrlLocal);
-            user.set('guid', guid);
-            user.set('avatar_hash', avatar_hash);
+            //user.set('guid', guid);
+            //user.set('avatar_hash', avatar_hash);
             cCode = model.get('currency_code');
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function(){
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
-              newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+              newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-              newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
+              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
               Backbone.history.start();
             });
 
@@ -149,9 +152,9 @@ var loadProfile = function() {
             $('.js-loadingMessageModal').addClass('hide');
             user.set('serverUrl', serverUrlLocal);
             newSocketView = new socketView({model: user});
-            newPageNavView = new pageNavView({model: user, socketView: newSocketView});
-            newChatAppView = new chatAppView({model: user, socketView: newSocketView})
-            newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
+            newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
+            newChatAppView = new chatAppView({model: user, socketView: newSocketView});
+            newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
             Backbone.history.start();
           }
         });
