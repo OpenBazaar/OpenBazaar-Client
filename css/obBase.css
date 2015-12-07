@@ -379,7 +379,6 @@ form {
   flex-grow: 1;
 }
 
-
 .gridItem {
   box-sizing: border-box;
   padding: 33px;
@@ -2426,7 +2425,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-navBar {
   top: -238px;
   right: 10px;
->>>>>>> refs/remotes/OpenBazaar/master
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
   border-bottom-left-radius: 4px;
