@@ -207,7 +207,7 @@ module.exports = Backbone.View.extend({
 
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat).promise().done(function() {
             "use strict";
-            $(this).animate({ scrollTop: 99999999999}, 1); // Arbitrary long value
+            $(this).animate({ scrollTop: 99999999999}, 100); // Arbitrary long value
           });
         }
       }
