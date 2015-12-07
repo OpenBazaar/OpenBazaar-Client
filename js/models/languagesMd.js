@@ -84,7 +84,7 @@ module.exports = Backbone.Model.extend({
         Instagram: "Instagram",
         Twitter: "Twitter",
         Snapchat: "Snapchat",
-        BUYNOW: "BUY NOW",
+        BUYNOW: "Buy Now",
         Description: "Description",
         Reviews: "Reviews",
         Shipping: "Shipping",

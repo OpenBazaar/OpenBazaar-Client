@@ -386,14 +386,34 @@ form {
 
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
-  height: 357px;
-  width: 357px;
+  height: 400px;
+  width: 100%;
+  border-radius: 2px;
 }
 
 .itemImg.itemImg-small {
   height: 82px;
   width: 82px;
   margin: 0 10px 10px 0;
+}
+
+.itemMeta {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.itemMeta li {
+  box-sizing: border-box;
+  border-bottom: solid 1px #ccc;
+  font-size: 15px;
+  opacity: .75;
+  padding: 15px;
+  width: 100%;
+}
+
+.itemMeta li:hover{
+  opacity: 1;
 }
 
 .rowItem {
@@ -1213,13 +1233,15 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-buyNow {
-  margin-top: 10px;
-  width: 200px;
-  height: 40px;
-  line-height: 40px;
+  margin: 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
   padding: 0;
   opacity: 1;
-  font-size: 14px;
+  font-size: 17px;
+  border-radius: 2px;
+
 }
 
 .btn.btn-txtOnly {
@@ -1507,7 +1529,7 @@ div.chatSearchOut .chatSearchIcon {
 
 #userPage .btn.btn-bar {
   background-color: #575757;
-  border-right: 1px solid #4a4848;
+  /*border-right: 1px solid #4a4848;*/
 }
 
 .btn.btn-bar:hover {
@@ -2663,9 +2685,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .page-contractTitle {
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: .5px;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: .8px;
   margin-bottom: 0;
   opacity: 1;
 }
@@ -3364,6 +3386,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding20 {
   padding: 20px;
+}
+
+#ov1  .padding30 {
+  padding: 30px;
 }
 
 #ov1  .padding2015 {
