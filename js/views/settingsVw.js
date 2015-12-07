@@ -577,7 +577,7 @@ module.exports = Backbone.View.extend({
       modList.push($(this).data('guid'));
     });
 
-    storeData.moderator_list = modList;
+    storeData.moderator_list = modList.length > 0 ? modList : "";
     storeData.vendor = true;
 
     this.saveData(form, "", "profile", function(){

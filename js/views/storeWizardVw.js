@@ -7,6 +7,7 @@ var __ = require('underscore'),
     colpicker = require('../utils/colpick.js'),
     countriesModel = require('../models/countriesMd'),
     showErrorModal = require('../utils/showErrorModal.js'),
+    saveToAPI = require('../utils/saveToAPI'),
     Taggle = require('taggle'),
     chosen = require('../utils/chosen.jquery.min.js');
 
@@ -143,6 +144,36 @@ module.exports = Backbone.View.extend({
   },
 
   saveWizard: function() {
+    "use strict";
+    var self = this,
+        profileForm = this.$el.find('#storeWizardForm'),
+        moderatorsChecked = $('.js-storeWizardModeratorList input:checked'),
+        userProfile = this.model.get('page').profile,
+        modList = [],
+        wizData = {};
+
+    //convert taggle tags to data in the form
+    this.$el.find('#realCategoriesInput').val(this.categoriesInput.getTagValues().join(","));
+
+    wizData.vendor = true;
+
+    moderatorsChecked.each(function() {
+      modList.push($(this).data('guid'));
+    });
+
+    wizData.moderator_list = modList.length > 0 ? modList : "";
+
+    wizData.primary_color = parseInt(userProfile.primary_color.slice(1), 16);
+    wizData.secondary_color = parseInt(userProfile.secondary_color.slice(1), 16);
+    wizData.background_color = parseInt(userProfile.background_color.slice(1), 16);
+    wizData.text_color = parseInt(userProfile.text_color.slice(1), 16);
+
+    saveToAPI(profileForm, this.model.get('page').profile, self.model.get('user').serverUrl + "profile", function(){
+      self.trigger('storeCreated');
+    }, "", wizData);
+  },
+
+  saveWizardOld: function() {
     "use strict";
     var self = this,
         profileForm = this.$el.find('#storeWizardForm'),

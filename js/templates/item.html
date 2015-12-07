@@ -78,8 +78,14 @@
             <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('international') %>): <%- ob.vendor_offer.listing.shipping.est_delivery.international %></p>
             <hr/>
           <% } %>
-          <h3><%= polyglot.t('ReturnsPolicy') %></h3>
-          <p><%- ob.vendor_offer.listing.policy.returns %></p>
+          <% if(ob.vendor_offer.listing.policy.returns) { %>
+            <h3><%= polyglot.t('ReturnsPolicy') %></h3>
+            <p><%- ob.vendor_offer.listing.policy.returns %></p>
+          <% } %>
+          <% if(ob.vendor_offer.listing.policy.terms_conditions) { %>
+            <h3><%= polyglot.t('TermsAndConditions') %></h3>
+            <p><%- ob.vendor_offer.listing.policy.terms_conditions %></p>
+          <% } %>
         </div>
       </div>
     </div>
