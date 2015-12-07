@@ -534,6 +534,8 @@ module.exports = Backbone.Model.extend({
         Reviews: "Rezensionen",
         Shipping: "Versand",
         Addresses: "Adressen",
+        NewAddress : "Neue Adresse",
+        CurrentAddress : "Aktuelle Adressen",
         Returns: "R&uuml;ckgabe",
         ReturnsPolicy: "R&uuml;cknahmebedingungen",
         Ampersand: "&",
@@ -894,6 +896,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi"
+          }
         },
         {
         langName: "French",
@@ -1049,7 +1052,6 @@ module.exports = Backbone.Model.extend({
         ShipTo: "Envoyer &agrave;",
         OrderDetails: "D&eacute;tails de la commande",
         OrderSummary: "R&eacute;sum&eacute; de la commande",
-        NewAddress: "Nouvelle adresse",
         AllListings: "Annonces",
         ComingSoon: "&agrave; venir",
         PaymentPending: "Paiement en attente",
