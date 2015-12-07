@@ -343,7 +343,9 @@ module.exports = Backbone.View.extend({
     if(data.hasOwnProperty('message')) {
       var chat_message = data.message;
       this.afterRender();
-      this.updateChat(chat_message.sender);
+      if(chat_message.sender == this.currentChatId){
+        this.updateChat(chat_message.sender);
+      }
       var username = chat_message.handle ? chat_message.handle : chat_message.guid;
       var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
 

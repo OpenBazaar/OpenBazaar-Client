@@ -1616,11 +1616,12 @@ div.chatSearchOut .chatSearchIcon {
   margin-left: 2px;
 }
 
-.chatConversationMessageBody div {
+.chatConversationMessageBody > .inner {
   background-color: #2D2D2D;
   border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
+  word-break: break-word;
   display: inline-block;
   font-weight: 500;
   letter-spacing: 0.2em;
