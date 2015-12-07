@@ -47,10 +47,13 @@ module.exports = Backbone.View.extend({
   initialize: function(options){
     "use strict";
     var self = this;
+    this.options = options || {};
+    /* recieves socketView and userProfile from app.js */
     this.socketView = options.socketView;
+    this.userProfile = options.userProfile;
     this.subViews = [];
     this.languages = new languagesModel();
-    this.options = options || {};
+
 
     this.currentWindow = remote.getCurrentWindow();
 
@@ -59,6 +62,10 @@ module.exports = Backbone.View.extend({
       var newLang = this.model.get("language");
       window.polyglot = new Polyglot({locale: newLang});
       window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
+      this.render();
+    });
+
+    this.listenTo(this.userProfile, 'change', function(){
       this.render();
     });
 
@@ -93,12 +100,12 @@ module.exports = Backbone.View.extend({
       this.languageReady = true;
     }
     if(this.countryReady && this.currencyReady && this.languageReady){
-      //set up filterable lists.
-      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
-      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
-      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
-      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
-      this.initAccordion('.js-profileAccordion');
+        //set up filterable lists.
+        var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
+        var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
+        var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
+        var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
+        this.initAccordion('.js-profileAccordion');
     }
   },
 
@@ -149,6 +156,9 @@ module.exports = Backbone.View.extend({
     this.countryReady = false;
     this.currencyReady = false;
     this.languageReady = false;
+    //load userProfile data into model
+    this.model.set('guid', this.userProfile.get('profile').guid);
+    this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
