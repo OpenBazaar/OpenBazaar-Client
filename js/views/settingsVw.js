@@ -1,7 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    userProfileModel = require('../models/userProfileMd'),
+    //userProfileModel = require('../models/userProfileMd'),
     loadTemplate = require('../utils/loadTemplate'),
     timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
@@ -51,12 +51,26 @@ module.exports = Backbone.View.extend({
        socketView
      */
     this.socketView = options.socketView;
-    this.userProfile = new userProfileModel();
+    this.userProfile = options.userProfile;
     this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
     this.user = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
     this.subModels = [];
+    this.subModels.push(this.userProfile);
+
+    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      this.handleSocketMessage(response);
+    });
+    this.socketModeratorID = Math.random().toString(36).slice(2);
+    this.moderatorCount = 0;
+
+    this.fetchModel();
+  },
+
+  fetchModel: function(){
+    "use strict";
+    var self = this;
     this.userProfile.fetch({
       success: function(model) {
         var profile = model.get('profile');
@@ -83,13 +97,6 @@ module.exports = Backbone.View.extend({
         showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
-    this.subModels.push(this.userProfile);
-
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
-      this.handleSocketMessage(response);
-    });
-    this.socketModeratorID = Math.random().toString(36).slice(2);
-    this.moderatorCount = 0;
   },
 
   render: function(){
@@ -97,6 +104,7 @@ module.exports = Backbone.View.extend({
     $('#content').html(self.$el);
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.delegateEvents(); //delegate again for re-render
       self.setFormValues();
       self.setState(self.options.state);
       //self.renderBlocked(self.model.get("user").blocked);
@@ -636,7 +644,9 @@ module.exports = Backbone.View.extend({
 
   refreshView: function(){
     "use strict";
-    window.location.reload();
+    //window.location.reload();
+    //this.render();
+    this.fetchModel();
   },
 
   addressDelete: function(e){
