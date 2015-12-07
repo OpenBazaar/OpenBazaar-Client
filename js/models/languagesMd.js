@@ -181,6 +181,10 @@ module.exports = Backbone.Model.extend({
           contractError: "This Item Cannot be Purchased",
           sellerError: "The seller's server has rejected the purchase request"
         },
+        saveMessages: {
+          Saved: "Saved",
+          SaveSuccess: "Your changes have been saved."
+        },
         filters: {
           pagesAllTypes: "All types",
           pagesStores: "Stores",
@@ -402,6 +406,10 @@ module.exports = Backbone.Model.extend({
           contractError: "Este artículo no puede ser comprado" ,
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra"
         },
+        saveMessages: {
+          Saved: "Salvado",
+          SaveSuccess: "Se han guardado los cambios."
+        },
         filters: {
           pagesAllTypes: "Todos los tipos",
           pagesStores: "Tiendas",
@@ -534,6 +542,8 @@ module.exports = Backbone.Model.extend({
         Reviews: "Rezensionen",
         Shipping: "Versand",
         Addresses: "Adressen",
+        NewAddress : "Neue Adresse",
+        CurrentAddress : "Aktuelle Adressen",
         Returns: "R&uuml;ckgabe",
         ReturnsPolicy: "R&uuml;cknahmebedingungen",
         Ampersand: "&",
@@ -614,6 +624,10 @@ module.exports = Backbone.Model.extend({
           socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
           contractError: "Dieser Artikel kann nicht gekauft werden",
           sellerError: "Server des Verkäufers die Kaufanfrage abgelehnt wurde"
+        },
+        saveMessages: {
+          Saved: "Gespeichert",
+          SaveSuccess: "Ihre &Auml;nderungen wurden gespeichert."
         },
         filters: {
           pagesAllTypes: "Alle Arten",
@@ -843,6 +857,10 @@ module.exports = Backbone.Model.extend({
           contractError: "Questo articolo non pu&ograve; essere acquistato",
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto"
         },
+        saveMessages: {
+          Saved: "Salvato",
+          SaveSuccess: "Le modifiche sono state salvate."
+        },
         filters: {
           pagesAllTypes: "Tutti i tipi",
           pagesStores: "Negozi",
@@ -894,6 +912,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi"
+          }
         },
         {
         langName: "French",
@@ -1049,7 +1068,6 @@ module.exports = Backbone.Model.extend({
         ShipTo: "Envoyer &agrave;",
         OrderDetails: "D&eacute;tails de la commande",
         OrderSummary: "R&eacute;sum&eacute; de la commande",
-        NewAddress: "Nouvelle adresse",
         AllListings: "Annonces",
         ComingSoon: "&agrave; venir",
         PaymentPending: "Paiement en attente",
@@ -1070,6 +1088,10 @@ module.exports = Backbone.Model.extend({
           socketError: "L'URL pour WebSocket a &eacute;chou&eacute;. Connexion au socket avec l'adresse par d&eacute;faut de ws://localhost:18466",
           contractError: "Cet article ne peut pas &ecirc;tre achet&eacute;",
           sellerError: "Le serveur du vendeur a rejet&eacute; la demande d'achat"
+        },
+        saveMessages: {
+          Saved: "Saved",
+          SaveSuccess: "Vos changements ont &eacute;t&eacute; enregistr&eacute;s."
         },
         filters: {
           pagesAllTypes: "Tous les types",
