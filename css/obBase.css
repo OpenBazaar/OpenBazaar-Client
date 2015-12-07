@@ -386,7 +386,7 @@ form {
 
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
-  height: 400px;
+  height: 380px;
   width: 100%;
   border-radius: 2px;
 }
@@ -3345,6 +3345,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .lineHeight21{
   line-height: 21px;
+}
+#ov1  .lineHeight24{
+  line-height: 24px;
 }
 
 #ov1  .lineHeightReset{
