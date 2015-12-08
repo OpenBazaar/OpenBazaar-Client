@@ -24,7 +24,6 @@ var Polyglot = require('node-polyglot'),
     newRouter,
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
-    languagesModel = require('./models/languagesMd'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     setTheme = require('./utils/setTheme.js'),
@@ -35,7 +34,6 @@ var Polyglot = require('node-polyglot'),
     newChatAppView,
     user = new userModel(),
     userProfile = new userProfileModel(),
-    languages = new languagesModel(),
     socketView = require('./views/socketVw'),
     guid = "",
     avatar_hash = "",
@@ -53,15 +51,6 @@ user.urlRoot = serverUrlLocal + "settings";
 
 //set the urlRoot of the user model. Defaults to local host if not found
 userProfile.urlRoot = serverUrlLocal + "profile";
-
-//put language in the window so all templates and models can reach it. It's especially important in formatting currency.
-window.lang = user.get("language");
-
-//put polyglot in the window so all templates can reach it
-window.polyglot = new Polyglot({locale: window.lang});
-
-//retrieve the object that has a matching language code
-window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
 
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
