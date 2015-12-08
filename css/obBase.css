@@ -1467,6 +1467,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeadsCompressed {
+  background: #3A3434;
   height: calc(100% - 430px);
   overflow-x: hidden;
   overflow-y: auto;
@@ -1591,8 +1592,8 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatHeadSelected {
   opacity: 1;
-  outline: solid 1px #ccc;
-  background: #3E3E3E;
+  outline: solid 1px #FFFFFF;
+  background: #565656;
   z-index:3;
 }
 
@@ -3275,6 +3276,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .textWeightMedium {
   font-weight: 500;
+}
+
+#ov1 .background3A3434 {
+  background: #3A3434;
 }
 
 
