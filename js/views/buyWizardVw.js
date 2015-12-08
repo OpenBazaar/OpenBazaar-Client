@@ -406,6 +406,7 @@ module.exports = Backbone.View.extend({
     this.hidePayAddress();
     if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
       this.accPrev();
+      this.showMaps();
     } else {
       this.accPrev(2);
     }
