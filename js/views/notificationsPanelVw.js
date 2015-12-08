@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.options = options || {};
     this.parentEl = $(options.parentEl);
-    this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow"></div>');
+    this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow marginLeft1"></div>');
 
     this.notificationLimit = 30;
     this.notifications = new notificationsCollection();
