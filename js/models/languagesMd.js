@@ -161,7 +161,7 @@ module.exports = Backbone.Model.extend({
         ShipTo: "Ship To",
         OrderDetails: "Order Details",
         OrderSummary: "Order Summary",
-        AllListings: "Listings",
+        AllListings: "All Listings",
         ComingSoon: "Coming Soon",
         PaymentPending: "Payment Pending",
         FinalizePurchase: "Finalize Purchase",

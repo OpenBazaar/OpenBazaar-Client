@@ -45,6 +45,7 @@ body {
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
+  /*-webkit-font-smoothing: subpixel-antialiased;*/
   letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
@@ -185,8 +186,8 @@ form {
   -webkit-app-region: no-drag;
 }
 
-#pageNav.bar {
-  padding: 0 6px 0 10px;
+#pageNav .bar {
+  padding: 10px 8px;
 }
 
 #sideBar {
@@ -434,15 +435,10 @@ form {
 
 .itemMeta li {
   box-sizing: border-box;
-  border-bottom: solid 1px #ccc;
+  border-bottom: solid 1px;
   font-size: 15px;
-  opacity: .75;
   padding: 15px;
   width: 100%;
-}
-
-.itemMeta li:hover{
-  opacity: 1;
 }
 
 .rowItem {
@@ -805,6 +801,14 @@ form {
   padding-right: 15px;
   position: relative;
   background-color: rgb(33, 81, 117);
+}
+
+.breadCrumbArrow {
+  margin-top: 10px; 
+  width: 20px; 
+  text-align: center;
+  font-size: 10px;
+  opacity: .5;
 }
 
 /*========== typography ==========*/
@@ -1263,16 +1267,22 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-buyNow {
-  margin: 0;
+  margin: auto;
   width: 100%;
-  height: 50px;
-  line-height: 50px;
+  height: 52px;
+  line-height: 52px;
   padding: 0;
-  opacity: 1;
-  font-size: 17px;
+  opacity: .90;
+  font-size: 18px;
   border-radius: 2px;
-
+  float: none;
+  text-transform: uppercase;
 }
+
+.btn.btn-buyNow:hover {
+  opacity: 1;
+}
+
 
 .btn.btn-txtOnly {
   background: none;
@@ -1647,7 +1657,7 @@ div.chatSearchOut .chatSearchIcon {
   word-break: break-word;
   display: inline-block;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.2px;
 }
 
 #inputConversationMessage {
@@ -1677,7 +1687,6 @@ div.chatSearchOut .chatSearchIcon {
 
 #userPage .btn.btn-bar {
   background-color: #575757;
-  /*border-right: 1px solid #4a4848;*/
 }
 
 .btn.btn-bar:hover {
@@ -2444,6 +2453,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .popMenu-notifications-opened {
   animation: menuSlide .12s normal linear;
   top: 50px;
+}
+
+.notification .rowItem {
+  opacity: .35;
+}
+
+.notification .rowItem:hover {
+  opacity: .75;
 }
 
 .popMenu-navBar {
@@ -3411,6 +3428,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 15px;
 }
 
+#ov1  .marginLeft20 {
+  margin-left: 20px;
+}
+
 #ov1  .marginLeft88 {
   margin-left: 88px;
 }
@@ -3463,6 +3484,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-bottom: 2px;
 }
 
+#ov1  .marginBottom8 {
+  margin-bottom: 8px;
+}
+
 #ov1  .marginBottom20 {
   margin-bottom: 20px;
 }
@@ -3501,6 +3526,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .height54 {
   height: 54px;
+}
+
+#ov1  .height30 {
+  height: 30px;
+  line-height: 30px;
 }
 
 #ov1  .height70 {
@@ -3695,6 +3725,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 0;
 }
 
+#ov1  .borderBottom1 {
+  border-bottom: 1px;
+}
+
 #ov1 .fontWeight500 {
   font-weight: 500;
 }
@@ -3722,6 +3756,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .hoverUnderline:hover {
   text-decoration: underline !important;
+}
+
+#ov1 .underline {
+  text-decoration: underline;
 }
 
 .badge:after{

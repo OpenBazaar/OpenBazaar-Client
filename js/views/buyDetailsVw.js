@@ -62,19 +62,19 @@ module.exports = Backbone.View.extend({
         moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") : 0,
         moderatorPrice = moderatorPercentage ? totalItemPrice / moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
-        newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
+        newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalItemPrice),
-        newDisplayShippingPrice = (userCurrency == "BTC") ? totalShipping.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
+        newDisplayShippingPrice = (userCurrency == "BTC") ? totalShipping.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalShipping),
-        newDisplayModeratorPrice = (userCurrency == "BTC") ? moderatorTotal.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
+        newDisplayModeratorPrice = (userCurrency == "BTC") ? moderatorTotal.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,

@@ -53,7 +53,7 @@ module.exports = Backbone.Model.extend({
             currency: userCCode
           }).format(vendorPrice*vendToUserBTCRatio);
         } else {
-          newAttributes.displayPrice = vendorBitCoinPrice.toFixed(4) + "btc";
+          newAttributes.displayPrice = vendorBitCoinPrice.toFixed(4) + " BTC";
         }
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
