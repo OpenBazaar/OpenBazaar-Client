@@ -583,7 +583,7 @@ module.exports = Backbone.View.extend({
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-followers'));
     this.addTabToHistory('followers');
     this.setState('followers');
-    $('#inputFollowers').focus();
+    // $('#inputFollowers').focus();
   },
 
   followingClick: function(e){
@@ -591,7 +591,7 @@ module.exports = Backbone.View.extend({
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-following'));
     this.addTabToHistory('following');
     this.setState('following');
-    $('#inputFollowing').focus();
+    // $('#inputFollowing').focus();
   },
 
   storeClick: function(e){
@@ -599,7 +599,7 @@ module.exports = Backbone.View.extend({
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
-    $('#inputStore').focus();
+    // $('#inputStore').focus();
   },
 
   tabClick: function(activeTab, showContent){

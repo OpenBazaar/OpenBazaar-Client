@@ -16,19 +16,18 @@
             <input name="location" id="locationSelect" type="text" class="hide"/>
 
             <div class="flexRow">
-
               <div class="flexRow custCol-border">
-                <div class="flexCol-4 borderRight custCol-border">
-                  <label class="fieldItem" for="storeNameInput">
-                    <%= polyglot.t('Name') %>
-                  </label>
-                </div>
-                <div class="flexCol-8">
-                  <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
-                </div>
+                  <div class="flexCol-3 borderRight custCol-border">
+                    <label class="fieldItem" for="storeNameInput">
+                      <%= polyglot.t('Name') %>
+                    </label>
+                  </div>
+                  <div class="flexCol-9">
+                    <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
+                  </div>
               </div>
               <div class="flexRow custCol-border">
-                <div class="flexCol-4 borderRight custCol-border">
+                <div class="flexCol-3 borderRight custCol-border">
                   <label class="fieldItem" for="aboutInput">
                     <%= polyglot.t('Description') %>
                   </label>
@@ -57,9 +56,8 @@
                 </div>
               </div>
               -->
-
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              <div class="flexRow custCol-border">
+                <div class="flexCol-3 borderRight custCol-border">
                   <label class="fieldItem" for="realCategoriesInput">
                     <%= polyglot.t('Keywords') %><!--  (<%= polyglot.t('UpTo3') %>) -->
                   </label>

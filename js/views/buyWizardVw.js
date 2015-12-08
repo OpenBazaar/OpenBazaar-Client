@@ -358,12 +358,7 @@ module.exports = Backbone.View.extend({
         message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id),
         payHREF = "",
         dataURI;
-    console.log(this.model);
-    if(this.model.get('shippingType') == "domestic"){
-      totalBTCPrice = (this.model.get('vendorBTCPrice') + this.model.get('domesticShippingBTC')) * this.model.get('quantity');
-    } else {
-      totalBTCPrice = (this.model.get('vendorBTCPrice') + this.model.get('internationalShippingBTC')) * this.model.get('quantity');
-    }
+    totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
@@ -392,7 +387,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var totalPrice = this.model.get('totalPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
-        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(6) + " btc" : new Intl.NumberFormat(window.lang, {
+        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
@@ -411,6 +406,7 @@ module.exports = Backbone.View.extend({
     this.hidePayAddress();
     if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
       this.accPrev();
+      this.showMaps();
     } else {
       this.accPrev(2);
     }

@@ -7,6 +7,16 @@ window.Backbone = Backbone;
 window.$ = $;
 window.jQuery = $;
 window.Backbone.$ = $;
+window.focused = true;
+
+// we need to know this for notifications
+window.onfocus = function() {
+  window.focused = true;
+};
+
+window.onblur = function() {
+  window.focused = false;
+};
 
 var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
@@ -14,7 +24,6 @@ var Polyglot = require('node-polyglot'),
     newRouter,
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
-    languagesModel = require('./models/languagesMd'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     setTheme = require('./utils/setTheme.js'),
@@ -25,7 +34,6 @@ var Polyglot = require('node-polyglot'),
     newChatAppView,
     user = new userModel(),
     userProfile = new userProfileModel(),
-    languages = new languagesModel(),
     socketView = require('./views/socketVw'),
     guid = "",
     avatar_hash = "",
@@ -43,15 +51,6 @@ user.urlRoot = serverUrlLocal + "settings";
 
 //set the urlRoot of the user model. Defaults to local host if not found
 userProfile.urlRoot = serverUrlLocal + "profile";
-
-//put language in the window so all templates and models can reach it. It's especially important in formatting currency.
-window.lang = user.get("language");
-
-//put polyglot in the window so all templates can reach it
-window.polyglot = new Polyglot({locale: window.lang});
-
-//retrieve the object that has a matching language code
-window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
 
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
@@ -96,9 +95,9 @@ var loadProfile = function() {
       $('.js-loadingMessageModal').addClass('hide');
       user.set('serverUrl', serverUrlLocal);
       newSocketView = new socketView({model: user});
-      newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+      newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
       newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-      newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
+      newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
       Backbone.history.start();
       window.clearTimeout(loadProfileTimeout);
     }
@@ -111,24 +110,24 @@ var loadProfile = function() {
       "use strict";
       //make sure profile is not blank
       if (response.profile){
-        guid = response.profile.guid;
-        avatar_hash = response.profile.avatar_hash;
+        //guid = response.profile.guid;
+        //avatar_hash = response.profile.avatar_hash;
         setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
         //get the user
         user.fetch({
           success: function (model, response) {
             user.set('serverUrl', serverUrlLocal);
-            user.set('guid', guid);
-            user.set('avatar_hash', avatar_hash);
+            //user.set('guid', guid);
+            //user.set('avatar_hash', avatar_hash);
             cCode = model.get('currency_code');
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function(){
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
-              newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+              newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-              newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
+              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
               Backbone.history.start();
             });
 
@@ -142,9 +141,9 @@ var loadProfile = function() {
             $('.js-loadingMessageModal').addClass('hide');
             user.set('serverUrl', serverUrlLocal);
             newSocketView = new socketView({model: user});
-            newPageNavView = new pageNavView({model: user, socketView: newSocketView});
+            newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
             newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-            newRouter = new router({userModel: user, socketView: newSocketView, chatAppView: newChatAppView});
+            newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
             Backbone.history.start();
           }
         });

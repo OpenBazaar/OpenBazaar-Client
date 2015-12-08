@@ -1,5 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
+    Polyglot = require('node-polyglot'),
+    languagesModel = require('../models/languagesMd'),
     countriesMd = require('./countriesMd');
 
 module.exports = Backbone.Model.extend({
@@ -7,6 +9,7 @@ module.exports = Backbone.Model.extend({
   initialize: function(){
     this.countries = new countriesMd();
     this.countryArray = this.countries.get('countries');
+    this.languages = new languagesModel();
   },
 
   defaults: {
@@ -59,10 +62,15 @@ module.exports = Backbone.Model.extend({
       }
       catch (e){
         //server may set a malformed shipping_address value
-	console.log("Error in shipping_addresses:");
+        console.log("Error in shipping_addresses:");
         console.log(e);
       }
     }
+
+    //set the client language to match the language in the response
+    response.language = response.language || "en";
+    window.polyglot = new Polyglot({locale: response.language});
+    window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: response.language})[0]);
 
     return response;
   }

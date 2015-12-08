@@ -14,9 +14,10 @@ module.exports = Backbone.Router.extend({
   initialize: function(options){
     this.options = options || {};
     /*
-    expects options.userModel from app.js
+    expects options.userModel, options userProfile, socketView, chatAppView from app.js
      */
-    //this.socketView = new socketView({model: options.userModel});
+    this.userModel = options.userModel;
+    this.userProfile = options.userProfile;
     this.socketView = options.socketView;
     this.chatAppView = options.chatAppView;
   },
@@ -58,7 +59,7 @@ module.exports = Backbone.Router.extend({
 
   index: function(){
     "use strict";
-    if(this.options.userModel.get('beenSet') === true){
+    if(this.userModel.get('beenSet') === true){
       this.home();
     } else {
       this.userPage();
@@ -69,7 +70,7 @@ module.exports = Backbone.Router.extend({
     "use strict";
     this.cleanup();
     this.newView(new homeView({
-      userModel: this.options.userModel,
+      userModel: this.userModel,
       socketView: this.socketView
     }));
   },
@@ -78,7 +79,7 @@ module.exports = Backbone.Router.extend({
     "use strict";
     this.cleanup();
     this.newView(new userPageView({
-      userModel: this.options.userModel,
+      userModel: this.userModel,
       userID: userID,
       state: state,
       itemHash: itemHash,
@@ -97,7 +98,7 @@ module.exports = Backbone.Router.extend({
     "use strict";
     this.cleanup();
     this.newView(new userPageView({
-      userModel: this.options.userModel,
+      userModel: this.userModel,
       state: 'itemNew',
       socketView: this.socketView
     }),"userPage");
@@ -132,7 +133,8 @@ module.exports = Backbone.Router.extend({
     $('.js-loadingModal').addClass('show');
     this.cleanup();
     this.newView(new settingsView({
-      userModel: this.options.userModel,
+      userModel: this.userModel,
+      userProfile: this.userProfile,
       state: state,
       socketView: this.socketView
     }), "userPage");
