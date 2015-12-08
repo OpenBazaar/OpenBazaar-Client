@@ -14,19 +14,16 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     "use strict";
-    var shippableAddresses = [],
-        nonshippableAddresses = [],
-        shippingRegions = this.model.get('vendor_offer').listing.shipping_regions;
     //don't render on init, let parent trigger the render
+    //add list of countries the vendor ships to
+    this.model.set('shipsToList', (this.model.get('vendor_offer').listing.shipping.shipping_regionsDisplay).join(","));
   },
 
   render: function(selected){
     var self = this;
     var modelData = this.model.toJSON();
-    if(selected){
-      modelData.selected = selected;
-      this.setAddress(selected);
-    }
+    modelData.selected = selected;
+    this.setAddress(selected);
     loadTemplate('./js/templates/buyAddresses.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(modelData));
       //this does not add it to the DOM, that is done by the parent view

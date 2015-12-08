@@ -1,11 +1,29 @@
 /*========== scroll bars ==========*/
 #obContainer::-webkit-scrollbar {
-  width: 6px;
+  width: 1px;
 }
  
 #obContainer::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 20px;
   background: #44697E; 
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar,
+.chatConversationHeads::-webkit-scrollbar,
+.chatConversationContent::-webkit-scrollbar {
+  width: 1px;
+}
+
+.popMenu-notificationsContent::-webkit-scrollbar-thumb,
+.chatConversationHeads::-webkit-scrollbar-thumb,
+.chatConversationContent::-webkit-scrollbar {
+  border-radius: 20px;
+  background: #3E3E3E;
+}
+
+
+.noScrollBar::-webkit-scrollbar {
+  width: 0 !important;
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar {
@@ -60,8 +78,8 @@ p a {
 }
 
 hr {
+  border: solid 1px rgba(255,255,255,0.08);
   width: 100%;
-  border: 1px solid rgba(255,255,255,0.08);
 }
 
 input {
@@ -143,10 +161,12 @@ form {
 
 #obContainer {
   transition: width 0.5s ease;
+  width: calc(100% - 49px);
+
 }
 
 #obContainer.compressed {
-  width: calc(100% - 220px);
+  width: calc(100% - 235px);
 }
 
 #pageNav {
@@ -165,14 +185,19 @@ form {
   -webkit-app-region: no-drag;
 }
 
+#pageNav.bar {
+  padding: 0 6px 0 10px;
+}
+
 #sideBar {
   position: fixed;
-  right: -180px;
+  right: -182px;
   top: 50px;
-  width:220px;
+  width:230px;
   background-color: #252525;
+  border-left: solid 1px #333333;
   height: calc(100% - 50px);
-  z-index: 2;
+  z-index: 1;
   transition: right 0.5s ease;
   color: #DDD;
 }
@@ -190,7 +215,11 @@ form {
 }
 
 .chatSearch {
-  margin-left: 40px;
+  margin-left: 41px;
+}
+
+.chatRead {
+  opacity: .5;
 }
 
 .mainContainer {
@@ -229,7 +258,7 @@ form {
   top: 50px;
   height: 100%;
   width: 100%;
-  background-color: rgba(25,25,25,0.50);
+  background-color: rgba(25,25,25,0.65);
   z-index: 2;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
@@ -965,6 +994,7 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
+  transition: left .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modal-hero {
@@ -1312,15 +1342,15 @@ input[type="text"].txtField-bar {
 }
 
 .btn-chatOpen {
-  background-color: unset;
-  margin: 5px;
-  width: 32px;
-  height: 19px;
-  line-height: 19px;
+  background-color: transparent;
   text-align: center;
   font-size: 20px;
   color: white;
   font-weight: normal;
+}
+
+.btn-chatOpen:before {
+  line-height: 42px;
 }
 
 .btn-chatOpenOut {
@@ -1335,13 +1365,35 @@ input[type="text"].txtField-bar {
   right: 0;
   float: right;
   background-color: unset;
-}
+  margin-right: 5px;
 
+}
+.btn-closeChat:hover {
+  outline: solid 1px #363636;
+  border-radius: 0;
+}
 .btn-chatSearch {
   background-color: unset;
   text-align: center;
   font-size: 18px;
   font-weight: normal;
+}
+
+.newChatButton {
+  border-bottom: solid 2px rgba(255,255,255,0.08);
+}
+
+.newChatButton .btn {
+  opacity: .5;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.newChatButton:hover .btn {
+  opacity: 1;
+}
+
+.chatSearch {
+  /*border-bottom: solid 1px rgba(255,255,255,0.08);*/
 }
 
 .chatSearch input {
@@ -1357,14 +1409,26 @@ input[type="text"].txtField-bar {
 }
 
 .chatSearchIcon {
-  margin-left: -25px;
+  margin-left: -24px;
   margin-right: 10px;
+  float: left;
+  margin-top: 13px;
+  cursor: pointer;
+  font-size: 15px;
+  opacity: .50;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.chatSearchIcon:hover {
+  opacity: 1;
 }
 
 .chatSearchOut {
   padding-left: 10px;
   width: calc(100% - 10px);
   margin-left: 0;
+  height: 25px;
+  line-height: 25px;
 }
 
 div.chatSearchOut .chatSearchIcon {
@@ -1373,43 +1437,57 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversation {
-  width: 100%;
-  height: 300px;
+  width: calc(100% - 1px);
+  height: 360px;
   bottom: 0px;
   position: absolute;
-  transition: bottom 0.5s ease;
-  border: 1px solid #333;
-  border-top: 1px solid #BBB;
+  transition: bottom 0.35s ease;
   background-color: #252525;
 }
 
 .chatConversationHidden {
-  bottom: -300px;
+  bottom: -362px;
 }
 
 .chatMessagesLabel {
   float:left;
-  padding: 10px;
   color: white;
-  font-weight: bold;
+  font-size: 15px;
+  height: 43px;
+  line-height: 43px;
+  padding-left: 10px;
 }
 
 .chatConversationHeads {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  clear: both;
+  border-top: solid 1px #363636;
+  height: calc(100% - 88px);
 }
 
 .chatConversationHeadsCompressed {
-  height: calc(100% - 370px);
+  height: calc(100% - 430px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+  transition: height 1s cubic-bezier(0, 0, 0.2, 1);
+  -webkit-filter: blur(.25px);
 }
 
 .chatConversationHeader {
-  padding: 10px;
-  background-color: #292929;
-  border-bottom: 1px solid #333;
+    padding: 0;
+    background-color: #565656;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 10px;
+    color: #fff;
+    border-top-left-radius: 4px;
+    margin-left: 2px;
 }
 
 .chatConversationLabel {
-  width: calc(100% - 20px);
+  width: calc(100% - 100px);
   margin-right:5px;
   float:left;
   text-overflow: ellipsis;
@@ -1417,13 +1495,21 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-closeConversation {
+  padding: 10px;
+}
 
+.btn-closeConversation:hover {
+  outline: solid 1px #4C4C4C;
+  border-radius: 0;
 }
 
 .chatConversationContent {
-  height: calc(100% - 120px);
-  border-bottom: 1px solid #333;
+  height: calc(100% - 134px);
+  border: 1px solid #565656;
+  border-top: 0;
   overflow: auto;
+  padding: 6px 2px;
+  margin-left: 2px;
 }
 
 .chatConversationTo {
@@ -1452,6 +1538,25 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationMessage {
   height: 60px;
   padding: 10px;
+  border: 1px solid #565656;
+  border-top: 0;
+  margin-left: 2px;
+}
+
+.chatConversationMessageBody img,
+.chatConversationMessageBody iframe {
+  max-width: 145px;
+  max-height: 145px;
+}
+
+.chatConversationAvatar {
+    margin-top: -3px;
+    width: 48px;
+    height: 48px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 6px;
+    margin-left: -2px;
 }
 
 .chatConversation textarea, .chatConversation input {
@@ -1461,7 +1566,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessageLine {
-  padding: 5px;
+  padding: 4px 5px;
   width: 100%;
 }
 
@@ -1471,11 +1576,33 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatHead {
-  padding:5px;
+  padding: 7px 5px;
+  border-bottom: solid 1px rgba(255,255,255,0.08);
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.chatHead .thumbnail {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.20);
+}
+
+.chatHead:hover {
+  opacity: 1;
 }
 
 .chatHeadSelected {
-  background-color: #444;
+  opacity: 1;
+  outline: solid 1px #ccc;
+  background: #3E3E3E;
+  z-index:3;
+}
+
+/*.chatConversationHeadsCompressed .chatHead {
+  border: solid 1px transparent;
+}*/
+
+#chatSearchField {
+  height: 44px;
+  float: left;
 }
 
 .chatHeadIcon {
@@ -1487,15 +1614,17 @@ div.chatSearchOut .chatSearchIcon {
   font-size: 11px;
   float:left;
   padding:0 5px;
+  margin-top: 3px;
 }
 
 .chatPreviewSender {
   font-size:13px;
-  font-weight:bold;
+  font-weight:500;
   color: white;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 170px;
+  width: 100px;
+  margin-left: 2px;
 }
 
 .chatPreviewLastMessage {
@@ -1503,14 +1632,21 @@ div.chatSearchOut .chatSearchIcon {
   text-overflow: ellipsis;
   width: 170px;
   white-space: nowrap;
-  color: #999;
+  color: #fff;
+  opacity: .75;
+  font-size: 12px;
+  margin-left: 2px;
 }
 
-.chatConversationMessageBody {
-  background-color: #333;
-  font-size: 11px;
-  padding: 5px;
-  word-break: break-all;
+.chatConversationMessageBody > .inner {
+  background-color: #2D2D2D;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 6px 8px;
+  word-break: break-word;
+  display: inline-block;
+  font-weight: 500;
+  letter-spacing: 0.2em;
 }
 
 #inputConversationMessage {
@@ -1523,8 +1659,19 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessageTimestamp {
-  font-size: 10px;
-  color: #DDD;
+  font-size: 11px;
+  color: #fff;
+  opacity: .35;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.chatConversationMessageTimestamp div {
+  margin-top: 2px;
+}
+
+.modalCompressed {
+  left: calc(50% - 115.5px);
 }
 
 #userPage .btn.btn-bar {
@@ -1839,8 +1986,12 @@ input[type="number"].fieldItem:focus,
 input[type="email"].fieldItem:focus,
 input[type="url"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
-  outline: 1px solid rgba(255,255,255,0.35);
+  border: 2px solid #277FAF;
   transition: border 0.3s;
+}
+
+.txtAreaField:focus {
+  outline: 1px solid #565656;
 }
 
 /* add formChecked class after form has been checked for validity */
@@ -3042,6 +3193,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .25;
 }
 
+#ov1  .textOpacity35 {
+  opacity: .35;
+}
+
 #ov1  .textOpacity50 {
   opacity: .50;
 }
@@ -3203,6 +3358,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin: 0;
 }
 
+#ov1  .marginRight2 {
+  margin-right: 2px;
+}
+
 #ov1  .marginRight3 {
   margin-right: 3px;
 }
@@ -3217,6 +3376,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginRight15 {
   margin-right: 15px;
+}
+
+#ov1  .marginLeft1 {
+  margin-left: 1px;
 }
 
 #ov1  .marginLeft2 {
@@ -3263,12 +3426,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 6px;
 }
 
+#ov1  .marginTop7 {
+  margin-top: 7px;
+}
+
 #ov1  .marginTop9 {
   margin-top: 9px;
 }
 
 #ov1  .marginTop12 {
   margin-top: 12px;
+}
+
+#ov1  .marginTop13 {
+  margin-top: 13px;
 }
 
 #ov1  .marginTop15 {
@@ -3312,6 +3483,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .height40 {
   height: 40px;
   line-height: 40px;
+}
+#ov1  .height43 {
+  height: 43px;
+  line-height: 43px;
 }
 
 #ov1  .height36 {
@@ -3374,6 +3549,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
 }
 
+#ov1  .padding4 {
+  padding: 4px;
+}
 
 #ov1  .padding5 {
   padding: 5px;
@@ -3401,6 +3579,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding17px {
   padding: 17px;
+}
+
+#ov1  .paddingRight2 {
+  padding-right: 2px;
+}
+
+#ov1  .paddingLeft2 {
+  padding-left: 2px;
 }
 
 #ov1  .paddingLeft5 {
@@ -3452,6 +3638,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 360px;
 }
 
+#ov1 .width46px {
+  width: 46px;
+}
+
 #ov1 .width75px {
   width: 75px;
 }
@@ -3462,7 +3652,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width105 {
   width: 105px;
->>>>>>> refs/remotes/origin/master
 }
 
 #ov1 .width110 {
@@ -3530,24 +3719,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-decoration: underline !important;
 }
 
-#ov1 .zIndex4 {
-  z-index: 4;
-}
-
 .badge:after{
-  content:attr(data-count);
+  content: attr(data-count);
   position: absolute;
-  top:-5px;
-  right:-3px;
-  width:16px;
+  top: -5px;
+  right: -4px;
+  width: 20px;
   text-align: center;
-  line-height: 16px;
-  font-size: 10px;
+  line-height: 20px;
+  font-size: 13px;
   border-radius: 50%;
-  color:white;
+  color: white;
   background-opacity: .75;
   background-color: #FFA41C;
-  /* don't put a border on this or it will be visible when it has no content */
 }
 
 /* terrible hack, TODO: remove before production */

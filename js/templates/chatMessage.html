@@ -2,25 +2,25 @@
     <table width="100%">
         <% if(ob.outgoing) { %>
         <tr>
-            <td class="chatConversationMessageBody"><%= ob.formattedMessage%></td>
-            <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border-secondary"
-                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
-            </td>
+            <td align="right" class="chatConversationMessageTimestamp paddingLeft2" colspan="100%"><div><%- ob.formattedTimestamp %></div></td>
         </tr>
         <tr>
-            <td align="left" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
+            <td class="chatConversationMessageBody"><div class="inner"><%= ob.formattedMessage%></div></td>
+            <td class="chatConversationMessageAvatar">
+                <div class="thumbnail custcol-border-secondary marginLeft2 js-username clickable"
+                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
+            </td>
         </tr>
         <% } else { %>
         <tr>
-            <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border-secondary"
-                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 25px; width: 25px"></div>
-            </td>
-            <td class="chatConversationMessageBody"><%= ob.formattedMessage %></td>
+            <td align="left" class="chatConversationMessageTimestamp" colspan="100%"><div><%- ob.formattedTimestamp %></div></td>
         </tr>
         <tr>
-            <td align="right" class="chatConversationMessageTimestamp" colspan="100%"><%- ob.formattedTimestamp %></td>
+            <td class="chatConversationMessageAvatar">
+                <div class="thumbnail custcol-border-secondary marginRight2 js-username clickable"
+                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
+            </td>
+            <td class="chatConversationMessageBody paddingRight2"><div class="inner"><%= ob.formattedMessage %></div></td>
         </tr>
         <% } %>
     </table>

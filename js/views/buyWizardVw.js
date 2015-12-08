@@ -358,12 +358,7 @@ module.exports = Backbone.View.extend({
         message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id),
         payHREF = "",
         dataURI;
-    console.log(this.model);
-    if(this.model.get('shippingType') == "domestic"){
-      totalBTCPrice = (this.model.get('vendorBTCPrice') + this.model.get('domesticShippingBTC')) * this.model.get('quantity');
-    } else {
-      totalBTCPrice = (this.model.get('vendorBTCPrice') + this.model.get('internationalShippingBTC')) * this.model.get('quantity');
-    }
+    totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
