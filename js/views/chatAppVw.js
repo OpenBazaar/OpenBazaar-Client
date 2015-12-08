@@ -153,7 +153,7 @@ module.exports = Backbone.View.extend({
 
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
-    $('.chatConversationAvatar').css('background-image', 'url(' + avatarURL + ')');
+    $('.chatConversationAvatar').css('background-image', 'url(' + avatarURL + '), url(imgs/defaultUser.png)');
     $('.chatConversationLabel').html(guid);
     $('#inputConversationKey').val(key);
     $('#inputConversationMessage').focus();
