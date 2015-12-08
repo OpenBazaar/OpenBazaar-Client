@@ -44,7 +44,6 @@ module.exports = Backbone.Model.extend({
         Followers: "Followers",
         Following: "Following",
         Message: "Message",
-        Messages: "Messages",
         Store: "Store",
         Edit: "Edit",
         Used: "Used",
@@ -275,7 +274,6 @@ module.exports = Backbone.Model.extend({
         Followers: "Seguidores",
         Following: "Siguiendo a",
         Message: "Mensaje",
-        Messages: "",
         Store: "Tienda",
         Edit: "Editar",
         Used: "Usado",
@@ -499,7 +497,6 @@ module.exports = Backbone.Model.extend({
         Followers: "Followers",
         Following: "Folgt",
         Message: 'Nachricht',
-        Messages: '',
         Store: "Store",
         Edit: "Editieren",
         Used: "Benutzt",
@@ -723,7 +720,6 @@ module.exports = Backbone.Model.extend({
         Followers: "Seguaci",
         Following: "Segue",
         Message: "Messaggio",
-        Messages: "",
         Store: "Negozio",
         Edit: "Modifica",
         Used: "Usato",
@@ -770,7 +766,7 @@ module.exports = Backbone.Model.extend({
         Shipping: "Spedizione",
         Addresses: "Indirizzi",
         NewAddress: "Nuovo indirizzo",
-        CurrentAddress: "Indirizzo attuale",		
+        CurrentAddress: "Indirizzo attuale",
         Returns: "Restituzione",
         ReturnsPolicy: "Politica di restituzione",
         Ampersand: "&",
@@ -916,9 +912,9 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi"
-          }
-        },
-        {
+        }
+      },
+      {
         langName: "French",
         langCode: "fr",
         /* Use capitalized keys for widely reused text that must be capitalized */
