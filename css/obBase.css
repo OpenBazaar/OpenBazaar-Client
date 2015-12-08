@@ -185,8 +185,8 @@ form {
   -webkit-app-region: no-drag;
 }
 
-#pageNav.bar {
-  padding: 0 6px 0 10px;
+#pageNav .bar {
+  padding: 10px 8px;
 }
 
 #sideBar {
@@ -1624,7 +1624,7 @@ div.chatSearchOut .chatSearchIcon {
   word-break: break-word;
   display: inline-block;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.2px;
 }
 
 #inputConversationMessage {
@@ -1654,7 +1654,6 @@ div.chatSearchOut .chatSearchIcon {
 
 #userPage .btn.btn-bar {
   background-color: #575757;
-  border-right: 1px solid #4a4848;
 }
 
 .btn.btn-bar:hover {
@@ -3659,6 +3658,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .borderBottom0 {
   border-bottom: 0;
+}
+
+#ov1  .borderBottom1 {
+  border-bottom: 1px;
 }
 
 #ov1 .fontWeight500 {
