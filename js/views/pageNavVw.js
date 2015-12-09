@@ -66,6 +66,7 @@ module.exports = Backbone.View.extend({
     });
 
     this.listenTo(this.userProfile, 'change', function(){
+      console.log("profile changed");
       this.render();
     });
 
@@ -88,6 +89,16 @@ module.exports = Backbone.View.extend({
     if(data.id == this.socketNotificationID){
       console.log(data);
     }
+  },
+
+  refreshProfile: function() {
+    "use strict";
+    var self = this;
+    this.userProfile.fetch({
+      success: function(){
+        self.render();
+      }
+    });
   },
 
   accordionReady: function(listReady) {
@@ -419,24 +430,18 @@ module.exports = Backbone.View.extend({
     }
 
 
-    var themeId = $('input[name=theme-selection]:checked').attr('id');
-    if(themeId){
+    var themeId = $('input[name=theme-selection]:checked');
+    if(themeId.length > 0){
+      var header = themeId.data('header');
+      var primaryColor = parseInt(themeId.data('primary-color').slice(1), 16);
+      var secondaryColor = parseInt(themeId.data('secondary-color').slice(1), 16);
+      var backgroundColor = parseInt(themeId.data('background-color').slice(1), 16);
+      var textColor = parseInt(themeId.data('text-color').slice(1), 16);
 
-        var primaryColor =  parseInt($($("label[for='"+themeId+"']")[0]).data('primary-color').replace("#","0x"));
-        var secondaryColor =   parseInt($($("label[for='"+themeId+"']")[0]).data('secondary-color').replace("#","0x"));
-        var backgroundColor =  parseInt($($("label[for='"+themeId+"']")[0]).data('background-color').replace("#","0x"));
-        var textColor =   parseInt($($("label[for='"+themeId+"']")[0]).data('text-color').replace("#","0x"));
-        var header = $($("label[for='"+themeId+"']")[0]).data('header');
-
-
-        self.model.set('primary_color', primaryColor);
-        self.model.set('secondary_color', secondaryColor);
-        self.model.set('text_color', backgroundColor);
-        self.model.set('background_color', textColor);
-        //TODO upload Image header
-        //From profile api : header= the hash of the header image. must have been previously uploaded using the upload_image api call. (40 character hex string)
-        //self.model.set('header', header);
-
+      self.model.set('primary_color', primaryColor);
+      self.model.set('secondary_color', secondaryColor);
+      self.model.set('text_color', textColor);
+      self.model.set('background_color', backgroundColor);
     }
 
     $.each(this.model.attributes,
@@ -486,7 +491,9 @@ module.exports = Backbone.View.extend({
                             dataType: "json",
                             success: function(data) {
                                  if(data.success == true) {
-                                   self.currentWindow.reload();
+                                   //self.currentWindow.reload();
+                                   Backbone.history.loadUrl(Backbone.history.fragment);
+                                   self.refreshProfile();
                                  }
                             },
                             error: function(jqXHR, status, errorThrown){

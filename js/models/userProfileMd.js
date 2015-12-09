@@ -90,9 +90,12 @@ module.exports = Backbone.Model.extend({
       }
 
       //if no country, set to USA
-      if(!response.location) {
-        response.location = "UNITED_STATES";
+      if(!response.profile.location) {
+        response.profile.location = "UNITED_STATES";
       }
+
+      //add randome number because change event is not triggered by changes inside profile
+      response.fetched = Math.random();
     }
 
     return response;
