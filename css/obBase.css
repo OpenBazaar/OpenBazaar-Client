@@ -2609,11 +2609,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .icon-huge {
-  font-size: 160px;
-}
-
-.icon-huge {
-  font-size: 160px;
+  font-size: 140px;
 }
 
 .icon-large {
@@ -2632,12 +2628,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .icon-huge.icon-circle-background1 {
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
 }
 
 .icon-huge.icon-circle-background1:before {
-  line-height:160px;
+  line-height:140px;
   font-size:0.8em;
 }
 

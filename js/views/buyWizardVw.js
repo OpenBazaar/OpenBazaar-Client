@@ -32,6 +32,7 @@ module.exports = Backbone.View.extend({
     'click .js-accordionPrev': 'accPrev',
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
+    'click .js-buyWizardCloseSummary': 'closeWizard',
     'blur input': 'validateInput'
   },
 
@@ -67,7 +68,11 @@ module.exports = Backbone.View.extend({
     "use strict";
     var data = JSON.parse(response.data);
     console.log(data);
-    //look for message type "payment received" and orderID
+    console.log(data.notification.order_id);
+    console.log(this.orderID);
+    if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received"){
+      this.showSummary();
+    }
   },
 
   initAccordion: function(targ){
@@ -421,25 +426,26 @@ module.exports = Backbone.View.extend({
 
   checkPayment: function(){
     "use strict";
-    //do this at close
-    var formData = new FormData();
+    console.log("check payment " + this.orderID);
+    var self = this,
+        formData = new FormData();
+
     formData.append("order_id", this.orderID);
-    function checkPay() {
-      $.ajax({
-        type: "POST",
-        url: self.model.get('serverUrl') + "check_for_payment",
-        data: formData,
-        success: function(data){
-          console.log(data);
-        }
-      });
-    }
+    $.ajax({ //this only triggers the server to send a new socket message
+      type: "POST",
+      url: self.model.get('serverUrl') + "check_for_payment",
+      contentType: false,
+      processData: false,
+      data: formData,
+      dataType: "json"
+    });
   },
 
   showSummary: function(){
     "use strict";
-    this.$el.find('.js-buyWizardPay, .js-buyWizardOrderDetails').addClass('hide');
-    this.$el.find('.js-buyWizardOrderSummary').removeClass('hide');
+    console.log("show summary");
+    this.$el.find('.js-buyWizardPay, .js-buyWizardOrderDetails, .js-buyWizardPendingMsg, .js-buyWizardPurchaseBack').addClass('hide');
+    this.$el.find('.js-buyWizardOrderSummary, .js-buyWizardCloseSummary').removeClass('hide');
   },
 
   openCountrySelect: function(){

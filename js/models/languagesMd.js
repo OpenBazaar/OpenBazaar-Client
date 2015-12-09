@@ -240,7 +240,11 @@ module.exports = Backbone.Model.extend({
           BTCto: "BTC to",
           OpenAddress: "Open Address in Local Wallet",
           CopyAddress: "Copy Pay Address to Clipboard",
-          RefreshPayment: "Refresh Payment Status"
+          RefreshPayment: "Refresh Payment Status",
+          summaryMsg1: "Your payment has been sent to",
+          summaryMsg2: "The expected processing time for this order is",
+          summaryMsg3: "You can check the status of your order on your",
+          purchasesPage: "purchases page"
         }
       },
       {
@@ -1383,7 +1387,7 @@ module.exports = Backbone.Model.extend({
           MustAddAddress: "Вы должны указать адрес для доставки",
           VendorShipsTo: "Этот производитель отправляет в следующие страны"
         }
-      },
+      }
     ]
   }
 });

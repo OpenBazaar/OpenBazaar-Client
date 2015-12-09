@@ -1,4 +1,11 @@
 <div class="flexRow">
+  <div class="flexRow custCol-border-secondary borderBottom hide js-buyWizardOrderSummary">
+    <div class="rowItem padding2015">
+      <%= polyglot.t('buyFlow.summaryMsg1') %> <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>.
+      <%= polyglot.t('buyFlow.summaryMsg2') %> <%- ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
+      <a href="#purchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
+    </div>
+  </div>
   <div class="flexRow custCol-border-secondary borderBottom">
     <div class="flexCol-6 borderRight">
       <div class="rowItem padding2015">
