@@ -83,6 +83,10 @@ hr {
   width: 100%;
 }
 
+ul {
+  margin: 0;
+}
+
 input {
   outline: none;
   font-size: 14px;
@@ -186,7 +190,7 @@ form {
   -webkit-app-region: no-drag;
 }
 
-#pageNav .bar {
+.navBar .navBar-main .bar {
   padding: 10px 8px;
 }
 
