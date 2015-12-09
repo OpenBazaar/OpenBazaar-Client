@@ -1731,6 +1731,7 @@ div.chatSearchOut .chatSearchIcon {
   line-height: 46px;
   padding: 0 20px;
   margin-top: 4px;
+  font-size: 15px;
 }
 
 .btn.btn-bar.active {
