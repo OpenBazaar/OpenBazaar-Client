@@ -82,8 +82,7 @@
                   <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
                 </div>
               </div>
-              <ul class="flexRow list js-homeModal-languageList homeModal-settings scrollOverflowY custCol-primary custCol-text">
-              </ul>
+              <div class="js-homeModal-languageList"></div>
             </div>
             <div class="bar barFlush">
               <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
@@ -113,13 +112,13 @@
               <%= polyglot.t('onboarding.yourCountry') %>
               <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
             </div>
-            <div class="flexContainer flex-border custCol-primary js-homeModal-countryList" id="homeModal-countryList">
+            <div class="flexContainer flex-border custCol-primary" id="homeModal-countryList">
               <div class="flexRow">
                 <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border">
                   <input type="text" class="txtField txtField-bar search custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
-
                 </div>
               </div>
+              <div class="js-homeModal-countryList"></div>
               <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
                 <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
                 <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
