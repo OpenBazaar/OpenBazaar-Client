@@ -81,6 +81,15 @@ module.exports = Backbone.View.extend({
         self.user.fetch({
           success: function(model){
             "use strict";
+            //clean the addresses
+            var shippingAddresses = model.get('shipping_addresses'),
+                cleanShippingAddresses = [];
+            __.each(shippingAddresses, function(address){
+              if(address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
+                cleanShippingAddresses.push(address);
+              }
+            });
+            model.set('shipping_addresses', cleanShippingAddresses);
             self.model.set({user: model.toJSON()});
 
             //use default currency to return list of supported currencies

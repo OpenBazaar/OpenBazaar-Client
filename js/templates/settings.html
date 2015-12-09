@@ -245,7 +245,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0 marginLeft6">
+                <div class="fieldItem marginLeft6">
                   <input type="radio" class="fieldItem" id="store_nsfw_yes" name="store-nsfw" value="true" /><label for="store_nsfw_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
                   <input type="radio" class="fieldItem" id="store_nsfw_no" name="store-nsfw" value="false" checked /><label for="store_nsfw_no" class="radioLabel"><%= polyglot.t('No') %></label>
                 </div>
@@ -649,7 +649,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0 marginLeft6">
+                <div class="fieldItem marginLeft6">
                   <input disabled type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
                   <input disabled type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
                 </div>
@@ -800,7 +800,7 @@
                 <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('NewAddress') %></h3>
               </div>
 
-              <div class="flexCol-2 borderRight custCol-border-secondary">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToName">
                     <%= polyglot.t('ShipToName') %>
@@ -808,7 +808,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-10 custCol-border-secondary">
+              <div class="flexCol-9 custCol-border-secondary">
                 <input name="ship_to_name"
                        id="settingsShipToName"
                        type="text"
@@ -820,7 +820,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-2 borderRight custCol-border-secondary">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToStreet">
                     <%= polyglot.t('ShipToStreet') %>
@@ -828,7 +828,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-10 custCol-border-secondary">
+              <div class="flexCol-9 custCol-border-secondary">
                 <input name="ship_to_street"
                        id="settingsShipToStreet"
                        type="text"
@@ -840,7 +840,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-2 borderRight custCol-border-secondary">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToCity">
                     <%= polyglot.t('ShipToCity') %>
@@ -848,7 +848,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-10 custCol-border-secondary">
+              <div class="flexCol-9 custCol-border-secondary">
                 <input name="ship_to_city"
                        id="settingsShipToCity"
                        type="text"
@@ -860,7 +860,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-2 borderRight custCol-border-secondary">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToState">
                     <%= polyglot.t('ShipToState') %>
@@ -868,7 +868,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-10 custCol-border-secondary">
+              <div class="flexCol-9 custCol-border-secondary">
                 <input name="ship_to_state"
                        id="settingsShipToState"
                        type="text"
@@ -880,7 +880,7 @@
 
             <div class="flexRow">
 
-              <div class="flexCol-2 borderRight custCol-border-secondary">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToPostalCode">
                     <%= polyglot.t('ShipToPostalCode') %>
@@ -888,7 +888,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-10 custCol-border-secondary">
+              <div class="flexCol-9 custCol-border-secondary">
                 <input name="ship_to_postal_code"
                        id="settingsShipToPostalCode"
                        type="text"
@@ -900,7 +900,7 @@
 
             <div class="flexRow overflowVisible">
 
-              <div class="flexCol-2 borderRight custCol-border-secondary">
+              <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
                   <label for="settingsShipToCountry">
                     <%= polyglot.t('ShipToCountry') %>
@@ -908,7 +908,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-10 custCol-border-secondary">
+              <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper chosen-relative noIcon">
                     <select
@@ -982,7 +982,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <div class="fieldItem padding0">
+                <div class="fieldItem">
                   <input type="radio" class="fieldItem" id="sslYes" name="ssl" value="true"
                     <% if(ob.user.ssl) { %>
                     checked
