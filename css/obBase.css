@@ -428,17 +428,34 @@ form {
 }
 
 .itemMeta {
-  padding: 0;
+  padding: 6px;
   margin: 0;
   list-style-type: none;
 }
 
 .itemMeta li {
   box-sizing: border-box;
-  border-bottom: solid 1px;
   font-size: 15px;
   padding: 15px;
   width: 100%;
+}
+
+.itemMeta .itemPrice {
+  padding: 15px 15px 2px 15px;
+}
+
+.itemMetaCircle {
+  height: 46px;
+  line-height: 46px;
+  width: 46px;
+  text-align: center;
+  border-radius: 25px;
+  font-size: 18px;
+  opacity: .75;
+}
+
+.itemMetaCircle:before {
+  margin-top: 13px;
 }
 
 .rowItem {
@@ -1276,7 +1293,6 @@ input[type="text"].txtField-bar {
   font-size: 18px;
   border-radius: 2px;
   float: none;
-  text-transform: uppercase;
 }
 
 .btn.btn-buyNow:hover {
@@ -1737,6 +1753,13 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn.btn-half {
   width: 50%;
+}
+
+.btn-pill {
+  padding: 7px 16px;
+  border-radius: 14px;
+  height: 20px;
+  opacity: .75;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -3263,8 +3286,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 20px;
 }
 
+#ov1  .textSize22px {
+  font-size: 22px;
+}
+
 #ov1  .textSize24px {
   font-size: 24px;
+}
+
+#ov1  .textSize28px {
+  font-size: 28px;
+}
+
+#ov1  .textSize30px {
+  font-size: 30px;
 }
 
 #ov1  .textSize90px {
@@ -3392,6 +3427,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: 5px;
 }
 
+#ov1  .marginRight7 {
+  margin-right: 7px;
+}
+
+#ov1  .marginRight8 {
+  margin-right: 8px;
+}
+
 #ov1  .marginRight10 {
   margin-right: 10px;
 }
@@ -3484,8 +3527,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-bottom: 2px;
 }
 
+#ov1  .marginBottom6 {
+  margin-bottom: 6px;
+}
+
 #ov1  .marginBottom8 {
   margin-bottom: 8px;
+}
+
+#ov1  .marginBottom12 {
+  margin-bottom: 12px;
 }
 
 #ov1  .marginBottom20 {
@@ -3528,6 +3579,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 54px;
 }
 
+#ov1  .height46 {
+  height: 46px;
+}
+
+
+
 #ov1  .height30 {
   height: 30px;
   line-height: 30px;
@@ -3558,6 +3615,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 #ov1  .lineHeight24{
   line-height: 24px;
+}
+#ov1  .lineHeight46{
+  line-height: 46px;
 }
 
 #ov1  .lineHeightReset{

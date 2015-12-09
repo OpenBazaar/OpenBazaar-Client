@@ -23,34 +23,65 @@
     </div>
   </div>
   <div class="flexCol-5 pad20Right">
-    <div class="row20 clearfix custCol-secondary borderRadius2">
+    <div class="marginBottom12 clearfix custCol-secondary borderRadius2">
       <ul class="itemMeta">
-        <li class="custCol-border">
-          <span class="textSize17px textOpacity1 fontWeight500"><%- ob.displayPrice %></span>
+        <li class="alignCenter itemPrice">
+          <span class="textSize28px textOpacity1 fontWeight500 marginRight2"><%- ob.displayPrice %></span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
-          <span class="textOpacity75">(<%- ob.vendorBTCPrice.toFixed(4) %> btc)</span>
+          <span class="textSize22px textOpacity65"><%- ob.vendorBTCPrice.toFixed(4) %> btc</span>
           <% } %>
         </li>
-        <% if(ob.vendor_offer.listing.item.condition) { %>
-          <li class="custCol-border textOpacity75"><%- ob.vendor_offer.listing.item.condition %></li>
-        <% } %>
-        <% if(ob.vendor_offer.listing.metadata.category) { %>
-          <li class="custCol-border textOpacity75">
-            <span class="capitalize"><%- ob.vendor_offer.listing.metadata.category %></span>
-          </li>
-        <% } %>
-        <% if(ob.vendor_offer.listing.shipping.shipping_origin) { %>
-          <li class="custCol-border textOpacity75">
-            <span class="capitalize"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></span>
-          </li>
-        <% } %>
-          <li class="border0 alignCenter padding10 height70">
-        <% if(ob.ownPage !== true) { %>
-            <div class="btn btn-light btn-buyNow js-buyButton tTip" data-tt="This is a tooltip"><%= polyglot.t('BUYNOW') %></div>
-          </li>
-        <% } %>        
+        <li class="border0 alignCenter padding10 height70">
+          <div class="btn btn-light btn-buyNow js-buyButton custCol-primary tTip" data-tt="This is a tooltip"><%= polyglot.t('BUYNOW') %></div>
+        </li>
       </ul>
     </div>
+    
+
+    <table class="width100">
+      <tr>
+        <td style="width:50%">
+          <% if(ob.vendor_offer.listing.shipping.shipping_origin) { %>
+          <div class="clearfix">
+            <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7"></div>
+            <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
+          </div>  
+          <% } %>  
+        </td>
+        <td style="width:50%">
+          <% if(ob.vendor_offer.listing.metadata.category) { %>
+          <div class="clearfix">
+            <div class="itemMetaCircle custCol-secondary floatLeft ion-ios-pricetag marginRight7 fontSize16"></div>
+            <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.metadata.category %></div>
+          </div>    
+          <% } %>
+        </td>
+      </tr>
+      <tr>
+        <% if(ob.vendor_offer.listing.item.condition) { %>  
+        <td>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7 fontSize16"></div>
+          <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.item.condition %></div>
+        </td>
+        <% } %>
+
+        <% if(ob.vendor_offer.listing.shipping.free ) { %>  
+        <td>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize16"></div>
+          <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500">Free Shipping</div>
+        </td>
+        <% } %>
+      </tr>
+    </table>
+
+    <% if(ob.vendor_offer.listing.item.keywords != "") { %> 
+    <div class="clearFix marginBottom6 marginTop15 fontSize15"><h4>Keywords</h4></div> 
+    <div class="clearFix">
+      <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { %>
+        <span class="btn-pill custCol-secondary"><%- data  %></span> 
+      <% }); %>    
+    </div>
+    <% } %>
   </div>
 </div>
 
