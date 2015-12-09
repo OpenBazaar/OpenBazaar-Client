@@ -62,7 +62,25 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85);}" +
       "#ov1 #userPage .txtField:focus, #ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + shadeColor2(primaryColor, 0.15) + ";}" +
       "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + shadeColor2(backgroundColor, 0.25) + ";}" +
-      "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.65);}" +
+      "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.65);}";
+      
+    // colorbox stuffs
+    customStyleTag.innerHTML +=
+      "#ov1 #userPage #cboxMiddleLeft { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxMiddleRight { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxBottomRight { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxTopLeft { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxTopCenter { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxTopRight { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxBottomLeft { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxBottomCenter { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxBottomRight { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxContent { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage #cboxContent { color: " + textColor + ";}" +
+      "#ov1 #userPage #cboxCurrent { color: " + textColor + ";}" +
+      "#ov1 #userPage #cboxNext { background-color: " + secondaryColor + "; color: " + textColor + "}" +
+      "#ov1 #userPage #cboxClose { background-color: " + secondaryColor + "; color: " + textColor + "}" +
+      "#ov1 #userPage #cboxPrevious { background-color: " + secondaryColor + "; color: " + textColor + "}" +
       "#ov1 #userPage #cboxOverlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 1);}";
 
   document.body.appendChild(customStyleTag);

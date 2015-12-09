@@ -198,7 +198,7 @@ form {
   background-color: #252525;
   border-left: solid 1px #333333;
   height: calc(100% - 50px);
-  z-index: 1;
+  z-index: 2;
   transition: right 0.5s ease;
   color: #DDD;
 }
@@ -462,7 +462,7 @@ form {
   text-align: center;
   border-radius: 25px;
   font-size: 18px;
-  opacity: 1;
+  opacity: .85;
 }
 
 .itemMetaCircle:before {
@@ -852,12 +852,12 @@ form {
 
 /* colorbox styles */ 
 #colorbox {
-  z-index: 5;
+  z-index: 3;
   outline: none;
 }
 
 #cboxOverlay {
-  z-index: 4;
+  z-index: 2;
   top: 50px;
 }
 
@@ -1525,7 +1525,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeadsCompressed {
-  background: #3A3434;
+  /*background: #3A3434;*/
   height: calc(100% - 430px);
   overflow-x: hidden;
   overflow-y: auto;
@@ -1789,14 +1789,17 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-pill {
-  padding: 7px 16px;
+  padding: 6px 13px;
   cursor: pointer;
-  border-radius: 14px;
+  border-radius: 18px;
   min-height: 17px;
   opacity: .75;
-  margin-bottom: 7px;
-  margin-right: 5px;
+  margin-bottom: 6px;
+  margin-right: 3px;
+  min-width: 30px;
+  text-align: center;
   overflow: hidden;
+  line-height: 20px;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -3365,10 +3368,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .textWeightMedium {
   font-weight: 500;
-}
-
-#ov1 .background3A3434 {
-  background: #3A3434;
 }
 
 

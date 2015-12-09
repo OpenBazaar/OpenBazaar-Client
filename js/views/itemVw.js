@@ -48,13 +48,13 @@ module.exports = Backbone.View.extend({
       'photo': true,
       'fadeOut': 0,
       'opacity': '.90',
-      'speed': 50
-      //  onOpen:function(){
-      //   $('#overlay').show();
-      // },
-      // onClosed:function(){
-      //   $('#overlay').hide();
-      // }
+      'speed': 50,
+      'maxHeight': '85%',
+       onOpen:function(){
+        // we need to append colorbox to obContainer to prevent it from covering the header
+        $("#colorbox").appendTo("#obContainer");
+        $("#cboxOverlay").appendTo("#obContainer");
+      }
     });
   },
 

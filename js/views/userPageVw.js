@@ -928,6 +928,9 @@ module.exports = Backbone.View.extend({
     this.model.off();
     this.off();
     this.remove();
+
+    // close colorbox to make sure the overlay doesnt remain open when going to a different page
+    $.colorbox.close()
   }
 
 });

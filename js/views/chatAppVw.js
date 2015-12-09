@@ -280,7 +280,7 @@ module.exports = Backbone.View.extend({
     this.slideChatOut();
     $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
     $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
-    $(this.$el).find('.chatSearch').addClass('background3A3434').addClass('textOpacity50');
+    $(this.$el).find('.chatSearch').addClass('textOpacity50');
 
   },
 
@@ -288,7 +288,7 @@ module.exports = Backbone.View.extend({
     $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
     $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
     $(this.$el).find('.chatHead').removeClass('chatHeadSelected');
-    $(this.$el).find('.chatSearch').removeClass('background3A3434').removeClass('textOpacity50');
+    $(this.$el).find('.chatSearch').removeClass('textOpacity50');
 
 
     // let's clear the form on close
