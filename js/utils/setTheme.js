@@ -57,6 +57,8 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .search-choice { background-color: " + secondaryColor + "; background-image: none; border: none; padding: 10px; color: " + textColor + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
       "#ov1 #userPage .custCol-border-background { border-color: " + backgroundColor + " }" +
       "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + secondaryColor + "}" +
+      "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-single, #ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li { color:" + textColor + " }" +
+      "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li.highlighted { background:" + secondaryColor + " }" +
       "#ov1 #userPage .custCol-primary-darken { background: " + shadeColor2(primaryColor, -0.35) + ";}" +
       "#ov1 #userPage .custCol-text, .search-field input { color: " + textColor + "!important;}" +
       "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85);}" +
