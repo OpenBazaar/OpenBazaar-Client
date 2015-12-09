@@ -14,11 +14,14 @@
     <div class="flexCol-7 pad20">
       <div class="itemImg itemImg-large row10"
       style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+          <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
+            <button class="fullscreen js-photoGallery" href="<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>"></button>
+          <% } %>
       </div>
     <div class="flexRow row20">
       <% _.each(ob.vendor_offer.listing.item.image_hashes, function(data, i) {
       if(i != 0){%>
-      <div class="itemImg itemImg-small" style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"></div>
+      <div class="itemImg itemImg-small" style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"><button class="fullscreen js-photoGallery" href="<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>"></button></div>
       <% } }); %>
     </div>
   </div>
@@ -38,13 +41,13 @@
     </div>
     
 
-    <table class="width100">
+    <table class="width100 custCol-text">
       <tr>
         <td style="width:50%">
           <% if(ob.vendor_offer.listing.shipping.shipping_origin) { %>
           <div class="clearfix">
             <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7"></div>
-            <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
+            <div class="itemMetaValue noOverflow"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
           </div>  
           <% } %>  
         </td>
@@ -52,7 +55,7 @@
           <% if(ob.vendor_offer.listing.metadata.category) { %>
           <div class="clearfix">
             <div class="itemMetaCircle custCol-secondary floatLeft ion-ios-pricetag marginRight7 fontSize16"></div>
-            <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.metadata.category %></div>
+            <div class="itemMetaValue"><%- ob.vendor_offer.listing.metadata.category %></div>
           </div>    
           <% } %>
         </td>
@@ -61,25 +64,27 @@
         <% if(ob.vendor_offer.listing.item.condition) { %>  
         <td>
           <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7 fontSize16"></div>
-          <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.item.condition %></div>
+          <div class="itemMetaValue"><%- ob.vendor_offer.listing.item.condition %></div>
         </td>
         <% } %>
 
-        <% if(ob.vendor_offer.listing.shipping.free ) { %>  
+        <% if( ob.vendor_offer.listing.metadata.category === "physical good" && ob.vendor_offer.listing.shipping.free ) { %>  
         <td>
           <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize16"></div>
-          <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500">Free Shipping</div>
+          <div class="itemMetaValue"><%= polyglot.t('FreeShipping') %></div>
         </td>
         <% } %>
       </tr>
     </table>
 
     <% if(ob.vendor_offer.listing.item.keywords != "") { %> 
-    <div class="clearFix marginBottom6 marginTop15 fontSize15"><h4>Keywords</h4></div> 
-    <div class="clearFix">
-      <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { %>
-        <span class="btn-pill custCol-secondary"><%- data  %></span> 
-      <% }); %>    
+    <div class="clearFix marginTop15 fontSize15"><h4><%= polyglot.t('Keywords') %></h4></div> 
+    <div class="clearFix marginBottom20">
+      <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { 
+        if(data.length < 100) { 
+        %>
+          <div class="btn-pill custCol-secondary floatLeft"><%- data  %></div>
+      <% } }); %>    
     </div>
     <% } %>
   </div>

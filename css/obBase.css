@@ -427,6 +427,17 @@ form {
   margin: 0 10px 10px 0;
 }
 
+.itemImg.itemImg-small .fullscreen,
+.itemImg.itemImg-large .fullscreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
 .itemMeta {
   padding: 6px;
   margin: 0;
@@ -445,9 +456,9 @@ form {
 }
 
 .itemMetaCircle {
-  height: 46px;
-  line-height: 46px;
-  width: 46px;
+  height: 44px;
+  line-height: 44px;
+  width: 44px;
   text-align: center;
   border-radius: 25px;
   font-size: 18px;
@@ -455,7 +466,18 @@ form {
 }
 
 .itemMetaCircle:before {
-  margin-top: 13px;
+  margin-top: 12px;
+}
+
+.itemMetaValue {
+  max-width: 130px;
+  float: left;
+  font-size: 16px;
+  opacity: .75;
+  height: 44px;
+  line-height: 44px;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .rowItem {
@@ -826,6 +848,17 @@ form {
   text-align: center;
   font-size: 10px;
   opacity: .5;
+}
+
+/* colorbox styles */ 
+#colorbox {
+  z-index: 5;
+  outline: none;
+}
+
+#cboxOverlay {
+  z-index: 4;
+  top: 50px;
 }
 
 /*========== typography ==========*/
@@ -1239,11 +1272,10 @@ input[type="text"].txtField-bar {
 .btn-large {
   height: 42px;
   font-size: 15px;
-  min-width: 160px;
   line-height: 42px;
   float: left;
   background-color: #086A9E; /* default color */
-  padding:0;
+  padding: 0 20px;
   border-radius: 3px;
   opacity: .80;
   box-sizing: border-box;
@@ -1758,9 +1790,13 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn-pill {
   padding: 7px 16px;
+  cursor: pointer;
   border-radius: 14px;
-  height: 20px;
+  min-height: 17px;
   opacity: .75;
+  margin-bottom: 7px;
+  margin-right: 5px;
+  overflow: hidden;
 }
 
 .btn.btn-half.btn-bar:last-child,
