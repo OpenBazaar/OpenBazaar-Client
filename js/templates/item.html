@@ -44,7 +44,7 @@
           <% if(ob.vendor_offer.listing.shipping.shipping_origin) { %>
           <div class="clearfix">
             <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7"></div>
-            <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
+            <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
           </div>  
           <% } %>  
         </td>
@@ -52,7 +52,7 @@
           <% if(ob.vendor_offer.listing.metadata.category) { %>
           <div class="clearfix">
             <div class="itemMetaCircle custCol-secondary floatLeft ion-ios-pricetag marginRight7 fontSize16"></div>
-            <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.metadata.category %></div>
+            <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.metadata.category %></div>
           </div>    
           <% } %>
         </td>
@@ -61,14 +61,14 @@
         <% if(ob.vendor_offer.listing.item.condition) { %>  
         <td>
           <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7 fontSize16"></div>
-          <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.item.condition %></div>
+          <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500"><%- ob.vendor_offer.listing.item.condition %></div>
         </td>
         <% } %>
 
         <% if(ob.vendor_offer.listing.shipping.free ) { %>  
         <td>
           <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize16"></div>
-          <div class="floatLeft capitalize fontSize15 textOpacity75 height46 lineHeight46 fontWeight500">Free Shipping</div>
+          <div class="floatLeft capitalize fontSize16 textOpacity75 height46 lineHeight46 fontWeight500">Free Shipping</div>
         </td>
         <% } %>
       </tr>
