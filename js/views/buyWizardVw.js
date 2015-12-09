@@ -31,6 +31,7 @@ module.exports = Backbone.View.extend({
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
+    'click .js-buyWizardPayCheck': 'checkPayment',
     'blur input': 'validateInput'
   },
 

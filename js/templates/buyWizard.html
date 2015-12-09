@@ -19,13 +19,14 @@
           <img class="pull-left qrCode js-buyWizardPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
           <div class="pull-left rowtop20 pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row20 textSize16px">
-              Send <span class="js-buyWizardDetailsTotalBTC"></span> BTC to
+              <%= polyglot.t('buyFlow.Send') %> <span class="js-buyWizardDetailsTotalBTC"></span> <%= polyglot.t('buyFlow.BTCto') %>
             </div>
             <div class="txt-center row20">
               <a class="textSize11px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
             </div>
-            <a class="btn btn-txt btn-wide row20 js-buyWizardPayLink"><i class="ion-link"></i> Open Address in Local Wallet</a>
-            <a class="btn btn-txt btn-wide js-buyWizardPayCopy"><i class="ion-clipboard"></i> Copy Pay Address to Clipboard</a>
+            <a class="btn btn-txt btn-wide row20 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
+            <a class="btn btn-txt btn-wide js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+            <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
           </div>
         </div>
       </div>
