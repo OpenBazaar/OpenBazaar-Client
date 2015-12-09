@@ -83,10 +83,6 @@ hr {
   width: 100%;
 }
 
-ul {
-  margin: 0;
-}
-
 input {
   outline: none;
   font-size: 14px;
@@ -190,7 +186,7 @@ form {
   -webkit-app-region: no-drag;
 }
 
-.navBar .navBar-main .bar {
+#pageNav .bar {
   padding: 10px 8px;
 }
 
@@ -422,17 +418,31 @@ form {
   /* flex row collapses unless a specific height is set */
   height: 380px;
   width: 100%;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .itemImg.itemImg-small {
   height: 82px;
   width: 121px;
   margin: 0 10px 10px 0;
+  border-radius: 1px;
 }
 
 .itemImg.itemImg-small:nth-child(4) {
   margin-right: 0;
+}
+.itemImg.itemImg-small:nth-child(4):before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "...";
+  background: #000;
+  opacity: .75;
+  border-radius: 1px;
+  line-height: 82px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .itemImg.itemImg-small .fullscreen,
