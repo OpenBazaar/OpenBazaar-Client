@@ -46,6 +46,7 @@ module.exports = Backbone.View.extend({
      */
     this.parentEl = $(options.parentEl);
     this.hideMap = true;
+    this.orderID = "";
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -57,6 +58,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
     });
+
     this.render();
   },
 
@@ -358,6 +360,7 @@ module.exports = Backbone.View.extend({
         message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id),
         payHREF = "",
         dataURI;
+    this.orderID = data.order_id;
     totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
@@ -413,6 +416,23 @@ module.exports = Backbone.View.extend({
     this.buyDetailsView.render();
     this.$el.find('.js-buyWizardSendPurchase').removeClass('hide');
     this.$el.find('.js-buyWizardPendingMsg').addClass('hide');
+  },
+
+  checkPayment: function(){
+    "use strict";
+    //do this at close
+    var formData = new FormData();
+    formData.append("order_id", this.orderID);
+    function checkPay() {
+      $.ajax({
+        type: "POST",
+        url: self.model.get('serverUrl') + "check_for_payment",
+        data: formData,
+        success: function(data){
+          console.log(data);
+        }
+      });
+    }
   },
 
   showSummary: function(){
