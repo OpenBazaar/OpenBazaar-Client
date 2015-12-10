@@ -404,7 +404,7 @@ module.exports = Backbone.Model.extend({
           userError: "La informaci&oacute;n para este ID no se pudo encontrar",
           userNotFoundError: "La informaci&oacute;n de esta persona no est&aacute; disponible. Es posible que se haya desconectado.",
           notFoundError: "Los datos no se pudieron cargar para:",
-          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n predeterminadas de ws://localhost:18466",
+          socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n predeterminada de ws://localhost:18466",
           contractError: "Este artículo no puede ser comprado" ,
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra"
         },
