@@ -1,0 +1,60 @@
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left; background: #ffffff;}
+#cboxContent{position:relative; background: #ffffff;}
+#cboxLoadedContent{overflow:auto;}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none; border-top-left-radius: 3px; border-top-right-radius: 3px;}
+.cboxIframe{width:100%; height:100%; display:block; border:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
+#cboxOverlay{background-color: rgba(37,37,37,.95);}
+#colorbox{}
+#cboxTopLeft{width:0; height:0; background: #ffffff;}
+#cboxTopCenter{height:0; background: #ffffff;}
+#cboxTopRight{width:0; height:0; background: #ffffff;}
+#cboxBottomLeft{width:0; height:0; background: #ffffff;}
+#cboxBottomCenter{height:0; background: #ffffff;}
+#cboxBottomRight{width:0; height:0; background: #ffffff;}
+#cboxMiddleLeft{width:0; background: #ffffff;}
+#cboxMiddleRight{width:0; background: #ffffff;}
+#cboxContent{background: transparent; overflow:hidden; border-radius: 3px;}
+.cboxIframe{background:#fff;}
+#cboxError{padding:50px; border:1px solid #ccc;}
+#cboxLoadedContent{margin-bottom:50px;}
+#cboxTitle{position:absolute; bottom:0px; left:0; text-align:center; line-height: 0; height: 0; width:100%;}
+#cboxCurrent{position:absolute; bottom:17px; left:10px; color:#999;}
+#cboxSlideshow{position:absolute; bottom:0px; right:42px; color:#444;}
+#cboxPrevious{display: block;
+    position: absolute;
+    background: transparent;
+    border: 0;
+    top: 0;
+    left: 10px;
+    height: calc(100% - 51px);
+    color: #fff;
+    width: 50%;
+    opacity: .90;
+    font-size: 42px;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.55);
+    text-align: left;
+    outline: none;
+}
+#cboxNext{display: block;
+    position: absolute;
+    background: transparent;
+    border: 0;
+    top: 0;
+    right: 10px;
+    height: calc(100% - 51px);
+    color: #fff;
+    width: 50%;
+    opacity: .90;
+    font-size: 42px;
+    text-align: right;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.55);
+    outline: none;
+}
+#cboxLoadingOverlay{background:#fff;}
+#cboxClose{display: block; position:absolute; bottom:9px; right:8px;border:0;border-radius: 3px;outline: none;padding:10px; font-weight:bold;opacity: 1;  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15)}

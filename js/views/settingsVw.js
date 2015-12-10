@@ -187,7 +187,10 @@ module.exports = Backbone.View.extend({
         country_str = "",
         currency_str = "",
         timezone_str = "",
-        language_str = "";
+        language_str = "",
+        pageNSFW = this.model.get('page').profile.nsfw;
+
+    this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
@@ -494,7 +497,7 @@ module.exports = Backbone.View.extend({
       bColor.val(parseInt(bColorVal.slice(1), 16));
       tColor.val(parseInt(tColorVal.slice(1), 16));
 
-      self.saveData(form, self.model.get('page'), "profile", function(){
+      self.saveData(form, self.model.get('page').profile, "profile", function(){
         "use strict";
         showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         //set color inputs back to original values
@@ -510,7 +513,7 @@ module.exports = Backbone.View.extend({
       var socialSend = function (socialInput) {
         var socialData = {};
         socialInputCount++;
-        if(socialInput){
+        if(socialInput.val()){
           socialData.account_type = socialInput.data('type');
           socialData.username = socialInput.val();
           self.saveData("", "", "social_accounts",

@@ -29,9 +29,9 @@
 
   <div class="user-page-content">
     <div class="user-page-header-slim-bg-cover custCol-background"></div>
-    <div class="flexRow user-page-header-slim hide borderBottom2 custCol-border-secondary shadow-inner1-ultra-light" style="">
+    <div class="flexRow user-page-header-slim borderBottom2 custCol-border-secondary shadow-inner1-ultra-light">
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
+        <div class="thumbnail thumbnail-large-slim pull-left js-userPageAvatar"
              <% if(ob.page.profile.avatar_hash) { %>
              style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
              <% } else { %>
@@ -41,8 +41,8 @@
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft88">
-          <h1 class="page-userNameLarge floatLeft capitalize fancy-heading colorWhiteForce"><%- ob.page.profile.name.toLowerCase() %></h1>
-          <div class="floatLeft marginLeft6 marginTop6 colorWhiteForce"><%- ob.page.profile.handle %></div>
+          <h1 class="page-userNameLarge floatLeft capitalize fancy-heading fontSize20"><%- ob.page.profile.name.toLowerCase() %></h1>
+          <div class="floatLeft marginLeft6 marginTop6"><%- ob.page.profile.handle %></div>
         </div>
       </div>
     </div>
@@ -143,7 +143,7 @@
           </a>
         </div>
       </div>
-    </div>
+    </div>    
   </div>
 
   <div class="bar navBar barFlush user-page-navigation custCol-secondary">
@@ -157,7 +157,7 @@
   <div class="userPage-subViews custCol-primary minHeight650">
     <div class="flexContainer flex-border custCol-primary hide js-about js-tabTarg minHeight650">
       <div class="flexRow minHeight650">
-        <div class="flexCol-8 custCol-border-secondary borderBottom0">
+        <div class="flexCol-8 custCol-border borderBottom0">
           <div class="rowItem">
             <% if(ob.page.profile.about) { %>
               <%- ob.page.profile.about %>
@@ -250,7 +250,7 @@
     </div>
     <div class="flexContainer flex-border custCol-primary js-followers js-tabTarg hide minHeight650">
       <div class="flexRow height54">
-        <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border-secondary">
+        <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
           <input type="text" id="inputFollowers" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
         </div>
         <div class="selectPill pull-up43">
@@ -270,7 +270,7 @@
     </div>
     <div class="flexContainer flex-border custCol-primary js-following js-tabTarg hide minHeight650">
       <div class="flexRow height54">
-        <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border-secondary">
+        <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
           <input type="text" id="inputFollowing" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
         </div>
         <div class="selectPill pull-up43">
@@ -347,3 +347,4 @@
   </div>
 </div>
 <div id="modalHolder"></div>
+ 

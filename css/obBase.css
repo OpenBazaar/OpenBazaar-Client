@@ -45,14 +45,10 @@ body {
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
+  /*-webkit-font-smoothing: subpixel-antialiased;*/
   letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 a {
@@ -180,6 +176,7 @@ form {
   z-index: 3;
 }
 
+
 .pageNavContainer {
   width: 100%;
   z-index: 3;
@@ -189,7 +186,7 @@ form {
   -webkit-app-region: no-drag;
 }
 
-.navBar .navBar-main .bar {
+#pageNav .navBar.bar {
   padding: 10px 8px;
 }
 
@@ -201,7 +198,7 @@ form {
   background-color: #252525;
   border-left: solid 1px #333333;
   height: calc(100% - 50px);
-  z-index: 1;
+  z-index: 2;
   transition: right 0.5s ease;
   color: #DDD;
 }
@@ -263,7 +260,7 @@ form {
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.65);
-  z-index: 2;
+  z-index: 3;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
 
@@ -390,7 +387,7 @@ form {
   width: 317px;
 }
 
-#userPage-subViews .gridItem,
+.userPage-subViews .gridItem,
 .homeView .gridItem {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
@@ -398,12 +395,12 @@ form {
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-#userPage-subViews .gridItem:hover,
+.userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
   opacity: 1;
 }
 
-#userPage-subViews .gridItem:nth-child(3n),
+.userPage-subViews .gridItem:nth-child(3n),
 .homeView .gridItem:nth-child(3n) {
   border-right: 0;
 }
@@ -419,14 +416,86 @@ form {
 
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
-  height: 357px;
-  width: 357px;
+  height: 380px;
+  width: 100%;
+  border-radius: 3px;
 }
 
 .itemImg.itemImg-small {
   height: 82px;
-  width: 82px;
+  width: 121px;
   margin: 0 10px 10px 0;
+  border-radius: 1px;
+}
+
+.itemImg.itemImg-small:nth-child(4) {
+  margin-right: 0;
+}
+.itemImg.itemImg-small:nth-child(4):before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: "...";
+  background: #000;
+  opacity: .75;
+  border-radius: 1px;
+  line-height: 82px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.itemImg.itemImg-small .fullscreen,
+.itemImg.itemImg-large .fullscreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.itemMeta {
+  padding: 6px;
+  margin: 0;
+  list-style-type: none;
+}
+
+.itemMeta li {
+  box-sizing: border-box;
+  font-size: 15px;
+  padding: 15px;
+  width: 100%;
+}
+
+.itemMeta .itemPrice {
+  padding: 15px 15px 2px 15px;
+}
+
+.itemMetaCircle {
+  height: 44px;
+  line-height: 44px;
+  width: 44px;
+  text-align: center;
+  border-radius: 25px;
+  font-size: 18px;
+  opacity: .85;
+}
+
+.itemMetaCircle:before {
+  margin-top: 12px;
+}
+
+.itemMetaValue {
+  max-width: 130px;
+  float: left;
+  font-size: 16px;
+  opacity: .75;
+  height: 44px;
+  line-height: 44px;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .rowItem {
@@ -793,6 +862,30 @@ label.fieldItem {
   padding-right: 15px;
   position: relative;
   background-color: rgb(33, 81, 117);
+}
+
+.breadCrumbArrow {
+  margin-top: 10px; 
+  width: 20px; 
+  text-align: center;
+  font-size: 10px;
+  opacity: .5;
+}
+
+/* colorbox styles */ 
+#colorbox {
+  z-index: 3;
+  outline: none;
+  margin-top: 20px;
+  transition: margin 0.5s ease;
+  position: fixed;
+}
+
+#cboxOverlay {
+  z-index: 2;
+  top: 50px;
+  height: 100%;
+  width: calc(100% - 30px);
 }
 
 /*========== typography ==========*/
@@ -1206,11 +1299,10 @@ input[type="text"].txtField-bar {
 .btn-large {
   height: 42px;
   font-size: 15px;
-  min-width: 160px;
   line-height: 42px;
   float: left;
   background-color: #086A9E; /* default color */
-  padding:0;
+  padding: 0 20px;
   border-radius: 3px;
   opacity: .80;
   box-sizing: border-box;
@@ -1251,14 +1343,21 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-buyNow {
-  margin-top: 10px;
-  width: 200px;
-  height: 40px;
-  line-height: 40px;
+  margin: auto;
+  width: 100%;
+  height: 52px;
+  line-height: 52px;
   padding: 0;
-  opacity: 1;
-  font-size: 14px;
+  opacity: .90;
+  font-size: 18px;
+  border-radius: 2px;
+  float: none;
 }
+
+.btn.btn-buyNow:hover {
+  opacity: 1;
+}
+
 
 .btn.btn-txtOnly {
   background: none;
@@ -1453,6 +1552,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeadsCompressed {
+  /*background: #3A3434;*/
   height: calc(100% - 430px);
   overflow-x: hidden;
   overflow-y: auto;
@@ -1577,8 +1677,8 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatHeadSelected {
   opacity: 1;
-  outline: solid 1px #ccc;
-  background: #3E3E3E;
+  outline: solid 1px #FFFFFF;
+  background: #565656;
   z-index:3;
 }
 
@@ -1690,6 +1790,7 @@ div.chatSearchOut .chatSearchIcon {
   line-height: 46px;
   padding: 0 20px;
   margin-top: 4px;
+  font-size: 14px;
 }
 
 .btn.btn-bar.active {
@@ -1712,6 +1813,20 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn.btn-half {
   width: 50%;
+}
+
+.btn-pill {
+  padding: 5px 13px;
+  cursor: pointer;
+  border-radius: 18px;
+  min-height: 17px;
+  opacity: .75;
+  margin-bottom: 6px;
+  margin-right: 3px;
+  min-width: 30px;
+  text-align: center;
+  overflow: hidden;
+  line-height: 20px;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -2429,6 +2544,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
 }
 
+.notification .rowItem {
+  opacity: .35;
+}
+
+.notification .rowItem:hover {
+  opacity: .75;
+}
+
 .popMenu-navBar {
   top: -238px;
   right: 10px;
@@ -2441,6 +2564,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 10px 0;
   width: 230px;
   z-index: -1;
+  overflow: hidden;
 }
 
 .popMenu-navBar-opened {
@@ -2594,12 +2718,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 64px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  height: 54px;
+  height: 0;
+  opacity: 0;
   width: 950px;
   background: #281B2E;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.35);
   z-index: 4;
   padding: 0;
+  transition: height .25s cubic-bezier(0, 0, 0.2, 1);
+
 }
 
 .user-page-header-slim-bg-cover {
@@ -2816,9 +2943,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .page-contractTitle {
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: .5px;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: .8px;
   margin-bottom: 0;
   opacity: 1;
 }
@@ -3225,8 +3352,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 20px;
 }
 
+#ov1  .textSize22px {
+  font-size: 22px;
+}
+
 #ov1  .textSize24px {
   font-size: 24px;
+}
+
+#ov1  .textSize28px {
+  font-size: 28px;
+}
+
+#ov1  .textSize30px {
+  font-size: 30px;
 }
 
 #ov1  .textSize90px {
@@ -3350,12 +3489,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: 5px;
 }
 
+#ov1  .marginRight7 {
+  margin-right: 7px;
+}
+
+#ov1  .marginRight8 {
+  margin-right: 8px;
+}
+
 #ov1  .marginRight10 {
   margin-right: 10px;
 }
 
 #ov1  .marginRight15 {
   margin-right: 15px;
+}
+
+#ov1  .marginLeftNeg115 {
+  margin-left: -115px;
 }
 
 #ov1  .marginLeft1 {
@@ -3384,6 +3535,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginLeft15 {
   margin-left: 15px;
+}
+
+#ov1  .marginLeft20 {
+  margin-left: 20px;
 }
 
 #ov1  .marginLeft88 {
@@ -3438,6 +3593,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-bottom: 2px;
 }
 
+#ov1  .marginBottom6 {
+  margin-bottom: 6px;
+}
+
+#ov1  .marginBottom8 {
+  margin-bottom: 8px;
+}
+
+#ov1  .marginBottom12 {
+  margin-bottom: 12px;
+}
+
 #ov1  .marginBottom20 {
   margin-bottom: 20px;
 }
@@ -3478,6 +3645,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 54px;
 }
 
+#ov1  .height46 {
+  height: 46px;
+}
+
+
+
+#ov1  .height30 {
+  height: 30px;
+  line-height: 30px;
+}
+
 #ov1  .height70 {
   height: 70px;
 }
@@ -3494,12 +3672,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   min-height: 420px;
 }
 
+#ov1  .minHeight300 {
+  min-height: 300px;
+}
+
 #ov1  .lineHeight20{
   line-height: 20px;
 }
 
 #ov1  .lineHeight21{
   line-height: 21px;
+}
+#ov1  .lineHeight24{
+  line-height: 24px;
+}
+#ov1  .lineHeight46{
+  line-height: 46px;
 }
 
 #ov1  .lineHeightReset{
@@ -3544,6 +3732,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding20 {
   padding: 20px;
+}
+
+#ov1  .padding30 {
+  padding: 30px;
 }
 
 #ov1  .padding2015 {
@@ -3696,6 +3888,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-decoration: underline !important;
 }
 
+#ov1 .blur {
+  -webkit-filter: blur(1px);
+}
+
+#ov1 .underline {
+  text-decoration: underline;
+}
+
+#ov1 .zIndex4 {
+  z-index: 4;
+}
+
 .badge:after{
   content: attr(data-count);
   position: absolute;
@@ -3710,6 +3914,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background-opacity: .75;
   background-color: #FFA41C;
 }
+
 
 /* terrible hack, TODO: remove before production */
 
