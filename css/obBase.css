@@ -654,6 +654,11 @@ label.fieldItem {
   padding-left: 20px;
 }
 
+.pad50 {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
 .popMenu {
   position: absolute;
   z-index: 1;

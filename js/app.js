@@ -84,13 +84,11 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 
 this.loadNewServer = function(newServer) {
   "use strict";
-  console.log(newServer);
   localStorage.setItem("serverUrl", newServer);
   loadProfile();
 };
 
 var loadProfile = function() {
-  console.log("load profile");
 
   var reloadProfile = function(){
     "use strict";
@@ -106,7 +104,7 @@ var loadProfile = function() {
           $('.js-indexLoadingMsg4').text("");
           clearInterval(loadProfileCountdownInterval);
           loadProfileCount++;
-          //loadProfile();
+          loadProfile();
         }
       }, 2000);
     } else {
@@ -169,7 +167,7 @@ var loadProfile = function() {
       }else{
         $('.js-indexLoadingMsg1').text("User profile did not load.");
         $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
-        $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
+        $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount + " of 3");
         reloadProfile();
       }
     },
@@ -177,7 +175,7 @@ var loadProfile = function() {
       $('.js-loadingModal').addClass('hide');
       $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded: " + response.statusText);
       $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
-      $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount);
+      $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount + " of 3");
       reloadProfile();
     }
   });
