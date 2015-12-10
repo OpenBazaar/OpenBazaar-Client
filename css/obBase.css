@@ -49,11 +49,6 @@ body {
   letter-spacing: .4px;
   line-height: 1.2;
   margin: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 }
 
 a {
@@ -260,7 +255,7 @@ form {
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.65);
-  z-index: 2;
+  z-index: 3;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
 
@@ -387,7 +382,7 @@ form {
   width: 317px;
 }
 
-#userPage-subViews .gridItem,
+.userPage-subViews .gridItem,
 .homeView .gridItem {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
@@ -395,12 +390,12 @@ form {
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-#userPage-subViews .gridItem:hover,
+.userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
   opacity: 1;
 }
 
-#userPage-subViews .gridItem:nth-child(3n),
+.userPage-subViews .gridItem:nth-child(3n),
 .homeView .gridItem:nth-child(3n) {
   border-right: 0;
 }
@@ -2561,6 +2556,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 10px 0;
   width: 230px;
   z-index: -1;
+  overflow: hidden;
 }
 
 .popMenu-navBar-opened {
@@ -2721,7 +2717,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.35);
   z-index: 4;
   padding: 0;
-  transition: height .35s;
+  transition: height .25s cubic-bezier(0, 0, 0.2, 1);
 
 }
 
@@ -3894,6 +3890,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .underline {
   text-decoration: underline;
+}
+
+#ov1 .zIndex4 {
+  z-index: 4;
 }
 
 .badge:after{

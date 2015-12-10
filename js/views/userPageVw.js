@@ -273,7 +273,6 @@ module.exports = Backbone.View.extend({
         if ($(this).scrollTop() > 395 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.user-page-header-slim').addClass('textOpacity1').addClass('height54');
-          $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
           $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
           $('.user-page-header .rowItem').hide();
           $('.user-page-navigation-buttons').addClass('positionFixed positionTop66');
@@ -281,13 +280,12 @@ module.exports = Backbone.View.extend({
         if ($(this).scrollTop() < 395 && self.slimVisible === true ) {
           self.slimVisible = false;
           $('.user-page-header-slim').removeClass('height54');
-          $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
           $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
           $('.user-page-header .rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop66');
           setTimeout(function(){ 
             $('.user-page-header-slim').removeClass('textOpacity1');
-          }, 150);
+          }, 100);
         }
       });
 

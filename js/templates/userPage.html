@@ -29,9 +29,9 @@
 
   <div class="user-page-content">
     <div class="user-page-header-slim-bg-cover custCol-background"></div>
-    <div class="flexRow user-page-header-slim borderBottom2 custCol-border shadow-inner1-ultra-light" style="">
+    <div class="flexRow user-page-header-slim borderBottom2 custCol-border shadow-inner1-ultra-light">
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
+        <div class="thumbnail thumbnail-large-slim pull-left js-userPageAvatar"
              <% if(ob.page.profile.avatar_hash) { %>
              style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
              <% } else { %>
