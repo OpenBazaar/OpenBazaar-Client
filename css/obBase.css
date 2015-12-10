@@ -211,11 +211,11 @@ form {
 }
 
 #sideBar input::-webkit-input-placeholder {
-  color: white;
+  color: #fff;
 }
 
 #sideBar.btn {
-  color: white;
+  color: #fff;
 }
 
 .chatSearch {
@@ -3309,6 +3309,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .txt-darkest {
+  color: #000;
+}
+
+#ov1 input.placeholder-dark::-webkit-input-placeholder  {
   color: #000;
 }
 
