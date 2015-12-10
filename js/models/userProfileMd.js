@@ -75,7 +75,7 @@ module.exports = Backbone.Model.extend({
 
       //if an empty social_accounts object is returned, put the defaults back into it
       response.profile.social_accounts.facebook = response.profile.social_accounts.facebook || {username: "", proof_url: ""};
-      response.profile.social_accounts.twitter = response.profile.social_accounts.facebook || {twitter: "", proof_url: ""};
+      response.profile.social_accounts.twitter = response.profile.social_accounts.twitter || {username: "", proof_url: ""};
       response.profile.social_accounts.instagram = response.profile.social_accounts.instagram || {username: "", proof_url: ""};
       response.profile.social_accounts.snapchat = response.profile.social_accounts.snapchat || {username: "", proof_url: ""};
 
@@ -88,6 +88,8 @@ module.exports = Backbone.Model.extend({
       if(!response.profile.name){
         response.profile.name = "ob" + Math.random().toString(36).slice(2);
       }
+
+      console.log(response.location);
 
       //if no country, set to USA
       if(!response.profile.location) {
