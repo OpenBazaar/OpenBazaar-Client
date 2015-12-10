@@ -7,6 +7,67 @@
         <% } %>
   </div>
 
+  <div id="image-cropper" class="headerCropper banner-large js-pageCustomizationButtons js-headerCropper">
+    <div class="headerCropperPreview banner-large cropit-image-preview js-pageCustomizationButtons"></div>
+    <div class="statusBar navBar fadeOut positionAbsolute js-headerLoading">
+      <div class="pad20 rowTop20 width100"><h2 class="txt-center">Loading Image...</h2></div>
+    </div>
+    <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
+    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+    <input id="headerImageInput" type="file" class="cropit-image-input hide" />
+    <div class="bar navBar barFlush user-page-navigation positionBottom">
+      <div class="navEnd pad10">
+        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide textOpacity75">
+          <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
+        </div>
+        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
+          <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-page-content">
+    <div class="user-page-header-slim-bg-cover custCol-background"></div>
+    <div class="flexRow user-page-header-slim borderBottom2 custCol-border shadow-inner1-ultra-light" style="">
+      <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
+        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
+             <% if(ob.page.profile.avatar_hash) { %>
+             style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+             <% } else { %>
+             style="background-image: url(imgs/defaultUser.png);">
+             <% } %>
+        </div>
+      </div>
+      <div class="pull-left">
+        <div class="vCentered marginLeft88">
+          <h1 class="page-userNameLarge floatLeft capitalize fancy-heading colorWhiteForce fontSize20"><%- ob.page.profile.name.toLowerCase() %></h1>
+          <div class="floatLeft marginLeft6 marginTop6 colorWhiteForce"><%- ob.page.profile.handle %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flexRow shadow-inner1 user-page-header">
+    <div class="rowItem positionBottom width600 padding0 paddingLeft20">
+      <div class="table">
+        <div>
+          <div class="thumbnail thumbnail-large js-userPageAvatar"
+              <% if(ob.page.profile.avatar_hash) { %>
+              style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+              <% } else { %>
+              style="background-image: url(imgs/defaultUser.png);">
+              <% } %>
+          </div>
+          <div class="pad15 push-down5 noOverflow">
+            <span class="h1 page-userNameLarge capitalize fancy-heading colorWhiteForce"><%- ob.page.profile.name.toLowerCase() %></span>
+            <br />
+            <span class="textSize16px colorWhiteForce"><%- ob.page.profile.handle %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="bar navBar barFlush user-page-navigation-buttons positionBottom backgroundTransparent width950">
       <div class="navEnd pad15">
         <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
@@ -82,68 +143,7 @@
           </a>
         </div>
       </div>
-    </div>
-
-  <div id="image-cropper" class="headerCropper banner-large js-pageCustomizationButtons js-headerCropper">
-    <div class="headerCropperPreview banner-large cropit-image-preview js-pageCustomizationButtons"></div>
-    <div class="statusBar navBar fadeOut positionAbsolute js-headerLoading">
-      <div class="pad20 rowTop20 width100"><h2 class="txt-center">Loading Image...</h2></div>
-    </div>
-    <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
-    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
-    <input id="headerImageInput" type="file" class="cropit-image-input hide" />
-    <div class="bar navBar barFlush user-page-navigation positionBottom">
-      <div class="navEnd pad10">
-        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide textOpacity75">
-          <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
-        </div>
-        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
-          <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="user-page-content">
-    <div class="user-page-header-slim-bg-cover custCol-background"></div>
-    <div class="flexRow user-page-header-slim borderBottom2 custCol-border shadow-inner1-ultra-light" style="">
-      <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail thumbnail-large pull-left js-userPageAvatar"
-             <% if(ob.page.profile.avatar_hash) { %>
-             style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
-             <% } else { %>
-             style="background-image: url(imgs/defaultUser.png);">
-             <% } %>
-        </div>
-      </div>
-      <div class="pull-left">
-        <div class="vCentered marginLeft88">
-          <h1 class="page-userNameLarge floatLeft capitalize fancy-heading colorWhiteForce fontSize20"><%- ob.page.profile.name.toLowerCase() %></h1>
-          <div class="floatLeft marginLeft6 marginTop6 colorWhiteForce"><%- ob.page.profile.handle %></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="flexRow shadow-inner1 user-page-header">
-    <div class="rowItem positionBottom width600 padding0 paddingLeft20">
-      <div class="table">
-        <div>
-          <div class="thumbnail thumbnail-large js-userPageAvatar"
-              <% if(ob.page.profile.avatar_hash) { %>
-              style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
-              <% } else { %>
-              style="background-image: url(imgs/defaultUser.png);">
-              <% } %>
-          </div>
-          <div class="pad15 push-down5 noOverflow">
-            <span class="h1 page-userNameLarge capitalize fancy-heading colorWhiteForce"><%- ob.page.profile.name.toLowerCase() %></span>
-            <br />
-            <span class="textSize16px colorWhiteForce"><%- ob.page.profile.handle %></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    </div>    
   </div>
 
   <div class="bar navBar barFlush user-page-navigation custCol-secondary">
@@ -347,3 +347,4 @@
   </div>
 </div>
 <div id="modalHolder"></div>
+ 
