@@ -62,7 +62,7 @@ module.exports = Backbone.Model.extend({
         SearchForUsersPlaceholder: "Search by handle or GUID",
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
-        OrderProcessingTimePlaceholder: "1-2 Business Days",
+        OrderProcessingTimePlaceholder: "Enter time needed to process order",
         TermsAndConditionsPlaceholder: "Enter terms and conditions...",
         TitlePlaceholder: "Enter title",
         DescriptionPlaceholder: "Enter description...",
