@@ -1,4 +1,4 @@
-<div class="flexRow custCol-primary">
+<div class="flexRow custCol-primary custCol-border-secondary">
   <div class="rowItem padding10 txt-center">
     <div class="textSize11px txt-fade"><%= polyglot.t('buyFlow.VendorShipsTo') %></div>
     <div class="textsize12px">
@@ -7,7 +7,7 @@
   </div>
 </div>
 <% if(ob.user.shipping_addresses.length < 1) { %>
-<div class="flexRow ">
+<div class="flexRow custCol-primary custCol-border-secondary">
   <div class="rowItem padding2015 txt-center">
     <%= polyglot.t('buyFlow.MustAddAddress') %>
   </div>

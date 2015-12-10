@@ -67,9 +67,6 @@ module.exports = Backbone.View.extend({
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    console.log(data);
-    console.log(data.notification.order_id);
-    console.log(this.orderID);
     if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received"){
       this.showSummary();
     }
@@ -104,7 +101,6 @@ module.exports = Backbone.View.extend({
 
   accPrev: function(rewindBy){
     "use strict";
-    console.log(rewindBy);
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
         moveBy = rewindBy ? this.accWidth * rewindBy : this.accWidth;
@@ -426,7 +422,6 @@ module.exports = Backbone.View.extend({
 
   checkPayment: function(){
     "use strict";
-    console.log("check payment " + this.orderID);
     var self = this,
         formData = new FormData();
 
@@ -443,7 +438,6 @@ module.exports = Backbone.View.extend({
 
   showSummary: function(){
     "use strict";
-    console.log("show summary");
     this.$el.find('.js-buyWizardPay, .js-buyWizardOrderDetails, .js-buyWizardPendingMsg, .js-buyWizardPurchaseBack').addClass('hide');
     this.$el.find('.js-buyWizardOrderSummary, .js-buyWizardCloseSummary').removeClass('hide');
   },

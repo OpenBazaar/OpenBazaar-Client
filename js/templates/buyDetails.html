@@ -11,12 +11,14 @@
       <div class="rowItem padding2015">
         <div class="table">
           <div>
-            <div class="thumbnail thumbnail-large-slim box-border"
-                <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
-                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
-                <% } else { %>
-                style="background-image: url(imgs/defaultItem.png);">
-                <% } %>
+            <div class="thumbnail-large-slim">
+              <div class="thumbnail thumbnail-large-slim box-border"
+                  <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
+                  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+                  <% } else { %>
+                  style="background-image: url(imgs/defaultItem.png);">
+                  <% } %>
+              </div>
             </div>
             <div class="pad10left txt-unleaded">
               <div class="row10"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
@@ -43,12 +45,14 @@
       <div class="rowItem padding2015">
         <div class="table">
           <div>
-            <div class="thumbnail thumbnail-large-slim box-border"
-            <% if(ob.user.avatar_hash){ %>
-            style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultUser.png);">
-            <% } else { %>
-            style="background-image: url(imgs/defaultUser.png);">
-            <% } %>
+            <div class="thumbnail-large-slim">
+              <div class="thumbnail thumbnail-large-slim box-border"
+              <% if(ob.user.avatar_hash){ %>
+              style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultUser.png);">
+              <% } else { %>
+              style="background-image: url(imgs/defaultUser.png);">
+              <% } %>
+              </div>
             </div>
             <div class="pad10left txt-unleaded">
               <% if(ob.selectedAddress) { %>
@@ -79,12 +83,14 @@
         <div class="table">
           <div>
             <% if(ob.selectedModerator){ %>
-            <div class="thumbnail thumbnail-large-slim box-border"
-                <% if(ob.selectedModerator.avatar){ %>
-                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultUser.png);">
-                <% } else { %>
-                style="background-image: url(imgs/defaultUser.png);">
-                <% } %>
+            <div class="thumbnail-large-slim">
+              <div class="thumbnail thumbnail-large-slim box-border"
+                  <% if(ob.selectedModerator.avatar){ %>
+                  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultUser.png);">
+                  <% } else { %>
+                  style="background-image: url(imgs/defaultUser.png);">
+                  <% } %>
+              </div>
             </div>
             <div class="pad10left txt-unleaded">
               <div class="row10"><strong>Secure Transaction</strong></div>
