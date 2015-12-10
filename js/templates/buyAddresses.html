@@ -1,4 +1,4 @@
-<div class="flexRow">
+<div class="flexRow custCol-primary custCol-border-secondary">
   <div class="rowItem padding10 txt-center">
     <div class="textSize11px txt-fade"><%= polyglot.t('buyFlow.VendorShipsTo') %></div>
     <div class="textsize12px">
@@ -7,7 +7,7 @@
   </div>
 </div>
 <% if(ob.user.shipping_addresses.length < 1) { %>
-<div class="flexRow ">
+<div class="flexRow custCol-primary custCol-border-secondary">
   <div class="rowItem padding2015 txt-center">
     <%= polyglot.t('buyFlow.MustAddAddress') %>
   </div>
@@ -15,7 +15,7 @@
 <% } else { %>
 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
 <% if(address.city && address.country && address.displayCountry && address.name && address.postal_code && address.state && address.street && ob.vendor_offer.listing.shipping.shipping_regions.indexOf(address.country) > -1) { %>
-<div class="flexRow js-buyWizardAddress">
+<div class="flexRow custCol-primary js-buyWizardAddress">
   <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
   <label for="buyWizardAddress<%- i %>" class="flexCol-8">
     <div class="padding10">

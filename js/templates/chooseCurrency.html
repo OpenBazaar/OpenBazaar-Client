@@ -1,4 +1,4 @@
-<div class="rowItem js-homeModal-currencySelect padding0 paddingLeft6" data-code="<%= ob.code %>" data-name="<%= ob.dataName %>">
+<div class="rowItem js-homeModal-currencySelect paddingLeft6" data-code="<%= ob.code %>" data-name="<%= ob.dataName %>">
   <input type="radio" class="fieldItem" id="currency-<%= ob.dataName %>" name="<%= ob.code %>" <% if(ob.selected == ob.code){%>checked="checked"<%}%>>
   <label class="homeModal-currency radioLabel" for="currency-<%= ob.dataName %>"><%- ob.currency %></label>
 </div>
