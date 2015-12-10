@@ -82,12 +82,6 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
   });
 };
 
-this.loadNewServer = function(newServer) {
-  "use strict";
-  localStorage.setItem("serverUrl", newServer);
-  loadProfile();
-};
-
 var loadProfile = function() {
 
   var reloadProfile = function(){
@@ -110,7 +104,7 @@ var loadProfile = function() {
     } else {
       alert("Your server may not be working correctly. Loading using default settings.");
       $('.js-loadingMessageModal').addClass('hide');
-      user.set('serverUrl', serverUrlLocal);
+      user.set('serverUrl', "http://localhost:18469/api/v1/");
       newSocketView = new socketView({model: user});
       newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
       newChatAppView = new chatAppView({model: user, socketView: newSocketView});
@@ -156,7 +150,7 @@ var loadProfile = function() {
           error: function (model, response) {
             alert("No user was found. Your server may not be working correctly. Loading using default settings.");
             $('.js-loadingMessageModal').addClass('hide');
-            user.set('serverUrl', serverUrlLocal);
+            user.set('serverUrl', "http://localhost:18469/api/v1/");
             newSocketView = new socketView({model: user});
             newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
             newChatAppView = new chatAppView({model: user, socketView: newSocketView});
@@ -179,6 +173,16 @@ var loadProfile = function() {
       reloadProfile();
     }
   });
+};
+
+this.loadNewServer = function(newServer) {
+  "use strict";
+  newServer = newServer.replace(/\/?$/, '/'); //add trailing slash if missing
+  localStorage.setItem("serverUrl", newServer);
+  serverUrlLocal = newServer;
+  user.urlRoot = newServer + "settings";
+  userProfile.urlRoot = newServer + "profile";
+  loadProfile();
 };
 
 loadProfile();
