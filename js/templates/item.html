@@ -98,21 +98,21 @@
         <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
         <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
       </div>
-      <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight420">
+      <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300">
         <div class="flexRow">
           <div class="rowItem fontSize16 padding30 lineHeight24">
             <%- ob.vendor_offer.listing.item.description %>
           </div>
         </div>
       </div>
-      <div class="flexContainer flex-border custCol-primary minHeight420 textOpacity75 js-reviews js-tabTarg hide">
+      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-reviews js-tabTarg hide">
         <div class="flexRow">
           <div class="rowItem fontSize16 padding30 lineHeight24">
             Placeholder for reviews
           </div>
         </div>
       </div>
-      <div class="flexContainer flex-border custCol-primary minHeight420 textOpacity75 js-shipping js-tabTarg hide">
+      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-shipping js-tabTarg hide">
         <div class="flexRow">
           <div class="rowItem fontSize16 padding30 lineHeight24">
             <% if(ob.vendor_offer.listing.shipping.free == false) { %>

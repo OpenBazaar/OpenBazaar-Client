@@ -281,7 +281,6 @@ module.exports = Backbone.View.extend({
     $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
     $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
     $(this.$el).find('.chatSearch').addClass('textOpacity50');
-
   },
 
   closeConversation: function() {
@@ -310,6 +309,7 @@ module.exports = Backbone.View.extend({
     $('.modal-child').addClass('modalCompressed');
     $('.spinner-with-logo').addClass('modalCompressed');
     $('#obContainer').addClass('noScrollBar');
+    $('#colorbox').addClass('marginLeftNeg115');
 
     // Adjust elements
     $(this.$el).find('.chatSearch').addClass('chatSearchOut');
@@ -327,6 +327,7 @@ module.exports = Backbone.View.extend({
     $('.modal-child').removeClass('modalCompressed');
     $('.spinner-with-logo').removeClass('modalCompressed');
     $('#obContainer').removeClass('noScrollBar');
+    $('#colorbox').removeClass('marginLeftNeg115');
 
     // Adjust elements
     $(this.$el).find('.chatSearch').removeClass('chatSearchOut');

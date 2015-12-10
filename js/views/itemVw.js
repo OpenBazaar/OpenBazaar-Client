@@ -47,13 +47,17 @@ module.exports = Backbone.View.extend({
       'rel': 'js-photoGallery', 
       'photo': true,
       'fadeOut': 0,
-      'opacity': '.90',
+      'maxHeight': '620px',
+      'opacity': '.95',
       'speed': 50,
-      'maxHeight': '85%',
-       onOpen:function(){
+      onOpen:function(){
         // we need to append colorbox to obContainer to prevent it from covering the header
         $("#colorbox").appendTo("#obContainer");
         $("#cboxOverlay").appendTo("#obContainer");
+        $('#content').addClass('blur');
+      },
+      onClosed:function(){
+        $('#content').removeClass('blur');
       }
     });
   },

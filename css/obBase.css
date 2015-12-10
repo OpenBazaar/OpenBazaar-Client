@@ -872,11 +872,16 @@ form {
 #colorbox {
   z-index: 3;
   outline: none;
+  margin-top: 20px;
+  transition: margin 0.5s ease;
+  position: fixed;
 }
 
 #cboxOverlay {
   z-index: 2;
   top: 50px;
+  height: 100%;
+  width: calc(100% - 30px);
 }
 
 /*========== typography ==========*/
@@ -1781,7 +1786,7 @@ div.chatSearchOut .chatSearchIcon {
   line-height: 46px;
   padding: 0 20px;
   margin-top: 4px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .btn.btn-bar.active {
@@ -1807,7 +1812,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-pill {
-  padding: 6px 13px;
+  padding: 5px 13px;
   cursor: pointer;
   border-radius: 18px;
   min-height: 17px;
@@ -2709,12 +2714,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 64px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  height: 54px;
+  height: 0;
+  opacity: 0;
   width: 950px;
   background: #281B2E;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.35);
   z-index: 4;
   padding: 0;
+  transition: height .35s;
+
 }
 
 .user-page-header-slim-bg-cover {
@@ -3497,6 +3505,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: 15px;
 }
 
+#ov1  .marginLeftNeg115 {
+  margin-left: -115px;
+}
+
 #ov1  .marginLeft1 {
   margin-left: 1px;
 }
@@ -3658,6 +3670,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .minHeight420 {
   min-height: 420px;
+}
+
+#ov1  .minHeight300 {
+  min-height: 300px;
 }
 
 #ov1  .lineHeight20{
@@ -3872,6 +3888,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-decoration: underline !important;
 }
 
+#ov1 .blur {
+  -webkit-filter: blur(1px);
+}
+
 #ov1 .underline {
   text-decoration: underline;
 }
@@ -3890,6 +3910,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background-opacity: .75;
   background-color: #FFA41C;
 }
+
 
 /* terrible hack, TODO: remove before production */
 

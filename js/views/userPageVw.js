@@ -270,23 +270,24 @@ module.exports = Backbone.View.extend({
       });
 
       $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 351 && self.slimVisible === false ) {
+        if ($(this).scrollTop() > 395 && self.slimVisible === false ) {
           self.slimVisible = true;
-          $('.page-userNameLarge').addClass('fontSize20');
-          $('.user-page-header-slim').show();
+          $('.user-page-header-slim').addClass('textOpacity1').addClass('height54');
           $('.user-page-content .thumbnail-large').addClass('thumbnail-large-slim');
           $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
           $('.user-page-header .rowItem').hide();
           $('.user-page-navigation-buttons').addClass('positionFixed positionTop66');
         }
-        if ($(this).scrollTop() < 351 && self.slimVisible === true ) {
+        if ($(this).scrollTop() < 395 && self.slimVisible === true ) {
           self.slimVisible = false;
-          $('.page-userNameLarge').removeClass('fontSize20');
-          $('.user-page-header-slim').hide();
+          $('.user-page-header-slim').removeClass('height54');
           $('.user-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
           $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
           $('.user-page-header .rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop66');
+          setTimeout(function(){ 
+            $('.user-page-header-slim').removeClass('textOpacity1');
+          }, 150);
         }
       });
 

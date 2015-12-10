@@ -123,7 +123,6 @@ module.exports = Backbone.View.extend({
       self.initAccordion('.js-buyWizardAccordion');
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-buyWizardModal').removeClass('fadeOut');
-      $('#obContainer').addClass('blur');
       //add all countries to the Ships To select list
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
       //add address view
