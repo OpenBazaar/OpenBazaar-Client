@@ -68,9 +68,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
     customStyleTag.innerHTML +=
       "#ov1 #userPage #cboxContent { background-color: " + primaryColor + "; color: " + textColor + ";}" +
       "#ov1 #userPage #cboxCurrent { color: " + textColor + ";}" +
-      "#ov1 #userPage #cboxNext { background-color: " + secondaryColor + "; color: " + textColor + "}" +
       "#ov1 #userPage #cboxClose { background-color: " + secondaryColor + "; color: " + textColor + "}" +
-      "#ov1 #userPage #cboxPrevious { background-color: " + secondaryColor + "; color: " + textColor + "}" +
       "#ov1 #userPage #cboxOverlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 1);}";
 
   document.body.appendChild(customStyleTag);

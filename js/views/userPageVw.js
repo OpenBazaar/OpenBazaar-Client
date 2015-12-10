@@ -270,14 +270,14 @@ module.exports = Backbone.View.extend({
       });
 
       $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 395 && self.slimVisible === false ) {
+        if ($(this).scrollTop() > 362 && self.slimVisible === false ) {
           self.slimVisible = true;
           $('.user-page-header-slim').addClass('textOpacity1').addClass('height54');
           $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
           $('.user-page-header .rowItem').hide();
           $('.user-page-navigation-buttons').addClass('positionFixed positionTop66');
         }
-        if ($(this).scrollTop() < 395 && self.slimVisible === true ) {
+        if ($(this).scrollTop() < 362 && self.slimVisible === true ) {
           self.slimVisible = false;
           $('.user-page-header-slim').removeClass('height54');
           $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
