@@ -29,7 +29,7 @@
 
   <div class="user-page-content">
     <div class="user-page-header-slim-bg-cover custCol-background"></div>
-    <div class="flexRow user-page-header-slim borderBottom2 custCol-border shadow-inner1-ultra-light">
+    <div class="flexRow user-page-header-slim borderBottom2 custCol-border-secondary shadow-inner1-ultra-light">
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
         <div class="thumbnail thumbnail-large-slim pull-left js-userPageAvatar"
              <% if(ob.page.profile.avatar_hash) { %>
@@ -41,8 +41,8 @@
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft88">
-          <h1 class="page-userNameLarge floatLeft capitalize fancy-heading colorWhiteForce fontSize20"><%- ob.page.profile.name.toLowerCase() %></h1>
-          <div class="floatLeft marginLeft6 marginTop6 colorWhiteForce"><%- ob.page.profile.handle %></div>
+          <h1 class="page-userNameLarge floatLeft capitalize fancy-heading fontSize20"><%- ob.page.profile.name.toLowerCase() %></h1>
+          <div class="floatLeft marginLeft6 marginTop6"><%- ob.page.profile.handle %></div>
         </div>
       </div>
     </div>
