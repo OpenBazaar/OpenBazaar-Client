@@ -1938,6 +1938,8 @@ input[type="datetime-local"].fieldItem {
 input[type="datetime-local"].fieldItem {
   font-family: inherit;
   line-height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 input[type="datetime-local"].fieldItem::-webkit-inner-spin-button {
