@@ -301,7 +301,7 @@ module.exports = Backbone.Model.extend({
         CategoryPlaceholder: "Introduzca categor&iacute;a",
         CategoryHelperText: "Las categor&iacute;as se utilizan para agrupar y organizar art&iacute;culos dentro de su tienda.",
         KeywordsHelperText: "Poner palabras claves de ayuda para que sus art&iacute;culos sean encontrados en el mercado.",
-        ExpirationDateHelperText : "Establecer una fecha para que el art&iacute;culo sea autom&aacute; retirado de su tienda.",
+        ExpirationDateHelperText : "Establecer una fecha para que el art&iacute;culo sea autom&aacute;ticammente retirado de su tienda.",
         ClearExpirationDate : "Limpiar Fecha de Vencimiento",
         ReturnPolicy: "Pol&iacute;tica de devoluciones",
         TermsAndConditions: "T&eacute;rminos y Condiciones",
