@@ -506,7 +506,7 @@ module.exports = Backbone.Model.extend({
         Used: "Gebraucht",
         Delete: "L&ouml;schen",
         DontDelete: "Nicht l&ouml;schen",
-        ConfirmDelete: "L&ouml;schen Best&auml;tigen",
+        ConfirmDelete: "L&ouml;schen best&auml;tigen",
         Website: "Webseite",
         Guid: "OpenBazaar ID (GUID)",
         Welcome: "Willkommen",
