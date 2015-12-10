@@ -509,10 +509,14 @@ form {
 
 .fieldItem {
   min-height: 50px;
-  line-height: 50px;
-  padding: 0 15px;
+  padding: 15px;
   position: relative;
   display: block;
+  box-sizing: border-box;
+}
+
+label.fieldItem {
+  border: 2px solid transparent;
 }
 
 .fieldItem.fieldItem-multiLine {
@@ -2031,7 +2035,6 @@ label {
 .fieldItem h5,
 .fieldItem h6 {
   margin: 0;
-  line-height: 50px;
 }
 
 input[type="text"].fieldItem,
@@ -2043,9 +2046,6 @@ input[type="datetime-local"].fieldItem {
   background: none;
   border: 2px solid transparent;
   color: #fff;
-  height: 53px;
-  line-height: 53px;
-  padding: 0 15px;
   width: 100%;
 }
 
@@ -2142,12 +2142,12 @@ input[type=number].spinButtons::-webkit-inner-spin-button:after {
 }
 
 input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:before {
-  content: "\f10d";
+  content: "\f104";
   top:0px;
 }
 
 input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:after {
-  content: "\f104";
+  content: "\f10d";
   bottom:0px;
 }
 
@@ -2275,7 +2275,7 @@ input[type="number"].fieldItem.spinButtons:focus {
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   font-family: inherit;
   font-size: inherit;
   resize: none;
@@ -2307,7 +2307,6 @@ input[type="radio"].fieldItem + label {
   display: inline-block;
   cursor: pointer;
   position: relative;
-  line-height: 50px;
   padding: 0 20px 0 40px;
 }
 
@@ -2316,13 +2315,14 @@ input[type="radio"].fieldItem + label:before {
   display: inline-block;
   position: absolute;
   left: 10px;
-  top: 15px;
   height: 16px;
   width: 16px;
   border-radius: 12px;
   border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
+  transform: translateY(-50%);
+  top: 50%;
 }
 
 input[type="radio"].fieldItem:checked + label:before {
@@ -2342,7 +2342,7 @@ input[type="radio"].fieldItem:checked + label:before {
   position: absolute;
   height: 16px;
   width: 16px;
-  top: 112px;
+  top: 120px;
   left: 50%;
   margin-left: -8px;
   border-radius: 12px;
@@ -2443,6 +2443,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: opacity,.25s;
   -webkit-user-select: none;
   color: rgba(255,255,255,0.4);
+  top: 17px;
 }
 
 .fieldItem .taggle_list {
@@ -2739,11 +2740,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .icon-huge {
-  font-size: 160px;
-}
-
-.icon-huge {
-  font-size: 160px;
+  font-size: 140px;
 }
 
 .icon-large {
@@ -2762,12 +2759,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .icon-huge.icon-circle-background1 {
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
 }
 
 .icon-huge.icon-circle-background1:before {
-  line-height:160px;
+  line-height:140px;
   font-size:0.8em;
 }
 

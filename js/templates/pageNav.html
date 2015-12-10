@@ -76,13 +76,13 @@
               <%= polyglot.t('onboarding.chooseLanguage') %>
               <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 9</span>
             </div>
-            <div class="flexContainer flex-border" id="homeModal-languageList">
+            <div class="flexContainer" id="homeModal-languageList">
               <div class="flexRow">
                 <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper  custCol-border-secondary">
                   <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
                 </div>
               </div>
-              <div class="js-homeModal-languageList"></div>
+              <div class="js-homeModal-languageList flex-border"></div>
             </div>
             <div class="bar barFlush">
               <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
@@ -112,13 +112,13 @@
               <%= polyglot.t('onboarding.yourCountry') %>
               <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
             </div>
-            <div class="flexContainer flex-border custCol-primary" id="homeModal-countryList">
+            <div class="flexContainer custCol-primary" id="homeModal-countryList">
               <div class="flexRow">
                 <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border">
                   <input type="text" class="txtField txtField-bar search custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
                 </div>
               </div>
-              <div class="js-homeModal-countryList"></div>
+              <div class="js-homeModal-countryList flex-border"></div>
               <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
                 <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
                 <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
@@ -130,13 +130,13 @@
               <%= polyglot.t('onboarding.localCurrency') %>
               <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 9</span>
             </div>
-            <div class="flexContainer flex-border" id="homeModal-currencyList">
+            <div class="flexContainer" id="homeModal-currencyList">
               <div class="flexRow">
                 <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-border">
                   <input type="text" class="txtField txtField-bar search custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
                 </div>
               </div>
-              <div class="js-homeModal-currencyList"></div>
+              <div class="js-homeModal-currencyList flex-border"></div>
               <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
                 <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
                 <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
@@ -156,187 +156,187 @@
               </div>
               <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text">
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -12:00) Eniwetok, Kwajalein">(GMT -12:00) Eniwetok, Kwajalein</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -11:00) Midway Island, Samoa" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -11:00) Midway Island, Samoa">(GMT -11:00) Midway Island, Samoa</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -10:00) Hawaii" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -10:00) Hawaii">(GMT -10:00) Hawaii</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -9:00) Alaska" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -9:00) Alaska">(GMT -9:00) Alaska</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -8:00) Pacific Time (US &amp; Canada)" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -8:00) Pacific Time (US &amp; Canada)">(GMT -8:00) Pacific Time (US &amp; Canada)</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -7:00) Mountain Time (US &amp; Canada)" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -7:00) Mountain Time (US &amp; Canada)">(GMT -7:00) Mountain Time (US &amp; Canada)</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -6:00) Central Time (US &amp; Canada), Mexico City" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -6:00) Central Time (US &amp; Canada), Mexico City">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -3:30) Newfoundland" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -3:30) Newfoundland">(GMT -3:30) Newfoundland</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -3:00) Brazil, Buenos Aires, Georgetown" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -3:00) Brazil, Buenos Aires, Georgetown">(GMT -3:00) Brazil, Buenos Aires, Georgetown</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -2:00) Mid-Atlantic" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -2:00) Mid-Atlantic">(GMT -2:00) Mid-Atlantic</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -1:00 hour) Azores, Cape Verde Islands" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT -1:00 hour) Azores, Cape Verde Islands">(GMT -1:00 hour) Azores, Cape Verde Islands</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT) Western Europe Time, London, Lisbon, Casablanca" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT) Western Europe Time, London, Lisbon, Casablanca">(GMT) Western Europe Time, London, Lisbon, Casablanca</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +2:00) Kaliningrad, South Africa" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +2:00) Kaliningrad, South Africa">(GMT +2:00) Kaliningrad, South Africa</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +3:30) Tehran" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +3:30) Tehran">(GMT +3:30) Tehran</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +4:30) Kabul" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +4:30) Kabul">(GMT +4:30) Kabul</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent">(GMT  +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +5:30) Bombay, Calcutta, Madras, New Delhi">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +5:45) Kathmandu" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +5:45) Kathmandu">(GMT +5:45) Kathmandu</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +6:00) Almaty, Dhaka, Colombo" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +6:00) Almaty, Dhaka, Colombo">(GMT +6:00) Almaty, Dhaka, Colombo</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +7:00) Bangkok, Hanoi, Jakarta" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +7:00) Bangkok, Hanoi, Jakarta">(GMT +7:00) Bangkok, Hanoi, Jakarta</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +8:00) Beijing, Perth, Singapore, Hong Kong">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +9:30) Adelaide, Darwin" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +9:30) Adelaide, Darwin">(GMT +9:30) Adelaide, Darwin</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +10:00) Eastern Australia, Guam, Vladivostok" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +10:00) Eastern Australia, Guam, Vladivostok">(GMT +10:00) Eastern Australia, Guam, Vladivostok</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +11:00) Magadan, Solomon Islands, New Caledonia" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +11:00) Magadan, Solomon Islands, New Caledonia">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</label>
                   </div>
                 </li>
                 <li class="flexRow custCol-border">
-                  <div class="rowItem js-homeModal-timeSelect padding0 paddingLeft6">
+                  <div class="rowItem js-homeModal-timeSelect  paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka" name="time">
                     <label class="homeModal-time radioLabel" for="(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</label>
                   </div>

@@ -19,20 +19,21 @@
           <img class="pull-left qrCode js-buyWizardPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
           <div class="pull-left rowtop20 pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row20 textSize16px">
-              Send <span class="js-buyWizardDetailsTotalBTC"></span> BTC to
+              <%= polyglot.t('buyFlow.Send') %> <span class="js-buyWizardDetailsTotalBTC"></span> <%= polyglot.t('buyFlow.BTCto') %>
             </div>
             <div class="txt-center row20">
               <a class="textSize11px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
             </div>
-            <a class="btn btn-txt btn-wide row20 js-buyWizardPayLink"><i class="ion-link"></i> Open Address in Local Wallet</a>
-            <a class="btn btn-txt btn-wide js-buyWizardPayCopy"><i class="ion-clipboard"></i> Copy Pay Address to Clipboard</a>
+            <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
+            <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+            <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
           </div>
         </div>
       </div>
       <div class="modal-hero js-buyWizardOrderSummary background1 hide">
         <div class="width100 txt-center">
           <div class="txt-col3 ion-checkmark icon-huge icon-circle-background1 rowtop20 row20"></div>
-          <h3>Payment Sent!</h3>
+          <h3 class="txt-bright">Payment Sent!</h3>
         </div>
       </div>
     </div>
@@ -45,7 +46,7 @@
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
               <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
-                <div class="flexRow">
+                <div class="flexRow custCol-border-secondary">
                   <div class="rowItem padding2015">
                     <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
                     <label for="buyWizardModeratorRadio<%- i %>">
@@ -69,7 +70,7 @@
                   </div>
                 </div>
               <% }); %>
-              <div class="flexRow">
+              <div class="flexRow custCol-border-secondary">
                 <div class="rowItem padding2015">
                   <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardNoModerator" value="direct"/>
                   <label for="buyWizardNoModerator">
@@ -107,69 +108,69 @@
               <%= polyglot.t('NewAddress') %>
             </div>
           </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary js-buyWizardAddressScroller">
-            <div class="flexRow">
+          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-border-secondary scrollOverflow custCol-primary js-buyWizardAddressScroller">
+            <div class="flexRow custCol-secondary">
               <div class="flex-border flexExpand js-buyWizardAddresses">
                 <!--insert addresses-->
               </div>
-              <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress flex-border flexExpand hide">
-                <div class="flexRow">
-                  <div class="flexCol-5">
+              <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress flex-border flexExpand custCol-primary hide">
+                <div class="flexRow custCol-border-secondary">
+                  <div class="flexCol-5 custCol-border-secondary">
                     <div class="fieldItem">
                       <label for="buyWizardNameInput"><%= polyglot.t('ShipToName') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 positionWrapper">
-                    <input type="text" name="new_ship_to_name" class="fieldItem" id="buyWizardNameInput" required/>
+                  <div class="flexCol-7 custCol-border-secondary positionWrapper">
+                    <input type="text" name="new_ship_to_name" class="fieldItem custCol-text" id="buyWizardNameInput" required/>
                   </div>
                 </div>
                 <div class="flexRow">
-                  <div class="flexCol-5">
+                  <div class="flexCol-5 custCol-border-secondary">
                     <div class="fieldItem">
                       <label for="buyWizardStreetInput"><%= polyglot.t('ShipToStreet') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 positionWrapper">
-                    <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardStreetInput" required/>
+                  <div class="flexCol-7 custCol-border-secondary positionWrapper">
+                    <input type="text" name="new_ship_to_street" class="fieldItem custCol-text" id="buyWizardStreetInput" required/>
                   </div>
                 </div>
                 <div class="flexRow">
-                  <div class="flexCol-5">
+                  <div class="flexCol-5 custCol-border-secondary">
                     <div class="fieldItem">
                       <label for="buyWizardCityInput"><%= polyglot.t('ShipToCity') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 positionWrapper">
-                    <input type="text" name="new_ship_to_city" class="fieldItem" id="buyWizardCityInput" required/>
+                  <div class="flexCol-7 custCol-border-secondary positionWrapper">
+                    <input type="text" name="new_ship_to_city" class="fieldItem custCol-text" id="buyWizardCityInput" required/>
                   </div>
                 </div>
                 <div class="flexRow">
-                  <div class="flexCol-5">
+                  <div class="flexCol-5 custCol-border-secondary">
                     <div class="fieldItem">
                       <label for="buyWizardStateInput"><%= polyglot.t('ShipToState') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 positionWrapper">
-                    <input type="text" name="new_ship_to_state" class="fieldItem" id="buyWizardStateInput" required/>
+                  <div class="flexCol-7 custCol-border-secondary positionWrapper">
+                    <input type="text" name="new_ship_to_state" class="fieldItem custCol-text" id="buyWizardStateInput" required/>
                   </div>
                 </div>
                 <div class="flexRow">
-                  <div class="flexCol-5">
+                  <div class="flexCol-5 custCol-border-secondary">
                     <div class="fieldItem">
                       <label for="buyWizardPostalInput"><%= polyglot.t('ShipToPostalCode') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 positionWrapper">
-                    <input type="text" name="new_ship_to_street" class="fieldItem" id="buyWizardPostalInput" required/>
+                  <div class="flexCol-7 custCol-border-secondary positionWrapper">
+                    <input type="text" name="new_ship_to_street" class="fieldItem custCol-text" id="buyWizardPostalInput" required/>
                   </div>
                 </div>
                 <div class="flexRow overflowVisible">
-                  <div class="flexCol-5">
+                  <div class="flexCol-5 custCol-border-secondary">
                     <div class="fieldItem">
                       <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 positionWrapper">
+                  <div class="flexCol-7 custCol-border-secondary positionWrapper">
                     <div class="fieldItem padding0">
                       <div class="fieldItem-selectWrapper chosen-relative noIcon js-buyWizardCountryWrapper"></div>
                     </div>
@@ -201,6 +202,7 @@
             <a class="btn btn-bar btn-half js-buyWizardPurchaseBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
             <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
             <span class="btn btn-bar btn-half disabled js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
+            <a class="btn btn-bar btn-wide  js-buyWizardCloseSummary custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 hide"><%= polyglot.t('Close') %></a>
           </div>
         </div>
       </div>

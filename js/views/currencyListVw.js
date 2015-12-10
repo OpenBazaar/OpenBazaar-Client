@@ -35,7 +35,6 @@ module.exports = Backbone.View.extend({
       self.availableCurrenciesList = currencyList;
       self.render();
     });
-    this.totalCurrencies = 0;
   },
 
   render: function(){
@@ -46,14 +45,14 @@ module.exports = Backbone.View.extend({
     },this);
 
     this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text">'+ this.listContents.join('') +'</ul>');
-    window.obEventBus.trigger("currencyListRendered", this.totalCurrencies);
+    window.obEventBus.trigger("currencyListRendered");
   },
 
   renderItem: function(item){
     if(this.availableCurrenciesList.indexOf(item.get('code')) > -1 || item.get('code') === "BTC"){
       var itemJSON = item.toJSON();
-      this.listContents.push('<li class="flexRow custCol-border-secondary">');
-      this.listContents.push('<div class="rowItem js-homeModal-currencySelect padding0 paddingLeft6" data-code="'+ itemJSON.code +'" data-name="'+ itemJSON.dataName +'">');
+      this.listContents.push('<li class="flexRow custCol-border">');
+      this.listContents.push('<div class="rowItem js-homeModal-currencySelect paddingLeft6" data-code="'+ itemJSON.code +'" data-name="'+ itemJSON.dataName +'">');
       this.listContents.push('<input type="radio" class="fieldItem" id="currency-'+ itemJSON.dataName +'" name="'+ itemJSON.code +'"');
       if(itemJSON.selected == itemJSON.code){
         this.listContents.push('checked="checked"');

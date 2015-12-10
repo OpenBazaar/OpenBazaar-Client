@@ -31,6 +31,8 @@ module.exports = Backbone.View.extend({
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
+    'click .js-buyWizardPayCheck': 'checkPayment',
+    'click .js-buyWizardCloseSummary': 'closeWizard',
     'blur input': 'validateInput'
   },
 
@@ -46,6 +48,7 @@ module.exports = Backbone.View.extend({
      */
     this.parentEl = $(options.parentEl);
     this.hideMap = true;
+    this.orderID = "";
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -57,14 +60,16 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
     });
+
     this.render();
   },
 
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    console.log(data);
-    //look for message type "payment received" and orderID
+    if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received"){
+      this.showSummary();
+    }
   },
 
   initAccordion: function(targ){
@@ -96,7 +101,6 @@ module.exports = Backbone.View.extend({
 
   accPrev: function(rewindBy){
     "use strict";
-    console.log(rewindBy);
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
         moveBy = rewindBy ? this.accWidth * rewindBy : this.accWidth;
@@ -357,6 +361,7 @@ module.exports = Backbone.View.extend({
         message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id),
         payHREF = "",
         dataURI;
+    this.orderID = data.order_id;
     totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
@@ -414,10 +419,26 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardPendingMsg').addClass('hide');
   },
 
+  checkPayment: function(){
+    "use strict";
+    var self = this,
+        formData = new FormData();
+
+    formData.append("order_id", this.orderID);
+    $.ajax({ //this only triggers the server to send a new socket message
+      type: "POST",
+      url: self.model.get('serverUrl') + "check_for_payment",
+      contentType: false,
+      processData: false,
+      data: formData,
+      dataType: "json"
+    });
+  },
+
   showSummary: function(){
     "use strict";
-    this.$el.find('.js-buyWizardPay, .js-buyWizardOrderDetails').addClass('hide');
-    this.$el.find('.js-buyWizardOrderSummary').removeClass('hide');
+    this.$el.find('.js-buyWizardPay, .js-buyWizardOrderDetails, .js-buyWizardPendingMsg, .js-buyWizardPurchaseBack').addClass('hide');
+    this.$el.find('.js-buyWizardOrderSummary, .js-buyWizardCloseSummary').removeClass('hide');
   },
 
   openCountrySelect: function(){
