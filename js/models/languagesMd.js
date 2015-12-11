@@ -240,7 +240,7 @@ module.exports = Backbone.Model.extend({
           MustAddAddress: "You must add an address to ship to",
           VendorShipsTo: "This vendor ships to these countries",
           DoesNotShipHere: "This vendor does not ship here",
-          Send: "Semd",
+          Send: "Send",
           BTCto: "BTC to",
           OpenAddress: "Open Address in Local Wallet",
           CopyAddress: "Copy Pay Address to Clipboard",
