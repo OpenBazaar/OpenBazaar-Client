@@ -239,7 +239,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "You must add an address to ship to",
           VendorShipsTo: "This vendor ships to these countries",
-          Send: "Semd",
+          Send: "Send",
           BTCto: "BTC to",
           OpenAddress: "Open Address in Local Wallet",
           CopyAddress: "Copy Pay Address to Clipboard",
