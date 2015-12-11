@@ -83,14 +83,13 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 };
 
 var isValidUrl = function(url) {
-  var regexp = /(https?:\/\/)+[\w-]+(\.[\w-]+)?\.?(:\d+)?(\/\S*)?/;
+  var regexp = /(https?:\/\/)+[\w-]+(\.[\w-]+)+\.?(:\d+)+(\/\S*)?/;
   return regexp.test(url);
 };
 
 var loadDefaultServer = function(){
   "use strict";
-  //alert("No user was found. Your server may not be working correctly. Loading using default settings.");
-  //$('.js-loadingMessageModal').addClass('hide');
+  $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
   $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded.");
   $('.js-indexLoadingMsg2').text(serverUrlLocal + " could not be reached.");
   $('.js-indexLoadingMsg3').text("You can enter a different server below.");
@@ -123,7 +122,7 @@ var loadProfile = function() {
 
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
-    timeout: 1000,
+    timeout: 5000,
     success: function (model, response) {
       $('.js-loadingModal').addClass('hide');
       "use strict";
@@ -131,6 +130,7 @@ var loadProfile = function() {
       clearInterval(loadProfileCountdownInterval);
       //make sure profile is not blank
       if (response.profile){
+        console.log("+++++++++++++++++++++Loop");
         //guid = response.profile.guid;
         //avatar_hash = response.profile.avatar_hash;
         setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
@@ -158,7 +158,7 @@ var loadProfile = function() {
             }, 54000000);
           },
           error: function (model, response) {
-            reloadProfile();
+            loadDefaultServer();
           }
         });
       }else{
@@ -186,10 +186,10 @@ this.loadNewServer = function(newServer) {
     serverUrlLocal = newServer;
     user.urlRoot = newServer + "settings";
     userProfile.urlRoot = newServer + "profile";
-    loadProfileCount=1;
+    loadProfileCount=3;//end any loops
     loadProfile();
   } else {
-    alert(newServer + " is not a valid URL");
+    alert(newServer + " is not a valid URL. It must start with http:// or https:// and have a port number. ':18469' is the normal port number.");
   }
 };
 

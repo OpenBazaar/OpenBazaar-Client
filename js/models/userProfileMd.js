@@ -89,8 +89,6 @@ module.exports = Backbone.Model.extend({
         response.profile.name = "ob" + Math.random().toString(36).slice(2);
       }
 
-      console.log(response.location);
-
       //if no country, set to USA
       if(!response.profile.location) {
         response.profile.location = "UNITED_STATES";
