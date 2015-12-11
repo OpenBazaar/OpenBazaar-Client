@@ -82,6 +82,25 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
   });
 };
 
+var isValidUrl = function(url) {
+  var regexp = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  return regexp.test(url);
+};
+
+var loadDefaultServer = function(){
+  "use strict";
+  alert("No user was found. Your server may not be working correctly. Loading using default settings.");
+  $('.js-loadingMessageModal').addClass('hide');
+  user.set('serverUrl', "http://localhost:18469/api/v1/");
+  user.urlRoot =  "http://localhost:18469/api/v1/settings";
+  userProfile.urlRoot = "http://localhost:18469/api/v1/profile";
+  newSocketView = new socketView({model: user});
+  newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
+  newChatAppView = new chatAppView({model: user, socketView: newSocketView});
+  newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
+  Backbone.history.start();
+};
+
 var loadProfile = function() {
 
   var reloadProfile = function(){
@@ -102,20 +121,13 @@ var loadProfile = function() {
         }
       }, 2000);
     } else {
-      alert("Your server may not be working correctly. Loading using default settings.");
-      $('.js-loadingMessageModal').addClass('hide');
-      user.set('serverUrl', "http://localhost:18469/api/v1/");
-      newSocketView = new socketView({model: user});
-      newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
-      newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-      newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
-      Backbone.history.start();
-      window.clearTimeout(loadProfileTimeout);
+      loadDefaultServer();
     }
   };
 
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
+    timeout: 1000,
     success: function (model, response) {
       $('.js-loadingModal').addClass('hide');
       "use strict";
@@ -148,14 +160,7 @@ var loadProfile = function() {
             }, 54000000);
           },
           error: function (model, response) {
-            alert("No user was found. Your server may not be working correctly. Loading using default settings.");
-            $('.js-loadingMessageModal').addClass('hide');
-            user.set('serverUrl', "http://localhost:18469/api/v1/");
-            newSocketView = new socketView({model: user});
-            newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
-            newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-            newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
-            Backbone.history.start();
+            loadDefaultServer();
           }
         });
       }else{
@@ -177,12 +182,21 @@ var loadProfile = function() {
 
 this.loadNewServer = function(newServer) {
   "use strict";
-  newServer = newServer.replace(/\/?$/, '/'); //add trailing slash if missing
-  localStorage.setItem("serverUrl", newServer);
-  serverUrlLocal = newServer;
-  user.urlRoot = newServer + "settings";
-  userProfile.urlRoot = newServer + "profile";
-  loadProfile();
+  if(isValidUrl(newServer)){
+    newServer = newServer.replace(/\/api\/v1\/?$/, '/api/v1/'); //add trailing slash if missing
+    localStorage.setItem("serverUrl", newServer);
+    serverUrlLocal = newServer;
+    user.urlRoot = newServer + "settings";
+    userProfile.urlRoot = newServer + "profile";
+    loadProfile();
+  } else {
+    alert("That is not a valid URL");
+  }
 };
 
-loadProfile();
+if(isValidUrl(serverUrlLocal)){
+  loadProfile();
+} else {
+  loadDefaultServer();
+}
+
