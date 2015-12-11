@@ -89,22 +89,12 @@ var isValidUrl = function(url) {
 
 var loadDefaultServer = function(){
   "use strict";
-  console.log("foo");
   //alert("No user was found. Your server may not be working correctly. Loading using default settings.");
   //$('.js-loadingMessageModal').addClass('hide');
   $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded.");
   $('.js-indexLoadingMsg2').text(serverUrlLocal + " could not be reached.");
   $('.js-indexLoadingMsg3').text("You can enter a different server below.");
-  /*
-  user.set('serverUrl', "http://localhost:18469/api/v1/");
-  user.urlRoot =  "http://localhost:18469/api/v1/settings";
-  userProfile.urlRoot = "http://localhost:18469/api/v1/profile";
-  newSocketView = new socketView({model: user});
-  newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
-  newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-  newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
-  Backbone.history.start();
-  */
+  loadProfileCount = 3;
 };
 
 var loadProfile = function() {
@@ -112,9 +102,9 @@ var loadProfile = function() {
   var reloadProfile = function(){
     "use strict";
     $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
-    loadProfileCountdown=3;
+    loadProfileCountdown=5;
 
-    if(loadProfileCount < 3){
+    if(loadProfileCount <= 3){
       loadProfileCountdownInterval = setInterval(function(){
         if(loadProfileCountdown > 0){
           $('.js-indexLoadingMsg4').text(loadProfileCountdown);
@@ -166,7 +156,7 @@ var loadProfile = function() {
             }, 54000000);
           },
           error: function (model, response) {
-            loadDefaultServer();
+            reloadProfile();
           }
         });
       }else{
@@ -191,10 +181,10 @@ this.loadNewServer = function(newServer) {
   if(isValidUrl(newServer)){
     newServer = newServer.replace(/((\/)?(api)?(\/)?(v1)?(\/)?)$/, '/api/v1/'); //add trailing slash if missing
     localStorage.setItem("serverUrl", newServer);
-    console.log(newServer);
     serverUrlLocal = newServer;
     user.urlRoot = newServer + "settings";
     userProfile.urlRoot = newServer + "profile";
+    loadProfileCount=1;
     loadProfile();
   } else {
     alert(newServer + " is not a valid URL");
