@@ -1366,6 +1366,8 @@ input[type="text"].txtField-bar {
 
 .btn.btn-txtOnly {
   background: none;
+  box-shadow: none;
+  border: none;
 }
 
 #userPage .btn.inactive {

@@ -83,14 +83,19 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 };
 
 var isValidUrl = function(url) {
-  var regexp = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  var regexp = /(https?:\/\/)+[\w-]+(\.[\w-]+)?\.?(:\d+)?(\/\S*)?/;
   return regexp.test(url);
 };
 
 var loadDefaultServer = function(){
   "use strict";
-  alert("No user was found. Your server may not be working correctly. Loading using default settings.");
-  $('.js-loadingMessageModal').addClass('hide');
+  console.log("foo");
+  //alert("No user was found. Your server may not be working correctly. Loading using default settings.");
+  //$('.js-loadingMessageModal').addClass('hide');
+  $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded.");
+  $('.js-indexLoadingMsg2').text(serverUrlLocal + " could not be reached.");
+  $('.js-indexLoadingMsg3').text("You can enter a different server below.");
+  /*
   user.set('serverUrl', "http://localhost:18469/api/v1/");
   user.urlRoot =  "http://localhost:18469/api/v1/settings";
   userProfile.urlRoot = "http://localhost:18469/api/v1/profile";
@@ -99,6 +104,7 @@ var loadDefaultServer = function(){
   newChatAppView = new chatAppView({model: user, socketView: newSocketView});
   newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
   Backbone.history.start();
+  */
 };
 
 var loadProfile = function() {
@@ -183,14 +189,15 @@ var loadProfile = function() {
 this.loadNewServer = function(newServer) {
   "use strict";
   if(isValidUrl(newServer)){
-    newServer = newServer.replace(/\/api\/v1\/?$/, '/api/v1/'); //add trailing slash if missing
+    newServer = newServer.replace(/((\/)?(api)?(\/)?(v1)?(\/)?)$/, '/api/v1/'); //add trailing slash if missing
     localStorage.setItem("serverUrl", newServer);
+    console.log(newServer);
     serverUrlLocal = newServer;
     user.urlRoot = newServer + "settings";
     userProfile.urlRoot = newServer + "profile";
     loadProfile();
   } else {
-    alert("That is not a valid URL");
+    alert(newServer + " is not a valid URL");
   }
 };
 

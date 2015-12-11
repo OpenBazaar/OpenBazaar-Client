@@ -36,9 +36,15 @@
       </h2>
       <div class="rowTop20 width100 positionWrapper pad50">
         <div class="txtFieldWrapper">
-          <input type="text" class="txtField borderRadius3 placeholder-dark" placeholder="Enter remote server here"
+          <input type="text" class="txtField borderRadius3 placeholder-dark" placeholder="http://serverIPorURL/api/v1/"
                  style="height: 32px; text-indent: 10px;" name="newServer" id="indexNewServer" />
           <a class="btn btn-txt btn-insideInput js-newServerIndexApp">Set New Server</a>
+        </div>
+      </div>
+      <div class="rowTop20 width100 positionWrapper pad50">
+        <div class="txtFieldWrapper">
+          <a class="btn btn-txtOnly js-defaultServerIndexApp">Set to http://localhost:18469/api/v1/</a>
+          <a class="btn btn-txt btn-insideInput pull-right js-defaultServerIndexApp">Default</a>
         </div>
       </div>
       <div class="positionBottom row60 width100 positionWrapper">
@@ -69,6 +75,9 @@
     $('.js-newServerIndexApp').on('click', function(){
       var newServer = $('#indexNewServer').val();
       app.loadNewServer(newServer);
+    });
+    $('.js-defaultServerIndexApp').on('click', function(){
+      app.loadNewServer("http://localhost:18469/api/v1/");
     });
   </script>
 
