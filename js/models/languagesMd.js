@@ -16,6 +16,7 @@ module.exports = Backbone.Model.extend({
         Skip: "Skip",
         Done: "Done",
         Cancel: "Cancel",
+        Close: "Close",
         Yes: "Yes",
         No: "No",
         of: "of",
@@ -63,7 +64,7 @@ module.exports = Backbone.Model.extend({
         SearchForUsersPlaceholder: "Search by handle or GUID",
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
-        OrderProcessingTimePlaceholder: "1-2 Business Days",
+        OrderProcessingTimePlaceholder: "Enter time needed to process order",
         TermsAndConditionsPlaceholder: "Enter terms and conditions...",
         TitlePlaceholder: "Enter title",
         DescriptionPlaceholder: "Enter description...",
@@ -85,7 +86,7 @@ module.exports = Backbone.Model.extend({
         Instagram: "Instagram",
         Twitter: "Twitter",
         Snapchat: "Snapchat",
-        BUYNOW: "BUY NOW",
+        BUYNOW: "Buy Now",
         Description: "Description",
         Reviews: "Reviews",
         Shipping: "Shipping",
@@ -95,6 +96,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Returns",
         ReturnsPolicy: "Returns Policy",
         Ampersand: "&",
+        Keywords: "Keywords",
         ShipsFrom: "Ships From",
         ShipsTo: "Ships To",
         Optional: "Optional",
@@ -159,9 +161,10 @@ module.exports = Backbone.Model.extend({
         AboutYourStore: "A description of your store",
         PaymentType: "Payment Type",
         ShipTo: "Ship To",
+        FreeShipping: "Free Shipping",
         OrderDetails: "Order Details",
         OrderSummary: "Order Summary",
-        AllListings: "Listings",
+        AllListings: "All Listings",
         ComingSoon: "Coming Soon",
         PaymentPending: "Payment Pending",
         FinalizePurchase: "Finalize Purchase",
@@ -237,7 +240,8 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "You must add an address to ship to",
           VendorShipsTo: "This vendor ships to these countries",
-          Send: "Semd",
+          DoesNotShipHere: "This vendor does not ship here",
+          Send: "Send",
           BTCto: "BTC to",
           OpenAddress: "Open Address in Local Wallet",
           CopyAddress: "Copy Pay Address to Clipboard",
@@ -257,6 +261,7 @@ module.exports = Backbone.Model.extend({
         Skip: "Omitir",
         Done: "Hecho",
         Cancel: "Cancelar",
+        Close: "",
         Yes: "S&iacute;",
         No: "No",
         of: "de",
@@ -376,6 +381,7 @@ module.exports = Backbone.Model.extend({
         UpTo3: "Hasta 3",
         PaymentType: "Tipo de pago",
         ShipTo: "Nave",
+        FreeShipping: "",
         OrderDetails: "Detalles Orden",
         OrderSummary : " Resumen Orden",
         AboutYourStore: "Una descripci&oacute;n de su tienda",
@@ -471,6 +477,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Usted debe agregar una dirección para enviar a",
           VendorShipsTo: "este proveedor buques a estos países",
+          DoesNotShipHere: "This vendor does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -568,6 +575,7 @@ module.exports = Backbone.Model.extend({
         Returns: "R&uuml;ckgabe",
         ReturnsPolicy: "R&uuml;cknahmebedingungen",
         Ampersand: "&",
+        Keywords: "",
         ShipsFrom: "Versand von",
         ShipsTo: "Versand nach",
         Optional: "Optional",
@@ -700,6 +708,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Sie m&uuml;ssen eine Adresse zu versenden hinzuzuf&uuml;gen",
           VendorShipsTo: "dieses Anbieters Schiffe in diese L&auml;nde",
+          DoesNotShipHere: "This vendor does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -943,6 +952,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi",
+          DoesNotShipHere: "This vendor does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -1185,6 +1195,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Vous devez ajouter une adresse pour exp&eacute;dier",
           VendorShipsTo: "Ce vendeur expédie vers ces pays",
+          DoesNotShipHere: "This vendor does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -1428,6 +1439,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
           VendorShipsTo: "Acest furnizor livrează către următoarele țări",
+          DoesNotShipHere: "This vendor does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -1671,6 +1683,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Вы должны указать адрес для доставки",
           VendorShipsTo: "Этот производитель отправляет в следующие страны",
+          DoesNotShipHere: "This vendor does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated

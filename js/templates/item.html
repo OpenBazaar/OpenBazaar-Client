@@ -1,94 +1,143 @@
-<div class="flexRow custCol-border">
-  <div class="flexRow bar barTxt pad20 textOpacity75">
-    <div class="table">
-      <div>
-        <div class="width65px">
-          <a class="js-returnToStore textOpacity1"><%= polyglot.t('AllListings') %></a>&nbsp;>&nbsp;
-        </div>
-        <div class="noOverflow">
-          <%- ob.vendor_offer.listing.item.title %>
-        </div>
+  <div class="flexRow border0">
+    <div class="flexRow bar pad20 height30 marginTop9">
+      <a class="js-returnToStore textOpacity50 underline fontSize13"><%= polyglot.t('AllListings') %></a>
+      <% if(ob.vendor_offer.listing.item.category) { %>
+        <span class="ion-ios-arrow-forward breadCrumbArrow"></span> 
+        <a class="js-returnToStore textOpacity50 underline fontSize13"><%- ob.vendor_offer.listing.item.category %></a>
+      <% } %>
+    </div>
+  </div>
+  <h2 class="page-contractTitle noOverflow textOpacity1 marginLeft20 marginBottom8" title="<%- ob.vendor_offer.listing.item.title %>"><%- ob.vendor_offer.listing.item.title %></h2>
+      <!-- <div style="word-break: break-word;"><%- JSON.stringify(ob.vendor_offer.listing) %></div> -->
+
+  <div class="flexRow border0">
+    <div class="flexCol-7 pad20">
+      <div class="itemImg itemImg-large row10"
+      style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+          <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
+            <button class="fullscreen js-photoGallery" href="<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>"></button>
+          <% } %>
       </div>
+    <div class="flexRow row20">
+      <% _.each(ob.vendor_offer.listing.item.image_hashes, function(data, i) {
+      if(i != 0){%>
+      <div class="itemImg itemImg-small <% if(i > 4){%>hide<% } %>" style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"><button class="fullscreen js-photoGallery" href="<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>"></button></div>
+      <% } }); %>
     </div>
   </div>
-</div>
-<div class="flexRow border0">
-  <div class="flexCol-5 pad20">
-    <div class="itemImg itemImg-large row10 rowTop20"
-    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+  <div class="flexCol-5 pad20Right">
+    <div class="marginBottom12 clearfix custCol-secondary borderRadius2">
+      <ul class="itemMeta">
+        <li class="alignCenter itemPrice">
+          <span class="textSize28px textOpacity1 fontWeight500 marginRight2"><%- ob.displayPrice %></span>
+          <% if(ob.userCurrencyCode != 'BTC'){ %>
+          <span class="textSize22px textOpacity65"><%- ob.vendorBTCPrice.toFixed(4) %> btc</span>
+          <% } %>
+        </li>
+        <li class="border0 alignCenter padding10 height70">
+          <div class="btn btn-light btn-buyNow js-buyButton custCol-primary tTip" data-tt="This is a tooltip"><%= polyglot.t('BUYNOW') %></div>
+        </li>
+      </ul>
     </div>
-  <div class="flexRow row20">
-    <% _.each(ob.vendor_offer.listing.item.image_hashes, function(data, i) {
-    if(i != 0){%>
-    <div class="itemImg itemImg-small" style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"></div>
-    <% } }); %>
-  </div>
-</div>
-<div class="flexCol-7 pad20Right">
-  <div class="row20 rowTop20 clearfix">
-    <h1 class="page-contractTitle noOverflow" title="<%- ob.vendor_offer.listing.item.title %>"><%- ob.vendor_offer.listing.item.title %></h1>
-    <p class="margin0 marginTop2 textOpacity75 fontSize14">
-      <%- ob.displayPrice %>
-      <% if(ob.userCurrencyCode != 'BTC'){ %>
-      (<%- ob.vendorBTCPrice.toFixed(4) %> BTC)
-      <% } %>
-      <% if(ob.vendor_offer.listing.item.condition) { %>
-        &#8226; <%- ob.vendor_offer.listing.item.condition %> 
-      <% } %>
-      <% if(ob.vendor_offer.listing.metadata.category) { %>
-        &#8226; <span class="capitalize"><%- ob.vendor_offer.listing.metadata.category %></span>
-      <% } %>
-    </p>
-    <% if(ob.ownPage !== true) { %>
-    <div class="btn btn-light btn-txt btn-buyNow js-buyButton tTip" data-tt="This is a tooltip"><span class="ion-ios-cart marginRight5"></span><%= polyglot.t('BUYNOW') %></div>
+    
+
+    <table class="width100 custCol-text">
+      <tr>
+        <td style="width:50%">
+          <% if(ob.vendor_offer.listing.shipping.shipping_origin) { %>
+          <div class="clearfix">
+            <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7"></div>
+            <div class="itemMetaValue noOverflow"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
+          </div>  
+          <% } %>  
+        </td>
+        <td style="width:50%">
+          <% if(ob.vendor_offer.listing.metadata.category) { %>
+          <div class="clearfix">
+            <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize16"></div>
+            <div class="itemMetaValue"><%- ob.vendor_offer.listing.metadata.category %></div>
+          </div>    
+          <% } %>
+        </td>
+      </tr>
+      <tr>
+        <% if(ob.vendor_offer.listing.item.condition) { %>  
+        <td>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-android-star marginRight7 fontSize16"></div>
+          <div class="itemMetaValue"><%- ob.vendor_offer.listing.item.condition %></div>
+        </td>
+        <% } %>
+
+        <% if( ob.vendor_offer.listing.metadata.category === "physical good" && ob.vendor_offer.listing.shipping.free ) { %>  
+        <td>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize16"></div>
+          <div class="itemMetaValue"><%= polyglot.t('FreeShipping') %></div>
+        </td>
+        <% } %>
+      </tr>
+    </table>
+
+    <% if(ob.vendor_offer.listing.item.keywords != "") { %> 
+    <div class="clearFix marginTop15 fontSize15 marginLeft5"><h4><%= polyglot.t('Keywords') %></h4></div> 
+    <div class="clearFix marginBottom20 marginLeft5">
+      <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { 
+        if(data.length < 100) { 
+        %>
+          <div class="btn-pill custCol-secondary floatLeft"><%- data  %></div>
+      <% } }); %>    
+    </div>
     <% } %>
   </div>
-  <div class="box-border custCol-border-secondary marginBottom40">
-    <div class="bar navBar barFlush navBar custCol-secondary">
-      <a class="btn btn-bar btn-tab custCol-secondary active js-descriptionTab js-tab"><%= polyglot.t('Description') %></a>
-      <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
-      <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
-    </div>
-    <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight420">
-      <div class="flexRow">
-        <div class="rowItem">
-          <%- ob.vendor_offer.listing.item.description %>
+</div>
+
+<div class="flexRow border0">
+  <div class="flexCol-12">
+    <div class="custCol-border-secondary marginBottom40">
+      <div class="bar navBar barFlush navBar custCol-secondary">
+        <a class="btn btn-bar btn-tab custCol-secondary active js-descriptionTab js-tab"><%= polyglot.t('Description') %></a>
+        <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
+        <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
+      </div>
+      <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300">
+        <div class="flexRow">
+          <div class="rowItem fontSize16 padding30 lineHeight24">
+            <%- ob.vendor_offer.listing.item.description %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="flexContainer flex-border custCol-primary minHeight420 textOpacity75 js-reviews js-tabTarg hide">
-      <div class="flexRow">
-        <div class="rowItem">
-          Placeholder for reviews
+      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-reviews js-tabTarg hide">
+        <div class="flexRow">
+          <div class="rowItem fontSize16 padding30 lineHeight24">
+            Placeholder for reviews
+          </div>
         </div>
       </div>
-    </div>
-    <div class="flexContainer flex-border custCol-primary minHeight420 textOpacity75 js-shipping js-tabTarg hide">
-      <div class="flexRow">
-        <div class="rowItem">
-          <% if(ob.vendor_offer.listing.shipping.free == false) { %>
-            <p><%= polyglot.t('ShipsFrom') %>: <%- ob.vendor_offer.listing.shipping.shipping_origin %></p>
-            <hr/>
-            <h3><%= polyglot.t('Domestic') %></h3>
-            <p><%= polyglot.t('Shipping') %>: <%- ob.displayDomesticShipping %></p>
-            <p><%= polyglot.t('EstimatedDelivery') %>: <%- ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
-            <hr/>
-            <h3><%= polyglot.t('International') %></h3>
-            <p><%= polyglot.t('Shipping') %>: <%- ob.displayInternationalShipping %></p>
-            <p><%= polyglot.t('EstimatedDelivery') %> (<%= polyglot.t('international') %>): <%- ob.vendor_offer.listing.shipping.est_delivery.international %></p>
-            <hr/>
-          <% } %>
-          <% if(ob.vendor_offer.listing.policy.returns) { %>
-            <h3><%= polyglot.t('ReturnsPolicy') %></h3>
-            <p><%- ob.vendor_offer.listing.policy.returns %></p>
-          <% } %>
-          <% if(ob.vendor_offer.listing.policy.terms_conditions) { %>
-            <h3><%= polyglot.t('TermsAndConditions') %></h3>
-            <p><%- ob.vendor_offer.listing.policy.terms_conditions %></p>
-          <% } %>
+      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-shipping js-tabTarg hide">
+        <div class="flexRow">
+          <div class="rowItem fontSize16 padding30 lineHeight24">
+            <% if(ob.vendor_offer.listing.shipping.free == false) { %>
+              <h3><%= polyglot.t('Domestic') %></h3>
+              <p><%= polyglot.t('Shipping') %>: <%- ob.displayDomesticShipping %></p>
+              <p><%= polyglot.t('EstimatedDelivery') %>: <%- ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
+              <hr/>
+              <h3><%= polyglot.t('International') %></h3>
+              <p><%= polyglot.t('Shipping') %>: <%- ob.displayInternationalShipping %></p>
+              <p><%= polyglot.t('EstimatedDelivery') %>: <%- ob.vendor_offer.listing.shipping.est_delivery.international %></p>
+              <hr/>
+            <% } %>
+            <% if(ob.vendor_offer.listing.policy.returns) { %>
+              <h3><%= polyglot.t('ReturnsPolicy') %></h3>
+              <p><%- ob.vendor_offer.listing.policy.returns %></p>
+            <% } %>
+            <% if(ob.vendor_offer.listing.policy.terms_conditions) { %>
+              <h3><%= polyglot.t('TermsAndConditions') %></h3>
+              <p><%- ob.vendor_offer.listing.policy.terms_conditions %></p>
+            <% } %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 </div>

@@ -1,9 +1,10 @@
 var __ = require('underscore'),
   Backbone = require('backbone'),
   $ = require('jquery'),
+  colorbox = require('jquery-colorbox'),
   loadTemplate = require('../utils/loadTemplate'),
   buyWizardVw = require('./buyWizardVw');
-Backbone.$ = $;
+  Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
 
@@ -11,7 +12,8 @@ module.exports = Backbone.View.extend({
     'click .js-descriptionTab': 'descriptionClick',
     'click .js-reviewsTab': 'reviewsClick',
     'click .js-shippingTab': 'shippingClick',
-    'click .js-buyButton': 'buyClick'
+    'click .js-buyButton': 'buyClick',
+    'click .js-photoGallery': 'photoGalleryClick'
   },
 
   initialize: function(options){
@@ -35,7 +37,33 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
         self.$el.html(loadedTemplate(self.model.toJSON()));
     });
+
     return this;
+  },
+
+  photoGalleryClick: function(e){
+    $('.js-photoGallery').colorbox({
+      'transition': 'fade',
+      'rel': 'js-photoGallery', 
+      'photo': true,
+      'fadeOut': 0,
+      'previous': '<span class="arrowIcon ion-ios-arrow-back"></span>',
+      'next': '<span class="arrowIcon ion-ios-arrow-forward"></span>',
+      'current': '{current} ' + window.polyglot.t('of') + ' {total}',
+      'close': window.polyglot.t('Close'),
+      'maxHeight': '620px',
+      'opacity': '.95',
+      'speed': 50,
+      onOpen:function(){
+        // we need to append colorbox to obContainer to prevent it from covering the header
+        $("#colorbox").appendTo("#obContainer");
+        $("#cboxOverlay").appendTo("#obContainer");
+        $('#content').addClass('blur');
+      },
+      onClosed:function(){
+        $('#content').removeClass('blur');
+      }
+    });
   },
 
   descriptionClick: function(e){

@@ -185,8 +185,10 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" value="true" /><label for="shippingFreeTrue" class="radioLabel">Yes</label>
-                <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" value="false" checked/><label for="shippingFreeFalse" class="radioLabel">No</label>
+                <div class="fieldItem">
+                  <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" value="true" /><label for="shippingFreeTrue" class="radioLabel">Yes</label>
+                  <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" value="false" checked/><label for="shippingFreeFalse" class="radioLabel">No</label>
+                </div>
               </div>
             </div>
             <div class="flexRow custCol-border js-inputParent js-shippingPriceRow">
@@ -331,7 +333,7 @@
               </div>
             </div>
             <div class="flexCol-8">
-              <div class="fieldItem" id="inputKeyword"></div>
+              <div class="fieldItem padding015" id="inputKeyword"></div>
             </div>
           </div>
           <div class="flexRow">
@@ -357,7 +359,7 @@
             </div>
           </div>
           <div class="flexRow hide js-itemEditClearDateWrapper">
-            <div class="fieldItem width100">
+            <div class="fieldItem width100 padding0">
               <a class="btn btn-txt custCol-primary hcentered js-itemEditClearDate"><%= polyglot.t('ClearExpirationDate') %></a>
             </div>
           </div>

@@ -64,11 +64,18 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-single, #ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li { color:" + textColor + " }" +
       "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li.highlighted { background:" + secondaryColor + " }" +
       "#ov1 #userPage .custCol-primary-darken { background: " + shadeColor2(primaryColor, -0.35) + ";}" +
-      "#ov1 #userPage .custCol-text, .search-field input { color: " + textColor + ";}" +
+      "#ov1 #userPage .custCol-text, #ov1 #userPage .search-field input { color: " + textColor + ";}" +
       "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.85);}" +
       "#ov1 #userPage .txtField:focus, #ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { border: 2px solid " + shadeColor2(primaryColor, 0.15) + ";}" +
       "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + shadeColor2(backgroundColor, 0.25) + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.65);}";
+      
+    // colorbox stuffs
+    customStyleTag.innerHTML +=
+      "#ov1 #userPage #cboxContent { background-color: " + primaryColor + "; color: " + textColor + ";}" +
+      "#ov1 #userPage #cboxCurrent { color: " + textColor + ";}" +
+      "#ov1 #userPage #cboxClose { background-color: " + secondaryColor + "; color: " + textColor + "}" +
+      "#ov1 #userPage #cboxOverlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 1);}";
 
   document.body.appendChild(customStyleTag);
 };

@@ -280,12 +280,15 @@ module.exports = Backbone.View.extend({
     this.slideChatOut();
     $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
     $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
+    $(this.$el).find('.chatSearch').addClass('textOpacity50');
   },
 
   closeConversation: function() {
     $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
     $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
     $(this.$el).find('.chatHead').removeClass('chatHeadSelected');
+    $(this.$el).find('.chatSearch').removeClass('textOpacity50');
+
 
     // let's clear the form on close
     $('#chatConversation').trigger('reset');
@@ -306,6 +309,7 @@ module.exports = Backbone.View.extend({
     $('.modal-child').addClass('modalCompressed');
     $('.spinner-with-logo').addClass('modalCompressed');
     $('#obContainer').addClass('noScrollBar');
+    $('#colorbox').addClass('marginLeftNeg115');
 
     // Adjust elements
     $(this.$el).find('.chatSearch').addClass('chatSearchOut');
@@ -323,6 +327,7 @@ module.exports = Backbone.View.extend({
     $('.modal-child').removeClass('modalCompressed');
     $('.spinner-with-logo').removeClass('modalCompressed');
     $('#obContainer').removeClass('noScrollBar');
+    $('#colorbox').removeClass('marginLeftNeg115');
 
     // Adjust elements
     $(this.$el).find('.chatSearch').removeClass('chatSearchOut');

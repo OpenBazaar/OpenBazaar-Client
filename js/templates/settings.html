@@ -246,8 +246,8 @@
 
               <div class="flexCol-9 custCol-border-secondary">
                 <div class="fieldItem marginLeft6">
-                  <input type="radio" class="fieldItem" id="store_nsfw_yes" name="store-nsfw" value="true" /><label for="store_nsfw_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                  <input type="radio" class="fieldItem" id="store_nsfw_no" name="store-nsfw" value="false" checked /><label for="store_nsfw_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                  <input type="radio" class="fieldItem" id="store_nsfw_yes" name="nsfw" value="true" /><label for="store_nsfw_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="store_nsfw_no" name="nsfw" value="false" checked /><label for="store_nsfw_no" class="radioLabel"><%= polyglot.t('No') %></label>
                 </div>
               </div>
             </div>
@@ -326,7 +326,7 @@
                        data-type="facebook"
                        placeholder="<%= polyglot.t('Facebook') %>"
                        class="fieldItem"
-                       value="<%= ob.page.profile.social_accounts.facebook.username %>">
+                       value="<%- ob.page.profile.social_accounts.facebook.username %>">
               </div>
             </div>
 
@@ -344,7 +344,7 @@
                        data-type="twitter"
                        placeholder="<%= polyglot.t('Twitter') %>"
                        class="fieldItem"
-                       value="<%= ob.page.profile.social_accounts.twitter.username %>">
+                       value="<%- ob.page.profile.social_accounts.twitter.username %>">
               </div>
             </div>
 
@@ -362,7 +362,7 @@
                        data-type="instagram"
                        placeholder="<%= polyglot.t('Instagram') %>"
                        class="fieldItem"
-                       value="<%= ob.page.profile.social_accounts.instagram.username %>">
+                       value="<%- ob.page.profile.social_accounts.instagram.username %>">
               </div>
             </div>
 
@@ -380,7 +380,7 @@
                        data-type="snapchat"
                        placeholder="<%= polyglot.t('Snapchat') %>"
                        class="fieldItem"
-                       value="<%= ob.page.profile.social_accounts.snapchat.username %>">
+                       value="<%- ob.page.profile.social_accounts.snapchat.username %>">
               </div>
             </div>
 
@@ -418,7 +418,7 @@
                     id="about"
                     rows="10"
                     class="fieldItem-textarea"
-                    placeholder="<%= polyglot.t('AboutPlaceholder') %>"><%= ob.user.about %></textarea>              
+                    placeholder="<%= polyglot.t('AboutPlaceholder') %>"><%= ob.page.profile.about %></textarea>
               </div>
             </div>
 

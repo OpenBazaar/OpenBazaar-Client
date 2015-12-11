@@ -15,7 +15,7 @@
 <% } else { %>
 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
 <% if(address.city && address.country && address.displayCountry && address.name && address.postal_code && address.state && address.street && ob.vendor_offer.listing.shipping.shipping_regions.indexOf(address.country) > -1) { %>
-<div class="flexRow custCol-primary js-buyWizardAddress">
+<div class="flexRow custCol-primary custCol-border-secondary js-buyWizardAddress">
   <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
   <label for="buyWizardAddress<%- i %>" class="flexCol-8">
     <div class="padding10">
@@ -38,8 +38,8 @@
 <!--non-valid addresses -->
 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
 <% if(address.city && address.country && address.displayCountry && address.name && address.postal_code && address.state && address.street && ob.vendor_offer.listing.shipping.shipping_regions.indexOf(address.country) < 0) { %>
-<div class="flexRow js-buyWizardAddress disabled">
-  <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
+<div class="flexRow custCol-primary custCol-border-secondary js-buyWizardAddress disabled2">
+  <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" />
   <label for="buyWizardAddress<%- i %>" class="flexCol-8">
     <div class="padding10">
       <div class="row10 txt-unleaded"><strong><%- address.name %></strong></div>
