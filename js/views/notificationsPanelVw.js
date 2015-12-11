@@ -57,9 +57,11 @@ module.exports = Backbone.View.extend({
     this.listWrapper.prepend(notification.el);
     var serverUrl = this.options.serverUrl;
 
-    $.post(serverUrl + "mark_notification_as_read", {
-      "id": model.get('id')
-    });
+    if (model.get('read') != true) {
+      $.post(serverUrl + "mark_notification_as_read", {
+        "id": model.get('id')
+      });
+    }
   },
 
   renderNoneFound: function(){
@@ -109,4 +111,3 @@ module.exports = Backbone.View.extend({
     this.remove();
   }
 });
-
