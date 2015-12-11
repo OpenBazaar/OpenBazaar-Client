@@ -3738,6 +3738,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 30px;
 }
 
+#ov1  .padding015 {
+  padding: 0px 15px;
+}
+
 #ov1  .padding2015 {
   padding: 20px 15px;
 }
@@ -3878,6 +3882,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .disabled {
   pointer-events: none;
   opacity: 0.2;
+}
+
+#ov1 .disabled2 {
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 #ov1 .overflowVisible {
