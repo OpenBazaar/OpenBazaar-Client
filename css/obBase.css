@@ -3884,6 +3884,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0.2;
 }
 
+#ov1 .disabled2 {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 #ov1 .overflowVisible {
   overflow: visible;
 }
