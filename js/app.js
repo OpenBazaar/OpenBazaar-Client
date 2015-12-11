@@ -127,6 +127,8 @@ var loadProfile = function() {
     success: function (model, response) {
       $('.js-loadingModal').addClass('hide');
       "use strict";
+      //clear the interval
+      clearInterval(loadProfileCountdownInterval);
       //make sure profile is not blank
       if (response.profile){
         //guid = response.profile.guid;
