@@ -45,6 +45,7 @@ module.exports = Backbone.Model.extend({
         Followers: "Followers",
         Following: "Following",
         Message: "Message",
+        Messages: "Messages",
         Store: "Store",
         Edit: "Edit",
         Used: "Used",
@@ -525,6 +526,7 @@ module.exports = Backbone.Model.extend({
         Followers: "Follower",
         Following: "Folgt",
         Message: 'Nachricht',
+        Messages: "Messages",//notTranslated
         Store: "Laden",
         Edit: "Bearbeiten",
         Used: "Gebraucht",
@@ -768,6 +770,7 @@ module.exports = Backbone.Model.extend({
         Followers: "Seguaci",
         Following: "Segue",
         Message: "Messaggio",
+        Messages: "Messages",//notTranslated
         Store: "Negozio",
         Edit: "Modifica",
         Used: "Usato",
@@ -1009,7 +1012,8 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "&agrave; propos est vide...",
         Followers: "Abonn&eacute;s",
         Following: "Abonnements",
-        Message: "Message",
+        Message: "Message",//notTranslated
+        Messages: "Messages",//notTranslated
         Store: "Boutique",
         Edit: "Editer",
         Used: "Utilis&eacute;",

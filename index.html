@@ -31,9 +31,25 @@
       <p class="txt-center js-indexLoadingMsg1"></p>
       <p class="txt-center js-indexLoadingMsg2"></p>
       <p class="txt-center js-indexLoadingMsg3"></p>
-      <h2 class="txt-center js-indexLoadingMsg4"></h2>
+      <h2 class="txt-center">
+        &nbsp;<span class="js-indexLoadingMsg4"></span>&nbsp;
+      </h2>
+      <div class="rowTop20 width100 positionWrapper pad50">
+        <div class="txtFieldWrapper">
+          <input type="text" class="txtField borderRadius3 placeholder-dark" placeholder="http://serverIPorURL/api/v1/"
+                 style="height: 32px; text-indent: 10px;" name="newServer" id="indexNewServer" />
+          <a class="btn btn-txt btn-insideInput js-newServerIndexApp">Set New Server</a>
+        </div>
+      </div>
+      <div class="rowTop20 width100 positionWrapper pad50">
+        <div class="txtFieldWrapper">
+          <a class="btn btn-txtOnly js-defaultServerIndexApp">Set to http://localhost:18469/api/v1/</a>
+          <a class="btn btn-txt btn-insideInput pull-right js-defaultServerIndexApp">Set to Default</a>
+        </div>
+      </div>
       <div class="positionBottom row60 width100 positionWrapper">
         <a class="btn btn-txt hCentered js-closeIndexApp">Close Application</a>
+      </div>
       </div>
     </div>
   </div>
@@ -55,6 +71,13 @@
       } else {
         win.hide();
       }
+    });
+    $('.js-newServerIndexApp').on('click', function(){
+      var newServer = $('#indexNewServer').val();
+      app.loadNewServer(newServer);
+    });
+    $('.js-defaultServerIndexApp').on('click', function(){
+      app.loadNewServer("http://localhost:18469/api/v1/");
     });
   </script>
 
