@@ -3738,6 +3738,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 30px;
 }
 
+#ov1  .padding015 {
+  padding: 0px 15px;
+}
+
 #ov1  .padding2015 {
   padding: 20px 15px;
 }
