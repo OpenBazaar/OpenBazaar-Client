@@ -83,7 +83,7 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 };
 
 var isValidUrl = function(url) {
-  var regexp = /(https?:\/\/)+[\w-]+(\.[\w-]+)+\.?(:\d+)+(\/\S*)?/;
+  var regexp = /(https?:\/\/)+[\w-]+(\.[\w-]+)*(:\d+)+(\/\S*)?/;
   return regexp.test(url);
 };
 
@@ -114,7 +114,7 @@ var loadProfile = function() {
           loadProfileCount++;
           loadProfile();
         }
-      }, 2000);
+      }, 3000);
     } else {
       loadDefaultServer();
     }
