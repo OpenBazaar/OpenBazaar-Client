@@ -1744,6 +1744,7 @@ div.chatSearchOut .chatSearchIcon {
 
 #inputConversationMessage {
   border: 1px solid #333;
+  resize: none;
 }
 
 .chatConversationMessageAvatar {
