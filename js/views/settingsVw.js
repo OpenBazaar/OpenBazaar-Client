@@ -16,7 +16,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  className: "settingsPage",
+  className: "settingsView",
 
   events: {
     'click .js-generalTab': 'generalClick',
@@ -298,6 +298,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     //add action to history
     Backbone.history.navigate("#settings/" + state);
+    this.options.state = state;
   },
 
   setTab: function(activeTab, showContent, state){
@@ -363,10 +364,10 @@ module.exports = Backbone.View.extend({
     var theme = $(e.currentTarget).data();
 
     // Populate the color inputs on theme change
-    $('#primary_color').val(theme["primaryColor"]);
-    $('#secondary_color').val(theme["secondaryColor"]);
-    $('#background_color').val(theme["backgroundColor"]);
-    $('#text_color').val(theme["textColor"]);
+    $('#primaryColor').val(theme["primaryColor"]);
+    $('#secondaryColor').val(theme["secondaryColor"]);
+    $('#backgroundColor').val(theme["backgroundColor"]);
+    $('#textColor').val(theme["textColor"]);
     //$('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
     $('#settings-image-cropperBanner').cropit('imageSrc', theme["coverPhoto"]);
   },
@@ -400,7 +401,7 @@ module.exports = Backbone.View.extend({
 
     //add manual data not in the form
     __.each(addData, function(value, key){
-      formKeys.push(value.name);
+      formKeys.push(key);
       if(value.constructor === Array){
         __.each(value, function(val){
           formData.append(key, val);
@@ -478,13 +479,13 @@ module.exports = Backbone.View.extend({
         bannerURI,
         img64Data = {},
         banner64Data = {},
-        imgData = {},
+        pageData = {},
         socialInputCount = 0,
         socialInputs = self.$el.find('#settingsFacebookInput, #settingsTwitterInput, #settingsInstagramInput, #settingsSnapchatInput'),
-        pColor = self.$el.find('#primary_color'),
-        sColor = self.$el.find('#secondary_color'),
-        bColor = self.$el.find('#background_color'),
-        tColor = self.$el.find('#text_color'),
+        pColor = self.$el.find('#primaryColor'),
+        sColor = self.$el.find('#secondaryColor'),
+        bColor = self.$el.find('#backgroundColor'),
+        tColor = self.$el.find('#textColor'),
         pColorVal = pColor.val(),
         bColorVal = bColor.val(),
         sColorVal = sColor.val(),
@@ -492,21 +493,16 @@ module.exports = Backbone.View.extend({
 
     var sendPage = function(){
       //change color inputs to hex values
-      pColor.val(parseInt(pColorVal.slice(1), 16));
-      sColor.val(parseInt(sColorVal.slice(1), 16));
-      bColor.val(parseInt(bColorVal.slice(1), 16));
-      tColor.val(parseInt(tColorVal.slice(1), 16));
+      pageData.primary_color = parseInt(pColorVal.slice(1), 16);
+      pageData.secondary_color = parseInt(sColorVal.slice(1), 16);
+      pageData.background_color = parseInt(bColorVal.slice(1), 16);
+      pageData.text_color = parseInt(tColorVal.slice(1), 16);
 
       self.saveData(form, self.model.get('page').profile, "profile", function(){
         "use strict";
         showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
-        //set color inputs back to original values
-        pColor.val(pColorVal);
-        sColor.val(sColorVal);
-        bColor.val(bColorVal);
-        tColor.val(tColorVal);
         self.refreshView();
-      }, "", imgData);
+      }, "", pageData);
     };
 
     var checkSocialCount = function(){
@@ -552,7 +548,7 @@ module.exports = Backbone.View.extend({
           "use strict";
           var img_hash = data.image_hashes[0];
           if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-            imgData.header = img_hash;
+            pageData.header = img_hash;
             checkSocialCount();
           }
         },"", banner64Data);
@@ -576,7 +572,7 @@ module.exports = Backbone.View.extend({
             "use strict";
             var img_hash = data.image_hashes[0];
             if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              imgData.avatar = img_hash;
+              pageData.avatar = img_hash;
               checkBanner();
             }
           },"", img64Data);
