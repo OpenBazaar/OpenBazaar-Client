@@ -33,18 +33,13 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData)
 
   //add manual data not in the form
   __.each(addData, function(value, key){
-    console.log("foo");
-    console.log("add "+ key);
-    formKeys.push(value.name);
+    formKeys.push(key);
     if(value.constructor === Array){
-      console.log("array");
       __.each(value, function(val){
         formData.append(key, val);
       });
     }else{
       formData.append(key, value);
-      console.log(key);
-      console.log(value);
     }
   });
 

@@ -131,7 +131,7 @@
                        id="refund_address"
                        placeholder="<%= polyglot.t('Address') %>"
                        class="fieldItem"
-                       pattern=".{26,}"
+                       pattern="<%- ob.user.bitcoinValidationRegex %>"
                        value="<%= ob.user.refund_address %>" required>
               </div>
             </div>

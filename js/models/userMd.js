@@ -35,7 +35,11 @@ module.exports = Backbone.Model.extend({
     //value below for testing. Real value should be dynamically set
     //serverUrl: "http://seed.openbazaar.org:18469/api/v1/",
     terms_conditions: "No terms or conditions", //default terms/conditions (string)
-    refund_policy: "No refund policy" //default refund policy (string)
+    refund_policy: "No refund policy", //default refund policy (string)
+
+    //bitcoinValidationRegex: "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$"
+    //remove this when in production, this is for testNet addresses
+    bitcoinValidationRegex: "^[a-km-zA-HJ-NP-Z1-9]{25,34}$"
 
   },
 
