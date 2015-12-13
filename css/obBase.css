@@ -655,16 +655,12 @@ label.fieldItem {
   margin-bottom: 10px;
 }
 
-.rowTop10 {
-  margin-top: 10px;
+.row15 {
+  margin-bottom: 15px;
 }
 
 .row20 {
   margin-bottom: 20px;
-}
-
-.rowTop20 {
-  margin-top: 20px;
 }
 
 .row60 {
@@ -675,6 +671,18 @@ label.fieldItem {
   margin-bottom: 100px;
 }
 
+.rowTop10 {
+  margin-top: 10px;
+}
+
+.rowTop15 {
+  margin-top: 15px;
+}
+
+.rowTop20 {
+  margin-top: 20px;
+}
+
 .rowTop241 {
   /* special class for the itemEdit view */
   margin-top: 241px;
@@ -682,6 +690,11 @@ label.fieldItem {
 
 .row320 {
   margin-bottom: 320px;
+}
+
+.pad5 {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .pad10 {

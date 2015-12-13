@@ -566,15 +566,16 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="primary_color"><%= polyglot.t('PrimaryColor') %></label>
+                  <label for="primaryColor"><%= polyglot.t('PrimaryColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="primary_color"
+                <input name="primaryColor"
                        type="text"
-                       id="primary_color"
+                       id="primaryColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.primary_color %>">
               </div>
             </div>
@@ -582,15 +583,16 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="secondary_color"><%= polyglot.t('SecondaryColor') %></label>
+                  <label for="secondaryColor"><%= polyglot.t('SecondaryColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="secondary_color"
+                <input name="secondaryColor"
                        type="text"
-                       id="secondary_color"
+                       id="secondaryColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.secondary_color %>">
               </div>
             </div>
@@ -599,15 +601,16 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="background_color"><%= polyglot.t('BackgroundColor') %></label>
+                  <label for="backgroundColor"><%= polyglot.t('BackgroundColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="background_color"
+                <input name="backgroundColor"
                        type="text"
-                       id="background_color"
+                       id="backgroundColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.background_color %>">
               </div>
             </div>
@@ -615,15 +618,16 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="text_color"><%= polyglot.t('TextColor') %></label>
+                  <label for="textColor"><%= polyglot.t('TextColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="text_color"
+                <input name="textColor"
                        type="text"
-                       id="text_color"
+                       id="textColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.text_color %>">
               </div>
             </div>
@@ -766,10 +770,10 @@
               <div class="flexRow">
                 <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('CurrentAddress') %></h3>
               </div>
-              <div class="flexRow marginLeft15 marginTop15">
+              <div class="flexRow pad5 rowTop15">
                 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
-                <div class="flexCol-4 padding5">
-                  <div class="padding15 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
+                <div class="flexCol-4 pad10 row15">
+                  <div class="padding10 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
                     <div class="textOpacity75">
                       <div><%- address.name %></div>
                       <div><%- address.street %></div>
