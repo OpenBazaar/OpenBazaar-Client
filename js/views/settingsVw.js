@@ -12,6 +12,7 @@ var __ = require('underscore'),
     showErrorModal = require('../utils/showErrorModal.js'),
     cropit = require('../utils/jquery.cropit'),
     setTheme = require('../utils/setTheme.js'),
+    saveToAPI = require('../utils/saveToAPI'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({
@@ -52,12 +53,16 @@ module.exports = Backbone.View.extend({
      */
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
-    this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
+    this.serverUrl = options.userModel.get('serverUrl')
+    this.userProfile.urlRoot = this.serverUrl + "profile";
     this.user = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
     this.subModels = [];
     this.subModels.push(this.userProfile);
+
+    this.newAvatar = false;
+    this.newBanner = false;
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
@@ -126,6 +131,7 @@ module.exports = Backbone.View.extend({
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
           self.$el.find('.js-avatarLoading').removeClass('fadeOut');
+          self.newAvatar = true;
         },
         onImageLoaded: function(){self.$el.find('.js-avatarLoading').addClass('fadeOut');},
         onImageError: function(errorObject, errorCode, errorMessage){
@@ -134,6 +140,8 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
+      $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
+      //set existing avatar, if any
       $('#settings-image-cropperBanner').cropit({
         $preview: $('.js-settingsBannerPreview'),
         $fileInput: $('#settingsBannerInput'),
@@ -143,6 +151,7 @@ module.exports = Backbone.View.extend({
         onFileReaderError: function(data){console.log(data);},
         onFileChange: function(){
           self.$el.find('.js-bannerLoading').removeClass('fadeOut');
+          self.newBanner = true;
         },
         onImageLoaded: function(){self.$el.find('.js-bannerLoading').addClass('fadeOut');},
         onImageError: function(errorObject, errorCode, errorMessage){
@@ -151,6 +160,7 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
+      $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
 
       self.socketView.getModerators(self.socketModeratorID);
     });
@@ -262,14 +272,14 @@ module.exports = Backbone.View.extend({
 
   renderModerator: function(moderator){
     "use strict";
-    var serverUrl = this.model.get('user').serverUrl,
+    var self = this,
         existingMods = this.model.get('page').profile.moderator_list,
         isExistingMod = existingMods.indexOf(moderator.guid) > -1 ? true : false;
 
     if(moderator.guid != this.model.get('page').profile.guid){
-      moderator.serverUrl = serverUrl;
+      moderator.serverUrl = self.serverUrl;
       moderator.userID = moderator.guid;
-      moderator.avatarURL = serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
+      moderator.avatarURL = self.serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
       moderator.isModerator = true; //flag for template
       moderator.existingModerator = isExistingMod; //flag for template
       moderator.micro = true; //flag for template
@@ -370,8 +380,10 @@ module.exports = Backbone.View.extend({
     $('#textColor').val(theme["textColor"]);
     //$('.js-settingsCoverPhoto').css('background', 'url(' + theme["coverPhoto"] + ') 50% 50% / cover no-repeat');
     $('#settings-image-cropperBanner').cropit('imageSrc', theme["coverPhoto"]);
+    this.newBanner = true;
   },
 
+  /*
   saveData: function(form, modelJSON, endPoint, onSucceed, onFail, addData) {
     "use strict";
     var self = this,
@@ -457,13 +469,14 @@ module.exports = Backbone.View.extend({
       }
     });
   },
+  */
 
   saveGeneral: function() {
     "use strict";
     var self = this,
         form = this.$el.find("#generalForm");
 
-    this.saveData(form, this.model.get('user'), "settings", function(){
+    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
@@ -498,7 +511,7 @@ module.exports = Backbone.View.extend({
       pageData.background_color = parseInt(bColorVal.slice(1), 16);
       pageData.text_color = parseInt(tColorVal.slice(1), 16);
 
-      self.saveData(form, self.model.get('page').profile, "profile", function(){
+      saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
         "use strict";
         showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
@@ -512,7 +525,7 @@ module.exports = Backbone.View.extend({
         if(socialInput.val()){
           socialData.account_type = socialInput.data('type');
           socialData.username = socialInput.val();
-          self.saveData("", "", "social_accounts",
+          saveToAPI("", "", self.serverUrl + "social_accounts",
               function(data){
                 "use strict";
                 checkSocialCount();
@@ -534,7 +547,7 @@ module.exports = Backbone.View.extend({
 
     var checkBanner = function(){
       var bannerCrop = self.$el.find('#settings-image-cropperBanner');
-      if(bannerCrop.cropit('imageSrc')){
+      if(self.newBanner && bannerCrop.cropit('imageSrc')){
 
         bannerURI = bannerCrop.cropit('export', {
           type: 'image/jpeg',
@@ -544,7 +557,7 @@ module.exports = Backbone.View.extend({
         bannerURI = bannerURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         banner64Data.image = bannerURI;
 
-        self.saveData('', '', "upload_image", function (data) {
+        saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
           "use strict";
           var img_hash = data.image_hashes[0];
           if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
@@ -558,7 +571,8 @@ module.exports = Backbone.View.extend({
     };
 
     //if an avatar has been set, upload it first and get the hash
-    if(avatarCrop.cropit('imageSrc')){
+    console.log(self.newAvatar +"  "+ avatarCrop.cropit('imageSrc'));
+    if(self.newAvatar && avatarCrop.cropit('imageSrc')){
 
       imageURI = avatarCrop.cropit('export', {
         type: 'image/jpeg',
@@ -568,7 +582,7 @@ module.exports = Backbone.View.extend({
       imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
       img64Data.image = imageURI;
 
-      this.saveData('', '', "upload_image", function (data) {
+      saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
             "use strict";
             var img_hash = data.image_hashes[0];
             if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
@@ -596,7 +610,7 @@ module.exports = Backbone.View.extend({
     storeData.moderator_list = modList.length > 0 ? modList : "";
     storeData.vendor = true;
 
-    this.saveData(form, "", "profile", function(){
+    saveToAPI(form, "", self.serverUrl + "profile", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
@@ -631,7 +645,7 @@ module.exports = Backbone.View.extend({
       addressData.shipping_addresses = JSON.stringify(newAddresses);
     }
 
-    this.saveData(form, this.model.get('user'), "settings", function(){
+    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
@@ -643,7 +657,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#advancedForm");
 
-    this.saveData(form, this.model.get('user'), "settings", function(){
+    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();

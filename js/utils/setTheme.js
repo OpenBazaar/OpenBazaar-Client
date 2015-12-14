@@ -47,12 +47,14 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .user-page-header-slim { background: " + shadeColor2(primaryColor, -0.15) + ";}" +
       "#ov1 #userPage .mainSearchWrapper .txtField:focus { box-shadow: 0 0 0 2px " + shadeColor2(primaryColor, -0.35) + ";}" +
       "#ov1 #userPage .fieldItem { color: " + textColor + ";}" +
+      "#ov1 #userPage .fieldItem-textarea { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + textColor + "; box-shadow: inset 0 0 0 4px " + primaryColor + ";}" +
       "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + textColor + "; box-shadow: inset 0 0 0 3px " + primaryColor + ";}" +
       "#ov1 #userPage input[type='number'].fieldItem { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].spinButtons::-webkit-inner-spin-button:before { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].spinButtons::-webkit-inner-spin-button:after { color: " + textColor + ";}" +
       "#ov1 #userPage input::-webkit-input-placeholder { color: " + textColor + ";}" +
+      "#ov1 #userPage textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + textColor + ";}" +
       "#ov1 #userPage .container .txtField { color: " + textColor + ";}" +
       "#ov1 #userPage .custCol-font-secondary { color: " + secondaryColor + ";}" +
