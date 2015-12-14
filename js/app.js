@@ -130,7 +130,6 @@ var loadProfile = function() {
       clearInterval(loadProfileCountdownInterval);
       //make sure profile is not blank
       if (response.profile){
-        console.log("+++++++++++++++++++++Loop");
         //guid = response.profile.guid;
         //avatar_hash = response.profile.avatar_hash;
         setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
