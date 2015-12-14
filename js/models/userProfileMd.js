@@ -84,6 +84,11 @@ module.exports = Backbone.Model.extend({
         response.profile.avatar_hash = "";
       }
 
+      //check to make sure header hash is valid
+      if(response.profile.header_hash === "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" || response.profile.header_hash.length !== 40) {
+        response.profile.header_hash = "";
+      }
+
       //if name comes back blank, set to random value
       if(!response.profile.name){
         response.profile.name = "ob" + Math.random().toString(36).slice(2);
