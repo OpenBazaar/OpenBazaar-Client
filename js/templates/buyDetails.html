@@ -1,12 +1,12 @@
 <div class="flexRow">
-  <div class="flexRow custCol-border-secondary borderBottom hide js-buyWizardOrderSummary">
+  <div class="flexRow custCol-border borderBottom hide js-buyWizardOrderSummary">
     <div class="rowItem padding2015">
       <%= polyglot.t('buyFlow.summaryMsg1') %> <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>.
       <%= polyglot.t('buyFlow.summaryMsg2') %> <%- ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
       <a href="#purchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
     </div>
   </div>
-  <div class="flexRow custCol-border-secondary borderBottom">
+  <div class="flexRow custCol-border borderBottom">
     <div class="flexCol-6 borderRight">
       <div class="rowItem padding2015">
         <div class="table">
@@ -22,7 +22,7 @@
             </div>
             <div class="pad10left txt-unleaded">
               <div class="row10"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
-              <div class="noOverflow">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
+              <div class="noOverflow textOpacity75">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
             </div>
           </div>
         </div>
@@ -40,13 +40,16 @@
       </div>
     </div>
   </div>
-  <div class="flexRow custCol-border-secondary borderBottom">
+
+  <!-- only display shipping if physical item -->
+  <% if( ob.vendor_offer.listing.metadata.category === "physical good" ) { %>  
+  <div class="flexRow custCol-border borderBottom">
     <div class="flexCol-6 borderRight">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
             <div class="thumbnail-large-slim">
-              <div class="thumbnail thumbnail-large-slim box-border"
+              <div class="thumbnail thumbnail-large-slim"
               <% if(ob.user.avatar_hash){ %>
               style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultUser.png);">
               <% } else { %>
@@ -77,14 +80,16 @@
       </div>
     </div>
   </div>
-  <div class="flexRow custCol-border-secondary">
+  <% } %>
+
+  <div class="flexRow custCol-border borderBottom">
     <div class="flexCol-6 borderRight">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
             <% if(ob.selectedModerator){ %>
             <div class="thumbnail-large-slim">
-              <div class="thumbnail thumbnail-large-slim box-border"
+              <div class="thumbnail thumbnail-large-slim"
                   <% if(ob.selectedModerator.avatar){ %>
                   style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultUser.png);">
                   <% } else { %>
@@ -93,8 +98,8 @@
               </div>
             </div>
             <div class="pad10left txt-unleaded">
-              <div class="row10"><strong>Secure Transaction</strong></div>
-              <div class="noOverflow">Service by
+              <div class="row10"><strong>Moderated Transaction</strong></div>
+              <div class="noOverflow textOpacity75">Service by
                 <% if(ob.selectedModerator.blockchain_id){ %>
                 <%- ob.selectedModerator.blockchain_id %>
                 <% } else { %>

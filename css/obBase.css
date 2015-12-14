@@ -1,6 +1,6 @@
 /*========== scroll bars ==========*/
 #obContainer::-webkit-scrollbar {
-  width: 1px;
+  width: 6px;
 }
  
 #obContainer::-webkit-scrollbar-thumb {
@@ -11,7 +11,7 @@
 .popMenu-notificationsContent::-webkit-scrollbar,
 .chatConversationHeads::-webkit-scrollbar,
 .chatConversationContent::-webkit-scrollbar {
-  width: 1px;
+  width: 6px;
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar-thumb,
@@ -618,6 +618,7 @@ label.fieldItem {
   width: 54px;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   border-radius: 2px;
   position: relative;
 }
@@ -3593,6 +3594,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-bottom: 2px;
 }
 
+#ov1  .marginBottom4 {
+  margin-bottom: 4px;
+}
+
 #ov1  .marginBottom6 {
   margin-bottom: 6px;
 }
@@ -3740,6 +3745,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding015 {
   padding: 0px 15px;
+}
+
+#ov1  .padding2010{
+  padding: 20px 10px;
 }
 
 #ov1  .padding2015 {

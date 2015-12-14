@@ -136,6 +136,7 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
       //set the initial total price
       self.setTotalPrice();
+
     });
 
     return this;
@@ -171,6 +172,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.$el.find('.js-buyWizardAddress').addClass('hide');
     this.$el.find('.js-buyWizardNewAddress').removeClass('hide');
+    this.$el.find('#buyWizardNameInput').focus();
     //set chosen inputs
     $('.chosen').chosen();
   },
@@ -292,6 +294,10 @@ module.exports = Backbone.View.extend({
     if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
       this.accNext();
       this.showMaps();
+    if(this.options.userModel.get('shipping_addresses').length === 0){
+      $('.js-buyWizardAddresses').hide();
+      this.createNewAddress();
+    }
     } else {
       this.accNext(2);
     }
