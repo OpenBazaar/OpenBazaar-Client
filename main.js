@@ -10,18 +10,27 @@ var path = require('path');
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('electron').BrowserWindow;  // Module to create native browser window.
 var request = require('request');
+var os = require('os');
+var autoUpdater = require('auto-updater');
+var electron = require('electron');
+var menu = require('menu');
+var tray = require('tray');
 
 var launched_from_installer = false;
+var platform = os.platform() + '_' + os.arch();
+switch(platform) {
+  case "darwin_x64":
+    platform = "mac";
+}
+var version = app.getVersion();
+var trayMenu = null;
+var subpy = null;
 
-// Check if we need to kick off the python server-daemon (Desktop app)
-if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
-  launched_from_installer = true;
-
-  console.log('Starting OpenBazaar Server');
+var start_local_server = function() {
   var platform = process.platform;
 
   if(platform == "darwin" || platform == "linux") {
-    var subpy = require('child_process').spawn('/usr/local/bin/python', ['bootstrap.py', 'testnet', '--loglevel', 'debug'], {
+    subpy = require('child_process').spawn('./openbazaard', ['start', '--testnet', '--loglevel', 'debug'], {
       detach: true,
       cwd: __dirname + '/OpenBazaar-Server'
     });
@@ -46,6 +55,14 @@ if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
     });
     subpy.unref();
   }
+};
+
+// Check if we need to kick off the python server-daemon (Desktop app)
+if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
+  launched_from_installer = true;
+
+  console.log('Starting OpenBazaar Server');
+  start_local_server();
 }
 
 // Report crashes to our server.
@@ -84,6 +101,91 @@ app.on('before-quit', function (e) {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
 
+  //var protocol = require('protocol');
+  //protocol.registerProtocol('ob', function(request) {
+  //  var url = request.url.substr(5);
+  //  console.log(path.normalize(__dirname + '/' + url));
+  //}, function (error) {
+  //  if (error)
+  //    console.error('Failed to register protocol')
+  //});
+
+  // Application Menu
+  var appMenu = menu.buildFromTemplate([
+    {
+      label: 'OpenBazaar',
+      submenu: [
+        {
+          label: 'Quit OpenBazaar',
+          accelerator: 'CmdOrCtrl+Q',
+          click: function() {
+            app.quit();
+          }
+        }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        {
+          label: 'Reload',
+          accelerator: 'CmdOrCtrl+R',
+          click: function(item, focusedWindow) {
+            if (focusedWindow)
+              focusedWindow.reload();
+          }
+        },
+        {
+          label: 'Toggle Developer Tools',
+          accelerator: (function() {
+            if (process.platform == 'darwin')
+              return 'Alt+Command+I';
+            else
+              return 'Ctrl+Shift+I';
+          })(),
+          click: function(item, focusedWindow) {
+            if (focusedWindow)
+              focusedWindow.toggleDevTools();
+          }
+        },
+      ]
+    }
+  ]);
+  menu.setApplicationMenu(appMenu);
+
+  // Context Menu for OS X
+  if (process.platform == 'darwin') {
+    trayMenu = new tray(__dirname + '/imgs/menubar_icon.png');
+    var contextMenu = menu.buildFromTemplate([
+      {
+        label: 'Start Local Server', type: 'normal', click: function () {
+        start_local_server();
+      }
+      },
+      {
+        label: 'Shutdown Local Server', type: 'normal', click: function () {
+        request('http://localhost:18469/api/v1/shutdown', function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+            console.log('Shutting down server');
+          } else {
+            console.log('Server does not seem to be running.');
+          }
+        });
+      }
+      },
+      {type: 'separator'},
+      {label: 'View Debug Log', type: 'normal'},
+      {type: 'separator'},
+      {
+        label: 'Quit', type: 'normal', accelerator: 'Command+Q', click: function () {
+        app.quit();
+      }
+      }
+    ]);
+
+    trayMenu.setContextMenu(contextMenu);
+  }
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     "width": 1200,
@@ -118,5 +220,24 @@ app.on('ready', function() {
   app.on('activate', function() {
     mainWindow.show();
   });
+
+  autoUpdater.on("error", function(err, msg) {
+    console.log(msg); //print msg , you can find the cash reason.
+  });
+
+  autoUpdater.on("update-not-available", function() {
+    console.log(msg); //print msg , you can find the cash reason.
+  });
+
+  autoUpdater.on("update-available", function() {
+    mainWindow.webContents.send('ping', 'Update available!');
+  });
+
+  autoUpdater.on("update-downloaded", function(e, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
+    mainWindow.webContents.send('ping', 'Update available!');
+  });
+
+  autoUpdater.setFeedUrl('http://updates.openbazaar.org:5000/update/' + platform + '/' + version);
+  autoUpdater.checkForUpdates();
 
 });
