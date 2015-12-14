@@ -130,7 +130,7 @@ module.exports = Backbone.View.extend({
       //add all countries to the Ships To select list
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
       //add address view
-      self.buyAddressesView.render();
+      self.buyAddressesView.render(0);
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
@@ -316,7 +316,13 @@ module.exports = Backbone.View.extend({
         moderatorID = this.model.get('selectedModerator').guid,
         selectedAddress = this.model.get('selectedAddress');
 
+    if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
+      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      return;
+    }
+
     formData.append("id", this.model.get('id'));
+
     formData.append("quantity", this.$el.find('.js-buyWizardQuantity').val());
     if(selectedAddress){
       formData.append("ship_to", selectedAddress.name);
