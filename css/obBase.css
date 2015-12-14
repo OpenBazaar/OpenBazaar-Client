@@ -770,6 +770,7 @@ label.fieldItem {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  -webkit-backface-visibility: hidden;
 }
 
 .modal.modal-navOffset .modal-child {
@@ -2346,6 +2347,7 @@ input[type="radio"].fieldItem + label:before {
   box-shadow: none;
   opacity: 1;
   transform: translateY(-50%);
+  -webkit-backface-visibility: hidden;
   top: 50%;
 }
 
@@ -2677,6 +2679,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  -webkit-backface-visibility: hidden;
 }
 
 .color-primary {
@@ -2808,6 +2811,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .spinner {
   position: relative;
+  -webkit-backface-visibility: hidden;
 }
 
 .spinner:before {
@@ -3249,6 +3253,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  -webkit-backface-visibility: hidden;
 }
 
 #ov1 .hCentered {
@@ -3256,6 +3261,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  -webkit-backface-visibility: hidden;
 }
 
 #ov1 .fullCentered {
@@ -3264,6 +3270,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  -webkit-backface-visibility: hidden;
 }
 
 #ov1  .borderRight {
