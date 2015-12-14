@@ -71,6 +71,7 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new homeView({
       userModel: this.userModel,
+      userProfile: this.userProfile,
       socketView: this.socketView
     }));
   },

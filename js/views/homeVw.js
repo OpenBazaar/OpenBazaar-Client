@@ -30,20 +30,25 @@ module.exports = Backbone.View.extend({
     this.model = new Backbone.Model();
     this.options = options || {};
     this.userModel = options.userModel;
-    this.userProfile = new userProfileModel();
-    this.userProfile.urlRoot = this.userModel.get('serverUrl') + "profile";
+    //this.userProfile = new userProfileModel();
+    //this.userProfile.urlRoot = this.userModel.get('serverUrl') + "profile";
+    this.userProfile = options.userProfile;
     this.socketView = options.socketView;
     this.slimVisible = false;
     this.subViews = [];
     this.lookingCount = 0;
+    this.obContainer = $('#obContainer');
     this.homeLookingTimeout = setInterval(function(){
-      if(self.lookingCount < 10){
+      if(self.lookingCount < 3){
         self.lookingCount++;
       } else {
         self.endLookingCount();
       }
     }, 1000);
 
+    this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
+
+    /*
     this.userProfile.fetch({
       //no id is passed, this will always be a request for the user's own profile
       success: function(model){
@@ -55,12 +60,15 @@ module.exports = Backbone.View.extend({
         alert("loading the user profile has failed");
       }
     });
+    */
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
     });
     this.socketItemID = Math.random().toString(36).slice(2);
     this.socketVendorID = Math.random().toString(36).slice(2);
+
+    this.render();
   },
 
   resetLookingCount: function(){
@@ -106,25 +114,8 @@ module.exports = Backbone.View.extend({
       self.socketView.getItems(self.socketItemID);
       self.socketView.getVendors(self.socketVendorID);
 
-      // $("#obContainer").scroll(function(){
-      //   if ($(this).scrollTop() > 20 && self.slimVisible === false ) {
-      //     self.slimVisible = true;
-      //     $('.home-page-navigation-filler').show();
-      //     $('.home-page-header').addClass('home-page-header-slim');
-      //     $('.home-page-header-slim').show();
-      //     $('.home-page-content .thumbnail-large').addClass('thumbnail-large-slim');
-      //   }
-      //   if ($(this).scrollTop() < 20 && self.slimVisible === true ) {
-      //     self.slimVisible = false;
-      //     $('.home-page-navigation-filler').hide();
-      //     $('.home-page-header').removeClass('home-page-header-slim');
-      //     $('.home-page-header-slim').hide();
-      //     $('.home-page-content .thumbnail-large').removeClass('thumbnail-large-slim');
-      //   }
-      // });
-
-      // Auto focus the search input
-      // $('.js-homeItemsSearch input').focus();
+      //listen to scrolling on container
+      self.obContainer.on('scroll', function(){self.scrollHandler();});
     });
   },
 
@@ -193,9 +184,21 @@ module.exports = Backbone.View.extend({
     // $('.js-homeFeedSearch input').focus();    
   },  
 
-  createStore: function() {
+  createStore: function(){
     "use strict";
     Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/createStore', {trigger: true});
+  },
+
+  scrollHandler: function(){
+    "use strict";
+    console.log(this.lookingCount);
+    if(this.lookingCount == 3 && this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 100 > this.obContainer[0].scrollHeight){
+      console.log("load");
+      this.lookingCount = 0;
+      this.socketView.getItems(this.socketItemID);
+      this.socketView.getVendors(this.socketVendorID);
+    }
+
   },
 
   close: function(){
