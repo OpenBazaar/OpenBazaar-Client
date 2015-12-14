@@ -131,7 +131,7 @@
                        id="refund_address"
                        placeholder="<%= polyglot.t('Address') %>"
                        class="fieldItem"
-                       pattern=".{26,}"
+                       pattern="<%- ob.user.bitcoinValidationRegex %>"
                        value="<%= ob.user.refund_address %>" required>
               </div>
             </div>
@@ -171,7 +171,7 @@
             </div>
 
             <a class="btn btn-large js-saveGeneral custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelGeneral custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelGeneral custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
 
           </div>
         </form>
@@ -633,7 +633,7 @@
             </div>
 
             <a class="btn btn-large js-savePage custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelPage custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelPage custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
 
           </div>
         </form>
@@ -760,7 +760,7 @@
             </div>
 
             <a class="btn btn-large js-saveStore custCol-secondary pull-right marginRight15 marginTop15 marginBottom5 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelStore custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelStore custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
           </div>
         </form>
         <form class="width100" name="addressesForm" id="addressesForm">
@@ -926,7 +926,7 @@
             </div>
 
             <a class="btn btn-large js-saveAddress custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelAddress custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelAddress custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
           </div>
         </form>
         <form class="width100" name="blockedForm" id="blockedForm">
@@ -1006,7 +1006,7 @@
             </div>
 
             <a class="btn btn-large js-saveAdvanced custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelAdvanced custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelAdvanced custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
           </div>
         </form>
 

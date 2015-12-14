@@ -123,7 +123,6 @@ module.exports = Backbone.Model.extend({
         Name: "Name",
         Price: "Price",
         Available: "Available",
-        Keywords: "Keywords",
         Type: "Type",
         Condition: "Condition",
         NSFW: "18+ (Adult content)",
@@ -173,6 +172,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Save Avatar",
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
+        Reset: "Reset",
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -409,6 +409,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Guardar Avatar ",
         NewAvatar: "Seleccione Nuevo Avatar",
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
           getError: "Los datos no se pudieron recuperar.",
@@ -652,6 +653,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Avatar speichern",
         NewAvatar: "W&auml;hlen Sie New Avatar",
         NewCoverImage: "W&auml;hlen Sie New Cover Image",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
           getError: "Daten konnten nicht empfangen werden.",
@@ -896,6 +898,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Salva Avatar",
         NewAvatar: "Selezionare Nuovo Avatar",
         NewCoverImage: "Selezionare Nuovo Copertina",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
           getError: "I dati non sono stati recuperati.",
@@ -1139,6 +1142,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Enregistrer un Avatar",
         NewAvatar: "S&eacute;lectionner un nouvel Avatar",
         NewCoverImage: "S&eacute;lectionner une nouvelle image de couverture",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "Impossible de sauvegarder les donn&eacute;es.",
           getError: "Impossible de r&eacute;cup&eacute;rer les donn&eacute;es.",
@@ -1383,6 +1387,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Salvare Avatar",
         NewAvatar: "Selectare Avatar Nou",
         NewCoverImage: "Selectare Imagine Copertă Nouă",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
           getError: "Datele nu au putut fi primite.",
@@ -1627,6 +1632,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Сохранить аватар",
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
           getError: "Данные невозможно получить.",
@@ -1870,6 +1876,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Uložiť avatara",
         NewAvatar: "Zvoľte nového avatara",
         NewCoverImage: "Zvoľte nový titulný obrázok",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
           getError: "Nepodarilo sa načítať údaje.",
@@ -2066,7 +2073,6 @@ module.exports = Backbone.Model.extend({
         Name: "Pong",
         Price: "'ay'",
         Available: "LupoQ",
-        Keywords: "Mu'mey",
         Type: "Segh",
         Condition: "Je",
         NSFW: "Dochmey nen",
@@ -2116,6 +2122,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "QaD mIllogh nob",
         NewAvatar: "QaD mIllogh wIv",
         NewCoverImage: "Yuvtlhe' mIllogh wIv",
+        Reset: "Reset", // not translated
         errorMessages: {
           saveError: "Wej toDlu' De'.",
           getError: "LaH wej Suq De'.",
