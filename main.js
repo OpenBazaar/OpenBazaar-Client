@@ -131,21 +131,24 @@ app.on('ready', function() {
           label: 'Reload',
           accelerator: 'CmdOrCtrl+R',
           click: function(item, focusedWindow) {
-            if (focusedWindow)
+            if (focusedWindow) {
               focusedWindow.reload();
+            }
           }
         },
         {
           label: 'Toggle Developer Tools',
           accelerator: (function() {
-            if (process.platform == 'darwin')
+            if (process.platform == 'darwin') {
               return 'Alt+Command+I';
-            else
+            } else {
               return 'Ctrl+Shift+I';
+            }
           })(),
           click: function(item, focusedWindow) {
-            if (focusedWindow)
+            if (focusedWindow) {
               focusedWindow.toggleDevTools();
+            }
           }
         },
       ]
@@ -225,7 +228,7 @@ app.on('ready', function() {
     console.log(msg); //print msg , you can find the cash reason.
   });
 
-  autoUpdater.on("update-not-available", function() {
+  autoUpdater.on("update-not-available", function(msg) {
     console.log(msg); //print msg , you can find the cash reason.
   });
 
