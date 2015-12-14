@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
   renderItem: function(item){
     if(this.availableCurrenciesList.indexOf(item.get('code')) > -1 || item.get('code') === "BTC"){
       var itemJSON = item.toJSON();
+      itemJSON.selected = this.options.selected;
       this.listContents.push('<li class="flexRow custCol-border">');
       this.listContents.push('<div class="rowItem js-homeModal-currencySelect paddingLeft6" data-code="'+ itemJSON.code +'" data-name="'+ itemJSON.dataName +'">');
       this.listContents.push('<input type="radio" class="fieldItem" id="currency-'+ itemJSON.dataName +'" name="'+ itemJSON.code +'"');
