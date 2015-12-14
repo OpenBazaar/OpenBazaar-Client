@@ -19,9 +19,9 @@ module.exports = Backbone.View.extend({
   className:"homeView",
 
   events: {
-    'click .js-homeItemsBtn': 'homeItemsClick',
-    'click .js-homeFeedBtn': 'homeFeedClick',
-    'click .js-homeStoresBtn': 'homeStoresClick',
+    'click .js-productsTab': function(){this.setState("products");},
+    'click .js-feedTab': function(){this.setState("feed");},
+    'click .js-vendorsTab': function(){this.setState("vendors");},
     'click .js-homeCreateStore': 'createStore'
   },
 
@@ -30,37 +30,15 @@ module.exports = Backbone.View.extend({
     this.model = new Backbone.Model();
     this.options = options || {};
     this.userModel = options.userModel;
-    //this.userProfile = new userProfileModel();
-    //this.userProfile.urlRoot = this.userModel.get('serverUrl') + "profile";
     this.userProfile = options.userProfile;
     this.socketView = options.socketView;
+    this.state = options.state;
     this.slimVisible = false;
     this.subViews = [];
-    this.lookingCount = 0;
     this.obContainer = $('#obContainer');
-    this.homeLookingTimeout = setInterval(function(){
-      if(self.lookingCount < 3){
-        self.lookingCount++;
-      } else {
-        self.endLookingCount();
-      }
-    }, 1000);
+    this.loadingSockets = false;
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
-
-    /*
-    this.userProfile.fetch({
-      //no id is passed, this will always be a request for the user's own profile
-      success: function(model){
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        self.render();
-      },
-      error: function(model, response){
-        console.log("Information for user "+options.userID+" fetch failed: " + response.statusText);
-        alert("loading the user profile has failed");
-      }
-    });
-    */
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
@@ -71,21 +49,28 @@ module.exports = Backbone.View.extend({
     this.render();
   },
 
+  setSocketTimeout: function(){
+    "use strict";
+    var self = this;
+    this.loadingSockets = true;
+    this.$el.find('.js-loadingSpinner').removeClass('fadeOut');
+    this.socketTimeout = window.setTimeout(function(){
+        self.$el.find('.js-loadingSpinner').addClass('fadeOut');
+        self.loadingSockets = false;
+        window.clearTimeout(self.socketTimeout);
+    }, 2000);
+
+  },
+
   resetLookingCount: function(){
     "use strict";
     this.lookingCount = 0;
   },
 
-  endLookingCount: function(){
-    "use strict";
-    this.$el.find('.js-loadingMsg').addClass('hide');
-    clearInterval(this.homeLookingTimeout);
-  },
-
-  hideList: function(e){
-    $('.js-list1, .js-list2, .js-list3').addClass('hide');
+  hideList: function(){
+    $('.js-feed, .js-products, .js-vendors').addClass('hide');
     $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').addClass('hide');
-    $('.js-homeItemsBtn, .js-homeStoresBtn, .js-homeFeedBtn').removeClass('active');
+    $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
   },
 
   handleSocketMessage: function(response) {
@@ -105,6 +90,7 @@ module.exports = Backbone.View.extend({
     $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
+      self.setState(self.state);
       if(self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
         self.$el.find('.js-homeMyPage').addClass('show');
@@ -113,6 +99,7 @@ module.exports = Backbone.View.extend({
       //get vendors and items
       self.socketView.getItems(self.socketItemID);
       self.socketView.getVendors(self.socketVendorID);
+      self.setSocketTimeout();
 
       //listen to scrolling on container
       self.obContainer.on('scroll', function(){self.scrollHandler();});
@@ -130,7 +117,7 @@ module.exports = Backbone.View.extend({
     item.userID = item.guid;
     var newItemModel = new itemShortModel(item);
     var itemShort = new itemShortView({model: newItemModel});
-    this.$el.find('.js-list1 .js-loadingMsg').before(itemShort.el);
+    this.$el.find('.js-products .js-loadingSpinner').before(itemShort.el);
     this.subViews.push(itemShort);
   },
 
@@ -141,7 +128,7 @@ module.exports = Backbone.View.extend({
     user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
     var newUserModel = new userShortModel(user);
     var storeShort = new userShortView({model: newUserModel});
-    this.$el.find('.js-list2 .js-loadingMsg').before(storeShort.el);
+    this.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
     this.subViews.push(storeShort);
   },
 
@@ -151,38 +138,22 @@ module.exports = Backbone.View.extend({
     this.subViews.push(simpleMessage);
   },
 
-  homeItemsClick: function(e){
+  setState: function(state){
     "use strict";
+    console.log("state: " + state);
+    if(!state){
+      state = "products";
+    }
     this.hideList();
-    $('.js-list1').removeClass('hide');
-    $('.js-homeItemsBtn').addClass('active');
+    this.$el.find('.js-' + state).removeClass('hide');
+    this.$el.find('.js-' + state + 'Tab').addClass('active');
+    this.$el.find('.js-' + state + 'Search').removeClass('hide');
 
-    // Auto focus the search input
-    $('.js-homeItemsSearch').removeClass('hide');
-    // $('.js-homeItemsSearch input').focus();
+    //add action to history
+    Backbone.history.navigate("#home/" + state);
+    this.state = state;
+
   },
-
-  homeStoresClick: function(e){
-    "use strict";
-    this.hideList();
-    $('.js-list2').removeClass('hide');
-    $('.js-homeStoresBtn').addClass('active');
-
-    // Auto focus the search input
-    $('.js-homeStoresSearch').removeClass('hide');
-    // $('.js-homeStoresSearch input').focus();
-  },
-
-  homeFeedClick: function(e){
-    "use strict";
-    this.hideList();
-    $('.js-list3').removeClass('hide');
-    $('.js-homeFeedBtn').addClass('active');
-
-    // Auto focus the search input
-    $('.js-homeFeedSearch').removeClass('hide');
-    // $('.js-homeFeedSearch input').focus();    
-  },  
 
   createStore: function(){
     "use strict";
@@ -191,10 +162,9 @@ module.exports = Backbone.View.extend({
 
   scrollHandler: function(){
     "use strict";
-    console.log(this.lookingCount);
-    if(this.lookingCount == 3 && this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 100 > this.obContainer[0].scrollHeight){
-      console.log("load");
-      this.lookingCount = 0;
+    console.log("scroll handler go" + !this.loadingSockets);
+    if(!this.loadingSockets && this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight){
+      this.setSocketTimeout();
       this.socketView.getItems(this.socketItemID);
       this.socketView.getVendors(this.socketVendorID);
     }

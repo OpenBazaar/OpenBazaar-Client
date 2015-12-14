@@ -2857,6 +2857,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .90;
 }
 
+.spinnerWrapper {
+  transition: opacity 1s;
+}
+
+.spinnerWrapper.fadeOut {
+  opacity: 0;
+  pointer-events: none;
+}
+
 @-webkit-keyframes spinnerAnimation {
   0% {
     transform: translate(50%,-50%) rotate(359deg);
