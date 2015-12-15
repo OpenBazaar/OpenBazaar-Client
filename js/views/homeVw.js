@@ -36,7 +36,8 @@ module.exports = Backbone.View.extend({
     this.slimVisible = false;
     this.subViews = [];
     this.obContainer = $('#obContainer');
-    this.loadingSockets = false;
+    this.loadingProducts = false;
+    this.loadingVendors = false;
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
@@ -52,11 +53,9 @@ module.exports = Backbone.View.extend({
   setSocketTimeout: function(){
     "use strict";
     var self = this;
-    this.loadingSockets = true;
     this.$el.find('.js-loadingSpinner').removeClass('fadeOut');
     this.socketTimeout = window.setTimeout(function(){
         self.$el.find('.js-loadingSpinner').addClass('fadeOut');
-        self.loadingSockets = false;
         window.clearTimeout(self.socketTimeout);
     }, 2000);
 
@@ -77,8 +76,10 @@ module.exports = Backbone.View.extend({
     "use strict";
     var data = JSON.parse(response.data);
     if(data.id == this.socketItemID){
+      this.loadingProducts = false;
       this.renderItem(data);
     } else if(data.id == this.socketVendorID) {
+      this.loadingVendors = false;
       this.renderUser(data.vendor);
     }
     this.resetLookingCount();
@@ -97,7 +98,9 @@ module.exports = Backbone.View.extend({
       }
 
       //get vendors and items
+      self.loadingProducts = true;
       self.socketView.getItems(self.socketItemID);
+      self.loadingVendors = true;
       self.socketView.getVendors(self.socketVendorID);
       self.setSocketTimeout();
 
@@ -162,13 +165,18 @@ module.exports = Backbone.View.extend({
 
   scrollHandler: function(){
     "use strict";
-    console.log("scroll handler go" + !this.loadingSockets);
-    if(!this.loadingSockets && this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight){
-      this.setSocketTimeout();
-      this.socketView.getItems(this.socketItemID);
-      this.socketView.getVendors(this.socketVendorID);
+    if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight){
+      console.log(this.loadingProducts);
+      if(this.state == "products" && !this.loadingProducts){
+        this.setSocketTimeout();
+        this.loadingProducts = true;
+        this.socketView.getItems(this.socketItemID);
+      } else if(this.state == "vendors" && !this.loadingVendors){
+        this.setSocketTimeout();
+        this.loadingVendors = true;
+        this.socketView.getVendors(this.socketVendorID);
+      }
     }
-
   },
 
   close: function(){
