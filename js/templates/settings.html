@@ -226,12 +226,13 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="short_description"
-                       type="text"
-                       id="short_description"
-                       placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"
-                       class="fieldItem"
-                       value="<%= ob.page.profile.about %>">
+                <textarea
+                  name="short_description"
+                  id="short_description"
+                  rows="2"
+                  class="fieldItem-textarea"
+                  maxlength="160"
+                  placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"><%= ob.page.profile.short_description %></textarea>
               </div>
             </div>
 
