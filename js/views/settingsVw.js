@@ -54,7 +54,6 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.serverUrl = options.userModel.get('serverUrl')
-    this.userProfile.urlRoot = this.serverUrl + "profile";
     this.user = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
@@ -86,15 +85,6 @@ module.exports = Backbone.View.extend({
         self.user.fetch({
           success: function(model){
             "use strict";
-            //clean the addresses
-            var shippingAddresses = model.get('shipping_addresses'),
-                cleanShippingAddresses = [];
-            __.each(shippingAddresses, function(address){
-              if(address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
-                cleanShippingAddresses.push(address);
-              }
-            });
-            model.set('shipping_addresses', cleanShippingAddresses);
             self.model.set({user: model.toJSON()});
 
             //use default currency to return list of supported currencies
@@ -140,7 +130,9 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-      $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
+      if(self.model.get('page').profile.avatar_hash){
+        $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
+      }
       //set existing avatar, if any
       $('#settings-image-cropperBanner').cropit({
         $preview: $('.js-settingsBannerPreview'),
@@ -160,7 +152,9 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-      $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
+      if(self.model.get('page').profile.header_hash){
+        $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
+      }
 
       self.socketView.getModerators(self.socketModeratorID);
     });
@@ -414,7 +408,8 @@ module.exports = Backbone.View.extend({
         pColorVal = pColor.val(),
         bColorVal = bColor.val(),
         sColorVal = sColor.val(),
-        tColorVal = tColor.val();
+        tColorVal = tColor.val(),
+        skipKeys = ["avatar_hash", "header_hash"];
 
     var sendPage = function(){
       //change color inputs to hex values
@@ -427,7 +422,7 @@ module.exports = Backbone.View.extend({
         "use strict";
         showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
-      }, "", pageData);
+      }, "", pageData, skipKeys);
     };
 
     var checkSocialCount = function(){
@@ -545,16 +540,18 @@ module.exports = Backbone.View.extend({
     newAddress.displayCountry = this.$el.find('#settingsShipToCountry option:selected').data('name');
 
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
-      newAddresses.push(newAddress);
+      newAddresses.push(JSON.stringify(newAddress));
     }
 
     this.$el.find('.js-settingsAddress:not(:checked)').each(function(){
-      newAddresses.push(self.model.get('user').shipping_addresses[$(this).val()]);
+      newAddresses.push(JSON.stringify(self.model.get('user').shipping_addresses[$(this).val()]));
     });
 
     if(newAddresses){
-      addressData.shipping_addresses = JSON.stringify(newAddresses);
+      addressData.shipping_addresses = newAddresses;
     }
+
+    console.log(newAddresses);
 
     saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
       "use strict";

@@ -4,12 +4,13 @@ var __ = require('underscore'),
     showErrorModal = require('../utils/showErrorModal.js');
 
 
-module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData) {
+module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys) {
   "use strict";
   var self = this,
       formData = new FormData(form[0] || ""),
       formKeys = [],
-      tempDisabledFields = [];
+      tempDisabledFields = [],
+      skipKeys = skipKeys || [];
 
   if(form){
     form.addClass('formChecked');
@@ -33,9 +34,12 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData)
 
   //add manual data not in the form
   __.each(addData, function(value, key){
+    console.log(key);
     formKeys.push(key);
     if(value.constructor === Array){
       __.each(value, function(val){
+        console.log(val);
+        console.log(typeof val);
         formData.append(key, val);
       });
     }else{
@@ -52,8 +56,14 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData)
   //if key is not in formKeys, get value from the model
   if(modelJSON){
     __.each(modelJSON, function (value, key) {
-      if (formKeys.indexOf(key) == -1){
-        formData.append(key, value);
+      if (formKeys.indexOf(key) == -1 && skipKeys.indexOf(key) == -1){
+        if(value.constructor === Array){
+          __.each(value, function(val){
+            formData.append(key, val);
+          });
+        }else{
+          formData.append(key, value);
+        }
       }
     });
   }
