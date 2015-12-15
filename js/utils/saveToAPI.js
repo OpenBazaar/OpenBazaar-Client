@@ -9,8 +9,9 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   var self = this,
       formData = new FormData(form[0] || ""),
       formKeys = [],
-      tempDisabledFields = [],
-      skipKeys = skipKeys || [];
+      tempDisabledFields = [];
+
+  skipKeys = skipKeys || [];
 
   if(form){
     form.addClass('formChecked');
@@ -34,24 +35,18 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
 
   //add manual data not in the form
   __.each(addData, function(value, key){
-    console.log(key);
     formKeys.push(key);
     if(value.constructor === Array){
       __.each(value, function(val){
-        console.log(val);
-        console.log(typeof val);
         formData.append(key, val);
       });
+      if(value.length == 0){
+        formData.append(key, "");
+      }
     }else{
       formData.append(key, value);
     }
   });
-
-  //add addresses in correct format or they will be destroyed by the server
-  if(endPoint == "settings" && modelJSON){
-    formKeys.push("shipping_addresses");
-    formData.append("shipping_addresses", JSON.stringify(modelJSON.shipping_addresses));
-  }
 
   //if key is not in formKeys, get value from the model
   if(modelJSON){
@@ -61,6 +56,9 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
           __.each(value, function(val){
             formData.append(key, val);
           });
+          if(value.length == 0){
+            formData.append(key, "");
+          }
         }else{
           formData.append(key, value);
         }

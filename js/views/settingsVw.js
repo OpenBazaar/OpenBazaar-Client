@@ -539,6 +539,14 @@ module.exports = Backbone.View.extend({
     newAddress.country = this.$el.find('#settingsShipToCountry').val();
     newAddress.displayCountry = this.$el.find('#settingsShipToCountry option:selected').data('name');
 
+    //if form is partially filled out throw error
+    if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
+      if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
+        showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        return
+      }
+    }
+
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
       newAddresses.push(JSON.stringify(newAddress));
     }
@@ -547,11 +555,7 @@ module.exports = Backbone.View.extend({
       newAddresses.push(JSON.stringify(self.model.get('user').shipping_addresses[$(this).val()]));
     });
 
-    if(newAddresses){
-      addressData.shipping_addresses = newAddresses;
-    }
-
-    console.log(newAddresses);
+    addressData.shipping_addresses = newAddresses;
 
     saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
       "use strict";

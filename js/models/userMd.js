@@ -58,34 +58,15 @@ module.exports = Backbone.Model.extend({
     //addresses come from the server as a string. Parse the string
     response.shipping_addresses = response.shipping_addresses || [];
 
-    console.log(response.shipping_addresses[0]);
-    console.log(typeof response.shipping_addresses[0]);
-    var test = response.shipping_addresses[0].split(",");
-    console.log(test);
-    __.each(test, function(val){
-      console.log(val);
-      console.log(typeof val);
-      console.log(val[0]);
-    });
-    if(response.shipping_addresses.length > 0){
-      try{
-        var shipAddr = JSON.parse(response.shipping_addresses[0]);
-        if (shipAddr && typeof shipAddr === "object" && shipAddr !== null){
-          //remove addresses with missing data
-          response.shipping_addresses = [];
-          __.each(shipAddr, function(address){
-            if(address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
-              response.shipping_addresses.push(address);
-            }
-          });
+    if(response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
+      var tempAddresses = [];
+      __.each(response.shipping_addresses, function(address){
+        address = JSON.parse(address);
+        if(address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
+          tempAddresses.push(address);
         }
-      }
-      catch (e){
-        //server may set a malformed shipping_address value
-        console.log("Error in shipping_addresses:");
-        console.log(e);
-        response.shipping_addresses = [];
-      }
+      });
+      response.shipping_addresses = tempAddresses;
     }
 
     //set the client language to match the language in the response
