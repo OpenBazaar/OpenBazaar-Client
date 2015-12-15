@@ -770,6 +770,7 @@ label.fieldItem {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  -webkit-backface-visibility: hidden;
 }
 
 .modal.modal-navOffset .modal-child {
@@ -972,6 +973,22 @@ h5 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.clamp2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.clamp4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 /*========== skin classes ==========*/
@@ -2346,6 +2363,7 @@ input[type="radio"].fieldItem + label:before {
   box-shadow: none;
   opacity: 1;
   transform: translateY(-50%);
+  -webkit-backface-visibility: hidden;
   top: 50%;
 }
 
@@ -2677,6 +2695,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  -webkit-backface-visibility: hidden;
 }
 
 .color-primary {
@@ -2808,6 +2827,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .spinner {
   position: relative;
+  -webkit-backface-visibility: hidden;
 }
 
 .spinner:before {
@@ -2835,6 +2855,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 17px;
   left: 18px;
   opacity: .90;
+}
+
+.spinnerWrapper {
+  transition: opacity 1s;
+}
+
+.spinnerWrapper.fadeOut {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @-webkit-keyframes spinnerAnimation {
@@ -3249,6 +3278,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  -webkit-backface-visibility: hidden;
 }
 
 #ov1 .hCentered {
@@ -3256,6 +3286,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  -webkit-backface-visibility: hidden;
 }
 
 #ov1 .fullCentered {
@@ -3264,6 +3295,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  -webkit-backface-visibility: hidden;
 }
 
 #ov1  .borderRight {

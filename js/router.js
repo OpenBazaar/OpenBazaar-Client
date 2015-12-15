@@ -25,6 +25,7 @@ module.exports = Backbone.Router.extend({
   routes: {
     "": "index",
     "home": "home",
+    "home/:state": "home",
     "myPage": "userPage",
     "userPage": "userPage",
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
@@ -66,12 +67,14 @@ module.exports = Backbone.Router.extend({
     }
   },
 
-  home: function(){
+  home: function(state){
     "use strict";
     this.cleanup();
     this.newView(new homeView({
       userModel: this.userModel,
-      socketView: this.socketView
+      userProfile: this.userProfile,
+      socketView: this.socketView,
+      state: state
     }));
   },
 
