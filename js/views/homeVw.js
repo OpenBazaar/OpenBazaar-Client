@@ -143,7 +143,6 @@ module.exports = Backbone.View.extend({
 
   setState: function(state){
     "use strict";
-    console.log("state: " + state);
     if(!state){
       state = "products";
     }
@@ -166,7 +165,6 @@ module.exports = Backbone.View.extend({
   scrollHandler: function(){
     "use strict";
     if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight){
-      console.log(this.loadingProducts);
       if(this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
         this.loadingProducts = true;

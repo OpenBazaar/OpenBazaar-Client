@@ -56,20 +56,19 @@ module.exports = Backbone.Model.extend({
     response.displayCountry = matchedCountry[0] ? matchedCountry[0].name : "";
 
     //addresses come from the server as a string. Parse the string
-    response.shipping_addresses = response.shipping_addresses || [];
-    if(response.shipping_addresses){
-      try{
-        var shipAddr = JSON.parse(response.shipping_addresses[0]);
-        if (shipAddr && typeof shipAddr === "object" && shipAddr !== null){
-          response.shipping_addresses = shipAddr;
+    if(response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
+      var tempAddresses = [];
+      __.each(response.shipping_addresses, function(address){
+        if(address){
+          address = JSON.parse(address);
+          if(address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
+            tempAddresses.push(address);
+          }
         }
-      }
-      catch (e){
-        //server may set a malformed shipping_address value
-        console.log("Error in shipping_addresses:");
-        console.log(e);
-        response.shipping_addresses = [];
-      }
+      });
+      response.shipping_addresses = tempAddresses;
+    } else {
+      response.shipping_addresses = [];
     }
 
     //set the client language to match the language in the response

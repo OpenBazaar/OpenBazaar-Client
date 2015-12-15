@@ -60,7 +60,9 @@ module.exports = Backbone.Router.extend({
 
   index: function(){
     "use strict";
-    if(this.userModel.get('beenSet') === true){
+    if(localStorage.getItem("route")){
+      this.navigate('#' + localStorage.getItem("route"), {trigger: true});
+    } else if(this.userProfile.get('profile').beenSet == true){
       this.home();
     } else {
       this.userPage();
