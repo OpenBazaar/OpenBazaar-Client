@@ -10,17 +10,28 @@
 
 .popMenu-notificationsContent::-webkit-scrollbar,
 .chatConversationHeads::-webkit-scrollbar,
-.chatConversationContent::-webkit-scrollbar {
+.chatConversationContent::-webkit-scrollbar,
+#sideBar textarea::-webkit-scrollbar {
   width: 6px;
 }
 
+
 .popMenu-notificationsContent::-webkit-scrollbar-thumb,
 .chatConversationHeads::-webkit-scrollbar-thumb,
-.chatConversationContent::-webkit-scrollbar {
+.chatConversationContent::-webkit-scrollbar-thumb,
+#sideBar textarea::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: #3E3E3E;
 }
 
+.customThemeScrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.customThemeScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #3E3E3E;
+}
 
 .noScrollBar::-webkit-scrollbar {
   width: 0 !important;
@@ -3267,6 +3278,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transform: translate(-50%, -50%);
 }
 
+#ov1 .overflowHidden {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 #ov1  .borderRight {
   border-right: solid 1px rgba(255,255,255,0.08);
 }
@@ -3487,6 +3503,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-align: center;
 }
 
+#ov1  .alignRight {
+  text-align: right;
+}
+
 #ov1  .floatLeft {
   float: left;
 }
@@ -3609,6 +3629,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginTop20 {
   margin-top: 20px;
+}
+
+#ov1  .marginTop28 {
+  margin-top: 28px;
 }
 
 #ov1  .marginTop50 {

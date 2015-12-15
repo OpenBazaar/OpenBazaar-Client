@@ -43,7 +43,7 @@
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <%= polyglot.t('PaymentType') %>
           </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+          <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
               <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                 <div class="flexRow custCol-border">
@@ -52,7 +52,7 @@
                     <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1">
                       <div class="table">
                         <div>
-                          <div class="thumbnail thumbnail-large-slim box-border"
+                          <div class="thumbnail thumbnail-large-slim"
                                <% if(moderator.avatar){ %>
                                style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
                                <% } else { %>
@@ -60,9 +60,15 @@
                                <% } %>
                           </div>
                           <div class="pad10Left txt-unleaded">
-                            <div class="marginTop9 marginBottom4 fontSize15"><strong>Moderated by <%- moderator.name %> <%- moderator.blockchain_id %> (<%- moderator.fee %> fee)</strong></div>
-                            <div class="textOpacity75"><%- moderator.guid %></div>
-                            <div class="textOpacity75"><%- moderator.short_description %></div>
+                            <div class="marginTop9 marginBottom4 fontSize14 clearFix"><strong><div class="floatLeft">Moderated by</div>  <div class="noOverflow width110 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div> <div class="floatLeft">(<%- moderator.fee %> fee)</div></strong></div>
+                            <!-- <div class="textOpacity75"><%- moderator.guid %></div> -->
+                            <div class="textOpacity75 clearFix">
+                              <% if(moderator.short_description){ %>
+                                <%- moderator.short_description %>
+                              <% } else { %>
+                                <%= polyglot.t('NoDescriptionAdded') %>
+                              <% } %>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -72,7 +78,7 @@
               <% }); %>
               <div class="flexRow custCol-border">
                 <div class="rowItem padding2010">
-                  <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardNoModerator" value="direct"/>
+                  <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardNoModerator" value="direct" <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length === 0){ %>checked<% } %> />
                   <label for="buyWizardNoModerator" class="textOpacity1">
                     <div class="table">
                       <div>
@@ -80,8 +86,14 @@
                              style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
                         </div>
                         <div class="pad10left txt-unleaded">
-                          <div class="marginTop9 marginBottom4 fontSize15"><strong>Direct</strong></div>
-                          <div class="textOpacity75">Send Bitcoin directly to <%- ob.handle %></div>
+                          <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong>Direct Payment to <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (0% fee)</strong></div>
+                          <div class="textOpacity75">
+                            <% if(ob.page.profile.short_description){ %>
+                              <%- ob.page.profile.short_description %>
+                            <% } else { %>
+                              <%= polyglot.t('NoDescriptionAdded') %>
+                            <% } %>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -92,8 +104,7 @@
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
             <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-buyWizardModNext
-                      disabled custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3">
               <%= polyglot.t('Next') %>
             </a>
           </div>
@@ -105,10 +116,10 @@
               <a class="btn btn-txt custCol-primary rowTop10 pull-right js-buyWizardNewAddressBtn">New Address</a>
             </div>
             <div class="js-buyWizardNewAddress hide">
-              <%= polyglot.t('NewAddress') %>
+              <%= polyglot.t('ShipTo') %>
             </div>
           </div>
-          <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-border scrollOverflow custCol-primary js-buyWizardAddressScroller">
+          <div class="flexContainer customThemeScrollbar homeModal-settings homeModal-settings-noSearch custCol-border scrollOverflow custCol-primary js-buyWizardAddressScroller">
             <div class="flexRow custCol-secondary">
               <div class="flex-border flexExpand js-buyWizardAddresses">
                 <!--insert addresses-->
@@ -151,7 +162,7 @@
                     </div>
                   </div>
                   <div class="flexCol-7 custCol-border positionWrapper">
-                    <input type="text" name="new_ship_to_state" class="fieldItem custCol-text" id="buyWizardStateInput" required/>
+                    <input type="text" name="new_ship_to_state" class="fieldItem custCol-text js-buyWizardStateInput" id="buyWizardStateInput" required/>
                   </div>
                 </div>
                 <div class="flexRow">
@@ -161,7 +172,7 @@
                     </div>
                   </div>
                   <div class="flexCol-7 custCol-border positionWrapper">
-                    <input type="text" name="new_ship_to_street" class="fieldItem custCol-text" id="buyWizardPostalInput" required/>
+                    <input type="text" name="new_ship_to_street" class="fieldItem custCol-text js-buyWizardPostalInput" id="buyWizardPostalInput" required/>
                   </div>
                 </div>
                 <div class="flexRow overflowVisible">

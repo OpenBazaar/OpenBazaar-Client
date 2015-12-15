@@ -33,6 +33,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
+    'blur .js-buyWizardPostalInput': 'updateMap',
     'blur input': 'validateInput'
   },
 
@@ -278,7 +279,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var addressString = "";
     //only create new map if address is valid
-    if(address && address.street && address.city && address.state && address.postal_code && address.displayCountry) {
+    if(address && address.street && address.city && address.state && address.postal_code) {
+      console.log('sdf');
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
       addressString = encodeURIComponent(addressString);
       var hideClass = this.hideMap ? "hide" : "";
@@ -287,6 +289,16 @@ module.exports = Backbone.View.extend({
           'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe>';
       this.$el.find('.js-buyWizardMap').html(newMap);
     }
+  },
+
+  updateMap: function(){
+    var address = [];
+    address.street = $('#buyWizardStreetInput').val();
+    address.city = $('#buyWizardCityInput').val();
+    address.state = $('#buyWizardStateInput').val();
+    address.postal_code = $('#buyWizardPostalInput').val();
+
+    this.displayMap(address);
   },
 
   modNext: function(){
@@ -475,6 +487,7 @@ module.exports = Backbone.View.extend({
   closeWizard: function() {
     "use strict";
     this.close();
+    $('#obContainer').removeClass('overflowHidden');
   },
 
   close: function(){

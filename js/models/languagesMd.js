@@ -239,8 +239,8 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           MustAddAddress: "You must add an address to ship to",
-          VendorShipsTo: "This vendor ships to these countries",
-          DoesNotShipHere: "This vendor does not ship here",
+          VendorShipsTo: "Ships to",
+          DoesNotShipHere: "Does not ship here",
           Send: "Send",
           BTCto: "BTC to",
           OpenAddress: "Open Address in Local Wallet",
@@ -476,7 +476,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Usted debe agregar una dirección para env&iacute;os",
           VendorShipsTo: "Este proveedor despacha a estos países",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -721,7 +721,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Sie m&uuml;ssen eine Versandadresse hinzuzuf&uuml;gen",
           VendorShipsTo: "Dieser Anbieter versendet nach",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -966,7 +966,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -1210,7 +1210,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Vous devez ajouter une adresse pour exp&eacute;dier",
           VendorShipsTo: "Ce vendeur expédie vers ces pays",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -1455,7 +1455,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
           VendorShipsTo: "Acest furnizor livrează către următoarele țări",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -1700,7 +1700,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Вы должны указать адрес для доставки",
           VendorShipsTo: "Этот производитель отправляет в следующие страны",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
@@ -1944,7 +1944,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Musíte zadať adresu pre doručenie",
           VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín:",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
           OpenAddress: "Open Address in Local Wallet", //notTranslated
