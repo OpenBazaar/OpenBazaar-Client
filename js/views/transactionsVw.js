@@ -128,6 +128,7 @@ module.exports = Backbone.View.extend({
       this.subViews.push(orderShort);
       this.purchasesWrapper.append(orderShort.render().el);
     });
+    this.$el.find(".js-purchases").append(this.purchasesWrapper);
   },
 
   renderSales: function(models){
