@@ -57,16 +57,24 @@ module.exports = Backbone.Model.extend({
 
     //addresses come from the server as a string. Parse the string
     if(response.shipping_addresses && response.shipping_addresses.constructor === Array && response.shipping_addresses.length > 0){
-      var tempAddresses = [];
-      __.each(response.shipping_addresses, function(address){
-        if(address){
-          address = JSON.parse(address);
-          if(address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
-            tempAddresses.push(address);
+      try{
+        var tempAddresses = [];
+        __.each(response.shipping_addresses, function (address) {
+          if (address){
+            address = JSON.parse(address);
+            if (address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
+              tempAddresses.push(address);
+            }
           }
-        }
-      });
-      response.shipping_addresses = tempAddresses;
+        });
+        response.shipping_addresses = tempAddresses;
+      } catch(e) {
+        //server may set a malformed shipping_address value
+        console.log("Error in shipping_addresses:");
+        console.log(e);
+        response.shipping_addresses = [];
+      }
+
     } else {
       response.shipping_addresses = [];
     }
