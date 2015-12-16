@@ -238,6 +238,7 @@ module.exports = Backbone.View.extend({
         dataType: "json",
         success: function(data) {
           if (data.success === true){
+            console.log('success');
             //clear form
             self.$el.find('#buyWizardNameInput').val("");
             self.$el.find('#buyWizardStreetInput').val("");
@@ -280,7 +281,6 @@ module.exports = Backbone.View.extend({
     var addressString = "";
     //only create new map if address is valid
     if(address && address.street && address.city && address.state && address.postal_code) {
-      console.log('sdf');
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
       addressString = encodeURIComponent(addressString);
       var hideClass = this.hideMap ? "hide" : "";
@@ -307,8 +307,10 @@ module.exports = Backbone.View.extend({
       this.accNext();
       this.showMaps();
     if(this.options.userModel.get('shipping_addresses').length === 0){
-      $('.js-buyWizardAddresses').hide();
       this.createNewAddress();
+      $('.js-buyWizardAddresses').hide();
+      $('.js-buyWizardAddressBack').show();
+      $('.js-buyWizardNewAddressCancel').hide();
     }
     } else {
       this.accNext(2);

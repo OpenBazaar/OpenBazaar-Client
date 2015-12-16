@@ -54,7 +54,6 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.serverUrl = options.userModel.get('serverUrl')
-    this.userProfile.urlRoot = this.serverUrl + "profile";
     this.user = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
@@ -86,15 +85,6 @@ module.exports = Backbone.View.extend({
         self.user.fetch({
           success: function(model){
             "use strict";
-            //clean the addresses
-            var shippingAddresses = model.get('shipping_addresses'),
-                cleanShippingAddresses = [];
-            __.each(shippingAddresses, function(address){
-              if(address.name && address.street && address.city && address.state && address.postal_code && address.country && address.displayCountry){
-                cleanShippingAddresses.push(address);
-              }
-            });
-            model.set('shipping_addresses', cleanShippingAddresses);
             self.model.set({user: model.toJSON()});
 
             //use default currency to return list of supported currencies
@@ -129,7 +119,7 @@ module.exports = Backbone.View.extend({
         smallImage: "stretch",
         maxZoom: 2,
         onFileReaderError: function(data){console.log(data);},
-        onFileChange: function(){
+        onImageLoading: function(){
           self.$el.find('.js-avatarLoading').removeClass('fadeOut');
           self.newAvatar = true;
         },
@@ -140,7 +130,9 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-      $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
+      if(self.model.get('page').profile.avatar_hash){
+        $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
+      }
       //set existing avatar, if any
       $('#settings-image-cropperBanner').cropit({
         $preview: $('.js-settingsBannerPreview'),
@@ -149,7 +141,7 @@ module.exports = Backbone.View.extend({
         exportZoom: 1.33,
         maxZoom: 5,
         onFileReaderError: function(data){console.log(data);},
-        onFileChange: function(){
+        onImageLoading: function(){
           self.$el.find('.js-bannerLoading').removeClass('fadeOut');
           self.newBanner = true;
         },
@@ -160,7 +152,9 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
-      $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
+      if(self.model.get('page').profile.header_hash){
+        $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
+      }
 
       self.socketView.getModerators(self.socketModeratorID);
     });
@@ -383,94 +377,6 @@ module.exports = Backbone.View.extend({
     this.newBanner = true;
   },
 
-  /*
-  saveData: function(form, modelJSON, endPoint, onSucceed, onFail, addData) {
-    "use strict";
-    var self = this,
-        formData = new FormData(form[0] || ""),
-        formKeys = [],
-        tempDisabledFields = [];
-
-    if(form){
-      form.addClass('formChecked');
-      if (!form[0].checkValidity()){
-        showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-        return;
-      }
-
-      //temporarily disable any blank fields so they aren't picked up by the serializeArray
-      form.find(":input:not(:disabled)").each(function(){
-        if($(this).val() == "") {
-          $(this).attr('disabled', true);
-          tempDisabledFields.push($(this).attr('id'));
-        }
-      });
-
-      __.each(form.serializeArray(), function (value) {
-        formKeys.push(value.name);
-      });
-    }
-
-    //add manual data not in the form
-    __.each(addData, function(value, key){
-      formKeys.push(key);
-      if(value.constructor === Array){
-        __.each(value, function(val){
-          formData.append(key, val);
-        });
-      }else{
-        formData.append(key, value);
-      }
-    });
-
-    //add addresses in correct format or they will be destroyed by the server
-    if(endPoint == "settings" && modelJSON){
-      formKeys.push("shipping_addresses");
-      formData.append("shipping_addresses", JSON.stringify(modelJSON.shipping_addresses));
-    }
-
-    //if key is not in formKeys, get value from the model
-    if(modelJSON){
-      __.each(modelJSON, function (value, key) {
-        if (formKeys.indexOf(key) == -1){
-          formData.append(key, value);
-        }
-      });
-    }
-
-    $.ajax({
-      type: "POST",
-      url: self.options.userModel.get('serverUrl') + endPoint,
-      contentType: false,
-      processData: false,
-      data: formData,
-      dataType: "json",
-      success: function(data) {
-        if (data.success === true){
-          onSucceed(data);
-        }else if (data.success === false){
-          if(onFail){
-            onFail(data);
-          } else{
-            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-          }
-        }
-      },
-      error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      },
-      complete: function(){
-        //re-enable any disabled fields
-        __.each(tempDisabledFields, function(element){
-          form.find('#'+element).attr('disabled', false);
-        });
-      }
-    });
-  },
-  */
-
   saveGeneral: function() {
     "use strict";
     var self = this,
@@ -502,7 +408,8 @@ module.exports = Backbone.View.extend({
         pColorVal = pColor.val(),
         bColorVal = bColor.val(),
         sColorVal = sColor.val(),
-        tColorVal = tColor.val();
+        tColorVal = tColor.val(),
+        skipKeys = ["avatar_hash", "header_hash"];
 
     var sendPage = function(){
       //change color inputs to hex values
@@ -515,7 +422,7 @@ module.exports = Backbone.View.extend({
         "use strict";
         showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
-      }, "", pageData);
+      }, "", pageData, skipKeys);
     };
 
     var checkSocialCount = function(){
@@ -560,7 +467,7 @@ module.exports = Backbone.View.extend({
         saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
           "use strict";
           var img_hash = data.image_hashes[0];
-          if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+          if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
             pageData.header = img_hash;
             checkSocialCount();
           }
@@ -571,7 +478,6 @@ module.exports = Backbone.View.extend({
     };
 
     //if an avatar has been set, upload it first and get the hash
-    console.log(self.newAvatar +"  "+ avatarCrop.cropit('imageSrc'));
     if(self.newAvatar && avatarCrop.cropit('imageSrc')){
 
       imageURI = avatarCrop.cropit('export', {
@@ -585,7 +491,7 @@ module.exports = Backbone.View.extend({
       saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
             "use strict";
             var img_hash = data.image_hashes[0];
-            if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
+            if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
               pageData.avatar = img_hash;
               checkBanner();
             }
@@ -633,17 +539,23 @@ module.exports = Backbone.View.extend({
     newAddress.country = this.$el.find('#settingsShipToCountry').val();
     newAddress.displayCountry = this.$el.find('#settingsShipToCountry option:selected').data('name');
 
+    //if form is partially filled out throw error
+    if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
+      if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
+        showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        return
+      }
+    }
+
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
-      newAddresses.push(newAddress);
+      newAddresses.push(JSON.stringify(newAddress));
     }
 
     this.$el.find('.js-settingsAddress:not(:checked)').each(function(){
-      newAddresses.push(self.model.get('user').shipping_addresses[$(this).val()]);
+      newAddresses.push(JSON.stringify(self.model.get('user').shipping_addresses[$(this).val()]));
     });
 
-    if(newAddresses){
-      addressData.shipping_addresses = JSON.stringify(newAddresses);
-    }
+    addressData.shipping_addresses = newAddresses;
 
     saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
       "use strict";

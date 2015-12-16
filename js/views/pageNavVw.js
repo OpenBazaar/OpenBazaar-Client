@@ -66,7 +66,6 @@ module.exports = Backbone.View.extend({
     });
 
     this.listenTo(this.userProfile, 'change', function(){
-      console.log("profile changed");
       this.render();
     });
 

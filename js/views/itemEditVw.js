@@ -192,8 +192,6 @@ module.exports = Backbone.View.extend({
         imageList = [],
         imageCount = imageFiles.length;
 
-    this.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
-
     __.each(imageFiles, function(imageFile, i){
       var newImage = document.createElement("img"),
           ctx;
@@ -204,6 +202,8 @@ module.exports = Backbone.View.extend({
             imgW = newImage.width,
             dataURI,
             canvas = document.createElement("canvas");
+
+        self.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
 
         if (imgW < imgH){
           //if image width is smaller than height, set width to max

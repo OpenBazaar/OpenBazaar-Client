@@ -82,8 +82,11 @@
                   <label for="buyWizardNoModerator" class="textOpacity1">
                     <div class="table">
                       <div>
-                        <div class="thumbnail thumbnail-large-slim"
-                             style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+                        <div class="thumbnail thumbnail-large-slim" style="background-image:
+                        <% if(ob.avatar_hash) { %>
+                        url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %><%- ob.imageExtension %>),
+                        <% } %>
+                        url(imgs/defaultItem.png);">
                         </div>
                         <div class="pad10left txt-unleaded">
                           <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong>Direct Payment to <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (0% fee)</strong></div>

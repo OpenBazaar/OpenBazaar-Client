@@ -1,3 +1,4 @@
+<!-- item -->
 <div class="flexRow">
   <div class="flexRow custCol-border borderBottom hide js-buyWizardOrderSummary">
     <div class="rowItem padding2015">
@@ -7,7 +8,7 @@
     </div>
   </div>
   <div class="flexRow custCol-border borderBottom">
-    <div class="flexCol-6 borderRight">
+    <div class="flexCol-6">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
@@ -21,24 +22,31 @@
               </div>
             </div>
             <div class="pad10left txt-unleaded">
-              <div class="row10"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
-              <div class="noOverflow textOpacity75">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
+              <div class="marginTop12 marginBottom4 fontSize14 noOverflow"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
+              <div class="noOverflow fontSize14 txt-fade">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="flexCol-2 borderRight">
+    <div class="flexCol-2">
       <div class="rowItem padding2015">
         <form id="buyWizardQuantity">
-          <input type="number" step="1" min="1" class="fieldItem spinButtons js-buyWizardQuantity" value="1"/>
+          <input type="number" step="1" min="1" class="fieldItem spinButtons js-buyWizardQuantity border1 custCol-border" value="1"/>
         </form>
         <span class="fieldItem js-buyWizardQuantityDisplay hide"></span>
       </div>
     </div>
     <div class="flexCol-4">
-      <div class="rowItem padding2015">
-        <span class="fieldItem js-buyWizardPrice"><%- ob.displayPrice %></span>
+      <div class="rowItem padding2015 alignRight marginTop20">
+        <span class="js-buyWizardPrice fontSize14">
+          <%- ob.displayPrice %>
+        </span>
+        <span class="textOpacity75 fontSize14">
+          <% if(ob.userCurrencyCode != 'BTC'){ %>
+          (<%- ob.vendorBTCPrice.toFixed(4) %> BTC)
+          <% } %>
+        </span>
       </div>
     </div>
   </div>
@@ -46,7 +54,7 @@
   <!-- only display shipping if physical item -->
   <% if( ob.vendor_offer.listing.metadata.category === "physical good" ) { %>  
   <div class="flexRow custCol-border borderBottom">
-    <div class="flexCol-6 borderRight">
+    <div class="flexCol-6">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
@@ -72,20 +80,27 @@
         </div>
       </div>
     </div>
-    <div class="flexCol-2 borderRight">
+    <div class="flexCol-2">
       <div class="rowItem padding2015">
       </div>
     </div>
     <div class="flexCol-4">
-      <div class="rowItem padding2015">
-        <span class="fieldItem js-buyWizardShippingPrice"><%- ob.currentShippingDisplayPrice %></span>
+      <div class="rowItem padding2015 marginTop20">
+        <span class="js-buyWizardShippingPrice fontSize14">
+          <%- ob.currentShippingDisplayPrice %>
+        </span>
+        <span class="textOpacity75 fontSize14">
+          <% if(ob.userCurrencyCode != 'BTC'){ %>
+          (<%- ob.vendorBTCPrice.toFixed(4) %> BTC)
+          <% } %>
+        </span>
       </div>
     </div>
   </div>
   <% } %>
 
   <div class="flexRow custCol-border borderBottom">
-    <div class="flexCol-6 borderRight">
+    <div class="flexCol-6">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
@@ -116,7 +131,7 @@
         </div>
       </div>
     </div>
-    <div class="flexCol-2 borderRight">
+    <div class="flexCol-2">
       <div class="rowItem padding2015">
       </div>
     </div>
