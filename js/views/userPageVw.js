@@ -122,7 +122,8 @@ module.exports = Backbone.View.extend({
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUser',
     'click .js-unfollow': 'unfollowUser',
-    'click .js-message': 'sendMessage'
+    'click .js-message': 'sendMessage',
+    'change .js-categories': 'categoryChanged'
   },
 
   initialize: function (options) {
@@ -283,7 +284,7 @@ module.exports = Backbone.View.extend({
           $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
           $('.user-page-header .rowItem').show();
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop66');
-          setTimeout(function(){ 
+          setTimeout(function(){
             $('.user-page-header-slim').removeClass('textOpacity1');
           }, 100);
         }
@@ -397,6 +398,11 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  categoryChanged: function() {
+    this.renderItems(this.listings.get('listings'));
+    console.log("category changed");
+  },
+
   toggleFollowButtons: function(followed) {
     "use strict";
     var followBtn = this.$el.find('.js-follow'),
@@ -450,6 +456,7 @@ module.exports = Backbone.View.extend({
   renderItems: function (model) {
     "use strict";
     var self = this;
+    var select = document.getElementById('categories');
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.serverUrl = self.options.userModel.get('serverUrl');
@@ -457,14 +464,19 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
-
+      if (arrayItem.category != "" && $("#categories option[value='" + arrayItem.category + "']").val() === undefined){
+        var opt = document.createElement('option');
+        opt.value = arrayItem.category;
+        opt.innerHTML = arrayItem.category;
+        select.appendChild(opt);
+      }
       if(self.options.ownPage === true){
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
       } else {
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
-    this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel});
+    this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel, category: select.options[select.selectedIndex].value});
     this.subViews.push(this.itemList);
   },
 
@@ -595,6 +607,11 @@ module.exports = Backbone.View.extend({
 
   storeClick: function(e){
     "use strict";
+    var select = document.getElementById('categories');
+    if (select.value != "all"){
+        select.value = "all"
+        this.categoryChanged();
+    }
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
@@ -932,4 +949,3 @@ module.exports = Backbone.View.extend({
   }
 
 });
-
