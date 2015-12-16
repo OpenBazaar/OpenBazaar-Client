@@ -991,6 +991,11 @@ h5 {
   -webkit-box-orient: vertical;
 }
 
+.txtRow2 {
+  line-height: 1.5em;;
+  height: 3em;
+}
+
 /*========== skin classes ==========*/
 
 .userPageImageUpload {

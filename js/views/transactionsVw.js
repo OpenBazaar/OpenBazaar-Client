@@ -5,6 +5,7 @@ var __ = require('underscore'),
     showErrorModal = require('../utils/showErrorModal.js'),
     setTheme = require('../utils/setTheme.js'),
     chosen = require('../utils/chosen.jquery.min.js'),
+    purchasesCl = require('../collections/purchasesCl'),
     orderShortVw = require('./orderShortVw');
 
 module.exports = Backbone.View.extend({
@@ -35,19 +36,16 @@ module.exports = Backbone.View.extend({
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
 
-    this.purchasesCol = new Backbone.Collection();
+    this.purchasesCol = new purchasesCl();
     this.purchasesCol.url = this.serverUrl + "get_purchases";
     this.purchasesWrapper = $(wrapper);
-    this.listenTo(this.purchasesCol, 'change', this.renderPurchases());
 
     this.salesCol = new Backbone.Collection();
     this.salesCol.url = this.serverUrl + "get_sales";
-    this.listenTo(this.salesCol, 'change', this.renderSales());
     this.salesWrapper = $(wrapper);
 
     this.casesCol = new Backbone.Collection();
     this.casesCol.url = this.serverUrl + "get_cases";
-    this.listenTo(this.casesCol, 'change', this.renderCases());
     this.casesWrapper = $(wrapper);
 
     this.subViews = [];
@@ -59,7 +57,12 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     console.log("getData");
-    this.purchasesCol.fetch();
+    this.purchasesCol.fetch({
+      success: function(models){
+        console.log(models);
+        self.renderPurchases();
+      }
+    });
     if(this.model.get('page').vendor){
       //this.salesCol.fetch();
     }
@@ -117,16 +120,18 @@ module.exports = Backbone.View.extend({
     console.log("filter by "+filterBy);
   },
 
-  renderPurchases: function(models){
-    var self = this;
+  renderPurchases: function(){
     "use strict";
-    __.each(models, function(model){
-      model.thumbnailUrl = this.serverUrl +"get_image?hash="+ model.thumbnail_hash;
+    var self = this;
+    this.purchasesCol.each(function(model, i){
+      console.log(model);
+      console.log(model.get('thumbnail_hash'));
+      model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
       var orderShort = new orderShortVw({
         model: model,
       });
-      this.subViews.push(orderShort);
-      this.purchasesWrapper.append(orderShort.render().el);
+      self.subViews.push(orderShort);
+      self.purchasesWrapper.append(orderShort.render().el);
     });
     this.$el.find(".js-purchases").append(this.purchasesWrapper);
   },

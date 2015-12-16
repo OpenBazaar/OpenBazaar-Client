@@ -2,39 +2,35 @@
   <div class="flexRow">
     <div class="table">
       <div>
-        <div>
-          <div class="thumbnail thumbnail-large custCol-border-secondary borderRadius2 borderRadiusBottom0 textOpacity90 clickable js-userShort"
-            <% if(ob.thumbnail_hash) { %>
-            style="background-image: url(<%- ob.thumbnailUrl %>), url(imgs/defaultItem.png);">
-            <% } else { %>
-            style="background-image: url(imgs/defaultItem.png);">
-            <% } %>
-          </div>
+        <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 borderRadiusBottom0 textOpacity90 clickable js-userShort"
+          <% if(ob.thumbnail_hash) { %>
+          style="background-image: url(<%- ob.imageUrl %>), url(imgs/defaultItem.png);">
+          <% } else { %>
+          style="background-image: url(imgs/defaultItem.png);">
+          <% } %>
         </div>
         <div>
           <div class="marginLeft15 marginTop2 clearFix">
-            <div class="floatLeft noOverflow marginBottom2 marginRight5">
-              <span class="textSize16px capitalize js-userShort"><%- ob.order_id %></span>
-            </div>
-            <div class="noOverflow pull-left lineHeight21">
-              <a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.vendor %></a>
+            <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize16px">
+              <%- ob.title %>
             </div>
           </div>
           <div class="marginLeft15 marginRight15 marginTop2">
-            <% if(ob.description) { %>
-              <div class="fontSize14 txt-fade textWeightNormal clamp4"><%- ob.description %></div>
-            <% } else { %>
-              <div class="fontSize14 txt-fade textWeightNormal"><%= polyglot.t('NoDescriptionAdded') %></div>
-            <% } %>
+            <div class="fontSize14 txt-fade textWeightNormal txtRow2 clamp2">
+              <% if(ob.description) { %>
+                <%- ob.description %>
+              <% } else { %>
+                <%= polyglot.t('NoDescriptionAdded') %>
+              <% } %>
+            </div>
           </div>
           <div class="marginLeft15 marginRight15 marginTop2">
-            btns
+            <%= polyglot.t('SoldBy') %><a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.vendor %></a>
           </div>
-
         </div>
 
         <div style="width: 105px;">
-          Order date etc
+          <%= polyglot.t('OrderID') %> #<%- ob.order_id %>
         </div>
       </div>
     </div>

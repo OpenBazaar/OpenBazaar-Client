@@ -175,6 +175,8 @@ module.exports = Backbone.Model.extend({
         Reset: "Reset",
         Sales: "Sales",
         Cases: "Cases",
+        OrderID: "Order ID",
+        SoldBy: "Sold By",
         transactions: {
           searchByOrder: "Search by order id or item name",
           sortByStatusAll: "All",
