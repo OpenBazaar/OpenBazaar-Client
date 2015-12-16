@@ -8,7 +8,7 @@ var homeView = require('./views/homeVw'),
     aboutView = require('./views/aboutVw'),
     donateView = require('./views/donateVw'),
     settingsView = require('./views/settingsVw'),
-    purchasesView = require('./views/purchasesVw');
+    transactionsView = require('./views/transactionsVw');
 
 module.exports = Backbone.Router.extend({
 
@@ -32,8 +32,8 @@ module.exports = Backbone.Router.extend({
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
     "customizePage": "customizePage",
     "sellItem": "sellItem",
-    "purchases": "purchases",
-    "purchases/:state": "purchases",
+    "transactions": "transactions",
+    "transactions/:state": "transactions",
     "sales": "sales",
     "cases": "cases",
     "notifications": "notifications",
@@ -111,10 +111,10 @@ module.exports = Backbone.Router.extend({
     }),"userPage");
   },
 
-  purchases: function(state){
+  transactions: function(state){
     "use strict";
     this.cleanup();
-    this.newView(new purchasesView({
+    this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView

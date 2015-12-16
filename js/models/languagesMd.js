@@ -410,6 +410,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Seleccione Nuevo Avatar",
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
         Reset: "Reset", // not translated
+        Purchases:"Compras",
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
           getError: "Los datos no se pudieron recuperar.",
@@ -440,7 +441,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Personalizar P&aacute;gina",
           sellItem:"Nuevo",
           createListing:"Nuevo Listado",
-          purchases:"Compras",
+          transactions: "Transactions",
           sales:"Ventas",
           cases:"Casos",
           notifications:"Notificaciones",
@@ -654,6 +655,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "W&auml;hlen Sie New Avatar",
         NewCoverImage: "W&auml;hlen Sie New Cover Image",
         Reset: "Reset", // not translated
+        Purchases:"Eink&auml;ufe",
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
           getError: "Daten konnten nicht empfangen werden.",
@@ -684,7 +686,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Seite anpassen",
           sellItem:"Neu",
           createListing:"Neuer Eintrag",
-          purchases:"Eink&auml;ufe",
+          transactions: "Transactions", //not translated
           sales:"Verk&auml;ufe",
           cases:"F&auml;lle",
           notifications:"Benachrichtigungen",
@@ -899,6 +901,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Selezionare Nuovo Avatar",
         NewCoverImage: "Selezionare Nuovo Copertina",
         Reset: "Reset", // not translated
+        Purchases:"Acquisti",
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
           getError: "I dati non sono stati recuperati.",
@@ -929,7 +932,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Personalizza pagina",
           sellItem:"Nuovo",
           createListing:"Crea elenco",
-          purchases:"Acquisti",
+          transactions: "Transactions", //not translated
           sales:"Vendite",
           cases:"Cause",
           notifications:"Notifiche",
@@ -1143,6 +1146,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "S&eacute;lectionner un nouvel Avatar",
         NewCoverImage: "S&eacute;lectionner une nouvelle image de couverture",
         Reset: "Reset", // not translated
+        Purchases:"Achats",
         errorMessages: {
           saveError: "Impossible de sauvegarder les donn&eacute;es.",
           getError: "Impossible de r&eacute;cup&eacute;rer les donn&eacute;es.",
@@ -1173,7 +1177,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Personnaliser la page",
           sellItem:"Nouveau",
           createListing:"Nouvelle annonce",
-          purchases:"Achats",
+          transactions: "Transactions", //not translated
           sales:"Ventes",
           cases:"Cas",
           notifications:"Notifications",
@@ -1388,6 +1392,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Selectare Avatar Nou",
         NewCoverImage: "Selectare Imagine Copertă Nouă",
         Reset: "Reset", // not translated
+        Purchases:"Cumpărături",
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
           getError: "Datele nu au putut fi primite.",
@@ -1418,7 +1423,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Customizare Pagină",
           sellItem:"Nou",
           createListing:"Listare Nouă",
-          purchases:"Cumpărături",
+          transactions: "Transactions", //not translated
           sales:"Vânzări",
           cases:"Cazuri",
           notifications:"Notificări",
@@ -1633,6 +1638,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
         Reset: "Reset", // not translated
+        Purchases:"Покупки",
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
           getError: "Данные невозможно получить.",
@@ -1663,7 +1669,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Настроить страницу",
           sellItem:"Разместить товар",
           createListing:"Новый листинг",
-          purchases:"Покупки",
+          transactions: "Transactions", //not translated
           sales:"Продажи",
           cases:"История",
           notifications:"Уведомления",
@@ -1877,6 +1883,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Zvoľte nového avatara",
         NewCoverImage: "Zvoľte nový titulný obrázok",
         Reset: "Reset", // not translated
+        Purchases:"Nákupy",
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
           getError: "Nepodarilo sa načítať údaje.",
@@ -1907,7 +1914,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Upraviť stránku",
           sellItem:"Nová položka",
           createListing:"Nový listing",
-          purchases:"Nákupy",
+          transactions: "Transactions", //not translated
           sales:"Predaje",
           cases:"Prípady",
           notifications:"Notifikácie",
@@ -2123,6 +2130,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "QaD mIllogh wIv",
         NewCoverImage: "Yuvtlhe' mIllogh wIv",
         Reset: "Reset", // not translated
+        Purchases:"Je'",
         errorMessages: {
           saveError: "Wej toDlu' De'.",
           getError: "LaH wej Suq De'.",
@@ -2153,7 +2161,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"JuHwIj choH",
           sellItem:"Chu'",
           createListing:"Chu' tetlh",
-          purchases:"Je'",
+          transactions: "Transactions", //not translated
           sales:"DIlmeH",
           cases:"Bo'DIj qaS",
           notifications:"GhuH",

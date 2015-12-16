@@ -1026,7 +1026,7 @@ h5 {
 }
 
 .welcomeBar,
-.settingsBar {
+.userBar {
   background-color: transparent;
   height: 50px;
   line-height: 50px;
@@ -1047,7 +1047,7 @@ h5 {
 }
 
 .welcomeBar .welcomeBar-inner,
-.settingsBar .title-section {
+.userBar .title-section {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -1057,11 +1057,11 @@ h5 {
   z-index: 1;
 }
 
-.settingsBar .title-section {
+.userBar .title-section {
   padding-left: 102px;
 }
 
-.settingsBar .thumbnail {
+.userBar .thumbnail {
   background-size: cover;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
