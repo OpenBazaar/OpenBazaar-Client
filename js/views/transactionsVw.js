@@ -3,7 +3,9 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     showErrorModal = require('../utils/showErrorModal.js'),
-    chosen = require('../utils/chosen.jquery.min.js');
+    setTheme = require('../utils/setTheme.js'),
+    chosen = require('../utils/chosen.jquery.min.js'),
+    orderShortVw = require('./orderShortVw');
 
 module.exports = Backbone.View.extend({
 
@@ -23,9 +25,31 @@ module.exports = Backbone.View.extend({
        userProfile
        state (from router)
      */
+    var profile = options.userProfile.get('profile'),
+        wrapper = "<div></div>";
+
+    this.state = options.state || "purchases";
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
-    this.model.set("page", options.userProfile.get('profile'));
+    this.model.set("page", profile);
+    setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
+    this.serverUrl = options.userModel.get('serverUrl');
+
+    this.purchasesCol = new Backbone.Collection();
+    this.purchasesCol.url = this.serverUrl + "get_purchases";
+    this.purchasesWrapper = $(wrapper);
+    this.listenTo(this.purchasesCol, 'change', this.renderPurchases());
+
+    this.salesCol = new Backbone.Collection();
+    this.salesCol.url = this.serverUrl + "get_sales";
+    this.listenTo(this.salesCol, 'change', this.renderSales());
+    this.salesWrapper = $(wrapper);
+
+    this.casesCol = new Backbone.Collection();
+    this.casesCol.url = this.serverUrl + "get_cases";
+    this.listenTo(this.casesCol, 'change', this.renderCases());
+    this.casesWrapper = $(wrapper);
+
     this.subViews = [];
     this.subModels = [];
     this.render();
@@ -33,7 +57,15 @@ module.exports = Backbone.View.extend({
 
   getData: function(){
     "use strict";
-
+    var self = this;
+    console.log("getData");
+    this.purchasesCol.fetch();
+    if(this.model.get('page').vendor){
+      //this.salesCol.fetch();
+    }
+    if(this.model.get('page').moderator){
+      //this.casesCol.fetch(); //not ready yet
+    }
   },
 
   render: function(){
@@ -42,9 +74,8 @@ module.exports = Backbone.View.extend({
     $('#content').html(self.$el);
     loadTemplate('./js/templates/transactions.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.setState(self.options.state);
-      //set chosen inputs
-      $('.chosen').chosen();
+      self.setState(self.state);
+      self.getData();
     });
   },
 
@@ -65,7 +96,6 @@ module.exports = Backbone.View.extend({
 
   setState: function(state){
     "use strict";
-    state = state || "purchases";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     $('#content').find('input:visible:first').focus();
   },
@@ -85,5 +115,28 @@ module.exports = Backbone.View.extend({
     "use strict";
     var filterBy = this.$el.find(".js-transactionFilter").val();
     console.log("filter by "+filterBy);
+  },
+
+  renderPurchases: function(models){
+    var self = this;
+    "use strict";
+    __.each(models, function(model){
+      model.thumbnailUrl = this.serverUrl +"get_image?hash="+ model.thumbnail_hash;
+      var orderShort = new orderShortVw({
+        model: model,
+      });
+      this.subViews.push(orderShort);
+      this.purchasesWrapper.append(orderShort.render().el);
+    });
+  },
+
+  renderSales: function(models){
+    "use strict";
+
+  },
+
+  renderCases: function(models){
+    "use strict";
+
   }
 });

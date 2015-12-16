@@ -15,8 +15,12 @@
 
 <div class="bar navBar barFlush custCol-secondary clearFix">
   <a class="btn btn-bar btn-tab custCol-secondary js-tab active" data-tab="purchase"><%= polyglot.t('Purchases') %></a>
+  <% if(ob.page.vendor){ %>
   <a class="btn btn-bar btn-tab custCol-secondary js-tab" data-tab="sales"><%= polyglot.t('Sales') %></a>
+  <% } %>
+  <% if(ob.page.moderator){ %>
   <a class="btn btn-bar btn-tab custCol-secondary js-tab" data-tab="cases"><%= polyglot.t('Cases') %></a>
+  <% } %>
 </div>
 
 <div class="flexContainer flex-border color-primary height54">
@@ -27,7 +31,7 @@
           <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
         </div>
         <div class="selectPill pull-up43">
-          <select class="custCol-secondary chosen js-transactionFilter">
+          <select class="custCol-secondary js-transactionFilter">
             <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
             <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
             <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
