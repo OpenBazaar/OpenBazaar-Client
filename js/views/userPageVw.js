@@ -455,7 +455,7 @@ module.exports = Backbone.View.extend({
   renderItems: function (model) {
     "use strict";
     var self = this;
-    var select = document.getElementById('categories');
+    var select = this.$el.find('.js-categories');
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.serverUrl = self.options.userModel.get('serverUrl');
@@ -463,11 +463,11 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
-      if (arrayItem.category != "" && $("#categories option[value='" + arrayItem.category + "']").val() === undefined){
+      if (arrayItem.category != "" && self.$el.find(".js-categories option[value='" + arrayItem.category + "']").length == 0){
         var opt = document.createElement('option');
         opt.value = arrayItem.category;
         opt.innerHTML = arrayItem.category;
-        select.appendChild(opt);
+        select.append(opt);
       }
       if(self.options.ownPage === true){
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
@@ -475,7 +475,7 @@ module.exports = Backbone.View.extend({
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
-    this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel, category: select.options[select.selectedIndex].value});
+    this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel, category: this.$el.find('.js-categories').val()});
     this.subViews.push(this.itemList);
   },
 
@@ -606,9 +606,8 @@ module.exports = Backbone.View.extend({
 
   storeClick: function(e){
     "use strict";
-    var select = document.getElementById('categories');
-    if (select.value != "all"){
-        select.value = "all"
+    if (this.$el.find('.js-categories').val() != "all"){
+        $(".js-categories option[value='all']").attr("selected", "selected");
         this.categoryChanged();
     }
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
