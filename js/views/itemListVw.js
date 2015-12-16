@@ -36,6 +36,7 @@ module.exports = Backbone.View.extend({
       model: item,
       el: this.$el
     });
+    this.subViews.push(itemShort);
     //this.$el.append(itemShort.render().el);
   },
 

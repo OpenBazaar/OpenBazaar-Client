@@ -400,7 +400,6 @@ module.exports = Backbone.View.extend({
 
   categoryChanged: function() {
     this.renderItems(this.listings.get('listings'));
-    console.log("category changed");
   },
 
   toggleFollowButtons: function(followed) {
