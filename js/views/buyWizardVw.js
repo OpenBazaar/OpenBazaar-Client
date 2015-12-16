@@ -307,7 +307,6 @@ module.exports = Backbone.View.extend({
       this.showMaps();
       if(this.options.userModel.get('shipping_addresses').length === 0){
         this.createNewAddress();
-        // $('.js-buyWizardAddresses').hide();
         $('.js-buyWizardAddressBack').show();
         $('.js-buyWizardNewAddressCancel').hide();
       }

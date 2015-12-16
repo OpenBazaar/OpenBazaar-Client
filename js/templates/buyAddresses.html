@@ -42,6 +42,7 @@
             <%- ob.displayInternationalShipping %>
             <% if(ob.userCurrencyCode != 'BTC'){ %>
             <span class="textOpacity75">(<%- ob.internationalShippingBTC.toFixed(4) %> BTC)</span>
+            <% } %>
           <% } %>
         <% } %>
       </div>
