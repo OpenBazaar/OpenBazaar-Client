@@ -119,7 +119,7 @@ module.exports = Backbone.View.extend({
         smallImage: "stretch",
         maxZoom: 2,
         onFileReaderError: function(data){console.log(data);},
-        onFileChange: function(){
+        onImageLoading: function(){
           self.$el.find('.js-avatarLoading').removeClass('fadeOut');
           self.newAvatar = true;
         },
@@ -141,7 +141,7 @@ module.exports = Backbone.View.extend({
         exportZoom: 1.33,
         maxZoom: 5,
         onFileReaderError: function(data){console.log(data);},
-        onFileChange: function(){
+        onImageLoading: function(){
           self.$el.find('.js-bannerLoading').removeClass('fadeOut');
           self.newBanner = true;
         },
