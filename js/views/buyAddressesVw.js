@@ -7,7 +7,8 @@ Backbone.$ = $;
 module.exports = Backbone.View.extend({
 
   events: {
-    'change .js-buyWizardAddressRadio': 'selectAddress'
+    'change .js-buyWizardAddressRadio': 'selectAddress',
+    'click .js-buyWizardAddressSelected': 'selectAddressAndAdvance'
   },
 
   className: "flexRow",
@@ -29,6 +30,11 @@ module.exports = Backbone.View.extend({
       //this does not add it to the DOM, that is done by the parent view
     });
     return this;
+  },
+
+  selectAddressAndAdvance: function(){
+    "use strict";
+    $(".js-buyWizardAddressNext").trigger( "click" );
   },
 
   selectAddress: function(){

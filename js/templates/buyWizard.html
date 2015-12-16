@@ -24,8 +24,8 @@
             <div class="txt-center row20">
               <a class="textSize11px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
             </div>
-            <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
             <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+            <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
             <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
           </div>
         </div>
@@ -60,9 +60,9 @@
                                <% } %>
                           </div>
                           <div class="pad10Left txt-unleaded">
-                            <div class="marginTop9 marginBottom4 fontSize14 clearFix"><strong><div class="floatLeft">Moderated by</div>  <div class="noOverflow width110 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div> <div class="floatLeft">(<%- moderator.fee %> fee)</div></strong></div>
+                            <div class="marginTop9 marginBottom4 fontSize13 clearFix"><strong><div class="floatLeft">Moderated by</div>  <div class="noOverflow width120 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div> <div class="floatLeft">(<%- moderator.fee %> fee)</div></strong></div>
                             <!-- <div class="textOpacity75"><%- moderator.guid %></div> -->
-                            <div class="textOpacity75 clearFix">
+                            <div class="textOpacity75 clearFix fontSize13">
                               <% if(moderator.short_description){ %>
                                 <%- moderator.short_description %>
                               <% } else { %>
@@ -89,8 +89,8 @@
                         url(imgs/defaultItem.png);">
                         </div>
                         <div class="pad10left txt-unleaded">
-                          <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong>Direct Payment to <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (0% fee)</strong></div>
-                          <div class="textOpacity75">
+                          <div class="marginTop9 marginBottom4 fontSize13 noOverflow"><strong>Direct Payment to <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (Free)</strong></div>
+                          <div class="textOpacity75 fontSize13">
                             <% if(ob.page.profile.short_description){ %>
                               <%- ob.page.profile.short_description %>
                             <% } else { %>
@@ -128,7 +128,7 @@
                 <!--insert addresses-->
               </div>
               <form id="buyWizardNewAddressForm" class="js-buyWizardNewAddress flex-border flexExpand custCol-primary hide">
-                <div class="flexRow custCol-border">
+                <div class="flexRow custCol-border borderTop">
                   <div class="flexCol-5 custCol-border">
                     <div class="fieldItem">
                       <label for="buyWizardNameInput"><%= polyglot.t('ShipToName') %></label>
@@ -203,13 +203,18 @@
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <div class="js-buyWizardOrderDetails">
-              <%= polyglot.t('OrderDetails') %> <div class="pull-right">Total: <span class="js-buyWizardDetailsTotal"></span> </div>
+              <%= polyglot.t('OrderDetails') %> <div class="pull-right">Total:
+                <span class="js-buyWizardDetailsTotal"></span> 
+                <% if(ob.userCurrencyCode != 'BTC'){ %>
+                <span class="textOpacity75">(<%- ob.vendorBTCPrice.toFixed(4) %> BTC)</span>
+                <% } %>
+            </div>
             </div>
             <div class="js-buyWizardOrderSummary hide">
               <%= polyglot.t('OrderSummary') %>
             </div>
           </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch js-buyWizardInsertDetails scrollOverflow custCol-primary">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch js-buyWizardInsertDetails scrollOverflow custCol-primary customThemeScrollbar">
           <!--inser details view-->
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">

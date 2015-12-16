@@ -283,9 +283,9 @@ module.exports = Backbone.View.extend({
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
       addressString = encodeURIComponent(addressString);
       var hideClass = this.hideMap ? "hide" : "";
-      var newMap = '<iframe class="' + hideClass + ' js-buyWizardMap"' +
-          'width="525" height="250" frameborder="0" style="border:0"' +
-          'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe>';
+      var newMap = '<div class="overflowHidden"><iframe class="' + hideClass + ' js-buyWizardMap"' +
+          'width="525" height="350" frameborder="0" style="border:0; margin-top: -100px"' +
+          'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
       this.$el.find('.js-buyWizardMap').html(newMap);
     }
   },
@@ -305,12 +305,12 @@ module.exports = Backbone.View.extend({
     if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
       this.accNext();
       this.showMaps();
-    if(this.options.userModel.get('shipping_addresses').length === 0){
-      this.createNewAddress();
-      $('.js-buyWizardAddresses').hide();
-      $('.js-buyWizardAddressBack').show();
-      $('.js-buyWizardNewAddressCancel').hide();
-    }
+      if(this.options.userModel.get('shipping_addresses').length === 0){
+        this.createNewAddress();
+        // $('.js-buyWizardAddresses').hide();
+        $('.js-buyWizardAddressBack').show();
+        $('.js-buyWizardNewAddressCancel').hide();
+      }
     } else {
       this.accNext(2);
     }

@@ -243,8 +243,8 @@ module.exports = Backbone.Model.extend({
           DoesNotShipHere: "Does not ship here",
           Send: "Send",
           BTCto: "BTC to",
-          OpenAddress: "Open Address in Local Wallet",
-          CopyAddress: "Copy Pay Address to Clipboard",
+          OpenAddress: "Open in Local Wallet",
+          CopyAddress: "Copy to Clipboard",
           RefreshPayment: "Refresh Payment Status",
           summaryMsg1: "Your payment has been sent to",
           summaryMsg2: "The expected processing time for this order is",
@@ -479,8 +479,8 @@ module.exports = Backbone.Model.extend({
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
@@ -724,8 +724,8 @@ module.exports = Backbone.Model.extend({
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
@@ -1216,8 +1216,8 @@ module.exports = Backbone.Model.extend({
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
@@ -1461,8 +1461,8 @@ module.exports = Backbone.Model.extend({
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
@@ -1706,8 +1706,8 @@ module.exports = Backbone.Model.extend({
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
@@ -1950,8 +1950,8 @@ module.exports = Backbone.Model.extend({
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated

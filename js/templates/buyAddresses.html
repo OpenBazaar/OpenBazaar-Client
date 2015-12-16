@@ -9,36 +9,39 @@
   </div>
 </div>
 <% if(ob.user.shipping_addresses.length < 1) { %>
-<div class="flexRow custCol-primary custCol-border">
+<!-- <div class="flexRow custCol-primary custCol-border">
   <div class="rowItem padding2015 txt-center">
     <%= polyglot.t('buyFlow.MustAddAddress') %>
   </div>
-</div>
+</div> -->
 <% } else { %>
 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
 <% if(address.city && address.country && address.displayCountry && address.name && address.postal_code && address.state && address.street && ob.vendor_offer.listing.shipping.shipping_regions.indexOf(address.country) > -1) { %>
 <div class="flexRow custCol-primary custCol-border js-buyWizardAddress pad10">
   <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
-  <label for="buyWizardAddress<%- i %>" class="width100 textOpacity75 textSize13px">
+  <label for="buyWizardAddress<%- i %>" class="width100 textOpacity1 textSize13px paddingRight5">
     <div class="padding15 floatLeft">
       <div class="row10 txt-unleaded"><strong><%- address.name %></strong></div>
       <div class=""><%- address.street %><br/><%- address.city %>, <%- address.state %> <%- address.postal_code %><br/><%- address.displayCountry %></div>
     </div>
     <div class="floatRight">
-      <div class="btn btn-txt fontWeight500 textSize13px custCol-secondary marginTop28">
+      <div class="btn btn-txt fontWeight500 textOpacity1 textSize13px custCol-secondary marginTop28 js-buyWizardAddressSelected">
         <% if(address.country == ob.vendor_offer.listing.shipping.shipping_origin){ %>
           <% if(ob.vendor_offer.listing.shipping.free){ %>
             <%= polyglot.t('Free') %>
           <% } else { %>
             <%- ob.displayDomesticShipping %>
             <% if(ob.userCurrencyCode != 'BTC'){ %>
-            (<%- ob.vendorBTCPrice.toFixed(4) %> BTC)
+            <span class="textOpacity75">(<%- ob.domesticShippingBTC.toFixed(4) %> BTC)</span>
             <% } %>
           <% } %>
         <% } else { %>
-          <%- ob.displayInternationalShipping %>
-          <% if(ob.userCurrencyCode != 'BTC'){ %>
-          (<%- ob.vendorBTCPrice.toFixed(4) %> BTC)
+          <% if(ob.vendor_offer.listing.shipping.free){ %>
+            <%= polyglot.t('Free') %>
+          <% } else { %>
+            <%- ob.displayInternationalShipping %>
+            <% if(ob.userCurrencyCode != 'BTC'){ %>
+            <span class="textOpacity75">(<%- ob.internationalShippingBTC.toFixed(4) %> BTC)</span>
           <% } %>
         <% } %>
       </div>

@@ -29,7 +29,7 @@
 }
 
 .customThemeScrollbar::-webkit-scrollbar-thumb {
-  border-radius: 20px;
+  border-radius: 0;
   background: #3E3E3E;
 }
 
@@ -3647,6 +3647,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 7px;
 }
 
+#ov1  .marginTop8 {
+  margin-top: 8px;
+}
+
 #ov1  .marginTop9 {
   margin-top: 9px;
 }
@@ -3766,6 +3770,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   min-height: 300px;
 }
 
+#ov1  .lineHeight15{
+  line-height: 15px;
+}
+#ov1  .lineHeight16{
+  line-height: 16px;
+}
 #ov1  .lineHeight20{
   line-height: 20px;
 }
@@ -3790,6 +3800,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .bottom0 {
   bottom: 0;
+}
+
+#ov1 .bottom8px {
+  bottom: 8px;
+}
+
+#ov1 .left0 {
+  left: 0;
 }
 
 #ov1 .positionAbsolute {
@@ -3846,6 +3864,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .paddingRight2 {
   padding-right: 2px;
+}
+#ov1  .paddingRight5 {
+  padding-right: 5px;
 }
 
 #ov1  .paddingLeft2 {
