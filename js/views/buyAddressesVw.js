@@ -10,7 +10,7 @@ module.exports = Backbone.View.extend({
     'change .js-buyWizardAddressRadio': 'selectAddress'
   },
 
-  className: "flexRow borderBottom",
+  className: "flexRow",
 
   initialize: function() {
     "use strict";

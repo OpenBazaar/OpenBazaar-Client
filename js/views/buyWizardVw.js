@@ -238,7 +238,6 @@ module.exports = Backbone.View.extend({
         dataType: "json",
         success: function(data) {
           if (data.success === true){
-            console.log('success');
             //clear form
             self.$el.find('#buyWizardNameInput').val("");
             self.$el.find('#buyWizardStreetInput').val("");
