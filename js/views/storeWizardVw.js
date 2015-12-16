@@ -8,8 +8,7 @@ var __ = require('underscore'),
     countriesModel = require('../models/countriesMd'),
     showErrorModal = require('../utils/showErrorModal.js'),
     saveToAPI = require('../utils/saveToAPI'),
-    Taggle = require('taggle'),
-    chosen = require('../utils/chosen.jquery.min.js');
+    Taggle = require('taggle');
 
 module.exports = Backbone.View.extend({
 

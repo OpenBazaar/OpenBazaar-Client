@@ -173,6 +173,17 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
         Reset: "Reset",
+        Sales: "Sales",
+        Cases: "Cases",
+        transactions: {
+          searchByOrder: "Search by order id or item name",
+          sortByStatusAll: "All",
+          sortByStatus0: "Purchased",
+          sortByStatus1: "Paid (Funds Waiting)",
+          sortByStatus2: "Confirmed/Shipped",
+          sortByStatus3: "Completed (Funds Released)",
+          sortByStatus4: "Disputed"
+        },
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -203,7 +214,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Customize Page",
           sellItem:"New",
           createListing:"New Listing",
-          purchases:"Purchases",
+          transactions:"Transactions",
           sales:"Sales",
           cases:"Cases",
           notifications:"Notifications",
