@@ -26,6 +26,7 @@ module.exports = Backbone.Router.extend({
   routes: {
     "": "index",
     "home": "home",
+    "home/:state": "home",
     "myPage": "userPage",
     "userPage": "userPage",
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
@@ -61,19 +62,23 @@ module.exports = Backbone.Router.extend({
 
   index: function(){
     "use strict";
-    if(this.userModel.get('beenSet') === true){
+    if(localStorage.getItem("route")){
+      this.navigate('#' + localStorage.getItem("route"), {trigger: true});
+    } else if(this.userProfile.get('profile').beenSet == true){
       this.home();
     } else {
       this.userPage();
     }
   },
 
-  home: function(){
+  home: function(state){
     "use strict";
     this.cleanup();
     this.newView(new homeView({
       userModel: this.userModel,
-      socketView: this.socketView
+      userProfile: this.userProfile,
+      socketView: this.socketView,
+      state: state
     }));
   },
 

@@ -131,7 +131,7 @@
                        id="refund_address"
                        placeholder="<%= polyglot.t('Address') %>"
                        class="fieldItem"
-                       pattern=".{26,}"
+                       pattern="<%- ob.user.bitcoinValidationRegex %>"
                        value="<%= ob.user.refund_address %>" required>
               </div>
             </div>
@@ -171,7 +171,7 @@
             </div>
 
             <a class="btn btn-large js-saveGeneral custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelGeneral custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelGeneral custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
 
           </div>
         </form>
@@ -226,12 +226,13 @@
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="short_description"
-                       type="text"
-                       id="short_description"
-                       placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"
-                       class="fieldItem"
-                       value="<%= ob.page.profile.about %>">
+                <textarea
+                  name="short_description"
+                  id="short_description"
+                  rows="2"
+                  class="fieldItem-textarea"
+                  maxlength="160"
+                  placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"><%= ob.page.profile.short_description %></textarea>
               </div>
             </div>
 
@@ -566,15 +567,16 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="primary_color"><%= polyglot.t('PrimaryColor') %></label>
+                  <label for="primaryColor"><%= polyglot.t('PrimaryColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="primary_color"
+                <input name="primaryColor"
                        type="text"
-                       id="primary_color"
+                       id="primaryColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.primary_color %>">
               </div>
             </div>
@@ -582,15 +584,16 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="secondary_color"><%= polyglot.t('SecondaryColor') %></label>
+                  <label for="secondaryColor"><%= polyglot.t('SecondaryColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="secondary_color"
+                <input name="secondaryColor"
                        type="text"
-                       id="secondary_color"
+                       id="secondaryColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.secondary_color %>">
               </div>
             </div>
@@ -599,15 +602,16 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="background_color"><%= polyglot.t('BackgroundColor') %></label>
+                  <label for="backgroundColor"><%= polyglot.t('BackgroundColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="background_color"
+                <input name="backgroundColor"
                        type="text"
-                       id="background_color"
+                       id="backgroundColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.background_color %>">
               </div>
             </div>
@@ -615,21 +619,22 @@
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border-secondary">
                 <div class="fieldItem">
-                  <label for="text_color"><%= polyglot.t('TextColor') %></label>
+                  <label for="textColor"><%= polyglot.t('TextColor') %></label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border-secondary">
-                <input name="text_color"
+                <input name="textColor"
                        type="text"
-                       id="text_color"
+                       id="textColor"
                        class="fieldItem"
+                       pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
                        value="<%= ob.page.profile.text_color %>">
               </div>
             </div>
 
             <a class="btn btn-large js-savePage custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelPage custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelPage custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
 
           </div>
         </form>
@@ -756,7 +761,7 @@
             </div>
 
             <a class="btn btn-large js-saveStore custCol-secondary pull-right marginRight15 marginTop15 marginBottom5 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelStore custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelStore custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
           </div>
         </form>
         <form class="width100" name="addressesForm" id="addressesForm">
@@ -766,10 +771,10 @@
               <div class="flexRow">
                 <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('CurrentAddress') %></h3>
               </div>
-              <div class="flexRow marginLeft15 marginTop15">
+              <div class="flexRow pad5 rowTop15">
                 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
-                <div class="flexCol-4 padding5">
-                  <div class="padding15 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
+                <div class="flexCol-4 pad10 row15">
+                  <div class="padding10 color-secondary custCol-secondary borderRadius3 fontSize16 clearfix js-address">
                     <div class="textOpacity75">
                       <div><%- address.name %></div>
                       <div><%- address.street %></div>
@@ -922,7 +927,7 @@
             </div>
 
             <a class="btn btn-large js-saveAddress custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelAddress custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelAddress custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
           </div>
         </form>
         <form class="width100" name="blockedForm" id="blockedForm">
@@ -1002,7 +1007,7 @@
             </div>
 
             <a class="btn btn-large js-saveAdvanced custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary"><%= polyglot.t('SaveChanges') %></a>
-            <a class="btn btn-large js-cancelAdvanced custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-large js-cancelAdvanced custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
           </div>
         </form>
 

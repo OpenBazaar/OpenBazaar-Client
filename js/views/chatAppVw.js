@@ -186,7 +186,6 @@ module.exports = Backbone.View.extend({
     this.chatMessages.fetch({
       success: function(chatMessages, response) {
         if(chatMessages.models.length < 1) {
-          console.log('none found');
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat);
         } else {
           __.each(chatMessages.models, function (chatMessage) {
@@ -199,8 +198,10 @@ module.exports = Backbone.View.extend({
             }
             if(chatMessage.get('outgoing')) {
               chatMessage.set('avatarURL', self.serverUrl + "get_image?hash=" + model.get('avatar_hash'));
-            } else {
+            } else if(chatMessage.get('image_hash')) {
               chatMessage.set('avatarURL', self.serverUrl  + "get_image?hash=" + chatMessage.get('image_hash') + "&guid=" + chatMessage.get('guid'));
+            } else {
+              chatMessage.set('avatarURL', "imgs/defaultItem.png");
             }
             self.renderChatMessage(chatMessage);
           });
