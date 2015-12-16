@@ -744,6 +744,7 @@ module.exports = Backbone.Model.extend({
         Skip: "Salta",
         Done: "Finito",
         Cancel: "Annulla",
+        Close: "Chiudi",
         Yes: "Si",
         No: "No",
         of: "di",
@@ -772,7 +773,7 @@ module.exports = Backbone.Model.extend({
         Followers: "Seguaci",
         Following: "Segue",
         Message: "Messaggio",
-        Messages: "Messages",//notTranslated
+        Messages: "Messaggi",
         Store: "Negozio",
         Edit: "Modifica",
         Used: "Usato",
@@ -823,6 +824,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Restituzione",
         ReturnsPolicy: "Politica di restituzione",
         Ampersand: "&",
+        Keywords: "Parole chiave",		
         ShipsFrom: "Inviato da",
         ShipsTo: "Inviato verso",
         Optional: "Facoltativo",
@@ -887,6 +889,7 @@ module.exports = Backbone.Model.extend({
         AboutYourStore: "Una descrizione del tuo negozio",
         PaymentType: "Tipo di pagamento",
         ShipTo: "Invia a",
+        FreeShipping: "Spedizione gratuita",
         OrderDetails: "Dettaglio ordine",
         OrderSummary: "Riepilogo ordine",
         AllListings: "Tutti gli annunci",
@@ -966,16 +969,16 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
-          Send: "Semd", //notTranslated
-          BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
-          RefreshPayment: "Refresh Payment Status", //notTranslated
-          summaryMsg1: "Your payment has been sent to", //notTranslated
-          summaryMsg2: "The expected processing time for this order is", //notTranslated
-          summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          DoesNotShipHere: "Questo venditore non invia qui",
+          Send: "Invia",
+          BTCto: "BTC a",
+          OpenAddress: "Apri indirizzo in portafoglio locale",
+          CopyAddress: "Copia indirizzo di pagamento negli appunti",
+          RefreshPayment: "Aggiorna lo stato di pagamento",
+          summaryMsg1: "Il tuo pagamento è stato trasmesso a",
+          summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
+          summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
+          purchasesPage: "pagina acquisti"
         }
       },
       {
