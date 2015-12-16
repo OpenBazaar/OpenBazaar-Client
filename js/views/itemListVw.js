@@ -10,7 +10,7 @@ module.exports = Backbone.View.extend({
   initialize: function(options){
     var self = this;
     this.options = options || {};
-    this.category = options.category;
+    this.category = options.category || "all";
     //the model must be passed in by the constructor
     this.itemsShort = new itemsShortCollection(this.model);
     //this.listenTo(this.options.userModel, 'change', function(){
@@ -25,7 +25,7 @@ module.exports = Backbone.View.extend({
     //clear the list
     this.$el.empty();
     __.each(this.itemsShort.models, function(item){
-      if (item.toJSON().category == this.options.category || this.options.category == "all") {
+      if (item.toJSON().category == self.category || self.category == "all") {
         self.renderContract(item);
       }
     },this);
