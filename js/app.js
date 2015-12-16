@@ -37,12 +37,9 @@ var Polyglot = require('node-polyglot'),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
     socketView = require('./views/socketVw'),
-    guid = "",
-    avatar_hash = "",
     cCode = "",
     serverUrlLocal = "",
     loadProfileCount = 1,
-    loadProfileTimeout,
     loadProfileCountdownInterval,
     loadProfileCountdown = 5;
 
@@ -65,6 +62,12 @@ window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.la
 
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
+
+//record changes to the app state
+$(window).bind('hashchange', function(){
+  "use strict";
+  localStorage.setItem('route', Backbone.history.getFragment());
+});
 
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
@@ -130,25 +133,22 @@ var loadProfile = function() {
       clearInterval(loadProfileCountdownInterval);
       //make sure profile is not blank
       if (response.profile){
-        //guid = response.profile.guid;
-        //avatar_hash = response.profile.avatar_hash;
         setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
         //get the user
         user.fetch({
           success: function (model, response) {
             user.set('serverUrl', serverUrlLocal);
-            //user.set('guid', guid);
-            //user.set('avatar_hash', avatar_hash);
             cCode = model.get('currency_code');
 
             //get user bitcoin price before loading pages
-            setCurrentBitCoin(cCode, user, function(){
+            setCurrentBitCoin(cCode, user, function() {
               $('.js-loadingMessageModal').addClass('hide');
               newSocketView = new socketView({model: user});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
               newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
               Backbone.history.start();
+
             });
 
             //every 15 minutes update the bitcoin price for the currently selected currency
