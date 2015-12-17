@@ -27,7 +27,11 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
-    this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
+    console.log(this.model);
+    if(this.model.get('page').profile.header_hash){
+
+      this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
+    }
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
@@ -170,60 +174,8 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(profileForm, this.model.get('page').profile, self.model.get('user').serverUrl + "profile", function(){
       self.trigger('storeCreated');
+      window.obEventBus.trigger("updateProfile");
     }, "", wizData);
-  },
-
-  saveWizardOld: function() {
-    "use strict";
-    var self = this,
-        profileForm = this.$el.find('#storeWizardForm'),
-        formData = new FormData(profileForm[0]),
-        moderatorsChecked = $('.js-storeWizardModeratorList input:checked');
-
-    //add formChecked class to form so invalid fields are styled as invalid
-    profileForm.addClass('formChecked');
-
-    //convert taggle tags to data in the form
-    this.$el.find('#realCategoriesInput').val(this.categoriesInput.getTagValues().join(","));
-
-    if(profileForm[0].checkValidity()){
-
-      //add data not in the form
-      formData.append('vendor', true);
-      if(moderatorsChecked.length > 0){
-        moderatorsChecked.each(function () {
-          formData.append('moderator_list', $(this).data('guid'));
-        });
-      } else {
-        formData.append('moderator_list', "");
-      }
-
-      $.ajax({
-        type: "POST",
-        url: self.model.get('user').serverUrl + "profile",
-        contentType: false,
-        processData: false,
-        data: formData,
-        dataType: "json",
-        success: function (data) {
-          if (data.success === true){
-            self.trigger('storeCreated');
-          }else if (data.success === false){
-            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-          }else{
-            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
-          }
-        },
-        error: function (jqXHR, status, errorThrown) {
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
-      });
-    }else{
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-    }
-
   },
 
   close: function(){

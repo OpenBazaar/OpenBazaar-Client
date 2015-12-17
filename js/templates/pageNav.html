@@ -1,10 +1,10 @@
 <div class="popMenu hide popMenu-navBar js-navProfileMenu">
   <a href="#userPage"><%= polyglot.t('nav.myPage') %></a>
-  <a href="#customizePage"><%= polyglot.t('nav.customizePage') %></a>
+  <a href="#userPage/<%- ob.guid %>/customize"><%= polyglot.t('nav.customizePage') %></a>
   <% if(ob.vendor) { %>
     <a href="#sellItem" ><%= polyglot.t('nav.sellItem') %></a>
   <% }else{ %>
-    <a class="js-homeCreateStore"><%= polyglot.t('CreateStore') %></a>
+    <a href="#userPage/<%- ob.guid %>/createStore"><%= polyglot.t('CreateStore') %></a>
   <% } %>
   <hr/>
   <a href="#purchases"><%= polyglot.t('nav.purchases') %></a>
