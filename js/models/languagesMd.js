@@ -2626,7 +2626,7 @@ module.exports = Backbone.Model.extend({
           userError: "找不到此用户名的信息",
           userNotFoundError: "未能调出此人信息， 他有可能不在线。",
           notFoundError: "有关数据未能调出",
-          socketError: "WebSocket的URL地址失败。请使用ws://localhost:18466"
+          socketError: "WebSocket的URL地址失败。请使用ws://localhost:18466",
           contractError: "找不到此项货物",
           sellerError: "卖家的服务器拒绝了这笔买卖"
         },
