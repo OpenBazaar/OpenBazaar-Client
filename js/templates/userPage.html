@@ -143,7 +143,7 @@
           </a>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
 
   <div class="bar navBar barFlush user-page-navigation custCol-secondary">
@@ -152,7 +152,7 @@
     <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
     <% if(ob.page.profile.vendor) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
-    <% } %>    
+    <% } %>
   </div>
   <div class="userPage-subViews custCol-primary minHeight650">
     <div class="flexContainer flex-border custCol-primary hide js-about js-tabTarg minHeight650">
@@ -291,9 +291,14 @@
     <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide minHeight650">
       <div class="flexRow">
         <div class="flexRow custCol-border">
-          <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper">
+          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
             <input type="text" id="inputStore" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>"  />
           </div>
+        </div>
+        <div class="selectPill pull-up43">
+          <select id="categories" class="custCol-secondary js-categories">
+            <option value="all" selected><%= polyglot.t('filters.categoryAll') %></option>
+          </select>
         </div>
       </div>
       <div class="flexRow js-list3">
@@ -347,4 +352,3 @@
   </div>
 </div>
 <div id="modalHolder"></div>
- 
