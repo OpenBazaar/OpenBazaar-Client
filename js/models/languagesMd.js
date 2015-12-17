@@ -852,7 +852,6 @@ module.exports = Backbone.Model.extend({
         Name: "Nome",
         Price: "Prezzo",
         Available: "Disponibile",
-        Keywords: "Parole chiave",
         Type: "Tipo",
         Condition: "Condizione",
         NSFW: "18+ (Adult content)?",
@@ -2699,8 +2698,8 @@ module.exports = Backbone.Model.extend({
           summaryMsg3: "到此查看您订单的状况",
           purchasesPage: "以购商品"
         }
-      }
-            {
+      },
+      {
         langName: "한국어 (Korean)",
         langCode: "ko",
         /* Use capitalized keys for widely reused text that must be capitalized... 
@@ -2819,7 +2818,6 @@ module.exports = Backbone.Model.extend({
         Name: "이름",
         Price: "가격",
         Available: "가능",
-        Keywords: "주제어",
         Type: "종류",
         Condition: "상태",
         NSFW: "19+ (성인 콘텐츠)",
