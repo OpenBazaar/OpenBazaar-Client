@@ -2990,6 +2990,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   letter-spacing: 1.5px;
   margin-bottom: 0;
   margin-left: 0;
+  -webkit-user-select: none;
+  cursor: default;
 }
 
 .page-contractTitle {
