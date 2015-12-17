@@ -35,7 +35,7 @@
       <div class="modal-hero js-buyWizardOrderSummary background1 hide">
         <div class="width100 txt-center">
           <div class="txt-col3 ion-checkmark icon-huge icon-circle-background1 rowtop20 row20"></div>
-          <h3 class="txt-bright">Payment Sent!</h3>
+          <h3 class="txt-bright"><%= polyglot.t('buyFlow.paymentSent') %> </h3>
         </div>
       </div>
     </div>
@@ -91,7 +91,7 @@
                         url(imgs/defaultItem.png);">
                         </div>
                         <div class="pad10left txt-unleaded">
-                          <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong>Direct Payment to <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (Free)</strong></div>
+                          <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong><%= polyglot.t('buyFlow.directPaymentTo') %> <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (<%= polyglot.t('Free') %>)</strong></div>
                           <div class="textOpacity75 fontSize14">
                             <% if(ob.page.profile.short_description){ %>
                               <%- ob.page.profile.short_description %>
@@ -118,7 +118,7 @@
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <div class="js-buyWizardAddress">
               <%= polyglot.t('ShipTo') %>
-              <a class="btn btn-txt custCol-primary rowTop10 pull-right js-buyWizardNewAddressBtn">New Address</a>
+              <a class="btn btn-txt custCol-primary rowTop10 pull-right js-buyWizardNewAddressBtn"><%= polyglot.t('NewAddress') %></a>
             </div>
             <div class="js-buyWizardNewAddress hide">
               <%= polyglot.t('ShipTo') %>
@@ -205,7 +205,7 @@
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <div class="js-buyWizardOrderDetails">
-              <%= polyglot.t('OrderDetails') %> <div class="pull-right">Total:
+              <%= polyglot.t('OrderDetails') %> <div class="pull-right"><%= polyglot.t('buyFlow.total') %>:
                 <span class="js-buyWizardDetailsTotal"></span> 
                 <% if(ob.userCurrencyCode != 'BTC'){ %>
                 <span class="textOpacity75">(<%- ob.vendorBTCPrice.toFixed(4) %> BTC)</span>

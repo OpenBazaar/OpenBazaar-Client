@@ -61,7 +61,7 @@
             <div class="thumbnail-large-slim">
               <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
                 <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 23%;"></span>
-                <span class="fontSize10 textOpacity1 positionAbsolute width100 alignCenter left0 bottom8px">Ship to</span>
+                <span class="fontSize10 textOpacity1 positionAbsolute width100 alignCenter left0 bottom8px"><%= polyglot.t('ShipTo') %></span>
               </div>
             </div>
             <div class="pad10left txt-unleaded fontSize13 textOpacity1">
@@ -123,7 +123,7 @@
                   <%- ob.selectedModerator.guid %>
                 <% } %>
               </div>
-              <div class="textOpacity75 lineHeight15">**Only applies if the transaction ends in a dispute.</div>
+              <div class="textOpacity75 lineHeight15">**<%= polyglot.t('buyFlow.moderatorPaymentDisclaimer') %></div>
             </div>
             <% } else { %>
               <div class="thumbnail-large-slim">
@@ -136,9 +136,9 @@
                 </div>
               </div>
               <div class="pad10left txt-unleaded">
-                <div class="marginTop6 marginBottom4 fontSize13 noOverflow">Direct Payment to <%- ob.handle %></div>
+                <div class="marginTop6 marginBottom4 fontSize13 noOverflow"><%= polyglot.t('buyFlow.directPaymentTo') %> <%- ob.handle %></div>
                 <div class="textOpacity75 lineHeight15">
-                  *Use direct payment with caution, funds are irreversible*
+                  **<%= polyglot.t('buyFlow.directPaymentDisclaimer') %>
                 </div>
               </div>
             <% } %>

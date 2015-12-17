@@ -250,7 +250,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Your payment has been sent to",
           summaryMsg2: "The expected processing time for this order is",
           summaryMsg3: "You can check the status of your order on your",
-          purchasesPage: "purchases page"
+          purchasesPage: "purchases page",
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
+          directPaymentTo: "Direct Payment to",
+          paymentSent: "Payment Sent!",
+          total: "Total"
         }
       },
       {
@@ -486,7 +491,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -731,7 +741,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -978,7 +993,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Il tuo pagamento è stato trasmesso a",
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
           summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
-          purchasesPage: "pagina acquisti"
+          purchasesPage: "pagina acquisti", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1225,7 +1245,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Votre paiement a été envoyé à",
           summaryMsg2: "Le temps de traitement prévu pour cette commande est",
           summaryMsg3: "Vous pouvez vérifier le statut de votre commande sur votre",
-          purchasesPage: "page d'achat"
+          purchasesPage: "page d'achat", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1470,7 +1495,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1715,7 +1745,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Ваш платёж был отправлен на",
           summaryMsg2: "Ожидаемое время обработки вашего заказа составляет",
           summaryMsg3: "Чтобы проверить статус вашего заказа, загляните в",
-          purchasesPage: "интерфейс покупок"
+          purchasesPage: "интерфейс покупок", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1959,7 +1994,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2206,7 +2246,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Gönderilen ödemenin alıcısı",
           summaryMsg2: "Bu siparişin tahmini hazırlama süresi",
           summaryMsg3: "Siparişinizin durumunu kontrol edebileceğiniz yer",
-          purchasesPage: "alımlar sayfası"
+          purchasesPage: "alımlar sayfası", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2451,7 +2496,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "NgeH Huch",
           summaryMsg2: "PIH mIw Dunqu'mo' tlham",
           summaryMsg3: "LaH legh SoH tlham Dotlh",
-          purchasesPage: "Tuq je'"
+          purchasesPage: "Tuq je'", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2696,7 +2746,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "您付的款已经被交到",
           summaryMsg2: "这笔订单预计完成时间为",
           summaryMsg3: "到此查看您订单的状况",
-          purchasesPage: "以购商品"
+          purchasesPage: "以购商品", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2943,7 +2998,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "당신의 지불 보내졌다",
           summaryMsg2: "이주문에 대한 예상 처리 시간",
           summaryMsg3: "당신은 당신의 주문상태를 확인할수 있다",
-          purchasesPage: "지불 페이지"
+          purchasesPage: "지불 페이지", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       }
     ]
