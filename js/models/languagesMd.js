@@ -207,8 +207,8 @@ module.exports = Backbone.Model.extend({
           pagesStores: "Stores",
           pagesMods: "Moderator services",
           pagesBasic: "Basic users",
-          listingsCurated: "From stores I follow",
-          listingsAll: "From all stores",
+          listingsCurated: "Stores I follow",
+          listingsAll: "All stores",
           categoryAll: "All"
         },
         nav: {
