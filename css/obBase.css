@@ -501,7 +501,10 @@ form {
 .rowItem {
   flex-grow: 1;
   padding: 25px 15px;
-  white-space: pre-line;
+}
+
+.listing {
+  white-space: pre-line; 
 }
 
 .rowItem input[type=radio] {
