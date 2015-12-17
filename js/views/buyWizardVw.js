@@ -6,6 +6,7 @@ var __ = require('underscore'),
     buyDetailsVw = require('./buyDetailsVw'),
     buyAddressesVw = require('./buyAddressesVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
+    saveToAPI = require('../utils/saveToAPI'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
     clipboard = require('clipboard');
@@ -53,7 +54,7 @@ module.exports = Backbone.View.extend({
 
     //create the country select list
     this.countryList = countries.get('countries');
-    this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput"></select>');
+    this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput" required></select>');
     __.each(this.countryList, function(countryFromList, i){
       self.countriesSelect.append('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
     });
@@ -118,7 +119,7 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     this.buyDetailsView = new buyDetailsVw({model: this.model});
-    this.buyAddressesView = new buyAddressesVw({model: this.model});
+    this.buyAddressesView = new buyAddressesVw({model: this.model, userModel: this.options.userModel});
     this.listenTo(this.buyAddressesView, 'setAddress', this.addressSelected);
 
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
@@ -208,7 +209,12 @@ module.exports = Backbone.View.extend({
         targetForm = this.$el.find('#buyWizardNewAddressForm'),
         formData = new FormData(),
         newAddress = {},
-        newAddresses = this.options.userModel.get('shipping_addresses');
+        newAddresses = [],
+        addressData = {};
+
+    __.each(this.options.userModel.get('shipping_addresses'), function(address, i){
+      newAddresses.push(JSON.stringify(address));
+    });
 
     newAddress.name = this.$el.find('#buyWizardNameInput').val();
     newAddress.street = this.$el.find('#buyWizardStreetInput').val();
@@ -219,48 +225,23 @@ module.exports = Backbone.View.extend({
     newAddress.displayCountry = this.$el.find('#buyWizardCountryInput option:selected').data('name');
 
     if(newAddress.name && newAddress.street && newAddress.city && newAddress.state && newAddress.postal_code && newAddress.country) {
-      newAddresses.push(newAddress);
+      newAddresses.push(JSON.stringify(newAddress));
     }
 
-    formData.append('shipping_addresses', JSON.stringify(newAddresses));
+    addressData.shipping_addresses = newAddresses;
 
-    formData = this.modelToFormData(this.model.get('user'), formData, {'shipping_addresses': newAddresses});
-
-    targetForm.addClass('formChecked');
-
-    if(targetForm[0].checkValidity()){
-      $.ajax({
-        type: "POST",
-        url: self.model.get('serverUrl') + "settings",
-        contentType: false,
-        processData: false,
-        data: formData,
-        dataType: "json",
-        success: function(data) {
-          if (data.success === true){
-            //clear form
-            self.$el.find('#buyWizardNameInput').val("");
-            self.$el.find('#buyWizardStreetInput').val("");
-            self.$el.find('#buyWizardCityInput').val("");
-            self.$el.find('#buyWizardStateInput').val("");
-            self.$el.find('#buyWizardPostalInput').val("");
-            self.$el.find('#buyWizardCountryInput').val("");
-            targetForm.removeClass('formChecked').find('.formChecked').removeClass('formChecked');
-            self.hideNewAddress();
-            self.addNewAddress();
-          }else if (data.success === false){
-            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-          }
-        },
-        error: function(jqXHR, status, errorThrown){
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
-      });
-    } else {
-      console.log("new address form invalid");
-    }
+    saveToAPI(targetForm, this.options.userModel.toJSON(), self.model.get('serverUrl') + "settings", function(){
+      self.$el.find('#buyWizardNameInput').val("");
+      self.$el.find('#buyWizardStreetInput').val("");
+      self.$el.find('#buyWizardCityInput').val("");
+      self.$el.find('#buyWizardStateInput').val("");
+      self.$el.find('#buyWizardPostalInput').val("");
+      self.$el.find('#buyWizardCountryInput').val("");
+      self.$el.find('.chosen').trigger('chosen:updated');
+      targetForm.removeClass('formChecked').find('.formChecked').removeClass('formChecked');
+      self.hideNewAddress();
+      self.addNewAddress();
+    }, "", addressData);
   },
 
   addNewAddress: function(){
