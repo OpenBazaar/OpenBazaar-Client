@@ -4,7 +4,7 @@
 }
  
 #obContainer::-webkit-scrollbar-thumb {
-  border-radius: 20px;
+  border-radius: 0;
   background: #44697E; 
 }
 

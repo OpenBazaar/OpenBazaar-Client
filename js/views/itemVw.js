@@ -93,7 +93,7 @@ module.exports = Backbone.View.extend({
     this.buyWizardView = new buyWizardVw({model:buyModel, parentEl: '#modalHolder', userModel: this.options.userModel});
     this.subViews.push(this.buyWizardView);
     this.subModels.push(buyModel);
-    $('#obContainer').addClass('overflowHidden');
+    $('#obContainer').addClass('overflowHidden');  
   },
 
   close: function(){

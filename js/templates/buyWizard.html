@@ -62,7 +62,7 @@
                           <div class="pad10Left txt-unleaded">
                             <div class="marginTop9 marginBottom4 fontSize14 clearFix"><strong><div class="floatLeft">Moderated by</div>  <div class="noOverflow width120 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div> <div class="floatLeft">(<%- moderator.fee %> fee)</div></strong></div>
                             <!-- <div class="textOpacity75"><%- moderator.guid %></div> -->
-                            <div class="textOpacity75 clearFix fontSize13">
+                            <div class="textOpacity75 clearFix fontSize14">
                               <% if(moderator.short_description){ %>
                                 <%- moderator.short_description %>
                               <% } else { %>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="pad10left txt-unleaded">
                           <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong>Direct Payment to <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (Free)</strong></div>
-                          <div class="textOpacity75 fontSize13">
+                          <div class="textOpacity75 fontSize14">
                             <% if(ob.page.profile.short_description){ %>
                               <%- ob.page.profile.short_description %>
                             <% } else { %>
