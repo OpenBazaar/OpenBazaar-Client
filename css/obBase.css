@@ -73,6 +73,10 @@ p a {
   text-decoration: underline;
 }
 
+p { 
+  white-space: pre-line;  
+}
+
 hr {
   border: solid 1px rgba(255,255,255,0.08);
   width: 100%;
@@ -501,10 +505,6 @@ form {
 .rowItem {
   flex-grow: 1;
   padding: 25px 15px;
-}
-
-.listing {
-  white-space: pre-line; 
 }
 
 .rowItem input[type=radio] {
