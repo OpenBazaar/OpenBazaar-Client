@@ -1583,6 +1583,8 @@ div.chatSearchOut .chatSearchIcon {
   height: 43px;
   line-height: 43px;
   padding-left: 10px;
+  -webkit-user-select: none;
+  cursor: default;
 }
 
 .chatConversationHeads {
