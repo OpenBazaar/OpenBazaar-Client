@@ -52,7 +52,7 @@ body {
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
@@ -177,7 +177,7 @@ form {
 }
 
 #obContainer.compressed {
-  width: calc(100% - 235px);
+  width: calc(100% - 231px);
 }
 
 #pageNav {
@@ -1702,6 +1702,8 @@ div.chatSearchOut .chatSearchIcon {
   color: white;
   background-color: unset;
   width: 100%;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 }
 
 .chatConversationMessageLine {
@@ -3074,7 +3076,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #modalHolder {
   position: fixed;
-  z-index: 10;
+  z-index: 1;
 }
 
 .selectPill {

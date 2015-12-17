@@ -487,7 +487,7 @@ module.exports = Backbone.View.extend({
   closeWizard: function() {
     "use strict";
     this.close();
-    $('#obContainer').removeClass('overflowHidden');
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
   },
 
   close: function(){
