@@ -1397,7 +1397,7 @@ input[type="text"].txtField-bar {
   padding: 0;
   opacity: .90;
   font-size: 18px;
-  border-radius: 2px;
+  border-radius: 5px;
   float: none;
 }
 
@@ -3774,6 +3774,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   min-height: 300px;
 }
 
+#ov1  .minWidth120 {
+  min-width: 120px;
+}
+
 #ov1  .lineHeight15{
   line-height: 15px;
 }
@@ -3912,6 +3916,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .paddingBottom20 {
   padding-bottom: 20px;
+}
+
+#ov1  .letterSpacing02 {
+  letter-spacing: 0.2px;
 }
 
 #ov1  .widthAuto {

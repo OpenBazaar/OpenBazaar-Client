@@ -25,14 +25,14 @@
       <div class=""><%- address.street %><br/><%- address.city %>, <%- address.state %> <%- address.postal_code %><br/><%- address.displayCountry %></div>
     </div>
     <div class="floatRight">
-      <div class="btn btn-txt fontWeight500 textOpacity1 textSize13px height40 custCol-secondary marginTop25 js-buyWizardAddressSelected">
+      <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary marginTop25 minWidth120 js-buyWizardAddressSelected ">
         <% if(address.country == ob.vendor_offer.listing.shipping.shipping_origin){ %>
           <% if(ob.vendor_offer.listing.shipping.free){ %>
             <%= polyglot.t('Free') %>
           <% } else { %>
             <%- ob.displayDomesticShipping %>
             <% if(ob.userCurrencyCode != 'BTC'){ %>
-            <span class="textOpacity75">(<%- ob.domesticShippingBTC.toFixed(4) %> BTC)</span>
+            <span class="textOpacity75 textSize12px letterSpacing02">(<%- ob.domesticShippingBTC.toFixed(4) %> BTC)</span>
             <% } %>
           <% } %>
         <% } else { %>
@@ -41,7 +41,7 @@
           <% } else { %>
             <%- ob.displayInternationalShipping %>
             <% if(ob.userCurrencyCode != 'BTC'){ %>
-            <span class="textOpacity75">(<%- ob.internationalShippingBTC.toFixed(4) %> BTC)</span>
+            <span class="textOpacity75 textSize12px letterSpacing02">(<%- ob.internationalShippingBTC.toFixed(4) %> BTC)</span>
             <% } %>
           <% } %>
         <% } %>
