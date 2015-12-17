@@ -1396,9 +1396,11 @@ input[type="text"].txtField-bar {
   line-height: 52px;
   padding: 0;
   opacity: .90;
-  font-size: 18px;
+  font-size: 19px;
   border-radius: 5px;
   float: none;
+  text-transform: uppercase;
+  font-weight: 800
 }
 
 .btn.btn-buyNow:hover {
