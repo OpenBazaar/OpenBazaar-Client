@@ -6,12 +6,14 @@
     <div class="modal-hero js-buyWizardHero shadow-inner1-light"
          style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);">
       <div class="js-buyWizardMapPlaceholder hide">
-        <iframe
-          width="525"
-          height="250"
-          frameborder="0" style="border:0"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=placeholder">
-        </iframe>
+        <div class="overflowHidden">
+          <iframe
+            width="525"
+            height="290"
+            frameborder="0" style="border:0;margin-top: -36px"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=placeholder">
+          </iframe>
+        </div>
       </div>
       <div class="js-buyWizardMap positionTop"></div>
       <div class="modal-hero js-buyWizardPay hide background1">
