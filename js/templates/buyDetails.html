@@ -138,7 +138,7 @@
               <div class="pad10left txt-unleaded">
                 <div class="marginTop6 marginBottom4 fontSize13 noOverflow">Direct Payment to <%- ob.handle %></div>
                 <div class="textOpacity75 lineHeight15">
-                  **Use direct payment with caution, funds are irreversible**
+                  *Use direct payment with caution, funds are irreversible*
                 </div>
               </div>
             <% } %>
@@ -149,7 +149,7 @@
     <div class="flexCol-4">
       <div class="rowItem padding2015 alignRight marginTop20">
         <% if(ob.selectedModerator){ %>
-          <span class="js-buyWizardModeratorPrice"></span>*
+          <span class="js-buyWizardModeratorPrice"></span>**
         <% } else { %>
           <%= polyglot.t('Free') %>
         <% } %>

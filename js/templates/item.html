@@ -29,9 +29,9 @@
     <div class="marginBottom12 clearfix custCol-secondary borderRadius2">
       <ul class="itemMeta">
         <li class="alignCenter itemPrice">
-          <span class="textSize28px textOpacity1 fontWeight500 marginRight2"><%- ob.displayPrice %></span>
+          <span class="textSize26px textOpacity1 fontWeight500 marginRight2"><%- ob.displayPrice %></span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
-          <span class="textSize22px textOpacity65"><%- ob.vendorBTCPrice.toFixed(4) %> btc</span>
+          <span class="textSize22px textOpacity65">(<%- ob.vendorBTCPrice.toFixed(4) %> BTC)</span>
           <% } %>
         </li>
         <li class="border0 alignCenter padding10 height70">

@@ -3440,6 +3440,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 24px;
 }
 
+#ov1  .textSize24px {
+  font-size: 24px;
+}
+
+#ov1  .textSize26px {
+  font-size: 26px;
+}
+
 #ov1  .textSize28px {
   font-size: 28px;
 }

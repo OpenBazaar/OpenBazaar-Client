@@ -110,6 +110,7 @@ module.exports = Backbone.View.extend({
       }
     });
 
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');  
     this.model.off();
     this.off();
     this.remove();
