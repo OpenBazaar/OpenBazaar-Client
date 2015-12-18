@@ -11,6 +11,7 @@ var __ = require('underscore'),
     countriesModel = require('../models/countriesMd'),
     showErrorModal = require('../utils/showErrorModal.js'),
     cropit = require('../utils/jquery.cropit'),
+    chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
     getBTPrice = require('../utils/getBitcoinPrice');
@@ -305,7 +306,7 @@ module.exports = Backbone.View.extend({
     this.options.state = state;
   },
 
-  setTab: function(activeTab, showContent, state){
+  setTab: function(activeTab, showContent){
     "use strict";
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');

@@ -3,13 +3,8 @@ var __ = require('underscore'),
     $ = require('jquery'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
-    userProfileModel = require('../models/userProfileMd'),
-    colpicker = require('../utils/colpick.js'),
-    countriesModel = require('../models/countriesMd'),
-    showErrorModal = require('../utils/showErrorModal.js'),
     saveToAPI = require('../utils/saveToAPI'),
-    Taggle = require('taggle'),
-    chosen = require('../utils/chosen.jquery.min.js');
+    Taggle = require('taggle');
 
 module.exports = Backbone.View.extend({
 
@@ -27,7 +22,6 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     this.parentEl = $(options.parentEl);
     this.socketView = options.socketView;
-    console.log(this.model);
     if(this.model.get('page').profile.header_hash){
 
       this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);

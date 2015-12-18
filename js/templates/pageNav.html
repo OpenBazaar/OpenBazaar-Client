@@ -7,12 +7,12 @@
     <a href="#userPage/<%- ob.guid %>/createStore"><%= polyglot.t('CreateStore') %></a>
   <% } %>
   <hr/>
-  <a href="#purchases"><%= polyglot.t('nav.purchases') %></a>
+  <a href="#transactions/purchases"><%= polyglot.t('nav.purchases') %></a>
   <% if(ob.vendor) { %>
-    <a href="#sales"><%= polyglot.t('nav.sales') %></a>
+    <a href="#transactions/sales"><%= polyglot.t('nav.sales') %></a>
   <% } %>
   <% if(ob.moderator) { %>
-    <a href="#cases"><%= polyglot.t('nav.cases') %></a>
+    <a href="#transactions/cases"><%= polyglot.t('nav.cases') %></a>
   <% } %>
   <hr/>
   <a href="#settings"><%= polyglot.t('nav.settings') %></a>

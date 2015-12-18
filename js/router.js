@@ -7,7 +7,8 @@ var homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
     aboutView = require('./views/aboutVw'),
     donateView = require('./views/donateVw'),
-    settingsView = require('./views/settingsVw');
+    settingsView = require('./views/settingsVw'),
+    transactionsView = require('./views/transactionsVw');
 
 module.exports = Backbone.Router.extend({
 
@@ -31,9 +32,8 @@ module.exports = Backbone.Router.extend({
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
     "customizePage": "customizePage",
     "sellItem": "sellItem",
-    "purchases": "purchases",
-    "sales": "sales",
-    "cases": "cases",
+    "transactions": "transactions",
+    "transactions/:state": "transactions",
     "notifications": "notifications",
     "settings": "settings",
     "settings/:state": "settings",
@@ -85,6 +85,7 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new userPageView({
       userModel: this.userModel,
+      userProfile: this.userProfile,
       userID: userID,
       state: state,
       itemHash: itemHash,
@@ -109,10 +110,15 @@ module.exports = Backbone.Router.extend({
     }),"userPage");
   },
 
-  purchases: function(){
+  transactions: function(state){
     "use strict";
     this.cleanup();
-    console.log("purchases");
+    this.newView(new transactionsView({
+      userModel: this.userModel,
+      userProfile: this.userProfile,
+      socketView: this.socketView,
+      state: state,
+    }),"userPage");
   },
 
   sales: function(){

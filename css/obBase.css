@@ -549,6 +549,14 @@ label.fieldItem {
   vertical-align: top;
 }
 
+.table.tablePadCell5 > div > div {
+  padding: 5px;
+}
+
+.table.tablePadCellRB5 > div > div {
+  padding: 0 5px 5px 0;
+}
+
 .btn {
   font-size: 13px;
   display: inline-block;
@@ -986,6 +994,7 @@ h5 {
 }
 
 .clamp2 {
+  /* adds an ellipses to the end of wrapped text after 2 lines */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -994,11 +1003,18 @@ h5 {
 }
 
 .clamp4 {
+  /* adds an ellipses to the end of wrapped text after 4 lines */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+}
+
+.txtRow2 {
+  /* limits an element to being 2 rows of text tall */
+  line-height: 1.25em;;
+  height: 2.5em;
 }
 
 /*========== skin classes ==========*/
@@ -1036,7 +1052,7 @@ h5 {
 }
 
 .welcomeBar,
-.settingsBar {
+.userBar {
   background-color: transparent;
   height: 50px;
   line-height: 50px;
@@ -1057,7 +1073,7 @@ h5 {
 }
 
 .welcomeBar .welcomeBar-inner,
-.settingsBar .title-section {
+.userBar .title-section {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -1067,11 +1083,11 @@ h5 {
   z-index: 1;
 }
 
-.settingsBar .title-section {
+.userBar .title-section {
   padding-left: 102px;
 }
 
-.settingsBar .thumbnail {
+.userBar .thumbnail {
   background-size: cover;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
