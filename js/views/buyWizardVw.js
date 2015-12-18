@@ -34,6 +34,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
+    'click .js-buyWizardAddressSelect': 'modNext',
     'blur .js-buyWizardPostalInput': 'updateMap',
     'blur input': 'validateInput'
   },

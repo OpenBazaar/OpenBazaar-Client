@@ -57,7 +57,7 @@
                 <div class="flexRow custCol-border">
                   <div class="rowItem padding2010">
                     <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
-                    <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1">
+                    <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1 paddingRight0">
                       <div class="table">
                         <div>
                           <div class="thumbnail thumbnail-large-slim"
@@ -67,8 +67,8 @@
                                style="background-image: url(imgs/defaultUser.png);">
                                <% } %>
                           </div>
-                          <div class="pad10Left txt-unleaded width280">
-                            <div class="marginTop9 marginBottom4 fontSize14 clearFix"><strong><div class="floatLeft">Moderated by</div>  <div class="noOverflow width160 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div></strong></div>
+                          <div class="pad10Left txt-unleaded width260">
+                            <div class="marginTop9 marginBottom4 fontSize14 clearFix"><div class="floatLeft">Moderated by</div>  <div class="noOverflow width160 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div></div>
                             <!-- <div class="textOpacity75"><%- moderator.guid %></div> -->
                             <div class="textOpacity75 clearFix fontSize14">
                               <div class="floatLeft"><%- moderator.fee %> fee</div>
@@ -79,7 +79,7 @@
                               <% } %> -->
                             </div>
                           </div>
-                          <div>
+                          <div class="floatRight">
                             <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary minWidth120 marginTop6 js-buyWizardAddressSelect "><%= polyglot.t('Select') %></div>
                           </div>
 
@@ -101,8 +101,8 @@
                         <% } %>
                         url(imgs/defaultItem.png);">
                         </div>
-                        <div class="pad10left txt-unleaded width280">
-                          <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong><%= polyglot.t('buyFlow.directPaymentTo') %> <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (<%= polyglot.t('Free') %>)</strong></div>
+                        <div class="pad10left txt-unleaded width260">
+                          <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><%= polyglot.t('buyFlow.directPaymentTo') %> <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (<%= polyglot.t('Free') %>)</div>
                           <div class="textOpacity75 fontSize14">
                             <% if(ob.page.profile.short_description){ %>
                               <%- ob.page.profile.short_description %>
