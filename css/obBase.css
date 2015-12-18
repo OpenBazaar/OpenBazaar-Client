@@ -201,6 +201,7 @@ form {
   z-index: 2;
   transition: right 0.5s ease;
   color: #DDD;
+  -webkit-app-region: no-drag;
 }
 
 #sideBar.sideBarSlid {
@@ -3061,6 +3062,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #modalHolder {
   position: fixed;
   z-index: 10;
+  -webkit-app-region: no-drag;
 }
 
 .selectPill {
@@ -3160,6 +3162,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 50px;
   overflow-y: scroll;
   padding-top: 20px;
+  -webkit-app-region: no-drag;
 }
 
 .chatConversationMessageLine .chatConversationMessageBody a {
