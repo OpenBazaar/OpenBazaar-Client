@@ -2781,7 +2781,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: -10px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  height: 44px;
+  height: 50px;
   opacity: 0;
   overflow: hidden;
   width: 950px;
@@ -2789,8 +2789,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 5;
   padding: 0;
   border-radius: 0;
-  transition: opacity .35s cubic-bezier(0, 0, 0.2, 1);
-  transition: top .35s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
+  transition: top .5s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .user-page-header-slim-bg {
@@ -2798,7 +2798,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: -10px;
   width: 950px;
   height: 80px;
-  -webkit-filter: blur(8px);
+  -webkit-filter: blur(4px);
 }
 
 .user-page-header-slim-avatar {
@@ -3778,8 +3778,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
 }
 
-#ov1  .top70 {
-  top: 70px;
+#ov1  .top69 {
+  top: 69px;
 }
 
 
@@ -3971,8 +3971,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
 }
 
-#ov1  .positionTop66 {
-  top: 66px;
+#ov1  .positionTop68 {
+  top: 68px;
 }
 
 #ov1  .paddingBottom20 {
