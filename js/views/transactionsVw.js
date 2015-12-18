@@ -7,7 +7,8 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     purchasesCl = require('../collections/purchasesCl'),
     orderShortVw = require('./orderShortVw'),
-    getBTPrice = require('../utils/getBitcoinPrice');
+    getBTPrice = require('../utils/getBitcoinPrice'),
+    orderModalVw = require('./orderModalVw');
 
 module.exports = Backbone.View.extend({
 
@@ -39,6 +40,11 @@ module.exports = Backbone.View.extend({
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
     this.cCode = options.userModel.get('currency_code');
+    this.listenTo(window.obEventBus, "openOrderModal", function(orderID){
+      self.openOrderModal(orderID);
+    });
+    this.subViews = [];
+    this.subModels = [];
 
     getBTPrice(this.cCode, function(btAve){
       self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
@@ -55,10 +61,6 @@ module.exports = Backbone.View.extend({
 
       self.render();
     });
-
-    this.subViews = [];
-    this.subModels = [];
-
   },
 
   getData: function(){
@@ -165,5 +167,29 @@ module.exports = Backbone.View.extend({
   renderCases: function(models){
     "use strict";
 
+  },
+
+  openOrderModal: function(orderID){
+    "use strict";
+    var newOrderModal = new orderModalVw({orderID: orderID, serverUrl: this.serverUrl});
+  },
+
+  close: function(){
+    "use strict";
+    __.each(this.subModels, function(subModel) {
+      subModel.off();
+    });
+    __.each(this.subViews, function(subView) {
+      if(subView.close){
+        subView.close();
+      }else{
+        subView.unbind();
+        subView.remove();
+      }
+    });
+
+    this.model.off();
+    this.off();
+    this.remove();
   }
 });

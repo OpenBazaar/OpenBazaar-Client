@@ -9,6 +9,7 @@ module.exports = Backbone.View.extend({
   className: "flexRow custCol-border",
 
   events: {
+    'click .js-orderShort': 'openOrderModal'
   },
 
   initialize: function(){
@@ -23,6 +24,11 @@ module.exports = Backbone.View.extend({
       self.$el.append(loadedTemplate(self.model.toJSON()));
     });
     return this;
+  },
+
+  openOrderModal: function(){
+    "use strict";
+    window.obEventBus.trigger("openOrderModal", this.model.get('order_id'));
   },
 
   close: function(){
