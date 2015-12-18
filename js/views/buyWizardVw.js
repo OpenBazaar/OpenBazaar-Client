@@ -57,7 +57,9 @@ module.exports = Backbone.View.extend({
     this.countryList = countries.get('countries');
     this.countriesSelect = $('<select class="chosen custCol-text" id="buyWizardCountryInput" required></select>');
     __.each(this.countryList, function(countryFromList, i){
-      self.countriesSelect.append('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
+      var countryOption = $('<option value="'+countryFromList.dataName+'" data-name="'+countryFromList.name +'">'+countryFromList.name+'</option>');
+      countryOption.attr("selected",self.options.userModel.get('country') == countryFromList.dataName);
+      self.countriesSelect.append(countryOption);
     });
     this.listenTo(this.model, 'change:totalPrice', this.setTotalPrice);
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
