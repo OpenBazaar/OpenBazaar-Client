@@ -2776,8 +2776,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .user-page-header-slim {
   position: fixed;
   top: -10px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
   height: 50px;
   opacity: 0;
   overflow: hidden;
@@ -2785,7 +2785,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: transparent;
   z-index: 5;
   padding: 0;
-  border-radius: 0;
   transition: opacity .4s cubic-bezier(0, 0, 0.2, 1);
   transition: top .4s cubic-bezier(0, 0, 0.2, 1);
 }
@@ -2801,9 +2800,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .user-page-header-slim-avatar {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  height: 52px;
+  height: 48px;
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
-  width: 54px;
+  width: 52px;
   z-index: 5;
 }
 
@@ -3674,8 +3673,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 20px;
 }
 
-#ov1  .marginLeft88 {
-  margin-left: 88px;
+#ov1  .marginLeft82 {
+  margin-left: 82px;
 }
 
 #ov1  .marginTop1 {
