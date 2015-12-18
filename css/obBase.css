@@ -784,9 +784,8 @@ label.fieldItem {
   height: 624px;
   margin: 0 auto;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateZ(0);
-  -webkit-backface-visibility: hidden;
+  right: 0;
+  left: 0;
 }
 
 .modal.modal-navOffset .modal-child {
