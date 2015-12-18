@@ -1,4 +1,3 @@
-sidebar
 /*========== scroll bars ==========*/
 #obContainer::-webkit-scrollbar {
   width: 6px;
@@ -2783,6 +2782,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: transparent;
   z-index: 5;
   padding: 0;
+  border-radius: 0;
   transition: opacity .35s cubic-bezier(0, 0, 0.2, 1);
   transition: top .35s cubic-bezier(0, 0, 0.2, 1);
 }
@@ -3760,8 +3760,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
 }
 
-#ov1  .top68 {
-  top: 68px;
+#ov1  .top70 {
+  top: 70px;
 }
 
 
@@ -3953,8 +3953,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
 }
 
-#ov1  .positionTop64 {
-  top: 64px;
+#ov1  .positionTop66 {
+  top: 66px;
 }
 
 #ov1  .paddingBottom20 {
