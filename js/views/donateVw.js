@@ -19,6 +19,14 @@ module.exports = Backbone.View.extend({
     $('#content').html(this.$el);
     loadTemplate('./js/templates/donate.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.find('a').on('click', function(e){
+        e.preventDefault();
+        var extUrl = $(this).attr('href');
+        if (!/^https?:\/\//i.test(extUrl)) {
+          extUrl = 'http://' + extUrl;
+        }
+        require("shell").openExternal(extUrl);
+      });
     });
     return this;
   },
