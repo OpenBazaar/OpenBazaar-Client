@@ -175,16 +175,25 @@ module.exports = Backbone.Model.extend({
         Reset: "Reset",
         Sales: "Sales",
         Cases: "Cases",
-        OrderID: "Order ID",
-        SoldBy: "Sold By",
         transactions: {
+          SoldBy: "Sold By",
+          PurchasedBy: "Purchased By",
           searchByOrder: "Search by order id or item name",
           sortByStatusAll: "All",
           sortByStatus0: "Purchased",
           sortByStatus1: "Paid (Funds Waiting)",
           sortByStatus2: "Confirmed/Shipped",
           sortByStatus3: "Completed (Funds Released)",
-          sortByStatus4: "Disputed"
+          sortByStatus4: "Disputed",
+          OrderID: "Order ID",
+          OrderDate: "Order Date",
+          OrderStatus: "Order Status",
+          OrderStatus0: "Purchased (Not Funded)",
+          OrderStatus1: "Paid (Funds Waiting)",
+          OrderStatus2: "Confirmed/Shipped",
+          OrderStatus3: "Completed (Funds Released)",
+          OrderStatus4: "Disputed",
+          OrderTotal: "Order Total"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -217,7 +226,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Customize Page",
           sellItem:"New",
           createListing:"New Listing",
-          transactions:"Transactions",
+          purchases:"Purchases",
           sales:"Sales",
           cases:"Cases",
           notifications:"Notifications",
@@ -455,7 +464,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Personalizar P&aacute;gina",
           sellItem:"Nuevo",
           createListing:"Nuevo Listado",
-          transactions: "Transactions",
+          purchases:"Compras",
           sales:"Ventas",
           cases:"Casos",
           notifications:"Notificaciones",
@@ -700,7 +709,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Seite anpassen",
           sellItem:"Neu",
           createListing:"Neuer Eintrag",
-          transactions: "Transactions", //not translated
+          purchases:"Eink&auml;ufe",
           sales:"Verk&auml;ufe",
           cases:"F&auml;lle",
           notifications:"Benachrichtigungen",
@@ -948,7 +957,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Personalizza pagina",
           sellItem:"Nuovo",
           createListing:"Crea elenco",
-          transactions: "Transactions", //not translated
+          purchases:"Acquisti",
           sales:"Vendite",
           cases:"Cause",
           notifications:"Notifiche",
@@ -1196,7 +1205,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Personnaliser la page",
           sellItem:"Nouveau",
           createListing:"Nouvelle annonce",
-          transactions: "Transactions", //not translated
+          purchases:"Achats",
           sales:"Ventes",
           cases:"Cas",
           notifications:"Notifications",
@@ -1442,7 +1451,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Customizare Pagină",
           sellItem:"Nou",
           createListing:"Listare Nouă",
-          transactions: "Transactions", //not translated
+          purchases:"Cumpărături",
           sales:"Vânzări",
           cases:"Cazuri",
           notifications:"Notificări",
@@ -1689,7 +1698,6 @@ module.exports = Backbone.Model.extend({
           sellItem:"Разместить товар",
           createListing:"Подать объявление",
           purchases:"Покупки",
-          transactions: "Transactions", //not translated
           sales:"Продажи",
           cases:"История",
           notifications:"Уведомления",
@@ -1934,7 +1942,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"Upraviť stránku",
           sellItem:"Nová položka",
           createListing:"Nový listing",
-          transactions: "Transactions", //not translated
+          purchases:"Nákupy",
           sales:"Predaje",
           cases:"Prípady",
           notifications:"Notifikácie",
@@ -2428,7 +2436,7 @@ module.exports = Backbone.Model.extend({
           customizePage:"JuHwIj choH",
           sellItem:"Chu'",
           createListing:"Chu' tetlh",
-          transactions: "Transactions", //not translated
+          purchases:"Je'",
           sales:"DIlmeH",
           cases:"Bo'DIj qaS",
           notifications:"GhuH",

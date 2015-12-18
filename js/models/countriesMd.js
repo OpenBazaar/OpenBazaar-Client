@@ -428,7 +428,7 @@ module.exports = Backbone.Model.extend({
         "currencyUnits": "2"
       },
       {
-        "name": "Côte D'Ivoire",
+        "name": "Cï¿½te D'Ivoire",
         "dataName": "COTE_DIVOIRE",
         "currency": "CFA Franc BCEAO",
         "code": "XOF",
@@ -452,7 +452,7 @@ module.exports = Backbone.Model.extend({
         "currencyUnits": "2"
       },
       {
-        "name": "Curaçao",
+        "name": "Curaï¿½ao",
         "dataName": "CURACAO",
         "currency": "NeTherlands Antillean Guilder",
         "code": "ANG",
@@ -1428,7 +1428,7 @@ module.exports = Backbone.Model.extend({
         "currencyUnits": "2"
       },
       {
-        "name": "Réunion",
+        "name": "Rï¿½union",
         "dataName": "REUNION",
         "currency": "Euro",
         "code": "EUR",
@@ -1460,7 +1460,7 @@ module.exports = Backbone.Model.extend({
         "currencyUnits": "0"
       },
       {
-        "name": "Saint Barthélemy",
+        "name": "Saint Barthï¿½lemy",
         "dataName": "SAINT_BARTHELEMY",
         "currency": "Euro",
         "code": "EUR",
@@ -1860,7 +1860,7 @@ module.exports = Backbone.Model.extend({
         "currencyUnits": "2"
       },
       {
-        "name": "United Kingdom of Great Britain and NorThern Ireland (The)",
+        "name": "United Kingdom of Great Britain and Northern Ireland (The)",
         "dataName": "UNITED_KINGDOM",
         "currency": "Pound Sterling",
         "code": "GBP",

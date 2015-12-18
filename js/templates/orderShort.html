@@ -24,13 +24,39 @@
               <% } %>
             </div>
           </div>
-          <div class="marginLeft15 marginRight15 marginTop2">
-            <%= polyglot.t('SoldBy') %><a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.vendor %></a>
+          <div class="marginLeft15 marginRight15 rowTop10">
+            <% if(ob.vendor){ %>
+              <%= polyglot.t('transactions.SoldBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.vendor %>" title="<%- ob.vendor %>"><%- ob.vendor %></a>
+            <% } else if(ob.buyer) { %>
+              <%= polyglot.t('transactions.PurchasedBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.buyer %>" title="<%- ob.buyer %>"><%- ob.buyer %></a>
+            <% } %>
           </div>
         </div>
 
-        <div style="width: 105px;">
-          <%= polyglot.t('OrderID') %> #<%- ob.order_id %>
+        <div style="width: 300px;">
+          <div class="table tablePadCellRB5">
+            <div>
+              <div style="width: 100px;"><%= polyglot.t('transactions.OrderID') %></div>
+              <div class="noOverflow"><strong>#<%- ob.order_id %></strong></div>
+            </div>
+            <div>
+              <div><%= polyglot.t('transactions.OrderDate') %></div>
+              <div class="noOverflow"><strong><%- ob.order_date %></strong></div>
+            </div>
+            <div>
+              <div><%= polyglot.t('transactions.OrderStatus') %></div>
+              <div class="noOverflow"><strong><%= polyglot.t('transactions.OrderStatus'+ob.status) %></strong></div>
+            </div>
+            <div>
+              <div><%= polyglot.t('transactions.OrderTotal') %></div>
+              <div class="noOverflow"><strong><%- ob.displayPrice %></strong></div>
+            </div>
+            <div>
+              <div><%= polyglot.t('transactions.OrderDate') %></div>
+              <div class="noOverflow"><strong><%- ob.order_date %></strong></div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

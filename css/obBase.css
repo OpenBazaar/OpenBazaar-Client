@@ -544,6 +544,14 @@ label.fieldItem {
   vertical-align: top;
 }
 
+.table.tablePadCell5 > div > div {
+  padding: 5px;
+}
+
+.table.tablePadCellRB5 > div > div {
+  padding: 0 5px 5px 0;
+}
+
 .btn {
   font-size: 13px;
   display: inline-block;
@@ -976,6 +984,7 @@ h5 {
 }
 
 .clamp2 {
+  /* adds an ellipses to the end of wrapped text after 2 lines */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -984,6 +993,7 @@ h5 {
 }
 
 .clamp4 {
+  /* adds an ellipses to the end of wrapped text after 4 lines */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -992,8 +1002,9 @@ h5 {
 }
 
 .txtRow2 {
-  line-height: 1.5em;;
-  height: 3em;
+  /* limits an element to being 2 rows of text tall */
+  line-height: 1.25em;;
+  height: 2.5em;
 }
 
 /*========== skin classes ==========*/

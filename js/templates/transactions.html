@@ -14,16 +14,16 @@
 </div>
 
 <div class="bar navBar barFlush custCol-secondary clearFix">
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchases active" data-tab="purchase"><%= polyglot.t('Purchases') %></a>
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchasesTab active" data-tab="purchases"><%= polyglot.t('Purchases') %></a>
   <% if(ob.page.vendor){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-sales" data-tab="sales"><%= polyglot.t('Sales') %></a>
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab" data-tab="sales"><%= polyglot.t('Sales') %></a>
   <% } %>
   <% if(ob.page.moderator){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-cases" data-tab="cases"><%= polyglot.t('Cases') %></a>
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab" data-tab="cases"><%= polyglot.t('Cases') %></a>
   <% } %>
 </div>
 
-<div class="flexContainer flex-border color-primary height54">
+<div class="flexContainer flex-border custCol-primary height54">
   <div class="flexRow">
     <div class="flexRow border0">
       <div class="js-transactionsSearch width100">
@@ -45,25 +45,20 @@
   </div>
 </div>
 
-<div class="flexContainer flex-border color-primary custCol-primary">
-  <div class="flexRow border0 minHeight650">
-    <div class="flexRow flexExpand">
+<div class="flexContainer color-primary custCol-primary minHeight650">
 
-      <div class="flexCol-12 flex-border js-tabTarg js-purchases">
+      <div class="flexRow flex-border js-tabTarg js-purchases">
 
       </div>
 
-      <div class="flexCol-12 flex-border js-tabTarg js-sales hide">
+      <div class="flexRow flex-border js-tabTarg js-sales hide">
 
       </div>
 
-      <div class="flexCol-12 flex-border hide js-tabTarg js-cases">
+      <div class="flexRow flex-border hide js-tabTarg js-cases">
 
       </div>
 
-    </div>
-
-  </div>
 </div>
 <div class="navBar custCol-secondary" style="padding: 4px 0"></div>
 </div>

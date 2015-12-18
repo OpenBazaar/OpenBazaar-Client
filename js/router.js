@@ -34,8 +34,6 @@ module.exports = Backbone.Router.extend({
     "sellItem": "sellItem",
     "transactions": "transactions",
     "transactions/:state": "transactions",
-    "sales": "sales",
-    "cases": "cases",
     "notifications": "notifications",
     "settings": "settings",
     "settings/:state": "settings",
@@ -87,6 +85,7 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new userPageView({
       userModel: this.userModel,
+      userProfile: this.userProfile,
       userID: userID,
       state: state,
       itemHash: itemHash,
@@ -117,7 +116,8 @@ module.exports = Backbone.Router.extend({
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
-      socketView: this.socketView
+      socketView: this.socketView,
+      state: state,
     }),"userPage");
   },
 

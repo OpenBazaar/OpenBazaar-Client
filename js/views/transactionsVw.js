@@ -6,7 +6,8 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     chosen = require('../utils/chosen.jquery.min.js'),
     purchasesCl = require('../collections/purchasesCl'),
-    orderShortVw = require('./orderShortVw');
+    orderShortVw = require('./orderShortVw'),
+    getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({
 
@@ -26,37 +27,44 @@ module.exports = Backbone.View.extend({
        userProfile
        state (from router)
      */
-    var profile = options.userProfile.get('profile'),
-        wrapper = "<div></div>";
+    var self = this,
+        profile = options.userProfile.get('profile'),
+        wrapper = "<div class='flexRow'></div>";
 
+    this.options = options;
     this.state = options.state || "purchases";
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
     this.model.set("page", profile);
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
+    this.cCode = options.userModel.get('currency_code');
 
-    this.purchasesCol = new purchasesCl();
-    this.purchasesCol.url = this.serverUrl + "get_purchases";
-    this.purchasesWrapper = $(wrapper);
+    getBTPrice(this.cCode, function(btAve){
+      self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
+      self.purchasesCol.url = self.serverUrl + "get_purchases";
+      self.purchasesWrapper = $(wrapper);
 
-    this.salesCol = new Backbone.Collection();
-    this.salesCol.url = this.serverUrl + "get_sales";
-    this.salesWrapper = $(wrapper);
+      self.salesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
+      self.salesCol.url = self.serverUrl + "get_sales";
+      self.salesWrapper = $(wrapper);
 
-    this.casesCol = new Backbone.Collection();
-    this.casesCol.url = this.serverUrl + "get_cases";
-    this.casesWrapper = $(wrapper);
+      self.casesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
+      self.casesCol.url = self.serverUrl + "get_cases";
+      self.casesWrapper = $(wrapper);
+
+      self.render();
+    });
 
     this.subViews = [];
     this.subModels = [];
-    this.render();
+
   },
 
   getData: function(){
     "use strict";
     var self = this;
-    console.log("getData");
+
     this.purchasesCol.fetch({
       success: function(models){
         console.log(models);
@@ -64,7 +72,12 @@ module.exports = Backbone.View.extend({
       }
     });
     if(this.model.get('page').vendor){
-      //this.salesCol.fetch();
+      this.salesCol.fetch({
+        success: function(models){
+          console.log(models);
+          self.renderSales();
+        }
+      });
     }
     if(this.model.get('page').moderator){
       //this.casesCol.fetch(); //not ready yet
@@ -98,6 +111,7 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state){
+    console.log(state);
     "use strict";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     $('#content').find('input:visible:first').focus();
@@ -124,8 +138,6 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.purchasesCol.each(function(model, i){
-      console.log(model);
-      console.log(model.get('thumbnail_hash'));
       model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
       var orderShort = new orderShortVw({
         model: model,
@@ -138,7 +150,16 @@ module.exports = Backbone.View.extend({
 
   renderSales: function(models){
     "use strict";
-
+    var self = this;
+    this.salesCol.each(function(model, i){
+      model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+      var orderShort = new orderShortVw({
+        model: model,
+      });
+      self.subViews.push(orderShort);
+      self.salesWrapper.append(orderShort.render().el);
+    });
+    this.$el.find(".js-sales").append(this.salesWrapper);
   },
 
   renderCases: function(models){

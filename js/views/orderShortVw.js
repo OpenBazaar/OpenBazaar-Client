@@ -1,16 +1,20 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    moment = require('moment'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
 
-  className: "flexCol-4 custCol-border",
+  className: "flexRow custCol-border",
 
   events: {
   },
 
   initialize: function(){
+    "use strict";
+    var timestamp = this.model.get('timestamp');
+    this.model.set('order_date', moment(new Date(timestamp*1000)).format('MMM D, h:mm A'));
   },
 
   render: function(){
