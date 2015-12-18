@@ -61,17 +61,22 @@
                                style="background-image: url(imgs/defaultUser.png);">
                                <% } %>
                           </div>
-                          <div class="pad10Left txt-unleaded">
-                            <div class="marginTop9 marginBottom4 fontSize14 clearFix"><strong><div class="floatLeft">Moderated by</div>  <div class="noOverflow width120 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div> <div class="floatLeft">(<%- moderator.fee %> fee)</div></strong></div>
+                          <div class="pad10Left txt-unleaded width280">
+                            <div class="marginTop9 marginBottom4 fontSize14 clearFix"><strong><div class="floatLeft">Moderated by</div>  <div class="noOverflow width160 floatLeft" title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>"> &nbsp;<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %></div></strong></div>
                             <!-- <div class="textOpacity75"><%- moderator.guid %></div> -->
                             <div class="textOpacity75 clearFix fontSize14">
-                              <% if(moderator.short_description){ %>
+                              <div class="floatLeft"><%- moderator.fee %> fee</div>
+<!--                               <% if(moderator.short_description){ %>
                                 <%- moderator.short_description %>
                               <% } else { %>
                                 <%= polyglot.t('NoDescriptionAdded') %>
-                              <% } %>
+                              <% } %> -->
                             </div>
                           </div>
+                          <div>
+                            <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary minWidth120 marginTop6 js-buyWizardAddressSelect "><%= polyglot.t('Select') %></div>
+                          </div>
+
                         </div>
                       </div>
                     </label>
@@ -81,7 +86,7 @@
               <div class="flexRow custCol-border">
                 <div class="rowItem padding2010">
                   <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardNoModerator" value="direct" <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length === 0){ %>checked<% } %> />
-                  <label for="buyWizardNoModerator" class="textOpacity1">
+                  <label for="buyWizardNoModerator" class="textOpacity1 paddingRight0">
                     <div class="table">
                       <div>
                         <div class="thumbnail thumbnail-large-slim" style="background-image:
@@ -90,7 +95,7 @@
                         <% } %>
                         url(imgs/defaultItem.png);">
                         </div>
-                        <div class="pad10left txt-unleaded">
+                        <div class="pad10left txt-unleaded width280">
                           <div class="marginTop9 marginBottom4 fontSize14 noOverflow"><strong><%= polyglot.t('buyFlow.directPaymentTo') %> <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>"><% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></span> (<%= polyglot.t('Free') %>)</strong></div>
                           <div class="textOpacity75 fontSize14">
                             <% if(ob.page.profile.short_description){ %>
@@ -100,6 +105,10 @@
                             <% } %>
                           </div>
                         </div>
+                        <div class="floatRight">
+                          <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary minWidth120 marginTop6 js-buyWizardAddressSelect "><%= polyglot.t('Select') %></div>                      
+                        </div>
+
                       </div>
                     </div>
                   </label>
