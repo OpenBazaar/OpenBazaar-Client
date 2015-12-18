@@ -171,7 +171,7 @@ module.exports = Backbone.View.extend({
 
   openOrderModal: function(orderID){
     "use strict";
-    var newOrderModal = new orderModalVw({orderID: orderID, serverUrl: this.serverUrl});
+    //var newOrderModal = new orderModalVw({orderID: orderID, serverUrl: this.serverUrl});
   },
 
   close: function(){

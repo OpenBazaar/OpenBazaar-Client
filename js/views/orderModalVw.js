@@ -24,7 +24,7 @@ module.exports = Backbone.View.extend({
     console.log(this.orderID);
     this.serverUrl = options.serverUrl;
     this.model = new Backbone.Model();
-    this.model.urlRoot = options.serverUrl + "contracts";
+    this.model.urlRoot = options.serverUrl + "contracts"; //replace with real API call when ready
     this.model.fetch({
       data: $.param({'id': self.orderID}),
       success: function(model){
