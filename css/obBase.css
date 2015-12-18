@@ -786,7 +786,6 @@ label.fieldItem {
   position: absolute;
   left: 50%;
   transform: translateX(-50%) translateZ(0);
-  -webkit-filter: blur(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -2386,7 +2385,6 @@ input[type="radio"].fieldItem + label:before {
   box-shadow: none;
   opacity: 1;
   transform: translateY(-50%) translateZ(0);
-  -webkit-filter: blur(0);
   -webkit-backface-visibility: hidden;
   top: 50%;
 }

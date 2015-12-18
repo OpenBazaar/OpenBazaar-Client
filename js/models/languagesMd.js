@@ -105,7 +105,8 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
-        BitcoinReturnAddress: "Bitcoin address",
+        BitcoinReturnAddress: "Bitcoin Return Address",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -354,6 +355,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
         BitcoinReturnAddress: "Direcci&oacute;n de devoluciones Bitcoin",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -600,6 +602,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "&Auml;nderungen speichern",
         YourName: "Dein Name",
         BitcoinReturnAddress: "Bitcoin R&uuml;cksendeaddresse",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Lokale W&auml;hrung",
         TimeZone: "Zeitzone",
         ShipToName: "Empfänger",
@@ -853,6 +856,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
         BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1106,6 +1110,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
         BitcoinReturnAddress: "Adresse Bitcoin",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1357,6 +1362,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Salvare Modificări",
         YourName: "Numele dvs.",
         BitcoinReturnAddress: "Adresa Bitcoin",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Valuta locală",
         TimeZone: "Fus orar",
         ShipToName: "Numele",
@@ -1608,6 +1614,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Применить",
         YourName: "Ваше имя",
         BitcoinReturnAddress: "Биткойн-адрес",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -1858,6 +1865,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
         BitcoinReturnAddress: "Bitcoinová adresa",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -2111,6 +2119,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Değişiklikleri Kaydet",
         YourName: "Adınız",
         BitcoinReturnAddress: "Bitcoin adresiniz",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Yerel para birimi",
         TimeZone: "Saat Dilimi",
         ShipToName: "Ad",
@@ -2363,6 +2372,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "ChoH toD",
         YourName: "PonglIj'e'",
         BitcoinReturnAddress: "Bot SoQ mIr",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Huch lutu'lu'bej",
         TimeZone: "PoH mIch",
         ShipToName: "Pong",
@@ -2614,6 +2624,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "保存更改",
         YourName: "您的姓名",
         BitcoinReturnAddress: "比特币地址",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -2867,6 +2878,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "변경 사항 저장",
         YourName: "당신 이름",
         BitcoinReturnAddress: "당신 비트코인 주소",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "지역 통화",
         TimeZone: "시간대",
         ShipToName: "이름",

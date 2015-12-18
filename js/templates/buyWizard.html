@@ -53,6 +53,19 @@
           </div>
           <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
+              <form class="flexRow custCol-border borderTop" id="buyWizardBitcoinReturnForm">
+                <div class="flexCol-5 custCol-border">
+                  <div class="fieldItem">
+                    <label for="buyWizardBitcoinAddressInput"><%= polyglot.t('BitcoinReturnAddress') %></label>
+                  </div>
+                </div>
+                <div class="flexCol-7 custCol-border positionWrapper">
+                  <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
+                         placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
+                         pattern="<%- ob.user.bitcoinValidationRegex %>"
+                         value="<%= ob.user.refund_address %>" required />
+                </div>
+              </form>
               <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                 <div class="flexRow custCol-border">
                   <div class="rowItem padding2010">

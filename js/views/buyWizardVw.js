@@ -287,17 +287,23 @@ module.exports = Backbone.View.extend({
 
   modNext: function(){
     "use strict";
-    if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
-      this.accNext();
-      this.showMaps();
-      if(this.options.userModel.get('shipping_addresses').length === 0){
-        this.createNewAddress();
-        $('.js-buyWizardAddressBack').show();
-        $('.js-buyWizardNewAddressCancel').hide();
+    var self = this;
+    saveToAPI(this.$el.find('#buyWizardBitcoinReturnForm'), this.options.userModel.toJSON(), this.model.get('serverUrl') + "settings", function(){
+      if(self.model.get('vendor_offer').listing.metadata.category == "physical good"){
+        self.accNext();
+        self.showMaps();
+        if(self.options.userModel.get('shipping_addresses').length === 0){
+          self.createNewAddress();
+          $('.js-buyWizardAddressBack').show();
+          $('.js-buyWizardNewAddressCancel').hide();
+        }
+      } else {
+        self.accNext(2);
       }
-    } else {
-      this.accNext(2);
-    }
+    },
+    function(){
+      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
+    });
   },
 
   addressPrev: function(){
