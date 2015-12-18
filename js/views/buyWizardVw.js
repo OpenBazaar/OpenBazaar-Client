@@ -240,7 +240,7 @@ module.exports = Backbone.View.extend({
       self.$el.find('#buyWizardCityInput').val("");
       self.$el.find('#buyWizardStateInput').val("");
       self.$el.find('#buyWizardPostalInput').val("");
-      self.$el.find('#buyWizardCountryInput').val("");
+      self.$el.find('#buyWizardCountryInput').val(self.options.userModel.get('country'));
       self.$el.find('.chosen').trigger('chosen:updated');
       targetForm.removeClass('formChecked').find('.formChecked').removeClass('formChecked');
       self.hideNewAddress();
@@ -288,22 +288,31 @@ module.exports = Backbone.View.extend({
   modNext: function(){
     "use strict";
     var self = this;
-    saveToAPI(this.$el.find('#buyWizardBitcoinReturnForm'), this.options.userModel.toJSON(), this.model.get('serverUrl') + "settings", function(){
-      if(self.model.get('vendor_offer').listing.metadata.category == "physical good"){
-        self.accNext();
-        self.showMaps();
-        if(self.options.userModel.get('shipping_addresses').length === 0){
-          self.createNewAddress();
-          $('.js-buyWizardAddressBack').show();
-          $('.js-buyWizardNewAddressCancel').hide();
-        }
-      } else {
-        self.accNext(2);
+    if(this.$el.find('#buyWizardBitcoinAddressInput').val() != this.model.get('user').refund_address){
+      saveToAPI(this.$el.find('#buyWizardBitcoinReturnForm'), this.options.userModel.toJSON(), this.model.get('serverUrl') + "settings", function(){
+          self.modNextCheck();
+        },
+        function(){
+          showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
+      });
+    } else {
+      this.modNextCheck();
+    }
+  },
+
+  modNextCheck: function(){
+    "use strict";
+    if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
+      this.accNext();
+      this.showMaps();
+      if(this.options.userModel.get('shipping_addresses').length === 0){
+        this.createNewAddress();
+        $('.js-buyWizardAddressBack').show();
+        $('.js-buyWizardNewAddressCancel').hide();
       }
-    },
-    function(){
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
-    });
+    } else {
+      this.accNext(2);
+    }
   },
 
   addressPrev: function(){
