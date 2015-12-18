@@ -1,3 +1,4 @@
+sidebar
 /*========== scroll bars ==========*/
 #obContainer::-webkit-scrollbar {
   width: 6px;
@@ -2791,7 +2792,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: -10px;
   width: 950px;
   height: 80px;
-  -webkit-filter: blur(8px);
+  -webkit-filter: blur(10px);
 }
 
 .user-page-header-slim-avatar {

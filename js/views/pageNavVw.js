@@ -157,6 +157,7 @@ module.exports = Backbone.View.extend({
     var targ = this.$el.find('.js-navProfileMenu');
     targ.addClass('hide');
     $('#overlay').addClass('hide');
+
   },
 
   render: function(){
@@ -239,6 +240,10 @@ module.exports = Backbone.View.extend({
     var targ = this.$el.find('.js-navProfileMenu');
     targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
+      $('#sideBar').removeClass('sideBarSlid');
+      $('.container').removeClass('compressed');
+      $('#obContainer').removeClass('noScrollBar');
+
       targ.removeClass('hide').addClass('popMenu-navBar-opened');
       $('#overlay').removeClass('hide');
       $('html').on('click.closeNav', function(e){
@@ -247,10 +252,27 @@ module.exports = Backbone.View.extend({
           $('#overlay').addClass('hide');
           $(this).off('.closeNav');
         }
+        // if ( $('.chatConversation').css('bottom') === "-362px" ){
+        //   $('#sideBar').addClass('sideBarSlid');
+        //   $('.container').addClass('compressed');
+        //   $('.modal-child').addClass('modalCompressed');
+        //   $('.spinner-with-logo').addClass('modalCompressed');
+        //   $('#obContainer').addClass('noScrollBar');
+        //   $('#colorbox').addClass('marginLeftNeg115');
+        // }
       });
     }else{
       targ.addClass('hide');
       $('#overlay').addClass('hide');
+
+      // if ( $('.chatConversation').css('bottom') === "-362px" ){
+      //   $('#sideBar').addClass('sideBarSlid');
+      //   $('.container').addClass('compressed');
+      //   $('.modal-child').addClass('modalCompressed');
+      //   $('.spinner-with-logo').addClass('modalCompressed');
+      //   $('#obContainer').addClass('noScrollBar');
+      //   $('#colorbox').addClass('marginLeftNeg115');
+      // }
     }
   },
 

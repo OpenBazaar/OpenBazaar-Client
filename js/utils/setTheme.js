@@ -72,7 +72,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + shadeColor2(backgroundColor, 0.25) + ";}" +
       "#ov1 #userPage .customThemeScrollbar::-webkit-scrollbar-thumb { background: " + shadeColor2(primaryColor, 0.25) + ";}" +
       "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -140px 112px -52px rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}" +
-      "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.1);}";
+      "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
     // colorbox stuffs
     customStyleTag.innerHTML +=
