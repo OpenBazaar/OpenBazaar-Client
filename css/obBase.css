@@ -695,6 +695,10 @@ label.fieldItem {
   margin-top: 20px;
 }
 
+.rowTop30 {
+  margin-top: 20px;
+}
+
 .rowTop241 {
   /* special class for the itemEdit view */
   margin-top: 241px;
@@ -2877,6 +2881,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   animation: spinnerAnimation 1.15s infinite linear;
 }
 
+.spinner.spinner-slow:before {
+  animation: spinnerAnimation 3s infinite linear;
+}
+
 .spinner:after {
   content: "\00a0 \00a0 \00a0 \00a0";
   /* non-breaking spaces, creates room for the spinning icon */
@@ -3565,6 +3573,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 input.placeholder-dark::-webkit-input-placeholder  {
   color: #000;
+}
+
+#ov1 .txt-col1 {
+  color: #086A9E;
+}
+
+#ov1 .txt-col2 {
+  color: #327EB8;
 }
 
 #ov1 .txt-col3 {

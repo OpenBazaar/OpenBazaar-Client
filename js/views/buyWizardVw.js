@@ -337,6 +337,8 @@ module.exports = Backbone.View.extend({
       formData.append("moderator", moderatorID);
     }
 
+    this.$el.find('.js-buyWizardSpinner').removeClass('hide');
+
     $.ajax({
       type: "POST",
       url: self.model.get('serverUrl') + "purchase_contract",
@@ -367,6 +369,7 @@ module.exports = Backbone.View.extend({
         message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id),
         payHREF = "",
         dataURI;
+    this.$el.find('.js-buyWizardSpinner').addClass('hide');
     this.orderID = data.order_id;
     totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
