@@ -240,9 +240,10 @@ module.exports = Backbone.View.extend({
     var targ = this.$el.find('.js-navProfileMenu');
     targ.siblings('.popMenu').addClass('hide');
     if(targ.hasClass('hide')){
-      $('#sideBar').removeClass('sideBarSlid');
-      $('.container').removeClass('compressed');
-      $('#obContainer').removeClass('noScrollBar');
+      // keep this stuff here for now, going to do something with this on my next branch. I basically hate how the user nav covers the chat panel. The plan is to collapse the sidebar when the nav is opened (to get it out of the way) and then reopen the side bar when the nav closes.
+      // $('#sideBar').removeClass('sideBarSlid');
+      // $('.container').removeClass('compressed');
+      // $('#obContainer').removeClass('noScrollBar');
 
       targ.removeClass('hide').addClass('popMenu-navBar-opened');
       $('#overlay').removeClass('hide');
@@ -252,6 +253,7 @@ module.exports = Backbone.View.extend({
           $('#overlay').addClass('hide');
           $(this).off('.closeNav');
         }
+        // keep this stuff here for now, going to do something with this on my next branch. I basically hate how the user nav covers the chat panel. The plan is to collapse the sidebar when the nav is opened (to get it out of the way) and then reopen the side bar when the nav closes.
         // if ( $('.chatConversation').css('bottom') === "-362px" ){
         //   $('#sideBar').addClass('sideBarSlid');
         //   $('.container').addClass('compressed');
@@ -265,6 +267,7 @@ module.exports = Backbone.View.extend({
       targ.addClass('hide');
       $('#overlay').addClass('hide');
 
+      // keep this stuff here for now, going to do something with this on my next branch. I basically hate how the user nav covers the chat panel. The plan is to collapse the sidebar when the nav is opened (to get it out of the way) and then reopen the side bar when the nav closes.
       // if ( $('.chatConversation').css('bottom') === "-362px" ){
       //   $('#sideBar').addClass('sideBarSlid');
       //   $('.container').addClass('compressed');
