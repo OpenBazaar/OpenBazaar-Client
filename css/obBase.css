@@ -2798,7 +2798,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: -10px;
   width: 950px;
   height: 80px;
-  -webkit-filter: blur(10px);
+  -webkit-filter: blur(8px);
 }
 
 .user-page-header-slim-avatar {
