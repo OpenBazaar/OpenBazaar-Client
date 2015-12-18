@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
     this.parentEl = $(options.parentEl);
     this.hideMap = true;
     this.orderID = "";
+    this.model.set('selectedModerator', "");
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -312,7 +313,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         formData = new FormData(),
-        moderatorID = this.model.get('selectedModerator').guid,
+        moderatorID = this.model.get('selectedModerator').guid || "",
         selectedAddress = this.model.get('selectedAddress');
 
     if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
