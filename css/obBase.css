@@ -2786,8 +2786,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 5;
   padding: 0;
   border-radius: 0;
-  transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
-  transition: top .5s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1);
+  transition: top .4s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .user-page-header-slim-bg {
@@ -2795,7 +2795,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: -10px;
   width: 950px;
   height: 80px;
-  -webkit-filter: blur(4px);
+  -webkit-filter: blur(10px);
 }
 
 .user-page-header-slim-avatar {
@@ -2808,7 +2808,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .user-page-header-slim-tint {
-  box-shadow: inset 0px -100px 112px -52px rgba(25,25,25,.9);
+  box-shadow: inset 0px -160px 112px -52px rgba(25,25,25,.9);
 }
 
 
@@ -3775,8 +3775,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
 }
 
-#ov1  .top69 {
-  top: 69px;
+#ov1  .top70 {
+  top: 70px;
 }
 
 
