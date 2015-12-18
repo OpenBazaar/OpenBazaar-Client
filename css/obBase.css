@@ -785,7 +785,8 @@ label.fieldItem {
   margin: 0 auto;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
+  -webkit-filter: blur(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -2384,7 +2385,8 @@ input[type="radio"].fieldItem + label:before {
   border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateZ(0);
+  -webkit-filter: blur(0);
   -webkit-backface-visibility: hidden;
   top: 50%;
 }
@@ -2717,7 +2719,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -3325,7 +3327,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   /* must be inside a relatively positioned containing element */
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateZ(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -3333,7 +3335,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   /* must be inside a relatively positioned containing element */
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -3342,7 +3344,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   -webkit-backface-visibility: hidden;
 }
 
