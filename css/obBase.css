@@ -909,16 +909,21 @@ label.fieldItem {
 
 /*========== typography ==========*/
 
-h1,h2,h3 {
-  margin: 0 0 20px 0;
-  line-height: 1.2;
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
   font-weight: 700;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+h1,h2,h3 {
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
 h4,h5,h6 {
-  margin: 0 0 10px 0;
+  margin-bottom: 10px;
   line-height: 1;
-  font-weight: 700;
 }
 
 h3 {
