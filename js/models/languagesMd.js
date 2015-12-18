@@ -2314,6 +2314,29 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Yeni Avatar Seç",
         NewCoverImage: "Yeni Kapak Görseli Seç",
         Reset: "Sıfırla",
+        Purchases: "Purchases", //not translated
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
           getError: "Veri alınamadı.",
