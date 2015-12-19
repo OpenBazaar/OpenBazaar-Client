@@ -52,14 +52,21 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   if(modelJSON){
     __.each(modelJSON, function (value, key) {
       if (formKeys.indexOf(key) == -1 && skipKeys.indexOf(key) == -1){
-        if(value.constructor === Array){
-          __.each(value, function(val){
+        if(value.constructor === Array && key != "shipping_addresses"){
+          __.each(value, function (val) {
             formData.append(key, val);
+          });
+          if (value.length == 0){
+            formData.append(key, "");
+          }
+        } else if(key == "shipping_addresses"){
+          __.each(value, function(val){
+            formData.append(key, JSON.stringify(val));
           });
           if(value.length == 0){
             formData.append(key, "");
           }
-        }else{
+        } else{
           formData.append(key, value);
         }
       }

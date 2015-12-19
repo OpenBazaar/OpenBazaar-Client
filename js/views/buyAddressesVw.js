@@ -7,19 +7,22 @@ Backbone.$ = $;
 module.exports = Backbone.View.extend({
 
   events: {
-    'change .js-buyWizardAddressRadio': 'selectAddress'
+    'change .js-buyWizardAddressRadio': 'selectAddress',
+    'click .js-buyWizardAddressSelected': 'selectAddressAndAdvance'
   },
 
-  className: "flexRow borderBottom",
+  className: "flexRow",
 
-  initialize: function() {
+  initialize: function(options) {
     "use strict";
+    this.userModel = options.userModel;
     //don't render on init, let parent trigger the render
     //add list of countries the vendor ships to
     this.model.set('shipsToList', (this.model.get('vendor_offer').listing.shipping.shipping_regionsDisplay).join(","));
   },
 
   render: function(selected){
+    this.model.set('user', this.userModel.toJSON());
     var self = this;
     var modelData = this.model.toJSON();
     modelData.selected = selected;
@@ -31,6 +34,11 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
+  selectAddressAndAdvance: function(){
+    "use strict";
+    $(".js-buyWizardAddressNext").trigger( "click" );
+  },
+
   selectAddress: function(){
     "use strict";
     var index = this.$el.find('.js-buyWizardAddressRadio:checked').val();
@@ -39,6 +47,7 @@ module.exports = Backbone.View.extend({
 
   setAddress: function(index){
     "use strict";
+    console.log("set address")
     var selectedAddress = this.model.get('user').shipping_addresses[index];
     if(selectedAddress && this.model.get('vendor_offer').listing.shipping.shipping_regions.indexOf(selectedAddress.country) > -1){
       this.trigger("setAddress", selectedAddress);

@@ -1,18 +1,19 @@
+<!-- item -->
 <div class="flexRow">
-  <div class="flexRow custCol-border-secondary borderBottom hide js-buyWizardOrderSummary">
+  <div class="flexRow custCol-border borderBottom hide js-buyWizardOrderSummary">
     <div class="rowItem padding2015">
       <%= polyglot.t('buyFlow.summaryMsg1') %> <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>.
       <%= polyglot.t('buyFlow.summaryMsg2') %> <%- ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
       <a href="#transactions/purchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
     </div>
   </div>
-  <div class="flexRow custCol-border-secondary borderBottom">
-    <div class="flexCol-6 borderRight">
+  <div class="flexRow custCol-border borderBottom">
+    <div class="flexCol-6">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
             <div class="thumbnail-large-slim">
-              <div class="thumbnail thumbnail-large-slim box-border"
+              <div class="thumbnail thumbnail-large-slim"
                   <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
                   style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
                   <% } else { %>
@@ -21,47 +22,53 @@
               </div>
             </div>
             <div class="pad10left txt-unleaded">
-              <div class="row10"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
-              <div class="noOverflow">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
+              <div class="marginTop12 marginBottom4 fontSize13 noOverflow"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
+              <div class="noOverflow fontSize13 txt-fade">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="flexCol-2 borderRight">
+    <div class="flexCol-2">
       <div class="rowItem padding2015">
         <form id="buyWizardQuantity">
-          <input type="number" step="1" min="1" class="fieldItem spinButtons js-buyWizardQuantity" value="1"/>
+          <input type="number" step="1" min="1" class="fieldItem spinButtons js-buyWizardQuantity border1 custCol-border marginTop4" value="1"/>
         </form>
         <span class="fieldItem js-buyWizardQuantityDisplay hide"></span>
       </div>
     </div>
     <div class="flexCol-4">
-      <div class="rowItem padding2015">
-        <span class="fieldItem js-buyWizardPrice"><%- ob.displayPrice %></span>
+      <div class="rowItem padding2015 alignRight marginTop20">
+        <span class="js-buyWizardPrice fontSize13">
+          <%- ob.displayPrice %>
+        </span>
+        <span class="textOpacity75 fontSize13">
+          <% if(ob.userCurrencyCode != 'BTC'){ %>
+          (<%- ob.vendorBTCPrice.toFixed(4) %> BTC)
+          <% } %>
+        </span>
       </div>
     </div>
   </div>
-  <div class="flexRow custCol-border-secondary borderBottom">
-    <div class="flexCol-6 borderRight">
+
+  <!-- only display shipping if physical item -->
+  <% if( ob.vendor_offer.listing.metadata.category === "physical good" ) { %>  
+  <div class="flexRow custCol-border borderBottom">
+    <div class="flexCol-8">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
             <div class="thumbnail-large-slim">
-              <div class="thumbnail thumbnail-large-slim box-border"
-              <% if(ob.user.avatar_hash){ %>
-              style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.user.avatar_hash %>), url(imgs/defaultUser.png);">
-              <% } else { %>
-              style="background-image: url(imgs/defaultUser.png);">
-              <% } %>
+              <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
+                <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 23%;"></span>
+                <span class="fontSize10 textOpacity1 positionAbsolute width100 alignCenter left0 bottom8px"><%= polyglot.t('ShipTo') %></span>
               </div>
             </div>
-            <div class="pad10left txt-unleaded">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1">
               <% if(ob.selectedAddress) { %>
-              <div class="row10"><strong>Ship To</strong></div>
-              <div><%- ob.selectedAddress.name %></div>
-              <div><%- ob.selectedAddress.street %></div>
-              <div><%- ob.selectedAddress.city %>, <%- ob.selectedAddress.state %> <% ob.selectedAddress.postal_code %></div>
+              <div class="marginBottom2"><%- ob.selectedAddress.name %></div>
+              <div class="marginBottom2"><%- ob.selectedAddress.street %></div>
+              <div class="marginBottom2"><%- ob.selectedAddress.city %>, <%- ob.selectedAddress.state %> <%- ob.selectedAddress.postal_code %></div>
               <div><%- ob.selectedAddress.displayCountry %></div>
               <% } %>
             </div>
@@ -69,24 +76,37 @@
         </div>
       </div>
     </div>
-    <div class="flexCol-2 borderRight">
-      <div class="rowItem padding2015">
-      </div>
-    </div>
     <div class="flexCol-4">
-      <div class="rowItem padding2015">
-        <span class="fieldItem js-buyWizardShippingPrice"><%- ob.currentShippingDisplayPrice %></span>
+      <div class="rowItem padding2015 marginTop20 alignRight">
+        <% if(ob.vendor_offer.listing.shipping.free){ %>
+          <%= polyglot.t('Free') %>
+        <% } else { %>
+          <span class="js-buyWizardShippingPrice fontSize13">
+            <%- ob.currentShippingDisplayPrice %>
+          </span>
+          <span class="textOpacity75 fontSize13">
+            <% if(ob.userCurrencyCode != 'BTC'){ %>
+              <% if(ob.shippingType === "domestic") { %>
+                (<%- ob.domesticShippingBTC.toFixed(4) %> BTC)
+              <% }else{ %>
+                (<%- ob.internationalShippingBTC.toFixed(4) %> BTC)
+              <% } %>
+            <% } %>
+          </span>
+        <% } %>
       </div>
     </div>
   </div>
-  <div class="flexRow custCol-border-secondary">
-    <div class="flexCol-6 borderRight">
+  <% } %>
+
+  <div class="flexRow custCol-border borderBottom">
+    <div class="flexCol-8">
       <div class="rowItem padding2015">
         <div class="table">
           <div>
             <% if(ob.selectedModerator){ %>
             <div class="thumbnail-large-slim">
-              <div class="thumbnail thumbnail-large-slim box-border"
+              <div class="thumbnail thumbnail-large-slim"
                   <% if(ob.selectedModerator.avatar){ %>
                   style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultUser.png);">
                   <% } else { %>
@@ -95,29 +115,44 @@
               </div>
             </div>
             <div class="pad10left txt-unleaded">
-              <div class="row10"><strong>Secure Transaction</strong></div>
-              <div class="noOverflow">Service by
+              <div class="marginTop6 marginBottom4 fontSize13 noOverflow marginBottom4">
+                Moderated by 
                 <% if(ob.selectedModerator.blockchain_id){ %>
-                <%- ob.selectedModerator.blockchain_id %>
+                  <%- ob.selectedModerator.blockchain_id %>
                 <% } else { %>
-                <%- ob.selectedModerator.guid %>
+                  <%- ob.selectedModerator.guid %>
                 <% } %>
               </div>
+              <div class="textOpacity75 lineHeight15">**<%= polyglot.t('buyFlow.moderatorPaymentDisclaimer') %></div>
             </div>
             <% } else { %>
-            Direct Purchase <%- ob.selectedModerator %>
+              <div class="thumbnail-large-slim">
+                <div class="thumbnail thumbnail-large-slim"
+                    <% if(ob.avatar_hash) { %>
+                    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>&guid=<%- ob.vendor_offer.listing.id.pubkeys.guid %>), url(imgs/defaultUser.png);">
+                    <% } else { %>
+                    style="background-image: url(imgs/defaultUser.png);">
+                    <% } %>
+                </div>
+              </div>
+              <div class="pad10left txt-unleaded">
+                <div class="marginTop6 marginBottom4 fontSize13 noOverflow"><%= polyglot.t('buyFlow.directPaymentTo') %> <%- ob.handle %></div>
+                <div class="textOpacity75 lineHeight15">
+                  **<%= polyglot.t('buyFlow.directPaymentDisclaimer') %>
+                </div>
+              </div>
             <% } %>
           </div>
         </div>
       </div>
     </div>
-    <div class="flexCol-2 borderRight">
-      <div class="rowItem padding2015">
-      </div>
-    </div>
     <div class="flexCol-4">
-      <div class="rowItem padding2015">
-        <span class="fieldItem js-buyWizardModeratorPrice"></span>
+      <div class="rowItem padding2015 alignRight marginTop20">
+        <% if(ob.selectedModerator){ %>
+          <span class="js-buyWizardModeratorPrice"></span>**
+        <% } else { %>
+          <%= polyglot.t('Free') %>
+        <% } %>
       </div>
     </div>
   </div>

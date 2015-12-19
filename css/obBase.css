@@ -1,26 +1,37 @@
 /*========== scroll bars ==========*/
 #obContainer::-webkit-scrollbar {
-  width: 1px;
+  width: 6px;
 }
  
 #obContainer::-webkit-scrollbar-thumb {
-  border-radius: 20px;
+  border-radius: 0;
   background: #44697E; 
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar,
 .chatConversationHeads::-webkit-scrollbar,
-.chatConversationContent::-webkit-scrollbar {
-  width: 1px;
+.chatConversationContent::-webkit-scrollbar,
+#sideBar textarea::-webkit-scrollbar {
+  width: 6px;
 }
+
 
 .popMenu-notificationsContent::-webkit-scrollbar-thumb,
 .chatConversationHeads::-webkit-scrollbar-thumb,
-.chatConversationContent::-webkit-scrollbar {
+.chatConversationContent::-webkit-scrollbar-thumb,
+#sideBar textarea::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: #3E3E3E;
 }
 
+.customThemeScrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.customThemeScrollbar::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background: #3E3E3E;
+}
 
 .noScrollBar::-webkit-scrollbar {
   width: 0 !important;
@@ -41,7 +52,7 @@ body {
   overflow: hidden;
   /*fonts*/
   color: rgb(255, 255, 255);
-  font-family: "Helvetica Neue", Helvetica, Arial;
+  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
   font-size: 13px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
@@ -165,12 +176,12 @@ form {
 
 #obContainer {
   transition: width 0.5s ease;
-  width: calc(100% - 49px);
+  width: calc(100% - 48px);
 
 }
 
 #obContainer.compressed {
-  width: calc(100% - 235px);
+  width: calc(100% - 231px);
 }
 
 #pageNav {
@@ -196,7 +207,7 @@ form {
 
 #sideBar {
   position: fixed;
-  right: -182px;
+  right: -183px;
   top: 50px;
   width:230px;
   background-color: #252525;
@@ -264,7 +275,7 @@ form {
   top: 50px;
   height: 100%;
   width: 100%;
-  background-color: rgba(25,25,25,0.65);
+  background-color: rgba(25,25,25,0.85);
   z-index: 3;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
@@ -631,6 +642,7 @@ label.fieldItem {
   width: 54px;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   border-radius: 2px;
   position: relative;
 }
@@ -693,6 +705,10 @@ label.fieldItem {
 }
 
 .rowTop20 {
+  margin-top: 20px;
+}
+
+.rowTop30 {
   margin-top: 20px;
 }
 
@@ -781,9 +797,8 @@ label.fieldItem {
   height: 624px;
   margin: 0 auto;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  -webkit-backface-visibility: hidden;
+  right: 0;
+  left: 0;
 }
 
 .modal.modal-navOffset .modal-child {
@@ -1405,14 +1420,16 @@ input[type="text"].txtField-bar {
 
 .btn.btn-buyNow {
   margin: auto;
-  width: 100%;
+  width: 280px;
   height: 52px;
   line-height: 52px;
   padding: 0;
   opacity: .90;
-  font-size: 18px;
-  border-radius: 2px;
+  font-size: 19px;
+  border-radius: 5px;
   float: none;
+  text-transform: uppercase;
+  font-weight: 800
 }
 
 .btn.btn-buyNow:hover {
@@ -1715,6 +1732,8 @@ div.chatSearchOut .chatSearchIcon {
   color: white;
   background-color: unset;
   width: 100%;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 }
 
 .chatConversationMessageLine {
@@ -2391,7 +2410,7 @@ input[type="radio"].fieldItem + label:before {
   border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateZ(0);
   -webkit-backface-visibility: hidden;
   top: 50%;
 }
@@ -2676,6 +2695,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 950px;
   padding: 0;
   z-index: 0;
+  -webkit-backface-visibility: hidden;
 }
 
 .banner-settings {
@@ -2723,7 +2743,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -2748,8 +2768,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   width: 950px;
   z-index: 3;
-  box-shadow: 0px 3px 43px -17px rgba(0,0,0,.6);
-
 }
 
 .home-page-navigation-filler {
@@ -2784,19 +2802,41 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .user-page-header-slim {
   position: fixed;
-  top: 64px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  height: 0;
+  top: -10px;
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
+  height: 50px;
   opacity: 0;
+  overflow: hidden;
   width: 950px;
-  background: #281B2E;
-  box-shadow: 0px 0 0 rgba(0, 0, 0, 0.35);
-  z-index: 4;
+  background: transparent;
+  z-index: 5;
   padding: 0;
-  transition: height .25s cubic-bezier(0, 0, 0.2, 1);
-
+  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1);
+  transition: top .4s cubic-bezier(0, 0, 0.2, 1);
 }
+
+.user-page-header-slim-bg {
+  position: absolute;
+  top: -10px;
+  width: 950px;
+  height: 80px;
+  -webkit-filter: blur(10px);
+}
+
+.user-page-header-slim-avatar {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 48px;
+  transition: all .1s cubic-bezier(0, 0, 0.5, 1);
+  width: 52px;
+  z-index: 5;
+}
+
+.user-page-header-slim-tint {
+  box-shadow: inset 0px -160px 112px -52px rgba(25,25,25,.9);
+}
+
 
 .user-page-header-slim-bg-cover {
   position: fixed;
@@ -2864,6 +2904,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50%;
   right: 50%;
   animation: spinnerAnimation 1.15s infinite linear;
+}
+
+.spinner.spinner-slow:before {
+  animation: spinnerAnimation 3s infinite linear;
 }
 
 .spinner:after {
@@ -3308,7 +3352,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   /* must be inside a relatively positioned containing element */
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) translateZ(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -3316,7 +3360,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   /* must be inside a relatively positioned containing element */
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0);
   -webkit-backface-visibility: hidden;
 }
 
@@ -3325,8 +3369,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) translateZ(0);
   -webkit-backface-visibility: hidden;
+}
+
+#ov1 .overflowHidden {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 #ov1  .borderRight {
@@ -3416,6 +3465,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 12px;
 }
 
+#ov1  .textSize13px {
+  font-size: 13px;
+}
+
 #ov1  .textSize14px {
   font-size: 14px;
 }
@@ -3442,6 +3495,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .textSize24px {
   font-size: 24px;
+}
+
+#ov1  .textSize24px {
+  font-size: 24px;
+}
+
+#ov1  .textSize26px {
+  font-size: 26px;
 }
 
 #ov1  .textSize28px {
@@ -3541,12 +3602,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #000;
 }
 
+#ov1 .txt-col1 {
+  color: #086A9E;
+}
+
+#ov1 .txt-col2 {
+  color: #327EB8;
+}
+
 #ov1 .txt-col3 {
   color: #428a38;
 }
 
 #ov1  .alignCenter {
   text-align: center;
+}
+
+#ov1  .alignRight {
+  text-align: right;
 }
 
 #ov1  .floatLeft {
@@ -3629,8 +3702,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 20px;
 }
 
-#ov1  .marginLeft88 {
-  margin-left: 88px;
+#ov1  .marginLeft82 {
+  margin-left: 82px;
 }
 
 #ov1  .marginTop1 {
@@ -3653,6 +3726,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 7px;
 }
 
+#ov1  .marginTop8 {
+  margin-top: 8px;
+}
+
 #ov1  .marginTop9 {
   margin-top: 9px;
 }
@@ -3673,12 +3750,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 20px;
 }
 
+#ov1  .marginTop25 {
+  margin-top: 25px;
+}
+
+#ov1  .marginTop28 {
+  margin-top: 28px;
+}
+
 #ov1  .marginTop50 {
   margin-top: 50px;
 }
 
 #ov1  .marginBottom2 {
   margin-bottom: 2px;
+}
+
+#ov1  .marginBottom4 {
+  margin-bottom: 4px;
 }
 
 #ov1  .marginBottom6 {
@@ -3712,6 +3801,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .top0 {
   top: 0;
+}
+
+#ov1  .top70 {
+  top: 70px;
 }
 
 
@@ -3764,6 +3857,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   min-height: 300px;
 }
 
+#ov1  .minWidth120 {
+  min-width: 120px;
+}
+
+#ov1  .lineHeight15{
+  line-height: 15px;
+}
+#ov1  .lineHeight16{
+  line-height: 16px;
+}
 #ov1  .lineHeight20{
   line-height: 20px;
 }
@@ -3774,6 +3877,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .lineHeight24{
   line-height: 24px;
 }
+
 #ov1  .lineHeight46{
   line-height: 46px;
 }
@@ -3788,6 +3892,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .bottom0 {
   bottom: 0;
+}
+
+#ov1 .bottom8px {
+  bottom: 8px;
+}
+
+#ov1 .left0 {
+  left: 0;
 }
 
 #ov1 .positionAbsolute {
@@ -3830,6 +3942,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 0px 15px;
 }
 
+#ov1  .padding2010{
+  padding: 20px 10px;
+}
+
 #ov1  .padding2015 {
   padding: 20px 15px;
 }
@@ -3838,8 +3954,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 17px;
 }
 
+#ov1  .paddingRight0 {
+  padding-right: 0;
+}
 #ov1  .paddingRight2 {
   padding-right: 2px;
+}
+#ov1  .paddingRight5 {
+  padding-right: 5px;
 }
 
 #ov1  .paddingLeft2 {
@@ -3874,12 +3996,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 20px;
 }
 
-#ov1  .positionTop66 {
-  top: 66px;
+#ov1  .positionTop68 {
+  top: 68px;
 }
 
 #ov1  .paddingBottom20 {
   padding-bottom: 20px;
+}
+
+#ov1  .letterSpacing02 {
+  letter-spacing: 0.2px;
 }
 
 #ov1  .widthAuto {
@@ -3918,9 +4044,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width120 {
   width: 120px;
 }
+#ov1 .width160 {
+  width: 160px;
+}
+
+#ov1 .width260 {
+  width: 260px;
+}
 
 #ov1 .width600 {
   width: 600px;
+}
+#ov1 .width740 {
+  width: 740px;
 }
 
 #ov1 .width950 {
