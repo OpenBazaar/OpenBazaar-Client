@@ -175,6 +175,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Select New Cover Image",
         Reset: "Reset",
         Loading: "Loading...", // not translated
+        Purchases: "Purchases",
+        Sales: "Sales",
+        Cases: "Cases",
+        transactions: {
+          SoldBy: "Sold By",
+          PurchasedBy: "Purchased By",
+          searchByOrder: "Search by order id or item name",
+          sortByStatusAll: "All",
+          sortByStatus0: "Purchased",
+          sortByStatus1: "Paid (Funds Waiting)",
+          sortByStatus2: "Confirmed/Shipped",
+          sortByStatus3: "Completed (Funds Released)",
+          sortByStatus4: "Disputed",
+          OrderID: "Order ID",
+          OrderDate: "Order Date",
+          OrderStatus: "Order Status",
+          OrderStatus0: "Purchased (Not Funded)",
+          OrderStatus1: "Paid (Funds Waiting)",
+          OrderStatus2: "Confirmed/Shipped",
+          OrderStatus3: "Completed (Funds Released)",
+          OrderStatus4: "Disputed",
+          OrderTotal: "Order Total"
+        },
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -196,8 +219,8 @@ module.exports = Backbone.Model.extend({
           pagesStores: "Stores",
           pagesMods: "Moderator services",
           pagesBasic: "Basic users",
-          listingsCurated: "From stores I follow",
-          listingsAll: "From all stores",
+          listingsCurated: "Stores I follow",
+          listingsAll: "All stores",
           categoryAll: "All"
         },
         nav: {
@@ -420,6 +443,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
         Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
+        Purchases:"Compras",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
           getError: "Los datos no se pudieron recuperar.",
@@ -671,6 +717,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "W&auml;hlen Sie New Cover Image",
         Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
+        Purchases:"Eink&auml;ufe",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
           getError: "Daten konnten nicht empfangen werden.",
@@ -925,6 +994,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Selezionare Nuovo Copertina",
         Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
+        Purchases:"Acquisti",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
           getError: "I dati non sono stati recuperati.",
@@ -1179,6 +1271,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Sélectionner une nouvelle image de couverture",
         Reset: "Réinitialiser",
         Loading: "Loading...", // not translated
+        Purchases:"Achats",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
           getError: "Impossible de récupérer les données.",
@@ -1431,6 +1546,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Selectare Imagine Copertă Nouă",
         Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
+        Purchases:"Cumpărături",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
           getError: "Datele nu au putut fi primite.",
@@ -1683,6 +1821,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Выбрать обложку",
         Reset: "Сброс",
         Loading: "Loading...", // not translated
+        Purchases:"Покупки",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
           getError: "Данные невозможно получить.",
@@ -1934,6 +2095,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Zvoľte nový titulný obrázok",
         Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
+        Purchases:"Nákupy",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
           getError: "Nepodarilo sa načítať údaje.",
@@ -2188,6 +2372,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Yeni Kapak Görseli Seç",
         Reset: "Sıfırla",
         Loading: "Loading...", // not translated
+        Purchases: "Purchases", //not translated
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
           getError: "Veri alınamadı.",
@@ -2441,6 +2648,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "Yuvtlhe' mIllogh wIv",
         Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
+        Purchases:"Je'",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
           getError: "LaH wej Suq De'.",
@@ -2693,6 +2923,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "选择新的封面照片",
         Reset: "重置",
         Loading: "Loading...", // not translated
+        Purchases: "Purchases", // not translated
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "数据没有被储存",
           getError: "数据调出失败",
@@ -2947,6 +3200,29 @@ module.exports = Backbone.Model.extend({
         NewCoverImage: "새로운 표지사진 선택",
         Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
+        Purchases: "Purchases", // not translated
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
           getError: "데이타를 검색할수 없다.",

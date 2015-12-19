@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
     /* recieves socketView and userProfile from app.js */
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
+    this.model.set('vendor', this.userProfile.get('profile').vendor);
     this.subViews = [];
     this.languages = new languagesModel();
 
@@ -66,6 +67,7 @@ module.exports = Backbone.View.extend({
     });
 
     this.listenTo(this.userProfile, 'change', function(){
+      this.model.set('vendor', this.userProfile.get('profile').vendor);
       this.render();
     });
 
@@ -78,6 +80,9 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "countryListRendered", function(){this.accordionReady("country");});
     this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency");});
     this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language");});
+    this.listenTo(window.obEventBus, "updateProfile", function(response){
+      this.userProfile.fetch();
+    });
 
     this.render();
   },

@@ -132,6 +132,7 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     /* expected options are:
     userModel: this is set by app.js, then by a call to the settings API.
+    userProfile: this is set by app.js, it is not the same as the page's userProfile, it belongs to the current user
     userID: if userID is in the route, it is set here
     state: if state is in the route, it is set here
     itemHash: if itemHash is in the route, it is set here
@@ -145,6 +146,7 @@ module.exports = Backbone.View.extend({
     this.subViews = [];
     this.subModels = [];
     this.model = new Backbone.Model();
+    this.globalUserProfile = options.userProfile;
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
     this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
@@ -327,10 +329,14 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(352);
       this.sellItem();
-    } else if(state === "createStore") {
+    } else if(state === "createStore"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
       this.addTabToHistory('about');
       this.createStore();
+    } else if(state === "customize"){
+      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      this.addTabToHistory('about');
+      this.customizePage();
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
@@ -339,7 +345,10 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }
     this.setControls(state);
-    this.lastTab = state;
+    if(state !== "customize"){
+      this.lastTab = state;
+    }
+
     //set address bar
     //taking out handle for now, since lookup by handle is not available yet
     /*
@@ -633,12 +642,11 @@ module.exports = Backbone.View.extend({
     this.setControls("itemEdit");
   },
 
-  customizePage: function(e){
+  customizePage: function(){
     "use strict";
     this.customizing = true;
     this.setControls('customize');
     $('.user-page-content').addClass('pull-up4');
-    //$('.user-customize-cover-photo').show();
     $('.user-page-header').addClass('shadow-inner1-strong');
     $('#obContainer').animate({ scrollTop: "0" });
   },
@@ -736,7 +744,6 @@ module.exports = Backbone.View.extend({
   saveCustomizePage: function() {
     "use strict";
     this.customizing = false;
-    //this.saveUserPageModel();
     this.uploadUserPageImage();
     $('.js-bannerRangeInput').addClass('hide');
   },
@@ -774,6 +781,8 @@ module.exports = Backbone.View.extend({
         if(data.success === true){
           self.setCustomStyles();
           self.setState(self.lastTab);
+          //refresh the universal profile model
+          self.globalUserProfile.fetch();
         }else if(data.success === false){
           showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
         }

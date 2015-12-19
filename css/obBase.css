@@ -84,6 +84,10 @@ p a {
   text-decoration: underline;
 }
 
+p { 
+  white-space: pre-line;  
+}
+
 hr {
   border: solid 1px rgba(255,255,255,0.08);
   width: 100%;
@@ -212,6 +216,7 @@ form {
   z-index: 2;
   transition: right 0.5s ease;
   color: #DDD;
+  -webkit-app-region: no-drag;
 }
 
 #sideBar.sideBarSlid {
@@ -553,6 +558,14 @@ label.fieldItem {
 .table > div > div {
   display: table-cell;
   vertical-align: top;
+}
+
+.table.tablePadCell5 > div > div {
+  padding: 5px;
+}
+
+.table.tablePadCellRB5 > div > div {
+  padding: 0 5px 5px 0;
 }
 
 .btn {
@@ -924,16 +937,21 @@ label.fieldItem {
 
 /*========== typography ==========*/
 
-h1,h2,h3 {
-  margin: 0 0 20px 0;
-  line-height: 1.2;
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
   font-weight: 700;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+h1,h2,h3 {
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
 h4,h5,h6 {
-  margin: 0 0 10px 0;
+  margin-bottom: 10px;
   line-height: 1;
-  font-weight: 700;
 }
 
 h3 {
@@ -991,6 +1009,7 @@ h5 {
 }
 
 .clamp2 {
+  /* adds an ellipses to the end of wrapped text after 2 lines */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -999,11 +1018,18 @@ h5 {
 }
 
 .clamp4 {
+  /* adds an ellipses to the end of wrapped text after 4 lines */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+}
+
+.txtRow2 {
+  /* limits an element to being 2 rows of text tall */
+  line-height: 1.25em;;
+  height: 2.5em;
 }
 
 /*========== skin classes ==========*/
@@ -1041,7 +1067,7 @@ h5 {
 }
 
 .welcomeBar,
-.settingsBar {
+.userBar {
   background-color: transparent;
   height: 50px;
   line-height: 50px;
@@ -1062,7 +1088,7 @@ h5 {
 }
 
 .welcomeBar .welcomeBar-inner,
-.settingsBar .title-section {
+.userBar .title-section {
   background-color: #215175;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -1072,11 +1098,11 @@ h5 {
   z-index: 1;
 }
 
-.settingsBar .title-section {
+.userBar .title-section {
   padding-left: 102px;
 }
 
-.settingsBar .thumbnail {
+.userBar .thumbnail {
   background-size: cover;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -1652,6 +1678,7 @@ div.chatSearchOut .chatSearchIcon {
   overflow: auto;
   padding: 6px 2px;
   margin-left: 2px;
+  width: 100%;
 }
 
 .chatConversationTo {
@@ -3104,7 +3131,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #modalHolder {
   position: fixed;
-  z-index: 1;
+  z-index: 10;
+  -webkit-app-region: no-drag;
 }
 
 .selectPill {
@@ -3204,6 +3232,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 50px;
   overflow-y: scroll;
   padding-top: 20px;
+  -webkit-app-region: no-drag;
 }
 
 .chatConversationMessageLine .chatConversationMessageBody a {
