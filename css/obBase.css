@@ -1661,6 +1661,7 @@ div.chatSearchOut .chatSearchIcon {
   overflow: auto;
   padding: 6px 2px;
   margin-left: 2px;
+  width: 100%;
 }
 
 .chatConversationTo {
