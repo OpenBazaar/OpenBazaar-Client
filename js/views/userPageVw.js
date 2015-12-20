@@ -132,6 +132,7 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     /* expected options are:
     userModel: this is set by app.js, then by a call to the settings API.
+    userProfile: this is set by app.js, it is not the same as the page's userProfile, it belongs to the current user
     userID: if userID is in the route, it is set here
     state: if state is in the route, it is set here
     itemHash: if itemHash is in the route, it is set here
@@ -145,6 +146,7 @@ module.exports = Backbone.View.extend({
     this.subViews = [];
     this.subModels = [];
     this.model = new Backbone.Model();
+    this.globalUserProfile = options.userProfile;
     this.userProfile = new userProfileModel();
     //models have to be passed the dynamic URL
     this.userProfile.urlRoot = options.userModel.get('serverUrl') + "profile";
@@ -271,22 +273,19 @@ module.exports = Backbone.View.extend({
       });
 
       $("#obContainer").scroll(function(){
-        if ($(this).scrollTop() > 362 && self.slimVisible === false ) {
+        if ($(this).scrollTop() > 400 && self.slimVisible === false ) {
           self.slimVisible = true;
-          $('.user-page-header-slim').addClass('textOpacity1').addClass('height54');
+          $('.user-page-header-slim').addClass('textOpacity1').addClass('top70');
           $('.user-page-header').removeClass('shadow-inner1').addClass('zIndex4');
           $('.user-page-header .rowItem').hide();
-          $('.user-page-navigation-buttons').addClass('positionFixed positionTop66');
+          $('.user-page-navigation-buttons').addClass('positionFixed positionTop68');
         }
-        if ($(this).scrollTop() < 362 && self.slimVisible === true ) {
+        if ($(this).scrollTop() < 400 && self.slimVisible === true ) {
           self.slimVisible = false;
-          $('.user-page-header-slim').removeClass('height54');
+          $('.user-page-header-slim').removeClass('top70');
           $('.user-page-header').addClass('shadow-inner1').removeClass('zIndex4');
           $('.user-page-header .rowItem').show();
-          $('.user-page-navigation-buttons').removeClass('positionFixed positionTop66');
-          setTimeout(function(){
-            $('.user-page-header-slim').removeClass('textOpacity1');
-          }, 100);
+          $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
         }
       });
 
@@ -782,6 +781,8 @@ module.exports = Backbone.View.extend({
         if(data.success === true){
           self.setCustomStyles();
           self.setState(self.lastTab);
+          //refresh the universal profile model
+          self.globalUserProfile.fetch();
         }else if(data.success === false){
           showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
         }

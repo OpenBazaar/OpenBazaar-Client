@@ -29,9 +29,16 @@
 
   <div class="user-page-content">
     <div class="user-page-header-slim-bg-cover custCol-background"></div>
-    <div class="flexRow user-page-header-slim borderBottom2 custCol-border-secondary shadow-inner1-ultra-light">
+    <div class="user-page-header-slim borderBottom2 custCol-border-secondary user-page-header-slim-tint">
+      <div class="user-page-header-slim-bg" 
+        <% if(ob.page.profile.header_hash){ %>
+        style="background-image: url(<%- ob.page.headerURL %>), url(imgs/defaultBanner.png); background-position: center; ">
+        <% } else { %>
+        style="background-image: url(imgs/defaultBanner.png);">
+        <% } %>
+      </div>
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
-        <div class="thumbnail thumbnail-large-slim pull-left js-userPageAvatar"
+        <div class="thumbnail user-page-header-slim-avatar  pull-left js-userPageAvatar"
              <% if(ob.page.profile.avatar_hash) { %>
              style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
              <% } else { %>
@@ -40,15 +47,15 @@
         </div>
       </div>
       <div class="pull-left">
-        <div class="vCentered marginLeft88">
-          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20"><%- ob.page.profile.name %></h1>
-          <div class="floatLeft marginLeft6 marginTop6"><%- ob.page.profile.handle %></div>
+        <div class="vCentered marginLeft82">
+          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce"><%- ob.page.profile.name %></h1>
+          <div class="floatLeft marginLeft6 marginTop6 colorWhiteForce"><%- ob.page.profile.handle %></div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="flexRow shadow-inner1 user-page-header">
+  <div class="shadow-inner1 user-page-header">
     <div class="rowItem positionBottom width600 padding0 paddingLeft20">
       <div class="table">
         <div>
@@ -351,4 +358,3 @@
     </div>
   </div>
 </div>
-<div id="modalHolder"></div>

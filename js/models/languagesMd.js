@@ -105,7 +105,8 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
-        BitcoinReturnAddress: "Bitcoin address",
+        BitcoinReturnAddress: "Bitcoin Return Address",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -173,6 +174,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
         Reset: "Reset",
+        Loading: "Loading...", // not translated
+        Purchases: "Purchases",
+        Sales: "Sales",
+        Cases: "Cases",
+        transactions: {
+          SoldBy: "Sold By",
+          PurchasedBy: "Purchased By",
+          searchByOrder: "Search by order id or item name",
+          sortByStatusAll: "All",
+          sortByStatus0: "Purchased",
+          sortByStatus1: "Paid (Funds Waiting)",
+          sortByStatus2: "Confirmed/Shipped",
+          sortByStatus3: "Completed (Funds Released)",
+          sortByStatus4: "Disputed",
+          OrderID: "Order ID",
+          OrderDate: "Order Date",
+          OrderStatus: "Order Status",
+          OrderStatus0: "Purchased (Not Funded)",
+          OrderStatus1: "Paid (Funds Waiting)",
+          OrderStatus2: "Confirmed/Shipped",
+          OrderStatus3: "Completed (Funds Released)",
+          OrderStatus4: "Disputed",
+          OrderTotal: "Order Total"
+        },
         errorMessages: {
           saveError: "Data could not be saved.",
           getError: "Data could not be retrieved.",
@@ -240,17 +265,22 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           MustAddAddress: "You must add an address to ship to",
-          VendorShipsTo: "This vendor ships to these countries",
-          DoesNotShipHere: "This vendor does not ship here",
+          VendorShipsTo: "Ships to",
+          DoesNotShipHere: "Does not ship here",
           Send: "Send",
           BTCto: "BTC to",
-          OpenAddress: "Open Address in Local Wallet",
-          CopyAddress: "Copy Pay Address to Clipboard",
+          OpenAddress: "Open in Local Wallet",
+          CopyAddress: "Copy to Clipboard",
           RefreshPayment: "Refresh Payment Status",
           summaryMsg1: "Your payment has been sent to",
           summaryMsg2: "The expected processing time for this order is",
           summaryMsg3: "You can check the status of your order on your",
-          purchasesPage: "purchases page"
+          purchasesPage: "purchases page",
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
+          directPaymentTo: "Direct Payment to",
+          paymentSent: "Payment Sent!",
+          total: "Total"
         }
       },
       {
@@ -348,6 +378,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
         BitcoinReturnAddress: "Direcci&oacute;n de devoluciones Bitcoin",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -411,6 +442,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Seleccione Nuevo Avatar",
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
         Reset: "Reset", // not translated
+        Loading: "Loading...", // not translated
+        Purchases:"Compras",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
           getError: "Los datos no se pudieron recuperar.",
@@ -477,16 +532,21 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Usted debe agregar una dirección para env&iacute;os",
           VendorShipsTo: "Este proveedor despacha a estos países",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -588,6 +648,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "&Auml;nderungen speichern",
         YourName: "Dein Name",
         BitcoinReturnAddress: "Bitcoin R&uuml;cksendeaddresse",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Lokale W&auml;hrung",
         TimeZone: "Zeitzone",
         ShipToName: "Empfänger",
@@ -655,6 +716,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "W&auml;hlen Sie New Avatar",
         NewCoverImage: "W&auml;hlen Sie New Cover Image",
         Reset: "Reset", // not translated
+        Loading: "Loading...", // not translated
+        Purchases:"Eink&auml;ufe",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
           getError: "Daten konnten nicht empfangen werden.",
@@ -722,16 +807,21 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Sie m&uuml;ssen eine Versandadresse hinzuzuf&uuml;gen",
           VendorShipsTo: "Dieser Anbieter versendet nach",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -835,6 +925,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
         BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -902,6 +993,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Selezionare Nuovo Avatar",
         NewCoverImage: "Selezionare Nuovo Copertina",
         Reset: "Reset", // not translated
+        Loading: "Loading...", // not translated
+        Purchases:"Acquisti",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
           getError: "I dati non sono stati recuperati.",
@@ -978,7 +1093,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Il tuo pagamento è stato trasmesso a",
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
           summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
-          purchasesPage: "pagina acquisti"
+          purchasesPage: "pagina acquisti", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1082,6 +1202,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
         BitcoinReturnAddress: "Adresse Bitcoin",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1149,6 +1270,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Sélectionner un nouvel Avatar",
         NewCoverImage: "Sélectionner une nouvelle image de couverture",
         Reset: "Réinitialiser",
+        Loading: "Loading...", // not translated
+        Purchases:"Achats",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
           getError: "Impossible de récupérer les données.",
@@ -1225,7 +1370,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Votre paiement a été envoyé à",
           summaryMsg2: "Le temps de traitement prévu pour cette commande est",
           summaryMsg3: "Vous pouvez vérifier le statut de votre commande sur votre",
-          purchasesPage: "page d'achat"
+          purchasesPage: "page d'achat", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1327,6 +1477,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Salvare Modificări",
         YourName: "Numele dvs.",
         BitcoinReturnAddress: "Adresa Bitcoin",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Valuta locală",
         TimeZone: "Fus orar",
         ShipToName: "Numele",
@@ -1394,6 +1545,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Selectare Avatar Nou",
         NewCoverImage: "Selectare Imagine Copertă Nouă",
         Reset: "Reset", // not translated
+        Loading: "Loading...", // not translated
+        Purchases:"Cumpărături",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
           getError: "Datele nu au putut fi primite.",
@@ -1461,16 +1636,21 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
           VendorShipsTo: "Acest furnizor livrează către următoarele țări",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1572,6 +1752,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Применить",
         YourName: "Ваше имя",
         BitcoinReturnAddress: "Биткойн-адрес",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -1639,6 +1820,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
         Reset: "Сброс",
+        Loading: "Loading...", // not translated
+        Purchases:"Покупки",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
           getError: "Данные невозможно получить.",
@@ -1715,7 +1920,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Ваш платёж был отправлен на",
           summaryMsg2: "Ожидаемое время обработки вашего заказа составляет",
           summaryMsg3: "Чтобы проверить статус вашего заказа, загляните в",
-          purchasesPage: "интерфейс покупок"
+          purchasesPage: "интерфейс покупок", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -1816,6 +2026,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
         BitcoinReturnAddress: "Bitcoinová adresa",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -1883,6 +2094,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Zvoľte nového avatara",
         NewCoverImage: "Zvoľte nový titulný obrázok",
         Reset: "Reset", // not translated
+        Loading: "Loading...", // not translated
+        Purchases:"Nákupy",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
           getError: "Nepodarilo sa načítať údaje.",
@@ -1950,16 +2185,21 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           MustAddAddress: "Musíte zadať adresu pre doručenie",
           VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín:",
-          DoesNotShipHere: "This vendor does not ship here", //notTranslated
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
-          OpenAddress: "Open Address in Local Wallet", //notTranslated
-          CopyAddress: "Copy Pay Address to Clipboard", //notTranslated
+          OpenAddress: "Open in Local Wallet", //notTranslated
+          CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
           summaryMsg1: "Your payment has been sent to", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page" //notTranslated
+          purchasesPage: "purchases page", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2063,6 +2303,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Değişiklikleri Kaydet",
         YourName: "Adınız",
         BitcoinReturnAddress: "Bitcoin adresiniz",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Yerel para birimi",
         TimeZone: "Saat Dilimi",
         ShipToName: "Ad",
@@ -2130,6 +2371,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Yeni Avatar Seç",
         NewCoverImage: "Yeni Kapak Görseli Seç",
         Reset: "Sıfırla",
+        Loading: "Loading...", // not translated
+        Purchases: "Purchases", //not translated
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
           getError: "Veri alınamadı.",
@@ -2206,7 +2471,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Gönderilen ödemenin alıcısı",
           summaryMsg2: "Bu siparişin tahmini hazırlama süresi",
           summaryMsg3: "Siparişinizin durumunu kontrol edebileceğiniz yer",
-          purchasesPage: "alımlar sayfası"
+          purchasesPage: "alımlar sayfası", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2309,6 +2579,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "ChoH toD",
         YourName: "PonglIj'e'",
         BitcoinReturnAddress: "Bot SoQ mIr",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "Huch lutu'lu'bej",
         TimeZone: "PoH mIch",
         ShipToName: "Pong",
@@ -2376,6 +2647,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "QaD mIllogh wIv",
         NewCoverImage: "Yuvtlhe' mIllogh wIv",
         Reset: "Reset", // not translated
+        Loading: "Loading...", // not translated
+        Purchases:"Je'",
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
           getError: "LaH wej Suq De'.",
@@ -2451,7 +2746,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "NgeH Huch",
           summaryMsg2: "PIH mIw Dunqu'mo' tlham",
           summaryMsg3: "LaH legh SoH tlham Dotlh",
-          purchasesPage: "Tuq je'"
+          purchasesPage: "Tuq je'", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2554,6 +2854,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "保存更改",
         YourName: "您的姓名",
         BitcoinReturnAddress: "比特币地址",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -2621,6 +2922,30 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "选择新的 Avatar",
         NewCoverImage: "选择新的封面照片",
         Reset: "重置",
+        Loading: "Loading...", // not translated
+        Purchases: "Purchases", // not translated
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "数据没有被储存",
           getError: "数据调出失败",
@@ -2696,7 +3021,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "您付的款已经被交到",
           summaryMsg2: "这笔订单预计完成时间为",
           summaryMsg3: "到此查看您订单的状况",
-          purchasesPage: "以购商品"
+          purchasesPage: "以购商品", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       },
       {
@@ -2801,6 +3131,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "변경 사항 저장",
         YourName: "당신 이름",
         BitcoinReturnAddress: "당신 비트코인 주소",
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         LocalCurrency: "지역 통화",
         TimeZone: "시간대",
         ShipToName: "이름",
@@ -2867,6 +3198,31 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "정장 화신",
         NewAvatar: "새로운 화신 선택",
         NewCoverImage: "새로운 표지사진 선택",
+        Reset: "Reset", // not translated
+        Loading: "Loading...", // not translated
+        Purchases: "Purchases", // not translated
+        Sales: "Sales", // not translated
+        Cases: "Cases", // not translated
+        transactions: {
+          SoldBy: "Sold By", // not translated
+          PurchasedBy: "Purchased By", // not translated
+          searchByOrder: "Search by order id or item name", // not translated
+          sortByStatusAll: "All", // not translated
+          sortByStatus0: "Purchased", // not translated
+          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus2: "Confirmed/Shipped", // not translated
+          sortByStatus3: "Completed (Funds Released)", // not translated
+          sortByStatus4: "Disputed", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Order Date", // not translated
+          OrderStatus: "Order Status", // not translated
+          OrderStatus0: "Purchased (Not Funded)", // not translated
+          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus2: "Confirmed/Shipped", // not translated
+          OrderStatus3: "Completed (Funds Released)", // not translated
+          OrderStatus4: "Disputed", // not translated
+          OrderTotal: "Order Total" // not translated
+        },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
           getError: "데이타를 검색할수 없다.",
@@ -2943,7 +3299,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "당신의 지불 보내졌다",
           summaryMsg2: "이주문에 대한 예상 처리 시간",
           summaryMsg3: "당신은 당신의 주문상태를 확인할수 있다",
-          purchasesPage: "지불 페이지"
+          purchasesPage: "지불 페이지", //notTranslated
+          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
+          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
+          directPaymentTo: "Direct Payment to", //notTranslated
+          paymentSent: "Payment Sent!", //notTranslated
+          total: "Total" //notTranslated
         }
       }
     ]
