@@ -127,6 +127,19 @@ module.exports = Backbone.Model.extend({
         Type: "Type",
         Condition: "Condition",
         NSFW: "18+ (Adult content)",
+        Select: "Select",
+        Basic: "Basic",
+        Social: "Social",
+        Theme: "Theme",
+        Listing: "Listing",
+        Listings: "Listings",
+        Pages: "Pages",
+        Page: "Page",
+        Blocked: "Blocked",
+        Advanced: "Advanced",
+        General: "General",
+        Language: "Language",
+        Reset: "Reset",
         Local: "Local",
         Domestic: "Domestic",
         Location: "Location",
@@ -276,6 +289,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is",
           summaryMsg3: "You can check the status of your order on your",
           purchasesPage: "purchases page",
+          returnAddress: "Return Address",
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
           directPaymentTo: "Direct Payment to",
@@ -400,6 +414,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tipo",
         Condition: "Condici&oacute;n",
         NSFW: "18+ (contenido para adultos)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Local",
         Domestic: "Interno",
         Location: "Ubicaci&oacute;n",
@@ -542,6 +569,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -670,6 +698,19 @@ module.exports = Backbone.Model.extend({
         Type: "Typ",
         Condition: "Zustand",
         NSFW: "18+ (nicht jugendfreie Inhalte)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Lokal",
         Domestic: "Inland",
         Location: "Standort",
@@ -817,6 +858,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -946,6 +988,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tipo",
         Condition: "Condizione",
         NSFW: "18+ (Adult content)?",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Locale",
         Domestic: "Nazionale",
         Location: "Locazione",
@@ -1094,6 +1149,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
           summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
           purchasesPage: "pagina acquisti", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -1223,6 +1279,19 @@ module.exports = Backbone.Model.extend({
         Type: "Type",
         Condition: "Condition",
         NSFW: "18+ (Contenu adulte)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Local",
         Domestic: "National",
         Location: "Emplacement",
@@ -1371,6 +1440,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Le temps de traitement prévu pour cette commande est",
           summaryMsg3: "Vous pouvez vérifier le statut de votre commande sur votre",
           purchasesPage: "page d'achat", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -1499,6 +1569,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tip",
         Condition: "Condiție",
         NSFW: "18+ (Conținut pentru adulți)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Local",
         Domestic: "Domestic",
         Location: "Locație",
@@ -1646,6 +1729,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -1774,6 +1858,19 @@ module.exports = Backbone.Model.extend({
         Type: "Тип",
         Condition: "Состояние",
         NSFW: "18+ (для взрослых)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Местный",
         Domestic: "Внутри страны",
         Location: "Местонахождение",
@@ -1921,6 +2018,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Ожидаемое время обработки вашего заказа составляет",
           summaryMsg3: "Чтобы проверить статус вашего заказа, загляните в",
           purchasesPage: "интерфейс покупок", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -2048,6 +2146,19 @@ module.exports = Backbone.Model.extend({
         Type: "Typ",
         Condition: "Podmienka",
         NSFW: "18+ (obsah pre dospelých)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Lokálne",
         Domestic: "Vnútroštátne",
         Location: "Lokalita",
@@ -2195,6 +2306,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -2324,6 +2436,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tür",
         Condition: "Şart",
         NSFW: "18+ (Yetişkinlere yönelik içerik)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Yerel",
         Domestic: "Yurt içi",
         Location: "Konum",
@@ -2472,6 +2597,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Bu siparişin tahmini hazırlama süresi",
           summaryMsg3: "Siparişinizin durumunu kontrol edebileceğiniz yer",
           purchasesPage: "alımlar sayfası", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -2600,6 +2726,19 @@ module.exports = Backbone.Model.extend({
         Type: "Segh",
         Condition: "Je",
         NSFW: "Dochmey nen",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Lutu'llu'bej",
         Domestic: "JuH Dachegh Sep",
         Location: "NuqDaq SoH",
@@ -2747,6 +2886,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "PIH mIw Dunqu'mo' tlham",
           summaryMsg3: "LaH legh SoH tlham Dotlh",
           purchasesPage: "Tuq je'", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -2875,6 +3015,19 @@ module.exports = Backbone.Model.extend({
         Type: "形式",
         Condition: "新旧程度",
         NSFW: "成人内容",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "本地",
         Domestic: "本国",
         Location: "地点",
@@ -3022,6 +3175,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "这笔订单预计完成时间为",
           summaryMsg3: "到此查看您订单的状况",
           purchasesPage: "以购商品", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -3152,6 +3306,19 @@ module.exports = Backbone.Model.extend({
         Type: "종류",
         Condition: "상태",
         NSFW: "19+ (성인 콘텐츠)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "지역",
         Domestic: "국내",
         Location: "위치",
@@ -3300,6 +3467,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "이주문에 대한 예상 처리 시간",
           summaryMsg3: "당신은 당신의 주문상태를 확인할수 있다",
           purchasesPage: "지불 페이지", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated

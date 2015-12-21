@@ -21,14 +21,14 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
   customStyleTag.setAttribute('id', 'customStyle');
 
   // if text is white the highlight color needs to darken instead of lighten
-  if (textColor == 'undefined' || textColor == "#ffffff"){
+  if (primaryColor == 'undefined' || primaryColor == "#ffffff"){
     customStyleTag.innerHTML = "#ov1 #userPage .txtField:focus, " +
-        "#ov1 #userPage .fieldItem:focus, " +
-        "#ov1 #userPage .fieldItem-textarea:focus { outline: 1px solid " + shadeColor2("#ffffff", -0.5) + " ;}";
+    "#ov1 #userPage .fieldItem:focus, " +
+    "#ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + shadeColor2("#ffffff", -0.15) + " ;}";
   }else{
     customStyleTag.innerHTML = "#ov1 #userPage .txtField:focus, " +
-        "#ov1 #userPage .fieldItem:focus, " +
-        "#ov1 #userPage .fieldItem-textarea:focus { outline: 1px solid " + shadeColor2(textColor, 0.5) + " ;}";
+    "#ov1 #userPage .fieldItem:focus, " +
+    "#ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + shadeColor2(primaryColor, 0.15) + " ;}";
   }
 
   customStyleTag.innerHTML +=

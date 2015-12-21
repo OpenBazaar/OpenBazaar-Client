@@ -1874,7 +1874,7 @@ div.chatSearchOut .chatSearchIcon {
   height: 46px;
   font-weight: 500;
   line-height: 46px;
-  padding: 0 20px;
+  padding: 0 25px;
   margin-top: 4px;
   font-size: 14px;
 }
@@ -3799,8 +3799,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin: auto;
 }
 
+#ov1  .left0 {
+  left: 0;
+}
+
 #ov1  .top0 {
   top: 0;
+}
+
+#ov1  .top13 {
+  top: 13px;
 }
 
 #ov1  .top70 {
