@@ -783,7 +783,7 @@ label.fieldItem {
   top: 0;
   left: 0;
   /* use fadeIn and fadeOut to change opacity */
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1);
   padding-top: 25px;
   z-index: 1;
 }
@@ -1151,7 +1151,7 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
-  transition: left .25s cubic-bezier(0, 0, 0.2, 1);
+  transition: left .1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modal-hero {
