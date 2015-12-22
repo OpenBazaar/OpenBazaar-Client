@@ -51,7 +51,7 @@ module.exports = Backbone.Router.extend({
     if($('body').attr('id') != bodyClass){
       $('body').attr("id", bodyClass || "");
     }
-    $('#obContainer').removeClass("box-borderDashed"); //remove customization styling if present
+    $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     //clear address bar. This will be replaced on the user page

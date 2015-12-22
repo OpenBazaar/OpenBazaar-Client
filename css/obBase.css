@@ -1238,8 +1238,9 @@ h5 {
 }
 
 .box-borderDashed {
-  border: 4px dashed #fff;
+  border: 5px dashed #fff;
   box-sizing: border-box;
+  height: calc(100% - 50px) !important;
 }
 
 #obContainer.box-borderDashed {
@@ -2755,6 +2756,59 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #327EB8;
 }
 
+.customize-preview-fade {
+  opacity: .05 !important;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1) !important;
+}
+
+.customize-preview-text {
+  animation: customTextAnimation 2s infinite linear;
+}
+
+@-webkit-keyframes customTextAnimation {
+  0% {
+    color: rgba(255,255,255,1);
+  }
+  50% {
+    color: rgba(255,255,255,0);
+  }
+  100% {
+    color: rgba(255,255,255,1);
+  }
+}
+
+.animateOpacity1to0to1 {
+  animation: animateInToOutToIn 2.5s infinite linear !important;
+}
+
+.animateOpacity05to0to05 {
+  animation: animatePreviewBackground 2s infinite linear !important;
+}
+
+@-webkit-keyframes animatePreviewBackground {
+  0% {
+    opacity: .05;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: .05;
+  }
+}
+
+@-webkit-keyframes animateInToOutToIn {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .homeView {
   margin-top: 8px;
 }
@@ -3429,6 +3483,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
+#ov1  .textOpacity0 {
+  opacity: 0;
+}
+
 #ov1  .textOpacity25 {
   opacity: .25;
 }
@@ -3807,8 +3865,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 0;
 }
 
-#ov1  .top13 {
-  top: 13px;
+#ov1  .top11 {
+  top: 11px;
 }
 
 #ov1  .top70 {

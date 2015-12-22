@@ -123,6 +123,14 @@ module.exports = Backbone.View.extend({
     'click .js-follow': 'followUser',
     'click .js-unfollow': 'unfollowUser',
     'click .js-message': 'sendMessage',
+    'mouseenter .js-customizePrimaryColor .js-customizeColor': 'hoverCustomizePrimaryColor',
+    'mouseleave .js-customizePrimaryColor .js-customizeColor': 'blurCustomizePrimaryColor',
+    'mouseenter .js-customizeSecondaryColor .js-customizeColor': 'hoverCustomizeSecondaryColor',
+    'mouseleave .js-customizeSecondaryColor .js-customizeColor': 'blurCustomizeSecondaryColor',
+    'mouseenter .js-customizeBackgroundColor .js-customizeColor': 'hoverCustomizeBackgroundColor',
+    'mouseleave .js-customizeBackgroundColor .js-customizeColor': 'blurCustomizeBackgroundColor',
+    'mouseenter .js-customizeTextColor .js-customizeColor': 'hoverCustomizeTextColor',
+    'mouseleave .js-customizeTextColor .js-customizeColor': 'blurCustomizeTextColor',
     'change .js-categories': 'categoryChanged'
   },
 
@@ -378,6 +386,8 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
+    document.getElementById('obContainer').classList.remove("noScrollBar");
+    document.getElementById('obContainer').classList.remove("overflowHidden");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
@@ -388,6 +398,9 @@ module.exports = Backbone.View.extend({
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
         document.getElementById('obContainer').classList.add("box-borderDashed");
+        document.getElementById('obContainer').classList.add("noScrollBar");
+        document.getElementById('obContainer').classList.add("overflowHidden");
+
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
@@ -649,6 +662,59 @@ module.exports = Backbone.View.extend({
     $('.user-page-content').addClass('pull-up4');
     $('.user-page-header').addClass('shadow-inner1-strong');
     $('#obContainer').animate({ scrollTop: "0" });
+  },
+
+  hoverCustomizePrimaryColor: function(e) {
+    $('.custCol-primary').addClass('animateOpacity1to0to1');
+    $('.custCol-secondary').addClass('customize-preview-fade');
+    $('.js-tab.active').removeClass('customize-preview-fade');
+    $('.pageNavContainer').removeClass('customize-preview-fade');
+    $('#pageNav').removeClass('customize-preview-fade');
+    $('.pageNavContainer').addClass('custCol-background');
+    $('.user-page-header').addClass('customize-preview-fade');
+    $('.js-pageCustomizationButtons').addClass('customize-preview-fade');
+  },
+
+  blurCustomizePrimaryColor: function(e) {
+    $('.custCol-primary').removeClass('animateOpacity1to0to1');
+    $('.custCol-secondary').removeClass('customize-preview-fade');
+    $('.pageNavContainer').removeClass('custCol-background');
+    $('.user-page-header').removeClass('customize-preview-fade');
+    $('.js-pageCustomizationButtons').removeClass('customize-preview-fade');
+  },
+
+  hoverCustomizeSecondaryColor: function(e) {
+    $('.custCol-secondary').addClass('animateOpacity1to0to1');
+    $('.custCol-primary').addClass('customize-preview-fade');
+    $('.banner-large').addClass('customize-preview-fade');
+    $('.user-page-header').addClass('customize-preview-fade');
+    $('.user-page-navigation').removeClass('customize-preview-fade');
+    $('.js-userPageBanner').removeClass('animateOpacity1to0to1');
+  },
+
+  blurCustomizeSecondaryColor: function(e) {
+    $('.custCol-secondary').removeClass('animateOpacity1to0to1');
+    $('.custCol-primary').removeClass('customize-preview-fade');
+    $('.banner-large').removeClass('customize-preview-fade');
+    $('.btn-tab.active').removeClass('customize-preview-fade')
+  },
+
+  hoverCustomizeBackgroundColor: function(e) {
+    $('#content').addClass('animateOpacity05to0to05');
+    // $('#content').addClass('customize-preview-fade');
+  },
+
+  blurCustomizeBackgroundColor: function(e) {
+    $('#content').removeClass('animateOpacity05to0to05');
+    // $('#content').removeClass('customize-preview-fade');
+  },
+
+  hoverCustomizeTextColor: function(e) {
+    $('.custCol-text').addClass('customize-preview-text');
+  },
+
+  blurCustomizeTextColor: function(e) {
+    $('.custCol-text').removeClass('customize-preview-text');
   },
 
   customizeColorClick: function(e) {

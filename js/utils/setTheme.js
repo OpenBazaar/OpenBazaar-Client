@@ -32,13 +32,13 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
   }
 
   customStyleTag.innerHTML +=
-      "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + shadeColor2(primaryColor, 0.05) + ";}" +
       "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primaryColor + ";}" +
       "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primaryColor + ";}" +
       "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + shadeColor2(primaryColor, -0.35) +  ";}" +
       "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
       "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + secondaryColor + ";}" +
+      "#ov1 #userPage { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, 0.1) + ";}" +
       "#ov1 #userPage .custCol-border-secondary { border-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-border-primary { border-color: " + primaryColor + ";}" +
@@ -72,6 +72,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + shadeColor2(backgroundColor, 0.25) + ";}" +
       "#ov1 #userPage .customThemeScrollbar::-webkit-scrollbar-thumb { background: " + shadeColor2(primaryColor, 0.25) + ";}" +
       "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", .50);}" +
+      "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
     // colorbox stuffs
