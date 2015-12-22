@@ -385,6 +385,7 @@ module.exports = Backbone.View.extend({
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
+    this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     document.getElementById('obContainer').classList.remove("noScrollBar");
     document.getElementById('obContainer').classList.remove("overflowHidden");
@@ -397,6 +398,7 @@ module.exports = Backbone.View.extend({
       } else if(state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
+        this.$el.find('.user-page-header-slim-bg-cover').addClass('user-page-header-slim-bg-cover-customize');
         document.getElementById('obContainer').classList.add("box-borderDashed");
         document.getElementById('obContainer').classList.add("noScrollBar");
         document.getElementById('obContainer').classList.add("overflowHidden");

@@ -2899,6 +2899,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 4;
   width: 950px;
 }
+.user-page-header-slim-bg-cover-customize {
+  position: fixed;
+  top: 55px;
+  height: 15px;
+  z-index: 4;
+  width: 950px;
+}
 
 .userPage-subViews {
   position: relative;
