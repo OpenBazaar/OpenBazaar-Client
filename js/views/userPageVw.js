@@ -675,6 +675,7 @@ module.exports = Backbone.View.extend({
     $('.pageNavContainer').addClass('custCol-background');
     $('.user-page-header').addClass('customize-preview-fade');
     $('.js-pageCustomizationButtons').addClass('customize-preview-fade');
+    $('.mainSearchWrapper').addClass('hide');
   },
 
   blurCustomizePrimaryColor: function(e) {
@@ -683,6 +684,8 @@ module.exports = Backbone.View.extend({
     $('.pageNavContainer').removeClass('custCol-background');
     $('.user-page-header').removeClass('customize-preview-fade');
     $('.js-pageCustomizationButtons').removeClass('customize-preview-fade');
+    $('.js-navAddressBar').removeClass('customize-preview-fade');
+    $('.mainSearchWrapper').removeClass('hide');
   },
 
   hoverCustomizeSecondaryColor: function(e) {
@@ -690,8 +693,10 @@ module.exports = Backbone.View.extend({
     $('.custCol-primary').addClass('customize-preview-fade');
     $('.banner-large').addClass('customize-preview-fade');
     $('.user-page-header').addClass('customize-preview-fade');
+    $('.user-page-header-slim').addClass('hide');
     $('.user-page-navigation').removeClass('customize-preview-fade');
     $('.js-userPageBanner').removeClass('animateOpacity1to0to1');
+    $('.mainSearchWrapper').addClass('hide');
   },
 
   blurCustomizeSecondaryColor: function(e) {
@@ -699,15 +704,19 @@ module.exports = Backbone.View.extend({
     $('.custCol-primary').removeClass('customize-preview-fade');
     $('.banner-large').removeClass('customize-preview-fade');
     $('.btn-tab.active').removeClass('customize-preview-fade')
+    $('.user-page-header-slim').removeClass('hide');
+    $('.mainSearchWrapper').removeClass('hide');
   },
 
   hoverCustomizeBackgroundColor: function(e) {
     $('.mainContainer').addClass('animateOpacity05to0to05');
+    // $('#pageNav').addClass('hide');
     // $('#content').addClass('customize-preview-fade');
   },
 
   blurCustomizeBackgroundColor: function(e) {
     $('.mainContainer').removeClass('animateOpacity05to0to05');
+    // $('#pageNav').removeClass('hide');
     // $('#content').removeClass('customize-preview-fade');
   },
 

@@ -1233,8 +1233,13 @@ h5 {
 }
 
 .box-borderBright {
-  border: 1px solid #fff;
+  border: 1px solid rbga(255,255,255,.5);
   box-sizing: border-box;
+}
+
+.box-borderBright:hover {
+  border: 1px solid rbga(255,255,255,1);
+
 }
 
 .box-borderDashed {
@@ -1995,6 +2000,12 @@ div.chatSearchOut .chatSearchIcon {
 .btn-square {
   width: 44px;
   height: 44px;
+  opacity: .75;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn-square:hover {
+  opacity: 1;
 }
 
 .btn-squareSm {
@@ -2799,13 +2810,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 @-webkit-keyframes animateInToOutToIn {
   0% {
-    opacity: 0;
+    opacity: .05;
   }
   50% {
     opacity: 1;
   }
   100% {
-    opacity: 0;
+    opacity: .05;
   }
 }
 
