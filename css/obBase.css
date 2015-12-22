@@ -2787,25 +2787,25 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 @-webkit-keyframes animatePreviewBackground {
   0% {
-    opacity: .05;
+    opacity: .0;
   }
   50% {
-    opacity: 0;
+    opacity: .05;
   }
   100% {
-    opacity: .05;
+    opacity: .0;
   }
 }
 
 @-webkit-keyframes animateInToOutToIn {
   0% {
-    opacity: 1;
-  }
-  50% {
     opacity: 0;
   }
-  100% {
+  50% {
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
