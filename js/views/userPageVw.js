@@ -702,12 +702,12 @@ module.exports = Backbone.View.extend({
   },
 
   hoverCustomizeBackgroundColor: function(e) {
-    $('#content').addClass('animateOpacity05to0to05');
+    $('.mainContainer').addClass('animateOpacity05to0to05');
     // $('#content').addClass('customize-preview-fade');
   },
 
   blurCustomizeBackgroundColor: function(e) {
-    $('#content').removeClass('animateOpacity05to0to05');
+    $('.mainContainer').removeClass('animateOpacity05to0to05');
     // $('#content').removeClass('customize-preview-fade');
   },
 
