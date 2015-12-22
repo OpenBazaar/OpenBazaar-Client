@@ -183,8 +183,8 @@ module.exports = Backbone.View.extend({
       self.subViews.push(self.countryList);
       self.subViews.push(self.currencyList);
       self.subViews.push(self.languageList);
-      if(localStorage.getItem("onboardingComplete") === "true") {
-      self.$el.find('.js-homeModal').hide();
+      if(localStorage.getItem("onboardingComplete") != "true") {
+      self.$el.find('.js-homeModal').removeClass("hide");
       }
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
