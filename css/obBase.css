@@ -2202,6 +2202,39 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding-left: 50px;
 }
 
+.numberSpinnerUp,
+.numberSpinnerDown {
+  cursor: pointer;
+  width: 18px;
+  position: absolute;
+  right: 0;
+  box-sizing: border-box;
+  font-family: "Ionicons";
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  background-color: rgba(140,140,140,0.2);
+  margin: 4px;
+}
+
+.numberSpinnerUp {
+  top: 0;
+}
+
+.numberSpinnerUp:before {
+  content: "\f10d";
+}
+
+.numberSpinnerDown {
+  bottom: 0;
+}
+
+.numberSpinnerDown:before {
+  content: "\f104";
+}
+
+/*
 input[type="number"].fieldItem.spinButtons {
   background: none;
   box-sizing: border-box;
@@ -2244,6 +2277,7 @@ input[type="number"].fieldItem.spinButtons:focus {
   border: none;
   outline: none;
 }
+*/
 
 .fieldItem .btn {
   margin-top: 9px;
