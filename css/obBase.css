@@ -2789,11 +2789,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .animateOpacity1to0to1 {
-  animation: animateInToOutToIn 2.5s infinite linear !important;
+  animation: animateInToOutToIn 1.75s infinite linear !important;
 }
 
 .animateOpacity05to0to05 {
-  animation: animatePreviewBackground 2s infinite linear !important;
+  animation: animatePreviewBackground 1.5s infinite linear !important;
 }
 
 @-webkit-keyframes animatePreviewBackground {
@@ -3147,10 +3147,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #customizeControls {
   position: fixed;
-  left: 40px;
+  left: 30px;
   top: 80px;
   width: 40px;
   z-index: 100;
+}
+
+#customizeControls .js-customizePrimaryColor .btn-square {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+#customizeControls .js-customizeTextColor .btn-square {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 #customizeControls .btn-square {
@@ -3159,23 +3169,26 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 40px;
   height: 40px;
   border: solid 2px #fff;
+  border-radius: 0;
+  border-bottom: 0;
 }
 
 .customizeSecondaryColorRecommendations {
   position: absolute;
-  left: 53px;
+  left: 40px;
   background: #252525;
-  width: 284px;
+  width: 270px;
   height: 50px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  line-height: 36px;
+  padding: 7px;
+  border-radius: 0;
 }
 
 .customizeSecondaryColorChoices .colorChoice {
-  width: 40px;
-  height: 50px;
+  width: 34px;
+  height: 34px;
   float: left;
-  margin-right: 10px;
+  margin-right: 6px;
 }
 
 .interactiveTooltip {
@@ -3190,7 +3203,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 11px;
   text-align: center;
   line-height: 20px;
-  top: 6px;
+  top: 8px;
   opacity: .9;
 }
 
@@ -3283,6 +3296,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 /* protect customize controls from custom page styles */
+#ov1 #customizeControls .labelWrap {
+  height: 40px;
+  border-radius: 0;
+}
+
 #ov1 #customizeControls .labelWrap input {
   color: rgba(255,255,255,0.6);
 }
@@ -3293,6 +3311,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #252525;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+}
+
+.colpick-customizeColor {
+  left: 70px !important; /* I want to override the inline styles on the colpick element */
 }
 
 #ov1 .colpick input {
