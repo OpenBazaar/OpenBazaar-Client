@@ -131,7 +131,6 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    // 'click .js-customizeColor': 'customizeColorClick',
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUser',
     'click .js-unfollow': 'unfollowUser',
@@ -139,8 +138,9 @@ module.exports = Backbone.View.extend({
     'click .js-customizeSecondaryColor': 'clickCustomizeSecondaryColor',
     'click .js-customizePrimaryColor': 'clickCustomizePrimaryColor',
     'click .js-customizeBackgroundColor': 'clickCustomizeBackgroundColor',
-    'click .js-customColorChoice': 'clickCustomColorChoice',
-    'mouseenter .js-customizePrimaryColor .js-customizeColor': 'hoverCustomizePrimaryColor',
+    // 'mouseenter .js-customizeColor': 'customizeColorClick',
+    'mouseenter .js-customColorChoice': 'clickCustomColorChoice',
+    'mouseenter .js-customizePrimaryColor .js-customizeColor': 'customizeColorClick',
     'mouseleave .js-customizePrimaryColor .js-customizeColor': 'blurCustomizePrimaryColor',
     'mouseenter .js-customizeSecondaryColor .js-customizeColor': 'hoverCustomizeSecondaryColor',
     'mouseleave .js-customizeSecondaryColor .js-customizeColor': 'blurCustomizeSecondaryColor',
@@ -148,6 +148,7 @@ module.exports = Backbone.View.extend({
     'mouseleave .js-customizeBackgroundColor .js-customizeColor': 'blurCustomizeBackgroundColor',
     'mouseenter .js-customizeTextColor .js-customizeColor': 'hoverCustomizeTextColor',
     'mouseleave .js-customizeTextColor .js-customizeColor': 'blurCustomizeTextColor',
+    'mouseleave .js-customizeColorRecommendations': 'blurColorRecommendations',
     'change .js-categories': 'categoryChanged'
   },
 
@@ -683,13 +684,17 @@ module.exports = Backbone.View.extend({
     $('#obContainer').animate({ scrollTop: "0" });
   },
 
+  blurColorRecommendations: function(e) {
+    "use strict";
+    $('.js-customizeColorRecommendations').removeClass('width250');
+  },
+
   clickCustomColorChoice: function(e) {
     "use strict";
     e.preventDefault();
     e.stopPropagation();
 
     var colorKey = $(e.currentTarget).data('colorKey');
-    console.log(colorKey);
 
     $('.js-customColorChoice').removeClass('outline2')
     $(e.currentTarget).addClass('outline2');
@@ -708,28 +713,12 @@ module.exports = Backbone.View.extend({
     }else{
       // $('.js-customizePrimaryColor .js-customizeColor').trigger('mouseleave');
       $('.customColorChoice').css('background','#fff');
-      $('.changeTooltip').hide();
-
-      // set recommendations
-      $('.customizePrimaryColorRecommendations .js-customColorChoice1').css('background', '#C44941'); 
-      $('.customizePrimaryColorRecommendations .js-customColorChoice2').css('background', '#BE9364');
-      $('.customizePrimaryColorRecommendations .js-customColorChoice3').css('background', '#8CBE64');
-      $('.customizePrimaryColorRecommendations .js-customColorChoice4').css('background', '#000000');
-      $('.customizePrimaryColorRecommendations .js-customColorChoice5').css('background', '#ffffff');
-      $('.customizePrimaryColorRecommendations .js-customColorChoice6').css('background', '#ffffff');
-      
-      // slide background_color recommendations out + hide others
-      $('.customizePrimaryColorRecommendations').addClass('width250');
-      $('.customizeSecondaryColorRecommendations').removeClass('width250');
-      $('.customizeBackgroundColorRecommendations').removeClass('width250');
-      $('.customizeTextColorRecommendations').removeClass('width250');
     }
   },
 
   clickCustomizeBackgroundColor: function(e) {
     "use strict";
     e.preventDefault();
-    var secondaryColor = this.model.get('page').profile.secondary_color;
 
     // if background_color recommendations already open
     if ($('.customizeBackgroundColorRecommendations').hasClass('width250')){
@@ -738,28 +727,12 @@ module.exports = Backbone.View.extend({
     }else{
       // $('.js-customizeBackgroundColor .js-customizeColor').trigger('mouseleave');
       $('.customColorChoice').css('background','#fff');
-      $('.changeTooltip').hide();
-
-      // set recommendations
-      $('.customizeBackgroundColorRecommendations .js-customColorChoice1').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
-      $('.customizeBackgroundColorRecommendations .js-customColorChoice2').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
-      $('.customizeBackgroundColorRecommendations .js-customColorChoice3').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
-      $('.customizeBackgroundColorRecommendations .js-customColorChoice4').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
-      $('.customizeBackgroundColorRecommendations .js-customColorChoice5').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
-      $('.customizeBackgroundColorRecommendations .js-customColorChoice6').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
-      
-      // slide background_color recommendations out + hide others
-      $('.customizeBackgroundColorRecommendations').addClass('width250');
-      $('.customizeSecondaryColorRecommendations').removeClass('width250');
-      $('.customizePrimaryColorRecommendations').removeClass('width250');
-      $('.customizeTextColorRecommendations').removeClass('width250');
     }
   },
 
   clickCustomizeSecondaryColor: function(e) {
     "use strict";
     e.preventDefault();
-    var primaryColor = this.model.get('page').profile.primary_color;
 
     // if secondary_color recommendations already open
     if ($('.customizeSecondaryColorRecommendations').hasClass('width250')){
@@ -768,38 +741,13 @@ module.exports = Backbone.View.extend({
     }else{
       // $('.js-customizeSecondaryColor .js-customizeColor').trigger('mouseleave');
       $('.customColorChoice').css('background','#fff');
-      $('.changeTooltip').hide();
-
-      // set recommendations
-      $('.customizeSecondaryColorRecommendations .js-customColorChoice1').css('background', shadeColor2(primaryColor, -0.20)); // 20% lighter than primary_color
-      $('.customizeSecondaryColorRecommendations .js-customColorChoice2').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
-      $('.customizeSecondaryColorRecommendations .js-customColorChoice3').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
-      $('.customizeSecondaryColorRecommendations .js-customColorChoice4').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
-      $('.customizeSecondaryColorRecommendations .js-customColorChoice5').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
-      $('.customizeSecondaryColorRecommendations .js-customColorChoice6').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
-      
-      // slide secondary_color recommendations out + hide others
-      $('.customizeBackgroundColorRecommendations').removeClass('width250');
-      $('.customizeSecondaryColorRecommendations').addClass('width250');
-      $('.customizePrimaryColorRecommendations').removeClass('width250');
-      $('.customizeTextColorRecommendations').removeClass('width250');
     }
   },
 
   hoverCustomizePrimaryColor: function(e) {
     "use strict";
 
-    // if click to change tooltip is visible move it down to the primary_color
-    if ($('.changeTooltip').is(':visible')){
-      $('.changeTooltip').hide();
-      $('.js-customizePrimaryColor').find('.changeTooltip').first().show();
-    }
-
-    if (this.$el.find('.seeTooltip').is(':visible')){
-      this.$el.find('.seeTooltip').hide();
-      this.$el.find('.changeTooltip').first().show();
-    }
-
+    // things to set in the dom
     $('.custCol-primary').addClass('animateOpacity1to0to1');
     $('.custCol-secondary').addClass('customize-preview-fade');
     $('.js-tab.active').removeClass('customize-preview-fade');
@@ -810,6 +758,16 @@ module.exports = Backbone.View.extend({
     $('.js-pageCustomizationButtons').addClass('customize-preview-fade');
     $('.mainSearchWrapper').addClass('hide');
     $('#obContainer').removeClass('box-borderDashed');
+    $('.seeTooltip').hide();
+
+    // set recommendations
+
+
+    // slide background_color recommendations out + hide others
+    $('.customizePrimaryColorRecommendations').addClass('width250');
+    $('.customizeSecondaryColorRecommendations').removeClass('width250');
+    $('.customizeBackgroundColorRecommendations').removeClass('width250');
+    $('.customizeTextColorRecommendations').removeClass('width250');
   },
 
   blurCustomizePrimaryColor: function(e) {
@@ -827,13 +785,9 @@ module.exports = Backbone.View.extend({
 
   hoverCustomizeSecondaryColor: function(e) {
     "use strict";
+    var primaryColor = this.model.get('page').profile.primary_color;
 
-    // if click to change tooltip is visible move it down to the secondary_color
-    if ($('.changeTooltip').is(':visible')){
-      $('.changeTooltip').hide();
-      $('.js-customizeSecondaryColor').find('.changeTooltip').first().show();
-    }
-
+    // things to set in the dom
     $('.custCol-secondary').addClass('animateOpacity1to0to1');
     $('.custCol-primary').addClass('customize-preview-fade');
     $('.banner-large').addClass('customize-preview-fade');
@@ -843,6 +797,21 @@ module.exports = Backbone.View.extend({
     $('.js-userPageBanner').removeClass('animateOpacity1to0to1');
     $('.mainSearchWrapper').addClass('hide');
     $('#obContainer').removeClass('box-borderDashed');
+
+    // set recommendations
+    $('.customColorChoice').css('background','#fff');
+    $('.customizeSecondaryColorRecommendations .js-customColorChoice1').css('background', shadeColor2(primaryColor, -0.20)); // 20% lighter than primary_color
+    $('.customizeSecondaryColorRecommendations .js-customColorChoice2').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
+    $('.customizeSecondaryColorRecommendations .js-customColorChoice3').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
+    $('.customizeSecondaryColorRecommendations .js-customColorChoice4').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
+    $('.customizeSecondaryColorRecommendations .js-customColorChoice5').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
+    $('.customizeSecondaryColorRecommendations .js-customColorChoice6').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
+
+    // slide secondary_color recommendations out + hide others
+    $('.customizePrimaryColorRecommendations').removeClass('width250');
+    $('.customizeSecondaryColorRecommendations').addClass('width250');
+    $('.customizeBackgroundColorRecommendations').removeClass('width250');
+    $('.customizeTextColorRecommendations').removeClass('width250');
 
   },
 
@@ -860,16 +829,27 @@ module.exports = Backbone.View.extend({
 
   hoverCustomizeBackgroundColor: function(e) {
     "use strict";
+    var secondaryColor = this.model.get('page').profile.secondary_color;
 
-    // if click to change tooltip is visible move it down to the background_color
-    if ($('.changeTooltip').is(':visible')){
-      $('.changeTooltip').hide();
-      $('.js-customizeBackgroundColor').find('.changeTooltip').first().show();
-    }
-
+    // things to set in the dom
     $('.mainContainer').addClass('animateOpacity05to0to05');
     $('#pageNav').addClass('customize-preview-fade');
     $('#obContainer').removeClass('box-borderDashed');
+
+    // set recommendations
+    $('.customColorChoice').css('background','#fff');
+    $('.customizeBackgroundColorRecommendations .js-customColorChoice1').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
+    $('.customizeBackgroundColorRecommendations .js-customColorChoice2').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
+    $('.customizeBackgroundColorRecommendations .js-customColorChoice3').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
+    $('.customizeBackgroundColorRecommendations .js-customColorChoice4').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
+    $('.customizeBackgroundColorRecommendations .js-customColorChoice5').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
+    $('.customizeBackgroundColorRecommendations .js-customColorChoice6').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
+
+    // slide background_color recommendations out + hide others
+    $('.customizePrimaryColorRecommendations').removeClass('width250');
+    $('.customizeSecondaryColorRecommendations').removeClass('width250');
+    $('.customizeBackgroundColorRecommendations').addClass('width250');
+    $('.customizeTextColorRecommendations').removeClass('width250');
   },
 
   blurCustomizeBackgroundColor: function(e) {
@@ -883,13 +863,18 @@ module.exports = Backbone.View.extend({
   hoverCustomizeTextColor: function(e) {
     "use strict";
 
-    // if click to change tooltip is visible move it down to the text_color
-    if ($('.changeTooltip').is(':visible')){
-      $('.changeTooltip').hide();
-      $('.js-customizeTextColor').find('.changeTooltip').first().show();
-    }
-
     $('.custCol-text').addClass('customize-preview-text');
+
+    // set recommendations
+    $('.customColorChoice').css('background','#fff');
+    $('.customizeTextColorRecommendations .js-customColorChoice1').css('background', '#ffffff'); 
+    $('.customizeTextColorRecommendations .js-customColorChoice2').css('background', '#000000');
+
+    // slide background_color recommendations out + hide others
+    $('.customizePrimaryColorRecommendations').removeClass('width250');
+    $('.customizeSecondaryColorRecommendations').removeClass('width250');
+    $('.customizeBackgroundColorRecommendations').removeClass('width250');
+    $('.customizeTextColorRecommendations').addClass('width250');
   },
 
   blurCustomizeTextColor: function(e) {
@@ -904,7 +889,6 @@ module.exports = Backbone.View.extend({
         colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
         colorKey = colorInput.attr('id'),
         newColor = this.model.get('page').profile[colorKey].slice(1);
-    this.$el.find('.changeTooltip').hide();
     colorInput.colpick({
       layout: "rgbhex", //can also be full, or hex
       colorScheme: "dark", //can also be light
