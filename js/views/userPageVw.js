@@ -100,6 +100,11 @@ var defaultItem = {
   }
 };
 
+function shadeColor2(color, percent) {
+  var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+  return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+}
+
 module.exports = Backbone.View.extend({
 
   classname: "userView",
@@ -123,6 +128,7 @@ module.exports = Backbone.View.extend({
     'click .js-follow': 'followUser',
     'click .js-unfollow': 'unfollowUser',
     'click .js-message': 'sendMessage',
+    'click .js-customizeSecondaryColor': 'clickCustomizeSecondaryColor',
     'mouseenter .js-customizePrimaryColor .js-customizeColor': 'hoverCustomizePrimaryColor',
     'mouseleave .js-customizePrimaryColor .js-customizeColor': 'blurCustomizePrimaryColor',
     'mouseenter .js-customizeSecondaryColor .js-customizeColor': 'hoverCustomizeSecondaryColor',
@@ -666,6 +672,23 @@ module.exports = Backbone.View.extend({
     $('#obContainer').animate({ scrollTop: "0" });
   },
 
+  clickCustomizeSecondaryColor: function(e) {
+    "use strict";
+    var recommendations = [];
+    var primaryColor = this.model.get('page').profile.primary_color;
+
+    recommendations.push(shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
+    recommendations.push(shadeColor2(primaryColor, -0.2)); // 20% darker than primary_color
+    recommendations.push(shadeColor2(primaryColor, -0.3)); // 30% darker than primary_color
+    recommendations.push(shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
+    recommendations.push(shadeColor2(primaryColor, 0.2)); // 20% darker than primary_color
+    recommendations.push(shadeColor2(primaryColor, 0.3)); // 30% darker than primary_color
+
+    __.each(recommendations, function(recommendation) {
+      $('.js-customizeSecondaryColorChoices').append('<div class="colorChoice" style="background: red"></div>');
+    });
+  },
+
   hoverCustomizePrimaryColor: function(e) {
     $('.custCol-primary').addClass('animateOpacity1to0to1');
     $('.custCol-secondary').addClass('customize-preview-fade');
@@ -676,6 +699,9 @@ module.exports = Backbone.View.extend({
     $('.user-page-header').addClass('customize-preview-fade');
     $('.js-pageCustomizationButtons').addClass('customize-preview-fade');
     $('.mainSearchWrapper').addClass('hide');
+    $('#obContainer').removeClass('box-borderDashed');
+    this.$el.find('.seeTooltip').hide();
+    this.$el.find('.changeTooltip').show();
   },
 
   blurCustomizePrimaryColor: function(e) {
@@ -686,6 +712,7 @@ module.exports = Backbone.View.extend({
     $('.js-pageCustomizationButtons').removeClass('customize-preview-fade');
     $('.js-navAddressBar').removeClass('customize-preview-fade');
     $('.mainSearchWrapper').removeClass('hide');
+    $('#obContainer').addClass('box-borderDashed');
   },
 
   hoverCustomizeSecondaryColor: function(e) {
@@ -697,6 +724,7 @@ module.exports = Backbone.View.extend({
     $('.user-page-navigation').removeClass('customize-preview-fade');
     $('.js-userPageBanner').removeClass('animateOpacity1to0to1');
     $('.mainSearchWrapper').addClass('hide');
+    $('#obContainer').removeClass('box-borderDashed');
   },
 
   blurCustomizeSecondaryColor: function(e) {
@@ -706,18 +734,17 @@ module.exports = Backbone.View.extend({
     $('.btn-tab.active').removeClass('customize-preview-fade')
     $('.user-page-header-slim').removeClass('hide');
     $('.mainSearchWrapper').removeClass('hide');
+    $('#obContainer').addClass('box-borderDashed');
   },
 
   hoverCustomizeBackgroundColor: function(e) {
     $('.mainContainer').addClass('animateOpacity05to0to05');
-    // $('#pageNav').addClass('hide');
-    // $('#content').addClass('customize-preview-fade');
+    $('#obContainer').removeClass('box-borderDashed');
   },
 
   blurCustomizeBackgroundColor: function(e) {
     $('.mainContainer').removeClass('animateOpacity05to0to05');
-    // $('#pageNav').removeClass('hide');
-    // $('#content').removeClass('customize-preview-fade');
+    $('#obContainer').addClass('box-borderDashed');
   },
 
   hoverCustomizeTextColor: function(e) {
@@ -735,13 +762,15 @@ module.exports = Backbone.View.extend({
         colorKey = colorInput.attr('id'),
         newColor = this.model.get('page').profile[colorKey].slice(1);
     $(e.target).closest('.positionWrapper').find('.labelWrap').addClass('fadeIn');
+    this.$el.find('.changeTooltip').hide();
     colorInput.colpick({
       layout: "rgbhex", //can also be full, or hex
       colorScheme: "dark", //can also be light
-      submitText: "Change",
+      submitText: "Submit",
       onShow: function(el) {
         var colorKey = $(this).attr('id');
         $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
+        $('.customizeSecondaryColorRecommendations').show();
       },
       onSubmit: function(hsb, hex, rgb, el, visible) {
         self.setCustomColor(hex, $(el).attr('id'));
@@ -753,6 +782,7 @@ module.exports = Backbone.View.extend({
       },
       onHide: function(){
         $('.labelWrap').removeClass('fadeIn');
+        $('.customizeSecondaryColorRecommendations').hide();
       }
     });
     colorInput.colpickSetColor(newColor, true);

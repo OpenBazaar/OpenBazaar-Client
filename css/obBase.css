@@ -3161,6 +3161,44 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border: solid 2px #fff;
 }
 
+.customizeSecondaryColorRecommendations {
+  position: absolute;
+  left: 53px;
+  background: #252525;
+  width: 284px;
+  height: 50px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.customizeSecondaryColorChoices .colorChoice {
+  width: 40px;
+  height: 50px;
+  float: left;
+  margin-right: 10px;
+}
+
+.interactiveTooltip {
+  height: 20px;
+  display: inline-block;
+  padding: 4px 10px;
+  background: #252525;
+  color: #fff;
+  position: absolute;
+  left: 37px;
+  border-radius: 4px;
+  font-size: 11px;
+  text-align: center;
+  line-height: 20px;
+  top: 6px;
+  opacity: .9;
+}
+
+.interactiveTooltip div {
+  position: relative;
+  display: inline-block;
+}
+
 .headerCropper.banner-large,
 .headerCropperPreview.banner-large {
   width: 950px;
@@ -3251,6 +3289,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .colpick {
   z-index: 10;
+  border-radius: 0;
+  background: #252525;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 #ov1 .colpick input {

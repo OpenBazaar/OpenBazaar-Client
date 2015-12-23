@@ -17,7 +17,7 @@
     <input id="headerImageInput" type="file" class="cropit-image-input hide" />
     <div class="bar navBar barFlush user-page-navigation positionBottom">
       <div class="navEnd pad10">
-        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide textOpacity75">
+        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
         </div>
         <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
@@ -330,6 +330,8 @@
 
 <div id="customizeControls" class="hide">
   <div class="positionWrapper js-customizePrimaryColor">
+    <div class="interactiveTooltip seeTooltip"><div class="noOverflow">Hover to see</div></div>
+    <div class="interactiveTooltip changeTooltip hide"><div class="noOverflow">Click to change</div></div>
     <label class="btn btn-square btn-corner btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="primary_color"></label>
     <div class="labelWrap row5 fade">
       <div><%= polyglot.t('PrimaryColor') %></div>
@@ -337,6 +339,10 @@
     </div>
   </div>
   <div class="positionWrapper js-customizeSecondaryColor">
+    <div class="customizeSecondaryColorRecommendations hide">
+      <span class="">Try</span>
+      <div class="customizeSecondaryColorChoices js-customizeSecondaryColorChoices"></div>
+    </div>
     <label class="btn btn-square btn-corner btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="secondary_color"></label>
     <div class="labelWrap row5 fade">
       <div><%= polyglot.t('SecondaryColor') %></div>
