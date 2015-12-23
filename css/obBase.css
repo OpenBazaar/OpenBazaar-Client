@@ -2102,7 +2102,6 @@ div.chatSearchOut .chatSearchIcon {
   border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.6);
   transition: opacity 1s;
-  width: 185px;
 }
 
 .labelWrap.fade {
@@ -2789,11 +2788,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .animateOpacity1to0to1 {
-  animation: animateInToOutToIn 1.75s infinite linear !important;
+  /*animation: animateInToOutToIn 1.75s infinite linear !important;*/
+  opacity: 1;
 }
 
 .animateOpacity05to0to05 {
-  animation: animatePreviewBackground 1.5s infinite linear !important;
+  /*animation: animatePreviewBackground 1.5s infinite linear !important;*/
+  opacity: .05;
 }
 
 @-webkit-keyframes animatePreviewBackground {
@@ -2810,13 +2811,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 @-webkit-keyframes animateInToOutToIn {
   0% {
-    opacity: .05;
+    opacity: .25;
   }
   50% {
     opacity: 1;
   }
   100% {
-    opacity: .05;
+    opacity: .25;
   }
 }
 
@@ -3173,22 +3174,43 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 0;
 }
 
-.customizeSecondaryColorRecommendations {
+.customizePrimaryColorRecommendations,
+.customizeSecondaryColorRecommendations,
+.customizeBackgroundColorRecommendations {
   position: absolute;
-  left: 40px;
+  left: 36px;
   background: #252525;
-  width: 270px;
-  height: 50px;
+  width: 0;
+  top: 1px;
+  height: 36px;
   line-height: 36px;
-  padding: 7px;
+  padding: 2px;
   border-radius: 0;
+  overflow: hidden;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  transition: width .35s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.customizeSecondaryColorChoices .colorChoice {
-  width: 34px;
-  height: 34px;
+.customColorChoice {
+  background: #fff;
+  width: 30px;
+  height: 30px;
   float: left;
-  margin-right: 6px;
+  margin-right: 5px;
+  margin-top: 3px;
+  cursor: pointer;
+  z-index: 5;
+  border-radius: 1px;
+  transition: background .85s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.customColorChoice:nth-child(6) {
+  margin-right: 0;
+}
+
+.customColorChoice:hover {
+  outline: 2px solid #ccc;
 }
 
 .interactiveTooltip {
@@ -3536,6 +3558,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .border0 {
   border: 0;
+}
+
+#ov1  .outline2 {
+  outline: 2px solid #fff;
 }
 
 #ov1  .borderRadiusTop {
@@ -4169,6 +4195,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 360px;
 }
 
+#ov1 .width40 {
+  width: 40px;
+}
+
 #ov1 .width46px {
   width: 46px;
 }
@@ -4198,6 +4228,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width260 {
   width: 260px;
+}
+
+#ov1 .width250 {
+  width: 250px;
 }
 
 #ov1 .width600 {
