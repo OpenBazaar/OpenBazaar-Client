@@ -63,6 +63,17 @@ window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.la
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
 
+// fix zoom issue on Linux hiDPI
+var platform = process.platform;
+
+if(platform === "linux") {
+  var scaleFactor = require('screen').getPrimaryDisplay().scaleFactor;
+  if (scaleFactor === 0) {
+      scaleFactor = 1;
+  }
+  $("body").css("zoom", 1 / scaleFactor);
+}
+
 //record changes to the app state
 $(window).bind('hashchange', function(){
   "use strict";
