@@ -177,15 +177,16 @@ module.exports = Backbone.View.extend({
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      if(localStorage.getItem("onboardingComplete") != "true") {
+        self.$el.find('.js-homeModal').removeClass("hide");
+      }
       self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
       self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
       self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
       self.subViews.push(self.countryList);
       self.subViews.push(self.currencyList);
       self.subViews.push(self.languageList);
-      if(localStorage.getItem("onboardingComplete") != "true") {
-      self.$el.find('.js-homeModal').removeClass("hide");
-      }
+
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
         socketView: self.socketView,

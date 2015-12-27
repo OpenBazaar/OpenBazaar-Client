@@ -6,7 +6,7 @@ Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
-    showErrorModal = require('../utils/showErrorModal.js'),
+    showErrorModal = require('../utils/showErrorModal'),
     chosen = require('../utils/chosen.jquery.min.js');
 
 module.exports = Backbone.View.extend({

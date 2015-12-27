@@ -2202,47 +2202,36 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding-left: 50px;
 }
 
-input[type="number"].fieldItem.spinButtons {
-  background: none;
-  box-sizing: border-box;
-  border: none;
-  width: 100%;;
-}
-
-input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button {
-  cursor:pointer;
-  display:block;
-  width:14px;
-  position:relative;
-  opacity: 1;
-}
-
-input[type=number].spinButtons::-webkit-inner-spin-button:before,
-input[type=number].spinButtons::-webkit-inner-spin-button:after {
-  position:absolute;
-  display: block;
+.numberSpinnerUp,
+.numberSpinnerDown {
+  cursor: pointer;
+  width: 18px;
+  position: absolute;
   right: 0;
+  box-sizing: border-box;
   font-family: "Ionicons";
   color: #fff;
   font-size: 14px;
   text-align: center;
-  line-height: 30px;
-  width:14px;
+  line-height: 20px;
+  background-color: rgba(140,140,140,0.2);
+  margin: 4px;
 }
 
-input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:before {
-  content: "\f104";
-  top:0px;
+.numberSpinnerUp {
+  top: 0;
 }
 
-input[type=number].fieldItem.spinButtons::-webkit-inner-spin-button:after {
+.numberSpinnerUp:before {
   content: "\f10d";
-  bottom:0px;
 }
 
-input[type="number"].fieldItem.spinButtons:focus {
-  border: none;
-  outline: none;
+.numberSpinnerDown {
+  bottom: 0;
+}
+
+.numberSpinnerDown:before {
+  content: "\f104";
 }
 
 .fieldItem .btn {

@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    numberSpinners = require('../utils/numberSpinners'),
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
 
@@ -33,7 +34,6 @@ module.exports = Backbone.View.extend({
     }).format(currentShippingPrice));
 
     this.listenTo(this.model, 'change:selectedModerator change:selectedAddress', this.render);
-
     this.render();
   },
 
@@ -43,6 +43,7 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       //this does not add it to the DOM, that is done by the parent view
       self.setQuantity(1);
+      numberSpinners(self.$el);
     });
     return this;
   },
