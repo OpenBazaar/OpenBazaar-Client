@@ -135,20 +135,19 @@ module.exports = Backbone.View.extend({
     'click .js-follow': 'followUser',
     'click .js-unfollow': 'unfollowUser',
     'click .js-message': 'sendMessage',
-    'click .js-customizeSecondaryColor': 'clickCustomizeSecondaryColor',
-    'click .js-customizePrimaryColor': 'clickCustomizePrimaryColor',
-    'click .js-customizeBackgroundColor': 'clickCustomizeBackgroundColor',
-    // 'mouseenter .js-customizeColor': 'customizeColorClick',
+    'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
+    'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
+    'click .js-customizeBackgroundColor': 'displayCustomizeBackgroundColor',
+    'mouseenter .js-customColorChoicePicker': 'customizeColorClick',
     'mouseenter .js-customColorChoice': 'clickCustomColorChoice',
-    'mouseenter .js-customizePrimaryColor .js-customizeColor': 'customizeColorClick',
-    'mouseleave .js-customizePrimaryColor .js-customizeColor': 'blurCustomizePrimaryColor',
-    'mouseenter .js-customizeSecondaryColor .js-customizeColor': 'hoverCustomizeSecondaryColor',
-    'mouseleave .js-customizeSecondaryColor .js-customizeColor': 'blurCustomizeSecondaryColor',
-    'mouseenter .js-customizeBackgroundColor .js-customizeColor': 'hoverCustomizeBackgroundColor',
-    'mouseleave .js-customizeBackgroundColor .js-customizeColor': 'blurCustomizeBackgroundColor',
-    'mouseenter .js-customizeTextColor .js-customizeColor': 'hoverCustomizeTextColor',
-    'mouseleave .js-customizeTextColor .js-customizeColor': 'blurCustomizeTextColor',
-    'mouseleave .js-customizeColorRecommendations': 'blurColorRecommendations',
+    'click .js-customizePrimaryColor .js-customizeColor': 'displayCustomizePrimaryColor',
+    'click .js-customizeSecondaryColor .js-customizeColor': 'displayCustomizeSecondaryColor',
+    'click .js-customizeBackgroundColor .js-customizeColor': 'displayCustomizeBackgroundColor',
+    'click .js-customizeTextColor .js-customizeColor': 'displayCustomizeTextColor',
+    'click .js-customizePrimaryColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-customizeSecondaryColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-customizeBackgroundColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-customizeTextColor .js-customColorChoice': 'customizeSelectColor',
     'change .js-categories': 'categoryChanged'
   },
 
@@ -684,9 +683,9 @@ module.exports = Backbone.View.extend({
     $('#obContainer').animate({ scrollTop: "0" });
   },
 
-  blurColorRecommendations: function(e) {
+  hideColorRecommendations: function(e) {
     "use strict";
-    $('.js-customizeColorRecommendations').removeClass('width250');
+    $('.js-customizeColorRecommendations').removeClass('width270');
   },
 
   clickCustomColorChoice: function(e) {
@@ -696,10 +695,23 @@ module.exports = Backbone.View.extend({
 
     var colorKey = $(e.currentTarget).data('colorKey');
 
-    $('.js-customColorChoice').removeClass('outline2')
-    $(e.currentTarget).addClass('outline2');
+    if (colorKey){
+      $('.js-customColorChoice').removeClass('outline2')
+      $(e.currentTarget).addClass('outline2');
 
-    this.setCustomColor(rgb2hex($(e.currentTarget).css('background-color')), colorKey);
+      this.setCustomColor(rgb2hex($(e.currentTarget).css('background-color')), colorKey);
+    }
+  },
+
+  customizeSelectColor: function(e) {
+    "use strict";
+    e.preventDefault();
+    e.stopPropagation();
+
+    if ( !$(e.currentTarget).hasClass('js-customColorChoicePicker') ){
+      this.hideColorRecommendations();
+      $('.colpick').removeClass('show');
+    }
   },
 
   clickCustomizePrimaryColor: function(e) {
@@ -707,9 +719,9 @@ module.exports = Backbone.View.extend({
     e.preventDefault();
     
     // if background_color recommendations already open
-    if ($('.customizeBackgroundColorRecommendations').hasClass('width250')){
+    if ($('.customizeBackgroundColorRecommendations').hasClass('width270')){
       $('.customColorChoice').css('background','#fff');
-      $('.customizeBackgroundColorRecommendations').removeClass('width250');
+      $('.customizeBackgroundColorRecommendations').removeClass('width270');
     }else{
       // $('.js-customizePrimaryColor .js-customizeColor').trigger('mouseleave');
       $('.customColorChoice').css('background','#fff');
@@ -721,9 +733,9 @@ module.exports = Backbone.View.extend({
     e.preventDefault();
 
     // if background_color recommendations already open
-    if ($('.customizeBackgroundColorRecommendations').hasClass('width250')){
+    if ($('.customizeBackgroundColorRecommendations').hasClass('width270')){
       $('.customColorChoice').css('background','#fff');
-      $('.customizeBackgroundColorRecommendations').removeClass('width250');
+      $('.customizeBackgroundColorRecommendations').removeClass('width270');
     }else{
       // $('.js-customizeBackgroundColor .js-customizeColor').trigger('mouseleave');
       $('.customColorChoice').css('background','#fff');
@@ -735,121 +747,143 @@ module.exports = Backbone.View.extend({
     e.preventDefault();
 
     // if secondary_color recommendations already open
-    if ($('.customizeSecondaryColorRecommendations').hasClass('width250')){
+    if ($('.customizeSecondaryColorRecommendations').hasClass('width270')){
       $('.customColorChoice').css('background','#fff');
-      $('.customizeSecondaryColorRecommendations').removeClass('width250');
+      $('.customizeSecondaryColorRecommendations').removeClass('width270');
     }else{
       // $('.js-customizeSecondaryColor .js-customizeColor').trigger('mouseleave');
       $('.customColorChoice').css('background','#fff');
     }
   },
 
-  hoverCustomizePrimaryColor: function(e) {
+  displayCustomizePrimaryColor: function(e) {
     "use strict";
 
-    // things to set in the dom
-    $('.custCol-primary').addClass('animateOpacity1to0to1');
-    $('.custCol-secondary').addClass('customize-preview-fade');
-    $('.js-tab.active').removeClass('customize-preview-fade');
-    $('.pageNavContainer').removeClass('customize-preview-fade');
-    $('#pageNav').removeClass('customize-preview-fade');
-    $('.pageNavContainer').addClass('custCol-background');
-    $('.user-page-header').addClass('customize-preview-fade');
-    $('.js-pageCustomizationButtons').addClass('customize-preview-fade');
-    $('.mainSearchWrapper').addClass('hide');
-    $('#obContainer').removeClass('box-borderDashed');
-    $('.seeTooltip').hide();
+    if(this.$el.find('.customizePrimaryColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+    }else{
+      // things to set in the dom
+      // $('.custCol-primary').addClass('animateOpacity1to0to1');
+      // $('.custCol-secondary').addClass('customize-preview-fade');
+      // $('.js-tab.active').removeClass('customize-preview-fade');
+      // $('.pageNavContainer').removeClass('customize-preview-fade');
+      // $('#pageNav').removeClass('customize-preview-fade');
+      // $('.pageNavContainer').addClass('custCol-background');
+      // $('.user-page-header').addClass('customize-preview-fade');
+      // $('.js-pageCustomizationButtons').addClass('customize-preview-fade');
+      // $('.mainSearchWrapper').addClass('hide');
+      // $('#obContainer').removeClass('box-borderDashed');
+      $('.seeTooltip').hide();
 
-    // set recommendations
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
 
-
-    // slide background_color recommendations out + hide others
-    $('.customizePrimaryColorRecommendations').addClass('width250');
-    $('.customizeSecondaryColorRecommendations').removeClass('width250');
-    $('.customizeBackgroundColorRecommendations').removeClass('width250');
-    $('.customizeTextColorRecommendations').removeClass('width250');
+      // slide background_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').addClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }
   },
 
   blurCustomizePrimaryColor: function(e) {
     "use strict";
 
-    $('.custCol-primary').removeClass('animateOpacity1to0to1');
-    $('.custCol-secondary').removeClass('customize-preview-fade');
-    $('.pageNavContainer').removeClass('custCol-background');
-    $('.user-page-header').removeClass('customize-preview-fade');
-    $('.js-pageCustomizationButtons').removeClass('customize-preview-fade');
-    $('.js-navAddressBar').removeClass('customize-preview-fade');
-    $('.mainSearchWrapper').removeClass('hide');
-    $('#obContainer').addClass('box-borderDashed');
+    // $('.custCol-primary').removeClass('animateOpacity1to0to1');
+    // $('.custCol-secondary').removeClass('customize-preview-fade');
+    // $('.pageNavContainer').removeClass('custCol-background');
+    // $('.user-page-header').removeClass('customize-preview-fade');
+    // $('.js-pageCustomizationButtons').removeClass('customize-preview-fade');
+    // $('.js-navAddressBar').removeClass('customize-preview-fade');
+    // $('.mainSearchWrapper').removeClass('hide');
+    // $('#obContainer').addClass('box-borderDashed');
   },
 
-  hoverCustomizeSecondaryColor: function(e) {
+  displayCustomizeSecondaryColor: function(e) {
     "use strict";
     var primaryColor = this.model.get('page').profile.primary_color;
 
-    // things to set in the dom
-    $('.custCol-secondary').addClass('animateOpacity1to0to1');
-    $('.custCol-primary').addClass('customize-preview-fade');
-    $('.banner-large').addClass('customize-preview-fade');
-    $('.user-page-header').addClass('customize-preview-fade');
-    $('.user-page-header-slim').addClass('hide');
-    $('.user-page-navigation').removeClass('customize-preview-fade');
-    $('.js-userPageBanner').removeClass('animateOpacity1to0to1');
-    $('.mainSearchWrapper').addClass('hide');
-    $('#obContainer').removeClass('box-borderDashed');
+    if(this.$el.find('.customizeSecondaryColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+    }else{
+      // things to set in the dom
+      // $('.custCol-secondary').addClass('animateOpacity1to0to1');
+      // $('.custCol-primary').addClass('customize-preview-fade');
+      // $('.banner-large').addClass('customize-preview-fade');
+      // $('.user-page-header').addClass('customize-preview-fade');
+      // $('.user-page-header-slim').addClass('hide');
+      // $('.user-page-navigation').removeClass('customize-preview-fade');
+      // $('.js-userPageBanner').removeClass('animateOpacity1to0to1');
+      // $('.mainSearchWrapper').addClass('hide');
+      // $('#obContainer').removeClass('box-borderDashed');
 
-    // set recommendations
-    $('.customColorChoice').css('background','#fff');
-    $('.customizeSecondaryColorRecommendations .js-customColorChoice1').css('background', shadeColor2(primaryColor, -0.20)); // 20% lighter than primary_color
-    $('.customizeSecondaryColorRecommendations .js-customColorChoice2').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
-    $('.customizeSecondaryColorRecommendations .js-customColorChoice3').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
-    $('.customizeSecondaryColorRecommendations .js-customColorChoice4').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
-    $('.customizeSecondaryColorRecommendations .js-customColorChoice5').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
-    $('.customizeSecondaryColorRecommendations .js-customColorChoice6').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:first').css('background', shadeColor2(primaryColor, -0.20)); // 20% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
 
-    // slide secondary_color recommendations out + hide others
-    $('.customizePrimaryColorRecommendations').removeClass('width250');
-    $('.customizeSecondaryColorRecommendations').addClass('width250');
-    $('.customizeBackgroundColorRecommendations').removeClass('width250');
-    $('.customizeTextColorRecommendations').removeClass('width250');
+      // slide secondary_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').addClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }
 
   },
 
   blurCustomizeSecondaryColor: function(e) {
     "use strict";
 
-    $('.custCol-secondary').removeClass('animateOpacity1to0to1');
-    $('.custCol-primary').removeClass('customize-preview-fade');
-    $('.banner-large').removeClass('customize-preview-fade');
-    $('.btn-tab.active').removeClass('customize-preview-fade')
-    $('.user-page-header-slim').removeClass('hide');
-    $('.mainSearchWrapper').removeClass('hide');
-    $('#obContainer').addClass('box-borderDashed');
+    // $('.custCol-secondary').removeClass('animateOpacity1to0to1');
+    // $('.custCol-primary').removeClass('customize-preview-fade');
+    // $('.banner-large').removeClass('customize-preview-fade');
+    // $('.btn-tab.active').removeClass('customize-preview-fade')
+    // $('.user-page-header-slim').removeClass('hide');
+    // $('.mainSearchWrapper').removeClass('hide');
+    // $('#obContainer').addClass('box-borderDashed');
   },
 
-  hoverCustomizeBackgroundColor: function(e) {
+  displayCustomizeBackgroundColor: function(e) {
     "use strict";
     var secondaryColor = this.model.get('page').profile.secondary_color;
+    
+    if(this.$el.find('.customizeBackgroundColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+    }else{
 
-    // things to set in the dom
-    $('.mainContainer').addClass('animateOpacity05to0to05');
-    $('#pageNav').addClass('customize-preview-fade');
-    $('#obContainer').removeClass('box-borderDashed');
+      // things to set in the dom
+      // $('.mainContainer').addClass('animateOpacity05to0to05');
+      // $('#pageNav').addClass('customize-preview-fade');
+      // $('#obContainer').removeClass('box-borderDashed');
 
-    // set recommendations
-    $('.customColorChoice').css('background','#fff');
-    $('.customizeBackgroundColorRecommendations .js-customColorChoice1').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
-    $('.customizeBackgroundColorRecommendations .js-customColorChoice2').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
-    $('.customizeBackgroundColorRecommendations .js-customColorChoice3').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
-    $('.customizeBackgroundColorRecommendations .js-customColorChoice4').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
-    $('.customizeBackgroundColorRecommendations .js-customColorChoice5').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
-    $('.customizeBackgroundColorRecommendations .js-customColorChoice6').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:first').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
 
-    // slide background_color recommendations out + hide others
-    $('.customizePrimaryColorRecommendations').removeClass('width250');
-    $('.customizeSecondaryColorRecommendations').removeClass('width250');
-    $('.customizeBackgroundColorRecommendations').addClass('width250');
-    $('.customizeTextColorRecommendations').removeClass('width250');
+      // slide background_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').addClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }
   },
 
   blurCustomizeBackgroundColor: function(e) {
@@ -860,21 +894,26 @@ module.exports = Backbone.View.extend({
     $('#obContainer').addClass('box-borderDashed');
   },
 
-  hoverCustomizeTextColor: function(e) {
+  displayCustomizeTextColor: function(e) {
     "use strict";
 
-    $('.custCol-text').addClass('customize-preview-text');
+    if(this.$el.find('.customizeTextColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }else{
+      // $('.custCol-text').addClass('customize-preview-text');
 
-    // set recommendations
-    $('.customColorChoice').css('background','#fff');
-    $('.customizeTextColorRecommendations .js-customColorChoice1').css('background', '#ffffff'); 
-    $('.customizeTextColorRecommendations .js-customColorChoice2').css('background', '#000000');
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background', '#ffffff'); 
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#000000');
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
 
-    // slide background_color recommendations out + hide others
-    $('.customizePrimaryColorRecommendations').removeClass('width250');
-    $('.customizeSecondaryColorRecommendations').removeClass('width250');
-    $('.customizeBackgroundColorRecommendations').removeClass('width250');
-    $('.customizeTextColorRecommendations').addClass('width250');
+      // slide background_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').addClass('width270');
+    }
   },
 
   blurCustomizeTextColor: function(e) {
@@ -883,19 +922,28 @@ module.exports = Backbone.View.extend({
     $('.custCol-text').removeClass('customize-preview-text');
   },
 
+  blurCustomizeColorClick: function(e) {
+    $('.colpick').removeClass('show');
+  },
+
   customizeColorClick: function(e) {
     "use strict";
     var self = this,
         colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
         colorKey = colorInput.attr('id'),
-        newColor = this.model.get('page').profile[colorKey].slice(1);
+        newColor = this.model.get('page').profile[colorKey].slice(1),
+        parent = $('.js-customizeColorRecommendations.width270'),
+        parentHeight = parent.height(),
+        topPosition = parent.offset().top + parentHeight + 2;
+
+    $('.colpick').addClass('colpick-customizeColor show').css('top', topPosition);
+
     colorInput.colpick({
       layout: "rgbhex", //can also be full, or hex
       colorScheme: "dark", //can also be light
       submitText: "Submit",
       onShow: function(el) {
         var colorKey = $(this).attr('id');
-        $('.colpick').addClass('colpick-customizeColor');
         $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
       },
       onSubmit: function(hsb, hex, rgb, el, visible) {

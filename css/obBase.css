@@ -2008,6 +2008,11 @@ div.chatSearchOut .chatSearchIcon {
   opacity: 1;
 }
 
+.btn-square:active {
+  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+  opacity: .75;
+}
+
 .btn-squareSm {
   width: 30px;
   height: 30px;
@@ -3182,9 +3187,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 36px;
   background: #252525;
   width: 0;
-  top: 1px;
-  height: 36px;
-  line-height: 36px;
+  top: 0;
+  height: 38px;
+  line-height: 38px;
   padding: 2px;
   border-radius: 0;
   overflow: hidden;
@@ -3196,8 +3201,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .customColorChoice {
   background: #fff;
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   margin-right: 2px;
   margin-top: 3px;
   cursor: pointer;
@@ -3212,6 +3217,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .customColorChoice:hover {
   outline: 2px solid #ccc;
+}
+
+.customColorChoiceControl {
+  width: 32px;
+  opacity: .5;
+  text-align: center;
+}
+
+.customColorPicker {
+  top: 10px;
+  margin-left: -8px;
+  font-size: 18px;
+  position: absolute;
 }
 
 .interactiveTooltip {
@@ -4235,8 +4253,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 260px;
 }
 
-#ov1 .width250 {
-  width: 250px;
+#ov1 .width270 {
+  width: 270px;
 }
 
 #ov1 .width600 {
@@ -4284,6 +4302,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .colorWhiteForce {
   color: #fff !important; /* This text must always remain white */
+}
+
+#ov1 .colorBlack {
+  color: #000;
 }
 
 #ov1  .borderBottomRightRaidus3 {
