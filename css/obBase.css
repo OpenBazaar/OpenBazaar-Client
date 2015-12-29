@@ -2771,61 +2771,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #327EB8;
 }
 
-.customize-preview-fade {
-  opacity: .02 !important;
-  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1) !important;
-}
-
-.customize-preview-text {
-  animation: customTextAnimation 2s infinite linear;
-}
-
-@-webkit-keyframes customTextAnimation {
-  0% {
-    color: rgba(255,255,255,1);
-  }
-  50% {
-    color: rgba(255,255,255,0);
-  }
-  100% {
-    color: rgba(255,255,255,1);
-  }
-}
-
-.animateOpacity1to0to1 {
-  /*animation: animateInToOutToIn 1.75s infinite linear !important;*/
-  opacity: 1;
-}
-
-.animateOpacity05to0to05 {
-  /*animation: animatePreviewBackground 1.5s infinite linear !important;*/
-  opacity: .05;
-}
-
-@-webkit-keyframes animatePreviewBackground {
-  0% {
-    opacity: .0;
-  }
-  50% {
-    opacity: .05;
-  }
-  100% {
-    opacity: .0;
-  }
-}
-
-@-webkit-keyframes animateInToOutToIn {
-  0% {
-    opacity: .25;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: .25;
-  }
-}
-
 .homeView {
   margin-top: 8px;
 }
