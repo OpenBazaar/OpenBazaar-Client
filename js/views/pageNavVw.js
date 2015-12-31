@@ -110,8 +110,7 @@ module.exports = Backbone.View.extend({
 
   accordionReady: function(listReady) {
     "use strict";
-    var self = this,
-        listTimeout;
+    var self = this;
 
     if(listReady == "country") {
       this.countryReady = true;
