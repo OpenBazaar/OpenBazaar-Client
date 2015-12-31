@@ -86,22 +86,24 @@ module.exports = Backbone.View.extend({
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(moderatorTotal),
-        totalBTCDisplayPrice = (this.model.get('vendorBTCPrice') + this.model.get('currentShippingBTCPrice')) * quantity;
+        totalBTCDisplayPrice = (this.model.get('vendorBTCPrice') + this.model.get('currentShippingBTCPrice')) * quantity,
+        moderatorPriceBTC = moderatorPercentage ? totalBTCDisplayPrice / moderatorPercentage : 0;
+    console.log(moderatorPriceBTC);
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
     this.$el.find('.js-buyWizardModeratorPrice').html(newDisplayModeratorPrice);
-    this.$el.find('.js-buyWizardQuantityDisplay').text(quantity);
+    this.$el.find('.js-buyWizardModeratorBTCPrice').html(moderatorPriceBTC.toFixed(4));
     newAttributes.quantity = quantity;
     newAttributes.totalPrice = totalPrice;
-    newAttributes.totalBTCDisplayPrice = totalBTCDisplayPrice;
+    newAttributes.totalBTCDisplayPrice = totalBTCDisplayPrice + moderatorPriceBTC;
     this.model.set(newAttributes);
   },
 
   lockForm: function(){
     "use strict";
-    this.$el.find('.js-buyWizardQuantity').addClass('hide');
-    this.$el.find('.js-buyWizardQuantityDisplay').removeClass('hide');
+    this.$el.find('.js-buyWizardQuantity').prop('disabled', true);
+    this.$el.find('#buyWizardQuantity .numberSpinnerUp, #buyWizardQuantity .numberSpinnerDown').addClass('hide');
   },
 
   close: function(){

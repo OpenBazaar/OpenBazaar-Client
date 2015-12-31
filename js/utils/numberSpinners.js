@@ -5,7 +5,7 @@ module.exports = function(view) {
     /* number spinners must be in the same container as the number input they affect */
 
   var setNumber = function(targetInput, step, min, curVal){
-    if(curVal + step >= min) {
+    if(curVal + step >= min && !targetInput.prop('disabled')) {
       targetInput.val(curVal + step).trigger('change');
     }
   };
