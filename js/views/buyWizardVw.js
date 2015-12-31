@@ -142,7 +142,6 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
       //set the initial total price
       self.setTotalPrice();
-
     });
 
     return this;
@@ -417,6 +416,7 @@ module.exports = Backbone.View.extend({
   setTotalPrice: function(){
     "use strict";
     var totalPrice = this.model.get('totalPrice'),
+        totalBTCPrice = this.model.get('totalBTCDisplayPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
         totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
@@ -425,6 +425,7 @@ module.exports = Backbone.View.extend({
           currency: userCurrency
         }).format(totalPrice);
     this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
+    this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(4));
   },
 
   copyPayAddress: function(){

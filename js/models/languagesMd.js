@@ -564,6 +564,7 @@ module.exports = Backbone.Model.extend({
           CountryPlaceholder: "Buscar por pa&iacute;s",
           CurrencyPlaceholder: "Buscar por moneda",
           TimezonePlaceholder: "Seleccione su zona horaria",
+          ShortDescriptionPlaceholder: "Say something interesting... (160 char max)", //not translated
           timeZone: "Zona Horaria",
           yourDetails: "Establecer su informaci&oacute;n",
           handle: "Apodo",
