@@ -185,7 +185,6 @@ module.exports = Backbone.Model.extend({
         Page: "Page",
         AllItems: "All Items",
         Listing: "Listing",
-        FreeShipping: "Free Shipping",
         DomesticShippingPrice: "Domestic Shipping Price",
         InternationalShippingPrice: "International Shipping Price",
         MinimumIs: "Minimum is",
@@ -1077,7 +1076,6 @@ module.exports = Backbone.Model.extend({
         Page: "Page", // not translated
         AllItems: "All Items", // not translated
         Listing: "Listing", // not translated
-        FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -1378,7 +1376,6 @@ module.exports = Backbone.Model.extend({
         Page: "Page",
         AllItems: "Tous les articles",
         Listing: "Annonce",
-        FreeShipping: "Livraison gratuite",
         DomesticShippingPrice: "Prix d'expédition nationale",
         InternationalShippingPrice: "Prix d'expédition internationale",
         MinimumIs: "Le minimum est",
@@ -2576,7 +2573,6 @@ module.exports = Backbone.Model.extend({
         Page: "Page", // not translated
         AllItems: "All Items", // not translated
         Listing: "Listing", // not translated
-        FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -2876,7 +2872,6 @@ module.exports = Backbone.Model.extend({
         Page: "Page", // not translated
         AllItems: "All Items", // not translated
         Listing: "Listing", // not translated
-        FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -3175,7 +3170,6 @@ module.exports = Backbone.Model.extend({
         Page: "Page", // not translated
         AllItems: "All Items", // not translated
         Listing: "Listing", // not translated
-        FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -3476,7 +3470,6 @@ module.exports = Backbone.Model.extend({
         Page: "Page", // not translated
         AllItems: "All Items", // not translated
         Listing: "Listing", // not translated
-        FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
