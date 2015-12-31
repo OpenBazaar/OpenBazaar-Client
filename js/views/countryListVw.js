@@ -18,23 +18,26 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    this.listWrapper = $('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text"></ul>');
+    this.listContents = [];
     __.each(this.chooseCountries.models, function(item){
       self.renderItem(item);
     },this);
-    this.$el.append(this.listWrapper);
+    this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text">'+ this.listContents.join('') +'</ul>');
     window.obEventBus.trigger("countryListRendered");
   },
 
   renderItem: function(item){
-    var chooseCountry = new chooseCountryView({
-      model: item,
-      selected: this.options.selected
-    });
-    this.subViews.push(chooseCountry);
-    //appending to the DOM one by one is too slow, and the last 1/3 of the items won't be added. Add to a holder element instead.
-    this.listWrapper.append(chooseCountry.render().el);
-    //this.$el.append(chooseCountry.render().el);
+    var itemJSON = item.toJSON();
+    itemJSON.selected = this.options.selected;
+    this.listContents.push('<li class="flexRow custCol-border">');
+    this.listContents.push('<div class="rowItem js-homeModal-countrySelect paddingLeft6" data-code="'+ itemJSON.dataName +'">');
+    this.listContents.push('<input type="radio" class="fieldItem" id="country-'+ itemJSON.dataName +'" name="'+ itemJSON.dataName +'"');
+    if(itemJSON.selected == itemJSON.dataName){
+      this.listContents.push('checked="checked"');
+    }
+    this.listContents.push('>');
+    this.listContents.push('<label class="homeModal-country radioLabel" for="country-'+ itemJSON.dataName +'">'+ itemJSON.name +'</label>');
+    this.listContents.push('</div></li>');
   },
 
   close: function(){
