@@ -67,7 +67,7 @@ module.exports = Backbone.View.extend({
         moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") : 0,
         moderatorPrice = moderatorPercentage ? totalItemPrice / moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
-        totalPrice = totalItemPrice + totalShipping + moderatorTotal,
+        totalPrice = totalItemPrice + totalShipping,
         newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
@@ -88,7 +88,6 @@ module.exports = Backbone.View.extend({
         }).format(moderatorTotal),
         totalBTCDisplayPrice = (this.model.get('vendorBTCPrice') + this.model.get('currentShippingBTCPrice')) * quantity,
         moderatorPriceBTC = moderatorPercentage ? totalBTCDisplayPrice / moderatorPercentage : 0;
-    console.log(moderatorPriceBTC);
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
@@ -96,7 +95,7 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardModeratorBTCPrice').html(moderatorPriceBTC.toFixed(4));
     newAttributes.quantity = quantity;
     newAttributes.totalPrice = totalPrice;
-    newAttributes.totalBTCDisplayPrice = totalBTCDisplayPrice + moderatorPriceBTC;
+    newAttributes.totalBTCDisplayPrice = totalBTCDisplayPrice;
     this.model.set(newAttributes);
   },
 
