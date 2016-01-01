@@ -13,18 +13,22 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     "use strict";
-    var currentShippingPrice = 0;
+    var currentShippingPrice = 0,
+        currentShippingBTCPrice = 0;
     if(this.model.get('vendor_offer').listing.shipping.free !== true) {
       if(this.model.get('userCountry') != this.model.get('vendor_offer').listing.shipping.shipping_origin) {
         currentShippingPrice = this.model.get('internationalShipping');
+        currentShippingBTCPrice = this.model.get('internationalShippingBTC');
         this.model.set('shippingType', 'international');
       } else {
         currentShippingPrice = this.model.get('domesticShipping');
+        currentShippingBTCPrice = this.model.get('domesticShippingBTC');
         this.model.set('shippingType', 'domestic');
       }
     }
 
     this.model.set('currentShippingPrice', currentShippingPrice);
+    this.model.set('currentShippingBTCPrice', currentShippingBTCPrice);
 
     this.model.set('currentShippingDisplayPrice', new Intl.NumberFormat(window.lang, {
       style: 'currency',
@@ -56,13 +60,14 @@ module.exports = Backbone.View.extend({
   setQuantity: function(quantity){
     "use strict";
     var self = this,
+        newAttributes = {},
         userCurrency = this.model.get('userCurrencyCode'),
         totalItemPrice = this.model.get('price') * quantity,
         totalShipping = this.model.get('currentShippingPrice') * quantity,
-        totalPrice = totalItemPrice + totalShipping,
         moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") : 0,
         moderatorPrice = moderatorPercentage ? totalItemPrice / moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
+        totalPrice = totalItemPrice + totalShipping + moderatorTotal,
         newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
@@ -80,20 +85,25 @@ module.exports = Backbone.View.extend({
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
-        }).format(moderatorTotal);
+        }).format(moderatorTotal),
+        totalBTCDisplayPrice = (this.model.get('vendorBTCPrice') + this.model.get('currentShippingBTCPrice')) * quantity,
+        moderatorPriceBTC = moderatorPercentage ? totalBTCDisplayPrice / moderatorPercentage : 0;
+    console.log(moderatorPriceBTC);
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
     this.$el.find('.js-buyWizardModeratorPrice').html(newDisplayModeratorPrice);
-    this.$el.find('.js-buyWizardQuantityDisplay').text(quantity);
-    this.model.set('quantity', quantity);
-    this.model.set('totalPrice', totalPrice);
+    this.$el.find('.js-buyWizardModeratorBTCPrice').html(moderatorPriceBTC.toFixed(4));
+    newAttributes.quantity = quantity;
+    newAttributes.totalPrice = totalPrice;
+    newAttributes.totalBTCDisplayPrice = totalBTCDisplayPrice + moderatorPriceBTC;
+    this.model.set(newAttributes);
   },
 
   lockForm: function(){
     "use strict";
-    this.$el.find('.js-buyWizardQuantity').addClass('hide');
-    this.$el.find('.js-buyWizardQuantityDisplay').removeClass('hide');
+    this.$el.find('.js-buyWizardQuantity').prop('disabled', true);
+    this.$el.find('#buyWizardQuantity .numberSpinnerUp, #buyWizardQuantity .numberSpinnerDown').addClass('hide');
   },
 
   close: function(){

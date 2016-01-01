@@ -233,12 +233,13 @@
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <div class="js-buyWizardOrderDetails">
-              <%= polyglot.t('OrderDetails') %> <div class="pull-right"><%= polyglot.t('buyFlow.total') %>:
+              <%= polyglot.t('OrderDetails') %>
+              <div class="pull-right"><%= polyglot.t('buyFlow.total') %>:
                 <span class="js-buyWizardDetailsTotal"></span> 
                 <% if(ob.userCurrencyCode != 'BTC'){ %>
-                <span class="textOpacity75">(<%- ob.vendorBTCPrice.toFixed(4) %> BTC)</span>
+                <span class="textOpacity75">(<span class="js-buyWizardDetailsBTCTotal"></span> BTC)</span>
                 <% } %>
-            </div>
+              </div>
             </div>
             <div class="js-buyWizardOrderSummary hide">
               <%= polyglot.t('OrderSummary') %>

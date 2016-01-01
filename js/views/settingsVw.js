@@ -54,7 +54,7 @@ module.exports = Backbone.View.extend({
      */
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
-    this.serverUrl = options.userModel.get('serverUrl')
+    this.serverUrl = options.userModel.get('serverUrl');
     this.user = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
@@ -269,7 +269,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         existingMods = this.model.get('page').profile.moderator_list,
-        isExistingMod = existingMods.indexOf(moderator.guid) > -1 ? true : false;
+        isExistingMod = existingMods.indexOf(moderator.guid) > -1;
 
     if(moderator.guid != this.model.get('page').profile.guid){
       moderator.serverUrl = self.serverUrl;
@@ -544,7 +544,7 @@ module.exports = Backbone.View.extend({
     if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
         showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-        return
+        return;
       }
     }
 

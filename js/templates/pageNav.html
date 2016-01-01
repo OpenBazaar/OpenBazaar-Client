@@ -364,12 +364,16 @@
                   <div class="flexRow borderBottom custCol-border">
                     <div class="flexCol-3 borderRight custCol-border">
                       <label class="fieldItem" for="storeNameInput">
-
                         <%= polyglot.t('Name') %>
                       </label>
                     </div>
                     <div class="flexCol-9">
-                      <input name="name" id="storeNameInput" type="text" class="fieldItem custCol-text"  placeholder="<%= polyglot.t('YourName') %>" required>
+                      <input name="name"
+                             id="storeNameInput"
+                             type="text"
+                             class="fieldItem custCol-text"
+                             placeholder="<%= polyglot.t('YourName') %>"
+                             required>
                     </div>
                   </div>
                   <div class="flexRow borderBottom custCol-border">
@@ -379,7 +383,13 @@
                       </label>
                     </div>
                     <div class="flexCol-9">
-                      <input name="handle" id="storeHandleInput" type="text" class="fieldItem custCol-text" placeholder="<%= polyglot.t('onboarding.chooseHandle') %> (@joe123)" required>
+                      <input name="handle"
+                             id="storeHandleInput"
+                             type="text"
+                             class="fieldItem custCol-text"
+                             placeholder="<%= polyglot.t('onboarding.chooseHandle') %> (@joe123)"
+                             pattern="@[a-zA-Z0-9]+"
+                             required>
                     </div>
                   </div>
                   <div class="flexRow borderBottom custCol-border">

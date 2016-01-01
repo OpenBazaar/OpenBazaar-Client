@@ -36,12 +36,15 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-newHandle': 'newHandle',
     'click .js-homeModal-existingHandle': 'existingHandle',
     'click .js-homeModal-cancelHandle': 'cancelHandle',
-    //'change .js-homeModalAvatarUpload': 'uploadAvatar',
+    'click .js-accordionNext': 'accNext',
+    'click .js-accordionPrev': 'accPrev',
     'click .js-homeModalDone': 'settingsDone',
     'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
-    'click .js-homeModal-themeSelected': 'setSelectedTheme'
+    'click .js-homeModal-themeSelected': 'setSelectedTheme',
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput'
   },
 
   initialize: function(options){
@@ -66,7 +69,7 @@ module.exports = Backbone.View.extend({
       this.render();
     });
 
-    this.listenTo(this.userProfile, 'change', function(){
+    this.listenTo(this.userProfile, 'change:language', function(){
       this.model.set('vendor', this.userProfile.get('profile').vendor);
       this.render();
     });
@@ -107,6 +110,8 @@ module.exports = Backbone.View.extend({
 
   accordionReady: function(listReady) {
     "use strict";
+    var self = this;
+
     if(listReady == "country") {
       this.countryReady = true;
     } else if(listReady == "currency") {
@@ -115,46 +120,54 @@ module.exports = Backbone.View.extend({
       this.languageReady = true;
     }
     if(this.countryReady && this.currencyReady && this.languageReady){
-        //set up filterable lists.
-        var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
-        var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
-        var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
-        var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
-        this.initAccordion('.js-profileAccordion');
+      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
+      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
+      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
+      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
+      self.initAccordion('.js-profileAccordion');
     }
   },
 
   initAccordion: function(targ){
     "use strict";
-    var acc = $(targ);
-    var accWidth = acc.width();
-    var accHeight = acc.height();
-    var accChildren = acc.find('.accordion-child');
-    var accNum = accChildren.length;
-    var accWin = acc.find('.accordion-window');
+    this.acc = $(targ);
+    this.accWidth = this.acc.width();
+    this.accHeight = this.acc.height();
+    this.accChildren = this.acc.find('.accordion-child');
+    this.accNum = this.accChildren.length;
+    this.accWin = this.acc.find('.accordion-window');
+    this.accWin.css({'left':0, 'width': function(){return this.accWidth * this.accNum;}});
+    this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
+  },
 
-    accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
-    accChildren.css({'width':accWidth, 'height':accHeight});
-    acc.find('.js-accordionNext').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
-      if(oldPos > (accWidth * accNum * -1 + accWidth)){
-        accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) - accWidth;
-        });
-      }
+  accNext: function(advanceBy){
+    "use strict";
+    var self = this,
+        oldPos = parseInt(this.accWin.css('left').replace("px","")),
+        moveBy = parseInt(advanceBy) ? this.accWidth * advanceBy : this.accWidth;
+
+    if(oldPos > (this.accWidth * (this.accNum -1) * -1)){
+      this.accWin.css('left', function(){
+        return oldPos - moveBy;
+      });
       // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('input:visible:first').focus();
-    });
-    acc.find('.js-accordionPrev').on('click', function(){
-      var oldPos = accWin.css('left').replace("px","");
-      if(oldPos < (0)){
-        accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) + accWidth;
-        });
-      }
+      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+    }
+  },
+
+  accPrev: function(rewindBy){
+    "use strict";
+    var self = this,
+        oldPos = parseInt(this.accWin.css('left').replace("px","")),
+        moveBy = parseInt(rewindBy) ? this.accWidth * rewindBy : this.accWidth;
+
+    if(oldPos < (0)){
+      this.accWin.css('left', function(){
+        return oldPos + moveBy;
+      });
       // focus search input
-       $(this).closest('.accordion-child').prev('.accordion-child').find('input:visible:first').focus();
-    });
+      $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
+    }
   },
 
   closeNav: function(){
@@ -179,13 +192,13 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       if(localStorage.getItem("onboardingComplete") != "true") {
         self.$el.find('.js-homeModal').removeClass("hide");
+        self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
+        self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
+        self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
+        self.subViews.push(self.countryList);
+        self.subViews.push(self.currencyList);
+        self.subViews.push(self.languageList);
       }
-      self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
-      self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
-      self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-      self.subViews.push(self.countryList);
-      self.subViews.push(self.currencyList);
-      self.subViews.push(self.languageList);
 
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
@@ -445,7 +458,7 @@ module.exports = Backbone.View.extend({
     localStorage.setItem("onboardingComplete", "true");
 
     if($('textarea#aboutInput').val() != ""){
-        self.model.set('about', $('textarea#aboutInput').val());
+        self.model.set('short_description', $('textarea#aboutInput').val());
     }
 
     if($('#storeHandleInput').val() != "" && /^@/.test($('#storeHandleInput').val()) ){
@@ -479,7 +492,8 @@ module.exports = Backbone.View.extend({
                 if(i == "country") {
                     profileFormData.append("location",el);
                 }
-                if(i == "name" || i == "handle" || i =="about"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+                if(i == "name" || i == "handle" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+                  console.log(i);
                     profileFormData.append(i,""+el);
                 } else {
                     settingsFormData.append(i,el);
@@ -607,7 +621,13 @@ module.exports = Backbone.View.extend({
   shadeColor2: function shadeColor2(color, percent) {   
     var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
     return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
-  }
+  },
+
+  validateInput: function(e) {
+    "use strict";
+    e.target.checkValidity();
+    $(e.target).closest('.flexRow').addClass('formChecked');
+  },
 
 });
 
