@@ -47,7 +47,6 @@ module.exports = Backbone.View.extend({
 
   setAddress: function(index){
     "use strict";
-    console.log("set address")
     var selectedAddress = this.model.get('user').shipping_addresses[index];
     if(selectedAddress && this.model.get('vendor_offer').listing.shipping.shipping_regions.indexOf(selectedAddress.country) > -1){
       this.trigger("setAddress", selectedAddress);

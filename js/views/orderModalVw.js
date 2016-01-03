@@ -20,8 +20,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
 
-    this.orderID = options.orderID
-    console.log(this.orderID);
+    this.orderID = options.orderID;
     this.serverUrl = options.serverUrl;
     this.model = new Backbone.Model();
     this.model.urlRoot = options.serverUrl + "contracts"; //replace with real API call when ready
