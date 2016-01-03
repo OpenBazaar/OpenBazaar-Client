@@ -628,6 +628,12 @@ label.fieldItem {
   right: -30px;
 }
 
+.modal > .btn-corner.btn-cornerTRFixedOut {
+  /* button must be direct child of modal. The left value is based on the width of the modal. */
+  left: 896px;
+  top: 23px;
+}
+
 .thumbnail-small {
   height: 30px;
   width: 30px;
