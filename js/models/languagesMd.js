@@ -1963,51 +1963,51 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
         Reset: "Сброс",
-        Loading: "Loading...", // not translated
+        Loading: "Загрузка...", // for LGTM
         Purchases:"Покупки",
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
-        Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
-        AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
-        FreeShipping: "Free Shipping", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
+        Sales: "Продажи", // for LGTM
+        Cases: "Сделки", // for LGTM
+        Discover: "Найти", // for LGTM
+        Blocked: "Блокировка", // for LGTM
+        Advanced: "Дополнительно", // for LGTM
+        General: "Общие", // for LGTM
+        Page: "Страница", // for LGTM
+        AllItems: "Все товары", // for LGTM
+        Listing: "Объявления", // for LGTM
+        FreeShipping: "Бесплатная доставка", // for LGTM
+        DomesticShippingPrice: "Цена доставки внутри страны", // for LGTM
+        InternationalShippingPrice: "Цена международной доставки", // for LGTM
+        MinimumIs: "Минимум", // for LGTM
+        Visibility: "Видимость", // for LGTM
+        Title: "Заголовок", // for LGTM
+        DigitalItem: "Цифровой товар", // for LGTM
+        PhysicalItem: "Физический товар", // for LGTM
+        DomesticShippingTime: "Время на доставку внутри страны", // for LGTM
+        InternationalShippingTime: "Время на международную доставку", // for LGTM
+        DisplayNSFWcontent: "Показывать контент для взрослых?", // for LGTM
+        Basic: "Базовый", // for LGTM
+        Content: "Контент", // for LGTM
+        StandardThemes: "Стандартные темы", // for LGTM
+        NoPhotosAdded: "Фотографий не добавлено", // for LGTM
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
-          OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          SoldBy: "Продавец", // for LGTM
+          PurchasedBy: "Покупатель", // for LGTM
+          searchByOrder: "Искать по id заказа или по номеру вещи", // for LGTM
+          sortByStatusAll: "Все", // for LGTM
+          sortByStatus0: "Купленые", // for LGTM
+          sortByStatus1: "Оплачено (ср-ва в процессе)", // for LGTM
+          sortByStatus2: "Подтверждено/Выслано", // for LGTM
+          sortByStatus3: "Завершено (Деньги освобождены)", // for LGTM
+          sortByStatus4: "Оспорено", // for LGTM
+          OrderID: "ID заказа", // for LGTM
+          OrderDate: "Дата заказа", // for LGTM
+          OrderStatus: "Статус заказа", // for LGTM
+          OrderStatus0: "Куплен (не оплачен)", // for LGTM
+          OrderStatus1: "Оплачено (ожидание ср-ств)", // for LGTM
+          OrderStatus2: "Подтверждено/Выслано", // for LGTM
+          OrderStatus3: "Завершен (ср-ва освобождены)", // for LGTM
+          OrderStatus4: "Оспорен", // for LGTM
+          OrderTotal: "Всего заказов" // for LGTM
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -2065,7 +2065,7 @@ module.exports = Backbone.Model.extend({
           timeZone: "Выберите часовой пояс",
           yourDetails: "Профильная информация",
           handle: "Логин",
-          chooseHandle: "Choose a handle", // not translated
+          chooseHandle: "Выберите ник (логин)", // for LGTM
           knownAs: "Сейчас ваше имя:",
           wouldYou: "Вы желаете зарегистрировать простой логин?",
           registerNew: "Зарегистрировать новый",
@@ -2073,7 +2073,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Подключить существующий",
           avatar: "Поставить аватарку",
           chooseAvatar: "Выбрать аватарку",
-          Finished: "Finished" //notTranslated
+          Finished: "Завершено" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "Вы должны указать адрес для доставки",
@@ -2193,7 +2193,7 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
         BitcoinReturnAddress: "Bitcoinová adresa",
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //for LGTM
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
