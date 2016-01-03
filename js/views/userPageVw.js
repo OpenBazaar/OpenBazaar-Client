@@ -177,6 +177,15 @@ module.exports = Backbone.View.extend({
     //show loading modal before fetching user data
     $('.js-loadingModal').removeClass('hide');
 
+    //listen to follow and unfollow events
+    this.listenTo(window.obEventBus, "followUser", function(guid){
+      this.followUser(guid);
+    });
+
+    this.listenTo(window.obEventBus, "unfollowUser", function(guid){
+      this.unfollowUser(guid);
+    });
+
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
     //sometimes it can be set to the string 'null', check for that too
@@ -487,13 +496,26 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: "", serverUrl: this.options.userModel.get('serverUrl')});
+    this.followerList = new personListView({
+      model: model,
+      el: '.js-list1',
+      title: "No followers",
+      message: "",
+      serverUrl: this.options.userModel.get('serverUrl')
+    });
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
     "use strict";
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: "", serverUrl: this.options.userModel.get('serverUrl')});
+    this.followingList = new personListView({
+      model: model,
+      followed: true,
+      el: '.js-list2',
+      title: "Not following anyone",
+      message: "",
+      serverUrl: this.options.userModel.get('serverUrl')
+    });
     this.subViews.push(this.followingList);
   },
 
@@ -885,12 +907,15 @@ module.exports = Backbone.View.extend({
     Backbone.history.loadUrl();
   },
 
-  followUser: function(){
+  followUser: function(guid){
     "use strict";
-    var self = this;
+    var self = this,
+        dataParams = {};
+    guid = guid || this.pageID;
+    dataParams.guid = this.pageID;
     $.ajax({
       type: "POST",
-      data: this.userProfileFetchParameters,
+      data: dataParams,
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "follow",
       success: function(data) {
@@ -904,12 +929,15 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  unfollowUser: function(){
+  unfollowUser: function(guid){
     "use strict";
-    var self = this;
+    var self = this,
+        dataParams = {};
+    guid = guid || this.pageID;
+    dataParams.guid = this.pageID;
     $.ajax({
       type: "POST",
-      data: this.userProfileFetchParameters,
+      data: dataParams,
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "unfollow",
       success: function() {

@@ -38,7 +38,10 @@
             <% } %>
           </div>
         <% if(!ob.micro){ %>
-          <a class="btn btn-txt btn-secondary custCol-secondary textOpacity65 btn-latched"><%= polyglot.t('follow') %></a>
+          <a class="btn btn-txt btn-secondary custCol-secondary textOpacity65 btn-latched">
+            <span class="js-userShortFollow"><%= polyglot.t('Follow') %></span>
+            <span class="js-userShortUnfollow hide"><%= polyglot.t('Unfollow') %></span>
+          </a>
         <% } %>
         </div>
         <div>
