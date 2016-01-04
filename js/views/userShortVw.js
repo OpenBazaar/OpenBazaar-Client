@@ -18,6 +18,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.render();
+    console.log(this.model.attributes);
   },
 
   render: function(){
