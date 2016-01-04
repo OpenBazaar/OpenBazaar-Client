@@ -191,6 +191,27 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases",
         Sales: "Sales",
         Cases: "Cases",
+        Discover: "Discover",
+        Blocked: "Blocked",
+        Advanced: "Advanced",
+        General: "General",
+        Page: "Page",
+        AllItems: "All Items",
+        Listing: "Listing",
+        DomesticShippingPrice: "Domestic Shipping Price",
+        InternationalShippingPrice: "International Shipping Price",
+        MinimumIs: "Minimum is",
+        Visibility: "Visibility",
+        Title: "Title",
+        DigitalItem: "Digital Item",
+        PhysicalItem: "Physical Item",
+        DomesticShippingTime: "Domestic Shipping Time",
+        InternationalShippingTime: "International Shipping Time",
+        DisplayNSFWcontent: "Display NSFW content?",
+        Basic: "Basic",
+        Content: "Content",
+        StandardThemes: "Standard themes",
+        NoPhotosAdded: "No Photos Added",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -268,13 +289,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "Select Your Time Zone",
           yourDetails: "Set Your Information",
           handle: "Handle",
+          chooseHandle: "Choose a handle",
           knownAs: "You're currently known as:",
           wouldYou: "Would you like to register an easy to remember handle?",
           registerNew: "Register New",
           recommended: "Recommended Pages to Follow",
           connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
-          chooseAvatar: "Select Avatar"
+          chooseAvatar: "Select Avatar",
+          Finished: "Finished"
         },
         buyFlow: {
           MustAddAddress: "You must add an address to ship to",
@@ -473,6 +496,28 @@ module.exports = Backbone.Model.extend({
         Purchases:"Compras",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        FreeShipping: "Free Shipping", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -545,16 +590,19 @@ module.exports = Backbone.Model.extend({
           CountryPlaceholder: "Buscar por pa&iacute;s",
           CurrencyPlaceholder: "Buscar por moneda",
           TimezonePlaceholder: "Seleccione su zona horaria",
+          ShortDescriptionPlaceholder: "Say something interesting... (160 char max)", //not translated
           timeZone: "Zona Horaria",
           yourDetails: "Establecer su informaci&oacute;n",
           handle: "Apodo",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "A Ud. se le conoce como:",
           wouldYou: "Desea registrar un apodo f&aacute;cil de recordar?",
           registerNew: "Registrar Nuevo",
           recommended: "P&aacute;ginas Recomendadas a Seguir",
           connectExisting: "Conectar Existente",
           avatar: "Establecer un Avatar",
-          chooseAvatar: "Seleccione avatar"
+          chooseAvatar: "Seleccione avatar",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "Usted debe agregar una dirección para env&iacute;os",
@@ -761,6 +809,28 @@ module.exports = Backbone.Model.extend({
         Purchases:"Eink&auml;ufe",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        FreeShipping: "Free Shipping", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -837,13 +907,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "W&auml;hle deine Zeitzone",
           yourDetails: "Setze deine Details",
           handle: "Handle",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "Du bist derzeit bekannt als:",
           wouldYou: "Willst du dir einen leicht zu merkenden Handle registrieren?",
           registerNew: "Neu registrieren",
           recommended: "Empfohlene Seiten",
           connectExisting: "Verbinde existierenden",
           avatar: "Setze einen Avatar",
-          chooseAvatar: "W&auml;hle einen Avatar"
+          chooseAvatar: "W&auml;hle einen Avatar",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "Sie m&uuml;ssen eine Versandadresse hinzuzuf&uuml;gen",
@@ -1052,6 +1124,27 @@ module.exports = Backbone.Model.extend({
         Purchases:"Acquisti",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1128,13 +1221,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "Seleziona il tuo fuso orario",
           yourDetails: "Imposta le tue informazioni",
           handle: "Nickname",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "Sei conosciuto come:",
           wouldYou: "Ti andrebbe di registrare un nickname facile da ricordare?",
           registerNew: "Registra nuovo",
           recommended: "Pagine raccomandate di seguire",
           connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
-          chooseAvatar: "Seleziona Avatar"
+          chooseAvatar: "Seleziona Avatar",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
@@ -1249,8 +1344,8 @@ module.exports = Backbone.Model.extend({
         ReturnsPolicy: "Conditions de retours",
         Ampersand: "&",
         Keywords: "Mots-clés",
-        ShipsFrom: "Expédié de",
-        ShipsTo: "Envoyé à",
+        ShipsFrom: "Expédie de",
+        ShipsTo: "Expédie vers",
         Optional: "Optionnel",
         Customize: "Personnaliser",
         Save: "Sauvegarder",
@@ -1325,7 +1420,7 @@ module.exports = Backbone.Model.extend({
         UpTo3: "Jusqu'à 3",
         AboutYourStore: "Une description de votre boutique",
         PaymentType: "Type de paiement",
-        ShipTo: "Envoyer à",
+        ShipTo: "Expédier à",
         FreeShipping: "Livraison gratuite",
         OrderDetails: "Détails de la commande",
         OrderSummary: "Résumé de la commande",
@@ -1336,32 +1431,53 @@ module.exports = Backbone.Model.extend({
         LoadingImage: "Chargement de l'image...",
         UploadAvatar: "Uploader un Avatar",
         SaveAvatar: "Enregistrer un Avatar",
-        NewAvatar: "Sélectionner un nouvel Avatar",
+        NewAvatar: "Sélectionner un nouvel avatar",
         NewCoverImage: "Sélectionner une nouvelle image de couverture",
         Reset: "Réinitialiser",
-        Loading: "Loading...", // not translated
+        Loading: "Chargement...",
         Purchases:"Achats",
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
+        Sales: "Ventes",
+        Cases: "Cas",
+        Discover: "Découvrir",
+        Blocked: "Bloqué",
+        Advanced: "Avancé",
+        General: "Général",
+        Page: "Page",
+        AllItems: "Tous les articles",
+        Listing: "Annonce",
+        DomesticShippingPrice: "Prix d'expédition nationale",
+        InternationalShippingPrice: "Prix d'expédition internationale",
+        MinimumIs: "Le minimum est",
+        Visibility: "Visibilité",
+        Title: "Titre",
+        DigitalItem: "Article numérique",
+        PhysicalItem: "Article physique",
+        DomesticShippingTime: "Délai d'expédition nationale",
+        InternationalShippingTime: "Délai d'expédition internationale",
+        DisplayNSFWcontent: "Afficher le contenu NSFW ?",
+        Basic: "Basic",
+        Content: "Contenu",
+        StandardThemes: "Thèmes standards",
+        NoPhotosAdded: "Aucune photo ajoutée",
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
-          OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          SoldBy: "Vendu par",
+          PurchasedBy: "Acheté par",
+          searchByOrder: "Rechercher par ID de commande ou par nom d'article",
+          sortByStatusAll: "Tout",
+          sortByStatus0: "Acheté",
+          sortByStatus1: "Payé (fonds en attente)",
+          sortByStatus2: "Confirmé/Expédié",
+          sortByStatus3: "Terminé (fonds reçus)",
+          sortByStatus4: "Contesté",
+          OrderID: "ID de commande",
+          OrderDate: "Date de commande",
+          OrderStatus: "Statut de commande",
+          OrderStatus0: "Acheté (non payé)",
+          OrderStatus1: "Payé (fonds en attente)",
+          OrderStatus2: "Confirmé/Expédié",
+          OrderStatus3: "Terminé (fonds reçus)",
+          OrderStatus4: "Contesté",
+          OrderTotal: "Total de la commande"
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -1385,12 +1501,13 @@ module.exports = Backbone.Model.extend({
           pagesMods: "Services de modérateur",
           pagesBasic: "Utilisateurs de base",
           listingsCurated: "Depuis les boutiques que je suis",
-          listingsAll: "Depuis toutes les boutiques"
+          listingsAll: "Depuis toutes les boutiques",
+          categoryAll: "Toutes"
         },
         nav: {
           searchPlaceholder: "Entrer un nom d'utilisateur ou rechercher",
-          myPage: "Ma Page",
-          customizePage:"Personnaliser la page",
+          myPage: "Ma page",
+          customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
           createListing:"Nouvelle annonce",
           purchases:"Achats",
@@ -1407,8 +1524,8 @@ module.exports = Backbone.Model.extend({
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
           configure: "Configurez votre expérience",
-          disclaimer_title: "Disclaimer",
-          disclaimer_body: "OpenBazaar est un réseau commercial de biens et services de personne à personne - utilisant Bitcoin - sans aucune organisation centrale exerçant une autorité sur la plate-forme. Cela signifie que vous êtes responsable de votre propre activité sur le réseau. <br /><br />Les utilisateurs d'OpenBazaar ne sont pas anonymes par défaut. La plupart des communications entre les partis sont chiffrées, mais les adresses IP sont publiques et peuvent être associées avec une activité sur le réseau. Des partis malveillants pourraient utiliser ces informations contre vous ; protéger votre vie privée est votre propre responsabilité. <br /><br />Les utilisateurs d'OpenBazaar doivent respecter les lois de leur propre juridiction ainsi que leur conscience. Les développeurs d'OpenBazaar ne tolèrent pas - et ne sont pas responsables -  de toute utilisation de la plate-forme pour une activité illégale. <br /><br />La communauté de développeurs d'OpenBazaar a travaillé dur afin d'offrir une plate-forme libre pour le commerce dans le monde. Mais, comme avec tout logiciel, des bugs seront trouvés. Les développeurs ne sont pas responsables de toute perte monétaire associée à des problèmes dans le logiciel. <br /><br />En utilisant OpenBazaar vous êtes responsable de vos propres actions sur le réseau OpenBazaar.",
+          disclaimer_title: "Clause de non-responsabilité",
+          disclaimer_body: "OpenBazaar est un réseau commercial de biens et services de personne à personne - utilisant Bitcoin - sans aucune organisation centrale exerçant une autorité sur la plate-forme. Cela signifie que vous êtes seul responsable de votre activité sur le réseau. <br /><br />Les utilisateurs d'OpenBazaar ne sont pas anonymes par défaut. La plupart des communications entre les partis sont chiffrées, mais les adresses IP sont publiques et peuvent être associées à une activité sur le réseau. Des partis malveillants pourraient utiliser ces informations contre vous ; protéger votre vie privée est votre propre responsabilité. <br /><br />Les utilisateurs d'OpenBazaar doivent respecter les lois de leur propre juridiction ainsi que leur conscience. Les développeurs d'OpenBazaar ne tolèrent pas - et ne sont pas responsables -  de toute utilisation de la plate-forme pour une activité illégale. <br /><br />La communauté des développeurs d'OpenBazaar a travaillé sans relâche afin d'offrir une plate-forme commerciale libre et mondiale. Mais, comme avec tout logiciel, des bugs seront trouvés. Les développeurs ne sont pas responsables de toute perte monétaire associée à des problèmes dans le logiciel. <br /><br />En utilisant OpenBazaar vous êtes seul responsable de vos actions sur le réseau d'OpenBazaar.",
           yourCountry: "Sélectionner votre pays",
           localCurrency: "Sélectionner votre devise",
           LanguagePlaceholder: "Rechercher par langue",
@@ -1419,33 +1536,34 @@ module.exports = Backbone.Model.extend({
           timeZone: "Sélectionner votre fuseau horaire",
           yourDetails: "Définir vos informations",
           handle: "Nom d'utilisateur",
+          chooseHandle: "Choisissez un nom d'utilisateur",
           knownAs: "Vous êtes actuellement connu comme :",
           wouldYou: "Voulez-vous enregistrer un nom d'utilisateur facilement mémorisable ?",
           registerNew: "Enregistrer",
           recommended: "Pages recommandées à suivre",
           connectExisting: "Connect Existing",
-          avatar: "Définir un Avatar",
-          chooseAvatar: "Sélectionner un Avatar"
+          avatar: "Définir un avatar",
+          chooseAvatar: "Sélectionner un avatar",
+          Finished: "Terminé"
         },
         buyFlow: {
           MustAddAddress: "Vous devez ajouter une adresse pour expédier",
-          VendorShipsTo: "Ce vendeur expédie vers ces pays",
-          DoesNotShipHere: "Ce vendeur n'expédie pas ici",
+          VendorShipsTo: "Expédie vers",
+          DoesNotShipHere: "N'expédie pas ici",
           Send: "Envoyer",
           BTCto: "BTC à",
-          OpenAddress: "Ouvrir l'adresse dans le portefeuille local",
-          CopyAddress: "Copier l'adresse de paiement dans le presse-papier",
+          OpenAddress: "Ouvrir dans le portefeuille local",
+          CopyAddress: "Copier dans le presse-papier",
           RefreshPayment: "Actualiser le statut du paiement",
           summaryMsg1: "Votre paiement a été envoyé à",
           summaryMsg2: "Le temps de traitement prévu pour cette commande est",
           summaryMsg3: "Vous pouvez vérifier le statut de votre commande sur votre",
-          purchasesPage: "page d'achat", //notTranslated
-          returnAddress: "Return Address", //notTranslated
-          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
-          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
-          paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          purchasesPage: "page d'achat",
+          moderatorPaymentDisclaimer: "N'appliquer que si la transaction se termine par un litige.",
+          directPaymentDisclaimer: "Utilisez le paiement direct avec prudence, les fonds sont irréversibles",
+          directPaymentTo: "Paiement direct à",
+          paymentSent: "Paiement envoyé !",
+          total: "Total"
         }
       },
       {
@@ -1632,6 +1750,28 @@ module.exports = Backbone.Model.extend({
         Purchases:"Cumpărături",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        FreeShipping: "Free Shipping", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1708,13 +1848,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "Selectați Fusul dvs. Orar",
           yourDetails: "Setați Informația dvs.",
           handle: "Nume",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "La moment sunteți cunoscut ca:",
           wouldYou: "Doriți să înregistrați un nume ușor de reținut?",
           registerNew: "Înregistrați-vă Acum",
           recommended: "Pagini Recomandate pentru Urmărire",
           connectExisting: "Conectare Existente",
           avatar: "Setați un Avatar",
-          chooseAvatar: "Selectare Avatar"
+          chooseAvatar: "Selectare Avatar",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
@@ -1921,6 +2063,28 @@ module.exports = Backbone.Model.extend({
         Purchases:"Покупки",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        FreeShipping: "Free Shipping", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1997,13 +2161,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "Выберите часовой пояс",
           yourDetails: "Профильная информация",
           handle: "Логин",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "Сейчас ваше имя:",
           wouldYou: "Вы желаете зарегистрировать простой логин?",
           registerNew: "Зарегистрировать новый",
           recommended: "Подпишитесь на популярные магазины",
           connectExisting: "Подключить существующий",
           avatar: "Поставить аватарку",
-          chooseAvatar: "Выбрать аватарку"
+          chooseAvatar: "Выбрать аватарку",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "Вы должны указать адрес для доставки",
@@ -2209,6 +2375,28 @@ module.exports = Backbone.Model.extend({
         Purchases:"Nákupy",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        FreeShipping: "Free Shipping", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2285,13 +2473,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "Zvoľte svoje časové pásmo",
           yourDetails: "Zadajte detaily o sebe",
           handle: "Handle",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "Momentálne ste známi ako:",
           wouldYou: "Chcete si zaregistrovať ľahko zapamätateľný handle (prezývku)?",
           registerNew: "Zaregistrovať nové",
           recommended: "Odporúčané stránky hodné sledovania",
           connectExisting: "Pripojiť existujúci",
           avatar: "Vložiť avatara",
-          chooseAvatar: "Zvoliť avatara"
+          chooseAvatar: "Zvoliť avatara",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "Musíte zadať adresu pre doručenie",
@@ -2500,6 +2690,27 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases", //not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2576,13 +2787,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "Saat Diliminizi Seçin",
           yourDetails: "Bilginizi Girin",
           handle: "Takma Ad",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "Mevcut Takma Adınız:",
           wouldYou: "Akılda kalıcı bir Takma Ad kaydetmek ister misiniz?",
           registerNew: "Yeni Kaydet",
           recommended: "Takip Edilesi Sayfalar",
           connectExisting: "Mevcuta Bağlan",
           avatar: "Avatar Ata",
-          chooseAvatar: "Avatar Seç"
+          chooseAvatar: "Avatar Seç",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "Gönderilecek bir adres eklemelisiniz",
@@ -2790,6 +3003,27 @@ module.exports = Backbone.Model.extend({
         Purchases:"Je'",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2866,13 +3100,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "MIch poH wIv",
           yourDetails: "De' toD",
           handle: "Mach pong",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "DaSov je:",
           wouldYou: "NgeD mach pong qaw toD vIvut SoH?",
           registerNew: "Suy qachmey chu'",
           recommended: "Chup tuq toblu'",
           connectExisting: "NIv'e' rar",
           avatar: "MIllogh qab HIjmeH",
-          chooseAvatar: "MIllogh qab wIv"
+          chooseAvatar: "MIllogh qab wIv",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "SoQ Duj ghob'e' chel SoH",
@@ -3079,6 +3315,27 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases", // not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3154,14 +3411,16 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "发表意见（最多160字）",
           timeZone: "选择您的时区",
           yourDetails: "设置您的信息",
-          handle: "Handle",
+          handle: "Handle", // not translated
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "您目前的用户名是",
           wouldYou: "您想注册一个更容易记得 handle吗?",
           registerNew: "注册一个新的",
           recommended: "建议关注此网页",
           connectExisting: "连接 Existing",
           avatar: "设置一个 Avatar",
-          chooseAvatar: "选择 Avatar"
+          chooseAvatar: "选择 Avatar",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "务必添加送货地址",
@@ -3370,6 +3629,27 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases", // not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Discover: "Discover", // not translated
+        Blocked: "Blocked", // not translated
+        Advanced: "Advanced", // not translated
+        General: "General", // not translated
+        Page: "Page", // not translated
+        AllItems: "All Items", // not translated
+        Listing: "Listing", // not translated
+        DomesticShippingPrice: "Domestic Shipping Price", // not translated
+        InternationalShippingPrice: "International Shipping Price", // not translated
+        MinimumIs: "Minimum is", // not translated
+        Visibility: "Visibility", // not translated
+        Title: "Title", // not translated
+        DigitalItem: "Digital Item", // not translated
+        PhysicalItem: "Physical Item", // not translated
+        DomesticShippingTime: "Domestic Shipping Time", // not translated
+        InternationalShippingTime: "International Shipping Time", // not translated
+        DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
+        Content: "Content", // not translated
+        StandardThemes: "Standard themes", // not translated
+        NoPhotosAdded: "No Photos Added", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3446,13 +3726,15 @@ module.exports = Backbone.Model.extend({
           timeZone: "시간대 선택",
           yourDetails: "너의 정보 설정",
           handle: "핸들",
+          chooseHandle: "Choose a handle", // not translated
           knownAs: "당신은 현재 알려져있어:",
           wouldYou: "당신은 기억하기 쉬운 핸들은 등록하겠습니까?",
           registerNew: "새로운 등록",
           recommended: "추천 페이지 팔로우",
           connectExisting: "기존 연결",
           avatar: "화신 설정",
-          chooseAvatar: "화신 선택"
+          chooseAvatar: "화신 선택",
+          Finished: "Finished" //notTranslated
         },
         buyFlow: {
           MustAddAddress: "당신 에게 제공할수 있는 배송지 주소를 추가",

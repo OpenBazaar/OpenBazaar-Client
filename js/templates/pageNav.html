@@ -63,7 +63,7 @@
     <% } %>></div>
   </div>
 
-  <div class="modal modal-opaque js-homeModal">
+  <div class="modal modal-opaque js-homeModal hide">
     <div class="modal-child modal-childMain custCol-primary">
       <div class="homeModal-hero modal-hero modal-shadow-inner1 custCol-primary-darken">
         <div class="modal-hero-icon"></div>
@@ -364,22 +364,32 @@
                   <div class="flexRow borderBottom custCol-border">
                     <div class="flexCol-3 borderRight custCol-border">
                       <label class="fieldItem" for="storeNameInput">
-
                         <%= polyglot.t('Name') %>
                       </label>
                     </div>
                     <div class="flexCol-9">
-                      <input name="name" id="storeNameInput" type="text" class="fieldItem custCol-text"  placeholder="<%= polyglot.t('Your') %> <%= polyglot.t('name') %>" required>
+                      <input name="name"
+                             id="storeNameInput"
+                             type="text"
+                             class="fieldItem custCol-text"
+                             placeholder="<%= polyglot.t('YourName') %>"
+                             required>
                     </div>
                   </div>
                   <div class="flexRow borderBottom custCol-border">
                     <div class="flexCol-3 borderRight custCol-border">
                       <label class="fieldItem" for="storeHandleInput">
-                        <%= polyglot.t('Handle') %>
+                        <%= polyglot.t('onboarding.handle') %>
                       </label>
                     </div>
                     <div class="flexCol-9">
-                      <input name="handle" id="storeHandleInput" type="text" class="fieldItem custCol-text" placeholder="<%= polyglot.t('Choose a handle') %> (@joe123)" required>
+                      <input name="handle"
+                             id="storeHandleInput"
+                             type="text"
+                             class="fieldItem custCol-text"
+                             placeholder="<%= polyglot.t('onboarding.chooseHandle') %> (@joe123)"
+                             pattern="@[a-zA-Z0-9]+"
+                             required>
                     </div>
                   </div>
                   <div class="flexRow borderBottom custCol-border">
@@ -389,7 +399,7 @@
                       </label>
                     </div>
                     <div class="flexCol-9">
-                      <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea custCol-text" placeholder="Say something interesting... (160 char max)"></textarea>
+                      <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea custCol-text" placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"></textarea>
                     </div>
                   </div>
                 </div>
@@ -550,7 +560,7 @@
 
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
-              Recommended Pages to Follow (<%= polyglot.t('Optional') %>)
+              <%= polyglot.t('onboarding.recommended') %> (<%= polyglot.t('Optional') %>)
               <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 9</span>
 
             </div>
@@ -629,7 +639,7 @@
             </div>
             <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
               <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-              <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Finished') %></a>
+              <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('onboarding.Finished') %></a>
             </div>
           </div>
 

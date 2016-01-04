@@ -89,11 +89,7 @@ module.exports = Backbone.Model.extend({
         response.profile.header_hash = "";
       }
 
-      if(!response.profile.avatar_hash && !response.profile.name && !response.profile.header_hash && !response.profile.handle){
-        response.profile.beenSet = false;
-      } else {
-        response.profile.beenSet = true;
-      }
+      response.profile.beenSet = !(!response.profile.avatar_hash && !response.profile.name && !response.profile.header_hash && !response.profile.handle);
 
       //if name comes back blank, set to random value
       if(!response.profile.name){

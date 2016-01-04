@@ -6,7 +6,7 @@
     <div>
       <% if(ob.showAvatar) { %>
       <div class="thumbnail-small js-avatar" data-handle="<%- ob.handle %>"
-        style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);"></div>
+        style="background-image: <% if(ob.avatar_hash && ob.avatarURL) { %> url(<%- ob.avatarURL %>), <% } %>url(imgs/defaultUser.png);"></div>
       <% } %>
       <div class="js-item pad8Left" data-id="<%- ob.contract_hash %>">
         <div class="textSize14px noOverflow" title="<%- ob.title %>"><%- ob.title %></div>
