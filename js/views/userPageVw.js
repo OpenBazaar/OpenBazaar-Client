@@ -138,7 +138,7 @@ module.exports = Backbone.View.extend({
     'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
     'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
     'click .js-customizeBackgroundColor': 'displayCustomizeBackgroundColor',
-    'mouseenter .js-customColorChoicePicker': 'customizeColorClick',
+    'click .js-customColorChoicePicker': 'customizeColorClick',
     'mouseenter .js-customColorChoice': 'clickCustomColorChoice',
     'click .js-customizePrimaryColor .js-customizeColor': 'displayCustomizePrimaryColor',
     'click .js-customizeSecondaryColor .js-customizeColor': 'displayCustomizeSecondaryColor',
@@ -717,6 +717,8 @@ module.exports = Backbone.View.extend({
   displayCustomizePrimaryColor: function(e) {
     "use strict";
 
+    $('#primary_color').colpickHide();
+
     if(this.$el.find('.customizePrimaryColorRecommendations').hasClass('width270')){
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
     }else{
@@ -724,13 +726,13 @@ module.exports = Backbone.View.extend({
 
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
       this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
       this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
       this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
       this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
       this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').addClass('width270');
@@ -744,18 +746,20 @@ module.exports = Backbone.View.extend({
     "use strict";
     var primaryColor = this.model.get('page').profile.primary_color;
 
+    $('#secondary_color').colpickHide();
+
     if(this.$el.find('.customizeSecondaryColorRecommendations').hasClass('width270')){
       this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
     }else{
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:first').css('background', shadeColor2(primaryColor, -0.20)); // 20% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, -0.20)); // 20% lighter than primary_color
 
       // slide secondary_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
@@ -769,19 +773,21 @@ module.exports = Backbone.View.extend({
   displayCustomizeBackgroundColor: function(e) {
     "use strict";
     var secondaryColor = this.model.get('page').profile.secondary_color;
-    
+
+    $('#background_color').colpickHide();
+
     if(this.$el.find('.customizeBackgroundColorRecommendations').hasClass('width270')){
       this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
     }else{
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:first').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
       this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
       this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
       this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
       this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
       this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
@@ -791,25 +797,19 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  blurCustomizeBackgroundColor: function(e) {
-    "use strict";
-
-    $('.mainContainer').removeClass('animateOpacity05to0to05');
-    $('#pageNav').removeClass('customize-preview-fade');
-    $('#obContainer').addClass('box-borderDashed');
-  },
-
   displayCustomizeTextColor: function(e) {
     "use strict";
+
+    $('#text_color').colpickHide();
 
     if(this.$el.find('.customizeTextColorRecommendations').hasClass('width270')){
       this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
     }else{
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background', '#ffffff'); 
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
       this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#000000');
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background','transparent'); // set to transparent
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background', '#ffffff'); 
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
@@ -819,18 +819,9 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  blurCustomizeTextColor: function(e) {
-    "use strict";
-
-    $('.custCol-text').removeClass('customize-preview-text');
-  },
-
-  blurCustomizeColorClick: function(e) {
-    $('.colpick').removeClass('show');
-  },
-
   customizeColorClick: function(e) {
     "use strict";
+
     var self = this,
         colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
         colorKey = colorInput.attr('id'),
@@ -839,8 +830,6 @@ module.exports = Backbone.View.extend({
         parentHeight = parent.height(),
         topPosition = parent.offset().top + parentHeight + 2;
 
-    $('.colpick').addClass('colpick-customizeColor show').css('top', topPosition);
-
     colorInput.colpick({
       layout: "rgbhex", //can also be full, or hex
       colorScheme: "dark", //can also be light
@@ -848,6 +837,7 @@ module.exports = Backbone.View.extend({
       onShow: function(el) {
         var colorKey = $(this).attr('id');
         $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
+        $('.colpick').addClass('colpick-customizeColor show').css('top', topPosition);
       },
       onSubmit: function(hsb, hex, rgb, el, visible) {
         self.setCustomColor(hex, $(el).attr('id'));
@@ -862,6 +852,7 @@ module.exports = Backbone.View.extend({
       }
     });
     colorInput.colpickSetColor(newColor, true);
+    colorInput.colpickShow();
   },
 
   setCustomColor: function(newColor, colorKey) {

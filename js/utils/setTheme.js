@@ -17,6 +17,7 @@ function shadeColor2(color, percent) {
 module.exports = function(primaryColor, secondaryColor, backgroundColor, textColor) {
   "use strict";
   var opaque = hexToRgb(backgroundColor);
+  var opaque1 = hexToRgb(primaryColor);
   var customStyleTag = document.getElementById('customStyle') || document.createElement('style');
   customStyleTag.setAttribute('id', 'customStyle');
 
@@ -56,6 +57,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage input::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + textColor + ";}" +
+      "#ov1 #userPage .mainContainer .txtFieldWrapper:before { color: " + textColor + ";}" +
       "#ov1 #userPage .container .txtField { color: " + textColor + ";}" +
       "#ov1 #userPage .custCol-font-secondary { color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + textColor + ";}" +
@@ -71,7 +73,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { border: 2px solid " + shadeColor2(primaryColor, 0.15) + ";}" +
       "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + shadeColor2(backgroundColor, 0.25) + ";}" +
       "#ov1 #userPage .customThemeScrollbar::-webkit-scrollbar-thumb { background: " + shadeColor2(primaryColor, 0.25) + ";}" +
-      "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", .50);}" +
+      "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque1.r + ", " + opaque1.g + ", " + opaque1.b + ", 1);}" +
       "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
