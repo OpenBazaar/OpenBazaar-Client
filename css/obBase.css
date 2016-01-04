@@ -628,6 +628,12 @@ label.fieldItem {
   right: -30px;
 }
 
+.modal > .btn-corner.btn-cornerTRFixedOut {
+  /* button must be direct child of modal. The left value is based on the width of the modal. */
+  left: 896px;
+  top: 23px;
+}
+
 .thumbnail-small {
   height: 30px;
   width: 30px;
@@ -3120,8 +3126,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #modalHolder {
   position: fixed;
-  z-index: 10;
+  z-index: 3;
   -webkit-app-region: no-drag;
+}
+
+#messageModal {
+  z-index: 4;
 }
 
 .selectPill {
