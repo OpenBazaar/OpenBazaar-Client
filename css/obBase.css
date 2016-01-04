@@ -1492,14 +1492,38 @@ input[type="text"].txtField-bar {
 
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
+  position: relative;
+}
+
+.btn.btn-win.btn-winClose .btn-win-icon,
+.btn.btn-win.btn-winMin .btn-win-icon,
+.btn.btn-win.btn-winMax .btn-win-icon {
+  position: absolute;
+  display: none;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  color: #000000;
+}
+
+.btn.btn-win.btn-winClose:hover .btn-win-icon,
+.btn.btn-win.btn-winMin:hover .btn-win-icon,
+.btn.btn-win.btn-winMax:hover .btn-win-icon {
+  display: block;
 }
 
 .btn.btn-win.btn-winMin {
   background-color: #F8E71C;
+  position: relative;
+
 }
 
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
+  position: relative;
+
 }
 
 .btn.btn-bar {
