@@ -21,7 +21,8 @@ module.exports = Backbone.View.extend({
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
     'click .js-buyWizardModeratorRadio': 'modSelected',
-    'click .js-buyWizardModNext': 'modNext',
+    'click .js-buyWizardModNext': 'accNext',
+    'click .js-buyWizardReturnNext': 'returnNext',
     'click .js-buyWizardAddressBack': 'addressPrev',
     'click .js-buyWizardAddressNext': 'addressNext',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
@@ -34,7 +35,6 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
-    'click .js-buyWizardAddressSelect': 'modNext',
     'blur .js-buyWizardPostalInput': 'updateMap',
     'blur input': 'validateInput'
   },
@@ -49,6 +49,7 @@ module.exports = Backbone.View.extend({
     parentEl: this is set by itemVw, and is the element this view is rendered into
     socketView: this is a reference to the socketView
      */
+    this.userModel = this.options.userModel;
     this.parentEl = $(options.parentEl);
     this.hideMap = true;
     this.orderID = "";
@@ -94,7 +95,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        moveBy = advanceBy ? this.accWidth * advanceBy : this.accWidth;
+        moveBy = parseInt(advanceBy) ? this.accWidth * advanceBy : this.accWidth;
 
     if(oldPos > (this.accWidth * (this.accNum -1) * -1)){
       this.accWin.css('left', function(){
@@ -109,7 +110,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        moveBy = rewindBy ? this.accWidth * rewindBy : this.accWidth;
+        moveBy = parseInt(rewindBy) ? this.accWidth * rewindBy : this.accWidth;
 
     if(oldPos < (0)){
       this.accWin.css('left', function(){
@@ -120,10 +121,25 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  accGoToID: function(ID){
+    "use strict";
+    var self = this,
+        oldPos = parseInt(this.accWin.css('left').replace("px","")),
+        currIndex = oldPos % this.accNum * -1,
+        newIndex = this.accWin.find(ID).index(),
+        moveBy = this.accWidth * (currIndex - newIndex);
+
+    this.accWin.css('left', function(){
+      return oldPos + moveBy;
+    });
+    // focus search input
+    $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
+  },
+
   render: function(){
     var self = this;
     this.buyDetailsView = new buyDetailsVw({model: this.model});
-    this.buyAddressesView = new buyAddressesVw({model: this.model, userModel: this.options.userModel});
+    this.buyAddressesView = new buyAddressesVw({model: this.model, userModel: this.userModel});
     this.listenTo(this.buyAddressesView, 'setAddress', this.addressSelected);
 
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
@@ -140,22 +156,20 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
-      //set the initial total price
-      self.setTotalPrice();
     });
-
     return this;
   },
 
   modSelected: function(e){
     "use strict";
     var modIndex = $(e.target).val();
-    this.$el.find('.js-buyWizardModNext').removeClass('disabled');
+    //this.$el.find('.js-buyWizardModNext').removeClass('disabled');
     if(modIndex != "direct"){
       this.model.set('selectedModerator', this.model.get('vendor_offer').listing.moderators[modIndex]);
     } else {
       this.model.set('selectedModerator', "");
     }
+    this.accNext();
   },
 
   showMaps: function(){
@@ -215,7 +229,7 @@ module.exports = Backbone.View.extend({
         newAddresses = [],
         addressData = {};
 
-    __.each(this.options.userModel.get('shipping_addresses'), function(address, i){
+    __.each(this.userModel.get('shipping_addresses'), function(address, i){
       newAddresses.push(JSON.stringify(address));
     });
 
@@ -233,13 +247,13 @@ module.exports = Backbone.View.extend({
 
     addressData.shipping_addresses = newAddresses;
 
-    saveToAPI(targetForm, this.options.userModel.toJSON(), self.model.get('serverUrl') + "settings", function(){
+    saveToAPI(targetForm, this.userModel.toJSON(), self.model.get('serverUrl') + "settings", function(){
       self.$el.find('#buyWizardNameInput').val("");
       self.$el.find('#buyWizardStreetInput').val("");
       self.$el.find('#buyWizardCityInput').val("");
       self.$el.find('#buyWizardStateInput').val("");
       self.$el.find('#buyWizardPostalInput').val("");
-      self.$el.find('#buyWizardCountryInput').val(self.options.userModel.get('country'));
+      self.$el.find('#buyWizardCountryInput').val(self.userModel.get('country'));
       self.$el.find('.chosen').trigger('chosen:updated');
       targetForm.removeClass('formChecked').find('.formChecked').removeClass('formChecked');
       self.hideNewAddress();
@@ -250,7 +264,7 @@ module.exports = Backbone.View.extend({
   addNewAddress: function(){
     "use strict";
     var self = this;
-    this.options.userModel.fetch({
+    this.userModel.fetch({
       success: function(data){
         var selected = data.attributes.shipping_addresses.length -1;
         //this will refresh the userModel, buyAddressView has a reference to it
@@ -284,39 +298,47 @@ module.exports = Backbone.View.extend({
     this.displayMap(address);
   },
 
-  modNext: function(){
+  returnNext: function(){
     "use strict";
-    var self = this;
-    if(this.$el.find('#buyWizardBitcoinAddressInput').val() != this.model.get('user').refund_address){
-      saveToAPI(this.$el.find('#buyWizardBitcoinReturnForm'), this.options.userModel.toJSON(), this.model.get('serverUrl') + "settings", function(){
-          self.modNextCheck();
-        },
-        function(){
-          showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
-      });
-    } else {
-      this.modNextCheck();
+    var self = this,
+        bitCoinReturnAddr = this.$el.find('#buyWizardBitcoinAddressInput').val(),
+        modForm = this.$el.find('#buyWizardBitcoinReturnForm');
+
+    modForm.addClass('formChecked');
+
+    if(modForm[0].checkValidity()) {
+      if (bitCoinReturnAddr != this.userModel.get('refund_address')) {
+        saveToAPI(modForm, this.userModel.toJSON(), this.model.get('serverUrl') + "settings", function () {
+              self.skipAddressCheck();
+            },
+            function () {
+              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
+            });
+      } else {
+        this.skipAddressCheck();
+      }
     }
   },
 
-  modNextCheck: function(){
+  skipAddressCheck: function(){
     "use strict";
+
     if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
-      this.accNext();
+      this.accGoToID('#BuyWizardShipTo');
       this.showMaps();
-      if(this.options.userModel.get('shipping_addresses').length === 0){
+      if(this.userModel.get('shipping_addresses').length === 0){
         this.createNewAddress();
         $('.js-buyWizardAddressBack').show();
         $('.js-buyWizardNewAddressCancel').hide();
       }
     } else {
-      this.accNext(2);
+      this.accGoToID('#BuyWizardDetails');
     }
   },
 
   addressPrev: function(){
     "use strict";
-    this.accPrev();
+    this.accGoToID("#BuyWizardBTCReturnAddress");
     this.hideMaps();
   },
 
@@ -331,7 +353,8 @@ module.exports = Backbone.View.extend({
     var self = this,
         formData = new FormData(),
         moderatorID = this.model.get('selectedModerator').guid || "",
-        selectedAddress = this.model.get('selectedAddress');
+        selectedAddress = this.model.get('selectedAddress'),
+        btcReturnAddress = "";
 
     if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
       showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
@@ -356,27 +379,35 @@ module.exports = Backbone.View.extend({
 
     this.$el.find('.js-buyWizardSpinner').removeClass('hide');
 
-    $.ajax({
-      type: "POST",
-      url: self.model.get('serverUrl') + "purchase_contract",
-      contentType: false,
-      processData: false,
-      data: formData,
-      dataType: 'json',
+    this.userModel.fetch({
       success: function(data){
-        if(data.success == true){
-          self.showPayAddress(data);
-        } else {
-          showErrorModal(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError'));
-        }
+        formData.append("refund_address", data.attributes.refund_address);
+        $.ajax({
+          type: "POST",
+          url: self.model.get('serverUrl') + "purchase_contract",
+          contentType: false,
+          processData: false,
+          data: formData,
+          dataType: 'json',
+          success: function(data){
+            if(data.success == true){
+              self.showPayAddress(data);
+            } else {
+              showErrorModal(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " + window.polyglot.t('errorMessages.checkPurchaseData'));
+              self.$el.find('.js-buyWizardSpinner').addClass('hide');
+            }
+          },
+          error: function (jqXHR, status, errorThrown) {
+            console.log(jqXHR);
+            console.log(status);
+            console.log(errorThrown);
+          }
+        });
       },
-      error: function (jqXHR, status, errorThrown) {
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
+      error: function(){
+        showErrorModal(window.polyglot.t('errorMessages.getError'));
       }
     });
-
   },
 
   showPayAddress: function(data){
@@ -437,10 +468,10 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.hidePayAddress();
     if(this.model.get('vendor_offer').listing.metadata.category == "physical good"){
-      this.accPrev();
+      this.accGoToID('#BuyWizardShipTo');
       this.showMaps();
     } else {
-      this.accPrev(2);
+      this.accGoToID('#BuyWizardBTCReturnAddress');
     }
     this.buyDetailsView.render();
     this.$el.find('.js-buyWizardSendPurchase').removeClass('hide');
