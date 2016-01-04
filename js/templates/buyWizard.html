@@ -45,9 +45,9 @@
         </div>
       </div>
     </div>
-    <div class="homeModal-accordion accordion js-buyWizardAccordion">
-      <div class="accordion-window">
-        <div class="accordion-child">
+    <div class="homeModal-accordion accordion js-buyWizardAccordion borderBottomLeftRaidus3 borderBottomRightRaidus3">
+      <div class="accordion-window  custCol-primary">
+        <div class="accordion-child ">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <%= polyglot.t('PaymentType') %>
           </div>
@@ -122,7 +122,7 @@
               </div>
             </div>
           </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 hide">
             <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
             <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3">
               <%= polyglot.t('Next') %>
