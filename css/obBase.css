@@ -2211,6 +2211,18 @@ input[type="datetime-local"].fieldItem::-webkit-clear-button {
   display: none;
 }
 
+input[type="datetime-local"].fieldItem::-webkit-calendar-picker-indicator {
+  padding: 10px;
+  opacity: .75;
+}
+
+input[type="datetime-local"].fieldItem::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background: transparent;
+  cursor: pointer;
+}
+
+
 input[type="number"].fieldItem {
   padding-right: 0;
 }
