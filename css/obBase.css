@@ -1699,7 +1699,20 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-closeConversation {
-  padding: 10px;
+  height: 38px;
+  width: 38px;
+  text-align: center;
+  float: right;
+}
+
+.btn-closeConversation a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-closeConversation a:before {
+  line-height: 38px;
 }
 
 .btn-closeConversation:hover {
@@ -3213,15 +3226,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   content: attr(data-tooltip);
   padding: 8px 10px;
   position: absolute;
-  z-index: 98;
+  z-index: 10;
   height: 16px;
   font-size: 11px;
   left: 0;
   line-height: 16px;
+  opacity: 1;
 }
 
 .btn-notifications.tooltip:hover:after{
   left: -20px;
+}
+
+.btn-closeChat.tooltip:hover:after,
+.btn-closeConversation a.tooltip:hover:after {
+  left: -13px;
+  bottom: -34px;
 }
 
 .btn-profile.tooltip:hover:after{
