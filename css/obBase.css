@@ -3205,14 +3205,30 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
 }
 
+.tooltip:hover:after{
+    background: #252525;
+    border-radius: 5px;
+    bottom: -30px;
+    color: #fff;
+    content: attr(data-tooltip);
+    padding: 8px 10px;
+    position: absolute;
+    z-index: 98;
+    height: 16px;
+    font-size: 12px;
+    left: 0;
+    line-height: 16px;
+}
+
 .tooltip:hover:before{
-  content: attr(title);
-  position: absolute;
-  bottom: 10px;
-  display: block;
-  background: #252525;
-  padding: 20px;
-  padding: 20px;
+    border: solid;
+    border-color: #252525 transparent;
+    border-width: 6px 0 0 6px;
+    bottom: 0px;
+    content: "";
+    left: 10px;
+    position: absolute;
+    z-index: 99;
 }
 
 .interactiveTooltip {
