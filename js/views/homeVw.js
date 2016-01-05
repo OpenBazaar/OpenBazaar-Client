@@ -47,6 +47,15 @@ module.exports = Backbone.View.extend({
     this.socketItemID = Math.random().toString(36).slice(2);
     this.socketVendorID = Math.random().toString(36).slice(2);
 
+    //listen to follow and unfollow events
+    this.listenTo(window.obEventBus, "followUser", function(guid){
+      this.followUser(guid);
+    });
+
+    this.listenTo(window.obEventBus, "unfollowUser", function(guid){
+      this.unfollowUser(guid);
+    });
+
     this.render();
   },
 
@@ -160,6 +169,47 @@ module.exports = Backbone.View.extend({
   createStore: function(){
     "use strict";
     Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/createStore', {trigger: true});
+  },
+
+  followUser: function(options){
+    "use strict";
+    console.log(options);
+    var self = this;
+    $.ajax({
+      type: "POST",
+      data: {'guid': options.guid},
+      dataType: 'json',
+      url: this.options.userModel.get('serverUrl') + "follow",
+      success: function(data) {
+        //self.subRender();
+        options.target.closest('.js-userShortView').removeClass('div-fade');
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+  },
+
+  unfollowUser: function(options){
+    "use strict";
+    var self = this;
+    $.ajax({
+      type: "POST",
+      data: {'guid': options.guid},
+      dataType: 'json',
+      url: this.options.userModel.get('serverUrl') + "unfollow",
+      success: function() {
+        //self.subRender();
+        options.target.closest('.js-userShortView').removeClass('div-fade');
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
   },
 
   scrollHandler: function(){
