@@ -54,7 +54,7 @@
         <td style="width:50%">
           <% if(ob.vendor_offer.listing.metadata.category) { %>
           <div class="clearfix">
-            <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize16"></div>
+            <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize15"></div>
             <div class="itemMetaValue"><%- ob.vendor_offer.listing.metadata.category %></div>
           </div>    
           <% } %>
@@ -63,14 +63,14 @@
       <tr>
         <% if(ob.vendor_offer.listing.item.condition) { %>  
         <td>
-          <div class="itemMetaCircle custCol-secondary floatLeft ion-android-star marginRight7 fontSize16"></div>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-android-star marginRight7 fontSize15"></div>
           <div class="itemMetaValue"><%- ob.vendor_offer.listing.item.condition %></div>
         </td>
         <% } %>
 
         <% if( ob.vendor_offer.listing.metadata.category === "physical good" && ob.vendor_offer.listing.shipping.free ) { %>  
         <td>
-          <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize16"></div>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize15"></div>
           <div class="itemMetaValue"><%= polyglot.t('FreeShipping') %></div>
         </td>
         <% } %>
@@ -100,21 +100,21 @@
       </div>
       <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300">
         <div class="flexRow">
-          <div class="rowItem fontSize16 padding30 lineHeight24">
+          <div class="rowItem fontSize16 padding30 paddingTop10 lineHeight24 fontWeight400">
             <p><%- ob.vendor_offer.listing.item.description %></p>
           </div>
         </div>
       </div>
       <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-reviews js-tabTarg hide">
         <div class="flexRow">
-          <div class="rowItem fontSize16 padding30 lineHeight24">
+          <div class="rowItem fontSize16 padding30 paddingTop10 lineHeight24 fontWeight400">
             <p>Placeholder for reviews</p>
           </div>
         </div>
       </div>
       <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-shipping js-tabTarg hide">
         <div class="flexRow">
-          <div class="rowItem fontSize16 padding30 lineHeight24">
+          <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
             <% if(ob.vendor_offer.listing.shipping.free == false) { %>
               <h3><%= polyglot.t('Domestic') %></h3>
               <p><%= polyglot.t('Shipping') %>: <%- ob.displayDomesticShipping %></p>

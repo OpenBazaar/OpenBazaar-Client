@@ -95,6 +95,11 @@ module.exports = Backbone.View.extend({
         unread_count = 1;
       }
       this.trigger('notificationsCounted', unread_count);
+
+      // play notification sound
+      var notifcationSound = document.createElement('audio');
+      notifcationSound.setAttribute('src', './audio/notification.mp3');
+      notifcationSound.play();
     }
   },
 

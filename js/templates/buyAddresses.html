@@ -18,7 +18,7 @@
 <% _.each(ob.user.shipping_addresses, function(address, i){ %>
 <% if(address.city && address.country && address.displayCountry && address.name && address.postal_code && address.state && address.street && ob.vendor_offer.listing.shipping.shipping_regions.indexOf(address.country) > -1) { %>
 <div class="flexRow custCol-primary custCol-border js-buyWizardAddress pad10">
-  <input type="radio" class="fieldItem js-buyWizardAddressRadio" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
+  <input type="radio" class="fieldItem js-buyWizardAddressRadio hide" name="address" id="buyWizardAddress<%- i %>" value="<%- i %>" <% if(ob.selected == i){ %>checked<% } %>/>
   <label for="buyWizardAddress<%- i %>" class="width100 textOpacity1 textSize13px paddingRight5">
     <div class="padding15 floatLeft">
       <div class="row10 txt-unleaded"><strong><%- address.name %></strong></div>

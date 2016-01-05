@@ -13,6 +13,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "I Agree",
         Back: "Back",
         EnterMessage: "Enter message...",
+        Reload: "Reload", 
+        You: "You",
         Skip: "Skip",
         Done: "Done",
         Cancel: "Cancel",
@@ -106,7 +108,8 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Save Changes",
         YourName: "Your name",
         BitcoinReturnAddress: "Bitcoin Return Address",
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...", 
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", 
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -127,6 +130,19 @@ module.exports = Backbone.Model.extend({
         Type: "Type",
         Condition: "Condition",
         NSFW: "18+ (Adult content)",
+        Select: "Select",
+        Basic: "Basic",
+        Social: "Social",
+        Theme: "Theme",
+        Listing: "Listing",
+        Listings: "Listings",
+        Pages: "Pages",
+        Page: "Page",
+        Blocked: "Blocked",
+        Advanced: "Advanced",
+        General: "General",
+        Language: "Language",
+        Reset: "Reset",
         Local: "Local",
         Domestic: "Domestic",
         Location: "Location",
@@ -300,6 +316,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is",
           summaryMsg3: "You can check the status of your order on your",
           purchasesPage: "purchases page",
+          returnAddress: "Return Address",
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
           directPaymentTo: "Direct Payment to",
@@ -313,6 +330,8 @@ module.exports = Backbone.Model.extend({
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Omitir",
         Done: "Hecho",
         Cancel: "Cancelar",
@@ -403,6 +422,7 @@ module.exports = Backbone.Model.extend({
         YourNombre: "Su nombre",
         BitcoinReturnAddress: "Direcci&oacute;n de devoluciones Bitcoin",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -424,6 +444,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tipo",
         Condition: "Condici&oacute;n",
         NSFW: "18+ (contenido para adultos)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Local",
         Domestic: "Interno",
         Location: "Ubicaci&oacute;n",
@@ -592,6 +625,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -607,6 +641,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Akzeptieren",
         Back: "Zur&uuml;ck",
         EnterMessage: "Nachricht eingeben...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "&Uuml;berspringen",
         Done: "Fertig",
         Cancel: "Abbrechen",
@@ -699,6 +735,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Dein Name",
         BitcoinReturnAddress: "Bitcoin R&uuml;cksendeaddresse",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Lokale W&auml;hrung",
         TimeZone: "Zeitzone",
         ShipToName: "Empfänger",
@@ -720,6 +757,19 @@ module.exports = Backbone.Model.extend({
         Type: "Typ",
         Condition: "Zustand",
         NSFW: "18+ (nicht jugendfreie Inhalte)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Lokal",
         Domestic: "Inland",
         Location: "Standort",
@@ -892,6 +942,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -907,6 +958,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Sono d'accordo",
         Back: "Indietro",
         EnterMessage: "Inserire messaggio...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Salta",
         Done: "Finito",
         Cancel: "Annulla",
@@ -1001,6 +1054,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Tuo nome",
         BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1021,6 +1075,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tipo",
         Condition: "Condizione",
         NSFW: "18+ (Adult content)?",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Locale",
         Domestic: "Nazionale",
         Location: "Locazione",
@@ -1193,6 +1260,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
           summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
           purchasesPage: "pagina acquisti", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -1208,6 +1276,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Je suis d'accord",
         Back: "Retour",
         EnterMessage: "Entrer un message...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Passer",
         Done: "Terminé",
         Cancel: "Annuler",
@@ -1302,6 +1372,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Votre nom",
         BitcoinReturnAddress: "Adresse Bitcoin",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1322,6 +1393,19 @@ module.exports = Backbone.Model.extend({
         Type: "Type",
         Condition: "Condition",
         NSFW: "18+ (Contenu adulte)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Local",
         Domestic: "National",
         Location: "Emplacement",
@@ -1510,6 +1594,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Sunt de acord",
         Back: "Înapoi",
         EnterMessage: "Introduceți mesajul...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Sari peste",
         Done: "Efectuat",
         Cancel: "Anulare",
@@ -1602,6 +1688,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Numele dvs.",
         BitcoinReturnAddress: "Adresa Bitcoin",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Valuta locală",
         TimeZone: "Fus orar",
         ShipToName: "Numele",
@@ -1623,6 +1710,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tip",
         Condition: "Condiție",
         NSFW: "18+ (Conținut pentru adulți)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Local",
         Domestic: "Domestic",
         Location: "Locație",
@@ -1795,6 +1895,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -1810,6 +1911,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Согласен",
         Back: "Назад",
         EnterMessage: "Ввести сообщение...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Пропустить",
         Done: "Готово",
         Cancel: "Отмена",
@@ -1902,6 +2005,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Ваше имя",
         BitcoinReturnAddress: "Биткойн-адрес",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -1923,6 +2027,19 @@ module.exports = Backbone.Model.extend({
         Type: "Тип",
         Condition: "Состояние",
         NSFW: "18+ (для взрослых)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Местный",
         Domestic: "Внутри страны",
         Location: "Местонахождение",
@@ -2095,6 +2212,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Ожидаемое время обработки вашего заказа составляет",
           summaryMsg3: "Чтобы проверить статус вашего заказа, загляните в",
           purchasesPage: "интерфейс покупок", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -2110,6 +2228,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Súhlasím",
         Back: "Späť",
         EnterMessage: "Vložte správu...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Preskočiť",
         Done: "Hotovo",
         Cancel: "Zrušiť",
@@ -2201,6 +2321,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Vaše meno",
         BitcoinReturnAddress: "Bitcoinová adresa",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -2222,6 +2343,19 @@ module.exports = Backbone.Model.extend({
         Type: "Typ",
         Condition: "Podmienka",
         NSFW: "18+ (obsah pre dospelých)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Lokálne",
         Domestic: "Vnútroštátne",
         Location: "Lokalita",
@@ -2394,6 +2528,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -2409,6 +2544,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Kabul ediyorum",
         Back: "Geri",
         EnterMessage: "İletinizi yazın...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Atla",
         Done: "Tamam",
         Cancel: "İptal",
@@ -2503,6 +2640,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Adınız",
         BitcoinReturnAddress: "Bitcoin adresiniz",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Yerel para birimi",
         TimeZone: "Saat Dilimi",
         ShipToName: "Ad",
@@ -2523,6 +2661,19 @@ module.exports = Backbone.Model.extend({
         Type: "Tür",
         Condition: "Şart",
         NSFW: "18+ (Yetişkinlere yönelik içerik)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Yerel",
         Domestic: "Yurt içi",
         Location: "Konum",
@@ -2695,6 +2846,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Bu siparişin tahmini hazırlama süresi",
           summaryMsg3: "Siparişinizin durumunu kontrol edebileceğiniz yer",
           purchasesPage: "alımlar sayfası", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -2710,6 +2862,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "jIQochbe'",
         Back: "Chap",
         EnterMessage: "QIn 'el...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "BuSHa'",
         Done: "PItlh",
         Cancel: "QuvHa'ghach",
@@ -2803,6 +2957,7 @@ module.exports = Backbone.Model.extend({
         YourName: "PonglIj'e'",
         BitcoinReturnAddress: "Bot SoQ mIr",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Huch lutu'lu'bej",
         TimeZone: "PoH mIch",
         ShipToName: "Pong",
@@ -2823,6 +2978,19 @@ module.exports = Backbone.Model.extend({
         Type: "Segh",
         Condition: "Je",
         NSFW: "Dochmey nen",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Lutu'llu'bej",
         Domestic: "JuH Dachegh Sep",
         Location: "NuqDaq SoH",
@@ -2994,6 +3162,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "PIH mIw Dunqu'mo' tlham",
           summaryMsg3: "LaH legh SoH tlham Dotlh",
           purchasesPage: "Tuq je'", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -3009,6 +3178,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "我同意",
         Back: "上一步",
         EnterMessage: "留言",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "跳过",
         Done: "完成",
         Cancel: "取消",
@@ -3102,6 +3273,7 @@ module.exports = Backbone.Model.extend({
         YourName: "您的姓名",
         BitcoinReturnAddress: "比特币地址",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -3122,6 +3294,19 @@ module.exports = Backbone.Model.extend({
         Type: "形式",
         Condition: "新旧程度",
         NSFW: "成人内容",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "本地",
         Domestic: "本国",
         Location: "地点",
@@ -3293,6 +3478,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "这笔订单预计完成时间为",
           summaryMsg3: "到此查看您订单的状况",
           purchasesPage: "以购商品", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated
@@ -3309,6 +3495,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "동의",
         Back: "뒤",
         EnterMessage: "메세지 입력...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "거르다",
         Done: "끝난",
         Cancel: "취소",
@@ -3403,6 +3591,7 @@ module.exports = Backbone.Model.extend({
         YourName: "당신 이름",
         BitcoinReturnAddress: "당신 비트코인 주소",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "지역 통화",
         TimeZone: "시간대",
         ShipToName: "이름",
@@ -3423,6 +3612,19 @@ module.exports = Backbone.Model.extend({
         Type: "종류",
         Condition: "상태",
         NSFW: "19+ (성인 콘텐츠)",
+        Select: "Select", //not translated
+        Basic: "Basic", //not translated
+        Social: "Social", //not translated
+        Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
+        Listings: "Listings", //not translated
+        Pages: "Pages", //not translated
+        Page: "Page", //not translated
+        Blocked: "Blocked", //not translated
+        Advanced: "Advanced", //not translated
+        General: "General", //not translated
+        Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "지역",
         Domestic: "국내",
         Location: "위치",
@@ -3595,6 +3797,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "이주문에 대한 예상 처리 시간",
           summaryMsg3: "당신은 당신의 주문상태를 확인할수 있다",
           purchasesPage: "지불 페이지", //notTranslated
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           directPaymentTo: "Direct Payment to", //notTranslated

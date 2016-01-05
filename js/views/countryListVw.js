@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
     __.each(this.chooseCountries.models, function(item){
       self.renderItem(item);
     },this);
-    this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text">'+ this.listContents.join('') +'</ul>');
+    this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">'+ this.listContents.join('') +'</ul>');
     window.obEventBus.trigger("countryListRendered");
   },
 

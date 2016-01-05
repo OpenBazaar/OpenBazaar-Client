@@ -100,6 +100,19 @@ var defaultItem = {
   }
 };
 
+function shadeColor2(color, percent) {
+  var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+  return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+}
+
+function rgb2hex(rgb) {
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    function hex(x) {
+        return ("0" + parseInt(x).toString(16)).slice(-2);
+    }
+    return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
 module.exports = Backbone.View.extend({
 
   classname: "userView",
@@ -118,11 +131,23 @@ module.exports = Backbone.View.extend({
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
-    'click .js-customizeColor': 'customizeColorClick',
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUserClick',
     'click .js-unfollow': 'unfollowUserClick',
     'click .js-message': 'sendMessage',
+    'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
+    'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
+    'click .js-customizeBackgroundColor': 'displayCustomizeBackgroundColor',
+    'click .js-customColorChoicePicker': 'customizeColorClick',
+    'mouseenter .js-customColorChoice': 'clickCustomColorChoice',
+    'click .js-customizePrimaryColor .js-customizeColor': 'displayCustomizePrimaryColor',
+    'click .js-customizeSecondaryColor .js-customizeColor': 'displayCustomizeSecondaryColor',
+    'click .js-customizeBackgroundColor .js-customizeColor': 'displayCustomizeBackgroundColor',
+    'click .js-customizeTextColor .js-customizeColor': 'displayCustomizeTextColor',
+    'click .js-customizePrimaryColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-customizeSecondaryColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-customizeBackgroundColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-customizeTextColor .js-customColorChoice': 'customizeSelectColor',
     'change .js-categories': 'categoryChanged'
   },
 
@@ -388,7 +413,10 @@ module.exports = Backbone.View.extend({
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
+    this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
+    document.getElementById('obContainer').classList.remove("noScrollBar");
+    document.getElementById('obContainer').classList.remove("overflowHidden");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
@@ -398,7 +426,11 @@ module.exports = Backbone.View.extend({
       } else if(state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
         this.$el.find('#customizeControls').removeClass('hide');
+        this.$el.find('.user-page-header-slim-bg-cover').addClass('user-page-header-slim-bg-cover-customize');
         document.getElementById('obContainer').classList.add("box-borderDashed");
+        document.getElementById('obContainer').classList.add("noScrollBar");
+        document.getElementById('obContainer').classList.add("overflowHidden");
+
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
@@ -711,20 +743,161 @@ module.exports = Backbone.View.extend({
     $('#obContainer').animate({ scrollTop: "0" });
   },
 
+  hideColorRecommendations: function(e) {
+    "use strict";
+    $('.js-customizeColorRecommendations').removeClass('width270');
+  },
+
+  clickCustomColorChoice: function(e) {
+    "use strict";
+    e.preventDefault();
+    e.stopPropagation();
+
+    var colorKey = $(e.currentTarget).data('colorKey');
+
+    if (colorKey){
+      $('.js-customColorChoice').removeClass('outline2')
+      $(e.currentTarget).addClass('outline2');
+
+      this.setCustomColor(rgb2hex($(e.currentTarget).css('background-color')), colorKey);
+    }
+  },
+
+  customizeSelectColor: function(e) {
+    "use strict";
+    e.preventDefault();
+    e.stopPropagation();
+
+    if ( !$(e.currentTarget).hasClass('js-customColorChoicePicker') ){
+      this.hideColorRecommendations();
+      $('.colpick').removeClass('show');
+    }
+  },
+
+  displayCustomizePrimaryColor: function(e) {
+    "use strict";
+
+    $('#primary_color').colpickHide();
+
+    if(this.$el.find('.customizePrimaryColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+    }else{
+      $('.seeTooltip').hide();
+
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+
+      // slide background_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').addClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }
+  },
+
+  displayCustomizeSecondaryColor: function(e) {
+    "use strict";
+    var primaryColor = this.model.get('page').profile.primary_color;
+
+    $('#secondary_color').colpickHide();
+
+    if(this.$el.find('.customizeSecondaryColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+    }else{
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(primaryColor, -0.25)); // 20% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
+
+      // slide secondary_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').addClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }
+
+  },
+
+  displayCustomizeBackgroundColor: function(e) {
+    "use strict";
+    var secondaryColor = this.model.get('page').profile.secondary_color;
+
+    $('#background_color').colpickHide();
+
+    if(this.$el.find('.customizeBackgroundColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+    }else{
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
+
+      // slide background_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').addClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }
+  },
+
+  displayCustomizeTextColor: function(e) {
+    "use strict";
+
+    $('#text_color').colpickHide();
+
+    if(this.$el.find('.customizeTextColorRecommendations').hasClass('width270')){
+      this.$el.find('.customizeTextColorRecommendations').removeClass('width270');
+    }else{
+      // set recommendations
+      this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#ffffff'); 
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background', '#000000');
+
+      // slide background_color recommendations out + hide others
+      this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeSecondaryColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeBackgroundColorRecommendations').removeClass('width270');
+      this.$el.find('.customizeTextColorRecommendations').addClass('width270');
+    }
+  },
+
   customizeColorClick: function(e) {
     "use strict";
+
     var self = this,
         colorInput = $(e.target).closest('.positionWrapper').find('.js-customizeColorInput'),
         colorKey = colorInput.attr('id'),
-        newColor = this.model.get('page').profile[colorKey].slice(1);
-    $(e.target).closest('.positionWrapper').find('.labelWrap').addClass('fadeIn');
+        newColor = this.model.get('page').profile[colorKey].slice(1),
+        parent = $('.js-customizeColorRecommendations.width270'),
+        parentHeight = parent.height(),
+        topPosition = parent.offset().top + parentHeight + 2;
+
     colorInput.colpick({
       layout: "rgbhex", //can also be full, or hex
       colorScheme: "dark", //can also be light
-      submitText: "Change",
+      submitText: "Submit",
       onShow: function(el) {
         var colorKey = $(this).attr('id');
         $(this).colpickSetColor(self.model.get('page').profile[colorKey].slice(1), true);
+        $('.colpick').addClass('colpick-customizeColor show').css('top', topPosition);
       },
       onSubmit: function(hsb, hex, rgb, el, visible) {
         self.setCustomColor(hex, $(el).attr('id'));
@@ -732,13 +905,14 @@ module.exports = Backbone.View.extend({
         if(visible) {
           $(el).colpickHide();
         }
-        $('.labelWrap').removeClass('fadeIn');
       },
       onHide: function(){
-        $('.labelWrap').removeClass('fadeIn');
+        // $('.customizeSecondaryColorRecommendations').hide();
+        // $('.colpick').removeClass('colpick-customizeColor');
       }
     });
     colorInput.colpickSetColor(newColor, true);
+    colorInput.colpickShow();
   },
 
   setCustomColor: function(newColor, colorKey) {

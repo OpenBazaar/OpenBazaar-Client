@@ -6,7 +6,7 @@
     <div class="modal-hero js-buyWizardHero shadow-inner1-light"
          style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);">
       <div class="js-buyWizardMapPlaceholder hide">
-        <div class="overflowHidden">
+        <div class="overflowhide">
           <iframe
             width="525"
             height="290"
@@ -56,8 +56,8 @@
               <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                 <div class="flexRow custCol-border">
                   <div class="rowItem padding2010">
-                    <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
-                    <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1 paddingRight0">
+                    <input type="radio" class="fieldItem js-buyWizardModeratorRadio hide" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
+                    <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1 paddingRight0 paddingLeft6">
                       <div class="table">
                         <div>
                           <div class="thumbnail thumbnail-large-slim"
@@ -92,8 +92,8 @@
               <% }); %>
               <div class="flexRow custCol-border">
                 <div class="rowItem padding2010">
-                  <input type="radio" class="fieldItem js-buyWizardModeratorRadio" name="moderator" id="buyWizardNoModerator" value="direct" <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length === 0){ %>checked<% } %> />
-                  <label for="buyWizardNoModerator" class="textOpacity1 paddingRight0">
+                  <input type="radio" class="fieldItem js-buyWizardModeratorRadio hide" name="moderator" id="buyWizardNoModerator" value="direct" <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length === 0){ %>checked<% } %> />
+                  <label for="buyWizardNoModerator" class="buyWizardPaymentType textOpacity1 paddingRight0 paddingLeft6">
                     <div class="table">
                       <div>
                         <div class="thumbnail thumbnail-large-slim" style="background-image:
@@ -136,19 +136,16 @@
             </a>
           </div>
         </div>
+
         <div class="accordion-child" id="BuyWizardBTCReturnAddress">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <%= polyglot.t('BitcoinReturnAddress') %>
           </div>
           <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+            <p class="padding515 textOpacity75"><%= polyglot.t('BitcoinReturnAddressInfo') %></p>
             <div class="flexRow">
               <form class="flexRow custCol-border borderTop" id="buyWizardBitcoinReturnForm">
-                <div class="flexCol-5 custCol-border">
-                  <div class="fieldItem">
-                    <label for="buyWizardBitcoinAddressInput"><%= polyglot.t('BitcoinReturnAddress') %></label>
-                  </div>
-                </div>
-                <div class="flexCol-7 custCol-border positionWrapper">
+                <div class="flexCol-12 custCol-border positionWrapper">
                   <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
                          placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
                          pattern="<%- ob.user.bitcoinValidationRegex %>"
