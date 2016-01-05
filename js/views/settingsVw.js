@@ -321,7 +321,6 @@ module.exports = Backbone.View.extend({
     } else {
       this.setTab(this.$el.find('.js-generalTab'), this.$el.find('.js-general'));
     }
-    $('#content').find('input:visible:first').focus();
   },
 
   generalClick: function(){
@@ -334,18 +333,21 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.setState("addresses");
     this.addTabToHistory("addresses");
+    $('#content').find('input:visible:first').focus();
   },
 
   pageClick: function(){
     "use strict";
     this.setState("page");
     this.addTabToHistory("page");
+    $('#content').find('input:visible:first').focus();
   },
 
   storeClick: function(){
     "use strict";
     this.setState("store");
     this.addTabToHistory("store");
+    $('#content').find('input:visible:first').focus();
   },
 
   blockedClick: function(){
@@ -358,6 +360,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.setState("advanced");
     this.addTabToHistory("advanced");
+    $('#content').find('input:visible:first').focus();
   },
 
   cancelView: function(e){

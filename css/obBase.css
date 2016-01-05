@@ -30,7 +30,7 @@
 
 .customThemeScrollbar::-webkit-scrollbar-thumb {
   border-radius: 0;
-  background: #3E3E3E;
+  background: #08324A;
 }
 
 .noScrollBar::-webkit-scrollbar {
@@ -490,26 +490,26 @@ form {
 }
 
 .itemMetaCircle {
-  height: 44px;
-  line-height: 44px;
-  width: 44px;
+  height: 38px;
+  line-height: 38px;
+  width: 38px;
   text-align: center;
   border-radius: 25px;
-  font-size: 18px;
+  font-size: 15px;
   opacity: .85;
 }
 
 .itemMetaCircle:before {
-  margin-top: 12px;
+  margin-top: 9px;
 }
 
 .itemMetaValue {
   max-width: 130px;
   float: left;
-  font-size: 16px;
+  font-size: 14px;
   opacity: .75;
-  height: 44px;
-  line-height: 44px;
+  height: 38px;
+  line-height: 38px;
   font-weight: 500;
   text-transform: capitalize;
 }
@@ -789,7 +789,7 @@ label.fieldItem {
   top: 0;
   left: 0;
   /* use fadeIn and fadeOut to change opacity */
-  transition: opacity .15s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .05s cubic-bezier(0, 0, 0.2, 1);
   padding-top: 25px;
   z-index: 1;
 }
@@ -1157,7 +1157,7 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
-  transition: left .25s cubic-bezier(0, 0, 0.2, 1);
+  transition: left .1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modal-hero {
@@ -1239,13 +1239,19 @@ h5 {
 }
 
 .box-borderBright {
-  border: 1px solid #fff;
+  border: 1px solid rbga(255,255,255,.5);
   box-sizing: border-box;
 }
 
+.box-borderBright:hover {
+  border: 1px solid rbga(255,255,255,1);
+
+}
+
 .box-borderDashed {
-  border: 4px dashed #fff;
+  border: 5px dashed #fff;
   box-sizing: border-box;
+  height: calc(100% - 50px) !important;
 }
 
 #obContainer.box-borderDashed {
@@ -1463,7 +1469,7 @@ input[type="text"].txtField-bar {
 
 #userPage .btn.btn-c1,
 .btn.btn-dark {
-  background-color: rgb(87,87,87);
+  background-color: rgb(37,37,37);
 }
 
 .btn.btn-c1.fade {
@@ -1486,14 +1492,38 @@ input[type="text"].txtField-bar {
 
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
+  position: relative;
+}
+
+.btn.btn-win.btn-winClose .btn-win-icon,
+.btn.btn-win.btn-winMin .btn-win-icon,
+.btn.btn-win.btn-winMax .btn-win-icon {
+  position: absolute;
+  display: none;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  color: #000000;
+}
+
+.btn.btn-win.btn-winClose:hover .btn-win-icon,
+.btn.btn-win.btn-winMin:hover .btn-win-icon,
+.btn.btn-win.btn-winMax:hover .btn-win-icon {
+  display: block;
 }
 
 .btn.btn-win.btn-winMin {
   background-color: #F8E71C;
+  position: relative;
+
 }
 
 .btn.btn-win.btn-winMax {
   background-color: #B8E986;
+  position: relative;
+
 }
 
 .btn.btn-bar {
@@ -1632,8 +1662,6 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeads {
-  overflow-x: hidden;
-  overflow-y: auto;
   clear: both;
   border-top: solid 1px #363636;
   height: calc(100% - 88px);
@@ -1669,7 +1697,20 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-closeConversation {
-  padding: 10px;
+  height: 38px;
+  width: 38px;
+  text-align: center;
+  float: right;
+}
+
+.btn-closeConversation a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-closeConversation a:before {
+  line-height: 38px;
 }
 
 .btn-closeConversation:hover {
@@ -1880,7 +1921,7 @@ div.chatSearchOut .chatSearchIcon {
   height: 46px;
   font-weight: 500;
   line-height: 46px;
-  padding: 0 20px;
+  padding: 0 25px;
   margin-top: 4px;
   font-size: 14px;
 }
@@ -2000,6 +2041,17 @@ div.chatSearchOut .chatSearchIcon {
 .btn-square {
   width: 44px;
   height: 44px;
+  opacity: .75;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn-square:hover {
+  opacity: 1;
+}
+
+.btn-square:active {
+  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+  opacity: .75;
 }
 
 .btn-squareSm {
@@ -2096,7 +2148,6 @@ div.chatSearchOut .chatSearchIcon {
   border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.6);
   transition: opacity 1s;
-  width: 185px;
 }
 
 .labelWrap.fade {
@@ -2840,6 +2891,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 4;
   width: 950px;
 }
+.user-page-header-slim-bg-cover-customize {
+  position: fixed;
+  top: 55px;
+  height: 15px;
+  z-index: 4;
+  width: 950px;
+}
 
 .userPage-subViews {
   position: relative;
@@ -3070,10 +3128,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #customizeControls {
   position: fixed;
-  left: 40px;
+  left: 30px;
   top: 80px;
   width: 40px;
   z-index: 100;
+}
+
+#customizeControls .js-customizePrimaryColor .btn-square {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+#customizeControls .js-customizeTextColor .btn-square {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 #customizeControls .btn-square {
@@ -3082,6 +3150,130 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 40px;
   height: 40px;
   border: solid 2px #fff;
+  border-radius: 0;
+  border-bottom: 0;
+}
+
+.customizePrimaryColorRecommendations,
+.customizeSecondaryColorRecommendations,
+.customizeBackgroundColorRecommendations,
+.customizeTextColorRecommendations {
+  position: absolute;
+  left: 36px;
+  background: #252525;
+  width: 0;
+  top: 0;
+  height: 38px;
+  line-height: 38px;
+  padding: 2px;
+  border-radius: 0;
+  overflow: hidden;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  transition: width .35s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.customColorChoice {
+  background: #fff;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
+  margin-top: 3px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  z-index: 5;
+  border-radius: 1px;
+  transition: background .5s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.customColorChoice:hover {
+  outline: 2px solid #ccc;
+}
+
+.customColorChoiceControl {
+  width: 32px;
+  opacity: .5;
+  text-align: center;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+
+}
+
+
+.customColorChoice:hover:hover {
+  outline: 2px solid #ccc;
+  opacity: 1;
+}
+
+.customColorPicker {
+  top: 10px;
+  margin-left: -8px;
+  font-size: 18px;
+  position: absolute;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover:after{
+  background: #252525;
+  border-radius: 3px;
+  bottom: -32px;
+  color: #fff;
+  content: attr(data-tooltip);
+  padding: 8px 10px;
+  position: absolute;
+  z-index: 10;
+  height: 16px;
+  font-size: 11px;
+  left: 0;
+  line-height: 16px;
+  opacity: 1;
+}
+
+.btn-notifications.tooltip:hover:after{
+  left: -20px;
+}
+
+.btn-closeChat.tooltip:hover:after,
+.btn-closeConversation a.tooltip:hover:after {
+  left: -13px;
+  bottom: -34px;
+}
+
+.btn-profile.tooltip:hover:after{
+  left: -10px;
+}
+
+.chatHead.tooltip:hover:after {
+  left: -123px;
+  bottom: 7px;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.interactiveTooltip {
+  height: 20px;
+  display: inline-block;
+  padding: 4px 10px;
+  background: #252525;
+  color: #fff;
+  position: absolute;
+  left: 37px;
+  border-radius: 4px;
+  font-size: 11px;
+  text-align: center;
+  line-height: 20px;
+  top: 8px;
+  opacity: .9;
+}
+
+.interactiveTooltip div {
+  position: relative;
+  display: inline-block;
 }
 
 .headerCropper.banner-large,
@@ -3172,12 +3364,25 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 /* protect customize controls from custom page styles */
+#ov1 #customizeControls .labelWrap {
+  height: 40px;
+  border-radius: 0;
+}
+
 #ov1 #customizeControls .labelWrap input {
   color: rgba(255,255,255,0.6);
 }
 
 .colpick {
   z-index: 10;
+  border-radius: 0;
+  background: #252525;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.colpick-customizeColor {
+  left: 70px !important; /* I want to override the inline styles on the colpick element */
 }
 
 #ov1 .colpick input {
@@ -3401,6 +3606,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border: 0;
 }
 
+#ov1  .outline2 {
+  outline: 2px solid #fff;
+}
+
 #ov1  .borderRadiusTop {
   border-radius: 3px;
 }
@@ -3426,6 +3635,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .podBorder {
   border: solid 1px rgba(255,255,255,0.08);
   border-bottom: solid 2px rgba(255,255,255,0.08);
+}
+
+#ov1  .textOpacity0 {
+  opacity: 0;
 }
 
 #ov1  .textOpacity25 {
@@ -3685,6 +3898,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 6px;
 }
 
+#ov1  .marginLeft7 {
+  margin-left: 7px;
+}
+
 #ov1  .marginLeft10 {
   margin-left: 10px;
 }
@@ -3798,8 +4015,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin: auto;
 }
 
+#ov1  .left0 {
+  left: 0;
+}
+
 #ov1  .top0 {
   top: 0;
+}
+
+#ov1  .top11 {
+  top: 11px;
 }
 
 #ov1  .top70 {
@@ -3940,6 +4165,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .padding015 {
   padding: 0px 15px;
 }
+#ov1  .padding515 {
+  padding: 5px 15px;
+}
 
 #ov1  .padding2010{
   padding: 20px 10px;
@@ -3987,6 +4215,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 4px;
 }
 
+#ov1  .paddingTop10 {
+  padding-top: 10px;
+}
+
 #ov1  .paddingTop15 {
   padding-top: 15px;
 }
@@ -4020,6 +4252,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 360px;
 }
 
+#ov1 .width40 {
+  width: 40px;
+}
+
 #ov1 .width46px {
   width: 46px;
 }
@@ -4049,6 +4285,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width260 {
   width: 260px;
+}
+
+#ov1 .width270 {
+  width: 270px;
 }
 
 #ov1 .width600 {
@@ -4096,6 +4336,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .colorWhiteForce {
   color: #fff !important; /* This text must always remain white */
+}
+
+#ov1 .colorBlack {
+  color: #000;
 }
 
 #ov1  .borderBottomRightRaidus3 {
