@@ -34,8 +34,6 @@ module.exports = Backbone.Model.extend({
           proof_url: ""
         }
       },
-      followers: ["handle1", "handle2", "handle3"],
-      following: ["handle4", "handle5", "handle6"],
       contracts: ["ID1", "ID2", "ID3"],
       primary_color: "#086A9E",
       secondary_color: "#317DB8",
