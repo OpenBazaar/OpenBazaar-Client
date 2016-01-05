@@ -488,7 +488,6 @@ module.exports = Backbone.View.extend({
                     profileFormData.append("location",el);
                 }
                 if(i == "name" || i == "handle" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
-                  console.log(i);
                     profileFormData.append(i,""+el);
                 } else {
                     settingsFormData.append(i,el);

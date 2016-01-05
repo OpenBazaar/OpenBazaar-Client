@@ -23,8 +23,9 @@ module.exports = Backbone.View.extend({
     'click .js-feedTab': function(){this.setState("feed");},
     'click .js-vendorsTab': function(){this.setState("vendors");},
     'click .js-homeCreateStore': 'createStore',
+    'click .js-homeSearchItemsClear': 'loadItems',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
-    'keyup .js-homeSearchPages': 'searchPagesKeyup'
+    'change .js-homeSelectFollowingFilter': 'setFollowingFilter'
   },
 
   initialize: function(options){
@@ -42,28 +43,30 @@ module.exports = Backbone.View.extend({
     this.loadingVendors = false;
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
+    this.onlyFollowing = false;
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
-      this.handleSocketMessage(response);
+      self.handleSocketMessage(response);
     });
-    this.socketItemID = Math.random().toString(36).slice(2);
-    this.socketVendorID = Math.random().toString(36).slice(2);
+    this.socketItemsID = Math.random().toString(36).slice(2);
+    this.socketUsersID = Math.random().toString(36).slice(2);
+    this.socketSearchID = '';
 
     //listen to follow and unfollow events
     this.listenTo(window.obEventBus, "followUser", function(guid){
-      this.followUser(guid);
+      self.followUser(guid);
     });
 
     this.listenTo(window.obEventBus, "unfollowUser", function(guid){
-      this.unfollowUser(guid);
+      self.unfollowUser(guid);
     });
 
-    this.fetchOwnFollowing();
+    this.fetchOwnFollowing(this.render());
   },
 
-  fetchOwnFollowing: function(){
+  fetchOwnFollowing: function(callback){
     var self = this;
     $.ajax({
       url: self.userModel.get('serverUrl') + "get_following",
@@ -75,7 +78,7 @@ module.exports = Backbone.View.extend({
         var followingGuid = followingObject.guid;
         return followingGuid;
       });
-      self.render();
+      typeof callback === 'function' && callback();
     }).fail(function(jqXHR, status, errorThrown){
       console.log(jqXHR);
       console.log(status);
@@ -100,20 +103,21 @@ module.exports = Backbone.View.extend({
   },
 
   hideList: function(){
-    $('.js-feed, .js-products, .js-vendors').addClass('hide');
-    $('.js-homeItemsSearch, .js-homeStoresSearch, .js-homeFeedSearch').addClass('hide');
+    $('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
     $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
   },
 
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    if(data.id == this.socketItemID){
+    if(data.id == this.socketItemsID){
       this.loadingProducts = false;
       this.renderItem(data);
-    } else if(data.id == this.socketVendorID) {
+    } else if(data.id == this.socketUsersID) {
       this.loadingVendors = false;
       this.renderUser(data.vendor);
+    } else if(data.id == this.socketSearchID) {
+      this.renderItem(data);
     }
     this.resetLookingCount();
   },
@@ -132,9 +136,9 @@ module.exports = Backbone.View.extend({
 
       //get vendors and items
       self.loadingProducts = true;
-      self.socketView.getItems(self.socketItemID);
+      self.socketView.getItems(self.socketItemsID);
       self.loadingVendors = true;
-      self.socketView.getVendors(self.socketVendorID);
+      self.socketView.getVendors(self.socketUsersID);
       self.setSocketTimeout();
 
       //listen to scrolling on container
@@ -144,6 +148,7 @@ module.exports = Backbone.View.extend({
 
   renderItem: function(item){
     "use strict";
+    var self = this;
     //get data from inside the listing object
     item = item.listing;
     item.userCurrencyCode = this.userModel.get('currency_code');
@@ -151,14 +156,26 @@ module.exports = Backbone.View.extend({
     item.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+item.avatar_hash+"&guid="+item.guid;
     item.showAvatar = true;
     item.userID = item.guid;
-    var newItemModel = new itemShortModel(item);
-    var itemShort = new itemShortView({model: newItemModel});
-    this.$el.find('.js-products .js-loadingSpinner').before(itemShort.el);
-    this.subViews.push(itemShort);
+
+    var newItem = function(){
+      var newItemModel = new itemShortModel(item);
+      var itemShort = new itemShortView({model: newItemModel});
+      self.$el.find('.js-products .js-loadingSpinner').before(itemShort.el);
+      self.subViews.push(itemShort);
+    };
+
+    if(this.onlyFollowing){
+      if(this.ownFollowing.indexOf(item.guid) != -1){
+        newItem();
+      }
+    } else {
+      newItem();
+    }
   },
 
   renderUser: function(user){
     "use strict";
+    var self = this;
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
     user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
@@ -167,8 +184,8 @@ module.exports = Backbone.View.extend({
     }
     var newUserModel = new userShortModel(user);
     var storeShort = new userShortView({model: newUserModel});
-    this.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
-    this.subViews.push(storeShort);
+    self.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
+    self.subViews.push(storeShort);
   },
 
   renderNoneFound: function(){
@@ -208,8 +225,12 @@ module.exports = Backbone.View.extend({
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "follow",
       success: function(data) {
-        //self.subRender();
         options.target.closest('.js-userShortView').removeClass('div-fade');
+        //get_following will not be ready right away after this call
+        self.followTimeout = window.setTimeout(function(){
+          self.fetchOwnFollowing(self.resetItemList());
+          window.clearTimeout(self.followTimeout);
+        }, 1000);
       },
       error: function(jqXHR, status, errorThrown){
         console.log(jqXHR);
@@ -228,8 +249,12 @@ module.exports = Backbone.View.extend({
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "unfollow",
       success: function() {
-        //self.subRender();
         options.target.closest('.js-userShortView').removeClass('div-fade');
+        //get_following will not be ready right away after this call
+        self.followTimeout = window.setTimeout(function(){
+          self.fetchOwnFollowing(self.resetItemList());
+          window.clearTimeout(self.followTimeout);
+        }, 1000);
       },
       error: function(jqXHR, status, errorThrown){
         console.log(jqXHR);
@@ -245,13 +270,23 @@ module.exports = Backbone.View.extend({
       if(this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
         this.loadingProducts = true;
-        this.socketView.getItems(this.socketItemID);
+        this.socketView.getItems(this.socketItemsID);
       } else if(this.state == "vendors" && !this.loadingVendors){
         this.setSocketTimeout();
         this.loadingVendors = true;
-        this.socketView.getVendors(this.socketVendorID);
+        this.socketView.getVendors(this.socketUsersID);
       }
     }
+  },
+
+  clearItems: function(){
+    "use strict";
+    this.$el.find('.js-products > *').not('.js-loadingSpinner').remove();
+  },
+
+  clearUsers: function(){
+    "use strict";
+    this.$el.find('.js-vendors > *').not('.js-loadingSpinner').remove();
   },
 
   searchItemsKeyup: function(e){
@@ -259,29 +294,61 @@ module.exports = Backbone.View.extend({
     var target = $(e.target),
         targetText = target.val();
 
-    if(targetText.length > 0){
-      //detect enter key
-      if (e.keyCode == 13){
-        this.searchItems(targetText);
-      } else {
-        //this.addressBarGoBtn.removeClass("fadeOut");
-        this.closeStatusBar();
-      }
-    } else {
-      this.closeStatusBar();
+    if(targetText.length > 0 && e.keyCode == 13){
+      this.searchItems(targetText);
     }
   },
 
-  searchPagesKeyup: function(e){
-
+  searchItems: function(searchText){
+    "use strict";
+    if(searchText){
+      this.searchItemsText = searchText;
+      this.clearItems();
+      this.socketSearchID = Math.random().toString(36).slice(2);
+      this.socketView.search(this.socketSearchID, searchText);
+      this.setSocketTimeout();
+      this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
+    }
   },
 
-  searchItems: function(){
-
+  loadItems: function(){
+    "use strict";
+    this.clearItems();
+    this.socketItemsID = Math.random().toString(36).slice(2);
+    this.loadingProducts = true;
+    this.socketView.getItems(this.socketItemsID);
+    this.setSocketTimeout();
+    this.searchItemsText = "";
+    this.$el.find('.js-homeSearchItems').val("");
+    this.$el.find('.js-homeSearchItemsClear').addClass('hide');
   },
 
-  searchPages: function(){
+  loadUsers: function(){
+    "use strict";
+    this.clearUsers();
+    this.socketUsersID = Math.random().toString(36).slice(2);
+    this.loadingVendors = true;
+    this.socketView.getVendors(this.socketUsersID);
+    this.setSocketTimeout();
+  },
 
+  setFollowingFilter: function(e){
+    "use strict";
+    var filterBy = $(e.target).val();
+    if(filterBy == "following"){
+      this.onlyFollowing = true;
+    } else {
+      this.onlyFollowing = false;
+    }
+    this.resetItemList();
+  },
+
+  resetItemList: function(){
+    if(this.searchItemsText){
+      this.searchItems(this.searchItemsText);
+    } else {
+      this.loadItems();
+    }
   },
 
   close: function(){
