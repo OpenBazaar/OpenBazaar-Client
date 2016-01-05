@@ -1662,8 +1662,6 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationHeads {
-  overflow-x: hidden;
-  overflow-y: auto;
   clear: both;
   border-top: solid 1px #363636;
   height: calc(100% - 88px);
@@ -3246,6 +3244,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .btn-profile.tooltip:hover:after{
   left: -10px;
+}
+
+.chatHead.tooltip:hover:after {
+  left: -122px;
+  bottom: 5px;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .interactiveTooltip {

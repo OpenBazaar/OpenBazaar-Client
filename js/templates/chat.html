@@ -1,4 +1,4 @@
-<div class="chatHead js-chatHead clickable <% if(ob.unread === 0) { %>chatRead<% } %>">
+<div class="chatHead js-chatHead clickable tooltip <% if(ob.unread === 0) { %>chatRead<% } %>" data-tooltip="<%-ob.guid%>">
     <div id="chatHead_<%-ob.guid%>" class="thumbnail clickable custcol-border-secondary chatHeadIcon badge"
          style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 36px; width: 36px"
          <% if(ob.unread > 0) { %>data-count="<%- ob.unread %>"<% } %>></div>
