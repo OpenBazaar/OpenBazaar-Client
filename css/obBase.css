@@ -3291,8 +3291,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #modalHolder {
   position: fixed;
-  z-index: 10;
+  z-index: 3;
   -webkit-app-region: no-drag;
+}
+
+#messageModal {
+  z-index: 4;
 }
 
 .selectPill {
@@ -4133,6 +4137,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding015 {
   padding: 0px 15px;
+}
+#ov1  .padding515 {
+  padding: 5px 15px;
 }
 
 #ov1  .padding2010{

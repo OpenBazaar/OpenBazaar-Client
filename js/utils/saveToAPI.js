@@ -6,6 +6,14 @@ var __ = require('underscore'),
 
 module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys) {
   "use strict";
+  /* form[optional]: the form to pull data from, as a jQuery object
+     modelJSON[optional]: model data in JSON format, any data not overwritten by the form will be added to the formData
+     endPoint: the API endpoint, in string format, such as "settings"
+     onSucceed[optional]: a function to run on success
+     onFail[optional]: a function to run on failure
+     addData[optional]: insert this data into the formData object, must be an object
+     skipKeys[optional]: keys to skip, and not send to the server
+   */
   var self = this,
       formData = new FormData(form[0] || ""),
       formKeys = [],

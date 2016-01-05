@@ -39,7 +39,6 @@ module.exports = Backbone.View.extend({
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'click .js-homeModalDone': 'settingsDone',
-    'click .js-closeModal': 'closeModal',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
@@ -588,11 +587,6 @@ module.exports = Backbone.View.extend({
     
     // Start application walkthrough (coming soon once I have better designs)
     new Notification(window.polyglot.t('WelcomeToYourPage'));
-  },
-
-  closeModal: function(e){
-    "use strict";
-    $(e.target).closest('.modal').addClass('hide');
   },
 
   navAdminPanel: function(){

@@ -108,7 +108,8 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Save Changes",
         YourName: "Your name",
         BitcoinReturnAddress: "Bitcoin Return Address",
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...", 
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", 
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -244,7 +245,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Data could not be loaded for:",
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "This Item Cannot be Purchased",
-          sellerError: "The seller's server has rejected the purchase request"
+          sellerError: "The seller's server has rejected the purchase request",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
         },
         saveMessages: {
           Saved: "Saved",
@@ -420,6 +422,7 @@ module.exports = Backbone.Model.extend({
         YourNombre: "Su nombre",
         BitcoinReturnAddress: "Direcci&oacute;n de devoluciones Bitcoin",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -552,7 +555,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Los datos no se pudieron cargar para:",
           socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n predeterminada de ws://localhost:18466",
           contractError: "Este artículo no puede ser comprado" ,
-          sellerError: "El servidor del vendedor ha rechazado la solicitud de compra"
+          sellerError: "El servidor del vendedor ha rechazado la solicitud de compra",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Guardado",
@@ -731,6 +735,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Dein Name",
         BitcoinReturnAddress: "Bitcoin R&uuml;cksendeaddresse",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Lokale W&auml;hrung",
         TimeZone: "Zeitzone",
         ShipToName: "Empfänger",
@@ -867,7 +872,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Daten konnten nicht geladen werden f&uuml;r:",
           socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
           contractError: "Dieser Artikel kann nicht gekauft werden",
-          sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt"
+          sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Gespeichert",
@@ -1048,6 +1054,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Tuo nome",
         BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1183,7 +1190,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "I dati non sono stati caricati per:",
           socketError: "Connessione all'URL per WebSocket fallita. Connettere al socket con l'indirizzo di default ws://localhost:18466",
           contractError: "Questo articolo non pu&ograve; essere acquistato",
-          sellerError: "Il server del venditore ha respinto la richiesta di acquisto"
+          sellerError: "Il server del venditore ha respinto la richiesta di acquisto",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Salvato",
@@ -1364,6 +1372,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Votre nom",
         BitcoinReturnAddress: "Adresse Bitcoin",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1499,7 +1508,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Les données ne peuvent pas être récupérées pour :",
           socketError: "L'URL pour WebSocket a échoué. Connexion au socket avec l'adresse par défaut de ws://localhost:18466",
           contractError: "Cet article ne peut pas être acheté",
-          sellerError: "Le serveur du vendeur a rejeté la demande d'achat"
+          sellerError: "Le serveur du vendeur a rejeté la demande d'achat",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Enregistrés",
@@ -1678,6 +1688,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Numele dvs.",
         BitcoinReturnAddress: "Adresa Bitcoin",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Valuta locală",
         TimeZone: "Fus orar",
         ShipToName: "Numele",
@@ -1814,7 +1825,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Nu pot fi încarcate datele pentru:",
           socketError: "URL pentru WebSocket a eșuat. Conectarea la socket cu adresa implicită ws://localhost:18466",
           contractError: "Acest Articol Nu Poate Fi Procurat",
-          sellerError: "Serverul vânzătorului a respins cererea de cumpărare"
+          sellerError: "Serverul vânzătorului a respins cererea de cumpărare",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Salvat",
@@ -1993,6 +2005,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Ваше имя",
         BitcoinReturnAddress: "Биткойн-адрес",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -2129,7 +2142,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Данные нельзя загрузить для:",
           socketError: "URL для WebSocket недоступен. Подключаемся к адресу по умолчанию ws://localhost:18466",
           contractError: "Этот товар недоступен для продажи",
-          sellerError: "Сервер продавца отключил эту возможность"
+          sellerError: "Сервер продавца отключил эту возможность",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Сохранено",
@@ -2307,6 +2321,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Vaše meno",
         BitcoinReturnAddress: "Bitcoinová adresa",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -2443,7 +2458,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Nepodarilo sa načítať údaje o:",
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "Nákup položky neprebehol.",
-          sellerError: "Predajcov server odmietol žiadosť o nákup."
+          sellerError: "Predajcov server odmietol žiadosť o nákup.",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Uložené",
@@ -2624,6 +2640,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Adınız",
         BitcoinReturnAddress: "Bitcoin adresiniz",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Yerel para birimi",
         TimeZone: "Saat Dilimi",
         ShipToName: "Ad",
@@ -2759,7 +2776,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Verisi yükelenemeyen öğe:",
           socketError: "Websoket URL'si hata verdi. Sokete öntanımlı ws://localhost:18466 ile bağlanılıyor.",
           contractError: "Bu Öğe Satın Alınamaz",
-          sellerError: "Satıcının sunucusu alım talebini reddetti"
+          sellerError: "Satıcının sunucusu alım talebini reddetti",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Kaydedildi",
@@ -2939,6 +2957,7 @@ module.exports = Backbone.Model.extend({
         YourName: "PonglIj'e'",
         BitcoinReturnAddress: "Bot SoQ mIr",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "Huch lutu'lu'bej",
         TimeZone: "PoH mIch",
         ShipToName: "Pong",
@@ -3074,7 +3093,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "LaH wej qaSmoHlu' De':",
           socketError: "Luj URL WebSocket. Rar socket SoQ ws://localhost:18466",
           contractError: "LaH wej je' Doch",
-          sellerError: "QuvHa' offer lajQo' loD 'Iv ngev"
+          sellerError: "QuvHa' offer lajQo' loD 'Iv ngev",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "Choq",
@@ -3253,6 +3273,7 @@ module.exports = Backbone.Model.extend({
         YourName: "您的姓名",
         BitcoinReturnAddress: "比特币地址",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -3388,7 +3409,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "有关数据未能调出",
           socketError: "WebSocket的URL地址失败。请使用ws://localhost:18466",
           contractError: "找不到此项货物",
-          sellerError: "卖家的服务器拒绝了这笔买卖"
+          sellerError: "卖家的服务器拒绝了这笔买卖",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "以保存",
@@ -3569,6 +3591,7 @@ module.exports = Backbone.Model.extend({
         YourName: "당신 이름",
         BitcoinReturnAddress: "당신 비트코인 주소",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
         LocalCurrency: "지역 통화",
         TimeZone: "시간대",
         ShipToName: "이름",
@@ -3704,7 +3727,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "데이터를 로딩 할 수 없습니다:",
           socketError: "웹 소켓의 URL에 실패했습니다.ws://localhost:18466 의 기본 주소와 소켓에 연결.",
           contractError: "이 제품은 지불 할수 없습니다 ",
-          sellerError: "판매자의 서버는 구매 요청을 거부했습니다."
+          sellerError: "판매자의 서버는 구매 요청을 거부했습니다.",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         saveMessages: {
           Saved: "저장하다",
