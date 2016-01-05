@@ -492,7 +492,7 @@ module.exports = Backbone.View.extend({
           $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
-            timeout: 3000,
+            timeout: 3000
           }).done(function(ownFollowingData){
             self.ownFollowing = ownFollowingData.following || [];
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -570,6 +570,7 @@ module.exports = Backbone.View.extend({
       title: "No followers",
       message: "",
       ownFollowing: this.ownFollowing,
+      hideFollow: true,
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
@@ -584,6 +585,7 @@ module.exports = Backbone.View.extend({
       title: "Not following anyone",
       message: "",
       ownFollowing: this.ownFollowing,
+      hideFollow: true,
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followingList);
@@ -1120,11 +1122,11 @@ module.exports = Backbone.View.extend({
   },
 
   followUserClick: function(){
-    this.followUser(this.pageID);
+    this.followUser({'guid': this.pageID});
   },
 
   unfollowUserClick: function(){
-    this.unfollowUser(this.pageID);
+    this.unfollowUser({'guid': this.pageID});
   },
 
   followUser: function(options){

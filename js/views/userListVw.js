@@ -16,6 +16,7 @@ module.exports = Backbone.View.extend({
       options.message: message for no users found
       options.serverUrl: server url to pass into each user view
       options.ownFollowing: array of guids this user is following
+      options.hideFollow: boolean, hide follow button
     */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
@@ -34,6 +35,7 @@ module.exports = Backbone.View.extend({
         if(self.options.ownFollowing.indexOf(user.get('guid')) != -1){
           user.set("ownFollowing", true);
         }
+        user.set('hideFollow', self.options.hideFollow);
         self.renderUser(user);
       }, this);
       this.$el.html(this.listWrapper);

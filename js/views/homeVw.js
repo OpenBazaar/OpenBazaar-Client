@@ -38,6 +38,8 @@ module.exports = Backbone.View.extend({
     this.obContainer = $('#obContainer');
     this.loadingProducts = false;
     this.loadingVendors = false;
+    //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
+    this.ownFollowing = [];
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
@@ -56,7 +58,27 @@ module.exports = Backbone.View.extend({
       this.unfollowUser(guid);
     });
 
-    this.render();
+    this.fetchOwnFollowing();
+  },
+
+  fetchOwnFollowing: function(){
+    var self = this;
+    $.ajax({
+      url: self.userModel.get('serverUrl') + "get_following",
+      dataType: "json",
+      timeout: 3000
+    }).done(function(ownFollowingData){
+      self.ownFollowing = ownFollowingData.following || [];
+      self.ownFollowing = self.ownFollowing.map(function(followingObject){
+        var followingGuid = followingObject.guid;
+        return followingGuid;
+      });
+      self.render();
+    }).fail(function(jqXHR, status, errorThrown){
+      console.log(jqXHR);
+      console.log(status);
+      console.log(errorThrown);
+    });
   },
 
   setSocketTimeout: function(){
@@ -138,6 +160,9 @@ module.exports = Backbone.View.extend({
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
     user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
+    if(this.ownFollowing.indexOf(user.guid) != -1){
+      user.ownFollowing = true;
+    }
     var newUserModel = new userShortModel(user);
     var storeShort = new userShortView({model: newUserModel});
     this.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
