@@ -130,27 +130,9 @@
           </div>
         </div>
 
-        <!-- return address step  -->
-         <div class="accordion-child">
-          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <div class="js-buyWizardNewAddress">
-              <%= polyglot.t('ReturnAddress') %>
-            </div>
-          </div>
           <form class="flexRow custCol-border borderTop" id="buyWizardBitcoinReturnForm">
-            <div class="flexCol-5 custCol-border">
-              <div class="fieldItem">
-                <label for="buyWizardBitcoinAddressInput"><%= polyglot.t('BitcoinReturnAddress') %></label>
-              </div>
-            </div>
-            <div class="flexCol-7 custCol-border positionWrapper">
-              <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
-                     placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
-                     pattern="<%- ob.user.bitcoinValidationRegex %>"
-                     value="<%= ob.user.refund_address %>" required />
-            </div>
           </form>
-        </div>
+
 
         <!-- shipping step -->
         <div class="accordion-child">

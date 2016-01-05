@@ -759,7 +759,7 @@ module.exports = Backbone.View.extend({
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, -0.20)); // 20% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, -0.25)); // 20% lighter than primary_color
 
       // slide secondary_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');

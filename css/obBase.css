@@ -490,26 +490,26 @@ form {
 }
 
 .itemMetaCircle {
-  height: 44px;
-  line-height: 44px;
-  width: 44px;
+  height: 38px;
+  line-height: 38px;
+  width: 38px;
   text-align: center;
   border-radius: 25px;
-  font-size: 18px;
+  font-size: 15px;
   opacity: .85;
 }
 
 .itemMetaCircle:before {
-  margin-top: 12px;
+  margin-top: 9px;
 }
 
 .itemMetaValue {
   max-width: 130px;
   float: left;
-  font-size: 16px;
+  font-size: 14px;
   opacity: .75;
-  height: 44px;
-  line-height: 44px;
+  height: 38px;
+  line-height: 38px;
   font-weight: 500;
   text-transform: capitalize;
 }
@@ -3199,6 +3199,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: -8px;
   font-size: 18px;
   position: absolute;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover:before{
+  content: attr(title);
+  position: absolute;
+  bottom: 10px;
+  display: block;
+  background: #252525;
+  padding: 20px;
+  padding: 20px;
 }
 
 .interactiveTooltip {

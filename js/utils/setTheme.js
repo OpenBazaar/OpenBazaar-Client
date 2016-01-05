@@ -39,7 +39,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + shadeColor2(primaryColor, -0.35) +  ";}" +
       "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
       "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + secondaryColor + ";}" +
-      "#ov1 #userPage { background-color: " + backgroundColor + ";}" +
+      "#ov1 #userPage { background-color: " + backgroundColor + ";}" + 
       "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, 0.1) + ";}" +
       "#ov1 #userPage .custCol-border-secondary { border-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-border-primary { border-color: " + primaryColor + ";}" +
@@ -73,7 +73,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { border: 2px solid " + shadeColor2(primaryColor, 0.15) + ";}" +
       "#ov1 #userPage #obContainer::-webkit-scrollbar-thumb { background: " + shadeColor2(backgroundColor, 0.25) + ";}" +
       "#ov1 #userPage .customThemeScrollbar::-webkit-scrollbar-thumb { background: " + shadeColor2(primaryColor, 0.25) + ";}" +
-      "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque1.r + ", " + opaque1.g + ", " + opaque1.b + ", 1);}" +
+      "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque1.r + ", " + opaque1.g + ", " + opaque1.b + ", .65);}" +
       "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       

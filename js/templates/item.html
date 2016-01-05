@@ -54,7 +54,7 @@
         <td style="width:50%">
           <% if(ob.vendor_offer.listing.metadata.category) { %>
           <div class="clearfix">
-            <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize16"></div>
+            <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize15"></div>
             <div class="itemMetaValue"><%- ob.vendor_offer.listing.metadata.category %></div>
           </div>    
           <% } %>
@@ -63,14 +63,14 @@
       <tr>
         <% if(ob.vendor_offer.listing.item.condition) { %>  
         <td>
-          <div class="itemMetaCircle custCol-secondary floatLeft ion-android-star marginRight7 fontSize16"></div>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-android-star marginRight7 fontSize15"></div>
           <div class="itemMetaValue"><%- ob.vendor_offer.listing.item.condition %></div>
         </td>
         <% } %>
 
         <% if( ob.vendor_offer.listing.metadata.category === "physical good" && ob.vendor_offer.listing.shipping.free ) { %>  
         <td>
-          <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize16"></div>
+          <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize15"></div>
           <div class="itemMetaValue"><%= polyglot.t('FreeShipping') %></div>
         </td>
         <% } %>
