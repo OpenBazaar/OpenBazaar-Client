@@ -13,6 +13,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "I Agree",
         Back: "Back",
         EnterMessage: "Enter message...",
+        Reload: "Reload", 
+        You: "You",
         Skip: "Skip",
         Done: "Done",
         Cancel: "Cancel",
@@ -326,6 +328,8 @@ module.exports = Backbone.Model.extend({
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Omitir",
         Done: "Hecho",
         Cancel: "Cancelar",
@@ -633,6 +637,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Akzeptieren",
         Back: "Zur&uuml;ck",
         EnterMessage: "Nachricht eingeben...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "&Uuml;berspringen",
         Done: "Fertig",
         Cancel: "Abbrechen",
@@ -946,6 +952,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Sono d'accordo",
         Back: "Indietro",
         EnterMessage: "Inserire messaggio...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Salta",
         Done: "Finito",
         Cancel: "Annulla",
@@ -1260,6 +1268,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Je suis d'accord",
         Back: "Retour",
         EnterMessage: "Entrer un message...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Passer",
         Done: "Terminé",
         Cancel: "Annuler",
@@ -1574,6 +1584,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Sunt de acord",
         Back: "Înapoi",
         EnterMessage: "Introduceți mesajul...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Sari peste",
         Done: "Efectuat",
         Cancel: "Anulare",
@@ -1887,6 +1899,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Согласен",
         Back: "Назад",
         EnterMessage: "Ввести сообщение...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Пропустить",
         Done: "Готово",
         Cancel: "Отмена",
@@ -2200,6 +2214,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Súhlasím",
         Back: "Späť",
         EnterMessage: "Vložte správu...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Preskočiť",
         Done: "Hotovo",
         Cancel: "Zrušiť",
@@ -2512,6 +2528,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Kabul ediyorum",
         Back: "Geri",
         EnterMessage: "İletinizi yazın...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "Atla",
         Done: "Tamam",
         Cancel: "İptal",
@@ -2826,6 +2844,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "jIQochbe'",
         Back: "Chap",
         EnterMessage: "QIn 'el...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "BuSHa'",
         Done: "PItlh",
         Cancel: "QuvHa'ghach",
@@ -3138,6 +3158,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "我同意",
         Back: "上一步",
         EnterMessage: "留言",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "跳过",
         Done: "完成",
         Cancel: "取消",
@@ -3451,6 +3473,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "동의",
         Back: "뒤",
         EnterMessage: "메세지 입력...",
+        Reload: "Reload", //notTranslated
+        You: "You", //notTranslated
         Skip: "거르다",
         Done: "끝난",
         Cancel: "취소",

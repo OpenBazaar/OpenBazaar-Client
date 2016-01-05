@@ -30,7 +30,7 @@
 
 .customThemeScrollbar::-webkit-scrollbar-thumb {
   border-radius: 0;
-  background: #3E3E3E;
+  background: #08324A;
 }
 
 .noScrollBar::-webkit-scrollbar {
@@ -3206,29 +3206,26 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .tooltip:hover:after{
-    background: #252525;
-    border-radius: 5px;
-    bottom: -30px;
-    color: #fff;
-    content: attr(data-tooltip);
-    padding: 8px 10px;
-    position: absolute;
-    z-index: 98;
-    height: 16px;
-    font-size: 12px;
-    left: 0;
-    line-height: 16px;
+  background: #252525;
+  border-radius: 3px;
+  bottom: -32px;
+  color: #fff;
+  content: attr(data-tooltip);
+  padding: 8px 10px;
+  position: absolute;
+  z-index: 98;
+  height: 16px;
+  font-size: 11px;
+  left: 0;
+  line-height: 16px;
 }
 
-.tooltip:hover:before{
-    border: solid;
-    border-color: #252525 transparent;
-    border-width: 6px 0 0 6px;
-    bottom: 0px;
-    content: "";
-    left: 10px;
-    position: absolute;
-    z-index: 99;
+.btn-notifications.tooltip:hover:after{
+  left: -20px;
+}
+
+.btn-profile.tooltip:hover:after{
+  left: -10px;
 }
 
 .interactiveTooltip {

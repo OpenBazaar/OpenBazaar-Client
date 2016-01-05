@@ -754,12 +754,12 @@ module.exports = Backbone.View.extend({
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
       this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
-      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, -0.25)); // 20% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(primaryColor, -0.25)); // 20% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(primaryColor, -0.15)); // 15% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(primaryColor, -0.1)); // 10% lighter than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(primaryColor, 0.1)); // 10% darker than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(primaryColor, 0.15)); // 15% darker than primary_color
+      this.$el.find('.customizeSecondaryColorRecommendations .customColorChoice:last').css('background', shadeColor2(primaryColor, 0.20)); // 25% darker than primary_color
 
       // slide secondary_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
@@ -782,12 +782,12 @@ module.exports = Backbone.View.extend({
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
       this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
-      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(2)').css('background', shadeColor2(secondaryColor, -0.70)); // 70% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(3)').css('background', shadeColor2(secondaryColor, -0.65)); // 65% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(4)').css('background', shadeColor2(secondaryColor, -0.55)); // 55% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(5)').css('background', shadeColor2(secondaryColor, -0.45)); // 45% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:nth-child(6)').css('background', shadeColor2(secondaryColor, -0.35)); // 35% darker than primary_color
+      this.$el.find('.customizeBackgroundColorRecommendations .customColorChoice:last').css('background', shadeColor2(secondaryColor, -0.25)); // 25% darker than primary_color
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
@@ -808,8 +808,8 @@ module.exports = Backbone.View.extend({
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
       this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#000000');
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background', '#ffffff'); 
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#ffffff'); 
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background', '#000000');
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').removeClass('width270');
