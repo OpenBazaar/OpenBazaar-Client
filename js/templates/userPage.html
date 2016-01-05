@@ -200,7 +200,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Email') %></div>
                 <div>
                   <% if(ob.page.profile.email) { %>
-                  <%- ob.page.profile.email %>
+                  <a href="mailto:<%- ob.page.profile.email %>"><%- ob.page.profile.email %></a>
                   <%}else{%>
                   not provided
                   <%}%>
