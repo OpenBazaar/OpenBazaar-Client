@@ -2912,6 +2912,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 32px;
 }
 
+.icon-med {
+  font-size: 20px;
+  /* padding prevents icon from being cut off due to overlapping edges of element */
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
 .icon-small {
   font-size: 11px;
 }
