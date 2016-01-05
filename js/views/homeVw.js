@@ -207,7 +207,6 @@ module.exports = Backbone.View.extend({
     //add action to history
     Backbone.history.navigate("#home/" + state);
     this.state = state;
-
   },
 
   createStore: function(){
@@ -217,7 +216,6 @@ module.exports = Backbone.View.extend({
 
   followUser: function(options){
     "use strict";
-    console.log(options);
     var self = this;
     $.ajax({
       type: "POST",
