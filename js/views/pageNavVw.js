@@ -211,7 +211,6 @@ module.exports = Backbone.View.extend({
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
       self.addressInput = self.$el.find('.js-navAddressBar');
-      //self.addressBarGoBtn = self.$el.find('.js-navAddressBarGo');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(setText){
@@ -343,13 +342,10 @@ module.exports = Backbone.View.extend({
       //detect enter key
       if (e.keyCode == 13){
         this.addressBarProcess(barText);
-        //this.addressBarGoBtn.addClass("fadeOut");
       } else {
-        //this.addressBarGoBtn.removeClass("fadeOut");
         this.closeStatusBar();
       }
     } else {
-      //this.addressBarGoBtn.addClass("fadeOut");
       this.closeStatusBar();
     }
   },
@@ -492,7 +488,6 @@ module.exports = Backbone.View.extend({
                     profileFormData.append("location",el);
                 }
                 if(i == "name" || i == "handle" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
-                  console.log(i);
                     profileFormData.append(i,""+el);
                 } else {
                     settingsFormData.append(i,el);

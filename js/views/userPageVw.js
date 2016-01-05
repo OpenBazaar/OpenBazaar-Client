@@ -132,8 +132,8 @@ module.exports = Backbone.View.extend({
     'click .js-saveCustomization': 'saveCustomizePage',
     'click .js-cancelCustomization': 'cancelCustomizePage',
     'click .js-createStore': 'createStore',
-    'click .js-follow': 'followUser',
-    'click .js-unfollow': 'unfollowUser',
+    'click .js-follow': 'followUserClick',
+    'click .js-unfollow': 'unfollowUserClick',
     'click .js-message': 'sendMessage',
     'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
     'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
@@ -182,6 +182,8 @@ module.exports = Backbone.View.extend({
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
     this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
+    //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
+    this.ownFollowing = [];
     this.socketView = options.socketView;
     this.chatAppView = options.chatAppView;
     this.slimVisible = false;
@@ -201,6 +203,15 @@ module.exports = Backbone.View.extend({
 
     //show loading modal before fetching user data
     $('.js-loadingModal').removeClass('hide');
+
+    //listen to follow and unfollow events
+    this.listenTo(window.obEventBus, "followUser", function(guid){
+      this.followUser(guid);
+    });
+
+    this.listenTo(window.obEventBus, "unfollowUser", function(guid){
+      this.unfollowUser(guid);
+    });
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -465,6 +476,48 @@ module.exports = Backbone.View.extend({
         showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
       }
     });
+    this.following.fetch({
+      data: self.userProfileFetchParameters,
+      success: function(model){
+        if(self.options.ownPage === true){
+          self.ownFollowing = model.get('following') || [];
+          self.ownFollowing = self.ownFollowing.map(function(followingObject){
+            var followingGuid = followingObject.guid;
+            return followingGuid;
+          });
+          self.renderFollowing(model.get('following'));
+          //call followers 2nd so list of following is available
+          self.fetchFollowers();
+        } else {
+          $.ajax({
+            url: self.options.userModel.get('serverUrl') + "get_following",
+            dataType: "json",
+            timeout: 3000
+          }).done(function(ownFollowingData){
+            self.ownFollowing = ownFollowingData.following || [];
+            self.ownFollowing = self.ownFollowing.map(function(followingObject){
+              var followingGuid = followingObject.guid;
+              return followingGuid;
+            });
+            self.renderFollowing(model.get('following'));
+            //call followers 2nd so list of following is available
+            self.fetchFollowers();
+          }).fail(function(jqXHR, status, errorThrown){
+            console.log(jqXHR);
+            console.log(status);
+            console.log(errorThrown);
+          });
+        }
+      },
+      error: function(model, response){
+        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
+      }
+    });
+  },
+
+  fetchFollowers: function(){
+    var self = this;
+
     this.followers.fetch({
       data: self.userProfileFetchParameters,
       success: function(model){
@@ -477,15 +530,6 @@ module.exports = Backbone.View.extend({
       },
       error: function(model, response){
         showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
-      }
-    });
-    this.following.fetch({
-      data: self.userProfileFetchParameters,
-      success: function(model){
-        self.renderFollowing(model.get('following'));
-      },
-      error: function(model, response){
-        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
       }
     });
   },
@@ -519,13 +563,31 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    this.followerList = new personListView({model: model, el: '.js-list1', title: "No followers", message: "", serverUrl: this.options.userModel.get('serverUrl')});
+    console.log("render followers");
+    this.followerList = new personListView({
+      model: model,
+      el: '.js-list1',
+      title: "No followers",
+      message: "",
+      ownFollowing: this.ownFollowing,
+      hideFollow: true,
+      serverUrl: this.options.userModel.get('serverUrl')
+    });
     this.subViews.push(this.followerList);
   },
 
   renderFollowing: function (model) {
     "use strict";
-    this.followingList = new personListView({model: model, el: '.js-list2', title: "Not following anyone", message: "", serverUrl: this.options.userModel.get('serverUrl')});
+    this.followingList = new personListView({
+      model: model,
+      followed: true,
+      el: '.js-list2',
+      title: "Not following anyone",
+      message: "",
+      ownFollowing: this.ownFollowing,
+      hideFollow: true,
+      serverUrl: this.options.userModel.get('serverUrl')
+    });
     this.subViews.push(this.followingList);
   },
 
@@ -1059,12 +1121,20 @@ module.exports = Backbone.View.extend({
     Backbone.history.loadUrl();
   },
 
-  followUser: function(){
+  followUserClick: function(){
+    this.followUser({'guid': this.pageID});
+  },
+
+  unfollowUserClick: function(){
+    this.unfollowUser({'guid': this.pageID});
+  },
+
+  followUser: function(options){
     "use strict";
     var self = this;
     $.ajax({
       type: "POST",
-      data: this.userProfileFetchParameters,
+      data: {'guid': options.guid},
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "follow",
       success: function(data) {
@@ -1078,12 +1148,12 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  unfollowUser: function(){
+  unfollowUser: function(options){
     "use strict";
     var self = this;
     $.ajax({
       type: "POST",
-      data: this.userProfileFetchParameters,
+      data: {'guid': options.guid},
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "unfollow",
       success: function() {
