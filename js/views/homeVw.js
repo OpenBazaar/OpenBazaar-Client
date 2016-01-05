@@ -22,7 +22,9 @@ module.exports = Backbone.View.extend({
     'click .js-productsTab': function(){this.setState("products");},
     'click .js-feedTab': function(){this.setState("feed");},
     'click .js-vendorsTab': function(){this.setState("vendors");},
-    'click .js-homeCreateStore': 'createStore'
+    'click .js-homeCreateStore': 'createStore',
+    'keyup .js-homeSearchItems': 'searchItemsKeyup',
+    'keyup .js-homeSearchPages': 'searchPagesKeyup'
   },
 
   initialize: function(options){
@@ -250,6 +252,36 @@ module.exports = Backbone.View.extend({
         this.socketView.getVendors(this.socketVendorID);
       }
     }
+  },
+
+  searchItemsKeyup: function(e){
+    "use strict";
+    var target = $(e.target),
+        targetText = target.val();
+
+    if(targetText.length > 0){
+      //detect enter key
+      if (e.keyCode == 13){
+        this.searchItems(targetText);
+      } else {
+        //this.addressBarGoBtn.removeClass("fadeOut");
+        this.closeStatusBar();
+      }
+    } else {
+      this.closeStatusBar();
+    }
+  },
+
+  searchPagesKeyup: function(e){
+
+  },
+
+  searchItems: function(){
+
+  },
+
+  searchPages: function(){
+
   },
 
   close: function(){

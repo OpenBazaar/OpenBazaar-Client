@@ -211,7 +211,6 @@ module.exports = Backbone.View.extend({
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
       self.addressInput = self.$el.find('.js-navAddressBar');
-      //self.addressBarGoBtn = self.$el.find('.js-navAddressBarGo');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(setText){
@@ -343,13 +342,10 @@ module.exports = Backbone.View.extend({
       //detect enter key
       if (e.keyCode == 13){
         this.addressBarProcess(barText);
-        //this.addressBarGoBtn.addClass("fadeOut");
       } else {
-        //this.addressBarGoBtn.removeClass("fadeOut");
         this.closeStatusBar();
       }
     } else {
-      //this.addressBarGoBtn.addClass("fadeOut");
       this.closeStatusBar();
     }
   },
