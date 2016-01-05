@@ -3247,8 +3247,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .chatHead.tooltip:hover:after {
-  left: -122px;
-  bottom: 5px;
+  left: -123px;
+  bottom: 7px;
   max-width: 100px;
   text-overflow: ellipsis;
   white-space: nowrap;
