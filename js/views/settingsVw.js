@@ -520,7 +520,8 @@ module.exports = Backbone.View.extend({
     storeData.moderator_list = modList.length > 0 ? modList : "";
     storeData.vendor = true;
 
-    saveToAPI(form, "", self.serverUrl + "profile", function(){
+    //NOTE: set_moderators is now a separate API from profile. Profile will need to be called when the other fields on this page are ready.
+    saveToAPI(form, "", self.serverUrl + "set_moderators", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
