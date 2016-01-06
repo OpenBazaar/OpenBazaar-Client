@@ -2211,6 +2211,18 @@ input[type="datetime-local"].fieldItem::-webkit-clear-button {
   display: none;
 }
 
+input[type="datetime-local"].fieldItem::-webkit-calendar-picker-indicator {
+  padding: 10px;
+  opacity: .75;
+}
+
+input[type="datetime-local"].fieldItem::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background: transparent;
+  cursor: pointer;
+}
+
+
 input[type="number"].fieldItem {
   padding-right: 0;
 }
@@ -2910,6 +2922,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .icon-large {
   font-size: 32px;
+}
+
+.icon-med {
+  font-size: 20px;
+  /* padding prevents icon from being cut off due to overlapping edges of element */
+  padding-right: 3px;
+  padding-left: 3px;
 }
 
 .icon-small {

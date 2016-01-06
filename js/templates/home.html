@@ -19,24 +19,25 @@
     </div>
   </div>
   <div class="bar home-page-navigation-filler hide custCol-primary"></div>
-  <div class="flexContainer flex-border color-primary height54">
+  <div class="flexContainer flex-border color-primary height54 js-productsSearch">
     <div class="flexRow">
       <div class="flexRow border0">
-        <div class="js-productsSearch width100">
+        <div class="width100">
           <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
-            <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
+            <input type="text" class="txtField txtField-bar js-homeSearchItems" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
+            <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-homeSearchItemsClear"></a>
           </div>
           <div class="selectPill pull-up43">
-            <select class="custCol-secondary">
-              <option value="following"><%= polyglot.t('filters.listingsCurated') %></option>
+            <select class="custCol-secondary js-homeSelectFollowingFilter">
               <option value="network"><%= polyglot.t('filters.listingsAll') %></option>
+              <option value="following"><%= polyglot.t('filters.listingsCurated') %></option>
             </select>
           </div>
         </div>
-
+        <!--
         <div class="js-vendorsSearch width100 hide">
           <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
-            <input type="text" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForPagesPlaceholder') %>" />
+            <input type="text" class="txtField txtField-bar js-homeSearchUsers" placeholder="<%= polyglot.t('SearchForPagesPlaceholder') %>" />
           </div>
           <div class="selectPill pull-up43">
             <select class="custCol-secondary">
@@ -47,6 +48,7 @@
             </select>
           </div>
         </div>
+        -->
       </div>
     </div>
   </div>
@@ -60,7 +62,7 @@
       <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
     </div>
   </div>
-  <div class="js-feed minHeight650 hide alignCenter fontSize14">
+  <div class="js-feed minHeight650 rowTop30 hide alignCenter fontSize14">
     <h1 class="fancy-heading width100 fontweight500"><%= polyglot.t('ComingSoon') %></h1>
     <div class="row20">
       <span class="fontSize16"><%= polyglot.t('FeedPlaceholder') %></span>

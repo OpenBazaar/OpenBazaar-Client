@@ -13,7 +13,6 @@ module.exports = Backbone.Model.extend({
   },
 
   defaults: {
-
     guid: "", //set by app.js
     //name: "Your Name",
     //handle: "Blockchain ID",
@@ -40,7 +39,6 @@ module.exports = Backbone.Model.extend({
     //bitcoinValidationRegex: "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$"
     //remove this when in production, this is for testNet addresses
     bitcoinValidationRegex: "^[a-km-zA-HJ-NP-Z1-9]{25,34}$"
-
   },
 
   parse: function(response) {
