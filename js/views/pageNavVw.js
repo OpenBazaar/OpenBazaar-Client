@@ -68,7 +68,7 @@ module.exports = Backbone.View.extend({
       this.render();
     });
 
-    this.listenTo(this.userProfile, 'change:language', function(){
+    this.listenTo(this.userProfile, 'change:avatar_hash', function(){
       this.model.set('vendor', this.userProfile.get('profile').vendor);
       this.render();
     });
