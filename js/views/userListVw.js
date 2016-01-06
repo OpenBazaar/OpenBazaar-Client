@@ -16,9 +16,9 @@ module.exports = Backbone.View.extend({
       options.message: message for no users found
       options.serverUrl: server url to pass into each user view
       options.ownFollowing: array of guids this user is following
+      options.hideFollow: boolean, hide follow button
     */
     //the model must be passed in by the constructor
-    console.log(this.options.ownFollowing);
     this.usersShort = new usersShortCollection(this.model);
     this.subViews = [];
     this.render();
@@ -35,6 +35,7 @@ module.exports = Backbone.View.extend({
         if(self.options.ownFollowing.indexOf(user.get('guid')) != -1){
           user.set("ownFollowing", true);
         }
+        user.set('hideFollow', self.options.hideFollow);
         self.renderUser(user);
       }, this);
       this.$el.html(this.listWrapper);
@@ -44,14 +45,10 @@ module.exports = Backbone.View.extend({
   },
 
   renderUser: function(item){
-    //console.log(item);
     var storeShort = new userShortView({
       model: item
     });
     this.subViews.push(storeShort);
-    //$el must be passed in by the constructor
-    //this.$el.append(storeShort.el);
-    //appending to the DOM one by one is too slow, and the last 1/3 of the items won't be added. Add to a holder element instead.
     this.listWrapper.prepend(storeShort.el);
   },
 

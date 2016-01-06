@@ -13,11 +13,11 @@
       <div class="pad20 rowTop20 width100"><h2 class="txt-center">Loading Image...</h2></div>
     </div>
     <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
-    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
+    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce fontSize14"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
     <input id="headerImageInput" type="file" class="cropit-image-input hide" />
     <div class="bar navBar barFlush user-page-navigation positionBottom">
       <div class="navEnd pad10">
-        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide textOpacity75">
+        <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
         </div>
         <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
@@ -200,7 +200,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Email') %></div>
                 <div>
                   <% if(ob.page.profile.email) { %>
-                  <%- ob.page.profile.email %>
+                  <a href="mailto:<%- ob.page.profile.email %>"><%- ob.page.profile.email %></a>
                   <%}else{%>
                   not provided
                   <%}%>
@@ -261,7 +261,7 @@
           <input type="text" id="inputFollowers" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
         </div>
         <div class="selectPill pull-up43">
-          <select class="custCol-secondary">
+          <select class="custCol-secondary custcol-text">
             <option value="all" selected><%= polyglot.t('filters.pagesAllTypes') %></option>
             <option value="stores"><%= polyglot.t('filters.pagesStores') %></option>
             <option value="moderators"><%= polyglot.t('filters.pagesMods') %></option>
@@ -281,7 +281,7 @@
           <input type="text" id="inputFollowing" class="txtField txtField-bar" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" />
         </div>
         <div class="selectPill pull-up43">
-          <select class="custCol-secondary">
+          <select class="custCol-secondary custcol-text">
             <option value="all" selected><%= polyglot.t('filters.pagesAllTypes') %></option>
             <option value="stores"><%= polyglot.t('filters.pagesStores') %></option>
             <option value="moderators"><%= polyglot.t('filters.pagesMods') %></option>
@@ -296,15 +296,15 @@
       </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide minHeight650">
-      <div class="flexRow">
+      <div class="flexRow positionRelative">
         <div class="flexRow custCol-border">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
+          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill">
             <input type="text" id="inputStore" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>"  />
           </div>
         </div>
-        <div class="selectPill pull-up43">
-          <select id="categories" class="custCol-secondary js-categories">
-            <option value="all" selected><%= polyglot.t('filters.categoryAll') %></option>
+        <div class="selectPill positionAbsolute left0 top11">
+          <select id="categories" class="custCol-secondary js-categories custCol-text">
+            <option value="all" selected><%= polyglot.t('All') %></option>
           </select>
         </div>
       </div>
@@ -329,31 +329,68 @@
 </div>
 
 <div id="customizeControls" class="hide">
-  <div class="positionWrapper">
+  <div class="positionWrapper js-customizePrimaryColor">
+    <div class="interactiveTooltip seeTooltip"><div class="noOverflow">Click to change</div></div>
+    <div class="customizePrimaryColorRecommendations js-customizeColorRecommendations">
+      <div class="marginLeft7 floatLeft customizePrimaryColorChoices js-customizePrimaryColorChoices">
+        <div class="customColorChoice customColorChoiceControl js-customColorChoice js-customColorChoicePicker" data-color-key=""><span class="customColorPicker ion-android-color-palette colorWhiteForce"></span></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice1" data-color-key="primary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice2" data-color-key="primary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice3" data-color-key="primary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice4" data-color-key="primary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice5" data-color-key="primary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice6" data-color-key="primary_color"></div>
+      </div>
+    </div>
     <label class="btn btn-square btn-corner btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="primary_color"></label>
-    <div class="labelWrap row5 fade">
-      <div><%= polyglot.t('PrimaryColor') %></div>
+    <div class="labelWrap width40 fade">
       <div><input class="js-customizeColorInput" type="text" id="primary_color" size="7"/></div>
     </div>
   </div>
-  <div class="positionWrapper">
+  <div class="positionWrapper js-customizeSecondaryColor">
+    <div class="customizeSecondaryColorRecommendations js-customizeColorRecommendations">
+      <div class="marginLeft7 floatLeft customizeSecondaryColorChoices js-customizeSecondaryColorChoices">
+        <div class="customColorChoice customColorChoiceControl js-customColorChoice js-customColorChoicePicker" data-color-key=""><span class="customColorPicker ion-android-color-palette colorWhiteForce"></span></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice1" data-color-key="secondary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice2" data-color-key="secondary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice3" data-color-key="secondary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice4" data-color-key="secondary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice5" data-color-key="secondary_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice6" data-color-key="secondary_color"></div>
+      </div>
+    </div>
     <label class="btn btn-square btn-corner btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="secondary_color"></label>
-    <div class="labelWrap row5 fade">
-      <div><%= polyglot.t('SecondaryColor') %></div>
+    <div class="labelWrap width40 fade">
       <div><input class="js-customizeColorInput" type="text" id="secondary_color" size="7"/></div>
     </div>
   </div>
-  <div class="positionWrapper">
+  <div class="positionWrapper js-customizeBackgroundColor">
+    <div class="customizeBackgroundColorRecommendations js-customizeColorRecommendations">
+      <div class="marginLeft7 floatLeft customizeBackGrounColorChoices js-customizeBackgroundColorChoices">
+        <div class="customColorChoice customColorChoiceControl js-customColorChoice js-customColorChoicePicker" data-color-key=""><span class="customColorPicker ion-android-color-palette colorWhiteForce"></span></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice1" data-color-key="background_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice2" data-color-key="background_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice3" data-color-key="background_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice4" data-color-key="background_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice5" data-color-key="background_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice6" data-color-key="background_color"></div>
+      </div>
+    </div>
     <label class="btn btn-square btn-corner btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="background_color"></label>
-    <div class="labelWrap row5 fade">
-      <div><%= polyglot.t('BackgroundColor') %></div>
+    <div class="labelWrap width40 fade">
       <div><input class="js-customizeColorInput" type="text" id="background_color" size="7"/></div>
     </div>
   </div>
-  <div class="positionWrapper">
+  <div class="positionWrapper js-customizeTextColor">
+    <div class="customizeTextColorRecommendations js-customizeColorRecommendations">
+      <div class="marginLeft7 floatLeft customizeTextColorChoices js-customizeTextColorChoices">
+        <div class="customColorChoice customColorChoiceControl js-customColorChoice js-customColorChoicePicker" data-color-key=""><span class="customColorPicker ion-android-color-palette colorWhiteForce"></span></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice1" data-color-key="text_color"></div>
+        <div class="customColorChoice js-customColorChoice js-customColorChoice2" data-color-key="text_color"></div>
+      </div>
+    </div>
     <label class="btn btn-square btn-corner btn-cornerTL btn-flushTL box-borderBright js-customizeColor" for="text_color"></label>
-    <div class="labelWrap row5 fade">
-      <div><%= polyglot.t('TextColor') %></div>
+    <div class="labelWrap width40 fade">
       <div><input class="js-customizeColorInput" type="text" id="text_color" size="7"/></div>
     </div>
   </div>

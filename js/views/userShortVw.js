@@ -18,7 +18,6 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.render();
-    console.log(this.model.attributes);
   },
 
   render: function(){
@@ -35,14 +34,20 @@ module.exports = Backbone.View.extend({
     Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
   },
 
-  followUser: function(){
+  followUser: function(e){
     "use strict";
-    window.obEventBus.trigger('followUser', this.model.guid);
+    window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
+    this.$el.addClass('div-fade');
+    this.$el.find('.js-userShortUnfollow').removeClass('hide');
+    this.$el.find('.js-userShortFollow').addClass('hide');
   },
 
-  unfollowUser: function(){
+  unfollowUser: function(e){
     "use strict";
-    window.obEventBus.trigger('unfollowUser', this.model.guid);
+    window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
+    this.$el.addClass('div-fade');
+    this.$el.find('.js-userShortUnfollow').addClass('hide');
+    this.$el.find('.js-userShortFollow').removeClass('hide');
   },
 
   close: function(){

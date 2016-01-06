@@ -31,16 +31,22 @@
 
 <div class="bar navBar pageNavContainer custCol-secondary">
   <div class="ctrlGroup">
-    <a class="btn btn-win btn-winClose js-navClose"></a>
-    <a class="btn btn-win btn-winMin js-navMin"></a>
-    <a class="btn btn-win btn-winMax js-navMax"></a>
+    <a class="btn btn-win btn-winClose js-navClose">
+      <div class="btn-win-icon ion-ios-close-empty"></div>
+    </a>
+    <a class="btn btn-win btn-winMin js-navMin">
+      <div class="btn-win-icon ion-ios-minus-empty"></div>
+    </a>
+    <a class="btn btn-win btn-winMax js-navMax">
+      <div class="btn-win-icon ion-ios-plus-empty"></div>
+    </a>
   </div>
   <div class="ctrlGroup">
-    <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack custCol-primary custCol-text fontSize13"></a>
-    <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd custCol-primary custCol-text fontSize13"></a>
+    <a class="btn btn-togLeft btn-back ion-chevron-left js-navBack custCol-primary custCol-text fontSize13 tooltip" data-tooltip="<%= polyglot.t('Back') %>"></a>
+    <a class="btn btn-togRight btn-fwd ion-chevron-right js-navFwd custCol-primary custCol-text fontSize13 tooltip" data-tooltip="<%= polyglot.t('Forward') %>"></a>
   </div>
   <div class="ctrlGroup">
-    <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh"></a>
+    <a class="btn btn-home ion-refresh custCol-primary custCol-text js-navRefresh tooltip" data-tooltip="<%= polyglot.t('Reload') %>"></a>
   </div>
   <div class="ctrlGroup flexExpand">
     <div class="txtFieldWrapper searchWrapper mainSearchWrapper">
@@ -48,14 +54,16 @@
     </div>
   </div>
   <div class="ctrlGroup">
-    <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15" href="#home"></a>
+    <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15 tooltip" href="#home" data-tooltip="<%= polyglot.t('Discover') %>"></a>
   </div>
   <div class="ctrlGroup">
-    <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications badge"></div>
+    <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications tooltip" data-tooltip="<%= polyglot.t('Notifications') %>">
+      <div class="badge"></div>
+    </div>
   </div>
 
   <div class="ctrlGroup nav-profile">
-    <div class="btn btn-profile js-navProfile custCol-primary"
+    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('You') %>"
     <% if(ob.avatar_hash != "") { %>
     style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>
@@ -94,7 +102,7 @@
               <%= polyglot.t('onboarding.disclaimer_title') %>
               <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 9</span>
             </div>
-            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+            <div class="flexContainer homeModal-settings customThemeScrollbar homeModal-settings-noSearch custCol-primary">
               <div class="flexRow">
                 <div class="rowItem padding20">
                   <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.disclaimer_body') %></p>
@@ -154,7 +162,7 @@
                   <input type="text" class="search txtField txtField-bar custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
                 </div>
               </div>
-              <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text">
+              <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">
                 <li class="flexRow custCol-border">
                   <div class="rowItem js-homeModal-timeSelect paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -12:00) Eniwetok, Kwajalein" name="time">
@@ -415,7 +423,7 @@
               <%= polyglot.t('onboarding.theme') %>
               <span class="textOpacity75 fontSize14 floatRight">7 <%= polyglot.t('of') %> 9</span>
             </div>
-            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary customThemeScrollbar">
               <div class="flexRow">
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
                   <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1"
@@ -564,9 +572,9 @@
               <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 9</span>
 
             </div>
-            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary customThemeScrollbar">
               <div class="flexRow">
-                <ul class="width100 padding0 margin0 custCol-text">
+                <ul class="width100 padding0 margin0 custCol-text customThemeScrollbar">
 
 
                   <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border">
@@ -580,13 +588,7 @@
                           OpenBazaar
                           <span class="fontSize15 textOpacity50">@openbazaar</span>
                         </div>
-                        <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
-                          <div class="marginBottom2">
-                            OpenBazaar
-                            <span class="fontSize15 textOpacity50">@openbazaar</span>
-                          </div>
-                          <span class="fontSize14 textOpacity75">The offical OpenBazaar page and merch store.</span>
-                        </div>
+                        <span class="fontSize14 textOpacity75">The offical OpenBazaar page and merch store.</span>
                       </div>
                     </label>
                   </li>
@@ -602,13 +604,7 @@
                           Themes
                           <span class="fontSize15 textOpacity50">@themes</span>
                         </div>
-                        <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
-                          <div class="marginBottom2">
-                            Themes
-                            <span class="fontSize15 textOpacity50">@themes</span>
-                          </div>
-                          <span class="fontSize14 textOpacity75">Additional themes for your OpenBazaar page.</span>
-                        </div>
+                        <span class="fontSize14 textOpacity75">Additional themes for your OpenBazaar page.</span>
                       </div>
                     </label>
                   </li>
@@ -624,13 +620,7 @@
                           OB1
                           <span class="fontSize15 textOpacity50">@ob1</span>
                         </div>
-                        <div class="pull-left marginTop6 marginLeft2 marginRight5 fontSize16 width360">
-                          <div class="marginBottom2">
-                            OB1
-                            <span class="fontSize15 textOpacity50">@ob1</span>
-                          </div>
-                          <span class="fontSize14 textOpacity75">The first OpenBazaar company.</span>
-                        </div>
+                        <span class="fontSize14 textOpacity75">The first OpenBazaar company.</span>
                       </div>
                     </label>
                   </li>
