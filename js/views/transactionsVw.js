@@ -8,7 +8,7 @@ var __ = require('underscore'),
     purchasesCl = require('../collections/purchasesCl'),
     orderShortVw = require('./orderShortVw'),
     getBTPrice = require('../utils/getBitcoinPrice'),
-    orderModalVw = require('./orderModalVw');
+    transactionModalVw = require('./transactionModalVw');
 
 module.exports = Backbone.View.extend({
 
@@ -171,7 +171,7 @@ module.exports = Backbone.View.extend({
 
   openOrderModal: function(orderID){
     "use strict";
-    //var newOrderModal = new orderModalVw({orderID: orderID, serverUrl: this.serverUrl});
+    var newOrderModal = new transactionModalVw({orderID: orderID, serverUrl: this.serverUrl});
   },
 
   close: function(){

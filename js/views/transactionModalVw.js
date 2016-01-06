@@ -38,7 +38,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
 
-    loadTemplate('./js/templates/orderModal.html', function(loadedTemplate) {
+    loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
     });
   },
