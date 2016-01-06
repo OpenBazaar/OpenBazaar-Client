@@ -68,14 +68,6 @@ module.exports = Backbone.View.extend({
       this.render();
     });
 
-    this.listenTo(this.userProfile, 'change:avatar_hash', function(){
-      this.model.set('vendor', this.userProfile.get('profile').vendor);
-      this.render();
-    });
-
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
-      this.handleSocketMessage(response);
-    });
     this.socketNotificationID = Math.random().toString(36).slice(2);
     this.socketView.getNotifications(this.socketNotificationID);
 
@@ -216,6 +208,15 @@ module.exports = Backbone.View.extend({
       self.listenTo(window.obEventBus, "setAddressBar", function(setText){
         self.addressInput.val(setText);
         self.closeStatusBar();
+      });
+
+      self.listenTo(self.userProfile, 'change', function(){
+        self.model.set('vendor', self.userProfile.get('profile').vendor);
+        self.render();
+      });
+
+      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+        self.handleSocketMessage(response);
       });
     });
     return this;
