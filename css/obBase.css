@@ -3217,7 +3217,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .tooltip:hover:after{
-  background: #252525;
+  background: rgba(37,37,37,.85);
   border-radius: 3px;
   bottom: -32px;
   color: #fff;
@@ -3246,7 +3246,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: -10px;
 }
 
-.chatHead.tooltip:hover:after {
+.chatHead.tooltip:hover:after{
   left: -123px;
   bottom: 7px;
   max-width: 100px;
