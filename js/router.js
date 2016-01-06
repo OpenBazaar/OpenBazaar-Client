@@ -26,7 +26,7 @@ module.exports = Backbone.Router.extend({
   routes: {
     "": "index",
     "home": "home",
-    "home/:state": "home",
+    "home/:state(/:searchText)": "home",
     "myPage": "userPage",
     "userPage": "userPage",
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
@@ -69,14 +69,20 @@ module.exports = Backbone.Router.extend({
     }
   },
 
-  home: function(state){
+  home: function(state, searchText){
     "use strict";
+    var searchItemsText = "";
+    var searchUserText = ""; //placeholder for future functionality
+    if(state == "products"){
+      searchItemsText = searchText;
+    }
     this.cleanup();
     this.newView(new homeView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state
+      state: state,
+      searchItemsText: searchItemsText
     }));
   },
 
