@@ -23,7 +23,7 @@ module.exports = Backbone.View.extend({
     'click .js-feedTab': function(){this.setState("feed");},
     'click .js-vendorsTab': function(){this.setState("vendors");},
     'click .js-homeCreateStore': 'createStore',
-    'click .js-homeSearchItemsClear': 'loadItems',
+    'click .js-homeSearchItemsClear': 'searchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
     'change .js-homeSelectFollowingFilter': 'setFollowingFilter'
   },
@@ -36,6 +36,7 @@ module.exports = Backbone.View.extend({
     this.userProfile = options.userProfile;
     this.socketView = options.socketView;
     this.state = options.state;
+    this.searchItemsText = options.searchItemsText;
     this.slimVisible = false;
     this.subViews = [];
     this.obContainer = $('#obContainer');
@@ -128,21 +129,24 @@ module.exports = Backbone.View.extend({
     $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate());
-      self.setState(self.state);
+      self.setState(self.state, self.searchItemsText);
       if(self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
         self.$el.find('.js-homeMyPage').addClass('show');
       }
 
       //get vendors and items
-      self.loadingProducts = true;
-      self.socketView.getItems(self.socketItemsID);
+      self.loadItemsOrSearch();
       self.loadingVendors = true;
       self.socketView.getVendors(self.socketUsersID);
-      self.setSocketTimeout();
 
       //listen to scrolling on container
       self.obContainer.on('scroll', function(){self.scrollHandler();});
+
+      //populate search field
+      if(self.searchItemsText){
+        self.$el.find('.js-homeSearchItems').val(self.searchItemsText);
+      }
     });
   },
 
@@ -194,7 +198,7 @@ module.exports = Backbone.View.extend({
     this.subViews.push(simpleMessage);
   },
 
-  setState: function(state){
+  setState: function(state, searchItemsText){
     "use strict";
     if(!state){
       state = "products";
@@ -204,8 +208,14 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-' + state + 'Tab').addClass('active');
     this.$el.find('.js-' + state + 'Search').removeClass('hide');
 
-    //add action to history
-    Backbone.history.navigate("#home/" + state);
+    if(searchItemsText){
+      //add action to history
+      Backbone.history.navigate("#home/" + state + "/" + searchItemsText);
+    } else {
+      //add action to history
+      Backbone.history.navigate("#home/" + state);
+    }
+
     this.state = state;
   },
 
@@ -226,7 +236,7 @@ module.exports = Backbone.View.extend({
         options.target.closest('.js-userShortView').removeClass('div-fade');
         //get_following will not be ready right away after this call
         self.followTimeout = window.setTimeout(function(){
-          self.fetchOwnFollowing(self.resetItemList());
+          self.fetchOwnFollowing(self.loadItemsOrSearch());
           window.clearTimeout(self.followTimeout);
         }, 1000);
       },
@@ -250,7 +260,7 @@ module.exports = Backbone.View.extend({
         options.target.closest('.js-userShortView').removeClass('div-fade');
         //get_following will not be ready right away after this call
         self.followTimeout = window.setTimeout(function(){
-          self.fetchOwnFollowing(self.resetItemList());
+          self.fetchOwnFollowing(self.loadItemsOrSearch());
           window.clearTimeout(self.followTimeout);
         }, 1000);
       },
@@ -264,7 +274,7 @@ module.exports = Backbone.View.extend({
 
   scrollHandler: function(){
     "use strict";
-    if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight){
+    if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight && !this.searchItemsText){
       if(this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
         this.loadingProducts = true;
@@ -297,15 +307,22 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  searchItems: function(searchText){
+  searchItemsClear: function(){
     "use strict";
-    if(searchText){
-      this.searchItemsText = searchText;
+    this.setState("products");
+    this.loadItems();
+  },
+
+  searchItems: function(searchItemsText){
+    "use strict";
+    if(searchItemsText){
+      this.searchItemsText = searchItemsText;
       this.clearItems();
       this.socketSearchID = Math.random().toString(36).slice(2);
-      this.socketView.search(this.socketSearchID, searchText);
+      this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
+      this.setState('products', searchItemsText);
     }
   },
 
@@ -338,10 +355,10 @@ module.exports = Backbone.View.extend({
     } else {
       this.onlyFollowing = false;
     }
-    this.resetItemList();
+    this.loadItemsOrSearch();
   },
 
-  resetItemList: function(){
+  loadItemsOrSearch: function(){
     if(this.searchItemsText){
       this.searchItems(this.searchItemsText);
     } else {
