@@ -352,10 +352,9 @@ module.exports = Backbone.View.extend({
         addressState,
         currentHandle = this.model.get('page').profile.handle;
 
-    //clear old templates
-    //this.$el.find('.js-list4').html("");
-
     if(state === "item"){
+      //clear old templates
+      this.$el.find('.js-list4').html("");
       this.renderItem(hash);
       $('#obContainer').scrollTop(352);
     }else if(state === "itemOld") {
