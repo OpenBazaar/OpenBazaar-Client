@@ -353,7 +353,7 @@ module.exports = Backbone.View.extend({
         currentHandle = this.model.get('page').profile.handle;
 
     //clear old templates
-    this.$el.find('.js-list4').html("");
+    //this.$el.find('.js-list4').html("");
 
     if(state === "item"){
       this.renderItem(hash);
@@ -666,9 +666,6 @@ module.exports = Backbone.View.extend({
     }
     //add the moderator list to the item model
     this.itemEdit.set('moderator_list', self.model.get('page').profile.moderator_list);
-    //this.itemEdit.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
-    //add the user information
-    //this.itemEdit.set({user: self.options.userModel.toJSON()});
     //unbind any old view
     if(this.itemEditView){
       this.itemEditView.undelegateEvents();
