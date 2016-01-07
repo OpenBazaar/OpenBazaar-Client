@@ -210,7 +210,7 @@ module.exports = Backbone.View.extend({
         self.closeStatusBar();
       });
 
-      self.listenTo(self.userProfile, 'change', function(){
+      self.listenTo(self.userProfile, 'change:avatar_hash', function(){
         self.model.set('vendor', self.userProfile.get('profile').vendor);
         self.render();
       });
