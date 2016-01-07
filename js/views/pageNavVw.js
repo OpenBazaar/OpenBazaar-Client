@@ -29,6 +29,7 @@ module.exports = Backbone.View.extend({
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
+    'click .js-homeModal': 'blockClicks',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
@@ -587,8 +588,13 @@ module.exports = Backbone.View.extend({
 
   navAdminPanel: function(){
     "use strict";
-    this.$el.find('.js-adminModal').removeClass('hide');
+    this.$el.find('.js-adminModal').fadeIn(300);
     this.adminPanel.updatePage();
+  },
+
+  blockClicks: function(e) {
+    "use strict";
+    e.stopPropagation();
   },
 
   close: function(){

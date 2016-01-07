@@ -34,6 +34,7 @@ module.exports = Backbone.View.extend({
 
     this.options = options;
     this.state = options.state || "purchases";
+    this.userModel = this.options.userModel;
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
     this.model.set("page", profile);
@@ -171,7 +172,8 @@ module.exports = Backbone.View.extend({
 
   openOrderModal: function(orderID){
     "use strict";
-    var newOrderModal = new transactionModalVw({orderID: orderID, serverUrl: this.serverUrl});
+
+    var orderModalView = new transactionModalVw({orderID: orderID, serverUrl: this.serverUrl});
   },
 
   close: function(){

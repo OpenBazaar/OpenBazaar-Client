@@ -7,13 +7,11 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  classname: "storeWizard",
+  classname: "modal modal-opaque js-transactionModal",
 
   events: {
-    'click .js-storeWizardModal': 'blockClicks',
-    'click .js-closeStoreWizardModal': 'closeWizard',
-    'click .js-storeWizardSave': 'saveWizard',
-    'blur input': 'validateInput'
+    'click .js-transactionModal': 'blockClicks',
+    'click .js-closeModal': 'closeModal'
   },
 
   initialize: function (options) {
@@ -23,9 +21,9 @@ module.exports = Backbone.View.extend({
     this.orderID = options.orderID;
     this.serverUrl = options.serverUrl;
     this.model = new Backbone.Model();
-    this.model.urlRoot = options.serverUrl + "contracts"; //replace with real API call when ready
+    this.model.urlRoot = options.serverUrl + "get_order"; //replace with real API call when ready
     this.model.fetch({
-      data: $.param({'id': self.orderID}),
+      data: $.param({'order_id': self.orderID}),
       success: function(model){
         console.log(model);
         self.render();
@@ -39,8 +37,20 @@ module.exports = Backbone.View.extend({
     var self = this;
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
+      //hide the modal when it first loads
+      self.$el.attr('style', 'display:none');
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.fadeIn(300);
     });
+  },
+
+  blockClicks: function(e) {
+    "use strict";
+    e.stopPropagation();
+  },
+
+  closeModal: function(){
+    this.$el.find('.js-transactionModal').fadeOut(300);
   },
 
   close: function(){
