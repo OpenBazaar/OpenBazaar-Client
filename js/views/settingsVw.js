@@ -388,7 +388,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#generalForm");
 
-    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
@@ -511,7 +511,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         form = this.$el.find("#storeForm"),
-        storeData = {},
+        profileData = {},
+        settingsData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [];
 
@@ -519,14 +520,16 @@ module.exports = Backbone.View.extend({
       modList.push($(this).data('guid'));
     });
 
-    storeData.moderators = modList.length > 0 ? modList : "";
+    settingsData.moderators = modList.length > 0 ? modList : "";
+    profileData.vendor = true;
 
-    //NOTE: set_moderators is now a separate API from profile. Profile will need to be called when the other fields on this page are ready.
-    saveToAPI(form, "", self.serverUrl + "set_store_moderator", function(){
-      "use strict";
-      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
-      self.refreshView();
-    }, "", storeData);
+    saveToAPI(form, "", self.serverUrl + "profile", function() {
+      saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
+        "use strict";
+        showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        self.refreshView();
+      }, "", settingsData);
+    }, "", profileData);
   },
 
   saveAddress: function(){
@@ -563,7 +566,7 @@ module.exports = Backbone.View.extend({
 
     addressData.shipping_addresses = newAddresses;
 
-    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
@@ -575,7 +578,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#advancedForm");
 
-    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();

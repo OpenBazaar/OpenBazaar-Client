@@ -176,7 +176,7 @@ module.exports = Backbone.View.extend({
     wizData.text_color = parseInt(userProfile.text_color.slice(1), 16);
 
     saveToAPI(profileForm, this.model.get('page').profile, self.model.get('user').serverUrl + "profile", function(){
-      saveToAPI('', '', self.model.get('user').serverUrl + "set_store_moderator", function(){
+      saveToAPI('', self.model.get('user'), self.model.get('user').serverUrl + "settings", function(){
         self.trigger('storeCreated');
         window.obEventBus.trigger("updateProfile");
       }, '', modData);
