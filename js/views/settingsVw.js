@@ -55,7 +55,7 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.serverUrl = options.userModel.get('serverUrl');
-    this.user = this.options.userModel;
+    this.userModel = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
     this.subModels = [];
@@ -83,7 +83,7 @@ module.exports = Backbone.View.extend({
           setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
         }
         self.model.set({page: model.toJSON()});
-        self.user.fetch({
+        self.userModel.fetch({
           success: function(model){
             "use strict";
             self.model.set({user: model.toJSON()});
@@ -268,7 +268,7 @@ module.exports = Backbone.View.extend({
   renderModerator: function(moderator){
     "use strict";
     var self = this,
-        existingMods = this.model.get('page').profile.moderator_list,
+        existingMods = this.userModel.get('moderator_list'),
         isExistingMod = existingMods.indexOf(moderator.guid) > -1;
 
     if(moderator.guid != this.model.get('page').profile.guid){
@@ -517,11 +517,10 @@ module.exports = Backbone.View.extend({
       modList.push($(this).data('guid'));
     });
 
-    storeData.moderator_list = modList.length > 0 ? modList : "";
-    storeData.vendor = true;
+    storeData.moderators = modList.length > 0 ? modList : "";
 
     //NOTE: set_moderators is now a separate API from profile. Profile will need to be called when the other fields on this page are ready.
-    saveToAPI(form, "", self.serverUrl + "set_moderators", function(){
+    saveToAPI(form, "", self.serverUrl + "set_store_moderator", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
