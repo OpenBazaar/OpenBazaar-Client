@@ -249,10 +249,11 @@ module.exports = Backbone.View.extend({
     timezone.html(timezone_str);
     language.html(language_str);
 
-    __.each(this.model.get('page').profile.moderator_list, function(modID){
+    __.each(this.userModel.get('moderators'), function(modID){
       "use strict";
       if(modID) {
-        self.renderModerator({'guid': modID, "isBlank": true});
+        modID.fromModel = true;
+        self.renderModerator(modID);
       }
     });
   },
@@ -268,7 +269,7 @@ module.exports = Backbone.View.extend({
   renderModerator: function(moderator){
     "use strict";
     var self = this,
-        existingMods = this.userModel.get('moderator_list'),
+        existingMods = this.userModel.get('moderator_guids'),
         isExistingMod = existingMods.indexOf(moderator.guid) > -1;
 
     if(moderator.guid != this.model.get('page').profile.guid){
@@ -282,9 +283,10 @@ module.exports = Backbone.View.extend({
       var newModModel = new userShortModel(moderator);
       var modShort = new userShortView({model: newModModel});
       if (isExistingMod){
-        //remove blank version that was already added
-        this.$el.find('.js-blankMod[data-guid="' + moderator.guid + '"]').remove();
-        this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+        //don't add unless it comes from the model
+        if(moderator.fromModel){
+          this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+        }
       }else{
         this.$el.find('.js-settingsNewMods').append(modShort.el);
       }

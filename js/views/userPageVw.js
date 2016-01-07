@@ -664,7 +664,7 @@ module.exports = Backbone.View.extend({
       this.itemEdit = new itemModel(defaultItem);
     }
     //add the moderator list to the item model
-    this.itemEdit.set('moderator_list', self.model.get('page').profile.moderator_list);
+    this.itemEdit.set('moderators', self.model.get('user').moderators);
     //unbind any old view
     if(this.itemEditView){
       this.itemEditView.undelegateEvents();

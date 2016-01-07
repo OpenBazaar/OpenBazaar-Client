@@ -39,7 +39,7 @@ module.exports = Backbone.Model.extend({
     //bitcoinValidationRegex: "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$"
     //remove this when in production, this is for testNet addresses
     bitcoinValidationRegex: "^[a-km-zA-HJ-NP-Z1-9]{25,34}$",
-    moderator_list: []
+    moderators: []
   },
 
   parse: function(response) {
@@ -82,6 +82,14 @@ module.exports = Backbone.Model.extend({
     response.language = response.language || "en";
     window.polyglot = new Polyglot({locale: response.language});
     window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: response.language})[0]);
+
+    //extract a list of only moderator guids
+    response.moderators = response.moderators || [];
+
+    response.moderator_guids = response.moderators.map(function(moderatorObject){
+      var modGuid = moderatorObject.guid;
+      return modGuid;
+    });
 
     return response;
   }
