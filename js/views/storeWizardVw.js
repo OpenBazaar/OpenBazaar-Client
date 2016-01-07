@@ -148,7 +148,8 @@ module.exports = Backbone.View.extend({
         moderatorsChecked = $('.js-storeWizardModeratorList input:checked'),
         userProfile = this.model.get('page').profile,
         modList = [],
-        wizData = {};
+        wizData = {},
+        modData = {};
 
     //convert taggle tags to data in the form
     this.$el.find('#realCategoriesInput').val(this.categoriesInput.getTagValues().join(","));
@@ -159,7 +160,7 @@ module.exports = Backbone.View.extend({
       modList.push($(this).data('guid'));
     });
 
-    wizData.moderator_list = modList.length > 0 ? modList : "";
+    modData.moderator_list = modList.length > 0 ? modList : "";
 
     wizData.primary_color = parseInt(userProfile.primary_color.slice(1), 16);
     wizData.secondary_color = parseInt(userProfile.secondary_color.slice(1), 16);
@@ -167,8 +168,10 @@ module.exports = Backbone.View.extend({
     wizData.text_color = parseInt(userProfile.text_color.slice(1), 16);
 
     saveToAPI(profileForm, this.model.get('page').profile, self.model.get('user').serverUrl + "profile", function(){
-      self.trigger('storeCreated');
-      window.obEventBus.trigger("updateProfile");
+      saveToAPI('', '', self.model.get('user').serverUrl + "set_store_moderator", function(){
+        self.trigger('storeCreated');
+        window.obEventBus.trigger("updateProfile");
+      }, '', modData);
     }, "", wizData);
   },
 
