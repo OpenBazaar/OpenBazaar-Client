@@ -763,7 +763,7 @@ module.exports = Backbone.View.extend({
     var colorKey = $(e.currentTarget).data('colorKey');
 
     if (colorKey){
-      $('.js-customColorChoice').removeClass('outline2')
+      $('.js-customColorChoice').removeClass('outline2');
       $(e.currentTarget).addClass('outline2');
 
       this.setCustomColor(rgb2hex($(e.currentTarget).css('background-color')), colorKey);
