@@ -26,7 +26,7 @@
       </div>
       <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder">
         <div class="statusBar navBar fadeOut positionAbsolute js-itemEditImageLoading">
-          <div class="pad20 rowTop20 width100"><h4 class="txt-center"><% polyglot.t('LoadingImage') %></h4></div>
+          <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
         </div>
         <% _.each(ob.combinedImagesArray, function(data, i) { %>
         <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);" data-index="<% i %>">
@@ -383,4 +383,3 @@
     </div>
   </div>
 </form>
-
