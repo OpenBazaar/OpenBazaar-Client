@@ -1307,7 +1307,7 @@ h5 {
 }
 
 .searchWrapper .txtField:focus {
-  outline: 1px solid rgba(255,255,255,0.35);
+  outline: 2px solid rgba(255,255,255,0.35);
   -webkit-background-clip: border;
 }
 
@@ -1376,6 +1376,15 @@ input[type="text"].txtField-bar {
   border-radius: 3px;
   opacity: .80;
   box-sizing: border-box;
+}
+
+.btn-enter {
+  margin: 15px;
+  border-radius: 3px;
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 90%;
 }
 
 .btn i[class *= "ion-"]:before {
@@ -1912,8 +1921,8 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn.btn-bar.btn-tab {
   background: #327EB8;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   -webkit-user-select: none;
@@ -1922,7 +1931,7 @@ div.chatSearchOut .chatSearchIcon {
   font-weight: 500;
   line-height: 46px;
   padding: 0 25px;
-  margin-top: 4px;
+  margin-top: 8px;
   font-size: 14px;
 }
 
@@ -2423,8 +2432,6 @@ input[type="number"].fieldItem.fieldItem-withButton {
   -webkit-appearance: none;
   width: 100%;
   padding: 15px;
-  font-family: inherit;
-  font-size: inherit;
   resize: none;
 }
 
@@ -2697,6 +2704,45 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .75;
 }
 
+.onboardingIntroDiscover {
+  position: absolute;
+  cursor: pointer;
+  top: 50px;
+  right: 80px;
+  height: 155px;
+  width: 233px;
+  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 100%;
+  background-size: cover;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-align: center;
+  -webkit-box-shadow: 0px 1px 2px 0px rgb(37, 37, 37);
+}
+
+.onboardingIntroDiscover:before {
+  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0%;
+  background-size: 233px 196px;
+  content: " ";
+  width: 32px;
+  height: 41px;
+  position: absolute;
+  top: -41px;
+  z-index: 10;
+  right: 0px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.onboardingIntroDiscover a {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.onboardingIntroDiscover a:hover {
+  text-decoration: none;
+}
+
 .popMenu-navBar {
   top: -238px;
   right: 10px;
@@ -2765,6 +2811,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
   width: 950px;
   z-index: 3;
+}
+
+#noNotifications {
+  padding-top: 10px;
 }
 
 #notificationsPanel {
@@ -3262,7 +3312,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .btn-profile.tooltip:hover:after{
-  left: -10px;
+  left: -45px;
 }
 
 .chatHead.tooltip:hover:after{
@@ -3343,6 +3393,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #messageModal {
   z-index: 4;
+}
+
+.pill {
+  border-radius: 2px;
+  padding: 5px 7px;
+  min-width: 100px;
+  background: red;
 }
 
 .selectPill {
@@ -3869,6 +3926,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin: 0;
 }
 
+#ov1  .margin8 {
+  margin: 8px;
+}
+
 #ov1  .marginRight2 {
   margin-right: 2px;
 }
@@ -4068,6 +4129,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .height54 {
   height: 54px;
 }
+#ov1  .height55 {
+  height: 55px;
+}
 
 #ov1  .height46 {
   height: 46px;
@@ -4183,6 +4247,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding015 {
   padding: 0px 15px;
+}
+#ov1  .padding025 {
+  padding: 0px 25px;
 }
 #ov1  .padding515 {
   padding: 5px 15px;

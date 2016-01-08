@@ -109,7 +109,7 @@ module.exports = Backbone.View.extend({
     var moderatorDescription = (data.moderator.short_description) ? data.moderator.short_description : window.polyglot.t('NoDescriptionAdded');
     var moderatorHandle = (data.moderator.handle) ? data.moderator.handle : data.moderator.guid;
     var newModerator = $(
-        '<div class="pad10 flexRow custCol-border-secondary">' +
+        '<div class="pad10 flexRow custCol-border">' +
           '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
           '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100">' +
             '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);"></div>' +

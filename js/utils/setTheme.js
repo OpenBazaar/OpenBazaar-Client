@@ -36,11 +36,13 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + shadeColor2(primaryColor, 0.05) + ";}" +
       "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primaryColor + ";}" +
       "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage .btn-tab .pill { background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage .btn-tab.active .pill { background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + shadeColor2(primaryColor, -0.35) +  ";}" +
       "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
       "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage { background-color: " + backgroundColor + ";}" + 
-      "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, 0.1) + ";}" +
+      "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, 0.08) + ";}" +
       "#ov1 #userPage .custCol-border-secondary { border-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-border-primary { border-color: " + primaryColor + ";}" +
       "#ov1 #userPage .radioLabel:before { border-color: " + textColor + ";}" +
@@ -61,7 +63,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .container .txtField { color: " + textColor + ";}" +
       "#ov1 #userPage .custCol-font-secondary { color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + textColor + ";}" +
-      "#ov1 #userPage .chosen-choices { background-color: " + shadeColor2(primaryColor, 0.04) + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
+      "#ov1 #userPage .chosen-choices { background-color: " + primaryColor + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
       "#ov1 #userPage .search-choice { background-color: " + secondaryColor + "; background-image: none; border: none; padding: 10px; color: " + textColor + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
       "#ov1 #userPage .custCol-border-background { border-color: " + backgroundColor + " }" +
       "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + secondaryColor + "}" +

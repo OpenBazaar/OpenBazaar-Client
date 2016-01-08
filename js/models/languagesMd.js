@@ -17,7 +17,9 @@ module.exports = Backbone.Model.extend({
         You: "You",
         Skip: "Skip",
         Done: "Done",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Cancel",
+        ClosingOpenBazaar: "Tip: Keep OpenBazaar open for your page to stay online.", 
         Close: "Close",
         Yes: "Yes",
         No: "No",
@@ -59,7 +61,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Become a Store",
         GoToMyPage: "My Page",
-        SearchForItemsPlaceholder: "Search by name or keyword",
+        SearchForItemsPlaceholder: "Type a keyword...",
         SearchForPagesPlaceholder: "Search by name or keyword",
         SearchFeedPlaceholder: "Search by handle or GUID",
         SearchForFollowersPlaceholder: "Search by handle or GUID",
@@ -185,7 +187,7 @@ module.exports = Backbone.Model.extend({
         PaymentPending: "Payment Pending",
         FinalizePurchase: "Finalize Purchase",
         LoadingImage: "Loading Image...",
-        UploadAvatar: "Upload Avatar",
+        UploadAvatar: "Select Avatar",
         SaveAvatar: "Save Avatar",
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
@@ -277,6 +279,8 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar Configuration",
+          Introduction: "Introduction",
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions within OpenBazaar. <br /><br /> It may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           theme: "Select a Theme for your Page",
           chooseLanguage: "Select Your Language",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
@@ -334,6 +338,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Omitir",
         Done: "Hecho",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Cancelar",
         Yes: "S&iacute;",
         No: "No",
@@ -586,7 +591,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Personalice Su OpenBazaar",
-          theme: "Seleccione un tema para su p&aacute;gina",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Seleccione un tema para su p&aacute;gina",
           chooseLanguage: "Seleccione idioma",
           contributors: "%{smart_count} Colaboradores |||| %{smart_count} Colaboradores",
           configure: "Configure su Experiencia",
@@ -645,6 +652,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "&Uuml;berspringen",
         Done: "Fertig",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Abbrechen",
         Yes: "Ja",
         No: "Nein",
@@ -903,7 +911,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar Konfiguration",
-          theme: "W&auml;hle ein Farbschema f&uuml;r deine Seite",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "W&auml;hle ein Farbschema f&uuml;r deine Seite",
           chooseLanguage: "W&auml;hle deine Sprache",
           contributors: "%{smart_count} Mitwirkeder |||| %{smart_count} Mitwirkende",
           configure: "Konfiguriere dein Erlebnis",
@@ -962,7 +972,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Salta",
         Done: "Finito",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Annulla",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "Chiudi",
         Yes: "Si",
         No: "No",
@@ -1221,7 +1233,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Configurazione OpenBazaar",
-          theme: "Seleziona un Tema per la tua pagina",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Seleziona un Tema per la tua pagina",
           chooseLanguage: "Seleziona la tua lingua",
           contributors: "%{smart_count} Contributore |||| %{smart_count} Contributori",
           configure: "Imposta la tua esperienza",
@@ -1280,7 +1294,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Passer",
         Done: "Terminé",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Annuler",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "Fermer",
         Yes: "Oui",
         No: "Non",
@@ -1540,7 +1556,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Configuration d'OpenBazaar",
-          theme: "Sélectionner un thème pour votre page",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Sélectionner un thème pour votre page",
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
           configure: "Configurez votre expérience",
@@ -1598,6 +1616,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Sari peste",
         Done: "Efectuat",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Anulare",
         Yes: "Da",
         No: "Nu",
@@ -1856,7 +1875,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Configurare OpenBazaar",
-          theme: "Selectați o Temă pentru Pagina dvs.",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Selectați o Temă pentru Pagina dvs.",
           chooseLanguage: "Selectați Limba dvs.",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributori",
           configure: "Configurați-vă experiența",
@@ -1915,6 +1936,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Пропустить",
         Done: "Готово",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Отмена",
         Yes: "Да",
         No: "Нет",
@@ -2173,7 +2195,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Конфигурация OpenBazaar",
-          theme: "Выберите оформление для вашей страницы",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Выберите оформление для вашей страницы",
           chooseLanguage: "Выберите ваш язык",
           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиков",
           configure: "Настройте рабочее место",
@@ -2232,6 +2256,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Preskočiť",
         Done: "Hotovo",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Zrušiť",
         Yes: "Áno",
         No: "Nie",
@@ -2489,7 +2514,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Konfigurácia OpenBazaaru",
-          theme: "Zvoľte si grafickú tému Vašej stránky",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Zvoľte si grafickú tému Vašej stránky",
           chooseLanguage: "Zvoľte jazyk",
           contributors: "%{smart_count} prispievateľ |||| %{smart_count} prispievateľov",
           configure: "Configure your experience",
@@ -2548,7 +2575,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Atla",
         Done: "Tamam",
+        Navigation: "Navigation", //notTranslated
         Cancel: "İptal",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "Kapat",
         Yes: "Evet",
         No: "Hayır",
@@ -2807,7 +2836,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar Yaplandırma",
-          theme: "Sayfanız için bir Tema Seçin",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Sayfanız için bir Tema Seçin",
           chooseLanguage: "Dilinizi Seçin",
           contributors: "%{smart_count} Katkıcı |||| %{smart_count} Katkıcı",
           configure: "Deneyiminizi Yapılandırın",
@@ -2866,7 +2897,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "BuSHa'",
         Done: "PItlh",
+        Navigation: "Navigation", //notTranslated
         Cancel: "QuvHa'ghach",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "SoQmoH",
         Yes: "HIja'",
         No: "Be'",
@@ -3124,7 +3157,9 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar bang",
-          theme: "Hoch tuqwIj wIv",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Hoch tuqwIj wIv",
           chooseLanguage: "Hol wIv",
           contributors: "%{smart_count} 'ach yIn nuvpu' 'Iv ghaq |||| %{smart_count} 'ach yIn nuvpu' 'Iv ghaq",
           configure: "SIQpu'bogh choH",
@@ -3182,7 +3217,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "跳过",
         Done: "完成",
+        Navigation: "Navigation", //notTranslated
         Cancel: "取消",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "关闭",
         Yes: "是",
         No: "否",
@@ -3440,7 +3477,8 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar 布局",
-          theme: "选择主页主题",
+          Introduction: "Introduction", //notTranslated
+         IntroductionBody: "", //notTranslated          theme: "选择主页主题",
           chooseLanguage: "选择语言",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
           configure: "设定体验内容",
@@ -3499,7 +3537,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "거르다",
         Done: "끝난",
+        Navigation: "Navigation", //notTranslated
         Cancel: "취소",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "닫기",
         Yes: "네",
         No: "아니요",
@@ -3758,6 +3798,8 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "오픈바자 구서",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated          
           theme: "내 페이지 테마 선택",
           chooseLanguage: "언어 선택",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors", // not sure if I can change this..

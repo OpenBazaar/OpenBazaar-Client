@@ -183,6 +183,7 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       if(localStorage.getItem("onboardingComplete") != "true") {
         self.$el.find('.js-homeModal').removeClass("hide");
+        $('#obContainer').addClass("blur");
         self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
         self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
         self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
@@ -452,6 +453,7 @@ module.exports = Backbone.View.extend({
         uploadImageFormData = new FormData();
 
     localStorage.setItem("onboardingComplete", "true");
+    $('#obContainer').removeClass("blur");
 
     if($('textarea#aboutInput').val() != ""){
         self.model.set('short_description', $('textarea#aboutInput').val());
@@ -580,9 +582,15 @@ module.exports = Backbone.View.extend({
             submit();
         }
     this.$el.find('.js-homeModal').hide();
+    this.$el.find('.js-OnboardingIntroDiscover').removeClass('hide');
     
-    // Start application walkthrough (coming soon once I have better designs)
     new Notification(window.polyglot.t('WelcomeToYourPage'));
+
+    // play notification sound
+    var notifcationSound = document.createElement('audio');
+    notifcationSound.setAttribute('src', './audio/notification.mp3');
+    notifcationSound.play();
+
   },
 
   navAdminPanel: function(){

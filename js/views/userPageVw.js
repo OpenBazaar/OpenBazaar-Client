@@ -100,6 +100,8 @@ var defaultItem = {
   }
 };
 
+var recommendedPrimaryColors = ['#4c877c','#dc6c7d','#ce738b','#3a4352','#80bbad','#106c88','#58a6ad','#90545d','#b53b4d','#6c9052','#89a4b3','#ffffff','#827341','#74b69e','#716e86','#935456','#929e8e','#9aa1a5','#d9d8c6'];
+
 function shadeColor2(color, percent) {
   var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
   return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
@@ -526,6 +528,7 @@ module.exports = Backbone.View.extend({
         if(self.options.ownPage === false){
           self.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: self.userID})));
         }
+        $('.js-userFollowerCount').html(model.attributes.followers.length);
       },
       error: function(model, response){
         showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
@@ -573,6 +576,8 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
+    $('.js-userFollowersCount').html(this.followers.attributes.followers.length);
+
   },
 
   renderFollowing: function (model) {
@@ -588,6 +593,7 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followingList);
+    $('.js-userFollowingCount').html(this.following.attributes.following.length);
   },
 
   renderItem: function(hash){
@@ -785,12 +791,12 @@ module.exports = Backbone.View.extend({
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
       this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').addClass('width270');

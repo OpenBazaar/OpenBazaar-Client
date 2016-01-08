@@ -79,7 +79,7 @@
       <div class="navEnd pad15">
         <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
           <a class="btn btn-txt custCol-primary js-sellItem">
-            <span class="ion-android-add fontSize11 marginRight2 textOpacity1"></span>
+            <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('nav.createListing') %>
           </a>
           <a class="btn btn-txt custCol-primary js-createStore">
@@ -153,12 +153,26 @@
     </div>
   </div>
 
-  <div class="bar navBar barFlush user-page-navigation custCol-secondary">
-    <a class="btn btn-bar btn-tab custCol-secondary js-aboutTab js-tab"><%= polyglot.t('About') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab"><%= polyglot.t('Followers') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab"><%= polyglot.t('Following') %></a>
+  <div class="bar navBar barFlush user-page-navigation custCol-secondary height55">
+    <a class="btn btn-bar btn-tab custCol-secondary js-aboutTab js-tab">
+      <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('About') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-followersTab js-tab">
+      <span class="ion-person-stalker fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Followers') %>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowerCount">0</span>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-followingTab js-tab">
+      <span class="ion-person fontSize11 marginRight2 textOpacity"></span>
+      <%= polyglot.t('Following') %>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowingCount">0</span>
+    </a>
     <% if(ob.page.profile.vendor) { %>
-    <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab"><%= polyglot.t('Store') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab">
+      <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Store') %>
+    </a>
     <% } %>
   </div>
   <div class="userPage-subViews custCol-primary minHeight650">

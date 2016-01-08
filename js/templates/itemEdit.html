@@ -124,12 +124,25 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
+            <div class="flexCol-3 borderRight custCol-border">
+              <div class="fieldItem">
+                <label for="nsfwFalse"><%= polyglot.t('NSFW') %></label>
+              </div>
+            </div>
+            <div class="flexCol-8">
+              <div class="fieldItem">
+                <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel"><%= polyglot.t('No') %></label>
+              </div>
+            </div>
+          </div>
+          <div class="flexRow custCol-border">
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputSku"><%= polyglot.t('SKU') %> </label>
               </div>
             </div>
-            <div class="flexCol-9">
+            <div class="flexCol-8">
               <input name="sku" type="text" id="inputSku" placeholder="<%= polyglot.t('Optional') %>" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.item.sku %>">
             </div>
           </div>
@@ -316,19 +329,6 @@
           <div class="flexRow custCol-border">
             <div class="flexCol-4  borderRight custCol-border">
               <div class="fieldItem">
-                <label for="nsfwFalse"><%= polyglot.t('NSFW') %></label>
-              </div>
-            </div>
-            <div class="flexCol-8">
-              <div class="fieldItem">
-                <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel"><%= polyglot.t('No') %></label>
-              </div>
-            </div>
-          </div>
-          <div class="flexRow custCol-border">
-            <div class="flexCol-4  borderRight custCol-border">
-              <div class="fieldItem">
                 <label><%= polyglot.t('Keywords') %></label>
               </div>
             </div>
@@ -337,7 +337,7 @@
             </div>
           </div>
           <div class="flexRow">
-            <p class="textOpacity50 helper-text"<%= polyglot.t('KeywordsHelperText') %></p>
+            <p class="textOpacity50 helper-text"><%= polyglot.t('KeywordsHelperText') %></p>
           </div>
         </div>
 
@@ -360,11 +360,11 @@
           </div>
           <div class="flexRow hide js-itemEditClearDateWrapper">
             <div class="fieldItem width100 padding0">
-              <a class="btn btn-txt custCol-primary hcentered js-itemEditClearDate"><%= polyglot.t('ClearExpirationDate') %></a>
+              <a class="btn btn-txt custCol-secondary hcentered js-itemEditClearDate"><%= polyglot.t('ClearExpirationDate') %></a>
             </div>
           </div>
           <div class="flexRow">
-              <p class="textOpacity50 helper-text"><%= polyglot.t('ExpirationDateHelperText') %></p>
+            <p class="textOpacity50 helper-text"><%= polyglot.t('ExpirationDateHelperText') %></p>
           </div>
         </div>
       </div>

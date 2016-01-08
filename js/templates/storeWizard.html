@@ -17,17 +17,17 @@
 
             <div class="flexRow">
               <div class="flexRow custCol-border">
-                  <div class="flexCol-3 borderRight custCol-border">
+                  <div class="flexCol-4 borderRight custCol-border">
                     <label class="fieldItem" for="storeNameInput">
                       <%= polyglot.t('Name') %>
                     </label>
                   </div>
-                  <div class="flexCol-9">
+                  <div class="flexCol-8">
                     <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
                   </div>
               </div>
               <div class="flexRow custCol-border">
-                <div class="flexCol-3 borderRight custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <label class="fieldItem" for="aboutInput">
                     <%= polyglot.t('Description') %>
                   </label>
@@ -37,8 +37,8 @@
                 </div>
               </div>
               <!--
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              <div class="flexRow custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <div class="fieldItem">
                     <label for="refund_address">
                       <%= polyglot.t('BitcoinReturnAddress') %>
@@ -57,7 +57,7 @@
               </div>
               -->
               <div class="flexRow custCol-border">
-                <div class="flexCol-3 borderRight custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <label class="fieldItem" for="realCategoriesInput">
                     <%= polyglot.t('Keywords') %><!--  (<%= polyglot.t('UpTo3') %>) -->
                   </label>
@@ -67,8 +67,8 @@
                   <div class="fieldItem" id="categoriesInput"></div>
                 </div>
               </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              <div class="flexRow custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <label class="fieldItem">
                     <%= polyglot.t('NSFW') %>
                   </label>
@@ -93,7 +93,7 @@
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border-secondary">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border">
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Search') %> <%= polyglot.t('for') %> <%= polyglot.t('moderators') %>" />
               </div>
             </div>
