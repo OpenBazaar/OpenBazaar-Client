@@ -104,9 +104,13 @@
                         </div>
                         <div class="pad10left txt-unleaded width260">
                           <div class="marginTop9 marginBottom4 fontSize14 noOverflow">
-                            <%= polyglot.t('buyFlow.directPaymentTo') %>
+
                             <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>">
-                              <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>
+                              <% if(ob.page.profile.handle){ %>
+                                <%= polyglot.t('buyFlow.directPaymentTo', {handle: ob.page.profile.handle }) %>
+                              <% } else { %>
+                                <%= polyglot.t('buyFlow.directPaymentTo', {handle: ob.page.profile.guid }) %>
+                              <% } %>
                             </span> (<%= polyglot.t('Free') %>)
                           </div>
                           <div class="textOpacity75 fontSize14">
