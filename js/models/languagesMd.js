@@ -189,18 +189,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Save Avatar",
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
-        Reset: "Reset",
         Loading: "Loading...", // not translated
         Purchases: "Purchases",
         Sales: "Sales",
         Cases: "Cases",
         Discover: "Discover",
-        Blocked: "Blocked",
-        Advanced: "Advanced",
-        General: "General",
-        Page: "Page",
         AllItems: "All Items",
-        Listing: "Listing",
         DomesticShippingPrice: "Domestic Shipping Price",
         InternationalShippingPrice: "International Shipping Price",
         MinimumIs: "Minimum is",
@@ -211,7 +205,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time",
         InternationalShippingTime: "International Shipping Time",
         DisplayNSFWcontent: "Display NSFW content?",
-        Basic: "Basic",
         Content: "Content",
         StandardThemes: "Standard themes",
         NoPhotosAdded: "No Photos Added",
@@ -498,18 +491,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Guardar Avatar ",
         NewAvatar: "Seleccione Nuevo Avatar",
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
-        Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
         Purchases:"Compras",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
@@ -521,7 +508,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -815,18 +801,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Avatar speichern",
         NewAvatar: "W&auml;hlen Sie New Avatar",
         NewCoverImage: "W&auml;hlen Sie New Cover Image",
-        Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
         Purchases:"Eink&auml;ufe",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
@@ -838,7 +818,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -1134,18 +1113,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Salva Avatar",
         NewAvatar: "Selezionare Nuovo Avatar",
         NewCoverImage: "Selezionare Nuovo Copertina",
-        Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
         Purchases:"Acquisti",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -1156,7 +1129,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -1452,18 +1424,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Enregistrer un Avatar",
         NewAvatar: "Sélectionner un nouvel avatar",
         NewCoverImage: "Sélectionner une nouvelle image de couverture",
-        Reset: "Réinitialiser",
         Loading: "Chargement...",
         Purchases:"Achats",
         Sales: "Ventes",
         Cases: "Cas",
         Discover: "Découvrir",
-        Blocked: "Bloqué",
-        Advanced: "Avancé",
-        General: "Général",
-        Page: "Page",
         AllItems: "Tous les articles",
-        Listing: "Annonce",
         DomesticShippingPrice: "Prix d'expédition nationale",
         InternationalShippingPrice: "Prix d'expédition internationale",
         MinimumIs: "Le minimum est",
@@ -1474,7 +1440,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Délai d'expédition nationale",
         InternationalShippingTime: "Délai d'expédition internationale",
         DisplayNSFWcontent: "Afficher le contenu NSFW ?",
-        Basic: "Basic",
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
@@ -1768,18 +1733,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Salvare Avatar",
         NewAvatar: "Selectare Avatar Nou",
         NewCoverImage: "Selectare Imagine Copertă Nouă",
-        Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
         Purchases:"Cumpărături",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
@@ -1791,7 +1750,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -2085,18 +2043,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Сохранить аватар",
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
-        Reset: "Сброс",
         Loading: "Loading...", // not translated
         Purchases:"Покупки",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         FreeShipping: "Free Shipping", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
@@ -2108,7 +2060,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -2344,18 +2295,11 @@ module.exports = Backbone.Model.extend({
         Condition: "Podmienka",
         NSFW: "18+ (obsah pre dospelých)",
         Select: "Select", //not translated
-        Basic: "Basic", //not translated
         Social: "Social", //not translated
         Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
         Listings: "Listings", //not translated
         Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Blocked: "Blocked", //not translated
-        Advanced: "Advanced", //not translated
-        General: "General", //not translated
         Language: "Language", //not translated
-        Reset: "Reset", //not translated
         Local: "Lokálne",
         Domestic: "Vnútroštátne",
         Location: "Lokalita",
@@ -2720,18 +2664,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Avatarı Kaydet",
         NewAvatar: "Yeni Avatar Seç",
         NewCoverImage: "Yeni Kapak Görseli Seç",
-        Reset: "Sıfırla",
         Loading: "Loading...", // not translated
         Purchases: "Purchases", //not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -2742,7 +2680,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -3037,18 +2974,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "QaD mIllogh nob",
         NewAvatar: "QaD mIllogh wIv",
         NewCoverImage: "Yuvtlhe' mIllogh wIv",
-        Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
         Purchases:"Je'",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -3059,7 +2990,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -3353,18 +3283,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "保存 Avatar",
         NewAvatar: "选择新的 Avatar",
         NewCoverImage: "选择新的封面照片",
-        Reset: "重置",
         Loading: "Loading...", // not translated
         Purchases: "Purchases", // not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -3375,7 +3299,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
@@ -3671,18 +3594,12 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "정장 화신",
         NewAvatar: "새로운 화신 선택",
         NewCoverImage: "새로운 표지사진 선택",
-        Reset: "Reset", // not translated
         Loading: "Loading...", // not translated
         Purchases: "Purchases", // not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
         Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        Page: "Page", // not translated
         AllItems: "All Items", // not translated
-        Listing: "Listing", // not translated
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
@@ -3693,7 +3610,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
