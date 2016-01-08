@@ -1075,7 +1075,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Argomento",
         Listing: "Listato",
         Listings: "Listati",
-        Pages: "Pagine"
+        Pages: "Pagine",
         Page: "Pagina",
         Language: "Lingua",
         Reset: "Reset",
@@ -1158,7 +1158,7 @@ module.exports = Backbone.Model.extend({
           sortByStatus2: "Confermato/Inviato",
           sortByStatus3: "Completato (fondi rilasciati)",
           sortByStatus4: "Contestato",
-          OrderID: "ID Ordine"
+          OrderID: "ID Ordine",
           OrderDate: "Data ordine",
           OrderStatus: "Stato dell'ordine",
           OrderStatus0: "Comprato (non finanziato)",
