@@ -304,15 +304,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished"
         },
         buyFlow: {
+          DirectPayment: "Direct Payment",
+          SendDirectlyTo: "Send direct payment to %{handle}",
           MustAddAddress: "You must add an address to ship to",
           VendorShipsTo: "Ships to",
           DoesNotShipHere: "Does not ship here",
           Send: "Send",
           BTCto: "BTC to",
+          SendBTCtoAddress: "Send %{amount} BTC to",
           OpenAddress: "Open in Local Wallet",
           CopyAddress: "Copy to Clipboard",
           RefreshPayment: "Refresh Payment Status",
-          summaryMsg1: "Your payment has been sent to",
+          summaryMsg1: "Your payment has been sent to %{recipient}",
           summaryMsg2: "The expected processing time for this order is",
           summaryMsg3: "You can check the status of your order on your",
           purchasesPage: "purchases page",
@@ -613,15 +616,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Usted debe agregar una dirección para env&iacute;os",
           VendorShipsTo: "Este proveedor despacha a estos países",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
+          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
           OpenAddress: "Open in Local Wallet", //notTranslated
           CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
-          summaryMsg1: "Your payment has been sent to", //notTranslated
+          summaryMsg1: "Your payment has been sent to %{recipient}", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
@@ -930,15 +936,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Sie m&uuml;ssen eine Versandadresse hinzuzuf&uuml;gen",
           VendorShipsTo: "Dieser Anbieter versendet nach",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
+          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
           OpenAddress: "Open in Local Wallet", //notTranslated
           CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
-          summaryMsg1: "Your payment has been sent to", //notTranslated
+          summaryMsg1: "Your payment has been sent to %{recipient}", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
@@ -1043,7 +1052,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Restituzione",
         ReturnsPolicy: "Politica di restituzione",
         Ampersand: "&",
-        Keywords: "Parole chiave",		
+        Keywords: "Parole chiave",
         ShipsFrom: "Inviato da",
         ShipsTo: "Inviato verso",
         Optional: "Facoltativo",
@@ -1248,15 +1257,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi",
           DoesNotShipHere: "Questo venditore non invia qui",
           Send: "Invia",
           BTCto: "BTC a",
+          SendBTCtoAddress: "Invia %{amount} BTC a",
           OpenAddress: "Apri indirizzo in portafoglio locale",
           CopyAddress: "Copia indirizzo di pagamento negli appunti",
           RefreshPayment: "Aggiorna lo stato di pagamento",
-          summaryMsg1: "Il tuo pagamento è stato trasmesso a",
+          summaryMsg1: "Il tuo pagamento è stato trasmesso a %{recipient}",
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
           summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
           purchasesPage: "pagina acquisti", //notTranslated
@@ -1567,18 +1579,22 @@ module.exports = Backbone.Model.extend({
           Finished: "Terminé"
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Vous devez ajouter une adresse pour expédier",
           VendorShipsTo: "Expédie vers",
           DoesNotShipHere: "N'expédie pas ici",
           Send: "Envoyer",
           BTCto: "BTC à",
+          SendBTCtoAddress: "Envoyer %{amount} BTC à",
           OpenAddress: "Ouvrir dans le portefeuille local",
           CopyAddress: "Copier dans le presse-papier",
           RefreshPayment: "Actualiser le statut du paiement",
-          summaryMsg1: "Votre paiement a été envoyé à",
+          summaryMsg1: "Votre paiement a été envoyé à %{recipient}",
           summaryMsg2: "Le temps de traitement prévu pour cette commande est",
           summaryMsg3: "Vous pouvez vérifier le statut de votre commande sur votre",
           purchasesPage: "page d'achat",
+          returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "N'appliquer que si la transaction se termine par un litige.",
           directPaymentDisclaimer: "Utilisez le paiement direct avec prudence, les fonds sont irréversibles",
           directPaymentTo: "Paiement direct à",
@@ -1883,15 +1899,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
           VendorShipsTo: "Acest furnizor livrează către următoarele țări",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
+          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
           OpenAddress: "Open in Local Wallet", //notTranslated
           CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
-          summaryMsg1: "Your payment has been sent to", //notTranslated
+          summaryMsg1: "Your payment has been sent to %{recipient}", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
@@ -2200,15 +2219,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Вы должны указать адрес для доставки",
           VendorShipsTo: "Этот производитель отправляет в следующие страны",
           DoesNotShipHere: "Выбранный производитель не производит доставку в указанный регион",
           Send: "Отправить",
           BTCto: "BTC to",
+          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
           OpenAddress: "Открывать адрес в кошельке по-умолчанию",
           CopyAddress: "Скопировать адрес оплаты в буфер обмена",
           RefreshPayment: "Обновить статус платежа",
-          summaryMsg1: "Ваш платёж был отправлен на",
+          summaryMsg1: "Ваш платёж был отправлен на %{recipient}", //notTranslated
           summaryMsg2: "Ожидаемое время обработки вашего заказа составляет",
           summaryMsg3: "Чтобы проверить статус вашего заказа, загляните в",
           purchasesPage: "интерфейс покупок", //notTranslated
@@ -2516,15 +2538,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Musíte zadať adresu pre doručenie",
           VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín:",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
+          SendBTCtoAddress: "Send %{amount} BTC to",
           OpenAddress: "Open in Local Wallet", //notTranslated
           CopyAddress: "Copy to Clipboard", //notTranslated
           RefreshPayment: "Refresh Payment Status", //notTranslated
-          summaryMsg1: "Your payment has been sent to", //notTranslated
+          summaryMsg1: "Your payment has been sent to %{recipient}", //notTranslated
           summaryMsg2: "The expected processing time for this order is", //notTranslated
           summaryMsg3: "You can check the status of your order on your", //notTranslated
           purchasesPage: "purchases page", //notTranslated
@@ -2834,15 +2859,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Gönderilecek bir adres eklemelisiniz",
           VendorShipsTo: "Satıcı şu ülkelere gönderim yapmaktadır",
           DoesNotShipHere: "Satıcı buraya gönderim yapmamaktadır",
           Send: "Gönder",
           BTCto: "BTC alıcısı",
+          SendBTCtoAddress: "Gönder %{amount} BTC alıcısı",
           OpenAddress: "Adresi Yerel Cüzdanda Aç",
           CopyAddress: "Ödeme Adresini Panoya Kopyala",
           RefreshPayment: "Ödeme Durumunu Yenile",
-          summaryMsg1: "Gönderilen ödemenin alıcısı",
+          summaryMsg1: "Gönderilen ödemenin alıcısı %{recipient}",
           summaryMsg2: "Bu siparişin tahmini hazırlama süresi",
           summaryMsg3: "Siparişinizin durumunu kontrol edebileceğiniz yer",
           purchasesPage: "alımlar sayfası", //notTranslated
@@ -3151,14 +3179,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "SoQ Duj ghob'e' chel SoH",
           VendorShipsTo: "Daq Duj tuq",
+          DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "NgeH",
           BTCto: "BTC to",
+          SendBTCtoAddress: "Send %{amount} BTC to",
           OpenAddress: "SoQ poS qaStaHvIS Sum chom Huch",
           CopyAddress: "Huch SoQ pol lulIjbe'lu'bogh",
           RefreshPayment: "Legh Huch Dotlh",
-          summaryMsg1: "NgeH Huch",
+          summaryMsg1: "NgeH Huch %{recipient}", //notTranslated
           summaryMsg2: "PIH mIw Dunqu'mo' tlham",
           summaryMsg3: "LaH legh SoH tlham Dotlh",
           purchasesPage: "Tuq je'", //notTranslated
@@ -3467,14 +3499,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "务必添加送货地址",
           VendorShipsTo: "此商家向以下国家发货",
+          DoesNotShipHere: "Does not ship here",
           Send: "发送",
           BTCto: "BTC至",
+          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
           OpenAddress: "将地址在本地钱包里打开",
           CopyAddress: "将付款地址拷贝到粘贴册",
           RefreshPayment: "刷新付款进度",
-          summaryMsg1: "您付的款已经被交到",
+          summaryMsg1: "您付的款已经被交到%{recipient}", //notTranslated
           summaryMsg2: "这笔订单预计完成时间为",
           summaryMsg3: "到此查看您订单的状况",
           purchasesPage: "以购商品", //notTranslated
@@ -3489,7 +3525,7 @@ module.exports = Backbone.Model.extend({
       {
         langName: "한국어 (Korean)",
         langCode: "ko",
-        /* Use capitalized keys for widely reused text that must be capitalized... 
+        /* Use capitalized keys for widely reused text that must be capitalized...
         Korean type doesn't have capitalized letters*/
         Next: "다음",
         IAgree: "동의",
@@ -3785,15 +3821,18 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          DirectPayment: "Direct Payment", //notTranslated
+          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "당신 에게 제공할수 있는 배송지 주소를 추가",
           VendorShipsTo: "공급업체 다른나라로 배송",
           DoesNotShipHere: "이업체는 여기에 배송되지 않습니다 ",
           Send: "보내다",
           BTCto: "비트코인 에게",
+          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
           OpenAddress: "비트코인 주소로 지역 지갑 열리다",
           CopyAddress: "클립보드에 비트코인 주소 복사",
           RefreshPayment: "지불 방법 새로 고침 ",
-          summaryMsg1: "당신의 지불 보내졌다",
+          summaryMsg1: "당신의 지불 보내졌다 %{recipient}", //notTranslated
           summaryMsg2: "이주문에 대한 예상 처리 시간",
           summaryMsg3: "당신은 당신의 주문상태를 확인할수 있다",
           purchasesPage: "지불 페이지", //notTranslated
