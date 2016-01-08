@@ -10,7 +10,7 @@
   <div id="image-cropper" class="headerCropper banner-large js-pageCustomizationButtons js-headerCropper">
     <div class="headerCropperPreview banner-large cropit-image-preview js-pageCustomizationButtons"></div>
     <div class="statusBar navBar fadeOut positionAbsolute js-headerLoading">
-      <div class="pad20 rowTop20 width100"><h2 class="txt-center">Loading Image...</h2></div>
+      <div class="pad20 rowTop20 width100"><h2 class="txt-center"><% polyglot.t('LoadingImage') %></h2></div>
     </div>
     <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
     <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce fontSize14"><%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)</label>
@@ -21,7 +21,7 @@
           <a class="btn btn-txt custCol-primary js-cancelCustomization"><%= polyglot.t('Cancel') %></a>
         </div>
         <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
-          <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('Save') %> <%= polyglot.t('Changes') %></a>
+          <a class="btn btn-txt custCol-primary js-saveCustomization"><%= polyglot.t('SaveChanges') %></a>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
   <div class="user-page-content">
     <div class="user-page-header-slim-bg-cover custCol-background"></div>
     <div class="user-page-header-slim borderBottom2 custCol-border-secondary user-page-header-slim-tint">
-      <div class="user-page-header-slim-bg" 
+      <div class="user-page-header-slim-bg"
         <% if(ob.page.profile.header_hash){ %>
         style="background-image: url(<%- ob.page.headerURL %>), url(imgs/defaultBanner.png); background-position: center; ">
         <% } else { %>
@@ -140,13 +140,13 @@
         <div class="ctrlGroup hide js-itemEditButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary js-saveItem">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
+            <%= polyglot.t('SaveChanges') %>
           </a>
         </div>
         <div class="ctrlGroup hide js-itemCustomizationButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary js-saveCustomization">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
+            <%= polyglot.t('SaveChanges') %>
           </a>
         </div>
       </div>
@@ -245,7 +245,7 @@
             </div>
             <div class="flexRow borderBottom custCol-border">
               <div class="rowItem">
-                <div class="textOpacity75"><%= polyglot.t('PGP Key') %></div>
+                <div class="textOpacity75"><%= polyglot.t('PGPKey') %></div>
                 <div>
                   not provided
                 </div>
