@@ -8,7 +8,8 @@ var __ = require('underscore'),
     purchasesCl = require('../collections/purchasesCl'),
     orderShortVw = require('./orderShortVw'),
     getBTPrice = require('../utils/getBitcoinPrice'),
-    transactionModalVw = require('./transactionModalVw');
+    transactionModalVw = require('./transactionModalVw'),
+    countriesMd = require('../models/countriesMd');
 
 module.exports = Backbone.View.extend({
 
@@ -46,6 +47,11 @@ module.exports = Backbone.View.extend({
     });
     this.subViews = [];
     this.subModels = [];
+
+    this.countries = new countriesMd();
+    this.countriesArray = this.countries.get('countries');
+
+    this.subModels.push(this.countries);
 
     getBTPrice(this.cCode, function(btAve){
       self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
@@ -172,8 +178,13 @@ module.exports = Backbone.View.extend({
 
   openOrderModal: function(orderID){
     "use strict";
-
-    var orderModalView = new transactionModalVw({orderID: orderID, serverUrl: this.serverUrl});
+    var orderModalView = new transactionModalVw({
+      orderID: orderID,
+      serverUrl: this.serverUrl,
+      parentEl: this.$el.find('.js-transactionModalHolder'),
+      countriesArray: this.countriesArray,
+      cCode: this.userModel.get('currency_code')
+    });
   },
 
   close: function(){

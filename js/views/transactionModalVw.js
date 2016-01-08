@@ -7,7 +7,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  classname: "modal modal-opaque js-transactionModal",
+  className: "modal modal-opaque js-transactionModal",
 
   events: {
     'click .js-transactionModal': 'blockClicks',
@@ -20,12 +20,35 @@ module.exports = Backbone.View.extend({
 
     this.orderID = options.orderID;
     this.serverUrl = options.serverUrl;
+    this.parentEl = options.parentEl;
+    this.countriesArray = options.countriesArray;
+    this.cCode = options.cCode;
+
     this.model = new Backbone.Model();
     this.model.urlRoot = options.serverUrl + "get_order"; //replace with real API call when ready
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
       success: function(model){
-        console.log(model);
+        var cCode = self.cCode,
+            displayPrice = "test1",//fiat and btc, or just btc
+            displayShippingPrice = "test2",//fiat and btc, or just btc
+            displayCountry = self.countriesArray.filter(function(value){
+              return value.dataName == model.get('buyer_order').order.shipping.country;
+            }),
+            arrayOfModerators = model.get('vendor_offer').listing.moderators,
+            orderModerator = model.get('buyer_order').order.moderator,
+            displayModerator = arrayOfModerators.filter(function(moderator){
+              return moderator.guid == orderModerator;
+            });
+        console.log(arrayOfModerators);
+        console.log(orderModerator);
+        console.log(displayModerator);
+
+        model.set('displayPrice', displayPrice);
+        model.set('displayShippingPrice', displayShippingPrice);
+        model.set('displayCountry', displayCountry);
+        model.set('displayModerator', displayModerator[0]);
+        model.set('serverUrl', self.serverUrl);
         self.render();
       }
     });
@@ -33,14 +56,13 @@ module.exports = Backbone.View.extend({
 
   render: function () {
     "use strict";
-    "use strict";
     var self = this;
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
-      self.$el.attr('style', 'display:none');
+      self.parentEl.html(self.$el);
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.$el.fadeIn(300);
+      self.$el.parent().fadeIn(300);
     });
   },
 
@@ -50,7 +72,7 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(){
-    this.$el.find('.js-transactionModal').fadeOut(300);
+    this.$el.parent().fadeOut(300);
   },
 
   close: function(){

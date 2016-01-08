@@ -1,13 +1,93 @@
 <!-- modal container created by view-->
-  <div class="modal-child modal-childMain">
-    <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModal">
-      <h2 class="ion-android-close"></h2>
-    </div>
-    <div class="modal-hero js-transactionHero shadow-inner1-light"
-    <!--insert order image here -->
-    style="background-image: url(imgs/defaultBanner.png);"></div>
-    <div class="">
-      TODO: order information here.
-    </div>
+<div class="modal-child modal-childMain">
+  <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModal">
+    <h2 class="ion-android-close"></h2>
   </div>
+  <div class="modal-hero js-transactionHero shadow-inner1-light"
+  <% if(ob.vendor_offer.listing.item.image_hashes){ %>
+  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
+  <% } else { %>
+  style="background-image: url(imgs/defaultBanner.png);"
+  <% } %>></div>
+  <div class="bar navBar barFlush custCol-secondary clearFix">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-summaryTab active" data-tab="summary"><%= polyglot.t('Summary') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-shippingTab" data-tab="shipping"><%= polyglot.t('Shipping') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-fundsTab" data-tab="funds"><%= polyglot.t('Funds') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-discussionTab" data-tab="discussion"><%= polyglot.t('Discussion') %></a>
+  </div>
+
+  <div class="js-transactionModalSummary">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="rowItem padding2015">
+        <div class="flexCol-8">
+          <div class="pad10left txt-unleaded">
+            <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+              <strong><%- ob.vendor_offer.listing.item.title %></strong>
+            </div>
+            <div class="noOverflow fontSize13 txt-fade">
+              <%= polyglot.t('transactions.SoldBy') %> <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
+              <%- ob.vendor_offer.listing.id.blockchain_id %>
+              <% } else { %>
+              <%- ob.vendor_offer.listing.id.guid %>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <div class="flexCol-4">
+          <div class="pad10left txt-unleaded">
+            <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+              <strong><%- ob.displayPrice %></strong>
+            </div>
+            <div class="noOverflow fontSize13 txt-fade">
+              <%= polyglot.t('Quantity') %>: <%- ob.buyer_order.order.quantity %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- only display shipping if physical item -->
+    <% if( ob.vendor_offer.listing.metadata.category === "physical good" ) { %>
+    <div class="flexRow custCol-border borderBottom">
+      <div class="rowItem padding2015">
+        <div class="flexCol-8">
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%= polyglot.t('ShippingTo') %>: <%- ob.displayCountry %></strong>
+          </div>
+        </div>
+        <div class="flexCol-4">
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%- ob.displayShippingPrice %></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <!-- only display moderator if one is assigned -->
+    <% if( ob.displayModerator) { %>
+    <div class="flexRow custCol-border borderBottom">
+      <div class="rowItem padding2015">
+        <div class="thumbnail thumbnail-large-slim pull-left"
+          <% console.log(ob.displayModerator); if(ob.displayModerator.avatar) { %>
+          style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultItem.png);">
+          <% } else { %>
+          style="background-image: url(imgs/defaultItem.png);">
+          <% } %>
+        </div>
+
+        <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 pull-left">
+          <strong><%= polyglot.t('ModeratedBy') %>: <%- ob.displayModerator.name %></strong>
+        </div>
+
+        <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+          <strong><%- ob.displayShippingPrice %></strong>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+  </div>
+
+</div>
 <!-- modal container created by view-->

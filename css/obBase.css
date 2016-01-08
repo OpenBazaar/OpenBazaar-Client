@@ -246,6 +246,7 @@ form {
   margin-bottom: 100px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  z-index: 1;
 }
 
 .img-rsp {
@@ -796,6 +797,15 @@ label.fieldItem {
 
 .modal.modal-navOffset {
   top: 50px;
+}
+
+.modalHolder {
+  /* use to contain modals inside views */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
 
 .modal-child {
