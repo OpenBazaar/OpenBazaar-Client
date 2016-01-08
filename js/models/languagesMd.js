@@ -292,6 +292,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Say something interesting... (160 char max)",
           timeZone: "Select Your Time Zone",
           yourDetails: "Set Your Information",
+          yourDescription: "Description",
           handle: "Handle",
           chooseHandle: "Choose a handle",
           knownAs: "You're currently known as:",
@@ -604,6 +605,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Say something interesting... (160 char max)", //not translated
           timeZone: "Zona Horaria",
           yourDetails: "Establecer su informaci&oacute;n",
+          yourDescription: "Descripci&oacute;n",
           handle: "Apodo",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "A Ud. se le conoce como:",
@@ -924,6 +926,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Sage etwas interessantes... (maximal 160 Zeichen)",
           timeZone: "W&auml;hle deine Zeitzone",
           yourDetails: "Setze deine Details",
+          yourDescription: "Beschreibung",
           handle: "Handle",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "Du bist derzeit bekannt als:",
@@ -1245,6 +1248,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Di qualcosa di interessante... (massimo 160 caratteri)",
           timeZone: "Seleziona il tuo fuso orario",
           yourDetails: "Imposta le tue informazioni",
+          yourDescription: "Descrizione",
           handle: "Nickname",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "Sei conosciuto come:",
@@ -1567,6 +1571,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Dites quelque chose d'intéressant... (160 caractères max)",
           timeZone: "Sélectionner votre fuseau horaire",
           yourDetails: "Définir vos informations",
+          yourDescription: "Description",
           handle: "Nom d'utilisateur",
           chooseHandle: "Choisissez un nom d'utilisateur",
           knownAs: "Vous êtes actuellement connu comme :",
@@ -1887,6 +1892,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Spuneți ceva interesant... (160 caractere maxim)",
           timeZone: "Selectați Fusul dvs. Orar",
           yourDetails: "Setați Informația dvs.",
+          yourDescription: "Descriere",
           handle: "Nume",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "La moment sunteți cunoscut ca:",
@@ -2207,6 +2213,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Расскажите что-нибудь о вашей деятельности... (160 букв максимум)",
           timeZone: "Выберите часовой пояс",
           yourDetails: "Профильная информация",
+          yourDescription: "Описание", //notTranslated
           handle: "Логин",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "Сейчас ваше имя:",
@@ -2526,6 +2533,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Napíšte o sebe niečo zaujímavé... (max 160 znakov)",
           timeZone: "Zvoľte svoje časové pásmo",
           yourDetails: "Zadajte detaily o sebe",
+          yourDescription: "Popis", // notTranslated
           handle: "Handle",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "Momentálne ste známi ako:",
@@ -2847,6 +2855,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "İlginç bir şeyler söyleyin... (Azami 160 kar.)",
           timeZone: "Saat Diliminizi Seçin",
           yourDetails: "Bilginizi Girin",
+          yourDescription: "Tanım", //notTranslated
           handle: "Takma Ad",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "Mevcut Takma Adınız:",
@@ -3167,6 +3176,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Vay' quv jatlh... (160 char max)",
           timeZone: "MIch poH wIv",
           yourDetails: "De' toD",
+          yourDescription: "Bang", //notTranslated
           handle: "Mach pong",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "DaSov je:",
@@ -3487,6 +3497,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "发表意见（最多160字）",
           timeZone: "选择您的时区",
           yourDetails: "设置您的信息",
+          yourDescription: "描述", // notTranslated
           handle: "Handle", // not translated
           chooseHandle: "Choose a handle", // not translated
           knownAs: "您目前的用户名是",
@@ -3809,6 +3820,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "뭔가 흥미로운걸 말하다... (160 성격)",
           timeZone: "시간대 선택",
           yourDetails: "너의 정보 설정",
+          yourDescription: "설명", // noTranslated
           handle: "핸들",
           chooseHandle: "Choose a handle", // not translated
           knownAs: "당신은 현재 알려져있어:",
@@ -4131,6 +4143,7 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "自己紹介をして下さい (160文字まで)",
           timeZone: "タイムゾーンを選択",
           yourDetails: "あなたの情報を入力してください",
+          yourDescription: "自己紹介",
           handle: "ユーザ名",
           chooseHandle: "ユーザ名を選択",
           knownAs: "現在のユーザ名:",
