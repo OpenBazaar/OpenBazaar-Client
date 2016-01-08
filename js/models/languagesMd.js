@@ -13,7 +13,7 @@ module.exports = Backbone.Model.extend({
         IAgree: "I Agree",
         Back: "Back",
         EnterMessage: "Enter message...",
-        Reload: "Reload", 
+        Reload: "Reload",
         You: "You",
         Skip: "Skip",
         Done: "Done",
@@ -108,8 +108,8 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Save Changes",
         YourName: "Your name",
         BitcoinReturnAddress: "Bitcoin Return Address",
-        BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...", 
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", 
+        BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...",
+        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.",
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -3846,7 +3846,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "日本語 (Japanese)",
-        langCode: "en",
+        langCode: "ja",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "次へ",
         IAgree: "同意する",
