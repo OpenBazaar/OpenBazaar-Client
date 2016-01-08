@@ -3781,7 +3781,7 @@ module.exports = Backbone.Model.extend({
         Back: "戻る",
         EnterMessage: "本文",
         Reload: "リロード",
-        You: "あなた",
+        You: "アカウント",
         Skip: "スキップ",
         Done: "完了",
         Cancel: "キャンセル",
