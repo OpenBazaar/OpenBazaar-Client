@@ -952,8 +952,8 @@ module.exports = Backbone.Model.extend({
         IAgree: "Sono d'accordo",
         Back: "Indietro",
         EnterMessage: "Inserire messaggio...",
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Reload: "Ricaricare",
+        You: "Tu",
         Skip: "Salta",
         Done: "Finito",
         Cancel: "Annulla",
@@ -1048,8 +1048,8 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
         BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
+        BitcoinReturnAddressInfo: "In caso di restituzione, i tuoi soldi verranno messi nel seguente indirizzo.",
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1069,16 +1069,16 @@ module.exports = Backbone.Model.extend({
         Available: "Disponibile",
         Type: "Tipo",
         Condition: "Condizione",
-        NSFW: "18+ (Adult content)?",
-        Select: "Select", //not translated
-        Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
-        Reset: "Reset", //not translated
+        NSFW: "18+ (Materiale per adulti)",
+        Select: "Seleziona",
+        Social: "Social",
+        Theme: "Argomento",
+        Listing: "Listato",
+        Listings: "Listati",
+        Pages: "Pagine"
+        Page: "Pagina",
+        Language: "Lingua",
+        Reset: "Reset",
         Local: "Locale",
         Domestic: "Nazionale",
         Location: "Locazione",
@@ -1090,7 +1090,7 @@ module.exports = Backbone.Model.extend({
         UploadPhotos: "Caricare foto",
         DragOrUploadPhotos: "Trascina o carica foto",
         ExpirationDate: "Scadenza per il",
-        UploadCoverPhoto: "Upload a cover photo",
+        UploadCoverPhoto: "Carica una foto di copertina",
         ShortDescription: "Breve descrizione",
         UpTo140Characters: "Fino a 140 caratteri",
         PrimaryColor: "Colore principale",
@@ -1125,48 +1125,48 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Salva Avatar",
         NewAvatar: "Selezionare Nuovo Avatar",
         NewCoverImage: "Selezionare Nuovo Copertina",
-        Loading: "Loading...", // not translated
-        Purchases:"Acquisti",
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
-        Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        AllItems: "All Items", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
+        Loading: "Caricamento...",
+        Purchases: "Acquisti",
+        Sales: "Vendite",
+        Cases: "Cause",
+        Discover: "Trova",
+        Blocked: "Bloccato",
+        Advanced: "Avanzato",
+        General: "Generale",
+        AllItems: "Tutti gli articoli",
+        DomesticShippingPrice: "Prezzo per invio nazionale",
+        InternationalShippingPrice: "Prezzo per invio internazionale",
+        MinimumIs: "Il minimo &eacute;",
+        Visibility: "Visibilit&agrave;",
+        Title: "Titolo",
+        DigitalItem: "Articolo digitale",
+        PhysicalItem: "Articolo fisico",
+        DomesticShippingTime: "Tempo di invio nazionale",
+        InternationalShippingTime: "Tempo di invio internazionale",
+        DisplayNSFWcontent: "Mostrare contenuto NSFW?",
+        Basic: "Base",
+        Content: "Contenuto",
+        StandardThemes: "Temi standard",
+        NoPhotosAdded: "Nessuna foto aggiunta",
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
-          OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          SoldBy: "Venduto da",
+          PurchasedBy: "Comprato da",
+          searchByOrder: "Ricerca per ID di ordine o nome articolo",
+          sortByStatusAll: "Tutti",
+          sortByStatus0: "Comprato",
+          sortByStatus1: "Pagato (fondi in attesa)",
+          sortByStatus2: "Confermato/Inviato",
+          sortByStatus3: "Completato (fondi rilasciati)",
+          sortByStatus4: "Contestato",
+          OrderID: "ID Ordine"
+          OrderDate: "Data ordine",
+          OrderStatus: "Stato dell'ordine",
+          OrderStatus0: "Comprato (non finanziato)",
+          OrderStatus1: "Pagato (fondi in attesa)",
+          OrderStatus2: "Confermato/Inviato",
+          OrderStatus3: "Completato (fondi rilasciati)",
+          OrderStatus4: "Contestato",
+          OrderTotal: "Totale ordine"
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -1179,7 +1179,7 @@ module.exports = Backbone.Model.extend({
           socketError: "Connessione all'URL per WebSocket fallita. Connettere al socket con l'indirizzo di default ws://localhost:18466",
           contractError: "Questo articolo non pu&ograve; essere acquistato",
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto"
         },
         saveMessages: {
           Saved: "Salvato",
@@ -1196,16 +1196,16 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Inserisci nickname o cerca",
           myPage: "La mia pagina",
-          customizePage:"Personalizza pagina",
-          sellItem:"Nuovo",
-          createListing:"Crea elenco",
-          purchases:"Acquisti",
-          sales:"Vendite",
-          cases:"Cause",
-          notifications:"Notifiche",
-          settings:"Impostazioni",
-          about:"About OpenBazaar",
-          support:"Supporto OpenBazaar"
+          customizePage: "Personalizza pagina",
+          sellItem: "Nuovo",
+          createListing: "Crea elenco",
+          purchases: "Acquisti",
+          sales: "Vendite",
+          cases: "Cause",
+          notifications: "Notifiche",
+          settings: "Impostazioni",
+          about: "About OpenBazaar",
+          support: "Supporto OpenBazaar"
         },
         onboarding: {
           intro: "Configurazione OpenBazaar",
@@ -1226,7 +1226,7 @@ module.exports = Backbone.Model.extend({
           yourDetails: "Imposta le tue informazioni",
           yourDescription: "Descrizione",
           handle: "Nickname",
-          chooseHandle: "Choose a handle", // not translated
+          chooseHandle: "Scegli un nickname",
           knownAs: "Sei conosciuto come:",
           wouldYou: "Ti andrebbe di registrare un nickname facile da ricordare?",
           registerNew: "Registra nuovo",
@@ -1234,11 +1234,11 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar",
-          Finished: "Finished" //notTranslated
+          Finished: "Finito"
         },
         buyFlow: {
-          DirectPayment: "Direct Payment", //notTranslated
-          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
+          DirectPayment: "Pagamento diretto",
+          SendDirectlyTo: "Invia pagamento diretto a %{handle}",
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
           VendorShipsTo: "Questo fornitore navi a questi paesi",
           DoesNotShipHere: "Questo venditore non invia qui",
@@ -1251,13 +1251,13 @@ module.exports = Backbone.Model.extend({
           summaryMsg1: "Il tuo pagamento è stato trasmesso a %{recipient}",
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
           summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
-          purchasesPage: "pagina acquisti", //notTranslated
-          returnAddress: "Return Address", //notTranslated
-          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
-          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
-          paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          purchasesPage: "pagina acquisti",
+          returnAddress: "Indirizzi di ritorno",
+          moderatorPaymentDisclaimer: "Si applica solo se l'operazione si conclude in una contestazione.",
+          directPaymentDisclaimer: "Usa il pagamento diretto con cauzione, i fondi sono irreversibili",
+          directPaymentTo: "Pagamento diretto a",
+          paymentSent: "Pagamento inviato!",
+          total: "Totale"
         }
       },
       {
