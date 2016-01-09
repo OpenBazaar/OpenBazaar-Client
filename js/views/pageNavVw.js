@@ -261,7 +261,6 @@ module.exports = Backbone.View.extend({
         $('.js-modalAboutLicensing').show();
         break;
     }
-
   },
 
   navNotificationsClick: function(e){
