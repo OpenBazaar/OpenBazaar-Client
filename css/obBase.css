@@ -1931,11 +1931,11 @@ div.chatSearchOut .chatSearchIcon {
   border-bottom-left-radius: 0;
   -webkit-user-select: none;
   border: none;
-  height: 46px;
+  height:48px;
   font-weight: 500;
   line-height: 46px;
   padding: 0 25px;
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 14px;
 }
 
@@ -4288,6 +4288,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 #ov1  .paddingRight5 {
   padding-right: 5px;
+}
+#ov1  .paddingRight18 {
+  padding-right: 18px;
 }
 
 #ov1  .paddingLeft2 {

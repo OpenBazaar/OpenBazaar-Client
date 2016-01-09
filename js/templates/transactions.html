@@ -14,12 +14,21 @@
 </div>
 
 <div class="bar navBar barFlush custCol-secondary clearFix">
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchasesTab active" data-tab="purchases"><%= polyglot.t('Purchases') %></a>
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchasesTab active" data-tab="purchases">
+    <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('Purchases') %>
+  </a>
   <% if(ob.page.vendor){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab" data-tab="sales"><%= polyglot.t('Sales') %></a>
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab" data-tab="sales">
+    <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('Sales') %>
+  </a>
   <% } %>
   <% if(ob.page.moderator){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab" data-tab="cases"><%= polyglot.t('Cases') %></a>
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab" data-tab="cases">
+    <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('Cases') %>
+  </a>
   <% } %>
 </div>
 
