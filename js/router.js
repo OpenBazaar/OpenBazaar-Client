@@ -164,7 +164,6 @@ module.exports = Backbone.Router.extend({
   about: function(){
     "use strict";
     this.cleanup();
-    this.newView(new aboutView());
   },
 
   donate: function(){

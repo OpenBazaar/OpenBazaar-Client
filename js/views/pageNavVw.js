@@ -24,6 +24,9 @@ module.exports = Backbone.View.extend({
     'click .js-navMax': 'navMaxClick',
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
+    'click .js-showAboutModal': 'showAboutModal',
+    'click .js-hideAboutModal': 'hideAboutModal',
+    'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navNotifications': 'navNotificationsClick',
     'click .js-navProfile': 'navProfileClick',
     'click .js-navRefresh': 'navRefreshClick',
@@ -221,6 +224,44 @@ module.exports = Backbone.View.extend({
       });
     });
     return this;
+  },
+
+  showAboutModal: function(e){
+    "use strict";
+    $('.js-aboutModal').removeClass('hide');
+    $('#obContainer').addClass('blur');
+  },
+
+  hideAboutModal: function(e){
+    "use strict";
+    $('.js-aboutModal').addClass('hide');
+    $('#obContainer').removeClass('blur');
+  },
+
+  aboutModalTabClick: function(e){ 
+    var tab = $(e.currentTarget).data('tab');
+    $('.js-aboutModal .btn-tab').removeClass('active');
+    $(e.currentTarget).addClass('active');
+
+    switch(tab) {
+      case "about":
+        $('.modal-about-section').hide();
+        $('.js-modalAboutMain').show();
+        break;
+      case "support":
+        $('.modal-about-section').hide();
+        $('.js-modalAboutSupport').show();
+        break;
+      case "contributors":
+        $('.modal-about-section').hide();
+        $('.js-modalAboutContributors').show();
+        break;
+      case "licensing":
+        $('.modal-about-section').hide();
+        $('.js-modalAboutLicensing').show();
+        break;
+    }
+
   },
 
   navNotificationsClick: function(e){

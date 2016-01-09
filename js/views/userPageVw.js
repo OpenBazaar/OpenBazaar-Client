@@ -528,7 +528,9 @@ module.exports = Backbone.View.extend({
         if(self.options.ownPage === false){
           self.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: self.userID})));
         }
-        $('.js-userFollowerCount').html(model.attributes.followers.length);
+        if(followerArray){
+          $ ('.js-userFollowerCount').html(followerArray.length);
+        }
       },
       error: function(model, response){
         showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
@@ -559,7 +561,14 @@ module.exports = Backbone.View.extend({
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
-    this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel, category: this.$el.find('.js-categories').val()});
+    this.itemList = new itemListView({
+      model: model, 
+      el: '.js-list3', 
+      title: window.polyglot.t('NoListings'), 
+      message: "",
+      userModel: this.options.userModel, 
+      category: this.$el.find('.js-categories').val()
+    });
     this.subViews.push(this.itemList);
   },
 
@@ -576,8 +585,6 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
-    $('.js-userFollowersCount').html(this.followers.attributes.followers.length);
-
   },
 
   renderFollowing: function (model) {

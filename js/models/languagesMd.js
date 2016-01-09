@@ -17,7 +17,7 @@ module.exports = Backbone.Model.extend({
         You: "You",
         Skip: "Skip",
         Done: "Done",
-        Navigation: "Navigation", //notTranslated
+        Navigation: "Navigation", 
         Cancel: "Cancel",
         ClosingOpenBazaar: "Tip: Keep OpenBazaar open for your page to stay online.", 
         Close: "Close",
@@ -44,6 +44,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Unfollow",
         About: "About",
         NoDescriptionAdded: "No description added",
+        NoListings: "No listings",
         CoverPhoto: "Cover Photo",
         AboutEmpty: "About is blank...",
         Followers: "Followers",
@@ -363,6 +364,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
+        NoListings: "No listings", //notTranslated
         AboutEmpty: "La secci&oacute;n Acerca de est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
@@ -677,6 +679,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Nicht mehr folgen",
         About: "&Uuml;ber",
         NoDescriptionAdded: "Keine Beschreibung hinzugefügt",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Titelbild",
         AboutEmpty: "'&Uuml;ber' ist leer...",
         Followers: "Follower",
@@ -999,6 +1002,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Foto di copertina",
         AboutEmpty: "L'about &egrave; vuoto...",
         Followers: "Seguaci",
@@ -1321,6 +1325,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Ne plus suivre",
         About: "&Agrave; propos",
         NoDescriptionAdded: "Aucune description ajoutée",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Photo de couverture",
         AboutEmpty: "&Agrave; propos est vide...",
         Followers: "Abonnés",
@@ -1641,6 +1646,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Oprire Urmărire",
         About: "Despre",
         NoDescriptionAdded: "Nu a fost adăgată descrirea",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Fotografie Copertă",
         AboutEmpty: "Despre este gol...",
         Followers: "Urmăritori",
@@ -1961,6 +1967,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Обложка",
         AboutEmpty: "Описание не заполнено...",
         Followers: "Читатели",
@@ -2281,6 +2288,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Titulná fotka",
         AboutEmpty: "Stránka s informáciami je prázdna...",
         Followers: "Followeri",
@@ -2602,6 +2610,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Takibi bırak",
         About: "Hakkında",
         NoDescriptionAdded: "Tanım eklenmemiş",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Kapak görseli",
         AboutEmpty: "Hakkında kısmı boş...",
         Followers: "Takipçiler",
@@ -2924,6 +2933,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Mej",
         About: "Umqu' ghot",
         NoDescriptionAdded: "Pagh bang nob",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Yuvtlhe' mIllogh",
         AboutEmpty: "Ghot tu'lu'. mej chIm...",
         Followers: "PabwI'",
@@ -3244,6 +3254,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "不再关注",
         About: "关于",
         NoDescriptionAdded: "未加描述",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "封面照片",
         AboutEmpty: "关于空白着",
         Followers: "追随者",
@@ -3564,6 +3575,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "팔로우 취소",
         About: "정보",
         NoDescriptionAdded: "설명할수 없어",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "표지 사진",
         AboutEmpty: "정보 없어...",
         Followers: "팔로워",
