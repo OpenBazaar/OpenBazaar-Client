@@ -9,28 +9,52 @@
 </div>
 
 <div class="popMenu hide popMenu-navBar js-navProfileMenu">
-  <a href="#userPage"><%= polyglot.t('nav.myPage') %></a>
-  <a href="#userPage/<%- ob.guid %>/customize"><%= polyglot.t('nav.customizePage') %></a>
+  <a href="#userPage">
+    <span class="ion-document-text fontSize12 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.myPage') %>
+  </a>
+  <a href="#userPage/<%- ob.guid %>/customize">
+    <span class="ion-paintbucket fontSize10  textOpacity1"></span>
+    <%= polyglot.t('nav.customizePage') %>
+  </a>
   <% if(ob.vendor) { %>
-    <a href="#sellItem" ><%= polyglot.t('nav.sellItem') %></a>
+    <a href="#sellItem" >
+      <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('nav.createListing') %>
+    </a>
   <% }else{ %>
     <a href="#userPage/<%- ob.guid %>/createStore"><%= polyglot.t('CreateStore') %></a>
   <% } %>
   <hr/>
-  <a href="#transactions/purchases"><%= polyglot.t('nav.purchases') %></a>
+  <a href="#transactions/purchases">
+    <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.purchases') %>
+  </a>
   <% if(ob.vendor) { %>
-    <a href="#transactions/sales"><%= polyglot.t('nav.sales') %></a>
+    <a href="#transactions/sales">
+      <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('nav.sales') %>
+    </a>
   <% } %>
   <% if(ob.moderator) { %>
     <a href="#transactions/cases"><%= polyglot.t('nav.cases') %></a>
   <% } %>
   <hr/>
-  <a href="#settings"><%= polyglot.t('nav.settings') %></a>
+  <a href="#settings">
+    <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.settings') %>
+    </a>
   <hr/>
-  <a class="js-showAboutModal"><%= polyglot.t('nav.about') %></a>
-  <a href="#support"><%= polyglot.t('nav.support') %></a>
+  <a class="js-showAboutModal">
+    <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.about') %>
+  </a>
+  <a href="#support">
+    <span class="ion-android-favorite fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.support') %>
+  </a>
   <hr/>
-  <a class="js-navAdminPanel">Admin Panel</a>
+  <a class="js-navAdminPanel">Admin Panel (temporary)</a>
 </div>
 
 <div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
@@ -73,7 +97,7 @@
   </div>
 
   <div class="ctrlGroup nav-profile">
-    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('Navigation') %>"
+    <div class="btn btn-profile js-navProfile custCol-primary"
     <% if(ob.avatar_hash != "") { %>
     style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>
@@ -413,7 +437,7 @@
                   <div class="flexRow borderBottom custCol-border">
                     <div class="flexCol-3 borderRight custCol-border">
                       <label class="fieldItem" for="aboutInput">
-                        <%= polyglot.t('onboarding.yourDescription') %>
+                        <%= polyglot.t('Description') %>
                       </label>
                     </div>
                     <div class="flexCol-9">
@@ -688,11 +712,23 @@
         <div class="accordion-window">
           <div class="accordion-child custCol-primary">
             <div class="h6 custCol-secondary custCol-text">
-              <div class="bar navBar barFlush user-page-navigation custCol-secondary">
-                <a class="btn btn-bar btn-tab custCol-secondary js-about-mainTab js-tab active" data-tab="about"><%= polyglot.t('About') %></a>
-                <a class="btn btn-bar btn-tab custCol-secondary js-about-contributorsTab js-tab" data-tab="contributors"><%= polyglot.t('Contributors') %></a>
-                <a class="btn btn-bar btn-tab custCol-secondary js-about-donationsTab js-tab"  data-tab="support"><%= polyglot.t('Support') %></a>
-                <a class="btn btn-bar btn-tab custCol-secondary js-about-licensingTab js-tab"  data-tab="licensing"><%= polyglot.t('Licensing') %></a>
+              <div class="bar navBar barFlush user-page-navigation custCol-secondary height55">
+                <a class="btn btn-bar btn-tab custCol-secondary js-about-mainTab js-tab active" data-tab="about">
+                  <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('About') %>
+                </a>
+                <a class="btn btn-bar btn-tab custCol-secondary js-about-contributorsTab js-tab" data-tab="contributors">
+                  <span class="ion-ios-people fontSize12 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('Contributors') %>
+                </a>
+                <a class="btn btn-bar btn-tab custCol-secondary js-about-donationsTab js-tab"  data-tab="support">
+                  <span class="ion-android-favorite fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('Support') %>
+                </a>
+                <a class="btn btn-bar btn-tab custCol-secondary js-about-licensingTab js-tab"  data-tab="licensing">
+                  <span class="ion-clipboard fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('Licensing') %>
+                </a>
               </div>          
             </div>
 
