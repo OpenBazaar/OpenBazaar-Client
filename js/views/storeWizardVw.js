@@ -111,11 +111,19 @@ module.exports = Backbone.View.extend({
     var newModerator = $(
         '<div class="pad10 flexRow custCol-border">' +
           '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
-          '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100">' +
-            '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);"></div>' +
-              '<div class="pull-left marginLeft6">' +
-              '<div class="clearfix"><div class="capitalize marginBottom2 marginRight5 floatLeft marginRight5 textOpacity1">' + data.moderator.name + '</div> <div class="floatLeft txt-fade">' + moderatorHandle + '</div></div>' +
-              '<div class="fontSize14 txt-fade textWeightNormal">' + moderatorDescription + '</div>' +
+          '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100 table">' +
+            '<div>' +
+              '<div style="width: 80px;">' +
+                '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);">' +
+                '</div>' +
+              '</div>' +
+              '<div>' +
+                '<div class="clearfix">' +
+                  '<div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 floatLeft">' + data.moderator.name + '</div> ' +
+                  '<div class="pull-left lineHeight21">' + moderatorHandle + '</div>' +
+                '</div>' +
+                '<div class="fontSize14 txt-fade textWeightNormal">' + moderatorDescription + '</div>' +
+               '</div>' +
             '</div>' +
           '</label>' +
         '</div>'
@@ -148,7 +156,8 @@ module.exports = Backbone.View.extend({
         moderatorsChecked = $('.js-storeWizardModeratorList input:checked'),
         userProfile = this.model.get('page').profile,
         modList = [],
-        wizData = {};
+        wizData = {},
+        modData = {};
 
     //convert taggle tags to data in the form
     this.$el.find('#realCategoriesInput').val(this.categoriesInput.getTagValues().join(","));
@@ -159,7 +168,7 @@ module.exports = Backbone.View.extend({
       modList.push($(this).data('guid'));
     });
 
-    wizData.moderator_list = modList.length > 0 ? modList : "";
+    modData.moderators = modList.length > 0 ? modList : "";
 
     wizData.primary_color = parseInt(userProfile.primary_color.slice(1), 16);
     wizData.secondary_color = parseInt(userProfile.secondary_color.slice(1), 16);
@@ -167,8 +176,10 @@ module.exports = Backbone.View.extend({
     wizData.text_color = parseInt(userProfile.text_color.slice(1), 16);
 
     saveToAPI(profileForm, this.model.get('page').profile, self.model.get('user').serverUrl + "profile", function(){
-      self.trigger('storeCreated');
-      window.obEventBus.trigger("updateProfile");
+      saveToAPI('', self.model.get('user'), self.model.get('user').serverUrl + "settings", function(){
+        self.trigger('storeCreated');
+        window.obEventBus.trigger("updateProfile");
+      }, '', modData);
     }, "", wizData);
   },
 

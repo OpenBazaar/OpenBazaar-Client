@@ -155,6 +155,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function (options) {
     "use strict";
+    console.log("init");
     var self = this;
     this.options = options || {};
     /* expected options are:
@@ -190,6 +191,7 @@ module.exports = Backbone.View.extend({
     this.chatAppView = options.chatAppView;
     this.slimVisible = false;
     this.confirmDelete = false;
+    this.state = this.options.state;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
@@ -269,6 +271,7 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     "use strict";
+    console.log("render");
     var self = this;
     //make sure container is cleared
     $('#content').html(this.$el);
@@ -282,7 +285,7 @@ module.exports = Backbone.View.extend({
       self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
-      self.setState(self.options.state, self.options.itemHash);
+      self.setState(self.state, self.options.itemHash);
       self.$el.find('.js-externalLink').on('click', function(e){
         e.preventDefault();
         var extUrl = $(this).attr('href');
@@ -350,6 +353,7 @@ module.exports = Backbone.View.extend({
 
   setState: function(state, hash) {
     "use strict";
+    console.log("state " + state);
     var currentAddress,
         addressState,
         currentHandle = this.model.get('page').profile.handle;
@@ -365,6 +369,7 @@ module.exports = Backbone.View.extend({
     }else if(state === "itemNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(352);
+      this.addTabToHistory('newItem');
       this.sellItem();
     } else if(state === "createStore"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
@@ -382,8 +387,12 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }
     this.setControls(state);
-    if(state !== "customize"){
-      this.lastTab = state;
+    console.log(state != "itemNew");
+    if(state != "customize" && state != this.state && state != "itemNew" && this.state != "itemNew"){
+      this.lastTab = this.state;
+      this.state = state;
+      console.log("this.state " + this.state);
+      console.log("this.lastTab " + this.lastTab);
     }
 
     //set address bar
@@ -401,7 +410,7 @@ module.exports = Backbone.View.extend({
       addressState = state;
     }
     currentAddress = this.model.get('page').profile.guid + "/" + addressState;
-    if(addressState === "item") {
+    if(addressState === "item" && hash) {
       currentAddress += "/"+ hash;
     } else if(addressState === "createStore"){
       currentAddress = this.model.get('page').profile.guid;
@@ -419,10 +428,11 @@ module.exports = Backbone.View.extend({
     document.getElementById('obContainer').classList.remove("noScrollBar");
     document.getElementById('obContainer').classList.remove("overflowHidden");
     //unhide the ones that are needed
+    console.log(state);
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
-      } else if(state === "itemEdit") {
+      } else if(state === "itemEdit" || state === "itemNew") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
       } else if(state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
@@ -431,7 +441,6 @@ module.exports = Backbone.View.extend({
         document.getElementById('obContainer').classList.add("box-borderDashed");
         document.getElementById('obContainer').classList.add("noScrollBar");
         document.getElementById('obContainer').classList.add("overflowHidden");
-
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
@@ -677,7 +686,7 @@ module.exports = Backbone.View.extend({
       this.itemEdit = new itemModel(defaultItem);
     }
     //add the moderator list to the item model
-    this.itemEdit.set('moderator_list', self.model.get('page').profile.moderator_list);
+    this.itemEdit.set('moderators', self.model.get('user').moderators);
     //unbind any old view
     if(this.itemEditView){
       this.itemEditView.undelegateEvents();
@@ -767,7 +776,7 @@ module.exports = Backbone.View.extend({
     var colorKey = $(e.currentTarget).data('colorKey');
 
     if (colorKey){
-      $('.js-customColorChoice').removeClass('outline2')
+      $('.js-customColorChoice').removeClass('outline2');
       $(e.currentTarget).addClass('outline2');
 
       this.setCustomColor(rgb2hex($(e.currentTarget).css('background-color')), colorKey);
@@ -1125,7 +1134,7 @@ module.exports = Backbone.View.extend({
   storeCreated: function() {
     "use strict";
     //this.storeWizardView.closeWizard();
-    var currentState = this.lastTab || "about";
+    //var currentState = this.lastTab || "about";
     //recreate the entire page with the new data
     Backbone.history.loadUrl();
   },

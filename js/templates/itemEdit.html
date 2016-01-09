@@ -26,7 +26,7 @@
       </div>
       <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder">
         <div class="statusBar navBar fadeOut positionAbsolute js-itemEditImageLoading">
-          <div class="pad20 rowTop20 width100"><h4 class="txt-center">Loading Images...</h4></div>
+          <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
         </div>
         <% _.each(ob.combinedImagesArray, function(data, i) { %>
         <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%- data %>);" data-index="<% i %>">
@@ -199,8 +199,8 @@
               </div>
               <div class="flexCol-8">
                 <div class="fieldItem">
-                  <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" value="true" /><label for="shippingFreeTrue" class="radioLabel">Yes</label>
-                  <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" value="false" checked/><label for="shippingFreeFalse" class="radioLabel">No</label>
+                  <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeTrue" value="true" /><label for="shippingFreeTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input name="free_shipping" type="radio" class="fieldItem" id="shippingFreeFalse" value="false" checked/><label for="shippingFreeFalse" class="radioLabel"><%= polyglot.t('No') %></label>
                 </div>
               </div>
             </div>
@@ -372,7 +372,7 @@
       <div class="marginTop15 marginLeft15 width100 marginRight15">
         <div class="ctrlGroup js-itemEditButtons floatRight">
           <a class="btn btn-large custCol-secondary js-saveItem">
-            <%= polyglot.t('Save') %> <%= polyglot.t('Changes') %>
+            <%= polyglot.t('SaveChanges') %>
           </a>
         </div>
         <div class="ctrlGroup js-itemEditButtons textOpacity1 floatRight marginRight5">
@@ -383,4 +383,3 @@
     </div>
   </div>
 </form>
-

@@ -115,8 +115,10 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new userPageView({
       userModel: this.userModel,
+      userProfile: this.userProfile,
       state: 'itemNew',
-      socketView: this.socketView
+      socketView: this.socketView,
+      chatAppView: this.chatAppView
     }),"userPage");
   },
 

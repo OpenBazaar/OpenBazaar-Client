@@ -14,7 +14,8 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     "use strict";
     var currentShippingPrice = 0,
-        currentShippingBTCPrice = 0;
+        currentShippingBTCPrice = 0,
+        recipient = this.model.get('page').profile.handle || this.model.get('page').profile.guid;
     if(this.model.get('vendor_offer').listing.shipping.free !== true) {
       if(this.model.get('userCountry') != this.model.get('vendor_offer').listing.shipping.shipping_origin) {
         currentShippingPrice = this.model.get('internationalShipping');
@@ -36,6 +37,8 @@ module.exports = Backbone.View.extend({
       maximumFractionDigits: 2,
       currency: this.model.get('userCurrencyCode')
     }).format(currentShippingPrice));
+
+    this.model.set('recipient', recipient);
 
     this.listenTo(this.model, 'change:selectedModerator change:selectedAddress', this.render);
     this.render();
