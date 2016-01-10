@@ -3111,8 +3111,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 374px;
 }
 
-.modal .homeModal-accordion .btn-bar,
-.modal .aboutModal-accordion .btn-bar{
+.modal .homeModal-accordion .btn-bar{
   border-radius: 0;
   font-size: 14px;
   height: 50px;
@@ -3120,6 +3119,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin: 0;
   opacity: 1;
 }
+
+.modal .aboutModal-accordion .btn-bar{
+  font-size: 14px;
+  height: 50px;
+  line-height: 50px;
+  opacity: 1;
+}
+
 .modal .homeModal-accordion .btn-bar .btn,
 .modal .aboutModal-accordion .btn-bar .btn{
   opacity: .75;
@@ -3334,6 +3341,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .btn-profile.tooltip:hover:after{
   left: -45px;
+}
+
+.btn-upload-cover-photo {
+  padding: 7px 20px;
+  opacity: 1;
 }
 
 .chatHead.tooltip:hover:after{
@@ -3850,6 +3862,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-weight: 500;
 }
 
+
+#ov1 .fontSize8 {
+  font-size: 8px;
+}
 
 #ov1 .fontSize10 {
   font-size: 10px;

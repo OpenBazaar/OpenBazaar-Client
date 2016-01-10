@@ -85,8 +85,14 @@
             </div>
           </form>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight">
+              <span class="ion-android-close fontSize13 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('Cancel') %>
+            </a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Next') %>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity1"></span>
+            </a>
           </div>
         </div>
         <div class="accordion-child">
@@ -103,9 +109,15 @@
             <div class="flexRow js-storeWizardModeratorList">
             </div>
           </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary"><%= polyglot.t('Finished') %></a>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 ">
+            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary borderRight">
+              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('Back') %>
+            </a>
+            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary">
+              <span class="ion-checkmark fontSize10 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('Finished') %>
+            </a>
           </div>
         </div>
       </div>
