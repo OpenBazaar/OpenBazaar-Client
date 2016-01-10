@@ -23,7 +23,10 @@
       <%= polyglot.t('nav.createListing') %>
     </a>
   <% }else{ %>
-    <a href="#userPage/<%- ob.guid %>/createStore"><%= polyglot.t('CreateStore') %></a>
+    <a href="#userPage/<%- ob.guid %>/createStore">
+      <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('CreateStore') %>
+    </a>
   <% } %>
   <hr/>
   <a href="#transactions/purchases">
@@ -735,13 +738,13 @@
             <div class="padding20 custCol-primary modal-about-section js-modalAboutMain">
               <p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p>
 
-              <p>The software is open source and MIT licensed. You can view the code on <a href="https://github.com/OpenBazaar/">Github</a>.</p>
+              <p>The software is open source and MIT licensed. You can view the code on <a href="https://github.com/OpenBazaar/" target="_blank">Github</a>.</p>
 
-              <p>OpenBazaar is a community project, and we welcome participation in our <a href="https://openbazaar-slackin-drwasho.herokuapp.com/">Slack</a> channel or on our <a href="http://www.reddit.com/r/openbazaar">subreddit</a>.</p>
+              <p>OpenBazaar is a community project, and we welcome participation in our <a href="https://openbazaar-slackin-drwasho.herokuapp.com/" target="_blank">Slack</a> channel or on our <a href="http://www.reddit.com/r/openbazaar" target="_blank">subreddit</a>.</p>
 
-              <p>If you need help, read the OpenBazaar version 1.0 <a href="">Tutorial</a>.</p>   <!-- Still need an href link here -->
+              <p>If you need help, read the OpenBazaar version 1.0 <a href="" target="_blank">Tutorial</a>.</p>   <!-- Still need an href link here -->
 
-              <p>If you still have questions, open an issue at our <a href="https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post">support desk</a>.</p>
+              <p>If you still have questions, open an issue at our <a href="https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post" target="_blank">support desk</a>.</p>
             </div>
 
             <div class="padding20 custCol-primary hide  modal-about-section js-modalAboutLicensing">

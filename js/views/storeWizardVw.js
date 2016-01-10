@@ -114,7 +114,7 @@ module.exports = Backbone.View.extend({
           '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100 table">' +
             '<div>' +
               '<div style="width: 80px;">' +
-                '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);">' +
+                '<div class="thumbnail thumbnail-large-slim pull-left" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);">' +
                 '</div>' +
               '</div>' +
               '<div>' +

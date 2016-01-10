@@ -609,7 +609,10 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followingList);
-    $('.js-userFollowingCount').html(this.following.attributes.following.length);
+    
+    if(this.following.attributes.following){
+      $('.js-userFollowingCount').html(this.following.attributes.following.length);
+    }
   },
 
   renderItem: function(hash){

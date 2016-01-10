@@ -510,7 +510,7 @@ form {
 .itemMetaValue {
   max-width: 130px;
   float: left;
-  font-size: 14px;
+  font-size: 15px;
   opacity: .75;
   height: 38px;
   line-height: 38px;
@@ -1964,15 +1964,23 @@ div.chatSearchOut .chatSearchIcon {
 .btn-pill {
   padding: 5px 13px;
   cursor: pointer;
-  border-radius: 18px;
+  border-radius: 4px;
   min-height: 17px;
   opacity: .75;
-  margin-bottom: 6px;
-  margin-right: 3px;
+  margin-bottom: 4px;
+  margin-right: 4px;
   min-width: 30px;
   text-align: center;
   overflow: hidden;
   line-height: 20px;
+}
+
+.btn-pill a {
+  text-decoration: none;
+}
+
+.btn-pill:hover {
+  opacity: 1;
 }
 
 .btn.btn-half.btn-bar:last-child,
