@@ -180,7 +180,7 @@ module.exports = Backbone.View.extend({
         self.trigger('storeCreated');
         window.obEventBus.trigger("updateProfile");
       }, '', modData);
-    }, "", wizData);
+    }, '', wizData);
   },
 
   close: function(){
