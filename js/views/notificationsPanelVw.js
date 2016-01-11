@@ -45,6 +45,9 @@ module.exports = Backbone.View.extend({
       this.handleSocketMessage(response);
     });
 
+    this.notifcationSound = document.createElement('audio');
+    this.notifcationSound.setAttribute('src', './audio/notification.mp3');
+
     this.subViews = [];
 
   },
@@ -88,7 +91,7 @@ module.exports = Backbone.View.extend({
       new_notification.set('avatarURL', avatar);
       this.renderNotification(new_notification);
       console.log(new_notification);
-      var unread_count = $('.js-navNotifications:first').attr('data-count');
+      var unread_count = $('.js-navNotifications .badge').attr('data-count');
       if(unread_count) {
         unread_count = parseInt(unread_count) + 1;
       } else {
@@ -97,9 +100,7 @@ module.exports = Backbone.View.extend({
       this.trigger('notificationsCounted', unread_count);
 
       // play notification sound
-      var notifcationSound = document.createElement('audio');
-      notifcationSound.setAttribute('src', './audio/notification.mp3');
-      notifcationSound.play();
+      this.notifcationSound.play();
     }
   },
 

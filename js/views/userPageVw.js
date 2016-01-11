@@ -155,7 +155,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function (options) {
     "use strict";
-    console.log("init");
     var self = this;
     this.options = options || {};
     /* expected options are:
@@ -271,7 +270,6 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     "use strict";
-    console.log("render");
     var self = this;
     //make sure container is cleared
     $('#content').html(this.$el);
@@ -353,7 +351,6 @@ module.exports = Backbone.View.extend({
 
   setState: function(state, hash) {
     "use strict";
-    console.log("state " + state);
     var currentAddress,
         addressState,
         currentHandle = this.model.get('page').profile.handle;
@@ -387,12 +384,9 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }
     this.setControls(state);
-    console.log(state != "itemNew");
     if(state != "customize" && state != this.state && state != "itemNew" && this.state != "itemNew"){
       this.lastTab = this.state;
       this.state = state;
-      console.log("this.state " + this.state);
-      console.log("this.lastTab " + this.lastTab);
     }
 
     //set address bar
@@ -428,7 +422,6 @@ module.exports = Backbone.View.extend({
     document.getElementById('obContainer').classList.remove("noScrollBar");
     document.getElementById('obContainer').classList.remove("overflowHidden");
     //unhide the ones that are needed
-    console.log(state);
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
@@ -583,7 +576,6 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    console.log("render followers");
     this.followerList = new personListView({
       model: model,
       el: '.js-list1',

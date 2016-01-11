@@ -181,8 +181,9 @@ module.exports = Backbone.View.extend({
       saveToAPI('', self.model.get('user'), self.model.get('user').serverUrl + "settings", function(){
         self.trigger('storeCreated');
         window.obEventBus.trigger("updateProfile");
+        window.obEventBus.trigger("updateUserModel");
       }, '', modData);
-    }, "", wizData);
+    }, '', wizData);
   },
 
   close: function(){

@@ -82,6 +82,9 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.userProfile.fetch();
     });
+    this.listenTo(window.obEventBus, "updateUserModel", function(response){
+      this.model.fetch();
+    });
 
     this.render();
   },
@@ -320,7 +323,7 @@ module.exports = Backbone.View.extend({
     if(count > 99) {
       count = "..";
     }
-    this.$el.find('.js-navNotifications').attr('data-count', count);
+    this.$el.find('.js-navNotifications .badge').attr('data-count', count);
   },
 
   navProfileClick: function(e){
