@@ -246,7 +246,6 @@ module.exports = Backbone.View.extend({
 
   setNotificationCount: function(count){
     "use strict";
-    console.log("set notif " + count);
     if(count > 99) {
       count = "..";
     }
