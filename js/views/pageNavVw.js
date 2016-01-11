@@ -78,6 +78,9 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.userProfile.fetch();
     });
+    this.listenTo(window.obEventBus, "updateUserModel", function(response){
+      this.model.fetch();
+    });
 
     this.render();
   },
