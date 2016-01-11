@@ -1174,6 +1174,13 @@ h5 {
   position: relative;
   width: 525px;
 }
+.modal-hero-about {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 250px;
+  position: relative;
+  width: 525px;
+}
 
 .modal-hero-icon {
   background: url(../imgs/openbazaar-icon-no-border.png);
@@ -3147,6 +3154,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-right: none;
 }
 
+.modal .aboutModal-accordion .btn-bar.active{
+  background: #106DA3;
+}
+
+.modal .aboutModal-accordion .btn-bar.active:hover{
+  opacity: 1;
+}
+
 .modal .homeModal-accordion .btn-bar:nth-child(2){
 ]  border-left: solid 1px #086A9E;
 }
@@ -3184,6 +3199,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: url('../imgs/defaultUser.png') 100% 100%;
   background-size: cover;
   margin-top: 30px;
+}
+
+.modal .aboutModal-accordion .modal-section {
+  display: block;
+  height: 315px;
+  font-weight: 400;
+  padding: 10px 20px;
+  overflow: scroll;
+  font-size: 14px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .uploadPhotoControls {
@@ -4169,6 +4195,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .height55 {
   height: 55px;
 }
+#ov1  .height56 {
+  height: 56px;
+}
 
 #ov1  .height46 {
   height: 46px;
@@ -4290,6 +4319,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 #ov1  .padding515 {
   padding: 5px 15px;
+}
+
+#ov1  .padding1020{
+  padding: 10px 20px;
 }
 
 #ov1  .padding2010{
@@ -4515,6 +4548,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: white;
   background-opacity: .75;
   background-color: #FFA41C;
+}
+
+#ov1 .alignCenter {
+  text-align: center;
 }
 
 

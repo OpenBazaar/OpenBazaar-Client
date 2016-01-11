@@ -8,7 +8,7 @@
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
       <div class="accordion-window">
         <div class="accordion-child">
-          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary  custCol-text">
             <!-- <span class="ion-ios-cart fontSize12 marginRight5 textOpacity1"></span> -->
             <%= polyglot.t('CreateStore') %>
             <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 2</span>
@@ -84,18 +84,18 @@
               </div>
             </div>
           </form>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
             <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight">
-              <span class="ion-android-close fontSize13 marginRight2 textOpacity1"></span>
+              <span class="ion-android-close fontSize13 marginRight2 textOpacity50"></span>
               <%= polyglot.t('Cancel') %>
             </a>
             <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
               <%= polyglot.t('Next') %>
-              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity1"></span>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity50"></span>
             </a>
           </div>
         </div>
-        <div class="accordion-child">
+        <div class="accordion-child  custCol-text">
           <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('Store') %> <%= polyglot.t('Moderators') %> (<%= polyglot.t('Optional') %>)
             <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 2</span>
@@ -109,13 +109,13 @@
             <div class="flexRow js-storeWizardModeratorList">
             </div>
           </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 ">
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
             <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary borderRight">
-              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity1"></span>
+              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity50"></span>
               <%= polyglot.t('Back') %>
             </a>
             <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary">
-              <span class="ion-checkmark fontSize10 marginRight2 textOpacity1"></span>
+              <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
               <%= polyglot.t('Finished') %>
             </a>
           </div>

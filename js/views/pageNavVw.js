@@ -26,6 +26,8 @@ module.exports = Backbone.View.extend({
     'click .js-navFwd': 'navFwdClick',
     'click .js-showAboutModal': 'showAboutModal',
     'click .js-hideAboutModal': 'hideAboutModal',
+    'click .js-showSupportModal': 'showSupportModal',
+    'click .js-hideSupportModal': 'hideSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navNotifications': 'navNotificationsClick',
     'click .js-navProfile': 'navProfileClick',
@@ -228,11 +230,39 @@ module.exports = Backbone.View.extend({
 
   showAboutModal: function(e){
     "use strict";
-    $('.js-aboutModal').removeClass('hide');
+
+    // set the active tab
+    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $('.js-about-mainTab').addClass('active');
+
+    // set the active section
+    $('.js-aboutModal .modal-section').addClass('hide');
+    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+
+    // blur the container for extra focus
     $('#obContainer').addClass('blur');
+
+    // display the modal
+    $('.js-aboutModal').removeClass('hide');
   },
 
   hideAboutModal: function(e){
+    "use strict";
+    $('.js-aboutModal').addClass('hide');
+    $('#obContainer').removeClass('blur');
+  },
+
+  showSupportModal: function(e){
+    "use strict";
+    $('.js-aboutModal').removeClass('hide');
+    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $('.js-about-donationsTab').addClass('active');
+    $('.js-aboutModal .modal-section').addClass('hide');
+    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    $('#obContainer').addClass('blur');
+  },
+
+  hideSupportModal: function(e){
     "use strict";
     $('.js-aboutModal').addClass('hide');
     $('#obContainer').removeClass('blur');
@@ -245,20 +275,20 @@ module.exports = Backbone.View.extend({
 
     switch(tab) {
       case "about":
-        $('.modal-about-section').hide();
-        $('.js-modalAboutMain').show();
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutMain').removeClass('hide');
         break;
       case "support":
-        $('.modal-about-section').hide();
-        $('.js-modalAboutSupport').show();
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutSupport').removeClass('hide');
         break;
       case "contributors":
-        $('.modal-about-section').hide();
-        $('.js-modalAboutContributors').show();
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutContributors').removeClass('hide');
         break;
       case "licensing":
-        $('.modal-about-section').hide();
-        $('.js-modalAboutLicensing').show();
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutLicensing').removeClass('hide');
         break;
     }
   },

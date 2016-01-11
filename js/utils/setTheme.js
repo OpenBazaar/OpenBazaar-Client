@@ -24,10 +24,12 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
   // if text is white the highlight color needs to darken instead of lighten
   if (primaryColor == 'undefined' || primaryColor == "#ffffff"){
     customStyleTag.innerHTML = "#ov1 #userPage .txtField:focus, " +
+    "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, -0.08) + ";}" +
     "#ov1 #userPage .fieldItem:focus, " +
     "#ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + shadeColor2("#ffffff", -0.15) + " ;}";
   }else{
     customStyleTag.innerHTML = "#ov1 #userPage .txtField:focus, " +
+    "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, 0.08) + ";}" +
     "#ov1 #userPage .fieldItem:focus, " +
     "#ov1 #userPage .fieldItem-textarea:focus { outline: 2px solid " + shadeColor2(primaryColor, 0.15) + " ;}";
   }
@@ -42,7 +44,6 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
       "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage { background-color: " + backgroundColor + ";}" + 
-      "#ov1 #userPage .custCol-border { border-color: " + shadeColor2(primaryColor, 0.08) + ";}" +
       "#ov1 #userPage .custCol-border-secondary { border-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-border-primary { border-color: " + primaryColor + ";}" +
       "#ov1 #userPage .radioLabel:before { border-color: " + textColor + ";}" +
