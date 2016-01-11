@@ -190,7 +190,7 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases",
         Sales: "Sales",
         Cases: "Cases",
-        Discover: "Discover"
+        Discover: "Discover",
         Blocked: "Blocked",
         Advanced: "Advanced",
         General: "General",
