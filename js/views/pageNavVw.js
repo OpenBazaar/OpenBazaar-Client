@@ -250,7 +250,7 @@ module.exports = Backbone.View.extend({
     if(count > 99) {
       count = "..";
     }
-    this.$el.find('.js-navNotifications').attr('data-count', count);
+    this.$el.find('.js-navNotifications .badge').attr('data-count', count);
   },
 
   navProfileClick: function(e){

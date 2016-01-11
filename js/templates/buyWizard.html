@@ -27,7 +27,7 @@
           <img class="pull-left qrCode js-buyWizardPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
           <div class="pull-left rowtop20 pad20Left txt-bright" style="width:255px;">
             <div class="txt-center row20 textSize16px">
-              <%= polyglot.t('buyFlow.Send') %> <span class="js-buyWizardDetailsTotalBTC"></span> <%= polyglot.t('buyFlow.BTCto') %>
+              <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: '<span class="js-buyWizardDetailsTotalBTC"></span>'}) %>
             </div>
             <div class="txt-center row20">
               <a class="textSize11px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
@@ -104,9 +104,13 @@
                         </div>
                         <div class="pad10left txt-unleaded width260">
                           <div class="marginTop9 marginBottom4 fontSize14 noOverflow">
-                            <%= polyglot.t('buyFlow.directPaymentTo') %>
+
                             <span title="<% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>">
-                              <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %>
+                              <% if(ob.page.profile.handle){ %>
+                                <%= polyglot.t('buyFlow.directPaymentTo', {handle: ob.page.profile.handle }) %>
+                              <% } else { %>
+                                <%= polyglot.t('buyFlow.directPaymentTo', {handle: ob.page.profile.guid }) %>
+                              <% } %>
                             </span> (<%= polyglot.t('Free') %>)
                           </div>
                           <div class="textOpacity75 fontSize14">
@@ -254,7 +258,7 @@
             <div class="js-buyWizardOrderDetails">
               <%= polyglot.t('OrderDetails') %>
               <div class="pull-right"><%= polyglot.t('buyFlow.total') %>:
-                <span class="js-buyWizardDetailsTotal"></span> 
+                <span class="js-buyWizardDetailsTotal"></span>
                 <% if(ob.userCurrencyCode != 'BTC'){ %>
                 <span class="textOpacity75">(<span class="js-buyWizardDetailsBTCTotal"></span> BTC)</span>
                 <% } %>

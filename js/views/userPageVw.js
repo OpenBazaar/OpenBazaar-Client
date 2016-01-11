@@ -188,6 +188,7 @@ module.exports = Backbone.View.extend({
     this.chatAppView = options.chatAppView;
     this.slimVisible = false;
     this.confirmDelete = false;
+    this.state = this.options.state;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
@@ -280,7 +281,7 @@ module.exports = Backbone.View.extend({
       self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
-      self.setState(self.options.state, self.options.itemHash);
+      self.setState(self.state, self.options.itemHash);
       self.$el.find('.js-externalLink').on('click', function(e){
         e.preventDefault();
         var extUrl = $(this).attr('href');
@@ -363,6 +364,7 @@ module.exports = Backbone.View.extend({
     }else if(state === "itemNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(352);
+      this.addTabToHistory('newItem');
       this.sellItem();
     } else if(state === "createStore"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
@@ -380,8 +382,9 @@ module.exports = Backbone.View.extend({
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
     }
     this.setControls(state);
-    if(state !== "customize"){
-      this.lastTab = state;
+    if(state != "customize" && state != this.state && state != "itemNew" && this.state != "itemNew"){
+      this.lastTab = this.state;
+      this.state = state;
     }
 
     //set address bar
@@ -399,7 +402,7 @@ module.exports = Backbone.View.extend({
       addressState = state;
     }
     currentAddress = this.model.get('page').profile.guid + "/" + addressState;
-    if(addressState === "item") {
+    if(addressState === "item" && hash) {
       currentAddress += "/"+ hash;
     } else if(addressState === "createStore"){
       currentAddress = this.model.get('page').profile.guid;
@@ -420,7 +423,7 @@ module.exports = Backbone.View.extend({
     if(this.options.ownPage === true) {
       if(state === "item" || state === "itemOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
-      } else if(state === "itemEdit") {
+      } else if(state === "itemEdit" || state === "itemNew") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
       } else if(state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
@@ -429,7 +432,6 @@ module.exports = Backbone.View.extend({
         document.getElementById('obContainer').classList.add("box-borderDashed");
         document.getElementById('obContainer').classList.add("noScrollBar");
         document.getElementById('obContainer').classList.add("overflowHidden");
-
       } else {
         this.$el.find('.js-pageButtons').removeClass('hide');
       }
@@ -562,7 +564,6 @@ module.exports = Backbone.View.extend({
 
   renderFollowers: function (model) {
     "use strict";
-    console.log("render followers");
     this.followerList = new personListView({
       model: model,
       el: '.js-list1',
@@ -754,7 +755,7 @@ module.exports = Backbone.View.extend({
     var colorKey = $(e.currentTarget).data('colorKey');
 
     if (colorKey){
-      $('.js-customColorChoice').removeClass('outline2')
+      $('.js-customColorChoice').removeClass('outline2');
       $(e.currentTarget).addClass('outline2');
 
       this.setCustomColor(rgb2hex($(e.currentTarget).css('background-color')), colorKey);
@@ -1112,7 +1113,7 @@ module.exports = Backbone.View.extend({
   storeCreated: function() {
     "use strict";
     //this.storeWizardView.closeWizard();
-    var currentState = this.lastTab || "about";
+    //var currentState = this.lastTab || "about";
     //recreate the entire page with the new data
     Backbone.history.loadUrl();
   },
