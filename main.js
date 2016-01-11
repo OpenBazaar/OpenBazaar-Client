@@ -8,7 +8,7 @@ var fs = require('fs');
 var path = require('path');
 
 var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var BrowserWindow = require('electron').BrowserWindow;  // Module to create native browser window.
 var request = require('request');
 
 var launched_from_installer = false;
@@ -49,7 +49,7 @@ if(fs.existsSync(__dirname + path.sep + "OpenBazaar-Server")) {
 }
 
 // Report crashes to our server.
-require('crash-reporter').start();
+//require('crash-reporter').start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
