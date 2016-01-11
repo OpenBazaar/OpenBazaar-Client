@@ -652,7 +652,9 @@ module.exports = Backbone.View.extend({
             submit();
         }
     this.$el.find('.js-homeModal').hide();
-    this.$el.find('.js-OnboardingIntroDiscover').removeClass('hide');
+
+    // display discover callout
+    this.$el.find('.js-OnboardingIntroDiscoverHolder').removeClass('hide'); // Josh can you help with this? After onboarding, this shows for a split second, but then seems to disappear immediately afterwards possibly because the page is reloading.
     
     new Notification(window.polyglot.t('WelcomeToYourPage'));
 

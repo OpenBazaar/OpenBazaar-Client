@@ -86,8 +86,7 @@ module.exports = Backbone.Router.extend({
     }));
 
     // hide the discover onboarding callout 
-    $('.js-OnboardingIntroDiscover').addClass('hide');
-
+    $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
   },
 
   userPage: function(userID, state, itemHash){
