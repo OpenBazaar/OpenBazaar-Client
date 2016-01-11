@@ -386,7 +386,7 @@ module.exports = Backbone.View.extend({
 
     //add moderator list from profile
     __.each(this.model.get('moderators'), function(moderator){
-      formData.append('moderators', moderator);
+      formData.append('moderators', moderator.guid);
     });
 
     //add formChecked class to form so invalid fields are styled as invalid
