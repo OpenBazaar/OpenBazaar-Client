@@ -8,26 +8,28 @@
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
       <div class="accordion-window">
         <div class="accordion-child">
-          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary  custCol-text">
+            <!-- <span class="ion-ios-cart fontSize12 marginRight5 textOpacity1"></span> -->
             <%= polyglot.t('CreateStore') %>
+            <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 2</span>
           </div>
-          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary" id="storeWizardForm">
+          <form class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar" id="storeWizardForm">
             <input name="header" id="headerInput" type="text" class="hide" value="<%- ob.page.profile.header_hash %>" />
             <input name="location" id="locationSelect" type="text" class="hide"/>
 
             <div class="flexRow">
               <div class="flexRow custCol-border">
-                  <div class="flexCol-3 borderRight custCol-border">
+                  <div class="flexCol-4 borderRight custCol-border">
                     <label class="fieldItem" for="storeNameInput">
                       <%= polyglot.t('Name') %>
                     </label>
                   </div>
-                  <div class="flexCol-9">
+                  <div class="flexCol-8">
                     <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%- ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
                   </div>
               </div>
               <div class="flexRow custCol-border">
-                <div class="flexCol-3 borderRight custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <label class="fieldItem" for="aboutInput">
                     <%= polyglot.t('Description') %>
                   </label>
@@ -37,8 +39,8 @@
                 </div>
               </div>
               <!--
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              <div class="flexRow custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <div class="fieldItem">
                     <label for="refund_address">
                       <%= polyglot.t('BitcoinReturnAddress') %>
@@ -57,7 +59,7 @@
               </div>
               -->
               <div class="flexRow custCol-border">
-                <div class="flexCol-3 borderRight custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <label class="fieldItem" for="realCategoriesInput">
                     <%= polyglot.t('Keywords') %><!--  (<%= polyglot.t('UpTo3') %>) -->
                   </label>
@@ -67,8 +69,8 @@
                   <div class="fieldItem" id="categoriesInput"></div>
                 </div>
               </div>
-              <div class="flexRow custCol-border-secondary">
-                <div class="flexCol-4 borderRight custCol-border-secondary">
+              <div class="flexRow custCol-border">
+                <div class="flexCol-4 borderRight custCol-border">
                   <label class="fieldItem">
                     <%= polyglot.t('NSFW') %>
                   </label>
@@ -82,27 +84,40 @@
               </div>
             </div>
           </form>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
+            <a class="btn btn-bar btn-half js-closeStoreWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight">
+              <span class="ion-android-close fontSize13 marginRight2 textOpacity50"></span>
+              <%= polyglot.t('Cancel') %>
+            </a>
+            <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Next') %>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity50"></span>
+            </a>
           </div>
         </div>
-        <div class="accordion-child">
+        <div class="accordion-child  custCol-text">
           <div class="bar barTxt h6 custCol-secondary">
-            <%= polyglot.t('Store') %> <%= polyglot.t('Moderators') %>
+            <%= polyglot.t('Store') %> <%= polyglot.t('Moderators') %> (<%= polyglot.t('Optional') %>)
+            <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 2</span>
           </div>
-          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+          <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar">
             <div class="flexRow">
-              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border-secondary">
+              <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border">
                 <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Search') %> <%= polyglot.t('for') %> <%= polyglot.t('moderators') %>" />
               </div>
             </div>
             <div class="flexRow js-storeWizardModeratorList">
             </div>
           </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary"><%= polyglot.t('Save') %></a>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3  custCol-text">
+            <a class="btn btn-bar btn-half js-accordionPrev borderBottomLeftRaidus3 custCol-secondary borderRight">
+              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity50"></span>
+              <%= polyglot.t('Back') %>
+            </a>
+            <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary">
+              <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
+              <%= polyglot.t('Finished') %>
+            </a>
           </div>
         </div>
       </div>

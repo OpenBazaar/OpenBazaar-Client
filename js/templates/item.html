@@ -29,7 +29,7 @@
     <div class="marginBottom12 clearfix custCol-secondary borderRadius2">
       <ul class="itemMeta">
         <li class="alignCenter itemPrice">
-          <span class="textSize26px textOpacity1 fontWeight500 marginRight2"><%- ob.displayPrice %></span>
+          <span class="textSize22px textOpacity1 fontWeight500 marginRight2"><%- ob.displayPrice %></span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
           <span class="textSize22px textOpacity65">(<%- ob.vendorBTCPrice.toFixed(4) %> BTC)</span>
           <% } %>
@@ -81,9 +81,9 @@
     <div class="clearFix marginTop15 fontSize15 marginLeft5"><h4><%= polyglot.t('Keywords') %></h4></div> 
     <div class="clearFix marginBottom20 marginLeft5">
       <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { 
-        if(data.length < 100) { 
+        if(data.length < 100 && i < 11) { 
         %>
-          <div class="btn-pill custCol-secondary floatLeft"><%- data  %></div>
+          <div class="btn-pill custCol-secondary floatLeft"><a href="#home?keyword=<%- data %>"><%- data %></a></div>
       <% } }); %>    
     </div>
     <% } %>
@@ -92,11 +92,21 @@
 
 <div class="flexRow border0">
   <div class="flexCol-12">
-    <div class="custCol-border-secondary marginBottom40">
-      <div class="bar navBar barFlush navBar custCol-secondary">
-        <a class="btn btn-bar btn-tab custCol-secondary active js-descriptionTab js-tab"><%= polyglot.t('Description') %></a>
-        <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab"><%= polyglot.t('Reviews') %></a>
-        <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab"><%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %></a>
+    <div class="custCol-border marginBottom40">
+      <div class="bar navBar barFlush navBar custCol-secondary height55">
+        <a class="btn btn-bar btn-tab custCol-secondary active js-descriptionTab js-tab">
+          <span class="ion-quote fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('Description') %>
+        </a>
+        <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab paddingRight18">
+          <span class="ion-android-star fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('Reviews') %>
+          <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingReviewCount">0</span>
+        </a>
+        <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab">
+          <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %>
+        </a>
       </div>
       <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300">
         <div class="flexRow">
