@@ -25,7 +25,8 @@
               <strong><%- ob.vendor_offer.listing.item.title %></strong>
             </div>
             <div class="noOverflow fontSize13 txt-fade">
-              <%= polyglot.t('transactions.SoldBy') %> <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
+              <%= polyglot.t('transactions.SoldBy') %>
+              <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
               <%- ob.vendor_offer.listing.id.blockchain_id %>
               <% } else { %>
               <%- ob.vendor_offer.listing.id.guid %>

@@ -28,29 +28,9 @@ module.exports = Backbone.View.extend({
 
     this.model = new orderModel({cCode: this.cCode, btAve: this.btAve, serverUrl: this.serverUrl});
     this.model.urlRoot = options.serverUrl + "get_order"; //replace with real API call when ready
+    this.listenTo(this.model, 'change:displayTotalPrice', function(){this.render();});
     this.model.fetch({
-      data: $.param({'order_id': self.orderID}),
-      success: function(model){
-        var cCode = self.cCode,
-            displayUnitPrice = "" ,
-            displayShippingPrice = "test2",//fiat and btc, or just btc
-            displayCountry = self.countriesArray.filter(function(value){
-              return value.dataName == model.get('buyer_order').order.shipping ? model.get('buyer_order').order.shipping.country : "";
-            }),
-            arrayOfModerators = model.get('vendor_offer').listing.moderators,
-            orderModerator = model.get('buyer_order').order.moderator,
-            displayModerator = arrayOfModerators ? arrayOfModerators.filter(function(moderator){
-              return moderator.guid == orderModerator;
-            }) : "";
-
-        //model.set('displayPrice', displayPrice);
-        //model.set('displayShippingPrice', displayShippingPrice);
-       // model.set('displayCountry', displayCountry);
-       // model.set('displayModerator', displayModerator[0]);
-       // model.set('serverUrl', self.serverUrl);
-       // console.log(model.attributes);
-        self.render();
-      }
+      data: $.param({'order_id': self.orderID})
     });
   },
 
@@ -61,6 +41,7 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
+      console.log(self.model.toJSON());
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.$el.parent().fadeIn(300);
     });
