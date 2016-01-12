@@ -2612,6 +2612,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background-color: #4a4848;
 }
 
+.taggle {
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .fieldItem .taggle_placeholder {
   position: absolute;
   transition: opacity,.25s;
