@@ -229,7 +229,7 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
-      timeout: 30000,
+      timeout: 5000,
       success: function(model, response){
         //don't render if view has been closed and the $el has been deleted
         if(self.$el){
@@ -470,6 +470,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         self.renderItems(model.get('listings'));
       },
@@ -479,6 +480,7 @@ module.exports = Backbone.View.extend({
     });
     this.following.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         if(self.options.ownPage === true){
           self.ownFollowing = model.get('following') || [];
@@ -493,7 +495,7 @@ module.exports = Backbone.View.extend({
           $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
-            timeout: 3000
+            timeout: 5000
           }).done(function(ownFollowingData){
             self.ownFollowing = ownFollowingData.following || [];
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -521,6 +523,7 @@ module.exports = Backbone.View.extend({
 
     this.followers.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         var followerArray = model.get('followers');
         self.renderFollowers(followerArray);

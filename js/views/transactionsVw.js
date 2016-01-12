@@ -54,6 +54,7 @@ module.exports = Backbone.View.extend({
     this.subModels.push(this.countries);
 
     getBTPrice(this.cCode, function(btAve){
+      self.btAve = btAve;
       self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";
       self.purchasesWrapper = $(wrapper);
@@ -149,7 +150,7 @@ module.exports = Backbone.View.extend({
     this.purchasesCol.each(function(model, i){
       model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
       var orderShort = new orderShortVw({
-        model: model,
+        model: model
       });
       self.subViews.push(orderShort);
       self.purchasesWrapper.append(orderShort.render().el);
@@ -163,7 +164,7 @@ module.exports = Backbone.View.extend({
     this.salesCol.each(function(model, i){
       model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
       var orderShort = new orderShortVw({
-        model: model,
+        model: model
       });
       self.subViews.push(orderShort);
       self.salesWrapper.append(orderShort.render().el);
@@ -183,7 +184,8 @@ module.exports = Backbone.View.extend({
       serverUrl: this.serverUrl,
       parentEl: this.$el.find('.js-transactionModalHolder'),
       countriesArray: this.countriesArray,
-      cCode: this.userModel.get('currency_code')
+      cCode: this.userModel.get('currency_code'),
+      btAve: this.btAve
     });
   },
 

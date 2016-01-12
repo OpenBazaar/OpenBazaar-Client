@@ -3,7 +3,8 @@ var __ = require('underscore'),
     $ = require('jquery'),
     is = require('is_js'),
     loadTemplate = require('../utils/loadTemplate'),
-    saveToAPI = require('../utils/saveToAPI');
+    saveToAPI = require('../utils/saveToAPI'),
+    orderModel = require('../models/orderMd');
 
 module.exports = Backbone.View.extend({
 
@@ -23,32 +24,32 @@ module.exports = Backbone.View.extend({
     this.parentEl = options.parentEl;
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
+    this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
+    console.log(options);
 
-    this.model = new Backbone.Model();
+    this.model = new orderModel({cCode: this.cCode, btAve: this.btAve, serverUrl: this.serverUrl});
     this.model.urlRoot = options.serverUrl + "get_order"; //replace with real API call when ready
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
       success: function(model){
         var cCode = self.cCode,
-            displayPrice = "test1",//fiat and btc, or just btc
+            displayUnitPrice = "" ,
             displayShippingPrice = "test2",//fiat and btc, or just btc
             displayCountry = self.countriesArray.filter(function(value){
-              return value.dataName == model.get('buyer_order').order.shipping.country;
+              return value.dataName == model.get('buyer_order').order.shipping ? model.get('buyer_order').order.shipping.country : "";
             }),
             arrayOfModerators = model.get('vendor_offer').listing.moderators,
             orderModerator = model.get('buyer_order').order.moderator,
-            displayModerator = arrayOfModerators.filter(function(moderator){
+            displayModerator = arrayOfModerators ? arrayOfModerators.filter(function(moderator){
               return moderator.guid == orderModerator;
-            });
-        console.log(arrayOfModerators);
-        console.log(orderModerator);
-        console.log(displayModerator);
+            }) : "";
 
-        model.set('displayPrice', displayPrice);
-        model.set('displayShippingPrice', displayShippingPrice);
-        model.set('displayCountry', displayCountry);
-        model.set('displayModerator', displayModerator[0]);
-        model.set('serverUrl', self.serverUrl);
+        //model.set('displayPrice', displayPrice);
+        //model.set('displayShippingPrice', displayShippingPrice);
+       // model.set('displayCountry', displayCountry);
+       // model.set('displayModerator', displayModerator[0]);
+       // model.set('serverUrl', self.serverUrl);
+       // console.log(model.attributes);
         self.render();
       }
     });
