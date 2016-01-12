@@ -78,6 +78,10 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
           __.each(value, function(val){
             formData.append(key, val.guid);
           });
+          //insert blank if there are no moderators
+          if(value.length == 0){
+            formData.append(key, "");
+          }
         } else{
           formData.append(key, value);
         }
