@@ -4,18 +4,33 @@
       <div class="welcomeBar-inner">
         <h1 class="fancy-heading fontSize20 vCentered"><%= polyglot.t('Discover') %></h1>
         <a href="#userPage" class="btn btn-txt custCol-background positionRelative pull-right right10 marginTop9 marginLeft6">
+          <span class="ion-document-text fontSize11 marginRight2 textOpacity1"></span>
           <%= polyglot.t('GoToMyPage') %>
         </a>
-        <a  class="btn btn-txt custCol-background positionRelative pull-right marginTop9 right10 js-homeCreateStore">
+        <a class="btn btn-txt custCol-background js-sellItem positionRelative pull-right marginTop9 right10 js-homeCreateListing">
+          <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
+          <%= polyglot.t('nav.createListing') %>
+        </a>  
+        <a class="btn btn-txt custCol-background positionRelative pull-right marginTop9 right10 js-homeCreateStore">
+          <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
           <%= polyglot.t('CreateStore') %>
-        </a>        
+        </a>
       </div>
     </div>
 
-    <div class="bar barFlush navBar home-page-navigation">
-      <a class="btn btn-bar btn-tab js-feedTab"><%= polyglot.t('Feed') %></a>
-      <a class="btn btn-bar btn-tab active js-productsTab"><%= polyglot.t('AllListings') %></a>
-      <a class="btn btn-bar btn-tab js-vendorsTab"><%= polyglot.t('Pages') %></a>
+    <div class="bar barFlush navBar home-page-navigation height55">
+      <a class="btn btn-bar btn-tab js-feedTab">
+        <span class="ion-ios-paper fontSize11 marginRight2 textOpacity1"></span> 
+        <%= polyglot.t('Feed') %>
+      </a>
+      <a class="btn btn-bar btn-tab active js-productsTab">
+        <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span> 
+        <%= polyglot.t('Listings') %>
+      </a>
+      <a class="btn btn-bar btn-tab js-vendorsTab">
+        <span class="ion-document-text fontSize12 marginRight2 textOpacity1"></span> 
+        <%= polyglot.t('Pages') %>
+      </a>
     </div>
   </div>
   <div class="bar home-page-navigation-filler hide custCol-primary"></div>
@@ -25,7 +40,7 @@
         <div class="width100">
           <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
             <input type="text" class="txtField txtField-bar js-homeSearchItems" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
-            <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-homeSearchItemsClear"></a>
+            <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-homeSearchItemsClear textOpacity50"></a>
           </div>
           <div class="selectPill pull-up43">
             <select class="custCol-secondary js-homeSelectFollowingFilter">

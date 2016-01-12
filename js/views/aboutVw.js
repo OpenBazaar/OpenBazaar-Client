@@ -27,6 +27,7 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
+      self.$el.find('.js-aboutModal').removeClass("hide");
     });
     return this;
   },
