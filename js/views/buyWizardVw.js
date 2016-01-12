@@ -466,10 +466,8 @@ module.exports = Backbone.View.extend({
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalPrice);
-    console.log(totalBTCPrice);
     this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
     this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(4));
-    console.log(this.$el.find('.js-buyWizardDetailsTotal'));
   },
 
   copyPayAddress: function(){
