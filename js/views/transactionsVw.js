@@ -84,7 +84,6 @@ module.exports = Backbone.View.extend({
     if(this.model.get('page').vendor){
       this.salesCol.fetch({
         success: function(models){
-          console.log(models);
           self.renderSales();
         }
       });
@@ -121,7 +120,6 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state){
-    console.log(state);
     "use strict";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     $('#content').find('input:visible:first').focus();

@@ -150,12 +150,11 @@ module.exports = window.Backbone.Model.extend({
                     return value.dataName == region;
                 });
                 response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
-
             });
 
             //add pretty country name for the country being shipped to
             if (response.buyer_order.order.shipping) {
-                response.displayCountry = self.countryArray(function (value) {
+                response.displayCountry = self.countryArray.filter(function (value) {
                     return value.dataName == response.buyer_order.order.shipping.country;
                 });
             } else {
@@ -173,6 +172,8 @@ module.exports = window.Backbone.Model.extend({
 
             response.serverUrl = this.serverUrl;
         }
+
+        console.log(response);
 
         return response;
     },

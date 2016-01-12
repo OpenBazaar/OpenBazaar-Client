@@ -25,7 +25,6 @@ module.exports = Backbone.View.extend({
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
-    console.log(options);
 
     this.model = new orderModel({cCode: this.cCode, btAve: this.btAve, serverUrl: this.serverUrl});
     this.model.urlRoot = options.serverUrl + "get_order"; //replace with real API call when ready
