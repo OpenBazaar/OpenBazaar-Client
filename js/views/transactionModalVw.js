@@ -27,22 +27,24 @@ module.exports = Backbone.View.extend({
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
 
     this.model = new orderModel({cCode: this.cCode, btAve: this.btAve, serverUrl: this.serverUrl});
-    this.model.urlRoot = options.serverUrl + "get_order"; //replace with real API call when ready
-    this.listenTo(this.model, 'change:displayTotalPrice', function(){this.render();});
+    this.model.urlRoot = options.serverUrl + "get_order";
     this.model.fetch({
-      data: $.param({'order_id': self.orderID})
+      data: $.param({'order_id': self.orderID}),
+      success: function (model, response, options) {
+        self.render(response);
+      }
     });
   },
 
-  render: function () {
+  render: function (model) {
     "use strict";
     var self = this;
+    console.log(self.model.toJSON());
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
-      console.log(self.model.toJSON());
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(model));
       self.$el.parent().fadeIn(300);
     });
   },

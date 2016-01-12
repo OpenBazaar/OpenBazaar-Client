@@ -5,77 +5,6 @@ var __ = require('underscore'),
   countriesMd = require('./countriesMd');
 
 module.exports = window.Backbone.Model.extend({
-  defaults: {
-    buyer_order: {
-      order: {
-        id: {
-          blockchain_id: "",
-          guid: "",
-          pubkeys: {
-            bitcoin: "",
-            encryption: "",
-            guid: ""
-          }
-        }
-      },
-      payment: {
-        address: "",
-        amount: 0,
-        chaincode: ""
-      },
-      quantity: 0,
-      ref_hash: "",
-      refund_address: "",
-      signatures: {
-        bitcoin: "",
-        guid: ""
-      }
-    },
-    displayCountry: "", // set by parse
-    displayModerator: "", //set by parse
-    displayUnitPrice: "", //set by parse
-    displayTotalPrice: "", //set by parse
-    displayShippingPrice: "", //set by parse
-    serverUrl: "", //set by view
-    vendor_offer: {
-      listing: {
-        id: {
-          blockchain_id: "",
-          guid: "",
-          pubkeys: {
-            bitcoin: "",
-            encryption: "",
-            guid: ""
-          }
-        },
-        item: {
-          description: "",
-          image_hashes: [],
-          keywords: [],
-          nsfw: false,
-          price_per_unit: {
-            fiat: {
-               price: 0,
-               currency_code: "usd" //country code here
-             }
-          },
-          process_time: "",
-          title: ""
-        },
-        metadata: {
-          category: "",
-          category_sub: "",
-          expiry: "",
-          version: "0.1"
-        },
-        moderators: [],
-        signatures: {
-          bitcoin: "",
-          guid: ""
-        }
-      }
-    }
-  },
 
   parse: function(response) {
     "use strict";
@@ -187,7 +116,6 @@ module.exports = window.Backbone.Model.extend({
       }
 
       console.log(response);
-
       return response;
     };
 
@@ -235,7 +163,6 @@ module.exports = window.Backbone.Model.extend({
   },
 
   initialize: function(options){
-    console.log(options);
     this.userCurrencyCode = options.cCode;
     this.userBTCAve = options.btAve;
     this.serverUrl = options.serverUrl;
