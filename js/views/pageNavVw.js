@@ -86,6 +86,9 @@ module.exports = Backbone.View.extend({
       this.model.fetch();
     });
 
+    this.notifcationSound = document.createElement('audio');
+    this.notifcationSound.setAttribute('src', './audio/notification.mp3');
+
     this.render();
   },
 
@@ -227,6 +230,11 @@ module.exports = Backbone.View.extend({
       self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
         self.handleSocketMessage(response);
       });
+
+      if(self.showDiscoverCallout) {
+        // display discover callout
+        self.$el.find('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+      }
     });
     return this;
   },
@@ -656,15 +664,12 @@ module.exports = Backbone.View.extend({
         }
     this.$el.find('.js-homeModal').hide();
 
-    // display discover callout
-    this.$el.find('.js-OnboardingIntroDiscoverHolder').removeClass('hide'); // Josh can you help with this? After onboarding, this shows for a split second, but then seems to disappear immediately afterwards possibly because the page is reloading.
+    this.showDiscoverCallout = true;
     
     new Notification(window.polyglot.t('WelcomeToYourPage'));
 
     // play notification sound
-    var notifcationSound = document.createElement('audio');
-    notifcationSound.setAttribute('src', './audio/notification.mp3');
-    notifcationSound.play();
+    this.notifcationSound.play();
 
   },
 
