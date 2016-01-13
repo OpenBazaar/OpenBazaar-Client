@@ -28,7 +28,8 @@ module.exports = Backbone.View.extend({
 
   openOrderModal: function(){
     "use strict";
-    window.obEventBus.trigger("openOrderModal", this.model.get('order_id'));
+    console.log(this.model.get('status'))
+    window.obEventBus.trigger("openOrderModal", {'orderID': this.model.get('order_id'), 'status': this.model.get('status')});
   },
 
   close: function(){

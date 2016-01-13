@@ -104,6 +104,7 @@ module.exports = window.Backbone.Model.extend({
     }
 
     response.serverUrl = this.serverUrl;
+    response.status = this.status;
 
     var convertTotal = function(){
       if(self.userCurrencyCode != "BTC"){
@@ -176,6 +177,7 @@ module.exports = window.Backbone.Model.extend({
     this.userCurrencyCode = options.cCode;
     this.userBTCAve = options.btAve;
     this.serverUrl = options.serverUrl;
+    this.status = options.status;
     this.countries = new countriesMd();
     this.countryArray = this.countries.get('countries');
   }

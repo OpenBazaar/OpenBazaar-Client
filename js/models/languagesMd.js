@@ -215,9 +215,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary",
         Funds: "Funds",
         Discussion: "Discussion",
-        Quantity: "Quantity",
-        ShippingTo: "Shipping To",
-        ModeratedBy: "Moderated by",
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -239,7 +240,26 @@ module.exports = Backbone.Model.extend({
           OrderTotal: "Order Total",
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
-          ConfirmOrder: "Confirm Order"
+          ConfirmOrder: "Confirm Order",
+          ReceivingAddress: "Receiving Address",
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
+          Shipper: "Item Shipped By",
+          ShipperPlaceholder: "Name of the company shipping the item",
+          TrackingNumber: "Tracking Number",
+          TrackingNumberPlaceholder: "Tracking number of item",
+          EstimatedDelivery: "Estimated Delivery",
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered",
+          URL: "URL",
+          URLPlaceholder: "Link to download, schedule, or more information",
+          Password: "Password",
+          PasswordPlaceholder: "Password required for link, if any",
+          DirectTransaction: "Direct transaction",
+          ModeratedTransaction: "Moderated transaction",
+          seller: "seller",
+          buyer: "buyer",
+          transferReceipt: "transferReceipt",
+          copyTxid: "copy tx ID",
+          Close: "Close"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -543,6 +563,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -872,6 +896,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1204,6 +1232,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1535,6 +1567,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1865,6 +1901,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2194,6 +2234,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2521,6 +2565,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2852,6 +2900,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3182,6 +3234,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3512,6 +3568,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3843,6 +3903,10 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
         Discussion: "Discussion", // not translated
+        Quantity: "Quantity", //not translated
+        ShippingTo: "Shipping To", //not translated
+        ModeratedBy: "Moderated by", //not translated
+        Submit: "Submit", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated

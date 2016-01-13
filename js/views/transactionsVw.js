@@ -19,8 +19,7 @@ module.exports = Backbone.View.extend({
     'click .js-purchasesTab': 'tabHandler',
     'click .js-salesTab': 'tabHandler',
     'click .js-casesTab': 'tabHandler',
-    'change .js-transactionFilter': 'transactionFilter',
-    'click .js-transactionsConfirmOrder': 'confirmOrder'
+    'change .js-transactionFilter': 'transactionFilter'
   },
 
   initialize: function(options){
@@ -163,8 +162,6 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.salesCol.each(function(model, i){
       model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-      model.set('isSales', true);
-      console.log(model);
       var orderShort = new orderShortVw({
         model: model
       });
@@ -179,10 +176,11 @@ module.exports = Backbone.View.extend({
 
   },
 
-  openOrderModal: function(orderID){
+  openOrderModal: function(options){
     "use strict";
     var orderModalView = new transactionModalVw({
-      orderID: orderID,
+      orderID: options.orderID,
+      status: options.status,
       serverUrl: this.serverUrl,
       parentEl: this.$el.find('.js-transactionModalHolder'),
       countriesArray: this.countriesArray,
@@ -191,37 +189,6 @@ module.exports = Backbone.View.extend({
       state: this.state,
       modalTab: this.modalTab
     });
-  },
-
-  confirmOrder: function(e){
-    "use strict";
-    var orderId = $(e.target).data("id");
-    $.ajax({
-      type: "POST",
-      url: this.serverUrl + "confirm_order",
-      data: $.param({
-        'order_id': orderId,
-        'shipper': "foo",
-        'tracking_number': "foo",
-        'est_delivery': "foo",
-        'password': "foo"
-      }),
-      contentType: false,
-      processData: false,
-      dataType: 'json',
-      success: function(data){
-        if(data.success == true){
-          console.log(data);
-        } else {
-          showErrorModal(window.polyglot.t('errorMessages.saveError'));
-        }
-      },
-      error: function (jqXHR, status, errorThrown) {
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      }
-    })
   },
 
   close: function(){
