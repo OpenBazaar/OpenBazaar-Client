@@ -215,7 +215,7 @@ form {
   top: 50px;
   width:230px;
   background-color: #252525;
-  border-left: solid 1px #333333;
+  border-left: 0;
   height: calc(100% - 50px);
   z-index: 2;
   transition: right 0.5s ease;
@@ -903,6 +903,15 @@ label.fieldItem {
   left: 30px;
   position: absolute;
   z-index: 3;
+}
+
+#addressBar{
+  height: 32px;
+}
+
+#addressBar::-webkit-input-placeholder {
+  color: #000;
+  font-size: 12px;
 }
 
 .smPageHeader {

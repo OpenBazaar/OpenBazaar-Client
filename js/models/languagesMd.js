@@ -266,7 +266,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "All"
         },
         nav: {
-          searchPlaceholder: "Enter handle or search",
+          searchPlaceholder: "Type a keyword, handle or GUID...",
           myPage: "My Page",
           customizePage:"Customize Page",
           sellItem:"New",
