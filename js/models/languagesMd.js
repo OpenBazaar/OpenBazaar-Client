@@ -1975,11 +1975,11 @@ module.exports = Backbone.Model.extend({
         IAgree: "Согласен",
         Back: "Назад",
         EnterMessage: "Ввести сообщение...",
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Reload: "Обновить",
+        You: "Вы",
         Skip: "Пропустить",
         Done: "Готово",
-        Navigation: "Navigation", //notTranslated
+        Navigation: "Навигация",
         Cancel: "Отмена",
         Yes: "Да",
         No: "Нет",
@@ -2004,7 +2004,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Нет объявлений", //notTranslated
         CoverPhoto: "Обложка",
         AboutEmpty: "Описание не заполнено...",
         Followers: "Читатели",
@@ -2094,14 +2094,14 @@ module.exports = Backbone.Model.extend({
         Type: "Тип",
         Condition: "Состояние",
         NSFW: "18+ (для взрослых)",
-        Select: "Select", //not translated
-        Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
+        Select: "Выбор", //not translated
+        Social: "Социальный", //not translated
+        Theme: "Тема", //not translated
+        Listing: "Объявление", //not translated
+        Listings: "Объявления", //not translated
+        Pages: "Страницы", //not translated
+        Page: "Страница", //not translated
+        Language: "Язык", //not translated
         Reset: "Сброс", //not translated
         Local: "Местный",
         Domestic: "Внутри страны",
@@ -2148,50 +2148,50 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Сохранить аватар",
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
-        Loading: "Loading...", // not translated
+        Loading: "Загрузка...", // not translated
         Purchases:"Покупки",
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
+        Sales: "Продажи", // not translated
+        Cases: "Кейсы", // not translated
         Enter: "Enter", //notTranslated
-        Discover: "Discover", // not translated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        AllItems: "All Items", // not translated
-        FreeShipping: "Free Shipping", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
+        Discover: "Обзор", // not translated
+        Blocked: "Заблокированно", // not translated
+        Advanced: "Дополнительно", // not translated
+        General: "Общий", // not translated
+        AllItems: "Все инструменты", // not translated
+        FreeShipping: "Бесплатная доставка", // not translated
+        DomesticShippingPrice: "Бесплатная доставка внутри страны", // not translated
+        InternationalShippingPrice: "Международные цены доставки", // not translated
+        MinimumIs: "Минимум", // not translated
+        Visibility: "Видимость", // not translated
+        Title: "Название", // not translated
+        DigitalItem: "Цифровой товар", // not translated
+        PhysicalItem: "Физический товар", // not translated
+        DomesticShippingTime: "Внутреннее время доставки", // not translated
+        InternationalShippingTime: "Международное время доставки", // not translated
+        DisplayNSFWcontent: "Отображать NSFW контент?", // not translated
+        Basic: "Базовый", // not translated
+        Content: "Контент", // not translated
+        StandardThemes: "Стандартные темы", // not translated
+        NoPhotosAdded: "Не добавлено фотографий", // not translated
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
+          SoldBy: "Продано", // not translated
+          PurchasedBy: "Куплено", // not translated
+          searchByOrder: "Искать по номеру заказа", // not translated
+          sortByStatusAll: "Все", // not translated
+          sortByStatus0: "Купленные", // not translated
+          sortByStatus1: "Оплачено (ожидание средств)", // not translated
+          sortByStatus2: "Подтверждено/Доставлено", // not translated
+          sortByStatus3: "Завершено (средства освобождены)", // not translated
+          sortByStatus4: "Оспорено", // not translated
           OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderDate: "Дата ордера", // not translated
+          OrderStatus: "Статус ордера", // not translated
+          OrderStatus0: "Куплено (не оплачен)", // not translated
+          OrderStatus1: "Оплачено (ожидание средств)", // not translated
+          OrderStatus2: "Подтверждено/выслано", // not translated
+          OrderStatus3: "Завершено (средства освобождены)", // not translated
+          OrderStatus4: "Оспорено", // not translated
+          OrderTotal: "Всего заказов" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -2204,12 +2204,12 @@ module.exports = Backbone.Model.extend({
           socketError: "URL для WebSocket недоступен. Подключаемся к адресу по умолчанию ws://localhost:18466",
           contractError: "Этот товар недоступен для продажи",
           sellerError: "Сервер продавца отключил эту возможность",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться " //not translated
         },
         aboutSection: {
-          about: "", //notTranslated
+          about: "о нас", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
-          support: "", //notTranslated
+          support: "поддержка", //notTranslated
           licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
         },
         saveMessages: {
@@ -2240,8 +2240,8 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Конфигурация OpenBazaar",
-          Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          Introduction: "Ознакомление", //notTranslated
+          IntroductionBody: "Представление", //notTranslated
           Theme: "Выберите оформление для вашей страницы",
           chooseLanguage: "Выберите ваш язык",
           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиков",
@@ -2259,7 +2259,7 @@ module.exports = Backbone.Model.extend({
           yourDetails: "Профильная информация",
           yourDescription: "Описание", //notTranslated
           handle: "Логин",
-          chooseHandle: "Choose a handle", // not translated
+          chooseHandle: "Выберите логин", // not translated
           knownAs: "Сейчас ваше имя:",
           wouldYou: "Вы желаете зарегистрировать простой логин?",
           registerNew: "Зарегистрировать новый",
@@ -2267,18 +2267,18 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Подключить существующий",
           avatar: "Поставить аватарку",
           chooseAvatar: "Выбрать аватарку",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
-          Finished: "Finished" //notTranslated
+          discoverCallOut: "Найти объявления и страницы на OpenBazaar", //notTranslated
+          Finished: "Завершено" //notTranslated
         },
         buyFlow: {
-          DirectPayment: "Direct Payment", //notTranslated
-          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
+          DirectPayment: "Оплатить напрямую", //notTranslated
+          SendDirectlyTo: "Отправка прямого платежа %{handle}", //notTranslated
           MustAddAddress: "Вы должны указать адрес для доставки",
           VendorShipsTo: "Этот производитель отправляет в следующие страны",
           DoesNotShipHere: "Выбранный производитель не производит доставку в указанный регион",
           Send: "Отправить",
           BTCto: "BTC to",
-          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
+          SendBTCtoAddress: "Отправить %{amount} BTC", //notTranslated
           OpenAddress: "Открывать адрес в кошельке по-умолчанию",
           CopyAddress: "Скопировать адрес оплаты в буфер обмена",
           RefreshPayment: "Обновить статус платежа",
@@ -2286,12 +2286,12 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Ожидаемое время обработки вашего заказа составляет",
           summaryMsg3: "Чтобы проверить статус вашего заказа, загляните в",
           purchasesPage: "интерфейс покупок", //notTranslated
-          returnAddress: "Return Address", //notTranslated
-          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
-          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
-          paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          returnAddress: "адрес возврата", //notTranslated
+          moderatorPaymentDisclaimer: "Применяется только в случаях если транзакция имеет статус спора.", //notTranslated
+          directPaymentDisclaimer: "Будьте осторожны при отправке средств напрямую, средства невозвратимы", //notTranslated
+          directPaymentTo: "Прямой платёж", //notTranslated
+          paymentSent: "Платёж отправлен!", //notTranslated
+          total: "Всего" //notTranslated
         }
       },
       {
