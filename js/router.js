@@ -33,7 +33,7 @@ module.exports = Backbone.Router.extend({
     "customizePage": "customizePage",
     "sellItem": "sellItem",
     "transactions": "transactions",
-    "transactions/:state": "transactions",
+    "transactions/:state(/:modalTab)": "transactions",
     "notifications": "notifications",
     "settings": "settings",
     "settings/:state": "settings",
@@ -122,7 +122,7 @@ module.exports = Backbone.Router.extend({
     }),"userPage");
   },
 
-  transactions: function(state){
+  transactions: function(state, modalTab){
     "use strict";
     this.cleanup();
     this.newView(new transactionsView({
@@ -130,6 +130,7 @@ module.exports = Backbone.Router.extend({
       userProfile: this.userProfile,
       socketView: this.socketView,
       state: state,
+      modalTab: modalTab
     }),"userPage");
   },
 

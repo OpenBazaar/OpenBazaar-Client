@@ -12,7 +12,11 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-transactionModal': 'blockClicks',
-    'click .js-closeModal': 'closeModal'
+    'click .js-closeModal': 'closeModal',
+    'click .js-summaryTab': 'clickSummaryTab',
+    'click .js-shippingTab': 'clickShippingTab',
+    'click .js-fundsTab': 'clickFundsTab',
+    'click .js-discussionTab': 'clickDiscussionTab'
   },
 
   initialize: function (options) {
@@ -25,6 +29,8 @@ module.exports = Backbone.View.extend({
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
+    this.pageState = options.state //state of the parent view
+    this.tabState = options.modalTab //active tab
 
     this.model = new orderModel({cCode: this.cCode, btAve: this.btAve, serverUrl: this.serverUrl});
     this.model.urlRoot = options.serverUrl + "get_order";
@@ -46,7 +52,44 @@ module.exports = Backbone.View.extend({
       self.parentEl.html(self.$el);
       self.$el.html(loadedTemplate(model));
       self.$el.parent().fadeIn(300);
+      self.setState(self.tabState);
     });
+  },
+
+  setState: function(state){
+    "use strict";
+    if(!state){
+      state = "summary";
+    }
+    this.$el.find('.js-summary, .js-shipping, .js-funds, .js-discussion').addClass('hide');
+    this.$el.find('.js-tab').removeClass('active');
+    this.$el.find('.js-' + state).removeClass('hide');
+    this.$el.find('.js-' + state + 'Tab').addClass('active');
+
+    //add action to history
+    Backbone.history.navigate("#transactions/" + this.pageState + "/" + state);
+
+    this.state = state;
+  },
+
+  clickSummaryTab: function(){
+    "use strict";
+    this.setState("summary");
+  },
+
+  clickShippingTab: function(){
+    "use strict";
+    this.setState("shipping");
+  },
+
+  clickFundsTab: function(){
+    "use strict";
+    this.setState("funds");
+  },
+
+  clickDiscussionTab: function(){
+    "use strict";
+    this.setState("discussion");
   },
 
   blockClicks: function(e) {

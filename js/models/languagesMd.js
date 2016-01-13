@@ -236,7 +236,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped",
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "Disputed",
-          OrderTotal: "Order Total"
+          OrderTotal: "Order Total",
+          PaymentProtection: "Payment Protection",
+          ShipTo: "Ship To",
+          ConfirmOrder: "Confirm Order"
         },
         errorMessages: {
           saveError: "Data could not be saved.",

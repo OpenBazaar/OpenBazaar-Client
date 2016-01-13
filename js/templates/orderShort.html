@@ -31,6 +31,13 @@
               <%= polyglot.t('transactions.PurchasedBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.buyer %>" title="<%- ob.buyer %>"><%- ob.buyer %></a>
             <% } %>
           </div>
+          <% if(ob.isSales && ob.status == 1){ %>
+          <div class="marginLeft15 marginRight15 rowTop10">
+            <div class="btn btn-txt pad20 custCol-secondary js-transactionsConfirmOrder" data-id="<%- ob.order_id %>">
+              <%= polyglot.t('transactions.ConfirmOrder') %>
+            </div>
+          </div>
+          <% } %>
         </div>
 
         <div style="width: 300px;">

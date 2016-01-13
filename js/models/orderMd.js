@@ -121,25 +121,35 @@ module.exports = window.Backbone.Model.extend({
 
     var convertShipping = function(btAve){
       if (response.buyer_order.order.shipping.country == response.vendor_offer.listing.shipping.shipping_origin) {
-        convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.domestic,
-          btAve,
-          response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
-          self.userCurrencyCode,
-          function (price, priceBTC) {
-            response.displayShippingPrice = price;
-            response.displayShippingPriceBTC = priceBTC;
-            convertTotal();
-          });
+        response.shippingType = "Domestic Shipping";
+        if(response.vendor_offer.listing.shipping.flat_fee.fiat.price.domestic) {
+          convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.domestic,
+            btAve,
+            response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
+            self.userCurrencyCode,
+            function (price, priceBTC) {
+              response.displayShippingPrice = price;
+              response.displayShippingPriceBTC = priceBTC;
+              convertTotal();
+            });
+        } else {
+          convertTotal();
+        }
       } else {
-        convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.international,
-          response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
-          btAve,
-          self.userCurrencyCode,
-          function (price, priceBTC) {
-            response.displayShippingPrice = price;
-            response.displayShippingPriceBTC = priceBTC;
-            convertTotal();
-          });
+        response.shippingType = "International Shipping";
+        if(response.vendor_offer.listing.shipping.flat_fee.fiat.price.international) {
+          convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.international,
+            response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
+            btAve,
+            self.userCurrencyCode,
+            function (price, priceBTC) {
+              response.displayShippingPrice = price;
+              response.displayShippingPriceBTC = priceBTC;
+              convertTotal();
+            });
+        } else {
+          convertTotal();
+        }
       }
     };
 

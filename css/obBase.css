@@ -1028,6 +1028,10 @@ h5 {
   overflow: hidden;
 }
 
+.noWrap {
+  white-space: nowrap;
+}
+
 .clamp2 {
   /* adds an ellipses to the end of wrapped text after 2 lines */
   overflow: hidden;

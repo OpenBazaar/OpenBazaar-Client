@@ -1,5 +1,5 @@
 <!-- modal container created by view-->
-<div class="modal-child modal-childMain">
+<div class="modal-child modal-childMain custCol-primary">
   <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModal">
     <h2 class="ion-android-close"></h2>
   </div>
@@ -11,15 +11,17 @@
   <% } %>></div>
   <div class="bar navBar barFlush custCol-secondary clearFix">
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-summaryTab active" data-tab="summary"><%= polyglot.t('Summary') %></a>
+    <% if(ob.buyer_order.order.shipping) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-shippingTab" data-tab="shipping"><%= polyglot.t('Shipping') %></a>
+    <% } %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-fundsTab" data-tab="funds"><%= polyglot.t('Funds') %></a>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-discussionTab" data-tab="discussion"><%= polyglot.t('Discussion') %></a>
   </div>
 
-  <div class="js-transactionModalSummary">
+  <div class="js-summary">
     <div class="flexRow custCol-border borderBottom">
-      <div class="rowItem padding2015">
-        <div class="flexCol-8">
+      <div class="flexRow rowItem padding2015">
+        <div class="flexCol-7">
           <div class="pad10left txt-unleaded">
             <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
               <strong><%- ob.vendor_offer.listing.item.title %></strong>
@@ -34,10 +36,14 @@
             </div>
           </div>
         </div>
-        <div class="flexCol-4">
+        <div class="flexCol-5">
           <div class="pad10left txt-unleaded">
-            <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
-              <strong><%- ob.displayPrice %></strong>
+            <div class="marginTop12 marginBottom4 fontSize13">
+              <% if(ob.displayUnitPrice){ %>
+              <strong><%- ob.displayUnitPrice %> <span class="noWrap">(<%- ob.displayUnitPriceBTC.toFixed(4) %> BTC)</span></strong>
+              <% } else if(ob.displayUnitPriceBTC){ %>
+              <strong><%- ob.displayUnitPriceBTC.toFixed(6) %> BTC</strong>
+              <% } %>
             </div>
             <div class="noOverflow fontSize13 txt-fade">
               <%= polyglot.t('Quantity') %>: <%- ob.buyer_order.order.quantity %>
@@ -47,18 +53,24 @@
       </div>
     </div>
 
-    <!-- only display shipping if physical item -->
-    <% if( ob.vendor_offer.listing.metadata.category === "physical good" ) { %>
+    <!-- only display shipping if shipping data exists -->
+    <% if(ob.buyer_order.order.shipping) { %>
     <div class="flexRow custCol-border borderBottom">
-      <div class="rowItem padding2015">
-        <div class="flexCol-8">
+      <div class="flexRow rowItem padding2015">
+        <div class="flexCol-7">
           <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-            <strong><%= polyglot.t('ShippingTo') %>: <%- ob.displayCountry %></strong>
+            <strong><%- ob.shippingType %></strong>
           </div>
         </div>
-        <div class="flexCol-4">
+        <div class="flexCol-5">
           <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-            <strong><%- ob.displayShippingPrice %></strong>
+            <% if(ob.displayShippingPrice){ %>
+            <strong><%- ob.displayShippingPrice %> <span class="noWrap">(<%- ob.displayShippingPriceBTC %> BTC)</span></strong>
+            <% } else if(ob.displayShippingPriceBTC){ %>
+            <strong><%- ob.displayShippingPriceBTC %> BTC</strong>
+            <% } else { %>
+            <strong><%= polyglot.t('Free') %></strong>
+            <% } %>
           </div>
         </div>
       </div>
@@ -68,27 +80,76 @@
     <!-- only display moderator if one is assigned -->
     <% if( ob.displayModerator) { %>
     <div class="flexRow custCol-border borderBottom">
-      <div class="rowItem padding2015">
-        <div class="thumbnail thumbnail-large-slim pull-left"
-          <% console.log(ob.displayModerator); if(ob.displayModerator.avatar) { %>
+      <div class="flexRow rowItem padding2015">
+        <div class="thumbnail thumbnail-large-slim"
+          <% if(ob.displayModerator.avatar) { %>
           style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultItem.png);">
           <% } else { %>
           style="background-image: url(imgs/defaultItem.png);">
           <% } %>
         </div>
 
-        <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 pull-left">
-          <strong><%= polyglot.t('ModeratedBy') %>: <%- ob.displayModerator.name %></strong>
-        </div>
+        <div>
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%= polyglot.t('transactions.PaymentProtection') %></strong>
+          </div>
 
-        <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-          <strong><%- ob.displayShippingPrice %></strong>
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <%= polyglot.t('ModeratedBy') %>: <%- ob.displayModerator.name %>
+          </div>
         </div>
       </div>
     </div>
     <% } %>
 
+    <div class="flexRow rowItem padding2015 width100 positionBottom custCol-secondary">
+      <div class="flexCol-7">
+        <%= polyglot.t('transactions.OrderTotal') %>
+      </div>
+      <div class="flexCol-5">
+        <% if(ob.displayTotalPrice){ %>
+        <strong><%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+        <% } else if(ob.buyer_order.order.payment.amount){ %>
+        <strong><%- ob.buyer_order.order.payment.amount %> BTC</strong>
+        <% } else { %>
+        <strong><%= polyglot.t('Free') %></strong>
+        <% } %>
+      </div>
+    </div>
   </div>
+
+  <% if(ob.buyer_order.order.shipping) { %>
+  <div class="js-shipping hide">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding2015">
+        <div class="pad10left txt-unleaded">
+          <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+            <strong><%= polyglot.t('transactions.ShipTo') %></strong>
+          </div>
+          <div class="noOverflow fontSize13 txt-fade">
+            <%- ob.buyer_order.order.shipping.ship_to %>, <%- ob.buyer_order.order.shipping.address %> <%- ob.buyer_order.order.shipping.city %>, <%- ob.buyer_order.order.shipping.state %> <%- ob.buyer_order.order.shipping.postal_code %> <%- ob.displayCountry %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+  <div class="js-funds hide">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding2015">
+        <div class="pad10left txt-unleaded">
+          <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+            <% if( ob.displayModerator) { %>
+            <% } %>
+          </div>
+          <div class="noOverflow fontSize13 txt-fade">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 </div>
 <!-- modal container created by view-->
