@@ -18,7 +18,10 @@ module.exports = Backbone.View.extend({
     'click .js-chatOpen': 'slideChatOut',
     'click .js-closeChat': 'closeChat',
     'click .js-closeConversation': 'closeConversation',
+    'click .js-conversationSettings': 'conversationSettings',
     'click .js-chatSearch': 'chatSearch',
+    'click .chatConversationContent': 'closeConversationSettings',
+    'click .chatConversationMessage': 'closeConversationSettings',
     'keydown .js-chatMessage': 'checkShift',
     'keyup .js-chatMessage': 'sendChat',
     'click .js-username': 'usernameClick',
@@ -159,6 +162,7 @@ module.exports = Backbone.View.extend({
     $('#inputConversationMessage').focus();
 
     this.updateChat(guid);
+    this.closeConversationSettings();
 
     $('.chatHead').removeClass('chatHeadSelected');
     $('#chatHead_' + guid).parent().addClass('chatHeadSelected');
@@ -290,11 +294,23 @@ module.exports = Backbone.View.extend({
     $(this.$el).find('.chatHead').removeClass('chatHeadSelected');
     $(this.$el).find('.chatSearch').removeClass('textOpacity50');
 
-
     // let's clear the form on close
     $('#chatConversation').trigger('reset');
     $('#inputConversationKey').val('');
     $('#inputConversationRecipient').val('');
+  },
+
+  closeConversationSettings: function() {
+    $(this.$el).find('.chatConversationMenu').addClass('hide');
+  },
+  
+  conversationSettings: function() {
+    var menu = $(this.$el).find('.chatConversationMenu');
+    if(menu.hasClass('hide')){
+      menu.removeClass('hide');
+    }else{
+      menu.addClass('hide');
+    }
   },
 
   chatSearch: function() {

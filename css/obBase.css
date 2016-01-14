@@ -1774,7 +1774,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationLabel {
-  width: calc(100% - 100px);
+  width: calc(100% - 115px);
   margin-right:5px;
   float:left;
   text-overflow: ellipsis;
@@ -1783,7 +1783,7 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn-closeConversation {
   height: 38px;
-  width: 38px;
+  width: 30px;
   text-align: center;
   float: right;
 }
@@ -1804,7 +1804,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationContent {
-  height: calc(100% - 134px);
+  height: calc(100% - 138px);
   border: 1px solid #565656;
   border-top: 0;
   overflow: auto;
@@ -1851,13 +1851,30 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationAvatar {
-    margin-top: -3px;
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
     margin-right: 6px;
-    margin-left: -2px;
+    margin-left: -10px;
+}
+
+.chatConversationAvatar:hover {
+  -webkit-box-shadow: inset 0px 0px 15px 0px rgb(50, 50, 50);
+}
+
+.chatConversationMenu {
+  width: 100px;
+  height: 35px;
+  border: solid 1px #565656;
+  border-top: 0;
+  padding: 10px;
+  position: absolute;
+  top: 45px;
+  left: 2px;
+  background: #252525;
+  z-index: 5;
 }
 
 .chatConversation textarea, .chatConversation input {
