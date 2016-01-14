@@ -123,8 +123,9 @@ module.exports = Backbone.View.extend({
     'click .js-aboutTab': 'aboutClick',
     'click .js-followersTab': 'followersClick',
     'click .js-followingTab': 'followingClick',
-    'click .js-storeTab': 'storeClick',
+    'click .js-storeTab': 'storeTabClick',
     'click .js-returnToStore': 'storeClick',
+    'click .js-returnToStoreCategory': 'storeCatClick',
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
     'click .js-editItem': 'editItem',
@@ -155,6 +156,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function (options) {
     "use strict";
+
     var self = this;
     this.options = options || {};
     /* expected options are:
@@ -450,6 +452,19 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  setCategory: function(category) {
+    var $select;
+
+    if (category) {
+      $select = this.$el.find('.js-categories');
+
+      if ($select.val() !== category && $select.find('option[value="' + category + '"]').length) {
+        $select.val(category);
+        this.categoryChanged();
+      }
+    }
+  },
+
   categoryChanged: function() {
     this.renderItems(this.listings.get('listings'));
   },
@@ -719,14 +734,25 @@ module.exports = Backbone.View.extend({
 
   storeClick: function(e){
     "use strict";
-    if (this.$el.find('.js-categories').val() != "all"){
-        $(".js-categories option[value='all']").attr("selected", "selected");
-        this.categoryChanged();
-    }
+
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
     // $('#inputStore').focus();
+  },
+
+  storeTabClick: function(e) {
+    if (this.$el.find('.js-categories').val() != "all"){
+        $(".js-categories option[value='all']").attr("selected", "selected");
+        this.categoryChanged();
+    }
+
+    this.storeClick(e);    
+  },
+
+  storeCatClick: function(e) {
+    this.setCategory($(e.target).text());
+    this.storeClick(e);
   },
 
   tabClick: function(activeTab, showContent){
