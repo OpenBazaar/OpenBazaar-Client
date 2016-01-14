@@ -572,6 +572,8 @@ module.exports = Backbone.View.extend({
       category: this.$el.find('.js-categories').val()
     });
     this.subViews.push(this.itemList);
+
+    new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
   },
 
   renderFollowers: function (model) {
