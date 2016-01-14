@@ -530,9 +530,6 @@ module.exports = Backbone.View.extend({
         if(self.options.ownPage === false){
           self.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: self.userID})));
         }
-        if(followerArray){
-          $ ('.js-userFollowerCount').html(followerArray.length);
-        }
       },
       error: function(model, response){
         showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
@@ -594,6 +591,8 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
+
+    this.$('.js-userFollowerCount').html(model.length);
 
     if (model.length) {
       new window.List('searchFollowers', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
