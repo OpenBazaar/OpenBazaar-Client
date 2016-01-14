@@ -123,8 +123,9 @@ module.exports = Backbone.View.extend({
     'click .js-aboutTab': 'aboutClick',
     'click .js-followersTab': 'followersClick',
     'click .js-followingTab': 'followingClick',
-    'click .js-storeTab': 'storeClick',
+    'click .js-storeTab': 'storeTabClick',
     'click .js-returnToStore': 'storeClick',
+    'click .js-returnToStoreCategory': 'storeCatClick',
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
     'click .js-editItem': 'editItem',
@@ -155,6 +156,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function (options) {
     "use strict";
+
     var self = this;
     this.options = options || {};
     /* expected options are:
@@ -450,6 +452,19 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  setCategory: function(category) {
+    var $select;
+
+    if (category) {
+      $select = this.$el.find('.js-categories');
+
+      if ($select.val() !== category && $select.find('option[value="' + category + '"]').length) {
+        $select.val(category);
+        this.categoryChanged();
+      }
+    }
+  },
+
   categoryChanged: function() {
     this.renderItems(this.listings.get('listings'));
   },
@@ -530,9 +545,6 @@ module.exports = Backbone.View.extend({
         if(self.options.ownPage === false){
           self.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: self.userID})));
         }
-        if(followerArray){
-          $ ('.js-userFollowerCount').html(followerArray.length);
-        }
       },
       error: function(model, response){
         showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
@@ -542,8 +554,10 @@ module.exports = Backbone.View.extend({
 
   renderItems: function (model) {
     "use strict";
+    
     var self = this;
     var select = this.$el.find('.js-categories');
+    model = model || [];
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.serverUrl = self.options.userModel.get('serverUrl');
@@ -572,10 +586,16 @@ module.exports = Backbone.View.extend({
       category: this.$el.find('.js-categories').val()
     });
     this.subViews.push(this.itemList);
+
+    if (model.length) {
+      new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
+    }
   },
 
   renderFollowers: function (model) {
     "use strict";
+
+    model = model || [];
     this.followerList = new personListView({
       model: model,
       el: '.js-list1',
@@ -586,10 +606,18 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
+
+    this.$('.js-userFollowerCount').html(model.length);
+
+    if (model.length) {
+      new window.List('searchFollowers', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
+    }
   },
 
   renderFollowing: function (model) {
     "use strict";
+
+    model = model || [];
     this.followingList = new personListView({
       model: model,
       followed: true,
@@ -602,8 +630,10 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.followingList);
     
-    if(this.following.attributes.following){
-      $('.js-userFollowingCount').html(this.following.attributes.following.length);
+    this.$('.js-userFollowingCount').html(model.length);
+      
+    if (model.length) {
+      new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
     }
   },
 
@@ -719,14 +749,25 @@ module.exports = Backbone.View.extend({
 
   storeClick: function(e){
     "use strict";
-    if (this.$el.find('.js-categories').val() != "all"){
-        $(".js-categories option[value='all']").attr("selected", "selected");
-        this.categoryChanged();
-    }
+
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
     // $('#inputStore').focus();
+  },
+
+  storeTabClick: function(e) {
+    if (this.$el.find('.js-categories').val() != "all"){
+        $(".js-categories option[value='all']").attr("selected", "selected");
+        this.categoryChanged();
+    }
+
+    this.storeClick(e);    
+  },
+
+  storeCatClick: function(e) {
+    this.setCategory($(e.target).text());
+    this.storeClick(e);
   },
 
   tabClick: function(activeTab, showContent){
