@@ -572,6 +572,8 @@ module.exports = Backbone.View.extend({
       category: this.$el.find('.js-categories').val()
     });
     this.subViews.push(this.itemList);
+
+    new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
   },
 
   renderFollowers: function (model) {
@@ -586,6 +588,8 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
+
+    new window.List('searchFollowers', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
   },
 
   renderFollowing: function (model) {
@@ -605,6 +609,8 @@ module.exports = Backbone.View.extend({
     if(this.following.attributes.following){
       $('.js-userFollowingCount').html(this.following.attributes.following.length);
     }
+
+    new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
   },
 
   renderItem: function(hash){

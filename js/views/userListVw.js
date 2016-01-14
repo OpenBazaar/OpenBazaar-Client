@@ -26,11 +26,10 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    this.listWrapper = $('<div class="flexRow flexExpand border0 custCol-border"></div>');
+    this.listWrapper = $('<div class="list flexRow flexExpand border0 custCol-border"></div>');
     if(this.usersShort.models.length > 0)
     {
-      __.each(this.usersShort.models, function (user)
-      {
+      this.usersShort.each(function (user) {
         user.set('avatarURL', self.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
         if(self.options.ownFollowing.indexOf(user.get('guid')) != -1){
           user.set("ownFollowing", true);
