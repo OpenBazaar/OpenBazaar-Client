@@ -409,7 +409,6 @@ form {
   height: 40px; 
   line-height: 38px;
   border-top: solid 1px #327EB8;
-  border-bottom: solid 1px #327EB8;
   border-right: solid 1px #327EB8;
   width: 317px;
   padding: 0;
@@ -434,6 +433,8 @@ form {
   padding: 34px 32px;
   cursor: pointer;
   width: 317px;
+  height: 340px;
+  position: relative;
 }
 
 .userPage-subViews .gridItem,
