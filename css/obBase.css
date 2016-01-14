@@ -400,9 +400,38 @@ form {
   flex-grow: 1;
 }
 
+.gridItemControls {
+  background: #106DA3;
+  position: absolute; 
+  opacity: 0;
+  bottom: 0; 
+  left: 0; 
+  height: 40px; 
+  line-height: 38px;
+  border-top: solid 1px #327EB8;
+  border-bottom: solid 1px #327EB8;
+  border-right: solid 1px #327EB8;
+  width: 317px;
+  padding: 0;
+  box-sizing: border-box;
+  transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.gridItemControls .btn-gridItemControl {
+  text-align: center;
+  padding: 0;
+  opacity: .75;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.gridItemControls .btn-gridItemControl:hover {
+  opacity: 1;
+}
+
 .gridItem {
   box-sizing: border-box;
-  padding: 33px;
+  padding: 34px 32px;
   cursor: pointer;
   width: 317px;
 }
@@ -411,17 +440,37 @@ form {
 .homeView .gridItem {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
-  opacity: .85;
+  opacity: .9;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+  transition: padding-top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
+  box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
+  opacity: 1;
+  padding-top: 20px;
+}
+
+.userPage-subViews .gridItem:hover .gridItemControls,
+.homeView .gridItem:hover .gridItemControls{
   opacity: 1;
 }
 
-.userPage-subViews .gridItem:nth-child(3n),
-.homeView .gridItem:nth-child(3n) {
+.userPage-subViews .gridItem:hover .itemImg,
+.homeView .gridItem:hover .itemImg {
+    box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
+}
+
+.pageGridItems .flexCol-4:nth-child(3n) .gridItem,
+.homeGridItems .flexCol-4:nth-child(3n) .gridItem {
+  border-right: 0;
+}
+
+.pageGridItems .flexCol-4:nth-child(3n) .gridItem .gridItemControls,
+.homeGridItems .flexCol-4:nth-child(3n) .gridItem .gridItemControls {
+  left: 1px;
+  width: 316px;
   border-right: 0;
 }
 

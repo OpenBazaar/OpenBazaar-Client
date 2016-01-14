@@ -19,5 +19,30 @@
       </div>
     </div>
   </div>
-</div>
+  <div class="gridItemControls custCol-border custCol-primary">
+    <div class="table">
+      <div>
+        <div class="btn-gridItemControl borderRight custCol-border js-avatar">
+          <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+          About
+        </div>
 
+        <% if(!ob.micro && !ob.hideFollow){ %>
+          <div class="btn-gridItemControl borderRight custCol-border js-userShortUnfollow <% if(!ob.ownFollowing){ %> hide <% } %>">
+            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Unfollow') %>
+          </div>
+          <div class="btn-gridItemControl borderRight custCol-border js-userShortFollow <% if(ob.ownFollowing){ %> hide <% } %>">
+            <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>            
+            <%= polyglot.t('Follow') %>
+          </div>
+        <% } %>
+
+        <div class="btn-gridItemControl  custCol-border">
+          <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+          Block
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
