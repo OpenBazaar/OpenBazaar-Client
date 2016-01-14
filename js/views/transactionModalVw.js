@@ -70,7 +70,7 @@ module.exports = Backbone.View.extend({
   render: function (model) {
     "use strict";
     var self = this;
-    console.log(self.model.toJSON());
+    console.log(model);
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
@@ -86,7 +86,33 @@ module.exports = Backbone.View.extend({
         }
         require("shell").openExternal(extUrl);
       });
+      if(self.status == 0){
+        self.showPayment();
+      }
+      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+        self.handleSocketMessage(response);
+      });
     });
+  },
+
+  handleSocketMessage: function(response) {
+    "use strict";
+    console.log(response);
+    var data = JSON.parse(response.data);
+    if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
+      this.status = 1;
+      this.getData();
+    }
+  },
+
+  showPayment: function(){
+    "use strict";
+    var totalBTCPrice = 0,
+        payHREF,
+        dataURI;
+    payHREF = "bitcoin:"+ this.model.get('buyer_order').order.payment.address+"?amount="+this.model.get('buyer_order').order.payment.amount+"&message="+this.model.get('vendor_offer').listing.item.title;
+    dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
+    this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
   },
 
   setState: function(state){

@@ -117,9 +117,6 @@ module.exports = window.Backbone.Model.extend({
           currency: self.userCurrencyCode
         }).format(response.buyer_order.order.payment.amount*window.currentBitcoin);
       }
-
-      console.log(response);
-      return response;
     };
 
     var convertShipping = function(btAve){
@@ -173,6 +170,8 @@ module.exports = window.Backbone.Model.extend({
     };
 
     convertUnit(this.userBTCAve);
+
+    return response;
   },
 
   initialize: function(options){

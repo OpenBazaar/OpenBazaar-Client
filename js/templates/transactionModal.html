@@ -9,12 +9,36 @@
     <% } else { %>
     style="background-image: url(imgs/defaultBanner.png);"
     <% } %>>
-      <div class="modal-hero js-transactionSpinner hide background1">
-        <div class="width100 txt-center">
-          <div class="txt-col1 ion-android-sync spinner spinner-slow icon-huge icon-circle-background1 rowTop30 row20"></div>
-          <h3 class="txt-bright"><%= polyglot.t('Loading') %> </h3>
+    <div class="modal-hero js-transactionSpinner hide background1">
+      <div class="width100 txt-center">
+        <div class="txt-col1 ion-android-sync spinner spinner-slow icon-huge icon-circle-background1 rowTop30 row20"></div>
+        <h3 class="txt-bright"><%= polyglot.t('Loading') %> </h3>
+      </div>
+    </div>
+    <% if(ob.status == 0){ %>
+    <div class="modal-hero js-transactionPay background1">
+      <div class="positionTop width100 padding20">
+        <img class="pull-left qrCode js-transactionPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
+        <div class="pull-left rowtop20 pad20Left txt-bright" style="width:255px;">
+          <div class="txt-center row20 textSize16px">
+            <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: ob.buyer_order.order.payment.amount}) %>
+          </div>
+          <div class="txt-center row20">
+            <a class="textSize11px"
+               href="bitcoin:<%- ob.buyer_order.order.payment.address %>?amount=<%- ob.buyer_order.order.payment.amount %>&message=<%- ob.vendor_offer.listing.item.title %>">
+              <%- ob.buyer_order.order.payment.address %>
+            </a>
+          </div>
+          <a class="btn btn-txt btn-wide row10 js-transactionPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+          <a class="btn btn-txt btn-wide row10 js-externalLink"
+             href="bitcoin:<%- ob.buyer_order.order.payment.address %>?amount=<%- ob.buyer_order.order.payment.amount %>&message=<%- ob.vendor_offer.listing.item.title %>">
+            <i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %>
+          </a>
+          <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
         </div>
       </div>
+    </div>
+    <% } %>
   </div>
   <div class="bar navBar barFlush custCol-secondary height55 clearFix">
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-summaryTab active" data-tab="summary"><%= polyglot.t('Summary') %></a>
