@@ -215,10 +215,13 @@ module.exports = Backbone.Model.extend({
         Summary: "Summary",
         Funds: "Funds",
         Discussion: "Discussion",
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
+        Quantity: "Quantity",
+        ShippingTo: "Shipping To",
+        ModeratedBy: "Moderated by",
+        Submit: "Submit",
+        maxLength20: "maximum length 20 characters",
+        maxLength80: "maximum length 80 characters",
+        maxLength200: "maximum length 200 characters",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -255,11 +258,12 @@ module.exports = Backbone.Model.extend({
           PasswordPlaceholder: "Password required for link, if any",
           DirectTransaction: "Direct transaction",
           ModeratedTransaction: "Moderated transaction",
-          seller: "seller",
-          buyer: "buyer",
+          Seller: "Seller",
+          Buyer: "Buyer",
           transferReceipt: "transferReceipt",
           copyTxid: "copy tx ID",
-          Close: "Close"
+          Close: "Close",
+          FundOrder: "Fund Order"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -567,6 +571,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -585,7 +592,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -900,6 +929,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -918,7 +950,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1236,6 +1290,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1254,7 +1311,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confermato/Inviato",
           OrderStatus3: "Completato (fondi rilasciati)",
           OrderStatus4: "Contestato",
-          OrderTotal: "Totale ordine"
+          OrderTotal: "Totale ordine",
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -1571,6 +1650,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1589,7 +1671,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmé/Expédié",
           OrderStatus3: "Terminé (fonds reçus)",
           OrderStatus4: "Contesté",
-          OrderTotal: "Total de la commande"
+          OrderTotal: "Total de la commande",
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -1905,6 +2009,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1923,7 +2030,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -2238,6 +2367,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2256,7 +2388,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -2569,6 +2723,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2587,7 +2744,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -2904,6 +3083,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2922,7 +3104,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -3238,6 +3442,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3256,7 +3463,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -3572,6 +3801,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3590,7 +3822,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -3907,6 +4161,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
+        maxLength20: "maximum length 20 characters", //not translated
+        maxLength80: "maximum length 80 characters", //not translated
+        maxLength200: "maximum length 200 characters", //not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3925,7 +4182,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderTotal: "Order Total", // not translated
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -4251,7 +4530,29 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "確認完了・出荷済",
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "異議・クレーム",
-          OrderTotal: "注文合計"
+          OrderTotal: "注文合計",
+          PaymentProtection: "Payment Protection", // not translated
+          ShipTo: "Ship To",// not translated
+          ConfirmOrder: "Confirm Order",// not translated
+          ReceivingAddress: "Receiving Address", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Shipper: "Item Shipped By", // not translated
+          ShipperPlaceholder: "Name of the company shipping the item", // not translated
+          TrackingNumber: "Tracking Number", // not translated
+          TrackingNumberPlaceholder: "Tracking number of item", // not translated
+          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
+          URL: "URL", // not translated
+          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          Password: "Password", // not translated
+          PasswordPlaceholder: "Password required for link, if any", // not translated
+          DirectTransaction: "Direct transaction", // not translated
+          ModeratedTransaction: "Moderated transaction", // not translated
+          Seller: "Seller", // not translated
+          Buyer: "Buyer", // not translated
+          transferReceipt: "transferReceipt", // not translated
+          copyTxid: "copy tx ID", // not translated
+          Close: "Close" // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",

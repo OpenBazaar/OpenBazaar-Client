@@ -986,6 +986,13 @@ h5 {
   font-size: 15px;
 }
 
+.note {
+  /* use for instructions and incidental text */
+  font-style: italic;
+  font-size: 9px;
+  opacity: 0.75;
+}
+
 [class *= "ion-"]:before {
   font-size: 1.2em;
 }

@@ -35,7 +35,6 @@ module.exports = Backbone.View.extend({
 
     this.options = options;
     this.state = options.state || "purchases";
-    this.modalTab = options.modalTab;
     this.userModel = this.options.userModel;
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
@@ -105,13 +104,6 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  addTabToHistory: function(state){
-    "use strict";
-    //add action to history
-    Backbone.history.navigate("#transactions/" + state);
-    this.options.state = state;
-  },
-
   setTab: function(activeTab, showContent){
     "use strict";
     this.$el.find('.js-tab').removeClass('active');
@@ -124,6 +116,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     $('#content').find('input:visible:first').focus();
+    //add action to history
+    Backbone.history.navigate("#transactions/" + state);
   },
 
   tabHandler: function(e){
@@ -132,7 +126,6 @@ module.exports = Backbone.View.extend({
         tabID = tab.data("tab"),
         showContent = this.$el.find('.js-'+tabID);
 
-    this.addTabToHistory(tabID);
     this.setTab(tab, showContent);
     this.setState(tabID);
   },
@@ -148,6 +141,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.purchasesCol.each(function(model, i){
       model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+      model.set('transactionType', "purchase");
       var orderShort = new orderShortVw({
         model: model
       });
@@ -162,6 +156,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.salesCol.each(function(model, i){
       model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+      model.set('transactionType', "sale");
       var orderShort = new orderShortVw({
         model: model
       });
@@ -187,7 +182,8 @@ module.exports = Backbone.View.extend({
       cCode: this.userModel.get('currency_code'),
       btAve: this.btAve,
       state: this.state,
-      modalTab: this.modalTab
+      bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
+      transactionType: options.transactionType
     });
   },
 

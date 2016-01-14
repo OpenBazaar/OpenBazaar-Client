@@ -5,6 +5,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     orderModel = require('../models/orderMd'),
+    qr = require('qr-encode'),
     clipboard = require('clipboard');
 
 module.exports = Backbone.View.extend({
@@ -22,7 +23,9 @@ module.exports = Backbone.View.extend({
     'click .js-confirmOrder': 'confirmOrder',
     'click .js-copyIncommingTx': 'copyTx',
     'click .js-copyOutgoingTx': 'copyTx',
-    'click .js-closeOrderForm': 'closeOrderForm'
+    'click .js-closeOrderForm': 'closeOrderForm',
+    'click .js-showFundOrder': 'showFundOrder',
+    'blur input': 'validateInput'
   },
 
   initialize: function (options) {
@@ -31,17 +34,31 @@ module.exports = Backbone.View.extend({
 
     this.orderID = options.orderID;
     this.status = options.status;
+    this.transactionType = options.transactionType;
     this.serverUrl = options.serverUrl;
     this.parentEl = options.parentEl;
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
+    this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.pageState = options.state //state of the parent view
     this.tabState = options.modalTab //active tab
     this.lastTab = "summary";
 
-    this.model = new orderModel({cCode: this.cCode, btAve: this.btAve, serverUrl: this.serverUrl, status: this.status});
+    this.model = new orderModel({
+      cCode: this.cCode,
+      btAve: this.btAve,
+      serverUrl: this.serverUrl,
+      status: this.status,
+      transactionType: this.transactionType,
+      bitcoinValidationRegex: this.bitcoinValidationRegex
+    });
     this.model.urlRoot = options.serverUrl + "get_order";
+    this.getData();
+  },
+
+  getData: function(){
+    var self = this;
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
       success: function (model, response, options) {
@@ -82,11 +99,14 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active');
 
-    //add action to history
-    Backbone.history.navigate("#transactions/" + this.pageState + "/" + state);
-
     this.lastTab = this.state;
     this.state = state;
+  },
+
+  validateInput: function(e) {
+    "use strict";
+    e.target.checkValidity();
+    $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   clickSummaryTab: function(){
@@ -121,10 +141,13 @@ module.exports = Backbone.View.extend({
         confirmData = {};
 
     confirmData.id = this.orderID;
+    this.$el.find('.js-transactionSpinner').removeClass('hide');
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
       console.log(data);
-    }, '', confirmData);
+      self.status = 3;
+      self.getData();
+      }, '', confirmData);
 
     },
 

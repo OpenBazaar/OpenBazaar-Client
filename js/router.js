@@ -33,7 +33,7 @@ module.exports = Backbone.Router.extend({
     "customizePage": "customizePage",
     "sellItem": "sellItem",
     "transactions": "transactions",
-    "transactions/:state(/:modalTab)": "transactions",
+    "transactions/:state": "transactions",
     "notifications": "notifications",
     "settings": "settings",
     "settings/:state": "settings",
@@ -129,8 +129,7 @@ module.exports = Backbone.Router.extend({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state,
-      modalTab: modalTab
+      state: state
     }),"userPage");
   },
 
