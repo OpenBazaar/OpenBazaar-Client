@@ -545,9 +545,6 @@ module.exports = Backbone.View.extend({
         if(self.options.ownPage === false){
           self.toggleFollowButtons(Boolean(__.findWhere(followerArray, {guid: self.userID})));
         }
-        if(followerArray){
-          $ ('.js-userFollowerCount').html(followerArray.length);
-        }
       },
       error: function(model, response){
         showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
@@ -557,8 +554,10 @@ module.exports = Backbone.View.extend({
 
   renderItems: function (model) {
     "use strict";
+    
     var self = this;
     var select = this.$el.find('.js-categories');
+    model = model || [];
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.serverUrl = self.options.userModel.get('serverUrl');
@@ -587,10 +586,16 @@ module.exports = Backbone.View.extend({
       category: this.$el.find('.js-categories').val()
     });
     this.subViews.push(this.itemList);
+
+    if (model.length) {
+      new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
+    }
   },
 
   renderFollowers: function (model) {
     "use strict";
+
+    model = model || [];
     this.followerList = new personListView({
       model: model,
       el: '.js-list1',
@@ -601,10 +606,18 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
+
+    this.$('.js-userFollowerCount').html(model.length);
+
+    if (model.length) {
+      new window.List('searchFollowers', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
+    }
   },
 
   renderFollowing: function (model) {
     "use strict";
+
+    model = model || [];
     this.followingList = new personListView({
       model: model,
       followed: true,
@@ -617,8 +630,10 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.followingList);
     
-    if(this.following.attributes.following){
-      $('.js-userFollowingCount').html(this.following.attributes.following.length);
+    this.$('.js-userFollowingCount').html(model.length);
+      
+    if (model.length) {
+      new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
     }
   },
 
