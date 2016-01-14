@@ -616,7 +616,7 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.followingList);
     
-    this.$('.js-userFollowingCount').html(0);
+    this.$('.js-userFollowingCount').html(model.length);
       
     if (model.length) {
       new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
