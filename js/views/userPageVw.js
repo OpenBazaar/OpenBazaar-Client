@@ -574,7 +574,7 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.itemList);
 
-    if (model.length) {
+    if (model && model.length) {
       new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
     }
   },
@@ -593,7 +593,7 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.followerList);
 
-    if (model.length) {
+    if (model && model.length) {
       new window.List('searchFollowers', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
     }
   },
@@ -613,9 +613,9 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.followingList);
     
-    this.$('.js-userFollowingCount').html(model.length);
+    this.$('.js-userFollowingCount').html((model && model.length) || 0);
       
-    if (model.length) {
+    if (model && model.length) {
       new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
     }
   },
