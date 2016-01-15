@@ -106,7 +106,7 @@ module.exports = Backbone.View.extend({
       success: function(data){
         var routingString = '';
         __.each(data, function(tableEntry){
-          routingString += "<table class='row20'>";
+          routingString += "<table class='basicTable row20'>";
           routingString += "<tr><td>NAT Type</td><td>"+tableEntry.nat_type+"</td><tr>";
           routingString += "<tr><td>IP</td><td>"+tableEntry.ip+"</td><tr>";
           routingString += "<tr><td>GUID</td><td>"+tableEntry.guid+"</td><tr>";

@@ -572,12 +572,12 @@ label.fieldItem {
   padding: 0 5px 5px 0;
 }
 
-table {
+.basicTable {
   width: 100%;
   border-collapse: collapse;
 }
 
-table, td {
+.basicTable, .basicTable td {
   padding: 10px;
   border: 1px solid rgba(255,255,255,0.08);
 }
@@ -2460,6 +2460,10 @@ input[type="number"].fieldItem.fieldItem-withButton {
 
 .chosen-container .chosen-results {
   padding: 0;
+}
+
+.chosen-container-multi .chosen-choices {
+  background: none;
 }
 
 .fieldItem-textarea {

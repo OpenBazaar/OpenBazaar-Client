@@ -307,7 +307,7 @@ module.exports = Backbone.View.extend({
     $(this.$el).addClass('sideBarSlid', 500);
 
     $('.container').addClass('compressed');
-    $('.modal-child').addClass('modalCompressed');
+    //$('.modal-child').addClass('modalCompressed');
     $('.spinner-with-logo').addClass('modalCompressed');
     $('#obContainer').addClass('noScrollBar');
     $('#colorbox').addClass('marginLeftNeg115');
@@ -325,7 +325,7 @@ module.exports = Backbone.View.extend({
     $(this.$el).removeClass('sideBarSlid', 500);
 
     $('.container').removeClass('compressed');
-    $('.modal-child').removeClass('modalCompressed');
+    //$('.modal-child').removeClass('modalCompressed');
     $('.spinner-with-logo').removeClass('modalCompressed');
     $('#obContainer').removeClass('noScrollBar');
     $('#colorbox').removeClass('marginLeftNeg115');

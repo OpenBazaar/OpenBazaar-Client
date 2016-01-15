@@ -119,7 +119,7 @@ module.exports = Backbone.View.extend({
     });
 
     //set chosen inputs
-    $('.chosen').chosen();
+    $('.chosen').chosen({width: '100%'});
 
     //focus main input
     this.$el.find('input[name=title]').focus();
