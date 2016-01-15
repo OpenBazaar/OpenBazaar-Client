@@ -5,13 +5,7 @@ var path = require('path');
 module.exports = function(templateFile, callback){
 
   var cur_dir = path.dirname(require.main.filename);
-  fs.readFile(cur_dir + path.sep + templateFile, "utf8", function(err, ob){
-
-    if (err) {
-      throw err;
-    }
-    __.templateSettings.variable = "ob";
-    var tmpl = __.template(ob);
-    callback(tmpl);
-  });
+  var file = fs.readFileSync(cur_dir + path.sep + templateFile, "utf8");
+  __.templateSettings.variable = "ob";
+  callback(__.template(file));
 };
