@@ -213,6 +213,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content",
         StandardThemes: "Standard themes",
         NoPhotosAdded: "No Photos Added",
+        StoreModeratorsOptional: "Store Moderators (Optional)",
+        Searchformoderators: "Search for moderators",
+        Contributors: "Contributors",
+        Support: "Support",
+        Licensing: "Licensing",
+        Forward: "Forward",
+        On: "On",
+        Off: "Off",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -533,6 +541,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -860,6 +876,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1189,6 +1213,14 @@ module.exports = Backbone.Model.extend({
         Content: "Contenuto",
         StandardThemes: "Temi standard",
         NoPhotosAdded: "Nessuna foto aggiunta",
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1316,7 +1348,7 @@ module.exports = Backbone.Model.extend({
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Suivant",
         IAgree: "Je suis d'accord",
-        Back: "Retour",
+        Back: "Reculer",
         EnterMessage: "Entrer un message...",
         Reload: "Actualiser",
         You: "Vous",
@@ -1518,6 +1550,14 @@ module.exports = Backbone.Model.extend({
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
+        StoreModeratorsOptional: "Modérateurs de boutique (Optionnel)",
+        Searchformoderators: "Rechercher des modérateurs",
+        Contributors: "Contributeurs",
+        Support: "Soutenir",
+        Licensing: "Licences",
+        Forward: "Avancer",
+        On: "Activer",
+        Off: "Désactiver",
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1613,7 +1653,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Découvrez les annonces et les pages sur OpenBazaar",
           Finished: "Terminé"
         },
         buyFlow: {
@@ -1846,6 +1886,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2173,6 +2221,14 @@ module.exports = Backbone.Model.extend({
         Content: "Контент", // not translated
         StandardThemes: "Стандартные темы", // not translated
         NoPhotosAdded: "Не добавлено фотографий", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Продано", // not translated
           PurchasedBy: "Куплено", // not translated
@@ -2499,6 +2555,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2828,6 +2892,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3156,6 +3228,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3484,6 +3564,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3813,6 +3901,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4139,6 +4235,14 @@ module.exports = Backbone.Model.extend({
         Content: "コンテンツ設定",
         StandardThemes: "基本テーマ",
         NoPhotosAdded: "写真はありません",
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",
