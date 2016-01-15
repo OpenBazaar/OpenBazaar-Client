@@ -3466,7 +3466,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .btn-profile.tooltip:hover:after{
-  left: -45px;
+  left: -25px;
 }
 
 .btn-upload-cover-photo {
