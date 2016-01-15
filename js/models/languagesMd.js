@@ -1322,13 +1322,13 @@ module.exports = Backbone.Model.extend({
         IAgree: "Je suis d'accord",
         Back: "Retour",
         EnterMessage: "Entrer un message...",
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Reload: "Actualiser",
+        You: "Vous",
         Skip: "Passer",
         Done: "Terminé",
-        Navigation: "Navigation", //notTranslated
+        Navigation: "Navigation",
         Cancel: "Annuler",
-        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
+        ClosingOpenBazaar: "La fermeture d'OpenBazaar déconnectera votre page",
         Close: "Fermer",
         Yes: "Oui",
         No: "Non",
@@ -1343,7 +1343,7 @@ module.exports = Backbone.Model.extend({
         Physical: "Physique",
         Digital: "Numérique",
         Service: "Service",
-        Visit: "Voir Page",
+        Visit: "Voir",
         Item: "Article",
         Items: "Articles",
         Stores: "Boutiques",
@@ -1353,7 +1353,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Ne plus suivre",
         About: "&Agrave; propos",
         NoDescriptionAdded: "Aucune description ajoutée",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Aucune annonce",
         CoverPhoto: "Photo de couverture",
         AboutEmpty: "&Agrave; propos est vide...",
         Followers: "Abonnés",
@@ -1371,13 +1371,13 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenue",
         CreateStore: "Créer une boutique",
         GoToMyPage: "Ma page",
-        SearchForItemsPlaceholder: "Rechercher par nom ou par mot-clé",
+        SearchForItemsPlaceholder: "Tapez un mot-clé...",
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
-        SearchFeedPlaceholder: "Rechercher par nom d'utilisateur ou GUID",
-        SearchForFollowersPlaceholder: "Rechercher par nom d'utilisateur ou GUID",
-        SearchForUsersPlaceholder: "Rechercher par nom d'utilisateur ou GUID",
-        EstDeliveryDomesticPlaceholder: "3-5 Jours Ouvrés",
-        EstDeliveryInternationalPlaceholder: "7-15 Jours Ouvrés",
+        SearchFeedPlaceholder: "Tapez un mot-clé...",
+        SearchForFollowersPlaceholder: "Tapez un nom...",
+        SearchForUsersPlaceholder: "Tapez un nom...",
+        EstDeliveryDomesticPlaceholder: "3-5 jours ouvrés",
+        EstDeliveryInternationalPlaceholder: "7-15 jours ouvrés",
         OrderProcessingTimePlaceholder: "Entrer le temps nécessaire pour traiter la commande",
         TermsAndConditionsPlaceholder: "Entrer les termes et conditions...",
         TitlePlaceholder: "Entrer un titre",
@@ -1399,7 +1399,7 @@ module.exports = Backbone.Model.extend({
         Facebook: "Facebook",
         Instagram: "Instagram",
         Twitter: "Twitter",
-        PGPKey: "PGP Key",
+        PGPKey: "Clé PGP",
         Snapchat: "Snapchat",
         BUYNOW: "Acheter Maintenant",
         Description: "Description",
@@ -1420,9 +1420,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Changements",
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
-        BitcoinReturnAddress: "Adresse Bitcoin",
+        BitcoinReturnAddress: "Adresse Bitcoin de retour",
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "En cas de remboursement, vos fonds seront émis à l'adresse suivante.",
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1443,15 +1443,15 @@ module.exports = Backbone.Model.extend({
         Type: "Type",
         Condition: "Condition",
         NSFW: "18+ (Contenu adulte)",
-        Select: "Select", //not translated
-        Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Annonce", //not translated
-        Listings: "Annonces", //not translated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
-        Reset: "Réinitialiser", //not translated
+        Select: "Sélectionner",
+        Social: "Social",
+        Theme: "Thème",
+        Listing: "Annonce",
+        Listings: "Annonces",
+        Pages: "Pages",
+        Page: "Page",
+        Language: "Langue",
+        Reset: "Réinitialiser",
         Local: "Local",
         Domestic: "National",
         Location: "Emplacement",
@@ -1494,15 +1494,15 @@ module.exports = Backbone.Model.extend({
         PaymentPending: "Paiement en attente",
         FinalizePurchase: "Finaliser l'achat",
         LoadingImage: "Chargement de l'image...",
-        UploadAvatar: "Uploader un Avatar",
-        SaveAvatar: "Enregistrer un Avatar",
+        UploadAvatar: "Sélectionner un avatar",
+        SaveAvatar: "Enregistrer un avatar",
         NewAvatar: "Sélectionner un nouvel avatar",
         NewCoverImage: "Sélectionner une nouvelle image de couverture",
         Loading: "Chargement...",
         Purchases:"Achats",
         Sales: "Ventes",
         Cases: "Cas",
-        Enter: "Enter", //notTranslated
+        Enter: "Entrer",
         Discover: "Découvrir",
         Block: "Block", //notTranslated
         Blocked: "Bloqué",
@@ -1557,10 +1557,10 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
         aboutSection: {
-          about: "", //notTranslated
-          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
         },
         saveMessages: {
           Saved: "Enregistrés",
@@ -1591,8 +1591,8 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Configuration d'OpenBazaar",
-          Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          Introduction: "Présentation",
+          IntroductionBody: "OpenBazaar est un marché social pair à pair. Ce projet est semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. Il n’y a pas de frais ou de restrictions et OpenBazaar est un projet open-source. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase d’apprentissage.",
           Theme: "Sélectionner un thème pour votre page",
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
@@ -1622,8 +1622,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Terminé"
         },
         buyFlow: {
-          DirectPayment: "Direct Payment", //notTranslated
-          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
+          DirectPayment: "Paiement direct",
+          SendDirectlyTo: "Envoyer un paiement direct à %{handle}",
           MustAddAddress: "Vous devez ajouter une adresse pour expédier",
           VendorShipsTo: "Expédie vers",
           DoesNotShipHere: "N'expédie pas ici",
@@ -1637,7 +1637,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Le temps de traitement prévu pour cette commande est",
           summaryMsg3: "Vous pouvez vérifier le statut de votre commande sur votre",
           purchasesPage: "page d'achat",
-          returnAddress: "Return Address", //notTranslated
+          returnAddress: "Adresse de retour",
           moderatorPaymentDisclaimer: "N'appliquer que si la transaction se termine par un litige.",
           directPaymentDisclaimer: "Utilisez le paiement direct avec prudence, les fonds sont irréversibles",
           directPaymentTo: "Paiement direct à",
@@ -1981,11 +1981,11 @@ module.exports = Backbone.Model.extend({
         IAgree: "Согласен",
         Back: "Назад",
         EnterMessage: "Ввести сообщение...",
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Reload: "Обновить",
+        You: "Вы",
         Skip: "Пропустить",
         Done: "Готово",
-        Navigation: "Navigation", //notTranslated
+        Navigation: "Навигация",
         Cancel: "Отмена",
         Yes: "Да",
         No: "Нет",
@@ -2010,7 +2010,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Нет объявлений",
         CoverPhoto: "Обложка",
         AboutEmpty: "Описание не заполнено...",
         Followers: "Читатели",
@@ -2100,14 +2100,14 @@ module.exports = Backbone.Model.extend({
         Type: "Тип",
         Condition: "Состояние",
         NSFW: "18+ (для взрослых)",
-        Select: "Select", //not translated
-        Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
+        Select: "Выбор", //not translated
+        Social: "Социальный", //not translated
+        Theme: "Тема", //not translated
+        Listing: "Объявление", //not translated
+        Listings: "Объявления", //not translated
+        Pages: "Страницы", //not translated
+        Page: "Страница", //not translated
+        Language: "Язык", //not translated
         Reset: "Сброс", //not translated
         Local: "Местный",
         Domestic: "Внутри страны",
@@ -2154,51 +2154,50 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Сохранить аватар",
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
-        Loading: "Loading...", // not translated
+        Loading: "Загрузка...", // not translated
         Purchases:"Покупки",
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
-        Enter: "Enter", //notTranslated
-        Discover: "Discover", // not translated
-        Block: "Block", //notTranslated
-        Blocked: "Blocked", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        AllItems: "All Items", // not translated
-        FreeShipping: "Free Shipping", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
+        Sales: "Продажи", // not translated
+        Cases: "Кейсы", // not translated
+        Enter: "Enter",
+        Discover: "Обзор", // not translated
+        Blocked: "Заблокированно", // not translated
+        Advanced: "Дополнительно", // not translated
+        General: "Общий", // not translated
+        AllItems: "Все инструменты", // not translated
+        FreeShipping: "Бесплатная доставка", // not translated
+        DomesticShippingPrice: "Бесплатная доставка внутри страны", // not translated
+        InternationalShippingPrice: "Международные цены доставки", // not translated
+        MinimumIs: "Минимум", // not translated
+        Visibility: "Видимость", // not translated
+        Title: "Название", // not translated
+        DigitalItem: "Цифровой товар", // not translated
+        PhysicalItem: "Физический товар", // not translated
+        DomesticShippingTime: "Внутреннее время доставки", // not translated
+        InternationalShippingTime: "Международное время доставки", // not translated
+        DisplayNSFWcontent: "Отображать NSFW контент?", // not translated
+        Basic: "Базовый", // not translated
+        Content: "Контент", // not translated
+        StandardThemes: "Стандартные темы", // not translated
+        NoPhotosAdded: "Не добавлено фотографий", // not translated
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
+          SoldBy: "Продано", // not translated
+          PurchasedBy: "Куплено", // not translated
+          searchByOrder: "Искать по номеру заказа", // not translated
+          sortByStatusAll: "Все", // not translated
+          sortByStatus0: "Купленные", // not translated
+          sortByStatus1: "Оплачено (ожидание средств)", // not translated
+          sortByStatus2: "Подтверждено/Доставлено", // not translated
+          sortByStatus3: "Завершено (средства освобождены)", // not translated
+          sortByStatus4: "Оспорено", // not translated
           OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total" // not translated
+          OrderDate: "Дата ордера", // not translated
+          OrderStatus: "Статус ордера", // not translated
+          OrderStatus0: "Куплено (не оплачен)", // not translated
+          OrderStatus1: "Оплачено (ожидание средств)", // not translated
+          OrderStatus2: "Подтверждено/выслано", // not translated
+          OrderStatus3: "Завершено (средства освобождены)", // not translated
+          OrderStatus4: "Оспорено", // not translated
+          OrderTotal: "Всего заказов" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -2211,13 +2210,13 @@ module.exports = Backbone.Model.extend({
           socketError: "URL для WebSocket недоступен. Подключаемся к адресу по умолчанию ws://localhost:18466",
           contractError: "Этот товар недоступен для продажи",
           sellerError: "Сервер продавца отключил эту возможность",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться " //not translated
         },
         aboutSection: {
-          about: "", //notTranslated
-          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
-          support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          about: "о нас",
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
+          support: "поддержка",
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
         },
         saveMessages: {
           Saved: "Сохранено",
@@ -2247,8 +2246,8 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Конфигурация OpenBazaar",
-          Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          Introduction: "Ознакомление",
+          IntroductionBody: "Представление",
           Theme: "Выберите оформление для вашей страницы",
           chooseLanguage: "Выберите ваш язык",
           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиков",
@@ -2264,9 +2263,9 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Расскажите что-нибудь о вашей деятельности... (160 букв максимум)",
           timeZone: "Выберите часовой пояс",
           yourDetails: "Профильная информация",
-          yourDescription: "Описание", //notTranslated
+          yourDescription: "Описание",
           handle: "Логин",
-          chooseHandle: "Choose a handle", // not translated
+          chooseHandle: "Выберите логин", // not translated
           knownAs: "Сейчас ваше имя:",
           wouldYou: "Вы желаете зарегистрировать простой логин?",
           registerNew: "Зарегистрировать новый",
@@ -2274,31 +2273,31 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Подключить существующий",
           avatar: "Поставить аватарку",
           chooseAvatar: "Выбрать аватарку",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
-          Finished: "Finished" //notTranslated
+          discoverCallOut: "Найти объявления и страницы на OpenBazaar",
+          Finished: "Завершено"
         },
         buyFlow: {
-          DirectPayment: "Direct Payment", //notTranslated
-          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
+          DirectPayment: "Оплатить напрямую",
+          SendDirectlyTo: "Отправка прямого платежа %{handle}",
           MustAddAddress: "Вы должны указать адрес для доставки",
           VendorShipsTo: "Этот производитель отправляет в следующие страны",
           DoesNotShipHere: "Выбранный производитель не производит доставку в указанный регион",
           Send: "Отправить",
           BTCto: "BTC to",
-          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
+          SendBTCtoAddress: "Отправить %{amount} BTC",
           OpenAddress: "Открывать адрес в кошельке по-умолчанию",
           CopyAddress: "Скопировать адрес оплаты в буфер обмена",
           RefreshPayment: "Обновить статус платежа",
-          summaryMsg1: "Ваш платёж был отправлен на %{recipient}", //notTranslated
+          summaryMsg1: "Ваш платёж был отправлен на %{recipient}",
           summaryMsg2: "Ожидаемое время обработки вашего заказа составляет",
           summaryMsg3: "Чтобы проверить статус вашего заказа, загляните в",
-          purchasesPage: "интерфейс покупок", //notTranslated
-          returnAddress: "Return Address", //notTranslated
-          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
-          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
-          paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          purchasesPage: "интерфейс покупок",
+          returnAddress: "адрес возврата",
+          moderatorPaymentDisclaimer: "Применяется только в случаях если транзакция имеет статус спора.",
+          directPaymentDisclaimer: "Будьте осторожны при отправке средств напрямую, средства невозвратимы",
+          directPaymentTo: "Прямой платёж",
+          paymentSent: "Платёж отправлен!",
+          total: "Всего"
         }
       },
       {

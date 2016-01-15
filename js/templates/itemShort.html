@@ -22,26 +22,46 @@
   <div class="gridItemControls custCol-border custCol-primary">
     <div class="table">
       <div>
-        <div class="btn-gridItemControl borderRight custCol-border js-avatar">
-          <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('About') %>
-        </div>
-
-        <% if(!ob.micro && !ob.hideFollow){ %>
-          <div class="btn-gridItemControl borderRight custCol-border js-userShortUnfollow <% if(!ob.ownFollowing){ %> hide <% } %>">
-            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Unfollow') %>
+        <% if(ob.discover) { %>
+          <div class="btn-gridItemControl borderRight custCol-border js-avatar">
+            <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('About') %>
           </div>
-          <div class="btn-gridItemControl borderRight custCol-border js-userShortFollow <% if(ob.ownFollowing){ %> hide <% } %>">
-            <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>            
-            <%= polyglot.t('Follow') %>
+
+          <% if(!ob.micro && !ob.hideFollow){ %>
+            <div class="btn-gridItemControl borderRight custCol-border js-userShortUnfollow <% if(!ob.ownFollowing){ %> hide <% } %>">
+              <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('Unfollow') %>
+            </div>
+            <div class="btn-gridItemControl borderRight custCol-border js-userShortFollow <% if(ob.ownFollowing){ %> hide <% } %>">
+              <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>            
+              <%= polyglot.t('Follow') %>
+            </div>
+          <% } %>
+
+          <div class="btn-gridItemControl  custCol-border">
+            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Block') %>
           </div>
         <% } %>
 
-        <div class="btn-gridItemControl  custCol-border">
-          <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('Block') %>
-        </div>
+        <% if(ob.ownPage){ %>
+          <div class="btn-gridItemControl borderRight custCol-border js-editItem">
+            <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Edit') %>
+          </div>  
+          <div class="btn-gridItemControl borderRight custCol-border js-deleteItem">
+            <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Delete') %>
+          </div>           
+        <% } %>
+
+        <% if(!ob.ownPage && ob.discover === undefined){ %>
+          <div class="btn-gridItemControl borderRight custCol-border js-item" data-id="<%- ob.contract_hash %>">
+            <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('View Listing') %>
+          </div>          
+        <% } %>
       </div>
     </div>
   </div>

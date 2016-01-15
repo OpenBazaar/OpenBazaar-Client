@@ -105,7 +105,6 @@ module.exports = Backbone.View.extend({
       url: self.model.get('serverUrl')+ "routing_table",
       success: function(data){
         var routingString = '';
-        console.log(data);
         __.each(data, function(tableEntry){
           routingString += "<table class='row20'>";
           routingString += "<tr><td>NAT Type</td><td>"+tableEntry.nat_type+"</td><tr>";
@@ -116,7 +115,6 @@ module.exports = Backbone.View.extend({
           routingString += "</table>";
         });
 
-console.log(routingString);
         self.$el.find('.js-adminRoutingTable').html(routingString);
       },
       error: function(){

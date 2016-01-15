@@ -405,12 +405,12 @@ form {
   position: absolute; 
   opacity: 0;
   bottom: 0; 
-  left: 0; 
+  left: 1px; 
   height: 40px; 
   line-height: 38px;
   border-top: solid 1px #327EB8;
   border-right: solid 1px #327EB8;
-  width: 317px;
+  width: 316px;
   padding: 0;
   box-sizing: border-box;
   transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
@@ -899,6 +899,14 @@ table, td {
   float: left;
 }
 
+.accordion-active input, .accordion-active textarea, .accordion-active a {
+  visibility: visible;
+}
+
+.accordion-inactive input, .accordion-inactive textarea, .accordion-inactive a {
+  visibility: hidden;
+}
+
 .positionWrapper {
   /* use when you need a generic element around one or more elements where one is absolutely positioned */
   position: relative;
@@ -1230,6 +1238,8 @@ h5 {
 
 .modal-opaque.modal-navBlock {
   background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
+  top: 0;
+  padding-top: 70px;
 }
 
 .modal-childMain {
