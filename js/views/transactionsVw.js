@@ -31,7 +31,7 @@ module.exports = Backbone.View.extend({
      */
     var self = this,
         profile = options.userProfile.get('profile'),
-        wrapper = "<div class='flexRow'></div>";
+        wrapper = "<ul class='list flexRow'></ul>";
 
     this.options = options;
     this.state = options.state || "purchases";
@@ -45,6 +45,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "openOrderModal", function(orderID){
       self.openOrderModal(orderID);
     });
+    this.searchTransactions;
     this.subViews = [];
     this.subModels = [];
 
@@ -134,36 +135,83 @@ module.exports = Backbone.View.extend({
     "use strict";
     var filterBy = this.$el.find(".js-transactionFilter").val();
     console.log("filter by "+filterBy);
+    switch(this.state){
+      case "purchases":
+        this.renderPurchases(filterBy);
+        break;
+      case "sales":
+        this.renderSales(filterBy);
+        break;
+      case "cases":
+        this.renderCases(filterBy);
+        break;
+    }
   },
 
-  renderPurchases: function(){
+  renderPurchases: function(filterBy){
     "use strict";
     var self = this;
+    this.purchasesWrapper.html('');
+    if(filterBy == "dateNewest"){
+      this.purchasesCol.comparator = function(model) {
+        return -model.get("timestamp");
+      };
+      this.purchasesCol.sort();
+    }
+    if(filterBy == "dateOldest"){
+      this.purchasesCol.comparator = function(model) {
+        return model.get("timestamp");
+      };
+      this.purchasesCol.sort();
+    }
+    console.log(this.purchasesCol.models)
     this.purchasesCol.each(function(model, i){
-      model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-      model.set('transactionType', "purchase");
-      var orderShort = new orderShortVw({
-        model: model
-      });
-      self.subViews.push(orderShort);
-      self.purchasesWrapper.append(orderShort.render().el);
+      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
+        self.addPurchase(model);
+      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
+        self.addPurchase(model);
+      }
     });
     this.$el.find(".js-purchases").append(this.purchasesWrapper);
+    this.searchTransactions = new window.List('transactionsHolder', {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
+    console.log(this.$('#transactionsHolder'))
   },
 
-  renderSales: function(models){
+  addPurchase: function(model){
+    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+    model.set('transactionType', "purchase");
+    var orderShort = new orderShortVw({
+      model: model
+    });
+    this.subViews.push(orderShort);
+    this.purchasesWrapper.append(orderShort.render().el);
+  },
+
+  renderSales: function(filterBy){
     "use strict";
     var self = this;
+    this.salesWrapper.html('');
     this.salesCol.each(function(model, i){
-      model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-      model.set('transactionType', "sale");
-      var orderShort = new orderShortVw({
-        model: model
-      });
-      self.subViews.push(orderShort);
-      self.salesWrapper.append(orderShort.render().el);
+      if(!filterBy || filterBy == "all"){
+        self.addSale(model);
+      } else if(filterBy && model.get('status') == filterBy) {
+        self.addSale(model);
+      }
     });
     this.$el.find(".js-sales").append(this.salesWrapper);
+    this.searchTransactions = new window.List('transactionsHolder', {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
+
+  },
+
+  addSale: function(model){
+    "use strict";
+    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+    model.set('transactionType', "sale");
+    var orderShort = new orderShortVw({
+      model: model
+    });
+    this.subViews.push(orderShort);
+    this.salesWrapper.append(orderShort.render().el);
   },
 
   renderCases: function(models){

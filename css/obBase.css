@@ -3550,6 +3550,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
 }
 
+.selectPillWrapper {
+
+}
+
 /* protect customize controls from custom page styles */
 #ov1 #customizeControls .labelWrap {
   height: 40px;

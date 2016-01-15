@@ -263,7 +263,9 @@ module.exports = Backbone.Model.extend({
           transferReceipt: "transferReceipt",
           copyTxid: "copy tx ID",
           Close: "Close",
-          FundOrder: "Fund Order"
+          FundOrder: "Fund Order",
+          sortByDateNewest: "Sort By Date, Newest",
+          sortByDateOldest: "Sort By Date, Oldest"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
