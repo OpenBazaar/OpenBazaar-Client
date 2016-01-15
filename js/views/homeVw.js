@@ -165,6 +165,7 @@ module.exports = Backbone.View.extend({
     item.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+item.avatar_hash+"&guid="+item.guid;
     item.showAvatar = true;
     item.userID = item.guid;
+    item.discover = true;
 
     var newItem = function(){
       var newItemModel = new itemShortModel(item);
