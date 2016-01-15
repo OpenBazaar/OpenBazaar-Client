@@ -176,7 +176,7 @@ form {
 
 #obContainer {
   transition: width 0.5s ease;
-  width: calc(100% - 48px);
+  width: calc(100% - 47px);
 
 }
 
@@ -2639,20 +2639,21 @@ input[type="checkbox"].fieldItem + label {
 }
 
 input[type="checkbox"].fieldItem + label:before {
-  content: "";
+  content: "\f371";
   display: inline-block;
+  font-family: Ionicons;
   position: absolute;
   left: 10px;
-  top: 20px;
-  height: 14px;
-  width: 14px;
-  border-radius: 1px;
-  border: solid 1px #fff;
+  top: 3px;
+  font-size: 18px;
+  width: 15px;
+  text-align: center;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
-  background: #fff;
-  box-shadow: inset 0 0 0 3px #086A9E;
+  content: "\f374";
+  font-family: Ionicons;
+  background: transparent;
 }
 
 input[type="checkbox"].fieldItem + label div,
