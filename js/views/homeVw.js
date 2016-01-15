@@ -73,7 +73,7 @@ module.exports = Backbone.View.extend({
     $.ajax({
       url: self.userModel.get('serverUrl') + "get_following",
       dataType: "json",
-      timeout: 3000
+      timeout: 4000
     }).done(function(ownFollowingData){
       self.ownFollowing = ownFollowingData.following || [];
       self.ownFollowing = self.ownFollowing.map(function(followingObject){
