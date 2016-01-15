@@ -190,7 +190,7 @@ module.exports = Backbone.View.extend({
     switch (e.which) {
       case 32: // space
       case 13: // return
-        event.stopPropagation;
+        event.stopPropagation();
         return cb(e);
     }
     return true;
