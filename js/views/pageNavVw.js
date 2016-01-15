@@ -44,7 +44,10 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-cancelHandle': 'cancelHandle',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
+    'keypress .js-accordionNext': 'accNextKeypress',
+    'keypress .js-accordionPrev': 'accPrevKeypress',
     'click .js-homeModalDone': 'settingsDone',
+    'keypress .js-homeModalDone': 'settingsDoneKeypress',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
@@ -153,8 +156,13 @@ module.exports = Backbone.View.extend({
       this.accWin.css('left', function(){
         return oldPos - moveBy;
       });
+      // switch active tab
+      var curActive = $(this.$el).find('.accordion-active');
+      curActive.addClass('accordion-inactive').removeClass('accordion-active');
+      var newActive = curActive.next('.accordion-child');
+      newActive.addClass('accordion-active').removeClass('accordion-inactive');
       // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
+      newActive.find('.search').focus();
     }
   },
 
@@ -168,9 +176,36 @@ module.exports = Backbone.View.extend({
       this.accWin.css('left', function(){
         return oldPos + moveBy;
       });
+      // switch active tab
+      var curActive = $(this.$el).find('.accordion-active');
+      curActive.addClass('accordion-inactive').removeClass('accordion-active');
+      var newActive = curActive.prev('.accordion-child');
+      newActive.addClass('accordion-active').removeClass('accordion-inactive');
       // focus search input
-      $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
+      newActive.find('.search').focus();
     }
+  },
+
+  triggerOnEnterSpace: function(e, cb) {
+    "use strict";
+    switch (e.which) {
+      case 32: // space
+      case 13: // return
+        event.stopPropagation();
+        return cb(e);
+    }
+    return true;
+ 
+  },
+
+  accNextKeypress: function(e) {
+    "use strict";
+    this.triggerOnEnterSpace(e, this.accNext.bind(this));
+  },
+
+  accPrevKeypress: function(e) {
+    "use strict";
+    this.triggerOnEnterSpace(e, this.accPrev.bind(this));
   },
 
   closeNav: function(){
@@ -194,8 +229,17 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       if(localStorage.getItem("onboardingComplete") != "true") {
-        self.$el.find('.js-homeModal').removeClass("hide");
+        var modal = self.$el.find('.js-homeModal');
+        modal.removeClass("hide");
         $('#obContainer').addClass("blur");
+        modal.attr("tabIndex", "0");
+        document.addEventListener('focus', function( ev ) {
+          if ( !modal.hasClass("hide") && !$.contains( modal[0], ev.target ) ) {
+            ev.stopPropagation();
+            modal.focus();
+          }
+        }, true);
+
         self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
         self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
         self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
@@ -674,6 +718,11 @@ module.exports = Backbone.View.extend({
 
   },
 
+  settingsDoneKeypress: function(e) {
+    "use strict";
+    this.triggerOnEnterSpace(e, this.settingsDone.bind(this));
+  },
+    
   navAdminPanel: function(){
     "use strict";
     this.$el.find('.js-adminModal').fadeIn(300);

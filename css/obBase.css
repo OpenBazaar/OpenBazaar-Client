@@ -573,12 +573,12 @@ label.fieldItem {
   padding: 0 5px 5px 0;
 }
 
-table {
+.basicTable {
   width: 100%;
   border-collapse: collapse;
 }
 
-table, td {
+.basicTable, .basicTable td {
   padding: 10px;
   border: 1px solid rgba(255,255,255,0.08);
 }
@@ -851,6 +851,14 @@ table, td {
 
 .accordion > .accordion-window > .accordion-child {
   float: left;
+}
+
+.accordion-active input, .accordion-active textarea, .accordion-active a {
+  visibility: visible;
+}
+
+.accordion-inactive input, .accordion-inactive textarea, .accordion-inactive a {
+  visibility: hidden;
 }
 
 .positionWrapper {
@@ -1187,7 +1195,7 @@ h5 {
 .modal-opaque.modal-navBlock {
   background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2) 50px, rgba(7,65,97,1) 51px);
   top: 0;
-  padding-top: 75px;
+  padding-top: 70px;
 }
 
 .modal-childMain {
@@ -1283,7 +1291,7 @@ h5 {
 }
 
 .box-borderBright {
-  border: 1px solid rbga(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.5);
   box-sizing: border-box;
 }
 
@@ -2473,6 +2481,10 @@ input[type="number"].fieldItem.fieldItem-withButton {
 
 .chosen-container .chosen-results {
   padding: 0;
+}
+
+.chosen-container-multi .chosen-choices {
+  background: none;
 }
 
 .fieldItem-textarea {
