@@ -1886,15 +1886,25 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMenu {
   width: 100px;
-  height: 35px;
   border: solid 1px #565656;
   border-top: 0;
   padding: 10px;
   position: absolute;
   top: 45px;
-  left: 2px;
+  right: 0px;
   background: #252525;
   z-index: 5;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.chatConversationMenu div {
+  cursor: pointer;
+  line-height: 22px;
+}
+
+.chatConversationMenu div:hover {
+  text-decoration: underline;
 }
 
 .chatConversation textarea, .chatConversation input {
