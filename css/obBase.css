@@ -843,6 +843,14 @@ table, td {
   float: left;
 }
 
+.accordion-active input, .accordion-active textarea, .accordion-active a {
+  visibility: visible;
+}
+
+.accordion-inactive input, .accordion-inactive textarea, .accordion-inactive a {
+  visibility: hidden;
+}
+
 .positionWrapper {
   /* use when you need a generic element around one or more elements where one is absolutely positioned */
   position: relative;
