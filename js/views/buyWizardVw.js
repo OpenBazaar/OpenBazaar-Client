@@ -54,6 +54,8 @@ module.exports = Backbone.View.extend({
     this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
+    this.subViews = [];
+    this.subModels = [];
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -138,19 +140,28 @@ module.exports = Backbone.View.extend({
 
   render: function(){
     var self = this;
-    this.buyDetailsView = new buyDetailsVw({model: this.model});
-    this.buyAddressesView = new buyAddressesVw({model: this.model, userModel: this.userModel});
-    this.listenTo(this.buyAddressesView, 'setAddress', this.addressSelected);
 
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
+
       //append the view to the passed in parent
       self.parentEl.append(self.$el);
+
+      //add subviews
+      self.buyDetailsView = new buyDetailsVw({model: self.model});
+      self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel});
+      self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
+      self.subViews.push(self.buyDetailsView, self.buyAddressesView);
+
+      //init the accordion
       self.initAccordion('.js-buyWizardAccordion');
+
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-buyWizardModal').removeClass('fadeOut');
+
       //add all countries to the Ships To select list
       self.$el.find('.js-buyWizardCountryWrapper').append(self.countriesSelect);
+
       //add address view
       self.buyAddressesView.render(0);
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
