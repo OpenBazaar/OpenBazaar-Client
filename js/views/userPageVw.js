@@ -568,7 +568,7 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
-      arrayItem.ownPage = self.ownPage;
+      arrayItem.ownPage = self.options.ownPage;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         var opt = document.createElement('option');
         opt.value = arrayItem.category;
