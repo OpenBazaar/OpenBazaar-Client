@@ -425,6 +425,22 @@ form {
   border-right: 0;
 }
 
+.userPageAboutSection .userPageEditBtn,
+.userPageSocialAccounts .userPageEditBtn {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.userPageAboutSection:hover .userPageEditBtn,
+.userPageSocialAccounts:hover .userPageEditBtn {
+  display: block;
+}
+
 .itemImg {
   position: relative;
   background-position: center;

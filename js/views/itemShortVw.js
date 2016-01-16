@@ -9,7 +9,8 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-item': 'itemClick',
-    'click .js-avatar': 'avatarClick'
+    'click .js-avatar': 'avatarClick',
+    'click .js-editItem': 'editItem'
   },
 
   initialize: function(){
@@ -27,6 +28,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
       self.$el.append(loadedTemplate(self.model.toJSON()));
+      console.log(self.model.toJSON());
     });
     return this;
   },
