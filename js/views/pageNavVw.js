@@ -130,6 +130,11 @@ module.exports = Backbone.View.extend({
       var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
       var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       self.initAccordion('.js-profileAccordion');
+
+      // pre-select timezone
+      var offset = new Date().getTimezoneOffset();
+      offset = '(GMT ' + (offset < 0 ? '+' : '-') + parseInt(Math.abs(offset/60)) + ':00)';
+      $("[id*='" + offset + "']").prop('checked', true);
     }
   },
 
