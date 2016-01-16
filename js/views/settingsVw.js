@@ -55,7 +55,7 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.serverUrl = options.userModel.get('serverUrl');
-    this.user = this.options.userModel;
+    this.userModel = this.options.userModel;
     this.model = new Backbone.Model();
     this.subViews = [];
     this.subModels = [];
@@ -83,7 +83,7 @@ module.exports = Backbone.View.extend({
           setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
         }
         self.model.set({page: model.toJSON()});
-        self.user.fetch({
+        self.userModel.fetch({
           success: function(model){
             "use strict";
             self.model.set({user: model.toJSON()});
@@ -249,10 +249,11 @@ module.exports = Backbone.View.extend({
     timezone.html(timezone_str);
     language.html(language_str);
 
-    __.each(this.model.get('page').profile.moderator_list, function(modID){
+    __.each(this.userModel.get('moderators'), function(modID){
       "use strict";
       if(modID) {
-        self.renderModerator({'guid': modID, "isBlank": true});
+        modID.fromModel = true;
+        self.renderModerator(modID);
       }
     });
   },
@@ -268,7 +269,7 @@ module.exports = Backbone.View.extend({
   renderModerator: function(moderator){
     "use strict";
     var self = this,
-        existingMods = this.model.get('page').profile.moderator_list,
+        existingMods = this.userModel.get('moderator_guids'),
         isExistingMod = existingMods.indexOf(moderator.guid) > -1;
 
     if(moderator.guid != this.model.get('page').profile.guid){
@@ -282,9 +283,10 @@ module.exports = Backbone.View.extend({
       var newModModel = new userShortModel(moderator);
       var modShort = new userShortView({model: newModModel});
       if (isExistingMod){
-        //remove blank version that was already added
-        this.$el.find('.js-blankMod[data-guid="' + moderator.guid + '"]').remove();
-        this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+        //don't add unless it comes from the model
+        if(moderator.fromModel){
+          this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+        }
       }else{
         this.$el.find('.js-settingsNewMods').append(modShort.el);
       }
@@ -386,7 +388,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#generalForm");
 
-    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
@@ -509,7 +511,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         form = this.$el.find("#storeForm"),
-        storeData = {},
+        profileData = {},
+        settingsData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [];
 
@@ -517,14 +520,16 @@ module.exports = Backbone.View.extend({
       modList.push($(this).data('guid'));
     });
 
-    storeData.moderator_list = modList.length > 0 ? modList : "";
-    storeData.vendor = true;
+    settingsData.moderators = modList.length > 0 ? modList : "";
+    profileData.vendor = true;
 
-    saveToAPI(form, "", self.serverUrl + "profile", function(){
-      "use strict";
-      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
-      self.refreshView();
-    }, "", storeData);
+    saveToAPI(form, "", self.serverUrl + "profile", function() {
+      saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
+        "use strict";
+        showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        self.refreshView();
+      }, "", settingsData);
+    }, "", profileData);
   },
 
   saveAddress: function(){
@@ -561,7 +566,7 @@ module.exports = Backbone.View.extend({
 
     addressData.shipping_addresses = newAddresses;
 
-    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
@@ -573,7 +578,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#advancedForm");
 
-    saveToAPI(form, this.model.get('user'), self.serverUrl + "settings", function(){
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();

@@ -99,6 +99,11 @@ module.exports = Backbone.Model.extend({
         response.profile.location = "UNITED_STATES";
       }
 
+      //put a copy of the avatar outside of the profile object, so change events can be triggered for it
+      if(response.profile.avatar_hash){
+        response.avatar_hash = response.profile.avatar_hash;
+      }
+
       //add randome number because change event is not triggered by changes inside profile
       response.fetched = Math.random();
     }

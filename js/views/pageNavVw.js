@@ -68,14 +68,6 @@ module.exports = Backbone.View.extend({
       this.render();
     });
 
-    this.listenTo(this.userProfile, 'change:language', function(){
-      this.model.set('vendor', this.userProfile.get('profile').vendor);
-      this.render();
-    });
-
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
-      this.handleSocketMessage(response);
-    });
     this.socketNotificationID = Math.random().toString(36).slice(2);
     this.socketView.getNotifications(this.socketNotificationID);
 
@@ -84,6 +76,9 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language");});
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.userProfile.fetch();
+    });
+    this.listenTo(window.obEventBus, "updateUserModel", function(response){
+      this.model.fetch();
     });
 
     this.render();
@@ -217,6 +212,15 @@ module.exports = Backbone.View.extend({
         self.addressInput.val(setText);
         self.closeStatusBar();
       });
+
+      self.listenTo(self.userProfile, 'change:avatar_hash', function(){
+        self.model.set('vendor', self.userProfile.get('profile').vendor);
+        self.render();
+      });
+
+      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+        self.handleSocketMessage(response);
+      });
     });
     return this;
   },
@@ -248,7 +252,7 @@ module.exports = Backbone.View.extend({
     if(count > 99) {
       count = "..";
     }
-    this.$el.find('.js-navNotifications').attr('data-count', count);
+    this.$el.find('.js-navNotifications .badge').attr('data-count', count);
   },
 
   navProfileClick: function(e){
