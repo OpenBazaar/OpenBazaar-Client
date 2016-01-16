@@ -113,10 +113,15 @@ module.exports = Backbone.View.extend({
     var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
     keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
     //activate tags plugin
-    this.inputKeyword = new Taggle('inputKeyword', {
-      tags: keywordTags,
-      saveOnBlur: true
-    });
+    //hacky fix for now, because DOM is not complete when taggle is called, resulting in a container size of zero
+    //TODO: find a fix for this, so taggle is initialized after reflow is complete
+    window.setTimeout(function(){
+      this.inputKeyword = new Taggle('inputKeyword', {
+        tags: keywordTags,
+        saveOnBlur: true
+      });
+    },1);
+
 
     //set chosen inputs
     $('.chosen').chosen({width: '100%'});
