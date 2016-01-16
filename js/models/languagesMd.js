@@ -17,7 +17,9 @@ module.exports = Backbone.Model.extend({
         You: "You",
         Skip: "Skip",
         Done: "Done",
+        Navigation: "Navigation", 
         Cancel: "Cancel",
+        ClosingOpenBazaar: "Tip: Keeping OpenBazaar open keeps your page online.", 
         Close: "Close",
         Yes: "Yes",
         No: "No",
@@ -32,7 +34,7 @@ module.exports = Backbone.Model.extend({
         Physical: "Physical",
         Digital: "Digital",
         Service: "Service",
-        Visit: "View Page",
+        Visit: "View",
         Item: "Item",
         Items: "Items",
         Stores: "Stores",
@@ -42,6 +44,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Unfollow",
         About: "About",
         NoDescriptionAdded: "No description added",
+        NoListings: "No listings",
         CoverPhoto: "Cover Photo",
         AboutEmpty: "About is blank...",
         Followers: "Followers",
@@ -59,11 +62,11 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Become a Store",
         GoToMyPage: "My Page",
-        SearchForItemsPlaceholder: "Search by name or keyword",
+        SearchForItemsPlaceholder: "Type a keyword...",
         SearchForPagesPlaceholder: "Search by name or keyword",
-        SearchFeedPlaceholder: "Search by handle or GUID",
-        SearchForFollowersPlaceholder: "Search by handle or GUID",
-        SearchForUsersPlaceholder: "Search by handle or GUID",
+        SearchFeedPlaceholder: "Type a keyword...",
+        SearchForFollowersPlaceholder: "Type a name...",
+        SearchForUsersPlaceholder: "Type a name...",
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -182,7 +185,7 @@ module.exports = Backbone.Model.extend({
         PaymentPending: "Payment Pending",
         FinalizePurchase: "Finalize Purchase",
         LoadingImage: "Loading Image...",
-        UploadAvatar: "Upload Avatar",
+        UploadAvatar: "Select Avatar",
         SaveAvatar: "Save Avatar",
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
@@ -190,6 +193,7 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases",
         Sales: "Sales",
         Cases: "Cases",
+        Enter: "Enter", //notTranslated
         Discover: "Discover",
         Blocked: "Blocked",
         Advanced: "Advanced",
@@ -242,6 +246,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "The seller's server has rejected the purchase request",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
         },
+        aboutSection: {
+          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
+          contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", 
+          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>", //notTranslated
+          licensing: "<p>OpenBazaar is open source software using the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
+        },
         saveMessages: {
           Saved: "Saved",
           SaveSuccess: "Your changes have been saved."
@@ -260,7 +270,7 @@ module.exports = Backbone.Model.extend({
           myPage: "My Page",
           customizePage:"Customize Page",
           sellItem:"New",
-          createListing:"New Listing",
+          createListing:"Create Listing",
           purchases:"Purchases",
           sales:"Sales",
           cases:"Cases",
@@ -271,12 +281,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar Configuration",
+          Introduction: "Introduction",
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is an open-source project. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           theme: "Select a Theme for your Page",
           chooseLanguage: "Select Your Language",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
           configure: "Configure your experience",
           disclaimer_title: "Disclaimer",
-          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.<br /><br />OpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.<br /><br />OpenBazaar users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.<br /><br />The OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.<br /><br />By using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
+          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\nOpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\nOpenBazaar users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
           yourCountry: "Select Your Country",
           localCurrency: "Select Your Currency",
           LanguagePlaceholder: "Search for language",
@@ -296,6 +308,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished"
         },
         buyFlow: {
@@ -332,6 +345,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Omitir",
         Done: "Hecho",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Cancelar",
         Yes: "S&iacute;",
         No: "No",
@@ -356,6 +370,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
+        NoListings: "No listings", //notTranslated
         AboutEmpty: "La secci&oacute;n Acerca de est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
@@ -497,6 +512,7 @@ module.exports = Backbone.Model.extend({
         Purchases:"Compras",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -550,6 +566,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Guardado",
           SaveSuccess: "Se han guardado los cambios."
@@ -578,12 +600,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Personalice Su OpenBazaar",
-          theme: "Seleccione un tema para su p&aacute;gina",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Seleccione un tema para su p&aacute;gina",
           chooseLanguage: "Seleccione idioma",
           contributors: "%{smart_count} Colaboradores |||| %{smart_count} Colaboradores",
           configure: "Configure su Experiencia",
           disclaimer_title: "Nota Legal",
-          disclaimer_body: "OpenBazaar es una red para el intercambio de bienes y servicios directamente entre la gente - utilizando Bitcoin - sin ninguna organizaci&oacute;n central que controle la plataforma. Esto quiere decir que eres responsable por tus propias actividades dentro de la red.<br /><br />La plataforma de OpenBazaar NO HACE ANONIMOS a sus usuarios en forma predeterminada. La mayor&iacute;a de las comunicaciones entre las partes son encriptadas, pero las direcciones IP son p&uacute;blicas y pueden ser asociadas con la actividad en la red. Entes maliciosos pudieran utilizar esta informaci&oacute;n en su contra; el proteger su privacidad es su propia responsabilidad.<br /><br >Los usuarios de OpenBazaar deben apegarse tanto a las leyes de su propia jurisdicci&oacute;n legal, as&iacute; como a su conciencia. Los desarrolladores de OpenBazaar no condonan - y no son responsables de - ning&uacute;n uso de la plataforma para actividades ilegales.<br /><br />La comunidad de desarrolladores de OpenBazaar ha trabajado duro en entregar una plataforma libre para el comercio internacional. Pero como en todo software, podr&iacute;a encontrar errores. Los desarrolladores no son responsables por ninguna p&eacute;rdida monetaria asociada a problemas con el software.<br /><br />Al utilizar OpenBazaar Ud. es responsable de sus propias acciones en la red OpenBazaar.",
+          disclaimer_body: "OpenBazaar es una red para el intercambio de bienes y servicios directamente entre la gente - utilizando Bitcoin - sin ninguna organizaci&oacute;n central que controle la plataforma. Esto quiere decir que eres responsable por tus propias actividades dentro de la red.\n\nLa plataforma de OpenBazaar NO HACE ANONIMOS a sus usuarios en forma predeterminada. La mayor&iacute;a de las comunicaciones entre las partes son encriptadas, pero las direcciones IP son p&uacute;blicas y pueden ser asociadas con la actividad en la red. Entes maliciosos pudieran utilizar esta informaci&oacute;n en su contra; el proteger su privacidad es su propia responsabilidad.\n\nLos usuarios de OpenBazaar deben apegarse tanto a las leyes de su propia jurisdicci&oacute;n legal, as&iacute; como a su conciencia. Los desarrolladores de OpenBazaar no condonan - y no son responsables de - ning&uacute;n uso de la plataforma para actividades ilegales.\n\nLa comunidad de desarrolladores de OpenBazaar ha trabajado duro en entregar una plataforma libre para el comercio internacional. Pero como en todo software, podr&iacute;a encontrar errores. Los desarrolladores no son responsables por ninguna p&eacute;rdida monetaria asociada a problemas con el software.\n\nAl utilizar OpenBazaar Ud. es responsable de sus propias acciones en la red OpenBazaar.",
           yourCountry: "Seleccione su pa&iacute;s",
           localCurrency: "Moneda Local",
           LanguagePlaceholder: "Buscar por idioma",
@@ -603,6 +627,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Conectar Existente",
           avatar: "Establecer un Avatar",
           chooseAvatar: "Seleccione avatar",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -641,6 +666,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "&Uuml;berspringen",
         Done: "Fertig",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Abbrechen",
         Yes: "Ja",
         No: "Nein",
@@ -665,6 +691,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Nicht mehr folgen",
         About: "&Uuml;ber",
         NoDescriptionAdded: "Keine Beschreibung hinzugefügt",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Titelbild",
         AboutEmpty: "'&Uuml;ber' ist leer...",
         Followers: "Follower",
@@ -812,6 +839,7 @@ module.exports = Backbone.Model.extend({
         Purchases:"Eink&auml;ufe",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -865,6 +893,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Gespeichert",
           SaveSuccess: "Ihre &Auml;nderungen wurden gespeichert."
@@ -893,12 +927,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar Konfiguration",
-          theme: "W&auml;hle ein Farbschema f&uuml;r deine Seite",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "W&auml;hle ein Farbschema f&uuml;r deine Seite",
           chooseLanguage: "W&auml;hle deine Sprache",
           contributors: "%{smart_count} Mitwirkeder |||| %{smart_count} Mitwirkende",
           configure: "Konfiguriere dein Erlebnis",
           disclaimer_title: "Ausschlussklausel",
-          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.<br /><br />OpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.<br /><br />OpenBazaar users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.<br /><br />The OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.<br /><br />By using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
+          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\nOpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\nOpenBazaar users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
           yourCountry: "W&auml;hle dein Land",
           localCurrency: "W&auml;hle deine W&auml;hrung",
           LanguagePlaceholder: "Suche nach Sprache",
@@ -918,6 +954,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Verbinde existierenden",
           avatar: "Setze einen Avatar",
           chooseAvatar: "W&auml;hle einen Avatar",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -956,7 +993,9 @@ module.exports = Backbone.Model.extend({
         You: "Tu",
         Skip: "Salta",
         Done: "Finito",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Annulla",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "Chiudi",
         Yes: "Si",
         No: "No",
@@ -981,6 +1020,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Foto di copertina",
         AboutEmpty: "L'about &egrave; vuoto...",
         Followers: "Seguaci",
@@ -1129,6 +1169,7 @@ module.exports = Backbone.Model.extend({
         Purchases: "Acquisti",
         Sales: "Vendite",
         Cases: "Cause",
+        Enter: "Enter", //notTranslated
         Discover: "Trova",
         Blocked: "Bloccato",
         Advanced: "Avanzato",
@@ -1181,6 +1222,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto",
           checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto"
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Salvato",
           SaveSuccess: "Le modifiche sono state salvate."
@@ -1209,12 +1256,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Configurazione OpenBazaar",
-          theme: "Seleziona un Tema per la tua pagina",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Seleziona un Tema per la tua pagina",
           chooseLanguage: "Seleziona la tua lingua",
           contributors: "%{smart_count} Contributore |||| %{smart_count} Contributori",
           configure: "Imposta la tua esperienza",
           disclaimer_title: "Disclaimer",
-          disclaimer_body: "OpenBazaar &egrave; un network per scambi di beni e servizi direttamente fra le persone - usando Bitcoin - senza nessuna organizzazione centrale che controlli la piattaforma. Questo significa che tu sei responsabile per le tue attività sul network.<br /><br />Gli utenti di OpenBazaar non sono anonimi di default. La maggior parte delle comunicazioni fra le parti sono cifrate, ma gli indirizzi IP sono pubblici e possono essere associati con le attivit&agrave; sul network. Parti malevole potrebbero utilizzare queste informazioni contro di voi; proteggere la tua privay è una tua responsabilit&agrave;.<br /><br />Gli utenti di OpenBazaar devono rispettare le leggi nella propria giurisdizione legale cos&igrave; come la loro coscienza. Gli sviluppatori di OpenBazaar non perdonano - e non sono responsabili - per alcun uso illegale della piattaforma.<br /><br />La comunit&agrave; deglo sviluppatori di OpenBazaar ha lavorato duramente per fornire una piattaforma libera per il commercio nel mondo. Ma come per ogni software, si troveranno bug. Gli sviluppatori non sono responsabili per alcuna perdita monetaria associata a problemi nel software.<br /><br />Usando OpenBazaar sei responsabile per le tue azioni sul network OpenBazaar.",
+          disclaimer_body: "OpenBazaar &egrave; un network per scambi di beni e servizi direttamente fra le persone - usando Bitcoin - senza nessuna organizzazione centrale che controlli la piattaforma. Questo significa che tu sei responsabile per le tue attività sul network.\n\nGli utenti di OpenBazaar non sono anonimi di default. La maggior parte delle comunicazioni fra le parti sono cifrate, ma gli indirizzi IP sono pubblici e possono essere associati con le attivit&agrave; sul network. Parti malevole potrebbero utilizzare queste informazioni contro di voi; proteggere la tua privay è una tua responsabilit&agrave;.\n\nGli utenti di OpenBazaar devono rispettare le leggi nella propria giurisdizione legale cos&igrave; come la loro coscienza. Gli sviluppatori di OpenBazaar non perdonano - e non sono responsabili - per alcun uso illegale della piattaforma.\n\nLa comunit&agrave; deglo sviluppatori di OpenBazaar ha lavorato duramente per fornire una piattaforma libera per il commercio nel mondo. Ma come per ogni software, si troveranno bug. Gli sviluppatori non sono responsabili per alcuna perdita monetaria associata a problemi nel software.\n\nUsando OpenBazaar sei responsabile per le tue azioni sul network OpenBazaar.",
           yourCountry: "Seleziona il tuo paese",
           localCurrency: "Seleziona la tua moneta",
           LanguagePlaceholder: "Seleziona la tua lingua",
@@ -1234,6 +1283,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finito"
         },
         buyFlow: {
@@ -1272,7 +1322,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Passer",
         Done: "Terminé",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Annuler",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "Fermer",
         Yes: "Oui",
         No: "Non",
@@ -1297,6 +1349,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Ne plus suivre",
         About: "&Agrave; propos",
         NoDescriptionAdded: "Aucune description ajoutée",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Photo de couverture",
         AboutEmpty: "&Agrave; propos est vide...",
         Followers: "Abonnés",
@@ -1445,6 +1498,7 @@ module.exports = Backbone.Model.extend({
         Purchases:"Achats",
         Sales: "Ventes",
         Cases: "Cas",
+        Enter: "Enter", //notTranslated
         Discover: "Découvrir",
         Blocked: "Bloqué",
         Advanced: "Avancé",
@@ -1497,6 +1551,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "Le serveur du vendeur a rejeté la demande d'achat",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Enregistrés",
           SaveSuccess: "Vos changements ont été enregistrés."
@@ -1526,12 +1586,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Configuration d'OpenBazaar",
-          theme: "Sélectionner un thème pour votre page",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Sélectionner un thème pour votre page",
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
           configure: "Configurez votre expérience",
           disclaimer_title: "Clause de non-responsabilité",
-          disclaimer_body: "OpenBazaar est un réseau commercial de biens et services de personne à personne - utilisant Bitcoin - sans aucune organisation centrale exerçant une autorité sur la plate-forme. Cela signifie que vous êtes seul responsable de votre activité sur le réseau. <br /><br />Les utilisateurs d'OpenBazaar ne sont pas anonymes par défaut. La plupart des communications entre les partis sont chiffrées, mais les adresses IP sont publiques et peuvent être associées à une activité sur le réseau. Des partis malveillants pourraient utiliser ces informations contre vous ; protéger votre vie privée est votre propre responsabilité. <br /><br />Les utilisateurs d'OpenBazaar doivent respecter les lois de leur propre juridiction ainsi que leur conscience. Les développeurs d'OpenBazaar ne tolèrent pas - et ne sont pas responsables -  de toute utilisation de la plate-forme pour une activité illégale. <br /><br />La communauté des développeurs d'OpenBazaar a travaillé sans relâche afin d'offrir une plate-forme commerciale libre et mondiale. Mais, comme avec tout logiciel, des bugs seront trouvés. Les développeurs ne sont pas responsables de toute perte monétaire associée à des problèmes dans le logiciel. <br /><br />En utilisant OpenBazaar vous êtes seul responsable de vos actions sur le réseau d'OpenBazaar.",
+          disclaimer_body: "OpenBazaar est un réseau commercial de biens et services de personne à personne - utilisant Bitcoin - sans aucune organisation centrale exerçant une autorité sur la plate-forme. Cela signifie que vous êtes seul responsable de votre activité sur le réseau. \n\nLes utilisateurs d'OpenBazaar ne sont pas anonymes par défaut. La plupart des communications entre les partis sont chiffrées, mais les adresses IP sont publiques et peuvent être associées à une activité sur le réseau. Des partis malveillants pourraient utiliser ces informations contre vous ; protéger votre vie privée est votre propre responsabilité. \n\nLes utilisateurs d'OpenBazaar doivent respecter les lois de leur propre juridiction ainsi que leur conscience. Les développeurs d'OpenBazaar ne tolèrent pas - et ne sont pas responsables -  de toute utilisation de la plate-forme pour une activité illégale. \n\nLa communauté des développeurs d'OpenBazaar a travaillé sans relâche afin d'offrir une plate-forme commerciale libre et mondiale. Mais, comme avec tout logiciel, des bugs seront trouvés. Les développeurs ne sont pas responsables de toute perte monétaire associée à des problèmes dans le logiciel. \n\nEn utilisant OpenBazaar vous êtes seul responsable de vos actions sur le réseau d'OpenBazaar.",
           yourCountry: "Sélectionner votre pays",
           localCurrency: "Sélectionner votre devise",
           LanguagePlaceholder: "Rechercher par langue",
@@ -1551,6 +1613,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Terminé"
         },
         buyFlow: {
@@ -1589,6 +1652,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Sari peste",
         Done: "Efectuat",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Anulare",
         Yes: "Da",
         No: "Nu",
@@ -1613,6 +1677,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Oprire Urmărire",
         About: "Despre",
         NoDescriptionAdded: "Nu a fost adăgată descrirea",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Fotografie Copertă",
         AboutEmpty: "Despre este gol...",
         Followers: "Urmăritori",
@@ -1760,6 +1825,7 @@ module.exports = Backbone.Model.extend({
         Purchases:"Cumpărături",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -1813,6 +1879,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "Serverul vânzătorului a respins cererea de cumpărare",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Salvat",
           SaveSuccess: "Modificările dvs. au fost salvate."
@@ -1841,12 +1913,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Configurare OpenBazaar",
-          theme: "Selectați o Temă pentru Pagina dvs.",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Selectați o Temă pentru Pagina dvs.",
           chooseLanguage: "Selectați Limba dvs.",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributori",
           configure: "Configurați-vă experiența",
           disclaimer_title: "Act de Declinare a Responsabilităţii",
-          disclaimer_body: "OpenBazaar este o rețea pentru comercializarea bunurilor și serviciilor direct între oameni - folosind Bitcoin - fără nici o organizație centrală care ar controla platforma. Aceasta înseamnă ca dvs. sunteți responsibil(ă) pentru activitatea dvs. în rețea.<br /><br />Utilizatorii OpenBazaar nu sunt anonimi implicit. Majoritatea cumunicațiilor între părți sunt criptate, dar adresa IP este publică și poate fi asociată cu activitatea în rețea. Părțile răutăcioase pot folosi această informație împotriva dvs.; protejarea confidențialității este responsabilitatea dvs.<br /><br />Utilizatorii OpenBazaar trebuie să respecte legile în jurisdicția lor legală de asemenea și conștiința lor. Dezvoltatorii OpenBazaar nu scuză - și nu sunt responsabili pentru - orice folosire a platformei în activități ileagale.<br /><br />Comunitatea dezvoltatorilor OpenBazaar a lucrat din greu pentru a livra lumii o platformă gratuită pentru comerț. Dar ca orice soft, bug-uri vor fi găsite. Dezvoltatorii nu sunt responsabili pentru orice pierdere monetară asociată cu problemele din soft.<br /><br />Folosind OpenBazaar sunteți responsabili pentru acțiunile proprii în rețeaua OpenBazaar.",
+          disclaimer_body: "OpenBazaar este o rețea pentru comercializarea bunurilor și serviciilor direct între oameni - folosind Bitcoin - fără nici o organizație centrală care ar controla platforma. Aceasta înseamnă ca dvs. sunteți responsibil(ă) pentru activitatea dvs. în rețea.\n\nUtilizatorii OpenBazaar nu sunt anonimi implicit. Majoritatea cumunicațiilor între părți sunt criptate, dar adresa IP este publică și poate fi asociată cu activitatea în rețea. Părțile răutăcioase pot folosi această informație împotriva dvs.; protejarea confidențialității este responsabilitatea dvs.\n\nUtilizatorii OpenBazaar trebuie să respecte legile în jurisdicția lor legală de asemenea și conștiința lor. Dezvoltatorii OpenBazaar nu scuză - și nu sunt responsabili pentru - orice folosire a platformei în activități ileagale.\n\nComunitatea dezvoltatorilor OpenBazaar a lucrat din greu pentru a livra lumii o platformă gratuită pentru comerț. Dar ca orice soft, bug-uri vor fi găsite. Dezvoltatorii nu sunt responsabili pentru orice pierdere monetară asociată cu problemele din soft.\n\nFolosind OpenBazaar sunteți responsabili pentru acțiunile proprii în rețeaua OpenBazaar.",
           yourCountry: "Selectați Țara dvs.",
           localCurrency: "Selectați Valuta dvs.",
           LanguagePlaceholder: "Căutare limbă",
@@ -1866,6 +1940,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Conectare Existente",
           avatar: "Setați un Avatar",
           chooseAvatar: "Selectare Avatar",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -1904,6 +1979,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Пропустить",
         Done: "Готово",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Отмена",
         Yes: "Да",
         No: "Нет",
@@ -1928,6 +2004,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Обложка",
         AboutEmpty: "Описание не заполнено...",
         Followers: "Читатели",
@@ -2075,6 +2152,7 @@ module.exports = Backbone.Model.extend({
         Purchases:"Покупки",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -2128,6 +2206,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "Сервер продавца отключил эту возможность",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Сохранено",
           SaveSuccess: "Ваши изменения сохранены."
@@ -2156,12 +2240,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Конфигурация OpenBazaar",
-          theme: "Выберите оформление для вашей страницы",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Выберите оформление для вашей страницы",
           chooseLanguage: "Выберите ваш язык",
           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиков",
           configure: "Настройте рабочее место",
           disclaimer_title: "Отказ от ответственности",
-          disclaimer_body: "OpenBazaar является открытой сетью для прямой торговли с использованием сети Биткойна - без какого-либо центрального органа или компании контроллирующего платформу. Это значит что вы ответственны за ваши собственные действия.<br /><br />Пользователи OpenBazaar не являются анонимными по умолчанию. Большинство коммуникаций между сторонами шифруются, но IP адреса публичны, поэтому могут быть ассоциированны с запросами поступающими с них в сеть. Злоумышленники могут использовать эту информацию против вас; защита приватности - в ваших руках.<br /><br />Пользователи OpenBazaar должны соблюдать законы в непосредственной юрисдикции их местонахождения. Разработчики OpenBazaar не могут контроллировать каждое использование - и не несут ответственности за любое использование платформы в незаконных целях.<br /><br />Сообщество OpenBazaar приложило огромное количество усилий по созданию свободной платформы для международной торговли. Как и в любом программном обеспечении, наши программы тоже содержат ошибки. Разработчики не несут ответственности за любые потери связанные с использованием этого программного продукта.<br /><br />Используя OpenBazaar вы несёте полную ответственность за любые действия совершаемые вами в сети OpenBazaar.",
+          disclaimer_body: "OpenBazaar является открытой сетью для прямой торговли с использованием сети Биткойна - без какого-либо центрального органа или компании контроллирующего платформу. Это значит что вы ответственны за ваши собственные действия.\n\nПользователи OpenBazaar не являются анонимными по умолчанию. Большинство коммуникаций между сторонами шифруются, но IP адреса публичны, поэтому могут быть ассоциированны с запросами поступающими с них в сеть. Злоумышленники могут использовать эту информацию против вас; защита приватности - в ваших руках.\n\nПользователи OpenBazaar должны соблюдать законы в непосредственной юрисдикции их местонахождения. Разработчики OpenBazaar не могут контроллировать каждое использование - и не несут ответственности за любое использование платформы в незаконных целях.\n\nСообщество OpenBazaar приложило огромное количество усилий по созданию свободной платформы для международной торговли. Как и в любом программном обеспечении, наши программы тоже содержат ошибки. Разработчики не несут ответственности за любые потери связанные с использованием этого программного продукта.\n\nИспользуя OpenBazaar вы несёте полную ответственность за любые действия совершаемые вами в сети OpenBazaar.",
           yourCountry: "Выберите вашу страну",
           localCurrency: "Выберите вашу валюту",
           LanguagePlaceholder: "Введите язык",
@@ -2181,6 +2267,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Подключить существующий",
           avatar: "Поставить аватарку",
           chooseAvatar: "Выбрать аватарку",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -2219,6 +2306,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Preskočiť",
         Done: "Hotovo",
+        Navigation: "Navigation", //notTranslated
         Cancel: "Zrušiť",
         Yes: "Áno",
         No: "Nie",
@@ -2243,6 +2331,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Titulná fotka",
         AboutEmpty: "Stránka s informáciami je prázdna...",
         Followers: "Followeri",
@@ -2389,6 +2478,7 @@ module.exports = Backbone.Model.extend({
         Purchases:"Nákupy",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -2442,6 +2532,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "Predajcov server odmietol žiadosť o nákup.",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Uložené",
           SaveSuccess: "Vaše zmeny boli uložené."
@@ -2470,12 +2566,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "Konfigurácia OpenBazaaru",
-          theme: "Zvoľte si grafickú tému Vašej stránky",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Zvoľte si grafickú tému Vašej stránky",
           chooseLanguage: "Zvoľte jazyk",
           contributors: "%{smart_count} prispievateľ |||| %{smart_count} prispievateľov",
           configure: "Configure your experience",
           disclaimer_title: "Upozornenie",
-          disclaimer_body: "OpenBazaar je sieť umožňujúca ľuďom obchodovať s tovarmi a službami - prostredníctovm Bitcoinu - bez akejkoľvek centrálnej organizácie, ktorá by platformu ovládala. To znamená, že za svoju aktivitu v sieti ste zodpovední Vy sami.<br /><br />Používatelia OpenBazaaru nie sú anonymní. Väčšina komunikácie medzi používateľmi je šifrovaná, no IP adresy sú verejné a môžu byť spojené s aktivitou na sieti. Útočníci môžu tieto informácie použiť proti Vám; ochrana Vášho súkromia je Vaša vlastná zodpovednosť.<br /><br />Používatelia OpenBazaaru podliehajú zákonom platným v mieste ich pôsobenia, rovnako ako svojmu vlastnému svedomiu. Vývojári OpenBazaaru nenesú žiadnu vinu ani zodpovednosť za akékoľvek zneužitie platformy na nelegálnu činnosť.<br /><br />Komunita vývojárov OpenBazaaru tvrdo pracovala na tom, aby svetu priniesla slobodnú obchodnú platformu. Ale ako to už pri softvéri býva, určite sa vyskytnú nejaké chyby. Vývojári nie sú zodpovední za akékoľvek finančné škody spojené s problémami v tomto softvéri.<br /><br />Používaním OpenBazaaru príjmate zodpovednosť za všetky svoje činy na sieti OpenBazaar.",
+          disclaimer_body: "OpenBazaar je sieť umožňujúca ľuďom obchodovať s tovarmi a službami - prostredníctovm Bitcoinu - bez akejkoľvek centrálnej organizácie, ktorá by platformu ovládala. To znamená, že za svoju aktivitu v sieti ste zodpovední Vy sami.\n\nPoužívatelia OpenBazaaru nie sú anonymní. Väčšina komunikácie medzi používateľmi je šifrovaná, no IP adresy sú verejné a môžu byť spojené s aktivitou na sieti. Útočníci môžu tieto informácie použiť proti Vám; ochrana Vášho súkromia je Vaša vlastná zodpovednosť.\n\nPoužívatelia OpenBazaaru podliehajú zákonom platným v mieste ich pôsobenia, rovnako ako svojmu vlastnému svedomiu. Vývojári OpenBazaaru nenesú žiadnu vinu ani zodpovednosť za akékoľvek zneužitie platformy na nelegálnu činnosť.\n\nKomunita vývojárov OpenBazaaru tvrdo pracovala na tom, aby svetu priniesla slobodnú obchodnú platformu. Ale ako to už pri softvéri býva, určite sa vyskytnú nejaké chyby. Vývojári nie sú zodpovední za akékoľvek finančné škody spojené s problémami v tomto softvéri.\n\nPoužívaním OpenBazaaru príjmate zodpovednosť za všetky svoje činy na sieti OpenBazaar.",
           yourCountry: "Zvoľte svoju krajinu",
           localCurrency: "Zvoľte svoju menu",
           LanguagePlaceholder: "Vyhľadať jazyk",
@@ -2495,6 +2593,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Pripojiť existujúci",
           avatar: "Vložiť avatara",
           chooseAvatar: "Zvoliť avatara",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -2533,7 +2632,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Atla",
         Done: "Tamam",
+        Navigation: "Navigation", //notTranslated
         Cancel: "İptal",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "Kapat",
         Yes: "Evet",
         No: "Hayır",
@@ -2558,6 +2659,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Takibi bırak",
         About: "Hakkında",
         NoDescriptionAdded: "Tanım eklenmemiş",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Kapak görseli",
         AboutEmpty: "Hakkında kısmı boş...",
         Followers: "Takipçiler",
@@ -2706,6 +2808,7 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases", //not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -2758,6 +2861,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "Satıcının sunucusu alım talebini reddetti",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Kaydedildi",
           SaveSuccess: "Değişiklikleriniz kaydedildi."
@@ -2786,12 +2895,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar Yaplandırma",
-          theme: "Sayfanız için bir Tema Seçin",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Sayfanız için bir Tema Seçin",
           chooseLanguage: "Dilinizi Seçin",
           contributors: "%{smart_count} Katkıcı |||| %{smart_count} Katkıcı",
           configure: "Deneyiminizi Yapılandırın",
           disclaimer_title: "Sorumluluk Reddi",
-          disclaimer_body: "OpenBazaar, insanların Bitcoin kullanarak doğrudan birbirleri arasında ürün ve hizmet alışverişi için kurulmş bir ağdır ve bu platformu kontrol eden merkezi hiçbir örgüt yoktur. Bu da, ağdaki eylemlerinizden kendinizin sorumlu olduğu anlamına gelir.<br /><br />OpenBazaar kullanıcıları varsayılan olarak anonim değillerdir. Taraflar arasındaki çoğu iletişim şifrelenmiştir, fakat IP adresleri herkesin erişimine açıktır ve ağdaki aktivitelerle ilişkilendirilebilir. Kötü niyetli kimseler bu bilgiyi aleyhinize kullanabilir; gizliliğinizi korumak sizin sorumluluğunuzdadır. <br /><br />OpenBazaar kullanıcıları kendi adli yargılama yasalarına ve vicdanlarına uygun biçimde hareket etmelidirler. OpenBazaar geliştiricileri platformun yasadışı etkinlik için kullanımını uygun görmez ve bundan sorumlu değillerdir.<br /><br /> OpenBazaar geliştiricleri topluluğu dünyaya özgür bir alışveriş platformu sunmak için çok çalışmışlardır. Ancak her yazılımda olduğu gibi hatalar olacaktır. Geliştiriciler yazılımdaki hatalardan kaynaklanabilecek maddi kayıplardan sorumlu tutulamazlar. <br /><br />OpenBazaar'ı kullanarak, bu ağdaki eylemlerinizin sorumluluğunu üstlenmiş olursunuz.",
+          disclaimer_body: "OpenBazaar, insanların Bitcoin kullanarak doğrudan birbirleri arasında ürün ve hizmet alışverişi için kurulmş bir ağdır ve bu platformu kontrol eden merkezi hiçbir örgüt yoktur. Bu da, ağdaki eylemlerinizden kendinizin sorumlu olduğu anlamına gelir.\n\nOpenBazaar kullanıcıları varsayılan olarak anonim değillerdir. Taraflar arasındaki çoğu iletişim şifrelenmiştir, fakat IP adresleri herkesin erişimine açıktır ve ağdaki aktivitelerle ilişkilendirilebilir. Kötü niyetli kimseler bu bilgiyi aleyhinize kullanabilir; gizliliğinizi korumak sizin sorumluluğunuzdadır. \n\nOpenBazaar kullanıcıları kendi adli yargılama yasalarına ve vicdanlarına uygun biçimde hareket etmelidirler. OpenBazaar geliştiricileri platformun yasadışı etkinlik için kullanımını uygun görmez ve bundan sorumlu değillerdir.\n\n OpenBazaar geliştiricleri topluluğu dünyaya özgür bir alışveriş platformu sunmak için çok çalışmışlardır. Ancak her yazılımda olduğu gibi hatalar olacaktır. Geliştiriciler yazılımdaki hatalardan kaynaklanabilecek maddi kayıplardan sorumlu tutulamazlar. \n\nOpenBazaar'ı kullanarak, bu ağdaki eylemlerinizin sorumluluğunu üstlenmiş olursunuz.",
           yourCountry: "Ülkenizi Seçin",
           localCurrency: "Para Biriminizi Seçin",
           LanguagePlaceholder: "Dil Ara",
@@ -2811,6 +2922,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Mevcuta Bağlan",
           avatar: "Avatar Ata",
           chooseAvatar: "Avatar Seç",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -2849,7 +2961,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "BuSHa'",
         Done: "PItlh",
+        Navigation: "Navigation", //notTranslated
         Cancel: "QuvHa'ghach",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "SoQmoH",
         Yes: "HIja'",
         No: "Be'",
@@ -2874,6 +2988,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "Mej",
         About: "Umqu' ghot",
         NoDescriptionAdded: "Pagh bang nob",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "Yuvtlhe' mIllogh",
         AboutEmpty: "Ghot tu'lu'. mej chIm...",
         Followers: "PabwI'",
@@ -3021,6 +3136,7 @@ module.exports = Backbone.Model.extend({
         Purchases:"Je'",
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -3073,6 +3189,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "QuvHa' offer lajQo' loD 'Iv ngev",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "Choq",
           SaveSuccess: "YemwI' choH."
@@ -3101,12 +3223,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar bang",
-          theme: "Hoch tuqwIj wIv",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated
+          Theme: "Hoch tuqwIj wIv",
           chooseLanguage: "Hol wIv",
           contributors: "%{smart_count} 'ach yIn nuvpu' 'Iv ghaq |||| %{smart_count} 'ach yIn nuvpu' 'Iv ghaq",
           configure: "SIQpu'bogh choH",
           disclaimer_title: "Tu' ghuHmoH",
-          disclaimer_body: "OpenBazaar Doch chavmoH Hoch wo' SabtaHbogh yIn nuvpu'-bitcoin-lo' Hutlh vay' Vas DIvI' ravDaq yISeH 'ej mech network. SoHvaD ngoy' activity wa' nuv. qej <br /><br />OpenBazaar nuv wej Sovbe'lu'bogh Qoylu' 'ej mIv tIn vItuQchoH pong quvHa' nuvpu'. QaD QumpIn SabtaHbogh nuvpu' mI' pong, 'ach public vaj laH nuq Davang wa' nuv maqochpu'na' maHtaH ip SoQ. De' laH DanoHmeH nuv quvHa' harm SoH; ghob'e' vIchIDmeH, Qatlh Qu' QaD HoS.<br /><br />The OpenBazaar group of men who build has worked hard to deliver a free floor for trade to the world. But as with any work, bugs will be found. The men who build are not responsible for any money lost associated with problems in the work.<br /><br />By using OpenBazaar you're responsible for your own honor on the OpenBazaar people.",
+          disclaimer_body: "OpenBazaar Doch chavmoH Hoch wo' SabtaHbogh yIn nuvpu'-bitcoin-lo' Hutlh vay' Vas DIvI' ravDaq yISeH 'ej mech network. SoHvaD ngoy' activity wa' nuv. qej \n\nOpenBazaar nuv wej Sovbe'lu'bogh Qoylu' 'ej mIv tIn vItuQchoH pong quvHa' nuvpu'. QaD QumpIn SabtaHbogh nuvpu' mI' pong, 'ach public vaj laH nuq Davang wa' nuv maqochpu'na' maHtaH ip SoQ. De' laH DanoHmeH nuv quvHa' harm SoH; ghob'e' vIchIDmeH, Qatlh Qu' QaD HoS.\n\nThe OpenBazaar group of men who build has worked hard to deliver a free floor for trade to the world. But as with any work, bugs will be found. The men who build are not responsible for any money lost associated with problems in the work.\n\nBy using OpenBazaar you're responsible for your own honor on the OpenBazaar people.",
           yourCountry: "Sep wlv",
           localCurrency: "Huch wIv",
           LanguagePlaceholder: "Nej Hol",
@@ -3126,6 +3250,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "NIv'e' rar",
           avatar: "MIllogh qab HIjmeH",
           chooseAvatar: "MIllogh qab wIv",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -3164,7 +3289,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "跳过",
         Done: "完成",
+        Navigation: "Navigation", //notTranslated
         Cancel: "取消",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "关闭",
         Yes: "是",
         No: "否",
@@ -3189,6 +3316,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "不再关注",
         About: "关于",
         NoDescriptionAdded: "未加描述",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "封面照片",
         AboutEmpty: "关于空白着",
         Followers: "追随者",
@@ -3336,6 +3464,7 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases", // not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -3388,6 +3517,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "卖家的服务器拒绝了这笔买卖",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "以保存",
           SaveSuccess: "以保存更改"
@@ -3416,12 +3551,13 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "OpenBazaar 布局",
-          theme: "选择主页主题",
+          Introduction: "Introduction", //notTranslated
+         IntroductionBody: "", //notTranslated          theme: "选择主页主题",
           chooseLanguage: "选择语言",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
           configure: "设定体验内容",
           disclaimer_title: "免责声明",
-          disclaimer_body: "OpenBazaar 是一个没有任何集中体控制的网络平台，通过本网人们可以使用比特币自由直接的交换货物与互相提供服务。这意味着您将为您在本网的活动负全部责任。<br /><br />OpenBazaar 的使用者默认身份不为匿名的。大多数用户通讯信息是加密的，但是用户IP地址是公开的并且可以被追踪到本网。有人可以恶意使用您的信息损害您的利益；保护您的隐私是您本人的责任<br /><br />OpenBazaar 用户必须遵守他们所在地区管辖内的法律和道德标准。OpenBazaar 的创建者们不但不宽容并且不为任何利用本网进行非法活动分子负责。<br /><br />OpenBazaar 创建者们尽心尽力为用户提供了一个免费的贸易交流平台，但是就像所有的软件一样，避免不了程序错误。创建者们不为因软件问题而造成的经济损失。<br /><br />在使用 OpenBazaar 时，敬请对您本人的行为负责。",
+          disclaimer_body: "OpenBazaar 是一个没有任何集中体控制的网络平台，通过本网人们可以使用比特币自由直接的交换货物与互相提供服务。这意味着您将为您在本网的活动负全部责任。\n\nOpenBazaar 的使用者默认身份不为匿名的。大多数用户通讯信息是加密的，但是用户IP地址是公开的并且可以被追踪到本网。有人可以恶意使用您的信息损害您的利益；保护您的隐私是您本人的责任\n\nOpenBazaar 用户必须遵守他们所在地区管辖内的法律和道德标准。OpenBazaar 的创建者们不但不宽容并且不为任何利用本网进行非法活动分子负责。\n\nOpenBazaar 创建者们尽心尽力为用户提供了一个免费的贸易交流平台，但是就像所有的软件一样，避免不了程序错误。创建者们不为因软件问题而造成的经济损失。\n\n在使用 OpenBazaar 时，敬请对您本人的行为负责。",
           yourCountry: "选择您的国家",
           localCurrency: "选择您的币种",
           LanguagePlaceholder: "选择语言",
@@ -3441,6 +3577,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "连接 Existing",
           avatar: "设置一个 Avatar",
           chooseAvatar: "选择 Avatar",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -3480,7 +3617,9 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "거르다",
         Done: "끝난",
+        Navigation: "Navigation", //notTranslated
         Cancel: "취소",
+        ClosingOpenBazaar: "Closing OpenBazaar will take your page offline", //notTranslated
         Close: "닫기",
         Yes: "네",
         No: "아니요",
@@ -3505,6 +3644,7 @@ module.exports = Backbone.Model.extend({
         Unfollow: "팔로우 취소",
         About: "정보",
         NoDescriptionAdded: "설명할수 없어",
+        NoListings: "No listings", //notTranslated
         CoverPhoto: "표지 사진",
         AboutEmpty: "정보 없어...",
         Followers: "팔로워",
@@ -3653,6 +3793,7 @@ module.exports = Backbone.Model.extend({
         Purchases: "Purchases", // not translated
         Sales: "Sales", // not translated
         Cases: "Cases", // not translated
+        Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
@@ -3705,6 +3846,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "판매자의 서버는 구매 요청을 거부했습니다.",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "저장하다",
           SaveSuccess: "변경 사항 저장하다."
@@ -3733,12 +3880,14 @@ module.exports = Backbone.Model.extend({
         },
         onboarding: {
           intro: "오픈바자 구서",
+          Introduction: "Introduction", //notTranslated
+          IntroductionBody: "", //notTranslated          
           theme: "내 페이지 테마 선택",
           chooseLanguage: "언어 선택",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors", // not sure if I can change this..
           configure: "당신의 경험을 구성",
           disclaimer_title: "경고",
-          disclaimer_body: "오픈바자 is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.<br /><br />오픈바자 users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.<br /><br />오픈바자 users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The 오픈바자 developers do not condone - and are not responsible for - any use of the platform for illegal activity.<br /><br />The OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.<br /><br />By using 오픈바자 you're responsible for your own actions on the 오픈바자 network.", // leaving legalese alone, just changed the name OpenBazaar to ko
+          disclaimer_body: "오픈바자 is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\n오픈바자 users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\n오픈바자 users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The 오픈바자 developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using 오픈바자 you're responsible for your own actions on the 오픈바자 network.", // leaving legalese alone, just changed the name OpenBazaar to ko
           yourCountry: "나라 선택",
           localCurrency: "선택 통화",
           LanguagePlaceholder: "언어 검색",
@@ -3758,6 +3907,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "기존 연결",
           avatar: "화신 설정",
           chooseAvatar: "화신 선택",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
@@ -3969,6 +4119,7 @@ module.exports = Backbone.Model.extend({
         Purchases: "購入済み",
         Sales: "販売履歴",
         Cases: "事例",
+        Enter: "Enter", //notTranslated
         Discover: "ピックアップ",
         Blocked: "ブロック",
         Advanced: "詳細設定",
@@ -4021,6 +4172,12 @@ module.exports = Backbone.Model.extend({
           sellerError: "出品者のサーバーは購入要求を拒否しました。",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
         },
+        aboutSection: {
+          about: "", //notTranslated
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
+          support: "", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+        },
         saveMessages: {
           Saved: "保存しました",
           SaveSuccess: "変更の保存をしました。"
@@ -4055,7 +4212,7 @@ module.exports = Backbone.Model.extend({
           contributors: "投稿者: %{smart_count}人 |||| 投稿者: %{smart_count}人",
           configure: "ユーザーエクスペリエンスの構成",
           disclaimer_title: "担保文言",
-          disclaimer_body: "OpenBazaarは、ビットコインを使用して、直接任意の中央機関の制御なしに商品やサービスを売買するためのネットワークです。ユーザーは、ネットワーク上の自分の活動に責任があります。<br /><br />OpenBazaarユーザーは、デフォルトでは匿名ではありません。当事者間のほとんどの通信は暗号化されていますが、IPアドレスは公開され、ネットワーク上のアクティビティに関連付けることができます。<br /><br />悪意のある当事者は、あなたに対して、この情報を使用することができます。あなたのプライバシーを保護することはあなた自身の責任です。<br /><br />OpenBazaarユーザーは自分の法的管轄区域の法律、また、自分の良心に従っている必要があります。OpenBazaarの開発者は、容認または違法行為のために、このプラットフォームのいずれかの使用については責任を負いません。<br /><br />開発者のOpenBazaarコミュニティは、世界の貿易のための無料のプラットフォームを提供するために懸命に働きました。しかし、他のソフトウェアと同様、バグが発見されます。開発者は、ソフトウェアでの問題に関連したいかなる金銭的損害について責任を負いません。<br /><br />OpenBazaarを使用することで、OpenBazaarネットワーク上の自分自身の行動に責任です。", // terrible. fix later.",
+          disclaimer_body: "OpenBazaarは、ビットコインを使用して、直接任意の中央機関の制御なしに商品やサービスを売買するためのネットワークです。ユーザーは、ネットワーク上の自分の活動に責任があります。\n\nOpenBazaarユーザーは、デフォルトでは匿名ではありません。当事者間のほとんどの通信は暗号化されていますが、IPアドレスは公開され、ネットワーク上のアクティビティに関連付けることができます。\n\n悪意のある当事者は、あなたに対して、この情報を使用することができます。あなたのプライバシーを保護することはあなた自身の責任です。\n\nOpenBazaarユーザーは自分の法的管轄区域の法律、また、自分の良心に従っている必要があります。OpenBazaarの開発者は、容認または違法行為のために、このプラットフォームのいずれかの使用については責任を負いません。\n\n開発者のOpenBazaarコミュニティは、世界の貿易のための無料のプラットフォームを提供するために懸命に働きました。しかし、他のソフトウェアと同様、バグが発見されます。開発者は、ソフトウェアでの問題に関連したいかなる金銭的損害について責任を負いません。\n\nOpenBazaarを使用することで、OpenBazaarネットワーク上の自分自身の行動に責任です。", // terrible. fix later.",
           yourCountry: "国を選択",
           localCurrency: "通貨を選択",
           LanguagePlaceholder: "言語を探す [例:日本語、English]",
@@ -4075,6 +4232,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "既存サーバーに接続する",
           avatar: "プロフィール画像",
           chooseAvatar: "プロフィール画像を選択",
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "完了"
         },
         buyFlow: {

@@ -1,26 +1,63 @@
+<div class="onboardingIntroDiscover js-OnboardingIntroDiscoverHolder hide">
+  <a href="#home" class="js-OnboardingIntroDiscover">
+    <div>
+      <h3 class="margin0 marginTop25"><%= polyglot.t('Discover') %></h3>
+    </div>
+    <p class="textOpacity75 padding025 fontSize15 margin8"><%= polyglot.t('onboarding.discoverCallOut') %></p>
+    <div class="btn btn-enter custCol-secondary"><%= polyglot.t('Enter') %></div>
+  </a>
+</div>
+
 <div class="popMenu hide popMenu-navBar js-navProfileMenu">
-  <a href="#userPage"><%= polyglot.t('nav.myPage') %></a>
-  <a href="#userPage/<%- ob.guid %>/customize"><%= polyglot.t('nav.customizePage') %></a>
+  <a href="#userPage">
+    <span class="ion-document-text fontSize12 marginRight2 textOpacity1"></span>
+  <%= polyglot.t('nav.myPage') %>
+  </a>
+  <a href="#userPage/<%- ob.guid %>/customize">
+    <span class="ion-paintbucket fontSize10  textOpacity1"></span>
+    <%= polyglot.t('nav.customizePage') %>
+  </a>
   <% if(ob.vendor) { %>
-    <a href="#sellItem" ><%= polyglot.t('nav.sellItem') %></a>
+    <a href="#sellItem" >
+      <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('nav.createListing') %>
+    </a>
   <% }else{ %>
-    <a href="#userPage/<%- ob.guid %>/createStore"><%= polyglot.t('CreateStore') %></a>
+    <a href="#userPage/<%- ob.guid %>/createStore">
+      <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('CreateStore') %>
+    </a>
   <% } %>
   <hr/>
-  <a href="#transactions/purchases"><%= polyglot.t('nav.purchases') %></a>
+  <a href="#transactions/purchases">
+    <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.purchases') %>
+  </a>
   <% if(ob.vendor) { %>
-    <a href="#transactions/sales"><%= polyglot.t('nav.sales') %></a>
+    <a href="#transactions/sales">
+      <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('nav.sales') %>
+    </a>
   <% } %>
   <% if(ob.moderator) { %>
     <a href="#transactions/cases"><%= polyglot.t('nav.cases') %></a>
   <% } %>
   <hr/>
-  <a href="#settings"><%= polyglot.t('nav.settings') %></a>
+  <a href="#settings">
+    <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.settings') %>
+    </a>
   <hr/>
-  <a href="#about"><%= polyglot.t('nav.about') %></a>
-  <a href="#support"><%= polyglot.t('nav.support') %></a>
+  <a class="js-showAboutModal">
+    <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.about') %>
+  </a>
+  <a class="js-showSupportModal">
+    <span class="ion-android-favorite fontSize11 marginRight2 textOpacity1"></span>
+    <%= polyglot.t('nav.support') %>
+  </a>
   <hr/>
-  <a class="js-navAdminPanel">Admin Panel</a>
+  <a class="js-navAdminPanel">Admin Panel (temporary)</a>
 </div>
 
 <div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
@@ -31,7 +68,7 @@
 
 <div class="bar navBar pageNavContainer custCol-secondary">
   <div class="ctrlGroup">
-    <a class="btn btn-win btn-winClose js-navClose">
+    <a class="btn btn-win btn-winClose js-navClose tooltip" data-tooltip="<%= polyglot.t('ClosingOpenBazaar') %>">
       <div class="btn-win-icon ion-ios-close-empty"></div>
     </a>
     <a class="btn btn-win btn-winMin js-navMin">
@@ -63,7 +100,7 @@
   </div>
 
   <div class="ctrlGroup nav-profile">
-    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('You') %>"
+    <div class="btn btn-profile js-navProfile custCol-primary"
     <% if(ob.avatar_hash != "") { %>
     style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>
@@ -82,43 +119,52 @@
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.chooseLanguage') %>
-              <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 9</span>
+              <span class="textOpacity75 fontSize14 floatRight">1 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer" id="homeModal-languageList">
               <div class="flexRow">
-                <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper  custCol-border-secondary">
-                  <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border-secondary custCol-text" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
+                <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper  custCol-border">
+                  <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
                 </div>
               </div>
               <div class="js-homeModal-languageList flex-border"></div>
             </div>
             <div class="bar barFlush">
-              <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+              <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 custCol-text">
+                <%= polyglot.t('Next') %>
+                <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+              </a>
             </div>
           </div>
 
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
-              <%= polyglot.t('onboarding.disclaimer_title') %>
-              <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 9</span>
+              <%= polyglot.t('Introduction') %>
+              <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 10</span>
             </div>
-            <div class="flexContainer homeModal-settings customThemeScrollbar homeModal-settings-noSearch custCol-primary">
-              <div class="flexRow">
+            <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
+              <div class="flexRow flexRow-center positionRelative">
                 <div class="rowItem padding20">
-                  <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.disclaimer_body') %></p>
+                  <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.IntroductionBody') %></p>
                 </div>
               </div>
             </div>
-            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                <%= polyglot.t('Next') %>
+                <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+              </a>
             </div>
           </div>
 
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.yourCountry') %>
-              <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 9</span>
+              <span class="textOpacity75 fontSize14 floatRight">3 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer custCol-primary" id="homeModal-countryList">
               <div class="flexRow">
@@ -128,15 +174,21 @@
               </div>
               <div class="js-homeModal-countryList flex-border"></div>
               <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-                <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-                <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+                <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                  <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                  <%= polyglot.t('Back') %>
+                </a>
+                <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                  <%= polyglot.t('Next') %>
+                  <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+                </a>
               </div>
             </div>
           </div>
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.localCurrency') %>
-              <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 9</span>
+              <span class="textOpacity75 fontSize14 floatRight">4 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer" id="homeModal-currencyList">
               <div class="flexRow">
@@ -146,15 +198,21 @@
               </div>
               <div class="js-homeModal-currencyList flex-border"></div>
               <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-                <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-                <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+                <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                  <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                  <%= polyglot.t('Back') %>
+                </a>
+                <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                  <%= polyglot.t('Next') %>
+                  <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+                </a>
               </div>
             </div>
           </div>
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.timeZone') %>
-              <span class="textOpacity75 fontSize14 floatRight">5 <%= polyglot.t('of') %> 9</span>
+              <span class="textOpacity75 fontSize14 floatRight">5 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer flex-border" id="homeModal-timeList">
               <div class="flexRow">
@@ -352,14 +410,20 @@
               </ul>
             </div>
             <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                <%= polyglot.t('Next') %>
+                <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+              </a>
             </div>
           </div>
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.yourDetails') %> (<%= polyglot.t('Optional') %>)
-              <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 9</span>
+              <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch custCol-primary custCol-text">
               <div class="flexRow">
@@ -403,7 +467,7 @@
                   <div class="flexRow borderBottom custCol-border">
                     <div class="flexCol-3 borderRight custCol-border">
                       <label class="fieldItem" for="aboutInput">
-                        <%= polyglot.t('onboarding.yourDescription') %>
+                        <%= polyglot.t('Description') %>
                       </label>
                     </div>
                     <div class="flexCol-9">
@@ -414,14 +478,20 @@
               </div>
             </div>
             <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                <%= polyglot.t('Next') %>
+                <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+              </a>
             </div>
           </div>
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.theme') %>
-              <span class="textOpacity75 fontSize14 floatRight">7 <%= polyglot.t('of') %> 9</span>
+              <span class="textOpacity75 fontSize14 floatRight">7 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary customThemeScrollbar">
               <div class="flexRow">
@@ -439,6 +509,7 @@
                       <div class="theme-nav" style="background: #641630">
                         <div class="theme-tab" style="background: #461222"></div>
                       </div>
+                      <div class="theme-body" style="background: #461222"></div>
                     </div>
                   </label>
                 </div>
@@ -457,6 +528,7 @@
                       <div class="theme-nav" style="background: #d1d1d1">
                         <div class="theme-tab" style="background: #e8e8e8"></div>
                       </div>
+                      <div class="theme-body" style="background: #e8e8e8"></div>
                     </div>
                   </label>
                 </div>
@@ -475,6 +547,7 @@
                       <div class="theme-nav" style="background: #515752">
                         <div class="theme-tab" style="background: #3F4641"></div>
                       </div>
+                      <div class="theme-body" style="background: #3F4641"></div>
                     </div>
                   </label>
                 </div>
@@ -493,6 +566,7 @@
                       <div class="theme-nav" style="background: #3B5F2B">
                         <div class="theme-tab" style="background: #344E31"></div>
                       </div>
+                      <div class="theme-body" style="background: #344E31"></div>
                     </div>
                   </label>
                 </div>
@@ -511,6 +585,7 @@
                       <div class="theme-nav" style="background: #007088">
                         <div class="theme-tab" style="background: #128092"></div>
                       </div>
+                      <div class="theme-body" style="background: #128092"></div>
                     </div>
                   </label>
                 </div>
@@ -529,21 +604,28 @@
                       <div class="theme-nav" style="background: #0D0A0D">
                         <div class="theme-tab" style="background: #121212"></div>
                       </div>
+                      <div class="theme-body" style="background: #121212"></div>
                     </div>
                   </label>
                 </div>
               </div>
             </div>
             <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                <%= polyglot.t('Next') %>
+                <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+              </a>
             </div>
           </div>
 
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.avatar') %> (<%= polyglot.t('Optional') %>)
-              <span class="textOpacity75 fontSize14 floatRight">8 <%= polyglot.t('of') %> 9</span>
+              <span class="textOpacity75 fontSize14 floatRight">8 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
               <div class="flexRow flexRow-center positionRelative">
@@ -551,7 +633,7 @@
                   <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
                     <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
                   </div>
-                  <div class="cropit-image-preview rowTop10 thumbnail thumbnail-huge box-borderBright row10"></div>
+                  <div class="cropit-image-preview rowTop10 thumbnail thumbnail-huge border1 row10"></div>
                   <div>
                     <input type="range" class="cropit-image-zoom-input rowTop10 row10 width100" />
                   </div>
@@ -561,16 +643,21 @@
               </div>
             </div>
             <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('Next') %></a>
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                <%= polyglot.t('Next') %>
+                <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+              </a>
             </div>
           </div>
 
           <div class="accordion-child custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('onboarding.recommended') %> (<%= polyglot.t('Optional') %>)
-              <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 9</span>
-
+              <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary customThemeScrollbar">
               <div class="flexRow">
@@ -628,8 +715,38 @@
               </div>
             </div>
             <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text"><%= polyglot.t('Back') %></a>
-              <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text"><%= polyglot.t('onboarding.Finished') %></a>
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                <%= polyglot.t('Next') %>
+                <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="accordion-child custCol-primary">
+            <div class="bar barTxt h6 custCol-secondary custCol-text">
+              <%= polyglot.t('onboarding.disclaimer_title') %>
+              <span class="textOpacity75 fontSize14 floatRight">10 <%= polyglot.t('of') %> 10</span>
+            </div>
+            <div class="flexContainer homeModal-settings customThemeScrollbar homeModal-settings-noSearch custCol-primary">
+              <div class="flexRow">
+                <div class="rowItem padding20">
+                  <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.disclaimer_body') %></p>
+                </div>
+              </div>
+            </div>
+            <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+              <a class="btn btn-bar btn-half js-homeModalDone custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text">
+                <span class="ion-checkmark fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('IAgree') %>
+              </a>
             </div>
           </div>
 
@@ -646,4 +763,60 @@
   </div>
 
   <div id="adminPanel"></div>
+
+  <div class="modal modal-opaque modal-about js-aboutModal hide">
+    <div class="modal-child modal-childMain custCol-primary">
+      <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-hideAboutModal">
+        <h2 class="ion-android-close"></h2>
+      </div>
+      <div class="about-hero modal-hero-about color-secondary custCol-secondary shadow-inner1-ultra-light">
+        <div class="modal-hero-icon"></div>
+        <p class="width100 alignCenter custCol-text marginTop50 textOpacity75 fontSize14">Version 0.9</p>
+      </div>
+      <div class="aboutModal-accordion accordion js-profileAccordion">
+        <div class="accordion-window">
+          <div class="accordion-child color-primary custCol-primary custCol-text">
+            <div class="bar navBar barFlush custCol-text custCol-secondary height56">
+              <a class="btn btn-bar btn-tab custCol-secondary js-about-mainTab js-tab active" data-tab="about">
+                <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
+                <%= polyglot.t('About') %>
+              </a>
+              <a class="btn btn-bar btn-tab custCol-secondary js-about-contributorsTab js-tab" data-tab="contributors">
+                <span class="ion-ios-people fontSize12 marginRight2 textOpacity1"></span>
+                <%= polyglot.t('Contributors') %>
+              </a>
+              <a class="btn btn-bar btn-tab custCol-secondary js-about-donationsTab js-tab"  data-tab="support">
+                <span class="ion-android-favorite fontSize11 marginRight2 textOpacity1"></span>
+                <%= polyglot.t('Support') %>
+              </a>
+              <a class="btn btn-bar btn-tab custCol-secondary js-about-licensingTab js-tab"  data-tab="licensing">
+                <span class="ion-clipboard fontSize11 marginRight2 textOpacity1"></span>
+                <%= polyglot.t('Licensing') %>
+              </a>
+            </div>          
+
+            <div class="modal-section custCol-primary modal-about-section js-modalAboutMain customThemeScrollbar">
+              <%= polyglot.t('aboutSection.about') %>
+            </div>
+
+            <div class="modal-section custCol-primary hide  modal-about-section js-modalAboutLicensing customThemeScrollbar">
+              <%= polyglot.t('aboutSection.licensing') %>
+            </div>
+          
+            <div class="modal-section custCol-primary hide modal-about-section js-modalAboutSupport customThemeScrollbar">
+              <div class="width100 alignCenter">
+                <img src="./imgs/donations.png" />
+              </div>
+              <%= polyglot.t('aboutSection.support') %>
+            </div>
+
+            <div class="modal-section custCol-primary hide modal-about-section js-modalAboutContributors customThemeScrollbar">
+              <%= polyglot.t('aboutSection.contributors') %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -84,7 +84,11 @@ module.exports = Backbone.Router.extend({
       state: state,
       searchItemsText: searchItemsText
     }));
+
+    // hide the discover onboarding callout 
+    $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
   },
+
 
   userPage: function(userID, state, itemHash){
     "use strict";
@@ -162,7 +166,6 @@ module.exports = Backbone.Router.extend({
   about: function(){
     "use strict";
     this.cleanup();
-    this.newView(new aboutView());
   },
 
   donate: function(){

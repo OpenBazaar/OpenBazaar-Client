@@ -11,18 +11,37 @@
       </div>
       <h1 class="fancy-heading fontSize20 vCentered"><%= polyglot.t('nav.settings') %></h1>
       <a href="#userPage" class="btn btn-txt custCol-primary positionRelative pull-right right10 marginTop9 marginLeft6">
+        <span class="ion-document-text fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('GoToMyPage') %>
       </a>
     </div>
   </div>
 
-  <div class="bar navBar barFlush custCol-secondary clearFix">
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-generalTab active"><%= polyglot.t('General') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-pageTab"><%= polyglot.t('Page') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-storeTab"><%= polyglot.t('Store') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-addressesTab"><%= polyglot.t('Addresses') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-blockedTab"><%= polyglot.t('Blocked') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-advancedTab"><%= polyglot.t('Advanced') %></a>
+  <div class="bar navBar barFlush custCol-secondary clearFix height55">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-generalTab active">
+      <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('General') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-pageTab">
+      <span class="ion-document-text fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Page') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-storeTab">
+      <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Store') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-addressesTab">
+      <span class="ion-ios-location fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Addresses') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-blockedTab">
+      <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Blocked') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-advancedTab">
+      <span class="ion-erlenmeyer-flask fontSize12 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Advanced') %>
+    </a>
   </div>
 
   <div class="flexContainer flex-border color-primary custCol-primary">

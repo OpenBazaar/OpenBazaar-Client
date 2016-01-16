@@ -23,6 +23,7 @@ module.exports = Backbone.View.extend({
     'click .js-feedTab': function(){this.setState("feed");},
     'click .js-vendorsTab': function(){this.setState("vendors");},
     'click .js-homeCreateStore': 'createStore',
+    'click .js-homeCreateListing': 'createListing',
     'click .js-homeSearchItemsClear': 'searchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
     'change .js-homeSelectFollowingFilter': 'setFollowingFilter'
@@ -72,7 +73,7 @@ module.exports = Backbone.View.extend({
     $.ajax({
       url: self.userModel.get('serverUrl') + "get_following",
       dataType: "json",
-      timeout: 3000
+      timeout: 4000
     }).done(function(ownFollowingData){
       self.ownFollowing = ownFollowingData.following || [];
       self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -133,6 +134,10 @@ module.exports = Backbone.View.extend({
       if(self.model.get('page').profile.vendor == true) {
         self.$el.find('.js-homeCreateStore').addClass('hide');
         self.$el.find('.js-homeMyPage').addClass('show');
+        self.$el.find('.js-homeCreateListing').addClass('show');
+      }else{
+        self.$el.find('.js-homeCreateStore').addClass('show');
+        self.$el.find('.js-homeCreateListing').addClass('hide');
       }
 
       //get vendors and items
@@ -222,6 +227,11 @@ module.exports = Backbone.View.extend({
   createStore: function(){
     "use strict";
     Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/createStore', {trigger: true});
+  },
+
+  createListing: function(){
+    "use strict";
+    Backbone.history.navigate('#sellItem', {trigger: true});
   },
 
   followUser: function(options){

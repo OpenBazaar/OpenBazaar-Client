@@ -78,6 +78,8 @@ module.exports = Backbone.View.extend({
       self.parentEl.append(self.$el);
       self.initAccordion('.js-storeWizardAccordion');
       self.setValues();
+      // add blur to container
+      $('#obContainer').addClass('blur');
       // fade the modal in after it loads and focus the input
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
@@ -109,12 +111,12 @@ module.exports = Backbone.View.extend({
     var moderatorDescription = (data.moderator.short_description) ? data.moderator.short_description : window.polyglot.t('NoDescriptionAdded');
     var moderatorHandle = (data.moderator.handle) ? data.moderator.handle : data.moderator.guid;
     var newModerator = $(
-        '<div class="pad10 flexRow custCol-border-secondary">' +
+        '<div class="pad10 flexRow custCol-border">' +
           '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
           '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100 table">' +
             '<div>' +
               '<div style="width: 80px;">' +
-                '<div class="thumbnail thumbnail-large-slim pull-left box-border" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);">' +
+                '<div class="thumbnail thumbnail-large-slim pull-left" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);">' +
                 '</div>' +
               '</div>' +
               '<div>' +
@@ -187,6 +189,7 @@ module.exports = Backbone.View.extend({
   close: function(){
     this.unbind();
     this.remove();
+    $('#obContainer').removeClass('blur');
   }
 
 });

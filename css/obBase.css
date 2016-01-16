@@ -205,6 +205,10 @@ form {
   padding: 10px 8px;
 }
 
+#pageNav .modal-about .navBar.bar {
+  padding: 0;
+}
+
 #sideBar {
   position: fixed;
   right: -183px;
@@ -506,7 +510,7 @@ form {
 .itemMetaValue {
   max-width: 130px;
   float: left;
-  font-size: 14px;
+  font-size: 15px;
   opacity: .75;
   height: 38px;
   line-height: 38px;
@@ -566,6 +570,16 @@ label.fieldItem {
 
 .table.tablePadCellRB5 > div > div {
   padding: 0 5px 5px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, td {
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .btn {
@@ -1170,6 +1184,13 @@ h5 {
   position: relative;
   width: 525px;
 }
+.modal-hero-about {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 250px;
+  position: relative;
+  width: 525px;
+}
 
 .modal-hero-icon {
   background: url(../imgs/openbazaar-icon-no-border.png);
@@ -1307,7 +1328,7 @@ h5 {
 }
 
 .searchWrapper .txtField:focus {
-  outline: 1px solid rgba(255,255,255,0.35);
+  outline: 2px solid rgba(255,255,255,0.35);
   -webkit-background-clip: border;
 }
 
@@ -1376,6 +1397,15 @@ input[type="text"].txtField-bar {
   border-radius: 3px;
   opacity: .80;
   box-sizing: border-box;
+}
+
+.btn-enter {
+  margin: 15px;
+  border-radius: 3px;
+  margin-top: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 90%;
 }
 
 .btn i[class *= "ion-"]:before {
@@ -1912,17 +1942,17 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn.btn-bar.btn-tab {
   background: #327EB8;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   -webkit-user-select: none;
   border: none;
-  height: 46px;
+  height:48px;
   font-weight: 500;
   line-height: 46px;
   padding: 0 25px;
-  margin-top: 4px;
+  margin-top: 6px;
   font-size: 14px;
 }
 
@@ -1951,15 +1981,23 @@ div.chatSearchOut .chatSearchIcon {
 .btn-pill {
   padding: 5px 13px;
   cursor: pointer;
-  border-radius: 18px;
+  border-radius: 4px;
   min-height: 17px;
   opacity: .75;
-  margin-bottom: 6px;
-  margin-right: 3px;
+  margin-bottom: 4px;
+  margin-right: 4px;
   min-width: 30px;
   text-align: center;
   overflow: hidden;
   line-height: 20px;
+}
+
+.btn-pill a {
+  text-decoration: none;
+}
+
+.btn-pill:hover {
+  opacity: 1;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -2423,8 +2461,6 @@ input[type="number"].fieldItem.fieldItem-withButton {
   -webkit-appearance: none;
   width: 100%;
   padding: 15px;
-  font-family: inherit;
-  font-size: inherit;
   resize: none;
 }
 
@@ -2586,6 +2622,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background-color: #4a4848;
 }
 
+.taggle {
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .fieldItem .taggle_placeholder {
   position: absolute;
   transition: opacity,.25s;
@@ -2697,6 +2740,45 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .75;
 }
 
+.onboardingIntroDiscover {
+  position: absolute;
+  cursor: pointer;
+  top: 50px;
+  right: 80px;
+  height: 155px;
+  width: 233px;
+  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 100%;
+  background-size: cover;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-align: center;
+  -webkit-box-shadow: 0px 1px 2px 0px rgb(37, 37, 37);
+}
+
+.onboardingIntroDiscover:before {
+  background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 0%;
+  background-size: 233px 196px;
+  content: " ";
+  width: 32px;
+  height: 41px;
+  position: absolute;
+  top: -41px;
+  z-index: 10;
+  right: 0px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.onboardingIntroDiscover a {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.onboardingIntroDiscover a:hover {
+  text-decoration: none;
+}
+
 .popMenu-navBar {
   top: -238px;
   right: 10px;
@@ -2765,6 +2847,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
   width: 950px;
   z-index: 3;
+}
+
+#noNotifications {
+  padding-top: 10px;
 }
 
 #notificationsPanel {
@@ -3044,7 +3130,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-align: center;
 }
 
-.modal .homeModal-accordion {
+.modal .homeModal-accordion,
+.modal .aboutModal-accordion {
   height: 374px;
 }
 
@@ -3054,38 +3141,61 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 50px;
   line-height: 50px;
   margin: 0;
-  opacity: .75;
-}
-.modal .homeModal-accordion .btn-bar .btn{
-  opacity: .75;
-}
-
-.modal .homeModal-accordion .btn-bar:hover{
   opacity: 1;
 }
 
-.modal .homeModal-accordion .btn {
+.modal .aboutModal-accordion .btn-bar{
+  font-size: 14px;
+  height: 50px;
+  line-height: 50px;
+  opacity: 1;
+}
+
+.modal .homeModal-accordion .btn-bar .btn,
+.modal .aboutModal-accordion .btn-bar .btn{
+  opacity: .75;
+}
+
+.modal .homeModal-accordion .btn-bar:hover,
+.modal .aboutModal-accordion .btn-bar:hover{
+  opacity: .75;
+}
+
+.modal .homeModal-accordion .btn,
+.modal .aboutModal-accordion .btn {
   background-color: rgb(50,126,184);
 }
 
-.modal .homeModal-accordion .btn-bar{
+.modal .homeModal-accordion .btn-bar,
+.modal .aboutModal-accordion .btn-bar{
   border-right: none;
 }
 
-.modal .homeModal-accordion .btn-bar:nth-child(2){
-  border-left: solid 1px #086A9E;
+.modal .aboutModal-accordion .btn-bar.active{
+  background: #106DA3;
 }
 
-.modal .homeModal-accordion .searchWrapper {
+.modal .aboutModal-accordion .btn-bar.active:hover{
+  opacity: 1;
+}
+
+.modal .homeModal-accordion .btn-bar:nth-child(2){
+]  border-left: solid 1px #086A9E;
+}
+
+.modal .homeModal-accordion .searchWrapper,
+.modal .aboutModal-accordion .searchWrapper {
   background: #086A9E;
   border-bottom: solid 1px #327EB8;
 }
 
-.modal .homeModal-accordion .flexRow {
+.modal .homeModal-accordion .flexRow,
+.modal .aboutModal-accordion .flexRow {
   width: 100%;
 }
 
-.modal .homeModal-accordion .accordion-child {
+.modal .homeModal-accordion .accordion-child,
+.modal .aboutModal-accordion .accordion-child {
   width: 525px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -3106,6 +3216,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: url('../imgs/defaultUser.png') 100% 100%;
   background-size: cover;
   margin-top: 30px;
+}
+
+.modal .aboutModal-accordion .modal-section {
+  display: block;
+  height: 315px;
+  font-weight: 400;
+  padding: 10px 20px;
+  overflow: scroll;
+  font-size: 14px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .uploadPhotoControls {
@@ -3236,7 +3357,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .tooltip:hover:after{
-  background: #252525;
+  background: rgba(37,37,37,.85);
   border-radius: 3px;
   bottom: -32px;
   color: #fff;
@@ -3262,10 +3383,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .btn-profile.tooltip:hover:after{
-  left: -10px;
+  left: -45px;
 }
 
-.chatHead.tooltip:hover:after {
+.btn-upload-cover-photo {
+  padding: 7px 20px;
+  opacity: 1;
+}
+
+.chatHead.tooltip:hover:after{
   left: -123px;
   bottom: 7px;
   max-width: 100px;
@@ -3343,6 +3469,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #messageModal {
   z-index: 4;
+}
+
+.pill {
+  border-radius: 2px;
+  padding: 5px 7px;
+  min-width: 100px;
+  background: red;
 }
 
 .selectPill {
@@ -3773,6 +3906,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 
+#ov1 .fontSize8 {
+  font-size: 8px;
+}
+
 #ov1 .fontSize10 {
   font-size: 10px;
 }
@@ -3867,6 +4004,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .margin0 {
   margin: 0;
+}
+
+#ov1  .margin8 {
+  margin: 8px;
 }
 
 #ov1  .marginRight2 {
@@ -4068,6 +4209,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .height54 {
   height: 54px;
 }
+#ov1  .height55 {
+  height: 55px;
+}
+#ov1  .height56 {
+  height: 56px;
+}
 
 #ov1  .height46 {
   height: 46px;
@@ -4184,8 +4331,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .padding015 {
   padding: 0px 15px;
 }
+#ov1  .padding025 {
+  padding: 0px 25px;
+}
 #ov1  .padding515 {
   padding: 5px 15px;
+}
+
+#ov1  .padding1020{
+  padding: 10px 20px;
 }
 
 #ov1  .padding2010{
@@ -4208,6 +4362,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 #ov1  .paddingRight5 {
   padding-right: 5px;
+}
+#ov1  .paddingRight18 {
+  padding-right: 18px;
 }
 
 #ov1  .paddingLeft2 {
@@ -4408,6 +4565,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: white;
   background-opacity: .75;
   background-color: #FFA41C;
+}
+
+#ov1 .alignCenter {
+  text-align: center;
 }
 
 

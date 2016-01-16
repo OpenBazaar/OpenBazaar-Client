@@ -32,7 +32,7 @@
           <% } %>
           custCol-border-secondary borderRadius2 borderRadiusBottom0 textOpacity90 clickable js-userShort"
             <% if(ob.avatar_hash) { %>
-            style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png);">
+            style="background-image: url(<%- ob.avatarURL %>), url(imgs/offlineUser.png);">
             <% } else { %>
             style="background-image: url(imgs/defaultUser.png);">
             <% } %>
@@ -41,17 +41,19 @@
           <a class="btn btn-txt btn-secondary custCol-secondary textOpacity65 btn-latched
                     js-userShortUnfollow <% if(!ob.ownFollowing){ %> hide <% } %>"><%= polyglot.t('Unfollow') %></a>
           <a class="btn btn-txt btn-secondary custCol-secondary textOpacity65 btn-latched
-                    js-userShortFollow <% if(ob.ownFollowing){ %> hide <% } %>"><%= polyglot.t('Follow') %></a>
+                    js-userShortFollow <% if(ob.ownFollowing){ %> hide <% } %>">
+                    <%= polyglot.t('Follow') %>
+                  </a>
         <% } %>
         </div>
         <div>
           <div class="marginLeft15 marginTop2 clearFix">
             <div class="floatLeft noOverflow marginBottom2 marginRight5">
-              <a class="textSize16px capitalize js-userShort" title="<%- ob.name %>"><%- ob.name %></a>
+              <a class="textSize16px capitalize js-userShort js-searchName" title="<%- ob.name %>"><%- ob.name %></a>
             </div>
             <% if(ob.handle) { %>
               <div class="pull-left lineHeight21">
-                <a class="textSize14px txt-fade js-userShort" title="<%- ob.handle %>"><%- ob.handle %></a>
+                <a class="textSize14px txt-fade js-userShort js-searchHandle" title="<%- ob.handle %>"><%- ob.handle %></a>
               </div>
             <% }else{ %>
               <div class="noOverflow pull-left lineHeight21 width110">
@@ -69,7 +71,10 @@
         </div>
 
         <div style="width: 105px;">
-          <a class="btn btn-txt btn-secondary custCol-secondary pull-right height36 width105 fontSize14 js-userShort"><%= polyglot.t('Visit') %></a>
+          <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-userShort">
+            <%= polyglot.t('Visit') %>
+            <span class="ion-chevron-right fontSize8 marginLeft2 textOpacity1"></span> 
+          </a>
         </div>
       </div>
     </div>

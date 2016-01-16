@@ -24,6 +24,11 @@ module.exports = Backbone.View.extend({
     'click .js-navMax': 'navMaxClick',
     'click .js-navBack': 'navBackClick',
     'click .js-navFwd': 'navFwdClick',
+    'click .js-showAboutModal': 'showAboutModal',
+    'click .js-hideAboutModal': 'hideAboutModal',
+    'click .js-showSupportModal': 'showSupportModal',
+    'click .js-hideSupportModal': 'hideSupportModal',
+    'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navNotifications': 'navNotificationsClick',
     'click .js-navProfile': 'navProfileClick',
     'click .js-navRefresh': 'navRefreshClick',
@@ -80,6 +85,9 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "updateUserModel", function(response){
       this.model.fetch();
     });
+
+    this.notifcationSound = document.createElement('audio');
+    this.notifcationSound.setAttribute('src', './audio/notification.mp3');
 
     this.render();
   },
@@ -186,6 +194,7 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       if(localStorage.getItem("onboardingComplete") != "true") {
         self.$el.find('.js-homeModal').removeClass("hide");
+        $('#obContainer').addClass("blur");
         self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
         self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
         self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
@@ -221,8 +230,78 @@ module.exports = Backbone.View.extend({
       self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
         self.handleSocketMessage(response);
       });
+
+      if(self.showDiscoverCallout) {
+        // display discover callout
+        self.$el.find('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+      }
     });
     return this;
+  },
+
+  showAboutModal: function(e){
+    "use strict";
+
+    // set the active tab
+    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $('.js-about-mainTab').addClass('active');
+
+    // set the active section
+    $('.js-aboutModal .modal-section').addClass('hide');
+    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+
+    // blur the container for extra focus
+    $('#obContainer').addClass('blur');
+
+    // display the modal
+    $('.js-aboutModal').removeClass('hide');
+  },
+
+  hideAboutModal: function(e){
+    "use strict";
+    $('.js-aboutModal').addClass('hide');
+    $('#obContainer').removeClass('blur');
+  },
+
+  showSupportModal: function(e){
+    "use strict";
+    $('.js-aboutModal').removeClass('hide');
+    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $('.js-about-donationsTab').addClass('active');
+    $('.js-aboutModal .modal-section').addClass('hide');
+    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    $('#obContainer').addClass('blur');
+  },
+
+  hideSupportModal: function(e){
+    "use strict";
+    $('.js-aboutModal').addClass('hide');
+    $('#obContainer').removeClass('blur');
+  },
+
+  aboutModalTabClick: function(e){ 
+    var tab = $(e.currentTarget).data('tab');
+    $('.js-aboutModal .btn-tab').removeClass('active');
+    $(e.currentTarget).addClass('active');
+
+    switch(tab) {
+      case "about":
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutMain').removeClass('hide');
+        break;
+      case "support":
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutSupport').removeClass('hide');
+        break;
+      case "contributors":
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutContributors').removeClass('hide');
+        break;
+      case "licensing":
+        $('.modal-about-section').addClass('hide');
+        $('.js-modalAboutLicensing').removeClass('hide');
+        break;
+    }
   },
 
   navNotificationsClick: function(e){
@@ -455,6 +534,7 @@ module.exports = Backbone.View.extend({
         uploadImageFormData = new FormData();
 
     localStorage.setItem("onboardingComplete", "true");
+    $('#obContainer').removeClass("blur");
 
     if($('textarea#aboutInput').val() != ""){
         self.model.set('short_description', $('textarea#aboutInput').val());
@@ -583,9 +663,14 @@ module.exports = Backbone.View.extend({
             submit();
         }
     this.$el.find('.js-homeModal').hide();
+
+    this.showDiscoverCallout = true;
     
-    // Start application walkthrough (coming soon once I have better designs)
     new Notification(window.polyglot.t('WelcomeToYourPage'));
+
+    // play notification sound
+    this.notifcationSound.play();
+
   },
 
   navAdminPanel: function(){

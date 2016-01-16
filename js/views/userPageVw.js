@@ -100,6 +100,8 @@ var defaultItem = {
   }
 };
 
+var recommendedPrimaryColors = ['#4c877c','#dc6c7d','#ce738b','#3a4352','#80bbad','#106c88','#58a6ad','#90545d','#b53b4d','#6c9052','#89a4b3','#ffffff','#827341','#74b69e','#716e86','#935456','#929e8e','#9aa1a5','#d9d8c6'];
+
 function shadeColor2(color, percent) {
   var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
   return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
@@ -121,8 +123,9 @@ module.exports = Backbone.View.extend({
     'click .js-aboutTab': 'aboutClick',
     'click .js-followersTab': 'followersClick',
     'click .js-followingTab': 'followingClick',
-    'click .js-storeTab': 'storeClick',
+    'click .js-storeTab': 'storeTabClick',
     'click .js-returnToStore': 'storeClick',
+    'click .js-returnToStoreCategory': 'storeCatClick',
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
     'click .js-editItem': 'editItem',
@@ -153,6 +156,7 @@ module.exports = Backbone.View.extend({
 
   initialize: function (options) {
     "use strict";
+
     var self = this;
     this.options = options || {};
     /* expected options are:
@@ -229,7 +233,7 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
-      timeout: 30000,
+      timeout: 4000,
       success: function(model, response){
         //don't render if view has been closed and the $el has been deleted
         if(self.$el){
@@ -448,6 +452,19 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  setCategory: function(category) {
+    var $select;
+
+    if (category) {
+      $select = this.$el.find('.js-categories');
+
+      if ($select.val() !== category && $select.find('option[value="' + category + '"]').length) {
+        $select.val(category);
+        this.categoryChanged();
+      }
+    }
+  },
+
   categoryChanged: function() {
     this.renderItems(this.listings.get('listings'));
   },
@@ -493,7 +510,7 @@ module.exports = Backbone.View.extend({
           $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
-            timeout: 3000
+            timeout: 4000
           }).done(function(ownFollowingData){
             self.ownFollowing = ownFollowingData.following || [];
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -537,8 +554,10 @@ module.exports = Backbone.View.extend({
 
   renderItems: function (model) {
     "use strict";
+    
     var self = this;
     var select = this.$el.find('.js-categories');
+    model = model || [];
     __.each(model, function (arrayItem) {
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.serverUrl = self.options.userModel.get('serverUrl');
@@ -558,12 +577,25 @@ module.exports = Backbone.View.extend({
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
-    this.itemList = new itemListView({model: model, el: '.js-list3', userModel: this.options.userModel, category: this.$el.find('.js-categories').val()});
+    this.itemList = new itemListView({
+      model: model, 
+      el: '.js-list3', 
+      title: window.polyglot.t('NoListings'), 
+      message: "",
+      userModel: this.options.userModel, 
+      category: this.$el.find('.js-categories').val()
+    });
     this.subViews.push(this.itemList);
+
+    if (model.length) {
+      new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
+    }
   },
 
   renderFollowers: function (model) {
     "use strict";
+
+    model = model || [];
     this.followerList = new personListView({
       model: model,
       el: '.js-list1',
@@ -574,10 +606,18 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followerList);
+
+    this.$('.js-userFollowerCount').html(model.length);
+
+    if (model.length) {
+      new window.List('searchFollowers', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
+    }
   },
 
   renderFollowing: function (model) {
     "use strict";
+
+    model = model || [];
     this.followingList = new personListView({
       model: model,
       followed: true,
@@ -589,6 +629,12 @@ module.exports = Backbone.View.extend({
       serverUrl: this.options.userModel.get('serverUrl')
     });
     this.subViews.push(this.followingList);
+    
+    this.$('.js-userFollowingCount').html(model.length);
+      
+    if (model.length) {
+      new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
+    }
   },
 
   renderItem: function(hash){
@@ -622,7 +668,7 @@ module.exports = Backbone.View.extend({
     }
     this.item.fetch({
       data: self.itemFetchParameters,
-      timeout: 5000,
+      timeout: 4000,
       success: function(model, response){
         if(response.vendor_offer){
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
@@ -703,14 +749,25 @@ module.exports = Backbone.View.extend({
 
   storeClick: function(e){
     "use strict";
-    if (this.$el.find('.js-categories').val() != "all"){
-        $(".js-categories option[value='all']").attr("selected", "selected");
-        this.categoryChanged();
-    }
+
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-store'));
     this.addTabToHistory('store');
     this.setState('store');
     // $('#inputStore').focus();
+  },
+
+  storeTabClick: function(e) {
+    if (this.$el.find('.js-categories').val() != "all"){
+        $(".js-categories option[value='all']").attr("selected", "selected");
+        this.categoryChanged();
+    }
+
+    this.storeClick(e);    
+  },
+
+  storeCatClick: function(e) {
+    this.setCategory($(e.target).text());
+    this.storeClick(e);
   },
 
   tabClick: function(activeTab, showContent){
@@ -786,12 +843,12 @@ module.exports = Backbone.View.extend({
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff'); // reset to white to give a cool transition
       this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
-      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', '#'+(Math.random()*0xFFFFFF<<0).toString(16)); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(2)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(3)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(4)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(5)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:nth-child(6)').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
+      this.$el.find('.customizePrimaryColorRecommendations .customColorChoice:last').css('background', recommendedPrimaryColors[Math.floor(Math.random() * recommendedPrimaryColors.length)]); // random colors to start
 
       // slide background_color recommendations out + hide others
       this.$el.find('.customizePrimaryColorRecommendations').addClass('width270');

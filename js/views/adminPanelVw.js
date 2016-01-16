@@ -104,7 +104,20 @@ module.exports = Backbone.View.extend({
     $.ajax({
       url: self.model.get('serverUrl')+ "routing_table",
       success: function(data){
-        self.$el.find('.js-adminRoutingTable').text(data);
+        var routingString = '';
+        console.log(data);
+        __.each(data, function(tableEntry){
+          routingString += "<table class='row20'>";
+          routingString += "<tr><td>NAT Type</td><td>"+tableEntry.nat_type+"</td><tr>";
+          routingString += "<tr><td>IP</td><td>"+tableEntry.ip+"</td><tr>";
+          routingString += "<tr><td>GUID</td><td>"+tableEntry.guid+"</td><tr>";
+          routingString += "<tr><td>Vendor</td><td>"+tableEntry.vendor+"</td><tr>";
+          routingString += "<tr><td>Port</td><td>"+tableEntry.port+"</td><tr>";
+          routingString += "</table>";
+        });
+
+console.log(routingString);
+        self.$el.find('.js-adminRoutingTable').html(routingString);
       },
       error: function(){
         self.$el.find('.js-adminRoutingTable').text("Call to routing table API failed.");
