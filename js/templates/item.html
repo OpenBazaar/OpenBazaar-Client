@@ -83,7 +83,7 @@
       <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { 
         if(data.length < 100 && i < 11) { 
         %>
-          <div class="btn-pill custCol-secondary floatLeft"><a href="#home?keyword=<%- data %>"><%- data %></a></div>
+          <div class="btn-pill custCol-secondary floatLeft"><a href="#home?keyword=<%- data %>">#<%- data %></a></div>
       <% } }); %>    
     </div>
     <% } %>

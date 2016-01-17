@@ -62,7 +62,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Become a Store",
         GoToMyPage: "My Page",
-        SearchForItemsPlaceholder: "Type a keyword...",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword",
         SearchForPagesPlaceholder: "Search by name or keyword",
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
