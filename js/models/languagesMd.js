@@ -265,7 +265,8 @@ module.exports = Backbone.Model.extend({
           Close: "Close",
           FundOrder: "Fund Order",
           sortByDateNewest: "Sort By Date, Newest",
-          sortByDateOldest: "Sort By Date, Oldest"
+          sortByDateOldest: "Sort By Date, Oldest",
+          PayPurchase: "Pay for this Purchase"
         },
         errorMessages: {
           saveError: "Data could not be saved.",

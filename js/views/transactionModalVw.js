@@ -6,6 +6,7 @@ var __ = require('underscore'),
     saveToAPI = require('../utils/saveToAPI'),
     orderModel = require('../models/orderMd'),
     qr = require('qr-encode'),
+    showErrorModal = require('../utils/showErrorModal'),
     clipboard = require('clipboard');
 
 module.exports = Backbone.View.extend({
@@ -31,6 +32,7 @@ module.exports = Backbone.View.extend({
   initialize: function (options) {
     "use strict";
     var self = this;
+    console.log("new modal");
 
     this.orderID = options.orderID;
     this.status = options.status;
@@ -61,8 +63,16 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
+      timeOut: 4000,
+      dataType: 'json',
       success: function (model, response, options) {
         self.render(response);
+      },
+      error: function (jqXHR, status, errorThrown) {
+        showErrorModal(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
       }
     });
   },
@@ -71,6 +81,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     console.log(model);
+    $('.js-loadingModal').addClass("hide");
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads

@@ -19,7 +19,9 @@ module.exports = Backbone.View.extend({
     'click .js-purchasesTab': 'tabHandler',
     'click .js-salesTab': 'tabHandler',
     'click .js-casesTab': 'tabHandler',
-    'change .js-transactionFilter': 'transactionFilter'
+    'change .js-transactionFilter': 'transactionFilter',
+    'keyup .search': 'searchKeyup',
+    'click .js-transactionsSearchClear': 'searchClear'
   },
 
   initialize: function(options){
@@ -131,10 +133,22 @@ module.exports = Backbone.View.extend({
     this.setState(tabID);
   },
 
+  searchKeyup: function(e){
+    "use strict";
+    this.$('.js-transactionsSearchClear').removeClass('hide');
+  },
+
+  searchClear: function(){
+    "use strict";
+    this.$('.search').val("");
+    this.$('.js-transactionsSearchClear').addClass('hide');
+    this.renderPurchases();
+  },
+
   transactionFilter: function(){
     "use strict";
+    this.$('.search').val("");
     var filterBy = this.$el.find(".js-transactionFilter").val();
-    console.log("filter by "+filterBy);
     switch(this.state){
       case "purchases":
         this.renderPurchases(filterBy);
@@ -164,7 +178,6 @@ module.exports = Backbone.View.extend({
       };
       this.purchasesCol.sort();
     }
-    console.log(this.purchasesCol.models)
     this.purchasesCol.each(function(model, i){
       if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
         self.addPurchase(model);
@@ -174,7 +187,6 @@ module.exports = Backbone.View.extend({
     });
     this.$el.find(".js-purchases").append(this.purchasesWrapper);
     this.searchTransactions = new window.List('transactionsHolder', {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
-    console.log(this.$('#transactionsHolder'))
   },
 
   addPurchase: function(model){
@@ -221,6 +233,8 @@ module.exports = Backbone.View.extend({
 
   openOrderModal: function(options){
     "use strict";
+    console.log("open modal");
+    $('.js-loadingModal').removeClass("hide");
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,

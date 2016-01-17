@@ -2,18 +2,27 @@
   <div class="flexRow">
     <div class="table">
       <div>
-        <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 borderRadiusBottom0 textOpacity90 clickable js-userShort"
-          <% if(ob.thumbnail_hash) { %>
-          style="background-image: url(<%- ob.imageUrl %>), url(imgs/defaultItem.png);">
-          <% } else { %>
-          style="background-image: url(imgs/defaultItem.png);">
-          <% } %>
+        <div class="thumbnail thumbnail-large">
+          <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 borderRadiusBottom0 textOpacity90 clickable js-userShort"
+            <% if(ob.thumbnail_hash) { %>
+            style="background-image: url(<%- ob.imageUrl %>), url(imgs/defaultItem.png);">
+            <% } else { %>
+            style="background-image: url(imgs/defaultItem.png);">
+            <% } %>
+          </div>
         </div>
         <div>
           <div class="marginLeft15 marginTop2 clearFix">
             <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize16px js-searchTitle">
               <%- ob.title %>
             </div>
+          </div>
+          <div class="marginLeft15 marginRight15 rowTop10">
+            <% if(ob.vendor){ %>
+            <%= polyglot.t('transactions.SoldBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.vendor %>" title="<%- ob.vendor %>"><%- ob.vendor %></a>
+            <% } else if(ob.buyer) { %>
+            <%= polyglot.t('transactions.PurchasedBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.buyer %>" title="<%- ob.buyer %>"><%- ob.buyer %></a>
+            <% } %>
           </div>
           <div class="marginLeft15 marginRight15 marginTop2">
             <div class="fontSize14 txt-fade textWeightNormal txtRow2 clamp2">
@@ -23,13 +32,6 @@
                 <%= polyglot.t('NoDescriptionAdded') %>
               <% } %>
             </div>
-          </div>
-          <div class="marginLeft15 marginRight15 rowTop10">
-            <% if(ob.vendor){ %>
-              <%= polyglot.t('transactions.SoldBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.vendor %>" title="<%- ob.vendor %>"><%- ob.vendor %></a>
-            <% } else if(ob.buyer) { %>
-              <%= polyglot.t('transactions.PurchasedBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.buyer %>" title="<%- ob.buyer %>"><%- ob.buyer %></a>
-            <% } %>
           </div>
         </div>
 
@@ -50,6 +52,23 @@
             <div>
               <div><%= polyglot.t('transactions.OrderTotal') %></div>
               <div class="noOverflow"><strong><%- ob.displayPrice %></strong></div>
+            </div>
+            <div>
+              <% if(ob.transactionType == "purchase" && ob.status == 0){ %>
+              <div class="marginLeft15 marginRight15 rowTop10">
+                <a class="btn btn-txt custCol-secondary js-orderShortPay">
+                  <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('transactions.PayPurchase') %>
+                </a>
+              </div>
+              <% } else if(ob.transactionType == "sale" && ob.status == 1){ %>
+              <div class="marginLeft15 marginRight15 rowTop10">
+                <a class="btn btn-txt custCol-secondary js-orderShortConfirm">
+                  <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('transactions.ConfirmOrder') %>
+                </a>
+              </div>
+              <% } %>
             </div>
           </div>
 
