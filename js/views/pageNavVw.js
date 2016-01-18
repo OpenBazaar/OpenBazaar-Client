@@ -131,10 +131,13 @@ module.exports = Backbone.View.extend({
       var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       self.initAccordion('.js-profileAccordion');
 
-      // pre-select timezone
+      // pre-select local timezone and scroll it to the top.
       var offset = new Date().getTimezoneOffset();
       offset = '(GMT ' + (offset < 0 ? '+' : '-') + parseInt(Math.abs(offset/60)) + ':00)';
-      $("[id*='" + offset + "']").prop('checked', true);
+      var currentTimezone = $("[id*='" + offset + "']");
+      currentTimezone.prop('checked', true);
+      var currentTimeZone_li = currentTimezone.parent().parent();
+      currentTimeZone_li[0].scrollIntoView(true);
     }
   },
 
