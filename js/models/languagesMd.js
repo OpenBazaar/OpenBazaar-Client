@@ -387,7 +387,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "B&uacute;squeda de art&iacute;culos",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
@@ -709,7 +709,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Willkommen",
         CreateStore: "Werde ein Verk&auml;ufer",
         GoToMyPage: "Zur eigenen Seite",
-        SearchForItemsPlaceholder: "Nach Name oder Schlagwort suchen",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Nach Name oder Schlagwort suchen",
         SearchFeedPlaceholder: "Nach GUID oder Handle suchen",
         SearchForFollowersPlaceholder: "Nach GUID oder Handle suchen",
@@ -1038,7 +1038,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Benvenuto",
         CreateStore: "Diventa un negozio",
         GoToMyPage: "Vai alla mia pagina",
-        SearchForItemsPlaceholder: "Cerca per nome o parola chiave",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Cerca per nome o parola chiave",
         SearchFeedPlaceholder: "Cerca per nickname o guid",
         SearchForFollowersPlaceholder: "Cerca per nickname o guid",
@@ -1367,7 +1367,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenue",
         CreateStore: "Créer une boutique",
         GoToMyPage: "Ma page",
-        SearchForItemsPlaceholder: "Tapez un mot-clé...",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
         SearchFeedPlaceholder: "Tapez un mot-clé...",
         SearchForFollowersPlaceholder: "Tapez un nom...",
@@ -1695,7 +1695,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bun Venit",
         CreateStore: "Deveniți un Magazin",
         GoToMyPage: "Pagina Mea",
-        SearchForItemsPlaceholder: "Căutare după nume sau cuvânt cheie",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Căutare după nume sau cuvânt cheie",
         SearchFeedPlaceholder: "Căutare după nume sau GUID",
         SearchForFollowersPlaceholder: "Căutare după nume sau GUID",
@@ -2022,7 +2022,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Создать магазин",
         GoToMyPage: "Моя страница",
-        SearchForItemsPlaceholder: "Поиск по имени или ключевому слову",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Поиск по имени или ключевому слову",
         SearchFeedPlaceholder: "Поиск по имени или GUID",
         SearchForFollowersPlaceholder: "Поиск по имени или GUID",
@@ -2348,7 +2348,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Vitajte",
         CreateStore: "Vytvorte si obchod",
         GoToMyPage: "Moja stránka",
-        SearchForItemsPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
         SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
@@ -2677,7 +2677,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Hoşgeldiniz",
         CreateStore: "Mağaza Oluşturun",
         GoToMyPage: "Sayfam",
-        SearchForItemsPlaceholder: "Bir ad ya da anahtar sözcük Ara",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Bir ad ya da anahtar sözcük Ara",
         SearchFeedPlaceholder: "Takma ad ya da GUID Ara",
         SearchForFollowersPlaceholder: "Takma ad ya da GUID Ara",
@@ -3005,7 +3005,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "YI'el",
         CreateStore: "NgevwI' qach",
         GoToMyPage: "JuHwIj",
-        SearchForItemsPlaceholder: "Pong mu' joq nej",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "Pong mu' joq nej",
         SearchFeedPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForFollowersPlaceholder: "Ngaj pong nej ghap GUID",
@@ -3333,7 +3333,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "欢迎",
         CreateStore: "开店铺",
         GoToMyPage: "我的主页",
-        SearchForItemsPlaceholder: "用名字或关键字查找",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "用名字或关键字查找",
         SearchFeedPlaceholder: "用 handle 或 GUID 查找",
         SearchForFollowersPlaceholder: "用 handle 或 GUID 查找",
@@ -3662,7 +3662,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "어서오세요!",
         CreateStore: "가게 만들기",
         GoToMyPage: "내 페이지",
-        SearchForItemsPlaceholder: "이름과 주제어 검색",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "이름과 주제어 검색",
         SearchFeedPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForFollowersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
@@ -3988,7 +3988,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "こんにちは",
         CreateStore: "出品する",
         GoToMyPage: "マイページ",
-        SearchForItemsPlaceholder: "商品名・キーワードで探す",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
         SearchForPagesPlaceholder: "商品名・キーワードで探す",
         SearchFeedPlaceholder: "GUID・ユーザ名で探す",
         SearchForFollowersPlaceholder: "GUID・ユーザ名で探す",
