@@ -118,6 +118,7 @@ module.exports = Backbone.View.extend({
     window.setTimeout(function(){
       this.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
+        preserveCase: true,
         submitKeys: [188, 9, 13, 32],
         saveOnBlur: true
       });
