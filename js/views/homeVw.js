@@ -14,6 +14,16 @@ var fs = require('fs'),//TODO: Remove FS - it is not used?
     userShortModel = require('../models/userShortMd'),
     simpleMessageView = require('./simpleMessageVw');
 
+function stringToTag(string) {
+  var tag = string.replace(/\s+/g, '');
+
+  if (string.charAt(0) !== "#"){
+    tag = '#' + tag;
+  }
+
+  return tag;
+}
+
 module.exports = Backbone.View.extend({
 
   className:"homeView",
@@ -311,10 +321,13 @@ module.exports = Backbone.View.extend({
   searchItemsKeyup: function(e){
     "use strict";
     var target = $(e.target),
-        targetText = target.val();
+        targetText = stringToTag(target.val());
 
     if(targetText.length > 0 && e.keyCode == 13){
-      this.searchItems(targetText);
+      // reset the input value to be in a tag format instead of a plain string
+      target.val(stringToTag(target.val()));
+
+      this.searchItems(targetText.replace('#',''));
     }
   },
 

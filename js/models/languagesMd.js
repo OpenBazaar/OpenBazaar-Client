@@ -62,11 +62,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Become a Store",
         GoToMyPage: "My Page",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...",
         SearchForPagesPlaceholder: "Search by name or keyword",
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
         SearchForUsersPlaceholder: "Type a name...",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -388,11 +389,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
@@ -711,11 +713,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Willkommen",
         CreateStore: "Werde ein Verk&auml;ufer",
         GoToMyPage: "Zur eigenen Seite",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Nach Name oder Schlagwort suchen",
         SearchFeedPlaceholder: "Nach GUID oder Handle suchen",
         SearchForFollowersPlaceholder: "Nach GUID oder Handle suchen",
         SearchForUsersPlaceholder: "Nach GUID oder Handle suchen",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Werktage",
         EstDeliveryInternationalPlaceholder: "7-15 Werktage",
         OrderProcessingTimePlaceholder: "1-2 Werktage",
@@ -1041,11 +1044,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Benvenuto",
         CreateStore: "Diventa un negozio",
         GoToMyPage: "Vai alla mia pagina",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Cerca per nome o parola chiave",
         SearchFeedPlaceholder: "Cerca per nickname o guid",
         SearchForFollowersPlaceholder: "Cerca per nickname o guid",
         SearchForUsersPlaceholder: "Cerca per nickname o guid",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 giorni di lavoro",
         EstDeliveryInternationalPlaceholder: "7-15 giorni di lavoro",
         OrderProcessingTimePlaceholder: "1-2 giorni di lavoro",
@@ -1371,11 +1375,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenue",
         CreateStore: "Créer une boutique",
         GoToMyPage: "Ma page",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
         SearchFeedPlaceholder: "Tapez un mot-clé...",
         SearchForFollowersPlaceholder: "Tapez un nom...",
         SearchForUsersPlaceholder: "Tapez un nom...",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 jours ouvrés",
         EstDeliveryInternationalPlaceholder: "7-15 jours ouvrés",
         OrderProcessingTimePlaceholder: "Entrer le temps nécessaire pour traiter la commande",
@@ -1700,11 +1705,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bun Venit",
         CreateStore: "Deveniți un Magazin",
         GoToMyPage: "Pagina Mea",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Căutare după nume sau cuvânt cheie",
         SearchFeedPlaceholder: "Căutare după nume sau GUID",
         SearchForFollowersPlaceholder: "Căutare după nume sau GUID",
         SearchForUsersPlaceholder: "Căutare după nume sau GUID",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Zile Lucrătoare",
         EstDeliveryInternationalPlaceholder: "7-15 Zile Lucrătoare",
         OrderProcessingTimePlaceholder: "1-2 Zile Lucrătoare",
@@ -2028,11 +2034,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Создать магазин",
         GoToMyPage: "Моя страница",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Поиск по имени или ключевому слову",
         SearchFeedPlaceholder: "Поиск по имени или GUID",
         SearchForFollowersPlaceholder: "Поиск по имени или GUID",
         SearchForUsersPlaceholder: "Поиск по имени или GUID",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 рабочих дней",
         EstDeliveryInternationalPlaceholder: "7-15 рабочих дней",
         OrderProcessingTimePlaceholder: "1-2 рабочих дней",
@@ -2355,11 +2362,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Vitajte",
         CreateStore: "Vytvorte si obchod",
         GoToMyPage: "Moja stránka",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
         SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForUsersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 pracovných dní",
         EstDeliveryInternationalPlaceholder: "7-15 pracovných dní",
         OrderProcessingTimePlaceholder: "1-2 pracovné dni",
@@ -2685,11 +2693,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Hoşgeldiniz",
         CreateStore: "Mağaza Oluşturun",
         GoToMyPage: "Sayfam",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Bir ad ya da anahtar sözcük Ara",
         SearchFeedPlaceholder: "Takma ad ya da GUID Ara",
         SearchForFollowersPlaceholder: "Takma ad ya da GUID Ara",
         SearchForUsersPlaceholder: "Takma ad ya da GUID Ara",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 İş Günü",
         EstDeliveryInternationalPlaceholder: "7-15 İş Günü",
         OrderProcessingTimePlaceholder: "Siparişin hazırlanması için gereken süreyi girin",
@@ -3014,11 +3023,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "YI'el",
         CreateStore: "NgevwI' qach",
         GoToMyPage: "JuHwIj",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Pong mu' joq nej",
         SearchFeedPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForFollowersPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForUsersPlaceholder: "Ngaj pong nej ghap GUID",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "Wej pagh vagh jaj malja'",
         EstDeliveryInternationalPlaceholder: "Soch pagh wa'maH 'ej vagh jaj malja'",
         OrderProcessingTimePlaceholder: "wa' pagh cha' jaj malja'",
@@ -3343,11 +3353,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "欢迎",
         CreateStore: "开店铺",
         GoToMyPage: "我的主页",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "用名字或关键字查找",
         SearchFeedPlaceholder: "用 handle 或 GUID 查找",
         SearchForFollowersPlaceholder: "用 handle 或 GUID 查找",
         SearchForUsersPlaceholder: "用 handle 或 GUID 查找",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 个工作日",
         EstDeliveryInternationalPlaceholder: "7-15 工作日",
         OrderProcessingTimePlaceholder: "1-2 工作日",
@@ -3673,11 +3684,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "어서오세요!",
         CreateStore: "가게 만들기",
         GoToMyPage: "내 페이지",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "이름과 주제어 검색",
         SearchFeedPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForFollowersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForUsersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 영업일",
         EstDeliveryInternationalPlaceholder: "7-15 영업일",
         OrderProcessingTimePlaceholder: "시간을 입력시에 주문서 필요",
@@ -4000,11 +4012,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "こんにちは",
         CreateStore: "出品する",
         GoToMyPage: "マイページ",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "商品名・キーワードで探す",
         SearchFeedPlaceholder: "GUID・ユーザ名で探す",
         SearchForFollowersPlaceholder: "GUID・ユーザ名で探す",
         SearchForUsersPlaceholder: "GUID・ユーザ名で探す",
+        SearchOnUserStorePlaceholder: "Type: a Title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3〜5営業日以内",
         EstDeliveryInternationalPlaceholder: "7〜15営業日以内",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",

@@ -6,6 +6,7 @@ Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
+    MediumEditor = require('medium-editor'),
     showErrorModal = require('../utils/showErrorModal'),
     chosen = require('../utils/chosen.jquery.min.js');
 
@@ -70,6 +71,13 @@ module.exports = Backbone.View.extend({
       $(document.body).bind("drop", function(e){
         e.preventDefault();
         return false;
+      });
+
+      var editor = new MediumEditor('#inputDescription', {
+          toolbar: {
+            imageDragging: false,
+            buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
+          }
       });
       
     });

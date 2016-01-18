@@ -28,7 +28,6 @@ module.exports = Backbone.View.extend({
     var self = this;
     loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
       self.$el.append(loadedTemplate(self.model.toJSON()));
-      console.log(self.model.toJSON());
     });
     return this;
   },
