@@ -56,16 +56,23 @@
             <div>
               <% if(ob.transactionType == "purchase" && ob.status == 0){ %>
               <div class="marginLeft15 marginRight15 rowTop10">
-                <a class="btn btn-txt custCol-secondary js-orderShortPay">
+                <a class="btn btn-txt custCol-secondary">
                   <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
                   <%= polyglot.t('transactions.PayPurchase') %>
                 </a>
               </div>
               <% } else if(ob.transactionType == "sale" && ob.status == 1){ %>
               <div class="marginLeft15 marginRight15 rowTop10">
-                <a class="btn btn-txt custCol-secondary js-orderShortConfirm">
+                <a class="btn btn-txt custCol-secondary">
                   <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
                   <%= polyglot.t('transactions.ConfirmOrder') %>
+                </a>
+              </div>
+              <% } else if(ob.transactionType == "purchase" && ob.status == 2){ %>
+              <div class="marginLeft15 marginRight15 rowTop10">
+                <a class="btn btn-txt custCol-secondary">
+                  <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('transactions.CompleteOrder') %>
                 </a>
               </div>
               <% } %>

@@ -243,7 +243,7 @@ module.exports = Backbone.Model.extend({
           OrderTotal: "Order Total",
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
-          ConfirmOrder: "Confirm Order",
+          ConfirmOrder: "Confirm this Order",
           ReceivingAddress: "Receiving Address",
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
           Shipper: "Item Shipped By",
@@ -266,7 +266,12 @@ module.exports = Backbone.Model.extend({
           FundOrder: "Fund Order",
           sortByDateNewest: "Sort By Date, Newest",
           sortByDateOldest: "Sort By Date, Oldest",
-          PayPurchase: "Pay for this Purchase"
+          PayPurchase: "Pay for this Purchase",
+          CompleteOrder: "Complete this Order",
+          RateThisTransaction: "Rate this Transaction",
+          OverallRating: "Overall Rating",
+          Review: "Review",
+          ReviewPlaceHolder: "Your review of this transaction"
         },
         errorMessages: {
           saveError: "Data could not be saved.",

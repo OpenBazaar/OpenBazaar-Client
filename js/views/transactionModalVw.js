@@ -26,6 +26,7 @@ module.exports = Backbone.View.extend({
     'click .js-copyOutgoingTx': 'copyTx',
     'click .js-closeOrderForm': 'closeOrderForm',
     'click .js-showFundOrder': 'showFundOrder',
+    'click .js-transactionPayCheck':'checkPayment',
     'blur input': 'validateInput'
   },
 
@@ -77,16 +78,17 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  render: function (model) {
+  render: function (response) {
     "use strict";
     var self = this;
-    console.log(model);
+    response.status = this.status;
     $('.js-loadingModal').addClass("hide");
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
-      self.$el.html(loadedTemplate(model));
+      self.$el.html(loadedTemplate(response));
+      self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
       self.$el.find('.js-externalLink').on('click', function(e){
@@ -108,9 +110,9 @@ module.exports = Backbone.View.extend({
 
   handleSocketMessage: function(response) {
     "use strict";
-    console.log(response);
     var data = JSON.parse(response.data);
     if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
+      this.model.set('status', 1);
       this.status = 1;
       this.getData();
     }
@@ -168,6 +170,7 @@ module.exports = Backbone.View.extend({
 
   showConfirmForm: function(){
     "use strict";
+    console.log("confirm order button pressed")
     this.setState("confirm");
   },
 
@@ -181,12 +184,27 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-transactionSpinner').removeClass('hide');
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
-      console.log(data);
       self.status = 3;
       self.getData();
       }, '', confirmData);
 
     },
+
+  checkPayment: function(){
+    "use strict";
+    var self = this,
+        formData = new FormData();
+
+    formData.append("order_id", this.orderID);
+    $.ajax({ //this only triggers the server to send a new socket message
+      type: "POST",
+      url: self.model.get('serverUrl') + "check_for_payment",
+      contentType: false,
+      processData: false,
+      data: formData,
+      dataType: "json"
+    });
+  },
 
   copyTx: function(e){
     "use strict";
@@ -206,6 +224,7 @@ module.exports = Backbone.View.extend({
 
   closeModal: function(){
     this.$el.parent().fadeOut(300);
+    this.trigger("closed");
   },
 
   close: function(){

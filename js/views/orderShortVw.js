@@ -11,9 +11,7 @@ module.exports = Backbone.View.extend({
   className: "flexRow custCol-border",
 
   events: {
-    'click .js-orderShort': 'openOrderModal',
-    'click .js-orderShortPay': 'orderPay',
-    'click .js-orderShortConfirm': 'orderConfirm'
+    'click .js-orderShort': 'openOrderModal'
   },
 
   initialize: function(){
@@ -39,16 +37,6 @@ module.exports = Backbone.View.extend({
       'transactionType': this.model.get('transactionType'),
       //'modalTab': state
     });
-  },
-
-  orderPay: function(){
-    "use strict";
-    //do nothing, the click is picked up by the parent element
-  },
-
-  orderConfirm: function(){
-    "use strict";
-    this.openOrderModal("confirmOrder");
   },
 
   close: function(){

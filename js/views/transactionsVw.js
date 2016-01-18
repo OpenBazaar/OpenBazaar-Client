@@ -80,13 +80,13 @@ module.exports = Backbone.View.extend({
 
     this.purchasesCol.fetch({
       success: function(models){
-        console.log(models);
         self.renderPurchases();
       }
     });
     if(this.model.get('page').vendor){
       this.salesCol.fetch({
         success: function(models){
+          console.log(models);
           self.renderSales();
         }
       });
@@ -233,7 +233,6 @@ module.exports = Backbone.View.extend({
 
   openOrderModal: function(options){
     "use strict";
-    console.log("open modal");
     $('.js-loadingModal').removeClass("hide");
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
@@ -246,6 +245,9 @@ module.exports = Backbone.View.extend({
       state: this.state,
       bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
       transactionType: options.transactionType
+    });
+    this.listenTo(orderModalView, "closed", function(){
+      this.getData();
     });
   },
 

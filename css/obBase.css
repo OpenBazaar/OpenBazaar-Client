@@ -2575,6 +2575,42 @@ input[type="radio"].fieldItem:checked + label:before {
   box-shadow: inset 0 0 0 4px #086A9E;
 }
 
+input[type="radio"].fieldItem.starRating + label:before {
+  content: "\f2fc";
+  font-family: "Ionicons";
+  color: #fff;
+  display: inline-block;
+  position: absolute;
+  left: 10px;
+  height: 16px;
+  width: 16px;
+  border-radius: 12px;
+  border: solid 1px #fff;
+  background: #000;
+  box-shadow: none;
+  opacity: 1;
+  transform: translateY(-50%) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  top: 50%;
+}
+
+input[type="radio"].fieldItem.starRating:checked + label:before {
+  content: "\f2fc";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label:before + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label:before + input + label:before + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label:before + input + label:before + input + label:before + input + label:before {
+  content: "\f3ae";
+}
+
+
 .radioLabel {
   opacity: .75;
 }
