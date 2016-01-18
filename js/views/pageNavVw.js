@@ -551,7 +551,7 @@ module.exports = Backbone.View.extend({
   timeSelect: function(e){
     "use strict";
     var inpt = $(e.target).closest('input[type=radio]'); 
-    var tz = inpt.attr('id');
+    var tz = inpt.val();
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
     this.model.set('time_zone', tz);
