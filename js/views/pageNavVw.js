@@ -136,8 +136,6 @@ module.exports = Backbone.View.extend({
       offset = '(GMT ' + (offset < 0 ? '+' : '-') + parseInt(Math.abs(offset/60)) + ':00)';
       var currentTimezone = $("[id*='" + offset + "']");
       currentTimezone.prop('checked', true);
-      var currentTimeZone_li = currentTimezone.parent().parent();
-      currentTimeZone_li[0].scrollIntoView(true);
     }
   },
 
