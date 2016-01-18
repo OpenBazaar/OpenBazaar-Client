@@ -45,6 +45,7 @@ module.exports = Backbone.View.extend({
     });
     //add images urls to the combinedImagesArray for rendering
     this.model.set('combinedImagesArray', this.combinedImagesArray);
+    this.inputKeyword;
 
     //add existing hashes to the list to be uploaded on save
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
@@ -77,7 +78,8 @@ module.exports = Backbone.View.extend({
   },
 
   setFormValues: function(){ //TODO: Refactor to a generic enumeration pattern
-    var typeValue = String(this.model.get('vendor_offer').listing.metadata.category) || "physical good";
+    var typeValue = String(this.model.get('vendor_offer').listing.metadata.category) || "physical good",
+        self = this;
     this.$el.find('input[name=nsfw]').val([String(this.model.get('vendor_offer').listing.item.nsfw)]);
     this.$el.find('input[name=free_shipping]').val([String(this.model.get('vendor_offer').listing.shipping.free)]);
     this.$el.find('#inputType').val(typeValue);
@@ -116,7 +118,7 @@ module.exports = Backbone.View.extend({
     //hacky fix for now, because DOM is not complete when taggle is called, resulting in a container size of zero
     //TODO: find a fix for this, so taggle is initialized after reflow is complete
     window.setTimeout(function(){
-      this.inputKeyword = new Taggle('inputKeyword', {
+      self.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
         saveOnBlur: true
       });
