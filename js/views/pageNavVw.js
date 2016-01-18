@@ -131,6 +131,25 @@ module.exports = Backbone.View.extend({
       var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       self.initAccordion('.js-profileAccordion');
 
+      // pre-select lauguage and scroll it to the top.
+      var localLanguage = window.navigator.language;
+      var currentLanguage = null;
+      $('.js-homeModal-languageSelect').each(function () {
+        if(this.getAttribute("data-code") == localLanguage) {
+          currentLanguage = this;
+          return false;
+        }
+      });
+      if(currentLanguage != null) {
+        $("#" + localLanguage).prop('checked', true);
+        currentLanguage.parentNode.scrollIntoView(true);
+      }
+      else { // If local language is not defined, use en-US as default.
+        var defaultLanguage = $("#en-US");
+        defaultLanguage.prop('checked', true);
+        defaultLanguage.parentNode.scrollIntoView(true);
+      }
+
       // pre-select local timezone and scroll it to the top.
       var offset = new Date().getTimezoneOffset();
       offset = '(GMT ' + (offset < 0 ? '+' : '-') + parseInt(Math.abs(offset/60)) + ':00)';
