@@ -63,18 +63,20 @@
       <div class="table">
         <div>
           <div class="thumbnail thumbnail-large js-userPageAvatar"
-              <% if(ob.page.profile.avatar_hash) { %>
-              style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
-              <% } else { %>
-              style="background-image: url(imgs/defaultUser.png);">
-              <% } %>
-                <% if(ob.ownPage) { %>
-                  <a href="#settings/page" class="userPageEditBtn">
-                    <div class="btn  custCol-secondary">
-                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
-                    </div>
-                  </a>
-                <%}%>
+            <% if(ob.page.profile.avatar_hash) { %>
+            style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+            <% } else { %>
+            style="background-image: url(imgs/defaultUser.png);">
+            <% } %>
+
+            <% if(ob.ownPage) { %>
+              <a href="#settings/page" class="userPageEditBtn">
+                <div class="btn btn-txt custCol-secondary fontSize11 marginTop4 hCentered ">
+                  <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('Edit') %>
+                </div>
+              </a>
+            <%}%>
           </div>
           <div class="pad15 push-down5 noOverflow">
             <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%- ob.page.profile.name %></span>

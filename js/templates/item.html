@@ -78,7 +78,7 @@
     </table>
 
     <% if(ob.vendor_offer.listing.item.keywords != "") { %> 
-    <div class="clearFix marginTop15 fontSize15 marginLeft5"><h4><%= polyglot.t('Keywords') %></h4></div> 
+    <div class="clearFix marginTop15 fontSize15 marginLeft5"><h4><%= polyglot.t('Tags') %></h4></div> 
     <div class="clearFix marginBottom20 marginLeft5">
       <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { 
         if(data.length < 100 && i < 11) { 

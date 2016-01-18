@@ -692,6 +692,15 @@ label.fieldItem {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
+.thumbnail-large .userPageEditBtn {
+  display: none;
+  margin: auto;
+}
+
+.thumbnail-large:hover .userPageEditBtn {
+  display: block;
+}
+
 .thumbnail-largeTrimmed {
   height: 70px;
 }
@@ -1478,7 +1487,7 @@ input[type="text"].txtField-bar {
 
 .btn.btn-txt {
   /* button with text */
-  padding: 0 16px;
+  padding: 0 12px;
 }
 
 .btn.btn-txtHalf {

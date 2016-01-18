@@ -62,7 +62,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Become a Store",
         GoToMyPage: "My Page",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword",
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag",
         SearchForPagesPlaceholder: "Search by name or keyword",
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
@@ -75,9 +75,9 @@ module.exports = Backbone.Model.extend({
         DescriptionPlaceholder: "Enter description...",
         ReturnPolicyPlaceholder: "Enter return policy...",
         CategoryPlaceholder: "Enter category",
-        CategoryHelperText: "Categories are used to group and organize items within your store.",
-        KeywordsHelperText: "Setting keywords helps your item to be discovered in the market.",
-        ExpirationDateHelperText: "Set a date for the item to automatically be pulled from your store.",
+        CategoryHelperText: "Categories are used to group and organize listing within your store.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.",
+        ExpirationDateHelperText: "Set a date for the listing to automatically be pulled from your store.",
         ClearExpirationDate: "Clear Expiration Date",
         ReturnPolicy: "Return Policy",
         TermsAndConditions: "Terms and Conditions",
@@ -102,6 +102,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Returns",
         ReturnsPolicy: "Returns Policy",
         Ampersand: "&",
+        Tags: "Tags", //notTranslated
         Keywords: "Keywords",
         ShipsFrom: "Ships From",
         ShipsTo: "Ships To",
@@ -387,7 +388,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
@@ -400,7 +401,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Introduzca pol&iacute;ticas de devoluciones",
         CategoryPlaceholder: "Introduzca categor&iacute;a",
         CategoryHelperText: "Las categor&iacute;as se utilizan para agrupar y organizar art&iacute;culos dentro de su tienda.",
-        KeywordsHelperText: "Poner palabras claves de ayuda para que sus art&iacute;culos sean encontrados en el mercado.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText : "Establecer una fecha para que el art&iacute;culo sea autom&aacute;ticammente retirado de su tienda.",
         ClearExpirationDate : "Limpiar Fecha de Vencimiento",
         ReturnPolicy: "Pol&iacute;tica de devoluciones",
@@ -454,6 +455,7 @@ module.exports = Backbone.Model.extend({
         Name: "Nombre",
         Price: "Precio",
         Available: "Disponible",
+        Tags: "Tags", //notTranslated
         Keywords: "Palabras claves",
         Type: "Tipo",
         Condition: "Condici&oacute;n",
@@ -709,7 +711,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Willkommen",
         CreateStore: "Werde ein Verk&auml;ufer",
         GoToMyPage: "Zur eigenen Seite",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Nach Name oder Schlagwort suchen",
         SearchFeedPlaceholder: "Nach GUID oder Handle suchen",
         SearchForFollowersPlaceholder: "Nach GUID oder Handle suchen",
@@ -723,7 +725,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "R&uuml;ckgabebedingungen eingeben...",
         CategoryPlaceholder: "Kategorie eingeben",
         CategoryHelperText: "Kategorien werden verwendet um Gegenst&auml;nde in deinem Laden zu gruppieren und organisieren",
-        KeywordsHelperText: "Stichw&ouml;rter machen es einfacher dein Angebot im Markt zu finden.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Setze ein Datum, an dem dein Gegenstand automatisch gel&ouml;scht werden soll.",
         ClearExpirationDate: "L&ouml;sche das Verfallsdatum",
         ReturnPolicy: "R&uuml;cknahmebedingungen",
@@ -777,6 +779,7 @@ module.exports = Backbone.Model.extend({
         Name: "Name",
         Price: "Preis",
         Available: "Verf&uuml;gbar",
+        Tags: "Tags", //notTranslated
         Keywords: "Stichw&ouml;rter",
         Type: "Typ",
         Condition: "Zustand",
@@ -1038,7 +1041,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Benvenuto",
         CreateStore: "Diventa un negozio",
         GoToMyPage: "Vai alla mia pagina",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Cerca per nome o parola chiave",
         SearchFeedPlaceholder: "Cerca per nickname o guid",
         SearchForFollowersPlaceholder: "Cerca per nickname o guid",
@@ -1052,7 +1055,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Inserire politiche di restituazione...",
         CategoryPlaceholder: "Inserire categoria",
         CategoryHelperText: "Le categorie sono usate per raggruppare e organizzare gli oggetti nel tuo negozio.",
-        KeywordsHelperText: "Impostare delle parole chiave aiuta i tuoi oggetti ad essere trovari sul mercato.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Imposta una data per l'oggetto per far si che venga tolto automaticamente dal tuo negozio.",
         ClearExpirationDate: "Cancella data di scadenza",
         ReturnPolicy: "Politica di restituzione",
@@ -1078,6 +1081,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Restituzione",
         ReturnsPolicy: "Politica di restituzione",
         Ampersand: "&",
+        Tags: "Tags", //notTranslated
         Keywords: "Parole chiave",
         ShipsFrom: "Inviato da",
         ShipsTo: "Inviato verso",
@@ -1367,7 +1371,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenue",
         CreateStore: "Créer une boutique",
         GoToMyPage: "Ma page",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
         SearchFeedPlaceholder: "Tapez un mot-clé...",
         SearchForFollowersPlaceholder: "Tapez un nom...",
@@ -1381,7 +1385,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Entrer une condition de retour...",
         CategoryPlaceholder: "Entrer une catégorie",
         CategoryHelperText: "Les catégories sont utilisées pour regrouper et organiser les articles au sein de votre boutique.",
-        KeywordsHelperText: "Définir des mots-clés permet à votre article d'être découvert sur le marché.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Définir une date pour que l'article soit automatiquement retiré de votre boutique.",
         ClearExpirationDate: "Effacer la date d'expiration",
         ReturnPolicy: "Condition de retour",
@@ -1407,6 +1411,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Retours",
         ReturnsPolicy: "Conditions de retours",
         Ampersand: "&",
+        Tags: "Tags", //notTranslated
         Keywords: "Mots-clés",
         ShipsFrom: "Expédie de",
         ShipsTo: "Expédie vers",
@@ -1695,7 +1700,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bun Venit",
         CreateStore: "Deveniți un Magazin",
         GoToMyPage: "Pagina Mea",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Căutare după nume sau cuvânt cheie",
         SearchFeedPlaceholder: "Căutare după nume sau GUID",
         SearchForFollowersPlaceholder: "Căutare după nume sau GUID",
@@ -1709,7 +1714,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Introduceți politica de returnare...",
         CategoryPlaceholder: "Introduceți categoria",
         CategoryHelperText: "Categoriile sunt folosite pentru gruparea și organizarea produselor în magazinul dvs.",
-        KeywordsHelperText: "Setarea cuvintelor cheie ajută produsul dvs. să fie găsit în piaţă",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Setați o dată pentru produsul dvs. să fie scos automat din magazin",
         ClearExpirationDate: "Ștergeți Data Expirării",
         ReturnPolicy: "Politica de Returnare",
@@ -1763,6 +1768,7 @@ module.exports = Backbone.Model.extend({
         Name: "Nume",
         Price: "Preț",
         Available: "Disponibil",
+        Tags: "Tags", //notTranslated
         Keywords: "Cuvinte cheie",
         Type: "Tip",
         Condition: "Condiție",
@@ -2022,7 +2028,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Создать магазин",
         GoToMyPage: "Моя страница",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Поиск по имени или ключевому слову",
         SearchFeedPlaceholder: "Поиск по имени или GUID",
         SearchForFollowersPlaceholder: "Поиск по имени или GUID",
@@ -2036,7 +2042,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Введите ваши условия возврата...",
         CategoryPlaceholder: "Выберите категорию",
         CategoryHelperText: "Категории используются для сортировки выкладки товаров в вашем магазине.",
-        KeywordsHelperText: "Указание ключевых слов улучшают позиционирование в поиске.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Выберите дату для автоматического снятия с продажи.",
         ClearExpirationDate: "Точная дата для снятия с продажи",
         ReturnPolicy: "Политика возвратов",
@@ -2090,6 +2096,7 @@ module.exports = Backbone.Model.extend({
         Name: "Имя",
         Price: "Цена",
         Available: "Доступно",
+        Tags: "Tags", //notTranslated
         Keywords: "Ключевые слова",
         Type: "Тип",
         Condition: "Состояние",
@@ -2348,7 +2355,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Vitajte",
         CreateStore: "Vytvorte si obchod",
         GoToMyPage: "Moja stránka",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
         SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
@@ -2362,7 +2369,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Vložte pravidlá vrátenia tovaru...",
         CategoryPlaceholder: "Zadajte kategóriu",
         CategoryHelperText: "Kategórie slúžia na zoskupovanie a organizáciu položiek vo Vašom obchode.",
-        KeywordsHelperText: "Zákazníci nájdu Váš tovar ľahšie, ak k nemu pridáte vhodné kľúčové slová.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Zadajte dátum, kedy má byť tovar stiahnutý z Vášho obchodu.",
         ClearExpirationDate: "Zrušiť dátum stiahnutia tovaru.",
         ReturnPolicy: "Pravidlá vrátenie tovaru",
@@ -2416,6 +2423,7 @@ module.exports = Backbone.Model.extend({
         Name: "Meno",
         Price: "Cena",
         Available: "K dispozícii",
+        Tags: "Tags", //notTranslated
         Keywords: "Kľúčové slová",
         Type: "Typ",
         Condition: "Podmienka",
@@ -2677,7 +2685,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "Hoşgeldiniz",
         CreateStore: "Mağaza Oluşturun",
         GoToMyPage: "Sayfam",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Bir ad ya da anahtar sözcük Ara",
         SearchFeedPlaceholder: "Takma ad ya da GUID Ara",
         SearchForFollowersPlaceholder: "Takma ad ya da GUID Ara",
@@ -2691,7 +2699,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "İade politkasını girin...",
         CategoryPlaceholder: "Kategori girin",
         CategoryHelperText: "Kategoriler mağazanızdaki öğeleri  gruplandırıp sınıflandırmak için kullanılır.",
-        KeywordsHelperText: "Anahtar sözcük atamak öğelerinizin pazarde bulunmasını kolaylaştırır.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Öğenin mağazanızdan otomatik olarak kaldırılacağı bir tarih belirleyin.",
         ClearExpirationDate: "Sonlanma Tarihini Sil",
         ReturnPolicy: "İade Politikası",
@@ -2717,6 +2725,7 @@ module.exports = Backbone.Model.extend({
         Returns: "İadeler",
         ReturnsPolicy: "İade Politikası",
         Ampersand: "&",
+        Tags: "Tags", //notTranslated
         Keywords: "Anahtar Sözcükler",
         ShipsFrom: "Gönderi Çıkış Yeri:",
         ShipsTo: "Gönderilebilecek Yerler",
@@ -3005,7 +3014,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "YI'el",
         CreateStore: "NgevwI' qach",
         GoToMyPage: "JuHwIj",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "Pong mu' joq nej",
         SearchFeedPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForFollowersPlaceholder: "Ngaj pong nej ghap GUID",
@@ -3019,7 +3028,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Ngoch 'el chegh...",
         CategoryPlaceholder: "MIwqoqvam'e' Doch 'el",
         CategoryHelperText: "Lo' bIquv Doch ghom tlham 'ej pa' ngevwI'.",
-        KeywordsHelperText: "Doch tu' neH malja''e' QaH, mu' HIjmeH.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "PoH Doch DaqaSmoH vo' ngevwI' HIjmeH.",
         ClearExpirationDate: "Hegh poH Huv",
         ReturnPolicy: "Ngoch chegh",
@@ -3045,6 +3054,7 @@ module.exports = Backbone.Model.extend({
         Returns: "NobHa'",
         ReturnsPolicy: "Ngoch chegh",
         Ampersand: "&",
+        Tags: "Tags", //notTranslated
         Keywords: "Mu'mey",
         ShipsFrom: "Duj vo'",
         ShipsTo: "Duj",
@@ -3333,7 +3343,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "欢迎",
         CreateStore: "开店铺",
         GoToMyPage: "我的主页",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "用名字或关键字查找",
         SearchFeedPlaceholder: "用 handle 或 GUID 查找",
         SearchForFollowersPlaceholder: "用 handle 或 GUID 查找",
@@ -3347,7 +3357,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "输入退货方式",
         CategoryPlaceholder: "输入分类",
         CategoryHelperText: "分类 为您店铺离商品作出归类和管理",
-        KeywordsHelperText: "为您的商品加入关键字以便提高市场能见度",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "输入货品自动上柜日期",
         ClearExpirationDate: "清空过期日期",
         ReturnPolicy: "退货条款",
@@ -3373,6 +3383,7 @@ module.exports = Backbone.Model.extend({
         Returns: "退货",
         ReturnsPolicy: "退货规则",
         Ampersand: "&",
+        Tags: "Tags", //notTranslated
         Keywords: "关键字",
         ShipsFrom: "发货地",
         ShipsTo: "发往",
@@ -3662,7 +3673,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "어서오세요!",
         CreateStore: "가게 만들기",
         GoToMyPage: "내 페이지",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "이름과 주제어 검색",
         SearchFeedPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForFollowersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
@@ -3676,7 +3687,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "반품 정책 입력...",
         CategoryPlaceholder: "항목 입력",
         CategoryHelperText: "항목그룹에 사용하고 매장내 항목을 구성하고  있습니다.",
-        KeywordsHelperText: "주제어들을 설정하면 시장 항목을 발견하는데 도움이 됩니다.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "물품이 자동으로 상점에서 가져오게될 날짜를 설정합니다.",
         ClearExpirationDate: "종료날 삭제",
         ReturnPolicy: "반품 정책",
@@ -3702,6 +3713,7 @@ module.exports = Backbone.Model.extend({
         Returns: "반품",
         ReturnsPolicy: "제품 반품",
         Ampersand: "&",
+        Tags: "Tags", //notTranslated
         Keywords: "주제어",
         ShipsFrom: "배송지로 부터",
         ShipsTo: "배송지",
@@ -3988,7 +4000,7 @@ module.exports = Backbone.Model.extend({
         Welcome: "こんにちは",
         CreateStore: "出品する",
         GoToMyPage: "マイページ",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #keyword", //notTranslated
+        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag", //notTranslated
         SearchForPagesPlaceholder: "商品名・キーワードで探す",
         SearchFeedPlaceholder: "GUID・ユーザ名で探す",
         SearchForFollowersPlaceholder: "GUID・ユーザ名で探す",
@@ -4002,7 +4014,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "返品ポリシーを入力",
         CategoryPlaceholder: "カテゴリーを入力",
         CategoryHelperText: "Categories are used to group and organize items within your store.",
-        KeywordsHelperText: "Setting keywords helps your item to be discovered in the market.",
+        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
         ExpirationDateHelperText: "Set a date for the item to automatically be pulled from your store.",
         ClearExpirationDate: "終了日時を消す",
         ReturnPolicy: "返品ポリシー",
@@ -4028,6 +4040,7 @@ module.exports = Backbone.Model.extend({
         Returns: "返品",
         ReturnsPolicy: "返品ポリシー",
         Ampersand: "・",
+        Tags: "Tags", //notTranslated
         Keywords: "キーワード",
         ShipsFrom: "発送元",
         ShipsTo: "配送可能エリア",
