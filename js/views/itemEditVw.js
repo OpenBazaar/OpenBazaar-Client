@@ -6,7 +6,6 @@ Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
-    simplemde = require('SimpleMDE'),
     showErrorModal = require('../utils/showErrorModal'),
     chosen = require('../utils/chosen.jquery.min.js');
 
