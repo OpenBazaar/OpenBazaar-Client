@@ -270,6 +270,10 @@ module.exports = Backbone.Model.extend({
           CompleteOrder: "Complete this Order",
           RateThisTransaction: "Rate this Transaction",
           OverallRating: "Overall Rating",
+          Quality: "Quality",
+          Description: "Description",
+          DeliveryTime: "DeliveryTime",
+          CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction"
         },

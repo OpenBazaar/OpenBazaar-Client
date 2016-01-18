@@ -440,17 +440,107 @@
               <label><%= polyglot.t('transactions.OverallRating') %></label>
             </div>
           </div>
-          <div class="flexCol-8">
-            <input name="feedback" type="radio" class="fieldItem starRating" value = 1 checked>
-            <label></label>
-            <input name="feedback" type="radio" class="fieldItem starRating" value = 2>
-            <label></label>
-            <input name="feedback" type="radio" class="fieldItem starRating" value = 3>
-            <label></label>
-            <input name="feedback" type="radio" class="fieldItem starRating" value = 4>
-            <label></label>
-            <input name="feedback" type="radio" class="fieldItem starRating" value = 5>
-            <label></label>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="feedback" id="feedback1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="feedback1"></label>
+              <input name="feedback" id="feedback2" type="radio" class="fieldItem starRating" value = 2>
+              <label for="feedback2"></label>
+              <input name="feedback" id="feedback3" type="radio" class="fieldItem starRating" value = 3>
+              <label for="feedback3"></label>
+              <input name="feedback" id="feedback4" type="radio" class="fieldItem starRating" value = 4>
+              <label for="feedback4"></label>
+              <input name="feedback" id="feedback5" type="radio" class="fieldItem starRating" value = 5>
+              <label for="feedback5"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.Quality') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="quality" id="quality1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="quality1"></label>
+              <input name="quality" id="quality2" type="radio" class="fieldItem starRating" value = 2>
+              <label for="quality2"></label>
+              <input name="quality" id="quality3" type="radio" class="fieldItem starRating" value = 3>
+              <label for="quality3"></label>
+              <input name="quality" id="quality4" type="radio" class="fieldItem starRating" value = 4>
+              <label for="quality4"></label>
+              <input name="quality" id="quality5" type="radio" class="fieldItem starRating" value = 5>
+              <label for="quality5"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.Description') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="description" id="description1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="description1"></label>
+              <input name="description" id="description2" type="radio" class="fieldItem starRating" value = 2>
+              <label for="description2"></label>
+              <input name="description" id="description3" type="radio" class="fieldItem starRating" value = 3>
+              <label for="description3"></label>
+              <input name="description" id="description4" type="radio" class="fieldItem starRating" value = 4>
+              <label for="description4"></label>
+              <input name="description" id="description5" type="radio" class="fieldItem starRating" value = 5>
+              <label for="description5"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.DeliveryTime') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="delivery_time" id="delivery_time1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="delivery_time1"></label>
+              <input name="delivery_time" id="delivery_time2" type="radio" class="fieldItem starRating" value = 2>
+              <label for="delivery_time2"></label>
+              <input name="delivery_time" id="delivery_time3" type="radio" class="fieldItem starRating" value = 3>
+              <label for="delivery_time3"></label>
+              <input name="delivery_time" id="delivery_time4" type="radio" class="fieldItem starRating" value = 4>
+              <label for="delivery_time4"></label>
+              <input name="delivery_time" id="delivery_time5" type="radio" class="fieldItem starRating" value = 5>
+              <label for="delivery_time5"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="flexRow custCol-border borderTop">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label><%= polyglot.t('transactions.CustomerService') %></label>
+            </div>
+          </div>
+          <div class="flexCol-8 positionWrapper">
+            <div class="fieldItem">
+              <input name="customer_service" id="customer_service1" type="radio" class="fieldItem starRating" value = 1 checked>
+              <label for="customer_service1"></label>
+              <input name="customer_service" id="customer_service2" type="radio" class="fieldItem starRating" value = 2>
+              <label for="customer_service2"></label>
+              <input name="customer_service" id="customer_service3" type="radio" class="fieldItem starRating" value = 3>
+              <label for="customer_service3"></label>
+              <input name="customer_service" id="customer_service4" type="radio" class="fieldItem starRating" value = 4>
+              <label for="customer_service4"></label>
+              <input name="customer_service" id="customer_service5" type="radio" class="fieldItem starRating" value = 5>
+              <label for="customer_service5"></label>
+            </div>
           </div>
         </div>
 
@@ -462,13 +552,13 @@
             </div>
           </div>
           <div class="flexCol-8">
-            <textarea name="review" rows="8" maxlength="80" class="fieldItem-textarea custCol-text" id="inputReview" placeholder="<%= polyglot.t('transaction.ReviewPlaceHolder') %>"></textarea>
+            <textarea name="review" rows="3" maxlength="80" class="fieldItem-textarea custCol-text" id="inputReview" placeholder="<%= polyglot.t('transactions.ReviewPlaceHolder') %>"></textarea>
           </div>
         </div>
 
         <div class="width100 custCol-border borderTop">
           <div class="ctrlGroup padding10 pull-right">
-            <a class="btn btn-large custCol-secondary js-confirmOrder"><%= polyglot.t('Submit') %></a>
+            <a class="btn btn-large custCol-secondary js-completeOrder"><%= polyglot.t('Submit') %></a>
           </div>
           <div class="ctrlGroup padding10 pull-right">
             <a class="btn btn-large custCol-secondary js-closeOrderForm"><%= polyglot.t('Close') %></a>

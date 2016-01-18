@@ -243,6 +243,7 @@ module.exports = Backbone.View.extend({
       cCode: this.userModel.get('currency_code'),
       btAve: this.btAve,
       state: this.state,
+      tabState: options.tabState,
       bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
       transactionType: options.transactionType
     });

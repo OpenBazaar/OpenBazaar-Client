@@ -21,7 +21,9 @@ module.exports = Backbone.View.extend({
     'click .js-fundsTab': 'clickFundsTab',
     'click .js-discussionTab': 'clickDiscussionTab',
     'click .js-showConfirmForm': 'showConfirmForm',
+    'click .js-showCompleteForm': 'showCompleteForm',
     'click .js-confirmOrder': 'confirmOrder',
+    'click .js-completeOrder': 'completeOrder',
     'click .js-copyIncommingTx': 'copyTx',
     'click .js-copyOutgoingTx': 'copyTx',
     'click .js-closeOrderForm': 'closeOrderForm',
@@ -45,7 +47,7 @@ module.exports = Backbone.View.extend({
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.pageState = options.state //state of the parent view
-    this.tabState = options.modalTab //active tab
+    this.tabState = options.tabState //active tab
     this.lastTab = "summary";
 
     this.model = new orderModel({
@@ -82,6 +84,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     response.status = this.status;
+    console.log(response);
     $('.js-loadingModal').addClass("hide");
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
@@ -170,8 +173,12 @@ module.exports = Backbone.View.extend({
 
   showConfirmForm: function(){
     "use strict";
-    console.log("confirm order button pressed")
     this.setState("confirm");
+  },
+
+  showCompleteForm: function(){
+    "use strict";
+    this.setState("complete");
   },
 
   confirmOrder: function(e){
@@ -184,11 +191,25 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-transactionSpinner').removeClass('hide');
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
-      self.status = 3;
+      self.status = 2;
       self.getData();
       }, '', confirmData);
+  },
 
-    },
+  completeOrder: function(e){
+    "use strict";
+    var self = this,
+        targetForm = this.$el.find('#transactionCompleteForm'),
+        completeData = {};
+
+    completeData.id = this.orderID;
+    this.$el.find('.js-transactionSpinner').removeClass('hide');
+
+    saveToAPI(targetForm, '', this.serverUrl + "complete_order", function(data){
+      self.status = 3;
+      self.getData();
+    }, '', completeData);
+  },
 
   checkPayment: function(){
     "use strict";
