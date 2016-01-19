@@ -386,11 +386,13 @@ module.exports = Backbone.View.extend({
   saveGeneral: function() {
     "use strict";
     var self = this,
-        form = this.$el.find("#generalForm");
+        form = this.$el.find("#generalForm"),
+        cCode = this.$('#currency_code').val();
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.setCurrentBitCoin(cCode);
       self.refreshView();
     });
   },
@@ -600,6 +602,13 @@ module.exports = Backbone.View.extend({
   addressUnDelete: function(e){
     "use strict";
     $(e.target).closest('.js-address').removeClass('div-fadeExtra');
+  },
+
+  setCurrentBitCoin: function(cCode) {
+    "use strict";
+    getBTPrice(cCode, function (btAve) {
+      window.currentBitcoin = btAve;
+    });
   },
 
   close: function(){

@@ -87,7 +87,7 @@
   </div>
   <div class="ctrlGroup flexExpand">
     <div class="txtFieldWrapper searchWrapper mainSearchWrapper">
-      <input type="text" class="txtField js-navAddressBar borderRadius3" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" style="height: 32px;" />
+      <input type="text" class="txtField js-navAddressBar borderRadius3" id="addressBar" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" />
     </div>
   </div>
   <div class="ctrlGroup">
@@ -100,7 +100,7 @@
   </div>
 
   <div class="ctrlGroup nav-profile">
-    <div class="btn btn-profile js-navProfile custCol-primary"
+    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('Menu') %>"
     <% if(ob.avatar_hash != "") { %>
     style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>
@@ -497,38 +497,38 @@
               <div class="flexRow">
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
                   <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1"
-                         data-primary-color="#461222"
-                         data-secondary-color="#641630"
-                         data-background-color="#291318"
+                         data-primary-color="#C6483D"
+                         data-secondary-color="#D84E49"
+                         data-background-color="#5E3E36"
                          data-text-color="#ffffff"
                          data-header="imgs/themes/1/header.png" />
                   <label for="theme-1" class="js-homeModal-themeSelected radioLabel">
-                    <div class="theme-background" style="background: #291318">
-                      <div class="theme-global-header" style="background: #641630"></div>
+                    <div class="theme-background" style="background: #5E3E36">
+                      <div class="theme-global-header" style="background: #D84E49"></div>
                       <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div>
-                      <div class="theme-nav" style="background: #641630">
-                        <div class="theme-tab" style="background: #461222"></div>
+                      <div class="theme-nav" style="background: #D84E49">
+                        <div class="theme-tab" style="background: #C6483D"></div>
                       </div>
-                      <div class="theme-body" style="background: #461222"></div>
+                      <div class="theme-body" style="background: #C6483D"></div>
                     </div>
                   </label>
                 </div>
 
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
                   <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-2"
-                         data-primary-color="#e8e8e8"
-                         data-secondary-color="#d1d1d1"
-                         data-background-color="#787878"
-                         data-text-color="#545454"
+                         data-primary-color="#ffffff"
+                         data-secondary-color="#E6E6E6"
+                         data-background-color="#B2B2B2"
+                         data-text-color="#000000"
                          data-header="imgs/themes/2/header.png"/>
                   <label for="theme-2" class="js-homeModal-themeSelected radioLabel">
-                    <div class="theme-background" style="background: #787878">
-                      <div class="theme-global-header" style="background: #d1d1d1"></div>
+                    <div class="theme-background" style="background: #B2B2B2">
+                      <div class="theme-global-header" style="background: #E6E6E6"></div>
                       <div class="theme-header" style="background: url(imgs/themes/2/header-thumbnail.png); background-size: cover"></div>
-                      <div class="theme-nav" style="background: #d1d1d1">
-                        <div class="theme-tab" style="background: #e8e8e8"></div>
+                      <div class="theme-nav" style="background: #E6E6E6">
+                        <div class="theme-tab" style="background: #ffffff"></div>
                       </div>
-                      <div class="theme-body" style="background: #e8e8e8"></div>
+                      <div class="theme-body" style="background: #ffffff"></div>
                     </div>
                   </label>
                 </div>
@@ -554,19 +554,19 @@
 
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
                   <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-4"
-                         data-primary-color="#344E31"
-                         data-secondary-color="#3B5F2B"
-                         data-background-color="#15180F"
+                         data-primary-color="#6C7D46"
+                         data-secondary-color="#5C6A3C"
+                         data-background-color="#29301B"
                          data-text-color="#ffffff"
                          data-header="imgs/themes/4/header.png" />
                   <label for="theme-4" class="js-homeModal-themeSelected radioLabel">
-                    <div class="theme-background" style="background: #15180F">
-                      <div class="theme-global-header" style="background: #3B5F2B"></div>
+                    <div class="theme-background" style="background: #29301B">
+                      <div class="theme-global-header" style="background: #5C6A3C"></div>
                       <div class="theme-header" style="background: url(imgs/themes/4/header-thumbnail.png); background-size: cover"></div>
-                      <div class="theme-nav" style="background: #3B5F2B">
-                        <div class="theme-tab" style="background: #344E31"></div>
+                      <div class="theme-nav" style="background: #5C6A3C">
+                        <div class="theme-tab" style="background: #6C7D46"></div>
                       </div>
-                      <div class="theme-body" style="background: #344E31"></div>
+                      <div class="theme-body" style="background: #6C7D46"></div>
                     </div>
                   </label>
                 </div>
@@ -592,19 +592,19 @@
 
                 <div class="theme-container clearfix custCol-border borderBottom">
                   <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-6"
-                         data-primary-color="#121212"
-                         data-secondary-color="#0D0A0D"
-                         data-background-color="#181818"
+                         data-primary-color="#252525"
+                         data-secondary-color="#1B1B1B"
+                         data-background-color="#141414"
                          data-text-color="#ffffff"
                          data-header="imgs/themes/6/header.png" />
                   <label for="theme-6" class="js-homeModal-themeSelected radioLabel">
-                    <div class="theme-background" style="background: #181818">
-                      <div class="theme-global-header" style="background: #0D0A0D"></div>
+                    <div class="theme-background" style="background: #141414">
+                      <div class="theme-global-header" style="background: #1B1B1B"></div>
                       <div class="theme-header" style="background: url(imgs/themes/6/header-thumbnail.png); background-size: cover"></div>
-                      <div class="theme-nav" style="background: #0D0A0D">
-                        <div class="theme-tab" style="background: #121212"></div>
+                      <div class="theme-nav" style="background: #1B1B1B">
+                        <div class="theme-tab" style="background: #252525"></div>
                       </div>
-                      <div class="theme-body" style="background: #121212"></div>
+                      <div class="theme-body" style="background: #252525"></div>
                     </div>
                   </label>
                 </div>
