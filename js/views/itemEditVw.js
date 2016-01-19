@@ -60,19 +60,6 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
-
-      // prevent the body from picking up drag actions
-      //TODO: make these nice backbone events
-      $(document.body).bind("dragover", function(e) {
-        e.preventDefault();
-        return false;
-      });
-
-      $(document.body).bind("drop", function(e){
-        e.preventDefault();
-        return false;
-      });
-      
     });
     return this;
   },
