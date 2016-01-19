@@ -4417,6 +4417,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 20px 15px;
 }
 
+#ov1  .padding2520 {
+  padding: 20px 20px;
+}
+
 #ov1  .padding17px {
   padding: 17px;
 }
