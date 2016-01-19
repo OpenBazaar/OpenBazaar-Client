@@ -223,6 +223,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward",
         On: "On",
         Off: "Off",
+        ClickToChange: "Click to change",
+        NotProvided: "not provided",
+        NotFollowingAnyone: "Not following anyone",
+        NoFollowers: "No followers",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -553,6 +557,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -890,6 +898,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1229,6 +1241,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1568,6 +1584,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Avancer",
         On: "Activer",
         Off: "Désactiver",
+        ClickToChange: "Cliquez pour changer",
+        NotProvided: "Non renseigné",
+        NotFollowingAnyone: "Aucun abonnement",
+        NoFollowers: "Aucun abonné",
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1906,6 +1926,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2242,6 +2266,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Продано", // not translated
           PurchasedBy: "Куплено", // not translated
@@ -2578,6 +2606,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2917,6 +2949,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3255,6 +3291,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3593,6 +3633,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3932,6 +3976,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4268,6 +4316,10 @@ module.exports = Backbone.Model.extend({
         Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
+        ClickToChange: "Click to change", // not translated
+        NotProvided: "not provided", // not translated
+        NotFollowingAnyone: "Not following anyone", // not translated
+        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",
