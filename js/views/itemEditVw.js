@@ -78,7 +78,8 @@ module.exports = Backbone.View.extend({
             text: ''
           },
           toolbar: {
-            imageDragging: false
+            imageDragging: false,
+            sticky: true
           }
       });
       
