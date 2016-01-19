@@ -130,6 +130,12 @@ module.exports = Backbone.View.extend({
       var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
       var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       self.initAccordion('.js-profileAccordion');
+
+      // pre-select local timezone and scroll it to the top.
+      var offset = new Date().getTimezoneOffset();
+      offset = '(GMT ' + (offset < 0 ? '+' : '-') + parseInt(Math.abs(offset/60)) + ':00)';
+      var currentTimezone = $("[id*='" + offset + "']");
+      currentTimezone.prop('checked', true);
     }
   },
 
@@ -545,7 +551,7 @@ module.exports = Backbone.View.extend({
   timeSelect: function(e){
     "use strict";
     var inpt = $(e.target).closest('input[type=radio]'); 
-    var tz = inpt.attr('id');
+    var tz = inpt.val();
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
     this.model.set('time_zone', tz);

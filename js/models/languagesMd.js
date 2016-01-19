@@ -41,6 +41,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Follow",
         Feed: "Feed",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Unfollow",
         About: "About",
         NoDescriptionAdded: "No description added",
@@ -197,6 +198,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases",
         Enter: "Enter", //notTranslated
         Discover: "Discover",
+        Block: "Block", //notTranslated
         Blocked: "Blocked",
         Advanced: "Advanced",
         General: "General",
@@ -215,6 +217,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content",
         StandardThemes: "Standard themes",
         NoPhotosAdded: "No Photos Added",
+        StoreModeratorsOptional: "Store Moderators (Optional)",
+        Searchformoderators: "Search for moderators",
+        Contributors: "Contributors",
+        Support: "Support",
+        Licensing: "Licensing",
+        Forward: "Forward",
+        On: "On",
+        Off: "Off",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -268,7 +278,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "All"
         },
         nav: {
-          searchPlaceholder: "Enter handle or search",
+          searchPlaceholder: "Type a keyword, handle or GUID...",
           myPage: "My Page",
           customizePage:"Customize Page",
           sellItem:"New",
@@ -369,6 +379,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Seguir",
         Feed: "Feed",
         FeedPlaceholder: "RSS de las p&aacute;ginas que sigue",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
@@ -518,6 +529,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -537,6 +549,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -692,6 +712,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Folgen",
         Feed: "Feed",
         FeedPlaceholder: "Neuigkeiten aller Seiten denen du folgst",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Nicht mehr folgen",
         About: "&Uuml;ber",
         NoDescriptionAdded: "Keine Beschreibung hinzugefügt",
@@ -847,6 +868,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -866,6 +888,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1023,6 +1053,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Segui",
         Feed: "Feed",
         FeedPlaceholder: "Un feed di aggiornamenti da tutte le pagine che segui",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
@@ -1179,6 +1210,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cause",
         Enter: "Enter", //notTranslated
         Discover: "Trova",
+        Block: "Block", //notTranslated
         Blocked: "Bloccato",
         Advanced: "Avanzato",
         General: "Generale",
@@ -1197,6 +1229,14 @@ module.exports = Backbone.Model.extend({
         Content: "Contenuto",
         StandardThemes: "Temi standard",
         NoPhotosAdded: "Nessuna foto aggiunta",
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1324,7 +1364,7 @@ module.exports = Backbone.Model.extend({
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Suivant",
         IAgree: "Je suis d'accord",
-        Back: "Retour",
+        Back: "Reculer",
         EnterMessage: "Entrer un message...",
         Reload: "Actualiser",
         You: "Vous",
@@ -1354,6 +1394,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Suivre",
         Feed: "Flux",
         FeedPlaceholder: "Un flux de mises à jour de toutes les pages que vous suivez",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Ne plus suivre",
         About: "&Agrave; propos",
         NoDescriptionAdded: "Aucune description ajoutée",
@@ -1510,6 +1551,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cas",
         Enter: "Entrer",
         Discover: "Découvrir",
+        Block: "Block", //notTranslated
         Blocked: "Bloqué",
         Advanced: "Avancé",
         General: "Général",
@@ -1528,6 +1570,14 @@ module.exports = Backbone.Model.extend({
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
+        StoreModeratorsOptional: "Modérateurs de boutique (Optionnel)",
+        Searchformoderators: "Rechercher des modérateurs",
+        Contributors: "Contributeurs",
+        Support: "Soutenir",
+        Licensing: "Licences",
+        Forward: "Avancer",
+        On: "Activer",
+        Off: "Désactiver",
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1623,7 +1673,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Découvrez les annonces et les pages sur OpenBazaar",
           Finished: "Terminé"
         },
         buyFlow: {
@@ -1684,6 +1734,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Urmărire",
         Feed: "Feed",
         FeedPlaceholder: "Lista de actualizări de la toate paginile urmărite",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Oprire Urmărire",
         About: "Despre",
         NoDescriptionAdded: "Nu a fost adăgată descrirea",
@@ -1839,6 +1890,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -1858,6 +1910,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2013,6 +2073,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Подписан",
         Feed: "Лента",
         FeedPlaceholder: "Лента обновлений, за которыми я слежу",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
@@ -2187,6 +2248,14 @@ module.exports = Backbone.Model.extend({
         Content: "Контент", // not translated
         StandardThemes: "Стандартные темы", // not translated
         NoPhotosAdded: "Не добавлено фотографий", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Продано", // not translated
           PurchasedBy: "Куплено", // not translated
@@ -2342,6 +2411,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Sleduj",
         Feed: "Feed",
         FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete.",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
@@ -2496,6 +2566,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2515,6 +2586,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2672,6 +2751,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Takip et",
         Feed: "Haberler",
         FeedPlaceholder: "Takip ettiğiniz tüm sayfalardan haberler",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Takibi bırak",
         About: "Hakkında",
         NoDescriptionAdded: "Tanım eklenmemiş",
@@ -2828,6 +2908,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2846,6 +2927,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3003,6 +3092,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Pab",
         Feed: "BIQtIq",
         FeedPlaceholder: "BIQtIq chu' wa' vo' chaq juH Dapab",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Mej",
         About: "Umqu' ghot",
         NoDescriptionAdded: "Pagh bang nob",
@@ -3158,6 +3248,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3176,6 +3267,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3333,6 +3432,7 @@ module.exports = Backbone.Model.extend({
         Follow: "关注",
         Feed: "消息来源",
         FeedPlaceholder: "更新您关注的所有网页",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "不再关注",
         About: "关于",
         NoDescriptionAdded: "未加描述",
@@ -3488,6 +3588,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3506,6 +3607,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3663,6 +3772,7 @@ module.exports = Backbone.Model.extend({
         Follow: "팔로우",
         Feed: "새로고침",
         FeedPlaceholder: "당신이 따른 모든페이지에서 업데이트 공급",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "팔로우 취소",
         About: "정보",
         NoDescriptionAdded: "설명할수 없어",
@@ -3819,6 +3929,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3837,6 +3948,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3992,6 +4111,7 @@ module.exports = Backbone.Model.extend({
         Follow: "フォロー",
         Feed: "フィード",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "フォローをやめる",
         About: "プロフェール",
         NoDescriptionAdded: "説明はありません",
@@ -4147,6 +4267,7 @@ module.exports = Backbone.Model.extend({
         Cases: "事例",
         Enter: "Enter", //notTranslated
         Discover: "ピックアップ",
+        Block: "Block", //notTranslated
         Blocked: "ブロック",
         Advanced: "詳細設定",
         General: "一般設定",
@@ -4165,6 +4286,14 @@ module.exports = Backbone.Model.extend({
         Content: "コンテンツ設定",
         StandardThemes: "基本テーマ",
         NoPhotosAdded: "写真はありません",
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",
