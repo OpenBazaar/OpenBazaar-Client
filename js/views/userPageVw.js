@@ -15,6 +15,7 @@ var __ = require('underscore'),
     itemEditVw = require('./itemEditVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
     setTheme = require('../utils/setTheme.js'),
+    sanitizeHTML = require('sanitize-html'),
     storeWizardVw = require('./storeWizardVw');
 
 //create a default item because a new itemModel will be created with only flat attributes
@@ -330,7 +331,13 @@ module.exports = Backbone.View.extend({
         }
       });
 
+      var about = sanitizeHTML(self.model.get('page').profile.about, {
+        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+      });
+
+      $('.js-userAbout').html(about);
     });
+
     return this;
   },
 
