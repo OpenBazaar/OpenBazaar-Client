@@ -1817,8 +1817,8 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessage {
-  height: 60px;
-  padding: 10px;
+  height: 75px;
+  padding: 0 5px;
   border: 1px solid #565656;
   border-top: 0;
   margin-left: 2px;
@@ -1828,6 +1828,18 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationMessageBody iframe {
   max-width: 145px;
   max-height: 145px;
+}
+
+.chatConversationMessage  .txtAreaField {
+  height: 75px;
+}
+
+.chatConversationMessage  .txtAreaField:focus {
+  outline: none;
+}
+
+.chatConversationMessage  .txtAreaField:after {
+  margin-top: 5px;
 }
 
 .chatConversationAvatar {

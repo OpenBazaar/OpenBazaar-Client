@@ -7,6 +7,8 @@ var __ = require('underscore'),
     chatMessageCollection = require('../collections/chatMessageCl'),
     chatMessageView = require('./chatMessageVw'),
     chatMessage = require('../models/chatMessageMd'),
+    MediumEditor = require('medium-editor'),
+    sanitizeHTML = require('sanitize-html'),
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
 
@@ -122,6 +124,15 @@ module.exports = Backbone.View.extend({
     });
     this.subViewsChat.push(chatMessage);
     this.listWrapperChat.prepend(chatMessage.el);
+
+    var editor = new MediumEditor('#inputConversationMessage', {
+        placeholder: {
+          text: 'Enter message...'
+        },
+        toolbar: {
+          imageDragging: false
+        }
+    });
   },
 
   renderNoneFound: function(){
@@ -232,7 +243,7 @@ module.exports = Backbone.View.extend({
   sendChat: function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
     var targetForm = this.$el.find('#chatConversation');
-    var chat_body = targetForm.find('#inputConversationMessage')[0].value;
+    var chat_body = targetForm.find('.js-chatMessage').html();
 
     if(!this.shiftDown) {
 
@@ -266,6 +277,7 @@ module.exports = Backbone.View.extend({
         }
 
         targetForm.find('#inputConversationMessage')[0].value = "";
+        targetForm.find('.js-chatMessage').html('');
 
         this.updateChat(chat_guid);
         this.afterRender();
