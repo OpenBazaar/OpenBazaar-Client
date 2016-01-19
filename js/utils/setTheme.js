@@ -53,7 +53,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .fieldItem { color: " + textColor + ";}" +
       "#ov1 #userPage .fieldItem-textarea { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + textColor + "; box-shadow: inset 0 0 0 4px " + primaryColor + ";}" +
-      "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { background: " + textColor + "; box-shadow: inset 0 0 0 3px " + primaryColor + ";}" +
+      "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].fieldItem { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].spinButtons::-webkit-inner-spin-button:before { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].spinButtons::-webkit-inner-spin-button:after { color: " + textColor + ";}" +

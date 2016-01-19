@@ -41,6 +41,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Follow",
         Feed: "Feed",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Unfollow",
         About: "About",
         NoDescriptionAdded: "No description added",
@@ -195,6 +196,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases",
         Enter: "Enter", //notTranslated
         Discover: "Discover",
+        Block: "Block", //notTranslated
         Blocked: "Blocked",
         Advanced: "Advanced",
         General: "General",
@@ -274,7 +276,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "All"
         },
         nav: {
-          searchPlaceholder: "Enter handle or search",
+          searchPlaceholder: "Type a keyword, handle or GUID...",
           myPage: "My Page",
           customizePage:"Customize Page",
           sellItem:"New",
@@ -375,6 +377,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Seguir",
         Feed: "Feed",
         FeedPlaceholder: "RSS de las p&aacute;ginas que sigue",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
@@ -522,6 +525,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -704,6 +708,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Folgen",
         Feed: "Feed",
         FeedPlaceholder: "Neuigkeiten aller Seiten denen du folgst",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Nicht mehr folgen",
         About: "&Uuml;ber",
         NoDescriptionAdded: "Keine Beschreibung hinzugefügt",
@@ -857,6 +862,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -1041,6 +1047,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Segui",
         Feed: "Feed",
         FeedPlaceholder: "Un feed di aggiornamenti da tutte le pagine che segui",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
@@ -1195,6 +1202,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cause",
         Enter: "Enter", //notTranslated
         Discover: "Trova",
+        Block: "Block", //notTranslated
         Blocked: "Bloccato",
         Advanced: "Avanzato",
         General: "Generale",
@@ -1378,6 +1386,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Suivre",
         Feed: "Flux",
         FeedPlaceholder: "Un flux de mises à jour de toutes les pages que vous suivez",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Ne plus suivre",
         About: "&Agrave; propos",
         NoDescriptionAdded: "Aucune description ajoutée",
@@ -1532,6 +1541,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cas",
         Enter: "Entrer",
         Discover: "Découvrir",
+        Block: "Block", //notTranslated
         Blocked: "Bloqué",
         Advanced: "Avancé",
         General: "Général",
@@ -1714,6 +1724,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Urmărire",
         Feed: "Feed",
         FeedPlaceholder: "Lista de actualizări de la toate paginile urmărite",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Oprire Urmărire",
         About: "Despre",
         NoDescriptionAdded: "Nu a fost adăgată descrirea",
@@ -1867,6 +1878,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2049,6 +2061,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Подписан",
         Feed: "Лента",
         FeedPlaceholder: "Лента обновлений, за которыми я слежу",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
@@ -2384,6 +2397,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Sleduj",
         Feed: "Feed",
         FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete.",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
@@ -2536,6 +2550,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2720,6 +2735,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Takip et",
         Feed: "Haberler",
         FeedPlaceholder: "Takip ettiğiniz tüm sayfalardan haberler",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Takibi bırak",
         About: "Hakkında",
         NoDescriptionAdded: "Tanım eklenmemiş",
@@ -2874,6 +2890,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3057,6 +3074,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Pab",
         Feed: "BIQtIq",
         FeedPlaceholder: "BIQtIq chu' wa' vo' chaq juH Dapab",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "Mej",
         About: "Umqu' ghot",
         NoDescriptionAdded: "Pagh bang nob",
@@ -3210,6 +3228,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3393,6 +3412,7 @@ module.exports = Backbone.Model.extend({
         Follow: "关注",
         Feed: "消息来源",
         FeedPlaceholder: "更新您关注的所有网页",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "不再关注",
         About: "关于",
         NoDescriptionAdded: "未加描述",
@@ -3546,6 +3566,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3729,6 +3750,7 @@ module.exports = Backbone.Model.extend({
         Follow: "팔로우",
         Feed: "새로고침",
         FeedPlaceholder: "당신이 따른 모든페이지에서 업데이트 공급",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "팔로우 취소",
         About: "정보",
         NoDescriptionAdded: "설명할수 없어",
@@ -3883,6 +3905,7 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4064,6 +4087,7 @@ module.exports = Backbone.Model.extend({
         Follow: "フォロー",
         Feed: "フィード",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewPage: "View Page", //notTranslated
         Unfollow: "フォローをやめる",
         About: "プロフェール",
         NoDescriptionAdded: "説明はありません",
@@ -4217,6 +4241,7 @@ module.exports = Backbone.Model.extend({
         Cases: "事例",
         Enter: "Enter", //notTranslated
         Discover: "ピックアップ",
+        Block: "Block", //notTranslated
         Blocked: "ブロック",
         Advanced: "詳細設定",
         General: "一般設定",

@@ -9,7 +9,8 @@ module.exports = Backbone.View.extend({
 
   events: {
     'click .js-item': 'itemClick',
-    'click .js-avatar': 'avatarClick'
+    'click .js-avatar': 'avatarClick',
+    'click .js-editItem': 'editItem'
   },
 
   initialize: function(){
