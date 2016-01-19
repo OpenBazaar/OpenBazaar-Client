@@ -10,6 +10,14 @@ var homeView = require('./views/homeVw'),
     settingsView = require('./views/settingsVw'),
     transactionsView = require('./views/transactionsVw');
 
+function stringToTag(string) {
+  var tag = string.replace(/\s+/g, '');
+  if (string.charAt(0) !== "#"){
+    tag = '#' + tag;
+  }
+  return tag;
+}
+
 module.exports = Backbone.Router.extend({
 
   initialize: function(options){
@@ -74,7 +82,7 @@ module.exports = Backbone.Router.extend({
     var searchItemsText = "";
     var searchUserText = ""; //placeholder for future functionality
     if(state == "products"){
-      searchItemsText = searchText;
+      searchItemsText = stringToTag(searchText);
     }
     this.cleanup();
     this.newView(new homeView({

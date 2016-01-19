@@ -16,11 +16,9 @@ var fs = require('fs'),//TODO: Remove FS - it is not used?
 
 function stringToTag(string) {
   var tag = string.replace(/\s+/g, '');
-
   if (string.charAt(0) !== "#"){
     tag = '#' + tag;
   }
-
   return tag;
 }
 
@@ -327,7 +325,7 @@ module.exports = Backbone.View.extend({
       // reset the input value to be in a tag format instead of a plain string
       target.val(stringToTag(target.val()));
 
-      this.searchItems(targetText.replace('#',''));
+      this.searchItems(targetText);
     }
   },
 
@@ -343,7 +341,7 @@ module.exports = Backbone.View.extend({
       this.searchItemsText = searchItemsText;
       this.clearItems();
       this.socketSearchID = Math.random().toString(36).slice(2);
-      this.socketView.search(this.socketSearchID, searchItemsText);
+      this.socketView.search(this.socketSearchID, searchItemsText.replace('#',''));
       this.setSocketTimeout();
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.setState('products', searchItemsText);
