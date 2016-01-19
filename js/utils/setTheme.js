@@ -80,6 +80,12 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
+    // Medium Editor stuffs
+    customStyleTag.innerHTML += 
+      "#ov1 #userPage .medium-editor-toolbar li button { background-color: " + secondaryColor + "; color: " + textColor + "; border: 0}" +
+      "#ov1 #userPage .medium-editor-toolbar li button:hover { opacity: .75}" +
+      "#ov1 #userPage .medium-editor-toolbar:after { border-top-color: " + secondaryColor + "; border-left-color: transparent; border-right-color: transparent}";
+
     // colorbox stuffs
     customStyleTag.innerHTML +=
       "#ov1 #userPage #cboxContent { background-color: " + primaryColor + "; color: " + textColor + ";}" +

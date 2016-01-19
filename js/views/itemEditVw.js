@@ -74,9 +74,11 @@ module.exports = Backbone.View.extend({
       });
 
       var editor = new MediumEditor('#inputDescription', {
+          placeholder: {
+            text: ''
+          },
           toolbar: {
-            imageDragging: false,
-            buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
+            imageDragging: false
           }
       });
       
