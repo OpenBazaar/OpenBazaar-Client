@@ -465,14 +465,14 @@ module.exports = Backbone.View.extend({
   addressBarKeyup: function(e){
     "use strict";
     var barText = this.addressInput.val();
-    if(barText.length > 0){
-      //detect enter key
-      if (e.keyCode == 13){
-        this.addressBarProcess(barText);
-      } else {
-        this.closeStatusBar();
-      }
+    //detect enter key
+    if (e.keyCode == 13){
+      this.addressBarProcess(barText);
     } else {
+      this.closeStatusBar();
+    }
+
+    if(barText.length === 0){
       this.closeStatusBar();
     }
   },
@@ -491,6 +491,8 @@ module.exports = Backbone.View.extend({
     if(addressTextArray[0].charAt(0) == "@"){
       handle = addressTextArray[0];
       this.showStatusBar('Navigation by handle is not supported yet.');
+    } else if(addressTextArray[0].length === 0){
+      Backbone.history.navigate('#home', {trigger:true});
     } else if(addressTextArray[0].length === 40){
       guid = addressTextArray[0];
       Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});

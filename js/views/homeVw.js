@@ -159,6 +159,8 @@ module.exports = Backbone.View.extend({
       //populate search field
       if(self.searchItemsText){
         self.$el.find('.js-homeSearchItems').val(self.searchItemsText);
+        $('#obContainer').scrollTop(0);
+        $('.js-navAddressBar').val(self.searchItemsText);
       }
     });
   },
@@ -326,6 +328,8 @@ module.exports = Backbone.View.extend({
       target.val(stringToTag(target.val()));
 
       this.searchItems(targetText);
+
+      $('.js-navAddressBar').val(targetText);
     }
   },
 
@@ -333,6 +337,9 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.setState("products");
     this.loadItems();
+
+    //clear address bar
+    $('.js-navAddressBar').val('');
   },
 
   searchItems: function(searchItemsText){
