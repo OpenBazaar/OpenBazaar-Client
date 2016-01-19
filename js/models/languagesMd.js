@@ -215,6 +215,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content",
         StandardThemes: "Standard themes",
         NoPhotosAdded: "No Photos Added",
+        StoreModeratorsOptional: "Store Moderators (Optional)",
+        Searchformoderators: "Search for moderators",
+        Contributors: "Contributors",
+        Support: "Support",
+        Licensing: "Licensing",
+        Forward: "Forward",
+        On: "On",
+        Off: "Off",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -290,7 +298,7 @@ module.exports = Backbone.Model.extend({
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
           configure: "Configure your experience",
           disclaimer_title: "Disclaimer",
-          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\nOpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\nOpenBazaar users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
+          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\nOpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\nOpenBazaar users must adhere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
           yourCountry: "Select Your Country",
           localCurrency: "Select Your Currency",
           LanguagePlaceholder: "Search for language",
@@ -537,6 +545,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -866,6 +882,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -940,7 +964,7 @@ module.exports = Backbone.Model.extend({
           contributors: "%{smart_count} Mitwirkeder |||| %{smart_count} Mitwirkende",
           configure: "Konfiguriere dein Erlebnis",
           disclaimer_title: "Ausschlussklausel",
-          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\nOpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\nOpenBazaar users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
+          disclaimer_body: "OpenBazaar is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\nOpenBazaar users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\nOpenBazaar users must adhere to the laws in their own legal jurisdiction as well as their conscience. The OpenBazaar developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using OpenBazaar you're responsible for your own actions on the OpenBazaar network.",
           yourCountry: "W&auml;hle dein Land",
           localCurrency: "W&auml;hle deine W&auml;hrung",
           LanguagePlaceholder: "Suche nach Sprache",
@@ -1197,6 +1221,14 @@ module.exports = Backbone.Model.extend({
         Content: "Contenuto",
         StandardThemes: "Temi standard",
         NoPhotosAdded: "Nessuna foto aggiunta",
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1324,7 +1356,7 @@ module.exports = Backbone.Model.extend({
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Suivant",
         IAgree: "Je suis d'accord",
-        Back: "Retour",
+        Back: "Reculer",
         EnterMessage: "Entrer un message...",
         Reload: "Actualiser",
         You: "Vous",
@@ -1528,6 +1560,14 @@ module.exports = Backbone.Model.extend({
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
+        StoreModeratorsOptional: "Modérateurs de boutique (Optionnel)",
+        Searchformoderators: "Rechercher des modérateurs",
+        Contributors: "Contributeurs",
+        Support: "Soutenir",
+        Licensing: "Licences",
+        Forward: "Avancer",
+        On: "Activer",
+        Off: "Désactiver",
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1623,7 +1663,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Découvrez les annonces et les pages sur OpenBazaar",
           Finished: "Terminé"
         },
         buyFlow: {
@@ -1858,6 +1898,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2186,6 +2234,14 @@ module.exports = Backbone.Model.extend({
         Content: "Контент", // not translated
         StandardThemes: "Стандартные темы", // not translated
         NoPhotosAdded: "Не добавлено фотографий", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Продано", // not translated
           PurchasedBy: "Куплено", // not translated
@@ -2514,6 +2570,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2845,6 +2909,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3175,6 +3247,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3505,6 +3585,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3836,6 +3924,14 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3910,7 +4006,7 @@ module.exports = Backbone.Model.extend({
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors", // not sure if I can change this..
           configure: "당신의 경험을 구성",
           disclaimer_title: "경고",
-          disclaimer_body: "오픈바자 is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\n오픈바자 users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\n오픈바자 users must ahdere to the laws in their own legal jurisdiction as well as their conscience. The 오픈바자 developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using 오픈바자 you're responsible for your own actions on the 오픈바자 network.", // leaving legalese alone, just changed the name OpenBazaar to ko
+          disclaimer_body: "오픈바자 is a network for trading goods and services directly between people - using Bitcoin - without any central organization controlling the platform. This means you are responsible for your own activity on the network.\n\n오픈바자 users are not anonymous by default. Most communications between parties are encrypted, but IP addresses are public and can be associated with activity on the network. Malicious parties could use this information against you; protecting your privacy is your own responsibility.\n\n오픈바자 users must adhere to the laws in their own legal jurisdiction as well as their conscience. The 오픈바자 developers do not condone - and are not responsible for - any use of the platform for illegal activity.\n\nThe OpenBazaar community of developers has worked hard to deliver a free platform for trade to the world. But as with any software, bugs will be found. The developers are not responsible for any monetary loss associated with problems in the software.\n\nBy using 오픈바자 you're responsible for your own actions on the 오픈바자 network.", // leaving legalese alone, just changed the name OpenBazaar to ko
           yourCountry: "나라 선택",
           localCurrency: "선택 통화",
           LanguagePlaceholder: "언어 검색",
@@ -4164,6 +4260,14 @@ module.exports = Backbone.Model.extend({
         Content: "コンテンツ設定",
         StandardThemes: "基本テーマ",
         NoPhotosAdded: "写真はありません",
+        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
+        Searchformoderators: "Search for moderators", // not translated
+        Contributors: "Contributors", // not translated
+        Support: "Support", // not translated
+        Licensing: "Licensing", // not translated
+        Forward: "Forward", // not translated
+        On: "On", // not translated
+        Off: "Off", // not translated
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",

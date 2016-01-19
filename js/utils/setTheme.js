@@ -64,7 +64,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .container .txtField { color: " + textColor + ";}" +
       "#ov1 #userPage .custCol-font-secondary { color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + textColor + ";}" +
-      "#ov1 #userPage .chosen-choices { background-color: " + primaryColor + "; border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
+      "#ov1 #userPage .chosen-choices {border: 0; background-image: none; box-shadow: none; padding: 5px 7px}" +
       "#ov1 #userPage .search-choice { background-color: " + secondaryColor + "; background-image: none; border: none; padding: 10px; color: " + textColor + " ; font-size: 13px; box-shadow: none; border-radius: 3px;}" +
       "#ov1 #userPage .custCol-border-background { border-color: " + backgroundColor + " }" +
       "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + secondaryColor + "}" +
