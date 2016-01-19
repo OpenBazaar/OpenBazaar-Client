@@ -96,7 +96,8 @@
                 <% if(ob.userCurrencyCode == "BTC"){ %>
                 min="0.0001"
                 <% } else { %>
-                min="0.01"<% } %>
+                min="<% print(window.currentBitcoin * 0.0005) %>"
+                <% } %>
               >
             </div>
             <div class="flexCol-4">
