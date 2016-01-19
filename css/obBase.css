@@ -1865,6 +1865,12 @@ div.chatSearchOut .chatSearchIcon {
   width: 100%;
 }
 
+.chatConversationMessageLine h2,
+.chatConversationMessageLine h3,
+.chatConversationMessageLine p {
+  margin: 0;
+}
+
 .chatConversationMessageLine table {
   padding: 0;
   width: 100%;
