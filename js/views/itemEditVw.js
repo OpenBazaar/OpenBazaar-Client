@@ -387,8 +387,6 @@ module.exports = Backbone.View.extend({
     this.$el.find('#contractForm').addClass('formChecked');
 
     if(submitForm.checkValidity()){
-      console.log('boom town flat filly what what!');
-      
       $.ajax({
         type: "POST",
         url: self.model.get('serverUrl') + "contracts",
