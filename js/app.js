@@ -80,6 +80,16 @@ $(window).bind('hashchange', function(){
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
+//prevent dragging a file to the window from loading that file
+window.addEventListener("dragover",function(e){
+  e = e || event;
+  e.preventDefault();
+},false);
+window.addEventListener("drop",function(e){
+  e = e || event;
+  e.preventDefault();
+},false);
+
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
   getBTPrice(cCode, function (btAve, currencyList) {
