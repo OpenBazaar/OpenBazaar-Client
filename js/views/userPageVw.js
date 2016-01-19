@@ -332,7 +332,7 @@ module.exports = Backbone.View.extend({
       });
 
       var about = sanitizeHTML(self.model.get('page').profile.about, {
-        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
       });
 
       $('.js-userAbout').html(about);
