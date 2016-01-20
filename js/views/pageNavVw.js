@@ -495,17 +495,20 @@ module.exports = Backbone.View.extend({
     itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
 
     if(addressTextArray[0].charAt(0) == "@"){
+      // user enter a handle
       handle = addressTextArray[0];
       this.showStatusBar('Navigation by handle is not supported yet.');
     } else if(addressTextArray[0].length === 0){
+      // user trying to go back to discover
       Backbone.history.navigate('#home', {trigger:true});
     } else if(addressTextArray[0].length === 40){
+      // user entered a guid
       guid = addressTextArray[0];
       Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
     } else {
-      Backbone.history.navigate('#home/products/' + addressTextArray[0], {trigger:true});
+      // user enetered a search term
+      Backbone.history.navigate('#home/products/' + addressTextArray[0].replace('#', ''), {trigger:true});
     }
-
   },
 
   showStatusBar: function(msgText){

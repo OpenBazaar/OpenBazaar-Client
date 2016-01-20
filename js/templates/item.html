@@ -87,7 +87,7 @@
         %>
           <a href="#home/products/<%- data %>">
             <div class="btn-pill custCol-secondary floatLeft">
-              #<%- data %>
+              #<%- data.replace(/\s+/g, '') %>
             </div>
           </a>
       <% } }); %>    

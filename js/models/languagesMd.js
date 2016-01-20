@@ -64,12 +64,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Become a Store",
         GoToMyPage: "My Page",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...",
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...",
         SearchForPagesPlaceholder: "Search by name or keyword",
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
         SearchForUsersPlaceholder: "Type a name...",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -260,6 +260,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Saved",
           SaveSuccess: "Your changes have been saved."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "All types",
           pagesStores: "Stores",
@@ -270,7 +275,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "All"
         },
         nav: {
-          searchPlaceholder: "Enter handle or search",
+          searchPlaceholder: "Type a handle, guid or #tag...",
           myPage: "My Page",
           customizePage:"Customize Page",
           sellItem:"New",
@@ -391,12 +396,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
@@ -582,6 +587,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Guardado",
           SaveSuccess: "Se han guardado los cambios."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Todos los tipos",
           pagesStores: "Tiendas",
@@ -591,7 +601,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "De dodas las tiendas"
         },
         nav: {
-          searchPlaceholder: "Introduzca un apodo o una palabra clave",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "Mi p&aacute;gina",
           customizePage:"Personalizar P&aacute;gina",
           sellItem:"Nuevo",
@@ -715,12 +725,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Willkommen",
         CreateStore: "Werde ein Verk&auml;ufer",
         GoToMyPage: "Zur eigenen Seite",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Nach Name oder Schlagwort suchen",
         SearchFeedPlaceholder: "Nach GUID oder Handle suchen",
         SearchForFollowersPlaceholder: "Nach GUID oder Handle suchen",
         SearchForUsersPlaceholder: "Nach GUID oder Handle suchen",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Werktage",
         EstDeliveryInternationalPlaceholder: "7-15 Werktage",
         OrderProcessingTimePlaceholder: "1-2 Werktage",
@@ -911,6 +921,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Gespeichert",
           SaveSuccess: "Ihre &Auml;nderungen wurden gespeichert."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Alle Arten",
           pagesStores: "L&auml;den",
@@ -920,7 +935,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Von allen L&auml;den"
         },
         nav: {
-          searchPlaceholder: "Handle eingeben oder suchen",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "Meine Seite",
           customizePage:"Seite anpassen",
           sellItem:"Neu",
@@ -1048,12 +1063,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Benvenuto",
         CreateStore: "Diventa un negozio",
         GoToMyPage: "Vai alla mia pagina",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Cerca per nome o parola chiave",
         SearchFeedPlaceholder: "Cerca per nickname o guid",
         SearchForFollowersPlaceholder: "Cerca per nickname o guid",
         SearchForUsersPlaceholder: "Cerca per nickname o guid",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 giorni di lavoro",
         EstDeliveryInternationalPlaceholder: "7-15 giorni di lavoro",
         OrderProcessingTimePlaceholder: "1-2 giorni di lavoro",
@@ -1244,6 +1259,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Salvato",
           SaveSuccess: "Le modifiche sono state salvate."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Tutti i tipi",
           pagesStores: "Negozi",
@@ -1253,7 +1273,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Da tutti i negozi"
         },
         nav: {
-          searchPlaceholder: "Inserisci nickname o cerca",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "La mia pagina",
           customizePage: "Personalizza pagina",
           sellItem: "Nuovo",
@@ -1381,12 +1401,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenue",
         CreateStore: "Créer une boutique",
         GoToMyPage: "Ma page",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
         SearchFeedPlaceholder: "Tapez un mot-clé...",
         SearchForFollowersPlaceholder: "Tapez un nom...",
         SearchForUsersPlaceholder: "Tapez un nom...",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 jours ouvrés",
         EstDeliveryInternationalPlaceholder: "7-15 jours ouvrés",
         OrderProcessingTimePlaceholder: "Entrer le temps nécessaire pour traiter la commande",
@@ -1577,6 +1597,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Enregistrés",
           SaveSuccess: "Vos changements ont été enregistrés."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Tous les types",
           pagesStores: "Boutiques",
@@ -1587,7 +1612,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "Toutes"
         },
         nav: {
-          searchPlaceholder: "Entrer un nom d'utilisateur ou rechercher",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "Ma page",
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
@@ -1711,12 +1736,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bun Venit",
         CreateStore: "Deveniți un Magazin",
         GoToMyPage: "Pagina Mea",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Căutare după nume sau cuvânt cheie",
         SearchFeedPlaceholder: "Căutare după nume sau GUID",
         SearchForFollowersPlaceholder: "Căutare după nume sau GUID",
         SearchForUsersPlaceholder: "Căutare după nume sau GUID",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Zile Lucrătoare",
         EstDeliveryInternationalPlaceholder: "7-15 Zile Lucrătoare",
         OrderProcessingTimePlaceholder: "1-2 Zile Lucrătoare",
@@ -1907,6 +1932,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Salvat",
           SaveSuccess: "Modificările dvs. au fost salvate."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Toate tipurile",
           pagesStores: "Magazine",
@@ -1916,7 +1946,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Din toate magazinele"
         },
         nav: {
-          searchPlaceholder: "Introduceți numele sau căutați",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "Pagina mea",
           customizePage:"Customizare Pagină",
           sellItem:"Nou",
@@ -2040,12 +2070,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Создать магазин",
         GoToMyPage: "Моя страница",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Поиск по имени или ключевому слову",
         SearchFeedPlaceholder: "Поиск по имени или GUID",
         SearchForFollowersPlaceholder: "Поиск по имени или GUID",
         SearchForUsersPlaceholder: "Поиск по имени или GUID",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 рабочих дней",
         EstDeliveryInternationalPlaceholder: "7-15 рабочих дней",
         OrderProcessingTimePlaceholder: "1-2 рабочих дней",
@@ -2236,6 +2266,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Сохранено",
           SaveSuccess: "Ваши изменения сохранены."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Все типы",
           pagesStores: "Магазины",
@@ -2245,7 +2280,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Со всех магазинов"
         },
         nav: {
-          searchPlaceholder: "Введите имя или запрос",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "Моя страница",
           customizePage:"Настроить страницу",
           sellItem:"Разместить товар",
@@ -2368,12 +2403,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Vitajte",
         CreateStore: "Vytvorte si obchod",
         GoToMyPage: "Moja stránka",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
         SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForUsersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 pracovných dní",
         EstDeliveryInternationalPlaceholder: "7-15 pracovných dní",
         OrderProcessingTimePlaceholder: "1-2 pracovné dni",
@@ -2564,6 +2599,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Uložené",
           SaveSuccess: "Vaše zmeny boli uložené."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Všetky typy",
           pagesStores: "Obchody",
@@ -2573,7 +2613,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Zo všetkých obchodov"
         },
         nav: {
-          searchPlaceholder: "Vložte hľadaný výraz",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "Moja stránka",
           customizePage:"Upraviť stránku",
           sellItem:"Nová položka",
@@ -2701,12 +2741,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Hoşgeldiniz",
         CreateStore: "Mağaza Oluşturun",
         GoToMyPage: "Sayfam",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Bir ad ya da anahtar sözcük Ara",
         SearchFeedPlaceholder: "Takma ad ya da GUID Ara",
         SearchForFollowersPlaceholder: "Takma ad ya da GUID Ara",
         SearchForUsersPlaceholder: "Takma ad ya da GUID Ara",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 İş Günü",
         EstDeliveryInternationalPlaceholder: "7-15 İş Günü",
         OrderProcessingTimePlaceholder: "Siparişin hazırlanması için gereken süreyi girin",
@@ -2897,6 +2937,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Kaydedildi",
           SaveSuccess: "Değişiklikleriniz kaydedildi."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Tüm çeşitler",
           pagesStores: "Mağazalar",
@@ -2906,7 +2951,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Tüm mağazalardan"
         },
         nav: {
-          searchPlaceholder: "Takma ad gir ya da Ara",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "Sayfam",
           customizePage:"Sayfayı Özelleştir",
           sellItem:"Yeni",
@@ -3033,12 +3078,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "YI'el",
         CreateStore: "NgevwI' qach",
         GoToMyPage: "JuHwIj",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Pong mu' joq nej",
         SearchFeedPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForFollowersPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForUsersPlaceholder: "Ngaj pong nej ghap GUID",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "Wej pagh vagh jaj malja'",
         EstDeliveryInternationalPlaceholder: "Soch pagh wa'maH 'ej vagh jaj malja'",
         OrderProcessingTimePlaceholder: "wa' pagh cha' jaj malja'",
@@ -3229,6 +3274,11 @@ module.exports = Backbone.Model.extend({
           Saved: "Choq",
           SaveSuccess: "YemwI' choH."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "Hoch Segh",
           pagesStores: "NgevwI'",
@@ -3238,7 +3288,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Vo' Hoch ngevwI'"
         },
         nav: {
-          searchPlaceholder: "Mach pong search pagh 'el",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "JuHwIj",
           customizePage:"JuHwIj choH",
           sellItem:"Chu'",
@@ -3365,12 +3415,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "欢迎",
         CreateStore: "开店铺",
         GoToMyPage: "我的主页",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "用名字或关键字查找",
         SearchFeedPlaceholder: "用 handle 或 GUID 查找",
         SearchForFollowersPlaceholder: "用 handle 或 GUID 查找",
         SearchForUsersPlaceholder: "用 handle 或 GUID 查找",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 个工作日",
         EstDeliveryInternationalPlaceholder: "7-15 工作日",
         OrderProcessingTimePlaceholder: "1-2 工作日",
@@ -3561,6 +3611,11 @@ module.exports = Backbone.Model.extend({
           Saved: "以保存",
           SaveSuccess: "以保存更改"
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "所有分类",
           pagesStores: "店铺",
@@ -3570,7 +3625,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "所有点家里找"
         },
         nav: {
-          searchPlaceholder: "Enter handle 或查找",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "我的主页",
           customizePage:"个性化主页",
           sellItem:"新品",
@@ -3698,12 +3753,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "어서오세요!",
         CreateStore: "가게 만들기",
         GoToMyPage: "내 페이지",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "이름과 주제어 검색",
         SearchFeedPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForFollowersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForUsersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 영업일",
         EstDeliveryInternationalPlaceholder: "7-15 영업일",
         OrderProcessingTimePlaceholder: "시간을 입력시에 주문서 필요",
@@ -3894,6 +3949,11 @@ module.exports = Backbone.Model.extend({
           Saved: "저장하다",
           SaveSuccess: "변경 사항 저장하다."
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "모든종류",
           pagesStores: "가게",
@@ -3903,7 +3963,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "모든 가게"
         },
         nav: {
-          searchPlaceholder: "핸들 입력 과 검색",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "내 페이지",
           customizePage:"사용자 페이지",
           sellItem:"새로운",
@@ -4027,12 +4087,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "こんにちは",
         CreateStore: "出品する",
         GoToMyPage: "マイページ",
-        SearchForItemsPlaceholder: "Type: #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "商品名・キーワードで探す",
         SearchFeedPlaceholder: "GUID・ユーザ名で探す",
         SearchForFollowersPlaceholder: "GUID・ユーザ名で探す",
         SearchForUsersPlaceholder: "GUID・ユーザ名で探す",
-        SearchOnUserStorePlaceholder: "Type: a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3〜5営業日以内",
         EstDeliveryInternationalPlaceholder: "7〜15営業日以内",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -4223,6 +4283,11 @@ module.exports = Backbone.Model.extend({
           Saved: "保存しました",
           SaveSuccess: "変更の保存をしました。"
         },
+        discover: {
+          searchDefaultText: "Scanning your network", //notTranslated
+          searchingText: "Scanning your network for", //notTranslated
+          noResults: "No listings found in your network tagged with" //notTranslated
+        },
         filters: {
           pagesAllTypes: "すべて",
           pagesStores: "ストア",
@@ -4233,7 +4298,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "すべて"
         },
         nav: {
-          searchPlaceholder: "ユーザ名・検索",
+          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
           myPage: "マイページ",
           customizePage:"ページをカスタマイズ",
           sellItem:"出品する",

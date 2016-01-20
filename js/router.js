@@ -92,7 +92,9 @@ module.exports = Backbone.Router.extend({
       state: state,
       searchItemsText: searchItemsText
     }));
-
+    if(searchItemsText){
+      window.obEventBus.trigger("setAddressBar", searchItemsText);
+    }
     // hide the discover onboarding callout 
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
   },

@@ -99,12 +99,21 @@ module.exports = Backbone.View.extend({
   setSocketTimeout: function(){
     "use strict";
     var self = this;
-    this.$el.find('.js-loadingSpinner').removeClass('fadeOut');
+    this.$el.find('.js-loadingMessage .spinner').removeClass('fadeOut');
+    this.$el.find('.js-loadingMessage').removeClass('fadeOut');
     this.socketTimeout = window.setTimeout(function(){
-        self.$el.find('.js-loadingSpinner').addClass('fadeOut');
+        self.$el.find('.js-loadingMessage').addClass('fadeOut');
         window.clearTimeout(self.socketTimeout);
     }, 2000);
 
+    // after 4 seconds, if no listings are found, display the no results found message
+    window.setTimeout(function() {
+      if ($('.homeGridItems .gridItem').length === 0){
+        self.$el.find('.js-loadingMessage').removeClass('fadeOut');
+        self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
+        self.$el.find('.js-loadingText').html(self.$el.find('.js-loadingText').data('noResultsText'));
+      }
+    }, 4000);
   },
 
   resetLookingCount: function(){
@@ -160,8 +169,6 @@ module.exports = Backbone.View.extend({
       if(self.searchItemsText){
         self.$el.find('.js-homeSearchItems').val(self.searchItemsText);
         $('#obContainer').scrollTop(0);
-        $('.js-navAddressBar').val('sdfsdf');
-        console.log('sdf');
       }
     });
   },
@@ -324,13 +331,15 @@ module.exports = Backbone.View.extend({
     var target = $(e.target),
         targetText = stringToTag(target.val());
 
-    if(targetText.length > 0 && e.keyCode == 13){
+    if(target.val().length > 0 && e.keyCode == 13){
       // reset the input value to be in a tag format instead of a plain string
       target.val(stringToTag(target.val()));
 
       this.searchItems(targetText);
 
-      $('.js-navAddressBar').val(targetText);
+      $('#addressBar').val(targetText);
+    }else if(target.val().length == 0 && e.keyCode == 13){
+      this.searchItemsClear();
     }
   },
 
@@ -340,7 +349,12 @@ module.exports = Backbone.View.extend({
     this.loadItems();
 
     //clear address bar
-    $('.js-navAddressBar').val('');
+    window.obEventBus.trigger("setAddressBar", "");
+    
+    // change loading text copy
+    this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));
+    this.$el.find('.js-discoverSearchKeyword').addClass('hide');
+
   },
 
   searchItems: function(searchItemsText){
@@ -350,7 +364,10 @@ module.exports = Backbone.View.extend({
       this.clearItems();
       this.socketSearchID = Math.random().toString(36).slice(2);
       this.socketView.search(this.socketSearchID, searchItemsText.replace('#',''));
-      this.setSocketTimeout();
+      this.setSocketTimeout();      
+      this.$el.find('.js-discoverSearchKeyword').html(searchItemsText);
+      this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('searchingText'));
+      this.$el.find('.js-discoverSearchKeyword').removeClass('hide');
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.setState('products', searchItemsText);
     }

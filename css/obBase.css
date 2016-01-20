@@ -1561,21 +1561,23 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-buyNow {
-  margin: auto;
-  width: 280px;
-  height: 52px;
-  line-height: 52px;
-  padding: 0;
-  opacity: 1;
-  font-size: 22px;
-  border-radius: 5px;
-  float: none;
-  font-weight: 800;
-  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+margin: auto;
+    width: 280px;
+    height: 52px;
+    line-height: 52px;
+    padding: 0;
+    opacity: 1;
+    font-size: 17px;
+    border-radius: 5px;
+    float: none;
+    font-weight: 400;
+    transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .btn.btn-buyNow:hover {
-  opacity: .85;
+  opacity: .75;
 }
 
 
@@ -1944,7 +1946,8 @@ div.chatSearchOut .chatSearchIcon {
   text-decoration: underline;
 }
 
-.chatConversation textarea, .chatConversation input {
+.chatConversation textarea, 
+.chatConversation input {
   color: white;
   background-color: unset;
   width: 100%;
@@ -2045,6 +2048,11 @@ div.chatSearchOut .chatSearchIcon {
 #inputConversationMessage {
   border: 1px solid #333;
   resize: none;
+  margin-top: 4px;
+}
+
+#inputConversationMessage::-webkit-input-placeholder  {
+  font-size: 12px;
 }
 
 .chatConversationMessageAvatar {
@@ -4723,6 +4731,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .blur {
   -webkit-filter: blur(1px);
+}
+
+#ov1 .fadeOut {
+  opacity: 0;
+  pointer-events: none;
 }
 
 #ov1 .underline {
