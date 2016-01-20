@@ -391,6 +391,7 @@ module.exports = Backbone.View.extend({
       this.socketView.search(this.socketSearchID, searchItemsText.replace('#',''));
       this.setSocketTimeout();      
       this.$el.find('.js-discoverSearchKeyword').html(searchItemsText);
+      this.$el.find('.js-discoverHeading').html(searchItemsText);
       this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('searchingText'));
       this.$el.find('.js-discoverSearchKeyword').removeClass('hide');
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
