@@ -82,19 +82,29 @@ module.exports = Backbone.View.extend({
     this.purchasesCol.fetch({
       success: function(models){
         self.renderPurchases();
+        self.setSearchList('transactionsPurchases');
+        if(self.model.get('page').vendor){
+          self.salesCol.fetch({
+            success: function(models){
+              self.renderSales();
+              self.setSearchList('transactionsSales');
+              if(self.model.get('page').moderator){
+                //this.casesCol.fetch(); //not ready yet
+              }
+              //move to success of fetch cases when that is ready
+
+            }
+          });
+        }
       }
     });
-    if(this.model.get('page').vendor){
-      this.salesCol.fetch({
-        success: function(models){
-          console.log(models);
-          self.renderSales();
-        }
-      });
-    }
-    if(this.model.get('page').moderator){
-      //this.casesCol.fetch(); //not ready yet
-    }
+
+
+  },
+
+  setSearchList: function(targetID){
+    "use strict";
+    this.searchTransactions = new window.List(targetID, {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
   },
 
   render: function(){
@@ -146,11 +156,13 @@ module.exports = Backbone.View.extend({
     this.renderPurchases();
   },
 
-  transactionFilter: function(){
+  transactionFilter: function(e){
     "use strict";
-    this.$('.search').val("");
-    var filterBy = this.$el.find(".js-transactionFilter").val();
-    switch(this.state){
+    var tab = $(e.target),
+        tabTarget = tab.data("tab"),
+        filterBy = tab.val();
+    this.$('.js-'+tabTarget+' .search').val("");
+    switch(tabTarget){
       case "purchases":
         this.renderPurchases(filterBy);
         break;
@@ -187,7 +199,6 @@ module.exports = Backbone.View.extend({
       }
     });
     this.$el.find(".js-purchases").append(this.purchasesWrapper);
-    this.searchTransactions = new window.List('transactionsHolder', {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
   },
 
   addPurchase: function(model){
@@ -204,16 +215,27 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.salesWrapper.html('');
+    if(filterBy == "dateNewest"){
+      this.salesCol.comparator = function(model) {
+        return -model.get("timestamp");
+      };
+      this.salesCol.sort();
+    }
+    if(filterBy == "dateOldest"){
+      this.salesCol.comparator = function(model) {
+        return model.get("timestamp");
+      };
+      this.salesCol.sort();
+    }
     this.salesCol.each(function(model, i){
-      if(!filterBy || filterBy == "all"){
+      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
         self.addSale(model);
-      } else if(filterBy && model.get('status') == filterBy) {
+      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
         self.addSale(model);
       }
     });
-    this.$el.find(".js-sales").append(this.salesWrapper);
-    this.searchTransactions = new window.List('transactionsHolder', {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
 
+    this.$el.find(".js-sales").append(this.salesWrapper);
   },
 
   addSale: function(model){
@@ -235,7 +257,6 @@ module.exports = Backbone.View.extend({
   openOrderModal: function(options){
     "use strict";
     $('.js-loadingModal').removeClass("hide");
-    console.log(options);
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
