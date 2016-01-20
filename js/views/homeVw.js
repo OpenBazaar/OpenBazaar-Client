@@ -346,12 +346,12 @@ module.exports = Backbone.View.extend({
   searchItemsKeyup: function(e){
     "use strict";
     var target = $(e.target),
-        targetText = target.val(),
+        targetText = target.val().replace("#",''),
         addressText = targetText;
 
     if(e.keyCode == 13){
       this.searchItems(targetText);
-      addressText = addressText ? "#" + addressText : "";
+      addressText = addressText ? "#" + addressText.replace(" ", "") : "";
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", addressText);
     }
