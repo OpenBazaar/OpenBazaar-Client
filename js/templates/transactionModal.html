@@ -437,7 +437,7 @@
             >
           </div>
         </div>
-        <% if(ob.buyer_order.order.shipping) { %>
+        <% if(ob.vendor_offer.listing.metadata.category == "physical good") { %>
         <div class="flexRow custCol-border borderTop">
           <div class="flexCol-4 borderRight custCol-border">
             <div class="fieldItem">
@@ -490,6 +490,7 @@
           </div>
         </div>
         <% } %>
+        <% if(ob.vendor_offer.listing.metadata.category == "digital good") { %>
         <div class="flexRow custCol-border borderTop">
           <div class="flexCol-4 borderRight custCol-border">
             <div class="fieldItem">
@@ -524,6 +525,7 @@
             >
           </div>
         </div>
+        <% } %>
         <div class="width100 custCol-border borderTop">
           <div class="ctrlGroup padding10 pull-right">
             <a class="btn btn-large custCol-secondary js-confirmOrder"><%= polyglot.t('Submit') %></a>

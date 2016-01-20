@@ -235,6 +235,7 @@ module.exports = Backbone.View.extend({
   openOrderModal: function(options){
     "use strict";
     $('.js-loadingModal').removeClass("hide");
+    console.log(options);
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,

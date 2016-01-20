@@ -137,6 +137,7 @@ module.exports = Backbone.View.extend({
     if(!state){
       state = "summary";
     }
+    console.log(state);
     this.$el.find('.js-main').addClass('hide');
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
@@ -193,6 +194,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
       self.status = 2;
+      self.tabState = "summary";
       self.getData();
       }, '', confirmData);
   },
@@ -208,6 +210,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(targetForm, '', this.serverUrl + "complete_order", function(data){
       self.status = 3;
+      self.tabState = "summary";
       self.getData();
     }, '', completeData);
   },
