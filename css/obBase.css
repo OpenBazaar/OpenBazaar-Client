@@ -3794,6 +3794,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   clear: both;
 }
 
+#ov1 .highlight {
+  /* use on an element inside a block container to add a translucent hover background to it. The color is slightly
+     grey so it works on light backgrounds too*/
+  background: rgba(215, 215, 215, 0);
+  transition: background 0.5s;
+}
+
+#ov1 .highlight:hover {
+  background: rgba(215, 215, 215, 0.2);
+}
+
 #ov1 .pull-right {
   float: right;
 }

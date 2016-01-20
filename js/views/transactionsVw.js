@@ -55,8 +55,9 @@ module.exports = Backbone.View.extend({
     this.countriesArray = this.countries.get('countries');
 
     this.subModels.push(this.countries);
-
+    $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
+      $('.js-loadingModal').addClass("hide");
       self.btAve = btAve;
       self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";

@@ -69,6 +69,16 @@
     <div style="height: 264px;" class="scrollOverflowY">
       <div class="flexRow custCol-border borderBottom">
         <div class="flexRow rowItem padding2015">
+          <div class="pad10left txt-unleaded">
+            <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+              <strong><%= polyglot.t('transactions.OrderStatus') %>: </strong><%= polyglot.t('transactions.OrderStatus'+ob.status) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flexRow custCol-border borderBottom">
+        <div class="flexRow rowItem padding2015">
           <div class="flexCol-7">
             <div class="pad10left txt-unleaded">
               <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
@@ -153,38 +163,6 @@
       </div>
       <% } %>
 
-      <!-- only display moderator if one is assigned -->
-      <% if( ob.vendor_order_confirmation) { %>
-      <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding2015">
-          <div>
-            <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
-            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-              <strong><%= polyglot.t('transactions.EstimatedDelivery') %>:</strong> <%-ob.vendor_order_confirmation.invoice.shipping.est_delivery %>
-            </div>
-            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-              <strong><%= polyglot.t('transactions.Shipper') %>:</strong> <%-ob.vendor_order_confirmation.invoice.shipping.shipper %>
-            </div>
-            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-              <strong><%= polyglot.t('transactions.TrackingNumber') %>:</strong> <%-ob.vendor_order_confirmation.invoice.shipping.tracking_number %>
-            </div>
-            <% } %>
-            <% if( ob.vendor_order_confirmation.invoice.content_source) { %>
-            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-              <strong><%= polyglot.t('transactions.URL') %>:</strong> <%-ob.vendor_order_confirmation.invoice.content_source.url %>
-            </div>
-            <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
-            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
-              <strong><%= polyglot.t('transactions.Password') %>:</strong> <%-ob.vendor_order_confirmation.invoice.content_source.password %>
-            </div>
-            <% } %>
-            <% } %>
-          </div>
-        </div>
-      </div>
-      <% } %>
-
-
     </div>
 
     <div class="flexRow rowItem padding2015 width100 positionBottom custCol-secondary">
@@ -217,11 +195,53 @@
         </div>
       </div>
     </div>
+
+    <!-- only display if vendor_order_confirmation exists -->
+    <% if( ob.vendor_order_confirmation) { %>
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding2015">
+        <div>
+          <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%= polyglot.t('transactions.EstimatedDelivery') %>:</strong>
+            <%- ob.vendor_order_confirmation.invoice.shipping.est_delivery ?
+            ob.vendor_order_confirmation.invoice.shipping.est_delivery : polyglot.t('transactions.NoneSent') %>
+          </div>
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%= polyglot.t('transactions.Shipper') %>:</strong>
+            <%- ob.vendor_order_confirmation.invoice.shipping.shipper ?
+            ob.vendor_order_confirmation.invoice.shipping.shipper : polyglot.t('transactions.NoneSent') %>
+          </div>
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%= polyglot.t('transactions.TrackingNumber') %>:</strong>
+            <%- ob.vendor_order_confirmation.invoice.shipping.tracking_number
+            ? ob.vendor_order_confirmation.invoice.shipping.tracking_number : polyglot.t('transactions.NoneSent') %>
+          </div>
+          <% } %>
+          <% if( ob.vendor_order_confirmation.invoice.content_source) { %>
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%= polyglot.t('transactions.URL') %>:</strong>
+            <%- ob.vendor_order_confirmation.invoice.content_source.url ?
+            ob.vendor_order_confirmation.invoice.content_source.url : polyglot.t('transactions.NoneSent') %>
+          </div>
+          <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
+          <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+            <strong><%= polyglot.t('transactions.Password') %>:</strong>
+            <%- ob.vendor_order_confirmation.invoice.content_source.password ?
+            ob.vendor_order_confirmation.invoice.content_source.password : polyglot.t('transactions.NoneSent') %>
+          </div>
+          <% } %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
   </div>
   <% } %>
 
   <div class="js-main js-funds hide">
-    <div class="flexRow">
+    <div class="flexRow scrollOverflowY" style="height: 319px;">
       <div class="flexRow rowItem padding2015 custCol-border borderBottom">
         <div class="pad10left txt-unleaded">
           <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
@@ -271,8 +291,8 @@
           <% _.each(ob.bitcoin_txs, function(tx, i){ %>
             <% if(tx.type == "outgoing"){ %>
             <div class="noOverflow width100 fontSize13 txt-fade">
-              <div class="marginBottom4"><%= polyglot.t('transactions.transferReceipt') %>:</div>
-              <div class="marginBottom4 fontSize10">
+              <div class="marginTop12 marginBottom4"><%= polyglot.t('transactions.transferReceipt') %>:</div>
+              <div class="marginTop12 marginBottom4 fontSize10">
                 <a href="https://blockchain.info/tx/<%- ob.bitcoin_txs[i].txid %>" class="noWrap js-externalLink">
                   <%- ob.bitcoin_txs[i].txid %>
                 </a>
@@ -311,8 +331,8 @@
           <% _.each(ob.bitcoin_txs, function(tx, i){ %>
             <% if(tx.type == "incoming"){ %>
               <div class="noOverflow width100 fontSize13 txt-fade">
-                <div class="marginBottom4"><%= polyglot.t('transactions.transferReceipt') %>:</div>
-                <div class="marginBottom4 fontSize10">
+                <div class="marginTop12 marginBottom4"><%= polyglot.t('transactions.transferReceipt') %>:</div>
+                <div class="marginTop12 marginBottom4 fontSize10">
                   <a href="https://blockchain.info/tx/<%- ob.bitcoin_txs[i].txid %>" class="noWrap js-externalLink">
                     <%- ob.bitcoin_txs[i].txid %>
                   </a>

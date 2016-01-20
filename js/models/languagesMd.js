@@ -285,7 +285,8 @@ module.exports = Backbone.Model.extend({
           DeliveryTime: "DeliveryTime",
           CustomerService: "Customer Service",
           Review: "Review",
-          ReviewPlaceHolder: "Your review of this transaction"
+          ReviewPlaceHolder: "Your review of this transaction",
+          NoneSent: "None sent"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
