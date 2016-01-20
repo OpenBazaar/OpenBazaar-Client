@@ -260,7 +260,17 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
-      self.$el.find('#image-cropper').cropit();
+      self.$el.find('#image-cropper').cropit({
+        smallImage: "stretch",
+        exportZoom: 1.33,
+        maxZoom: 5,
+        onFileReaderError: function(data){console.log(data);},
+        onImageError: function(errorObject, errorCode, errorMessage) {
+          console.log(errorObject);
+          console.log(errorCode);
+          console.log(errorMessage);
+        }
+      });
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
