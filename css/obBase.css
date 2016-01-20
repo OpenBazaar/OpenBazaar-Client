@@ -916,11 +916,6 @@ label.fieldItem {
   margin-top: 25px;
 }
 
-.modal.fadeOut {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .accordion {
   overflow: hidden;
   position: relative;
@@ -1194,11 +1189,6 @@ h5 {
   transition: opacity 1s;
   overflow: hidden;
   z-index: 10;
-}
-
-.navBar.statusBar.fadeOut {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .navBar-main.navBar.statusBar {
@@ -1559,11 +1549,6 @@ input[type="text"].txtField-bar {
 
 .btn:before {
   line-height: 32px;
-}
-
-.btn.fadeOut {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .btn:active {
@@ -3326,11 +3311,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .spinnerWrapper {
   transition: opacity 1s;
-}
-
-.spinnerWrapper.fadeOut {
-  opacity: 0;
-  pointer-events: none;
 }
 
 @-webkit-keyframes spinnerAnimation {

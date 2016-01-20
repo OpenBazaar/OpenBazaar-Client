@@ -346,11 +346,14 @@ module.exports = Backbone.View.extend({
   searchItemsKeyup: function(e){
     "use strict";
     var target = $(e.target),
-        targetText = target.val();
+        targetText = target.val(),
+        addressText = targetText;
 
     if(e.keyCode == 13){
       this.searchItems(targetText);
-      window.obEventBus.trigger("setAddressBar", "#" + targetText);
+      addressText = addressText ? "#" + addressText : "";
+      target.val(addressText);
+      window.obEventBus.trigger("setAddressBar", addressText);
     }
   },
 
@@ -384,6 +387,8 @@ module.exports = Backbone.View.extend({
       this.$el.find('.js-discoverSearchKeyword').removeClass('hide');
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
       this.setState('products', searchItemsText);
+    }else{
+      this.searchItemsClear();
     }
   },
 
