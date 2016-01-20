@@ -628,8 +628,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -648,7 +648,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -996,8 +1011,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1016,7 +1031,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1367,8 +1397,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Contestato",
           OrderTotal: "Totale ordine",
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1387,7 +1417,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -1737,8 +1782,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Contesté",
           OrderTotal: "Total de la commande",
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1757,7 +1802,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2106,8 +2166,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -2126,7 +2186,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -2474,8 +2549,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Оспорено",
           OrderTotal: "Всего заказов",
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -2494,7 +2569,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -2840,8 +2930,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -2860,7 +2950,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -3210,8 +3315,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3230,7 +3335,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -3579,8 +3699,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3599,7 +3719,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -3948,8 +4083,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3968,7 +4103,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -4318,8 +4468,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -4338,7 +4488,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -4676,8 +4841,8 @@ module.exports = Backbone.Model.extend({
           OrderStatus4: "異議・クレーム",
           OrderTotal: "注文合計",
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To",// not translated
-          ConfirmOrder: "Confirm Order",// not translated
+          ShipTo: "Ship To", // not translated
+          ConfirmOrder: "Confirm this Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -4696,7 +4861,22 @@ module.exports = Backbone.Model.extend({
           Buyer: "Buyer", // not translated
           transferReceipt: "transferReceipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close" // not translated
+          Close: "Close", // not translated
+          FundOrder: "Fund Order", // not translated
+          sortByDateNewest: "By Date, Newest", // not translated
+          sortByDateOldest: "By Date, Oldest", // not translated
+          PayPurchase: "Pay for this Purchase", // not translated
+          CompleteOrder: "Complete this Order", // not translated
+          RateThisTransaction: "Rate this Transaction", // not translated
+          TransactionReview: "Transaction Review", // not translated
+          OverallRating: "Overall Rating", // not translated
+          Quality: "Quality", // not translated
+          Description: "Description", // not translated
+          DeliveryTime: "DeliveryTime", // not translated
+          CustomerService: "Customer Service", // not translated
+          Review: "Review", // not translated
+          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoneSent: "None sent" // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
