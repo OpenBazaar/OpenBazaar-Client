@@ -3,8 +3,7 @@ var __ = require('underscore'),
     Moment = require('moment'),
     $ = require('jquery');
 Backbone.$ = $;
-var fs = require('fs'),//TODO: Remove FS - it is not used?
-    loadTemplate = require('../utils/loadTemplate'),
+var loadTemplate = require('../utils/loadTemplate'),
     itemListView = require('./itemListVw'),
     storeListView = require('./userListVw'),
     userProfileModel = require('../models/userProfileMd'),
@@ -57,12 +56,12 @@ module.exports = Backbone.View.extend({
     this.socketSearchID = '';
 
     //listen to follow and unfollow events
-    this.listenTo(window.obEventBus, "followUser", function(guid){
-      self.followUser(guid);
+    this.listenTo(window.obEventBus, "followUser", function(options){
+      self.followUser(options);
     });
 
-    this.listenTo(window.obEventBus, "unfollowUser", function(guid){
-      self.unfollowUser(guid);
+    this.listenTo(window.obEventBus, "unfollowUser", function(options){
+      self.unfollowUser(options);
     });
 
     this.fetchOwnFollowing(this.render());
@@ -80,7 +79,6 @@ module.exports = Backbone.View.extend({
         var followingGuid = followingObject.guid;
         return followingGuid;
       });
-      console.log(self.ownFollowing);
       typeof callback === 'function' && callback();
     }).fail(function(jqXHR, status, errorThrown){
       console.log(jqXHR);
@@ -167,6 +165,7 @@ module.exports = Backbone.View.extend({
     item.showAvatar = true;
     item.userID = item.guid;
     item.discover = true;
+    item.ownFollowing = false;
     if(this.ownFollowing.indexOf(item.guid) != -1){
       item.ownFollowing = true;
     }    
@@ -239,8 +238,28 @@ module.exports = Backbone.View.extend({
     Backbone.history.navigate('#sellItem', {trigger: true});
   },
 
+  addFollower: function(guid) {
+    if (guid && this.ownFollowing.indexOf(guid) == -1) {
+      this.ownFollowing.push(guid);
+    }
+  },
+
+  removeFollower: function(guid) {
+    var index;
+
+    if (guid && (index = this.ownFollowing.indexOf(guid)) !== -1) {
+      this.ownFollowing.splice(index, 1);
+    }
+  },
+
   _followUnfollowUser: function(follow, options) {
     var self = this;
+
+    if (typeof follow == 'object') {
+      options = follow;
+      follow = true;
+    }
+
     $.ajax({
       type: "POST",
       data: {'guid': options.guid},
@@ -248,26 +267,30 @@ module.exports = Backbone.View.extend({
       url: this.options.userModel.get('serverUrl') + (follow ? "follow" : "unfollow"),
       success: function(data) {
         options.target.closest('.js-userShortView').removeClass('div-fade');
-        //get_following will not be ready right away after this call
-        var state = self.state;
-        window.setTimeout(function(){
-          self.fetchOwnFollowing(function() {
-            if (state == 'products') {
-              self.loadUsers();
+        follow ? self.addFollower(options.guid) : self.removeFollower(options.guid);
 
-              if (!follow) {
-                console.log('keep it real yall');
-              }
+        if (self.state == 'products') {
+          self.loadUsers();
 
-              if (!follow && self.onlyFollowing) {
-                console.log('foo');
-                window.foo = options;
+          // if we're unfollowing on the 'Stores i follow'
+          // filter, let's remove all the views for the guid
+          // that we've just unfollowed.
+          if (!follow && self.onlyFollowing) {
+            var viewsToRemove = [];
+
+            __.each(self.subViews, function(subView, i) {
+              if (subView instanceof itemShortView && subView.model.get('guid') === options.guid) {
+                viewsToRemove.push(subView);
               }
-            } else if (state == 'vendors') {
-              self.loadItemsOrSearch();
-            }
-          });
-        }, 1000);
+            });
+
+            __.each(viewsToRemove, function(view, i) {
+              self.removeSubView(view);
+            });
+          }
+        } else if (self.state == 'vendors') {
+          self.loadItemsOrSearch();
+        }
       },
       error: function(jqXHR, status, errorThrown){
         console.log(jqXHR);
@@ -278,59 +301,11 @@ module.exports = Backbone.View.extend({
   },
 
   followUser: function(options){
-    // this._followUnfollowUser(true, options);
-
-    // return;
-    "use strict";
-    var self = this;
-    $.ajax({
-      type: "POST",
-      data: {'guid': options.guid},
-      dataType: 'json',
-      url: this.options.userModel.get('serverUrl') + "follow",
-      success: function(data) {
-        options.target.closest('.js-userShortView').removeClass('div-fade');
-        //get_following will not be ready right away after this call
-        var state = self.state;
-        window.setTimeout(function(){
-          self.loadItemsOrSearch();
-          self.loadUsers();
-        }, 1000);
-      },
-      error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      }
-    });
+    this._followUnfollowUser(options);
   },
 
   unfollowUser: function(options){
-    // this._followUnfollowUser(false, options);
-
-    // return;
-    "use strict";
-    var self = this;
-    $.ajax({
-      type: "POST",
-      data: {'guid': options.guid},
-      dataType: 'json',
-      url: this.options.userModel.get('serverUrl') + "unfollow",
-      success: function() {
-        options.target.closest('.js-userShortView').removeClass('div-fade');
-        //get_following will not be ready right away after this call
-        var state = self.state;
-        window.setTimeout(function(){
-          self.loadItemsOrSearch();
-          self.loadUsers();
-        }, 1000);
-      },
-      error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
-      }
-    });
+    this._followUnfollowUser(false, options);
   },
 
   scrollHandler: function(){
@@ -420,12 +395,37 @@ module.exports = Backbone.View.extend({
   },
 
   loadItemsOrSearch: function(){
-    console.log('what-what: ' + this.onlyFollowing);
     if(this.searchItemsText){
       this.searchItems(this.searchItemsText);
     } else {
       this.loadItems();
     }
+  },
+
+  removeSubView: function(view) {
+    var self = this,
+        index;
+
+    if (!view) return;
+
+    __.every(this.subViews, function(subView, i) {
+      if (view === subView) {
+        index = i;
+
+        if(subView.close){
+          subView.close();
+        }else{
+          subView.unbind();
+          subView.remove();
+        }
+
+        self.subViews.splice(index, 1);
+
+        return false;        
+      }
+
+      return true;
+    });
   },
 
   close: function(){

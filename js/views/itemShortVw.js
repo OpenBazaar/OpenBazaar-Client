@@ -18,18 +18,34 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     //pre-load image
     var self=this;
-    this.listenTo(this.model, 'change:priceSet', this.render);
+    this.listenTo(this.model, 'change', this.render);
     //this.userID = this.model.get('guid');
     //if price has already been set, render
     if(this.model.get('priceSet') !== 0){
       this.render();
     }
+
+    this.listenTo(window.obEventBus, "followUser", function(options){
+      if (options.view === this || options.guid !== this.model.get('guid')) {
+        return;
+      }
+
+      this.model.set('ownFollowing', true);
+    });
+
+    this.listenTo(window.obEventBus, "unfollowUser", function(options){
+      if (options.view === this || options.guid !== this.model.get('guid')) {
+        return;
+      }
+
+      this.model.set('ownFollowing', false);
+    });    
   },
 
   render: function(){
     var self = this;
     loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
-      self.$el.append(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(self.model.toJSON()));
     });
     return this;
   },
@@ -44,13 +60,13 @@ module.exports = Backbone.View.extend({
   },
 
   followUser: function(e) {
-    window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
+    window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
     this.$el.find('.js-userShortUnfollow').removeClass('hide');
     this.$el.find('.js-userShortFollow').addClass('hide');
   },
 
   unfollowUser: function(e){
-    window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
+    window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
     this.$el.find('.js-userShortUnfollow').addClass('hide');
     this.$el.find('.js-userShortFollow').removeClass('hide');
   },  
