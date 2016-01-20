@@ -160,7 +160,8 @@ module.exports = Backbone.View.extend({
       if(self.searchItemsText){
         self.$el.find('.js-homeSearchItems').val(self.searchItemsText);
         $('#obContainer').scrollTop(0);
-        $('.js-navAddressBar').val(self.searchItemsText);
+        $('.js-navAddressBar').val('sdfsdf');
+        console.log('sdf');
       }
     });
   },

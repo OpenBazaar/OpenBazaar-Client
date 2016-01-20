@@ -4273,6 +4273,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .marginTop15 {
   margin-top: 15px;
 }
+#ov1  .marginTop18 {
+  margin-top: 18px;
+}
 
 #ov1  .marginTop20 {
   margin-top: 20px;
@@ -4288,6 +4291,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginTop28 {
   margin-top: 28px;
+}
+
+#ov1  .marginTop30 {
+  margin-top: 30px;
 }
 
 #ov1  .marginTop40 {

@@ -503,7 +503,7 @@ module.exports = Backbone.View.extend({
       guid = addressTextArray[0];
       Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
     } else {
-      this.showStatusBar('This is not a valid user GUID or handle.');
+      Backbone.history.navigate('#home/products/' + addressTextArray[0], {trigger:true});
     }
 
   },
