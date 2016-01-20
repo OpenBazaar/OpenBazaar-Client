@@ -376,6 +376,8 @@ module.exports = Backbone.View.extend({
     //clear address bar
     window.obEventBus.trigger("setAddressBar", "");
     
+    this.$el.find('.js-discoverHeading').html(window.polyglot.t('Discover'));
+
     // change loading text copy
     this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));
     this.$el.find('.js-discoverSearchKeyword').addClass('hide');
