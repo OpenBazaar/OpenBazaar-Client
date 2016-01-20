@@ -232,7 +232,7 @@
                   <% if(ob.page.profile.website) { %>
                   <a href="<%- ob.page.profile.website %>" class="js-externalLink"><%- ob.page.profile.website %></a>
                   <%}else{%>
-                  not provided
+                  <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
@@ -252,7 +252,7 @@
                   <% if(ob.page.profile.email) { %>
                   <a href="mailto:<%- ob.page.profile.email %>"><%- ob.page.profile.email %></a>
                   <%}else{%>
-                  not provided
+                  <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
@@ -272,7 +272,7 @@
                   <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
                   <%- ob.page.profile.social_accounts.facebook.username %>
                   <%}else{%>
-                  not provided
+                  <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
@@ -292,7 +292,7 @@
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
                   <%- ob.page.profile.social_accounts.instagram.username %>
                   <%}else{%>
-                  not provided
+                  <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
@@ -312,7 +312,7 @@
                   <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
                   <%- ob.page.profile.social_accounts.snapchat.username %>
                   <%}else{%>
-                  not provided
+                  <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
@@ -329,7 +329,7 @@
                 <%}%>
                 <div class="textOpacity75"><%= polyglot.t('PGPKey') %></div>
                 <div>
-                  not provided
+                  <%= polyglot.t('NotProvided') %>
                 </div>
               </div>
             </div>
@@ -412,7 +412,7 @@
 
 <div id="customizeControls" class="hide">
   <div class="positionWrapper js-customizePrimaryColor">
-    <div class="interactiveTooltip seeTooltip"><div class="noOverflow">Click to change</div></div>
+    <div class="interactiveTooltip seeTooltip"><div class="noOverflow"><%= polyglot.t('ClickToChange') %></div></div>
     <div class="customizePrimaryColorRecommendations js-customizeColorRecommendations">
       <div class="marginLeft7 floatLeft customizePrimaryColorChoices js-customizePrimaryColorChoices">
         <div class="customColorChoice customColorChoiceControl js-customColorChoice js-customColorChoicePicker" data-color-key=""><span class="customColorPicker ion-android-color-palette colorWhiteForce"></span></div>

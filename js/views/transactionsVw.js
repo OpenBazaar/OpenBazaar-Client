@@ -8,7 +8,8 @@ var __ = require('underscore'),
     purchasesCl = require('../collections/purchasesCl'),
     orderShortVw = require('./orderShortVw'),
     getBTPrice = require('../utils/getBitcoinPrice'),
-    orderModalVw = require('./orderModalVw');
+    transactionModalVw = require('./transactionModalVw'),
+    countriesMd = require('../models/countriesMd');
 
 module.exports = Backbone.View.extend({
 
@@ -18,7 +19,9 @@ module.exports = Backbone.View.extend({
     'click .js-purchasesTab': 'tabHandler',
     'click .js-salesTab': 'tabHandler',
     'click .js-casesTab': 'tabHandler',
-    'change .js-transactionFilter': 'transactionFilter'
+    'change .js-transactionFilter': 'transactionFilter',
+    'keyup .search': 'searchKeyup',
+    'click .js-transactionsSearchClear': 'searchClear'
   },
 
   initialize: function(options){
@@ -30,10 +33,11 @@ module.exports = Backbone.View.extend({
      */
     var self = this,
         profile = options.userProfile.get('profile'),
-        wrapper = "<div class='flexRow'></div>";
+        wrapper = "<ul class='list flexRow'></ul>";
 
     this.options = options;
     this.state = options.state || "purchases";
+    this.userModel = this.options.userModel;
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
     this.model.set("page", profile);
@@ -43,10 +47,18 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "openOrderModal", function(orderID){
       self.openOrderModal(orderID);
     });
+    this.searchTransactions;
     this.subViews = [];
     this.subModels = [];
 
+    this.countries = new countriesMd();
+    this.countriesArray = this.countries.get('countries');
+
+    this.subModels.push(this.countries);
+    $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
+      $('.js-loadingModal').addClass("hide");
+      self.btAve = btAve;
       self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";
       self.purchasesWrapper = $(wrapper);
@@ -69,21 +81,30 @@ module.exports = Backbone.View.extend({
 
     this.purchasesCol.fetch({
       success: function(models){
-        console.log(models);
         self.renderPurchases();
+        self.setSearchList('transactionsPurchases');
+        if(self.model.get('page').vendor){
+          self.salesCol.fetch({
+            success: function(models){
+              self.renderSales();
+              self.setSearchList('transactionsSales');
+              if(self.model.get('page').moderator){
+                //this.casesCol.fetch(); //not ready yet
+              }
+              //move to success of fetch cases when that is ready
+
+            }
+          });
+        }
       }
     });
-    if(this.model.get('page').vendor){
-      this.salesCol.fetch({
-        success: function(models){
-          console.log(models);
-          self.renderSales();
-        }
-      });
-    }
-    if(this.model.get('page').moderator){
-      //this.casesCol.fetch(); //not ready yet
-    }
+
+
+  },
+
+  setSearchList: function(targetID){
+    "use strict";
+    this.searchTransactions = new window.List(targetID, {valueNames: ['js-searchOrderID', 'js-searchStatus', 'js-searchTitle'], page: 1000});
   },
 
   render: function(){
@@ -97,13 +118,6 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  addTabToHistory: function(state){
-    "use strict";
-    //add action to history
-    Backbone.history.navigate("#transactions/" + state);
-    this.options.state = state;
-  },
-
   setTab: function(activeTab, showContent){
     "use strict";
     this.$el.find('.js-tab').removeClass('active');
@@ -113,10 +127,11 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state){
-    console.log(state);
     "use strict";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     $('#content').find('input:visible:first').focus();
+    //add action to history
+    Backbone.history.navigate("#transactions/" + state);
   },
 
   tabHandler: function(e){
@@ -125,43 +140,113 @@ module.exports = Backbone.View.extend({
         tabID = tab.data("tab"),
         showContent = this.$el.find('.js-'+tabID);
 
-    this.addTabToHistory(tabID);
     this.setTab(tab, showContent);
     this.setState(tabID);
   },
 
-  transactionFilter: function(){
+  searchKeyup: function(e){
     "use strict";
-    var filterBy = this.$el.find(".js-transactionFilter").val();
-    console.log("filter by "+filterBy);
+    this.$('.js-transactionsSearchClear').removeClass('hide');
   },
 
-  renderPurchases: function(){
+  searchClear: function(){
+    "use strict";
+    this.$('.search').val("");
+    this.$('.js-transactionsSearchClear').addClass('hide');
+    this.renderPurchases();
+  },
+
+  transactionFilter: function(e){
+    "use strict";
+    var tab = $(e.target),
+        tabTarget = tab.data("tab"),
+        filterBy = tab.val();
+    this.$('.js-'+tabTarget+' .search').val("");
+    switch(tabTarget){
+      case "purchases":
+        this.renderPurchases(filterBy);
+        break;
+      case "sales":
+        this.renderSales(filterBy);
+        break;
+      case "cases":
+        this.renderCases(filterBy);
+        break;
+    }
+  },
+
+  renderPurchases: function(filterBy){
     "use strict";
     var self = this;
+    this.purchasesWrapper.html('');
+    if(filterBy == "dateNewest"){
+      this.purchasesCol.comparator = function(model) {
+        return -model.get("timestamp");
+      };
+      this.purchasesCol.sort();
+    }
+    if(filterBy == "dateOldest"){
+      this.purchasesCol.comparator = function(model) {
+        return model.get("timestamp");
+      };
+      this.purchasesCol.sort();
+    }
     this.purchasesCol.each(function(model, i){
-      model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-      var orderShort = new orderShortVw({
-        model: model,
-      });
-      self.subViews.push(orderShort);
-      self.purchasesWrapper.append(orderShort.render().el);
+      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
+        self.addPurchase(model);
+      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
+        self.addPurchase(model);
+      }
     });
     this.$el.find(".js-purchases").append(this.purchasesWrapper);
   },
 
-  renderSales: function(models){
+  addPurchase: function(model){
+    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+    model.set('transactionType', "purchase");
+    var orderShort = new orderShortVw({
+      model: model
+    });
+    this.subViews.push(orderShort);
+    this.purchasesWrapper.append(orderShort.render().el);
+  },
+
+  renderSales: function(filterBy){
     "use strict";
     var self = this;
+    this.salesWrapper.html('');
+    if(filterBy == "dateNewest"){
+      this.salesCol.comparator = function(model) {
+        return -model.get("timestamp");
+      };
+      this.salesCol.sort();
+    }
+    if(filterBy == "dateOldest"){
+      this.salesCol.comparator = function(model) {
+        return model.get("timestamp");
+      };
+      this.salesCol.sort();
+    }
     this.salesCol.each(function(model, i){
-      model.set('imageUrl', self.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-      var orderShort = new orderShortVw({
-        model: model,
-      });
-      self.subViews.push(orderShort);
-      self.salesWrapper.append(orderShort.render().el);
+      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
+        self.addSale(model);
+      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
+        self.addSale(model);
+      }
     });
+
     this.$el.find(".js-sales").append(this.salesWrapper);
+  },
+
+  addSale: function(model){
+    "use strict";
+    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+    model.set('transactionType', "sale");
+    var orderShort = new orderShortVw({
+      model: model
+    });
+    this.subViews.push(orderShort);
+    this.salesWrapper.append(orderShort.render().el);
   },
 
   renderCases: function(models){
@@ -169,9 +254,25 @@ module.exports = Backbone.View.extend({
 
   },
 
-  openOrderModal: function(orderID){
+  openOrderModal: function(options){
     "use strict";
-    //var newOrderModal = new orderModalVw({orderID: orderID, serverUrl: this.serverUrl});
+    $('.js-loadingModal').removeClass("hide");
+    var orderModalView = new transactionModalVw({
+      orderID: options.orderID,
+      status: options.status,
+      serverUrl: this.serverUrl,
+      parentEl: this.$el.find('.js-transactionModalHolder'),
+      countriesArray: this.countriesArray,
+      cCode: this.userModel.get('currency_code'),
+      btAve: this.btAve,
+      state: this.state,
+      tabState: options.tabState,
+      bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
+      transactionType: options.transactionType
+    });
+    this.listenTo(orderModalView, "closed", function(){
+      this.getData();
+    });
   },
 
   close: function(){

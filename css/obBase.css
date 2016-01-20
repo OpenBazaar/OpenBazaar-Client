@@ -250,6 +250,7 @@ form {
   margin-bottom: 100px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  z-index: 1;
 }
 
 .img-rsp {
@@ -893,6 +894,15 @@ label.fieldItem {
   top: 50px;
 }
 
+.modalHolder {
+  /* use to contain modals inside views */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
 .modal-child {
   width: 525px;
   height: 624px;
@@ -1084,6 +1094,13 @@ h5 {
   font-size: 15px;
 }
 
+.note {
+  /* use for instructions and incidental text */
+  font-style: italic;
+  font-size: 9px;
+  opacity: 0.75;
+}
+
 [class *= "ion-"]:before {
   font-size: 1.2em;
 }
@@ -1124,6 +1141,10 @@ h5 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.noWrap {
+  white-space: nowrap;
 }
 
 .clamp2 {
@@ -1360,7 +1381,7 @@ h5 {
 }
 
 .box-borderBright {
-  border: 1px solid rbga(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.5);
   box-sizing: border-box;
 }
 
@@ -2698,6 +2719,62 @@ input[type="radio"].fieldItem:checked + label:before {
   box-shadow: inset 0 0 0 4px #086A9E;
 }
 
+input[type="radio"].fieldItem.starRating + label {
+  padding: 0 20px;
+}
+
+input[type="radio"].fieldItem.starRating + label:before {
+  content: "\f2fc";
+  font-family: "Ionicons";
+  color: #fff;
+  line-height: 24px;
+  font-size: 18px;
+  text-align: center;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  box-shadow: none;
+  opacity: 1;
+  transform: translateY(-50%) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  top: 50%;
+  left: 0;
+}
+
+input[type="radio"].fieldItem.starRating:checked + label:before {
+  content: "\f2fc";
+  background: #000;
+  box-shadow: none;
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label + input + label + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label + input + label + input + label + input + label:before {
+  content: "\f3ae";
+}
+
+.starRating:before {
+  /* use when displaying stars that are not part of an input */
+  content: "\f2fc";
+  font-family: "Ionicons";
+  color: #fff;
+  line-height: 24px;
+  font-size: 18px;
+}
+
+
 .radioLabel {
   opacity: .75;
 }
@@ -3675,6 +3752,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
 }
 
+.selectPillWrapper {
+
+}
+
 /* protect customize controls from custom page styles */
 #ov1 #customizeControls .labelWrap {
   height: 40px;
@@ -3773,6 +3854,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .clearfix:after {
   clear: both;
+}
+
+#ov1 .highlight {
+  /* use on an element inside a block container to add a translucent hover background to it. The color is slightly
+     grey so it works on light backgrounds too*/
+  background: rgba(215, 215, 215, 0);
+  transition: background 0.5s;
+}
+
+#ov1 .highlight:hover {
+  background: rgba(215, 215, 215, 0.2);
 }
 
 #ov1 .pull-right {
