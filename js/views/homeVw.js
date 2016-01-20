@@ -80,6 +80,7 @@ module.exports = Backbone.View.extend({
         var followingGuid = followingObject.guid;
         return followingGuid;
       });
+      console.log(self.ownFollowing);
       typeof callback === 'function' && callback();
     }).fail(function(jqXHR, status, errorThrown){
       console.log(jqXHR);
@@ -166,6 +167,9 @@ module.exports = Backbone.View.extend({
     item.showAvatar = true;
     item.userID = item.guid;
     item.discover = true;
+    if(this.ownFollowing.indexOf(item.guid) != -1){
+      item.ownFollowing = true;
+    }    
 
     var newItem = function(){
       var newItemModel = new itemShortModel(item);
@@ -175,7 +179,7 @@ module.exports = Backbone.View.extend({
     };
 
     if(this.onlyFollowing){
-      if(this.ownFollowing.indexOf(item.guid) != -1){
+      if(item.ownFollowing){
         newItem();
       }
     } else {
@@ -235,7 +239,48 @@ module.exports = Backbone.View.extend({
     Backbone.history.navigate('#sellItem', {trigger: true});
   },
 
+  _followUnfollowUser: function(follow, options) {
+    var self = this;
+    $.ajax({
+      type: "POST",
+      data: {'guid': options.guid},
+      dataType: 'json',
+      url: this.options.userModel.get('serverUrl') + (follow ? "follow" : "unfollow"),
+      success: function(data) {
+        options.target.closest('.js-userShortView').removeClass('div-fade');
+        //get_following will not be ready right away after this call
+        var state = self.state;
+        window.setTimeout(function(){
+          self.fetchOwnFollowing(function() {
+            if (state == 'products') {
+              self.loadUsers();
+
+              if (!follow) {
+                console.log('keep it real yall');
+              }
+
+              if (!follow && self.onlyFollowing) {
+                console.log('foo');
+                window.foo = options;
+              }
+            } else if (state == 'vendors') {
+              self.loadItemsOrSearch();
+            }
+          });
+        }, 1000);
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });    
+  },
+
   followUser: function(options){
+    // this._followUnfollowUser(true, options);
+
+    // return;
     "use strict";
     var self = this;
     $.ajax({
@@ -246,9 +291,10 @@ module.exports = Backbone.View.extend({
       success: function(data) {
         options.target.closest('.js-userShortView').removeClass('div-fade');
         //get_following will not be ready right away after this call
-        self.followTimeout = window.setTimeout(function(){
-          self.fetchOwnFollowing(self.loadItemsOrSearch());
-          window.clearTimeout(self.followTimeout);
+        var state = self.state;
+        window.setTimeout(function(){
+          self.loadItemsOrSearch();
+          self.loadUsers();
         }, 1000);
       },
       error: function(jqXHR, status, errorThrown){
@@ -260,6 +306,9 @@ module.exports = Backbone.View.extend({
   },
 
   unfollowUser: function(options){
+    // this._followUnfollowUser(false, options);
+
+    // return;
     "use strict";
     var self = this;
     $.ajax({
@@ -270,9 +319,10 @@ module.exports = Backbone.View.extend({
       success: function() {
         options.target.closest('.js-userShortView').removeClass('div-fade');
         //get_following will not be ready right away after this call
-        self.followTimeout = window.setTimeout(function(){
-          self.fetchOwnFollowing(self.loadItemsOrSearch());
-          window.clearTimeout(self.followTimeout);
+        var state = self.state;
+        window.setTimeout(function(){
+          self.loadItemsOrSearch();
+          self.loadUsers();
         }, 1000);
       },
       error: function(jqXHR, status, errorThrown){
@@ -370,6 +420,7 @@ module.exports = Backbone.View.extend({
   },
 
   loadItemsOrSearch: function(){
+    console.log('what-what: ' + this.onlyFollowing);
     if(this.searchItemsText){
       this.searchItems(this.searchItemsText);
     } else {

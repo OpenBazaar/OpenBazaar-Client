@@ -10,7 +10,9 @@ module.exports = Backbone.View.extend({
   events: {
     'click .js-item': 'itemClick',
     'click .js-avatar': 'avatarClick',
-    'click .js-editItem': 'editItem'
+    'click .js-editItem': 'editItem',
+    'click .js-userShortFollow': 'followUser',
+    'click .js-userShortUnfollow': 'unfollowUser'
   },
 
   initialize: function(){
@@ -38,9 +40,20 @@ module.exports = Backbone.View.extend({
   },
 
   avatarClick: function(){
-    console.log("avatarClick");
     Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/store', {trigger: true});
   },
+
+  followUser: function(e) {
+    window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
+    this.$el.find('.js-userShortUnfollow').removeClass('hide');
+    this.$el.find('.js-userShortFollow').addClass('hide');
+  },
+
+  unfollowUser: function(e){
+    window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target)});
+    this.$el.find('.js-userShortUnfollow').addClass('hide');
+    this.$el.find('.js-userShortFollow').removeClass('hide');
+  },  
 
   close: function(){
     __.each(this.subViews, function(subView) {
