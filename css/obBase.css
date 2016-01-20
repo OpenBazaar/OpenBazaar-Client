@@ -2713,6 +2713,15 @@ input[type="radio"].fieldItem.starRating:checked + label + input + label + input
   content: "\f3ae";
 }
 
+.starRating:before {
+  /* use when displaying stars that are not part of an input */
+  content: "\f2fc";
+  font-family: "Ionicons";
+  color: #fff;
+  line-height: 24px;
+  font-size: 18px;
+}
+
 
 .radioLabel {
   opacity: .75;

@@ -163,6 +163,65 @@
       </div>
       <% } %>
 
+      <!-- only display if buyer_receipt exists -->
+      <% if( ob.buyer_receipt) { %>
+      <div class="flexRow custCol-border borderBottom">
+        <div class="flexRow rowItem padding2015">
+          <div class="flexCol-12">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.TransactionReview') %></strong>
+            </div>
+          </div>
+          <div class="flexCol-12">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.OverallRating') %> (<%-ob.buyer_receipt.receipt.rating.feedback %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.feedback; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexCol-12">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.Quality') %> (<%-ob.buyer_receipt.receipt.rating.quality %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.quality; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexCol-12">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.Description') %> (<%-ob.buyer_receipt.receipt.rating.description %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.description; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexCol-12">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.DeliveryTime') %> (<%-ob.buyer_receipt.receipt.rating.delivery_time %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.delivery_time; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexCol-12">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.CustomerService') %> (<%-ob.buyer_receipt.receipt.rating.customer_service %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.customer_service; i++) { %>
+              <i class="starRating"></i>
+              <% } %>
+            </div>
+          </div>
+          <div class="flexCol-12">
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
+              <strong><%= polyglot.t('transactions.Review') %></strong><br/>
+              <%-ob.buyer_receipt.receipt.rating.review %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } %>
+
     </div>
 
     <div class="flexRow rowItem padding2015 width100 positionBottom custCol-secondary">
