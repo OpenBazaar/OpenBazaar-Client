@@ -603,7 +603,7 @@ module.exports = Backbone.View.extend({
     this.followerList = new personListView({
       model: model,
       el: '.js-list1',
-      title: "No followers",
+      title: window.polyglot.t('NoFollowers'),
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
@@ -626,7 +626,7 @@ module.exports = Backbone.View.extend({
       model: model,
       followed: true,
       el: '.js-list2',
-      title: "Not following anyone",
+      title: window.polyglot.t('NotFollowingAnyone'),
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
