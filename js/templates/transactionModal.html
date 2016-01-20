@@ -134,9 +134,9 @@
         <div class="flexRow rowItem padding2015">
           <div class="thumbnail thumbnail-large-slim"
             <% if(ob.displayModerator.avatar) { %>
-            style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultItem.png);">
+            style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.displayModerator.avatar %>&guid=<%- ob.displayModerator.guid %>), url(imgs/defaultUser.png);">
             <% } else { %>
-            style="background-image: url(imgs/defaultItem.png);">
+            style="background-image: url(imgs/defaultUser.png);">
             <% } %>
           </div>
 
@@ -152,6 +152,39 @@
         </div>
       </div>
       <% } %>
+
+      <!-- only display moderator if one is assigned -->
+      <% if( ob.vendor_order_confirmation) { %>
+      <div class="flexRow custCol-border borderBottom">
+        <div class="flexRow rowItem padding2015">
+          <div>
+            <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.EstimatedDelivery') %>:</strong> <%-ob.vendor_order_confirmation.invoice.shipping.est_delivery %>
+            </div>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.Shipper') %>:</strong> <%-ob.vendor_order_confirmation.invoice.shipping.shipper %>
+            </div>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.TrackingNumber') %>:</strong> <%-ob.vendor_order_confirmation.invoice.shipping.tracking_number %>
+            </div>
+            <% } %>
+            <% if( ob.vendor_order_confirmation.invoice.content_source) { %>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.URL') %>:</strong> <%-ob.vendor_order_confirmation.invoice.content_source.url %>
+            </div>
+            <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
+              <strong><%= polyglot.t('transactions.Password') %>:</strong> <%-ob.vendor_order_confirmation.invoice.content_source.password %>
+            </div>
+            <% } %>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <% } %>
+
+
     </div>
 
     <div class="flexRow rowItem padding2015 width100 positionBottom custCol-secondary">

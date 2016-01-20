@@ -1469,7 +1469,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         "name": "Saint Helena, Ascension and Tristan da Cunha",
-        "dataName": "SAINT HELENA",
+        "dataName": "SAINT_HELENA",
         "currency": "Saint Helena Pound",
         "code": "SHP",
         "number": "654",

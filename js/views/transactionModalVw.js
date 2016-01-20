@@ -66,13 +66,14 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
-      timeOut: 4000,
+      timeout: 4000,
       dataType: 'json',
       success: function (model, response, options) {
         self.render(response);
       },
       error: function (jqXHR, status, errorThrown) {
         showErrorModal(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        $('.js-loadingModal').addClass("hide");
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
