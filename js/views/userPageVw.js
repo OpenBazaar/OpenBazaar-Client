@@ -487,6 +487,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         self.renderItems(model.get('listings'));
       },
@@ -496,6 +497,7 @@ module.exports = Backbone.View.extend({
     });
     this.following.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         if(self.options.ownPage === true){
           self.ownFollowing = model.get('following') || [];
@@ -538,6 +540,7 @@ module.exports = Backbone.View.extend({
 
     this.followers.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         var followerArray = model.get('followers');
         self.renderFollowers(followerArray);
