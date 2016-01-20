@@ -10,14 +10,6 @@ var homeView = require('./views/homeVw'),
     settingsView = require('./views/settingsVw'),
     transactionsView = require('./views/transactionsVw');
 
-function stringToTag(string) {
-  var tag = string.replace(/\s+/g, '');
-  if (string.charAt(0) !== "#"){
-    tag = '#' + tag;
-  }
-  return tag;
-}
-
 module.exports = Backbone.Router.extend({
 
   initialize: function(options){
@@ -38,11 +30,9 @@ module.exports = Backbone.Router.extend({
     "myPage": "userPage",
     "userPage": "userPage",
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
-    "customizePage": "customizePage",
     "sellItem": "sellItem",
     "transactions": "transactions",
     "transactions/:state": "transactions",
-    "notifications": "notifications",
     "settings": "settings",
     "settings/:state": "settings",
     "about": "about",
@@ -54,7 +44,7 @@ module.exports = Backbone.Router.extend({
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
   },
 
-  newView: function(view, bodyClass){
+  newView: function(view, bodyClass, addressBarText){
     "use strict";
     if($('body').attr('id') != bodyClass){
       $('body').attr("id", bodyClass || "");
@@ -63,7 +53,9 @@ module.exports = Backbone.Router.extend({
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     //clear address bar. This will be replaced on the user page
-    window.obEventBus.trigger("setAddressBar", "");
+    console.log("router set address bar ")
+    addressBarText = addressBarText || "";
+    window.obEventBus.trigger("setAddressBar", addressBarText);
   },
 
   index: function(){
@@ -79,10 +71,11 @@ module.exports = Backbone.Router.extend({
 
   home: function(state, searchText){
     "use strict";
-    var searchItemsText = "";
-    var searchUserText = ""; //placeholder for future functionality
+    var searchItemsText = "",
+        searchUserText = "", //placeholder for future functionality
+        addressBarText = searchText ? "#" + searchText : "";
     if(state == "products"){
-      searchItemsText = stringToTag(searchText);
+      searchItemsText = searchText;
     }
     this.cleanup();
     this.newView(new homeView({
@@ -91,10 +84,8 @@ module.exports = Backbone.Router.extend({
       socketView: this.socketView,
       state: state,
       searchItemsText: searchItemsText
-    }));
-    if(searchItemsText){
-      window.obEventBus.trigger("setAddressBar", searchItemsText);
-    }
+    }),'',addressBarText);
+
     // hide the discover onboarding callout 
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
   },
@@ -112,12 +103,6 @@ module.exports = Backbone.Router.extend({
       socketView: this.socketView,
       chatAppView: this.chatAppView
     }),"userPage");
-  },
-
-  customizePage: function(){
-    "use strict";
-    this.cleanup();
-    console.log("customizePage");
   },
 
   sellItem: function(){
@@ -141,24 +126,6 @@ module.exports = Backbone.Router.extend({
       socketView: this.socketView,
       state: state
     }),"userPage");
-  },
-
-  sales: function(){
-    "use strict";
-    this.cleanup();
-    console.log("sales");
-  },
-
-  cases: function(){
-    "use strict";
-    this.cleanup();
-    console.log("cases");
-  },
-
-  notifications: function(){
-    "use strict";
-    this.cleanup();
-    console.log("notifications");
   },
 
   settings: function(state){

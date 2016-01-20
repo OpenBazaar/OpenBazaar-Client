@@ -13,14 +13,6 @@ var loadTemplate = require('../utils/loadTemplate'),
     userShortModel = require('../models/userShortMd'),
     simpleMessageView = require('./simpleMessageVw');
 
-function stringToTag(string) {
-  var tag = string.replace(/\s+/g, '');
-  if (string.charAt(0) !== "#"){
-    tag = '#' + tag;
-  }
-  return tag;
-}
-
 module.exports = Backbone.View.extend({
 
   className:"homeView",
@@ -166,7 +158,7 @@ module.exports = Backbone.View.extend({
 
       //populate search field
       if(self.searchItemsText){
-        self.$el.find('.js-homeSearchItems').val(self.searchItemsText);
+        self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
         $('#obContainer').scrollTop(0);
       }
     });
@@ -354,17 +346,11 @@ module.exports = Backbone.View.extend({
   searchItemsKeyup: function(e){
     "use strict";
     var target = $(e.target),
-        targetText = stringToTag(target.val());
+        targetText = target.val();
 
-    if(target.val().length > 0 && e.keyCode == 13){
-      // reset the input value to be in a tag format instead of a plain string
-      target.val(stringToTag(target.val()));
-
+    if(e.keyCode == 13){
       this.searchItems(targetText);
-
-      $('#addressBar').val(targetText);
-    }else if(target.val().length == 0 && e.keyCode == 13){
-      this.searchItemsClear();
+      window.obEventBus.trigger("setAddressBar", "#" + targetText);
     }
   },
 
@@ -390,7 +376,7 @@ module.exports = Backbone.View.extend({
       this.searchItemsText = searchItemsText;
       this.clearItems();
       this.socketSearchID = Math.random().toString(36).slice(2);
-      this.socketView.search(this.socketSearchID, searchItemsText.replace('#',''));
+      this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();      
       this.$el.find('.js-discoverSearchKeyword').html(searchItemsText);
       this.$el.find('.js-discoverHeading').html(searchItemsText);

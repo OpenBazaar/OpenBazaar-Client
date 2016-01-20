@@ -488,10 +488,6 @@ module.exports = Backbone.View.extend({
     } else {
       this.closeStatusBar();
     }
-
-    if(barText.length === 0){
-      this.closeStatusBar();
-    }
   },
 
   addressBarProcess: function(addressBarText){
@@ -506,19 +502,22 @@ module.exports = Backbone.View.extend({
     itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
 
     if(addressTextArray[0].charAt(0) == "@"){
-      // user enter a handle
+      // user entered a handle
       handle = addressTextArray[0];
       this.showStatusBar('Navigation by handle is not supported yet.');
-    } else if(addressTextArray[0].length === 0){
+    } else if(!addressTextArray[0].length){
       // user trying to go back to discover
       Backbone.history.navigate('#home', {trigger:true});
     } else if(addressTextArray[0].length === 40){
       // user entered a guid
       guid = addressTextArray[0];
       Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
-    } else {
-      // user enetered a search term
+    } else if(addressTextArray[0].charAt(0) == "#"){
+      // user entered a search term
       Backbone.history.navigate('#home/products/' + addressTextArray[0].replace('#', ''), {trigger:true});
+    } else {
+      //user entered text that doesn't match a known pattern, assume it's a product search
+      Backbone.history.navigate('#home/products/' + addressTextArray[0], {trigger:true});
     }
   },
 
