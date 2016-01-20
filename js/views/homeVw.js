@@ -351,7 +351,7 @@ module.exports = Backbone.View.extend({
 
     if(e.keyCode == 13){
       this.searchItems(targetText);
-      addressText = addressText ? "#" + addressText.replace(" ", "") : "";
+      addressText = addressText ? "#" + addressText.replace(/\s+/g, '') : "";
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", addressText);
     }
@@ -382,7 +382,7 @@ module.exports = Backbone.View.extend({
       this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();      
       this.$el.find('.js-discoverSearchKeyword').html(searchItemsText);
-      this.$el.find('.js-discoverHeading').html(searchItemsText);
+      this.$el.find('.js-discoverHeading').html('#' + searchItemsText.replace(/\s+/g, ''));
       this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('searchingText'));
       this.$el.find('.js-discoverSearchKeyword').removeClass('hide');
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
