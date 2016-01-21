@@ -2139,7 +2139,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-pill {
-  padding: 5px 13px;
+  padding: 5px 10px;
   cursor: pointer;
   border-radius: 4px;
   min-height: 17px;
@@ -2627,6 +2627,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   width: 100%;
   padding: 15px;
   resize: none;
+  box-sizing: border-box;
 }
 
 .fieldItem-textarea:focus {
