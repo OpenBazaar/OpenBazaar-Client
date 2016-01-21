@@ -49,7 +49,6 @@ module.exports = Backbone.View.extend({
   blockClicks: function(e) {
     "use strict";
     e.stopPropagation();
-
   },
 
   updatePage: function() {
@@ -126,8 +125,9 @@ module.exports = Backbone.View.extend({
   },
 
   closeModal: function(e){
-    $(e.target).closest('.js-adminModal').fadeTo(0,0).removeAttr('style');
-    window.location.reload();
+    $(e.target).closest('.js-adminModal').fadeOut(300, function(){
+      window.location.reload();
+    });
   },
 
   makeModerator: function() {

@@ -122,14 +122,14 @@ module.exports = Backbone.Router.extend({
     }),"userPage");
   },
 
-  transactions: function(state){
+  transactions: function(state, modalTab){
     "use strict";
     this.cleanup();
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state,
+      state: state
     }),"userPage");
   },
 

@@ -487,6 +487,7 @@ module.exports = Backbone.View.extend({
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         self.renderItems(model.get('listings'));
       },
@@ -496,6 +497,7 @@ module.exports = Backbone.View.extend({
     });
     this.following.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         if(self.options.ownPage === true){
           self.ownFollowing = model.get('following') || [];
@@ -538,6 +540,7 @@ module.exports = Backbone.View.extend({
 
     this.followers.fetch({
       data: self.userProfileFetchParameters,
+      timeout: 5000,
       success: function(model){
         var followerArray = model.get('followers');
         self.renderFollowers(followerArray);
@@ -600,7 +603,7 @@ module.exports = Backbone.View.extend({
     this.followerList = new personListView({
       model: model,
       el: '.js-list1',
-      title: "No followers",
+      title: window.polyglot.t('NoFollowers'),
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
@@ -623,7 +626,7 @@ module.exports = Backbone.View.extend({
       model: model,
       followed: true,
       el: '.js-list2',
-      title: "Not following anyone",
+      title: window.polyglot.t('NotFollowingAnyone'),
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
