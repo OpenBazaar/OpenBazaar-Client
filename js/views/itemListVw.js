@@ -39,11 +39,10 @@ module.exports = Backbone.View.extend({
 
   renderContract: function(item){
     var itemShort = new itemShortView({
-      model: item,
-      el: this.$el
+      model: item
     });
     this.subViews.push(itemShort);
-    //this.$el.append(itemShort.render().el);
+    this.$el.append(itemShort.render().el);
   },
 
   renderNoneFound: function(){
