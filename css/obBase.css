@@ -2627,6 +2627,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   width: 100%;
   padding: 15px;
   resize: none;
+  box-sizing: border-box;
 }
 
 .fieldItem-textarea:focus {
