@@ -21,9 +21,9 @@
             </div>
             <div class="marginLeft15 marginRight15 rowTop10">
               <% if(ob.vendor){ %>
-              <%= polyglot.t('transactions.SoldBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.vendor %>" title="<%- ob.vendor %>"><%- ob.vendor %></a>
+              <%= polyglot.t('transactions.SoldBy') %> <%- ob.vendor %>
               <% } else if(ob.buyer) { %>
-              <%= polyglot.t('transactions.PurchasedBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.buyer %>" title="<%- ob.buyer %>"><%- ob.buyer %></a>
+              <%= polyglot.t('transactions.PurchasedBy') %> <%- ob.buyer %>
               <% } %>
             </div>
             <div class="marginLeft15 marginRight15 marginTop2">
