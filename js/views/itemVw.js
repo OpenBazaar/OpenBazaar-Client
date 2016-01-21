@@ -3,6 +3,7 @@ var __ = require('underscore'),
   $ = require('jquery'),
   colorbox = require('jquery-colorbox'),
   loadTemplate = require('../utils/loadTemplate'),
+  sanitizeHTML = require('sanitize-html'),
   buyWizardVw = require('./buyWizardVw');
   Backbone.$ = $;
 
@@ -35,7 +36,13 @@ module.exports = Backbone.View.extend({
     });
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
-        self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(self.model.toJSON()));
+
+      var description = sanitizeHTML(self.model.get('vendor_offer').listing.item.description, {
+        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+      });
+
+      $('.js-listingDescription').html(description);
     });
 
     return this;

@@ -43,7 +43,6 @@ module.exports = Backbone.View.extend({
       el: this.$el
     });
     this.subViews.push(itemShort);
-    //this.$el.append(itemShort.render().el);
   },
 
   renderNoneFound: function(){

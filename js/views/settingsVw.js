@@ -14,6 +14,7 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
+    MediumEditor = require('medium-editor'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({
@@ -156,6 +157,15 @@ module.exports = Backbone.View.extend({
       if(self.model.get('page').profile.header_hash){
         $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
       }
+
+      var editor = new MediumEditor('#about', {
+          placeholder: {
+            text: ''
+          },
+          toolbar: {
+            imageDragging: false
+          }
+      });
 
       self.socketView.getModerators(self.socketModeratorID);
     });
@@ -386,11 +396,13 @@ module.exports = Backbone.View.extend({
   saveGeneral: function() {
     "use strict";
     var self = this,
-        form = this.$el.find("#generalForm");
+        form = this.$el.find("#generalForm"),
+        cCode = this.$('#currency_code').val();
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
       showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.setCurrentBitCoin(cCode);
       self.refreshView();
     });
   },
@@ -600,6 +612,13 @@ module.exports = Backbone.View.extend({
   addressUnDelete: function(e){
     "use strict";
     $(e.target).closest('.js-address').removeClass('div-fadeExtra');
+  },
+
+  setCurrentBitCoin: function(cCode) {
+    "use strict";
+    getBTPrice(cCode, function (btAve) {
+      window.currentBitcoin = btAve;
+    });
   },
 
   close: function(){

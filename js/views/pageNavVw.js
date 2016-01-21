@@ -34,6 +34,7 @@ module.exports = Backbone.View.extend({
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
+    'click .js-homeModal': 'blockClicks',
     'click .js-homeModal-countrySelect': 'countrySelect',
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
@@ -131,10 +132,11 @@ module.exports = Backbone.View.extend({
       var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       self.initAccordion('.js-profileAccordion');
 
-      // pre-select timezone
+      // pre-select local timezone and scroll it to the top.
       var offset = new Date().getTimezoneOffset();
       offset = '(GMT ' + (offset < 0 ? '+' : '-') + parseInt(Math.abs(offset/60)) + ':00)';
-      $("[id*='" + offset + "']").prop('checked', true);
+      var currentTimezone = $("[id*='" + offset + "']");
+      currentTimezone.prop('checked', true);
     }
   },
 
@@ -259,7 +261,17 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
-      self.$el.find('#image-cropper').cropit();
+      self.$el.find('#image-cropper').cropit({
+        smallImage: "stretch",
+        exportZoom: 1.33,
+        maxZoom: 5,
+        onFileReaderError: function(data){console.log(data);},
+        onImageError: function(errorObject, errorCode, errorMessage) {
+          console.log(errorObject);
+          console.log(errorCode);
+          console.log(errorMessage);
+        }
+      });
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
@@ -470,13 +482,9 @@ module.exports = Backbone.View.extend({
   addressBarKeyup: function(e){
     "use strict";
     var barText = this.addressInput.val();
-    if(barText.length > 0){
-      //detect enter key
-      if (e.keyCode == 13){
-        this.addressBarProcess(barText);
-      } else {
-        this.closeStatusBar();
-      }
+    //detect enter key
+    if (e.keyCode == 13){
+      this.addressBarProcess(barText);
     } else {
       this.closeStatusBar();
     }
@@ -488,21 +496,29 @@ module.exports = Backbone.View.extend({
         handle = "",
         state = "",
         itemHash = "",
-        addressTextArray = addressBarText.split("/");
+        addressTextArray = addressBarText.replace(/ /g, "").split("/");
 
     state = addressTextArray[1] ? "/" + addressTextArray[1] : "";
     itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
 
     if(addressTextArray[0].charAt(0) == "@"){
+      // user entered a handle
       handle = addressTextArray[0];
       this.showStatusBar('Navigation by handle is not supported yet.');
+    } else if(!addressTextArray[0].length){
+      // user trying to go back to discover
+      Backbone.history.navigate('#home', {trigger:true});
     } else if(addressTextArray[0].length === 40){
+      // user entered a guid
       guid = addressTextArray[0];
       Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
+    } else if(addressTextArray[0].charAt(0) == "#"){
+      // user entered a search term
+      Backbone.history.navigate('#home/products/' + addressTextArray[0].replace('#', ''), {trigger:true});
     } else {
-      this.showStatusBar('This is not a valid user GUID or handle.');
+      //user entered text that doesn't match a known pattern, assume it's a product search
+      Backbone.history.navigate('#home/products/' + addressTextArray[0], {trigger:true});
     }
-
   },
 
   showStatusBar: function(msgText){
@@ -548,7 +564,7 @@ module.exports = Backbone.View.extend({
   timeSelect: function(e){
     "use strict";
     var inpt = $(e.target).closest('input[type=radio]'); 
-    var tz = inpt.attr('id');
+    var tz = inpt.val();
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
     this.model.set('time_zone', tz);
@@ -729,8 +745,13 @@ module.exports = Backbone.View.extend({
     
   navAdminPanel: function(){
     "use strict";
-    this.$el.find('.js-adminModal').removeClass('hide');
+    this.$el.find('.js-adminModal').fadeIn(300);
     this.adminPanel.updatePage();
+  },
+
+  blockClicks: function(e) {
+    "use strict";
+    e.stopPropagation();
   },
 
   close: function(){

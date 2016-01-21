@@ -6,10 +6,14 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
+  tagName: "li",
+
   className: "flexRow custCol-border",
 
   events: {
-    'click .js-orderShort': 'openOrderModal'
+    'click .js-orderShort': 'openOrderModal',
+    'click .js-orderShortConfirm': 'orderConfirm',
+    'click .js-orderShortComplete': 'orderComplete'
   },
 
   initialize: function(){
@@ -26,9 +30,37 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
-  openOrderModal: function(){
+  openOrderModal: function(e){
     "use strict";
-    window.obEventBus.trigger("openOrderModal", this.model.get('order_id'));
+    e.stopPropagation();
+    window.obEventBus.trigger("openOrderModal", {
+      'orderID': this.model.get('order_id'),
+      'status': this.model.get('status'),
+      'transactionType': this.model.get('transactionType')
+    });
+  },
+
+  orderConfirm: function(e){
+    console.log("confirm order")
+    "use strict";
+    e.stopPropagation();
+    window.obEventBus.trigger("openOrderModal", {
+      'orderID': this.model.get('order_id'),
+      'status': this.model.get('status'),
+      'transactionType': this.model.get('transactionType'),
+      'tabState': "confirm"
+    });
+  },
+
+  orderComplete: function(e){
+    "use strict";
+    e.stopPropagation();
+    window.obEventBus.trigger("openOrderModal", {
+      'orderID': this.model.get('order_id'),
+      'status': this.model.get('status'),
+      'transactionType': this.model.get('transactionType'),
+      'tabState': "complete"
+    });
   },
 
   close: function(){

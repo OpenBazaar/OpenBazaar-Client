@@ -85,7 +85,8 @@ p a {
 }
 
 p { 
-  white-space: pre-line;  
+  white-space: pre-line;
+  margin: 0 0 1em 0;
 }
 
 hr {
@@ -176,7 +177,7 @@ form {
 
 #obContainer {
   transition: width 0.5s ease;
-  width: calc(100% - 48px);
+  width: calc(100% - 47px);
 
 }
 
@@ -215,7 +216,7 @@ form {
   top: 50px;
   width:230px;
   background-color: #252525;
-  border-left: solid 1px #333333;
+  border-left: 0;
   height: calc(100% - 50px);
   z-index: 2;
   transition: right 0.5s ease;
@@ -250,6 +251,7 @@ form {
   margin-bottom: 100px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  z-index: 1;
 }
 
 .img-rsp {
@@ -400,29 +402,101 @@ form {
   flex-grow: 1;
 }
 
+.gridItemControls {
+  background: #106DA3;
+  position: absolute; 
+  opacity: 0;
+  bottom: 0; 
+  left: 1px; 
+  height: 40px; 
+  line-height: 38px;
+  border-top: solid 1px #327EB8;
+  border-right: solid 1px #327EB8;
+  width: 316px;
+  padding: 0;
+  box-sizing: border-box;
+  transition: opacity .5s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.gridItemControls .btn-gridItemControl {
+  text-align: center;
+  padding: 0;
+  opacity: .75;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.gridItemControls .btn-gridItemControl:hover {
+  opacity: 1;
+}
+
 .gridItem {
   box-sizing: border-box;
-  padding: 33px;
+  padding: 34px 32px;
   cursor: pointer;
   width: 317px;
+  height: 340px;
+  position: relative;
 }
 
 .userPage-subViews .gridItem,
 .homeView .gridItem {
   border-bottom: 1px solid #327EB8;
   border-right: 1px solid #327EB8;
-  opacity: .85;
+  opacity: .9;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
+  transition: padding-top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
+  box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
+  opacity: 1;
+  padding-top: 20px;
+}
+
+.userPage-subViews .gridItem:hover .gridItemControls,
+.homeView .gridItem:hover .gridItemControls{
   opacity: 1;
 }
 
-.userPage-subViews .gridItem:nth-child(3n),
-.homeView .gridItem:nth-child(3n) {
+.userPage-subViews .gridItem:hover .itemImg,
+.homeView .gridItem:hover .itemImg {
+    box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
+}
+
+.userPage-subViews .gridItem .itemImg:active,
+.homeView .gridItem .itemImg:active {
+    box-shadow: 0px 0px 67px -10px rgb(0, 0, 0);
+    opacity: .75;
+}
+
+.pageGridItems .flexCol-4:nth-child(3n) .gridItem,
+.homeGridItems .flexCol-4:nth-child(3n) .gridItem {
   border-right: 0;
+}
+
+.pageGridItems .flexCol-4:nth-child(3n) .gridItem .gridItemControls,
+.homeGridItems .flexCol-4:nth-child(3n) .gridItem .gridItemControls {
+  left: 1px;
+  width: 316px;
+  border-right: 0;
+}
+
+.userPageAboutSection .userPageEditBtn,
+.userPageSocialAccounts .userPageEditBtn {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.userPageAboutSection:hover .userPageEditBtn,
+.userPageSocialAccounts:hover .userPageEditBtn {
+  display: block;
 }
 
 .itemImg {
@@ -438,7 +512,7 @@ form {
   /* flex row collapses unless a specific height is set */
   height: 380px;
   width: 100%;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 .itemImg.itemImg-small {
@@ -477,7 +551,7 @@ form {
 }
 
 .itemMeta {
-  padding: 6px;
+  padding: 0 15px 2px 15px;
   margin: 0;
   list-style-type: none;
 }
@@ -490,7 +564,7 @@ form {
 }
 
 .itemMeta .itemPrice {
-  padding: 15px 15px 2px 15px;
+  padding: 0 15px 2px 15px;
 }
 
 .itemMetaCircle {
@@ -676,6 +750,15 @@ label.fieldItem {
   transition: all .1s cubic-bezier(0, 0, 0.5, 1);
 }
 
+.thumbnail-large .userPageEditBtn {
+  display: none;
+  margin: auto;
+}
+
+.thumbnail-large:hover .userPageEditBtn {
+  display: block;
+}
+
 .thumbnail-largeTrimmed {
   height: 70px;
 }
@@ -812,6 +895,15 @@ label.fieldItem {
   top: 50px;
 }
 
+.modalHolder {
+  /* use to contain modals inside views */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
 .modal-child {
   width: 525px;
   height: 624px;
@@ -823,11 +915,6 @@ label.fieldItem {
 
 .modal.modal-navOffset .modal-child {
   margin-top: 25px;
-}
-
-.modal.fadeOut {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .accordion {
@@ -923,6 +1010,15 @@ label.fieldItem {
   z-index: 3;
 }
 
+#addressBar{
+  height: 32px;
+}
+
+#addressBar::-webkit-input-placeholder {
+  color: #000;
+  font-size: 12px;
+}
+
 .smPageHeader {
   background-color: rgb(6,55,83);
   height: 85px;
@@ -994,6 +1090,13 @@ h5 {
   font-size: 15px;
 }
 
+.note {
+  /* use for instructions and incidental text */
+  font-style: italic;
+  font-size: 9px;
+  opacity: 0.75;
+}
+
 [class *= "ion-"]:before {
   font-size: 1.2em;
 }
@@ -1034,6 +1137,10 @@ h5 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.noWrap {
+  white-space: nowrap;
 }
 
 .clamp2 {
@@ -1083,11 +1190,6 @@ h5 {
   transition: opacity 1s;
   overflow: hidden;
   z-index: 10;
-}
-
-.navBar.statusBar.fadeOut {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .navBar-main.navBar.statusBar {
@@ -1270,7 +1372,7 @@ h5 {
 }
 
 .box-borderBright {
-  border: 1px solid rbga(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.5);
   box-sizing: border-box;
 }
 
@@ -1450,11 +1552,6 @@ input[type="text"].txtField-bar {
   line-height: 32px;
 }
 
-.btn.fadeOut {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .btn:active {
   -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
   opacity: .75;
@@ -1462,7 +1559,7 @@ input[type="text"].txtField-bar {
 
 .btn.btn-txt {
   /* button with text */
-  padding: 0 16px;
+  padding: 0 12px;
 }
 
 .btn.btn-txtHalf {
@@ -1471,21 +1568,23 @@ input[type="text"].txtField-bar {
 }
 
 .btn.btn-buyNow {
-  margin: auto;
-  width: 280px;
-  height: 52px;
-  line-height: 52px;
-  padding: 0;
-  opacity: .90;
-  font-size: 19px;
-  border-radius: 5px;
-  float: none;
-  text-transform: uppercase;
-  font-weight: 800
+margin: auto;
+    width: 280px;
+    height: 52px;
+    line-height: 52px;
+    padding: 0;
+    opacity: 1;
+    font-size: 17px;
+    border-radius: 5px;
+    float: none;
+    font-weight: 500;
+    transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .btn.btn-buyNow:hover {
-  opacity: 1;
+  opacity: .75;
 }
 
 
@@ -1729,7 +1828,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationLabel {
-  width: calc(100% - 100px);
+  width: calc(100% - 115px);
   margin-right:5px;
   float:left;
   text-overflow: ellipsis;
@@ -1738,7 +1837,7 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn-closeConversation {
   height: 38px;
-  width: 38px;
+  width: 30px;
   text-align: center;
   float: right;
 }
@@ -1759,7 +1858,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationContent {
-  height: calc(100% - 134px);
+  height: calc(100% - 138px);
   border: 1px solid #565656;
   border-top: 0;
   overflow: auto;
@@ -1792,8 +1891,8 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessage {
-  height: 60px;
-  padding: 10px;
+  height: 75px;
+  padding: 0 5px;
   border: 1px solid #565656;
   border-top: 0;
   margin-left: 2px;
@@ -1805,17 +1904,57 @@ div.chatSearchOut .chatSearchIcon {
   max-height: 145px;
 }
 
-.chatConversationAvatar {
-    margin-top: -3px;
-    width: 48px;
-    height: 48px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    margin-right: 6px;
-    margin-left: -2px;
+.chatConversationMessage  .txtAreaField {
+  height: 75px;
 }
 
-.chatConversation textarea, .chatConversation input {
+.chatConversationMessage  .txtAreaField:focus {
+  outline: none;
+}
+
+.chatConversationMessage  .txtAreaField:after {
+  margin-top: 5px;
+}
+
+.chatConversationAvatar {
+    width: 45px;
+    height: 45px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    margin-right: 6px;
+    margin-left: -10px;
+}
+
+.chatConversationAvatar:hover {
+  -webkit-box-shadow: inset 0px 0px 15px 0px rgb(50, 50, 50);
+}
+
+.chatConversationMenu {
+  width: 100px;
+  border: solid 1px #565656;
+  border-top: 0;
+  padding: 10px;
+  position: absolute;
+  top: 45px;
+  right: 0px;
+  background: #252525;
+  z-index: 5;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.chatConversationMenu div {
+  cursor: pointer;
+  line-height: 22px;
+}
+
+.chatConversationMenu div:hover {
+  text-decoration: underline;
+}
+
+.chatConversation textarea, 
+.chatConversation input {
   color: white;
   background-color: unset;
   width: 100%;
@@ -1826,6 +1965,12 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationMessageLine {
   padding: 4px 5px;
   width: 100%;
+}
+
+.chatConversationMessageLine h2,
+.chatConversationMessageLine h3,
+.chatConversationMessageLine p {
+  margin: 0;
 }
 
 .chatConversationMessageLine table {
@@ -1910,6 +2055,11 @@ div.chatSearchOut .chatSearchIcon {
 #inputConversationMessage {
   border: 1px solid #333;
   resize: none;
+  margin-top: 4px;
+}
+
+#inputConversationMessage::-webkit-input-placeholder  {
+  font-size: 12px;
 }
 
 .chatConversationMessageAvatar {
@@ -1993,13 +2143,14 @@ div.chatSearchOut .chatSearchIcon {
   cursor: pointer;
   border-radius: 4px;
   min-height: 17px;
-  opacity: .75;
+  opacity: 1;
   margin-bottom: 4px;
   margin-right: 4px;
   min-width: 30px;
   text-align: center;
   overflow: hidden;
   line-height: 20px;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .btn-pill a {
@@ -2007,7 +2158,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-pill:hover {
-  opacity: 1;
+  opacity: .75;
 }
 
 .btn.btn-half.btn-bar:last-child,
@@ -2554,6 +2705,62 @@ input[type="radio"].fieldItem:checked + label:before {
   box-shadow: inset 0 0 0 4px #086A9E;
 }
 
+input[type="radio"].fieldItem.starRating + label {
+  padding: 0 20px;
+}
+
+input[type="radio"].fieldItem.starRating + label:before {
+  content: "\f2fc";
+  font-family: "Ionicons";
+  color: #fff;
+  line-height: 24px;
+  font-size: 18px;
+  text-align: center;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: none;
+  background: none;
+  box-shadow: none;
+  opacity: 1;
+  transform: translateY(-50%) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  top: 50%;
+  left: 0;
+}
+
+input[type="radio"].fieldItem.starRating:checked + label:before {
+  content: "\f2fc";
+  background: #000;
+  box-shadow: none;
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label + input + label + input + label:before {
+  content: "\f3ae";
+}
+
+input[type="radio"].fieldItem.starRating:checked + label + input + label + input + label + input + label + input + label:before {
+  content: "\f3ae";
+}
+
+.starRating:before {
+  /* use when displaying stars that are not part of an input */
+  content: "\f2fc";
+  font-family: "Ionicons";
+  color: #fff;
+  line-height: 24px;
+  font-size: 18px;
+}
+
+
 .radioLabel {
   opacity: .75;
 }
@@ -2571,20 +2778,21 @@ input[type="checkbox"].fieldItem + label {
 }
 
 input[type="checkbox"].fieldItem + label:before {
-  content: "";
+  content: "\f371";
   display: inline-block;
+  font-family: Ionicons;
   position: absolute;
   left: 10px;
-  top: 20px;
-  height: 14px;
-  width: 14px;
-  border-radius: 1px;
-  border: solid 1px #fff;
+  top: 3px;
+  font-size: 18px;
+  width: 15px;
+  text-align: center;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
-  background: #fff;
-  box-shadow: inset 0 0 0 3px #086A9E;
+  content: "\f374";
+  font-family: Ionicons;
+  background: transparent;
 }
 
 input[type="checkbox"].fieldItem + label div,
@@ -3106,11 +3314,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: opacity 1s;
 }
 
-.spinnerWrapper.fadeOut {
-  opacity: 0;
-  pointer-events: none;
-}
-
 @-webkit-keyframes spinnerAnimation {
   0% {
     transform: translate(50%,-50%) rotate(359deg);
@@ -3277,6 +3480,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-weight: 500;
   letter-spacing: .8px;
   margin-bottom: 0;
+  margin-top: 10px;
   opacity: 1;
 }
 
@@ -3397,7 +3601,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .btn-profile.tooltip:hover:after{
-  left: -45px;
+  left: -25px;
 }
 
 .btn-upload-cover-photo {
@@ -3529,6 +3733,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
 }
 
+.selectPillWrapper {
+
+}
+
 /* protect customize controls from custom page styles */
 #ov1 #customizeControls .labelWrap {
   height: 40px;
@@ -3627,6 +3835,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .clearfix:after {
   clear: both;
+}
+
+#ov1 .highlight {
+  /* use on an element inside a block container to add a translucent hover background to it. The color is slightly
+     grey so it works on light backgrounds too*/
+  background: rgba(215, 215, 215, 0);
+  transition: background 0.5s;
+}
+
+#ov1 .highlight:hover {
+  background: rgba(215, 215, 215, 0.2);
 }
 
 #ov1 .pull-right {
@@ -4135,9 +4354,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .marginTop15 {
   margin-top: 15px;
 }
+#ov1  .marginTop18 {
+  margin-top: 18px;
+}
 
 #ov1  .marginTop20 {
   margin-top: 20px;
+}
+
+#ov1  .marginTop22 {
+  margin-top: 22px;
 }
 
 #ov1  .marginTop25 {
@@ -4146,6 +4372,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginTop28 {
   margin-top: 28px;
+}
+
+#ov1  .marginTop30 {
+  margin-top: 30px;
+}
+
+#ov1  .marginTop40 {
+  margin-top: 40px;
 }
 
 #ov1  .marginTop50 {
@@ -4364,6 +4598,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 20px 15px;
 }
 
+#ov1  .padding2520 {
+  padding: 20px 20px;
+}
+
 #ov1  .padding17px {
   padding: 17px;
 }
@@ -4379,6 +4617,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 #ov1  .paddingRight18 {
   padding-right: 18px;
+}
+#ov1  .paddingRight40 {
+  padding-right: 40px;
 }
 
 #ov1  .paddingLeft2 {
@@ -4400,6 +4641,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .paddingLeft20 {
   padding-left: 20px;
 }
+#ov1  .paddingLeft40 {
+  padding-left: 40px;
+}
 
 #ov1  .paddingTop4 {
   padding-top: 4px;
@@ -4419,6 +4663,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .positionTop68 {
   top: 68px;
+}
+
+#ov1  .paddingBottom12 {
+  padding-bottom: 12px;
 }
 
 #ov1  .paddingBottom20 {
@@ -4556,6 +4804,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .blur {
   -webkit-filter: blur(1px);
+}
+
+#ov1 .fadeOut {
+  opacity: 0;
+  pointer-events: none;
 }
 
 #ov1 .underline {
