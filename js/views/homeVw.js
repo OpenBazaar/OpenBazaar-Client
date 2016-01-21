@@ -381,8 +381,8 @@ module.exports = Backbone.View.extend({
       this.socketSearchID = Math.random().toString(36).slice(2);
       this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();      
-      this.$el.find('.js-discoverSearchKeyword').html(searchItemsText);
-      this.$el.find('.js-discoverHeading').html(searchItemsText);
+      this.$el.find('.js-discoverSearchKeyword').html("#" + searchItemsText);
+      this.$el.find('.js-discoverHeading').html("#" + searchItemsText);
       this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('searchingText'));
       this.$el.find('.js-discoverSearchKeyword').removeClass('hide');
       this.$el.find('.js-homeSearchItemsClear').removeClass('hide');
