@@ -482,7 +482,7 @@ module.exports = Backbone.View.extend({
 
   addressBarFocus: function(e){
     // on inital focus of input, select all text (this makes it easier to copy or delete the text)
-    $(this.$el).on('mouseup', function () {
+    $(e.target).on('mouseup', function () {
       $('#addressBar').select();
     });
   },
