@@ -229,7 +229,7 @@ module.exports = Backbone.View.extend({
 
     if(searchItemsText){
       //add action to history
-      Backbone.history.navigate("#home/" + state + "/" + searchItemsText);
+      Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""));
     } else {
       //add action to history
       Backbone.history.navigate("#home/" + state);
@@ -346,12 +346,12 @@ module.exports = Backbone.View.extend({
   searchItemsKeyup: function(e){
     "use strict";
     var target = $(e.target),
-        targetText = target.val().replace("#",''),
+        targetText = target.val().replace("#",'').replace(/ /g, ""),
         addressText = targetText;
 
     if(e.keyCode == 13){
       this.searchItems(targetText);
-      addressText = addressText ? "#" + addressText.replace(" ", "") : "";
+      addressText = addressText ? "#" + addressText : "";
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", addressText);
     }

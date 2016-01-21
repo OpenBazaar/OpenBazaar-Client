@@ -496,7 +496,7 @@ module.exports = Backbone.View.extend({
         handle = "",
         state = "",
         itemHash = "",
-        addressTextArray = addressBarText.split("/");
+        addressTextArray = addressBarText.replace(/ /g, "").split("/");
 
     state = addressTextArray[1] ? "/" + addressTextArray[1] : "";
     itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
