@@ -598,6 +598,8 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.itemList);
 
+    this.$('.js-listingCount').html(model.length);
+
     if (model.length) {
       new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
     }

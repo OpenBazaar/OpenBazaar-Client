@@ -69,7 +69,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
         SearchForUsersPlaceholder: "Type a name...",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -213,31 +213,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time",
         InternationalShippingTime: "International Shipping Time",
         DisplayNSFWcontent: "Display NSFW content?",
+        Basic: "Basic",
         Content: "Content",
         StandardThemes: "Standard themes",
         NoPhotosAdded: "No Photos Added",
-        Summary: "Summary",
-        Funds: "Funds",
-        Discussion: "Discussion",
-        Quantity: "Quantity",
-        ShippingTo: "Shipping To",
-        ModeratedBy: "Moderated by",
-        Submit: "Submit",
-        maxLength20: "maximum length 20 characters",
-        maxLength80: "maximum length 80 characters",
-        maxLength200: "maximum length 200 characters",
-        StoreModeratorsOptional: "Store Moderators (Optional)",
-        Searchformoderators: "Search for moderators",
-        Contributors: "Contributors",
-        Support: "Support",
-        Licensing: "Licensing",
-        Forward: "Forward",
-        On: "On",
-        Off: "Off",
-        ClickToChange: "Click to change",
-        NotProvided: "not provided",
-        NotFollowingAnyone: "Not following anyone",
-        NoFollowers: "No followers",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -256,45 +235,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped",
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "Disputed",
-          OrderTotal: "Order Total",
-          OrderTotalInBTC: "BTC Total",
-          PaymentProtection: "Payment Protection",
-          ShipTo: "Ship To",
-          ConfirmOrder: "Confirm this Order",
-          ReceivingAddress: "Receiving Address",
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
-          Shipper: "Item Shipped By",
-          ShipperPlaceholder: "Name of the company shipping the item",
-          TrackingNumber: "Tracking Number",
-          TrackingNumberPlaceholder: "Tracking number of item",
-          EstimatedDelivery: "Estimated Delivery",
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered",
-          URL: "URL",
-          URLPlaceholder: "Link to download, schedule, or more information",
-          Password: "Password",
-          PasswordPlaceholder: "Password required for link, if any",
-          DirectTransaction: "Direct transaction",
-          ModeratedTransaction: "Moderated transaction",
-          Seller: "Seller",
-          Buyer: "Buyer",
-          transferReceipt: "transferReceipt",
-          copyTxid: "copy tx ID",
-          Close: "Close",
-          FundOrder: "Fund Order",
-          sortByDateNewest: "By Date, Newest",
-          sortByDateOldest: "By Date, Oldest",
-          PayPurchase: "Pay for this Purchase",
-          CompleteOrder: "Complete this Order",
-          RateThisTransaction: "Rate this Transaction",
-          TransactionReview: "Transaction Review",
-          OverallRating: "Overall Rating",
-          Quality: "Quality",
-          Description: "Description",
-          DeliveryTime: "DeliveryTime",
-          CustomerService: "Customer Service",
-          Review: "Review",
-          ReviewPlaceHolder: "Your review of this transaction",
-          NoneSent: "None sent"
+          OrderTotal: "Order Total"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -334,7 +275,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "All"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...",
+          searchPlaceholder: "Type a @handle, GUID or #tag...",
           myPage: "My Page",
           customizePage:"Customize Page",
           sellItem:"New",
@@ -460,7 +401,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
@@ -599,31 +540,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -642,45 +562,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -719,7 +601,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "De dodas las tiendas"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "Mi p&aacute;gina",
           customizePage:"Personalizar P&aacute;gina",
           sellItem:"Nuevo",
@@ -848,7 +730,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Nach GUID oder Handle suchen",
         SearchForFollowersPlaceholder: "Nach GUID oder Handle suchen",
         SearchForUsersPlaceholder: "Nach GUID oder Handle suchen",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Werktage",
         EstDeliveryInternationalPlaceholder: "7-15 Werktage",
         OrderProcessingTimePlaceholder: "1-2 Werktage",
@@ -992,31 +874,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1035,45 +896,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1112,7 +935,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Von allen L&auml;den"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "Meine Seite",
           customizePage:"Seite anpassen",
           sellItem:"Neu",
@@ -1245,7 +1068,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Cerca per nickname o guid",
         SearchForFollowersPlaceholder: "Cerca per nickname o guid",
         SearchForUsersPlaceholder: "Cerca per nickname o guid",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 giorni di lavoro",
         EstDeliveryInternationalPlaceholder: "7-15 giorni di lavoro",
         OrderProcessingTimePlaceholder: "1-2 giorni di lavoro",
@@ -1393,28 +1216,6 @@ module.exports = Backbone.Model.extend({
         Content: "Contenuto",
         StandardThemes: "Temi standard",
         NoPhotosAdded: "Nessuna foto aggiunta",
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1433,45 +1234,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confermato/Inviato",
           OrderStatus3: "Completato (fondi rilasciati)",
           OrderStatus4: "Contestato",
-          OrderTotal: "Totale ordine",
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Totale ordine"
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -1510,7 +1273,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Da tutti i negozi"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "La mia pagina",
           customizePage: "Personalizza pagina",
           sellItem: "Nuovo",
@@ -1643,7 +1406,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Tapez un mot-clé...",
         SearchForFollowersPlaceholder: "Tapez un nom...",
         SearchForUsersPlaceholder: "Tapez un nom...",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 jours ouvrés",
         EstDeliveryInternationalPlaceholder: "7-15 jours ouvrés",
         OrderProcessingTimePlaceholder: "Entrer le temps nécessaire pour traiter la commande",
@@ -1773,7 +1536,6 @@ module.exports = Backbone.Model.extend({
         Cases: "Cas",
         Enter: "Entrer",
         Discover: "Découvrir",
-        Block: "Bloquer",
         Blocked: "Bloqué",
         Advanced: "Avancé",
         General: "Général",
@@ -1788,31 +1550,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Délai d'expédition nationale",
         InternationalShippingTime: "Délai d'expédition internationale",
         DisplayNSFWcontent: "Afficher le contenu NSFW ?",
+        Basic: "Basic",
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Modérateurs de boutique (Optionnel)",
-        Searchformoderators: "Rechercher des modérateurs",
-        Contributors: "Contributeurs",
-        Support: "Soutenir",
-        Licensing: "Licences",
-        Forward: "Avancer",
-        On: "Activer",
-        Off: "Désactiver",
-        ClickToChange: "Cliquez pour changer",
-        NotProvided: "Non renseigné",
-        NotFollowingAnyone: "Aucun abonnement",
-        NoFollowers: "Aucun abonné",
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1831,45 +1572,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmé/Expédié",
           OrderStatus3: "Terminé (fonds reçus)",
           OrderStatus4: "Contesté",
-          OrderTotal: "Total de la commande",
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Total de la commande"
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -1909,7 +1612,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "Toutes"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "Ma page",
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
@@ -1925,7 +1628,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configuration d'OpenBazaar",
           Introduction: "Présentation",
-          IntroductionBody: "OpenBazaar est un marché social pair à pair, semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. OpenBazaar est un projet open-source qui n'applique pas de frais ou de restrictions particulières. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase de découverte.",
+          IntroductionBody: "OpenBazaar est un marché social pair à pair. Ce projet est semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. Il n’y a pas de frais ou de restrictions et OpenBazaar est un projet open-source. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase d’apprentissage.",
           Theme: "Sélectionner un thème pour votre page",
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
@@ -2038,7 +1741,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Căutare după nume sau GUID",
         SearchForFollowersPlaceholder: "Căutare după nume sau GUID",
         SearchForUsersPlaceholder: "Căutare după nume sau GUID",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Zile Lucrătoare",
         EstDeliveryInternationalPlaceholder: "7-15 Zile Lucrătoare",
         OrderProcessingTimePlaceholder: "1-2 Zile Lucrătoare",
@@ -2182,31 +1885,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2225,45 +1907,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -2302,7 +1946,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Din toate magazinele"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "Pagina mea",
           customizePage:"Customizare Pagină",
           sellItem:"Nou",
@@ -2431,7 +2075,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Поиск по имени или GUID",
         SearchForFollowersPlaceholder: "Поиск по имени или GUID",
         SearchForUsersPlaceholder: "Поиск по имени или GUID",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 рабочих дней",
         EstDeliveryInternationalPlaceholder: "7-15 рабочих дней",
         OrderProcessingTimePlaceholder: "1-2 рабочих дней",
@@ -2554,110 +2198,50 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Сохранить аватар",
         NewAvatar: "Выбрать аватар",
         NewCoverImage: "Выбрать обложку",
-        Loading: "Загрузка...",
+        Loading: "Загрузка...", // not translated
         Purchases:"Покупки",
-        Sales: "Продажи",
-        Cases: "Кейсы",
+        Sales: "Продажи", // not translated
+        Cases: "Кейсы", // not translated
         Enter: "Enter",
-        Discover: "Обзор",
-        Blocked: "Заблокированно",
-        Advanced: "Дополнительно",
-        General: "Общий",
-        AllItems: "Все инструменты",
-        FreeShipping: "Бесплатная доставка",
-        DomesticShippingPrice: "Бесплатная доставка внутри страны",
-        InternationalShippingPrice: "Международные цены доставки",
-        MinimumIs: "Минимум",
-        Visibility: "Видимость",
-        Title: "Название",
-        DigitalItem: "Цифровой товар",
-        PhysicalItem: "Физический товар",
-        DomesticShippingTime: "Внутреннее время доставки",
-        InternationalShippingTime: "Международное время доставки",
-        DisplayNSFWcontent: "Отображать NSFW контент?",
-        Basic: "Базовый",
-        Content: "Контент",
-        StandardThemes: "Стандартные темы",
-        NoPhotosAdded: "Не добавлено фотографий",
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
+        Discover: "Обзор", // not translated
+        Blocked: "Заблокированно", // not translated
+        Advanced: "Дополнительно", // not translated
+        General: "Общий", // not translated
+        AllItems: "Все инструменты", // not translated
+        FreeShipping: "Бесплатная доставка", // not translated
+        DomesticShippingPrice: "Бесплатная доставка внутри страны", // not translated
+        InternationalShippingPrice: "Международные цены доставки", // not translated
+        MinimumIs: "Минимум", // not translated
+        Visibility: "Видимость", // not translated
+        Title: "Название", // not translated
+        DigitalItem: "Цифровой товар", // not translated
+        PhysicalItem: "Физический товар", // not translated
+        DomesticShippingTime: "Внутреннее время доставки", // not translated
+        InternationalShippingTime: "Международное время доставки", // not translated
+        DisplayNSFWcontent: "Отображать NSFW контент?", // not translated
+        Basic: "Базовый", // not translated
+        Content: "Контент", // not translated
+        StandardThemes: "Стандартные темы", // not translated
+        NoPhotosAdded: "Не добавлено фотографий", // not translated
         transactions: {
-          SoldBy: "Продано",
-          PurchasedBy: "Куплено",
-          searchByOrder: "Искать по номеру заказа",
-          sortByStatusAll: "Все",
-          sortByStatus0: "Купленные",
-          sortByStatus1: "Оплачено (ожидание средств)",
-          sortByStatus2: "Подтверждено/Доставлено",
-          sortByStatus3: "Завершено (средства освобождены)",
-          sortByStatus4: "Оспорено",
-          OrderID: "Order ID",
-          OrderDate: "Дата ордера",
-          OrderStatus: "Статус ордера",
-          OrderStatus0: "Куплено (не оплачен)",
-          OrderStatus1: "Оплачено (ожидание средств)",
-          OrderStatus2: "Подтверждено/выслано",
-          OrderStatus3: "Завершено (средства освобождены)",
-          OrderStatus4: "Оспорено",
-          OrderTotal: "Всего заказов",
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          SoldBy: "Продано", // not translated
+          PurchasedBy: "Куплено", // not translated
+          searchByOrder: "Искать по номеру заказа", // not translated
+          sortByStatusAll: "Все", // not translated
+          sortByStatus0: "Купленные", // not translated
+          sortByStatus1: "Оплачено (ожидание средств)", // not translated
+          sortByStatus2: "Подтверждено/Доставлено", // not translated
+          sortByStatus3: "Завершено (средства освобождены)", // not translated
+          sortByStatus4: "Оспорено", // not translated
+          OrderID: "Order ID", // not translated
+          OrderDate: "Дата ордера", // not translated
+          OrderStatus: "Статус ордера", // not translated
+          OrderStatus0: "Куплено (не оплачен)", // not translated
+          OrderStatus1: "Оплачено (ожидание средств)", // not translated
+          OrderStatus2: "Подтверждено/выслано", // not translated
+          OrderStatus3: "Завершено (средства освобождены)", // not translated
+          OrderStatus4: "Оспорено", // not translated
+          OrderTotal: "Всего заказов" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -2696,7 +2280,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Со всех магазинов"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "Моя страница",
           customizePage:"Настроить страницу",
           sellItem:"Разместить товар",
@@ -2824,7 +2408,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
         SearchForUsersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 pracovných dní",
         EstDeliveryInternationalPlaceholder: "7-15 pracovných dní",
         OrderProcessingTimePlaceholder: "1-2 pracovné dni",
@@ -2896,10 +2480,12 @@ module.exports = Backbone.Model.extend({
         Select: "Select", //not translated
         Social: "Social", //not translated
         Theme: "Theme", //not translated
+        Listing: "Listing", //not translated
         Listings: "Listings", //not translated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
+        Reset: "Reset", //not translated
         Local: "Lokálne",
         Domestic: "Vnútroštátne",
         Location: "Lokalita",
@@ -2970,28 +2556,6 @@ module.exports = Backbone.Model.extend({
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3010,45 +2574,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -3087,7 +2613,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Zo všetkých obchodov"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "Moja stránka",
           customizePage:"Upraviť stránku",
           sellItem:"Nová položka",
@@ -3220,7 +2746,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Takma ad ya da GUID Ara",
         SearchForFollowersPlaceholder: "Takma ad ya da GUID Ara",
         SearchForUsersPlaceholder: "Takma ad ya da GUID Ara",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 İş Günü",
         EstDeliveryInternationalPlaceholder: "7-15 İş Günü",
         OrderProcessingTimePlaceholder: "Siparişin hazırlanması için gereken süreyi girin",
@@ -3364,31 +2890,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3407,45 +2912,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -3484,7 +2951,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Tüm mağazalardan"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "Sayfam",
           customizePage:"Sayfayı Özelleştir",
           sellItem:"Yeni",
@@ -3616,7 +3083,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForFollowersPlaceholder: "Ngaj pong nej ghap GUID",
         SearchForUsersPlaceholder: "Ngaj pong nej ghap GUID",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "Wej pagh vagh jaj malja'",
         EstDeliveryInternationalPlaceholder: "Soch pagh wa'maH 'ej vagh jaj malja'",
         OrderProcessingTimePlaceholder: "wa' pagh cha' jaj malja'",
@@ -3760,31 +3227,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3803,45 +3249,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -3880,7 +3288,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Vo' Hoch ngevwI'"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "JuHwIj",
           customizePage:"JuHwIj choH",
           sellItem:"Chu'",
@@ -4012,7 +3420,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "用 handle 或 GUID 查找",
         SearchForFollowersPlaceholder: "用 handle 或 GUID 查找",
         SearchForUsersPlaceholder: "用 handle 或 GUID 查找",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 个工作日",
         EstDeliveryInternationalPlaceholder: "7-15 工作日",
         OrderProcessingTimePlaceholder: "1-2 工作日",
@@ -4156,31 +3564,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4199,45 +3586,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -4276,7 +3625,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "所有点家里找"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "我的主页",
           customizePage:"个性化主页",
           sellItem:"新品",
@@ -4409,7 +3758,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForFollowersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
         SearchForUsersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 영업일",
         EstDeliveryInternationalPlaceholder: "7-15 영업일",
         OrderProcessingTimePlaceholder: "시간을 입력시에 주문서 필요",
@@ -4553,31 +3902,10 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
+        Basic: "Basic", // not translated
         Content: "Content", // not translated
         StandardThemes: "Standard themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4596,45 +3924,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "Order Total" // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -4673,7 +3963,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "모든 가게"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "내 페이지",
           customizePage:"사용자 페이지",
           sellItem:"새로운",
@@ -4802,7 +4092,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "GUID・ユーザ名で探す",
         SearchForFollowersPlaceholder: "GUID・ユーザ名で探す",
         SearchForUsersPlaceholder: "GUID・ユーザ名で探す",
-        SearchOnUserStorePlaceholder: "Type a title or #tag...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3〜5営業日以内",
         EstDeliveryInternationalPlaceholder: "7〜15営業日以内",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -4950,18 +4240,6 @@ module.exports = Backbone.Model.extend({
         Content: "コンテンツ設定",
         StandardThemes: "基本テーマ",
         NoPhotosAdded: "写真はありません",
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",
@@ -4980,45 +4258,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "確認完了・出荷済",
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "異議・クレーム",
-          OrderTotal: "注文合計",
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          OrderTotal: "注文合計"
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
@@ -5058,7 +4298,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "すべて"
         },
         nav: {
-          searchPlaceholder: "Type a handle, guid or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
           myPage: "マイページ",
           customizePage:"ページをカスタマイズ",
           sellItem:"出品する",
