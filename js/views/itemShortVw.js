@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     //pre-load image
     var self=this;
-    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'change:priceSet', this.render);
     //this.userID = this.model.get('guid');
     //if price has already been set, render
     if(this.model.get('priceSet') !== 0){
@@ -45,7 +45,7 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      self.$el.append(loadedTemplate(self.model.toJSON()));
     });
     return this;
   },

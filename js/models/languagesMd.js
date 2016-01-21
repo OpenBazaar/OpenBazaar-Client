@@ -257,6 +257,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "Disputed",
           OrderTotal: "Order Total",
+          OrderTotalInBTC: "BTC Total",
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
           ConfirmOrder: "Confirm this Order",
@@ -642,6 +643,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -1034,6 +1036,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -1431,6 +1434,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completato (fondi rilasciati)",
           OrderStatus4: "Contestato",
           OrderTotal: "Totale ordine",
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -1828,6 +1832,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Terminé (fonds reçus)",
           OrderStatus4: "Contesté",
           OrderTotal: "Total de la commande",
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -2221,6 +2226,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -2614,6 +2620,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Завершено (средства освобождены)",
           OrderStatus4: "Оспорено",
           OrderTotal: "Всего заказов",
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -3004,6 +3011,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -3400,6 +3408,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -3795,6 +3804,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -4190,6 +4200,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -4586,6 +4597,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
           OrderTotal: "Order Total", // not translated
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated
@@ -4969,6 +4981,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "異議・クレーム",
           OrderTotal: "注文合計",
+          OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm this Order", // not translated

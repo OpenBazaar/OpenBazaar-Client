@@ -53,7 +53,6 @@ module.exports = Backbone.Router.extend({
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     //clear address bar. This will be replaced on the user page
-    console.log("router set address bar ")
     addressBarText = addressBarText || "";
     window.obEventBus.trigger("setAddressBar", addressBarText);
   },
