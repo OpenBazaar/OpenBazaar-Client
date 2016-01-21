@@ -5,7 +5,8 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
-    //personListView = require('./userListVw'),
+    usersCl = require('../collections/usersCl.js'),
+    blockedUsersVw = require('./blockedUsersVw'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
@@ -112,7 +113,45 @@ module.exports = Backbone.View.extend({
       self.delegateEvents(); //delegate again for re-render
       self.setFormValues();
       self.setState(self.options.state);
-      //self.renderBlocked(self.model.get("user").blocked);
+      
+      // render blocked user tab
+      // self.blockedUsers = new usersCl(self.model.get('user').blocked);
+      self.blockedUsers = new usersCl(
+        [
+          'ef3a67d5849328ee14b0601889d7cce0e6b605fb',
+          'a9cb72595d6b9370c71054907df6eaa8f0634c40',
+          '3c2e8862cc95463637c2179c043b67662e47ab21'
+        ].map(function(guid) {
+          return { guid: guid }
+        })
+      );
+
+      self.blockedUsersVw = new blockedUsersVw({
+        collection: self.blockedUsers
+      });
+
+      this.$('#blockedForm').append(
+        self.blockedUsersVw.render().el
+      );
+
+      self.blockedUsers.each(function(user) {
+
+        user.urlRoot = self.serverUrl + 'profile';
+        
+        // Monkey patching parse so the profile is not nested
+        // and therefore change events will be in play.
+        user.oldParse = user.parse;
+        user.parse = function (response) {
+          if (response.profile) {
+            return user.oldParse(response).profile;
+          } else {
+            return response;
+          }          
+        };
+
+        user.fetch({ data: { guid: user.get('guid')} });
+      });
+
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
         $preview: $('.js-settingsAvatarPreview'),
@@ -161,16 +200,6 @@ module.exports = Backbone.View.extend({
     });
     return this;
   },
-/* this is not how this should work
-  renderBlocked: function (model) {
-    "use strict";
-    this.blockedList = new personListView({model: model,
-                                           el: '.js-list1',
-                                           title: "No one blocked",
-                                           message: ""});
-    this.subViews.push(this.blockedList);
-  },
-  */
 
   setFormValues: function(){
     var self = this,
