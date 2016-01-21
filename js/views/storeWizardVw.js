@@ -93,6 +93,8 @@ module.exports = Backbone.View.extend({
     this.$el.find('#locationSelect').val(this.model.get('user').country);
     //activate tags plugin
     this.categoriesInput = new Taggle('categoriesInput', {
+      submitKeys: [188, 9, 13, 32],
+      preserveCase: true,
       saveOnBlur: true
     });
   },

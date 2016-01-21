@@ -482,13 +482,9 @@ module.exports = Backbone.View.extend({
   addressBarKeyup: function(e){
     "use strict";
     var barText = this.addressInput.val();
-    if(barText.length > 0){
-      //detect enter key
-      if (e.keyCode == 13){
-        this.addressBarProcess(barText);
-      } else {
-        this.closeStatusBar();
-      }
+    //detect enter key
+    if (e.keyCode == 13){
+      this.addressBarProcess(barText);
     } else {
       this.closeStatusBar();
     }
@@ -500,21 +496,29 @@ module.exports = Backbone.View.extend({
         handle = "",
         state = "",
         itemHash = "",
-        addressTextArray = addressBarText.split("/");
+        addressTextArray = addressBarText.replace(/ /g, "").split("/");
 
     state = addressTextArray[1] ? "/" + addressTextArray[1] : "";
     itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
 
     if(addressTextArray[0].charAt(0) == "@"){
+      // user entered a handle
       handle = addressTextArray[0];
       this.showStatusBar('Navigation by handle is not supported yet.');
+    } else if(!addressTextArray[0].length){
+      // user trying to go back to discover
+      Backbone.history.navigate('#home', {trigger:true});
     } else if(addressTextArray[0].length === 40){
+      // user entered a guid
       guid = addressTextArray[0];
       Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
+    } else if(addressTextArray[0].charAt(0) == "#"){
+      // user entered a search term
+      Backbone.history.navigate('#home/products/' + addressTextArray[0].replace('#', ''), {trigger:true});
     } else {
-      this.showStatusBar('This is not a valid user GUID or handle.');
+      //user entered text that doesn't match a known pattern, assume it's a product search
+      Backbone.history.navigate('#home/products/' + addressTextArray[0], {trigger:true});
     }
-
   },
 
   showStatusBar: function(msgText){
