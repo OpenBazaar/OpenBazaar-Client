@@ -351,7 +351,7 @@ module.exports = Backbone.View.extend({
 
     if(e.keyCode == 13){
       this.searchItems(targetText);
-      addressText = addressText ? "#" + addressText : "";
+      addressText = addressText ? "#" + addressText.replace(/\s+/g, '') : "";
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", addressText);
     }
