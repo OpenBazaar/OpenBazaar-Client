@@ -48,6 +48,7 @@ module.exports = Backbone.View.extend({
     'keypress .js-accordionPrev': 'accPrevKeypress',
     'click .js-homeModalDone': 'settingsDone',
     'keypress .js-homeModalDone': 'settingsDoneKeypress',
+    'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
@@ -479,6 +480,14 @@ module.exports = Backbone.View.extend({
     this.currentWindow.reload();
   },
 
+  addressBarFocus: function(e){
+    // on inital focus of input, select all text (this makes it easier to copy or delete the text)
+    $(this.$el).one('mouseup', function () {
+      $('#addressBar').select()
+      return false;
+    }).select();
+  },
+   
   addressBarKeyup: function(e){
     "use strict";
     var barText = this.addressInput.val();
