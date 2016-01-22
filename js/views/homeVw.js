@@ -332,7 +332,6 @@ module.exports = Backbone.View.extend({
   },
 
   unblockUserClick: function(e) {
-    console.log('unblock click');
     this.userModel.unblockUser(e.view.model.get('guid'));
   },  
 

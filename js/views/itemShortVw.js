@@ -22,7 +22,7 @@ module.exports = Backbone.View.extend({
     //pre-load image
     var self=this;
     this.parentEl = $(options.parentEl);
-    this.listenTo(this.model, 'change:priceSet', this.render);
+    this.listenTo(this.model, 'change', this.render);
     //this.userID = this.model.get('guid');
     //if price has already been set, render
     if(this.model.get('priceSet') !== 0){
