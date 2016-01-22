@@ -1,7 +1,7 @@
 var __ = require('underscore'),
   Backbone = require('backbone'),
-  getBTPrice = require('../utils/getBitcoinPrice'),
   convertToUserCurrency = require('../utils/convertToUserCurrency'),
+  getBTPrice = require('../utils/getBitcoinPrice'),
   countriesMd = require('./countriesMd');
 
 module.exports = window.Backbone.Model.extend({
@@ -108,70 +108,74 @@ module.exports = window.Backbone.Model.extend({
     response.bitcoinValidationRegex = this.bitcoinValidationRegex;
     response.transactionType = this.transactionType;
 
-    var convertTotal = function(){
-      if(self.userCurrencyCode != "BTC"){
-        response.displayTotalPrice = new Intl.NumberFormat(window.lang, {
-          style: 'currency',
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-          currency: self.userCurrencyCode
-        }).format(response.buyer_order.order.payment.amount*window.currentBitcoin);
-      }
-    };
+    //convert the currency
+    getBTPrice(response.vendor_offer.listing.item.price_per_unit.fiat.currency_code, function(btAve){
 
-    var convertShipping = function(btAve){
-      if (response.buyer_order.order.shipping.country == response.vendor_offer.listing.shipping.shipping_origin) {
-        response.shippingType = "Domestic Shipping";
-        if(response.vendor_offer.listing.shipping.flat_fee.fiat.price.domestic) {
-          convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.domestic,
-            btAve,
-            response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
-            self.userCurrencyCode,
-            function (price, priceBTC) {
-              response.displayShippingPrice = price;
-              response.displayShippingPriceBTC = priceBTC;
-              convertTotal();
-            });
-        } else {
-          convertTotal();
+      var convertTotal = function(){
+        if(self.userCurrencyCode != "BTC"){
+          response.displayTotalPrice = new Intl.NumberFormat(window.lang, {
+            style: 'currency',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            currency: self.userCurrencyCode
+          }).format(response.buyer_order.order.payment.amount*window.currentBitcoin);
         }
-      } else {
-        response.shippingType = "International Shipping";
-        if(response.vendor_offer.listing.shipping.flat_fee.fiat.price.international) {
-          convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.international,
-            response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
-            btAve,
-            self.userCurrencyCode,
-            function (price, priceBTC) {
-              response.displayShippingPrice = price;
-              response.displayShippingPriceBTC = priceBTC;
-              convertTotal();
-            });
-        } else {
-          convertTotal();
-        }
-      }
-    };
+      };
 
-    var convertUnit = function(btAve){
-      convertToUserCurrency(response.vendor_offer.listing.item.price_per_unit.fiat.price,
-        btAve,
-        response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
-        self.userCurrencyCode,
-        function(price, priceBTC){
-          response.displayUnitPrice = price;
-          response.displayUnitPriceBTC = priceBTC;
-          if (response.buyer_order.order.shipping) {
-            convertShipping(btAve);
+      var convertShipping = function(btAve){
+        if (response.buyer_order.order.shipping.country == response.vendor_offer.listing.shipping.shipping_origin) {
+          response.shippingType = "Domestic Shipping";
+          if(response.vendor_offer.listing.shipping.flat_fee.fiat.price.domestic) {
+            convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.domestic,
+                btAve,
+                response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
+                self.userCurrencyCode,
+                function (price, priceBTC) {
+                  response.displayShippingPrice = price;
+                  response.displayShippingPriceBTC = priceBTC;
+                  convertTotal();
+                });
           } else {
-            convertTotal(btAve);
+            convertTotal();
           }
-        });
-    };
+        } else {
+          response.shippingType = "International Shipping";
+          if(response.vendor_offer.listing.shipping.flat_fee.fiat.price.international) {
+            convertToUserCurrency(response.vendor_offer.listing.shipping.flat_fee.fiat.price.international,
+                response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
+                btAve,
+                self.userCurrencyCode,
+                function (price, priceBTC) {
+                  response.displayShippingPrice = price;
+                  response.displayShippingPriceBTC = priceBTC;
+                  convertTotal();
+                });
+          } else {
+            convertTotal();
+          }
+        }
+      };
 
-    convertUnit(this.userBTCAve);
+      var convertUnit = function(btAve){
+        convertToUserCurrency(response.vendor_offer.listing.item.price_per_unit.fiat.price,
+            btAve,
+            response.vendor_offer.listing.item.price_per_unit.fiat.currency_code,
+            self.userCurrencyCode,
+            function(price, priceBTC){
+              response.displayUnitPrice = price;
+              response.displayUnitPriceBTC = priceBTC;
+              if (response.buyer_order.order.shipping) {
+                convertShipping(btAve);
+              } else {
+                convertTotal(btAve);
+              }
+            });
+      };
 
-    return response;
+      convertUnit(btAve);
+
+      return response;
+    });
   },
 
   initialize: function(options){

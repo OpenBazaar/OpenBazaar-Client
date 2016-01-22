@@ -15,6 +15,7 @@ var __ = require('underscore'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
+    MediumEditor = require('medium-editor'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.View.extend({
@@ -169,6 +170,15 @@ module.exports = Backbone.View.extend({
       if(self.model.get('page').profile.header_hash){
         $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
       }
+
+      var editor = new MediumEditor('#about', {
+          placeholder: {
+            text: ''
+          },
+          toolbar: {
+            imageDragging: false
+          }
+      });
 
       self.socketView.getModerators(self.socketModeratorID);
     });

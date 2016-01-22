@@ -63,11 +63,20 @@
       <div class="table">
         <div>
           <div class="thumbnail thumbnail-large js-userPageAvatar"
-              <% if(ob.page.profile.avatar_hash) { %>
-              style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
-              <% } else { %>
-              style="background-image: url(imgs/defaultUser.png);">
-              <% } %>
+            <% if(ob.page.profile.avatar_hash) { %>
+            style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+            <% } else { %>
+            style="background-image: url(imgs/defaultUser.png);">
+            <% } %>
+
+            <% if(ob.ownPage) { %>
+              <a href="#settings/page" class="userPageEditBtn">
+                <div class="btn btn-txt custCol-secondary fontSize11 marginTop4 hCentered ">
+                  <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('Edit') %>
+                </div>
+              </a>
+            <%}%>
           </div>
           <div class="pad15 push-down5 noOverflow">
             <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%- ob.page.profile.name %></span>
@@ -172,9 +181,10 @@
       <span class="pill fontSize12 textOpacity75 marginLeft2 js-userFollowerCount">0</span>
     </a>
     <% if(ob.page.profile.vendor) { %>
-    <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab">
+    <a class="btn btn-bar btn-tab custCol-secondary js-storeTab js-tab paddingRight18">
       <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Store') %>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingCount">0</span>
     <% } %>
     </a>
   </div>
@@ -182,18 +192,26 @@
     <div class="flexContainer flex-border custCol-primary hide js-about js-tabTarg minHeight650">
       <div class="flexRow minHeight650">
         <div class="flexCol-8 custCol-border borderBottom0">
-          <div class="rowItem">
+          <div class="rowItem userPageAboutSection padding2520">
+            <% if(ob.ownPage) { %>
+              <a href="#settings/page">
+                <div class="btn btn-txt userPageEditBtn custCol-secondary fontSize12 js-editPage">
+                  <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                  <%= polyglot.t('Edit') %>
+                </div>
+              </a>
+            <%}%>
             <% if(ob.page.profile.about) { %>
-             <p><%- ob.page.profile.about %></p>
+             <p class="js-userAbout margin0"></p>
             <%}else{%>
               <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
             <%}%>
           </div>
         </div>
-        <div class="flexCol-4 flex-border border0">
+        <div class="flexCol-4 flex-border border0 userPageSocialAccounts">
           <div class="flexRow">
             <div class="flexRow borderBottom custCol-border">
-              <div class="rowItem">
+              <div class="rowItem positionRelative">
                 <div class="textOpacity75"><%= polyglot.t('Guid') %></div>
                 <div class="textSize12px">
                   <%- ob.page.profile.guid %>
@@ -201,9 +219,17 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem">
+              <div class="rowItem positionRelative">
                 <div class="textOpacity75"><%= polyglot.t('Website') %></div>
                 <div>
+                  <% if(ob.ownPage) { %>
+                    <a href="#settings/page" class="userPageEditBtn">
+                      <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                        <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                        <%= polyglot.t('Edit') %>
+                      </div>
+                    </a>
+                  <%}%>
                   <% if(ob.page.profile.website) { %>
                   <a href="<%- ob.page.profile.website %>" class="js-externalLink"><%- ob.page.profile.website %></a>
                   <%}else{%>
@@ -213,9 +239,17 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem">
+              <div class="rowItem positionRelative">
                 <div class="textOpacity75"><%= polyglot.t('Email') %></div>
                 <div>
+                  <% if(ob.ownPage) { %>
+                    <a href="#settings/page" class="userPageEditBtn">
+                      <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                        <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                        <%= polyglot.t('Edit') %>
+                      </div>
+                    </a>
+                  <%}%>
                   <% if(ob.page.profile.email) { %>
                   <a href="mailto:<%- ob.page.profile.email %>"><%- ob.page.profile.email %></a>
                   <%}else{%>
@@ -225,7 +259,15 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem">
+              <div class="rowItem positionRelative">
+                <% if(ob.ownPage) { %>
+                  <a href="#settings/page" class="userPageEditBtn">
+                    <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Edit') %>
+                    </div>
+                  </a>
+                <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
@@ -237,7 +279,15 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem">
+              <div class="rowItem positionRelative">
+                <% if(ob.ownPage) { %>
+                  <a href="#settings/page" class="userPageEditBtn">
+                    <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Edit') %>
+                    </div>
+                  </a>
+                <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
@@ -249,7 +299,15 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem">
+              <div class="rowItem positionRelative">
+                <% if(ob.ownPage) { %>
+                  <a href="#settings/page" class="userPageEditBtn">
+                    <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Edit') %>
+                    </div>
+                  </a>
+                <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
@@ -261,7 +319,15 @@
               </div>
             </div>
             <div class="flexRow borderBottom custCol-border">
-              <div class="rowItem">
+              <div class="rowItem positionRelative">
+                <% if(ob.ownPage) { %>
+                  <a href="#settings/page" class="userPageEditBtn">
+                    <div class="btn btn-txt custCol-secondary">
+                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Edit') %>
+                    </div>
+                  </a>
+                <%}%>
                 <div class="textOpacity75"><%= polyglot.t('PGPKey') %></div>
                 <div>
                   <%= polyglot.t('NotProvided') %>
@@ -316,7 +382,7 @@
       <div class="flexRow positionRelative">
         <div class="flexRow custCol-border">
           <div class="txtFieldWrapper searchWrapper searchWrapperWithPill">
-            <input type="text" id="inputStore" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>"  />
+            <input type="text" id="inputStore" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchOnUserStorePlaceholder') %>"  />
           </div>
         </div>
         <div class="selectPill positionAbsolute left0 top11">

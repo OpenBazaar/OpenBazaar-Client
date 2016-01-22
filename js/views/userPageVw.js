@@ -15,6 +15,7 @@ var __ = require('underscore'),
     itemEditVw = require('./itemEditVw'),
     showErrorModal = require('../utils/showErrorModal.js'),
     setTheme = require('../utils/setTheme.js'),
+    sanitizeHTML = require('sanitize-html'),
     storeWizardVw = require('./storeWizardVw');
 
 //create a default item because a new itemModel will be created with only flat attributes
@@ -129,7 +130,7 @@ module.exports = Backbone.View.extend({
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
     'click .js-editItem': 'editItem',
-    'click .js-deleteItem': 'deleteItem',
+    'click .js-deleteItem': 'deleteItemClick',
     'click .js-cancelItem': 'cancelClick',
     'click .js-saveItem': 'saveItem',
     'click .js-saveCustomization': 'saveCustomizePage',
@@ -216,6 +217,18 @@ module.exports = Backbone.View.extend({
 
     this.listenTo(window.obEventBus, "unfollowUser", function(guid){
       this.unfollowUser(guid);
+    });
+
+    this.listenTo(window.obEventBus, "itemShortEdit", function(options){
+      this.setItem(options.contract_hash, function(){
+        self.editItem();
+      });
+    });
+
+    this.listenTo(window.obEventBus, "itemShortDelete", function(options){
+      this.setItem(options.contract_hash, function(){
+        self.deleteItem();
+      });
     });
 
     //determine if this is the user's own page or another profile's page
@@ -330,7 +343,13 @@ module.exports = Backbone.View.extend({
         }
       });
 
+      var about = sanitizeHTML(self.model.get('page').profile.about, {
+        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+      });
+
+      $('.js-userAbout').html(about);
     });
+
     return this;
   },
 
@@ -591,6 +610,8 @@ module.exports = Backbone.View.extend({
     });
     this.subViews.push(this.itemList);
 
+    this.$('.js-listingCount').html(model.length);
+
     if (model.length) {
       new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
     }
@@ -641,7 +662,7 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  renderItem: function(hash){
+  setItem: function(hash, onSucceed){
     "use strict";
     var self = this;
     this.item = new itemModel({
@@ -660,7 +681,6 @@ module.exports = Backbone.View.extend({
     //remove old item before rendering
     if(this.itemView){
       this.itemView.undelegateEvents();
-      //this.itemView.remove();
     }
     this.itemView = new itemVw({model:this.item, el: '.js-list4', userModel: self.options.userModel, socketView: this.socketView});
     this.subViews.push(this.itemView);
@@ -674,19 +694,14 @@ module.exports = Backbone.View.extend({
       data: self.itemFetchParameters,
       timeout: 4000,
       success: function(model, response){
-        if(response.vendor_offer){
-          self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
-          //set id after fetch, otherwise Backbone includes it in the fetch url
-          model.set('id', hash);
-          if(self.options.ownPage === false){
-            model.set('imageExtension', "&guid="+model.get('vendor_offer').listing.id.guid);
-          }
-          //model may arrive empty, set this flag to trigger a change event
-          model.set({fetched: true});
-        } else {
-          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
-          window.history.back();
+        //set id after fetch, otherwise Backbone includes it in the fetch url
+        model.set('id', hash);
+        if (self.options.ownPage === false){
+          model.set('imageExtension', "&guid=" + model.get('vendor_offer').listing.id.guid);
         }
+        //model may arrive empty, set this flag to trigger a change event
+        model.set({fetched: true});
+        onSucceed(model, response);
       },
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
@@ -697,6 +712,20 @@ module.exports = Backbone.View.extend({
         }
       }
     });
+  },
+
+  renderItem: function(hash){
+    "use strict";
+    var self = this;
+    this.setItem(hash, function(model, response) {
+          if (response.vendor_offer){
+            self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
+          }else{
+            showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+            window.history.back();
+          }
+        }
+    );
   },
 
   renderItemEdit: function(model){
@@ -1107,6 +1136,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     if(newHash) {
       this.setState('item', newHash);
+      this.subRender();
     } else {
       this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
       this.addTabToHistory('store');
@@ -1127,11 +1157,16 @@ module.exports = Backbone.View.extend({
     this.lastTab = "itemOld";
   },
 
-  deleteItem: function(){
+  deleteItemClick: function(){
+    "use strict";
+    this.deleteItem(true);
+  },
+
+  deleteItem: function(confirm){
     "use strict";
     var self=this;
 
-    if(this.confirmDelete === false){
+    if(this.confirmDelete === false && confirm){
       this.$el.find('.js-deleteItem').addClass('confirm');
       this.confirmDelete = true;
     } else {

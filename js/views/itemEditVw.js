@@ -6,6 +6,7 @@ Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
+    MediumEditor = require('medium-editor'),
     showErrorModal = require('../utils/showErrorModal'),
     chosen = require('../utils/chosen.jquery.min.js');
 
@@ -60,6 +61,29 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.setFormValues();
+
+      // prevent the body from picking up drag actions
+      //TODO: make these nice backbone events
+      $(document.body).bind("dragover", function(e) {
+        e.preventDefault();
+        return false;
+      });
+
+      $(document.body).bind("drop", function(e){
+        e.preventDefault();
+        return false;
+      });
+
+      var editor = new MediumEditor('#inputDescription', {
+          placeholder: {
+            text: ''
+          },
+          toolbar: {
+            imageDragging: false,
+            sticky: true
+          }
+      });
+
     });
     return this;
   },
@@ -107,6 +131,8 @@ module.exports = Backbone.View.extend({
     window.setTimeout(function(){
       self.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
+        preserveCase: true,
+        submitKeys: [188, 9, 13, 32],
         saveOnBlur: true
       });
     },1);

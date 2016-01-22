@@ -21,15 +21,15 @@
             </div>
             <div class="marginLeft15 marginRight15 rowTop10">
               <% if(ob.vendor){ %>
-              <%= polyglot.t('transactions.SoldBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.vendor %>" title="<%- ob.vendor %>"><%- ob.vendor %></a>
+              <%= polyglot.t('transactions.SoldBy') %> <%- ob.vendor %>
               <% } else if(ob.buyer) { %>
-              <%= polyglot.t('transactions.PurchasedBy') %> <a class="textSize14px txt-fade js-userShort" href="#userPage/<%- ob.buyer %>" title="<%- ob.buyer %>"><%- ob.buyer %></a>
+              <%= polyglot.t('transactions.PurchasedBy') %> <%- ob.buyer %>
               <% } %>
             </div>
             <div class="marginLeft15 marginRight15 marginTop2">
               <div class="fontSize14 txt-fade textWeightNormal txtRow2 clamp2">
                 <% if(ob.description) { %>
-                  <%- ob.description %>
+                  <%= ob.description %>
                 <% } else { %>
                   <%= polyglot.t('NoDescriptionAdded') %>
                 <% } %>
@@ -55,6 +55,12 @@
                 <div><%= polyglot.t('transactions.OrderTotal') %></div>
                 <div class="noOverflow"><strong><%- ob.displayPrice %></strong></div>
               </div>
+              <% if(ob.cCode != "BTC"){ %>
+              <div>
+                <div><%= polyglot.t('transactions.OrderTotalInBTC') %></div>
+                <div class="noOverflow"><strong><%- ob.btc_total.toFixed(4) %></strong></div>
+              </div>
+              <% } %>
               <div>
                 <% if(ob.transactionType == "purchase" && ob.status == 0){ %>
                 <div class="marginLeft15 marginRight15 rowTop10">

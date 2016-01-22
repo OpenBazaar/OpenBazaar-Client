@@ -218,11 +218,12 @@
                   <% if(ob.userCurrencyCode == "BTC"){ %>
                   min="0.0001"
                   <% } else { %>
-                  min="0.01"<% } %>
+                  min="<% print((window.currentBitcoin * 0.0005).toFixed(2)) %>"
+                  <% } %>
                 >
               </div>
               <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
+                <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0001 :  (window.currentBitcoin * 0.0005).toFixed(2) %></span>
               </div>
             </div>
             <div class="flexRow custCol-border js-inputParent js-shippingPriceRow">
@@ -237,11 +238,12 @@
                   <% if(ob.userCurrencyCode == "BTC"){ %>
                   min="0.0001"
                   <% } else { %>
-                  min="0.01"<% } %>
+                  min="<% print((window.currentBitcoin * 0.0005).toFixed(2)) %>"
+                  <% } %>
                 >
               </div>
               <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder"><% if(ob.userCurrencyCode == "BTC"){ %>Minimum is 0.0001<% } %></span>
+                <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0001 :  (window.currentBitcoin * 0.0005).toFixed(2) %></span>
               </div>
             </div>
             <div class="flexRow custCol-border js-shippingRow">
@@ -306,12 +308,12 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-4  borderRight custCol-border">
+            <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputCategory"><%= polyglot.t('Category') %></label>
               </div>
             </div>
-            <div class="flexCol-8">
+            <div class="flexCol-9">
               <input name="category" type="text" id="inputCategory" placeholder="<%= polyglot.t('CategoryPlaceholder') %>" class="fieldItem custCol-text" value="<%- ob.vendor_offer.listing.item.category %>">
             </div>
           </div>
@@ -328,12 +330,12 @@
             </div>
           </div>
           <div class="flexRow custCol-border">
-            <div class="flexCol-4  borderRight custCol-border">
+            <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
-                <label><%= polyglot.t('Keywords') %></label>
+                <label><%= polyglot.t('Tags') %></label>
               </div>
             </div>
-            <div class="flexCol-8">
+            <div class="flexCol-9">
               <div class="fieldItem padding015" id="inputKeyword"></div>
             </div>
           </div>

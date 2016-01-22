@@ -35,7 +35,6 @@ module.exports = Backbone.View.extend({
   initialize: function (options) {
     "use strict";
     var self = this;
-    console.log("new modal");
 
     this.orderID = options.orderID;
     this.status = options.status;
@@ -85,7 +84,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     response.status = this.status;
-    console.log(response);
+    //console.log(response);
     $('.js-loadingModal').addClass("hide");
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
@@ -137,7 +136,6 @@ module.exports = Backbone.View.extend({
     if(!state){
       state = "summary";
     }
-    console.log(state);
     this.$el.find('.js-main').addClass('hide');
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
