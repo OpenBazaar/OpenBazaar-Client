@@ -86,9 +86,7 @@ module.exports = Backbone.View.extend({
     this.notifcationSound = document.createElement('audio');
     this.notifcationSound.setAttribute('src', './audio/notification.mp3');
 
-    this.render();
-
-    // pre-select lauguage and scroll it to the top.
+    // pre-select lauguage.
     var localLanguage = window.navigator.language;
     var localLanguageFound = false;
     var languageList = this.languages.get('languages');
@@ -98,12 +96,11 @@ module.exports = Backbone.View.extend({
         break;
       }
     }
-    if(localLanguageFound == true) {
-      this.model.set('language', localLanguage);
-    }
-    else { // If local language is not defined, use en-US as default.
-      this.model.set('language', "en-US");
-    }
+    localLanguage = localLanguageFound ? localLanguage : "en-US";
+    this.model.set('language', localLanguage);
+    this.createTranslation(localLanguage);
+
+    this.render();
   },
 
   handleSocketMessage: function(response) {
@@ -141,23 +138,14 @@ module.exports = Backbone.View.extend({
       var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
       var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
       self.initAccordion('.js-profileAccordion');
-
-      // pre-select local timezone and scroll it to the top.
-      var offset = new Date().getTimezoneOffset();
-      offset = '(GMT ' + (offset < 0 ? '+' : '-') + parseInt(Math.abs(offset/60)) + ':00)';
-      var currentTimezone = $("[id*='" + offset + "']");
-      currentTimezone.prop('checked', true);
+      // Scroll selected options to the top
+      var checkedInput = $('.js-homeModal-listParent').find('input:checked').each(function(){
+        var checkedInputScrollParent = $(this).closest('ul');
+        var checkedInputPosition = $(this).closest('li').position().top;
+        var checkedInputOffset = checkedInputScrollParent.position().top;
+        checkedInputScrollParent.scrollTop(checkedInputPosition - checkedInputOffset);
+      });
     }
-
-    // Scroll the selected language to the top
-    $('.js-homeModal-languageSelect').find('input').each(function () {
-      if($(this).attr("checked") == 'checked' && $(this).attr("name") == window.navigator.language) {
-        var selectedLanguagePosition = $(this).parent().parent().position().top;
-        var offset = $('.js-homeModal-languageList').find('ul').position().top;
-        $('.js-homeModal-languageList').find('ul').scrollTop(selectedLanguagePosition - offset);
-        return false;
-      }
-    });
   },
 
   initAccordion: function(targ){
@@ -221,7 +209,6 @@ module.exports = Backbone.View.extend({
         return cb(e);
     }
     return true;
- 
   },
 
   accNextKeypress: function(e) {
@@ -265,6 +252,11 @@ module.exports = Backbone.View.extend({
             modal.focus();
           }
         }, true);
+
+        // pre-select timezone
+        var timeZoneOffset = new Date().getTimezoneOffset();
+        timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
+        self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
 
         self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
         self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
@@ -319,13 +311,18 @@ module.exports = Backbone.View.extend({
 
       //when language is changed, re-render
       self.listenTo(self.model, 'change:language', function(){
-        var newLang = self.model.get("language");
-        window.polyglot = new Polyglot({locale: newLang});
-        window.polyglot.extend(__.where(self.languages.get('languages'), {langCode: newLang})[0]);
+        self.createTranslation(self.model.get("language"));
         self.render();
       });
     });
     return this;
+  },
+
+  createTranslation: function(newLang){
+    "use strict";
+    window.polyglot = new Polyglot({locale: newLang});
+    window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
+
   },
 
   showAboutModal: function(e){
@@ -368,7 +365,7 @@ module.exports = Backbone.View.extend({
     $('#obContainer').removeClass('blur');
   },
 
-  aboutModalTabClick: function(e){ 
+  aboutModalTabClick: function(e){
     var tab = $(e.currentTarget).data('tab');
     $('.js-aboutModal .btn-tab').removeClass('active');
     $(e.currentTarget).addClass('active');
@@ -578,7 +575,7 @@ module.exports = Backbone.View.extend({
 
   currencySelect: function(e){
     "use strict";
-    var targ = $(e.currentTarget); 
+    var targ = $(e.currentTarget);
     //var crcy = targ.attr('data-name');
     var ccode = targ.attr('data-code');
     $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
@@ -589,16 +586,13 @@ module.exports = Backbone.View.extend({
 
   languageSelect: function(e){
     "use strict";
-    var targ = $(e.currentTarget); 
-    var lang = targ.attr('data-code');
-    $('.js-homeModal-languageList').find('input[type=radio]').prop("checked", false);
-    targ.find('input[type=radio]').prop("checked", true);
+    var lang = $(e.currentTarget).attr('data-code');
     this.model.set('language', lang);
   },
 
   timeSelect: function(e){
     "use strict";
-    var inpt = $(e.target).closest('input[type=radio]'); 
+    var inpt = $(e.target).closest('input[type=radio]');
     var tz = inpt.val();
     $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
     inpt.prop("checked", true);
@@ -690,82 +684,82 @@ module.exports = Backbone.View.extend({
     }
 
 
-   var submit = function(img_hash) {
-            if(img_hash) {
-                profileFormData.append("avatar",img_hash);
-            }
+    var submit = function(img_hash) {
+      if(img_hash) {
+        profileFormData.append("avatar",img_hash);
+      }
 
+      $.ajax({
+        type: "POST",
+        url: server + "settings",
+        contentType: false,
+        processData: false,
+        data: settingsFormData,
+        dataType: "json",
+        success: function(data) {
+          if(data.success) {
             $.ajax({
-                type: "POST",
-                url: server + "settings",
-                contentType: false,
-                processData: false,
-                data: settingsFormData,
-                dataType: "json",
-                success: function(data) {
-                    if(data.success) {
-                        $.ajax({
-                            type: "POST",
-                            url: server + "profile",
-                            contentType: false,
-                            processData: false,
-                            data: profileFormData,
-                            dataType: "json",
-                            success: function(data) {
-                                 if(data.success == true) {
-                                   //self.currentWindow.reload();
-                                   Backbone.history.loadUrl(Backbone.history.fragment);
-                                   self.refreshProfile();
-                                 }
-                            },
-                            error: function(jqXHR, status, errorThrown){
-                                console.log(jqXHR);
-                                console.log(status);
-                                console.log(errorThrown);
-                            }
-                        });
-                    }
-                },
-                error: function(jqXHR, status, errorThrown){
-                    console.log(jqXHR);
-                    console.log(status);
-                    console.log(errorThrown);
+              type: "POST",
+              url: server + "profile",
+              contentType: false,
+              processData: false,
+              data: profileFormData,
+              dataType: "json",
+              success: function(data) {
+                if(data.success == true) {
+                  //self.currentWindow.reload();
+                  Backbone.history.loadUrl(Backbone.history.fragment);
+                  self.refreshProfile();
                 }
+              },
+              error: function(jqXHR, status, errorThrown){
+                console.log(jqXHR);
+                console.log(status);
+                console.log(errorThrown);
+              }
             });
-
-        };
-
-        //Lets upload the image first, if there is one
-        //to get the hash
-
-        if(imageURI) {
-            $.ajax({
-                type: "POST",
-                url: server + "upload_image",
-                contentType: false,
-                processData: false,
-                data: uploadImageFormData,
-                dataType: "JSON",
-                success: function(data) {
-                     var img_hash = data.image_hashes[0];
-                    if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
-                        submit(img_hash);
-                    }
-                },
-                error: function(jqXHR, status, errorThrown){
-                    console.log(jqXHR);
-                    console.log(status);
-                    console.log(errorThrown);
-                }
-            });
-
-        } else { //Otherwise lets just submit right away
-            submit();
+          }
+        },
+        error: function(jqXHR, status, errorThrown){
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
         }
+      });
+
+    };
+
+    //Lets upload the image first, if there is one
+    //to get the hash
+
+    if(imageURI) {
+      $.ajax({
+        type: "POST",
+        url: server + "upload_image",
+        contentType: false,
+        processData: false,
+        data: uploadImageFormData,
+        dataType: "JSON",
+        success: function(data) {
+          var img_hash = data.image_hashes[0];
+          if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
+            submit(img_hash);
+          }
+        },
+        error: function(jqXHR, status, errorThrown){
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
+        }
+      });
+
+    } else { //Otherwise lets just submit right away
+      submit();
+    }
     this.$el.find('.js-homeModal').hide();
 
     this.showDiscoverCallout = true;
-    
+
     new Notification(window.polyglot.t('WelcomeToYourPage'));
 
     // play notification sound
@@ -777,7 +771,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.triggerOnEnterSpace(e, this.settingsDone.bind(this));
   },
-    
+
   navAdminPanel: function(){
     "use strict";
     this.$el.find('.js-adminModal').fadeIn(300);
@@ -806,7 +800,7 @@ module.exports = Backbone.View.extend({
     // Needs to save to the object and update the dom
   },
 
-  shadeColor2: function shadeColor2(color, percent) {   
+  shadeColor2: function shadeColor2(color, percent) {
     var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
     return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
   },
