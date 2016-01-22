@@ -156,7 +156,8 @@ module.exports = Backbone.View.extend({
 
   renderItem: function(item){
     "use strict";
-    var self = this;
+    var self = this,
+        blocked;
     //get data from inside the listing object
     item = item.listing;
     item.userCurrencyCode = this.userModel.get('currency_code');
@@ -165,14 +166,22 @@ module.exports = Backbone.View.extend({
     item.showAvatar = true;
     item.userID = item.guid;
     item.discover = true;
+
     item.ownFollowing = false;
     if(this.ownFollowing.indexOf(item.guid) != -1){
       item.ownFollowing = true;
-    }    
+    }
+
+    blocked = this.userModel.get('blocked_guids') || [];    
+    item.isBlocked = blocked.indexOf(item.guid) !== -1;
 
     var newItem = function(){
       var newItemModel = new itemShortModel(item);
       var itemShort = new itemShortView({model: newItemModel});
+
+      self.listenTo(itemShort, 'blockUserClick', self.blockUserClick);
+      self.listenTo(itemShort, 'unblockUserClick', self.unblockUserClick);
+
       self.$el.find('.js-products .js-loadingSpinner').before(itemShort.el);
       self.subViews.push(itemShort);
     };
@@ -307,6 +316,15 @@ module.exports = Backbone.View.extend({
   unfollowUser: function(options){
     this._followUnfollowUser(false, options);
   },
+
+  blockUserClick: function(e) {
+    this.userModel.blockUser(e.view.model.get('guid'));
+  },
+
+  unblockUserClick: function(e) {
+    console.log('unblock click');
+    this.userModel.unblockUser(e.view.model.get('guid'));
+  },  
 
   scrollHandler: function(){
     "use strict";

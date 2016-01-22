@@ -39,9 +39,9 @@
             </div>
           <% } %>
 
-          <div class="btn-gridItemControl  custCol-border">
-            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Block') %>
+          <div class="btn-gridItemControl custCol-border <%= !ob.isBlocked ? 'js-blockUser' : 'js-unblockUser' %>">
+            <span class="<%= !ob.isBlocked ? 'ion-sad' : 'ion-happy' %> fontSize11 marginRight2 textOpacity1"></span>
+            <%= !ob.isBlocked ? polyglot.t('Block') : polyglot.t('Unblock') %>
           </div>
         <% } %>
 

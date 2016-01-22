@@ -8,22 +8,19 @@ module.exports = Backbone.View.extend({
   className: "flexRow borderBottom",
 
   events: {
+    'click .js-unblockUser': 'unblockUser'
   },
 
   initialize: function(){
     var self = this;
 
-    // this.listenTo(this.model, 'request', function() {
-    //   self.$el.addClass('fetching');
-    // });
-
-    // this.listenTo(this.model, 'sync error', function() {
-    //   self.$el.removeClass('fetching');
-    // });
-
     this.listenTo(this.model, 'change', function() {
       self.render();
-    });    
+    });
+  },
+
+  unblockUser: function(e) {
+    this.trigger('unblockUserClick', { originalEvent: e, view: this });
   },
 
   render: function(){

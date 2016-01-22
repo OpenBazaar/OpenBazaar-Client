@@ -9,7 +9,8 @@
                 <%= ob.name %>
               </a>
             </div>
-          <% } else if(ob.handle) { %>
+          <% } %>
+          <% if(ob.handle) { %>
             <div class="pull-left lineHeight21">
               <a class="textSize14px txt-fade" title="<%= ob.handle %>" href="<% print('#userPage/' + ob.guid + '/store') %>">
                 <%= ob.handle %>
@@ -17,9 +18,9 @@
             </div>
           <% }else{ %>
             <div class="noOverflow pull-left lineHeight21">
-              <a class="textSize14px txt-fade" title="<%= ob.guid %>" href="<% print('#userPage/' + ob.guid + '/store') %>">
+              <span class="textSize14px txt-fade" title="<%= ob.guid %>">
                 <%= ob.guid %>
-              </a>
+              </span>
             </div>
           <% } %>
         </div>
@@ -29,7 +30,7 @@
           <% } %>
         </div>
       </div>
-      <a href="#" class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-userShort">Unblock</a>
+      <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-unblockUser">Unblock</a>
     </div>
   </div>
 </div>

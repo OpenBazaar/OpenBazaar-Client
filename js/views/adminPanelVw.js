@@ -54,8 +54,6 @@ module.exports = Backbone.View.extend({
   updatePage: function() {
     "use strict";
     var self = this;
-    console.log('boom-bam-bizzle: ' + this.model.get('serverUrl'));
-    
     this.userProfile.urlRoot = this.model.get('serverUrl')+ "profile";
     this.userSettings.urlRoot = this.model.get('serverUrl') + "settings";
     this.userProfile.fetch({

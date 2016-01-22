@@ -197,6 +197,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover",
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated
         Blocked: "Blocked",
         Advanced: "Advanced",
         General: "General",

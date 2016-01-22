@@ -114,44 +114,18 @@ module.exports = Backbone.View.extend({
       self.setFormValues();
       self.setState(self.options.state);
       
-      // render blocked user tab
-      // self.blockedUsers = new usersCl(self.model.get('user').blocked);
-      self.blockedUsers = new usersCl(
-        [
-          'ef3a67d5849328ee14b0601889d7cce0e6b605fb',
-          'a9cb72595d6b9370c71054907df6eaa8f0634c40',
-          '3c2e8862cc95463637c2179c043b67662e47ab21'
-        ].map(function(guid) {
-          return { guid: guid }
-        })
-      );
-
-      self.blockedUsersVw = new blockedUsersVw({
-        collection: self.blockedUsers
-      });
-
-      this.$('#blockedForm').append(
-        self.blockedUsersVw.render().el
-      );
-
-      self.blockedUsers.each(function(user) {
-
-        user.urlRoot = self.serverUrl + 'profile';
-        
-        // Monkey patching parse so the profile is not nested
-        // and therefore change events will be in play.
-        user.oldParse = user.parse;
-        user.parse = function (response) {
-          if (response.profile) {
-            return user.oldParse(response).profile;
-          } else {
-            return response;
-          }          
-        };
-
-        user.fetch({ data: { guid: user.get('guid')} });
-      });
-
+      // Since the Blocked Users View kicks off many server calls (one
+      // for each blocked user) and since we are re-rendering the entire
+      // settings view often (after each save), we will cache the Blocked
+      // Users View. If for some reason, you really need to re-render it,
+      // call renderBlocked() explicitly after calling render().
+      if (!this.blockedRendered) {
+        self.renderBlocked();
+        self.blockedRendered = true;
+      } else {
+        self.$('#blockedForm').html(self.blockedUsersVw.el);
+      }
+      
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
         $preview: $('.js-settingsAvatarPreview'),
@@ -199,6 +173,44 @@ module.exports = Backbone.View.extend({
       self.socketView.getModerators(self.socketModeratorID);
     });
     return this;
+  },
+
+  renderBlocked: function() {
+    var self = this;
+
+    self.blockedUsers = new usersCl(
+      this.userModel.get('blocked_guids')
+        .map(function(guid) {
+          return { guid: guid }
+        })
+    );
+
+    this.blockedUsersVw = new blockedUsersVw({
+      model: this.userModel,
+      collection: self.blockedUsers,
+      serverUrl: self.serverUrl
+    });
+
+    this.$('#blockedForm').html(
+      self.blockedUsersVw.render().el
+    );
+
+    this.blockedUsers.each(function(user) {
+      user.urlRoot = self.serverUrl + 'profile';
+      
+      // Monkey patching parse so the profile is not nested
+      // and therefore change events will be in play.
+      user.oldParse = user.parse;
+      user.parse = function (response) {
+        if (response.profile) {
+          return user.oldParse(response).profile;
+        } else {
+          return response;
+        }          
+      };
+
+      user.fetch({ data: { guid: user.get('guid')} });
+    });
   },
 
   setFormValues: function(){
@@ -654,6 +666,7 @@ module.exports = Backbone.View.extend({
       }
     });
 
+    this.blockedUsersVw.remove();
     this.model.off();
     this.off();
     this.remove();
