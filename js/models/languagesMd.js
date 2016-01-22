@@ -7,7 +7,7 @@ module.exports = Backbone.Model.extend({
     languages: [
       {
         langName: "English",
-        langCode: "en",
+        langCode: "en-US",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Next",
         IAgree: "I Agree",
@@ -3959,7 +3959,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "中文",
-        langCode: "zh",
+        langCode: "zh-CN",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "下一步",
         IAgree: "我同意",
@@ -4754,7 +4754,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "日本語 (Japanese)",
-        langCode: "ja",
+        langCode: "ja-JP",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "次へ",
         IAgree: "同意する",
