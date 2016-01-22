@@ -9,7 +9,7 @@
         style="background-image: <% if(ob.avatar_hash && ob.avatarURL) { %> url(<%- ob.avatarURL %>), <% } %>url(imgs/defaultUser.png);"></div>
       <% } %>
       <div class="js-item pad8Left" data-id="<%- ob.contract_hash %>">
-        <div class="textSize14px noOverflow textOpacity1 js-searchTitle"><a><%- ob.title %></a></div>
+        <div class="textSize14px noOverflow textOpacity1 js-searchTitle"><%- ob.title %></div>
         <div class="textSize13px txt-fade textWeightNormal">
           <%- ob.displayPrice %>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
@@ -30,7 +30,7 @@
 
           <% if(!ob.micro && !ob.hideFollow){ %>
             <div class="btn-gridItemControl borderRight custCol-border js-userShortUnfollow <% if(!ob.ownFollowing){ %> hide <% } %>">
-              <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+              <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity1"></span>
               <%= polyglot.t('Unfollow') %>
             </div>
             <div class="btn-gridItemControl borderRight custCol-border js-userShortFollow <% if(ob.ownFollowing){ %> hide <% } %>">
@@ -46,11 +46,11 @@
         <% } %>
 
         <% if(ob.ownPage){ %>
-          <div class="btn-gridItemControl borderRight custCol-border js-editItem">
+          <div class="btn-gridItemControl borderRight custCol-border js-itemShortEdit">
             <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('Edit') %>
           </div>  
-          <div class="btn-gridItemControl borderRight custCol-border js-deleteItem">
+          <div class="btn-gridItemControl borderRight custCol-border js-itemShortDelete">
             <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('Delete') %>
           </div>           

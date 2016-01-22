@@ -48,6 +48,7 @@ module.exports = Backbone.View.extend({
     'keypress .js-accordionPrev': 'accPrevKeypress',
     'click .js-homeModalDone': 'settingsDone',
     'keypress .js-homeModalDone': 'settingsDoneKeypress',
+    'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
@@ -69,14 +70,6 @@ module.exports = Backbone.View.extend({
 
     this.currentWindow = remote.getCurrentWindow();
 
-    //when language is changed, re-render
-    this.listenTo(this.model, 'change:language', function(){
-      var newLang = this.model.get("language");
-      window.polyglot = new Polyglot({locale: newLang});
-      window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
-      this.render();
-    });
-
     this.socketNotificationID = Math.random().toString(36).slice(2);
     this.socketView.getNotifications(this.socketNotificationID);
 
@@ -94,6 +87,23 @@ module.exports = Backbone.View.extend({
     this.notifcationSound.setAttribute('src', './audio/notification.mp3');
 
     this.render();
+
+    // pre-select lauguage and scroll it to the top.
+    var localLanguage = window.navigator.language;
+    var localLanguageFound = false;
+    var languageList = this.languages.get('languages');
+    for(var i in languageList) {
+      if(languageList[i].langCode == localLanguage) {
+        localLanguageFound = true;
+        break;
+      }
+    }
+    if(localLanguageFound == true) {
+      this.model.set('language', localLanguage);
+    }
+    else { // If local language is not defined, use en-US as default.
+      this.model.set('language', "en-US");
+    }
   },
 
   handleSocketMessage: function(response) {
@@ -138,6 +148,16 @@ module.exports = Backbone.View.extend({
       var currentTimezone = $("[id*='" + offset + "']");
       currentTimezone.prop('checked', true);
     }
+
+    // Scroll the selected language to the top
+    $('.js-homeModal-languageSelect').find('input').each(function () {
+      if($(this).attr("checked") == 'checked' && $(this).attr("name") == window.navigator.language) {
+        var selectedLanguagePosition = $(this).parent().parent().position().top;
+        var offset = $('.js-homeModal-languageList').find('ul').position().top;
+        $('.js-homeModal-languageList').find('ul').scrollTop(selectedLanguagePosition - offset);
+        return false;
+      }
+    });
   },
 
   initAccordion: function(targ){
@@ -296,6 +316,14 @@ module.exports = Backbone.View.extend({
         // display discover callout
         self.$el.find('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
       }
+
+      //when language is changed, re-render
+      self.listenTo(self.model, 'change:language', function(){
+        var newLang = self.model.get("language");
+        window.polyglot = new Polyglot({locale: newLang});
+        window.polyglot.extend(__.where(self.languages.get('languages'), {langCode: newLang})[0]);
+        self.render();
+      });
     });
     return this;
   },
@@ -477,6 +505,13 @@ module.exports = Backbone.View.extend({
   navRefreshClick: function(){
     "use strict";
     this.currentWindow.reload();
+  },
+
+  addressBarFocus: function(e){
+    // on inital focus of input, select all text (this makes it easier to copy or delete the text)
+    $(e.target).one('mouseup', function () {
+      $('#addressBar').select();
+    });
   },
 
   addressBarKeyup: function(e){
