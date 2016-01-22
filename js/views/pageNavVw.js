@@ -101,23 +101,6 @@ module.exports = Backbone.View.extend({
     this.createTranslation(localLanguage);
 
     this.render();
-
-    // pre-select lauguage and scroll it to the top.
-    var localLanguage = window.navigator.language;
-    var localLanguageFound = false;
-    var languageList = this.languages.get('languages');
-    for(var i in languageList) {
-      if(languageList[i].langCode == localLanguage) {
-        localLanguageFound = true;
-        break;
-      }
-    }
-    if(localLanguageFound == true) {
-      this.model.set('language', localLanguage);
-    }
-    else { // If local language is not defined, use en-US as default.
-      this.model.set('language', "en-US");
-    }
   },
 
   handleSocketMessage: function(response) {
@@ -163,16 +146,6 @@ module.exports = Backbone.View.extend({
         checkedInputScrollParent.scrollTop(checkedInputPosition - checkedInputOffset);
       });
     }
-
-    // Scroll the selected language to the top
-    $('.js-homeModal-languageSelect').find('input').each(function () {
-      if($(this).attr("checked") == 'checked' && $(this).attr("name") == window.navigator.language) {
-        var selectedLanguagePosition = $(this).parent().parent().position().top;
-        var offset = $('.js-homeModal-languageList').find('ul').position().top;
-        $('.js-homeModal-languageList').find('ul').scrollTop(selectedLanguagePosition - offset);
-        return false;
-      }
-    });
   },
 
   initAccordion: function(targ){
@@ -613,10 +586,7 @@ module.exports = Backbone.View.extend({
 
   languageSelect: function(e){
     "use strict";
-    var targ = $(e.currentTarget);
-    var lang = targ.attr('data-code');
-    $('.js-homeModal-languageList').find('input[type=radio]').prop("checked", false);
-    targ.find('input[type=radio]').prop("checked", true);
+    var lang = $(e.currentTarget).attr('data-code');
     this.model.set('language', lang);
   },
 
