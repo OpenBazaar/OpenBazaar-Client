@@ -116,7 +116,7 @@ module.exports = Backbone.Model.extend({
         index,
         request;
 
-    blockedGuids = this.get('blocked_guids') || [];
+    blockedGuids = this.get('blocked_guids').slice(0) || [];
     index = blockedGuids.indexOf(guid);
 
     if (block && index === -1) {

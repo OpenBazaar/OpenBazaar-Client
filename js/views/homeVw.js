@@ -4,7 +4,6 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
-    itemListView = require('./itemListVw'),
     storeListView = require('./userListVw'),
     userProfileModel = require('../models/userProfileMd'),
     itemShortView = require('./itemShortVw'),
@@ -65,6 +64,9 @@ module.exports = Backbone.View.extend({
     });
 
     this.fetchOwnFollowing(this.render());
+
+    console.log('hippo');
+    window.hippo = this.userModel;
   },
 
   fetchOwnFollowing: function(callback){
@@ -107,11 +109,6 @@ module.exports = Backbone.View.extend({
     }, 4000);
   },
 
-  resetLookingCount: function(){
-    "use strict";
-    this.lookingCount = 0;
-  },
-
   hideList: function(){
     $('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
     $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
@@ -129,7 +126,6 @@ module.exports = Backbone.View.extend({
     } else if(data.id == this.socketSearchID) {
       this.renderItem(data);
     }
-    this.resetLookingCount();
   },
 
   render: function(){
@@ -186,12 +182,28 @@ module.exports = Backbone.View.extend({
     item.isBlocked = blocked.indexOf(item.guid) !== -1;
 
     var newItem = function(){
-      var newItemModel = new itemShortModel(item);
-      var itemShort = new itemShortView({model: newItemModel});
+      var newItemModel,
+          itemShort;
+
+      if (item.isBlocked) {
+        self.setListingsBlockedCount(self.getListingsBlockedCount() + 1);
+        return;
+      }
+
+      newItemModel = new itemShortModel(item);
+      itemShort = new itemShortView({model: newItemModel});
+
+      self.listenTo(newItemModel, 'change:isBlocked', function(model, changed, options) {
+        if (changed) {
+          itemShort.close();
+          self.setListingsBlockedCount(self.getListingsBlockedCount() + 1);
+        }
+      });
 
       self.listenTo(itemShort, 'blockUserClick', self.blockUserClick);
       self.listenTo(itemShort, 'unblockUserClick', self.unblockUserClick);
 
+      item.isBlocked && itemShort.$el.hide().addClass('blocked-user');
       self.$el.find('.js-products .js-loadingSpinner').before(itemShort.el);
       self.subViews.push(itemShort);
     };
@@ -202,7 +214,7 @@ module.exports = Backbone.View.extend({
       }
     } else {
       newItem();
-    }
+    }    
   },
 
   renderUser: function(user){
@@ -352,12 +364,13 @@ module.exports = Backbone.View.extend({
 
   clearItems: function(){
     "use strict";
-    this.$el.find('.js-products > *').not('.js-loadingSpinner').remove();
+    this.$el.find('.js-products > *').not('.js-loadingSpinner, .js-blocked-listings-count').remove();
+    this.setListingsBlockedCount(0);
   },
 
   clearUsers: function(){
     "use strict";
-    this.$el.find('.js-vendors > *').not('.js-loadingSpinner').remove();
+    this.$el.find('.js-vendors > *').not('.js-loadingSpinner, .js-blocked-listings-count').remove();
   },
 
   searchItemsKeyup: function(e){
@@ -419,6 +432,27 @@ module.exports = Backbone.View.extend({
     this.searchItemsText = "";
     this.$el.find('.js-homeSearchItems').val("");
     this.$el.find('.js-homeSearchItemsClear').addClass('hide');
+  },
+
+  // TODO move with other renders
+  setListingsBlockedCount: function(count) {
+    var text = '';
+
+    count = count || 0;
+    if (this.blockedItemCount === count) return;
+    this._blockedItemCount = count;
+    
+    if (count) {
+      text = count + ' blocked item' + (count !== 1 ? 's' : '') + ' not shown';
+    }
+
+    // todo TODO todo TODO: cache me
+    this.$('.homeGridItems .js-blocked-listings-count')
+      .text(text);
+  },
+
+  getListingsBlockedCount: function() {
+    return this._blockedItemCount || 0;
   },
 
   loadUsers: function(){

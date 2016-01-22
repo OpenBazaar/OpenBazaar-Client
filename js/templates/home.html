@@ -72,15 +72,18 @@
       <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
     </div>
   </div>
-  <div class="flexRow homeGridItems js-products color-primary minHeight650">
-    <div class="padding10 marginBottom12 width100 alignCenter js-loadingSpinner">
-      <div class="js-loadingMessage spinnerWrapper">
-        <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
-        <div class="textOpacity75 typeWeight400 marginTop6">
-          <span class="js-loadingText" data-default-text="<%= polyglot.t('discover.searchDefaultText') %>" data-searching-text="<%= polyglot.t('discover.searchingText') %>" data-no-results-text="<%= polyglot.t('discover.noResults') %>"><%= polyglot.t('discover.searchDefaultText') %></span>
-          <span class="js-discoverSearchKeyword btn-pill color-secondary hide"></span>
-        </div>
-      </div> 
+  <div class="homeGridItems">
+    <div class="js-blocked-listings-count color-primary width100"></div>
+    <div class="flexRow js-products color-primary minHeight650">
+      <div class="padding10 marginBottom12 width100 alignCenter js-loadingSpinner">
+        <div class="js-loadingMessage spinnerWrapper">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+          <div class="textOpacity75 typeWeight400 marginTop6">
+            <span class="js-loadingText" data-default-text="<%= polyglot.t('discover.searchDefaultText') %>" data-searching-text="<%= polyglot.t('discover.searchingText') %>" data-no-results-text="<%= polyglot.t('discover.noResults') %>"><%= polyglot.t('discover.searchDefaultText') %></span>
+            <span class="js-discoverSearchKeyword btn-pill color-secondary hide"></span>
+          </div>
+        </div> 
+      </div>
     </div>
   </div>
   <div class="js-feed minHeight650 rowTop30 hide alignCenter fontSize14">

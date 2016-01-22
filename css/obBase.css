@@ -4846,3 +4846,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0.2;
   pointer-events: none;
 }
+
+/*========== Discover > Listings ==========*/
+.homeGridItems .blocked-user {
+  display: none;
+}
