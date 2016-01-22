@@ -199,8 +199,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases",
         Enter: "Enter", //notTranslated
         Discover: "Discover",
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated
+        Block: "Block",
+        Unblock: "Unblock",
         Blocked: "Blocked",
         Advanced: "Advanced",
         General: "General",
@@ -587,6 +587,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -981,6 +983,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -1380,6 +1384,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cause",
         Enter: "Enter", //notTranslated
         Discover: "Trova",
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Bloccato",
         Advanced: "Avanzato",
         General: "Generale",
@@ -1778,6 +1784,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cas",
         Enter: "Entrer",
         Discover: "Découvrir",
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Bloqué",
         Advanced: "Avancé",
         General: "Général",
@@ -2172,6 +2180,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2566,6 +2576,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Кейсы",
         Enter: "Enter",
         Discover: "Обзор",
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Заблокированно",
         Advanced: "Дополнительно",
         General: "Общий",
@@ -2959,6 +2971,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3358,6 +3372,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3755,6 +3771,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4152,6 +4170,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4550,6 +4570,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4944,6 +4966,8 @@ module.exports = Backbone.Model.extend({
         Cases: "事例",
         Enter: "Enter", //notTranslated
         Discover: "ピックアップ",
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "ブロック",
         Advanced: "詳細設定",
         General: "一般設定",
