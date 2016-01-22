@@ -17,3 +17,5 @@ npm-debug.log
 
 .idea/jsLinters/eslint.xml
 .idea/encodings.xml
+
+.DS_Store

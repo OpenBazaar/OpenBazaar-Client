@@ -5,16 +5,18 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  className: "flexCol-12 flex-border js-tabTarg js-blocked",
+  className: "",
 
   events: {
   },
 
   initialize: function(options) {
+    var self = this;
+
     this.options = options || {};
     this.subViews = [];
 
-    this.listenTo(window.obEventBus, 'unblockingUser', function(e){
+    this.listenTo(window.obEventBus, 'unblockingUser', function(e) {
       var self = this,
           view;
 
@@ -23,7 +25,29 @@ module.exports = Backbone.View.extend({
       })) {
         self.removeSubView(view);
       }
-    });        
+    });
+
+    this.listenTo(this.collection, 'update', function(collection, options) {
+      if (options.add) {
+        __.each(collection.models.slice(self.subViews.length), function(user) {
+          self.renderNewUserView(user);
+        });
+      }
+    });
+  },
+
+  renderNewUserView: function(model) {
+    var view;
+
+    if (!model) return;
+
+    view = new blockedUserVw({
+      model: model
+    });
+
+    this.listenTo(view, 'unblockUserClick', this.unblockUserClick);
+    this.subViews.push(view);
+    this.$el.append(view.render().el);
   },
 
   render: function(){
@@ -33,13 +57,7 @@ module.exports = Backbone.View.extend({
     this.$el.empty();
 
     this.collection.each(function(user) {
-      var view = new blockedUserVw({
-          model: user
-        });
-
-      self.listenTo(view, 'unblockUserClick', self.unblockUserClick);
-      self.subViews.push(view);
-      self.$el.append(view.render().el);
+      self.renderNewUserView(user);
     });
 
     return this;
@@ -50,7 +68,11 @@ module.exports = Backbone.View.extend({
   },
 
   clearSubViews: function() {
+    __.each(this.subViews, function(view) {
+      view.close();
+    });
 
+    this.subViews = [];
   },
 
   removeSubView: function(view) {
