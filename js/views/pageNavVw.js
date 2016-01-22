@@ -338,7 +338,6 @@ module.exports = Backbone.View.extend({
 
       //when language is changed, re-render
       self.listenTo(self.model, 'change:language', function(){
-        console.log("language listener fired, lang= "+self.model.get("language"));
         self.createTranslation(self.model.get("language"));
         self.render();
       });
