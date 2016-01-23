@@ -111,6 +111,7 @@ module.exports = Backbone.Model.extend({
   },
 
   _blockUnblockUser: function(block, guid) {
+    console.log('user model has got a blocking request');
     var self = this,
         blockedGuids,
         index,

@@ -64,9 +64,6 @@ module.exports = Backbone.View.extend({
     });
 
     this.fetchOwnFollowing(this.render());
-
-    console.log('hippo');
-    window.hippo = this.userModel;
   },
 
   fetchOwnFollowing: function(callback){
@@ -182,6 +179,7 @@ module.exports = Backbone.View.extend({
     item.isBlocked = blocked.indexOf(item.guid) !== -1;
 
     var newItem = function(){
+      console.log('new item yall');
       var newItemModel,
           itemShort;
 
@@ -193,8 +191,11 @@ module.exports = Backbone.View.extend({
       newItemModel = new itemShortModel(item);
       itemShort = new itemShortView({model: newItemModel});
 
-      self.listenTo(newItemModel, 'change:isBlocked', function(model, changed, options) {
-        if (changed) {
+      self.listenTo(newItemModel, 'change:isBlocked', function(model, isBlocked, options) {
+        console.log('change is:blocked');
+        window.moo = window.moo || [];
+        window.moo.push(model);
+        if (isBlocked) {
           itemShort.close();
           self.setListingsBlockedCount(self.getListingsBlockedCount() + 1);
         }

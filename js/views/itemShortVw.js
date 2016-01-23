@@ -50,6 +50,7 @@ module.exports = Backbone.View.extend({
         return;
       }
 
+      console.log('item short view block');
       this.model.set('isBlocked', true);
     });
 
