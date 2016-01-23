@@ -73,7 +73,7 @@ module.exports = Backbone.View.extend({
     $.ajax({
       url: self.userModel.get('serverUrl') + "get_following",
       dataType: "json",
-      timeout: 3000
+      timeout: 4000
     }).done(function(ownFollowingData){
       self.ownFollowing = ownFollowingData.following || [];
       self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -165,6 +165,7 @@ module.exports = Backbone.View.extend({
     item.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+item.avatar_hash+"&guid="+item.guid;
     item.showAvatar = true;
     item.userID = item.guid;
+    item.discover = true;
 
     var newItem = function(){
       var newItemModel = new itemShortModel(item);

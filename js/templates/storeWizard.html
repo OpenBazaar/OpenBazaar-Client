@@ -77,8 +77,8 @@
                 </div>
                 <div class="flexCol-8">
                   <div class="fieldItem">
-                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel">Yes</label>
-                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel">No</label>
+                    <input type="radio" class="fieldItem" id="nsfwTrue" name="nsfw" value="true" /><label for="nsfwTrue" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                    <input type="radio" class="fieldItem" id="nsfwFalse" name="nsfw" value="false" checked/><label for="nsfwFalse" class="radioLabel"><%= polyglot.t('No') %></label>
                   </div>
                 </div>
               </div>
@@ -97,13 +97,13 @@
         </div>
         <div class="accordion-child  custCol-text">
           <div class="bar barTxt h6 custCol-secondary">
-            <%= polyglot.t('Store') %> <%= polyglot.t('Moderators') %> (<%= polyglot.t('Optional') %>)
+            <%= polyglot.t('StoreModeratorsOptional') %>
             <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 2</span>
           </div>
           <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary customThemeScrollbar">
             <div class="flexRow">
               <div class="txtFieldWrapper txtFieldWrapper-bar searchWrapper custCol-primary custCol-border">
-                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Search') %> <%= polyglot.t('for') %> <%= polyglot.t('moderators') %>" />
+                <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('Searchformoderators') %>" />
               </div>
             </div>
             <div class="flexRow js-storeWizardModeratorList">
@@ -116,7 +116,7 @@
             </a>
             <a class="btn btn-bar btn-half js-storeWizardSave custCol-border-primary borderBottomRightRaidus3 custCol-secondary">
               <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
-              <%= polyglot.t('Finished') %>
+              <%= polyglot.t('onboarding.Finished') %>
             </a>
           </div>
         </div>

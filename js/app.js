@@ -80,6 +80,16 @@ $(window).bind('hashchange', function(){
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
+//prevent dragging a file to the window from loading that file
+window.addEventListener("dragover",function(e){
+  e = e || event;
+  e.preventDefault();
+},false);
+window.addEventListener("drop",function(e){
+  e = e || event;
+  e.preventDefault();
+},false);
+
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
   getBTPrice(cCode, function (btAve, currencyList) {
@@ -136,7 +146,7 @@ var loadProfile = function() {
 
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
-    timeout: 5000,
+    timeout: 4000,
     success: function (model, response) {
       $('.js-loadingModal').addClass('hide');
       "use strict";
@@ -159,7 +169,6 @@ var loadProfile = function() {
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
               newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
               Backbone.history.start();
-
             });
 
             //every 15 minutes update the bitcoin price for the currently selected currency

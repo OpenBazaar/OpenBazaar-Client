@@ -233,7 +233,7 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
-      timeout: 30000,
+      timeout: 4000,
       success: function(model, response){
         //don't render if view has been closed and the $el has been deleted
         if(self.$el){
@@ -510,7 +510,7 @@ module.exports = Backbone.View.extend({
           $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
-            timeout: 3000
+            timeout: 4000
           }).done(function(ownFollowingData){
             self.ownFollowing = ownFollowingData.following || [];
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -565,6 +565,7 @@ module.exports = Backbone.View.extend({
       arrayItem.avatar_hash = self.model.get('page').profile.avatar_hash;
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
+      arrayItem.ownPage = self.options.ownPage;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         var opt = document.createElement('option');
         opt.value = arrayItem.category;
@@ -668,7 +669,7 @@ module.exports = Backbone.View.extend({
     }
     this.item.fetch({
       data: self.itemFetchParameters,
-      timeout: 5000,
+      timeout: 4000,
       success: function(model, response){
         if(response.vendor_offer){
           self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
