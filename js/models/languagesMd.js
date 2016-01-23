@@ -241,6 +241,15 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
+        moderatorSettings: {
+          ProvideResolution: "Provide dispute resolution",
+          ServiceFee: "Service fee",
+          ServiceFeePlaceholder: "Percentage of transaction price",
+          MinimumFee: "Minimum fee",
+          MinimumFeePlaceholder: "Minimum price for your services",
+          PaymentAddress: "Bitcoin Address",
+          PaymentAddressPlaceholder: "Your payments are sent to this address"
+        },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
         transactions: {
