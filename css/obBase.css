@@ -4840,7 +4840,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-align: center;
 }
 
-
 /* terrible hack, TODO: remove before production */
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {

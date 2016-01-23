@@ -2,7 +2,8 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     Polyglot = require('node-polyglot'),
     languagesModel = require('../models/languagesMd'),
-    countriesMd = require('./countriesMd');
+    countriesMd = require('./countriesMd'),
+    saveToAPI = require('../utils/saveToAPI');
 
 module.exports = Backbone.Model.extend({
 
@@ -22,11 +23,12 @@ module.exports = Backbone.Model.extend({
     currency_code: "BTC", //may either be “btc” or a currency from this list. (formatted string)
     country: "UNITED_STATES", //the location of the user. must be a formatted string from this list. (formatted string)
 
-    language: "en", //user�s prefered language (string)
+    language: "en-US", //user�s prefered language (string)
     time_zone: "", //the user�s time zone (string)
     notifications: true, //display notifications (�True� or �False�)
     shipping_addresses: [], //array of addresses
     blocked: [], //a list of guids to block (LIST of 40 character hex strings)
+    blocked_guids: [], // the same as blocked. The API returns blocked_guids, but expects blocked.
     libbitcoin_server: "", //the server address (url string)
     ssl: true, //use ssl on the openbazaar server (�True� or �False�)
     serverUrl: "http://localhost:18469/api/v1/", //set from localStorage
@@ -80,11 +82,10 @@ module.exports = Backbone.Model.extend({
     }
 
     //set the client language to match the language in the response
-    response.language = response.language || "en";
+    response.language = response.language || "en-US";
     window.polyglot = new Polyglot({locale: response.language});
     window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: response.language})[0]);
 
-    //extract a list of only moderator guids
     response.moderators = response.moderators || [];
 
     response.moderator_guids = response.moderators.map(function(moderatorObject){
@@ -92,6 +93,86 @@ module.exports = Backbone.Model.extend({
       return modGuid;
     });
 
+    response.blocked_guids = response.blocked_guids || [];
+
+    // If blocked_guids has no legitmate guids, it returns an array with an empty string.
+    // Let's remedy that.
+    if (response.blocked_guids.length && response.blocked_guids[0] === "") {
+      response.blocked_guids = [];
+    }
+
     return response;
+  },
+
+  toJSON: function() {
+    var attributes = __.clone(this.attributes);
+
+    attributes.blocked = attributes.blocked_guids || [];
+
+    return attributes;
+  },
+
+  _blockUnblockUser: function(block, guid) {
+    var self = this,
+        blockedGuids,
+        index,
+        request;
+
+    blockedGuids = this.get('blocked_guids') || [];
+    index = blockedGuids.indexOf(guid);
+
+    if (block && index === -1) {
+      blockedGuids.push(guid);
+    } else if (index !== -1) {
+      blockedGuids.splice(index, 1);
+    }
+
+    this.set('blocked_guids', blockedGuids);
+
+    request = saveToAPI(null, this.toJSON(), this.get('serverUrl') + 'settings', null, '', { blocked: blockedGuids })
+        .done(function(data) {
+          var blocked,
+              i;
+
+          if (data.success) {
+            window.obEventBus.trigger(block ? 'blockedUser' : 'unblockedUser', { 'guid': guid });
+          } else {
+            // on fail, let's revert the optomistic model updates
+            blocked = self.get('blocked_guids') || [];
+            i = blocked.indexOf(guid);
+
+            if (block && blocked.length && i !== -1) {
+              // a block attempt failed
+              blocked.splice(index, 1);
+            } else if (i === -1) {
+              // an unblock attempt failed
+              blocked.push(guid);
+            }
+
+            self.set('blocked_guids', blocked);
+          }
+        }).fail(function() {
+          throw new Error('There was an error blocking user ' + guid);
+        });
+
+    window.obEventBus.trigger(block ? 'blockingUser' : 'unblockingUser', { guid: guid, request: request });
+
+    return request;
+  },
+
+  blockUser: function(guid) {
+    if (!guid) {
+      throw new Error('Please provide a guid.');
+    }
+
+    return this._blockUnblockUser.call(this, true, guid);
+  },
+
+  unblockUser: function(guid) {
+    if (!guid) {
+      throw new Error('Please provide a guid.');
+    }
+
+    return this._blockUnblockUser.call(this, false, guid);
   }
 });

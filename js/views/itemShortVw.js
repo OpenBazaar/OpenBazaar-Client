@@ -13,14 +13,16 @@ module.exports = Backbone.View.extend({
     'click .js-itemShortEdit': 'editItemClick',
     'click .js-itemShortDelete': 'deleteItemClick',
     'click .js-userShortFollow': 'followUser',
-    'click .js-userShortUnfollow': 'unfollowUser'
+    'click .js-userShortUnfollow': 'unfollowUser',
+    'click .js-blockUser': 'blockUser',
+    'click .js-unblockUser': 'unblockUser'
   },
 
   initialize: function(options){
     //pre-load image
     var self=this;
     this.parentEl = $(options.parentEl);
-    this.listenTo(this.model, 'change:priceSet', this.render);
+    this.listenTo(this.model, 'change', this.render);
     //this.userID = this.model.get('guid');
     //if price has already been set, render
     if(this.model.get('priceSet') !== 0){
@@ -41,7 +43,23 @@ module.exports = Backbone.View.extend({
       }
 
       this.model.set('ownFollowing', false);
-    });    
+    });
+
+    this.listenTo(window.obEventBus, "blockingUser", function(e){
+      if (e.guid !== this.model.get('guid')) {
+        return;
+      }
+
+      this.model.set('isBlocked', true);
+    });
+
+    this.listenTo(window.obEventBus, "unblockingUser", function(e){
+      if (e.guid !== this.model.get('guid')) {
+        return;
+      }
+
+      this.model.set('isBlocked', false);
+    });
   },
 
   render: function(){
@@ -84,7 +102,15 @@ module.exports = Backbone.View.extend({
     window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
     this.$el.find('.js-userShortUnfollow').addClass('hide');
     this.$el.find('.js-userShortFollow').removeClass('hide');
+  },
+
+  blockUser: function(e) {
+    this.trigger('blockUserClick', { originalEvent: e, view: this });
   },  
+
+  unblockUser: function(e) {
+    this.trigger('unblockUserClick', { originalEvent: e, view: this });
+  },
 
   close: function(){
     __.each(this.subViews, function(subView) {

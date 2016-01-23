@@ -1,0 +1,36 @@
+<div class="rowItem padding2015">
+  <div class="table">
+    <div>
+      <div class="marginLeft15 marginTop2 clearFix">
+        <div class="marginLeft15 marginTop2 clearFix">
+          <% if(ob.name) { %>
+            <div class="floatLeft noOverflow marginBottom2 marginRight5">
+              <a class="textSize16px capitalize" title="<%= ob.name %>" href="<% print('#userPage/' + ob.guid + '/store') %>">
+                <%= ob.name %>
+              </a>
+            </div>
+          <% } %>
+          <% if(ob.handle) { %>
+            <div class="pull-left lineHeight21">
+              <a class="textSize14px txt-fade" title="<%= ob.handle %>" href="<% print('#userPage/' + ob.guid + '/store') %>">
+                <%= ob.handle %>
+              </a>
+            </div>
+          <% }else{ %>
+            <div class="noOverflow pull-left lineHeight21">
+              <span class="textSize14px txt-fade" title="<%= ob.guid %>">
+                <%= ob.guid %>
+              </span>
+            </div>
+          <% } %>
+        </div>
+        <div class="marginLeft15 marginRight15 marginTop2">
+          <% if(ob.short_description) { %>
+            <div class="fontSize14 txt-fade textWeightNormal clamp4"><%= ob.short_description %></div>
+          <% } %>
+        </div>
+      </div>
+      <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-unblockUser">Unblock</a>
+    </div>
+  </div>
+</div>
