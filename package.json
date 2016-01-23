@@ -25,6 +25,7 @@
     "jquery": "2.1.4",
     "jquery-colorbox": "^1.6.3",
     "jquery-mousewheel": "3.1.13",
+    "medium-editor": "^5.13.0",
     "moment": "2.10.6",
     "node-polyglot": "0.4.3",
     "qr-encode": "^0.3.0",

@@ -18,26 +18,14 @@
         <div class="chatConversationHeader">
             <div class="chatConversationAvatar thumbnail-small marginRight5 floatLeft js-username clickable"></div>
             <div class="chatConversationLabel floatLeft"></div>
-            <div class="btn-closeConversation floatRight marginTop4 textOpacity75">
+            <div class="btn-closeConversation floatRight marginTop4 marginRight5 textOpacity75">
                 <a class="ion-close-round js-closeConversation"></a>
             </div>
-            <div class="btn-closeConversation floatRight marginTop4 textOpacity75 fontSize15">
-                <a class="ion-android-more-vertical js-conversationSettings"></a>
-            </div>
         </div>
-        <div class="chatConversationMenu hide">
-            <div class="js-username clickable">
-                <%= polyglot.t('ViewPage') %>
-            </div>
-            <div>
-                <%= polyglot.t('Block') %>
-            </div>
-        </div>
-
         <div id="chatConversationContent" class="chatConversationContent"></div>
 
-        <div class="chatConversationMessage">
-            <textarea name="conversation_message" id="inputConversationMessage" class="fontSize12 padding4 txtAreaField js-chatMessage" rows="3"></textarea>
+        <div class="chatConversationMessage ">
+            <textarea name="conversation_message" placeholder="<%= polyglot.t('EnterMessage') %>" id="inputConversationMessage" class="fontSize12 padding4 txtAreaField border0 js-chatMessage" rows="3"></textarea>
         </div>
     </form>
 </div>

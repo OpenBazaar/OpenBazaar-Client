@@ -53,6 +53,9 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .fieldItem { color: " + textColor + ";}" +
       "#ov1 #userPage .fieldItem-textarea { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='radio'].fieldItem:checked + label:before { background: " + textColor + "; box-shadow: inset 0 0 0 4px " + primaryColor + ";}" +
+      "#ov1 #userPage input[type='radio'].fieldItem.starRating + label:before { color: " + textColor + "; background: none; box-shadow: none;}" +
+      "#ov1 #userPage input[type='radio'].fieldItem.starRating:checked + label:before { background: none; box-shadow: none;}" +
+      "#ov1 #userPage .starRating:before { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='checkbox'].fieldItem:checked + label:before { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].fieldItem { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].spinButtons::-webkit-inner-spin-button:before { color: " + textColor + ";}" +
@@ -80,6 +83,12 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
+    // Medium Editor stuffs
+    customStyleTag.innerHTML += 
+      "#ov1 #userPage .medium-editor-toolbar li button { background-color: " + secondaryColor + "; color: " + textColor + "; border: 0}" +
+      "#ov1 #userPage .medium-editor-toolbar li button:hover { opacity: .75}" +
+      "#ov1 #userPage .medium-editor-toolbar:after { border-top-color: " + secondaryColor + "; border-left-color: transparent; border-right-color: transparent}";
+
     // colorbox stuffs
     customStyleTag.innerHTML +=
       "#ov1 #userPage #cboxContent { background-color: " + primaryColor + "; color: " + textColor + ";}" +

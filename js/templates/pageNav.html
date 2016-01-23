@@ -46,7 +46,7 @@
   <a href="#settings">
     <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('nav.settings') %>
-    </a>
+  </a>
   <hr/>
   <a class="js-showAboutModal">
     <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
@@ -71,10 +71,10 @@
     <a class="btn btn-win btn-winClose js-navClose tooltip" data-tooltip="<%= polyglot.t('ClosingOpenBazaar') %>">
       <div class="btn-win-icon ion-ios-close-empty"></div>
     </a>
-    <a class="btn btn-win btn-winMin js-navMin">
+    <a class="btn btn-win btn-winMin js-navMin tooltip" data-tooltip="<%= polyglot.t('Minimize') %>">
       <div class="btn-win-icon ion-ios-minus-empty"></div>
     </a>
-    <a class="btn btn-win btn-winMax js-navMax">
+    <a class="btn btn-win btn-winMax js-navMax tooltip" data-tooltip="<%= polyglot.t('Maximize') %>">
       <div class="btn-win-icon ion-ios-plus-empty"></div>
     </a>
   </div>
@@ -127,7 +127,7 @@
                   <input type="text" autofocus="autofocus" class="txtField txtField-bar search custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.LanguagePlaceholder') %>" />
                 </div>
               </div>
-              <div class="js-homeModal-languageList flex-border"></div>
+              <div class="js-homeModal-languageList js-homeModal-listParent flex-border"></div>
             </div>
             <div class="bar barFlush">
               <a class="btn btn-bar btn-wide js-accordionNext custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 custCol-text" tabIndex="0">
@@ -145,7 +145,7 @@
             <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary">
               <div class="flexRow flexRow-center positionRelative">
                 <div class="rowItem padding20">
-                  <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text"><%= polyglot.t('onboarding.IntroductionBody') %></p>
+                  <p class="margin0 fontSize15 lineHeight20 fontWeight400 custCol-text alignCenter"><%= polyglot.t('onboarding.IntroductionBody') %></p>
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@
                   <input type="text" class="txtField txtField-bar search custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.CountryPlaceholder') %>" />
                 </div>
               </div>
-              <div class="js-homeModal-countryList flex-border"></div>
+              <div class="js-homeModal-countryList js-homeModal-listParent flex-border"></div>
               <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
                 <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabIndex="0">
                   <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
@@ -196,7 +196,7 @@
                   <input type="text" class="txtField txtField-bar search custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.CurrencyPlaceholder') %>" />
                 </div>
               </div>
-              <div class="js-homeModal-currencyList flex-border"></div>
+              <div class="js-homeModal-currencyList js-homeModal-listParent flex-border"></div>
               <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
                 <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabIndex="0">
                   <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
@@ -220,7 +220,7 @@
                   <input type="text" class="search txtField txtField-bar custCol-primary custCol-border custCol-text" placeholder="<%= polyglot.t('onboarding.TimezonePlaceholder') %>" />
                 </div>
               </div>
-              <ul class="flexRow list js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">
+              <ul class="flexRow list js-homeModal-listParent js-homeModal-timeZoneList homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">
                 <li class="flexRow custCol-border">
                   <div class="rowItem js-homeModal-timeSelect paddingLeft6">
                     <input type="radio" class="fieldItem" id="(GMT -12:00) Eniwetok, Kwajalein" name="time_zone" value="-12">
@@ -488,6 +488,7 @@
               </a>
             </div>
           </div>
+
           <div class="accordion-child accordion-inactive custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('Theme') %>
@@ -497,19 +498,19 @@
               <div class="flexRow">
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
                   <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1"
-                         data-primary-color="#C6483D"
-                         data-secondary-color="#D84E49"
+                         data-primary-color="#ba4a3f"
+                         data-secondary-color="#d94641"
                          data-background-color="#5E3E36"
                          data-text-color="#ffffff"
                          data-header="imgs/themes/1/header.png" />
                   <label for="theme-1" class="js-homeModal-themeSelected radioLabel">
                     <div class="theme-background" style="background: #5E3E36">
-                      <div class="theme-global-header" style="background: #D84E49"></div>
+                      <div class="theme-global-header" style="background: #d94641"></div>
                       <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div>
-                      <div class="theme-nav" style="background: #D84E49">
-                        <div class="theme-tab" style="background: #C6483D"></div>
+                      <div class="theme-nav" style="background: #d94641">
+                        <div class="theme-tab" style="background: #ba4a3f"></div>
                       </div>
-                      <div class="theme-body" style="background: #C6483D"></div>
+                      <div class="theme-body" style="background: #ba4a3f"></div>
                     </div>
                   </label>
                 </div>
@@ -793,24 +794,24 @@
                 <span class="ion-clipboard fontSize11 marginRight2 textOpacity1"></span>
                 <%= polyglot.t('Licensing') %>
               </a>
-            </div>          
+            </div>
 
-            <div class="modal-section custCol-primary modal-about-section js-modalAboutMain customThemeScrollbar">
+            <div class="modal-section custCol-primary modal-about-section js-modalAboutMain customThemeScrollbar lineHeight20">
               <%= polyglot.t('aboutSection.about') %>
             </div>
 
-            <div class="modal-section custCol-primary hide  modal-about-section js-modalAboutLicensing customThemeScrollbar">
+            <div class="modal-section custCol-primary hide  modal-about-section js-modalAboutLicensing customThemeScrollbar lineHeight20">
               <%= polyglot.t('aboutSection.licensing') %>
             </div>
-          
-            <div class="modal-section custCol-primary hide modal-about-section js-modalAboutSupport customThemeScrollbar">
+
+            <div class="modal-section custCol-primary hide modal-about-section js-modalAboutSupport customThemeScrollbar lineHeight20">
               <div class="width100 alignCenter">
                 <img src="./imgs/donations.png" />
               </div>
               <%= polyglot.t('aboutSection.support') %>
             </div>
 
-            <div class="modal-section custCol-primary hide modal-about-section js-modalAboutContributors customThemeScrollbar">
+            <div class="modal-section custCol-primary hide modal-about-section js-modalAboutContributors customThemeScrollbar lineHeight20">
               <%= polyglot.t('aboutSection.contributors') %>
             </div>
 

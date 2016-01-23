@@ -30,11 +30,9 @@ module.exports = Backbone.Router.extend({
     "myPage": "userPage",
     "userPage": "userPage",
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
-    "customizePage": "customizePage",
     "sellItem": "sellItem",
     "transactions": "transactions",
     "transactions/:state": "transactions",
-    "notifications": "notifications",
     "settings": "settings",
     "settings/:state": "settings",
     "about": "about",
@@ -46,7 +44,7 @@ module.exports = Backbone.Router.extend({
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
   },
 
-  newView: function(view, bodyClass){
+  newView: function(view, bodyClass, addressBarText){
     "use strict";
     if($('body').attr('id') != bodyClass){
       $('body').attr("id", bodyClass || "");
@@ -55,7 +53,8 @@ module.exports = Backbone.Router.extend({
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     //clear address bar. This will be replaced on the user page
-    window.obEventBus.trigger("setAddressBar", "");
+    addressBarText = addressBarText || "";
+    window.obEventBus.trigger("setAddressBar", addressBarText);
   },
 
   index: function(){
@@ -71,8 +70,9 @@ module.exports = Backbone.Router.extend({
 
   home: function(state, searchText){
     "use strict";
-    var searchItemsText = "";
-    var searchUserText = ""; //placeholder for future functionality
+    var searchItemsText = "",
+        searchUserText = "", //placeholder for future functionality
+        addressBarText = searchText ? "#" + searchText : "";
     if(state == "products"){
       searchItemsText = searchText;
     }
@@ -83,7 +83,7 @@ module.exports = Backbone.Router.extend({
       socketView: this.socketView,
       state: state,
       searchItemsText: searchItemsText
-    }));
+    }),'',addressBarText);
 
     // hide the discover onboarding callout 
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
@@ -104,12 +104,6 @@ module.exports = Backbone.Router.extend({
     }),"userPage");
   },
 
-  customizePage: function(){
-    "use strict";
-    this.cleanup();
-    console.log("customizePage");
-  },
-
   sellItem: function(){
     "use strict";
     this.cleanup();
@@ -122,33 +116,15 @@ module.exports = Backbone.Router.extend({
     }),"userPage");
   },
 
-  transactions: function(state){
+  transactions: function(state, modalTab){
     "use strict";
     this.cleanup();
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state,
+      state: state
     }),"userPage");
-  },
-
-  sales: function(){
-    "use strict";
-    this.cleanup();
-    console.log("sales");
-  },
-
-  cases: function(){
-    "use strict";
-    this.cleanup();
-    console.log("cases");
-  },
-
-  notifications: function(){
-    "use strict";
-    this.cleanup();
-    console.log("notifications");
   },
 
   settings: function(state){

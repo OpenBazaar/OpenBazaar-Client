@@ -10,37 +10,81 @@ module.exports = Backbone.View.extend({
   events: {
     'click .js-item': 'itemClick',
     'click .js-avatar': 'avatarClick',
-    'click .js-editItem': 'editItem'
+    'click .js-itemShortEdit': 'editItemClick',
+    'click .js-itemShortDelete': 'deleteItemClick',
+    'click .js-userShortFollow': 'followUser',
+    'click .js-userShortUnfollow': 'unfollowUser'
   },
 
-  initialize: function(){
+  initialize: function(options){
     //pre-load image
     var self=this;
+    this.parentEl = $(options.parentEl);
     this.listenTo(this.model, 'change:priceSet', this.render);
     //this.userID = this.model.get('guid');
     //if price has already been set, render
     if(this.model.get('priceSet') !== 0){
       this.render();
     }
+
+    this.listenTo(window.obEventBus, "followUser", function(options){
+      if (options.view === this || options.guid !== this.model.get('guid')) {
+        return;
+      }
+
+      this.model.set('ownFollowing', true);
+    });
+
+    this.listenTo(window.obEventBus, "unfollowUser", function(options){
+      if (options.view === this || options.guid !== this.model.get('guid')) {
+        return;
+      }
+
+      this.model.set('ownFollowing', false);
+    });    
   },
 
   render: function(){
     var self = this;
     loadTemplate('./js/templates/itemShort.html', function(loadedTemplate) {
-      self.$el.append(loadedTemplate(self.model.toJSON()));
+      self.$el.html(loadedTemplate(self.model.toJSON()));
+
+      //append the view to the passed in parent
+      self.parentEl.append(self.$el);
     });
     return this;
   },
 
   itemClick: function(e){
     var self = this;
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+$(e.target).closest('.js-item').data('id'), {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+this.model.get('contract_hash'), {trigger: true});
   },
 
   avatarClick: function(){
-    console.log("avatarClick");
     Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/store', {trigger: true});
   },
+
+  editItemClick: function(){
+    "use strict";
+    window.obEventBus.trigger('itemShortEdit', {'contract_hash': this.model.get('contract_hash')});
+  },
+
+  deleteItemClick: function(){
+    "use strict";
+    window.obEventBus.trigger('itemShortDelete', {'contract_hash': this.model.get('contract_hash')});
+  },
+
+  followUser: function(e) {
+    window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
+    this.$el.find('.js-userShortUnfollow').removeClass('hide');
+    this.$el.find('.js-userShortFollow').addClass('hide');
+  },
+
+  unfollowUser: function(e){
+    window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
+    this.$el.find('.js-userShortUnfollow').addClass('hide');
+    this.$el.find('.js-userShortFollow').removeClass('hide');
+  },  
 
   close: function(){
     __.each(this.subViews, function(subView) {
