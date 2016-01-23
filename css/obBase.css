@@ -3807,11 +3807,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #obContainer {
-  height: 96%;
-  margin-top: 50px;
+  height: calc(100% - 70px);
   overflow-y: scroll;
   padding-top: 20px;
   -webkit-app-region: no-drag;
+  position: relative;
+  top: 50px;
 }
 
 .chatConversationMessageLine .chatConversationMessageBody a {
@@ -4838,7 +4839,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .alignCenter {
   text-align: center;
 }
-
 
 /* terrible hack, TODO: remove before production */
 

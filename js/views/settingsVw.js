@@ -3,9 +3,11 @@ var __ = require('underscore'),
     $ = require('jquery'),
     //userProfileModel = require('../models/userProfileMd'),
     loadTemplate = require('../utils/loadTemplate'),
+    domUtils = require('../utils/dom'),
     timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
-    //personListView = require('./userListVw'),
+    usersCl = require('../collections/usersCl.js'),
+    blockedUsersVw = require('./blockedUsersVw'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
@@ -113,7 +115,18 @@ module.exports = Backbone.View.extend({
       self.delegateEvents(); //delegate again for re-render
       self.setFormValues();
       self.setState(self.options.state);
-      //self.renderBlocked(self.model.get("user").blocked);
+      
+      // Since the Blocked Users View kicks off many server calls (one
+      // for each blocked user) and since we are re-rendering the entire
+      // settings view often (after each save), we will cache the Blocked
+      // Users View.
+      if (!self.blockedRendered) {
+        self.renderBlocked();
+        self.blockedRendered = true;
+      } else {
+        self.renderBlocked({ useCached: true });
+      }
+      
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
         $preview: $('.js-settingsAvatarPreview'),
@@ -171,16 +184,109 @@ module.exports = Backbone.View.extend({
     });
     return this;
   },
-/* this is not how this should work
-  renderBlocked: function (model) {
-    "use strict";
-    this.blockedList = new personListView({model: model,
-                                           el: '.js-list1',
-                                           title: "No one blocked",
-                                           message: ""});
-    this.subViews.push(this.blockedList);
+
+  patchAndFetchBlockedUsers: function(models) {
+    var self = this;
+
+    if (models && models.length) {
+      __.each(models, function(model) {
+        model.urlRoot = self.serverUrl + 'profile';
+        
+        // Monkey patching parse so the profile is not nested
+        // and therefore change events will be in play.
+        model.oldParse = model.parse;
+        model.parse = function (response) {
+          if (response.profile) {
+            return model.oldParse(response).profile;
+          } else {
+            return response;
+          }          
+        };
+
+        model.fetch({ data: { guid: model.get('guid')} });
+      });
+    }
   },
-  */
+
+  renderBlocked: function(options) {
+    var self = this,
+        modelsPerBatch = 25,
+        $lazyLoadTrigger,
+        $blockedForm,
+        blockedGuids,
+        blockedUsersCl;
+
+    options = options || {};
+    $blockedContainer = this.$('#blockedForm > :first-child');
+
+    if (options.useCached) {
+      if (!this.$lazyLoadTrigger.length) {
+        throw new Error('Some expected state is missing. renderBlocked() can only'
+          + ' be called with the useCached option after it has been called at least once'
+          + ' without the useCached option.');
+      }
+
+      $blockedContainer.html(this.blockedUsersVw.el);
+
+      if (!document.contains(this.$lazyLoadTrigger[0])) {
+        $blockedContainer.append(this.$lazyLoadTrigger);
+      }
+
+      return;
+    }
+
+    blockedGuids = this.userModel.get('blocked_guids')
+      .map(function(guid) {
+        return { guid: guid }
+      });
+
+    blockedUsersCl = new usersCl(blockedGuids.slice(0, modelsPerBatch));
+    this.patchAndFetchBlockedUsers(blockedUsersCl.models);
+
+    this.blockedUsersVw = new blockedUsersVw({
+      model: this.userModel,
+      collection: blockedUsersCl,
+      serverUrl: this.serverUrl
+    });
+
+    $blockedContainer.html(
+      self.blockedUsersVw.render().el
+    );
+
+    // implement scroll based lazy loading of blocked users
+    this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
+      position: 'absolute',
+      width: '100%',
+      height: 5,
+      bottom: 300
+    });
+    $blockedContainer.append(this.$lazyLoadTrigger);
+
+    this.$obContainer = this.$obContainer || $('#obContainer');
+    // in case we're re-rendering, remove any previous scroll handlers
+    this.blockedUsersScrollHandler && this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+    this.blockedUsersScrollHandler = __.throttle(function() {
+      var colLen;
+
+      if (
+        blockedUsersCl.length < blockedGuids.length &&
+        domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
+      ) {
+        colLen = blockedUsersCl.length;
+
+        blockedUsersCl.add(
+          blockedGuids.slice(colLen, colLen + modelsPerBatch)
+        );
+
+        self.patchAndFetchBlockedUsers(
+          blockedUsersCl.slice(colLen, colLen + modelsPerBatch)
+        )
+      }
+    }, 200);
+
+    this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
+    // end - implement scroll based lazy loading of blocked users
+  },
 
   setFormValues: function(){
     var self = this,
@@ -635,6 +741,12 @@ module.exports = Backbone.View.extend({
       }
     });
 
+    this.blockedUsersVw.remove();
+
+    if (this.blockedUsersScrollHandler && this.$obContainer.length) {
+      this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+    }
+    
     this.model.off();
     this.off();
     this.remove();

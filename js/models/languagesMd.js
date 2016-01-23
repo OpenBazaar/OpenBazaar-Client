@@ -7,7 +7,7 @@ module.exports = Backbone.Model.extend({
     languages: [
       {
         langName: "English",
-        langCode: "en",
+        langCode: "en-US",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Next",
         IAgree: "I Agree",
@@ -201,6 +201,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover",
         Block: "Block",
+        Unblock: "Unblock",
         Blocked: "Blocked",
         Advanced: "Advanced",
         General: "General",
@@ -589,6 +590,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -985,6 +987,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -1386,6 +1389,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Trova",
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Bloccato",
         Advanced: "Avanzato",
         General: "Generale",
@@ -1592,7 +1596,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Français",
-        langCode: "fr",
+        langCode: "fr-FR",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Suivant",
         IAgree: "Je suis d'accord",
@@ -1786,6 +1790,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Entrer",
         Discover: "Découvrir",
         Block: "Bloquer",
+        Unblock: "Débloquer",
         Blocked: "Bloqué",
         Advanced: "Avancé",
         General: "Général",
@@ -2182,6 +2187,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2578,6 +2584,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter",
         Discover: "Обзор",
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Заблокированно",
         Advanced: "Дополнительно",
         General: "Общий",
@@ -2973,6 +2980,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3374,6 +3382,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3773,6 +3782,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3979,7 +3989,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "中文",
-        langCode: "zh",
+        langCode: "zh-CN",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "下一步",
         IAgree: "我同意",
@@ -4172,6 +4182,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4572,6 +4583,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4778,7 +4790,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "日本語 (Japanese)",
-        langCode: "ja",
+        langCode: "ja-JP",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "次へ",
         IAgree: "同意する",
@@ -4968,6 +4980,7 @@ module.exports = Backbone.Model.extend({
         Enter: "Enter", //notTranslated
         Discover: "ピックアップ",
         Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "ブロック",
         Advanced: "詳細設定",
         General: "一般設定",

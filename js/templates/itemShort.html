@@ -39,18 +39,18 @@
             </div>
           <% } %>
 
-          <div class="btn-gridItemControl  custCol-border">
-            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('Block') %>
+          <div class="btn-gridItemControl custCol-border <%= !ob.isBlocked ? 'js-blockUser' : 'js-unblockUser' %>">
+            <span class="<%= !ob.isBlocked ? 'ion-sad' : 'ion-happy' %> fontSize11 marginRight2 textOpacity1"></span>
+            <%= !ob.isBlocked ? polyglot.t('Block') : polyglot.t('Unblock') %>
           </div>
         <% } %>
 
         <% if(ob.ownPage){ %>
-          <div class="btn-gridItemControl borderRight custCol-border js-editItem">
+          <div class="btn-gridItemControl borderRight custCol-border js-itemShortEdit">
             <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('Edit') %>
           </div>  
-          <div class="btn-gridItemControl borderRight custCol-border js-deleteItem">
+          <div class="btn-gridItemControl borderRight custCol-border js-itemShortDelete">
             <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('Delete') %>
           </div>           
