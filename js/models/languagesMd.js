@@ -239,6 +239,8 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
+        BecomeModerator: "Become a moderator",
+        EditModerator: "Moderator Settings",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",

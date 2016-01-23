@@ -90,6 +90,17 @@
     <div class="bar navBar barFlush user-page-navigation-buttons positionBottom backgroundTransparent width950">
       <div class="navEnd pad15">
         <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
+          <a class="btn btn-txt custCol-primary js-moderator">
+            <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
+            <% console.log(ob.page) %>
+            <% if(ob.page.profile.moderator){ %>
+            <%= polyglot.t('EditModerator') %>
+            <% } else {%>
+            <%= polyglot.t('BecomeModerator') %>
+            <% } %>
+          </a>
+        </div>
+        <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
           <a class="btn btn-txt custCol-primary js-sellItem">
             <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('nav.createListing') %>

@@ -139,6 +139,7 @@ module.exports = Backbone.View.extend({
     'click .js-follow': 'followUserClick',
     'click .js-unfollow': 'unfollowUserClick',
     'click .js-message': 'sendMessage',
+    'click .js-moderator': 'showModeratorModal',
     'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
     'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
     'click .js-customizeBackgroundColor': 'displayCustomizeBackgroundColor',
@@ -1267,6 +1268,11 @@ module.exports = Backbone.View.extend({
     var key = this.userProfile.get('profile').encryption_key;
     var guid = this.userProfile.get('profile').guid;
     window.obEventBus.trigger("openChat", guid, key);
+  },
+
+  showModeratorModal: function(){
+    "use strict";
+
   },
 
   close: function(){
