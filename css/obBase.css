@@ -3807,7 +3807,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #obContainer {
-  height: calc(100% - 70px);
+  height: calc(100% - 50px);
   overflow-y: scroll;
   padding-top: 20px;
   -webkit-app-region: no-drag;
