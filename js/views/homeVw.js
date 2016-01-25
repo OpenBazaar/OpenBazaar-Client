@@ -1,9 +1,12 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     Moment = require('moment'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw'),
     storeListView = require('./userListVw'),
     userProfileModel = require('../models/userProfileMd'),
     itemShortView = require('./itemShortVw'),
@@ -12,7 +15,7 @@ var loadTemplate = require('../utils/loadTemplate'),
     userShortModel = require('../models/userShortMd'),
     simpleMessageView = require('./simpleMessageVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className:"homeView",
 
@@ -37,7 +40,8 @@ module.exports = Backbone.View.extend({
     this.state = options.state;
     this.searchItemsText = options.searchItemsText;
     this.slimVisible = false;
-    this.subViews = [];
+    this.itemViews = [];
+    this.userViews = [];
     this.obContainer = $('#obContainer');
     this.loadingProducts = false;
     this.loadingVendors = false;
@@ -87,17 +91,15 @@ module.exports = Backbone.View.extend({
   },
 
   setSocketTimeout: function(){
-    "use strict";
     var self = this;
     this.$el.find('.js-loadingMessage .spinner').removeClass('fadeOut');
     this.$el.find('.js-loadingMessage').removeClass('fadeOut');
     this.socketTimeout = window.setTimeout(function(){
         self.$el.find('.js-loadingMessage').addClass('fadeOut');
-        window.clearTimeout(self.socketTimeout);
     }, 2000);
 
     // after 4 seconds, if no listings are found, display the no results found message
-    window.setTimeout(function() {
+    this.noResultsTimeout = window.setTimeout(function() {
       if ($('.homeGridItems .gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
@@ -106,13 +108,17 @@ module.exports = Backbone.View.extend({
     }, 4000);
   },
 
+  clearSocketTimeout: function() {
+    this.socketTimeout && window.clearTimeout(this.socketTimeout);
+    this.noResultsTimeout && window.clearTimeout(this.noResultsTimeout);
+  },
+
   hideList: function(){
     $('.js-feed, .js-products, .js-vendors, .js-productsSearch').addClass('hide');
     $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
   },
 
   handleSocketMessage: function(response) {
-    "use strict";
     var data = JSON.parse(response.data);
     if(data.id == this.socketItemsID){
       this.loadingProducts = false;
@@ -126,7 +132,6 @@ module.exports = Backbone.View.extend({
   },
 
   render: function(){
-    "use strict";
     var self = this;
     $('#content').html(this.$el);
     loadTemplate('./js/templates/home.html', function(loadedTemplate) {
@@ -147,7 +152,11 @@ module.exports = Backbone.View.extend({
       self.socketView.getVendors(self.socketUsersID);
 
       //listen to scrolling on container
-      self.obContainer.on('scroll', function(){self.scrollHandler();});
+      self.scrollHandler = __.bind(
+        __.throttle(self.onScroll, 100),
+        self
+      );
+      self.obContainer.on('scroll', self.scrollHandler);
 
       //populate search field
       if(self.searchItemsText){
@@ -158,7 +167,6 @@ module.exports = Backbone.View.extend({
   },
 
   renderItem: function(item){
-    "use strict";
     var self = this,
         blocked;
     //get data from inside the listing object
@@ -179,7 +187,6 @@ module.exports = Backbone.View.extend({
     item.isBlocked = blocked.indexOf(item.guid) !== -1;
 
     var newItem = function(){
-      console.log('new item yall');
       var newItemModel,
           itemShort;
 
@@ -192,9 +199,6 @@ module.exports = Backbone.View.extend({
       itemShort = new itemShortView({model: newItemModel});
 
       self.listenTo(newItemModel, 'change:isBlocked', function(model, isBlocked, options) {
-        console.log('change is:blocked');
-        window.moo = window.moo || [];
-        window.moo.push(model);
         if (isBlocked) {
           itemShort.close();
           self.setListingsBlockedCount(self.getListingsBlockedCount() + 1);
@@ -206,7 +210,8 @@ module.exports = Backbone.View.extend({
 
       item.isBlocked && itemShort.$el.hide().addClass('blocked-user');
       self.$el.find('.js-products .js-loadingSpinner').before(itemShort.el);
-      self.subViews.push(itemShort);
+      self.registerChild(itemShort);
+      self.itemViews.push(itemShort);
     };
 
     if(this.onlyFollowing){
@@ -219,7 +224,6 @@ module.exports = Backbone.View.extend({
   },
 
   renderUser: function(user){
-    "use strict";
     var self = this;
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
@@ -230,17 +234,11 @@ module.exports = Backbone.View.extend({
     var newUserModel = new userShortModel(user);
     var storeShort = new userShortView({model: newUserModel});
     self.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
-    self.subViews.push(storeShort);
-  },
-
-  renderNoneFound: function(){
-    "use strict";
-    var simpleMessage = new simpleMessageView({title: this.options.title, message: this.options.message, el: this.$el});
-    this.subViews.push(simpleMessage);
+    self.registerChild(storeShort);
+    self.userViews.push(storeShort);
   },
 
   setState: function(state, searchItemsText){
-    "use strict";
     if(!state){
       state = "products";
     }
@@ -261,12 +259,10 @@ module.exports = Backbone.View.extend({
   },
 
   createStore: function(){
-    "use strict";
     Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/createStore', {trigger: true});
   },
 
   createListing: function(){
-    "use strict";
     Backbone.history.navigate('#sellItem', {trigger: true});
   },
 
@@ -308,16 +304,10 @@ module.exports = Backbone.View.extend({
           // filter, let's remove all the views for the guid
           // that we've just unfollowed.
           if (!follow && self.onlyFollowing) {
-            var viewsToRemove = [];
-
-            __.each(self.subViews, function(subView, i) {
-              if (subView instanceof itemShortView && subView.model.get('guid') === options.guid) {
-                viewsToRemove.push(subView);
+            __.each(self.itemViews, function(item, i) {
+              if (item.model.get('guid') === options.guid) {
+                self.removeItemView(item);
               }
-            });
-
-            __.each(viewsToRemove, function(view, i) {
-              self.removeSubView(view);
             });
           }
         } else if (self.state == 'vendors') {
@@ -348,8 +338,8 @@ module.exports = Backbone.View.extend({
     this.userModel.unblockUser(e.view.model.get('guid'));
   },  
 
-  scrollHandler: function(){
-    "use strict";
+  onScroll: function(){
+    console.log('sugar');
     if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight && !this.searchItemsText){
       if(this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
@@ -364,18 +354,23 @@ module.exports = Backbone.View.extend({
   },
 
   clearItems: function(){
-    "use strict";
-    this.$el.find('.js-products > *').not('.js-loadingSpinner, .js-blocked-listings-count').remove();
+    this.itemViews.forEach(function (view) {
+      view.remove();
+    });
+
+    this.itemViews = [];
     this.setListingsBlockedCount(0);
   },
 
   clearUsers: function(){
-    "use strict";
-    this.$el.find('.js-vendors > *').not('.js-loadingSpinner, .js-blocked-listings-count').remove();
+    this.userViews.forEach(function (view) {
+      view.remove();
+    });
+
+    this.userViews = [];
   },
 
   searchItemsKeyup: function(e){
-    "use strict";
     var target = $(e.target),
         targetText = target.val().replace("#",'').replace(/ /g, ""),
         addressText = targetText;
@@ -389,7 +384,6 @@ module.exports = Backbone.View.extend({
   },
 
   searchItemsClear: function(){
-    "use strict";
     this.setState("products");
     this.loadItems();
 
@@ -405,7 +399,6 @@ module.exports = Backbone.View.extend({
   },
 
   searchItems: function(searchItemsText){
-    "use strict";
     if(searchItemsText){
       this.searchItemsText = searchItemsText;
       this.clearItems();
@@ -424,7 +417,6 @@ module.exports = Backbone.View.extend({
   },
 
   loadItems: function(){
-    "use strict";
     this.clearItems();
     this.socketItemsID = Math.random().toString(36).slice(2);
     this.loadingProducts = true;
@@ -435,7 +427,6 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-homeSearchItemsClear').addClass('hide');
   },
 
-  // TODO move with other renders
   setListingsBlockedCount: function(count) {
     var text = '';
 
@@ -447,9 +438,8 @@ module.exports = Backbone.View.extend({
       text = count + ' blocked item' + (count !== 1 ? 's' : '') + ' not shown';
     }
 
-    // todo TODO todo TODO: cache me
-    this.$('.homeGridItems .js-blocked-listings-count')
-      .text(text);
+    this.$listingsBlockedCount = this.$listingsBlockedCount || this.$('.homeGridItems .js-blocked-listings-count');
+    this.$listingsBlockedCount.text(text);
   },
 
   getListingsBlockedCount: function() {
@@ -457,7 +447,6 @@ module.exports = Backbone.View.extend({
   },
 
   loadUsers: function(){
-    "use strict";
     this.clearUsers();
     this.socketUsersID = Math.random().toString(36).slice(2);
     this.loadingVendors = true;
@@ -466,7 +455,6 @@ module.exports = Backbone.View.extend({
   },
 
   setFollowingFilter: function(e){
-    "use strict";
     var filterBy = $(e.target).val();
     if(filterBy == "following"){
       this.onlyFollowing = true;
@@ -484,44 +472,32 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  removeSubView: function(view) {
-    var self = this,
-        index;
-
-    if (!view) return;
-
-    __.every(this.subViews, function(subView, i) {
-      if (view === subView) {
-        index = i;
-
-        if(subView.close){
-          subView.close();
-        }else{
-          subView.unbind();
-          subView.remove();
+  _removeSubView: function(list, view) {
+    if (list && Array.isArray(list) && view) {
+      for (var i = list.length; i--;) {
+        if (view == list[i]) {
+          list.remove();
+          break;
         }
-
-        self.subViews.splice(index, 1);
-
-        return false;        
       }
-
-      return true;
-    });
+    }
   },
 
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    clearInterval(this.homeLookingTimeout);
-    this.unbind();
-    this.remove();
-  }
+  removeItemView: function(view) {
+    if (!view) return;
 
+    this._removeSubView(this.itemViews, view);
+  },
+
+  removeUserView: function(view) {
+    if (!view) return;
+
+    this._removeSubView(this.userViews, view);
+  },
+
+  remove: function() {
+    this.clearSocketTimeout();
+    this.scrollHandler && this.obContainer.off('scroll', this.scrollHandler);
+    baseVw.prototype.remove.apply(this, arguments);
+  }
 });

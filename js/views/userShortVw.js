@@ -48,19 +48,5 @@ module.exports = Backbone.View.extend({
     this.$el.addClass('div-fade');
     this.$el.find('.js-userShortUnfollow').addClass('hide');
     this.$el.find('.js-userShortFollow').removeClass('hide');
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
-
 });

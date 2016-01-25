@@ -23,18 +23,5 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model));
     });
     return this;
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
 });
