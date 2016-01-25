@@ -1,0 +1,166 @@
+/*
+Get the protobuf compiler:
+sudo apt-get install protobuf-compiler
+
+Compile with:
+cd path/to/protos/
+protoc --python_out=./ objects.proto
+*/
+
+import "countries.proto";
+
+//An object containing information about the node.
+//Some fields are optional as they aren't needed in all situations.
+message Node {
+    required bytes guid             = 1;
+	required bytes signedPublicKey  = 2; // <64 byte signature><32 byte public key>
+	required NATType natType        = 3;
+	required IPAddress nodeAddress  = 4;
+	optional IPAddress relayAddress = 5;
+	optional bool vendor            = 6 [default = false];
+
+	message IPAddress {
+	    required string ip    = 1;
+	    required uint32 port  = 2;
+	}
+}
+
+enum NATType {
+    FULL_CONE  = 1;
+    RESTRICTED = 2;
+    SYMMETRIC  = 3;
+}
+
+
+//The value returned by a FIND_VALUE rpc call
+//Typically a list of these will be returned for any given keyword.
+message Value {
+    optional bytes keyword        = 1;
+	required bytes valueKey       = 2;
+	required bytes serializedData = 3;
+	required uint32 ttl           = 4;
+}
+
+//A list of these is sent in an INV packet
+message Inv {
+    required bytes keyword  = 1;
+    required bytes valueKey = 2;
+}
+
+//The object returned by the GET_PROFILE rpc call
+message Profile {
+        required string name              = 1;
+        required CountryCode location     = 2;
+        required PublicKey encryption_key = 3; // guid signature covers encryption key
+        optional PublicKey bitcoin_key    = 4; // guid signature covers bitcoin key
+        optional bool nsfw                = 5 [default = false];
+        optional bool vendor              = 6 [default = false];
+        optional bool moderator           = 7 [default = false];
+        optional float moderation_fee     = 8 [default = 10.0];
+        optional string handle            = 9;
+        optional string about             = 10;
+        optional string short_description = 11;
+        optional string website           = 12;
+        optional string email             = 13;
+        repeated SocialAccount social     = 14;
+        optional uint32 primary_color     = 15 [default = 551582];
+        optional uint32 secondary_color   = 16 [default = 3243448];
+        optional uint32 background_color  = 17 [default = 407379];
+        optional uint32 text_color        = 18 [default = 16777215];
+        optional uint32 follower_count    = 19 [default = 0];
+        optional uint32 following_count   = 20 [default = 0];
+        optional PublicKey pgp_key        = 21; // pgp signature covers guid
+        optional bytes avatar_hash        = 22;
+        optional bytes header_hash        = 23;
+
+	// Social media account for the profile
+    message SocialAccount {
+    	required SocialType type  = 1;
+    	required string username  = 2;
+    	optional string proof_url = 3;
+
+    	enum SocialType {
+			FACEBOOK  = 1;
+			TWITTER   = 2;
+			INSTAGRAM = 3;
+			SNAPCHAT  = 4;
+    	}
+    }
+
+    message PublicKey {
+    	required bytes public_key = 1;
+    	required bytes signature  = 2;
+    }
+}
+
+message Metadata {
+    required string name              = 1;
+    optional string handle            = 2;
+    optional string short_description = 3;
+    required bytes avatar_hash        = 4;
+    required bool nsfw                = 5;
+}
+
+message Listings {
+    repeated ListingMetadata listing = 1;
+    optional string handle           = 2;
+    optional bytes avatar_hash       = 3;
+
+    message ListingMetadata {
+        required bytes contract_hash  = 1;
+        required string title         = 2;
+        optional bytes thumbnail_hash = 3;
+        optional string category      = 4;
+        required float price          = 5;
+        required string currency_code = 6;
+        required bool nsfw            = 7;
+        required CountryCode origin   = 8;
+        repeated CountryCode ships_to = 9;
+        optional bytes avatar_hash    = 10;
+        optional string handle        = 11;
+    }
+}
+
+message Followers {
+    repeated Follower followers = 1;
+
+    message Follower {
+        required bytes guid          = 1;
+        required bytes following     = 2;
+        required bytes signed_pubkey = 3;
+        required Metadata metadata   = 4;
+        optional bytes signature     = 5;
+    }
+}
+
+message Following {
+    repeated User users = 1;
+
+    message User {
+        required bytes guid          = 1;
+        required bytes signed_pubkey = 2;
+        required Metadata metadata   = 3;
+        optional bytes signature     = 4;
+    }
+}
+
+message PlaintextMessage {
+    required bytes sender_guid       = 1;
+    optional string handle           = 2;
+    required bytes signed_pubkey     = 3;
+    required bytes encryption_pubkey = 4;
+    optional string subject          = 5;
+    required Type type               = 6;
+    required string message          = 7;
+    required uint64 timestamp        = 8;
+    optional bytes avatar_hash       = 9;
+    optional bytes signature         = 10;
+
+    enum Type {
+        CHAT                 = 1;
+        DISPUTE_OPEN         = 2;
+        DISPUTE_CLOSE        = 3;
+        ORDER_CONFIRMATION   = 4;
+        RECEIPT              = 5;
+    }
+}

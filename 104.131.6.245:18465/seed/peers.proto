@@ -1,0 +1,4 @@
+message PeerSeeds {
+    repeated bytes serializedNode  = 1;
+    required bytes signature       = 2;
+}
