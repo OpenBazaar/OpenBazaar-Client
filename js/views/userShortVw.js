@@ -2,9 +2,10 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
 Backbone.$ = $;
-var loadTemplate = require('../utils/loadTemplate');
+var loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "flexRow borderBottom custCol-border js-userShortView",
 
@@ -16,8 +17,20 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     "use strict";
-    var self = this;
-    this.render();
+
+    this.listenTo(window.obEventBus, "blockingUser", function(e){
+      if (e.guid == this.model.get('guid')) {
+        this.model.set('isBlocked', true);
+      }      
+    });
+
+    this.listenTo(window.obEventBus, "unblockingUser", function(e){
+      if (e.guid == this.model.get('guid')) {
+        this.model.set('isBlocked', false);
+      }
+    });
+
+    this.render();        
   },
 
   render: function(){

@@ -200,7 +200,7 @@ module.exports = baseVw.extend({
 
       self.listenTo(newItemModel, 'change:isBlocked', function(model, isBlocked, options) {
         if (isBlocked) {
-          itemShort.close();
+          self.removeItemView(itemShort);
           self.setListingsBlockedCount(self.getListingsBlockedCount() + 1);
         }
       });
@@ -224,18 +224,31 @@ module.exports = baseVw.extend({
   },
 
   renderUser: function(user){
-    var self = this;
+    var self = this,
+        blocked = this.userModel.get('blocked_guids') || [];
+
+    if (blocked.indexOf(user.guid) !== -1) return;
+
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;
     user.avatarURL = this.userModel.get('serverUrl')+"get_image?hash="+user.avatar_hash+"&guid="+user.guid;
+    
     if(this.ownFollowing.indexOf(user.guid) != -1){
       user.ownFollowing = true;
     }
+
     var newUserModel = new userShortModel(user);
+
+    this.listenTo(newUserModel, 'change:isBlocked', function(model, isBlocked, options) {
+      if (isBlocked) {
+        self.removeUserView(storeShort);
+      }
+    });
+
     var storeShort = new userShortView({model: newUserModel});
-    self.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
-    self.registerChild(storeShort);
-    self.userViews.push(storeShort);
+    this.$el.find('.js-vendors .js-loadingSpinner').before(storeShort.el);
+    this.registerChild(storeShort);
+    this.userViews.push(storeShort);
   },
 
   setState: function(state, searchItemsText){
@@ -339,7 +352,6 @@ module.exports = baseVw.extend({
   },  
 
   onScroll: function(){
-    console.log('sugar');
     if(this.obContainer[0].scrollTop + this.obContainer[0].clientHeight + 200 > this.obContainer[0].scrollHeight && !this.searchItemsText){
       if(this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
@@ -476,7 +488,7 @@ module.exports = baseVw.extend({
     if (list && Array.isArray(list) && view) {
       for (var i = list.length; i--;) {
         if (view == list[i]) {
-          list.remove();
+          view.remove();
           break;
         }
       }

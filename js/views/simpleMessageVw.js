@@ -1,10 +1,11 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw');
 
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   classname: "alertView",
 

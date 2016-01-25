@@ -1,9 +1,10 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "flexCol-4 custCol-border",
 
@@ -46,19 +47,15 @@ module.exports = Backbone.View.extend({
     });
 
     this.listenTo(window.obEventBus, "blockingUser", function(e){
-      if (e.guid !== this.model.get('guid')) {
-        return;
-      }
-
-      this.model.set('isBlocked', true);
+      if (e.guid == this.model.get('guid')) {
+        this.model.set('isBlocked', true);
+      }      
     });
 
     this.listenTo(window.obEventBus, "unblockingUser", function(e){
       if (e.guid !== this.model.get('guid')) {
-        return;
-      }
-
-      this.model.set('isBlocked', false);
+        this.model.set('isBlocked', false);
+      }      
     });
   },
 
