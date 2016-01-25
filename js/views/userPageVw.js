@@ -400,9 +400,13 @@ module.exports = Backbone.View.extend({
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
-      //if no state was set for some reason
-      state="store";
-      this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
+      //if no state was set
+      if(this.userProfile.get('profile').vendor){
+        state="store";
+      } else {
+        state="about";
+      }
+      this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }
     this.setControls(state);
     if(state != "customize" && state != this.state && state != "itemNew" && this.state != "itemNew"){
@@ -1208,8 +1212,6 @@ module.exports = Backbone.View.extend({
 
   storeCreated: function() {
     "use strict";
-    //this.storeWizardView.closeWizard();
-    //var currentState = this.lastTab || "about";
     //recreate the entire page with the new data
     Backbone.history.loadUrl();
   },

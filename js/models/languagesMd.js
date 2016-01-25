@@ -7,7 +7,7 @@ module.exports = Backbone.Model.extend({
     languages: [
       {
         langName: "English",
-        langCode: "en",
+        langCode: "en-US",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Next",
         IAgree: "I Agree",
@@ -43,6 +43,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Follow",
         Feed: "Feed",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewListing: "View Listing",
         Unfollow: "Unfollow",
         About: "About",
         NoDescriptionAdded: "No description added",
@@ -438,6 +439,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Seguir",
         Feed: "Feed",
         FeedPlaceholder: "RSS de las p&aacute;ginas que sigue",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
@@ -828,6 +830,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Folgen",
         Feed: "Feed",
         FeedPlaceholder: "Neuigkeiten aller Seiten denen du folgst",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Nicht mehr folgen",
         About: "&Uuml;ber",
         NoDescriptionAdded: "Keine Beschreibung hinzugefügt",
@@ -1228,6 +1231,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Segui",
         Feed: "Feed",
         FeedPlaceholder: "Un feed di aggiornamenti da tutte le pagine che segui",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
@@ -1592,7 +1596,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Français",
-        langCode: "fr",
+        langCode: "fr-FR",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Suivant",
         IAgree: "Je suis d'accord",
@@ -1604,9 +1608,9 @@ module.exports = Backbone.Model.extend({
         Done: "Terminé",
         Navigation: "Navigation",
         Cancel: "Annuler",
-        ClosingOpenBazaar: "La fermeture d'OpenBazaar déconnectera votre page",
-        Minimize: "Minimize", //notTranslated
-        Maximize: "Maximize", //notTranslated
+        ClosingOpenBazaar: "Fermer (votre page sera déconnectée)",
+        Minimize: "Réduire",
+        Maximize: "Agrandir",
         Close: "Fermer",
         Yes: "Oui",
         No: "Non",
@@ -1628,6 +1632,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Suivre",
         Feed: "Flux",
         FeedPlaceholder: "Un flux de mises à jour de toutes les pages que vous suivez",
+        ViewListing: "Voir l'annonce",
         Unfollow: "Ne plus suivre",
         About: "&Agrave; propos",
         NoDescriptionAdded: "Aucune description ajoutée",
@@ -1639,7 +1644,7 @@ module.exports = Backbone.Model.extend({
         Message: "Message",
         Messages: "Messages",
         Store: "Boutique",
-        Edit: "Editer",
+        Edit: "Modifier",
         Used: "Utilisé",
         Delete: "Supprimer",
         DontDelete: "Ne pas supprimer",
@@ -1649,12 +1654,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenue",
         CreateStore: "Créer une boutique",
         GoToMyPage: "Ma page",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Tapez #games, #shoes ou un autre #mot_clé...",
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
         SearchFeedPlaceholder: "Tapez un mot-clé...",
         SearchForFollowersPlaceholder: "Tapez un nom...",
         SearchForUsersPlaceholder: "Tapez un nom...",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Tapez un titre...",
         EstDeliveryDomesticPlaceholder: "3-5 jours ouvrés",
         EstDeliveryInternationalPlaceholder: "7-15 jours ouvrés",
         OrderProcessingTimePlaceholder: "Entrer le temps nécessaire pour traiter la commande",
@@ -1664,7 +1669,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Entrer une condition de retour...",
         CategoryPlaceholder: "Entrer une catégorie",
         CategoryHelperText: "Les catégories sont utilisées pour regrouper et organiser les articles au sein de votre boutique.",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        KeywordsHelperText: "Ajouter des mots-clés permet à votre annonce d'être découverte sur le marché.",
         ExpirationDateHelperText: "Définir une date pour que l'article soit automatiquement retiré de votre boutique.",
         ClearExpirationDate: "Effacer la date d'expiration",
         ReturnPolicy: "Condition de retour",
@@ -1690,7 +1695,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Retours",
         ReturnsPolicy: "Conditions de retours",
         Ampersand: "&",
-        Tags: "Tags", //notTranslated
+        Tags: "Mots-clés",
         Keywords: "Mots-clés",
         ShipsFrom: "Expédie de",
         ShipsTo: "Expédie vers",
@@ -1701,8 +1706,8 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
         BitcoinReturnAddress: "Adresse Bitcoin de retour",
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "En cas de remboursement, vos fonds seront émis à l'adresse suivante.",
+        BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
+        BitcoinReturnAddressInfo: "En cas de remboursement, vos fonds seront envoyés à l'adresse suivante.",
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1784,8 +1789,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cas",
         Enter: "Entrer",
         Discover: "Découvrir",
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated        
+        Block: "Bloquer",
+        Unblock: "Débloquer",
         Blocked: "Bloqué",
         Advanced: "Avancé",
         General: "Général",
@@ -1804,16 +1809,16 @@ module.exports = Backbone.Model.extend({
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        Summary: "Récapitulatif",
+        Funds: "Fonds",
+        Discussion: "Discussion",
+        Quantity: "Quantité",
+        ShippingTo: "Expédier à",
+        ModeratedBy: "Modéré par",
+        Submit: "Envoyer",
+        maxLength20: "20 caractères maximum",
+        maxLength80: "80 caractères maximum",
+        maxLength200: "200 caractères maximum",
         StoreModeratorsOptional: "Modérateurs de boutique (Optionnel)",
         Searchformoderators: "Rechercher des modérateurs",
         Contributors: "Contributeurs",
@@ -1845,43 +1850,43 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Terminé (fonds reçus)",
           OrderStatus4: "Contesté",
           OrderTotal: "Total de la commande",
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          OrderTotalInBTC: "Total BTC",
+          PaymentProtection: "Protection de paiement",
+          ShipTo: "Expédier à",
+          ConfirmOrder: "Confirmer cette commande",
+          ReceivingAddress: "Adresse de réception",
+          RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
+          Shipper: "Article expédié par",
+          ShipperPlaceholder: "Nom de l'entreprise expédiant l'article",
+          TrackingNumber: "Numéro de suivi",
+          TrackingNumberPlaceholder: "Numéro de suivi de cet article",
+          EstimatedDelivery: "Délai de livraison estimé",
+          EstimatedDeliveryPlaceholder: "Date estimée de la livraison de l'article",
+          URL: "URL",
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
+          Password: "Mot de passe",
+          PasswordPlaceholder: "Mot de passe requis pour le lien, si nécessaire",
+          DirectTransaction: "Transaction directe",
+          ModeratedTransaction: "Transaction modérée",
+          Seller: "Vendeur",
+          Buyer: "Acheteur",
           transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          copyTxid: "copier l'ID de transaction",
+          Close: "Fermer",
+          FundOrder: "Financer la commande",
+          sortByDateNewest: "Par date, les plus récentes",
+          sortByDateOldest: "Par date, les plus anciennes",
+          PayPurchase: "Payer cet achat",
+          CompleteOrder: "Compléter cette commande",
+          RateThisTransaction: "Noter cette transaction",
+          TransactionReview: "Avis de transaction",
+          OverallRating: "Note générale",
+          Quality: "Qualité",
+          Description: "Description",
+          DeliveryTime: "Heure de livraison",
+          CustomerService: "Service client",
+          Review: "Avis",
+          ReviewPlaceHolder: "Votre avis sur cette transaction",
           NoneSent: "None sent" // not translated
         },
         errorMessages: {
@@ -1895,7 +1900,7 @@ module.exports = Backbone.Model.extend({
           socketError: "L'URL pour WebSocket a échoué. Connexion au socket avec l'adresse par défaut de ws://localhost:18466",
           contractError: "Cet article ne peut pas être acheté",
           sellerError: "Le serveur du vendeur a rejeté la demande d'achat",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme"
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -1908,9 +1913,9 @@ module.exports = Backbone.Model.extend({
           SaveSuccess: "Vos changements ont été enregistrés."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Analyse de votre réseau",
+          searchingText: "Analyse de votre réseau pour",
+          noResults: "Aucune annonce trouvée dans votre réseau avec le mot-clé"
         },
         filters: {
           pagesAllTypes: "Tous les types",
@@ -1922,7 +1927,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "Toutes"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Tapez un @nom_d_utilisateur, GUID ou un #mot_clé...",
           myPage: "Ma page",
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
@@ -1938,7 +1943,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configuration d'OpenBazaar",
           Introduction: "Présentation",
-          IntroductionBody: "OpenBazaar est un marché social pair à pair. Ce projet est semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. Il n’y a pas de frais ou de restrictions et OpenBazaar est un projet open-source. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase d’apprentissage.",
+          IntroductionBody: "OpenBazaar est un marché social pair à pair, semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. OpenBazaar est un projet open-source qui n'applique pas de frais ou de restrictions particulières. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase de découverte.",
           Theme: "Sélectionner un thème pour votre page",
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
@@ -1964,7 +1969,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Explorez les annonces et les pages sur OpenBazaar",
           Finished: "Terminé"
         },
         buyFlow: {
@@ -2025,6 +2030,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Urmărire",
         Feed: "Feed",
         FeedPlaceholder: "Lista de actualizări de la toate paginile urmărite",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Oprire Urmărire",
         About: "Despre",
         NoDescriptionAdded: "Nu a fost adăgată descrirea",
@@ -2421,6 +2427,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Подписан",
         Feed: "Лента",
         FeedPlaceholder: "Лента обновлений, за которыми я слежу",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
@@ -2817,6 +2824,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Sleduj",
         Feed: "Feed",
         FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete.",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
@@ -3216,6 +3224,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Takip et",
         Feed: "Haberler",
         FeedPlaceholder: "Takip ettiğiniz tüm sayfalardan haberler",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Takibi bırak",
         About: "Hakkında",
         NoDescriptionAdded: "Tanım eklenmemiş",
@@ -3616,6 +3625,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Pab",
         Feed: "BIQtIq",
         FeedPlaceholder: "BIQtIq chu' wa' vo' chaq juH Dapab",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Mej",
         About: "Umqu' ghot",
         NoDescriptionAdded: "Pagh bang nob",
@@ -3979,7 +3989,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "中文",
-        langCode: "zh",
+        langCode: "zh-CN",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "下一步",
         IAgree: "我同意",
@@ -4015,6 +4025,7 @@ module.exports = Backbone.Model.extend({
         Follow: "关注",
         Feed: "消息来源",
         FeedPlaceholder: "更新您关注的所有网页",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "不再关注",
         About: "关于",
         NoDescriptionAdded: "未加描述",
@@ -4414,6 +4425,7 @@ module.exports = Backbone.Model.extend({
         Follow: "팔로우",
         Feed: "새로고침",
         FeedPlaceholder: "당신이 따른 모든페이지에서 업데이트 공급",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "팔로우 취소",
         About: "정보",
         NoDescriptionAdded: "설명할수 없어",
@@ -4778,7 +4790,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "日本語 (Japanese)",
-        langCode: "ja",
+        langCode: "ja-JP",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "次へ",
         IAgree: "同意する",
@@ -4811,6 +4823,7 @@ module.exports = Backbone.Model.extend({
         Follow: "フォロー",
         Feed: "フィード",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "フォローをやめる",
         About: "プロフェール",
         NoDescriptionAdded: "説明はありません",
