@@ -144,6 +144,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme",
         Listing: "Listing",
         Listings: "Listings",
+        ViewPage: "View page", //notTranslated
         Pages: "Pages",
         Page: "Page",
         Language: "Language",
@@ -538,6 +539,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -931,6 +933,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -1332,6 +1335,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Argomento",
         Listing: "Listato",
         Listings: "Listati",
+        ViewPage: "View page", //notTranslated
         Pages: "Pagine",
         Page: "Pagina",
         Language: "Lingua",
@@ -1733,6 +1737,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Thème",
         Listing: "Annonce",
         Listings: "Annonces",
+        ViewPage: "View page", //notTranslated
         Pages: "Pages",
         Page: "Page",
         Language: "Langue",
@@ -2131,6 +2136,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -2528,6 +2534,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Тема", //not translated
         Listing: "Объявление", //not translated
         Listings: "Объявления", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Страницы", //not translated
         Page: "Страница", //not translated
         Language: "Язык", //not translated
@@ -2924,6 +2931,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -3325,6 +3333,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -3725,6 +3734,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -4125,6 +4135,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -4526,6 +4537,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -4923,6 +4935,7 @@ module.exports = Backbone.Model.extend({
         Theme: "テーマ",
         Listing: "出品",
         Listings: "出品",
+        ViewPage: "View page", //notTranslated
         Pages: "ページ",
         Page: "ページ",
         Language: "言語",
