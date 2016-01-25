@@ -85,7 +85,7 @@
       <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { 
         if(data.length < 100 && i < 11) { 
         %>
-          <a href="#home/products/<%- data %>">
+          <a href="#home/products/<%- data.replace(/\s+/g, '')  %>">
             <div class="btn-pill custCol-secondary floatLeft">
               #<%- data.replace(/\s+/g, '') %>
             </div>
