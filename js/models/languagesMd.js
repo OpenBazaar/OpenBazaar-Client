@@ -242,10 +242,11 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
+        Moderator: "Moderator",
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
           ServiceFee: "Service fee",
-          ServiceFeePlaceholder: "Percentage of transaction price"
+          ServiceFeeNote: "Percentage of transaction price (max 25)"
         },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",

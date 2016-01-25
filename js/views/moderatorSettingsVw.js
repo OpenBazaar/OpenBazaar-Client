@@ -24,10 +24,8 @@ module.exports = Backbone.View.extend({
     this.parentEl = $(options.parentEl);
     this.moderatorFeeInput;
     this.moderatorStatus = true;
+    this.oldFeeValue = 0;
 
-    this.subViews = [];
-    this.subModels = [];
-    
     this.render();
   },
 
@@ -91,14 +89,6 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
     this.unbind();
     this.remove();
   }
