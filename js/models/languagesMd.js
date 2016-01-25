@@ -311,7 +311,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "This Item Cannot be Purchased",
           sellerError: "The seller's server has rejected the purchase request",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
+          storeUnavailable: "This store is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -701,7 +702,8 @@ module.exports = Backbone.Model.extend({
           socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n predeterminada de ws://localhost:18466",
           contractError: "Este artículo no puede ser comprado" ,
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          storeUnavailable: "This store is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1098,7 +1100,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
           contractError: "Dieser Artikel kann nicht gekauft werden",
           sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          storeUnavailable: "This store is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1499,7 +1502,8 @@ module.exports = Backbone.Model.extend({
           socketError: "Connessione all'URL per WebSocket fallita. Connettere al socket con l'indirizzo di default ws://localhost:18466",
           contractError: "Questo articolo non pu&ograve; essere acquistato",
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto",
-          checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto"
+          checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto",
+          storeUnavailable: "This store is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
