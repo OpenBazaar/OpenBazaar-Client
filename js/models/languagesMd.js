@@ -243,6 +243,14 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
+        Moderator: "Moderator",
+        moderatorSettings: {
+          ProvideResolution: "Provide dispute resolution",
+          ServiceFee: "Service fee",
+          ServiceFeeNote: "Percentage of transaction price (max 25)"
+        },
+        BecomeModerator: "Become a moderator",
+        EditModerator: "Moderator Settings",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -634,6 +642,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1032,6 +1046,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1434,6 +1454,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1836,6 +1862,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "Non renseigné",
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -2235,6 +2267,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2633,6 +2671,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Продано",
           PurchasedBy: "Куплено",
@@ -3030,6 +3074,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3432,6 +3482,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3833,6 +3889,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4234,6 +4296,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4636,6 +4704,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -5024,6 +5098,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",

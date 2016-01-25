@@ -16,7 +16,8 @@ var __ = require('underscore'),
     showErrorModal = require('../utils/showErrorModal.js'),
     setTheme = require('../utils/setTheme.js'),
     sanitizeHTML = require('sanitize-html'),
-    storeWizardVw = require('./storeWizardVw');
+    storeWizardVw = require('./storeWizardVw'),
+    moderatorSettingsVw = require('./moderatorSettingsVw');
 
 //create a default item because a new itemModel will be created with only flat attributes
 var defaultItem = {
@@ -139,6 +140,7 @@ module.exports = Backbone.View.extend({
     'click .js-follow': 'followUserClick',
     'click .js-unfollow': 'unfollowUserClick',
     'click .js-message': 'sendMessage',
+    'click .js-moderatorSettings': 'showModeratorModal',
     'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
     'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
     'click .js-customizeBackgroundColor': 'displayCustomizeBackgroundColor',
@@ -229,6 +231,10 @@ module.exports = Backbone.View.extend({
       this.setItem(options.contract_hash, function(){
         self.deleteItem();
       });
+    });
+
+    this.listenTo(window.obEventBus, "moderatorStatus", function(options){
+      this.changeModeratorStatus(options.status, options.fee);
     });
 
     //determine if this is the user's own page or another profile's page
@@ -1267,6 +1273,34 @@ module.exports = Backbone.View.extend({
     var key = this.userProfile.get('profile').encryption_key;
     var guid = this.userProfile.get('profile').guid;
     window.obEventBus.trigger("openChat", guid, key);
+  },
+
+  showModeratorModal: function(){
+    "use strict";
+    var self = this,
+        moderatorSettingsModel = new Backbone.Model();
+    moderatorSettingsModel.set(this.model.attributes);
+    this.moderatorSettingsView = new moderatorSettingsVw({model:moderatorSettingsModel, parentEl: '#modalHolder'});
+    this.subViews.push(this.moderatorSettingsView);
+    this.subModels.push(moderatorSettingsModel);
+  },
+
+  changeModeratorStatus: function(status, fee){
+    "use strict";
+    //set new moderator values without a fetch
+    var tempPage = __.clone(this.model.get('page'));
+    tempPage.profile.moderator = status;
+    tempPage.profile.moderation_fee = fee;
+    this.model.set('page', tempPage);
+
+    //set button state without re-rendering
+    if(status){
+      this.$('.js-userPageEditModerator').removeClass('hide');
+      this.$('.js-userPageBecomeModerator').addClass('hide');
+    } else {
+      this.$('.js-userPageEditModerator').addClass('hide');
+      this.$('.js-userPageBecomeModerator').removeClass('hide');
+    }
   },
 
   close: function(){
