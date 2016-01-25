@@ -118,6 +118,10 @@ module.exports = baseVw.extend({
     $('.js-productsTab, .js-vendorsTab, .js-feedTab').removeClass('active');
   },
 
+  resetLookingCount: function(){
+    this.lookingCount = 0;
+  },
+
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
     if(data.id == this.socketItemsID){
@@ -129,6 +133,8 @@ module.exports = baseVw.extend({
     } else if(data.id == this.socketSearchID) {
       this.renderItem(data);
     }
+    
+    this.resetLookingCount();
   },
 
   render: function(){
