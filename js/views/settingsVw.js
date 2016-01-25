@@ -43,6 +43,8 @@ module.exports = Backbone.View.extend({
     'change .js-settingsThemeSelection': 'themeClick',
     'click .js-settingsAddressDelete': 'addressDelete',
     'click .js-settingsAddressUnDelete': 'addressUnDelete',
+    'click #moderatorYes': 'showModeratorFeeHolder',
+    'click #moderatorNo': 'hideModeratorFeeHolder',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -66,6 +68,10 @@ module.exports = Backbone.View.extend({
 
     this.newAvatar = false;
     this.newBanner = false;
+
+    this.moderatorFeeInput;
+    this.moderatorFeeHolder;
+    this.oldFeeValue = 0;
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
@@ -145,6 +151,8 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
+      self.moderatorFeeInput = self.$('#moderatorFeeInput');
+      self.moderatorFeeHolder = self.$('.js-settingsModeratorFee');
       if(self.model.get('page').profile.avatar_hash){
         $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
       }
@@ -309,7 +317,8 @@ module.exports = Backbone.View.extend({
         currency_str = "",
         timezone_str = "",
         language_str = "",
-        pageNSFW = this.model.get('page').profile.nsfw;
+        pageNSFW = this.model.get('page').profile.nsfw,
+        moderatorStatus = this.model.get('page').profile.moderator;
 
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
 
@@ -372,6 +381,22 @@ module.exports = Backbone.View.extend({
         self.renderModerator(modID);
       }
     });
+
+    //set moderator status
+    this.$('#pageForm input[name=moderator]').val([String(moderatorStatus)]);
+  },
+
+  showModeratorFeeHolder: function(){
+    "use strict";
+    this.moderatorFeeHolder.removeClass('hide');
+    this.moderatorFeeInput.val(this.oldFeeValue);
+  },
+
+  hideModeratorFeeHolder: function(){
+    "use strict";
+    this.moderatorFeeHolder.addClass('hide');
+    this.oldFeeValue = this.moderatorFeeInput.val();
+    this.moderatorFeeInput.val(0);
   },
 
   handleSocketMessage: function(response) {
