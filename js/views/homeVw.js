@@ -449,7 +449,7 @@ module.exports = baseVw.extend({
     var text = '';
 
     count = count || 0;
-    if (this.blockedItemCount === count) return;
+    if (this._blockedItemCount === count) return;
     this._blockedItemCount = count;
     
     if (count) {
