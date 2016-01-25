@@ -244,11 +244,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
           ServiceFee: "Service fee",
-          ServiceFeePlaceholder: "Percentage of transaction price",
-          MinimumFee: "Minimum fee",
-          MinimumFeePlaceholder: "Minimum price for your services",
-          PaymentAddress: "Bitcoin Address",
-          PaymentAddressPlaceholder: "Your payments are sent to this address"
+          ServiceFeePlaceholder: "Percentage of transaction price"
         },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",

@@ -1,16 +1,16 @@
-<div class="modal modal-opaque js-moderatorModal fadeOut  custCol-text">
+<div class="modal modal-opaque js-moderatorModal custCol-text">
   <div class="modal-child modal-childMain">
     <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModeratorModal">
       <h2 class="ion-close-round"></h2>
     </div>
     <div class="modal-hero shadow-inner1-light"
-         style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.profile.header_hash %>), url(imgs/defaultBanner.png);">
+         style="background-image: url(<%- ob.headerURL %>), url(imgs/defaultBanner.png);">
     </div>
     <div class="homeModal-accordion accordion">
       <div class="accordion-window">
         <div class="accordion-child">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <% if(ob.profile.moderator){ %>
+            <% if(ob.page.profile.moderator){ %>
             <%= polyglot.t('EditModerator') %>
             <% } else {%>
             <%= polyglot.t('BecomeModerator') %>
@@ -28,8 +28,19 @@
                     </div>
                     <div class="flexCol-7 custCol-border positionWrapper">
                       <div class="fieldItem">
-                        <input type="radio" class="fieldItem" id="moderatorSettingsModYes" name="moderator" value="true" checked /><label for="moderatorSettingsModYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                        <input type="radio" class="fieldItem" id="moderatorSettingsModNo" name="moderator" value="false"/><label for="moderatorSettingsModNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                        <input type="radio"
+                               class="fieldItem"
+                               id="moderatorSettingsModYes"
+                               name="moderator"
+                               value="true"
+                               checked />
+                        <label for="moderatorSettingsModYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                        <input type="radio"
+                               class="fieldItem"
+                               id="moderatorSettingsModNo"
+                               name="moderator"
+                               value="false"/>
+                        <label for="moderatorSettingsModNo" class="radioLabel"><%= polyglot.t('No') %></label>
                       </div>
                     </div>
                   </div>
@@ -41,49 +52,13 @@
                       </div>
                     </div>
                     <div class="flexCol-7 custCol-border positionWrapper">
-                      <input type="number" min="0.1" step="0.1" name="service_fee" class="fieldItem custCol-text" id="moderatorSettingsFeeInput" required/>
-                    </div>
-                  </div>
-                  <div class="flexRow">
-                    <div class="flexCol-5 custCol-border">
-                      <div class="fieldItem">
-                        <label for="buyWizardCityInput"><%= polyglot.t('moderatorSettings.MinimumFee') %></label>
-                      </div>
-                    </div>
-                    <div class="flexCol-7 custCol-border positionWrapper">
-                      <input type="text" name="new_ship_to_city" class="fieldItem custCol-text" id="buyWizardCityInput" required/>
-                    </div>
-                  </div>
-                  <div class="flexRow">
-                    <div class="flexCol-5 custCol-border">
-                      <div class="fieldItem">
-                        <label for="buyWizardStateInput"><%= polyglot.t('ShipToState') %></label>
-                      </div>
-                    </div>
-                    <div class="flexCol-7 custCol-border positionWrapper">
-                      <input type="text" name="new_ship_to_state" class="fieldItem custCol-text js-buyWizardStateInput" id="buyWizardStateInput" required/>
-                    </div>
-                  </div>
-                  <div class="flexRow">
-                    <div class="flexCol-5 custCol-border">
-                      <div class="fieldItem">
-                        <label for="buyWizardPostalInput"><%= polyglot.t('ShipToPostalCode') %></label>
-                      </div>
-                    </div>
-                    <div class="flexCol-7 custCol-border positionWrapper">
-                      <input type="text" name="new_ship_to_street" class="fieldItem custCol-text js-buyWizardPostalInput" id="buyWizardPostalInput" required/>
-                    </div>
-                  </div>
-                  <div class="flexRow overflowVisible">
-                    <div class="flexCol-5 custCol-border">
-                      <div class="fieldItem">
-                        <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %></label>
-                      </div>
-                    </div>
-                    <div class="flexCol-7 custCol-border positionWrapper">
-                      <div class="fieldItem padding0">
-                        <div class="fieldItem-selectWrapper chosen-relative noIcon js-buyWizardCountryWrapper"></div>
-                      </div>
+                      <input type="number"
+                             min="0.1"
+                             step="0.1"
+                             name="moderation_fee"
+                             class="fieldItem custCol-text"
+                             id="moderatorSettingsFeeInput"
+                             value="<%- ob.service_fee %>" required/>
                     </div>
                   </div>
                 </form>
@@ -91,11 +66,11 @@
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3">
-              <%= polyglot.t('Cancel') %>
+            <a class="btn btn-bar btn-half js-closeModeratorModal custCol-secondary borderBottomLeftRaidus3">
+              <%= polyglot.t('Close') %>
             </a>
-            <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3">
-              <%= polyglot.t('Next') %>
+            <a class="btn btn-bar btn-half js-moderatorSettingsSave custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Save') %>
             </a>
           </div>
         </div>

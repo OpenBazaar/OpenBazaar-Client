@@ -16,7 +16,8 @@ var __ = require('underscore'),
     showErrorModal = require('../utils/showErrorModal.js'),
     setTheme = require('../utils/setTheme.js'),
     sanitizeHTML = require('sanitize-html'),
-    storeWizardVw = require('./storeWizardVw');
+    storeWizardVw = require('./storeWizardVw'),
+    moderatorSettingsVw = require('./moderatorSettingsVw');
 
 //create a default item because a new itemModel will be created with only flat attributes
 var defaultItem = {
@@ -139,7 +140,7 @@ module.exports = Backbone.View.extend({
     'click .js-follow': 'followUserClick',
     'click .js-unfollow': 'unfollowUserClick',
     'click .js-message': 'sendMessage',
-    'click .js-moderator': 'showModeratorModal',
+    'click .js-moderatorSettings': 'showModeratorModal',
     'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
     'click .js-customizePrimaryColor': 'displayCustomizePrimaryColor',
     'click .js-customizeBackgroundColor': 'displayCustomizeBackgroundColor',
@@ -1272,7 +1273,12 @@ module.exports = Backbone.View.extend({
 
   showModeratorModal: function(){
     "use strict";
-
+    var self = this,
+        moderatorSettingsModel = new Backbone.Model();
+    moderatorSettingsModel.set(this.model.attributes);
+    this.moderatorSettingsView = new moderatorSettingsVw({model:moderatorSettingsModel, parentEl: '#modalHolder'});
+    this.subViews.push(this.moderatorSettingsView);
+    this.subModels.push(moderatorSettingsModel);
   },
 
   close: function(){
