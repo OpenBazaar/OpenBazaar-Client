@@ -233,6 +233,10 @@ module.exports = Backbone.View.extend({
       });
     });
 
+    this.listenTo(window.obEventBus, "moderatorStatus", function(options){
+      this.changeModeratorStatus(options.status, options.fee);
+    });
+
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
     //sometimes it can be set to the string 'null', check for that too
@@ -1279,6 +1283,24 @@ module.exports = Backbone.View.extend({
     this.moderatorSettingsView = new moderatorSettingsVw({model:moderatorSettingsModel, parentEl: '#modalHolder'});
     this.subViews.push(this.moderatorSettingsView);
     this.subModels.push(moderatorSettingsModel);
+  },
+
+  changeModeratorStatus: function(status, fee){
+    "use strict";
+    //set new moderator values without a fetch
+    var tempPage = __.clone(this.model.get('page'));
+    tempPage.profile.moderator = status;
+    tempPage.profile.moderation_fee = fee;
+    this.model.set('page', tempPage);
+
+    //set button state without re-rendering
+    if(status){
+      this.$('.js-userPageEditModerator').removeClass('hide');
+      this.$('.js-userPageBecomeModerator').addClass('hide');
+    } else {
+      this.$('.js-userPageEditModerator').addClass('hide');
+      this.$('.js-userPageBecomeModerator').removeClass('hide');
+    }
   },
 
   close: function(){

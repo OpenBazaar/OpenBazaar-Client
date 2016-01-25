@@ -14,18 +14,20 @@ module.exports = Backbone.View.extend({
     'click .js-moderatorModal': 'blockClicks',
     'click .js-closeModeratorModal': 'closeModeratorSettings',
     'click .js-moderatorSettingsSave': 'saveModeratorSettings',
+    'click #moderatorSettingsModYes': 'showModeratorFeeHolder',
+    'click #moderatorSettingsModNo': 'hideModeratorFeeHolder',
     'blur input': 'validateInput'
   },
 
   initialize: function(options){
     var self = this;
     this.parentEl = $(options.parentEl);
+    this.moderatorFeeInput;
+    this.moderatorStatus = true;
 
     this.subViews = [];
     this.subModels = [];
-
-    console.log(this.model.attributes);
-
+    
     this.render();
   },
 
@@ -37,6 +39,7 @@ module.exports = Backbone.View.extend({
 
       //append the view to the passed in parent
       self.parentEl.append(self.$el);
+      self.moderatorFeeInput = self.$('#moderatorSettingsFeeInput');
     });
     return this;
   },
@@ -46,13 +49,28 @@ module.exports = Backbone.View.extend({
     var self = this,
         targetForm = this.$el.find('#moderatorSettingsForm'),
         formData = new FormData(),
-        moderatorData = {};
+        moderatorFee = this.moderatorFeeInput.val();
 
-    saveToAPI(targetForm, this.model.get('page').toJSON(), self.model.get('serverUrl') + "profile", function(){
-      //do post success stuff here
-    }, "", moderatorData);
+    saveToAPI(targetForm, '', self.model.get('user').serverUrl + "profile", function(){
+      self.closeModeratorSettings();
+      window.obEventBus.trigger("moderatorStatus", {'status': self.moderatorStatus, 'fee': moderatorFee});
+    }, "");
   },
 
+  showModeratorFeeHolder: function(){
+    "use strict";
+    this.$('.js-moderatorSettingsFeeHolder').removeClass('hide');
+    this.moderatorFeeInput.val(this.oldFeeValue);
+    this.moderatorStatus = true;
+  },
+
+  hideModeratorFeeHolder: function(){
+    "use strict";
+    this.$('.js-moderatorSettingsFeeHolder').addClass('hide');
+    this.oldFeeValue = this.moderatorFeeInput.val();
+    this.moderatorFeeInput.val(0);
+    this.moderatorStatus = false;
+  },
 
   blockClicks: function(e) {
     "use strict";
