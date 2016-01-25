@@ -47,12 +47,16 @@ module.exports = Backbone.View.extend({
     var self = this,
         targetForm = this.$el.find('#moderatorSettingsForm'),
         formData = new FormData(),
-        moderatorFee = this.moderatorFeeInput.val();
+        moderatorFee = this.moderatorFeeInput.val(),
+        moderatorData = {};
+
+    moderatorData.name = self.model.get('page').profile.name;
+    moderatorData.location = self.model.get('page').profile.location;
 
     saveToAPI(targetForm, '', self.model.get('user').serverUrl + "profile", function(){
       self.closeModeratorSettings();
       window.obEventBus.trigger("moderatorStatus", {'status': self.moderatorStatus, 'fee': moderatorFee});
-    }, "");
+    }, "", moderatorData);
   },
 
   showModeratorFeeHolder: function(){
