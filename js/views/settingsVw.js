@@ -24,12 +24,13 @@ module.exports = Backbone.View.extend({
   className: "settingsView",
 
   events: {
-    'click .js-generalTab': 'generalClick',
-    'click .js-addressesTab': 'addressesClick',
-    'click .js-pageTab': 'pageClick',
-    'click .js-storeTab': 'storeClick',
-    'click .js-blockedTab': 'blockedClick',
-    'click .js-advancedTab': 'advancedClick',
+    'click .js-generalTab': 'tabClick',
+    'click .js-addressesTab': 'tabClick',
+    'click .js-pageTab': 'tabClick',
+    'click .js-storeTab': 'tabClick',
+    'click .js-blockedTab': 'tabClick',
+    'click .js-moderatorTab': 'tabClick',
+    'click .js-advancedTab': 'tabClick',
     'click .js-cancelGeneral': 'cancelView',
     'click .js-saveGeneral': 'saveGeneral',
     'click .js-cancelPage': 'cancelView',
@@ -38,6 +39,8 @@ module.exports = Backbone.View.extend({
     'click .js-saveAddress': 'saveAddress',
     'click .js-cancelStore': 'cancelView',
     'click .js-saveStore': 'saveStore',
+    'click .js-cancelModerator': 'cancelView',
+    'click .js-saveModerator': 'saveModerator',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvanced',
     'change .js-settingsThemeSelection': 'themeClick',
@@ -71,7 +74,7 @@ module.exports = Backbone.View.extend({
 
     this.moderatorFeeInput;
     this.moderatorFeeHolder;
-    this.oldFeeValue = 0;
+    this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
@@ -383,7 +386,7 @@ module.exports = Backbone.View.extend({
     });
 
     //set moderator status
-    this.$('#pageForm input[name=moderator]').val([String(moderatorStatus)]);
+    this.$('#moderatorForm input[name=moderator]').val([String(moderatorStatus)]);
   },
 
   showModeratorFeeHolder: function(){
@@ -466,44 +469,11 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  generalClick: function(){
+  tabClick: function(e){
     "use strict";
-    this.setState("general");
-    this.addTabToHistory("general");
-  },
-
-  addressesClick: function(){
-    "use strict";
-    this.setState("addresses");
-    this.addTabToHistory("addresses");
-    $('#content').find('input:visible:first').focus();
-  },
-
-  pageClick: function(){
-    "use strict";
-    this.setState("page");
-    this.addTabToHistory("page");
-    $('#content').find('input:visible:first').focus();
-  },
-
-  storeClick: function(){
-    "use strict";
-    this.setState("store");
-    this.addTabToHistory("store");
-    $('#content').find('input:visible:first').focus();
-  },
-
-  blockedClick: function(){
-    "use strict";
-    this.setState("blocked");
-    this.addTabToHistory("blocked");
-  },
-
-  advancedClick: function(){
-    "use strict";
-    this.setState("advanced");
-    this.addTabToHistory("advanced");
-    $('#content').find('input:visible:first').focus();
+    var tab = $(e.target).data('tab');
+    this.setState(tab);
+    this.addTabToHistory(tab);
   },
 
   cancelView: function(e){
@@ -714,6 +684,22 @@ module.exports = Backbone.View.extend({
       messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
     }, "", addressData);
+  },
+
+  saveModerator: function(){
+    "use strict";
+    var self = this,
+        form = this.$el.find("#moderatorForm"),
+        moderatorData = {};
+
+    moderatorData.name = self.model.get('page').profile.name;
+    moderatorData.location = self.model.get('page').profile.location;
+
+    saveToAPI(form, '', self.serverUrl + "profile", function(){
+      "use strict";
+      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.refreshView();
+    }, '', moderatorData);
   },
 
   saveAdvanced: function(){

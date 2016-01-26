@@ -938,10 +938,7 @@ label.fieldItem {
   visibility: hidden;
 }
 
-.positionWrapper {
-  /* use when you need a generic element around one or more elements where one is absolutely positioned */
-  position: relative;
-}
+
 
 .clickable {
   cursor: pointer;
@@ -1585,13 +1582,6 @@ margin: auto;
 
 .btn.btn-buyNow:hover {
   opacity: .75;
-}
-
-
-.btn.btn-txtOnly {
-  background: none;
-  box-shadow: none;
-  border: none;
 }
 
 #userPage .btn.inactive {
@@ -3965,6 +3955,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-backface-visibility: hidden;
 }
 
+#ov1 .btn.btn-txtOnly,
+#ov1 .btn.btn-bar.btn-txtOnly,
+#ov1 .btn.btn-bar.btn-tab.btn-txtOnly {
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
 #ov1 .overflowHidden {
   overflow-x: hidden;
   overflow-y: hidden;
@@ -4561,7 +4559,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: fixed;
 }
 
-#ov1 .positionRelative {
+#ov1 .positionWrapper {
+  /* use when you need a generic element around one or more elements where one is absolutely positioned */
+  position: relative;
+}
+
+ .positionRelative {
   position: relative;
 }
 
