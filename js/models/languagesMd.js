@@ -1686,7 +1686,7 @@ module.exports = Backbone.Model.extend({
         Website: "Site web",
         Guid: "OpenBazaar ID (GUID)",
         Welcome: "Bienvenue",
-        CreateStore: "Créer une boutique",
+        CreateStore: "Devenir une boutique",
         GoToMyPage: "Ma page",
         SearchForItemsPlaceholder: "Tapez #games, #shoes ou un autre #mot_clé...",
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
@@ -1767,7 +1767,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Thème",
         Listing: "Annonce",
         Listings: "Annonces",
-        ViewPage: "View page", //notTranslated
+        ViewPage: "Voir la page",
         Pages: "Pages",
         Page: "Page",
         Language: "Langue",
@@ -1780,7 +1780,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratuit",
         Category: "Catégorie",
         ProcessingTime: "Délai de traitement",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Sélectionner des photos",
         DragOrUploadPhotos: "Glisser ou uploader des photos",
         ExpirationDate: "Expire le",
         UploadCoverPhoto: "Uploader une photo de couverture",
@@ -1866,11 +1866,11 @@ module.exports = Backbone.Model.extend({
         NotProvided: "Non renseigné",
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
-        Moderator: "Moderator", // not translated
-        moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
-          ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        Moderator: "Modérateur",
+        moderatorSettings: {
+          ProvideResolution: "Apporter des résolutions aux conflits",
+          ServiceFee: "Frais de service",
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max)"
         },
         transactions: {
           SoldBy: "Vendu par",
