@@ -5493,7 +5493,7 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Termin wysyłki krajowej",
         InternationalShippingTime: "Termin wysyłki międzynarodowej",
         DisplayNSFWcontent: "Pokaż treści NSFW?",
-        Basic: "Basic",//
+        Basic: "Basic",//nottranslated
         Content: "Zawartość",
         StandardThemes: "Standardowe motywy",
         NoPhotosAdded: "Brak zdjęć",
@@ -5525,8 +5525,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee",//notTranslated
           ServiceFeeNote: "Percentage of transaction price (max 25)"//notTranslated
         },
-        BecomeModerator: "Become a moderator",
-        EditModerator: "Moderator Settings",
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sprzedawca",
           PurchasedBy: "Nabywca",
@@ -5610,8 +5610,8 @@ module.exports = Backbone.Model.extend({
           SaveSuccess: "Zmiany zostały zapisane."
         },
         discover: {
-          searchDefaultText: "Przeszukiwanie sieci"
-          searchingText: "Przeszukiwanie sieci dla"
+          searchDefaultText: "Przeszukiwanie sieci",
+          searchingText: "Przeszukiwanie sieci dla",
           noResults: "Brak pozycji z tagiem"
         },
         filters: {
