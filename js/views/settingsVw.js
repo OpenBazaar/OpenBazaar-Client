@@ -108,7 +108,7 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(model, response){
-        messageModal.showModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
+        messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
   },
@@ -532,7 +532,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
-      messageModal.showModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.setCurrentBitCoin(cCode);
       self.refreshView();
     });
@@ -569,7 +569,7 @@ module.exports = Backbone.View.extend({
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
         "use strict";
-        messageModal.showModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
       }, "", pageData, skipKeys);
     };
@@ -587,7 +587,7 @@ module.exports = Backbone.View.extend({
                 checkSocialCount();
               },
               function(data){
-                messageModal.showModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+                messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
               }, socialData);
         } else {
           checkSocialCount();
@@ -669,7 +669,7 @@ module.exports = Backbone.View.extend({
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
         "use strict";
-        messageModal.showModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
       }, "", settingsData);
     }, "", profileData);
@@ -694,7 +694,7 @@ module.exports = Backbone.View.extend({
     //if form is partially filled out throw error
     if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
-        messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
         return;
       }
     }
@@ -711,7 +711,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
-      messageModal.showModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
     }, "", addressData);
   },
@@ -723,7 +723,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
-      messageModal.showModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
     });
   },

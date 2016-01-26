@@ -281,7 +281,7 @@ module.exports = Backbone.View.extend({
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         }else if (data.success === false){
-          messageModal.showModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -427,7 +427,7 @@ module.exports = Backbone.View.extend({
           if (returnedId && data.success === true && returnedId != data.id){
             deleteThisItem(data.id);
           }else if (data.success === false){
-            messageModal.showModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+            messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
             self.trigger('saveNewDone', data.id);
@@ -446,7 +446,7 @@ module.exports = Backbone.View.extend({
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
-      messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
     }
   },
 

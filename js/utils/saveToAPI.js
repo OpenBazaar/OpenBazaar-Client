@@ -24,7 +24,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   if(form){
     form.addClass('formChecked');
     if (!form[0].checkValidity()){
-      messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return $.Deferred().reject('failed form validation').promise();
     }
 
@@ -103,10 +103,10 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
         if(onFail){
           onFail(data);
         } else{
-          messageModal.showModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       } else {
-        messageModal.showModal(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
       }
     },
     error: function(jqXHR, status, errorThrown){

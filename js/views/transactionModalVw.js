@@ -71,7 +71,7 @@ module.exports = Backbone.View.extend({
         self.render(response);
       },
       error: function (jqXHR, status, errorThrown) {
-        messageModal.showModal(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
         $('.js-loadingModal').addClass("hide");
         console.log(jqXHR);
         console.log(status);
@@ -132,7 +132,7 @@ module.exports = Backbone.View.extend({
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
-      showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
+      messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
     }
   },
 

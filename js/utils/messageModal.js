@@ -14,7 +14,7 @@ function hideModal() {
 }
 
 module.exports = {
-  showModal: showModal,
-  hideModal: hideModal,
+  show: showModal,
+  hide: hideModal,
   $el: $el
 };

@@ -269,7 +269,7 @@ module.exports = Backbone.View.extend({
           }else{
             //model was returned as a blank object
             $('.js-loadingModal').addClass('hide');
-            messageModal.showModal(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+            messageModal.show(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
             self.bindModalCloseHandler();
           }
 
@@ -284,7 +284,7 @@ module.exports = Backbone.View.extend({
       },
       error: function(model, response){
         $('.js-loadingModal').addClass('hide');
-        messageModal.showModal(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+        messageModal.show(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
         self.bindModalCloseHandler();
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
@@ -535,7 +535,7 @@ module.exports = Backbone.View.extend({
         self.renderItems(model.get('listings'));
       },
       error: function(model, response){
-        messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
+        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
       }
     });
     this.following.fetch({
@@ -568,6 +568,7 @@ module.exports = Backbone.View.extend({
             //call followers 2nd so list of following is available
             self.fetchFollowers();
           }).fail(function(jqXHR, status, errorThrown){
+            if (status == 'abort') return;
             console.log(jqXHR);
             console.log(status);
             console.log(errorThrown);
@@ -577,7 +578,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
+        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
       }
     });
   },
@@ -597,7 +598,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
+        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
       }
     });
   },
@@ -692,7 +693,8 @@ module.exports = Backbone.View.extend({
 
   setItem: function(hash, onSucceed){
     "use strict";
-    var self = this;
+    var self = this,
+        request;
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
@@ -718,7 +720,7 @@ module.exports = Backbone.View.extend({
     } else {
       this.itemFetchParameters = $.param({'id': hash, 'guid': this.pageID});
     }
-    this.item.fetch({
+    request = this.item.fetch({
       data: self.itemFetchParameters,
       timeout: 4000,
       success: function(model, response){
@@ -734,12 +736,14 @@ module.exports = Backbone.View.extend({
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
         if(response.statusText){
-          messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+          messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         } else {
-          messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+          messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         }
       }
     });
+
+    this.requests.push(request);
   },
 
   renderItem: function(hash){
@@ -749,7 +753,7 @@ module.exports = Backbone.View.extend({
           if (response.vendor_offer){
             self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           }else{
-            messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+            messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
             window.history.back();
           }
         }
@@ -1075,15 +1079,16 @@ module.exports = Backbone.View.extend({
               self.$el.find('.js-userPageBanner').css('background-image', 'url(' + serverUrl + "get_image?hash=" + imageHash + ')');
               self.saveUserPageModel();
             }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
+              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }else{
-              messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
+              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }
           }else if (data.success === false){
-            messageModal.showModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
+            messageModal.show(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
+          if (status == 'abort') return;
           console.log(jqXHR);
           console.log(status);
           console.log(errorThrown);
@@ -1107,8 +1112,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         formData = new FormData(),
-        pageData = this.model.get('page').profile,
-        request;
+        pageData = this.model.get('page').profile;
 
     for(var profileKey in pageData) {
       if(pageData.hasOwnProperty(profileKey)){
@@ -1126,7 +1130,7 @@ module.exports = Backbone.View.extend({
       }
     }
 
-    request = $.ajax({
+    $.ajax({
       type: "POST",
       url: self.model.get('user').serverUrl + "profile",
       contentType: false,
@@ -1134,23 +1138,27 @@ module.exports = Backbone.View.extend({
       data: formData,
       success: function(data) {
         data = JSON.parse(data);
+
         if(data.success === true){
-          self.setCustomStyles();
-          self.setState(self.lastTab);
+          if (!self.isRemoved()) {
+            self.setCustomStyles();
+            self.setState(self.lastTab);
+          }
+
           //refresh the universal profile model
           self.globalUserProfile.fetch();
-        }else if(data.success === false){
-          messageModal.showModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
+        }else if(data.success === false && !self.isRemoved()){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
+        if (!self.isRemoved()) {
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
+        }
       }
     });
-
-    this.requests.push(request);
   },
 
   cancelCustomizePage: function() {
@@ -1216,6 +1224,7 @@ module.exports = Backbone.View.extend({
           self.setState("store");
         },
         error: function (jqXHR, status, errorThrown) {
+          if (status == 'abort') return;
           console.log(jqXHR);
           console.log(status);
           console.log(errorThrown);
@@ -1272,6 +1281,7 @@ module.exports = Backbone.View.extend({
         self.subRender();
       },
       error: function(jqXHR, status, errorThrown){
+        if (status == 'abort') return;
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
@@ -1295,6 +1305,7 @@ module.exports = Backbone.View.extend({
         self.subRender();
       },
       error: function(jqXHR, status, errorThrown){
+        if (status == 'abort') return;
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
@@ -1360,7 +1371,10 @@ module.exports = Backbone.View.extend({
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
+    // console.log('boom-town');
+    // window.boom = this.requests;
     this.requests.forEach(function(req) {
+      // console.log('abort-abort');
       req.abort();
     });
   }

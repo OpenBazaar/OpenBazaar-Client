@@ -43,7 +43,7 @@ module.exports = Backbone.Router.extend({
   cleanup: function(){
     "use strict";
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
-    messageModal.hideModal();
+    messageModal.hide();
   },
 
   newView: function(view, bodyClass, addressBarText){
