@@ -5,7 +5,7 @@ var __ = require('underscore'),
     countriesModel = require('../models/countriesMd'),
     buyDetailsVw = require('./buyDetailsVw'),
     buyAddressesVw = require('./buyAddressesVw'),
-    showErrorModal = require('../utils/showErrorModal.js'),
+    messageModal = require('../utils/messageModal.js'),
     saveToAPI = require('../utils/saveToAPI'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
@@ -323,7 +323,7 @@ module.exports = Backbone.View.extend({
               self.skipAddressCheck();
             },
             function () {
-              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
+              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
             });
       } else {
         this.skipAddressCheck();
@@ -368,7 +368,7 @@ module.exports = Backbone.View.extend({
         btcReturnAddress = "";
 
     if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return;
     }
 
@@ -404,7 +404,7 @@ module.exports = Backbone.View.extend({
             if(data.success == true){
               self.showPayAddress(data);
             } else {
-              showErrorModal(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " + window.polyglot.t('errorMessages.checkPurchaseData'));
+              messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " + window.polyglot.t('errorMessages.checkPurchaseData'));
               self.$el.find('.js-buyWizardSpinner').addClass('hide');
             }
           },
@@ -416,7 +416,7 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(){
-        showErrorModal(window.polyglot.t('errorMessages.getError'));
+        messageModal.show(window.polyglot.t('errorMessages.getError'));
       }
     });
   },

@@ -2,7 +2,6 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    showErrorModal = require('../utils/showErrorModal.js'),
     saveToAPI = require('../utils/saveToAPI');
 Backbone.$ = $;
 
