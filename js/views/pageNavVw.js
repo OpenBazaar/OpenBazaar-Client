@@ -557,20 +557,19 @@ module.exports = Backbone.View.extend({
     "use strict";
     if(handle){
       $.ajax({
-        url: "http://resolver.onename.com/v2/users/" + handle,
-        dataType: "json",
+        url: this.model.get('resolver') + "/v2/users/" + handle,
+        dataType: "json"
       }).done(function(resolverData){
-        var account = resolverData[handle].profile.account.filter(function(accountObject){
-          return accountObject.service == "openbazaar";
-        });
-        console.log(resolverData);
-        console.log(account[0].identifier);
-        Backbone.history.navigate('#userPage/' + account[0].identifier, {trigger:true});
+        if(resolverData[handle].profile && resolverData[handle].profile.account){
+          var account = resolverData[handle].profile.account.filter(function (accountObject) {
+            return accountObject.service == "openbazaar";
+          });
+          Backbone.history.navigate('#userPage/' + account[0].identifier, {trigger: true});
+        } else {
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
+        }
       }).fail(function(jqXHR, status, errorThrown){
         messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
-        console.log(jqXHR);
-        console.log(status);
-        console.log(errorThrown);
       });
     }
   },

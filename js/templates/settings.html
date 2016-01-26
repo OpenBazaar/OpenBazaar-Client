@@ -1050,7 +1050,6 @@
                 <input name="libbitcoin_server"
                        id="libbitcoin_server"
                        type="text"
-                       placeholder="<%= polyglot.t('ServerIPPort') %>"
                        class="fieldItem"
                        value="<%= ob.user.libbitcoin_server %>">
               </div>
@@ -1060,19 +1059,18 @@
 
               <div class="flexCol-3  borderRight  custCol-border">
                 <div class="fieldItem">
-                  <label for="libbitcoin_server">
-                    <%= polyglot.t('LibbitcoinServerAddress') %>
+                  <label for="resolver">
+                    <%= polyglot.t('HandleResolver') %>
                   </label>
                 </div>
               </div>
 
               <div class="flexCol-9 custCol-border">
-                <input name="libbitcoin_server"
-                       id="libbitcoin_server"
+                <input name="resolver"
+                       id="resolver"
                        type="text"
-                       placeholder="<%= polyglot.t('ServerIPPort') %>"
                        class="fieldItem"
-                       value="<%= ob.user.libbitcoin_server %>">
+                       value="<%= ob.user.resolver %>">
               </div>
             </div>
 
@@ -1080,7 +1078,7 @@
 
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="ssl">
+                  <label>
                     <%= polyglot.t('EnableSSL') %>
                   </label>
                 </div>

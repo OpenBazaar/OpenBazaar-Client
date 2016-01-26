@@ -244,6 +244,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
         Moderator: "Moderator",
+        HandleResolver: "Handle Resolver",
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
           ServiceFee: "Service fee",
@@ -645,6 +646,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -1051,6 +1053,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -1461,6 +1464,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -1871,6 +1875,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -2278,6 +2283,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -2684,6 +2690,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -3090,6 +3097,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -3500,6 +3508,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -3909,6 +3918,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -4318,6 +4328,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -4728,6 +4739,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
@@ -5124,6 +5136,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
