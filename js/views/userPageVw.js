@@ -175,6 +175,7 @@ module.exports = Backbone.View.extend({
     this.itemFetchParameters = {};
     this.subViews = [];
     this.subModels = [];
+    this.requests = [];
     this.model = new Backbone.Model();
     this.globalUserProfile = options.userProfile;
     this.userProfile = new userProfileModel();
@@ -535,6 +536,8 @@ module.exports = Backbone.View.extend({
       data: self.userProfileFetchParameters,
       timeout: 5000,
       success: function(model){
+        var request;
+
         if(self.options.ownPage === true){
           self.ownFollowing = model.get('following') || [];
           self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -545,7 +548,7 @@ module.exports = Backbone.View.extend({
           //call followers 2nd so list of following is available
           self.fetchFollowers();
         } else {
-          $.ajax({
+          request = $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
             timeout: 4000
@@ -563,6 +566,8 @@ module.exports = Backbone.View.extend({
             console.log(status);
             console.log(errorThrown);
           });
+
+          self.requests.push(request);
         }
       },
       error: function(model, response){
@@ -1033,17 +1038,19 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     //var formData = new FormData(this.$el.find('#userPageImageForm')[0]);
-    var serverUrl = self.options.userModel.get('serverUrl');
-    var imageURI = self.$el.find('#image-cropper').cropit('export', {
-      type: 'image/jpeg',
-      quality: 0.75,
-      originalSize: false
-    });
+    var serverUrl = self.options.userModel.get('serverUrl'),
+        imageURI = self.$el.find('#image-cropper').cropit('export', {
+          type: 'image/jpeg',
+          quality: 0.75,
+          originalSize: false
+        }),
+        request;
+
     if(imageURI){
       imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
       var formData = new FormData();
       formData.append('image', imageURI);
-      $.ajax({
+      request = $.ajax({
         type: "POST",
         url: serverUrl + "upload_image",
         contentType: false,
@@ -1076,6 +1083,8 @@ module.exports = Backbone.View.extend({
           console.log(errorThrown);
         }
       });
+
+      this.requests.push(request);
     } else {
       self.saveUserPageModel();
     }
@@ -1092,7 +1101,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         formData = new FormData(),
-        pageData = this.model.get('page').profile;
+        pageData = this.model.get('page').profile,
+        request;
 
     for(var profileKey in pageData) {
       if(pageData.hasOwnProperty(profileKey)){
@@ -1110,7 +1120,7 @@ module.exports = Backbone.View.extend({
       }
     }
 
-    $.ajax({
+    request = $.ajax({
       type: "POST",
       url: self.model.get('user').serverUrl + "profile",
       contentType: false,
@@ -1133,6 +1143,8 @@ module.exports = Backbone.View.extend({
         console.log(errorThrown);
       }
     });
+
+    this.requests.push(request);
   },
 
   cancelCustomizePage: function() {
@@ -1181,13 +1193,14 @@ module.exports = Backbone.View.extend({
 
   deleteItem: function(confirm){
     "use strict";
-    var self=this;
+    var self=this,
+        request;
 
     if(this.confirmDelete === false && confirm){
       this.$el.find('.js-deleteItem').addClass('confirm');
       this.confirmDelete = true;
     } else {
-      $.ajax({
+      request = $.ajax({
         type: "DELETE",
         url: self.item.get('serverUrl') + "contracts/?id=" + self.item.get('id'),
         success: function () {
@@ -1202,6 +1215,8 @@ module.exports = Backbone.View.extend({
           console.log(errorThrown);
         }
       });
+
+      this.requests.push(request);
     }
   },
 
@@ -1239,8 +1254,10 @@ module.exports = Backbone.View.extend({
 
   followUser: function(options){
     "use strict";
-    var self = this;
-    $.ajax({
+    var self = this,
+        request;
+
+    request = $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
@@ -1254,12 +1271,16 @@ module.exports = Backbone.View.extend({
         console.log(errorThrown);
       }
     });
+
+    this.requests.push(request);
   },
 
   unfollowUser: function(options){
     "use strict";
-    var self = this;
-    $.ajax({
+    var self = this,
+        request;
+    
+    request = $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
@@ -1273,6 +1294,8 @@ module.exports = Backbone.View.extend({
         console.log(errorThrown);
       }
     });
+
+    this.requests.push(request);
   },
 
   sendMessage: function(){
@@ -1303,6 +1326,9 @@ module.exports = Backbone.View.extend({
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
+    this.requests.forEach(function(req) {
+      req.abort();
+    });
   }
 
 });
