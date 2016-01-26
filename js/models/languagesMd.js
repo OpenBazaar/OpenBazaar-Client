@@ -5477,8 +5477,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Sprawy",
         Enter: "Wprowadź",
         Discover: "Odkryj",
-        Block: "Block",//
-        Unblock: "Unblock",//
+        Block: "Block",//notTranslated
+        Unblock: "Unblock",//notTranslated
         Blocked: "Zablokowani",
         Advanced: "Zaawansowane",
         General: "Ogólne",
@@ -5519,11 +5519,11 @@ module.exports = Backbone.Model.extend({
         NotProvided: "niezapewniane",
         NotFollowingAnyone: "Brak obserwowanych",
         NoFollowers: "Brak obserwujących",
-        Moderator: "Moderator",//
+        Moderator: "Moderator",//notTranslated
         moderatorSettings: {
-          ProvideResolution: "Provide dispute resolution",//
-          ServiceFee: "Service fee",//
-          ServiceFeeNote: "Percentage of transaction price (max 25)"//
+          ProvideResolution: "Provide dispute resolution",//notTranslated
+          ServiceFee: "Service fee",//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25)"//notTranslated
         },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
