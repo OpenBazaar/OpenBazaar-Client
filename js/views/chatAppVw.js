@@ -160,11 +160,16 @@ module.exports = Backbone.View.extend({
         avatarURL = "",
         avatarHash = window.localStorage.getItem("avatar_" + guid);
 
-    if(avatarHash !== "") {
-      avatarURL = model.get('serverUrl') + "get_image?hash=" + avatarHash + "&guid=" + guid;
+    if (this.currentChatId === guid) {
+      this.openConversation();
+      return;
     }
 
     this.currentChatId = guid;
+
+    if(avatarHash !== "") {
+      avatarURL = model.get('serverUrl') + "get_image?hash=" + avatarHash + "&guid=" + guid;
+    }
 
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
@@ -296,16 +301,16 @@ module.exports = Backbone.View.extend({
 
   openConversation: function() {
     this.slideChatOut();
-    $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
-    $(this.$el).find('.chatSearch').addClass('textOpacity50');
+    this.$('.chatConversation').removeClass('chatConversationHidden');
+    this.$('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
+    this.$('.chatSearch').addClass('textOpacity50');
   },
 
   closeConversation: function() {
-    $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
-    $(this.$el).find('.chatHead').removeClass('chatHeadSelected');
-    $(this.$el).find('.chatSearch').removeClass('textOpacity50');
+    this.$('.chatConversation').addClass('chatConversationHidden');
+    this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
+    this.$('.chatHead').removeClass('chatHeadSelected');
+    this.$('.chatSearch').removeClass('textOpacity50');
 
     // let's clear the form on close
     $('#chatConversation').trigger('reset');
@@ -314,11 +319,11 @@ module.exports = Backbone.View.extend({
   },
 
   closeConversationSettings: function() {
-    $(this.$el).find('.chatConversationMenu').addClass('hide');
+    this.$('.chatConversationMenu').addClass('hide');
   },
   
   conversationSettings: function() {
-    var menu = $(this.$el).find('.chatConversationMenu');
+    var menu = this.$el.find('.chatConversationMenu');
     if(menu.hasClass('hide')){
       menu.removeClass('hide');
     }else{
@@ -333,7 +338,7 @@ module.exports = Backbone.View.extend({
 
   slideChatOut: function() {
     // Slide app out
-    $(this.$el).addClass('sideBarSlid', 500);
+    this.$el.addClass('sideBarSlid', 500);
 
     $('.container').addClass('compressed');
     //$('.modal-child').addClass('modalCompressed');
@@ -342,16 +347,16 @@ module.exports = Backbone.View.extend({
     $('#colorbox').addClass('marginLeftNeg115');
 
     // Adjust elements
-    $(this.$el).find('.chatSearch').addClass('chatSearchOut');
+    this.$el.find('.chatSearch').addClass('chatSearchOut');
 
-    var chatButton = $(this.$el).find('.btn-chatOpen');
+    var chatButton = this.$el.find('.btn-chatOpen');
     chatButton.addClass('hide');
     $('.chatMessagesLabel').removeClass('hide');
     chatButton.find('span').removeClass('hide');
   },
 
   slideChatIn: function() {
-    $(this.$el).removeClass('sideBarSlid', 500);
+    this.$el.removeClass('sideBarSlid', 500);
 
     $('.container').removeClass('compressed');
     //$('.modal-child').removeClass('modalCompressed');
@@ -360,13 +365,13 @@ module.exports = Backbone.View.extend({
     $('#colorbox').removeClass('marginLeftNeg115');
 
     // Adjust elements
-    $(this.$el).find('.chatSearch').removeClass('chatSearchOut');
+    this.$el.find('.chatSearch').removeClass('chatSearchOut');
   },
 
   closeChat: function(){
     this.slideChatIn();
     $('.chatHeadSelected').removeClass('chatHeadSelected');
-    var chatButton = $(this.$el).find('.btn-chatOpen');
+    var chatButton = this.$el.find('.btn-chatOpen');
     chatButton.removeClass('hide');
     chatButton.find('span').addClass('hide');
     this.closeConversation();

@@ -18,20 +18,20 @@
         <div class="chatConversationHeader">
             <div class="chatConversationAvatar thumbnail-small marginRight5 floatLeft js-username clickable"></div>
             <div class="chatConversationLabel floatLeft"></div>
-            <div class="btn-closeConversation floatRight marginTop4 textOpacity75">
+            <div class="conversationHeader-btn floatRight marginTop4 textOpacity75">
                 <a class="ion-close-round js-closeConversation"></a>
             </div>
-            <div class="btn-closeConversation floatRight marginTop4 textOpacity75 fontSize15">
+            <div class="conversationHeader-btn floatRight marginTop4 textOpacity75 fontSize15">
                 <a class="ion-android-more-vertical js-conversationSettings"></a>
             </div>
         </div>
 
         <div class="chatConversationMenu hide">
              <div>
-                 <%= polyglot.t('ViewPage') %>
+                 <a><%= polyglot.t('ViewPage') %></a>
              </div>
-             <div>
-                 <%= polyglot.t('Block') %>
+             <div class="js-block-user">
+                 <a><%= polyglot.t('Block') %></a>
              </div>
          </div>
 
