@@ -323,7 +323,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "The seller's server has rejected the purchase request",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
           pageUnavailable: "This page is currently unavailable.",
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -723,7 +723,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1130,7 +1130,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1541,7 +1541,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto",
           checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto",
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1952,7 +1952,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "Le serveur du vendeur a rejeté la demande d'achat",
           checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme",
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -2360,7 +2360,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "Serverul vânzătorului a respins cererea de cumpărare",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -2767,7 +2767,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "Сервер продавца отключил эту возможность",
           checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться ", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "о нас",
@@ -3174,7 +3174,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "Predajcov server odmietol žiadosť o nákup.",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3585,7 +3585,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "Satıcının sunucusu alım talebini reddetti",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3995,7 +3995,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "QuvHa' offer lajQo' loD 'Iv ngev",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4405,7 +4405,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "卖家的服务器拒绝了这笔买卖",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4816,7 +4816,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "판매자의 서버는 구매 요청을 거부했습니다.",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5213,7 +5213,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "出品者のサーバーは購入要求を拒否しました。",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid Open Bazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
