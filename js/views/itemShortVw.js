@@ -75,8 +75,7 @@ module.exports = Backbone.View.extend({
 
   itemClick: function(e){
     var self = this;
-    // Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+this.model.get('contract_hash'), {trigger: true});
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'moo-shoo-chicken' + '/item/'+this.model.get('contract_hash'), {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+this.model.get('contract_hash'), {trigger: true});
   },
 
   avatarClick: function(){

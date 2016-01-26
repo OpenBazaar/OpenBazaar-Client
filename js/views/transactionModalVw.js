@@ -6,7 +6,7 @@ var __ = require('underscore'),
     saveToAPI = require('../utils/saveToAPI'),
     orderModel = require('../models/orderMd'),
     qr = require('qr-encode'),
-    showErrorModal = require('../utils/showErrorModal'),
+    messageModal = require('../utils/messageModal'),
     clipboard = require('clipboard');
 
 module.exports = Backbone.View.extend({
@@ -71,7 +71,7 @@ module.exports = Backbone.View.extend({
         self.render(response);
       },
       error: function (jqXHR, status, errorThrown) {
-        showErrorModal(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        messageModal.showModal(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
         $('.js-loadingModal').addClass("hide");
         console.log(jqXHR);
         console.log(status);

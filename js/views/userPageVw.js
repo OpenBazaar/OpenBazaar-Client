@@ -13,7 +13,7 @@ var __ = require('underscore'),
     personListView = require('./userListVw'),
     itemVw = require('./itemVw'),
     itemEditVw = require('./itemEditVw'),
-    showErrorModal = require('../utils/showErrorModal.js'),
+    messageModal = require('../utils/messageModal.js'),
     setTheme = require('../utils/setTheme.js'),
     sanitizeHTML = require('sanitize-html'),
     storeWizardVw = require('./storeWizardVw');
@@ -262,7 +262,8 @@ module.exports = Backbone.View.extend({
           }else{
             //model was returned as a blank object
             $('.js-loadingModal').addClass('hide');
-            showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+            messageModal.showModal(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+            self.bindModalCloseHandler();
           }
 
           // Cache user avatar in localStorage
@@ -276,11 +277,23 @@ module.exports = Backbone.View.extend({
       },
       error: function(model, response){
         $('.js-loadingModal').addClass('hide');
-        showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+        messageModal.showModal(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+        self.bindModalCloseHandler();
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
       }
     });
+  },
+
+  bindModalCloseHandler: function(e) {
+    if (this.modalCloseHandler) return;
+
+    this.modalCloseHandler = function() {
+      window.history.back();
+    };
+
+    messageModal.$el.find('.js-closeIndexModal')
+      .one('click', this.modalCloseHandler);
   },
 
   render: function(){
@@ -515,7 +528,7 @@ module.exports = Backbone.View.extend({
         self.renderItems(model.get('listings'));
       },
       error: function(model, response){
-        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
+        messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
       }
     });
     this.following.fetch({
@@ -553,7 +566,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
+        messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
       }
     });
   },
@@ -573,7 +586,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
-        showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
+        messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
       }
     });
   },
@@ -710,9 +723,9 @@ module.exports = Backbone.View.extend({
       error: function(model, response){
         console.log("Fetch of itemModel from userPageView has failed");
         if(response.statusText){
-          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+          messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         } else {
-          showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+          messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
         }
       }
     });
@@ -725,7 +738,7 @@ module.exports = Backbone.View.extend({
           if (response.vendor_offer){
             self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
           }else{
-            showErrorModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+            messageModal.showModal(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
             window.history.back();
           }
         }
@@ -1049,12 +1062,12 @@ module.exports = Backbone.View.extend({
               self.$el.find('.js-userPageBanner').css('background-image', 'url(' + serverUrl + "get_image?hash=" + imageHash + ')');
               self.saveUserPageModel();
             }else if (imageHash == "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb"){
-              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
+              messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }else{
-              showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
+              messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.serverError'));
             }
           }else if (data.success === false){
-            showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
+            messageModal.showModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -1111,7 +1124,7 @@ module.exports = Backbone.View.extend({
           //refresh the universal profile model
           self.globalUserProfile.fetch();
         }else if(data.success === false){
-          showErrorModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
+          messageModal.showModal(window.polyglot.t('errorMessages.serverError'), "<i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -1289,6 +1302,7 @@ module.exports = Backbone.View.extend({
 
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();
+    messageModal.$el.off('click', this.modalCloseHandler);
   }
 
 });

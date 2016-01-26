@@ -11,7 +11,7 @@ var __ = require('underscore'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
     remote = require('remote'),
     cropit = require('../utils/jquery.cropit'),
-    showErrorModal = require('../utils/showErrorModal.js');
+    messageModal = require('../utils/messageModal.js');
 
 
 module.exports = Backbone.View.extend({

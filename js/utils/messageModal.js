@@ -1,22 +1,20 @@
 'use strict';
 
 var $ = require('jquery'),
-    $el;
+    $el = $('.js-messageModal');
 
 function showModal(errorTitle, errorMessage) {
-  var errorModal = $el || $('.js-messageModal');
-  errorModal.removeClass('hide');
-  errorModal.find('.js-messageModal-title').html(errorTitle);
-  errorModal.find('.js-messageModal-message').html(errorMessage);
+  $el.removeClass('hide');
+  $el.find('.js-messageModal-title').html(errorTitle);
+  $el.find('.js-messageModal-message').html(errorMessage);
 }
 
 function hideModal() {
-  var errorModal = $el || $('.js-messageModal');
-  errorModal.addClass('hide');
+  $el.addClass('hide');
 }
 
 module.exports = {
   showModal: showModal,
   hideModal: hideModal,
-  $el
+  $el: $el
 };

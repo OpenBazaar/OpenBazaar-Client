@@ -7,7 +7,7 @@ var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
-    showErrorModal = require('../utils/showErrorModal'),
+    messageModal = require('../utils/messageModal'),
     chosen = require('../utils/chosen.jquery.min.js');
 
 module.exports = Backbone.View.extend({
@@ -281,7 +281,7 @@ module.exports = Backbone.View.extend({
           self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
           self.updateImages();
         }else if (data.success === false){
-          showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          messageModal.showModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -427,7 +427,7 @@ module.exports = Backbone.View.extend({
           if (returnedId && data.success === true && returnedId != data.id){
             deleteThisItem(data.id);
           }else if (data.success === false){
-            showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+            messageModal.showModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
             self.trigger('saveNewDone', data.id);
@@ -446,7 +446,7 @@ module.exports = Backbone.View.extend({
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
+      messageModal.showModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
     }
   },
 
