@@ -123,12 +123,17 @@ module.exports = Backbone.View.extend({
 
   showPayment: function(){
     "use strict";
+    console.log(this.model.attributes);
     var totalBTCPrice = 0,
         payHREF,
         dataURI;
-    payHREF = "bitcoin:"+ this.model.get('buyer_order').order.payment.address+"?amount="+this.model.get('buyer_order').order.payment.amount+"&message="+this.model.get('vendor_offer').listing.item.title;
-    dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
-    this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
+    if(this.model.get('buyer_order')){
+      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title;
+      dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
+      this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
+    } else {
+      showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
+    }
   },
 
   setState: function(state){
