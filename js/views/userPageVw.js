@@ -1056,8 +1056,7 @@ module.exports = baseVw.extend({
           type: 'image/jpeg',
           quality: 0.75,
           originalSize: false
-        }),
-        request;
+        });
 
     if(imageURI){
       imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
