@@ -1682,7 +1682,7 @@ module.exports = Backbone.Model.extend({
         Website: "Site web",
         Guid: "OpenBazaar ID (GUID)",
         Welcome: "Bienvenue",
-        CreateStore: "Créer une boutique",
+        CreateStore: "Devenir une boutique",
         GoToMyPage: "Ma page",
         SearchForItemsPlaceholder: "Tapez #games, #shoes ou un autre #mot_clé...",
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
