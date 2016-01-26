@@ -1012,11 +1012,12 @@ label.fieldItem {
 
 #addressBar{
   height: 32px;
+  font-size: 13px;
 }
 
 #addressBar::-webkit-input-placeholder {
   color: #000;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .smPageHeader {
