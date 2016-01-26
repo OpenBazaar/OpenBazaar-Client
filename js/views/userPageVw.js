@@ -9,6 +9,7 @@ var __ = require('underscore'),
     listingsModel = require('../models/listingsMd'),
     usersModel = require('../models/usersMd'),
     itemModel = require('../models/itemMd'),
+    baseVw = require('./baseVw'),
     itemListView = require('./itemListVw'),
     personListView = require('./userListVw'),
     itemVw = require('./itemVw'),
@@ -117,7 +118,7 @@ function rgb2hex(rgb) {
     return hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   classname: "userView",
 
@@ -177,7 +178,6 @@ module.exports = Backbone.View.extend({
     this.itemFetchParameters = {};
     this.subViews = [];
     this.subModels = [];
-    this.requests = [];
     this.model = new Backbone.Model();
     this.globalUserProfile = options.userProfile;
     this.userProfile = new userProfileModel();
@@ -256,33 +256,35 @@ module.exports = Backbone.View.extend({
       timeout: 4000,
       success: function(model, response){
         //don't render if view has been closed and the $el has been deleted
-        if(self.$el){
-          if (response.profile){
-            $('.js-loadingModal').addClass('hide');
-            if (self.options.ownPage === true){
-              model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash);
-              model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash);
-            }else{
-              model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
-              model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
-            }
+        if (self.isRemoved()) return;
+
+        if (response.profile){
+          $('.js-loadingModal').addClass('hide');
+          if (self.options.ownPage === true){
+            model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash);
+            model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash);
           }else{
-            //model was returned as a blank object
-            $('.js-loadingModal').addClass('hide');
-            messageModal.show(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
-            self.bindModalCloseHandler();
+            model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
+            model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
           }
-
-          // Cache user avatar in localStorage
-          var profile = model.toJSON().profile;
-          window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
-
-          self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-          self.model.set({ownPage: self.options.ownPage});
-          self.render();
+        }else{
+          //model was returned as a blank object
+          $('.js-loadingModal').addClass('hide');
+          messageModal.show(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+          self.bindModalCloseHandler();
         }
+
+        // Cache user avatar in localStorage
+        var profile = model.toJSON().profile;
+        window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
+
+        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+        self.model.set({ownPage: self.options.ownPage});
+        self.render();
       },
       error: function(model, response){
+        if (self.isRemoved()) return;
+
         $('.js-loadingModal').addClass('hide');
         messageModal.show(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
         self.bindModalCloseHandler();
@@ -532,9 +534,11 @@ module.exports = Backbone.View.extend({
       data: self.userProfileFetchParameters,
       timeout: 5000,
       success: function(model){
+        if (self.isRemoved()) return;
         self.renderItems(model.get('listings'));
       },
       error: function(model, response){
+        if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
       }
     });
@@ -542,7 +546,7 @@ module.exports = Backbone.View.extend({
       data: self.userProfileFetchParameters,
       timeout: 5000,
       success: function(model){
-        var request;
+        if (self.isRemoved()) return;
 
         if(self.options.ownPage === true){
           self.ownFollowing = model.get('following') || [];
@@ -554,11 +558,12 @@ module.exports = Backbone.View.extend({
           //call followers 2nd so list of following is available
           self.fetchFollowers();
         } else {
-          request = $.ajax({
+          $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
             timeout: 4000
           }).done(function(ownFollowingData){
+            if (self.isRemoved()) return;
             self.ownFollowing = ownFollowingData.following || [];
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
               var followingGuid = followingObject.guid;
@@ -568,16 +573,15 @@ module.exports = Backbone.View.extend({
             //call followers 2nd so list of following is available
             self.fetchFollowers();
           }).fail(function(jqXHR, status, errorThrown){
-            if (status == 'abort') return;
+            if (self.isRemoved()) return;
             console.log(jqXHR);
             console.log(status);
             console.log(errorThrown);
           });
-
-          self.requests.push(request);
         }
       },
       error: function(model, response){
+        if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
       }
     });
@@ -591,6 +595,9 @@ module.exports = Backbone.View.extend({
       timeout: 5000,
       success: function(model){
         var followerArray = model.get('followers');
+
+        if (self.isRemoved()) return;
+
         self.renderFollowers(followerArray);
         //if this is not their page, see if they are being followed
         if(self.options.ownPage === false){
@@ -598,6 +605,7 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(model, response){
+        if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
       }
     });
@@ -693,8 +701,7 @@ module.exports = Backbone.View.extend({
 
   setItem: function(hash, onSucceed){
     "use strict";
-    var self = this,
-        request;
+    var self = this;
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
@@ -720,10 +727,12 @@ module.exports = Backbone.View.extend({
     } else {
       this.itemFetchParameters = $.param({'id': hash, 'guid': this.pageID});
     }
-    request = this.item.fetch({
+    this.item.fetch({
       data: self.itemFetchParameters,
       timeout: 4000,
       success: function(model, response){
+        if (self.isRemoved()) return;
+
         //set id after fetch, otherwise Backbone includes it in the fetch url
         model.set('id', hash);
         if (self.options.ownPage === false){
@@ -734,16 +743,10 @@ module.exports = Backbone.View.extend({
         onSucceed(model, response);
       },
       error: function(model, response){
-        console.log("Fetch of itemModel from userPageView has failed");
-        if(response.statusText){
-          messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
-        } else {
-          messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
-        }
+        if (self.isRemoved()) return;
+        messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
       }
     });
-
-    this.requests.push(request);
   },
 
   renderItem: function(hash){
@@ -1060,7 +1063,7 @@ module.exports = Backbone.View.extend({
       imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
       var formData = new FormData();
       formData.append('image', imageURI);
-      request = $.ajax({
+      $.ajax({
         type: "POST",
         url: serverUrl + "upload_image",
         contentType: false,
@@ -1070,6 +1073,9 @@ module.exports = Backbone.View.extend({
         success: function (data) {
           var imageHash,
               tempPage;
+
+          if (self.isRemoved()) return;
+
           if (data.success === true){
             imageHash = data.image_hashes[0] || [];
             if (imageHash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && imageHash.length){
@@ -1088,14 +1094,12 @@ module.exports = Backbone.View.extend({
           }
         },
         error: function (jqXHR, status, errorThrown) {
-          if (status == 'abort') return;
+          if (self.isRemoved()) return;
           console.log(jqXHR);
           console.log(status);
           console.log(errorThrown);
         }
       });
-
-      this.requests.push(request);
     } else {
       self.saveUserPageModel();
     }
@@ -1152,11 +1156,11 @@ module.exports = Backbone.View.extend({
         }
       },
       error: function(jqXHR, status, errorThrown){
-        if (!self.isRemoved()) {
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
+        if (self.isRemoved()) return;
+
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
       }
     });
   },
@@ -1207,31 +1211,30 @@ module.exports = Backbone.View.extend({
 
   deleteItem: function(confirm){
     "use strict";
-    var self=this,
-        request;
+    var self=this;
 
     if(this.confirmDelete === false && confirm){
       this.$el.find('.js-deleteItem').addClass('confirm');
       this.confirmDelete = true;
     } else {
-      request = $.ajax({
+      $.ajax({
         type: "DELETE",
         url: self.item.get('serverUrl') + "contracts/?id=" + self.item.get('id'),
         success: function () {
+          if (self.isRemoved()) return;
+
           //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
           self.item.trigger('destroy', self.item);
           self.subRender();
           self.setState("store");
         },
         error: function (jqXHR, status, errorThrown) {
-          if (status == 'abort') return;
+          if (self.isRemoved()) return;
           console.log(jqXHR);
           console.log(status);
           console.log(errorThrown);
         }
       });
-
-      this.requests.push(request);
     }
   },
 
@@ -1269,50 +1272,46 @@ module.exports = Backbone.View.extend({
 
   followUser: function(options){
     "use strict";
-    var self = this,
-        request;
+    var self = this;
 
-    request = $.ajax({
+    $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "follow",
       success: function(data) {
+        if (self.isRemoved()) return;
         self.subRender();
       },
       error: function(jqXHR, status, errorThrown){
-        if (status == 'abort') return;
+        if (self.isRemoved()) return;
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
       }
     });
-
-    this.requests.push(request);
   },
 
   unfollowUser: function(options){
     "use strict";
-    var self = this,
-        request;
+    var self = this;
     
-    request = $.ajax({
+    $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
       url: this.options.userModel.get('serverUrl') + "unfollow",
       success: function() {
+        if (self.isRemoved()) return;
         self.subRender();
       },
       error: function(jqXHR, status, errorThrown){
-        if (status == 'abort') return;
+        if (self.isRemoved()) return;
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
       }
     });
-
-    this.requests.push(request);
   },
 
   sendMessage: function(){
@@ -1371,12 +1370,6 @@ module.exports = Backbone.View.extend({
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();
     messageModal.$el.off('click', this.modalCloseHandler);
-    // console.log('boom-town');
-    // window.boom = this.requests;
-    this.requests.forEach(function(req) {
-      // console.log('abort-abort');
-      req.abort();
-    });
   }
 
 });
