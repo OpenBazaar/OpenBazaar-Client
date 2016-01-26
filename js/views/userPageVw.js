@@ -1126,7 +1126,7 @@ module.exports = baseVw.extend({
             var profileColor = pageData[profileKey].slice(1);
             profileColor = is.hexColor(profileColor) ? parseInt(profileColor, 16) : profileColor;
             formData.append(profileKey, profileColor);
-          } else if(profileKey == "header") {
+          } else if(profileKey == "header" || profileKey == "name" || profileKey == "location") {
             formData.append(profileKey, String(pageData[profileKey]));
           }
         }
