@@ -3,7 +3,8 @@ var __ = require('underscore'),
     $ = require('jquery');
 Backbone.$ = $;
 
-var homeView = require('./views/homeVw'),
+var messageModal = require('./utils/messageModal.js'),
+    homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
     aboutView = require('./views/aboutVw'),
     donateView = require('./views/donateVw'),
@@ -42,6 +43,7 @@ module.exports = Backbone.Router.extend({
   cleanup: function(){
     "use strict";
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
+    messageModal.hide();
   },
 
   newView: function(view, bodyClass, addressBarText){

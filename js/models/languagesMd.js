@@ -320,7 +320,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "This Item Cannot be Purchased",
           sellerError: "The seller's server has rejected the purchase request",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -717,7 +718,8 @@ module.exports = Backbone.Model.extend({
           socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n predeterminada de ws://localhost:18466",
           contractError: "Este artículo no puede ser comprado" ,
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1121,7 +1123,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
           contractError: "Dieser Artikel kann nicht gekauft werden",
           sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1529,7 +1532,8 @@ module.exports = Backbone.Model.extend({
           socketError: "Connessione all'URL per WebSocket fallita. Connettere al socket con l'indirizzo di default ws://localhost:18466",
           contractError: "Questo articolo non pu&ograve; essere acquistato",
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto",
-          checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto"
+          checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto",
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1937,7 +1941,8 @@ module.exports = Backbone.Model.extend({
           socketError: "L'URL pour WebSocket a échoué. Connexion au socket avec l'adresse par défaut de ws://localhost:18466",
           contractError: "Cet article ne peut pas être acheté",
           sellerError: "Le serveur du vendeur a rejeté la demande d'achat",
-          checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme"
+          checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme",
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -2342,7 +2347,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL pentru WebSocket a eșuat. Conectarea la socket cu adresa implicită ws://localhost:18466",
           contractError: "Acest Articol Nu Poate Fi Procurat",
           sellerError: "Serverul vânzătorului a respins cererea de cumpărare",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -2746,7 +2752,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL для WebSocket недоступен. Подключаемся к адресу по умолчанию ws://localhost:18466",
           contractError: "Этот товар недоступен для продажи",
           sellerError: "Сервер продавца отключил эту возможность",
-          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться " //not translated
+          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться ", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "о нас",
@@ -3150,7 +3157,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "Nákup položky neprebehol.",
           sellerError: "Predajcov server odmietol žiadosť o nákup.",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3558,7 +3566,8 @@ module.exports = Backbone.Model.extend({
           socketError: "Websoket URL'si hata verdi. Sokete öntanımlı ws://localhost:18466 ile bağlanılıyor.",
           contractError: "Bu Öğe Satın Alınamaz",
           sellerError: "Satıcının sunucusu alım talebini reddetti",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3965,7 +3974,8 @@ module.exports = Backbone.Model.extend({
           socketError: "Luj URL WebSocket. Rar socket SoQ ws://localhost:18466",
           contractError: "LaH wej je' Doch",
           sellerError: "QuvHa' offer lajQo' loD 'Iv ngev",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4372,7 +4382,8 @@ module.exports = Backbone.Model.extend({
           socketError: "WebSocket的URL地址失败。请使用ws://localhost:18466",
           contractError: "找不到此项货物",
           sellerError: "卖家的服务器拒绝了这笔买卖",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4780,7 +4791,8 @@ module.exports = Backbone.Model.extend({
           socketError: "웹 소켓의 URL에 실패했습니다.ws://localhost:18466 의 기본 주소와 소켓에 연결.",
           contractError: "이 제품은 지불 할수 없습니다 ",
           sellerError: "판매자의 서버는 구매 요청을 거부했습니다.",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5174,7 +5186,8 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "購入が完了できませんでした。",
           sellerError: "出品者のサーバーは購入要求を拒否しました。",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
