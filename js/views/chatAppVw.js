@@ -24,9 +24,11 @@ module.exports = Backbone.View.extend({
     'click .js-chatSearch': 'chatSearch',
     'click .chatConversationContent': 'closeConversationSettings',
     'click .chatConversationMessage': 'closeConversationSettings',
+    'click .chatConversation .js-username': 'usernameClick',
+    'click .chatConversation .js-viewPage': 'gotoChatUserProfile',
+    'click .chatConversation .js-blockUser': 'blockUserClick',
     'keydown .js-chatMessage': 'checkShift',
     'keyup .js-chatMessage': 'sendChat',
-    'click .js-username': 'usernameClick',
     'keyup .js-chatSearchText': 'chatSearchText'
   },
 
@@ -50,8 +52,6 @@ module.exports = Backbone.View.extend({
       this.renderChats();
     });
 
-
-
     this.subViews = [];
     this.subViewsChat = [];
     this.render();
@@ -64,6 +64,13 @@ module.exports = Backbone.View.extend({
       this.openChat(guid, key);
     });
 
+    this.listenTo(window.obEventBus, "blockingUser", function(e) {
+      if (e.guid === this.currentChatId) {
+        this.chats.remove(
+          this.chats.findWhere({ guid: this.currentChatId })
+        );
+      }
+    });
   },
 
   render: function(){
@@ -107,7 +114,6 @@ module.exports = Backbone.View.extend({
           chat.set('avatarURL', self.serverUrl + "get_image?hash=" + chat.get('avatar_hash') + "&guid=" + chat.get('guid'));
         }
         self.renderChat(chat);
-
       });
       $('#chatHeads').html(self.listWrapper);
     }
@@ -236,11 +242,24 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  usernameClick: function(){
-    var targ = $('.js-navNotificationsMenu');
-    targ.addClass('hide');
-    $('#overlay').addClass('hide');
-    Backbone.history.navigate('#userPage/'+$('#inputConversationRecipient').val()+'/store', {trigger: true});
+  gotoChatUserProfile: function() {
+    if (this.currentChatId) {
+      Backbone.history.navigate('#userPage/'+this.currentChatId+'/store', {trigger: true});
+    }
+  },
+
+  usernameClick: function() {
+    // TODO: I don't think the following commented lines are needed. If
+    // we find they're not, delete the block.
+    // var targ = $('.js-navNotificationsMenu');
+    // targ.addClass('hide');
+    // $('#overlay').addClass('hide');
+    
+    this.gotoChatUserProfile();
+  },
+
+  blockUserClick: function() {
+    this.model.blockUser(this.currentChatId);
   },
 
   checkShift: function(e) {
@@ -379,6 +398,7 @@ module.exports = Backbone.View.extend({
 
   handleSocketMessage: function(response) {
     "use strict";
+    return;
     var data = JSON.parse(response.data);
     if(data.hasOwnProperty('message')) {
       var chat_message = data.message;
