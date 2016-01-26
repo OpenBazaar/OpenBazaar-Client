@@ -2275,9 +2275,10 @@ div.chatSearchOut .chatSearchIcon {
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   position: relative;
-  font-size: 12px;
+  font-size: 11px;
   height: 28px;
   line-height: 28px;
+  padding: 0;
   text-transform: capitalize;
   transition: opacity .2s cubic-bezier(0, 0, 0.2, 1);
 }
@@ -3807,7 +3808,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #obContainer {
-  height: calc(100% - 70px);
+  height: calc(100% - 50px);
   overflow-y: scroll;
   padding-top: 20px;
   -webkit-app-region: no-drag;
@@ -4140,6 +4141,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-weight: 500;
 }
 
+#ov1 .textShadow {
+  text-shadow: 0px 0 6px #000000;
+}
 
 #ov1 .fontSize8 {
   font-size: 8px;
@@ -4317,6 +4321,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 82px;
 }
 
+#ov1  .marginTopNeg8 {
+  margin-top: -8px;
+}
+
 #ov1  .marginTop1 {
   margin-top: 1px;
 }
@@ -4456,6 +4464,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 36px;
 }
 
+#ov1  .height50 {
+  height: 50px;
+}
 #ov1  .height54 {
   height: 54px;
 }

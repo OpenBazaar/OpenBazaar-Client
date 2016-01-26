@@ -144,6 +144,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme",
         Listing: "Listing",
         Listings: "Listings",
+        ViewPage: "View page", //notTranslated
         Pages: "Pages",
         Page: "Page",
         Language: "Language",
@@ -156,7 +157,7 @@ module.exports = Backbone.Model.extend({
         Free: "Free",
         Category: "Category",
         ProcessingTime: "Processing Time",
-        UploadPhotos: "Upload photos",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Drag or upload photos",
         ExpirationDate: "Expires On",
         UploadCoverPhoto: "Upload a cover photo",
@@ -242,6 +243,14 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
+        Moderator: "Moderator",
+        moderatorSettings: {
+          ProvideResolution: "Provide dispute resolution",
+          ServiceFee: "Service fee",
+          ServiceFeeNote: "Percentage of transaction price (max 25)"
+        },
+        BecomeModerator: "Become a moderator",
+        EditModerator: "Moderator Settings",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -539,6 +548,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -551,7 +561,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categor&iacute;a",
         ProcessingTime: "Tiempo de procesamiento",
-        UploadPhotos: "Subir fotos",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Arrastre o suba fotos",
         UploadCoverPhoto: "Suba una foto de portada",
         ExpirationDate: "Fecha de vencimiento",
@@ -633,6 +643,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -933,6 +949,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -945,7 +962,7 @@ module.exports = Backbone.Model.extend({
         Free: "Kostenlos",
         Category: "Kategorie",
         ProcessingTime: "Bearbeitungszeit",
-        UploadPhotos: "Fotos hochladen",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Fotos hier hin ziehen oder hochladen",
         ExpirationDate: "Ablaufdatum",
         UploadCoverPhoto: "Titelbild hochladen",
@@ -1031,6 +1048,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1335,6 +1358,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Argomento",
         Listing: "Listato",
         Listings: "Listati",
+        ViewPage: "View page", //notTranslated
         Pages: "Pagine",
         Page: "Pagina",
         Language: "Lingua",
@@ -1347,7 +1371,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratuito",
         Category: "Categoria",
         ProcessingTime: "Tempo di preparazione",
-        UploadPhotos: "Caricare foto",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Trascina o carica foto",
         ExpirationDate: "Scadenza per il",
         UploadCoverPhoto: "Carica una foto di copertina",
@@ -1433,6 +1457,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1737,6 +1767,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Thème",
         Listing: "Annonce",
         Listings: "Annonces",
+        ViewPage: "View page", //notTranslated
         Pages: "Pages",
         Page: "Page",
         Language: "Langue",
@@ -1749,7 +1780,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratuit",
         Category: "Catégorie",
         ProcessingTime: "Délai de traitement",
-        UploadPhotos: "Uploader des photos",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Glisser ou uploader des photos",
         ExpirationDate: "Expire le",
         UploadCoverPhoto: "Uploader une photo de couverture",
@@ -1835,6 +1866,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "Non renseigné",
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -2136,6 +2173,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -2148,7 +2186,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categorie",
         ProcessingTime: "Timp de Procesare",
-        UploadPhotos: "Încărcare fotografii",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Trageți sau încărcați imaginile",
         ExpirationDate: "Expiră Pe",
         UploadCoverPhoto: "Încărcați imaginea copertă",
@@ -2234,6 +2272,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2534,6 +2578,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Тема", //not translated
         Listing: "Объявление", //not translated
         Listings: "Объявления", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Страницы", //not translated
         Page: "Страница", //not translated
         Language: "Язык", //not translated
@@ -2546,7 +2591,7 @@ module.exports = Backbone.Model.extend({
         Free: "Свободный",
         Category: "Категория",
         ProcessingTime: "Дней на упаковку",
-        UploadPhotos: "Загрузить фото",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Перетащите или выберите фото",
         ExpirationDate: "Заканчивается",
         UploadCoverPhoto: "Загрузить фото для фоновой картинки",
@@ -2632,6 +2677,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Продано",
           PurchasedBy: "Куплено",
@@ -2931,6 +2982,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -2943,6 +2995,7 @@ module.exports = Backbone.Model.extend({
         Free: "Zdarma",
         Category: "Kategória",
         ProcessingTime: "Čas spracovania",
+        SelectPhotos: "Select photos", //notTranslated
         UploadPhotos: "Nahrajte obrázky",
         DragOrUploadPhotos: "Nahrať obrázky",
         ExpirationDate: "Dátum expirácie",
@@ -3029,6 +3082,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3333,6 +3392,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -3345,7 +3405,7 @@ module.exports = Backbone.Model.extend({
         Free: "Ücretsiz",
         Category: "Kategori",
         ProcessingTime: "Hazırlanma süresi",
-        UploadPhotos: "Görsel yükle",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Görselleri yükle ya da sürükle",
         ExpirationDate: "Sona erme tarihi",
         UploadCoverPhoto: "Kapak görseli yükleyin",
@@ -3431,6 +3491,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3734,6 +3800,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -3746,7 +3813,7 @@ module.exports = Backbone.Model.extend({
         Free: "Tlhab",
         Category: "Segh",
         ProcessingTime: "Poh mlw",
-        UploadPhotos: "MIllogh ngeH",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Chagh pagh mIllogh ngeH",
         ExpirationDate: "Hegh",
         UploadCoverPhoto: "MIllogh yuvtlhe' ngeH",
@@ -3832,6 +3899,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4135,6 +4208,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -4147,7 +4221,7 @@ module.exports = Backbone.Model.extend({
         Free: "免费",
         Category: "分类",
         ProcessingTime: "处理时间",
-        UploadPhotos: "上传照片",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "拖移或上传照片",
         ExpirationDate: "失效日期",
         UploadCoverPhoto: "上传封面照片",
@@ -4233,6 +4307,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4537,6 +4617,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -4549,7 +4630,7 @@ module.exports = Backbone.Model.extend({
         Free: "무료",
         Category: "항목",
         ProcessingTime: "과정 시간",
-        UploadPhotos: "사진 업로드",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "끌기와 업로드 사진",
         ExpirationDate: "종료",
         UploadCoverPhoto: "표지 사진 업로드",
@@ -4635,6 +4716,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4935,6 +5022,7 @@ module.exports = Backbone.Model.extend({
         Theme: "テーマ",
         Listing: "出品",
         Listings: "出品",
+        ViewPage: "View page", //notTranslated
         Pages: "ページ",
         Page: "ページ",
         Language: "言語",
@@ -4947,7 +5035,7 @@ module.exports = Backbone.Model.extend({
         Free: "無料",
         Category: "カテゴリー",
         ProcessingTime: "発送までの日数",
-        UploadPhotos: "写真をアップロード",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "ドラッグ＆ドロップ・写真をアプロード",
         ExpirationDate: "終了日時",
         UploadCoverPhoto: "カバー写真をアップロード",
@@ -5023,6 +5111,12 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",
