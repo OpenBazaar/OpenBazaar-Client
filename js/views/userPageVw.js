@@ -270,7 +270,7 @@ module.exports = baseVw.extend({
         }else{
           //model was returned as a blank object
           $('.js-loadingModal').addClass('hide');
-          messageModal.show(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+          messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           self.bindModalCloseHandler();
         }
 
@@ -286,7 +286,7 @@ module.exports = baseVw.extend({
         if (self.isRemoved()) return;
 
         $('.js-loadingModal').addClass('hide');
-        messageModal.show(window.polyglot.t('errorMessages.storeUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+        messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
         self.bindModalCloseHandler();
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
