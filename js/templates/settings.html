@@ -10,11 +10,11 @@
         <% } %>
       </div>
       <h1 class="fancy-heading fontSize20 vCentered"><%= polyglot.t('nav.settings') %></h1>
-      <a href="#userPage" class="btn btn-txt custCol-secondary positionRelative pull-right right10 marginTop9 marginLeft6">
+      <a href="#userPage" class="btn btn-txt custCol-secondary positionWrapper pull-right right10 marginTop9 marginLeft6">
         <span class="ion-document-text fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('GoToMyPage') %>
       </a>
-      <a href="#transactions" class="btn btn-txt custCol-secondary positionRelative pull-right right10 marginTop9 marginLeft6">
+      <a href="#transactions" class="btn btn-txt custCol-secondary positionWrapper pull-right right10 marginTop9 marginLeft6">
         <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Transactions') %>
       </a>
@@ -22,27 +22,31 @@
   </div>
 
   <div class="bar navBar barFlush custCol-secondary clearFix height55">
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-generalTab active">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-generalTab active" data-tab="general">
       <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('General') %>
     </a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-pageTab">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-pageTab" data-tab="page">
       <span class="ion-document-text fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Page') %>
     </a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-storeTab">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-storeTab" data-tab="store">
       <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Store') %>
     </a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-addressesTab">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-addressesTab" data-tab="addresses">
       <span class="ion-ios-location fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Addresses') %>
     </a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-blockedTab">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-blockedTab" data-tab="blocked">
       <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Blocked') %>
     </a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-advancedTab">
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-moderatorTab" data-tab="moderator">
+      <span class="ion-android-compass fontSize12 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Moderator') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-advancedTab" data-tab="advanced">
       <span class="ion-erlenmeyer-flask fontSize12 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Advanced') %>
     </a>
@@ -658,54 +662,6 @@
                        value="<%= ob.page.profile.text_color %>">
               </div>
             </div>
-            <div class="flexRow borderBottom custCol-border marginTop20">
-              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Moderator') %></h3>
-            </div>
-            <div class="flexRow">
-              <div class="flexCol-3 borderRight custCol-border">
-                <div class="fieldItem">
-                  <label><%= polyglot.t('Moderator') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border positionWrapper">
-                <div class="fieldItem">
-                  <input type="radio"
-                         class="fieldItem"
-                         id="moderatorYes"
-                         name="moderator"
-                         value="true" />
-                  <label for="moderatorYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                  <input type="radio"
-                         class="fieldItem"
-                         id="moderatorNo"
-                         name="moderator"
-                         value="false"/>
-                  <label for="moderatorNo" class="radioLabel"><%= polyglot.t('No') %></label>
-                </div>
-              </div>
-            </div>
-            <div class="flexRow js-settingsModeratorFee
-            <% if(!ob.page.profile.moderator) {%>
-            hide
-            <% } %>">
-              <div class="flexCol-3 borderRight custCol-border">
-                <div class="fieldItem">
-                  <label for="moderatorFeeInput"><%= polyglot.t('moderatorSettings.ServiceFee') %></label>
-                  <div class="note"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
-                </div>
-              </div>
-
-              <div class="flexCol-9 custCol-border">
-                <input type="number"
-                       min="0"
-                       max="25"
-                       name="moderation_fee"
-                       class="fieldItem custCol-text"
-                       id="moderatorFeeInput"
-                       value="<%- ob.page.profile.moderation_fee %>" required/>
-              </div>
-            </div>
 
             <a class="btn btn-large js-savePage custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary">
               <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
@@ -1013,8 +969,66 @@
             <a class="btn btn-large js-cancelAddress custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
           </div>
         </form>
-        <form class="width100 positionRelative" name="blockedForm" id="blockedForm">
+        <form class="width100 positionWrapper" name="blockedForm" id="blockedForm">
           <div class="flexCol-12 flex-border js-tabTarg js-blocked hide"></div>
+        </form>
+        <form class="width100 positionWrapper" name="moderatorForm" id="moderatorForm">
+          <div class="flexCol-12 flex-border js-tabTarg js-moderator hide">
+            <div class="flexRow borderBottom custCol-border marginTop20">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Moderator') %></h3>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-3 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label><%= polyglot.t('Moderator') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border positionWrapper">
+                <div class="fieldItem">
+                  <input type="radio"
+                         class="fieldItem"
+                         id="moderatorYes"
+                         name="moderator"
+                         value="true" />
+                  <label for="moderatorYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio"
+                         class="fieldItem"
+                         id="moderatorNo"
+                         name="moderator"
+                         value="false"/>
+                  <label for="moderatorNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow js-settingsModeratorFee
+            <% if(!ob.page.profile.moderator) {%>
+            hide
+            <% } %>">
+              <div class="flexCol-3 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="moderatorFeeInput"><%= polyglot.t('moderatorSettings.ServiceFee') %></label>
+                  <div class="note"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
+                </div>
+              </div>
+
+              <div class="flexCol-9 custCol-border">
+                <input type="number"
+                       min="0"
+                       max="25"
+                       name="moderation_fee"
+                       class="fieldItem custCol-text"
+                       id="moderatorFeeInput"
+                       value="<%- ob.page.profile.moderation_fee %>" required/>
+              </div>
+            </div>
+            <a class="btn btn-large js-saveModerator custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary">
+              <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('SaveChanges') %>
+            </a>
+            <a class="btn btn-large js-cancelModerator custCol-secondary pull-right marginRight5 marginTop15 marginBottom50 btn-secondary width87px"><%= polyglot.t('Reset') %></a>
+          </div>
+
         </form>
         <form class="width100" name="advancedForm" id="advancedForm">
           <div class="flexCol-12 flex-border hide js-tabTarg js-advanced">

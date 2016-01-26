@@ -197,6 +197,15 @@
       <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingCount">0</span>
     <% } %>
     </a>
+    <% if(ob.page.profile.moderator && ob.ownPage == false){ %>
+    <div class="ctrlGroup flexExpand">
+      <div class="btn btn-bar btn-tab btn-txtOnly paddingRight18 pull-right">
+        <span class="fontSize14 marginRight2 textOpacity1">
+          <i class="ion-android-compass"></i><strong>Moderator [<%- ob.page.profile.moderation_fee %>%]</strong>
+        </span>
+      </div>
+    </div>
+    <% } %>
   </div>
   <div class="userPage-subViews custCol-primary minHeight650">
     <div class="flexContainer flex-border custCol-primary hide js-about js-tabTarg minHeight650">
@@ -221,7 +230,7 @@
         <div class="flexCol-4 flex-border border0 userPageSocialAccounts">
           <div class="flexRow">
             <div class="flexRow borderBottom custCol-border">
-              <div class="rowItem positionRelative">
+              <div class="rowItem positionWrapper">
                 <div class="textOpacity75"><%= polyglot.t('Guid') %></div>
                 <div class="textSize12px">
                   <%- ob.page.profile.guid %>
@@ -229,7 +238,7 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionRelative">
+              <div class="rowItem positionWrapper">
                 <div class="textOpacity75"><%= polyglot.t('Website') %></div>
                 <div>
                   <% if(ob.ownPage) { %>
@@ -249,7 +258,7 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionRelative">
+              <div class="rowItem positionWrapper">
                 <div class="textOpacity75"><%= polyglot.t('Email') %></div>
                 <div>
                   <% if(ob.ownPage) { %>
@@ -269,7 +278,7 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionRelative">
+              <div class="rowItem positionWrapper">
                 <% if(ob.ownPage) { %>
                   <a href="#settings/page" class="userPageEditBtn">
                     <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
@@ -289,7 +298,7 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionRelative">
+              <div class="rowItem positionWrapper">
                 <% if(ob.ownPage) { %>
                   <a href="#settings/page" class="userPageEditBtn">
                     <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
@@ -309,7 +318,7 @@
               </div>
             </div>
             <div class="flexRow custCol-border">
-              <div class="rowItem positionRelative">
+              <div class="rowItem positionWrapper">
                 <% if(ob.ownPage) { %>
                   <a href="#settings/page" class="userPageEditBtn">
                     <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
@@ -329,7 +338,7 @@
               </div>
             </div>
             <div class="flexRow borderBottom custCol-border">
-              <div class="rowItem positionRelative">
+              <div class="rowItem positionWrapper">
                 <% if(ob.ownPage) { %>
                   <a href="#settings/page" class="userPageEditBtn">
                     <div class="btn btn-txt custCol-secondary">
@@ -389,7 +398,7 @@
       </div>
     </div>
     <div class="flexContainer flex-border custCol-primary js-store js-tabTarg hide minHeight650" id="searchStore">
-      <div class="flexRow positionRelative">
+      <div class="flexRow positionWrapper">
         <div class="flexRow custCol-border">
           <div class="txtFieldWrapper searchWrapper searchWrapperWithPill">
             <input type="text" id="inputStore" class="txtField txtField-bar search" placeholder="<%= polyglot.t('SearchOnUserStorePlaceholder') %>"  />
