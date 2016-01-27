@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -43,6 +45,7 @@ module.exports = Backbone.View.extend({
     this.currentChatId = ""; //keep track of the currently active chat guid
 
     this.shiftDown = false; // Detect shift key down
+    
     this.chats = new chatCollection();
     this.chats.url = this.serverUrl + "get_chat_conversations";
     this.chats.comparator = function(model) {
@@ -65,16 +68,23 @@ module.exports = Backbone.View.extend({
     });
 
     this.listenTo(window.obEventBus, "blockingUser", function(e) {
-      if (e.guid === this.currentChatId) {
-        this.chats.remove(
-          this.chats.findWhere({ guid: this.currentChatId })
-        );
+      if (this.chats.get(this.currentChatId)) {
+        this.renderChats();
       }
+
+      if (e.guid == this.currentChatId) {
+        this.closeConversation();
+      }      
     });
+
+    this.listenTo(window.obEventBus, "unblockingUser", function(e) {
+      if (this.chats.get(this.currentChatId)) {
+        this.renderChats();
+      }
+    });    
   },
 
   render: function(){
-    "use strict";
     var self = this;
 
     loadTemplate('./js/templates/chatApp.html', function(loadedTemplate) {
@@ -94,16 +104,20 @@ module.exports = Backbone.View.extend({
   },
 
   renderChats: function() {
-    var self = this;
-    var model = this.options.model;
+    var self = this,
+        model = this.options.model,
+        blocked,
+        cl;
 
+    cl = this.filteredChats || this.chats;
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow marginLeft1 marginTop1"></div>');
 
-    if(this.chats.models.length < 1) {
+    if(cl.length < 1) {
       self.renderNoneFound();
     } else {
-      __.each(this.chats.models, function (chat) {
-        "use strict";
+      cl.each(function (chat) {
+        if (self.model.isBlocked(chat.get('guid'))) return;
+
         if(!chat.get('avatar_hash')) {
           var hash = window.localStorage.getItem("avatar_" + chat.get('guid'));
           if(hash !== "") {
@@ -113,6 +127,7 @@ module.exports = Backbone.View.extend({
         } else {
           chat.set('avatarURL', self.serverUrl + "get_image?hash=" + chat.get('avatar_hash') + "&guid=" + chat.get('guid'));
         }
+
         self.renderChat(chat);
       });
       $('#chatHeads').html(self.listWrapper);
@@ -146,17 +161,19 @@ module.exports = Backbone.View.extend({
   },
 
   renderNoneFound: function(){
-    // Decide what to do here
+    this.$('#chatHeads').html('<p>No results found.</p>');
   },
 
   chatSearchText: function(e) {
     var search = e.currentTarget.value;
+
     if(search !== "") {
       var t = this.chats.where({"guid": search});
-      this.chats = new chatCollection(t);
+      this.filteredChats = new chatCollection(t);
     } else {
-      this.afterRender();
+      this.filteredChats = null;
     }
+
     this.renderChats();
   },
 
@@ -216,7 +233,6 @@ module.exports = Backbone.View.extend({
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat);
         } else {
           __.each(chatMessages.models, function (chatMessage) {
-            "use strict";
             if(chatMessage.image_hash === undefined) {
               var hash = window.localStorage.getItem("avatar_" + chatMessage.get('guid'));
               if(hash !== "") {
@@ -234,7 +250,6 @@ module.exports = Backbone.View.extend({
           });
 
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat).promise().done(function() {
-            "use strict";
             $(this).animate({ scrollTop: 99999999999}, 100); // Arbitrary long value
           });
         }
@@ -249,12 +264,6 @@ module.exports = Backbone.View.extend({
   },
 
   usernameClick: function() {
-    // TODO: I don't think the following commented lines are needed. If
-    // we find they're not, delete the block.
-    // var targ = $('.js-navNotificationsMenu');
-    // targ.addClass('hide');
-    // $('#overlay').addClass('hide');
-    
     this.gotoChatUserProfile();
   },
 
@@ -397,21 +406,26 @@ module.exports = Backbone.View.extend({
   },
 
   handleSocketMessage: function(response) {
-    "use strict";
-    return;
     var data = JSON.parse(response.data);
     if(data.hasOwnProperty('message')) {
-      var chat_message = data.message;
+      var chat_message = data.message,
+          username,
+          avatar;
+
+      if (this.model.isBlocked(chat_message.sender)) {
+        return;
+      }
+
       this.afterRender();
       if(chat_message.sender == this.currentChatId){
         this.updateChat(chat_message.sender);
       }
-      var username = chat_message.handle ? chat_message.handle : chat_message.guid;
-      var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
+      username = chat_message.handle ? chat_message.handle : chat_message.guid;
+      avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
 
       // lets not bother them with a notification if they're already actively talking to this person
       // however, let's bother them if the window isn't active
-      if (!window.focused || $('#inputConversationRecipient').val() != chat_message.sender){
+      if (!window.focused || this.currentChatId != chat_message.sender){
         // send notification to recipient
         new Notification(username + ":", { 
           body: data.message.message, 
@@ -427,7 +441,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    __.each(this.subViews, function(subView) {
+    __.each(this.subViews.concat(this.subViewsChat), function(subView) {
       if(subView.close){
         subView.close();
       }else{
