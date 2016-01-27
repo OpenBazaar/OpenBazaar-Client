@@ -396,7 +396,8 @@ module.exports = baseVw.extend({
     "use strict";
     var currentAddress,
         addressState,
-        currentHandle = this.model.get('page').profile.handle;
+        currentHandle = this.model.get('page').profile.handle,
+        isItemType = false;
 
     if(state === "item"){
       //clear old templates
@@ -436,27 +437,30 @@ module.exports = baseVw.extend({
       this.state = state;
     }
 
+    if(state == "item" || state == "itemOld" || state == "itemNew") {
+      isItemType = true;
+    }
+
     //set address bar
-    //taking out handle for now, since lookup by handle is not available yet
-    /*
-    if(currentHandle){
-      currentAddress = currentHandle + "/" + state;
+    if(isItemType) {
+      addressState = "/item";
     } else {
-      currentAddress = this.model.get('page').profile.guid + "/" + state;
+      addressState = "/" + state;
     }
-    */
-    if(state == "itemOld" || state == "itemNew") {
-      addressState = "item";
-    } else {
-      addressState = state;
-    }
-    currentAddress = this.model.get('page').profile.guid + "/" + addressState;
-    if(addressState === "item" && hash) {
+    currentAddress = this.model.get('page').profile.guid + addressState;
+    currentHandle = currentHandle ? currentHandle + addressState : "";
+    console.log("hash: "+ hash);
+    if(isItemType && hash) {
+      console.log("set hash");
       currentAddress += "/"+ hash;
+      currentHandle = currentHandle ? currentHandle += "/"+ hash : "";
     } else if(addressState === "createStore"){
       currentAddress = this.model.get('page').profile.guid;
     }
-    window.obEventBus.trigger("setAddressBar", currentAddress);
+    console.log(currentAddress);
+    console.log(currentHandle);
+
+    window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress, 'handle': currentHandle});
   },
 
   setControls: function(state){
