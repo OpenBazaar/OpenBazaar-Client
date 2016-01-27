@@ -365,7 +365,7 @@ module.exports = Backbone.View.extend({
         formData = new FormData(),
         moderatorID = this.model.get('selectedModerator').guid || "",
         selectedAddress = this.model.get('selectedAddress'),
-        btcReturnAddress = "";
+        bitCoinReturnAddr = this.$el.find('#buyWizardBitcoinAddressInput').val();
 
     if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
@@ -390,33 +390,27 @@ module.exports = Backbone.View.extend({
 
     this.$el.find('.js-buyWizardSpinner').removeClass('hide');
 
-    this.userModel.fetch({
+    formData.append("refund_address", bitCoinReturnAddr);
+
+    $.ajax({
+      type: "POST",
+      url: self.model.get('serverUrl') + "purchase_contract",
+      contentType: false,
+      processData: false,
+      data: formData,
+      dataType: 'json',
       success: function(data){
-        formData.append("refund_address", data.attributes.refund_address);
-        $.ajax({
-          type: "POST",
-          url: self.model.get('serverUrl') + "purchase_contract",
-          contentType: false,
-          processData: false,
-          data: formData,
-          dataType: 'json',
-          success: function(data){
-            if(data.success == true){
-              self.showPayAddress(data);
-            } else {
-              messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " + window.polyglot.t('errorMessages.checkPurchaseData'));
-              self.$el.find('.js-buyWizardSpinner').addClass('hide');
-            }
-          },
-          error: function (jqXHR, status, errorThrown) {
-            console.log(jqXHR);
-            console.log(status);
-            console.log(errorThrown);
-          }
-        });
+        if(data.success == true){
+          self.showPayAddress(data);
+        } else {
+          messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " + window.polyglot.t('errorMessages.checkPurchaseData'));
+          self.$el.find('.js-buyWizardSpinner').addClass('hide');
+        }
       },
-      error: function(){
-        messageModal.show(window.polyglot.t('errorMessages.getError'));
+      error: function (jqXHR, status, errorThrown) {
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
       }
     });
   },
