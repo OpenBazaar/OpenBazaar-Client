@@ -2375,6 +2375,7 @@ input[type="number"].fieldItem,
 input[type="email"].fieldItem,
 input[type="file"].fieldItem,
 input[type="url"].fieldItem,
+input[type="password"].fieldItem,
 input[type="datetime-local"].fieldItem {
   background: none;
   border: 2px solid transparent;
@@ -3324,7 +3325,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 /*========== one-off classes ==========*/
 
-.modal .homeModal-hero {
+.modal .homeModal-hero, .modal.server-connect-modal .modal-hero {
   background: #063753;
 }
 
@@ -3928,6 +3929,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .scrollOverflowY {
   overflow-y: scroll;
 }
+
+#ov1 .scrollOverflowYHideX {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 
 #ov1 .vCentered {
   /* must be inside a relatively positioned containing element */

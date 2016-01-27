@@ -420,6 +420,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }
       },
       {
@@ -822,6 +825,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }
       },
       {
@@ -1232,6 +1238,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -1646,6 +1655,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -2061,6 +2073,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -2471,6 +2486,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -2881,6 +2899,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -3291,6 +3312,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -3705,6 +3729,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -4118,6 +4145,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -4530,6 +4560,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -4945,6 +4978,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }        
       },
       {
@@ -5344,6 +5380,9 @@ module.exports = Backbone.Model.extend({
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
+        },
+        serverConnectModal: {
+          heading: "Trying to connect to your server" //notTranslated
         }       
       },
       {

@@ -218,3 +218,26 @@ if(isValidUrl(serverUrlLocal)){
   loadDefaultServer();
 }
 
+var serverConnectModal = require('./views/serverConnectModal');
+var mooModal = new serverConnectModal({
+  // dismissOnOverlayClick: true
+});
+
+mooModal.on('open', function() {
+  console.log('local open');
+});
+
+mooModal.on('close', function() {
+  console.log('local close');
+});
+
+window.obEventBus.on('modal-open', function() {
+  console.log('global open');
+});
+
+window.obEventBus.on('modal-close', function() {
+  console.log('global close');
+});
+
+mooModal.render().open();
+

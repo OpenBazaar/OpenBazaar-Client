@@ -13,7 +13,7 @@ module.exports = baseVw.extend({
 
       defaults = {
         dismissOnOverlayClick: false,
-        includeCloseButton: true,
+        includeCloseButton: false,
         closeButtonClass: 'btn-corner btn-cornerTR',
         innerWrapperClass: 'modal-child modal-childMain'
       }

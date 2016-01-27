@@ -1,10 +1,11 @@
 'use strict';
 
 var Backbone = require('backbone'),
+    loadTemplate = require('../utils/loadTemplate'),
     baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
-  className: 'connect-yo-self',
+  className: 'server-connect-modal',
 
   events: {
     'click button': 'buttonClick'
@@ -19,9 +20,12 @@ module.exports = baseModal.extend({
   },
 
   render: function() {
-    this.$el.html('<p class="sassy">charlie chuckles cried morose.</p><button>Move on over!</button>')
+    var self = this;
 
-    baseModal.prototype.render.apply(this, arguments);
+    loadTemplate('./js/templates/serverConnectModal.html', function(t) {
+      self.$el.html(t());
+      baseModal.prototype.render.apply(self, arguments);
+    });
 
     return this;
   }
