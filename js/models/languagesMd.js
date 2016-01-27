@@ -5757,7 +5757,6 @@ module.exports = Backbone.Model.extend({
           paymentSent: "Dokonano płatności!",
           total: "Suma"
         }
->>>>>>> upstream/master
       }
     ]
   }
