@@ -1,7 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    showErrorModal = require('../utils/showErrorModal.js');
+    messageModal = require('../utils/messageModal.js');
 
 
 module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys) {
@@ -24,7 +24,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   if(form){
     form.addClass('formChecked');
     if (!form[0].checkValidity()){
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return $.Deferred().reject('failed form validation').promise();
     }
 
@@ -103,10 +103,10 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
         if(onFail){
           onFail(data);
         } else{
-          showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       } else {
-        showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
       }
     },
     error: function(jqXHR, status, errorThrown){

@@ -5,7 +5,6 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = Backbone.View.extend({
-
   className: "chat flexRow",
 
   events: {

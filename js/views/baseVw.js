@@ -7,6 +7,7 @@ module.exports = Backbone.View.extend({
       Backbone.View.prototype.constructor.apply(this, arguments);
       this._childViews = [];
       this._unregisterFromParent = true;
+      this._removed = false;
     },
 
     // If you are creating child views within your view, call this method
@@ -52,5 +53,11 @@ module.exports = Backbone.View.extend({
       }
 
       Backbone.View.prototype.remove.apply(this, arguments);
+
+      this._removed = true;
+    },
+
+    isRemoved: function() {
+      return this._removed;
     }
 });

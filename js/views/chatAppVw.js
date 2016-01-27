@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -24,9 +26,11 @@ module.exports = Backbone.View.extend({
     'click .js-chatSearch': 'chatSearch',
     'click .chatConversationContent': 'closeConversationSettings',
     'click .chatConversationMessage': 'closeConversationSettings',
+    'click .chatConversation .js-username': 'usernameClick',
+    'click .chatConversation .js-viewPage': 'gotoChatUserProfile',
+    'click .chatConversation .js-blockUser': 'blockUserClick',
     'keydown .js-chatMessage': 'checkShift',
     'keyup .js-chatMessage': 'sendChat',
-    'click .js-username': 'usernameClick',
     'keyup .js-chatSearchText': 'chatSearchText'
   },
 
@@ -41,6 +45,7 @@ module.exports = Backbone.View.extend({
     this.currentChatId = ""; //keep track of the currently active chat guid
 
     this.shiftDown = false; // Detect shift key down
+    
     this.chats = new chatCollection();
     this.chats.url = this.serverUrl + "get_chat_conversations";
     this.chats.comparator = function(model) {
@@ -49,8 +54,6 @@ module.exports = Backbone.View.extend({
     this.listenTo(this.chats, 'update', function(){
       this.renderChats();
     });
-
-
 
     this.subViews = [];
     this.subViewsChat = [];
@@ -64,10 +67,24 @@ module.exports = Backbone.View.extend({
       this.openChat(guid, key);
     });
 
+    this.listenTo(window.obEventBus, "blockingUser", function(e) {
+      if (this.chats.get(this.currentChatId)) {
+        this.renderChats();
+      }
+
+      if (e.guid == this.currentChatId) {
+        this.closeConversation();
+      }      
+    });
+
+    this.listenTo(window.obEventBus, "unblockingUser", function(e) {
+      if (this.chats.get(this.currentChatId)) {
+        this.renderChats();
+      }
+    });    
   },
 
   render: function(){
-    "use strict";
     var self = this;
 
     loadTemplate('./js/templates/chatApp.html', function(loadedTemplate) {
@@ -87,16 +104,20 @@ module.exports = Backbone.View.extend({
   },
 
   renderChats: function() {
-    var self = this;
-    var model = this.options.model;
+    var self = this,
+        model = this.options.model,
+        blocked,
+        cl;
 
+    cl = this.filteredChats || this.chats;
     this.listWrapper = $('<div class="border0 custCol-border-secondary flexRow marginLeft1 marginTop1"></div>');
 
-    if(this.chats.models.length < 1) {
+    if(cl.length < 1) {
       self.renderNoneFound();
     } else {
-      __.each(this.chats.models, function (chat) {
-        "use strict";
+      cl.each(function (chat) {
+        if (self.model.isBlocked(chat.get('guid'))) return;
+
         if(!chat.get('avatar_hash')) {
           var hash = window.localStorage.getItem("avatar_" + chat.get('guid'));
           if(hash !== "") {
@@ -106,8 +127,8 @@ module.exports = Backbone.View.extend({
         } else {
           chat.set('avatarURL', self.serverUrl + "get_image?hash=" + chat.get('avatar_hash') + "&guid=" + chat.get('guid'));
         }
-        self.renderChat(chat);
 
+        self.renderChat(chat);
       });
       $('#chatHeads').html(self.listWrapper);
     }
@@ -140,17 +161,19 @@ module.exports = Backbone.View.extend({
   },
 
   renderNoneFound: function(){
-    // Decide what to do here
+    this.$('#chatHeads').html('<p>' + window.polyglot.t('chat.noSearchResultsFound') + '.</p>');
   },
 
   chatSearchText: function(e) {
     var search = e.currentTarget.value;
+
     if(search !== "") {
       var t = this.chats.where({"guid": search});
-      this.chats = new chatCollection(t);
+      this.filteredChats = new chatCollection(t);
     } else {
-      this.afterRender();
+      this.filteredChats = null;
     }
+
     this.renderChats();
   },
 
@@ -160,11 +183,16 @@ module.exports = Backbone.View.extend({
         avatarURL = "",
         avatarHash = window.localStorage.getItem("avatar_" + guid);
 
-    if(avatarHash !== "") {
-      avatarURL = model.get('serverUrl') + "get_image?hash=" + avatarHash + "&guid=" + guid;
+    if (this.currentChatId === guid) {
+      this.openConversation();
+      return;
     }
 
     this.currentChatId = guid;
+
+    if(avatarHash !== "") {
+      avatarURL = model.get('serverUrl') + "get_image?hash=" + avatarHash + "&guid=" + guid;
+    }
 
     this.openConversation();
     $('#inputConversationRecipient').val(guid);
@@ -205,7 +233,6 @@ module.exports = Backbone.View.extend({
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat);
         } else {
           __.each(chatMessages.models, function (chatMessage) {
-            "use strict";
             if(chatMessage.image_hash === undefined) {
               var hash = window.localStorage.getItem("avatar_" + chatMessage.get('guid'));
               if(hash !== "") {
@@ -223,7 +250,6 @@ module.exports = Backbone.View.extend({
           });
 
           $('#chatConversation .chatConversationContent').html(self.listWrapperChat).promise().done(function() {
-            "use strict";
             $(this).animate({ scrollTop: 99999999999}, 100); // Arbitrary long value
           });
         }
@@ -231,11 +257,18 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  usernameClick: function(){
-    var targ = $('.js-navNotificationsMenu');
-    targ.addClass('hide');
-    $('#overlay').addClass('hide');
-    Backbone.history.navigate('#userPage/'+$('#inputConversationRecipient').val()+'/store', {trigger: true});
+  gotoChatUserProfile: function() {
+    if (this.currentChatId) {
+      Backbone.history.navigate('#userPage/'+this.currentChatId+'/store', {trigger: true});
+    }
+  },
+
+  usernameClick: function() {
+    this.gotoChatUserProfile();
+  },
+
+  blockUserClick: function() {
+    this.model.blockUser(this.currentChatId);
   },
 
   checkShift: function(e) {
@@ -296,16 +329,16 @@ module.exports = Backbone.View.extend({
 
   openConversation: function() {
     this.slideChatOut();
-    $(this.$el).find('.chatConversation').removeClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
-    $(this.$el).find('.chatSearch').addClass('textOpacity50');
+    this.$('.chatConversation').removeClass('chatConversationHidden');
+    this.$('.chatConversationHeads').addClass('chatConversationHeadsCompressed').addClass('textOpacity50');
+    this.$('.chatSearch').addClass('textOpacity50');
   },
 
   closeConversation: function() {
-    $(this.$el).find('.chatConversation').addClass('chatConversationHidden');
-    $(this.$el).find('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
-    $(this.$el).find('.chatHead').removeClass('chatHeadSelected');
-    $(this.$el).find('.chatSearch').removeClass('textOpacity50');
+    this.$('.chatConversation').addClass('chatConversationHidden');
+    this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
+    this.$('.chatHead').removeClass('chatHeadSelected');
+    this.$('.chatSearch').removeClass('textOpacity50');
 
     // let's clear the form on close
     $('#chatConversation').trigger('reset');
@@ -314,11 +347,11 @@ module.exports = Backbone.View.extend({
   },
 
   closeConversationSettings: function() {
-    $(this.$el).find('.chatConversationMenu').addClass('hide');
+    this.$('.chatConversationMenu').addClass('hide');
   },
   
   conversationSettings: function() {
-    var menu = $(this.$el).find('.chatConversationMenu');
+    var menu = this.$el.find('.chatConversationMenu');
     if(menu.hasClass('hide')){
       menu.removeClass('hide');
     }else{
@@ -333,7 +366,7 @@ module.exports = Backbone.View.extend({
 
   slideChatOut: function() {
     // Slide app out
-    $(this.$el).addClass('sideBarSlid', 500);
+    this.$el.addClass('sideBarSlid', 500);
 
     $('.container').addClass('compressed');
     //$('.modal-child').addClass('modalCompressed');
@@ -342,16 +375,16 @@ module.exports = Backbone.View.extend({
     $('#colorbox').addClass('marginLeftNeg115');
 
     // Adjust elements
-    $(this.$el).find('.chatSearch').addClass('chatSearchOut');
+    this.$el.find('.chatSearch').addClass('chatSearchOut');
 
-    var chatButton = $(this.$el).find('.btn-chatOpen');
+    var chatButton = this.$el.find('.btn-chatOpen');
     chatButton.addClass('hide');
     $('.chatMessagesLabel').removeClass('hide');
     chatButton.find('span').removeClass('hide');
   },
 
   slideChatIn: function() {
-    $(this.$el).removeClass('sideBarSlid', 500);
+    this.$el.removeClass('sideBarSlid', 500);
 
     $('.container').removeClass('compressed');
     //$('.modal-child').removeClass('modalCompressed');
@@ -360,33 +393,39 @@ module.exports = Backbone.View.extend({
     $('#colorbox').removeClass('marginLeftNeg115');
 
     // Adjust elements
-    $(this.$el).find('.chatSearch').removeClass('chatSearchOut');
+    this.$el.find('.chatSearch').removeClass('chatSearchOut');
   },
 
   closeChat: function(){
     this.slideChatIn();
     $('.chatHeadSelected').removeClass('chatHeadSelected');
-    var chatButton = $(this.$el).find('.btn-chatOpen');
+    var chatButton = this.$el.find('.btn-chatOpen');
     chatButton.removeClass('hide');
     chatButton.find('span').addClass('hide');
     this.closeConversation();
   },
 
   handleSocketMessage: function(response) {
-    "use strict";
     var data = JSON.parse(response.data);
     if(data.hasOwnProperty('message')) {
-      var chat_message = data.message;
+      var chat_message = data.message,
+          username,
+          avatar;
+
+      if (this.model.isBlocked(chat_message.sender)) {
+        return;
+      }
+
       this.afterRender();
       if(chat_message.sender == this.currentChatId){
         this.updateChat(chat_message.sender);
       }
-      var username = chat_message.handle ? chat_message.handle : chat_message.guid;
-      var avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
+      username = chat_message.handle ? chat_message.handle : chat_message.guid;
+      avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
 
       // lets not bother them with a notification if they're already actively talking to this person
       // however, let's bother them if the window isn't active
-      if (!window.focused || $('#inputConversationRecipient').val() != chat_message.sender){
+      if (!window.focused || this.currentChatId != chat_message.sender){
         // send notification to recipient
         new Notification(username + ":", { 
           body: data.message.message, 
@@ -402,7 +441,7 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    __.each(this.subViews, function(subView) {
+    __.each(this.subViews.concat(this.subViewsChat), function(subView) {
       if(subView.close){
         subView.close();
       }else{
