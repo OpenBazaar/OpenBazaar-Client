@@ -4141,7 +4141,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .textShadow {
-  text-shadow: 0px 0 6px #000000;
+  text-shadow: 0px 1px 5px #000;
 }
 
 #ov1 .fontSize8 {
