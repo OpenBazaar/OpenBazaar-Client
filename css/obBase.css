@@ -1825,24 +1825,23 @@ div.chatSearchOut .chatSearchIcon {
   overflow: hidden;
 }
 
-.btn-closeConversation {
+.conversationHeader-btn {
   height: 38px;
   width: 30px;
   text-align: center;
-  float: right;
 }
 
-.btn-closeConversation a {
+.conversationHeader-btn a {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.btn-closeConversation a:before {
+.conversationHeader-btn a:before {
   line-height: 38px;
 }
 
-.btn-closeConversation:hover {
+.conversationHeader-btn:hover {
   outline: solid 1px #4C4C4C;
   border-radius: 0;
 }

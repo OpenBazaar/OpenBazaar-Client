@@ -174,5 +174,11 @@ module.exports = Backbone.Model.extend({
     }
 
     return this._blockUnblockUser.call(this, false, guid);
+  },
+
+  isBlocked: function(guid) {
+    if (guid) {
+      return this.get('blocked_guids').indexOf(guid) !== -1;
+    }
   }
 });
