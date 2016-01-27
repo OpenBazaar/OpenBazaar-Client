@@ -15,18 +15,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function(){
     this.render();
-
-    // this.listenTo(window.obEventBus, "blockingUser", function(e){
-    //   if (e.guid == this.model.get('guid')) {
-    //     this.model.set('isBlocked', true);
-    //   }      
-    // });
-
-    // this.listenTo(window.obEventBus, "unblockingUser", function(e){
-    //   if (e.guid !== this.model.get('guid')) {
-    //     this.model.set('isBlocked', false);
-    //   }      
-    // });    
   },
 
   render: function(){
