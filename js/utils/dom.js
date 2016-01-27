@@ -10,6 +10,12 @@ function isScrolledIntoView(el, scrollContainer) {
   return isVisible;
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/Node/contains
+function isInPage(node) {
+  return (node === document.body) ? false : document.body.contains(node);
+}
+
 module.exports = {
-  isScrolledIntoView: isScrolledIntoView
+  isScrolledIntoView: isScrolledIntoView,
+  isInPage: isInPage
 }
