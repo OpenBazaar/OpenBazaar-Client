@@ -248,7 +248,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
           ServiceFee: "Service fee",
-          ServiceFeeNote: "Percentage of transaction price (max 25)"
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"
         },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
@@ -653,7 +653,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -1063,7 +1063,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -1477,7 +1477,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Venduto da",
@@ -1891,7 +1891,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
-          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max)"
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, min 0.001)"
         },
         transactions: {
           SoldBy: "Vendu par",
@@ -2302,7 +2302,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -2712,7 +2712,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Продано",
@@ -3122,7 +3122,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -3536,7 +3536,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -3949,7 +3949,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -4362,7 +4362,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -4776,7 +4776,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -5176,7 +5176,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
           SoldBy: "出品者",
@@ -5588,7 +5588,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",//notTranslated
           ServiceFee: "Service fee",//notTranslated
-          ServiceFeeNote: "Percentage of transaction price (max 25)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated

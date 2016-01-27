@@ -397,7 +397,7 @@ module.exports = baseVw.extend({
       this.searchItems(targetText);
       addressText = addressText ? "#" + addressText.replace(/\s+/g, '') : "";
       target.val(addressText);
-      window.obEventBus.trigger("setAddressBar", addressText);
+      window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
     }
   },
 
@@ -406,7 +406,7 @@ module.exports = baseVw.extend({
     this.loadItems();
 
     //clear address bar
-    window.obEventBus.trigger("setAddressBar", "");
+    window.obEventBus.trigger("setAddressBar", {'addressText': ""});
     
     this.$el.find('.js-discoverHeading').html(window.polyglot.t('Discover'));
 
