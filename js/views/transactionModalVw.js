@@ -5,11 +5,12 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     orderModel = require('../models/orderMd'),
+    baseVw = require('./baseVw'),
     qr = require('qr-encode'),
     messageModal = require('../utils/messageModal'),
     clipboard = require('clipboard');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "modal modal-opaque js-transactionModal",
 
@@ -253,24 +254,5 @@ module.exports = Backbone.View.extend({
   closeModal: function(){
     this.$el.parent().fadeOut(300);
     this.trigger("closed");
-  },
-
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
-    this.model.off();
-    this.off();
-    this.remove();
   }
 });

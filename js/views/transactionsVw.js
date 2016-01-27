@@ -6,12 +6,13 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     chosen = require('../utils/chosen.jquery.min.js'),
     purchasesCl = require('../collections/purchasesCl'),
+    baseVw = require('./baseVw'),
     orderShortVw = require('./orderShortVw'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     transactionModalVw = require('./transactionModalVw'),
     countriesMd = require('../models/countriesMd');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "transactionsView",
 
@@ -48,13 +49,10 @@ module.exports = Backbone.View.extend({
       self.openOrderModal(orderID);
     });
     this.searchTransactions;
-    this.subViews = [];
-    this.subModels = [];
 
     this.countries = new countriesMd();
     this.countriesArray = this.countries.get('countries');
 
-    this.subModels.push(this.countries);
     $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
       $('.js-loadingModal').addClass("hide");
@@ -207,7 +205,7 @@ module.exports = Backbone.View.extend({
     var orderShort = new orderShortVw({
       model: model
     });
-    this.subViews.push(orderShort);
+    this.registerChild(orderShort);
     this.purchasesWrapper.append(orderShort.render().el);
   },
 
@@ -245,7 +243,7 @@ module.exports = Backbone.View.extend({
     var orderShort = new orderShortVw({
       model: model
     });
-    this.subViews.push(orderShort);
+    this.registerChild(orderShort);
     this.salesWrapper.append(orderShort.render().el);
   },
 
@@ -273,24 +271,5 @@ module.exports = Backbone.View.extend({
     this.listenTo(orderModalView, "closed", function(){
       this.getData();
     });
-  },
-
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
-    this.model.off();
-    this.off();
-    this.remove();
   }
 });

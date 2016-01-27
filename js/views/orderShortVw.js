@@ -2,9 +2,10 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     moment = require('moment'),
+    baseVw = require('./baseVw'),
     loadTemplate = require('../utils/loadTemplate');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   tagName: "li",
 
@@ -61,11 +62,6 @@ module.exports = Backbone.View.extend({
       'transactionType': this.model.get('transactionType'),
       'tabState': "complete"
     });
-  },
-
-  close: function(){
-    this.unbind();
-    this.remove();
   }
 
 });
