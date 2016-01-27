@@ -840,9 +840,9 @@ module.exports = baseVw.extend({
 
   tabClick: function(activeTab, showContent){
     "use strict";
-    this.$el.find('.js-tab').removeClass('active');
+    this.$('.js-userPageTabs > .js-tab').removeClass('active');
     activeTab.addClass('active');
-    this.$el.find('.js-tabTarg').addClass('hide');
+    this.$('.js-userPageSubViews > .js-tabTarg').addClass('hide');
     showContent.removeClass('hide');
   },
 
