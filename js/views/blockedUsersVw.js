@@ -17,6 +17,8 @@ module.exports = Backbone.View.extend({
     this.subViews = [];
 
     this.listenTo(window.obEventBus, 'unblockingUser', function(e) {
+      return;
+
       var self = this,
           view;
 
@@ -28,11 +30,16 @@ module.exports = Backbone.View.extend({
     });
 
     this.listenTo(this.collection, 'update', function(collection, options) {
+      var self = this;
+
       if (options.add) {
         __.each(collection.models.slice(self.subViews.length), function(user) {
           self.renderNewUserView(user);
         });
       }
+    });
+
+    this.listenTo(this.collection, 'remove', function(collection, options) {
     });
   },
 
@@ -64,6 +71,7 @@ module.exports = Backbone.View.extend({
   },
 
   unblockUserClick: function(e) {
+    console.log('sugar time yall');
     this.model.unblockUser(e.view.model.get('guid'), this.model, this.options.serverUrl);
   },
 

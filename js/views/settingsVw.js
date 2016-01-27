@@ -221,10 +221,9 @@ module.exports = Backbone.View.extend({
 
   renderBlocked: function(options) {
     var self = this,
-        modelsPerBatch = 25,
+        modelsPerBatch = 2,
         $lazyLoadTrigger,
         $blockedForm,
-        blockedGuids,
         blockedUsersCl;
 
     options = options || {};
@@ -246,12 +245,14 @@ module.exports = Backbone.View.extend({
       return;
     }
 
-    blockedGuids = this.userModel.get('blocked_guids')
-      .map(function(guid) {
-        return { guid: guid }
-      });
+    function getBlockedGuids() {
+      return self.userModel.get('blocked_guids')
+        .map(function(guid) {
+          return { guid: guid }
+        });
+    }
 
-    blockedUsersCl = new usersCl(blockedGuids.slice(0, modelsPerBatch));
+    blockedUsersCl = new usersCl(getBlockedGuids().slice(0, modelsPerBatch));
     this.patchAndFetchBlockedUsers(blockedUsersCl.models);
 
     this.blockedUsersVw = new blockedUsersVw({
@@ -273,12 +274,27 @@ module.exports = Backbone.View.extend({
     });
     $blockedContainer.append(this.$lazyLoadTrigger);
 
+    this.listenTo(window.obEventBus, 'blockingUser', function(e) {
+      this.blockedUsersScrollHandler();
+    });
+
+    this.listenTo(window.obEventBus, 'unblockingUser', function(e) {
+      console.log('moo hoo chicken');
+      window.moo = blockedUsersCl.findWhere({ guid: e.guid });
+      blockedUsersCl.remove(
+        blockedUsersCl.findWhere({ guid: e.guid })
+      );
+    });    
+
     this.$obContainer = this.$obContainer || $('#obContainer');
     // in case we're re-rendering, remove any previous scroll handlers
     this.blockedUsersScrollHandler && this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
     this.blockedUsersScrollHandler = __.throttle(function() {
-      var colLen;
+      var colLen,
+          blockedGuids = getBlockedGuids();
 
+      // console.log('green: ' + blockedUsersCl.length);
+      // console.log('billboard: ' + blockedGuids.length);
       if (
         blockedUsersCl.length < blockedGuids.length &&
         domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
