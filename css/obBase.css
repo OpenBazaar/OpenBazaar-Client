@@ -3718,6 +3718,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .5;
   top: 0;
   right: 6px;
+  pointer-events: none;
 }
 
 .selectPill:hover {
