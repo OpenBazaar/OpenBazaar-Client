@@ -655,6 +655,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1065,6 +1067,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1479,6 +1483,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1801,9 +1807,9 @@ module.exports = Backbone.Model.extend({
         Category: "Catégorie",
         ProcessingTime: "Délai de traitement",
         SelectPhotos: "Sélectionner des photos",
-        DragOrUploadPhotos: "Glisser ou uploader des photos",
+        DragOrUploadPhotos: "Glisser ou sélectionner des photos",
         ExpirationDate: "Expire le",
-        UploadCoverPhoto: "Uploader une photo de couverture",
+        UploadCoverPhoto: "Sélectionner une photo de couverture",
         ShortDescription: "Brève description",
         UpTo140Characters: "Jusqu'à 140 caractères",
         PrimaryColor: "Couleur primaire",
@@ -1860,7 +1866,7 @@ module.exports = Backbone.Model.extend({
         DomesticShippingTime: "Délai d'expédition nationale",
         InternationalShippingTime: "Délai d'expédition internationale",
         DisplayNSFWcontent: "Afficher le contenu NSFW ?",
-        Basic: "Basic",
+        Basic: "Général",
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
@@ -1887,12 +1893,14 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
-      HandleResolver: "Handle Resolver",  // not translated
+      HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
           ServiceFeeNote: "Pourcentage du prix de la transaction (25 max)"
         },
+        BecomeModerator: "Devenir modérateur",
+        EditModerator: "Paramètres de modérateur",
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1963,8 +1971,8 @@ module.exports = Backbone.Model.extend({
           contractError: "Cet article ne peut pas être acheté",
           sellerError: "Le serveur du vendeur a rejeté la demande d'achat",
           checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme",
-          pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          pageUnavailable: "Cette page est actuellement indisponible.",
+          badHandle: "Le nom d'utilisateur que vous avez entré n'a pas un ID OpenBazaar valide"
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -2007,13 +2015,13 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configuration d'OpenBazaar",
           Introduction: "Présentation",
-          IntroductionBody: "OpenBazaar est un marché social pair à pair, semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. OpenBazaar est un projet open-source qui n'applique pas de frais ou de restrictions particulières. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase de découverte.",
+          IntroductionBody: "OpenBazaar est un marché social pair à pair, semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. Ce projet est open-source et n'applique pas de frais ou de restrictions particulières. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase de découverte.",
           Theme: "Sélectionner un thème pour votre page",
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
           configure: "Configurez votre expérience",
           disclaimer_title: "Clause de non-responsabilité",
-          disclaimer_body: "OpenBazaar est un réseau commercial de biens et services de personne à personne - utilisant Bitcoin - sans aucune organisation centrale exerçant une autorité sur la plate-forme. Cela signifie que vous êtes seul responsable de votre activité sur le réseau. \n\nLes utilisateurs d'OpenBazaar ne sont pas anonymes par défaut. La plupart des communications entre les partis sont chiffrées, mais les adresses IP sont publiques et peuvent être associées à une activité sur le réseau. Des partis malveillants pourraient utiliser ces informations contre vous ; protéger votre vie privée est votre propre responsabilité. \n\nLes utilisateurs d'OpenBazaar doivent respecter les lois de leur propre juridiction ainsi que leur conscience. Les développeurs d'OpenBazaar ne tolèrent pas - et ne sont pas responsables -  de toute utilisation de la plate-forme pour une activité illégale. \n\nLa communauté des développeurs d'OpenBazaar a travaillé sans relâche afin d'offrir une plate-forme commerciale libre et mondiale. Mais, comme avec tout logiciel, des bugs seront trouvés. Les développeurs ne sont pas responsables de toute perte monétaire associée à des problèmes dans le logiciel. \n\nEn utilisant OpenBazaar vous êtes seul responsable de vos actions sur le réseau d'OpenBazaar.",
+          disclaimer_body: "OpenBazaar est un réseau commercial de biens et services de personne à personne - utilisant Bitcoin - sans aucune organisation centrale exerçant une autorité sur la plate-forme. Cela signifie que vous êtes seul responsable de votre activité sur le réseau. \n\nLes utilisateurs d'OpenBazaar ne sont pas anonymes par défaut. La plupart des communications entre les partis sont chiffrées, mais les adresses IP sont publiques et peuvent être associées à une activité sur le réseau. Des partis malveillants pourraient utiliser ces informations contre vous ; protéger votre vie privée est votre propre responsabilité. \n\nLes utilisateurs d'OpenBazaar doivent respecter les lois de leur propre juridiction aussi bien que leur conscience. Les développeurs d'OpenBazaar ne tolèrent pas - et ne sont pas responsables -  de toute utilisation de la plate-forme à des fins illégales. \n\nLa communauté des développeurs d'OpenBazaar a travaillé sans relâche afin d'offrir une plate-forme commerciale libre et mondiale. Mais, comme avec tout logiciel, des bugs seront trouvés. Les développeurs ne sont pas responsables de toute perte monétaire associée à des problèmes dans le logiciel. \n\nEn utilisant OpenBazaar vous êtes seul responsable de vos actions sur le réseau d'OpenBazaar.",
           yourCountry: "Sélectionner votre pays",
           localCurrency: "Sélectionner votre devise",
           LanguagePlaceholder: "Rechercher par langue",
@@ -2060,7 +2068,7 @@ module.exports = Backbone.Model.extend({
           total: "Total"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "Aucun résultat trouvé"
         }        
       },
       {
@@ -2304,6 +2312,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2714,6 +2724,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Продано",
           PurchasedBy: "Куплено",
@@ -3124,6 +3136,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3538,6 +3552,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3951,6 +3967,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4364,6 +4382,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4778,6 +4798,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -5178,6 +5200,8 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
         },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",
