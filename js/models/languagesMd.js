@@ -415,6 +415,9 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to",
           paymentSent: "Payment Sent!",
           total: "Total"
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
         }
       },
       {
@@ -812,6 +815,9 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
         }
       },
       {
@@ -1217,7 +1223,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "Italiano",
@@ -1626,7 +1635,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Pagamento diretto a",
           paymentSent: "Pagamento inviato!",
           total: "Totale"
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "Français",
@@ -2036,7 +2048,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Paiement direct à",
           paymentSent: "Paiement envoyé !",
           total: "Total"
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "Română",
@@ -2441,7 +2456,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "Russian",
@@ -2846,7 +2864,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Прямой платёж",
           paymentSent: "Платёж отправлен!",
           total: "Всего"
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "Slovak",
@@ -3251,7 +3272,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "Turkish",
@@ -3660,7 +3684,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "Klingon",
@@ -4068,7 +4095,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "中文",
@@ -4475,7 +4505,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "한국어 (Korean)",
@@ -4885,7 +4918,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }        
       },
       {
         langName: "日本語 (Japanese)",
@@ -5279,7 +5315,10 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "%{handle}に直接購入",
           paymentSent: "送金しました！",
           total: "注文合計"
-        }
+        },
+        chat: {
+          noSearchResultsFound: "No results found" //notTranslated
+        }       
       }
     ]
   }

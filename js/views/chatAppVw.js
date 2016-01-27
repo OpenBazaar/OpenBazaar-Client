@@ -161,7 +161,7 @@ module.exports = Backbone.View.extend({
   },
 
   renderNoneFound: function(){
-    this.$('#chatHeads').html('<p>No results found.</p>');
+    this.$('#chatHeads').html('<p>' + window.polyglot.t('chat.noSearchResultsFound') + '.</p>');
   },
 
   chatSearchText: function(e) {
