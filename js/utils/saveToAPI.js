@@ -1,7 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    showErrorModal = require('../utils/showErrorModal.js');
+    messageModal = require('../utils/messageModal.js');
 
 
 module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys) {
@@ -15,7 +15,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
      skipKeys[optional]: keys to skip, and not send to the server
    */
   var self = this,
-      formData = new FormData(form[0] || ""),
+      formData = new FormData((form && form[0]) || ""),
       formKeys = [],
       tempDisabledFields = [];
 
@@ -24,8 +24,8 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   if(form){
     form.addClass('formChecked');
     if (!form[0].checkValidity()){
-      showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-      return;
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      return $.Deferred().reject('failed form validation').promise();
     }
 
     //temporarily disable any blank fields so they aren't picked up by the serializeArray
@@ -89,7 +89,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
     });
   }
 
-  $.ajax({
+  return $.ajax({
     type: "POST",
     url: endPoint,
     contentType: false,
@@ -98,15 +98,15 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
     dataType: "json",
     success: function(data) {
       if (data.success === true){
-        onSucceed(data);
+        typeof onSucceed === 'function' && onSucceed(data);
       }else if (data.success === false){
         if(onFail){
           onFail(data);
         } else{
-          showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       } else {
-        showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
       }
     },
     error: function(jqXHR, status, errorThrown){

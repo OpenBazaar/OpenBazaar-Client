@@ -43,6 +43,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Follow",
         Feed: "Feed",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewListing: "View Listing",
         Unfollow: "Unfollow",
         About: "About",
         NoDescriptionAdded: "No description added",
@@ -143,6 +144,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme",
         Listing: "Listing",
         Listings: "Listings",
+        ViewPage: "View page", //notTranslated
         Pages: "Pages",
         Page: "Page",
         Language: "Language",
@@ -155,7 +157,7 @@ module.exports = Backbone.Model.extend({
         Free: "Free",
         Category: "Category",
         ProcessingTime: "Processing Time",
-        UploadPhotos: "Upload photos",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Drag or upload photos",
         ExpirationDate: "Expires On",
         UploadCoverPhoto: "Upload a cover photo",
@@ -199,6 +201,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases",
         Enter: "Enter", //notTranslated
         Discover: "Discover",
+        Block: "Block",
+        Unblock: "Unblock",
         Blocked: "Blocked",
         Advanced: "Advanced",
         General: "General",
@@ -239,6 +243,15 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
+        Moderator: "Moderator",
+        HandleResolver: "Handle Resolver",
+        moderatorSettings: {
+          ProvideResolution: "Provide dispute resolution",
+          ServiceFee: "Service fee",
+          ServiceFeeNote: "Percentage of transaction price (max 25)"
+        },
+        BecomeModerator: "Become a moderator",
+        EditModerator: "Moderator Settings",
         transactions: {
           SoldBy: "Sold By",
           PurchasedBy: "Purchased By",
@@ -308,7 +321,9 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "This Item Cannot be Purchased",
           sellerError: "The seller's server has rejected the purchase request",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
+          pageUnavailable: "This page is currently unavailable.",
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -436,6 +451,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Seguir",
         Feed: "Feed",
         FeedPlaceholder: "RSS de las p&aacute;ginas que sigue",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
@@ -534,6 +550,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -546,7 +563,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categor&iacute;a",
         ProcessingTime: "Tiempo de procesamiento",
-        UploadPhotos: "Subir fotos",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Arrastre o suba fotos",
         UploadCoverPhoto: "Suba una foto de portada",
         ExpirationDate: "Fecha de vencimiento",
@@ -585,6 +602,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -626,6 +645,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -695,7 +721,9 @@ module.exports = Backbone.Model.extend({
           socketError: "La URL del WebSocket fall&oacute;. Conectando a socket con la direcci&oacute;n predeterminada de ws://localhost:18466",
           contractError: "Este artículo no puede ser comprado" ,
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -824,6 +852,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Folgen",
         Feed: "Feed",
         FeedPlaceholder: "Neuigkeiten aller Seiten denen du folgst",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Nicht mehr folgen",
         About: "&Uuml;ber",
         NoDescriptionAdded: "Keine Beschreibung hinzugefügt",
@@ -924,6 +953,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -936,7 +966,7 @@ module.exports = Backbone.Model.extend({
         Free: "Kostenlos",
         Category: "Kategorie",
         ProcessingTime: "Bearbeitungszeit",
-        UploadPhotos: "Fotos hochladen",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Fotos hier hin ziehen oder hochladen",
         ExpirationDate: "Ablaufdatum",
         UploadCoverPhoto: "Titelbild hochladen",
@@ -979,6 +1009,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -1020,6 +1052,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -1089,7 +1128,9 @@ module.exports = Backbone.Model.extend({
           socketError: "URL f&uuml;r den Websocket ist fehlgschlagen. Verbindung mit der Standard-Addresse ws://localhost:18466 wird aufgebaut.",
           contractError: "Dieser Artikel kann nicht gekauft werden",
           sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1222,6 +1263,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Segui",
         Feed: "Feed",
         FeedPlaceholder: "Un feed di aggiornamenti da tutte le pagine che segui",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
@@ -1322,6 +1364,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Argomento",
         Listing: "Listato",
         Listings: "Listati",
+        ViewPage: "View page", //notTranslated
         Pages: "Pagine",
         Page: "Pagina",
         Language: "Lingua",
@@ -1334,7 +1377,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratuito",
         Category: "Categoria",
         ProcessingTime: "Tempo di preparazione",
-        UploadPhotos: "Caricare foto",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Trascina o carica foto",
         ExpirationDate: "Scadenza per il",
         UploadCoverPhoto: "Carica una foto di copertina",
@@ -1378,6 +1421,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cause",
         Enter: "Enter", //notTranslated
         Discover: "Trova",
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Bloccato",
         Advanced: "Avanzato",
         General: "Generale",
@@ -1418,6 +1463,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
@@ -1487,7 +1539,9 @@ module.exports = Backbone.Model.extend({
           socketError: "Connessione all'URL per WebSocket fallita. Connettere al socket con l'indirizzo di default ws://localhost:18466",
           contractError: "Questo articolo non pu&ograve; essere acquistato",
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto",
-          checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto"
+          checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto",
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1584,7 +1638,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Français",
-        langCode: "fr",
+        langCode: "fr-FR",
         /* Use capitalized keys for widely reused text that must be capitalized */
         Next: "Suivant",
         IAgree: "Je suis d'accord",
@@ -1596,9 +1650,9 @@ module.exports = Backbone.Model.extend({
         Done: "Terminé",
         Navigation: "Navigation",
         Cancel: "Annuler",
-        ClosingOpenBazaar: "La fermeture d'OpenBazaar déconnectera votre page",
-        Minimize: "Minimize", //notTranslated
-        Maximize: "Maximize", //notTranslated
+        ClosingOpenBazaar: "Fermer (votre page sera déconnectée)",
+        Minimize: "Réduire",
+        Maximize: "Agrandir",
         Close: "Fermer",
         Yes: "Oui",
         No: "Non",
@@ -1620,6 +1674,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Suivre",
         Feed: "Flux",
         FeedPlaceholder: "Un flux de mises à jour de toutes les pages que vous suivez",
+        ViewListing: "Voir l'annonce",
         Unfollow: "Ne plus suivre",
         About: "&Agrave; propos",
         NoDescriptionAdded: "Aucune description ajoutée",
@@ -1631,7 +1686,7 @@ module.exports = Backbone.Model.extend({
         Message: "Message",
         Messages: "Messages",
         Store: "Boutique",
-        Edit: "Editer",
+        Edit: "Modifier",
         Used: "Utilisé",
         Delete: "Supprimer",
         DontDelete: "Ne pas supprimer",
@@ -1639,14 +1694,14 @@ module.exports = Backbone.Model.extend({
         Website: "Site web",
         Guid: "OpenBazaar ID (GUID)",
         Welcome: "Bienvenue",
-        CreateStore: "Créer une boutique",
+        CreateStore: "Devenir une boutique",
         GoToMyPage: "Ma page",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Tapez #games, #shoes ou un autre #mot_clé...",
         SearchForPagesPlaceholder: "Rechercher par nom ou par mot-clé",
         SearchFeedPlaceholder: "Tapez un mot-clé...",
         SearchForFollowersPlaceholder: "Tapez un nom...",
         SearchForUsersPlaceholder: "Tapez un nom...",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Tapez un titre...",
         EstDeliveryDomesticPlaceholder: "3-5 jours ouvrés",
         EstDeliveryInternationalPlaceholder: "7-15 jours ouvrés",
         OrderProcessingTimePlaceholder: "Entrer le temps nécessaire pour traiter la commande",
@@ -1656,7 +1711,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Entrer une condition de retour...",
         CategoryPlaceholder: "Entrer une catégorie",
         CategoryHelperText: "Les catégories sont utilisées pour regrouper et organiser les articles au sein de votre boutique.",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        KeywordsHelperText: "Ajouter des mots-clés permet à votre annonce d'être découverte sur le marché.",
         ExpirationDateHelperText: "Définir une date pour que l'article soit automatiquement retiré de votre boutique.",
         ClearExpirationDate: "Effacer la date d'expiration",
         ReturnPolicy: "Condition de retour",
@@ -1682,7 +1737,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Retours",
         ReturnsPolicy: "Conditions de retours",
         Ampersand: "&",
-        Tags: "Tags", //notTranslated
+        Tags: "Mots-clés",
         Keywords: "Mots-clés",
         ShipsFrom: "Expédie de",
         ShipsTo: "Expédie vers",
@@ -1693,8 +1748,8 @@ module.exports = Backbone.Model.extend({
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
         BitcoinReturnAddress: "Adresse Bitcoin de retour",
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "En cas de remboursement, vos fonds seront émis à l'adresse suivante.",
+        BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
+        BitcoinReturnAddressInfo: "En cas de remboursement, vos fonds seront envoyés à l'adresse suivante.",
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1720,6 +1775,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Thème",
         Listing: "Annonce",
         Listings: "Annonces",
+        ViewPage: "Voir la page",
         Pages: "Pages",
         Page: "Page",
         Language: "Langue",
@@ -1732,7 +1788,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratuit",
         Category: "Catégorie",
         ProcessingTime: "Délai de traitement",
-        UploadPhotos: "Uploader des photos",
+        SelectPhotos: "Sélectionner des photos",
         DragOrUploadPhotos: "Glisser ou uploader des photos",
         ExpirationDate: "Expire le",
         UploadCoverPhoto: "Uploader une photo de couverture",
@@ -1776,6 +1832,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cas",
         Enter: "Entrer",
         Discover: "Découvrir",
+        Block: "Bloquer",
+        Unblock: "Débloquer",
         Blocked: "Bloqué",
         Advanced: "Avancé",
         General: "Général",
@@ -1794,16 +1852,16 @@ module.exports = Backbone.Model.extend({
         Content: "Contenu",
         StandardThemes: "Thèmes standards",
         NoPhotosAdded: "Aucune photo ajoutée",
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        Summary: "Récapitulatif",
+        Funds: "Fonds",
+        Discussion: "Discussion",
+        Quantity: "Quantité",
+        ShippingTo: "Expédier à",
+        ModeratedBy: "Modéré par",
+        Submit: "Envoyer",
+        maxLength20: "20 caractères maximum",
+        maxLength80: "80 caractères maximum",
+        maxLength200: "200 caractères maximum",
         StoreModeratorsOptional: "Modérateurs de boutique (Optionnel)",
         Searchformoderators: "Rechercher des modérateurs",
         Contributors: "Contributeurs",
@@ -1816,6 +1874,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "Non renseigné",
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
+        Moderator: "Modérateur",
+      HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: {
+          ProvideResolution: "Apporter des résolutions aux conflits",
+          ServiceFee: "Frais de service",
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max)"
+        },
         transactions: {
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
@@ -1835,43 +1900,43 @@ module.exports = Backbone.Model.extend({
           OrderStatus3: "Terminé (fonds reçus)",
           OrderStatus4: "Contesté",
           OrderTotal: "Total de la commande",
-          OrderTotalInBTC: "BTC Total", // not translated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          OrderTotalInBTC: "Total BTC",
+          PaymentProtection: "Protection de paiement",
+          ShipTo: "Expédier à",
+          ConfirmOrder: "Confirmer cette commande",
+          ReceivingAddress: "Adresse de réception",
+          RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
+          Shipper: "Article expédié par",
+          ShipperPlaceholder: "Nom de l'entreprise expédiant l'article",
+          TrackingNumber: "Numéro de suivi",
+          TrackingNumberPlaceholder: "Numéro de suivi de cet article",
+          EstimatedDelivery: "Délai de livraison estimé",
+          EstimatedDeliveryPlaceholder: "Date estimée de la livraison de l'article",
+          URL: "URL",
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
+          Password: "Mot de passe",
+          PasswordPlaceholder: "Mot de passe requis pour le lien, si nécessaire",
+          DirectTransaction: "Transaction directe",
+          ModeratedTransaction: "Transaction modérée",
+          Seller: "Vendeur",
+          Buyer: "Acheteur",
           transferReceipt: "transferReceipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
+          copyTxid: "copier l'ID de transaction",
+          Close: "Fermer",
+          FundOrder: "Financer la commande",
+          sortByDateNewest: "Par date, les plus récentes",
+          sortByDateOldest: "Par date, les plus anciennes",
+          PayPurchase: "Payer cet achat",
+          CompleteOrder: "Compléter cette commande",
+          RateThisTransaction: "Noter cette transaction",
+          TransactionReview: "Avis de transaction",
+          OverallRating: "Note générale",
+          Quality: "Qualité",
+          Description: "Description",
+          DeliveryTime: "Heure de livraison",
+          CustomerService: "Service client",
+          Review: "Avis",
+          ReviewPlaceHolder: "Votre avis sur cette transaction",
           NoneSent: "None sent" // not translated
         },
         errorMessages: {
@@ -1885,7 +1950,9 @@ module.exports = Backbone.Model.extend({
           socketError: "L'URL pour WebSocket a échoué. Connexion au socket avec l'adresse par défaut de ws://localhost:18466",
           contractError: "Cet article ne peut pas être acheté",
           sellerError: "Le serveur du vendeur a rejeté la demande d'achat",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme",
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -1898,9 +1965,9 @@ module.exports = Backbone.Model.extend({
           SaveSuccess: "Vos changements ont été enregistrés."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Analyse de votre réseau",
+          searchingText: "Analyse de votre réseau pour",
+          noResults: "Aucune annonce trouvée dans votre réseau avec le mot-clé"
         },
         filters: {
           pagesAllTypes: "Tous les types",
@@ -1912,7 +1979,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "Toutes"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Tapez un @nom_d_utilisateur, GUID ou un #mot_clé...",
           myPage: "Ma page",
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
@@ -1928,7 +1995,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configuration d'OpenBazaar",
           Introduction: "Présentation",
-          IntroductionBody: "OpenBazaar est un marché social pair à pair. Ce projet est semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. Il n’y a pas de frais ou de restrictions et OpenBazaar est un projet open-source. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase d’apprentissage.",
+          IntroductionBody: "OpenBazaar est un marché social pair à pair, semblable à une fusion entre eBay&trade;, Twitter&trade; et BitTorrent. OpenBazaar est un projet open-source qui n'applique pas de frais ou de restrictions particulières. \n\n Veuillez noter que l’expérience d’utilisation peut être différente de celles que vous avez, essayez d’être patient pendant la phase de découverte.",
           Theme: "Sélectionner un thème pour votre page",
           chooseLanguage: "Sélectionner votre langue",
           contributors: "%{smart_count} Contributeur |||| %{smart_count} Contributeur",
@@ -1954,7 +2021,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Explorez les annonces et les pages sur OpenBazaar",
           Finished: "Terminé"
         },
         buyFlow: {
@@ -2015,6 +2082,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Urmărire",
         Feed: "Feed",
         FeedPlaceholder: "Lista de actualizări de la toate paginile urmărite",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Oprire Urmărire",
         About: "Despre",
         NoDescriptionAdded: "Nu a fost adăgată descrirea",
@@ -2115,6 +2183,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -2127,7 +2196,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categorie",
         ProcessingTime: "Timp de Procesare",
-        UploadPhotos: "Încărcare fotografii",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Trageți sau încărcați imaginile",
         ExpirationDate: "Expiră Pe",
         UploadCoverPhoto: "Încărcați imaginea copertă",
@@ -2170,6 +2239,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2211,6 +2282,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -2280,7 +2358,9 @@ module.exports = Backbone.Model.extend({
           socketError: "URL pentru WebSocket a eșuat. Conectarea la socket cu adresa implicită ws://localhost:18466",
           contractError: "Acest Articol Nu Poate Fi Procurat",
           sellerError: "Serverul vânzătorului a respins cererea de cumpărare",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -2409,6 +2489,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Подписан",
         Feed: "Лента",
         FeedPlaceholder: "Лента обновлений, за которыми я слежу",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
@@ -2509,6 +2590,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Тема", //not translated
         Listing: "Объявление", //not translated
         Listings: "Объявления", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Страницы", //not translated
         Page: "Страница", //not translated
         Language: "Язык", //not translated
@@ -2521,7 +2603,7 @@ module.exports = Backbone.Model.extend({
         Free: "Свободный",
         Category: "Категория",
         ProcessingTime: "Дней на упаковку",
-        UploadPhotos: "Загрузить фото",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Перетащите или выберите фото",
         ExpirationDate: "Заканчивается",
         UploadCoverPhoto: "Загрузить фото для фоновой картинки",
@@ -2564,6 +2646,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Кейсы",
         Enter: "Enter",
         Discover: "Обзор",
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Заблокированно",
         Advanced: "Дополнительно",
         General: "Общий",
@@ -2605,6 +2689,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Продано",
           PurchasedBy: "Куплено",
@@ -2674,7 +2765,9 @@ module.exports = Backbone.Model.extend({
           socketError: "URL для WebSocket недоступен. Подключаемся к адресу по умолчанию ws://localhost:18466",
           contractError: "Этот товар недоступен для продажи",
           sellerError: "Сервер продавца отключил эту возможность",
-          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться " //not translated
+          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться ", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "о нас",
@@ -2803,6 +2896,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Sleduj",
         Feed: "Feed",
         FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete.",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
@@ -2902,6 +2996,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -2914,6 +3009,7 @@ module.exports = Backbone.Model.extend({
         Free: "Zdarma",
         Category: "Kategória",
         ProcessingTime: "Čas spracovania",
+        SelectPhotos: "Select photos", //notTranslated
         UploadPhotos: "Nahrajte obrázky",
         DragOrUploadPhotos: "Nahrať obrázky",
         ExpirationDate: "Dátum expirácie",
@@ -2957,6 +3053,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -2998,6 +3096,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3067,7 +3172,9 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "Nákup položky neprebehol.",
           sellerError: "Predajcov server odmietol žiadosť o nákup.",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3200,6 +3307,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Takip et",
         Feed: "Haberler",
         FeedPlaceholder: "Takip ettiğiniz tüm sayfalardan haberler",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Takibi bırak",
         About: "Hakkında",
         NoDescriptionAdded: "Tanım eklenmemiş",
@@ -3300,6 +3408,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -3312,7 +3421,7 @@ module.exports = Backbone.Model.extend({
         Free: "Ücretsiz",
         Category: "Kategori",
         ProcessingTime: "Hazırlanma süresi",
-        UploadPhotos: "Görsel yükle",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Görselleri yükle ya da sürükle",
         ExpirationDate: "Sona erme tarihi",
         UploadCoverPhoto: "Kapak görseli yükleyin",
@@ -3356,6 +3465,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3396,6 +3507,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3465,7 +3583,9 @@ module.exports = Backbone.Model.extend({
           socketError: "Websoket URL'si hata verdi. Sokete öntanımlı ws://localhost:18466 ile bağlanılıyor.",
           contractError: "Bu Öğe Satın Alınamaz",
           sellerError: "Satıcının sunucusu alım talebini reddetti",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3598,6 +3718,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Pab",
         Feed: "BIQtIq",
         FeedPlaceholder: "BIQtIq chu' wa' vo' chaq juH Dapab",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "Mej",
         About: "Umqu' ghot",
         NoDescriptionAdded: "Pagh bang nob",
@@ -3697,6 +3818,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -3709,7 +3831,7 @@ module.exports = Backbone.Model.extend({
         Free: "Tlhab",
         Category: "Segh",
         ProcessingTime: "Poh mlw",
-        UploadPhotos: "MIllogh ngeH",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "Chagh pagh mIllogh ngeH",
         ExpirationDate: "Hegh",
         UploadCoverPhoto: "MIllogh yuvtlhe' ngeH",
@@ -3753,6 +3875,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -3793,6 +3917,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -3862,7 +3993,9 @@ module.exports = Backbone.Model.extend({
           socketError: "Luj URL WebSocket. Rar socket SoQ ws://localhost:18466",
           contractError: "LaH wej je' Doch",
           sellerError: "QuvHa' offer lajQo' loD 'Iv ngev",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3995,6 +4128,7 @@ module.exports = Backbone.Model.extend({
         Follow: "关注",
         Feed: "消息来源",
         FeedPlaceholder: "更新您关注的所有网页",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "不再关注",
         About: "关于",
         NoDescriptionAdded: "未加描述",
@@ -4094,6 +4228,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -4106,7 +4241,7 @@ module.exports = Backbone.Model.extend({
         Free: "免费",
         Category: "分类",
         ProcessingTime: "处理时间",
-        UploadPhotos: "上传照片",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "拖移或上传照片",
         ExpirationDate: "失效日期",
         UploadCoverPhoto: "上传封面照片",
@@ -4150,6 +4285,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4190,6 +4327,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4259,7 +4403,9 @@ module.exports = Backbone.Model.extend({
           socketError: "WebSocket的URL地址失败。请使用ws://localhost:18466",
           contractError: "找不到此项货物",
           sellerError: "卖家的服务器拒绝了这笔买卖",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4392,6 +4538,7 @@ module.exports = Backbone.Model.extend({
         Follow: "팔로우",
         Feed: "새로고침",
         FeedPlaceholder: "당신이 따른 모든페이지에서 업데이트 공급",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "팔로우 취소",
         About: "정보",
         NoDescriptionAdded: "설명할수 없어",
@@ -4492,6 +4639,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme", //not translated
         Listing: "Listing", //not translated
         Listings: "Listings", //not translated
+        ViewPage: "View page", //notTranslated
         Pages: "Pages", //not translated
         Page: "Page", //not translated
         Language: "Language", //not translated
@@ -4504,7 +4652,7 @@ module.exports = Backbone.Model.extend({
         Free: "무료",
         Category: "항목",
         ProcessingTime: "과정 시간",
-        UploadPhotos: "사진 업로드",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "끌기와 업로드 사진",
         ExpirationDate: "종료",
         UploadCoverPhoto: "표지 사진 업로드",
@@ -4548,6 +4696,8 @@ module.exports = Backbone.Model.extend({
         Cases: "Cases", // not translated
         Enter: "Enter", //notTranslated
         Discover: "Discover", // not translated
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
@@ -4588,6 +4738,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "Sold By", // not translated
           PurchasedBy: "Purchased By", // not translated
@@ -4657,7 +4814,9 @@ module.exports = Backbone.Model.extend({
           socketError: "웹 소켓의 URL에 실패했습니다.ws://localhost:18466 의 기본 주소와 소켓에 연결.",
           contractError: "이 제품은 지불 할수 없습니다 ",
           sellerError: "판매자의 서버는 구매 요청을 거부했습니다.",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid" //not translated
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4787,6 +4946,7 @@ module.exports = Backbone.Model.extend({
         Follow: "フォロー",
         Feed: "フィード",
         FeedPlaceholder: "A feed of updates from all of the pages you follow",
+        ViewListing: "View Listing", //notTranslated
         Unfollow: "フォローをやめる",
         About: "プロフェール",
         NoDescriptionAdded: "説明はありません",
@@ -4886,6 +5046,7 @@ module.exports = Backbone.Model.extend({
         Theme: "テーマ",
         Listing: "出品",
         Listings: "出品",
+        ViewPage: "View page", //notTranslated
         Pages: "ページ",
         Page: "ページ",
         Language: "言語",
@@ -4898,7 +5059,7 @@ module.exports = Backbone.Model.extend({
         Free: "無料",
         Category: "カテゴリー",
         ProcessingTime: "発送までの日数",
-        UploadPhotos: "写真をアップロード",
+        SelectPhotos: "Select photos", //notTranslated
         DragOrUploadPhotos: "ドラッグ＆ドロップ・写真をアプロード",
         ExpirationDate: "終了日時",
         UploadCoverPhoto: "カバー写真をアップロード",
@@ -4942,6 +5103,8 @@ module.exports = Backbone.Model.extend({
         Cases: "事例",
         Enter: "Enter", //notTranslated
         Discover: "ピックアップ",
+        Block: "Block", //notTranslated
+        Unblock: "Unblock", //notTranslated        
         Blocked: "ブロック",
         Advanced: "詳細設定",
         General: "一般設定",
@@ -4972,6 +5135,13 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        Moderator: "Moderator", // not translated
+        HandleResolver: "Handle Resolver",  // not translated
+        moderatorSettings: { // not translated
+          ProvideResolution: "Provide dispute resolution", // not translated
+          ServiceFee: "Service fee", // not translated
+          ServiceFeeNote: "Percentage of transaction price (max 25)" // not translated
+        },
         transactions: {
           SoldBy: "出品者",
           PurchasedBy: "購入者",
@@ -5041,7 +5211,9 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
           contractError: "購入が完了できませんでした。",
           sellerError: "出品者のサーバーは購入要求を拒否しました。",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid"
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
+          pageUnavailable: "This page is currently unavailable.",  //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5133,6 +5305,418 @@ module.exports = Backbone.Model.extend({
           directPaymentTo: "%{handle}に直接購入",
           paymentSent: "送金しました！",
           total: "注文合計"
+        }
+      },
+      {
+        langName: "Polski",
+        langCode: "pl",
+        /* Use capitalized keys for widely reused text that must be capitalized */
+        Next: "Dalej",
+        IAgree: "Zgadzam się",
+        Back: "Wróć",
+        EnterMessage: "Wprowadź tekst...",
+        Reload: "Odśwież",
+        You: "Ja",
+        Skip: "Pomiń",
+        Done: "Gotowe",
+        Navigation: "Nawigacja", 
+        Cancel: "Anuluj",
+        ClosingOpenBazaar: "Ciekawostka: twoja strona jest online, póki nie zamkniesz programu.", 
+        Minimize: "Zminimalizuj",
+        Maximize: "Zmaksymalizuj",
+        Close: "Zamknij",
+        Yes: "Tak",
+        No: "Nie",
+        of: "of",//No Polish Equivalent
+        Sell: "Sprzedaj",
+        New: "Nowy",
+        Excellent: "Doskonały",
+        Good: "W dobrym stanie",
+        Poor: "W złym stanie",
+        SKU: "Na stanie",
+        Refurbished: "Odnowiony",
+        Physical: "Fizyczny",
+        Digital: "Cyfrowy",
+        Service: "Usługa",
+        Visit: "Zobacz",
+        Item: "Przedmiot",
+        Items: "Przedmioty",
+        Stores: "Sklepy",
+        Follow: "Obserwuj",
+        Feed: "Kanał",
+        FeedPlaceholder: "Kanał aktualizacji ze stron, które obserwujesz",
+        Unfollow: "Przestań obserwować",
+        About: "O programie",
+        NoDescriptionAdded: "Brak opisu",
+        NoListings: "Brak pozycji",
+        CoverPhoto: "Tło",
+        AboutEmpty: "Pusto...",
+        Followers: "Obserwujący",
+        Following: "Obserwowani",
+        Message: "Wiadomość",
+        Messages: "Wiadomości",
+        Store: "Sklep",
+        Edit: "Edytuj",
+        Used: "Użyte",
+        Delete: "Usuń",
+        DontDelete: "Nie usuwaj",
+        ConfirmDelete: "Potwierdź usunięcie",
+        Website: "Strona",
+        Guid: "OpenBazaar ID (GUID)",
+        Welcome: "Witaj",
+        CreateStore: "Utwórz sklep",
+        GoToMyPage: "Mój profil",
+        SearchForItemsPlaceholder: "Wprowadź słowo kluczowe...",
+        SearchForPagesPlaceholder: "Szukaj po nazwie lub słowie kluczowym",
+        SearchFeedPlaceholder: "Wprowadź słowo kluczowe...",
+        SearchForFollowersPlaceholder: "Wprowadź imię...",
+        SearchForUsersPlaceholder: "Wprowadź imię...",
+        SearchOnUserStorePlaceholder: "Wpisz tytuł lub #tag",
+        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        EstDeliveryDomesticPlaceholder: "3-5 dni roboczych",
+        EstDeliveryInternationalPlaceholder: "7-15 dni roboczych",
+        OrderProcessingTimePlaceholder: "Wprowadź czas realizacji zamówienia",
+        TermsAndConditionsPlaceholder: "Wprowadź regulamin...",
+        TitlePlaceholder: "Wprowadź tytuł",
+        DescriptionPlaceholder: "Wprowadź opis...",
+        ReturnPolicyPlaceholder: "Wprowadź zasady dokonywania zwrotów...",
+        CategoryPlaceholder: "Wprowadź kategorię",
+        CategoryHelperText: "Kategorie służą grupowaniu i organizowaniu przedmiotów w twoim sklepie.",
+        KeywordsHelperText: "Dzięki słowom kluczowym twój przedmiot może zostać odkryty w markecie przez innych użytkowników.",
+        ExpirationDateHelperText: "Ustaw datę wygaśnięcia pozycji z twojego sklepu.",
+        ClearExpirationDate: "Wyczyść datę wygaśnięcia",
+        ReturnPolicy: "Zasady dokonywania zwrotów",
+        TermsAndConditions: "Regulamin",
+        Photos: "Zdjęcia",
+        Added: "Dodane",
+        Categorization: "Categorization",
+        Expiration: "Expiration",
+        Search: "Wyszukaj",
+        Email: "E-mail",
+        Facebook: "Facebook",
+        Instagram: "Instagram",
+        Twitter: "Twitter",
+        PGPKey: "Klucz PGP",
+        Snapchat: "Snapchat",
+        BUYNOW: "Kup teraz",
+        Description: "Opis",
+        Reviews: "Opinie",
+        Shipping: "Wysyłka",
+        Addresses: "Adresy",
+        NewAddress: "Nowy adres",
+        CurrentAddress: "Bieżący adres",
+        Returns: "Zwroty",
+        ReturnsPolicy: "Zasady dokonywania zwrotów",
+        Ampersand: "&",
+        Tags: "Tagi",
+        Keywords: "Słowa kluczowe",
+        ShipsFrom: "Wysyłka z",
+        ShipsTo: "Wysyłka do",
+        Optional: "Opcjonalne",
+        Customize: "Dostosuj",
+        Save: "Zapisz",
+        Changes: "Zmiany",
+        SaveChanges: "Zapisz wprowadzone zmiany",
+        YourName: "Twoje imię",
+        BitcoinReturnAddress: "Adres zwrotów BTC",
+        BitcoinReturnAddressPlaceholder: "Wprowadź adres BTC...",
+        BitcoinReturnAddressInfo: "W przypadku zwrotów środki będą zwracane na ten adres.",
+        LocalCurrency: "Lokalna waluta",
+        TimeZone: "Strefa czasowa",
+        ShipToName: "Name",
+        ShipToStreet: "Ulica",
+        ShipToCity: "Miasto",
+        ShipToState: "Województwo",
+        ShipToPostalCode: "Kod pocztowy",
+        PostalCode: "Kod pocztowy",
+        ShipToCountry: "Kraj",
+        EnableNotifications: "Włącz powiadomienia",
+        EnableSSL: "Włącz SSL",
+        LibbitcoinServerAddress: "Adres serwera Libbitcoin",
+        ServerIPPort: "IP:port serwera",
+        All: "Wszystko",
+        Name: "Nazwa",
+        Price: "Cena",
+        Available: "Dostępne",
+        Type: "Typ",
+        Condition: "Stan",
+        NSFW: "18+ (treści dla dorosłych)",
+        Select: "Wybierz",
+        Social: "Społecznościowy",
+        Theme: "Motyw",
+        Listing: "Pozycja",
+        Listings: "Pozycje",
+        ViewPage: "View page", //notTranslated
+        Pages: "Strony",
+        Page: "Strona",
+        Language: "Język",
+        Reset: "Reset",
+        Local: "Lokalny",
+        Domestic: "Krajowy",
+        Location: "Lokalizacja",
+        International: "Międzynarodowy",
+        Time: "Czas",
+        Free: "Darmowe",
+        Category: "Kategoria",
+        ProcessingTime: "Czas realizacji",
+        SelectPhotos: "Select photos", //notTranslated
+        DragOrUploadPhotos: "Przenieś i upuść lub wgraj zdjęcia",
+        ExpirationDate: "Wygasa dnia",
+        UploadCoverPhoto: "Wgraj tło",
+        ShortDescription: "Krótki opis",
+        UpTo140Characters: "Maksymalnie 140 znaków",
+        PrimaryColor: "Kolor główny",
+        SecondaryColor: "Kolor drugorzędny",
+        TextColor: "Kolor tekstu",
+        CoverPhotoButton: "Wybierz tło",
+        AboutPlaceholder: "Pełny opis",
+        BackgroundColor: "Kolor tła",
+        NotificationFollow: "zaczął cię obserować!",
+        NoNotifications: "Brak powiadomień",
+        WelcomeToYourPage: "Witaj na swojej stronie!",
+        SearchForCategory: "Szukaj w kategorii",
+        Moderators: "Moderatorzy",
+        CurrentModerators: "Obecni moderatorzy",
+        AddModerators: "Dodaj nowych moderatorów",
+        DeselectToRemoveModerator: "Odznacz moderatorów, których chcesz usunąć",
+        SelectToAddModerator: "Zaznacz moderatorów, których chcesz dodać",
+        Categories: "Kategorie",
+        UpTo3: "Maksymalnie 3",
+        AboutYourStore: "Opis twojego sklepu",
+        PaymentType: "Metoda płatności",
+        ShipTo: "Wysyłka do",
+        FreeShipping: "Darmowa wysyłka",
+        OrderDetails: "Szczegóły zamówienia",
+        OrderSummary: "Podsumowanie zamówienia",
+        AllListings: "Wszystkie artykuły",
+        ComingSoon: "Wkrótce",
+        PaymentPending: "Płatność w toku",
+        FinalizePurchase: "Sfinalizuj transakcję",
+        LoadingImage: "Ładuję zdjęcie...",
+        UploadAvatar: "Wybierz avatar",
+        SaveAvatar: "Zapisz avatar",
+        NewAvatar: "Wybierz nowy avatar",
+        NewCoverImage: "Wybierz nowe tło",
+        Loading: "Ładowanie...",
+        Purchases: "Kupione",
+        Sales: "Sprzedane",
+        Cases: "Sprawy",
+        Enter: "Wprowadź",
+        Discover: "Odkryj",
+        Block: "Block",//notTranslated
+        Unblock: "Unblock",//notTranslated
+        Blocked: "Zablokowani",
+        Advanced: "Zaawansowane",
+        General: "Ogólne",
+        AllItems: "Wszystkie przedmioty",
+        DomesticShippingPrice: "Koszt wysyłki krajowej",
+        InternationalShippingPrice: "Koszt wysyłki międzynarodowej",
+        MinimumIs: "Minimum to",
+        Visibility: "Widoczność",
+        Title: "Tytuł",
+        DigitalItem: "Przedmiot cyfrowy",
+        PhysicalItem: "Przedmiot fizyczny",
+        DomesticShippingTime: "Termin wysyłki krajowej",
+        InternationalShippingTime: "Termin wysyłki międzynarodowej",
+        DisplayNSFWcontent: "Pokaż treści NSFW?",
+        Basic: "Basic",//nottranslated
+        Content: "Zawartość",
+        StandardThemes: "Standardowe motywy",
+        NoPhotosAdded: "Brak zdjęć",
+        Summary: "Podsumowanie",
+        Funds: "Środki",
+        Discussion: "Dyskusja",
+        Quantity: "Ilość",
+        ShippingTo: "Wysyłka do",
+        ModeratedBy: "Nadzorowany przez",
+        Submit: "Wyślij",
+        maxLength20: "maksymalnie 20 znaków",
+        maxLength80: "maksymalnie 80 znaków",
+        maxLength200: "maksymalnie 200 znaków",
+        StoreModeratorsOptional: "Moderatorzy sklepu (opcjonalne)",
+        Searchformoderators: "Szukaj moderatorów",
+        Contributors: "Kontrybutorzy",
+        Support: "Pomoc",
+        Licensing: "Licencja",
+        Forward: "Dalej",
+        On: "Włączony",
+        Off: "Wyłączony",
+        ClickToChange: "Kliknij, by zmienić",
+        NotProvided: "niezapewniane",
+        NotFollowingAnyone: "Brak obserwowanych",
+        NoFollowers: "Brak obserwujących",
+        Moderator: "Moderator",//notTranslated
+        moderatorSettings: {
+          ProvideResolution: "Provide dispute resolution",//notTranslated
+          ServiceFee: "Service fee",//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25)"//notTranslated
+        },
+        BecomeModerator: "Become a moderator",//notTranslated
+        EditModerator: "Moderator Settings",//notTranslated
+        transactions: {
+          SoldBy: "Sprzedawca",
+          PurchasedBy: "Nabywca",
+          searchByOrder: "Szukaj po ID lub nazwie przedmiotu",
+          sortByStatusAll: "Wszystko",
+          sortByStatus0: "Kupione",
+          sortByStatus1: "Zapłacone (w trakcie realizacji)",
+          sortByStatus2: "Potwierdzone/Wysłane",
+          sortByStatus3: "Zakończone (opłacone)",
+          sortByStatus4: "W trakcie sporu",
+          OrderID: "Numer zamówienia",
+          OrderDate: "Data zamówienia",
+          OrderStatus: "Status zamówienia",
+          OrderStatus0: "Kupione (nieopłacone)",
+          OrderStatus1: "Zapłacone (w trakcie realizacji)",
+          OrderStatus2: "Potwierdzone/Wysłane",
+          OrderStatus3: "Zakończone (opłacone)",
+          OrderStatus4: "W trakcie sporu",
+          OrderTotal: "Do zapłaty",
+          OrderTotalInBTC: "Łącznie (BTC)",
+          PaymentProtection: "Ubezpieczenie płatności",
+          ShipTo: "Wysyłka do",
+          ConfirmOrder: "Potwierdź to zamówienie",
+          ReceivingAddress: "Adres odbiorczy",
+          RecievingAddressPlaceholder: "Adres portfela, na którzy otrzymasz płatność",
+          Shipper: "Wysłane przez",
+          ShipperPlaceholder: "Firma przesyłkowa",
+          TrackingNumber: "Numer śledzenia",
+          TrackingNumberPlaceholder: "Numer śledzenia przesyłki",
+          EstimatedDelivery: "Przybliżona wysyłka",
+          EstimatedDeliveryPlaceholder: "Przybliżony czas dostarczenia",
+          URL: "URL",
+          URLPlaceholder: "Link do pobrania, harmonogramu lub innych informacji",
+          Password: "Hasło",
+          PasswordPlaceholder: "Hasło zabezpieczające link (opcjonalne)",
+          DirectTransaction: "Transakcja bez pośredników",
+          ModeratedTransaction: "Transakcja nadzorowana",
+          Seller: "Sprzedawca",
+          Buyer: "Kupujący",
+          transferReceipt: "Dowód transakcji",
+          copyTxid: "Kopiuj numer transakcji",
+          Close: "Zamknij",
+          FundOrder: "Zapłać",
+          sortByDateNewest: "Od najnowszych",
+          sortByDateOldest: "Od najstarszych",
+          PayPurchase: "Zapłać",
+          CompleteOrder: "Sfinalizuj zamówienie",
+          RateThisTransaction: "Oceń transakcję",
+          TransactionReview: "Opinia o transakcji",
+          OverallRating: "Średnia ocen",
+          Quality: "Jakość",
+          Description: "Opis",
+          DeliveryTime: "Czas dostawy",
+          CustomerService: "Obsługa klienta",
+          Review: "Oceń",
+          ReviewPlaceHolder: "Twoja opinia o tej transakcji",
+          NoneSent: "Brak informacji"
+        },
+        errorMessages: {
+          saveError: "Nie można zapisać zmian.",
+          getError: "Nie można wczytać danych.",
+          missingError: "Wypełnij poprawnie pola.",
+          serverError: "Nieprawidłowa odpowiedź serwera.",
+          userError: "Brak danych dla tego ID",
+          userNotFoundError: "Dane tej osoby są obecnie niedostępne. Możliwe, że jest offline.",
+          notFoundError: "Nie można załadować danych dla:",
+          socketError: "URL dla WebSocket nieprawidłowy. Łączę z domyślnym adresem ws://localhost:18466",
+          contractError: "Nie można kupić tego przedmiotu",
+          sellerError: "Serwer sprzedawcy odrzucił płatność",
+          checkPurchaseData: "Upewnij się, że wprowadziłeś poprawne dane. Sprawdź stan konta oraz adresu zwrotów.",
+          pageUnavailable: "This page is currently unavailable."  //notTranslated
+        },
+        aboutSection: {
+          about: "<p>OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p><p>Oprogramowanie jest otwarte, udostępniane na licencji MIT. Kod dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githubie</a>.</p><p>OpenBazaar jest projektem społeczośniowym i zachęcamy do wejścia na nasz kanał <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> lub odwiedzenia naszego <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p><p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"\" target=\"_blank\">poradnik</a> do OpenBazaar w wersji 1.0.</p><p>Jeśli nadaj masz jakieś pytania, kliknij <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">tutaj</a>.</p>",
+          contributors: "<p>OpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy, którzy poświęcają swój czas, by uczynić handel wolnym. Oto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub inny rodzaj uczestnictwa.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li><li>Michał Pado</li></ul>", 
+          support: "<p>Możesz wesprzeć OpenBazaar na wiele sposobów, by wspomóc nas w naszej misji.</p><p>Kupowanie i sprzedawanie dóbr i usług przyczynia się do powiększenia naszej społeczności, a to z kolei zwiększa atrakcyjność platformy w oczach potencjalnych nowych użytkowników. Uprzejme prośby (kierowane do sprzedawców) o akceptację płatności w Bitcoinie za pośrednictwem naszej platformy pomaga docierać do kolejnych osób i pokazuje, że jest zapotrzebowanie na handel P2P.</p><p>Jeśli jesteś programistą, odwiedź naszego <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githuba</a> i zobacz, czy może nie ma czegoś, w czym mógłbyś nam pomóc. Oprócz pomocy z kodem źrodłowym mamy nadzieję, liberalna natura projektu zachęci was do tworzenia nowych usług bazujących na istniejącej sieci.</p><p>Możesz również <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">wspomóc nas finansowo</a>. Środki zostaną wykorzystane na pokrycie kosztów związanych z konferencjami, programem Bug Bounty oraz promocją //bounties.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Dołącz do naszego Slacka</a>, jeśli masz jakieś pomysły związane z projektem lub chciałbyś o coś zapytać deweloperów.</p>",
+          licensing: "<p>OpenBazaar to otwarte oprogramowanie oparte na licencj MIT. To liberalna licencja, zezwala pozwala na wykorzystanie kodu przy innych otwartych projektach, jak i projektach prawnie zastrzeżonych. Pełna treść licencji dostępna jest pod poniższym linkiem.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
+        },
+        saveMessages: {
+          Saved: "Zapisano",
+          SaveSuccess: "Zmiany zostały zapisane."
+        },
+        discover: {
+          searchDefaultText: "Przeszukiwanie sieci",
+          searchingText: "Przeszukiwanie sieci dla",
+          noResults: "Brak pozycji z tagiem"
+        },
+        filters: {
+          pagesAllTypes: "Wszystkie typy",
+          pagesStores: "Sklepy",
+          pagesMods: "Usługi moderatorów",
+          pagesBasic: "Zwykli użytkownicy",
+          listingsCurated: "Obserowane sklepy",
+          listingsAll: "Wszystkie sklepy",
+          categoryAll: "Wszystko"
+        },
+        nav: {
+          searchPlaceholder: "Wprowadź pseudonim lub szukaj",
+          myPage: "Moja strona",
+          customizePage:"Dostosuj stronę",
+          sellItem:"Nowy",
+          createListing:"Utwórz pozycję",
+          purchases:"Kupione",
+          sales:"Sprzedane",
+          cases:"Sprawy",
+          notifications:"Powiadomienia",
+          settings:"Ustawienia",
+          about:"O projekcie",
+          support:"Wspomóż projekt"
+        },
+        onboarding: {
+          intro: "Konfiguracja OpenBazaar",
+          Introduction: "Wprowadzenie",
+          IntroductionBody: "OpenBazaar to społecznościowy market P2P. Można powiedzieć, że jesteśmy połączeniem Allegro, Twittera i BitTorrenta. Ponadto nie ma żadnych opłat czy ograniczeń, a projekt jest otwarty źródłowo. \n\n Może ci to wydać odmienne od tego, do czego przywykłeś, dlatego prosimy o cierpliwość podczas zapoznawania się z OpenBazaar.",
+          theme: "Wybierz motyw dla swojej strony",
+          chooseLanguage: "Wybierz język",
+          contributors: "%{smart_count} Kontrybutor |||| %{smart_count} Kontrybutorzy",
+          configure: "Konfiguracja",
+          disclaimer_title: "Wyłączenie odpowiedzialności",
+          disclaimer_body: "OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji. Oznacza to, że tylko ty odpowiadasz za swoje działania w sieci. \n\nUżytkownicy OpenBazaar nie są domyślnie anonimowi. Większość komunikacji między stronami jest szyfrowana, lecz adresy IP są publiczne i mogą zostać powiązane z aktywnością w sieci. Złośliwe osoby mogą wykorzystać te informacje je przeciwko tobie. Ochrona własnej prywatności spoczywa na tobie.\n\n \\ Użytkownicy OpenBazaar muszą przestrzegać prawa obowiązującego w ich kraju, jak i prawa moralnego. Twórcy projektu OpenBazaar nie odpowiadają za nielegalne działania użytkowników.\n\nProgramiści OpenBazaar ciężko pracowali, by dostarczyć platformę umożliwiającą handel bez ograniczeń. Jednak, jak w każdym oprogramowaniu, bugi mogą się zdarzyć. Twórcy nie odpowiadają za straty materialne wynikłe z problemów z programem.\n\nJesteś odpowiedzialny za wszelkie swoje działania w OpenBazaar.",
+          yourCountry: "Wybierz kraj",
+          localCurrency: "Wybierz lokalną walutę",
+          LanguagePlaceholder: "Wyszukaj język",
+          CountryPlaceholder: "Wyszukaj kraj",
+          CurrencyPlaceholder: "Wyszukaj walutę",
+          TimezonePlaceholder: "Wyszukaj strefę czasową",
+          ShortDescriptionPlaceholder: "Napisz coś o sobie... (do 160 znaków)",
+          timeZone: "Wybierz strefę czasową",
+          yourDetails: "Informacje o tobie",
+          yourDescription: "Opis",
+          handle: "Pseudonim",
+          chooseHandle: "Wybierz pseudonim",
+          knownAs: "Jesteś znany jako:",
+          wouldYou: "Chciałbyś zarejestrować łatwy do zapamiętania pseudonim?",
+          registerNew: "Zarejestruj nowy",
+          recommended: "Proponowane strony do obserowania",
+          connectExisting: "Połącz istniejący",
+          avatar: "Ustaw avatar",
+          chooseAvatar: "Wybierz avatar",
+          discoverCallOut: "Odkrywaj produkty i strony na OpenBazaar",
+          Finished: "Gotowe"
+        },
+        buyFlow: {
+          DirectPayment: "Płatność bezpośrednia",
+          SendDirectlyTo: "Wyślij bezpośrednią płatność do %{handle}",
+          MustAddAddress: "Musisz wprowadzić adres wysyłki",
+          VendorShipsTo: "Wysyłka do",
+          DoesNotShipHere: "Wysyłka niedostępna do",
+          Send: "Wyślij",
+          BTCto: "BTC do",
+          SendBTCtoAddress: "Wyślij %{amount} BTC do",
+          OpenAddress: "Otwórz w portfelu lokalnym",
+          CopyAddress: "Kopiuj do schowka",
+          RefreshPayment: "Odśwież status płatności",
+          summaryMsg1: "Płatność została wysłana do %{recipient}",
+          summaryMsg2: "Szacowany czas realizacji tego zamówienia to",
+          summaryMsg3: "Możesz sprawdzić status swojego zamówienia na",
+          purchasesPage: "Kupione",
+          returnAddress: "Adres zwrotów",
+          moderatorPaymentDisclaimer: "Dotyczy wyłącznie transakcji w sporze.",
+          directPaymentDisclaimer: "Korzystaj z płatności bezpośredniej ostrożnie; środki nie są zwracane",
+          directPaymentTo: "Płatność bezpośrednia do",
+          paymentSent: "Dokonano płatności!",
+          total: "Suma"
         }
       }
     ]

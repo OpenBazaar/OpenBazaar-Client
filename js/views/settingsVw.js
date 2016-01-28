@@ -3,13 +3,15 @@ var __ = require('underscore'),
     $ = require('jquery'),
     //userProfileModel = require('../models/userProfileMd'),
     loadTemplate = require('../utils/loadTemplate'),
+    domUtils = require('../utils/dom'),
     timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
-    //personListView = require('./userListVw'),
+    usersCl = require('../collections/usersCl.js'),
+    blockedUsersVw = require('./blockedUsersVw'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
     countriesModel = require('../models/countriesMd'),
-    showErrorModal = require('../utils/showErrorModal.js'),
+    messageModal = require('../utils/messageModal.js'),
     cropit = require('../utils/jquery.cropit'),
     chosen = require('../utils/chosen.jquery.min.js'),
     setTheme = require('../utils/setTheme.js'),
@@ -22,12 +24,13 @@ module.exports = Backbone.View.extend({
   className: "settingsView",
 
   events: {
-    'click .js-generalTab': 'generalClick',
-    'click .js-addressesTab': 'addressesClick',
-    'click .js-pageTab': 'pageClick',
-    'click .js-storeTab': 'storeClick',
-    'click .js-blockedTab': 'blockedClick',
-    'click .js-advancedTab': 'advancedClick',
+    'click .js-generalTab': 'tabClick',
+    'click .js-addressesTab': 'tabClick',
+    'click .js-pageTab': 'tabClick',
+    'click .js-storeTab': 'tabClick',
+    'click .js-blockedTab': 'tabClick',
+    'click .js-moderatorTab': 'tabClick',
+    'click .js-advancedTab': 'tabClick',
     'click .js-cancelGeneral': 'cancelView',
     'click .js-saveGeneral': 'saveGeneral',
     'click .js-cancelPage': 'cancelView',
@@ -36,11 +39,15 @@ module.exports = Backbone.View.extend({
     'click .js-saveAddress': 'saveAddress',
     'click .js-cancelStore': 'cancelView',
     'click .js-saveStore': 'saveStore',
+    'click .js-cancelModerator': 'cancelView',
+    'click .js-saveModerator': 'saveModerator',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvanced',
     'change .js-settingsThemeSelection': 'themeClick',
     'click .js-settingsAddressDelete': 'addressDelete',
     'click .js-settingsAddressUnDelete': 'addressUnDelete',
+    'click #moderatorYes': 'showModeratorFeeHolder',
+    'click #moderatorNo': 'hideModeratorFeeHolder',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -64,6 +71,10 @@ module.exports = Backbone.View.extend({
 
     this.newAvatar = false;
     this.newBanner = false;
+
+    this.moderatorFeeInput;
+    this.moderatorFeeHolder;
+    this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
     this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
       this.handleSocketMessage(response);
@@ -100,7 +111,7 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(model, response){
-        showErrorModal(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
+        messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
   },
@@ -113,7 +124,18 @@ module.exports = Backbone.View.extend({
       self.delegateEvents(); //delegate again for re-render
       self.setFormValues();
       self.setState(self.options.state);
-      //self.renderBlocked(self.model.get("user").blocked);
+      
+      // Since the Blocked Users View kicks off many server calls (one
+      // for each blocked user) and since we are re-rendering the entire
+      // settings view often (after each save), we will cache the Blocked
+      // Users View.
+      if (!self.blockedRendered) {
+        self.renderBlocked();
+        self.blockedRendered = true;
+      } else {
+        self.renderBlocked({ useCached: true });
+      }
+      
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
         $preview: $('.js-settingsAvatarPreview'),
@@ -132,6 +154,8 @@ module.exports = Backbone.View.extend({
           console.log(errorMessage);
         }
       });
+      self.moderatorFeeInput = self.$('#moderatorFeeInput');
+      self.moderatorFeeHolder = self.$('.js-settingsModeratorFee');
       if(self.model.get('page').profile.avatar_hash){
         $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
       }
@@ -171,16 +195,109 @@ module.exports = Backbone.View.extend({
     });
     return this;
   },
-/* this is not how this should work
-  renderBlocked: function (model) {
-    "use strict";
-    this.blockedList = new personListView({model: model,
-                                           el: '.js-list1',
-                                           title: "No one blocked",
-                                           message: ""});
-    this.subViews.push(this.blockedList);
+
+  patchAndFetchBlockedUsers: function(models) {
+    var self = this;
+
+    if (models && models.length) {
+      __.each(models, function(model) {
+        model.urlRoot = self.serverUrl + 'profile';
+        
+        // Monkey patching parse so the profile is not nested
+        // and therefore change events will be in play.
+        model.oldParse = model.parse;
+        model.parse = function (response) {
+          if (response.profile) {
+            return model.oldParse(response).profile;
+          } else {
+            return response;
+          }          
+        };
+
+        model.fetch({ data: { guid: model.get('guid')} });
+      });
+    }
   },
-  */
+
+  renderBlocked: function(options) {
+    var self = this,
+        modelsPerBatch = 25,
+        $lazyLoadTrigger,
+        $blockedForm,
+        blockedGuids,
+        blockedUsersCl;
+
+    options = options || {};
+    $blockedContainer = this.$('#blockedForm > :first-child');
+
+    if (options.useCached) {
+      if (!this.$lazyLoadTrigger.length) {
+        throw new Error('Some expected state is missing. renderBlocked() can only'
+          + ' be called with the useCached option after it has been called at least once'
+          + ' without the useCached option.');
+      }
+
+      $blockedContainer.html(this.blockedUsersVw.el);
+
+      if (!document.contains(this.$lazyLoadTrigger[0])) {
+        $blockedContainer.append(this.$lazyLoadTrigger);
+      }
+
+      return;
+    }
+
+    blockedGuids = this.userModel.get('blocked_guids')
+      .map(function(guid) {
+        return { guid: guid }
+      });
+
+    blockedUsersCl = new usersCl(blockedGuids.slice(0, modelsPerBatch));
+    this.patchAndFetchBlockedUsers(blockedUsersCl.models);
+
+    this.blockedUsersVw = new blockedUsersVw({
+      model: this.userModel,
+      collection: blockedUsersCl,
+      serverUrl: this.serverUrl
+    });
+
+    $blockedContainer.html(
+      self.blockedUsersVw.render().el
+    );
+
+    // implement scroll based lazy loading of blocked users
+    this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
+      position: 'absolute',
+      width: '100%',
+      height: 5,
+      bottom: 300
+    });
+    $blockedContainer.append(this.$lazyLoadTrigger);
+
+    this.$obContainer = this.$obContainer || $('#obContainer');
+    // in case we're re-rendering, remove any previous scroll handlers
+    this.blockedUsersScrollHandler && this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+    this.blockedUsersScrollHandler = __.throttle(function() {
+      var colLen;
+
+      if (
+        blockedUsersCl.length < blockedGuids.length &&
+        domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
+      ) {
+        colLen = blockedUsersCl.length;
+
+        blockedUsersCl.add(
+          blockedGuids.slice(colLen, colLen + modelsPerBatch)
+        );
+
+        self.patchAndFetchBlockedUsers(
+          blockedUsersCl.slice(colLen, colLen + modelsPerBatch)
+        )
+      }
+    }, 200);
+
+    this.$obContainer.on('scroll', this.blockedUsersScrollHandler);
+    // end - implement scroll based lazy loading of blocked users
+  },
 
   setFormValues: function(){
     var self = this,
@@ -203,7 +320,8 @@ module.exports = Backbone.View.extend({
         currency_str = "",
         timezone_str = "",
         language_str = "",
-        pageNSFW = this.model.get('page').profile.nsfw;
+        pageNSFW = this.model.get('page').profile.nsfw,
+        moderatorStatus = this.model.get('page').profile.moderator;
 
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
 
@@ -266,6 +384,22 @@ module.exports = Backbone.View.extend({
         self.renderModerator(modID);
       }
     });
+
+    //set moderator status
+    this.$('#moderatorForm input[name=moderator]').val([String(moderatorStatus)]);
+  },
+
+  showModeratorFeeHolder: function(){
+    "use strict";
+    this.moderatorFeeHolder.removeClass('hide');
+    this.moderatorFeeInput.val(this.oldFeeValue);
+  },
+
+  hideModeratorFeeHolder: function(){
+    "use strict";
+    this.moderatorFeeHolder.addClass('hide');
+    this.oldFeeValue = this.moderatorFeeInput.val();
+    this.moderatorFeeInput.val(0);
   },
 
   handleSocketMessage: function(response) {
@@ -335,44 +469,11 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  generalClick: function(){
+  tabClick: function(e){
     "use strict";
-    this.setState("general");
-    this.addTabToHistory("general");
-  },
-
-  addressesClick: function(){
-    "use strict";
-    this.setState("addresses");
-    this.addTabToHistory("addresses");
-    $('#content').find('input:visible:first').focus();
-  },
-
-  pageClick: function(){
-    "use strict";
-    this.setState("page");
-    this.addTabToHistory("page");
-    $('#content').find('input:visible:first').focus();
-  },
-
-  storeClick: function(){
-    "use strict";
-    this.setState("store");
-    this.addTabToHistory("store");
-    $('#content').find('input:visible:first').focus();
-  },
-
-  blockedClick: function(){
-    "use strict";
-    this.setState("blocked");
-    this.addTabToHistory("blocked");
-  },
-
-  advancedClick: function(){
-    "use strict";
-    this.setState("advanced");
-    this.addTabToHistory("advanced");
-    $('#content').find('input:visible:first').focus();
+    var tab = $(e.target).data('tab');
+    this.setState(tab);
+    this.addTabToHistory(tab);
   },
 
   cancelView: function(e){
@@ -401,7 +502,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
-      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.setCurrentBitCoin(cCode);
       self.refreshView();
     });
@@ -438,7 +539,7 @@ module.exports = Backbone.View.extend({
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
         "use strict";
-        showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
       }, "", pageData, skipKeys);
     };
@@ -456,7 +557,7 @@ module.exports = Backbone.View.extend({
                 checkSocialCount();
               },
               function(data){
-                showErrorModal(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+                messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
               }, socialData);
         } else {
           checkSocialCount();
@@ -538,7 +639,7 @@ module.exports = Backbone.View.extend({
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
         "use strict";
-        showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
       }, "", settingsData);
     }, "", profileData);
@@ -563,7 +664,7 @@ module.exports = Backbone.View.extend({
     //if form is partially filled out throw error
     if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
-        showErrorModal(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
         return;
       }
     }
@@ -580,9 +681,25 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
-      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
     }, "", addressData);
+  },
+
+  saveModerator: function(){
+    "use strict";
+    var self = this,
+        form = this.$el.find("#moderatorForm"),
+        moderatorData = {};
+
+    moderatorData.name = self.model.get('page').profile.name;
+    moderatorData.location = self.model.get('page').profile.location;
+
+    saveToAPI(form, '', self.serverUrl + "profile", function(){
+      "use strict";
+      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      self.refreshView();
+    }, '', moderatorData);
   },
 
   saveAdvanced: function(){
@@ -592,7 +709,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
-      showErrorModal(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
       self.refreshView();
     });
   },
@@ -635,6 +752,12 @@ module.exports = Backbone.View.extend({
       }
     });
 
+    this.blockedUsersVw.remove();
+
+    if (this.blockedUsersScrollHandler && this.$obContainer.length) {
+      this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
+    }
+    
     this.model.off();
     this.off();
     this.remove();
