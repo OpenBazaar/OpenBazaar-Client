@@ -61,6 +61,7 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
+    this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.subViews = [];
     this.languages = new languagesModel();
 
@@ -114,6 +115,7 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       success: function(model){
         self.model.set('vendor', model.get('profile').vendor);
+        self.model.set('moderator', model.get('profile').moderator);
         self.render();
       }
     });

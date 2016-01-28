@@ -698,6 +698,7 @@ module.exports = Backbone.View.extend({
     saveToAPI(form, '', self.serverUrl + "profile", function(){
       "use strict";
       messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, '', moderatorData);
   },
