@@ -321,14 +321,6 @@ module.exports = baseVw.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.state, self.options.itemHash);
-      self.$el.find('.js-externalLink').on('click', function(e){
-        e.preventDefault();
-        var extUrl = $(this).attr('href');
-        if (!/^https?:\/\//i.test(extUrl)) {
-          extUrl = 'http://' + extUrl;
-        }
-        require("shell").openExternal(extUrl);
-      });
 
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
@@ -370,6 +362,15 @@ module.exports = baseVw.extend({
       });
 
       $('.js-userAbout').html(about);
+
+      self.$el.find('.js-externalLink, .js-userAbout a').on('click', function(e){
+        e.preventDefault();
+        var extUrl = $(this).attr('href');
+        if (!/^https?:\/\//i.test(extUrl)) {
+          extUrl = 'http://' + extUrl;
+        }
+        require("shell").openExternal(extUrl);
+      });
     });
 
     return this;
