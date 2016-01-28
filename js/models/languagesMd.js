@@ -61,7 +61,7 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Don't Delete",
         ConfirmDelete: "Confirm Delete",
         Website: "Website",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Welcome",
         CreateStore: "Become a Store",
         GoToMyPage: "My Page",
@@ -248,7 +248,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
           ServiceFee: "Service fee",
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"
         },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
@@ -318,12 +318,12 @@ module.exports = Backbone.Model.extend({
           userError: "Information for this ID could not be found",
           userNotFoundError: "This person's information is not available. They may have gone offline.",
           notFoundError: "Data could not be loaded for:",
-          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
-          contractError: "This Item Cannot be Purchased",
+          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466.",
+          contractError: "This Item Cannot be Purchased.",
           sellerError: "The seller's server has rejected the purchase request",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid.",
           pageUnavailable: "This page is currently unavailable.",
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID."//notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -350,7 +350,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "All"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...",
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...",
           myPage: "My Page",
           customizePage:"Customize Page",
           sellItem:"New",
@@ -471,7 +471,7 @@ module.exports = Backbone.Model.extend({
         DontDelete: "No Borrar",
         ConfirmDelete: "Confirmar eliminaci&oacute;n",
         Website: "Sitio Web",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
@@ -653,7 +653,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -752,7 +752,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "De dodas las tiendas"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Mi p&aacute;gina",
           customizePage:"Personalizar P&aacute;gina",
           sellItem:"Nuevo",
@@ -876,15 +876,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Nicht l&ouml;schen",
         ConfirmDelete: "L&ouml;schen best&auml;tigen",
         Website: "Webseite",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Willkommen",
         CreateStore: "Werde ein Verk&auml;ufer",
         GoToMyPage: "Zur eigenen Seite",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Nach Name oder Schlagwort suchen",
-        SearchFeedPlaceholder: "Nach GUID oder Handle suchen",
-        SearchForFollowersPlaceholder: "Nach GUID oder Handle suchen",
-        SearchForUsersPlaceholder: "Nach GUID oder Handle suchen",
+        SearchFeedPlaceholder: "Nach OpenBazaar ID oder Handle suchen",
+        SearchForFollowersPlaceholder: "Nach OpenBazaar ID oder Handle suchen",
+        SearchForUsersPlaceholder: "Nach OpenBazaar ID oder Handle suchen",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Werktage",
         EstDeliveryInternationalPlaceholder: "7-15 Werktage",
@@ -1063,7 +1063,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -1162,7 +1162,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Von allen L&auml;den"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Meine Seite",
           customizePage:"Seite anpassen",
           sellItem:"Neu",
@@ -1290,15 +1290,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Non eliminare",
         ConfirmDelete: "Conferma cancellazione",
         Website: "Sito web",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Benvenuto",
         CreateStore: "Diventa un negozio",
         GoToMyPage: "Vai alla mia pagina",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Cerca per nome o parola chiave",
-        SearchFeedPlaceholder: "Cerca per nickname o guid",
-        SearchForFollowersPlaceholder: "Cerca per nickname o guid",
-        SearchForUsersPlaceholder: "Cerca per nickname o guid",
+        SearchFeedPlaceholder: "Cerca per nickname o OpenBazaar ID",
+        SearchForFollowersPlaceholder: "Cerca per nickname o OpenBazaar ID",
+        SearchForUsersPlaceholder: "Cerca per nickname o OpenBazaar ID",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 giorni di lavoro",
         EstDeliveryInternationalPlaceholder: "7-15 giorni di lavoro",
@@ -1477,7 +1477,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Venduto da",
@@ -1576,7 +1576,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Da tutti i negozi"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "La mia pagina",
           customizePage: "Personalizza pagina",
           sellItem: "Nuovo",
@@ -1704,7 +1704,7 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Ne pas supprimer",
         ConfirmDelete: "Confirmer la suppression",
         Website: "Site web",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Bienvenue",
         CreateStore: "Devenir une boutique",
         GoToMyPage: "Ma page",
@@ -1891,7 +1891,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
-          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, min 0.001)"
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, step 0.001, min 0)"
         },
         transactions: {
           SoldBy: "Vendu par",
@@ -1991,7 +1991,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "Toutes"
         },
         nav: {
-          searchPlaceholder: "Tapez un @nom_d_utilisateur, GUID ou un #mot_clé...",
+          searchPlaceholder: "Tapez un @nom_d_utilisateur, OpenBazaar ID ou un #mot_clé...",
           myPage: "Ma page",
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
@@ -2115,15 +2115,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Nu Ștergeți",
         ConfirmDelete: "Confirmați Ștergerea",
         Website: "Website",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Bun Venit",
         CreateStore: "Deveniți un Magazin",
         GoToMyPage: "Pagina Mea",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Căutare după nume sau cuvânt cheie",
-        SearchFeedPlaceholder: "Căutare după nume sau GUID",
-        SearchForFollowersPlaceholder: "Căutare după nume sau GUID",
-        SearchForUsersPlaceholder: "Căutare după nume sau GUID",
+        SearchFeedPlaceholder: "Căutare după nume sau OpenBazaar ID",
+        SearchForFollowersPlaceholder: "Căutare după nume sau OpenBazaar ID",
+        SearchForUsersPlaceholder: "Căutare după nume sau OpenBazaar ID",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 Zile Lucrătoare",
         EstDeliveryInternationalPlaceholder: "7-15 Zile Lucrătoare",
@@ -2302,7 +2302,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -2401,7 +2401,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Din toate magazinele"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Pagina mea",
           customizePage:"Customizare Pagină",
           sellItem:"Nou",
@@ -2525,15 +2525,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Не удалять",
         ConfirmDelete: "Да, удалить",
         Website: "Веб-сайт",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Welcome",
         CreateStore: "Создать магазин",
         GoToMyPage: "Моя страница",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Поиск по имени или ключевому слову",
-        SearchFeedPlaceholder: "Поиск по имени или GUID",
-        SearchForFollowersPlaceholder: "Поиск по имени или GUID",
-        SearchForUsersPlaceholder: "Поиск по имени или GUID",
+        SearchFeedPlaceholder: "Поиск по имени или OpenBazaar ID",
+        SearchForFollowersPlaceholder: "Поиск по имени или OpenBazaar ID",
+        SearchForUsersPlaceholder: "Поиск по имени или OpenBazaar ID",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 рабочих дней",
         EstDeliveryInternationalPlaceholder: "7-15 рабочих дней",
@@ -2712,7 +2712,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Продано",
@@ -2811,7 +2811,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Со всех магазинов"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Моя страница",
           customizePage:"Настроить страницу",
           sellItem:"Разместить товар",
@@ -2934,15 +2934,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Nevymazávajte",
         ConfirmDelete: "Potvrďte vymazanie",
         Website: "Webstránka",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Vitajte",
         CreateStore: "Vytvorte si obchod",
         GoToMyPage: "Moja stránka",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
-        SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
-        SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
-        SearchForUsersPlaceholder: "Vyhľadať podľa prezývky alebo GUID",
+        SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
+        SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
+        SearchForUsersPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 pracovných dní",
         EstDeliveryInternationalPlaceholder: "7-15 pracovných dní",
@@ -3122,7 +3122,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -3221,7 +3221,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Zo všetkých obchodov"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Moja stránka",
           customizePage:"Upraviť stránku",
           sellItem:"Nová položka",
@@ -3349,15 +3349,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Silme",
         ConfirmDelete: "Silmeyi Onayla",
         Website: "Websitesi",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Hoşgeldiniz",
         CreateStore: "Mağaza Oluşturun",
         GoToMyPage: "Sayfam",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Bir ad ya da anahtar sözcük Ara",
-        SearchFeedPlaceholder: "Takma ad ya da GUID Ara",
-        SearchForFollowersPlaceholder: "Takma ad ya da GUID Ara",
-        SearchForUsersPlaceholder: "Takma ad ya da GUID Ara",
+        SearchFeedPlaceholder: "Takma ad ya da OpenBazaar ID Ara",
+        SearchForFollowersPlaceholder: "Takma ad ya da OpenBazaar ID Ara",
+        SearchForUsersPlaceholder: "Takma ad ya da OpenBazaar ID Ara",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 İş Günü",
         EstDeliveryInternationalPlaceholder: "7-15 İş Günü",
@@ -3536,7 +3536,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -3635,7 +3635,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Tüm mağazalardan"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Sayfam",
           customizePage:"Sayfayı Özelleştir",
           sellItem:"Yeni",
@@ -3762,15 +3762,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Wej HoH",
         ConfirmDelete: "Qapla' HoH",
         Website: "'ej bebvo' Juh",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "YI'el",
         CreateStore: "NgevwI' qach",
         GoToMyPage: "JuHwIj",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "Pong mu' joq nej",
-        SearchFeedPlaceholder: "Ngaj pong nej ghap GUID",
-        SearchForFollowersPlaceholder: "Ngaj pong nej ghap GUID",
-        SearchForUsersPlaceholder: "Ngaj pong nej ghap GUID",
+        SearchFeedPlaceholder: "Ngaj pong nej ghap OpenBazaar ID",
+        SearchForFollowersPlaceholder: "Ngaj pong nej ghap OpenBazaar ID",
+        SearchForUsersPlaceholder: "Ngaj pong nej ghap OpenBazaar ID",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "Wej pagh vagh jaj malja'",
         EstDeliveryInternationalPlaceholder: "Soch pagh wa'maH 'ej vagh jaj malja'",
@@ -3949,7 +3949,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -4048,7 +4048,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Vo' Hoch ngevwI'"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "JuHwIj",
           customizePage:"JuHwIj choH",
           sellItem:"Chu'",
@@ -4175,15 +4175,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "请不要删除",
         ConfirmDelete: "确认删除",
         Website: "网页",
-        Guid: "OpenBazaar用户名(GUID)",
+        Guid: "OpenBazaar用户名",
         Welcome: "欢迎",
         CreateStore: "开店铺",
         GoToMyPage: "我的主页",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "用名字或关键字查找",
-        SearchFeedPlaceholder: "用 handle 或 GUID 查找",
-        SearchForFollowersPlaceholder: "用 handle 或 GUID 查找",
-        SearchForUsersPlaceholder: "用 handle 或 GUID 查找",
+        SearchFeedPlaceholder: "用 handle 或 OpenBazaar ID 查找",
+        SearchForFollowersPlaceholder: "用 handle 或 OpenBazaar ID 查找",
+        SearchForUsersPlaceholder: "用 handle 或 OpenBazaar ID 查找",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 个工作日",
         EstDeliveryInternationalPlaceholder: "7-15 工作日",
@@ -4362,7 +4362,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -4461,7 +4461,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "所有点家里找"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "我的主页",
           customizePage:"个性化主页",
           sellItem:"新品",
@@ -4589,15 +4589,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "삭제하지마",
         ConfirmDelete: "진짜삭제?",
         Website: "웹사이트",
-        Guid: "오픈바자 ID (GUID)",
+        Guid: "오픈바자 ID",
         Welcome: "어서오세요!",
         CreateStore: "가게 만들기",
         GoToMyPage: "내 페이지",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "이름과 주제어 검색",
-        SearchFeedPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
-        SearchForFollowersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
-        SearchForUsersPlaceholder: "핸들과 오픈바자 ID (GUID) 검색",
+        SearchFeedPlaceholder: "핸들과 오픈바자 ID 검색",
+        SearchForFollowersPlaceholder: "핸들과 오픈바자 ID 검색",
+        SearchForUsersPlaceholder: "핸들과 오픈바자 ID 검색",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 영업일",
         EstDeliveryInternationalPlaceholder: "7-15 영업일",
@@ -4776,7 +4776,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "Sold By", // not translated
@@ -4875,7 +4875,7 @@ module.exports = Backbone.Model.extend({
           listingsAll: "모든 가게"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "내 페이지",
           customizePage:"사용자 페이지",
           sellItem:"새로운",
@@ -4999,15 +4999,15 @@ module.exports = Backbone.Model.extend({
         DontDelete: "削除しない",
         ConfirmDelete: "削除する",
         Website: "ウェブサイト",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "こんにちは",
         CreateStore: "出品する",
         GoToMyPage: "マイページ",
         SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
         SearchForPagesPlaceholder: "商品名・キーワードで探す",
-        SearchFeedPlaceholder: "GUID・ユーザ名で探す",
-        SearchForFollowersPlaceholder: "GUID・ユーザ名で探す",
-        SearchForUsersPlaceholder: "GUID・ユーザ名で探す",
+        SearchFeedPlaceholder: "OpenBazaar ID・ユーザ名で探す",
+        SearchForFollowersPlaceholder: "OpenBazaar ID・ユーザ名で探す",
+        SearchForUsersPlaceholder: "OpenBazaar ID・ユーザ名で探す",
         SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3〜5営業日以内",
         EstDeliveryInternationalPlaceholder: "7〜15営業日以内",
@@ -5176,7 +5176,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         transactions: {
           SoldBy: "出品者",
@@ -5276,7 +5276,7 @@ module.exports = Backbone.Model.extend({
           categoryAll: "すべて"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, GUID or #tag...", //notTranslated
+          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "マイページ",
           customizePage:"ページをカスタマイズ",
           sellItem:"出品する",
@@ -5401,7 +5401,7 @@ module.exports = Backbone.Model.extend({
         DontDelete: "Nie usuwaj",
         ConfirmDelete: "Potwierdź usunięcie",
         Website: "Strona",
-        Guid: "OpenBazaar ID (GUID)",
+        Guid: "OpenBazaar ID",
         Welcome: "Witaj",
         CreateStore: "Utwórz sklep",
         GoToMyPage: "Mój profil",
@@ -5588,7 +5588,7 @@ module.exports = Backbone.Model.extend({
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",//notTranslated
           ServiceFee: "Service fee",//notTranslated
-          ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
