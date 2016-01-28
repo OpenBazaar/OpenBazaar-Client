@@ -320,6 +320,26 @@
             <div class="flexRow custCol-border">
               <div class="rowItem positionWrapper">
                 <% if(ob.ownPage) { %>
+                <a href="#settings/page" class="userPageEditBtn">
+                  <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                    <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </div>
+                </a>
+                <%}%>
+                <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
+                <div>
+                  <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
+                  <%- ob.page.profile.social_accounts.twitter.username %>
+                  <%}else{%>
+                  <%= polyglot.t('NotProvided') %>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow custCol-border">
+              <div class="rowItem positionWrapper">
+                <% if(ob.ownPage) { %>
                   <a href="#settings/page" class="userPageEditBtn">
                     <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
                       <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
