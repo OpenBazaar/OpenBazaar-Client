@@ -245,6 +245,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers",
         Moderator: "Moderator",
         NetworkConnection: "Network Connection",
+        ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
@@ -653,6 +654,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -1067,6 +1069,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -1485,6 +1488,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -1903,6 +1907,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
@@ -2318,6 +2323,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -2732,6 +2738,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -3146,6 +3153,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -3564,6 +3572,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -3981,6 +3990,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -4398,6 +4408,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -4816,6 +4827,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -5220,6 +5232,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -5637,6 +5650,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Brak obserwujących",
         Moderator: "Moderator",//notTranslated
         NetworkConnection: "Network Connection", //notTranslated
+        ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",//notTranslated
