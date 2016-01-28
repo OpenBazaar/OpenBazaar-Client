@@ -61,7 +61,7 @@
               </div>
             <% } else if(ob.transactionType == "sale" && ob.status == 1){ %>
               <div class="btn btn-txt height36 custCol-secondary js-orderShortConfirm marginBottom5 width100">
-              <% if (ob.contract_type == "digital good") { %>
+              <% if (ob.contract_type == "digital good" || ob.contract_type == "service") { %>
                 <%= polyglot.t('transactions.ConfirmOrder') %>
               <% } else { %>
                 <%= polyglot.t('transactions.MarkAsShipped') %>
