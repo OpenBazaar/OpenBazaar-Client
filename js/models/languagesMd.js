@@ -244,6 +244,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
         Moderator: "Moderator",
+        NetworkConnection: "Network Connection",
         HandleResolver: "Handle Resolver",
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
@@ -651,6 +652,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -1064,6 +1066,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -1481,6 +1484,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -1898,7 +1902,8 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
-      HandleResolver: "Résolveur de nom d'utilisateur",
+        NetworkConnection: "Network Connection", //notTranslated
+        HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
@@ -2312,6 +2317,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -2725,6 +2731,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -3138,6 +3145,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -3555,6 +3563,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -3971,6 +3980,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -4387,6 +4397,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -4804,6 +4815,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -5207,6 +5219,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
+        NetworkConnection: "Network Connection", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
@@ -5623,6 +5636,8 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Brak obserwowanych",
         NoFollowers: "Brak obserwujących",
         Moderator: "Moderator",//notTranslated
+        NetworkConnection: "Network Connection", //notTranslated
+        HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",//notTranslated
           ServiceFee: "Service fee",//notTranslated
