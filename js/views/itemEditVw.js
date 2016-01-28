@@ -446,7 +446,7 @@ module.exports = Backbone.View.extend({
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<i>"+ invalidInputList+"</i>");
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
     }
   },
 

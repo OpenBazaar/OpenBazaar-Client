@@ -323,7 +323,7 @@ module.exports = Backbone.View.extend({
               self.skipAddressCheck();
             },
             function () {
-              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + ": " + window.polyglot.t('BitcoinReturnAddress'));
+              messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br>" + window.polyglot.t('BitcoinReturnAddress'));
             });
       } else {
         this.skipAddressCheck();
