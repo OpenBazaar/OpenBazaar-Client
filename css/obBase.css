@@ -210,6 +210,16 @@ form {
   padding: 0;
 }
 
+.navMoreButtons {
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  min-height: 80px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  top: 41px;
+}
+
 #sideBar {
   position: fixed;
   right: -183px;
@@ -4526,6 +4536,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .lineHeight24{
   line-height: 24px;
 }
+#ov1  .lineHeight32{
+  line-height: 32px;
+}
 
 #ov1  .lineHeight46{
   line-height: 46px;
@@ -4568,6 +4581,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
 }
 
+#ov1  .padding2 {
+  padding: 2px;
+}
 #ov1  .padding4 {
   padding: 4px;
 }
@@ -4689,6 +4705,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-bottom: 20px;
 }
 
+#ov1  .letterSpacing0 {
+  letter-spacing: 0;
+}
+
 #ov1  .letterSpacing02 {
   letter-spacing: 0.2px;
 }
@@ -4706,6 +4726,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 360px;
 }
 
+#ov1 .width34 {
+  width: 34px;
+}
 #ov1 .width40 {
   width: 40px;
 }
@@ -4736,6 +4759,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width160 {
   width: 160px;
 }
+#ov1 .width200 {
+  width: 200px;
+}
 
 #ov1 .width260 {
   width: 260px;
@@ -4745,6 +4771,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 270px;
 }
 
+#ov1 .width450 {
+  width: 450px;
+}
 #ov1 .width600 {
   width: 600px;
 }

@@ -22,20 +22,23 @@
 </div>
 
 <div class="bar navBar barFlush custCol-secondary clearFix height55">
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchasesTab active" data-tab="purchases">
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchasesTab paddingRight18 active" data-tab="purchases">
     <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Purchases') %>
+    <span class="pill fontSize12 textOpacity75 marginLeft2 js-purchasesCount">0</span>
   </a>
   <% if(ob.page.vendor){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab" data-tab="sales">
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab paddingRight18" data-tab="sales">
     <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Sales') %>
+    <span class="pill fontSize12 textOpacity75 marginLeft2 js-salesCount">0</span>
   </a>
   <% } %>
   <% if(ob.page.moderator){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab" data-tab="cases">
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab paddingRight18" data-tab="cases">
     <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Cases') %>
+    <span class="pill fontSize12 textOpacity75 marginLeft2 js-casesCount">0</span>
   </a>
   <% } %>
 </div>

@@ -253,8 +253,9 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
         transactions: {
-          SoldBy: "Sold By",
-          PurchasedBy: "Purchased By",
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller",
+          PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
           sortByStatusAll: "All",
           sortByStatus0: "Purchased",
@@ -274,7 +275,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total",
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
-          ConfirmOrder: "Confirm this Order",
+          ConfirmOrder: "Confirm Order",
           ReceivingAddress: "Receiving Address",
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
           Shipper: "Item Shipped By",
@@ -656,8 +657,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -677,7 +679,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1066,8 +1068,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -1087,7 +1090,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1480,6 +1483,7 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
+          OrderDetails: "Order Details", //notTranslated
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
           searchByOrder: "Ricerca per ID di ordine o nome articolo",
@@ -1501,7 +1505,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1894,6 +1898,7 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, min 0.001)"
         },
         transactions: {
+          OrderDetails: "Order Details", //notTranslated
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
@@ -2305,8 +2310,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -2326,7 +2332,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -2715,6 +2721,7 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
+          OrderDetails: "Order Details", //notTranslated
           SoldBy: "Продано",
           PurchasedBy: "Куплено",
           searchByOrder: "Искать по номеру заказа",
@@ -2736,7 +2743,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3125,8 +3132,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -3146,7 +3154,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3539,8 +3547,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -3560,7 +3569,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3952,8 +3961,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -3973,7 +3983,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -4365,8 +4375,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -4386,7 +4397,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -4779,8 +4790,9 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
-          SoldBy: "Sold By", // not translated
-          PurchasedBy: "Purchased By", // not translated
+          OrderDetails: "Order Details", //notTranslated
+          SoldBy: "Seller", // not translated
+          PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
@@ -4800,7 +4812,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -5179,6 +5191,7 @@ module.exports = Backbone.Model.extend({
           ServiceFeeNote: "Percentage of transaction price (max 25, min 0.001)"//notTranslated
         },
         transactions: {
+          OrderDetails: "Order Details", //notTranslated
           SoldBy: "出品者",
           PurchasedBy: "購入者",
           searchByOrder: "注文ID・商品名で探す",
@@ -5200,7 +5213,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm this Order", // not translated
+          ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -5593,6 +5606,7 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
+          OrderDetails: "Order Details", //notTranslated
           SoldBy: "Sprzedawca",
           PurchasedBy: "Nabywca",
           searchByOrder: "Szukaj po ID lub nazwie przedmiotu",

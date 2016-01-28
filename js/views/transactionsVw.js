@@ -33,7 +33,7 @@ module.exports = Backbone.View.extend({
      */
     var self = this,
         profile = options.userProfile.get('profile'),
-        wrapper = "<ul class='list flexRow'></ul>";
+        wrapper = "<ul class='list flexRow width100'></ul>";
 
     this.options = options;
     this.state = options.state || "purchases";
@@ -179,7 +179,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.purchasesWrapper.html('');
-    if(filterBy == "dateNewest"){
+    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
       this.purchasesCol.comparator = function(model) {
         return -model.get("timestamp");
       };
@@ -198,6 +198,8 @@ module.exports = Backbone.View.extend({
         self.addPurchase(model);
       }
     });
+
+    this.$el.find('.js-purchasesCount').html(this.purchasesCol.length);
     this.$el.find(".js-purchases").append(this.purchasesWrapper);
   },
 
@@ -215,7 +217,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.salesWrapper.html('');
-    if(filterBy == "dateNewest"){
+    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
       this.salesCol.comparator = function(model) {
         return -model.get("timestamp");
       };
@@ -235,6 +237,7 @@ module.exports = Backbone.View.extend({
       }
     });
 
+    this.$el.find('.js-salesCount').html(this.salesCol.length);
     this.$el.find(".js-sales").append(this.salesWrapper);
   },
 
