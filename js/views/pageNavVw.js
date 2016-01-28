@@ -74,7 +74,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency");});
     this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language");});
     this.listenTo(window.obEventBus, "updateProfile", function(response){
-      this.userProfile.fetch();
+      this.refreshProfile();
     });
     this.listenTo(window.obEventBus, "updateUserModel", function(response){
       this.model.fetch();
@@ -112,7 +112,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.userProfile.fetch({
-      success: function(){
+      success: function(model){
+        self.model.set('vendor', model.get('profile').vendor);
         self.render();
       }
     });
