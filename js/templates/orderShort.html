@@ -1,15 +1,16 @@
 <div class="width100 cursorDefault">
-  <div class="rowItem padding2015">
+  <div class="rowItem padding20">
     <div class="flexRow">
       <div class="width100">
         <div class="clearFix">
-          <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize14px js-searchOrderID js-orderShort">
-            <span class="clickable hoverUnderline">Order #: <%- ob.order_id %></span> <span class="noOverflow textOpacity75 textSize13px letterSpacing0"><%- ob.order_date %></span>
+          <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize15px js-searchOrderID js-orderShort">
+            <span class="noOverflow letterSpacing0"><%- ob.order_date %> — </span>
+            <span class="clickable hoverUnderline ">#<%- ob.order_id %></span> 
           </div>
         </div>
         <div class="flexCol-8 clearFix marginTop2">
           <div class="thumbnail thumbnail-large floatLeft marginRight5 marginTop6">
-            <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 textOpacity90 js-userShort border0"
+            <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 textOpacity75 js-userShort border0"
               <% if(ob.thumbnail_hash) { %>
               style="background-image: url(<%- ob.imageUrl %>), url(imgs/defaultItem.png);">
               <% } else { %>
@@ -17,32 +18,34 @@
               <% } %>
             </div>
           </div>
-          <table class="floatLeft custCol-text fontSize13 letterSpacing0 width450 fontWeight500">
+          <table class="floatLeft custCol-text fontSize14  width450 fontWeight500">
             <tr>
-              <td class="textOpacity50 padding2">Listing</td>
-              <td class="js-searchTitle textOpacity90 padding2"><%- ob.title %></td>
+              <td class="textOpacity50 padding3">Listing</td>
+              <td class="js-searchTitle textOpacity75 padding3"><%- ob.title %></td>
             </tr>
             <tr>
-              <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderTotal') %> </td>
-              <td class="padding2 textOpacity90"><%- ob.displayPrice %> <% if(ob.cCode != "BTC"){ %>(<%- ob.btc_total.toFixed(4) %> BTC)<% } %></td>
+              <td class="textOpacity50 padding3"><%= polyglot.t('transactions.OrderTotal') %> </td>
+              <td class="padding3 textOpacity75"><%- ob.displayPrice %> <% if(ob.cCode != "BTC"){ %>(<%- ob.btc_total.toFixed(4) %> BTC)<% } %></td>
             </tr>
             <tr>
-              <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderStatus') %></td>
-              <td class="js-searchStatus padding2 textOpacity90"><%= polyglot.t('transactions.OrderStatus'+ob.status) %></td>
+              <td class="textOpacity50 padding3"><%= polyglot.t('transactions.OrderStatus') %></td>
+              <td class="js-searchStatus padding3 textOpacity75"><%= polyglot.t('transactions.OrderStatus'+ob.status) %></td>
             </tr>
             <tr>
-              <td class="textOpacity50 padding2">
+              <td class="textOpacity50 padding3">
                 <% if(ob.vendor){ %>
                   <%= polyglot.t('transactions.SoldBy') %> 
                 <% } else if(ob.buyer) { %>
                   <%= polyglot.t('transactions.PurchasedBy') %>
                 <% } %>                
               </td>
-              <td class="padding2">
+              <td class="padding3">
                 <% if(ob.vendor){ %>
-                  <a href="<%- ob.vendor %>"><%- ob.vendor %></a>
+                  <a href="#userPage/<%- ob.vendor %>" class="textOpacity75">               
+                      <%- ob.vendor %>
+                  </a>
                 <% } else if(ob.buyer) { %>
-                  <a href="<%- ob.buyer %>"><%- ob.buyer %></a>
+                  <a href="#userPage/<%- ob.buyer %>" class="textOpacity75"><%- ob.buyer %></a>
                 <% } %>                
               </td>
             </tr>

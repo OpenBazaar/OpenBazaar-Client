@@ -4584,6 +4584,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .padding2 {
   padding: 2px;
 }
+#ov1  .padding3 {
+  padding: 3px;
+}
 #ov1  .padding4 {
   padding: 4px;
 }
