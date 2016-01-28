@@ -17,72 +17,122 @@
         <form class="width100" name="serverConfigForm">
           <div class="flexCol-12 flex-border borderBottom scrollOverflowYHideX customThemeScrollbar" style="height: 200px">
             <div class="flexRow">
+              <% if (ob.errors.server_ip) { %>
+              <div class="flexCol-12">
+                <ul class="padding2015">
+                  <% ob.errors.server_ip.forEach(function(err) {
+                       print('<li class="list-style-none">' + err + '</li>');
+                     }); %>
+                </ul>
+              </div>
+              <% } %>
+
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="fld_server">Server IP</label>
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
-                <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="blah blah">
+              <div class="flexCol-9 custCol-border <% ob.errors.server_ip && print('invalid') %>">
+                <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="<%= ob.server_ip %>">
               </div>
             </div>
 
             <div class="flexRow">
+              <% if (ob.errors.rest_api_port) { %>
+              <div class="flexCol-12">
+                <ul class="padding2015">
+                  <% ob.errors.rest_api_port.forEach(function(err) {
+                       print('<li class="list-style-none">' + err + '</li>');
+                     }); %>
+                </ul>
+              </div>
+              <% } %>
+
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="fld_rest_port">Rest API port</label>
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
-                <input name="rest_api_port" type="text" id="fld_rest_port" placeholder="" class="fieldItem" value="moo shoo chicken">
+              <div class="flexCol-9 custCol-border <% ob.errors.rest_api_port && print('invalid') %>">
+                <input name="rest_api_port" type="text" id="fld_rest_port" placeholder="" class="fieldItem" value="<%= ob.rest_api_port %>">
               </div>
             </div>
 
             <div class="flexRow">
+              <% if (ob.errors.socket_port) { %>
+              <div class="flexCol-12">
+                <ul class="padding2015">
+                  <% ob.errors.socket_port.forEach(function(err) {
+                       print('<li class="list-style-none">' + err + '</li>');
+                     }); %>
+                </ul>
+              </div>
+              <% } %>
+
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="fld_socket_port">Websocket API port</label>
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
-                <input name="socket_port" type="text" id="fld_socket_port" placeholder="" class="fieldItem" value="french sanwhich">
+              <div class="flexCol-9 custCol-border <% ob.errors.socket_port && print('invalid') %>">
+                <input name="socket_port" type="text" id="fld_socket_port" placeholder="" class="fieldItem" value="<%= ob.socket_port %>">
               </div>
             </div>
 
             <div class="flexRow">
+              <% if (ob.errors.username) { %>
+              <div class="flexCol-12">
+                <ul class="padding2015">
+                  <% ob.errors.username.forEach(function(err) {
+                       print('<li class="list-style-none">' + err + '</li>');
+                     }); %>
+                </ul>
+              </div>
+              <% } %>
+
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="fld_username">Username</label>
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
-                <input name="username" type="text" id="fld_username" placeholder="optional" class="fieldItem" value="french sanwhich">
+              <div class="flexCol-9 custCol-border <% ob.errors.username && print('invalid') %>">
+                <input name="username" type="text" id="fld_username" placeholder="optional" class="fieldItem" value="<%= ob.username %>">
               </div>
             </div>
 
             <div class="flexRow">
+              <% if (ob.errors.password) { %>
+              <div class="flexCol-12">
+                <ul class="padding2015">
+                  <% ob.errors.password.forEach(function(err) {
+                       print('<li class="list-style-none">' + err + '</li>');
+                     }); %>
+                </ul>
+              </div>
+              <% } %>
+
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="fld_password">Password</label>
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
-                <input name="password" type="password" id="fld_password" placeholder="optional" class="fieldItem" value="french sanwhich">
+              <div class="flexCol-9 custCol-border <% ob.errors.password && print('invalid') %>">
+                <input name="password" type="password" id="fld_password" placeholder="optional" class="fieldItem" value="<%= ob.password %>">
               </div>
             </div>                        
            </div>
 
            <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabindex="0">
+              <a class="btn btn-bar btn-half js-restoreDefaults custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabindex="0">
                 <span class="fontSize10 marginRight2"></span>
                 Restore defaults
               </a>
-              <a class="btn btn-bar btn-half js-accordionNext custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text" tabindex="0">
+              <a class="btn btn-bar btn-half js-save custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text" tabindex="0">
                 Save changes
                 <span class="fontSize10 marginLeft2 textOpacity75"></span>
               </a>
