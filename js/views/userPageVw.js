@@ -140,6 +140,8 @@ module.exports = baseVw.extend({
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUserClick',
     'click .js-unfollow': 'unfollowUserClick',
+    'click .js-moreButtonsOwnPage': 'moreButtonsOwnPageClick',
+    'click .js-moreButtonsNotOwnPage': 'moreButtonsNotOwnPageClick',
     'click .js-message': 'sendMessage',
     'click .js-moderatorSettings': 'showModeratorModal',
     'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
@@ -1268,6 +1270,25 @@ module.exports = baseVw.extend({
 
   unfollowUserClick: function(){
     this.unfollowUser({'guid': this.pageID});
+  },
+
+  moreButtonsOwnPageClick: function(){
+    if ($('.js-extraButtonsOwnPage').hasClass('hide')){
+      $('.js-extraButtonsOwnPage').removeClass('hide');
+      $('.js-moreButtonsOwnPage').html('x');
+    }else{
+      $('.js-extraButtonsOwnPage').addClass('hide');
+      $('.js-moreButtonsOwnPage').html('...');
+    }
+  },
+  moreButtonsNotOwnPageClick: function(){
+    if ($('.js-extraButtonsNotOwnPage').hasClass('hide')){
+      $('.js-extraButtonsNotOwnPage').removeClass('hide');
+      $('.js-moreButtonsNotOwnPage').html('x');
+    }else{
+      $('.js-extraButtonsNotOwnPage').addClass('hide');
+      $('.js-moreButtonsNotOwnPage').html('...');
+    }
   },
 
   followUser: function(options){
