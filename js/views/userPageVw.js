@@ -449,16 +449,12 @@ module.exports = baseVw.extend({
     }
     currentAddress = this.model.get('page').profile.guid + addressState;
     currentHandle = currentHandle ? currentHandle + addressState : "";
-    console.log("hash: "+ hash);
     if(isItemType && hash) {
-      console.log("set hash");
       currentAddress += "/"+ hash;
       currentHandle = currentHandle ? currentHandle += "/"+ hash : "";
     } else if(addressState === "createStore"){
       currentAddress = this.model.get('page').profile.guid;
     }
-    console.log(currentAddress);
-    console.log(currentHandle);
 
     window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress, 'handle': currentHandle});
   },
