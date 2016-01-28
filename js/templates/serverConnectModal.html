@@ -10,12 +10,12 @@
         <i class="ion-android-sync spinner"></i>Attempt 1 of 3
       </span>
     </div>
-    <div class="flexContainer">
+    <div class="flexContainer scrollOverflowYHideX customThemeScrollbar" style="height: 272px">
       <div class="flexRow borderBottom custCol-border">
         <p class="margin0 padding2015">OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.</p>
       </div>
         <form class="width100" name="serverConfigForm">
-          <div class="flexCol-12 flex-border borderBottom scrollOverflowYHideX customThemeScrollbar" style="height: 200px">
+          <div class="flexCol-12 flex-border borderBottom">
             <div class="flexRow">
               <% if (ob.errors.server_ip) { %>
               <div class="flexCol-12">
@@ -126,18 +126,19 @@
               </div>
             </div>                        
            </div>
-
-           <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
-              <a class="btn btn-bar btn-half js-restoreDefaults custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabindex="0">
-                <span class="fontSize10 marginRight2"></span>
-                Restore defaults
-              </a>
-              <a class="btn btn-bar btn-half js-save custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text" tabindex="0">
-                Save changes
-                <span class="fontSize10 marginLeft2 textOpacity75"></span>
-              </a>
-            </div>
         </form>
     </div>
+
+    <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
+      <a class="btn btn-bar btn-half js-restoreDefaults custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabindex="0">
+        <span class="fontSize10 marginRight2"></span>
+        Restore defaults
+      </a>
+      <a class="btn btn-bar btn-half js-save custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text" tabindex="0">
+        Save changes
+        <span class="fontSize10 marginLeft2 textOpacity75"></span>
+      </a>
+    </div>
+
   </div>
 </div>

@@ -15,11 +15,12 @@ module.exports = baseVw.extend({
         dismissOnOverlayClick: false,
         includeCloseButton: false,
         closeButtonClass: 'btn-corner btn-cornerTR',
-        innerWrapperClass: 'modal-child modal-childMain'
+        innerWrapperClass: 'modal-child modal-childMain custCol-primary'
       }
 
       this.__options = __.extend({}, defaults, options || {});
       this.className = 'modal modal-opaque ' + __.result(this, 'className', '');
+      this._open = false;
 
       if (this.__options.dismissOnOverlayClick) {
         events['click'] = '__modalClick';
@@ -44,10 +45,15 @@ module.exports = baseVw.extend({
       this.close();
     },
 
+    isOpen: function() {
+      return this._open;
+    },
+
     open: function() {
       if (!domUtils.isInPage(this.el)) {
         document.body.appendChild(this.el);
 
+        this._open = true;
         this.trigger('open');
         window.obEventBus.trigger('modal-open', { modal: this });
       }
@@ -57,17 +63,14 @@ module.exports = baseVw.extend({
       if (domUtils.isInPage(this.el)) {
         document.body.removeChild(this.el);
 
+        this._open = false;
         this.trigger('close');
         window.obEventBus.trigger('modal-close', { modal: this });
       }
     },
 
     remove: function() {
-      if (domUtils.isInPage(this.el)) {
-        this.trigger('close');
-        window.obEventBus.trigger('modal-close', { modal: this });        
-      }
-
+      this.close();
       baseVw.prototype.remove.apply(this, arguments);
     },
 

@@ -29,11 +29,12 @@ module.exports = Backbone.View.extend({
     orderedCurrencies.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4"});
     this.chooseCurrencies = new chooseCurrenciesCollection(orderedCurrencies);
     this.subViews = [];
+
     //use default currency to return list of supported currencies
     getBTPrice("USD", function (btAve, currencyList) {
-      "use strict";
       self.availableCurrenciesList = currencyList;
       self.render();
+      self.trigger("currencyListReady");
     });
   },
 
@@ -45,7 +46,7 @@ module.exports = Backbone.View.extend({
     },this);
 
     this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">'+ this.listContents.join('') +'</ul>');
-    window.obEventBus.trigger("currencyListRendered");
+    // window.obEventBus.trigger("currencyListRendered");
   },
 
   renderItem: function(item){

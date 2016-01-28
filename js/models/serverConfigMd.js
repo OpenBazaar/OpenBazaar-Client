@@ -48,5 +48,9 @@ module.exports = Backbone.Model.extend({
     }    
 
     return Object.keys(err).length && err || undefined;
+  },
+
+  getServerBaseUrl: function() {
+    return 'http://' + this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1'
   }
 });

@@ -218,16 +218,61 @@ if(isValidUrl(serverUrlLocal)){
   loadDefaultServer();
 }
 
-var serverConfigMd = require('./models/serverConfigMd');
-var serverConfig = new serverConfigMd({ id: 1 });
-serverConfig.fetch();
-window.mooMod = serverConfig;
+// var serverConfigMd = require('./models/serverConfigMd');
+// var serverConfig = new serverConfigMd({ id: 1 });
+// serverConfig.fetch();
+// serverConfig.set('rest_api_port', 18469);
+// window.mooMod = serverConfig;
 
-// todo: register child
-var serverConnectModal = require('./views/serverConnectModal');
-var mooModal = new serverConnectModal({
-  model: serverConfig
-});
+// // todo: register child
+// var serverConnectModal = require('./views/serverConnectModal');
+// var mooModal = new serverConnectModal({
+//   model: serverConfig
+// });
+// // mooModal.render().open();
 
-mooModal.render().open();
+// var onboardingModal = require('./views/onboardingModal');
+// var pickleModal = new onboardingModal({
+//   model: user,
+//   userProfile: userProfile
+// });
+// pickleModal.render().open();
+// pickleModal.on('onboarding-complete', function() {
+//   var newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
+//   Backbone.history.start();
+//   pickleModal.remove();
+// });
 
+// // var serverConnector = function(options) {
+// //   options = options || {};
+// //   this.options = options;
+
+// //   if (!options.serverConfigModel || !(options.serverConfigModel instanceof serverConfigMd)) {
+// //     throw new Error('Please provide a serverConfigMd instance.')
+// //   }
+
+// //   // this.url = options.serverConfigModel.getServerBaseUrl() + '/guid_generation'
+// //   this.connectAttempts = 0;
+// // }
+
+// // serverConnector.prototype.connect = function() {
+// //   this.connectAttempts += 1;
+// //   this.connectRequest = $.ajax({
+// //     type: 'GET',
+// //     url: this.options.serverConfigModel.getServerBaseUrl() + '/guid_generation',
+// //     // contentType: false,
+// //     // processData: false,
+// //     // data: formData,
+// //     dataType: "json"
+// //   }).complete(function() {
+
+// //   });
+// // }
+
+// // window.guidCheck = $.get('http://localhost:18470/api/v1/guid_generation').complete(function() {
+// //   console.log('completion');
+// //   window.completion = arguments;
+// // }).fail(function() {
+// //   console.log('fail');
+// //   window.fail = arguments;
+// // });
