@@ -258,7 +258,7 @@ form {
   background-color: #063753;
   position: relative;
   min-height: 800px;
-  margin-bottom: 100px;
+  margin-bottom: 70px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   z-index: 1;
@@ -4412,6 +4412,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-bottom: 4px;
 }
 
+#ov1  .marginBottom5 {
+  margin-bottom: 5px;
+}
 #ov1  .marginBottom6 {
   margin-bottom: 6px;
 }
@@ -4772,6 +4775,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width270 {
   width: 270px;
+}
+#ov1 .width400 {
+  width: 400px;
 }
 
 #ov1 .width450 {

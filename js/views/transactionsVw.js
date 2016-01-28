@@ -129,7 +129,7 @@ module.exports = Backbone.View.extend({
   setState: function(state){
     "use strict";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
-    $('#content').find('input:visible:first').focus();
+    // $('#content').find('input:visible:first').focus();
     //add action to history
     Backbone.history.navigate("#transactions/" + state);
   },
