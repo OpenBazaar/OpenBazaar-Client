@@ -1629,6 +1629,11 @@ margin: auto;
   background-color: rgba(87,87,87,0.8);
 }
 
+.btn.btn-c2,
+#userPage .btn.btn-c2 {
+  background-color: rgba(200,25,25,1);
+}
+
 .btn.btn-win {
   border-radius: 6px;
   width: 12px;

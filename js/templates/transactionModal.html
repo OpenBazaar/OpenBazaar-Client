@@ -424,6 +424,75 @@
 
         </div>
       </div>
+      <!-- only display moderator if one is assigned -->
+      <% if( ob.displayModerator) { %>
+      <div class="flexRow">
+        <div class="flexCol-8">
+          <div class="rowItem padding2015">
+            <div class="pad10left txt-unleaded">
+              <div class="marginTop12 marginBottom4 fontSize13">
+                <%= polyglot.t('ModeratedBy') %> <%- ob.displayModerator.name %>
+              </div>
+              <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+                <%= polyglot.t('transactions.ModerationFee') %><%- ob.displayModerator.fee %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flexCol-4 custCol-border">
+          <% if(ob.status == 2 || ob.status == 3){ %>
+          <% if(ob.transactionType == "purchase"){ %>
+          <div class="rowItem padding2015">
+            <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
+              <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('transactions.DisputeTransaction') %>
+            </a>
+          </div>
+          <% } %>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="js-main js-discussion">
+    <div class="flexRow scrollOverflowY" style="height: 319px;">
+      <div class="flexRow rowItem padding2015 custCol-border borderBottom">
+        <div class=" flexExpand">
+          <p><%= polyglot.t('transactions.DisputeInstructions') %></p>
+        </div>
+      </div>
+    </div>
+    <div class="flexRow padding20 width100 positionBottom custCol-secondary box-borderbright">
+      <div class="table">
+        <div>
+          <div style="width: 54px;">
+            <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 borderRadiusBottom0"
+            <% if(ob.avatar_hash) { %>
+            style="background-image: url(<%- ob.avatarURL %>), url(imgs/offlineUser.png);">
+            <% } else { %>
+            style="background-image: url(imgs/defaultUser.png);">
+            <% } %></div>
+          </div>
+          <div>
+            <textarea name="claim"
+                      rows="4"
+                      class="fieldItem-textarea custCol-text"
+                      id="transactionDisputeClaimText"
+                      required placeholder="<%= polyglot.t('transaction.DisputeClaimPlaceholder') %>">
+              </textarea>
+          </div>
+          <div style="width: 105px;">
+            <a class="btn btn-txt custCol-primary pull-right js-startDispute">
+              <!-- if chat doesn't exist yet -->
+              <%= polyglot.t('transactions.DisputeTransaction') %>
+              <!-- else show send button -->
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

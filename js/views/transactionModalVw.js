@@ -30,6 +30,7 @@ module.exports = baseVw.extend({
     'click .js-closeOrderForm': 'closeOrderForm',
     'click .js-showFundOrder': 'showFundOrder',
     'click .js-transactionPayCheck':'checkPayment',
+    'click .js-startDispute': 'startDispute',
     'blur input': 'validateInput'
   },
 
@@ -145,7 +146,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-main').addClass('hide');
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
-    this.$el.find('.js-' + state + 'Tab').addClass('active');
+    this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
 
     this.lastTab = this.state;
     this.state = state;
@@ -239,6 +240,17 @@ module.exports = baseVw.extend({
     "use strict";
     var tx = $(e.target).data('tx');
     clipboard.writeText(tx);
+  },
+
+  startDispute: function(){
+    "use strict";
+    this.setState("discussion");
+    this.$('.js-confirmDisputeHolder').removeClass('hide');
+  },
+
+  confirmDispute: function(){
+    "use strict";
+    this.$('.js-confirmDisputeHolder').addClass('hide');
   },
 
   closeOrderForm: function(e){

@@ -312,7 +312,11 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
-          NoneSent: "None sent"
+          NoneSent: "None sent",
+          ModerationFee: "Moderation Fee:",
+          DisputeTransaction: "Start a Dispute",
+          DisputeClaimPlaceholder: "Enter the details of your complaint here.",
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent."
         },
         errorMessages: {
           saveError: "Data could not be saved.",
