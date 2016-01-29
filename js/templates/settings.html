@@ -237,14 +237,22 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 custCol-border positionWrapper">
                 <input name="handle"
                        type="text"
                        id="handle"
                        placeholder="@john"
                        class="fieldItem"
                        pattern="@[a-zA-Z0-9]+"
-                       value="<%= ob.page.profile.handle %>">
+                       value="<%= ob.page.profile.temp_handle || ob.page.profile.handle %>">
+                <% if(ob.page.profile.temp_handle && !ob.page.profile.handle){ %>
+                <a class="positionTopRight padding10 js-externalLink" href="https://onename.com/">
+                  <span class="btn btn-txt custCol-secondary tooltip tooltip-right"
+                        data-tooltip="Your handle is being checked at https://onename.com/. Click save to check it again.">
+                    This handle is not yet validated
+                  </span>
+                </a>
+                <% } %>
               </div>
             </div>
 
