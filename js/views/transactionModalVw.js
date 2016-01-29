@@ -31,6 +31,7 @@ module.exports = baseVw.extend({
     'click .js-showFundOrder': 'showFundOrder',
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
+    'click .js-confirmDispute': 'confirmDispute',
     'blur input': 'validateInput'
   },
 
@@ -245,12 +246,21 @@ module.exports = baseVw.extend({
   startDispute: function(){
     "use strict";
     this.setState("discussion");
-    this.$('.js-confirmDisputeHolder').removeClass('hide');
   },
 
   confirmDispute: function(){
     "use strict";
-    this.$('.js-confirmDisputeHolder').addClass('hide');
+    var self = this,
+        targetForm = this.$('#transactionDiscussionForm'),
+        discussionData = {};
+
+    discussionData.order_id = this.orderID;
+
+    saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
+      self.status = 4;
+      self.tabState = "summary";
+      self.getData();
+    }, '', discussionData);
   },
 
   closeOrderForm: function(e){

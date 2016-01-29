@@ -458,39 +458,37 @@
 
   <div class="js-main js-discussion">
     <div class="flexRow scrollOverflowY" style="height: 319px;">
-      <div class="flexRow rowItem padding2015 custCol-border borderBottom">
-        <div class=" flexExpand">
+      <div class="flexRow">
+        <div class="padding10 flexExpand">
           <p><%= polyglot.t('transactions.DisputeInstructions') %></p>
         </div>
       </div>
     </div>
-    <div class="flexRow padding20 width100 positionBottom custCol-secondary box-borderbright">
-      <div class="table">
-        <div>
-          <div style="width: 54px;">
+    <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright">
+          <div class="pad10right">
             <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 borderRadiusBottom0"
             <% if(ob.avatar_hash) { %>
             style="background-image: url(<%- ob.avatarURL %>), url(imgs/offlineUser.png);">
             <% } else { %>
             style="background-image: url(imgs/defaultUser.png);">
-            <% } %></div>
+            <% } %>
+            </div>
           </div>
-          <div>
+          <form class="flexExpand" id="transactionDiscussionForm">
             <textarea name="claim"
                       rows="4"
-                      class="fieldItem-textarea custCol-text"
-                      id="transactionDisputeClaimText"
+                      class=" custCol-text"
+                      id="transactionDiscussionSendText"
                       required placeholder="<%= polyglot.t('transaction.DisputeClaimPlaceholder') %>">
               </textarea>
-          </div>
-          <div style="width: 105px;">
-            <a class="btn btn-txt custCol-primary pull-right js-startDispute">
+          </form>
+          <div class="pad10left">
+            <a class="btn btn-txt custCol-primary pull-right js-confirmDispute">
               <!-- if chat doesn't exist yet -->
               <%= polyglot.t('transactions.DisputeTransaction') %>
               <!-- else show send button -->
             </a>
           </div>
-        </div>
       </div>
 
     </div>

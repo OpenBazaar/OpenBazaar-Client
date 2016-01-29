@@ -160,6 +160,23 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: rgba(255,255,255,0.9);
 }
 
+textarea {
+  background: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  transition: border 0.3s;
+}
+
+textarea:focus {
+  border: 1px solid #fff;
+  outline: none;
+}
+
 form {
   margin: 0;
 }
@@ -2633,16 +2650,9 @@ input[type="number"].fieldItem.fieldItem-withButton {
 }
 
 .fieldItem-textarea {
-  background: none;
+  padding: 15px;
   border: 2px solid transparent;
   color: #fff;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  padding: 15px;
-  resize: none;
-  box-sizing: border-box;
 }
 
 .fieldItem-textarea:focus {
