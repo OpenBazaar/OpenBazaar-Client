@@ -28,7 +28,7 @@
               <td class="padding2 textOpacity75"> 
                 <%- ob.btc_total.toFixed(4) %> BTC
                 <% if(ob.cCode != "BTC"){ %>
-                  (Current value: <%- ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
+                  (<%- ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
                 <% } %>
               </td>
             </tr>
