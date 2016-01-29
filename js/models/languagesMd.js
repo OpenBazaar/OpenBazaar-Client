@@ -420,7 +420,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg3: "You can check the status of your order on your",
           purchasesPage: "purchases page",
           returnAddress: "Return Address",
-          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
+          moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
           directPaymentTo: "Direct Payment to",
           paymentSent: "Payment Sent!",
