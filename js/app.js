@@ -106,19 +106,19 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
   });
 };
 
-var isValidUrl = function(url) {
-  var regexp = /(https?:\/\/)+[\w-]+(\.[\w-]+)*(:\d+)+(\/\S*)?/;
-  return regexp.test(url);
-};
+// var isValidUrl = function(url) {
+//   var regexp = /(https?:\/\/)+[\w-]+(\.[\w-]+)*(:\d+)+(\/\S*)?/;
+//   return regexp.test(url);
+// };
 
-var loadDefaultServer = function(){
-  "use strict";
-  $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
-  $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded.");
-  $('.js-indexLoadingMsg2').text(serverUrlLocal + " could not be reached.");
-  $('.js-indexLoadingMsg3').text("You can enter a different server below.");
-  loadProfileCount = 3;
-};
+// var loadDefaultServer = function(){
+//   "use strict";
+//   $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
+//   $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded.");
+//   $('.js-indexLoadingMsg2').text(serverUrlLocal + " could not be reached.");
+//   $('.js-indexLoadingMsg3').text("You can enter a different server below.");
+//   loadProfileCount = 3;
+// };
 
 var loadProfile = function() {
 
@@ -197,26 +197,35 @@ var loadProfile = function() {
   });
 };
 
-this.loadNewServer = function(newServer) {
-  "use strict";
-  if(isValidUrl(newServer)){
-    newServer = newServer.replace(/((\/)?(api)?(\/)?(v1)?(\/)?)$/, '/api/v1/'); //add trailing slash if missing
-    localStorage.setItem("serverUrl", newServer);
-    serverUrlLocal = newServer;
-    user.urlRoot = newServer + "settings";
-    userProfile.urlRoot = newServer + "profile";
-    loadProfileCount=3;//end any loops
-    loadProfile();
-  } else {
-    alert(newServer + " is not a valid URL. It must start with http:// or https:// and have a port number. ':18469' is the normal port number.");
-  }
-};
+// this.loadNewServer = function(newServer) {
+//   "use strict";
+//   if(isValidUrl(newServer)){
+//     newServer = newServer.replace(/((\/)?(api)?(\/)?(v1)?(\/)?)$/, '/api/v1/'); //add trailing slash if missing
+//     localStorage.setItem("serverUrl", newServer);
+//     serverUrlLocal = newServer;
+//     user.urlRoot = newServer + "settings";
+//     userProfile.urlRoot = newServer + "profile";
+//     loadProfileCount=3;//end any loops
+//     loadProfile();
+//   } else {
+//     alert(newServer + " is not a valid URL. It must start with http:// or https:// and have a port number. ':18469' is the normal port number.");
+//   }
+// };
 
-if(isValidUrl(serverUrlLocal)){
-  loadProfile();
-} else {
-  loadDefaultServer();
-}
+// if(isValidUrl(serverUrlLocal)){
+//   loadProfile();
+// } else {
+//   loadDefaultServer();
+// }
+
+// $(document).bind("ajaxSend", function(s, req){
+//   console.log('slick willy');
+//   window.slick = arguments;
+
+//   req.abort();
+// });
+
+// loadProfile();
 
 // var serverConfigMd = require('./models/serverConfigMd');
 // var serverConfig = new serverConfigMd({ id: 1 });
@@ -224,12 +233,58 @@ if(isValidUrl(serverUrlLocal)){
 // serverConfig.set('rest_api_port', 18469);
 // window.mooMod = serverConfig;
 
+// window.guidCheck = $.get(serverConfig.getServerBaseUrl() + '/profile').always(function() {
+//   console.log('always and forever');
+//   window.always = arguments;
+// });
+
 // // todo: register child
 // var serverConnectModal = require('./views/serverConnectModal');
 // var mooModal = new serverConnectModal({
 //   model: serverConfig
 // });
 // // mooModal.render().open();
+
+// fire off guid check req
+// window.guidCheck = $.get('http://localhost:18470/api/v1/guid_generation');
+
+// setTimeout(function() {
+//   if (guidCheck.state() === 'pending') {
+//     // guid create in progress
+//     // launch onboarding modal passing in guid check req
+//   } else {
+//     // guid check either finished or server is down
+//     guidCheck.complete(function() {
+//       if (data.success) {
+//         // guid gen complete
+//          // launch onboarding modal passing in guid check req
+//       } else {
+//         // guid gen failed
+//         // ????
+//       }
+//     }).fail(function() {
+//       // either server is down or guid had already been generated
+//       var profileCheck = $.get(serverConfig.getServerBaseUrl() + '/profile').done(function() {
+//         console.log('profDone');
+//         window.profDone = arguments;
+
+//         // guid was previously generated
+//         if (localStorage.onboardingComplete) {
+//           // launch the app
+//         }
+//       }).fail(function() {
+//         console.log('profFail');
+//         window.profFail = arguments;
+
+//         // server is indeed down
+//         // show serverConnectModal;
+//       });
+//     });
+//   }
+// }, 1000);
+
+
+
 
 // var onboardingModal = require('./views/onboardingModal');
 // var pickleModal = new onboardingModal({
@@ -268,11 +323,3 @@ if(isValidUrl(serverUrlLocal)){
 
 // //   });
 // // }
-
-// // window.guidCheck = $.get('http://localhost:18470/api/v1/guid_generation').complete(function() {
-// //   console.log('completion');
-// //   window.completion = arguments;
-// // }).fail(function() {
-// //   console.log('fail');
-// //   window.fail = arguments;
-// // });

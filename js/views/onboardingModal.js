@@ -31,6 +31,7 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
+    this.options = options || {};
     this.$document = $(document).on('focus', this.docFocusHandler);
     this.$el.attr('tabIndex', 0);
     this.$loadingModal = $('.js-loadingModal');
