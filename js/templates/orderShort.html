@@ -20,26 +20,31 @@
           </div>
           <table class="floatLeft custCol-text fontSize14  width450 fontWeight500">
             <tr>
-              <td class="textOpacity50 padding3"><%= polyglot.t('Listing') %></td>
-              <td class="js-searchTitle textOpacity75 padding3"><%- ob.title %></td>
+              <td class="textOpacity50 padding2"><%= polyglot.t('Listing') %></td>
+              <td class="js-searchTitle textOpacity75 padding2"><%- ob.title %></td>
             </tr>
             <tr>
-              <td class="textOpacity50 padding3"><%= polyglot.t('transactions.OrderTotal') %> </td>
-              <td class="padding3 textOpacity75"><%- ob.displayPrice %> <% if(ob.cCode != "BTC"){ %>(<%- ob.btc_total.toFixed(4) %> BTC)<% } %></td>
+              <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderTotal') %> </td>
+              <td class="padding2 textOpacity75"> 
+                <%- ob.btc_total.toFixed(4) %> BTC
+                <% if(ob.cCode != "BTC"){ %>
+                  (Current value: <%- ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
+                <% } %>
+              </td>
             </tr>
             <tr>
-              <td class="textOpacity50 padding3"><%= polyglot.t('transactions.OrderStatus') %></td>
-              <td class="js-searchStatus padding3 textOpacity75"><%= polyglot.t('transactions.OrderStatus'+ob.status) %></td>
+              <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderStatus') %></td>
+              <td class="js-searchStatus padding2 textOpacity75"><%= polyglot.t('transactions.OrderStatus'+ob.status) %></td>
             </tr>
             <tr>
-              <td class="textOpacity50 padding3">
+              <td class="textOpacity50 padding2">
                 <% if(ob.vendor){ %>
                   <%= polyglot.t('transactions.SoldBy') %> 
                 <% } else if(ob.buyer) { %>
                   <%= polyglot.t('transactions.PurchasedBy') %>
                 <% } %>                
               </td>
-              <td class="padding3">
+              <td class="padding2">
                 <% if(ob.vendor){ %>
                   <a href="#userPage/<%- ob.vendor %>" class="textOpacity75">               
                       <%- ob.vendor %>
