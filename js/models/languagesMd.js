@@ -244,7 +244,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
         Moderator: "Moderator",
-        NetworkConnection: "Network Connection",
+        Firewall: "Firewall",
         ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
         moderatorSettings: {
@@ -653,7 +653,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -1068,7 +1068,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -1487,7 +1487,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -1906,7 +1906,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
@@ -2322,7 +2322,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -2737,7 +2737,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -3152,7 +3152,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -3571,7 +3571,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -3989,7 +3989,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -4407,7 +4407,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -4826,7 +4826,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -5231,7 +5231,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
@@ -5649,7 +5649,7 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Brak obserwowanych",
         NoFollowers: "Brak obserwujących",
         Moderator: "Moderator",//notTranslated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: {
