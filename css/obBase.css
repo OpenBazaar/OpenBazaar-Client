@@ -20,7 +20,7 @@
 .chatConversationHeads::-webkit-scrollbar-thumb,
 .chatConversationContent::-webkit-scrollbar-thumb,
 #sideBar textarea::-webkit-scrollbar-thumb {
-  border-radius: 20px;
+  border-radius: 0;
   background: #3E3E3E;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 0;
   background: #3E3E3E;
 }
 
@@ -1794,7 +1794,7 @@ div.chatSearchOut .chatSearchIcon {
   bottom: 0px;
   position: absolute;
   transition: bottom 0.35s ease;
-  background-color: #252525;
+  background-color: #2B2B2B;
 }
 
 .chatConversationHidden {
@@ -2053,7 +2053,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessageBody > .inner {
-  background-color: #2D2D2D;
+  background-color: #333333;
   border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
@@ -3588,6 +3588,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .tooltip:hover:after{
+  max-width: 400px;
   background: rgba(37,37,37,.85);
   border-radius: 3px;
   bottom: -32px;
@@ -3601,6 +3602,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   line-height: 16px;
   opacity: 1;
+  white-space: nowrap;
 }
 
 .tooltip.tooltip-right:hover:after{
