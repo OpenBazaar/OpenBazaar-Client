@@ -538,7 +538,7 @@ module.exports = Backbone.View.extend({
       pageData.text_color = parseInt(tColorVal.slice(1), 16);
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
-        "use strict";
+        window.obEventBus.trigger("updateProfile");
         messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
       }, "", pageData, skipKeys);
@@ -729,8 +729,6 @@ module.exports = Backbone.View.extend({
 
   refreshView: function(){
     "use strict";
-    //window.location.reload();
-    //this.render();
     this.fetchModel();
   },
 

@@ -118,7 +118,7 @@
             <div class="pad10left txt-unleaded">
               <div class="marginTop12 marginBottom4 fontSize13">
                 <% if(ob.displayUnitPrice){ %>
-                <strong><%- ob.displayUnitPrice %> <span class="noWrap">(<%- ob.displayUnitPriceBTC.toFixed(4) %> BTC)</span></strong>
+                <strong><span class="noWrap"><%- ob.displayUnitPriceBTC.toFixed(4) %> BTC</span> (<%- ob.displayUnitPrice %>)</strong>
                 <% } else if(ob.displayUnitPriceBTC){ %>
                 <strong><%- ob.displayUnitPriceBTC.toFixed(6) %> BTC</strong>
                 <% } %>
@@ -324,7 +324,7 @@
             <% if( ob.displayModerator) { %>
               <%= polyglot.t('ModeratedTransaction') %>:
               <% if(ob.displayTotalPrice){ %>
-              <strong><%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+              <strong><span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
               <% } else if(ob.buyer_order.order.payment.amount){ %>
               <strong><%- ob.buyer_order.order.payment.amount %> BTC</strong>
               <% } else { %>
@@ -357,7 +357,7 @@
           </div>
           <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
             <% if(ob.displayTotalPrice){ %>
-            <strong>+<%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+            <strong>+<span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
             <% } else if(ob.buyer_order.order.payment.amount){ %>
             <strong>+<%- ob.buyer_order.order.payment.amount %> BTC</strong>
             <% } else { %>
@@ -374,7 +374,7 @@
                 </a>
               </div>
               <div>
-                <a class="js-copyIncommingTx" data-tx=<%- ob.bitcoin_txs[i].txid %>">
+                <a class="js-copyIncommingTx" data-tx="<%- ob.bitcoin_txs[i].txid %>">
                   <i class="ion-clipboard"></i> <%= polyglot.t('transactions.copyTxid') %>
                 </a>
               </div>
@@ -397,7 +397,7 @@
           </div>
           <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
             <% if(ob.displayTotalPrice){ %>
-            <strong>-<%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+            <strong>-<span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
             <% } else if(ob.buyer_order.order.payment.amount){ %>
             <strong>-<%- ob.buyer_order.order.payment.amount %> BTC</strong>
             <% } else { %>

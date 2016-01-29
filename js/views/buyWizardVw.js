@@ -70,6 +70,9 @@ module.exports = Backbone.View.extend({
       this.handleSocketMessage(response);
     });
 
+    //make sure the model has a fresh copy of the user
+    this.model.set('user', this.userModel.attributes);
+
     this.render();
   },
 
@@ -320,6 +323,7 @@ module.exports = Backbone.View.extend({
     if(modForm[0].checkValidity()) {
       if (bitCoinReturnAddr != this.userModel.get('refund_address')) {
         saveToAPI(modForm, this.userModel.toJSON(), this.model.get('serverUrl') + "settings", function () {
+              window.obEventBus.trigger("updateUserModel");
               self.skipAddressCheck();
             },
             function () {
