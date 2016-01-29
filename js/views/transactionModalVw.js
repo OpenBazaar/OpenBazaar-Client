@@ -32,25 +32,33 @@ module.exports = baseVw.extend({
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
     'click .js-confirmDispute': 'confirmDispute',
-    'blur input': 'validateInput'
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput'
   },
 
   initialize: function (options) {
     "use strict";
-    var self = this;
+    var self = this,
+        avatarURL;
 
     this.orderID = options.orderID;
     this.status = options.status;
     this.transactionType = options.transactionType;
-    this.serverUrl = options.serverUrl;
     this.parentEl = options.parentEl;
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
-    this.pageState = options.state //state of the parent view
-    this.tabState = options.tabState //active tab
+    this.pageState = options.state; //state of the parent view
+    this.tabState = options.tabState ;//active tab
+    this.userModel = options.userModel;
+    this.serverUrl = this.userModel.get('serverUrl');
+    this.userProfile = options.userProfile;
     this.lastTab = "summary";
+
+    if(this.userProfile.get('avatar_hash')){
+      avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
+    }
 
     this.model = new orderModel({
       cCode: this.cCode,
@@ -58,9 +66,12 @@ module.exports = baseVw.extend({
       serverUrl: this.serverUrl,
       status: this.status,
       transactionType: this.transactionType,
-      bitcoinValidationRegex: this.bitcoinValidationRegex
+      bitcoinValidationRegex: this.bitcoinValidationRegex,
+      avatarURL: avatarURL
     });
-    this.model.urlRoot = options.serverUrl + "get_order";
+
+    this.model.urlRoot = this.serverUrl + "get_order";
+
     this.getData();
   },
 
@@ -85,6 +96,7 @@ module.exports = baseVw.extend({
 
   render: function (response) {
     "use strict";
+    console.log(this.model.attributes)
     var self = this;
     response.status = this.status;
     //console.log(response);
@@ -206,11 +218,16 @@ module.exports = baseVw.extend({
     completeData.id = this.orderID;
     this.$el.find('.js-transactionSpinner').removeClass('hide');
 
-    saveToAPI(targetForm, '', this.serverUrl + "complete_order", function(data){
-      self.status = 3;
-      self.tabState = "summary";
-      self.getData();
-    }, '', completeData);
+    saveToAPI(targetForm, '', this.serverUrl + "complete_order",
+        function(data){
+          self.status = 3;
+          self.tabState = "summary";
+          self.getData();
+        },
+        function(data){
+          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        },
+        completeData);
   },
 
   checkPayment: function(){

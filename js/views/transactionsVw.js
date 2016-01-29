@@ -39,6 +39,7 @@ module.exports = baseVw.extend({
     this.options = options;
     this.state = options.state || "purchases";
     this.userModel = this.options.userModel;
+    this.userProfile = this.options.userProfile;
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
     this.model.set("page", profile);
@@ -261,7 +262,6 @@ module.exports = baseVw.extend({
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
-      serverUrl: this.serverUrl,
       parentEl: this.$el.find('.js-transactionModalHolder'),
       countriesArray: this.countriesArray,
       cCode: this.userModel.get('currency_code'),
@@ -269,7 +269,9 @@ module.exports = baseVw.extend({
       state: this.state,
       tabState: options.tabState,
       bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
-      transactionType: options.transactionType
+      transactionType: options.transactionType,
+      userModel: this.userModel,
+      userProfile: this.userProfile
     });
     this.listenTo(orderModalView, "closed", function(){
       this.getData();
