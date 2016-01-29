@@ -244,13 +244,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
         Moderator: "Moderator",
-        NetworkConnection: "Network Connection",
+        Firewall: "Firewall",
         ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",
           ServiceFee: "Service fee",
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"
         },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
@@ -657,13 +657,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -1072,13 +1072,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -1491,13 +1491,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -1910,13 +1910,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
-          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, step 0.001, min 0)"
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, step 0.01, min 0)"
         },
         BecomeModerator: "Devenir modérateur",
         EditModerator: "Paramètres de modérateur",
@@ -2326,13 +2326,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -2741,13 +2741,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -3156,13 +3156,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -3575,13 +3575,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -3993,13 +3993,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -4411,13 +4411,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -4830,13 +4830,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -5235,13 +5235,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
           ProvideResolution: "Provide dispute resolution", // not translated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -5653,13 +5653,13 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Brak obserwowanych",
         NoFollowers: "Brak obserwujących",
         Moderator: "Moderator",//notTranslated
-        NetworkConnection: "Network Connection", //notTranslated
+        Firewall: "Firewall", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: {
           ProvideResolution: "Provide dispute resolution",//notTranslated
           ServiceFee: "Service fee",//notTranslated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.001, min 0)"//notTranslated
+          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
