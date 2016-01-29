@@ -206,15 +206,6 @@ module.exports = baseModal.extend({
     this.triggerOnEnterSpace(e, this.accPrev.bind(this));
   },
 
-  refreshProfile: function() {
-    var self = this;
-    this.options.userProfile.fetch({
-      success: function(){
-        self.render();
-      }
-    });
-  },  
-
   settingsDone: function(e){
     var self = this,
         guidCreation = this.options.guidCreationPromise;
@@ -244,8 +235,6 @@ module.exports = baseModal.extend({
         profileFormData = new FormData(),
         settingsFormData = new FormData(),
         uploadImageFormData = new FormData();
-
-    // localStorage.setItem("onboardingComplete", "true");
 
     if(this.$('textarea#aboutInput').val() != ""){
         self.model.set('short_description', this.$('textarea#aboutInput').val());
@@ -322,10 +311,15 @@ module.exports = baseModal.extend({
               data: profileFormData,
               dataType: "json",
               success: function(data) {
+                var profile = self.options.userProfile;
+
                 if(data.success == true) {
                   //self.currentWindow.reload();
                   // Backbone.history.loadUrl(Backbone.history.fragment);
-                  self.refreshProfile();
+                  profile.fetch()
+                    .done(function() {
+                      self.trigger('onboarding-complete', profile.get('guid'));
+                    });                  
                 }
               },
               error: function(jqXHR, status, errorThrown){
@@ -374,8 +368,6 @@ module.exports = baseModal.extend({
     }
 
     this.close();
-    this.trigger('onboarding-complete');
-
     this.showDiscoverCallout = true;
 
     new Notification(window.polyglot.t('WelcomeToYourPage'));

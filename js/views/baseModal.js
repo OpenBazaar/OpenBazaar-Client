@@ -57,6 +57,8 @@ module.exports = baseVw.extend({
         this.trigger('open');
         window.obEventBus.trigger('modal-open', { modal: this });
       }
+
+      return this;
     },
 
     close: function() {
@@ -67,11 +69,15 @@ module.exports = baseVw.extend({
         this.trigger('close');
         window.obEventBus.trigger('modal-close', { modal: this });
       }
+
+      return this;
     },
 
     remove: function() {
       this.close();
       baseVw.prototype.remove.apply(this, arguments);
+
+      return this;
     },
 
     render: function() {
@@ -82,5 +88,7 @@ module.exports = baseVw.extend({
           t( __.extend({} , self.__options, { innerContent: self.el.innerHTML}) )
         );
       });
+
+      return this;
     }
 });

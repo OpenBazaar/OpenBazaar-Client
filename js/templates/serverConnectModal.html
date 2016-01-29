@@ -1,13 +1,23 @@
 <div class="modal-hero modal-shadow-inner1">
   <div class="modal-hero-icon"></div>
-  <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.heading') %>...</p>
+  <% if (ob.status == 'trying') { %>
+    <p class="h6 homeModal-heroText fancy-heading">Trying to connect to your server...</p>
+  <% } else if (ob.status == 'connected') { %>
+    <p class="h6 homeModal-heroText fancy-heading">Connected.</p>  
+  <% } else if (ob.status == 'failed') { %>  
+    <p class="h6 homeModal-heroText fancy-heading">Unable to connect to your server.</p>
+  <% } %>
+  </p>
 </div>
 <div class="accordion-window" style="left: 0px;">
   <div class="accordion-child accordion-active custCol-primary overflowHidden" style="width: 525px; height: 374px;">
     <div class="bar barTxt h6 custCol-secondary custCol-text">
       Server Configuration
       <span class="textOpacity75 fontSize14 floatRight">
-        <i class="ion-android-sync spinner"></i>Attempt 1 of 3
+        <% if (ob.status == 'trying') { %>
+          <!-- variablize the max attempts -->
+          <i class="ion-android-sync spinner"></i>Attempt <%= ob.attempt %> of 3
+        <% } %>
       </span>
     </div>
     <div class="flexContainer scrollOverflowYHideX customThemeScrollbar" style="height: 272px">

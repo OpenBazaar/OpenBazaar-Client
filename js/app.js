@@ -127,7 +127,8 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 //   loadProfileCount = 3;
 // };
 
-var loadProfile = function() {
+var loadProfile = function(landingRoute) {
+  landingRoute = landingRoute || '#';
 
   var reloadProfile = function(){
     "use strict";
@@ -176,6 +177,7 @@ var loadProfile = function() {
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
               newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
               Backbone.history.start();
+              Backbone.history.navigate(landingRoute);
             });
 
             //every 15 minutes update the bitcoin price for the currently selected currency
@@ -246,23 +248,48 @@ window.mooMod = serverConfig;
 //   window.always = arguments;
 // });
 
-// // todo: register child
-// var serverConnectModal = require('./views/serverConnectModal');
-// var mooModal = new serverConnectModal({
-//   model: serverConfig
-// });
-// // mooModal.render().open();
-
+var ServerConnectModal = require('./views/serverConnectModal');
+var serverConnectModal;
 var OnboardingModal = require('./views/onboardingModal');
 var onboardingModal;
 var startInitSequence;
 var launchOnboarding;
+
+launchOnboarding = function(creatingGuid) {
+  onboardingModal && onboardingModal.remove();
+  onboardingModal = new OnboardingModal({
+    model: user,
+    userProfile: userProfile,
+    guidCreationPromise: creatingGuid
+  });
+
+  onboardingModal.render().open();
+
+  creatingGuid.fail(function() {
+    // guid creation failed
+    // server probably went down during guid creation
+    // todo: need to test this very edgy case
+    onboardingModal && onboardingModal.remove()
+    onboardingModal = null;
+    startInitSequence();
+    console.log('guid creation failed');
+  });
+
+  onboardingModal.on('onboarding-complete', function(guid) {
+    console.log('onboarding is complete - hoo to the ray!');
+    onboardingModal && onboardingModal.remove()
+    onboardingModal = null;
+    loadProfile('#userPage/' + guid + '/store');       
+  });  
+};
 
 (startInitSequence = function() {
   return isServerRunning(
     serverConfig.getServerBaseUrl() + '/profile',
     serverConfig.getGuidCheckUrl(),
     {
+      timeout: 100, // 10 times a second
+      maxAttempts: 1, // for 1 seconds    
       onAttempt: function(attempt) {
         console.log('fat ass attempt yo: ' + attempt);
         window.fat = this;
@@ -275,36 +302,10 @@ var launchOnboarding;
     if (creatingGuid) {
       console.log('guid creation in progress');
       // guid creation in progress
-      onboardingModal && onboardingModal.remove();
-      onboardingModal = new OnboardingModal({
-        model: user,
-        userProfile: userProfile,
-        guidCreationPromise: creatingGuid
-      });
-
-      onboardingModal.render().open();
-
-      creatingGuid.fail(function() {
-        // guid creation failed
-        // server probably went down during guid creation
-        // todo: need to test this very edgy case
-        onboardingModal && onboardingModal.remove()
-        onboardingModal = null;
-        startInitSequence();
-        console.log('guid creation failed');
-      });
-
-      onboardingModal.on('onboarding-complete', function() {
-        // var newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
-        // Backbone.history.start();
-        console.log('onboarding is complete - hoo to the ray!');
-        onboardingModal && onboardingModal.remove()
-        onboardingModal = null;
-        loadProfile();       
-      });
+      launchOnboarding(creatingGuid);
     } else {
       // Guid had previously been generated.
-      if (profileData.beenSet) {
+      if (profileData.profile.encryption_key) {
         // onboarding complete
         loadProfile();
 
@@ -314,9 +315,19 @@ var launchOnboarding;
         // it could skip that particular fetch.
       } else {
         // onboarding needed
+        launchOnboarding($.Deferred().resolve().promise());
       }
     }
   }).fail(function() {
     console.log('The server is most certainly NOT running.');
+
+    // server is down
+    serverConnectModal && serverConnectModal.remove();
+    serverConnectModal = new ServerConnectModal({
+      model: serverConfig
+    });
+    serverConnectModal.render()
+      .open()
+      .start();
   });
 })();
