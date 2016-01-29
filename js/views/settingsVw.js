@@ -690,7 +690,9 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         form = this.$el.find("#moderatorForm"),
-        moderatorData = {};
+        moderatorData = {},
+        moderatorStatus = this.$('#moderatorYes').is(':checked'),
+        makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator";
 
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
@@ -701,6 +703,16 @@ module.exports = Backbone.View.extend({
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, '', moderatorData);
+
+    $.ajax({
+      type: "POST",
+      url: makeModeratorUrl,
+      processData: false,
+      dataType: "json",
+      error: function(){
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessaes.serverError') + "</i>");
+      }
+    });
   },
 
   saveAdvanced: function(){
