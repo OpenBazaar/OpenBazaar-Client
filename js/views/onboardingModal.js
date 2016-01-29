@@ -31,6 +31,10 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
+    if (!(options.guidCreationPromise && options.guidCreationPromise.then)) {
+      throw new Error('Please provide a guidCreationPromise as an instance of a jQuery $.Promise().');
+    }
+
     this.options = options || {};
     this.$document = $(document).on('focus', this.docFocusHandler);
     this.$el.attr('tabIndex', 0);
@@ -213,12 +217,35 @@ module.exports = baseModal.extend({
 
   settingsDone: function(e){
     var self = this,
+        guidCreation = this.options.guidCreationPromise;
+
+    if (guidCreation.state() == 'pending') {
+      console.log('Guid is still creating, hang tight');
+      // todo: show waiting screen
+    }
+
+    guidCreation.done(function() {
+      if (self.isRemoved()) return;
+
+      console.log('onboarding modal - guid creation complete');
+      self._settingsDone(e);
+    }).fail(function() {
+      if (self.isRemoved()) return;
+
+      console.log('onboarding modal - guid creation failure');
+    }).always(function() {
+      // todo: if waiting screen, hide
+    });
+  },
+
+  _settingsDone: function(e){
+    var self = this,
         server = this.model.get('serverUrl'),
         profileFormData = new FormData(),
         settingsFormData = new FormData(),
         uploadImageFormData = new FormData();
 
-    localStorage.setItem("onboardingComplete", "true");
+    // localStorage.setItem("onboardingComplete", "true");
 
     if(this.$('textarea#aboutInput').val() != ""){
         self.model.set('short_description', this.$('textarea#aboutInput').val());
@@ -346,7 +373,6 @@ module.exports = baseModal.extend({
       submit();
     }
 
-    localStorage.setItem("onboardingComplete", "true");
     this.close();
     this.trigger('onboarding-complete');
 

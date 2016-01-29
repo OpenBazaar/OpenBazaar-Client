@@ -20,6 +20,7 @@ window.onblur = function() {
 
 var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
+    isServerRunning = require('./utils/isServerRunning'),
     router = require('./router'),
     newRouter,
     userModel = require('./models/userMd'),
@@ -48,8 +49,14 @@ serverUrlLocal = localStorage.getItem("serverUrl") || "http://localhost:18469/ap
 //set the urlRoot of the user model. Defaults to local host if not found
 user.urlRoot = serverUrlLocal + "settings";
 
+console.log('remove mew remove me removal needed');
+window.user = user;
+
 //set the urlRoot of the user model. Defaults to local host if not found
 userProfile.urlRoot = serverUrlLocal + "profile";
+
+console.log('remove mew remove me removal needed');
+window.userProfile = userProfile;
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 window.lang = user.get("language");
@@ -227,11 +234,12 @@ var loadProfile = function() {
 
 // loadProfile();
 
-// var serverConfigMd = require('./models/serverConfigMd');
-// var serverConfig = new serverConfigMd({ id: 1 });
-// serverConfig.fetch();
-// serverConfig.set('rest_api_port', 18469);
-// window.mooMod = serverConfig;
+// todo: don't let model remain in error state on removal of serverConfigModal
+var serverConfigMd = require('./models/serverConfigMd');
+var serverConfig = new serverConfigMd({ id: 1 });
+serverConfig.fetch();
+serverConfig.set('rest_api_port', 18469);
+window.mooMod = serverConfig;
 
 // window.guidCheck = $.get(serverConfig.getServerBaseUrl() + '/profile').always(function() {
 //   console.log('always and forever');
@@ -245,81 +253,70 @@ var loadProfile = function() {
 // });
 // // mooModal.render().open();
 
-// fire off guid check req
-// window.guidCheck = $.get('http://localhost:18470/api/v1/guid_generation');
+var OnboardingModal = require('./views/onboardingModal');
+var onboardingModal;
+var startInitSequence;
+var launchOnboarding;
 
-// setTimeout(function() {
-//   if (guidCheck.state() === 'pending') {
-//     // guid create in progress
-//     // launch onboarding modal passing in guid check req
-//   } else {
-//     // guid check either finished or server is down
-//     guidCheck.complete(function() {
-//       if (data.success) {
-//         // guid gen complete
-//          // launch onboarding modal passing in guid check req
-//       } else {
-//         // guid gen failed
-//         // ????
-//       }
-//     }).fail(function() {
-//       // either server is down or guid had already been generated
-//       var profileCheck = $.get(serverConfig.getServerBaseUrl() + '/profile').done(function() {
-//         console.log('profDone');
-//         window.profDone = arguments;
+(startInitSequence = function() {
+  return isServerRunning(
+    serverConfig.getServerBaseUrl() + '/profile',
+    serverConfig.getGuidCheckUrl(),
+    {
+      onAttempt: function(attempt) {
+        console.log('fat ass attempt yo: ' + attempt);
+        window.fat = this;
+      }
+    }
+  ).done(function(creatingGuid, profileData) {
+    console.log('server is running');
 
-//         // guid was previously generated
-//         if (localStorage.onboardingComplete) {
-//           // launch the app
-//         }
-//       }).fail(function() {
-//         console.log('profFail');
-//         window.profFail = arguments;
+    // server is running
+    if (creatingGuid) {
+      console.log('guid creation in progress');
+      // guid creation in progress
+      onboardingModal && onboardingModal.remove();
+      onboardingModal = new OnboardingModal({
+        model: user,
+        userProfile: userProfile,
+        guidCreationPromise: creatingGuid
+      });
 
-//         // server is indeed down
-//         // show serverConnectModal;
-//       });
-//     });
-//   }
-// }, 1000);
+      onboardingModal.render().open();
 
+      creatingGuid.fail(function() {
+        // guid creation failed
+        // server probably went down during guid creation
+        // todo: need to test this very edgy case
+        onboardingModal && onboardingModal.remove()
+        onboardingModal = null;
+        startInitSequence();
+        console.log('guid creation failed');
+      });
 
+      onboardingModal.on('onboarding-complete', function() {
+        // var newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
+        // Backbone.history.start();
+        console.log('onboarding is complete - hoo to the ray!');
+        onboardingModal && onboardingModal.remove()
+        onboardingModal = null;
+        loadProfile();       
+      });
+    } else {
+      // Guid had previously been generated.
+      if (profileData.beenSet) {
+        // onboarding complete
+        loadProfile();
 
-
-// var onboardingModal = require('./views/onboardingModal');
-// var pickleModal = new onboardingModal({
-//   model: user,
-//   userProfile: userProfile
-// });
-// pickleModal.render().open();
-// pickleModal.on('onboarding-complete', function() {
-//   var newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
-//   Backbone.history.start();
-//   pickleModal.remove();
-// });
-
-// // var serverConnector = function(options) {
-// //   options = options || {};
-// //   this.options = options;
-
-// //   if (!options.serverConfigModel || !(options.serverConfigModel instanceof serverConfigMd)) {
-// //     throw new Error('Please provide a serverConfigMd instance.')
-// //   }
-
-// //   // this.url = options.serverConfigModel.getServerBaseUrl() + '/guid_generation'
-// //   this.connectAttempts = 0;
-// // }
-
-// // serverConnector.prototype.connect = function() {
-// //   this.connectAttempts += 1;
-// //   this.connectRequest = $.ajax({
-// //     type: 'GET',
-// //     url: this.options.serverConfigModel.getServerBaseUrl() + '/guid_generation',
-// //     // contentType: false,
-// //     // processData: false,
-// //     // data: formData,
-// //     dataType: "json"
-// //   }).complete(function() {
-
-// //   });
-// // }
+        // todo: examine and potentially refactor loadProfile().
+        // todo: since we have the profile data here,
+        // we could pass it into loadProfile and if we do so,
+        // it could skip that particular fetch.
+      } else {
+        // onboarding needed
+      }
+    }
+  }).fail(function() {
+    console.log('The server is most certainly NOT running.');
+  });
+})();

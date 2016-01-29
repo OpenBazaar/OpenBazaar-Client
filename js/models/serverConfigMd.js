@@ -51,6 +51,10 @@ module.exports = Backbone.Model.extend({
   },
 
   getServerBaseUrl: function() {
-    return 'http://' + this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1'
-  }
+    return 'http://' + this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
+  },
+
+  getGuidCheckUrl: function() {
+    return 'http://' + this.get('server_ip') + ':18470/api/v1/guid_generation';
+  }  
 });
