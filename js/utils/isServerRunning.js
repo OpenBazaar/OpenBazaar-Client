@@ -27,17 +27,23 @@ module.exports = function(url, guidCheckUrl, options) {
   options = $.extend({}, defaults, options);
   guidCheck = $.get(guidCheckUrl);
 
+  console.log('1');
   timeout = setTimeout(function() {
+    console.log('12345');
     if (guidCheck.state() === 'pending') {
+      console.log('2');
       // guid creation in progress
       deferred.resolve(guidCheck);
     } else {
       // guid check either finished, server is down of
       // guid check had previosuly been completed
+      console.log('3');
       guidCheck.done(function() {
+        console.log('4');
         // guid check finished
         deferred.resolve(guidCheck);
       }).fail(function() {
+        console.log('5');
         // either server is down or guid had already been generated
         var pingUrl,
             pingAttempt;

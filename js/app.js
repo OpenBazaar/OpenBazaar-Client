@@ -39,21 +39,48 @@ var Polyglot = require('node-polyglot'),
     languages = new languagesModel(),
     socketView = require('./views/socketVw'),
     cCode = "",
-    serverUrlLocal = "",
+    // serverUrlLocal = "",
     loadProfileCount = 1,
     loadProfileCountdownInterval,
     loadProfileCountdown = 5;
 
-serverUrlLocal = localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
+var ServerConfigMd = require('./models/serverConfigMd');
+var serverConfigMd = new ServerConfigMd({ id: 1 });
+serverConfigMd.fetch();
+serverConfigMd.save({
+  'server_ip': 'localhost'
+});
+window.mooMod = serverConfigMd;
+
+var setServerUrl;
+
+// (setServerUrl = function() {
+//   user.urlRoot = serverConfigMd.getServerBaseUrl() + "/settings";
+//   userProfile.urlRoot = serverConfigMd.getServerBaseUrl() + "/profile";
+
+//   console.log('some urls set:');
+//   console.log(user.urlRoot);
+//   console.log(userProfile.urlRoot);
+// })();
+
+serverConfigMd.on('sync', function(md) {
+  setServerUrl();
+});
+
+$.ajax({
+  beforeSend: function() { jqxhr.requestURL = "http://some/url"; },
+});
+
+// serverUrlLocal = localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
 
 //set the urlRoot of the user model. Defaults to local host if not found
-user.urlRoot = serverUrlLocal + "settings";
+// user.urlRoot = serverConfigMd.getServerBaseUrl + "/settings";
 
 console.log('remove mew remove me removal needed');
 window.user = user;
 
 //set the urlRoot of the user model. Defaults to local host if not found
-userProfile.urlRoot = serverUrlLocal + "profile";
+// userProfile.urlRoot = serverConfigMd.getServerBaseUrl + "/profile";
 
 console.log('remove mew remove me removal needed');
 window.userProfile = userProfile;
@@ -166,7 +193,7 @@ var loadProfile = function(landingRoute) {
         //get the user
         user.fetch({
           success: function (model, response) {
-            user.set('serverUrl', serverUrlLocal);
+            // user.set('serverUrl', serverUrlLocal);
             cCode = model.get('currency_code');
 
             //get user bitcoin price before loading pages
@@ -190,18 +217,18 @@ var loadProfile = function(landingRoute) {
           }
         });
       }else{
-        $('.js-indexLoadingMsg1').text("User profile did not load.");
-        $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
-        $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount + " of 3");
-        reloadProfile();
+        // $('.js-indexLoadingMsg1').text("User profile did not load.");
+        // $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
+        // $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount + " of 3");
+        // reloadProfile();
       }
     },
     error: function (model, response) {
-      $('.js-loadingModal').addClass('hide');
-      $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded: " + response.statusText);
-      $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
-      $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount + " of 3");
-      reloadProfile();
+      // $('.js-loadingModal').addClass('hide');
+      // $('.js-indexLoadingMsg1').text("Information for your user profile could not be loaded: " + response.statusText);
+      // $('.js-indexLoadingMsg2').text("Attempting to reach " + serverUrlLocal);
+      // $('.js-indexLoadingMsg3').text("Reload attempt " + loadProfileCount + " of 3");
+      // reloadProfile();
     }
   });
 };
@@ -236,14 +263,7 @@ var loadProfile = function(landingRoute) {
 
 // loadProfile();
 
-// todo: don't let model remain in error state on removal of serverConfigModal
-var serverConfigMd = require('./models/serverConfigMd');
-var serverConfig = new serverConfigMd({ id: 1 });
-serverConfig.fetch();
-serverConfig.set('rest_api_port', 18469);
-window.mooMod = serverConfig;
-
-// window.guidCheck = $.get(serverConfig.getServerBaseUrl() + '/profile').always(function() {
+// window.guidCheck = $.get(serverConfigMd.getServerBaseUrl() + '/profile').always(function() {
 //   console.log('always and forever');
 //   window.always = arguments;
 // });
@@ -285,8 +305,8 @@ launchOnboarding = function(creatingGuid) {
 
 (startInitSequence = function() {
   return isServerRunning(
-    serverConfig.getServerBaseUrl() + '/profile',
-    serverConfig.getGuidCheckUrl(),
+    serverConfigMd.getServerBaseUrl() + '/profile',
+    serverConfigMd.getGuidCheckUrl(),
     {
       timeout: 100, // 10 times a second
       maxAttempts: 1, // for 1 seconds    
@@ -297,6 +317,7 @@ launchOnboarding = function(creatingGuid) {
     }
   ).done(function(creatingGuid, profileData) {
     console.log('server is running');
+    window.server = arguments;
 
     // server is running
     if (creatingGuid) {
@@ -324,7 +345,7 @@ launchOnboarding = function(creatingGuid) {
     // server is down
     serverConnectModal && serverConnectModal.remove();
     serverConnectModal = new ServerConnectModal({
-      model: serverConfig
+      model: serverConfigMd
     });
     serverConnectModal.render()
       .open()
