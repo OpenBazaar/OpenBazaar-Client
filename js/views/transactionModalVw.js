@@ -279,7 +279,7 @@ module.exports = baseVw.extend({
   },
 
   closeModal: function(){
-    this.$el.parent().fadeOut(300);
     this.trigger("closed");
+    this.$el.parent().fadeOut(300);
   }
 });
