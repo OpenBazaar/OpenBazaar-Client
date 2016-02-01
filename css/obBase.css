@@ -20,7 +20,7 @@
 .chatConversationHeads::-webkit-scrollbar-thumb,
 .chatConversationContent::-webkit-scrollbar-thumb,
 #sideBar textarea::-webkit-scrollbar-thumb {
-  border-radius: 20px;
+  border-radius: 0;
   background: #3E3E3E;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 0;
   background: #3E3E3E;
 }
 
@@ -210,6 +210,16 @@ form {
   padding: 0;
 }
 
+.navMoreButtons {
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  min-height: 80px;
+  padding: 10px;
+  position: absolute;
+  right: 10px;
+  top: 41px;
+}
+
 #sideBar {
   position: fixed;
   right: -183px;
@@ -226,6 +236,15 @@ form {
 
 #sideBar.sideBarSlid {
   right: 0px;
+}
+
+#sideBar .sideBarSlidShow {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+#sideBar.sideBarSlid .sideBarSlidShow {
+  opacity: 1;
 }
 
 #sideBar input::-webkit-input-placeholder {
@@ -248,7 +267,7 @@ form {
   background-color: #063753;
   position: relative;
   min-height: 800px;
-  margin-bottom: 100px;
+  margin-bottom: 70px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   z-index: 1;
@@ -1009,11 +1028,12 @@ label.fieldItem {
 
 #addressBar{
   height: 32px;
+  font-size: 13px;
 }
 
 #addressBar::-webkit-input-placeholder {
   color: #000;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .smPageHeader {
@@ -1320,12 +1340,14 @@ h5 {
   background: linear-gradient(to bottom, rgba(72,78,93,1), rgba(23,24,31,1) 75%, rgba(0,0,0,1) 100%);
 }
 
+/*
+removed because I don't think we're using the trick to hide the borders any more
 .flex-border > .flexRow {
-  /* hide the extra border on the right and bottom sides */
   margin: 0 -1px -1px 0;
   width: auto;
   overflow: hidden;
 }
+*/
 
 .hideTopAndBottomBorder {
   /* use to hide the first and last border of the flexRows inside this element */
@@ -1772,7 +1794,7 @@ div.chatSearchOut .chatSearchIcon {
   bottom: 0px;
   position: absolute;
   transition: bottom 0.35s ease;
-  background-color: #252525;
+  background-color: #2B2B2B;
 }
 
 .chatConversationHidden {
@@ -1825,24 +1847,23 @@ div.chatSearchOut .chatSearchIcon {
   overflow: hidden;
 }
 
-.btn-closeConversation {
+.conversationHeader-btn {
   height: 38px;
   width: 30px;
   text-align: center;
-  float: right;
 }
 
-.btn-closeConversation a {
+.conversationHeader-btn a {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.btn-closeConversation a:before {
+.conversationHeader-btn a:before {
   line-height: 38px;
 }
 
-.btn-closeConversation:hover {
+.conversationHeader-btn:hover {
   outline: solid 1px #4C4C4C;
   border-radius: 0;
 }
@@ -2032,7 +2053,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .chatConversationMessageBody > .inner {
-  background-color: #2D2D2D;
+  background-color: #333333;
   border-radius: 3px;
   font-size: 12px;
   padding: 6px 8px;
@@ -3567,6 +3588,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .tooltip:hover:after{
+  max-width: 400px;
   background: rgba(37,37,37,.85);
   border-radius: 3px;
   bottom: -32px;
@@ -3580,6 +3602,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   line-height: 16px;
   opacity: 1;
+  white-space: nowrap;
+}
+
+.tooltip.tooltip-right:hover:after{
+  left: auto;
+  right: 0;
 }
 
 .btn-notifications.tooltip:hover:after{
@@ -3719,6 +3747,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .5;
   top: 0;
   right: 6px;
+  pointer-events: none;
 }
 
 .selectPill:hover {
@@ -3897,6 +3926,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .positionTop {
   position: absolute;
   top: 0;
+}
+
+#ov1 .positionTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 #ov1 .hide {
@@ -4140,7 +4175,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .textShadow {
-  text-shadow: 0px 0 6px #000000;
+  text-shadow: 0px 1px 5px #000;
 }
 
 #ov1 .fontSize8 {
@@ -4402,6 +4437,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-bottom: 4px;
 }
 
+#ov1  .marginBottom5 {
+  margin-bottom: 5px;
+}
 #ov1  .marginBottom6 {
   margin-bottom: 6px;
 }
@@ -4526,6 +4564,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .lineHeight24{
   line-height: 24px;
 }
+#ov1  .lineHeight32{
+  line-height: 32px;
+}
 
 #ov1  .lineHeight46{
   line-height: 46px;
@@ -4568,6 +4609,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: relative;
 }
 
+#ov1  .padding2 {
+  padding: 2px;
+}
+#ov1  .padding3 {
+  padding: 3px;
+}
 #ov1  .padding4 {
   padding: 4px;
 }
@@ -4689,6 +4736,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-bottom: 20px;
 }
 
+#ov1  .letterSpacing0 {
+  letter-spacing: 0;
+}
+
 #ov1  .letterSpacing02 {
   letter-spacing: 0.2px;
 }
@@ -4706,6 +4757,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 360px;
 }
 
+#ov1 .width34 {
+  width: 34px;
+}
 #ov1 .width40 {
   width: 40px;
 }
@@ -4736,6 +4790,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width160 {
   width: 160px;
 }
+#ov1 .width200 {
+  width: 200px;
+}
 
 #ov1 .width260 {
   width: 260px;
@@ -4744,7 +4801,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width270 {
   width: 270px;
 }
+#ov1 .width400 {
+  width: 400px;
+}
 
+#ov1 .width450 {
+  width: 450px;
+}
 #ov1 .width600 {
   width: 600px;
 }

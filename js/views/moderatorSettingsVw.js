@@ -2,6 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    messageModal = require('../utils/messageModal.js'),
     saveToAPI = require('../utils/saveToAPI');
 Backbone.$ = $;
 
@@ -47,7 +48,8 @@ module.exports = Backbone.View.extend({
         targetForm = this.$el.find('#moderatorSettingsForm'),
         formData = new FormData(),
         moderatorFee = this.moderatorFeeInput.val(),
-        moderatorData = {};
+        moderatorData = {},
+        makeModeratorUrl = this.moderatorStatus ? this.model.get('user').serverUrl + "make_moderator" : this.model.get('user').serverUrl + "unmake_moderator";
 
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
@@ -56,6 +58,16 @@ module.exports = Backbone.View.extend({
       self.closeModeratorSettings();
       window.obEventBus.trigger("moderatorStatus", {'status': self.moderatorStatus, 'fee': moderatorFee});
     }, "", moderatorData);
+
+    $.ajax({
+      type: "POST",
+      url: makeModeratorUrl,
+      processData: false,
+      dataType: "json",
+      error: function(){
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessaes.serverError') + "</i>");
+      }
+    });
   },
 
   showModeratorFeeHolder: function(){
