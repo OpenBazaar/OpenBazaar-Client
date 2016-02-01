@@ -3,7 +3,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
-    isServerRunning = require('../utils/isServerRunning'),    
+    isLocalServerRunning = require('../utils/isLocalServerRunning'),    
     serverConfigMd = require('../models/serverConfigMd'),
     baseModal = require('./baseModal'),
     messageModal = require('../utils/messageModal.js');
@@ -37,11 +37,7 @@ module.exports = baseModal.extend({
   },
 
   saveForm: function() {
-    if (this.model.save()) {
-      messageModal.show('The changes have been saved.')
-    } else {
-      messageModal.show('There are one or more errors. Please fix.')
-    }
+    this.model.save();
   },
 
   restoreDefaults: function() {
@@ -72,11 +68,11 @@ module.exports = baseModal.extend({
     if (this._started) return this;
 
     this.started = true;
-    this.serverRunning = isServerRunning(
+    this.serverRunning = isLocalServerRunning(
       this.model.getServerBaseUrl() + '/profile',
       this.model.getGuidCheckUrl(),
       {
-        timeout: 250,
+        interval: 250,
         maxAttempts: 24, // for 6 seconds    
         onAttempt: __.bind(this.onConnectAttempt, this)
       }
@@ -84,7 +80,8 @@ module.exports = baseModal.extend({
       self.setState({ status: 'connected'});
       this.serverRunning && this.serverRunning.cancel();
       self.trigger('connect');
-    }).fail(function() {
+    }).fail(function(status) {
+      if (status && status === 'canceled') return;
       self.setState({ status: 'failed'});
     });
 

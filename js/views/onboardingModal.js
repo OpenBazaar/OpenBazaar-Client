@@ -32,8 +32,14 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
-    if (!(options.guidCreationPromise && options.guidCreationPromise.then)) {
-      throw new Error('Please provide a guidCreationPromise as an instance of a jQuery $.Promise().');
+    if (!options.serverConfig) {
+      throw new Error('Please provide a serverConfig model.');
+    }
+
+    if (options.serverConfig.isLocalServer()) {
+      if (!(options.guidCreationPromise && options.guidCreationPromise.then)) {
+        throw new Error('For connection to a local server, a guidCreationPromise as an instance of a jQuery $.Promise() is required.');
+      }
     }
 
     this.options = options || {};
