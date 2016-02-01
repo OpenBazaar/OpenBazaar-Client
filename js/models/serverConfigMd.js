@@ -7,7 +7,7 @@ module.exports = Backbone.Model.extend({
     'id': 1,
     'server_ip': 'localhost',
     'rest_api_port': 18469,
-    'socket_port': 18469
+    'socket_port': 18466
   },
 
   sync: localStorageSync.sync,

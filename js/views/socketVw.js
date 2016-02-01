@@ -32,6 +32,10 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  showSocketErrorMessage: function() {
+
+  },
+
   socketOpen: function() {
     "use strict";
     //placeholder
@@ -58,6 +62,7 @@ module.exports = Backbone.View.extend({
 
   socketError: function(e) {
     messageModal.show('WebSockets cannot be reached.', '<i>Interface will continue loading, but some functionality will not be available.</i>');    
+    
   },
 
   socketClose: function(e) {
