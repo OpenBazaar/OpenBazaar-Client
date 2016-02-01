@@ -422,7 +422,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Unable to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }
       },
       {
@@ -827,7 +839,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }
       },
       {
@@ -1240,7 +1264,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -1657,7 +1693,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -2075,7 +2123,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -2488,7 +2548,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -2901,7 +2973,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -3314,7 +3398,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -3731,7 +3827,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -4147,7 +4255,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -4562,7 +4682,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -4980,7 +5112,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }        
       },
       {
@@ -5382,7 +5526,19 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
-          heading: "Trying to connect to your server" //notTranslated
+          statusTryingToConnect: "Trying to connect to your server", //notTranslated
+          statusConnected: "Trying to connect to your server", //notTranslated
+          statusFailedConnection: "Trying to connect to your server", //notTranslated
+          serverConfiguration: "Server Configuration", //notTranslated
+          attempt: "Attempt", //notTranslated
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
+          serverIP: "Server IP", //notTranslated
+          restApiPort: "Rest API port", //notTranslated
+          websocketApiPort: "Websocket API port", //notTranslated
+          username: "Username", //notTranslated
+          password: "Password", //notTranslated                    
+          restoreDefaults: "Restore defaults", //notTranslated                    
+          saveChanges: "Save Changes" //notTranslated                    
         }       
       },
       {

@@ -1,28 +1,28 @@
 <div class="modal-hero modal-shadow-inner1 bg-dark-blue custCol-primary-darken">
   <div class="modal-hero-icon"></div>
   <% if (ob.status == 'trying') { %>
-    <p class="h6 homeModal-heroText fancy-heading">Trying to connect to your server...</p>
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusTryingToConnect') %>...</p>
   <% } else if (ob.status == 'connected') { %>
-    <p class="h6 homeModal-heroText fancy-heading">Connected.</p>  
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusConnected') %>.</p>  
   <% } else if (ob.status == 'failed') { %>  
-    <p class="h6 homeModal-heroText fancy-heading">Unable to connect to your server.</p>
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusFailedConnection') %>.</p>
   <% } %>
   </p>
 </div>
 <div class="accordion-window" style="left: 0px;">
   <div class="accordion-child accordion-active custCol-primary overflowHidden" style="width: 525px; height: 374px;">
     <div class="bar barTxt h6 custCol-secondary custCol-text">
-      Server Configuration
+      <%= polyglot.t('serverConnectModal.serverConfiguration') %>
       <span class="textOpacity75 fontSize14 floatRight">
         <% if (ob.status == 'trying') { %>
           <!-- variablize the max attempts -->
-          <i class="ion-android-sync spinner"></i>Attempt <%= ob.attempt %> of 3
+          <i class="ion-android-sync spinner"></i><%= polyglot.t('serverConnectModal.attempt') %> <%= ob.attempt %> <%= polyglot.t('of') %> 3
         <% } %>
       </span>
     </div>
     <div class="flexContainer scrollOverflowYHideX customThemeScrollbar" style="height: 272px">
       <div class="flexRow borderBottom custCol-border">
-        <p class="margin0 padding2015">OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.</p>
+        <p class="margin0 padding2015"><%= polyglot.t('serverConnectModal.intro') %></p>
       </div>
         <form class="width100" name="serverConfigForm">
           <div class="flexCol-12 flex-border borderBottom">
@@ -39,7 +39,7 @@
 
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="fld_server">Server IP</label>
+                  <label for="fld_server"><%= polyglot.t('serverConnectModal.serverIP') %></label>
                 </div>
               </div>
 
@@ -61,7 +61,7 @@
 
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="fld_rest_port">Rest API port</label>
+                  <label for="fld_rest_port"><%= polyglot.t('serverConnectModal.restApiPort') %></label>
                 </div>
               </div>
 
@@ -83,7 +83,7 @@
 
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="fld_socket_port">Websocket API port</label>
+                  <label for="fld_socket_port"><%= polyglot.t('serverConnectModal.websocketApiPort') %></label>
                 </div>
               </div>
 
@@ -105,7 +105,7 @@
 
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="fld_username">Username</label>
+                  <label for="fld_username"><%= polyglot.t('serverConnectModal.username') %></label>
                 </div>
               </div>
 
@@ -127,7 +127,7 @@
 
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="fld_password">Password</label>
+                  <label for="fld_password"><%= polyglot.t('serverConnectModal.password') %></label>
                 </div>
               </div>
 
@@ -142,10 +142,10 @@
     <div class="bar barFlush borderBottomLeftRaidus3 borderBottomRightRaidus3">
       <a class="btn btn-bar btn-half js-restoreDefaults custCol-secondary custCol-border-primary borderBottomLeftRaidus3 custCol-text borderRight" tabindex="0">
         <span class="fontSize10 marginRight2"></span>
-        Restore defaults
+        <%= polyglot.t('serverConnectModal.restoreDefaults') %>
       </a>
       <a class="btn btn-bar btn-half js-save custCol-secondary custCol-border-primary borderBottomRightRaidus3 custCol-text" tabindex="0">
-        Save changes
+        <%= polyglot.t('serverConnectModal.saveChanges') %>
         <span class="fontSize10 marginLeft2 textOpacity75"></span>
       </a>
     </div>

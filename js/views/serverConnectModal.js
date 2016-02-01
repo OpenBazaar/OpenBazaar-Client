@@ -77,8 +77,7 @@ module.exports = baseModal.extend({
       this.model.getGuidCheckUrl(),
       {
         timeout: 250,
-        // maxAttempts: 24, // for 6 seconds    
-        maxAttempts: 240, // for 6 seconds    
+        maxAttempts: 24, // for 6 seconds    
         onAttempt: __.bind(this.onConnectAttempt, this)
       }
     ).done(function() {
