@@ -262,6 +262,7 @@ module.exports = baseVw.extend({
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
+      serverUrl: this.serverUrl,
       parentEl: this.$el.find('.js-transactionModalHolder'),
       countriesArray: this.countriesArray,
       cCode: this.userModel.get('currency_code'),

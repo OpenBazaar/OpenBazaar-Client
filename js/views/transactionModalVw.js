@@ -79,12 +79,10 @@ module.exports = baseVw.extend({
     var self = this;
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
-      //timeout: 4000,
+      timeout: 4000,
       dataType: 'json',
       success: function (model, response, options) {
-        console.log(model.attributes)
         self.model.updateAttributes();
-        //self.render(response);
       },
       error: function (jqXHR, status, errorThrown) {
         messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
@@ -98,11 +96,9 @@ module.exports = baseVw.extend({
 
   render: function () {
     "use strict";
-    console.log(this.model.attributes)
     var self = this;
-    //console.log(response);
     $('.js-loadingModal').addClass("hide");
-    console.log(self.model.toJSON())
+    this.model.set('status', this.status);
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
@@ -124,7 +120,6 @@ module.exports = baseVw.extend({
     "use strict";
     var data = JSON.parse(response.data);
     if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
-      this.model.set('status', 1);
       this.status = 1;
       this.getData();
     }
@@ -132,7 +127,6 @@ module.exports = baseVw.extend({
 
   showPayment: function(){
     "use strict";
-    console.log(this.model.attributes);
     var totalBTCPrice = 0,
         payHREF,
         dataURI;

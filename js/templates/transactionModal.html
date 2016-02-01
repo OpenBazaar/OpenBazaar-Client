@@ -440,7 +440,7 @@
           </div>
         </div>
         <div class="flexCol-4 custCol-border">
-          <% if(ob.status == 2 || ob.status == 3){ %>
+          <% if(ob.status == 1 || ob.status == 2 || ob.status == 3){ %>
           <% if(ob.transactionType == "purchase"){ %>
           <div class="rowItem padding2015">
             <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
@@ -464,7 +464,6 @@
         </div>
       </div>
     </div>
-    <% console.log(ob.avatarURL) %>
     <%- ob.avatarURL %>
     <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright">
       <div class="pad10right">
