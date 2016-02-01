@@ -140,6 +140,8 @@ module.exports = baseVw.extend({
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUserClick',
     'click .js-unfollow': 'unfollowUserClick',
+    'click .js-moreButtonsOwnPage': 'moreButtonsOwnPageClick',
+    'click .js-moreButtonsNotOwnPage': 'moreButtonsNotOwnPageClick',
     'click .js-message': 'sendMessage',
     'click .js-moderatorSettings': 'showModeratorModal',
     'click .js-customizeSecondaryColor': 'displayCustomizeSecondaryColor',
@@ -321,14 +323,6 @@ module.exports = baseVw.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.state, self.options.itemHash);
-      self.$el.find('.js-externalLink').on('click', function(e){
-        e.preventDefault();
-        var extUrl = $(this).attr('href');
-        if (!/^https?:\/\//i.test(extUrl)) {
-          extUrl = 'http://' + extUrl;
-        }
-        require("shell").openExternal(extUrl);
-      });
 
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
@@ -370,6 +364,15 @@ module.exports = baseVw.extend({
       });
 
       $('.js-userAbout').html(about);
+
+      self.$el.find('.js-userAbout a').on('click', function(e){
+        e.preventDefault();
+        var extUrl = $(this).attr('href');
+        if (!/^https?:\/\//i.test(extUrl)) {
+          extUrl = 'http://' + extUrl;
+        }
+        require("shell").openExternal(extUrl);
+      });
     });
 
     return this;
@@ -1267,6 +1270,25 @@ module.exports = baseVw.extend({
 
   unfollowUserClick: function(){
     this.unfollowUser({'guid': this.pageID});
+  },
+
+  moreButtonsOwnPageClick: function(){
+    if ($('.js-extraButtonsOwnPage').hasClass('hide')){
+      $('.js-extraButtonsOwnPage').removeClass('hide');
+      $('.js-moreButtonsOwnPage').html('x');
+    }else{
+      $('.js-extraButtonsOwnPage').addClass('hide');
+      $('.js-moreButtonsOwnPage').html('...');
+    }
+  },
+  moreButtonsNotOwnPageClick: function(){
+    if ($('.js-extraButtonsNotOwnPage').hasClass('hide')){
+      $('.js-extraButtonsNotOwnPage').removeClass('hide');
+      $('.js-moreButtonsNotOwnPage').html('x');
+    }else{
+      $('.js-extraButtonsNotOwnPage').addClass('hide');
+      $('.js-moreButtonsNotOwnPage').html('...');
+    }
   },
 
   followUser: function(options){

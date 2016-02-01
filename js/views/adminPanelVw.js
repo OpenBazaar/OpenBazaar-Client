@@ -14,8 +14,6 @@ module.exports = Backbone.View.extend({
   events: {
     'click .js-adminModal': 'blockClicks',
     'click .js-closeModal': 'closeModal',
-    'click .js-adminMakeModerator': 'makeModerator',
-    'click .js-adminUnmakeModerator': 'unMakeModerator',
     'click .js-adminServer': 'setServer',
     'click .js-adminUpdateProfile': 'updateProfile',
     'click .js-adminUpdateSettings': 'updateSettings',
@@ -59,13 +57,6 @@ module.exports = Backbone.View.extend({
     this.userProfile.fetch({
       success: function(model){
         var modelJSON = model.toJSON();
-        if(model.get('profile').moderator === true){
-          self.$el.find('.js-adminMakeModerator').hide();
-          self.$el.find('.js-adminUnmakeModerator').show();
-        } else {
-          self.$el.find('.js-adminMakeModerator').show();
-          self.$el.find('.js-adminUnmakeModerator').hide();
-        }
         __.each(self.$el.find('#adminPanelProfile input'), function(inputTarget){
           __.each(modelJSON.profile, function(modelValue, modelName) {
             if(inputTarget.name == modelName && inputTarget.type != "radio"){
@@ -126,34 +117,6 @@ module.exports = Backbone.View.extend({
     $(e.target).closest('.js-adminModal').fadeOut(300, function(){
       window.location.reload();
     });
-  },
-
-  makeModerator: function() {
-    "use strict";
-    var self = this;
-    this.postData("", "make_moderator",
-      function(){
-        self.$el.find('.js-adminModeratorMsg').html("You are a moderator");
-        self.updatePage();
-      },
-      function(data){
-        alert("Failed. "+ data.reason);
-      }
-    );
-  },
-
-  unMakeModerator: function() {
-    "use strict";
-    var self = this;
-    this.postData("", "unmake_moderator",
-      function(){
-        self.$el.find('.js-adminModeratorMsg').html("You are not a moderator");
-        self.updatePage();
-      },
-      function(data){
-        alert("Failed. "+ data.reason);
-      }
-    );
   },
 
   setServer: function() {

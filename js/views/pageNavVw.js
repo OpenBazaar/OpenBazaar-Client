@@ -61,6 +61,7 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
+    this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.subViews = [];
     this.languages = new languagesModel();
 
@@ -74,7 +75,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency");});
     this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language");});
     this.listenTo(window.obEventBus, "updateProfile", function(response){
-      this.userProfile.fetch();
+      this.refreshProfile();
     });
     this.listenTo(window.obEventBus, "updateUserModel", function(response){
       this.model.fetch();
@@ -112,7 +113,9 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.userProfile.fetch({
-      success: function(){
+      success: function(model){
+        self.model.set('vendor', model.get('profile').vendor);
+        self.model.set('moderator', model.get('profile').moderator);
         self.render();
       }
     });

@@ -95,14 +95,6 @@ module.exports = baseVw.extend({
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
-      self.$el.find('.js-externalLink').on('click', function(e){
-        e.preventDefault();
-        var extUrl = $(this).attr('href');
-        if (!/^https?:\/\//i.test(extUrl)) {
-          extUrl = 'http://' + extUrl;
-        }
-        require("shell").openExternal(extUrl);
-      });
       if(self.status == 0){
         self.showPayment();
       }

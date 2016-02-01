@@ -9,7 +9,7 @@
       style="background-image: url(imgs/defaultUser.png);">
       <% } %>
     </div>
-    <h1 class="fancy-heading fontSize20 vCentered"><%= polyglot.t('Transactions') %></h1>
+    <h1 class="fancy-heading fontSize20 vCentered colorWhiteForce textShadow"><%= polyglot.t('Transactions') %></h1>
     <a href="#userPage" class="btn btn-txt custCol-secondary positionWrapper pull-right right10 marginTop9 marginLeft6">
       <span class="ion-document-text fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('GoToMyPage') %>
@@ -22,20 +22,23 @@
 </div>
 
 <div class="bar navBar barFlush custCol-secondary clearFix height55">
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchasesTab active" data-tab="purchases">
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-purchasesTab paddingRight18 active" data-tab="purchases">
     <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Purchases') %>
+    <span class="pill fontSize12 textOpacity75 marginLeft2 js-purchasesCount">0</span>
   </a>
   <% if(ob.page.vendor){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab" data-tab="sales">
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-salesTab paddingRight18" data-tab="sales">
     <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Sales') %>
+    <span class="pill fontSize12 textOpacity75 marginLeft2 js-salesCount">0</span>
   </a>
   <% } %>
   <% if(ob.page.moderator){ %>
-  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab" data-tab="cases">
-    <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
+  <a class="btn btn-bar btn-tab custCol-secondary js-tab js-casesTab paddingRight18" data-tab="cases">
+    <span class="ion-briefcase fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('Cases') %>
+    <span class="pill fontSize12 textOpacity75 marginLeft2 js-casesCount">0</span>
   </a>
   <% } %>
 </div>
@@ -44,12 +47,12 @@
 
       <div class="flexRow flex-border js-tabTarg js-purchases" id="transactionsPurchases">
         <div class="positionWrapper width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
             <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
             <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
           </div>
           <div class="selectPill positionTop rowTop10">
-            <select class="custCol-secondary js-transactionFilter" data-tab="purchases">
+            <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="purchases">
               <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
               <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
               <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
@@ -65,12 +68,12 @@
 
       <div class="flexRow flex-border positionWrapper js-tabTarg js-sales hide" id="transactionsSales">
         <div class="positionWrapper width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
             <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
             <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
           </div>
           <div class="selectPill positionTop rowTop10">
-            <select class="custCol-secondary js-transactionFilter" data-tab="sales">
+            <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="sales">
               <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
               <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
               <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
@@ -86,12 +89,12 @@
 
       <div class="flexRow flex-border positionWrapper hide js-tabTarg js-cases" id="transactionsCases">
         <div class="positionWrapper width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom custCol-border">
             <input type="text" class="txtField txtField-bar search" placeholder="<%= polyglot.t('transactions.searchByOrder') %>" />
             <a class="btn-corner btn-cornerTR ion-close-circled vCentered icon-med hide js-transactionsSearchClear textOpacity50"></a>
           </div>
           <div class="selectPill positionTop rowTop10">
-            <select class="custCol-secondary js-transactionFilter" data-tab="cases">
+            <select class="custCol-secondary custCol-text js-transactionFilter" data-tab="cases">
               <option value="all"><%= polyglot.t('transactions.sortByStatusAll') %></option>
               <option value="0"><%= polyglot.t('transactions.sortByStatus0') %></option>
               <option value="1"><%= polyglot.t('transactions.sortByStatus1') %></option>
