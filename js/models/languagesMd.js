@@ -670,7 +670,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -678,7 +678,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
@@ -1085,7 +1085,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -1093,7 +1093,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
@@ -2339,7 +2339,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -2347,7 +2347,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
@@ -3169,7 +3169,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -3177,7 +3177,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
@@ -3588,7 +3588,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -3596,7 +3596,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
@@ -4006,7 +4006,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4014,7 +4014,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
@@ -4424,7 +4424,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4432,7 +4432,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
@@ -4843,7 +4843,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds Waiting)", // not translated
+          sortByStatus1: "Paid (Funds in Escrow)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4851,7 +4851,7 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds Waiting)", // not translated
+          OrderStatus1: "Paid (Funds in Escrow)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
