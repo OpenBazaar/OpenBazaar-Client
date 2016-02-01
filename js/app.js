@@ -157,27 +157,27 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 var loadProfile = function(landingRoute) {
   landingRoute = landingRoute || '#';
 
-  var reloadProfile = function(){
-    "use strict";
-    $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
-    loadProfileCountdown=5;
+  // var reloadProfile = function(){
+  //   "use strict";
+  //   $('.js-loadingMessageModal').removeClass('hide').find('.js-closeIndexModal').addClass('hide');
+  //   loadProfileCountdown=5;
 
-    if(loadProfileCount <= 3){
-      loadProfileCountdownInterval = setInterval(function(){
-        if(loadProfileCountdown > 0){
-          $('.js-indexLoadingMsg4').text(loadProfileCountdown);
-          loadProfileCountdown--;
-        } else {
-          $('.js-indexLoadingMsg4').text("");
-          clearInterval(loadProfileCountdownInterval);
-          loadProfileCount++;
-          loadProfile();
-        }
-      }, 3000);
-    } else {
-      loadDefaultServer();
-    }
-  };
+  //   if(loadProfileCount <= 3){
+  //     loadProfileCountdownInterval = setInterval(function(){
+  //       if(loadProfileCountdown > 0){
+  //         $('.js-indexLoadingMsg4').text(loadProfileCountdown);
+  //         loadProfileCountdown--;
+  //       } else {
+  //         $('.js-indexLoadingMsg4').text("");
+  //         clearInterval(loadProfileCountdownInterval);
+  //         loadProfileCount++;
+  //         loadProfile();
+  //       }
+  //     }, 3000);
+  //   } else {
+  //     loadDefaultServer();
+  //   }
+  // };
 
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
@@ -212,9 +212,9 @@ var loadProfile = function(landingRoute) {
               setCurrentBitCoin(model.get('currency_code'), user);
             }, 54000000);
           },
-          error: function (model, response) {
-            loadDefaultServer();
-          }
+          // error: function (model, response) {
+          //   loadDefaultServer();
+          // }
         });
       }else{
         // $('.js-indexLoadingMsg1').text("User profile did not load.");
