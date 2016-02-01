@@ -1295,6 +1295,12 @@ h5 {
   position: relative;
   width: 525px;
 }
+
+/*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
+.modal-hero.bg-dark-blue {
+  background: #063753;
+}
+
 .modal-hero-about {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -3011,7 +3017,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   overflow: hidden;
 }
 
-.popMenu-navBar-opened {
+.popMenu-navbar-opened {
   animation: menuSlide .12s normal linear;
   top: 50px;
 }
@@ -3328,13 +3334,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 /*========== one-off classes ==========*/
 
-.modal .homeModal-hero, .modal.server-connect-modal .modal-hero {
-  background: #063753;
-}
-
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 40px;
+  bottom: 0px;
+  top: 180px;
   color: #fff;
   font-size: 24px;
   width: 70%;

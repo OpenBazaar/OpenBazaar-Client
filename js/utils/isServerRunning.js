@@ -5,11 +5,13 @@ var $ = require('jquery');
 // todo: doc this guy.
 module.exports = function(url, guidCheckUrl, options) {
   var deferred = $.Deferred(),
+      promise = deferred.promise(),
       attempts = 0,
-      timeout,
       defaults,
       pingServer,
-      guidCheck;
+      guidCheck,
+      pingAttempt,
+      pingAttemptTimeout;
 
   if (!url) {
     throw new Error('Please provide an url to ping.');
@@ -27,26 +29,19 @@ module.exports = function(url, guidCheckUrl, options) {
   options = $.extend({}, defaults, options);
   guidCheck = $.get(guidCheckUrl);
 
-  console.log('1');
-  timeout = setTimeout(function() {
-    console.log('12345');
+  setTimeout(function() {
     if (guidCheck.state() === 'pending') {
-      console.log('2');
       // guid creation in progress
       deferred.resolve(guidCheck);
     } else {
       // guid check either finished, server is down of
       // guid check had previosuly been completed
-      console.log('3');
       guidCheck.done(function() {
-        console.log('4');
         // guid check finished
         deferred.resolve(guidCheck);
       }).fail(function() {
-        console.log('5');
         // either server is down or guid had already been generated
-        var pingUrl,
-            pingAttempt;
+        var pingUrl;
 
         (pingUrl = function() {
           if (attempts < options.maxAttempts) {
@@ -57,7 +52,7 @@ module.exports = function(url, guidCheckUrl, options) {
             }).fail(function() {
               // server is indeed down, let's
               // keep pinging
-              setTimeout(pingUrl, options.timeout);
+              pingAttemptTimeout = setTimeout(pingUrl, options.timeout);
             });
 
             if (typeof options.onAttempt == 'function') {
@@ -73,5 +68,11 @@ module.exports = function(url, guidCheckUrl, options) {
     }
   }, 0);
 
-  return deferred.promise();
+  promise.cancel = function() {
+    pingAttemptTimeout && clearTimeout(pingAttemptTimeout);
+    pingAttempt && pingAttempt.abort();
+    guidCheck && guidCheck.abort();
+  };
+
+  return promise;
 };

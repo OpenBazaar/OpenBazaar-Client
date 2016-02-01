@@ -58,8 +58,12 @@ module.exports = baseModal.extend({
   },
 
   setState: function(state) {
-    this._state = __.extend({}, this._state, state);
-    this.render();
+    var newState =  __.extend({}, this._state, state);
+    
+    if (!__.isEqual(this._state, newState)) {
+      this._state = newState;
+      this.render();
+    }
   },
 
   start: function() {
@@ -68,16 +72,19 @@ module.exports = baseModal.extend({
     if (this._started) return this;
 
     this.started = true;
-    isServerRunning(
+    this.serverRunning = isServerRunning(
       this.model.getServerBaseUrl() + '/profile',
       this.model.getGuidCheckUrl(),
       {
         timeout: 250,
-        maxAttempts: 24, // for 6 seconds    
+        // maxAttempts: 24, // for 6 seconds    
+        maxAttempts: 240, // for 6 seconds    
         onAttempt: __.bind(this.onConnectAttempt, this)
       }
     ).done(function() {
       self.setState({ status: 'connected'});
+      this.serverRunning && this.serverRunning.cancel();
+      self.trigger('connect');
     }).fail(function() {
       self.setState({ status: 'failed'});
     });
@@ -86,11 +93,20 @@ module.exports = baseModal.extend({
   },
 
   remove: function() {
+    this.serverRunning && this.serverRunning.cancel();
+
     // TODO: don't let us leave this modal with the model in an error state.
+
+    baseModal.prototype.remove.apply(this, arguments);
   },  
 
   render: function() {
-    var self = this;
+    var self = this,
+        scrollPos,
+        $scrollContainer;
+
+    $scrollContainer = this.$('.flexContainer.scrollOverflowYHideX');
+    $scrollContainer.length && (scrollPos = $scrollContainer[0].scrollTop);
 
     loadTemplate('./js/templates/serverConnectModal.html', function(t) {
       self.$el.html(
@@ -98,6 +114,7 @@ module.exports = baseModal.extend({
       );
 
       baseModal.prototype.render.apply(self, arguments);
+      self.$('.flexContainer.scrollOverflowYHideX')[0].scrollTop = scrollPos;
     });
 
     return this;

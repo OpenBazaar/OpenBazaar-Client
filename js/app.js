@@ -54,22 +54,22 @@ window.mooMod = serverConfigMd;
 
 var setServerUrl;
 
-// (setServerUrl = function() {
-//   user.urlRoot = serverConfigMd.getServerBaseUrl() + "/settings";
-//   userProfile.urlRoot = serverConfigMd.getServerBaseUrl() + "/profile";
+(setServerUrl = function() {
+  user.urlRoot = serverConfigMd.getServerBaseUrl() + "/settings";
+  userProfile.urlRoot = serverConfigMd.getServerBaseUrl() + "/profile";
 
-//   console.log('some urls set:');
-//   console.log(user.urlRoot);
-//   console.log(userProfile.urlRoot);
-// })();
+  console.log('some urls set:');
+  console.log(user.urlRoot);
+  console.log(userProfile.urlRoot);
+})();
 
-serverConfigMd.on('sync', function(md) {
-  setServerUrl();
-});
+// serverConfigMd.on('sync', function(md) {
+//   setServerUrl();
+// });
 
-$.ajax({
-  beforeSend: function() { jqxhr.requestURL = "http://some/url"; },
-});
+// $.ajax({
+//   beforeSend: function() { jqxhr.requestURL = "http://some/url"; },
+// });
 
 // serverUrlLocal = localStorage.getItem("serverUrl") || "http://localhost:18469/api/v1/";
 
@@ -203,8 +203,8 @@ var loadProfile = function(landingRoute) {
               newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
               newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
+              location.hash = landingRoute;
               Backbone.history.start();
-              Backbone.history.navigate(landingRoute);
             });
 
             //every 15 minutes update the bitcoin price for the currently selected currency
@@ -299,6 +299,7 @@ launchOnboarding = function(creatingGuid) {
     console.log('onboarding is complete - hoo to the ray!');
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
+    console.log('guid hub is: ' + guid);
     loadProfile('#userPage/' + guid + '/store');       
   });  
 };
@@ -347,6 +348,12 @@ launchOnboarding = function(creatingGuid) {
     serverConnectModal = new ServerConnectModal({
       model: serverConfigMd
     });
+
+    serverConnectModal.on('connect', function() {
+      // serverConnectModal.remove();
+      startInitSequence();
+    });
+
     serverConnectModal.render()
       .open()
       .start();

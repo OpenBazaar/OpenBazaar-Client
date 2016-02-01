@@ -6,7 +6,8 @@ var Backbone = require('backbone'),
     messageModal = require('../utils/messageModal.js'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
-    languageListView = require('../views/languageListVw');
+    languageListView = require('../views/languageListVw'),
+    guidStillCreatingModal = require('../views/guidStillCreatingModal');
 
 module.exports = baseModal.extend({
   className: 'js-homeModal',
@@ -212,7 +213,9 @@ module.exports = baseModal.extend({
 
     if (guidCreation.state() == 'pending') {
       console.log('Guid is still creating, hang tight');
-      // todo: show waiting screen
+      this.guidStillCreatingModal && guidStillCreatingModal.remove();
+      this.guidStillCreatingModal = new guidStillCreatingModal();
+      this.guidStillCreatingModal.render().open();
     }
 
     guidCreation.done(function() {
@@ -225,7 +228,10 @@ module.exports = baseModal.extend({
 
       console.log('onboarding modal - guid creation failure');
     }).always(function() {
-      // todo: if waiting screen, hide
+      if (self.isRemoved()) return;
+
+      console.log('removing guid still creating modal');
+      this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
     });
   },
 
@@ -318,7 +324,7 @@ module.exports = baseModal.extend({
                   // Backbone.history.loadUrl(Backbone.history.fragment);
                   profile.fetch()
                     .done(function() {
-                      self.trigger('onboarding-complete', profile.get('guid'));
+                      self.trigger('onboarding-complete', profile.get('profile').guid);
                     });                  
                 }
               },
@@ -415,6 +421,7 @@ module.exports = baseModal.extend({
 
   remove: function() {
     this.$document.off('focus', this.docFocusHandler);
+    this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
     baseModal.prototype.remove.apply(this, arguments);
   }
 });
