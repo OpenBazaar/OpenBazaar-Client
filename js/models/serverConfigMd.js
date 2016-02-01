@@ -6,8 +6,8 @@ module.exports = Backbone.Model.extend({
   defaults: {
     'id': 1,
     'server_ip': 'localhost',
-    'rest_api_port': 18342,
-    'socket_port': 18342
+    'rest_api_port': 18469,
+    'socket_port': 18469
   },
 
   sync: localStorageSync.sync,
@@ -20,8 +20,42 @@ module.exports = Backbone.Model.extend({
     errObj[fieldName].push(error);
   },
 
+  parse: function(response) {
+    response = this.castIntegerFields(response);
+
+    Backbone.Model.prototype.parse.apply(this, arguments);
+  },
+
+  castIntegerFields: function(attrs) {
+    var parsed;
+
+    if (typeof attrs.rest_api_port !== undefined) {
+      parsed = parseInt(attrs.rest_api_port);
+      
+      if (isNaN(parsed)) {
+        delete attrs.rest_api_port;
+      } else {
+        attrs.rest_api_port = parsed;
+      }
+    }
+
+    if (typeof attrs.socket_port !== undefined) {
+      parsed = parseInt(attrs.socket_port);
+      
+      if (isNaN(parsed)) {
+        delete attrs.socket_port;
+      } else {
+        attrs.socket_port = parsed;
+      }
+    }
+
+    return attrs;
+  },
+
   validate: function(attrs, options) {
     var err = {};
+
+    attrs = this.castIntegerFields(attrs);
 
     if (is.empty(attrs.server_ip)) {
       this._addError(err, 'server_ip', 'Please provide a value.');

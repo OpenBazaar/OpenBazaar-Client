@@ -16,13 +16,27 @@
       <span class="textOpacity75 fontSize14 floatRight">
         <% if (ob.status == 'trying') { %>
           <!-- variablize the max attempts -->
-          <i class="ion-android-sync spinner"></i><%= polyglot.t('serverConnectModal.attempt') %> <%= ob.attempt %> <%= polyglot.t('of') %> 3
+          <i class="ion-android-sync spinner"></i>
+          <% if (ob.isLocal) { %>
+          <%= polyglot.t('serverConnectModal.attempt') %> <span class="attempt"></span> <%= polyglot.t('of') %> 3
+          <% } %>
+        <% } else if (ob.status === 'failed') { %>
+        <a class="js-retry"><%= polyglot.t('serverConnectModal.retry') %></a>
         <% } %>
       </span>
     </div>
     <div class="flexContainer scrollOverflowYHideX customThemeScrollbar" style="height: 272px">
       <div class="flexRow borderBottom custCol-border">
+        <% if (!ob.isLocal) { %>
+        <p class="margin0 padding015 marginBottom20">We are having difficulties establishing a connection with your server. The two most likely reasons are:</p>
+        <ol class="margin0 padding015 marginBottom20">
+          <li class="marginLeft20 marginBottom8">Your server is not running. If this is so, pleast start it and click Retry.</li>
+          <li class="marginLeft20">Your server is generating a guid. If this is the case, please monitor the logs, and when the process is complete, click retry.</li>
+        </ol>
+        <p class="margin0 padding015 marginBottom20">Alternatively, please feel free to specify a different server below.</p>
+        <% } else { %>
         <p class="margin0 padding2015"><%= polyglot.t('serverConnectModal.intro') %></p>
+        <% } %>
       </div>
         <form class="width100" name="serverConfigForm">
           <div class="flexCol-12 flex-border borderBottom">

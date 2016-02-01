@@ -41,17 +41,23 @@ var Polyglot = require('node-polyglot'),
     socketView = require('./views/socketVw'),
     cCode = "",
     // serverUrlLocal = "",
-    loadProfileCount = 1,
-    loadProfileCountdownInterval,
-    loadProfileCountdown = 5;
+    // // loadProfileCount = 1,
+    // // loadProfileCountdownInterval,
+    // loadProfileCountdown = 5,
+    $loadingModal = $('.js-loadingModal');
 
 var ServerConfigMd = require('./models/serverConfigMd');
-var serverConfigMd = new ServerConfigMd({ id: 1 });
-serverConfigMd.fetch();
-serverConfigMd.save({
-  'server_ip': 'localhost'
-});
+// TODO: what is wrong with the localStorage adapter??? shouldn't need
+// to manually provide the data to the model. All that should be needed
+// is an ID and then a subsequent fetch, but that doesn't return the data.
+// Investigate!
+var serverConfigMd = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1']) );
+// serverConfigMd.fetch();
 window.mooMod = serverConfigMd;
+
+$.get('http://localhost:18469/api/v1/profile');
+
+return;
 
 var setServerUrl;
 
@@ -69,6 +75,7 @@ var setServerUrl;
 
 serverConfigMd.on('sync', function(md) {
   setServerUrl();
+  startInitSequence();
 });
 
 // $.ajax({
@@ -187,10 +194,10 @@ var loadProfile = function(landingRoute) {
   userProfile.fetch({
     timeout: 4000,
     success: function (model, response) {
-      $('.js-loadingModal').addClass('hide');
+      // $('.js-loadingModal').addClass('hide');
       "use strict";
       //clear the interval
-      clearInterval(loadProfileCountdownInterval);
+      // clearInterval(loadProfileCountdownInterval);
       //make sure profile is not blank
       if (response.profile){
         setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
@@ -202,7 +209,7 @@ var loadProfile = function(landingRoute) {
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
-              $('.js-loadingMessageModal').addClass('hide');
+              $loadingModal.addClass('hide');
               newSocketView = new socketView({model: user});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
@@ -323,11 +330,11 @@ launchServerConnect = function() {
   serverConnectModal.on('connect', function() {
     serverConnectModal.remove();
     startInitSequence();
+    $loadingModal.removeClass('hide');
   });
 
-  serverConnectModal.render()
-    .open()
-    .start();
+  serverConnectModal.render().open();
+  serverConfigMd.isLocalServer() && serverConnectModal.start();
 };
 
 startLocalInitSequence = function() {

@@ -215,30 +215,66 @@ module.exports = baseModal.extend({
 
   settingsDone: function(e){
     var self = this,
-        guidCreation = this.options.guidCreationPromise;
+        serverConfig = this.options.serverConfig,
+        guidCreation;
 
-    if (guidCreation.state() == 'pending') {
-      console.log('Guid is still creating, hang tight');
-      this.guidStillCreatingModal && guidStillCreatingModal.remove();
-      this.guidStillCreatingModal = new guidStillCreatingModal();
-      this.guidStillCreatingModal.render().open();
+    if (serverConfig.isLocalServer()) {
+      guidCreation = this.options.guidCreationPromise;
+
+      if (guidCreation.state() == 'pending') {
+        console.log('Local server - Guid is still creating, hang tight');
+
+        this.guidStillCreatingModal && guidStillCreatingModal.remove();
+        this.guidStillCreatingModal = new guidStillCreatingModal();
+        this.guidStillCreatingModal.render().open();
+      }
+
+      guidCreation.done(function() {
+        if (self.isRemoved()) return;
+
+        console.log('Local server - onboarding modal - guid creation complete');
+        self._settingsDone(e);
+      }).fail(function() {
+        if (self.isRemoved()) return;
+        console.error('Server is down or guid creation failed. Please restart the app.')
+      }).always(function() {
+        if (self.isRemoved()) return;
+
+        console.log('Local server - removing guid still creating modal');
+        this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
+      });
+    } else {
+      isRemoteServerRunning(serverConfigMd.getServerBaseUrl() + '/profile').done(function() {
+        if (self.isRemoved()) return;
+
+        console.log('remote server - onboarding modal - guid creation complete before onboarding complete');
+        self._settingsDone(e);
+      }).fail(function() {
+        if (self.isRemoved()) return;
+
+        console.log('remote server - guid is still creating, hang tight');
+        self.guidStillCreatingModal && guidStillCreatingModal.remove();
+        self.guidStillCreatingModal = new guidStillCreatingModal();
+        self.guidStillCreatingModal.render().open();        
+      });
+
+      // we'll give the guid creation a few minutes to complete
+      isRemoteServerRunning(
+        serverConfigMd.getServerBaseUrl() + '/profile',
+        {
+          interval: 1000, // check every second
+          timeout: 1000 * 60 * 5, // for up to 5 minutes
+        }
+      ).done(function() {
+        if (self.isRemoved()) return;
+
+        console.log('remote server - onboarding modal - guid creation complete after onboarding complete');
+        self._settingsDone(e);
+      }).fail(function() {
+        if (self.isRemoved()) return;
+        console.error('Server is down or guid creation failed. Please restart the server and client.')
+      });
     }
-
-    guidCreation.done(function() {
-      if (self.isRemoved()) return;
-
-      console.log('onboarding modal - guid creation complete');
-      self._settingsDone(e);
-    }).fail(function() {
-      if (self.isRemoved()) return;
-
-      console.log('onboarding modal - guid creation failure');
-    }).always(function() {
-      if (self.isRemoved()) return;
-
-      console.log('removing guid still creating modal');
-      this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
-    });
   },
 
   _settingsDone: function(e){

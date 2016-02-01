@@ -4,6 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
     isLocalServerRunning = require('../utils/isLocalServerRunning'),    
+    isRemoteServerRunning = require('../utils/isRemoteServerRunning'),        
     serverConfigMd = require('../models/serverConfigMd'),
     baseModal = require('./baseModal'),
     messageModal = require('../utils/messageModal.js');
@@ -14,7 +15,8 @@ module.exports = baseModal.extend({
   events: {
     'click .js-save': 'saveForm',
     'click .js-restoreDefaults': 'restoreDefaults',
-    'change input': 'inputChange'
+    'keyup input': 'inputKeydown',
+    'click .js-retry': 'retry'
   },
 
   initialize: function(options) {
@@ -22,17 +24,25 @@ module.exports = baseModal.extend({
       throw new Error('Please provide a ServerConfigMd instance.');
     }
 
-    this._state = {
-      status: 'trying', // connected, failed
-      attempt: 1
-    };
-
     this.listenTo(this.model, 'invalid sync', function() {
       this.render();
     });
+
+    this._state = this.getInitialState();
   },
 
-  inputChange: function(e) {
+  getInitialState: function() {
+    var state = {};
+
+    state['attempt'] = 1;
+    state['status'] = this.model.isLocalServer() ?
+      'trying' : 'failed';
+    state['isLocal'] = this.model.isLocalServer();
+
+    return state;
+  },
+
+  inputKeydown: function(e) {
     this.model.set(e.target.name, e.target.value);
   },
 
@@ -54,36 +64,65 @@ module.exports = baseModal.extend({
   },
 
   setState: function(state) {
-    var newState =  __.extend({}, this._state, state);
+    var newState;
     
+    if (typeof state['attempt'] !== 'undefined') {
+      this.$attempt.text(state['attempt']);
+    }
+
+    newState =  __.extend({}, this._state, state);
+
     if (!__.isEqual(this._state, newState)) {
       this._state = newState;
-      this.render();
+
+      if (!(typeof state['attempt'] !== 'undefined' && Object.keys(state).length === 1)) {
+        // if the only new state is the attemp counter, no need to
+        // re-render since we manually updated that above.
+        this.render();
+      }
     }
+  },
+
+  retry: function() {
+    this.start();
   },
 
   start: function() {
     var self = this;
 
-    if (this._started) return this;
+    // if (this._started) return this;
+    this.serverRunning && this.serverRunning.cancel;
+    this.setState(
+      __.extend(this.getInitialState(), { status: 'trying' })
+    );
 
-    this.started = true;
-    this.serverRunning = isLocalServerRunning(
-      this.model.getServerBaseUrl() + '/profile',
-      this.model.getGuidCheckUrl(),
-      {
-        interval: 250,
-        maxAttempts: 24, // for 6 seconds    
-        onAttempt: __.bind(this.onConnectAttempt, this)
-      }
-    ).done(function() {
-      self.setState({ status: 'connected'});
-      this.serverRunning && this.serverRunning.cancel();
-      self.trigger('connect');
-    }).fail(function(status) {
-      if (status && status === 'canceled') return;
-      self.setState({ status: 'failed'});
-    });
+    if (this.model.isLocalServer()) {
+      this.serverRunning = isLocalServerRunning(
+        this.model.getServerBaseUrl() + '/profile',
+        this.model.getGuidCheckUrl(),
+        {
+          interval: 250,
+          // todo todo todo - make 24!!!!!
+          maxAttempts: 24, // for 6 seconds    
+          onAttempt: __.bind(this.onConnectAttempt, this)
+        }
+      ).done(function() {
+        self.setState({ status: 'connected'});
+        self.trigger('connect');
+      }).fail(function(status) {
+        if (status && status === 'canceled') return;
+        self.setState({ status: 'failed'});
+      });
+    } else {
+      this.serverRunning = isRemoteServerRunning(this.model.getServerBaseUrl() + '/profile')
+        .done(function() {
+          self.setState({ status: 'connected'});
+          self.trigger('connect');
+        }).fail(function(status) {
+          if (status && status === 'canceled') return;
+          self.setState({ status: 'failed'});
+        });
+    }
 
     return this;
   },
@@ -111,6 +150,7 @@ module.exports = baseModal.extend({
 
       baseModal.prototype.render.apply(self, arguments);
       self.$('.flexContainer.scrollOverflowYHideX')[0].scrollTop = scrollPos;
+      self.$attempt = self.$('.attempt').text(self._state.attempt);
     });
 
     return this;

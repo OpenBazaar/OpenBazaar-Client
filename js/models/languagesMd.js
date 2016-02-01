@@ -434,7 +434,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }
       },
       {
@@ -851,7 +852,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }
       },
       {
@@ -1276,7 +1278,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry" //notTranslated 
         }        
       },
       {
@@ -1705,7 +1708,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry" //notTranslated 
         }        
       },
       {
@@ -2135,7 +2139,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -2560,7 +2565,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -2985,7 +2991,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -3410,7 +3417,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -3839,7 +3847,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -4267,7 +4276,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -4694,7 +4704,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -5124,7 +5135,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }        
       },
       {
@@ -5538,7 +5550,8 @@ module.exports = Backbone.Model.extend({
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes" //notTranslated                    
+          saveChanges: "Save Changes", //notTranslated                    
+          retry: "Retry", //notTranslated 
         }       
       },
       {

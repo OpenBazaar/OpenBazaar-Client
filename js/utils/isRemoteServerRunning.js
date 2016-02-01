@@ -4,6 +4,7 @@
 module.exports = function(url, options) {
   var deferred = $.Deferred(),
       promise = deferred.promise(),
+      defaults,
       pingInterval,
       timesUp,
       request;
@@ -29,7 +30,7 @@ module.exports = function(url, options) {
 
   timesUp = setTimeout(function() {
     clearInterval(pingInterval);
-    promise.reject('timedout');
+    deferred.reject('timedout');
   }, options.timeout);
 
   promise.cancel = function() {
