@@ -107,6 +107,7 @@ module.exports = window.Backbone.Model.extend({
     response.status = this.status;
     response.bitcoinValidationRegex = this.bitcoinValidationRegex;
     response.transactionType = this.transactionType;
+    response.avatarURL = this.avatarURL;
 
     //convert the currency
     getBTPrice(response.vendor_offer.listing.item.price_per_unit.fiat.currency_code, function(btAve){
@@ -368,6 +369,7 @@ module.exports = window.Backbone.Model.extend({
     this.transactionType = options.transactionType;
     this.countries = new countriesMd();
     this.countryArray = this.countries.get('countries');
+    this.avatarURL = options.avatarURL;
   }
 
 });

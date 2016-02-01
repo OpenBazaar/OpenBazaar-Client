@@ -31,25 +31,35 @@ module.exports = baseVw.extend({
     'click .js-closeOrderForm': 'closeOrderForm',
     'click .js-showFundOrder': 'showFundOrder',
     'click .js-transactionPayCheck':'checkPayment',
-    'blur input': 'validateInput'
+    'click .js-startDispute': 'startDispute',
+    'click .js-confirmDispute': 'confirmDispute',
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput'
   },
 
   initialize: function (options) {
     "use strict";
-    var self = this;
+    var self = this,
+        avatarURL;
 
     this.orderID = options.orderID;
     this.status = options.status;
     this.transactionType = options.transactionType;
-    this.serverUrl = options.serverUrl;
     this.parentEl = options.parentEl;
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
-    this.pageState = options.state //state of the parent view
-    this.tabState = options.tabState //active tab
+    this.pageState = options.state; //state of the parent view
+    this.tabState = options.tabState ;//active tab
+    this.userModel = options.userModel;
+    this.serverUrl = this.userModel.get('serverUrl');
+    this.userProfile = options.userProfile;
     this.lastTab = "summary";
+
+    if(this.userProfile.get('avatar_hash')){
+      avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
+    }
 
     this.model = new orderModel({
       cCode: this.cCode,
@@ -57,7 +67,8 @@ module.exports = baseVw.extend({
       serverUrl: this.serverUrl,
       status: this.status,
       transactionType: this.transactionType,
-      bitcoinValidationRegex: this.bitcoinValidationRegex
+      bitcoinValidationRegex: this.bitcoinValidationRegex,
+      avatarURL: avatarURL
     });
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
@@ -87,6 +98,7 @@ module.exports = baseVw.extend({
 
   render: function () {
     "use strict";
+    console.log(this.model.attributes)
     var self = this;
     //console.log(response);
     $('.js-loadingModal').addClass("hide");
@@ -141,7 +153,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-main').addClass('hide');
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
-    this.$el.find('.js-' + state + 'Tab').addClass('active');
+    this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
 
     this.lastTab = this.state;
     this.state = state;
@@ -208,11 +220,16 @@ module.exports = baseVw.extend({
     completeData.id = this.orderID;
     this.$el.find('.js-transactionSpinner').removeClass('hide');
 
-    saveToAPI(targetForm, '', this.serverUrl + "complete_order", function(data){
-      self.status = 3;
-      self.tabState = "summary";
-      self.getData();
-    }, '', completeData);
+    saveToAPI(targetForm, '', this.serverUrl + "complete_order",
+        function(data){
+          self.status = 3;
+          self.tabState = "summary";
+          self.getData();
+        },
+        function(data){
+          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        },
+        completeData);
   },
 
   checkPayment: function(){
@@ -235,6 +252,26 @@ module.exports = baseVw.extend({
     "use strict";
     var tx = $(e.target).data('tx');
     clipboard.writeText(tx);
+  },
+
+  startDispute: function(){
+    "use strict";
+    this.setState("discussion");
+  },
+
+  confirmDispute: function(){
+    "use strict";
+    var self = this,
+        targetForm = this.$('#transactionDiscussionForm'),
+        discussionData = {};
+
+    discussionData.order_id = this.orderID;
+
+    saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
+      self.status = 4;
+      self.tabState = "summary";
+      self.getData();
+    }, '', discussionData);
   },
 
   closeOrderForm: function(e){

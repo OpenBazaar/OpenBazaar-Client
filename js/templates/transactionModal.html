@@ -424,6 +424,72 @@
 
         </div>
       </div>
+      <!-- only display moderator if one is assigned -->
+      <% if( ob.displayModerator) { %>
+      <div class="flexRow">
+        <div class="flexCol-8">
+          <div class="rowItem padding2015">
+            <div class="pad10left txt-unleaded">
+              <div class="marginTop12 marginBottom4 fontSize13">
+                <%= polyglot.t('ModeratedBy') %> <%- ob.displayModerator.name %>
+              </div>
+              <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+                <%= polyglot.t('transactions.ModerationFee') %><%- ob.displayModerator.fee %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flexCol-4 custCol-border">
+          <% if(ob.status == 2 || ob.status == 3){ %>
+          <% if(ob.transactionType == "purchase"){ %>
+          <div class="rowItem padding2015">
+            <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
+              <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+              <%= polyglot.t('transactions.DisputeTransaction') %>
+            </a>
+          </div>
+          <% } %>
+          <% } %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="js-main js-discussion">
+    <div class="flexRow scrollOverflowY" style="height: 225px;">
+      <div class="flexRow">
+        <div class="padding10 flexExpand">
+          <p><%= polyglot.t('transactions.DisputeInstructions') %></p>
+        </div>
+      </div>
+    </div>
+    <% console.log(ob.avatarURL) %>
+    <%- ob.avatarURL %>
+    <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright">
+      <div class="pad10right">
+        <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 borderRadiusBottom0"
+        <% if(ob.avatarURL) { %>
+        style="background-image: url(<%- ob.avatarURL %>), url(imgs/offlineUser.png);">
+        <% } else { %>
+        style="background-image: url(imgs/defaultUser.png);">
+        <% } %>
+        </div>
+      </div>
+      <form class="flexExpand" id="transactionDiscussionForm">
+        <textarea name="claim"
+                  rows="4"
+                  class=" custCol-text validatable"
+                  id="transactionDiscussionSendText"
+                  required placeholder="<%= polyglot.t('transactions.DisputeClaimPlaceholder') %>"></textarea>
+      </form>
+      <div class="pad10left">
+        <a class="btn btn-txt custCol-primary pull-right js-confirmDispute">
+          <!-- if chat doesn't exist yet -->
+          <%= polyglot.t('transactions.DisputeTransaction') %>
+          <!-- else show send button -->
+        </a>
+      </div>
     </div>
   </div>
 
@@ -683,7 +749,14 @@
             </div>
           </div>
           <div class="flexCol-8">
-            <textarea name="review" rows="3" maxlength="80" class="fieldItem-textarea custCol-text" id="inputReview" placeholder="<%= polyglot.t('transactions.ReviewPlaceHolder') %>"></textarea>
+            <textarea name="review"
+                      rows="3"
+                      maxlength="80"
+                      class="fieldItem-textarea custCol-text"
+                      id="inputReview"
+                      placeholder="<%= polyglot.t('transactions.ReviewPlaceHolder') %>"
+                      required>
+            </textarea>
           </div>
         </div>
 
