@@ -55,10 +55,6 @@ var serverConfigMd = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-
 // serverConfigMd.fetch();
 window.mooMod = serverConfigMd;
 
-$.get('http://localhost:18469/api/v1/profile');
-
-return;
-
 var setServerUrl;
 
 (setServerUrl = function() {
@@ -210,7 +206,7 @@ var loadProfile = function(landingRoute) {
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
               $loadingModal.addClass('hide');
-              newSocketView = new socketView({model: user});
+              newSocketView = new socketView({model: serverConfigMd});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
               newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
@@ -296,7 +292,7 @@ launchOnboarding = function(creatingGuid) {
     serverConfig: serverConfigMd
   };
 
-  if (creatingGuid) options[guidCreationPromise] = creatingGuid;
+  if (creatingGuid) options['guidCreationPromise'] = creatingGuid;
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal(options);
   onboardingModal.render().open();

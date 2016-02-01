@@ -92,6 +92,10 @@ module.exports = Backbone.Model.extend({
     return 'http://' + this.get('server_ip') + ':18470/api/v1/guid_generation';
   },
 
+  getWebSocketAddress: function() {
+    return 'ws://' + this.get('server_ip') + ':' + this.get('socket_port');
+  },
+
   isLocalServer: function() {
     var ip = this.get('server_ip');
 
