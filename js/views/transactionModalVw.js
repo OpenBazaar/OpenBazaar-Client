@@ -5,6 +5,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     orderModel = require('../models/orderMd'),
+    getBTPrice = require('../utils/getBitcoinPrice'),
     baseVw = require('./baseVw'),
     qr = require('qr-encode'),
     messageModal = require('../utils/messageModal'),
@@ -59,6 +60,7 @@ module.exports = baseVw.extend({
       bitcoinValidationRegex: this.bitcoinValidationRegex
     });
     this.model.urlRoot = options.serverUrl + "get_order";
+    this.listenTo(this.model, 'change:priceSet', this.render);
     this.getData();
   },
 
@@ -66,10 +68,12 @@ module.exports = baseVw.extend({
     var self = this;
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
-      timeout: 4000,
+      //timeout: 4000,
       dataType: 'json',
       success: function (model, response, options) {
-        self.render(response);
+        console.log(model.attributes)
+        self.model.updateAttributes();
+        //self.render(response);
       },
       error: function (jqXHR, status, errorThrown) {
         messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
@@ -81,17 +85,17 @@ module.exports = baseVw.extend({
     });
   },
 
-  render: function (response) {
+  render: function () {
     "use strict";
     var self = this;
-    response.status = this.status;
     //console.log(response);
     $('.js-loadingModal').addClass("hide");
+    console.log(self.model.toJSON())
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
-      self.$el.html(loadedTemplate(response));
+      self.$el.html(loadedTemplate(self.model.toJSON()));
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
