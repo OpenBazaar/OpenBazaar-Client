@@ -68,10 +68,6 @@ serverConfigMd = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'])
   user.urlRoot = baseServerUrl + "/settings";
   user.set('serverUrl', baseServerUrl + '/');
   userProfile.urlRoot = baseServerUrl + "/profile";
-
-  console.log('some urls set:');
-  console.log(user.urlRoot);
-  console.log(userProfile.urlRoot);
 })();
 
 serverConfigMd.on('sync', function(md) {
@@ -255,7 +251,6 @@ startLocalInitSequence = function() {
     }
   ).done(function(creatingGuid, profileData) {
     console.log('server is running');
-    window.server = arguments;
 
     // server is running
     if (creatingGuid) {
@@ -264,7 +259,7 @@ startLocalInitSequence = function() {
       launchOnboarding(creatingGuid);
     } else {
       // Guid had previously been generated.
-      if (profileData.profile.moderation_fee) {
+      if (__.isEmpty(profileData)) {
         // onboarding complete
         loadProfile();
 
