@@ -61,6 +61,9 @@ var Polyglot = require('node-polyglot'),
 // Investigate!
 serverConfigMd = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
 // serverConfigMd.fetch();
+if (!localStorage['_serverConfig-1']) {
+  serverConfigMd.save();
+}
 
 (setServerUrl = function() {
   var baseServerUrl = serverConfigMd.getServerBaseUrl();
