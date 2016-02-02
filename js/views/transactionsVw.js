@@ -31,6 +31,7 @@ module.exports = baseVw.extend({
        userModel
        userProfile
        state (from router)
+       socketView (from router)
      */
     var self = this,
         profile = options.userProfile.get('profile'),
@@ -38,11 +39,12 @@ module.exports = baseVw.extend({
 
     this.options = options;
     this.state = options.state || "purchases";
-    this.userModel = this.options.userModel;
-    this.userProfile = this.options.userProfile;
+    this.userModel = options.userModel;
+    this.userProfile = options.userProfile;
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
     this.model.set("page", profile);
+    this.socketView = options.socketView;
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
     this.cCode = options.userModel.get('currency_code');
@@ -272,7 +274,8 @@ module.exports = baseVw.extend({
       bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
       transactionType: options.transactionType,
       userModel: this.userModel,
-      userProfile: this.userProfile
+      userProfile: this.userProfile,
+      socketView: this.socketView
     });
     this.listenTo(orderModalView, "closed", function(){
       this.getData();

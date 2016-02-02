@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -7,8 +9,10 @@ var __ = require('underscore'),
     orderModel = require('../models/orderMd'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     baseVw = require('./baseVw'),
+    chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
     messageModal = require('../utils/messageModal'),
+    discussionCl = require('../collections/discussionCl'),
     clipboard = require('clipboard');
 
 module.exports = baseVw.extend({
@@ -33,14 +37,14 @@ module.exports = baseVw.extend({
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
     'click .js-confirmDispute': 'confirmDispute',
+    'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
 
   initialize: function (options) {
-    "use strict";
-    var self = this,
-        avatarURL;
+    
+    var self = this;
 
     this.orderID = options.orderID;
     this.status = options.status;
@@ -52,14 +56,16 @@ module.exports = baseVw.extend({
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.pageState = options.state; //state of the parent view
     this.tabState = options.tabState ;//active tab
+    this.socketView = options.socketView;
     this.userModel = options.userModel;
     this.serverUrl = this.userModel.get('serverUrl');
     this.userProfile = options.userProfile;
     this.lastTab = "summary";
 
     if(this.userProfile.get('avatar_hash')){
-      avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
+      this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
     }
+
 
     this.model = new orderModel({
       cCode: this.cCode,
@@ -68,7 +74,7 @@ module.exports = baseVw.extend({
       status: this.status,
       transactionType: this.transactionType,
       bitcoinValidationRegex: this.bitcoinValidationRegex,
-      avatarURL: avatarURL
+      avatarURL: this.avatarURL
     });
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
@@ -95,7 +101,6 @@ module.exports = baseVw.extend({
   },
 
   render: function () {
-    "use strict";
     var self = this;
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
@@ -117,16 +122,16 @@ module.exports = baseVw.extend({
   },
 
   handleSocketMessage: function(response) {
-    "use strict";
     var data = JSON.parse(response.data);
     if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
       this.status = 1;
       this.getData();
+    } else if(data.message && data.subject == this.orderID){
+      this.addMessage(data.message);
     }
   },
 
   showPayment: function(){
-    "use strict";
     var totalBTCPrice = 0,
         payHREF,
         dataURI;
@@ -140,7 +145,6 @@ module.exports = baseVw.extend({
   },
 
   setState: function(state){
-    "use strict";
     if(!state){
       state = "summary";
     }
@@ -154,43 +158,36 @@ module.exports = baseVw.extend({
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   clickSummaryTab: function(){
-    "use strict";
     this.setState("summary");
   },
 
   clickShippingTab: function(){
-    "use strict";
     this.setState("shipping");
   },
 
   clickFundsTab: function(){
-    "use strict";
     this.setState("funds");
   },
 
   clickDiscussionTab: function(){
-    "use strict";
     this.setState("discussion");
+    this.getDiscussion();
   },
 
   showConfirmForm: function(){
-    "use strict";
     this.setState("confirm");
   },
 
   showCompleteForm: function(){
-    "use strict";
     this.setState("complete");
   },
 
   confirmOrder: function(e){
-    "use strict";
     var self = this,
         targetForm = this.$el.find('#transactionConfirmForm'),
         confirmData = {};
@@ -206,7 +203,6 @@ module.exports = baseVw.extend({
   },
 
   completeOrder: function(e){
-    "use strict";
     var self = this,
         targetForm = this.$el.find('#transactionCompleteForm'),
         completeData = {};
@@ -227,7 +223,6 @@ module.exports = baseVw.extend({
   },
 
   checkPayment: function(){
-    "use strict";
     var self = this,
         formData = new FormData();
 
@@ -241,20 +236,96 @@ module.exports = baseVw.extend({
       dataType: "json"
     });
   },
+  
+  getDiscussion: function(){
+    var self = this;
+    this.discussionCol = new discussionCl();
+    this.discussionCol.url = this.serverUrl + "get_dispute_messages";
+
+    this.discussionCol.fetch({
+      data: $.param({'order_id': self.orderID}),
+      timeout: 4000,
+      dataType: 'json',
+      reset: true,
+      success: function (collection, response, options) {
+        console.log(collection)
+        console.log(response)
+        self.addAllDiscussionMessages();
+      },
+      error: function (jqXHR, status, errorThrown) {
+        messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+  },
+
+  addDiscussionMessage: function(message){
+    var avatarURL = message.outgoing ? this.serverUrl + "get_image?hash=" + message.avatar_hash + "&guid=" + message.guid : this.avatarURL;
+    message.set('avatarURL', avatarURL);
+    console.log(message.get('message'));
+    var discussionMessage = new chatMessageView({
+      model: message
+    });
+    this.$('.js-discussionWrapper').prepend(discussionMessage.el);
+  },
+
+  addAllDiscussionMessages: function(){
+    var self = this;
+    this.$('.js-discussionWrapper').html('');
+    console.log(this.discussionCol)
+    this.discussionCol.each(function(model, i){
+      console.log(i)
+      self.addDiscussionMessage(model);
+    });
+    if(this.discussionCol.length > 0){
+      this.$('.js-discussionNotStarted').addClass('hide');
+      this.$('.js-discussionStarted').removeClass('hide');
+    }
+  },
+
+  sendDiscussionMessageClick: function(){
+    this.sendDiscussionMessage(this.model.get('vendor_offer').listing.id.guid);
+    this.sendDiscussionMessage(this.model.get('displayModerator').guid);
+  },
+
+  sendDiscussionMessage: function(guid){
+    var messageInput = this.$('#transactionDiscussionSendText');
+    var messageText = messageInput.val();
+    if (messageText) {
+      var socketMessageId = Math.random().toString(36).slice(2);
+
+      var chatMessage = {
+        "request": {
+          "api": "v1",
+          "id": socketMessageId,
+          "command": "send_message",
+          "guid": guid,
+          "handle": "",
+          "message": messageText,
+          "subject": this.orderID,
+          "message_type": "DISPUTE",
+          "recipient_key": this.model.get('vendor_offer').listing.id.pubkeys.encryption
+        }
+      };
+      this.socketView.sendMessage(JSON.stringify(chatMessage));
+      messageInput.val('');
+      this.getDiscussion();
+    }
+  },
 
   copyTx: function(e){
-    "use strict";
+    
     var tx = $(e.target).data('tx');
     clipboard.writeText(tx);
   },
 
   startDispute: function(){
-    "use strict";
     this.setState("discussion");
   },
 
   confirmDispute: function(){
-    "use strict";
     var self = this,
         targetForm = this.$('#transactionDiscussionForm'),
         discussionData = {};
@@ -269,12 +340,10 @@ module.exports = baseVw.extend({
   },
 
   closeOrderForm: function(e){
-    "use strict";
     this.setState(this.lastTab);
   },
 
   blockClicks: function(e) {
-    "use strict";
     e.stopPropagation();
   },
 

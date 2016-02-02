@@ -10,8 +10,7 @@ module.exports = Backbone.View.extend({
   className: "chatMessage flexRow",
 
   events: {
-    'click .js-avatar': 'avatarClick',
-    'click .js-username': 'avatarClick'
+    'click .js-chatMessageAvatar': 'avatarClick'
   },
 
   initialize: function(){
@@ -44,11 +43,12 @@ module.exports = Backbone.View.extend({
   },
 
   avatarClick: function(){
-    var targ = $('.js-navNotificationsMenu');
-    targ.addClass('hide');
-    $('#overlay').addClass('hide');
-    Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
-
+    if(this.model.get('outgoing') == false) {
+      var targ = $('.js-navNotificationsMenu');
+      targ.addClass('hide');
+      $('#overlay').addClass('hide');
+      Backbone.history.navigate('#userPage/' + this.model.get('guid') + '/store', {trigger: true});
+    }
   },
 
   close: function(){

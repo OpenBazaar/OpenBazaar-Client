@@ -16,7 +16,8 @@ module.exports = function (currency, callback) {
     var callBlockchain = function () {
         $.ajax({
             method: "GET",
-            url: "https://blockchain.info/ticker"
+            url: "https://blockchain.info/ticker",
+            timeOut: 4000
         })
             .done(function (response) {
                 var BlockchainCurrencies = {};
@@ -38,7 +39,8 @@ module.exports = function (currency, callback) {
     var callCoinkite = function () {
         $.ajax({
             method: "GET",
-            url: "https://api.coinkite.com/public/rates"
+            url: "https://api.coinkite.com/public/rates",
+            timeOut: 4000
         })
             .done(function (response) {
                 var CoinkiteCurrencies = {};
@@ -61,7 +63,8 @@ module.exports = function (currency, callback) {
     var callBitcoinAvg = function () {
         $.ajax({
             method: "GET",
-            url: "https://api.bitcoinaverage.com/all"
+            url: "https://api.bitcoinaverage.com/all",
+            timeOut: 4000
         })
             .done(function (response) {
                 var BitcoinAvgCurrencies = {};
@@ -83,7 +86,8 @@ module.exports = function (currency, callback) {
     var callBitcoinCharts = function () {
         $.ajax({
             method: "GET",
-            url: "http://api.bitcoincharts.com/v1/weighted_prices.json"
+            url: "http://api.bitcoincharts.com/v1/weighted_prices.json",
+            timeOut: 4000
         })
             .done(function (response) {
                 response = JSON.parse(response);

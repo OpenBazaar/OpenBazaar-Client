@@ -75,11 +75,13 @@
       <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Funds') %>
     </a>
+    <% if( ob.displayModerator) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-discussionTab paddingRight18" data-tab="discussion">
       <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Discussion') %>
       <span class="pill fontSize12 textOpacity75 marginLeft2 js-discussionCount">0</span>
     </a>
+    <% } %>
   </div>
 
   <div class="js-main js-summary">
@@ -458,13 +460,12 @@
 
   <div class="js-main js-discussion">
     <div class="flexRow scrollOverflowY" style="height: 225px;">
-      <div class="flexRow">
-        <div class="padding10 flexExpand">
+      <div class="flexRow js-discussionWrapper">
+        <div class="padding10 flexExpand js-discussionNotStarted">
           <p><%= polyglot.t('transactions.DisputeInstructions') %></p>
         </div>
       </div>
     </div>
-    <%- ob.avatarURL %>
     <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright">
       <div class="pad10right">
         <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 borderRadiusBottom0"
@@ -480,13 +481,15 @@
                   rows="4"
                   class=" custCol-text validatable"
                   id="transactionDiscussionSendText"
-                  required placeholder="<%= polyglot.t('transactions.DisputeClaimPlaceholder') %>"></textarea>
+                  required
+                  placeholder="<%= polyglot.t('transactions.sendMessagePlaceholder') %>"></textarea>
       </form>
       <div class="pad10left">
-        <a class="btn btn-txt custCol-primary pull-right js-confirmDispute">
-          <!-- if chat doesn't exist yet -->
+        <a class="btn btn-txt custCol-primary pull-right js-confirmDispute js-discussionNotStarted">
           <%= polyglot.t('transactions.DisputeTransaction') %>
-          <!-- else show send button -->
+        </a>
+        <a class="btn btn-txt custCol-primary pull-right js-sendDiscussionMessage js-discussionStarted hide">
+          <%= polyglot.t('transactions.SendMessage') %>
         </a>
       </div>
     </div>
