@@ -48,7 +48,6 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
-    this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.subViews = [];
     this.languages = new languagesModel();
 
@@ -59,7 +58,7 @@ module.exports = Backbone.View.extend({
     this.socketView.getNotifications(this.socketNotificationID);
 
     this.listenTo(window.obEventBus, "updateProfile", function(response){
-      this.refreshProfile();
+      this.userProfile.fetch();
     });
     this.listenTo(window.obEventBus, "updateUserModel", function(response){
       this.model.fetch();
@@ -160,9 +159,8 @@ module.exports = Backbone.View.extend({
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
-      self.listenTo(window.obEventBus, "setAddressBar", function(options){
-        var text = options.handle || options.addressText;
-        self.addressInput.val(text);
+      self.listenTo(window.obEventBus, "setAddressBar", function(setText){
+        self.addressInput.val(setText);
         self.closeStatusBar();
       });
 
@@ -407,7 +405,7 @@ module.exports = Backbone.View.extend({
     if(addressTextArray[0].charAt(0) == "@"){
       // user entered a handle
       handle = addressTextArray[0].replace('@', '');
-      this.processHandle(handle, state, itemHash);
+      this.processHandle(handle);
     } else if(!addressTextArray[0].length){
       // user trying to go back to discover
       Backbone.history.navigate('#home', {trigger:true});
@@ -424,7 +422,7 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  processHandle: function(handle, state, itemHash){
+  processHandle: function(handle){
     "use strict";
     if(handle){
       $.ajax({
@@ -435,8 +433,7 @@ module.exports = Backbone.View.extend({
           var account = resolverData[handle].profile.account.filter(function (accountObject) {
             return accountObject.service == "openbazaar";
           });
-          console.log('#userPage/' + account[0].identifier + state + itemHash);
-          Backbone.history.navigate('#userPage/' + account[0].identifier + state + itemHash, {trigger: true});
+          Backbone.history.navigate('#userPage/' + account[0].identifier, {trigger: true});
         } else {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
         }

@@ -2148,7 +2148,8 @@ module.exports = Backbone.Model.extend({
           total: "Total"
         },
         chat: {
-          noSearchResultsFound: "Aucun résultat trouvé"
+<<<<<<< HEAD
+          noSearchResultsFound: "No results found" //notTranslated
         },
         serverConnectModal: {
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
@@ -2165,6 +2166,9 @@ module.exports = Backbone.Model.extend({
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
           retry: "Retry", //notTranslated 
+=======
+          noSearchResultsFound: "Aucun résultat trouvé"
+>>>>>>> upstream/master
         }        
       },
       {

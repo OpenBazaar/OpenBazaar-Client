@@ -106,6 +106,16 @@ if(platform === "linux") {
   $("body").css("zoom", 1 / scaleFactor);
 }
 
+//open external links in a browser, not the app
+$('body').on('click', '.js-externalLink', function(e){
+  e.preventDefault();
+  var extUrl = $(this).attr('href');
+  if (!/^https?:\/\//i.test(extUrl)) {
+    extUrl = 'http://' + extUrl;
+  }
+  require("shell").openExternal(extUrl);
+});
+
 //record changes to the app state
 $(window).bind('hashchange', function(){
   "use strict";

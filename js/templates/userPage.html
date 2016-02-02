@@ -55,7 +55,6 @@
       <div class="pull-left">
         <div class="vCentered marginLeft82">
           <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce textShadow"><%- ob.page.profile.name %></h1>
-          <div class="floatLeft marginLeft6 marginTop6 colorWhiteForce textShadow"><%- ob.page.profile.handle %></div>
         </div>
       </div>
     </div>
@@ -84,21 +83,25 @@
           <div class="pad15 push-down5 noOverflow">
             <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%- ob.page.profile.name %></span>
             <br />
-            <span class="textSize16px colorWhiteForce"><%- ob.page.profile.handle %></span>
+            <span class="textSize16px colorWhiteForce">
+            <% if(ob.page.profile.handle) { %><%- ob.page.profile.handle %><% }else{ %><%- ob.page.profile.guid %><% } %>
+            </span>
           </div>
         </div>
       </div>
     </div>
 
     <div class="bar navBar barFlush user-page-navigation-buttons positionBottom backgroundTransparent width950">
-      <div class="navEnd pad15">
-        <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
-          <a class="btn btn-txt custCol-primary js-moderatorSettings">
-            <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
-            <span class="js-userPageEditModerator <% if(!ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('EditModerator') %></span>
-            <span class="js-userPageBecomeModerator <% if(ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('BecomeModerator') %></span>
-          </a>
-        </div>
+<!--       <div class="navMoreButtons">
+        <ul class="js-notOwnPageButtons">  
+          <li>Block</li>
+        </ul>
+        <ul class="js-pageButtons ">
+          <li class="js-userPageBecomeModerator <% if(!ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('BecomeModerator') %></li>
+          <li class="js-userPageEditModerator <% if(ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('EditModerator') %></li>
+        </ul>
+      </div> -->
+      <div class="navEnd pad10">
         <div class="ctrlGroup hide js-pageButtons js-userPageControls zIndex4">
           <a class="btn btn-txt custCol-primary js-sellItem">
             <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
@@ -136,6 +139,25 @@
             <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('Edit') %>
           </a>
+        </div>
+        <div class="ctrlGroup hide js-extraButtonsNotOwnPage js-userPageControls zIndex4">
+          <a class="btn btn-txt custCol-primary js-block">
+            <span class="ion-sad fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Block') %>
+          </a>
+        </div>
+        <div class="ctrlGroup hide js-extraButtonsOwnPage js-userPageControls zIndex4">
+          <a class="btn btn-txt custCol-primary js-moderatorSettings">
+            <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
+            <span class="js-userPageEditModerator <% if(!ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('EditModerator') %></span>
+            <span class="js-userPageBecomeModerator <% if(ob.page.profile.moderator){ %> hide <% } %>"><%= polyglot.t('BecomeModerator') %></span>
+          </a>
+        </div>
+        <div class="ctrlGroup hide js-pageButtons js-userPageControls">
+          <a class="btn btn-txt custCol-primary js-moreButtonsOwnPage width34 lineHeight32 padding0">...</a>
+        </div>
+        <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
+          <a class="btn btn-txt custCol-primary js-moreButtonsNotOwnPage width34 lineHeight32 padding0">...</a>
         </div>
         <div class="ctrlGroup hide js-itemButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary confirmable js-deleteItem">
@@ -175,7 +197,7 @@
     </div>
   </div>
 
-  <div class="bar navBar barFlush user-page-navigation custCol-secondary height55">
+  <div class="bar navBar barFlush user-page-navigation custCol-secondary height55 js-userPageTabs">
     <a class="btn btn-bar btn-tab custCol-secondary js-aboutTab js-tab">
       <span class="ion-ios-book fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('About') %>
@@ -207,7 +229,7 @@
     </div>
     <% } %>
   </div>
-  <div class="userPage-subViews custCol-primary minHeight650">
+  <div class="userPage-subViews custCol-primary minHeight650 js-userPageSubViews">
     <div class="flexContainer flex-border custCol-primary hide js-about js-tabTarg minHeight650">
       <div class="flexRow minHeight650">
         <div class="flexCol-8 custCol-border borderBottom0">
@@ -307,10 +329,50 @@
                     </div>
                   </a>
                 <%}%>
+                <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
+                <div>
+                  <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
+                  <%- ob.page.profile.social_accounts.twitter.username %>
+                  <%}else{%>
+                  <%= polyglot.t('NotProvided') %>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow custCol-border">
+              <div class="rowItem positionWrapper">
+                <% if(ob.ownPage) { %>
+                  <a href="#settings/page" class="userPageEditBtn">
+                    <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                      <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('Edit') %>
+                    </div>
+                  </a>
+                <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
                   <%- ob.page.profile.social_accounts.instagram.username %>
+                  <%}else{%>
+                  <%= polyglot.t('NotProvided') %>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow custCol-border">
+              <div class="rowItem positionWrapper">
+                <% if(ob.ownPage) { %>
+                <a href="#settings/page" class="userPageEditBtn">
+                  <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
+                    <span class="ion-edit fontSize10 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('Edit') %>
+                  </div>
+                </a>
+                <%}%>
+                <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
+                <div>
+                  <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
+                  <%- ob.page.profile.social_accounts.twitter.username %>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>

@@ -1,7 +1,7 @@
 <!-- modal container created by view-->
 <div class="modal-child modal-childMain custCol-primary">
   <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModal">
-    <h2 class="ion-android-close"></h2>
+    <h2 class="ion-android-close clickable"></h2>
   </div>
   <div class="modal-hero js-transactionHero shadow-inner1-light"
     <% if(ob.vendor_offer.listing.item.image_hashes){ %>
@@ -43,7 +43,11 @@
     <div class="positionBottom padding2015 width100">
       <a class="btn btn-txt custCol-secondary pull-right js-showConfirmForm">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-        <%= polyglot.t('transactions.ConfirmOrder') %>
+        <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
+          <%= polyglot.t('transactions.ConfirmOrder') %>
+        <% } else { %>
+          <%= polyglot.t('transactions.MarkAsShipped') %>
+        <% } %>         
       </a>
     </div>
     <% } %>
@@ -57,12 +61,25 @@
   <% } %>
   </div>
   <div class="bar navBar barFlush custCol-secondary height55 clearFix">
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-summaryTab active" data-tab="summary"><%= polyglot.t('Summary') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-summaryTab active" data-tab="summary">
+      <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Summary') %>
+    </a>
     <% if(ob.buyer_order.order.shipping) { %>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-shippingTab" data-tab="shipping"><%= polyglot.t('Shipping') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-shippingTab" data-tab="shipping">
+      <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Shipping') %>
+    </a>
     <% } %>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-fundsTab" data-tab="funds"><%= polyglot.t('Funds') %></a>
-    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-discussionTab" data-tab="discussion"><%= polyglot.t('Discussion') %></a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-fundsTab" data-tab="funds">
+      <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Funds') %>
+    </a>
+    <a class="btn btn-bar btn-tab custCol-secondary js-tab js-discussionTab paddingRight18" data-tab="discussion">
+      <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('Discussion') %>
+      <span class="pill fontSize12 textOpacity75 marginLeft2 js-discussionCount">0</span>
+    </a>
   </div>
 
   <div class="js-main js-summary">
@@ -101,7 +118,7 @@
             <div class="pad10left txt-unleaded">
               <div class="marginTop12 marginBottom4 fontSize13">
                 <% if(ob.displayUnitPrice){ %>
-                <strong><%- ob.displayUnitPrice %> <span class="noWrap">(<%- ob.displayUnitPriceBTC.toFixed(4) %> BTC)</span></strong>
+                <strong><span class="noWrap"><%- ob.displayUnitPriceBTC.toFixed(4) %> BTC</span> (<%- ob.displayUnitPrice %>)</strong>
                 <% } else if(ob.displayUnitPriceBTC){ %>
                 <strong><%- ob.displayUnitPriceBTC.toFixed(6) %> BTC</strong>
                 <% } %>
@@ -307,7 +324,7 @@
             <% if( ob.displayModerator) { %>
               <%= polyglot.t('ModeratedTransaction') %>:
               <% if(ob.displayTotalPrice){ %>
-              <strong><%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+              <strong><span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
               <% } else if(ob.buyer_order.order.payment.amount){ %>
               <strong><%- ob.buyer_order.order.payment.amount %> BTC</strong>
               <% } else { %>
@@ -340,7 +357,7 @@
           </div>
           <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
             <% if(ob.displayTotalPrice){ %>
-            <strong>+<%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+            <strong>+<span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
             <% } else if(ob.buyer_order.order.payment.amount){ %>
             <strong>+<%- ob.buyer_order.order.payment.amount %> BTC</strong>
             <% } else { %>
@@ -357,7 +374,7 @@
                 </a>
               </div>
               <div>
-                <a class="js-copyIncommingTx" data-tx=<%- ob.bitcoin_txs[i].txid %>">
+                <a class="js-copyIncommingTx" data-tx="<%- ob.bitcoin_txs[i].txid %>">
                   <i class="ion-clipboard"></i> <%= polyglot.t('transactions.copyTxid') %>
                 </a>
               </div>
@@ -380,7 +397,7 @@
           </div>
           <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
             <% if(ob.displayTotalPrice){ %>
-            <strong>-<%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+            <strong>-<span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
             <% } else if(ob.buyer_order.order.payment.amount){ %>
             <strong>-<%- ob.buyer_order.order.payment.amount %> BTC</strong>
             <% } else { %>

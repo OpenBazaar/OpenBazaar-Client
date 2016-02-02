@@ -40,7 +40,10 @@
     </a>
   <% } %>
   <% if(ob.moderator) { %>
-    <a href="#transactions/cases"><%= polyglot.t('nav.cases') %></a>
+    <a href="#transactions/cases">
+      <span class="ion-briefcase fontSize11 marginRight2 textOpacity1"></span>
+      <%= polyglot.t('nav.cases') %>
+    </a>
   <% } %>
   <hr/>
   <a href="#settings">
@@ -426,11 +429,6 @@
               <span class="textOpacity75 fontSize14 floatRight">6 <%= polyglot.t('of') %> 10</span>
             </div>
             <div class="flexContainer flex-border homeModal-settings homeModal-settings-noSearch custCol-primary custCol-text">
-              <div class="flexRow">
-                <div class="txtFieldWrapper txtFieldWrapper-bar hide">
-                  <input type="text" class="txtField txtField-bar js-homeModal-handleInput custCol-text" placeholder="Choose Handle" />
-                </div>
-              </div>
               <div>
                 <div class="flexRow marginTop1">
                   <div class="flexRow borderBottom custCol-border">
@@ -445,22 +443,6 @@
                              type="text"
                              class="fieldItem custCol-text"
                              placeholder="<%= polyglot.t('YourName') %>"
-                             required>
-                    </div>
-                  </div>
-                  <div class="flexRow borderBottom custCol-border">
-                    <div class="flexCol-3 borderRight custCol-border">
-                      <label class="fieldItem" for="storeHandleInput">
-                        <%= polyglot.t('onboarding.handle') %>
-                      </label>
-                    </div>
-                    <div class="flexCol-9">
-                      <input name="handle"
-                             id="storeHandleInput"
-                             type="text"
-                             class="fieldItem custCol-text"
-                             placeholder="<%= polyglot.t('onboarding.chooseHandle') %> (@joe123)"
-                             pattern="@[a-zA-Z0-9]+"
                              required>
                     </div>
                   </div>
