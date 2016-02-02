@@ -15,7 +15,7 @@ module.exports = baseModal.extend({
   events: {
     'click .js-save': 'saveForm',
     'click .js-restoreDefaults': 'restoreDefaults',
-    'keyup input': 'inputKeydown',
+    'input input': 'inputEntered',
     'click .js-retry': 'retry'
   },
 
@@ -42,7 +42,7 @@ module.exports = baseModal.extend({
     return state;
   },
 
-  inputKeydown: function(e) {
+  inputEntered: function(e) {
     this.model.set(e.target.name, e.target.value);
   },
 
@@ -91,7 +91,7 @@ module.exports = baseModal.extend({
     var self = this;
 
     // if (this._started) return this;
-    this.serverRunning && this.serverRunning.cancel;
+    this.serverRunning && this.serverRunning.cancel();
     this.setState(
       __.extend(this.getInitialState(), { status: 'trying' })
     );
@@ -140,6 +140,7 @@ module.exports = baseModal.extend({
         scrollPos,
         $scrollContainer;
 
+    // todo: also restore focused element
     $scrollContainer = this.$('.flexContainer.scrollOverflowYHideX');
     $scrollContainer.length && (scrollPos = $scrollContainer[0].scrollTop);
 
