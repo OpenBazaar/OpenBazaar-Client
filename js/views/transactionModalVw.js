@@ -61,6 +61,7 @@ module.exports = baseVw.extend({
     this.serverUrl = this.userModel.get('serverUrl');
     this.userProfile = options.userProfile;
     this.lastTab = "summary";
+    this.discussionCount = 0;
 
     if(this.userProfile.get('avatar_hash')){
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
@@ -118,6 +119,8 @@ module.exports = baseVw.extend({
       self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
         self.handleSocketMessage(response);
       });
+      self.getDiscussion();
+      self.discussionScroller = self.$('.js-discussionScroller');
     });
   },
 
@@ -153,6 +156,10 @@ module.exports = baseVw.extend({
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
 
+    if(state == "discussion"){
+      this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
+    }
+
     this.lastTab = this.state;
     this.state = state;
   },
@@ -176,7 +183,6 @@ module.exports = baseVw.extend({
 
   clickDiscussionTab: function(){
     this.setState("discussion");
-    this.getDiscussion();
   },
 
   showConfirmForm: function(){
@@ -239,6 +245,7 @@ module.exports = baseVw.extend({
   
   getDiscussion: function(){
     var self = this;
+    this.discussionCount = 0;
     this.discussionCol = new discussionCl();
     this.discussionCol.url = this.serverUrl + "get_dispute_messages";
 
@@ -262,13 +269,18 @@ module.exports = baseVw.extend({
   },
 
   addDiscussionMessage: function(message){
-    var avatarURL = message.outgoing ? this.serverUrl + "get_image?hash=" + message.avatar_hash + "&guid=" + message.guid : this.avatarURL;
+    var avatarURL = message.outgoing ? this.serverUrl + "get_image?hash=" + message.avatar_hash + "&guid=" + message.guid : this.avatarURL,
+        wrapper = this.$('.js-discussionWrapper');
+
     message.set('avatarURL', avatarURL);
     console.log(message.get('message'));
     var discussionMessage = new chatMessageView({
       model: message
     });
-    this.$('.js-discussionWrapper').prepend(discussionMessage.el);
+    wrapper.append(discussionMessage.el);
+    this.discussionCount++;
+    this.$('.js-discussionCount').text(this.discussionCount);
+    this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
   },
 
   addAllDiscussionMessages: function(){
@@ -311,6 +323,7 @@ module.exports = baseVw.extend({
       };
       this.socketView.sendMessage(JSON.stringify(chatMessage));
       messageInput.val('');
+      messageInput.closest('.flexRow').removeClass('formChecked');
       this.getDiscussion();
     }
   },
