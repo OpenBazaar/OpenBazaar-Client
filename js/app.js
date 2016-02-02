@@ -212,7 +212,8 @@ launchOnboarding = function(creatingGuid) {
       onboardingModal && onboardingModal.remove()
       onboardingModal = null;
       startLocalInitSequence();
-      console.log('guid creation failed');
+      console.log('guid creation failed - meatballs');
+      window.meatballs = arguments;
     });
   }
 

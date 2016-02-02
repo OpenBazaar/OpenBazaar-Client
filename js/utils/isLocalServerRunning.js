@@ -29,7 +29,7 @@ module.exports = function(url, guidCheckUrl, options) {
   options = $.extend({}, defaults, options);
   guidCheck = $.get(guidCheckUrl);
 
-  setTimeout(function() {
+  var temp = setTimeout(function() {
     if (guidCheck.state() === 'pending') {
       // guid creation in progress
       deferred.resolve(guidCheck);
@@ -68,9 +68,12 @@ module.exports = function(url, guidCheckUrl, options) {
         })();
       });
     }
-  }, 0);
+  }, 1000);
 
   promise.cancel = function() {
+    // TODO: remove or make better var name
+    clearTimeout(temp);
+
     pingAttemptTimeout && clearTimeout(pingAttemptTimeout);
     pingAttempt && pingAttempt.abort();
     guidCheck && guidCheck.abort();
