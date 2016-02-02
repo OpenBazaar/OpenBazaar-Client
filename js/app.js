@@ -151,17 +151,13 @@ var loadProfile = function(landingRoute) {
   userProfile.fetch({
     timeout: 4000,
     success: function (model, response) {
-      // $('.js-loadingModal').addClass('hide');
       "use strict";
-      //clear the interval
-      // clearInterval(loadProfileCountdownInterval);
       //make sure profile is not blank
       if (response.profile){
         setTheme(model.get('profile').primary_color, model.get('profile').secondary_color, model.get('profile').background_color, model.get('profile').text_color);
         //get the user
         user.fetch({
           success: function (model, response) {
-            // user.set('serverUrl', serverUrlLocal);
             cCode = model.get('currency_code');
 
             //get user bitcoin price before loading pages

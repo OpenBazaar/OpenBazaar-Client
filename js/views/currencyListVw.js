@@ -46,7 +46,6 @@ module.exports = Backbone.View.extend({
     },this);
 
     this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">'+ this.listContents.join('') +'</ul>');
-    // window.obEventBus.trigger("currencyListRendered");
   },
 
   renderItem: function(item){
