@@ -285,16 +285,16 @@ module.exports = baseVw.extend({
 
   addAllDiscussionMessages: function(){
     var self = this;
-    this.$('.js-discussionWrapper').html('');
     console.log(this.discussionCol)
-    this.discussionCol.each(function(model, i){
-      console.log(i)
-      self.addDiscussionMessage(model);
-    });
     if(this.discussionCol.length > 0){
+      this.$('.js-discussionWrapper').html('');
       this.$('.js-discussionNotStarted').addClass('hide');
       this.$('.js-discussionStarted').removeClass('hide');
+      this.$('.js-discussionForm').removeClass('disable');
     }
+    this.discussionCol.each(function(model, i){
+      self.addDiscussionMessage(model);
+    });
   },
 
   sendDiscussionMessageClick: function(){

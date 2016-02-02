@@ -329,8 +329,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Data could not be loaded for:",
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466.",
           contractError: "This Item Cannot be Purchased.",
-          sellerError: "The seller's server has rejected the purchase request",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid.",
+          sellerError: "The seller's server has rejected the purchase request. This may be due to a connection issue.",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid. If it is valid, try again in a few seconds.",
           pageUnavailable: "This page is currently unavailable.",
           badHandle: "The handle you entered does not have a valid OpenBazaar ID."//notTranslated
         },
