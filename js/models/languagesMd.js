@@ -273,6 +273,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped",
           OrderStatus3: "Completed (Payment released)",
           OrderStatus4: "Disputed",
+          InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
           OrderTotalInBTC: "BTC Total",
           PaymentProtection: "Payment Protection",
@@ -670,7 +671,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -678,10 +679,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -1085,7 +1087,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -1093,10 +1095,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -1516,6 +1519,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confermato/Inviato",
           OrderStatus3: "Completato (fondi rilasciati)",
           OrderStatus4: "Contestato",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Totale ordine",
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -1935,6 +1939,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmé/Expédié",
           OrderStatus3: "Terminé (fonds reçus)",
           OrderStatus4: "Contesté",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
           PaymentProtection: "Protection de paiement",
@@ -2339,7 +2344,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -2347,10 +2352,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -2766,6 +2772,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Подтверждено/выслано",
           OrderStatus3: "Завершено (средства освобождены)",
           OrderStatus4: "Оспорено",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -3169,7 +3176,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -3177,10 +3184,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -3588,7 +3596,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -3596,10 +3604,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -4006,7 +4015,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4014,10 +4023,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -4424,7 +4434,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4432,10 +4442,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -4843,7 +4854,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4851,10 +4862,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -5260,6 +5272,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "確認完了・出荷済",
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "異議・クレーム",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -5678,6 +5691,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Potwierdzone/Wysłane",
           OrderStatus3: "Zakończone (opłacone)",
           OrderStatus4: "W trakcie sporu",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
           PaymentProtection: "Ubezpieczenie płatności",
