@@ -59,7 +59,7 @@ var Polyglot = require('node-polyglot'),
 // to manually provide the data to the model. All that should be needed
 // is an ID and then a subsequent fetch, but that doesn't return the data.
 // Investigate!
-serverConfigMd = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1']) );
+serverConfigMd = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
 // serverConfigMd.fetch();
 
 (setServerUrl = function() {
