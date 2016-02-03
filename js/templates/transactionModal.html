@@ -469,7 +469,7 @@
       </div>
     </div>
     <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright js-discussionForm
-            <% if(ob.transactionType != 'purchase'){ %>
+            <% if(ob.transactionType != 'purchase' && ob.status < 2){ %>
             disabled
             <% } %>
             ">
