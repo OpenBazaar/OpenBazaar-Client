@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
+    'change input[name="radioPaymentType"]': 'changePaymentType',
     'blur .js-buyWizardPostalInput': 'updateMap',
     'blur input': 'validateInput'
   },
@@ -265,6 +266,17 @@ module.exports = Backbone.View.extend({
       }
     });
     return newFormData;
+  },
+
+  changePaymentType: function(e) {
+    "use strict";
+    var checked = $('[name="radioPaymentType"]:checked');
+
+    if (checked.attr('id') === "buyWizardPaymentTypeDirect") {
+      this.$el.find('.js-buyWizardModeratorList').addClass('hide');
+    }else{
+      this.$el.find('.js-buyWizardModeratorList').removeClass('hide');
+    }
   },
 
   saveNewAddress: function(){

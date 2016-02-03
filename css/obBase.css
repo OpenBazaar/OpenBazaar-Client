@@ -4630,6 +4630,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 5px;
 }
 
+#ov1  .padding8 {
+  padding: 8px;
+}
+
 #ov1  .padding10 {
   padding: 10px;
 }
@@ -4809,6 +4813,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width270 {
   width: 270px;
+}
+#ov1 .width380 {
+  width: 380px;
 }
 #ov1 .width400 {
   width: 400px;
