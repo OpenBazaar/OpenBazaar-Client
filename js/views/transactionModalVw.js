@@ -62,14 +62,16 @@ module.exports = baseVw.extend({
     this.userProfile = options.userProfile;
     this.lastTab = "summary";
     this.discussionCount = 0;
+    this.discussionCol = new discussionCl();
+    this.discussionCol.url = this.serverUrl + "get_dispute_messages";
 
     if(this.userProfile.get('avatar_hash')){
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
     }
 
-    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
-      this.handleSocketMessage(response);
-    });
+    this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
+
+    this.listenTo(this.discussionCol, "add", this.addDiscussionMessage);
 
     this.model = new orderModel({
       cCode: this.cCode,
@@ -131,7 +133,8 @@ module.exports = baseVw.extend({
       this.getData();
     } else if(data.message && data.message.subject == this.orderID){
       var messageModel = new Backbone.Model(data.message);
-      this.addDiscussionMessage(messageModel);
+      //this.addDiscussionMessage(messageModel);
+      this.discussionCol.add(messageModel);
     }
   },
 
@@ -247,8 +250,6 @@ module.exports = baseVw.extend({
   getDiscussion: function(){
     var self = this;
     this.discussionCount = 0;
-    this.discussionCol = new discussionCl();
-    this.discussionCol.url = this.serverUrl + "get_dispute_messages";
 
     this.discussionCol.fetch({
       data: $.param({'order_id': self.orderID}),
@@ -273,7 +274,6 @@ module.exports = baseVw.extend({
         : this.serverUrl + "get_image?hash=" + message.get('avatar_hash') + "&guid=" + message.get('guid'),
         wrapper = this.$('.js-discussionWrapper');
 
-    console.log(avatarURL)
     message.set('avatarURL', avatarURL);
     var discussionMessage = new chatMessageView({
       model: message
@@ -312,7 +312,6 @@ module.exports = baseVw.extend({
   },
 
   sendDiscussionMessage: function(guid, rKey){
-    console.log(rKey);
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
     if (messageText) {
