@@ -424,7 +424,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment",
           SendDirectlyTo: "Send direct payment to %{handle}",
           MustAddAddress: "You must add an address to ship to",
@@ -845,7 +845,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Usted debe agregar una dirección para env&iacute;os",
@@ -1274,7 +1274,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Sie m&uuml;ssen eine Versandadresse hinzuzuf&uuml;gen",
@@ -1707,7 +1707,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Pagamento diretto",
           SendDirectlyTo: "Invia pagamento diretto a %{handle}",
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
@@ -2141,7 +2141,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Paiement direct",
           SendDirectlyTo: "Envoyer un paiement direct à %{handle}",
           MustAddAddress: "Vous devez ajouter une adresse pour expédier",
@@ -2570,7 +2570,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
@@ -2999,7 +2999,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Оплатить напрямую",
           SendDirectlyTo: "Отправка прямого платежа %{handle}",
           MustAddAddress: "Вы должны указать адрес для доставки",
@@ -3428,7 +3428,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Musíte zadať adresu pre doručenie",
@@ -3861,7 +3861,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Gönderilecek bir adres eklemelisiniz",
@@ -4293,7 +4293,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "SoQ Duj ghob'e' chel SoH",
@@ -4724,7 +4724,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "务必添加送货地址",
@@ -5158,7 +5158,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "당신 에게 제공할수 있는 배송지 주소를 추가",
@@ -5576,7 +5576,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "直接購入",
           SendDirectlyTo: "%{handle}に直接購入する",
           MustAddAddress: "お届け先住所を入力してください。",
@@ -6009,7 +6009,7 @@ module.exports = Backbone.Model.extend({
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use for small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Płatność bezpośrednia",
           SendDirectlyTo: "Wyślij bezpośrednią płatność do %{handle}",
           MustAddAddress: "Musisz wprowadzić adres wysyłki",
