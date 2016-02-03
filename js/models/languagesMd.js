@@ -421,7 +421,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment",
           SendDirectlyTo: "Send direct payment to %{handle}",
@@ -840,7 +840,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -1267,7 +1267,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -1698,7 +1698,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Pagamento diretto",
           SendDirectlyTo: "Invia pagamento diretto a %{handle}",
@@ -2130,7 +2130,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Paiement direct",
           SendDirectlyTo: "Envoyer un paiement direct à %{handle}",
@@ -2557,7 +2557,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -2984,7 +2984,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Оплатить напрямую",
           SendDirectlyTo: "Отправка прямого платежа %{handle}",
@@ -3411,7 +3411,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -3842,7 +3842,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -4272,7 +4272,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -4701,7 +4701,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -5133,7 +5133,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
@@ -5549,7 +5549,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "直接購入",
           SendDirectlyTo: "%{handle}に直接購入する",
@@ -5980,7 +5980,7 @@ module.exports = Backbone.Model.extend({
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create Wallet", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use for microtransactions or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Płatność bezpośrednia",
           SendDirectlyTo: "Wyślij bezpośrednią płatność do %{handle}",

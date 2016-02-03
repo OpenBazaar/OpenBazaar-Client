@@ -272,10 +272,16 @@ module.exports = Backbone.View.extend({
     "use strict";
     var checked = $('[name="radioPaymentType"]:checked');
 
+    // uncheck prior selections
+    $('.js-buyWizardModeratorRadio').prop('checked', false);
+
     if (checked.attr('id') === "buyWizardPaymentTypeDirect") {
       this.$el.find('.js-buyWizardModeratorList').addClass('hide');
+      this.$el.find('#buyWizardNoModerator').prop('checked', true);
+      this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').removeClass('disabled');
     }else{
       this.$el.find('.js-buyWizardModeratorList').removeClass('hide');
+      this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').addClass('disabled');
     }
   },
 

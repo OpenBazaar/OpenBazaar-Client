@@ -242,10 +242,12 @@
         <div class="accordion-child" id="BuyWizardPaymentType">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <%= polyglot.t('PaymentType') %>
+            <div class="floatRight marginTop9"><img src="imgs/bitcoin-accepted.png" style="width: 80px;" /></div>
           </div>
           <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
-              <div class="flexRow custCol-border">
+              <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>
+                <div class="flexRow custCol-border">
                 <div class="rowItem padding15">
                   <div class="floatLeft marginRight10">
                     <input type="radio" name="radioPaymentType" class="marginTop4" id="buyWizardPaymentTypeModerated" />
@@ -280,7 +282,7 @@
                                        <% if(moderator.avatar){ %>
                                        style="width: 32px; height: 32px; background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
                                        <% } else { %>
-                                       style="background-image: url(imgs/defaultUser.png);">
+                                       style="background-image: url(imgs/defaultUser.png); width: 32px; height: 32px;">
                                        <% } %>
                                   </div>
                                   <div class="txt-unleaded width380 floatLeft">
@@ -305,7 +307,8 @@
 
                   </div>
                 </div>
-              </div>
+                </div>
+              <% } %>
               <div class="flexRow custCol-border">
                 <div class="rowItem padding15">
                   <div class="floatLeft marginRight10">
@@ -318,14 +321,15 @@
                         <%= polyglot.t('buyFlow.DirectPaymentDescription') %>
                       </div>
                     </label>
+                    <input type="radio" class="fieldItem js-buyWizardModeratorRadio hide" name="moderator" id="buyWizardNoModerator" value="direct" <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length === 0){ %>checked<% } %> />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
-            <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border"><%= polyglot.t('Cancel') %></a>
+            <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3  borderRight custCol-border">
               <%= polyglot.t('Next') %>
               <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
             </a>
