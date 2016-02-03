@@ -86,6 +86,8 @@ module.exports = Backbone.Model.extend({
 
   getServerBaseUrl: function() {
     return 'http://' + this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
+    // return 'http://' + this.get('username') + ':' + this.get('password') + '@' +
+    //   this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
   },
 
   getWebSocketAddress: function() {

@@ -22,6 +22,7 @@ var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     isLocalServerRunning = require('./utils/isLocalServerRunning'),
     isRemoteServerRunning = require('./utils/isRemoteServerRunning'),
+    Socket = require('./utils/Socket'),
     router = require('./router'),
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
@@ -65,6 +66,9 @@ if (!localStorage['_serverConfig-1']) {
   serverConfigMd.save();
 }
 
+console.log('remove me: remove me: remove me');
+window.serverConfigMd = serverConfigMd;
+
 (setServerUrl = function() {
   var baseServerUrl = serverConfigMd.getServerBaseUrl();
   
@@ -75,7 +79,7 @@ if (!localStorage['_serverConfig-1']) {
 
 serverConfigMd.on('sync', function(md) {
   setServerUrl();
-  startInitSequence();
+  // startInitSequence();
 });
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
@@ -305,14 +309,81 @@ var loadProfile = function(landingRoute) {
 //   }
 // })();
 
-// $.ajax({
-//   beforeSend: function() { jqxhr.requestURL = "http://some/url"; },
-// });
+// launchOnboarding = function(guidCreated) {
+//   guidIsCreating = guidIsCreating || false;
+//   onboardingModal && onboardingModal.remove();
+//   onboardingModal = new OnboardingModal({ guidCreated: guidCreated });
+//   onboardingModal.render().open();
 
-launchOnboarding = function(guidCreated) {
-  guidIsCreating = guidIsCreating || false;
+//   onboardingModal.on('onboarding-complete', function(guid) {
+//     console.log('onboarding is complete - hoo to the ray!');
+//     onboardingModal && onboardingModal.remove()
+//     onboardingModal = null;
+//     loadProfile('#userPage/' + guid + '/store');
+//   });
+// };
+
+// launchServerConnect = function() {
+//   serverConnectModal && serverConnectModal.remove();
+//   serverConnectModal = new ServerConnectModal({
+//     model: serverConfigMd
+//   });
+
+//   serverConnectModal.on('connect', function() {
+//     serverConnectModal.remove();
+//     startInitSequence();
+//     $loadingModal.removeClass('hide');
+//   });
+
+//   serverConnectModal.render()
+//     .open()
+//     .start();
+// };
+
+// (startInitSequence = function() {
+//   $.get(serverConfigMd.getServerBaseUrl() + '/guid_generation').done(function(guidData) {
+//     // server is running
+//     if (guidData.status == 'generating guid') {
+//       // guid is being generated
+//       launchOnboarding();
+//     } else if (guidData.status == 'complete') {
+//       // guid gen complete
+//       $.get(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profileData) {
+//         if (__.isEmpty(profileData)) {
+//           // launch onboarding
+//           launchOnboarding(true);
+//         } else {
+//           loadProfile();
+//         }
+//       }).fail(function() {
+//         // server is down
+//         launchServerConnect();
+//       });
+//     }
+//   }).fail(function() {
+//     // server is down
+//     launchServerConnect();
+//   });
+// })();
+
+$(document).ajaxSend(function(e, jqxhr, settings) {
+  var username = serverConfigMd.get('username'),
+      pw = serverConfigMd.get('password'),
+      serverBaseUrl = serverConfigMd.getServerBaseUrl();
+
+  if (username && pw && settings.url.startsWith(serverBaseUrl)) {
+    jqxhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ':' + pw));    
+  }
+});
+
+launchOnboarding = function(guidCreating) {
   onboardingModal && onboardingModal.remove();
-  onboardingModal = new OnboardingModal({ guidCreated: guidCreated });
+  onboardingModal = new OnboardingModal({
+    model: user,
+    userProfile: userProfile,
+    serverConfig: serverConfigMd,
+    guidCreationPromise: guidCreating
+  });
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
@@ -323,45 +394,70 @@ launchOnboarding = function(guidCreated) {
   });
 };
 
-launchServerConnect = function() {
-  serverConnectModal && serverConnectModal.remove();
-  serverConnectModal = new ServerConnectModal({
-    model: serverConfigMd
-  });
+// var heartbeatSocket = new WebSocket('ws://' + serverConfigMd.get('server_ip') + ':18470');
+// var heartbeatSocket = new WebSocket('ws://happy-hippo:18470');
+var heartbeatSocket = new Socket('ws://' + serverConfigMd.get('server_ip') + ':18470');
+var guidCreating;
 
-  serverConnectModal.on('connect', function() {
-    serverConnectModal.remove();
-    startInitSequence();
-    $loadingModal.removeClass('hide');
-  });
+console.log('heartbeat - removal yo removal yo');
+window.heartbeat = heartbeatSocket;
 
-  serverConnectModal.render()
-    .open()
-    .start();
+heartbeatSocket.on('open', function(e) {
+  console.log('hb open in: ' + (e.data || ''));
+  window.open = arguments;
+});
+
+heartbeatSocket.on('close', function(e) {
+  console.log('hb close in: ' + (e.data || ''));
+  window.close = arguments;
+
+  // server down
+  // launch server connect modal
+});
+
+heartbeatSocket.on('message', function(e) {
+  console.log('hb message in');
+  window.message = arguments;
+
+  if (e.jsonData && e.jsonData.status) {
+    switch (e.jsonData.status) {
+      case 'generating GUID':
+        if (guidCreating) return;
+
+        guidCreating = $.Deferred();
+
+        // launch onboarding, pass in guid creating
+        launchOnboarding(guidCreating);
+        break;
+      case 'GUID generation complete':
+        serverConfigMd.save({
+          username: e.jsonData.username,
+          password: e.jsonData.password
+        });
+        guidCreating.resolve();
+        break;
+    }
+  }
+});
+
+var onlineMessageHandler = function(e) {
+  if (e.jsonData && e.jsonData.status && e.jsonData.status == 'online') {
+    if (!guidCreating) {
+      console.log('gonna load that profizzle');
+
+      // todo: need to call profile to see if 401 comes back, meaning the client
+      // started after guid gen was already complete on a new server. In that case
+      // show server connnect modal.
+      loadProfile()
+    }
+
+    heartbeatSocket.off('message', onlineMessageHandler);
+  }
 };
 
-(startInitSequence = function() {
-  $.get(serverConfigMd.getServerBaseUrl() + '/guid_generation').done(function(guidData) {
-    // server is running
-    if (guidData.status == 'generating guid') {
-      // guid is being generated
-      launchOnboarding();
-    } else if (guidData.status == 'complete') {
-      // guid gen complete
-      $.get(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profileData) {
-        if (__.isEmpty(profileData)) {
-          // launch onboarding
-          launchOnboarding(true);
-        } else {
-          loadProfile();
-        }
-      }).fail(function() {
-        // server is down
-        launchServerConnect();
-      });
-    }
-  }).fail(function() {
-    // server is down
-    launchServerConnect();
-  });
-})();
+heartbeatSocket.on('message', onlineMessageHandler);
+
+heartbeatSocket.on('error', function(e) {
+  console.log('hb error in: ' + (e.data || ''));
+  window.error = arguments;
+});
