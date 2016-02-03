@@ -414,6 +414,8 @@ module.exports = Backbone.Model.extend({
           DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma."
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -833,6 +835,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -1260,6 +1264,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -1691,6 +1697,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finito"
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -2123,6 +2131,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Terminé"
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -2550,6 +2560,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -2977,6 +2989,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Завершено"
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -3404,6 +3418,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -3835,6 +3851,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -4265,6 +4283,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -4694,6 +4714,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -5126,6 +5148,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -5542,6 +5566,8 @@ module.exports = Backbone.Model.extend({
           Finished: "完了"
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
@@ -5973,6 +5999,8 @@ module.exports = Backbone.Model.extend({
           Finished: "Gotowe"
         },
         buyFlow: {
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
