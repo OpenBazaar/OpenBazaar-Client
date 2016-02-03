@@ -444,7 +444,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address",
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
-          directPaymentTo: "Direct Payment to",
           paymentSent: "Payment Sent!",
           total: "Total"
         },
@@ -866,7 +865,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -1296,7 +1294,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -1730,7 +1727,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Indirizzi di ritorno",
           moderatorPaymentDisclaimer: "Si applica solo se l'operazione si conclude in una contestazione.",
           directPaymentDisclaimer: "Usa il pagamento diretto con cauzione, i fondi sono irreversibili",
-          directPaymentTo: "Pagamento diretto a",
           paymentSent: "Pagamento inviato!",
           total: "Totale"
         },
@@ -2165,7 +2161,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Adresse de retour",
           moderatorPaymentDisclaimer: "N'appliquer que si la transaction se termine par un litige.",
           directPaymentDisclaimer: "Utilisez le paiement direct avec prudence, les fonds sont irréversibles",
-          directPaymentTo: "Paiement direct à",
           paymentSent: "Paiement envoyé !",
           total: "Total"
         },
@@ -2595,7 +2590,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -3025,7 +3019,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "адрес возврата",
           moderatorPaymentDisclaimer: "Применяется только в случаях если транзакция имеет статус спора.",
           directPaymentDisclaimer: "Будьте осторожны при отправке средств напрямую, средства невозвратимы",
-          directPaymentTo: "Прямой платёж",
           paymentSent: "Платёж отправлен!",
           total: "Всего"
         },
@@ -3455,7 +3448,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -3889,7 +3881,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -4322,7 +4313,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -4754,7 +4744,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -5189,7 +5178,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -5608,7 +5596,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "返品用アドレス",
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
-          directPaymentTo: "%{handle}に直接購入",
           paymentSent: "送金しました！",
           total: "注文合計"
         },
@@ -6042,7 +6029,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Adres zwrotów",
           moderatorPaymentDisclaimer: "Dotyczy wyłącznie transakcji w sporze.",
           directPaymentDisclaimer: "Korzystaj z płatności bezpośredniej ostrożnie; środki nie są zwracane",
-          directPaymentTo: "Płatność bezpośrednia do",
           paymentSent: "Dokonano płatności!",
           total: "Suma"
         }
