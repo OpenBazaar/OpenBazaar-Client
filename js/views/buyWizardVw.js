@@ -206,7 +206,9 @@ module.exports = Backbone.View.extend({
     } else {
       this.model.set('selectedModerator', "");
     }
-    this.accNext();
+    
+    this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').removeClass('disabled');
+
   },
 
   showMaps: function(){
