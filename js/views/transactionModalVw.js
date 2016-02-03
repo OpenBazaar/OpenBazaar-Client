@@ -304,11 +304,12 @@ module.exports = baseVw.extend({
       guid = this.model.get('buyer_order').order.id.guid;
       rKey = this.model.get('buyer_order').order.id.pubkeys.encryption;
     }
-    this.sendDiscussionMessage(guid);
-    this.sendDiscussionMessage(this.model.get('displayModerator').guid);
+    this.sendDiscussionMessage(guid, rKey);
+    this.sendDiscussionMessage(this.model.get('displayModerator').guid, rKey);
   },
 
   sendDiscussionMessage: function(guid, rKey){
+    console.log(rKey);
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
     if (messageText) {
