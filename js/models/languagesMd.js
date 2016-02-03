@@ -414,6 +414,7 @@ module.exports = Backbone.Model.extend({
           DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma."
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -835,6 +836,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -1264,6 +1266,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -1697,6 +1700,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finito"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -2131,6 +2135,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Terminé"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -2560,6 +2565,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -2989,6 +2995,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Завершено"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -3418,6 +3425,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -3851,6 +3859,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -4283,6 +4292,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -4714,6 +4724,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -5148,6 +5159,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -5566,6 +5578,7 @@ module.exports = Backbone.Model.extend({
           Finished: "完了"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
@@ -5999,6 +6012,7 @@ module.exports = Backbone.Model.extend({
           Finished: "Gotowe"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
