@@ -20,8 +20,8 @@ module.exports = Backbone.Model.extend({
         Navigation: "Navigation", 
         Cancel: "Cancel",
         ClosingOpenBazaar: "Close (Your page will go offline)", 
-        Minimize: "Minimize", //notTranslated
-        Maximize: "Maximize", //notTranslated
+        Minimize: "Minimize",
+        Maximize: "Maximize",
         Close: "Close",
         Yes: "Yes",
         No: "No",
@@ -70,7 +70,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
         SearchForUsersPlaceholder: "Type a name...",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...",
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -106,7 +106,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Returns",
         ReturnsPolicy: "Returns Policy",
         Ampersand: "&",
-        Tags: "Tags", //notTranslated
+        Tags: "Tags",
         Keywords: "Keywords",
         ShipsFrom: "Ships From",
         ShipsTo: "Ships To",
@@ -144,7 +144,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme",
         Listing: "Listing",
         Listings: "Listings",
-        ViewPage: "View page", //notTranslated
+        ViewPage: "View page",
         Pages: "Pages",
         Page: "Page",
         Language: "Language",
@@ -157,7 +157,7 @@ module.exports = Backbone.Model.extend({
         Free: "Free",
         Category: "Category",
         ProcessingTime: "Processing Time",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Select photos",
         DragOrUploadPhotos: "Drag or upload photos",
         ExpirationDate: "Expires On",
         UploadCoverPhoto: "Upload a cover photo",
@@ -195,11 +195,11 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Save Avatar",
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
-        Loading: "Loading...", // not translated
+        Loading: "Loading...",
         Purchases: "Purchases",
         Sales: "Sales",
         Cases: "Cases",
-        Enter: "Enter", //notTranslated
+        Enter: "Enter",
         Discover: "Discover",
         Block: "Block",
         Unblock: "Unblock",
@@ -255,7 +255,7 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
+          OrderDetails: "Order Details",
           SoldBy: "Seller",
           PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
@@ -295,7 +295,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction",
           Seller: "Seller",
           Buyer: "Buyer",
-          transferReceipt: "transferReceipt",
+          transferReceipt: "Transfer Receipt",
           copyTxid: "copy tx ID",
           Close: "Close",
           FundOrder: "Fund Order",
@@ -328,7 +328,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "The seller's server has rejected the purchase request",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid.",
           pageUnavailable: "This page is currently unavailable.",
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID."//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID."
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -341,9 +341,9 @@ module.exports = Backbone.Model.extend({
           SaveSuccess: "Your changes have been saved."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Scanning your network",
+          searchingText: "Scanning your network for",
+          noResults: "No listings found in your network tagged with"
         },
         filters: {
           pagesAllTypes: "All types",
@@ -397,7 +397,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar",
           Finished: "Finished"
         },
         buyFlow: {
@@ -424,7 +424,7 @@ module.exports = Backbone.Model.extend({
           total: "Total"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "No results found"
         }
       },
       {
@@ -705,7 +705,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1121,7 +1121,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1541,7 +1541,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1910,18 +1910,18 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
-        Firewall: "Firewall", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
+        Firewall: "Pare-feu",
+        ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
-          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, step 0.01, min 0)"
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, par étape de 0.01, 0 min)"
         },
         BecomeModerator: "Devenir modérateur",
         EditModerator: "Paramètres de modérateur",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
+          OrderDetails: "Détails de la commande",
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
@@ -1961,7 +1961,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Transaction modérée",
           Seller: "Vendeur",
           Buyer: "Acheteur",
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Reçu de transfert",
           copyTxid: "copier l'ID de transaction",
           Close: "Fermer",
           FundOrder: "Financer la commande",
@@ -2378,7 +2378,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -2794,7 +2794,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -3210,7 +3210,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -3630,7 +3630,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4049,7 +4049,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4468,7 +4468,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4888,7 +4888,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -5294,7 +5294,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
