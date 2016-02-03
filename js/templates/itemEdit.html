@@ -86,7 +86,10 @@
           <div class="flexRow custCol-border js-inputParent">
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
-                <label for="priceLocal"><%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)</label>
+                <label for="priceLocal">
+                  <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>) 
+                  <a href="#settings" class="underline fontSize10 textOpacity50 noOverflow width80"><%= polyglot.t('ChangeCurrency') %></a>
+                </label>
               </div>
             </div>
             <div class="flexCol-5">
