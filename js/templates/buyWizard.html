@@ -47,6 +47,230 @@
     </div>
     <div class="homeModal-accordion accordion js-buyWizardAccordion">
       <div class="accordion-window">
+        <div class="accordion-child" id="BuyWizardBitcoinWallet">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+            Bitcoin Wallet
+            <div class="floatRight marginTop9"><img src="imgs/bitcoin-accepted.png" style="width: 80px;" /></div>
+          </div>
+          <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary alignCenter height324 borderBottomRightRaidus3 borderBottomLeftRaidus3">
+            <h2 class="margin0 marginTop80">Do you have a Bitcoin wallet?</h2>
+            <p class="textOpacity75 fontSize15">It only takes a few minutes to set one up</p>
+            <div class="inlineBlock">
+              <div class="btn btn-txt btn-large custCol-secondary minWidth120 js-buyWizardDoesntHaveWallet">No</div>
+              <div class="btn btn-txt btn-large custCol-secondary minWidth120 marginLeft6 js-buyWizardHasWallet">Yes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-child" id="BuyWizardCreateWallet">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+            Create Wallet
+            <div class="floatRight marginTop9"><img src="imgs/bitcoin-accepted.png" style="width: 80px;" /></div>
+          </div>
+          <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+            <div class="flexRow custCol-border js-BuyWizardWallets">
+            
+              <!-- Airbitz -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="https://airbitz.co/bitcoin-wallet/" target="_blank"> 
+                    <img src="imgs/wallet-providers/airbitz.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="https://airbitz.co/bitcoin-wallet/" target="_blank" class="textOpacity1">Airbitz <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.AirbitzTagline') %></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Coinbase -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="https://www.coinbase.com/signup" target="_blank"> 
+                    <img src="imgs/wallet-providers/coinbase.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="https://www.coinbase.com/signup" target="_blank" class="textOpacity1">Coinbase <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.CoinbaseTagline') %></div>
+                  </div>
+                </div>
+              </div>      
+                    
+              <!-- Samourai Wallet -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="http://samouraiwallet.com/" target="_blank"> 
+                    <img src="imgs/wallet-providers/samourai-wallet.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="http://samouraiwallet.com/" target="_blank" class="textOpacity1">Samourai Wallet <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.SamouraiTagline') %></div>
+                  </div>
+                </div>
+              </div> 
+
+              <!-- RushWallet -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="https://rushwallet.com/" target="_blank"> 
+                    <img src="imgs/wallet-providers/rush-wallet.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="https://rushwallet.com/" target="_blank" class="textOpacity1">RushWallet <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.RushWalletTagline') %></div>
+                  </div>
+                </div>
+              </div>
+                    
+              <!-- Breadwallet -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="http://breadwallet.com/" target="_blank"> 
+                    <img src="imgs/wallet-providers/bread-wallet.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="http://breadwallet.com/" target="_blank" class="textOpacity1">Breadwallet <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.BreadwalletTagline') %></div>
+                  </div>
+                </div>
+              </div>    
+
+              <!-- MyCelium -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="https://mycelium.com/mycelium-wallet.html" target="_blank"> 
+                    <img src="imgs/wallet-providers/mycelium.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="https://mycelium.com/mycelium-wallet.html" target="_blank" class="textOpacity1">MyCelium <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.MyCeliumTagline') %></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Blockchain.info -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="https://blockchain.info/wallet" target="_blank"> 
+                    <img src="imgs/wallet-providers/blockchaininfo.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="https://blockchain.info/wallet" target="_blank" class="textOpacity1">Blockchain.info <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.BlockchaininfoTagline') %></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DuoMoney -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="https://www.duo.money" target="_blank"> 
+                    <img src="imgs/wallet-providers/duo-money.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="https://www.duo.money" target="_blank" class="textOpacity1">DuoMoney <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.DuoMoneyTagline') %></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Coinkite -->
+              <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                <div class="floatLeft marginRight10">
+                  <a href="https://coinkite.com/promo/nwt1" target="_blank"> 
+                    <img src="imgs/wallet-providers/coinkite.png" class="thumbnail thumbnail-large-slim " />
+                  </a>
+                </div>
+                <div class="floatLeft width420 marginTop4">
+                  <div class="clearfix">
+                    <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                      <a href="https://coinkite.com/promo/nwt1" target="_blank" class="textOpacity1">Coinkite <span class="ion-android-open fontSize10"></span></a>
+                    </div>
+                    <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.CoinkiteTagline') %></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border-primary">
+              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+              <%= polyglot.t('Back') %>
+            </a>
+            <a class="btn btn-bar btn-half js-buyWizardModNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('IHaveAWalletNow') %>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="accordion-child" id="BuyWizardBTCReturnAddress">
+          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
+            <%= polyglot.t('BitcoinReturnAddress') %>
+            <div class="floatRight marginTop9"><img src="imgs/bitcoin-accepted.png" style="width: 80px;" /></div>
+          </div>
+          <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
+            <p class="padding15 textOpacity75 margin0"><%= polyglot.t('BitcoinReturnAddressInfo') %></p>
+            <div class="flexRow">
+              <form class="flexRow custCol-border borderTop" id="buyWizardBitcoinReturnForm">
+                <div class="flexCol-12 custCol-border positionWrapper">
+                  <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
+                         placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
+                         pattern="<%- ob.user.bitcoinValidationRegex %>"
+                         value="<%= ob.user.refund_address %>" required />
+                </div>
+              </form>
+              <div class="width100 marginTop30 alignCenter">
+                <a href="https://openbazaar.zendesk.com/hc/en-us/articles/207535416" class="marginRight10 underline" target="_blank">I can't find my bitcoin address</a>
+                <a href="https://rushwallet.com/" class="underline" target="_blank">I need a temporary bitcoin address</a>
+              </div>
+            </div>
+          </div>
+          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
+            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border-primary">
+              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+              <%= polyglot.t('Back') %>
+            </a>
+            <a class="btn btn-bar btn-half js-buyWizardReturnNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Next') %>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+            </a>
+          </div>
+        </div>
+
         <div class="accordion-child" id="BuyWizardPaymentType">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <%= polyglot.t('PaymentType') %>
@@ -80,7 +304,7 @@
                             </div>
                           </div>
                           <div class="floatRight">
-                            <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary minWidth120 marginTop6">
+                            <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary minWidth120 marginTop4">
                               <%= polyglot.t('Select') %>
                             </div>
                           </div>
@@ -122,7 +346,7 @@
                           </div>
                         </div>
                         <div class="floatRight">
-                          <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary minWidth120 marginTop6">
+                          <div class="btn btn-txt fontWeight500 textOpacity1 textSize14px height40 custCol-secondary minWidth120 marginTop4">
                             <%= polyglot.t('Select') %>
                           </div>
                         </div>
@@ -137,34 +361,11 @@
             <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
             <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3">
               <%= polyglot.t('Next') %>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
             </a>
           </div>
         </div>
 
-        <div class="accordion-child" id="BuyWizardBTCReturnAddress">
-          <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            <%= polyglot.t('BitcoinReturnAddress') %>
-          </div>
-          <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
-            <p class="padding515 textOpacity75"><%= polyglot.t('BitcoinReturnAddressInfo') %></p>
-            <div class="flexRow">
-              <form class="flexRow custCol-border borderTop" id="buyWizardBitcoinReturnForm">
-                <div class="flexCol-12 custCol-border positionWrapper">
-                  <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
-                         placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
-                         pattern="<%- ob.user.bitcoinValidationRegex %>"
-                         value="<%= ob.user.refund_address %>" required />
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half js-buyWizardReturnNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
-              <%= polyglot.t('Next') %>
-            </a>
-          </div>
-        </div>
         <div class="accordion-child" id="BuyWizardShipTo">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
             <div class="js-buyWizardAddress">
@@ -247,8 +448,14 @@
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-buyWizardAddress js-buyWizardAddressBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half disabled js-buyWizardAddress js-buyWizardAddressNext custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-buyWizardAddress js-buyWizardAddressBack custCol-secondary borderBottomLeftRaidus3">
+              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+              <%= polyglot.t('Back') %>
+            </a>
+            <a class="btn btn-bar btn-half disabled js-buyWizardAddress js-buyWizardAddressNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Next') %>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+            </a>
             <a class="btn btn-bar btn-half js-buyWizardNewAddressCancel js-buyWizardNewAddress hide custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Cancel') %></a>
             <a class="btn btn-bar btn-half js-buyWizardNewAddressSave js-buyWizardNewAddress hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Save') %></a>
           </div>
@@ -272,8 +479,14 @@
           <!--inser details view-->
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-buyWizardPurchaseBack custCol-secondary borderBottomLeftRaidus3"><%= polyglot.t('Back') %></a>
-            <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('Next') %></a>
+            <a class="btn btn-bar btn-half js-buyWizardPurchaseBack custCol-secondary borderBottomLeftRaidus3">
+              <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+              <%= polyglot.t('Back') %>
+            </a>
+            <a class="btn btn-bar btn-half  js-buyWizardSendPurchase custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <%= polyglot.t('Next') %>
+              <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
+            </a>
             <span class="btn btn-bar btn-half disabled js-buyWizardPendingMsg hide custCol-secondary custCol-border-primary borderBottomRightRaidus3"><%= polyglot.t('PaymentPending') %></span>
             <a class="btn btn-bar btn-wide  js-buyWizardCloseSummary custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3 hide"><%= polyglot.t('Close') %></a>
           </div>

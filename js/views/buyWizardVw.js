@@ -12,6 +12,20 @@ var __ = require('underscore'),
     clipboard = require('clipboard');
 Backbone.$ = $;
 
+// randomize function
+$.fn.randomize = function(selector){
+    var $elems = selector ? $(this).find(selector) : $(this).children(),
+        $parents = $elems.parent();
+
+    $parents.each(function(){
+        $(this).children(selector).sort(function(a,b){
+            return Math.round(Math.random()) - 0.5;
+        }).detach().appendTo(this);
+    });
+
+    return this;
+};
+
 module.exports = Backbone.View.extend({
 
   className: "buyView",
@@ -25,6 +39,8 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardReturnNext': 'returnNext',
     'click .js-buyWizardAddressBack': 'addressPrev',
     'click .js-buyWizardAddressNext': 'addressNext',
+    'click .js-buyWizardHasWallet': 'hasWallet',
+    'click .js-buyWizardDoesntHaveWallet': 'doesntHaveWallet',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
@@ -170,6 +186,12 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
+
+      //randomize the bitcoin wallet providers 5 times
+      for(var i = 0; i < 5; i++) {
+        $(".js-BuyWizardWallets").randomize();
+      }
+
     });
     return this;
   },
@@ -221,6 +243,17 @@ module.exports = Backbone.View.extend({
     this.model.set('selectedAddress', selectedAddress);
     this.displayMap(selectedAddress);
     this.$el.find('.js-buyWizardAddressNext').removeClass('disabled');
+  },
+
+  hasWallet: function(e){
+    "use strict";
+    this.accNext(2);
+    this.$el.find('#buyWizardBitcoinAddressInput').focus();
+  },
+
+  doesntHaveWallet: function(e){
+    "use strict";
+    this.accNext();
   },
 
   modelToFormData: function(modelJSON, formData, existingKeys) {

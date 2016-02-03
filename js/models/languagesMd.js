@@ -9,6 +9,7 @@ module.exports = Backbone.Model.extend({
         langName: "English",
         langCode: "en-US",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Next",
         IAgree: "I Agree",
         Back: "Back",
@@ -116,9 +117,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
-        BitcoinReturnAddress: "Bitcoin Return Address",
+        BitcoinReturnAddress: "Enter your Bitcoin Address",
         BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...",
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.",
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -399,6 +400,17 @@ module.exports = Backbone.Model.extend({
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished"
         },
+        walletProviders: {
+          CoinbaseTagline: "The world's most popular way to buy, sell, and use bitcoin.",
+          SamouraiTagline: "Secure mobile wallet. Emphasis on privacy.",
+          AirbitzTagline: "Privacy. Security. Autonomy. Decentralized.",
+          BreadwalletTagline: "Connects directly to the bitcoin network, no servers. Beautiful simplicity, maximum security.",
+          RushWalletTagline: "Get a Bitcoin address quickly and easily in your browser.",
+          MyCeliumTagline: "One of the longest in market, most secure and reliable Bitcoin wallets.",
+          CoinkiteTagline: "The Most Powerful Bitcoin Wallet",
+          BlockchaininfoTagline: "The world's most popular bitcoin wallet. Safer, Friendlier, Easier.",
+          DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma."
+        },
         buyFlow: {
           DirectPayment: "Direct Payment",
           SendDirectlyTo: "Send direct payment to %{handle}",
@@ -429,6 +441,7 @@ module.exports = Backbone.Model.extend({
       {
         langName: "Espa&ntilde;ol",
         langCode: "sp",
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
@@ -527,9 +540,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Cambios",
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
-        BitcoinReturnAddress: "Direcci&oacute;n de devoluciones Bitcoin",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -837,6 +850,7 @@ module.exports = Backbone.Model.extend({
         langName: "German",
         langCode: "de",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Weiter",
         IAgree: "Akzeptieren",
         Back: "Zur&uuml;ck",
@@ -938,9 +952,9 @@ module.exports = Backbone.Model.extend({
         Changes: "&Auml;nderungen",
         SaveChanges: "&Auml;nderungen speichern",
         YourName: "Dein Name",
-        BitcoinReturnAddress: "Bitcoin R&uuml;cksendeaddresse",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Lokale W&auml;hrung",
         TimeZone: "Zeitzone",
         ShipToName: "Empfänger",
@@ -1252,6 +1266,7 @@ module.exports = Backbone.Model.extend({
         langName: "Italiano",
         langCode: "it",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Avanti",
         IAgree: "Sono d'accordo",
         Back: "Indietro",
@@ -1359,9 +1374,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Modifiche",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
-        BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
-        BitcoinReturnAddressInfo: "In caso di restituzione, i tuoi soldi verranno messi nel seguente indirizzo.",
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1671,6 +1686,7 @@ module.exports = Backbone.Model.extend({
         langName: "Français",
         langCode: "fr-FR",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Suivant",
         IAgree: "Je suis d'accord",
         Back: "Retour",
@@ -1778,9 +1794,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Changements",
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
-        BitcoinReturnAddress: "Adresse Bitcoin de retour",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
-        BitcoinReturnAddressInfo: "En cas de remboursement, vos fonds seront envoyés à l'adresse suivante.",
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -2091,6 +2107,7 @@ module.exports = Backbone.Model.extend({
         langName: "Română",
         langCode: "ro",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Următorul",
         IAgree: "Sunt de acord",
         Back: "Înapoi",
@@ -2192,9 +2209,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Modificări",
         SaveChanges: "Salvare Modificări",
         YourName: "Numele dvs.",
-        BitcoinReturnAddress: "Adresa Bitcoin",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Valuta locală",
         TimeZone: "Fus orar",
         ShipToName: "Numele",
@@ -2506,6 +2523,7 @@ module.exports = Backbone.Model.extend({
         langName: "Russian",
         langCode: "ru",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Далее",
         IAgree: "Согласен",
         Back: "Назад",
@@ -2607,9 +2625,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Изменения",
         SaveChanges: "Применить",
         YourName: "Ваше имя",
-        BitcoinReturnAddress: "Биткойн-адрес",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -2921,6 +2939,7 @@ module.exports = Backbone.Model.extend({
         langName: "Slovak",
         langCode: "sk",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Ďalej",
         IAgree: "Súhlasím",
         Back: "Späť",
@@ -3021,9 +3040,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Zmeny",
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
-        BitcoinReturnAddress: "Bitcoinová adresa",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -3336,6 +3355,7 @@ module.exports = Backbone.Model.extend({
         langName: "Turkish",
         langCode: "tr",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Sonraki",
         IAgree: "Kabul ediyorum",
         Back: "Geri",
@@ -3443,9 +3463,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Değişiklikler",
         SaveChanges: "Değişiklikleri Kaydet",
         YourName: "Adınız",
-        BitcoinReturnAddress: "Bitcoin adresiniz",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Yerel para birimi",
         TimeZone: "Saat Dilimi",
         ShipToName: "Ad",
@@ -3755,6 +3775,7 @@ module.exports = Backbone.Model.extend({
         langName: "Klingon",
         langCode: "klg",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Veb",
         IAgree: "jIQochbe'",
         Back: "Chap",
@@ -3861,9 +3882,9 @@ module.exports = Backbone.Model.extend({
         Changes: "ChoH",
         SaveChanges: "ChoH toD",
         YourName: "PonglIj'e'",
-        BitcoinReturnAddress: "Bot SoQ mIr",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Huch lutu'lu'bej",
         TimeZone: "PoH mIch",
         ShipToName: "Pong",
@@ -4173,6 +4194,7 @@ module.exports = Backbone.Model.extend({
         langName: "中文",
         langCode: "zh-CN",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "下一步",
         IAgree: "我同意",
         Back: "上一步",
@@ -4279,9 +4301,9 @@ module.exports = Backbone.Model.extend({
         Changes: "更改",
         SaveChanges: "保存更改",
         YourName: "您的姓名",
-        BitcoinReturnAddress: "比特币地址",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -4591,6 +4613,7 @@ module.exports = Backbone.Model.extend({
         langCode: "ko",
         /* Use capitalized keys for widely reused text that must be capitalized...
         Korean type doesn't have capitalized letters*/
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "다음",
         IAgree: "동의",
         Back: "뒤",
@@ -4698,9 +4721,9 @@ module.exports = Backbone.Model.extend({
         Changes: "변경",
         SaveChanges: "변경 사항 저장",
         YourName: "당신 이름",
-        BitcoinReturnAddress: "당신 비트코인 주소",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "지역 통화",
         TimeZone: "시간대",
         ShipToName: "이름",
@@ -5010,6 +5033,7 @@ module.exports = Backbone.Model.extend({
         langName: "日本語 (Japanese)",
         langCode: "ja-JP",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "次へ",
         IAgree: "同意する",
         Back: "戻る",
@@ -5113,9 +5137,9 @@ module.exports = Backbone.Model.extend({
         Changes: "変更",
         SaveChanges: "変更を保存",
         YourName: "氏名",
-        BitcoinReturnAddress: "返品用ビットコインアドレス",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "返品用ビットコインアドレス",
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.",
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "現地通貨",
         TimeZone: "タイムゾーン",
         ShipToName: "氏名",
@@ -5414,6 +5438,7 @@ module.exports = Backbone.Model.extend({
         langName: "Polski",
         langCode: "pl",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Dalej",
         IAgree: "Zgadzam się",
         Back: "Wróć",
@@ -5521,9 +5546,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Zmiany",
         SaveChanges: "Zapisz wprowadzone zmiany",
         YourName: "Twoje imię",
-        BitcoinReturnAddress: "Adres zwrotów BTC",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "Wprowadź adres BTC...",
-        BitcoinReturnAddressInfo: "W przypadku zwrotów środki będą zwracane na ten adres.",
+        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Lokalna waluta",
         TimeZone: "Strefa czasowa",
         ShipToName: "Name",
