@@ -279,7 +279,7 @@ module.exports = Backbone.View.extend({
 
     if (checked.attr('id') === "buyWizardPaymentTypeDirect") {
       this.$el.find('.js-buyWizardModeratorList').addClass('hide');
-      this.$el.find('#buyWizardNoModerator').prop('checked', true);
+      this.$el.find('#buyWizardNoModerator').prop('checked', true).trigger( "click" );
       this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').removeClass('disabled');
     }else{
       this.$el.find('.js-buyWizardModeratorList').removeClass('hide');
@@ -585,8 +585,9 @@ module.exports = Backbone.View.extend({
 
   blockClicks: function(e) {
     "use strict";
-    e.stopPropagation();
-
+    if(!$(e.target).hasClass('js-externalLink')){
+      e.stopPropagation();
+    }
   },
 
   validateInput: function(e) {
