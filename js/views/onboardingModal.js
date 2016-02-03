@@ -213,7 +213,24 @@ module.exports = baseModal.extend({
     this.triggerOnEnterSpace(e, this.accPrev.bind(this));
   },
 
+  // keepPingingUrl: function(url, options) {
+  //   var 
+  //   if (!url) {
+  //     throw new Error('Please provide an url.');
+  //   }
+
+
+  // },
+
   settingsDone: function(e){
+    if (this.options.guidCreated) {
+      this._settingsDone(e);
+    } else {
+
+    }
+  },
+
+  _____settingsDone: function(e){
     var self = this,
         serverConfig = this.options.serverConfig,
         guidCreation;

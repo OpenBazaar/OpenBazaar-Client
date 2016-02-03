@@ -78,10 +78,6 @@ serverConfigMd.on('sync', function(md) {
   startInitSequence();
 });
 
-// $.ajax({
-//   beforeSend: function() { jqxhr.requestURL = "http://some/url"; },
-// });
-
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 window.lang = user.get("language");
 
@@ -191,38 +187,140 @@ var loadProfile = function(landingRoute) {
   });
 };
 
-launchOnboarding = function(creatingGuid) {
-  // For local servers, a creatingGuid promise is passed in.
-  var options = {
-    model: user,
-    userProfile: userProfile,
-    serverConfig: serverConfigMd
-  };
+// launchOnboarding = function(creatingGuid) {
+//   // For local servers, a creatingGuid promise is passed in.
+//   var options = {
+//     model: user,
+//     userProfile: userProfile,
+//     serverConfig: serverConfigMd
+//   };
 
-  if (creatingGuid) options['guidCreationPromise'] = creatingGuid;
+//   if (creatingGuid) options['guidCreationPromise'] = creatingGuid;
+//   onboardingModal && onboardingModal.remove();
+//   onboardingModal = new OnboardingModal(options);
+//   onboardingModal.render().open();
+
+//   if (creatingGuid) {
+//     creatingGuid.fail(function() {
+//       // guid creation failed
+//       // server probably went down during guid creation
+//       // todo: need to test this very edgy case
+//       onboardingModal && onboardingModal.remove()
+//       onboardingModal = null;
+//       startLocalInitSequence();
+//       console.log('guid creation failed - meatballs');
+//       window.meatballs = arguments;
+//     });
+//   }
+
+//   onboardingModal.on('onboarding-complete', function(guid) {
+//     console.log('onboarding is complete - hoo to the ray!');
+//     onboardingModal && onboardingModal.remove()
+//     onboardingModal = null;
+//     loadProfile('#userPage/' + guid + '/store');       
+//   });  
+// };
+
+// launchServerConnect = function() {
+//   serverConnectModal && serverConnectModal.remove();
+//   serverConnectModal = new ServerConnectModal({
+//     model: serverConfigMd
+//   });
+
+//   serverConnectModal.on('connect', function() {
+//     serverConnectModal.remove();
+//     startInitSequence();
+//     $loadingModal.removeClass('hide');
+//   });
+
+//   serverConnectModal.render().open();
+//   serverConfigMd.isLocalServer() && serverConnectModal.start();
+// };
+
+// startLocalInitSequence = function() {
+//   return isLocalServerRunning(
+//     serverConfigMd.getServerBaseUrl() + '/profile',
+//     serverConfigMd.getGuidCheckUrl(),
+//     {
+//       interval: 100, // 10 times a second
+//       maxAttempts: 1, // for 1 seconds    
+//     }
+//   ).done(function(creatingGuid, profileData) {
+//     console.log('server is running');
+
+//     // server is running
+//     if (creatingGuid) {
+//       console.log('guid creation in progress');
+//       // guid creation in progress
+//       launchOnboarding(creatingGuid);
+//     } else {
+//       // Guid had previously been generated.
+//       if (__.isEmpty(profileData)) {
+//         // onboarding complete
+//         loadProfile();
+
+//         // todo: examine and potentially refactor loadProfile().
+//         // todo: since we have the profile data here,
+//         // we could pass it into loadProfile and if we do so,
+//         // it could skip that particular fetch.
+//       } else {
+//         // onboarding needed
+//         launchOnboarding($.Deferred().resolve().promise());
+//       }
+//     }
+//   }).fail(function() {
+//     console.log('The server is most certainly NOT running.');
+
+//     // server is down
+//     launchServerConnect();
+//   });
+// };
+
+// startRemoteInitSequence = function() {
+//   return isRemoteServerRunning(serverConfigMd.getServerBaseUrl() + '/profile')
+//     .done(function(profileData) {
+//       console.log('remote server is running');
+      
+//       // remote server is running
+//       if (__.isEmpty(profileData)) {
+//         // onboarding needed
+//         launchOnboarding();
+//       } else {
+//         // onboarding complete
+//         loadProfile();
+//       }
+//     }).fail(function() {
+//       console.log('The remote server is most certainly NOT running.');
+
+//       // remote server is down or guid is generating
+//       launchServerConnect();
+//     });
+// };
+
+// (startInitSequence = function() {
+//   if (serverConfigMd.isLocalServer()) {
+//     startLocalInitSequence();
+//   } else {
+//     startRemoteInitSequence();
+//   }
+// })();
+
+// $.ajax({
+//   beforeSend: function() { jqxhr.requestURL = "http://some/url"; },
+// });
+
+launchOnboarding = function(guidCreated) {
+  guidIsCreating = guidIsCreating || false;
   onboardingModal && onboardingModal.remove();
-  onboardingModal = new OnboardingModal(options);
+  onboardingModal = new OnboardingModal({ guidCreated: guidCreated });
   onboardingModal.render().open();
-
-  if (creatingGuid) {
-    creatingGuid.fail(function() {
-      // guid creation failed
-      // server probably went down during guid creation
-      // todo: need to test this very edgy case
-      onboardingModal && onboardingModal.remove()
-      onboardingModal = null;
-      startLocalInitSequence();
-      console.log('guid creation failed - meatballs');
-      window.meatballs = arguments;
-    });
-  }
 
   onboardingModal.on('onboarding-complete', function(guid) {
     console.log('onboarding is complete - hoo to the ray!');
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
-    loadProfile('#userPage/' + guid + '/store');       
-  });  
+    loadProfile('#userPage/' + guid + '/store');
+  });
 };
 
 launchServerConnect = function() {
@@ -237,74 +335,33 @@ launchServerConnect = function() {
     $loadingModal.removeClass('hide');
   });
 
-  serverConnectModal.render().open();
-  serverConfigMd.isLocalServer() && serverConnectModal.start();
-};
-
-startLocalInitSequence = function() {
-  return isLocalServerRunning(
-    serverConfigMd.getServerBaseUrl() + '/profile',
-    serverConfigMd.getGuidCheckUrl(),
-    {
-      interval: 100, // 10 times a second
-      maxAttempts: 1, // for 1 seconds    
-    }
-  ).done(function(creatingGuid, profileData) {
-    console.log('server is running');
-
-    // server is running
-    if (creatingGuid) {
-      console.log('guid creation in progress');
-      // guid creation in progress
-      launchOnboarding(creatingGuid);
-    } else {
-      // Guid had previously been generated.
-      if (__.isEmpty(profileData)) {
-        // onboarding complete
-        loadProfile();
-
-        // todo: examine and potentially refactor loadProfile().
-        // todo: since we have the profile data here,
-        // we could pass it into loadProfile and if we do so,
-        // it could skip that particular fetch.
-      } else {
-        // onboarding needed
-        launchOnboarding($.Deferred().resolve().promise());
-      }
-    }
-  }).fail(function() {
-    console.log('The server is most certainly NOT running.');
-
-    // server is down
-    launchServerConnect();
-  });
-};
-
-startRemoteInitSequence = function() {
-  return isRemoteServerRunning(serverConfigMd.getServerBaseUrl() + '/profile')
-    .done(function(profileData) {
-      console.log('remote server is running');
-      
-      // remote server is running
-      if (__.isEmpty(profileData)) {
-        // onboarding needed
-        launchOnboarding();
-      } else {
-        // onboarding complete
-        loadProfile();
-      }
-    }).fail(function() {
-      console.log('The remote server is most certainly NOT running.');
-
-      // remote server is down or guid is generating
-      launchServerConnect();
-    });
+  serverConnectModal.render()
+    .open()
+    .start();
 };
 
 (startInitSequence = function() {
-  if (serverConfigMd.isLocalServer()) {
-    startLocalInitSequence();
-  } else {
-    startRemoteInitSequence();
-  }
+  $.get(serverConfigMd.getServerBaseUrl() + '/guid_generation').done(function(guidData) {
+    // server is running
+    if (guidData.status == 'generating guid') {
+      // guid is being generated
+      launchOnboarding();
+    } else if (guidData.status == 'complete') {
+      // guid gen complete
+      $.get(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profileData) {
+        if (__.isEmpty(profileData)) {
+          // launch onboarding
+          launchOnboarding(true);
+        } else {
+          loadProfile();
+        }
+      }).fail(function() {
+        // server is down
+        launchServerConnect();
+      });
+    }
+  }).fail(function() {
+    // server is down
+    launchServerConnect();
+  });
 })();

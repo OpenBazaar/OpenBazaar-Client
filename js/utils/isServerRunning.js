@@ -25,7 +25,7 @@ module.exports = function(url, options) {
       clearInterval(pingInterval);
       clearTimeout(timesUp);
       deferred.resolve(data);
-    });
+    })
   }, options.interval);
 
   timesUp = setTimeout(function() {

@@ -1,9 +1,13 @@
 'use strict';
 
 // todo: doc this guy.
+
+// will keep trying to fetch the given url until it responds or
+// the given timeout is exceeded.
 module.exports = function(url, options) {
   var deferred = $.Deferred(),
       promise = deferred.promise(),
+      requests = [],
       defaults,
       pingInterval,
       timesUp,
@@ -22,10 +26,20 @@ module.exports = function(url, options) {
 
   pingInterval = setInterval(function() {
     request = $.get(url).done(function(data) {
+      if (jqXhr.statusText == 'abort') return;
+
       clearInterval(pingInterval);
       clearTimeout(timesUp);
-      deferred.resolve(data);
+      deferred.resolve(arguments);
+    }).fail(function(jqXhr) {
+      if (jqXhr.statusText == 'abort') return;
+
+      if (jqXhr.status !== 0) {
+        deferred.reject(arguments);  
+      }      
     });
+
+    requests.push(request);
   }, options.interval);
 
   timesUp = setTimeout(function() {
@@ -36,8 +50,11 @@ module.exports = function(url, options) {
   promise.cancel = function() {
     clearInterval(pingInterval);
     clearTimeout(timesUp);
-    request.abort();
     deferred.reject('canceled');
+
+    request.forEach(function(req) {
+      req.abort();
+    });
   };
 
   return promise;
