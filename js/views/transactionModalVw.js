@@ -295,7 +295,13 @@ module.exports = baseVw.extend({
   },
 
   sendDiscussionMessageClick: function(){
-    this.sendDiscussionMessage(this.model.get('vendor_offer').listing.id.guid);
+    var guid;
+    if(this.transactionType == "purchase"){
+      guid = this.model.get('vendor_offer').listing.id.guid;
+    } else if(this.transactionType == "sale"){
+      guid = this.model.get('buyer_order').order.id.guid;
+    }
+    this.sendDiscussionMessage(guid);
     this.sendDiscussionMessage(this.model.get('displayModerator').guid);
   },
 
@@ -344,7 +350,7 @@ module.exports = baseVw.extend({
 
     saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
       self.status = 4;
-      self.tabState = "summary";
+      self.tabState = "discussion";
       self.getData();
     }, '', discussionData);
   },
