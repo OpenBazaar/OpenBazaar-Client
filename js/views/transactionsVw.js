@@ -137,7 +137,7 @@ module.exports = baseVw.extend({
 
   tabHandler: function(e){
     "use strict";
-    var tab = $(e.target),
+    var tab = $(e.target).closest('.js-tab'),
         tabID = tab.data("tab"),
         showContent = this.$el.find('.js-'+tabID);
 

@@ -67,6 +67,9 @@ module.exports = baseVw.extend({
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
     }
 
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
+      this.handleSocketMessage(response);
+    });
 
     this.model = new orderModel({
       cCode: this.cCode,
@@ -116,9 +119,6 @@ module.exports = baseVw.extend({
       if(self.status == 0){
         self.showPayment();
       }
-      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
-        self.handleSocketMessage(response);
-      });
       self.getDiscussion();
       self.discussionScroller = self.$('.js-discussionScroller');
     });
@@ -129,8 +129,9 @@ module.exports = baseVw.extend({
     if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
       this.status = 1;
       this.getData();
-    } else if(data.message && data.subject == this.orderID){
-      this.addMessage(data.message);
+    } else if(data.message && data.message.subject == this.orderID){
+      var messageModel = new Backbone.Model(data.message);
+      this.addDiscussionMessage(messageModel);
     }
   },
 
@@ -255,8 +256,6 @@ module.exports = baseVw.extend({
       dataType: 'json',
       reset: true,
       success: function (collection, response, options) {
-        console.log(collection)
-        console.log(response)
         self.addAllDiscussionMessages();
       },
       error: function (jqXHR, status, errorThrown) {
@@ -273,7 +272,6 @@ module.exports = baseVw.extend({
         wrapper = this.$('.js-discussionWrapper');
 
     message.set('avatarURL', avatarURL);
-    console.log(message.get('message'));
     var discussionMessage = new chatMessageView({
       model: message
     });
@@ -281,16 +279,15 @@ module.exports = baseVw.extend({
     this.discussionCount++;
     this.$('.js-discussionCount').text(this.discussionCount);
     this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
+    this.$('.js-discussionForm').removeClass('disabled');
   },
 
   addAllDiscussionMessages: function(){
     var self = this;
-    console.log(this.discussionCol)
     if(this.discussionCol.length > 0){
       this.$('.js-discussionWrapper').html('');
       this.$('.js-discussionNotStarted').addClass('hide');
       this.$('.js-discussionStarted').removeClass('hide');
-      this.$('.js-discussionForm').removeClass('disable');
     }
     this.discussionCol.each(function(model, i){
       self.addDiscussionMessage(model);

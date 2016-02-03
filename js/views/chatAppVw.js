@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend({
     this.subViewsChat = [];
     this.render();
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
 
