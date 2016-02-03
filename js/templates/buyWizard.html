@@ -49,22 +49,22 @@
       <div class="accordion-window">
         <div class="accordion-child" id="BuyWizardBitcoinWallet">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            Bitcoin Wallet
+            <%= polyglot.t('buyFlow.BitcoinWallet') %>
             <div class="floatRight marginTop9"><img src="imgs/bitcoin-accepted.png" style="width: 80px;" /></div>
           </div>
           <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary alignCenter height324 borderBottomRightRaidus3 borderBottomLeftRaidus3">
-            <h2 class="margin0 marginTop80">Do you have a Bitcoin wallet?</h2>
-            <p class="textOpacity75 fontSize15">It only takes a few minutes to set one up</p>
+            <h2 class="margin0 marginTop80"><%= polyglot.t('buyFlow.HaveWallet') %></h2>
+            <p class="textOpacity75 fontSize15"><%= polyglot.t('buyFlow.QuickSetup') %></p>
             <div class="inlineBlock">
-              <div class="btn btn-txt btn-large custCol-secondary minWidth120 js-buyWizardDoesntHaveWallet">No</div>
-              <div class="btn btn-txt btn-large custCol-secondary minWidth120 marginLeft6 js-buyWizardHasWallet">Yes</div>
+              <div class="btn btn-txt btn-large custCol-secondary minWidth120 js-buyWizardDoesntHaveWallet"><%= polyglot.t('No') %></div>
+              <div class="btn btn-txt btn-large custCol-secondary minWidth120 marginLeft6 js-buyWizardHasWallet"><%= polyglot.t('Yes') %></div>
             </div>
           </div>
         </div>
 
         <div class="accordion-child" id="BuyWizardCreateWallet">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary">
-            Create Wallet
+            <%= polyglot.t('buyFlow.CreateWallet') %>
             <div class="floatRight marginTop9"><img src="imgs/bitcoin-accepted.png" style="width: 80px;" /></div>
           </div>
           <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
