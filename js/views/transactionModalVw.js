@@ -295,17 +295,20 @@ module.exports = baseVw.extend({
   },
 
   sendDiscussionMessageClick: function(){
-    var guid;
+    var guid,
+        rKey;
     if(this.transactionType == "purchase"){
       guid = this.model.get('vendor_offer').listing.id.guid;
+      rKey = this.model.get('vendor_offer').listing.id.pubkeys.encryption;
     } else if(this.transactionType == "sale"){
       guid = this.model.get('buyer_order').order.id.guid;
+      rKey = this.model.get('buyer_order').order.id.pubkeys.encryption;
     }
     this.sendDiscussionMessage(guid);
     this.sendDiscussionMessage(this.model.get('displayModerator').guid);
   },
 
-  sendDiscussionMessage: function(guid){
+  sendDiscussionMessage: function(guid, rKey){
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
     if (messageText) {
@@ -321,7 +324,7 @@ module.exports = baseVw.extend({
           "message": messageText,
           "subject": this.orderID,
           "message_type": "DISPUTE",
-          "recipient_key": this.model.get('vendor_offer').listing.id.pubkeys.encryption
+          "recipient_key": rKey
         }
       };
       this.socketView.sendMessage(JSON.stringify(chatMessage));
