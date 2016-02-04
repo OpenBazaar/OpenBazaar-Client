@@ -97,32 +97,10 @@ module.exports = baseModal.extend({
         request,
         timesup,
         rejectLater,
-        onConnect,
+        checkProfile,
         onClose;
 
-    if (app.getHeartbeatSocket().getReadyState() === 1) {
-      return deferred.resolve().promise();
-    }
-
-    app.connectHeartbeatSocket();
-
-    promise.cleanup = function() {
-      clearTimeout(timesup);
-      clearTimeout(rejectLater);
-      request && request.abort();
-      app.getHeartbeatSocket().off(null, onConnect);
-      app.getHeartbeatSocket().off(null, onClose);
-    };
-
-    promise.cancel = function() {
-      deferred.reject('canceled');
-    }
-
-    promise.always(function() {
-      promise.cleanup();
-    });
-
-    app.getHeartbeatSocket().on('open', (onConnect = function() {
+    checkProfile = function() {
       // check authentication
       request = $.ajax({
         url: app.serverConfig.getServerBaseUrl() + '/profile',
@@ -141,7 +119,31 @@ module.exports = baseModal.extend({
           deferred.reject();
         }
       });
-    }));
+    };
+
+    if (app.getHeartbeatSocket().getReadyState() === 1) {
+      checkProfile();
+    }
+
+    app.connectHeartbeatSocket();
+
+    promise.cleanup = function() {
+      clearTimeout(timesup);
+      clearTimeout(rejectLater);
+      request && request.abort();
+      app.getHeartbeatSocket().off(null, checkProfile);
+      app.getHeartbeatSocket().off(null, onClose);
+    };
+
+    promise.cancel = function() {
+      deferred.reject('canceled');
+    }
+
+    promise.always(function() {
+      promise.cleanup();
+    });
+
+    app.getHeartbeatSocket().on('open', checkProfile);
 
     app.getHeartbeatSocket().on('close', (onClose = function() {
       // On local servers the close event on a down server is
@@ -188,6 +190,8 @@ module.exports = baseModal.extend({
           attempts += 1;
           connect();
         }
+      }).always(function() {
+        self.connectAttempt = null;
       });
     })();
   },
@@ -198,6 +202,10 @@ module.exports = baseModal.extend({
       this.connectAttempt = null;
       this.setState({ status: 'failed' });
     }
+  },
+
+  isStarted: function() {
+    return !!this.connectAttempt;
   },
 
   remove: function() {

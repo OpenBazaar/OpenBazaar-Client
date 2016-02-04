@@ -22,7 +22,7 @@
           <% if (ob.isLocal) { %>
           <%= polyglot.t('serverConnectModal.attempt') %> <span class="attempt"></span> <%= polyglot.t('of') %> 3
           <% } %>
-        <% } else if (ob.status === 'failed') { %>
+        <% } else if (ob.status === 'failed' || ob.status === 'failed-auth') { %>
         <a class="js-retry"><%= polyglot.t('serverConnectModal.retry') %></a>
         <% } %>
       </span>
@@ -126,7 +126,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border <% ob.errors.username && print('invalid') %>">
-                <input name="username" type="text" id="fld_username" placeholder="optional" class="fieldItem" value="<%= ob.username %>">
+                <input name="username" type="text" id="fld_username" class="fieldItem" value="<%= ob.username %>">
               </div>
             </div>
 
@@ -148,7 +148,7 @@
               </div>
 
               <div class="flexCol-9 custCol-border <% ob.errors.password && print('invalid') %>">
-                <input name="password" type="password" id="fld_password" placeholder="optional" class="fieldItem" value="<%= ob.password %>">
+                <input name="password" type="password" id="fld_password" class="fieldItem" value="<%= ob.password %>">
               </div>
             </div>                        
            </div>

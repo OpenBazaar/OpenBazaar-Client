@@ -365,6 +365,13 @@ $(document).ajaxSend(function(e, jqxhr, settings) {
   }
 });
 
+$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+  if (jqxhr.status === 401) {
+    launchServerConnect();
+  }
+});
+
+
 launchOnboarding = function(guidCreating) {
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
@@ -391,12 +398,24 @@ launchServerConnect = function() {
 
     serverConnectModal.on('connect', function() {
       serverConnectModal.remove();
+      serverConnectModal = null;
       // $loadingModal.removeClass('hide');
+
+      // clear some flags so the heartbeat events will
+      // appropriatally loadProfile or launch onboarding
+      guidCreating = null;
+      profileLoaded = false;
     });
 
     serverConnectModal.render()
       .open()
       .start();
+  } else {
+    // if (!serverConnectModal.isStarted()) serverConnectModal.start();
+    if (!serverConnectModal.isOpen()) {
+      serverConnectModal.open();
+      if (!serverConnectModal.isStarted()) serverConnectModal.start();
+    }
   }
 };
 

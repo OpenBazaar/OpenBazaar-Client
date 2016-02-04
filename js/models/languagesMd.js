@@ -429,7 +429,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -853,7 +853,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -1285,7 +1285,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -1721,7 +1721,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -2158,7 +2158,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -2590,8 +2590,8 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -3023,7 +3023,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -3455,7 +3455,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -3891,7 +3891,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -4326,7 +4326,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -4760,7 +4760,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -5197,7 +5197,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
@@ -5618,7 +5618,7 @@ module.exports = Backbone.Model.extend({
           statusTryingToConnect: "Trying to connect to your server", //notTranslated
           statusConnected: "Connected", //notTranslated
           statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed.", //notTranslated
+          statusFailedAuthentication: "Authentication failed", //notTranslated
           serverConfiguration: "Server Configuration", //notTranslated
           attempt: "Attempt", //notTranslated
           intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated

@@ -33,7 +33,6 @@ App.prototype.connectHeartbeatSocket = function() {
   clearTimeout(this.heartbeatSocketTimesup);
 
   if (this._heartbeatSocket) {
-    console.log('reusing existing heartbeat socket');
     this._heartbeatSocket.connect(this.serverConfig.getHeartbeatSocketUrl());
   } else {
     this._heartbeatSocket = new Socket(this.serverConfig.getHeartbeatSocketUrl());
