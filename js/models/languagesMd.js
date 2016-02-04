@@ -9,10 +9,12 @@ module.exports = Backbone.Model.extend({
         langName: "English",
         langCode: "en-US",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Next",
         IAgree: "I Agree",
         Back: "Back",
         EnterMessage: "Enter message...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload",
         You: "You",
         Skip: "Skip",
@@ -20,8 +22,8 @@ module.exports = Backbone.Model.extend({
         Navigation: "Navigation", 
         Cancel: "Cancel",
         ClosingOpenBazaar: "Close (Your page will go offline)", 
-        Minimize: "Minimize", //notTranslated
-        Maximize: "Maximize", //notTranslated
+        Minimize: "Minimize",
+        Maximize: "Maximize",
         Close: "Close",
         Yes: "Yes",
         No: "No",
@@ -31,6 +33,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Good",
         Poor: "Poor",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Refurbished",
         Physical: "Physical",
@@ -70,7 +73,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
         SearchForUsersPlaceholder: "Type a name...",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...",
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -106,7 +109,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Returns",
         ReturnsPolicy: "Returns Policy",
         Ampersand: "&",
-        Tags: "Tags", //notTranslated
+        Tags: "Tags",
         Keywords: "Keywords",
         ShipsFrom: "Ships From",
         ShipsTo: "Ships To",
@@ -116,9 +119,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
-        BitcoinReturnAddress: "Bitcoin Return Address",
+        BitcoinReturnAddress: "Enter your Bitcoin Address",
         BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...",
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.",
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -144,7 +147,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme",
         Listing: "Listing",
         Listings: "Listings",
-        ViewPage: "View page", //notTranslated
+        ViewPage: "View page",
         Pages: "Pages",
         Page: "Page",
         Language: "Language",
@@ -157,7 +160,7 @@ module.exports = Backbone.Model.extend({
         Free: "Free",
         Category: "Category",
         ProcessingTime: "Processing Time",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Select photos",
         DragOrUploadPhotos: "Drag or upload photos",
         ExpirationDate: "Expires On",
         UploadCoverPhoto: "Upload a cover photo",
@@ -195,11 +198,11 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Save Avatar",
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
-        Loading: "Loading...", // not translated
+        Loading: "Loading...",
         Purchases: "Purchases",
         Sales: "Sales",
         Cases: "Cases",
-        Enter: "Enter", //notTranslated
+        Enter: "Enter",
         Discover: "Discover",
         Block: "Block",
         Unblock: "Unblock",
@@ -255,7 +258,7 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
+          OrderDetails: "Order Details",
           SoldBy: "Seller",
           PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
@@ -295,7 +298,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction",
           Seller: "Seller",
           Buyer: "Buyer",
-          transferReceipt: "transferReceipt",
+          transferReceipt: "Transfer Receipt",
           copyTxid: "copy tx ID",
           Close: "Close",
           FundOrder: "Fund Order",
@@ -333,22 +336,22 @@ module.exports = Backbone.Model.extend({
           sellerError: "The seller's server has rejected the purchase request. This may be due to a connection issue.",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid. If it is valid, try again in a few seconds.",
           pageUnavailable: "This page is currently unavailable.",
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID."//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID."
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", 
           support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>", //notTranslated
-          licensing: "<p>OpenBazaar is open source software using the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
+          licensing: "<p>OpenBazaar is open source software using the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Saved",
           SaveSuccess: "Your changes have been saved."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Scanning your network",
+          searchingText: "Scanning your network for",
+          noResults: "No listings found in your network tagged with"
         },
         filters: {
           pagesAllTypes: "All types",
@@ -376,7 +379,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar Configuration",
           Introduction: "Introduction",
-          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and it's open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           theme: "Select a Theme for your Page",
           chooseLanguage: "Select Your Language",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
@@ -402,10 +405,34 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar",
           Finished: "Finished"
         },
+        walletProviders: {
+          CoinbaseTagline: "The world's most popular way to buy, sell, and use bitcoin.",
+          SamouraiTagline: "Secure mobile wallet. Emphasis on privacy.",
+          AirbitzTagline: "Privacy. Security. Autonomy. Decentralized.",
+          BreadwalletTagline: "Connects directly to the bitcoin network, no servers. Beautiful simplicity, maximum security.",
+          RushWalletTagline: "Get a Bitcoin address quickly and easily in your browser.",
+          MyCeliumTagline: "One of the longest in market, most secure and reliable Bitcoin wallets.",
+          CoinkiteTagline: "The Most Powerful Bitcoin Wallet",
+          BlockchaininfoTagline: "The world's most popular bitcoin wallet. Safer, Friendlier, Easier.",
+          DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma."
+        },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address",
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment",
           SendDirectlyTo: "Send direct payment to %{handle}",
           MustAddAddress: "You must add an address to ship to",
@@ -424,20 +451,21 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address",
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
-          directPaymentTo: "Direct Payment to",
           paymentSent: "Payment Sent!",
           total: "Total"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "No results found"
         }
       },
       {
         langName: "Espa&ntilde;ol",
         langCode: "sp",
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "Omitir",
@@ -452,6 +480,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Restaurado",
         Physical: "F&iacute;sico",
@@ -533,9 +562,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Cambios",
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
-        BitcoinReturnAddress: "Direcci&oacute;n de devoluciones Bitcoin",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -710,7 +739,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -748,7 +777,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "Guardado",
@@ -814,6 +843,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Usted debe agregar una dirección para env&iacute;os",
@@ -832,7 +874,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -844,10 +885,12 @@ module.exports = Backbone.Model.extend({
         langName: "German",
         langCode: "de",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Weiter",
         IAgree: "Akzeptieren",
         Back: "Zur&uuml;ck",
         EnterMessage: "Nachricht eingeben...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "&Uuml;berspringen",
@@ -862,6 +905,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Hervorragend",
         Good: "Gut",
         Poor: "Mangelhaft",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "&Uuml;berholt",
         Physical: "Physisch",
@@ -945,9 +989,9 @@ module.exports = Backbone.Model.extend({
         Changes: "&Auml;nderungen",
         SaveChanges: "&Auml;nderungen speichern",
         YourName: "Dein Name",
-        BitcoinReturnAddress: "Bitcoin R&uuml;cksendeaddresse",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Lokale W&auml;hrung",
         TimeZone: "Zeitzone",
         ShipToName: "Empfänger",
@@ -1126,7 +1170,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1164,7 +1208,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "Gespeichert",
@@ -1230,6 +1274,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Sie m&uuml;ssen eine Versandadresse hinzuzuf&uuml;gen",
@@ -1248,7 +1305,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -1260,10 +1316,12 @@ module.exports = Backbone.Model.extend({
         langName: "Italiano",
         langCode: "it",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Avanti",
         IAgree: "Sono d'accordo",
         Back: "Indietro",
         EnterMessage: "Inserire messaggio...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Ricaricare",
         You: "Tu",
         Skip: "Salta",
@@ -1282,6 +1340,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Eccellente",
         Good: "Buono",
         Poor: "Scarso",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Ricondizionato",
         Physical: "Fisico",
@@ -1367,9 +1426,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Modifiche",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
-        BitcoinReturnAddress: "Indirizzo Bitcoin di restituzione",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
-        BitcoinReturnAddressInfo: "In caso di restituzione, i tuoi soldi verranno messi nel seguente indirizzo.",
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1546,7 +1605,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1584,7 +1643,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "Salvato",
@@ -1650,6 +1709,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finito"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Pagamento diretto",
           SendDirectlyTo: "Invia pagamento diretto a %{handle}",
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
@@ -1668,7 +1740,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Indirizzi di ritorno",
           moderatorPaymentDisclaimer: "Si applica solo se l'operazione si conclude in una contestazione.",
           directPaymentDisclaimer: "Usa il pagamento diretto con cauzione, i fondi sono irreversibili",
-          directPaymentTo: "Pagamento diretto a",
           paymentSent: "Pagamento inviato!",
           total: "Totale"
         },
@@ -1680,10 +1751,12 @@ module.exports = Backbone.Model.extend({
         langName: "Français",
         langCode: "fr-FR",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Suivant",
         IAgree: "Je suis d'accord",
         Back: "Retour",
         EnterMessage: "Entrer un message...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Actualiser",
         You: "Vous",
         Skip: "Passer",
@@ -1702,6 +1775,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Bon",
         Poor: "Médiocre",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Remis à neuf",
         Physical: "Physique",
@@ -1787,9 +1861,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Changements",
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
-        BitcoinReturnAddress: "Adresse Bitcoin de retour",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
-        BitcoinReturnAddressInfo: "En cas de remboursement, vos fonds seront envoyés à l'adresse suivante.",
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -1915,18 +1989,18 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
-        Firewall: "Firewall", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
+        Firewall: "Pare-feu",
+        ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
-          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, step 0.01, min 0)"
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, par étape de 0.01, 0 min)"
         },
         BecomeModerator: "Devenir modérateur",
         EditModerator: "Paramètres de modérateur",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
+          OrderDetails: "Détails de la commande",
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
@@ -1966,7 +2040,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Transaction modérée",
           Seller: "Vendeur",
           Buyer: "Acheteur",
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Reçu de transfert",
           copyTxid: "copier l'ID de transaction",
           Close: "Fermer",
           FundOrder: "Financer la commande",
@@ -2004,7 +2078,7 @@ module.exports = Backbone.Model.extend({
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Enregistrés",
@@ -2071,6 +2145,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Terminé"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Paiement direct",
           SendDirectlyTo: "Envoyer un paiement direct à %{handle}",
           MustAddAddress: "Vous devez ajouter une adresse pour expédier",
@@ -2089,7 +2176,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Adresse de retour",
           moderatorPaymentDisclaimer: "N'appliquer que si la transaction se termine par un litige.",
           directPaymentDisclaimer: "Utilisez le paiement direct avec prudence, les fonds sont irréversibles",
-          directPaymentTo: "Paiement direct à",
           paymentSent: "Paiement envoyé !",
           total: "Total"
         },
@@ -2101,10 +2187,12 @@ module.exports = Backbone.Model.extend({
         langName: "Română",
         langCode: "ro",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Următorul",
         IAgree: "Sunt de acord",
         Back: "Înapoi",
         EnterMessage: "Introduceți mesajul...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "Sari peste",
@@ -2119,6 +2207,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelent",
         Good: "Bun",
         Poor: "Prost",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Renovat",
         Physical: "Fizic",
@@ -2202,9 +2291,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Modificări",
         SaveChanges: "Salvare Modificări",
         YourName: "Numele dvs.",
-        BitcoinReturnAddress: "Adresa Bitcoin",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Valuta locală",
         TimeZone: "Fus orar",
         ShipToName: "Numele",
@@ -2383,7 +2472,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -2421,7 +2510,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "Salvat",
@@ -2487,6 +2576,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
@@ -2505,7 +2607,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -2517,10 +2618,12 @@ module.exports = Backbone.Model.extend({
         langName: "Russian",
         langCode: "ru",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Далее",
         IAgree: "Согласен",
         Back: "Назад",
         EnterMessage: "Ввести сообщение...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Обновить",
         You: "Вы",
         Skip: "Пропустить",
@@ -2535,6 +2638,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Идеальное",
         Good: "Хорошее",
         Poor: "Плохое",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Восстановленный",
         Physical: "Физический",
@@ -2618,9 +2722,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Изменения",
         SaveChanges: "Применить",
         YourName: "Ваше имя",
-        BitcoinReturnAddress: "Биткойн-адрес",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -2799,7 +2903,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -2837,7 +2941,7 @@ module.exports = Backbone.Model.extend({
           about: "о нас",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
           support: "поддержка",
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Сохранено",
@@ -2903,6 +3007,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Завершено"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Оплатить напрямую",
           SendDirectlyTo: "Отправка прямого платежа %{handle}",
           MustAddAddress: "Вы должны указать адрес для доставки",
@@ -2921,7 +3038,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "адрес возврата",
           moderatorPaymentDisclaimer: "Применяется только в случаях если транзакция имеет статус спора.",
           directPaymentDisclaimer: "Будьте осторожны при отправке средств напрямую, средства невозвратимы",
-          directPaymentTo: "Прямой платёж",
           paymentSent: "Платёж отправлен!",
           total: "Всего"
         },
@@ -2933,10 +3049,12 @@ module.exports = Backbone.Model.extend({
         langName: "Slovak",
         langCode: "sk",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Ďalej",
         IAgree: "Súhlasím",
         Back: "Späť",
         EnterMessage: "Vložte správu...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "Preskočiť",
@@ -2951,6 +3069,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Renovované",
         Physical: "Fyzické",
@@ -3033,9 +3152,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Zmeny",
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
-        BitcoinReturnAddress: "Bitcoinová adresa",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -3215,7 +3334,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -3253,7 +3372,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "Uložené",
@@ -3319,6 +3438,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Musíte zadať adresu pre doručenie",
@@ -3337,7 +3469,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -3349,10 +3480,12 @@ module.exports = Backbone.Model.extend({
         langName: "Turkish",
         langCode: "tr",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Sonraki",
         IAgree: "Kabul ediyorum",
         Back: "Geri",
         EnterMessage: "İletinizi yazın...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "Atla",
@@ -3371,6 +3504,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Çok iyi",
         Good: "İyi",
         Poor: "İyi değil",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "Stok Takip Kodu",
         Refurbished: "Yenilenmiş",
         Physical: "Fiziksel",
@@ -3456,9 +3590,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Değişiklikler",
         SaveChanges: "Değişiklikleri Kaydet",
         YourName: "Adınız",
-        BitcoinReturnAddress: "Bitcoin adresiniz",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Yerel para birimi",
         TimeZone: "Saat Dilimi",
         ShipToName: "Ad",
@@ -3635,7 +3769,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -3673,7 +3807,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "Kaydedildi",
@@ -3739,6 +3873,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Gönderilecek bir adres eklemelisiniz",
@@ -3757,7 +3904,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -3769,10 +3915,12 @@ module.exports = Backbone.Model.extend({
         langName: "Klingon",
         langCode: "klg",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Veb",
         IAgree: "jIQochbe'",
         Back: "Chap",
         EnterMessage: "QIn 'el...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "BuSHa'",
@@ -3791,6 +3939,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Chon",
         Good: "Maj",
         Poor: "VIvup",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "SabHa'",
         Physical: "Hap 'u'",
@@ -3875,9 +4024,9 @@ module.exports = Backbone.Model.extend({
         Changes: "ChoH",
         SaveChanges: "ChoH toD",
         YourName: "PonglIj'e'",
-        BitcoinReturnAddress: "Bot SoQ mIr",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Huch lutu'lu'bej",
         TimeZone: "PoH mIch",
         ShipToName: "Pong",
@@ -4054,7 +4203,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4092,7 +4241,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "Choq",
@@ -4158,6 +4307,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "SoQ Duj ghob'e' chel SoH",
@@ -4176,7 +4338,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -4188,10 +4349,12 @@ module.exports = Backbone.Model.extend({
         langName: "中文",
         langCode: "zh-CN",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "下一步",
         IAgree: "我同意",
         Back: "上一步",
         EnterMessage: "留言",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "跳过",
@@ -4210,6 +4373,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "出色",
         Good: "完好",
         Poor: "较差",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "整修过",
         Physical: "实物",
@@ -4294,9 +4458,9 @@ module.exports = Backbone.Model.extend({
         Changes: "更改",
         SaveChanges: "保存更改",
         YourName: "您的姓名",
-        BitcoinReturnAddress: "比特币地址",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -4473,7 +4637,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4511,7 +4675,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "以保存",
@@ -4576,6 +4740,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "务必添加送货地址",
@@ -4594,7 +4771,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -4607,10 +4783,12 @@ module.exports = Backbone.Model.extend({
         langCode: "ko",
         /* Use capitalized keys for widely reused text that must be capitalized...
         Korean type doesn't have capitalized letters*/
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "다음",
         IAgree: "동의",
         Back: "뒤",
         EnterMessage: "메세지 입력...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Reload", //notTranslated
         You: "You", //notTranslated
         Skip: "거르다",
@@ -4629,6 +4807,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "훌륭한",
         Good: "줗은",
         Poor: "불량",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "단장",
         Physical: "물질",
@@ -4714,9 +4893,9 @@ module.exports = Backbone.Model.extend({
         Changes: "변경",
         SaveChanges: "변경 사항 저장",
         YourName: "당신 이름",
-        BitcoinReturnAddress: "당신 비트코인 주소",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "지역 통화",
         TimeZone: "시간대",
         ShipToName: "이름",
@@ -4893,7 +5072,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4931,7 +5110,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "저장하다",
@@ -4997,6 +5176,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Finished" //notTranslated
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "당신 에게 제공할수 있는 배송지 주소를 추가",
@@ -5015,7 +5207,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          directPaymentTo: "Direct Payment to", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
           total: "Total" //notTranslated
         },
@@ -5027,10 +5218,12 @@ module.exports = Backbone.Model.extend({
         langName: "日本語 (Japanese)",
         langCode: "ja-JP",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "次へ",
         IAgree: "同意する",
         Back: "戻る",
         EnterMessage: "本文",
+        Recommended: "Recommended", //notTranslated
         Reload: "リロード",
         You: "アカウント",
         Skip: "スキップ",
@@ -5046,6 +5239,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "極良質",
         Good: "良質",
         Poor: "まあまあ良い",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "整備済製品", // check
         Physical: "商品", // check
@@ -5130,9 +5324,9 @@ module.exports = Backbone.Model.extend({
         Changes: "変更",
         SaveChanges: "変更を保存",
         YourName: "氏名",
-        BitcoinReturnAddress: "返品用ビットコインアドレス",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "返品用ビットコインアドレス",
-        BitcoinReturnAddressInfo: "In case of a refund, your funds will be issued to the following address.",
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "現地通貨",
         TimeZone: "タイムゾーン",
         ShipToName: "氏名",
@@ -5299,7 +5493,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -5337,7 +5531,7 @@ module.exports = Backbone.Model.extend({
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
           support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>", //notTranslated
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
           Saved: "保存しました",
@@ -5402,6 +5596,19 @@ module.exports = Backbone.Model.extend({
           Finished: "完了"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "直接購入",
           SendDirectlyTo: "%{handle}に直接購入する",
           MustAddAddress: "お届け先住所を入力してください。",
@@ -5420,7 +5627,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "返品用アドレス",
           moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
-          directPaymentTo: "%{handle}に直接購入",
           paymentSent: "送金しました！",
           total: "注文合計"
         },
@@ -5432,10 +5638,12 @@ module.exports = Backbone.Model.extend({
         langName: "Polski",
         langCode: "pl",
         /* Use capitalized keys for widely reused text that must be capitalized */
+        IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Dalej",
         IAgree: "Zgadzam się",
         Back: "Wróć",
         EnterMessage: "Wprowadź tekst...",
+        Recommended: "Recommended", //notTranslated
         Reload: "Odśwież",
         You: "Ja",
         Skip: "Pomiń",
@@ -5454,6 +5662,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Doskonały",
         Good: "W dobrym stanie",
         Poor: "W złym stanie",
+        ChangeCurrency: "Change currency", //notTranslated
         SKU: "Na stanie",
         Refurbished: "Odnowiony",
         Physical: "Fizyczny",
@@ -5539,9 +5748,9 @@ module.exports = Backbone.Model.extend({
         Changes: "Zmiany",
         SaveChanges: "Zapisz wprowadzone zmiany",
         YourName: "Twoje imię",
-        BitcoinReturnAddress: "Adres zwrotów BTC",
+        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "Wprowadź adres BTC...",
-        BitcoinReturnAddressInfo: "W przypadku zwrotów środki będą zwracane na ten adres.",
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Lokalna waluta",
         TimeZone: "Strefa czasowa",
         ShipToName: "Name",
@@ -5755,7 +5964,7 @@ module.exports = Backbone.Model.extend({
           about: "<p>OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p><p>Oprogramowanie jest otwarte, udostępniane na licencji MIT. Kod dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githubie</a>.</p><p>OpenBazaar jest projektem społeczośniowym i zachęcamy do wejścia na nasz kanał <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> lub odwiedzenia naszego <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p><p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"\" target=\"_blank\">poradnik</a> do OpenBazaar w wersji 1.0.</p><p>Jeśli nadaj masz jakieś pytania, kliknij <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">tutaj</a>.</p>",
           contributors: "<p>OpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy, którzy poświęcają swój czas, by uczynić handel wolnym. Oto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub inny rodzaj uczestnictwa.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li><li>Michał Pado</li></ul>", 
           support: "<p>Możesz wesprzeć OpenBazaar na wiele sposobów, by wspomóc nas w naszej misji.</p><p>Kupowanie i sprzedawanie dóbr i usług przyczynia się do powiększenia naszej społeczności, a to z kolei zwiększa atrakcyjność platformy w oczach potencjalnych nowych użytkowników. Uprzejme prośby (kierowane do sprzedawców) o akceptację płatności w Bitcoinie za pośrednictwem naszej platformy pomaga docierać do kolejnych osób i pokazuje, że jest zapotrzebowanie na handel P2P.</p><p>Jeśli jesteś programistą, odwiedź naszego <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githuba</a> i zobacz, czy może nie ma czegoś, w czym mógłbyś nam pomóc. Oprócz pomocy z kodem źrodłowym mamy nadzieję, liberalna natura projektu zachęci was do tworzenia nowych usług bazujących na istniejącej sieci.</p><p>Możesz również <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">wspomóc nas finansowo</a>. Środki zostaną wykorzystane na pokrycie kosztów związanych z konferencjami, programem Bug Bounty oraz promocją //bounties.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Dołącz do naszego Slacka</a>, jeśli masz jakieś pomysły związane z projektem lub chciałbyś o coś zapytać deweloperów.</p>",
-          licensing: "<p>OpenBazaar to otwarte oprogramowanie oparte na licencj MIT. To liberalna licencja, zezwala pozwala na wykorzystanie kodu przy innych otwartych projektach, jak i projektach prawnie zastrzeżonych. Pełna treść licencji dostępna jest pod poniższym linkiem.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
+          licensing: "<p>OpenBazaar to otwarte oprogramowanie oparte na licencj MIT. To liberalna licencja, zezwala pozwala na wykorzystanie kodu przy innych otwartych projektach, jak i projektach prawnie zastrzeżonych. Pełna treść licencji dostępna jest pod poniższym linkiem.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Zapisano",
@@ -5822,6 +6031,19 @@ module.exports = Backbone.Model.extend({
           Finished: "Gotowe"
         },
         buyFlow: {
+          PayForOrder: "Pay for Order", //notTranslated
+          NeedTempAddress: "I need a temporary address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          CantFindAddress: "I can't find my bitcoin address", //notTranslated
+          BitcoinWallet: "Bitcoin Wallet", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
+          ModeratedPayment: "Moderated Payment", //notTranslated
+          DisputeFee: "Dispute fee", //notTranslated
+          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
+          CreateWallet: "Create a Wallet", //notTranslated
+          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
           DirectPayment: "Płatność bezpośrednia",
           SendDirectlyTo: "Wyślij bezpośrednią płatność do %{handle}",
           MustAddAddress: "Musisz wprowadzić adres wysyłki",
@@ -5840,7 +6062,6 @@ module.exports = Backbone.Model.extend({
           returnAddress: "Adres zwrotów",
           moderatorPaymentDisclaimer: "Dotyczy wyłącznie transakcji w sporze.",
           directPaymentDisclaimer: "Korzystaj z płatności bezpośredniej ostrożnie; środki nie są zwracane",
-          directPaymentTo: "Płatność bezpośrednia do",
           paymentSent: "Dokonano płatności!",
           total: "Suma"
         }

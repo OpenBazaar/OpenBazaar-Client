@@ -366,7 +366,10 @@ module.exports = baseVw.extend({
   },
 
   blockClicks: function(e) {
-    e.stopPropagation();
+    "use strict";
+    if(!$(e.target).hasClass('js-externalLink')){
+      e.stopPropagation();
+    }
   },
 
   closeModal: function(){

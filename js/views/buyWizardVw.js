@@ -12,6 +12,20 @@ var __ = require('underscore'),
     clipboard = require('clipboard');
 Backbone.$ = $;
 
+// randomize function
+$.fn.randomize = function(selector){
+    var $elems = selector ? $(this).find(selector) : $(this).children(),
+        $parents = $elems.parent();
+
+    $parents.each(function(){
+        $(this).children(selector).sort(function(a,b){
+            return Math.round(Math.random()) - 0.5;
+        }).detach().appendTo(this);
+    });
+
+    return this;
+};
+
 module.exports = Backbone.View.extend({
 
   className: "buyView",
@@ -25,6 +39,8 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardReturnNext': 'returnNext',
     'click .js-buyWizardAddressBack': 'addressPrev',
     'click .js-buyWizardAddressNext': 'addressNext',
+    'click .js-buyWizardHasWallet': 'hasWallet',
+    'click .js-buyWizardDoesntHaveWallet': 'doesntHaveWallet',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
     'click .js-buyWizardSendPurchase': 'sendPurchase',
@@ -35,6 +51,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
+    'change input[name="radioPaymentType"]': 'changePaymentType',
     'blur .js-buyWizardPostalInput': 'updateMap',
     'blur input': 'validateInput'
   },
@@ -92,7 +109,8 @@ module.exports = Backbone.View.extend({
     this.accChildren = this.acc.find('.accordion-child');
     this.accNum = this.accChildren.length;
     this.accWin = this.acc.find('.accordion-window');
-    this.accWin.css({'left':0, 'width': function(){return this.accWidth * this.accNum;}});
+    this.accWinWidth = this.accWidth * this.accNum;
+    this.accWin.css({'left':'0px', 'width':this.accWinWidth});
     this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
   },
 
@@ -106,8 +124,6 @@ module.exports = Backbone.View.extend({
       this.accWin.css('left', function(){
         return oldPos - moveBy;
       });
-      // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
     }
   },
 
@@ -121,24 +137,25 @@ module.exports = Backbone.View.extend({
       this.accWin.css('left', function(){
         return oldPos + moveBy;
       });
-      // focus search input
-      $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
     }
   },
 
-  accGoToID: function(ID){
+  accGoToID: function(ID, focusOn){
     "use strict";
     var self = this,
+        targID = this.accWin.find(ID),
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        currIndex = oldPos % this.accNum * -1,
-        newIndex = this.accWin.find(ID).index(),
+        currIndex = oldPos / this.accWidth * -1,
+        newIndex = targID.index(),
         moveBy = this.accWidth * (currIndex - newIndex);
 
     this.accWin.css('left', function(){
       return oldPos + moveBy;
     });
-    // focus search input
-    $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
+    // focus
+    if(focusOn){
+      targID.find(focusOn).focus();
+    }
   },
 
   render: function(){
@@ -170,6 +187,12 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
+
+      //randomize the bitcoin wallet providers 5 times
+      for(var i = 0; i < 5; i++) {
+        $(".js-BuyWizardWallets").randomize();
+      }
+
     });
     return this;
   },
@@ -183,7 +206,9 @@ module.exports = Backbone.View.extend({
     } else {
       this.model.set('selectedModerator', "");
     }
-    this.accNext();
+    
+    this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').removeClass('disabled');
+
   },
 
   showMaps: function(){
@@ -223,6 +248,16 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardAddressNext').removeClass('disabled');
   },
 
+  hasWallet: function(e){
+    "use strict";
+    this.accGoToID('#BuyWizardPaymentType');
+  },
+
+  doesntHaveWallet: function(e){
+    "use strict";
+    this.accNext();
+  },
+
   modelToFormData: function(modelJSON, formData, existingKeys) {
     "use strict";
     var newFormData = formData || new FormData();
@@ -232,6 +267,23 @@ module.exports = Backbone.View.extend({
       }
     });
     return newFormData;
+  },
+
+  changePaymentType: function(e) {
+    "use strict";
+    var checked = $('[name="radioPaymentType"]:checked');
+
+    // uncheck prior selections
+    $('.js-buyWizardModeratorRadio').prop('checked', false);
+
+    if (checked.attr('id') === "buyWizardPaymentTypeDirect") {
+      this.$el.find('.js-buyWizardModeratorList').addClass('hide');
+      this.$el.find('#buyWizardNoModerator').prop('checked', true).trigger( "click" );
+      this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').removeClass('disabled');
+    }else{
+      this.$el.find('.js-buyWizardModeratorList').removeClass('hide');
+      this.$el.find('#BuyWizardPaymentType .js-buyWizardModNext').addClass('disabled');
+    }
   },
 
   saveNewAddress: function(){
@@ -526,8 +578,9 @@ module.exports = Backbone.View.extend({
 
   blockClicks: function(e) {
     "use strict";
-    e.stopPropagation();
-
+    if(!$(e.target).hasClass('js-externalLink')){
+      e.stopPropagation();
+    }
   },
 
   validateInput: function(e) {
