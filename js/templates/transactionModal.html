@@ -91,6 +91,9 @@
           <div class="pad10left txt-unleaded">
             <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
               <strong><%= polyglot.t('transactions.OrderStatus') %>: </strong><%= polyglot.t('transactions.OrderStatus'+ob.status) %>
+              <% if(ob.displayModerator){ %>
+              <%= polyglot.t('transactions.InEscrow') %>
+              <% } %>
             </div>
           </div>
         </div>
@@ -113,6 +116,9 @@
               </div>
               <div class="fontSize13 txt-fade">
                 <%= polyglot.t('transactions.OrderStatus'+ob.status) %>
+                <% if(ob.displayModerator){ %>
+                <%= polyglot.t('transactions.InEscrow') %>
+                <% } %>
               </div>
             </div>
           </div>
