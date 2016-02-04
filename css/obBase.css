@@ -1404,6 +1404,12 @@ removed because I don't think we're using the trick to hide the borders any more
   border: 5px dashed #fff;
   box-sizing: border-box;
   height: calc(100% - 50px) !important;
+  animation: borderDashedFade .35s normal linear;
+}
+
+@-webkit-keyframes borderDashedFade {
+    0%   {opacity: 0;}
+    100% {opacity: 1;}
 }
 
 #obContainer.box-borderDashed {
@@ -2980,7 +2986,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   cursor: pointer;
   top: 50px;
   right: 80px;
-  height: 155px;
   width: 233px;
   background: #252525 url('../imgs/onboarding-discover-callout.png') 100% 100%;
   background-size: cover;
