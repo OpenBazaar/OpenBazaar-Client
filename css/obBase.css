@@ -2968,7 +2968,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .notification .rowItem {
-  opacity: .35;
+  opacity: 1;
 }
 
 .notification .rowItem:hover {
