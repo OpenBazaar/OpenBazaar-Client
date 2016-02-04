@@ -404,7 +404,7 @@ launchServerConnect = function() {
       // clear some flags so the heartbeat events will
       // appropriatally loadProfile or launch onboarding
       guidCreating = null;
-      profileLoaded = false;
+      loadProfileNeeded = true;
     });
 
     serverConnectModal.render()
@@ -421,7 +421,7 @@ launchServerConnect = function() {
 
 var heartbeat = app.getHeartbeatSocket(),
     guidCreating,
-    profileLoaded;
+    loadProfileNeeded = true;
 
 // socket.on('open', function(e) {
 //   console.log('hb open in: ' + (e.data || ''));
@@ -444,7 +444,7 @@ heartbeat.on('message', function(e) {
     switch (e.jsonData.status) {
       case 'generating GUID':
         // if (guidCreating) return;
-        // todo: put in some time in the off chance the guid
+        // todo: put in some timeout in the off chance the guid
         // creation process doesn't complete after a long time.
         guidCreating = $.Deferred();
 
@@ -459,12 +459,21 @@ heartbeat.on('message', function(e) {
         guidCreating.resolve();
         break;
       case 'online':
-        // todo: check profile to see if onboarding is
-        // needed.
-        if (!profileLoaded && !guidCreating) {
-          profileLoaded = true;
-          loadProfile();
+        if (loadProfileNeeded && !guidCreating) {
+          loadProfileNeeded = false;
+
+          $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
+            if (__.isEmpty(profile)) {
+              launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+            } else {
+              loadProfile();              
+            }
+          });
         }
+
+        // todo: check for edge case where guid creating
+        // is still pending here, meaning the GUID generation
+        // complete message never arrived. Auth will fail.
     }
   }
 });
