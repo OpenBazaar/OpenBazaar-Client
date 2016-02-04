@@ -780,7 +780,9 @@ module.exports = Backbone.View.extend({
 
   blockClicks: function(e) {
     "use strict";
-    e.stopPropagation();
+    if(!$(e.target).hasClass('js-externalLink')){
+      e.stopPropagation();
+    }
   },
 
   close: function(){

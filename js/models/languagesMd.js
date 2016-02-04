@@ -121,7 +121,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Your name",
         BitcoinReturnAddress: "Enter your Bitcoin Address",
         BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...",
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
         LocalCurrency: "Local currency",
         TimeZone: "Time zone",
         ShipToName: "Name",
@@ -418,8 +418,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -557,7 +557,7 @@ module.exports = Backbone.Model.extend({
         YourNombre: "Su nombre",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -839,8 +839,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -982,7 +982,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Dein Name",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Lokale W&auml;hrung",
         TimeZone: "Zeitzone",
         ShipToName: "Empfänger",
@@ -1268,8 +1268,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -1417,7 +1417,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Tuo nome",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1701,8 +1701,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -1850,7 +1850,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Votre nom",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Devise locale",
         TimeZone: "Fuseau horaire",
         ShipToName: "Nom",
@@ -2135,8 +2135,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -2278,7 +2278,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Numele dvs.",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Valuta locală",
         TimeZone: "Fus orar",
         ShipToName: "Numele",
@@ -2564,8 +2564,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -2707,7 +2707,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Ваше имя",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -2993,8 +2993,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -3135,7 +3135,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Vaše meno",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -3422,8 +3422,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -3571,7 +3571,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Adınız",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Yerel para birimi",
         TimeZone: "Saat Dilimi",
         ShipToName: "Ad",
@@ -3855,8 +3855,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -4003,7 +4003,7 @@ module.exports = Backbone.Model.extend({
         YourName: "PonglIj'e'",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "Huch lutu'lu'bej",
         TimeZone: "PoH mIch",
         ShipToName: "Pong",
@@ -4287,8 +4287,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -4435,7 +4435,7 @@ module.exports = Backbone.Model.extend({
         YourName: "您的姓名",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -4718,8 +4718,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -4868,7 +4868,7 @@ module.exports = Backbone.Model.extend({
         YourName: "당신 이름",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
         LocalCurrency: "지역 통화",
         TimeZone: "시간대",
         ShipToName: "이름",
@@ -5152,8 +5152,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -5297,7 +5297,7 @@ module.exports = Backbone.Model.extend({
         YourName: "氏名",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "返品用ビットコインアドレス",
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "現地通貨",
         TimeZone: "タイムゾーン",
         ShipToName: "氏名",
@@ -5570,8 +5570,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
@@ -5719,7 +5719,7 @@ module.exports = Backbone.Model.extend({
         YourName: "Twoje imię",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "Wprowadź adres BTC...",
-        BitcoinReturnAddressInfo: "If a refund is needed, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
+        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
         LocalCurrency: "Lokalna waluta",
         TimeZone: "Strefa czasowa",
         ShipToName: "Name",
@@ -6003,8 +6003,8 @@ module.exports = Backbone.Model.extend({
           NeedTempAddress: "I need a temporary address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the Seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee if a dispute arises.", //notTranslated
+          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
+          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
           HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
