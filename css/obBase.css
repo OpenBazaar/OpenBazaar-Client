@@ -2968,7 +2968,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .notification .rowItem {
-  opacity: .35;
+  opacity: 1;
 }
 
 .notification .rowItem:hover {
@@ -4428,6 +4428,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .marginTop50 {
   margin-top: 50px;
 }
+#ov1  .marginTop80 {
+  margin-top: 80px;
+}
 
 #ov1  .marginBottom2 {
   margin-bottom: 2px;
@@ -4532,6 +4535,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 250px;
 }
 
+#ov1  .height324 {
+  height: 324px;
+}
+
 #ov1  .minHeight650 {
   min-height: 650px;
 }
@@ -4621,6 +4628,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding5 {
   padding: 5px;
+}
+
+#ov1  .padding8 {
+  padding: 8px;
 }
 
 #ov1  .padding10 {
@@ -4776,6 +4787,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 65px;
 }
 
+#ov1 .width80 {
+  width: 80px;
+}
 #ov1 .width105 {
   width: 105px;
 }
@@ -4793,7 +4807,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width200 {
   width: 200px;
 }
-
 #ov1 .width260 {
   width: 260px;
 }
@@ -4801,8 +4814,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width270 {
   width: 270px;
 }
+#ov1 .width380 {
+  width: 380px;
+}
 #ov1 .width400 {
   width: 400px;
+}
+
+#ov1 .width420{
+  width: 420px;
 }
 
 #ov1 .width450 {
@@ -4840,7 +4860,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1  .borderBottom1 {
-  border-bottom: 1px;
+  border-bottom: solid 1px;
 }
 
 #ov1 .fontWeight500 {
@@ -4892,6 +4912,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .underline {
   text-decoration: underline;
+}
+
+#ov1 .inlineBlock {
+  display: inline-block;
 }
 
 #ov1 .zIndex4 {
