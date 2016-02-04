@@ -145,7 +145,7 @@ module.exports = Backbone.View.extend({
     var self = this,
         targID = this.accWin.find(ID),
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        currIndex = oldPos % this.accNum * -1,
+        currIndex = oldPos / this.accWidth * -1,
         newIndex = targID.index(),
         moveBy = this.accWidth * (currIndex - newIndex);
 
