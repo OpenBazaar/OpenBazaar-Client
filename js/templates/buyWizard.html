@@ -328,7 +328,14 @@
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border"><%= polyglot.t('Cancel') %></a>
+             <% if(ob.user.refund_address === ""){ %>
+              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border-primary">
+                <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
+                <%= polyglot.t('Back') %>
+              </a>
+            <% }else{ %>
+              <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border"><%= polyglot.t('Cancel') %></a>
+            <% } %>
             <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3  borderRight custCol-border">
               <%= polyglot.t('Next') %>
               <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
@@ -357,10 +364,8 @@
                    class="marginRight10 underline js-externalLink">
                   <%= polyglot.t('buyFlow.CantFindAddress') %>
                 </a>
-                <a href="https://rushwallet.com/"
-                   class="underline js-externalLink">
-                  <%= polyglot.t('buyFlow.NeedTempAddress') %>
-                </a>
+                <a href="https://rushwallet.com/" class="underline js-externalLink"><%= polyglot.t('buyFlow.NeedTempAddress') %></a>
+                <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-right" data-tooltip="<%= polyglot.t('buyFlow.NeedTempAddressHelper') %>"></span>
               </div>
             </div>
           </div>
