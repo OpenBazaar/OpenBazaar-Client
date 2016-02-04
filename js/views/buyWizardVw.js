@@ -109,7 +109,8 @@ module.exports = Backbone.View.extend({
     this.accChildren = this.acc.find('.accordion-child');
     this.accNum = this.accChildren.length;
     this.accWin = this.acc.find('.accordion-window');
-    this.accWin.css({'left':0, 'width': function(){return this.accWidth * this.accNum;}});
+    this.accWinWidth = this.accWidth * this.accNum;
+    this.accWin.css({'left':'0px', 'width':this.accWinWidth});
     this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
   },
 
@@ -123,8 +124,6 @@ module.exports = Backbone.View.extend({
       this.accWin.css('left', function(){
         return oldPos - moveBy;
       });
-      // focus search input
-      $(this).closest('.accordion-child').next('.accordion-child').find('.search').focus();
     }
   },
 
@@ -138,24 +137,25 @@ module.exports = Backbone.View.extend({
       this.accWin.css('left', function(){
         return oldPos + moveBy;
       });
-      // focus search input
-      $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
     }
   },
 
-  accGoToID: function(ID){
+  accGoToID: function(ID, focusOn){
     "use strict";
     var self = this,
+        targID = this.accWin.find(ID),
         oldPos = parseInt(this.accWin.css('left').replace("px","")),
         currIndex = oldPos % this.accNum * -1,
-        newIndex = this.accWin.find(ID).index(),
+        newIndex = targID.index(),
         moveBy = this.accWidth * (currIndex - newIndex);
 
     this.accWin.css('left', function(){
       return oldPos + moveBy;
     });
-    // focus search input
-    $(this).closest('.accordion-child').prev('.accordion-child').find('.search').focus();
+    // focus
+    if(focusOn){
+      targID.find(focusOn).focus();
+    }
   },
 
   render: function(){
@@ -250,8 +250,7 @@ module.exports = Backbone.View.extend({
 
   hasWallet: function(e){
     "use strict";
-    this.accNext(2);
-    this.$el.find('#buyWizardBitcoinAddressInput').focus();
+    this.accGoToID('#BuyWizardPaymentType');
   },
 
   doesntHaveWallet: function(e){
