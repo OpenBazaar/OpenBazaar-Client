@@ -22,8 +22,8 @@ module.exports = Backbone.Model.extend({
         Navigation: "Navigation", 
         Cancel: "Cancel",
         ClosingOpenBazaar: "Close (Your page will go offline)", 
-        Minimize: "Minimize", //notTranslated
-        Maximize: "Maximize", //notTranslated
+        Minimize: "Minimize",
+        Maximize: "Maximize",
         Close: "Close",
         Yes: "Yes",
         No: "No",
@@ -73,7 +73,7 @@ module.exports = Backbone.Model.extend({
         SearchFeedPlaceholder: "Type a keyword...",
         SearchForFollowersPlaceholder: "Type a name...",
         SearchForUsersPlaceholder: "Type a name...",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Type a title...",
         EstDeliveryDomesticPlaceholder: "3-5 Business Days",
         EstDeliveryInternationalPlaceholder: "7-15 Business Days",
         OrderProcessingTimePlaceholder: "Enter time needed to process order",
@@ -109,7 +109,7 @@ module.exports = Backbone.Model.extend({
         Returns: "Returns",
         ReturnsPolicy: "Returns Policy",
         Ampersand: "&",
-        Tags: "Tags", //notTranslated
+        Tags: "Tags",
         Keywords: "Keywords",
         ShipsFrom: "Ships From",
         ShipsTo: "Ships To",
@@ -147,7 +147,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Theme",
         Listing: "Listing",
         Listings: "Listings",
-        ViewPage: "View page", //notTranslated
+        ViewPage: "View page",
         Pages: "Pages",
         Page: "Page",
         Language: "Language",
@@ -160,7 +160,7 @@ module.exports = Backbone.Model.extend({
         Free: "Free",
         Category: "Category",
         ProcessingTime: "Processing Time",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Select photos",
         DragOrUploadPhotos: "Drag or upload photos",
         ExpirationDate: "Expires On",
         UploadCoverPhoto: "Upload a cover photo",
@@ -198,11 +198,11 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Save Avatar",
         NewAvatar: "Select New Avatar",
         NewCoverImage: "Select New Cover Image",
-        Loading: "Loading...", // not translated
+        Loading: "Loading...",
         Purchases: "Purchases",
         Sales: "Sales",
         Cases: "Cases",
-        Enter: "Enter", //notTranslated
+        Enter: "Enter",
         Discover: "Discover",
         Block: "Block",
         Unblock: "Unblock",
@@ -258,7 +258,7 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
+          OrderDetails: "Order Details",
           SoldBy: "Seller",
           PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
@@ -276,6 +276,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped",
           OrderStatus3: "Completed (Payment released)",
           OrderStatus4: "Disputed",
+          InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
           OrderTotalInBTC: "BTC Total",
           PaymentProtection: "Payment Protection",
@@ -297,7 +298,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction",
           Seller: "Seller",
           Buyer: "Buyer",
-          transferReceipt: "transferReceipt",
+          transferReceipt: "Transfer Receipt",
           copyTxid: "copy tx ID",
           Close: "Close",
           FundOrder: "Fund Order",
@@ -330,7 +331,7 @@ module.exports = Backbone.Model.extend({
           sellerError: "The seller's server has rejected the purchase request",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid.",
           pageUnavailable: "This page is currently unavailable.",
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID."//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID."
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -343,9 +344,9 @@ module.exports = Backbone.Model.extend({
           SaveSuccess: "Your changes have been saved."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Scanning your network",
+          searchingText: "Scanning your network for",
+          noResults: "No listings found in your network tagged with"
         },
         filters: {
           pagesAllTypes: "All types",
@@ -399,7 +400,7 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Explore Listings and Pages on OpenBazaar",
           Finished: "Finished"
         },
         walletProviders: {
@@ -448,7 +449,7 @@ module.exports = Backbone.Model.extend({
           total: "Total"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "No results found"
         }
       },
       {
@@ -698,7 +699,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -706,10 +707,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -731,7 +733,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1127,7 +1129,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -1135,10 +1137,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -1160,7 +1163,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1572,6 +1575,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confermato/Inviato",
           OrderStatus3: "Completato (fondi rilasciati)",
           OrderStatus4: "Contestato",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Totale ordine",
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -1593,7 +1597,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -1976,18 +1980,18 @@ module.exports = Backbone.Model.extend({
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
-        Firewall: "Firewall", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
+        Firewall: "Pare-feu",
+        ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
           ProvideResolution: "Apporter des résolutions aux conflits",
           ServiceFee: "Frais de service",
-          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, step 0.01, min 0)"
+          ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, par étape de 0.01, 0 min)"
         },
         BecomeModerator: "Devenir modérateur",
         EditModerator: "Paramètres de modérateur",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
+          OrderDetails: "Détails de la commande",
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
@@ -2005,6 +2009,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmé/Expédié",
           OrderStatus3: "Terminé (fonds reçus)",
           OrderStatus4: "Contesté",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
           PaymentProtection: "Protection de paiement",
@@ -2026,7 +2031,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Transaction modérée",
           Seller: "Vendeur",
           Buyer: "Acheteur",
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Reçu de transfert",
           copyTxid: "copier l'ID de transaction",
           Close: "Fermer",
           FundOrder: "Financer la commande",
@@ -2423,7 +2428,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -2431,10 +2436,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -2456,7 +2462,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -2864,6 +2870,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Подтверждено/выслано",
           OrderStatus3: "Завершено (средства освобождены)",
           OrderStatus4: "Оспорено",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -2885,7 +2892,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -3281,7 +3288,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -3289,10 +3296,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -3314,7 +3322,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -3714,7 +3722,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -3722,10 +3730,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -3747,7 +3756,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4146,7 +4155,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4154,10 +4163,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -4179,7 +4189,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -4578,7 +4588,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -4586,10 +4596,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -4611,7 +4622,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -5011,7 +5022,7 @@ module.exports = Backbone.Model.extend({
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
           sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Paid (Funds in Escrow)", // not translated
+          sortByStatus1: "Ready to process (Paid in full)", // not translated
           sortByStatus2: "Confirmed/Shipped", // not translated
           sortByStatus3: "Completed (Funds Released)", // not translated
           sortByStatus4: "Disputed", // not translated
@@ -5019,10 +5030,11 @@ module.exports = Backbone.Model.extend({
           OrderDate: "Order Date", // not translated
           OrderStatus: "Order Status", // not translated
           OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Paid (Funds in Escrow)", // not translated
+          OrderStatus1: "Ready to process (Paid in full)", // not translated
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -5044,7 +5056,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -5442,6 +5454,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "確認完了・出荷済",
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "異議・クレーム",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
@@ -5463,7 +5476,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
-          transferReceipt: "transferReceipt", // not translated
+          transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
           FundOrder: "Fund Order", // not translated
@@ -5874,6 +5887,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Potwierdzone/Wysłane",
           OrderStatus3: "Zakończone (opłacone)",
           OrderStatus4: "W trakcie sporu",
+          InEscrow: "- In Escrow", // not translated
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
           PaymentProtection: "Ubezpieczenie płatności",
