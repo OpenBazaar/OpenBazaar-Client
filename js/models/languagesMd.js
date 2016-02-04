@@ -424,7 +424,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -847,7 +847,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -1278,7 +1278,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -1713,7 +1713,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -2149,7 +2149,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -2580,7 +2580,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -3011,7 +3011,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -3442,7 +3442,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -3877,7 +3877,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -4311,7 +4311,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -4744,7 +4744,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -5180,7 +5180,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -5600,7 +5600,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -6035,7 +6035,7 @@ module.exports = Backbone.Model.extend({
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
