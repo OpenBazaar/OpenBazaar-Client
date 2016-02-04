@@ -215,93 +215,12 @@ module.exports = baseVw.extend({
   addTransaction: function(model, tabWrapper, type){
     model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
     model.set('transactionType', type);
+    console.log(model.attributes)
     var orderShort = new orderShortVw({
       model: model
     });
     this.registerChild(orderShort);
     tabWrapper.append(orderShort.render().el);
-  },
-
-  renderPurchases: function(filterBy){
-    "use strict";
-    var self = this;
-    this.purchasesWrapper.html('');
-    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
-      this.purchasesCol.comparator = function(model) {
-        return -model.get("timestamp");
-      };
-      this.purchasesCol.sort();
-    }
-    if(filterBy == "dateOldest"){
-      this.purchasesCol.comparator = function(model) {
-        return model.get("timestamp");
-      };
-      this.purchasesCol.sort();
-    }
-    this.purchasesCol.each(function(model, i){
-      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
-        self.addPurchase(model);
-      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-        self.addPurchase(model);
-      }
-    });
-
-    this.$el.find('.js-purchasesCount').html(this.purchasesCol.length);
-    this.$el.find(".js-purchases").append(this.purchasesWrapper);
-  },
-
-  addPurchase: function(model){
-    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-    model.set('transactionType', "purchase");
-    var orderShort = new orderShortVw({
-      model: model
-    });
-    this.registerChild(orderShort);
-    this.purchasesWrapper.append(orderShort.render().el);
-  },
-
-  renderSales: function(filterBy){
-    "use strict";
-    var self = this;
-    this.salesWrapper.html('');
-    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
-      this.salesCol.comparator = function(model) {
-        return -model.get("timestamp");
-      };
-      this.salesCol.sort();
-    }
-    if(filterBy == "dateOldest"){
-      this.salesCol.comparator = function(model) {
-        return model.get("timestamp");
-      };
-      this.salesCol.sort();
-    }
-    this.salesCol.each(function(model, i){
-      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
-        self.addSale(model);
-      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-        self.addSale(model);
-      }
-    });
-
-    this.$el.find('.js-salesCount').html(this.salesCol.length);
-    this.$el.find(".js-sales").append(this.salesWrapper);
-  },
-
-  addSale: function(model){
-    "use strict";
-    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-    model.set('transactionType', "sale");
-    var orderShort = new orderShortVw({
-      model: model
-    });
-    this.registerChild(orderShort);
-    this.salesWrapper.append(orderShort.render().el);
-  },
-
-  renderCases: function(models){
-    "use strict";
-
   },
 
   openOrderModal: function(options){
