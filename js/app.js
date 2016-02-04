@@ -390,8 +390,7 @@ launchServerConnect = function() {
     });
 
     serverConnectModal.on('connect', function() {
-      // serverConnectModal.remove();
-      // startInitSequence();
+      serverConnectModal.remove();
       // $loadingModal.removeClass('hide');
     });
 
@@ -401,20 +400,9 @@ launchServerConnect = function() {
   }
 };
 
-// var heartbeatSocket = new Socket('ws://happy-hippo:18470');
-// setTimeout(function() {
-//   heartbeatSocket.socket.close();
-// }, 2000);
-
-// todo: add helper method to the serverConfigMd class
-// var heartbeatSocket = new Socket('ws://' + serverConfigMd.get('server_ip') + ':18470');
-
-// var bindHeartbeatHandlers = function(socket) {
-//   window.obEventBus.off('heartbeat-close'
-// }
-
 var heartbeat = app.getHeartbeatSocket(),
-    guidCreating;
+    guidCreating,
+    profileLoaded;
 
 // socket.on('open', function(e) {
 //   console.log('hb open in: ' + (e.data || ''));
@@ -451,24 +439,16 @@ heartbeat.on('message', function(e) {
         });
         guidCreating.resolve();
         break;
+      case 'online':
+        // todo: check profile to see if onboarding is
+        // needed.
+        if (!profileLoaded && !guidCreating) {
+          profileLoaded = true;
+          loadProfile();
+        }
     }
   }
 });
-
-var onlineMessageHandler = function(e) {
-  if (e.jsonData && e.jsonData.status && e.jsonData.status == 'online') {
-    if (!guidCreating) {
-      // todo: need to call profile to see if 401 comes back, meaning the client
-      // started after guid gen was already complete on a new server. In that case
-      // show server connnect modal.
-      loadProfile()
-    }
-
-    socket.off('message', onlineMessageHandler);
-  }
-};
-
-heartbeat.on('message', onlineMessageHandler);
 
 heartbeat.on('error', function(e) {
   console.log('hb error in');

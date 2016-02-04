@@ -6,6 +6,8 @@
     <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusConnected') %>.</p>  
   <% } else if (ob.status == 'failed') { %>  
     <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusFailedConnection') %>.</p>
+  <% } else if (ob.status == 'failed-auth') { %>  
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusFailedAuthentication') %>.</p>
   <% } %>
   </p>
 </div>

@@ -33,19 +33,20 @@ App.prototype.connectHeartbeatSocket = function() {
   clearTimeout(this.heartbeatSocketTimesup);
 
   if (this._heartbeatSocket) {
-    this._heartbeatSocket.connect();
+    console.log('reusing existing heartbeat socket');
+    this._heartbeatSocket.connect(this.serverConfig.getHeartbeatSocketUrl());
   } else {
-    this._heartbeatSocket = new Socket('ws://' + this.serverConfig .get('server_ip') + ':18470');
+    this._heartbeatSocket = new Socket(this.serverConfig.getHeartbeatSocketUrl());
 
     // proxy the socket's events into global events
-    this._heartbeatSocket.on('all', function(name, e) {
-      // console.log('heartbeat-moonshine: ' + name);
+    // this._heartbeatSocket.on('all', function(name, e) {
+    //   // console.log('heartbeat-moonshine: ' + name);
 
-      window.obEventBus.trigger('heartbeat-' + name, {
-        socket: self._heartbeatSocket,
-        e: e
-      });
-    });
+    //   window.obEventBus.trigger('heartbeat-' + name, {
+    //     socket: self._heartbeatSocket,
+    //     e: e
+    //   });
+    // });
 
     this._heartbeatSocket.on('close', function() {
       clearTimeout(self._heartbeatSocketTimesup);
@@ -53,12 +54,10 @@ App.prototype.connectHeartbeatSocket = function() {
 
     // give up if it takes to long
     this._heartbeatSocketTimesup = setTimeout(function() {
-      console.log('heartbeat socket timed out');
       if (self._heartbeatSocket.getReadyState() !== 1) {
-        console.log('gonna close');
         self._heartbeatSocket._socket.close();
       }
-    }, 5000);    
+    }, 3000);    
   }
 };
 

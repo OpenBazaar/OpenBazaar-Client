@@ -7,7 +7,9 @@ module.exports = Backbone.Model.extend({
     'id': 1,
     'server_ip': 'localhost',
     'rest_api_port': 18469,
-    'socket_port': 18466
+    // todo: rename to api socket port
+    'socket_port': 18466,
+    'heartbeat_socket_port': 18470
   },
 
   sync: localStorageSync.sync,
@@ -90,6 +92,12 @@ module.exports = Backbone.Model.extend({
     //   this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
   },
 
+  getHeartbeatSocketUrl: function() {
+    // return 'ws://' + this.get('server_ip') + ':' + this.get('socket_port');
+    return 'ws://' + this.get('server_ip') + ':' + this.get('heartbeat_socket_port');
+  },
+
+  // todo: change this name
   getWebSocketAddress: function() {
     return 'ws://' + this.get('server_ip') + ':' + this.get('socket_port');
   },

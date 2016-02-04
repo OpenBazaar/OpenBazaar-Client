@@ -30,6 +30,7 @@ module.exports = baseModal.extend({
     });
 
     this._state = this.getInitialState();
+    this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
   },
 
   getInitialState: function() {
@@ -48,7 +49,14 @@ module.exports = baseModal.extend({
   },
 
   saveForm: function() {
-    this.model.save();
+    if (__.isEqual(this.model.attributes, this._lastSavedAttrs)) {
+      return;
+    }
+
+    if (this.model.save()) {
+      this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
+      this.start();
+    };
   },
 
   restoreDefaults: function() {
@@ -57,12 +65,6 @@ module.exports = baseModal.extend({
     this.model.validationError = {};
     this.render();
   },
-
-  // onConnectAttempt: function(attempt) {
-  //   if (!this.isRemoved()) {
-  //     this.setState({ attempt: Math.ceil(attempt / 8) });
-  //   }
-  // },
 
   setState: function(state) {
     var newState;
@@ -92,36 +94,67 @@ module.exports = baseModal.extend({
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
+        request,
         timesup,
+        rejectLater,
         onConnect,
         onClose;
+
+    if (app.getHeartbeatSocket().getReadyState() === 1) {
+      return deferred.resolve().promise();
+    }
 
     app.connectHeartbeatSocket();
 
     promise.cleanup = function() {
       clearTimeout(timesup);
+      clearTimeout(rejectLater);
+      request && request.abort();
       app.getHeartbeatSocket().off(null, onConnect);
       app.getHeartbeatSocket().off(null, onClose);
     };
 
     promise.cancel = function() {
-      promise.cleanup();
       deferred.reject('canceled');
     }
 
-    app.getHeartbeatSocket().on('connect', (onConnect = function() {
-      deferred.resolve();
+    promise.always(function() {
       promise.cleanup();
+    });
+
+    app.getHeartbeatSocket().on('open', (onConnect = function() {
+      // check authentication
+      request = $.ajax({
+        url: app.serverConfig.getServerBaseUrl() + '/profile',
+        timeout: 3000
+      }).done(function() {
+        deferred.resolve();
+      }).fail(function(jqxhr) {
+        if (jqxhr.statusText === 'abort') return;
+        
+        if (jqxhr.status === 401) {
+          deferred.reject('failed-auth');
+        } else {
+          // assuming there's no business rules where
+          // the server would be up and still send back
+          // a failure code, outside of bad auth.
+          deferred.reject();
+        }
+      });
     }));
 
     app.getHeartbeatSocket().on('close', (onClose = function() {
-      promise.cleanup();
-      deferred.reject();
+      // On local servers the close event on a down server is
+      // almost instantaneous and the UI can't even show the
+      // user we're attempting to connect. So we'll put up a bit
+      // of a charade.
+      rejectLater = setTimeout(function() {
+        deferred.reject();
+      }, 1000);
     }));    
 
     timesup = setTimeout(function() {
       deferred.reject('timedout');
-      promise.cleanup();
     }, 3000);
 
     return promise;
@@ -145,11 +178,12 @@ module.exports = baseModal.extend({
 
       self.connectAttempt = self.attemptConnection().done(function() {
         self.setState({ status: 'connected' });
+        self.trigger('connect');
       }).fail(function(reason) {
         if (reason == 'canceled') return;
         
         if (attempts >= 3) {
-          self.setState({ status: 'failed' });  
+          self.setState({ status: reason === 'failed-auth' ? 'failed-auth' : 'failed' });
         } else {
           attempts += 1;
           connect();
@@ -158,53 +192,16 @@ module.exports = baseModal.extend({
     })();
   },
 
-  __start: function() {
-    var self = this;
-
-    // if (this._started) return this;
-    this.serverRunning && this.serverRunning.cancel();
-    this.setState(
-      __.extend(this.getInitialState(), { status: 'trying' })
-    );
-
-    if (this.model.isLocalServer()) {
-      this.serverRunning = isLocalServerRunning(
-        this.model.getServerBaseUrl() + '/profile',
-        this.model.getGuidCheckUrl(),
-        {
-          interval: 250,
-          // todo todo todo - make 24!!!!!
-          maxAttempts: 24, // for 6 seconds    
-          onAttempt: __.bind(this.onConnectAttempt, this)
-        }
-      ).done(function() {
-        self.setState({ status: 'connected'});
-        self.trigger('connect');
-      }).fail(function(status) {
-        if (status && status === 'canceled') return;
-        self.setState({ status: 'failed'});
-      });
-    } else {
-      this.serverRunning = isRemoteServerRunning(this.model.getServerBaseUrl() + '/profile')
-        .done(function() {
-          self.setState({ status: 'connected'});
-          self.trigger('connect');
-        }).fail(function(status) {
-          if (status && status === 'canceled') return;
-          self.setState({ status: 'failed'});
-        });
-    }
-
-    return this;
-  },
-
   stop: function() {
-    // todo: need to implement;
+    if (this.connectAttempt) {
+      this.connectAttempt.cancel();
+      this.connectAttempt = null;
+      this.setState({ status: 'failed' });
+    }
   },
 
   remove: function() {
-    // this.serverRunning && this.serverRunning.cancel();
-    this.connectAttempt && this.connectAttempt.cancel();
+    this.stop();
 
     // TODO: don't let us leave this modal with the model in an error state.
 
@@ -216,7 +213,7 @@ module.exports = baseModal.extend({
         scrollPos,
         $scrollContainer;
 
-    // todo: also restore focused element
+    // todo: also restore focused element and if possible cursor position
     $scrollContainer = this.$('.flexContainer.scrollOverflowYHideX');
     $scrollContainer.length && (scrollPos = $scrollContainer[0].scrollTop);
 
