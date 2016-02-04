@@ -1,0 +1,80 @@
+var Socket = require('./utils/Socket'),
+    ServerConfigMd = require('./models/serverConfigMd'),
+    _app;
+
+function App() {
+  var self = this;
+
+  // ensure we're a singleton
+  if (_app) return _app;
+
+  _app = this;
+
+  // TODO: what is wrong with the localStorage adapter??? shouldn't need
+  // to manually provide the data to the model. All that should be needed
+  // is an ID and then a subsequent fetch, but that doesn't return the data.
+  // Investigate!
+  this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
+  // serverConfigMd.fetch();
+  if (!localStorage['_serverConfig-1']) {
+    this.serverConfig.save();
+  }  
+
+  this.connectHeartbeatSocket();
+}
+
+App.prototype.connectHeartbeatSocket = function() {
+  var self = this;
+
+  if (this._heartbeatSocket && this._heartbeatSocket.getReadyState() <= 1) {
+    return;
+  }
+
+  clearTimeout(this.heartbeatSocketTimesup);
+
+  if (this._heartbeatSocket) {
+    this._heartbeatSocket.connect();
+  } else {
+    this._heartbeatSocket = new Socket('ws://' + this.serverConfig .get('server_ip') + ':18470');
+
+    // proxy the socket's events into global events
+    this._heartbeatSocket.on('all', function(name, e) {
+      // console.log('heartbeat-moonshine: ' + name);
+
+      window.obEventBus.trigger('heartbeat-' + name, {
+        socket: self._heartbeatSocket,
+        e: e
+      });
+    });
+
+    this._heartbeatSocket.on('close', function() {
+      clearTimeout(self._heartbeatSocketTimesup);
+    });
+
+    // give up if it takes to long
+    this._heartbeatSocketTimesup = setTimeout(function() {
+      console.log('heartbeat socket timed out');
+      if (self._heartbeatSocket.getReadyState() !== 1) {
+        console.log('gonna close');
+        self._heartbeatSocket._socket.close();
+      }
+    }, 5000);    
+  }
+};
+
+App.prototype.getHeartbeatSocket = function() {
+  return this._heartbeatSocket;
+};
+
+App.getApp = function() {
+  if (!_app) {
+    throw new Error('The app instance was never instantiated and is therefore not available.');
+  }
+
+  return _app;
+};
+
+
+module.exports = App;
+
+

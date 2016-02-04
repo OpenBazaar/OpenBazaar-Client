@@ -4,7 +4,8 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
     isLocalServerRunning = require('../utils/isLocalServerRunning'),    
-    isRemoteServerRunning = require('../utils/isRemoteServerRunning'),        
+    isRemoteServerRunning = require('../utils/isRemoteServerRunning'),
+    app = require('../App2.js').getApp(),        
     serverConfigMd = require('../models/serverConfigMd'),
     baseModal = require('./baseModal'),
     messageModal = require('../utils/messageModal.js');
@@ -57,11 +58,11 @@ module.exports = baseModal.extend({
     this.render();
   },
 
-  onConnectAttempt: function(attempt) {
-    if (!this.isRemoved()) {
-      this.setState({ attempt: Math.ceil(attempt / 8) });
-    }
-  },
+  // onConnectAttempt: function(attempt) {
+  //   if (!this.isRemoved()) {
+  //     this.setState({ attempt: Math.ceil(attempt / 8) });
+  //   }
+  // },
 
   setState: function(state) {
     var newState;
@@ -87,7 +88,77 @@ module.exports = baseModal.extend({
     this.start();
   },
 
+  attemptConnection: function() {
+    var self = this,
+        deferred = $.Deferred(),
+        promise = deferred.promise(),
+        timesup,
+        onConnect,
+        onClose;
+
+    app.connectHeartbeatSocket();
+
+    promise.cleanup = function() {
+      clearTimeout(timesup);
+      app.getHeartbeatSocket().off(null, onConnect);
+      app.getHeartbeatSocket().off(null, onClose);
+    };
+
+    promise.cancel = function() {
+      promise.cleanup();
+      deferred.reject('canceled');
+    }
+
+    app.getHeartbeatSocket().on('connect', (onConnect = function() {
+      deferred.resolve();
+      promise.cleanup();
+    }));
+
+    app.getHeartbeatSocket().on('close', (onClose = function() {
+      promise.cleanup();
+      deferred.reject();
+    }));    
+
+    timesup = setTimeout(function() {
+      deferred.reject('timedout');
+      promise.cleanup();
+    }, 3000);
+
+    return promise;
+  },
+
   start: function() {
+    var self = this,
+        attempts = 1,
+        connect;
+
+    this.connectAttempt && this.connectAttempt.cancel();
+
+    this.setState(
+      __.extend(this.getInitialState(), {
+        status: 'trying'
+      })
+    );
+
+    (connect = function() {
+      self.setState({ attempt: attempts });
+
+      self.connectAttempt = self.attemptConnection().done(function() {
+        self.setState({ status: 'connected' });
+      }).fail(function(reason) {
+        if (reason == 'canceled') return;
+        
+        if (attempts >= 3) {
+          self.setState({ status: 'failed' });  
+        } else {
+          attempts += 1;
+          connect();
+        }
+      });
+    })();
+  },
+
+  __start: function() {
     var self = this;
 
     // if (this._started) return this;
@@ -127,8 +198,13 @@ module.exports = baseModal.extend({
     return this;
   },
 
+  stop: function() {
+    // todo: need to implement;
+  },
+
   remove: function() {
-    this.serverRunning && this.serverRunning.cancel();
+    // this.serverRunning && this.serverRunning.cancel();
+    this.connectAttempt && this.connectAttempt.cancel();
 
     // TODO: don't let us leave this modal with the model in an error state.
 

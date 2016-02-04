@@ -1,3 +1,6 @@
+var App = require('./App2');
+    app = new App();
+
 var __ = window.__ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery');
@@ -22,12 +25,12 @@ var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     isLocalServerRunning = require('./utils/isLocalServerRunning'),
     isRemoteServerRunning = require('./utils/isRemoteServerRunning'),
+    // todo: todo: do you need me anymore
     Socket = require('./utils/Socket'),
     router = require('./router'),
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
     languagesModel = require('./models/languagesMd'),
-    ServerConfigMd = require('./models/serverConfigMd'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     setTheme = require('./utils/setTheme.js'),
@@ -41,7 +44,7 @@ var Polyglot = require('node-polyglot'),
     $loadingModal = $('.js-loadingModal'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
-    serverConfigMd,
+    serverConfigMd = app.serverConfig,
     newRouter,
     newPageNavView,
     newSocketView,
@@ -54,20 +57,6 @@ var Polyglot = require('node-polyglot'),
     launchOnboarding,
     launchServerConnect,
     setServerUrl;
-
-
-// TODO: what is wrong with the localStorage adapter??? shouldn't need
-// to manually provide the data to the model. All that should be needed
-// is an ID and then a subsequent fetch, but that doesn't return the data.
-// Investigate!
-serverConfigMd = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
-// serverConfigMd.fetch();
-if (!localStorage['_serverConfig-1']) {
-  serverConfigMd.save();
-}
-
-console.log('remove me: remove me: remove me');
-window.serverConfigMd = serverConfigMd;
 
 (setServerUrl = function() {
   var baseServerUrl = serverConfigMd.getServerBaseUrl();
@@ -394,36 +383,62 @@ launchOnboarding = function(guidCreating) {
   });
 };
 
-// var heartbeatSocket = new WebSocket('ws://' + serverConfigMd.get('server_ip') + ':18470');
-// var heartbeatSocket = new WebSocket('ws://happy-hippo:18470');
-var heartbeatSocket = new Socket('ws://' + serverConfigMd.get('server_ip') + ':18470');
-var guidCreating;
+launchServerConnect = function() {
+  if (!serverConnectModal) {
+    serverConnectModal = new ServerConnectModal({
+      model: serverConfigMd
+    });
 
-console.log('heartbeat - removal yo removal yo');
-window.heartbeat = heartbeatSocket;
+    serverConnectModal.on('connect', function() {
+      // serverConnectModal.remove();
+      // startInitSequence();
+      // $loadingModal.removeClass('hide');
+    });
 
-heartbeatSocket.on('open', function(e) {
-  console.log('hb open in: ' + (e.data || ''));
-  window.open = arguments;
-});
+    serverConnectModal.render()
+      .open()
+      .start();
+  }
+};
 
-heartbeatSocket.on('close', function(e) {
+// var heartbeatSocket = new Socket('ws://happy-hippo:18470');
+// setTimeout(function() {
+//   heartbeatSocket.socket.close();
+// }, 2000);
+
+// todo: add helper method to the serverConfigMd class
+// var heartbeatSocket = new Socket('ws://' + serverConfigMd.get('server_ip') + ':18470');
+
+// var bindHeartbeatHandlers = function(socket) {
+//   window.obEventBus.off('heartbeat-close'
+// }
+
+var heartbeat = app.getHeartbeatSocket(),
+    guidCreating;
+
+// socket.on('open', function(e) {
+//   console.log('hb open in: ' + (e.data || ''));
+//   window.open = arguments;
+// });
+
+heartbeat.on('close', function(e) {
   console.log('hb close in: ' + (e.data || ''));
   window.close = arguments;
 
   // server down
-  // launch server connect modal
+  launchServerConnect();
 });
 
-heartbeatSocket.on('message', function(e) {
+heartbeat.on('message', function(e) {
   console.log('hb message in');
   window.message = arguments;
 
   if (e.jsonData && e.jsonData.status) {
     switch (e.jsonData.status) {
       case 'generating GUID':
-        if (guidCreating) return;
-
+        // if (guidCreating) return;
+        // todo: put in some time in the off chance the guid
+        // creation process doesn't complete after a long time.
         guidCreating = $.Deferred();
 
         // launch onboarding, pass in guid creating
@@ -443,21 +458,19 @@ heartbeatSocket.on('message', function(e) {
 var onlineMessageHandler = function(e) {
   if (e.jsonData && e.jsonData.status && e.jsonData.status == 'online') {
     if (!guidCreating) {
-      console.log('gonna load that profizzle');
-
       // todo: need to call profile to see if 401 comes back, meaning the client
       // started after guid gen was already complete on a new server. In that case
       // show server connnect modal.
       loadProfile()
     }
 
-    heartbeatSocket.off('message', onlineMessageHandler);
+    socket.off('message', onlineMessageHandler);
   }
 };
 
-heartbeatSocket.on('message', onlineMessageHandler);
+heartbeat.on('message', onlineMessageHandler);
 
-heartbeatSocket.on('error', function(e) {
-  console.log('hb error in: ' + (e.data || ''));
+heartbeat.on('error', function(e) {
+  console.log('hb error in');
   window.error = arguments;
 });
