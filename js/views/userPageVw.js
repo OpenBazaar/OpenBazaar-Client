@@ -166,8 +166,8 @@ module.exports = baseVw.extend({
     var self = this;
     this.options = options || {};
     /* expected options are:
-    userModel: this is set by app.js, then by a call to the settings API.
-    userProfile: this is set by app.js, it is not the same as the page's userProfile, it belongs to the current user
+    userModel: this is set by main.js, then by a call to the settings API.
+    userProfile: this is set by main.js, it is not the same as the page's userProfile, it belongs to the current user
     userID: if userID is in the route, it is set here
     state: if state is in the route, it is set here
     itemHash: if itemHash is in the route, it is set here

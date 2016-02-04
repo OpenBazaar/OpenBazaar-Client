@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
   initialize: function(options){
     this.options = options || {};
     /* expected options are:
-    userModel: this is set by app.js, then by a call to the settings API.
+    userModel: this is set by main.js, then by a call to the settings API.
      */
     //don't render immediately, wait for the model to update itself with converted prices
     this.listenTo(this.model, 'change:priceSet', this.render);

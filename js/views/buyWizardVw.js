@@ -45,7 +45,7 @@ module.exports = Backbone.View.extend({
 
     this.options = options || {};
     /* expected options are:
-    userModel: this is set by app.js, then by a call to the settings API.
+    userModel: this is set by main.js, then by a call to the settings API.
     parentEl: this is set by itemVw, and is the element this view is rendered into
     socketView: this is a reference to the socketView
      */

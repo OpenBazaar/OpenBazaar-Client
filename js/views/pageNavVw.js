@@ -44,7 +44,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.options = options || {};
-    /* recieves socketView and userProfile from app.js */
+    /* recieves socketView and userProfile from main.js */
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
