@@ -18,6 +18,7 @@
     "startwithserver": "electron main.js"
   },
   "dependencies": {
+    "autolinker": "^0.22.0",
     "backbone": ">=1.2.1",
     "chosen": "0.0.2",
     "cropit": "0.4.5",
