@@ -56,21 +56,23 @@ module.exports = baseVw.extend({
     this.countries = new countriesMd();
     this.countriesArray = this.countries.get('countries');
 
+    this.purchasesWrapper = $(wrapper);
+    this.salesWrapper = $(wrapper);
+    this.casesWrapper = $(wrapper);
+
+
     $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
       $('.js-loadingModal').addClass("hide");
       self.btAve = btAve;
       self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";
-      self.purchasesWrapper = $(wrapper);
 
       self.salesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.salesCol.url = self.serverUrl + "get_sales";
-      self.salesWrapper = $(wrapper);
 
       self.casesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.casesCol.url = self.serverUrl + "get_cases";
-      self.casesWrapper = $(wrapper);
 
       self.render();
     });
@@ -82,18 +84,24 @@ module.exports = baseVw.extend({
 
     this.purchasesCol.fetch({
       success: function(models){
-        self.renderPurchases();
+        //self.renderPurchases();
+        self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
         self.setSearchList('transactionsPurchases');
         if(self.model.get('page').vendor){
           self.salesCol.fetch({
             success: function(models){
-              self.renderSales();
+              //self.renderSales();
+              self.renderTab("sales", self.salesCol, self.salesWrapper);
               self.setSearchList('transactionsSales');
               if(self.model.get('page').moderator){
-                //this.casesCol.fetch(); //not ready yet
+                self.casesCol.fetch({
+                  success: function(models) {
+                    //self.renderCases();
+                    self.renderTab("cases", self.casesCol, self.casesWrapper);
+                    self.setSearchList('transactionsCases');
+                  }
+                });
               }
-              //move to success of fetch cases when that is ready
-
             }
           });
         }
@@ -174,6 +182,44 @@ module.exports = baseVw.extend({
         this.renderCases(filterBy);
         break;
     }
+  },
+
+  renderTab: function(tabName, tabCollection, tabWrapper, filterBy){
+    "use strict";
+    var self = this;
+    tabWrapper.html('');
+    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
+      tabCollection.comparator = function(model) {
+        return -model.get("timestamp");
+      };
+      tabCollection.sort();
+    }
+    if(filterBy == "dateOldest"){
+      tabCollection.comparator = function(model) {
+        return model.get("timestamp");
+      };
+      tabCollection.sort();
+    }
+    tabCollection.each(function(model, i){
+      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
+        self.addTransaction(model, tabWrapper, tabName);
+      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
+        self.addTransaction(model, tabWrapper, tabName);
+      }
+    });
+
+    this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
+    this.$el.find('.js-'+tabName).append(tabWrapper);
+  },
+
+  addTransaction: function(model, tabWrapper, type){
+    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
+    model.set('transactionType', type);
+    var orderShort = new orderShortVw({
+      model: model
+    });
+    this.registerChild(orderShort);
+    tabWrapper.append(orderShort.render().el);
   },
 
   renderPurchases: function(filterBy){
