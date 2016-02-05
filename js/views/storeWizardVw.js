@@ -27,7 +27,7 @@ module.exports = Backbone.View.extend({
       this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
     }
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);
@@ -138,8 +138,9 @@ module.exports = Backbone.View.extend({
   
   blockClicks: function(e) {
     "use strict";
-    e.stopPropagation();
-
+    if(!$(e.target).hasClass('js-externalLink')){
+      e.stopPropagation();
+    }
   },
 
   closeWizard: function() {
@@ -173,17 +174,19 @@ module.exports = Backbone.View.extend({
     });
 
     modData.moderators = modList.length > 0 ? modList : "";
+    modData.name = this.model.get('page').profile.name;
+    modData.location = this.model.get('page').profile.location;
 
     wizData.primary_color = parseInt(userProfile.primary_color.slice(1), 16);
     wizData.secondary_color = parseInt(userProfile.secondary_color.slice(1), 16);
     wizData.background_color = parseInt(userProfile.background_color.slice(1), 16);
     wizData.text_color = parseInt(userProfile.text_color.slice(1), 16);
 
-    saveToAPI(profileForm, this.model.get('page').profile, self.model.get('user').serverUrl + "profile", function(){
+    saveToAPI(profileForm, '', self.model.get('user').serverUrl + "profile", function(){
       saveToAPI('', self.model.get('user'), self.model.get('user').serverUrl + "settings", function(){
-        self.trigger('storeCreated');
         window.obEventBus.trigger("updateProfile");
         window.obEventBus.trigger("updateUserModel");
+        self.trigger('storeCreated');
       }, '', modData);
     }, '', wizData);
   },

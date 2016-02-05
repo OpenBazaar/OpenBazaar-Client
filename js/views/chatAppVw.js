@@ -9,7 +9,7 @@ var __ = require('underscore'),
     chatMessageCollection = require('../collections/chatMessageCl'),
     chatMessageView = require('./chatMessageVw'),
     chatMessage = require('../models/chatMessageMd'),
-    //MediumEditor = require('medium-editor'),
+//MediumEditor = require('medium-editor'),
     sanitizeHTML = require('sanitize-html'),
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
@@ -45,7 +45,7 @@ module.exports = Backbone.View.extend({
     this.currentChatId = ""; //keep track of the currently active chat guid
 
     this.shiftDown = false; // Detect shift key down
-    
+
     this.chats = new chatCollection();
     this.chats.url = this.serverUrl + "get_chat_conversations";
     this.chats.comparator = function(model) {
@@ -59,7 +59,7 @@ module.exports = Backbone.View.extend({
     this.subViewsChat = [];
     this.render();
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
 
@@ -74,14 +74,14 @@ module.exports = Backbone.View.extend({
 
       if (e.guid == this.currentChatId) {
         this.closeConversation();
-      }      
+      }
     });
 
     this.listenTo(window.obEventBus, "unblockingUser", function(e) {
       if (this.chats.get(this.currentChatId)) {
         this.renderChats();
       }
-    });    
+    });
   },
 
   render: function(){
@@ -148,20 +148,20 @@ module.exports = Backbone.View.extend({
     });
     this.subViewsChat.push(chatMessage);
     this.listWrapperChat.prepend(chatMessage.el);
-/*
-    var editor = new MediumEditor('#inputConversationMessage', {
-        placeholder: {
-          text: 'Enter message...'
-        },
-        toolbar: {
-          imageDragging: false
-        }
-    });
-    */
+    /*
+     var editor = new MediumEditor('#inputConversationMessage', {
+     placeholder: {
+     text: 'Enter message...'
+     },
+     toolbar: {
+     imageDragging: false
+     }
+     });
+     */
   },
 
   renderNoneFound: function(){
-    this.$('#chatHeads').html('<p>' + window.polyglot.t('chat.noSearchResultsFound') + '.</p>');
+    this.$('#chatHeads').html('<p class="padding10 sideBarSlidShow">' + window.polyglot.t('chat.noSearchResultsFound') + '.</p>');
   },
 
   chatSearchText: function(e) {
@@ -349,7 +349,7 @@ module.exports = Backbone.View.extend({
   closeConversationSettings: function() {
     this.$('.chatConversationMenu').addClass('hide');
   },
-  
+
   conversationSettings: function() {
     var menu = this.$el.find('.chatConversationMenu');
     if(menu.hasClass('hide')){
@@ -407,10 +407,10 @@ module.exports = Backbone.View.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.hasOwnProperty('message')) {
+    if(data.hasOwnProperty('message')  && data.message.message_type == "CHAT") {
       var chat_message = data.message,
-          username,
-          avatar;
+          username = "",
+          avatar = "";
 
       if (this.model.isBlocked(chat_message.sender)) {
         return;
@@ -420,18 +420,18 @@ module.exports = Backbone.View.extend({
       if(chat_message.sender == this.currentChatId){
         this.updateChat(chat_message.sender);
       }
-      username = chat_message.handle ? chat_message.handle : chat_message.guid;
-      avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
+      username = chat_message.handle ? chat_message.handle : chat_message.sender;
+      avatar = chat_message.avatar_hash ? this.serverUrl + 'get_image?hash=' + chat_message.avatar_hash + '&guid=' + chat_message.sender : 'imgs/defaultUser.png';
 
       // lets not bother them with a notification if they're already actively talking to this person
       // however, let's bother them if the window isn't active
       if (!window.focused || this.currentChatId != chat_message.sender){
         // send notification to recipient
-        new Notification(username + ":", { 
-          body: data.message.message, 
-          icon: avatar 
-        }); 
-      }  
+        new Notification(username + ":", {
+          body: data.message.message,
+          icon: avatar
+        });
+      }
 
       // play notification sound
       var notifcationSound = document.createElement('audio');

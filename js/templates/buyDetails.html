@@ -40,14 +40,14 @@
     </div>
     <div class="flexCol-4">
       <div class="rowItem padding2015 alignRight marginTop20">
-        <span class="noOverflow js-buyWizardPrice fontSize13">
-          <%- ob.displayPrice %>
+        <span class="noOverflow fontSize13">
+          <%- ob.vendorBTCPrice.toFixed(4) %> BTC
         </span>
-        <span class="noOverflow textOpacity75 fontSize13">
+        (<span class="noOverflow textOpacity75 fontSize13 js-buyWizardPrice">
           <% if(ob.userCurrencyCode != 'BTC'){ %>
-          (<%- ob.vendorBTCPrice.toFixed(4) %> BTC)
+            <%- ob.displayPrice %>
           <% } %>
-        </span>
+        </span>)
       </div>
     </div>
   </div>
@@ -82,18 +82,18 @@
         <% if(ob.vendor_offer.listing.shipping.free){ %>
           <%= polyglot.t('Free') %>
         <% } else { %>
-          <span class="noOverflow js-buyWizardShippingPrice fontSize13">
-            <%- ob.currentShippingDisplayPrice %>
-          </span>
-          <span class="noOverflow textOpacity75 fontSize13">
-            <% if(ob.userCurrencyCode != 'BTC'){ %>
-              <% if(ob.shippingType === "domestic") { %>
-                (<%- ob.domesticShippingBTC.toFixed(4) %> BTC)
-              <% }else{ %>
-                (<%- ob.internationalShippingBTC.toFixed(4) %> BTC)
-              <% } %>
+          <span class="noOverflow fontSize13">
+            <% if(ob.shippingType === "domestic") { %>
+              <%- ob.domesticShippingBTC.toFixed(4) %> BTC
+            <% }else{ %>
+              <%- ob.internationalShippingBTC.toFixed(4) %> BTC
             <% } %>
           </span>
+          (<span class="noOverflow js-buyWizardShippingPrice textOpacity75 fontSize13">
+            <% if(ob.userCurrencyCode != 'BTC'){ %>
+              <%- ob.currentShippingDisplayPrice %>
+            <% } %>
+          </span>)
         <% } %>
       </div>
     </div>
@@ -137,7 +137,7 @@
                 </div>
               </div>
               <div class="pad10left txt-unleaded">
-                <div class="marginTop6 marginBottom4 fontSize13 noOverflow"><%= polyglot.t('buyFlow.directPaymentTo') %> <%- ob.handle %></div>
+                <div class="marginTop6 marginBottom4 fontSize13 noOverflow"><%= polyglot.t('buyFlow.DirectPayment') %> <%- ob.handle %></div>
                 <div class="textOpacity75 lineHeight15">
                   (<%= polyglot.t('buyFlow.directPaymentDisclaimer') %>)
                 </div>
@@ -150,9 +150,9 @@
     <div class="flexCol-4">
       <div class="rowItem padding2015 alignRight marginTop20">
         <% if(ob.selectedModerator){ %>
-          <span class="noOverflow fontSize13 js-buyWizardModeratorPrice"></span>
+          <span class="noOverflow fontSize13"><span class="js-buyWizardModeratorBTCPrice"></span> BTC</span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
-            <span class="noOverflow textOpacity75 fontSize13">(<span class="js-buyWizardModeratorBTCPrice"></span> BTC)</span>
+            (<span class="noOverflow textOpacity75 fontSize13 js-buyWizardModeratorPrice"></span>)
           <% } %>
         <% } else { %>
           <%= polyglot.t('Free') %>

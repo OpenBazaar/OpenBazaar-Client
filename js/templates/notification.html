@@ -1,17 +1,17 @@
-<div class="rowItem js-notification padding10
+<div class="rowItem js-notification padding10 clickable
   <% if(ob.read == true){ %>
-textOpacity25
+textOpacity50
   <% } %>">
     <div class="table">
         <div>
-            <div class="thumbnail clickable js-avatar custcol-border"
+            <div class="thumbnail clickable js-actionLink custcol-border"
                  style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 50px; width: 50px"></div>
             <div class="txt-lowleading">
                 <div class="marginLeft10 marginTop2 clearfix">
 
                     <% if(ob.type == "follow") { %>
                         <div class="textSize13px">
-                        <a class="clickable js-username"><% if(ob.handle) { %>
+                        <a class="clickable js-actionLink"><% if(ob.handle) { %>
                         <%- ob.handle %>
                         <% }else{ %>
                         <%- ob.guid %>
@@ -21,9 +21,9 @@ textOpacity25
                     <% }  else { %>
 
 
-                    <div class="textSize11px marginRight5 marginBottom2 noOverflow" title="<%- ob.title %>">
+                    <a class="textSize11px marginRight5 marginBottom2 noOverflow js-actionLink" title="<%- ob.title %>">
                         <strong>Title: <%- ob.title %></strong>
-                    </div>
+                    </a>
                     <div class="textSize11px txt-fade textWeightNormal">
                         From:
                         <% if(ob.handle) { %>
@@ -33,7 +33,7 @@ textOpacity25
                         <% } %>
                     </div>
                     <div class="textSize11px txt-fade">Type: <%- ob.type %></div>
-                    <div class="textSize11px txt-fade">Time: <%- ob.timestamp %></div>
+                    <div class="textSize11px txt-fade">Time: <%- ob.formattedTimestamp %></div>
                     <% if(ob.order_id){ %>
                     <div class="textSize11px txt-fade"><%- ob.order_id %></div>
                     <% } %>

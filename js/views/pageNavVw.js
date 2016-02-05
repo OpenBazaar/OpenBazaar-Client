@@ -39,9 +39,6 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
     'click .js-homeModal-timeSelect': 'timeSelect',
-    'click .js-homeModal-newHandle': 'newHandle',
-    'click .js-homeModal-existingHandle': 'existingHandle',
-    'click .js-homeModal-cancelHandle': 'cancelHandle',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'keypress .js-accordionNext': 'accNextKeypress',
@@ -64,6 +61,7 @@ module.exports = Backbone.View.extend({
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
+    this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.subViews = [];
     this.languages = new languagesModel();
 
@@ -77,7 +75,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency");});
     this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language");});
     this.listenTo(window.obEventBus, "updateProfile", function(response){
-      this.userProfile.fetch();
+      this.refreshProfile();
     });
     this.listenTo(window.obEventBus, "updateUserModel", function(response){
       this.model.fetch();
@@ -96,9 +94,9 @@ module.exports = Backbone.View.extend({
         break;
       }
     }
-    localLanguage = localLanguageFound ? localLanguage : "en-US";
-    this.model.set('language', localLanguage);
-    this.createTranslation(localLanguage);
+    //localLanguage = localLanguageFound ? localLanguage : "en-US";
+    //this.model.set('language', localLanguage);
+    //this.createTranslation(localLanguage);
 
     this.render();
   },
@@ -115,7 +113,9 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.userProfile.fetch({
-      success: function(){
+      success: function(model){
+        self.model.set('vendor', model.get('profile').vendor);
+        self.model.set('moderator', model.get('profile').moderator);
         self.render();
       }
     });
@@ -156,7 +156,8 @@ module.exports = Backbone.View.extend({
     this.accChildren = this.acc.find('.accordion-child');
     this.accNum = this.accChildren.length;
     this.accWin = this.acc.find('.accordion-window');
-    this.accWin.css({'left':0, 'width': function(){return this.accWidth * this.accNum;}});
+    this.accWinWidth = this.accWidth * this.accNum;
+    this.accWin.css({'left':'0px', 'width':this.accWinWidth});
     this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
   },
 
@@ -290,8 +291,9 @@ module.exports = Backbone.View.extend({
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
-      self.listenTo(window.obEventBus, "setAddressBar", function(setText){
-        self.addressInput.val(setText);
+      self.listenTo(window.obEventBus, "setAddressBar", function(options){
+        var text = options.handle || options.addressText;
+        self.addressInput.val(text);
         self.closeStatusBar();
       });
 
@@ -300,7 +302,7 @@ module.exports = Backbone.View.extend({
         self.render();
       });
 
-      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      self.listenTo(window.obEventBus, "socketMessageReceived", function(response){
         self.handleSocketMessage(response);
       });
 
@@ -536,7 +538,7 @@ module.exports = Backbone.View.extend({
     if(addressTextArray[0].charAt(0) == "@"){
       // user entered a handle
       handle = addressTextArray[0].replace('@', '');
-      this.processHandle(handle);
+      this.processHandle(handle, state, itemHash);
     } else if(!addressTextArray[0].length){
       // user trying to go back to discover
       Backbone.history.navigate('#home', {trigger:true});
@@ -553,7 +555,7 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  processHandle: function(handle){
+  processHandle: function(handle, state, itemHash){
     "use strict";
     if(handle){
       $.ajax({
@@ -564,7 +566,8 @@ module.exports = Backbone.View.extend({
           var account = resolverData[handle].profile.account.filter(function (accountObject) {
             return accountObject.service == "openbazaar";
           });
-          Backbone.history.navigate('#userPage/' + account[0].identifier, {trigger: true});
+          console.log('#userPage/' + account[0].identifier + state + itemHash);
+          Backbone.history.navigate('#userPage/' + account[0].identifier + state + itemHash, {trigger: true});
         } else {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
         }
@@ -620,25 +623,6 @@ module.exports = Backbone.View.extend({
     this.model.set('time_zone', tz);
   },
 
-  newHandle: function(e){
-    "use strict";
-    this.$el.find('.js-homeModal-handleInput').closest('.flexRow').removeClass('hide');
-    this.$el.find('.js-homeModal-existingHandle').parent().addClass('hide');
-    this.$el.find('.js-homeModal-cancelHandle').parent().removeClass('hide');
-  },
-
-  existingHandle: function(e){
-    "use strict";
-    //TODO: add code to connect handle here
-  },
-
-  cancelHandle: function(e){
-    "use strict";
-    this.$el.find('.js-homeModal-handleInput').closest('.flexRow').addClass('hide');
-    this.$el.find('.js-homeModal-existingHandle').parent().removeClass('hide');
-    this.$el.find('.js-homeModal-cancelHandle').parent().addClass('hide');
-  },
-
   settingsDone: function(e){
     "use strict";
 
@@ -653,10 +637,6 @@ module.exports = Backbone.View.extend({
 
     if($('textarea#aboutInput').val() != ""){
         self.model.set('short_description', $('textarea#aboutInput').val());
-    }
-
-    if($('#storeHandleInput').val() != "" && /^@/.test($('#storeHandleInput').val()) ){
-        self.model.set('handle', $('#storeHandleInput').val());
     }
 
     if($('#storeNameInput').val() != ""){
@@ -686,7 +666,7 @@ module.exports = Backbone.View.extend({
                 if(i == "country") {
                     profileFormData.append("location",el);
                 }
-                if(i == "name" || i == "handle" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+                if(i == "name" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
                     profileFormData.append(i,""+el);
                 } else {
                     settingsFormData.append(i,el);
@@ -801,7 +781,9 @@ module.exports = Backbone.View.extend({
 
   blockClicks: function(e) {
     "use strict";
-    e.stopPropagation();
+    if(!$(e.target).hasClass('js-externalLink')){
+      e.stopPropagation();
+    }
   },
 
   close: function(){

@@ -76,7 +76,7 @@ module.exports = Backbone.View.extend({
     this.moderatorFeeHolder;
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);
@@ -554,7 +554,7 @@ module.exports = Backbone.View.extend({
       pageData.text_color = parseInt(tColorVal.slice(1), 16);
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
-        "use strict";
+        window.obEventBus.trigger("updateProfile");
         messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
         self.refreshView();
       }, "", pageData, skipKeys);
@@ -706,7 +706,9 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         form = this.$el.find("#moderatorForm"),
-        moderatorData = {};
+        moderatorData = {},
+        moderatorStatus = this.$('#moderatorYes').is(':checked'),
+        makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator";
 
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
@@ -714,8 +716,19 @@ module.exports = Backbone.View.extend({
     saveToAPI(form, '', self.serverUrl + "profile", function(){
       "use strict";
       messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, '', moderatorData);
+
+    $.ajax({
+      type: "POST",
+      url: makeModeratorUrl,
+      processData: false,
+      dataType: "json",
+      error: function(){
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessaes.serverError') + "</i>");
+      }
+    });
   },
 
   saveAdvanced: function(){
@@ -732,8 +745,6 @@ module.exports = Backbone.View.extend({
 
   refreshView: function(){
     "use strict";
-    //window.location.reload();
-    //this.render();
     this.fetchModel();
   },
 

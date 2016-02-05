@@ -45,8 +45,8 @@ module.exports = Backbone.View.extend({
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
-    this.pageState = options.state //state of the parent view
-    this.tabState = options.tabState //active tab
+    this.pageState = options.state; //state of the parent view
+    this.tabState = options.tabState; //active tab
     this.lastTab = "summary";
 
     this.model = new orderModel({
@@ -94,18 +94,10 @@ module.exports = Backbone.View.extend({
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
-      self.$el.find('.js-externalLink').on('click', function(e){
-        e.preventDefault();
-        var extUrl = $(this).attr('href');
-        if (!/^https?:\/\//i.test(extUrl)) {
-          extUrl = 'http://' + extUrl;
-        }
-        require("shell").openExternal(extUrl);
-      });
       if(self.status == 0){
         self.showPayment();
       }
-      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      self.listenTo(window.obEventBus, "socketMessageReceived", function(response){
         self.handleSocketMessage(response);
       });
     });
@@ -247,7 +239,9 @@ module.exports = Backbone.View.extend({
 
   blockClicks: function(e) {
     "use strict";
-    e.stopPropagation();
+    if(!$(e.target).hasClass('js-externalLink')){
+      e.stopPropagation();
+    }
   },
 
   closeModal: function(){
