@@ -27,7 +27,7 @@ module.exports = Backbone.View.extend({
       this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
     }
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);

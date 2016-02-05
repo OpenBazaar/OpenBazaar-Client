@@ -1,7 +1,8 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     getBTPrice = require('../utils/getBitcoinPrice'),
-    countriesMd = require('./countriesMd');
+    countriesMd = require('./countriesMd'),
+    autolinker = require( 'autolinker' );
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -185,6 +186,8 @@ module.exports = window.Backbone.Model.extend({
 
       });
 
+      //change any plain text urls in the description into links
+      response.vendor_offer.listing.item.displayDescription = autolinker.link(response.vendor_offer.listing.item.description, {'twitter': false, 'hashtag': false});
 
     }
 

@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    is = require('is_js');
+    is = require('is_js'),
+    autolinker = require( 'autolinker' );
 
 module.exports = Backbone.Model.extend({
   defaults: {
@@ -103,6 +104,10 @@ module.exports = Backbone.Model.extend({
       if(response.profile.avatar_hash){
         response.avatar_hash = response.profile.avatar_hash;
       }
+
+      //change any plain text urls in the about field into links
+      response.profile.displayAbout = autolinker.link(response.profile.about, {'twitter': false, 'hashtag': false});
+
 
       //add randome number because change event is not triggered by changes inside profile
       response.fetched = Math.random();
