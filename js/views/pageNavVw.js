@@ -109,32 +109,6 @@ module.exports = Backbone.View.extend({
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-
-      // if(localStorage.getItem("onboardingComplete") != "true") {
-      //   var modal = self.$el.find('.js-homeModal');
-      //   modal.removeClass("hide");
-      //   $('#obContainer').addClass("blur");
-      //   modal.attr("tabIndex", "0");
-      //   document.addEventListener('focus', function( ev ) {
-      //     if ( !modal.hasClass("hide") && !$.contains( modal[0], ev.target ) ) {
-      //       ev.stopPropagation();
-      //       modal.focus();
-      //     }
-      //   }, true);
-
-      //   // pre-select timezone
-      //   var timeZoneOffset = new Date().getTimezoneOffset();
-      //   timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
-      //   self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
-
-      //   self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
-      //   self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
-      //   self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-      //   self.subViews.push(self.countryList);
-      //   self.subViews.push(self.currencyList);
-      //   self.subViews.push(self.languageList);
-      // }
-
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
         socketView: self.socketView,
