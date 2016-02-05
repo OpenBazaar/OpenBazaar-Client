@@ -141,18 +141,10 @@ module.exports = Backbone.View.extend({
 
       //when language is changed, re-render
       self.listenTo(self.model, 'change:language', function(){
-        self.createTranslation(self.model.get("language"));
         self.render();
       });
     });
     return this;
-  },
-
-  createTranslation: function(newLang){
-    "use strict";
-    window.polyglot = new Polyglot({locale: newLang});
-    window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
-
   },
 
   showAboutModal: function(e){

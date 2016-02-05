@@ -43,6 +43,7 @@ var Polyglot = require('node-polyglot'),
     serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
+    extendPolyglot,
     newRouter,
     newPageNavView,
     newSocketView,
@@ -63,8 +64,27 @@ window.lang = user.get("language");
 //put polyglot in the window so all templates can reach it
 window.polyglot = new Polyglot({locale: window.lang});
 
-//retrieve the object that has a matching language code
-window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
+(extendPolyglot = function(lang) {
+  window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
+})(window.lang);
+
+user.on('change:language', function(md, lang) {
+  window.lang = lang;
+  extendPolyglot(lang);
+});
+
+//keep user and profile urls synced with the server configuration
+(setServerUrl = function() {
+  var baseServerUrl = serverConfigMd.getServerBaseUrl();
+  
+  user.urlRoot = baseServerUrl + "/settings";
+  user.set('serverUrl', baseServerUrl + '/');
+  userProfile.urlRoot = baseServerUrl + "/profile";
+})();
+
+serverConfigMd.on('sync', function(md) {
+  setServerUrl();
+});
 
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
@@ -189,18 +209,6 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
   }
 });
 
-(setServerUrl = function() {
-  var baseServerUrl = serverConfigMd.getServerBaseUrl();
-  
-  user.urlRoot = baseServerUrl + "/settings";
-  user.set('serverUrl', baseServerUrl + '/');
-  userProfile.urlRoot = baseServerUrl + "/profile";
-})();
-
-serverConfigMd.on('sync', function(md) {
-  setServerUrl();
-});
-
 launchOnboarding = function(guidCreating) {
   serverConnectModal && serverConnectModal.remove();
   serverConnectModal = null;  
@@ -238,7 +246,7 @@ launchServerConnect = function() {
 
       // todo: perhaps only re-load if the server changed and on
       // re-connect of the same server, just refresh the current
-      // route?
+      // route or let loadProfile happen if it hadn't already?
       if (profileLoaded) {
         location.reload();
       }

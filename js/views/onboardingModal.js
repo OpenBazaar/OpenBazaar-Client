@@ -33,6 +33,8 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
+    var self = this;
+
     if (!(options.guidCreationPromise && options.guidCreationPromise.then)) {
       throw new Error('Please provide a guidCreationPromise.');
     }
@@ -41,6 +43,10 @@ module.exports = baseModal.extend({
     this.$document = $(document).on('focus', this.docFocusHandler);
     this.$el.attr('tabIndex', 0);
     this.$loadingModal = $('.js-loadingModal');
+
+    this.listenTo(self.model, 'change:language', function() {
+      self.render();
+    });
   },
 
   loadingOff: function() {
@@ -414,6 +420,10 @@ module.exports = baseModal.extend({
       timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
       self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
 
+      self.languageList && self.languageList.remove();
+      self.countryList && self.countryList.remove();
+      self.currencyList && self.currencyList.remove();
+
       self.languageList = new languageListView({el: self.$('.js-homeModal-languageList'), selected: self.model.get('language')});
       self.countryList = new countryListView({el: self.$('.js-homeModal-countryList'), selected: self.model.get('country')});
       self.currencyList = new currencyListView({el: self.$('.js-homeModal-currencyList'), selected: self.model.get('currency_code')});
@@ -422,9 +432,13 @@ module.exports = baseModal.extend({
       self.registerChild(self.countryList);
       self.registerChild(self.currencyList);
 
-      self.currencyList.on('currencyListReady', function() {
+      if (self.currencyList.ready) {
         self.accordionReady();
-      });
+      } else {
+        self.currencyList.on('currencyListReady', function() {
+          self.accordionReady();
+        });
+      }
     });
 
     return this;
