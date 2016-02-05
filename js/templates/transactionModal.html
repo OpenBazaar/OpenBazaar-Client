@@ -199,40 +199,40 @@
           </div>
           <div class="flexCol-12">
             <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-              <strong><%= polyglot.t('transactions.OverallRating') %> (<%-ob.buyer_receipt.receipt.rating.feedback %>)</strong>
-              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.feedback; i++) { %>
+              <strong><%= polyglot.t('transactions.OverallRating') %> (<%-ob.buyer_receipt.receipt.rating.tx_summary.feedback %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
               <i class="starRating"></i>
               <% } %>
             </div>
           </div>
           <div class="flexCol-12">
             <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-              <strong><%= polyglot.t('transactions.Quality') %> (<%-ob.buyer_receipt.receipt.rating.quality %>)</strong>
-              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.quality; i++) { %>
+              <strong><%= polyglot.t('transactions.Quality') %> (<%-ob.buyer_receipt.receipt.rating.tx_summary.quality %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.quality; i++) { %>
               <i class="starRating"></i>
               <% } %>
             </div>
           </div>
           <div class="flexCol-12">
             <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-              <strong><%= polyglot.t('transactions.Description') %> (<%-ob.buyer_receipt.receipt.rating.description %>)</strong>
-              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.description; i++) { %>
+              <strong><%= polyglot.t('transactions.Description') %> (<%-ob.buyer_receipt.receipt.rating.tx_summary.description %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.description; i++) { %>
               <i class="starRating"></i>
               <% } %>
             </div>
           </div>
           <div class="flexCol-12">
             <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-              <strong><%= polyglot.t('transactions.DeliveryTime') %> (<%-ob.buyer_receipt.receipt.rating.delivery_time %>)</strong>
-              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.delivery_time; i++) { %>
+              <strong><%= polyglot.t('transactions.DeliveryTime') %> (<%-ob.buyer_receipt.receipt.rating.tx_summary.delivery_time %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.delivery_time; i++) { %>
               <i class="starRating"></i>
               <% } %>
             </div>
           </div>
           <div class="flexCol-12">
             <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-              <strong><%= polyglot.t('transactions.CustomerService') %> (<%-ob.buyer_receipt.receipt.rating.customer_service %>)</strong>
-              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.customer_service; i++) { %>
+              <strong><%= polyglot.t('transactions.CustomerService') %> (<%-ob.buyer_receipt.receipt.rating.tx_summary.customer_service %>)</strong>
+              <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.customer_service; i++) { %>
               <i class="starRating"></i>
               <% } %>
             </div>
@@ -240,7 +240,7 @@
           <div class="flexCol-12">
             <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
               <strong><%= polyglot.t('transactions.Review') %></strong><br/>
-              <%-ob.buyer_receipt.receipt.rating.review %>
+              <%-ob.buyer_receipt.receipt.rating.tx_summary.review %>
             </div>
           </div>
         </div>
