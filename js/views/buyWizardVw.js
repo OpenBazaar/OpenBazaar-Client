@@ -83,7 +83,7 @@ module.exports = Backbone.View.extend({
       self.countriesSelect.append(countryOption);
     });
     this.listenTo(this.model, 'change:totalPrice', this.setTotalPrice);
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
 

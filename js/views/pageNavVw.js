@@ -94,9 +94,9 @@ module.exports = Backbone.View.extend({
         break;
       }
     }
-    localLanguage = localLanguageFound ? localLanguage : "en-US";
-    this.model.set('language', localLanguage);
-    this.createTranslation(localLanguage);
+    //localLanguage = localLanguageFound ? localLanguage : "en-US";
+    //this.model.set('language', localLanguage);
+    //this.createTranslation(localLanguage);
 
     this.render();
   },
@@ -302,7 +302,7 @@ module.exports = Backbone.View.extend({
         self.render();
       });
 
-      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      self.listenTo(window.obEventBus, "socketMessageReceived", function(response){
         self.handleSocketMessage(response);
       });
 

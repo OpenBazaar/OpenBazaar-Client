@@ -41,7 +41,7 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
 
@@ -81,6 +81,16 @@ module.exports = Backbone.View.extend({
       switch(n.type) {
         case "follow":
           new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
+            icon: avatar
+          });
+          break;
+        case "dispute_open":
+          new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
+            icon: avatar
+          });
+          break;
+        case "new order":
+          new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
             icon: avatar
           });
           break;
