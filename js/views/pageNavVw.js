@@ -74,9 +74,9 @@ module.exports = Backbone.View.extend({
         break;
       }
     }
-    localLanguage = localLanguageFound ? localLanguage : "en-US";
-    this.model.set('language', localLanguage);
-    this.createTranslation(localLanguage);
+    //localLanguage = localLanguageFound ? localLanguage : "en-US";
+    //this.model.set('language', localLanguage);
+    //this.createTranslation(localLanguage);
 
     this.render();
   },

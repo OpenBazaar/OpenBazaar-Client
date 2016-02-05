@@ -18,6 +18,7 @@
     "startwithserver": "electron main.js"
   },
   "dependencies": {
+    "autolinker": "^0.22.0",
     "backbone": ">=1.2.1",
     "backbone.localstorage": "^1.1.16",
     "chosen": "0.0.2",
