@@ -124,8 +124,10 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
   });
 };
 
+var profileLoaded;
 var loadProfile = function(landingRoute) {
   landingRoute = landingRoute || '#';
+  profileLoaded = true;
 
   //get the guid from the user profile to put in the user model
   userProfile.fetch({
@@ -143,17 +145,13 @@ var loadProfile = function(landingRoute) {
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
               $loadingModal.addClass('hide');
-              
-              newSocketView && newSocketView.remove();
-              newPageNavView && newPageNavView.remove();
-              newChatAppView && newChatAppView;
-
+             
               newSocketView = new socketView({model: serverConfigMd});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               newChatAppView = new chatAppView({model: user, socketView: newSocketView});
 
-              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
               location.hash = landingRoute;
+              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
               Backbone.history.start();
             });
 
@@ -197,6 +195,9 @@ serverConfigMd.on('sync', function(md) {
 });
 
 launchOnboarding = function(guidCreating) {
+  serverConnectModal && serverConnectModal.remove();
+  serverConnectModal = null;  
+
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
     model: user,
@@ -207,8 +208,11 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
+    console.log('onboarding complete - great job yo');
+
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
+    $loadingModal.removeClass('hide');
     loadProfile('#userPage/' + guid + '/store');
   });
 };
@@ -219,15 +223,30 @@ launchServerConnect = function() {
       model: serverConfigMd
     });
 
-    serverConnectModal.on('connect', function() {
-      serverConnectModal.remove();
-      serverConnectModal = null;
-
+    serverConnectModal.on('connected', function() {
       // clear some flags so the heartbeat events will
       // appropriatally loadProfile or launch onboarding
       guidCreating = null;
       loadProfileNeeded = true;
+
+      $loadingModal.removeClass('hide');      
+
+      // let's remove the previous page that may contain data
+      // from a different server
+      // if (newRouter) {
+      //   newRouter.view.remove();
+      //   newRouter.view = null;
+      // }
+
+      if (profileLoaded) {
+        location.reload();
+      }
     });
+
+    serverConnectModal.on('authenticated', function() {
+      serverConnectModal && serverConnectModal.remove();
+      serverConnectModal = null;
+    });    
 
     serverConnectModal.render()
       .open()
@@ -250,6 +269,8 @@ heartbeat.on('message', function(e) {
   if (e.jsonData && e.jsonData.status) {
     switch (e.jsonData.status) {
       case 'generating GUID':
+        if (guidCreating) return;
+
         // todo: put in some timeout in the off chance the guid
         // creation process doesn't complete after a long time.
         guidCreating = $.Deferred();

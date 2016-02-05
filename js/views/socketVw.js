@@ -13,7 +13,7 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     "use strict";
     var self = this,
-        socketAddress = this.model.getWebSocketAddress();
+        socketAddress = this.model.getApiSocketUrl();
 
     //socket should be opened when view is created, and stay open
     try{

@@ -97,27 +97,34 @@ module.exports = baseModal.extend({
         request,
         timesup,
         rejectLater,
+        rejectRequestLater,
         checkProfile,
         onClose;
 
     checkProfile = function() {
+      // at this point, we've confirmed connection, so:
+      self.trigger('connected');
+
       // check authentication
       request = $.ajax({
         url: app.serverConfig.getServerBaseUrl() + '/profile',
         timeout: 3000
       }).done(function() {
         deferred.resolve();
+        self.trigger('authenticated');
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
         
-        if (jqxhr.status === 401) {
-          deferred.reject('failed-auth');
-        } else {
-          // assuming there's no business rules where
-          // the server would be up and still send back
-          // a failure code, outside of bad auth.
-          deferred.reject();
-        }
+        rejectRequestLater = setTimeout(function() {
+          if (jqxhr.status === 401) {
+            deferred.reject('failed-auth');
+          } else {
+            // assuming there's no business rules where
+            // the server would be up and still send back
+            // a failure code, outside of bad auth.
+            deferred.reject();
+          }
+        }, 500);
       });
     };
 
@@ -130,6 +137,7 @@ module.exports = baseModal.extend({
     promise.cleanup = function() {
       clearTimeout(timesup);
       clearTimeout(rejectLater);
+      clearTimeout(rejectRequestLater);
       request && request.abort();
       app.getHeartbeatSocket().off(null, checkProfile);
       app.getHeartbeatSocket().off(null, onClose);
@@ -180,7 +188,6 @@ module.exports = baseModal.extend({
 
       self.connectAttempt = self.attemptConnection().done(function() {
         self.setState({ status: 'connected' });
-        self.trigger('connect');
       }).fail(function(reason) {
         if (reason == 'canceled') return;
         

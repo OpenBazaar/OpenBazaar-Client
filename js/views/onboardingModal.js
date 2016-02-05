@@ -2,6 +2,7 @@
 
 var Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
+    cropit = require('../utils/jquery.cropit'),
     baseModal = require('./baseModal'),
     messageModal = require('../utils/messageModal.js'),
     countryListView = require('../views/countryListVw'),
@@ -32,15 +33,8 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
-    if (!options.serverConfig) {
-      throw new Error('Please provide a serverConfig model.');
-    }
-
-    // todo: no longer just local!!!!
-    if (options.serverConfig.isLocalServer()) {
-      if (!(options.guidCreationPromise && options.guidCreationPromise.then)) {
-        throw new Error('For connection to a local server, a guidCreationPromise as an instance of a jQuery $.Promise() is required.');
-      }
+    if (!(options.guidCreationPromise && options.guidCreationPromise.then)) {
+      throw new Error('Please provide a guidCreationPromise.');
     }
 
     this.options = options || {};
@@ -129,15 +123,21 @@ module.exports = baseModal.extend({
   },
 
   accordionReady: function(listReady) {
-    var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
-    var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
-    var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
-    var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
+    var countryList,
+        currencyList,
+        timeList,
+        languageList;
 
-    
     this._accordianReady = true;
     this.loadingOff();
+
+    countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
+    currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
+    timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
+    languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
+    
     this.initAccordion('.js-profileAccordion');
+    
     // Scroll selected options to the top
     var checkedInput = this.$('.js-homeModal-listParent').find('input:checked').each(function(){
       var checkedInputScrollParent = $(this).closest('ul');
@@ -148,7 +148,7 @@ module.exports = baseModal.extend({
   },  
 
   initAccordion: function(targ){
-    this.acc = $(targ);
+    this.acc = this.$(targ);
     this.accWidth = this.acc.width();
     this.accHeight = this.acc.height();
     this.accChildren = this.acc.find('.accordion-child');
@@ -214,15 +214,6 @@ module.exports = baseModal.extend({
     this.triggerOnEnterSpace(e, this.accPrev.bind(this));
   },
 
-  // keepPingingUrl: function(url, options) {
-  //   var 
-  //   if (!url) {
-  //     throw new Error('Please provide an url.');
-  //   }
-
-
-  // },
-
   settingsDone: function(e){
     var self = this,
         guidCreation;
@@ -230,8 +221,6 @@ module.exports = baseModal.extend({
     guidCreation = this.options.guidCreationPromise;
 
     if (guidCreation.state() == 'pending') {
-      console.log('Guid is still creating, hang tight');
-
       this.guidStillCreatingModal && guidStillCreatingModal.remove();
       this.guidStillCreatingModal = new guidStillCreatingModal();
       this.guidStillCreatingModal.render().open();
@@ -240,9 +229,8 @@ module.exports = baseModal.extend({
     guidCreation.done(function() {
       if (self.isRemoved()) return;
 
-      console.log('onboarding modal - guid creation complete');
       self._settingsDone(e);
-      this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
+      self.guidStillCreatingModal && self.guidStillCreatingModal.remove();
     });
   },
 
@@ -425,6 +413,18 @@ module.exports = baseModal.extend({
       self.currencyList.on('currencyListReady', function() {
         self.accordionReady();
       });
+
+      self.$el.find('#image-cropper').cropit({
+        smallImage: "stretch",
+        exportZoom: 1.33,
+        maxZoom: 5,
+        onFileReaderError: function(data){console.log(data);},
+        onImageError: function(errorObject, errorCode, errorMessage) {
+          console.log(errorObject);
+          console.log(errorCode);
+          console.log(errorMessage);
+        }
+      });      
     });
 
     return this;

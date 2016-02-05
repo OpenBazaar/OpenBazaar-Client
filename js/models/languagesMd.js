@@ -436,6 +436,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -860,6 +861,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -1292,6 +1294,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -1728,6 +1731,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -2165,6 +2169,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -2598,6 +2603,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -3030,6 +3036,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -3462,6 +3469,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -3898,6 +3906,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -4333,6 +4342,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -4767,6 +4777,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -5204,6 +5215,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
@@ -5625,6 +5637,7 @@ module.exports = Backbone.Model.extend({
           serverIP: "Server IP", //notTranslated
           restApiPort: "Rest API port", //notTranslated
           websocketApiPort: "Websocket API port", //notTranslated
+          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
           username: "Username", //notTranslated
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    

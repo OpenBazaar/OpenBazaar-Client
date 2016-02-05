@@ -7,8 +7,7 @@ module.exports = Backbone.Model.extend({
     'id': 1,
     'server_ip': 'localhost',
     'rest_api_port': 18469,
-    // todo: rename to api socket port
-    'socket_port': 18466,
+    'api_socket_port': 18466,
     'heartbeat_socket_port': 18470
   },
 
@@ -41,15 +40,25 @@ module.exports = Backbone.Model.extend({
       }
     }
 
-    if (typeof attrs.socket_port !== undefined) {
-      parsed = parseInt(attrs.socket_port);
+    if (typeof attrs.api_socket_port !== undefined) {
+      parsed = parseInt(attrs.api_socket_port);
       
       if (isNaN(parsed)) {
-        delete attrs.socket_port;
+        delete attrs.api_socket_port;
       } else {
-        attrs.socket_port = parsed;
+        attrs.api_socket_port = parsed;
       }
     }
+
+    if (typeof attrs.heartbeat_socket_port !== undefined) {
+      parsed = parseInt(attrs.heartbeat_socket_port);
+      
+      if (isNaN(parsed)) {
+        delete attrs.heartbeat_socket_port;
+      } else {
+        attrs.heartbeat_socket_port = parsed;
+      }
+    }    
 
     return attrs;
   },
@@ -75,11 +84,11 @@ module.exports = Backbone.Model.extend({
       }
     }
 
-    if (is.empty(attrs.socket_port)) {
-      this._addError(err, 'socket_port', 'Please provide a value.');
+    if (is.empty(attrs.api_socket_port)) {
+      this._addError(err, 'api_socket_port', 'Please provide a value.');
     } else {
-      if (!is.within(attrs.socket_port, 0, 65535)) {
-        this._addError(err, 'socket_port', 'Please provide a number between 0 and 65535.');
+      if (!is.within(attrs.api_socket_port, 0, 65535)) {
+        this._addError(err, 'api_socket_port', 'Please provide a number between 0 and 65535.');
       }
     }    
 
@@ -88,18 +97,15 @@ module.exports = Backbone.Model.extend({
 
   getServerBaseUrl: function() {
     return 'http://' + this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
-    // return 'http://' + this.get('username') + ':' + this.get('password') + '@' +
-    //   this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
   },
 
   getHeartbeatSocketUrl: function() {
-    // return 'ws://' + this.get('server_ip') + ':' + this.get('socket_port');
     return 'ws://' + this.get('server_ip') + ':' + this.get('heartbeat_socket_port');
   },
 
   // todo: change this name
-  getWebSocketAddress: function() {
-    return 'ws://' + this.get('server_ip') + ':' + this.get('socket_port');
+  getApiSocketUrl: function() {
+    return 'ws://' + this.get('server_ip') + ':' + this.get('api_socket_port');
   },
 
   isLocalServer: function() {

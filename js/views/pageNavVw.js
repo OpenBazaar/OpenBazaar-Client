@@ -10,7 +10,6 @@ var __ = require('underscore'),
     adminPanelView = require('../views/adminPanelVw'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
     remote = require('remote'),
-    cropit = require('../utils/jquery.cropit'),
     messageModal = require('../utils/messageModal.js');
 
 
@@ -111,30 +110,30 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
-      if(localStorage.getItem("onboardingComplete") != "true") {
-        var modal = self.$el.find('.js-homeModal');
-        modal.removeClass("hide");
-        $('#obContainer').addClass("blur");
-        modal.attr("tabIndex", "0");
-        document.addEventListener('focus', function( ev ) {
-          if ( !modal.hasClass("hide") && !$.contains( modal[0], ev.target ) ) {
-            ev.stopPropagation();
-            modal.focus();
-          }
-        }, true);
+      // if(localStorage.getItem("onboardingComplete") != "true") {
+      //   var modal = self.$el.find('.js-homeModal');
+      //   modal.removeClass("hide");
+      //   $('#obContainer').addClass("blur");
+      //   modal.attr("tabIndex", "0");
+      //   document.addEventListener('focus', function( ev ) {
+      //     if ( !modal.hasClass("hide") && !$.contains( modal[0], ev.target ) ) {
+      //       ev.stopPropagation();
+      //       modal.focus();
+      //     }
+      //   }, true);
 
-        // pre-select timezone
-        var timeZoneOffset = new Date().getTimezoneOffset();
-        timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
-        self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
+      //   // pre-select timezone
+      //   var timeZoneOffset = new Date().getTimezoneOffset();
+      //   timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
+      //   self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
 
-        self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
-        self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
-        self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-        self.subViews.push(self.countryList);
-        self.subViews.push(self.currencyList);
-        self.subViews.push(self.languageList);
-      }
+      //   self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
+      //   self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
+      //   self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
+      //   self.subViews.push(self.countryList);
+      //   self.subViews.push(self.currencyList);
+      //   self.subViews.push(self.languageList);
+      // }
 
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
@@ -143,17 +142,6 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
-      self.$el.find('#image-cropper').cropit({
-        smallImage: "stretch",
-        exportZoom: 1.33,
-        maxZoom: 5,
-        onFileReaderError: function(data){console.log(data);},
-        onImageError: function(errorObject, errorCode, errorMessage) {
-          console.log(errorObject);
-          console.log(errorCode);
-          console.log(errorMessage);
-        }
-      });
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
