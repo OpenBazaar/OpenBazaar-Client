@@ -113,7 +113,7 @@ $('body').on('click', '.js-externalLink, .about a, .js-listingDescription a', fu
   if (!/^https?:\/\//i.test(extUrl)) {
     extUrl = 'http://' + extUrl;
   }
-}
+});
 
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
@@ -236,13 +236,9 @@ launchServerConnect = function() {
 
       $loadingModal.removeClass('hide');      
 
-      // let's remove the previous page that may contain data
-      // from a different server
-      // if (newRouter) {
-      //   newRouter.view.remove();
-      //   newRouter.view = null;
-      // }
-
+      // todo: perhaps only re-load if the server changed and on
+      // re-connect of the same server, just close the Server
+      // Connect modal after authentication.
       if (profileLoaded) {
         location.reload();
       }
