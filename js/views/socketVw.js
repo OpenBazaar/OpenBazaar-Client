@@ -57,7 +57,7 @@ module.exports = Backbone.View.extend({
 
   socketMessage: function(e){
     "use strict";
-    window.obEventBus.trigger("socketMessageRecived", e);
+    window.obEventBus.trigger("socketMessageReceived", e);
   },
 
   socketError: function(e) {

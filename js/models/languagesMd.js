@@ -173,6 +173,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Full description",
         BackgroundColor: "Background Color",
         NotificationFollow: "is now following you",
+        NotificationDispute: "has opened a new dispute",
+        NotificationNewOrder: "has made a purchase",
         NoNotifications: "No notifications",
         WelcomeToYourPage: "Welcome to your page!",
         SearchForCategory: "Search for category",
@@ -1076,6 +1078,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Beschreibung",
         BackgroundColor: "Hintergrundfarbe",
         NotificationFollow: "folgt dir nun.",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Keine Benachrichtigungen",
         WelcomeToYourPage: "Willkommen auf deiner Seite!",
         SearchForCategory: "Nach Kategorie suchen",
@@ -1529,6 +1533,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Descrizione completa",
         BackgroundColor: "Colore di sfondo",
         NotificationFollow: "ora ti sta seguendo",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nessuna notifica",
         WelcomeToYourPage: "Benvenuto alla tua pagina!",
         SearchForCategory: "Cerca per categoria",
@@ -1982,6 +1988,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Description complète",
         BackgroundColor: "Couleur de fond",
         NotificationFollow: "vous suit",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Aucune notification",
         WelcomeToYourPage: "Bienvenue sur votre page !",
         SearchForCategory: "Rechercher par catégorie",
@@ -2432,6 +2440,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Descrierea completă",
         BackgroundColor: "Culoarea de Fundal",
         NotificationFollow: "acum vă urmărește",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nu sunt notificări",
         WelcomeToYourPage: "Bun venit pe pagina dvs.!",
         SearchForCategory: "Căutare categorie",
@@ -2882,6 +2892,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Полное описание",
         BackgroundColor: "Фоновый цвет",
         NotificationFollow: "подписан на вас",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Нет уведомлений",
         WelcomeToYourPage: "Добро пожаловать!",
         SearchForCategory: "Поиск категории",
@@ -3331,6 +3343,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Plný popis",
         BackgroundColor: "Farba pozadia",
         NotificationFollow: "vás od teraz sleduje",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Žiadne notifikácie",
         WelcomeToYourPage: "Vitajte na svojej stránke!",
         SearchForCategory: "Hľadať kategóriu",
@@ -3784,6 +3798,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Tam açıklama",
         BackgroundColor: "Arkaplan Rengi",
         NotificationFollow: "sizi takip etmeye başladı",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Bildirim yok",
         WelcomeToYourPage: "Sayfanıza hoşgeldiniz!",
         SearchForCategory: "Kategori Ara",
@@ -4236,6 +4252,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Bang naQ",
         BackgroundColor: "rItlh patmey lulo'ta'",
         NotificationFollow: "SoH tlha'",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Pagh ghuHmoH",
         WelcomeToYourPage: "MajQa' Sucheghmo'!",
         SearchForCategory: "Nej Segh",
@@ -4688,6 +4706,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "详细介绍",
         BackgroundColor: "背景颜色",
         NotificationFollow: "在关注您",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "无新消息",
         WelcomeToYourPage: "欢迎来到您的主页",
         SearchForCategory: "查找分类项目",
@@ -5141,6 +5161,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "큰 설명",
         BackgroundColor: "배경색",
         NotificationFollow: "너를 팔로우하다",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "공지 없어",
         WelcomeToYourPage: "환영해 너의 페이지!",
         SearchForCategory: "항목 검색",
@@ -5590,6 +5612,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "商品の説明",
         BackgroundColor: "背景カラー",
         NotificationFollow: "があなたをフォローしました",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "新しい通知はありません。",
         WelcomeToYourPage: "マイページにようこそ！",
         SearchForCategory: "カテゴリーで検索する",
@@ -6032,6 +6056,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Pełny opis",
         BackgroundColor: "Kolor tła",
         NotificationFollow: "zaczął cię obserować!",
+        NotificationDispute: "has opened a new dispute", //not translated
+        NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Brak powiadomień",
         WelcomeToYourPage: "Witaj na swojej stronie!",
         SearchForCategory: "Szukaj w kategorii",
