@@ -12,4 +12,4 @@ function isScrolledIntoView(el, scrollContainer) {
 
 module.exports = {
   isScrolledIntoView: isScrolledIntoView
-}
+};
