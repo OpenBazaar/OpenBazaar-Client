@@ -84,6 +84,16 @@ module.exports = Backbone.View.extend({
             icon: avatar
           });
           break;
+        case "dispute_open":
+          new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
+            icon: avatar
+          });
+          break;
+        case "new order":
+          new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
+            icon: avatar
+          });
+          break;
       }
 
       var new_notification = new Backbone.Model(n);

@@ -9,7 +9,7 @@ var __ = require('underscore'),
     chatMessageCollection = require('../collections/chatMessageCl'),
     chatMessageView = require('./chatMessageVw'),
     chatMessage = require('../models/chatMessageMd'),
-    //MediumEditor = require('medium-editor'),
+//MediumEditor = require('medium-editor'),
     sanitizeHTML = require('sanitize-html'),
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
@@ -45,7 +45,7 @@ module.exports = Backbone.View.extend({
     this.currentChatId = ""; //keep track of the currently active chat guid
 
     this.shiftDown = false; // Detect shift key down
-    
+
     this.chats = new chatCollection();
     this.chats.url = this.serverUrl + "get_chat_conversations";
     this.chats.comparator = function(model) {
@@ -74,14 +74,14 @@ module.exports = Backbone.View.extend({
 
       if (e.guid == this.currentChatId) {
         this.closeConversation();
-      }      
+      }
     });
 
     this.listenTo(window.obEventBus, "unblockingUser", function(e) {
       if (this.chats.get(this.currentChatId)) {
         this.renderChats();
       }
-    });    
+    });
   },
 
   render: function(){
@@ -148,16 +148,16 @@ module.exports = Backbone.View.extend({
     });
     this.subViewsChat.push(chatMessage);
     this.listWrapperChat.prepend(chatMessage.el);
-/*
-    var editor = new MediumEditor('#inputConversationMessage', {
-        placeholder: {
-          text: 'Enter message...'
-        },
-        toolbar: {
-          imageDragging: false
-        }
-    });
-    */
+    /*
+     var editor = new MediumEditor('#inputConversationMessage', {
+     placeholder: {
+     text: 'Enter message...'
+     },
+     toolbar: {
+     imageDragging: false
+     }
+     });
+     */
   },
 
   renderNoneFound: function(){
@@ -349,7 +349,7 @@ module.exports = Backbone.View.extend({
   closeConversationSettings: function() {
     this.$('.chatConversationMenu').addClass('hide');
   },
-  
+
   conversationSettings: function() {
     var menu = this.$el.find('.chatConversationMenu');
     if(menu.hasClass('hide')){
@@ -427,11 +427,11 @@ module.exports = Backbone.View.extend({
       // however, let's bother them if the window isn't active
       if (!window.focused || this.currentChatId != chat_message.sender){
         // send notification to recipient
-        new Notification(username + ":", { 
-          body: data.message.message, 
-          icon: avatar 
-        }); 
-      }  
+        new Notification(username + ":", {
+          body: data.message.message,
+          icon: avatar
+        });
+      }
 
       // play notification sound
       var notifcationSound = document.createElement('audio');
