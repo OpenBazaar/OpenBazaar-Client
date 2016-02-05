@@ -11,6 +11,7 @@ module.exports = baseVw.extend({
   events: {
     'click .js-item': 'itemClick',
     'click .js-avatar': 'avatarClick',
+    'click .js-about': 'aboutClick',
     'click .js-itemShortEdit': 'editItemClick',
     'click .js-itemShortDelete': 'deleteItemClick',
     'click .js-userShortFollow': 'followUser',
@@ -73,6 +74,10 @@ module.exports = baseVw.extend({
   itemClick: function(e){
     var self = this;
     Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+this.model.get('contract_hash'), {trigger: true});
+  },
+
+  aboutClick: function(){
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/about', {trigger: true});
   },
 
   avatarClick: function(){

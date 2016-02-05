@@ -97,7 +97,7 @@ module.exports = Backbone.View.extend({
       if(self.status == 0){
         self.showPayment();
       }
-      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      self.listenTo(window.obEventBus, "socketMessageReceived", function(response){
         self.handleSocketMessage(response);
       });
     });
