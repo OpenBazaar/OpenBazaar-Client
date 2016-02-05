@@ -113,8 +113,6 @@ module.exports = function (currency, callback) {
         callBlockchain();
     }
 
-    callBlockchain();
-
     var makeAveragePrice = function () {
         var sum,
             currencyPrices,
