@@ -467,7 +467,7 @@
   <div class="js-main js-discussion">
     <div class="flexRow scrollOverflowY js-discussionScroller" style="height: 225px;">
       <div class="flexRow js-discussionWrapper">
-        <% if(ob.transactionType == "purchases"){ %>
+        <% if(ob.transactionType == "purchases" || ob.status > 1){ %>
         <div class="padding10 flexExpand js-discussionNotStarted">
           <p><%= polyglot.t('transactions.DisputeInstructions') %></p>
         </div>
@@ -476,7 +476,9 @@
     </div>
     <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright js-discussionForm
             <% if(ob.transactionType != 'purchases' && ob.status < 2){ %>
-            disabled
+              <% if(ob.transactionType == 'case' && ob.status != 4){ %>
+              disabled
+              <% } %>
             <% } %>
             ">
       <div class="pad10right">

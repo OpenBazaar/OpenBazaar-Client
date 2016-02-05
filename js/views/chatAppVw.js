@@ -407,10 +407,10 @@ module.exports = Backbone.View.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.hasOwnProperty('message')) {
+    if(data.hasOwnProperty('message') && data.message.message_type == "CHAT") {
       var chat_message = data.message,
-          username,
-          avatar;
+          username = "",
+          avatar = "";
 
       if (this.model.isBlocked(chat_message.sender)) {
         return;
@@ -420,8 +420,8 @@ module.exports = Backbone.View.extend({
       if(chat_message.sender == this.currentChatId){
         this.updateChat(chat_message.sender);
       }
-      username = chat_message.handle ? chat_message.handle : chat_message.guid;
-      avatar = chat_message.image_hash ? this.options.serverUrl + 'get_image?hash=' + chat_message.image_hash + '&guid=' + chat_message.guid : 'imgs/defaultUser.png';
+      username = chat_message.handle ? chat_message.handle : chat_message.sender;
+      avatar = chat_message.avatar_hash ? this.serverUrl + 'get_image?hash=' + chat_message.avatar_hash + '&guid=' + chat_message.sender : 'imgs/defaultUser.png';
 
       // lets not bother them with a notification if they're already actively talking to this person
       // however, let's bother them if the window isn't active

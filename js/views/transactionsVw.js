@@ -215,7 +215,6 @@ module.exports = baseVw.extend({
   addTransaction: function(model, tabWrapper, type){
     model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
     model.set('transactionType', type);
-    console.log(model.attributes)
     var orderShort = new orderShortVw({
       model: model
     });
