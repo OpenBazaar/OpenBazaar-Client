@@ -45,8 +45,8 @@ module.exports = Backbone.View.extend({
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
-    this.pageState = options.state //state of the parent view
-    this.tabState = options.tabState //active tab
+    this.pageState = options.state; //state of the parent view
+    this.tabState = options.tabState; //active tab
     this.lastTab = "summary";
 
     this.model = new orderModel({

@@ -41,7 +41,6 @@ module.exports = Backbone.View.extend({
   },
 
   orderConfirm: function(e){
-    console.log("confirm order")
     "use strict";
     e.stopPropagation();
     window.obEventBus.trigger("openOrderModal", {
