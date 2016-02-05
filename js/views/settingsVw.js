@@ -222,6 +222,7 @@ module.exports = Backbone.View.extend({
   renderBlocked: function(options) {
     var self = this,
         modelsPerBatch = 2,
+        rawBlockedGuids = this.userModel.get('blocked_guids'),
         $lazyLoadTrigger,
         $blockedForm,
         blockedUsersCl;
@@ -246,8 +247,7 @@ module.exports = Backbone.View.extend({
     }
 
     function getBlockedGuids() {
-      return self.userModel.get('blocked_guids')
-        .map(function(guid) {
+      return rawBlockedGuids.map(function(guid) {
           return { guid: guid }
         });
     }
@@ -275,12 +275,20 @@ module.exports = Backbone.View.extend({
     $blockedContainer.append(this.$lazyLoadTrigger);
 
     this.listenTo(window.obEventBus, 'blockingUser', function(e) {
-      this.blockedUsersScrollHandler();
+      blockedUsersCl.add({ guid: e.guid });
+      
+      if (rawBlockedGuids.length !== blockedUsersCl.length) {
+        // There are still users to lazy render. Since we
+        // already rendered the current user being blocked,
+        // let's adjust his position, so lazy loading won't be off.
+        rawBlockedGuids.splice(
+          blockedUsersCl.length, 0,
+          x.splice(rawBlockedGuids.indexOf(e.guid), 1)
+        );
+      }
     });
 
     this.listenTo(window.obEventBus, 'unblockingUser', function(e) {
-      console.log('moo hoo chicken');
-      window.moo = blockedUsersCl.findWhere({ guid: e.guid });
       blockedUsersCl.remove(
         blockedUsersCl.findWhere({ guid: e.guid })
       );
@@ -293,8 +301,6 @@ module.exports = Backbone.View.extend({
       var colLen,
           blockedGuids = getBlockedGuids();
 
-      // console.log('green: ' + blockedUsersCl.length);
-      // console.log('billboard: ' + blockedGuids.length);
       if (
         blockedUsersCl.length < blockedGuids.length &&
         domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
