@@ -79,7 +79,7 @@ module.exports = Backbone.Model.extend({
     if (is.empty(attrs.rest_api_port)) {
       this._addError(err, 'rest_api_port', 'Please provide a value.');
     } else {
-      if (!is.within(attrs.rest_api_port, 0, 65535)) {
+      if (!is.within(attrs.rest_api_port, -1, 65536)) {
         this._addError(err, 'rest_api_port', 'Please provide a number between 0 and 65535.');
       }
     }
@@ -87,8 +87,16 @@ module.exports = Backbone.Model.extend({
     if (is.empty(attrs.api_socket_port)) {
       this._addError(err, 'api_socket_port', 'Please provide a value.');
     } else {
-      if (!is.within(attrs.api_socket_port, 0, 65535)) {
+      if (!is.within(attrs.api_socket_port, -1, 65536)) {
         this._addError(err, 'api_socket_port', 'Please provide a number between 0 and 65535.');
+      }
+    }    
+
+    if (is.empty(attrs.heartbeat_socket_port)) {
+      this._addError(err, 'heartbeat_socket_port', 'Please provide a value.');
+    } else {
+      if (!is.within(attrs.heartbeat_socket_port, -1, 65536)) {
+        this._addError(err, 'heartbeat_socket_port', 'Please provide a number between 0 and 65535.');
       }
     }    
 
@@ -103,7 +111,6 @@ module.exports = Backbone.Model.extend({
     return 'ws://' + this.get('server_ip') + ':' + this.get('heartbeat_socket_port');
   },
 
-  // todo: change this name
   getApiSocketUrl: function() {
     return 'ws://' + this.get('server_ip') + ':' + this.get('api_socket_port');
   },

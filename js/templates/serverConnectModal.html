@@ -19,9 +19,7 @@
         <% if (ob.status == 'trying') { %>
           <!-- variablize the max attempts -->
           <i class="ion-android-sync spinner"></i>
-          <% if (ob.isLocal) { %>
           <%= polyglot.t('serverConnectModal.attempt') %> <span class="attempt"></span> <%= polyglot.t('of') %> 3
-          <% } %>
         <% } else if (ob.status === 'failed' || ob.status === 'failed-auth') { %>
         <a class="js-retry"><%= polyglot.t('serverConnectModal.retry') %></a>
         <% } %>
@@ -29,16 +27,7 @@
     </div>
     <div class="flexContainer scrollOverflowYHideX customThemeScrollbar" style="height: 272px">
       <div class="flexRow borderBottom custCol-border">
-        <% if (!ob.isLocal) { %>
-        <p class="margin0 padding015 marginBottom20">We are having difficulties establishing a connection with your server. The two most likely reasons are:</p>
-        <ol class="margin0 padding015 marginBottom20">
-          <li class="marginLeft20 marginBottom8">Your server is not running. If this is so, pleast start it and click Retry.</li>
-          <li class="marginLeft20">Your server is generating a guid. If this is the case, please monitor the logs, and when the process is complete, click retry.</li>
-        </ol>
-        <p class="margin0 padding015 marginBottom20">Alternatively, please feel free to specify a different server below.</p>
-        <% } else { %>
         <p class="margin0 padding2015"><%= polyglot.t('serverConnectModal.intro') %></p>
-        <% } %>
       </div>
         <form class="width100" name="serverConfigForm">
           <div class="flexCol-12 flex-border borderBottom">
@@ -125,7 +114,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border <% ob.errors.api_socket_port && print('invalid') %>">
+              <div class="flexCol-9 custCol-border <% ob.errors.heartbeat_socket_port && print('invalid') %>">
                 <input name="heartbeat_socket_port" type="text" id="fld_heartbeat_socket_port" placeholder="" class="fieldItem" value="<%= ob.heartbeat_socket_port %>">
               </div>
             </div>            

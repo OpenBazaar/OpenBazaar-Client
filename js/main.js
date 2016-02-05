@@ -23,8 +23,6 @@ window.onblur = function() {
 
 var Polyglot = require('node-polyglot'),
     getBTPrice = require('./utils/getBitcoinPrice'),
-    isLocalServerRunning = require('./utils/isLocalServerRunning'),
-    isRemoteServerRunning = require('./utils/isRemoteServerRunning'),
     router = require('./router'),
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
@@ -208,8 +206,6 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
-    console.log('onboarding complete - great job yo');
-
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
     $loadingModal.removeClass('hide');

@@ -3,8 +3,6 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
-    isLocalServerRunning = require('../utils/isLocalServerRunning'),    
-    isRemoteServerRunning = require('../utils/isRemoteServerRunning'),
     app = require('../App.js').getApp(),        
     serverConfigMd = require('../models/serverConfigMd'),
     baseModal = require('./baseModal'),
@@ -37,9 +35,7 @@ module.exports = baseModal.extend({
     var state = {};
 
     state['attempt'] = 1;
-    state['status'] = this.model.isLocalServer() ?
-      'trying' : 'failed';
-    state['isLocal'] = this.model.isLocalServer();
+    state['status'] = 'trying';
 
     return state;
   },
