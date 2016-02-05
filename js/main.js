@@ -237,8 +237,8 @@ launchServerConnect = function() {
       $loadingModal.removeClass('hide');      
 
       // todo: perhaps only re-load if the server changed and on
-      // re-connect of the same server, just close the Server
-      // Connect modal after authentication.
+      // re-connect of the same server, just refresh the current
+      // route?
       if (profileLoaded) {
         location.reload();
       }
@@ -253,7 +253,6 @@ launchServerConnect = function() {
       .open()
       .start();
   } else {
-    // if (!serverConnectModal.isStarted()) serverConnectModal.start();
     if (!serverConnectModal.isOpen()) {
       serverConnectModal.open();
       if (!serverConnectModal.isStarted()) serverConnectModal.start();

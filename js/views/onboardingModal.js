@@ -145,6 +145,18 @@ module.exports = baseModal.extend({
       var checkedInputOffset = checkedInputScrollParent.position().top;
       checkedInputScrollParent.scrollTop(checkedInputPosition - checkedInputOffset);
     });
+
+    this.$el.find('#image-cropper').cropit({
+      smallImage: "stretch",
+      exportZoom: 1.33,
+      maxZoom: 5,
+      onFileReaderError: function(data){console.log(data);},
+      onImageError: function(errorObject, errorCode, errorMessage) {
+        console.log(errorObject);
+        console.log(errorCode);
+        console.log(errorMessage);
+      }
+    });    
   },  
 
   initAccordion: function(targ){
@@ -413,18 +425,6 @@ module.exports = baseModal.extend({
       self.currencyList.on('currencyListReady', function() {
         self.accordionReady();
       });
-
-      self.$el.find('#image-cropper').cropit({
-        smallImage: "stretch",
-        exportZoom: 1.33,
-        maxZoom: 5,
-        onFileReaderError: function(data){console.log(data);},
-        onImageError: function(errorObject, errorCode, errorMessage) {
-          console.log(errorObject);
-          console.log(errorCode);
-          console.log(errorMessage);
-        }
-      });      
     });
 
     return this;
