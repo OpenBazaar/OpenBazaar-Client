@@ -76,7 +76,7 @@ module.exports = Backbone.View.extend({
     this.moderatorFeeHolder;
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
     this.socketModeratorID = Math.random().toString(36).slice(2);

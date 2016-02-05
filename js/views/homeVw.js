@@ -51,7 +51,7 @@ module.exports = baseVw.extend({
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
-    this.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       self.handleSocketMessage(response);
     });
     this.socketItemsID = Math.random().toString(36).slice(2);

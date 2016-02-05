@@ -302,7 +302,7 @@ module.exports = Backbone.View.extend({
         self.render();
       });
 
-      self.listenTo(window.obEventBus, "socketMessageRecived", function(response){
+      self.listenTo(window.obEventBus, "socketMessageReceived", function(response){
         self.handleSocketMessage(response);
       });
 

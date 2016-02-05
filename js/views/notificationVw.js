@@ -9,8 +9,8 @@ module.exports = Backbone.View.extend({
   className: "notification flexRow",
 
   events: {
-    'click .js-avatar': 'avatarClick',
-    'click .js-username': 'avatarClick'
+    'click .js-actionLink': 'actionClick',
+    'click .js-username': 'actionClick'
   },
 
   initialize: function(){
@@ -28,12 +28,27 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
-  avatarClick: function(){
+  actionClick: function(){
     var targ = $('.js-navNotificationsMenu');
     targ.addClass('hide');
     $('#overlay').addClass('hide');
-    Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
-
+    switch(this.model.get('type')){
+      case "follow":
+        Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
+        break;
+      case "new order":
+        Backbone.history.navigate('#transactions/sales', {trigger: true});
+        break;
+      case "dispute_open":
+        Backbone.history.navigate('#transactions/sales', {trigger: true});
+        break;
+      case "payment received":
+        Backbone.history.navigate('#transactions/sales', {trigger: true});
+        break;
+      case "order confirmation":
+        Backbone.history.navigate('#transactions/purchases', {trigger: true});
+        break;
+    }
   },
 
   close: function(){
