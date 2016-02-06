@@ -34,6 +34,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Good",
         Poor: "Poor",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -480,6 +481,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -907,6 +909,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Hervorragend",
         Good: "Gut",
         Poor: "Mangelhaft",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -1346,6 +1349,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Eccellente",
         Good: "Buono",
         Poor: "Scarso",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -1785,6 +1789,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Bon",
         Poor: "Médiocre",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -2221,6 +2226,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelent",
         Good: "Bun",
         Poor: "Prost",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -2656,6 +2662,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Идеальное",
         Good: "Хорошее",
         Poor: "Плохое",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -3091,6 +3098,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -3530,6 +3538,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Çok iyi",
         Good: "İyi",
         Poor: "İyi değil",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "Stok Takip Kodu",
@@ -3969,6 +3978,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Chon",
         Good: "Maj",
         Poor: "VIvup",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -4407,6 +4417,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "出色",
         Good: "完好",
         Poor: "较差",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -4845,6 +4856,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "훌륭한",
         Good: "줗은",
         Poor: "불량",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -5280,6 +5292,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "極良質",
         Good: "良質",
         Poor: "まあまあ良い",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
@@ -5707,6 +5720,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Doskonały",
         Good: "W dobrym stanie",
         Poor: "W złym stanie",
+        StillValidating: "Your handle is still validating", //notTranslated
         CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "Na stanie",
