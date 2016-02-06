@@ -34,6 +34,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Good",
         Poor: "Poor",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Refurbished",
@@ -479,6 +480,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Restaurado",
@@ -905,6 +907,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Hervorragend",
         Good: "Gut",
         Poor: "Mangelhaft",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "&Uuml;berholt",
@@ -1343,6 +1346,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Eccellente",
         Good: "Buono",
         Poor: "Scarso",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Ricondizionato",
@@ -1781,6 +1785,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Bon",
         Poor: "Médiocre",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Remis à neuf",
@@ -2216,6 +2221,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelent",
         Good: "Bun",
         Poor: "Prost",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Renovat",
@@ -2650,6 +2656,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Идеальное",
         Good: "Хорошее",
         Poor: "Плохое",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Восстановленный",
@@ -3084,6 +3091,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Renovované",
@@ -3522,6 +3530,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Çok iyi",
         Good: "İyi",
         Poor: "İyi değil",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "Stok Takip Kodu",
         Refurbished: "Yenilenmiş",
@@ -3960,6 +3969,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Chon",
         Good: "Maj",
         Poor: "VIvup",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "SabHa'",
@@ -4397,6 +4407,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "出色",
         Good: "完好",
         Poor: "较差",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "整修过",
@@ -4834,6 +4845,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "훌륭한",
         Good: "줗은",
         Poor: "불량",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "단장",
@@ -5268,6 +5280,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "極良質",
         Good: "良質",
         Poor: "まあまあ良い",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "整備済製品", // check
@@ -5694,6 +5707,7 @@ module.exports = Backbone.Model.extend({
         Excellent: "Doskonały",
         Good: "W dobrym stanie",
         Poor: "W złym stanie",
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "Na stanie",
         Refurbished: "Odnowiony",
