@@ -4,7 +4,7 @@
       <h3 class="margin0 marginTop25"><%= polyglot.t('Discover') %></h3>
     </div>
     <p class="textOpacity75 padding025 fontSize15 margin8"><%= polyglot.t('onboarding.discoverCallOut') %></p>
-    <div class="btn btn-enter custCol-secondary"><%= polyglot.t('Enter') %></div>
+    <div class="btn btn-enter custCol-secondary custCol-text"><%= polyglot.t('Enter') %></div>
   </a>
 </div>
 
@@ -471,6 +471,7 @@
             </div>
           </div>
 
+          <% var randomThemeSelection = Math.floor(Math.random() * 6) + 1; %>
           <div class="accordion-child accordion-inactive custCol-primary">
             <div class="bar barTxt h6 custCol-secondary custCol-text">
               <%= polyglot.t('Theme') %>
@@ -479,7 +480,7 @@
             <div class="flexContainer homeModal-settings homeModal-settings-noSearch custCol-primary customThemeScrollbar">
               <div class="flexRow">
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
-                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1"
+                  <input type="radio" name="theme-selection" <% if(randomThemeSelection === 1) { %>checked<% } %> class="fieldItem marginBottom20" id="theme-1"
                          data-primary-color="#ba4a3f"
                          data-secondary-color="#d94641"
                          data-background-color="#5E3E36"
@@ -498,7 +499,7 @@
                 </div>
 
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
-                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-2"
+                  <input type="radio" name="theme-selection" <% if(randomThemeSelection === 2) { %>checked<% } %> class="fieldItem marginBottom20" id="theme-2"
                          data-primary-color="#ffffff"
                          data-secondary-color="#E6E6E6"
                          data-background-color="#B2B2B2"
@@ -517,7 +518,7 @@
                 </div>
 
                 <div class="theme-container clearfix custCol-border borderBottom">
-                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-3"
+                  <input type="radio" name="theme-selection" <% if(randomThemeSelection === 3) { %>checked<% } %> class="fieldItem marginBottom20" id="theme-3"
                          data-primary-color="#3F4641"
                          data-secondary-color="#515752"
                          data-background-color="#272B24"
@@ -536,7 +537,7 @@
                 </div>
 
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
-                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-4"
+                  <input type="radio" name="theme-selection" <% if(randomThemeSelection === 4) { %>checked<% } %> class="fieldItem marginBottom20" id="theme-4"
                          data-primary-color="#6C7D46"
                          data-secondary-color="#5C6A3C"
                          data-background-color="#29301B"
@@ -555,7 +556,7 @@
                 </div>
 
                 <div class="theme-container clearfix custCol-border borderRight borderBottom">
-                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-5"
+                  <input type="radio" name="theme-selection" <% if(randomThemeSelection === 5) { %>checked<% } %> class="fieldItem marginBottom20" id="theme-5"
                          data-primary-color="#128092"
                          data-secondary-color="#007088"
                          data-background-color="#02334E"
@@ -574,7 +575,7 @@
                 </div>
 
                 <div class="theme-container clearfix custCol-border borderBottom">
-                  <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-6"
+                  <input type="radio" name="theme-selection" <% if(randomThemeSelection === 6) { %>checked<% } %> class="fieldItem marginBottom20" id="theme-6"
                          data-primary-color="#252525"
                          data-secondary-color="#1B1B1B"
                          data-background-color="#141414"

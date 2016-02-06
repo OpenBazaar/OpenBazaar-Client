@@ -4032,6 +4032,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border: 0;
 }
 
+#ov1  .borderRight0 {
+  border-right: 0;
+}
+
 #ov1  .outline2 {
   outline: 2px solid #fff;
 }
@@ -4583,6 +4587,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .lineHeight46{
   line-height: 46px;
 }
+#ov1  .lineHeight51{
+  line-height: 51px;
+}
 
 #ov1  .lineHeightReset{
   line-height: normal;
@@ -4782,6 +4789,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width46px {
   width: 46px;
+}
+
+#ov1 .width70px {
+  width: 70px;
 }
 
 #ov1 .width75px {
