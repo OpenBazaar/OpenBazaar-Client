@@ -45,7 +45,7 @@ module.exports = Backbone.Model.extend({
       location: "UNITED_STATES",
       avatar_hash: "",
       handle: "",
-      encryption_key: ""
+      public_key: ""
     }
   },
 
