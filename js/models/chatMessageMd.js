@@ -10,6 +10,6 @@ module.exports = window.Backbone.Model.extend({
     read: false,
     timestamp: "",
     message: "",
-    encryption_key: ""
+    public_key: ""
   }
 });

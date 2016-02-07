@@ -6,12 +6,13 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     chosen = require('../utils/chosen.jquery.min.js'),
     purchasesCl = require('../collections/purchasesCl'),
+    baseVw = require('./baseVw'),
     orderShortVw = require('./orderShortVw'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     transactionModalVw = require('./transactionModalVw'),
     countriesMd = require('../models/countriesMd');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "transactionsView",
 
@@ -30,6 +31,7 @@ module.exports = Backbone.View.extend({
        userModel
        userProfile
        state (from router)
+       socketView (from router)
      */
     var self = this,
         profile = options.userProfile.get('profile'),
@@ -37,10 +39,12 @@ module.exports = Backbone.View.extend({
 
     this.options = options;
     this.state = options.state || "purchases";
-    this.userModel = this.options.userModel;
+    this.userModel = options.userModel;
+    this.userProfile = options.userProfile;
     this.model = new Backbone.Model();
     this.model.set("user", options.userModel.toJSON());
     this.model.set("page", profile);
+    this.socketView = options.socketView;
     setTheme(profile.primary_color, profile.secondary_color, profile.background_color, profile.text_color);
     this.serverUrl = options.userModel.get('serverUrl');
     this.cCode = options.userModel.get('currency_code');
@@ -48,28 +52,27 @@ module.exports = Backbone.View.extend({
       self.openOrderModal(orderID);
     });
     this.searchTransactions;
-    this.subViews = [];
-    this.subModels = [];
 
     this.countries = new countriesMd();
     this.countriesArray = this.countries.get('countries');
 
-    this.subModels.push(this.countries);
+    this.purchasesWrapper = $(wrapper);
+    this.salesWrapper = $(wrapper);
+    this.casesWrapper = $(wrapper);
+
+
     $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
       $('.js-loadingModal').addClass("hide");
       self.btAve = btAve;
       self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";
-      self.purchasesWrapper = $(wrapper);
 
       self.salesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.salesCol.url = self.serverUrl + "get_sales";
-      self.salesWrapper = $(wrapper);
 
       self.casesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
       self.casesCol.url = self.serverUrl + "get_cases";
-      self.casesWrapper = $(wrapper);
 
       self.render();
     });
@@ -81,18 +84,24 @@ module.exports = Backbone.View.extend({
 
     this.purchasesCol.fetch({
       success: function(models){
-        self.renderPurchases();
+        //self.renderPurchases();
+        self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
         self.setSearchList('transactionsPurchases');
         if(self.model.get('page').vendor){
           self.salesCol.fetch({
             success: function(models){
-              self.renderSales();
+              //self.renderSales();
+              self.renderTab("sales", self.salesCol, self.salesWrapper);
               self.setSearchList('transactionsSales');
               if(self.model.get('page').moderator){
-                //this.casesCol.fetch(); //not ready yet
+                self.casesCol.fetch({
+                  success: function(models) {
+                    //self.renderCases();
+                    self.renderTab("cases", self.casesCol, self.casesWrapper);
+                    self.setSearchList('transactionsCases');
+                  }
+                });
               }
-              //move to success of fetch cases when that is ready
-
             }
           });
         }
@@ -136,7 +145,7 @@ module.exports = Backbone.View.extend({
 
   tabHandler: function(e){
     "use strict";
-    var tab = $(e.target),
+    var tab = $(e.target).closest('.js-tab'),
         tabID = tab.data("tab"),
         showContent = this.$el.find('.js-'+tabID);
 
@@ -175,86 +184,42 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  renderPurchases: function(filterBy){
+  renderTab: function(tabName, tabCollection, tabWrapper, filterBy){
     "use strict";
     var self = this;
-    this.purchasesWrapper.html('');
+    tabWrapper.html('');
     if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
-      this.purchasesCol.comparator = function(model) {
+      tabCollection.comparator = function(model) {
         return -model.get("timestamp");
       };
-      this.purchasesCol.sort();
+      tabCollection.sort();
     }
     if(filterBy == "dateOldest"){
-      this.purchasesCol.comparator = function(model) {
+      tabCollection.comparator = function(model) {
         return model.get("timestamp");
       };
-      this.purchasesCol.sort();
+      tabCollection.sort();
     }
-    this.purchasesCol.each(function(model, i){
+    tabCollection.each(function(model, i){
       if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
-        self.addPurchase(model);
+        self.addTransaction(model, tabWrapper, tabName);
       } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-        self.addPurchase(model);
+        self.addTransaction(model, tabWrapper, tabName);
       }
     });
 
-    this.$el.find('.js-purchasesCount').html(this.purchasesCol.length);
-    this.$el.find(".js-purchases").append(this.purchasesWrapper);
+    this.$el.find('.js-'+tabName+'Count').html(tabCollection.length);
+    this.$el.find('.js-'+tabName).append(tabWrapper);
   },
 
-  addPurchase: function(model){
+  addTransaction: function(model, tabWrapper, type){
     model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-    model.set('transactionType', "purchase");
+    model.set('transactionType', type);
     var orderShort = new orderShortVw({
       model: model
     });
-    this.subViews.push(orderShort);
-    this.purchasesWrapper.append(orderShort.render().el);
-  },
-
-  renderSales: function(filterBy){
-    "use strict";
-    var self = this;
-    this.salesWrapper.html('');
-    if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
-      this.salesCol.comparator = function(model) {
-        return -model.get("timestamp");
-      };
-      this.salesCol.sort();
-    }
-    if(filterBy == "dateOldest"){
-      this.salesCol.comparator = function(model) {
-        return model.get("timestamp");
-      };
-      this.salesCol.sort();
-    }
-    this.salesCol.each(function(model, i){
-      if(!filterBy || filterBy == "all" || filterBy == "dateNewest" || filterBy == "dateOldest"){
-        self.addSale(model);
-      } else if(filterBy && filterBy != "dateNewest" && filterBy != "dateOldest" && model.get('status') == filterBy) {
-        self.addSale(model);
-      }
-    });
-
-    this.$el.find('.js-salesCount').html(this.salesCol.length);
-    this.$el.find(".js-sales").append(this.salesWrapper);
-  },
-
-  addSale: function(model){
-    "use strict";
-    model.set('imageUrl', this.serverUrl +"get_image?hash="+ model.get('thumbnail_hash'));
-    model.set('transactionType', "sale");
-    var orderShort = new orderShortVw({
-      model: model
-    });
-    this.subViews.push(orderShort);
-    this.salesWrapper.append(orderShort.render().el);
-  },
-
-  renderCases: function(models){
-    "use strict";
-
+    this.registerChild(orderShort);
+    tabWrapper.append(orderShort.render().el);
   },
 
   openOrderModal: function(options){
@@ -271,29 +236,13 @@ module.exports = Backbone.View.extend({
       state: this.state,
       tabState: options.tabState,
       bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
-      transactionType: options.transactionType
+      transactionType: options.transactionType,
+      userModel: this.userModel,
+      userProfile: this.userProfile,
+      socketView: this.socketView
     });
     this.listenTo(orderModalView, "closed", function(){
       this.getData();
     });
-  },
-
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
-    this.model.off();
-    this.off();
-    this.remove();
   }
 });

@@ -61,7 +61,7 @@
               <span class="ion-android-open fontSize11 marginRight2 textOpacity1"></span>
             </div>
             <% if(ob.transactionType == "purchase" && ob.status == 0){ %>
-              <div class="btn btn-txt height36 custCol-secondary marginBottom5 width100">
+              <div class="btn btn-txt height36 custCol-secondary marginBottom5 width100 js-orderShort">
                 <%= polyglot.t('transactions.PayPurchase') %>
               </div>
             <% } else if(ob.transactionType == "sale" && ob.status == 1){ %>

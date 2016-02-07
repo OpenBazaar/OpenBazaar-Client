@@ -36,7 +36,7 @@ module.exports = Backbone.View.extend({
 
   chatHeadClick: function() {
     var guid = this.model.get('guid');
-    var key = this.model.get('encryption_key');
+    var key = this.model.get('public_key');
     window.obEventBus.trigger("openChat", guid, key);
   },
 

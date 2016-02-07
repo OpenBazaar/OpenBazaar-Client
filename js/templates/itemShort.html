@@ -5,7 +5,7 @@
   <div class="table">
     <div>
       <% if(ob.showAvatar) { %>
-      <div class="thumbnail-small js-avatar tooltip" data-tooltip="<%- ob.handle %>" data-handle="<%- ob.handle %>"
+      <div class="thumbnail-small js-avatar tooltip" data-tooltip="<% if(ob.handle) { %><%- ob.handle %><% }else{ %><%- ob.guid %><% } %>" data-handle="<%- ob.handle %>"
         style="background-image: <% if(ob.avatar_hash && ob.avatarURL) { %> url(<%- ob.avatarURL %>), <% } %>url(imgs/defaultUser.png);"></div>
       <% } %>
       <div class="js-item pad8Left" data-id="<%- ob.contract_hash %>">

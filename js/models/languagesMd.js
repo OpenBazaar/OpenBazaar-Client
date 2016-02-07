@@ -19,6 +19,7 @@ module.exports = Backbone.Model.extend({
         You: "You",
         Skip: "Skip",
         Done: "Done",
+        Status: "Status",
         Navigation: "Navigation", 
         Cancel: "Cancel",
         ClosingOpenBazaar: "Close (Your page will go offline)", 
@@ -33,6 +34,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Good",
         Poor: "Poor",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Refurbished",
@@ -253,9 +256,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
         moderatorSettings: {
-          ProvideResolution: "Provide dispute resolution",
+          DisputeResolution: "Dispute Resolution",
           ServiceFee: "Service fee",
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"
+          ServiceFeeNote: "Min: 0%, Max: 25%"
         },
         BecomeModerator: "Become a moderator",
         EditModerator: "Moderator Settings",
@@ -318,7 +321,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
-          NoneSent: "None sent"
+          NoneSent: "None sent",
+          ModerationFee: "Moderation Fee:",
+          DisputeTransaction: "Start a Dispute",
+          sendMessagePlaceholder: "Type your message here.",
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
+          SendMessage: "Send"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -330,8 +338,8 @@ module.exports = Backbone.Model.extend({
           notFoundError: "Data could not be loaded for:",
           socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466.",
           contractError: "This Item Cannot be Purchased.",
-          sellerError: "The seller's server has rejected the purchase request",
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid.",
+          sellerError: "The seller's server has rejected the purchase request. This may be due to a connection issue.",
+          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid. If it is valid, try again in a few seconds.",
           pageUnavailable: "This page is currently unavailable.",
           badHandle: "The handle you entered does not have a valid OpenBazaar ID."
         },
@@ -418,15 +426,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address",
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address",
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -446,7 +454,7 @@ module.exports = Backbone.Model.extend({
           summaryMsg3: "You can check the status of your order on your",
           purchasesPage: "purchases page",
           returnAddress: "Return Address",
-          moderatorPaymentDisclaimer: "Only applies if the transaction ends in a dispute.",
+          moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
           paymentSent: "Payment Sent!",
           total: "Total"
@@ -467,6 +475,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Omitir",
         Done: "Hecho",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "Cancelar",
         Yes: "S&iacute;",
@@ -477,6 +486,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Restaurado",
@@ -689,9 +700,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -753,7 +764,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -841,15 +857,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -892,6 +908,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "&Uuml;berspringen",
         Done: "Fertig",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "Abbrechen",
         Yes: "Ja",
@@ -902,6 +919,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Hervorragend",
         Good: "Gut",
         Poor: "Mangelhaft",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "&Uuml;berholt",
@@ -1122,9 +1141,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -1186,7 +1205,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1274,15 +1298,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -1325,6 +1349,7 @@ module.exports = Backbone.Model.extend({
         You: "Tu",
         Skip: "Salta",
         Done: "Finito",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "Annulla",
         ClosingOpenBazaar: "Close (Your page will go offline)", //notTranslated
@@ -1339,6 +1364,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Eccellente",
         Good: "Buono",
         Poor: "Scarso",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Ricondizionato",
@@ -1559,9 +1586,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -1623,7 +1650,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -1711,15 +1743,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -1762,6 +1794,7 @@ module.exports = Backbone.Model.extend({
         You: "Vous",
         Skip: "Passer",
         Done: "Terminé",
+        Status: "Status",
         Navigation: "Navigation",
         Cancel: "Annuler",
         ClosingOpenBazaar: "Fermer (votre page sera déconnectée)",
@@ -1776,6 +1809,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excellent",
         Good: "Bon",
         Poor: "Médiocre",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Remis à neuf",
@@ -1996,7 +2031,7 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur de nom d'utilisateur",
         moderatorSettings: {
-          ProvideResolution: "Apporter des résolutions aux conflits",
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Frais de service",
           ServiceFeeNote: "Pourcentage du prix de la transaction (25 max, par étape de 0.01, 0 min)"
         },
@@ -2060,7 +2095,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2149,15 +2189,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -2200,6 +2240,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Sari peste",
         Done: "Efectuat",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "Anulare",
         Yes: "Da",
@@ -2210,6 +2251,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Excelent",
         Good: "Bun",
         Poor: "Prost",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Renovat",
@@ -2430,9 +2473,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -2494,7 +2537,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -2582,15 +2630,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -2633,6 +2681,7 @@ module.exports = Backbone.Model.extend({
         You: "Вы",
         Skip: "Пропустить",
         Done: "Готово",
+        Status: "Status",
         Navigation: "Навигация",
         Cancel: "Отмена",
         Yes: "Да",
@@ -2643,6 +2692,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Идеальное",
         Good: "Хорошее",
         Poor: "Плохое",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Восстановленный",
@@ -2863,9 +2914,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -2927,7 +2978,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -3015,15 +3071,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -3066,6 +3122,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Preskočiť",
         Done: "Hotovo",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "Zrušiť",
         Yes: "Áno",
@@ -3076,6 +3133,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "Renovované",
@@ -3296,9 +3355,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -3360,7 +3419,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -3448,15 +3512,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -3499,6 +3563,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "Atla",
         Done: "Tamam",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "İptal",
         ClosingOpenBazaar: "Close (Your page will go offline)", //notTranslated
@@ -3513,6 +3578,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Çok iyi",
         Good: "İyi",
         Poor: "İyi değil",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "Stok Takip Kodu",
         Refurbished: "Yenilenmiş",
@@ -3733,9 +3800,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -3797,7 +3864,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -3885,15 +3957,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -3936,6 +4008,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "BuSHa'",
         Done: "PItlh",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "QuvHa'ghach",
         ClosingOpenBazaar: "Close (Your page will go offline)", //notTranslated
@@ -3950,6 +4023,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Chon",
         Good: "Maj",
         Poor: "VIvup",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "SabHa'",
@@ -4169,9 +4244,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -4233,7 +4308,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -4321,15 +4401,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -4372,6 +4452,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "跳过",
         Done: "完成",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "取消",
         ClosingOpenBazaar: "Close (Your page will go offline)", //notTranslated
@@ -4386,6 +4467,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "出色",
         Good: "完好",
         Poor: "较差",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "整修过",
@@ -4605,9 +4688,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -4669,7 +4752,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -4756,15 +4844,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -4808,6 +4896,7 @@ module.exports = Backbone.Model.extend({
         You: "You", //notTranslated
         Skip: "거르다",
         Done: "끝난",
+        Status: "Status",
         Navigation: "Navigation", //notTranslated
         Cancel: "취소",
         ClosingOpenBazaar: "Close (Your page will go offline)", //notTranslated
@@ -4822,6 +4911,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "훌륭한",
         Good: "줗은",
         Poor: "불량",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "단장",
@@ -5042,9 +5133,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -5106,7 +5197,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -5194,15 +5290,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -5256,6 +5352,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "極良質",
         Good: "良質",
         Poor: "まあまあ良い",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "SKU",
         Refurbished: "整備済製品", // check
@@ -5465,9 +5563,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: { // not translated
-          ProvideResolution: "Provide dispute resolution", // not translated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -5529,7 +5627,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
@@ -5616,15 +5719,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
@@ -5667,6 +5770,7 @@ module.exports = Backbone.Model.extend({
         You: "Ja",
         Skip: "Pomiń",
         Done: "Gotowe",
+        Status: "Status",
         Navigation: "Nawigacja", 
         Cancel: "Anuluj",
         ClosingOpenBazaar: "Ciekawostka: twoja strona jest online, póki nie zamkniesz programu.", 
@@ -5681,6 +5785,8 @@ module.exports = Backbone.Model.extend({
         Excellent: "Doskonały",
         Good: "W dobrym stanie",
         Poor: "W złym stanie",
+        StillValidating: "Your handle is still validating", //notTranslated
+        CheckStatus: "Check Status", //notTranslated
         ChangeCurrency: "Change currency", //notTranslated
         SKU: "Na stanie",
         Refurbished: "Odnowiony",
@@ -5901,9 +6007,9 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         moderatorSettings: {
-          ProvideResolution: "Provide dispute resolution",//notTranslated
+          DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee",//notTranslated
-          ServiceFeeNote: "Percentage of transaction price (max 25, step 0.01, min 0)"//notTranslated
+          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
         BecomeModerator: "Become a moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
@@ -5965,7 +6071,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Obsługa klienta",
           Review: "Oceń",
           ReviewPlaceHolder: "Twoja opinia o tej transakcji",
-          NoneSent: "Brak informacji"
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Nie można zapisać zmian.",
@@ -6053,15 +6164,15 @@ module.exports = Backbone.Model.extend({
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the page to your temporary bitcoin address", //notTranslated
+          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
           CantFindAddress: "I can't find my bitcoin address", //notTranslated
           BitcoinWallet: "Bitcoin Wallet", //notTranslated
           ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
           ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
           ModeratedPayment: "Moderated Payment", //notTranslated
           DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a bitcoin wallet?", //notTranslated
+          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
           QuickSetup: "It only takes a few minutes to set one up", //notTranslated
           CreateWallet: "Create a Wallet", //notTranslated
           DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
