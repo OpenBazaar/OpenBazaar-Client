@@ -3,7 +3,6 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     remote = require('remote'),
-    cropit = require('../utils/jquery.cropit'),
     userSettingsModel = require('../models/userMd'),
     userProfileModel = require('../models/userProfileMd');
 

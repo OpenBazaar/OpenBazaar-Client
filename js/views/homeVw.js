@@ -183,6 +183,7 @@ module.exports = baseVw.extend({
     item.showAvatar = true;
     item.userID = item.guid;
     item.discover = true;
+    item.ownGuid = this.userModel.get('guid');
 
     item.ownFollowing = false;
     if(this.ownFollowing.indexOf(item.guid) != -1){
@@ -305,6 +306,11 @@ module.exports = baseVw.extend({
     if (typeof follow == 'object') {
       options = follow;
       follow = true;
+    }
+
+    //don't follow if this is the user's own guid
+    if(options.guid == this.options.userModel.get('guid')){
+      return;
     }
 
     $.ajax({
