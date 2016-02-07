@@ -307,6 +307,11 @@ module.exports = baseVw.extend({
       follow = true;
     }
 
+    //don't follow if this is the user's own guid
+    if(options.guid == this.options.userModel.get('guid')){
+      return;
+    }
+
     $.ajax({
       type: "POST",
       data: {'guid': options.guid},
