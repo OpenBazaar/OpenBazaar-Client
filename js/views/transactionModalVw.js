@@ -299,16 +299,27 @@ module.exports = baseVw.extend({
 
   sendDiscussionMessageClick: function(){
     var guid,
-        rKey;
+        guid2,
+        rKey,
+        rKey2;
     if(this.transactionType == "purchases"){
       guid = this.model.get('vendor_offer').listing.id.guid;
       rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
+      guid2 = this.model.get('displayModerator').guid;
+      rKey2 = this.model.get('displayModerator').pubkeys.guid;
     } else if(this.transactionType == "sales"){
       guid = this.model.get('buyer_order').order.id.guid;
       rKey = this.model.get('buyer_order').order.id.pubkeys.guid;
+      guid2 = this.model.get('displayModerator').guid;
+      rKey2 = this.model.get('displayModerator').pubkeys.guid;
+    } else if(this.transactionType == "cases"){
+      guid = this.model.get('vendor_offer').listing.id.guid;
+      rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
+      guid2 = this.model.get('buyer_order').order.id.guid;
+      rKey2 = this.model.get('buyer_order').order.id.pubkeys.guid;
     }
     this.sendDiscussionMessage(guid, rKey);
-    this.sendDiscussionMessage(this.model.get('displayModerator').guid, rKey);
+    this.sendDiscussionMessage(guid2, rKey2);
   },
 
   sendDiscussionMessage: function(guid, rKey){
