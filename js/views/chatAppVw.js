@@ -195,7 +195,8 @@ module.exports = Backbone.View.extend({
     }
 
     this.openConversation();
-    $('#inputConversationRecipient').val(guid);
+    //$('#inputConversationRecipient').val(guid);
+    this.conversationRecipient = guid;
     $('.chatConversationAvatar').css('background-image', 'url(' + avatarURL + '), url(imgs/defaultUser.png)');
     $('.chatConversationLabel').html(guid);
     //$('#inputConversationKey').val(key);
@@ -291,11 +292,11 @@ module.exports = Backbone.View.extend({
         if (chat_body != "" && chat_body != '\n') {
 
           // Chat details
-          var chat_guid = targetForm.find('#inputConversationRecipient')[0].value;
-          //var chat_handle = targetForm.find('#inputConversationHandle').value;
+          //var chat_guid = targetForm.find('#inputConversationRecipient')[0].value;
+          var chat_handle = targetForm.find('#inputConversationHandle').value;
           var chat_subject = "";
           var chat_msgtype = "chat";
-          var chat_key = targetForm.find('#inputConversationKey')[0].value;
+          //var chat_key = targetForm.find('#inputConversationKey')[0].value;
 
           var socketMessageId = Math.random().toString(36).slice(2);
 
@@ -304,7 +305,7 @@ module.exports = Backbone.View.extend({
               "api": "v1",
               "id": socketMessageId,
               "command": "send_message",
-              "guid": chat_guid,
+              "guid": this.conversationRecipient,
               "handle": "",
               "message": chat_body,
               "subject": chat_subject,
@@ -319,7 +320,7 @@ module.exports = Backbone.View.extend({
         targetForm.find('#inputConversationMessage')[0].value = "";
         targetForm.find('.js-chatMessage').html('');
 
-        this.updateChat(chat_guid);
+        this.updateChat(this.conversationRecipient);
         this.afterRender();
       }
     } else {
@@ -345,7 +346,7 @@ module.exports = Backbone.View.extend({
     // let's clear the form on close
     $('#chatConversation').trigger('reset');
     //$('#inputConversationKey').val('');
-    $('#inputConversationRecipient').val('');
+    //$('#inputConversationRecipient').val('');
   },
 
   closeConversationSettings: function() {
