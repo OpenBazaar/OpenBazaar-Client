@@ -198,7 +198,8 @@ module.exports = Backbone.View.extend({
     $('#inputConversationRecipient').val(guid);
     $('.chatConversationAvatar').css('background-image', 'url(' + avatarURL + '), url(imgs/defaultUser.png)');
     $('.chatConversationLabel').html(guid);
-    $('#inputConversationKey').val(key);
+    //$('#inputConversationKey').val(key);
+    this.conversationKey = key;
     $('#inputConversationMessage').focus();
 
     this.updateChat(guid);
@@ -308,7 +309,8 @@ module.exports = Backbone.View.extend({
               "message": chat_body,
               "subject": chat_subject,
               "message_type": chat_msgtype,
-              "public_key": chat_key
+              //"public_key": chat_key
+              "public_key": this.conversationKey
             }
           };
           this.socketView.sendMessage(JSON.stringify(chatMessage));
@@ -342,7 +344,7 @@ module.exports = Backbone.View.extend({
 
     // let's clear the form on close
     $('#chatConversation').trigger('reset');
-    $('#inputConversationKey').val('');
+    //$('#inputConversationKey').val('');
     $('#inputConversationRecipient').val('');
   },
 
