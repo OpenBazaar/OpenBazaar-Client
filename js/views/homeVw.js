@@ -183,6 +183,7 @@ module.exports = baseVw.extend({
     item.showAvatar = true;
     item.userID = item.guid;
     item.discover = true;
+    item.ownGuid = this.userModel.get('guid');
 
     item.ownFollowing = false;
     if(this.ownFollowing.indexOf(item.guid) != -1){
