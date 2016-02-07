@@ -764,7 +764,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -1200,7 +1205,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1640,7 +1650,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -2080,7 +2095,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2517,7 +2537,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -2953,7 +2978,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -3389,7 +3419,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -3829,7 +3864,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -4268,7 +4308,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -4707,7 +4752,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -5147,7 +5197,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -5572,7 +5627,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoneSent: "None sent" // not translated
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
@@ -6011,7 +6071,12 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Obsługa klienta",
           Review: "Oceń",
           ReviewPlaceHolder: "Twoja opinia o tej transakcji",
-          NoneSent: "Brak informacji"
+          NoneSent: "None sent", // not translated
+          ModerationFee: "Moderation Fee:", // not translated
+          DisputeTransaction: "Start a Dispute", // not translated
+          sendMessagePlaceholder: "Type your message here.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          SendMessage: "Send" // not translated
         },
         errorMessages: {
           saveError: "Nie można zapisać zmian.",
