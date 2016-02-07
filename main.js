@@ -66,7 +66,7 @@ var start_local_server = function() {
 };
 
 // Check if we need to kick off the python server-daemon (Desktop app)
-if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + daemon)) {
+if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + path.sep + daemon)) {
   launched_from_installer = true;
   console.log('Starting OpenBazaar Server');
   start_local_server();
