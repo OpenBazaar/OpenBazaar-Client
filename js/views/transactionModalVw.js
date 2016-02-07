@@ -330,7 +330,7 @@ module.exports = baseVw.extend({
           "message": messageText,
           "subject": this.orderID,
           "message_type": "DISPUTE",
-          "recipient_key": rKey
+          "public_key": rKey
         }
       };
       this.socketView.sendMessage(JSON.stringify(chatMessage));

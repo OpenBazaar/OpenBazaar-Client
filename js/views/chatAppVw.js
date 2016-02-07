@@ -308,7 +308,7 @@ module.exports = Backbone.View.extend({
               "message": chat_body,
               "subject": chat_subject,
               "message_type": chat_msgtype,
-              "recipient_key": chat_key
+              "public_key": chat_key
             }
           };
           this.socketView.sendMessage(JSON.stringify(chatMessage));

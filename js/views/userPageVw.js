@@ -1337,7 +1337,7 @@ module.exports = baseVw.extend({
 
   sendMessage: function(){
     "use strict";
-    var key = this.userProfile.get('profile').encryption_key;
+    var key = this.userProfile.get('profile').public_key;
     var guid = this.userProfile.get('profile').guid;
     window.obEventBus.trigger("openChat", guid, key);
   },
