@@ -300,13 +300,12 @@ module.exports = baseVw.extend({
   sendDiscussionMessageClick: function(){
     var guid,
         rKey;
-    console.log(this.model.attributes)
     if(this.transactionType == "purchases"){
       guid = this.model.get('vendor_offer').listing.id.guid;
-      rKey = this.model.get('vendor_offer').listing.id.pubkeys.encryption;
+      rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
     } else if(this.transactionType == "sales"){
       guid = this.model.get('buyer_order').order.id.guid;
-      rKey = this.model.get('buyer_order').order.id.pubkeys.encryption;
+      rKey = this.model.get('buyer_order').order.id.pubkeys.guid;
     }
     this.sendDiscussionMessage(guid, rKey);
     this.sendDiscussionMessage(this.model.get('displayModerator').guid, rKey);
@@ -317,8 +316,6 @@ module.exports = baseVw.extend({
     var messageText = messageInput.val();
     if (messageText) {
       var socketMessageId = Math.random().toString(36).slice(2);
-      console.log(guid)
-      console.log(rKey)
 
       var chatMessage = {
         "request": {
