@@ -20,7 +20,6 @@ var __ = require('underscore'),
     storeWizardVw = require('./storeWizardVw'),
     moderatorSettingsVw = require('./moderatorSettingsVw');
 
-//create a default item because a new itemModel will be created with only flat attributes
 var defaultItem = {
   "vendor_offer": {
     "signature": "",
@@ -63,15 +62,13 @@ var defaultItem = {
       },
       "moderators": [
         {
+          "fee": 0,
+          "name": "",
+          "blockchain_id": "",
+          "avatar": "",
+          "short_description": "",
           "pubkeys": {
-            "encryption": {
-              "key": "",
-              "signature": ""
-            },
-            "signing": {
-              "key": "",
-              "signature": ""
-            },
+            "guid": "",
             "bitcoin": {
               "key": "",
               "signature": ""

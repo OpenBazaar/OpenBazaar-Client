@@ -25,6 +25,9 @@ module.exports = Backbone.View.extend({
     this.moderatorFeeInput;
     this.moderatorStatus = true;
     this.oldFeeValue = 0;
+    if(this.model.get('page').profile.header_hash){
+      this.model.set('headerURL', this.model.get('user').serverUrl+"get_image?hash="+this.model.get('page').profile.header_hash);
+    }
 
     this.render();
   },

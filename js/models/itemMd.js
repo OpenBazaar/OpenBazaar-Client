@@ -69,15 +69,13 @@ module.exports = window.Backbone.Model.extend({
         },
         "moderators": [
           {
+            "fee": 0,
+            "name": "",
+            "blockchain_id": "",
+            "avatar": "",
+            "short_description": "",
             "pubkeys": {
-              "encryption": {
-                "key": "",
-                "signature": ""
-              },
-              "signing": {
-                "key": "",
-                "signature": ""
-              },
+              "guid": "",
               "bitcoin": {
                 "key": "",
                 "signature": ""

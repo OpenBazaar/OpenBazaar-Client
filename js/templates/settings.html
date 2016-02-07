@@ -70,7 +70,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper noIcon">
                     <select name="language" class="chosen" id="language">
@@ -91,7 +91,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper noIcon">
                     <select name="country" class="chosen" id="country">
@@ -112,7 +112,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper chosen-relative noIcon">
                     <select name="currency_code" class="chosen" id="currency_code">
@@ -133,7 +133,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper chosen-relative noIcon">
                     <select name="time_zone" class="chosen" id="time_zone">
@@ -152,7 +152,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="refund_address"
                        type="text"
                        id="refund_address"
@@ -172,7 +172,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
                   <input type="radio" class="fieldItem" id="enableNotificationsYes" name="notifications" value="true" checked /><label for="enableNotificationsYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
                   <input type="radio" class="fieldItem" id="enableNotificationsNo" name="notifications" value="false"/><label for="enableNotificationsNo" class="radioLabel"><%= polyglot.t('No') %></label>
@@ -189,7 +189,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
                   <input disabled type="radio" class="fieldItem" id="display_nsfw_content_yes" name="nsfw" value="true" checked /><label for="display_nsfw_content_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
                   <input disabled type="radio" class="fieldItem" id="display_nsfw_content_no" name="nsfw" value="false"/><label for="display_nsfw_content_no" class="radioLabel"><%= polyglot.t('No') %></label>
@@ -219,7 +219,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="name"
                        type="text"
                        id="name"
@@ -237,7 +237,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border positionWrapper">
+              <div class="flexCol-9 borderRight0 custCol-border positionWrapper">
                 <input name="handle"
                        type="text"
                        id="handle"
@@ -248,8 +248,8 @@
                 <% if(ob.page.profile.temp_handle && !ob.page.profile.handle){ %>
                 <a class="positionTopRight padding10 js-externalLink" href="https://onename.com/">
                   <span class="btn btn-txt custCol-secondary tooltip tooltip-right"
-                        data-tooltip="Your handle is being checked at https://onename.com/. Click save to check it again.">
-                    This handle is not yet validated
+                        data-tooltip="<%= polyglot.t('StillValidating') %>">
+                    <%= polyglot.t('CheckStatus') %> <span class="ion-android-open fontSize10"></span>
                   </span>
                 </a>
                 <% } %>
@@ -263,7 +263,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <textarea
                   name="short_description"
                   id="short_description"
@@ -283,7 +283,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem marginLeft6">
                   <input type="radio" class="fieldItem" id="store_nsfw_yes" name="nsfw" value="true" /><label for="store_nsfw_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
                   <input type="radio" class="fieldItem" id="store_nsfw_no" name="nsfw" value="false" checked /><label for="store_nsfw_no" class="radioLabel"><%= polyglot.t('No') %></label>
@@ -297,7 +297,7 @@
                   <label for="settingsAvatarInput"><%= polyglot.t('Avatar') %></label>
                 </div>
               </div>
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div id="settings-image-cropper" class="positionWrapper">
                   <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
                     <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
@@ -324,7 +324,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="website"
                        type="text"
                        id="website"
@@ -341,7 +341,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="email"
                        type="text"
                        id="email"
@@ -358,7 +358,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="facebook"
                        type="text"
                        id="settingsFacebookInput"
@@ -376,7 +376,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="twitter"
                        type="text"
                        id="settingsTwitterInput"
@@ -394,7 +394,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="instagram"
                        type="text"
                        id="settingsInstagramInput"
@@ -412,7 +412,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="snapchat"
                        type="text"
                        id="settingsSnapchatInput"
@@ -430,7 +430,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="pgp_key"
                        type="text"
                        id="pgp_key"
@@ -451,7 +451,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                <textarea
                     name="about"
                     id="about"
@@ -472,7 +472,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="flexRow">
                  <div class="theme-container clearfix custCol-border borderRight borderBottom">
                     <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
@@ -587,7 +587,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border js-settingsCoverPhoto">
+              <div class="flexCol-9 borderRight0 custCol-border js-settingsCoverPhoto">
                 <div id="settings-image-cropperBanner" class="banner-settings positionWrapper">
                   <div class="statusBar navBar fadeOut positionAbsolute js-bannerLoading">
                     <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
@@ -609,7 +609,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="primaryColor"
                        type="text"
                        id="primaryColor"
@@ -626,7 +626,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="secondaryColor"
                        type="text"
                        id="secondaryColor"
@@ -644,7 +644,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="backgroundColor"
                        type="text"
                        id="backgroundColor"
@@ -661,7 +661,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="textColor"
                        type="text"
                        id="textColor"
@@ -694,7 +694,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem marginLeft6">
                   <input disabled type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
                   <input disabled type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
@@ -714,7 +714,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="hideTopAndBottomBorder js-settingsCurrentMods">
                   <!--TODO: moderators input here-->
                 </div>
@@ -733,7 +733,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="hideTopAndBottomBorder js-settingsNewMods">
                 </div>
               </div>
@@ -748,7 +748,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <!--TODO: keywords input here -->
                 </div>
@@ -768,7 +768,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <textarea disabled
                     name="terms_conditions"
@@ -789,7 +789,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <textarea disabled
                     name="refund_policy"
@@ -857,7 +857,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="ship_to_name"
                        id="settingsShipToName"
                        type="text"
@@ -877,7 +877,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="ship_to_street"
                        id="settingsShipToStreet"
                        type="text"
@@ -897,7 +897,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="ship_to_city"
                        id="settingsShipToCity"
                        type="text"
@@ -917,7 +917,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="ship_to_state"
                        id="settingsShipToState"
                        type="text"
@@ -937,7 +937,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="ship_to_postal_code"
                        id="settingsShipToPostalCode"
                        type="text"
@@ -957,7 +957,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper chosen-relative noIcon">
                     <select
@@ -982,30 +982,30 @@
         </form>
         <form class="width100 positionWrapper" name="moderatorForm" id="moderatorForm">
           <div class="flexCol-12 flex-border js-tabTarg js-moderator hide">
-            <div class="flexRow borderBottom custCol-border marginTop20">
-              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Moderator') %></h3>
+            <div class="flexRow borderBottom custCol-border">
+              <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('moderatorSettings.DisputeResolution') %></h3>
             </div>
             <div class="flexRow">
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label><%= polyglot.t('Moderator') %></label>
+                  <label><%= polyglot.t('Status') %></label>
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border positionWrapper">
+              <div class="flexCol-9 borderRight0 custCol-border positionWrapper">
                 <div class="fieldItem">
                   <input type="radio"
                          class="fieldItem"
                          id="moderatorYes"
                          name="moderator"
                          value="true" />
-                  <label for="moderatorYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <label for="moderatorYes" class="radioLabel"><%= polyglot.t('On') %></label>
                   <input type="radio"
                          class="fieldItem"
                          id="moderatorNo"
                          name="moderator"
                          value="false"/>
-                  <label for="moderatorNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                  <label for="moderatorNo" class="radioLabel"><%= polyglot.t('Off') %></label>
                 </div>
               </div>
             </div>
@@ -1016,19 +1016,19 @@
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="moderatorFeeInput"><%= polyglot.t('moderatorSettings.ServiceFee') %></label>
-                  <div class="note"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
+                  <div class="textOpacity50 fontSize12"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input type="number"
                        min="0"
                        max="25"
                        step="0.01"
                        name="moderation_fee"
-                       class="fieldItem custCol-text"
+                       class="fieldItem custCol-text width70px floatLeft"
                        id="moderatorFeeInput"
-                       value="<%- ob.page.profile.moderation_fee %>" required/>
+                       value="<%- ob.page.profile.moderation_fee.toFixed(2) %>" required/><div class="floatLeft marginLeft5 lineHeight51 fontWeight500 textOpacity75">%</div>
               </div>
             </div>
             <a class="btn btn-large js-saveModerator custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary">
@@ -1055,7 +1055,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="libbitcoin_server"
                        id="libbitcoin_server"
                        type="text"
@@ -1074,7 +1074,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <input name="resolver"
                        id="resolver"
                        type="text"
@@ -1093,7 +1093,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
                   <input type="radio" class="fieldItem" id="sslYes" name="ssl" value="true"
                     <% if(ob.user.ssl) { %>
@@ -1123,7 +1123,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
                   <%- ob.user.network_connection %>  <span class="txt-fade"><%= polyglot.t('ReadOnly') %></span>
                 </div>
