@@ -278,7 +278,9 @@ module.exports = Backbone.View.extend({
         smallImage: "stretch",
         exportZoom: 1.33,
         maxZoom: 5,
-        onFileReaderError: function(data){console.log(data);},
+        onFileReaderError: function(data){
+          console.log(data);
+        },
         onImageError: function(errorObject, errorCode, errorMessage) {
           console.log(errorObject);
           console.log(errorCode);
@@ -566,7 +568,6 @@ module.exports = Backbone.View.extend({
           var account = resolverData[handle].profile.account.filter(function (accountObject) {
             return accountObject.service == "openbazaar";
           });
-          console.log('#userPage/' + account[0].identifier + state + itemHash);
           Backbone.history.navigate('#userPage/' + account[0].identifier + state + itemHash, {trigger: true});
         } else {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));

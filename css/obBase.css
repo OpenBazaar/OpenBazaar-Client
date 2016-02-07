@@ -160,6 +160,23 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: rgba(255,255,255,0.9);
 }
 
+textarea {
+  background: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  transition: border 0.3s;
+}
+
+textarea:focus {
+  border: 1px solid #fff;
+  outline: none;
+}
+
 form {
   margin: 0;
 }
@@ -1551,6 +1568,10 @@ input[type="text"].txtField-bar {
   margin-right: 6px;
 }
 
+.btn *[class *= "ion-"]:before {
+  pointer-events: none; /* don't fire clicks on icon */
+}
+
 .btn-large {
   height: 42px;
   font-size: 15px;
@@ -1635,6 +1656,11 @@ margin: auto;
 
 #userPage .btn.btn-c1.fade {
   background-color: rgba(87,87,87,0.8);
+}
+
+.btn.btn-c2,
+#userPage .btn.btn-c2 {
+  background-color: rgba(200,25,25,1);
 }
 
 .btn.btn-win {
@@ -2474,7 +2500,8 @@ input[type="datetime-local"].fieldItem:focus {
 .formChecked input[type="email"].fieldItem:focus:invalid,
 .formChecked input[type="url"].fieldItem:focus:invalid,
 .formChecked .fieldItem-textarea:focus:invalid,
-.formChecked input[type="number"].fieldItem:focus:invalid {
+.formChecked input[type="number"].fieldItem:focus:invalid,
+.formChecked .validatable:invalid {
   border: 2px dashed rgba(89,1,1,0.8);;
   background-color: rgba(89,1,1,0.2);
   transition: border 0.3s, background-color 0.4s;
@@ -2636,16 +2663,9 @@ input[type="number"].fieldItem.fieldItem-withButton {
 }
 
 .fieldItem-textarea {
-  background: none;
+  padding: 15px;
   border: 2px solid transparent;
   color: #fff;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  padding: 15px;
-  resize: none;
-  box-sizing: border-box;
 }
 
 .fieldItem-textarea:focus {

@@ -308,7 +308,7 @@ module.exports = Backbone.View.extend({
               "message": chat_body,
               "subject": chat_subject,
               "message_type": chat_msgtype,
-              "recipient_key": chat_key
+              "public_key": chat_key
             }
           };
           this.socketView.sendMessage(JSON.stringify(chatMessage));
@@ -407,7 +407,7 @@ module.exports = Backbone.View.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.hasOwnProperty('message')  && data.message.message_type == "CHAT") {
+    if(data.hasOwnProperty('message') && data.message.message_type == "CHAT") {
       var chat_message = data.message,
           username = "",
           avatar = "";
