@@ -289,6 +289,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order",
           ReceivingAddress: "Receiving Address",
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
+          Comments: "Comments",
+          CommentsPlaceHolder: "Comments on the order, if any",
           Shipper: "Item Shipped By",
           ShipperPlaceholder: "Name of the company shipping the item",
           TrackingNumber: "Tracking Number",
@@ -733,6 +735,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -1174,6 +1178,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -1619,6 +1625,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -2064,6 +2072,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirmer cette commande",
           ReceivingAddress: "Adresse de réception",
           RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Article expédié par",
           ShipperPlaceholder: "Nom de l'entreprise expédiant l'article",
           TrackingNumber: "Numéro de suivi",
@@ -2506,6 +2516,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -2947,6 +2959,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -3388,6 +3402,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -3833,6 +3849,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -4277,6 +4295,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -4721,6 +4741,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -5166,6 +5188,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -5596,6 +5620,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -6040,6 +6066,8 @@ module.exports = Backbone.Model.extend({
           ConfirmOrder: "Potwierdź to zamówienie",
           ReceivingAddress: "Adres odbiorczy",
           RecievingAddressPlaceholder: "Adres portfela, na którzy otrzymasz płatność",
+          Comments: "Comments", // not translated
+          CommentsPlaceHolder: "Comments on the order, if any", // not translated
           Shipper: "Wysłane przez",
           ShipperPlaceholder: "Firma przesyłkowa",
           TrackingNumber: "Numer śledzenia",
