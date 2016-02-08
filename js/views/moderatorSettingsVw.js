@@ -16,6 +16,7 @@ module.exports = Backbone.View.extend({
     'click .js-moderatorSettingsSave': 'saveModeratorSettings',
     'click #moderatorSettingsModYes': 'showModeratorFeeHolder',
     'click #moderatorSettingsModNo': 'hideModeratorFeeHolder',
+    'keyup #moderatorSettingsFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput'
   },
 
@@ -44,6 +45,16 @@ module.exports = Backbone.View.extend({
     });
     return this;
   },
+
+ keypressFeeInput: function(){
+    "use strict";
+    var fee = $('#moderatorSettingsFeeInput').val();
+
+    if (fee.indexOf('.') > 0 && fee.split('.')[1].length > 2) {
+      fee = fee.substr(0, fee.length-1);
+      $('#moderatorSettingsFeeInput').val(fee);
+    }
+ },
 
   saveModeratorSettings: function(){
     "use strict";
