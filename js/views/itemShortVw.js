@@ -95,15 +95,19 @@ module.exports = baseVw.extend({
   },
 
   followUser: function(e) {
-    window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
-    this.$el.find('.js-userShortUnfollow').removeClass('hide');
-    this.$el.find('.js-userShortFollow').addClass('hide');
+    if(this.model.get('guid') !== this.model.get('ownGuid')){
+      window.obEventBus.trigger('followUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
+      this.$el.find('.js-userShortUnfollow').removeClass('hide');
+      this.$el.find('.js-userShortFollow').addClass('hide');
+    }
   },
 
   unfollowUser: function(e){
-    window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
-    this.$el.find('.js-userShortUnfollow').addClass('hide');
-    this.$el.find('.js-userShortFollow').removeClass('hide');
+    if(this.model.get('guid') !== this.model.get('ownGuid')) {
+      window.obEventBus.trigger('unfollowUser', {'guid': this.model.get('guid'), 'target': $(e.target), view: this});
+      this.$el.find('.js-userShortUnfollow').addClass('hide');
+      this.$el.find('.js-userShortFollow').removeClass('hide');
+    }
   },
 
   blockUser: function(e) {
