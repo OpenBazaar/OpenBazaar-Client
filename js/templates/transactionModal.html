@@ -285,12 +285,12 @@
     <div class="flexRow custCol-border borderBottom">
       <div class="flexRow rowItem padding2015">
         <div>
-          <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
           <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
             <strong><%= polyglot.t('transactions.Comments') %>:</strong>
-            <%- ob.vendor_order_confirmation.invoice.shipping.comments
-            ? ob.vendor_order_confirmation.invoice.shipping.comments : polyglot.t('transactions.NoneSent') %>
+            <%- ob.vendor_order_confirmation.invoice.comments
+            ? ob.vendor_order_confirmation.invoice.comments : polyglot.t('transactions.NoneSent') %>
           </div>
+          <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
           <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12">
             <strong><%= polyglot.t('transactions.EstimatedDelivery') %>:</strong>
             <%- ob.vendor_order_confirmation.invoice.shipping.est_delivery ?
@@ -544,13 +544,13 @@
         <div class="flexRow custCol-border borderTop">
           <div class="flexCol-4 borderRight custCol-border">
             <div class="fieldItem">
-              <label for="inputComments"><%= polyglot.t('transactions.Shipper') %></label>
+              <label for="inputComments"><%= polyglot.t('transactions.Comments') %></label>
               <div class="note"><%= polyglot.t('maxLength200') %></div>
             </div>
           </div>
           <div class="flexCol-8">
             <textarea name="comments"
-                      rows="2"
+                      rows="6"
                       maxlength="200"
                       class="fieldItem-textarea custCol-text"
                       id="inputComments"
