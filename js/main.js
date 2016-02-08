@@ -55,6 +55,7 @@ var Polyglot = require('node-polyglot'),
     startRemoteInitSequence,
     launchOnboarding,
     launchServerConnect,
+    login,
     setServerUrl,
     guidCreating;
 
@@ -268,7 +269,7 @@ launchServerConnect = function() {
   }
 };
 
-var login = function() {
+login = function() {
   return $.post(serverConfigMd.getServerBaseUrl() + '/login', {
     username: serverConfigMd.get('username'),
     password: serverConfigMd.get('password')
