@@ -327,10 +327,9 @@ module.exports = baseVw.extend({
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
     var self = this;
+    var socketMessageId = Math.random().toString(36).slice(2);
     __.each(messages, function(msg){
       if (messageText) {
-        var socketMessageId = Math.random().toString(36).slice(2);
-
         var chatMessage = {
           "request": {
             "api": "v1",
