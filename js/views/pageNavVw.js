@@ -94,6 +94,18 @@ module.exports = Backbone.View.extend({
 
   },
 
+  refreshProfile: function() {
+    var self = this;
+  
+    this.userProfile.fetch({
+      success: function(model){
+        self.model.set('vendor', model.get('profile').vendor);
+        self.model.set('moderator', model.get('profile').moderator);
+        self.render();
+      }
+    });
+  },
+
   render: function(){
     "use strict";
     var self = this;
