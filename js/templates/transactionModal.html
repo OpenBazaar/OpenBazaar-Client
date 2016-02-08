@@ -339,7 +339,7 @@
               <strong><%= polyglot.t('Free') %></strong>
               <% } %>
             <% } else { %>
-              <%= polyglot.t('DirectTransaction') %>:
+              <%= polyglot.t('transactions.DirectTransaction') %>:
               <% if(ob.displayTotalPrice){ %>
               <strong><%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
               <% } else if(ob.buyer_order.order.payment.amount){ %>
