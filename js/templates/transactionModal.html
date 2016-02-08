@@ -265,7 +265,6 @@
     </div>
   </div>
 
-  <% if(ob.buyer_order.order.shipping) { %>
   <div class="js-main js-shipping hide">
     <div class="flexRow custCol-border borderBottom">
       <div class="flexRow rowItem padding2015">
@@ -281,6 +280,7 @@
     </div>
 
     <!-- only display if vendor_order_confirmation exists -->
+    <%- ob.vendor_order_confirmation %>
     <% if( ob.vendor_order_confirmation) { %>
     <div class="flexRow custCol-border borderBottom">
       <div class="flexRow rowItem padding2015">
@@ -325,9 +325,7 @@
       </div>
     </div>
     <% } %>
-
   </div>
-  <% } %>
 
   <div class="js-main js-funds hide">
     <div class="flexRow scrollOverflowY" style="height: 319px;">
