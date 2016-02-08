@@ -20,7 +20,6 @@ var __ = require('underscore'),
     storeWizardVw = require('./storeWizardVw'),
     moderatorSettingsVw = require('./moderatorSettingsVw');
 
-//create a default item because a new itemModel will be created with only flat attributes
 var defaultItem = {
   "vendor_offer": {
     "signature": "",
@@ -63,15 +62,13 @@ var defaultItem = {
       },
       "moderators": [
         {
+          "fee": 0,
+          "name": "",
+          "blockchain_id": "",
+          "avatar": "",
+          "short_description": "",
           "pubkeys": {
-            "encryption": {
-              "key": "",
-              "signature": ""
-            },
-            "signing": {
-              "key": "",
-              "signature": ""
-            },
+            "guid": "",
             "bitcoin": {
               "key": "",
               "signature": ""
@@ -1181,6 +1178,7 @@ module.exports = baseVw.extend({
     this.subRender();
   },
 
+  /*
   deleteOldDone: function(newHash) {
     "use strict";
     if(newHash) {
@@ -1192,6 +1190,7 @@ module.exports = baseVw.extend({
       this.setState('store');
     }
   },
+  */
 
   cancelClick: function(){
     "use strict";
@@ -1337,7 +1336,7 @@ module.exports = baseVw.extend({
 
   sendMessage: function(){
     "use strict";
-    var key = this.userProfile.get('profile').encryption_key;
+    var key = this.userProfile.get('profile').public_key;
     var guid = this.userProfile.get('profile').guid;
     window.obEventBus.trigger("openChat", guid, key);
   },

@@ -1,11 +1,10 @@
 <div class="modal modal-opaque js-moderatorModal custCol-text">
   <div class="modal-child modal-childMain">
     <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModeratorModal">
-      <h2 class="ion-close-round"></h2>
+      <h2 class="ion-android-close custCol-text clickable"></h2>
     </div>
-    <div class="modal-hero shadow-inner1-light"
-         style="background-image: url(<%- ob.headerURL %>), url(imgs/defaultBanner.png);">
-    </div>
+    <div class="modal-hero js-storeWizardHero shadow-inner1-light"
+      style="background-image: <% if(ob.headerURL) { %>url(<%- ob.headerURL %>),<% } %>url(imgs/defaultBanner.png);"></div>
     <div class="homeModal-accordion accordion">
       <div class="accordion-window">
         <div class="accordion-child">
@@ -18,15 +17,15 @@
           </div>
           <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
-              <div class="flexRow custCol-border">
+              <div class="flexRow border0">
                 <form id="moderatorSettingsForm" class="flex-border flexExpand custCol-primary">
-                  <div class="flexRow custCol-border borderTop">
+                  <div class="flexRow custCol-border">
                     <div class="flexCol-5 custCol-border">
                       <div class="fieldItem">
-                        <label><%= polyglot.t('moderatorSettings.ProvideResolution') %></label>
+                        <label><%= polyglot.t('moderatorSettings.DisputeResolution') %></label>
                       </div>
                     </div>
-                    <div class="flexCol-7 custCol-border positionWrapper">
+                    <div class="flexCol-7 borderRight0 custCol-border positionWrapper">
                       <div class="fieldItem">
                         <input type="radio"
                                class="fieldItem"
@@ -34,13 +33,13 @@
                                name="moderator"
                                value="true"
                                checked />
-                        <label for="moderatorSettingsModYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                        <label for="moderatorSettingsModYes" class="radioLabel"><%= polyglot.t('On') %></label>
                         <input type="radio"
                                class="fieldItem"
                                id="moderatorSettingsModNo"
                                name="moderator"
                                value="false"/>
-                        <label for="moderatorSettingsModNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                        <label for="moderatorSettingsModNo" class="radioLabel"><%= polyglot.t('Off') %></label>
                       </div>
                     </div>
                   </div>
@@ -48,18 +47,18 @@
                     <div class="flexCol-5 custCol-border">
                       <div class="fieldItem">
                         <label for="moderatorSettingsFeeInput"><%= polyglot.t('moderatorSettings.ServiceFee') %></label>
-                        <div class="note"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
+                        <div class="textOpacity50 fontSize12"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
                       </div>
                     </div>
-                    <div class="flexCol-7 custCol-border">
+                    <div class="flexCol-7 borderRight0 custCol-border">
                       <input type="number"
                              min="0"
                              max="25"
                              step="0.01"
                              name="moderation_fee"
-                             class="fieldItem custCol-text"
+                             class="fieldItem custCol-text width70px floatLeft alignRight"
                              id="moderatorSettingsFeeInput"
-                             value="<%- ob.page.profile.moderation_fee %>" required/>
+                             value="<%- ob.page.profile.moderation_fee.toFixed(2) %>" required/><label class="paddingLeft2 floatLeft fieldItem textOpacity75">%</label>
                     </div>
                   </div>
                 </form>
@@ -67,11 +66,12 @@
             </div>
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
-            <a class="btn btn-bar btn-half js-closeModeratorModal custCol-secondary borderBottomLeftRaidus3">
+            <a class="btn btn-bar btn-half js-closeModeratorModal custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border">
               <%= polyglot.t('Close') %>
             </a>
             <a class="btn btn-bar btn-half js-moderatorSettingsSave custCol-secondary custCol-border-primary borderBottomRightRaidus3">
-              <%= polyglot.t('Save') %>
+              <span class="ion-checkmark fontSize10 marginRight2 textOpacity50"></span>
+              <%= polyglot.t('onboarding.Finished') %>
             </a>
           </div>
         </div>

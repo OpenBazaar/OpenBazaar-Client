@@ -9,6 +9,7 @@ var __ = require('underscore'),
     remote = require('remote'),
     messageModal = require('../utils/messageModal.js');
 
+    var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
 module.exports = Backbone.View.extend({
 
@@ -33,7 +34,10 @@ module.exports = Backbone.View.extend({
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
-    'blur input, textarea': 'validateInput'
+    'click .js-homeModal-themeSelected': 'setSelectedTheme',
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput',
+    'click .js-navInstallUpdate': 'sendInstallUpdate'
   },
 
   initialize: function(options){
@@ -76,6 +80,10 @@ module.exports = Backbone.View.extend({
     //this.createTranslation(localLanguage);
 
     this.render();
+  },
+
+  sendInstallUpdate: function() {
+    ipcRenderer.send('installUpdate');
   },
 
   handleSocketMessage: function(response) {
@@ -125,6 +133,7 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
+
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
@@ -398,7 +407,6 @@ module.exports = Backbone.View.extend({
           var account = resolverData[handle].profile.account.filter(function (accountObject) {
             return accountObject.service == "openbazaar";
           });
-          console.log('#userPage/' + account[0].identifier + state + itemHash);
           Backbone.history.navigate('#userPage/' + account[0].identifier + state + itemHash, {trigger: true});
         } else {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));

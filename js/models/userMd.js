@@ -119,6 +119,12 @@ module.exports = Backbone.Model.extend({
     blockedGuids = this.get('blocked_guids').slice(0) || [];
     index = blockedGuids.indexOf(guid);
 
+
+    //take no action if this is user's own guid
+    if(guid == this.get('guid')){
+      return;
+    }
+
     if (block && index === -1) {
       blockedGuids.push(guid);
     } else if (index !== -1) {

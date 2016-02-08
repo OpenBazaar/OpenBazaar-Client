@@ -1,28 +1,53 @@
 <div class="chatConversationMessageLine">
-    <table width="100%">
-        <% if(ob.outgoing) { %>
-        <tr>
-            <td align="right" class="chatConversationMessageTimestamp paddingLeft2" colspan="100%"><div><%- ob.formattedTimestamp %></div></td>
-        </tr>
-        <tr>
-            <td align="right" class="chatConversationMessageBody"><div class="inner"><%= ob.formattedMessage%></div></td>
-            <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border marginLeft2 js-username clickable"
-                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
-            </td>
-        </tr>
-        <% } else { %>
-        <tr>
-            <td align="left" class="chatConversationMessageTimestamp" colspan="100%"><div><%- ob.formattedTimestamp %></div></td>
-        </tr>
-        <tr>
-            <td class="chatConversationMessageAvatar">
-                <div class="thumbnail custcol-border marginRight2 js-username clickable"
-                 style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px"></div>
-            </td>
-            <td class="chatConversationMessageBody paddingRight2"><div class="inner"><%= ob.formattedMessage %></div></td>
-        </tr>
+    <div class="flexRow">
+        <div class="chatConversationMessageTimestamp paddingLeft2">
+            <div><%- ob.formattedTimestamp %></div>
+        </div>
+    </div>
+    <div class="flexRow">
+        <% if(!ob.outgoing) { %>
+        <div class="thumbnail custcol-border marginRight2"
+             style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px">
+        </div>
+        <% if(ob.guid == ob.moderatorGuid){ %>
+        <div class="chatConversationMessageBody marginRight2">
+            <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
+        </div>
+        <% } else if(ob.transactionType == "purchases"){ %>
+        <div class="chatConversationMessageBody marginRight2">
+            <div class="inner">(<%= polyglot.t('transactions.Seller') %>)</div>
+        </div>
+        <% } else if(ob.transactionType == "sales"){ %>
+        <div class="chatConversationMessageBody marginRight2">
+            <div class="inner">(<%= polyglot.t('transactions.Buyer') %>)</div>
+        </div>
         <% } %>
-    </table>
+        <% } %>
+        <div class="chatConversationMessageBody flexExpand">
+            <% if(ob.outgoing) { %>
+            <div class="inner pull-right"><%= ob.formattedMessage%></div>
+            <% } else { %>
+            <div class="inner pull-left"><%= ob.formattedMessage%></div>
+            <% } %>
+        </div>
+        <% if(ob.outgoing) { %>
+        <% if(ob.guid == ob.moderatorGuid){ %>
+        <div class="chatConversationMessageBody marginLeft2">
+            <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
+        </div>
+        <% } else if(ob.transactionType == "sales"){ %>
+        <div class="chatConversationMessageBody marginLeft2">
+            <div class="inner">(<%= polyglot.t('transactions.Seller') %>)</div>
+        </div>
+        <% } else if(ob.transactionType == "purchases"){ %>
+        <div class="chatConversationMessageBody marginLeft2">
+            <div class="inner">(<%= polyglot.t('transactions.Buyer') %>)</div>
+        </div>
+        <% } %>
+        <div class="thumbnail custcol-border marginLeft2"
+         style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px">
+        </div>
+        <% } %>
+    </div>
 </div>
 
