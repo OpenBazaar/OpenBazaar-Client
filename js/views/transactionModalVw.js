@@ -302,6 +302,7 @@ module.exports = baseVw.extend({
         guid2,
         rKey,
         rKey2;
+
     if(this.transactionType == "purchases"){
       guid = this.model.get('vendor_offer').listing.id.guid;
       rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
@@ -318,34 +319,38 @@ module.exports = baseVw.extend({
       guid2 = this.model.get('buyer_order').order.id.guid;
       rKey2 = this.model.get('buyer_order').order.id.pubkeys.guid;
     }
-    this.sendDiscussionMessage(guid, rKey);
-    this.sendDiscussionMessage(guid2, rKey2);
+    this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
   },
 
-  sendDiscussionMessage: function(guid, rKey){
+  sendDiscussionMessage: function(messages){
+    //messages should be an array of message objects with guid and rKey [{"guid": "", "rKey": ""}]
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
-    if (messageText) {
-      var socketMessageId = Math.random().toString(36).slice(2);
+    var self = this;
+    __.each(messages, function(msg){
+      if (messageText) {
+        var socketMessageId = Math.random().toString(36).slice(2);
 
-      var chatMessage = {
-        "request": {
-          "api": "v1",
-          "id": socketMessageId,
-          "command": "send_message",
-          "guid": guid,
-          "handle": "",
-          "message": messageText,
-          "subject": this.orderID,
-          "message_type": "DISPUTE",
-          "public_key": rKey
-        }
-      };
-      this.socketView.sendMessage(JSON.stringify(chatMessage));
-      messageInput.val('');
-      messageInput.closest('.flexRow').removeClass('formChecked');
-      this.getDiscussion();
-    }
+        var chatMessage = {
+          "request": {
+            "api": "v1",
+            "id": socketMessageId,
+            "command": "send_message",
+            "guid": msg.guid,
+            "handle": "",
+            "message": messageText,
+            "subject": self.orderID,
+            "message_type": "DISPUTE",
+            "public_key": msg.rKey
+          }
+        };
+        self.socketView.sendMessage(JSON.stringify(chatMessage));
+      }
+    });
+
+    messageInput.val('');
+    messageInput.closest('.flexRow').removeClass('formChecked');
+    this.getDiscussion();
   },
 
   copyTx: function(e){
