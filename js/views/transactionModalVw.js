@@ -271,12 +271,17 @@ module.exports = baseVw.extend({
   },
 
   addDiscussionMessage: function(message){
-    var avatarURL = message.get('outgoing')
-        ? this.avatarURL
-        : this.serverUrl + "get_image?hash=" + message.get('avatar_hash') + "&guid=" + message.get('guid'),
+    var newAttributes = {},
         wrapper = this.$('.js-discussionWrapper');
 
-    message.set('avatarURL', avatarURL);
+    newAttributes.avatarURL = message.get('outgoing')
+        ? this.avatarURL
+        : this.serverUrl + "get_image?hash=" + message.get('avatar_hash') + "&guid=" + message.get('guid');
+    newAttributes.moderatorGuid = this.model.get('displayModerator').guid;
+    newAttributes.transactionType = this.transactionType;
+
+    message.set(newAttributes);
+
     var discussionMessage = new chatMessageView({
       model: message
     });
