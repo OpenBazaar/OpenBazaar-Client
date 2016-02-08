@@ -363,11 +363,11 @@
                          value="<%= ob.user.refund_address %>" required />
                 </div>
               </form>
-              <div class="width100 marginTop30 alignCenter">
+              <div class="width100 marginTop30 lineHeight21 alignCenter">
                 <a href="https://openbazaar.zendesk.com/hc/en-us/articles/207535416"
                    class="marginRight10 underline js-externalLink">
                   <%= polyglot.t('buyFlow.CantFindAddress') %>
-                </a>
+                </a><br/>
                 <a href="https://rushwallet.com/" class="underline js-externalLink"><%= polyglot.t('buyFlow.NeedTempAddress') %></a>
                 <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-right" data-tooltip="<%= polyglot.t('buyFlow.NeedTempAddressHelper') %>"></span>
               </div>
