@@ -1178,6 +1178,7 @@ module.exports = baseVw.extend({
     this.subRender();
   },
 
+  /*
   deleteOldDone: function(newHash) {
     "use strict";
     if(newHash) {
@@ -1189,6 +1190,7 @@ module.exports = baseVw.extend({
       this.setState('store');
     }
   },
+  */
 
   cancelClick: function(){
     "use strict";
