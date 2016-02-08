@@ -2,10 +2,10 @@
 #obContainer::-webkit-scrollbar {
   width: 6px;
 }
- 
+
 #obContainer::-webkit-scrollbar-thumb {
   border-radius: 0;
-  background: #44697E; 
+  background: #44697E;
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar,
@@ -84,7 +84,7 @@ p a {
   text-decoration: underline;
 }
 
-p { 
+p {
   white-space: pre-line;
   margin: 0 0 1em 0;
 }
@@ -440,11 +440,11 @@ form {
 
 .gridItemControls {
   background: #106DA3;
-  position: absolute; 
+  position: absolute;
   opacity: 0;
-  bottom: 0; 
-  left: 1px; 
-  height: 40px; 
+  bottom: 0;
+  left: 1px;
+  height: 40px;
   line-height: 38px;
   border-top: solid 1px #327EB8;
   border-right: solid 1px #327EB8;
@@ -1070,14 +1070,14 @@ label.fieldItem {
 }
 
 .breadCrumbArrow {
-  margin-top: 10px; 
-  width: 20px; 
+  margin-top: 10px;
+  width: 20px;
   text-align: center;
   font-size: 10px;
   opacity: .5;
 }
 
-/* colorbox styles */ 
+/* colorbox styles */
 #colorbox {
   z-index: 3;
   outline: none;
@@ -1673,6 +1673,10 @@ margin: auto;
   padding: 0;
 }
 
+.btn.btn-win:hover {
+  transition: initial;
+}
+
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
   position: relative;
@@ -1996,7 +2000,7 @@ div.chatSearchOut .chatSearchIcon {
   text-decoration: underline;
 }
 
-.chatConversation textarea, 
+.chatConversation textarea,
 .chatConversation input {
   color: white;
   background-color: unset;
@@ -3762,7 +3766,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 2;
   -webkit-user-select: none;
   outline: none;
-} 
+}
 
 .selectPill:before {
   content: "\f104";
