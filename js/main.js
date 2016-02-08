@@ -268,6 +268,13 @@ launchServerConnect = function() {
   }
 };
 
+var login = function() {
+  return $.post(serverConfigMd.getServerBaseUrl() + '/login', {
+    username: serverConfigMd.get('username'),
+    password: serverConfigMd.get('password')
+  });
+}
+
 heartbeat.on('close', function(e) {
   // server down
   launchServerConnect();
@@ -291,18 +298,24 @@ heartbeat.on('message', function(e) {
           username: e.jsonData.username,
           password: e.jsonData.password
         });
-        guidCreating.resolve();
+
+        login().done(function() {
+          guidCreating.resolve();
+        });
+
         break;
       case 'online':
         if (loadProfileNeeded && !guidCreating) {
           loadProfileNeeded = false;
 
-          $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
-            if (__.isEmpty(profile)) {
-              launchOnboarding(guidCreating = $.Deferred().resolve().promise());
-            } else {
-              loadProfile();              
-            }
+          login().done(function() {
+            $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
+              if (__.isEmpty(profile)) {
+                launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+              } else {
+                loadProfile();              
+              }
+            });
           });
         }
 

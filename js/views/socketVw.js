@@ -28,7 +28,7 @@ module.exports = Backbone.View.extend({
       this.socketConnection.onclose = this.socketClose();
     } catch(exception){
       console.log(socketAddress, window.polyglot.t('errorMessages.socketError') + "<br/><br/>" + exception);
-      messageModal.show('WebSockets cannot be reached.', '<i>Interface will continue loading, but some functionality will not be available.</i>');
+      messageModal.show('The API WebSocket cannot be reached.', '<i>Interface will continue loading, but some functionality will not be available.</i>');
     }
   },
 
@@ -61,7 +61,7 @@ module.exports = Backbone.View.extend({
   },
 
   socketError: function(e) {
-    messageModal.show('WebSockets cannot be reached.', '<i>Interface will continue loading, but some functionality will not be available.</i>');    
+    messageModal.show('The API WebSocket cannot be reached.', '<i>Interface will continue loading, but some functionality will not be available.</i>');    
     
   },
 
