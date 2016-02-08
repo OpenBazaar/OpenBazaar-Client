@@ -305,6 +305,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction",
           Seller: "Seller",
           Buyer: "Buyer",
+          Moderator: "Moderator",
           transferReceipt: "Transfer Receipt",
           copyTxid: "copy tx ID",
           Close: "Close",
@@ -751,6 +752,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -1194,6 +1196,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -1641,6 +1644,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -2088,6 +2092,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Transaction modérée",
           Seller: "Vendeur",
           Buyer: "Acheteur",
+          Moderator: "Moderator", //not translated
           transferReceipt: "Reçu de transfert",
           copyTxid: "copier l'ID de transaction",
           Close: "Fermer",
@@ -2532,6 +2537,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -2975,6 +2981,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -3418,6 +3425,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -3865,6 +3873,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -4311,6 +4320,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -4757,6 +4767,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -5204,6 +5215,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -5636,6 +5648,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
           Buyer: "Buyer", // not translated
+          Moderator: "Moderator", //not translated
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
           Close: "Close", // not translated
@@ -6082,6 +6095,7 @@ module.exports = Backbone.Model.extend({
           ModeratedTransaction: "Transakcja nadzorowana",
           Seller: "Sprzedawca",
           Buyer: "Kupujący",
+          Moderator: "Moderator", //not translated
           transferReceipt: "Dowód transakcji",
           copyTxid: "Kopiuj numer transakcji",
           Close: "Zamknij",
