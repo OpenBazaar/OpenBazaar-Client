@@ -203,13 +203,15 @@ module.exports = baseVw.extend({
         confirmData = {};
 
     confirmData.id = this.orderID;
-    this.$el.find('.js-transactionSpinner').removeClass('hide');
+    this.$('.js-transactionSpinner').removeClass('hide');
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
       self.status = 2;
       self.tabState = "summary";
       self.getData();
-      }, '', confirmData);
+      }, '', confirmData, '', function(){
+      self.$('.js-transactionSpinner').addClass('hide');
+    });
   },
 
   completeOrder: function(e){
@@ -327,10 +329,9 @@ module.exports = baseVw.extend({
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
     var self = this;
+    var socketMessageId = Math.random().toString(36).slice(2);
     __.each(messages, function(msg){
       if (messageText) {
-        var socketMessageId = Math.random().toString(36).slice(2);
-
         var chatMessage = {
           "request": {
             "api": "v1",
