@@ -39,7 +39,15 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    this.listenTo(this.collection, 'remove', function(collection, options) {
+    this.listenTo(this.collection, 'remove', function(md, cl, options) {
+      var self = this,
+          view;
+
+      if (view = __.find(this.subViews, function(subView) {
+        return subView.model.get('guid') === e.guid;
+      })) {
+        self.removeSubView(view);
+      }      
     });
   },
 
@@ -71,7 +79,7 @@ module.exports = Backbone.View.extend({
   },
 
   unblockUserClick: function(e) {
-    console.log('sugar time yall');
+    console.log('block vw unblock');
     this.model.unblockUser(e.view.model.get('guid'), this.model, this.options.serverUrl);
   },
 

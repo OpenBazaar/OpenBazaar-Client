@@ -222,7 +222,7 @@ module.exports = Backbone.View.extend({
   renderBlocked: function(options) {
     var self = this,
         modelsPerBatch = 2,
-        rawBlockedGuids = this.userModel.get('blocked_guids'),
+        blockedGuids = this.userModel.get('blocked_guids'),
         $lazyLoadTrigger,
         $blockedForm,
         blockedUsersCl;
@@ -247,7 +247,7 @@ module.exports = Backbone.View.extend({
     }
 
     function getBlockedGuids() {
-      return rawBlockedGuids.map(function(guid) {
+      return blockedGuids.map(function(guid) {
           return { guid: guid }
         });
     }
@@ -275,16 +275,11 @@ module.exports = Backbone.View.extend({
     $blockedContainer.append(this.$lazyLoadTrigger);
 
     this.listenTo(window.obEventBus, 'blockingUser', function(e) {
-      blockedUsersCl.add({ guid: e.guid });
-      
-      if (rawBlockedGuids.length !== blockedUsersCl.length) {
-        // There are still users to lazy render. Since we
-        // already rendered the current user being blocked,
-        // let's adjust his position, so lazy loading won't be off.
-        rawBlockedGuids.splice(
-          blockedUsersCl.length, 0,
-          x.splice(rawBlockedGuids.indexOf(e.guid), 1)
-        );
+      if (blockedGuids.length === blockedUsersCl.length) {
+        // if lazy loading is complete, we'll directly
+        // add the newly blocked user to our collection.
+        // Otherwise, lazy loading will pick them up.
+        blockedUsersCl.add({ guid: e.guid });
       }
     });
 
