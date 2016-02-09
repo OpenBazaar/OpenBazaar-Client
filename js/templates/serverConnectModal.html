@@ -33,7 +33,7 @@
           <div class="flexCol-12 flex-border borderBottom">
             <div class="flexRow">
               <% if (ob.errors.server_ip) { %>
-              <div class="flexCol-12">
+              <div class="flexCol-12 error">
                 <ul class="padding2015">
                   <% ob.errors.server_ip.forEach(function(err) {
                        print('<li class="list-style-none">' + err + '</li>');

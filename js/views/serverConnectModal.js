@@ -25,17 +25,9 @@ module.exports = baseModal.extend({
       this.render();
     });
 
-    this._state = this.getInitialState();
-    this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
-  },
-
-  getInitialState: function() {
-    var state = {};
-
-    state['attempt'] = 1;
-    state['status'] = 'trying';
-
-    return state;
+    this._state = {
+      status: 'trying'
+    };
   },
 
   inputEntered: function(e) {
@@ -43,10 +35,6 @@ module.exports = baseModal.extend({
   },
 
   saveForm: function() {
-    if (__.isEqual(this.model.attributes, this._lastSavedAttrs)) {
-      return;
-    }
-
     if (this.model.save()) {
       if (!this.changeServerWarningModal) {
         this.changeServerWarningModal = new ChangeServerWarningModal({
@@ -56,7 +44,6 @@ module.exports = baseModal.extend({
         }).render().open();
         
         this.listenTo(this.changeServerWarningModal, 'close', function() {
-          this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
           this.start();
         });
       } else {
@@ -75,20 +62,11 @@ module.exports = baseModal.extend({
   setState: function(state) {
     var newState;
     
-    if (typeof state['attempt'] !== 'undefined') {
-      this.$attempt.text(state['attempt']);
-    }
-
     newState =  __.extend({}, this._state, state);
 
     if (!__.isEqual(this._state, newState)) {
       this._state = newState;
-
-      if (!(typeof state['attempt'] !== 'undefined' && Object.keys(state).length === 1)) {
-        // if the only new state is the attemp counter, no need to
-        // re-render since we manually updated that above.
-        this.render();
-      }
+      this.render();
     }
   },
 
@@ -188,11 +166,7 @@ module.exports = baseModal.extend({
 
     this.connectAttempt && this.connectAttempt.cancel();
 
-    this.setState(
-      __.extend(this.getInitialState(), {
-        status: 'trying'
-      })
-    );
+    this.setState({ status: 'trying' });
 
     (connect = function() {
       self.connectAttempt = self.attemptConnection().done(function() {
@@ -254,7 +228,6 @@ module.exports = baseModal.extend({
 
       baseModal.prototype.render.apply(self, arguments);
       self.$('.flexContainer.scrollOverflowYHideX')[0].scrollTop = scrollPos;
-      self.$attempt = self.$('.attempt').text(self._state.attempt);
     });
 
     return this;
