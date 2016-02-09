@@ -112,7 +112,11 @@ module.exports = baseModal.extend({
           deferred.resolve();
           self.trigger('authenticated');
         } else {
-          rejectLogin('failed-auth');
+          if (data.reason === 'too many attempts') {
+            rejectLogin('failed-auth-too-many');  
+          } else {
+            rejectLogin('failed-auth');  
+          }          
         }
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
@@ -177,15 +181,13 @@ module.exports = baseModal.extend({
     );
 
     (connect = function() {
-      self.setState({ attempt: attempts });
-
       self.connectAttempt = self.attemptConnection().done(function() {
         self.setState({ status: 'connected' });
       }).fail(function(reason) {
         if (reason == 'canceled') return;
         
-        if (attempts >= 3) {
-          self.setState({ status: reason === 'failed-auth' ? 'failed-auth' : 'failed' });
+        if (attempts >= 3 || reason === 'failed-auth' || reason === 'failed-auth-too-many') {
+          self.setState({ status: reason || 'failed' });
         } else {
           attempts += 1;
           connect();
@@ -210,6 +212,8 @@ module.exports = baseModal.extend({
 
   remove: function() {
     this.stop();
+
+    // TODO: don't let us leave this modal with the model in an error state.
 
     baseModal.prototype.remove.apply(this, arguments);
   },  

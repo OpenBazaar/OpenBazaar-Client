@@ -223,9 +223,6 @@ launchServerConnect = function() {
 
       $loadingModal.removeClass('hide');      
 
-      // todo: perhaps only re-load if the server changed and on
-      // re-connect of the same server, just refresh the current
-      // route or let loadProfile happen if it hadn't already?
       if (profileLoaded) {
         location.reload();
       }
