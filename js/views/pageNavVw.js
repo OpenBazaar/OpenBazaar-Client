@@ -4,13 +4,9 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     Polyglot = require('node-polyglot'),
     languagesModel = require('../models/languagesMd'),
-    countryListView = require('../views/countryListVw'),
-    currencyListView = require('../views/currencyListVw'),
-    languageListView = require('../views/languageListVw'),
     adminPanelView = require('../views/adminPanelVw'),
     notificationsPanelView = require('../views/notificationsPanelVw'),
     remote = require('remote'),
-    cropit = require('../utils/jquery.cropit'),
     messageModal = require('../utils/messageModal.js');
 
     var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
@@ -35,17 +31,6 @@ module.exports = Backbone.View.extend({
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
-    'click .js-homeModal': 'blockClicks',
-    'click .js-homeModal-countrySelect': 'countrySelect',
-    'click .js-homeModal-currencySelect': 'currencySelect',
-    'click .js-homeModal-languageSelect': 'languageSelect',
-    'click .js-homeModal-timeSelect': 'timeSelect',
-    'click .js-accordionNext': 'accNext',
-    'click .js-accordionPrev': 'accPrev',
-    'keypress .js-accordionNext': 'accNextKeypress',
-    'keypress .js-accordionPrev': 'accPrevKeypress',
-    'click .js-homeModalDone': 'settingsDone',
-    'keypress .js-homeModalDone': 'settingsDoneKeypress',
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
@@ -59,7 +44,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this;
     this.options = options || {};
-    /* recieves socketView and userProfile from app.js */
+    /* recieves socketView and userProfile from main.js */
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
@@ -73,18 +58,12 @@ module.exports = Backbone.View.extend({
     this.socketNotificationID = Math.random().toString(36).slice(2);
     this.socketView.getNotifications(this.socketNotificationID);
 
-    this.listenTo(window.obEventBus, "countryListRendered", function(){this.accordionReady("country");});
-    this.listenTo(window.obEventBus, "currencyListRendered", function(){this.accordionReady("currency");});
-    this.listenTo(window.obEventBus, "languageListRendered", function(){this.accordionReady("language");});
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.refreshProfile();
     });
     this.listenTo(window.obEventBus, "updateUserModel", function(response){
       this.model.fetch();
     });
-
-    this.notifcationSound = document.createElement('audio');
-    this.notifcationSound.setAttribute('src', './audio/notification.mp3');
 
     // pre-select lauguage.
     var localLanguage = window.navigator.language;
@@ -115,9 +94,17 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  refreshProfile: function() {
+  closeNav: function(){
     "use strict";
+    var targ = this.$el.find('.js-navProfileMenu');
+    targ.addClass('hide');
+    $('#overlay').addClass('hide');
+
+  },
+
+  refreshProfile: function() {
     var self = this;
+  
     this.userProfile.fetch({
       success: function(model){
         self.model.set('vendor', model.get('profile').vendor);
@@ -125,115 +112,6 @@ module.exports = Backbone.View.extend({
         self.render();
       }
     });
-  },
-
-  accordionReady: function(listReady) {
-    "use strict";
-    var self = this;
-
-    if(listReady == "country") {
-      this.countryReady = true;
-    } else if(listReady == "currency") {
-      this.currencyReady = true;
-    } else if(listReady == "language") {
-      this.languageReady = true;
-    }
-    if(this.countryReady && this.currencyReady && this.languageReady){
-      var countryList = new window.List('homeModal-countryList', {valueNames: ['homeModal-country'], page: 1000});
-      var currencyList = new window.List('homeModal-currencyList', {valueNames: ['homeModal-currency'], page: 1000});
-      var timeList = new window.List('homeModal-timeList', {valueNames: ['homeModal-time'], page: 1000});
-      var languageList = new window.List('homeModal-languageList', {valueNames: ['homeModal-language'], page: 1000});
-      self.initAccordion('.js-profileAccordion');
-      // Scroll selected options to the top
-      var checkedInput = $('.js-homeModal-listParent').find('input:checked').each(function(){
-        var checkedInputScrollParent = $(this).closest('ul');
-        var checkedInputPosition = $(this).closest('li').position().top;
-        var checkedInputOffset = checkedInputScrollParent.position().top;
-        checkedInputScrollParent.scrollTop(checkedInputPosition - checkedInputOffset);
-      });
-    }
-  },
-
-  initAccordion: function(targ){
-    "use strict";
-    this.acc = $(targ);
-    this.accWidth = this.acc.width();
-    this.accHeight = this.acc.height();
-    this.accChildren = this.acc.find('.accordion-child');
-    this.accNum = this.accChildren.length;
-    this.accWin = this.acc.find('.accordion-window');
-    this.accWinWidth = this.accWidth * this.accNum;
-    this.accWin.css({'left':'0px', 'width':this.accWinWidth});
-    this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
-  },
-
-  accNext: function(advanceBy){
-    "use strict";
-    var self = this,
-        oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        moveBy = parseInt(advanceBy) ? this.accWidth * advanceBy : this.accWidth;
-
-    if(oldPos > (this.accWidth * (this.accNum -1) * -1)){
-      this.accWin.css('left', function(){
-        return oldPos - moveBy;
-      });
-      // switch active tab
-      var curActive = $(this.$el).find('.accordion-active');
-      curActive.addClass('accordion-inactive').removeClass('accordion-active');
-      var newActive = curActive.next('.accordion-child');
-      newActive.addClass('accordion-active').removeClass('accordion-inactive');
-      // focus search input
-      newActive.find('.search').focus();
-    }
-  },
-
-  accPrev: function(rewindBy){
-    "use strict";
-    var self = this,
-        oldPos = parseInt(this.accWin.css('left').replace("px","")),
-        moveBy = parseInt(rewindBy) ? this.accWidth * rewindBy : this.accWidth;
-
-    if(oldPos < (0)){
-      this.accWin.css('left', function(){
-        return oldPos + moveBy;
-      });
-      // switch active tab
-      var curActive = $(this.$el).find('.accordion-active');
-      curActive.addClass('accordion-inactive').removeClass('accordion-active');
-      var newActive = curActive.prev('.accordion-child');
-      newActive.addClass('accordion-active').removeClass('accordion-inactive');
-      // focus search input
-      newActive.find('.search').focus();
-    }
-  },
-
-  triggerOnEnterSpace: function(e, cb) {
-    "use strict";
-    switch (e.which) {
-      case 32: // space
-      case 13: // return
-        event.stopPropagation();
-        return cb(e);
-    }
-    return true;
-  },
-
-  accNextKeypress: function(e) {
-    "use strict";
-    this.triggerOnEnterSpace(e, this.accNext.bind(this));
-  },
-
-  accPrevKeypress: function(e) {
-    "use strict";
-    this.triggerOnEnterSpace(e, this.accPrev.bind(this));
-  },
-
-  closeNav: function(){
-    "use strict";
-    var targ = this.$el.find('.js-navProfileMenu');
-    targ.addClass('hide');
-    $('#overlay').addClass('hide');
-
   },
 
   render: function(){
@@ -248,31 +126,6 @@ module.exports = Backbone.View.extend({
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      if(localStorage.getItem("onboardingComplete") != "true") {
-        var modal = self.$el.find('.js-homeModal');
-        modal.removeClass("hide");
-        $('#obContainer').addClass("blur");
-        modal.attr("tabIndex", "0");
-        document.addEventListener('focus', function( ev ) {
-          if ( !modal.hasClass("hide") && !$.contains( modal[0], ev.target ) ) {
-            ev.stopPropagation();
-            modal.focus();
-          }
-        }, true);
-
-        // pre-select timezone
-        var timeZoneOffset = new Date().getTimezoneOffset();
-        timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
-        self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
-
-        self.countryList = new countryListView({el: '.js-homeModal-countryList', selected: self.model.get('country')});
-        self.currencyList = new currencyListView({el: '.js-homeModal-currencyList', selected: self.model.get('currency_code')});
-        self.languageList = new languageListView({el: '.js-homeModal-languageList', selected: self.model.get('language')});
-        self.subViews.push(self.countryList);
-        self.subViews.push(self.currencyList);
-        self.subViews.push(self.languageList);
-      }
-
       self.notificationsPanel = new notificationsPanelView({
         parentEl: '#notificationsPanel',
         socketView: self.socketView,
@@ -280,19 +133,7 @@ module.exports = Backbone.View.extend({
       });
       self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
       self.subViews.push(self.notificationsPanel);
-      self.$el.find('#image-cropper').cropit({
-        smallImage: "stretch",
-        exportZoom: 1.33,
-        maxZoom: 5,
-        onFileReaderError: function(data){
-          console.log(data);
-        },
-        onImageError: function(errorObject, errorCode, errorMessage) {
-          console.log(errorObject);
-          console.log(errorCode);
-          console.log(errorMessage);
-        }
-      });
+
       //add the admin panel
       self.adminPanel = new adminPanelView({model: self.model});
       self.subViews.push(self.adminPanel);
@@ -321,18 +162,10 @@ module.exports = Backbone.View.extend({
 
       //when language is changed, re-render
       self.listenTo(self.model, 'change:language', function(){
-        self.createTranslation(self.model.get("language"));
         self.render();
       });
     });
     return this;
-  },
-
-  createTranslation: function(newLang){
-    "use strict";
-    window.polyglot = new Polyglot({locale: newLang});
-    window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: newLang})[0]);
-
   },
 
   showAboutModal: function(e){
@@ -595,202 +428,10 @@ module.exports = Backbone.View.extend({
     this.statusBar.addClass('fadeOut');
   },
 
-  countrySelect: function(e){
-    "use strict";
-    var targ = $(e.currentTarget);
-    var ctry = targ.attr('data-code');
-    $('.js-homeModal-countryList').find('input[type=radio]').prop("checked", false);
-    targ.find('input[type=radio]').prop("checked", true);
-    this.model.set('country', ctry);
-  },
-
-  currencySelect: function(e){
-    "use strict";
-    var targ = $(e.currentTarget);
-    //var crcy = targ.attr('data-name');
-    var ccode = targ.attr('data-code');
-    $('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
-    targ.find('input[type=radio]').prop("checked", true);
-    //this.model.set('currency', crcy);
-    this.model.set('currency_code', ccode);
-  },
-
-  languageSelect: function(e){
-    "use strict";
-    var lang = $(e.currentTarget).attr('data-code');
-    this.model.set('language', lang);
-  },
-
-  timeSelect: function(e){
-    "use strict";
-    var inpt = $(e.target).closest('input[type=radio]');
-    var tz = inpt.val();
-    $('.js-homeModal-timezoneList').find('input[type=radio]').prop("checked", false);
-    inpt.prop("checked", true);
-    this.model.set('time_zone', tz);
-  },
-
-  settingsDone: function(e){
-    "use strict";
-
-    var self = this,
-        server = this.model.get('serverUrl'),
-        profileFormData = new FormData(),
-        settingsFormData = new FormData(),
-        uploadImageFormData = new FormData();
-
-    localStorage.setItem("onboardingComplete", "true");
-    $('#obContainer').removeClass("blur");
-
-    if($('textarea#aboutInput').val() != ""){
-        self.model.set('short_description', $('textarea#aboutInput').val());
-    }
-
-    if($('#storeNameInput').val() != ""){
-        self.model.set('name', $('#storeNameInput').val());
-    }else if (self.model.get('name') == undefined){
-        //otherwise error since the profile api needs the name parameter and as of now it is not set in the userMd.js
-        self.model.set('name', "ob" + Math.random().toString(36).slice(2));
-    }
-
-
-    var themeId = $('input[name=theme-selection]:checked');
-    if(themeId.length > 0){
-      var header = themeId.data('header');
-      var primaryColor = parseInt(themeId.data('primary-color').slice(1), 16);
-      var secondaryColor = parseInt(themeId.data('secondary-color').slice(1), 16);
-      var backgroundColor = parseInt(themeId.data('background-color').slice(1), 16);
-      var textColor = parseInt(themeId.data('text-color').slice(1), 16);
-
-      self.model.set('primary_color', primaryColor);
-      self.model.set('secondary_color', secondaryColor);
-      self.model.set('text_color', textColor);
-      self.model.set('background_color', backgroundColor);
-    }
-
-    $.each(this.model.attributes,
-            function(i,el) {
-                if(i == "country") {
-                    profileFormData.append("location",el);
-                }
-                if(i == "name" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
-                    profileFormData.append(i,""+el);
-                } else {
-                    settingsFormData.append(i,el);
-                }
-            }
-        );
-
-    var imageURI = $('#image-cropper').cropit('export', {
-      type: 'image/jpeg',
-      quality: 0.75,
-      originalSize: false
-    });
-    if(imageURI) {
-      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-      uploadImageFormData.append('image', imageURI);
-    }
-
-
-    var submit = function(img_hash) {
-      if(img_hash) {
-        profileFormData.append("avatar",img_hash);
-      }
-
-      $.ajax({
-        type: "POST",
-        url: server + "settings",
-        contentType: false,
-        processData: false,
-        data: settingsFormData,
-        dataType: "json",
-        success: function(data) {
-          if(data.success) {
-            $.ajax({
-              type: "POST",
-              url: server + "profile",
-              contentType: false,
-              processData: false,
-              data: profileFormData,
-              dataType: "json",
-              success: function(data) {
-                if(data.success == true) {
-                  //self.currentWindow.reload();
-                  Backbone.history.loadUrl(Backbone.history.fragment);
-                  self.refreshProfile();
-                }
-              },
-              error: function(jqXHR, status, errorThrown){
-                console.log(jqXHR);
-                console.log(status);
-                console.log(errorThrown);
-              }
-            });
-          }
-        },
-        error: function(jqXHR, status, errorThrown){
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
-      });
-
-    };
-
-    //Lets upload the image first, if there is one
-    //to get the hash
-
-    if(imageURI) {
-      $.ajax({
-        type: "POST",
-        url: server + "upload_image",
-        contentType: false,
-        processData: false,
-        data: uploadImageFormData,
-        dataType: "JSON",
-        success: function(data) {
-          var img_hash = data.image_hashes[0];
-          if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
-            submit(img_hash);
-          }
-        },
-        error: function(jqXHR, status, errorThrown){
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
-      });
-
-    } else { //Otherwise lets just submit right away
-      submit();
-    }
-    this.$el.find('.js-homeModal').hide();
-
-    this.showDiscoverCallout = true;
-
-    new Notification(window.polyglot.t('WelcomeToYourPage'));
-
-    // play notification sound
-    this.notifcationSound.play();
-
-  },
-
-  settingsDoneKeypress: function(e) {
-    "use strict";
-    this.triggerOnEnterSpace(e, this.settingsDone.bind(this));
-  },
-
   navAdminPanel: function(){
     "use strict";
     this.$el.find('.js-adminModal').fadeIn(300);
     this.adminPanel.updatePage();
-  },
-
-  blockClicks: function(e) {
-    "use strict";
-    if(!$(e.target).hasClass('js-externalLink')){
-      e.stopPropagation();
-    }
   },
 
   close: function(){
@@ -822,4 +463,3 @@ module.exports = Backbone.View.extend({
   },
 
 });
-

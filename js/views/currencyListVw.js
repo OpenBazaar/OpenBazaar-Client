@@ -4,10 +4,11 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCurrenciesCollection = require('../collections/chooseCurrencyCl'),
+    baseVw = require('./baseVw'),
     chooseCurrencyView = require('../views/chooseCurrencyVw'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   initialize: function(options){
     var self = this;
@@ -28,12 +29,15 @@ module.exports = Backbone.View.extend({
     });
     orderedCurrencies.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4"});
     this.chooseCurrencies = new chooseCurrenciesCollection(orderedCurrencies);
-    this.subViews = [];
+
     //use default currency to return list of supported currencies
     getBTPrice("USD", function (btAve, currencyList) {
-      "use strict";
+      if (self.isRemoved()) return;
+
       self.availableCurrenciesList = currencyList;
       self.render();
+      self.trigger("currencyListReady");
+      self.ready = true;
     });
   },
 
@@ -45,7 +49,6 @@ module.exports = Backbone.View.extend({
     },this);
 
     this.$el.append('<ul class="flexRow list homeModal-settings scrollOverflowY custCol-primary custCol-text customThemeScrollbar">'+ this.listContents.join('') +'</ul>');
-    window.obEventBus.trigger("currencyListRendered");
   },
 
   renderItem: function(item){
@@ -62,19 +65,6 @@ module.exports = Backbone.View.extend({
       this.listContents.push('<label class="homeModal-currency radioLabel" for="currency-'+ itemJSON.dataName +'">'+ itemJSON.currency +'</label>');
       this.listContents.push('</div></li>');
     }
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
 });
 

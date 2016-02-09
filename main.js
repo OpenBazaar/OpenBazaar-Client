@@ -37,7 +37,7 @@ if(platform == "mac" || platform == "linux") {
 
 var start_local_server = function() {
   if(fs.existsSync(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon)) {
-    subpy = require('child_process').spawn(daemon, ['start', '--testnet', '--loglevel', 'debug'], {
+    subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug'], {
       detach: true,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });

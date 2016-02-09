@@ -3,8 +3,10 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     languagesModel = require('../models/languagesMd'),
-    chooseLanguagesCollection = require('../collections/chooseLanguageCl');
-module.exports = Backbone.View.extend({
+    chooseLanguagesCollection = require('../collections/chooseLanguageCl'),
+    baseVw = require('./baseVw');
+
+module.exports = baseVw.extend({
 
   initialize: function(options){
     this.options = options || {};
@@ -38,11 +40,6 @@ module.exports = Backbone.View.extend({
     this.listContents.push('>');
     this.listContents.push('<label class="homeModal-language radioLabel" for="'+ itemJSON.langCode +'">'+ itemJSON.langName +'</label>');
     this.listContents.push('</div></li>');
-  },
-
-  close: function(){
-    this.unbind();
-    this.remove();
   }
 });
 

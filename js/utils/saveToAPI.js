@@ -4,7 +4,7 @@ var __ = require('underscore'),
     messageModal = require('../utils/messageModal.js');
 
 
-module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys) {
+module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys, onInvalid) {
   "use strict";
   /* form[optional]: the form to pull data from, as a jQuery object
      modelJSON[optional]: model data in JSON format, any data not overwritten by the form will be added to the formData
@@ -24,7 +24,11 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   if(form){
     form.addClass('formChecked');
     if (!form[0].checkValidity()){
-      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      if(typeof onInvalid === 'function'){
+        onInvalid();
+      } else {
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+      }
       return $.Deferred().reject('failed form validation').promise();
     }
 
