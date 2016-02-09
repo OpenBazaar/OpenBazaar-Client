@@ -29,6 +29,60 @@ var subpy = null;
 
 var open_url = null; // This is for if someone opens a URL before the client is open
 
+var handleStartupEvent = function() {
+  if (process.platform !== 'win32') {
+    return false;
+  }
+
+  var squirrelCommand = process.argv[1];
+
+  function exeSquirrelCommand(args, cb) {
+    var updateDotExe = path.resolve(path.dirname(process.execPath), '..', 'update.exe');
+    var child = require('child_process').spawn(updateDotExe, args, { detached: true });
+    child.on('close', function() {
+       cb();
+    });
+  };
+
+  function install(cb) {
+      var target = path.basename(process.execPath);
+      exeSquirrelCommand(["--createShortcut", target], cb);
+  };
+
+  function uninstall(cb) {
+      var target = path.basename(process.execPath);
+      exeSquirrelCommand(["--removeShortcut", target], cb);
+  };
+
+  switch (squirrelCommand) {
+    case '--squirrel-install':
+          install(app.quit);
+
+    case '--squirrel-updated':
+
+      // Always quit when done
+      app.quit();
+      return true;
+
+    case '--squirrel-uninstall':
+      // Always quit when done
+      uninstall(app.quit);
+
+      return true;
+    case '--squirrel-obsolete':
+      // This is called on the outgoing version of your app before
+      // we update to the new version - it's the opposite of
+      // --squirrel-updated
+      app.quit();
+      return true;
+  }
+};
+
+if (handleStartupEvent()) {
+  return;
+}
+
+
 // Set daemon binary name
 var daemon = "openbazaard.exe";
 if(platform == "mac" || platform == "linux") {
@@ -309,7 +363,9 @@ app.on('ready', function() {
     autoUpdater.quitAndInstall();
   });
 
-  autoUpdater.setFeedURL('http://updates.openbazaar.org:5000/update/' + platform + '/' + version);
+  var feedURL = 'http://updates.openbazaar.org:5000/update/' + platform + '/' + version;
+  autoUpdater.setFeedURL(feedURL);
+  mainWindow.webContents.executeJavaScript("console.log('Checking for new versions at " + feedURL + " ...')");
   autoUpdater.checkForUpdates();
 
 });
@@ -343,3 +399,4 @@ app.on('open-url', function(event, uri) {
 
   event.preventDefault();
 });
+
