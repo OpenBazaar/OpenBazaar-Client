@@ -123,7 +123,6 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.delegateEvents(); //delegate again for re-render
       self.setFormValues();
-      self.setState(self.options.state);
       
       // Since the Blocked Users View kicks off many server calls (one
       // for each blocked user) and since we are re-rendering the entire
@@ -135,7 +134,9 @@ module.exports = Backbone.View.extend({
       } else {
         self.renderBlocked({ useCached: true });
       }
-      
+
+      self.setState(self.options.state);
+
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
         $preview: $('.js-settingsAvatarPreview'),
@@ -224,7 +225,6 @@ module.exports = Backbone.View.extend({
         modelsPerBatch = 25,
         $lazyLoadTrigger,
         $blockedForm,
-        blockedGuids,
         blockedUsersCl;
 
     options = options || {};
@@ -246,12 +246,13 @@ module.exports = Backbone.View.extend({
       return;
     }
 
-    blockedGuids = this.userModel.get('blocked_guids')
-      .map(function(guid) {
-        return { guid: guid }
-      });
+    function getBlockedGuids() {
+      return self.userModel.get('blocked_guids').map(function(guid) {
+          return { guid: guid }
+        });
+    }
 
-    blockedUsersCl = new usersCl(blockedGuids.slice(0, modelsPerBatch));
+    blockedUsersCl = new usersCl(getBlockedGuids().slice(0, modelsPerBatch));
     this.patchAndFetchBlockedUsers(blockedUsersCl.models);
 
     this.blockedUsersVw = new blockedUsersVw({
@@ -260,11 +261,10 @@ module.exports = Backbone.View.extend({
       serverUrl: this.serverUrl
     });
 
-    $blockedContainer.html(
-      self.blockedUsersVw.render().el
+    this.$('#blockedForm').html(
+      this.blockedUsersVw.render().el
     );
 
-    // implement scroll based lazy loading of blocked users
     this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
       position: 'absolute',
       width: '100%',
@@ -273,20 +273,40 @@ module.exports = Backbone.View.extend({
     });
     $blockedContainer.append(this.$lazyLoadTrigger);
 
+    this.blockedUsersBlockHandler && this.stopListening(window.obEventBus, null, this.blockedUsersBlockHandler);
+    this.listenTo(window.obEventBus, 'blockingUser', this.blockedUsersBlockHandler = function(e) {
+      if (getBlockedGuids().length - 1 === blockedUsersCl.length) {
+        // if only our newly blocked is missing, we'll
+        // add them directly, otherwise, lazy loading
+        // will pick them up.
+        self.patchAndFetchBlockedUsers([
+          blockedUsersCl.add({ guid: e.guid })
+        ]);
+      }
+    });
+
+    this.blockedUsersUnblockHandler && this.stopListening(window.obEventBus, null, this.blockedUsersUnblockHandler);
+    this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = function(e) {
+      blockedUsersCl.remove(
+        blockedUsersCl.findWhere({ guid: e.guid })
+      );
+    });    
+
+    // implement scroll based lazy loading of blocked users
     this.$obContainer = this.$obContainer || $('#obContainer');
-    // in case we're re-rendering, remove any previous scroll handlers
     this.blockedUsersScrollHandler && this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
     this.blockedUsersScrollHandler = __.throttle(function() {
       var colLen;
 
       if (
-        blockedUsersCl.length < blockedGuids.length &&
+        self.getState() === 'blocked' &&
+        blockedUsersCl.length < getBlockedGuids().length &&
         domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
       ) {
         colLen = blockedUsersCl.length;
 
         blockedUsersCl.add(
-          blockedGuids.slice(colLen, colLen + modelsPerBatch)
+          getBlockedGuids().slice(colLen, colLen + modelsPerBatch)
         );
 
         self.patchAndFetchBlockedUsers(
@@ -461,12 +481,17 @@ module.exports = Backbone.View.extend({
   },
 
   setState: function(state){
-    "use strict";
     if(state){
+      this._state = state;
       this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     } else {
+      this._state = 'general';
       this.setTab(this.$el.find('.js-generalTab'), this.$el.find('.js-general'));
     }
+  },
+
+  getState: function() {
+    return this._state;
   },
 
   tabClick: function(e){
