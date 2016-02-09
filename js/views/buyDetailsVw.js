@@ -97,8 +97,6 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
     this.$('.js-buyWizardModeratorPrice').attr('data-tooltip', moderatorPriceString);
-    //this.$el.find('.js-buyWizardModeratorPrice').html(newDisplayModeratorPrice);
-    //this.$el.find('.js-buyWizardModeratorBTCPrice').html(moderatorPriceBTC.toFixed(8));
     newAttributes.quantity = quantity;
     newAttributes.totalPrice = totalPrice;
     newAttributes.totalBTCDisplayPrice = totalBTCDisplayPrice;
