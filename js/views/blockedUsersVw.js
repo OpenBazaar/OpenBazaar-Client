@@ -5,7 +5,7 @@ var __ = require('underscore'),
 
 module.exports = Backbone.View.extend({
 
-  className: "",
+  className: "flexCol-12 flex-border js-tabTarg js-blocked hide",
 
   events: {
   },
@@ -15,19 +15,6 @@ module.exports = Backbone.View.extend({
 
     this.options = options || {};
     this.subViews = [];
-
-    this.listenTo(window.obEventBus, 'unblockingUser', function(e) {
-      return;
-
-      var self = this,
-          view;
-
-      if (view = __.find(this.subViews, function(subView) {
-        return subView.model.get('guid') === e.guid;
-      })) {
-        self.removeSubView(view);
-      }
-    });
 
     this.listenTo(this.collection, 'update', function(collection, options) {
       var self = this;
@@ -44,7 +31,7 @@ module.exports = Backbone.View.extend({
           view;
 
       if (view = __.find(this.subViews, function(subView) {
-        return subView.model.get('guid') === e.guid;
+        return subView.model.get('guid') === md.get('guid');
       })) {
         self.removeSubView(view);
       }      
@@ -79,7 +66,6 @@ module.exports = Backbone.View.extend({
   },
 
   unblockUserClick: function(e) {
-    console.log('block vw unblock');
     this.model.unblockUser(e.view.model.get('guid'), this.model, this.options.serverUrl);
   },
 
