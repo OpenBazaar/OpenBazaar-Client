@@ -83,8 +83,6 @@ module.exports = Backbone.Model.extend({
 
     //set the client language to match the language in the response
     response.language = response.language || "en-US";
-    window.polyglot = new Polyglot({locale: response.language});
-    window.polyglot.extend(__.where(this.languages.get('languages'), {langCode: response.language})[0]);
 
     response.moderators = response.moderators || [];
 

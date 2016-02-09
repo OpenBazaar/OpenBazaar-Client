@@ -3,7 +3,7 @@
 var Backbone = require('backbone');
 
 module.exports = Backbone.View.extend({
-    constructor: function (options) {
+    constructor: function(options) {
       Backbone.View.prototype.constructor.apply(this, arguments);
       this._childViews = [];
       this._unregisterFromParent = true;
@@ -13,7 +13,7 @@ module.exports = Backbone.View.extend({
     // If you are creating child views within your view, call this method
     // to register them. This will ensure that they will have their remove
     // method called if the parent is removed.
-    registerChild: function (childView) {
+    registerChild: function(childView) {
       if (this._childViews.indexOf(childView) === -1) {
         this._childViews.push(childView);
         childView._parentView = this;
@@ -25,7 +25,7 @@ module.exports = Backbone.View.extend({
     // won't need to call this method directly (as long as you
     // are remembering to call this base class's remove when you
     // are overriding remove in your own views).
-    unregisterChild: function (childView) {
+    unregisterChild: function(childView) {
       var name = '';
       if (childView.options && childView.options.name) {
         name = childView.options.name;
@@ -40,7 +40,7 @@ module.exports = Backbone.View.extend({
     },
 
     // Will call the remove method of any child views.
-    remove: function () {
+    remove: function() {
       for (var i=0; i < this._childViews.length; i++) {
         // no need to unregister child from parent,
         // since the parent is also being removed

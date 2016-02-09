@@ -4,15 +4,15 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     chooseCountriesCollection = require('../collections/chooseCountryCl'),
+    baseVw = require('./baseVw'),
     chooseCountryView = require('../views/chooseCountryVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   initialize: function(options){
     this.options = options || {};
     this.countries = new countriesModel();
     this.chooseCountries = new chooseCountriesCollection(this.countries.get('countries'));
-    this.subViews = [];
     this.render();
   },
 
@@ -38,19 +38,6 @@ module.exports = Backbone.View.extend({
     this.listContents.push('>');
     this.listContents.push('<label class="homeModal-country radioLabel" for="country-'+ itemJSON.dataName +'">'+ itemJSON.name +'</label>');
     this.listContents.push('</div></li>');
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
 });
 
