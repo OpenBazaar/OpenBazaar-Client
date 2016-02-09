@@ -8,6 +8,8 @@
     <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusFailedConnection') %>.</p>
   <% } else if (ob.status == 'failed-auth') { %>  
     <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusFailedAuthentication') %>.</p>
+  <% } else if (ob.status == 'failed-auth-too-many') { %>  
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusTooManyAttempts') %>.</p>
   <% } %>
   </p>
 </div>
@@ -17,9 +19,7 @@
       <%= polyglot.t('serverConnectModal.serverConfiguration') %>
       <span class="textOpacity75 fontSize14 floatRight">
         <% if (ob.status == 'trying') { %>
-          <!-- variablize the max attempts -->
-          <i class="ion-android-sync spinner"></i>
-          <%= polyglot.t('serverConnectModal.attempt') %> <span class="attempt"></span> <%= polyglot.t('of') %> 3
+          <i class="ion-android-sync spinner"></i> <%= polyglot.t('serverConnectModal.connecting') %>...
         <% } else if (ob.status === 'failed' || ob.status === 'failed-auth') { %>
         <a class="js-retry"><%= polyglot.t('serverConnectModal.retry') %></a>
         <% } %>
@@ -33,7 +33,7 @@
           <div class="flexCol-12 flex-border borderBottom">
             <div class="flexRow">
               <% if (ob.errors.server_ip) { %>
-              <div class="flexCol-12">
+              <div class="flexCol-12 error">
                 <ul class="padding2015">
                   <% ob.errors.server_ip.forEach(function(err) {
                        print('<li class="list-style-none">' + err + '</li>');

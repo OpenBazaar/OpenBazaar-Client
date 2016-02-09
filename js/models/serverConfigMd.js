@@ -100,6 +100,14 @@ module.exports = Backbone.Model.extend({
       }
     }    
 
+    if (is.empty(attrs.username)) {
+      this._addError(err, 'username', 'Please provide a value.');
+    }
+
+    if (is.empty(attrs.password)) {
+      this._addError(err, 'password', 'Please provide a value.');
+    }    
+
     return Object.keys(err).length && err || undefined;
   },
 
