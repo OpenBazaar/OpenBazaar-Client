@@ -19,9 +19,7 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
-    if (!(options.model && options.model instanceof serverConfigMd)) {
-      throw new Error('Please provide a ServerConfigMd instance.');
-    }
+    this.model = app.serverConfig;
 
     this.listenTo(this.model, 'invalid sync', function() {
       this.render();
@@ -90,42 +88,41 @@ module.exports = baseModal.extend({
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
-        request,
+        loginRequest,
         timesup,
         rejectLater,
-        rejectRequestLater,
-        checkProfile,
+        rejectLogin,
+        rejectLoginLater,
+        login,
         onClose;
 
-    checkProfile = function() {
+    rejectLogin = function(reason) {
+      rejectLoginLater = setTimeout(function() {
+        deferred.reject(reason);
+      }, 500);
+    };
+
+    login = function() {
       // at this point, we've confirmed connection, so:
       self.trigger('connected');
 
       // check authentication
-      request = $.ajax({
-        url: app.serverConfig.getServerBaseUrl() + '/profile',
-        timeout: 3000
-      }).done(function() {
-        deferred.resolve();
-        self.trigger('authenticated');
+      loginRequest = app.login().done(function(data) {
+        if (data.success) {
+          deferred.resolve();
+          self.trigger('authenticated');
+        } else {
+          rejectLogin('failed-auth');
+        }
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
         
-        rejectRequestLater = setTimeout(function() {
-          if (jqxhr.status === 401) {
-            deferred.reject('failed-auth');
-          } else {
-            // assuming there's no business rules where
-            // the server would be up and still send back
-            // a failure code, outside of bad auth.
-            deferred.reject();
-          }
-        }, 500);
+        rejectLogin('failed-auth');
       });
     };
 
     if (app.getHeartbeatSocket().getReadyState() === 1) {
-      checkProfile();
+      login();
     }
 
     app.connectHeartbeatSocket();
@@ -133,9 +130,9 @@ module.exports = baseModal.extend({
     promise.cleanup = function() {
       clearTimeout(timesup);
       clearTimeout(rejectLater);
-      clearTimeout(rejectRequestLater);
-      request && request.abort();
-      app.getHeartbeatSocket().off(null, checkProfile);
+      clearTimeout(rejectLoginLater);
+      loginRequest && loginRequest.abort();
+      app.getHeartbeatSocket().off(null, login);
       app.getHeartbeatSocket().off(null, onClose);
     };
 
@@ -147,7 +144,7 @@ module.exports = baseModal.extend({
       promise.cleanup();
     });
 
-    app.getHeartbeatSocket().on('open', checkProfile);
+    app.getHeartbeatSocket().on('open', login);
 
     app.getHeartbeatSocket().on('close', (onClose = function() {
       // On local servers the close event on a down server is
@@ -213,8 +210,6 @@ module.exports = baseModal.extend({
 
   remove: function() {
     this.stop();
-
-    // TODO: don't let us leave this modal with the model in an error state.
 
     baseModal.prototype.remove.apply(this, arguments);
   },  

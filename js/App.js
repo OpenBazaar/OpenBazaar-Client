@@ -54,6 +54,17 @@ App.prototype.getHeartbeatSocket = function() {
   return this._heartbeatSocket;
 };
 
+App.prototype.login = function() {
+  return $.ajax({
+    url: this.serverConfig.getServerBaseUrl() + '/login',
+    method: 'POST',
+    data: {
+      username: this.serverConfig.get('username'),
+      password: this.serverConfig.get('password')
+    }
+  });  
+};
+
 App.getApp = function() {
   if (!_app) {
     throw new Error('The app instance was never instantiated and is therefore not available.');
