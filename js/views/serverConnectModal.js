@@ -6,7 +6,7 @@ var __ = require('underscore'),
     app = require('../App.js').getApp(),        
     serverConfigMd = require('../models/serverConfigMd'),
     baseModal = require('./baseModal'),
-    messageModal = require('../utils/messageModal.js');
+    ChangeServerWarningModal = require('./changeServerWarningModal');
 
 module.exports = baseModal.extend({
   className: 'server-connect-modal',
@@ -48,8 +48,20 @@ module.exports = baseModal.extend({
     }
 
     if (this.model.save()) {
-      this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
-      this.start();
+      if (!this.changeServerWarningModal) {
+        this.changeServerWarningModal = new ChangeServerWarningModal({
+          innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
+          includeCloseButton: true,
+          model: this.model
+        }).render().open();
+        
+        this.listenTo(this.changeServerWarningModal, 'close', function() {
+          this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
+          this.start();
+        });
+      } else {
+        this.changeServerWarningModal.open();
+      }
     };
   },
 
@@ -121,7 +133,9 @@ module.exports = baseModal.extend({
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
         
-        rejectLogin('failed-auth');
+        // assuming rest server is down or
+        // wrong port set
+        rejectLogin();
       });
     };
 
@@ -210,8 +224,14 @@ module.exports = baseModal.extend({
     return !!this.connectAttempt;
   },
 
+  close: function() {
+    this.changeServerWarningModal && this.changeServerWarningModal.remove();
+    baseModal.prototype.close.apply(this, arguments);
+  },
+
   remove: function() {
     this.stop();
+    this.changeServerWarningModal && this.changeServerWarningModal.remove();
 
     // TODO: don't let us leave this modal with the model in an error state.
 

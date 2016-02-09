@@ -182,7 +182,6 @@ form {
 }
 
 
-
 /*========== structure classes ==========*/
 
 #content {
@@ -4992,6 +4991,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .alignCenter {
   text-align: center;
+}
+
+#ov1 .heightAuto {
+  height: auto;
 }
 
 /* terrible hack, TODO: remove before production */

@@ -289,6 +289,8 @@ heartbeat.on('message', function(e) {
             } else {
               launchServerConnect();
             }
+          }).fail(function() {
+            launchServerConnect();
           });
         }
 
