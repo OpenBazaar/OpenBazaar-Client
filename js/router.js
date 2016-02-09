@@ -16,7 +16,7 @@ module.exports = Backbone.Router.extend({
   initialize: function(options){
     this.options = options || {};
     /*
-    expects options.userModel, options userProfile, socketView, chatAppView from app.js
+    expects options.userModel, options userProfile, socketView, chatAppView from main.js
      */
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
@@ -118,7 +118,7 @@ module.exports = Backbone.Router.extend({
     }),"userPage");
   },
 
-  transactions: function(state, modalTab){
+  transactions: function(state){
     "use strict";
     this.cleanup();
     this.newView(new transactionsView({

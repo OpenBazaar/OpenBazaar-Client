@@ -160,7 +160,7 @@
                   </div>
                 </div>    
 
-                <!-- MyCelium -->
+                <!-- Mycelium -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
                   <div class="floatLeft marginRight10">
                     <a href="https://mycelium.com/mycelium-wallet.html" target="_blank"> 
@@ -170,9 +170,9 @@
                   <div class="floatLeft width420 marginTop4">
                     <div class="clearfix">
                       <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
-                        <a href="https://mycelium.com/mycelium-wallet.html" class="js-externalLink textOpacity1">MyCelium <span class="ion-android-open fontSize10"></span></a>
+                        <a href="https://mycelium.com/mycelium-wallet.html" class="js-externalLink textOpacity1">Mycelium <span class="ion-android-open fontSize10"></span></a>
                       </div>
-                      <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.MyCeliumTagline') %></div>
+                      <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.MyceliumTagline') %></div>
                     </div>
                   </div>
                 </div>
@@ -224,6 +224,23 @@
                         <a href="https://coinkite.com/promo/nwt1" class="js-externalLink textOpacity1">Coinkite <span class="ion-android-open fontSize10"></span></a>
                       </div>
                       <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.CoinkiteTagline') %></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- BitGo -->
+                <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
+                  <div class="floatLeft marginRight10">
+                    <a href="https://www.bitgo.com/wallet" target="_blank">
+                      <img src="imgs/wallet-providers/bitgo.png" class="thumbnail thumbnail-large-slim " />
+                    </a>
+                  </div>
+                  <div class="floatLeft width420 marginTop4">
+                    <div class="clearfix">
+                      <div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 fontSize15">
+                        <a href="https://www.bitgo.com/wallet" class="js-externalLink textOpacity1">BitGo <span class="ion-android-open fontSize10"></span></a>
+                      </div>
+                      <div class="textOpacity75 fontSize14"><%= polyglot.t('walletProviders.BitGoTagline') %></div>
                     </div>
                   </div>
                 </div>
@@ -363,11 +380,11 @@
                          value="<%= ob.user.refund_address %>" required />
                 </div>
               </form>
-              <div class="width100 marginTop30 alignCenter">
+              <div class="width100 marginTop30 lineHeight21 alignCenter">
                 <a href="https://openbazaar.zendesk.com/hc/en-us/articles/207535416"
                    class="marginRight10 underline js-externalLink">
                   <%= polyglot.t('buyFlow.CantFindAddress') %>
-                </a>
+                </a><br/>
                 <a href="https://rushwallet.com/" class="underline js-externalLink"><%= polyglot.t('buyFlow.NeedTempAddress') %></a>
                 <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-right" data-tooltip="<%= polyglot.t('buyFlow.NeedTempAddressHelper') %>"></span>
               </div>
