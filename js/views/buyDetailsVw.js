@@ -67,8 +67,8 @@ module.exports = Backbone.View.extend({
         userCurrency = this.model.get('userCurrencyCode'),
         totalItemPrice = this.model.get('price') * quantity,
         totalShipping = this.model.get('currentShippingPrice') * quantity,
-        moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") : 0,
-        moderatorPrice = moderatorPercentage ? totalItemPrice / moderatorPercentage : 0,
+        moderatorPercentage = this.model.get('selectedModerator') ? (this.model.get('selectedModerator').fee).replace("%", "") * 0.01 : 0,
+        moderatorPrice = moderatorPercentage ? totalItemPrice * moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
         totalPrice = totalItemPrice + totalShipping,
         newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
@@ -83,19 +83,20 @@ module.exports = Backbone.View.extend({
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalShipping),
-        newDisplayModeratorPrice = (userCurrency == "BTC") ? moderatorTotal.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayModeratorPrice = (userCurrency == "BTC") ? moderatorTotal.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(moderatorTotal),
         totalBTCDisplayPrice = (this.model.get('vendorBTCPrice') + this.model.get('currentShippingBTCPrice')) * quantity,
-        moderatorPriceBTC = moderatorPercentage ? totalBTCDisplayPrice / moderatorPercentage : 0;
+        moderatorPriceBTC = moderatorPercentage ? totalBTCDisplayPrice * moderatorPercentage : 0,
+        moderatorPriceString = this.model.get('userCurrencyCode') == 'BTC' ?
+                               moderatorPriceBTC.toFixed(8) + " BTC" : moderatorPriceBTC.toFixed(8) + " BTC (" + newDisplayModeratorPrice + ")";
 
     this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
     this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
-    this.$el.find('.js-buyWizardModeratorPrice').html(newDisplayModeratorPrice);
-    this.$el.find('.js-buyWizardModeratorBTCPrice').html(moderatorPriceBTC.toFixed(4));
+    this.$('.js-buyWizardModeratorPrice').attr('data-tooltip', moderatorPriceString);
     newAttributes.quantity = quantity;
     newAttributes.totalPrice = totalPrice;
     newAttributes.totalBTCDisplayPrice = totalBTCDisplayPrice;

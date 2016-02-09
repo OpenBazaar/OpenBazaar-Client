@@ -150,10 +150,9 @@
     <div class="flexCol-4">
       <div class="rowItem padding2015 alignRight marginTop20">
         <% if(ob.selectedModerator){ %>
-          <span class="noOverflow fontSize13"><span class="js-buyWizardModeratorBTCPrice"></span> BTC</span>
-          <% if(ob.userCurrencyCode != 'BTC'){ %>
-            (<span class="noOverflow textOpacity75 fontSize13 js-buyWizardModeratorPrice"></span>)
-          <% } %>
+          <span class="noOverflow fontSize13 tooltip tooltip-right js-buyWizardModeratorPrice">
+            <%- ob.selectedModerator.fee %>
+          </span>
         <% } else { %>
           <%= polyglot.t('Free') %>
         <% } %>
