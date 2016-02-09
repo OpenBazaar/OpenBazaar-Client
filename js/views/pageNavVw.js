@@ -350,18 +350,19 @@ module.exports = Backbone.View.extend({
     $('#obContainer').addClass('blur');
 
     // display the modal
-    $('.js-aboutModal').removeClass('hide');
+    $('.js-aboutModal').removeClass('fadeOut').addClass('fadeIn');
   },
 
   hideAboutModal: function(e){
     "use strict";
-    $('.js-aboutModal').addClass('hide');
+    $('.js-aboutModal').addClass('fadeOut');
     $('#obContainer').removeClass('blur');
+
   },
 
   showSupportModal: function(e){
     "use strict";
-    $('.js-aboutModal').removeClass('hide');
+    $('.js-aboutModal').removeClass('fadeOut').addClass('fadeIn');
     $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
     $('.js-about-donationsTab').addClass('active');
     $('.js-aboutModal .modal-section').addClass('hide');
@@ -371,7 +372,7 @@ module.exports = Backbone.View.extend({
 
   hideSupportModal: function(e){
     "use strict";
-    $('.js-aboutModal').addClass('hide');
+    $('.js-aboutModal').removeClass('fadeOut').addClass('fadeIn');
     $('#obContainer').removeClass('blur');
   },
 

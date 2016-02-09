@@ -115,6 +115,8 @@ module.exports = baseVw.extend({
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      // add blur to container
+      $('#obContainer').addClass('blur');
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
@@ -391,5 +393,6 @@ module.exports = baseVw.extend({
   closeModal: function(){
     this.trigger("closed");
     this.$el.parent().fadeOut(300);
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
   }
 });
