@@ -13,8 +13,10 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
-    if (!options.model) {
-      throw new Error('Please provide a Server Config model.');
+    this.options = options || {};
+    
+    if (!options.settings) {
+      throw new Error('Please provide an object with the server settings.');
     }
   },
 
@@ -26,7 +28,7 @@ module.exports = baseModal.extend({
     var self = this;
 
     loadTemplate('./js/templates/changeServerWarningModal.html', function(t) {
-      self.$el.html(t( self.model.toJSON() ));
+      self.$el.html(t( self.options.settings ));
 
       baseModal.prototype.render.apply(self, arguments);
     });

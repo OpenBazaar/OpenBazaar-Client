@@ -28,6 +28,8 @@ module.exports = baseModal.extend({
     this._state = {
       status: 'trying'
     };
+
+    this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
   },
 
   inputEntered: function(e) {
@@ -40,10 +42,11 @@ module.exports = baseModal.extend({
         this.changeServerWarningModal = new ChangeServerWarningModal({
           innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
           includeCloseButton: true,
-          model: this.model
+          settings: this._lastSavedAttrs
         }).render().open();
         
         this.listenTo(this.changeServerWarningModal, 'close', function() {
+          this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
           this.start();
         });
       } else {
