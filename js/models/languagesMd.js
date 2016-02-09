@@ -422,7 +422,7 @@ module.exports = Backbone.Model.extend({
           AirbitzTagline: "Privacy. Security. Autonomy. Decentralized.",
           BreadwalletTagline: "Connects directly to the bitcoin network, no servers. Beautiful simplicity, maximum security.",
           RushWalletTagline: "Get a Bitcoin address quickly and easily in your browser.",
-          MyCeliumTagline: "One of the longest in market, most secure and reliable Bitcoin wallets.",
+          MyceliumTagline: "One of the longest in market, most secure and reliable Bitcoin wallets.",
           CoinkiteTagline: "The Most Powerful Bitcoin Wallet",
           BlockchaininfoTagline: "The world's most popular bitcoin wallet. Safer, Friendlier, Easier.",
           DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma."
