@@ -425,7 +425,8 @@ module.exports = Backbone.Model.extend({
           MyCeliumTagline: "One of the longest in market, most secure and reliable Bitcoin wallets.",
           CoinkiteTagline: "The Most Powerful Bitcoin Wallet",
           BlockchaininfoTagline: "The world's most popular bitcoin wallet. Safer, Friendlier, Easier.",
-          DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma."
+          DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma.",
+          BitGoTagline: "The world's most secure bitcoin wallet. Trusted by leading Bitcoin businesses."
         },
         buyFlow: {
           PayForOrder: "Pay for Order",
