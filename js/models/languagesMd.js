@@ -332,7 +332,7 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
           SendMessage: "Send",
           CloseDispute: "Close Dispute",
-          TotalInTransaction: "Total In Transaction"
+          TotalInTransaction: "Transaction:"
         },
         errorMessages: {
           saveError: "Data could not be saved.",

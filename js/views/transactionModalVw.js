@@ -38,6 +38,8 @@ module.exports = baseVw.extend({
     'click .js-startDispute': 'startDispute',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
+    'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
+    'change #transactionsBuyerPayoutBTC': 'updateBuyerPercentage',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -337,7 +339,7 @@ module.exports = baseVw.extend({
     } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
       this.closeDispute();
     } else if(this.status == 4 || this.transactionType == "cases"){
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}], 'DISPUTE');
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}], 'ORDER');
     } else {
       this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}], 'CHAT');
     }
@@ -418,6 +420,16 @@ module.exports = baseVw.extend({
       self.tabState = "discussion";
       self.getData();
     }, '', discussionData);
+  },
+
+  updateBuyerBTC: function(e){
+    var updatedVal = this.$(e.target).val() * 0.01;
+    this.$('#transactionsBuyerPayoutBTC').val(updatedVal * this.model.get('buyer_order').order.payment.amount);
+  },
+
+  updateBuyerPercentage: function(e){
+    var updatedVal = this.$(e.target).val();
+    this.$('#transactionsBuyerPayoutBTC').val(updatedVal / this.model.get('buyer_order').order.payment.amount);
   },
 
   closeOrderForm: function(e){

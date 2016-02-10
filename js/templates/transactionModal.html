@@ -522,34 +522,43 @@
           <div class="flexRow">
             <div class="flexRow">
               <div class="flexCol-12 borderRight custCol-border">
-                <div class="fieldItem">
+                <div class="fieldItem fontSize11">
                   <%= polyglot.t('transactions.TotalInTransaction') %>
                   <% if(ob.displayTotalPrice){ %>
                   <strong><span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
                   <% } else if(ob.buyer_order.order.payment.amount){ %>
                   <strong><%- ob.buyer_order.order.payment.amount %> BTC</strong>
                   <% } %>
+                  <div class="pull-right">
+                    You earn: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
+                  </div>
                 </div>
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-5 borderRight custCol-border">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">Buyer Amount:</div>
               </div>
-              <div class="flexCol-7 borderRight custCol-border">
-                <input type="number" max="100" min="0" step="0.1" class="fieldItem">
-                <input type="number" max="<%- ob.buyer_order.order.payment.amount %>" min="0" step="0.0001" class="fieldItem hide">
-                <div class="positionTopRight padding10">
-                  <a class="btn btn-txt">%</a>
-                  <a class="btn btn-txt">usd</a>
-                </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <span class="marginRight10">
+                  <input type="number"
+                         id="transactionsBuyerPayoutPercent"
+                         max="100" min="0" step="0.1"
+                         class="box-borderBright"
+                         style="width: 60px">%
+                </span>
+                <input type="number"
+                       id="transactionsBuyerPayoutBTC"
+                       max="<%- ob.buyer_order.order.payment.amount %>" min="0" step="0.0001"
+                       class="box-borderBright"
+                       style="width: 220px">
               </div>
             </div>
             <div class="flexRow">
-              <div class="flexCol-5 borderRight custCol-border">
+              <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">Seller Amount:</div>
               </div>
-              <div class="flexCol-7 borderRight custCol-border">
+              <div class="flexCol-8 borderRight custCol-border">
               </div>
             </div>
           </div>
