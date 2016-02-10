@@ -37,6 +37,7 @@ module.exports = baseVw.extend({
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
+    'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -62,7 +63,7 @@ module.exports = baseVw.extend({
     this.lastTab = "summary";
     this.discussionCount = 0;
     this.discussionCol = new discussionCl();
-    this.discussionCol.url = this.serverUrl + "get_dispute_messages";
+    this.discussionCol.url = this.serverUrl + "order_messages";
 
     if(this.userProfile.get('avatar_hash')){
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
@@ -333,6 +334,8 @@ module.exports = baseVw.extend({
     //is this a dispute?
     if(this.$('#transactionStartDisputeCheckbox').prop("checked")) {
       this.confirmDispute();
+    } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
+      this.closeDispute();
     } else if(this.status == 4 || this.transactionType == "cases"){
       this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}], 'DISPUTE');
     } else {
@@ -370,6 +373,15 @@ module.exports = baseVw.extend({
     this.getDiscussion();
   },
 
+  showCloseDispute: function(e){
+    var closeDisputeForm = this.$('#transationCloseDispute');
+    if($(e.target).prop('checked')){
+      closeDisputeForm.removeClass('hide');
+    } else {
+      closeDisputeForm.addClass('hide');
+    }
+  },
+
   copyTx: function(e){
     
     var tx = $(e.target).data('tx');
@@ -381,6 +393,20 @@ module.exports = baseVw.extend({
   },
 
   confirmDispute: function(){
+    var self = this,
+        targetForm = this.$('#transationCloseDispute'),
+        discussionData = {};
+
+    discussionData.order_id = this.orderID;
+
+    saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
+      self.status = 3;
+      self.tabState = "discussion";
+      self.getData();
+    }, '', discussionData);
+  },
+
+  closeDispute: function(){
     var self = this,
         targetForm = this.$('#transactionDiscussionForm'),
         discussionData = {};
