@@ -169,7 +169,7 @@ module.exports = baseModal.extend({
         if (reason == 'canceled') return;
         
         if (attempts >= 3 || reason === 'failed-auth' || reason === 'failed-auth-too-many') {
-          self.setState({ status: reason || 'failed' });
+          self.setState({ status: reason === 'failed-auth' ? 'failed-auth' : 'failed' });
         } else {
           attempts += 1;
           connect();
