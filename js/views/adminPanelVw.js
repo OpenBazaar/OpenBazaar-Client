@@ -4,8 +4,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     remote = require('remote'),
     userSettingsModel = require('../models/userMd'),
-    userProfileModel = require('../models/userProfileMd'),
-    ServerConnectModal = require('./serverConnectModal');
+    userProfileModel = require('../models/userProfileMd');
 
 module.exports = Backbone.View.extend({
 
@@ -14,7 +13,7 @@ module.exports = Backbone.View.extend({
   events: {
     'click .js-adminModal': 'blockClicks',
     'click .js-closeModal': 'closeModal',
-    'click .js-changeServerSettings': 'launchServerConfig',
+    'click .js-adminServer': 'setServer',
     'click .js-adminUpdateProfile': 'updateProfile',
     'click .js-adminUpdateSettings': 'updateSettings',
     'blur input': 'validateInput',
@@ -121,28 +120,15 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  // setServer: function() {
-  //   "use strict";
-  //   var self = this,
-  //       newServer = this.$el.find('#adminServerInput').val();
+  setServer: function() {
+    "use strict";
+    var self = this,
+        newServer = this.$el.find('#adminServerInput').val();
 
-  //   //change model so everything else points at new server before REST call
-  //   this.model.set({serverUrl: newServer});
-  //   //set local storage to the new server
-  //   localStorage.setItem("serverUrl", newServer);
-  // },
-  launchServerConfig: function() {
-    var serverConnectModal = new ServerConnectModal({
-      includeCloseButton: true
-    }).render().open();
-
-    serverConnectModal.on('connected', function() {
-      location.reload();
-    });
-
-    serverConnectModal.on('close', function() {
-      serverConnectModal.remove();
-    });    
+    //change model so everything else points at new server before REST call
+    this.model.set({serverUrl: newServer});
+    //set local storage to the new server
+    localStorage.setItem("serverUrl", newServer);
   },
 
   updateProfile: function() {

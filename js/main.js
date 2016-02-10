@@ -216,8 +216,6 @@ launchServerConnect = function() {
     serverConnectModal = new ServerConnectModal();
 
     serverConnectModal.on('connected', function() {
-      alert('we be connected');
-      
       // clear some flags so the heartbeat events will
       // appropriatally loadProfile or launch onboarding
       guidCreating = null;

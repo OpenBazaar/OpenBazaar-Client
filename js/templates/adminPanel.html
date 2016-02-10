@@ -5,15 +5,26 @@
   <div class="modal-child modal-childMain pad20 scrollOverflowY">
     <div class="row20 rowTop20">
       <h1 class="txt-center">Admin Panel</h1>
+    </div>
+    <p class="txt-center">Use for testing the client.</p>
+    <p class="txt-center">Data changes when you click the blue button. The avatar changes as soon as you pick a new image.</p>
+    <p>To point at the local server, use http://localhost:18469/api/v1/</p>
 
-    <h3>Change Server Settings</h3>
+    <h3>Set Server</h3>
     <div class="box-border row20">
       <form id="adminPanelServer">
         <div class="flex-border">
           <div class="flexRow">
-            <div class="flexCol-12">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <label for="adminServerInput">Change Server</label>
+                <div class="txt-unleaded marginLeft10 js-adminServerMsg"></div>
+              </div>
+            </div>
+            <div class="flexCol-8">
+              <input type="text" name="serverUrl" class="fieldItem" id="adminServerInput" value="<%- ob.serverUrl %>" pattern="https?://.+"/>
               <div class="rowTop20 pad20">
-                <a class="btn btn-txt row20 js-changeServerSettings pull-right">Change Server Settings</a>
+                <a class="btn btn-txt row20 js-adminServer pull-right">Set</a>
               </div>
             </div>
           </div>
@@ -55,10 +66,15 @@
                 <div class="js-adminServerMsg"></div>
               </div>
             </div>
-            <div class="flexCol-8">
+            <div class="flexCol-8 positionWrapper">
+              <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
+              <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-12">
               <div class="fieldItem">
-                <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
-                <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+                <a class="btn btn-txt pull-right js-adminUpdateProfile">Change Profile</a>
               </div>
             </div>
           </div>
@@ -71,13 +87,17 @@
       <div class="flex-border">
         <div class="flexRow">
           <div class="flexCol-12">
-              <a class="btn btn-txt pull-left margin8 js-adminShutdown">Turn Server Off</a>
-              <div class="pull-right margin8 adminMsg"></div>
+            <div class="fieldItem">
+              <div class="pull-left adminMsg"></div>
+              <a class="btn btn-txt pull-right js-adminShutdown">Turn Server Off</a>
+            </div>
           </div>
         </div>
         <div class="flexRow">
           <div class="flexCol-12">
-            <a class="btn btn-txt pull-left margin8 js-adminCloseApp">Close This Application</a>
+            <div class="fieldItem">
+              <a class="btn btn-txt pull-right js-adminCloseApp">Close This Application</a>
+            </div>
           </div>
         </div>
       </div>
@@ -89,8 +109,7 @@
         <div class="flexRow">
           <div class="flexCol-12">
             <div class="fieldItem">
-              <p class="js-adminPeers">
-              </p>
+              <div class="js-adminPeers"></div>
             </div>
           </div>
         </div>
@@ -99,9 +118,11 @@
 
     <h3>Routing Table</h3>
     <div class="box-border row20">
-      <div class="flexRow">
-        <div class="flexCol-12">
-          <div class="textSize12px js-adminRoutingTable"></div>
+      <div class="flex-border">
+        <div class="flexRow">
+          <div class="flexCol-12">
+            <div class="padding10 textSize12px js-adminRoutingTable"></div>
+          </div>
         </div>
       </div>
     </div>
