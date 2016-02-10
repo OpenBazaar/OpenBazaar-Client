@@ -4,9 +4,8 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),        
-    serverConfigMd = require('../models/serverConfigMd'),
     baseModal = require('./baseModal'),
-    messageModal = require('../utils/messageModal.js');
+    ChangeServerWarningModal = require('./changeServerWarningModal');
 
 module.exports = baseModal.extend({
   className: 'server-connect-modal',
@@ -19,25 +18,13 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
-    if (!(options.model && options.model instanceof serverConfigMd)) {
-      throw new Error('Please provide a ServerConfigMd instance.');
-    }
+    this.model = app.serverConfig;
 
     this.listenTo(this.model, 'invalid sync', function() {
       this.render();
     });
 
-    this._state = this.getInitialState();
     this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
-  },
-
-  getInitialState: function() {
-    var state = {};
-
-    state['attempt'] = 1;
-    state['status'] = 'trying';
-
-    return state;
   },
 
   inputEntered: function(e) {
@@ -45,13 +32,21 @@ module.exports = baseModal.extend({
   },
 
   saveForm: function() {
-    if (__.isEqual(this.model.attributes, this._lastSavedAttrs)) {
-      return;
-    }
-
     if (this.model.save()) {
-      this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
-      this.start();
+      if (!this.changeServerWarningModal) {
+        this.changeServerWarningModal = new ChangeServerWarningModal({
+          innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
+          includeCloseButton: true,
+          settings: this._lastSavedAttrs
+        }).render().open();
+        
+        this.listenTo(this.changeServerWarningModal, 'close', function() {
+          this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
+          this.start();
+        });
+      } else {
+        this.changeServerWarningModal.open();
+      }
     };
   },
 
@@ -65,20 +60,11 @@ module.exports = baseModal.extend({
   setState: function(state) {
     var newState;
     
-    if (typeof state['attempt'] !== 'undefined') {
-      this.$attempt.text(state['attempt']);
-    }
-
     newState =  __.extend({}, this._state, state);
 
     if (!__.isEqual(this._state, newState)) {
       this._state = newState;
-
-      if (!(typeof state['attempt'] !== 'undefined' && Object.keys(state).length === 1)) {
-        // if the only new state is the attemp counter, no need to
-        // re-render since we manually updated that above.
-        this.render();
-      }
+      this.render();
     }
   },
 
@@ -90,52 +76,53 @@ module.exports = baseModal.extend({
     var self = this,
         deferred = $.Deferred(),
         promise = deferred.promise(),
-        request,
+        loginRequest,
         timesup,
         rejectLater,
-        rejectRequestLater,
-        checkProfile,
+        rejectLogin,
+        rejectLoginLater,
+        login,
         onClose;
 
-    checkProfile = function() {
+    rejectLogin = function(reason) {
+      rejectLoginLater = setTimeout(function() {
+        deferred.reject(reason);
+      }, 500);
+    };
+
+    login = function() {
       // at this point, we've confirmed connection, so:
       self.trigger('connected');
 
       // check authentication
-      request = $.ajax({
-        url: app.serverConfig.getServerBaseUrl() + '/profile',
-        timeout: 3000
-      }).done(function() {
-        deferred.resolve();
-        self.trigger('authenticated');
+      loginRequest = app.login().done(function(data) {
+        if (data.success) {
+          deferred.resolve();
+          self.trigger('authenticated');
+        } else {
+          if (data.reason === 'too many attempts') {
+            rejectLogin('failed-auth-too-many');  
+          } else {
+            rejectLogin('failed-auth');  
+          }          
+        }
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
         
-        rejectRequestLater = setTimeout(function() {
-          if (jqxhr.status === 401) {
-            deferred.reject('failed-auth');
-          } else {
-            // assuming there's no business rules where
-            // the server would be up and still send back
-            // a failure code, outside of bad auth.
-            deferred.reject();
-          }
-        }, 500);
+        // assuming rest server is down or
+        // wrong port set
+        rejectLogin();
       });
     };
-
-    if (app.getHeartbeatSocket().getReadyState() === 1) {
-      checkProfile();
-    }
 
     app.connectHeartbeatSocket();
 
     promise.cleanup = function() {
       clearTimeout(timesup);
       clearTimeout(rejectLater);
-      clearTimeout(rejectRequestLater);
-      request && request.abort();
-      app.getHeartbeatSocket().off(null, checkProfile);
+      clearTimeout(rejectLoginLater);
+      loginRequest && loginRequest.abort();
+      app.getHeartbeatSocket().off(null, login);
       app.getHeartbeatSocket().off(null, onClose);
     };
 
@@ -147,7 +134,7 @@ module.exports = baseModal.extend({
       promise.cleanup();
     });
 
-    app.getHeartbeatSocket().on('open', checkProfile);
+    app.getHeartbeatSocket().on('open', login);
 
     app.getHeartbeatSocket().on('close', (onClose = function() {
       // On local servers the close event on a down server is
@@ -173,22 +160,16 @@ module.exports = baseModal.extend({
 
     this.connectAttempt && this.connectAttempt.cancel();
 
-    this.setState(
-      __.extend(this.getInitialState(), {
-        status: 'trying'
-      })
-    );
+    this.setState({ status: 'trying' });
 
     (connect = function() {
-      self.setState({ attempt: attempts });
-
       self.connectAttempt = self.attemptConnection().done(function() {
         self.setState({ status: 'connected' });
       }).fail(function(reason) {
         if (reason == 'canceled') return;
         
-        if (attempts >= 3) {
-          self.setState({ status: reason === 'failed-auth' ? 'failed-auth' : 'failed' });
+        if (attempts >= 3 || reason === 'failed-auth' || reason === 'failed-auth-too-many') {
+          self.setState({ status: reason || 'failed' });
         } else {
           attempts += 1;
           connect();
@@ -211,8 +192,14 @@ module.exports = baseModal.extend({
     return !!this.connectAttempt;
   },
 
+  close: function() {
+    this.changeServerWarningModal && this.changeServerWarningModal.remove();
+    baseModal.prototype.close.apply(this, arguments);
+  },
+
   remove: function() {
     this.stop();
+    this.changeServerWarningModal && this.changeServerWarningModal.remove();
 
     // TODO: don't let us leave this modal with the model in an error state.
 
@@ -235,7 +222,6 @@ module.exports = baseModal.extend({
 
       baseModal.prototype.render.apply(self, arguments);
       self.$('.flexContainer.scrollOverflowYHideX')[0].scrollTop = scrollPos;
-      self.$attempt = self.$('.attempt').text(self._state.attempt);
     });
 
     return this;

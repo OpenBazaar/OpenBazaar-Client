@@ -26,9 +26,12 @@ function App() {
 App.prototype.connectHeartbeatSocket = function() {
   var self = this;
 
-  if (this._heartbeatSocket && this._heartbeatSocket.getReadyState() <= 1) {
-    return;
-  }
+  // todo: check if socket is already connected to the url specified in
+  // the config and if so, just return;
+
+  // if (this._heartbeatSocket && this._heartbeatSocket.getReadyState() <= 1) {
+  //   return;
+  // }
 
   clearTimeout(this.heartbeatSocketTimesup);
 
@@ -52,6 +55,17 @@ App.prototype.connectHeartbeatSocket = function() {
 
 App.prototype.getHeartbeatSocket = function() {
   return this._heartbeatSocket;
+};
+
+App.prototype.login = function() {
+  return $.ajax({
+    url: this.serverConfig.getServerBaseUrl() + '/login',
+    method: 'POST',
+    data: {
+      username: this.serverConfig.get('username'),
+      password: this.serverConfig.get('password')
+    }
+  });  
 };
 
 App.getApp = function() {

@@ -79,9 +79,8 @@ var handleStartupEvent = function() {
 };
 
 if (handleStartupEvent()) {
-  return;
+  console.log('Client started on Windows...');
 }
-
 
 // Set daemon binary name
 var daemon = "openbazaard.exe";

@@ -30,7 +30,7 @@ module.exports = Backbone.Model.extend({
     blocked: [], //a list of guids to block (LIST of 40 character hex strings)
     blocked_guids: [], // the same as blocked. The API returns blocked_guids, but expects blocked.
     libbitcoin_server: "", //the server address (url string)
-    ssl: true, //use ssl on the openbazaar server (�True� or �False�)
+    ssl: false, //use ssl on the openbazaar server (�True� or �False�)
     serverUrl: "http://localhost:18469/api/v1/", //set from localStorage
 
     //value below for testing. Real value should be dynamically set

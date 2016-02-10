@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/OpenBazaar/OpenBazaar-Client.svg)](https://travis-ci.org/OpenBazaar/OpenBazaar-Client)
 [![Slack Status](https://openbazaar-slackin-drwasho.herokuapp.com/badge.svg)](https://openbazaar-slackin-drwasho.herokuapp.com)
 
-You **must** be running the [OpenBazaar backend](https://github.com/drwasho/OpenBazaar-Server) for the client to work!
+You **must** be running the [OpenBazaar backend](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to work!
 
 Dependencies
 -----------

@@ -1,4 +1,4 @@
-var App = require('./App');
+var App = require('./App'),
     app = new App();
 
 var __ = window.__ = require('underscore'),
@@ -55,7 +55,6 @@ var Polyglot = require('node-polyglot'),
     startRemoteInitSequence,
     launchOnboarding,
     launchServerConnect,
-    login,
     setServerUrl,
     guidCreating;
 
@@ -185,16 +184,6 @@ var loadProfile = function(landingRoute) {
   });
 };
 
-$(document).ajaxSend(function(e, jqxhr, settings) {
-  var username = serverConfigMd.get('username'),
-      pw = serverConfigMd.get('password'),
-      serverBaseUrl = serverConfigMd.getServerBaseUrl();
-
-  if (username && pw && settings.url.startsWith(serverBaseUrl)) {
-    jqxhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ':' + pw));    
-  }
-});
-
 $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
   if (jqxhr.status === 401) {
     launchServerConnect();
@@ -224,9 +213,7 @@ launchOnboarding = function(guidCreating) {
 
 launchServerConnect = function() {
   if (!serverConnectModal) {
-    serverConnectModal = new ServerConnectModal({
-      model: serverConfigMd
-    });
+    serverConnectModal = new ServerConnectModal();
 
     serverConnectModal.on('connected', function() {
       // clear some flags so the heartbeat events will
@@ -236,9 +223,6 @@ launchServerConnect = function() {
 
       $loadingModal.removeClass('hide');      
 
-      // todo: perhaps only re-load if the server changed and on
-      // re-connect of the same server, just refresh the current
-      // route or let loadProfile happen if it hadn't already?
       if (profileLoaded) {
         location.reload();
       }
@@ -259,13 +243,6 @@ launchServerConnect = function() {
     }
   }
 };
-
-login = function() {
-  return $.post(serverConfigMd.getServerBaseUrl() + '/login', {
-    username: serverConfigMd.get('username'),
-    password: serverConfigMd.get('password')
-  });
-}
 
 heartbeat.on('close', function(e) {
   // server down
@@ -291,7 +268,7 @@ heartbeat.on('message', function(e) {
           password: e.jsonData.password
         });
 
-        login().done(function() {
+        app.login().done(function() {
           guidCreating.resolve();
         });
 
@@ -300,14 +277,20 @@ heartbeat.on('message', function(e) {
         if (loadProfileNeeded && !guidCreating) {
           loadProfileNeeded = false;
 
-          login().done(function() {
-            $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
-              if (__.isEmpty(profile)) {
-                launchOnboarding(guidCreating = $.Deferred().resolve().promise());
-              } else {
-                loadProfile();              
-              }
-            });
+          app.login().done(function(data) {
+            if (data.success) {
+              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
+                if (__.isEmpty(profile)) {
+                  launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+                } else {
+                  loadProfile();              
+                }
+              });
+            } else {
+              launchServerConnect();
+            }
+          }).fail(function() {
+            launchServerConnect();
           });
         }
 
