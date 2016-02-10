@@ -84,6 +84,20 @@ module.exports = Backbone.View.extend({
           }
       });
 
+      editor.subscribe('blur', function(e) {
+        var $field = self.$('#inputDescription');
+
+        if (!$($field.val()).text().length) {
+          $field.val('');
+        }
+
+        if (!$field[0].checkValidity()) {
+          $field.parent().addClass('invalid');
+        } else {
+          $field.parent().removeClass('invalid');
+        }
+      });
+
     });
     return this;
   },
@@ -379,6 +393,7 @@ module.exports = Backbone.View.extend({
     */
 
     formData = new FormData(submitForm);
+
     //add old and new image hashes
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
       //make sure all hashes are valid
