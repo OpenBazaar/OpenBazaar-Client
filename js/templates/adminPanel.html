@@ -6,13 +6,38 @@
     <div class="row20 rowTop20">
       <h1 class="txt-center">Admin Panel</h1>
 
-    <h3>Set Server</h3>
+    <h3>Change Server Settings</h3>
     <div class="box-border row20">
       <form id="adminPanelServer">
         <div class="flex-border">
           <div class="flexRow">
             <div class="flexCol-12">
-              <a class="btn btn-txt row20 js-adminServer margin8 pull-right">Set</a>
+              <div class="rowTop20 pad20">
+                <a class="btn btn-txt row20 js-changeServerSettings pull-right">Change Server Settings</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <h3>Clear Local Storage</h3>
+    <div class="box-border row20">
+      <form id="adminPanelServer">
+        <div class="flex-border">
+          <div class="flexRow">
+            <div class="flexCol-4">
+              <div class="fieldItem">
+                <p class="txt-unleaded">This will reset your server to the default local server, clear any saved image hashes, and reset your onboarding status.</p>
+              </div>
+              <div class="fieldItem">
+                <p class="txt-unleaded js-adminClearLocalMsg"></p>
+              </div>
+            </div>
+            <div class="flexCol-8">
+              <div class="rowTop20 pad20">
+                <a class="btn btn-txt row20 js-adminClearLocalStorage pull-right">Clear Local Storage</a>
+              </div>
             </div>
           </div>
         </div>
