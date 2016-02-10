@@ -56,7 +56,8 @@ var Polyglot = require('node-polyglot'),
     launchOnboarding,
     launchServerConnect,
     setServerUrl,
-    guidCreating;
+    guidCreating,
+    after401LoginRequest;
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
 window.lang = user.get("language");
@@ -186,7 +187,21 @@ var loadProfile = function(landingRoute) {
 
 $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
   if (jqxhr.status === 401) {
-    launchServerConnect();
+    if (after401LoginRequest && after401LoginRequest.state() === 'pending') return;
+
+    after401LoginRequest = app.login().done(function(data) {
+      var route = location.hash;
+
+      if (data.success) {
+        // refresh the current route
+        Backbone.history.navigate('blah-blah-blah');
+        Backbone.history.navigate(route, { trigger: true });
+      } else {
+        launchServerConnect();
+      }
+    }).fail(function() {
+      launchServerConnect();
+    });
   }
 });
 
