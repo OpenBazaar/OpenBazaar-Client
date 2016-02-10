@@ -127,6 +127,7 @@ module.exports = baseVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
+    console.log(data)
     if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
       this.status = 1;
       this.getData();
@@ -251,12 +252,6 @@ module.exports = baseVw.extend({
   getDiscussion: function(){
     var self = this;
     this.discussionCount = 0;
-    console.log(this.status)
-    if(this.status == 4){
-      this.$('.js-discussionWrapper').html('');
-      this.$('.js-discussionNotStarted').addClass('hide');
-      this.$('.js-discussionStarted').removeClass('hide');
-    }
 
     this.discussionCol.fetch({
       data: $.param({'order_id': self.orderID}),
@@ -334,16 +329,16 @@ module.exports = baseVw.extend({
     }
 
     //is this a dispute?
-    if(this.status == 4 || this.$('#transactionStartDisputeCheckbox').prop("checked" || this.transactionType == "cases")){
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
+    if(this.$('#transactionStartDisputeCheckbox').prop("checked")) {
+      this.confirmDispute();
+    } else if(this.status == 4 || this.transactionType == "cases"){
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}], 'DISPUTE');
     } else {
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}]);
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}], 'CHAT');
     }
-
-
   },
 
-  sendDiscussionMessage: function(messages){
+  sendDiscussionMessage: function(messages, type){
     //messages should be an array of message objects with guid and rKey [{"guid": "", "rKey": ""}]
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
@@ -360,7 +355,7 @@ module.exports = baseVw.extend({
             "handle": "",
             "message": messageText,
             "subject": self.orderID,
-            "message_type": "DISPUTE",
+            "message_type": type,
             "public_key": msg.rKey
           }
         };
