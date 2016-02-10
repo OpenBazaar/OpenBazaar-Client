@@ -79,7 +79,7 @@ var handleStartupEvent = function() {
 };
 
 if (handleStartupEvent()) {
-  return;
+  // return;
 }
 
 

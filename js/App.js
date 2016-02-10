@@ -26,9 +26,12 @@ function App() {
 App.prototype.connectHeartbeatSocket = function() {
   var self = this;
 
-  if (this._heartbeatSocket && this._heartbeatSocket.getReadyState() <= 1) {
-    return;
-  }
+  // todo: check if socket is already connected to the url specified in
+  // the config and if so, just return;
+
+  // if (this._heartbeatSocket && this._heartbeatSocket.getReadyState() <= 1) {
+  //   return;
+  // }
 
   clearTimeout(this.heartbeatSocketTimesup);
 

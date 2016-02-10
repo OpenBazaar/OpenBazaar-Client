@@ -4,7 +4,6 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),        
-    serverConfigMd = require('../models/serverConfigMd'),
     baseModal = require('./baseModal'),
     ChangeServerWarningModal = require('./changeServerWarningModal');
 
@@ -24,10 +23,6 @@ module.exports = baseModal.extend({
     this.listenTo(this.model, 'invalid sync', function() {
       this.render();
     });
-
-    this._state = {
-      status: 'trying'
-    };
 
     this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
   },
@@ -119,10 +114,6 @@ module.exports = baseModal.extend({
         rejectLogin();
       });
     };
-
-    if (app.getHeartbeatSocket().getReadyState() === 1) {
-      login();
-    }
 
     app.connectHeartbeatSocket();
 
