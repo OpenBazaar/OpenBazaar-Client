@@ -119,6 +119,7 @@ module.exports = Backbone.Model.extend({
         Optional: "Optional",
         Customize: "Customize",
         Save: "Save",
+        Change: "Change",
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
@@ -591,6 +592,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Personalizar",
         Save: "Guardar",
         Changes: "Cambios",
+        Change: "Change", //notTranslated
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -1048,6 +1050,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Anpassen",
         Save: "Speichern",
         Changes: "&Auml;nderungen",
+        Change: "Change", //notTranslated
         SaveChanges: "&Auml;nderungen speichern",
         YourName: "Dein Name",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -1517,6 +1520,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Personalizza",
         Save: "Salva",
         Changes: "Modifiche",
+        Change: "Change", //notTranslated
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -1984,6 +1988,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Personnaliser",
         Save: "Sauvegarder",
         Changes: "Changements",
+        Change: "Change", //notTranslated
         SaveChanges: "Sauvegarder les changements",
         YourName: "Votre nom",
         BitcoinReturnAddress: "Entrez votre adresse Bitcoin",
@@ -2446,6 +2451,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Customizare",
         Save: "Salvare",
         Changes: "Modificări",
+        Change: "Change", //notTranslated
         SaveChanges: "Salvare Modificări",
         YourName: "Numele dvs.",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -2909,6 +2915,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Настроить",
         Save: "Сохранить",
         Changes: "Изменения",
+        Change: "Change", //notTranslated
         SaveChanges: "Применить",
         YourName: "Ваше имя",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -3371,6 +3378,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Upraviť",
         Save: "Uložiť",
         Changes: "Zmeny",
+        Change: "Change", //notTranslated
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -3841,6 +3849,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Özelleştir",
         Save: "Kaydet",
         Changes: "Değişiklikler",
+        Change: "Change", //notTranslated
         SaveChanges: "Değişiklikleri Kaydet",
         YourName: "Adınız",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -4307,6 +4316,7 @@ module.exports = Backbone.Model.extend({
         Customize: "ChoH",
         Save: "Choq",
         Changes: "ChoH",
+        Change: "Change", //notTranslated
         SaveChanges: "ChoH toD",
         YourName: "PonglIj'e'",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -4773,6 +4783,7 @@ module.exports = Backbone.Model.extend({
         Customize: "个性化",
         Save: "保存",
         Changes: "更改",
+        Change: "Change", //notTranslated
         SaveChanges: "保存更改",
         YourName: "您的姓名",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -5240,6 +5251,7 @@ module.exports = Backbone.Model.extend({
         Customize: "사용자 지정",
         Save: "저장",
         Changes: "변경",
+        Change: "Change", //notTranslated
         SaveChanges: "변경 사항 저장",
         YourName: "당신 이름",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -5702,6 +5714,7 @@ module.exports = Backbone.Model.extend({
         Customize: "カスタマイズ",
         Save: "保存",
         Changes: "変更",
+        Change: "Change", //notTranslated
         SaveChanges: "変更を保存",
         YourName: "氏名",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
@@ -6158,6 +6171,7 @@ module.exports = Backbone.Model.extend({
         Customize: "Dostosuj",
         Save: "Zapisz",
         Changes: "Zmiany",
+        Change: "Change", //notTranslated
         SaveChanges: "Zapisz wprowadzone zmiany",
         YourName: "Twoje imię",
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
