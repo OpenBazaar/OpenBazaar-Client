@@ -38,8 +38,10 @@ module.exports = baseVw.extend({
     'click .js-startDispute': 'startDispute',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
-    'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
-    'change #transactionsBuyerPayoutBTC': 'updateBuyerPercentage',
+    'click #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
+    'keyup #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
+    'click #transactionsBuyerPayoutBTC': 'updateBuyerPercentage',
+    'keyup #transactionsBuyerPayoutBTC': 'updateBuyerPercentage',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -396,12 +398,12 @@ module.exports = baseVw.extend({
 
   confirmDispute: function(){
     var self = this,
-        targetForm = this.$('#transationCloseDispute'),
+        targetForm = this.$('#transactionDiscussionForm'),
         discussionData = {};
 
     discussionData.order_id = this.orderID;
 
-    saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
+    saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
       self.status = 3;
       self.tabState = "discussion";
       self.getData();
@@ -410,12 +412,12 @@ module.exports = baseVw.extend({
 
   closeDispute: function(){
     var self = this,
-        targetForm = this.$('#transactionDiscussionForm'),
+        targetForm = this.$('#transationCloseDispute'),
         discussionData = {};
 
     discussionData.order_id = this.orderID;
 
-    saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
+    saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
       self.status = 4;
       self.tabState = "discussion";
       self.getData();
@@ -429,7 +431,8 @@ module.exports = baseVw.extend({
 
   updateBuyerPercentage: function(e){
     var updatedVal = this.$(e.target).val();
-    this.$('#transactionsBuyerPayoutBTC').val(updatedVal / this.model.get('buyer_order').order.payment.amount);
+    console.log((updatedVal / this.model.get('buyer_order').order.payment.amount).toFixed(1));
+    this.$('#transactionsBuyerPayoutPercentage').val((updatedVal / this.model.get('buyer_order').order.payment.amount).toFixed(1));
   },
 
   closeOrderForm: function(e){
