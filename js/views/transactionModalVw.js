@@ -294,6 +294,8 @@ module.exports = baseVw.extend({
 
   addAllDiscussionMessages: function(){
     var self = this;
+    //clear existing messages
+    this.$('.js-discussionWrapper').html('');
     this.discussionCol.each(function(model, i){
       self.addDiscussionMessage(model);
     });
