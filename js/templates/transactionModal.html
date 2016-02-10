@@ -474,21 +474,10 @@
   <div class="js-main js-discussion">
     <div class="flexRow scrollOverflowY js-discussionScroller" style="height: 225px;">
       <div class="flexRow js-discussionWrapper">
-        <% if(ob.transactionType == "purchases" || ob.status > 1){ %>
-        <div class="padding10 flexExpand js-discussionNotStarted">
-          <p><%= polyglot.t('transactions.DisputeInstructions') %></p>
-        </div>
-        <% } %>
       </div>
     </div>
-    <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright js-discussionForm
-            <% if(ob.transactionType != 'purchases' && ob.status < 2){ %>
-              <% if(ob.transactionType == 'case' && ob.status != 4){ %>
-              disabled
-              <% } %>
-            <% } %>
-            ">
-      <div class="pad10right">
+    <div class="flexRow pad10Top width100 positionBottom custCol-secondary box-borderbright js-discussionForm">
+      <div class="pad10">
         <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 borderRadiusBottom0"
         <% if(ob.avatarURL) { %>
         style="background-image: url(<%- ob.avatarURL %>), url(imgs/offlineUser.png);">
@@ -505,14 +494,65 @@
                   required
                   placeholder="<%= polyglot.t('transactions.sendMessagePlaceholder') %>"></textarea>
       </form>
-      <div class="pad10left">
-        <a class="btn btn-txt custCol-primary pull-right js-confirmDispute js-discussionNotStarted">
-          <%= polyglot.t('transactions.DisputeTransaction') %>
-        </a>
-        <a class="btn btn-txt custCol-primary pull-right js-sendDiscussionMessage js-discussionStarted hide">
+      <div class="pad10" style="width:140px">
+        <a class="btn btn-txt btn-wide custCol-primary pull-right js-sendDiscussionMessage">
           <%= polyglot.t('transactions.SendMessage') %>
         </a>
+        <% if(ob.transactionType == "cases"){ %>
+        <div class="">
+          <input type="checkbox" class="fieldItem"
+                 id="transactionsCloseDisputeCheckbox" >
+          <label for="transactionsCloseDisputeCheckbox" class="fontSize10 clickable">
+            <%= polyglot.t('transactions.CloseDispute') %>
+          </label>
+        </div>
+        <% } else { %>
+        <div class="js-startDisputeFlag">
+          <input type="checkbox" class="fieldItem"
+                 id="transactionStartDisputeCheckbox" >
+          <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable">
+            <%= polyglot.t('transactions.DisputeTransaction') %>
+            <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box"
+               data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
+          </label>
+        </div>
+        <% } %>
       </div>
+
+      <form class="width100 hide" id="transationCloseDispute">
+        <div class="flexCol-12 flex-border custCol-border">
+          <div class="flexRow">
+            <div class="flexRow">
+              <div class="flexCol-12 borderRight custCol-border">
+                <div class="fieldItem">
+                  total in transaction
+                </div>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-5 borderRight custCol-border">
+                <div class="fieldItem">Buyer Amount:</div>
+              </div>
+              <div class="flexCol-7 borderRight custCol-border">
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-5 borderRight custCol-border">
+                <div class="fieldItem">Seller Amount:</div>
+              </div>
+              <div class="flexCol-7 borderRight custCol-border">
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-5 borderRight custCol-border">
+                <div class="fieldItem">Your Amount:</div>
+              </div>
+              <div class="flexCol-7 borderRight custCol-border">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 

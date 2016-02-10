@@ -288,7 +288,7 @@
                     <div class="hide marginTop12 js-buyWizardModeratorList">
                       <div class="table padding8 border1 custCol-border borderBottom0">
                         <div class="floatLeft textOpacity75"><%= polyglot.t('Moderators') %></div>
-                        <div class="floatRight textOpacity75"><%= polyglot.t('buyFlow.DisputeFee') %> <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-right" data-tooltip="<%= polyglot.t('buyFlow.ModeratorFeeHelper') %>"></span></div>
+                        <div class="floatRight textOpacity75"><%= polyglot.t('buyFlow.DisputeFee') %> <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-left" data-tooltip="<%= polyglot.t('buyFlow.ModeratorFeeHelper') %>"></span></div>
                       </div>
                       <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
                         <div class="flexRow">
@@ -386,7 +386,7 @@
                   <%= polyglot.t('buyFlow.CantFindAddress') %>
                 </a><br/>
                 <a href="https://rushwallet.com/" class="underline js-externalLink"><%= polyglot.t('buyFlow.NeedTempAddress') %></a>
-                <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-right" data-tooltip="<%= polyglot.t('buyFlow.NeedTempAddressHelper') %>"></span>
+                <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-left" data-tooltip="<%= polyglot.t('buyFlow.NeedTempAddressHelper') %>"></span>
               </div>
             </div>
           </div>

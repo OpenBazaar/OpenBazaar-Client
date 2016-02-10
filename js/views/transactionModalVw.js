@@ -36,7 +36,6 @@ module.exports = baseVw.extend({
     'click .js-showFundOrder': 'showFundOrder',
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
-    'click .js-confirmDispute': 'confirmDispute',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
@@ -252,6 +251,12 @@ module.exports = baseVw.extend({
   getDiscussion: function(){
     var self = this;
     this.discussionCount = 0;
+    console.log(this.status)
+    if(this.status == 4){
+      this.$('.js-discussionWrapper').html('');
+      this.$('.js-discussionNotStarted').addClass('hide');
+      this.$('.js-discussionStarted').removeClass('hide');
+    }
 
     this.discussionCol.fetch({
       data: $.param({'order_id': self.orderID}),
@@ -294,11 +299,6 @@ module.exports = baseVw.extend({
 
   addAllDiscussionMessages: function(){
     var self = this;
-    if(this.discussionCol.length > 0){
-      this.$('.js-discussionWrapper').html('');
-      this.$('.js-discussionNotStarted').addClass('hide');
-      this.$('.js-discussionStarted').removeClass('hide');
-    }
     this.discussionCol.each(function(model, i){
       self.addDiscussionMessage(model);
     });
@@ -308,25 +308,39 @@ module.exports = baseVw.extend({
     var guid,
         guid2,
         rKey,
-        rKey2;
+        rKey2,
+        buyerGuid = this.model.get('buyer_order').order.id.guid,
+        buyerKey = this.model.get('buyer_order').order.id.pubkeys.guid,
+        vendorGuid = this.model.get('vendor_offer').listing.id.guid,
+        vendorKey = this.model.get('vendor_offer').listing.id.pubkeys.guid,
+        modGuid = this.model.get('displayModerator')? this.model.get('displayModerator').guid : "",
+        modKey = this.model.get('displayModerator') ? this.model.get('displayModerator').pubkeys.guid : "";
 
     if(this.transactionType == "purchases"){
-      guid = this.model.get('vendor_offer').listing.id.guid;
-      rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
-      guid2 = this.model.get('displayModerator').guid;
-      rKey2 = this.model.get('displayModerator').pubkeys.guid;
+      guid = vendorGuid;
+      rKey = vendorKey;
+      guid2 = modGuid;
+      rKey2 = modKey;
     } else if(this.transactionType == "sales"){
-      guid = this.model.get('buyer_order').order.id.guid;
-      rKey = this.model.get('buyer_order').order.id.pubkeys.guid;
-      guid2 = this.model.get('displayModerator').guid;
-      rKey2 = this.model.get('displayModerator').pubkeys.guid;
+      guid = buyerGuid;
+      rKey = buyerKey;
+      guid2 = modGuid;
+      rKey2 = modKey;
     } else if(this.transactionType == "cases"){
-      guid = this.model.get('vendor_offer').listing.id.guid;
-      rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
-      guid2 = this.model.get('buyer_order').order.id.guid;
-      rKey2 = this.model.get('buyer_order').order.id.pubkeys.guid;
+      guid = vendorGuid;
+      rKey = vendorKey;
+      guid2 = buyerGuid;
+      rKey2 = buyerKey;
     }
-    this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
+
+    //is this a dispute?
+    if(this.status == 4 || this.$('#transactionStartDisputeCheckbox').prop("checked" || this.transactionType == "cases")){
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
+    } else {
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}]);
+    }
+
+
   },
 
   sendDiscussionMessage: function(messages){

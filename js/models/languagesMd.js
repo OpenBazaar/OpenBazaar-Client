@@ -328,8 +328,9 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:",
           DisputeTransaction: "Start a Dispute",
           sendMessagePlaceholder: "Type your message here.",
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
-          SendMessage: "Send"
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
+          SendMessage: "Send",
+          CloseDispute: "Close Dispute"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -793,7 +794,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -1255,7 +1256,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -1721,7 +1722,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -2187,7 +2188,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Frais de modération :",
           DisputeTransaction: "Initier un litige",
           sendMessagePlaceholder: "Écrivez ici votre message.",
-          DisputeInstructions: "Afin de déposer un litige pour cette transaction, écrivez ci-dessous la raison du litige, et cliquez sur le bouton Initier un litige. Cela amorcera une discussion entre vous, le vendeur, et le modérateur. Le modérateur prendra la décision finale quant à savoir si les fonds doivent vous être retournés, et combien. Les frais du modérateur seront payés avec les fonds que vous avez déjà envoyés.",
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Envoyer"
         },
         errorMessages: {
@@ -2650,7 +2651,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -3113,7 +3114,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -3575,7 +3576,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -4041,7 +4042,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -4506,7 +4507,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -4971,7 +4972,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -5437,7 +5438,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -5888,7 +5889,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
@@ -6353,7 +6354,7 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
           sendMessagePlaceholder: "Type your message here.", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and click the Start a Dispute button. This will begin a discussion between you, the seller, and the moderator. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", // not translated
+          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send" // not translated
         },
         errorMessages: {
