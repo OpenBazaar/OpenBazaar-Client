@@ -380,9 +380,12 @@ module.exports = baseVw.extend({
     var closeDisputeForm = this.$('#transationCloseDispute');
     if($(e.target).prop('checked')){
       closeDisputeForm.removeClass('hide');
-      this.percentToBTC(this.$('#transactionsBuyerPayoutPercent'), this.$('#transactionsBuyerPayoutBTC'), this.$('#transactionsSellerPayoutPercent'));
-      this.percentToBTC(this.$('#transactionsSellerPayoutPercent'), this.$('#transactionsSellerPayoutBTC'), this.$('#transactionsBuyerPayoutPercent'));
-
+      this.percentToBTC(
+          this.$('#transactionsBuyerPayoutPercent'),
+          this.$('#transactionsBuyerPayoutBTC'),
+          this.$('#transactionsSellerPayoutPercent'),
+          this.$('#transactionsSellerPayoutBTC')
+      );
     } else {
       closeDisputeForm.addClass('hide');
     }
@@ -429,22 +432,33 @@ module.exports = baseVw.extend({
   },
 
   updateBuyerBTC: function(e) {
-    this.percentToBTC(this.$(e.target), this.$('#transactionsBuyerPayoutBTC'), this.$('#transactionsSellerPayoutPercent'));
+    this.percentToBTC(this.$(e.target),
+        this.$('#transactionsBuyerPayoutBTC'),
+        this.$('#transactionsSellerPayoutPercent'),
+        this.$('#transactionsSellerPayoutBTC')
+    );
   },
 
   updateSellerBTC: function(e) {
-    this.percentToBTC(this.$(e.target), this.$('#transactionsSellerPayoutBTC'), this.$('#transactionsBuyerPayoutPercent'));
+    this.percentToBTC(this.$(e.target),
+        this.$('#transactionsSellerPayoutBTC'),
+        this.$('#transactionsBuyerPayoutPercent'),
+        this.$('#transactionsBuyerPayoutBTC')
+    );
   },
 
-  percentToBTC: function(targ1, targ2, targ3){
-    var updatedVal = targ1.val() * 0.01;
+  percentToBTC: function(targ1, targ2, targ3, targ4){
+    var updatedVal = targ1.val() * 0.01,
+        total = this.model.get('buyer_order').order.payment.amount,
+        adjustedTotal = total - total * this.moderatorPercentage;
 
     if(updatedVal > 1){
       updatedVal = 1;
       targ1.val(100);
     }
-    targ2.text(updatedVal * this.model.get('buyer_order').order.payment.amount);
+    targ2.text(updatedVal * adjustedTotal);
     targ3.val(100 - updatedVal * 100);
+    targ4.text(adjustedTotal - updatedVal * adjustedTotal);
   },
 
   closeOrderForm: function(e){
