@@ -325,7 +325,7 @@ module.exports = Backbone.View.extend({
         if (i < subImageDivs.length){
           $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
-          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
               .appendTo(self.$el.find('.js-editItemSubImagesWrapper'));
         }
       });
@@ -347,7 +347,7 @@ module.exports = Backbone.View.extend({
 
   deleteImage: function(e) {
     var imageUploadArray,
-        imgIndex = $(e.target).closest('.itemImg').data('index'),
+        imgIndex = $(e.target).closest('.itemImg').index('.js-editItemSubImage'),
         imageArray = __.clone(this.model.get("combinedImagesArray"));
 
     imageArray.splice(imgIndex, 1);
