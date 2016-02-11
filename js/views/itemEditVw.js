@@ -24,6 +24,8 @@ module.exports = Backbone.View.extend({
     'click .js-itemEditClearDate': 'clearDate'
   },
 
+  MAX_PHOTOS: 10,
+
   initialize: function(){
     var self=this,
         hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
@@ -59,7 +61,9 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      var context = __.extend({}, self.model.toJSON(), { MAX_PHOTOS: self.MAX_PHOTOS });
+
+      self.$el.html(loadedTemplate(context));
       self.setFormValues();
 
       // prevent the body from picking up drag actions
@@ -220,7 +224,8 @@ module.exports = Backbone.View.extend({
   resizeImage: function(){
     "use strict";
     var self = this,
-        imageFiles = this.$el.find('.js-itemImageUpload')[0].files,
+        $imageInput = this.$el.find('.js-itemImageUpload'),
+        imageFiles = $imageInput[0].files,
         maxH = 357,
         maxW = 357,
         imageList = [],
@@ -327,6 +332,16 @@ module.exports = Backbone.View.extend({
       uploadMsg.addClass('hide');
     } else {
       uploadMsg.removeClass('hide');
+    }
+
+    if (imageArray.length >= this.MAX_PHOTOS) {
+      $('.js-itemImageUpload').prop('disabled', true)
+        .siblings('.btn')
+        .addClass('disabled');
+    } else {
+      $('.js-itemImageUpload').prop('disabled', false)
+        .siblings('.btn')
+        .removeClass('disabled');
     }
   },
 

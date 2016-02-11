@@ -17,11 +17,11 @@
       <div class="flexRow custCol-secondary border0 height50">
         <label for="itemImageUploadMain" class="fieldItem width100">
           <h5 class="floatLeft"><%= polyglot.t('Photos') %></h5>
-          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1 margin0 marginTopNeg8">
+          <span class="btn btn-c1 btn-txt rowTop20 pull-right custCol-primary textOpacity1 margin0 marginTopNeg8 <%= ob.combinedImagesArray.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>">
             <span class="ion-images fontSize11 marginRight2 textOpacity75"></span>
             <%= polyglot.t('SelectPhotos') %>
           </span>
-          <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple>
+          <input type="file" name="image" id="itemImageUploadMain" accept="image/*" class="hide js-itemImageUpload" multiple <%= ob.combinedImagesArray.length >= ob.MAX_PHOTOS ? 'disabled' : '' %>>
         </label>
       </div>
       <div class="flexRow js-editItemSubImagesWrapper editItemImageHolder">
