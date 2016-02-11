@@ -376,6 +376,15 @@ form {
   padding: 0;
 }
 
+.flexRow.noFlexWrap {
+  /* temporary until all the flexRows with wrap are fixed */
+  flex-wrap: nowrap;
+}
+
+.flexSizeFixed {
+  flex-shrink: 0;
+}
+
 .flexRow-center {
   justify-content: center;
 }
@@ -774,6 +783,8 @@ label.fieldItem {
   background-repeat: no-repeat;
   border-radius: 2px;
   position: relative;
+  flex-basis: auto;
+  flex-shrink: 0;
 }
 
 .thumbnail-large {
