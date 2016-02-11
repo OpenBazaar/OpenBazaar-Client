@@ -524,11 +524,7 @@
               <div class="flexCol-12 borderRight custCol-border">
                 <div class="fieldItem fontSize11">
                   <%= polyglot.t('transactions.TotalInTransaction') %>
-                  <% if(ob.displayTotalPrice){ %>
-                  <strong><span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
-                  <% } else if(ob.buyer_order.order.payment.amount){ %>
-                  <strong><%- ob.buyer_order.order.payment.amount %> BTC</strong>
-                  <% } %>
+                  <strong><%= ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC</strong>
                   <div class="pull-right">
                     You earn: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
                   </div>
@@ -542,23 +538,43 @@
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
                   <input type="number"
+                         name="buyer_percentage"
                          id="transactionsBuyerPayoutPercent"
                          max="100" min="0" step="0.1"
-                         class="box-borderBright"
-                         style="width: 50px">%
+                         class=""
+                         style="width: 50px"
+                         value="50">%
                 </span>
-                <input type="number"
-                       id="transactionsBuyerPayoutBTC"
-                       max="<%- ob.buyer_order.order.payment.amount %>" min="0" step="0.0001"
-                       class="box-borderBright"
-                       style="width: 220px">
+                <span id="transactionsBuyerPayoutBTC" class=""></span>
               </div>
             </div>
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">Seller Amount:</div>
               </div>
-              <div class="flexCol-8 borderRight custCol-border">
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <span class="marginRight10">
+                  <input type="number"
+                         name="vendor_percentage"
+                         id="transactionsSellerPayoutPercent"
+                         max="100" min="0" step="0.1"
+                         class=""
+                         style="width: 50px"
+                         value="50">%
+                </span>
+                <span id="transactionsSellerPayoutBTC" class=""></span>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">Your Bitcoin Payment Address:</div>
+              </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <input name="moderator_address"
+                       type="text"
+                       placeholder="<%= polyglot.t('Address') %>"
+                       class="fieldItem"
+                       pattern="<%- ob.bitcoinValidationRegex %>">
               </div>
             </div>
           </div>

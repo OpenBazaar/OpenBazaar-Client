@@ -38,10 +38,8 @@ module.exports = baseVw.extend({
     'click .js-startDispute': 'startDispute',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
-    'click #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
-    'keyup #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
-    'click #transactionsBuyerPayoutBTC': 'updateBuyerPercentage',
-    'keyup #transactionsBuyerPayoutBTC': 'updateBuyerPercentage',
+    'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
+    'change #transactionsSellerPayoutPercent': 'updateSellerBTC',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -127,6 +125,7 @@ module.exports = baseVw.extend({
       }
       self.getDiscussion();
       self.discussionScroller = self.$('.js-discussionScroller');
+      self.moderatorPercentage = self.model.get('displayModerator').feeDecimal;
     });
   },
 
@@ -381,6 +380,9 @@ module.exports = baseVw.extend({
     var closeDisputeForm = this.$('#transationCloseDispute');
     if($(e.target).prop('checked')){
       closeDisputeForm.removeClass('hide');
+      this.percentToBTC(this.$('#transactionsBuyerPayoutPercent'), this.$('#transactionsBuyerPayoutBTC'), this.$('#transactionsSellerPayoutPercent'));
+      this.percentToBTC(this.$('#transactionsSellerPayoutPercent'), this.$('#transactionsSellerPayoutBTC'), this.$('#transactionsBuyerPayoutPercent'));
+
     } else {
       closeDisputeForm.addClass('hide');
     }
@@ -416,6 +418,8 @@ module.exports = baseVw.extend({
         discussionData = {};
 
     discussionData.order_id = this.orderID;
+    discussionData.resolution = this.$('#transactionDiscussionSendText').val();
+    discussionData.moderator_percentage = this.moderatorPercentage;
 
     saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
       self.status = 4;
@@ -424,15 +428,23 @@ module.exports = baseVw.extend({
     }, '', discussionData);
   },
 
-  updateBuyerBTC: function(e){
-    var updatedVal = this.$(e.target).val() * 0.01;
-    this.$('#transactionsBuyerPayoutBTC').val(updatedVal * this.model.get('buyer_order').order.payment.amount);
+  updateBuyerBTC: function(e) {
+    this.percentToBTC(this.$(e.target), this.$('#transactionsBuyerPayoutBTC'), this.$('#transactionsSellerPayoutPercent'));
   },
 
-  updateBuyerPercentage: function(e){
-    var updatedVal = this.$(e.target).val();
-    console.log((updatedVal / this.model.get('buyer_order').order.payment.amount).toFixed(1));
-    this.$('#transactionsBuyerPayoutPercentage').val((updatedVal / this.model.get('buyer_order').order.payment.amount).toFixed(1));
+  updateSellerBTC: function(e) {
+    this.percentToBTC(this.$(e.target), this.$('#transactionsSellerPayoutBTC'), this.$('#transactionsBuyerPayoutPercent'));
+  },
+
+  percentToBTC: function(targ1, targ2, targ3){
+    var updatedVal = targ1.val() * 0.01;
+
+    if(updatedVal > 1){
+      updatedVal = 1;
+      targ1.val(100);
+    }
+    targ2.text(updatedVal * this.model.get('buyer_order').order.payment.amount);
+    targ3.val(100 - updatedVal * 100);
   },
 
   closeOrderForm: function(e){

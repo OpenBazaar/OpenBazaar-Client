@@ -2483,7 +2483,8 @@ input[type="number"].fieldItem {
 }
 
 input[type="number"].fieldItem::-webkit-outer-spin-button,
-input[type="number"].fieldItem::-webkit-inner-spin-button {
+input[type="number"].fieldItem::-webkit-inner-spin-button,
+.noNumberSpinner {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
