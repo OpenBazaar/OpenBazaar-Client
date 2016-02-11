@@ -75,13 +75,11 @@
       <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Funds') %>
     </a>
-    <% if( ob.displayModerator) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-discussionTab paddingRight18" data-tab="discussion">
       <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Discussion') %>
       <span class="pill fontSize12 textOpacity75 marginLeft2 js-discussionCount">0</span>
     </a>
-    <% } %>
   </div>
 
   <div class="js-main js-summary">
@@ -255,7 +253,7 @@
       </div>
       <div class="flexCol-5">
         <% if(ob.displayTotalPrice){ %>
-        <strong><%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+        <strong><span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
         <% } else if(ob.buyer_order.order.payment.amount){ %>
         <strong><%- ob.buyer_order.order.payment.amount %> BTC</strong>
         <% } else { %>
@@ -348,7 +346,7 @@
             <% } else { %>
               <%= polyglot.t('transactions.DirectTransaction') %>:
               <% if(ob.displayTotalPrice){ %>
-              <strong><%- ob.displayTotalPrice %> <span class="noWrap">(<%- ob.buyer_order.order.payment.amount %> BTC)</span></strong>
+              <strong><span class="noWrap"><%- ob.buyer_order.order.payment.amount %> BTC</span> (<%- ob.displayTotalPrice %>)</strong>
               <% } else if(ob.buyer_order.order.payment.amount){ %>
               <strong><%- ob.buyer_order.order.payment.amount %> BTC</strong>
               <% } else { %>
@@ -456,7 +454,7 @@
         </div>
         <div class="flexCol-4 custCol-border">
           <% if(ob.status == 1 || ob.status == 2 || ob.status == 3){ %>
-          <% if(ob.transactionType == "purchases"){ %>
+          <% if(ob.transactionType == "purchases" && ob.displayModerator){ %>
           <div class="rowItem padding2015">
             <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
               <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
@@ -474,21 +472,10 @@
   <div class="js-main js-discussion">
     <div class="flexRow scrollOverflowY js-discussionScroller" style="height: 225px;">
       <div class="flexRow js-discussionWrapper">
-        <% if(ob.transactionType == "purchases" || ob.status > 1){ %>
-        <div class="padding10 flexExpand js-discussionNotStarted">
-          <p><%= polyglot.t('transactions.DisputeInstructions') %></p>
-        </div>
-        <% } %>
       </div>
     </div>
-    <div class="flexRow padding10 width100 positionBottom custCol-secondary box-borderbright js-discussionForm
-            <% if(ob.transactionType != 'purchases' && ob.status < 2){ %>
-              <% if(ob.transactionType == 'case' && ob.status != 4){ %>
-              disabled
-              <% } %>
-            <% } %>
-            ">
-      <div class="pad10right">
+    <div class="flexRow pad10Top width100 positionBottom custCol-secondary box-borderbright js-discussionForm">
+      <div class="pad10">
         <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 borderRadiusBottom0"
         <% if(ob.avatarURL) { %>
         style="background-image: url(<%- ob.avatarURL %>), url(imgs/offlineUser.png);">
@@ -505,14 +492,94 @@
                   required
                   placeholder="<%= polyglot.t('transactions.sendMessagePlaceholder') %>"></textarea>
       </form>
-      <div class="pad10left">
-        <a class="btn btn-txt custCol-primary pull-right js-confirmDispute js-discussionNotStarted">
-          <%= polyglot.t('transactions.DisputeTransaction') %>
-        </a>
-        <a class="btn btn-txt custCol-primary pull-right js-sendDiscussionMessage js-discussionStarted hide">
+      <div class="pad10" style="width:140px">
+        <a class="btn btn-txt btn-wide custCol-primary pull-right js-sendDiscussionMessage">
           <%= polyglot.t('transactions.SendMessage') %>
         </a>
+        <% if(ob.transactionType == "cases"){ %>
+        <div class="">
+          <input type="checkbox" class="fieldItem"
+                 id="transactionsCloseDisputeCheckbox" >
+          <label for="transactionsCloseDisputeCheckbox" class="fontSize10 clickable">
+            <%= polyglot.t('transactions.CloseDispute') %>
+          </label>
+        </div>
+        <% } else if(ob.status != 4 && ob.displayModerator) { %>
+        <div class="js-startDisputeFlag">
+          <input type="checkbox" class="fieldItem"
+                 id="transactionStartDisputeCheckbox" >
+          <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable">
+            <%= polyglot.t('transactions.DisputeTransaction') %>
+            <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box"
+               data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
+          </label>
+        </div>
+        <% } %>
       </div>
+
+      <form class="width100 hide" id="transationCloseDispute">
+        <div class="flexCol-12 flex-border custCol-border">
+          <div class="flexRow">
+            <div class="flexRow">
+              <div class="flexCol-12 borderRight custCol-border">
+                <div class="fieldItem fontSize11">
+                  <%= polyglot.t('transactions.TotalInTransaction') %>
+                  <strong><%= ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC</strong>
+                  <div class="pull-right">
+                    You earn: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">Buyer Amount:</div>
+              </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <span class="marginRight10">
+                  <input type="number"
+                         name="buyer_percentage"
+                         id="transactionsBuyerPayoutPercent"
+                         max="100" min="0" step="0.1"
+                         class=""
+                         style="width: 50px"
+                         value="50">%
+                </span>
+                <span id="transactionsBuyerPayoutBTC" class=""></span>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">Seller Amount:</div>
+              </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <span class="marginRight10">
+                  <input type="number"
+                         name="vendor_percentage"
+                         id="transactionsSellerPayoutPercent"
+                         max="100" min="0" step="0.1"
+                         class=""
+                         style="width: 50px"
+                         value="50">%
+                </span>
+                <span id="transactionsSellerPayoutBTC" class=""></span>
+              </div>
+            </div>
+            <div class="flexRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">Your Bitcoin Payment Address:</div>
+              </div>
+              <div class="flexCol-8 borderRight custCol-border padding10">
+                <input name="moderator_address"
+                       type="text"
+                       placeholder="<%= polyglot.t('Address') %>"
+                       class="fieldItem"
+                       pattern="<%- ob.bitcoinValidationRegex %>">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
