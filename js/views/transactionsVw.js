@@ -60,6 +60,7 @@ module.exports = baseVw.extend({
     this.salesWrapper = $(wrapper);
     this.casesWrapper = $(wrapper);
 
+    this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
 
     $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
@@ -107,8 +108,13 @@ module.exports = baseVw.extend({
         }
       }
     });
+  },
 
-
+  handleSocketMessage: function(response) {
+    var data = JSON.parse(response.data);
+    if(data.notification && data.notification.order_id){
+      this.getData();
+    }
   },
 
   setSearchList: function(targetID){

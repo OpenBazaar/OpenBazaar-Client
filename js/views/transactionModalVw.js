@@ -408,8 +408,9 @@ module.exports = baseVw.extend({
     discussionData.order_id = this.orderID;
 
     saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
-      self.status = 3;
+      self.status = 4;
       self.tabState = "discussion";
+      self.$('.js-startDisputeFlag').addClass('hide');
       self.getData();
     }, '', discussionData);
   },
