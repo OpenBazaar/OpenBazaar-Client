@@ -557,7 +557,7 @@ form {
   border-radius: 1px;
 }
 
-.itemImg.itemImg-small:nth-child(4) {
+.itemImg.itemImg-small:nth-child(4):not('.js-editItemSubImage') {
   margin-right: 0;
 }
 .itemImg.itemImg-small:nth-child(4):before {

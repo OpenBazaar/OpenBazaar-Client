@@ -36,7 +36,7 @@
         </div>
         <% }); %>
       </div>
-      <label for="itemImageUploadMain" class="textSize14px editItemImageLoadPhotoMessage js-itemEditLoadPhotoMessage">
+      <label for="itemImageUploadMain" class="textSize14px editItemImageLoadPhotoMessage js-itemEditLoadPhotoMessage <%= ob.combinedImagesArray.length ? 'hide' : '' %>">
         <span class="fullCentered"><%= polyglot.t('NoPhotosAdded') %></span>
       </label>
       <!--<div class="textOpacity50">Drag photos here or click button above.</div>-->
