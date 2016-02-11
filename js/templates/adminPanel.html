@@ -30,10 +30,15 @@
                 <div class="js-adminServerMsg"></div>
               </div>
             </div>
-            <div class="flexCol-8">
+            <div class="flexCol-8 positionWrapper">
+              <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
+              <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-12">
               <div class="fieldItem">
-                <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
-                <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+                <a class="btn btn-txt pull-right js-adminUpdateProfile">Change Profile</a>
               </div>
             </div>
           </div>

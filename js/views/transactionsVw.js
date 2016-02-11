@@ -88,24 +88,41 @@ module.exports = baseVw.extend({
         //self.renderPurchases();
         self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
         self.setSearchList('transactionsPurchases');
-        if(self.model.get('page').vendor){
-          self.salesCol.fetch({
-            success: function(models){
-              //self.renderSales();
+        self.salesCol.fetch({
+          success: function(models){
+            if(self.model.get('page').vendor) {
               self.renderTab("sales", self.salesCol, self.salesWrapper);
               self.setSearchList('transactionsSales');
-              if(self.model.get('page').moderator){
-                self.casesCol.fetch({
-                  success: function(models) {
-                    //self.renderCases();
-                    self.renderTab("cases", self.casesCol, self.casesWrapper);
-                    self.setSearchList('transactionsCases');
-                  }
-                });
-              }
             }
-          });
-        }
+            if(self.model.get('page').moderator){
+              self.casesCol.fetch({
+                success: function(models) {
+                  //self.renderCases();
+                  self.renderTab("cases", self.casesCol, self.casesWrapper);
+                  self.setSearchList('transactionsCases');
+                },
+                error: function(jqXHR, status, errorThrown){
+                  messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+                  console.log(jqXHR);
+                  console.log(status);
+                  console.log(errorThrown);
+                }
+              });
+            }
+          },
+          error: function(jqXHR, status, errorThrown){
+            messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+            console.log(jqXHR);
+            console.log(status);
+            console.log(errorThrown);
+          }
+        });
+      },
+      error: function(jqXHR, status, errorThrown){
+        messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
       }
     });
   },
