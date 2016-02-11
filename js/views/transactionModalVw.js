@@ -131,7 +131,6 @@ module.exports = baseVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    console.log(data)
     if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
       this.status = 1;
       this.getData();

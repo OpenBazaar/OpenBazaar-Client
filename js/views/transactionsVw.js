@@ -228,7 +228,6 @@ module.exports = baseVw.extend({
     if(options.status == "open"){
       options.status = 4;
     }
-    console.log(options.status)
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
