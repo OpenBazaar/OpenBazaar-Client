@@ -14,7 +14,7 @@
         <div class="thumbnail custcol-border marginRight2"
              style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px">
         </div>
-        <% if(ob.sender == ob.moderatorGuid){ %>
+        <% if(ob.sender == ob.moderatorGuid || ob.guid == ob.moderatorGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
         </div>
