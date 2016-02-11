@@ -3,11 +3,12 @@ var __ = require('underscore'),
   $ = require('jquery'),
   colorbox = require('jquery-colorbox'),
   loadTemplate = require('../utils/loadTemplate'),
-  sanitizeHTML = require('sanitize-html'),
-  buyWizardVw = require('./buyWizardVw');
-  Backbone.$ = $;
+  sanitizeHTML = require('sanitize-html')
+  baseVw = require('./baseVw'),
+  buyWizardVw = require('./buyWizardVw'),
+  ReviewsVw = require('./reviewsVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   events: {
     'click .js-descriptionTab': 'descriptionClick',
@@ -43,6 +44,11 @@ module.exports = Backbone.View.extend({
       });
 
       self.$('.js-listingDescription').html(description);
+
+      self.reviewsVw && self.reviewsVw.remove();
+      self.reviewsVw = new ReviewsVw({ collection: new Backbone.Collection() });
+      self.registerChild(self.reviewsVw);
+      self.$('.js-reviews').html(self.reviewsVw.render().el);
     });
 
     return this;
@@ -103,23 +109,7 @@ module.exports = Backbone.View.extend({
     $('#obContainer').addClass('overflowHidden').addClass('blur');  
   },
 
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');  
-    this.model.off();
-    this.off();
-    this.remove();
+  remove: function() {
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
   }
 });
