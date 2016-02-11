@@ -232,7 +232,8 @@ module.exports = baseVw.extend({
           self.getData();
         },
         function(data){
-          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+          self.$el.find('.js-transactionSpinner').addClass('hide');
+          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
         completeData);
   },
