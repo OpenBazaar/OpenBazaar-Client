@@ -15,11 +15,6 @@ function Socket(url) {
 Socket.prototype.connect = function(url) {
   var self = this;
 
-  // if already connected, do nothing
-  if (url === this.url && this._socket && this._socket.readyState <= 1) {
-    return;
-  }
-
   this.url = url || this.url;
 
   if (this._socket) {
