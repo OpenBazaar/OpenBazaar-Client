@@ -424,11 +424,15 @@ module.exports = baseVw.extend({
     discussionData.resolution = this.$('#transactionDiscussionSendText').val();
     discussionData.moderator_percentage = this.moderatorPercentage;
 
-    saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
-      self.status = 4;
-      self.tabState = "discussion";
-      self.getData();
-    }, '', discussionData);
+    if(discussionData.resolution != ""){
+      saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
+        self.status = 4;
+        self.tabState = "discussion";
+        self.getData();
+      }, '', discussionData);
+    } else {
+      messageModal.show(window.polyglot.t('errorMessages.missingError'));
+    }
   },
 
   updateBuyerBTC: function(e) {
