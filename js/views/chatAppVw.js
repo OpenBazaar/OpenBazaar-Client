@@ -410,7 +410,7 @@ module.exports = Backbone.View.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.hasOwnProperty('message') && data.message.message_type == "CHAT" && data.message.subject=="") {
+    if(data.hasOwnProperty('message') && data.message.message_type == "CHAT") {
       var chat_message = data.message,
           username = "",
           avatar = "";

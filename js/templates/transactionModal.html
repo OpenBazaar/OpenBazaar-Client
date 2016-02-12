@@ -65,12 +65,10 @@
       <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Summary') %>
     </a>
-    <% if(ob.vendor_order_confirmation) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-shippingTab" data-tab="shipping">
       <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Shipping') %>
     </a>
-    <% } %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-fundsTab" data-tab="funds">
       <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Funds') %>
@@ -538,10 +536,8 @@
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
                   <input type="number"
-                         name="buyer_percentage"
                          id="transactionsBuyerPayoutPercent"
                          max="100" min="0" step="0.1"
-                         class=""
                          style="width: 50px"
                          value="50">%
                 </span>
@@ -555,10 +551,8 @@
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
                   <input type="number"
-                         name="vendor_percentage"
                          id="transactionsSellerPayoutPercent"
                          max="100" min="0" step="0.1"
-                         class=""
                          style="width: 50px"
                          value="50">%
                 </span>

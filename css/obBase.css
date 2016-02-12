@@ -566,10 +566,10 @@ form {
   border-radius: 1px;
 }
 
-.itemImg.itemImg-small:nth-child(4) {
+.itemImg.itemImg-small:nth-child(4):not('.js-editItemSubImage') {
   margin-right: 0;
 }
-.itemImg.itemImg-small:nth-child(4):before {
+.itemImg.itemImg-small:nth-child(4):before:not('.js-editItemSubImage') {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -2550,8 +2550,9 @@ input[type="text"].fieldItem:focus,
 input[type="number"].fieldItem:focus,
 input[type="email"].fieldItem:focus,
 input[type="url"].fieldItem:focus,
+input[type="password"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
-  border: 2px solid #277FAF;
+  border: 2px solid #fff;
   transition: border 0.3s;
 }
 
@@ -3446,7 +3447,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   bottom: 0px;
   top: 180px;
   color: #fff;
-  font-size: 24px;
+  font-size: 20px;
+  line-height: 22px;
   width: 70%;
   margin: 0 15%;
   text-align: center;
@@ -3681,7 +3683,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .tooltip:hover:after{
   max-width: 400px;
-  background: rgba(37,37,37,.85);
+  background: rgba(37,37,37,.95);
   border-radius: 3px;
   bottom: -32px;
   color: #fff;
