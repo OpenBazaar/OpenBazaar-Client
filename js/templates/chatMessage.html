@@ -14,15 +14,15 @@
         <div class="thumbnail custcol-border marginRight2"
              style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px">
         </div>
-        <% if(ob.guid == ob.moderatorGuid){ %>
+        <% if(ob.guid == ob.moderatorGuid || ob.sender && ob.sender == ob.moderatorGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
         </div>
-        <% } else if(ob.guid == ob.vendorGuid){ %>
+        <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == vendorGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Seller') %>)</div>
         </div>
-        <% } else if(ob.guid == ob.buyerGuid){ %>
+        <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == buyerGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Buyer') %>)</div>
         </div>
