@@ -55,7 +55,6 @@ module.exports = baseModal.extend({
       .set( __.result(this.model, 'defaults', {}) );
     this.model.validationError = {};
     this.render();
-    this.start();
   },
 
   setState: function(state) {
