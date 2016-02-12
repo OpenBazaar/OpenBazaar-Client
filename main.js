@@ -16,6 +16,7 @@ var autoUpdater = require('auto-updater');
 var menu = require('menu');
 var tray = require('tray');
 var ipcMain = require('ipc-main');
+var ini = require('ini');
 
 var launched_from_installer = false;
 var platform = os.platform();
@@ -289,7 +290,7 @@ app.on('ready', function() {
     {type: 'separator'},
     {label: 'View Debug Log', type: 'normal', click: function() {
       // Open Debug Log Wherever It Is
-
+      find_debug_log();
     }},
     {type: 'separator'},
     {
@@ -298,6 +299,19 @@ app.on('ready', function() {
     }
     }
   ]);
+
+  function find_debug_log() {
+    var filename = "../OpenBazaar-Server/ob.cfg";
+    var config = ini.parse(fs.readFileSync(filename, 'utf-8'));
+    if(config.CONSTANTS.DATA_FOLDER) {
+      console.log('Using DATA_FOLDER: ' + config.CONSTANTS.DATA_FOLDER);
+      require('child_process').exec(config.CONSTANTS.DATA_FOLDER + '/debug.log');
+    } else {
+      console.log('Using default DATA_FOLDER location');
+      var home_folder = process.env.HOME || process.env.USERPROFILE;
+      require('child_process').exec(home_folder + '/OpenBazaar/debug.log');
+    }
+  }
 
   trayMenu.setContextMenu(contextMenu);
 
@@ -345,7 +359,7 @@ app.on('ready', function() {
   });
 
   autoUpdater.on("update-not-available", function(msg) {
-    // Nothing to do here
+    mainWindow.webContents.executeJavaScript("console.log('Update not available! Your software is up to date.')");
   });
 
   autoUpdater.on("update-available", function() {
@@ -354,10 +368,9 @@ app.on('ready', function() {
 
   autoUpdater.on("update-downloaded", function(e, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
     mainWindow.webContents.executeJavaScript("console.log('Update downloaded." + updateUrl + "')");
-    if(platform == "mac") {
       mainWindow.webContents.executeJavaScript('$(".js-statusBarMessage").html("Would you like to update OpenBazaar? <span class=\\"clickable js-navInstallUpdate\\">Restart</span> to update.");');
       mainWindow.webContents.executeJavaScript('$(".js-statusBarMessage").parent().removeClass("fadeOut");');
-    }
+
   });
 
   ipcMain.on('installUpdate', function(event) {
