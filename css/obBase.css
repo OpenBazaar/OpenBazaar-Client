@@ -2505,8 +2505,9 @@ input[type="text"].fieldItem:focus,
 input[type="number"].fieldItem:focus,
 input[type="email"].fieldItem:focus,
 input[type="url"].fieldItem:focus,
+input[type="password"].fieldItem:focus,
 input[type="datetime-local"].fieldItem:focus {
-  border: 2px solid #277FAF;
+  border: 2px solid #fff;
   transition: border 0.3s;
 }
 
@@ -3401,7 +3402,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   bottom: 0px;
   top: 180px;
   color: #fff;
-  font-size: 24px;
+  font-size: 20px;
+  line-height: 22px;
   width: 70%;
   margin: 0 15%;
   text-align: center;
