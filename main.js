@@ -306,7 +306,7 @@ app.on('ready', function() {
     } else {
       console.log('Using default DATA_FOLDER location');
       var home_folder = process.env.HOME || process.env.USERPROFILE;
-      require('child_process').exec(home_folder + '/debug.log');
+      require('child_process').exec(home_folder + '/OpenBazaar/debug.log');
     }
   }
 
