@@ -273,6 +273,7 @@ module.exports = window.Backbone.Model.extend({
         return moderator.guid == response.buyer_order.order.moderator;
       });
       response.displayModerator = matchedModerator[0];
+      response.displayModerator.feeDecimal = response.displayModerator.fee.replace("%","") * 0.01;
     } else {
       response.displayModerator = "";
     }

@@ -182,7 +182,6 @@ form {
 }
 
 
-
 /*========== structure classes ==========*/
 
 #content {
@@ -375,6 +374,15 @@ form {
   width: 100%;
   /* reset styles if applied to a list item */
   padding: 0;
+}
+
+.flexRow.noFlexWrap {
+  /* temporary until all the flexRows with wrap are fixed */
+  flex-wrap: nowrap;
+}
+
+.flexSizeFixed {
+  flex-shrink: 0;
 }
 
 .flexRow-center {
@@ -775,6 +783,8 @@ label.fieldItem {
   background-repeat: no-repeat;
   border-radius: 2px;
   position: relative;
+  flex-basis: auto;
+  flex-shrink: 0;
 }
 
 .thumbnail-large {
@@ -974,7 +984,9 @@ label.fieldItem {
   visibility: hidden;
 }
 
-
+.list-style-none {
+  list-style-type: none;
+}
 
 .clickable {
   cursor: pointer;
@@ -1330,6 +1342,12 @@ h5 {
   position: relative;
   width: 525px;
 }
+
+/*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
+.modal-hero.bg-dark-blue {
+  background: #063753;
+}
+
 .modal-hero-about {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
@@ -2433,6 +2451,7 @@ input[type="number"].fieldItem,
 input[type="email"].fieldItem,
 input[type="file"].fieldItem,
 input[type="url"].fieldItem,
+input[type="password"].fieldItem,
 input[type="datetime-local"].fieldItem {
   background: none;
   border: 2px solid transparent;
@@ -2475,7 +2494,8 @@ input[type="number"].fieldItem {
 }
 
 input[type="number"].fieldItem::-webkit-outer-spin-button,
-input[type="number"].fieldItem::-webkit-inner-spin-button {
+input[type="number"].fieldItem::-webkit-inner-spin-button,
+.noNumberSpinner {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
@@ -2495,6 +2515,7 @@ input[type="datetime-local"].fieldItem:focus {
 }
 
 /* add formChecked class after form has been checked for validity */
+.invalid,
 .formChecked input[type="text"].fieldItem:invalid,
 .formChecked input[type="email"].fieldItem:invalid,
 .formChecked input[type="url"].fieldItem:invalid,
@@ -2817,7 +2838,7 @@ input[type="checkbox"].fieldItem + label {
   cursor: pointer;
   position: relative;
   line-height: 53px;
-  padding: 0 20px 0 40px;
+  padding: 0 10px 0 34px;
 }
 
 input[type="checkbox"].fieldItem + label:before {
@@ -2826,7 +2847,7 @@ input[type="checkbox"].fieldItem + label:before {
   font-family: Ionicons;
   position: absolute;
   left: 10px;
-  top: 3px;
+  top: 0;
   font-size: 18px;
   width: 15px;
   text-align: center;
@@ -3058,7 +3079,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   overflow: hidden;
 }
 
-.popMenu-navBar-opened {
+.popMenu-navbar-opened {
   animation: menuSlide .12s normal linear;
   top: 50px;
 }
@@ -3375,13 +3396,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 /*========== one-off classes ==========*/
 
-.modal .homeModal-hero {
-  background: #063753;
-}
-
 .modal .homeModal-heroText {
   position: absolute;
-  bottom: 40px;
+  bottom: 0px;
+  top: 180px;
   color: #fff;
   font-size: 24px;
   width: 70%;
@@ -3631,12 +3649,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   line-height: 16px;
   opacity: 1;
-  white-space: nowrap;
 }
 
-.tooltip.tooltip-right:hover:after{
+.tooltip.tooltip-left:hover:after{
   left: auto;
   right: 0;
+}
+
+.tooltip.tooltip-leftTop:hover:after{
+  left: auto;
+  right: 0;
+  bottom: 18px;
+}
+
+.tooltip.tooltip-box:hover:after {
+  height: auto;
+  width: 400px;
 }
 
 .btn-notifications.tooltip:hover:after{
@@ -3993,6 +4021,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .scrollOverflowY {
   overflow-y: scroll;
 }
+
+#ov1 .scrollOverflowYHideX {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 
 #ov1 .vCentered {
   /* must be inside a relatively positioned containing element */
@@ -4979,6 +5013,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .alignCenter {
   text-align: center;
+}
+
+#ov1 .heightAuto {
+  height: auto;
 }
 
 /* terrible hack, TODO: remove before production */

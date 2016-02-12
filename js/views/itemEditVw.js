@@ -338,11 +338,12 @@ module.exports = Backbone.View.extend({
   saveChanges: function(){
     var self = this,
         formData,
-        deleteThisItem,
+        //deleteThisItem,
         cCode = this.model.get('userCurrencyCode'),
         submitForm = this.$el.find('#contractForm')[0],
         keywordsArray = this.inputKeyword.getTagValues();
 
+    /*
     deleteThisItem = function(newHash){
       $.ajax({
           type: "DELETE",
@@ -357,6 +358,7 @@ module.exports = Backbone.View.extend({
           }
       });
     };
+    */
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
@@ -399,6 +401,11 @@ module.exports = Backbone.View.extend({
       formData.append('delete_images', false);
     }
 
+    //if this is an existing item, pass in the contract id
+    if(self.model.get('vendor_offer').listing.contract_id){
+      formData.append('contract_id', self.model.get('vendor_offer').listing.contract_id);
+    }
+
     //if condition is disabled, insert default value
     if($('#inputCondition:disabled').length > 0){
       formData.append('condition', 'New');
@@ -420,8 +427,9 @@ module.exports = Backbone.View.extend({
         processData: false,
         data: formData,
         success: function (data) {
-          var returnedId = self.model.get('id');
+          //var returnedId = self.model.get('id');
           data = JSON.parse(data);
+          /*
           //if the itemEdit model has an id, it was cloned from an existing item
           //if the id returned is the same, an edit was made with no changes, don't delete it
           if (returnedId && data.success === true && returnedId != data.id){
@@ -430,7 +438,13 @@ module.exports = Backbone.View.extend({
             messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
           }else{
             //item is new or unchanged
+            */
+            //self.trigger('saveNewDone', data.id);
+          //}
+          if (data.success === true) {
             self.trigger('saveNewDone', data.id);
+          } else {
+            messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
           }
         },
         error: function (jqXHR, status, errorThrown) {
