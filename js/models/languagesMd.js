@@ -321,7 +321,7 @@ module.exports = Backbone.Model.extend({
           OverallRating: "Overall Rating",
           Quality: "Quality",
           Description: "Description",
-          DeliveryTime: "DeliveryTime",
+          DeliveryTime: "Delivery Time",
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
@@ -790,12 +790,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -1261,12 +1262,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -1736,12 +1738,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -2210,13 +2213,14 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "Par date, les plus récentes",
           sortByDateOldest: "Par date, les plus anciennes",
           PayPurchase: "Payer cet achat",
-          CompleteOrder: "Compléter cette commande",
+          CompleteOrder: "Terminer cette commande",
+          MarkAsShipped: "Marquer comme expédié",
           RateThisTransaction: "Noter cette transaction",
           TransactionReview: "Avis de transaction",
           OverallRating: "Note générale",
           Quality: "Qualité",
           Description: "Description",
-          DeliveryTime: "Heure de livraison",
+          DeliveryTime: "Temps de livraison",
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
@@ -2684,12 +2688,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -3155,12 +3160,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -3626,12 +3632,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -4101,12 +4108,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -4575,12 +4583,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -5049,12 +5058,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -5524,12 +5534,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -5984,12 +5995,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -6458,6 +6470,7 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "Od najstarszych",
           PayPurchase: "Zapłać",
           CompleteOrder: "Sfinalizuj zamówienie",
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Oceń transakcję",
           TransactionReview: "Opinia o transakcji",
           OverallRating: "Średnia ocen",
