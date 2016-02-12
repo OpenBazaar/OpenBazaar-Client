@@ -2165,7 +2165,7 @@ div.chatSearchOut .chatSearchIcon {
 .softwareUpdate {
   position: fixed;
   left: 0;
-  bottom: 15px;
+  bottom: 20px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   width: 300px;
