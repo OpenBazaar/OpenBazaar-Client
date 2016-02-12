@@ -18,11 +18,11 @@
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
         </div>
-        <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == vendorGuid){ %>
+        <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == ob.vendorGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Seller') %>)</div>
         </div>
-        <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == buyerGuid){ %>
+        <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == ob.buyerGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Buyer') %>)</div>
         </div>
