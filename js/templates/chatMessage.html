@@ -14,15 +14,15 @@
         <div class="thumbnail custcol-border marginRight2"
              style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 30px; width: 30px">
         </div>
-        <% if(ob.sender == ob.moderatorGuid || ob.guid == ob.moderatorGuid){ %>
+        <% if(ob.guid == ob.moderatorGuid || ob.sender && ob.sender == ob.moderatorGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
         </div>
-        <% } else if(ob.transactionType == "purchases"){ %>
+        <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == ob.vendorGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Seller') %>)</div>
         </div>
-        <% } else if(ob.transactionType == "sales"){ %>
+        <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == ob.buyerGuid){ %>
         <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Buyer') %>)</div>
         </div>
@@ -36,7 +36,7 @@
             <% } %>
         </div>
         <% if(ob.outgoing) { %>
-        <% if(ob.guid == ob.moderatorGuid){ %>
+        <% if(ob.transactionType == "cases"){ %>
         <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
             <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
         </div>

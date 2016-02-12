@@ -93,7 +93,6 @@ module.exports = baseVw.extend({
     var self = this;
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
-      timeout: 4000,
       dataType: 'json',
       success: function (model, response, options) {
         self.model.updateAttributes();
@@ -261,7 +260,6 @@ module.exports = baseVw.extend({
 
     this.discussionCol.fetch({
       data: $.param({'order_id': self.orderID}),
-      timeout: 4000,
       dataType: 'json',
       reset: true,
       success: function (collection, response, options) {
@@ -285,6 +283,8 @@ module.exports = baseVw.extend({
         : this.serverUrl + "get_image?hash=" + message.get('avatar_hash') + "&guid=" + message.get('guid');
     newAttributes.moderatorGuid = this.model.get('displayModerator').guid;
     newAttributes.transactionType = this.transactionType;
+    newAttributes.vendorGuid = this.model.get('vendor_offer').listing.id.guid;
+    newAttributes.buyerGuid = this.model.get('buyer_order').order.id.guid;
 
     message.set(newAttributes);
 
