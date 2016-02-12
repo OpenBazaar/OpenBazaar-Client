@@ -33,22 +33,20 @@ module.exports = baseModal.extend({
 
   saveForm: function() {
     if (this.model.save()) {
-      // This modal isnt really needed since we already have a Restore Defaults button
-      // if (!this.changeServerWarningModal) {
-      //   this.changeServerWarningModal = new ChangeServerWarningModal({
-      //     innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
-      //     includeCloseButton: true,
-      //     settings: this._lastSavedAttrs
-      //   }).render().open();
+      if (!this.changeServerWarningModal) {
+        this.changeServerWarningModal = new ChangeServerWarningModal({
+          innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
+          includeCloseButton: true,
+          settings: this._lastSavedAttrs
+        }).render().open();
         
-      //   this.listenTo(this.changeServerWarningModal, 'close', function() {
-      //     this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
-      //     this.start();
-      //   });
-      // } else {
-      //   this.changeServerWarningModal.open();
-      // }
-      this.start();
+        this.listenTo(this.changeServerWarningModal, 'close', function() {
+          this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
+          this.start();
+        });
+      } else {
+        this.changeServerWarningModal.open();
+      }
     };
   },
 
