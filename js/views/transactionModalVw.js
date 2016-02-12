@@ -426,6 +426,8 @@ module.exports = baseVw.extend({
     discussionData.order_id = this.orderID;
     discussionData.resolution = this.$('#transactionDiscussionSendText').val();
     discussionData.moderator_percentage = this.moderatorPercentage;
+    discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
+    discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
 
     if(discussionData.resolution != ""){
       saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
