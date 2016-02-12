@@ -33,20 +33,22 @@ module.exports = baseModal.extend({
 
   saveForm: function() {
     if (this.model.save()) {
-      if (!this.changeServerWarningModal) {
-        this.changeServerWarningModal = new ChangeServerWarningModal({
-          innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
-          includeCloseButton: true,
-          settings: this._lastSavedAttrs
-        }).render().open();
+      // This modal isnt really needed since we already have a Restore Defaults button
+      // if (!this.changeServerWarningModal) {
+      //   this.changeServerWarningModal = new ChangeServerWarningModal({
+      //     innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
+      //     includeCloseButton: true,
+      //     settings: this._lastSavedAttrs
+      //   }).render().open();
         
-        this.listenTo(this.changeServerWarningModal, 'close', function() {
-          this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
-          this.start();
-        });
-      } else {
-        this.changeServerWarningModal.open();
-      }
+      //   this.listenTo(this.changeServerWarningModal, 'close', function() {
+      //     this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
+      //     this.start();
+      //   });
+      // } else {
+      //   this.changeServerWarningModal.open();
+      // }
+      this.start();
     };
   },
 
@@ -55,6 +57,7 @@ module.exports = baseModal.extend({
       .set( __.result(this.model, 'defaults', {}) );
     this.model.validationError = {};
     this.render();
+    this.start();
   },
 
   setState: function(state) {

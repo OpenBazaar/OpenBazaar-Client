@@ -486,7 +486,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }
       },
       {
@@ -942,7 +942,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }
       },
       {
@@ -1408,7 +1408,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry" //notTranslated 
+          retry: "Retry connection" //notTranslated 
         }        
       },
       {
@@ -1878,7 +1878,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry" //notTranslated 
+          retry: "Retry connection" //notTranslated 
         }        
       },
       {
@@ -2816,7 +2816,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -3282,7 +3282,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -3748,7 +3748,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -4218,7 +4218,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -4687,7 +4687,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -5155,7 +5155,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -5626,7 +5626,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -6080,7 +6080,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }       
       },
       {
