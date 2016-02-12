@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
     'click .js-settingsAddressUnDelete': 'addressUnDelete',
     'click #moderatorYes': 'showModeratorFeeHolder',
     'click #moderatorNo': 'hideModeratorFeeHolder',
+    'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
@@ -813,6 +814,14 @@ module.exports = Backbone.View.extend({
       serverConnectModal.remove();
       this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
     });    
+  },
+
+  shutdownServer: function(){
+    var self = this;
+    $.ajax({
+      type: "GET",
+      url: self.serverUrl + "shutdown"
+    });
   },
 
   close: function(){

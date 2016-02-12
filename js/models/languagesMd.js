@@ -256,6 +256,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",
         ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
+        ServerSettings: "Server Settings",
+        ShutDownServer: "Shut Down the Server",
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution",
           ServiceFee: "Service fee",
@@ -348,7 +350,8 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid. If it is valid, try again in a few seconds.",
           pageUnavailable: "This page is currently unavailable.",
           badHandle: "The handle you entered does not have a valid OpenBazaar ID.",
-          tooManyPhotosTitle: "Too many photos", //notTranslated
+          serverDown: "The server has been shut down",
+          tooManyPhotosTitle: "Too many photos",
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
         },
         aboutSection: {
@@ -735,6 +738,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -826,7 +831,8 @@ module.exports = Backbone.Model.extend({
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID",//notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -1211,6 +1217,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1303,6 +1311,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -1691,6 +1700,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1783,6 +1794,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto",
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
         },
@@ -2171,6 +2183,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Paramètres du serveur",
         ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur d'identifiant",
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: {
           DisputeResolution: "Résolution de litige",
           ServiceFee: "Frais de service",
@@ -2263,6 +2277,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme",
           pageUnavailable: "Cette page est actuellement indisponible.",
           badHandle: "L'identifiant que vous avez entré n'a pas un ID OpenBazaar valide",
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -2649,6 +2664,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -2741,6 +2758,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -3125,6 +3143,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3217,6 +3237,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться ", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -3601,6 +3622,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3693,6 +3716,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -4081,6 +4105,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4173,6 +4199,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -4560,6 +4587,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4652,6 +4681,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -5039,6 +5069,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5131,6 +5163,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -5519,6 +5552,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5611,6 +5646,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
@@ -5984,6 +6020,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -6076,6 +6114,7 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
           badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
         },
@@ -6463,6 +6502,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee",//notTranslated
