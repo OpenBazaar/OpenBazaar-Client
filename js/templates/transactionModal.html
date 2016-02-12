@@ -502,7 +502,7 @@
             <%= polyglot.t('transactions.CloseDispute') %>
           </label>
         </div>
-        <% } else if(ob.status != 4 && ob.displayModerator) { %>
+        <% } else if(ob.status != 4  && ob.status != 0 && ob.displayModerator) { %>
         <div class="js-startDisputeFlag">
           <input type="checkbox" class="fieldItem"
                  id="transactionStartDisputeCheckbox" >
