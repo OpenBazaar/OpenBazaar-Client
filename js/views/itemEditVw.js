@@ -88,19 +88,7 @@ module.exports = Backbone.View.extend({
           }
       });
 
-      editor.subscribe('blur', function(e) {
-        var $field = self.$('#inputDescription');
-
-        if (!$($field.val()).text().length) {
-          $field.val('');
-        }
-
-        if (!$field[0].checkValidity()) {
-          $field.parent().addClass('invalid');
-        } else {
-          $field.parent().removeClass('invalid');
-        }
-      });
+      editor.subscribe('blur', self.validateDescription);
 
     });
     return this;
@@ -372,10 +360,23 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
+
+  validateDescription: function(e) {
+    var $field = self.$('#inputDescription');
+
+    if (!$($field.val()).text().length) {
+      $field.val('');
+    }
+
+    if (!$field[0].checkValidity()) {
+      $field.parent().addClass('invalid');
+    } else {
+      $field.parent().removeClass('invalid');
+    }
+  },  
 
   saveChanges: function(){
     var self = this,
@@ -462,7 +463,7 @@ module.exports = Backbone.View.extend({
     //add formChecked class to form so invalid fields are styled as invalid
     this.$el.find('#contractForm').addClass('formChecked');
 
-    if(submitForm.checkValidity()){
+    if(this.checkFormValidity()){
       $.ajax({
         type: "POST",
         url: self.model.get('serverUrl') + "contracts",
@@ -498,13 +499,19 @@ module.exports = Backbone.View.extend({
       });
     }else{
       var invalidInputList = "";
-      $(submitForm).find('input').each(function() {
+      $(submitForm).find('input, textarea').each(function() {
         if($(this).is(":invalid")){
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
     }
+  },
+
+  checkFormValidity: function() {
+    this.validateDescription();
+
+    return this.$('#contractForm')[0].checkValidity();
   },
 
   close: function(){
