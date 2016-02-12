@@ -11,7 +11,7 @@ var __ = require('underscore'),
     remote = require('remote'),
     messageModal = require('../utils/messageModal.js');
 
-    var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
+var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
 module.exports = Backbone.View.extend({
 
@@ -100,7 +100,7 @@ module.exports = Backbone.View.extend({
 
   refreshProfile: function() {
     var self = this;
-  
+
     this.userProfile.fetch({
       success: function(model){
         self.model.set('vendor', model.get('profile').vendor);
@@ -164,37 +164,39 @@ module.exports = Backbone.View.extend({
   },
 
   showAboutModal: function(e){
-    // set the active tab
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
-    $('.js-about-mainTab').addClass('active');
 
-    // set the active section
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+    // display the modal
+    $('.js-aboutModalHolder').fadeIn(300, function(){
+      // set the active tab
+      $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+      $('.js-about-mainTab').addClass('active');
+
+      // set the active section
+      $('.js-aboutModal .modal-section').addClass('hide');
+      $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+    });
 
     // blur the container for extra focus
     $('#obContainer').addClass('blur');
-
-    // display the modal
-    $('.js-aboutModal').removeClass('hide');
   },
 
   hideAboutModal: function(e){
-    $('.js-aboutModal').addClass('hide');
+    $('.js-aboutModalHolder').fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
   showSupportModal: function(e){
-    $('.js-aboutModal').removeClass('hide');
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
-    $('.js-about-donationsTab').addClass('active');
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    $('.js-aboutModalHolder').fadeIn(300, function() {
+      $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+      $('.js-about-donationsTab').addClass('active');
+      $('.js-aboutModal .modal-section').addClass('hide');
+      $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    });
     $('#obContainer').addClass('blur');
   },
 
   hideSupportModal: function(e){
-    $('.js-aboutModal').addClass('hide');
+    $('.js-aboutModalHolder').fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
