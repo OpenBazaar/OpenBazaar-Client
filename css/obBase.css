@@ -4864,6 +4864,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width80 {
   width: 80px;
 }
+#ov1 .width95 {
+  width: 95px;
+}
 #ov1 .width105 {
   width: 105px;
 }
