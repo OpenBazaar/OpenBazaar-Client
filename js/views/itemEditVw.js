@@ -222,14 +222,26 @@ module.exports = Backbone.View.extend({
   },
 
   resizeImage: function(){
-    "use strict";
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
-        imageFiles = $imageInput[0].files,
+        imageFiles = Array.prototype.slice.call($imageInput[0].files, 0),
+        curImages = this.model.get('combinedImagesArray'),
         maxH = 357,
         maxW = 357,
         imageList = [],
-        imageCount = imageFiles.length;
+        loaded = 0,
+        imageCount;
+
+    $imageInput.val('');
+
+    if (curImages.length + imageFiles.length > this.MAX_PHOTOS) {
+      imageFiles = imageFiles.slice(0, this.MAX_PHOTOS - curImages.length);
+      messageModal.show(window.polyglot.t('errorMessages.tooManyPhotosTitle'), window.polyglot.t('errorMessages.tooManyPhotosBody'));      
+    }
+
+    if (!imageFiles.length) return;
+
+    imageCount = imageFiles.length
 
     __.each(imageFiles, function(imageFile, i){
       var newImage = document.createElement("img"),
@@ -242,6 +254,7 @@ module.exports = Backbone.View.extend({
             dataURI,
             canvas = document.createElement("canvas");
 
+        loaded += 1;
         self.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
 
         if (imgW < imgH){
@@ -260,7 +273,7 @@ module.exports = Backbone.View.extend({
         dataURI = canvas.toDataURL('image/jpeg', 0.75);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
-        if(i+1 === imageCount) {
+        if(loaded === imageCount) {
           self.uploadImage(imageList);
         }
       };
@@ -335,11 +348,11 @@ module.exports = Backbone.View.extend({
     }
 
     if (imageArray.length >= this.MAX_PHOTOS) {
-      $('.js-itemImageUpload').prop('disabled', true)
+      this.$('.js-itemImageUpload').prop('disabled', true)
         .siblings('.btn')
         .addClass('disabled');
     } else {
-      $('.js-itemImageUpload').prop('disabled', false)
+      this.$('.js-itemImageUpload').prop('disabled', false)
         .siblings('.btn')
         .removeClass('disabled');
     }
