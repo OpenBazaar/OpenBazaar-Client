@@ -39,7 +39,8 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
-    'click .js-navInstallUpdate': 'sendInstallUpdate'
+    'click .js-navInstallUpdate': 'sendInstallUpdate',
+    'click .js-navDismisslUpdate': 'dismissUpdate'
   },
 
   initialize: function(options){
@@ -82,6 +83,11 @@ module.exports = Backbone.View.extend({
 
   sendInstallUpdate: function() {
     ipcRenderer.send('installUpdate');
+    $('.js-softwareUpdate').addClass('softwareUpdateHidden');
+  },
+
+  dismissUpdate: function() {
+    $('.js-softwareUpdate').addClass('softwareUpdateHidden');
   },
 
   handleSocketMessage: function(response) {

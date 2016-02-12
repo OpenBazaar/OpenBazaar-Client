@@ -2148,6 +2148,51 @@ div.chatSearchOut .chatSearchIcon {
   left: calc(50% - 115.5px);
 }
 
+.testnetBadge {
+  position: absolute;
+  right: 3px;
+  top: 2px;
+  background: #252525;
+  border-radius: 3px;
+  padding: 7px;
+  font-size: 11px;
+  cursor: default;
+  border-left: solid 3px #F3A123;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.softwareUpdate {
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 300px;
+  padding: 10px;
+  background: #252525;
+  border-left: 4px solid #FFA41C;
+  z-index: 1;
+  color: #ffffff;
+  opacity: .95;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.40);
+  transition: left .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.softwareUpdateHidden {
+  left: -325px;
+}
+
+.softwareUpdate .btn-txt {
+  background: transparent;
+  border: solid 1px #fff;
+  opacity: 1;
+  font-size: 12px;
+}
+.softwareUpdate .btn-txt:hover {
+  opacity: .75;
+}
+
 #userPage .btn.btn-bar {
   background-color: #575757;
 }
@@ -4250,6 +4295,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .fontSize8 {
   font-size: 8px;
 }
+#ov1 .fontSize9 {
+  font-size: 9px;
+}
 
 #ov1 .fontSize10 {
   font-size: 10px;
@@ -4419,6 +4467,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: 20px;
 }
 
+#ov1  .marginLeft30 {
+  margin-left: 30px;
+}
+
 #ov1  .marginLeft82 {
   margin-left: 82px;
 }
@@ -4433,6 +4485,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginTop2 {
   margin-top: 2px;
+}
+#ov1  .marginTop3 {
+  margin-top: 3px;
 }
 
 #ov1  .marginTop4 {
@@ -4865,6 +4920,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width80 {
   width: 80px;
+}
+#ov1 .width95 {
+  width: 95px;
 }
 #ov1 .width105 {
   width: 105px;

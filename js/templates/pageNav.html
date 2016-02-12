@@ -91,6 +91,10 @@
   <div class="ctrlGroup flexExpand">
     <div class="txtFieldWrapper searchWrapper mainSearchWrapper">
       <input type="text" class="txtField js-navAddressBar borderRadius3" id="addressBar" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" />
+      <div class="testnetBadge">
+        <span class="ion-alert-circled fontSize9"></span>
+        <%= polyglot.t('nav.testMode') %>
+      </div>
     </div>
   </div>
   <div class="ctrlGroup">
@@ -176,5 +180,16 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="softwareUpdate softwareUpdateHidden js-softwareUpdate">
+  <div class="clearFix">
+    <div class="ion-android-download fontSize20 floatLeft marginRight8"></div>
+    <div class="fontSize15 floatLeft marginTop3"><%= polyglot.t('softwareUpdate.updateAvailable') %></div>
+  </div>
+  <div class="marginLeft30 marginTop2">
+    <div class="btn btn-txt js-navInstallUpdate"><%= polyglot.t('softwareUpdate.installUpdate') %></div>
+    <div class="fontSize11 textOpacity75 marginTop8 marginLeft7 floatLeft js-navDismisslUpdate clickable"><%= polyglot.t('softwareUpdate.dismiss') %></div>
   </div>
 </div>
