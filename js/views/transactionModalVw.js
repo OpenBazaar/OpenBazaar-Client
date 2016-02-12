@@ -117,6 +117,8 @@ module.exports = baseVw.extend({
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      // add blur to container
+      $('#obContainer').addClass('blur');
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
@@ -340,13 +342,13 @@ module.exports = baseVw.extend({
     } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
       this.closeDispute();
     } else if(this.status == 4 || this.transactionType == "cases"){
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}], 'ORDER');
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
     } else {
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}], 'CHAT');
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}]);
     }
   },
 
-  sendDiscussionMessage: function(messages, type){
+  sendDiscussionMessage: function(messages){
     //messages should be an array of message objects with guid and rKey [{"guid": "", "rKey": ""}]
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
@@ -363,7 +365,7 @@ module.exports = baseVw.extend({
             "handle": "",
             "message": messageText,
             "subject": self.orderID,
-            "message_type": type,
+            "message_type": "ORDER",
             "public_key": msg.rKey
           }
         };
@@ -480,5 +482,6 @@ module.exports = baseVw.extend({
   closeModal: function(){
     this.trigger("closed");
     this.$el.parent().fadeOut(300);
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
   }
 });
