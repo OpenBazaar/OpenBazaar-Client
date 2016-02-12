@@ -267,6 +267,7 @@ module.exports = baseVw.extend({
       userProfile: this.userProfile,
       socketView: this.socketView
     });
+    this.registerChild(orderModalView);
     this.listenTo(orderModalView, "closed", function(){
       this.getData();
     });
