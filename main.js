@@ -265,7 +265,10 @@ app.on('ready', function() {
   ]);
   menu.setApplicationMenu(appMenu);
 
-  trayMenu = new tray(__dirname + '/imgs/menubar_icon.png');
+  // put logic here to set tray icon based on OS
+  var osTrayIcon = 'openbazaar-mac-system-tray.png';
+
+  trayMenu = new tray(__dirname + '/imgs/' + osTrayIcon);
   var contextMenu = menu.buildFromTemplate([
     {
       label: 'Start Local Server', type: 'normal', click: function () {

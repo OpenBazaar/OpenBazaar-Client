@@ -51,6 +51,7 @@ module.exports = Backbone.View.extend({
     'click .js-settingsAddressUnDelete': 'addressUnDelete',
     'click #moderatorYes': 'showModeratorFeeHolder',
     'click #moderatorNo': 'hideModeratorFeeHolder',
+    'keyup #moderatorFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -645,6 +646,16 @@ module.exports = Backbone.View.extend({
           },"", img64Data);
     } else {
       checkBanner();
+    }
+  },
+
+  keypressFeeInput: function(){
+    "use strict";
+    var fee = $('#moderatorFeeInput').val();
+
+    if (fee.indexOf('.') > 0 && fee.split('.')[1].length > 2) {
+      fee = fee.substr(0, fee.length-1);
+      $('#moderatorFeeInput').val(fee);
     }
   },
 

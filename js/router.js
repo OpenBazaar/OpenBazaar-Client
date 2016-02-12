@@ -6,7 +6,6 @@ Backbone.$ = $;
 var messageModal = require('./utils/messageModal.js'),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
-    aboutView = require('./views/aboutVw'),
     donateView = require('./views/donateVw'),
     settingsView = require('./views/settingsVw'),
     transactionsView = require('./views/transactionsVw');
@@ -44,6 +43,7 @@ module.exports = Backbone.Router.extend({
     "use strict";
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
   },
 
   newView: function(view, bodyClass, addressBarText){
