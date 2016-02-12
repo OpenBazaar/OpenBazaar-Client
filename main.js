@@ -352,8 +352,7 @@ app.on('ready', function() {
   autoUpdater.on("update-downloaded", function(e, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
     mainWindow.webContents.executeJavaScript("console.log('Update downloaded." + updateUrl + "')");
     if(platform == "mac") {
-      mainWindow.webContents.executeJavaScript('$(".js-statusBarMessage").html("Would you like to update OpenBazaar? <span class=\\"clickable js-navInstallUpdate\\">Restart</span> to update.");');
-      mainWindow.webContents.executeJavaScript('$(".js-statusBarMessage").parent().removeClass("fadeOut");');
+      mainWindow.webContents.executeJavaScript('$(".js-softwareUpdate").removeClass("softwareUpdateHidden");');
     }
   });
 

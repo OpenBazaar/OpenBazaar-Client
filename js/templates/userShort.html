@@ -50,16 +50,16 @@
         </div>
         <div>
           <div class="marginLeft15 noOverflow marginTop2 clearFix">
-            <div class="floatLeft  marginBottom2 marginRight5">
-              <a class="textSize16px capitalize js-userShort js-searchName" title="<%- ob.name %>"><%- ob.name %></a>
+            <div class="floatLeft  marginBottom2 marginRight5 tooltip" data-tooltip="<%- ob.name %>">
+              <a class="textSize16px capitalize js-userShort js-searchName"><%- ob.name %></a>
             </div>
             <% if(ob.handle) { %>
-              <div class="pull-left lineHeight21">
-                <a class="textSize14px txt-fade js-userShort js-searchHandle" title="<%- ob.handle %>"><%- ob.handle %></a>
+              <div class="pull-left lineHeight21 tooltip" data-tooltip="<%- ob.handle %>">
+                <a class="textSize14px txt-fade js-userShort js-searchHandle"><%- ob.handle %></a>
               </div>
             <% }else{ %>
-              <div class="noOverflow pull-left lineHeight21 width110">
-                <a class="textSize14px txt-fade js-userShort" title="<%- ob.guid %>"><%- ob.guid %></a>
+              <div class="noOverflow pull-left lineHeight21 width110 tooltip" data-tooltip="<%- ob.guid %>">
+                <a class="textSize14px txt-fade js-userShort"><%- ob.guid %></a>
               </div>
             <% } %>
           </div>

@@ -76,7 +76,7 @@ module.exports = Backbone.View.extend({
     var data = JSON.parse(response.data);
     if(data.hasOwnProperty('notification')) {
       var n = data.notification;
-      var username = n.handle ? n.handle : n.guid;
+      var username = n.handle ? n.handle : n.guid.substring(0,10) + '...';
       var avatar = n.image_hash ? this.options.serverUrl + 'get_image?hash=' + n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
       switch(n.type) {
         case "follow":

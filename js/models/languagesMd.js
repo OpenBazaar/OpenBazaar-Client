@@ -376,6 +376,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...",
           myPage: "My Page",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Customize Page",
           sellItem:"New",
           createListing:"Create Listing",
@@ -430,6 +431,11 @@ module.exports = Backbone.Model.extend({
           BlockchaininfoTagline: "The world's most popular bitcoin wallet. Safer, Friendlier, Easier.",
           DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma.",
           BitGoTagline: "The world's most secure bitcoin wallet. Trusted by leading Bitcoin businesses."
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order",
@@ -844,6 +850,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Mi p&aacute;gina",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Personalizar P&aacute;gina",
           sellItem:"Nuevo",
           createListing:"Nuevo Listado",
@@ -886,6 +893,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Seleccione avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -1310,6 +1322,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Meine Seite",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Seite anpassen",
           sellItem:"Neu",
           createListing:"Neuer Eintrag",
@@ -1352,6 +1365,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "W&auml;hle einen Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -1780,6 +1798,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "La mia pagina",
+          testMode: "Test Mode", //notTranslated
           customizePage: "Personalizza pagina",
           sellItem: "Nuovo",
           createListing: "Crea elenco",
@@ -1822,6 +1841,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Seleziona Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finito"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -2251,6 +2275,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Tapez un @identifiant, OpenBazaar ID ou un #mot_clé...",
           myPage: "Ma page",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
           createListing:"Nouvelle annonce",
@@ -2293,6 +2318,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Sélectionner un avatar",
           discoverCallOut: "Explorez les annonces et les pages sur OpenBazaar",
           Finished: "Terminé"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Payer pour commander",
@@ -2718,6 +2748,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Pagina mea",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Customizare Pagină",
           sellItem:"Nou",
           createListing:"Listare Nouă",
@@ -2760,6 +2791,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Selectare Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -3184,6 +3220,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Моя страница",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Настроить страницу",
           sellItem:"Разместить товар",
           createListing:"Подать объявление",
@@ -3226,6 +3263,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Выбрать аватарку",
           discoverCallOut: "Найти объявления и страницы на OpenBazaar",
           Finished: "Завершено"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -3650,6 +3692,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Moja stránka",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Upraviť stránku",
           sellItem:"Nová položka",
           createListing:"Nový listing",
@@ -3692,6 +3735,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Zvoliť avatara",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -4120,6 +4168,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Sayfam",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Sayfayı Özelleştir",
           sellItem:"Yeni",
           createListing:"Yeni Öğe",
@@ -4162,6 +4211,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Avatar Seç",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -4589,6 +4643,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "JuHwIj",
+          testMode: "Test Mode", //notTranslated
           customizePage:"JuHwIj choH",
           sellItem:"Chu'",
           createListing:"Chu' tetlh",
@@ -4631,6 +4686,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "MIllogh qab wIv",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -5058,6 +5118,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "我的主页",
+          testMode: "Test Mode", //notTranslated
           customizePage:"个性化主页",
           sellItem:"新品",
           createListing:"新条目",
@@ -5099,6 +5160,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "选择 Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -5528,6 +5594,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "내 페이지",
+          testMode: "Test Mode", //notTranslated
           customizePage:"사용자 페이지",
           sellItem:"새로운",
           createListing:"새로운 제품",
@@ -5570,6 +5637,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "화신 선택",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -5984,6 +6056,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "マイページ",
+          testMode: "Test Mode", //notTranslated
           customizePage:"ページをカスタマイズ",
           sellItem:"出品する",
           createListing:"新しい商品を出品する",
@@ -6024,6 +6097,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "プロフィール画像を選択",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "完了"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -6452,6 +6530,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Wprowadź pseudonim lub szukaj",
           myPage: "Moja strona",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Dostosuj stronę",
           sellItem:"Nowy",
           createListing:"Utwórz pozycję",
@@ -6494,6 +6573,11 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Wybierz avatar",
           discoverCallOut: "Odkrywaj produkty i strony na OpenBazaar",
           Finished: "Gotowe"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
