@@ -2284,7 +2284,7 @@ module.exports = Backbone.Model.extend({
           sendMessagePlaceholder: "Écrivez ici votre message.",
           DisputeInstructions: "Afin de déposer un litige pour cette transaction, écrivez ci-dessous la raison du litige, et cliquez sur le bouton Initier un litige. Le modérateur interviendra dans votre discussion jusqu'à ce que le litige soit résolu. Le modérateur prendra la décision finale quant à savoir si les fonds doivent vous être retournés, et combien. Les frais du modérateur seront payés avec les fonds que vous avez déjà envoyés.",
           SendMessage: "Envoyer",
-          CloseDispute: "Fermer le litige",
+          CloseDispute: "Clôturer le litige",
           TotalInTransaction: "Transaction :"
         },
         errorMessages: {
