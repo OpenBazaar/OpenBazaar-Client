@@ -15,7 +15,10 @@ module.exports = function (currency, callback) {
     //if this is the first check, show status
     if(!window.btcAverages){
         showStatus = true;
-        $('#statusBar').removeClass('fadeOut').text(polyglot.t('LoadingBitcoinPrices'));
+        var showStatusTimeout = window.setTimeout(function(){
+            $('#statusBar').removeClass('fadeOut').text(polyglot.t('LoadingBitcoinPrices'));
+        },1000);
+
     }
 
     window.btcAverages = window.btcAverages || {};
@@ -170,8 +173,8 @@ module.exports = function (currency, callback) {
         }
         if(showStatus){
             showStatus = false;
+            window.clearTimeout(showStatusTimeout);
             $('#statusBar').addClass('fadeOut').text("");
-            console.log("foo")
         }
 
         typeof callback === 'function' && callback(btAve, currencyKeys);
