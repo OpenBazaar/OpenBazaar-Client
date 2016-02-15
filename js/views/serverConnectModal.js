@@ -27,7 +27,6 @@ module.exports = baseModal.extend({
     });
 
     this.listenTo(this.model, 'change:SSL', function() {
-      console.log("change")
       this.render();
     });
 
@@ -200,7 +199,6 @@ module.exports = baseModal.extend({
   },
 
   sslOff: function(){
-    console.log("click")
     this.model.set('SSL', true);
   },
 
