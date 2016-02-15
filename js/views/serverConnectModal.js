@@ -26,6 +26,11 @@ module.exports = baseModal.extend({
       this.render();
     });
 
+    this.listenTo(this.model, 'change:SSL', function() {
+      console.log("change")
+      this.render();
+    });
+
     this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
   },
 
@@ -192,14 +197,11 @@ module.exports = baseModal.extend({
 
   sslOn: function(){
     this.model.set('SSL', false);
-    this.$('.js-sslOn').addClass('hide');
-    this.$('.js-sslOff').removeClass('hide');
   },
 
   sslOff: function(){
+    console.log("click")
     this.model.set('SSL', true);
-    this.$('.js-sslOn').removeClass('hide');
-    this.$('.js-sslOff').addClass('hide');
   },
 
   isStarted: function() {
