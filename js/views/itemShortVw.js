@@ -6,7 +6,7 @@ var __ = require('underscore'),
 
 module.exports = baseVw.extend({
 
-  className: "flexCol-4 custCol-border",
+  className: "flexCol-4 border0",
 
   events: {
     'click .js-item': 'itemClick',

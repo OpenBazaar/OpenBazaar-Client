@@ -245,7 +245,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors",
         Support: "Support",
         Licensing: "Licensing",
-        Forward: "Forward",
         On: "On",
         Off: "Off",
         ClickToChange: "Click to change",
@@ -254,8 +253,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers",
         Moderator: "Moderator",
         Firewall: "Firewall",
+        ServerSettings: "Server Settings",
         ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
+        ServerSettings: "Server Settings",
+        ShutDownServer: "Shut Down the Server",
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution",
           ServiceFee: "Service fee",
@@ -321,7 +323,7 @@ module.exports = Backbone.Model.extend({
           OverallRating: "Overall Rating",
           Quality: "Quality",
           Description: "Description",
-          DeliveryTime: "DeliveryTime",
+          DeliveryTime: "Delivery Time",
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
@@ -347,7 +349,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "The seller's server has rejected the purchase request. This may be due to a connection issue.",
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid. If it is valid, try again in a few seconds.",
           pageUnavailable: "This page is currently unavailable.",
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID."
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID.",
+          serverDown: "The server has been shut down",
+          tooManyPhotosTitle: "Too many photos",
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -376,6 +381,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...",
           myPage: "My Page",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Customize Page",
           sellItem:"New",
           createListing:"Create Listing",
@@ -385,7 +391,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Notifications",
           settings:"Settings",
           about:"About OpenBazaar",
-          support:"Support OpenBazaar"
+          support:"Support OpenBazaar",
+          Forward: "Forward",
+          Back: "Back"
         },
         onboarding: {
           intro: "OpenBazaar Configuration",
@@ -419,6 +427,11 @@ module.exports = Backbone.Model.extend({
           discoverCallOut: "Explore Listings and Pages on OpenBazaar",
           Finished: "Finished"
         },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...",
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.",
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>."
+        },
         walletProviders: {
           CoinbaseTagline: "The world's most popular way to buy, sell, and use bitcoin.",
           SamouraiTagline: "Secure mobile wallet. Emphasis on privacy.",
@@ -430,6 +443,11 @@ module.exports = Backbone.Model.extend({
           BlockchaininfoTagline: "The world's most popular bitcoin wallet. Safer, Friendlier, Easier.",
           DuoMoneyTagline: "Euro wallet for dead-easy Bitcoin payments. OpenBazaar for Grandma.",
           BitGoTagline: "The world's most secure bitcoin wallet. Trusted by leading Bitcoin businesses."
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order",
@@ -486,7 +504,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }
       },
       {
@@ -715,7 +733,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -724,8 +741,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -785,12 +805,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -816,7 +837,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "El servidor del vendedor ha rechazado la solicitud de compra. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID",//notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -844,6 +868,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Mi p&aacute;gina",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Personalizar P&aacute;gina",
           sellItem:"Nuevo",
           createListing:"Nuevo Listado",
@@ -853,7 +878,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Notificaciones",
           settings:"Ajustes",
           about:"Acerca de OpenBazaar",
-          support:"Soporte OpenBazaar"
+          support:"Soporte OpenBazaar",
+          Forward: "Forward", //notTranslated
+          Back: "Atr&aacute;s"
         },
         onboarding: {
           intro: "Personalice Su OpenBazaar",
@@ -886,6 +913,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Seleccione avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -942,7 +979,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }
       },
       {
@@ -1181,7 +1218,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -1190,8 +1226,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1251,12 +1290,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -1282,7 +1322,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "Die Kaufanfrage wurde vom Server des Verkäufers abgelehnt. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1310,6 +1353,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Meine Seite",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Seite anpassen",
           sellItem:"Neu",
           createListing:"Neuer Eintrag",
@@ -1319,7 +1363,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Benachrichtigungen",
           settings:"Einstellungen",
           about:"&Uuml;ber OpenBazaar",
-          support:"OpenBazaar unterst&uuml;tzen"
+          support:"OpenBazaar unterst&uuml;tzen",
+          Forward: "Forward", //notTranslated
+          Back: "Zur&uuml;ck"
         },
         onboarding: {
           intro: "OpenBazaar Konfiguration",
@@ -1352,6 +1398,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "W&auml;hle einen Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -1408,7 +1464,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry" //notTranslated 
+          retry: "Retry connection" //notTranslated 
         }        
       },
       {
@@ -1651,7 +1707,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -1660,8 +1715,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1721,12 +1779,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -1752,7 +1811,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "Il server del venditore ha respinto la richiesta di acquisto. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto",
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1780,6 +1842,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "La mia pagina",
+          testMode: "Test Mode", //notTranslated
           customizePage: "Personalizza pagina",
           sellItem: "Nuovo",
           createListing: "Crea elenco",
@@ -1789,7 +1852,9 @@ module.exports = Backbone.Model.extend({
           notifications: "Notifiche",
           settings: "Impostazioni",
           about: "About OpenBazaar",
-          support: "Supporto OpenBazaar"
+          support: "Supporto OpenBazaar",
+          Forward: "Forward", //notTranslated
+          Back: "Indietro"
         },
         onboarding: {
           intro: "Configurazione OpenBazaar",
@@ -1822,6 +1887,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Seleziona Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finito"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -1878,7 +1953,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry" //notTranslated 
+          retry: "Retry connection" //notTranslated 
         }        
       },
       {
@@ -1888,14 +1963,14 @@ module.exports = Backbone.Model.extend({
         IHaveAWalletNow: "J'ai maintenant un portefeuille",
         Next: "Suivant",
         IAgree: "Je suis d'accord",
-        Back: "Retour",
+        Back: "Précédent",
         EnterMessage: "Entrer un message...",
         Recommended: "Recommandé",
         Reload: "Actualiser",
         You: "Vous",
         Skip: "Passer",
         Done: "Terminé",
-        Status: "Status",
+        Status: "État",
         Navigation: "Navigation",
         Cancel: "Annuler",
         ClosingOpenBazaar: "Fermer (votre page sera déconnectée)",
@@ -1995,7 +2070,7 @@ module.exports = Backbone.Model.extend({
         Optional: "Optionnel",
         Customize: "Personnaliser",
         Save: "Enregistrer",
-        Change: "Change", //notTranslated
+        Change: "Modifier",
         Changes: "Modifications",
         SaveChanges: "Enregistrer les modifications",
         YourName: "Votre nom",
@@ -2083,7 +2158,7 @@ module.exports = Backbone.Model.extend({
         Loading: "Chargement...",
         Purchases:"Achats",
         Sales: "Ventes",
-        Cases: "Cas",
+        Cases: "Affaires",
         Enter: "Entrer",
         Discover: "Découvrir",
         Block: "Bloquer",
@@ -2121,7 +2196,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributeurs",
         Support: "Soutenir",
         Licensing: "Licences",
-        Forward: "Avancer",
         On: "Activer",
         Off: "Désactiver",
         ClickToChange: "Cliquez pour changer",
@@ -2130,8 +2204,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Aucun abonné",
         Moderator: "Modérateur",
         Firewall: "Pare-feu",
+        ServerSettings: "Paramètres du serveur",
         ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur d'identifiant",
+        ServerSettings: "Paramètres du serveur",
+        ShutDownServer: "Arrêter le serveur",
         moderatorSettings: {
           DisputeResolution: "Résolution de litige",
           ServiceFee: "Frais de service",
@@ -2190,13 +2267,14 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "Par date, les plus récentes",
           sortByDateOldest: "Par date, les plus anciennes",
           PayPurchase: "Payer cet achat",
-          CompleteOrder: "Compléter cette commande",
+          CompleteOrder: "Terminer cette commande",
+          MarkAsShipped: "Marquer comme expédié",
           RateThisTransaction: "Noter cette transaction",
           TransactionReview: "Avis de transaction",
           OverallRating: "Note générale",
           Quality: "Qualité",
           Description: "Description",
-          DeliveryTime: "Heure de livraison",
+          DeliveryTime: "Temps de livraison",
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
@@ -2204,10 +2282,10 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Frais de modération :",
           DisputeTransaction: "Initier un litige",
           sendMessagePlaceholder: "Écrivez ici votre message.",
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
+          DisputeInstructions: "Afin de déposer un litige pour cette transaction, écrivez ci-dessous la raison du litige, et cliquez sur le bouton Initier un litige. Le modérateur interviendra dans votre discussion jusqu'à ce que le litige soit résolu. Le modérateur prendra la décision finale quant à savoir si les fonds doivent vous être retournés, et combien. Les frais du modérateur seront payés avec les fonds que vous avez déjà envoyés.",
           SendMessage: "Envoyer",
-          CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          CloseDispute: "Clôturer le litige",
+          TotalInTransaction: "Transaction :"
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2222,7 +2300,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "Le serveur du vendeur a rejeté la demande d'achat. Cela peut être dû à un problème de connexion.",
           checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme",
           pageUnavailable: "Cette page est actuellement indisponible.",
-          badHandle: "L'identifiant que vous avez entré n'a pas un ID OpenBazaar valide"
+          badHandle: "L'identifiant que vous avez entré n'a pas un ID OpenBazaar valide",
+          serverDown: "Le serveur a été arrêté",
+          tooManyPhotosTitle: "Trop de photos",
+          tooManyPhotosBody: "Toutes ou une partie de vos photos n'ont pas pu être mises en ligne parce que vous avez probablement dépassé la quantité maximale autorisée.",  
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -2251,16 +2332,19 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Tapez un @identifiant, OpenBazaar ID ou un #mot_clé...",
           myPage: "Ma page",
+          testMode: "Mode de test",
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
           createListing:"Nouvelle annonce",
           purchases:"Achats",
           sales:"Ventes",
-          cases:"Cas",
+          cases:"Affaires",
           notifications:"Notifications",
           settings:"Paramètres",
           about:"&Agrave; propos d'OpenBazaar",
-          support:"Soutenir OpenBazaar"
+          support:"Soutenir OpenBazaar",
+          Forward: "Avancer",
+          Back: "Reculer"
         },
         onboarding: {
           intro: "Configuration d'OpenBazaar",
@@ -2294,13 +2378,23 @@ module.exports = Backbone.Model.extend({
           discoverCallOut: "Explorez les annonces et les pages sur OpenBazaar",
           Finished: "Terminé"
         },
+        softwareUpdate: {
+          updateAvailable: "Mise à jour d'OpenBazaar disponible",
+          installUpdate: "Installer la mise à jour",
+          dismiss: "Refuser"
+        },
+        guidStillCreating: {
+          HangTight: "Veuillez patienter quelques instants...",
+          YourPersonal: "Vos clés personnelles et votre identifiant OpenBazaar sont en cours de création et devrait s'achever d'ici quelques secondes.\n\nVous serez automatiquement connecté au réseau d'OpenBazaar une fois la création terminée, alors tâchez d'être patient.",
+          LookingFor: "Vous souhaitez patienter autrement ? Vous pouvez lire le <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">blog d'OpenBazaar</a>."
+        },
         buyFlow: {
           PayForOrder: "Payer pour commander",
           NeedTempAddress: "J'ai besoin d'une adresse Bitcoin temporaire",
           NeedTempAddressHelper: "Veuillez mettre en favoris l'url de votre adresse Bitcoin temporaire",
           CantFindAddress: "Je ne trouve pas mon adresse Bitcoin",
           BitcoinWallet: "Portefeuille Bitcoin",
-          ModeratedPaymentDescription: "Votre paiement est retenu dans un portefeuille sécurisé jusqu'à ce que le vendeur respecte les conditions l'accord. Si des problèmes surviennent, un modérateur aidera.",
+          ModeratedPaymentDescription: "Votre paiement est retenu dans un portefeuille sécurisé jusqu'à ce que le vendeur respecte les conditions de l'accord. Si des problèmes surviennent, un modérateur aidera.",
           ModeratorFeeHelper: "Le modérateur peut facturer des frais, mais uniquement en cas de litige.",
           ModeratedPayment: "Paiement modéré",
           DisputeFee: "Frais de litige",
@@ -2333,8 +2427,8 @@ module.exports = Backbone.Model.extend({
           noSearchResultsFound: "Aucun résultat trouvé"
         },
         serverConnectModal: {
-          statusTooManyAttempts: "Too many failed login attempts", //notTranslated
-          connecting: "Connecting", //notTranslated
+          statusTooManyAttempts: "Trop de tentatives de connexion infructueuses",
+          connecting: "Connexion",
           statusTryingToConnect: "Tentative de connexion à votre serveur",
           statusConnected: "Connecté",
           statusFailedConnection: "Impossible de se connecter à votre serveur",
@@ -2589,7 +2683,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -2598,8 +2691,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -2659,12 +2755,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -2690,7 +2787,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "Serverul vânzătorului a respins cererea de cumpărare. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -2718,6 +2818,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Pagina mea",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Customizare Pagină",
           sellItem:"Nou",
           createListing:"Listare Nouă",
@@ -2727,7 +2828,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Notificări",
           settings:"Setări",
           about:"Despre OpenBazaar",
-          support:"Susținere OpenBazaar"
+          support:"Susținere OpenBazaar",
+          Forward: "Forward", //notTranslated
+          Back: "Înapoi"
         },
         onboarding: {
           intro: "Configurare OpenBazaar",
@@ -2760,6 +2863,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Selectare Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -2816,7 +2929,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -3055,7 +3168,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -3064,8 +3176,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3125,12 +3240,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -3156,7 +3272,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "Сервер продавца отключил эту возможность. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться ", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "о нас",
@@ -3184,6 +3303,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Моя страница",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Настроить страницу",
           sellItem:"Разместить товар",
           createListing:"Подать объявление",
@@ -3193,7 +3313,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Уведомления",
           settings:"Настройки",
           about:"Об OpenBazaar",
-          support:"Поддержка OpenBazaar"
+          support:"Поддержка OpenBazaar",
+          Forward: "Forward", //notTranslated
+          Back: "Назад"
         },
         onboarding: {
           intro: "Конфигурация OpenBazaar",
@@ -3226,6 +3348,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Выбрать аватарку",
           discoverCallOut: "Найти объявления и страницы на OpenBazaar",
           Finished: "Завершено"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -3282,7 +3414,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -3521,7 +3653,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -3530,8 +3661,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3591,12 +3725,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -3622,7 +3757,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "Predajcov server odmietol žiadosť o nákup. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3650,6 +3788,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Moja stránka",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Upraviť stránku",
           sellItem:"Nová položka",
           createListing:"Nový listing",
@@ -3659,7 +3798,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Notifikácie",
           settings:"Nastavenia",
           about:"O OpenBazaari",
-          support:"Podporte OpenBazaar"
+          support:"Podporte OpenBazaar",
+          Forward: "Forward", //notTranslated
+          Back: "Späť"
         },
         onboarding: {
           intro: "Konfigurácia OpenBazaaru",
@@ -3692,6 +3833,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Zvoliť avatara",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -3748,7 +3899,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -3991,7 +4142,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -4000,8 +4150,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4061,12 +4214,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -4092,7 +4246,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "Satıcının sunucusu alım talebini reddetti. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4120,6 +4277,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "Sayfam",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Sayfayı Özelleştir",
           sellItem:"Yeni",
           createListing:"Yeni Öğe",
@@ -4129,7 +4287,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Bildirimler",
           settings:"Ayarlar",
           about:"OpenBazaar Hakkında",
-          support:"OpenBazaar'ı Destekle"
+          support:"OpenBazaar'ı Destekle",
+          Forward: "Forward", //notTranslated
+          Back: "Geri"
         },
         onboarding: {
           intro: "OpenBazaar Yaplandırma",
@@ -4162,6 +4322,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Avatar Seç",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -4218,7 +4388,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -4460,7 +4630,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -4469,8 +4638,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4530,12 +4702,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -4561,7 +4734,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "QuvHa' offer lajQo' loD 'Iv ngev. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4589,6 +4765,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "JuHwIj",
+          testMode: "Test Mode", //notTranslated
           customizePage:"JuHwIj choH",
           sellItem:"Chu'",
           createListing:"Chu' tetlh",
@@ -4598,7 +4775,9 @@ module.exports = Backbone.Model.extend({
           notifications:"GhuH",
           settings:"Bang",
           about:"Umqu' ghot OpenBazaar",
-          support:"Qutlh OpenBazaar"
+          support:"Qutlh OpenBazaar",
+          Forward: "Forward", //notTranslated
+          Back: "Chap"
         },
         onboarding: {
           intro: "OpenBazaar bang",
@@ -4631,6 +4810,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "MIllogh qab wIv",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -4687,7 +4876,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -4929,7 +5118,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -4938,8 +5126,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4999,12 +5190,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -5030,7 +5222,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "卖家的服务器拒绝了这笔买卖. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5058,6 +5253,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "我的主页",
+          testMode: "Test Mode", //notTranslated
           customizePage:"个性化主页",
           sellItem:"新品",
           createListing:"新条目",
@@ -5067,7 +5263,9 @@ module.exports = Backbone.Model.extend({
           notifications:"通知",
           settings:"设置",
           about:"关于 OpenBazaar",
-          support:"支持 OpenBazaar"
+          support:"支持 OpenBazaar",
+          Forward: "Forward", //notTranslated
+          Back: "上一步"
         },
         onboarding: {
           intro: "OpenBazaar 布局",
@@ -5099,6 +5297,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "选择 Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -5155,7 +5363,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -5399,7 +5607,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -5408,8 +5615,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5469,12 +5679,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -5500,7 +5711,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "판매자의 서버는 구매 요청을 거부했습니다. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5528,6 +5742,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "내 페이지",
+          testMode: "Test Mode", //notTranslated
           customizePage:"사용자 페이지",
           sellItem:"새로운",
           createListing:"새로운 제품",
@@ -5537,7 +5752,9 @@ module.exports = Backbone.Model.extend({
           notifications:"공지",
           settings:"설정",
           about:"오픈바자 정보",
-          support:"오픈바자 지원"
+          support:"오픈바자 지원",
+          Forward: "Forward", //notTranslated
+          Back: "뒤"
         },
         onboarding: {
           intro: "오픈바자 구서",
@@ -5570,6 +5787,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "화신 선택",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "Finished" //notTranslated
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -5626,7 +5853,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }        
       },
       {
@@ -5854,7 +6081,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Contributors", // not translated
         Support: "Support", // not translated
         Licensing: "Licensing", // not translated
-        Forward: "Forward", // not translated
         On: "On", // not translated
         Off: "Off", // not translated
         ClickToChange: "Click to change", // not translated
@@ -5863,8 +6089,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5924,12 +6153,13 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
           Description: "Description", // not translated
-          DeliveryTime: "DeliveryTime", // not translated
+          DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -5955,7 +6185,10 @@ module.exports = Backbone.Model.extend({
           sellerError: "出品者のサーバーは購入要求を拒否しました。. This may be due to a connection issue.", // not translated
           checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid",
           pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID"//notTranslated
+          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
+          serverDown: "The server has been shut down", //notTranslated
+          tooManyPhotosTitle: "Too many photos", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5984,6 +6217,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
           myPage: "マイページ",
+          testMode: "Test Mode", //notTranslated
           customizePage:"ページをカスタマイズ",
           sellItem:"出品する",
           createListing:"新しい商品を出品する",
@@ -5993,7 +6227,9 @@ module.exports = Backbone.Model.extend({
           notifications:"通知",
           settings:"設定",
           about:"OpenBazaarについて",
-          support:"OpenBazaarをサポートする"
+          support:"OpenBazaarをサポートする",
+          Forward: "Forward", //notTranslated
+          Back: "戻る"
         },
         onboarding: {
           intro: "OpenBazaarの設定",
@@ -6024,6 +6260,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "プロフィール画像を選択",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
           Finished: "完了"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated
@@ -6080,7 +6326,7 @@ module.exports = Backbone.Model.extend({
           password: "Password", //notTranslated                    
           restoreDefaults: "Restore defaults", //notTranslated                    
           saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry", //notTranslated 
+          retry: "Retry connection", //notTranslated 
         }       
       },
       {
@@ -6323,7 +6569,6 @@ module.exports = Backbone.Model.extend({
         Contributors: "Kontrybutorzy",
         Support: "Pomoc",
         Licensing: "Licencja",
-        Forward: "Dalej",
         On: "Włączony",
         Off: "Wyłączony",
         ClickToChange: "Kliknij, by zmienić",
@@ -6332,8 +6577,11 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Brak obserwujących",
         Moderator: "Moderator",//notTranslated
         Firewall: "Firewall", //notTranslated
+        ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
+        ServerSettings: "Server Settings",  // not translated
+        ShutDownServer: "Shut Down the Server",  // not translated
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee",//notTranslated
@@ -6393,6 +6641,7 @@ module.exports = Backbone.Model.extend({
           sortByDateOldest: "Od najstarszych",
           PayPurchase: "Zapłać",
           CompleteOrder: "Sfinalizuj zamówienie",
+          MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Oceń transakcję",
           TransactionReview: "Opinia o transakcji",
           OverallRating: "Średnia ocen",
@@ -6452,6 +6701,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Wprowadź pseudonim lub szukaj",
           myPage: "Moja strona",
+          testMode: "Test Mode", //notTranslated
           customizePage:"Dostosuj stronę",
           sellItem:"Nowy",
           createListing:"Utwórz pozycję",
@@ -6461,7 +6711,9 @@ module.exports = Backbone.Model.extend({
           notifications:"Powiadomienia",
           settings:"Ustawienia",
           about:"O projekcie",
-          support:"Wspomóż projekt"
+          support:"Wspomóż projekt",
+          Forward: "Dalej",
+          Back: "Wróć"
         },
         onboarding: {
           intro: "Konfiguracja OpenBazaar",
@@ -6494,6 +6746,16 @@ module.exports = Backbone.Model.extend({
           chooseAvatar: "Wybierz avatar",
           discoverCallOut: "Odkrywaj produkty i strony na OpenBazaar",
           Finished: "Gotowe"
+        },
+        softwareUpdate: {
+          updateAvailable: "OpenBazaar Update Available", //notTranslated
+          installUpdate: "Install Update", //notTranslated
+          dismiss: "Dismiss" //notTranslated
+        },
+        guidStillCreating: {
+          HangTight: "Hang tight for a few...", //notTranslated
+          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
+          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
           PayForOrder: "Pay for Order", //notTranslated

@@ -24,6 +24,8 @@ module.exports = Backbone.View.extend({
     'click .js-itemEditClearDate': 'clearDate'
   },
 
+  MAX_PHOTOS: 10,
+
   initialize: function(){
     var self=this,
         hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
@@ -59,7 +61,9 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      var context = __.extend({}, self.model.toJSON(), { MAX_PHOTOS: self.MAX_PHOTOS });
+
+      self.$el.html(loadedTemplate(context));
       self.setFormValues();
 
       // prevent the body from picking up drag actions
@@ -83,6 +87,8 @@ module.exports = Backbone.View.extend({
             sticky: true
           }
       });
+
+      editor.subscribe('blur', self.validateDescription);
 
     });
     return this;
@@ -204,13 +210,26 @@ module.exports = Backbone.View.extend({
   },
 
   resizeImage: function(){
-    "use strict";
     var self = this,
-        imageFiles = this.$el.find('.js-itemImageUpload')[0].files,
+        $imageInput = this.$el.find('.js-itemImageUpload'),
+        imageFiles = Array.prototype.slice.call($imageInput[0].files, 0),
+        curImages = this.model.get('combinedImagesArray'),
         maxH = 357,
         maxW = 357,
         imageList = [],
-        imageCount = imageFiles.length;
+        loaded = 0,
+        imageCount;
+
+    $imageInput.val('');
+
+    if (curImages.length + imageFiles.length > this.MAX_PHOTOS) {
+      imageFiles = imageFiles.slice(0, this.MAX_PHOTOS - curImages.length);
+      messageModal.show(window.polyglot.t('errorMessages.tooManyPhotosTitle'), window.polyglot.t('errorMessages.tooManyPhotosBody'));      
+    }
+
+    if (!imageFiles.length) return;
+
+    imageCount = imageFiles.length
 
     __.each(imageFiles, function(imageFile, i){
       var newImage = document.createElement("img"),
@@ -223,6 +242,7 @@ module.exports = Backbone.View.extend({
             dataURI,
             canvas = document.createElement("canvas");
 
+        loaded += 1;
         self.$el.find('.js-itemEditImageLoading').removeClass("fadeOut");
 
         if (imgW < imgH){
@@ -241,7 +261,7 @@ module.exports = Backbone.View.extend({
         dataURI = canvas.toDataURL('image/jpeg', 0.75);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
-        if(i+1 === imageCount) {
+        if(loaded === imageCount) {
           self.uploadImage(imageList);
         }
       };
@@ -306,7 +326,7 @@ module.exports = Backbone.View.extend({
         if (i < subImageDivs.length){
           $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
-          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');" data-index="' + i + '"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
               .appendTo(self.$el.find('.js-editItemSubImagesWrapper'));
         }
       });
@@ -314,11 +334,21 @@ module.exports = Backbone.View.extend({
     } else {
       uploadMsg.removeClass('hide');
     }
+
+    if (imageArray.length >= this.MAX_PHOTOS) {
+      this.$('.js-itemImageUpload').prop('disabled', true)
+        .siblings('.btn')
+        .addClass('disabled');
+    } else {
+      this.$('.js-itemImageUpload').prop('disabled', false)
+        .siblings('.btn')
+        .removeClass('disabled');
+    }
   },
 
   deleteImage: function(e) {
     var imageUploadArray,
-        imgIndex = $(e.target).closest('.itemImg').data('index'),
+        imgIndex = $(e.target).closest('.itemImg').index('.js-editItemSubImage'),
         imageArray = __.clone(this.model.get("combinedImagesArray"));
 
     imageArray.splice(imgIndex, 1);
@@ -330,10 +360,23 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
+
+  validateDescription: function(e) {
+    var $field = self.$('#inputDescription');
+
+    if (!$($field.val()).text().length) {
+      $field.val('');
+    }
+
+    if (!$field[0].checkValidity()) {
+      $field.parent().addClass('invalid');
+    } else {
+      $field.parent().removeClass('invalid');
+    }
+  },  
 
   saveChanges: function(){
     var self = this,
@@ -379,6 +422,7 @@ module.exports = Backbone.View.extend({
     */
 
     formData = new FormData(submitForm);
+
     //add old and new image hashes
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
       //make sure all hashes are valid
@@ -419,7 +463,7 @@ module.exports = Backbone.View.extend({
     //add formChecked class to form so invalid fields are styled as invalid
     this.$el.find('#contractForm').addClass('formChecked');
 
-    if(submitForm.checkValidity()){
+    if(this.checkFormValidity()){
       $.ajax({
         type: "POST",
         url: self.model.get('serverUrl') + "contracts",
@@ -455,13 +499,19 @@ module.exports = Backbone.View.extend({
       });
     }else{
       var invalidInputList = "";
-      $(submitForm).find('input').each(function() {
+      $(submitForm).find('input, textarea').each(function() {
         if($(this).is(":invalid")){
           invalidInputList += "<br/>"+$(this).attr('id');
         }
       });
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
     }
+  },
+
+  checkFormValidity: function() {
+    this.validateDescription();
+
+    return this.$('#contractForm')[0].checkValidity();
   },
 
   close: function(){

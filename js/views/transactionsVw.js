@@ -255,7 +255,7 @@ module.exports = baseVw.extend({
       orderID: options.orderID,
       status: options.status,
       serverUrl: this.serverUrl,
-      parentEl: this.$el.find('.js-transactionModalHolder'),
+      parentEl: $('.js-transactionModalHolder'),
       countriesArray: this.countriesArray,
       cCode: this.userModel.get('currency_code'),
       btAve: this.btAve,
@@ -267,6 +267,7 @@ module.exports = baseVw.extend({
       userProfile: this.userProfile,
       socketView: this.socketView
     });
+    this.registerChild(orderModalView);
     this.listenTo(orderModalView, "closed", function(){
       this.getData();
     });

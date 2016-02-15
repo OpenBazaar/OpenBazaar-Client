@@ -10,14 +10,14 @@ textOpacity50
                 <div class="marginLeft10 marginTop2 clearfix">
 
                     <% if(ob.type == "follow") { %>
-                        <div class="textSize13px">
+                        <div class="textSize13px floatLeft">
                         <a class="clickable js-actionLink"><% if(ob.handle) { %>
-                        <%- ob.handle %>
+                            <%- ob.handle %>
                         <% }else{ %>
-                        <%- ob.guid %>
+                            <div class="noOverflow width95 floatLeft tooltip" data-tooltip="<%- ob.guid %>"><%- ob.guid %></div>
                         <% } %></a> <%= polyglot.t('NotificationFollow') %>
                         </div>
-                        <div class="textSize11px txt-fade"><%= ob.formattedTimestamp %></div>
+                        <div class="textSize11px floatLeft txt-fade"><%= ob.formattedTimestamp %></div>
                     <% }  else { %>
 
 
