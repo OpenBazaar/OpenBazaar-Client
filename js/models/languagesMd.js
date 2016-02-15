@@ -2211,8 +2211,8 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Paramètres du serveur",
         ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur d'identifiant",
-        ServerSettings: "Server Settings",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
+        ServerSettings: "Paramètres du serveur",
+        ShutDownServer: "Arrêter le serveur",
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: {
           DisputeResolution: "Résolution de litige",
@@ -2287,10 +2287,10 @@ module.exports = Backbone.Model.extend({
           ModerationFee: "Frais de modération :",
           DisputeTransaction: "Initier un litige",
           sendMessagePlaceholder: "Écrivez ici votre message.",
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
+          DisputeInstructions: "Afin de déposer un litige pour cette transaction, écrivez ci-dessous la raison du litige, et cliquez sur le bouton Initier un litige. Le modérateur interviendra dans votre discussion jusqu'à ce que le litige soit résolu. Le modérateur prendra la décision finale quant à savoir si les fonds doivent vous être retournés, et combien. Les frais du modérateur seront payés avec les fonds que vous avez déjà envoyés.",
           SendMessage: "Envoyer",
-          CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          CloseDispute: "Clôturer le litige",
+          TotalInTransaction: "Transaction :"
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2306,9 +2306,9 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Vérifiez vos données d'achat, telles que la quantité et l'adresse Bitcoin de remboursement, pour vous assurer que tout est conforme",
           pageUnavailable: "Cette page est actuellement indisponible.",
           badHandle: "L'identifiant que vous avez entré n'a pas un ID OpenBazaar valide",
-          serverDown: "The server has been shut down", //notTranslated
-          tooManyPhotosTitle: "Too many photos", //notTranslated
-          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
+          serverDown: "Le serveur a été arrêté",
+          tooManyPhotosTitle: "Trop de photos",
+          tooManyPhotosBody: "Toutes ou une partie de vos photos n'ont pas pu être mises en ligne parce que vous avez probablement dépassé la quantité maximale autorisée.",  
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -2337,7 +2337,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Tapez un @identifiant, OpenBazaar ID ou un #mot_clé...",
           myPage: "Ma page",
-          testMode: "Test Mode", //notTranslated
+          testMode: "Mode de test",
           customizePage:"Personnaliser ma page",
           sellItem:"Nouveau",
           createListing:"Nouvelle annonce",
@@ -2384,9 +2384,9 @@ module.exports = Backbone.Model.extend({
           Finished: "Terminé"
         },
         softwareUpdate: {
-          updateAvailable: "OpenBazaar Update Available", //notTranslated
-          installUpdate: "Install Update", //notTranslated
-          dismiss: "Dismiss" //notTranslated
+          updateAvailable: "Mise à jour d'OpenBazaar disponible",
+          installUpdate: "Installer la mise à jour",
+          dismiss: "Refuser"
         },
         guidStillCreating: {
           HangTight: "Veuillez patienter quelques instants...",
@@ -2399,7 +2399,7 @@ module.exports = Backbone.Model.extend({
           NeedTempAddressHelper: "Veuillez mettre en favoris l'url de votre adresse Bitcoin temporaire",
           CantFindAddress: "Je ne trouve pas mon adresse Bitcoin",
           BitcoinWallet: "Portefeuille Bitcoin",
-          ModeratedPaymentDescription: "Votre paiement est retenu dans un portefeuille sécurisé jusqu'à ce que le vendeur respecte les conditions l'accord. Si des problèmes surviennent, un modérateur aidera.",
+          ModeratedPaymentDescription: "Votre paiement est retenu dans un portefeuille sécurisé jusqu'à ce que le vendeur respecte les conditions de l'accord. Si des problèmes surviennent, un modérateur aidera.",
           ModeratorFeeHelper: "Le modérateur peut facturer des frais, mais uniquement en cas de litige.",
           ModeratedPayment: "Paiement modéré",
           DisputeFee: "Frais de litige",
