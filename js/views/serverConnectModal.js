@@ -14,7 +14,9 @@ module.exports = baseModal.extend({
     'click .js-save': 'saveForm',
     'click .js-restoreDefaults': 'restoreDefaults',
     'input input': 'inputEntered',
-    'click .js-retry': 'retry'
+    'click .js-retry': 'retry',
+    'click .js-sslOn': 'sslOn',
+    'click .js-sslOff': 'sslOff'
   },
 
   initialize: function(options) {
@@ -47,7 +49,7 @@ module.exports = baseModal.extend({
       } else {
         this.changeServerWarningModal.open();
       }
-    };
+    }
   },
 
   restoreDefaults: function() {
@@ -128,7 +130,7 @@ module.exports = baseModal.extend({
 
     promise.cancel = function() {
       deferred.reject('canceled');
-    }
+    };
 
     promise.always(function() {
       promise.cleanup();
@@ -186,6 +188,18 @@ module.exports = baseModal.extend({
       this.connectAttempt = null;
       this.setState({ status: 'failed' });
     }
+  },
+
+  sslOn: function(){
+    this.model.set('SSL', false);
+    this.$('.js-sslOn').addClass('hide');
+    this.$('.js-sslOff').removeClass('hide');
+  },
+
+  sslOff: function(){
+    this.model.set('SSL', true);
+    this.$('.js-sslOn').removeClass('hide');
+    this.$('.js-sslOff').addClass('hide');
   },
 
   isStarted: function() {

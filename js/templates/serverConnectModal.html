@@ -32,7 +32,7 @@
       <div class="flexRow borderBottom custCol-border">
         <p class="margin0 padding2015 textOpacity75"><%= polyglot.t('serverConnectModal.intro') %></p>
       </div>
-        <form class="width100" name="serverConfigForm">
+        <form class="width100 <% if (ob.status == 'trying') { %>disabled<% } %>" name="serverConfigForm">
           <div class="flexCol-12 flex-border borderBottom">
             <div class="flexRow">
               <% if (ob.errors.server_ip) { %>
@@ -53,6 +53,16 @@
 
               <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.server_ip && print('invalid') %>">
                 <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="<%= ob.server_ip %>">
+                <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-locked
+                            positionAbsolute tooltip <% if(!ob.SSL){ %> hide <% } %>  js-sslOn"
+                     data-tooltip="SSL is on">
+                  SSL on
+                </div>
+                <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-unlocked
+                            positionAbsolute tooltip <% if(ob.SSL){ %> hide <% } %>  js-sslOff"
+                     data-tooltip="SSL is off">
+                  SSL off
+                </div>
               </div>
             </div>
 
@@ -169,7 +179,7 @@
         </form>
     </div>
 
-    <div class="bar barFlush borderBottomLeftRaidus3 color-secondary custCol-secondary borderBottomRightRaidus3">
+    <div class="bar barFlush borderBottomLeftRaidus3 color-secondary custCol-secondary borderBottomRightRaidus3 <% if (ob.status == 'trying') { %>disabled<% } %>">
       <a class="btn btn-bar btn-half js-restoreDefaults color-secondary custCol-secondary custCol-border-primary custCol-text textOpacity90 borderRight" tabindex="0">
         <span class="fontSize10 marginRight2"></span>
         <%= polyglot.t('serverConnectModal.restoreDefaults') %>
