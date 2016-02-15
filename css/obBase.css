@@ -3943,6 +3943,28 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-decoration: underline;
 }
 
+#statusBar {
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
+  opacity: 0.4;
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+  padding: 0 10px;
+  line-height: 30px;
+  color: #fff;
+  font-style: 12px;
+  font-style: italic;
+  background: #000;
+  transition: opacity 1s, bottom 1s;
+}
+
+#statusBar.fadeOut {
+  opacity: 0;
+  bottom: -30px;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity
