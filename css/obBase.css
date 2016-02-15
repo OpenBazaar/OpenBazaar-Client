@@ -3957,7 +3957,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-style: 12px;
   font-style: italic;
   background: #000;
-  transition: opacity 1s, bottom 1s;
+  transition: opacity 1.5s, bottom 1s;
 }
 
 #statusBar.fadeOut {
