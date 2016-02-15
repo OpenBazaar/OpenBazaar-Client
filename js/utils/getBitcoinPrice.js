@@ -8,10 +8,16 @@ module.exports = function (currency, callback) {
     //some APIs require currency to be upper case
     currency = currency.toUpperCase();
 
-    window.btcAverages = window.btcAverages || {};
+    var showStatus,
+        btPrices = [],
+        btcAverages = {rates: {}};
 
-    var btPrices = [];
-    var btcAverages = {rates: {}};
+    //if this is the first check, show status
+    if(!window.btcAverages){
+        showStatus = true;
+    }
+
+    window.btcAverages = window.btcAverages || {};
 
     var callBlockchain = function () {
         $.ajax({
@@ -161,6 +167,12 @@ module.exports = function (currency, callback) {
         } else {
             btAve = 1;
         }
+        if(showStatus){
+            showStatus = false;
+            $('#statusBar').addClass('fadeOut').text("");
+            console.log("foo")
+        }
+
         typeof callback === 'function' && callback(btAve, currencyKeys);
     };
 

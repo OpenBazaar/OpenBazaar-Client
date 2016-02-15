@@ -258,6 +258,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",
         ServerSettings: "Server Settings",
         ShutDownServer: "Shut Down the Server",
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...",
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution",
           ServiceFee: "Service fee",
@@ -746,6 +747,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1231,6 +1233,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1720,6 +1723,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -2209,6 +2213,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Résolveur d'identifiant",
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: {
           DisputeResolution: "Résolution de litige",
           ServiceFee: "Frais de service",
@@ -2696,6 +2701,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3181,6 +3187,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3666,6 +3673,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4155,6 +4163,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4643,6 +4652,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5131,6 +5141,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5620,6 +5631,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -6094,6 +6106,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -6582,6 +6595,7 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee",//notTranslated
