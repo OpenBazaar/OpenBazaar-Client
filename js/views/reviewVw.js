@@ -21,9 +21,14 @@ module.exports = baseVw.extend({
     var self = this;
 
     loadTemplate('./js/templates/review.html', function(loadedTemplate) {
-      self.$el.html(
-        loadedTemplate(self.model.toJSON())
-      );
+      loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {
+        self.$el.html(
+          loadedTemplate(
+            __.extend({}, self.model.toJSON(), { starsTmpl: starsTemplate })
+            // self.model.toJSON()
+          )
+        );
+      });
     });
 
     return this;

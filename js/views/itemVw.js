@@ -3,7 +3,8 @@ var __ = require('underscore'),
   $ = require('jquery'),
   colorbox = require('jquery-colorbox'),
   loadTemplate = require('../utils/loadTemplate'),
-  sanitizeHTML = require('sanitize-html')
+  sanitizeHTML = require('sanitize-html'),
+  RatingCl = require('../collections/ratingCl'),
   baseVw = require('./baseVw'),
   buyWizardVw = require('./buyWizardVw'),
   ReviewsVw = require('./reviewsVw');
@@ -19,14 +20,31 @@ module.exports = baseVw.extend({
   },
 
   initialize: function(options){
+    var self = this;
+
     this.options = options || {};
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
      */
     //don't render immediately, wait for the model to update itself with converted prices
-    this.listenTo(this.model, 'change:priceSet', this.render);
+    this.listenTo(this.model, 'change:priceSet', this.onPriceSet);
     this.subViews = [];
     this.subModels = [];
+    this.ratingCl = new RatingCl();
+
+    this.listenTo(this.ratingCl, 'sync', function() {
+      self.reviewsVw && self.reviewsVw.render();
+    });
+  },
+
+  onPriceSet: function() {
+    this.ratingCl.fetch({
+      data: {
+        contract_id: this.model.id
+      }
+    });
+
+    this.render();
   },
 
   render: function(){
@@ -46,7 +64,7 @@ module.exports = baseVw.extend({
       self.$('.js-listingDescription').html(description);
 
       self.reviewsVw && self.reviewsVw.remove();
-      self.reviewsVw = new ReviewsVw({ collection: new Backbone.Collection() });
+      self.reviewsVw = new ReviewsVw({ collection: self.ratingCl });
       self.registerChild(self.reviewsVw);
       self.$('.js-reviews').html(self.reviewsVw.render().el);
     });

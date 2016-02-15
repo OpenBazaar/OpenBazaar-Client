@@ -1,19 +1,48 @@
 <div class="rowItem padding2015">
-  <div class="table">
+  <div class="table custCol-text">
     <div>
-      <div class="marginLeft15 marginTop2 clearFix">
-        <div class="marginLeft15 marginTop2 clearFix">
-          <div class="floatLeft noOverflow marginBottom2 marginRight5">
-            <a class="textSize16px capitalize" title="<%= ob.name %>" href="<% print('#userPage/' + ob.guid + '/store') %>">
-              Minnow and the Frets
-            </a>
-          </div>
+      <div class="marginLeft15 marginTop2">
+        <div class="marginLeft15 marginTop2">
         </div>
-        <div class="marginLeft15 marginRight15 marginTop2">
-          <div class="fontSize14 txt-fade textWeightNormal clamp4">Silly Solly</div>
+        <div class="marginLeft15 marginTop2">
+          <div>
+<!--               <% print(ob.starsTmpl({ rating: ob.feedback })) %> -->
+              <% print(ob.starsTmpl({ rating: 3.75 })) %>
+              (<%= ob.feedback %>/5)
+          </div>
+          <p class="fontSize14 textWeightNormal clamp4 marginTop9"><%= ob.review %></p>
         </div>
       </div>
-      <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-unblockUser">Unblock</a>
+      <div class="marginLeft15 pull-right">
+        <div class="floatLeft marginRight15" style="width: 200px">
+          <div class="fontSize14">
+            <div>Quality: (<%= ob.quality %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.quality })) %>              
+            </div>
+          </div>
+          <div class="fontSize14 marginTop9">
+            <div>Matched description: (<%= ob.description %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.description })) %>
+            </div>            
+          </div>          
+        </div>
+        <div class="floatLeft" style="width: 200px">
+          <div class="fontSize14">
+            <div>Delivery speed: (<%= ob.delivery_time %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.delivery_time })) %>
+            </div>            
+          </div>
+          <div class="fontSize14 marginTop9">
+            <div>Customer service: (<%= ob.customer_service %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.customer_service })) %>
+            </div>            
+          </div>        
+        </div>
+      </div>
     </div>
   </div>
 </div>

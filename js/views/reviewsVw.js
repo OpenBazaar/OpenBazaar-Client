@@ -6,17 +6,21 @@ var __ = require('underscore'),
 
 module.exports = baseVw.extend({
 
-  className: "flexCol-12 flex-border js-tabTarg js-blocked hide",
+  className: "flexCol-12 flex-border js-tabTarg js-reviews hide",
 
   events: {
   },
 
   initialize: function(options) {
+    this.options = options || {};
+
     if (!options.collection) {
       throw new Error('Please provide a collection.');
     }
 
-    // this.reviewViews = [];
+    console.log('moo: '+ this.collection.length);
+    window.moo = this.collection;
+    this.reviewViews = [];
   },
 
   render: function(){
@@ -34,7 +38,14 @@ module.exports = baseVw.extend({
     this.collection.each(function(review) {
       var reviewView;
 
-      reviewView = new ReviewView().render();
+      // review.set({
+      //   delivery_time: Math.ceil(Math.random() * 5).toString(),
+      //   feedback: Math.ceil(Math.random() * 5).toString(),
+      //   quality: Math.ceil(Math.random() * 5).toString(),
+      //   description: Math.ceil(Math.random() * 5).toString()
+      // });
+
+      reviewView = new ReviewView({ model: review }).render();
       $container.append(reviewView.el);
       self.reviewViews.push(reviewView);
       self.registerChild(reviewView);
