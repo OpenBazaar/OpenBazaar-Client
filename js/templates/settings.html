@@ -1088,36 +1088,6 @@
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
                   <label>
-                    <%= polyglot.t('EnableSSL') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 borderRight0 custCol-border">
-                <div class="fieldItem">
-                  <input type="radio" class="fieldItem" id="sslYes" name="ssl" value="true"
-                    <% if(ob.user.ssl) { %>
-                    checked
-                    <% } %>
-                  />
-                  <label for="sslYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                  <input type="radio" class="fieldItem" id="sslNo" name="ssl" value="false"
-                    <% if(!ob.user.ssl) { %>
-                    checked
-                    <% } %>
-                  />
-                  <label for="sslNo" class="radioLabel"><%= polyglot.t('No') %></label>
-
-                </div>
-              </div>
-
-            </div>
-
-            <div class="flexRow">
-
-              <div class="flexCol-3  borderRight custCol-border">
-                <div class="fieldItem">
-                  <label>
                     <%= polyglot.t('Firewall') %>
                   </label>
                 </div>

@@ -8,7 +8,8 @@ module.exports = Backbone.Model.extend({
     'server_ip': 'localhost',
     'rest_api_port': 18469,
     'api_socket_port': 18466,
-    'heartbeat_socket_port': 18470
+    'heartbeat_socket_port': 18470,
+    'SSL': false
   },
 
   sync: localStorageSync.sync,
@@ -112,7 +113,8 @@ module.exports = Backbone.Model.extend({
   },
 
   getServerBaseUrl: function() {
-    return 'http://' + this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
+    var prefix = this.get('SSL') ? "https" : "http";
+    return prefix + '://' + this.get('server_ip') + ':' + this.get('rest_api_port') + '/api/v1';
   },
 
   getHeartbeatSocketUrl: function() {
