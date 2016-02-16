@@ -138,6 +138,7 @@ module.exports = baseVw.extend({
   shippingClick: function(e){
     this.render();
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-shipping'));
+    // this.onPriceSet();
   },
 
   tabClick: function(activeTab, showContent){
@@ -160,5 +161,7 @@ module.exports = baseVw.extend({
 
   remove: function() {
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+
+    baseVw.prototype.remove.apply(this, arguments);
   }
 });

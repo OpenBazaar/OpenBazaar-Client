@@ -20,14 +20,4 @@ module.exports = window.Backbone.Model.extend({
 
     return attrs;
   }
-  // },
-
-  // getAverageRating: function() {
-  //   var delivery = parseInt(this.get('delivery_time')),
-  //       feedback = parseInt(this.get('feedback')),
-  //       quality = parseInt(this.get('quality')),
-  //       description = parseInt(this.get('description'));
-
-  //   return (delivery + feedback + quality + description) / 4;
-  // }
 });

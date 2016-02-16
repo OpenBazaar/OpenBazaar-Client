@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    RatingCl = require('../collections/ratingCl'),
     baseVw = require('./baseVw'),
     ReviewView = require('./reviewVw');
 
@@ -11,22 +12,80 @@ module.exports = baseVw.extend({
   events: {
   },
 
+  VIEWS_PER_BATCH: 25,
+  VIEWS_PER_BATCH: 5,
+
+  MAX_MAX_MAX: 1500,
+
   initialize: function(options) {
+    var self = this;
+
     this.options = options || {};
 
     if (!options.collection) {
       throw new Error('Please provide a collection.');
     }
 
-    console.log('moo: '+ this.collection.length);
-    window.moo = this.collection;
+    for (var i=0;i<100;i++) {
+      var mooModel = this.collection.at(0),
+          pooModel;
+      
+      pooModel = mooModel.clone();
+      pooModel.set('review', i + ' ' + pooModel.get('review'));
+      this.collection.add(pooModel);
+    }
+
     this.reviewViews = [];
+    this.$obContainer = $('#obContainer');
+
+    this.paginatedCollection = new RatingCl(this.collection.slice(0, this.VIEWS_PER_BATCH));
+    this.paginatedCollection.on('update', (cl, options) => {
+      // console.log('gotz some updatations yo');
+      
+      if (options.add) {
+        this.$el.append(
+          this.createReviewViews(
+            this.collection.slice(
+              this.paginatedCollection.length - this.VIEWS_PER_BATCH,
+              this.paginatedCollection.length
+            )
+          )
+        );
+      }
+    });
+
+    this.throttledScroll = __.throttle(this.onScroll, 100).bind(this);
+    this.$obContainer.on('scroll', this.throttledScroll);
+  },
+
+  onScroll: function() {
+    if (this.paginatedCollection.length < this.collection.length &&
+        this.$el.is(':visible') &&
+        // if we've within 200 pixels of the bottom of our containing 'el'
+        (this.$obContainer[0].scrollTop >= (this.$obContainer[0].scrollHeight - this.$obContainer[0].offsetHeight) - 200)) {
+      this.paginatedCollection.add(
+        this.collection.models.slice(this.paginatedCollection.length, this.paginatedCollection.length + this.VIEWS_PER_BATCH)
+      );
+    }
+  },
+
+  createReviewViews: function(reviewModels) {
+    var $container = $('<div/>');
+
+    reviewModels.forEach((reviewMd) => {
+      var reviewView;
+
+      reviewView = new ReviewView({ model: reviewMd }).render();
+      this.reviewViews.push(reviewView);
+      $container.append(reviewView.el);
+      this.reviewViews.push(reviewView);
+      this.registerChild(reviewView);      
+    });
+
+    return $container;
   },
 
   render: function(){
-    var self = this,
-        $container = $('<div/>');
-
     if (this.reviewViews) {
       this.reviewViews.forEach(function(view) {
         view.remove();
@@ -35,24 +94,16 @@ module.exports = baseVw.extend({
 
     this.reviewViews = [];
 
-    this.collection.each(function(review) {
-      var reviewView;
-
-      // review.set({
-      //   delivery_time: Math.ceil(Math.random() * 5).toString(),
-      //   feedback: Math.ceil(Math.random() * 5).toString(),
-      //   quality: Math.ceil(Math.random() * 5).toString(),
-      //   description: Math.ceil(Math.random() * 5).toString()
-      // });
-
-      reviewView = new ReviewView({ model: review }).render();
-      $container.append(reviewView.el);
-      self.reviewViews.push(reviewView);
-      self.registerChild(reviewView);
-    });
-
-    this.$el.html($container);
+    this.$el.html(
+      this.createReviewViews(this.paginatedCollection.models)
+    );
 
     return this;
+  },
+
+  remove: function() {
+    this.$obContainer.off('scroll', this.throttledScroll);
+
+    baseVw.prototype.remove.apply(this, arguments);
   }
 });
