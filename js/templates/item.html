@@ -41,6 +41,9 @@
             <%= polyglot.t('BUYNOW') %>
           </div>
         </li>
+        <li class="border0 alignCenter padding10 marginBottom12 js-itemRating">
+          <span class="marginRight3"><%= ob.totalReviews %> Review<%= ob.totalReviews == 1 && print('s') %></span><% print(ob.starsTemplate({ rating: ob.avgRating })) %><span class="marginLeft2">(<%= ob.avgRating %>/5)</span>
+        </li>        
       </ul>
     </div>
     
@@ -109,7 +112,7 @@
         <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab paddingRight18">
           <span class="ion-android-star fontSize11 marginRight2 textOpacity1"></span>
           <%= polyglot.t('Reviews') %>
-          <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingReviewCount">0</span>
+          <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingReviewCount"><%= ob.totalReviews %></span>
         </a>
         <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab">
           <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
@@ -124,11 +127,6 @@
         </div>
       </div>
       <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-reviews js-tabTarg hide">
-<!--         <div class="flexRow">
-          <div class="rowItem fontSize16 padding30 paddingTop10 lineHeight24 fontWeight400">
-            <p>Placeholder for reviews</p>
-          </div>
-        </div> -->
       </div>
       <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-shipping js-tabTarg hide">
         <div class="flexRow">

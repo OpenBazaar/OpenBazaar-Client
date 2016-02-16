@@ -14,9 +14,6 @@ module.exports = window.Backbone.Model.extend({
     attrs.description = parseInt(attrs.description);
     attrs.customer_service = parseInt(attrs.customer_service);
 
-    console.log('hippo');
-    window.hippo = attrs;
-
     // todo: update sync to convert the above back to strings
     // for saves. That will be necessary, should we want to use
     // this model to save (which we probably should).

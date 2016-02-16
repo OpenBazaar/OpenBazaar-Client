@@ -33,7 +33,8 @@ module.exports = baseVw.extend({
     this.ratingCl = new RatingCl();
 
     this.listenTo(this.ratingCl, 'sync', function() {
-      self.reviewsVw && self.reviewsVw.render();
+      this.reviewsVw && this.reviewsVw.render();
+      this.render();
     });
   },
 
@@ -44,7 +45,23 @@ module.exports = baseVw.extend({
       }
     });
 
-    this.render();
+    // this.render();
+  },
+
+  getAverageRating: function() {
+    var ratingsSum = 0,
+        avgRating;
+
+    this.ratingCl.each(function(ratingMd) {
+      ratingsSum += ratingMd.get('feedback');
+    });
+
+    avgRating = (ratingsSum / this.ratingCl.length).toFixed(2);
+    avgRating = avgRating.endsWith('.00') ? avgRating.slice(0, avgRating.length - 3) : avgRating;
+    // round to the nearest quarter
+    avgRating = Math.round(avgRating * 4) / 4;
+
+    return avgRating;
   },
 
   render: function(){
@@ -55,18 +72,31 @@ module.exports = baseVw.extend({
     });
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {
+        self.$el.html(
+          loadedTemplate(
+            __.extend({}, self.model.toJSON(), {
+              totalReviews: self.ratingCl.length,
+              avgRating: self.getAverageRating(),
+              starsTemplate: starsTemplate
+            })
+          )
+        );
 
-      var description = sanitizeHTML(self.model.get('vendor_offer').listing.item.displayDescription, {
-        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+        var description = sanitizeHTML(self.model.get('vendor_offer').listing.item.displayDescription, {
+          allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+        });
+
+        self.$('.js-listingDescription').html(description);
+
+        if (!self.reviewsVw) {
+          self.reviewsVw = new ReviewsVw({ collection: self.ratingCl });
+          self.registerChild(self.reviewsVw);
+          self.$('.js-reviews').html(self.reviewsVw.render().el);
+        }
+
+        self.$itemRating = self.$('.js-itemRating');
       });
-
-      self.$('.js-listingDescription').html(description);
-
-      self.reviewsVw && self.reviewsVw.remove();
-      self.reviewsVw = new ReviewsVw({ collection: self.ratingCl });
-      self.registerChild(self.reviewsVw);
-      self.$('.js-reviews').html(self.reviewsVw.render().el);
     });
 
     return this;
@@ -106,6 +136,7 @@ module.exports = baseVw.extend({
   },
 
   shippingClick: function(e){
+    this.render();
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-shipping'));
   },
 
