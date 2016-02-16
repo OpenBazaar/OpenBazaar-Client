@@ -20,6 +20,7 @@ module.exports = baseModal.extend({
   },
 
   initialize: function(options) {
+    this.options = options || {};
     this.model = app.serverConfig;
 
     this.listenTo(this.model, 'invalid sync', function() {
@@ -30,6 +31,7 @@ module.exports = baseModal.extend({
       this.render();
     });
 
+    this._state = this.options.initialState || {};
     this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
   },
 
@@ -97,20 +99,19 @@ module.exports = baseModal.extend({
     };
 
     login = function() {
-      // at this point, we've confirmed connection, so:
-      self.trigger('connected');
-
       // check authentication
       loginRequest = app.login().done(function(data) {
         if (data.success) {
           deferred.resolve();
-          self.trigger('authenticated');
+          self.trigger('connected', true);
         } else {
           if (data.reason === 'too many attempts') {
             rejectLogin('failed-auth-too-many');  
           } else {
             rejectLogin('failed-auth');  
-          }          
+          }
+
+          self.trigger('connected', false);
         }
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
@@ -172,7 +173,7 @@ module.exports = baseModal.extend({
     }).fail(function(reason) {
       if (reason == 'canceled') return;
 
-      self.setState({ status: typeof reason === undefined || reason === 'timedout' ? 'failed' : reason });
+      self.setState({ status: typeof reason === 'undefined' || reason === 'timedout' ? 'failed' : reason });
     }).always(function() {
       self.connectAttempt = null;
     });
