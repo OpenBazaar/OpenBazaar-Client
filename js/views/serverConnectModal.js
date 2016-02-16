@@ -165,25 +165,17 @@ module.exports = baseModal.extend({
         connect;
 
     this.connectAttempt && this.connectAttempt.cancel();
-
     this.setState({ status: 'trying' });
 
-    (connect = function() {
-      self.connectAttempt = self.attemptConnection().done(function() {
-        self.setState({ status: 'connected' });
-      }).fail(function(reason) {
-        if (reason == 'canceled') return;
-        
-        if (attempts >= 3 || reason === 'failed-auth' || reason === 'failed-auth-too-many') {
-          self.setState({ status: reason === 'failed-auth' ? 'failed-auth' : 'failed' });
-        } else {
-          attempts += 1;
-          connect();
-        }
-      }).always(function() {
-        self.connectAttempt = null;
-      });
-    })();
+    this.connectAttempt = this.attemptConnection().done(function() {
+      self.setState({ status: 'connected' });
+    }).fail(function(reason) {
+      if (reason == 'canceled') return;
+
+      self.setState({ status: typeof reason === undefined || reason === 'timedout' ? 'failed' : reason });
+    }).always(function() {
+      self.connectAttempt = null;
+    });
   },
 
   stop: function() {
