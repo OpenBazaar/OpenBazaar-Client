@@ -57,7 +57,8 @@ App.prototype.login = function() {
     data: {
       username: this.serverConfig.get('username'),
       password: this.serverConfig.get('password')
-    }
+    },
+    timeout: 3000
   });  
 };
 
