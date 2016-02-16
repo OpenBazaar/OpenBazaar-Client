@@ -154,6 +154,9 @@ module.exports = baseVw.extend({
     'click .js-customizeSecondaryColor .js-customColorChoice': 'customizeSelectColor',
     'click .js-customizeBackgroundColor .js-customColorChoice': 'customizeSelectColor',
     'click .js-customizeTextColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-block': 'blockUserClick',
+    'click .js-unblock': 'unblockUserClick',
+    'click .js-showBlockedUser': 'showBlockedUser',
     'change .js-categories': 'categoryChanged'
   },
 
@@ -306,9 +309,15 @@ module.exports = baseVw.extend({
 
   render: function(){
     "use strict";
-    var self = this;
+    var self = this,
+        blocked = this.options.userModel.get('blocked_guids') || [],
+        isBlocked = blocked.indexOf(this.pageID) !== -1 ? true : false;
+
+    //add blocked status to model
+    this.model.set('isBlocked', isBlocked);
     //make sure container is cleared
     $('#content').html(this.$el);
+
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -320,6 +329,11 @@ module.exports = baseVw.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.state, self.options.itemHash);
+
+      //check if user is blocked
+      if (!self.options.ownPage && isBlocked) {
+        self.hideBlockedUser();
+      }
 
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
@@ -1367,6 +1381,29 @@ module.exports = baseVw.extend({
       this.$('.js-userPageEditModerator').addClass('hide');
       this.$('.js-userPageBecomeModerator').removeClass('hide');
     }
+  },
+
+  blockUserClick: function(e) {
+    this.$('.js-unblock').removeClass('hide');
+    this.$('.js-block').addClass('hide');
+    this.options.userModel.blockUser(this.userProfile.get('profile').guid);
+    this.hideBlockedUser();
+  },
+
+  unblockUserClick: function(e) {
+    this.$('.js-unblock').addClass('hide');
+    this.$('.js-block').removeClass('hide');
+    this.options.userModel.unblockUser(this.userProfile.get('profile').guid);
+  },
+
+  hideBlockedUser: function(){
+    this.$('.js-blockedWarning').fadeIn(100);
+    this.$('.js-mainContainer').addClass('blurMore');
+  },
+
+  showBlockedUser: function(){
+    this.$('.js-blockedWarning').fadeOut(300);
+    this.$('.js-mainContainer').removeClass('blurMore');
   },
 
   close: function(){

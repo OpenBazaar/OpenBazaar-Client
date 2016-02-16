@@ -258,6 +258,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",
         ServerSettings: "Server Settings",
         ShutDownServer: "Shut Down the Server",
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...",
+        ServerChangeWarningHeadline: "Caution: Record Your Settings",
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution",
           ServiceFee: "Service fee",
@@ -746,6 +749,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1231,6 +1237,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -1720,6 +1729,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -2209,6 +2221,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Résolveur d'identifiant",
         ServerSettings: "Paramètres du serveur",
         ShutDownServer: "Arrêter le serveur",
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: {
           DisputeResolution: "Résolution de litige",
           ServiceFee: "Frais de service",
@@ -2696,6 +2711,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3181,6 +3199,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -3666,6 +3687,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4155,6 +4179,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -4643,6 +4670,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5131,6 +5161,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -5620,6 +5653,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -6094,6 +6130,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee", // not translated
@@ -6582,6 +6621,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
+        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: {
           DisputeResolution: "Dispute Resolution", //notTranslated
           ServiceFee: "Service fee",//notTranslated

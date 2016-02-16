@@ -311,14 +311,20 @@ form {
   line-height: 50px;
 }
 
-#overlay {
+#overlay,
+.overlay {
   position: fixed;
   top: 50px;
+  left: 0;
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.85);
   z-index: 3;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
+}
+
+.overlayObscurring {
+  background-color: rgba(25,25,25,0.95);
 }
 
 .navBar {
@@ -837,6 +843,10 @@ label.fieldItem {
   margin-bottom: 20px;
 }
 
+.row30 {
+  margin-bottom: 30px;
+}
+
 .row60 {
   margin-bottom: 60px;
 }
@@ -1341,6 +1351,17 @@ h5 {
   height: 250px;
   position: relative;
   width: 525px;
+}
+
+.modal-small {
+  border-radius: 3px;
+  min-height: 120px;
+  min-width: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  -webkit-backface-visibility: hidden;
 }
 
 /*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
@@ -3943,6 +3964,27 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-decoration: underline;
 }
 
+#statusBar {
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
+  opacity: 0.4;
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+  padding: 0 10px;
+  line-height: 30px;
+  color: #fff;
+  font-style: 12px;
+  font-style: italic;
+  background: #000;
+  transition: opacity 1.5s, bottom 1s;
+}
+
+#statusBar.fadeOut {
+  bottom: -30px;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity
@@ -5037,6 +5079,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .blur {
   -webkit-filter: blur(1px);
+}
+
+#ov1 .blurMore {
+  -webkit-filter: blur(5px);
 }
 
 #ov1 .fadeOut {
