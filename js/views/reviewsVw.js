@@ -13,9 +13,8 @@ module.exports = baseVw.extend({
   },
 
   VIEWS_PER_BATCH: 25,
-  VIEWS_PER_BATCH: 5,
 
-  MAX_MAX_MAX: 1500,
+  MAX_VIEWS: 1500,
 
   initialize: function(options) {
     var self = this;
@@ -32,13 +31,18 @@ module.exports = baseVw.extend({
   },
 
   onScroll: function() {
+    var untilIndex;
+
     if (this.paginatedCollection &&
         this.paginatedCollection.length < this.collection.length &&
+        this.paginatedCollection.length < this.MAX_VIEWS &&
         this.$el.is(':visible') &&
         // if we're within 200 pixels of the bottom of the scroll container
         (this.$obContainer[0].scrollTop >= (this.$obContainer[0].scrollHeight - this.$obContainer[0].offsetHeight) - 200)) {
+      untilIndex = this.paginatedCollection.length + this.VIEWS_PER_BATCH > this.MAX_VIEWS ?
+        this.MAX_VIEWS : this.paginatedCollection.length + this.VIEWS_PER_BATCH;
       this.paginatedCollection.add(
-        this.collection.models.slice(this.paginatedCollection.length, this.paginatedCollection.length + this.VIEWS_PER_BATCH)
+        this.collection.models.slice(this.paginatedCollection.length, untilIndex)
       );
     }
   },
@@ -67,17 +71,6 @@ module.exports = baseVw.extend({
     }
 
     this.reviewViews = [];
-
-    for (var i=0;i<100;i++) {
-      if (!this.collection.length) break;
-
-      var mooModel = this.collection.at(0),
-          pooModel;
-      
-      pooModel = mooModel.clone();
-      pooModel.set('review', i + ' ' + pooModel.get('review'));
-      this.collection.add(pooModel);
-    }
 
     this.paginatedCollection = new RatingCl(this.collection.slice(0, this.VIEWS_PER_BATCH));
     this.listenTo(this.paginatedCollection, 'update', function(cl, options) {

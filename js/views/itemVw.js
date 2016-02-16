@@ -30,12 +30,18 @@ module.exports = baseVw.extend({
     this.listenTo(this.model, 'change:priceSet', this.onPriceSet);
     this.subViews = [];
     this.subModels = [];
+    this.activeTab = 'description';
     this.ratingCl = new RatingCl();
 
     this.listenTo(this.ratingCl, 'reset', function() {
+      this.fetchingRatings = false;
       this.reviewsVw && this.reviewsVw.render();
       this.render();
     });
+
+    this.listenTo(this.ratingCl, 'request', function() {
+      this.fetchingRatings = true;
+    });    
   },
 
   onPriceSet: function() {
@@ -66,8 +72,6 @@ module.exports = baseVw.extend({
   },
 
   render: function(){
-    console.log('im a rendering maniac');
-
     var self = this;
     __.each(self.model.get('vendor_offer').listing.item.image_hashes, function(imageHash, i){
       "use strict";
@@ -81,7 +85,9 @@ module.exports = baseVw.extend({
             __.extend({}, self.model.toJSON(), {
               totalReviews: self.ratingCl.length,
               avgRating: self.getAverageRating(),
-              starsTemplate: starsTemplate
+              starsTemplate: starsTemplate,
+              activeTab: self.activeTab,
+              fetchingRatings: self.fetchingRatings
             })
           )
         );
@@ -95,9 +101,9 @@ module.exports = baseVw.extend({
         if (!self.reviewsVw) {
           self.reviewsVw = new ReviewsVw({ collection: self.ratingCl });
           self.registerChild(self.reviewsVw);
-          self.$('.js-reviews').html(self.reviewsVw.render().el);
+          self.$('.js-reviewsContainer ').html(self.reviewsVw.render().el);
         } else {
-          self.$('.js-reviews').html(self.reviewsVw.el);
+          self.$('.js-reviewsContainer ').html(self.reviewsVw.el);
         }
 
         self.$itemRating = self.$('.js-itemRating');
@@ -134,16 +140,17 @@ module.exports = baseVw.extend({
 
   descriptionClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-description'));
+    this.activeTab = 'description';
   },
 
   reviewsClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-reviews'));
+    this.activeTab = 'reviews';
   },
 
   shippingClick: function(e){
-    this.render();
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-shipping'));
-    // this.onPriceSet();
+    this.activeTab = 'shipping';
   },
 
   tabClick: function(activeTab, showContent){

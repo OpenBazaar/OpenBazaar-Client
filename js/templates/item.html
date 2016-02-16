@@ -41,9 +41,11 @@
             <%= polyglot.t('BUYNOW') %>
           </div>
         </li>
+        <% if (ob.totalReviews) { %>
         <li class="border0 alignCenter padding10 marginBottom12 js-itemRating">
           <span class="marginRight3"><%= ob.totalReviews %> Review<% ob.totalReviews !== 1 && print('s') %></span><% print(ob.starsTemplate({ rating: ob.avgRating })) %><span class="marginLeft2">(<%= ob.avgRating %>/5)</span>
-        </li>        
+        </li>
+        <% } %>
       </ul>
     </div>
     
@@ -105,30 +107,40 @@
   <div class="flexCol-12">
     <div class="custCol-border marginBottom40 marginTop30">
       <div class="bar navBar barFlush navBar custCol-secondary height55">
-        <a class="btn btn-bar btn-tab custCol-secondary active js-descriptionTab js-tab marginLeft20 borderRadiusTop borderRadiusBottom0">
+        <a class="btn btn-bar btn-tab custCol-secondary js-descriptionTab js-tab marginLeft20 borderRadiusTop borderRadiusBottom0 <% ob.activeTab === 'description' && print('active') %>">
           <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
           <%= polyglot.t('Description') %>
         </a>
-        <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab paddingRight18">
+        <a class="btn btn-bar btn-tab custCol-secondary js-reviewsTab js-tab paddingRight18 <% ob.activeTab === 'reviews' && print('active') %>">
           <span class="ion-android-star fontSize11 marginRight2 textOpacity1"></span>
           <%= polyglot.t('Reviews') %>
+          <% if (!ob.fetchingRatings) { %>
           <span class="pill fontSize12 textOpacity75 marginLeft2 js-listingReviewCount"><%= ob.totalReviews %></span>
+          <% } %>
         </a>
-        <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab">
+        <a class="btn btn-bar btn-tab custCol-secondary js-shippingTab js-tab <% ob.activeTab === 'shipping' && print('active') %>">
           <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
           <%= polyglot.t('Shipping') %> <%= polyglot.t('Ampersand') %> <%= polyglot.t('Returns') %>
         </a>
       </div>
-      <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300">
+      <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300 <% ob.activeTab !== 'description' && print('hide') %>">
         <div class="flexRow">
           <div class="rowItem fontSize16 padding30 paddingTop10 lineHeight24 fontWeight400">
             <p class="js-listingDescription"></p>
           </div>
         </div>
       </div>
-      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-reviews js-tabTarg hide">
+      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-reviews js-tabTarg <% ob.activeTab !== 'reviews' && print('hide') %>">
+        <% if (ob.fetchingRatings) { %>
+        <div class="padding20 marginBottom12 width100 alignCenter">
+          <div class="spinnerWrapper">
+            <i class="ion-android-sync spinner textSize24px"></i>
+          </div>         
+        </div>
+        <% } %>
+        <div class="js-reviewsContainer <% (ob.fetchingRatings) && print ('hide') %>"></div>
       </div>
-      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-shipping js-tabTarg hide">
+      <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-shipping js-tabTarg <% ob.activeTab !== 'shipping' && print('hide') %>">
         <div class="flexRow">
           <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
             <% if(ob.vendor_offer.listing.shipping.free == false) { %>
