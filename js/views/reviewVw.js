@@ -25,7 +25,6 @@ module.exports = baseVw.extend({
         self.$el.html(
           loadedTemplate(
             __.extend({}, self.model.toJSON(), { starsTmpl: starsTemplate })
-            // self.model.toJSON()
           )
         );
       });

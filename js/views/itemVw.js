@@ -32,7 +32,7 @@ module.exports = baseVw.extend({
     this.subModels = [];
     this.ratingCl = new RatingCl();
 
-    this.listenTo(this.ratingCl, 'sync', function() {
+    this.listenTo(this.ratingCl, 'reset', function() {
       this.reviewsVw && this.reviewsVw.render();
       this.render();
     });
@@ -42,10 +42,11 @@ module.exports = baseVw.extend({
     this.ratingCl.fetch({
       data: {
         contract_id: this.model.id
-      }
+      },
+      reset: true
     });
 
-    // this.render();
+    this.render();
   },
 
   getAverageRating: function() {
@@ -65,6 +66,8 @@ module.exports = baseVw.extend({
   },
 
   render: function(){
+    console.log('im a rendering maniac');
+
     var self = this;
     __.each(self.model.get('vendor_offer').listing.item.image_hashes, function(imageHash, i){
       "use strict";
@@ -93,6 +96,8 @@ module.exports = baseVw.extend({
           self.reviewsVw = new ReviewsVw({ collection: self.ratingCl });
           self.registerChild(self.reviewsVw);
           self.$('.js-reviews').html(self.reviewsVw.render().el);
+        } else {
+          self.$('.js-reviews').html(self.reviewsVw.el);
         }
 
         self.$itemRating = self.$('.js-itemRating');

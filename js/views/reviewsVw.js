@@ -26,42 +26,16 @@ module.exports = baseVw.extend({
       throw new Error('Please provide a collection.');
     }
 
-    for (var i=0;i<100;i++) {
-      var mooModel = this.collection.at(0),
-          pooModel;
-      
-      pooModel = mooModel.clone();
-      pooModel.set('review', i + ' ' + pooModel.get('review'));
-      this.collection.add(pooModel);
-    }
-
-    this.reviewViews = [];
     this.$obContainer = $('#obContainer');
-
-    this.paginatedCollection = new RatingCl(this.collection.slice(0, this.VIEWS_PER_BATCH));
-    this.paginatedCollection.on('update', (cl, options) => {
-      // console.log('gotz some updatations yo');
-      
-      if (options.add) {
-        this.$el.append(
-          this.createReviewViews(
-            this.collection.slice(
-              this.paginatedCollection.length - this.VIEWS_PER_BATCH,
-              this.paginatedCollection.length
-            )
-          )
-        );
-      }
-    });
-
     this.throttledScroll = __.throttle(this.onScroll, 100).bind(this);
     this.$obContainer.on('scroll', this.throttledScroll);
   },
 
   onScroll: function() {
-    if (this.paginatedCollection.length < this.collection.length &&
+    if (this.paginatedCollection &&
+        this.paginatedCollection.length < this.collection.length &&
         this.$el.is(':visible') &&
-        // if we've within 200 pixels of the bottom of our containing 'el'
+        // if we're within 200 pixels of the bottom of the scroll container
         (this.$obContainer[0].scrollTop >= (this.$obContainer[0].scrollHeight - this.$obContainer[0].offsetHeight) - 200)) {
       this.paginatedCollection.add(
         this.collection.models.slice(this.paginatedCollection.length, this.paginatedCollection.length + this.VIEWS_PER_BATCH)
@@ -94,9 +68,36 @@ module.exports = baseVw.extend({
 
     this.reviewViews = [];
 
-    this.$el.html(
-      this.createReviewViews(this.paginatedCollection.models)
-    );
+    for (var i=0;i<100;i++) {
+      if (!this.collection.length) break;
+
+      var mooModel = this.collection.at(0),
+          pooModel;
+      
+      pooModel = mooModel.clone();
+      pooModel.set('review', i + ' ' + pooModel.get('review'));
+      this.collection.add(pooModel);
+    }
+
+    this.paginatedCollection = new RatingCl(this.collection.slice(0, this.VIEWS_PER_BATCH));
+    this.listenTo(this.paginatedCollection, 'update', function(cl, options) {
+      if (options.add) {
+        this.$el.append(
+          this.createReviewViews(
+            this.collection.slice(
+              this.paginatedCollection.length - this.VIEWS_PER_BATCH,
+              this.paginatedCollection.length
+            )
+          )
+        );
+      }
+    });    
+
+    if (this.paginatedCollection.length) {
+      this.$el.html(
+        this.createReviewViews(this.paginatedCollection.models)
+      );
+    }
 
     return this;
   },
