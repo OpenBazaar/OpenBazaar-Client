@@ -4,10 +4,12 @@ var __ = require('underscore'),
   colorbox = require('jquery-colorbox'),
   loadTemplate = require('../utils/loadTemplate'),
   sanitizeHTML = require('sanitize-html'),
-  buyWizardVw = require('./buyWizardVw');
-  Backbone.$ = $;
+  RatingCl = require('../collections/ratingCl'),
+  baseVw = require('./baseVw'),
+  buyWizardVw = require('./buyWizardVw'),
+  ReviewsVw = require('./reviewsVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   events: {
     'click .js-descriptionTab': 'descriptionClick',
@@ -18,14 +20,55 @@ module.exports = Backbone.View.extend({
   },
 
   initialize: function(options){
+    var self = this;
+
     this.options = options || {};
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
      */
     //don't render immediately, wait for the model to update itself with converted prices
-    this.listenTo(this.model, 'change:priceSet', this.render);
+    this.listenTo(this.model, 'change:priceSet', this.onPriceSet);
     this.subViews = [];
     this.subModels = [];
+    this.activeTab = 'description';
+    this.ratingCl = new RatingCl();
+
+    this.listenTo(this.ratingCl, 'reset', function() {
+      this.fetchingRatings = false;
+      this.reviewsVw && this.reviewsVw.render();
+      this.render();
+    });
+
+    this.listenTo(this.ratingCl, 'request', function() {
+      this.fetchingRatings = true;
+    });    
+  },
+
+  onPriceSet: function() {
+    this.ratingCl.fetch({
+      data: {
+        contract_id: this.model.id
+      },
+      reset: true
+    });
+
+    this.render();
+  },
+
+  getAverageRating: function() {
+    var ratingsSum = 0,
+        avgRating;
+
+    this.ratingCl.each(function(ratingMd) {
+      ratingsSum += ratingMd.get('feedback');
+    });
+
+    avgRating = (ratingsSum / this.ratingCl.length).toFixed(2);
+    avgRating = avgRating.endsWith('.00') ? avgRating.slice(0, avgRating.length - 3) : avgRating;
+    // round to the nearest quarter
+    avgRating = Math.round(avgRating * 4) / 4;
+
+    return avgRating;
   },
 
   render: function(){
@@ -36,13 +79,35 @@ module.exports = Backbone.View.extend({
     });
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
+      loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {
+        self.$el.html(
+          loadedTemplate(
+            __.extend({}, self.model.toJSON(), {
+              totalReviews: self.ratingCl.length,
+              avgRating: self.getAverageRating(),
+              starsTemplate: starsTemplate,
+              activeTab: self.activeTab,
+              fetchingRatings: self.fetchingRatings
+            })
+          )
+        );
 
-      var description = sanitizeHTML(self.model.get('vendor_offer').listing.item.displayDescription, {
-        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+        var description = sanitizeHTML(self.model.get('vendor_offer').listing.item.displayDescription, {
+          allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+        });
+
+        self.$('.js-listingDescription').html(description);
+
+        if (!self.reviewsVw) {
+          self.reviewsVw = new ReviewsVw({ collection: self.ratingCl });
+          self.registerChild(self.reviewsVw);
+          self.$('.js-reviewsContainer ').html(self.reviewsVw.render().el);
+        } else {
+          self.$('.js-reviewsContainer ').html(self.reviewsVw.el);
+        }
+
+        self.$itemRating = self.$('.js-itemRating');
       });
-
-      self.$('.js-listingDescription').html(description);
     });
 
     return this;
@@ -75,14 +140,17 @@ module.exports = Backbone.View.extend({
 
   descriptionClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-description'));
+    this.activeTab = 'description';
   },
 
   reviewsClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-reviews'));
+    this.activeTab = 'reviews';
   },
 
   shippingClick: function(e){
     this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-shipping'));
+    this.activeTab = 'shipping';
   },
 
   tabClick: function(activeTab, showContent){
@@ -103,23 +171,9 @@ module.exports = Backbone.View.extend({
     $('#obContainer').addClass('overflowHidden').addClass('blur');  
   },
 
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
+  remove: function() {
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
 
-    $('#obContainer').removeClass('overflowHidden').removeClass('blur');  
-    this.model.off();
-    this.off();
-    this.remove();
+    baseVw.prototype.remove.apply(this, arguments);
   }
 });
