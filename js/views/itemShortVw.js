@@ -14,6 +14,7 @@ module.exports = baseVw.extend({
     'click .js-about': 'aboutClick',
     'click .js-itemShortEdit': 'editItemClick',
     'click .js-itemShortDelete': 'deleteItemClick',
+    'click .js-itemShortClone': 'cloneItemClick',
     'click .js-userShortFollow': 'followUser',
     'click .js-userShortUnfollow': 'unfollowUser',
     'click .js-blockUser': 'blockUser',
@@ -85,13 +86,15 @@ module.exports = baseVw.extend({
   },
 
   editItemClick: function(){
-    "use strict";
     window.obEventBus.trigger('itemShortEdit', {'contract_hash': this.model.get('contract_hash')});
   },
 
   deleteItemClick: function(){
-    "use strict";
     window.obEventBus.trigger('itemShortDelete', {'contract_hash': this.model.get('contract_hash')});
+  },
+
+  cloneItemClick: function() {
+    window.obEventBus.trigger('itemShortClone', {'contract_hash': this.model.get('contract_hash')});
   },
 
   followUser: function(e) {

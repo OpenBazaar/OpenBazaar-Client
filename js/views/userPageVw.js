@@ -129,6 +129,7 @@ module.exports = baseVw.extend({
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
     'click .js-editItem': 'editItem',
+    'click .js-cloneItem': 'cloneItem',
     'click .js-deleteItem': 'deleteItemClick',
     'click .js-cancelItem': 'cancelClick',
     'click .js-saveItem': 'saveItem',
@@ -229,6 +230,12 @@ module.exports = baseVw.extend({
         self.editItem();
       });
     });
+
+    this.listenTo(window.obEventBus, "itemShortClone", function(options){
+      this.setItem(options.contract_hash, function(){
+        self.cloneItem();
+      });
+    });    
 
     this.listenTo(window.obEventBus, "itemShortDelete", function(options){
       this.setItem(options.contract_hash, function(){
@@ -474,7 +481,6 @@ module.exports = baseVw.extend({
   },
 
   setControls: function(state){
-    "use strict";
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
@@ -777,13 +783,16 @@ module.exports = baseVw.extend({
     );
   },
 
-  renderItemEdit: function(model){
-    "use strict";
+  renderItemEdit: function(model, clone){
     var self = this,
         hash = "";
     if(model) {
       //if editing existing product, clone the model
       this.itemEdit = model.clone();
+
+      if (clone) {
+        this.itemEdit.unset('id');
+      }
     } else {
       defaultItem.serverUrl =self.options.userModel.get('serverUrl');
       defaultItem.userCountry = self.options.userModel.get('country');
@@ -796,13 +805,13 @@ module.exports = baseVw.extend({
     this.itemEdit.set('moderators', self.model.get('user').moderators);
     //unbind any old view
     if(this.itemEditView){
-      this.itemEditView.undelegateEvents();
+      this.itemEditView.remove();
     }
-    this.itemEditView = new itemEditVw({model:this.itemEdit, el: '.js-list5'});
+    this.itemEditView = new itemEditVw({model:this.itemEdit});
+    this.$('.js-list5').html(this.itemEditView.render().el);
+    this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
-    this.subViews.push(this.itemEditView);
-    this.subModels.push(this.itemEdit);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
 
@@ -1212,11 +1221,14 @@ module.exports = baseVw.extend({
     $('#obContainer').animate({ scrollTop: 0 });
   },
 
-  editItem: function(){
-    "use strict";
-    this.renderItemEdit(this.item);
+  editItem: function(clone){
+    this.renderItemEdit(this.item, clone);
     this.setControls("itemEdit");
     this.lastTab = "itemOld";
+  },
+
+  cloneItem: function() {
+    this.editItem(true);
   },
 
   deleteItemClick: function(){

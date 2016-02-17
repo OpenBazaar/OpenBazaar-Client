@@ -8,9 +8,10 @@ var loadTemplate = require('../utils/loadTemplate'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
     messageModal = require('../utils/messageModal'),
-    chosen = require('../utils/chosen.jquery.min.js');
+    chosen = require('../utils/chosen.jquery.min.js'),
+    baseVw = require('./baseVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   events: {
     'click #shippingFreeTrue': 'disableShippingPrice',
@@ -54,8 +55,6 @@ module.exports = Backbone.View.extend({
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
-
-    this.render();
   },
 
   render: function(){
@@ -78,18 +77,19 @@ module.exports = Backbone.View.extend({
         return false;
       });
 
-      var editor = new MediumEditor('#inputDescription', {
-          placeholder: {
-            text: ''
-          },
-          toolbar: {
-            imageDragging: false,
-            sticky: true
-          }
-      });
+      setTimeout(() => {
+        var editor = new MediumEditor('#inputDescription', {
+            placeholder: {
+              text: ''
+            },
+            toolbar: {
+              imageDragging: false,
+              sticky: true
+            }
+        });
 
-      editor.subscribe('blur', self.validateDescription);
-
+        editor.subscribe('blur', self.validateDescription);
+      }, 0);
     });
     return this;
   },
@@ -443,11 +443,7 @@ module.exports = Backbone.View.extend({
     //if this is an existing product, do not delete the images
     if (self.model.get('id')) {
       formData.append('delete_images', false);
-    }
-
-    //if this is an existing item, pass in the contract id
-    if(self.model.get('vendor_offer').listing.contract_id){
-      formData.append('contract_id', self.model.get('vendor_offer').listing.contract_id);
+      formData.append('contract_id', self.model.get('id'));
     }
 
     //if condition is disabled, insert default value
@@ -512,18 +508,5 @@ module.exports = Backbone.View.extend({
     this.validateDescription();
 
     return this.$('#contractForm')[0].checkValidity();
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
 });

@@ -62,6 +62,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Messages",
         Store: "Store",
         Edit: "Edit",
+        Clone: "Clone", //notTranslated
         Used: "Used",
         Delete: "Delete",
         DontDelete: "Don't Delete",
@@ -560,6 +561,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Mensajes",
         Store: "Tienda",
         Edit: "Editar",
+        Clone: "Clone", //notTranslated
         Used: "Usado",
         Delete: "Borrar",
         DontDelete: "No Borrar",
@@ -1041,6 +1043,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Messages",//notTranslated
         Store: "Laden",
         Edit: "Bearbeiten",
+        Clone: "Clone", //notTranslated
         Used: "Gebraucht",
         Delete: "L&ouml;schen",
         DontDelete: "Nicht l&ouml;schen",
@@ -1533,6 +1536,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Messaggi",
         Store: "Negozio",
         Edit: "Modifica",
+        Clone: "Clone", //notTranslated
         Used: "Usato",
         Delete: "Cancella",
         DontDelete: "Non eliminare",
@@ -2025,6 +2029,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Messages",
         Store: "Boutique",
         Edit: "Modifier",
+        Clone: "Clone", //notTranslated
         Used: "Utilisé",
         Delete: "Supprimer",
         DontDelete: "Ne pas supprimer",
@@ -2515,6 +2520,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Mesaje",
         Store: "Magazin",
         Edit: "Modificare",
+        Clone: "Clone", //notTranslated
         Used: "Folosit",
         Delete: "Ștergere",
         DontDelete: "Nu Ștergeți",
@@ -3003,6 +3009,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Сообщений",
         Store: "Магазин",
         Edit: "Редактировать",
+        Clone: "Clone", //notTranslated
         Used: "В употреблении",
         Delete: "Удалить",
         DontDelete: "Не удалять",
@@ -3490,6 +3497,7 @@ module.exports = Backbone.Model.extend({
         Message: "Správa",
         Store: "Obchod",
         Edit: "Upraviť",
+        Clone: "Clone", //notTranslated
         Used: "Použité",
         Delete: "Vymazať",
         DontDelete: "Nevymazávajte",
@@ -3983,6 +3991,7 @@ module.exports = Backbone.Model.extend({
         Messages: "İletiler",
         Store: "Mağaza",
         Edit: "Düzenle",
+        Clone: "Clone", //notTranslated
         Used: "Kullanılmış",
         Delete: "Sil",
         DontDelete: "Silme",
@@ -4474,6 +4483,7 @@ module.exports = Backbone.Model.extend({
         Message: "QIn",
         Store: "NgevwI'",
         Edit: "ChoH",
+        Clone: "Clone", //notTranslated
         Used: "WaH",
         Delete: "HoH",
         DontDelete: "Wej HoH",
@@ -4965,6 +4975,7 @@ module.exports = Backbone.Model.extend({
         Message: "留言",
         Store: "店铺",
         Edit: "编辑",
+        Clone: "Clone", //notTranslated
         Used: "已用",
         Delete: "删除",
         DontDelete: "请不要删除",
@@ -5457,6 +5468,7 @@ module.exports = Backbone.Model.extend({
         Messages: "메시지들",
         Store: "가게",
         Edit: "편집",
+        Clone: "Clone", //notTranslated
         Used: "중고",
         Delete: "삭제",
         DontDelete: "삭제하지마",
@@ -5944,6 +5956,7 @@ module.exports = Backbone.Model.extend({
         Messages: "メッセージ",
         Store: "ストア",
         Edit: "編集",
+        Clone: "Clone", //notTranslated
         Used: "中古",
         Delete: "削除",
         DontDelete: "削除しない",
@@ -6424,6 +6437,7 @@ module.exports = Backbone.Model.extend({
         Messages: "Wiadomości",
         Store: "Sklep",
         Edit: "Edytuj",
+        Clone: "Clone", //notTranslated
         Used: "Użyte",
         Delete: "Usuń",
         DontDelete: "Nie usuwaj",
