@@ -55,6 +55,17 @@ module.exports = baseVw.extend({
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
+
+    // prevent the body from picking up drag actions
+    $(document.body).on("dragover", this.onDragonover = function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    $(document.body).on("drop", this.onDrop = function(e){
+      e.preventDefault();
+      return false;
+    });    
   },
 
   render: function(){
@@ -64,18 +75,6 @@ module.exports = baseVw.extend({
 
       self.$el.html(loadedTemplate(context));
       self.setFormValues();
-
-      // prevent the body from picking up drag actions
-      //TODO: make these nice backbone events
-      $(document.body).bind("dragover", function(e) {
-        e.preventDefault();
-        return false;
-      });
-
-      $(document.body).bind("drop", function(e){
-        e.preventDefault();
-        return false;
-      });
 
       setTimeout(() => {
         var editor = new MediumEditor('#inputDescription', {
@@ -507,5 +506,10 @@ module.exports = baseVw.extend({
     this.validateDescription();
 
     return this.$('#contractForm')[0].checkValidity();
+  },
+
+  remove: function() {
+    $(document.body).off("dragover");
+    $(document.body).off("drop");        
   }
 });
