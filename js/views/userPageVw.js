@@ -128,7 +128,7 @@ module.exports = baseVw.extend({
     'click .js-returnToStoreCategory': 'storeCatClick',
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
-    'click .js-editItem': 'editItem',
+    'click .js-editItem': 'editItemClick',
     'click .js-cloneItem': 'cloneItem',
     'click .js-deleteItem': 'deleteItemClick',
     'click .js-cancelItem': 'cancelClick',
@@ -1227,7 +1227,11 @@ module.exports = baseVw.extend({
     this.lastTab = "itemOld";
   },
 
-  cloneItem: function() {
+  editItemClick: function(e){
+    this.editItem();
+  },
+
+  cloneItem: function(){
     this.editItem(true);
   },
 
