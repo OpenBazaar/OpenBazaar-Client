@@ -691,8 +691,6 @@ module.exports = baseVw.extend({
   },
 
   renderFollowing: function (model) {
-    var followsMe;
-
     model = model || [];
     this.followingList = new personListView({
       model: model,
