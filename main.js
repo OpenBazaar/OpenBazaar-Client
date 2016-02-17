@@ -350,6 +350,10 @@ app.on('ready', function() {
     }
   });
 
+  mainWindow.on('close', function() {
+    app.quit();
+  });
+
   app.on('activate', function() {
     mainWindow.show();
   });
