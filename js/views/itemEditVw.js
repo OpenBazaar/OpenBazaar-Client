@@ -509,7 +509,7 @@ module.exports = baseVw.extend({
   },
 
   remove: function() {
-    $(document.body).off("dragover");
-    $(document.body).off("drop");        
+    $(document.body).off("dragover", this.onDragonover);
+    $(document.body).off("drop", this.onDrop);        
   }
 });
