@@ -54,7 +54,7 @@
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft82">
-          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce textShadow"><%- ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize11">follows you</span></h1>
+          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce textShadow"><%- ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize11"><%= polyglot.t('FollowsYou') %></span></h1>
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@
             <%}%>
           </div>
           <div class="pad15 push-down5 noOverflow">
-            <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%- ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize12">follows you</span></span>
+            <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%- ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize12"><%= polyglot.t('FollowsYou') %></span></span>
             <br />
             <span class="textSize16px colorWhiteForce">
             <% if(ob.page.profile.handle) { %><%- ob.page.profile.handle %><% }else{ %><%- ob.page.profile.guid %><% } %>

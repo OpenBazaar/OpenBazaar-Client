@@ -58,6 +58,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "About is blank...",
         Followers: "Followers",
         Following: "Following",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Message",
         Messages: "Messages",
         Store: "Store",
@@ -556,6 +557,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "La secci&oacute;n Acerca de est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Mensaje",
         Messages: "Mensajes",
         Store: "Tienda",
@@ -1037,6 +1039,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "'&Uuml;ber' ist leer...",
         Followers: "Follower",
         Following: "Folgt",
+        FollowsYou: "Follows You", //notTranslated        
         Message: 'Nachricht',
         Messages: "Messages",//notTranslated
         Store: "Laden",
@@ -1529,6 +1532,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "L'about &egrave; vuoto...",
         Followers: "Seguaci",
         Following: "Segue",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Messaggio",
         Messages: "Messaggi",
         Store: "Negozio",
@@ -2021,6 +2025,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "&Agrave; propos est vide...",
         Followers: "Abonnés",
         Following: "Abonnements",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Message",
         Messages: "Messages",
         Store: "Boutique",
@@ -2511,6 +2516,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "Despre este gol...",
         Followers: "Urmăritori",
         Following: "Se Urmărește",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Mesaj",
         Messages: "Mesaje",
         Store: "Magazin",
@@ -2999,6 +3005,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "Описание не заполнено...",
         Followers: "Читатели",
         Following: "Читаемые",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Сообщение",
         Messages: "Сообщений",
         Store: "Магазин",
@@ -3487,6 +3494,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "Stránka s informáciami je prázdna...",
         Followers: "Followeri",
         Following: "Sledované stránky",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Správa",
         Store: "Obchod",
         Edit: "Upraviť",
@@ -3979,6 +3987,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "Hakkında kısmı boş...",
         Followers: "Takipçiler",
         Following: "Takip edilenler",
+        FollowsYou: "Follows You", //notTranslated
         Message: "İleti",
         Messages: "İletiler",
         Store: "Mağaza",
@@ -4471,6 +4480,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "Ghot tu'lu'. mej chIm...",
         Followers: "PabwI'",
         Following: "Pab",
+        FollowsYou: "Follows You", //notTranslated
         Message: "QIn",
         Store: "NgevwI'",
         Edit: "ChoH",
@@ -4962,6 +4972,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "关于空白着",
         Followers: "追随者",
         Following: "关注中",
+        FollowsYou: "Follows You", //notTranslated
         Message: "留言",
         Store: "店铺",
         Edit: "编辑",
@@ -5453,6 +5464,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "정보 없어...",
         Followers: "팔로워",
         Following: "팔로잉",
+        FollowsYou: "Follows You", //notTranslated
         Message: "메시지",
         Messages: "메시지들",
         Store: "가게",
@@ -5940,6 +5952,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "自己紹介はありません",
         Followers: "フォロワー",
         Following: "フォロー",
+        FollowsYou: "Follows You", //notTranslated
         Message: "メッセージを送る",
         Messages: "メッセージ",
         Store: "ストア",
@@ -6420,6 +6433,7 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "Pusto...",
         Followers: "Obserwujący",
         Following: "Obserwowani",
+        FollowsYou: "Follows You", //notTranslated
         Message: "Wiadomość",
         Messages: "Wiadomości",
         Store: "Sklep",
