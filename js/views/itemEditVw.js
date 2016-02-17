@@ -89,6 +89,9 @@ module.exports = baseVw.extend({
         });
 
         editor.subscribe('blur', self.validateDescription);
+
+        //set chosen inputs
+        this.$('.chosen').chosen({width: '100%'});
       }, 0);
     });
     return this;
@@ -142,10 +145,6 @@ module.exports = baseVw.extend({
         saveOnBlur: true
       });
     },1);
-
-
-    //set chosen inputs
-    $('.chosen').chosen({width: '100%'});
 
     //focus main input
     this.$el.find('input[name=title]').focus();
