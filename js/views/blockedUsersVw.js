@@ -24,6 +24,8 @@ module.exports = Backbone.View.extend({
           self.renderNewUserView(user);
         });
       }
+
+      this.checkIfEmpty();
     });
 
     this.listenTo(this.collection, 'remove', function(md, cl, options) {
@@ -34,7 +36,9 @@ module.exports = Backbone.View.extend({
         return subView.model.get('guid') === md.get('guid');
       })) {
         self.removeSubView(view);
-      }      
+      }
+
+      this.checkIfEmpty();
     });
   },
 
@@ -62,7 +66,16 @@ module.exports = Backbone.View.extend({
       self.renderNewUserView(user);
     });
 
+    this.checkIfEmpty();
+
     return this;
+  },
+
+  checkIfEmpty: function(){
+    if(this.collection.length == 0) {
+      var noBlockSnippet = $("<h3 class='padding20 txt-center'>" + polyglot.t('NoBlockedList') + "</h3>");
+      this.$el.html(noBlockSnippet);
+    }
   },
 
   unblockUserClick: function(e) {

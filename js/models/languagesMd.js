@@ -215,6 +215,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block",
         Unblock: "Unblock",
         Blocked: "Blocked",
+        NoBlockedList: "You are not currently blocking anyone.",
         Advanced: "Advanced",
         General: "General",
         AllItems: "All Items",
@@ -707,6 +708,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -1197,6 +1199,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -1692,6 +1695,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Bloccato",
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Avanzato",
         General: "Generale",
         AllItems: "Tutti gli articoli",
@@ -2186,6 +2190,7 @@ module.exports = Backbone.Model.extend({
         Block: "Bloquer",
         Unblock: "Débloquer",
         Blocked: "Bloqué",
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Avancé",
         General: "Général",
         AllItems: "Tous les articles",
@@ -2677,6 +2682,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -3167,6 +3173,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Заблокированно",
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Дополнительно",
         General: "Общий",
         AllItems: "Все инструменты",
@@ -3657,6 +3664,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -4152,6 +4160,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -4645,6 +4654,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -5138,6 +5148,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -5632,6 +5643,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "Blocked", // not translated
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Advanced", // not translated
         General: "General", // not translated
         AllItems: "All Items", // not translated
@@ -6121,6 +6133,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block", //notTranslated
         Unblock: "Unblock", //notTranslated        
         Blocked: "ブロック",
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "詳細設定",
         General: "一般設定",
         AllItems: "すべて",
@@ -6604,6 +6617,7 @@ module.exports = Backbone.Model.extend({
         Block: "Block",//notTranslated
         Unblock: "Unblock",//notTranslated
         Blocked: "Zablokowani",
+        NoBlockedList: "You are not currently blocking anyone.", // not translated
         Advanced: "Zaawansowane",
         General: "Ogólne",
         AllItems: "Wszystkie przedmioty",
