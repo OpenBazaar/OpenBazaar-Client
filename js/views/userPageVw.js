@@ -697,8 +697,6 @@ module.exports = baseVw.extend({
   },
 
   renderFollowing: function (model) {
-    "use strict";
-
     model = model || [];
     this.followingList = new personListView({
       model: model,
@@ -713,7 +711,13 @@ module.exports = baseVw.extend({
     this.subViews.push(this.followingList);
     
     this.$('.js-userFollowingCount').html(model.length);
-      
+
+    if (__.findWhere(model, { guid: this.model.get('user').guid })) {
+      this.$('.js-followsMe').removeClass('hide');
+    } else {
+      this.$('.js-followsMe').addClass('hide');
+    }
+
     if (model.length) {
       new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
     }
