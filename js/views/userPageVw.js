@@ -262,7 +262,7 @@ module.exports = baseVw.extend({
     this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
-      timeout: 4000,
+      //timeout: 4000,
       success: function(model, response){
         //don't render if view has been closed and the $el has been deleted
         if (self.isRemoved()) return;
@@ -552,7 +552,7 @@ module.exports = baseVw.extend({
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
-      timeout: 5000,
+      //timeout: 5000,
       success: function(model){
         if (self.isRemoved()) return;
         self.renderItems(model.get('listings'));
@@ -564,7 +564,7 @@ module.exports = baseVw.extend({
     });
     this.following.fetch({
       data: self.userProfileFetchParameters,
-      timeout: 5000,
+      //timeout: 5000,
       success: function(model){
         if (self.isRemoved()) return;
 
@@ -581,7 +581,7 @@ module.exports = baseVw.extend({
           $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
-            timeout: 4000
+            //timeout: 4000
           }).done(function(ownFollowingData){
             if (self.isRemoved()) return;
             self.ownFollowing = ownFollowingData.following || [];
@@ -612,7 +612,7 @@ module.exports = baseVw.extend({
 
     this.followers.fetch({
       data: self.userProfileFetchParameters,
-      timeout: 5000,
+      //timeout: 5000,
       success: function(model){
         var followerArray = model.get('followers');
 
@@ -753,7 +753,7 @@ module.exports = baseVw.extend({
     }
     this.item.fetch({
       data: self.itemFetchParameters,
-      timeout: 4000,
+      //timeout: 4000,
       success: function(model, response){
         if (self.isRemoved()) return;
 
