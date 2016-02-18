@@ -791,7 +791,10 @@ module.exports = Backbone.View.extend({
 
   launchServerConfig: function() {
     var serverConnectModal = new ServerConnectModal({
-      includeCloseButton: true
+      includeCloseButton: true,
+      initialState: {
+        status: 'connected'
+      }
     }).render().open();
 
     this.serverConnectSyncHandler &&

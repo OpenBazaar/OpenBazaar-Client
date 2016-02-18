@@ -3,7 +3,7 @@
   <% if (ob.status == 'trying') { %>
     <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusTryingToConnect') %>...</p>
   <% } else if (ob.status == 'connected') { %>
-    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusConnected') %>./p>  
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusConnected') %>.</p>  
   <% } else if (ob.status == 'failed') { %>  
     <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusFailedConnection') %></p>
   <% } else if (ob.status == 'failed-auth') { %>  
@@ -32,7 +32,7 @@
       <div class="flexRow borderBottom custCol-border">
         <p class="margin0 padding2015 textOpacity75"><%= polyglot.t('serverConnectModal.intro') %></p>
       </div>
-        <form class="width100 <% if (ob.status == 'trying') { %>disabled<% } %>" name="serverConfigForm">
+        <form class="width100" name="serverConfigForm">
           <div class="flexCol-12 flex-border borderBottom">
             <div class="flexRow">
               <% if (ob.errors.server_ip) { %>
@@ -179,7 +179,7 @@
         </form>
     </div>
 
-    <div class="bar barFlush borderBottomLeftRaidus3 color-secondary custCol-secondary borderBottomRightRaidus3 <% if (ob.status == 'trying') { %>disabled<% } %>">
+    <div class="bar barFlush borderBottomLeftRaidus3 color-secondary custCol-secondary borderBottomRightRaidus3">
       <a class="btn btn-bar btn-half js-restoreDefaults color-secondary custCol-secondary custCol-border-primary custCol-text textOpacity90 borderRight" tabindex="0">
         <span class="fontSize10 marginRight2"></span>
         <%= polyglot.t('serverConnectModal.restoreDefaults') %>
