@@ -8,9 +8,10 @@ var loadTemplate = require('../utils/loadTemplate'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
     messageModal = require('../utils/messageModal'),
-    chosen = require('../utils/chosen.jquery.min.js');
+    chosen = require('../utils/chosen.jquery.min.js'),
+    baseVw = require('./baseVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   events: {
     'click #shippingFreeTrue': 'disableShippingPrice',
@@ -55,7 +56,16 @@ module.exports = Backbone.View.extend({
     self.model.set("imageHashesToUpload", anotherHashArray);
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
 
-    this.render();
+    // prevent the body from picking up drag actions
+    $(document.body).on("dragover", this.onDragonover = function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    $(document.body).on("drop", this.onDrop = function(e){
+      e.preventDefault();
+      return false;
+    });    
   },
 
   render: function(){
@@ -66,30 +76,22 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(context));
       self.setFormValues();
 
-      // prevent the body from picking up drag actions
-      //TODO: make these nice backbone events
-      $(document.body).bind("dragover", function(e) {
-        e.preventDefault();
-        return false;
-      });
+      setTimeout(() => {
+        var editor = new MediumEditor('#inputDescription', {
+            placeholder: {
+              text: ''
+            },
+            toolbar: {
+              imageDragging: false,
+              sticky: true
+            }
+        });
 
-      $(document.body).bind("drop", function(e){
-        e.preventDefault();
-        return false;
-      });
+        editor.subscribe('blur', self.validateDescription);
 
-      var editor = new MediumEditor('#inputDescription', {
-          placeholder: {
-            text: ''
-          },
-          toolbar: {
-            imageDragging: false,
-            sticky: true
-          }
-      });
-
-      editor.subscribe('blur', self.validateDescription);
-
+        //set chosen inputs
+        this.$('.chosen').chosen({width: '100%'});
+      }, 0);
     });
     return this;
   },
@@ -142,10 +144,6 @@ module.exports = Backbone.View.extend({
         saveOnBlur: true
       });
     },1);
-
-
-    //set chosen inputs
-    $('.chosen').chosen({width: '100%'});
 
     //focus main input
     this.$el.find('input[name=title]').focus();
@@ -443,11 +441,7 @@ module.exports = Backbone.View.extend({
     //if this is an existing product, do not delete the images
     if (self.model.get('id')) {
       formData.append('delete_images', false);
-    }
-
-    //if this is an existing item, pass in the contract id
-    if(self.model.get('vendor_offer').listing.contract_id){
-      formData.append('contract_id', self.model.get('vendor_offer').listing.contract_id);
+      formData.append('contract_id', self.model.get('id'));
     }
 
     //if condition is disabled, insert default value
@@ -514,16 +508,8 @@ module.exports = Backbone.View.extend({
     return this.$('#contractForm')[0].checkValidity();
   },
 
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
+  remove: function() {
+    $(document.body).off("dragover", this.onDragonover);
+    $(document.body).off("drop", this.onDrop);        
   }
 });
