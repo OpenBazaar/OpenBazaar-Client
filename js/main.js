@@ -169,7 +169,12 @@ var loadProfile = function(landingRoute) {
               newSocketView = new socketView({model: serverConfigMd});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
               // newChatAppView = new chatAppView({model: user, socketView: newSocketView});
-              $('#sideBar').html(new ChatVw().render().el);
+              $('#sideBar').html(
+                new ChatVw({
+                  model: user,
+                  socketView: newSocketView
+                }).render().el
+              );
 
 
               location.hash = landingRoute;

@@ -1,7 +1,8 @@
 var Backbone = require('backbone'),
   $ = require('jquery'),
   loadTemplate = require('../utils/loadTemplate'),
-  ChatConversationsCl = require('../collections/chatConversationCl'),
+  ChatConversationCl = require('../collections/chatConversationCl'),
+  ChatMessageCl = require('../collections/chatMessageCl'),
   baseVw = require('./baseVw'),
   ChatHeadsVw = require('./chatHeadsVw'),
   ChatConversationVw = require('./chatConversationVw');
@@ -15,6 +16,14 @@ module.exports = baseVw.extend({
   initialize: function(options) {
     var options = options || {};
 
+    if (!options.model) {
+      throw new Error('Please provide a model of the logged-in user.');
+    }
+
+    if (!options.socketView) {
+      throw new Error('Please provide a socketView instance.');
+    }    
+
     this.socketView = options.socketView;
 
     // cache some selectors which are outside of
@@ -24,10 +33,10 @@ module.exports = baseVw.extend({
     this.$obContainer = $('#obContainer');
     this.$loadingSpinner = $('.spinner-with-logo');
 
-    this.chatConversationsCl = new ChatConversationsCl();
-    this.chatConversationsCl.fetch();
+    this.chatConversationCl = new ChatConversationCl();
+    this.chatConversationCl.fetch();
 
-    this.listenTo(this.chatConversationsCl, 'sync', (cl) => {
+    this.listenTo(this.chatConversationCl, 'sync', (cl) => {
       if (cl.length) {
         for (var i=0; i < 100; i++) {
           cl.add(
@@ -61,16 +70,25 @@ module.exports = baseVw.extend({
 
     this.chatConversationVw = new ChatConversationVw({
       model: vw.model,
-      
+      user: this.model,
+      collection: new ChatMessageCl()
     });
 
     this.registerChild(this.chatConversationVw);
 
     this.listenTo(this.chatConversationVw, 'close-click', this.closeConversation);
+    this.listenTo(this.chatConversationVw, 'enter-message', function(msg) {
+      this.sendMessage(msg);
+      this.chatConversationVw.getMessageField().val('');
+    });
 
     this.$('.js-chatConversationContainer').html(
       this.chatConversationVw.render().el
     );
+  },
+
+  sendMessage: function(msg) {
+    console.log('send it frank! ' + msg);
   },
 
   closeConversation: function() {
