@@ -4943,22 +4943,22 @@ module.exports = Backbone.Model.extend({
         langName: "中文",
         langCode: "zh-CN",
         /* Use capitalized keys for widely reused text that must be capitalized */
-        IHaveAWalletNow: "I have a Wallet now", //notTranslated
+        IHaveAWalletNow: "我已经有一个钱包",
         Next: "下一步",
         IAgree: "我同意",
         Back: "上一步",
         EnterMessage: "留言",
         Recommended: "Recommended", //notTranslated
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Reload: "刷新",
+        You: "你",
         Skip: "跳过",
         Done: "完成",
-        Status: "Status",
-        Navigation: "Navigation", //notTranslated
+        Status: "状态",
+        Navigation: "导航",
         Cancel: "取消",
-        ClosingOpenBazaar: "Close (Your page will go offline)", //notTranslated
-        Minimize: "Minimize", //notTranslated
-        Maximize: "Maximize", //notTranslated
+        ClosingOpenBazaar: "关闭(你的页面将处于离线状态)",
+        Minimize: "最小化",
+        Maximize: "最大化",
         Close: "关闭",
         Yes: "是",
         No: "否",
@@ -4968,9 +4968,9 @@ module.exports = Backbone.Model.extend({
         Excellent: "出色",
         Good: "完好",
         Poor: "较差",
-        StillValidating: "Your handle is still validating", //notTranslated
-        CheckStatus: "Check Status", //notTranslated
-        ChangeCurrency: "Change currency", //notTranslated
+        StillValidating: "你的简称正在验证中...",
+        CheckStatus: "检查状态",
+        ChangeCurrency: "改变货币",
         SKU: "SKU",
         Refurbished: "整修过",
         Physical: "实物",
@@ -4990,7 +4990,7 @@ module.exports = Backbone.Model.extend({
         NoListings: "No listings", //notTranslated
         CoverPhoto: "封面照片",
         AboutEmpty: "关于空白着",
-        Followers: "追随者",
+        Followers: "被关注",
         Following: "关注中",
         FollowsYou: "Follows You", //notTranslated
         Message: "留言",
@@ -5002,26 +5002,26 @@ module.exports = Backbone.Model.extend({
         DontDelete: "请不要删除",
         ConfirmDelete: "确认删除",
         Website: "网页",
-        Guid: "OpenBazaar用户名",
+        Guid: "OpenBazaar ID",
         Welcome: "欢迎",
         CreateStore: "开店铺",
         GoToMyPage: "我的主页",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "输入 #games, #shoes 或任何 #标签...",
         SearchForPagesPlaceholder: "用名字或关键字查找",
-        SearchFeedPlaceholder: "用 handle 或 OpenBazaar ID 查找",
-        SearchForFollowersPlaceholder: "用 handle 或 OpenBazaar ID 查找",
-        SearchForUsersPlaceholder: "用 handle 或 OpenBazaar ID 查找",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchFeedPlaceholder: "用简称或 OpenBazaar ID 查找",
+        SearchForFollowersPlaceholder: "用简称或 OpenBazaar ID 查找",
+        SearchForUsersPlaceholder: "用简称或 OpenBazaar ID 查找",
+        SearchOnUserStorePlaceholder: "输入标题...",
         EstDeliveryDomesticPlaceholder: "3-5 个工作日",
         EstDeliveryInternationalPlaceholder: "7-15 工作日",
         OrderProcessingTimePlaceholder: "1-2 工作日",
         TermsAndConditionsPlaceholder: "输入合同条件.",
-        TitlePlaceholder: "输入抬头",
+        TitlePlaceholder: "输入标题",
         DescriptionPlaceholder: "输入描述",
         ReturnPolicyPlaceholder: "输入退货方式",
         CategoryPlaceholder: "输入分类",
-        CategoryHelperText: "分类 为您店铺离商品作出归类和管理",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        CategoryHelperText: "分类 为您店铺里的商品作出归类和管理",
+        KeywordsHelperText: "添加标签以便于被市场发现",
         ExpirationDateHelperText: "输入货品自动上柜日期",
         ClearExpirationDate: "清空过期日期",
         ReturnPolicy: "退货条款",
@@ -5047,7 +5047,7 @@ module.exports = Backbone.Model.extend({
         Returns: "退货",
         ReturnsPolicy: "退货规则",
         Ampersand: "&",
-        Tags: "Tags", //notTranslated
+        Tags: "标签",
         Keywords: "关键字",
         ShipsFrom: "发货地",
         ShipsTo: "发往",
@@ -5058,9 +5058,9 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "保存更改",
         YourName: "您的姓名",
-        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddress: "输入你的比特币地址",
+        BitcoinReturnAddressPlaceholder: "退款至该地址",
+        BitcoinReturnAddressInfo: "如果发生退款情形，款项需要发送到一个比特币地址。请提供你钱包中的一个地址：",
         LocalCurrency: "当地货币",
         TimeZone: "时区",
         ShipToName: "姓名",
@@ -5070,6 +5070,9 @@ module.exports = Backbone.Model.extend({
         ShipToPostalCode: "邮编",
         PostalCode: "邮编",
         ShipToCountry: "国家",
+        Notifications: "通知",
+        Menu: "主菜单",
+        Messages: "消息",
         EnableNotifications: "允许通知",
         EnableSSL: "允许 SSL",
         LibbitcoinServerAddress: "Libbitcoin 服务器地址",
@@ -5082,15 +5085,15 @@ module.exports = Backbone.Model.extend({
         Condition: "新旧程度",
         NSFW: "成人内容",
         Select: "Select", //not translated
-        Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        ViewPage: "View page", //notTranslated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
-        Reset: "重置", //not translated
+        Social: "社交",
+        Theme: "主题",
+        Listing: "列表",
+        Listings: "商品",
+        ViewPage: "查看主页",
+        Pages: "主页",
+        Page: "主页",
+        Language: "语言",
+        Reset: "重置",
         Local: "本地",
         Domestic: "本国",
         Location: "地点",
@@ -5099,7 +5102,7 @@ module.exports = Backbone.Model.extend({
         Free: "免费",
         Category: "分类",
         ProcessingTime: "处理时间",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "选择照片",
         DragOrUploadPhotos: "拖移或上传照片",
         ExpirationDate: "失效日期",
         UploadCoverPhoto: "上传封面照片",
@@ -5117,11 +5120,11 @@ module.exports = Backbone.Model.extend({
         NoNotifications: "无新消息",
         WelcomeToYourPage: "欢迎来到您的主页",
         SearchForCategory: "查找分类项目",
-        Moderators: "调解员",
-        CurrentModerators: "当前调解员",
-        AddModerators: "添加新的调解员",
-        DeselectToRemoveModerator: "反选您想要去掉的调解员",
-        SelectToAddModerator: "选择您想要添加的调解员",
+        Moderators: "仲裁员",
+        CurrentModerators: "当前仲裁员",
+        AddModerators: "添加新的仲裁员",
+        DeselectToRemoveModerator: "反选您想要去掉的仲裁员",
+        SelectToAddModerator: "选择您想要添加的仲裁员",
         Categories: "分类",
         UpTo3: "最多三类",
         AboutYourStore: "您店铺的介绍",
@@ -5135,104 +5138,105 @@ module.exports = Backbone.Model.extend({
         PaymentPending: "付款正在进行中",
         FinalizePurchase: "完成购物",
         LoadingImage: "正在下载图像",
-        UploadAvatar: "上载 Avatar",
-        SaveAvatar: "保存 Avatar",
-        NewAvatar: "选择新的 Avatar",
+        Avatar: "头像",
+        UploadAvatar: "上载头像",
+        SaveAvatar: "保存头像",
+        NewAvatar: "选择新的头像",
         NewCoverImage: "选择新的封面照片",
         Loading: "Loading...", // not translated
-        Purchases: "Purchases", // not translated
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
+        Transactions: "交易记录",
+        Purchases: "已买",
+        Sales: "已卖",
+        Cases: "事件",
         Enter: "Enter", //notTranslated
-        Discover: "Discover", // not translated
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated        
-        Blocked: "Blocked", // not translated
+        Discover: "发现",
+        Block: "屏蔽",
+        Unblock: "取消屏蔽",
+        Blocked: "屏蔽列表",
         NoBlockedList: "You are not currently blocking anyone.", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        AllItems: "All Items", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        Advanced: "高级",
+        General: "通用",
+        AllItems: "所有商品",
+        DomesticShippingPrice: "国内运费",
+        InternationalShippingPrice: "国际运费",
+        MinimumIs: "最少",
+        Visibility: "可见",
+        Title: "标题",
+        DigitalItem: "数字商品",
+        PhysicalItem: "实物商品",
+        DomesticShippingTime: "国内货运时长",
+        InternationalShippingTime: "国际货运时长",
+        DisplayNSFWcontent: "显示成人内容?",
+        Basic: "基本",
+        Content: "内容",
+        StandardThemes: "标准主题",
+        NoPhotosAdded: "未添加照片",
+        Summary: "汇总",
+        Funds: "Funds",
+        Discussion: "Discussion",
+        Quantity: "数量",
+        ShippingTo: "运往",
+        ModeratedBy: "仲裁员为",
+        Submit: "提交",
+        maxLength20: "最多20个字符",
+        maxLength80: "最多80个字符",
+        maxLength200: "最多200个字符",
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        Moderator: "Moderator", // not translated
-        Firewall: "Firewall", //notTranslated
-        ServerSettings: "Server Settings", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
-        HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        Searchformoderators: "查找仲裁员",
+        Contributors: "贡献者",
+        Support: "支持",
+        Licensing: "许可",
+        On: "打开",
+        Off: "关闭",
+        ClickToChange: "点击以改变",
+        NotProvided: "未提供",
+        NotFollowingAnyone: "未关注任何人",
+        NoFollowers: "没有人关注你",
+        Moderator: "仲裁员",
+        Firewall: "防火墙",
+        ServerSettings: "服务器设置",
+        ReadOnly: "(这个字段是只读的)",
+        HandleResolver: "简称解析器",
+        ShutDownServer: "关闭服务器",
+        LoadingBitcoinPrices: "正在载入比特币价格...",
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
-        moderatorSettings: { // not translated
-          DisputeResolution: "Dispute Resolution", //notTranslated
-          ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
+        moderatorSettings: {
+          DisputeResolution: "争议处理",
+          ServiceFee: "服务费率",
+          ServiceFeeNote: "最低: 0%, 最高: 25%"
         },
-        BecomeModerator: "Become a moderator",//notTranslated
-        EditModerator: "Moderator Settings",//notTranslated
+        BecomeModerator: "成为仲裁员",
+        EditModerator: "仲裁员设置",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
-          SoldBy: "Seller", // not translated
-          PurchasedBy: "Buyer", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Ready to process (Paid in full)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
-          OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Ready to process (Paid in full)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          InEscrow: "- In Escrow", // not translated
+          OrderDetails: "订单详细内容",
+          SoldBy: "卖家",
+          PurchasedBy: "买家",
+          searchByOrder: "用订单ID或货物名称来检索",
+          sortByStatusAll: "全部",
+          sortByStatus0: "已下单",
+          sortByStatus1: "待处理(已付全款)",
+          sortByStatus2: "已确认/已发货",
+          sortByStatus3: "已完成(款已支付给卖家)",
+          sortByStatus4: "有争议",
+          OrderID: "订单ID",
+          OrderDate: "订单日期",
+          OrderStatus: "订单状态",
+          OrderStatus0: "已下单(未付款)",
+          OrderStatus1: "待处理(已付全款)",
+          OrderStatus2: "已确认/已发货",
+          OrderStatus3: "已完成(款已支付给卖家)",
+          OrderStatus4: "有争议",
+          InEscrow: "- 托管中",
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ConfirmOrder: "Confirm Order", // not translated
+          ShipTo: "运往",
+          ConfirmOrder: "确认订单",
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
-          Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          Comments: "备注",
+          CommentsPlaceHolder: "订单的备注(如果有的话)",
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
@@ -5245,23 +5249,23 @@ module.exports = Backbone.Model.extend({
           PasswordPlaceholder: "Password required for link, if any", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          Moderator: "Moderator", //not translated
+          Seller: "卖家",
+          Buyer: "买家",
+          Moderator: "仲裁员",
           transferReceipt: "Transfer Receipt", // not translated
           copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
+          Close: "关闭",
           FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
+          sortByDateNewest: "按日期排序(倒序)",
+          sortByDateOldest: "按日期排序(正序)",
           PayPurchase: "Pay for this Purchase", // not translated
           CompleteOrder: "Complete this Order", // not translated
-          MarkAsShipped: "Mark as Shipped", // not translated
+          MarkAsShipped: "标记为已送达",
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
+          Description: "描述",
           DeliveryTime: "Delivery Time", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
@@ -5285,12 +5289,12 @@ module.exports = Backbone.Model.extend({
           notFoundError: "有关数据未能调出",
           socketError: "WebSocket的URL地址失败。请使用ws://localhost:18466",
           contractError: "找不到此项货物",
-          sellerError: "卖家的服务器拒绝了这笔买卖. This may be due to a connection issue.", // not translated
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
-          pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
-          serverDown: "The server has been shut down", //notTranslated
-          tooManyPhotosTitle: "Too many photos", //notTranslated
+          sellerError: "卖家的服务器拒绝了这笔买卖。这可能是由于连接故障导致。",
+          checkPurchaseData: "请检查你的购买请求数据，比如数量、比特币退款地址等，确认它们是有效的。",
+          pageUnavailable: "该页面现在无法访问.",
+          badHandle: "你输入的简称没有对应的OpenBazaar ID",
+          serverDown: "服务器已关闭",
+          tooManyPhotosTitle: "照片过多",
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated          
         },
         aboutSection: {
@@ -5300,43 +5304,44 @@ module.exports = Backbone.Model.extend({
           licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
         },
         saveMessages: {
-          Saved: "以保存",
-          SaveSuccess: "以保存更改"
+          Saved: "已保存",
+          SaveSuccess: "已保存更改"
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "正在扫描你的网络",
+          searchingText: "正在你的网络中检索",
+          noResults: "你的网络中没有商品具有标签"
         },
         filters: {
           pagesAllTypes: "所有分类",
           pagesStores: "店铺",
-          pagesMods: "调解员服务",
-          pagesBasic: "基本用户",
+          pagesMods: "仲裁员",
+          pagesBasic: "普通用户",
           listingsCurated: "我关注的店家里找",
-          listingsAll: "所有点家里找"
+          listingsAll: "所有店家里找"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
+          searchPlaceholder: "输入一个 @简称, OpenBazaar ID or #标签...",
           myPage: "我的主页",
-          testMode: "Test Mode", //notTranslated
+          testMode: "测试模式",
           customizePage:"个性化主页",
           sellItem:"新品",
           createListing:"新条目",
-          purchases:"已买到",
-          sales:"以卖纪录",
-          cases:"事件",
+          purchases:"已买记录",
+          sales:"已卖纪录",
+          cases:"事件记录",
           notifications:"通知",
           settings:"设置",
           about:"关于 OpenBazaar",
           support:"支持 OpenBazaar",
-          Forward: "Forward", //notTranslated
-          Back: "上一步"
+          Forward: "前进",
+          Back: "后退"
         },
         onboarding: {
           intro: "OpenBazaar 布局",
-          Introduction: "Introduction", //notTranslated
-         IntroductionBody: "", //notTranslated          theme: "选择主页主题",
+          Introduction: "简介",
+          IntroductionBody: "", //notTranslated
+          theme: "选择主页主题",
           chooseLanguage: "选择语言",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
           configure: "设定体验内容",
@@ -5351,22 +5356,22 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "发表意见（最多160字）",
           timeZone: "选择您的时区",
           yourDetails: "设置您的信息",
-          yourDescription: "描述", // notTranslated
-          handle: "Handle", // not translated
-          chooseHandle: "Choose a handle", // not translated
+          yourDescription: "描述",
+          handle: "简称",
+          chooseHandle: "选择一个简称",
           knownAs: "您目前的用户名是",
-          wouldYou: "您想注册一个更容易记得 handle吗?",
+          wouldYou: "您想注册一个更易记的简称吗?",
           registerNew: "注册一个新的",
           recommended: "建议关注此网页",
           connectExisting: "连接 Existing",
-          avatar: "设置一个 Avatar",
-          chooseAvatar: "选择 Avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
-          Finished: "Finished" //notTranslated
+          avatar: "设置一个头像",
+          chooseAvatar: "选择头像",
+          discoverCallOut: "在OpenBazaar中查找商品和主页",
+          Finished: "已完成"
         },
         softwareUpdate: {
-          updateAvailable: "OpenBazaar Update Available", //notTranslated
-          installUpdate: "Install Update", //notTranslated
+          updateAvailable: "OpenBazaar有新版本",
+          installUpdate: "安装更新",
           dismiss: "Dismiss" //notTranslated
         },
         guidStillCreating: {
@@ -5375,61 +5380,61 @@ module.exports = Backbone.Model.extend({
           LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
         },
         buyFlow: {
-          PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
+          PayForOrder: "支付订单",
+          NeedTempAddress: "我需要一个临时的比特币地址",
           NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
-          CantFindAddress: "I can't find my bitcoin address", //notTranslated
-          BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
-          ModeratedPayment: "Moderated Payment", //notTranslated
-          DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
-          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
-          DirectPayment: "Direct Payment", //notTranslated
-          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
+          CantFindAddress: "我找不到自己的比特币地址",
+          BitcoinWallet: "比特币钱包",
+          ModeratedPaymentDescription: "你支付的款项将存放在一个安全的钱包中，直到卖家履行完协定。如果有异议，仲裁员将会提供帮助。",
+          ModeratorFeeHelper: "当且仅当发生争议时，仲裁员会收取一定费用",
+          ModeratedPayment: "仲裁支付",
+          DisputeFee: "仲裁费",
+          HaveWallet: "你有比特币钱包吗?",
+          QuickSetup: "创建一个钱包仅需几分钟",
+          CreateWallet: "创建一个钱包",
+          DirectPaymentDescription: "款项将直接支付给卖家。仅当金额较小或你信任卖家时选择该选项。",
+          DirectPayment: "直接支付",
+          SendDirectlyTo: "将款项直接支付给 %{简称}",
           MustAddAddress: "务必添加送货地址",
           VendorShipsTo: "此商家向以下国家发货",
           DoesNotShipHere: "Does not ship here",
           Send: "发送",
           BTCto: "BTC至",
-          SendBTCtoAddress: "Send %{amount} BTC to", //notTranslated
+          SendBTCtoAddress: "发送 %{amount} BTC 到",
           OpenAddress: "将地址在本地钱包里打开",
           CopyAddress: "将付款地址拷贝到粘贴册",
           RefreshPayment: "刷新付款进度",
-          summaryMsg1: "您付的款已经被交到%{recipient}", //notTranslated
+          summaryMsg1: "您付的款已经被交到%{recipient}",
           summaryMsg2: "这笔订单预计完成时间为",
           summaryMsg3: "到此查看您订单的状况",
-          purchasesPage: "以购商品", //notTranslated
+          purchasesPage: "已购商品",
           returnAddress: "Return Address", //notTranslated
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
-          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          directPaymentDisclaimer: "请谨慎使用直接支付方式，这是不可逆的。",
+          paymentSent: "支付指令已发送!",
+          total: "总计"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "没有符合要求的结果"
         },
         serverConnectModal: {
-          statusTryingToConnect: "Trying to connect to your server", //notTranslated
-          statusConnected: "Connected", //notTranslated
-          statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed", //notTranslated
-          statusTooManyAttempts: "Too many failed login attempts", //notTranslated
-          serverConfiguration: "Server Configuration", //notTranslated
-          connecting: "Connecting", //notTranslated
-          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
-          serverIP: "Server IP", //notTranslated
-          restApiPort: "Rest API port", //notTranslated
-          websocketApiPort: "Websocket API port", //notTranslated
-          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
-          username: "Username", //notTranslated
-          password: "Password", //notTranslated                    
-          restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry connection", //notTranslated 
+          statusTryingToConnect: "正在尝试连接服务器",
+          statusConnected: "已连接服务器",
+          statusFailedConnection: "无法连接服务器",
+          statusFailedAuthentication: "身份认证失败",
+          statusTooManyAttempts: "登录失败次数过多",
+          serverConfiguration: "服务器配置",
+          connecting: "正在连接",
+          intro: "OpenBazaar被设计为服务器与客户端是可分离的。默认情况下，服务器在本地运行，但你可以在这里修改配置。",
+          serverIP: "服务器IP地址",
+          restApiPort: "Rest API端口号",
+          websocketApiPort: "Websocket API端口号",
+          heartbeatSocketApiPort: "心跳socket端口号",
+          username: "用户名",
+          password: "口令",
+          restoreDefaults: "恢复默认值",
+          saveChanges: "保存修改",
+          retry: "重新连接服务器",
         }        
       },
       {
