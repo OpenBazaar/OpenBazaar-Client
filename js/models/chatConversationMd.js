@@ -2,14 +2,12 @@ var __ = require('underscore'),
     Backbone = require('backbone');
 
 module.exports = window.Backbone.Model.extend({
+  idAttribute: 'guid',
+
   defaults: {
-    outgoing: "",
+    unread: 0,
     avatar_hash: "",
     guid: "",
-    handle: "",
-    read: false,
-    timestamp: "",
-    message: "",
-    public_key: ""
+    isBlocked: false
   }
 });
