@@ -1,12 +1,14 @@
 var Backbone = require('backbone'),
-    chatMessage = require('../models/chatMessageMd');
-
+    app = require('../App.js').getApp(),
+    chatConversationMd = require('../models/chatConversationMd');
 
 module.exports = Backbone.Collection.extend({
+  url: function() {
+    return app.serverConfig.getServerBaseUrl() + '/get_chat_conversations';
+  },
 
-  model: chatMessage,
+  model: chatConversationMd,
 
   initialize: function(options) {
   }
-
 });

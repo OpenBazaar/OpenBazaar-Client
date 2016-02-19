@@ -1,0 +1,44 @@
+<div class="newChatButton clearFix">
+    <div class="btn btn-chatOpen height43 js-chatOpen ion-chatbubbles fontSize18 width46px"></div>
+    <div class="chatMessagesLabel hide"><%= polyglot.t('Messages') %></div>
+    <div class="btn btn-closeChat js-closeChat ion-close-round marginTop6"></div>
+</div>
+<div class="chatSearch clearFix height43">
+    <div class="chatSearchIcon ion-ios-search-strong js-chatSearch"></div>
+    <input id="chatSearchField" class="js-chatSearchText" type="text" placeholder="<%= polyglot.t('SearchForFollowersPlaceholder') %>" value=""/>
+</div>
+
+<div class="chatConversationHeads noScrollBar" id="chatHeads"></div>
+
+<div class="chatConversation chatConversationHidden">
+    <form id="chatConversation">
+        <!--<input type="hidden" name="conversation_key" id="inputConversationKey" />
+        <input type="hidden" name="conversation_recipient" id="inputConversationRecipient"/>-->
+
+        <div class="chatConversationHeader">
+            <div class="chatConversationAvatar thumbnail-small marginRight5 floatLeft js-username clickable"></div>
+            <div class="chatConversationLabel floatLeft js-username"></div>
+            <div class="conversationHeader-btn floatRight marginTop4 textOpacity75">
+                <a class="ion-close-round js-closeConversation"></a>
+            </div>
+            <div class="conversationHeader-btn floatRight marginTop4 textOpacity75 fontSize15">
+                <a class="ion-android-more-vertical js-conversationSettings"></a>
+            </div>
+        </div>
+
+        <div class="chatConversationMenu hide">
+             <div class="js-viewPage">
+                 <a><%= polyglot.t('ViewPage') %></a>
+             </div>
+             <div class="js-blockUser">
+                 <a><%= polyglot.t('Block') %></a>
+             </div>
+         </div>
+
+        <div id="chatConversationContent" class="chatConversationContent"></div>
+
+        <div class="chatConversationMessage ">
+            <textarea name="conversation_message" placeholder="<%= polyglot.t('EnterMessage') %>" id="inputConversationMessage" class="fontSize12 padding4 txtAreaField border0 js-chatMessage" rows="3"></textarea>
+        </div>
+    </form>
+</div>

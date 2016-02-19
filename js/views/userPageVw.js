@@ -196,7 +196,6 @@ module.exports = baseVw.extend({
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
     this.socketView = options.socketView;
-    this.chatAppView = options.chatAppView;
     this.slimVisible = false;
     this.confirmDelete = false;
     this.state = this.options.state;

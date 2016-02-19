@@ -1,0 +1,31 @@
+<div class="chatConversationHeader">
+    <div class="chatConversationAvatar thumbnail-small marginRight5 floatLeft js-username clickable" style="background-image: url(<%= ob.serverUrl %>/get_image?hash=<%= ob.avatar_hash %>&guid=<%= ob.guid %>)"></div>
+    <div class="chatConversationLabel floatLeft js-username"><%= ob.guid %>)</div>
+    <div class="conversationHeader-btn floatRight marginTop4 textOpacity75">
+        <a class="ion-close-round js-closeConversation"></a>
+    </div>
+    <div class="conversationHeader-btn floatRight marginTop4 textOpacity75 fontSize15">
+        <a class="ion-android-more-vertical js-conversationSettings"></a>
+    </div>
+</div>
+
+<div class="chatConversationMenu hide">
+     <div class="js-viewPage">
+         <a><%= polyglot.t('ViewPage') %></a>
+     </div>
+     <div class="js-blockUser">
+         <a><%= polyglot.t('Block') %></a>
+     </div>
+ </div>
+
+<div class="chatConversationContent">
+    <% if (ob.fetching) { %>
+    <div class="padding10 width100 alignCenter js-loadingSpinner spinnerWrapper borderTop">
+      <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+    </div>
+    <% } %>
+</div>
+
+<div class="chatConversationMessage">
+    <textarea name="conversation_message" placeholder="<%= polyglot.t('EnterMessage') %>" class="fontSize12 padding4 txtAreaField border0 js-chatMessage" rows="3"></textarea>
+</div>
