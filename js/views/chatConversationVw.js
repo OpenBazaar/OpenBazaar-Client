@@ -7,7 +7,7 @@ var Backbone = require('backbone'),
   ChatMessageVw = require('./chatMessageVw');
 
 module.exports = baseVw.extend({
-  className: 'chatConversation c12345hatConversationHidden',
+  className: 'chatConversation',
 
   events: {
     'click .js-closeConversation': 'onClickClose',
@@ -35,16 +35,30 @@ module.exports = baseVw.extend({
     this.collection.fetch({
       data: {
         guid: this.model.get('guid')
-      }
+      },
+      reset: true
     });
 
-    this.listenTo(this.collection, 'sync', () => {
+    this.listenTo(this.collection, 'reset', () => {
       this.renderMessages();
     });
 
     this.listenTo(this.collection, 'request', () => {
       this.$messagesContainer.empty();
       this.$loadingSpinner.removeClass('hide');
+    });
+
+    this.listenTo(this.collection, 'add', (md) => {
+      var el = this.$messagesScrollContainer[0],
+          scolledToBot = el.scrollTop >= (el.scrollHeight - el.offsetHeight) - 5;
+
+      this.$msgWrap.append(
+        this.createMsg(md).render().el
+      );
+
+      if (scolledToBot) {
+        el.scrollTop = el.scrollHeight;
+      };
     });
   },
 
@@ -56,8 +70,12 @@ module.exports = baseVw.extend({
     var code = e.keyCode || e.which,
         val = this.$msgTextArea.val();
     
-    if (code === 13 && !val.trim()) {
+    if (code === 13 && !val.trim() && !this.shiftDown) {
       e.preventDefault();
+    }
+
+    if (code === 16) {
+      this.shiftDown = true;
     }
   },
 
@@ -65,17 +83,31 @@ module.exports = baseVw.extend({
     var code = e.keyCode || e.which,
         val = this.$msgTextArea.val();
     
-    if (code === 13 && val.trim()) {
+    if (code === 13 && val.trim() && !this.shiftDown) {
       this.trigger('enter-message', val);
     }
+
+    if (code === 16) this.shiftDown = false;
   },
 
   getMessageField: function() {
     return this.$msgTextArea;
   },
 
+  createMsg: function(md) {
+    var vw = new ChatMessageVw({
+      model: md,
+      user: this.user
+    });
+
+    this.msgViews.push(vw);
+    this.registerChild(vw);
+
+    return vw;
+  },
+
   renderMessages: function() {
-    var $container = $('<div />');
+    this.$msgWrap = $('<div />');
 
     this.$loadingSpinner.addClass('hide');
 
@@ -88,17 +120,12 @@ module.exports = baseVw.extend({
     this.msgViews = [];
 
     this.collection.forEach((md, index) => {
-      var vw = new ChatMessageVw({
-        model: md,
-        user: this.user
-      });
-
-      this.msgViews.push(vw);
-      this.registerChild(vw);
-      $container.append(vw.render().el);
+      this.$msgWrap.append(
+        this.createMsg(md).render().el
+      );
     });
 
-    this.$messagesContainer.html($container);
+    this.$messagesContainer.html(this.$msgWrap);
     this.$messagesScrollContainer[0].scrollTop = this.$messagesScrollContainer[0].scrollHeight;
   },
 

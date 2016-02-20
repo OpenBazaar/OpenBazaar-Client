@@ -1863,7 +1863,7 @@ div.chatSearchOut .chatSearchIcon {
   margin-right: unset;
 }
 
-.chatConversation {
+.chatConversationContainer {
   width: calc(100% - 1px);
   height: 360px;
   bottom: 0px;
@@ -1872,7 +1872,7 @@ div.chatSearchOut .chatSearchIcon {
   background-color: #2B2B2B;
 }
 
-.chatConversationHidden {
+.chatConversationContainerHide {
   bottom: -362px;
 }
 

@@ -5,8 +5,6 @@ var Backbone = require('backbone'),
   chatHeadVw = require('./chatHeadVw');
 
 module.exports = baseVw.extend({
-  // className: 'border0 custCol-border-secondary flexRow marginLeft1 marginTop1',
-
   events: {
   },
 
@@ -14,14 +12,32 @@ module.exports = baseVw.extend({
     if (!options.collection) {
       throw new Error('Please provide a collection.');
     }
+
+    this.listenTo(this.collection, 'add', (md, cl, opts) => {
+      this.$headContainer.prepend(
+        this.createChatHead(md).render().el
+      );
+    });
   },
 
   chatHeadClick: function(vw) {
     this.trigger('chatHeadClick', vw);
   },
 
+  createChatHead: function(md) {
+    var vw = new chatHeadVw({
+      model: md
+    });
+
+    this.chatHeadViews.push(vw);
+    this.listenTo(vw, 'click', this.chatHeadClick);
+    this.registerChild(vw);
+
+    return vw;
+  },
+
   render: function() {
-    var $container = $('<div />');
+    this.$headContainer = $('<div />');
 
     if (this.chatHeadViews) {
       this.chatHeadViews.forEach((vw) => {
@@ -32,17 +48,12 @@ module.exports = baseVw.extend({
     this.chatHeadViews = [];
 
     this.collection.forEach((md, index) => {
-      var vw = new chatHeadVw({
-        model: md
-      });
-
-      this.chatHeadViews.push(vw);
-      $container.append(vw.render().el);
-      this.listenTo(vw, 'click', this.chatHeadClick);
-      this.registerChild(vw);
+      this.$headContainer.append(
+        this.createChatHead(md).render().el
+      );
     });
 
-    this.$el.html($container);
+    this.$el.html(this.$headContainer);
 
     return this;
   }

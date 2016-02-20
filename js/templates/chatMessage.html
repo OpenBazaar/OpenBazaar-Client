@@ -12,8 +12,8 @@
     <div class="flexRow noFlexWrap">
         <% if (!ob.outgoing) { %>
             <a class="thumbnail custcol-border marginRight2"
-                 style="background-image: url(<%= ob.serverUrl %>/get_image?hash=<%= ob.avatar_hash %>&guid=<%= ob.guid %>), url(imgs/defaultUser.png); height: 30px; width: 30px"
-                 href="#userPage/<%= ob.guid %>/store">
+                style="background-image: <% if (ob.avatar_hash) {%>url(<%= ob.serverUrl %>/get_image?hash=<%= ob.avatar_hash %>&guid=<%= ob.guid %>),<% } %> url(imgs/defaultUser.png); height: 30px; width: 30px"
+                href="#userPage/<%= ob.guid %>/store">
             </a>
             <% if(ob.guid == ob.moderatorGuid || ob.sender && ob.sender == ob.moderatorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
@@ -54,7 +54,7 @@
             <% } %>
 
             <a class="thumbnail custcol-border marginLeft2"
-             style="background-image: url(<%= ob.serverUrl %>/get_image?hash=<%= ob.avatar_hash %>&guid=<%= ob.user.guid %>), url(imgs/defaultUser.png); height: 30px; width: 30px"
+             style="background-image: <% if (ob.user.avatar_hash) {%>url(<%= ob.serverUrl %>/get_image?hash=<%= ob.user.avatar_hash %>&guid=<%= ob.user.guid %>),<% } %> url(imgs/defaultUser.png); height: 30px; width: 30px"
                  href="#userPage/<%= ob.user.guid %>/store">
             </a>
         <% } %>

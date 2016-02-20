@@ -1,6 +1,6 @@
 <div class="chatHead js-chatHead clickable tooltip <% if(ob.unread === 0) { %>chatRead<% } %>" data-tooltip="<%-ob.guid%>">
     <div id="chatHead_<%-ob.guid%>" class="thumbnail clickable custcol-border chatHeadIcon badge"
-         style="background-image: url(<%- ob.avatarURL %>), url(imgs/defaultUser.png); height: 36px; width: 36px"
+         style="background-image: <% if (ob.avatar_hash) {%>url(<%= ob.serverUrl %>/get_image?hash=<%= ob.avatar_hash %>&guid=<%= ob.guid %>),<% } %> url(imgs/defaultUser.png); height: 36px; width: 36px"
          <% if(ob.unread > 0) { %>data-count="<%- ob.unread %>"<% } %>></div>
     <div class="chatPreview">
         <div class="chatPreviewSender">

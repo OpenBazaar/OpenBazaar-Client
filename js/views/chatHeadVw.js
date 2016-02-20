@@ -1,5 +1,6 @@
 var Backbone = require('backbone'),
   $ = require('jquery'),
+  app = require('../App.js').getApp(),
   loadTemplate = require('../utils/loadTemplate'),
   baseVw = require('./baseVw');
 
@@ -14,6 +15,8 @@ module.exports = baseVw.extend({
     if (!options.model) {
       throw new Error('Please provide a model.');
     }
+
+    this.listenTo(this.model, 'change', this.render);
   },
 
   chatHeadClick: function() {
@@ -23,7 +26,11 @@ module.exports = baseVw.extend({
   render: function() {
     loadTemplate('./js/templates/chatHead.html', (tmpl) => {
       this.$el.html(
-        tmpl(this.model.toJSON())
+        tmpl(
+          __.extend(this.model.toJSON(), {
+            serverUrl: app.serverConfig.getServerBaseUrl()
+          })
+        )
       );
     });
 
