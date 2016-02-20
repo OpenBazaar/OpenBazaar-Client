@@ -40,7 +40,7 @@ module.exports = baseVw.extend({
       if (cl.length) {
         for (var i=0; i < 100; i++) {
           cl.add(
-            cl.at(0).clone().set('guid', Math.random().toString())
+            cl.at(0).clone().set('guid', '----------> ' + i)
           );
         }
       }
@@ -67,6 +67,16 @@ module.exports = baseVw.extend({
   },
 
   onChatHeadClick: function(vw) {
+    this.openConversation(vw.model);
+  },
+
+  openConversation: function(model) {
+    // Model is the model of the user you want to converse with.
+    // When calling this function from inside our view, we are passing
+    // in a chatConversation model, but passing in a profile model should probably
+    // work as well (at least now it does). The latter could be useful when
+    // calling this function from outside of this view.
+
     var msgCl = new ChatMessagesCl();
 
     this.slideOut();
@@ -74,7 +84,7 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       // if we were already chatting with this person and that
       // conversation is just hidden, show it
-      if (this.chatConversationVw.model === vw.model) {
+      if (this.chatConversationVw.model.get('guid') === model.get('guid')) {
         this.$convoContainer.removeClass('chatConversationContainerHide');
         return;
       } else {
@@ -85,7 +95,7 @@ module.exports = baseVw.extend({
     msgCl.comparator = 'timestamp';
 
     this.chatConversationVw = new ChatConversationVw({
-      model: vw.model,
+      model: model,
       user: this.model,
       collection: msgCl
     });
@@ -93,12 +103,15 @@ module.exports = baseVw.extend({
     this.registerChild(this.chatConversationVw);
 
     this.listenTo(this.chatConversationVw, 'close-click', this.closeConversation);
+    
     this.listenTo(this.chatConversationVw, 'enter-message', function(msg) {
-      this.sendMessage(vw.model.get('guid'), vw.model.get('public_key'), msg);
+      var conversationMd;
+
+      this.sendMessage(model.get('guid'), model.get('public_key'), msg);
       this.chatConversationVw.getMessageField().val('');
 
       // since messages sent by us won't come back via the socket,
-      // to not have to call get_chat+messages to get the message
+      // to not have to call get_chat_messages to get the message
       // we just sent, we'll add it in manually
       this.chatConversationVw.collection.add({
         avatar_hash: this.model.avatar_hash,
@@ -107,12 +120,25 @@ module.exports = baseVw.extend({
         outgoing: true,
         read: true,
         timestamp: Date.now()
-      });      
+      });
+
+      // update chat head
+      if (conversationMd = this.chatConversationsCl.findWhere({ guid: msg.sender })) {
+        conversationMd.set({
+          last_message: msg,
+          unread: 0,
+          timestamp: Date.now()
+        });        
+      } else {
+        // todo: maybe manually create and add in the model, rather
+        // than having to fetch
+        this.chatConversationsCl.fetch();
+      }
     });
 
     this.$('.chatConversationContainer').html(
       this.chatConversationVw.render().el
-    ).removeClass('chatConversationContainerHide');
+    ).removeClass('chatConversationContainerHide');    
   },
 
   sendMessage: function(recipient, key, msg) {
@@ -134,13 +160,9 @@ module.exports = baseVw.extend({
   },
 
   handleSocketMessage: function(response) {
-    console.log('got somethin yo!');
-    window.got = response;
-
     var msg = JSON.parse(response.data).message,
         openlyChatting = false,
-        conversationMd,
-        newConvo;
+        conversationMd;
 
     if (!msg) return;
 
@@ -148,8 +170,6 @@ module.exports = baseVw.extend({
       // if we're actively chatting with the person who sent the message,
       // whether the view is hidden or not, update the conversation
       if (this.chatConversationVw && msg.sender === this.chatConversationVw.model.get('guid')) {
-        console.log('hey we be chatting already!')
-
         if (this.isConvoOpen()) {
           openlyChatting = true;
         }
@@ -165,8 +185,8 @@ module.exports = baseVw.extend({
         });
       }
 
-      // update chat heads
-      if (conversationMd = this.chatConversationsCl.get(msg.public_key)) {
+      // update chat head
+      if (conversationMd = this.chatConversationsCl.findWhere({ guid: msg.sender })) {
         conversationMd.set({
           last_message: msg.message,
           unread: openlyChatting ? 0 : conversationMd.get('unread') + 1,
@@ -174,17 +194,9 @@ module.exports = baseVw.extend({
           avatar_hash: msg.avatar_hash
         });
       } else {
-        newConvo = __.extend({}, conversationMd.attributes);
-        newConvo.last_message = msg.message;
-        newConvo.guid = msg.sender;
-        newConvo.unread = 1;
-        
-        delete newConvo.message;
-        delete newConvo.message_type;
-        delete newConvo.sender;
-        delete newConvo.subject;
-        
-        this.chatConversationsCl.add(newConvo);
+        // todo: maybe manually create and add in the model, rather
+        // than having to fetch
+        this.chatConversationsCl.fetch();
       }
 
       // if we're not openly chatting with the sender of the 
@@ -196,17 +208,7 @@ module.exports = baseVw.extend({
     return !this.$convoContainer.hasClass('chatConversationContainerHide');
   },
 
-  closeConversation: function() {
-    // this.$('.chatConversation').addClass('chatConversationHidden');
-    // this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
-    // this.$('.chatHead').removeClass('chatHeadSelected');
-    // this.$('.chatSearch').removeClass('textOpacity50');
-    
-    // this.chatConversationVw && this.chatConversationVw.remove();
-    this.$convoContainer.addClass('chatConversationContainerHide');
-  },
-
-  openChat: function(guid, key) {
+  _______openChat: function(guid, key) {
     var self = this,
         model = this.options.model,
         avatarURL = "",
@@ -244,12 +246,22 @@ module.exports = baseVw.extend({
 
   },
 
-  openConversation: function() {
+  _______openConversation: function() {
     this.slideOut();
     this.$('.chatConversation').removeClass('chatConversationHidden');
     this.$('.chatConversationHeads').addClass('chatConversationHeadsCompressed textOpacity50');
     this.$('.chatSearch').addClass('textOpacity50');
-  },    
+  },
+
+  closeConversation: function() {
+    // this.$('.chatConversation').addClass('chatConversationHidden');
+    // this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
+    // this.$('.chatHead').removeClass('chatHeadSelected');
+    // this.$('.chatSearch').removeClass('textOpacity50');
+    
+    // this.chatConversationVw && this.chatConversationVw.remove();
+    this.$convoContainer.addClass('chatConversationContainerHide');
+  },
 
   slideOut: function() {
     this.$sideBar.addClass('sideBarSlid');

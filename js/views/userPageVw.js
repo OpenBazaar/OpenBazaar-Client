@@ -2,6 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     is = require('is_js'),
+    app = require('../App.js').getApp(),
     loadTemplate = require('../utils/loadTemplate'),
     colpicker = require('../utils/colpick.js'),
     cropit = require('../utils/jquery.cropit'),
@@ -1368,10 +1369,9 @@ module.exports = baseVw.extend({
   },
 
   sendMessage: function(){
-    "use strict";
-    var key = this.userProfile.get('profile').public_key;
-    var guid = this.userProfile.get('profile').guid;
-    window.obEventBus.trigger("openChat", guid, key);
+    app.chatVw.openConversation(
+      new userProfileModel(this.userProfile.get('profile'))
+    );
   },
 
   showModeratorModal: function(){
