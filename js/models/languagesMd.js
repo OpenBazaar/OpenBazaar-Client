@@ -58,12 +58,12 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "About is blank...",
         Followers: "Followers",
         Following: "Following",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Follows You",
         Message: "Message",
         Messages: "Messages",
         Store: "Store",
         Edit: "Edit",
-        Clone: "Clone", //notTranslated
+        Clone: "Clone",
         Used: "Used",
         Delete: "Delete",
         DontDelete: "Don't Delete",
@@ -358,12 +358,12 @@ module.exports = Backbone.Model.extend({
           badHandle: "The handle you entered does not have a valid OpenBazaar ID.",
           serverDown: "The server has been shut down",
           tooManyPhotosTitle: "Too many photos",
-          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", 
-          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>", //notTranslated
+          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
           licensing: "<p>OpenBazaar is open source software using the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -387,7 +387,7 @@ module.exports = Backbone.Model.extend({
         nav: {
           searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...",
           myPage: "My Page",
-          testMode: "Test Mode", //notTranslated
+          testMode: "Test Mode",
           customizePage:"Customize Page",
           sellItem:"New",
           createListing:"Create Listing",
@@ -451,9 +451,9 @@ module.exports = Backbone.Model.extend({
           BitGoTagline: "The world's most secure bitcoin wallet. Trusted by leading Bitcoin businesses."
         },
         softwareUpdate: {
-          updateAvailable: "OpenBazaar Update Available", //notTranslated
-          installUpdate: "Install Update", //notTranslated
-          dismiss: "Dismiss" //notTranslated
+          updateAvailable: "OpenBazaar Update Available",
+          installUpdate: "Install Update",
+          dismiss: "Dismiss"
         },
         buyFlow: {
           PayForOrder: "Pay for Order",
@@ -491,31 +491,43 @@ module.exports = Backbone.Model.extend({
           total: "Total"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "No results found"
         },
         serverConnectModal: {
-          statusTryingToConnect: "Trying to connect to your server", //notTranslated
-          statusConnected: "Connected", //notTranslated
-          statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed", //notTranslated
-          statusTooManyAttempts: "Too many failed login attempts", //notTranslated
-          serverConfiguration: "Server Configuration", //notTranslated
-          connecting: "Connecting", //notTranslated
-          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
-          serverIP: "Server IP", //notTranslated
-          restApiPort: "Rest API port", //notTranslated
-          websocketApiPort: "Websocket API port", //notTranslated
-          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
-          username: "Username", //notTranslated
-          password: "Password", //notTranslated                    
-          restoreDefaults: "Restore defaults", //notTranslated                    
-          saveChanges: "Save Changes", //notTranslated                    
-          retry: "Retry connection", //notTranslated 
+          statusTryingToConnect: "Trying to connect to your server",
+          statusConnected: "Connected",
+          statusFailedConnection: "Unable to connect to your server",
+          statusFailedAuthentication: "Authentication failed",
+          statusTooManyAttempts: "Too many failed login attempts",
+          serverConfiguration: "Server Configuration",
+          connecting: "Connecting",
+          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.",
+          serverIP: "Server IP",
+          restApiPort: "Rest API port",
+          websocketApiPort: "Websocket API port",
+          heartbeatSocketApiPort: "Heartbeat socket port",
+          username: "Username",
+          password: "Password",  
+          restoreDefaults: "Restore defaults",       
+          saveChanges: "Save Changes",         
+          retry: "Retry connection",
         }
       },
+      
       {
+        
         langName: "Espa&ntilde;ol",
         langCode: "sp",
+        
+        /*
+        
+        Translators: @jjeffryes @gubatron @PolyDeveloper
+        02/18/2016: ~ 242 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
@@ -994,10 +1006,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }
       },
+      
       {
+        
         langName: "German",
         langCode: "de",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translators: @z3ntu @johirner
+        02/18/2016: ~ 244 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Weiter",
         IAgree: "Akzeptieren",
@@ -1485,10 +1508,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection" //notTranslated 
         }        
       },
+      
       {
+          
         langName: "Italiano",
         langCode: "it",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @HostFat
+        02/18/2016: ~ 173 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+        
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Avanti",
         IAgree: "Sono d'accordo",
@@ -1980,10 +2014,23 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection" //notTranslated 
         }        
       },
+      
       {
+        
         langName: "Français",
         langCode: "fr-FR",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @Kirvx
+        Reviewer  : @JustinDrake
+        
+        02/18/2016: ~ 0 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "J'ai maintenant un portefeuille",
         Next: "Suivant",
         IAgree: "Je suis d'accord",
@@ -2033,12 +2080,12 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "&Agrave; propos est vide...",
         Followers: "Abonnés",
         Following: "Abonnements",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Vous suit",
         Message: "Message",
         Messages: "Messages",
         Store: "Boutique",
         Edit: "Modifier",
-        Clone: "Clone", //notTranslated
+        Clone: "Dupliquer",
         Used: "Utilisé",
         Delete: "Supprimer",
         DontDelete: "Ne pas supprimer",
@@ -2190,7 +2237,7 @@ module.exports = Backbone.Model.extend({
         Block: "Bloquer",
         Unblock: "Débloquer",
         Blocked: "Bloqué",
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
+        NoBlockedList: "Vous ne bloquez personne",
         Advanced: "Avancé",
         General: "Général",
         AllItems: "Tous les articles",
@@ -2236,9 +2283,9 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Résolveur d'identifiant",
         ServerSettings: "Paramètres du serveur",
         ShutDownServer: "Arrêter le serveur",
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
-        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
-        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
+        LoadingBitcoinPrices: "Chargement des prix Bitcoin...",
+        ServerChangeWarningHeadline: "Attention: Enregistrez vos paramètres",
+        ServerChangeWarning: "Nous vous recommandons de faire une copie de vos paramètres précédents, indiqués ci-dessous. Votre nom d'utilisateur et mot de passe précédents ne seront plus disponibles au-delà de ce point.",
         moderatorSettings: {
           DisputeResolution: "Résolution de litige",
           ServiceFee: "Frais de service",
@@ -2282,7 +2329,7 @@ module.exports = Backbone.Model.extend({
           EstimatedDelivery: "Délai de livraison estimé",
           EstimatedDeliveryPlaceholder: "Date estimée de la livraison de l'article",
           URL: "URL",
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
+          URLPlaceholder: "Lien pour télécharger, planifier, ou plus d'informations",
           Password: "Mot de passe",
           PasswordPlaceholder: "Mot de passe requis pour le lien, si nécessaire",
           DirectTransaction: "Transaction directe",
@@ -2338,7 +2385,7 @@ module.exports = Backbone.Model.extend({
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le <a href=\"\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "", //notTranslated
+          support: "<p>Vous pouvez aider OpenBazaar de plusieurs manières afin de faciliter les échanges commerciaux libres et gratuits.</p><p>Acheter et vendre des biens et services sur le réseau aide la communauté à s’agrandir et rend la plateforme plus attractive pour de nouveaux utilisateurs. Demandez poliment à des commerces qui acceptent Bitcoin de vendre sur la plateforme afin de faire passer le mot et démontrez la demande pour des échanges pair à pair.</p><p>Si vous êtes un développeur, allez sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">notre Github</a> et voyez où vous pouvez nous aider. En plus d’aider à coder, nous espérons que la nature open-source et sans permissions du projet vous donnera l’envie de construire de nouveaux services sur le réseau existant.</p><p>Vous pouvez également <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donner des Bitcoins</a> au projet, qui seront utilisés pour couvrir les frais des conférences, offrir des récompenses pour le développement, et promouvoir OpenBazaar.</p><p>Vous pouvez <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">rejoindre notre Slack</a> si vous avez de nouvelles idées pour OpenBazaar, ou si vous avez des questions sur le développement du logiciel.</p>",
           licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -2477,10 +2524,21 @@ module.exports = Backbone.Model.extend({
           retry: "Réessayer",
         }
       },
+      
       {
+        
         langName: "Română",
         langCode: "ro",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @moldcraft
+        02/18/2016: ~ 243 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Următorul",
         IAgree: "Sunt de acord",
@@ -2968,10 +3026,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }        
       },
+      
       {
+        
         langName: "Russian",
         langCode: "ru",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @Squirrel2020
+        02/18/2016: ~ 172 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Далее",
         IAgree: "Согласен",
@@ -3459,10 +3528,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }        
       },
+      
       {
+        
         langName: "Slovak",
         langCode: "sk",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @michalvalasek
+        02/18/2016: ~ 243 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Ďalej",
         IAgree: "Súhlasím",
@@ -3950,10 +4030,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }        
       },
+      
       {
+        
         langName: "Turkish",
         langCode: "tr",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @Kahpecuce
+        02/18/2016: ~ 237 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Sonraki",
         IAgree: "Kabul ediyorum",
@@ -4445,10 +4536,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }        
       },
+      
       {
+        
         langName: "Klingon",
         langCode: "klg",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @drwasho
+        02/18/2016: ~ 238 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Veb",
         IAgree: "jIQochbe'",
@@ -4939,10 +5041,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }        
       },
+      
       {
+        
         langName: "中文",
         langCode: "zh-CN",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: Jingyi Yang | @saltduck
+        02/18/2016: ~ 66 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "我已经有一个钱包",
         Next: "下一步",
         IAgree: "我同意",
@@ -5437,11 +5550,21 @@ module.exports = Backbone.Model.extend({
           retry: "重新连接服务器",
         }        
       },
+      
       {
+        
         langName: "한국어 (Korean)",
         langCode: "ko",
-        /* Use capitalized keys for widely reused text that must be capitalized...
-        Korean type doesn't have capitalized letters*/
+        
+        /*
+        
+        Translator: @mpatc
+        02/18/2016: ~ 239 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "다음",
         IAgree: "동의",
@@ -5933,10 +6056,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }        
       },
+      
       {
+        
         langName: "日本語 (Japanese)",
         langCode: "ja-JP",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @ayalan
+        02/18/2016: ~ 159 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "次へ",
         IAgree: "同意する",
@@ -6412,10 +6546,21 @@ module.exports = Backbone.Model.extend({
           retry: "Retry connection", //notTranslated 
         }       
       },
+      
       {
+        
         langName: "Polski",
         langCode: "pl",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @Mido
+        02/18/2016: ~ 71 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized
+        
+        */
+
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Dalej",
         IAgree: "Zgadzam się",
@@ -6882,10 +7027,21 @@ module.exports = Backbone.Model.extend({
           total: "Suma"
         }
       },
+      
       {
+          
         langName: "Dansk",
         langCode: "da",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        
+        /*
+        
+        Translator: @pryds
+        02/21/2016: ~ 26 untranslated strings
+        
+        Use capitalized keys for widely reused text that must be capitalized 
+        
+        */
+        
         IHaveAWalletNow: "Nu har jeg en tegnebog",
         Next: "Næste",
         IAgree: "Jeg er enig",
