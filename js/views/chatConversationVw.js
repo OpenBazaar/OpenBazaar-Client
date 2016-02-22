@@ -12,7 +12,10 @@ module.exports = baseVw.extend({
   events: {
     'click .js-closeConversation': 'onClickClose',
     'keydown textarea': 'onKeydownMessage',
-    'keyup textarea': 'onKeyupMessage'
+    'keyup textarea': 'onKeyupMessage',
+    'click .js-conversationSettings': 'toggleConvoSettings',
+    'click .chatConversationMenu a': 'closeConvoSettings',
+    'click .js-blockUser a': 'onBlockClick'
   },
 
   initialize: function(options) {
@@ -104,6 +107,18 @@ module.exports = baseVw.extend({
     this.registerChild(vw);
 
     return vw;
+  },
+
+  closeConvoSettings: function() {
+    this.$('.chatConversationMenu').addClass('hide');
+  },
+
+  toggleConvoSettings: function() {
+    this.$('.chatConversationMenu').toggleClass('hide');
+  },
+
+  onBlockClick: function() {
+    this.user.blockUser(this.model.get('guid'));
   },
 
   renderMessages: function() {

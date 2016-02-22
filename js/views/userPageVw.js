@@ -247,6 +247,18 @@ module.exports = baseVw.extend({
       this.changeModeratorStatus(options.status, options.fee);
     });
 
+    this.listenTo(window.obEventBus, 'blockingUser', (e) => {
+      if (e.guid === this.model.get('page').profile.guid) {
+        this.renderUserBlocked();
+      }
+    });    
+
+    this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
+      if (e.guid === this.model.get('page').profile.guid) {
+        this.renderUserUnblocked();
+      }
+    });        
+
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
     //sometimes it can be set to the string 'null', check for that too
@@ -1403,17 +1415,25 @@ module.exports = baseVw.extend({
   },
 
   blockUserClick: function(e) {
+    this.options.userModel.blockUser(this.userProfile.get('profile').guid);
+    this.renderUserBlocked();
+  },
+
+  renderUserBlocked: function() {
     this.$('.js-unblock').removeClass('hide');
     this.$('.js-block').addClass('hide');
-    this.options.userModel.blockUser(this.userProfile.get('profile').guid);
     this.hideBlockedUser();
   },
 
   unblockUserClick: function(e) {
+    this.options.userModel.unblockUser(this.userProfile.get('profile').guid);
+    this.renderUserUnblocked();
+  },
+
+  renderUserUnblocked: function() {
     this.$('.js-unblock').addClass('hide');
     this.$('.js-block').removeClass('hide');
-    this.options.userModel.unblockUser(this.userProfile.get('profile').guid);
-  },
+  },  
 
   hideBlockedUser: function(){
     this.$('.js-blockedWarning').fadeIn(100);

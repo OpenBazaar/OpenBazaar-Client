@@ -40,13 +40,13 @@ module.exports = baseVw.extend({
     this.chatConversationsCl.fetch();
 
     this.listenTo(this.chatConversationsCl, 'sync', (cl) => {
-      if (cl.length) {
-        for (var i=0; i < 100; i++) {
-          cl.add(
-            cl.at(0).clone().set('guid', '----------> ' + i)
-          );
-        }
-      }
+      // if (cl.length) {
+      //   for (var i=0; i < 100; i++) {
+      //     cl.add(
+      //       cl.at(0).clone().set('guid', '----------> ' + i)
+      //     );
+      //   }
+      // }
 
       cl.forEach((md) => {
         this.listenTo(md, 'change', () => {
@@ -82,14 +82,14 @@ module.exports = baseVw.extend({
     this.listenTo(window.obEventBus, 'blockingUser', (e) => {
       this.filterChatHeads();
 
-      if (this.chatConversationVw.model.get('guid') === e.guid) {
+      if (this.chatConversationVw && this.chatConversationVw.model.get('guid') === e.guid) {
         this.closeConversation();
       }
     });    
 
     this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
       this.filterChatHeads();
-    });        
+    });
   },
 
   filterChatHeads: function() {
@@ -176,7 +176,7 @@ module.exports = baseVw.extend({
     this.registerChild(this.chatConversationVw);
 
     this.listenTo(this.chatConversationVw, 'close-click', this.closeConversation);
-    
+
     this.listenTo(this.chatConversationVw, 'enter-message', function(msg) {
       var conversationMd;
 
@@ -296,6 +296,7 @@ module.exports = baseVw.extend({
     this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed textOpacity50');
     this.$('.chatSearch').removeClass('textOpacity50');
     this.$convoContainer.addClass('chatConversationContainerHide');
+    this.chatConversationVw && this.chatConversationVw.closeConvoSettings();
   },
 
   slideOut: function() {
