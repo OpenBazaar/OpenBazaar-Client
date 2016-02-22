@@ -66,11 +66,12 @@ module.exports = Backbone.Model.extend({
   parse: function(response) {
     //first check to make sure server sent data in the response. Sometimes it doesn't.
     if(response.profile){
+
       //check if colors are in hex, if not convert. This assumes non-hex colors are numbers or strings of numbers.
-      response.profile.background_color = this.convertColor(response.profile.background_color);
-      response.profile.primary_color = this.convertColor(response.profile.primary_color);
-      response.profile.secondary_color = this.convertColor(response.profile.secondary_color);
-      response.profile.text_color = this.convertColor(response.profile.text_color);
+      response.profile.background_color = response.profile.background_color ? this.convertColor(response.profile.background_color) : "#063753";
+      response.profile.primary_color = response.profile.primary_color ? this.convertColor(response.profile.primary_color) : "#086A9E";
+      response.profile.secondary_color = response.profile.secondary_color ? this.convertColor(response.profile.secondary_color) : "#317DB8";
+      response.profile.text_color = response.profile.text_color ? this.convertColor(response.profile.text_color) : "#ffffff";
 
       //if an empty social_accounts object is returned, put the defaults back into it
       response.profile.social_accounts.facebook = response.profile.social_accounts.facebook || {username: "", proof_url: ""};
