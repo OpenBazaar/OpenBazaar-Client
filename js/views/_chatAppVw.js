@@ -30,8 +30,9 @@ module.exports = Backbone.View.extend({
     'click .chatConversation .js-viewPage': 'gotoChatUserProfile',
     'click .chatConversation .js-blockUser': 'blockUserClick',
     'keydown .js-chatMessage': 'checkShift',
-    'keyup .js-chatMessage': 'sendChat',
-    'keyup .js-chatSearchText': 'chatSearchText'
+    //'keyup .js-chatSearchText': 'chatSearchText'
+    'keyup .js-chatMessage': 'sendChat'
+
   },
 
   initialize: function(options){
@@ -165,6 +166,7 @@ module.exports = Backbone.View.extend({
   },
 
   chatSearchText: function(e) {
+    //currently turned off. Reactivate when chat functionality and UX is improved
     var search = e.currentTarget.value;
 
     if(search !== "") {
