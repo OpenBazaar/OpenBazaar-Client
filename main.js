@@ -31,12 +31,11 @@ var subpy = null;
 
 var open_url = null; // This is for if someone opens a URL before the client is open
 
-if (argv.appData) {
+if (argv.userData) {
   try {
-    app.setPath('appData', argv.appData);
-    app.setPath('userData', argv.appData);
+    app.setPath('userData', argv.userData);
   } catch (e) {
-    throw new Error('The passed in appData directory does not appear to be valid: ' + e);
+    throw new Error('The passed in userData directory does not appear to be valid: ' + e);
   }
 }
 
