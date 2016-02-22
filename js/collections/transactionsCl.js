@@ -17,8 +17,11 @@ module.exports = Backbone.Collection.extend({
     "use strict";
     var self = this;
     __.each(response, function(order, i){
-      response[i].btAve = self.btAve;
-      response[i].cCode = self.cCode;
+      order.btAve = self.btAve;
+      order.cCode = self.cCode;
+      if(order.status == "open"){
+        order.status = 4;
+      }
     });
 
     return response;
