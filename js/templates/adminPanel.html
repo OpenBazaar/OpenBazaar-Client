@@ -6,19 +6,6 @@
     <div class="row20 rowTop20">
       <h1 class="txt-center">Admin Panel</h1>
 
-    <h3>Set Server</h3>
-    <div class="box-border row20">
-      <form id="adminPanelServer">
-        <div class="flex-border">
-          <div class="flexRow">
-            <div class="flexCol-12">
-              <a class="btn btn-txt row20 js-adminServer margin8 pull-right">Set</a>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-
     <h3>Set Profile</h3>
     <div class="box-border row20">
       <form id="adminPanelProfile">
@@ -30,32 +17,20 @@
                 <div class="js-adminServerMsg"></div>
               </div>
             </div>
-            <div class="flexCol-8">
+            <div class="flexCol-8 positionWrapper">
+              <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
+              <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+            </div>
+          </div>
+          <div class="flexRow">
+            <div class="flexCol-12">
               <div class="fieldItem">
-                <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
-                <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+                <a class="btn btn-txt pull-right js-adminUpdateProfile">Change Profile</a>
               </div>
             </div>
           </div>
         </div>
       </form>
-    </div>
-
-    <h3>System</h3>
-    <div class="box-border row20">
-      <div class="flex-border">
-        <div class="flexRow">
-          <div class="flexCol-12">
-              <a class="btn btn-txt pull-left margin8 js-adminShutdown">Turn Server Off</a>
-              <div class="pull-right margin8 adminMsg"></div>
-          </div>
-        </div>
-        <div class="flexRow">
-          <div class="flexCol-12">
-            <a class="btn btn-txt pull-left margin8 js-adminCloseApp">Close This Application</a>
-          </div>
-        </div>
-      </div>
     </div>
 
     <h3>Connected Peers</h3>
@@ -64,7 +39,7 @@
         <div class="flexRow">
           <div class="flexCol-12">
             <div class="fieldItem">
-              <p class="js-adminPeers">
+              <p class="js-adminPeers" style="word-wrap: break-word">
               </p>
             </div>
           </div>

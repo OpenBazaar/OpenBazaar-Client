@@ -112,22 +112,6 @@ module.exports = baseModal.extend({
     this.model.set('time_zone', tz);
   },
 
-  newHandle: function(e){
-    this.$('.js-homeModal-handleInput').closest('.flexRow').removeClass('hide');
-    this.$('.js-homeModal-existingHandle').parent().addClass('hide');
-    this.$('.js-homeModal-cancelHandle').parent().removeClass('hide');
-  },
-
-  existingHandle: function(e){
-    //TODO: add code to connect handle here
-  },
-
-  cancelHandle: function(e){
-    this.$('.js-homeModal-handleInput').closest('.flexRow').addClass('hide');
-    this.$('.js-homeModal-existingHandle').parent().removeClass('hide');
-    this.$('.js-homeModal-cancelHandle').parent().addClass('hide');
-  },
-
   accordionReady: function(listReady) {
     var countryList,
         currencyList,
@@ -263,10 +247,6 @@ module.exports = baseModal.extend({
         self.model.set('short_description', this.$('textarea#aboutInput').val());
     }
 
-    if(this.$('#storeHandleInput').val() != "" && /^@/.test(this.$('#storeHandleInput').val()) ){
-        self.model.set('handle', this.$('#storeHandleInput').val());
-    }
-
     if(this.$('#storeNameInput').val() != ""){
         self.model.set('name', this.$('#storeNameInput').val());
     }else if (self.model.get('name') == undefined){
@@ -293,7 +273,7 @@ module.exports = baseModal.extend({
             if(i == "country") {
                 profileFormData.append("location",el);
             }
-            if(i == "name" || i == "handle" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
+            if(i == "name" || i =="short_description"|| (themeId && (i == "primary_color" || i == "secondary_color" || i == "text_color"|| i =="background_color" ))) {
                 profileFormData.append(i,""+el);
             } else {
                 settingsFormData.append(i,el);

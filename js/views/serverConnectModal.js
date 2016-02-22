@@ -14,16 +14,24 @@ module.exports = baseModal.extend({
     'click .js-save': 'saveForm',
     'click .js-restoreDefaults': 'restoreDefaults',
     'input input': 'inputEntered',
-    'click .js-retry': 'retry'
+    'click .js-retry': 'retry',
+    'click .js-sslOn': 'sslOn',
+    'click .js-sslOff': 'sslOff'
   },
 
   initialize: function(options) {
+    this.options = options || {};
     this.model = app.serverConfig;
 
     this.listenTo(this.model, 'invalid sync', function() {
       this.render();
     });
 
+    this.listenTo(this.model, 'change:SSL', function() {
+      this.render();
+    });
+
+    this._state = this.options.initialState || {};
     this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
   },
 
@@ -47,7 +55,7 @@ module.exports = baseModal.extend({
       } else {
         this.changeServerWarningModal.open();
       }
-    };
+    }
   },
 
   restoreDefaults: function() {
@@ -91,20 +99,19 @@ module.exports = baseModal.extend({
     };
 
     login = function() {
-      // at this point, we've confirmed connection, so:
-      self.trigger('connected');
-
       // check authentication
       loginRequest = app.login().done(function(data) {
         if (data.success) {
           deferred.resolve();
-          self.trigger('authenticated');
+          self.trigger('connected', true);
         } else {
           if (data.reason === 'too many attempts') {
             rejectLogin('failed-auth-too-many');  
           } else {
             rejectLogin('failed-auth');  
-          }          
+          }
+
+          self.trigger('connected', false);
         }
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
@@ -128,7 +135,7 @@ module.exports = baseModal.extend({
 
     promise.cancel = function() {
       deferred.reject('canceled');
-    }
+    };
 
     promise.always(function() {
       promise.cleanup();
@@ -159,25 +166,17 @@ module.exports = baseModal.extend({
         connect;
 
     this.connectAttempt && this.connectAttempt.cancel();
-
     this.setState({ status: 'trying' });
 
-    (connect = function() {
-      self.connectAttempt = self.attemptConnection().done(function() {
-        self.setState({ status: 'connected' });
-      }).fail(function(reason) {
-        if (reason == 'canceled') return;
-        
-        if (attempts >= 3 || reason === 'failed-auth' || reason === 'failed-auth-too-many') {
-          self.setState({ status: reason === 'failed-auth' ? 'failed-auth' : 'failed' });
-        } else {
-          attempts += 1;
-          connect();
-        }
-      }).always(function() {
-        self.connectAttempt = null;
-      });
-    })();
+    this.connectAttempt = this.attemptConnection().done(function() {
+      self.setState({ status: 'connected' });
+    }).fail(function(reason) {
+      if (reason == 'canceled') return;
+
+      self.setState({ status: typeof reason === 'undefined' || reason === 'timedout' ? 'failed' : reason });
+    }).always(function() {
+      self.connectAttempt = null;
+    });
   },
 
   stop: function() {
@@ -186,6 +185,14 @@ module.exports = baseModal.extend({
       this.connectAttempt = null;
       this.setState({ status: 'failed' });
     }
+  },
+
+  sslOn: function(){
+    this.model.set('SSL', false);
+  },
+
+  sslOff: function(){
+    this.model.set('SSL', true);
   },
 
   isStarted: function() {

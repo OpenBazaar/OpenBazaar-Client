@@ -65,12 +65,10 @@
       <span class="ion-android-list fontSize12 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Summary') %>
     </a>
-    <% if(ob.vendor_order_confirmation) { %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-shippingTab" data-tab="shipping">
       <span class="ion-cube fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Shipping') %>
     </a>
-    <% } %>
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-fundsTab" data-tab="funds">
       <span class="ion-social-bitcoin fontSize12 marginRight2 textOpacity1"></span>
       <%= polyglot.t('Funds') %>
@@ -83,7 +81,7 @@
   </div>
 
   <div class="js-main js-summary">
-    <div style="height: 264px;" class="scrollOverflowY">
+    <div style="height: 264px;" class="scrollOverflowY customThemeScrollbar">
       <div class="flexRow custCol-border borderBottom">
         <div class="flexRow rowItem padding2015">
           <div class="pad10left txt-unleaded">
@@ -330,7 +328,7 @@
 
 
   <div class="js-main js-funds hide">
-    <div class="flexRow scrollOverflowY" style="height: 319px;">
+    <div class="flexRow scrollOverflowY customThemeScrollbar" style="height: 319px;">
       <div class="flexRow rowItem padding2015 custCol-border borderBottom">
         <div class="pad10left txt-unleaded">
           <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
@@ -470,8 +468,8 @@
   </div>
 
   <div class="js-main js-discussion">
-    <div class="flexRow scrollOverflowY js-discussionScroller" style="height: 225px;">
-      <div class="flexRow js-discussionWrapper">
+    <div class="scrollOverflowY js-discussionScroller customThemeScrollbar" style="height: 225px;">
+      <div class="js-discussionWrapper">
       </div>
     </div>
     <div class="flexRow pad10Top width100 positionBottom custCol-secondary box-borderbright js-discussionForm">
@@ -504,7 +502,7 @@
             <%= polyglot.t('transactions.CloseDispute') %>
           </label>
         </div>
-        <% } else if(ob.status != 4 && ob.displayModerator) { %>
+        <% } else if(ob.status != 4  && ob.status != 0 && ob.displayModerator) { %>
         <div class="js-startDisputeFlag">
           <input type="checkbox" class="fieldItem"
                  id="transactionStartDisputeCheckbox" >
@@ -538,10 +536,8 @@
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
                   <input type="number"
-                         name="buyer_percentage"
                          id="transactionsBuyerPayoutPercent"
                          max="100" min="0" step="0.1"
-                         class=""
                          style="width: 50px"
                          value="50">%
                 </span>
@@ -555,10 +551,8 @@
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
                   <input type="number"
-                         name="vendor_percentage"
                          id="transactionsSellerPayoutPercent"
                          max="100" min="0" step="0.1"
-                         class=""
                          style="width: 50px"
                          value="50">%
                 </span>
@@ -592,7 +586,7 @@
           </div>
         </div>
       </div>
-      <form id="transactionConfirmForm" class="flexRow scrollOverflowY custCol-border borderTop" style="height: 269px">
+      <form id="transactionConfirmForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar" style="height: 269px">
         <div class="flexRow custCol-border">
           <div class="flexCol-4 borderRight custCol-border">
             <div class="fieldItem">
@@ -707,7 +701,7 @@
             </div>
           </div>
           <div class="flexCol-8">
-            <input name="url"
+            <input name="password"
                    id="inputPassword"
                    type="text"
                    class="fieldItem custCol-text"
@@ -738,7 +732,7 @@
           </div>
         </div>
       </div>
-      <form id="transactionCompleteForm" class="flexRow scrollOverflowY custCol-border borderTop" style="height: 269px">
+      <form id="transactionCompleteForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar" style="height: 269px">
         <div class="flexRow custCol-border">
           <div class="flexCol-4 borderRight custCol-border">
             <div class="fieldItem">
@@ -862,9 +856,7 @@
                       maxlength="80"
                       class="fieldItem-textarea custCol-text"
                       id="inputReview"
-                      placeholder="<%= polyglot.t('transactions.ReviewPlaceHolder') %>"
-                      required>
-            </textarea>
+                      required></textarea>
           </div>
         </div>
 

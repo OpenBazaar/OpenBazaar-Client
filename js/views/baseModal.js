@@ -16,7 +16,7 @@ module.exports = baseVw.extend({
         includeCloseButton: false,
         closeButtonClass: 'btn-corner btn-cornerTR',
         innerWrapperClass: 'modal-child modal-childMain custCol-primary'
-      }
+      };
 
       this.__options = __.extend({}, defaults, options || {});
       this.className = 'modal modal-opaque ' + __.result(this, 'className', '');

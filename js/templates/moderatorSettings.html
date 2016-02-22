@@ -52,10 +52,11 @@
                     </div>
                     <div class="flexCol-7 borderRight0 custCol-border">
                       <input type="number"
-                             min="0"
-                             max="25"
+                             min="0.00"
+                             max="25.00"
                              step="0.01"
                              name="moderation_fee"
+                             maxlength="2"
                              class="fieldItem custCol-text width70px floatLeft alignRight"
                              id="moderatorSettingsFeeInput"
                              value="<%- ob.page.profile.moderation_fee.toFixed(2) %>" required/><label class="paddingLeft2 floatLeft fieldItem textOpacity75">%</label>

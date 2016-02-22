@@ -51,6 +51,8 @@ module.exports = Backbone.View.extend({
     'click .js-settingsAddressUnDelete': 'addressUnDelete',
     'click #moderatorYes': 'showModeratorFeeHolder',
     'click #moderatorNo': 'hideModeratorFeeHolder',
+    'click .js-shutDownServer': 'shutdownServer',
+    'keyup #moderatorFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -648,6 +650,16 @@ module.exports = Backbone.View.extend({
     }
   },
 
+  keypressFeeInput: function(){
+    "use strict";
+    var fee = $('#moderatorFeeInput').val();
+
+    if (fee.indexOf('.') > 0 && fee.split('.')[1].length > 2) {
+      fee = fee.substr(0, fee.length-1);
+      $('#moderatorFeeInput').val(fee);
+    }
+  },
+
   saveStore: function(){
     "use strict";
     var self = this,
@@ -779,7 +791,10 @@ module.exports = Backbone.View.extend({
 
   launchServerConfig: function() {
     var serverConnectModal = new ServerConnectModal({
-      includeCloseButton: true
+      includeCloseButton: true,
+      initialState: {
+        status: 'connected'
+      }
     }).render().open();
 
     this.serverConnectSyncHandler &&
@@ -802,6 +817,14 @@ module.exports = Backbone.View.extend({
       serverConnectModal.remove();
       this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
     });    
+  },
+
+  shutdownServer: function(){
+    var self = this;
+    $.ajax({
+      type: "GET",
+      url: self.serverUrl + "shutdown"
+    });
   },
 
   close: function(){

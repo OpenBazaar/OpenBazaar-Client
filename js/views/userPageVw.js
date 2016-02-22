@@ -128,7 +128,8 @@ module.exports = baseVw.extend({
     'click .js-returnToStoreCategory': 'storeCatClick',
     'click .js-sellItem': 'sellItem',
     'click .js-customize': 'customizePage',
-    'click .js-editItem': 'editItem',
+    'click .js-editItem': 'editItemClick',
+    'click .js-cloneItem': 'cloneItem',
     'click .js-deleteItem': 'deleteItemClick',
     'click .js-cancelItem': 'cancelClick',
     'click .js-saveItem': 'saveItem',
@@ -154,6 +155,9 @@ module.exports = baseVw.extend({
     'click .js-customizeSecondaryColor .js-customColorChoice': 'customizeSelectColor',
     'click .js-customizeBackgroundColor .js-customColorChoice': 'customizeSelectColor',
     'click .js-customizeTextColor .js-customColorChoice': 'customizeSelectColor',
+    'click .js-block': 'blockUserClick',
+    'click .js-unblock': 'unblockUserClick',
+    'click .js-showBlockedUser': 'showBlockedUser',
     'change .js-categories': 'categoryChanged'
   },
 
@@ -227,6 +231,12 @@ module.exports = baseVw.extend({
       });
     });
 
+    this.listenTo(window.obEventBus, "itemShortClone", function(options){
+      this.setItem(options.contract_hash, function(){
+        self.cloneItem();
+      });
+    });    
+
     this.listenTo(window.obEventBus, "itemShortDelete", function(options){
       this.setItem(options.contract_hash, function(){
         self.deleteItem();
@@ -252,7 +262,7 @@ module.exports = baseVw.extend({
     this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
-      timeout: 4000,
+      //timeout: 4000,
       success: function(model, response){
         //don't render if view has been closed and the $el has been deleted
         if (self.isRemoved()) return;
@@ -306,9 +316,15 @@ module.exports = baseVw.extend({
 
   render: function(){
     "use strict";
-    var self = this;
+    var self = this,
+        blocked = this.options.userModel.get('blocked_guids') || [],
+        isBlocked = blocked.indexOf(this.pageID) !== -1 ? true : false;
+
+    //add blocked status to model
+    this.model.set('isBlocked', isBlocked);
     //make sure container is cleared
     $('#content').html(this.$el);
+
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -320,6 +336,11 @@ module.exports = baseVw.extend({
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
       self.setState(self.state, self.options.itemHash);
+
+      //check if user is blocked
+      if (!self.options.ownPage && isBlocked) {
+        self.hideBlockedUser();
+      }
 
       self.$el.find('#image-cropper').cropit({
         smallImage: "stretch",
@@ -460,7 +481,6 @@ module.exports = baseVw.extend({
   },
 
   setControls: function(state){
-    "use strict";
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
@@ -532,7 +552,7 @@ module.exports = baseVw.extend({
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
-      timeout: 5000,
+      //timeout: 5000,
       success: function(model){
         if (self.isRemoved()) return;
         self.renderItems(model.get('listings'));
@@ -544,7 +564,7 @@ module.exports = baseVw.extend({
     });
     this.following.fetch({
       data: self.userProfileFetchParameters,
-      timeout: 5000,
+      //timeout: 5000,
       success: function(model){
         if (self.isRemoved()) return;
 
@@ -561,7 +581,7 @@ module.exports = baseVw.extend({
           $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
             dataType: "json",
-            timeout: 4000
+            //timeout: 4000
           }).done(function(ownFollowingData){
             if (self.isRemoved()) return;
             self.ownFollowing = ownFollowingData.following || [];
@@ -592,7 +612,7 @@ module.exports = baseVw.extend({
 
     this.followers.fetch({
       data: self.userProfileFetchParameters,
-      timeout: 5000,
+      //timeout: 5000,
       success: function(model){
         var followerArray = model.get('followers');
 
@@ -677,8 +697,6 @@ module.exports = baseVw.extend({
   },
 
   renderFollowing: function (model) {
-    "use strict";
-
     model = model || [];
     this.followingList = new personListView({
       model: model,
@@ -693,7 +711,13 @@ module.exports = baseVw.extend({
     this.subViews.push(this.followingList);
     
     this.$('.js-userFollowingCount').html(model.length);
-      
+
+    if (__.findWhere(model, { guid: this.model.get('user').guid })) {
+      this.$('.js-followsMe').removeClass('hide');
+    } else {
+      this.$('.js-followsMe').addClass('hide');
+    }
+
     if (model.length) {
       new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
     }
@@ -729,7 +753,7 @@ module.exports = baseVw.extend({
     }
     this.item.fetch({
       data: self.itemFetchParameters,
-      timeout: 4000,
+      //timeout: 4000,
       success: function(model, response){
         if (self.isRemoved()) return;
 
@@ -763,13 +787,16 @@ module.exports = baseVw.extend({
     );
   },
 
-  renderItemEdit: function(model){
-    "use strict";
+  renderItemEdit: function(model, clone){
     var self = this,
         hash = "";
     if(model) {
       //if editing existing product, clone the model
       this.itemEdit = model.clone();
+
+      if (clone) {
+        this.itemEdit.unset('id');
+      }
     } else {
       defaultItem.serverUrl =self.options.userModel.get('serverUrl');
       defaultItem.userCountry = self.options.userModel.get('country');
@@ -782,13 +809,13 @@ module.exports = baseVw.extend({
     this.itemEdit.set('moderators', self.model.get('user').moderators);
     //unbind any old view
     if(this.itemEditView){
-      this.itemEditView.undelegateEvents();
+      this.itemEditView.remove();
     }
-    this.itemEditView = new itemEditVw({model:this.itemEdit, el: '.js-list5'});
+    this.itemEditView = new itemEditVw({model:this.itemEdit});
+    this.$('.js-list5').html(this.itemEditView.render().el);
+    this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
-    this.subViews.push(this.itemEditView);
-    this.subModels.push(this.itemEdit);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
 
@@ -1198,11 +1225,18 @@ module.exports = baseVw.extend({
     $('#obContainer').animate({ scrollTop: 0 });
   },
 
-  editItem: function(){
-    "use strict";
-    this.renderItemEdit(this.item);
+  editItem: function(clone){
+    this.renderItemEdit(this.item, clone);
     this.setControls("itemEdit");
     this.lastTab = "itemOld";
+  },
+
+  editItemClick: function(e){
+    this.editItem();
+  },
+
+  cloneItem: function(){
+    this.editItem(true);
   },
 
   deleteItemClick: function(){
@@ -1367,6 +1401,29 @@ module.exports = baseVw.extend({
       this.$('.js-userPageEditModerator').addClass('hide');
       this.$('.js-userPageBecomeModerator').removeClass('hide');
     }
+  },
+
+  blockUserClick: function(e) {
+    this.$('.js-unblock').removeClass('hide');
+    this.$('.js-block').addClass('hide');
+    this.options.userModel.blockUser(this.userProfile.get('profile').guid);
+    this.hideBlockedUser();
+  },
+
+  unblockUserClick: function(e) {
+    this.$('.js-unblock').addClass('hide');
+    this.$('.js-block').removeClass('hide');
+    this.options.userModel.unblockUser(this.userProfile.get('profile').guid);
+  },
+
+  hideBlockedUser: function(){
+    this.$('.js-blockedWarning').fadeIn(100);
+    this.$('.js-mainContainer').addClass('blurMore');
+  },
+
+  showBlockedUser: function(){
+    this.$('.js-blockedWarning').fadeOut(300);
+    this.$('.js-mainContainer').removeClass('blurMore');
   },
 
   close: function(){

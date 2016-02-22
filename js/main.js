@@ -230,7 +230,7 @@ launchServerConnect = function() {
   if (!serverConnectModal) {
     serverConnectModal = new ServerConnectModal();
 
-    serverConnectModal.on('connected', function() {
+    serverConnectModal.on('connected', function(authenticated) {
       // clear some flags so the heartbeat events will
       // appropriatally loadProfile or launch onboarding
       guidCreating = null;
@@ -241,12 +241,12 @@ launchServerConnect = function() {
       if (profileLoaded) {
         location.reload();
       }
-    });
 
-    serverConnectModal.on('authenticated', function() {
-      serverConnectModal && serverConnectModal.remove();
-      serverConnectModal = null;
-    });    
+      if (authenticated) {
+        serverConnectModal && serverConnectModal.remove();
+        serverConnectModal = null;        
+      }
+    });
 
     serverConnectModal.render()
       .open()
