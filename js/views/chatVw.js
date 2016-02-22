@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
   $ = require('jquery'),
   loadTemplate = require('../utils/loadTemplate'),
+  app = require('../App.js').getApp(),
   ChatConversationsCl = require('../collections/chatConversationsCl'),
   ChatMessagesCl = require('../collections/chatMessagesCl'),
   baseVw = require('./baseVw'),
@@ -199,8 +200,15 @@ module.exports = baseVw.extend({
         this.chatConversationsCl.fetch();
       }
 
-      // if we're not openly chatting with the sender of the 
-      // message, play notification sound
+      if (!window.focused || !openlyChatting) {
+        new Notification(msg.handle || msg.sender + ':', {
+          body: msg.message,
+          icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
+            '&guid=' + msg.sender : '/imgs/defaultUser.png'
+        });
+
+        app.playNotificationSound();
+      }
     }
   },
 
@@ -306,9 +314,5 @@ module.exports = baseVw.extend({
     });
 
     return this;
-  },
-
-  remove: function() {
-    baseVw.prototype.remove.apply(this, arguments);
   }
 });
