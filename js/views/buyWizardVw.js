@@ -497,6 +497,7 @@ module.exports = Backbone.View.extend({
       var extUrl = payHREF;
       require("shell").openExternal(extUrl);
     });
+    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
     this.buyDetailsView.lockForm();
   },
 
