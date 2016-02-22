@@ -9,7 +9,7 @@ var __ = require('underscore'),
     orderModel = require('../models/orderMd'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     baseVw = require('./baseVw'),
-    chatMessageView = require('./_chatMessageVw'),
+    chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
     messageModal = require('../utils/messageModal'),
     discussionCl = require('../collections/discussionCl'),
@@ -289,9 +289,10 @@ module.exports = baseVw.extend({
     message.set(newAttributes);
 
     var discussionMessage = new chatMessageView({
-      model: message
+      model: message,
+      user: this.model
     });
-    wrapper.append(discussionMessage.el);
+    wrapper.append(discussionMessage.render().el);
     this.discussionCount++;
     this.$('.js-discussionCount').text(this.discussionCount);
     this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;

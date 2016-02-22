@@ -50,17 +50,6 @@ module.exports = baseVw.extend({
           })
         )
       );
-
-      // self.$el.find('a').on('click', function(e){
-      //   e.preventDefault();
-      //   var extUrl = $(this).attr('href');
-      //   if (!/^https?:\/\//i.test(extUrl)) {
-      //     extUrl = 'http://' + extUrl;
-      //   }
-      //   require("shell").openExternal(extUrl);
-      // });
-
-
     });
     
     return this;
