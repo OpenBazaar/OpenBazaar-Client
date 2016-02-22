@@ -40,13 +40,13 @@ module.exports = baseVw.extend({
     this.chatConversationsCl.fetch();
 
     this.listenTo(this.chatConversationsCl, 'sync', (cl) => {
-      // if (cl.length) {
-      //   for (var i=0; i < 100; i++) {
-      //     cl.add(
-      //       cl.at(0).clone().set('guid', '----------> ' + i)
-      //     );
-      //   }
-      // }
+      if (cl.length) {
+        for (var i=0; i < 100; i++) {
+          cl.add(
+            cl.at(0).clone().set('guid', '----------> ' + i)
+          );
+        }
+      }
 
       cl.forEach((md) => {
         this.listenTo(md, 'change', () => {

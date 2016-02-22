@@ -1891,11 +1891,12 @@ div.chatSearchOut .chatSearchIcon {
   clear: both;
   border-top: solid 1px #363636;
   height: calc(100% - 88px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .chatConversationHeadsCompressed {
-  /*background: #3A3434;*/
-  height: calc(100% - 430px);
+  height: calc(100% - 405px);
   overflow-x: hidden;
   overflow-y: auto;
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
