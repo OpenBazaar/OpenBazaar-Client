@@ -150,14 +150,20 @@ module.exports = baseModal.extend({
   },  
 
   initAccordion: function(targ){
-    this.acc = this.$(targ);
-    this.accWidth = this.acc.width();
-    this.accHeight = this.acc.height();
-    this.accChildren = this.acc.find('.accordion-child');
-    this.accNum = this.accChildren.length;
-    this.accWin = this.acc.find('.accordion-window');
-    this.accWin.css({'left':0, 'width': function(){return this.accWidth * this.accNum;}});
-    this.accChildren.css({'width':this.accWidth, 'height':this.accHeight});
+    setTimeout(() => { //move to after painting so values are not zero
+      this.acc = this.$(targ);
+      this.accWidth = this.acc.width();
+      this.accHeight = this.acc.height();
+      this.accChildren = this.acc.find('.accordion-child');
+      this.accNum = this.accChildren.length;
+      this.accWin = this.acc.find('.accordion-window');
+      this.accWin.css({
+        'left': 0, 'width': function () {
+          return this.accWidth * this.accNum;
+        }
+      });
+      this.accChildren.css({'width': this.accWidth, 'height': this.accHeight});
+    }, 0);
   },  
 
   accNext: function(advanceBy){

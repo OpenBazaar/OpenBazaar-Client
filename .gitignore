@@ -19,3 +19,4 @@ npm-debug.log
 .idea/encodings.xml
 
 .DS_Store
+.idea/watcherTasks.xml
