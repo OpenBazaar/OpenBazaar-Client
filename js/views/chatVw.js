@@ -11,6 +11,7 @@ var Backbone = require('backbone'),
 module.exports = baseVw.extend({
   events: {
     'click .js-chatOpen': 'slideOut',
+    'click .js-chatSearch': 'onSearchClick',
     'click .js-closeChat': 'close',
     'keyup #chatSearchField': 'onKeyupSearch'
   },
@@ -126,6 +127,11 @@ module.exports = baseVw.extend({
     this.openConversation(vw.model);
   },
 
+  onSearchClick: function() {
+    this.$searchField.focus();
+    this.slideOut();
+  },
+
   openConversation: function(model) {
     // Model is the model of the user you want to converse with.
     // When calling this function from inside our view, we are passing
@@ -136,6 +142,8 @@ module.exports = baseVw.extend({
     var msgCl = new ChatMessagesCl(),
         convoMd;
 
+    this.$('.chatConversationHeads').addClass('chatConversationHeadsCompressed textOpacity50');
+    this.$('.chatSearch').addClass('textOpacity50');
     this.slideOut();
 
     // mark as read
@@ -284,58 +292,9 @@ module.exports = baseVw.extend({
     return !this.$convoContainer.hasClass('chatConversationContainerHide');
   },
 
-  _______openChat: function(guid, key) {
-    var self = this,
-        model = this.options.model,
-        avatarURL = "",
-        avatarHash = window.localStorage.getItem("avatar_" + guid);
-
-    if (this.currentChatId === guid) {
-      this.openConversation();
-      return;
-    }
-
-    this.currentChatId = guid;
-
-    if (avatarHash !== '') {
-      avatarURL = model.get('serverUrl') + "get_image?hash=" + avatarHash + "&guid=" + guid;
-    }
-
-    this.openConversation();
-
-    $('.chatConversationAvatar').css('background-image', 'url(' + avatarURL + '), url(imgs/defaultUser.png)');
-    $('.chatConversationLabel').html(guid);
-    this.conversationKey = key;
-    $('#inputConversationMessage').focus();
-
-    this.updateChat(guid);
-    this.closeConversationSettings();
-
-    $('.chatHead').removeClass('chatHeadSelected');
-    $('#chatHead_' + guid).parent().addClass('chatHeadSelected');
-
-    // Mark as read
-    $.post(self.serverUrl + "mark_chat_message_as_read", {guid: guid});
-    $('#chatHead_' + guid).attr('data-count', 0);
-    $('#chatHead_' + guid).removeClass('badge');
-    $('#chatHead_' + guid).addClass('chatRead');
-
-  },
-
-  _______openConversation: function() {
-    this.slideOut();
-    this.$('.chatConversation').removeClass('chatConversationHidden');
-    this.$('.chatConversationHeads').addClass('chatConversationHeadsCompressed textOpacity50');
-    this.$('.chatSearch').addClass('textOpacity50');
-  },
-
   closeConversation: function() {
-    // this.$('.chatConversation').addClass('chatConversationHidden');
-    // this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed').removeClass('textOpacity50');
-    // this.$('.chatHead').removeClass('chatHeadSelected');
-    // this.$('.chatSearch').removeClass('textOpacity50');
-    
-    // this.chatConversationVw && this.chatConversationVw.remove();
+    this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed textOpacity50');
+    this.$('.chatSearch').removeClass('textOpacity50');
     this.$convoContainer.addClass('chatConversationContainerHide');
   },
 
@@ -350,10 +309,10 @@ module.exports = baseVw.extend({
         .addClass('hide')
         .find('span')
         .removeClass('hide');
-    // self.$('.chatMessagesLabel').removeClass('hide');
   },
 
   slideIn: function() {
+    this.closeConversation();
     this.$sideBar.removeClass('sideBarSlid');
     this.$container.removeClass('compressed');
     this.$loadingSpinner.removeClass('modalCompressed');
@@ -368,10 +327,13 @@ module.exports = baseVw.extend({
         .removeClass('hide')
         .find('span')
         .addClass('hide');
-
-    // $('.chatHeadSelected').removeClass('chatHeadSelected');
-    // this.closeConversation();
   },      
+
+  remove: function() {
+    this.close();
+
+    baseVw.prototype.remove.apply(this, arguments);
+  },
 
   render: function() {
     loadTemplate('./js/templates/chat.html', (tmpl) => {
