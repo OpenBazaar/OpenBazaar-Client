@@ -14,8 +14,8 @@ module.exports = baseVw.extend({
     'keydown textarea': 'onKeydownMessage',
     'keyup textarea': 'onKeyupMessage',
     'click .js-conversationSettings': 'toggleConvoSettings',
-    'click .chatConversationMenu a': 'closeConvoSettings',
-    'click .js-blockUser a': 'onBlockClick'
+    'click .chatConversationMenu': 'closeConvoSettings',
+    'click .js-blockUser': 'onBlockClick'
   },
 
   initialize: function(options) {
