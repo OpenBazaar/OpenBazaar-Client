@@ -207,8 +207,8 @@ module.exports = Backbone.View.extend({
     "use strict";
     var self = this,
         imageFiles = this.$el.find('.js-itemImageUpload')[0].files,
-        maxH = 357,
-        maxW = 357,
+        maxH = 800,
+        maxW = 800,
         imageList = [],
         imageCount = imageFiles.length;
 
@@ -238,7 +238,7 @@ module.exports = Backbone.View.extend({
         canvas.height = imgH;
         ctx = canvas.getContext('2d');
         ctx.drawImage(newImage, 0, 0, imgW, imgH);
-        dataURI = canvas.toDataURL('image/jpeg', 0.75);
+        dataURI = canvas.toDataURL('image/jpeg', 0.45);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
         if(i+1 === imageCount) {
