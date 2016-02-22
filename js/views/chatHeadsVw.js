@@ -20,6 +20,12 @@ module.exports = baseVw.extend({
     });
   },
 
+  setCollection: function(cl) {
+    if (cl) {
+      this.collection = cl;
+    }
+  },
+
   chatHeadClick: function(vw) {
     this.trigger('chatHeadClick', vw);
   },

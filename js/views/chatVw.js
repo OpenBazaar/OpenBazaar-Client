@@ -12,6 +12,7 @@ module.exports = baseVw.extend({
   events: {
     'click .js-chatOpen': 'slideOut',
     'click .js-closeChat': 'close',
+    'keyup #chatSearchField': 'onKeyupSearch'
   },
 
   initialize: function(options) {
@@ -38,17 +39,17 @@ module.exports = baseVw.extend({
     this.chatConversationsCl.fetch();
 
     this.listenTo(this.chatConversationsCl, 'sync', (cl) => {
-      if (cl.length) {
-        for (var i=0; i < 100; i++) {
-          cl.add(
-            cl.at(0).clone().set('guid', '----------> ' + i)
-          );
-        }
-      }
+      // if (cl.length) {
+      //   for (var i=0; i < 100; i++) {
+      //     cl.add(
+      //       cl.at(0).clone().set('guid', '----------> ' + i)
+      //     );
+      //   }
+      // }
 
       if (!this.chatHeadsVw) {
         this.chatHeadsVw = new ChatHeadsVw({
-          collection: cl
+          collection: this.filterChatHeads(cl)
         });
 
         this.$chatHeadsContainer.html(
@@ -65,6 +66,50 @@ module.exports = baseVw.extend({
     this.listenTo(window.obEventBus, 'socketMessageReceived', (response) => {
       this.handleSocketMessage(response);
     });    
+
+    this.listenTo(window.obEventBus, 'blockingUser', (e) => {
+      this.updateChatHeads();
+
+      if (this.chatConversationVw.model.get('guid') === e.guid) {
+        this.closeConversation();
+      }
+    });    
+
+    this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
+      this.updateChatHeads();
+    });        
+  },
+
+  filterChatHeads: function() {
+    var searchText = this.$searchField.val(),
+        guid;
+
+    return new ChatConversationsCl(
+      this.chatConversationsCl.filter((md) => {
+        guid = md.get('guid');
+        
+        if (searchText) {
+          return !this.model.isBlocked(guid) && guid.startsWith(searchText);
+        } else {
+          return !this.model.isBlocked(guid);
+        }
+      })
+    );
+  },
+
+  updateChatHeads: function() {
+    // filter and update the chatHeadsVw
+    if (this.chatHeadsVw) {
+      this.chatHeadsVw.setCollection(
+        this.filterChatHeads()
+      );
+
+      this.chatHeadsVw.render();
+    }
+  },
+
+  onKeyupSearch: function() {
+    this.updateChatHeads();
   },
 
   onChatHeadClick: function(vw) {
@@ -200,7 +245,7 @@ module.exports = baseVw.extend({
         this.chatConversationsCl.fetch();
       }
 
-      if (!window.focused || !openlyChatting) {
+      if ((!window.focused || !openlyChatting) && !this.model.isBlocked(msg.sender))  {
         new Notification(msg.handle || msg.sender + ':', {
           body: msg.message,
           icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
@@ -311,6 +356,7 @@ module.exports = baseVw.extend({
 
       this.$chatHeadsContainer = this.$('.chatConversationHeads');
       this.$convoContainer = this.$('.chatConversationContainer');
+      this.$searchField = this.$('#chatSearchField');
     });
 
     return this;
