@@ -4,6 +4,7 @@ var __ = require('underscore'),
     //userProfileModel = require('../models/userProfileMd'),
     loadTemplate = require('../utils/loadTemplate'),
     domUtils = require('../utils/dom'),
+    app = require('../App.js').getApp(),    
     timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
     usersCl = require('../collections/usersCl.js'),
@@ -17,7 +18,8 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
-    getBTPrice = require('../utils/getBitcoinPrice');
+    getBTPrice = require('../utils/getBitcoinPrice'),
+    ServerConnectModal = require('./serverConnectModal');
 
 module.exports = Backbone.View.extend({
 
@@ -43,6 +45,7 @@ module.exports = Backbone.View.extend({
     'click .js-saveModerator': 'saveModerator',
     'click .js-cancelAdvanced': 'cancelView',
     'click .js-saveAdvanced': 'saveAdvanced',
+    'click .js-changeServerSettings': 'launchServerConfig',
     'change .js-settingsThemeSelection': 'themeClick',
     'click .js-settingsAddressDelete': 'addressDelete',
     'click .js-settingsAddressUnDelete': 'addressUnDelete',
@@ -774,6 +777,33 @@ module.exports = Backbone.View.extend({
     });
   },
 
+  launchServerConfig: function() {
+    var serverConnectModal = new ServerConnectModal({
+      includeCloseButton: true
+    }).render().open();
+
+    this.serverConnectSyncHandler &&
+      this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
+
+    this.serverConnectSyncHandler = function() {
+      // todo: bit of a hack to hide the close button. really, the
+      // modal api should provide this if we want to allow
+      // this type of stuff.
+      serverConnectModal.$('.js-modal-close').hide();
+    };
+
+    this.listenTo(app.serverConfig, 'sync', this.serverConnectSyncHandler);
+
+    serverConnectModal.on('connected', function() {
+      location.reload();
+    });
+
+    serverConnectModal.on('close', function() {
+      serverConnectModal.remove();
+      this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
+    });    
+  },
+
   close: function(){
     "use strict";
     __.each(this.subModels, function(subModel) {
@@ -793,6 +823,9 @@ module.exports = Backbone.View.extend({
     if (this.blockedUsersScrollHandler && this.$obContainer.length) {
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
     }
+
+    this.serverConnectSyncHandler &&
+      app.serverConfig.off(null, this.serverConnectSyncHandler);    
     
     this.model.off();
     this.off();

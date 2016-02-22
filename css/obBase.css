@@ -182,7 +182,6 @@ form {
 }
 
 
-
 /*========== structure classes ==========*/
 
 #content {
@@ -2484,7 +2483,8 @@ input[type="number"].fieldItem {
 }
 
 input[type="number"].fieldItem::-webkit-outer-spin-button,
-input[type="number"].fieldItem::-webkit-inner-spin-button {
+input[type="number"].fieldItem::-webkit-inner-spin-button,
+.noNumberSpinner {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
@@ -2827,7 +2827,7 @@ input[type="checkbox"].fieldItem + label {
   cursor: pointer;
   position: relative;
   line-height: 53px;
-  padding: 0 20px 0 40px;
+  padding: 0 10px 0 34px;
 }
 
 input[type="checkbox"].fieldItem + label:before {
@@ -2836,7 +2836,7 @@ input[type="checkbox"].fieldItem + label:before {
   font-family: Ionicons;
   position: absolute;
   left: 10px;
-  top: 3px;
+  top: 0;
   font-size: 18px;
   width: 15px;
   text-align: center;
@@ -3638,12 +3638,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
   line-height: 16px;
   opacity: 1;
-  white-space: nowrap;
 }
 
-.tooltip.tooltip-right:hover:after{
+.tooltip.tooltip-left:hover:after{
   left: auto;
   right: 0;
+}
+
+.tooltip.tooltip-leftTop:hover:after{
+  left: auto;
+  right: 0;
+  bottom: 18px;
+}
+
+.tooltip.tooltip-box:hover:after {
+  height: auto;
+  width: 400px;
 }
 
 .btn-notifications.tooltip:hover:after{
@@ -4992,6 +5002,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .alignCenter {
   text-align: center;
+}
+
+#ov1 .heightAuto {
+  height: auto;
 }
 
 /* terrible hack, TODO: remove before production */

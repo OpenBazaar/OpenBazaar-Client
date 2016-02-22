@@ -36,8 +36,10 @@ module.exports = baseVw.extend({
     'click .js-showFundOrder': 'showFundOrder',
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
-    'click .js-confirmDispute': 'confirmDispute',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
+    'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
+    'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
+    'change #transactionsSellerPayoutPercent': 'updateSellerBTC',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -63,7 +65,7 @@ module.exports = baseVw.extend({
     this.lastTab = "summary";
     this.discussionCount = 0;
     this.discussionCol = new discussionCl();
-    this.discussionCol.url = this.serverUrl + "get_dispute_messages";
+    this.discussionCol.url = this.serverUrl + "order_messages";
 
     if(this.userProfile.get('avatar_hash')){
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
@@ -123,6 +125,7 @@ module.exports = baseVw.extend({
       }
       self.getDiscussion();
       self.discussionScroller = self.$('.js-discussionScroller');
+      self.moderatorPercentage = self.model.get('displayModerator').feeDecimal;
     });
   },
 
@@ -294,11 +297,8 @@ module.exports = baseVw.extend({
 
   addAllDiscussionMessages: function(){
     var self = this;
-    if(this.discussionCol.length > 0){
-      this.$('.js-discussionWrapper').html('');
-      this.$('.js-discussionNotStarted').addClass('hide');
-      this.$('.js-discussionStarted').removeClass('hide');
-    }
+    //clear existing messages
+    this.$('.js-discussionWrapper').html('');
     this.discussionCol.each(function(model, i){
       self.addDiscussionMessage(model);
     });
@@ -308,28 +308,44 @@ module.exports = baseVw.extend({
     var guid,
         guid2,
         rKey,
-        rKey2;
+        rKey2,
+        buyerGuid = this.model.get('buyer_order').order.id.guid,
+        buyerKey = this.model.get('buyer_order').order.id.pubkeys.guid,
+        vendorGuid = this.model.get('vendor_offer').listing.id.guid,
+        vendorKey = this.model.get('vendor_offer').listing.id.pubkeys.guid,
+        modGuid = this.model.get('displayModerator')? this.model.get('displayModerator').guid : "",
+        modKey = this.model.get('displayModerator') ? this.model.get('displayModerator').pubkeys.guid : "";
 
     if(this.transactionType == "purchases"){
-      guid = this.model.get('vendor_offer').listing.id.guid;
-      rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
-      guid2 = this.model.get('displayModerator').guid;
-      rKey2 = this.model.get('displayModerator').pubkeys.guid;
+      guid = vendorGuid;
+      rKey = vendorKey;
+      guid2 = modGuid;
+      rKey2 = modKey;
     } else if(this.transactionType == "sales"){
-      guid = this.model.get('buyer_order').order.id.guid;
-      rKey = this.model.get('buyer_order').order.id.pubkeys.guid;
-      guid2 = this.model.get('displayModerator').guid;
-      rKey2 = this.model.get('displayModerator').pubkeys.guid;
+      guid = buyerGuid;
+      rKey = buyerKey;
+      guid2 = modGuid;
+      rKey2 = modKey;
     } else if(this.transactionType == "cases"){
-      guid = this.model.get('vendor_offer').listing.id.guid;
-      rKey = this.model.get('vendor_offer').listing.id.pubkeys.guid;
-      guid2 = this.model.get('buyer_order').order.id.guid;
-      rKey2 = this.model.get('buyer_order').order.id.pubkeys.guid;
+      guid = vendorGuid;
+      rKey = vendorKey;
+      guid2 = buyerGuid;
+      rKey2 = buyerKey;
     }
-    this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
+
+    //is this a dispute?
+    if(this.$('#transactionStartDisputeCheckbox').prop("checked")) {
+      this.confirmDispute();
+    } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
+      this.closeDispute();
+    } else if(this.status == 4 || this.transactionType == "cases"){
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}], 'ORDER');
+    } else {
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}], 'CHAT');
+    }
   },
 
-  sendDiscussionMessage: function(messages){
+  sendDiscussionMessage: function(messages, type){
     //messages should be an array of message objects with guid and rKey [{"guid": "", "rKey": ""}]
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
@@ -346,7 +362,7 @@ module.exports = baseVw.extend({
             "handle": "",
             "message": messageText,
             "subject": self.orderID,
-            "message_type": "DISPUTE",
+            "message_type": type,
             "public_key": msg.rKey
           }
         };
@@ -357,6 +373,21 @@ module.exports = baseVw.extend({
     messageInput.val('');
     messageInput.closest('.flexRow').removeClass('formChecked');
     this.getDiscussion();
+  },
+
+  showCloseDispute: function(e){
+    var closeDisputeForm = this.$('#transationCloseDispute');
+    if($(e.target).prop('checked')){
+      closeDisputeForm.removeClass('hide');
+      this.percentToBTC(
+          this.$('#transactionsBuyerPayoutPercent'),
+          this.$('#transactionsBuyerPayoutBTC'),
+          this.$('#transactionsSellerPayoutPercent'),
+          this.$('#transactionsSellerPayoutBTC')
+      );
+    } else {
+      closeDisputeForm.addClass('hide');
+    }
   },
 
   copyTx: function(e){
@@ -377,10 +408,56 @@ module.exports = baseVw.extend({
     discussionData.order_id = this.orderID;
 
     saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
+      self.status = 3;
+      self.tabState = "discussion";
+      self.getData();
+    }, '', discussionData);
+  },
+
+  closeDispute: function(){
+    var self = this,
+        targetForm = this.$('#transationCloseDispute'),
+        discussionData = {};
+
+    discussionData.order_id = this.orderID;
+    discussionData.resolution = this.$('#transactionDiscussionSendText').val();
+    discussionData.moderator_percentage = this.moderatorPercentage;
+
+    saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
       self.status = 4;
       self.tabState = "discussion";
       self.getData();
     }, '', discussionData);
+  },
+
+  updateBuyerBTC: function(e) {
+    this.percentToBTC(this.$(e.target),
+        this.$('#transactionsBuyerPayoutBTC'),
+        this.$('#transactionsSellerPayoutPercent'),
+        this.$('#transactionsSellerPayoutBTC')
+    );
+  },
+
+  updateSellerBTC: function(e) {
+    this.percentToBTC(this.$(e.target),
+        this.$('#transactionsSellerPayoutBTC'),
+        this.$('#transactionsBuyerPayoutPercent'),
+        this.$('#transactionsBuyerPayoutBTC')
+    );
+  },
+
+  percentToBTC: function(targ1, targ2, targ3, targ4){
+    var updatedVal = targ1.val() * 0.01,
+        total = this.model.get('buyer_order').order.payment.amount,
+        adjustedTotal = total - total * this.moderatorPercentage;
+
+    if(updatedVal > 1){
+      updatedVal = 1;
+      targ1.val(100);
+    }
+    targ2.text(updatedVal * adjustedTotal);
+    targ3.val(100 - updatedVal * 100);
+    targ4.text(adjustedTotal - updatedVal * adjustedTotal);
   },
 
   closeOrderForm: function(e){

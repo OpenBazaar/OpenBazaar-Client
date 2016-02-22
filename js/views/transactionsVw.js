@@ -225,6 +225,9 @@ module.exports = baseVw.extend({
   openOrderModal: function(options){
     "use strict";
     $('.js-loadingModal').removeClass("hide");
+    if(options.status == "open"){
+      options.status = 4;
+    }
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
