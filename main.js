@@ -6,6 +6,7 @@ safestart(__dirname);
 
 var fs = require('fs');
 var path = require('path');
+var argv = require('yargs').argv;
 
 var app = require('app');  // Module to control application life.
 var electron = require('electron');
@@ -29,6 +30,15 @@ var trayMenu = null;
 var subpy = null;
 
 var open_url = null; // This is for if someone opens a URL before the client is open
+
+if (argv.appData) {
+  try {
+    app.setPath('appData', argv.appData);
+    app.setPath('userData', argv.appData);
+  } catch (e) {
+    throw new Error('The passed in appData directory does not appear to be valid: ' + e);
+  }
+}
 
 var handleStartupEvent = function() {
   if (process.platform !== 'win32') {
