@@ -4697,6 +4697,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 70px;
 }
 
+#ov1  .height130 {
+  height: 130px;
+}
+
 #ov1  .height250 {
   height: 250px;
 }

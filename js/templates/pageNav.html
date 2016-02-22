@@ -28,6 +28,14 @@
       <%= polyglot.t('CreateStore') %>
     </a>
   <% } %>
+  <% if(!ob.moderator){ %>
+    <a chref="#userPage/<%- ob.guid %>/becomeModerator">
+      <span class="ion-ios-pricetag fontSize11 marginRight2 textOpacity1"></span>
+      <span class="js-userPageBecomeModerator">
+        <%= polyglot.t('BecomeModerator') %>
+      </span>
+    </a>
+  <% } %>
   <hr/>
   <a href="#transactions/purchases">
     <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>

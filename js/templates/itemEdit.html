@@ -154,10 +154,11 @@
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputDescription"><%= polyglot.t('Description') %></label>
+                <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
               </div>
             </div>
             <div class="flexCol-9">
-              <textarea name="description" rows="8" class="fieldItem-textarea custCol-text" id="inputDescription" required placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%- ob.vendor_offer.listing.item.description %></textarea>
+              <textarea name="description" rows="8" class="fieldItem-textarea custCol-text height130" id="inputDescription" required placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%- ob.vendor_offer.listing.item.description %></textarea>
             </div>
           </div>
         </div>

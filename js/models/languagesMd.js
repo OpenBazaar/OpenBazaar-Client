@@ -31,6 +31,7 @@ module.exports = Backbone.Model.extend({
         of: "of",
         Sell: "Sell",
         New: "New",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excellent",
         Good: "Good",
         Poor: "Poor",
@@ -439,6 +440,8 @@ module.exports = Backbone.Model.extend({
           LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>."
         },
         walletProviders: {
+          ExchangeAndWallet: "Exchange and Wallet",
+          WalletOnly: "Wallet Only",
           CoinbaseTagline: "The world's most popular way to buy, sell, and use bitcoin.",
           SamouraiTagline: "Secure mobile wallet. Emphasis on privacy.",
           AirbitzTagline: "Privacy. Security. Autonomy. Decentralized.",
@@ -533,6 +536,7 @@ module.exports = Backbone.Model.extend({
         of: "de",
         Sell: "Vender",
         New: "Nuevo",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
@@ -1016,6 +1020,7 @@ module.exports = Backbone.Model.extend({
         of: "von",
         Sell: "Verkaufen",
         New: "Neu",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Hervorragend",
         Good: "Gut",
         Poor: "Mangelhaft",
@@ -1511,6 +1516,7 @@ module.exports = Backbone.Model.extend({
         of: "di",
         Sell: "Vendere",
         New: "Nuovo",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Eccellente",
         Good: "Buono",
         Poor: "Scarso",
@@ -2006,6 +2012,7 @@ module.exports = Backbone.Model.extend({
         of: "de",
         Sell: "Vendre",
         New: "Nouveau",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excellent",
         Good: "Bon",
         Poor: "Médiocre",
@@ -2499,6 +2506,7 @@ module.exports = Backbone.Model.extend({
         of: "din",
         Sell: "Vânzare",
         New: "Nou",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excelent",
         Good: "Bun",
         Poor: "Prost",
@@ -2990,6 +2998,7 @@ module.exports = Backbone.Model.extend({
         of: "из",
         Sell: "Продать",
         New: "Новый",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Идеальное",
         Good: "Хорошее",
         Poor: "Плохое",
@@ -3481,6 +3490,7 @@ module.exports = Backbone.Model.extend({
         of: "z",
         Sell: "Predať",
         New: "New",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
@@ -3976,6 +3986,7 @@ module.exports = Backbone.Model.extend({
         of: "de",
         Sell: "Sat",
         New: "Yeni",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Çok iyi",
         Good: "İyi",
         Poor: "İyi değil",
@@ -4471,6 +4482,7 @@ module.exports = Backbone.Model.extend({
         of: ",",
         Sell: "Ngev",
         New: "Chu'",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Chon",
         Good: "Maj",
         Poor: "VIvup",
@@ -4965,6 +4977,7 @@ module.exports = Backbone.Model.extend({
         of: "有关",
         Sell: "卖l",
         New: "新",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "出色",
         Good: "完好",
         Poor: "较差",
@@ -5459,6 +5472,7 @@ module.exports = Backbone.Model.extend({
         of: "한태서",
         Sell: "팔다",
         New: "새것",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "훌륭한",
         Good: "줗은",
         Poor: "불량",
@@ -5950,6 +5964,7 @@ module.exports = Backbone.Model.extend({
         of: "／",
         Sell: "売る",
         New: "新品",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "極良質",
         Good: "良質",
         Poor: "まあまあ良い",
@@ -6433,6 +6448,7 @@ module.exports = Backbone.Model.extend({
         of: "of",//No Polish Equivalent
         Sell: "Sprzedaj",
         New: "Nowy",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Doskonały",
         Good: "W dobrym stanie",
         Poor: "W złym stanie",
