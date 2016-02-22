@@ -93,7 +93,6 @@ module.exports = baseVw.extend({
     var self = this;
     this.model.fetch({
       data: $.param({'order_id': self.orderID}),
-      timeout: 4000,
       dataType: 'json',
       success: function (model, response, options) {
         self.model.updateAttributes();
@@ -117,6 +116,8 @@ module.exports = baseVw.extend({
       //hide the modal when it first loads
       self.parentEl.html(self.$el);
       self.$el.html(loadedTemplate(self.model.toJSON()));
+      // add blur to container
+      $('#obContainer').addClass('blur');
       self.delegateEvents(); //reapply events if this is a second render
       self.$el.parent().fadeIn(300);
       self.setState(self.tabState);
@@ -232,7 +233,8 @@ module.exports = baseVw.extend({
           self.getData();
         },
         function(data){
-          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+          self.$el.find('.js-transactionSpinner').addClass('hide');
+          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
         completeData);
   },
@@ -258,7 +260,6 @@ module.exports = baseVw.extend({
 
     this.discussionCol.fetch({
       data: $.param({'order_id': self.orderID}),
-      timeout: 4000,
       dataType: 'json',
       reset: true,
       success: function (collection, response, options) {
@@ -282,6 +283,8 @@ module.exports = baseVw.extend({
         : this.serverUrl + "get_image?hash=" + message.get('avatar_hash') + "&guid=" + message.get('guid');
     newAttributes.moderatorGuid = this.model.get('displayModerator').guid;
     newAttributes.transactionType = this.transactionType;
+    newAttributes.vendorGuid = this.model.get('vendor_offer').listing.id.guid;
+    newAttributes.buyerGuid = this.model.get('buyer_order').order.id.guid;
 
     message.set(newAttributes);
 
@@ -339,13 +342,13 @@ module.exports = baseVw.extend({
     } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
       this.closeDispute();
     } else if(this.status == 4 || this.transactionType == "cases"){
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}], 'ORDER');
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey},{"guid": guid2, "rKey": rKey2}]);
     } else {
-      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}], 'CHAT');
+      this.sendDiscussionMessage([{"guid": guid, "rKey": rKey}]);
     }
   },
 
-  sendDiscussionMessage: function(messages, type){
+  sendDiscussionMessage: function(messages){
     //messages should be an array of message objects with guid and rKey [{"guid": "", "rKey": ""}]
     var messageInput = this.$('#transactionDiscussionSendText');
     var messageText = messageInput.val();
@@ -362,7 +365,7 @@ module.exports = baseVw.extend({
             "handle": "",
             "message": messageText,
             "subject": self.orderID,
-            "message_type": type,
+            "message_type": "ORDER",
             "public_key": msg.rKey
           }
         };
@@ -408,8 +411,9 @@ module.exports = baseVw.extend({
     discussionData.order_id = this.orderID;
 
     saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
-      self.status = 3;
+      self.status = 4;
       self.tabState = "discussion";
+      self.$('.js-startDisputeFlag').addClass('hide');
       self.getData();
     }, '', discussionData);
   },
@@ -422,12 +426,18 @@ module.exports = baseVw.extend({
     discussionData.order_id = this.orderID;
     discussionData.resolution = this.$('#transactionDiscussionSendText').val();
     discussionData.moderator_percentage = this.moderatorPercentage;
+    discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
+    discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
 
-    saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
-      self.status = 4;
-      self.tabState = "discussion";
-      self.getData();
-    }, '', discussionData);
+    if(discussionData.resolution != ""){
+      saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
+        self.status = 4;
+        self.tabState = "discussion";
+        self.getData();
+      }, '', discussionData);
+    } else {
+      messageModal.show(window.polyglot.t('errorMessages.missingError'));
+    }
   },
 
   updateBuyerBTC: function(e) {
@@ -474,5 +484,6 @@ module.exports = baseVw.extend({
   closeModal: function(){
     this.trigger("closed");
     this.$el.parent().fadeOut(300);
+    $('#obContainer').removeClass('overflowHidden').removeClass('blur');
   }
 });

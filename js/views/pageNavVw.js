@@ -1,3 +1,5 @@
+'use strict';
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -9,7 +11,7 @@ var __ = require('underscore'),
     remote = require('remote'),
     messageModal = require('../utils/messageModal.js');
 
-    var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
+var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
 module.exports = Backbone.View.extend({
 
@@ -37,11 +39,11 @@ module.exports = Backbone.View.extend({
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
-    'click .js-navInstallUpdate': 'sendInstallUpdate'
+    'click .js-navInstallUpdate': 'sendInstallUpdate',
+    'click .js-navDismisslUpdate': 'dismissUpdate'
   },
 
   initialize: function(options){
-    "use strict";
     var self = this;
     this.options = options || {};
     /* recieves socketView and userProfile from main.js */
@@ -75,19 +77,20 @@ module.exports = Backbone.View.extend({
         break;
       }
     }
-    //localLanguage = localLanguageFound ? localLanguage : "en-US";
-    //this.model.set('language', localLanguage);
-    //this.createTranslation(localLanguage);
 
     this.render();
   },
 
   sendInstallUpdate: function() {
     ipcRenderer.send('installUpdate');
+    $('.js-softwareUpdate').addClass('softwareUpdateHidden');
+  },
+
+  dismissUpdate: function() {
+    $('.js-softwareUpdate').addClass('softwareUpdateHidden');
   },
 
   handleSocketMessage: function(response) {
-    "use strict";
     var data = JSON.parse(response.data);
     if(data.id == this.socketNotificationID){
       console.log(data);
@@ -95,7 +98,6 @@ module.exports = Backbone.View.extend({
   },
 
   closeNav: function(){
-    "use strict";
     var targ = this.$el.find('.js-navProfileMenu');
     targ.addClass('hide');
     $('#overlay').addClass('hide');
@@ -104,7 +106,7 @@ module.exports = Backbone.View.extend({
 
   refreshProfile: function() {
     var self = this;
-  
+
     this.userProfile.fetch({
       success: function(model){
         self.model.set('vendor', model.get('profile').vendor);
@@ -115,7 +117,6 @@ module.exports = Backbone.View.extend({
   },
 
   render: function(){
-    "use strict";
     var self = this;
     //reset tests for applying lists or List.js will fail on a re-render
     this.countryReady = false;
@@ -169,42 +170,39 @@ module.exports = Backbone.View.extend({
   },
 
   showAboutModal: function(e){
-    "use strict";
 
-    // set the active tab
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
-    $('.js-about-mainTab').addClass('active');
+    // display the modal
+    $('.js-aboutModalHolder').fadeIn(300, function(){
+      // set the active tab
+      $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+      $('.js-about-mainTab').addClass('active');
 
-    // set the active section
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+      // set the active section
+      $('.js-aboutModal .modal-section').addClass('hide');
+      $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
+    });
 
     // blur the container for extra focus
     $('#obContainer').addClass('blur');
-
-    // display the modal
-    $('.js-aboutModal').removeClass('hide');
   },
 
   hideAboutModal: function(e){
-    "use strict";
-    $('.js-aboutModal').addClass('hide');
+    $('.js-aboutModalHolder').fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
   showSupportModal: function(e){
-    "use strict";
-    $('.js-aboutModal').removeClass('hide');
-    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
-    $('.js-about-donationsTab').addClass('active');
-    $('.js-aboutModal .modal-section').addClass('hide');
-    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    $('.js-aboutModalHolder').fadeIn(300, function() {
+      $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+      $('.js-about-donationsTab').addClass('active');
+      $('.js-aboutModal .modal-section').addClass('hide');
+      $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
+    });
     $('#obContainer').addClass('blur');
   },
 
   hideSupportModal: function(e){
-    "use strict";
-    $('.js-aboutModal').addClass('hide');
+    $('.js-aboutModalHolder').fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
@@ -234,7 +232,6 @@ module.exports = Backbone.View.extend({
   },
 
   navNotificationsClick: function(e){
-    "use strict";
     e.stopPropagation();
     this.setNotificationCount("");
     var targ = this.$el.find('.js-navNotificationsMenu');
@@ -256,7 +253,6 @@ module.exports = Backbone.View.extend({
   },
 
   setNotificationCount: function(count){
-    "use strict";
     if(count > 99) {
       count = "..";
     }
@@ -264,7 +260,6 @@ module.exports = Backbone.View.extend({
   },
 
   navProfileClick: function(e){
-    "use strict";
     e.stopPropagation();
     var targ = this.$el.find('.js-navProfileMenu');
     targ.siblings('.popMenu').addClass('hide');
@@ -309,7 +304,6 @@ module.exports = Backbone.View.extend({
   },
 
   navCloseClick: function(){
-    "use strict";
     var process = remote.process;
     if (process.platform != 'darwin') {
       this.currentWindow.close();
@@ -319,12 +313,10 @@ module.exports = Backbone.View.extend({
   },
 
   navMinClick: function(){
-    "use strict";
     this.currentWindow.minimize();
   },
 
   navMaxClick: function(){
-    "use strict";
     if(this.currentWindow.isMaximized()){
       this.currentWindow.unmaximize();
     } else {
@@ -333,17 +325,14 @@ module.exports = Backbone.View.extend({
   },
 
   navBackClick: function(){
-    "use strict";
     window.history.back();
   },
 
   navFwdClick: function(){
-    "use strict";
     window.history.forward();
   },
 
   navRefreshClick: function(){
-    "use strict";
     this.currentWindow.reload();
   },
 
@@ -355,7 +344,6 @@ module.exports = Backbone.View.extend({
   },
 
   addressBarKeyup: function(e){
-    "use strict";
     var barText = this.addressInput.val();
     //detect enter key
     if (e.keyCode == 13){
@@ -366,7 +354,6 @@ module.exports = Backbone.View.extend({
   },
 
   addressBarProcess: function(addressBarText){
-    "use strict";
     var guid = "",
         handle = "",
         state = "",
@@ -397,7 +384,6 @@ module.exports = Backbone.View.extend({
   },
 
   processHandle: function(handle, state, itemHash){
-    "use strict";
     if(handle){
       $.ajax({
         url: this.model.get('resolver') + "/v2/users/" + handle,
@@ -418,24 +404,20 @@ module.exports = Backbone.View.extend({
   },
 
   showStatusBar: function(msgText){
-    "use strict";
     this.statusBar.find('.js-statusBarMessage').text(msgText);
     this.statusBar.removeClass('fadeOut');
   },
 
   closeStatusBar: function(){
-    "use strict";
     this.statusBar.addClass('fadeOut');
   },
 
   navAdminPanel: function(){
-    "use strict";
     this.$el.find('.js-adminModal').fadeIn(300);
     this.adminPanel.updatePage();
   },
 
   close: function(){
-    "use strict";
     __.each(this.subViews, function(subView) {
       if(subView.close){
         subView.close();
@@ -447,7 +429,6 @@ module.exports = Backbone.View.extend({
   },
 
   setSelectedTheme: function(e){
-    "use strict";
     // Needs to save to the object and update the dom
   },
 
@@ -457,7 +438,6 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },

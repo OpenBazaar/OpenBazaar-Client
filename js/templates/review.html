@@ -1,0 +1,47 @@
+<div class="rowItem padding2015">
+  <div class="table custCol-text">
+    <div>
+      <div class="marginLeft15 marginTop2">
+        <div class="marginLeft15 marginTop2">
+        </div>
+        <div class="marginLeft15 marginTop2">
+          <div>
+              <% print(ob.starsTmpl({ rating: ob.feedback })) %>
+              (<%= ob.feedback %>/5)
+          </div>
+          <p class="fontSize14 textWeightNormal clamp4 marginTop9"><%= ob.review %></p>
+        </div>
+      </div>
+      <div class="marginLeft15 pull-right">
+        <div class="floatLeft marginRight15" style="width: 200px">
+          <div class="fontSize14">
+            <div>Quality: (<%= ob.quality %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.quality })) %>              
+            </div>
+          </div>
+          <div class="fontSize14 marginTop9">
+            <div>Matched description: (<%= ob.description %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.description })) %>
+            </div>            
+          </div>          
+        </div>
+        <div class="floatLeft" style="width: 200px">
+          <div class="fontSize14">
+            <div>Delivery speed: (<%= ob.delivery_time %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.delivery_time })) %>
+            </div>            
+          </div>
+          <div class="fontSize14 marginTop9">
+            <div>Customer service: (<%= ob.customer_service %>/5)</div>
+            <div>
+              <% print(ob.starsTmpl({ rating: ob.customer_service })) %>
+            </div>            
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

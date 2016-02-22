@@ -8,7 +8,7 @@
       <div class="thumbnail-small js-avatar tooltip" data-tooltip="<% if(ob.handle) { %><%- ob.handle %><% }else{ %><%- ob.guid %><% } %>" data-handle="<%- ob.handle %>"
         style="background-image: <% if(ob.avatar_hash && ob.avatarURL) { %> url(<%- ob.avatarURL %>), <% } %>url(imgs/defaultUser.png);"></div>
       <% } %>
-      <div class="js-item pad8Left" data-id="<%- ob.contract_hash %>">
+      <div class="js-item pad8Left <% if(ob.title.length >= 30) { %>tooltip<% } %>" <% if(ob.title.length >= 30) { %>data-tooltip="<%- ob.title %>"<% } %> data-id="<%- ob.contract_hash %>">
         <div class="textSize14px noOverflow textOpacity1 js-searchTitle"><%- ob.title %></div>
         <div class="textSize13px txt-fade textWeightNormal">
           <%- ob.vendorBTCPrice %> BTC
@@ -50,10 +50,14 @@
             <span class="ion-compose fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('Edit') %>
           </div>  
+          <div class="btn-gridItemControl borderRight custCol-border js-itemShortClone">
+            <span class="ion-ios-copy fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('Clone') %>
+          </div>
           <div class="btn-gridItemControl borderRight custCol-border js-itemShortDelete">
             <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('Delete') %>
-          </div>           
+          </div>
         <% } %>
 
         <% if(!ob.ownPage && ob.discover === undefined){ %>

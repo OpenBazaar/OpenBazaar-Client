@@ -75,7 +75,7 @@ module.exports = baseVw.extend({
     $.ajax({
       url: self.userModel.get('serverUrl') + "get_following",
       dataType: "json",
-      timeout: 4000
+      timeout: 10000
     }).done(function(ownFollowingData){
       self.ownFollowing = ownFollowingData.following || [];
       self.ownFollowing = self.ownFollowing.map(function(followingObject){
@@ -98,14 +98,14 @@ module.exports = baseVw.extend({
         self.$el.find('.js-loadingMessage').addClass('fadeOut');
     }, 2000);
 
-    // after 4 seconds, if no listings are found, display the no results found message
+    // after 8 seconds, if no listings are found, display the no results found message
     this.noResultsTimeout = window.setTimeout(function() {
       if ($('.homeGridItems .gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
         self.$el.find('.js-loadingText').html(self.$el.find('.js-loadingText').data('noResultsText'));
       }
-    }, 4000);
+    }, 8000);
   },
 
   clearSocketTimeout: function() {
