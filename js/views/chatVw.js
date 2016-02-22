@@ -47,6 +47,17 @@ module.exports = baseVw.extend({
       //   }
       // }
 
+      cl.forEach((md) => {
+        this.listenTo(md, 'change', () => {
+          var filteredMd;
+
+          if (this.filteredChatConvos) {
+            filteredMd = this.filteredChatConvos.findWhere({ guid: md.get('guid') });
+            filteredMd && filteredMd.set(md.attributes);
+          }
+        });
+      });
+
       if (!this.chatHeadsVw) {
         this.chatHeadsVw = new ChatHeadsVw({
           collection: this.filterChatHeads(cl)
@@ -68,7 +79,7 @@ module.exports = baseVw.extend({
     });    
 
     this.listenTo(window.obEventBus, 'blockingUser', (e) => {
-      this.updateChatHeads();
+      this.filterChatHeads();
 
       if (this.chatConversationVw.model.get('guid') === e.guid) {
         this.closeConversation();
@@ -76,7 +87,7 @@ module.exports = baseVw.extend({
     });    
 
     this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
-      this.updateChatHeads();
+      this.filterChatHeads();
     });        
   },
 
@@ -84,7 +95,7 @@ module.exports = baseVw.extend({
     var searchText = this.$searchField.val(),
         guid;
 
-    return new ChatConversationsCl(
+    this.filteredChatConvos = new ChatConversationsCl(
       this.chatConversationsCl.filter((md) => {
         guid = md.get('guid');
         
@@ -95,21 +106,20 @@ module.exports = baseVw.extend({
         }
       })
     );
-  },
 
-  updateChatHeads: function() {
-    // filter and update the chatHeadsVw
     if (this.chatHeadsVw) {
       this.chatHeadsVw.setCollection(
-        this.filterChatHeads()
+        this.filteredChatConvos
       );
 
       this.chatHeadsVw.render();
     }
+
+    return this.filteredChatConvos;
   },
 
   onKeyupSearch: function() {
-    this.updateChatHeads();
+    this.filterChatHeads();
   },
 
   onChatHeadClick: function(vw) {
@@ -123,9 +133,18 @@ module.exports = baseVw.extend({
     // work as well (at least now it does). The latter could be useful when
     // calling this function from outside of this view.
 
-    var msgCl = new ChatMessagesCl();
+    var msgCl = new ChatMessagesCl(),
+        convoMd;
 
     this.slideOut();
+
+    // mark as read
+    $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
+
+    // mark as read on chat head
+    if (convoMd = this.chatConversationsCl.findWhere({ guid: model.get('guid') })) {
+      convoMd.set('unread', 0);
+    }
 
     if (this.chatConversationVw) {
       // if we were already chatting with this person and that
@@ -239,6 +258,10 @@ module.exports = baseVw.extend({
           timestamp: msg.timestamp,
           avatar_hash: msg.avatar_hash
         });
+
+        if (openlyChatting) {
+          $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
+        }
       } else {
         // todo: maybe manually create and add in the model, rather
         // than having to fetch
