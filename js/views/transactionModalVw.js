@@ -289,9 +289,10 @@ module.exports = baseVw.extend({
     message.set(newAttributes);
 
     var discussionMessage = new chatMessageView({
-      model: message
+      model: message,
+      user: this.model
     });
-    wrapper.append(discussionMessage.el);
+    wrapper.append(discussionMessage.render().el);
     this.discussionCount++;
     this.$('.js-discussionCount').text(this.discussionCount);
     this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;

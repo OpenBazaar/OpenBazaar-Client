@@ -3,67 +3,55 @@ var __ = require('underscore'),
     $ = require('jquery'),
     moment = require('moment'),
     sanitizeHTML = require('sanitize-html'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    app = require('../App.js').getApp(),
+    baseVw = require('./baseVw');
 
-module.exports = Backbone.View.extend({
-
-  className: "chatMessage flexRow",
+module.exports = baseVw.extend({
+  className: 'chatMessage flexRow',
 
   events: {
     'click .js-chatMessageAvatar': 'avatarClick'
   },
 
-  initialize: function(){
-    var timestamp = this.model.get('timestamp');
-    var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMM D, h:mm A');
-    this.model.set('formattedTimestamp', formatted_timestamp);
+  initialize: function(options){
+    if (!options.model) {
+      throw new Error('Please provide a model.');
+    }
 
-    // Handle line breaks
-    var msg = sanitizeHTML(this.model.get('message').replace(/\n$/, "").split(/[\r\n]/g).join("<br/><br/>"), {
-      allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ]
-    });
-    this.model.set('formattedMessage', msg);
-    this.render();
+    if (!options.user) {
+      throw new Error('Please provide the model of the logged-in user.');
+    }
+
+    this.user = options.user;
   },
 
   render: function(){
-    var self = this;
-    loadTemplate('./js/templates/chatMessage.html', function(loadedTemplate) {
-      self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.$el.find('a').on('click', function(e){
-        e.preventDefault();
-        var extUrl = $(this).attr('href');
-        if (!/^https?:\/\//i.test(extUrl)) {
-          extUrl = 'http://' + extUrl;
-        }
-        require("shell").openExternal(extUrl);
-      });
+    var sanitizedMsg,
+        $msg;
+
+    sanitizedMsg = sanitizeHTML(this.model.get('message').replace(/\n$/, '').split(/[\r\n]/g).join('<br/><br/>'), {
+      allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u', 'ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img' ]
     });
+
+    // add js-externalLink class to any links in the message text
+    $msg = $('<div>' + sanitizedMsg + '</div>');
+    $msg.find('a').addClass('js-externalLink');
+    sanitizedMsg = $msg.html();
+
+    loadTemplate('./js/templates/chatMessage.html', (tmpl) => {
+      this.$el.html(
+        tmpl(
+          __.extend(this.model.toJSON(), {
+            serverUrl: app.serverConfig.getServerBaseUrl(),
+            moment: moment,
+            sanitizedMsg: sanitizedMsg,
+            user: this.user.toJSON()
+          })
+        )
+      );
+    });
+    
     return this;
-  },
-
-  avatarClick: function(){
-    if(this.model.get('outgoing') == false) {
-      var targ = $('.js-navNotificationsMenu');
-      targ.addClass('hide');
-      $('#overlay').addClass('hide');
-      Backbone.history.navigate('#userPage/' + this.model.get('guid') + '/store', {trigger: true});
-    }
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
-    delete this.$el;
-    delete this.el;
   }
-
 });

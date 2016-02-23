@@ -31,7 +31,7 @@ var Polyglot = require('node-polyglot'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     setTheme = require('./utils/setTheme.js'),
     pageNavView = require('./views/pageNavVw'),
-    chatAppView = require('./views/chatAppVw'),
+    ChatVw = require('./views/chatVw'),
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
@@ -47,7 +47,6 @@ var Polyglot = require('node-polyglot'),
     newRouter,
     newPageNavView,
     newSocketView,
-    newChatAppView,
     serverConnectModal,
     onboardingModal,
     startInitSequence,
@@ -167,10 +166,16 @@ var loadProfile = function(landingRoute) {
              
               newSocketView = new socketView({model: serverConfigMd});
               newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
-              newChatAppView = new chatAppView({model: user, socketView: newSocketView});
+              
+              app.chatVw = new ChatVw({
+                model: user,
+                socketView: newSocketView
+              });
+
+              $('#sideBar').html(app.chatVw.render().el);
 
               location.hash = landingRoute;
-              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView, chatAppView: newChatAppView});
+              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
               Backbone.history.start();
             });
 

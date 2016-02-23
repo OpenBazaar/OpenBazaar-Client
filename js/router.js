@@ -15,12 +15,11 @@ module.exports = Backbone.Router.extend({
   initialize: function(options){
     this.options = options || {};
     /*
-    expects options.userModel, options userProfile, socketView, chatAppView from main.js
+    expects options.userModel, options userProfile, socketView from main.js
      */
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
     this.socketView = options.socketView;
-    this.chatAppView = options.chatAppView;
   },
 
   routes: {
@@ -101,8 +100,7 @@ module.exports = Backbone.Router.extend({
       userID: userID,
       state: state,
       itemHash: itemHash,
-      socketView: this.socketView,
-      chatAppView: this.chatAppView
+      socketView: this.socketView
     }),"userPage");
   },
 
@@ -113,8 +111,7 @@ module.exports = Backbone.Router.extend({
       userModel: this.userModel,
       userProfile: this.userProfile,
       state: 'itemNew',
-      socketView: this.socketView,
-      chatAppView: this.chatAppView
+      socketView: this.socketView
     }),"userPage");
   },
 
