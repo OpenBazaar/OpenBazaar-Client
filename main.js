@@ -100,7 +100,10 @@ if(platform == "mac" || platform == "linux") {
 
 var start_local_server = function() {
   if(fs.existsSync(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon)) {
-    subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug'], {
+
+    var random_port = Math.floor((Math.random() * 10000) + 30000);
+
+    subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug', '-p', random_port], {
       detach: true,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
@@ -321,7 +324,7 @@ app.on('ready', function() {
   }
 
   // Open the devtools.
-  mainWindow.openDevTools({detach: true});
+  //mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
