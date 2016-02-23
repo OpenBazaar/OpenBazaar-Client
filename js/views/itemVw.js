@@ -45,10 +45,21 @@ module.exports = baseVw.extend({
   },
 
   onPriceSet: function() {
+    console.log('hardy');
+    window.hardy = this.model;
+
+    var itemOwnerGuid = this.model.get('page').profile.guid,
+        loggedInUserGuid = this.model.get('user'). guid,
+        data = {
+          contract_id: this.model.id
+        };
+
+    if (itemOwnerGuid !== loggedInUserGuid) {
+      data['guid'] = itemOwnerGuid;
+    }
+
     this.ratingCl.fetch({
-      data: {
-        contract_id: this.model.id
-      },
+      data: data,
       reset: true
     });
 
