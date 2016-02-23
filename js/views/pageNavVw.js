@@ -32,7 +32,7 @@ module.exports = Backbone.View.extend({
     'click .js-navProfile': 'navProfileClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
-    //'click .js-navProfileMenu a': 'closeNav',
+    'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
@@ -97,13 +97,11 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  /*
   closeNav: function(){
     var targ = this.$el.find('.js-navProfileMenu');
     targ.addClass('hide');
     $('#overlay').addClass('hide');
   },
-  */
 
   refreshProfile: function() {
     var self = this;
