@@ -66,7 +66,6 @@ module.exports = baseVw.extend({
         this.registerChild(this.chatHeadsVw);
       } else {
         this.filterChatHeads();
-        // this.chatHeadsVw.render();
       }
     });
 
@@ -205,10 +204,6 @@ module.exports = baseVw.extend({
           timestamp: Date.now()
         });        
       } else {
-        // todo: maybe manually create and add in the model, rather
-        // than having to fetch
-        // this.chatConversationsCl.fetch();
-
         this.chatConversationsCl.add({
           avatar_hash: convoMd.get('avatar_hash'),
           guid: convoMd.get('guid'),
@@ -269,12 +264,8 @@ module.exports = baseVw.extend({
         });
       }
 
-      console.log('check the slip knot yall');
-
       // update chat head
       if (conversationMd = this.chatConversationsCl.findWhere({ guid: msg.sender })) {
-        console.log('flo');
-
         conversationMd.set({
           last_message: msg.message,
           unread: openlyChatting ? 0 : conversationMd.get('unread') + 1,
@@ -286,11 +277,6 @@ module.exports = baseVw.extend({
           $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
         }
       } else {
-        console.log('rida');
-        // todo: maybe manually create and add in the model, rather
-        // than having to fetch
-        // this.chatConversationsCl.fetch();
-
         this.chatConversationsCl.add({
           avatar_hash: msg.avatar_hash,
           guid: msg.sender,

@@ -14,9 +14,6 @@ module.exports = baseVw.extend({
     }
 
     this.listenTo(this.collection, 'add', (md, cl, opts) => {
-      console.log('how dare you?');
-      window.how = md;
-      
       this.$headContainer.append(
         this.createChatHead(md).render().el
       );
