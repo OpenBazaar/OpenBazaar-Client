@@ -5,7 +5,7 @@ var __ = require('underscore'),
     messageModal = require('../utils/messageModal.js'),
     setTheme = require('../utils/setTheme.js'),
     chosen = require('../utils/chosen.jquery.min.js'),
-    purchasesCl = require('../collections/purchasesCl'),
+    transactionsCl = require('../collections/transactionsCl'),
     baseVw = require('./baseVw'),
     orderShortVw = require('./orderShortVw'),
     getBTPrice = require('../utils/getBitcoinPrice'),
@@ -66,13 +66,13 @@ module.exports = baseVw.extend({
     getBTPrice(this.cCode, function(btAve){
       $('.js-loadingModal').addClass("hide");
       self.btAve = btAve;
-      self.purchasesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
+      self.purchasesCol = new transactionsCl(null, {btAve: btAve, cCode: self.cCode});
       self.purchasesCol.url = self.serverUrl + "get_purchases";
 
-      self.salesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
+      self.salesCol = new transactionsCl(null, {btAve: btAve, cCode: self.cCode});
       self.salesCol.url = self.serverUrl + "get_sales";
 
-      self.casesCol = new purchasesCl(null, {btAve: btAve, cCode: self.cCode});
+      self.casesCol = new transactionsCl(null, {btAve: btAve, cCode: self.cCode});
       self.casesCol.url = self.serverUrl + "get_cases";
 
       self.render();
