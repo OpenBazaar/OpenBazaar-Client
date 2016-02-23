@@ -45,9 +45,6 @@ module.exports = baseVw.extend({
   },
 
   onPriceSet: function() {
-    console.log('hardy');
-    window.hardy = this.model;
-
     var itemOwnerGuid = this.model.get('page').profile.guid,
         loggedInUserGuid = this.model.get('user'). guid,
         data = {
