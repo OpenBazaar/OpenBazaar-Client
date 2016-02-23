@@ -1863,7 +1863,7 @@ div.chatSearchOut .chatSearchIcon {
   margin-right: unset;
 }
 
-.chatConversation {
+.chatConversationContainer {
   width: calc(100% - 1px);
   height: 360px;
   bottom: 0px;
@@ -1872,7 +1872,7 @@ div.chatSearchOut .chatSearchIcon {
   background-color: #2B2B2B;
 }
 
-.chatConversationHidden {
+.chatConversationContainerHide {
   bottom: -362px;
 }
 
@@ -1891,11 +1891,12 @@ div.chatSearchOut .chatSearchIcon {
   clear: both;
   border-top: solid 1px #363636;
   height: calc(100% - 88px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .chatConversationHeadsCompressed {
-  /*background: #3A3434;*/
-  height: calc(100% - 430px);
+  height: calc(100% - 405px);
   overflow-x: hidden;
   overflow-y: auto;
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
