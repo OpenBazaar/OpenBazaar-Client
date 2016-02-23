@@ -14,7 +14,7 @@ module.exports = baseVw.extend({
     }
 
     this.listenTo(this.collection, 'add', (md, cl, opts) => {
-      this.$headContainer.prepend(
+      this.$headContainer.append(
         this.createChatHead(md).render().el
       );
     });
