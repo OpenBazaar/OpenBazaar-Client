@@ -357,9 +357,7 @@ app.on('ready', function() {
 
   autoUpdater.on("update-downloaded", function(e, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
     mainWindow.webContents.executeJavaScript("console.log('Update downloaded." + updateUrl + "')");
-    if(platform == "mac") {
-      mainWindow.webContents.executeJavaScript('$(".js-softwareUpdate").removeClass("softwareUpdateHidden");');
-    }
+    mainWindow.webContents.executeJavaScript('$(".js-softwareUpdate").removeClass("softwareUpdateHidden");');
   });
 
   ipcMain.on('installUpdate', function(event) {
