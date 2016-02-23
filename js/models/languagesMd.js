@@ -294,6 +294,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed",
           OrderStatusclosed: "Dispute Closed",
           OrderStatus6: "Dispute Finalized",
+          AcceptDisputeResolution: "Accept Dispute Payout",
           InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
           OrderTotalInBTC: "BTC Total",

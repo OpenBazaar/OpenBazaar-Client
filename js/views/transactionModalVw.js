@@ -42,6 +42,7 @@ module.exports = baseVw.extend({
     'change #transactionsSellerPayoutPercent': 'updateSellerBTC',
     'click .js-transactionShowContract': 'showContract',
     'click .js-transactionHideContract': 'hideContract',
+    'click .js-acceptResolution': 'acceptResolution',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -99,6 +100,7 @@ module.exports = baseVw.extend({
       dataType: 'json',
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
+        //TODO set 'payout' here if the user has a payout from a dispute
         self.model.updateAttributes();
       },
       error: function (jqXHR, status, errorThrown) {
@@ -457,6 +459,16 @@ module.exports = baseVw.extend({
     } else {
       messageModal.show(window.polyglot.t('errorMessages.missingError'));
     }
+  },
+
+  acceptResolution: function(){
+    var resData = {};
+    resData.order_id = this.orderID;
+    saveToAPI(null, null, this.serverUrl + "release_funds", function(data){
+      self.status = 6;
+      self.tabState = "discussion";
+      self.getData();
+    },'', resData);
   },
 
   updateBuyerBTC: function(e) {
