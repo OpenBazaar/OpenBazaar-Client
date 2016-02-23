@@ -37,9 +37,11 @@ module.exports = baseVw.extend({
     this.$loadingSpinner = $('.spinner-with-logo');
 
     this.chatConversationsCl = new ChatConversationsCl();
-    this.chatConversationsCl.fetch();
+    this.chatConversationsCl.fetch({
+      reset: true
+    });
 
-    this.listenTo(this.chatConversationsCl, 'sync', (cl) => {
+    this.listenTo(this.chatConversationsCl, 'reset', (cl) => {
       cl.forEach((md) => {
         this.listenTo(md, 'change', () => {
           var filteredMd;
@@ -63,8 +65,15 @@ module.exports = baseVw.extend({
         this.listenTo(this.chatHeadsVw, 'chatHeadClick', this.onChatHeadClick)
         this.registerChild(this.chatHeadsVw);
       } else {
-        this.chatHeadsVw.render();
+        this.filterChatHeads();
+        // this.chatHeadsVw.render();
       }
+    });
+
+    this.listenTo(this.chatConversationsCl, 'add', (md) => {
+      if (this.filteredChatConvos) {
+        this.filteredChatConvos.add(md);
+      };
     });
 
     this.listenTo(window.obEventBus, 'socketMessageReceived', (response) => {
@@ -170,7 +179,8 @@ module.exports = baseVw.extend({
     this.listenTo(this.chatConversationVw, 'close-click', this.closeConversation);
 
     this.listenTo(this.chatConversationVw, 'enter-message', function(msg) {
-      var conversationMd;
+      var convoMd = this.chatConversationVw.model,
+          chatHeadMd;
 
       this.sendMessage(model.get('guid'), model.get('public_key'), msg);
       this.chatConversationVw.getMessageField().val('');
@@ -188,8 +198,8 @@ module.exports = baseVw.extend({
       });
 
       // update chat head
-      if (conversationMd = this.chatConversationsCl.findWhere({ guid: msg.sender })) {
-        conversationMd.set({
+      if (chatHeadMd = this.chatConversationsCl.findWhere({ guid: convoMd.get('guid') })) {
+        chatHeadMd.set({
           last_message: msg,
           unread: 0,
           timestamp: Date.now()
@@ -197,7 +207,16 @@ module.exports = baseVw.extend({
       } else {
         // todo: maybe manually create and add in the model, rather
         // than having to fetch
-        this.chatConversationsCl.fetch();
+        // this.chatConversationsCl.fetch();
+
+        this.chatConversationsCl.add({
+          avatar_hash: convoMd.get('avatar_hash'),
+          guid: convoMd.get('guid'),
+          last_message: msg,
+          public_key: convoMd.get('public_key'),
+          unread: 0,
+          timestamp: Date.now()
+        });
       }
     });
 
@@ -250,8 +269,12 @@ module.exports = baseVw.extend({
         });
       }
 
+      console.log('check the slip knot yall');
+
       // update chat head
       if (conversationMd = this.chatConversationsCl.findWhere({ guid: msg.sender })) {
+        console.log('flo');
+
         conversationMd.set({
           last_message: msg.message,
           unread: openlyChatting ? 0 : conversationMd.get('unread') + 1,
@@ -263,9 +286,19 @@ module.exports = baseVw.extend({
           $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
         }
       } else {
+        console.log('rida');
         // todo: maybe manually create and add in the model, rather
         // than having to fetch
-        this.chatConversationsCl.fetch();
+        // this.chatConversationsCl.fetch();
+
+        this.chatConversationsCl.add({
+          avatar_hash: msg.avatar_hash,
+          guid: msg.sender,
+          last_message: msg.message,
+          public_key: msg.public_key,
+          unread: 1,
+          timestamp: msg.timestamp
+        });
       }
 
       if ((!window.focused || !openlyChatting) && !this.model.isBlocked(msg.sender))  {
