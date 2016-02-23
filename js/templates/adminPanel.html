@@ -1,60 +1,63 @@
-<div class="modal modal-opaque js-adminModal hide">
-  <div class="btn-corner btn-cornerTR btn-cornerTRFixedOut js-closeModal">
-    <h3 class="ion-close-circled icon-large"></h3>
-  </div>
-  <div class="modal-child modal-childMain pad20 scrollOverflowY">
-    <div class="row20 rowTop20">
-      <h1 class="txt-center">Admin Panel</h1>
+<div class="js-adminModal hide">
 
-    <h3>Set Profile</h3>
-    <div class="box-border row20">
-      <form id="adminPanelProfile">
-        <div class="flex-border">
-          <div class="flexRow">
-            <div class="flexCol-4">
-              <div class="fieldItem">
-                <label>Vendor</label>
-                <div class="js-adminServerMsg"></div>
+ <div class="modal modal-opaque">
+    <div class="btn-corner btn-cornerTR btn-cornerTRFixedOut js-closeModal">
+      <h3 class="ion-close-circled icon-large"></h3>
+    </div>
+    <div class="modal-child modal-childMain pad20 scrollOverflowY">
+      <div class="row20 rowTop20">
+        <h1 class="txt-center">Admin Panel</h1>
+
+      <h3>Set Profile</h3>
+      <div class="box-border row20">
+        <form id="adminPanelProfile">
+          <div class="flex-border">
+            <div class="flexRow">
+              <div class="flexCol-4">
+                <div class="fieldItem">
+                  <label>Vendor</label>
+                  <div class="js-adminServerMsg"></div>
+                </div>
+              </div>
+              <div class="flexCol-8 positionWrapper">
+                <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
+                <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
               </div>
             </div>
-            <div class="flexCol-8 positionWrapper">
-              <input name="vendor" type="radio" class="fieldItem" id="vendorTrue" name="vendor" value="true" /><label for="vendorTrue" class="radioLabel">Yes</label>
-              <input name="vendor" type="radio" class="fieldItem" id="vendorFalse" name="vendor" value="false" checked/><label for="vendorFalse" class="radioLabel">No</label>
+            <div class="flexRow">
+              <div class="flexCol-12">
+                <div class="fieldItem">
+                  <a class="btn btn-txt pull-right js-adminUpdateProfile">Change Profile</a>
+                </div>
+              </div>
             </div>
           </div>
+        </form>
+      </div>
+
+      <h3>Connected Peers</h3>
+      <div class="box-border row20">
+        <div class="flex-border">
           <div class="flexRow">
             <div class="flexCol-12">
               <div class="fieldItem">
-                <a class="btn btn-txt pull-right js-adminUpdateProfile">Change Profile</a>
+                <p class="js-adminPeers" style="word-wrap: break-word">
+                </p>
               </div>
             </div>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
 
-    <h3>Connected Peers</h3>
-    <div class="box-border row20">
-      <div class="flex-border">
+      <h3>Routing Table</h3>
+      <div class="box-border row20">
         <div class="flexRow">
           <div class="flexCol-12">
-            <div class="fieldItem">
-              <p class="js-adminPeers" style="word-wrap: break-word">
-              </p>
-            </div>
+            <div class="textSize12px js-adminRoutingTable"></div>
           </div>
         </div>
       </div>
-    </div>
 
-    <h3>Routing Table</h3>
-    <div class="box-border row20">
-      <div class="flexRow">
-        <div class="flexCol-12">
-          <div class="textSize12px js-adminRoutingTable"></div>
-        </div>
-      </div>
     </div>
-
   </div>
 </div>

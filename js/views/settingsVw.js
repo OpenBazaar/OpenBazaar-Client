@@ -196,8 +196,6 @@ module.exports = Backbone.View.extend({
             imageDragging: false
           }
       });
-
-      self.socketView.getModerators(self.socketModeratorID);
     });
     return this;
   },
@@ -489,8 +487,12 @@ module.exports = Backbone.View.extend({
     if(state){
       this._state = state;
       this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
+      if(state == "store"){
+        console.log("get moderators")
+        this.socketView.getModerators(this.socketModeratorID);
+      }
     } else {
-      this._state = 'general';
+      this._state = "general";
       this.setTab(this.$el.find('.js-generalTab'), this.$el.find('.js-general'));
     }
   },
