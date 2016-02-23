@@ -4083,6 +4083,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
 }
 
+#ov1 .positionBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
 #ov1 .hide {
   display: none;
 }

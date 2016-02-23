@@ -40,6 +40,8 @@ module.exports = baseVw.extend({
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
     'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
     'change #transactionsSellerPayoutPercent': 'updateSellerBTC',
+    'click .js-transactionShowContract': 'showContract',
+    'click .js-transactionHideContract': 'hideContract',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -82,7 +84,8 @@ module.exports = baseVw.extend({
       status: this.status,
       transactionType: this.transactionType,
       bitcoinValidationRegex: this.bitcoinValidationRegex,
-      avatarURL: this.avatarURL
+      avatarURL: this.avatarURL,
+      orderID: this.orderID
     });
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
@@ -95,6 +98,7 @@ module.exports = baseVw.extend({
       data: $.param({'order_id': self.orderID}),
       dataType: 'json',
       success: function (model, response, options) {
+        self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
         self.model.updateAttributes();
       },
       error: function (jqXHR, status, errorThrown) {
@@ -109,6 +113,7 @@ module.exports = baseVw.extend({
 
   render: function () {
     var self = this;
+    console.log(this.model.attributes);
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
 
@@ -153,6 +158,19 @@ module.exports = baseVw.extend({
     } else {
       messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.serverError'));
     }
+  },
+
+  showContract: function(){
+    console.log("show contract")
+    this.$('.js-transactionsContractHolder').fadeIn(300);
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-transactionHideContract').removeClass('hide');
+  },
+
+  hideContract: function(){
+    this.$('.js-transactionsContractHolder').fadeOut(300);
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-transactionHideContract').addClass('hide');
   },
 
   setState: function(state){
