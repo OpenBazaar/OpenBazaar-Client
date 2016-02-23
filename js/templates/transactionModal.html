@@ -503,15 +503,17 @@
           </label>
         </div>
         <% } else if(ob.status != 4  && ob.status != 0 && ob.displayModerator) { %>
-        <div class="js-startDisputeFlag">
-          <input type="checkbox" class="fieldItem"
-                 id="transactionStartDisputeCheckbox" >
-          <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable">
-            <%= polyglot.t('transactions.DisputeTransaction') %>
-            <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box"
-               data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
-          </label>
-        </div>
+          <% if(ob.status == 1 && ob.transactionType == "purchases" || ob.status == 2 || ob.staus == 3){ %>
+          <div class="js-startDisputeFlag">
+            <input type="checkbox" class="fieldItem"
+                   id="transactionStartDisputeCheckbox" >
+            <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable">
+              <%= polyglot.t('transactions.DisputeTransaction') %>
+              <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box"
+                 data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
+            </label>
+          </div>
+          <% } %>
         <% } %>
       </div>
 
