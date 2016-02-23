@@ -2146,6 +2146,7 @@ div.chatSearchOut .chatSearchIcon {
 
 #inputConversationMessage::-webkit-input-placeholder  {
   font-size: 12px;
+  color: #fff !important; /* i'm using important here because the custom theme styles should never override this color */
 }
 
 .chatConversationMessageAvatar {
