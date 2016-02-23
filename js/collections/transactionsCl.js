@@ -21,6 +21,8 @@ module.exports = Backbone.Collection.extend({
       order.cCode = self.cCode;
       if(order.status == "open"){
         order.status = 4;
+      } else if(order.status == "closed"){
+        order.status = 5;
       }
     });
 
