@@ -85,6 +85,21 @@ module.exports = baseVw.extend({
     this.listenTo(this.notificationsCl, 'sync', (cl, resp, options) => {
       // this.setNotificationCount
     });
+
+    $(document).on('click', this.onDocumentClick.bind(this));
+  },
+
+  onDocumentClick: function(e) {
+    if (!this.notificationsVw) return;
+
+    if (  
+          !(e.target === this.$notifPanel[0] ||
+          $.contains(this.$notifPanel[0], e.target) ||
+          e.target === this.$navNotif[0] ||
+          $.contains(this.$navNotif[0], e.target))
+        ) {
+      this.closeNotificationsMenu();
+    }
   },
 
   sendInstallUpdate: function() {
@@ -121,6 +136,10 @@ module.exports = baseVw.extend({
     });
   },
 
+  notificationClick: function(e) {
+    this.closeNotificationsMenu();
+  },
+
   render: function(){
     var self = this;
     //reset tests for applying lists or List.js will fail on a re-render
@@ -133,7 +152,10 @@ module.exports = baseVw.extend({
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      
+
+      self.$notifPanel = self.$('#notificationsPanel');
+      self.$navNotif = self.$('.js-navNotifications');
+
       if (!self.notificationsVw) {
         self.notificationsVw = new NotificationsVw({
           socketView: self.socketView,
@@ -143,9 +165,11 @@ module.exports = baseVw.extend({
         // self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
         // self.subViews.push(self.notificationsPanel);
         self.registerChild(self.notificationsVw);
+
+        self.listenTo(self.notificationsVw, 'notification-click', self.notificationClick);
       }
 
-      self.$('#notificationsPanel').html(self.notificationsVw.render().el);
+      self.$notifPanel.html(self.notificationsVw.render().el);
 
       //add the admin panel
       self.adminPanel && self.adminPanel.remove();
@@ -247,6 +271,10 @@ module.exports = baseVw.extend({
     }
   },
 
+  closeNotificationsMenu: function() {
+    this.$('.js-navNotificationsMenu').removeClass('popMenu-notifications-opened');
+  },
+
   navNotificationsClick: function(e){
     // e.stopPropagation();
     // this.setNotificationCount("");
@@ -275,7 +303,8 @@ module.exports = baseVw.extend({
       count = "..";
     }
 
-    this.$('.js-navNotifications .badge').attr('data-count', count);
+    this.$navNotif.find('.badge')
+        .attr('data-count', count);
   },
 
   navProfileClick: function(e){
@@ -426,4 +455,9 @@ module.exports = baseVw.extend({
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
+  remove: function() {
+    $(document).off('click', this.onDocumentClick);
+
+    baseVw.prototype.remove.apply(this, arguments);
+  }
 });

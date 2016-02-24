@@ -41,7 +41,7 @@ module.exports = baseVw.extend({
         break;
     }
 
-    this.trigger('notification-click');
+    this.trigger('notification-click', { view: this });
   },
 
   // remove: function() {

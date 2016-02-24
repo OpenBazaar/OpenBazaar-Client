@@ -38,6 +38,10 @@ module.exports = baseVw.extend({
   //   baseVw.prototype.remove.apply(this, arguments);
   // },
 
+  notificationClick: function(e) {
+    this.trigger('notification-click', e);
+  },
+
   render: function() {
     this.notifications = this.notifications || [];
     this.notifications.forEach((vw) => {
@@ -65,6 +69,8 @@ module.exports = baseVw.extend({
           $container.append(vw.render().el);
           this.registerChild(vw);
           this.notifications.push(vw);
+
+          this.listenTo(vw, 'notification-click', this.notificationClick);
         });
       }
 
