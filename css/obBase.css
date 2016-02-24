@@ -3059,7 +3059,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications {
-  top: -238px;
+  top: -385px;
   right: 45px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -3069,7 +3069,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 15px;
   padding: 0;
   width: 390px;
-  transition: top 150ms;
+  transition: top 300ms;
 }
 
 .popMenu-notificationsHeader {
@@ -3208,9 +3208,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #notificationsPanel .popMenu-notificationsContent {
-  max-height: 390px;
   overflow-y: scroll;
   overflow-x: hidden;
+  max-height: 390px;
 }
 
 #notificationsPanel .notification {

@@ -49,7 +49,6 @@ module.exports = Backbone.View.extend({
     this.notifcationSound.setAttribute('src', './audio/notification.mp3');
 
     this.subViews = [];
-
   },
 
   renderNotification: function(model){

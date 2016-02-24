@@ -4,6 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    app = require('../App.js').getApp(),
     Polyglot = require('node-polyglot'),
     NotificationsCl = require('../collections/notificationsCl.js'), 
     languagesModel = require('../models/languagesMd'),
@@ -58,8 +59,8 @@ module.exports = baseVw.extend({
 
     this.currentWindow = remote.getCurrentWindow();
 
-    this.socketNotificationID = Math.random().toString(36).slice(2);
-    this.socketView.getNotifications(this.socketNotificationID);
+    // this.socketNotificationID = Math.random().toString(36).slice(2);
+    // this.socketView.getNotifications(this.socketNotificationID);
 
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.refreshProfile();
@@ -83,9 +84,7 @@ module.exports = baseVw.extend({
     this.notificationsFetch = this.notificationsCl.fetch();
 
     this.listenTo(this.notificationsCl, 'sync', (cl, resp, options) => {
-      this.setNotificationCount(
-        cl.where({ read: false }).length
-      );
+      this.setNotificationCount(cl.getUnreadCount());
     });
 
     $(document).on('click', this.onDocumentClick.bind(this));
@@ -95,8 +94,8 @@ module.exports = baseVw.extend({
     if (!this.notificationsVw) return;
 
     if (  
-          !(e.target === this.$notifPanel[0] ||
-          $.contains(this.$notifPanel[0], e.target) ||
+          !(e.target === this.$notifMenu[0] ||
+          $.contains(this.$notifMenu[0], e.target) ||
           e.target === this.$navNotif[0] ||
           $.contains(this.$navNotif[0], e.target))
         ) {
@@ -113,12 +112,49 @@ module.exports = baseVw.extend({
     $('.js-softwareUpdate').addClass('softwareUpdateHidden');
   },
 
+  // handleSocketMessage: function(response) {
+  //   var data = JSON.parse(response.data);
+  //   if(data.id == this.socketNotificationID){
+  //     console.log(data);
+  //   }
+  // },
+
   handleSocketMessage: function(response) {
-    var data = JSON.parse(response.data);
-    if(data.id == this.socketNotificationID){
-      console.log(data);
+    var data = JSON.parse(response.data),
+        username,
+        avatar,
+        n;
+
+    if(data.hasOwnProperty('notification')) {
+      n = data.notification;
+      username = n.handle ? n.handle : n.guid.substring(0,10) + '...';
+      avatar = n.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
+        n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
+
+      console.log('notify yo');
+      window.notify = n;
+
+      switch(n.type) {
+        case "follow":
+          new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
+            icon: avatar
+          });
+          break;
+        case "dispute_open":
+          new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
+            icon: avatar
+          });
+          break;
+        case "new order":
+          new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
+            icon: avatar
+          });
+          break;
+      }
+
+      app.playNotificationSound();
     }
-  },
+  },  
 
   closeNav: function(){
     var targ = this.$el.find('.js-navProfileMenu');
@@ -155,7 +191,7 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
-      self.$notifPanel = self.$('#notificationsPanel');
+      self.$notifMenu = self.$('.js-navNotificationsMenu');
       self.$navNotif = self.$('.js-navNotifications');
 
       if (!self.notificationsVw) {
@@ -171,7 +207,8 @@ module.exports = baseVw.extend({
         self.listenTo(self.notificationsVw, 'notification-click', self.notificationClick);
       }
 
-      self.$notifPanel.html(self.notificationsVw.render().el);
+      self.$notifMenu.find('#notificationsPanel')
+          .html(self.notificationsVw.render().el);
 
       //add the admin panel
       self.adminPanel && self.adminPanel.remove();
@@ -274,7 +311,7 @@ module.exports = baseVw.extend({
   },
 
   closeNotificationsMenu: function() {
-    this.$('.js-navNotificationsMenu').removeClass('popMenu-notifications-opened');
+    this.$notifMenu.removeClass('popMenu-notifications-opened');
   },
 
   navNotificationsClick: function(e){
@@ -297,20 +334,36 @@ module.exports = baseVw.extend({
     //   $('#overlay').addClass('hide');
     // }
 
-    this.$('.js-navNotificationsMenu').toggleClass('popMenu-notifications-opened');
+    
+    if (!this.$notifMenu.hasClass('popMenu-notifications-opened')) {
+      this.notificationsCl.where({ read: false })
+        .forEach((notif) => {
+          notif.set('read', true);
+          $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
+            'id': notif.get('id')
+          });          
+        });
+
+      this.setNotificationCount(0);
+    }
+
+    this.$notifMenu.toggleClass('popMenu-notifications-opened');
   },
 
   setNotificationCount: function(count){
-    var parsed = parseInt(count);
-
-    if (!count || isNan(parsed) || parsed <= 0) return;
+    if (isNaN(parseInt(count))) return;
 
     if (count > 99) {
-      count = "..";
+      count = '..';
     }
 
-    this.$navNotif.find('.badge')
-        .attr('data-count', count);
+    if (count == 0) {
+      this.$navNotif.find('.badge')
+          .removeAttr('data-count', count);
+    } else {
+      this.$navNotif.find('.badge')
+          .attr('data-count', count);
+    }
   },
 
   navProfileClick: function(e){

@@ -10,6 +10,14 @@ module.exports = Backbone.Collection.extend({
   
   model: NotificationMd,
 
+  comparator: function(notif) {
+    return -notif.get('timestamp');
+  },
+
   initialize: function(options) {
+  },
+
+  getUnreadCount: function() {
+    return this.where({ read: false }).length;
   }
 });

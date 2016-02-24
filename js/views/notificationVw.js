@@ -16,6 +16,8 @@ module.exports = baseVw.extend({
     if (!options.model) {
       throw new Error('Please provide a model of the logged-in user.');
     }
+
+    this.listenTo(this.model, 'change', this.render);
   },
 
   notificationClick: function(e) {
