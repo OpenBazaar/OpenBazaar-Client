@@ -3207,9 +3207,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #notificationsPanel .popMenu-notificationsContent {
-  height: 390px;
+  max-height: 390px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+#notificationsPanel .notification {
+  transition: background-color 300ms;
+}
+
+#notificationsPanel .notification:hover {
+  background-color: #333;
+}
+
+#notificationsPanel .notification:last-child {
+  border-bottom: 0;
 }
 
 .capitalize {

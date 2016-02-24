@@ -52,7 +52,6 @@ module.exports = baseVw.extend({
       this.$el.html(
         tmpl({
           isFetching: isFetching,
-          // collection: this.collection.toJSON()
           collection: this.collection.toJSON()
         })
       );
@@ -67,40 +66,9 @@ module.exports = baseVw.extend({
           this.registerChild(vw);
           this.notifications.push(vw);
         });
-
-        this.collection.forEach((md) => {
-          var vw = new NotificationVw({
-            model: md
-          });
-
-          $container.append(vw.render().el);
-          this.registerChild(vw);
-          this.notifications.push(vw);
-        });
-
-        this.collection.forEach((md) => {
-          var vw = new NotificationVw({
-            model: md
-          });
-
-          $container.append(vw.render().el);
-          this.registerChild(vw);
-          this.notifications.push(vw);
-        });
-
-        this.collection.forEach((md) => {
-          var vw = new NotificationVw({
-            model: md
-          });
-
-          $container.append(vw.render().el);
-          this.registerChild(vw);
-          this.notifications.push(vw);
-        });                        
       }
 
       this.$('.js-notif-wrap').append($container);
-      // this.$el.append($container);
     });
 
     return this;

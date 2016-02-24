@@ -9,12 +9,39 @@ module.exports = baseVw.extend({
   className: 'notification flexRow',
 
   events: {
+    'click .js-notification': 'notificationClick'
   },
 
   initialize: function(options) {
     if (!options.model) {
       throw new Error('Please provide a model of the logged-in user.');
     }
+  },
+
+  notificationClick: function(e) {
+    // var targ = $('.js-navNotificationsMenu');
+    // targ.addClass('hide');
+    // $('#overlay').addClass('hide');
+    
+    switch(this.model.get('type')) {
+      case "follow":
+        Backbone.history.navigate('#userPage/'+ this.model.get('guid') + '/store', {trigger: true});
+        break;
+      case "new order":
+        Backbone.history.navigate('#transactions', {trigger: true});
+        break;
+      case "dispute_open":
+        Backbone.history.navigate('#transactions', {trigger: true});
+        break;
+      case "payment received":
+        Backbone.history.navigate('#transactions', {trigger: true});
+        break;
+      case "order confirmation":
+        Backbone.history.navigate('#transactions', {trigger: true});
+        break;
+    }
+
+    this.trigger('notification-click');
   },
 
   // remove: function() {
