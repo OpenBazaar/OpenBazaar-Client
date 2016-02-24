@@ -291,6 +291,11 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped",
           OrderStatus3: "Completed (Payment released)",
           OrderStatus4: "Disputed",
+          OrderStatusopen: "Disputed",
+          OrderStatus5: "Dispute Closed",
+          OrderStatusclosed: "Dispute Closed",
+          OrderStatus6: "Dispute Finalized",
+          AcceptDisputeResolution: "Accept Dispute Payout",
           InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
           OrderTotalInBTC: "BTC Total",
@@ -800,6 +805,11 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
+          AcceptDisputeResolution: "Accept Dispute Payout",
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -1303,6 +1313,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -1810,6 +1824,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confermato/Inviato",
           OrderStatus3: "Completato (fondi rilasciati)",
           OrderStatus4: "Contestato",
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Totale ordine",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -2319,6 +2337,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmé/Expédié",
           OrderStatus3: "Terminé (paiement délivré)",
           OrderStatus4: "Contesté",
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- Sous séquestre",
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
@@ -2824,6 +2846,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -3327,6 +3353,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Подтверждено/выслано",
           OrderStatus3: "Завершено (средства освобождены)",
           OrderStatus4: "Оспорено",
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -3830,6 +3860,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -4337,6 +4371,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -4843,6 +4881,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -5353,6 +5395,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "已确认/已发货",
           OrderStatus3: "已完成(款已支付给卖家)",
           OrderStatus4: "有争议",
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- 托管中",
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -5860,6 +5906,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confirmed/Shipped", // not translated
           OrderStatus3: "Completed (Funds Released)", // not translated
           OrderStatus4: "Disputed", // not translated
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -6352,6 +6402,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "確認完了・出荷済",
           OrderStatus3: "Completed (Funds Released)",
           OrderStatus4: "異議・クレーム",
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -6858,6 +6912,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Potwierdzone/Wysłane",
           OrderStatus3: "Zakończone (opłacone)",
           OrderStatus4: "W trakcie sporu",
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
@@ -7339,6 +7397,10 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Bekræftet/Afsendt",
           OrderStatus3: "Gennemført (betaling frigivet)",
           OrderStatus4: "Uenighed",
+          OrderStatusopen: "Disputed", // not translated
+          OrderStatus5: "Dispute Closed", // not translated
+          OrderStatusclosed: "Dispute Closed", // not translated
+          OrderStatus6: "Dispute Finalized",// not translated
           InEscrow: "- i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",

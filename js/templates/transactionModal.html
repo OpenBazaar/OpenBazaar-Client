@@ -38,9 +38,8 @@
         </div>
       </div>
     </div>
-    <% } %>
-    <% if(ob.status == 1 && ob.transactionType == "sales"){ %>
-    <div class="positionBottom padding2015 width100">
+    <% } else if(ob.status == 1 && ob.transactionType == "sales"){ %>
+    <div class="positionTop padding2015 width100">
       <a class="btn btn-txt custCol-secondary pull-right js-showConfirmForm">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
         <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
@@ -50,15 +49,37 @@
         <% } %>         
       </a>
     </div>
+    <% } else if(ob.status == 2 && ob.transactionType == "purchases"){ %>
+    <div class="positionTop padding2015 width100">
+      <a class="btn btn-txt custCol-secondary pull-right js-showCompleteForm">
+        <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+        <%= polyglot.t('transactions.CompleteOrder') %>
+      </a>
+    </div>
+    <% } else if(ob.status == 5 && ob.payout){ %>
+  <!-- needs code to tell if this user has a payout -->
+    <div class="positionTop padding2015 width100">
+      <a class="btn btn-txt custCol-secondary pull-right js-acceptResolution">
+        <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+        <%= polyglot.t('transactions.AcceptDisputeResolution') %>
+      </a>
+    </div>
     <% } %>
-  <% if(ob.status == 2 && ob.transactionType == "purchases"){ %>
-  <div class="positionBottom padding2015 width100">
-    <a class="btn btn-txt custCol-secondary pull-right js-showCompleteForm">
-      <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-      <%= polyglot.t('transactions.CompleteOrder') %>
-    </a>
-  </div>
-  <% } %>
+    <div class="modal-hero js-transactionsContractHolder background1 hide">
+      <div class="positionTop width100 js-transactionsContract">
+        <pre style="height: 250px; margin: 0; overflow: scroll; font-size: 11px;" >
+          <code>
+            <%= ob.displayJSON %>
+          </code>
+        </pre>
+      </div>
+    </div>
+    <% if(ob.status != 0){ %>
+    <div class="positionBottomRight" style="margin: 0 25px 25px 0">
+      <a class="positionBottomRight btn btn-txt custCol-secondary js-transactionShowContract">Contract Details</a>
+      <a class="positionBottomRight btn btn-txt custCol-secondary js-transactionHideContract hide">Hide Details</a>
+    </div>
+    <% } %>
   </div>
   <div class="bar navBar barFlush custCol-secondary height55 clearFix">
     <a class="btn btn-bar btn-tab custCol-secondary js-tab js-summaryTab active" data-tab="summary">
@@ -503,15 +524,17 @@
           </label>
         </div>
         <% } else if(ob.status != 4  && ob.status != 0 && ob.displayModerator) { %>
-        <div class="js-startDisputeFlag">
-          <input type="checkbox" class="fieldItem"
-                 id="transactionStartDisputeCheckbox" >
-          <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable">
-            <%= polyglot.t('transactions.DisputeTransaction') %>
-            <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box"
-               data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
-          </label>
-        </div>
+          <% if(ob.status == 1 && ob.transactionType == "purchases" || ob.status == 2 || ob.staus == 3){ %>
+          <div class="js-startDisputeFlag">
+            <input type="checkbox" class="fieldItem"
+                   id="transactionStartDisputeCheckbox" >
+            <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable">
+              <%= polyglot.t('transactions.DisputeTransaction') %>
+              <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box"
+                 data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
+            </label>
+          </div>
+          <% } %>
         <% } %>
       </div>
 
@@ -618,8 +641,7 @@
                       class="fieldItem-textarea custCol-text"
                       id="inputComments"
                       placeholder="<%= polyglot.t('transactions.CommentsPlaceholder') %>"
-                      required>
-            </textarea>
+                      required></textarea>
           </div>
         </div>
         <% if(ob.vendor_offer.listing.metadata.category == "physical good") { %>

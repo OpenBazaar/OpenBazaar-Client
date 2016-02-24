@@ -62,6 +62,15 @@ App.prototype.login = function() {
   });  
 };
 
+App.prototype.playNotificationSound = function() {
+  if (!this._notificationSound) {
+    this._notificationSound = document.createElement('audio');
+    this._notificationSound.setAttribute('src', './audio/notification.mp3');
+  }
+
+  this._notificationSound.play();
+},
+
 App.getApp = function() {
   if (!_app) {
     throw new Error('The app instance was never instantiated and is therefore not available.');

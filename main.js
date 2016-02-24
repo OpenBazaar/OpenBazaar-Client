@@ -6,6 +6,7 @@ safestart(__dirname);
 
 var fs = require('fs');
 var path = require('path');
+var argv = require('yargs').argv;
 
 var app = require('app');  // Module to control application life.
 var electron = require('electron');
@@ -29,6 +30,14 @@ var trayMenu = null;
 var subpy = null;
 
 var open_url = null; // This is for if someone opens a URL before the client is open
+
+if (argv.userData) {
+  try {
+    app.setPath('userData', argv.userData);
+  } catch (e) {
+    throw new Error('The passed in userData directory does not appear to be valid: ' + e);
+  }
+}
 
 var handleStartupEvent = function() {
   if (process.platform !== 'win32') {
@@ -91,7 +100,10 @@ if(platform == "mac" || platform == "linux") {
 
 var start_local_server = function() {
   if(fs.existsSync(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon)) {
-    subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug'], {
+
+    var random_port = Math.floor((Math.random() * 10000) + 30000);
+
+    subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug', '-p', random_port], {
       detach: true,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
@@ -174,30 +186,6 @@ app.on('ready', function() {
             app.quit();
           }
         }
-      ]
-    },
-    {
-      label: 'Edit',
-      submenu: [
-        { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
-        { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
-        { type: "separator" },
-        { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
-        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-        { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
-      ]
-    },
-    {
-      label: 'Edit',
-      submenu: [
-        { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
-        { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
-        { type: "separator" },
-        { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
-        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
-        { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
-        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
       ]
     },
     {
@@ -336,7 +324,7 @@ app.on('ready', function() {
   }
 
   // Open the devtools.
-  mainWindow.openDevTools({detach: true});
+  //mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -372,9 +360,7 @@ app.on('ready', function() {
 
   autoUpdater.on("update-downloaded", function(e, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) {
     mainWindow.webContents.executeJavaScript("console.log('Update downloaded." + updateUrl + "')");
-    if(platform == "mac") {
-      mainWindow.webContents.executeJavaScript('$(".js-softwareUpdate").removeClass("softwareUpdateHidden");');
-    }
+    mainWindow.webContents.executeJavaScript('$(".js-softwareUpdate").removeClass("softwareUpdateHidden");');
   });
 
   ipcMain.on('installUpdate', function(event) {
