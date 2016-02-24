@@ -345,13 +345,15 @@ module.exports = baseVw.extend({
       openHandler = $popMenu.data('onopen');
       openHandler && this[openHandler] && this[openHandler].call(this);
     } else {
-      closeHandler = $popMenu.data('onopen');
+      closeHandler = $popMenu.data('onclose');
       closeHandler && this[closeHandler] && this[closeHandler].call(this);
     }
   },
 
   onDocumentClick: function(e) {
-    var $target = $(e.target);
+    var $target = $(e.target),
+        $popMenu,
+        closeHandler;
 
     if (!(
         $target.hasClass('popMenu') ||
@@ -359,7 +361,11 @@ module.exports = baseVw.extend({
         $target.is('[data-popmenu]') ||
         $target.parents('[data-popmenu]').length
       )) {
-      self.$('.popMenu').removeClass('popMenu-opened');
+      $popMenu = self.$('.popMenu').removeClass('popMenu-opened');
+      $popMenu.each((index, el) => {
+        closeHandler = $(el).data('onclose');
+        closeHandler && this[closeHandler] && this[closeHandler].call(this);
+      });
     }
   },
 
