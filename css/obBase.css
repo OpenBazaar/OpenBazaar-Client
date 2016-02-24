@@ -311,6 +311,10 @@ form {
   line-height: 50px;
 }
 
+.bar .btn {
+  float: left;
+}
+
 #overlay,
 .overlay {
   position: fixed;
