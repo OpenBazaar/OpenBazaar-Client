@@ -83,7 +83,9 @@ module.exports = baseVw.extend({
     this.notificationsFetch = this.notificationsCl.fetch();
 
     this.listenTo(this.notificationsCl, 'sync', (cl, resp, options) => {
-      // this.setNotificationCount
+      this.setNotificationCount(
+        cl.where({ read: false }).length
+      );
     });
 
     $(document).on('click', this.onDocumentClick.bind(this));
@@ -299,6 +301,10 @@ module.exports = baseVw.extend({
   },
 
   setNotificationCount: function(count){
+    var parsed = parseInt(count);
+
+    if (!count || isNan(parsed) || parsed <= 0) return;
+
     if (count > 99) {
       count = "..";
     }
