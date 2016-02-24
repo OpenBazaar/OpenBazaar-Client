@@ -22,7 +22,7 @@ module.exports = baseVw.extend({
     this.options = options || {};
 
     if (!options.model) {
-      throw new Error('Please provide a model.');
+      throw new Error('Please provide a model of the person you are conversing with.');
     }
 
     if (!options.user) {
