@@ -189,7 +189,6 @@ module.exports = baseVw.extend({
       self.adminPanel && self.adminPanel.remove();
       self.adminPanel = new adminPanelView({model: self.model});
       self.registerChild(self.adminPanel);
-      // self.subViews.push(self.adminPanel);
 
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
