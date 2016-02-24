@@ -1161,15 +1161,15 @@ h5 {
   text-align: center;
 }
 
-.txt-fade {
+#ov1 .txt-fade {
   opacity: 0.75;
 }
 
-.div-fade {
+#ov1 .div-fade {
   opacity: 0.50;
 }
 
-.div-fadeExtra {
+#ov1 .div-fadeExtra {
   opacity: 0.3;
 }
 
@@ -1181,11 +1181,11 @@ h5 {
   margin-bottom: 0;
 }
 
-.unbold {
+#ov1 .unbold {
   font-weight: 400;
 }
 
-.allCaps {
+#ov1 .allCaps {
   text-transform: uppercase;
 }
 
@@ -1584,7 +1584,6 @@ input[type="text"].txtField-bar {
   height: 32px;
   min-width: 32px;
   line-height: 32px;
-  float: left;
   background-color: #086A9E; /* default color */
   padding:0;
   border-radius: 3px;
