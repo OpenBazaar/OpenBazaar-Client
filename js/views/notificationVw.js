@@ -2,7 +2,6 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    // app = require('../App.js').getApp(),
     baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
@@ -21,10 +20,6 @@ module.exports = baseVw.extend({
   },
 
   notificationClick: function(e) {
-    // var targ = $('.js-navNotificationsMenu');
-    // targ.addClass('hide');
-    // $('#overlay').addClass('hide');
-    
     switch(this.model.get('type')) {
       case "follow":
         Backbone.history.navigate('#userPage/'+ this.model.get('guid') + '/store', {trigger: true});
@@ -45,12 +40,6 @@ module.exports = baseVw.extend({
 
     this.trigger('notification-click', { view: this });
   },
-
-  // remove: function() {
-  //   this.close();
-
-  //   baseVw.prototype.remove.apply(this, arguments);
-  // },
 
   render: function() {
     loadTemplate('./js/templates/notification.html', (tmpl) => {

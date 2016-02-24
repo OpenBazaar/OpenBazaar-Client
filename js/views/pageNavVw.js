@@ -31,8 +31,6 @@ module.exports = baseVw.extend({
     'click .js-showSupportModal': 'showSupportModal',
     'click .js-hideSupportModal': 'hideSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
-    'click .js-navNotifications': 'navNotificationsClick',
-    'click .js-navProfile': 'navProfileClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
@@ -43,7 +41,8 @@ module.exports = baseVw.extend({
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'click .js-navInstallUpdate': 'sendInstallUpdate',
-    'click .js-navDismisslUpdate': 'dismissUpdate'
+    'click .js-navDismisslUpdate': 'dismissUpdate',
+    'click [data-popmenu]': 'onPopMenuNavClick'
   },
 
   initialize: function(options){
@@ -58,9 +57,6 @@ module.exports = baseVw.extend({
 
 
     this.currentWindow = remote.getCurrentWindow();
-
-    // this.socketNotificationID = Math.random().toString(36).slice(2);
-    // this.socketView.getNotifications(this.socketNotificationID);
 
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.refreshProfile();
@@ -83,24 +79,11 @@ module.exports = baseVw.extend({
     this.notificationsCl = new NotificationsCl();
     this.notificationsFetch = this.notificationsCl.fetch();
 
-    this.listenTo(this.notificationsCl, 'sync', (cl, resp, options) => {
+    this.listenTo(this.notificationsCl, 'update', (cl, resp, options) => {
       this.setNotificationCount(cl.getUnreadCount());
     });
 
     $(document).on('click', this.onDocumentClick.bind(this));
-  },
-
-  onDocumentClick: function(e) {
-    if (!this.notificationsVw) return;
-
-    if (  
-          !(e.target === this.$notifMenu[0] ||
-          $.contains(this.$notifMenu[0], e.target) ||
-          e.target === this.$navNotif[0] ||
-          $.contains(this.$navNotif[0], e.target))
-        ) {
-      this.closeNotificationsMenu();
-    }
   },
 
   sendInstallUpdate: function() {
@@ -112,27 +95,17 @@ module.exports = baseVw.extend({
     $('.js-softwareUpdate').addClass('softwareUpdateHidden');
   },
 
-  // handleSocketMessage: function(response) {
-  //   var data = JSON.parse(response.data);
-  //   if(data.id == this.socketNotificationID){
-  //     console.log(data);
-  //   }
-  // },
-
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data),
         username,
         avatar,
         n;
 
-    if(data.hasOwnProperty('notification')) {
+    if (data.hasOwnProperty('notification')) {
       n = data.notification;
       username = n.handle ? n.handle : n.guid.substring(0,10) + '...';
       avatar = n.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
         n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
-
-      console.log('notify yo');
-      window.notify = n;
 
       switch(n.type) {
         case "follow":
@@ -152,15 +125,19 @@ module.exports = baseVw.extend({
           break;
       }
 
+      this.notificationsCl.add(
+        __.extend({}, n, { read: this.isNotifMenuOpen() ? true : false })
+      );
+
+      if (this.isNotifMenuOpen()) {
+        $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
+          'id': n.id
+        });        
+      }
+
       app.playNotificationSound();
     }
   },  
-
-  closeNav: function(){
-    var targ = this.$el.find('.js-navProfileMenu');
-    targ.addClass('hide');
-    $('#overlay').addClass('hide');
-  },
 
   refreshProfile: function() {
     var self = this;
@@ -200,8 +177,6 @@ module.exports = baseVw.extend({
           collection: self.notificationsCl,
           fetch: self.notificationsFetch
         });
-        // self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
-        // self.subViews.push(self.notificationsPanel);
         self.registerChild(self.notificationsVw);
 
         self.listenTo(self.notificationsVw, 'notification-click', self.notificationClick);
@@ -311,43 +286,11 @@ module.exports = baseVw.extend({
   },
 
   closeNotificationsMenu: function() {
-    this.$notifMenu.removeClass('popMenu-notifications-opened');
+    this.$notifMenu.removeClass('popMenu-opened');
   },
 
-  navNotificationsClick: function(e){
-    // e.stopPropagation();
-    // this.setNotificationCount("");
-    // var targ = this.$el.find('.js-navNotificationsMenu');
-    // targ.siblings('.popMenu').addClass('hide');
-    // if(targ.hasClass('hide')){
-    //   targ.removeClass('hide').addClass('popMenu-notifications-opened');
-    //   $('#overlay').removeClass('hide');
-    //   $('html').on('click.closeNav', function(e){
-    //     if($(e.target).closest(targ).length === 0){
-    //       targ.addClass('hide').removeClass('popMenu-notifications-opened');
-    //       $('#overlay').addClass('hide');
-    //       $(this).off('.closeNav');
-    //     }
-    //   });
-    // }else{
-    //   targ.addClass('hide');
-    //   $('#overlay').addClass('hide');
-    // }
-
-    
-    if (!this.$notifMenu.hasClass('popMenu-notifications-opened')) {
-      this.notificationsCl.where({ read: false })
-        .forEach((notif) => {
-          notif.set('read', true);
-          $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
-            'id': notif.get('id')
-          });          
-        });
-
-      this.setNotificationCount(0);
-    }
-
-    this.$notifMenu.toggleClass('popMenu-notifications-opened');
+  isNotifMenuOpen: function() {
+    return this.$notifMenu.hasClass('popMenu-opened');
   },
 
   setNotificationCount: function(count){
@@ -366,24 +309,62 @@ module.exports = baseVw.extend({
     }
   },
 
-  navProfileClick: function(e){
-    e.stopPropagation();
-    var targ = this.$el.find('.js-navProfileMenu');
-    targ.siblings('.popMenu').addClass('hide');
-    if(targ.hasClass('hide')){
-      targ.removeClass('hide').addClass('popMenu-navBar-opened');
-      $('#overlay').removeClass('hide');
-      $('html').on('click.closeNav', function(e){
-        if($(e.target).closest(targ).length === 0){
-          targ.addClass('hide').removeClass('popMenu-navBar-opened');
-          $('#overlay').addClass('hide');
-          $(this).off('.closeNav');
-        }
+  onNotifMenuClose: function() {
+    this.notificationsVw.resetScroll();
+  },
+
+  onNotifMenuOpen: function() {
+    this.notificationsCl.where({ read: false })
+      .forEach((notif) => {
+        notif.set('read', true);
+        $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
+          'id': notif.get('id')
+        });
       });
-    }else{
-      targ.addClass('hide');
-      $('#overlay').addClass('hide');
+
+    this.setNotificationCount(0);
+  },  
+
+  onPopMenuNavClick: function(e) {
+    var $popMenu,
+        openHandler,
+        closeHandler;
+
+    $popMenu = self.$(
+      $(e.target).data('popmenu')
+    );
+
+    if (!$popMenu.length) return;
+
+    self.$('.popMenu').not($popMenu)
+      .removeClass('popMenu-opened');
+    
+    $popMenu.toggleClass('popMenu-opened');
+
+    if ($popMenu.hasClass('popMenu-opened')) {
+      openHandler = $popMenu.data('onopen');
+      openHandler && this[openHandler] && this[openHandler].call(this);
+    } else {
+      closeHandler = $popMenu.data('onopen');
+      closeHandler && this[closeHandler] && this[closeHandler].call(this);
     }
+  },
+
+  onDocumentClick: function(e) {
+    var $target = $(e.target);
+
+    if (!(
+        $target.hasClass('popMenu') ||
+        $target.parents('.popMenu').length ||
+        $target.is('[data-popmenu]') ||
+        $target.parents('[data-popmenu]').length
+      )) {
+      self.$('.popMenu').removeClass('popMenu-opened');
+    }
+  },
+
+  closeNav: function() {
+    self.$('.js-navProfileMenu').removeClass('popMenu-opened');    
   },
 
   navCloseClick: function(){

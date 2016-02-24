@@ -2,22 +2,15 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
-    // app = require('../App.js').getApp(),
     baseVw = require('./baseVw'),
     NotificationVw = require('../views/notificationVw');
 
 module.exports = baseVw.extend({
-  // className: 'popMenu-notificationsContent flex-border',
-
   events: {
   },
 
   initialize: function(options) {
     var options = options || {};
-
-    // if (!options.model) {
-    //   throw new Error('Please provide a model of the logged-in user.');
-    // }
 
     if (!options.collection) {
       throw new Error('Please provide a collection.');
@@ -29,20 +22,28 @@ module.exports = baseVw.extend({
 
     this.options = options;
     this.socketView = options.socketView;
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'update', this.render);
   },
-
-  // remove: function() {
-  //   this.close();
-
-  //   baseVw.prototype.remove.apply(this, arguments);
-  // },
 
   notificationClick: function(e) {
     this.trigger('notification-click', e);
   },
 
+  resetScroll: function() {
+    if (this.$jsNotifWrap) this.$jsNotifWrap[0].scrollTop = 0;
+  },
+
   render: function() {
+    var prevScroll = {},
+        isFetching = this.options.fetch && this.options.fetch.state() === 'pending';
+
+    if (!isFetching && this.$jsNotifWrap.length) {
+      if (this.$el.is(':visible')) {
+        prevScroll.height = this.$jsNotifWrap[0].scrollHeight;
+        prevScroll.top = this.$jsNotifWrap[0].scrollTop;
+      }
+    }
+
     this.notifications = this.notifications || [];
     this.notifications.forEach((vw) => {
       vw.remove();
@@ -50,8 +51,7 @@ module.exports = baseVw.extend({
     this.notifications = [];
 
     loadTemplate('./js/templates/notifications.html', (tmpl) => {
-      var isFetching = this.options.fetch && this.options.fetch.state() === 'pending',
-          $container = $('<div class="border0 custCol-border-secondary flexRow marginLeft1 js-notif-wrap" />');
+      var $container = $('<div class="border0 custCol-border-secondary flexRow marginLeft1" />');
 
       this.$el.html(
         tmpl({
@@ -59,6 +59,8 @@ module.exports = baseVw.extend({
           collection: this.collection.toJSON()
         })
       );
+
+      this.$jsNotifWrap = this.$('.js-notif-wrap');
 
       if (!isFetching) {
         this.collection.forEach((md) => {
@@ -72,9 +74,15 @@ module.exports = baseVw.extend({
 
           this.listenTo(vw, 'notification-click', this.notificationClick);
         });
+
       }
 
-      this.$('.js-notif-wrap').append($container);
+      this.$jsNotifWrap.append($container);
+
+      // restore scroll position
+      if (!isFetching) {
+        this.$jsNotifWrap[0].scrollTop = prevScroll.top || 0;
+      }      
     });
 
     return this;

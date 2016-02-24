@@ -3069,7 +3069,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 15px;
   padding: 0;
   width: 390px;
-  transition: top 300ms;
+  transition: top 200ms;
 }
 
 .popMenu-notificationsHeader {
@@ -3082,8 +3082,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 0 15px;
 }
 
-.popMenu-notifications-opened {
-/*  animation: menuSlide .12s normal linear;*/
+.popMenu-notifications.popMenu-opened {
   top: 50px;
 }
 
@@ -3146,16 +3145,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 230px;
   z-index: -1;
   overflow: hidden;
+  transition: top 200ms;
 }
 
-.popMenu-navbar-opened {
-  animation: menuSlide .12s normal linear;
+.popMenu-navBar.popMenu-opened {
   top: 50px;
-}
-
-@-webkit-keyframes menuSlide {
-    0%   {top: -238px;}
-    100% {top: 50px;}
 }
 
 .popMenu-navBar a {
