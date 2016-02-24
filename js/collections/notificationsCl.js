@@ -1,12 +1,15 @@
 var Backbone = require('backbone'),
-    notifications = require('../models/notificationsMd');
+    app = require('../App.js').getApp(),
+    NotificationMd = require('../models/notificationsMd');
 
 
 module.exports = Backbone.Collection.extend({
-
-  model: notifications,
+  url: function() {
+    return app.serverConfig.getServerBaseUrl() + '/get_notifications';
+  },
+  
+  model: NotificationMd,
 
   initialize: function(options) {
   }
-
 });

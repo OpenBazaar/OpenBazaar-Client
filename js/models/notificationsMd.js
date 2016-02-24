@@ -1,5 +1,4 @@
-var __ = require('underscore'),
-    Backbone = require('backbone');
+var Backbone = require('backbone');
 
 module.exports = window.Backbone.Model.extend({
   defaults: {

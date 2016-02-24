@@ -5,15 +5,17 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     Polyglot = require('node-polyglot'),
+    NotificationsCl = require('../collections/notificationsCl.js'), 
     languagesModel = require('../models/languagesMd'),
+    baseVw = require('./baseVw'),
     adminPanelView = require('../views/adminPanelVw'),
-    notificationsPanelView = require('../views/notificationsPanelVw'),
+    NotificationsVw = require('../views/notificationsVw'),
     remote = require('remote'),
     messageModal = require('../utils/messageModal.js');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   el: '#pageNav',
 
@@ -51,7 +53,6 @@ module.exports = Backbone.View.extend({
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
     this.model.set('moderator', this.userProfile.get('profile').moderator);
-    this.subViews = [];
     this.languages = new languagesModel();
 
 
@@ -78,7 +79,12 @@ module.exports = Backbone.View.extend({
       }
     }
 
-    this.render();
+    this.notificationsCl = new NotificationsCl();
+    this.notificationsFetch = this.notificationsCl.fetch();
+
+    this.listenTo(this.notificationsCl, 'sync', (cl, resp, options) => {
+      // this.setNotificationCount
+    });
   },
 
   sendInstallUpdate: function() {
@@ -121,22 +127,32 @@ module.exports = Backbone.View.extend({
     this.countryReady = false;
     this.currencyReady = false;
     this.languageReady = false;
+    
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.notificationsPanel = new notificationsPanelView({
-        parentEl: '#notificationsPanel',
-        socketView: self.socketView,
-        serverUrl: self.options.model.get('serverUrl')
-      });
-      self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
-      self.subViews.push(self.notificationsPanel);
+      
+      if (!self.notificationsVw) {
+        self.notificationsVw = new NotificationsVw({
+          socketView: self.socketView,
+          collection: self.notificationsCl,
+          fetch: self.notificationsFetch
+        });
+        // self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
+        // self.subViews.push(self.notificationsPanel);
+        self.registerChild(self.notificationsVw);
+      }
+
+      self.$('#notificationsPanel').html(self.notificationsVw.render().el);
 
       //add the admin panel
+      self.adminPanel && self.adminPanel.remove();
       self.adminPanel = new adminPanelView({model: self.model});
-      self.subViews.push(self.adminPanel);
+      self.registerChild(self.adminPanel);
+      // self.subViews.push(self.adminPanel);
+
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
@@ -165,6 +181,7 @@ module.exports = Backbone.View.extend({
         self.render();
       });
     });
+
     return this;
   },
 
@@ -252,10 +269,11 @@ module.exports = Backbone.View.extend({
   },
 
   setNotificationCount: function(count){
-    if(count > 99) {
+    if (count > 99) {
       count = "..";
     }
-    this.$el.find('.js-navNotifications .badge').attr('data-count', count);
+
+    this.$('.js-navNotifications .badge').attr('data-count', count);
   },
 
   navProfileClick: function(e){
@@ -390,17 +408,6 @@ module.exports = Backbone.View.extend({
   navAdminPanel: function(){
     this.$el.find('.js-adminModal').fadeIn(300);
     this.adminPanel.updatePage();
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.remove();
-      }
-    });
-    this.remove();
   },
 
   setSelectedTheme: function(e){
