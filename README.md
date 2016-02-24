@@ -8,7 +8,7 @@ You **must** be running the [OpenBazaar backend](https://github.com/OpenBazaar/O
 Dependencies
 -----------
 
-- [NodeJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/) `sudo apt-get install nodejs-legacy`
 - Ensure that `npm` is added to your `PATH`!
 
 Running
