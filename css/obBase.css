@@ -3069,6 +3069,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 15px;
   padding: 0;
   width: 390px;
+  transition: top 150ms;
 }
 
 .popMenu-notificationsHeader {
@@ -3082,7 +3083,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications-opened {
-  animation: menuSlide .12s normal linear;
+/*  animation: menuSlide .12s normal linear;*/
   top: 50px;
 }
 
