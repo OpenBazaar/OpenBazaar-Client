@@ -347,6 +347,7 @@ module.exports = Backbone.View.extend({
         moderatorStatus = this.model.get('page').profile.moderator;
 
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
+    this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
@@ -531,6 +532,8 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#generalForm"),
         cCode = this.$('#currency_code').val();
+
+    localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       "use strict";
