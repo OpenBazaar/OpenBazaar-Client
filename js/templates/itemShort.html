@@ -1,4 +1,4 @@
-<div class="gridItem clearfix custCol-border">
+<div class="gridItem clearfix custCol-border <% if(ob.cloak){ %> blurMore <% } %>">
   <div class="itemImg row10 custCol-secondary js-item" data-id="<%- ob.contract_hash %>"
     style="background-image: url(<%- ob.imageURL %>), url(imgs/defaultItem.png);">
   </div>
@@ -70,3 +70,8 @@
     </div>
   </div>
 </div>
+<% if(ob.cloak){ %>
+<div class="fullCentered btn btn-large custCol-secondary div-fade">
+  NSFW
+</div>
+<% } %>
