@@ -159,7 +159,8 @@ module.exports = baseVw.extend({
     'click .js-block': 'blockUserClick',
     'click .js-unblock': 'unblockUserClick',
     'click .js-showBlockedUser': 'showBlockedUser',
-    'change .js-categories': 'categoryChanged'
+    'change .js-categories': 'categoryChanged',
+    'click .js-showNSFWContent': 'showNSFWContent'
   },
 
   initialize: function (options) {
@@ -173,6 +174,7 @@ module.exports = baseVw.extend({
     userID: if userID is in the route, it is set here
     state: if state is in the route, it is set here
     itemHash: if itemHash is in the route, it is set here
+    directClick: if this page was loaded by clicking on an itemShort view, this is true
      */
     //if userID was passed by router, set it as pageID
     this.pageID = options.userID;
@@ -203,6 +205,9 @@ module.exports = baseVw.extend({
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
+    this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
+    this.showNSFWContent = false;
+    this.directClick = options.directClick;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -350,8 +355,12 @@ module.exports = baseVw.extend({
       self.setState(self.state, self.options.itemHash);
 
       //check if user is blocked
-      if (!self.options.ownPage && isBlocked) {
-        self.hideBlockedUser();
+      if(!self.options.ownPage && isBlocked) {
+        self.hideThisUser("blocked");
+      }
+
+      if(!self.options.ownPage && self.model.get('page').profile.nsfw && !self.showNSFW && !self.directClick){
+        self.hideThisUser("nsfw");
       }
 
       self.$el.find('#image-cropper').cropit({
@@ -567,7 +576,8 @@ module.exports = baseVw.extend({
       //timeout: 5000,
       success: function(model){
         if (self.isRemoved()) return;
-        self.renderItems(model.get('listings'));
+        self.cachedListings = model.get('listings'); //cache for rerendering
+        self.renderItems(self.cachedListings);
       },
       error: function(model, response){
         if (self.isRemoved()) return;
@@ -650,6 +660,10 @@ module.exports = baseVw.extend({
     var select = this.$el.find('.js-categories');
     model = model || [];
     __.each(model, function (arrayItem) {
+
+      if(arrayItem.nsfw && !self.showNSFWContent && !self.showNSFW){
+        arrayItem.cloak = true;
+      }
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.serverUrl = self.options.userModel.get('serverUrl');
       arrayItem.showAvatar = false;
@@ -657,6 +671,7 @@ module.exports = baseVw.extend({
       arrayItem.handle = self.model.get('page').profile.handle;
       arrayItem.userID = self.pageID;
       arrayItem.ownPage = self.options.ownPage;
+      arrayItem.onUserPage = true;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         var opt = document.createElement('option');
         opt.value = arrayItem.category;
@@ -1205,8 +1220,6 @@ module.exports = baseVw.extend({
 
   cancelCustomizePage: function() {
     "use strict";
-    //this.undoColorCustomization();
-    //this.setControls();
     //refresh the current page
     Backbone.history.loadUrl();
   },
@@ -1216,20 +1229,6 @@ module.exports = baseVw.extend({
     this.setState('item', newHash);
     this.subRender();
   },
-
-  /*
-  deleteOldDone: function(newHash) {
-    "use strict";
-    if(newHash) {
-      this.setState('item', newHash);
-      this.subRender();
-    } else {
-      this.tabClick($('.js-storeTab'), this.$el.find('.js-store'));
-      this.addTabToHistory('store');
-      this.setState('store');
-    }
-  },
-  */
 
   cancelClick: function(){
     "use strict";
@@ -1422,7 +1421,7 @@ module.exports = baseVw.extend({
   renderUserBlocked: function() {
     this.$('.js-unblock').removeClass('hide');
     this.$('.js-block').addClass('hide');
-    this.hideBlockedUser();
+    this.hideThisUser();
   },
 
   unblockUserClick: function(e) {
@@ -1435,9 +1434,22 @@ module.exports = baseVw.extend({
     this.$('.js-block').removeClass('hide');
   },  
 
-  hideBlockedUser: function(){
+  hideThisUser: function(reason){
     this.$('.js-blockedWarning').fadeIn(100);
     this.$('.js-mainContainer').addClass('blurMore');
+    if(reason == "blocked"){
+      this.$('.js-reasonBlocked').removeClass('hide');
+      this.$('.js-reasonNSFW').addClass('hide');
+    } else if(reason == 'nsfw'){
+      this.$('.js-reasonBlocked').addClass('hide');
+      this.$('.js-reasonNSFW').removeClass('hide');
+    }
+  },
+
+  showNSFWContent: function(){
+    this.showNSFWContent = true;
+    this.render(this.cachedListings);
+    this.showBlockedUser();
   },
 
   showBlockedUser: function(){

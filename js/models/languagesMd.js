@@ -262,6 +262,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",
         ShutDownServer: "Shut Down the Server",
         LoadingBitcoinPrices: "Loading Bitcoin Prices...",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list",
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW",
+        ShowBlockedUser: "Show this user's page except for NSFW listings",
+        ShowNSFWContent: "Show this user's page, and all NSFW listings",
         ServerChangeWarningHeadline: "Caution: Record Your Settings",
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
         moderatorSettings: {
@@ -773,6 +777,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -1280,6 +1288,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -1790,6 +1802,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -2302,6 +2318,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Paramètres du serveur",
         ShutDownServer: "Arrêter le serveur",
         LoadingBitcoinPrices: "Chargement des prix Bitcoin...",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Attention: Enregistrez vos paramètres",
         ServerChangeWarning: "Nous vous recommandons de faire une copie de vos paramètres précédents, indiqués ci-dessous. Votre nom d'utilisateur et mot de passe précédents ne seront plus disponibles au-delà de ce point.",
         moderatorSettings: {
@@ -2810,6 +2830,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -3316,6 +3340,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -3822,6 +3850,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -4332,6 +4364,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -4841,6 +4877,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -5354,6 +5394,10 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "简称解析器",
         ShutDownServer: "关闭服务器",
         LoadingBitcoinPrices: "正在载入比特币价格...",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: {
@@ -5864,6 +5908,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -6359,6 +6407,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -6868,6 +6920,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: {
@@ -7353,6 +7409,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Advarsel: Gem dine indstillinger",
         ServerChangeWarning: "Vi anbefaler, at du laver en kopi af dine tidligere indstillinger, der vises herunder. Dit tidligere brugernavn og adgangskode vil ikke længere være tilgængelig herefter.",
         moderatorSettings: {

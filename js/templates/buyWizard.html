@@ -268,69 +268,70 @@
           <div class="flexContainer flex-border customThemeScrollbar homeModal-settings homeModal-settings-noSearch scrollOverflow custCol-primary">
             <div class="flexRow">
               <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>
+                <% if(ob.vendor_offer.listing.moderators.length != 1 || ob.vendor_offer.listing.moderators[0].guid != ob.user.guid){ %>
                 <div class="flexRow custCol-border">
-                <div class="rowItem padding2015">
-                  <div class="floatLeft marginRight10">
-                    <input type="radio" name="radioPaymentType" class="marginTop4" id="buyWizardPaymentTypeModerated" />
-                  </div>
-                  <div class="width450 floatLeft">
-                    <label for="buyWizardPaymentTypeModerated" class="clickable">
-                      <div class="fontSize15">
-                        <%= polyglot.t('buyFlow.ModeratedPayment') %>
-                        <span class="allCaps textOpacity50 fontSize13"><%= polyglot.t('Recommended') %></span>
-                      </div>
-                      <div class="textOpacity75 fontSize14 marginTop4">
-                        <%= polyglot.t('buyFlow.ModeratedPaymentDescription') %>
-                      </div>
-                    </label>
+                  <div class="rowItem padding2015">
+                    <div class="floatLeft marginRight10">
+                      <input type="radio" name="radioPaymentType" class="marginTop4" id="buyWizardPaymentTypeModerated" />
+                    </div>
+                    <div class="width450 floatLeft">
+                      <label for="buyWizardPaymentTypeModerated" class="clickable">
+                        <div class="fontSize15">
+                          <%= polyglot.t('buyFlow.ModeratedPayment') %>
+                          <span class="allCaps textOpacity50 fontSize13"><%= polyglot.t('Recommended') %></span>
+                        </div>
+                        <div class="textOpacity75 fontSize14 marginTop4">
+                          <%= polyglot.t('buyFlow.ModeratedPaymentDescription') %>
+                        </div>
+                      </label>
 
 
-                    <div class="hide marginTop12 js-buyWizardModeratorList">
-                      <div class="table padding8 border1 custCol-border borderBottom0">
-                        <div class="floatLeft textOpacity75"><%= polyglot.t('Moderators') %></div>
-                        <div class="floatRight textOpacity75"><%= polyglot.t('buyFlow.DisputeFee') %> <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-left" data-tooltip="<%= polyglot.t('buyFlow.ModeratorFeeHelper') %>"></span></div>
-                      </div>
-                      <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
-                        <% if(moderator.guid != ob.user.guid){ %>
-                          <div class="flexRow">
-                            <div class="">
-                              <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1 clickable">
-                                <div class="table padding8 border1 custCol-border">
-                                  <div>
-                                    <div class="floatLeft marginTop8">
-                                      <input type="radio" class="js-buyWizardModeratorRadio floatLeft" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
-                                    </div>
-                                    <div class="thumbnail thumbnail-large-slim floatLeft marginLeft7"
-                                         <% if(moderator.avatar){ %>
-                                         style="width: 32px; height: 32px; background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
-                                         <% } else { %>
-                                         style="background-image: url(imgs/defaultUser.png); width: 32px; height: 32px;">
-                                         <% } %>
-                                    </div>
-                                    <div class="txt-unleaded width380 floatLeft">
-                                      <div class="clearFix">
-                                        <div class="noOverflow width260 floatLeft marginLeft7  marginTop2 fontSize13"
-                                             title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>">
-                                          <%- moderator.name %>
-                                          <div class="marginTop2 textOpacity75 noOverflow width260">
-                                          <% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>
+                      <div class="hide marginTop12 js-buyWizardModeratorList">
+                        <div class="table padding8 border1 custCol-border borderBottom0">
+                          <div class="floatLeft textOpacity75"><%= polyglot.t('Moderators') %></div>
+                          <div class="floatRight textOpacity75"><%= polyglot.t('buyFlow.DisputeFee') %> <span class="ion-help-circled fontSize12 custCol-text tooltip tooltip-left" data-tooltip="<%= polyglot.t('buyFlow.ModeratorFeeHelper') %>"></span></div>
+                        </div>
+                        <% _.each(ob.vendor_offer.listing.moderators, function(moderator, i) { %>
+                          <% if(moderator.guid != ob.user.guid){ %>
+                            <div class="flexRow">
+                              <div class="">
+                                <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1 clickable">
+                                  <div class="table padding8 border1 custCol-border">
+                                    <div>
+                                      <div class="floatLeft marginTop8">
+                                        <input type="radio" class="js-buyWizardModeratorRadio floatLeft" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
+                                      </div>
+                                      <div class="thumbnail thumbnail-large-slim floatLeft marginLeft7"
+                                           <% if(moderator.avatar){ %>
+                                           style="width: 32px; height: 32px; background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
+                                           <% } else { %>
+                                           style="background-image: url(imgs/defaultUser.png); width: 32px; height: 32px;">
+                                           <% } %>
+                                      </div>
+                                      <div class="txt-unleaded width380 floatLeft">
+                                        <div class="clearFix">
+                                          <div class="noOverflow width260 floatLeft marginLeft7  marginTop2 fontSize13"
+                                               title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>">
+                                            <%- moderator.name %>
+                                            <div class="marginTop2 textOpacity75 noOverflow width260">
+                                            <% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>
+                                            </div>
                                           </div>
+                                          <div class="floatRight textOpacity75"><%- moderator.fee %></div>
                                         </div>
-                                        <div class="floatRight textOpacity75"><%- moderator.fee %></div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </label>
+                                </label>
+                              </div>
                             </div>
-                          </div>
-                        <% } %>
-                      <% }); %>
+                          <% } %>
+                        <% }); %>
+                      </div>
                     </div>
-
                   </div>
                 </div>
-                </div>
+              <% } %>
               <% } %>
               <div class="flexRow custCol-border">
                 <div class="rowItem padding2015">
