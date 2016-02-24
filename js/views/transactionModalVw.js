@@ -43,6 +43,7 @@ module.exports = baseVw.extend({
     'click .js-transactionShowContract': 'showContract',
     'click .js-transactionHideContract': 'hideContract',
     'click .js-acceptResolution': 'acceptResolution',
+    'click .js-refundTransaction': 'refundOrder',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -469,6 +470,16 @@ module.exports = baseVw.extend({
       self.tabState = "discussion";
       self.getData();
     },'', resData);
+  },
+
+  refundOrder: function(){
+    var resData = {};
+    refData.order_id = this.orderID;
+    saveToAPI(null, null, this.serverUrl + "refund", function(data){
+      self.status = 7;
+      self.tabState = "summary";
+      self.getData();
+    },'', refData);
   },
 
   updateBuyerBTC: function(e) {

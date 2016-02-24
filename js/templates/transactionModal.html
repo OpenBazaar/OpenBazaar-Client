@@ -48,6 +48,9 @@
           <%= polyglot.t('transactions.MarkAsShipped') %>
         <% } %>         
       </a>
+      <a class="btn btn-txt custCol-secondary pull-right marginRight10 js-refundTransaction">
+        Refund Transaction <i class="ion-help-circled tooltip" data-tooltip="Cancel this order and release the locked funds back to the buyer."></i>
+      </a>
     </div>
     <% } else if(ob.status == 2 && ob.transactionType == "purchases"){ %>
     <div class="positionTop padding2015 width100">
