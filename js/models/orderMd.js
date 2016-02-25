@@ -296,7 +296,7 @@ module.exports = window.Backbone.Model.extend({
     //convert the currency
     var self = this;
     getBTPrice(self.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code, function(btAve) {
-      var newAttributes = {};;
+      var newAttributes = {};
 
       var convertTotal = function () {
         if (self.userCurrencyCode != "BTC") {
