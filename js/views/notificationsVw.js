@@ -23,6 +23,12 @@ module.exports = baseVw.extend({
     this.options = options;
     this.socketView = options.socketView;
     this.listenTo(this.collection, 'update', this.render);
+
+    if (this.options.fetch) {
+      this.options.fetch.done(() => {
+        this.render()
+      });
+    }
   },
 
   notificationClick: function(e) {
@@ -37,6 +43,8 @@ module.exports = baseVw.extend({
     var prevScroll = {},
         isFetching = this.options.fetch && this.options.fetch.state() === 'pending';
 
+    this.collection = new Backbone.Collection();
+    
     if (!isFetching && this.$jsNotifWrap.length) {
       if (this.$el.is(':visible')) {
         prevScroll.height = this.$jsNotifWrap[0].scrollHeight;
