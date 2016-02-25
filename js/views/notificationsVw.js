@@ -43,8 +43,6 @@ module.exports = baseVw.extend({
     var prevScroll = {},
         isFetching = this.options.fetch && this.options.fetch.state() === 'pending';
 
-    this.collection = new Backbone.Collection();
-    
     if (!isFetching && this.$jsNotifWrap.length) {
       if (this.$el.is(':visible')) {
         prevScroll.height = this.$jsNotifWrap[0].scrollHeight;

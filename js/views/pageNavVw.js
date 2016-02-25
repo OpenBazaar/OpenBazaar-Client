@@ -279,6 +279,7 @@ module.exports = baseVw.extend({
   },
 
   closeNotificationsMenu: function() {
+    app.hideOverlay();
     this.$notifMenu.removeClass('popMenu-opened');
   },
 
@@ -364,6 +365,7 @@ module.exports = baseVw.extend({
   },
 
   closeNav: function() {
+    app.hideOverlay();
     self.$('.js-navProfileMenu').removeClass('popMenu-opened');    
   },
 
