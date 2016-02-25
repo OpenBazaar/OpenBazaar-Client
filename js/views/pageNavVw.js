@@ -33,7 +33,7 @@ module.exports = baseVw.extend({
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
-    'click .js-navProfileMenu a': 'closeNavProfileMenu',
+    'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
     'click .js-closeStatus': 'closeStatusBar',
