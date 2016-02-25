@@ -3,6 +3,9 @@
   <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeModal">
     <h2 class="ion-android-close clickable"></h2>
   </div>
+  <% if(ob.invalidData){ %>
+  <div class="fullCentered"><h2><%= polyglot.t('errorMessages.serverError') %></h2></div>
+  <% } else { %>
   <div class="modal-hero js-transactionHero shadow-inner1-light"
     <% if(ob.vendor_offer.listing.item.image_hashes){ %>
     style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
@@ -935,8 +938,6 @@
       </form>
     </div>
   </div>
-
-
-
+<% } %>
 </div>
 <!-- modal container created by view-->
