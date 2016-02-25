@@ -530,8 +530,6 @@
           <%= polyglot.t('transactions.SendMessage') %>
         </a>
 
-        <% console.log(ob.status < 4  && ob.status != 0 && ob.displayModerator) %>
-        <% console.log(ob.status == 2 || ob.staus == 3 || ob.status == 1 && ob.transactionType == "purchases") %>
         <% if(ob.transactionType == "cases" && ob.status == 4){ %>
         <div>
           <input type="checkbox" class="fieldItem"
