@@ -537,8 +537,8 @@
             <%= polyglot.t('transactions.CloseDispute') %>
           </label>
         </div>
-        <% } else if(ob.status != 4  && ob.status != 0 && ob.displayModerator) { %>
-          <% if(ob.status == 1 && ob.transactionType == "purchases" || ob.status == 2 || ob.staus == 3){ %>
+        <% } else if(ob.status < 4  && ob.status != 0 && ob.displayModerator) { %>
+          <% if(ob.status == 2 || ob.staus == 3 || ob.status == 1 && ob.transactionType == "purchases"){ %>
           <div class="js-startDisputeFlag">
             <input type="checkbox" class="fieldItem"
                    id="transactionStartDisputeCheckbox" >
