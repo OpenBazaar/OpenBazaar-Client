@@ -478,15 +478,23 @@
           </div>
         </div>
         <div class="flexCol-4 custCol-border">
-          <% if(ob.status == 1 || ob.status == 2 || ob.status == 3){ %>
-          <% if(ob.transactionType == "purchases" && ob.displayModerator){ %>
-          <div class="rowItem padding2015">
-            <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
-              <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
-              <%= polyglot.t('transactions.DisputeTransaction') %>
-            </a>
-          </div>
-          <% } %>
+          <% if(ob.displayModerator){ %>
+            <% if(ob.status == 1 && ob.transactionType == "purchases"){ %>
+            <div class="rowItem padding2015">
+              <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
+                <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+                <%= polyglot.t('transactions.DisputeTransaction') %>
+              </a>
+            </div>
+            <% } %>
+            <% if(ob.status == 2 || ob.status == 3){ %>
+            <div class="rowItem padding2015">
+              <a class="btn btn-txt custCol-secondary pull-right js-startDispute">
+                <span class="ion-chatbubbles fontSize11 marginRight2 textOpacity1"></span>
+                <%= polyglot.t('transactions.DisputeTransaction') %>
+              </a>
+            </div>
+            <% } %>
           <% } %>
         </div>
       </div>

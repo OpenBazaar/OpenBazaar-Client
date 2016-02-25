@@ -536,7 +536,7 @@ module.exports = baseVw.extend({
   },
 
   closeModal: function(){
-    this.trigger("closed");
+    window.obEventBus.trigger("orderModalClosed");
     this.$el.parent().fadeOut(300);
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
   }
