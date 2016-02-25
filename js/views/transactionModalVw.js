@@ -105,7 +105,11 @@ module.exports = baseVw.extend({
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
         //TODO set 'payout' here if the user has a payout from a dispute
-        self.model.updateAttributes();
+        if(!response.invalidData){
+          self.model.updateAttributes();
+        } else {
+          messageModal.show(window.polyglot.t('errorMessages.serverError'));
+        }
       },
       error: function (jqXHR, status, errorThrown) {
         messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
