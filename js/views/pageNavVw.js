@@ -126,14 +126,8 @@ module.exports = baseVw.extend({
       }
 
       this.notificationsCl.add(
-        __.extend({}, notif, { read: this.isNotifMenuOpen() ? true : false })
+        __.extend({}, notif, { read: false })
       );
-
-      if (this.isNotifMenuOpen()) {
-        $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
-          'id': notif.id
-        });        
-      }
 
       app.playNotificationSound();
     }
@@ -310,9 +304,7 @@ module.exports = baseVw.extend({
 
   onNotifMenuClose: function() {
     this.notificationsVw.resetScroll();
-  },
 
-  onNotifMenuOpen: function() {
     this.notificationsCl.where({ read: false })
       .forEach((notif) => {
         notif.set('read', true);
@@ -321,8 +313,8 @@ module.exports = baseVw.extend({
         });
       });
 
-    this.setNotificationCount(0);
-  },  
+    this.setNotificationCount(0);    
+  },
 
   onPopMenuNavClick: function(e) {
     var $popMenu,

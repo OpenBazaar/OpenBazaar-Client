@@ -80,8 +80,8 @@ module.exports = baseVw.extend({
       this.$jsNotifWrap.append($container);
 
       // restore scroll position
-      if (!isFetching) {
-        this.$jsNotifWrap[0].scrollTop = prevScroll.top || 0;
+      if (!isFetching && prevScroll.top) {
+        this.$jsNotifWrap[0].scrollTop = prevScroll.top + (this.$jsNotifWrap[0].scrollHeight - prevScroll.height);
       }      
     });
 
