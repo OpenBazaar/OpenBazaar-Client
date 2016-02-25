@@ -59,7 +59,7 @@
         <%= polyglot.t('transactions.CompleteOrder') %>
       </a>
     </div>
-    <% } else if(ob.status == 5 && ob.payout){ %>
+    <% } else if(ob.status == 5 && ob.dispute_resolution.resolution){ %>
   <!-- needs code to tell if this user has a payout -->
     <div class="positionTop padding2015 width100">
       <a class="btn btn-txt custCol-secondary pull-right js-acceptResolution">
@@ -518,8 +518,8 @@
         <a class="btn btn-txt btn-wide custCol-primary pull-right js-sendDiscussionMessage">
           <%= polyglot.t('transactions.SendMessage') %>
         </a>
-        <% if(ob.transactionType == "cases"){ %>
-        <div class="">
+        <% if(ob.transactionType == "cases" && ob.status == 4){ %>
+        <div>
           <input type="checkbox" class="fieldItem"
                  id="transactionsCloseDisputeCheckbox" >
           <label for="transactionsCloseDisputeCheckbox" class="fontSize10 clickable">
@@ -643,7 +643,7 @@
                       maxlength="200"
                       class="fieldItem-textarea custCol-text"
                       id="inputComments"
-                      placeholder="<%= polyglot.t('transactions.CommentsPlaceholder') %>"
+                      placeholder="<%= polyglot.t('transactions.CommentsPlaceHolder') %>"
                       required></textarea>
           </div>
         </div>
@@ -742,6 +742,45 @@
           </div>
           <div class="ctrlGroup padding10 pull-right">
             <a class="btn btn-large custCol-secondary js-closeOrderForm"><%= polyglot.t('Close') %></a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="js-main js-refund hide">
+    <div class="flexRow custCol-border borderBottom">
+      <div class="flexRow rowItem padding10">
+        <div class="pad10left txt-unleaded">
+          <div class="marginTop12 marginBottom4 fontSize13 noOverflow">
+            <strong><%= polyglot.t('transactions.RefundOrder') %></strong>
+          </div>
+        </div>
+      </div>
+      <form id="transactionRefundForm" class="flexRow scrollOverflowY custCol-border borderTop customThemeScrollbar" style="height: 269px">
+        <div class="flexRow custCol-border">
+          <div class="flexCol-4 borderRight custCol-border">
+            <div class="fieldItem">
+              <label for="inputReason"><%= polyglot.t('transactions.RefundReason') %></label>
+              <div class="note"><%= polyglot.t('maxLength200') %></div>
+            </div>
+          </div>
+          <div class="flexCol-8">
+              <textarea name="reason"
+                        rows="6"
+                        maxlength="200"
+                        class="fieldItem-textarea custCol-text"
+                        id="inputReason"
+                        placeholder="<%= polyglot.t('transactions.RefundReasonPlaceholder') %>"
+                        required></textarea>
+          </div>
+        </div>
+        <div class="width100 custCol-border borderTop">
+          <div class="ctrlGroup padding10 pull-right">
+            <a class="btn btn-large custCol-secondary js-refundOrder"><%= polyglot.t('Submit') %></a>
+          </div>
+          <div class="ctrlGroup padding10 pull-right">
+            <a class="btn btn-large custCol-secondary js-closeRefund"><%= polyglot.t('Close') %></a>
           </div>
         </div>
       </form>

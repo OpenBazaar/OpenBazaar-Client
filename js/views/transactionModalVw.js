@@ -43,6 +43,8 @@ module.exports = baseVw.extend({
     'click .js-transactionShowContract': 'showContract',
     'click .js-transactionHideContract': 'hideContract',
     'click .js-acceptResolution': 'acceptResolution',
+    //'click .js-refundTransaction': 'showRefundOrder',
+    //'click .js-refundOrder': 'refundOrder',
     'click .js-refundTransaction': 'refundOrder',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
@@ -87,6 +89,7 @@ module.exports = baseVw.extend({
       transactionType: this.transactionType,
       bitcoinValidationRegex: this.bitcoinValidationRegex,
       avatarURL: this.avatarURL,
+      avatar_hash: this.userProfile.get('avatar_hash'),
       orderID: this.orderID
     });
     this.model.urlRoot = options.serverUrl + "get_order";
@@ -218,6 +221,10 @@ module.exports = baseVw.extend({
     this.setState("confirm");
   },
 
+  showRefundOrder: function(){
+    this.setState("refund");
+  },
+
   showCompleteForm: function(){
     this.setState("complete");
   },
@@ -299,9 +306,6 @@ module.exports = baseVw.extend({
     var newAttributes = {},
         wrapper = this.$('.js-discussionWrapper');
 
-    newAttributes.avatarURL = message.get('outgoing')
-        ? this.avatarURL
-        : this.serverUrl + "get_image?hash=" + message.get('avatar_hash') + "&guid=" + message.get('guid');
     newAttributes.moderatorGuid = this.model.get('displayModerator').guid;
     newAttributes.transactionType = this.transactionType;
     newAttributes.vendorGuid = this.model.get('vendor_offer').listing.id.guid;
@@ -372,10 +376,12 @@ module.exports = baseVw.extend({
 
   sendDiscussionMessage: function(messages){
     //messages should be an array of message objects with guid and rKey [{"guid": "", "rKey": ""}]
-    var messageInput = this.$('#transactionDiscussionSendText');
-    var messageText = messageInput.val();
-    var self = this;
-    var socketMessageId = Math.random().toString(36).slice(2);
+    var messageInput = this.$('#transactionDiscussionSendText'),
+        messageText = messageInput.val(),
+        self = this,
+        socketMessageId = Math.random().toString(36).slice(2),
+        avatar_hash = this.model.get('avatar_hash');
+
     __.each(messages, function(msg){
       if (messageText) {
         var chatMessage = {
@@ -388,7 +394,8 @@ module.exports = baseVw.extend({
             "message": messageText,
             "subject": self.orderID,
             "message_type": "ORDER",
-            "public_key": msg.rKey
+            "public_key": msg.rKey,
+            "avatar_hash": avatar_hash
           }
         };
         self.socketView.sendMessage(JSON.stringify(chatMessage));
@@ -453,8 +460,8 @@ module.exports = baseVw.extend({
 
     if(discussionData.resolution != ""){
       saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
-        self.status = 4;
-        self.tabState = "discussion";
+        self.status = 5;
+        self.tabState = "summary";
         self.getData();
       }, '', discussionData);
     } else {
@@ -467,13 +474,14 @@ module.exports = baseVw.extend({
     resData.order_id = this.orderID;
     saveToAPI(null, null, this.serverUrl + "release_funds", function(data){
       self.status = 6;
-      self.tabState = "discussion";
+      self.tabState = "summary";
       self.getData();
     },'', resData);
   },
 
   refundOrder: function(){
-    var resData = {};
+    //var targetForm = this.$('#transactionRefundForm'),
+      var refData = {};
     refData.order_id = this.orderID;
     saveToAPI(null, null, this.serverUrl + "refund", function(data){
       self.status = 7;

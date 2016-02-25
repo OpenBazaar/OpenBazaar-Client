@@ -306,6 +306,9 @@ module.exports = Backbone.Model.extend({
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
           ConfirmOrder: "Confirm Order",
+          RefundOrder: "Refund Order",
+          RefundReason: "Reason for refund",
+          RefundReasonPlaceholder: "Explain why you are sending a refund",
           ReceivingAddress: "Receiving Address",
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
           Comments: "Comments",
@@ -350,7 +353,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
           SendMessage: "Send",
           CloseDispute: "Close Dispute",
-          TotalInTransaction: "Transaction:"
+          TotalInTransaction: "Transaction:",
+          StartDispute: "START DISPUTE",
+          CloseDispute: "END DISPUTE"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
