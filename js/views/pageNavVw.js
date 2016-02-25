@@ -99,15 +99,15 @@ module.exports = baseVw.extend({
     var data = JSON.parse(response.data),
         username,
         avatar,
-        n;
+        notif;
 
     if (data.hasOwnProperty('notification')) {
-      n = data.notification;
-      username = n.handle ? n.handle : n.guid.substring(0,10) + '...';
-      avatar = n.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
-        n.image_hash + '&guid=' + n.guid : 'imgs/defaultUser.png';
+      notif = data.notification;
+      username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
+      avatar = notif.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
+        notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
 
-      switch(n.type) {
+      switch(notif.type) {
         case "follow":
           new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
             icon: avatar
@@ -126,12 +126,12 @@ module.exports = baseVw.extend({
       }
 
       this.notificationsCl.add(
-        __.extend({}, n, { read: this.isNotifMenuOpen() ? true : false })
+        __.extend({}, notif, { read: this.isNotifMenuOpen() ? true : false })
       );
 
       if (this.isNotifMenuOpen()) {
         $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
-          'id': n.id
+          'id': notif.id
         });        
       }
 

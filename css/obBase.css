@@ -3062,7 +3062,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications {
-  top: -385px;
+  top: 50px;
   right: 45px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -3072,7 +3072,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 15px;
   padding: 0;
   width: 390px;
-  transition: top 200ms;
+  transform: translateY(-100%);
+  transition: transform 200ms;
 }
 
 .popMenu-notificationsHeader {
@@ -3086,7 +3087,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications.popMenu-opened {
-  top: 50px;
+  transform: translateY(0);
 }
 
 .notification .rowItem {
@@ -3136,7 +3137,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-navBar {
-  top: -238px;
+  top: 50px;
   right: 10px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -3148,11 +3149,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 230px;
   z-index: -1;
   overflow: hidden;
-  transition: top 200ms;
+  transform: translateY(-100%);
+  transition: transform 200ms;
 }
 
 .popMenu-navBar.popMenu-opened {
-  top: 50px;
+  transform: translateY(0);
 }
 
 .popMenu-navBar a {
