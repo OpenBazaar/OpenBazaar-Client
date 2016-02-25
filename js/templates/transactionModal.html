@@ -529,13 +529,8 @@
         <a class="btn btn-txt btn-wide custCol-primary pull-right js-sendDiscussionMessage">
           <%= polyglot.t('transactions.SendMessage') %>
         </a>
-        <% console.log(ob.status < 4) %>
-        <% console.log(ob.status != 0) %>
-        <% console.log(ob.displayModerator) %>
 
-        <% console.log(ob.status == 2) %>
-        <% console.log(ob.status == 3) %>
-
+        <% console.log(ob.status < 4  && ob.status != 0 && ob.displayModerator) %>
         <% console.log(ob.status == 2 || ob.staus == 3 || ob.status == 1 && ob.transactionType == "purchases") %>
         <% if(ob.transactionType == "cases" && ob.status == 4){ %>
         <div>
