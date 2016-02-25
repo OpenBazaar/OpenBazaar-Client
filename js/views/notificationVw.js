@@ -1,40 +1,28 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    moment = require('moment'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw');
 
-module.exports = Backbone.View.extend({
-
-  className: "notification flexRow",
+module.exports = baseVw.extend({
+  className: 'notification flexRow',
 
   events: {
-    'click .js-actionLink': 'actionClick',
-    'click .js-username': 'actionClick'
+    'click .js-notification': 'notificationClick'
   },
 
-  initialize: function(){
-    this.render();
+  initialize: function(options) {
+    if (!options.model) {
+      throw new Error('Please provide a model of the logged-in user.');
+    }
+
+    this.listenTo(this.model, 'change', this.render);
   },
 
-  render: function(){
-    var self = this;
-    loadTemplate('./js/templates/notification.html', function(loadedTemplate) {
-      var timestamp = self.model.get('timestamp');
-      var formatted_timestamp = moment(new Date(timestamp*1000)).format('MMM D, h:mm A');
-      self.model.set('formattedTimestamp', formatted_timestamp);
-      self.$el.html(loadedTemplate(self.model.toJSON()));
-    });
-    return this;
-  },
-
-  actionClick: function(){
-    var targ = $('.js-navNotificationsMenu');
-    targ.addClass('hide');
-    $('#overlay').addClass('hide');
-    switch(this.model.get('type')){
+  notificationClick: function(e) {
+    switch(this.model.get('type')) {
       case "follow":
-        Backbone.history.navigate('#userPage/'+this.model.get('guid')+'/store', {trigger: true});
+        Backbone.history.navigate('#userPage/'+ this.model.get('guid') + '/store', {trigger: true});
         break;
       case "new order":
         Backbone.history.navigate('#transactions', {trigger: true});
@@ -49,21 +37,17 @@ module.exports = Backbone.View.extend({
         Backbone.history.navigate('#transactions', {trigger: true});
         break;
     }
+
+    this.trigger('notification-click', { view: this });
   },
 
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
+  render: function() {
+    loadTemplate('./js/templates/notification.html', (tmpl) => {
+      this.$el.html(
+        tmpl(this.model.toJSON())
+      );
     });
-    this.unbind();
-    this.remove();
-    delete this.$el;
-    delete this.el;
-  }
 
+    return this;
+  }
 });
