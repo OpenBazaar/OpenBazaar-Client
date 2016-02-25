@@ -333,9 +333,11 @@ module.exports = baseVw.extend({
     $popMenu.toggleClass('popMenu-opened');
 
     if ($popMenu.hasClass('popMenu-opened')) {
+      app.showOverlay();
       openHandler = $popMenu.data('onopen');
       openHandler && this[openHandler] && this[openHandler].call(this);
     } else {
+      app.hideOverlay();
       closeHandler = $popMenu.data('onclose');
       closeHandler && this[closeHandler] && this[closeHandler].call(this);
     }
@@ -352,6 +354,7 @@ module.exports = baseVw.extend({
         $target.is('[data-popmenu]') ||
         $target.parents('[data-popmenu]').length
       )) {
+      app.hideOverlay();
       $popMenu = self.$('.popMenu').removeClass('popMenu-opened');
       $popMenu.each((index, el) => {
         closeHandler = $(el).data('onclose');
