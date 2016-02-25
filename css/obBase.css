@@ -3062,7 +3062,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-notifications {
-  top: -238px;
+  top: 50px;
   right: 45px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -3072,6 +3072,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 15px;
   padding: 0;
   width: 390px;
+  transform: translateY(-100%);
+  transition: transform 200ms;
 }
 
 .popMenu-notificationsHeader {
@@ -3084,9 +3086,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 0 15px;
 }
 
-.popMenu-notifications-opened {
-  animation: menuSlide .12s normal linear;
-  top: 50px;
+.popMenu-notifications.popMenu-opened {
+  transform: translateY(0);
 }
 
 .notification .rowItem {
@@ -3136,7 +3137,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .popMenu-navBar {
-  top: -238px;
+  top: 50px;
   right: 10px;
   background-color: #252525;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
@@ -3148,16 +3149,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 230px;
   z-index: -1;
   overflow: hidden;
+  transform: translateY(-100%);
+  transition: transform 200ms;
 }
 
-.popMenu-navbar-opened {
-  animation: menuSlide .12s normal linear;
-  top: 50px;
-}
-
-@-webkit-keyframes menuSlide {
-    0%   {top: -238px;}
-    100% {top: 50px;}
+.popMenu-navBar.popMenu-opened {
+  transform: translateY(0);
 }
 
 .popMenu-navBar a {
@@ -3209,10 +3206,22 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding-top: 10px;
 }
 
-#notificationsPanel {
-  height: 390px;
+#notificationsPanel .popMenu-notificationsContent {
   overflow-y: scroll;
   overflow-x: hidden;
+  max-height: 390px;
+}
+
+#notificationsPanel .notification {
+  transition: background-color 300ms;
+}
+
+#notificationsPanel .notification:hover {
+  background-color: #333;
+}
+
+#notificationsPanel .notification:last-child {
+  border-bottom: 0;
 }
 
 .capitalize {

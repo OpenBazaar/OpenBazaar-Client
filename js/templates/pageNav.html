@@ -8,7 +8,7 @@
   </a>
 </div>
 
-<div class="popMenu hide popMenu-navBar js-navProfileMenu">
+<div class="popMenu popMenu-navBar js-navProfileMenu">
   <a href="#userPage">
     <span class="ion-document-text fontSize12 marginRight2 textOpacity1"></span>
   <%= polyglot.t('nav.myPage') %>
@@ -63,10 +63,8 @@
   <a class="js-navAdminPanel">Admin Panel (temporary)</a>
 </div>
 
-<div class="popMenu popMenu-notifications hide js-navNotificationsMenu">
-  <div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
-  <div id="noNotifications" class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
-  <div id="notificationsPanel" class="popMenu-notificationsContent flex-border"></div>
+<div class="popMenu popMenu-notifications js-navNotificationsMenu" data-onclose="onNotifMenuClose">
+  <div id="notificationsPanel"></div>
 </div>
 
 <div class="bar navBar pageNavContainer custCol-secondary">
@@ -101,13 +99,13 @@
     <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15 tooltip" href="#home" data-tooltip="<%= polyglot.t('Discover') %>"></a>
   </div>
   <div class="ctrlGroup">
-    <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications tooltip" data-tooltip="<%= polyglot.t('Notifications') %>">
+    <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications tooltip" data-tooltip="<%= polyglot.t('Notifications') %>" data-popmenu=".popMenu-notifications">
       <div class="badge"></div>
     </div>
   </div>
 
   <div class="ctrlGroup nav-profile">
-    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('Menu') %>"
+    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('Menu') %>" data-popmenu=".popMenu-navBar"
     <% if(ob.avatar_hash != "") { %>
     style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>

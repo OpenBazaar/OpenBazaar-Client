@@ -1,0 +1,13 @@
+<div class="popMenu-notificationsHeader height40"><%= polyglot.t('nav.notifications') %></div>
+
+<div class="popMenu-notificationsContent flex-border js-notif-wrap">
+    <% if (ob.isFetching) { %>
+    <div class="padding10 width100 alignCenter spinnerWrapper">
+      <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+    </div>
+    <% } else { %>
+        <% if (!ob.collection.length) { %>
+        <div class="hide paddingLeft15"><%= polyglot.t('NoNotifications') %></div>
+        <% } %>
+    <% } %>
+</div>

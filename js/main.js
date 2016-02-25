@@ -165,7 +165,12 @@ var loadProfile = function(landingRoute) {
               $loadingModal.addClass('hide');
              
               newSocketView = new socketView({model: serverConfigMd});
-              newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
+              
+              newPageNavView = new pageNavView({
+                model: user,
+                socketView: newSocketView,
+                userProfile: userProfile
+              }).render();
               
               app.chatVw = new ChatVw({
                 model: user,
