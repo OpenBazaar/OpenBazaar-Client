@@ -61,6 +61,9 @@ module.exports = baseVw.extend({
     this.casesWrapper = $(wrapper);
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
+    this.listenTo(window.obEventBus, "orderModalClosed", function(){
+      this.getData();
+    });
 
     $('.js-loadingModal').removeClass("hide");
     getBTPrice(this.cCode, function(btAve){
@@ -268,8 +271,5 @@ module.exports = baseVw.extend({
       socketView: this.socketView
     });
     this.registerChild(orderModalView);
-    this.listenTo(orderModalView, "closed", function(){
-      this.getData();
-    });
   }
 });
