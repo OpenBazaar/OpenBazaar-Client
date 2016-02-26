@@ -7,7 +7,7 @@
     style="background-image: <% if(ob.headerURL) { %>url(<%- ob.headerURL %>),<% } %>url(imgs/defaultBanner.png);"></div>
     <div class="homeModal-accordion accordion js-storeWizardAccordion">
       <div class="accordion-window">
-        <div class="accordion-child">
+        <div class="accordion-child accordion-active">
           <div class="bar barTxt h6 paddingLeft15 custCol-secondary  custCol-text">
             <!-- <span class="ion-ios-cart fontSize12 marginRight5 textOpacity1"></span> -->
             <%= polyglot.t('CreateStore') %>
@@ -94,7 +94,7 @@
             </a>
           </div>
         </div>
-        <div class="accordion-child  custCol-text">
+        <div class="accordion-child accordion-inactive custCol-text">
           <div class="bar barTxt h6 custCol-secondary">
             <%= polyglot.t('StoreModeratorsOptional') %>
             <span class="textOpacity75 fontSize14 floatRight">2 <%= polyglot.t('of') %> 2</span>

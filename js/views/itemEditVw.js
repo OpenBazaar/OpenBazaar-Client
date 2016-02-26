@@ -140,10 +140,9 @@ module.exports = baseVw.extend({
       self.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
         preserveCase: true,
-        submitKeys: [188, 9, 13, 32],
         saveOnBlur: true
       });
-    },1);
+    },0);
 
     //focus main input
     this.$el.find('input[name=title]').focus();
@@ -383,6 +382,14 @@ module.exports = baseVw.extend({
         cCode = this.model.get('userCurrencyCode'),
         submitForm = this.$el.find('#contractForm')[0],
         keywordsArray = this.inputKeyword.getTagValues();
+
+    keywordsArray = keywordsArray.map(function(tag){
+      var re = /#/g;
+      var newTag = tag.replace(re, '');
+      return newTag;
+    });
+
+    console.log(keywordsArray)
 
     /*
     deleteThisItem = function(newHash){
