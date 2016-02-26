@@ -42,7 +42,8 @@ module.exports = baseVw.extend({
     'blur textarea': 'validateInput',
     'click .js-navInstallUpdate': 'sendInstallUpdate',
     'click .js-navDismisslUpdate': 'dismissUpdate',
-    'click [data-popmenu]': 'onPopMenuNavClick'
+    'click [data-popmenu]': 'onPopMenuNavClick',
+    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro'
   },
 
   initialize: function(options){
@@ -54,7 +55,7 @@ module.exports = baseVw.extend({
     this.model.set('vendor', this.userProfile.get('profile').vendor);
     this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.languages = new languagesModel();
-
+    this.showDiscIntro = options.showDiscIntro;
 
     this.currentWindow = remote.getCurrentWindow();
 
@@ -83,7 +84,35 @@ module.exports = baseVw.extend({
       this.setNotificationCount(cl.getUnreadCount());
     });
 
+    this.listenTo(this.userProfile, 'change:avatar_hash', function(){
+      this.model.set('vendor', this.userProfile.get('profile').vendor);
+      this.render();
+    });
+
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
+      this.handleSocketMessage(response);
+    });
+
+    this.listenTo(window.obEventBus, "onboarding-complete", function(){
+      this.showDiscoverIntro();
+    });
+
+    //when language is changed, re-render
+    this.listenTo(this.model, 'change:language', function(){
+      this.render();
+    });
+
     $(document).on('click', this.onDocumentClick.bind(this));
+  },
+
+  showDiscoverIntro: function(){
+    this.$('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+    this.showDiscIntro = true;
+  },
+
+  hideDiscoverIntro: function(){
+    this.$('.js-OnboardingIntroDiscoverHolder').addClass('hide');
+    this.showDiscIntro = false;
   },
 
   sendInstallUpdate: function() {
@@ -192,25 +221,9 @@ module.exports = baseVw.extend({
         self.addressInput.val(text);
         self.closeStatusBar();
       });
-
-      self.listenTo(self.userProfile, 'change:avatar_hash', function(){
-        self.model.set('vendor', self.userProfile.get('profile').vendor);
-        self.render();
-      });
-
-      self.listenTo(window.obEventBus, "socketMessageReceived", function(response){
-        self.handleSocketMessage(response);
-      });
-
-      if(self.showDiscoverCallout) {
-        // display discover callout
-        self.$el.find('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+      if(self.showDiscIntro){
+        self.showDiscoverIntro();
       }
-
-      //when language is changed, re-render
-      self.listenTo(self.model, 'change:language', function(){
-        self.render();
-      });
     });
 
     return this;
@@ -320,6 +333,9 @@ module.exports = baseVw.extend({
     var $popMenu,
         openHandler,
         closeHandler;
+
+    e.preventDefault();
+    e.stopPropagation();
 
     $popMenu = self.$(
       $(e.target).data('popmenu')
