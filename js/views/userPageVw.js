@@ -1451,9 +1451,7 @@ module.exports = baseVw.extend({
   clickShowNSFWContent: function(){
     this.showNSFWContent = true;
     this.showBlockedUser();
-    console.log(this.state);
     if(this.state == "item"){
-      console.log("rerender item")
       this.renderItem(this.currentItemHash);
     }
     this.renderItems(this.cachedListings);
