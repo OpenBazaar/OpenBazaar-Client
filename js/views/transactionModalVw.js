@@ -27,6 +27,7 @@ module.exports = baseVw.extend({
     'click .js-fundsTab': 'clickFundsTab',
     'click .js-discussionTab': 'clickDiscussionTab',
     'click .js-showConfirmForm': 'showConfirmForm',
+    'click .js-hideConfirmForm': 'hideConfirmForm',
     'click .js-showCompleteForm': 'showCompleteForm',
     'click .js-confirmOrder': 'confirmOrder',
     'click .js-completeOrder': 'completeOrder',
@@ -164,13 +165,13 @@ module.exports = baseVw.extend({
 
   showContract: function(){
     console.log("show contract")
-    this.$('.js-transactionsContractHolder').fadeIn(300);
+    this.$('.js-transactionsContractHolder').addClass('bottom0');
     this.$('.js-transactionShowContract').addClass('hide');
     this.$('.js-transactionHideContract').removeClass('hide');
   },
 
   hideContract: function(){
-    this.$('.js-transactionsContractHolder').fadeOut(300);
+    this.$('.js-transactionsContractHolder').removeClass('bottom0');
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-transactionHideContract').addClass('hide');
   },
@@ -213,8 +214,15 @@ module.exports = baseVw.extend({
     this.setState("discussion");
   },
 
+  hideConfirmForm: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-transactionsConfirmOrderHolder').removeClass('bottom0');
+  },
+  
   showConfirmForm: function(){
-    this.setState("confirm");
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-transactionsConfirmOrderHolder').addClass('bottom0');
+    this.$("#transactionConfirmForm input:text").first().focus();
   },
 
   showCompleteForm: function(){
@@ -397,6 +405,8 @@ module.exports = baseVw.extend({
     messageInput.val('');
     messageInput.closest('.flexRow').removeClass('formChecked');
     this.getDiscussion();
+    messageInput.focus();
+
   },
 
   showCloseDispute: function(e){

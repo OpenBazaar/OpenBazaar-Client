@@ -3,13 +3,13 @@
 <div class="pad10">START DISPUTE</div>
 <hr>
 <% } %>
-<div class="chatConversationMessageLine">
+<div class="chatConversationMessageLine <% if(ob.message_type == "ORDER") { %>padding2015 borderBottom1 custCol-border<% } %>">
     <div class="flexRow">
         <div class="chatConversationMessageTimestamp paddingLeft2">
             <div><%= ob.moment(new Date(ob.timestamp * 1000)).format('MMM D, h:mm A') %></div>
         </div>
     </div>
-    <div class="flexRow noFlexWrap">
+    <div class="flexRow noFlexWrap marginTop4">
         <% if (!ob.outgoing) { %>
             <a class="thumbnail custcol-border marginRight2"
                 style="background-image: <% if (ob.avatar_hash) {%>url(<%= ob.serverUrl %>/get_image?hash=<%= ob.avatar_hash %>&guid=<%= ob.guid %>),<% } %> url(imgs/defaultUser.png); height: 30px; width: 30px"
@@ -17,24 +17,24 @@
             </a>
             <% if(ob.guid == ob.moderatorGuid || ob.sender && ob.sender == ob.moderatorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
+                <div class="marginLeft4">(<%= polyglot.t('transactions.Moderator') %>):</div>
             </div>
             <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == ob.vendorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner">(<%= polyglot.t('transactions.Seller') %>)</div>
+                <div class="marginLeft4"><%= ob.sender %> (<%= polyglot.t('transactions.Seller') %>):</div>
             </div>
             <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == ob.buyerGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner">(<%= polyglot.t('transactions.Buyer') %>)</div>
+                <div class="marginLeft4"><%= ob.buyerGuid %> (<%= polyglot.t('transactions.Buyer') %>):</div>
             </div>
             <% } %>
         <% } %>
         
         <div class="chatConversationMessageBody flexExpand">
             <% if (ob.outgoing) { %>
-            <div class="inner pull-right"><%= ob.sanitizedMsg %></div>
+            <div class="inner"><%= ob.sanitizedMsg %></div>
             <% } else { %>
-            <div class="inner pull-left"><%= ob.sanitizedMsg %></div>
+            <div class="inner"><%= ob.sanitizedMsg %></div>
             <% } %>
         </div>
         
