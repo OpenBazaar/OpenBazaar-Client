@@ -383,7 +383,7 @@ module.exports = baseModal.extend({
             var res = event.target.result,
                 bannerFormData = new FormData();
 
-            bannerFormData.append('image', event.target.result);
+            bannerFormData.append('image', res.replace(/^data:image\/(png|jpeg);base64,/, ''));
 
             bannerUpload =  $.ajax({
               type: 'POST',
@@ -466,7 +466,7 @@ module.exports = baseModal.extend({
 
       if ($themeInputs.length) {
         $themeInputs.eq(
-          Math.round(Math.random() * $themeInputs.length)
+          Math.round(Math.random() * ($themeInputs.length - 1))
         ).prop('checked', true);
       }
 
