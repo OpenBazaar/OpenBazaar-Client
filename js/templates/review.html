@@ -15,13 +15,13 @@
       <div class="marginLeft15 pull-right">
         <div class="floatLeft marginRight15" style="width: 200px">
           <div class="fontSize14">
-            <div>Quality: (<%= ob.quality %>/5)</div>
+            <div><%= polyglot.t('transactions.Quality') %>: (<%= ob.quality %>/5)</div>
             <div>
               <% print(ob.starsTmpl({ rating: ob.quality })) %>              
             </div>
           </div>
           <div class="fontSize14 marginTop9">
-            <div>Matched description: (<%= ob.description %>/5)</div>
+            <div><%= polyglot.t('transactions.MatchedDescription') %>: (<%= ob.description %>/5)</div>
             <div>
               <% print(ob.starsTmpl({ rating: ob.description })) %>
             </div>            
@@ -29,13 +29,13 @@
         </div>
         <div class="floatLeft" style="width: 200px">
           <div class="fontSize14">
-            <div>Delivery speed: (<%= ob.delivery_time %>/5)</div>
+            <div><%= polyglot.t('transactions.DeliverySpeed') %>: (<%= ob.delivery_time %>/5)</div>
             <div>
               <% print(ob.starsTmpl({ rating: ob.delivery_time })) %>
             </div>            
           </div>
           <div class="fontSize14 marginTop9">
-            <div>Customer service: (<%= ob.customer_service %>/5)</div>
+            <div><%= polyglot.t('transactions.CustomerService') %>: (<%= ob.customer_service %>/5)</div>
             <div>
               <% print(ob.starsTmpl({ rating: ob.customer_service })) %>
             </div>            

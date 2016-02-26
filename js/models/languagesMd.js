@@ -341,8 +341,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review",
           OverallRating: "Overall Rating",
           Quality: "Quality",
-          Description: "Description",
-          DeliveryTime: "Delivery Time",
+          MatchedDescription: "Matched Description",
+          DeliverySpeed: "Delivery Speed",
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
@@ -859,8 +859,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -1372,8 +1372,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -1889,8 +1889,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -2408,8 +2408,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Avis de transaction",
           OverallRating: "Note générale",
           Quality: "Qualité",
-          Description: "Description",
-          DeliveryTime: "Temps de livraison",
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
@@ -2923,8 +2923,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -3436,8 +3436,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -3949,8 +3949,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -4466,8 +4466,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -4982,8 +4982,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -5502,8 +5502,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "描述",
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -6019,8 +6019,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -6521,8 +6521,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
           Quality: "Quality", // not translated
-          Description: "Description", // not translated
-          DeliveryTime: "Delivery Time", // not translated
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
@@ -7037,8 +7037,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Opinia o transakcji",
           OverallRating: "Średnia ocen",
           Quality: "Jakość",
-          Description: "Opis",
-          DeliveryTime: "Czas dostawy",
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Obsługa klienta",
           Review: "Oceń",
           ReviewPlaceHolder: "Twoja opinia o tej transakcji",
@@ -7529,8 +7529,8 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Handelsbedømmelse",
           OverallRating: "Overordnet bedømmelse",
           Quality: "Kvalitet",
-          Description: "Beskrivelse",
-          DeliveryTime: "Leveringstid",
+          MatchedDescription: "Matched Description", // not translated
+          DeliverySpeed: "Delivery Speed", // not translated
           CustomerService: "Kundeservice",
           Review: "Bedøm",
           ReviewPlaceHolder: "Din bedømmelse af denne handel",
