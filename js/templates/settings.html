@@ -4,7 +4,7 @@
     <div class="title-section custCol-primary shadow-inner1-ultra-light">
       <div class="thumbnail pull-left"
         <% if(ob.page.profile.avatar_hash) { %>
-        style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+        style="background-image: url(<%= ob.user.serverUrl %>get_image?hash=<%= ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
         <% } else { %>
         style="background-image: url(imgs/defaultUser.png);">
         <% } %>
@@ -158,7 +158,7 @@
                        id="refund_address"
                        placeholder="<%= polyglot.t('Address') %>"
                        class="fieldItem"
-                       pattern="<%- ob.user.bitcoinValidationRegex %>"
+                       pattern="<%= ob.user.bitcoinValidationRegex %>"
                        value="<%= ob.user.refund_address %>">
               </div>
             </div>
@@ -365,7 +365,7 @@
                        data-type="facebook"
                        placeholder="<%= polyglot.t('Facebook') %>"
                        class="fieldItem"
-                       value="<%- ob.page.profile.social_accounts.facebook.username %>">
+                       value="<%= ob.page.profile.social_accounts.facebook.username %>">
               </div>
             </div>
 
@@ -383,7 +383,7 @@
                        data-type="twitter"
                        placeholder="<%= polyglot.t('Twitter') %>"
                        class="fieldItem"
-                       value="<%- ob.page.profile.social_accounts.twitter.username %>">
+                       value="<%= ob.page.profile.social_accounts.twitter.username %>">
               </div>
             </div>
 
@@ -401,7 +401,7 @@
                        data-type="instagram"
                        placeholder="<%= polyglot.t('Instagram') %>"
                        class="fieldItem"
-                       value="<%- ob.page.profile.social_accounts.instagram.username %>">
+                       value="<%= ob.page.profile.social_accounts.instagram.username %>">
               </div>
             </div>
 
@@ -419,7 +419,7 @@
                        data-type="snapchat"
                        placeholder="<%= polyglot.t('Snapchat') %>"
                        class="fieldItem"
-                       value="<%- ob.page.profile.social_accounts.snapchat.username %>">
+                       value="<%= ob.page.profile.social_accounts.snapchat.username %>">
               </div>
             </div>
 
@@ -820,18 +820,18 @@
                 <div class="flexCol-4 pad10 row15">
                   <div class="padding10 color-secondary custCol-secondary borderRadius3 fontSize15 clearfix js-address">
                     <div class="textOpacity1">
-                      <div><%- address.name %></div>
-                      <div><%- address.street %></div>
-                      <div><%- address.city %>, <%- address.state %> <%- address.postal_code %></div>
-                      <div><%- address.displayCountry %></div>
+                      <div><%= address.name %></div>
+                      <div><%= address.street %></div>
+                      <div><%= address.city %>, <%= address.state %> <%= address.postal_code %></div>
+                      <div><%= address.displayCountry %></div>
                     </div>
 
                     <div class="btn marginTop6 custCol-primary clickable">
                       <input type="checkbox"
                              class="hide js-settingsAddress"
-                             id="settingsAddress<%- i %>"
-                             value="<%- i %>">
-                      <label for="settingsAddress<%- i %>">
+                             id="settingsAddress<%= i %>"
+                             value="<%= i %>">
+                      <label for="settingsAddress<%= i %>">
                         <span class="fontSize12 clickable togLabelOff js-settingsAddressDelete"><%= polyglot.t('Delete') %></span>
                         <span class="fontSize12 clickable togLabelOn js-settingsAddressUnDelete"><%= polyglot.t('DontDelete') %></span>
                       </label>
@@ -1028,7 +1028,7 @@
                        name="moderation_fee"
                        class="fieldItem custCol-text width70px floatLeft"
                        id="moderatorFeeInput"
-                       value="<%- ob.page.profile.moderation_fee.toFixed(2) %>" required/><div class="floatLeft marginLeft5 lineHeight51 fontWeight500 textOpacity75">%</div>
+                       value="<%= ob.page.profile.moderation_fee.toFixed(2) %>" required/><div class="floatLeft marginLeft5 lineHeight51 fontWeight500 textOpacity75">%</div>
               </div>
             </div>
             <a class="btn btn-large js-saveModerator custCol-secondary pull-right marginRight15 marginTop15 marginBottom50 btn-secondary">
@@ -1095,7 +1095,7 @@
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
-                  <%- ob.user.network_connection %>  <span class="txt-fade"><%= polyglot.t('ReadOnly') %></span>
+                  <%= ob.user.network_connection %>  <span class="txt-fade"><%= polyglot.t('ReadOnly') %></span>
                 </div>
               </div>
 

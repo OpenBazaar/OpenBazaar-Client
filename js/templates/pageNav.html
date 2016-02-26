@@ -13,7 +13,7 @@
     <span class="ion-document-text fontSize12 marginRight2 textOpacity1"></span>
   <%= polyglot.t('nav.myPage') %>
   </a>
-  <a href="#userPage/<%- ob.guid %>/customize">
+  <a href="#userPage/<%= ob.guid %>/customize">
     <span class="ion-paintbucket fontSize10  textOpacity1"></span>
     <%= polyglot.t('nav.customizePage') %>
   </a>
@@ -23,7 +23,7 @@
       <%= polyglot.t('nav.createListing') %>
     </a>
   <% }else{ %>
-    <a href="#userPage/<%- ob.guid %>/createStore">
+    <a href="#userPage/<%= ob.guid %>/createStore">
       <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('CreateStore') %>
     </a>
@@ -107,7 +107,7 @@
   <div class="ctrlGroup nav-profile">
     <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('Menu') %>" data-popmenu=".popMenu-navBar"
     <% if(ob.avatar_hash != "") { %>
-    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>), url(imgs/defaultUser.png);"
+    style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>
     style="background-image: url(imgs/defaultUser.png)"
     <% } %>></div>
