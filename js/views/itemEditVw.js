@@ -383,6 +383,14 @@ module.exports = baseVw.extend({
         submitForm = this.$el.find('#contractForm')[0],
         keywordsArray = this.inputKeyword.getTagValues();
 
+    keywordsArray = keywordsArray.map(function(tag){
+      var re = /#/g;
+      var newTag = tag.replace(re, '');
+      return newTag;
+    });
+
+    console.log(keywordsArray)
+
     /*
     deleteThisItem = function(newHash){
       $.ajax({
