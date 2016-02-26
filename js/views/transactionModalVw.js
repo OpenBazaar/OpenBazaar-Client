@@ -152,8 +152,17 @@ module.exports = baseVw.extend({
       this.getData();
     } else if(data.message && data.message.subject == this.orderID){
       var messageModel = new Backbone.Model(data.message);
-      //this.addDiscussionMessage(messageModel);
       this.discussionCol.add(messageModel);
+      if(data.message.message_type = "DISPUTE_OPEN"){
+        this.status = 4;
+        this.tabState = "discussion";
+        this.getData();
+      }
+      if(data.message.message_type = "DISPUTE_CLOSE"){
+        this.status = 5;
+        this.tabState = "discussion";
+        this.getData();
+      }
     }
   },
 

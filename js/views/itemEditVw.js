@@ -389,24 +389,6 @@ module.exports = baseVw.extend({
       return newTag;
     });
 
-    console.log(keywordsArray)
-
-    /*
-    deleteThisItem = function(newHash){
-      $.ajax({
-          type: "DELETE",
-          url: self.model.get('serverUrl') + "contracts?id="+self.model.get('id'),
-          success: function() {
-              self.trigger('deleteOldDone', newHash);
-          },
-          error: function(jqXHR, status, errorThrown){
-              console.log(jqXHR);
-              console.log(status);
-              console.log(errorThrown);
-          }
-      });
-    };
-    */
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
@@ -414,17 +396,6 @@ module.exports = baseVw.extend({
     this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
     this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
     this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
-    /*
-    if(cCode === "BTC"){
-      this.$el.find('#inputPrice').val(this.$el.find('.js-priceBtc').val());
-      this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalBtc').val());
-      this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalBtc').val());
-    }else{
-      this.$el.find('#inputPrice').val(this.$el.find('.js-priceLocal').val());
-      this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
-      this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
-    }
-    */
 
     formData = new FormData(submitForm);
 

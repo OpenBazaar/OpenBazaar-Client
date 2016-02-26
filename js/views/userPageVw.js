@@ -160,7 +160,7 @@ module.exports = baseVw.extend({
     'click .js-unblock': 'unblockUserClick',
     'click .js-showBlockedUser': 'showBlockedUser',
     'change .js-categories': 'categoryChanged',
-    'click .js-showNSFWContent': 'showNSFWContent'
+    'click .js-showNSFWContent': 'clickShowNSFWContent'
   },
 
   initialize: function (options) {
@@ -1446,10 +1446,10 @@ module.exports = baseVw.extend({
     }
   },
 
-  showNSFWContent: function(){
+  clickShowNSFWContent: function(){
     this.showNSFWContent = true;
-    this.render(this.cachedListings);
     this.showBlockedUser();
+    this.renderItems(this.cachedListings);
   },
 
   showBlockedUser: function(){
