@@ -71,6 +71,16 @@ App.prototype.playNotificationSound = function() {
   this._notificationSound.play();
 },
 
+App.prototype.showOverlay = function() {
+  this._$overlay = this._$overlay || $('#overlay');
+  this._$overlay.removeClass('hide');
+},
+
+App.prototype.hideOverlay = function() {
+  this._$overlay = this._$overlay || $('#overlay');
+  this._$overlay.addClass('hide');
+},
+
 App.getApp = function() {
   if (!_app) {
     throw new Error('The app instance was never instantiated and is therefore not available.');

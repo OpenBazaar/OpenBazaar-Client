@@ -1,7 +1,7 @@
 <div class="mainContainer custCol-background js-mainContainer">
   <div class="banner-large js-userPageBanner custCol-secondary"
         <% if(ob.page.profile.header_hash){ %>
-        style="background-image: url(<%- ob.page.headerURL %>), url(imgs/defaultBanner.png);">
+        style="background-image: url(<%= ob.page.headerURL %>), url(imgs/defaultBanner.png);">
         <% } else { %>
         style="background-image: url(imgs/defaultBanner.png);">
         <% } %>
@@ -38,7 +38,7 @@
     <div class="user-page-header-slim borderBottom2 custCol-border-secondary user-page-header-slim-tint">
       <div class="user-page-header-slim-bg"
         <% if(ob.page.profile.header_hash){ %>
-        style="background-image: url(<%- ob.page.headerURL %>), url(imgs/defaultBanner.png); background-position: center; ">
+        style="background-image: url(<%= ob.page.headerURL %>), url(imgs/defaultBanner.png); background-position: center; ">
         <% } else { %>
         style="background-image: url(imgs/defaultBanner.png);">
         <% } %>
@@ -46,7 +46,7 @@
       <div class="rowItem positionAbsolute bottom0 width600" style="padding: 0 20px">
         <div class="thumbnail user-page-header-slim-avatar  pull-left js-userPageAvatar"
              <% if(ob.page.profile.avatar_hash) { %>
-             style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+             style="background-image: url(<%= ob.user.serverUrl %>get_image?hash=<%= ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
              <% } else { %>
              style="background-image: url(imgs/defaultUser.png);">
              <% } %>
@@ -54,7 +54,7 @@
       </div>
       <div class="pull-left">
         <div class="vCentered marginLeft82">
-          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce textShadow"><%- ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize11"><%= polyglot.t('FollowsYou') %></span></h1>
+          <h1 class="page-userNameLarge floatLeft fancy-heading fontSize20 colorWhiteForce textShadow"><%= ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize11"><%= polyglot.t('FollowsYou') %></span></h1>
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@
         <div>
           <div class="thumbnail thumbnail-large js-userPageAvatar"
             <% if(ob.page.profile.avatar_hash) { %>
-            style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
+            style="background-image: url(<%= ob.user.serverUrl %>get_image?hash=<%= ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
             <% } else { %>
             style="background-image: url(imgs/defaultUser.png);">
             <% } %>
@@ -81,10 +81,10 @@
             <%}%>
           </div>
           <div class="pad15 push-down5 noOverflow">
-            <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%- ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize12"><%= polyglot.t('FollowsYou') %></span></span>
+            <span class="h1 page-userNameLarge fancy-heading colorWhiteForce"><%= ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize12"><%= polyglot.t('FollowsYou') %></span></span>
             <br />
             <span class="textSize16px colorWhiteForce">
-            <% if(ob.page.profile.handle) { %><%- ob.page.profile.handle %><% }else{ %><%- ob.page.profile.guid %><% } %>
+            <% if(ob.page.profile.handle) { %><%= ob.page.profile.handle %><% }else{ %><%= ob.page.profile.guid %><% } %>
             </span>
           </div>
         </div>
@@ -256,7 +256,7 @@
               <div class="rowItem positionWrapper">
                 <div class="textOpacity75"><%= polyglot.t('Guid') %></div>
                 <div class="textSize12px">
-                  <%- ob.page.profile.guid %>
+                  <%= ob.page.profile.guid %>
                 </div>
               </div>
             </div>
@@ -273,7 +273,7 @@
                     </a>
                   <%}%>
                   <% if(ob.page.profile.website) { %>
-                  <a href="<%- ob.page.profile.website %>" class="js-externalLink"><%- ob.page.profile.website %></a> <span class="ion-android-open fontSize10"></span>
+                  <a href="<%= ob.page.profile.website %>" class="js-externalLink"><%= ob.page.profile.website %></a> <span class="ion-android-open fontSize10"></span>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>
@@ -293,7 +293,7 @@
                     </a>
                   <%}%>
                   <% if(ob.page.profile.email) { %>
-                  <a href="mailto:<%- ob.page.profile.email %>"><%- ob.page.profile.email %></a> <span class="ion-android-open fontSize10"></span>
+                  <a href="mailto:<%= ob.page.profile.email %>"><%= ob.page.profile.email %></a> <span class="ion-android-open fontSize10"></span>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>
@@ -313,7 +313,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
-                  <%- ob.page.profile.social_accounts.facebook.username %>
+                  <%= ob.page.profile.social_accounts.facebook.username %>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>
@@ -333,7 +333,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
-                  <%- ob.page.profile.social_accounts.twitter.username %>
+                  <%= ob.page.profile.social_accounts.twitter.username %>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>
@@ -353,7 +353,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
-                  <%- ob.page.profile.social_accounts.instagram.username %>
+                  <%= ob.page.profile.social_accounts.instagram.username %>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>
@@ -373,7 +373,7 @@
                 <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
-                  <%- ob.page.profile.social_accounts.snapchat.username %>
+                  <%= ob.page.profile.social_accounts.snapchat.username %>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>

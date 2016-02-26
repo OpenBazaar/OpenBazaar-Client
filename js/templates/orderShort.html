@@ -4,15 +4,15 @@
       <div class="width100">
         <div class="clearFix">
           <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize15px js-searchOrderID js-orderShort">
-            <span class="noOverflow letterSpacing0"><%- ob.order_date %> — </span>
-            <span class="clickable hoverUnderline ">Order #<%- ob.order_id %></span> 
+            <span class="noOverflow letterSpacing0"><%= ob.order_date %> — </span>
+            <span class="clickable hoverUnderline ">Order #<%= ob.order_id %></span> 
           </div>
         </div>
         <div class="flexCol-8 clearFix marginTop2">
           <div class="thumbnail thumbnail-large floatLeft marginRight5 marginTop6">
             <div class="thumbnail thumbnail-large box-borderBright custCol-border-secondary borderRadius2 textOpacity75 js-userShort border0"
               <% if(ob.thumbnail_hash) { %>
-              style="background-image: url(<%- ob.imageUrl %>), url(imgs/defaultItem.png);">
+              style="background-image: url(<%= ob.imageUrl %>), url(imgs/defaultItem.png);">
               <% } else { %>
               style="background-image: url(imgs/defaultItem.png);">
               <% } %>
@@ -21,14 +21,14 @@
           <table class="floatLeft custCol-text fontSize14  width450 fontWeight500">
             <tr>
               <td class="textOpacity50 padding2"><%= polyglot.t('Listing') %></td>
-              <td class="js-searchTitle textOpacity75 padding2"><%- ob.title %></td>
+              <td class="js-searchTitle textOpacity75 padding2"><%= ob.title %></td>
             </tr>
             <tr>
               <td class="textOpacity50 padding2"><%= polyglot.t('transactions.OrderTotal') %> </td>
               <td class="padding2 textOpacity75"> 
-                <%- ob.btc_total.toFixed(4) %> BTC
+                <%= ob.btc_total.toFixed(4) %> BTC
                 <% if(ob.cCode != "BTC"){ %>
-                  (<%- ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
+                  (<%= ob.displayPrice %><!-- Would like to get this working at some point <span class="tooltip ion-information-circled fontSize12" data-tooltip="You received *VAL* in Bitcoin at the time of the sale."></span> -->)
                 <% } %>
               </td>
             </tr>
@@ -46,11 +46,11 @@
               </td>
               <td class="padding2">
                 <% if(ob.vendor){ %>
-                  <a href="#userPage/<%- ob.vendor %>" class="textOpacity75">               
-                      <%- ob.vendor %>
+                  <a href="#userPage/<%= ob.vendor %>" class="textOpacity75">               
+                      <%= ob.vendor %>
                   </a>
                 <% } else if(ob.buyer) { %>
-                  <a href="#userPage/<%- ob.buyer %>" class="textOpacity75"><%- ob.buyer %></a>
+                  <a href="#userPage/<%= ob.buyer %>" class="textOpacity75"><%= ob.buyer %></a>
                 <% } %>                
               </td>
             </tr>

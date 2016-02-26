@@ -4,7 +4,7 @@
     <div class="title-section custCol-primary shadow-inner1-ultra-light">
       <div class="thumbnail pull-left"
       <% if(ob.page.avatar_hash) { %>
-      style="background-image: url(<%- ob.user.serverUrl %>get_image?hash=<%- ob.page.avatar_hash %>), url(imgs/defaultUser.png);">
+      style="background-image: url(<%= ob.user.serverUrl %>get_image?hash=<%= ob.page.avatar_hash %>), url(imgs/defaultUser.png);">
       <% } else { %>
       style="background-image: url(imgs/defaultUser.png);">
       <% } %>
