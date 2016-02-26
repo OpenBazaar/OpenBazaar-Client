@@ -247,7 +247,9 @@ module.exports = baseModal.extend({
         server = this.model.get('serverUrl'),
         profileFormData = new FormData(),
         settingsFormData = new FormData(),
-        uploadImageFormData = new FormData();
+        avatarFormData = new FormData(),
+        avatarUpload = {},
+        bannerUpload;
 
     if(this.$('textarea#aboutInput').val() != ""){
         self.model.set('short_description', this.$('textarea#aboutInput').val());
@@ -292,17 +294,13 @@ module.exports = baseModal.extend({
       quality: 0.75,
       originalSize: false
     });
+
     if(imageURI) {
       imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-      uploadImageFormData.append('image', imageURI);
+      avatarFormData.append('image', imageURI);
     }
 
-
-    var submit = function(img_hash) {
-      if(img_hash) {
-        profileFormData.append("avatar",img_hash);
-      }
-
+    var submit = function() {
       $.ajax({
         type: "POST",
         url: server + "settings",
@@ -323,8 +321,6 @@ module.exports = baseModal.extend({
                 var profile = self.options.userProfile;
 
                 if(data.success == true) {
-                  //self.currentWindow.reload();
-                  // Backbone.history.loadUrl(Backbone.history.fragment);
                   profile.fetch()
                     .done(function() {
                       self.trigger('onboarding-complete', profile.get('profile').guid);
@@ -348,21 +344,19 @@ module.exports = baseModal.extend({
 
     };
 
-    //Lets upload the image first, if there is one
-    //to get the hash
-
+    //Lets upload the images first to get the hashes
     if(imageURI) {
-      $.ajax({
+      avatarUpload = $.ajax({
         type: "POST",
         url: server + "upload_image",
         contentType: false,
         processData: false,
-        data: uploadImageFormData,
+        data: avatarFormData,
         dataType: "JSON",
         success: function(data) {
           var img_hash = data.image_hashes[0];
           if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
-            submit(img_hash);
+            profileFormData.append('avatar', img_hash);
           }
         },
         error: function(jqXHR, status, errorThrown){
@@ -371,10 +365,70 @@ module.exports = baseModal.extend({
           console.log(errorThrown);
         }
       });
-
-    } else { //Otherwise lets just submit right away
-      submit();
     }
+
+    var bannerUpload = function() {
+      var deferred = $.Deferred(),
+          xhr = new XMLHttpRequest();
+
+      if (header) {
+        xhr.open('GET', header, true); 
+        xhr.responseType = 'blob';
+        
+        xhr.onload = function (e) {
+          var reader = new FileReader(),
+              file = this.response;
+          
+          reader.onload = function(event) {
+            var res = event.target.result,
+                bannerFormData = new FormData();
+
+            bannerFormData.append('image', event.target.result);
+
+            bannerUpload =  $.ajax({
+              type: 'POST',
+              url: server + 'upload_image',
+              contentType: false,
+              processData: false,
+              data: bannerFormData,
+              dataType: 'JSON',
+              success: function(data) {
+                var img_hash = data.image_hashes[0];
+
+                if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
+                  profileFormData.append('header', img_hash);
+                }
+
+                deferred.resolve();
+              },
+              error: function(jqXHR, status, errorThrown){
+                console.log(jqXHR);
+                console.log(status);
+                console.log(errorThrown);
+                deferred.reject();
+              }
+            });
+          }
+          
+          reader.readAsDataURL(file)
+        };
+
+        xhr.onerror = function (e) {
+          console.log(e);
+          deferred.reject();
+        }
+
+        xhr.send();
+      } else {
+        deferred.reject();
+      }
+
+      return deferred.promise();
+    };
+
+    $.when(bannerUpload(), avatarUpload).always((banner, avatar) => {
+      submit();
+    });
 
     this.close();
     this.showDiscoverCallout = true;
