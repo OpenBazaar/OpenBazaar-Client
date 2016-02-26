@@ -5106,6 +5106,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(5px);
 }
 
+#ov1 .nsfw {
+  -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
+}
+
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
