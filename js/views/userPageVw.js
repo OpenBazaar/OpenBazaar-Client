@@ -205,7 +205,7 @@ module.exports = baseVw.extend({
     //flag to hold state when customizing
     this.customizing = false;
     this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
-    this.showNSFWContent = false;
+    this.showNSFWContent = this.showNSFW;
     this.currentItemHash = options.itemHash;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
