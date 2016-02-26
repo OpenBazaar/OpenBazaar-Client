@@ -47,6 +47,7 @@ module.exports = baseVw.extend({
   },
 
   initialize: function(options){
+
     var self = this;
     this.options = options || {};
     /* recieves socketView and userProfile from main.js */
@@ -65,6 +66,10 @@ module.exports = baseVw.extend({
     this.listenTo(window.obEventBus, "updateUserModel", function(response){
       this.model.fetch();
     });
+
+    ipcRenderer.on('goto', function(event, arg) {
+      self.addressBarProcess(arg);
+    })
 
     // pre-select lauguage.
     var localLanguage = window.navigator.language;
