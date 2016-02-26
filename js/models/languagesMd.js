@@ -241,8 +241,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To",
         ModeratedBy: "Moderated by",
         Submit: "Submit",
-        maxLength20: "maximum length 20 characters",
-        maxLength80: "maximum length 80 characters",
+        maxLength20: "max length 20 char",
+        maxLength80: "max length 80 char",
         maxLength200: "max length 200 char",
         StoreModeratorsOptional: "Store Moderators (Optional)",
         Searchformoderators: "Search for moderators",
@@ -756,8 +756,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -1265,8 +1265,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -1777,8 +1777,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -2801,8 +2801,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -3309,8 +3309,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -3817,8 +3817,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -4329,8 +4329,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -4840,8 +4840,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
@@ -5867,8 +5867,8 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
