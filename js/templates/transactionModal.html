@@ -52,7 +52,7 @@
     </div>
     <% } else if(ob.status == 1 && ob.transactionType == "sales"){ %>
     <div class="positionTop padding10 width100 textOpacity1">
-      <a class="btn btn-txt custCol-secondary textOpacity1 js-showConfirmForm">
+      <a class="btn btn-txt custCol-secondary pull-left borderRight textOpacity1 js-showConfirmForm custCol-border" style="border-top-right-radius: 0; border-bottom-right-radius: 0">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
         <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
           <%= polyglot.t('transactions.ConfirmOrder') %>
@@ -60,13 +60,14 @@
           <%= polyglot.t('transactions.MarkAsShipped') %>
         <% } %>         
       </a>
-      <a class="btn btn-txt custCol-secondary pull-right marginRight10 js-refundTransaction">
-        Refund Transaction <i class="ion-help-circled tooltip" data-tooltip="Cancel this order and release the locked funds back to the buyer."></i>
+      <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransaction tooltip" data-tooltip="Cancel order and release the funds back to the buyer" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+        <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+        Refund Order
       </a>
     </div>
     <% } else if(ob.status == 2 && ob.transactionType == "purchases"){ %>
     <div class="positionTop padding10 width100">
-      <a class="btn btn-txt custCol-secondary pull-right js-showCompleteForm">
+      <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('transactions.CompleteOrder') %>
       </a>
@@ -91,8 +92,8 @@
                 <div class="fontSize15 floatLeft noOverflow lineHeight32">
                   <span><%= polyglot.t('transactions.ConfirmOrder') %></span>
                 </div>
-                <div class="floatRight  textOpacity75">
-                    <a class="btn btn-txt custCol-secondary js-hideConfirmForm">Hide Form</a>
+                <div class="floatRight  textOpacity1">
+                    <a class="btn btn-txt custCol-secondary js-hideConfirmForm"><%= polyglot.t('Hide') %></a>
                 </div>         
               </div>
             </div>
@@ -247,7 +248,7 @@
       </div>
     </div>
     <% if(ob.status != 0){ %>
-    <div class="positionTop floatRight padding15" style="right: 0">
+    <div class="positionTop floatRight padding10" style="right: 0">
       <a class="btn btn-txt custCol-secondary js-transactionShowContract textOpacity1">Contract Details</a>
       <a class="btn btn-txt custCol-primary js-transactionHideContract textOpacity1 hide">Hide Details</a>
     </div>
@@ -738,7 +739,7 @@
                   placeholder="<%= polyglot.t('transactions.sendMessagePlaceholder') %>"></textarea>
       </form>
       <div class="pad10" style="width:140px">
-        <a class="btn btn-txt btn-wide custCol-primary pull-right js-sendDiscussionMessage height36 allCaps">
+        <a class="btn btn-txt btn-wide custCol-primary pull-left js-sendDiscussionMessage height36 allCaps">
           <%= polyglot.t('transactions.SendMessage') %>
         </a>
 

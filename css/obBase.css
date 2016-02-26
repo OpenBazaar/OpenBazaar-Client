@@ -1155,7 +1155,7 @@ h5 {
   /* use for instructions and incidental text */
   /*font-style: italic;*/
   font-size: 9px;
-  opacity: 0.75;
+  opacity: 0.50;
 }
 
 [class *= "ion-"]:before {
@@ -3855,8 +3855,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 
-#ov1 .confirmOrderHolder,
-#ov1 .contractHolder {
+#transactionConfirmForm label {
+  font-size: 12px;
+}
+
+#transactionConfirmForm input::-webkit-input-placeholder,
+#transactionConfirmForm textarea::-webkit-input-placeholder {
+  font-size: 12px;
+}
+
+.confirmOrderHolder,
+.contractHolder {
   transition: bottom .15s ease;
   bottom: -250px;
   position: absolute;
