@@ -28,7 +28,7 @@ module.exports = Backbone.Router.extend({
     "home/:state(/:searchText)": "home",
     "myPage": "userPage",
     "userPage": "userPage",
-    "userPage/:userID(/:state)(/:itemHash)(/:directClick)": "userPage",
+    "userPage/:userID(/:state)(/:itemHash)": "userPage",
     "sellItem": "sellItem",
     "transactions": "transactions",
     "transactions/:state": "transactions",
@@ -91,7 +91,7 @@ module.exports = Backbone.Router.extend({
   },
 
 
-  userPage: function(userID, state, itemHash,directClick){
+  userPage: function(userID, state, itemHash){
     "use strict";
     this.cleanup();
     this.newView(new userPageView({
@@ -100,8 +100,7 @@ module.exports = Backbone.Router.extend({
       userID: userID,
       state: state,
       itemHash: itemHash,
-      socketView: this.socketView,
-      directClick: directClick
+      socketView: this.socketView
     }),"userPage");
   },
 
