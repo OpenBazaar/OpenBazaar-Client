@@ -377,7 +377,6 @@ module.exports = baseModal.extend({
     }
 
     this.close();
-    this.showDiscoverCallout = true;
 
     new Notification(window.polyglot.t('WelcomeToYourPage'));
 
@@ -395,7 +394,8 @@ module.exports = baseModal.extend({
     var self = this;
 
     loadTemplate('./js/templates/onboardingModal.html', function(t) {
-      var timeZoneOffset;
+      var timeZoneOffset,
+          $themeInputs;
 
       self.$el.html(t());
 
@@ -405,6 +405,15 @@ module.exports = baseModal.extend({
       var timeZoneOffset = new Date().getTimezoneOffset();
       timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
       self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
+
+      // select a random theme
+      $themeInputs = self.$('[name=theme-selection]');
+
+      if ($themeInputs.length) {
+        $themeInputs.eq(
+          Math.round(Math.random() * $themeInputs.length)
+        ).prop('checked', true);
+      }
 
       self.languageList && self.languageList.remove();
       self.countryList && self.countryList.remove();

@@ -42,7 +42,8 @@ module.exports = Backbone.Model.extend({
     //remove this when in production, this is for testNet addresses
     bitcoinValidationRegex: "^[2mn][a-km-zA-HJ-NP-Z1-9]{25,34}$",
     moderators: [],
-    moderator_guids: [] //list of moderator guids, created in the parse function
+    moderator_guids: [], //list of moderator guids, created in the parse function
+    nsfw: '' //show nsfw work content, yes or no
   },
 
   parse: function(response) {

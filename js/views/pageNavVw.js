@@ -4,16 +4,19 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
+    app = require('../App.js').getApp(),
     Polyglot = require('node-polyglot'),
+    NotificationsCl = require('../collections/notificationsCl.js'), 
     languagesModel = require('../models/languagesMd'),
+    baseVw = require('./baseVw'),
     adminPanelView = require('../views/adminPanelVw'),
-    notificationsPanelView = require('../views/notificationsPanelVw'),
+    NotificationsVw = require('../views/notificationsVw'),
     remote = require('remote'),
     messageModal = require('../utils/messageModal.js');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   el: '#pageNav',
 
@@ -28,8 +31,6 @@ module.exports = Backbone.View.extend({
     'click .js-showSupportModal': 'showSupportModal',
     'click .js-hideSupportModal': 'hideSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
-    'click .js-navNotifications': 'navNotificationsClick',
-    'click .js-navProfile': 'navProfileClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
@@ -40,7 +41,9 @@ module.exports = Backbone.View.extend({
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'click .js-navInstallUpdate': 'sendInstallUpdate',
-    'click .js-navDismisslUpdate': 'dismissUpdate'
+    'click .js-navDismisslUpdate': 'dismissUpdate',
+    'click [data-popmenu]': 'onPopMenuNavClick',
+    'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro'
   },
 
   initialize: function(options){
@@ -51,14 +54,10 @@ module.exports = Backbone.View.extend({
     this.userProfile = options.userProfile;
     this.model.set('vendor', this.userProfile.get('profile').vendor);
     this.model.set('moderator', this.userProfile.get('profile').moderator);
-    this.subViews = [];
     this.languages = new languagesModel();
-
+    this.showDiscIntro = options.showDiscIntro;
 
     this.currentWindow = remote.getCurrentWindow();
-
-    this.socketNotificationID = Math.random().toString(36).slice(2);
-    this.socketView.getNotifications(this.socketNotificationID);
 
     this.listenTo(window.obEventBus, "updateProfile", function(response){
       this.refreshProfile();
@@ -78,7 +77,42 @@ module.exports = Backbone.View.extend({
       }
     }
 
-    this.render();
+    this.notificationsCl = new NotificationsCl();
+    this.notificationsFetch = this.notificationsCl.fetch();
+
+    this.listenTo(this.notificationsCl, 'update', (cl, resp, options) => {
+      this.setNotificationCount(cl.getUnreadCount());
+    });
+
+    this.listenTo(this.userProfile, 'change:avatar_hash', function(){
+      this.model.set('vendor', this.userProfile.get('profile').vendor);
+      this.render();
+    });
+
+    this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
+      this.handleSocketMessage(response);
+    });
+
+    this.listenTo(window.obEventBus, "onboarding-complete", function(){
+      this.showDiscoverIntro();
+    });
+
+    //when language is changed, re-render
+    this.listenTo(this.model, 'change:language', function(){
+      this.render();
+    });
+
+    $(document).on('click', this.onDocumentClick.bind(this));
+  },
+
+  showDiscoverIntro: function(){
+    this.$('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+    this.showDiscIntro = true;
+  },
+
+  hideDiscoverIntro: function(){
+    this.$('.js-OnboardingIntroDiscoverHolder').addClass('hide');
+    this.showDiscIntro = false;
   },
 
   sendInstallUpdate: function() {
@@ -91,17 +125,42 @@ module.exports = Backbone.View.extend({
   },
 
   handleSocketMessage: function(response) {
-    var data = JSON.parse(response.data);
-    if(data.id == this.socketNotificationID){
-      console.log(data);
-    }
-  },
+    var data = JSON.parse(response.data),
+        username,
+        avatar,
+        notif;
 
-  closeNav: function(){
-    var targ = this.$el.find('.js-navProfileMenu');
-    targ.addClass('hide');
-    $('#overlay').addClass('hide');
-  },
+    if (data.hasOwnProperty('notification')) {
+      notif = data.notification;
+      username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
+      avatar = notif.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
+        notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
+
+      switch(notif.type) {
+        case "follow":
+          new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
+            icon: avatar
+          });
+          break;
+        case "dispute_open":
+          new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
+            icon: avatar
+          });
+          break;
+        case "new order":
+          new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
+            icon: avatar
+          });
+          break;
+      }
+
+      this.notificationsCl.add(
+        __.extend({}, notif, { read: false })
+      );
+
+      app.playNotificationSound();
+    }
+  },  
 
   refreshProfile: function() {
     var self = this;
@@ -115,28 +174,45 @@ module.exports = Backbone.View.extend({
     });
   },
 
+  notificationClick: function(e) {
+    this.closeNotificationsMenu();
+  },
+
   render: function(){
     var self = this;
     //reset tests for applying lists or List.js will fail on a re-render
     this.countryReady = false;
     this.currencyReady = false;
     this.languageReady = false;
+    
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.notificationsPanel = new notificationsPanelView({
-        parentEl: '#notificationsPanel',
-        socketView: self.socketView,
-        serverUrl: self.options.model.get('serverUrl')
-      });
-      self.listenTo(self.notificationsPanel, 'notificationsCounted', self.setNotificationCount);
-      self.subViews.push(self.notificationsPanel);
+
+      self.$notifMenu = self.$('.js-navNotificationsMenu');
+      self.$navNotif = self.$('.js-navNotifications');
+
+      if (!self.notificationsVw) {
+        self.notificationsVw = new NotificationsVw({
+          socketView: self.socketView,
+          collection: self.notificationsCl,
+          fetch: self.notificationsFetch
+        });
+        self.registerChild(self.notificationsVw);
+
+        self.listenTo(self.notificationsVw, 'notification-click', self.notificationClick);
+      }
+
+      self.$notifMenu.find('#notificationsPanel')
+          .html(self.notificationsVw.render().el);
 
       //add the admin panel
+      self.adminPanel && self.adminPanel.remove();
       self.adminPanel = new adminPanelView({model: self.model});
-      self.subViews.push(self.adminPanel);
+      self.registerChild(self.adminPanel);
+
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
@@ -145,26 +221,11 @@ module.exports = Backbone.View.extend({
         self.addressInput.val(text);
         self.closeStatusBar();
       });
-
-      self.listenTo(self.userProfile, 'change:avatar_hash', function(){
-        self.model.set('vendor', self.userProfile.get('profile').vendor);
-        self.render();
-      });
-
-      self.listenTo(window.obEventBus, "socketMessageReceived", function(response){
-        self.handleSocketMessage(response);
-      });
-
-      if(self.showDiscoverCallout) {
-        // display discover callout
-        self.$el.find('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
+      if(self.showDiscIntro){
+        self.showDiscoverIntro();
       }
-
-      //when language is changed, re-render
-      self.listenTo(self.model, 'change:language', function(){
-        self.render();
-      });
     });
+
     return this;
   },
 
@@ -230,52 +291,93 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  navNotificationsClick: function(e){
-    e.stopPropagation();
-    this.setNotificationCount("");
-    var targ = this.$el.find('.js-navNotificationsMenu');
-    targ.siblings('.popMenu').addClass('hide');
-    if(targ.hasClass('hide')){
-      targ.removeClass('hide').addClass('popMenu-notifications-opened');
-      $('#overlay').removeClass('hide');
-      $('html').on('click.closeNav', function(e){
-        if($(e.target).closest(targ).length === 0){
-          targ.addClass('hide').removeClass('popMenu-notifications-opened');
-          $('#overlay').addClass('hide');
-          $(this).off('.closeNav');
-        }
-      });
-    }else{
-      targ.addClass('hide');
-      $('#overlay').addClass('hide');
-    }
+  closeNotificationsMenu: function() {
+    this.$notifMenu.removeClass('popMenu-opened');
+  },
+
+  isNotifMenuOpen: function() {
+    return this.$notifMenu.hasClass('popMenu-opened');
   },
 
   setNotificationCount: function(count){
-    if(count > 99) {
-      count = "..";
+    if (isNaN(parseInt(count))) return;
+
+    if (count > 99) {
+      count = '..';
     }
-    this.$el.find('.js-navNotifications .badge').attr('data-count', count);
+
+    if (count == 0) {
+      this.$navNotif.find('.badge')
+          .removeAttr('data-count', count);
+    } else {
+      this.$navNotif.find('.badge')
+          .attr('data-count', count);
+    }
   },
 
-  navProfileClick: function(e){
-    e.stopPropagation();
-    var targ = this.$el.find('.js-navProfileMenu');
-    targ.siblings('.popMenu').addClass('hide');
-    if(targ.hasClass('hide')){
-      targ.removeClass('hide').addClass('popMenu-navBar-opened');
-      $('#overlay').removeClass('hide');
-      $('html').on('click.closeNav', function(e){
-        if($(e.target).closest(targ).length === 0){
-          targ.addClass('hide').removeClass('popMenu-navBar-opened');
-          $('#overlay').addClass('hide');
-          $(this).off('.closeNav');
-        }
+  onNotifMenuClose: function() {
+    this.notificationsVw.resetScroll();
+
+    this.notificationsCl.where({ read: false })
+      .forEach((notif) => {
+        notif.set('read', true);
+        $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
+          'id': notif.get('id')
+        });
       });
-    }else{
-      targ.addClass('hide');
-      $('#overlay').addClass('hide');
+
+    this.setNotificationCount(0);    
+  },
+
+  onPopMenuNavClick: function(e) {
+    var $popMenu,
+        openHandler,
+        closeHandler;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    $popMenu = self.$(
+      $(e.target).data('popmenu')
+    );
+
+    if (!$popMenu.length) return;
+
+    self.$('.popMenu').not($popMenu)
+      .removeClass('popMenu-opened');
+    
+    $popMenu.toggleClass('popMenu-opened');
+
+    if ($popMenu.hasClass('popMenu-opened')) {
+      openHandler = $popMenu.data('onopen');
+      openHandler && this[openHandler] && this[openHandler].call(this);
+    } else {
+      closeHandler = $popMenu.data('onclose');
+      closeHandler && this[closeHandler] && this[closeHandler].call(this);
     }
+  },
+
+  onDocumentClick: function(e) {
+    var $target = $(e.target),
+        $popMenu,
+        closeHandler;
+
+    if (!(
+        $target.hasClass('popMenu') ||
+        $target.parents('.popMenu').length ||
+        $target.is('[data-popmenu]') ||
+        $target.parents('[data-popmenu]').length
+      )) {
+      $popMenu = self.$('.popMenu').removeClass('popMenu-opened');
+      $popMenu.each((index, el) => {
+        closeHandler = $(el).data('onclose');
+        closeHandler && this[closeHandler] && this[closeHandler].call(this);
+      });
+    }
+  },
+
+  closeNav: function() {
+    self.$('.js-navProfileMenu').removeClass('popMenu-opened');    
   },
 
   navCloseClick: function(){
@@ -392,17 +494,6 @@ module.exports = Backbone.View.extend({
     this.adminPanel.updatePage();
   },
 
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.remove();
-      }
-    });
-    this.remove();
-  },
-
   setSelectedTheme: function(e){
     // Needs to save to the object and update the dom
   },
@@ -417,4 +508,9 @@ module.exports = Backbone.View.extend({
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
+  remove: function() {
+    $(document).off('click', this.onDocumentClick);
+
+    baseVw.prototype.remove.apply(this, arguments);
+  }
 });

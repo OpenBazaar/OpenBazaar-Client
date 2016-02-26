@@ -74,7 +74,9 @@ module.exports = baseVw.extend({
 
   itemClick: function(e){
     var self = this;
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+this.model.get('contract_hash'), {trigger: true});
+    var directClick = this.model.get('onUserPage');
+    directClick = directClick ? "/"+ directClick : "";
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+this.model.get('contract_hash')+directClick, {trigger: true});
   },
 
   aboutClick: function(){

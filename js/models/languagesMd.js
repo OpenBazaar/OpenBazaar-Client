@@ -263,6 +263,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",
         ShutDownServer: "Shut Down the Server",
         LoadingBitcoinPrices: "Loading Bitcoin Prices...",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list",
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW",
+        ShowBlockedUser: "Show this user's page except for NSFW listings",
+        ShowNSFWContent: "Show this user's page, and all NSFW listings",
         ServerChangeWarningHeadline: "Caution: Record Your Settings",
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
         moderatorSettings: {
@@ -296,6 +300,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed",
           OrderStatusclosed: "Dispute Closed",
           OrderStatus6: "Dispute Finalized",
+          OrderStatus7: "Refunded",
           AcceptDisputeResolution: "Accept Dispute Payout",
           InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
@@ -303,6 +308,9 @@ module.exports = Backbone.Model.extend({
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
           ConfirmOrder: "Confirm Order",
+          RefundOrder: "Refund Order",
+          RefundReason: "Reason for refund",
+          RefundReasonPlaceholder: "Explain why you are sending a refund",
           ReceivingAddress: "Receiving Address",
           RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
           Comments: "Comments",
@@ -347,7 +355,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
           SendMessage: "Send",
           CloseDispute: "Close Dispute",
-          TotalInTransaction: "Transaction:"
+          TotalInTransaction: "Transaction:",
+          StartDisputeFlag: "START DISPUTE",
+          CloseDisputeFlag: "END DISPUTE"
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -778,6 +788,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -811,6 +825,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           AcceptDisputeResolution: "Accept Dispute Payout",
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
@@ -862,7 +877,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -1287,6 +1304,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -1320,6 +1341,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -1370,7 +1392,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1799,6 +1823,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -1832,6 +1860,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Totale ordine",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -1882,7 +1911,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -2313,6 +2344,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Paramètres du serveur",
         ShutDownServer: "Arrêter le serveur",
         LoadingBitcoinPrices: "Chargement des prix Bitcoin...",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Attention: Enregistrez vos paramètres",
         ServerChangeWarning: "Nous vous recommandons de faire une copie de vos paramètres précédents, indiqués ci-dessous. Votre nom d'utilisateur et mot de passe précédents ne seront plus disponibles au-delà de ce point.",
         moderatorSettings: {
@@ -2346,6 +2381,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- Sous séquestre",
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
@@ -2396,7 +2432,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "Afin de déposer un litige pour cette transaction, écrivez ci-dessous la raison du litige, et cliquez sur le bouton Initier un litige. Le modérateur interviendra dans votre discussion jusqu'à ce que le litige soit résolu. Le modérateur prendra la décision finale quant à savoir si les fonds doivent vous être retournés, et combien. Les frais du modérateur seront payés avec les fonds que vous avez déjà envoyés.",
           SendMessage: "Envoyer",
           CloseDispute: "Clôturer le litige",
-          TotalInTransaction: "Transaction :"
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2823,6 +2861,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -2856,6 +2898,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -2906,7 +2949,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -3331,6 +3376,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -3364,6 +3413,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -3414,7 +3464,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -3839,6 +3891,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -3872,6 +3928,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -3922,7 +3979,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -4351,6 +4410,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -4384,6 +4447,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -4434,7 +4498,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -4862,6 +4928,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -4895,6 +4965,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -4945,7 +5016,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -5377,6 +5450,10 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "简称解析器",
         ShutDownServer: "关闭服务器",
         LoadingBitcoinPrices: "正在载入比特币价格...",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: {
@@ -5410,6 +5487,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- 托管中",
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -5460,7 +5538,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -5889,6 +5969,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -5922,6 +6006,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -5972,7 +6057,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -6386,6 +6473,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: { // not translated
@@ -6419,6 +6510,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -6469,7 +6561,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
@@ -6897,6 +6991,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: {
@@ -6930,6 +7028,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
@@ -6980,7 +7079,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:"// not translated
+          TotalInTransaction: "Transaction:", // not translated
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Nie można zapisać zmian.",
@@ -7383,6 +7484,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
+        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
+        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
+        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Advarsel: Gem dine indstillinger",
         ServerChangeWarning: "Vi anbefaler, at du laver en kopi af dine tidligere indstillinger, der vises herunder. Dit tidligere brugernavn og adgangskode vil ikke længere være tilgængelig herefter.",
         moderatorSettings: {
@@ -7416,6 +7521,7 @@ module.exports = Backbone.Model.extend({
           OrderStatus5: "Dispute Closed", // not translated
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
+          OrderStatus7: "Refunded", // not translated
           InEscrow: "- i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
@@ -7466,7 +7572,9 @@ module.exports = Backbone.Model.extend({
           DisputeInstructions: "For at oprette en uenighed for denne handel, indtast begrundelsen for uenigheden herunder og vælg boksen Start en uenighed. Dette vil inkludere moderatoren i samtalen, indtil uenigheden er løst. Moderatoren vil tage den endelige beslutning omkring hvorvidt der tilbagebetales et beløb til dig, og hvor meget. Moderatorens gebyr vil blive betalt ud af de beløb, du allerede har sendt.",
           SendMessage: "Send",
           CloseDispute: "Luk uenighed",
-          TotalInTransaction: "Handel:"
+          TotalInTransaction: "Handel:",
+          StartDisputeFlag: "START DISPUTE", // not translated
+          CloseDisputeFlag: "END DISPUTE" // not translated
         },
         errorMessages: {
           saveError: "Data kunne ikke gemmes.",

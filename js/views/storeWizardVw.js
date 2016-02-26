@@ -45,24 +45,36 @@ module.exports = Backbone.View.extend({
 
     accWin.css({'left':0, 'width': function(){return accWidth * accNum;}});
     accChildren.css({'width':accWidth, 'height':accHeight});
+
     acc.find('.js-accordionNext').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
       if(oldPos > (accWidth * accNum * -1 + accWidth)){
         accWin.css('left', function(){
           return parseInt(accWin.css('left').replace("px","")) - accWidth;
         });
+        // switch active tab
+        var curActive = acc.find('.accordion-active');
+        curActive.addClass('accordion-inactive').removeClass('accordion-active');
+        var newActive = curActive.next('.accordion-child');
+        newActive.addClass('accordion-active').removeClass('accordion-inactive');
         // focus search input
-        $(this).closest('.accordion-child').next('.accordion-child').find('input:visible:first').focus();
+        newActive.find('input:visible:first').focus();
       }
     });
+
     acc.find('.js-accordionPrev').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
       if(oldPos < (0)){
         accWin.css('left', function(){
           return parseInt(accWin.css('left').replace("px","")) + accWidth;
         });
+        // switch active tab
+        var curActive = acc.find('.accordion-active');
+        curActive.addClass('accordion-inactive').removeClass('accordion-active');
+        var newActive = curActive.prev('.accordion-child');
+        newActive.addClass('accordion-active').removeClass('accordion-inactive');
         // focus search input
-        $(this).closest('.accordion-child').prev('.accordion-child').find('input:visible:first').focus();
+        newActive.find('input:visible:first').focus();
       }
     });
   },

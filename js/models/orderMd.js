@@ -255,27 +255,33 @@ module.exports = window.Backbone.Model.extend({
         });
         response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
       });
+    } else {
+      response.invalidData = true;
     }
 
-    //add pretty country name for the country being shipped to
-    if (response.buyer_order.order.shipping) {
-      var matchedCountry = self.countryArray.filter(function (value) {
-        return value.dataName == response.buyer_order.order.shipping.country;
-      });
-      response.displayCountry = matchedCountry[0].name;
-    } else {
-      response.displayCountry = "";
-    }
+    if (response.buyer_order) {
+      //add pretty country name for the country being shipped to
+      if (response.buyer_order.order.shipping) {
+        var matchedCountry      = self.countryArray.filter(function (value) {
+          return value.dataName == response.buyer_order.order.shipping.country;
+        });
+        response.displayCountry = matchedCountry[0].name;
+      } else {
+        response.displayCountry = "";
+      }
 
-    //add moderator
-    if(response.buyer_order.order.moderator){
-      var matchedModerator= response.vendor_offer.listing.moderators.filter(function(moderator) {
-        return moderator.guid == response.buyer_order.order.moderator;
-      });
-      response.displayModerator = matchedModerator[0];
-      response.displayModerator.feeDecimal = response.displayModerator.fee.replace("%","") * 0.01;
+      //add moderator
+      if (response.buyer_order.order.moderator) {
+        var matchedModerator                 = response.vendor_offer.listing.moderators.filter(function (moderator) {
+          return moderator.guid == response.buyer_order.order.moderator;
+        });
+        response.displayModerator            = matchedModerator[0];
+        response.displayModerator.feeDecimal = response.displayModerator.fee.replace("%", "") * 0.01;
+      } else {
+        response.displayModerator = "";
+      }
     } else {
-      response.displayModerator = "";
+      response.invalidData = true;
     }
 
     response.serverUrl = this.serverUrl;
@@ -290,7 +296,7 @@ module.exports = window.Backbone.Model.extend({
     //convert the currency
     var self = this;
     getBTPrice(self.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code, function(btAve) {
-      var newAttributes = {};;
+      var newAttributes = {};
 
       var convertTotal = function () {
         if (self.userCurrencyCode != "BTC") {

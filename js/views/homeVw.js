@@ -48,6 +48,7 @@ module.exports = baseVw.extend({
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
     this.onlyFollowing = false;
+    this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
 
@@ -175,6 +176,9 @@ module.exports = baseVw.extend({
   renderItem: function(item){
     var self = this,
         blocked;
+
+    //don't show if NSFW and filter is set to false
+    if(item.listing.nsfw && !this.showNSFW) return;
     //get data from inside the listing object
     item = item.listing;
     item.userCurrencyCode = this.userModel.get('currency_code');
@@ -235,6 +239,10 @@ module.exports = baseVw.extend({
         blocked = this.userModel.get('blocked_guids') || [];
 
     if (blocked.indexOf(user.guid) !== -1) return;
+
+    if(user.nsfw && !this.showNSFW) return;
+
+    if(!user.name) return; //if user has no name, they probably don't have a profile
 
     user.serverUrl = this.userModel.get('serverUrl');
     user.userID = user.guid;

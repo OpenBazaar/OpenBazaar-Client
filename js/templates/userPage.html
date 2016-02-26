@@ -546,8 +546,16 @@
     <div class="modal modal-navOffset">
       <div class="modal-child">
         <div class="modal-small padding15 txt-center custCol-secondary">
-          <h3 class="rowTop30 custCol-text">This user is blocked.</h3>
-          <a class="btn btn-txt hCentered custCol-primary positionBottom row30 js-showBlockedUser"><span class="custCol-text">Show</span></a>
+          <h3 class="rowTop30 custCol-text">
+            <span class="js-reasonBlocked"><%= polyglot.t('ThisUserIsBlocked') %></span>
+            <span class="js-reasonNSFW hide"><%= polyglot.t('ThisUserIsNSFW') %></span>
+          </h3>
+          <a class="btn btn-txt custCol-primary row10 js-showBlockedUser">
+            <span class="custCol-text"><%= polyglot.t('ShowBlockedUser') %></span>
+          </a>
+          <a class="btn btn-txt custCol-primary row10 js-reasonNSFW js-showNSFWContent hide">
+            <span class="custCol-text"><%= polyglot.t('ShowNSFWContent') %></span>
+          </a>
         </div>
       </div>
     </div>

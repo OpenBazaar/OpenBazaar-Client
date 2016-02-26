@@ -1,6 +1,6 @@
-<% if (ob.message_type == "DISPUTE_OPEN") { %>
+<% if (ob.message_type == "DISPUTE_OPEN" || ob.message_type == "dispute_open") { %>
 <hr>
-<div class="pad10">START DISPUTE</div>
+<div class="pad10"><%= polyglot.t('StartDisputeFlag') %></div>
 <hr>
 <% } %>
 <div class="chatConversationMessageLine <% if(ob.message_type == "ORDER") { %>padding2015 borderBottom1 custCol-border<% } %>">
@@ -60,4 +60,9 @@
         <% } %>
     </div>
 </div>
+<% if (ob.message_type == "DISPUTE_CLOSE" || ob.message_type == "dispute_close") { %>
+<hr>
+<div class="pad10"><%= polyglot.t('EndDisputeFlag') %></div>
+<hr>
+<% } %>
 

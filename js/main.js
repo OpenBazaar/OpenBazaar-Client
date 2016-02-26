@@ -143,7 +143,7 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 };
 
 var profileLoaded;
-var loadProfile = function(landingRoute) {
+var loadProfile = function(landingRoute, onboarded) {
   landingRoute = landingRoute || '#';
   profileLoaded = true;
 
@@ -165,7 +165,13 @@ var loadProfile = function(landingRoute) {
               $loadingModal.addClass('hide');
              
               newSocketView = new socketView({model: serverConfigMd});
-              newPageNavView = new pageNavView({model: user, socketView: newSocketView, userProfile: userProfile});
+
+              newPageNavView = new pageNavView({
+                model: user,
+                socketView: newSocketView,
+                userProfile: userProfile,
+                showDiscIntro: onboarded
+              }).render();
               
               app.chatVw = new ChatVw({
                 model: user,
@@ -227,7 +233,7 @@ launchOnboarding = function(guidCreating) {
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
     $loadingModal.removeClass('hide');
-    loadProfile('#userPage/' + guid + '/store');
+    loadProfile('#userPage/' + guid + '/store', true);
   });
 };
 
