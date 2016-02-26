@@ -30,6 +30,7 @@ var trayMenu = null;
 var subpy = null;
 
 var open_url = null; // This is for if someone opens a URL before the client is open
+var external_uri = null;
 
 if (argv.userData) {
   try {
@@ -323,6 +324,14 @@ app.on('ready', function() {
     mainWindow.loadURL('file://' + __dirname + '/index.html');
   }
 
+  ipcMain.on('checkURI', function(event, arg) {
+    if(external_uri) {
+      mainWindow.webContents.send('goto', external_uri);
+      mainWindow.webContents.executeJavaScript("$('input#addressBar').val('" + external_uri + "');");
+      external_uri = null;
+    }
+  })
+
   // Open the devtools.
   mainWindow.openDevTools({detach: true});
 
@@ -379,8 +388,12 @@ app.on('open-url', function(event, uri) {
   var split_uri = uri.split('://');
   uri = split_uri[1];
 
-  mainWindow.webContents.send('goto', uri);
-  mainWindow.webContents.executeJavaScript("$('input#addressBar').val('" + uri + "');");
+  if(!mainWindow) {
+    external_uri = uri;
+  } else {
+    mainWindow.webContents.send('goto', uri);
+    mainWindow.webContents.executeJavaScript("$('input#addressBar').val('" + uri + "');");
+  }
 
   event.preventDefault();
 });

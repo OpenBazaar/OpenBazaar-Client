@@ -69,7 +69,9 @@ module.exports = baseVw.extend({
 
     ipcRenderer.on('goto', function(event, arg) {
       self.addressBarProcess(arg);
-    })
+    });
+
+    ipcRenderer.send('checkURI', '');
 
     // pre-select lauguage.
     var localLanguage = window.navigator.language;
