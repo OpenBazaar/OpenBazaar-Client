@@ -489,7 +489,7 @@ module.exports = Backbone.View.extend({
       this._state = state;
       this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
       if(state == "store"){
-        console.log("get moderators")
+        this.$el.find('.js-settingsNewMods').html("");
         this.socketView.getModerators(this.socketModeratorID);
       }
     } else {

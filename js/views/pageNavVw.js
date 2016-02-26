@@ -334,6 +334,9 @@ module.exports = baseVw.extend({
         openHandler,
         closeHandler;
 
+    e.preventDefault();
+    e.stopPropagation();
+
     $popMenu = self.$(
       $(e.target).data('popmenu')
     );
