@@ -377,7 +377,6 @@ module.exports = baseModal.extend({
     }
 
     this.close();
-    this.showDiscoverCallout = true;
 
     new Notification(window.polyglot.t('WelcomeToYourPage'));
 
