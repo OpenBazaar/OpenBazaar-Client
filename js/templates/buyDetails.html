@@ -3,7 +3,7 @@
   <div class="flexRow custCol-border borderBottom hide js-buyWizardOrderSummary">
     <div class="rowItem padding2015">
       <%= polyglot.t('buyFlow.summaryMsg1', {recipient: ob.recipient}) %>.
-      <%= polyglot.t('buyFlow.summaryMsg2') %> <%- ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
+      <%= polyglot.t('buyFlow.summaryMsg2') %> <%= ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
       <a href="#transactions/purchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
     </div>
   </div>
@@ -15,15 +15,15 @@
             <div class="thumbnail-large-slim">
               <div class="thumbnail thumbnail-large-slim"
                   <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
-                  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+                  style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>), url(imgs/defaultItem.png);">
                   <% } else { %>
                   style="background-image: url(imgs/defaultItem.png);">
                   <% } %>
               </div>
             </div>
             <div class="pad10left txt-unleaded">
-              <div class="marginTop12 marginBottom4 fontSize13 noOverflow"><strong><%- ob.vendor_offer.listing.item.title %></strong></div>
-              <div class="noOverflow fontSize13 txt-fade">Sold by <% if(ob.page.profile.handle){ %><%- ob.page.profile.handle %><% } else { %><%- ob.page.profile.guid %><% } %></div>
+              <div class="marginTop12 marginBottom4 fontSize13 noOverflow"><strong><%= ob.vendor_offer.listing.item.title %></strong></div>
+              <div class="noOverflow fontSize13 txt-fade">Sold by <% if(ob.page.profile.handle){ %><%= ob.page.profile.handle %><% } else { %><%= ob.page.profile.guid %><% } %></div>
             </div>
           </div>
         </div>
@@ -41,11 +41,11 @@
     <div class="flexCol-4">
       <div class="rowItem padding2015 alignRight marginTop20">
         <span class="noOverflow fontSize13">
-          <%- ob.vendorBTCPrice.toFixed(4) %> BTC
+          <%= ob.vendorBTCPrice.toFixed(4) %> BTC
         </span>
         (<span class="noOverflow textOpacity75 fontSize13 js-buyWizardPrice">
           <% if(ob.userCurrencyCode != 'BTC'){ %>
-            <%- ob.displayPrice %>
+            <%= ob.displayPrice %>
           <% } %>
         </span>)
       </div>
@@ -67,10 +67,10 @@
             </div>
             <div class="pad10left txt-unleaded fontSize13 textOpacity1">
               <% if(ob.selectedAddress) { %>
-              <div class="marginBottom2"><%- ob.selectedAddress.name %></div>
-              <div class="marginBottom2"><%- ob.selectedAddress.street %></div>
-              <div class="marginBottom2"><%- ob.selectedAddress.city %>, <%- ob.selectedAddress.state %> <%- ob.selectedAddress.postal_code %></div>
-              <div><%- ob.selectedAddress.displayCountry %></div>
+              <div class="marginBottom2"><%= ob.selectedAddress.name %></div>
+              <div class="marginBottom2"><%= ob.selectedAddress.street %></div>
+              <div class="marginBottom2"><%= ob.selectedAddress.city %>, <%= ob.selectedAddress.state %> <%= ob.selectedAddress.postal_code %></div>
+              <div><%= ob.selectedAddress.displayCountry %></div>
               <% } %>
             </div>
           </div>
@@ -84,14 +84,14 @@
         <% } else { %>
           <span class="noOverflow fontSize13">
             <% if(ob.shippingType === "domestic") { %>
-              <%- ob.domesticShippingBTC.toFixed(4) %> BTC
+              <%= ob.domesticShippingBTC.toFixed(4) %> BTC
             <% }else{ %>
-              <%- ob.internationalShippingBTC.toFixed(4) %> BTC
+              <%= ob.internationalShippingBTC.toFixed(4) %> BTC
             <% } %>
           </span>
           (<span class="noOverflow js-buyWizardShippingPrice textOpacity75 fontSize13">
             <% if(ob.userCurrencyCode != 'BTC'){ %>
-              <%- ob.currentShippingDisplayPrice %>
+              <%= ob.currentShippingDisplayPrice %>
             <% } %>
           </span>)
         <% } %>
@@ -109,7 +109,7 @@
             <div class="thumbnail-large-slim">
               <div class="thumbnail thumbnail-large-slim"
                   <% if(ob.selectedModerator.avatar){ %>
-                  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.selectedModerator.avatar %>&guid=<%- ob.selectedModerator.guid %>), url(imgs/defaultUser.png);">
+                  style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.selectedModerator.avatar %>&guid=<%= ob.selectedModerator.guid %>), url(imgs/defaultUser.png);">
                   <% } else { %>
                   style="background-image: url(imgs/defaultUser.png);">
                   <% } %>
@@ -119,9 +119,9 @@
               <div class="marginTop6 marginBottom4 fontSize13 noOverflow marginBottom4">
                 Moderated by 
                 <% if(ob.selectedModerator.blockchain_id){ %>
-                  <%- ob.selectedModerator.blockchain_id %>
+                  <%= ob.selectedModerator.blockchain_id %>
                 <% } else { %>
-                  <%- ob.selectedModerator.guid %>
+                  <%= ob.selectedModerator.guid %>
                 <% } %>
               </div>
               <div class="textOpacity75 lineHeight15">(<%= polyglot.t('buyFlow.moderatorPaymentDisclaimer') %>)</div>
@@ -130,14 +130,14 @@
               <div class="thumbnail-large-slim">
                 <div class="thumbnail thumbnail-large-slim"
                     <% if(ob.avatar_hash) { %>
-                    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.avatar_hash %>&guid=<%- ob.vendor_offer.listing.id.pubkeys.guid %>), url(imgs/defaultUser.png);">
+                    style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.avatar_hash %>&guid=<%= ob.vendor_offer.listing.id.pubkeys.guid %>), url(imgs/defaultUser.png);">
                     <% } else { %>
                     style="background-image: url(imgs/defaultUser.png);">
                     <% } %>
                 </div>
               </div>
               <div class="pad10left txt-unleaded">
-                <div class="marginTop6 marginBottom4 fontSize13 noOverflow"><%= polyglot.t('buyFlow.DirectPayment') %> <%- ob.handle %></div>
+                <div class="marginTop6 marginBottom4 fontSize13 noOverflow"><%= polyglot.t('buyFlow.DirectPayment') %> <%= ob.handle %></div>
                 <div class="textOpacity75 lineHeight15">
                   (<%= polyglot.t('buyFlow.directPaymentDisclaimer') %>)
                 </div>
@@ -151,7 +151,7 @@
       <div class="rowItem padding2015 alignRight marginTop20">
         <% if(ob.selectedModerator){ %>
           <span class="noOverflow fontSize13 tooltip tooltip-left js-buyWizardModeratorPrice">
-            <%- ob.selectedModerator.fee %>
+            <%= ob.selectedModerator.fee %>
           </span>
         <% } else { %>
           <%= polyglot.t('Free') %>

@@ -10,22 +10,22 @@
                         <div class="textSize13px floatLeft">
                             <span>
                             <% if(ob.handle) { %>
-                                <%- ob.handle %>
+                                <%= ob.handle %>
                             <% }else{ %>
-                                <span class="noOverflow width95 floatLeft tooltip" data-tooltip="<%- ob.guid %>"><%- ob.guid %></span>
+                                <span class="noOverflow width95 floatLeft tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
                             </span> <%= polyglot.t('NotificationFollow') %>
                         </div>
                         <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% }  else { %>
-                        <span class="textSize11px marginRight5 marginBottom2 noOverflow" title="<%- ob.title %>">
-                            <strong>Title: <%- ob.title %></strong>
+                        <span class="textSize11px marginRight5 marginBottom2 noOverflow" title="<%= ob.title %>">
+                            <strong>Title: <%= ob.title %></strong>
                         </span>
                         <div class="textSize11px txt-fade textWeightNormal">From: <%= ob.handle || ob.guid %></div>
-                        <div class="textSize11px txt-fade">Type: <%- ob.type %></div>
+                        <div class="textSize11px txt-fade">Type: <%= ob.type %></div>
                         <div class="textSize11px txt-fade">Time: <%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                         <% if (ob.order_id) { %>
-                            <div class="textSize11px txt-fade"><%- ob.order_id %></div>
+                            <div class="textSize11px txt-fade"><%= ob.order_id %></div>
                         <% } %>
                     <% } %>
                 </div>
