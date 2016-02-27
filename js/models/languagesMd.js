@@ -110,6 +110,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Reviews",
         Shipping: "Shipping",
         Addresses: "Addresses",
+        Files: "Files", //notTranslated
         NewAddress: "New Address",
         CurrentAddress: "Current Addresses",
         Returns: "Returns",
@@ -181,6 +182,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Background Color",
         NotificationFollow: "is now following you",
         NotificationDispute: "has opened a new dispute",
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase",
         NoNotifications: "No notifications",
         WelcomeToYourPage: "Welcome to your page!",
@@ -312,7 +314,7 @@ module.exports = Backbone.Model.extend({
           RefundReason: "Reason for refund",
           RefundReasonPlaceholder: "Explain why you are sending a refund",
           ReceivingAddress: "Receiving Address",
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at",
           Comments: "Comments",
           CommentsPlaceHolder: "Comments on the order (optional)",
           Shipper: "Item Shipped By",
@@ -348,6 +350,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent",
           ModerationFee: "Moderation Fee:",
           DisputeTransaction: "Start a Dispute",
@@ -641,6 +644,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Cr&iacute;ticas",
         Shipping: "Envío",
         Addresses: "Direcciones",
+        Files: "Files", //notTranslated
         NewAddress: "Nueva Direcci&oacute;n",
         CurrentAddress: "Direcciones actuales",
         Returns: "Devoluciones",
@@ -834,7 +838,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -870,6 +874,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -1222,6 +1227,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Hintergrundfarbe",
         NotificationFollow: "folgt dir nun.",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Keine Benachrichtigungen",
         WelcomeToYourPage: "Willkommen auf deiner Seite!",
@@ -1349,7 +1355,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1385,6 +1391,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -1670,6 +1677,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Recensioni",
         Shipping: "Spedizione",
         Addresses: "Indirizzi",
+        Files: "Files", //notTranslated
         NewAddress: "Nuovo indirizzo",
         CurrentAddress: "Indirizzo attuale",
         Returns: "Restituzione",
@@ -1741,6 +1749,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Colore di sfondo",
         NotificationFollow: "ora ti sta seguendo",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nessuna notifica",
         WelcomeToYourPage: "Benvenuto alla tua pagina!",
@@ -1868,7 +1877,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -1904,6 +1913,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -2191,6 +2201,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Avis",
         Shipping: "Expédition",
         Addresses: "Adresses",
+        Files: "Files", //notTranslated
         NewAddress: "Nouvelle adresse",
         CurrentAddress: "Adresse actuelle",
         Returns: "Retours",
@@ -2262,6 +2273,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Couleur de fond",
         NotificationFollow: "vous suit",
         NotificationDispute: "a ouvert un nouveau litige",
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "a effectué un achat",
         NoNotifications: "Aucune notification",
         WelcomeToYourPage: "Bienvenue sur votre page !",
@@ -2425,6 +2437,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "Aucun avis envoyé",
           ModerationFee: "Frais de modération :",
           DisputeTransaction: "Initier un litige",
@@ -2708,6 +2721,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Recenzii",
         Shipping: "Livrare",
         Addresses: "Adrese",
+        Files: "Files", //notTranslated
         NewAddress: "Adresă Nouă",
         CurrentAddress: "Adresele Curente",
         Returns: "Returnări",
@@ -2779,6 +2793,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Culoarea de Fundal",
         NotificationFollow: "acum vă urmărește",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nu sunt notificări",
         WelcomeToYourPage: "Bun venit pe pagina dvs.!",
@@ -2906,7 +2921,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -2942,6 +2957,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -3223,6 +3239,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Отзывы",
         Shipping: "Доставка",
         Addresses: "Адреса",
+        Files: "Files", //notTranslated
         NewAddress: "Новый адрес",
         CurrentAddress: "Текущие адреса",
         Returns: "Возвраты",
@@ -3294,6 +3311,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Фоновый цвет",
         NotificationFollow: "подписан на вас",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Нет уведомлений",
         WelcomeToYourPage: "Добро пожаловать!",
@@ -3421,7 +3439,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3457,6 +3475,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -3737,6 +3756,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Hodnotenia zákazníkov",
         Shipping: "Doprava",
         Addresses: "Adresy",
+        Files: "Files", //notTranslated
         NewAddress: "Nová adresa",
         CurrentAddress: "Aktuálna adresa",
         Returns: "Vrátenie",
@@ -3809,6 +3829,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Farba pozadia",
         NotificationFollow: "vás od teraz sleduje",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Žiadne notifikácie",
         WelcomeToYourPage: "Vitajte na svojej stránke!",
@@ -3936,7 +3957,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -3972,6 +3993,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -4257,6 +4279,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Yorumlar",
         Shipping: "Gönderme",
         Addresses: "Adresler",
+        Files: "Files", //notTranslated
         NewAddress: "Yeni Adres",
         CurrentAddress: "Güncel Adres",
         Returns: "İadeler",
@@ -4328,6 +4351,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Arkaplan Rengi",
         NotificationFollow: "sizi takip etmeye başladı",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Bildirim yok",
         WelcomeToYourPage: "Sayfanıza hoşgeldiniz!",
@@ -4455,7 +4479,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -4491,6 +4515,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -4775,6 +4800,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "YIqaw",
         Shipping: "NgeH Duj",
         Addresses: "SoQ",
+        Files: "Files", //notTranslated
         NewAddress: "Chu' SoQ",
         CurrentAddress: "JuH Dachegh SoQ",
         Returns: "NobHa'",
@@ -4846,6 +4872,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "rItlh patmey lulo'ta'",
         NotificationFollow: "SoH tlha'",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Pagh ghuHmoH",
         WelcomeToYourPage: "MajQa' Sucheghmo'!",
@@ -4973,7 +5000,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -5009,6 +5036,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -5293,6 +5321,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "评价",
         Shipping: "物流",
         Addresses: "地址",
+        Files: "Files", //notTranslated
         NewAddress: "新地址",
         CurrentAddress: "当前地址",
         Returns: "退货",
@@ -5367,6 +5396,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "背景颜色",
         NotificationFollow: "在关注您",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "无新消息",
         WelcomeToYourPage: "欢迎来到您的主页",
@@ -5495,7 +5525,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "运往",
           ConfirmOrder: "确认订单",
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "备注",
           CommentsPlaceHolder: "订单的备注(如果有的话)",
           Shipper: "Item Shipped By", // not translated
@@ -5531,6 +5561,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -5816,6 +5847,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "리뷰",
         Shipping: "배송",
         Addresses: "주소들",
+        Files: "Files", //notTranslated
         NewAddress: "새로 주소",
         CurrentAddress: "현재 주소들",
         Returns: "반품",
@@ -5887,6 +5919,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "배경색",
         NotificationFollow: "너를 팔로우하다",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "공지 없어",
         WelcomeToYourPage: "환영해 너의 페이지!",
@@ -6014,7 +6047,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -6050,6 +6083,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -6330,6 +6364,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "レビュー",
         Shipping: "発送",
         Addresses: "住所",
+        Files: "Files", //notTranslated
         NewAddress: "新しいお届け先住所",
         CurrentAddress: "現在のお届け先住所",
         Returns: "返品",
@@ -6401,6 +6436,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "背景カラー",
         NotificationFollow: "があなたをフォローしました",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "新しい通知はありません。",
         WelcomeToYourPage: "マイページにようこそ！",
@@ -6518,7 +6554,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Ship To", // not translated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
           CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
@@ -6554,6 +6590,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -6838,6 +6875,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Opinie",
         Shipping: "Wysyłka",
         Addresses: "Adresy",
+        Files: "Files", //notTranslated
         NewAddress: "Nowy adres",
         CurrentAddress: "Bieżący adres",
         Returns: "Zwroty",
@@ -6909,6 +6947,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Kolor tła",
         NotificationFollow: "zaczął cię obserować!",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Brak powiadomień",
         WelcomeToYourPage: "Witaj na swojej stronie!",
@@ -7072,6 +7111,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Obsługa klienta",
           Review: "Oceń",
           ReviewPlaceHolder: "Twoja opinia o tej transakcji",
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -7331,6 +7371,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Anmeldelser",
         Shipping: "Forsendelse",
         Addresses: "Adresser",
+        Files: "Files", //notTranslated
         NewAddress: "Ny adresse",
         CurrentAddress: "Aktuelle adresser",
         Returns: "Returret",
@@ -7402,6 +7443,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Baggrundsfarve",
         NotificationFollow: "følger nu dig",
         NotificationDispute: "har åbnet en ny uenighed",
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "har gjort et køb",
         NoNotifications: "Ingen notifikationer",
         WelcomeToYourPage: "Velkommen til din side!",
@@ -7565,6 +7607,7 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Kundeservice",
           Review: "Bedøm",
           ReviewPlaceHolder: "Din bedømmelse af denne handel",
+          NoFileProvided: "No file provided", //notTranslated
           NoneSent: "Ingen sendt",
           ModerationFee: "Modereringsgebyr:",
           DisputeTransaction: "Start en uenighed",
