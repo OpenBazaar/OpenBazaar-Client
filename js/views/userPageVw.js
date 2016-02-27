@@ -453,10 +453,14 @@ module.exports = baseVw.extend({
       $('#obContainer').scrollTop(352);
       this.addTabToHistory('newItem');
       this.sellItem();
-    } else if(state === "createStore"){
+    } else if(state === "createStore") {
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
       this.addTabToHistory('about');
       this.createStore();
+    } else if(state === "becomeModerator"){
+      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      this.addTabToHistory('about');
+      this.showModeratorModal();
     } else if(state === "customize"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
       this.addTabToHistory('about');

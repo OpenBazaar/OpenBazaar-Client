@@ -27,6 +27,9 @@ module.exports = baseVw.extend({
     'click .js-fundsTab': 'clickFundsTab',
     'click .js-discussionTab': 'clickDiscussionTab',
     'click .js-showConfirmForm': 'showConfirmForm',
+    'click .js-hideConfirmForm': 'hideConfirmForm',
+    'click .js-showFeedbackRating': 'showFeedbackRating',
+    'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
     'click .js-confirmOrder': 'confirmOrder',
     'click .js-completeOrder': 'completeOrder',
@@ -46,6 +49,8 @@ module.exports = baseVw.extend({
     //'click .js-refundTransaction': 'showRefundOrder',
     //'click .js-refundOrder': 'refundOrder',
     'click .js-refundTransaction': 'refundOrder',
+    'focus .js-transactionDiscussionSendText': 'highlightInput',
+    'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -156,10 +161,12 @@ module.exports = baseVw.extend({
           this.status = 2;
           this.tabState = "summary";
           break;
-        case "payment recieved":
+        /* //this notification is not sent yet by the server
+        case "payment released":
           this.status = 3;
           this.tabState = "summary";
           break;
+          */
       }
       this.getData();
     } else if(data.message && data.message.subject == this.orderID){
@@ -193,13 +200,13 @@ module.exports = baseVw.extend({
 
   showContract: function(){
     console.log("show contract")
-    this.$('.js-transactionsContractHolder').fadeIn(300);
+    this.$('.js-transactionsContractHolder').addClass('bottom0');
     this.$('.js-transactionShowContract').addClass('hide');
     this.$('.js-transactionHideContract').removeClass('hide');
   },
 
   hideContract: function(){
-    this.$('.js-transactionsContractHolder').fadeOut(300);
+    this.$('.js-transactionsContractHolder').removeClass('bottom0');
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-transactionHideContract').addClass('hide');
   },
@@ -221,6 +228,14 @@ module.exports = baseVw.extend({
     this.state = state;
   },
 
+  highlightInput: function(e) {
+    this.$('.js-discussionForm').addClass('custCol-border').removeClass('custCol-border-secondary');
+  },
+
+  blurInput: function(e) {
+    this.$('.js-discussionForm').removeClass('custCol-border').addClass('custCol-border-secondary');
+  },
+
   validateInput: function(e) {
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
@@ -240,10 +255,28 @@ module.exports = baseVw.extend({
 
   clickDiscussionTab: function(){
     this.setState("discussion");
+    this.$('.js-transactionDiscussionSendText').focus();
   },
 
+  hideConfirmForm: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-transactionsConfirmOrderHolder').removeClass('bottom0');
+  },
+  
   showConfirmForm: function(){
-    this.setState("confirm");
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-transactionsConfirmOrderHolder').addClass('bottom0');
+    this.$("#transactionConfirmForm input:text").first().focus();
+  },
+
+  showFeedbackRating: function(){
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-transactionFeedback').addClass('bottom0');
+  },
+
+  hideFeedbackRating: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-transactionFeedback').removeClass('bottom0');
   },
 
   showRefundOrder: function(){
@@ -346,7 +379,7 @@ module.exports = baseVw.extend({
     this.discussionCount++;
     this.$('.js-discussionCount').text(this.discussionCount);
     this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
-    //this.$('.js-discussionForm').removeClass('disabled');
+    this.$('.js-discussionWrapperEmpty').addClass('hide');
   },
 
   addAllDiscussionMessages: function(){
@@ -356,6 +389,9 @@ module.exports = baseVw.extend({
     this.discussionCol.each(function(model, i){
       self.addDiscussionMessage(model);
     });
+    if (this.discussionCol.length > 0 ){
+      this.$('.js-discussionWrapperEmpty').addClass('hide');
+    }
   },
 
   sendDiscussionMessageClick: function(){
@@ -430,6 +466,8 @@ module.exports = baseVw.extend({
     messageInput.val('');
     messageInput.closest('.flexRow').removeClass('formChecked');
     this.getDiscussion();
+    messageInput.focus();
+
   },
 
   showCloseDispute: function(e){
