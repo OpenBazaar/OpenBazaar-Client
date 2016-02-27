@@ -116,7 +116,8 @@ module.exports = baseModal.extend({
     var countryList,
         currencyList,
         timeList,
-        languageList;
+        languageList,
+        self = this;
 
     this._accordianReady = true;
     this.loadingOff();
@@ -137,9 +138,17 @@ module.exports = baseModal.extend({
     });
 
     this.$el.find('#image-cropper').cropit({
+      $preview: self.$('.js-onboardingAvatarPreview'),
+      $fileInput: self.$('#onboardingAvatarInput'),
       smallImage: "stretch",
       exportZoom: 1.33,
       maxZoom: 5,
+      onImageLoading: function(){
+        self.$el.find('.js-avatarLoading').removeClass('fadeOut');
+      },
+      onImageLoaded: function(){
+        self.$el.find('.js-avatarLoading').addClass('fadeOut');
+      },
       onFileReaderError: function(data){console.log(data);},
       onImageError: function(errorObject, errorCode, errorMessage) {
         console.log(errorObject);
