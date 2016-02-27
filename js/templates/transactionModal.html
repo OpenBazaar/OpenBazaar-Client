@@ -576,6 +576,8 @@
                 </div>
               </div>
             </div>
+
+            <% if(ob.vendor_order_confirmation){ %>
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">Buyer Amount:</div>
@@ -606,6 +608,14 @@
                 <span id="transactionsSellerPayoutBTC" class=""></span>
               </div>
             </div>
+            <% } else {%>
+            <div class="flexRow">
+              <div class="padding15">
+              <%= polyglot.t('transactions.PayoutOnlyBuyer') %>
+              </div>
+            </div>
+            <% } %>
+
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">Your Bitcoin Payment Address:</div>
