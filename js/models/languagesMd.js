@@ -307,6 +307,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
           OrderTotalInBTC: "BTC Total",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
           ContractDetails: "Contract Details", //notTranslated
@@ -837,6 +838,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -1357,6 +1359,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -1882,6 +1885,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Totale ordine",
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -2409,6 +2413,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- Sous séquestre",
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Protection de paiement",
           ShipTo: "Expédier à",
           ContractDetails: "Contract Details", //notTranslated
@@ -2932,6 +2937,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -3453,6 +3459,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -3974,6 +3981,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -4499,6 +4507,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -5023,6 +5032,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -5551,6 +5561,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- 托管中",
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "运往",
           ContractDetails: "Contract Details", //notTranslated
@@ -6076,6 +6087,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -6586,6 +6598,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
           ContractDetails: "Contract Details", //notTranslated
@@ -7110,6 +7123,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Ubezpieczenie płatności",
           ShipTo: "Wysyłka do",
           ContractDetails: "Contract Details", //notTranslated
@@ -7609,6 +7623,7 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Betalingsbeskyttelse",
           ShipTo: "Afsend til",
           ContractDetails: "Contract Details", //notTranslated

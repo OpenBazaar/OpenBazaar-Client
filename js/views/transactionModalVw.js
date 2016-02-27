@@ -355,6 +355,7 @@ module.exports = baseVw.extend({
     this.$('.js-discussionCount').text(this.discussionCount);
     this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
     this.$('.js-discussionForm').removeClass('disabled');
+    this.$('.js-discussionWrapperEmpty').addClass('hide');
   },
 
   addAllDiscussionMessages: function(){
@@ -364,6 +365,9 @@ module.exports = baseVw.extend({
     this.discussionCol.each(function(model, i){
       self.addDiscussionMessage(model);
     });
+    if (this.discussionCol.length > 0 ){
+      this.$('.js-discussionWrapperEmpty').addClass('hide');
+    }
   },
 
   sendDiscussionMessageClick: function(){
