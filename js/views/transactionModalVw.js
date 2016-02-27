@@ -161,10 +161,12 @@ module.exports = baseVw.extend({
           this.status = 2;
           this.tabState = "summary";
           break;
-        case "payment recieved":
+        /* //this notification is not sent yet by the server
+        case "payment released":
           this.status = 3;
           this.tabState = "summary";
           break;
+          */
       }
       this.getData();
     } else if(data.message && data.message.subject == this.orderID){
