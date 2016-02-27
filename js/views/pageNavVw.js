@@ -436,53 +436,12 @@ module.exports = baseVw.extend({
   },
 
   addressBarProcess: function(addressBarText){
-    var guid = "",
-        handle = "",
-        state = "",
-        itemHash = "",
-        addressTextArray = addressBarText.replace(/ /g, "").split("/");
-
-    state = addressTextArray[1] ? "/" + addressTextArray[1] : "";
-    itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
-
-    if(addressTextArray[0].charAt(0) == "@"){
-      // user entered a handle
-      handle = addressTextArray[0].replace('@', '');
-      this.processHandle(handle, state, itemHash);
-    } else if(!addressTextArray[0].length){
-      // user trying to go back to discover
-      Backbone.history.navigate('#home', {trigger:true});
-    } else if(addressTextArray[0].length === 40){
-      // user entered a guid
-      guid = addressTextArray[0];
-      Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
-    } else if(addressTextArray[0].charAt(0) == "#"){
-      // user entered a search term
-      Backbone.history.navigate('#home/products/' + addressTextArray[0].replace('#', ''), {trigger:true});
-    } else {
-      //user entered text that doesn't match a known pattern, assume it's a product search
-      Backbone.history.navigate('#home/products/' + addressTextArray[0], {trigger:true});
-    }
-  },
-
-  processHandle: function(handle, state, itemHash){
-    if(handle){
-      $.ajax({
-        url: this.model.get('resolver') + "/v2/users/" + handle,
-        dataType: "json"
-      }).done(function(resolverData){
-        if(resolverData[handle].profile && resolverData[handle].profile.account){
-          var account = resolverData[handle].profile.account.filter(function (accountObject) {
-            return accountObject.service == "openbazaar";
-          });
-          Backbone.history.navigate('#userPage/' + account[0].identifier + state + itemHash, {trigger: true});
-        } else {
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
-        }
-      }).fail(function(jqXHR, status, errorThrown){
-        messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
-      });
-    }
+    // todo: show small spinnerin address bar, since handle check
+    // could take a little bit of time. Also, cancel request
+    // if new address text comes before another has been processed.
+    app.router.translateRoute(addressBarText).done((route) => {
+      Backbone.history.navigate(route, {trigger:true});
+    });
   },
 
   showStatusBar: function(msgText){

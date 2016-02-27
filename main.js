@@ -376,32 +376,25 @@ app.on('ready', function() {
 });
 
 app.on('open-url', function(event, uri) {
+  var split_uri = uri.split('://');
+  uri = split_uri[1];
 
-  // uri should be in format ob:route delimited by colons
-  // eg: ob:user:GUID
-  //     ob:user:GUID:store
-  //     ob:user:GUID:item:ITEM_ID
-  var split_uri = uri.split(':');
-  if(split_uri.length > 1 && split_uri[0] == "ob") {
-    switch(split_uri[1]) {
-      case "user":
-        open_url = "#userPage/" + split_uri[2];
-        if(split_uri[3] == "store") {
-          open_url += "/store";
-        } else if(split_uri[3] == "item") {
-          open_url += "/item" + split_uri[4];
-        }
+  global.externalRoute = uri;
 
-        break;
-    }
-  }
-  console.log(open_url);
+  // if(!mainWindow) {
+  //   global.startingRoute = uri;
+  // } else {
+  //   // mainWindow.webContents.send('goto', uri);
+  //   // mainWindow.webContents.executeJavaScript("$('input#addressBar').val('" + uri + "');");
+  //   mainWindow.webContents.executeJavaScript("location.href='" + "#userPage/" + uri + "'");
+  // }
 
-  // If application was not open store in localStorage
-  if(mainWindow) {
-    mainWindow.webContents.executeJavaScript("Backbone.history.navigate('" + open_url + "', {trigger: true});");
-  }
+  if (mainWindow) {
+    // if our app router is fully loaded it will pick up on location.href, otherwise
+    // the global.externalRoute will be used
+    mainWindow.webContents.send('external-route', uri);
+    // mainWindow.webContents.executeJavaScript("location.href='" + "#userPage/" + uri + "'");
+  }  
 
   event.preventDefault();
 });
-
