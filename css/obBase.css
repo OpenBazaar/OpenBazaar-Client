@@ -287,6 +287,7 @@ form {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   z-index: 1;
+  box-shadow: 0px 10px 20px #05283C;
 }
 
 .img-rsp {
@@ -1152,9 +1153,9 @@ h5 {
 
 .note {
   /* use for instructions and incidental text */
-  font-style: italic;
+  /*font-style: italic;*/
   font-size: 9px;
-  opacity: 0.75;
+  opacity: 0.50;
 }
 
 [class *= "ion-"]:before {
@@ -1342,7 +1343,7 @@ h5 {
 .modal-childMain {
   border-radius: 3px;
   background-color: #327eb8;
-  box-shadow: 0px 0 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 10px #383838;
   transition: left .1s cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -1809,6 +1810,18 @@ margin: auto;
   font-weight: normal;
 }
 
+#transactionDiscussionSendText {
+  font-size: 13px;
+}
+
+#transactionDiscussionSendText::-webkit-input-placeholder {
+  font-size: 13px;
+}
+
+.transitionBottomSlow {
+  transition: bottom .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
 .newChatButton {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
@@ -2150,6 +2163,7 @@ div.chatSearchOut .chatSearchIcon {
 
 #inputConversationMessage::-webkit-input-placeholder  {
   font-size: 12px;
+  color: #fff !important; /* i'm using important here because the custom theme styles should never override this color */
 }
 
 .chatConversationMessageAvatar {
@@ -3352,7 +3366,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   height: 20px;
   z-index: 4;
-  width: 950px;
+  width: 980px;
+  margin-left: -10px;
 }
 .user-page-header-slim-bg-cover-customize {
   position: fixed;
@@ -3839,6 +3854,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   left: 0;
 }
 
+
+#transactionConfirmForm label {
+  font-size: 12px;
+}
+
+#transactionConfirmForm input::-webkit-input-placeholder,
+#transactionConfirmForm textarea::-webkit-input-placeholder {
+  font-size: 12px;
+}
+
+.confirmOrderHolder,
+.contractHolder,
+.feedbackHolder {
+  transition: bottom .15s ease;
+  bottom: -250px;
+  position: absolute;
+}
+
 #modalHolder {
   position: fixed;
   z-index: 3;
@@ -4196,6 +4229,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .border2 {
+  border: solid 2px rgba(255,255,255,0.08);
+}
+
 #ov1  .border0 {
   border: 0;
 }
@@ -4501,6 +4538,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .marginLeft2 {
   margin-left: 2px;
 }
+#ov1  .marginLeft4 {
+  margin-left: 4px;
+}
 
 #ov1  .marginLeft5 {
   margin-left: 5px;
@@ -4557,6 +4597,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-top: 4px;
 }
 
+#ov1  .marginTop5 {
+  margin-top: 5px;
+}
 #ov1  .marginTop6 {
   margin-top: 6px;
 }
@@ -4675,6 +4718,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 70px;
 }
 
+#ov1 .bottomNeg250 {
+  bottom: -250px;
+}
 
 #ov1  .height40 {
   height: 40px;
@@ -4685,6 +4731,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 43px;
 }
 
+#ov1  .height30 {
+  height: 30px;
+}
 #ov1  .height36 {
   height: 36px;
   line-height: 36px;
@@ -4716,6 +4765,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .height70 {
   height: 70px;
+}
+
+#ov1  .height130 {
+  height: 130px;
 }
 
 #ov1  .height250 {
@@ -4958,6 +5011,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 360px;
 }
 
+#ov1 .width30 {
+  width: 30px;
+}
 #ov1 .width34 {
   width: 34px;
 }
@@ -5104,6 +5160,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .blurMore {
   -webkit-filter: blur(5px);
+}
+
+#ov1 .nsfw {
+  -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
 #ov1 .fadeOut {

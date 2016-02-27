@@ -31,6 +31,7 @@ module.exports = Backbone.Model.extend({
         of: "of",
         Sell: "Sell",
         New: "New",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excellent",
         Good: "Good",
         Poor: "Poor",
@@ -109,6 +110,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Reviews",
         Shipping: "Shipping",
         Addresses: "Addresses",
+        Files: "Files", //notTranslated
         NewAddress: "New Address",
         CurrentAddress: "Current Addresses",
         Returns: "Returns",
@@ -180,6 +182,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Background Color",
         NotificationFollow: "is now following you",
         NotificationDispute: "has opened a new dispute",
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase",
         NoNotifications: "No notifications",
         WelcomeToYourPage: "Welcome to your page!",
@@ -240,9 +243,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To",
         ModeratedBy: "Moderated by",
         Submit: "Submit",
-        maxLength20: "maximum length 20 characters",
-        maxLength80: "maximum length 80 characters",
-        maxLength200: "maximum length 200 characters",
+        maxLength20: "max length 20 char",
+        maxLength80: "max length 80 char",
+        maxLength200: "max length 200 char",
         StoreModeratorsOptional: "Store Moderators (Optional)",
         Searchformoderators: "Search for moderators",
         Contributors: "Contributors",
@@ -273,10 +276,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee",
           ServiceFeeNote: "Min: 0%, Max: 25%"
         },
-        BecomeModerator: "Become a moderator",
+        BecomeModerator: "Become a Moderator",
         EditModerator: "Moderator Settings",
         transactions: {
           OrderDetails: "Order Details",
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller",
           PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
@@ -303,26 +307,28 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
           OrderTotalInBTC: "BTC Total",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order",
           RefundOrder: "Refund Order",
           RefundReason: "Reason for refund",
           RefundReasonPlaceholder: "Explain why you are sending a refund",
           ReceivingAddress: "Receiving Address",
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at",
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at",
           Comments: "Comments",
-          CommentsPlaceHolder: "Comments on the order, if any",
+          CommentsPlaceHolder: "Comments on the order (optional)",
           Shipper: "Item Shipped By",
           ShipperPlaceholder: "Name of the company shipping the item",
           TrackingNumber: "Tracking Number",
           TrackingNumberPlaceholder: "Tracking number of item",
           EstimatedDelivery: "Estimated Delivery",
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered",
-          URL: "URL",
+          URL: "File URL",
           URLPlaceholder: "Link to download, schedule, or more information",
           Password: "Password",
-          PasswordPlaceholder: "Password required for link, if any",
+          PasswordPlaceholder: "Password required for link (optional)",
           DirectTransaction: "Direct transaction",
           ModeratedTransaction: "Moderated transaction",
           Seller: "Seller",
@@ -346,16 +352,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent",
           ModerationFee: "Moderation Fee:",
           DisputeTransaction: "Start a Dispute",
-          sendMessagePlaceholder: "Type your message here.",
+          sendMessagePlaceholder: "Enter message...",
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
           SendMessage: "Send",
           CloseDispute: "Close Dispute",
           TotalInTransaction: "Transaction:",
           StartDisputeFlag: "START DISPUTE",
-          CloseDisputeFlag: "END DISPUTE"
+          CloseDisputeFlag: "END DISPUTE",
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer."
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -379,7 +388,7 @@ module.exports = Backbone.Model.extend({
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", 
           support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
-          licensing: "<p>OpenBazaar is open source software using the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
+          licensing: "<p>OpenBazaar is open source software using the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Saved",
@@ -454,6 +463,8 @@ module.exports = Backbone.Model.extend({
           LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>."
         },
         walletProviders: {
+          ExchangeAndWallet: "Exchange and Wallet",
+          WalletOnly: "Wallet Only",
           CoinbaseTagline: "The world's most popular way to buy, sell, and use bitcoin.",
           SamouraiTagline: "Secure mobile wallet. Emphasis on privacy.",
           AirbitzTagline: "Privacy. Security. Autonomy. Decentralized.",
@@ -560,6 +571,7 @@ module.exports = Backbone.Model.extend({
         of: "de",
         Sell: "Vender",
         New: "Nuevo",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
@@ -636,6 +648,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Cr&iacute;ticas",
         Shipping: "Envío",
         Addresses: "Direcciones",
+        Files: "Files", //notTranslated
         NewAddress: "Nueva Direcci&oacute;n",
         CurrentAddress: "Direcciones actuales",
         Returns: "Devoluciones",
@@ -761,9 +774,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -794,10 +807,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
@@ -824,23 +838,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -864,16 +880,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -1066,6 +1085,7 @@ module.exports = Backbone.Model.extend({
         of: "von",
         Sell: "Verkaufen",
         New: "Neu",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Hervorragend",
         Good: "Gut",
         Poor: "Mangelhaft",
@@ -1215,6 +1235,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Hintergrundfarbe",
         NotificationFollow: "folgt dir nun.",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Keine Benachrichtigungen",
         WelcomeToYourPage: "Willkommen auf deiner Seite!",
@@ -1275,9 +1296,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -1308,10 +1329,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
@@ -1337,23 +1359,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -1377,16 +1401,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1583,6 +1610,7 @@ module.exports = Backbone.Model.extend({
         of: "di",
         Sell: "Vendere",
         New: "Nuovo",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Eccellente",
         Good: "Buono",
         Poor: "Scarso",
@@ -1661,6 +1689,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Recensioni",
         Shipping: "Spedizione",
         Addresses: "Indirizzi",
+        Files: "Files", //notTranslated
         NewAddress: "Nuovo indirizzo",
         CurrentAddress: "Indirizzo attuale",
         Returns: "Restituzione",
@@ -1732,6 +1761,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Colore di sfondo",
         NotificationFollow: "ora ti sta seguendo",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nessuna notifica",
         WelcomeToYourPage: "Benvenuto alla tua pagina!",
@@ -1792,9 +1822,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -1825,10 +1855,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
           searchByOrder: "Ricerca per ID di ordine o nome articolo",
@@ -1854,23 +1885,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Totale ordine",
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -1894,16 +1927,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -2102,6 +2138,7 @@ module.exports = Backbone.Model.extend({
         of: "de",
         Sell: "Vendre",
         New: "Nouveau",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excellent",
         Good: "Bon",
         Poor: "Médiocre",
@@ -2180,6 +2217,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Avis",
         Shipping: "Expédition",
         Addresses: "Adresses",
+        Files: "Files", //notTranslated
         NewAddress: "Nouvelle adresse",
         CurrentAddress: "Adresse actuelle",
         Returns: "Retours",
@@ -2251,6 +2289,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Couleur de fond",
         NotificationFollow: "vous suit",
         NotificationDispute: "a ouvert un nouveau litige",
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "a effectué un achat",
         NoNotifications: "Aucune notification",
         WelcomeToYourPage: "Bienvenue sur votre page !",
@@ -2348,6 +2387,7 @@ module.exports = Backbone.Model.extend({
         EditModerator: "Paramètres de modérateur",
         transactions: {
           OrderDetails: "Détails de la commande",
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
@@ -2373,8 +2413,10 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- Sous séquestre",
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Protection de paiement",
           ShipTo: "Expédier à",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirmer cette commande",
           ReceivingAddress: "Adresse de réception",
           RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
@@ -2386,7 +2428,7 @@ module.exports = Backbone.Model.extend({
           TrackingNumberPlaceholder: "Numéro de suivi de cet article",
           EstimatedDelivery: "Délai de livraison estimé",
           EstimatedDeliveryPlaceholder: "Date estimée de la livraison de l'article",
-          URL: "URL",
+          URL: "File URL",
           URLPlaceholder: "Lien pour télécharger, planifier, ou plus d'informations",
           Password: "Mot de passe",
           PasswordPlaceholder: "Mot de passe requis pour le lien, si nécessaire",
@@ -2413,6 +2455,8 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "Aucun avis envoyé",
           ModerationFee: "Frais de modération :",
           DisputeTransaction: "Initier un litige",
@@ -2422,7 +2466,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Clôturer le litige",
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2617,6 +2662,7 @@ module.exports = Backbone.Model.extend({
         of: "din",
         Sell: "Vânzare",
         New: "Nou",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Excelent",
         Good: "Bun",
         Poor: "Prost",
@@ -2695,6 +2741,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Recenzii",
         Shipping: "Livrare",
         Addresses: "Adrese",
+        Files: "Files", //notTranslated
         NewAddress: "Adresă Nouă",
         CurrentAddress: "Adresele Curente",
         Returns: "Returnări",
@@ -2766,6 +2813,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Culoarea de Fundal",
         NotificationFollow: "acum vă urmărește",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nu sunt notificări",
         WelcomeToYourPage: "Bun venit pe pagina dvs.!",
@@ -2826,9 +2874,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -2859,10 +2907,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
@@ -2888,23 +2937,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -2928,16 +2979,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -3130,6 +3184,7 @@ module.exports = Backbone.Model.extend({
         of: "из",
         Sell: "Продать",
         New: "Новый",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Идеальное",
         Good: "Хорошее",
         Poor: "Плохое",
@@ -3208,6 +3263,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Отзывы",
         Shipping: "Доставка",
         Addresses: "Адреса",
+        Files: "Files", //notTranslated
         NewAddress: "Новый адрес",
         CurrentAddress: "Текущие адреса",
         Returns: "Возвраты",
@@ -3279,6 +3335,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Фоновый цвет",
         NotificationFollow: "подписан на вас",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Нет уведомлений",
         WelcomeToYourPage: "Добро пожаловать!",
@@ -3339,9 +3396,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -3372,10 +3429,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Продано",
           PurchasedBy: "Куплено",
           searchByOrder: "Искать по номеру заказа",
@@ -3401,23 +3459,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -3441,16 +3501,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -3643,6 +3706,7 @@ module.exports = Backbone.Model.extend({
         of: "z",
         Sell: "Predať",
         New: "New",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
@@ -3720,6 +3784,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Hodnotenia zákazníkov",
         Shipping: "Doprava",
         Addresses: "Adresy",
+        Files: "Files", //notTranslated
         NewAddress: "Nová adresa",
         CurrentAddress: "Aktuálna adresa",
         Returns: "Vrátenie",
@@ -3792,6 +3857,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Farba pozadia",
         NotificationFollow: "vás od teraz sleduje",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Žiadne notifikácie",
         WelcomeToYourPage: "Vitajte na svojej stránke!",
@@ -3852,9 +3918,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -3885,10 +3951,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
@@ -3914,23 +3981,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -3954,16 +4023,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -4160,6 +4232,7 @@ module.exports = Backbone.Model.extend({
         of: "de",
         Sell: "Sat",
         New: "Yeni",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Çok iyi",
         Good: "İyi",
         Poor: "İyi değil",
@@ -4238,6 +4311,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Yorumlar",
         Shipping: "Gönderme",
         Addresses: "Adresler",
+        Files: "Files", //notTranslated
         NewAddress: "Yeni Adres",
         CurrentAddress: "Güncel Adres",
         Returns: "İadeler",
@@ -4309,6 +4383,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Arkaplan Rengi",
         NotificationFollow: "sizi takip etmeye başladı",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Bildirim yok",
         WelcomeToYourPage: "Sayfanıza hoşgeldiniz!",
@@ -4369,9 +4444,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -4402,10 +4477,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
@@ -4431,23 +4507,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -4471,16 +4549,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -4677,6 +4758,7 @@ module.exports = Backbone.Model.extend({
         of: ",",
         Sell: "Ngev",
         New: "Chu'",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Chon",
         Good: "Maj",
         Poor: "VIvup",
@@ -4754,6 +4836,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "YIqaw",
         Shipping: "NgeH Duj",
         Addresses: "SoQ",
+        Files: "Files", //notTranslated
         NewAddress: "Chu' SoQ",
         CurrentAddress: "JuH Dachegh SoQ",
         Returns: "NobHa'",
@@ -4825,6 +4908,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "rItlh patmey lulo'ta'",
         NotificationFollow: "SoH tlha'",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Pagh ghuHmoH",
         WelcomeToYourPage: "MajQa' Sucheghmo'!",
@@ -4885,9 +4969,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -4918,10 +5002,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
@@ -4947,23 +5032,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -4987,16 +5074,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -5193,6 +5283,7 @@ module.exports = Backbone.Model.extend({
         of: "有关",
         Sell: "卖l",
         New: "新",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "出色",
         Good: "完好",
         Poor: "较差",
@@ -5270,6 +5361,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "评价",
         Shipping: "物流",
         Addresses: "地址",
+        Files: "Files", //notTranslated
         NewAddress: "新地址",
         CurrentAddress: "当前地址",
         Returns: "退货",
@@ -5344,6 +5436,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "背景颜色",
         NotificationFollow: "在关注您",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "无新消息",
         WelcomeToYourPage: "欢迎来到您的主页",
@@ -5442,6 +5535,7 @@ module.exports = Backbone.Model.extend({
         EditModerator: "仲裁员设置",
         transactions: {
           OrderDetails: "订单详细内容",
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "卖家",
           PurchasedBy: "买家",
           searchByOrder: "用订单ID或货物名称来检索",
@@ -5467,11 +5561,13 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- 托管中",
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "运往",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "确认订单",
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "备注",
           CommentsPlaceHolder: "订单的备注(如果有的话)",
           Shipper: "Item Shipped By", // not translated
@@ -5480,10 +5576,10 @@ module.exports = Backbone.Model.extend({
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "卖家",
@@ -5507,16 +5603,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -5713,6 +5812,7 @@ module.exports = Backbone.Model.extend({
         of: "한태서",
         Sell: "팔다",
         New: "새것",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "훌륭한",
         Good: "줗은",
         Poor: "불량",
@@ -5791,6 +5891,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "리뷰",
         Shipping: "배송",
         Addresses: "주소들",
+        Files: "Files", //notTranslated
         NewAddress: "새로 주소",
         CurrentAddress: "현재 주소들",
         Returns: "반품",
@@ -5862,6 +5963,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "배경색",
         NotificationFollow: "너를 팔로우하다",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "공지 없어",
         WelcomeToYourPage: "환영해 너의 페이지!",
@@ -5922,9 +6024,9 @@ module.exports = Backbone.Model.extend({
         ShippingTo: "Shipping To", //not translated
         ModeratedBy: "Moderated by", //not translated
         Submit: "Submit", //not translated
-        maxLength20: "maximum length 20 characters", //not translated
-        maxLength80: "maximum length 80 characters", //not translated
-        maxLength200: "maximum length 200 characters", //not translated
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
         Searchformoderators: "Search for moderators", // not translated
         Contributors: "Contributors", // not translated
@@ -5955,10 +6057,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
@@ -5984,23 +6087,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -6024,16 +6129,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -6226,6 +6334,7 @@ module.exports = Backbone.Model.extend({
         of: "／",
         Sell: "売る",
         New: "新品",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "極良質",
         Good: "良質",
         Poor: "まあまあ良い",
@@ -6303,6 +6412,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "レビュー",
         Shipping: "発送",
         Addresses: "住所",
+        Files: "Files", //notTranslated
         NewAddress: "新しいお届け先住所",
         CurrentAddress: "現在のお届け先住所",
         Returns: "返品",
@@ -6374,6 +6484,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "背景カラー",
         NotificationFollow: "があなたをフォローしました",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "新しい通知はありません。",
         WelcomeToYourPage: "マイページにようこそ！",
@@ -6457,10 +6568,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee", // not translated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "出品者",
           PurchasedBy: "購入者",
           searchByOrder: "注文ID・商品名で探す",
@@ -6486,23 +6598,25 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address you will receive payment at", // not translated
+          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Item Shipped By", // not translated
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
           EstimatedDelivery: "Estimated Delivery", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "URL", // not translated
+          URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
           Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link, if any", // not translated
+          PasswordPlaceholder: "Password required for link (optional)", // not translated
           DirectTransaction: "Direct transaction", // not translated
           ModeratedTransaction: "Moderated transaction", // not translated
           Seller: "Seller", // not translated
@@ -6526,16 +6640,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
@@ -6731,6 +6848,7 @@ module.exports = Backbone.Model.extend({
         of: "of",//No Polish Equivalent
         Sell: "Sprzedaj",
         New: "Nowy",
+        HighlightToStyle: "Highlight text to style", //notTranslated
         Excellent: "Doskonały",
         Good: "W dobrym stanie",
         Poor: "W złym stanie",
@@ -6809,6 +6927,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Opinie",
         Shipping: "Wysyłka",
         Addresses: "Adresy",
+        Files: "Files", //notTranslated
         NewAddress: "Nowy adres",
         CurrentAddress: "Bieżący adres",
         Returns: "Zwroty",
@@ -6880,6 +6999,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Kolor tła",
         NotificationFollow: "zaczął cię obserować!",
         NotificationDispute: "has opened a new dispute", //not translated
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Brak powiadomień",
         WelcomeToYourPage: "Witaj na swojej stronie!",
@@ -6973,10 +7093,11 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Service fee",//notTranslated
           ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
         },
-        BecomeModerator: "Become a moderator",//notTranslated
+        BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
         transactions: {
           OrderDetails: "Order Details", //notTranslated
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Sprzedawca",
           PurchasedBy: "Nabywca",
           searchByOrder: "Szukaj po ID lub nazwie przedmiotu",
@@ -7002,20 +7123,22 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Ubezpieczenie płatności",
           ShipTo: "Wysyłka do",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Potwierdź to zamówienie",
           ReceivingAddress: "Adres odbiorczy",
           RecievingAddressPlaceholder: "Adres portfela, na którzy otrzymasz płatność",
           Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on the order, if any", // not translated
+          CommentsPlaceHolder: "Comments on the order (optional)", // not translated
           Shipper: "Wysłane przez",
           ShipperPlaceholder: "Firma przesyłkowa",
           TrackingNumber: "Numer śledzenia",
           TrackingNumberPlaceholder: "Numer śledzenia przesyłki",
           EstimatedDelivery: "Przybliżona wysyłka",
           EstimatedDeliveryPlaceholder: "Przybliżony czas dostarczenia",
-          URL: "URL",
+          URL: "File URL",
           URLPlaceholder: "Link do pobrania, harmonogramu lub innych informacji",
           Password: "Hasło",
           PasswordPlaceholder: "Hasło zabezpieczające link (opcjonalne)",
@@ -7042,16 +7165,19 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Obsługa klienta",
           Review: "Oceń",
           ReviewPlaceHolder: "Twoja opinia o tej transakcji",
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Type your message here.", // not translated
+          sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
           SendMessage: "Send",// not translated
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Nie można zapisać zmian.",
@@ -7071,7 +7197,7 @@ module.exports = Backbone.Model.extend({
           about: "<p>OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p><p>Oprogramowanie jest otwarte, udostępniane na licencji MIT. Kod dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githubie</a>.</p><p>OpenBazaar jest projektem społeczośniowym i zachęcamy do wejścia na nasz kanał <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> lub odwiedzenia naszego <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p><p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"\" target=\"_blank\">poradnik</a> do OpenBazaar w wersji 1.0.</p><p>Jeśli nadaj masz jakieś pytania, kliknij <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">tutaj</a>.</p>",
           contributors: "<p>OpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy, którzy poświęcają swój czas, by uczynić handel wolnym. Oto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub inny rodzaj uczestnictwa.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li><li>Michał Pado</li></ul>", 
           support: "<p>Możesz wesprzeć OpenBazaar na wiele sposobów, by wspomóc nas w naszej misji.</p><p>Kupowanie i sprzedawanie dóbr i usług przyczynia się do powiększenia naszej społeczności, a to z kolei zwiększa atrakcyjność platformy w oczach potencjalnych nowych użytkowników. Uprzejme prośby (kierowane do sprzedawców) o akceptację płatności w Bitcoinie za pośrednictwem naszej platformy pomaga docierać do kolejnych osób i pokazuje, że jest zapotrzebowanie na handel P2P.</p><p>Jeśli jesteś programistą, odwiedź naszego <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githuba</a> i zobacz, czy może nie ma czegoś, w czym mógłbyś nam pomóc. Oprócz pomocy z kodem źrodłowym mamy nadzieję, liberalna natura projektu zachęci was do tworzenia nowych usług bazujących na istniejącej sieci.</p><p>Możesz również <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">wspomóc nas finansowo</a>. Środki zostaną wykorzystane na pokrycie kosztów związanych z konferencjami, programem Bug Bounty oraz promocją //bounties.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Dołącz do naszego Slacka</a>, jeśli masz jakieś pomysły związane z projektem lub chciałbyś o coś zapytać deweloperów.</p>",
-          licensing: "<p>OpenBazaar to otwarte oprogramowanie oparte na licencj MIT. To liberalna licencja, zezwala pozwala na wykorzystanie kodu przy innych otwartych projektach, jak i projektach prawnie zastrzeżonych. Pełna treść licencji dostępna jest pod poniższym linkiem.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
+          licensing: "<p>OpenBazaar to otwarte oprogramowanie oparte na licencj MIT. To liberalna licencja, zezwala pozwala na wykorzystanie kodu przy innych otwartych projektach, jak i projektach prawnie zastrzeżonych. Pełna treść licencji dostępna jest pod poniższym linkiem.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Zapisano",
@@ -7301,6 +7427,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Anmeldelser",
         Shipping: "Forsendelse",
         Addresses: "Adresser",
+        Files: "Files", //notTranslated
         NewAddress: "Ny adresse",
         CurrentAddress: "Aktuelle adresser",
         Returns: "Returret",
@@ -7372,6 +7499,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Baggrundsfarve",
         NotificationFollow: "følger nu dig",
         NotificationDispute: "har åbnet en ny uenighed",
+        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "har gjort et køb",
         NoNotifications: "Ingen notifikationer",
         WelcomeToYourPage: "Velkommen til din side!",
@@ -7469,6 +7597,7 @@ module.exports = Backbone.Model.extend({
         EditModerator: "Moderatorindstillinger",
         transactions: {
           OrderDetails: "Ordredetaljer",
+          ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Sælger",
           PurchasedBy: "Køber",
           searchByOrder: "Søg ud fra ordre-ID eller varenavn",
@@ -7494,8 +7623,10 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
+          NoMessages: "No messages", //notTranslated
           PaymentProtection: "Betalingsbeskyttelse",
           ShipTo: "Afsend til",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Bekræft ordre",
           ReceivingAddress: "Modtagelsesadresse",
           RecievingAddressPlaceholder: "Bitcoin-adresse, du vil modtage betaling på",
@@ -7507,7 +7638,7 @@ module.exports = Backbone.Model.extend({
           TrackingNumberPlaceholder: "Varens tracking-nummer",
           EstimatedDelivery: "Estimeret levering",
           EstimatedDeliveryPlaceholder: "Estimeret dato for levering af vare",
-          URL: "URL",
+          URL: "File URL",
           URLPlaceholder: "Link til download, plan eller mere information",
           Password: "Adgangskode",
           PasswordPlaceholder: "Adgangskode til link, hvis det kræves",
@@ -7534,6 +7665,8 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Kundeservice",
           Review: "Bedøm",
           ReviewPlaceHolder: "Din bedømmelse af denne handel",
+          NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "Ingen sendt",
           ModerationFee: "Modereringsgebyr:",
           DisputeTransaction: "Start en uenighed",
@@ -7543,7 +7676,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Luk uenighed",
           TotalInTransaction: "Handel:",
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Data kunne ikke gemmes.",
@@ -7567,7 +7701,7 @@ module.exports = Backbone.Model.extend({
           about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a>-kanal eller på vores <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"\" target=\"_blank\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar er muliggjort af et internationalt fællesskab af udviklere og frivillige, der bidrager med deres tid for at gøre handel fri. Dette er en delvis liste over folk, der har bidraget til projektet, enten gennem kode eller anden assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", 
           support: "<p>Du kan hjælpe OpenBazaar på flere forskellige måder med vores mission om at gøre handel fri.</p><p>Køb og salg af varer og serviceydelser på netværket hjælper til at fællesskabet bliver større og gør platformen mere attraktiv for nye brugere. En venlig forespørgsel til eksisterende visksomheder, der modtager Bitcoin, om at sælge på platformen hjælper med at sprede kendskabet og viser efterspørgsel efter peer-to-peer-handel.</p><p>Hvis du er udvikler kan du tjekke <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">vores Github</a> og se, hvor du kan hjælpe os. Ud over at hjælpe med den centrale kode håber vi, at projektets tilladelsesfri og open source tilgang betyder, at du vil udvikle nye tjenester oven på det eksisterende netværk.</p><p>Du kan også <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donere Bitcoin</a> til projektet, hvilket vil blive brugt til at afholde omkostninger til besøg på konferencer, at tilbyde belønninger for udvikling og promovering af OpenBazaar.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Tilmeld dig venligst vores Slack</a>, hvis du har nye idéer til OpenBazaar eller har spørgsmål til kerneudviklerne.</p>", //notTranslated
-          licensing: "<p>OpenBazaar er open source software, der bruger MIT-licensen. Denne licens er tilladende og er designet til at tillade folk frit at genbruge koden til andre open source projekter eller til proprietær software. Den komplette licenstekst er herunder.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2015 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
+          licensing: "<p>OpenBazaar er open source software, der bruger MIT-licensen. Denne licens er tilladende og er designet til at tillade folk frit at genbruge koden til andre open source projekter eller til proprietær software. Den komplette licenstekst er herunder.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Gemt",
