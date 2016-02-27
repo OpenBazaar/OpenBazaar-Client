@@ -28,6 +28,8 @@ module.exports = baseVw.extend({
     'click .js-discussionTab': 'clickDiscussionTab',
     'click .js-showConfirmForm': 'showConfirmForm',
     'click .js-hideConfirmForm': 'hideConfirmForm',
+    'click .js-showFeedbackRating': 'showFeedbackRating',
+    'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
     'click .js-confirmOrder': 'confirmOrder',
     'click .js-completeOrder': 'completeOrder',
@@ -153,8 +155,17 @@ module.exports = baseVw.extend({
       this.getData();
     } else if(data.message && data.message.subject == this.orderID){
       var messageModel = new Backbone.Model(data.message);
-      //this.addDiscussionMessage(messageModel);
       this.discussionCol.add(messageModel);
+      if(data.message.message_type = "DISPUTE_OPEN"){
+        this.status = 4;
+        this.tabState = "discussion";
+        this.getData();
+      }
+      if(data.message.message_type = "DISPUTE_CLOSE"){
+        this.status = 5;
+        this.tabState = "discussion";
+        this.getData();
+      }
     }
   },
 
@@ -231,6 +242,16 @@ module.exports = baseVw.extend({
     this.$('.js-transactionShowContract').addClass('hide');
     this.$('.js-transactionsConfirmOrderHolder').addClass('bottom0');
     this.$("#transactionConfirmForm input:text").first().focus();
+  },
+
+  showFeedbackRating: function(){
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-transactionFeedback').addClass('bottom0');
+  },
+
+  hideFeedbackRating: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-transactionFeedback').removeClass('bottom0');
   },
 
   showRefundOrder: function(){
@@ -469,8 +490,14 @@ module.exports = baseVw.extend({
     discussionData.order_id = this.orderID;
     discussionData.resolution = this.$('#transactionDiscussionSendText').val();
     discussionData.moderator_percentage = this.moderatorPercentage;
-    discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
-    discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
+    if(this.model.get('vendor_order_confirmation')){
+      discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
+      discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
+    } else {
+      discussionData.buyer_percentage = 1
+      discussionData.vendor_percentage = 0;
+    }
+
 
     if(discussionData.resolution != ""){
       saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
@@ -484,7 +511,8 @@ module.exports = baseVw.extend({
   },
 
   acceptResolution: function(){
-    var resData = {};
+    var self = this,
+        resData = {};
     resData.order_id = this.orderID;
     saveToAPI(null, null, this.serverUrl + "release_funds", function(data){
       self.status = 6;
@@ -495,7 +523,8 @@ module.exports = baseVw.extend({
 
   refundOrder: function(){
     //var targetForm = this.$('#transactionRefundForm'),
-      var refData = {};
+      var self = this,
+          refData = {};
     refData.order_id = this.orderID;
     saveToAPI(null, null, this.serverUrl + "refund", function(data){
       self.status = 7;

@@ -3,28 +3,36 @@
       <a class="js-returnToStore textOpacity50 underline fontSize13"><%= polyglot.t('AllListings') %></a>
       <% if(ob.vendor_offer.listing.item.category) { %>
         <span class="ion-ios-arrow-forward breadCrumbArrow"></span> 
-        <a class="js-returnToStoreCategory textOpacity50 underline fontSize13"><%- ob.vendor_offer.listing.item.category %></a>
+        <a class="js-returnToStoreCategory textOpacity50 underline fontSize13"><%= ob.vendor_offer.listing.item.category %></a>
       <% } %>
     </div>
     <div class="floatRight">
       
     </div>
   </div>
-  <h2 class="page-contractTitle noOverflow textOpacity1 marginLeft20 marginBottom8" title="<%- ob.vendor_offer.listing.item.title %>"><%- ob.vendor_offer.listing.item.title %></h2>
-      <!-- <div style="word-break: break-word;"><%- JSON.stringify(ob.vendor_offer.listing) %></div> -->
+  <h2 class="page-contractTitle noOverflow textOpacity1 marginLeft20 marginBottom8" title="<%= ob.vendor_offer.listing.item.title %>"><%= ob.vendor_offer.listing.item.title %></h2>
+      <!-- <div style="word-break: break-word;"><%= JSON.stringify(ob.vendor_offer.listing) %></div> -->
 
   <div class="flexRow border0">
     <div class="flexCol-7 pad20">
-      <div class="itemImg itemImg-large row10"
-      style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultItem.png);">
+      <div class="itemImg itemImg-large row10 overflowHidden">
+        <div class="itemImg itemImg-large <% if(!ob.showNSFWContent && ob.vendor_offer.listing.item.nsfw){ %> nsfw <% } %>"
+           style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>),
+           url(imgs/defaultItem.png);">
+        </div>
           <% if(ob.vendor_offer.listing.item.image_hashes[0]) { %>
-            <button class="fullscreen js-photoGallery" href="<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>"></button>
+            <button class="fullscreen js-photoGallery" href="<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>"></button>
           <% } %>
       </div>
     <div class="flexRow row20">
       <% _.each(ob.vendor_offer.listing.item.image_hashes, function(data, i) {
       if(i != 0){%>
-      <div class="itemImg itemImg-small <% if(i > 4){%>hide<% } %>" style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>), url(imgs/defaultItem.png);"><button class="fullscreen js-photoGallery" href="<%- ob.serverUrl %>get_image?hash=<%- data %><%- ob.imageExtension %>"></button></div>
+      <div class="itemImg itemImg-small overflowHidden <% if(i > 4){%>hide<% } %>">
+        <div class="itemImg itemImg-small <% if(!ob.showNSFWContent && ob.vendor_offer.listing.item.nsfw){ %> nsfw <% } %>"
+             style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= data %><%= ob.imageExtension %>), url(imgs/defaultItem.png);">
+        </div>
+        <button class="fullscreen js-photoGallery" href="<%= ob.serverUrl %>get_image?hash=<%= data %><%= ob.imageExtension %>"></button>
+      </div>
       <% } }); %>
     </div>
   </div>
@@ -33,10 +41,10 @@
       <ul class="itemMeta">
         <li class="alignCenter itemPrice">
           <span class="textSize22px textOpacity1 fontWeight500 marginRight2">
-            <%- ob.vendorBTCPrice.toFixed(4) %> BTC
+            <%= ob.vendorBTCPrice.toFixed(4) %> BTC
           </span>
           <% if(ob.userCurrencyCode != 'BTC'){ %>
-          <span class="textSize22px textOpacity65">(<%- ob.displayPrice %>)</span>
+          <span class="textSize22px textOpacity65">(<%= ob.displayPrice %>)</span>
           <% } %>
         </li>
         <li class="border0 alignCenter padding10 height70 marginBottom12">
@@ -59,7 +67,7 @@
           <% if(ob.vendor_offer.listing.shipping.shipping_origin) { %>
           <div class="clearfix">
             <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7"></div>
-            <div class="itemMetaValue noOverflow"><%- ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
+            <div class="itemMetaValue noOverflow"><%= ob.vendor_offer.listing.shipping.shipping_origin.replace("_", " ").toLowerCase() %></div>
           </div>  
           <% } %>  
         </td>
@@ -67,7 +75,7 @@
           <% if(ob.vendor_offer.listing.metadata.category) { %>
           <div class="clearfix">
             <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize15"></div>
-            <div class="itemMetaValue"><%- ob.vendor_offer.listing.metadata.category %></div>
+            <div class="itemMetaValue"><%= ob.vendor_offer.listing.metadata.category %></div>
           </div>    
           <% } %>
         </td>
@@ -76,7 +84,7 @@
         <% if(ob.vendor_offer.listing.item.condition) { %>  
         <td>
           <div class="itemMetaCircle custCol-secondary floatLeft ion-android-star marginRight7 fontSize15"></div>
-          <div class="itemMetaValue"><%- ob.vendor_offer.listing.item.condition %></div>
+          <div class="itemMetaValue"><%= ob.vendor_offer.listing.item.condition %></div>
         </td>
         <% } %>
 
@@ -95,9 +103,9 @@
       <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) { 
         if(data.length < 100 && i < 11) { 
         %>
-          <a href="#home/products/<%- data.replace(/\s+/g, '')  %>">
+          <a href="#home/products/<%= data.replace(/\s+/g, '')  %>">
             <div class="btn-pill custCol-secondary floatLeft">
-              #<%- data.replace(/\s+/g, '') %>
+              #<%= data.replace(/\s+/g, '') %>
             </div>
           </a>
       <% } }); %>    
@@ -148,21 +156,21 @@
           <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
             <% if(ob.vendor_offer.listing.shipping.free == false) { %>
               <h3><%= polyglot.t('Domestic') %></h3>
-              <p><%= polyglot.t('Shipping') %>: <%- ob.displayDomesticShipping %></p>
-              <p><%= polyglot.t('transactions.EstimatedDelivery') %>: <%- ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
+              <p><%= polyglot.t('Shipping') %>: <%= ob.displayDomesticShipping %></p>
+              <p><%= polyglot.t('transactions.EstimatedDelivery') %>: <%= ob.vendor_offer.listing.shipping.est_delivery.domestic %></p>
               <hr/>
               <h3><%= polyglot.t('International') %></h3>
-              <p><%= polyglot.t('Shipping') %>: <%- ob.displayInternationalShipping %></p>
-              <p><%= polyglot.t('transactions.EstimatedDelivery') %>: <%- ob.vendor_offer.listing.shipping.est_delivery.international %></p>
+              <p><%= polyglot.t('Shipping') %>: <%= ob.displayInternationalShipping %></p>
+              <p><%= polyglot.t('transactions.EstimatedDelivery') %>: <%= ob.vendor_offer.listing.shipping.est_delivery.international %></p>
               <hr/>
             <% } %>
             <% if(ob.vendor_offer.listing.policy.returns) { %>
               <h3><%= polyglot.t('ReturnsPolicy') %></h3>
-              <p><%- ob.vendor_offer.listing.policy.returns %></p>
+              <p><%= ob.vendor_offer.listing.policy.returns %></p>
             <% } %>
             <% if(ob.vendor_offer.listing.policy.terms_conditions) { %>
               <h3><%= polyglot.t('TermsAndConditions') %></h3>
-              <p><%- ob.vendor_offer.listing.policy.terms_conditions %></p>
+              <p><%= ob.vendor_offer.listing.policy.terms_conditions %></p>
             <% } %>
           </div>
         </div>

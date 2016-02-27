@@ -74,9 +74,6 @@ module.exports = Backbone.View.extend({
     this.subModels = [];
     this.subModels.push(this.userProfile);
 
-    this.newAvatar = false;
-    this.newBanner = false;
-
     this.moderatorFeeInput;
     this.moderatorFeeHolder;
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
@@ -128,7 +125,12 @@ module.exports = Backbone.View.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.delegateEvents(); //delegate again for re-render
       self.setFormValues();
-      
+
+      self.newAvatar = false;
+      self.avatarNeverLoaded = true;
+      self.newBanner = false;
+      self.bannerNeverLoaded = true;
+
       // Since the Blocked Users View kicks off many server calls (one
       // for each blocked user) and since we are re-rendering the entire
       // settings view often (after each save), we will cache the Blocked
@@ -151,7 +153,12 @@ module.exports = Backbone.View.extend({
         onFileReaderError: function(data){console.log(data);},
         onImageLoading: function(){
           self.$el.find('.js-avatarLoading').removeClass('fadeOut');
-          self.newAvatar = true;
+          
+          if (self.avatarNeverLoaded) {
+            self.avatarNeverLoaded = false;
+          } else {
+            self.newAvatar = true;
+          }
         },
         onImageLoaded: function(){self.$el.find('.js-avatarLoading').addClass('fadeOut');},
         onImageError: function(errorObject, errorCode, errorMessage){
@@ -175,7 +182,12 @@ module.exports = Backbone.View.extend({
         onFileReaderError: function(data){console.log(data);},
         onImageLoading: function(){
           self.$el.find('.js-bannerLoading').removeClass('fadeOut');
-          self.newBanner = true;
+
+          if (self.bannerNeverLoaded) {
+            self.bannerNeverLoaded = false;
+          } else {
+            self.newBanner = true;
+          }          
         },
         onImageLoaded: function(){self.$el.find('.js-bannerLoading').addClass('fadeOut');},
         onImageError: function(errorObject, errorCode, errorMessage){
@@ -609,7 +621,6 @@ module.exports = Backbone.View.extend({
     var checkBanner = function(){
       var bannerCrop = self.$el.find('#settings-image-cropperBanner');
       if(self.newBanner && bannerCrop.cropit('imageSrc')){
-
         bannerURI = bannerCrop.cropit('export', {
           type: 'image/jpeg',
           quality: 0.75,
@@ -633,7 +644,6 @@ module.exports = Backbone.View.extend({
 
     //if an avatar has been set, upload it first and get the hash
     if(self.newAvatar && avatarCrop.cropit('imageSrc')){
-
       imageURI = avatarCrop.cropit('export', {
         type: 'image/jpeg',
         quality: 0.75,

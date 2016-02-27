@@ -309,6 +309,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total",
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order",
           RefundOrder: "Refund Order",
           RefundReason: "Reason for refund",
@@ -351,6 +352,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent",
           ModerationFee: "Moderation Fee:",
           DisputeTransaction: "Start a Dispute",
@@ -360,7 +362,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",
           TotalInTransaction: "Transaction:",
           StartDisputeFlag: "START DISPUTE",
-          CloseDisputeFlag: "END DISPUTE"
+          CloseDisputeFlag: "END DISPUTE",
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer."
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -836,6 +839,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -875,6 +879,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -884,7 +889,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -1353,6 +1359,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -1392,6 +1399,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -1401,7 +1409,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1875,6 +1884,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -1914,6 +1924,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -1923,7 +1934,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -2399,6 +2411,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "Total BTC",
           PaymentProtection: "Protection de paiement",
           ShipTo: "Expédier à",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirmer cette commande",
           ReceivingAddress: "Adresse de réception",
           RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
@@ -2438,6 +2451,7 @@ module.exports = Backbone.Model.extend({
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "Aucun avis envoyé",
           ModerationFee: "Frais de modération :",
           DisputeTransaction: "Initier un litige",
@@ -2447,7 +2461,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Clôturer le litige",
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2919,6 +2934,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -2958,6 +2974,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -2967,7 +2984,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -3437,6 +3455,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -3476,6 +3495,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -3485,7 +3505,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -3955,6 +3976,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -3994,6 +4016,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -4003,7 +4026,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -4477,6 +4501,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -4516,6 +4541,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -4525,7 +4551,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -4998,6 +5025,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -5037,6 +5065,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -5046,7 +5075,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -5523,6 +5553,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "运往",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "确认订单",
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -5562,6 +5593,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -5571,7 +5603,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -6045,6 +6078,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -6084,6 +6118,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -6093,7 +6128,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -6552,6 +6588,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC Total", // not translated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -6591,6 +6628,7 @@ module.exports = Backbone.Model.extend({
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -6600,7 +6638,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
@@ -7073,6 +7112,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "Łącznie (BTC)",
           PaymentProtection: "Ubezpieczenie płatności",
           ShipTo: "Wysyłka do",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Potwierdź to zamówienie",
           ReceivingAddress: "Adres odbiorczy",
           RecievingAddressPlaceholder: "Adres portfela, na którzy otrzymasz płatność",
@@ -7112,6 +7152,7 @@ module.exports = Backbone.Model.extend({
           Review: "Oceń",
           ReviewPlaceHolder: "Twoja opinia o tej transakcji",
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "None sent", // not translated
           ModerationFee: "Moderation Fee:", // not translated
           DisputeTransaction: "Start a Dispute", // not translated
@@ -7121,7 +7162,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Nie można zapisać zmian.",
@@ -7569,6 +7611,7 @@ module.exports = Backbone.Model.extend({
           OrderTotalInBTC: "BTC-total",
           PaymentProtection: "Betalingsbeskyttelse",
           ShipTo: "Afsend til",
+          ContractDetails: "Contract Details", //notTranslated
           ConfirmOrder: "Bekræft ordre",
           ReceivingAddress: "Modtagelsesadresse",
           RecievingAddressPlaceholder: "Bitcoin-adresse, du vil modtage betaling på",
@@ -7608,6 +7651,7 @@ module.exports = Backbone.Model.extend({
           Review: "Bedøm",
           ReviewPlaceHolder: "Din bedømmelse af denne handel",
           NoFileProvided: "No file provided", //notTranslated
+          None: "None", //notTranslated
           NoneSent: "Ingen sendt",
           ModerationFee: "Modereringsgebyr:",
           DisputeTransaction: "Start en uenighed",
@@ -7617,7 +7661,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Luk uenighed",
           TotalInTransaction: "Handel:",
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Data kunne ikke gemmes.",

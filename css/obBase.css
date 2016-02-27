@@ -3865,7 +3865,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .confirmOrderHolder,
-.contractHolder {
+.contractHolder,
+.feedbackHolder {
   transition: bottom .15s ease;
   bottom: -250px;
   position: absolute;
@@ -5155,6 +5156,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .blurMore {
   -webkit-filter: blur(5px);
+}
+
+#ov1 .nsfw {
+  -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
 #ov1 .fadeOut {

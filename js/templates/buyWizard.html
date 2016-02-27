@@ -4,7 +4,7 @@
       <h2 class="ion-android-close custCol-text clickable"></h2>
     </div>
     <div class="modal-hero js-buyWizardHero shadow-inner1-light"
-         style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %><%- ob.imageExtension %>), url(imgs/defaultBanner.png);">
+         style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>), url(imgs/defaultBanner.png);">
       <div class="js-buyWizardMapPlaceholder hide">
         <div class="overflowhide">
           <iframe
@@ -306,15 +306,15 @@
                           <% if(moderator.guid != ob.user.guid){ %>
                             <div class="flexRow">
                               <div class="">
-                                <label for="buyWizardModeratorRadio<%- i %>" class="textOpacity1 clickable">
+                                <label for="buyWizardModeratorRadio<%= i %>" class="textOpacity1 clickable">
                                   <div class="table padding8 border1 custCol-border">
                                     <div>
                                       <div class="floatLeft marginTop8">
-                                        <input type="radio" class="js-buyWizardModeratorRadio floatLeft" name="moderator" id="buyWizardModeratorRadio<%- i %>" value="<%- i %>"/>
+                                        <input type="radio" class="js-buyWizardModeratorRadio floatLeft" name="moderator" id="buyWizardModeratorRadio<%= i %>" value="<%= i %>"/>
                                       </div>
                                       <div class="thumbnail thumbnail-large-slim floatLeft marginLeft7"
                                            <% if(moderator.avatar){ %>
-                                           style="width: 32px; height: 32px; background-image: url(<%- ob.serverUrl %>get_image?hash=<%- moderator.avatar %>&guid=<%- moderator.guid %>), url(imgs/defaultUser.png);">
+                                           style="width: 32px; height: 32px; background-image: url(<%= ob.serverUrl %>get_image?hash=<%= moderator.avatar %>&guid=<%= moderator.guid %>), url(imgs/defaultUser.png);">
                                            <% } else { %>
                                            style="background-image: url(imgs/defaultUser.png); width: 32px; height: 32px;">
                                            <% } %>
@@ -322,13 +322,13 @@
                                       <div class="txt-unleaded width380 floatLeft">
                                         <div class="clearFix">
                                           <div class="noOverflow width260 floatLeft marginLeft7  marginTop2 fontSize13"
-                                               title="<% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>">
-                                            <%- moderator.name %>
+                                               title="<% if(moderator.handle){ %><%= moderator.handle %><% } else { %><%= moderator.guid %><% } %>">
+                                            <%= moderator.name %>
                                             <div class="marginTop2 textOpacity75 noOverflow width260">
-                                            <% if(moderator.handle){ %><%- moderator.handle %><% } else { %><%- moderator.guid %><% } %>
+                                            <% if(moderator.handle){ %><%= moderator.handle %><% } else { %><%= moderator.guid %><% } %>
                                             </div>
                                           </div>
-                                          <div class="floatRight textOpacity75"><%- moderator.fee %></div>
+                                          <div class="floatRight textOpacity75"><%= moderator.fee %></div>
                                         </div>
                                       </div>
                                     </div>
@@ -390,7 +390,7 @@
                 <div class="flexCol-12 custCol-border positionWrapper">
                   <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
                          placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
-                         pattern="<%- ob.user.bitcoinValidationRegex %>"
+                         pattern="<%= ob.user.bitcoinValidationRegex %>"
                          value="<%= ob.user.refund_address %>" required />
                 </div>
               </form>

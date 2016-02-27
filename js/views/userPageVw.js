@@ -160,7 +160,7 @@ module.exports = baseVw.extend({
     'click .js-unblock': 'unblockUserClick',
     'click .js-showBlockedUser': 'showBlockedUser',
     'change .js-categories': 'categoryChanged',
-    'click .js-showNSFWContent': 'showNSFWContent'
+    'click .js-showNSFWContent': 'clickShowNSFWContent'
   },
 
   initialize: function (options) {
@@ -174,7 +174,6 @@ module.exports = baseVw.extend({
     userID: if userID is in the route, it is set here
     state: if state is in the route, it is set here
     itemHash: if itemHash is in the route, it is set here
-    directClick: if this page was loaded by clicking on an itemShort view, this is true
      */
     //if userID was passed by router, set it as pageID
     this.pageID = options.userID;
@@ -201,13 +200,13 @@ module.exports = baseVw.extend({
     this.socketView = options.socketView;
     this.slimVisible = false;
     this.confirmDelete = false;
-    this.state = this.options.state;
+    this.state = options.state;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
     this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
-    this.showNSFWContent = false;
-    this.directClick = options.directClick;
+    this.showNSFWContent = this.showNSFW;
+    this.currentItemHash = options.itemHash;
     //hold changes to the page for undoing, such as custom colors
     this.undoCustomAttributes = {
       profile: {
@@ -352,14 +351,14 @@ module.exports = baseVw.extend({
       self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
-      self.setState(self.state, self.options.itemHash);
+      self.setState(self.state, self.currentItemHash);
 
       //check if user is blocked
       if(!self.options.ownPage && isBlocked) {
         self.hideThisUser("blocked");
       }
 
-      if(!self.options.ownPage && self.model.get('page').profile.nsfw && !self.showNSFW && !self.directClick){
+      if(!self.options.ownPage && self.model.get('page').profile.nsfw && !self.showNSFW){
         self.hideThisUser("nsfw");
       }
 
@@ -663,6 +662,8 @@ module.exports = baseVw.extend({
 
       if(arrayItem.nsfw && !self.showNSFWContent && !self.showNSFW){
         arrayItem.cloak = true;
+      }else{
+        arrayItem.cloak = false;
       }
       arrayItem.userCurrencyCode = self.options.userModel.get('currency_code');
       arrayItem.serverUrl = self.options.userModel.get('serverUrl');
@@ -764,6 +765,7 @@ module.exports = baseVw.extend({
       itemHash: hash,
       user: self.model.get('user'),
       page: self.model.get('page'),
+      showNSFWContent: self.showNSFWContent
     });
     this.item.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
     //remove old item before rendering
@@ -1446,10 +1448,13 @@ module.exports = baseVw.extend({
     }
   },
 
-  showNSFWContent: function(){
+  clickShowNSFWContent: function(){
     this.showNSFWContent = true;
-    this.render(this.cachedListings);
     this.showBlockedUser();
+    if(this.state == "item"){
+      this.renderItem(this.currentItemHash);
+    }
+    this.renderItems(this.cachedListings);
   },
 
   showBlockedUser: function(){

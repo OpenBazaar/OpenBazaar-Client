@@ -346,6 +346,19 @@
                 <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea custCol-text" placeholder="<%= polyglot.t('onboarding.ShortDescriptionPlaceholder') %>"></textarea>
               </div>
             </div>
+            <div class="flexRow borderBottom custCol-border">
+              <div class="flexCol-3 borderRight custCol-border">
+                <label class="fieldItem" for="aboutInput">
+                  <%= polyglot.t('DisplayNSFWcontent') %>
+                </label>
+              </div>
+              <div class="flexCol-9">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="display_nsfw_content_yes" name="nsfw" value="true" /><label for="display_nsfw_content_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="display_nsfw_content_no" name="nsfw" value="false" checked /><label for="display_nsfw_content_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
