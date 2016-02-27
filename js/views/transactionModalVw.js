@@ -49,6 +49,8 @@ module.exports = baseVw.extend({
     //'click .js-refundTransaction': 'showRefundOrder',
     //'click .js-refundOrder': 'refundOrder',
     'click .js-refundTransaction': 'refundOrder',
+    'focus .js-transactionDiscussionSendText': 'highlightInput',
+    'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput'
   },
@@ -212,6 +214,14 @@ module.exports = baseVw.extend({
     this.state = state;
   },
 
+  highlightInput: function(e) {
+    this.$('.js-discussionForm').addClass('custCol-border').removeClass('custCol-border-secondary');
+  },
+
+  blurInput: function(e) {
+    this.$('.js-discussionForm').removeClass('custCol-border').addClass('custCol-border-secondary');
+  },
+
   validateInput: function(e) {
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
@@ -231,6 +241,7 @@ module.exports = baseVw.extend({
 
   clickDiscussionTab: function(){
     this.setState("discussion");
+    this.$('.js-transactionDiscussionSendText').focus();
   },
 
   hideConfirmForm: function(){

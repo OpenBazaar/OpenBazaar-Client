@@ -404,7 +404,7 @@
     <div style="height: 264px;" class="scrollOverflowY customThemeScrollbar">
 
       <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding2015">       
+        <div class="flexRow rowItem padding15">       
           <div class="flexCol-8">
             <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
             <div class="thumbnail thumbnail-large-slim floatLeft marginRight10"
@@ -454,7 +454,7 @@
       <!-- only display shipping if shipping data exists -->
       <% if(ob.buyer_order.order.shipping) { %>
       <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding2015">
+        <div class="flexRow rowItem padding15">
           <div class="flexCol-8">
             <div class="thumbnail-large-slim floatLeft marginRight10">
               <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
@@ -493,7 +493,7 @@
       <!-- only display moderator if one is assigned -->
       <% if( ob.displayModerator) { %>
       <div class="flexRow custCol-border borderBottom">
-        <div class="flexRow rowItem padding2015">
+        <div class="flexRow rowItem padding15">
           <a href="#userPage/<%- ob.displayModerator.guid %>">
             <div class="thumbnail thumbnail-large-slim"
               <% if(ob.displayModerator.avatar) { %>
@@ -540,7 +540,7 @@
   <div class="js-main js-shipping hide" style="height:319px">
     <% if(ob.buyer_order.order.shipping) { %>
     <div class="flexRow custCol-border borderBottom">
-      <div class="flexRow rowItem padding2015">
+      <div class="flexRow rowItem padding15">
         <div class="thumbnail-large-slim floatLeft marginRight10">
           <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
             <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 23%;"></span>
@@ -564,10 +564,15 @@
     <div class="flexRow custCol-border borderBottom">
       <div class="flexRow rowItem padding15">
         <div class="flexCol-8">
-          <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
-            <div class="thumbnail thumbnail-large-slim floatLeft marginRight10" style="background-image: url(imgs/defaultUser.png);">
-            </div>
-          </a>
+            <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
+            <div class="thumbnail thumbnail-large-slim floatLeft marginRight10"
+                        <% if(ob.vendor_offer.listing.item.image_hashes){ %>
+    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
+    <% } else { %>
+    style="background-image: url(imgs/defaultBanner.png);"
+    <% } %>>
+                      </div>    
+              </a> 
           <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop6">
             <%- ob.vendor_order_confirmation.invoice.comments ? ob.vendor_order_confirmation.invoice.comments : polyglot.t('transactions.None') %>
           </div>
@@ -798,7 +803,7 @@
       <div class="js-discussionWrapper">
       </div>
     </div>
-    <div class="flexRow pad10Top width100 positionBottom custCol-secondary js-discussionForm" style="height: 83px;">
+    <div class="flexRow pad10Top width100 positionBottom custCol-secondary js-discussionForm border2 custCol-border-secondary" style="height: 83px;">
       <div class="pad10">
         <div class="thumbnail thumbnail-small custCol-border-secondary borderRadius2 width40 height40"
         <% if(ob.avatarURL) { %>
@@ -811,7 +816,7 @@
       <form class="flexExpand" id="transactionDiscussionForm">
         <textarea name="claim"
                   rows="4"
-                  class=" custCol-text validatable border0"
+                  class=" custCol-text validatable border0 js-transactionDiscussionSendText"
                   id="transactionDiscussionSendText"
                   required
                   placeholder="<%= polyglot.t('transactions.sendMessagePlaceholder') %>"></textarea>

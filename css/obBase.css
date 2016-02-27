@@ -4229,6 +4229,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .border2 {
+  border: solid 2px rgba(255,255,255,0.08);
+}
+
 #ov1  .border0 {
   border: 0;
 }
