@@ -29,7 +29,6 @@ module.exports = Backbone.Router.extend({
     "myPage": "userPage",
     "userPage": "userPage",
     "userPage/:userID(/:state)(/:itemHash)": "userPage",
-    "sellItem": "sellItem",
     "transactions": "transactions",
     "transactions/:state": "transactions",
     "settings": "settings",
@@ -100,17 +99,6 @@ module.exports = Backbone.Router.extend({
       userID: userID,
       state: state,
       itemHash: itemHash,
-      socketView: this.socketView
-    }),"userPage");
-  },
-
-  sellItem: function(){
-    "use strict";
-    this.cleanup();
-    this.newView(new userPageView({
-      userModel: this.userModel,
-      userProfile: this.userProfile,
-      state: 'itemNew',
       socketView: this.socketView
     }),"userPage");
   },

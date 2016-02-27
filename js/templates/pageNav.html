@@ -18,7 +18,7 @@
     <%= polyglot.t('nav.customizePage') %>
   </a>
   <% if(ob.vendor) { %>
-    <a href="#sellItem" >
+    <a href="#userPage/<%- ob.guid %>/itemNew" >
       <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
       <%= polyglot.t('nav.createListing') %>
     </a>
@@ -29,7 +29,7 @@
     </a>
   <% } %>
   <% if(!ob.moderator){ %>
-    <a chref="#userPage/<%- ob.guid %>/becomeModerator">
+    <a href="#userPage/<%- ob.guid %>/becomeModerator">
       <span class="ion-bowtie fontSize11 marginRight2 textOpacity1"></span>
       <span class="js-userPageBecomeModerator">
         <%= polyglot.t('BecomeModerator') %>
@@ -113,7 +113,7 @@
   </div>
 
   <div class="ctrlGroup nav-profile">
-    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('Menu') %>" data-popmenu=".popMenu-navBar"
+    <div class="btn btn-profile js-navProfile tooltip" data-tooltip="<%= polyglot.t('Menu') %>" data-popmenu=".popMenu-navBar"
     <% if(ob.avatar_hash != "") { %>
     style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>

@@ -292,7 +292,7 @@
             </div>
           </div>
           <div class="customThemeScrollbar width100 scrollOverflowYHideX" style="height: 215px;">
-            <div class="flexCol-12">
+            <div class="flexRow">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
                 <strong><%= polyglot.t('transactions.OverallRating') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.feedback %>)</strong>
                 <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
@@ -300,7 +300,7 @@
                 <% } %>
               </div>
             </div>
-            <div class="flexCol-12">
+            <div class="flexRow">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
                 <strong><%= polyglot.t('transactions.Quality') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.quality %>)</strong>
                 <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.quality; i++) { %>
@@ -308,7 +308,7 @@
                 <% } %>
               </div>
             </div>
-            <div class="flexCol-12">
+            <div class="flexRow">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
                 <strong><%= polyglot.t('transactions.Description') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.description %>)</strong>
                 <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.description; i++) { %>
@@ -316,7 +316,7 @@
                 <% } %>
               </div>
             </div>
-            <div class="flexCol-12">
+            <div class="flexRow">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
                 <strong><%= polyglot.t('transactions.DeliveryTime') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.delivery_time %>)</strong>
                 <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.delivery_time; i++) { %>
@@ -324,7 +324,7 @@
                 <% } %>
               </div>
             </div>
-            <div class="flexCol-12">
+            <div class="flexRow">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
                 <strong><%= polyglot.t('transactions.CustomerService') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.customer_service %>)</strong>
                 <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.customer_service; i++) { %>
@@ -332,10 +332,14 @@
                 <% } %>
               </div>
             </div>
-            <div class="flexCol-12">
+            <div class="flexRow row30">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.Review') %></strong><br/>
-                <%=ob.buyer_receipt.receipt.rating.tx_summary.review %>
+                <div class="row10">
+                  <strong><%= polyglot.t('transactions.Review') %></strong>
+                </div>
+                <div class="row10">
+                  <%= ob.buyer_receipt.receipt.rating.tx_summary.review %>
+                </div>
               </div>
             </div>
           </div>
@@ -565,14 +569,14 @@
       <div class="flexRow rowItem padding15">
         <div class="flexCol-8">
             <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
-            <div class="thumbnail thumbnail-large-slim floatLeft marginRight10"
-                        <% if(ob.vendor_offer.listing.item.image_hashes){ %>
-    style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
-    <% } else { %>
-    style="background-image: url(imgs/defaultBanner.png);"
-    <% } %>>
-                      </div>    
-              </a> 
+              <div class="thumbnail thumbnail-large-slim floatLeft marginRight10"
+                  <% if(ob.vendor_offer.listing.item.image_hashes){ %>
+                  style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
+                  <% } else { %>
+                  style="background-image: url(imgs/defaultBanner.png);"
+                  <% } %>>
+              </div>
+            </a>
           <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop6">
             <%- ob.vendor_order_confirmation.invoice.comments ? ob.vendor_order_confirmation.invoice.comments : polyglot.t('transactions.None') %>
           </div>
@@ -598,21 +602,21 @@
             <%- ob.vendor_order_confirmation.invoice.content_source.url ?
             ob.vendor_order_confirmation.invoice.content_source.url : polyglot.t('transactions.NoFileProvided') %>
           </div> -->
-          <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
-          <div class="pad10left txt-unleaded fontSize13 textOpacity75 marginTop4">
-            <%= polyglot.t('transactions.Password') %>:
-            <%= ob.vendor_order_confirmation.invoice.content_source.password ?
-            ob.vendor_order_confirmation.invoice.content_source.password : polyglot.t('transactions.None') %>
-          </div>
-          <% }else{ %>
-          <div class="pad10left txt-unleaded fontSize13 textOpacity75 marginTop4">
-            <%= polyglot.t('transactions.Password') %>:
-            <%- polyglot.t('transactions.None') %>
-          </div>
-          <% } %>
+            <% if( ob.vendor_order_confirmation.invoice.content_source.password) { %>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity75 marginTop4">
+              <%= polyglot.t('transactions.Password') %>:
+              <%= ob.vendor_order_confirmation.invoice.content_source.password ?
+              ob.vendor_order_confirmation.invoice.content_source.password : polyglot.t('transactions.None') %>
+            </div>
+            <% }else{ %>
+            <div class="pad10left txt-unleaded fontSize13 textOpacity75 marginTop4">
+              <%= polyglot.t('transactions.Password') %>:
+              <%- polyglot.t('transactions.None') %>
+            </div>
+            <% } %>
           <% } %>
         </div>
-        <% if( ob.vendor_order_confirmation.invoice.content_source.url ) { %>
+        <% if( ob.vendor_order_confirmation.invoice.content_source && ob.vendor_order_confirmation.invoice.content_source.url ) { %>
         <div class="flexCol-4">
           <a href="<%- ob.vendor_order_confirmation.invoice.content_source.url %>" class="js-externalLink">
             <div class="btn btn-txt floatRight custCol-secondary textOpacity1">
