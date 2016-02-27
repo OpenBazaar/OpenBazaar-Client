@@ -459,7 +459,8 @@ module.exports = Backbone.View.extend({
         if(data.success == true){
           self.showPayAddress(data);
         } else {
-          messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " + window.polyglot.t('errorMessages.checkPurchaseData'));
+          messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " +
+              window.polyglot.t('errorMessages.checkPurchaseData') + "\n\n Reason: " + data.reason);
           self.$el.find('.js-buyWizardSpinner').addClass('hide');
         }
       },

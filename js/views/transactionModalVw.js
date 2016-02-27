@@ -128,7 +128,6 @@ module.exports = baseVw.extend({
 
   render: function () {
     var self = this;
-    console.log(this.model.attributes);
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
 
@@ -152,18 +151,31 @@ module.exports = baseVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
-      this.status = 1;
+    if(data.notification && data.notification.order_id == this.orderID){
+      switch(data.notification.type){
+        case "payment received":
+          this.status = 1;
+          this.tabState = "summary";
+          break;
+        case "order confirmation":
+          this.status = 2;
+          this.tabState = "summary";
+          break;
+        case "payment recieved":
+          this.status = 3;
+          this.tabState = "summary";
+          break;
+      }
       this.getData();
     } else if(data.message && data.message.subject == this.orderID){
       var messageModel = new Backbone.Model(data.message);
       this.discussionCol.add(messageModel);
-      if(data.message.message_type = "DISPUTE_OPEN"){
+      if(data.message.message_type == "DISPUTE_OPEN"){
         this.status = 4;
         this.tabState = "discussion";
         this.getData();
       }
-      if(data.message.message_type = "DISPUTE_CLOSE"){
+      if(data.message.message_type == "DISPUTE_CLOSE"){
         this.status = 5;
         this.tabState = "discussion";
         this.getData();
@@ -365,7 +377,6 @@ module.exports = baseVw.extend({
     this.discussionCount++;
     this.$('.js-discussionCount').text(this.discussionCount);
     this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
-    this.$('.js-discussionForm').removeClass('disabled');
     this.$('.js-discussionWrapperEmpty').addClass('hide');
   },
 
