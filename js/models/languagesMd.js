@@ -355,7 +355,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",
           TotalInTransaction: "Transaction:",
           StartDisputeFlag: "START DISPUTE",
-          CloseDisputeFlag: "END DISPUTE"
+          CloseDisputeFlag: "END DISPUTE",
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer."
         },
         errorMessages: {
           saveError: "Data could not be saved.",
@@ -873,7 +874,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Los datos no se pudieron guardar.",
@@ -1386,7 +1388,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Daten konnten nicht gespeichert werden.",
@@ -1903,7 +1906,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -2422,7 +2426,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Clôturer le litige",
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
@@ -2937,7 +2942,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Datele nu au putut fi salvate.",
@@ -3450,7 +3456,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -3963,7 +3970,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -4480,7 +4488,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Veri kaydedilemedi.",
@@ -4996,7 +5005,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Wej toDlu' De'.",
@@ -5516,7 +5526,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -6033,7 +6044,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "데이타를 저장할수 없다.",
@@ -6535,7 +6547,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "データの保存はできませんでした。",
@@ -7051,7 +7064,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Close Dispute",// not translated
           TotalInTransaction: "Transaction:", // not translated
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Nie można zapisać zmian.",
@@ -7543,7 +7557,8 @@ module.exports = Backbone.Model.extend({
           CloseDispute: "Luk uenighed",
           TotalInTransaction: "Handel:",
           StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE" // not translated
+          CloseDisputeFlag: "END DISPUTE", // not translated
+          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
         },
         errorMessages: {
           saveError: "Data kunne ikke gemmes.",

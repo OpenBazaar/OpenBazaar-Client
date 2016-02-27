@@ -468,8 +468,14 @@ module.exports = baseVw.extend({
     discussionData.order_id = this.orderID;
     discussionData.resolution = this.$('#transactionDiscussionSendText').val();
     discussionData.moderator_percentage = this.moderatorPercentage;
-    discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
-    discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
+    if(this.model.get('vendor_order_confirmation')){
+      discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
+      discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
+    } else {
+      discussionData.buyer_percentage = 1
+      discussionData.vendor_percentage = 0;
+    }
+
 
     if(discussionData.resolution != ""){
       saveToAPI(targetForm, '', this.serverUrl + "close_dispute", function(data){
@@ -483,7 +489,8 @@ module.exports = baseVw.extend({
   },
 
   acceptResolution: function(){
-    var resData = {};
+    var self = this,
+        resData = {};
     resData.order_id = this.orderID;
     saveToAPI(null, null, this.serverUrl + "release_funds", function(data){
       self.status = 6;
@@ -494,7 +501,8 @@ module.exports = baseVw.extend({
 
   refundOrder: function(){
     //var targetForm = this.$('#transactionRefundForm'),
-      var refData = {};
+      var self = this,
+          refData = {};
     refData.order_id = this.orderID;
     saveToAPI(null, null, this.serverUrl + "refund", function(data){
       self.status = 7;
