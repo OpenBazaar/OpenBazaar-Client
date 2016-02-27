@@ -31,7 +31,7 @@ module.exports = Backbone.Model.extend({
         of: "of",
         Sell: "Sell",
         New: "New",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        HighlightToStyle: "Highlight text to style",
         Excellent: "Excellent",
         Good: "Good",
         Poor: "Poor",
@@ -182,7 +182,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Background Color",
         NotificationFollow: "is now following you",
         NotificationDispute: "has opened a new dispute",
-        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
+        NoticationOrderStatus: "Order status updated, buyer notified",
         NotificationNewOrder: "has made a purchase",
         NoNotifications: "No notifications",
         WelcomeToYourPage: "Welcome to your page!",
@@ -280,7 +280,7 @@ module.exports = Backbone.Model.extend({
         EditModerator: "Moderator Settings",
         transactions: {
           OrderDetails: "Order Details",
-          ViewOnBlockchain: "View Details", //noTranslated
+          ViewOnBlockchain: "View Details",
           SoldBy: "Seller",
           PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
@@ -307,10 +307,12 @@ module.exports = Backbone.Model.extend({
           InEscrow: "- In Escrow",
           OrderTotal: "Order Total",
           OrderTotalInBTC: "BTC Total",
-          NoMessages: "No messages", //notTranslated
+          NoMessages: "No messages",
           PaymentProtection: "Payment Protection",
           ShipTo: "Ship To",
-          ContractDetails: "Contract Details", //notTranslated
+          ViewRating: "(View Rating)",
+          ContractDetails: "Contract Details",
+          HideDetails: "Hide Details",
           ConfirmOrder: "Confirm Order",
           RefundOrder: "Refund Order",
           RefundReason: "Reason for refund",
@@ -352,8 +354,8 @@ module.exports = Backbone.Model.extend({
           CustomerService: "Customer Service",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
-          NoFileProvided: "No file provided", //notTranslated
-          None: "None", //notTranslated
+          NoFileProvided: "No file provided",
+          None: "None",
           NoneSent: "None sent",
           ModerationFee: "Moderation Fee:",
           DisputeTransaction: "Start a Dispute",
@@ -548,7 +550,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translators: @jjeffryes @gubatron @PolyDeveloper
-        02/18/2016: ~ 242 untranslated strings
+        02/28/2016: ~ 263 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -841,7 +843,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -1061,7 +1065,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translators: @z3ntu @johirner
-        02/18/2016: ~ 244 untranslated strings
+        02/28/2016: ~ 265 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -1362,7 +1366,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -1582,7 +1588,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @HostFat
-        02/18/2016: ~ 173 untranslated strings
+        02/28/2016: ~ 195 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -1888,7 +1894,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -2110,7 +2118,7 @@ module.exports = Backbone.Model.extend({
         Translator: @Kirvx
         Reviewer  : @JustinDrake
         
-        02/18/2016: ~ 0 untranslated strings
+        02/28/2016: ~ 0 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -2137,8 +2145,8 @@ module.exports = Backbone.Model.extend({
         No: "Non",
         of: "de",
         Sell: "Vendre",
-        New: "Nouveau",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        New: "Neuf",
+        HighlightToStyle: "Sélectionnez votre texte pour lui appliquer un style",
         Excellent: "Excellent",
         Good: "Bon",
         Poor: "Médiocre",
@@ -2159,11 +2167,11 @@ module.exports = Backbone.Model.extend({
         FeedPlaceholder: "Un flux de mises à jour de toutes les pages que vous suivez",
         ViewListing: "Voir l'annonce",
         Unfollow: "Ne plus suivre",
-        About: "&Agrave; propos",
+        About: "À propos",
         NoDescriptionAdded: "Aucune description ajoutée",
         NoListings: "Aucune annonce",
         CoverPhoto: "Photo de couverture",
-        AboutEmpty: "&Agrave; propos est vide...",
+        AboutEmpty: "À propos est vide...",
         Followers: "Abonnés",
         Following: "Abonnements",
         FollowsYou: "Vous suit",
@@ -2217,7 +2225,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Avis",
         Shipping: "Expédition",
         Addresses: "Adresses",
-        Files: "Files", //notTranslated
+        Files: "Fichiers",
         NewAddress: "Nouvelle adresse",
         CurrentAddress: "Adresse actuelle",
         Returns: "Retours",
@@ -2242,7 +2250,7 @@ module.exports = Backbone.Model.extend({
         ShipToName: "Nom",
         ShipToStreet: "Rue",
         ShipToCity: "Ville",
-        ShipToState: "État/Région/Département",
+        ShipToState: "État / Région / Département",
         ShipToPostalCode: "Code postal",
         PostalCode: "Code postal",
         ShipToCountry: "Pays",
@@ -2255,7 +2263,7 @@ module.exports = Backbone.Model.extend({
         Price: "Prix",
         Available: "Disponible",
         Type: "Type",
-        Condition: "Condition",
+        Condition: "État",
         NSFW: "18+ (Contenu adulte)",
         Select: "Sélectionner",
         Social: "Social",
@@ -2289,7 +2297,7 @@ module.exports = Backbone.Model.extend({
         BackgroundColor: "Couleur de fond",
         NotificationFollow: "vous suit",
         NotificationDispute: "a ouvert un nouveau litige",
-        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
+        NoticationOrderStatus: "L'état de la commande a été mis à jour, l'acheteur a été averti",
         NotificationNewOrder: "a effectué un achat",
         NoNotifications: "Aucune notification",
         WelcomeToYourPage: "Bienvenue sur votre page !",
@@ -2372,10 +2380,10 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Paramètres du serveur",
         ShutDownServer: "Arrêter le serveur",
         LoadingBitcoinPrices: "Chargement des prix Bitcoin...",
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
-        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
-        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
+        ThisUserIsBlocked: "Cet utilisateur est masqué parce que vous l'avez bloqué",
+        ThisUserIsNSFW: "Cet utilisateur est masqué parce que sa page est listée comme NSFW",
+        ShowBlockedUser: "Voir la page de cet utilisateur en dehors des annonces NSFW",
+        ShowNSFWContent: "Voir la page de cet utilisateur et toutes les annonces NSFW",
         ServerChangeWarningHeadline: "Attention: Enregistrez vos paramètres",
         ServerChangeWarning: "Nous vous recommandons de faire une copie de vos paramètres précédents, indiqués ci-dessous. Votre nom d'utilisateur et mot de passe précédents ne seront plus disponibles au-delà de ce point.",
         moderatorSettings: {
@@ -2387,51 +2395,52 @@ module.exports = Backbone.Model.extend({
         EditModerator: "Paramètres de modérateur",
         transactions: {
           OrderDetails: "Détails de la commande",
-          ViewOnBlockchain: "View Details", //noTranslated
+          ViewOnBlockchain: "Voir les détails",
           SoldBy: "Vendu par",
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
           sortByStatusAll: "Tout",
           sortByStatus0: "Achat (paiement en attente)",
           sortByStatus1: "Prêt à traiter (entièrement payé)",
-          sortByStatus2: "Confirmé/Expédié",
+          sortByStatus2: "Confirmé / Expédié",
           sortByStatus3: "Terminé (paiement délivré)",
-          sortByStatus4: "Contesté",
+          sortByStatus4: "Litige",
           OrderID: "ID de la commande",
           OrderDate: "Date de la commande",
           OrderStatus: "État de la commande",
           OrderStatus0: "Achat (paiement en attente)",
           OrderStatus1: "Prêt à traiter (entièrement payé)",
-          OrderStatus2: "Confirmé/Expédié",
+          OrderStatus2: "Confirmé / Expédié",
           OrderStatus3: "Terminé (paiement délivré)",
-          OrderStatus4: "Contesté",
-          OrderStatusopen: "Disputed", // not translated
-          OrderStatus5: "Dispute Closed", // not translated
-          OrderStatusclosed: "Dispute Closed", // not translated
-          OrderStatus6: "Dispute Finalized",// not translated
-          OrderStatus7: "Refunded", // not translated
+          OrderStatus4: "Litige",
+          OrderStatusopen: "Litige",
+          OrderStatus5: "Litige clôturé",
+          OrderStatusclosed: "Litige clôturé",
+          OrderStatus6: "Litige finalisé",
+          OrderStatus7: "Remboursé",
           InEscrow: "- Sous séquestre",
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
-          NoMessages: "No messages", //notTranslated
+          NoMessages: "Aucun message",
           PaymentProtection: "Protection de paiement",
           ShipTo: "Expédier à",
-          ContractDetails: "Contract Details", //notTranslated
+          ViewRating: "(Voir l'évaluation)",
+          ContractDetails: "Détails du contrat",
           ConfirmOrder: "Confirmer cette commande",
           ReceivingAddress: "Adresse de réception",
           RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
           Comments: "Commentaires",
-          CommentsPlaceHolder: "Commentaires éventuels sur la commandes",
+          CommentsPlaceHolder: "Commentaires sur la commandes (optionnel)",
           Shipper: "Article expédié par",
           ShipperPlaceholder: "Nom de l'entreprise expédiant l'article",
           TrackingNumber: "Numéro de suivi",
           TrackingNumberPlaceholder: "Numéro de suivi de cet article",
           EstimatedDelivery: "Délai de livraison estimé",
           EstimatedDeliveryPlaceholder: "Date estimée de la livraison de l'article",
-          URL: "File URL",
+          URL: "URL du fichier",
           URLPlaceholder: "Lien pour télécharger, planifier, ou plus d'informations",
           Password: "Mot de passe",
-          PasswordPlaceholder: "Mot de passe requis pour le lien, si nécessaire",
+          PasswordPlaceholder: "Mot de passe requis pour le lien (optionnel)",
           DirectTransaction: "Transaction directe",
           ModeratedTransaction: "Transaction modérée",
           Seller: "Vendeur",
@@ -2441,8 +2450,8 @@ module.exports = Backbone.Model.extend({
           copyTxid: "copier l'ID de transaction",
           Close: "Fermer",
           FundOrder: "Financer la commande",
-          sortByDateNewest: "Par date, les plus récentes",
-          sortByDateOldest: "Par date, les plus anciennes",
+          sortByDateNewest: "Par date, les plus récents",
+          sortByDateOldest: "Par date, les plus anciens",
           PayPurchase: "Payer cet achat",
           CompleteOrder: "Terminer cette commande",
           MarkAsShipped: "Marquer comme expédié",
@@ -2450,31 +2459,31 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Avis de transaction",
           OverallRating: "Note générale",
           Quality: "Qualité",
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
+          MatchedDescription: "Conformité à la description",
+          DeliverySpeed: "Vitesse de livraison",
           CustomerService: "Service client",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
-          NoFileProvided: "No file provided", //notTranslated
-          None: "None", //notTranslated
+          NoFileProvided: "Aucun fichier fourni",
+          None: "Aucun",
           NoneSent: "Aucun avis envoyé",
           ModerationFee: "Frais de modération :",
           DisputeTransaction: "Initier un litige",
-          sendMessagePlaceholder: "Écrivez ici votre message.",
+          sendMessagePlaceholder: "Écrivez votre message...",
           DisputeInstructions: "Afin de déposer un litige pour cette transaction, écrivez ci-dessous la raison du litige, et cliquez sur le bouton Initier un litige. Le modérateur interviendra dans votre discussion jusqu'à ce que le litige soit résolu. Le modérateur prendra la décision finale quant à savoir si les fonds doivent vous être retournés, et combien. Les frais du modérateur seront payés avec les fonds que vous avez déjà envoyés.",
           SendMessage: "Envoyer",
           CloseDispute: "Clôturer le litige",
-          TotalInTransaction: "Transaction:", // not translated
-          StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE", // not translated
-          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
+          TotalInTransaction: "Transaction :",
+          StartDisputeFlag: "LITIGE DÉMARRÉ",
+          CloseDisputeFlag: "LITIGE CLÔTURÉ",
+          PayoutOnlyBuyer: "La fermeture de ce litige retournera 100% des fonds à l'acheteur."
         },
         errorMessages: {
           saveError: "Impossible de sauvegarder les données.",
           getError: "Impossible de récupérer les données.",
           missingError: "Certains champs sont incorrects ou manquants.",
           serverError: "Une réponse incorrecte a été reçue du serveur.",
-          userError: "Les informations pour cette ID sont introuvables",
+          userError: "Les informations pour cet ID sont introuvables",
           userNotFoundError: "Les informations de cette personne ne sont pas disponibles. Elles sont peut-être hors ligne.",
           notFoundError: "Les données ne peuvent pas être récupérées pour :",
           socketError: "L'URL pour WebSocket a échoué. Connexion au socket avec l'adresse par défaut de ws://localhost:18466",
@@ -2523,7 +2532,7 @@ module.exports = Backbone.Model.extend({
           cases:"Affaires",
           notifications:"Notifications",
           settings:"Paramètres",
-          about:"&Agrave; propos d'OpenBazaar",
+          about:"À propos d'OpenBazaar",
           support:"Soutenir OpenBazaar",
           Forward: "Avancer",
           Back: "Reculer"
@@ -2638,7 +2647,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @moldcraft
-        02/18/2016: ~ 243 untranslated strings
+        02/28/2016: ~ 265 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -2940,7 +2949,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -3160,7 +3171,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @Squirrel2020
-        02/18/2016: ~ 172 untranslated strings
+        02/28/2016: ~ 194 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -3462,7 +3473,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -3682,7 +3695,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @michalvalasek
-        02/18/2016: ~ 243 untranslated strings
+        02/28/2016: ~ 265 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -3984,7 +3997,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -4204,7 +4219,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @Kahpecuce
-        02/18/2016: ~ 237 untranslated strings
+        02/28/2016: ~ 259 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -4510,7 +4525,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -4730,7 +4747,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @drwasho
-        02/18/2016: ~ 238 untranslated strings
+        02/28/2016: ~ 260 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -5035,7 +5052,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -5254,8 +5273,8 @@ module.exports = Backbone.Model.extend({
         
         /*
         
-        Translator: Jingyi Yang | @saltduck
-        02/18/2016: ~ 66 untranslated strings
+        Translators: Jingyi Yang | @saltduck
+        02/28/2016: ~ 89 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -5564,7 +5583,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "运往",
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "确认订单",
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -5784,7 +5805,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @mpatc
-        02/18/2016: ~ 239 untranslated strings
+        02/28/2016: ~ 261 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -6090,7 +6111,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -6310,7 +6333,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @ayalan
-        02/18/2016: ~ 159 untranslated strings
+        02/28/2016: ~ 181 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -6601,7 +6624,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Payment Protection", // not translated
           ShipTo: "Ship To", // not translated
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Confirm Order", // not translated
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -6820,7 +6845,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @Mido
-        02/18/2016: ~ 71 untranslated strings
+        02/28/2016: ~ 95 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized
         
@@ -7126,7 +7151,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Ubezpieczenie płatności",
           ShipTo: "Wysyłka do",
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Potwierdź to zamówienie",
           ReceivingAddress: "Adres odbiorczy",
           RecievingAddressPlaceholder: "Adres portfela, na którzy otrzymasz płatność",
@@ -7321,7 +7348,7 @@ module.exports = Backbone.Model.extend({
         /*
         
         Translator: @pryds
-        02/21/2016: ~ 26 untranslated strings
+        02/28/2016: ~ 49 untranslated strings
         
         Use capitalized keys for widely reused text that must be capitalized 
         
@@ -7626,7 +7653,9 @@ module.exports = Backbone.Model.extend({
           NoMessages: "No messages", //notTranslated
           PaymentProtection: "Betalingsbeskyttelse",
           ShipTo: "Afsend til",
+          ViewRating: "(View Rating)", // not translated
           ContractDetails: "Contract Details", //notTranslated
+          HideDetails: "Hide Details", //notTranslated
           ConfirmOrder: "Bekræft ordre",
           ReceivingAddress: "Modtagelsesadresse",
           RecievingAddressPlaceholder: "Bitcoin-adresse, du vil modtage betaling på",
