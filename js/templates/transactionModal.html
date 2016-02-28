@@ -96,7 +96,7 @@
           <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
             <i class="starRating textShadow"></i>
           <% } %>
-          (View Rating)
+          <%= polyglot.t('transactions.ViewRating') %>
         </div>
       </div>
     <% } %>
@@ -309,7 +309,7 @@
             </div>
             <div class="flexRow">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.Description') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.description %>)</strong>
+                <strong><%= polyglot.t('transactions.MatchedDescription') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.description %>)</strong>
                 <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.description; i++) { %>
                 <i class="starRating"></i>
                 <% } %>
@@ -317,7 +317,7 @@
             </div>
             <div class="flexRow">
               <div class="pad10left txt-unleaded fontSize13 textOpacity1 marginTop12 marginBottom4">
-                <strong><%= polyglot.t('transactions.DeliveryTime') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.delivery_time %>)</strong>
+                <strong><%= polyglot.t('transactions.DeliverySpeed') %> (<%=ob.buyer_receipt.receipt.rating.tx_summary.delivery_time %>)</strong>
                 <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.delivery_time; i++) { %>
                 <i class="starRating"></i>
                 <% } %>
@@ -355,7 +355,7 @@
               <span><%= polyglot.t('transactions.ContractDetails') %></span>
             </div>    
             <div class="floatRight  textOpacity1">
-                <a class="btn btn-txt custCol-primary  js-transactionHideContract textOpacity1 hide">Hide Details</a>
+                <a class="btn btn-txt custCol-primary  js-transactionHideContract textOpacity1 hide"><%= polyglot.t('HideDetails') %></a>
             </div>  
           </div>
         </div>
@@ -1166,7 +1166,7 @@
         <div class="flexRow custCol-border borderTop">
           <div class="flexCol-4 borderRight custCol-border">
             <div class="fieldItem">
-              <label><%= polyglot.t('transactions.Description') %></label>
+              <label><%= polyglot.t('transactions.MatchedDescription') %></label>
             </div>
           </div>
           <div class="flexCol-8 positionWrapper">
@@ -1188,7 +1188,7 @@
         <div class="flexRow custCol-border borderTop">
           <div class="flexCol-4 borderRight custCol-border">
             <div class="fieldItem">
-              <label><%= polyglot.t('transactions.DeliveryTime') %></label>
+              <label><%= polyglot.t('transactions.DeliverySpeed') %></label>
             </div>
           </div>
           <div class="flexCol-8 positionWrapper">
