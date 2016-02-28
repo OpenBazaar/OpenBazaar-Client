@@ -2919,12 +2919,12 @@ input[type="checkbox"].fieldItem {
 }
 
 input[type="checkbox"].fieldItem + label {
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  line-height: 53px;
-  padding: 0 10px 0 34px;
-}
+   display: inline-block;
+   cursor: pointer;
+   position: relative;
+   line-height: 53px;
+   padding: 0 10px 0 34px;
+ }
 
 input[type="checkbox"].fieldItem + label:before {
   content: "\f371";
@@ -2936,6 +2936,15 @@ input[type="checkbox"].fieldItem + label:before {
   font-size: 18px;
   width: 15px;
   text-align: center;
+}
+
+input[type="checkbox"].fieldItem + label.compact {
+  line-height: 35px;
+  padding-left: 20px;
+}
+
+input[type="checkbox"].fieldItem + label.compact:before {
+  left: 0;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {

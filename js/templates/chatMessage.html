@@ -17,39 +17,39 @@
             </a>
             <% if(ob.guid == ob.moderatorGuid || ob.sender && ob.sender == ob.moderatorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="marginLeft4">(<%= polyglot.t('transactions.Moderator') %>):</div>
+                <div class="inner"><%= polyglot.t('transactions.Moderator') %></div>
             </div>
             <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == ob.vendorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="marginLeft4"><%= ob.sender %> (<%= polyglot.t('transactions.Seller') %>):</div>
+                <div class="inner"><%= polyglot.t('transactions.Seller') %></div>
             </div>
             <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == ob.buyerGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="marginLeft4"><%= ob.buyerGuid %> (<%= polyglot.t('transactions.Buyer') %>):</div>
+                <div class="inner"><%= polyglot.t('transactions.Buyer') %></div>
             </div>
             <% } %>
         <% } %>
         
         <div class="chatConversationMessageBody flexExpand">
             <% if (ob.outgoing) { %>
-            <div class="inner"><%= ob.sanitizedMsg %></div>
+            <div class="inner width100"><%= ob.sanitizedMsg %></div>
             <% } else { %>
-            <div class="inner"><%= ob.sanitizedMsg %></div>
+            <div class="inner width100"><%= ob.sanitizedMsg %></div>
             <% } %>
         </div>
         
         <% if (ob.outgoing) { %>
             <% if(ob.transactionType == "cases"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner">(<%= polyglot.t('transactions.Moderator') %>)</div>
+                    <div class="inner"><%= polyglot.t('transactions.Moderator') %></div>
                 </div>
                 <% } else if(ob.transactionType == "sales"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner">(<%= polyglot.t('transactions.Seller') %>)</div>
+                    <div class="inner"><%= polyglot.t('transactions.Seller') %></div>
                 </div>
                 <% } else if(ob.transactionType == "purchases"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner">(<%= polyglot.t('transactions.Buyer') %>)</div>
+                    <div class="inner"><%= polyglot.t('transactions.Buyer') %></div>
                 </div>
             <% } %>
 
