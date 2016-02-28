@@ -54,7 +54,8 @@ module.exports = Backbone.View.extend({
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'input #pgp_key': 'showSignature'
   },
 
   initialize: function(options){
@@ -834,6 +835,12 @@ module.exports = Backbone.View.extend({
       type: "GET",
       url: self.serverUrl + "shutdown"
     });
+  },
+
+  showSignature: function(){
+    console.log("show sig")
+    var targ = this.$('.js-settingsSignatureRow');
+    targ.css("height", 50);
   },
 
   close: function(){
