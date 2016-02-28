@@ -78,13 +78,14 @@ module.exports = baseVw.extend({
 
       setTimeout(() => {
         var editor = new MediumEditor('#inputDescription', {
-            placeholder: {
-              text: ''
-            },
-            toolbar: {
-              imageDragging: false,
-              sticky: true
-            }
+          placeholder: {
+            text: window.polyglot.t('DescriptionPlaceholder')
+          },
+          toolbar: {
+            imageDragging: false,
+            sticky: true
+          },
+          disableExtraSpaces: true
         });
 
         editor.subscribe('blur', self.validateDescription);
