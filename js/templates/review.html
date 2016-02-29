@@ -15,17 +15,17 @@
       <div class="marginLeft15 pull-right">
         <div class="floatLeft marginRight15" style="width: 200px">
           <div class="fontSize14">
-            <div><%= polyglot.t('transactions.Quality'): %> (<%= ob.quality %>/5)</div>
+            <div><%= polyglot.t('transactions.Quality') %>: (<%= ob.quality %>/5)</div>
             <div>
-              <% print(ob.starsTmpl({ rating: ob.quality })) %>              
+              <% print(ob.starsTmpl({ rating: ob.quality })) %>
             </div>
           </div>
           <div class="fontSize14 marginTop9">
             <div><%= polyglot.t('transactions.MatchedDescription') %>: (<%= ob.description %>/5)</div>
             <div>
               <% print(ob.starsTmpl({ rating: ob.description })) %>
-            </div>            
-          </div>          
+            </div>
+          </div>
         </div>
         <div class="floatLeft" style="width: 200px">
           <div class="fontSize14">
