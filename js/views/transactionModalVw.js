@@ -53,7 +53,9 @@ module.exports = baseVw.extend({
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'keydown #transactionDiscussionSendText': 'onKeydownDiscussion',
+    'keyup #transactionDiscussionSendText': 'onKeyupDiscussion'
   },
 
   initialize: function (options) {
@@ -474,7 +476,30 @@ module.exports = baseVw.extend({
     messageInput.closest('.flexRow').removeClass('formChecked');
     this.getDiscussion();
     messageInput.focus();
+  },
 
+  onKeydownDiscussion: function(e) {
+    var code = e.keyCode || e.which;
+    console.log(code);
+
+    if (code === 13 && !this.shiftDown) {
+      e.preventDefault();
+    }
+
+    if (code === 16) {
+      this.shiftDown = true;
+    }
+  },
+
+  onKeyupDiscussion: function(e) {
+    var code = e.keyCode || e.which;
+    console.log(code);
+
+    if (code === 13 && !this.shiftDown) {
+      this.sendDiscussionMessageClick();
+    }
+
+    if (code === 16) this.shiftDown = false;
   },
 
   showCloseDispute: function(e){
