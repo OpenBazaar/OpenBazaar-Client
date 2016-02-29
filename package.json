@@ -1,6 +1,6 @@
 {
   "name": "OpenBazaar",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "OpenBazaar Client",
   "main": "main.js",
   "repository": {
@@ -40,7 +40,7 @@
     "yargs": "^4.1.0"
   },
   "devDependencies": {
-    "electron-prebuilt": "0.36.2",
+    "electron-prebuilt": "0.36.9",
     "eslint": "1.9.0",
     "pre-commit": "^1.1.2",
     "valiquire": "0.3.0"
