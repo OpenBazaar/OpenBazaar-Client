@@ -381,19 +381,10 @@ app.on('open-url', function(event, uri) {
 
   global.externalRoute = uri;
 
-  // if(!mainWindow) {
-  //   global.startingRoute = uri;
-  // } else {
-  //   // mainWindow.webContents.send('goto', uri);
-  //   // mainWindow.webContents.executeJavaScript("$('input#addressBar').val('" + uri + "');");
-  //   mainWindow.webContents.executeJavaScript("location.href='" + "#userPage/" + uri + "'");
-  // }
-
   if (mainWindow) {
-    // if our app router is fully loaded it will pick up on location.href, otherwise
+    // if our app router is fully loaded it will process the event sent below, otherwise
     // the global.externalRoute will be used
     mainWindow.webContents.send('external-route', uri);
-    // mainWindow.webContents.executeJavaScript("location.href='" + "#userPage/" + uri + "'");
   }  
 
   event.preventDefault();
