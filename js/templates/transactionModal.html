@@ -655,12 +655,14 @@
             <% } %>
           </div>
         </div>
+        <% if(ob.bitcoin_txs[0]){ %>
         <a href="https://blockchain.info/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
           <div class="btn btn-txt floatRight custCol-secondary textOpacity1">
             <%= polyglot.t('transactions.ViewOnBlockchain') %> 
             <span class="ion-android-open fontSize10"></span>
           </div>
         </a>
+        <% } %>
       </div>
       <div class="flexRow rowItem padding15 custCol-border borderBottom">
         <div class="txt-unleaded">
