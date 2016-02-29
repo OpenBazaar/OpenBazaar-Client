@@ -165,8 +165,6 @@ module.exports = baseVw.extend({
       }
     }    
 
-    msgCl.comparator = 'timestamp';
-
     this.chatConversationVw = new ChatConversationVw({
       model: model,
       user: this.model,

@@ -245,7 +245,7 @@ form {
   background-color: #252525;
   border-left: 0;
   height: calc(100% - 50px);
-  z-index: 2;
+  z-index: 999;
   transition: right 0.5s ease;
   color: #DDD;
   -webkit-app-region: no-drag;
