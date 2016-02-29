@@ -480,7 +480,6 @@ module.exports = baseVw.extend({
 
   onKeydownDiscussion: function(e) {
     var code = e.keyCode || e.which;
-    console.log(code);
 
     if (code === 13 && !this.shiftDown) {
       e.preventDefault();
@@ -493,7 +492,6 @@ module.exports = baseVw.extend({
 
   onKeyupDiscussion: function(e) {
     var code = e.keyCode || e.which;
-    console.log(code);
 
     if (code === 13 && !this.shiftDown) {
       this.sendDiscussionMessageClick();

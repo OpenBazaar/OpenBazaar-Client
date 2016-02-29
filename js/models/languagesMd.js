@@ -186,6 +186,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "is now following you",
         NotificationDispute: "has opened a dispute",
+        NotificationDisputeClosed: "this dispute is closed",
+        NotificationRefund: "has refunded your order",
         NoticationOrderStatus: "Order status updated, buyer notified",
         NotificationNewOrder: "has made a purchase",
         NoNotifications: "No notifications",
@@ -1250,6 +1252,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "folgt dir nun.",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Keine Benachrichtigungen",
@@ -1783,6 +1787,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "ora ti sta seguendo",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nessuna notifica",
@@ -2318,6 +2324,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "vous suit",
         NotificationDispute: "a ouvert un nouveau litige",
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "L'état de la commande a été mis à jour, l'acheteur a été averti",
         NotificationNewOrder: "a effectué un achat",
         NoNotifications: "Aucune notification",
@@ -2848,6 +2856,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "acum vă urmărește",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Nu sunt notificări",
@@ -3377,6 +3387,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "подписан на вас",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Нет уведомлений",
@@ -3906,6 +3918,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "vás od teraz sleduje",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Žiadne notifikácie",
@@ -4439,6 +4453,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "sizi takip etmeye başladı",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Bildirim yok",
@@ -4971,6 +4987,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "SoH tlha'",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Pagh ghuHmoH",
@@ -5506,6 +5524,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "在关注您",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "无新消息",
@@ -6040,6 +6060,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "너를 팔로우하다",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "공지 없어",
@@ -6568,6 +6590,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "があなたをフォローしました",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "新しい通知はありません。",
@@ -7090,6 +7114,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "zaczął cię obserować!",
         NotificationDispute: "has opened a dispute", //not translated
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
         NoNotifications: "Brak powiadomień",
@@ -7597,6 +7623,8 @@ module.exports = Backbone.Model.extend({
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "følger nu dig",
         NotificationDispute: "har åbnet en ny uenighed",
+        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "har gjort et køb",
         NoNotifications: "Ingen notifikationer",
