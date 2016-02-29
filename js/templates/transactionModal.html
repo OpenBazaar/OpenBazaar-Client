@@ -82,10 +82,10 @@
       <hr>
       <div class="flexRow txt-center">
         <div class="flexExpand">
-          Buyer Payout: <%= ob.dispute_resolution.resolution.buyer_payout %>BTC
+          Buyer Payout: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %>BTC
         </div>
         <div class="flexExpand">
-          Seller Payout: <%= ob.dispute_resolution.resolution.seller_payout %>BTC
+          Seller Payout: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %>BTC
         </div>
       </div>
     </div>
