@@ -1,4 +1,7 @@
-<div class="rowItem js-notification padding10 clickable <% ob.read && print('textOpacity50') %>">
+<div class="rowItem js-notification padding10 clickable positionRelative">
+    <% if (!ob.read) { %>
+        <div class="notificationUnreadIndicator"></div>
+    <% } %>
     <div class="table">
         <div>
             <div class="thumbnail clickable custcol-border"
@@ -6,15 +9,43 @@
             <div class="txt-lowleading">
                 <div class="marginLeft10 marginTop2 clearfix">
 
-                    <% if(ob.type == "follow") { %>
-                        <div class="textSize13px floatLeft">
+                    <% if(ob.type == "order confirmation") { %>
+                        <div class="textSize12px floatLeft hoverUnderline">
+                            <%= polyglot.t('NotificationOrderConfirmed') %>
+                        </div>
+                        <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
+                    <% } else if(ob.type == "payment received") { %>
+                        <div class="textSize12px floatLeft hoverUnderline">
+                            <%= polyglot.t('NotificationPaymentReceived') %>&nbsp;
+                            <span>
+                            <% if(ob.handle) { %>
+                                <%= ob.handle %>.
+                            <% }else{ %>
+                                <span class="noOverflow width95 floatRight tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                            <% } %>
+                            </span>
+                        </div>
+                        <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
+                    <% } else if(ob.type == "new order") { %>
+                        <div class="textSize12px clearFix hoverUnderline">
                             <span>
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>
                             <% }else{ %>
                                 <span class="noOverflow width95 floatLeft tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
-                            </span> <%= polyglot.t('NotificationFollow') %>
+                            </span> <%= polyglot.t('NotificationOrderFor') %> <%= ob.title %>.
+                        </div>
+                        <div class="textSize11px clearFix txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
+                    <% } else if(ob.type == "follow") { %>
+                        <div class="textSize12px floatLeft hoverUnderline">
+                            <span>
+                            <% if(ob.handle) { %>
+                                <%= ob.handle %>
+                            <% }else{ %>
+                                <span class="noOverflow width95 floatLeft tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                            <% } %>
+                            </span> <%= polyglot.t('NotificationFollow') %>.
                         </div>
                         <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% }  else { %>

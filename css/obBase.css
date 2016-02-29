@@ -3121,7 +3121,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .notification .rowItem:hover {
-  opacity: .75;
+  opacity: 1;
+}
+
+.notificationUnreadIndicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: #F3A123;
 }
 
 .onboardingIntroDiscover {
