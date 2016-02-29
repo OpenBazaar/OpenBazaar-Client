@@ -318,7 +318,8 @@ app.on('ready', function() {
   }
 
   // Open the devtools.
-  mainWindow.openDevTools({detach: true});
+  // Uncomment if you want tools to open on startup
+  // mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
