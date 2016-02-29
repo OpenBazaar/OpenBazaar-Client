@@ -54,7 +54,8 @@ module.exports = Backbone.View.extend({
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'input #pgp_key': 'showSignature'
   },
 
   initialize: function(options){
@@ -350,16 +351,18 @@ module.exports = Backbone.View.extend({
         timezone_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
+        notifications = user.notifications;
         moderatorStatus = this.model.get('page').profile.moderator;
 
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
     this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
+    this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
       var cA = a.currency.toLowerCase(),
           cB = b.currency.toLowerCase();
-      if (cA < cB){
+        if (cA < cB){
         return -1;
       }
       if (cA > cB){
@@ -834,6 +837,11 @@ module.exports = Backbone.View.extend({
       type: "GET",
       url: self.serverUrl + "shutdown"
     });
+  },
+
+  showSignature: function(){
+    var targ = this.$('.js-settingsSignatureRow');
+    targ.css("height", 50);
   },
 
   close: function(){

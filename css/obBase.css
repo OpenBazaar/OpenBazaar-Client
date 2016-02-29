@@ -603,6 +603,8 @@ form {
   border: 0;
   cursor: pointer;
   outline: none;
+  top: 0;
+  left: 0;
 }
 
 .itemMeta {
@@ -2855,7 +2857,7 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 input[type="radio"].fieldItem.starRating + label {
-  padding: 0 20px;
+  padding: 0 12px;
 }
 
 input[type="radio"].fieldItem.starRating + label:before {
@@ -2919,12 +2921,12 @@ input[type="checkbox"].fieldItem {
 }
 
 input[type="checkbox"].fieldItem + label {
-  display: inline-block;
-  cursor: pointer;
-  position: relative;
-  line-height: 53px;
-  padding: 0 10px 0 34px;
-}
+   display: inline-block;
+   cursor: pointer;
+   position: relative;
+   line-height: 53px;
+   padding: 0 10px 0 34px;
+ }
 
 input[type="checkbox"].fieldItem + label:before {
   content: "\f371";
@@ -2936,6 +2938,15 @@ input[type="checkbox"].fieldItem + label:before {
   font-size: 18px;
   width: 15px;
   text-align: center;
+}
+
+input[type="checkbox"].fieldItem + label.compact {
+  line-height: 35px;
+  padding-left: 20px;
+}
+
+input[type="checkbox"].fieldItem + label.compact:before {
+  left: 0;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
@@ -4773,6 +4784,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .height250 {
   height: 250px;
+}
+#ov1  .height254 {
+  height: 254px;
 }
 
 #ov1  .height324 {

@@ -31,6 +31,7 @@ module.exports = baseVw.extend({
     'click .js-showFeedbackRating': 'showFeedbackRating',
     'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
+    'click .js-completeOrderHide': 'completeOrderHide',
     'click .js-confirmOrder': 'confirmOrder',
     'click .js-completeOrder': 'completeOrder',
     'click .js-copyIncommingTx': 'copyTx',
@@ -284,7 +285,13 @@ module.exports = baseVw.extend({
   },
 
   showCompleteForm: function(){
-    this.setState("complete");
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-complete').addClass('bottom0');
+  },
+
+  completeOrderHide: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-complete').removeClass('bottom0');
   },
 
   confirmOrder: function(e){
