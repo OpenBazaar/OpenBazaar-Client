@@ -34,20 +34,19 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
 
     //temporarily disable any blank fields so they aren't picked up by the serializeArray
     form.find(":input:not(:disabled)").each(function(){
-
       if($(this).val() == "") {
         $(this).attr('disabled', true);
         tempDisabledFields.push($(this).attr('id'));
       }
     });
 
-    //after disabling blank fields, populate the formData
-    formData = new FormData((form && form[0]) || "");
-
     __.each(form.serializeArray(), function (value) {
       formKeys.push(value.name);
     });
   }
+
+  //after disabling blank fields, populate the formData
+  formData = new FormData((form && form[0]) || "");
 
   //add manual data not in the form
   __.each(addData, function(value, key){
