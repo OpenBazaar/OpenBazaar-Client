@@ -204,7 +204,8 @@ module.exports = baseVw.extend({
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
-    this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
+    this.skipNSFWmodal = options.skipNSFWmodal;
+    this.showNSFW = options.skipNSFWmodal ? options.skipNSFWmodal : JSON.parse(localStorage.getItem('NSFWFilter'));
     this.showNSFWContent = this.showNSFW;
     this.currentItemHash = options.itemHash;
     //hold changes to the page for undoing, such as custom colors
@@ -358,8 +359,8 @@ module.exports = baseVw.extend({
         self.hideThisUser("blocked");
       }
 
-      if(!self.options.ownPage && self.model.get('page').profile.nsfw && !self.showNSFW){
-        self.hideThisUser("nsfw");
+      if(!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
+          self.hideThisUser("nsfw");
       }
 
       self.$el.find('#image-cropper').cropit({
@@ -656,15 +657,16 @@ module.exports = baseVw.extend({
     });
   },
 
-  renderItems: function (model) {
+  renderItems: function (model, skipNSFWmodal) {
     "use strict";
     
     var self = this;
     var select = this.$el.find('.js-categories');
+    skipNSFWmodal = skipNSFWmodal || this.skipNSFWmodal;
     model = model || [];
     __.each(model, function (arrayItem) {
 
-      if(arrayItem.nsfw && !self.showNSFWContent && !self.showNSFW){
+      if(arrayItem.nsfw && !self.showNSFWContent && !self.showNSFW &&!skipNSFWmodal){
         arrayItem.cloak = true;
       }else{
         arrayItem.cloak = false;
@@ -677,6 +679,7 @@ module.exports = baseVw.extend({
       arrayItem.userID = self.pageID;
       arrayItem.ownPage = self.options.ownPage;
       arrayItem.onUserPage = true;
+      arrayItem.skipNSFWmodal = skipNSFWmodal;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         var opt = document.createElement('option');
         opt.value = arrayItem.category;
@@ -769,7 +772,8 @@ module.exports = baseVw.extend({
       itemHash: hash,
       user: self.model.get('user'),
       page: self.model.get('page'),
-      showNSFWContent: self.showNSFWContent
+      showNSFWContent: self.showNSFWContent,
+      skipNSFWmodal: self.skipNSFWmodal
     });
     this.item.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
     //remove old item before rendering
@@ -1454,11 +1458,12 @@ module.exports = baseVw.extend({
 
   clickShowNSFWContent: function(){
     this.showNSFWContent = true;
+    this.showNSFW = true;
     this.showBlockedUser();
     if(this.state == "item"){
       this.renderItem(this.currentItemHash);
     }
-    this.renderItems(this.cachedListings);
+    this.renderItems(this.cachedListings, true);
   },
 
   showBlockedUser: function(){

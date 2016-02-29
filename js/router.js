@@ -16,7 +16,7 @@ module.exports = Backbone.Router.extend({
     "home/:state(/:searchText)": "home",
     "myPage": "userPage",
     "userPage": "userPage",
-    "userPage/:userID(/:state)(/:itemHash)": "userPage",
+    "userPage/:userID(/:state)(/:itemHash)(/:skipNSFWmodal)": "userPage",
     "transactions": "transactions",
     "transactions/:state": "transactions",
     "settings": "settings",
@@ -157,7 +157,7 @@ module.exports = Backbone.Router.extend({
   },
 
 
-  userPage: function(userID, state, itemHash){
+  userPage: function(userID, state, itemHash, skipNSFWmodal){
     "use strict";
     this.cleanup();
     this.newView(new userPageView({
@@ -166,7 +166,8 @@ module.exports = Backbone.Router.extend({
       userID: userID,
       state: state,
       itemHash: itemHash,
-      socketView: this.socketView
+      socketView: this.socketView,
+      skipNSFWmodal: skipNSFWmodal
     }),"userPage");
   },
 
