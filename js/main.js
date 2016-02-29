@@ -250,16 +250,7 @@ launchServerConnect = function() {
     serverConnectModal = new ServerConnectModal();
 
     serverConnectModal.on('connected', function(authenticated) {
-      // clear some flags so the heartbeat events will
-      // appropriatally loadProfile or launch onboarding
-      // guidCreating = null;
-      // loadProfileNeeded = true;
-
       $loadingModal.removeClass('hide');
-
-      if (profileLoaded) {
-        location.reload();
-      }
 
       if (authenticated) {
         serverConnectModal && serverConnectModal.remove();
@@ -277,6 +268,17 @@ launchServerConnect = function() {
     }
   }
 };
+
+heartbeat.on('open', function(e) {
+  if (profileLoaded) {
+    location.reload();
+  } else {
+    // clear some flags so the heartbeat events will
+    // appropriatally loadProfile or launch onboarding
+    guidCreating = null;
+    loadProfileNeeded = true;
+  }
+});
 
 heartbeat.on('close', function(e) {
   // server down

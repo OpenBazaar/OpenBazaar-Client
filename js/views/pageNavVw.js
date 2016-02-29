@@ -426,10 +426,18 @@ module.exports = baseVw.extend({
   },
 
   addressBarKeyup: function(e){
-    var barText = this.addressInput.val();
+    var barText = this.addressInput.val(),
+        sliced;
+
     //detect enter key
     if (e.keyCode == 13){
-      this.addressBarProcess(barText);
+      if (barText.startsWith('ob://')) {
+        sliced = barText.length > 5 ? barText.slice(5) : '';
+        this.addressInput.val(sliced);        
+        sliced && this.addressBarProcess(sliced);
+      } else {
+        this.addressBarProcess(barText);  
+      }
     } else {
       this.closeStatusBar();
     }
