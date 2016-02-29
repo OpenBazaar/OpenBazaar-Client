@@ -44,7 +44,6 @@ var Polyglot = require('node-polyglot'),
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
     extendPolyglot,
-    newRouter,
     newPageNavView,
     newSocketView,
     serverConnectModal,
@@ -144,7 +143,8 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 
 var profileLoaded;
 var loadProfile = function(landingRoute, onboarded) {
-  landingRoute = landingRoute || '#';
+  var externalRoute = remote.getGlobal('externalRoute');
+
   profileLoaded = true;
 
   //get the guid from the user profile to put in the user model
@@ -180,9 +180,17 @@ var loadProfile = function(landingRoute, onboarded) {
 
               $('#sideBar').html(app.chatVw.render().el);
 
-              location.hash = landingRoute;
-              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
-              Backbone.history.start();
+              app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
+
+              if (externalRoute) {
+                app.router.translateRoute(externalRoute).done((translatedRoute) => {
+                  location.hash = translatedRoute;
+                  Backbone.history.start();
+                });
+              } else {
+                location.hash = landingRoute || '#';
+                Backbone.history.start();
+              }
             });
 
             //every 15 minutes update the bitcoin price for the currently selected currency
@@ -242,16 +250,7 @@ launchServerConnect = function() {
     serverConnectModal = new ServerConnectModal();
 
     serverConnectModal.on('connected', function(authenticated) {
-      // clear some flags so the heartbeat events will
-      // appropriatally loadProfile or launch onboarding
-      guidCreating = null;
-      loadProfileNeeded = true;
-
-      $loadingModal.removeClass('hide');      
-
-      if (profileLoaded) {
-        location.reload();
-      }
+      $loadingModal.removeClass('hide');
 
       if (authenticated) {
         serverConnectModal && serverConnectModal.remove();
@@ -269,6 +268,17 @@ launchServerConnect = function() {
     }
   }
 };
+
+heartbeat.on('open', function(e) {
+  if (profileLoaded) {
+    location.reload();
+  } else {
+    // clear some flags so the heartbeat events will
+    // appropriatally loadProfile or launch onboarding
+    guidCreating = null;
+    loadProfileNeeded = true;
+  }
+});
 
 heartbeat.on('close', function(e) {
   // server down

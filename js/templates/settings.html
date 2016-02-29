@@ -243,7 +243,7 @@
                        id="handle"
                        placeholder="@john"
                        class="fieldItem"
-                       pattern="@[a-zA-Z0-9]+"
+                       pattern="@[a-zA-Z0-9_]+"
                        value="<%= ob.page.profile.temp_handle || ob.page.profile.handle %>">
                 <% if(ob.page.profile.temp_handle && !ob.page.profile.handle){ %>
                 <a class="positionTopRight padding10 js-externalLink" href="https://onename.com/">
