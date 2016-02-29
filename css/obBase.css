@@ -4262,6 +4262,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-right: 0;
 }
 
+#ov1 .top3 {
+  top: 3px;
+}
+
 #ov1  .outline2 {
   outline: 2px solid #fff;
 }
