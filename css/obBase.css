@@ -603,6 +603,8 @@ form {
   border: 0;
   cursor: pointer;
   outline: none;
+  top: 0;
+  left: 0;
 }
 
 .itemMeta {
