@@ -46,7 +46,7 @@
                   <div class="flexRow js-moderatorSettingsFeeHolder">
                     <div class="flexCol-5 custCol-border">
                       <div class="fieldItem">
-                        <label for="moderatorSettingsFeeInput"><%= polyglot.t('moderatorSettings.ServiceFee') %></label>
+                        <label for="moderatorSettingsModalFeeInput"><%= polyglot.t('moderatorSettings.ServiceFee') %></label>
                         <div class="textOpacity50 fontSize12"><%= polyglot.t('moderatorSettings.ServiceFeeNote') %></div>
                       </div>
                     </div>
@@ -58,8 +58,9 @@
                              name="moderation_fee"
                              maxlength="2"
                              class="fieldItem custCol-text width70px floatLeft alignRight"
-                             id="moderatorSettingsFeeInput"
-                             value="<%= ob.page.profile.moderation_fee.toFixed(2) %>" required/><label class="paddingLeft2 floatLeft fieldItem textOpacity75">%</label>
+                             id="moderatorSettingsModalFeeInput"
+                             value="<%= Number(ob.page.profile.moderation_fee).toFixed(2) %>" required/>
+                      <label class="paddingLeft2 floatLeft fieldItem textOpacity75">%</label>
                     </div>
                   </div>
                 </form>

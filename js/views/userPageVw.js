@@ -1396,13 +1396,10 @@ module.exports = baseVw.extend({
   },
 
   showModeratorModal: function(){
-    "use strict";
-    var self = this,
-        moderatorSettingsModel = new Backbone.Model();
-    moderatorSettingsModel.set(this.model.attributes);
-    this.moderatorSettingsView = new moderatorSettingsVw({model:moderatorSettingsModel, parentEl: '#modalHolder'});
+    var self = this;
+
+    this.moderatorSettingsView = new moderatorSettingsVw({model:this.model, parentEl: '#modalHolder'});
     this.subViews.push(this.moderatorSettingsView);
-    this.subModels.push(moderatorSettingsModel);
   },
 
   changeModeratorStatus: function(status, fee){

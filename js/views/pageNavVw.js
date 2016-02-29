@@ -9,7 +9,7 @@ var __ = require('underscore'),
     NotificationsCl = require('../collections/notificationsCl.js'), 
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
-    adminPanelView = require('../views/adminPanelVw'),
+    //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
     remote = require('remote'),
     messageModal = require('../utils/messageModal.js');
@@ -212,9 +212,11 @@ module.exports = baseVw.extend({
           .html(self.notificationsVw.render().el);
 
       //add the admin panel
+      /*
       self.adminPanel && self.adminPanel.remove();
       self.adminPanel = new adminPanelView({model: self.model});
       self.registerChild(self.adminPanel);
+      */
 
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');

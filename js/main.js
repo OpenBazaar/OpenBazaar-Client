@@ -125,6 +125,13 @@ window.addEventListener("drop",function(e){
   e.preventDefault();
 },false);
 
+//prevent enter from submitting forms
+window.addEventListener('keypress', function(event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+  }
+});
+
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
   getBTPrice(cCode, function (btAve, currencyList) {
