@@ -206,7 +206,7 @@ form {
   position: fixed;
   top: 0;
   -webkit-app-region: drag;
-  z-index: 3;
+  z-index: 5;
 }
 
 
@@ -245,7 +245,7 @@ form {
   background-color: #252525;
   border-left: 0;
   height: calc(100% - 50px);
-  z-index: 999;
+  z-index: 4;
   transition: right 0.5s ease;
   color: #DDD;
   -webkit-app-region: no-drag;
@@ -325,7 +325,7 @@ form {
   height: 100%;
   width: 100%;
   background-color: rgba(25,25,25,0.85);
-  z-index: 3;
+  z-index: 4;
   transition: all .25s cubic-bezier(0, 0, 0.2, .5);
 }
 
