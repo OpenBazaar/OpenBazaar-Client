@@ -128,6 +128,7 @@ textarea {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
   font-size: 14px;
   font-weight: 500;
+  font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
 }
 
 input[type=range]{
@@ -282,8 +283,8 @@ form {
 .mainContainer {
   background-color: #063753;
   position: relative;
-  min-height: 800px;
-  margin-bottom: 70px;
+  min-height: 740px;
+  margin-bottom: 50px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   z-index: 1;
@@ -2857,7 +2858,7 @@ input[type="radio"].fieldItem:checked + label:before {
 }
 
 input[type="radio"].fieldItem.starRating + label {
-  padding: 0 20px;
+  padding: 0 12px;
 }
 
 input[type="radio"].fieldItem.starRating + label:before {
@@ -3120,7 +3121,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .notification .rowItem:hover {
-  opacity: .75;
+  opacity: 1;
+}
+
+.notificationUnreadIndicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: #F3A123;
 }
 
 .onboardingIntroDiscover {
@@ -4252,6 +4262,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-right: 0;
 }
 
+#ov1 .top3 {
+  top: 3px;
+}
+
 #ov1  .outline2 {
   outline: 2px solid #fff;
 }
@@ -4784,6 +4798,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .height250 {
   height: 250px;
+}
+#ov1  .height254 {
+  height: 254px;
 }
 
 #ov1  .height324 {

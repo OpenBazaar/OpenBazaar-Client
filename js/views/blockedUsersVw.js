@@ -73,7 +73,7 @@ module.exports = Backbone.View.extend({
 
   checkIfEmpty: function(){
     if(this.collection.length == 0) {
-      var noBlockSnippet = $("<h3 class='padding20 txt-center'>" + polyglot.t('NoBlockedList') + "</h3>");
+      var noBlockSnippet = $("<div class='padding20 txt-center'>" + polyglot.t('NoBlockedList') + "</div>");
       this.$el.html(noBlockSnippet);
     }
   },

@@ -31,6 +31,7 @@ module.exports = baseVw.extend({
     'click .js-showFeedbackRating': 'showFeedbackRating',
     'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
+    'click .js-completeOrderHide': 'completeOrderHide',
     'click .js-confirmOrder': 'confirmOrder',
     'click .js-completeOrder': 'completeOrder',
     'click .js-copyIncommingTx': 'copyTx',
@@ -52,7 +53,9 @@ module.exports = baseVw.extend({
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'keydown #transactionDiscussionSendText': 'onKeydownDiscussion',
+    'keyup #transactionDiscussionSendText': 'onKeyupDiscussion'
   },
 
   initialize: function (options) {
@@ -284,7 +287,13 @@ module.exports = baseVw.extend({
   },
 
   showCompleteForm: function(){
-    this.setState("complete");
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-complete').addClass('bottom0');
+  },
+
+  completeOrderHide: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-complete').removeClass('bottom0');
   },
 
   confirmOrder: function(e){
@@ -467,7 +476,28 @@ module.exports = baseVw.extend({
     messageInput.closest('.flexRow').removeClass('formChecked');
     this.getDiscussion();
     messageInput.focus();
+  },
 
+  onKeydownDiscussion: function(e) {
+    var code = e.keyCode || e.which;
+
+    if (code === 13 && !this.shiftDown) {
+      e.preventDefault();
+    }
+
+    if (code === 16) {
+      this.shiftDown = true;
+    }
+  },
+
+  onKeyupDiscussion: function(e) {
+    var code = e.keyCode || e.which;
+
+    if (code === 13 && !this.shiftDown) {
+      this.sendDiscussionMessageClick();
+    }
+
+    if (code === 16) this.shiftDown = false;
   },
 
   showCloseDispute: function(e){

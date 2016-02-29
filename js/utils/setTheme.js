@@ -42,7 +42,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .btn-tab.active .pill { background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + shadeColor2(primaryColor, -0.35) +  ";}" +
       "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
-      "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background: " + secondaryColor + ";}" +
+      "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage { background-color: " + backgroundColor + ";}" + 
       "#ov1 #userPage .custCol-border-secondary { border-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-border-primary { border-color: " + primaryColor + ";}" +

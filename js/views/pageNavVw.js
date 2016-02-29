@@ -78,6 +78,9 @@ module.exports = baseVw.extend({
     }
 
     this.notificationsCl = new NotificationsCl();
+    this.notificationsCl.comparator = function(notif) {
+      return -notif.get("timestamp");
+    };
     this.notificationsFetch = this.notificationsCl.fetch();
 
     this.listenTo(this.notificationsCl, 'update', (cl, resp, options) => {
