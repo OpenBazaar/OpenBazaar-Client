@@ -1,9 +1,8 @@
-var __ = require('underscore'),
+var ipcRenderer = require('ipc-renderer'),
+    __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
-
-var messageModal = require('./utils/messageModal.js'),
+    $ = require('jquery'),
+    messageModal = require('./utils/messageModal.js'),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
     donateView = require('./views/donateVw'),
@@ -11,17 +10,6 @@ var messageModal = require('./utils/messageModal.js'),
     transactionsView = require('./views/transactionsVw');
 
 module.exports = Backbone.Router.extend({
-
-  initialize: function(options){
-    this.options = options || {};
-    /*
-    expects options.userModel, options userProfile, socketView from main.js
-     */
-    this.userModel = options.userModel;
-    this.userProfile = options.userProfile;
-    this.socketView = options.socketView;
-  },
-
   routes: {
     "": "index",
     "home": "home",
@@ -35,7 +23,86 @@ module.exports = Backbone.Router.extend({
     "settings/:state": "settings",
     "about": "about",
     "support": "donate"
+  },  
+
+  initialize: function(options){
+    this.options = options || {};
+    /*
+    expects options.userModel, options userProfile, socketView from main.js
+     */
+    this.userModel = options.userModel;
+    this.userProfile = options.userProfile;
+    this.socketView = options.socketView;
+
+    ipcRenderer.on('external-route', (e, route) => {
+      this.translateRoute(route).done((translatedRoute) => {
+        this.navigate(translatedRoute, { trigger: true });
+      });
+    });
   },
+
+  translateRoute: function(route) {
+    var guid = "",
+        handle = "",
+        state = "",
+        itemHash = "",
+        routeArray = route.replace(/ /g, "").split("/"),
+        deferred = $.Deferred();
+
+    state = routeArray[1] ? "/" + routeArray[1] : "";
+    itemHash = routeArray[2] ? "/" + routeArray[2] : "";
+
+    if(routeArray[0].charAt(0) == "@"){
+      // user entered a handle
+      handle = routeArray[0].replace('@', '');
+      this.processHandle(handle, state, itemHash).done((route) => {
+        deferred.resolve(route);
+      }).fail(() => {
+        deferred.reject('bad-handle');
+      });
+    } else if(!routeArray[0].length){
+      // user trying to go back to discover
+      deferred.resolve('#home');
+    } else if(routeArray[0].length === 40){
+      // user entered a guid
+      guid = routeArray[0];
+      deferred.resolve('#userPage/' + guid + state + itemHash);
+    } else if(routeArray[0].charAt(0) == "#"){
+      // user entered a search term
+      deferred.resolve('#home/products/' + routeArray[0].replace('#', ''));
+    } else {
+      //user entered text that doesn't match a known pattern, assume it's a product search
+      deferred.resolve('#home/products/');
+    }
+
+    return deferred.promise();
+  },
+
+  processHandle: function(handle, state, itemHash) {
+    var deferred = $.Deferred();
+
+    if (handle) {
+      $.ajax({
+        url: this.userModel.get('resolver') + "/v2/users/" + handle,
+        dataType: "json"
+      }).done(function(resolverData){
+        if(resolverData[handle].profile && resolverData[handle].profile.account){
+          var account = resolverData[handle].profile.account.filter(function (accountObject) {
+            return accountObject.service == "openbazaar";
+          });
+          deferred.resolve('#userPage/' + account[0].identifier + state + itemHash);
+        } else {
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
+          deferred.reject();
+        }
+      }).fail(function(jqXHR, status, errorThrown){
+        messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
+        deferred.reject();
+      });
+    }
+
+    return deferred.promise();
+  },  
 
   cleanup: function(){
     "use strict";
@@ -136,5 +203,4 @@ module.exports = Backbone.Router.extend({
     this.cleanup();
     this.newView(new donateView());
   }
-
 });
