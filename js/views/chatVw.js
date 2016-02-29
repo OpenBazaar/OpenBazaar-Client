@@ -217,7 +217,9 @@ module.exports = baseVw.extend({
 
     this.$('.chatConversationContainer').html(
       this.chatConversationVw.render().el
-    ).removeClass('chatConversationContainerHide');    
+    ).removeClass('chatConversationContainerHide');   
+     
+    this.$('.js-chatMessage').focus();
   },
 
   sendMessage: function(recipient, key, msg) {
