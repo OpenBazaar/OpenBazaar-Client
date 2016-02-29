@@ -440,6 +440,23 @@
               </div>
             </div>
 
+            <div class="flexRow js-settingsSignatureRow" style="overflow: hidden; height: 0; transition: height 1s;">
+              <div class="flexCol-3 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="signature"><%= polyglot.t('Signature') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="signature"
+                       type="text"
+                       id="signature"
+                       placeholder="<%= polyglot.t('Signature') %>"
+                       class="fieldItem"
+                       value="<%= ob.page.profile.pgp_key %>">
+              </div>
+            </div>
+
             <div class="flexRow borderBottom custCol-border marginTop20">
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('About') %></h3>
             </div>
