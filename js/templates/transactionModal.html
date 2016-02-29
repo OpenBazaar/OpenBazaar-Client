@@ -95,9 +95,9 @@
       <div class="positionTop padding10 width100 textOpacity1 js-showFeedbackRating">
         <div class="btn btn-txt textOpacity1 custCol-secondary">
           <% for(var i = 0; i < ob.buyer_receipt.receipt.rating.tx_summary.feedback; i++) { %>
-            <i class="starRating textShadow"></i>
+            <span class="starRating textShadow"></span>
           <% } %>
-          (View Rating)
+          <span>View Rating</span>
         </div>
       </div>
     <% } %>
@@ -353,6 +353,7 @@
         <div class="flexRow rowItem padding10">
           <div class="width100">
             <div class="fontSize15 floatLeft noOverflow lineHeight32">
+              <span class="fontSize13 ion-code marginLeft5"></span>
               <span><%= polyglot.t('transactions.ContractDetails') %></span>
             </div>    
             <div class="floatRight  textOpacity1">
@@ -371,7 +372,10 @@
     </div>
     <% if(ob.status != 0){ %>
     <div class="positionTop floatRight padding10" style="right: 0">
-      <a class="btn btn-txt custCol-secondary js-transactionShowContract textOpacity1"><%= polyglot.t('transactions.ContractDetails') %></a>
+      <a class="btn btn-txt custCol-secondary js-transactionShowContract textOpacity1">
+        <span class="fontSize12 ion-code"></span>
+        <%= polyglot.t('transactions.ContractDetails') %>
+      </a>
     </div>
     <% } %>
   </div>
