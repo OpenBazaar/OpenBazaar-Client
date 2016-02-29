@@ -70,12 +70,11 @@ module.exports = baseVw.extend({
   },
 
   onKeydownMessage: function(e) {
-    var code = e.keyCode || e.which,
-        val = this.$msgTextArea.val();
+    var code = e.keyCode || e.which;
     
-    if (code === 13 && !val.trim() && !this.shiftDown) {
+    if (code === 13 && !this.shiftDown) {
       e.preventDefault();
-    }
+    }    
 
     if (code === 16) {
       this.shiftDown = true;
