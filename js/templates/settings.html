@@ -191,8 +191,8 @@
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
-                  <input type="radio" class="fieldItem" id="display_nsfw_content_yes" name="nsfw" value="true" checked /><label for="display_nsfw_content_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
-                  <input type="radio" class="fieldItem" id="display_nsfw_content_no" name="nsfw" value="false"/><label for="display_nsfw_content_no" class="radioLabel"><%= polyglot.t('No') %></label>
+                  <input type="radio" class="fieldItem" id="display_nsfw_content_yes" name="nsfw" value="true" /><label for="display_nsfw_content_yes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="display_nsfw_content_no" name="nsfw" value="false" checked /><label for="display_nsfw_content_no" class="radioLabel"><%= polyglot.t('No') %></label>
                 </div>
               </div>
             </div>
@@ -243,7 +243,7 @@
                        id="handle"
                        placeholder="@john"
                        class="fieldItem"
-                       pattern="@[a-zA-Z0-9]+"
+                       pattern="@[a-zA-Z0-9_]+"
                        value="<%= ob.page.profile.temp_handle || ob.page.profile.handle %>">
                 <% if(ob.page.profile.temp_handle && !ob.page.profile.handle){ %>
                 <a class="positionTopRight padding10 js-externalLink" href="https://onename.com/">
@@ -440,6 +440,22 @@
               </div>
             </div>
 
+            <div class="flexRow js-settingsSignatureRow" style="overflow: hidden; height: 0; transition: height 1s;">
+              <div class="flexCol-3 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="signature"><%= polyglot.t('Signature') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="signature"
+                       type="text"
+                       id="signature"
+                       placeholder="<%= polyglot.t('Signature') %>"
+                       class="fieldItem">
+              </div>
+            </div>
+
             <div class="flexRow borderBottom custCol-border marginTop20">
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('About') %></h3>
             </div>
@@ -448,6 +464,7 @@
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="about"><%= polyglot.t('About') %></label>
+                  <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
                 </div>
               </div>
 
@@ -456,7 +473,7 @@
                     name="about"
                     id="about"
                     rows="10"
-                    class="fieldItem-textarea"
+                    class="fieldItem-textarea height130"
                     placeholder="<%= polyglot.t('AboutPlaceholder') %>"><%= ob.page.profile.about %></textarea>
               </div>
             </div>
@@ -478,15 +495,15 @@
                     <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
                            id="settings-theme-1"
                            data-primary-color="#ba4a3f"
-                           data-secondary-color="#d94641"
+                           data-secondary-color="#cc504b"
                            data-background-color="#5E3E36"
                            data-text-color="#ffffff"
                            data-cover-photo="imgs/themes/1/header.png" />
                     <label for="settings-theme-1" class="radioLabel">
                       <div class="theme-background" style="background: #5E3E36">
-                        <div class="theme-global-header" style="background: #d94641"></div>
+                        <div class="theme-global-header" style="background: #cc504b"></div>
                         <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div> 
-                        <div class="theme-nav" style="background: #d94641">
+                        <div class="theme-nav" style="background: #cc504b">
                           <div class="theme-tab" style="background: #ba4a3f"></div>
                         </div>
                         <div class="theme-body" style="background: #ba4a3f"></div> 

@@ -15,7 +15,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
      skipKeys[optional]: keys to skip, and not send to the server
    */
   var self = this,
-      formData = new FormData((form && form[0]) || ""),
+      formData,
       formKeys = [],
       tempDisabledFields = [];
 
@@ -44,6 +44,9 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       formKeys.push(value.name);
     });
   }
+
+  //after disabling blank fields, populate the formData
+  formData = new FormData((form && form[0]) || "");
 
   //add manual data not in the form
   __.each(addData, function(value, key){

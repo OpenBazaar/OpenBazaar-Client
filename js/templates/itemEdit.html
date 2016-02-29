@@ -97,14 +97,14 @@
               <input type="text" name="currency_code" id="inputCurrencyCode" class="hide" />
               <input type="number" name="priceLocal" step="any" class="fieldItem js-priceLocal custCol-text"  id="priceLocal" value="<%= ob.price %>" required
                 <% if(ob.userCurrencyCode == "BTC"){ %>
-                min="0.0001"
+                min="0.0015"
                 <% } else { %>
-                min="<% print((window.currentBitcoin * 0.0005).toFixed(2)) %>"
+                min="<% print((window.currentBitcoin * 0.002).toFixed(2)) %>"
                 <% } %>
               >
             </div>
             <div class="flexCol-4">
-              <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0001 :  (window.currentBitcoin * 0.0005).toFixed(2) %></span>
+              <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0015 :  (window.currentBitcoin * 0.002).toFixed(2) %></span>
             </div>
           </div>
           <div class="flexRow custCol-border js-shippingRow">
@@ -154,10 +154,14 @@
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputDescription"><%= polyglot.t('Description') %></label>
+                <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
               </div>
             </div>
             <div class="flexCol-9">
-              <textarea name="description" rows="8" class="fieldItem-textarea custCol-text" id="inputDescription" required placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%= ob.vendor_offer.listing.item.description %></textarea>
+              <textarea name="description" rows="8" class="fieldItem-textarea custCol-text height130 overflowHidden"
+                        id="inputDescription" required placeholder="<%= polyglot.t('DescriptionPlaceholder') %>">
+                <%- ob.vendor_offer.listing.item.description %>
+              </textarea>
             </div>
           </div>
         </div>

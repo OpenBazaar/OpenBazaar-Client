@@ -4,7 +4,7 @@ var __ = require('underscore'),
     //userProfileModel = require('../models/userProfileMd'),
     loadTemplate = require('../utils/loadTemplate'),
     domUtils = require('../utils/dom'),
-    app = require('../App.js').getApp(),    
+    app = require('../App.js').getApp(),
     timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd.js'),
     usersCl = require('../collections/usersCl.js'),
@@ -54,16 +54,17 @@ module.exports = Backbone.View.extend({
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'input #pgp_key': 'showSignature'
   },
 
   initialize: function(options){
     var self = this;
     this.options = options || {};
     /* expected options:
-       userModel
-       state
-       socketView
+     userModel
+     state
+     socketView
      */
     this.socketView = options.socketView;
     this.userProfile = options.userProfile;
@@ -127,9 +128,7 @@ module.exports = Backbone.View.extend({
       self.setFormValues();
 
       self.newAvatar = false;
-      self.avatarNeverLoaded = true;
       self.newBanner = false;
-      self.bannerNeverLoaded = true;
 
       // Since the Blocked Users View kicks off many server calls (one
       // for each blocked user) and since we are re-rendering the entire
@@ -146,21 +145,18 @@ module.exports = Backbone.View.extend({
 
       $(".chosen").chosen({ width: '100%' });
       $('#settings-image-cropper').cropit({
-        $preview: $('.js-settingsAvatarPreview'),
-        $fileInput: $('#settingsAvatarInput'),
+        $preview: self.$('.js-settingsAvatarPreview'),
+        $fileInput: self.$('#settingsAvatarInput'),
         smallImage: "stretch",
         maxZoom: 2,
         onFileReaderError: function(data){console.log(data);},
         onImageLoading: function(){
-          self.$el.find('.js-avatarLoading').removeClass('fadeOut');
-          
-          if (self.avatarNeverLoaded) {
-            self.avatarNeverLoaded = false;
-          } else {
-            self.newAvatar = true;
-          }
+          self.newAvatar = true;
+          self.$('.js-avatarLoading').removeClass('fadeOut');
         },
-        onImageLoaded: function(){self.$el.find('.js-avatarLoading').addClass('fadeOut');},
+        onImageLoaded: function(){
+          self.$('.js-avatarLoading').addClass('fadeOut');
+        },
         onImageError: function(errorObject, errorCode, errorMessage){
           console.log(errorObject);
           console.log(errorCode);
@@ -171,6 +167,7 @@ module.exports = Backbone.View.extend({
       self.moderatorFeeHolder = self.$('.js-settingsModeratorFee');
       if(self.model.get('page').profile.avatar_hash){
         $('#settings-image-cropper').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.avatar_hash);
+        self.newAvatar = false;
       }
       //set existing avatar, if any
       $('#settings-image-cropperBanner').cropit({
@@ -181,15 +178,12 @@ module.exports = Backbone.View.extend({
         maxZoom: 5,
         onFileReaderError: function(data){console.log(data);},
         onImageLoading: function(){
+          self.newBanner = true;
           self.$el.find('.js-bannerLoading').removeClass('fadeOut');
-
-          if (self.bannerNeverLoaded) {
-            self.bannerNeverLoaded = false;
-          } else {
-            self.newBanner = true;
-          }          
         },
-        onImageLoaded: function(){self.$el.find('.js-bannerLoading').addClass('fadeOut');},
+        onImageLoaded: function(){
+          self.$el.find('.js-bannerLoading').addClass('fadeOut');
+        },
         onImageError: function(errorObject, errorCode, errorMessage){
           console.log(errorObject);
           console.log(errorCode);
@@ -198,15 +192,16 @@ module.exports = Backbone.View.extend({
       });
       if(self.model.get('page').profile.header_hash){
         $('#settings-image-cropperBanner').cropit('imageSrc', self.serverUrl +'get_image?hash='+self.model.get('page').profile.header_hash);
+        self.newBanner = false;
       }
 
       var editor = new MediumEditor('#about', {
-          placeholder: {
-            text: ''
-          },
-          toolbar: {
-            imageDragging: false
-          }
+        placeholder: {
+          text: ''
+        },
+        toolbar: {
+          imageDragging: false
+        }
       });
     });
     return this;
@@ -218,7 +213,7 @@ module.exports = Backbone.View.extend({
     if (models && models.length) {
       __.each(models, function(model) {
         model.urlRoot = self.serverUrl + 'profile';
-        
+
         // Monkey patching parse so the profile is not nested
         // and therefore change events will be in play.
         model.oldParse = model.parse;
@@ -227,7 +222,7 @@ module.exports = Backbone.View.extend({
             return model.oldParse(response).profile;
           } else {
             return response;
-          }          
+          }
         };
 
         model.fetch({ data: { guid: model.get('guid')} });
@@ -248,8 +243,8 @@ module.exports = Backbone.View.extend({
     if (options.useCached) {
       if (!this.$lazyLoadTrigger.length) {
         throw new Error('Some expected state is missing. renderBlocked() can only'
-          + ' be called with the useCached option after it has been called at least once'
-          + ' without the useCached option.');
+            + ' be called with the useCached option after it has been called at least once'
+            + ' without the useCached option.');
       }
 
       $blockedContainer.html(this.blockedUsersVw.el);
@@ -263,8 +258,8 @@ module.exports = Backbone.View.extend({
 
     function getBlockedGuids() {
       return self.userModel.get('blocked_guids').map(function(guid) {
-          return { guid: guid }
-        });
+        return { guid: guid }
+      });
     }
 
     blockedUsersCl = new usersCl(getBlockedGuids().slice(0, modelsPerBatch));
@@ -277,7 +272,7 @@ module.exports = Backbone.View.extend({
     });
 
     this.$('#blockedForm').html(
-      this.blockedUsersVw.render().el
+        this.blockedUsersVw.render().el
     );
 
     this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
@@ -303,9 +298,9 @@ module.exports = Backbone.View.extend({
     this.blockedUsersUnblockHandler && this.stopListening(window.obEventBus, null, this.blockedUsersUnblockHandler);
     this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = function(e) {
       blockedUsersCl.remove(
-        blockedUsersCl.findWhere({ guid: e.guid })
+          blockedUsersCl.findWhere({ guid: e.guid })
       );
-    });    
+    });
 
     // implement scroll based lazy loading of blocked users
     this.$obContainer = this.$obContainer || $('#obContainer');
@@ -314,18 +309,18 @@ module.exports = Backbone.View.extend({
       var colLen;
 
       if (
-        self.getState() === 'blocked' &&
-        blockedUsersCl.length < getBlockedGuids().length &&
-        domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
+          self.getState() === 'blocked' &&
+          blockedUsersCl.length < getBlockedGuids().length &&
+          domUtils.isScrolledIntoView(self.$lazyLoadTrigger[0], self.$obContainer[0])
       ) {
         colLen = blockedUsersCl.length;
 
         blockedUsersCl.add(
-          getBlockedGuids().slice(colLen, colLen + modelsPerBatch)
+            getBlockedGuids().slice(colLen, colLen + modelsPerBatch)
         );
 
         self.patchAndFetchBlockedUsers(
-          blockedUsersCl.slice(colLen, colLen + modelsPerBatch)
+            blockedUsersCl.slice(colLen, colLen + modelsPerBatch)
         )
       }
     }, 200);
@@ -356,16 +351,18 @@ module.exports = Backbone.View.extend({
         timezone_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
+        notifications = user.notifications;
         moderatorStatus = this.model.get('page').profile.moderator;
 
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
     this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
+    this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
       var cA = a.currency.toLowerCase(),
           cB = b.currency.toLowerCase();
-      if (cA < cB){
+        if (cA < cB){
         return -1;
       }
       if (cA > cB){
@@ -402,9 +399,9 @@ module.exports = Backbone.View.extend({
     });
 
     __.each(languageList, function(l, i){
-        var language_option = $('<option value="'+l.langCode+'">'+l.langName+'</option>');
-        language_option.attr("selected",user.language == l.langCode);
-        language_str += language_option[0].outerHTML;
+      var language_option = $('<option value="'+l.langCode+'">'+l.langName+'</option>');
+      language_option.attr("selected",user.language == l.langCode);
+      language_str += language_option[0].outerHTML;
     });
 
     ship_country.html(ship_country_str);
@@ -653,13 +650,13 @@ module.exports = Backbone.View.extend({
       img64Data.image = imageURI;
 
       saveToAPI('', '', self.serverUrl + "upload_image", function (data) {
-            "use strict";
-            var img_hash = data.image_hashes[0];
-            if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
-              pageData.avatar = img_hash;
-              checkBanner();
-            }
-          },"", img64Data);
+        "use strict";
+        var img_hash = data.image_hashes[0];
+        if(img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40){
+          pageData.avatar = img_hash;
+          checkBanner();
+        }
+      },"", img64Data);
     } else {
       checkBanner();
     }
@@ -813,7 +810,7 @@ module.exports = Backbone.View.extend({
     }).render().open();
 
     this.serverConnectSyncHandler &&
-      this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
+    this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
 
     this.serverConnectSyncHandler = function() {
       // todo: bit of a hack to hide the close button. really, the
@@ -831,7 +828,7 @@ module.exports = Backbone.View.extend({
     serverConnectModal.on('close', function() {
       serverConnectModal.remove();
       this.stopListening(app.serverConfig, null, this.serverConnectSyncHandler);
-    });    
+    });
   },
 
   shutdownServer: function(){
@@ -840,6 +837,11 @@ module.exports = Backbone.View.extend({
       type: "GET",
       url: self.serverUrl + "shutdown"
     });
+  },
+
+  showSignature: function(){
+    var targ = this.$('.js-settingsSignatureRow');
+    targ.css("height", 50);
   },
 
   close: function(){
@@ -863,8 +865,8 @@ module.exports = Backbone.View.extend({
     }
 
     this.serverConnectSyncHandler &&
-      app.serverConfig.off(null, this.serverConnectSyncHandler);    
-    
+    app.serverConfig.off(null, this.serverConnectSyncHandler);
+
     this.model.off();
     this.off();
     this.remove();

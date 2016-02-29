@@ -5,6 +5,7 @@ var Backbone = require('backbone'),
     cropit = require('../utils/jquery.cropit'),
     baseModal = require('./baseModal'),
     messageModal = require('../utils/messageModal.js'),
+    languagesModel = require('../models/languagesMd'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
     languageListView = require('../views/languageListVw'),
@@ -43,6 +44,20 @@ module.exports = baseModal.extend({
     this.$document = $(document).on('focus', this.docFocusHandler);
     this.$el.attr('tabIndex', 0);
     this.$loadingModal = $('.js-loadingModal');
+    this.languages = new languagesModel();
+
+    // pre-select lauguage.
+    var localLanguage = window.navigator.language;
+    var localLanguageFound = false;
+    var languageList = this.languages.get('languages');
+    for(var i in languageList) {
+      if(languageList[i].langCode == localLanguage) {
+        localLanguageFound = true;
+        break;
+      }
+    }
+    localLanguage = localLanguageFound ? localLanguage : "en-US";
+    this.model.set('language', localLanguage);
 
     this.listenTo(self.model, 'change:language', function() {
       self.render();
@@ -91,11 +106,9 @@ module.exports = baseModal.extend({
 
   currencySelect: function(e){
     var targ = $(e.currentTarget);
-    //var crcy = targ.attr('data-name');
     var ccode = targ.attr('data-code');
     this.$('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
-    //this.model.set('currency', crcy);
     this.model.set('currency_code', ccode);
   },
 
@@ -116,7 +129,8 @@ module.exports = baseModal.extend({
     var countryList,
         currencyList,
         timeList,
-        languageList;
+        languageList,
+        self = this;
 
     this._accordianReady = true;
     this.loadingOff();
@@ -137,9 +151,17 @@ module.exports = baseModal.extend({
     });
 
     this.$el.find('#image-cropper').cropit({
+      $preview: self.$('.js-onboardingAvatarPreview'),
+      $fileInput: self.$('#onboardingAvatarInput'),
       smallImage: "stretch",
       exportZoom: 1.33,
       maxZoom: 5,
+      onImageLoading: function(){
+        self.$el.find('.js-avatarLoading').removeClass('fadeOut');
+      },
+      onImageLoaded: function(){
+        self.$el.find('.js-avatarLoading').addClass('fadeOut');
+      },
       onFileReaderError: function(data){console.log(data);},
       onImageError: function(errorObject, errorCode, errorMessage) {
         console.log(errorObject);
