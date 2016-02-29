@@ -104,7 +104,7 @@ var start_local_server = function() {
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
     subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug', '-p', random_port], {
-      detach: true,
+      detach: false,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
 
@@ -160,13 +160,7 @@ app.on('before-quit', function (e) {
     console.log('Closing Application');
     if(launched_from_installer) {
       console.log('Shutting down server daemon');
-      request('http://localhost:18469/api/v1/shutdown', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          console.log('Shutting down server');
-        } else {
-          console.log('Server does not seem to be running.');
-        }
-      });
+      subpy.kill();
     }
 });
 
