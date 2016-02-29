@@ -233,6 +233,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title",
         DigitalItem: "Digital Item",
         PhysicalItem: "Physical Item",
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time",
         InternationalShippingTime: "International Shipping Time",
         DisplayNSFWcontent: "Display NSFW content?",
@@ -394,7 +395,7 @@ module.exports = Backbone.Model.extend({
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", 
           support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
-          licensing: "<p>OpenBazaar is open source software using the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
+          licensing: "<p>OpenBazaar is open source software under the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Saved",
@@ -767,6 +768,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
@@ -1295,6 +1297,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
@@ -1827,6 +1830,7 @@ module.exports = Backbone.Model.extend({
         Title: "Titolo",
         DigitalItem: "Articolo digitale",
         PhysicalItem: "Articolo fisico",
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Tempo di invio nazionale",
         InternationalShippingTime: "Tempo di invio internazionale",
         DisplayNSFWcontent: "Mostrare contenuto NSFW?",
@@ -2361,6 +2365,7 @@ module.exports = Backbone.Model.extend({
         Title: "Titre",
         DigitalItem: "Article numérique",
         PhysicalItem: "Article physique",
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Délai d'expédition nationale",
         InternationalShippingTime: "Délai d'expédition internationale",
         DisplayNSFWcontent: "Afficher le contenu NSFW ?",
@@ -2890,6 +2895,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
@@ -3418,6 +3424,7 @@ module.exports = Backbone.Model.extend({
         Title: "Название",
         DigitalItem: "Цифровой товар",
         PhysicalItem: "Физический товар",
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Внутреннее время доставки",
         InternationalShippingTime: "Международное время доставки",
         DisplayNSFWcontent: "Отображать NSFW контент?",
@@ -3946,6 +3953,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
@@ -4478,6 +4486,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
@@ -5009,6 +5018,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
@@ -5545,6 +5555,7 @@ module.exports = Backbone.Model.extend({
         Title: "标题",
         DigitalItem: "数字商品",
         PhysicalItem: "实物商品",
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "国内货运时长",
         InternationalShippingTime: "国际货运时长",
         DisplayNSFWcontent: "显示成人内容?",
@@ -6076,6 +6087,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Domestic Shipping Time", // not translated
         InternationalShippingTime: "International Shipping Time", // not translated
         DisplayNSFWcontent: "Display NSFW content?", // not translated
@@ -6603,6 +6615,7 @@ module.exports = Backbone.Model.extend({
         Title: "タイトル",
         DigitalItem: "デジタル製品",
         PhysicalItem: "品物", // check
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "国内配達日数",
         InternationalShippingTime: "国際配達日数",
         DisplayNSFWcontent: "アダルトコンテンツを表示しますか？",
@@ -7124,6 +7137,7 @@ module.exports = Backbone.Model.extend({
         Title: "Tytuł",
         DigitalItem: "Przedmiot cyfrowy",
         PhysicalItem: "Przedmiot fizyczny",
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Termin wysyłki krajowej",
         InternationalShippingTime: "Termin wysyłki międzynarodowej",
         DisplayNSFWcontent: "Pokaż treści NSFW?",
@@ -7630,6 +7644,7 @@ module.exports = Backbone.Model.extend({
         Title: "Titel",
         DigitalItem: "Digital vare",
         PhysicalItem: "Fysisk vare",
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
         DomesticShippingTime: "Indenlands forsendelsestid",
         InternationalShippingTime: "International forsendelsestid",
         DisplayNSFWcontent: "Vis potentielt stødende indhold?",
