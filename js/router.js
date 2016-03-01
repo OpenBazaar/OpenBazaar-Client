@@ -46,7 +46,7 @@ module.exports = Backbone.Router.extend({
         handle = "",
         state = "",
         itemHash = "",
-        routeArray = route.replace(/ /g, "").split("/"),
+        routeArray = route.replace("ob://","").replace(/ /g, "").split("/"),
         deferred = $.Deferred();
 
     state = routeArray[1] ? "/" + routeArray[1] : "";
