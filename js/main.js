@@ -282,6 +282,8 @@ heartbeat.on('open', function(e) {
     // appropriatally loadProfile or launch onboarding
     guidCreating = null;
     loadProfileNeeded = true;
+
+    onboardingModal && onboardingModal.remove();
   }
 });
 
