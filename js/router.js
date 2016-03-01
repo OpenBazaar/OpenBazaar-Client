@@ -105,7 +105,6 @@ module.exports = Backbone.Router.extend({
   },
 
   newView: function(view, bodyClass, addressBarText){
-    "use strict";
     if($('body').attr('id') != bodyClass){
       $('body').attr("id", bodyClass || "");
     }
@@ -115,6 +114,7 @@ module.exports = Backbone.Router.extend({
     //clear address bar. This will be replaced on the user page
     addressBarText = addressBarText || "";
     window.obEventBus.trigger("setAddressBar", addressBarText);
+    $('#obContainer')[0].scrollTop = 0;
   },
 
   index: function(){
