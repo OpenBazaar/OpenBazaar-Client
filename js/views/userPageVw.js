@@ -293,20 +293,19 @@ module.exports = baseVw.extend({
             model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
             model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
           }
+          // Cache user avatar in localStorage
+          var profile = model.toJSON().profile;
+          window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
+
+          self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+          self.model.set({ownPage: self.options.ownPage});
+          self.render();
         }else{
           //model was returned as a blank object
           $('.js-loadingModal').addClass('hide');
           messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           self.bindModalCloseHandler();
         }
-
-        // Cache user avatar in localStorage
-        var profile = model.toJSON().profile;
-        window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
-
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        self.model.set({ownPage: self.options.ownPage});
-        self.render();
       },
       error: function(model, response){
         if (self.isRemoved()) return;
@@ -466,11 +465,20 @@ module.exports = baseVw.extend({
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
       this.addTabToHistory('about');
       this.customizePage();
+    }else if(state == "store"){
+      //if this page is not a vendor, don't go to their store
+      if(this.model.get('page').profile.vendor){
+        state="store";
+      } else {
+        state="about";
+      }
+      this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
+      this.addTabToHistory('state');
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
       //if no state was set
-      if(this.userProfile.get('profile').vendor){
+      if(this.model.get('page').profile.vendor){
         state="store";
       } else {
         state="about";
@@ -487,6 +495,8 @@ module.exports = baseVw.extend({
       isItemType = true;
     }
 
+    console.log(this.model.get('page').profile.vendor)
+    console.log(state)
     //set address bar
     if(isItemType) {
       addressState = "/item";
