@@ -162,6 +162,7 @@ module.exports = baseModal.extend({
       exportZoom: 1.33,
       maxZoom: 5,
       onImageLoading: function(){
+        self.$('.cropit-image-zoom-input').removeClass('hide');
         self.$el.find('.js-avatarLoading').removeClass('fadeOut');
       },
       onImageLoaded: function(){
@@ -397,8 +398,6 @@ module.exports = baseModal.extend({
         if (followHandles.length) {
           this.postFollowing(followHandles);
         }
-                
-        this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
       });
     });
 

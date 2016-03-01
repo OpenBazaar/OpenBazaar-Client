@@ -1,7 +1,6 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    //userProfileModel = require('../models/userProfileMd'),
     loadTemplate = require('../utils/loadTemplate'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
@@ -151,6 +150,7 @@ module.exports = Backbone.View.extend({
         maxZoom: 2,
         onFileReaderError: function(data){console.log(data);},
         onImageLoading: function(){
+          self.$('.cropit-image-zoom-input').removeClass('hide');
           self.newAvatar = true;
           self.$('.js-avatarLoading').removeClass('fadeOut');
         },
