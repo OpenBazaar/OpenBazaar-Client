@@ -2489,7 +2489,7 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Avis de transaction",
           OverallRating: "Note générale",
           Quality: "Qualité",
-          MatchedDescription: "Conformité",
+          MatchedDescription: "Conformité à l'annonce",
           DeliverySpeed: "Vitesse de livraison",
           CustomerService: "Service client",
           Review: "Avis",
