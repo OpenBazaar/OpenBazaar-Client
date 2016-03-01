@@ -264,6 +264,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator",
         Firewall: "Firewall",
         ServerSettings: "Server Settings",
@@ -799,6 +800,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -1330,6 +1332,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -1865,6 +1868,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "non fornito",
         NotFollowingAnyone: "Non segui nessuno",
         NoFollowers: "Nessun seguace",
+        NoReviews: "No reviews", //notTranslated        
         Moderator: "Moderatore",
         Firewall: "Firewall",
         ServerSettings: "Impostazioni Server",
@@ -2421,6 +2425,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "Non renseigné",
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Modérateur",
         Firewall: "Pare-feu",
         ServerSettings: "Paramètres du serveur",
@@ -2953,6 +2958,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -3484,6 +3490,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -4015,6 +4022,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -4550,6 +4558,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -5084,6 +5093,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -5623,6 +5633,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "未提供",
         NotFollowingAnyone: "未关注任何人",
         NoFollowers: "没有人关注你",
+        NoReviews: "No reviews", //notTranslated
         Moderator: "仲裁员",
         Firewall: "防火墙",
         ServerSettings: "服务器设置",
@@ -6157,6 +6168,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -6677,6 +6689,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided", // not translated
         NotFollowingAnyone: "Not following anyone", // not translated
         NoFollowers: "No followers", // not translated
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -7211,6 +7224,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "niezapewniane",
         NotFollowingAnyone: "Brak obserwowanych",
         NoFollowers: "Brak obserwujących",
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator",//notTranslated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
@@ -7720,6 +7734,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "ikke angivet",
         NotFollowingAnyone: "Følger ingen",
         NoFollowers: "Ingen følgere",
+        NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator",
         Firewall: "Firewall",
         ServerSettings: "Serverindstillinger",
