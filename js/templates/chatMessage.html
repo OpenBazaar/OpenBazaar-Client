@@ -17,39 +17,39 @@
             </a>
             <% if(ob.guid == ob.moderatorGuid || ob.sender && ob.sender == ob.moderatorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Moderator') %></div>
+                <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Moderator') %></div>
             </div>
             <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == ob.vendorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Seller') %></div>
+                <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Seller') %></div>
             </div>
             <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == ob.buyerGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Buyer') %></div>
+                <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Buyer') %></div>
             </div>
             <% } %>
         <% } %>
         
         <div class="chatConversationMessageBody flexExpand">
             <% if (ob.outgoing) { %>
-            <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %> floatRight"><%= ob.sanitizedMsg %></div>
+            <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %> floatRight"><%= ob.sanitizedMsg %></div>
             <% } else { %>
-            <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %>"><%= ob.sanitizedMsg %></div>
+            <div class="inner <% if(ob.message_type == 'ORDER'  || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= ob.sanitizedMsg %></div>
             <% } %>
         </div>
         
         <% if (ob.outgoing) { %>
             <% if(ob.transactionType == "cases"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Moderator') %></div>
+                    <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Moderator') %></div>
                 </div>
                 <% } else if(ob.transactionType == "sales"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Seller') %></div>
+                    <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Seller') %></div>
                 </div>
                 <% } else if(ob.transactionType == "purchases"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner <% if(ob.message_type == "ORDER") { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Buyer') %></div>
+                    <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Buyer') %></div>
                 </div>
             <% } %>
 
