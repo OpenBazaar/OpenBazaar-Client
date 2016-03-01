@@ -191,7 +191,7 @@ module.exports = baseVw.extend({
         message: msg,
         outgoing: true,
         read: true,
-        timestamp: Date.now()
+        timestamp: Date.now() / 1000
       });
 
       // update chat head
@@ -208,7 +208,7 @@ module.exports = baseVw.extend({
           last_message: msg,
           public_key: convoMd.get('public_key'),
           unread: 0,
-          timestamp: Date.now()
+          timestamp: Date.now() / 1000
         });
       }
     });
