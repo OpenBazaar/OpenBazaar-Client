@@ -1244,7 +1244,7 @@ module.exports = baseVw.extend({
 
   saveNewDone: function(newHash) {
     "use strict";
-    this.setState('item', newHash);
+    this.setState('listing', newHash);
     this.subRender();
   },
 
