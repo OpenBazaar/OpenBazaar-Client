@@ -1971,7 +1971,7 @@ div.chatSearchOut .chatSearchIcon {
   overflow: auto;
   padding: 6px 2px;
   margin-left: 2px;
-  width: 100%;
+  width: 222px;
 }
 
 .chatConversationTo {
@@ -1999,7 +1999,7 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessage {
   height: 75px;
-  padding: 0 5px;
+  padding: 0;
   border: 1px solid #565656;
   border-top: 0;
   margin-left: 2px;
@@ -2011,12 +2011,17 @@ div.chatSearchOut .chatSearchIcon {
   max-height: 145px;
 }
 
+.chatConversationMessage  .txtAreaField::-webkit-input-placeholder{
+  font-size: 13px;
+}
+
 .chatConversationMessage  .txtAreaField {
   height: 75px;
+  padding: 10px 10px;
 }
 
 .chatConversationMessage  .txtAreaField:focus {
-  outline: none;
+    outline: 2px solid #565656;
 }
 
 .chatConversationMessage  .txtAreaField:after {
@@ -3092,14 +3097,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   right: 45px;
   background-color: #252525;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   color: #fff;
   font-size: 15px;
   padding: 0;
   width: 390px;
-  transform: translateY(-100%);
+  transform: translateY(-440px);
   transition: transform 200ms;
 }
 
@@ -3176,7 +3181,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   right: 10px;
   background-color: #252525;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   color: #fff;
@@ -3184,7 +3189,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   padding: 10px 0;
   width: 230px;
   overflow: hidden;
-  transform: translateY(-100%);
+  transform: translateY(-330px);
   transition: transform 200ms;
 }
 
@@ -4532,6 +4537,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: 3px;
 }
 
+#ov1  .marginRight4 {
+  margin-right: 4px;
+}
+
 #ov1  .marginRight5 {
   margin-right: 5px;
 }
@@ -4900,6 +4909,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .padding5 {
   padding: 5px;
 }
+#ov1  .padding10px6px {
+  padding: 10px 6px;
+}
 
 #ov1  .padding8 {
   padding: 8px;
@@ -5067,6 +5079,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .width80 {
   width: 80px;
+}
+#ov1 .width91 {
+  width: 91px;
 }
 #ov1 .width95 {
   width: 95px;
