@@ -8,7 +8,7 @@ var __ = require('underscore'),
 
 module.exports = baseVw.extend({
 
-  className: "flexCol-12 flex-border js-tabTarg js-reviews hide",
+  className: "flexCol-12 flex-border",
 
   events: {
   },
