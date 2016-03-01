@@ -272,6 +272,8 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Handle Resolver",
         ServerSettings: "Server Settings",
         ShutDownServer: "Shut Down the Server",
+        NoFancyStyles: "Disable Visual Effects",
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.",
         LoadingBitcoinPrices: "Loading Bitcoin Prices...",
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list",
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW",
