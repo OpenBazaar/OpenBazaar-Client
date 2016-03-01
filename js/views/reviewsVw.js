@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    loadTemplate = require('../utils/loadTemplate'),
     RatingCl = require('../collections/ratingCl'),
     baseVw = require('./baseVw'),
     ReviewView = require('./reviewVw');
@@ -90,6 +91,10 @@ module.exports = baseVw.extend({
       this.$el.html(
         this.createReviewViews(this.paginatedCollection.models)
       );
+    } else {
+      loadTemplate('./js/templates/simpleMessage.html', (tmpl) => {
+        this.$el.html(tmpl({ title: window.polyglot.t('NoReviews') }));
+      });
     }
 
     return this;
