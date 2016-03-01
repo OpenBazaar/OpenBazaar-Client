@@ -2015,11 +2015,11 @@ module.exports = Backbone.Model.extend({
           pagesMods: "Servizi di moderazione",
           pagesBasic: "Utenti normali",
           listingsCurated: "Dai negozi che seguo",
-          listingsAll: "Da tutti i negozi"
+          listingsAll: "Da tutti i negozi",
           categoryAll: "Tutti"
         },
         nav: {
-          searchPlaceholder: "Scrivi un @Nickname, OpenBazaar ID o #tag..."
+          searchPlaceholder: "Scrivi un @Nickname, OpenBazaar ID o #tag...",
           myPage: "La mia pagina",
           testMode: "Modalit&agrave; Test",
           customizePage: "Personalizza pagina",
