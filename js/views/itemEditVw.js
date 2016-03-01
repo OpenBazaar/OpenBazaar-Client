@@ -31,7 +31,8 @@ module.exports = baseVw.extend({
     var self=this,
         hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
         nowDate = new Date(),
-        nowMonth = nowDate.getMonth()+ 1;
+        nowMonth = nowDate.getMonth()+ 1,
+        noShipping = false;
 
     function padTime(val){
       "use strict";
@@ -106,8 +107,10 @@ module.exports = baseVw.extend({
     //hide or unhide shipping based on product type
     if(typeValue === "physical good") {
       this.enableShipping();
+      this.noShipping = false;
     } else {
       this.disableShipping();
+      this.noShipping = true;
     }
     //hide or unhide shipping based on free shipping
     if(this.model.get('vendor_offer').listing.shipping.free == true){
@@ -122,6 +125,43 @@ module.exports = baseVw.extend({
     //add all countries to the Ships To select list
     var countries = new countriesModel();
     var countryList = countries.get('countries');
+    countryList.unshift(
+        {
+          "name": window.polyglot.t('WorldwideShipping'),
+          "dataName": "ALL",
+          "code": "ALL",
+          "number": "1"
+        },
+        {
+          "name": "North America",
+          "dataName": "NORTH_AMERICA",
+          "code": "NORTH_AMERICA",
+          "number": "2"
+        },
+        {
+          "name": "South America",
+          "dataName": "SOUTH_AMERICA",
+          "code": "SOUTH_AMERICA",
+          "number": "3"
+        },
+        {
+          "name": "Europe",
+          "dataName": "EUROPE",
+          "code": "EUROPE",
+          "number": "4"
+        },
+        {
+          "name": "Africa",
+          "dataName": "AFRICA",
+          "code": "AFRICA",
+          "number": "5"
+        },
+        {
+          "name": "Asia",
+          "dataName": "ASIA",
+          "code": "ASIA",
+          "number": "6"
+        });
     var shipsTo = this.$el.find('#shipsTo');
     __.each(countryList, function(countryFromList, i){
       shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
@@ -186,9 +226,11 @@ module.exports = baseVw.extend({
       if(this.$el.find('input[name=free_shipping]').val() == "false") {
         this.enableShippingPrice();
       }
+      this.noShipping = false;
     } else {
       this.disableShipping();
       this.disableShippingPrice();
+      this.noShipping = true;
     }
   },
 
@@ -389,6 +431,10 @@ module.exports = baseVw.extend({
       var newTag = tag.replace(re, '');
       return newTag;
     });
+
+    if(this.noShipping){
+      //do some clever stuff to insert value NA/0 if no shipping
+    }
 
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);

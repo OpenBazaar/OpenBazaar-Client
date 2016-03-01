@@ -276,6 +276,8 @@ module.exports = Backbone.Model.extend({
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW",
         ShowBlockedUser: "Show this user's page except for NSFW listings",
         ShowNSFWContent: "Show this user's page, and all NSFW listings",
+        NoShipping: "Digital or Remote (No Shipping)",
+        WorldwideShipping: "Worldwide",
         ServerChangeWarningHeadline: "Caution: Record Your Settings",
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
         moderatorSettings: {

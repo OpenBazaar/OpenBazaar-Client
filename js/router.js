@@ -71,8 +71,9 @@ module.exports = Backbone.Router.extend({
       // user entered a search term
       deferred.resolve('#home/products/' + routeArray[0].replace('#', ''));
     } else {
+      console.log("test")
       //user entered text that doesn't match a known pattern, assume it's a product search
-      deferred.resolve('#home/products/');
+      deferred.resolve('#home/products/' + routeArray[0]);
     }
 
     return deferred.promise();
