@@ -1078,7 +1078,8 @@ label.fieldItem {
   font-size: 13px;
 }
 
-#addressBar::-webkit-input-placeholder {
+#ov1 #addressBar::-webkit-input-placeholder,
+#ov1 #userPage #addressBar::-webkit-input-placeholder {
   color: #000;
   font-size: 13px;
 }
