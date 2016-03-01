@@ -1,7 +1,7 @@
 var Backbone = require('backbone'),
   $ = require('jquery'),
   loadTemplate = require('../utils/loadTemplate'),
-  app = require('../App.js').getApp(),
+  app = require('../App').getApp(),
   ChatConversationsCl = require('../collections/chatConversationsCl'),
   ChatMessagesCl = require('../collections/chatMessagesCl'),
   baseVw = require('./baseVw'),

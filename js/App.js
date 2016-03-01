@@ -62,6 +62,34 @@ App.prototype.login = function() {
   });  
 };
 
+App.prototype.getGuid = function(handle, resolver) {
+  var url = resolver || 'https://resolver.onename.com/v2/users/',
+      deferred = $.Deferred();
+
+  if (!handle) {
+    throw new Error('Please provide a handle.');
+  }
+
+  url = url.charAt(url.length - 1) !== '/' ? url + '/' : url;
+  url += handle;
+
+  $.get(url).done(function(data){
+    if (data && data[handle] && data[handle].profile && data[handle].profile.account){
+      var account = data[handle].profile.account.filter(function (accountObject) {
+        return accountObject.service == 'openbazaar';
+      });
+
+      deferred.resolve(account[0].identifier);
+    } else {
+      deferred.reject();
+    }
+  }).fail(function(jqXHR, status, errorThrown){
+    deferred.reject();
+  });
+
+  return deferred.promise();
+};
+
 App.prototype.playNotificationSound = function() {
   if (!this._notificationSound) {
     this._notificationSound = document.createElement('audio');
