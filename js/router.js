@@ -2,6 +2,7 @@ var ipcRenderer = require('ipc-renderer'),
     __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    app = require('./App').getApp(),    
     messageModal = require('./utils/messageModal.js'),
     homeView = require('./views/homeVw'),
     userPageView = require('./views/userPageVw'),
@@ -82,23 +83,15 @@ module.exports = Backbone.Router.extend({
     var deferred = $.Deferred();
 
     if (handle) {
-      $.ajax({
-        url: this.userModel.get('resolver') + "/v2/users/" + handle,
-        dataType: "json"
-      }).done(function(resolverData){
-        if(resolverData[handle].profile && resolverData[handle].profile.account){
-          var account = resolverData[handle].profile.account.filter(function (accountObject) {
-            return accountObject.service == "openbazaar";
-          });
-          deferred.resolve('#userPage/' + account[0].identifier + state + itemHash);
-        } else {
+      app.getGuid(handle, this.userModel.get('resolver') + '/v2/users/')
+        .done((guid) => {
+          deferred.resolve('#userPage/' + guid + state + itemHash);
+        }).fail(() => {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
-          deferred.reject();
-        }
-      }).fail(function(jqXHR, status, errorThrown){
-        messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
-        deferred.reject();
-      });
+          deferred.reject();          
+        });
+    } else {
+      deferred.reject();
     }
 
     return deferred.promise();

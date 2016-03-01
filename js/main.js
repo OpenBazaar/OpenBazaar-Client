@@ -169,8 +169,6 @@ var loadProfile = function(landingRoute, onboarded) {
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
-              $loadingModal.addClass('hide');
-             
               newSocketView = new socketView({model: serverConfigMd});
 
               newPageNavView = new pageNavView({
@@ -247,8 +245,8 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.on('onboarding-complete', function(guid) {
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
-    $loadingModal.removeClass('hide');
     loadProfile('#userPage/' + guid + '/store', true);
+    $loadingModal.removeClass('hide');
   });
 };
 
