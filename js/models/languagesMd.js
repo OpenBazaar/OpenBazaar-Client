@@ -1610,35 +1610,35 @@ module.exports = Backbone.Model.extend({
 
          */
 
-        IHaveAWalletNow: "I have a Wallet now", //notTranslated
+        IHaveAWalletNow: "Ho un Portafoglio ora",
         Next: "Avanti",
         IAgree: "Sono d'accordo",
         Back: "Indietro",
         EnterMessage: "Inserire messaggio...",
-        Recommended: "Recommended", //notTranslated
+        Recommended: "Raccomandato",
         Reload: "Ricaricare",
         You: "Tu",
         Skip: "Salta",
         Done: "Finito",
         Status: "Status",
-        Navigation: "Navigation", //notTranslated
+        Navigation: "Navigazione",
         Cancel: "Annulla",
-        ClosingOpenBazaar: "Close (Your page will go offline)", //notTranslated
-        Minimize: "Minimize", //notTranslated
-        Maximize: "Maximize", //notTranslated
+        ClosingOpenBazaar: "Chiudi (La tua pagina sar&agrave; disconnessa)",
+        Minimize: "Minimizza",
+        Maximize: "Massimizza",
         Close: "Chiudi",
         Yes: "Si",
         No: "No",
         of: "di",
         Sell: "Vendere",
         New: "Nuovo",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        HighlightToStyle: "Evidenza testo per stilizzarlo",
         Excellent: "Eccellente",
         Good: "Buono",
         Poor: "Scarso",
-        StillValidating: "Your handle is still validating", //notTranslated
-        CheckStatus: "Check Status", //notTranslated
-        ChangeCurrency: "Change currency", //notTranslated
+        StillValidating: "Il tuo nickname &egrave; ancora in validazione",
+        CheckStatus: "Controllare lo stato",
+        ChangeCurrency: "Cambia valuta",
         SKU: "SKU",
         Refurbished: "Ricondizionato",
         Physical: "Fisico",
@@ -1651,21 +1651,21 @@ module.exports = Backbone.Model.extend({
         Follow: "Segui",
         Feed: "Feed",
         FeedPlaceholder: "Un feed di aggiornamenti da tutte le pagine che segui",
-        ViewListing: "View Listing", //notTranslated
+        ViewListing: "Visualizza il listino",
         Unfollow: "Smetti di seguire",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Nessun listino",
         CoverPhoto: "Foto di copertina",
-        AboutEmpty: "L'about &egrave; vuoto...",
+        AboutEmpty: "L'About &egrave; vuoto...",
         Followers: "Seguaci",
         Following: "Segue",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Ti segue",
         Message: "Messaggio",
         Messages: "Messaggi",
         Store: "Negozio",
         Edit: "Modifica",
-        Clone: "Clone", //notTranslated
+        Clone: "Clone",
         Used: "Usato",
         Delete: "Cancella",
         DontDelete: "Non eliminare",
@@ -1675,12 +1675,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Benvenuto",
         CreateStore: "Diventa un negozio",
         GoToMyPage: "Vai alla mia pagina",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Scrivi #giochi, #scarpe o un qualsiasi #tag...",
         SearchForPagesPlaceholder: "Cerca per nome o parola chiave",
         SearchFeedPlaceholder: "Cerca per nickname o OpenBazaar ID",
         SearchForFollowersPlaceholder: "Cerca per nickname o OpenBazaar ID",
         SearchForUsersPlaceholder: "Cerca per nickname o OpenBazaar ID",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Scrivi un titolo...",
         EstDeliveryDomesticPlaceholder: "3-5 giorni di lavoro",
         EstDeliveryInternationalPlaceholder: "7-15 giorni di lavoro",
         OrderProcessingTimePlaceholder: "1-2 giorni di lavoro",
@@ -1690,7 +1690,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Inserire politiche di restituazione...",
         CategoryPlaceholder: "Inserire categoria",
         CategoryHelperText: "Le categorie sono usate per raggruppare e organizzare gli oggetti nel tuo negozio.",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        KeywordsHelperText: "Aggiungere tag aiuta i tuoi listino ad essere trovato sul mercato.",
         ExpirationDateHelperText: "Imposta una data per l'oggetto per far si che venga tolto automaticamente dal tuo negozio.",
         ClearExpirationDate: "Cancella data di scadenza",
         ReturnPolicy: "Politica di restituzione",
@@ -1705,20 +1705,20 @@ module.exports = Backbone.Model.extend({
         Instagram: "Instagram",
         Twitter: "Twitter",
         PGPKey: "PGP Key",
-        Signature: "PGP Signature", //not translated
+        Signature: "Firma PGP",
         Snapchat: "Snapchat",
         BUYNOW: "COMPRA ORA",
         Description: "Descrizione",
         Reviews: "Recensioni",
         Shipping: "Spedizione",
         Addresses: "Indirizzi",
-        Files: "Files", //notTranslated
+        Files: "File",
         NewAddress: "Nuovo indirizzo",
         CurrentAddress: "Indirizzo attuale",
         Returns: "Restituzione",
         ReturnsPolicy: "Politica di restituzione",
         Ampersand: "&",
-        Tags: "Tags", //notTranslated
+        Tags: "Tag",
         Keywords: "Parole chiave",
         ShipsFrom: "Inviato da",
         ShipsTo: "Inviato verso",
@@ -1726,12 +1726,12 @@ module.exports = Backbone.Model.extend({
         Customize: "Personalizza",
         Save: "Salva",
         Changes: "Modifiche",
-        Change: "Change", //notTranslated
+        Change: "Cambia",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
-        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
+        BitcoinReturnAddress: "Inserisci il tuo Indirizzo Bitcoin",
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
-        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
+        BitcoinReturnAddressInfo: "Se sar&agrave; rilasciato un rimborso, i fondi dovranno essere inviati ad un indirizzo Bitcoin. Si prega di fornire qui sotto un indirizzo al vostro portafoglio.",
         LocalCurrency: "Moneta locale",
         TimeZone: "Fuso orario",
         ShipToName: "Invia a nominativo",
@@ -1744,7 +1744,7 @@ module.exports = Backbone.Model.extend({
         EnableNotifications: "Abilita notifiche",
         EnableSSL: "Abilita SSL",
         LibbitcoinServerAddress: "Indirizzo del server Libbitcoin",
-        ServerIPPort: "Server IP:Port",
+        ServerIPPort: "Server IP:Porta",
         All: "Tutti",
         Name: "Nome",
         Price: "Prezzo",
@@ -1753,11 +1753,11 @@ module.exports = Backbone.Model.extend({
         Condition: "Condizione",
         NSFW: "18+ (Materiale per adulti)",
         Select: "Seleziona",
-        Social: "Social",
+        Social: "Sociale",
         Theme: "Argomento",
         Listing: "Listato",
         Listings: "Listati",
-        ViewPage: "View page", //notTranslated
+        ViewPage: "Mostra pagina",
         Pages: "Pagine",
         Page: "Pagina",
         Language: "Lingua",
@@ -1770,7 +1770,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratuito",
         Category: "Categoria",
         ProcessingTime: "Tempo di preparazione",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Seleziona foto",
         DragOrUploadPhotos: "Trascina o carica foto",
         ExpirationDate: "Scadenza per il",
         UploadCoverPhoto: "Carica una foto di copertina",
@@ -1782,15 +1782,15 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Seleziona foto di copertina",
         AboutPlaceholder: "Descrizione completa",
         BackgroundColor: "Colore di sfondo",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
-        NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
+        NotificationPaymentReceived: "Pagamento ricevuto da",
+        NotificationOrderFor: "piazza un ordine per",
+        NotificationOrderConfirmed: "Il tuo ordine &egrave; stato confermato/inviato",
         NotificationFollow: "ora ti sta seguendo",
-        NotificationDispute: "has opened a dispute", //not translated
-        NotificationDisputeClosed: "this dispute is closed", //not translated
-        NotificationRefund: "has refunded your order", //not translated
-        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
-        NotificationNewOrder: "has made a purchase", //not translated
+        NotificationDispute: "ha aperto una disputa",
+        NotificationDisputeClosed: "questa disputa &egrave; chiusa",
+        NotificationRefund: "ha rimborsato il tuo ordine",
+        NoticationOrderStatus: "Stato ordine aggiornato, notifica inviata al compratore",
+        NotificationNewOrder: "ha fatto un acquisto",
         NoNotifications: "Nessuna notifica",
         WelcomeToYourPage: "Benvenuto alla tua pagina!",
         SearchForCategory: "Cerca per categoria",
@@ -1820,12 +1820,12 @@ module.exports = Backbone.Model.extend({
         Purchases: "Acquisti",
         Sales: "Vendite",
         Cases: "Cause",
-        Enter: "Enter", //notTranslated
+        Enter: "Inserire",
         Discover: "Trova",
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated
+        Block: "Blocca",
+        Unblock: "Sblocca",
         Blocked: "Bloccato",
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
+        NoBlockedList: "Attualmente non stai bloccando nessuno.",
         Advanced: "Avanzato",
         General: "Generale",
         AllItems: "Tutti gli articoli",
@@ -1836,7 +1836,7 @@ module.exports = Backbone.Model.extend({
         Title: "Titolo",
         DigitalItem: "Articolo digitale",
         PhysicalItem: "Articolo fisico",
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
+        MinimumPrice: "&Egrave; necessario un minimo per assicurare che siano coperti i costi di transazione",
         DomesticShippingTime: "Tempo di invio nazionale",
         InternationalShippingTime: "Tempo di invio internazionale",
         DisplayNSFWcontent: "Mostrare contenuto NSFW?",
@@ -1844,51 +1844,51 @@ module.exports = Backbone.Model.extend({
         Content: "Contenuto",
         StandardThemes: "Temi standard",
         NoPhotosAdded: "Nessuna foto aggiunta",
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "max length 20 char", //not translated
-        maxLength80: "max length 80 char", //not translated
-        maxLength200: "max length 200 char", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        Moderator: "Moderator", // not translated
-        Firewall: "Firewall", //notTranslated
-        ServerSettings: "Server Settings", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
-        HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
-        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
-        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
-        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
-        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
-        moderatorSettings: { // not translated
-          DisputeResolution: "Dispute Resolution", //notTranslated
-          ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
+        Summary: "Sommario",
+        Funds: "Fondi",
+        Discussion: "Discussione",
+        Quantity: "Quantit&agrave;",
+        ShippingTo: "Spedire a",
+        ModeratedBy: "Moderato da",
+        Submit: "Invio",
+        maxLength20: "lunghezza massima 20 caratteri",
+        maxLength80: "lunghezza massima 80 caratteri",
+        maxLength200: "lunghezza massima 200 caratteri",
+        StoreModeratorsOptional: "Moderatori negozio (Opzionale)",
+        Searchformoderators: "Ricerca per moderatori",
+        Contributors: "Contributori",
+        Support: "Supporto",
+        Licensing: "Licenze",
+        On: "On",
+        Off: "Off",
+        ClickToChange: "Clicca per cambiare",
+        NotProvided: "non fornito",
+        NotFollowingAnyone: "Non segui nessuno",
+        NoFollowers: "Nessun seguace",
+        Moderator: "Moderatore",
+        Firewall: "Firewall",
+        ServerSettings: "Impostazioni Server",
+        ReadOnly: "(Questo campo &egrave; di sola lettura)",
+        HandleResolver: "Recupero Nickname",
+        ServerSettings: "Impostazioni Server",
+        ShutDownServer: "Spegni il server",
+        LoadingBitcoinPrices: "Caricamento Prezzi Bitcoin...",
+        ThisUserIsBlocked: "Questo utente &egrave; nascosto perch&egrave; si trova nella tua lista bloccati",
+        ThisUserIsNSFW: "Questo utente &egrave; nascosto perch&egrave; la sua pagina &egrave; indicata come NSFW",
+        ShowBlockedUser: "Mostra la pagina di questo utente eccetto per il contenuto NSFW",
+        ShowNSFWContent: "Mostra la pagina di questo utente, e tutto il listino NSFW",
+        ServerChangeWarningHeadline: "Attenzione: registra le tue impostazioni",
+        ServerChangeWarning: "Ti raccomandiamo di fare una copia dei delle tue precedenti impostazioni, mostrate sotto. I tuoi precedenti nomeutente e password non saranno pi&ugrave; disponibili dopo questo punto.",
+        moderatorSettings: {
+          DisputeResolution: "Risoluzione disputa",
+          ServiceFee: "Commissione servizio",
+          ServiceFeeNote: "Min: 0%, Max: 25%"
         },
-        BecomeModerator: "Become a Moderator",//notTranslated
-        EditModerator: "Moderator Settings",//notTranslated
+        BecomeModerator: "Diventa un moderatore",
+        EditModerator: "Impostazioni moderatore",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
-          ViewOnBlockchain: "View Details", //noTranslated
+          OrderDetails: "Dettagli ordine",
+          ViewOnBlockchain: "Mostra dettagli",
           SoldBy: "Venduto da",
           PurchasedBy: "Comprato da",
           searchByOrder: "Ricerca per ID di ordine o nome articolo",
@@ -1906,71 +1906,75 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Confermato/Inviato",
           OrderStatus3: "Completato (fondi rilasciati)",
           OrderStatus4: "Contestato",
-          OrderStatusopen: "Disputed", // not translated
-          OrderStatus5: "Dispute Closed", // not translated
-          OrderStatusclosed: "Dispute Closed", // not translated
-          OrderStatus6: "Dispute Finalized",// not translated
-          OrderStatus7: "Refunded", // not translated
-          InEscrow: "- In Escrow", // not translated
+          OrderStatusopen: "Contestato",
+          OrderStatus5: "Contestazione chiusa",
+          OrderStatusclosed: "Contestazione chiusa",
+          OrderStatus6: "Contestazione finalizzata",
+          OrderStatus7: "Rimborsato",
+          AcceptDisputeResolution: "Accetta il pagamento della contestazione",
+          InEscrow: "- In deposito di garanzia (escrow)",
           OrderTotal: "Totale ordine",
-          OrderTotalInBTC: "BTC Total", // not translated
-          NoMessages: "No messages", //notTranslated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ViewRating: "(View Rating)", // not translated
-          ContractDetails: "Contract Details", //notTranslated
-          HideDetails: "Hide Details", //notTranslated
-          ConfirmOrder: "Confirm Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
-          Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on this order", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "File URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link (optional)", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          Moderator: "Moderator", //not translated
-          transferReceipt: "Transfer Receipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          MarkAsShipped: "Mark as Shipped", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoFileProvided: "No file provided", //notTranslated
-          None: "None", //notTranslated
-          NoneSent: "None sent", // not translated
-          ModerationFee: "Moderation Fee:", // not translated
-          DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Enter message...", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
-          SendMessage: "Send",// not translated
-          CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:", // not translated
-          StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE", // not translated
-          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
+          OrderTotalInBTC: "BTC Totali",
+          NoMessages: "Nessun messaggio",
+          PaymentProtection: "Protezione pagamento",
+          ShipTo: "Spedire a",
+          ViewRating: "(Mostra Valutazione)",
+          ContractDetails: "Dettagli Contratto",
+          HideDetails: "Nascondi Dettagli",
+          ConfirmOrder: "Conferma ordine",
+          RefundOrder: "Rimborsa Ordine",
+          RefundReason: "Motivo per il rimborso",
+          RefundReasonPlaceholder: "Spiega perch&egrave; sti inviando un rimborso",
+          ReceivingAddress: "Indirizzo di ricezione",
+          RecievingAddressPlaceholder: "Indirizzo Bitcoin per ricevere fondi a",
+          Comments: "Commenti",
+          CommentsPlaceHolder: "Commenti a questo ordine",
+          Shipper: "Articolo spedito a",
+          ShipperPlaceholder: "Nome della compagnia inviante l'articolo",
+          TrackingNumber: "Numero di tracciamento",
+          TrackingNumberPlaceholder: "Numero di tracciamento dell'articolo",
+          EstimatedDelivery: "Consegna stimata",
+          EstimatedDeliveryPlaceholder: "Data stimada per la consegna dell'articolo",
+          URL: "File URL",
+          URLPlaceholder: "Link per scaricare, calendario, o pi&ugrave; informazioni",
+          Password: "Password",
+          PasswordPlaceholder: "Password richiesta per link (opzionale)",
+          DirectTransaction: "Transazione diretta",
+          ModeratedTransaction: "Transazione moderata",
+          Seller: "Venditore",
+          Buyer: "Compratore",
+          Moderator: "Moderatore",
+          transferReceipt: "Ricecevuta di trasferimento",
+          copyTxid: "copia tx ID",
+          Close: "Chiudi",
+          FundOrder: "Finanzia l'ordine",
+          sortByDateNewest: "Per data, i pi&ugrave; nuovi",
+          sortByDateOldest: "Per data, i pi&ugrave; vecchi",
+          PayPurchase: "Paga per questo acquisto",
+          CompleteOrder: "Completa questo ordine",
+          MarkAsShipped: "Segna come Inviato",
+          RateThisTransaction: "Valuta questa transazione",
+          TransactionReview: "Analisi Transazione",
+          OverallRating: "Valutazione complessiva",
+          Quality: "Qualit&agrave;",
+          MatchedDescription: "Descrizione combaciante",
+          DeliverySpeed: "Velocit&agrave; di consegna",
+          CustomerService: "Assistenza clienti",
+          Review: "Analisi",
+          ReviewPlaceHolder: "La tua analisi su questa transazione",
+          NoFileProvided: "Nessun file fornito",
+          None: "Niente",
+          NoneSent: "Niente inviato",
+          ModerationFee: "Commissione di moderazione:",
+          DisputeTransaction: "Apri una controversia",
+          sendMessagePlaceholder: "Inserisci messaggio...",
+          DisputeInstructions: "Per aprire una controversia per questa transazione, scrivi la ragione la controversia qui sotto, e attiva la casella Apri una Controversia. Questo includer&agrave; il moderatore nella tua conversazione fintanto che la controversia non sar&agrave; risolta. Il moderatore far&agrave; la decisione finale sul fatto che i fondi vi verranno restituiti, e la quantit&agrave;. La commissione di moderazione sar&agrave; presa dai fondi che hai gi&agrave; inviato.",
+          SendMessage: "Invia",
+          CloseDispute: "Chiudi controversia",
+          TotalInTransaction: "Transazione:",
+          StartDisputeFlag: "APRI CONTROVERSIA",
+          CloseDisputeFlag: "CONCLUDI CONTROVERSIA",
+          PayoutOnlyBuyer: "Chiundere questa controversia rimborser&agrave; il 100% dei fondi al compratore"
         },
         errorMessages: {
           saveError: "I dati non sono stati salvati.",
@@ -1982,28 +1986,28 @@ module.exports = Backbone.Model.extend({
           notFoundError: "I dati non sono stati caricati per:",
           socketError: "Connessione all'URL per WebSocket fallita. Connettere al socket con l'indirizzo di default ws://localhost:18466",
           contractError: "Questo articolo non pu&ograve; essere acquistato",
-          sellerError: "Il server del venditore ha respinto la richiesta di acquisto. This may be due to a connection issue.", // not translated
+          sellerError: "Il server del venditore ha respinto la richiesta di acquisto. Qusto pu&ograve; essere a causa di un problema di connessione.", 
           checkPurchaseData: "Controlla i tuoi dati di acquisto, come la quantit&agrave; e l'indirizzo Bitcoin di restituzione, per essere sicuro che sia tutto corretto",
-          pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
-          serverDown: "The server has been shut down", //notTranslated
-          tooManyPhotosTitle: "Too many photos", //notTranslated
-          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          pageUnavailable: "Questa pagina non &egrave; attualmente disponibile.",
+          badHandle: "Il nickname che hai inserito non ha un valido OpenBazaar ID",
+          serverDown: "Il server &egrave; stato spento",
+          tooManyPhotosTitle: "Troppe foto",
+          tooManyPhotosBody: "Ad alcune o a tutte le foto &egrave; stato impedito di essere caricate perch&egrave; avresti superato la massima quantit&agrave; consentita.",
         },
         aboutSection: {
-          about: "", //notTranslated
-          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
-          support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
+          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
+          contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
+          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
+          licensing: "<p>OpenBazaar is open source software under the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Salvato",
           SaveSuccess: "Le modifiche sono state salvate."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Scansione del tuo network",
+          searchingText: "Scansionando il tuo network per",
+          noResults: "Nessun listino trovato sul tuo network taggato con"
         },
         filters: {
           pagesAllTypes: "Tutti i tipi",
@@ -2012,11 +2016,12 @@ module.exports = Backbone.Model.extend({
           pagesBasic: "Utenti normali",
           listingsCurated: "Dai negozi che seguo",
           listingsAll: "Da tutti i negozi"
+          categoryAll: "Tutti"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
+          searchPlaceholder: "Scrivi un @Nickname, OpenBazaar ID o #tag..."
           myPage: "La mia pagina",
-          testMode: "Test Mode", //notTranslated
+          testMode: "Modalit&agrave; Test",
           customizePage: "Personalizza pagina",
           sellItem: "Nuovo",
           createListing: "Crea elenco",
@@ -2027,19 +2032,19 @@ module.exports = Backbone.Model.extend({
           settings: "Impostazioni",
           about: "About OpenBazaar",
           support: "Supporto OpenBazaar",
-          Forward: "Forward", //notTranslated
+          Forward: "Inoltra",
           Back: "Indietro"
         },
         onboarding: {
           intro: "Configurazione OpenBazaar",
-          Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          Introduction: "Introduzione",
+          IntroductionBody: "OpenBazaar &agrave; un mercato sociale peer-to-peer. &Egrave; come combinare eBay, Twitter e Bittorrent in un uno. Giusto, non ci sono commissioni e OpenBazaar &egrave; open-source. \n\n Si prega di notare che pu&ograve; apparire e sembrare un po' differente da ci&ograve; a cui sei abituato, quindi si paziente per come di regoli.",
           Theme: "Seleziona un Tema per la tua pagina",
           chooseLanguage: "Seleziona la tua lingua",
           contributors: "%{smart_count} Contributore |||| %{smart_count} Contributori",
           configure: "Imposta la tua esperienza",
           disclaimer_title: "Disclaimer",
-          disclaimer_body: "OpenBazaar &egrave; un network per scambi di beni e servizi direttamente fra le persone - usando Bitcoin - senza nessuna organizzazione centrale che controlli la piattaforma. Questo significa che tu sei responsabile per le tue attività sul network.\n\nGli utenti di OpenBazaar non sono anonimi di default. La maggior parte delle comunicazioni fra le parti sono cifrate, ma gli indirizzi IP sono pubblici e possono essere associati con le attivit&agrave; sul network. Parti malevole potrebbero utilizzare queste informazioni contro di voi; proteggere la tua privay è una tua responsabilit&agrave;.\n\nGli utenti di OpenBazaar devono rispettare le leggi nella propria giurisdizione legale cos&igrave; come la loro coscienza. Gli sviluppatori di OpenBazaar non perdonano - e non sono responsabili - per alcun uso illegale della piattaforma.\n\nLa comunit&agrave; deglo sviluppatori di OpenBazaar ha lavorato duramente per fornire una piattaforma libera per il commercio nel mondo. Ma come per ogni software, si troveranno bug. Gli sviluppatori non sono responsabili per alcuna perdita monetaria associata a problemi nel software.\n\nUsando OpenBazaar sei responsabile per le tue azioni sul network OpenBazaar.",
+          disclaimer_body: "OpenBazaar &egrave; un network per scambi di beni e servizi direttamente fra le persone - usando Bitcoin - senza nessuna organizzazione centrale che controlli la piattaforma. Questo significa che tu sei responsabile per le tue attivit&agrave; sul network.\n\nGli utenti di OpenBazaar non sono anonimi di default. La maggior parte delle comunicazioni fra le parti sono cifrate, ma gli indirizzi IP sono pubblici e possono essere associati con le attivit&agrave; sul network. Parti malevole potrebbero utilizzare queste informazioni contro di voi; proteggere la tua privay &egrave; una tua responsabilit&agrave;.\n\nGli utenti di OpenBazaar devono rispettare le leggi nella propria giurisdizione legale cos&igrave; come la loro coscienza. Gli sviluppatori di OpenBazaar non perdonano - e non sono responsabili - per alcun uso illegale della piattaforma.\n\nLa comunit&agrave; deglo sviluppatori di OpenBazaar ha lavorato duramente per fornire una piattaforma libera per il commercio nel mondo. Ma come per ogni software, si troveranno bug. Gli sviluppatori non sono responsabili per alcuna perdita monetaria associata a problemi nel software.\n\nUsando OpenBazaar sei responsabile per le tue azioni sul network OpenBazaar.",
           yourCountry: "Seleziona il tuo paese",
           localCurrency: "Seleziona la tua moneta",
           LanguagePlaceholder: "Seleziona la tua lingua",
@@ -2059,33 +2064,47 @@ module.exports = Backbone.Model.extend({
           connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
+          discoverCallOut: "Esplora i Listini e Pagine su OpenBazaar",
           Finished: "Finito"
         },
-        softwareUpdate: {
-          updateAvailable: "OpenBazaar Update Available", //notTranslated
-          installUpdate: "Install Update", //notTranslated
-          dismiss: "Dismiss" //notTranslated
-        },
         guidStillCreating: {
-          HangTight: "Hang tight for a few...", //notTranslated
-          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
-          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
+          HangTight: "Porta pazienza per un po'...",
+          YourPersonal: "Le tue chiavi personali e l'OpenBazaar ID si stanno generando e dovrebbe richiedero richiedre circa solo 30 secondi per finire.\n\nTi connetterai automaticamente al network una volta completato il processo, quindi se puoi attendere un attimo.",
+          LookingFor: "Sei alla ricerca di qualcosa da fare nel frattempo? Leggi l'<a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>."
         },
+        walletProviders: {
+          ExchangeAndWallet: "Exchange and Portafoglio",
+          WalletOnly: "Solo Portafoglio",
+          CoinbaseTagline: "Il pi&ugrave; popolare modo al mondo per comprare, vendere e usare bitcoin.",
+          SamouraiTagline: "Portafoglio sicuro mobile. Con particolare attenzione alla privacy.",
+          AirbitzTagline: "Privacy. Sicurezza. Autonomia. Decentralizzato.",
+          BreadwalletTagline: "Connette direttamente al network Bitcoin, nessun server. Bellissima semplicit&agrave;, massima sicurezza.",
+          RushWalletTagline: "Ottienti un Indirizzo Bitcoin velocemente e facilmente nel tuo browser.",
+          MyceliumTagline: "Uno dei primi sul mercato, dei pi&ugrave; sicuri e affidabile fra i portafogli Bitcoin",
+          CoinkiteTagline: "Il pi&ugrave; potente Portafoglio Bitcoin",
+          BlockchaininfoTagline: "Il portafoglio bitcoin pi&ugrave; popolare al mondo. Sicuro, Amichevole, Facile.",
+          DuoMoneyTagline: "Portafoglio euro per pagamenti estremamente facili. OpenBazaar per Nonna.",
+          BitGoTagline: "Il portafoglio bitcoin pi&ugrave; sicuro al mondo. Scelto da imprese leader diBitcoin."
+        },
+        softwareUpdate: {
+          updateAvailable: "Disponibile aggiornamento per OpenBazaar",
+          installUpdate: "Installa aggiornamento",
+          dismiss: "Respingi"
+		},
         buyFlow: {
-          PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
-          CantFindAddress: "I can't find my bitcoin address", //notTranslated
-          BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
-          ModeratedPayment: "Moderated Payment", //notTranslated
-          DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
-          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
+          PayForOrder: "Paga per ordinare",
+          NeedTempAddress: "Ho bisogno di un indirizzo Bitcoin temporaneo",
+          NeedTempAddressHelper: "Si prega di contrassegnare l'url al suo indirizzo bitcoin temporaneo",
+          CantFindAddress: "Non riesco a trovare il mio indirizzo bitcoin",
+          BitcoinWallet: "Portafoglio Bitcoin",
+          ModeratedPaymentDescription: "Il tuo pagamento &egrave; mantenuto in un portafoglio sicuro fintanto che il venditore completa la sua parte dell'accordo. Se sorgono dei problemi, un moderatore ver&agrave; in aiuto",
+          ModeratorFeeHelper: "Il moderatore potrebbe richiedere delle commissioni, ma solo in caso di controversia.",
+          ModeratedPayment: "Pagamento moderato",
+          DisputeFee: "Commissione per disputa",
+          HaveWallet: "Hai un portafoglio Bitcoin?",
+          QuickSetup: "Ci vogliono solo pochi minuti per crearne uno",
+          CreateWallet: "Crea un Portafoglio",
+          DirectPaymentDescription: "I fondi vengono inviati direttamente al venditore. Utilizzare solo su piccoli acquisti o se si acquista da un venditore di fiducia.",
           DirectPayment: "Pagamento diretto",
           SendDirectlyTo: "Invia pagamento diretto a %{handle}",
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
@@ -2097,37 +2116,37 @@ module.exports = Backbone.Model.extend({
           OpenAddress: "Apri indirizzo in portafoglio locale",
           CopyAddress: "Copia indirizzo di pagamento negli appunti",
           RefreshPayment: "Aggiorna lo stato di pagamento",
-          summaryMsg1: "Il tuo pagamento è stato trasmesso a %{recipient}",
+          summaryMsg1: "Il tuo pagamento &egrave; stato trasmesso a %{recipient}",
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
           summaryMsg3: "Puoi controllare lo stato del tuo ordine sulla tua",
           purchasesPage: "pagina acquisti",
           returnAddress: "Indirizzi di ritorno",
-          moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", // not translated
+          moderatorPaymentDisclaimer: "Pagato dal totale se la transazione si conclude in una disputa.",
           directPaymentDisclaimer: "Usa il pagamento diretto con cauzione, i fondi sono irreversibili",
           paymentSent: "Pagamento inviato!",
           total: "Totale"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "Nessun risultato trovato"
         },
         serverConnectModal: {
-          statusTryingToConnect: "Trying to connect to your server", //notTranslated
-          statusConnected: "Connected", //notTranslated
-          statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed", //notTranslated
-          statusTooManyAttempts: "Too many failed login attempts", //notTranslated
-          serverConfiguration: "Server Configuration", //notTranslated
-          connecting: "Connecting", //notTranslated
-          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
-          serverIP: "Server IP", //notTranslated
-          restApiPort: "Rest API port", //notTranslated
-          websocketApiPort: "Websocket API port", //notTranslated
-          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
-          username: "Username", //notTranslated
-          password: "Password", //notTranslated
-          restoreDefaults: "Restore defaults", //notTranslated
-          saveChanges: "Save Changes", //notTranslated
-          retry: "Retry connection" //notTranslated
+          statusTryingToConnect: "Tentativo di connettere al tuo server",
+          statusConnected: "Connesso",
+          statusFailedConnection: "Impossibile connettere al tuo server",
+          statusFailedAuthentication: "Autenticazione fallita",
+          statusTooManyAttempts: "Troppi tentativi di accesso falliti",
+          serverConfiguration: "Configurazione server",
+          connecting: "Connessione",
+          intro: "OpenBazaar &egrave; progettato per consentire di ospitare il vostro server in modo separato dal client. Per impostazione predefinita, il server verr&agrave; eseguito in locale, ma &egrave; possibile ignorare sottostante.",
+          serverIP: "Server IP",
+          restApiPort: "Porta Rest API",
+          websocketApiPort: "Porta Websocket API",
+          heartbeatSocketApiPort: "Porta Heartbeat socket port",
+          username: "Nome utente",
+          password: "Password",
+          restoreDefaults: "Ripristina i valori predefiniti",
+          saveChanges: "Salva cambiamenti",
+          retry: "Riprova connessione"
         }
       },
 
