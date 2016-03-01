@@ -2166,7 +2166,7 @@ module.exports = Backbone.Model.extend({
         Close: "Fermer",
         Yes: "Oui",
         No: "Non",
-        of: "de",
+        of: "sur",
         Sell: "Vendre",
         New: "Neuf",
         HighlightToStyle: "Sélectionnez votre texte pour lui appliquer un style",
@@ -2242,7 +2242,7 @@ module.exports = Backbone.Model.extend({
         Instagram: "Instagram",
         Twitter: "Twitter",
         PGPKey: "Clé PGP",
-        Signature: "PGP Signature", //not translated
+        Signature: "Signature PGP",
         Snapchat: "Snapchat",
         BUYNOW: "Acheter Maintenant",
         Description: "Description",
@@ -2319,13 +2319,13 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Sélectionner une photo de couverture",
         AboutPlaceholder: "Description complète",
         BackgroundColor: "Couleur de fond",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
-        NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
+        NotificationPaymentReceived: "Paiement reçu de",
+        NotificationOrderFor: "a placé une commande pour",
+        NotificationOrderConfirmed: "Votre commande a été confirmée / expédiée",
         NotificationFollow: "vous suit",
         NotificationDispute: "a ouvert un nouveau litige",
-        NotificationDisputeClosed: "this dispute is closed", //not translated
-        NotificationRefund: "has refunded your order", //not translated
+        NotificationDisputeClosed: "ce litige est clôturé",
+        NotificationRefund: "a remboursé votre commande",
         NoticationOrderStatus: "L'état de la commande a été mis à jour, l'acheteur a été averti",
         NotificationNewOrder: "a effectué un achat",
         NoNotifications: "Aucune notification",
@@ -2373,7 +2373,7 @@ module.exports = Backbone.Model.extend({
         Title: "Titre",
         DigitalItem: "Article numérique",
         PhysicalItem: "Article physique",
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
+        MinimumPrice: "Un montant minimal est nécessaire afin de couvrir les frais de transaction Bitcoin",
         DomesticShippingTime: "Délai d'expédition nationale",
         InternationalShippingTime: "Délai d'expédition internationale",
         DisplayNSFWcontent: "Afficher le contenu NSFW ?",
@@ -2489,7 +2489,7 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Avis de transaction",
           OverallRating: "Note générale",
           Quality: "Qualité",
-          MatchedDescription: "Conformité à la description",
+          MatchedDescription: "Conformité",
           DeliverySpeed: "Vitesse de livraison",
           CustomerService: "Service client",
           Review: "Avis",
