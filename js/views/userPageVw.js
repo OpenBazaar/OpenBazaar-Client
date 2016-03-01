@@ -495,8 +495,6 @@ module.exports = baseVw.extend({
       isItemType = true;
     }
 
-    console.log(this.model.get('page').profile.vendor)
-    console.log(state)
     //set address bar
     if(isItemType) {
       addressState = "/listing";
