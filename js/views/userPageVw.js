@@ -473,7 +473,7 @@ module.exports = baseVw.extend({
         state="about";
       }
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
-      this.addTabToHistory('state');
+      this.addTabToHistory(state);
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
