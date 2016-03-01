@@ -1164,6 +1164,7 @@ h5 {
 
 [class *= "ion-"]:before {
   font-size: 1.2em;
+  pointer-events: none;
 }
 
 .txt-center {
