@@ -440,18 +440,18 @@ module.exports = baseVw.extend({
         currentHandle = this.model.get('page').profile.handle,
         isItemType = false;
 
-    if(state === "item"){
+    if(state === "listing"){
       //clear old templates
       this.$el.find('.js-list4').html("");
       this.renderItem(hash);
       $('#obContainer').scrollTop(352);
-    }else if(state === "itemOld") {
+    }else if(state === "listingOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
       $('#obContainer').scrollTop(352);
-    }else if(state === "itemNew"){
+    }else if(state === "listingNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(352);
-      this.addTabToHistory('newItem');
+      this.addTabToHistory('listingNew');
       this.sellItem();
     } else if(state === "createStore") {
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
@@ -486,12 +486,12 @@ module.exports = baseVw.extend({
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }
     this.setControls(state);
-    if(state != "customize" && state != this.state && state != "itemNew" && this.state != "itemNew"){
+    if(state != "customize" && state != this.state && state != "listingNew" && this.state != "listingNew"){
       this.lastTab = this.state;
       this.state = state;
     }
 
-    if(state == "item" || state == "itemOld" || state == "itemNew") {
+    if(state == "listing" || state == "listingOld" || state == "listingNew") {
       isItemType = true;
     }
 
@@ -499,7 +499,7 @@ module.exports = baseVw.extend({
     console.log(state)
     //set address bar
     if(isItemType) {
-      addressState = "/item";
+      addressState = "/listing";
     } else {
       addressState = "/" + state;
     }
@@ -525,9 +525,9 @@ module.exports = baseVw.extend({
     document.getElementById('obContainer').classList.remove("overflowHidden");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
-      if(state === "item" || state === "itemOld") {
+      if(state === "listing" || state === "listingOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
-      } else if(state === "itemEdit" || state === "itemNew") {
+      } else if(state === "listingEdit" || state === "listingNew") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
       } else if(state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
@@ -929,7 +929,7 @@ module.exports = baseVw.extend({
   sellItem: function(){
     "use strict";
     this.renderItemEdit();
-    this.setControls("itemEdit");
+    this.setControls("listingEdit");
   },
 
   customizePage: function(){
@@ -1258,8 +1258,8 @@ module.exports = baseVw.extend({
 
   editItem: function(clone){
     this.renderItemEdit(this.item, clone);
-    this.setControls("itemEdit");
-    this.lastTab = "itemOld";
+    this.setControls("listingEdit");
+    this.lastTab = "listingOld";
   },
 
   editItemClick: function(e){
@@ -1467,7 +1467,7 @@ module.exports = baseVw.extend({
     this.showNSFWContent = true;
     this.showNSFW = true;
     this.showBlockedUser();
-    if(this.state == "item"){
+    if(this.state == "listing"){
       this.renderItem(this.currentItemHash);
     }
     this.renderItems(this.cachedListings, true);

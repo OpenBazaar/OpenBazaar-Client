@@ -75,7 +75,7 @@ module.exports = baseVw.extend({
   itemClick: function(e){
     var self = this;
     var skipNSFWmodal = this.model.get('skipNSFWmodal') ? "/" + this.model.get('skipNSFWmodal') : "";
-    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/item/'+this.model.get('contract_hash') + skipNSFWmodal, {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.model.get('userID')+'/listing/'+this.model.get('contract_hash') + skipNSFWmodal, {trigger: true});
   },
 
   aboutClick: function(){

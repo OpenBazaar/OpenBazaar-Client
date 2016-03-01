@@ -223,7 +223,7 @@ module.exports = baseVw.extend({
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
-        self.addressInput.val(text);
+        self.addressInput.val(text ? "ob://" + text: "");
         self.closeStatusBar();
       });
       if(self.showDiscIntro){
