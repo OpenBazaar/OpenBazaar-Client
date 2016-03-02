@@ -8547,7 +8547,7 @@ module.exports = Backbone.Model.extend({
           connecting: "Conectando",
           intro: "O OpenBazaar é projetado para permitir que você hospede o seu servidor separadamente do cliente. Por padrão, o seu servidor será executado localmente, mas você podecally, but you can override it below.",
           serverIP: "IP do Servidor",
-          restApiPort: "Rest API port",
+          restApiPort: "Porta do Rest API",
           websocketApiPort: "Porta do Websocket API",
           heartbeatSocketApiPort: "Porta do Heartbeat socket",
           username: "Usuário",
