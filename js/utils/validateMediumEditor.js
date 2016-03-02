@@ -1,5 +1,6 @@
 function checkVal($field) {
   var fVal = $($field.val()).text().trim();
+  if (!fVal.length || fVal == "<p>&nbsp;</p>" || fVal == "&nbsp;") {
     $field.val('');
   }
 
