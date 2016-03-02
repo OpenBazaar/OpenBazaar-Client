@@ -577,7 +577,9 @@ module.exports = baseModal.extend({
       // pre-select timezone
       var timeZoneOffset = new Date().getTimezoneOffset();
       timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
-      self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
+      var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
+      selectedTimeZone.prop('checked', true);
+      self.model.set('time_zone', selectedTimeZone.val());
 
       // select a random theme
       $themeInputs = self.$('[name=theme-selection]');
