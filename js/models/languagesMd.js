@@ -568,26 +568,26 @@ module.exports = Backbone.Model.extend({
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
-        Recommended: "Recommended", //notTranslated
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Recommended: "Recomendado", //notTranslated
+        Reload: "Refrescar", //notTranslated
+        You: "Tu", //notTranslated
         Skip: "Omitir",
         Done: "Hecho",
-        Status: "Status",
-        Navigation: "Navigation", //notTranslated
+        Status: "Estado",
+        Navigation: "Navegaci&oacute;n", //notTranslated
         Cancel: "Cancelar",
         Yes: "S&iacute;",
         No: "No",
         of: "de",
         Sell: "Vender",
         New: "Nuevo",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        HighlightToStyle: "Seleccionar texto para darle estilo", //notTranslated
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
-        StillValidating: "Your handle is still validating", //notTranslated
-        CheckStatus: "Check Status", //notTranslated
-        ChangeCurrency: "Change currency", //notTranslated
+        StillValidating: "Tu apodo se est&aacute; validando", //notTranslated
+        CheckStatus: "Revisar estado", //notTranslated
+        ChangeCurrency: "Cambiar moneda", //notTranslated
         SKU: "SKU",
         Refurbished: "Restaurado",
         Physical: "F&iacute;sico",
@@ -600,20 +600,20 @@ module.exports = Backbone.Model.extend({
         Follow: "Seguir",
         Feed: "Feed",
         FeedPlaceholder: "RSS de las p&aacute;ginas que sigue",
-        ViewListing: "View Listing", //notTranslated
+        ViewListing: "Ver publicaciones", //notTranslated
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Sin publicaciones", //notTranslated
         AboutEmpty: "La secci&oacute;n Acerca de est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Te siguen", //notTranslated
         Message: "Mensaje",
         Messages: "Mensajes",
         Store: "Tienda",
         Edit: "Editar",
-        Clone: "Clone", //notTranslated
+        Clone: "Duplicar", //notTranslated
         Used: "Usado",
         Delete: "Borrar",
         DontDelete: "No Borrar",
@@ -623,12 +623,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Ingresa #juegos, #zapatos u otra #etiqueta...", //notTranslated
         SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Introduzca un t&iacute;tulo...", //notTranslated
         EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
@@ -671,12 +671,12 @@ module.exports = Backbone.Model.extend({
         Customize: "Personalizar",
         Save: "Guardar",
         Changes: "Cambios",
-        Change: "Change", //notTranslated
+        Change: "Cambio", //notTranslated
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
-        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddress: "Introduzca su direcci&oacute;n Bitcoin", //notTranslated
+        BitcoinReturnAddressPlaceholder: "direcci&oacute;n Bitcoin para retornar las monedas", //not translated
+        BitcoinReturnAddressInfo: "Si se emite un reembolso, los fondos ser&aacute;n enviados a una direcci&oacute;n Bitcoin. Por favor, introduzca su billetera a continuaci&oacute;n.", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -694,21 +694,21 @@ module.exports = Backbone.Model.extend({
         Name: "Nombre",
         Price: "Precio",
         Available: "Disponible",
-        Tags: "Tags", //notTranslated
+        Tags: "Etiquetas", //notTranslated
         Keywords: "Palabras claves",
         Type: "Tipo",
         Condition: "Condici&oacute;n",
         NSFW: "18+ (contenido para adultos)",
-        Select: "Select", //not translated
+        Select: "Seleccionar", //not translated
         Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        ViewPage: "View page", //notTranslated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
-        Reset: "Reset", //not translated
+        Theme: "Template", //not translated
+        Listing: "Publicaci&oacute;n", //not translated
+        Listings: "Publicaciones", //not translated
+        ViewPage: "Ver p&aacute;gina", //notTranslated
+        Pages: " P&aacute;ginas", //not translated
+        Page: " P&aacute;gina", //not translated
+        Language: "Lenguaje", //not translated
+        Reset: "Restaurar", //not translated
         Local: "Local",
         Domestic: "Interno",
         Location: "Ubicaci&oacute;n",
@@ -717,7 +717,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categor&iacute;a",
         ProcessingTime: "Tiempo de procesamiento",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Seleccionar fotos", //notTranslated
         DragOrUploadPhotos: "Arrastre o suba fotos",
         UploadCoverPhoto: "Suba una foto de portada",
         ExpirationDate: "Fecha de vencimiento",
@@ -731,7 +731,7 @@ module.exports = Backbone.Model.extend({
         SearchForCategory: "B&uacute;squeda de categor&iacute;a",
         Moderators: "Moderadores",
         CurrentModerators: "Moderadores Actuales",
-        AddModerators: "Add New Moderadores",
+        AddModerators: "Agregar Moderadores",
         DeselectToRemoveModerator: "Desactive los moderadores que desea eliminar",
         SelectToAddModerator: "Seleccione los moderadores que desee agregar",
         Categories: "Categor&iacute;as",
@@ -750,67 +750,67 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Guardar Avatar ",
         NewAvatar: "Seleccione Nuevo Avatar",
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
-        Loading: "Loading...", // not translated
+        Loading: "Cargando...", // not translated
         Purchases:"Compras",
-        Sales: "Sales", // not translated
+        Sales: "Ventas", // not translated
         Cases: "Cases", // not translated
-        Enter: "Enter", //notTranslated
-        Discover: "Discover", // not translated
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated
-        Blocked: "Blocked", // not translated
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
-        Advanced: "Advanced", // not translated
+        Enter: "Ingresar", //notTranslated
+        Discover: "Descubrir", // not translated
+        Block: "Bloquear", //notTranslated
+        Unblock: "Desbloquear", //notTranslated
+        Blocked: "Bloqueado", // not translated
+        NoBlockedList: "No bloqueaste a nadie.", // not translated
+        Advanced: "Avanzado", // not translated
         General: "General", // not translated
-        AllItems: "All Items", // not translated
-        FreeShipping: "Free Shipping", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "max length 20 char", //not translated
-        maxLength80: "max length 80 char", //not translated
-        maxLength200: "max length 200 char", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        NoReviews: "No reviews", //notTranslated
-        Moderator: "Moderator", // not translated
+        AllItems: "Todos los items", // not translated
+        FreeShipping: "Env&iacute;o gratuito", // not translated
+        DomesticShippingPrice: "Precio de env&iacute;o nacional", // not translated
+        InternationalShippingPrice: "Precio de env&iacute;o internacional", // not translated
+        MinimumIs: "M&iacute;nimo", // not translated
+        Visibility: "Visibilidad", // not translated
+        Title: "T&iacute;tulo", // not translated
+        DigitalItem: "&Iacute;tem digital", // not translated
+        PhysicalItem: "&Iacute;tem  f&iacute;sico", // not translated
+        MinimumPrice: "Un m&iacute,nimo es necesario para cubrir los costos de la transacci&oacute;n Bitcoin", //notTranslated
+        DomesticShippingTime: "Tiempo de env&iacute;o nacional", // not translated
+        InternationalShippingTime: "Tiempo de env&iacute;o internacional", // not translated
+        DisplayNSFWcontent: "Mostrar contenido no apto para el trabajo?", // not translated
+        Basic: "B&aacute;sico", // not translated
+        Content: "Contenido", // not translated
+        StandardThemes: "Template est&aacute;ndar", // not translated
+        NoPhotosAdded: "No hay fotos", // not translated
+        Summary: "Resumen", // not translated
+        Funds: "Fondos", // not translated
+        Discussion: "Debate", // not translated
+        Quantity: "Cantidad", //not translated
+        ShippingTo: "Enviar a", //not translated
+        ModeratedBy: "Moderado por", //not translated
+        Submit: "Enviar", //not translated
+        maxLength20: "m&aacute;ximo 20 caracteres", //not translated
+        maxLength80: "m&aacute;ximo 80 caracteres", //not translated
+        maxLength200: "m&aacute;ximo 200 caracteres", //not translated
+        StoreModeratorsOptional: "Moderadores de la Tienda (Opcional)", // not translated
+        Searchformoderators: "Buscar moderadores", // not translated
+        Contributors: "Colaboradores", // not translated
+        Support: "Soporte", // not translated
+        Licensing: "Licencia", // not translated
+        On: "Activado", // not translated
+        Off: "Desactivado", // not translated
+        ClickToChange: "Click para cambiar", // not translated
+        NotProvided: "no proporcionado", // not translated
+        NotFollowingAnyone: "No sigue a nadie", // not translated
+        NoFollowers: "Sin seguidores", // not translated
+        NoReviews: "Sin rese&ntilde;as", //notTranslated
+        Moderator: "Moderador", // not translated
         Firewall: "Firewall", //notTranslated
-        ServerSettings: "Server Settings", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
+        ServerSettings: "Configuraci&oacute;n del servidor", //notTranslated
+        ReadOnly: "(Campo de solo lectura)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ServerSettings: "Configuraci&oacute;n del servidor",  // not translated duplicated?
+        ShutDownServer: "Apagar servidor",  // not translated
+        LoadingBitcoinPrices: "Cargando precios de Bitcoin...", // not translated
+        ThisUserIsBlocked: "&Eacute;ste usuario est&aacute; ocultdo porque lo tienes bloqueado", // not translated
+        ThisUserIsNSFW: "&Eacute;ste usuario est&aacute; ocultdo porque su p&aacute;gina est&aacute; marcada como no apta para el trabajo", // not translated
         ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
         ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
