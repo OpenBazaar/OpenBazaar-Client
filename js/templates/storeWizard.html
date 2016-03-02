@@ -25,7 +25,12 @@
                     </label>
                   </div>
                   <div class="flexCol-8">
-                    <input name="name" id="storeNameInput" type="text" class="fieldItem" value="<%= ob.page.profile.name %>" placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>" required>
+                    <input name="name" id="storeNameInput"
+                           type="text"
+                           class="fieldItem"
+                           value="<%= ob.page.profile.name %>"
+                           placeholder="<%= polyglot.t('Store') %> <%= polyglot.t('Name') %>"
+                           required>
                   </div>
               </div>
               <div class="flexRow custCol-border">
@@ -35,7 +40,11 @@
                   </label>
                 </div>
                 <div class="flexCol-8">
-                  <textarea name="about" rows="5" id="aboutInput" class="fieldItem-textarea"><%= ob.page.profile.about %></textarea>
+                  <textarea name="about"
+                            rows="5"
+                            id="aboutInput"
+                            class="fieldItem-textarea"
+                            required><%= ob.page.profile.about %></textarea>
                 </div>
               </div>
               <!--

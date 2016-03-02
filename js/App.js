@@ -15,6 +15,7 @@ function App() {
   // is an ID and then a subsequent fetch, but that doesn't return the data.
   // Investigate!
   this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
+
   // serverConfigMd.fetch();
   if (!localStorage['_serverConfig-1']) {
     this.serverConfig.save();
