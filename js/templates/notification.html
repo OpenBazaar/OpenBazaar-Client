@@ -38,7 +38,7 @@
                     <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "payment received") { %>
                         <div class="textSize12px hoverUnderline">
-                            <%= polyglot.t('NotificationPaymentReceived') %>
+                            <%= polyglot.t('NotificationPaymentSent') %>
                             <span>
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>.
