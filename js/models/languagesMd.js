@@ -1655,7 +1655,7 @@ module.exports = Backbone.Model.extend({
         Feed: "Feed",
         FeedPlaceholder: "Un feed di aggiornamenti da tutte le pagine che segui",
         ViewListing: "Visualizza il listino",
-        Unfollow: "Smetti di seguire",
+        Unfollow: "Smetti",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
         NoListings: "Nessun listino",
@@ -1785,7 +1785,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Seleziona foto di copertina",
         AboutPlaceholder: "Descrizione completa",
         BackgroundColor: "Colore di sfondo",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
+        NotificationPaymentSent: "Il pagamento è stato inviato a",
         NotificationOrderFor: "piazza un ordine per",
         NotificationOrderConfirmed: "Il tuo ordine &egrave; stato confermato/inviato",
         NotificationFollow: "ora ti sta seguendo",
@@ -1868,7 +1868,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "non fornito",
         NotFollowingAnyone: "Non segui nessuno",
         NoFollowers: "Nessun seguace",
-        NoReviews: "No reviews", //notTranslated        
+        NoReviews: "Nessuna recensione",     
         Moderator: "Moderatore",
         Firewall: "Firewall",
         ServerSettings: "Impostazioni Server",
