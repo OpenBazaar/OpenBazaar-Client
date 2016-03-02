@@ -15,15 +15,8 @@ module.exports = Backbone.Model.extend({
         localUsername = this.get('local_username'),
         localPassword = this.get('local_password');
 
-    // console.log('lu: ' + localUsername);
-    if (localUsername) {
-      defaultsObj['username'] = localUsername;
-    }
-
-    // console.log('lp: ' + localPassword);
-    if (localPassword) {
-      defaultsObj['password'] = localPassword;
-    }
+    defaultsObj['username'] = localUsername || '';
+    defaultsObj['password'] = localPassword || '';
 
     return defaultsObj;
   },
