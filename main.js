@@ -129,6 +129,9 @@ var start_local_server = function() {
     });
     subpy.unref();
   }
+  if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
+       process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
+   }
 };
 
 // Check if we need to kick off the python server-daemon (Desktop app)

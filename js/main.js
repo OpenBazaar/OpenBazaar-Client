@@ -43,6 +43,10 @@ var Polyglot = require('node-polyglot'),
     serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
+    startUpConnectMaxRetries = 2,
+    startUpConnectRetryDelay = 2 * 1000,
+    startUpConnectMaxTime = 6 * 1000,
+    startTime = Date.now(),
     extendPolyglot,
     newPageNavView,
     newSocketView,
@@ -100,7 +104,7 @@ if(platform === "linux") {
 }
 
 //open external links in a browser, not the app
-$('body').on('click', '.js-externalLink, .js-aboutModalHolder a, .js-listingDescription a', function(e){
+$('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescription a', function(e){
   e.preventDefault();
   var extUrl = $(this).attr('href');
   if (!/^https?:\/\//i.test(extUrl)) {
@@ -282,12 +286,23 @@ heartbeat.on('open', function(e) {
     // appropriatally loadProfile or launch onboarding
     guidCreating = null;
     loadProfileNeeded = true;
+
+    onboardingModal && onboardingModal.remove();
   }
 });
 
 heartbeat.on('close', function(e) {
-  // server down
-  launchServerConnect();
+  if (
+    Date.now() - startTime < startUpConnectMaxTime &&
+    startUpConnectMaxRetries
+  ) {
+    setTimeout(() => {
+      startUpConnectMaxRetries--;
+      app.connectHeartbeatSocket();
+    }, startUpConnectRetryDelay);
+  } else {
+    launchServerConnect();
+  }
 });
 
 heartbeat.on('message', function(e) {

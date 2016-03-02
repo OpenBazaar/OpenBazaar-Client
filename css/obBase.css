@@ -1164,6 +1164,7 @@ h5 {
 
 [class *= "ion-"]:before {
   font-size: 1.2em;
+  pointer-events: none;
 }
 
 .txt-center {
@@ -1910,7 +1911,7 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationHeads {
   clear: both;
   border-top: solid 1px #363636;
-  height: calc(100% - 88px);
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }

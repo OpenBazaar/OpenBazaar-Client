@@ -181,7 +181,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Select Cover Photo",
         AboutPlaceholder: "Full description",
         BackgroundColor: "Background Color",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to",
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "is now following you",
@@ -1251,7 +1251,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Titelbild auswählen",
         AboutPlaceholder: "Beschreibung",
         BackgroundColor: "Hintergrundfarbe",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "folgt dir nun.",
@@ -1787,7 +1787,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Seleziona foto di copertina",
         AboutPlaceholder: "Descrizione completa",
         BackgroundColor: "Colore di sfondo",
-        NotificationPaymentReceived: "Pagamento ricevuto da",
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "piazza un ordine per",
         NotificationOrderConfirmed: "Il tuo ordine &egrave; stato confermato/inviato",
         NotificationFollow: "ora ti sta seguendo",
@@ -2176,7 +2176,7 @@ module.exports = Backbone.Model.extend({
         Next: "Suivant",
         IAgree: "Je suis d'accord",
         Back: "Précédent",
-        EnterMessage: "Entrer un message...",
+        EnterMessage: "Écrivez un message...",
         Recommended: "Recommandé",
         Reload: "Actualiser",
         You: "Vous",
@@ -2245,15 +2245,15 @@ module.exports = Backbone.Model.extend({
         SearchOnUserStorePlaceholder: "Tapez un titre...",
         EstDeliveryDomesticPlaceholder: "3-5 jours ouvrés",
         EstDeliveryInternationalPlaceholder: "7-15 jours ouvrés",
-        OrderProcessingTimePlaceholder: "Entrer le temps nécessaire pour traiter la commande",
-        TermsAndConditionsPlaceholder: "Entrer les termes et conditions...",
-        TitlePlaceholder: "Entrer un titre",
-        DescriptionPlaceholder: "Entrer une description...",
-        ReturnPolicyPlaceholder: "Entrer une condition de retour...",
-        CategoryPlaceholder: "Entrer une catégorie",
+        OrderProcessingTimePlaceholder: "Écrivez le temps nécessaire pour traiter la commande",
+        TermsAndConditionsPlaceholder: "Écrivez les termes et conditions...",
+        TitlePlaceholder: "Écrivez un titre",
+        DescriptionPlaceholder: "Écrivez une description...",
+        ReturnPolicyPlaceholder: "Écrivez une condition de retour...",
+        CategoryPlaceholder: "Choisissez une catégorie",
         CategoryHelperText: "Les catégories sont utilisées pour regrouper et organiser les articles au sein de votre boutique.",
         KeywordsHelperText: "Ajouter des mots-clés permet à votre annonce d'être découverte sur le marché.",
-        ExpirationDateHelperText: "Définir une date pour que l'article soit automatiquement retiré de votre boutique.",
+        ExpirationDateHelperText: "Définissez une date pour que l'article soit automatiquement retiré de votre boutique.",
         ClearExpirationDate: "Effacer la date d'expiration",
         ReturnPolicy: "Condition de retour",
         TermsAndConditions: "Termes et Conditions",
@@ -2344,7 +2344,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Sélectionner une photo de couverture",
         AboutPlaceholder: "Description complète",
         BackgroundColor: "Couleur de fond",
-        NotificationPaymentReceived: "Paiement reçu de",
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "a placé une commande pour",
         NotificationOrderConfirmed: "Votre commande a été confirmée / expédiée",
         NotificationFollow: "vous suit",
@@ -2359,8 +2359,8 @@ module.exports = Backbone.Model.extend({
         Moderators: "Modérateurs",
         CurrentModerators: "Modérateurs actuels",
         AddModerators: "Ajouter de nouveaux modérateurs",
-        DeselectToRemoveModerator: "Désélectionner les modérateurs que vous voulez supprimer",
-        SelectToAddModerator: "Sélectionner les modérateurs que vous voulez ajouter",
+        DeselectToRemoveModerator: "Désélectionnez les modérateurs que vous voulez supprimer",
+        SelectToAddModerator: "Sélectionnez les modérateurs que vous voulez ajouter",
         Categories: "Categories",
         UpTo3: "Jusqu'à 3",
         AboutYourStore: "Une description de votre boutique",
@@ -2877,7 +2877,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Selectați Fotografia Copertă",
         AboutPlaceholder: "Descrierea completă",
         BackgroundColor: "Culoarea de Fundal",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "acum vă urmărește",
@@ -3409,7 +3409,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Выберите обложку",
         AboutPlaceholder: "Полное описание",
         BackgroundColor: "Фоновый цвет",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "подписан на вас",
@@ -3941,7 +3941,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Zvoľte titulný obrázok",
         AboutPlaceholder: "Plný popis",
         BackgroundColor: "Farba pozadia",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "vás od teraz sleduje",
@@ -4477,7 +4477,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Kapak Görseli Seç",
         AboutPlaceholder: "Tam açıklama",
         BackgroundColor: "Arkaplan Rengi",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "sizi takip etmeye başladı",
@@ -5012,7 +5012,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Yuvtlhe' mIllogh wIv",
         AboutPlaceholder: "Bang naQ",
         BackgroundColor: "rItlh patmey lulo'ta'",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "SoH tlha'",
@@ -5550,7 +5550,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "选择封面照片",
         AboutPlaceholder: "详细介绍",
         BackgroundColor: "背景颜色",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "在关注您",
@@ -6087,7 +6087,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "표지 사진 선택",
         AboutPlaceholder: "큰 설명",
         BackgroundColor: "배경색",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "너를 팔로우하다",
@@ -6618,7 +6618,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "カバー写真選択",
         AboutPlaceholder: "商品の説明",
         BackgroundColor: "背景カラー",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "があなたをフォローしました",
@@ -7143,7 +7143,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Wybierz tło",
         AboutPlaceholder: "Pełny opis",
         BackgroundColor: "Kolor tła",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "zaczął cię obserować!",
@@ -7653,7 +7653,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Vælg coverbillede",
         AboutPlaceholder: "Fuld beskrivelse",
         BackgroundColor: "Baggrundsfarve",
-        NotificationPaymentReceived: "Payment received from", //notTranslated
+        NotificationPaymentSent: "Payment was sent to", //notTranslated
         NotificationOrderFor: "placed an order for", //notTranslated
         NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
         NotificationFollow: "følger nu dig",
