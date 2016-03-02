@@ -28,13 +28,7 @@ module.exports = baseVw.extend({
     }    
 
     this.socketView = options.socketView;
-
-    // cache some selectors which are outside of
-    // our el's scope
-    this.$sideBar = $('#sideBar');
-    this.$container = $('.container');
-    this.$obContainer = $('#obContainer');
-    this.$loadingSpinner = $('.spinner-with-logo');
+    this.$body = $('body');
 
     this.chatConversationsCl = new ChatConversationsCl();
     this.chatConversationsCl.fetch({
@@ -311,11 +305,7 @@ module.exports = baseVw.extend({
   },
 
   slideOut: function() {
-    this.$sideBar.addClass('sideBarSlid');
-    this.$container.addClass('compressed');
-    this.$loadingSpinner.addClass('modalCompressed');
-    this.$obContainer.addClass('noScrollBar');
-    $('#colorbox').addClass('marginLeftNeg115');
+    this.$body.addClass('chatOpen');
     self.$('.chatSearch').addClass('chatSearchOut');
     self.$('.btn-chatOpen')
         .addClass('hide')
@@ -325,11 +315,7 @@ module.exports = baseVw.extend({
 
   slideIn: function() {
     this.closeConversation();
-    this.$sideBar.removeClass('sideBarSlid');
-    this.$container.removeClass('compressed');
-    this.$loadingSpinner.removeClass('modalCompressed');
-    this.$obContainer.removeClass('noScrollBar');
-    $('#colorbox').removeClass('marginLeftNeg115');
+    this.$body.removeClass('chatOpen');
     self.$('.chatSearch').removeClass('chatSearchOut');
   },
 
