@@ -2042,7 +2042,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configurazione OpenBazaar",
           Introduction: "Introduzione",
-          IntroductionBody: "OpenBazaar &agrave; un mercato sociale peer-to-peer. &Egrave; come combinare eBay, Twitter e Bittorrent in un uno. Giusto, non ci sono commissioni e OpenBazaar &egrave; open-source. \n\n Si prega di notare che pu&ograve; apparire e sembrare un po' differente da ci&ograve; a cui sei abituato, quindi si paziente per come di regoli.",
+          IntroductionBody: "OpenBazaar &agrave; un mercato sociale peer-to-peer. &Egrave; come combinare eBay, Twitter e Bittorrent in un uno. Giusto, non ci sono commissioni e OpenBazaar &egrave; open-source. \n\n Si prega di notare che pu&ograve; apparire e sembrare un po' differente da ci&ograve; a cui sei abituato, quindi sii paziente per come ti regoli.",
           Theme: "Seleziona un Tema per la tua pagina",
           chooseLanguage: "Seleziona la tua lingua",
           contributors: "%{smart_count} Contributore |||| %{smart_count} Contributori",
