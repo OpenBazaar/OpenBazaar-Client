@@ -21,9 +21,6 @@ module.exports = baseModal.extend({
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
     'click .js-homeModal-timeSelect': 'timeSelect',
-    'click .js-homeModal-newHandle': 'newHandle',
-    'click .js-homeModal-existingHandle': 'existingHandle',
-    'click .js-homeModal-cancelHandle': 'cancelHandle',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'keypress .js-accordionNext': 'accNextKeypress',
@@ -305,6 +302,9 @@ module.exports = baseModal.extend({
       self.model.set('text_color', textColor);
       self.model.set('background_color', backgroundColor);
     }
+
+    var nsfwVal = this.$("input[name='nsfw']:checked").val();
+    this.model.set('nsfw', nsfwVal);
 
     $.each(this.model.attributes,
         function(i,el) {
