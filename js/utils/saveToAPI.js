@@ -40,6 +40,13 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       }
     });
 
+    //temporarily disable any form fields overriden by manual data so they aren't double submitted
+    __.each(addData, function(value, key) {
+      var disInp = form.find('input[name="'+key+'"]');
+      disInp.attr('disabled', true);
+      tempDisabledFields.push(disInp.attr('id'));
+    });
+
     __.each(form.serializeArray(), function (value) {
       formKeys.push(value.name);
     });
