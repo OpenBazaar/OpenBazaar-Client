@@ -4,8 +4,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),        
-    baseModal = require('./baseModal'),
-    ChangeServerWarningModal = require('./changeServerWarningModal');
+    baseModal = require('./baseModal');
 
 module.exports = baseModal.extend({
   className: 'server-connect-modal',
@@ -41,26 +40,13 @@ module.exports = baseModal.extend({
 
   saveForm: function() {
     if (this.model.save()) {
-      if (!this.changeServerWarningModal) {
-        this.changeServerWarningModal = new ChangeServerWarningModal({
-          innerWrapperClass: 'modal-child modal-childMain custCol-primary padding2010 heightAuto',
-          includeCloseButton: true,
-          settings: this._lastSavedAttrs
-        }).render().open();
-        
-        this.listenTo(this.changeServerWarningModal, 'close', function() {
-          this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
-          this.start();
-        });
-      } else {
-        this.changeServerWarningModal.open();
-      }
+      this._lastSavedAttrs = $.extend(true, {}, this.model.attributes);
+      this.start();
     }
   },
 
   restoreDefaults: function() {
-    this.model.clear()
-      .set( __.result(this.model, 'defaults', {}) );
+    this.model.set(__.result(this.model, 'defaults', {}));
     this.model.validationError = {};
     this.render();
   },
@@ -199,14 +185,8 @@ module.exports = baseModal.extend({
     return !!this.connectAttempt;
   },
 
-  close: function() {
-    this.changeServerWarningModal && this.changeServerWarningModal.remove();
-    baseModal.prototype.close.apply(this, arguments);
-  },
-
   remove: function() {
     this.stop();
-    this.changeServerWarningModal && this.changeServerWarningModal.remove();
 
     // TODO: don't let us leave this modal with the model in an error state.
 

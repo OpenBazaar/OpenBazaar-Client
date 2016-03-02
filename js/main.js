@@ -319,10 +319,17 @@ heartbeat.on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
-        serverConfigMd.save({
+        var creds = {
           username: e.jsonData.username,
           password: e.jsonData.password
-        });
+        };
+
+        if (app.serverConfig.isLocalServer()) {
+          creds.local_username = e.jsonData.username;
+          creds.local_password = e.jsonData.password;
+        }
+
+        serverConfigMd.save(creds);
 
         app.login().done(function() {
           guidCreating.resolve();
