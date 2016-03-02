@@ -53,6 +53,7 @@ module.exports = Backbone.View.extend({
     'click #moderatorNo': 'hideModeratorFeeHolder',
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
+    'click #advancedForm input[name="fancyStyles"]': 'toggleFancyStyles',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'input #pgp_key': 'showSignature'
@@ -850,6 +851,10 @@ module.exports = Backbone.View.extend({
   showSignature: function(){
     var targ = this.$('.js-settingsSignatureRow');
     targ.css("height", 50);
+  },
+
+  toggleFancyStyles: function(){
+
   },
 
   close: function(){

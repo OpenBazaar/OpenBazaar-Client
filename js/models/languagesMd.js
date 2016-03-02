@@ -271,7 +271,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",
         ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
-        ServerSettings: "Server Settings",
         ShutDownServer: "Shut Down the Server",
         NoFancyStyles: "Disable Visual Effects",
         NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.",
@@ -810,7 +809,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -1343,7 +1341,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -1880,7 +1877,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Impostazioni Server",
         ReadOnly: "(Questo campo &egrave; di sola lettura)",
         HandleResolver: "Recupero Nickname",
-        ServerSettings: "Impostazioni Server",
         ShutDownServer: "Spegni il server",
         LoadingBitcoinPrices: "Caricamento Prezzi Bitcoin...",
         ThisUserIsBlocked: "Questo utente &egrave; nascosto perch&egrave; si trova nella tua lista bloccati",
@@ -2438,7 +2434,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Paramètres du serveur",
         ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur d'identifiant",
-        ServerSettings: "Paramètres du serveur",
         ShutDownServer: "Arrêter le serveur",
         LoadingBitcoinPrices: "Chargement des prix Bitcoin...",
         ThisUserIsBlocked: "Cet utilisateur est masqué parce que vous l'avez bloqué",
@@ -2972,7 +2967,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -3505,7 +3499,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -4038,7 +4031,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -4575,7 +4567,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -5111,7 +5102,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -6188,7 +6178,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -6710,7 +6699,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -7246,7 +7234,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -7757,7 +7744,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Serverindstillinger",
         ReadOnly: "(dette felt er skrivebeskyttet)",
         HandleResolver: "Handle Resolver", // ?
-        ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated

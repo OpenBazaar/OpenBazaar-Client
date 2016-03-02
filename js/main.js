@@ -119,6 +119,11 @@ $(window).bind('hashchange', function(){
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
+//set fancy styles class
+if(localStorage.getItem('fancy')){
+  $('html').addClass('')
+}
+
 //prevent dragging a file to the window from loading that file
 window.addEventListener("dragover",function(e){
   e = e || event;
