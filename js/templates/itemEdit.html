@@ -158,10 +158,12 @@
               </div>
             </div>
             <div class="flexCol-9">
-              <textarea name="description" rows="8" class="fieldItem-textarea custCol-text height130 overflowHidden"
-                        id="inputDescription" required placeholder="<%= polyglot.t('DescriptionPlaceholder') %>">
-                <%- ob.vendor_offer.listing.item.description %>
-              </textarea>
+              <textarea name="description"
+                        rows="8"
+                        class="fieldItem-textarea custCol-text height130 overflowHidden"
+                        id="inputDescription"
+                        required
+                        placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%- ob.vendor_offer.listing.item.description %></textarea>
             </div>
           </div>
         </div>
@@ -193,7 +195,7 @@
               <div class="flexCol-8">
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper noIcon">
-                    <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple>
+                    <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple required>
                     </select>
                   </div>
                 </div>

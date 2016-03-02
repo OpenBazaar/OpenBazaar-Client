@@ -43,6 +43,10 @@ var Polyglot = require('node-polyglot'),
     serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
+    startUpConnectMaxRetries = 2,
+    startUpConnectRetryDelay = 2 * 1000,
+    startUpConnectMaxTime = 6 * 1000,
+    startTime = Date.now(),
     extendPolyglot,
     newPageNavView,
     newSocketView,
@@ -288,8 +292,17 @@ heartbeat.on('open', function(e) {
 });
 
 heartbeat.on('close', function(e) {
-  // server down
-  launchServerConnect();
+  if (
+    Date.now() - startTime < startUpConnectMaxTime &&
+    startUpConnectMaxRetries
+  ) {
+    setTimeout(() => {
+      startUpConnectMaxRetries--;
+      app.connectHeartbeatSocket();
+    }, startUpConnectRetryDelay);
+  } else {
+    launchServerConnect();
+  }
 });
 
 heartbeat.on('message', function(e) {
@@ -306,10 +319,17 @@ heartbeat.on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
-        serverConfigMd.save({
+        var creds = {
           username: e.jsonData.username,
           password: e.jsonData.password
-        });
+        };
+
+        if (app.serverConfig.isLocalServer()) {
+          creds.local_username = e.jsonData.username;
+          creds.local_password = e.jsonData.password;
+        }
+
+        serverConfigMd.save(creds);
 
         app.login().done(function() {
           guidCreating.resolve();

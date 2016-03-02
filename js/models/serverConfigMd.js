@@ -3,13 +3,22 @@ var Backbone = require('backbone'),
     is = require('is_js');
 
 module.exports = Backbone.Model.extend({
-  defaults: {
-    'id': 1,
-    'server_ip': 'localhost',
-    'rest_api_port': 18469,
-    'api_socket_port': 18466,
-    'heartbeat_socket_port': 18470,
-    'SSL': false
+  defaults: function() {
+    var defaultsObj = {
+          'id': 1,
+          'server_ip': 'localhost',
+          'rest_api_port': 18469,
+          'api_socket_port': 18466,
+          'heartbeat_socket_port': 18470,
+          'SSL': false
+        },
+        localUsername = this.get('local_username'),
+        localPassword = this.get('local_password');
+
+    defaultsObj['username'] = localUsername || '';
+    defaultsObj['password'] = localPassword || '';
+
+    return defaultsObj;
   },
 
   sync: localStorageSync.sync,

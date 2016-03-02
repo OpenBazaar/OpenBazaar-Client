@@ -5,6 +5,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
+    validateMediumEditor = require('../utils/validateMediumEditor'),
     Taggle = require('taggle');
 
 module.exports = Backbone.View.extend({
@@ -15,7 +16,8 @@ module.exports = Backbone.View.extend({
     'click .js-storeWizardModal': 'blockClicks',
     'click .js-closeStoreWizardModal': 'closeWizard',
     'click .js-storeWizardSave': 'saveWizard',
-    'blur input': 'validateInput'
+    'blur input': 'validateInput',
+    'blur textarea': 'validateInput',
   },
 
   initialize: function(options) {
@@ -104,7 +106,12 @@ module.exports = Backbone.View.extend({
           imageDragging: false
         }
       });
+      editor.subscribe('blur', self.validateDescription);
     });
+  },
+
+  validateDescription: function(e) {
+    validateMediumEditor.checkVal($('#aboutInput'));
   },
 
   setValues: function() {

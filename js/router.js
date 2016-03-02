@@ -143,7 +143,7 @@ module.exports = Backbone.Router.extend({
       socketView: this.socketView,
       state: state,
       searchItemsText: searchItemsText
-    }),'',addressBarText);
+    }),'',{'addressText': addressBarText});
 
     // hide the discover onboarding callout 
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
