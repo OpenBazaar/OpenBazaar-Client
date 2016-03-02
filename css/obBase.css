@@ -259,19 +259,6 @@ form {
   right: 0px;
 }
 
-/*#sideBar.sideBarSlid {
-  right: 0px;
-}
-*/
-/*#sideBar .sideBarSlidShow {
-  opacity: 0;
-  transition: opacity 1s;
-}
-
-#sideBar.sideBarSlid .sideBarSlidShow {
-  opacity: 1;
-}
-*/
 #sideBar input::-webkit-input-placeholder {
   color: #fff;
 }
