@@ -9,6 +9,7 @@ var loadTemplate = require('../utils/loadTemplate'),
     MediumEditor = require('medium-editor'),
     messageModal = require('../utils/messageModal'),
     chosen = require('../utils/chosen.jquery.min.js'),
+    validateMediumEditor = require('../utils/validateMediumEditor'),
     baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
@@ -358,22 +359,15 @@ module.exports = baseVw.extend({
   },
 
   validateInput: function(e) {
+    var targ = $(e.target),
+        trimVal = targ.val().trim();
+    targ.val(trimVal);
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    targ.closest('.flexRow').addClass('formChecked');
   },
 
   validateDescription: function(e) {
-    var $field = self.$('#inputDescription');
-
-    if (!$($field.val()).text().length) {
-      $field.val('');
-    }
-
-    if (!$field[0].checkValidity()) {
-      $field.parent().addClass('invalid');
-    } else {
-      $field.parent().removeClass('invalid');
-    }
+    validateMediumEditor.checkVal(this.$('#inputDescription'));
   },  
 
   saveChanges: function(){
