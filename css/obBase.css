@@ -1369,7 +1369,6 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0px 10px #383838;
-  transition: left .1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modal-hero {
