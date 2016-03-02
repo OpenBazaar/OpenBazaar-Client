@@ -21,9 +21,6 @@ module.exports = baseModal.extend({
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
     'click .js-homeModal-timeSelect': 'timeSelect',
-    'click .js-homeModal-newHandle': 'newHandle',
-    'click .js-homeModal-existingHandle': 'existingHandle',
-    'click .js-homeModal-cancelHandle': 'cancelHandle',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'keypress .js-accordionNext': 'accNextKeypress',
@@ -306,6 +303,9 @@ module.exports = baseModal.extend({
       self.model.set('background_color', backgroundColor);
     }
 
+    var nsfwVal = this.$("input[name='nsfw']:checked").val();
+    this.model.set('nsfw', nsfwVal);
+
     $.each(this.model.attributes,
         function(i,el) {
             if(i == "country") {
@@ -577,7 +577,9 @@ module.exports = baseModal.extend({
       // pre-select timezone
       var timeZoneOffset = new Date().getTimezoneOffset();
       timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
-      self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
+      var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
+      selectedTimeZone.prop('checked', true);
+      self.model.set('time_zone', selectedTimeZone.val());
 
       // select a random theme
       $themeInputs = self.$('[name=theme-selection]');
