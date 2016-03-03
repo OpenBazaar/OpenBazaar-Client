@@ -248,6 +248,11 @@ module.exports = baseVw.extend({
 
     imageFiles = Array.prototype.slice.call(imageFiles || $imageInput[0].files, 0);
 
+    // prune out any non-image files
+    imageFiles = imageFiles.filter((file) => {
+      return file.type.startsWith('image');
+    });
+
     $imageInput.val('');
 
     if (curImages.length + imageFiles.length > this.MAX_PHOTOS) {
@@ -264,6 +269,7 @@ module.exports = baseVw.extend({
           ctx;
 
       newImage.src = imageFile.path;
+
       newImage.onload = function() {
         var imgH = newImage.height,
             imgW = newImage.width,
@@ -289,9 +295,18 @@ module.exports = baseVw.extend({
         dataURI = canvas.toDataURL('image/jpeg', 0.45);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
+
         if(loaded === imageCount) {
           self.uploadImage(imageList);
         }
+      };
+
+      newImage.onerror = function() {
+        loaded += 1;
+
+        if(loaded === imageCount) {
+          self.uploadImage(imageList);
+        }        
       };
     });
   },
@@ -299,10 +314,16 @@ module.exports = baseVw.extend({
   uploadImage: function(imageList){
     var self = this,
         formData = new FormData();
+    
     __.each(imageList, function(dataURL){
       "use strict";
       formData.append('image', dataURL);
     });
+
+    if (!imageList.length) {
+      self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
+      return;
+    }
 
     $.ajax({
       type: "POST",
