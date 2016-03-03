@@ -56,7 +56,7 @@ module.exports = Backbone.View.extend({
     'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
-    'input #pgp_key': 'showSignature'
+    'input #pgp_key': 'checkPGPKey'
   },
 
   initialize: function(options){
@@ -850,9 +850,14 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  showSignature: function(){
-    var targ = this.$('.js-settingsSignatureRow');
-    targ.css("height", 50);
+  checkPGPKey: function(e){
+    if(!this.$(e.target).val().length){
+      this.$('.js-settingsSignatureRow').css("height", 0);
+      this.$('#signature').removeAttr("required");
+    } else {
+      this.$('.js-settingsSignatureRow').css("height", 50);
+      this.$('#signature').attr("required", '');
+    }
   },
 
   toggleFancyStyles: function(){
