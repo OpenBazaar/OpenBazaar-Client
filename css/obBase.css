@@ -3362,8 +3362,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: transparent;
   z-index: 5;
   padding: 0;
-  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1);
-  transition: top .4s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1), top .4s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .user-page-header-slim-bg {
@@ -5255,10 +5254,106 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: auto;
 }
 
+/* turn off animations and transitions with this style */
+
+#ov1.notFancy,
+#ov1.notFancy *,
+#ov1.notFancy * *,
+#ov1.notFancy * * *,
+#ov1.notFancy * * * *,
+#ov1.notFancy * * * * *,
+#ov1.notFancy * * * * * *,
+#ov1.notFancy * * * * * * *,
+#ov1.notFancy * * * * * * * *,
+#ov1.notFancy * * * * * * * * * ,
+#ov1.notFancy * * * * * * * * * *,
+#ov1.notFancy #userPage,
+#ov1.notFancy #userPage *,
+#ov1.notFancy #userPage * *,
+#ov1.notFancy #userPage * * *,
+#ov1.notFancy #userPage * * * *,
+#ov1.notFancy #userPage * * * * *,
+#ov1.notFancy #userPage * * * * * *,
+#ov1.notFancy #userPage * * * * * * *,
+#ov1.notFancy #userPage * * * * * * * *,
+#ov1.notFancy #userPage * * * * * * * * * ,
+#ov1.notFancy #userPage * * * * * * * * * *,
+#ov1.notFancy #obContainer,
+#ov1.notFancy #obContainer *,
+#ov1.notFancy #obContainer * *,
+#ov1.notFancy #obContainer * * *,
+#ov1.notFancy #obContainer * * * *,
+#ov1.notFancy #obContainer * * * * *,
+#ov1.notFancy #obContainer * * * * * *,
+#ov1.notFancy #obContainer * * * * * * *,
+#ov1.notFancy #obContainer * * * * * * * *,
+#ov1.notFancy #obContainer * * * * * * * * * ,
+#ov1.notFancy #obContainer * * * * * * * * * *,
+#ov1.notFancy #overlay,
+#ov1.notFancy #sideBar,
+#ov1.notFancy #pageNav,
+#ov1.notFancy #modalHolder,
+#ov1.notFancy #messageModal,
+#ov1.notFancy #statusBar {
+  transition: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+  transition-property: none !important;
+  animation: none !important;
+}
+
+#ov1.notFancy #pageNav .statusBar.fadeOut,
+#ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
+#ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
+  opacity: 0 !important;
+}
+
+#ov1.notFancy #sideBar .sideBarSlidShow {
+  display: none;
+}
+
+#ov1.notFancy #sideBar.sideBarSlid .sideBarSlidShow {
+  display: block;
+}
+
+#ov1.notFancy .gridItemControls {
+  display: none;
+}
+
+#ov1.notFancy .gridItemControls .btn-gridItemControl:hover {
+  display: block;
+}
+
+#ov1.notFancy .btn .postConfirm {
+  display: none;
+}
+
+#ov1.notFancy .confirm.btn .preConfirm {
+  display: none;
+}
+
+#ov1.notFancy .confirm.btn .postConfirm {
+  display: inline-block;
+}
+
+#ov1.notFancy #userPage #obContainer #content .labelWrap.fade {
+  opacity: 0 !important;
+}
+
+#ov1.notFancy #userPage #obContainer #content .labelWrap.fadeIn {
+  opacity: 1;
+}
+
+
+
 /* terrible hack, TODO: remove before production */
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   background: #535353;
   opacity: 0.2;
   pointer-events: none;
+}
+
+#ov1 .TODO.TODO.TODO.TODO.TODO {
+  display: none; /* hide when live */
 }

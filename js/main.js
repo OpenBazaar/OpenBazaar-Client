@@ -120,8 +120,8 @@ $(window).bind('hashchange', function(){
 });
 
 //set fancy styles class
-if(localStorage.getItem('fancy')){
-  $('html').addClass('')
+if(localStorage.getItem('notFancy') == "true"){
+  $('html').addClass('notFancy')
 }
 
 //prevent dragging a file to the window from loading that file
