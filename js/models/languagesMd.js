@@ -231,7 +231,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price",
         InternationalShippingPrice: "International Shipping Price",
         MinimumIs: "Minimum is",
-        Visibility: "Visibility",
         Title: "Title",
         DigitalItem: "Digital Item",
         PhysicalItem: "Physical Item",
@@ -266,6 +265,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers",
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator",
+        ActiveStore:"Store is Active",
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people",
         Firewall: "Firewall",
         ServerSettings: "Server Settings",
         ReadOnly: "(This Field is Read Only)",
@@ -767,7 +768,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
@@ -802,6 +802,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -1299,7 +1301,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
@@ -1334,6 +1335,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -1835,7 +1838,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Prezzo per invio nazionale",
         InternationalShippingPrice: "Prezzo per invio internazionale",
         MinimumIs: "Il minimo &eacute;",
-        Visibility: "Visibilit&agrave;",
         Title: "Titolo",
         DigitalItem: "Articolo digitale",
         PhysicalItem: "Articolo fisico",
@@ -1870,6 +1872,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Nessun seguace",
         NoReviews: "No reviews", //notTranslated        
         Moderator: "Moderatore",
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall",
         ServerSettings: "Impostazioni Server",
         ReadOnly: "(Questo campo &egrave; di sola lettura)",
@@ -2392,7 +2396,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Prix d'expédition nationale",
         InternationalShippingPrice: "Prix d'expédition internationale",
         MinimumIs: "Le minimum est",
-        Visibility: "Visibilité",
         Title: "Titre",
         DigitalItem: "Article numérique",
         PhysicalItem: "Article physique",
@@ -2427,6 +2430,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Aucun abonné",
         NoReviews: "No reviews", //notTranslated
         Moderator: "Modérateur",
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Pare-feu",
         ServerSettings: "Paramètres du serveur",
         ReadOnly: "(Ce champ est en lecture seule)",
@@ -2925,7 +2930,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
@@ -2960,6 +2964,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -3457,7 +3463,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Бесплатная доставка внутри страны",
         InternationalShippingPrice: "Международные цены доставки",
         MinimumIs: "Минимум",
-        Visibility: "Видимость",
         Title: "Название",
         DigitalItem: "Цифровой товар",
         PhysicalItem: "Физический товар",
@@ -3492,6 +3497,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -3989,7 +3996,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
@@ -4024,6 +4030,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -4525,7 +4533,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
@@ -4560,6 +4567,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -5060,7 +5069,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
@@ -5095,6 +5103,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -5600,7 +5610,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "国内运费",
         InternationalShippingPrice: "国际运费",
         MinimumIs: "最少",
-        Visibility: "可见",
         Title: "标题",
         DigitalItem: "数字商品",
         PhysicalItem: "实物商品",
@@ -5635,6 +5644,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "没有人关注你",
         NoReviews: "没有客户评价",
         Moderator: "仲裁员",
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "防火墙",
         ServerSettings: "服务器设置",
         ReadOnly: "(这个字段是只读的)",
@@ -6135,7 +6146,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Domestic Shipping Price", // not translated
         InternationalShippingPrice: "International Shipping Price", // not translated
         MinimumIs: "Minimum is", // not translated
-        Visibility: "Visibility", // not translated
         Title: "Title", // not translated
         DigitalItem: "Digital Item", // not translated
         PhysicalItem: "Physical Item", // not translated
@@ -6170,6 +6180,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -6666,7 +6678,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "国内配送料",
         InternationalShippingPrice: "国際配送料",
         MinimumIs: "最小", // is this used?
-        Visibility: "表示",
         Title: "タイトル",
         DigitalItem: "デジタル製品",
         PhysicalItem: "品物", // check
@@ -6691,6 +6702,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "No followers", // not translated
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator", // not translated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -7191,7 +7204,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Koszt wysyłki krajowej",
         InternationalShippingPrice: "Koszt wysyłki międzynarodowej",
         MinimumIs: "Minimum to",
-        Visibility: "Widoczność",
         Title: "Tytuł",
         DigitalItem: "Przedmiot cyfrowy",
         PhysicalItem: "Przedmiot fizyczny",
@@ -7226,6 +7238,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Brak obserwujących",
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator",//notTranslated
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
@@ -7701,7 +7715,6 @@ module.exports = Backbone.Model.extend({
         DomesticShippingPrice: "Indenlands forsendelsespris",
         InternationalShippingPrice: "International forsendelsespris",
         MinimumIs: "Minimum er",
-        Visibility: "Synlighed",
         Title: "Titel",
         DigitalItem: "Digital vare",
         PhysicalItem: "Fysisk vare",
@@ -7736,6 +7749,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Ingen følgere",
         NoReviews: "No reviews", //notTranslated
         Moderator: "Moderator",
+        ActiveStore:"Store is Active", // not translated
+        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall",
         ServerSettings: "Serverindstillinger",
         ReadOnly: "(dette felt er skrivebeskyttet)",

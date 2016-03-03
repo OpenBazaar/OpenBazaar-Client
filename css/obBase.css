@@ -195,11 +195,15 @@ form {
 #obContainer {
   transition: width 0.5s ease;
   width: calc(100% - 47px);
-
+  transition: width 0.5s ease;
 }
 
-#obContainer.compressed {
+#ov1 .chatOpen #obContainer {
   width: calc(100% - 231px);
+}
+
+#ov1 .chatOpen #obContainer::-webkit-scrollbar {
+  width: 0;
 }
 
 #pageNav {
@@ -245,23 +249,14 @@ form {
   background-color: #252525;
   border-left: 0;
   height: calc(100% - 50px);
-  z-index: 4;
+  z-index: 5;
   transition: right 0.5s ease;
   color: #DDD;
   -webkit-app-region: no-drag;
 }
 
-#sideBar.sideBarSlid {
+.chatOpen #sideBar {
   right: 0px;
-}
-
-#sideBar .sideBarSlidShow {
-  opacity: 0;
-  transition: opacity 1s;
-}
-
-#sideBar.sideBarSlid .sideBarSlidShow {
-  opacity: 1;
 }
 
 #sideBar input::-webkit-input-placeholder {
@@ -547,7 +542,7 @@ form {
   right: 15px;
   font-size: 12px;
   cursor: pointer;
-  z-index: 5;
+  z-index: 4;
 }
 
 .userPageAboutSection:hover .userPageEditBtn,
@@ -949,6 +944,7 @@ label.fieldItem {
   height: 100%;
   top: 0;
   left: 0;
+  right: 0;
   /* use fadeIn and fadeOut to change opacity */
   transition: opacity .05s cubic-bezier(0, 0, 0.2, 1);
   padding-top: 25px;
@@ -975,7 +971,13 @@ label.fieldItem {
   position: absolute;
   right: 0;
   left: 0;
+  transition: right 0.5s ease;
 }
+
+#ov1 .chatOpen .modal-child {
+  right: 230px;
+}
+
 
 .modal.modal-navOffset .modal-child {
   margin-top: 25px;
@@ -1115,6 +1117,11 @@ label.fieldItem {
   margin-top: 20px;
   transition: margin 0.5s ease;
   position: fixed;
+  transition: margin-left 0.5s ease;
+}
+
+#ov1 .chatOpen #colorbox {
+  margin-left: -115px;
 }
 
 #cboxOverlay {
@@ -1349,7 +1356,6 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0px 10px #383838;
-  transition: left .1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modal-hero {
@@ -2191,10 +2197,6 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessageTimestamp div {
   margin-top: 2px;
-}
-
-.modalCompressed {
-  left: calc(50% - 115.5px);
 }
 
 .testnetBadge {
@@ -3486,6 +3488,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 215px;
   height: 215px;
   position: relative;
+  transition: left 0.5s ease;
 }
 
 .spinner-with-logo i {
@@ -3493,6 +3496,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 17px;
   left: 18px;
   opacity: .90;
+}
+
+#ov1 .chatOpen .spinner-with-logo {
+  left: calc(50% - 115.5px);
 }
 
 .spinnerWrapper {

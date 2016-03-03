@@ -464,7 +464,9 @@
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="about"><%= polyglot.t('About') %></label>
-                  <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
+                  <div>
+                    <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
+                  </div>
                 </div>
               </div>
 
@@ -702,19 +704,26 @@
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Basic') %></h3>
             </div>
 
-            <div class="flexRow TODO">
+            <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
                   <label>
-                    <%= polyglot.t('Visibility') %>
+                    <%= polyglot.t('ActiveStore') %>
                   </label>
+                  <div>
+                    <label class="textSize11px txt-unleaded">
+                      <%= polyglot.t('ActiveStoreDetails') %>
+                    </label>
+                  </div>
                 </div>
               </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem marginLeft6">
-                  <input disabled type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
-                  <input disabled type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
+                  <input type="radio" class="fieldItem" id="store_active_on" name="vendor" value="true" checked />
+                  <label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
+                  <input type="radio" class="fieldItem" id="store_active_off" name="vendor" value="false"/>
+                  <label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
                 </div>
               </div>
             </div>

@@ -628,7 +628,7 @@ module.exports = Backbone.Model.extend({
         "currencyUnits": "2"
       },
       {
-        "name": "GABON",
+        "name": "Gabon",
         "dataName": "GABON",
         "currency": "CFA Franc BEAC",
         "code": "XAF",
@@ -685,7 +685,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         "name": "Greenland",
-        "dataName": "Greenland",
+        "dataName": "GREENLAND",
         "currency": "Danish Krone",
         "code": "DKK",
         "number": "208",
@@ -1309,7 +1309,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         "name": "Northern Mariana Islands (The)",
-        "dataName": "Northern_Mariana_Islands",
+        "dataName": "NORTHERN_MARIANA_ISLANDS",
         "currency": "United States Dollar",
         "code": "USD",
         "number": "840",
@@ -1908,8 +1908,8 @@ module.exports = Backbone.Model.extend({
         "currencyUnits": "2"
       },
       {
-        "name": "Viet Nam",
-        "dataName": "VIET NAM",
+        "name": "VietNam",
+        "dataName": "VIETNAM",
         "currency": "Dong",
         "code": "VND",
         "number": "704",
