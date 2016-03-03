@@ -972,7 +972,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Personalice Su OpenBazaar",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Seleccione un tema para su p&aacute;gina",
           chooseLanguage: "Seleccione idioma",
           contributors: "%{smart_count} Colaboradores |||| %{smart_count} Colaboradores",
@@ -1503,7 +1503,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar Konfiguration",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "W&auml;hle ein Farbschema f&uuml;r deine Seite",
           chooseLanguage: "W&auml;hle deine Sprache",
           contributors: "%{smart_count} Mitwirkeder |||| %{smart_count} Mitwirkende",
@@ -3129,7 +3129,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configurare OpenBazaar",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Selectați o Temă pentru Pagina dvs.",
           chooseLanguage: "Selectați Limba dvs.",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributori",
@@ -3661,7 +3661,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Конфигурация OpenBazaar",
           Introduction: "Ознакомление",
-          IntroductionBody: "Представление",
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Выберите оформление для вашей страницы",
           chooseLanguage: "Выберите ваш язык",
           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиков",
@@ -4193,7 +4193,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Konfigurácia OpenBazaaru",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Zvoľte si grafickú tému Vašej stránky",
           chooseLanguage: "Zvoľte jazyk",
           contributors: "%{smart_count} prispievateľ |||| %{smart_count} prispievateľov",
@@ -4729,7 +4729,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar Yaplandırma",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Sayfanız için bir Tema Seçin",
           chooseLanguage: "Dilinizi Seçin",
           contributors: "%{smart_count} Katkıcı |||| %{smart_count} Katkıcı",
@@ -5264,7 +5264,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar bang",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Hoch tuqwIj wIv",
           chooseLanguage: "Hol wIv",
           contributors: "%{smart_count} 'ach yIn nuvpu' 'Iv ghaq |||| %{smart_count} 'ach yIn nuvpu' 'Iv ghaq",
@@ -5804,7 +5804,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar 布局",
           Introduction: "简介",
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           theme: "选择主页主题",
           chooseLanguage: "选择语言",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
@@ -6340,7 +6340,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "오픈바자 구서",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           theme: "내 페이지 테마 선택",
           chooseLanguage: "언어 선택",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors", // not sure if I can change this..
@@ -6863,6 +6863,7 @@ module.exports = Backbone.Model.extend({
           intro: "OpenBazaarの設定",
           theme: "マイページのテーマを選択",
           chooseLanguage: "言語",
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           contributors: "投稿者: %{smart_count}人 |||| 投稿者: %{smart_count}人",
           configure: "ユーザーエクスペリエンスの構成",
           disclaimer_title: "担保文言",

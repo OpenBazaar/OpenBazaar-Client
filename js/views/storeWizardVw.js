@@ -51,17 +51,20 @@ module.exports = Backbone.View.extend({
 
     acc.find('.js-accordionNext').on('click', function(){
       var oldPos = accWin.css('left').replace("px","");
-      if(oldPos > (accWidth * accNum * -1 + accWidth)){
-        accWin.css('left', function(){
-          return parseInt(accWin.css('left').replace("px","")) - accWidth;
-        });
-        // switch active tab
-        var curActive = acc.find('.accordion-active');
-        curActive.addClass('accordion-inactive').removeClass('accordion-active');
-        var newActive = curActive.next('.accordion-child');
-        newActive.addClass('accordion-active').removeClass('accordion-inactive');
-        // focus search input
-        newActive.find('input:visible:first').focus();
+
+      if($('#storeWizardForm')[0].checkValidity()) {
+        if (oldPos > (accWidth * accNum * -1 + accWidth)) {
+          accWin.css('left', function () {
+            return parseInt(accWin.css('left').replace("px", "")) - accWidth;
+          });
+          // switch active tab
+          var curActive = acc.find('.accordion-active');
+          curActive.addClass('accordion-inactive').removeClass('accordion-active');
+          var newActive = curActive.next('.accordion-child');
+          newActive.addClass('accordion-active').removeClass('accordion-inactive');
+          // focus search input
+          newActive.find('input:visible:first').focus();
+        }
       }
     });
 

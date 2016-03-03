@@ -5300,6 +5300,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1 !important;
   transition-property: none !important;
   animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+#ov1.notFancy #pageNav .popMenu.popMenu-navBar.popMenu-opened {
+  border-left: 1px solid #444;
+  border-right: 1px solid #444;
+  border-bottom: 1px solid #444;
 }
 
 #ov1.notFancy #pageNav .statusBar.fadeOut,
@@ -5320,7 +5328,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: none;
 }
 
-#ov1.notFancy .gridItemControls .btn-gridItemControl:hover {
+#ov1.notFancy .gridItemControls .btn-gridItemControl:hover,
+#ov1.notFancy .userPage-subViews .gridItem:hover .gridItemControls,
+#ov1.notFancy .homeView .gridItem:hover .gridItemControls {
   display: block;
 }
 
@@ -5342,6 +5352,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy #userPage #obContainer #content .labelWrap.fadeIn {
   opacity: 1;
+}
+
+#ov1.notFancy #obContainer .taggle_placeholder,
+#ov1.notFancy #userPage #obContainer .taggle_placeholder {
+  display: none !important;
 }
 
 
