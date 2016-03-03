@@ -1657,14 +1657,14 @@ module.exports = Backbone.Model.extend({
         Feed: "Feed",
         FeedPlaceholder: "Un feed di aggiornamenti da tutte le pagine che segui",
         ViewListing: "Visualizza il listino",
-        Unfollow: "Smetti di seguire",
+        Unfollow: "Smetti",
         About: "About",
         NoDescriptionAdded: "Nessuna descrizione aggiunta",
         NoListings: "Nessun listino",
         CoverPhoto: "Foto di copertina",
         AboutEmpty: "L'About &egrave; vuoto...",
-        Followers: "Seguaci",
-        Following: "Segue",
+        Followers: "Followers",
+        Following: "Following",
         FollowsYou: "Ti segue",
         Message: "Messaggio",
         Messages: "Messaggi",
@@ -1787,7 +1787,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Seleziona foto di copertina",
         AboutPlaceholder: "Descrizione completa",
         BackgroundColor: "Colore di sfondo",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
+        NotificationPaymentSent: "Il pagamento è stato inviato a",
         NotificationOrderFor: "piazza un ordine per",
         NotificationOrderConfirmed: "Il tuo ordine &egrave; stato confermato/inviato",
         NotificationFollow: "ora ti sta seguendo",
@@ -1869,7 +1869,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "non fornito",
         NotFollowingAnyone: "Non segui nessuno",
         NoFollowers: "Nessun seguace",
-        NoReviews: "No reviews", //notTranslated        
+        NoReviews: "Nessuna recensione",     
         Moderator: "Moderatore",
         ActiveStore:"Store is Active", // not translated
         ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
@@ -2044,7 +2044,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configurazione OpenBazaar",
           Introduction: "Introduzione",
-          IntroductionBody: "OpenBazaar &agrave; un mercato sociale peer-to-peer. &Egrave; come combinare eBay, Twitter e Bittorrent in un uno. Giusto, non ci sono commissioni e OpenBazaar &egrave; open-source. \n\n Si prega di notare che pu&ograve; apparire e sembrare un po' differente da ci&ograve; a cui sei abituato, quindi si paziente per come di regoli.",
+          IntroductionBody: "OpenBazaar &agrave; un mercato sociale peer-to-peer. &Egrave; come combinare eBay, Twitter e Bittorrent in un uno. Giusto, non ci sono commissioni e OpenBazaar &egrave; open-source. \n\n Si prega di notare che pu&ograve; apparire e sembrare un po' differente da ci&ograve; a cui sei abituato, quindi sii paziente per come ti regoli.",
           Theme: "Seleziona un Tema per la tua pagina",
           chooseLanguage: "Seleziona la tua lingua",
           contributors: "%{smart_count} Contributore |||| %{smart_count} Contributori",
