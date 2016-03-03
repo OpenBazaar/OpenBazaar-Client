@@ -5226,6 +5226,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   pointer-events: none;
 }
 
+#ov1 .foldIn {
+  height: 0;
+  overflow: hidden;
+  transition: height 1s;
+}
+
 #ov1 .underline {
   text-decoration: underline;
 }

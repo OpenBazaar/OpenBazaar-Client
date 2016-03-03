@@ -105,6 +105,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "PGP Signature",
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key",
         Snapchat: "Snapchat",
         BUYNOW: "Buy Now",
         Description: "Description",
@@ -654,6 +655,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",  //not translated
         Signature: "PGP Signature",  //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "COMPRAR AHORA",
         Description: "Descripci&oacute;n",
@@ -1147,6 +1149,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "JETZT KAUFEN",
         Description: "Beschreibung",
@@ -1681,6 +1684,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "Firma PGP",
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "COMPRA ORA",
         Description: "Descrizione",
@@ -2237,6 +2241,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "Clé PGP",
         Signature: "Signature PGP",
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "Acheter Maintenant",
         Description: "Description",
@@ -2769,6 +2774,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "CUMPĂRAȚI ACUM",
         Description: "Descriere",
@@ -3300,6 +3306,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "Купи сейчас",
         Description: "Описание",
@@ -3830,6 +3837,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "KÚPIŤ IHNEĎ",
         Description: "Popis",
@@ -4366,6 +4374,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "Hemen Al",
         Description: "Tanım",
@@ -4900,6 +4909,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Mach mu'",
         PGPKey: "PGP Key",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "MIllogh naked nuvpu'",
         BUYNOW: "DaH je'",
         Description: "Bang",
@@ -5434,6 +5444,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key", //not translated
         Signature: "PGP签名",
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "立即购买",
         Description: "描述",
@@ -5974,6 +5985,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "트위터",
         PGPKey: "PGP Key",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "스냅채트",
         BUYNOW: "지금 구매",
         Description: "설명",
@@ -6504,6 +6516,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGPキー",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "今すぐ購入する",
         Description: "商品の説明",
@@ -7029,6 +7042,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "Klucz PGP",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "Kup teraz",
         Description: "Opis",
@@ -7538,6 +7552,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP-nøgle",
         Signature: "PGP Signature", //not translated
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "Køb nu",
         Description: "Beskrivelse",
@@ -8075,6 +8090,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "Chave PGP",
         Signature: "Assinatura PGP",
+        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "Comprar agora",
         Description: "Descrição",
