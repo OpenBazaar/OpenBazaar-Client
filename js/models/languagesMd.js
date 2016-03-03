@@ -7503,15 +7503,15 @@ module.exports = Backbone.Model.extend({
         NoDescriptionAdded: "Ingen beskrivelse tilføjet",
         NoListings: "Ingen listninger",
         CoverPhoto: "Coverbillede",
-        AboutEmpty: "Om er tomt…",
+        AboutEmpty: "Om er ikke udfyldt…",
         Followers: "Følgere",
         Following: "Følger",
-        FollowsYou: "Følger dig", //notTranslated
+        FollowsYou: "Følger dig",
         Message: "Besked",
         Messages: "Beskeder",
         Store: "Butik",
         Edit: "Redigér",
-        Clone: "Klon", //notTranslated
+        Clone: "Klon",
         Used: "Brugt",
         Delete: "Slet",
         DontDelete: "Slet ikke",
@@ -7519,7 +7519,7 @@ module.exports = Backbone.Model.extend({
         Website: "Websted",
         Guid: "OpenBazaar-ID",
         Welcome: "Velkommen",
-        CreateStore: "Bliv en butik",
+        CreateStore: "Opret en butik",
         GoToMyPage: "Min side",
         SearchForItemsPlaceholder: "Skriv #games, #shoes eller et andet #tag…",
         SearchForPagesPlaceholder: "Søg efter navn eller nøgleord",
@@ -7533,11 +7533,11 @@ module.exports = Backbone.Model.extend({
         TermsAndConditionsPlaceholder: "Indtast betingelser og vilkår…",
         TitlePlaceholder: "Indtast titel",
         DescriptionPlaceholder: "Indtast beskrivelse…",
-        ReturnPolicyPlaceholder: "Indtast returretpolitik…",
+        ReturnPolicyPlaceholder: "Indtast returpolitik…",
         CategoryPlaceholder: "Indtast kategori",
         CategoryHelperText: "Kategorier bruges til at gruppere og organisere varer i din butik.",
         KeywordsHelperText: "Tilføjelse af tags hjælper med at gøre din vare synlig i markedet.",
-        ExpirationDateHelperText: "Sæt en dato, hvor din vare automatisk skal fjernes fra din butik.",
+        ExpirationDateHelperText: "Sæt en dato, hvor din vare automatisk bliver fjernet fra din butik.",
         ClearExpirationDate: "Ryd udløbsdato",
         ReturnPolicy: "Returret",
         TermsAndConditions: "Betingelser og vilkår",
@@ -7551,7 +7551,7 @@ module.exports = Backbone.Model.extend({
         Instagram: "Instagram",
         Twitter: "Twitter",
         PGPKey: "PGP-nøgle",
-        Signature: "PGP Signature", //not translated
+        Signature: "PGP-signatur",
         SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
         Snapchat: "Snapchat",
         BUYNOW: "Køb nu",
@@ -7559,11 +7559,11 @@ module.exports = Backbone.Model.extend({
         Reviews: "Anmeldelser",
         Shipping: "Forsendelse",
         Addresses: "Adresser",
-        Files: "Files", //notTranslated
+        Files: "Filer",
         NewAddress: "Ny adresse",
         CurrentAddress: "Aktuelle adresser",
         Returns: "Returret",
-        ReturnsPolicy: "Returretpolitik",
+        ReturnsPolicy: "Returpolitik",
         Ampersand: "&",
         Tags: "Tags",
         Keywords: "Nøgleord",
@@ -7571,8 +7571,8 @@ module.exports = Backbone.Model.extend({
         ShipsTo: "Sendes til",
         Optional: "Valgfri",
         Customize: "Tilpas",
-        Save: "gem",
-        Change: "Ændring",
+        Save: "Gem",
+        Change: "Ændr", // a verb, to change something. This is used on buttons.
         Changes: "Ændringer",
         SaveChanges: "Gem ændringer",
         YourName: "Dit navn",
@@ -7629,14 +7629,14 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Vælg coverbillede",
         AboutPlaceholder: "Fuld beskrivelse",
         BackgroundColor: "Baggrundsfarve",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
-        NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
+        NotificationPaymentSent: "Betaling blev sendt til",
+        NotificationOrderFor: "lagde en ordre på",
+        NotificationOrderConfirmed: "Din ordre er blevet bekræftet/afsendt",
         NotificationFollow: "følger nu dig",
         NotificationDispute: "har åbnet en ny uenighed",
-        NotificationDisputeClosed: "this dispute is closed", //not translated
-        NotificationRefund: "has refunded your order", //not translated
-        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
+        NotificationDisputeClosed: "denne uenighed er lukket",
+        NotificationRefund: "har refunderet din ordre",
+        NoticationOrderStatus: "Ordrestatus opdateret; køber notificeret",
         NotificationNewOrder: "har gjort et køb",
         NoNotifications: "Ingen notifikationer",
         WelcomeToYourPage: "Velkommen til din side!",
@@ -7667,33 +7667,33 @@ module.exports = Backbone.Model.extend({
         Purchases: "Køb",
         Sales: "Salg",
         Cases: "Sager",
-        Enter: "Indtast", // Context?
-        Discover: "Opdag",
+        Enter: "Gå ind", // this is used on a button in a tooltip asking if users want to look at the Discover section. In this context it means "Go inside" or "Go to this place"
+        Discover: "Opdagelse",
         Block: "Blokér",
         Unblock: "Afblokér",
         Blocked: "Blokeret",
-        NoBlockedList: "Du blokerer aktuelt ikke nogen.",
+        NoBlockedList: "Du blokerer ikke nogen p.t.",
         Advanced: "Avanceret",
         General: "Generelt",
-        AllItems: "All varer",
+        AllItems: "Alle varer",
         DomesticShippingPrice: "Indenlands forsendelsespris",
         InternationalShippingPrice: "International forsendelsespris",
         MinimumIs: "Minimum er",
         Title: "Titel",
         DigitalItem: "Digital vare",
         PhysicalItem: "Fysisk vare",
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
+        MinimumPrice: "Det er nødvendigt med et minimum for at sikre, at omkostninger ved Bitcoin-transaktion er dækket",
         DomesticShippingTime: "Indenlands forsendelsestid",
         InternationalShippingTime: "International forsendelsestid",
         DisplayNSFWcontent: "Vis potentielt stødende indhold?",
-        Basic: "Basal",
+        Basic: "Basalt",
         Content: "Indhold",
         StandardThemes: "Standardtemaer",
         NoPhotosAdded: "Ingen billeder tilføjet",
         Summary: "Opsummering",
         Funds: "Beløb",
         Discussion: "Diskussion",
-        Quantity: "Kvantitet",
+        Quantity: "Mængde",
         ShippingTo: "Afsendes til",
         ModeratedBy: "Modereret af",
         Submit: "Indsend",
@@ -7705,30 +7705,31 @@ module.exports = Backbone.Model.extend({
         Contributors: "Bidragere",
         Support: "Support",
         Licensing: "Licensering",
-        On: "Tænd",
-        Off: "Sluk",
+        On: "Aktiveret",
+        Off: "Deaktiveret",
         ClickToChange: "Klik for at ændre",
         NotProvided: "ikke angivet",
         NotFollowingAnyone: "Følger ingen",
         NoFollowers: "Ingen følgere",
-        NoReviews: "No reviews", //notTranslated
+        NoReviews: "Ingen anmeldelser",
         Moderator: "Moderator",
-        ActiveStore:"Store is Active", // not translated
-        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
+        ActiveStore:"Butikken er aktiv",
+        ActiveStoreDetails: "Inaktive butikker og listninger er ikke synlige for andre",
         Firewall: "Firewall",
         ServerSettings: "Serverindstillinger",
         ReadOnly: "(dette felt er skrivebeskyttet)",
-        HandleResolver: "Handle Resolver", // ?
+        HandleResolver: "Håndtering af brugernavn", // This is related to the Handle phrase. A Handle is a unique name that starts with @ that users can register with OneName. For example, "@joshob1". If a user wants to use a different web service to resolve Handles, they can put in the URL of a Handle Resolver in this field.
+        ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
-        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
-        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
+        ThisUserIsBlocked: "Denne bruger er skjult, da vedkommende er på din blokeringsliste",
+        ThisUserIsNSFW: "Denne bruger er skjult, da vedkommendes side står opført som potentielt stødende",
+        ShowBlockedUser: "Vis denne brugers side, undtaget potentielt stødende listninger",
+        ShowNSFWContent: "Vis denne brugers side, inkl. alle potentielt stødende listninger",
         ServerChangeWarningHeadline: "Advarsel: Gem dine indstillinger",
         ServerChangeWarning: "Vi anbefaler, at du laver en kopi af dine tidligere indstillinger, der vises herunder. Dit tidligere brugernavn og adgangskode vil ikke længere være tilgængelig herefter.",
         moderatorSettings: {
-          DisputeResolution: "Uenighedsløsning",
+          DisputeResolution: "Løsning af uenigheder",
           ServiceFee: "Servicegebyr",
           ServiceFeeNote: "Min: 0%, Maks: 25%"
         },
@@ -7736,50 +7737,50 @@ module.exports = Backbone.Model.extend({
         EditModerator: "Moderatorindstillinger",
         transactions: {
           OrderDetails: "Ordredetaljer",
-          ViewOnBlockchain: "View Details", //noTranslated
+          ViewOnBlockchain: "Se detajler",
           SoldBy: "Sælger",
           PurchasedBy: "Køber",
           searchByOrder: "Søg ud fra ordre-ID eller varenavn",
           sortByStatusAll: "Alle",
-          sortByStatus0: "Under køb (afventer betaling)",
-          sortByStatus1: "Klar til håndtering (fuldt ud betalt)",
+          sortByStatus0: "Køb er i gang (afventer betaling)",
+          sortByStatus1: "Klar til håndtering (betaling komplet)",
           sortByStatus2: "Bekræftet/afsendt",
           sortByStatus3: "Gennemført (betaling frigivet)",
           sortByStatus4: "Uenighed",
           OrderID: "Ordre-ID",
           OrderDate: "Ordredato",
           OrderStatus: "Ordrestatus",
-          OrderStatus0: "Under køb (afventer betaling)",
-          OrderStatus1: "Klar til håndtering (fuldt ud betalt)",
+          OrderStatus0: "Køb er i gang (afventer betaling)",
+          OrderStatus1: "Klar til håndtering (betaling komplet)",
           OrderStatus2: "Bekræftet/Afsendt",
           OrderStatus3: "Gennemført (betaling frigivet)",
           OrderStatus4: "Uenighed",
-          OrderStatusopen: "Disputed", // not translated
-          OrderStatus5: "Dispute Closed", // not translated
-          OrderStatusclosed: "Dispute Closed", // not translated
-          OrderStatus6: "Dispute Finalized",// not translated
-          OrderStatus7: "Refunded", // not translated
-          InEscrow: "- i depot",
+          OrderStatusopen: "Uenighed er i gang", //orig string: "Disputed"
+          OrderStatus5: "Uenighed lukket",
+          OrderStatusclosed: "Uenighed lukket",
+          OrderStatus6: "Uenighed færdiggjort",
+          OrderStatus7: "Refunderet",
+          InEscrow: "– i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
-          NoMessages: "No messages", //notTranslated
+          NoMessages: "Ingen beskeder",
           PaymentProtection: "Betalingsbeskyttelse",
           ShipTo: "Afsend til",
-          ViewRating: "(View Rating)", // not translated
-          ContractDetails: "Contract Details", //notTranslated
-          HideDetails: "Hide Details", //notTranslated
+          ViewRating: "(Se bedømmelse)",
+          ContractDetails: "Kontraktdetaljer",
+          HideDetails: "Skjul detaljer",
           ConfirmOrder: "Bekræft ordre",
           ReceivingAddress: "Modtagelsesadresse",
           RecievingAddressPlaceholder: "Bitcoin-adresse, du vil modtage betaling på",
           Comments: "Kommentarer",
-          CommentsPlaceHolder: "Kommentarer til ordren, om nogen",
+          CommentsPlaceHolder: "Kommentarer til ordren, hvis du har nogen",
           Shipper: "Vare afsendt af",
           ShipperPlaceholder: "Navnet på virksomheden, der afsender varen",
           TrackingNumber: "Tracking-nummer",
           TrackingNumberPlaceholder: "Varens tracking-nummer",
           EstimatedDelivery: "Estimeret levering",
           EstimatedDeliveryPlaceholder: "Estimeret dato for levering af vare",
-          URL: "File URL",
+          URL: "Fil-URL",
           URLPlaceholder: "Link til download, plan eller mere information",
           Password: "Adgangskode",
           PasswordPlaceholder: "Adgangskode til link, hvis det kræves",
@@ -7788,10 +7789,10 @@ module.exports = Backbone.Model.extend({
           Seller: "Sælger",
           Buyer: "Køber",
           Moderator: "Moderator",
-          transferReceipt: "Overførselskvittering", // Context? "Transfer a receipt" or "Receipt for transfer"?
-          copyTxid: "kopiér handels-ID",
+          transferReceipt: "Overførselskvittering", // this is the bitcoin receipt for a transfer
+          copyTxid: "Kopiér handels-ID",
           Close: "Luk",
-          FundOrder: "Financiér ordre",
+          FundOrder: "Betal ordre", // this means to fund an order by sending bitcoin to an address
           sortByDateNewest: "Efter dato, nyeste",
           sortByDateOldest: "Efter dato, ældste",
           PayPurchase: "Betal for dette køb",
@@ -7801,13 +7802,13 @@ module.exports = Backbone.Model.extend({
           TransactionReview: "Handelsbedømmelse",
           OverallRating: "Overordnet bedømmelse",
           Quality: "Kvalitet",
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
+          MatchedDescription: "Beskrivelsen passede",
+          DeliverySpeed: "Leveringstid",
           CustomerService: "Kundeservice",
           Review: "Bedøm",
           ReviewPlaceHolder: "Din bedømmelse af denne handel",
-          NoFileProvided: "No file provided", //notTranslated
-          None: "None", //notTranslated
+          NoFileProvided: "Ingen fil leveret",
+          None: "Ingen",
           NoneSent: "Ingen sendt",
           ModerationFee: "Modereringsgebyr:",
           DisputeTransaction: "Start en uenighed",
@@ -7816,9 +7817,9 @@ module.exports = Backbone.Model.extend({
           SendMessage: "Send",
           CloseDispute: "Luk uenighed",
           TotalInTransaction: "Handel:",
-          StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE", // not translated
-          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
+          StartDisputeFlag: "START UENIGHED",
+          CloseDisputeFlag: "AFSLUT UENIGHED",
+          PayoutOnlyBuyer: "Ved at lukke denne uenighed vil 100% af pengene blive returneret til køberen."
         },
         errorMessages: {
           saveError: "Data kunne ikke gemmes.",
@@ -7831,17 +7832,17 @@ module.exports = Backbone.Model.extend({
           socketError: "URL for WebSocket mislykkedes. Forbinder til sokkel med standardadressen ws://localhost:18466.",
           contractError: "Denne vare kan ikke købes.",
           sellerError: "Sælgerens server har afvist købsanmodningen. Dette kan skyldes et forbindelsesproblem.",
-          checkPurchaseData: "Tjek dine købsdata, så som kvantitet og Bitcoin-tilbagebetalingsadresse, og vær sikker på at den er gyldig. Hvis den er gyldig, så prøv igen om nogle få sekunder.",
+          checkPurchaseData: "Tjek dine købsdata, så som købsmængde og Bitcoin-tilbagebetalingsadresse, og vær sikker på at den er gyldig. Hvis den er gyldig, så prøv igen om nogle få sekunder.",
           pageUnavailable: "Denne side er utilgængelig i øjeblikket.",
           badHandle: "Det brugernavn, du indtastede, har ikke et gyldigt OpenBazaar-ID.",
           serverDown: "Serveren er blevet lukket ned",
           tooManyPhotosTitle: "For mange billeder",
-          tooManyPhotosBody: "Nogle eller alle dine billeder blev forhindret i at blive uploadet, da du ellers ville overskride det maksimalt tilladte antal.", //notTranslated
+          tooManyPhotosBody: "Nogle eller alle dine billeder blev forhindret i at blive uploadet, da du ellers ville overskride det maksimalt tilladte antal.",
         },
         aboutSection: {
           about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a>-kanal e ller på vores <a href=\"http://www.reddit.com/r/openbazaar\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar er muliggjort af et internationalt fællesskab af udviklere og frivillige, der bidrager med deres tid for at gøre handel fri. Dette er en delvis liste over folk, der har bidraget til projektet, enten gennem kode eller anden assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>Du kan hjælpe OpenBazaar på flere forskellige måder med vores mission om at gøre handel fri.</p><p>Køb og salg af varer og serviceydelser på netværket hjælper til at fællesskabet bliver større og gør platformen mere attraktiv for nye brugere. En venlig forespørgsel til eksisterende visksomheder, der modtager Bitcoin, om at sælge på platformen hjælper med at sprede kendskabet og viser efterspørgsel efter peer-to-peer-handel.</p><p>Hvis du er udvikler kan du tjekke <a href=\"https://github.com/OpenBazaar/\">vores Github</a> og se, hvor du kan hjælpe os. Ud over at hjælpe med den centrale kode håber vi, at projektets tilladelsesfri og open source tilgang betyder, at du vil udvikle nye tjenester oven på det eksisterende netværk.</p><p>Du kan også <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\">donere Bitcoin</a> til projektet, hvilket vil blive brugt til at afholde omkostninger til besøg på konferencer, at tilbyde belønninger for udvikling og promovering af OpenBazaar.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Tilmeld dig venligst vores Slack</a>, hvis du har nye idéer til OpenBazaar eller har spørgsmål til kerneudviklerne.</p>", //notTranslated
+          support: "<p>Du kan hjælpe OpenBazaar på flere forskellige måder med vores mission om at gøre handel fri.</p><p>Køb og salg af varer og serviceydelser på netværket hjælper til at fællesskabet bliver større og gør platformen mere attraktiv for nye brugere. En venlig forespørgsel til eksisterende visksomheder, der modtager Bitcoin, om at sælge på platformen hjælper med at sprede kendskabet og viser efterspørgsel efter peer-to-peer-handel.</p><p>Hvis du er udvikler kan du tjekke <a href=\"https://github.com/OpenBazaar/\">vores Github</a> og se, hvor du kan hjælpe os. Ud over at hjælpe med den centrale kode håber vi, at projektets tilladelsesfri og open source tilgang betyder, at du vil udvikle nye tjenester oven på det eksisterende netværk.</p><p>Du kan også <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\">donere Bitcoin</a> til projektet, hvilket vil blive brugt til at afholde omkostninger til besøg på konferencer, at tilbyde belønninger for udvikling og promovering af OpenBazaar.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Tilmeld dig venligst vores Slack</a>, hvis du har nye idéer til OpenBazaar eller har spørgsmål til kerneudviklerne.</p>",
           licensing: "<p>OpenBazaar er open source software, der bruger MIT-licensen. Denne licens er tilladende og er designet til at tillade folk frit at genbruge koden til andre open source projekter eller til proprietær software. Den komplette licenstekst er herunder.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -7864,8 +7865,8 @@ module.exports = Backbone.Model.extend({
         },
         nav: {
           searchPlaceholder: "Indtast et @brugernavn, OpenBazaar-ID eller #tag…",
-          myPage: "min side",
-          testMode: "Testtilstand", //notTranslated
+          myPage: "Min side",
+          testMode: "Testtilstand",
           customizePage:"Tilpas side",
           sellItem:"Ny",
           createListing:"Opret listning",
@@ -7928,9 +7929,9 @@ module.exports = Backbone.Model.extend({
           BitGoTagline: "Verdens mest sikre Bitcoin-tegnebog. Tiltroet af ledende Bitcoin-virksomheder."
         },
         softwareUpdate: {
-          updateAvailable: "OpenBazaar-opdatering tilgængelig", //notTranslated
-          installUpdate: "Installér opdatering", //notTranslated
-          dismiss: "Afvis" //notTranslated
+          updateAvailable: "OpenBazaar-opdatering er tilgængelig",
+          installUpdate: "Installér opdatering",
+          dismiss: "Afvis"
         },
         buyFlow: {
           PayForOrder: "Betal for ordre",
@@ -7961,33 +7962,33 @@ module.exports = Backbone.Model.extend({
           summaryMsg2: "Den forventede håndteringstid for denne ordre er",
           summaryMsg3: "Du kan tjekke status for din ordre på din",
           purchasesPage: "købsside",
-          returnAddress: "Returneringsadresse", // Context? BTC address? For change? For refund? Postal address?
+          returnAddress: "Refunderingsadresse", // This is the bitcoin address you enter in case a refund is issued by the vendor. They will refund your bitcoin transfer to this address.
           moderatorPaymentDisclaimer: "Betales ud fra totalbeløbet, hvis handelen ender i en uenighed.",
-          directPaymentDisclaimer: "Brug direkte betaling med forsigtighed; midler er uigenkaldelige",
+          directPaymentDisclaimer: "Brug direkte betaling med forsigtighed; pengene kan ikke trækkes tilbage!",
           paymentSent: "Betaling afsendt!",
           total: "Total"
         },
         chat: {
-          noSearchResultsFound: "Ingen resultater fundet" //notTranslated
+          noSearchResultsFound: "Ingen resultater fundet"
         },
         serverConnectModal: {
-          statusTryingToConnect: "Prøver at forbinde til din server", //notTranslated
-          statusConnected: "Forbundet", //notTranslated
-          statusFailedConnection: "Forbindelse til din server mislykkedes", //notTranslated
-          statusFailedAuthentication: "Autentificering mislykkedes", //notTranslated
-          statusTooManyAttempts: "For mange mislykkedes loginforsøg", //notTranslated
-          serverConfiguration: "Serveropsætning", //notTranslated
-          connecting: "Forbinder", //notTranslated
-          intro: "OpenBazaar er designet til at lade dig køre din server adskilt fra klienten. Som udgangspunkt vil din server køre lokalt, men dette kan du tilsidesætte herunder.", //notTranslated
-          serverIP: "Server-IP", //notTranslated
-          restApiPort: "Rest API port", //notTranslated
-          websocketApiPort: "Websocket API port", //notTranslated
-          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
-          username: "Brugernavn", //notTranslated
-          password: "Adgangskode", //notTranslated                    
-          restoreDefaults: "Gendan standardværdier", //notTranslated                    
-          saveChanges: "Gæm ændringer", //notTranslated                    
-          retry: "Prøv forbindelse igen", //notTranslated 
+          statusTryingToConnect: "Prøver at forbinde til din server",
+          statusConnected: "Forbundet",
+          statusFailedConnection: "Forbindelse til din server mislykkedes",
+          statusFailedAuthentication: "Autentificering mislykkedes",
+          statusTooManyAttempts: "For mange mislykkedes loginforsøg",
+          serverConfiguration: "Serveropsætning",
+          connecting: "Forbinder",
+          intro: "OpenBazaar er designet til at lade dig køre din server adskilt fra klienten. Som udgangspunkt vil din server køre lokalt, men dette kan du tilsidesætte herunder.",
+          serverIP: "Server-IP",
+          restApiPort: "Rest API-port",
+          websocketApiPort: "Websocket API-port",
+          heartbeatSocketApiPort: "Heartbeat sokkelport",
+          username: "Brugernavn",
+          password: "Adgangskode",
+          restoreDefaults: "Gendan standardværdier",
+          saveChanges: "Gæm ændringer",
+          retry: "Prøv forbindelse igen",
         }
       },
       {
