@@ -8431,7 +8431,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Você gostaria de criar um apelido?",
           registerNew: "Criar Novo",
           recommended: "Páginas Recomendadas para Seguir",
-          connectExisting: "Conectar Existente",
           avatar: "Escolha uma imagem de perfil",
           chooseAvatar: "Escolher Imagem de Perfil",
           discoverCallOut: "Explore as Listagens e Páginas do OpenBazaar",
