@@ -7,6 +7,7 @@ var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
+    Sortable = require('sortablejs'),
     messageModal = require('../utils/messageModal'),
     chosen = require('../utils/chosen.jquery.min.js'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
@@ -18,9 +19,6 @@ module.exports = baseVw.extend({
     'click #shippingFreeTrue': 'disableShippingPrice',
     'click #shippingFreeFalse': 'enableShippingPrice',
     'change .js-itemImageUpload': 'onImageFileChange',
-    // 'drop form': 'onFormDrop',
-    // 'dragenter form': 'onFormDragging',
-    // 'dragover form': 'onFormDragging',
     'dragover .js-photosModule': 'onPhotoDragOver',
     'dragleave .js-photosModule': 'onPhotoDragLeave',    
     'drop .js-photosModule': 'onPhotoDrop',
@@ -73,6 +71,16 @@ module.exports = baseVw.extend({
       self.setFormValues();
 
       self.$photosModule = self.$('.js-photosModule');
+
+      this.sortableImages && this.sortableImages.destroy();
+      this.sortableImages = Sortable.create(self.$('.js-subImageWrap')[0], {
+        onUpdate: function(e) {
+          var imagesArr = self.model.get('imageHashesToUpload');
+
+          imagesArr.splice(e.newIndex, 0, imagesArr.splice(e.oldIndex, 1)[0]);
+          self.model.set('imageHashesToUpload', imagesArr);
+        }
+      });
 
       setTimeout(() => {
         var editor = new MediumEditor('#inputDescription', {
@@ -207,6 +215,8 @@ module.exports = baseVw.extend({
   },
 
   onPhotoDragOver: function(e) {
+    if (!event.dataTransfer.files.length) return;
+
     this.$photosModule.addClass('dragOver');
     e.preventDefault();
   },
@@ -229,7 +239,6 @@ module.exports = baseVw.extend({
   resizeImage: function(imageFiles){
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
-        // imageFiles = Array.prototype.slice.call($imageInput[0].files, 0),
         curImages = this.model.get('combinedImagesArray'),
         maxH = 800,
         maxW = 800,
@@ -345,8 +354,8 @@ module.exports = baseVw.extend({
         if (i < subImageDivs.length){
           $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
-          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
-              .appendTo(self.$('.js-editItemSubImagesWrapper'));
+          $('<div class="itemImg itemImg-small js-editItemSubImage floatLeft" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+              .appendTo(self.$('.js-subImageWrap'));
         }
       });
       uploadMsg.addClass('hide');

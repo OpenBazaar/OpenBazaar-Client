@@ -3906,10 +3906,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0;
 }
 
-#userPage .photosModule .dropIconWrap span {
-
-}
-
 .editItemImageHolder {
   height: 168px;
   overflow: auto;
