@@ -384,15 +384,15 @@
           <div class="theme-container clearfix custCol-border borderRight borderBottom">
             <input type="radio" name="theme-selection" class="fieldItem marginBottom20" id="theme-1"
                    data-primary-color="#ba4a3f"
-                   data-secondary-color="#d94641"
+                   data-secondary-color="#cc504b"
                    data-background-color="#5E3E36"
                    data-text-color="#ffffff"
                    data-header="imgs/themes/1/header.png" />
             <label for="theme-1" class="js-homeModal-themeSelected radioLabel">
               <div class="theme-background" style="background: #5E3E36">
-                <div class="theme-global-header" style="background: #d94641"></div>
+                <div class="theme-global-header" style="background: #cc504b"></div>
                 <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div>
-                <div class="theme-nav" style="background: #d94641">
+                <div class="theme-nav" style="background: #cc504b">
                   <div class="theme-tab" style="background: #ba4a3f"></div>
                 </div>
                 <div class="theme-body" style="background: #ba4a3f"></div>
@@ -519,9 +519,9 @@
             <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
               <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
             </div>
-            <div class="cropit-image-preview rowTop10 thumbnail thumbnail-huge border1 row10"></div>
+            <div class="cropit-image-preview cropit-avatar js-onboardingAvatarPreview rowTop10 thumbnail thumbnail-huge border1 row10"></div>
             <div>
-              <input type="range" class="cropit-image-zoom-input rowTop10 row10 width100" />
+              <input type="range" class="cropit-image-zoom-input rowTop10 row10 width100 hide" />
             </div>
             <input type="file" id="onboardingAvatarInput" class="cropit-image-input hide" />
             <label for="onboardingAvatarInput" class="btn btn-txt btn-c1 btn-wide rowTop10 row20"><%= polyglot.t('UploadAvatar') %></label>
@@ -540,7 +540,7 @@
       </div>
     </div>
 
-    <div class="accordion-child accordion-inactive custCol-primary">
+    <div class="accordion-child accordion-inactive custCol-primary js-followHandles">
       <div class="bar barTxt h6 custCol-secondary custCol-text">
         <%= polyglot.t('onboarding.recommended') %> (<%= polyglot.t('Optional') %>)
         <span class="textOpacity75 fontSize14 floatRight">9 <%= polyglot.t('of') %> 10</span>
@@ -551,7 +551,7 @@
 
 
             <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border">
-              <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithobguid" checked />
+              <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithobguid" data-handle="openbazaar" checked />
               <label for="replacewithobguid" class="textOpacity1 checkboxLabel">
                 <div class="pull-left marginRight10">
                   <div class="thumbnail pull-left" style="background-image: url(imgs/openbazaar-icon-no-border.png);"></div>
@@ -567,7 +567,7 @@
             </li>
 
             <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border">
-              <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithtemplatesguid" checked />
+              <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithtemplatesguid" data-handle="themes" checked />
               <label for="replacewithtemplatesguid" class="textOpacity1 checkboxLabel">
                 <div class="pull-left marginRight10">
                   <div class="thumbnail pull-left" style="background-image: url(imgs/themes-icon.png);"></div>
@@ -583,7 +583,7 @@
             </li>
 
             <li class="rowItem paddingLeft5 paddingTop20 paddingBottom20 borderBottom custCol-border">
-              <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithob1guid" checked />
+              <input class="fieldItem pull-left marginTop12" type="checkbox" id="replacewithob1guid" data-handle="ob1" checked />
               <label for="replacewithob1guid" class="textOpacity1 checkboxLabel">
                 <div class="pull-left marginRight10">
                   <div class="thumbnail pull-left" style="background-image: url(imgs/ob1-icon.png);"></div>

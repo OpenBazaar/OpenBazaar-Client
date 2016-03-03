@@ -9,6 +9,10 @@ module.exports = Backbone.Collection.extend({
 
   model: ChatConversationMd,
 
+  comparator: function(convo) {
+    return -convo.get('timestamp');
+  },  
+
   initialize: function(options) {
   }
 });

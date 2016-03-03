@@ -104,7 +104,7 @@ var start_local_server = function() {
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
     subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug', '-p', random_port], {
-      detach: true,
+      detach: false,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
 
@@ -129,6 +129,9 @@ var start_local_server = function() {
     });
     subpy.unref();
   }
+  if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
+       process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
+   }
 };
 
 // Check if we need to kick off the python server-daemon (Desktop app)
@@ -160,13 +163,7 @@ app.on('before-quit', function (e) {
     console.log('Closing Application');
     if(launched_from_installer) {
       console.log('Shutting down server daemon');
-      request('http://localhost:18469/api/v1/shutdown', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          console.log('Shutting down server');
-        } else {
-          console.log('Server does not seem to be running.');
-        }
-      });
+      subpy.kill();
     }
 });
 
@@ -324,7 +321,8 @@ app.on('ready', function() {
   }
 
   // Open the devtools.
-  mainWindow.openDevTools({detach: true});
+  // Uncomment if you want tools to open on startup
+  // mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -376,32 +374,16 @@ app.on('ready', function() {
 });
 
 app.on('open-url', function(event, uri) {
+  var split_uri = uri.split('://');
+  uri = split_uri[1];
 
-  // uri should be in format ob:route delimited by colons
-  // eg: ob:user:GUID
-  //     ob:user:GUID:store
-  //     ob:user:GUID:item:ITEM_ID
-  var split_uri = uri.split(':');
-  if(split_uri.length > 1 && split_uri[0] == "ob") {
-    switch(split_uri[1]) {
-      case "user":
-        open_url = "#userPage/" + split_uri[2];
-        if(split_uri[3] == "store") {
-          open_url += "/store";
-        } else if(split_uri[3] == "item") {
-          open_url += "/item" + split_uri[4];
-        }
+  global.externalRoute = uri;
 
-        break;
-    }
-  }
-  console.log(open_url);
-
-  // If application was not open store in localStorage
-  if(mainWindow) {
-    mainWindow.webContents.executeJavaScript("Backbone.history.navigate('" + open_url + "', {trigger: true});");
-  }
+  if (mainWindow) {
+    // if our app router is fully loaded it will process the event sent below, otherwise
+    // the global.externalRoute will be used
+    mainWindow.webContents.send('external-route', uri);
+  }  
 
   event.preventDefault();
 });
-

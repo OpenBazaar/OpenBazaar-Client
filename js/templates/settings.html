@@ -243,7 +243,7 @@
                        id="handle"
                        placeholder="@john"
                        class="fieldItem"
-                       pattern="@[a-zA-Z0-9]+"
+                       pattern="@[a-zA-Z0-9_]+"
                        value="<%= ob.page.profile.temp_handle || ob.page.profile.handle %>">
                 <% if(ob.page.profile.temp_handle && !ob.page.profile.handle){ %>
                 <a class="positionTopRight padding10 js-externalLink" href="https://onename.com/">
@@ -302,9 +302,9 @@
                   <div class="statusBar navBar fadeOut positionAbsolute js-avatarLoading">
                     <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
                   </div>
-                  <div class="cropit-image-preview js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
+                  <div class="cropit-image-preview cropit-avatar js-settingsAvatarPreview rowTop20 thumbnail thumbnail-huge box-border pull-left row20 marginLeft12"></div>
                   <div>
-                    <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12" />
+                    <input type="range" class="cropit-image-zoom-input rowTop20 row20  marginLeft12 hide" />
                   </div>
                   <input type="file" id="settingsAvatarInput" class="cropit-image-input hide" />
                   <label for="settingsAvatarInput" class="btn btn-txt rowTop20 marginLeft12 row20 color-secondary custCol-secondary"><%= polyglot.t('NewAvatar') %></label>
@@ -440,6 +440,22 @@
               </div>
             </div>
 
+            <div class="flexRow js-settingsSignatureRow" style="overflow: hidden; height: 0; transition: height 1s;">
+              <div class="flexCol-3 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="signature"><%= polyglot.t('Signature') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <input name="signature"
+                       type="text"
+                       id="signature"
+                       placeholder="<%= polyglot.t('Signature') %>"
+                       class="fieldItem">
+              </div>
+            </div>
+
             <div class="flexRow borderBottom custCol-border marginTop20">
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('About') %></h3>
             </div>
@@ -448,6 +464,9 @@
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="about"><%= polyglot.t('About') %></label>
+                  <div>
+                    <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
+                  </div>
                 </div>
               </div>
 
@@ -456,7 +475,7 @@
                     name="about"
                     id="about"
                     rows="10"
-                    class="fieldItem-textarea"
+                    class="fieldItem-textarea height130"
                     placeholder="<%= polyglot.t('AboutPlaceholder') %>"><%= ob.page.profile.about %></textarea>
               </div>
             </div>
@@ -478,15 +497,15 @@
                     <input type="radio" name="settings-theme-selection" class="js-settingsThemeSelection fieldItem marginBottom20"
                            id="settings-theme-1"
                            data-primary-color="#ba4a3f"
-                           data-secondary-color="#d94641"
+                           data-secondary-color="#cc504b"
                            data-background-color="#5E3E36"
                            data-text-color="#ffffff"
                            data-cover-photo="imgs/themes/1/header.png" />
                     <label for="settings-theme-1" class="radioLabel">
                       <div class="theme-background" style="background: #5E3E36">
-                        <div class="theme-global-header" style="background: #d94641"></div>
+                        <div class="theme-global-header" style="background: #cc504b"></div>
                         <div class="theme-header" style="background: url(imgs/themes/1/header-thumbnail.png); background-size: cover"></div> 
-                        <div class="theme-nav" style="background: #d94641">
+                        <div class="theme-nav" style="background: #cc504b">
                           <div class="theme-tab" style="background: #ba4a3f"></div>
                         </div>
                         <div class="theme-body" style="background: #ba4a3f"></div> 
@@ -610,7 +629,7 @@
               </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
-                <input name="primaryColor"
+                <input name="primary_color"
                        type="text"
                        id="primaryColor"
                        class="fieldItem"
@@ -627,7 +646,7 @@
               </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
-                <input name="secondaryColor"
+                <input name="secondary_color"
                        type="text"
                        id="secondaryColor"
                        class="fieldItem"
@@ -645,7 +664,7 @@
               </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
-                <input name="backgroundColor"
+                <input name="background_color"
                        type="text"
                        id="backgroundColor"
                        class="fieldItem"
@@ -662,7 +681,7 @@
               </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
-                <input name="textColor"
+                <input name="text_color"
                        type="text"
                        id="textColor"
                        class="fieldItem"
@@ -685,19 +704,26 @@
               <h3 class="padding15 margin0 fontWeight500"><%= polyglot.t('Basic') %></h3>
             </div>
 
-            <div class="flexRow TODO">
+            <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
                   <label>
-                    <%= polyglot.t('Visibility') %>
+                    <%= polyglot.t('ActiveStore') %>
                   </label>
+                  <div>
+                    <label class="textSize11px txt-unleaded">
+                      <%= polyglot.t('ActiveStoreDetails') %>
+                    </label>
+                  </div>
                 </div>
               </div>
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem marginLeft6">
-                  <input disabled type="radio" class="fieldItem" id="store_active_on" name="store_active" value="true" checked /><label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
-                  <input disabled type="radio" class="fieldItem" id="store_active_off" name="store_active" value="false"/><label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
+                  <input type="radio" class="fieldItem" id="store_active_on" name="vendor" value="true" checked />
+                  <label for="store_active_on" class="radioLabel"><%= polyglot.t('On') %></label>
+                  <input type="radio" class="fieldItem" id="store_active_off" name="vendor" value="false"/>
+                  <label for="store_active_off" class="radioLabel"><%= polyglot.t('Off') %></label>
                 </div>
               </div>
             </div>
@@ -1099,7 +1125,27 @@
                 </div>
               </div>
 
-            </div> 
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
+                  <label>
+                    <%= polyglot.t('NoFancyStyles') %>
+                  </label>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem">
+                  <input type="radio" class="fieldItem" id="fancyStylesYes" name="notFancy" value="true" /><label for="fancyStylesYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                  <input type="radio" class="fieldItem" id="fancyStylesNo" name="notFancy" value="false" checked/><label for="fancyStylesNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                  <div class="marginLeft10 textSize11px txt-fade pull-right"><%= polyglot.t('NoFancyStylesWarning') %></div>
+                </div>
+              </div>
+
+            </div>
 
             <div class="flexRow">
 

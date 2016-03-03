@@ -9,7 +9,7 @@ var __ = require('underscore'),
     NotificationsCl = require('../collections/notificationsCl.js'), 
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
-    adminPanelView = require('../views/adminPanelVw'),
+    //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
     remote = require('remote'),
     messageModal = require('../utils/messageModal.js');
@@ -78,6 +78,9 @@ module.exports = baseVw.extend({
     }
 
     this.notificationsCl = new NotificationsCl();
+    this.notificationsCl.comparator = function(notif) {
+      return -notif.get("timestamp");
+    };
     this.notificationsFetch = this.notificationsCl.fetch();
 
     this.listenTo(this.notificationsCl, 'update', (cl, resp, options) => {
@@ -209,15 +212,20 @@ module.exports = baseVw.extend({
           .html(self.notificationsVw.render().el);
 
       //add the admin panel
+      /*
       self.adminPanel && self.adminPanel.remove();
       self.adminPanel = new adminPanelView({model: self.model});
       self.registerChild(self.adminPanel);
+      */
 
       self.addressInput = self.$el.find('.js-navAddressBar');
       self.statusBar = self.$el.find('.js-navStatusBar');
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
+        
+        text = text ? 'ob://' + text : '';
+        self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
       });
@@ -426,63 +434,33 @@ module.exports = baseVw.extend({
   },
 
   addressBarKeyup: function(e){
-    var barText = this.addressInput.val();
+    var barText = this.addressInput.val(),
+        sliced;
+
     //detect enter key
     if (e.keyCode == 13){
-      this.addressBarProcess(barText);
+      if (barText.startsWith('ob://')) {
+        sliced = barText.length > 5 ? barText.slice(5) : '';
+        sliced && this.addressBarProcess(sliced);
+      } else {
+        this.addressBarProcess(barText);  
+      }
     } else {
       this.closeStatusBar();
     }
   },
 
   addressBarProcess: function(addressBarText){
-    var guid = "",
-        handle = "",
-        state = "",
-        itemHash = "",
-        addressTextArray = addressBarText.replace(/ /g, "").split("/");
-
-    state = addressTextArray[1] ? "/" + addressTextArray[1] : "";
-    itemHash = addressTextArray[2] ? "/" + addressTextArray[2] : "";
-
-    if(addressTextArray[0].charAt(0) == "@"){
-      // user entered a handle
-      handle = addressTextArray[0].replace('@', '');
-      this.processHandle(handle, state, itemHash);
-    } else if(!addressTextArray[0].length){
-      // user trying to go back to discover
-      Backbone.history.navigate('#home', {trigger:true});
-    } else if(addressTextArray[0].length === 40){
-      // user entered a guid
-      guid = addressTextArray[0];
-      Backbone.history.navigate('#userPage/' + guid + state + itemHash, {trigger:true});
-    } else if(addressTextArray[0].charAt(0) == "#"){
-      // user entered a search term
-      Backbone.history.navigate('#home/products/' + addressTextArray[0].replace('#', ''), {trigger:true});
-    } else {
-      //user entered text that doesn't match a known pattern, assume it's a product search
-      Backbone.history.navigate('#home/products/' + addressTextArray[0], {trigger:true});
-    }
-  },
-
-  processHandle: function(handle, state, itemHash){
-    if(handle){
-      $.ajax({
-        url: this.model.get('resolver') + "/v2/users/" + handle,
-        dataType: "json"
-      }).done(function(resolverData){
-        if(resolverData[handle].profile && resolverData[handle].profile.account){
-          var account = resolverData[handle].profile.account.filter(function (accountObject) {
-            return accountObject.service == "openbazaar";
-          });
-          Backbone.history.navigate('#userPage/' + account[0].identifier + state + itemHash, {trigger: true});
-        } else {
-          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
-        }
-      }).fail(function(jqXHR, status, errorThrown){
-        messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
-      });
-    }
+    // todo: show small spinnerin address bar, since handle check
+    // could take a little bit of time. Also, cancel request
+    // if new address text comes before another has been processed.
+    app.router.translateRoute(addressBarText).done((route) => {
+      Backbone.history.navigate(route, {trigger:true});
+    }).fail((reason) => {
+      if (reason === 'bad-handle') {
+        this.addressInput.val(this._lastSetAddressBarText || '');
+      }
+    });
   },
 
   showStatusBar: function(msgText){

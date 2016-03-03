@@ -35,14 +35,14 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
   }
 
   customStyleTag.innerHTML +=
-      "#ov1 #userPage .custCol-primary-light { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1);  background-color: " + shadeColor2(primaryColor, 0.05) + ";}" +
-      "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primaryColor + ";}" +
-      "#ov1 #userPage .btn-tab.active { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + primaryColor + ";}" +
+      "#ov1 #userPage .custCol-primary-light { background-color: " + shadeColor2(primaryColor, 0.05) + ";}" +
+      "#ov1 #userPage .custCol-primary, #ov1 #userPage .chosen-drop, #ov1 #userPage .no-results { background: " + primaryColor + ";}" +
+      "#ov1 #userPage .btn-tab.active { background-color: " + primaryColor + ";}" +
       "#ov1 #userPage .btn-tab .pill { background-color: " + primaryColor + ";}" +
       "#ov1 #userPage .btn-tab.active .pill { background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .btn:active { -webkit-box-shadow: inset 0px 0px 6px 0px " + shadeColor2(primaryColor, -0.35) +  ";}" +
       "#ov1 #userPage .btn-tab:active { -webkit-box-shadow: none;}" +
-      "#ov1 #userPage .custCol-secondary { transition: background-color .3s cubic-bezier(0, 0, 0.0, 1); background-color: " + secondaryColor + ";}" +
+      "#ov1 #userPage .custCol-secondary { background-color: " + secondaryColor + ";}" +
       "#ov1 #userPage { background-color: " + backgroundColor + ";}" + 
       "#ov1 #userPage .custCol-border-secondary { border-color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-border-primary { border-color: " + primaryColor + ";}" +
@@ -63,7 +63,8 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage input::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + textColor + ";}" +
-      "#ov1 #userPage .mainContainer .txtFieldWrapper:before { color: " + textColor + ";}" +
+      "#ov1 #userPage .mainContainer { box-shadow: 0px 10px 20px " + shadeColor2(backgroundColor, -0.3)  + ";  }" +
+      "#ov1 #userPage .mainContainer .txtFieldWrapper:before { color: " + textColor + ";  }" +
       "#ov1 #userPage .container .txtField { color: " + textColor + ";}" +
       "#ov1 #userPage .custCol-font-secondary { color: " + secondaryColor + ";}" +
       "#ov1 #userPage .custCol-text::-webkit-input-placeholder { color: " + textColor + ";}" +
@@ -73,7 +74,8 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + secondaryColor + "}" +
       "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-single, #ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li { color:" + textColor + " }" +
       "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li.highlighted { background:" + secondaryColor + " }" +
-      "#ov1 #userPage .custCol-primary-darken { background: " + shadeColor2(primaryColor, -0.35) + ";}" +
+      "#ov1 #userPage .custCol-primary-darken { background: " + shadeColor2(primaryColor, -0.15) + ";}" +
+      "#ov1 #userPage .custCol-secondary-darken { background: " + shadeColor2(secondaryColor, -0.15) + ";}" +
       "#ov1 #userPage .custCol-text, #ov1 #userPage .search-field input { color: " + textColor + ";}" +
       "#ov1 #userPage .modal-opaque { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.90);}" +
       "#ov1 #userPage .fieldItem:focus , #ov1 #userPage .fieldItem-textarea:focus { border: 2px solid " + shadeColor2(primaryColor, 0.15) + ";}" +
@@ -81,6 +83,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .customThemeScrollbar::-webkit-scrollbar-thumb { background: " + shadeColor2(primaryColor, 0.25) + ";}" +
       "#ov1 #userPage .user-page-header-slim-bg { box-shadow: inset 0px -120px 112px -52px rgba(" + opaque1.r + ", " + opaque1.g + ", " + opaque1.b + ", .65);}" +
       "#ov1 #userPage .custCol-background { background-color: " + backgroundColor + ";}" +
+      "#ov1 #userPage .modal-childMain { box-shadow: 0px 0px 15px " + shadeColor2(backgroundColor, -0.15)  + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
     // Medium Editor stuffs

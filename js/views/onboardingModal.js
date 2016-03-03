@@ -3,8 +3,10 @@
 var Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
     cropit = require('../utils/jquery.cropit'),
+    app = require('../App').getApp(),    
     baseModal = require('./baseModal'),
     messageModal = require('../utils/messageModal.js'),
+    languagesModel = require('../models/languagesMd'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
     languageListView = require('../views/languageListVw'),
@@ -19,9 +21,6 @@ module.exports = baseModal.extend({
     'click .js-homeModal-currencySelect': 'currencySelect',
     'click .js-homeModal-languageSelect': 'languageSelect',
     'click .js-homeModal-timeSelect': 'timeSelect',
-    'click .js-homeModal-newHandle': 'newHandle',
-    'click .js-homeModal-existingHandle': 'existingHandle',
-    'click .js-homeModal-cancelHandle': 'cancelHandle',
     'click .js-accordionNext': 'accNext',
     'click .js-accordionPrev': 'accPrev',
     'keypress .js-accordionNext': 'accNextKeypress',
@@ -43,6 +42,20 @@ module.exports = baseModal.extend({
     this.$document = $(document).on('focus', this.docFocusHandler);
     this.$el.attr('tabIndex', 0);
     this.$loadingModal = $('.js-loadingModal');
+    this.languages = new languagesModel();
+
+    // pre-select lauguage.
+    var localLanguage = window.navigator.language;
+    var localLanguageFound = false;
+    var languageList = this.languages.get('languages');
+    for(var i in languageList) {
+      if(languageList[i].langCode == localLanguage) {
+        localLanguageFound = true;
+        break;
+      }
+    }
+    localLanguage = localLanguageFound ? localLanguage : "en-US";
+    this.model.set('language', localLanguage);
 
     this.listenTo(self.model, 'change:language', function() {
       self.render();
@@ -55,11 +68,15 @@ module.exports = baseModal.extend({
     this.$el.removeClass('hide');
   },
 
+  loadingOn: function() {
+    this.$loadingModal.removeClass('hide')
+      .css('z-index', 99999);
+    this.$el.addClass('hide');
+  },  
+
   open: function() {
     if (!this._accordianReady) {
-      this.$loadingModal.removeClass('hide')
-        .css('z-index', 99999999999);
-      this.$el.addClass('hide');
+      this.loadingOn();
     }
 
     baseModal.prototype.open.apply(this, arguments);
@@ -91,11 +108,9 @@ module.exports = baseModal.extend({
 
   currencySelect: function(e){
     var targ = $(e.currentTarget);
-    //var crcy = targ.attr('data-name');
     var ccode = targ.attr('data-code');
     this.$('.js-homeModal-currencyList').find('input[type=radio]').prop("checked", false);
     targ.find('input[type=radio]').prop("checked", true);
-    //this.model.set('currency', crcy);
     this.model.set('currency_code', ccode);
   },
 
@@ -116,7 +131,8 @@ module.exports = baseModal.extend({
     var countryList,
         currencyList,
         timeList,
-        languageList;
+        languageList,
+        self = this;
 
     this._accordianReady = true;
     this.loadingOff();
@@ -137,9 +153,18 @@ module.exports = baseModal.extend({
     });
 
     this.$el.find('#image-cropper').cropit({
+      $preview: self.$('.js-onboardingAvatarPreview'),
+      $fileInput: self.$('#onboardingAvatarInput'),
       smallImage: "stretch",
       exportZoom: 1.33,
       maxZoom: 5,
+      onImageLoading: function(){
+        self.$('.cropit-image-zoom-input').removeClass('hide');
+        self.$el.find('.js-avatarLoading').removeClass('fadeOut');
+      },
+      onImageLoaded: function(){
+        self.$el.find('.js-avatarLoading').addClass('fadeOut');
+      },
       onFileReaderError: function(data){console.log(data);},
       onImageError: function(errorObject, errorCode, errorMessage) {
         console.log(errorObject);
@@ -232,13 +257,14 @@ module.exports = baseModal.extend({
       this.guidStillCreatingModal && guidStillCreatingModal.remove();
       this.guidStillCreatingModal = new guidStillCreatingModal();
       this.guidStillCreatingModal.render().open();
+    } else {
+      this.loadingOn();
     }
 
     guidCreation.done(function() {
       if (self.isRemoved()) return;
 
       self._settingsDone(e);
-      self.guidStillCreatingModal && self.guidStillCreatingModal.remove();
     });
   },
 
@@ -247,9 +273,10 @@ module.exports = baseModal.extend({
         server = this.model.get('serverUrl'),
         profileFormData = new FormData(),
         settingsFormData = new FormData(),
-        avatarFormData = new FormData(),
-        avatarUpload = {},
-        bannerUpload;
+        bannerUpload = $.Deferred(),
+        avatarUpload = $.Deferred(),
+        followHandles = [];
+
 
     if(this.$('textarea#aboutInput').val() != ""){
         self.model.set('short_description', this.$('textarea#aboutInput').val());
@@ -276,6 +303,9 @@ module.exports = baseModal.extend({
       self.model.set('background_color', backgroundColor);
     }
 
+    var nsfwVal = this.$("input[name='nsfw']:checked").val();
+    this.model.set('nsfw', nsfwVal);
+
     $.each(this.model.attributes,
         function(i,el) {
             if(i == "country") {
@@ -289,19 +319,8 @@ module.exports = baseModal.extend({
         }
     );
 
-    var imageURI = this.$('#image-cropper').cropit('export', {
-      type: 'image/jpeg',
-      quality: 0.75,
-      originalSize: false
-    });
-
-    if(imageURI) {
-      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, "");
-      avatarFormData.append('image', imageURI);
-    }
-
     var submit = function() {
-      $.ajax({
+      return $.ajax({
         type: "POST",
         url: server + "settings",
         contentType: false,
@@ -341,96 +360,46 @@ module.exports = baseModal.extend({
           console.log(errorThrown);
         }
       });
-
     };
-
-    //Lets upload the images first to get the hashes
-    if(imageURI) {
-      avatarUpload = $.ajax({
-        type: "POST",
-        url: server + "upload_image",
-        contentType: false,
-        processData: false,
-        data: avatarFormData,
-        dataType: "JSON",
-        success: function(data) {
-          var img_hash = data.image_hashes[0];
-          if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
-            profileFormData.append('avatar', img_hash);
-          }
-        },
-        error: function(jqXHR, status, errorThrown){
-          console.log(jqXHR);
-          console.log(status);
-          console.log(errorThrown);
-        }
-      });
-    }
-
-    var bannerUpload = function() {
-      var deferred = $.Deferred(),
-          xhr = new XMLHttpRequest();
-
-      if (header) {
-        xhr.open('GET', header, true); 
-        xhr.responseType = 'blob';
-        
-        xhr.onload = function (e) {
-          var reader = new FileReader(),
-              file = this.response;
-          
-          reader.onload = function(event) {
-            var res = event.target.result,
-                bannerFormData = new FormData();
-
-            bannerFormData.append('image', res.replace(/^data:image\/(png|jpeg);base64,/, ''));
-
-            bannerUpload =  $.ajax({
-              type: 'POST',
-              url: server + 'upload_image',
-              contentType: false,
-              processData: false,
-              data: bannerFormData,
-              dataType: 'JSON',
-              success: function(data) {
-                var img_hash = data.image_hashes[0];
-
-                if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
-                  profileFormData.append('header', img_hash);
-                }
-
-                deferred.resolve();
-              },
-              error: function(jqXHR, status, errorThrown){
-                console.log(jqXHR);
-                console.log(status);
-                console.log(errorThrown);
-                deferred.reject();
-              }
-            });
-          }
-          
-          reader.readAsDataURL(file)
-        };
-
-        xhr.onerror = function (e) {
-          console.log(e);
-          deferred.reject();
-        }
-
-        xhr.send();
-      } else {
-        deferred.reject();
-      }
-
-      return deferred.promise();
-    };
-
-    $.when(bannerUpload(), avatarUpload).always((banner, avatar) => {
-      submit();
+   
+    var imageURI = this.$('#image-cropper').cropit('export', {
+      type: 'image/jpeg',
+      quality: 0.75,
+      originalSize: false
     });
 
-    this.close();
+    if (header) {
+      this.bannerUpload(header).done((imgHash) => {
+        profileFormData.append('header', imgHash);
+      }).always(() => bannerUpload.resolve());
+    } else {
+      bannerUpload.resolve();
+    }
+    
+    if (imageURI) {
+      imageURI = imageURI.replace(/^data:image\/(png|jpeg);base64,/, '');
+
+      this.avatarUpload(imageURI).done((imgHash) => {
+        profileFormData.append('avatar', imgHash);
+      }).always(() => avatarUpload.resolve());
+    } else {
+      avatarUpload.resolve();
+    }
+
+    this.$('.js-followHandles [data-handle]:checked').each(function(e) {
+      followHandles.push($(this).data('handle'));
+    });
+
+    $.when(
+      bannerUpload,
+      avatarUpload
+    ).always(() => {
+      submit().always(() => {
+        if (followHandles.length) {
+          this.postFollowing(followHandles);
+        }
+      });
+    });
 
     new Notification(window.polyglot.t('WelcomeToYourPage'));
 
@@ -438,6 +407,156 @@ module.exports = baseModal.extend({
     this.notifcationSound = document.createElement('audio');
     this.notifcationSound.setAttribute('src', './audio/notification.mp3');
     this.notifcationSound.play();
+  },
+
+  postFollowing: function(followers) {
+    var deferred = $.Deferred(),
+        failed = 0,
+        succeeded = 0;
+
+    if (!followers || !__.isArray(followers) || !followers.length) {
+      throw new Error('Please provide a followers array with at least on handle to follow.');
+    }
+
+    followers.forEach((follower, index) => {
+      app.getGuid(follower).done((guid) => {
+        $.ajax({
+          url: this.model.get('serverUrl') + 'follow',
+          type: 'POST',
+          dataType: 'JSON',
+          data: {
+            guid: guid
+          }          
+        }).fail(() => {
+          failed ++;
+
+          if (failed + succeeded === followers.length) {
+            failed ? deferred.reject() : deferred.resolve();
+          }
+
+          console.log(jqXHR);
+          console.log(status);
+          console.log(errorThrown);
+        }).done(function(data) {
+          if (data.success) {
+            succeeded++;
+          } else {
+            failed++;
+            console.warn(`Unable to set ${follower} as a follower because: ${data.reason}`);
+          }
+
+          if (failed + succeeded === followers.length) {
+            failed ? deferred.reject() : deferred.resolve();
+          }          
+        });
+      }).fail((jqXHR, status, errorThrown) => {
+        failed++;
+
+        if (failed + succeeded === followers.length) {
+          failed ? deferred.reject() : deferred.resolve();
+        }
+
+        console.warn(`Unable to obtain a guid for handle: ${follower}`);
+      });
+    });
+
+    return deferred.promise();
+  },
+
+  avatarUpload: function(imgData) {
+    var formData = new FormData(),
+        deferred = $.Deferred();
+
+    if (!imgData) {
+      throw new Error('Please provide the imgData.');
+    }
+
+    formData.append('image', imgData);
+
+    $.ajax({
+      type: 'POST',
+      url: this.model.get('serverUrl') + 'upload_image',
+      contentType: false,
+      processData: false,
+      data: formData,
+      dataType: 'JSON',
+      success: function(data) {
+        var img_hash = data.image_hashes[0];
+
+        if(data.success === true && img_hash !== 'b472a266d0bd89c13706a4132ccfb16f7c3b9fcb' && img_hash.length == 40) {
+          deferred.resolve(img_hash)
+        } else {
+          deferred.reject();
+        }
+      },
+      error: function(jqXHR, status, errorThrown){
+        console.log(jqXHR);
+        console.log(status);
+        console.log(errorThrown);
+      }
+    });
+
+    return deferred.promise();
+  },
+
+  bannerUpload: function(bannerPath) {
+    var deferred = $.Deferred(),
+        xhr = new XMLHttpRequest(),
+        self = this;
+
+    if (!bannerPath) {
+      throw new Error('Please provide the bannerPath.');
+    }        
+
+    xhr.open('GET', bannerPath, true); 
+    xhr.responseType = 'blob';
+    
+    xhr.onload = function (e) {
+      var reader = new FileReader(),
+          file = this.response;
+      
+      reader.onload = function(event) {
+        var res = event.target.result,
+            bannerFormData = new FormData();
+
+        bannerFormData.append('image', res.replace(/^data:image\/(png|jpeg);base64,/, ''));
+
+        $.ajax({
+          type: 'POST',
+          url: self.model.get('serverUrl') + 'upload_image',
+          contentType: false,
+          processData: false,
+          data: bannerFormData,
+          dataType: 'JSON',
+          success: function(data) {
+            var img_hash = data.image_hashes[0];
+
+            if(data.success === true && img_hash !== "b472a266d0bd89c13706a4132ccfb16f7c3b9fcb" && img_hash.length == 40) {
+              deferred.resolve(img_hash);
+            } else {
+              deferred.reject();
+            }
+          },
+          error: function(jqXHR, status, errorThrown){
+            console.log(jqXHR);
+            console.log(status);
+            console.log(errorThrown);
+            deferred.reject();
+          }
+        });
+      }
+      
+      reader.readAsDataURL(file)
+    };
+
+    xhr.onerror = function (e) {
+      console.log(e);
+      deferred.reject();
+    }
+
+    xhr.send();
+
+    return deferred.promise();
   },
 
   settingsDoneKeypress: function(e) {
@@ -458,7 +577,9 @@ module.exports = baseModal.extend({
       // pre-select timezone
       var timeZoneOffset = new Date().getTimezoneOffset();
       timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
-      self.$("[id*='" + timeZoneOffset + "']").prop('checked', true);
+      var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
+      selectedTimeZone.prop('checked', true);
+      self.model.set('time_zone', selectedTimeZone.val());
 
       // select a random theme
       $themeInputs = self.$('[name=theme-selection]');
@@ -494,6 +615,7 @@ module.exports = baseModal.extend({
   },
 
   remove: function() {
+    this.loadingOff();
     this.$document.off('focus', this.docFocusHandler);
     this.guidStillCreatingModal && this.guidStillCreatingModal.remove();
     baseModal.prototype.remove.apply(this, arguments);

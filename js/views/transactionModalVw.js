@@ -27,7 +27,11 @@ module.exports = baseVw.extend({
     'click .js-fundsTab': 'clickFundsTab',
     'click .js-discussionTab': 'clickDiscussionTab',
     'click .js-showConfirmForm': 'showConfirmForm',
+    'click .js-hideConfirmForm': 'hideConfirmForm',
+    'click .js-showFeedbackRating': 'showFeedbackRating',
+    'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
+    'click .js-completeOrderHide': 'completeOrderHide',
     'click .js-confirmOrder': 'confirmOrder',
     'click .js-completeOrder': 'completeOrder',
     'click .js-copyIncommingTx': 'copyTx',
@@ -46,8 +50,12 @@ module.exports = baseVw.extend({
     //'click .js-refundTransaction': 'showRefundOrder',
     //'click .js-refundOrder': 'refundOrder',
     'click .js-refundTransaction': 'refundOrder',
+    'focus .js-transactionDiscussionSendText': 'highlightInput',
+    'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput'
+    'blur textarea': 'validateInput',
+    'keydown #transactionDiscussionSendText': 'onKeydownDiscussion',
+    'keyup #transactionDiscussionSendText': 'onKeyupDiscussion'
   },
 
   initialize: function (options) {
@@ -123,7 +131,6 @@ module.exports = baseVw.extend({
 
   render: function () {
     var self = this;
-    console.log(this.model.attributes);
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
 
@@ -147,18 +154,33 @@ module.exports = baseVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.notification && data.notification.order_id == this.orderID && data.notification.type == "payment received" && this.status == 0){
-      this.status = 1;
+    if(data.notification && data.notification.order_id == this.orderID){
+      switch(data.notification.type){
+        case "payment received":
+          this.status = 1;
+          this.tabState = "summary";
+          break;
+        case "order confirmation":
+          this.status = 2;
+          this.tabState = "summary";
+          break;
+        /* //this notification is not sent yet by the server
+        case "payment released":
+          this.status = 3;
+          this.tabState = "summary";
+          break;
+          */
+      }
       this.getData();
     } else if(data.message && data.message.subject == this.orderID){
       var messageModel = new Backbone.Model(data.message);
       this.discussionCol.add(messageModel);
-      if(data.message.message_type = "DISPUTE_OPEN"){
+      if(data.message.message_type == "DISPUTE_OPEN"){
         this.status = 4;
         this.tabState = "discussion";
         this.getData();
       }
-      if(data.message.message_type = "DISPUTE_CLOSE"){
+      if(data.message.message_type == "DISPUTE_CLOSE"){
         this.status = 5;
         this.tabState = "discussion";
         this.getData();
@@ -181,13 +203,13 @@ module.exports = baseVw.extend({
 
   showContract: function(){
     console.log("show contract")
-    this.$('.js-transactionsContractHolder').fadeIn(300);
+    this.$('.js-transactionsContractHolder').addClass('bottom0');
     this.$('.js-transactionShowContract').addClass('hide');
     this.$('.js-transactionHideContract').removeClass('hide');
   },
 
   hideContract: function(){
-    this.$('.js-transactionsContractHolder').fadeOut(300);
+    this.$('.js-transactionsContractHolder').removeClass('bottom0');
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-transactionHideContract').addClass('hide');
   },
@@ -209,6 +231,14 @@ module.exports = baseVw.extend({
     this.state = state;
   },
 
+  highlightInput: function(e) {
+    this.$('.js-discussionForm').addClass('custCol-border').removeClass('custCol-border-secondary');
+  },
+
+  blurInput: function(e) {
+    this.$('.js-discussionForm').removeClass('custCol-border').addClass('custCol-border-secondary');
+  },
+
   validateInput: function(e) {
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
@@ -228,10 +258,28 @@ module.exports = baseVw.extend({
 
   clickDiscussionTab: function(){
     this.setState("discussion");
+    this.$('.js-transactionDiscussionSendText').focus();
   },
 
+  hideConfirmForm: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-transactionsConfirmOrderHolder').removeClass('bottom0');
+  },
+  
   showConfirmForm: function(){
-    this.setState("confirm");
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-transactionsConfirmOrderHolder').addClass('bottom0');
+    this.$("#transactionConfirmForm input:text").first().focus();
+  },
+
+  showFeedbackRating: function(){
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-transactionFeedback').addClass('bottom0');
+  },
+
+  hideFeedbackRating: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-transactionFeedback').removeClass('bottom0');
   },
 
   showRefundOrder: function(){
@@ -239,7 +287,13 @@ module.exports = baseVw.extend({
   },
 
   showCompleteForm: function(){
-    this.setState("complete");
+    this.$('.js-transactionShowContract').addClass('hide');
+    this.$('.js-complete').addClass('bottom0');
+  },
+
+  completeOrderHide: function(){
+    this.$('.js-transactionShowContract').removeClass('hide');
+    this.$('.js-complete').removeClass('bottom0');
   },
 
   confirmOrder: function(e){
@@ -334,7 +388,7 @@ module.exports = baseVw.extend({
     this.discussionCount++;
     this.$('.js-discussionCount').text(this.discussionCount);
     this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
-    this.$('.js-discussionForm').removeClass('disabled');
+    this.$('.js-discussionWrapperEmpty').addClass('hide');
   },
 
   addAllDiscussionMessages: function(){
@@ -344,6 +398,9 @@ module.exports = baseVw.extend({
     this.discussionCol.each(function(model, i){
       self.addDiscussionMessage(model);
     });
+    if (this.discussionCol.length > 0 ){
+      this.$('.js-discussionWrapperEmpty').addClass('hide');
+    }
   },
 
   sendDiscussionMessageClick: function(){
@@ -418,6 +475,29 @@ module.exports = baseVw.extend({
     messageInput.val('');
     messageInput.closest('.flexRow').removeClass('formChecked');
     this.getDiscussion();
+    messageInput.focus();
+  },
+
+  onKeydownDiscussion: function(e) {
+    var code = e.keyCode || e.which;
+
+    if (code === 13 && !this.shiftDown) {
+      e.preventDefault();
+    }
+
+    if (code === 16) {
+      this.shiftDown = true;
+    }
+  },
+
+  onKeyupDiscussion: function(e) {
+    var code = e.keyCode || e.which;
+
+    if (code === 13 && !this.shiftDown) {
+      this.sendDiscussionMessageClick();
+    }
+
+    if (code === 16) this.shiftDown = false;
   },
 
   showCloseDispute: function(e){
@@ -556,5 +636,6 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger("orderModalClosed");
     this.$el.parent().fadeOut(300);
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    this.remove();
   }
 });

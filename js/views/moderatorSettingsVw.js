@@ -16,7 +16,7 @@ module.exports = Backbone.View.extend({
     'click .js-moderatorSettingsSave': 'saveModeratorSettings',
     'click #moderatorSettingsModYes': 'showModeratorFeeHolder',
     'click #moderatorSettingsModNo': 'hideModeratorFeeHolder',
-    'keyup #moderatorSettingsFeeInput': 'keypressFeeInput',
+    'keyup #moderatorSettingsModalFeeInput': 'keypressFeeInput',
     'blur input': 'validateInput'
   },
 
@@ -41,18 +41,18 @@ module.exports = Backbone.View.extend({
 
       //append the view to the passed in parent
       self.parentEl.append(self.$el);
-      self.moderatorFeeInput = self.$('#moderatorSettingsFeeInput');
+      self.moderatorFeeInput = self.$('#moderatorSettingsModalFeeInput');
     });
     return this;
   },
 
  keypressFeeInput: function(){
     "use strict";
-    var fee = $('#moderatorSettingsFeeInput').val();
+    var fee = this.moderatorFeeInput.val();
 
     if (fee.indexOf('.') > 0 && fee.split('.')[1].length > 2) {
       fee = fee.substr(0, fee.length-1);
-      $('#moderatorSettingsFeeInput').val(fee);
+      this.moderatorFeeInput.val(fee);
     }
  },
 
@@ -67,10 +67,12 @@ module.exports = Backbone.View.extend({
 
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
+    this.model.set('moderation_fee', moderatorFee);
+    this.model.set('moderator', this.moderatorStatus);
 
     saveToAPI(targetForm, '', self.model.get('user').serverUrl + "profile", function(){
-      self.closeModeratorSettings();
       window.obEventBus.trigger("moderatorStatus", {'status': self.moderatorStatus, 'fee': moderatorFee});
+      self.closeModeratorSettings();
     }, "", moderatorData);
 
     $.ajax({
@@ -114,12 +116,11 @@ module.exports = Backbone.View.extend({
 
   closeModeratorSettings: function() {
     "use strict";
-    this.close();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    this.close();
   },
 
   close: function(){
-    this.unbind();
     this.remove();
   }
 

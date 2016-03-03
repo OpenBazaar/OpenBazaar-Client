@@ -291,7 +291,7 @@ module.exports = baseVw.extend({
   },
 
   createListing: function(){
-    Backbone.history.navigate('#sellItem', {trigger: true});
+    Backbone.history.navigate('#userPage/'+this.userModel.get('guid')+'/listingNew', {trigger: true});
   },
 
   addFollower: function(guid) {

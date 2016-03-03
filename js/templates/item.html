@@ -6,6 +6,9 @@
         <a class="js-returnToStoreCategory textOpacity50 underline fontSize13"><%= ob.vendor_offer.listing.item.category %></a>
       <% } %>
     </div>
+    <div class="floatRight">
+      
+    </div>
   </div>
   <h2 class="page-contractTitle noOverflow textOpacity1 marginLeft20 marginBottom8" title="<%= ob.vendor_offer.listing.item.title %>"><%= ob.vendor_offer.listing.item.title %></h2>
       <!-- <div style="word-break: break-word;"><%= JSON.stringify(ob.vendor_offer.listing) %></div> -->
@@ -13,7 +16,7 @@
   <div class="flexRow border0">
     <div class="flexCol-7 pad20">
       <div class="itemImg itemImg-large row10 overflowHidden">
-        <div class="itemImg itemImg-large <% if(!ob.showNSFWContent && ob.vendor_offer.listing.item.nsfw){ %> nsfw <% } %>"
+        <div class="itemImg itemImg-large <% if(!ob.showNSFWContent && !ob.skipNSFWmodal && ob.vendor_offer.listing.item.nsfw){ %> nsfw <% } %>"
            style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>),
            url(imgs/defaultItem.png);">
         </div>
@@ -25,7 +28,7 @@
       <% _.each(ob.vendor_offer.listing.item.image_hashes, function(data, i) {
       if(i != 0){%>
       <div class="itemImg itemImg-small overflowHidden <% if(i > 4){%>hide<% } %>">
-        <div class="itemImg itemImg-small <% if(!ob.showNSFWContent && ob.vendor_offer.listing.item.nsfw){ %> nsfw <% } %>"
+        <div class="itemImg itemImg-small <% if(!ob.showNSFWContent && !ob.skipNSFWmodal && ob.vendor_offer.listing.item.nsfw){ %> nsfw <% } %>"
              style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= data %><%= ob.imageExtension %>), url(imgs/defaultItem.png);">
         </div>
         <button class="fullscreen js-photoGallery" href="<%= ob.serverUrl %>get_image?hash=<%= data %><%= ob.imageExtension %>"></button>
@@ -50,7 +53,7 @@
           </div>
         </li>
         <% if (ob.totalReviews) { %>
-        <li class="border0 alignCenter padding10 marginBottom12 js-itemRating">
+        <li class="border0 alignCenter padding10 marginBottom12 clickable js-itemRating">
           <span class="marginRight3"><%= ob.totalReviews %> Review</span><% print(ob.starsTemplate({ rating: ob.avgRating })) %><span class="marginLeft2">(<%= ob.avgRating %>/5)</span>
         </li>
         <% } %>

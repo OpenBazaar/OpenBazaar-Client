@@ -204,7 +204,8 @@ module.exports = baseVw.extend({
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
-    this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
+    this.skipNSFWmodal = options.skipNSFWmodal;
+    this.showNSFW = options.skipNSFWmodal ? options.skipNSFWmodal : JSON.parse(localStorage.getItem('NSFWFilter'));
     this.showNSFWContent = this.showNSFW;
     this.currentItemHash = options.itemHash;
     //hold changes to the page for undoing, such as custom colors
@@ -292,20 +293,19 @@ module.exports = baseVw.extend({
             model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash + "&guid=" + self.pageID);
             model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash + "&guid=" + self.pageID);
           }
+          // Cache user avatar in localStorage
+          var profile = model.toJSON().profile;
+          window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
+
+          self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
+          self.model.set({ownPage: self.options.ownPage});
+          self.render();
         }else{
           //model was returned as a blank object
           $('.js-loadingModal').addClass('hide');
           messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
           self.bindModalCloseHandler();
         }
-
-        // Cache user avatar in localStorage
-        var profile = model.toJSON().profile;
-        window.localStorage.setItem("avatar_" + self.pageID, profile.avatar_hash);
-
-        self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
-        self.model.set({ownPage: self.options.ownPage});
-        self.render();
       },
       error: function(model, response){
         if (self.isRemoved()) return;
@@ -358,8 +358,8 @@ module.exports = baseVw.extend({
         self.hideThisUser("blocked");
       }
 
-      if(!self.options.ownPage && self.model.get('page').profile.nsfw && !self.showNSFW){
-        self.hideThisUser("nsfw");
+      if(!self.options.ownPage && !self.skipNSFWmodal && self.model.get('page').profile.nsfw && !self.showNSFW){
+          self.hideThisUser("nsfw");
       }
 
       self.$el.find('#image-cropper').cropit({
@@ -440,32 +440,45 @@ module.exports = baseVw.extend({
         currentHandle = this.model.get('page').profile.handle,
         isItemType = false;
 
-    if(state === "item"){
+    if(state === "listing"){
       //clear old templates
       this.$el.find('.js-list4').html("");
       this.renderItem(hash);
       $('#obContainer').scrollTop(352);
-    }else if(state === "itemOld") {
+    }else if(state === "listingOld") {
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-item"));
       $('#obContainer').scrollTop(352);
-    }else if(state === "itemNew"){
+    }else if(state === "listingNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(352);
-      this.addTabToHistory('newItem');
+      this.addTabToHistory('listingNew');
       this.sellItem();
-    } else if(state === "createStore"){
+    } else if(state === "createStore") {
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
       this.addTabToHistory('about');
       this.createStore();
+    } else if(state === "becomeModerator"){
+      this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
+      this.addTabToHistory('about');
+      this.showModeratorModal();
     } else if(state === "customize"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
       this.addTabToHistory('about');
       this.customizePage();
+    }else if(state == "store"){
+      //if this page is not a vendor, don't go to their store
+      if(this.model.get('page').profile.vendor){
+        state="store";
+      } else {
+        state="about";
+      }
+      this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
+      this.addTabToHistory(state);
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
       //if no state was set
-      if(this.userProfile.get('profile').vendor){
+      if(this.model.get('page').profile.vendor){
         state="store";
       } else {
         state="about";
@@ -473,18 +486,18 @@ module.exports = baseVw.extend({
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }
     this.setControls(state);
-    if(state != "customize" && state != this.state && state != "itemNew" && this.state != "itemNew"){
+    if(state != "customize" && state != this.state && state != "listingNew" && this.state != "listingNew"){
       this.lastTab = this.state;
       this.state = state;
     }
 
-    if(state == "item" || state == "itemOld" || state == "itemNew") {
+    if(state == "listing" || state == "listingOld" || state == "listingNew") {
       isItemType = true;
     }
 
     //set address bar
     if(isItemType) {
-      addressState = "/item";
+      addressState = "/listing";
     } else {
       addressState = "/" + state;
     }
@@ -510,9 +523,9 @@ module.exports = baseVw.extend({
     document.getElementById('obContainer').classList.remove("overflowHidden");
     //unhide the ones that are needed
     if(this.options.ownPage === true) {
-      if(state === "item" || state === "itemOld") {
+      if(state === "listing" || state === "listingOld") {
         this.$el.find('.js-itemButtons').removeClass('hide');
-      } else if(state === "itemEdit" || state === "itemNew") {
+      } else if(state === "listingEdit" || state === "listingNew") {
         this.$el.find('.js-itemEditButtons').removeClass('hide');
       } else if(state === "customize") {
         this.$el.find('.js-pageCustomizationButtons').removeClass('hide');
@@ -652,15 +665,16 @@ module.exports = baseVw.extend({
     });
   },
 
-  renderItems: function (model) {
+  renderItems: function (model, skipNSFWmodal) {
     "use strict";
     
     var self = this;
     var select = this.$el.find('.js-categories');
+    skipNSFWmodal = skipNSFWmodal || this.skipNSFWmodal;
     model = model || [];
     __.each(model, function (arrayItem) {
 
-      if(arrayItem.nsfw && !self.showNSFWContent && !self.showNSFW){
+      if(arrayItem.nsfw && !self.showNSFWContent && !self.showNSFW &&!skipNSFWmodal){
         arrayItem.cloak = true;
       }else{
         arrayItem.cloak = false;
@@ -673,6 +687,7 @@ module.exports = baseVw.extend({
       arrayItem.userID = self.pageID;
       arrayItem.ownPage = self.options.ownPage;
       arrayItem.onUserPage = true;
+      arrayItem.skipNSFWmodal = skipNSFWmodal;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
         var opt = document.createElement('option');
         opt.value = arrayItem.category;
@@ -765,7 +780,8 @@ module.exports = baseVw.extend({
       itemHash: hash,
       user: self.model.get('user'),
       page: self.model.get('page'),
-      showNSFWContent: self.showNSFWContent
+      showNSFWContent: self.showNSFWContent,
+      skipNSFWmodal: self.skipNSFWmodal
     });
     this.item.urlRoot = this.options.userModel.get('serverUrl')+"contracts";
     //remove old item before rendering
@@ -911,7 +927,7 @@ module.exports = baseVw.extend({
   sellItem: function(){
     "use strict";
     this.renderItemEdit();
-    this.setControls("itemEdit");
+    this.setControls("listingEdit");
   },
 
   customizePage: function(){
@@ -1228,7 +1244,7 @@ module.exports = baseVw.extend({
 
   saveNewDone: function(newHash) {
     "use strict";
-    this.setState('item', newHash);
+    this.setState('listing', newHash);
     this.subRender();
   },
 
@@ -1240,8 +1256,8 @@ module.exports = baseVw.extend({
 
   editItem: function(clone){
     this.renderItemEdit(this.item, clone);
-    this.setControls("itemEdit");
-    this.lastTab = "itemOld";
+    this.setControls("listingEdit");
+    this.lastTab = "listingOld";
   },
 
   editItemClick: function(e){
@@ -1388,13 +1404,10 @@ module.exports = baseVw.extend({
   },
 
   showModeratorModal: function(){
-    "use strict";
-    var self = this,
-        moderatorSettingsModel = new Backbone.Model();
-    moderatorSettingsModel.set(this.model.attributes);
-    this.moderatorSettingsView = new moderatorSettingsVw({model:moderatorSettingsModel, parentEl: '#modalHolder'});
+    var self = this;
+
+    this.moderatorSettingsView = new moderatorSettingsVw({model:this.model, parentEl: '#modalHolder'});
     this.subViews.push(this.moderatorSettingsView);
-    this.subModels.push(moderatorSettingsModel);
   },
 
   changeModeratorStatus: function(status, fee){
@@ -1450,11 +1463,12 @@ module.exports = baseVw.extend({
 
   clickShowNSFWContent: function(){
     this.showNSFWContent = true;
+    this.showNSFW = true;
     this.showBlockedUser();
-    if(this.state == "item"){
+    if(this.state == "listing"){
       this.renderItem(this.currentItemHash);
     }
-    this.renderItems(this.cachedListings);
+    this.renderItems(this.cachedListings, true);
   },
 
   showBlockedUser: function(){

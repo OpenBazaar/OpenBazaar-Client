@@ -18,7 +18,7 @@
     <%= polyglot.t('nav.customizePage') %>
   </a>
   <% if(ob.vendor) { %>
-    <a href="#sellItem" >
+    <a href="#userPage/<%- ob.guid %>/listingNew" >
       <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
       <%= polyglot.t('nav.createListing') %>
     </a>
@@ -26,6 +26,14 @@
     <a href="#userPage/<%= ob.guid %>/createStore">
       <span class="ion-ios-cart fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('CreateStore') %>
+    </a>
+  <% } %>
+  <% if(!ob.moderator){ %>
+    <a href="#userPage/<%- ob.guid %>/becomeModerator">
+      <span class="ion-bowtie fontSize11 marginRight2 textOpacity1"></span>
+      <span class="js-userPageBecomeModerator">
+        <%= polyglot.t('BecomeModerator') %>
+      </span>
     </a>
   <% } %>
   <hr/>
@@ -59,8 +67,9 @@
     <span class="ion-android-favorite fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('nav.support') %>
   </a>
-  <hr/>
+  <!--<hr/>
   <a class="js-navAdminPanel">Admin Panel (temporary)</a>
+  -->
 </div>
 
 <div class="popMenu popMenu-notifications js-navNotificationsMenu" data-onclose="onNotifMenuClose">
@@ -105,7 +114,7 @@
   </div>
 
   <div class="ctrlGroup nav-profile">
-    <div class="btn btn-profile js-navProfile custCol-primary tooltip" data-tooltip="<%= polyglot.t('Menu') %>" data-popmenu=".popMenu-navBar"
+    <div class="btn btn-profile js-navProfile tooltip" data-tooltip="<%= polyglot.t('Menu') %>" data-popmenu=".popMenu-navBar"
     <% if(ob.avatar_hash != "") { %>
     style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.avatar_hash %>), url(imgs/defaultUser.png);"
     <% }else{ %>
@@ -128,9 +137,9 @@
         <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-hideAboutModal">
           <h2 class="ion-android-close custCol-text clickable"></h2>
         </div>
-        <div class="about-hero modal-hero-about color-secondary custCol-secondary shadow-inner1-ultra-light">
+        <div class="about-hero modal-hero-about color-secondary custCol-secondary-darken">
           <div class="modal-hero-icon"></div>
-          <p class="width100 alignCenter custCol-text marginTop50 textOpacity75 fontSize14">Version 0.9</p>
+          <p class="width100 alignCenter custCol-text marginTop50 textOpacity75 fontSize14">Version 1.0.6</p>
         </div>
         <div class="aboutModal-accordion accordion js-profileAccordion">
           <div class="accordion-window">
@@ -154,22 +163,22 @@
                 </a>
               </div>
 
-              <div class="modal-section custCol-primary modal-about-section js-modalAboutMain customThemeScrollbar lineHeight20">
+              <div class="modal-section custCol-primary modal-about-section js-modalAboutMain js-externalLinks customThemeScrollbar lineHeight20">
                 <%= polyglot.t('aboutSection.about') %>
               </div>
 
-              <div class="modal-section custCol-primary hide  modal-about-section js-modalAboutLicensing customThemeScrollbar lineHeight20">
+              <div class="modal-section custCol-primary hide  modal-about-section js-modalAboutLicensing js-externalLinks customThemeScrollbar lineHeight20">
                 <%= polyglot.t('aboutSection.licensing') %>
               </div>
 
-              <div class="modal-section custCol-primary hide modal-about-section js-modalAboutSupport customThemeScrollbar lineHeight20">
+              <div class="modal-section custCol-primary hide modal-about-section js-modalAboutSupport js-externalLinks customThemeScrollbar lineHeight20">
                 <div class="width100 alignCenter">
                   <img src="./imgs/donations.png" />
                 </div>
                 <%= polyglot.t('aboutSection.support') %>
               </div>
 
-              <div class="modal-section custCol-primary hide modal-about-section js-modalAboutContributors customThemeScrollbar lineHeight20">
+              <div class="modal-section custCol-primary hide modal-about-section js-modalAboutContributors js-externalLinks customThemeScrollbar lineHeight20">
                 <%= polyglot.t('aboutSection.contributors') %>
               </div>
 

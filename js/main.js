@@ -43,8 +43,11 @@ var Polyglot = require('node-polyglot'),
     serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
+    startUpConnectMaxRetries = 2,
+    startUpConnectRetryDelay = 2 * 1000,
+    startUpConnectMaxTime = 6 * 1000,
+    startTime = Date.now(),
     extendPolyglot,
-    newRouter,
     newPageNavView,
     newSocketView,
     serverConnectModal,
@@ -101,7 +104,7 @@ if(platform === "linux") {
 }
 
 //open external links in a browser, not the app
-$('body').on('click', '.js-externalLink, .about a, .js-listingDescription a', function(e){
+$('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescription a', function(e){
   e.preventDefault();
   var extUrl = $(this).attr('href');
   if (!/^https?:\/\//i.test(extUrl)) {
@@ -116,6 +119,11 @@ $(window).bind('hashchange', function(){
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
+//set fancy styles class
+if(localStorage.getItem('notFancy') == "true"){
+  $('html').addClass('notFancy')
+}
+
 //prevent dragging a file to the window from loading that file
 window.addEventListener("dragover",function(e){
   e = e || event;
@@ -125,6 +133,13 @@ window.addEventListener("drop",function(e){
   e = e || event;
   e.preventDefault();
 },false);
+
+//prevent enter from submitting forms
+window.addEventListener('keypress', function(event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+  }
+});
 
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
@@ -144,7 +159,8 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 
 var profileLoaded;
 var loadProfile = function(landingRoute, onboarded) {
-  landingRoute = landingRoute || '#';
+  var externalRoute = remote.getGlobal('externalRoute');
+
   profileLoaded = true;
 
   //get the guid from the user profile to put in the user model
@@ -162,8 +178,6 @@ var loadProfile = function(landingRoute, onboarded) {
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
-              $loadingModal.addClass('hide');
-             
               newSocketView = new socketView({model: serverConfigMd});
 
               newPageNavView = new pageNavView({
@@ -180,9 +194,17 @@ var loadProfile = function(landingRoute, onboarded) {
 
               $('#sideBar').html(app.chatVw.render().el);
 
-              location.hash = landingRoute;
-              newRouter = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
-              Backbone.history.start();
+              app.router = new router({userModel: user, userProfile: userProfile, socketView: newSocketView});
+
+              if (externalRoute) {
+                app.router.translateRoute(externalRoute).done((translatedRoute) => {
+                  location.hash = translatedRoute;
+                  Backbone.history.start();
+                });
+              } else {
+                location.hash = landingRoute || '#';
+                Backbone.history.start();
+              }
             });
 
             //every 15 minutes update the bitcoin price for the currently selected currency
@@ -232,8 +254,8 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.on('onboarding-complete', function(guid) {
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
-    $loadingModal.removeClass('hide');
     loadProfile('#userPage/' + guid + '/store', true);
+    $loadingModal.removeClass('hide');
   });
 };
 
@@ -242,16 +264,7 @@ launchServerConnect = function() {
     serverConnectModal = new ServerConnectModal();
 
     serverConnectModal.on('connected', function(authenticated) {
-      // clear some flags so the heartbeat events will
-      // appropriatally loadProfile or launch onboarding
-      guidCreating = null;
-      loadProfileNeeded = true;
-
-      $loadingModal.removeClass('hide');      
-
-      if (profileLoaded) {
-        location.reload();
-      }
+      $loadingModal.removeClass('hide');
 
       if (authenticated) {
         serverConnectModal && serverConnectModal.remove();
@@ -270,9 +283,31 @@ launchServerConnect = function() {
   }
 };
 
+heartbeat.on('open', function(e) {
+  if (profileLoaded) {
+    location.reload();
+  } else {
+    // clear some flags so the heartbeat events will
+    // appropriatally loadProfile or launch onboarding
+    guidCreating = null;
+    loadProfileNeeded = true;
+
+    onboardingModal && onboardingModal.remove();
+  }
+});
+
 heartbeat.on('close', function(e) {
-  // server down
-  launchServerConnect();
+  if (
+    Date.now() - startTime < startUpConnectMaxTime &&
+    startUpConnectMaxRetries
+  ) {
+    setTimeout(() => {
+      startUpConnectMaxRetries--;
+      app.connectHeartbeatSocket();
+    }, startUpConnectRetryDelay);
+  } else {
+    launchServerConnect();
+  }
 });
 
 heartbeat.on('message', function(e) {
@@ -289,10 +324,17 @@ heartbeat.on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
-        serverConfigMd.save({
+        var creds = {
           username: e.jsonData.username,
           password: e.jsonData.password
-        });
+        };
+
+        if (app.serverConfig.isLocalServer()) {
+          creds.local_username = e.jsonData.username;
+          creds.local_password = e.jsonData.password;
+        }
+
+        serverConfigMd.save(creds);
 
         app.login().done(function() {
           guidCreating.resolve();

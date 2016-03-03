@@ -15,6 +15,7 @@ function App() {
   // is an ID and then a subsequent fetch, but that doesn't return the data.
   // Investigate!
   this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
+
   // serverConfigMd.fetch();
   if (!localStorage['_serverConfig-1']) {
     this.serverConfig.save();
@@ -60,6 +61,34 @@ App.prototype.login = function() {
     },
     timeout: 3000
   });  
+};
+
+App.prototype.getGuid = function(handle, resolver) {
+  var url = resolver || 'https://resolver.onename.com/v2/users/',
+      deferred = $.Deferred();
+
+  if (!handle) {
+    throw new Error('Please provide a handle.');
+  }
+
+  url = url.charAt(url.length - 1) !== '/' ? url + '/' : url;
+  url += handle;
+
+  $.get(url).done(function(data){
+    if (data && data[handle] && data[handle].profile && data[handle].profile.account){
+      var account = data[handle].profile.account.filter(function (accountObject) {
+        return accountObject.service == 'openbazaar';
+      });
+
+      deferred.resolve(account[0].identifier);
+    } else {
+      deferred.reject();
+    }
+  }).fail(function(jqXHR, status, errorThrown){
+    deferred.reject();
+  });
+
+  return deferred.promise();
 };
 
 App.prototype.playNotificationSound = function() {
