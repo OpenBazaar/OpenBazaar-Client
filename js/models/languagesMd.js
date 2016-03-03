@@ -5370,7 +5370,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translators: Jingyi Yang | @saltduck
-         02/28/2016: ~ 89 untranslated strings
+         03/02/2016: ~ 55 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -5381,7 +5381,7 @@ module.exports = Backbone.Model.extend({
         IAgree: "我同意",
         Back: "上一步",
         EnterMessage: "留言",
-        Recommended: "Recommended", //notTranslated
+        Recommended: "建议",
         Reload: "刷新",
         You: "你",
         Skip: "跳过",
@@ -5426,11 +5426,11 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "关于空白着",
         Followers: "被关注",
         Following: "关注中",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "关注你",
         Message: "留言",
         Store: "店铺",
         Edit: "编辑",
-        Clone: "Clone", //notTranslated
+        Clone: "克隆",
         Used: "已用",
         Delete: "删除",
         DontDelete: "请不要删除",
@@ -5469,8 +5469,8 @@ module.exports = Backbone.Model.extend({
         Facebook: "Facebook",
         Instagram: "Instagram",
         Twitter: "Twitter",
-        PGPKey: "PGP Key",
-        Signature: "PGP Signature", //not translated
+        PGPKey: "PGP Key", //not translated
+        Signature: "PGP签名",
         Snapchat: "Snapchat",
         BUYNOW: "立即购买",
         Description: "描述",
@@ -5491,7 +5491,7 @@ module.exports = Backbone.Model.extend({
         Customize: "个性化",
         Save: "保存",
         Changes: "更改",
-        Change: "Change", //notTranslated
+        Change: "修改",
         SaveChanges: "保存更改",
         YourName: "您的姓名",
         BitcoinReturnAddress: "输入你的比特币地址",
@@ -5520,7 +5520,7 @@ module.exports = Backbone.Model.extend({
         Type: "形式",
         Condition: "新旧程度",
         NSFW: "成人内容",
-        Select: "Select", //not translated
+        Select: "选择",
         Social: "社交",
         Theme: "主题",
         Listing: "列表",
@@ -5550,12 +5550,12 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "选择封面照片",
         AboutPlaceholder: "详细介绍",
         BackgroundColor: "背景颜色",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
+        NotificationPaymentSent: "款项已支付给",
         NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
+        NotificationOrderConfirmed: "你的订单已确认/发货",
         NotificationFollow: "在关注您",
-        NotificationDispute: "has opened a dispute", //not translated
-        NotificationDisputeClosed: "this dispute is closed", //not translated
+        NotificationDispute: "已发起争议",
+        NotificationDisputeClosed: "本次争议已关闭",
         NotificationRefund: "has refunded your order", //not translated
         NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
         NotificationNewOrder: "has made a purchase", //not translated
@@ -5585,7 +5585,7 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "保存头像",
         NewAvatar: "选择新的头像",
         NewCoverImage: "选择新的封面照片",
-        Loading: "Loading...", // not translated
+        Loading: "装载中...",
         Transactions: "交易记录",
         Purchases: "已买",
         Sales: "已卖",
@@ -5595,7 +5595,7 @@ module.exports = Backbone.Model.extend({
         Block: "屏蔽",
         Unblock: "取消屏蔽",
         Blocked: "屏蔽列表",
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
+        NoBlockedList: "你目前没有屏蔽任何人.",
         Advanced: "高级",
         General: "通用",
         AllItems: "所有商品",
@@ -5614,8 +5614,8 @@ module.exports = Backbone.Model.extend({
         StandardThemes: "标准主题",
         NoPhotosAdded: "未添加照片",
         Summary: "汇总",
-        Funds: "Funds",
-        Discussion: "Discussion",
+        Funds: "Funds", // not translated
+        Discussion: "Discussion", // not translated
         Quantity: "数量",
         ShippingTo: "运往",
         ModeratedBy: "仲裁员为",
@@ -5634,7 +5634,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "未提供",
         NotFollowingAnyone: "未关注任何人",
         NoFollowers: "没有人关注你",
-        NoReviews: "No reviews", //notTranslated
+        NoReviews: "没有客户评价",
         Moderator: "仲裁员",
         ActiveStore:"Store is Active", // not translated
         ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
@@ -5644,10 +5644,10 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "简称解析器",
         ShutDownServer: "关闭服务器",
         LoadingBitcoinPrices: "正在载入比特币价格...",
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
-        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
-        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
+        ThisUserIsBlocked: "该用户已隐藏，因为在你的屏蔽清单中",
+        ThisUserIsNSFW: "该用户已隐藏，因为主页包含成人内容",
+        ShowBlockedUser: "显示该用户的主页，剔除成人商品",
+        ShowNSFWContent: "显示该用户的主页，包含成人商品",
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
         moderatorSettings: {
@@ -5659,7 +5659,7 @@ module.exports = Backbone.Model.extend({
         EditModerator: "仲裁员设置",
         transactions: {
           OrderDetails: "订单详细内容",
-          ViewOnBlockchain: "View Details", //noTranslated
+          ViewOnBlockchain: "查看细节",
           SoldBy: "卖家",
           PurchasedBy: "买家",
           searchByOrder: "用订单ID或货物名称来检索",
@@ -5677,20 +5677,20 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "已确认/已发货",
           OrderStatus3: "已完成(款已支付给卖家)",
           OrderStatus4: "有争议",
-          OrderStatusopen: "Disputed", // not translated
-          OrderStatus5: "Dispute Closed", // not translated
-          OrderStatusclosed: "Dispute Closed", // not translated
-          OrderStatus6: "Dispute Finalized",// not translated
-          OrderStatus7: "Refunded", // not translated
+          OrderStatusopen: "争议中",
+          OrderStatus5: "争议已关闭",
+          OrderStatusclosed: "争议已关闭",
+          OrderStatus6: "争议终止",
+          OrderStatus7: "已退款",
           InEscrow: "- 托管中",
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          NoMessages: "No messages", //notTranslated
-          PaymentProtection: "Payment Protection", // not translated
+          OrderTotal: "订单总计",
+          OrderTotalInBTC: "BTC总计",
+          NoMessages: "没有消息",
+          PaymentProtection: "付款保护",
           ShipTo: "运往",
           ViewRating: "(View Rating)", // not translated
-          ContractDetails: "Contract Details", //notTranslated
-          HideDetails: "Hide Details", //notTranslated
+          ContractDetails: "合同详情",
+          HideDetails: "隐藏详情",
           ConfirmOrder: "确认订单",
           ReceivingAddress: "Receiving Address", // not translated
           RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
@@ -5700,14 +5700,14 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "预计运货天数",
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
+          Password: "口令",
           PasswordPlaceholder: "Password required for link (optional)", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
+          DirectTransaction: "直接交易",
+          ModeratedTransaction: "仲裁交易",
           Seller: "卖家",
           Buyer: "买家",
           Moderator: "仲裁员",
@@ -5732,16 +5732,16 @@ module.exports = Backbone.Model.extend({
           NoFileProvided: "No file provided", //notTranslated
           None: "None", //notTranslated
           NoneSent: "None sent", // not translated
-          ModerationFee: "Moderation Fee:", // not translated
-          DisputeTransaction: "Start a Dispute", // not translated
+          ModerationFee: "仲裁费:",
+          DisputeTransaction: "发起争议",
           sendMessagePlaceholder: "Enter message...", // not translated
           DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
-          SendMessage: "Send",// not translated
-          CloseDispute: "Close Dispute",// not translated
+          SendMessage: "发送",
+          CloseDispute: "关闭争议",
           TotalInTransaction: "Transaction:", // not translated
-          StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE", // not translated
-          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
+          StartDisputeFlag: "启动争议",
+          CloseDisputeFlag: "结束争议",
+          PayoutOnlyBuyer: "关闭本次争议会将货款100%退回给买家."
         },
         errorMessages: {
           saveError: "数据没有被储存",
@@ -5762,10 +5762,10 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
         },
         aboutSection: {
-          about: "", //notTranslated
-          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
-          support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
+          about: "",
+          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
+          support: "",
+          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "已保存",
@@ -5860,8 +5860,8 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "直接支付",
           SendDirectlyTo: "将款项直接支付给 %{简称}",
           MustAddAddress: "务必添加送货地址",
-          VendorShipsTo: "此商家向以下国家发货",
-          DoesNotShipHere: "Does not ship here",
+          VendorShipsTo: "此商家向以下国家/地区发货",
+          DoesNotShipHere: "不向以下国家/地区发货",
           Send: "发送",
           BTCto: "BTC至",
           SendBTCtoAddress: "发送 %{amount} BTC 到",
