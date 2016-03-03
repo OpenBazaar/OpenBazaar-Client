@@ -458,6 +458,10 @@ form {
   flex-grow: 1;
 }
 
+.noPointerEvents {
+  pointer-events: none;
+}
+
 .gridItemControls {
   background: #106DA3;
   position: absolute;
@@ -3872,21 +3876,26 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 48px;
 }
 
-#userPage .photosModule .dropIconWrap {
+#userPage .photosModule .dropPanel {
   position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   opacity: 0;
-  font-size: 50px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -7%);
   transition: opacity 0.3s;
-  z-index: -1;
-  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
-#userPage .photosModule.dragOver .dropIconWrap {
+#userPage .photosModule.dragOver .dropPanel {
   opacity: 1;
   z-index: 2;
+}
+
+#userPage .photosModule .dropPanel .icon {
+  font-size: 50px;
+  margin-top: 50px;
 }
 
 #userPage .photosModule .editItemImageLoadPhotoMessage {
