@@ -271,8 +271,9 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings",
         ReadOnly: "(This Field is Read Only)",
         HandleResolver: "Handle Resolver",
-        ServerSettings: "Server Settings",
         ShutDownServer: "Shut Down the Server",
+        NoFancyStyles: "Disable Visual Effects",
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.",
         LoadingBitcoinPrices: "Loading Bitcoin Prices...",
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list",
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW",
@@ -808,7 +809,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -972,7 +972,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Personalice Su OpenBazaar",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Seleccione un tema para su p&aacute;gina",
           chooseLanguage: "Seleccione idioma",
           contributors: "%{smart_count} Colaboradores |||| %{smart_count} Colaboradores",
@@ -1341,7 +1341,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -1504,7 +1503,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar Konfiguration",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "W&auml;hle ein Farbschema f&uuml;r deine Seite",
           chooseLanguage: "W&auml;hle deine Sprache",
           contributors: "%{smart_count} Mitwirkeder |||| %{smart_count} Mitwirkende",
@@ -1878,7 +1877,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Impostazioni Server",
         ReadOnly: "(Questo campo &egrave; di sola lettura)",
         HandleResolver: "Recupero Nickname",
-        ServerSettings: "Impostazioni Server",
         ShutDownServer: "Spegni il server",
         LoadingBitcoinPrices: "Caricamento Prezzi Bitcoin...",
         ThisUserIsBlocked: "Questo utente &egrave; nascosto perch&egrave; si trova nella tua lista bloccati",
@@ -2436,7 +2434,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Paramètres du serveur",
         ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur d'identifiant",
-        ServerSettings: "Paramètres du serveur",
         ShutDownServer: "Arrêter le serveur",
         LoadingBitcoinPrices: "Chargement des prix Bitcoin...",
         ThisUserIsBlocked: "Cet utilisateur est masqué parce que vous l'avez bloqué",
@@ -2970,7 +2967,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -3133,7 +3129,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Configurare OpenBazaar",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Selectați o Temă pentru Pagina dvs.",
           chooseLanguage: "Selectați Limba dvs.",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributori",
@@ -3503,7 +3499,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -3666,7 +3661,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Конфигурация OpenBazaar",
           Introduction: "Ознакомление",
-          IntroductionBody: "Представление",
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Выберите оформление для вашей страницы",
           chooseLanguage: "Выберите ваш язык",
           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиков",
@@ -4036,7 +4031,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -4199,7 +4193,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Konfigurácia OpenBazaaru",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Zvoľte si grafickú tému Vašej stránky",
           chooseLanguage: "Zvoľte jazyk",
           contributors: "%{smart_count} prispievateľ |||| %{smart_count} prispievateľov",
@@ -4573,7 +4567,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -4736,7 +4729,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar Yaplandırma",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Sayfanız için bir Tema Seçin",
           chooseLanguage: "Dilinizi Seçin",
           contributors: "%{smart_count} Katkıcı |||| %{smart_count} Katkıcı",
@@ -5109,7 +5102,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -5272,7 +5264,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar bang",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           Theme: "Hoch tuqwIj wIv",
           chooseLanguage: "Hol wIv",
           contributors: "%{smart_count} 'ach yIn nuvpu' 'Iv ghaq |||| %{smart_count} 'ach yIn nuvpu' 'Iv ghaq",
@@ -5812,7 +5804,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "OpenBazaar 布局",
           Introduction: "简介",
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           theme: "选择主页主题",
           chooseLanguage: "选择语言",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors",
@@ -6186,7 +6178,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -6349,7 +6340,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "오픈바자 구서",
           Introduction: "Introduction", //notTranslated
-          IntroductionBody: "", //notTranslated
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           theme: "내 페이지 테마 선택",
           chooseLanguage: "언어 선택",
           contributors: "%{smart_count} Contributor |||| %{smart_count} Contributors", // not sure if I can change this..
@@ -6708,7 +6699,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -6873,6 +6863,7 @@ module.exports = Backbone.Model.extend({
           intro: "OpenBazaarの設定",
           theme: "マイページのテーマを選択",
           chooseLanguage: "言語",
+          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
           contributors: "投稿者: %{smart_count}人 |||| 投稿者: %{smart_count}人",
           configure: "ユーザーエクスペリエンスの構成",
           disclaimer_title: "担保文言",
@@ -7244,7 +7235,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Server Settings", //notTranslated
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ServerSettings: "Server Settings",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
@@ -7755,7 +7745,6 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Serverindstillinger",
         ReadOnly: "(dette felt er skrivebeskyttet)",
         HandleResolver: "Handle Resolver", // ?
-        ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
