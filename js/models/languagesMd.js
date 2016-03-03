@@ -463,7 +463,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Would you like to register an easy to remember handle?",
           registerNew: "Register New",
           recommended: "Recommended Pages to Follow",
-          connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar",
@@ -558,38 +557,35 @@ module.exports = Backbone.Model.extend({
         langCode: "sp",
 
         /*
-
          Translators: @jjeffryes @gubatron @PolyDeveloper
          02/28/2016: ~ 263 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
-        Recommended: "Recommended", //notTranslated
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Recommended: "Recomendado", //notTranslated
+        Reload: "Refrescar", //notTranslated
+        You: "Tu", //notTranslated
         Skip: "Omitir",
         Done: "Hecho",
-        Status: "Status",
-        Navigation: "Navigation", //notTranslated
+        Status: "Estado",
+        Navigation: "Navegaci&oacute;n", //notTranslated
         Cancel: "Cancelar",
         Yes: "S&iacute;",
         No: "No",
         of: "de",
         Sell: "Vender",
         New: "Nuevo",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        HighlightToStyle: "Seleccionar texto para darle estilo", //notTranslated
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
-        StillValidating: "Your handle is still validating", //notTranslated
-        CheckStatus: "Check Status", //notTranslated
-        ChangeCurrency: "Change currency", //notTranslated
+        StillValidating: "Tu apodo se est&aacute; validando", //notTranslated
+        CheckStatus: "Revisar estado", //notTranslated
+        ChangeCurrency: "Cambiar moneda", //notTranslated
         SKU: "SKU",
         Refurbished: "Restaurado",
         Physical: "F&iacute;sico",
@@ -602,20 +598,20 @@ module.exports = Backbone.Model.extend({
         Follow: "Seguir",
         Feed: "Feed",
         FeedPlaceholder: "RSS de las p&aacute;ginas que sigue",
-        ViewListing: "View Listing", //notTranslated
+        ViewListing: "Ver publicaciones", //notTranslated
         Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Sin publicaciones", //notTranslated
         AboutEmpty: "La secci&oacute;n Acerca de est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Te siguen", //notTranslated
         Message: "Mensaje",
         Messages: "Mensajes",
         Store: "Tienda",
         Edit: "Editar",
-        Clone: "Clone", //notTranslated
+        Clone: "Duplicar", //notTranslated
         Used: "Usado",
         Delete: "Borrar",
         DontDelete: "No Borrar",
@@ -625,12 +621,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Ingresa #juegos, #zapatos u otra #etiqueta...", //notTranslated
         SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Introduzca un t&iacute;tulo...", //notTranslated
         EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
@@ -673,12 +669,12 @@ module.exports = Backbone.Model.extend({
         Customize: "Personalizar",
         Save: "Guardar",
         Changes: "Cambios",
-        Change: "Change", //notTranslated
+        Change: "Cambio", //notTranslated
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
-        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddress: "Introduzca su direcci&oacute;n Bitcoin", //notTranslated
+        BitcoinReturnAddressPlaceholder: "direcci&oacute;n Bitcoin para retornar las monedas", //not translated
+        BitcoinReturnAddressInfo: "Si se emite un reembolso, los fondos ser&aacute;n enviados a una direcci&oacute;n Bitcoin. Por favor, introduzca su billetera a continuaci&oacute;n.", //not translated
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -696,21 +692,21 @@ module.exports = Backbone.Model.extend({
         Name: "Nombre",
         Price: "Precio",
         Available: "Disponible",
-        Tags: "Tags", //notTranslated
+        Tags: "Etiquetas", //notTranslated
         Keywords: "Palabras claves",
         Type: "Tipo",
         Condition: "Condici&oacute;n",
         NSFW: "18+ (contenido para adultos)",
-        Select: "Select", //not translated
+        Select: "Seleccionar", //not translated
         Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        ViewPage: "View page", //notTranslated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
-        Reset: "Reset", //not translated
+        Theme: "Template", //not translated
+        Listing: "Publicaci&oacute;n", //not translated
+        Listings: "Publicaciones", //not translated
+        ViewPage: "Ver p&aacute;gina", //notTranslated
+        Pages: " P&aacute;ginas", //not translated
+        Page: " P&aacute;gina", //not translated
+        Language: "Lenguaje", //not translated
+        Reset: "Restaurar", //not translated
         Local: "Local",
         Domestic: "Interno",
         Location: "Ubicaci&oacute;n",
@@ -719,7 +715,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categor&iacute;a",
         ProcessingTime: "Tiempo de procesamiento",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Seleccionar fotos", //notTranslated
         DragOrUploadPhotos: "Arrastre o suba fotos",
         UploadCoverPhoto: "Suba una foto de portada",
         ExpirationDate: "Fecha de vencimiento",
@@ -733,7 +729,7 @@ module.exports = Backbone.Model.extend({
         SearchForCategory: "B&uacute;squeda de categor&iacute;a",
         Moderators: "Moderadores",
         CurrentModerators: "Moderadores Actuales",
-        AddModerators: "Add New Moderadores",
+        AddModerators: "Agregar Moderadores",
         DeselectToRemoveModerator: "Desactive los moderadores que desea eliminar",
         SelectToAddModerator: "Seleccione los moderadores que desee agregar",
         Categories: "Categor&iacute;as",
@@ -752,67 +748,40 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Guardar Avatar ",
         NewAvatar: "Seleccione Nuevo Avatar",
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
-        Loading: "Loading...", // not translated
+        Loading: "Cargando...", // not translated
         Purchases:"Compras",
-        Sales: "Sales", // not translated
+        Sales: "Ventas", // not translated
         Cases: "Cases", // not translated
-        Enter: "Enter", //notTranslated
-        Discover: "Discover", // not translated
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated
-        Blocked: "Blocked", // not translated
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
-        Advanced: "Advanced", // not translated
+        Enter: "Ingresar", //notTranslated
+        Discover: "Descubrir", // not translated
+        Block: "Bloquear", //notTranslated
+        Unblock: "Desbloquear", //notTranslated
+        Blocked: "Bloqueado", // not translated
+        NoBlockedList: "No bloqueaste a nadie.", // not translated
+        Advanced: "Avanzado", // not translated
         General: "General", // not translated
-        AllItems: "All Items", // not translated
-        FreeShipping: "Free Shipping", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "max length 20 char", //not translated
-        maxLength80: "max length 80 char", //not translated
-        maxLength200: "max length 200 char", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        NoReviews: "No reviews", //notTranslated
-        Moderator: "Moderator", // not translated
+        AllItems: "Todos los items", // not translated
+        FreeShipping: "Env&iacute;o gratuito", // not translated
+        DomesticShippingPrice: "Precio de env&iacute;o nacional", // not translated
+        InternationalShippingPrice: "Precio de env&iacute;o internacional", // not translated
+        MinimumIs: "M&iacute;nimo", // not translated
+        Visibility: "Visibilidad", // not translated
+        Title: "T&iacute;tulo", // not translated
+        DigitalItem: "&Iacute;tem digital", // not translated
+        PhysicalItem: "&Iacute;tem  f&iacute;sico", // not translated
+        MinimumPrice: "Un m&iacute,nimo es necesario para cubrir los costos de la transacci&oacute;n Bitcoin", //notTranslated
+        DomesticShippingTime: "Tiempo de env&iacute;o nacional", // not translated
+        InternationalShippingTime: "Tiempo de env&iacute;o internacional", // not translated
+        DisplayNSFWcontent: "Mostrar contenido no apto para el trabajo?", // not translated
+        Basic: "B&aacute;sico", // not translated
+        Content: "Contenido", // not translated
         ActiveStore:"Store is Active", // not translated
         ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
         Firewall: "Firewall", //notTranslated
-        ServerSettings: "Server Settings", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
+        ServerSettings: "Configuraci&oacute;n del servidor", //notTranslated
+        ReadOnly: "(Campo de solo lectura)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
+        ServerSettings: "Configuraci&oacute;n del servidor",  // not translated duplicated?
         ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
         ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
         ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
@@ -995,7 +964,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Desea registrar un apodo f&aacute;cil de recordar?",
           registerNew: "Registrar Nuevo",
           recommended: "P&aacute;ginas Recomendadas a Seguir",
-          connectExisting: "Conectar Existente",
           avatar: "Establecer un Avatar",
           chooseAvatar: "Seleccione avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -1076,12 +1044,9 @@ module.exports = Backbone.Model.extend({
         langCode: "de",
 
         /*
-
          Translators: @z3ntu @johirner
          02/28/2016: ~ 265 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -1526,7 +1491,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Willst du dir einen leicht zu merkenden Handle registrieren?",
           registerNew: "Neu registrieren",
           recommended: "Empfohlene Seiten",
-          connectExisting: "Verbinde existierenden",
           avatar: "Setze einen Avatar",
           chooseAvatar: "W&auml;hle einen Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -1607,12 +1571,9 @@ module.exports = Backbone.Model.extend({
         langCode: "it",
 
         /*
-
          Translator: @HostFat
          02/28/2016: ~ 195 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "Ho un Portafoglio ora",
@@ -2067,7 +2028,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Ti andrebbe di registrare un nickname facile da ricordare?",
           registerNew: "Registra nuovo",
           recommended: "Pagine raccomandate di seguire",
-          connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar",
           discoverCallOut: "Esplora i Listini e Pagine su OpenBazaar",
@@ -2162,14 +2122,10 @@ module.exports = Backbone.Model.extend({
         langCode: "fr-FR",
 
         /*
-
          Translator: @Kirvx
          Reviewer  : @JustinDrake
-
          02/28/2016: ~ 0 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "J'ai maintenant un portefeuille",
@@ -2619,7 +2575,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Voulez-vous enregistrer un identifiant facilement mémorisable ?",
           registerNew: "Enregistrer",
           recommended: "Pages recommandées à suivre",
-          connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
           discoverCallOut: "Explorez les annonces et les pages sur OpenBazaar",
@@ -2701,12 +2656,9 @@ module.exports = Backbone.Model.extend({
         langCode: "ro",
 
         /*
-
          Translator: @moldcraft
          02/28/2016: ~ 265 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -3152,7 +3104,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Doriți să înregistrați un nume ușor de reținut?",
           registerNew: "Înregistrați-vă Acum",
           recommended: "Pagini Recomandate pentru Urmărire",
-          connectExisting: "Conectare Existente",
           avatar: "Setați un Avatar",
           chooseAvatar: "Selectare Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -3233,12 +3184,9 @@ module.exports = Backbone.Model.extend({
         langCode: "ru",
 
         /*
-
          Translator: @Squirrel2020
          02/28/2016: ~ 194 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -3684,7 +3632,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Вы желаете зарегистрировать простой логин?",
           registerNew: "Зарегистрировать новый",
           recommended: "Подпишитесь на популярные магазины",
-          connectExisting: "Подключить существующий",
           avatar: "Поставить аватарку",
           chooseAvatar: "Выбрать аватарку",
           discoverCallOut: "Найти объявления и страницы на OpenBazaar",
@@ -3765,12 +3712,9 @@ module.exports = Backbone.Model.extend({
         langCode: "sk",
 
         /*
-
          Translator: @michalvalasek
          02/28/2016: ~ 265 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -4216,7 +4160,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Chcete si zaregistrovať ľahko zapamätateľný handle (prezývku)?",
           registerNew: "Zaregistrovať nové",
           recommended: "Odporúčané stránky hodné sledovania",
-          connectExisting: "Pripojiť existujúci",
           avatar: "Vložiť avatara",
           chooseAvatar: "Zvoliť avatara",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -4297,12 +4240,9 @@ module.exports = Backbone.Model.extend({
         langCode: "tr",
 
         /*
-
          Translator: @Kahpecuce
          02/28/2016: ~ 259 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -4752,7 +4692,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Akılda kalıcı bir Takma Ad kaydetmek ister misiniz?",
           registerNew: "Yeni Kaydet",
           recommended: "Takip Edilesi Sayfalar",
-          connectExisting: "Mevcuta Bağlan",
           avatar: "Avatar Ata",
           chooseAvatar: "Avatar Seç",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -4833,12 +4772,9 @@ module.exports = Backbone.Model.extend({
         langCode: "klg",
 
         /*
-
          Translator: @drwasho
          02/28/2016: ~ 260 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -5287,7 +5223,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "NgeD mach pong qaw toD vIvut SoH?",
           registerNew: "Suy qachmey chu'",
           recommended: "Chup tuq toblu'",
-          connectExisting: "NIv'e' rar",
           avatar: "MIllogh qab HIjmeH",
           chooseAvatar: "MIllogh qab wIv",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -5368,12 +5303,9 @@ module.exports = Backbone.Model.extend({
         langCode: "zh-CN",
 
         /*
-
          Translators: Jingyi Yang | @saltduck
          03/02/2016: ~ 55 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "我已经有一个钱包",
@@ -5827,7 +5759,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "您想注册一个更易记的简称吗?",
           registerNew: "注册一个新的",
           recommended: "建议关注此网页",
-          connectExisting: "连接 Existing",
           avatar: "设置一个头像",
           chooseAvatar: "选择头像",
           discoverCallOut: "在OpenBazaar中查找商品和主页",
@@ -5908,12 +5839,9 @@ module.exports = Backbone.Model.extend({
         langCode: "ko",
 
         /*
-
          Translator: @mpatc
          02/28/2016: ~ 261 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -6363,7 +6291,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "당신은 기억하기 쉬운 핸들은 등록하겠습니까?",
           registerNew: "새로운 등록",
           recommended: "추천 페이지 팔로우",
-          connectExisting: "기존 연결",
           avatar: "화신 설정",
           chooseAvatar: "화신 선택",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -6444,12 +6371,9 @@ module.exports = Backbone.Model.extend({
         langCode: "ja-JP",
 
         /*
-
          Translator: @ayalan
          02/28/2016: ~ 181 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -6884,7 +6808,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "ユーザ名を登録しますか?",
           registerNew: "登録する",
           recommended: "おすすめのページ",
-          connectExisting: "既存サーバーに接続する",
           avatar: "プロフィール画像",
           chooseAvatar: "プロフィール画像を選択",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -6965,12 +6888,9 @@ module.exports = Backbone.Model.extend({
         langCode: "pl",
 
         /*
-
          Translator: @Mido
          02/28/2016: ~ 95 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "I have a Wallet now", //notTranslated
@@ -7417,7 +7337,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Chciałbyś zarejestrować łatwy do zapamiętania pseudonim?",
           registerNew: "Zarejestruj nowy",
           recommended: "Proponowane strony do obserowania",
-          connectExisting: "Połącz istniejący",
           avatar: "Ustaw avatar",
           chooseAvatar: "Wybierz avatar",
           discoverCallOut: "Odkrywaj produkty i strony na OpenBazaar",
@@ -7476,12 +7395,9 @@ module.exports = Backbone.Model.extend({
         langCode: "da",
 
         /*
-
          Translator: @pryds
          02/28/2016: ~ 49 untranslated strings
-
          Use capitalized keys for widely reused text that must be capitalized
-
          */
 
         IHaveAWalletNow: "Nu har jeg en tegnebog",
@@ -7931,7 +7847,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Vil du registrere et brugernavn, der er nemt at huske?",
           registerNew: "Registrér nyt",
           recommended: "Anbefalede sider, der kan følges",
-          connectExisting: "Forbind til eksisterende", // Context?
           avatar: "Opsæt en avatar",
           chooseAvatar: "Vælg avatar",
           discoverCallOut: "Udforsk listiner og sider på OpenBazaar",
@@ -8473,7 +8388,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Você gostaria de criar um apelido?",
           registerNew: "Criar Novo",
           recommended: "Páginas Recomendadas para Seguir",
-          connectExisting: "Conectar Existente",
           avatar: "Escolha uma imagem de perfil",
           chooseAvatar: "Escolher Imagem de Perfil",
           discoverCallOut: "Explore as Listagens e Páginas do OpenBazaar",
@@ -8560,580 +8474,580 @@ module.exports = Backbone.Model.extend({
           saveChanges: "Salvar Modificações",
           retry: "Tentar novamente",
         } 
-      },
-      
-      {
-       langName: "Українська (Ukrainian)",
-       langCode: "uk",
-       /*
-
-        Translator: Loderunner2, Bitcoin.ua
-        02/28/2016: ~ 5 untranslated strings
-
-        Use capitalized keys for widely reused text that must be capitalized
-
-        */
-       Next: "Далі",
-       IAgree: "Згоден",
-       Back: "Назад",
-       EnterMessage: "Введіть повідомлення...",
-       Reload: "Перезавантажити",
-       You: "Ви",
-       Skip: "Пропустити",
-       Done: "Готово",
-       Navigation: "Навігація",
-       Cancel: "Скасувати",
-       ClosingOpenBazaar: "Закрити (Сторінка буде недоступна онлайн)", 
-       Minimize: "Згорнути",
-       Maximize: "Розгорнути",
-       Close: "Закрити",
-       Yes: "Так",
-       No: "Ні",
-       of: "із",
-       Sell: "Продати",
-       New: "Новий",
-       Excellent: "Відмінно",
-       Good: "Добре",
-       Poor: "Погно",
-       SKU: "Номер Товару",
-       Refurbished: "Відремонтованый",
-       Physical: "Фізичний товар",
-       Digital: "Цифровий товар",
-       Service: "Послуга",
-       Visit: "Переглядів",
-       Item: "Штук",
-       Items: "Штук",
-       Stores: "Магазини",
-       Follow: "Слідкувати",
-       Feed: "Лента",
-       FeedPlaceholder: "Всі магазини за котрими ви слідкуєте",
-       ViewListing: "Відобразити перелік",
-       Unfollow: "Не слідкувати",
-       About: "Про нас",
-       NoDescriptionAdded: "Опис не знайдено ...",
-       NoListings: "Товари відсутні",
-       CoverPhoto: "Головне зображення",
-       AboutEmpty: "Опис відсутній ...",
-       Followers: "Слідкують за вами",
-       Following: "Ви слідкуєте",
-       Message: "Повідомлення",
-       Messages: "Повідомлення",
-       Store: "Магазин",
-       Edit: "Редагувати",
-       Used: "Був у використанні",
-       Delete: "Видалити",
-       DontDelete: "Не видаляти",
-       ConfirmDelete: "Так, знищити",
-       Website: "Веб-сайт",
-       Guid: "OpenBazaar ID",
-       Welcome: "Вітаю",
-       CreateStore: "Відкрити магазин",
-       GoToMyPage: "Моя сторінка",
-       SearchForItemsPlaceholder: "Введіть #games, #shoes або будь який тег #tag...",
-       SearchForPagesPlaceholder: "Пошук за назвою або словом...",
-       SearchFeedPlaceholder: "Пошук за словом ...",
-       SearchForFollowersPlaceholder: "Пошук за ім'ям ...",
-       SearchForUsersPlaceholder: "Пошук за ім'ям або OpenBazaar ID",
-       SearchOnUserStorePlaceholder: "Введіть назву...",
-       EstDeliveryDomesticPlaceholder: "3-5 Робочих Днів",
-       EstDeliveryInternationalPlaceholder: "7-15 Робочих Днів",
-       OrderProcessingTimePlaceholder: "Вкажіть час за який ви відправите замовлення",
-       TermsAndConditionsPlaceholder: "Опишіть ваші правила та умови співпраці ...",
-       TitlePlaceholder: "Вкажіть назву",
-       DescriptionPlaceholder: "Додайте опис...",
-       ReturnPolicyPlaceholder: "Умови повернення товару...",
-       CategoryPlaceholder: "Оберіть категорію",
-       CategoryHelperText: "Категорії що використовуються для сортування товарів вашого магазину.",
-       KeywordsHelperText: "Додавання тегів полегшує пошук товарів, та збільшує продажі.",
-       ExpirationDateHelperText: "Оберіть дату для автоматичного зняття з продажу.",
-       ClearExpirationDate: "Дата зняття з продажу",
-       ReturnPolicy: "Умови повернення товару",
-       TermsAndConditions: "Правила роботи магазину",
-       Photos: "Зображення",
-       Added: "Додано",
-       Categorization: "Ктегорізація",
-       Expiration: "Дата закінчення продажу",
-       Search: "Пошук",
-       Email: "E-Mail",
-       Facebook: "Сторінка Facebook",
-       Instagram: "Сторінка Instagram",
-       Twitter: "Twitter",
-       PGPKey: "PGP Ключ",
-       Snapchat: "Snapchat",
-       BUYNOW: "Купити негайно",
-       Description: "Опис",
-       Reviews: "Відгуки",
-       Shipping: "Доставка",
-       Addresses: "Адреса",
-       NewAddress: "Нова адреса",
-       CurrentAddress: "Дійсна адреса",
-       Returns: "Повернення",
-       ReturnsPolicy: "Умови повернення товару",
-       Ampersand: "&",
-       Tags: "Tags, Теги",
-       Keywords: "Пошукові слова",
-       ShipsFrom: "Доставка з",
-       ShipsTo: "Країни доставки",
-       Optional: "Додатково",
-       Customize: "Налаштувати",
-       Save: "Зберігти",
-       Changes: "Зміни",
-       SaveChanges: "Зберігти зміни",
-       YourName: "Ваше ім'я",
-       BitcoinReturnAddress: "Біткойн-адреса для повернення коштів",
-       BitcoinReturnAddressPlaceholder: "Введіть Біткойн-адресу",
-       BitcoinReturnAddressInfo: "В разі повернення коштів, вони будуть надіслані на цю адресу, вона має бути постійною.", //not translated
-       LocalCurrency: "Ваша валюта",
-       TimeZone: "Часовий пояс",
-       ShipToName: "Ім'я",
-       ShipToStreet: "Вулиця",
-       ShipToCity: "Місто",
-       ShipToState: "Країна/Провінція/Місто",
-       ShipToPostalCode: "Почтовий Індекс",
-       PostalCode: "Почтовий Індекс",
-       ShipToCountry: "Країна",
-       EnableNotifications: "Повідомлення",
-       EnableSSL: "Включити SSL",
-       LibbitcoinServerAddress: "Адреса сервера Libbitcoin",
-       ServerIPPort: "Сервер IP:Port",
-       All: "Всі",
-       Name: "Ім'я",
-       Price: "Ціна",
-       Available: "Доступно",
-       Type: "Тип",
-       Condition: "Стан",
-       NSFW: "18+ (для Дорослих)",
-       Select: "Вибір",
-       Social: "Соціальний",
-       Theme: "Тема оформлення",
-       Listing: "Товар",
-       Listings: "Товари",
-       ViewPage: "Дивитись сторінку",
-       Pages: "Сторінки",
-       Page: "Сторінка",
-       Language: "Мова",
-       Reset: "Сброс",
-       Local: "Локльний",
-       Domestic: "В межах країни",
-       Location: "Місцезнаходження",
-       International: "Міжнродний",
-       Time: "Час",
-       Free: "Вільний",
-       Category: "Категорія",
-       ProcessingTime: "Днів на підготовку відправки",
-       SelectPhotos: "Оберіть Фото",
-       DragOrUploadPhotos: "Претащіть або оберіть фото",
-       ExpirationDate: "Зкінчуется продаж",
-       UploadCoverPhoto: "Завантажити головне фото",
-       ShortDescription: "Стислий опис",
-       UpTo140Characters: "До 140 знаків",
-       PrimaryColor: "Головний колір",
-       SecondaryColor: "Додатковий колір",
-       TextColor: "Колір тексту",
-       CoverPhotoButton: "Оберіть головне фото",
-       AboutPlaceholder: "Детальний опис",
-       BackgroundColor: "Фоновий колір",
-       NotificationFollow: "слідкує за вами",
-       NoNotifications: "Нема повідомлень",
-       WelcomeToYourPage: "Вітаємо вас!",
-       SearchForCategory: "Пошук категорії",
-       Moderators: "Модератори",
-       CurrentModerators: "Дійсні модертори",
-       AddModerators: "Додати модератора",
-       DeselectToRemoveModerator: "Оберіть модератора для того щоб видалити.",
-       SelectToAddModerator: "Оберіть модеретора для то щоб додати його.",
-       Categories: "Категорії",
-       UpTo3: "До 3-х",
-       AboutYourStore: "Опис вашого магзину",
-       PaymentType: "Засіб плтежу",
-       ShipTo: "Доставка",
-       FreeShipping: "Безкоштовна доставка",
-       OrderDetails: "Подробиці замовлення",
-       OrderSummary: "Інформація по замовленню",
-       AllListings: "Всі позиції",
-       ComingSoon: "Скоро",
-       PaymentPending: "Платіж обробляється",
-       FinalizePurchase: "Підтвердити Покупку",
-       LoadingImage: "Завантаження...",
-       UploadAvatar: "Оберіть Аватарку,
-       SaveAvatar: "Зберігти Аватарку",
-       NewAvatar: "Обрати нову аватарку",
-       NewCoverImage: "Обрати головне фото",
-       Loading: "Завантаження...",
-       Purchases:"Покупки",
-       Sales: "Продажі",
-       Cases: "Кейсы",
-       Enter: "Enter", 
-       Discover: "Перегляд",
-       Block: "Зблокувати",
-       Unblock: "Розблокувати",       
-       Blocked: "Заблокованно",
-       Advanced: "Додаткові налаштування",
-       General: "Загальні",
-       AllItems: "Всі інструменти",
-       DomesticShippingPrice: "Доставка в межах країни",
-       InternationalShippingPrice: "Ціна міжнародної доставки",
-       MinimumIs: "Мінімум",
-       Visibility: "Видимість",
-       Title: "Назва",
-       DigitalItem: "Цифровий товар",
-       PhysicalItem: "Фізичний товар",
-       DomesticShippingTime: "Термін доствки в межах країни",
-       InternationalShippingTime: "Міжнародний термін доставки",
-       DisplayNSFWcontent: "Відібржати NSFW контент?",
-       Basic: "Базовий",
-       Content: "Контент",
-       StandardThemes: "Стандартні теми",
-       NoPhotosAdded: "Фотографії не завнтежені",
-       Summary: "Загалом",
-       Funds: "Кошти",
-       Discussion: "Дискусія",
-       Quantity: "Кількість",
-       ShippingTo: "Доставка",
-       ModeratedBy: "Відмодеровано",
-       Submit: "Відправити",
-       maxLength20: "Максимум 20 знаків...",
-       maxLength80: "Максимум 80 знаків...",
-       maxLength200: "Максимум 200 знаків...",
-       StoreModeratorsOptional: "Модертори мгазину (Не Обов'язково)",
-       Searchformoderators: "Пошук модераторів",
-       Contributors: "Підтримали", 
-       Support: "Підтримка",
-       Licensing: "Ліцензування",
-       Forward: "Далі",
-       On: "On", 
-       Off: "Off", 
-       ClickToChange: "Натисніть для змін",
-       NotProvided: "Не вказано", 
-       NotFollowingAnyone: "Ні за ким не слідкуете",
-       NoFollowers: "За вми ніхто не слідкує",
-       Moderator: "Модератор",
-       Firewall: "Firewall", 
-       ReadOnly: "(Тільки перегляд)",
-       HandleResolver: "Handle Resolver",  
-       moderatorSettings: { 
-         ProvideResolution: "Забезпечити перегляд скарги",
-         ServiceFee: "Вартість послуги",
-         ServiceFeeNote: "Процент від сумми змовлення (max 25, Крок 0.01, min 0)"
-       },
-       BecomeModerator: "Стати Модертором",
-       EditModerator: "Налаштування Модертора",
-       transactions: {
-         OrderDetails: "Інформація Замовлення",
-         SoldBy: "Продано",
-         PurchasedBy: "Куплено",
-         searchByOrder: "Пошук за номером замовлення",
-         sortByStatusAll: "Всі",
-         sortByStatus0: "В Обробці (Очікування оплати)",
-         sortByStatus1: "Сплачено (Замовлення обробляеться)",
-         sortByStatus2: "Підтверджені/Відправлені",
-         sortByStatus3: "Виконано (Кошти вивільнені)",
-         sortByStatus4: "Оскаржені",
-         OrderID: "Номер замовлення",
-         OrderDate: "Дата змовлення",
-         OrderStatus: "Статус замовлення",
-         OrderStatus0: "В Обробці (Очікування оплати)",
-         OrderStatus1: "Сплачено (Замовлення обробляеться)",
-         OrderStatus2: "Підтверджено/Відправлено",
-         OrderStatus3: "Виконано (Кошти вивільнені)",
-         OrderStatus4: "Оскаржено",
-         OrderTotal: "Загалом заказів",
-         OrderTotalInBTC: "Загалом BTC",
-         PaymentProtection: "Захист оплати",
-         ShipTo: "Надіслати за адресою",
-         ConfirmOrder: "Підтвердити замовлення",
-         ReceivingAddress: "Адреса отримувача коштів",
-         RecievingAddressPlaceholder: "Bitcoin адреса на котру будуть надходити кошти",
-         Shipper: "Компанія що виконує доставку",
-         ShipperPlaceholder: "Назва компанії шо виконує доставку",
-         TrackingNumber: "Номер відстеження відправлення",
-         TrackingNumberPlaceholder: "Номер відстеження відправлення",
-         EstimatedDelivery: "Очікувана доставка",
-         EstimatedDeliveryPlaceholder: "Приблизна дата надходження замовлення",
-         URL: "URL адреса",
-         URLPlaceholder: "Посилання на завантаження, або додаткову інформацію", 
-         Password: "Password",
-         PasswordPlaceholder: "Пароль необхідний для завантеження, якщо є",
-         DirectTransaction: "Прямий переказ",
-         ModeratedTransaction: "Угода що модеруется",
-         Seller: "Продавець",
-         Buyer: "Покупець",
-         transferReceipt: "transferReceipt",
-         copyTxid: "copy tx ID",
+        },
+        
+        {
+         langName: "Українська (Ukrainian)",
+         langCode: "uk",
+         /*
+  
+          Translator: Loderunner2, Bitcoin.ua
+          02/28/2016: ~ 5 untranslated strings
+  
+          Use capitalized keys for widely reused text that must be capitalized
+  
+          */
+         Next: "Далі",
+         IAgree: "Згоден",
+         Back: "Назад",
+         EnterMessage: "Введіть повідомлення...",
+         Reload: "Перезавантажити",
+         You: "Ви",
+         Skip: "Пропустити",
+         Done: "Готово",
+         Navigation: "Навігація",
+         Cancel: "Скасувати",
+         ClosingOpenBazaar: "Закрити (Сторінка буде недоступна онлайн)", 
+         Minimize: "Згорнути",
+         Maximize: "Розгорнути",
          Close: "Закрити",
-         FundOrder: "Сплатити замовлення",
-         sortByDateNewest: "За датою, Новіші",
-         sortByDateOldest: "За датою, Старіші",
-         PayPurchase: "Оплатити це замовлення", 
-         CompleteOrder: "Змовлення виконано",
-         MarkAsShipped: "Змовлення відправлено",
-         RateThisTransaction: "Оцінити це замовлення",
-         TransactionReview: "відгут про замовлення",
-         OverallRating: "Загальний рейтинг",
-         Quality: "Якість",
-         Description: "Відповідність Опису",
-         DeliveryTime: "Час доставки",
-         CustomerService: "Підтримка та зворотній зв'язок",
-         Review: "Відгук",
-         ReviewPlaceHolder: "Ваш відгут про це замовлення",
-         NoneSent: "Не відпрвлене"
-       },
-       errorMessages: {
-         saveError: "Не можливо зберігти інформацію.",
-         getError: "Не можливо отримати інформцію.",
-         missingError: "Деякі поля заповнені не вірно.",
-         serverError: "Помилка зв'язку з сервером.",
-         userError: "Не можу знайти інформацію за цим ID.",
-         userNotFoundError: "Інформація користувача не доступна. Можливо він офлайн.",
-         notFoundError: "Не можу завантажити інформцію для:",
-         socketError: "URL для WebSocket втрачено. Підєднуюсь за стандартною адресою ws://localhost:18466",
-         contractError: "Цей товар не можна придбати",
-         sellerError: "Сервер продавця відхилив запит на придбання",
-         checkPurchaseData: "Будь-ласка перевірте інформацію по замовленню, кількість товару, адресу, та інше...",
-         pageUnavailable: "Ця сторінка зараз не доступна.",
-         badHandle: "Не правильний OpenBazaar ID"
-       },
-      aboutSection: {
-         about: "
-<p>OpenBazaar це мережа з користувачів котрі куплють та продають товари та послуги безпосередньо один одному, використовуючи Біткоін.
-Ця мережа не має власника, не управляєтся будь якою організаціею, являється розподіленою децентралізованою системою що існує в мережі.
-</p>
-<p>OpenBazaar программа з відкритим кодом та MIT ліцензіею. Ви можете переглянути код за посиланням 
-<a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p>
-<p>OpenBazaar це колективний поект, і ми запрошуемо всіх до участі у його розробці до каналу  
-<a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a>,
-або <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p
-<p>Якщо вам потрібна допомога, прочитайте OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">інструкцію</a>.</p>
-<p>Якщо у вас залишились питання, звертайтесь до служби підтримки (Англійською) 
-<a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" 
-target=\"_blank\">support desk</a>.</p>",
-         contributors: "
-<p>OpenBazaar став можливим завдяки міжнародному співтовариству розробників та волонтерів, що витратили свій час на розробку проекту, 
-та допомогли зробити торгівлю вільною. Це частковий список тих хто допоміг проекту написанням коду та іншою допомогою</p>
-<ul>
-<li>Giannis Adamopoulos</li>
-<li>Ariadni-Karolina Alexiou</li>
-<li>Tikhon Bernstam</li>
-<li>Brad Burnham</li>
-<li>George Chatzisofroniou</li>
-<li>Patrick Connolly</li>
-<li>Chris Dixon</li>
-<li>Simon de la Rouviere</li>
-<li>Braden Glasgow</li>
-<li>Brian Hoffman</li>
-<li>Ben Holden-Crowther</li>
-<li>Joshua Jeffryes</li>
-<li>Nikolas Korasidis</li>
-<li>Regan Lawton</li>
-<li>Sami Lehtinen</li>
-<li>Angel Leon</li>
-<li>Joye Lin</li>
-<li>Joel Monegro</li>
-<li>William Mougayar</li>
-<li>Jonas David Nick</li>
-<li>Onename</li>
-<li>Chris Pacia</li>
-<li>Sam Patterson</li>
-<li>Chara Podimata</li>
-<li>Samuel Reed</li>
-<li>Washington Sanchez</li>
-<li>Aeron Paul Sioson</li>
-<li>Adrian Smith</li>
-<li>Adam Snodgrass</li>
-<li>Thomas Stilwell</li>
-<li>Amir Taaki</li>
-<li>Mike Wolf</li>
-<li>Dionysis Zindros</li>
-<li>secret-bitcoin-login</li>
-<li>Rav3nPL</li>
-<li>El--Presidente</li>
-<li>Tinytin</li>
-<li>ULRichard</li>
-</ul>", 
-
-         support: "
-<p>Ви можете допомогти OpenBazaar в декілька способів та зробити торгівлю дійсно вільною.</p>
-<p>Продаж або придбання товарів та послуг в мережі допомагає зростанню та розвитку товариства та робить платформу більш цікавою для нових користувачів.
-Порадьте тим хто приймає Bitcoin в бізнесі використовувати плтформу, допоможіть розповсюдженням інформації про можливості платформи, P2P торгівлі.  
-</p>
-
-<p>Якщо ви розробник, відвідайте нашу сторінку <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>, 
-можливо ви зможете допомогти чимось. Під допомогою з розробкою ядра, ми надіємося що бездозвільна та відкрита природа проекту,
-дасть вам змогу будувати нові сервіси поверх вже існуючої мережі.</p>
-
-<p>Ткож вы можете 
-<a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">допомогти з розробкою надавши трішки Bitcoin</a> 
- що будуть використані для участі в конференціях, та як нагороди розробникам, та на рекламу та просування OpenBazaar.</p>
-
-<p>Будьласка <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">приєднуйтесь до Slack</a> якщо ви маєте ідеї для OpenBazaar, або якщо маєте питання до ключових розробників.</p>",
+         Yes: "Так",
+         No: "Ні",
+         of: "із",
+         Sell: "Продати",
+         New: "Новий",
+         Excellent: "Відмінно",
+         Good: "Добре",
+         Poor: "Погно",
+         SKU: "Номер Товару",
+         Refurbished: "Відремонтованый",
+         Physical: "Фізичний товар",
+         Digital: "Цифровий товар",
+         Service: "Послуга",
+         Visit: "Переглядів",
+         Item: "Штук",
+         Items: "Штук",
+         Stores: "Магазини",
+         Follow: "Слідкувати",
+         Feed: "Лента",
+         FeedPlaceholder: "Всі магазини за котрими ви слідкуєте",
+         ViewListing: "Відобразити перелік",
+         Unfollow: "Не слідкувати",
+         About: "Про нас",
+         NoDescriptionAdded: "Опис не знайдено ...",
+         NoListings: "Товари відсутні",
+         CoverPhoto: "Головне зображення",
+         AboutEmpty: "Опис відсутній ...",
+         Followers: "Слідкують за вами",
+         Following: "Ви слідкуєте",
+         Message: "Повідомлення",
+         Messages: "Повідомлення",
+         Store: "Магазин",
+         Edit: "Редагувати",
+         Used: "Був у використанні",
+         Delete: "Видалити",
+         DontDelete: "Не видаляти",
+         ConfirmDelete: "Так, знищити",
+         Website: "Веб-сайт",
+         Guid: "OpenBazaar ID",
+         Welcome: "Вітаю",
+         CreateStore: "Відкрити магазин",
+         GoToMyPage: "Моя сторінка",
+         SearchForItemsPlaceholder: "Введіть #games, #shoes або будь який тег #tag...",
+         SearchForPagesPlaceholder: "Пошук за назвою або словом...",
+         SearchFeedPlaceholder: "Пошук за словом ...",
+         SearchForFollowersPlaceholder: "Пошук за ім'ям ...",
+         SearchForUsersPlaceholder: "Пошук за ім'ям або OpenBazaar ID",
+         SearchOnUserStorePlaceholder: "Введіть назву...",
+         EstDeliveryDomesticPlaceholder: "3-5 Робочих Днів",
+         EstDeliveryInternationalPlaceholder: "7-15 Робочих Днів",
+         OrderProcessingTimePlaceholder: "Вкажіть час за який ви відправите замовлення",
+         TermsAndConditionsPlaceholder: "Опишіть ваші правила та умови співпраці ...",
+         TitlePlaceholder: "Вкажіть назву",
+         DescriptionPlaceholder: "Додайте опис...",
+         ReturnPolicyPlaceholder: "Умови повернення товару...",
+         CategoryPlaceholder: "Оберіть категорію",
+         CategoryHelperText: "Категорії що використовуються для сортування товарів вашого магазину.",
+         KeywordsHelperText: "Додавання тегів полегшує пошук товарів, та збільшує продажі.",
+         ExpirationDateHelperText: "Оберіть дату для автоматичного зняття з продажу.",
+         ClearExpirationDate: "Дата зняття з продажу",
+         ReturnPolicy: "Умови повернення товару",
+         TermsAndConditions: "Правила роботи магазину",
+         Photos: "Зображення",
+         Added: "Додано",
+         Categorization: "Ктегорізація",
+         Expiration: "Дата закінчення продажу",
+         Search: "Пошук",
+         Email: "E-Mail",
+         Facebook: "Сторінка Facebook",
+         Instagram: "Сторінка Instagram",
+         Twitter: "Twitter",
+         PGPKey: "PGP Ключ",
+         Snapchat: "Snapchat",
+         BUYNOW: "Купити негайно",
+         Description: "Опис",
+         Reviews: "Відгуки",
+         Shipping: "Доставка",
+         Addresses: "Адреса",
+         NewAddress: "Нова адреса",
+         CurrentAddress: "Дійсна адреса",
+         Returns: "Повернення",
+         ReturnsPolicy: "Умови повернення товару",
+         Ampersand: "&",
+         Tags: "Tags, Теги",
+         Keywords: "Пошукові слова",
+         ShipsFrom: "Доставка з",
+         ShipsTo: "Країни доставки",
+         Optional: "Додатково",
+         Customize: "Налаштувати",
+         Save: "Зберігти",
+         Changes: "Зміни",
+         SaveChanges: "Зберігти зміни",
+         YourName: "Ваше ім'я",
+         BitcoinReturnAddress: "Біткойн-адреса для повернення коштів",
+         BitcoinReturnAddressPlaceholder: "Введіть Біткойн-адресу",
+         BitcoinReturnAddressInfo: "В разі повернення коштів, вони будуть надіслані на цю адресу, вона має бути постійною.", //not translated
+         LocalCurrency: "Ваша валюта",
+         TimeZone: "Часовий пояс",
+         ShipToName: "Ім'я",
+         ShipToStreet: "Вулиця",
+         ShipToCity: "Місто",
+         ShipToState: "Країна/Провінція/Місто",
+         ShipToPostalCode: "Почтовий Індекс",
+         PostalCode: "Почтовий Індекс",
+         ShipToCountry: "Країна",
+         EnableNotifications: "Повідомлення",
+         EnableSSL: "Включити SSL",
+         LibbitcoinServerAddress: "Адреса сервера Libbitcoin",
+         ServerIPPort: "Сервер IP:Port",
+         All: "Всі",
+         Name: "Ім'я",
+         Price: "Ціна",
+         Available: "Доступно",
+         Type: "Тип",
+         Condition: "Стан",
+         NSFW: "18+ (для Дорослих)",
+         Select: "Вибір",
+         Social: "Соціальний",
+         Theme: "Тема оформлення",
+         Listing: "Товар",
+         Listings: "Товари",
+         ViewPage: "Дивитись сторінку",
+         Pages: "Сторінки",
+         Page: "Сторінка",
+         Language: "Мова",
+         Reset: "Сброс",
+         Local: "Локльний",
+         Domestic: "В межах країни",
+         Location: "Місцезнаходження",
+         International: "Міжнродний",
+         Time: "Час",
+         Free: "Вільний",
+         Category: "Категорія",
+         ProcessingTime: "Днів на підготовку відправки",
+         SelectPhotos: "Оберіть Фото",
+         DragOrUploadPhotos: "Претащіть або оберіть фото",
+         ExpirationDate: "Зкінчуется продаж",
+         UploadCoverPhoto: "Завантажити головне фото",
+         ShortDescription: "Стислий опис",
+         UpTo140Characters: "До 140 знаків",
+         PrimaryColor: "Головний колір",
+         SecondaryColor: "Додатковий колір",
+         TextColor: "Колір тексту",
+         CoverPhotoButton: "Оберіть головне фото",
+         AboutPlaceholder: "Детальний опис",
+         BackgroundColor: "Фоновий колір",
+         NotificationFollow: "слідкує за вами",
+         NoNotifications: "Нема повідомлень",
+         WelcomeToYourPage: "Вітаємо вас!",
+         SearchForCategory: "Пошук категорії",
+         Moderators: "Модератори",
+         CurrentModerators: "Дійсні модертори",
+         AddModerators: "Додати модератора",
+         DeselectToRemoveModerator: "Оберіть модератора для того щоб видалити.",
+         SelectToAddModerator: "Оберіть модеретора для то щоб додати його.",
+         Categories: "Категорії",
+         UpTo3: "До 3-х",
+         AboutYourStore: "Опис вашого магзину",
+         PaymentType: "Засіб плтежу",
+         ShipTo: "Доставка",
+         FreeShipping: "Безкоштовна доставка",
+         OrderDetails: "Подробиці замовлення",
+         OrderSummary: "Інформація по замовленню",
+         AllListings: "Всі позиції",
+         ComingSoon: "Скоро",
+         PaymentPending: "Платіж обробляється",
+         FinalizePurchase: "Підтвердити Покупку",
+         LoadingImage: "Завантаження...",
+         UploadAvatar: "Оберіть Аватарку,
+         SaveAvatar: "Зберігти Аватарку",
+         NewAvatar: "Обрати нову аватарку",
+         NewCoverImage: "Обрати головне фото",
+         Loading: "Завантаження...",
+         Purchases:"Покупки",
+         Sales: "Продажі",
+         Cases: "Кейсы",
+         Enter: "Enter", 
+         Discover: "Перегляд",
+         Block: "Зблокувати",
+         Unblock: "Розблокувати",       
+         Blocked: "Заблокованно",
+         Advanced: "Додаткові налаштування",
+         General: "Загальні",
+         AllItems: "Всі інструменти",
+         DomesticShippingPrice: "Доставка в межах країни",
+         InternationalShippingPrice: "Ціна міжнародної доставки",
+         MinimumIs: "Мінімум",
+         Visibility: "Видимість",
+         Title: "Назва",
+         DigitalItem: "Цифровий товар",
+         PhysicalItem: "Фізичний товар",
+         DomesticShippingTime: "Термін доствки в межах країни",
+         InternationalShippingTime: "Міжнародний термін доставки",
+         DisplayNSFWcontent: "Відібржати NSFW контент?",
+         Basic: "Базовий",
+         Content: "Контент",
+         StandardThemes: "Стандартні теми",
+         NoPhotosAdded: "Фотографії не завнтежені",
+         Summary: "Загалом",
+         Funds: "Кошти",
+         Discussion: "Дискусія",
+         Quantity: "Кількість",
+         ShippingTo: "Доставка",
+         ModeratedBy: "Відмодеровано",
+         Submit: "Відправити",
+         maxLength20: "Максимум 20 знаків...",
+         maxLength80: "Максимум 80 знаків...",
+         maxLength200: "Максимум 200 знаків...",
+         StoreModeratorsOptional: "Модертори мгазину (Не Обов'язково)",
+         Searchformoderators: "Пошук модераторів",
+         Contributors: "Підтримали", 
+         Support: "Підтримка",
+         Licensing: "Ліцензування",
+         Forward: "Далі",
+         On: "On", 
+         Off: "Off", 
+         ClickToChange: "Натисніть для змін",
+         NotProvided: "Не вказано", 
+         NotFollowingAnyone: "Ні за ким не слідкуете",
+         NoFollowers: "За вми ніхто не слідкує",
+         Moderator: "Модератор",
+         Firewall: "Firewall", 
+         ReadOnly: "(Тільки перегляд)",
+         HandleResolver: "Handle Resolver",  
+         moderatorSettings: { 
+           ProvideResolution: "Забезпечити перегляд скарги",
+           ServiceFee: "Вартість послуги",
+           ServiceFeeNote: "Процент від сумми змовлення (max 25, Крок 0.01, min 0)"
+         },
+         BecomeModerator: "Стати Модертором",
+         EditModerator: "Налаштування Модертора",
+         transactions: {
+           OrderDetails: "Інформація Замовлення",
+           SoldBy: "Продано",
+           PurchasedBy: "Куплено",
+           searchByOrder: "Пошук за номером замовлення",
+           sortByStatusAll: "Всі",
+           sortByStatus0: "В Обробці (Очікування оплати)",
+           sortByStatus1: "Сплачено (Замовлення обробляеться)",
+           sortByStatus2: "Підтверджені/Відправлені",
+           sortByStatus3: "Виконано (Кошти вивільнені)",
+           sortByStatus4: "Оскаржені",
+           OrderID: "Номер замовлення",
+           OrderDate: "Дата змовлення",
+           OrderStatus: "Статус замовлення",
+           OrderStatus0: "В Обробці (Очікування оплати)",
+           OrderStatus1: "Сплачено (Замовлення обробляеться)",
+           OrderStatus2: "Підтверджено/Відправлено",
+           OrderStatus3: "Виконано (Кошти вивільнені)",
+           OrderStatus4: "Оскаржено",
+           OrderTotal: "Загалом заказів",
+           OrderTotalInBTC: "Загалом BTC",
+           PaymentProtection: "Захист оплати",
+           ShipTo: "Надіслати за адресою",
+           ConfirmOrder: "Підтвердити замовлення",
+           ReceivingAddress: "Адреса отримувача коштів",
+           RecievingAddressPlaceholder: "Bitcoin адреса на котру будуть надходити кошти",
+           Shipper: "Компанія що виконує доставку",
+           ShipperPlaceholder: "Назва компанії шо виконує доставку",
+           TrackingNumber: "Номер відстеження відправлення",
+           TrackingNumberPlaceholder: "Номер відстеження відправлення",
+           EstimatedDelivery: "Очікувана доставка",
+           EstimatedDeliveryPlaceholder: "Приблизна дата надходження замовлення",
+           URL: "URL адреса",
+           URLPlaceholder: "Посилання на завантаження, або додаткову інформацію", 
+           Password: "Password",
+           PasswordPlaceholder: "Пароль необхідний для завантеження, якщо є",
+           DirectTransaction: "Прямий переказ",
+           ModeratedTransaction: "Угода що модеруется",
+           Seller: "Продавець",
+           Buyer: "Покупець",
+           transferReceipt: "transferReceipt",
+           copyTxid: "copy tx ID",
+           Close: "Закрити",
+           FundOrder: "Сплатити замовлення",
+           sortByDateNewest: "За датою, Новіші",
+           sortByDateOldest: "За датою, Старіші",
+           PayPurchase: "Оплатити це замовлення", 
+           CompleteOrder: "Змовлення виконано",
+           MarkAsShipped: "Змовлення відправлено",
+           RateThisTransaction: "Оцінити це замовлення",
+           TransactionReview: "відгут про замовлення",
+           OverallRating: "Загальний рейтинг",
+           Quality: "Якість",
+           Description: "Відповідність Опису",
+           DeliveryTime: "Час доставки",
+           CustomerService: "Підтримка та зворотній зв'язок",
+           Review: "Відгук",
+           ReviewPlaceHolder: "Ваш відгут про це замовлення",
+           NoneSent: "Не відпрвлене"
+         },
+         errorMessages: {
+           saveError: "Не можливо зберігти інформацію.",
+           getError: "Не можливо отримати інформцію.",
+           missingError: "Деякі поля заповнені не вірно.",
+           serverError: "Помилка зв'язку з сервером.",
+           userError: "Не можу знайти інформацію за цим ID.",
+           userNotFoundError: "Інформація користувача не доступна. Можливо він офлайн.",
+           notFoundError: "Не можу завантажити інформцію для:",
+           socketError: "URL для WebSocket втрачено. Підєднуюсь за стандартною адресою ws://localhost:18466",
+           contractError: "Цей товар не можна придбати",
+           sellerError: "Сервер продавця відхилив запит на придбання",
+           checkPurchaseData: "Будь-ласка перевірте інформацію по замовленню, кількість товару, адресу, та інше...",
+           pageUnavailable: "Ця сторінка зараз не доступна.",
+           badHandle: "Не правильний OpenBazaar ID"
+         },
+        aboutSection: {
+           about: "
+  <p>OpenBazaar це мережа з користувачів котрі куплють та продають товари та послуги безпосередньо один одному, використовуючи Біткоін.
+  Ця мережа не має власника, не управляєтся будь якою організаціею, являється розподіленою децентралізованою системою що існує в мережі.
+  </p>
+  <p>OpenBazaar программа з відкритим кодом та MIT ліцензіею. Ви можете переглянути код за посиланням 
+  <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p>
+  <p>OpenBazaar це колективний поект, і ми запрошуемо всіх до участі у його розробці до каналу  
+  <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a>,
+  або <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p
+  <p>Якщо вам потрібна допомога, прочитайте OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">інструкцію</a>.</p>
+  <p>Якщо у вас залишились питання, звертайтесь до служби підтримки (Англійською) 
+  <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" 
+  target=\"_blank\">support desk</a>.</p>",
+           contributors: "
+  <p>OpenBazaar став можливим завдяки міжнародному співтовариству розробників та волонтерів, що витратили свій час на розробку проекту, 
+  та допомогли зробити торгівлю вільною. Це частковий список тих хто допоміг проекту написанням коду та іншою допомогою</p>
+  <ul>
+  <li>Giannis Adamopoulos</li>
+  <li>Ariadni-Karolina Alexiou</li>
+  <li>Tikhon Bernstam</li>
+  <li>Brad Burnham</li>
+  <li>George Chatzisofroniou</li>
+  <li>Patrick Connolly</li>
+  <li>Chris Dixon</li>
+  <li>Simon de la Rouviere</li>
+  <li>Braden Glasgow</li>
+  <li>Brian Hoffman</li>
+  <li>Ben Holden-Crowther</li>
+  <li>Joshua Jeffryes</li>
+  <li>Nikolas Korasidis</li>
+  <li>Regan Lawton</li>
+  <li>Sami Lehtinen</li>
+  <li>Angel Leon</li>
+  <li>Joye Lin</li>
+  <li>Joel Monegro</li>
+  <li>William Mougayar</li>
+  <li>Jonas David Nick</li>
+  <li>Onename</li>
+  <li>Chris Pacia</li>
+  <li>Sam Patterson</li>
+  <li>Chara Podimata</li>
+  <li>Samuel Reed</li>
+  <li>Washington Sanchez</li>
+  <li>Aeron Paul Sioson</li>
+  <li>Adrian Smith</li>
+  <li>Adam Snodgrass</li>
+  <li>Thomas Stilwell</li>
+  <li>Amir Taaki</li>
+  <li>Mike Wolf</li>
+  <li>Dionysis Zindros</li>
+  <li>secret-bitcoin-login</li>
+  <li>Rav3nPL</li>
+  <li>El--Presidente</li>
+  <li>Tinytin</li>
+  <li>ULRichard</li>
+  </ul>", 
+  
+           support: "
+  <p>Ви можете допомогти OpenBazaar в декілька способів та зробити торгівлю дійсно вільною.</p>
+  <p>Продаж або придбання товарів та послуг в мережі допомагає зростанню та розвитку товариства та робить платформу більш цікавою для нових користувачів.
+  Порадьте тим хто приймає Bitcoin в бізнесі використовувати плтформу, допоможіть розповсюдженням інформації про можливості платформи, P2P торгівлі.  
+  </p>
+  
+  <p>Якщо ви розробник, відвідайте нашу сторінку <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>, 
+  можливо ви зможете допомогти чимось. Під допомогою з розробкою ядра, ми надіємося що бездозвільна та відкрита природа проекту,
+  дасть вам змогу будувати нові сервіси поверх вже існуючої мережі.</p>
+  
+  <p>Ткож вы можете 
+  <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">допомогти з розробкою надавши трішки Bitcoin</a> 
+   що будуть використані для участі в конференціях, та як нагороди розробникам, та на рекламу та просування OpenBazaar.</p>
+  
+  <p>Будьласка <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">приєднуйтесь до Slack</a> якщо ви маєте ідеї для OpenBazaar, або якщо маєте питання до ключових розробників.</p>",
+           
+   licensing: "
+  <p>OpenBazaar це програма з відкритим кодом та ліцензіею MIT. Ця ліцензія  дозволяє, та розроблена для того щоб дозволити людям
+  вільно використовувти код прогрмми для інших відкритих проектів, іншого програмного забезпечення. Повний текст ліцензії нведено нижче.</p>
+  <h4>MIT Ліцензія (MIT)</h4><h5>
+  Права користування &#169 2015 OpenBazaar розробників.</h5><p>Ціею ліцензіею надано дозвіл, безкоштовно, 
+  для будь якої особи отримувати копію ціеї прогрми та асоційовних файлів документації. (the \"Software\"), 
+  використовувати програму без будь яких обмежень, використання, копіювання, модифікації, злияння, публікації, розповсюдження, субліцензування, продажу копій, за умови дотримання наступних вимог:</p>
+  <p>Наведенні вище прва користування та дозвіл на використання має бути зазначений в кожній копії программи або її частині.</p>
+  <p>ПРОГРАММА НАДАЄТЬСЯ \"ЯК Є\", 
+  БЕЗ БУДЬ ЯКИХ ГАРАНТІЙ, ЯВНИХ АБО УЯВНИХ, БЕЗ ГАРАНТІЇ НА ТОВАРИ ТА ПОСЛУГИ,
+  БЕЗ ГРАНТІЇ ПРИДАТНОСТІ ДЛЯ ВИКОРИСТАННЯ В БУДЬЯКИХ ЦІЛЯХ, АБО НЕ ПОРУШЕННЯ ВАШИХ ПРАВ. 
+  АВТРОРИ ПРОГРММИ НІ В ЯКОМУ РАЗІ НЕ НЕСУТЬ ВІДПОВІДАЛЬНОСТІ ЗА БУДЬ ЯКІ ПРЕТЕНЗІЇ, ШКОДУ, ВТРАЧЕНІ КОШТИ, ТА ІНШЕ. 
+  ПРОГРАММА НАДАЕТСЯ БЕЗ ГАРАНТІЙ В РАЗІ ВИКОРИСТАННЯ ПРОГРАМИИ, ПРАВОПОРУШЕННЯ АБО ІНШИМ ЧИНОМ, ВИКЛИКАНИМ, ПРОГРММОЮ АБО ІНШИМИ УМОВАМИ В ПРОГРАММІ.
+  Ви ВИКОРИСТОВУЄТЕ ПРОГРАММУ НА ВЛАСНУ ВІДПОВІДАЛЬНІСТЬ ТА РИЗИК. ТА МАЄТЕ ВЛАСНОРУЧ НЕСТИ ВІДПОВІДАЛЬНІСЬ ЗА ДїЇ СПРИЧИНЕНІ ПРОГРАМОЮ АБо В ПРОГРАМІ.</p>
+  <h4>Бібліотеки</h4>
+  <p>Нступні бібліотеки були використані в OpenBazaar:
+  </p><ul><li>protobuf</li>
+  <li>Twisted</li>
+  <li>txJSON-RPC</li>
+  <li>txrudp</li>
+  <li>pyelliptic</li>
+  <li>pystun</li>
+  <li>bitcoin</li>
+  <li>gnupg</li>
+  <li>pynacl</li>
+  <li>txrestapi</li>
+  <li>autobahn</li>
+  <li>python-obelisk</li>
+  <li>requests</li>
+  <li>backbone</li>
+  <li>underscore</li>
+  <li>moment.js</li>
+  <li>jquery</li>
+  <li>electron.js</li>
+  <li>backbone.linear</li>
+  <li>list.js</li>
+  <li>polyglot.js</li>
+  <li>taggle.js</li>
+  <li>safestart</li></ul>",
          
- licensing: "
-<p>OpenBazaar це програма з відкритим кодом та ліцензіею MIT. Ця ліцензія  дозволяє, та розроблена для того щоб дозволити людям
-вільно використовувти код прогрмми для інших відкритих проектів, іншого програмного забезпечення. Повний текст ліцензії нведено нижче.</p>
-<h4>MIT Ліцензія (MIT)</h4><h5>
-Права користування &#169 2015 OpenBazaar розробників.</h5><p>Ціею ліцензіею надано дозвіл, безкоштовно, 
-для будь якої особи отримувати копію ціеї прогрми та асоційовних файлів документації. (the \"Software\"), 
-використовувати програму без будь яких обмежень, використання, копіювання, модифікації, злияння, публікації, розповсюдження, субліцензування, продажу копій, за умови дотримання наступних вимог:</p>
-<p>Наведенні вище прва користування та дозвіл на використання має бути зазначений в кожній копії программи або її частині.</p>
-<p>ПРОГРАММА НАДАЄТЬСЯ \"ЯК Є\", 
-БЕЗ БУДЬ ЯКИХ ГАРАНТІЙ, ЯВНИХ АБО УЯВНИХ, БЕЗ ГАРАНТІЇ НА ТОВАРИ ТА ПОСЛУГИ,
-БЕЗ ГРАНТІЇ ПРИДАТНОСТІ ДЛЯ ВИКОРИСТАННЯ В БУДЬЯКИХ ЦІЛЯХ, АБО НЕ ПОРУШЕННЯ ВАШИХ ПРАВ. 
-АВТРОРИ ПРОГРММИ НІ В ЯКОМУ РАЗІ НЕ НЕСУТЬ ВІДПОВІДАЛЬНОСТІ ЗА БУДЬ ЯКІ ПРЕТЕНЗІЇ, ШКОДУ, ВТРАЧЕНІ КОШТИ, ТА ІНШЕ. 
-ПРОГРАММА НАДАЕТСЯ БЕЗ ГАРАНТІЙ В РАЗІ ВИКОРИСТАННЯ ПРОГРАМИИ, ПРАВОПОРУШЕННЯ АБО ІНШИМ ЧИНОМ, ВИКЛИКАНИМ, ПРОГРММОЮ АБО ІНШИМИ УМОВАМИ В ПРОГРАММІ.
-Ви ВИКОРИСТОВУЄТЕ ПРОГРАММУ НА ВЛАСНУ ВІДПОВІДАЛЬНІСТЬ ТА РИЗИК. ТА МАЄТЕ ВЛАСНОРУЧ НЕСТИ ВІДПОВІДАЛЬНІСЬ ЗА ДїЇ СПРИЧИНЕНІ ПРОГРАМОЮ АБо В ПРОГРАМІ.</p>
-<h4>Бібліотеки</h4>
-<p>Нступні бібліотеки були використані в OpenBazaar:
-</p><ul><li>protobuf</li>
-<li>Twisted</li>
-<li>txJSON-RPC</li>
-<li>txrudp</li>
-<li>pyelliptic</li>
-<li>pystun</li>
-<li>bitcoin</li>
-<li>gnupg</li>
-<li>pynacl</li>
-<li>txrestapi</li>
-<li>autobahn</li>
-<li>python-obelisk</li>
-<li>requests</li>
-<li>backbone</li>
-<li>underscore</li>
-<li>moment.js</li>
-<li>jquery</li>
-<li>electron.js</li>
-<li>backbone.linear</li>
-<li>list.js</li>
-<li>polyglot.js</li>
-<li>taggle.js</li>
-<li>safestart</li></ul>",
-       
-},
-       saveMessages: {
-         Saved: "Збереженно",
-         SaveSuccess: "Ваші зміни збереженно."
-       },
-       discover: {
-         searchDefaultText: "Сканую вашу мережу...",
-         searchingText: "Сканую вашу мережу на ",
-         noResults: "Не знайдено товарів в вашій мережі познчених як "
-       },
-       filters: {
-         pagesAllTypes: "Всі типи",
-         pagesStores: "Магазини",
-         pagesMods: "Сервіси модератора",
-         pagesBasic: "Звичайні користувачі",
-         listingsCurated: "Магазини що я слідкую",
-         listingsAll: "Зі всіх магазинів"
-   categoryAll: "Всі"
-       },
-       nav: {
-         searchPlaceholder: "Введіть OpenBazaar ID або тег...",
-         myPage: "Моя сторінка",
-         customizePage:"Налаштувати сторінку",
-         sellItem:"Додати товар",
-         createListing:"Створити товар",
-         purchases:"Покупки",
-         sales:"Продажі",
-         cases:"Історія",
-         notifications:"Повідомлення",
-         settings:"Налаштування",
-         about:"Про OpenBazaar",
-         support:"Підтримай OpenBazaar"
-       },
-       onboarding: {
-         intro: "Конфігурація OpenBazaar",
-         Introduction: "Ознайомлення",
-         IntroductionBody: "
-OpenBazaar - це вільний, соціальний, децентралізований, глобалльний, P2P ринок товарів та послуг. 
-\n\n 
-Це технологія торгівлі за аналогом eBay, де довіра до продавця грунтуєтся на його попередній репутації та відгуках про нього.
-Данні в мережі OpenBazaar, передаются безпосередньо між учасникам та зберігаються у самих учасників за технологіею P2P (Torrent).
-OpenBazaar являєтся децентралізованим та глобальним ринком, що не має комісій та зборон на товари та послуги, це программа з відкритим кодом що створена суспільно 
-та не має має власника. 
-\n\n 
-Переклад виконано Openbazzare.org.ua та Bitcoin.ua.
-\n\n 
-Користування OpenBazaar, може виглядати та здійснюватись трошки інакше від того як ви звикли купляти та продвати товари, 
-тож будь ласка будьте стриманими, поки ви звикнете та навчитесь.",
-
-         Theme: "Оберіть дизайн вашої сторінки",
-         chooseLanguage: "Оберіть мову",
-         contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиків",
-         configure: "Налаштуйте ваш досвід",
-         disclaimer_title: "Відповідальність та Використання",
-         disclaimer_body: "
-ПОПЕРЕДЖЕННЯ! - Шановні Українці !
-\n\n
-НЕ Використовуйте OpenBazaar для продажу або придбання товарів що заборонені законодавством, або можуть порушувати норми моралі.
-Ви особисто несете відповідальність за всі ваші дії. 
-\n\n
-Майте на увазі що система Біткоін та OpenBazaar забезпечують лише умовну анонімнісмть, та потребують додаткових заходів 
-для забезпечення повної анонімності. Ці сиситеми зберігають всю історію транзакцій, що відкрита та може бути переглянута будьким. 
-Всі ваші дії що були вчинені анонімно зараз, потенційно можуть бути відстежені в майбутньому, 
-та не лише через вас, а й через дії тих з ким ви торгуєте.
-\n\n
-Користувачі OpenBazaar мають знати та дотримуватись зконів тих територій на яких здійснюють торгівлю. 
-Та несуть власну відповідальністю за порушення законів.
-Розробники OpenBazaar, не несуть відповідальність за використання программи в протиправних цілях. 
-Ви маєте самостійно переконатися в вашому праві, купувати чи продавати той чи інший товар чи послугу, 
-та можливості доставки товару в ту чи іншу країну, згідно її законодавства.
-\n\n
-Спільнота OpenBazaar постійно працює для вдосконалення якості використання, вільної платформи для світової торгівлі.
-Але, так як і з будь яким програмним продуктом можливі помилки в роботі прогрмми.
-Розробники не несуть відповідальності з грошові втрати повязані з використанням прогрмми OpenBazaar.
-Використовуючи программу OpenBazaar, ви чините на свій власний роззсуд, та власну відповідальність, 
-программа надается як є, без зобовязань. Якщо це не є прийнятним для вас, відмовтесь від використання OpenBazaar.
-",
-
-         yourCountry: "Оберіть вашу країну",
-         localCurrency: "Оберіть валюту",
-         LanguagePlaceholder: "Введіть мову",
-         CountryPlaceholder: "Введіть країну",
-         CurrencyPlaceholder: "Введіть валюту",
-         TimezonePlaceholder: "Введіть часовий пояс",
-         ShortDescriptionPlaceholder: "Напишіть щось про себе ... (160 літер максимум)",
-         timeZone: "Оберіть часовий пояс",
-         yourDetails: "Вкажіть вашу інформацію",
-         yourDescription: "Про Вас",
-         handle: "Логін",
-         chooseHandle: "Вкажіть Логін (Англійською)",
-         knownAs: "Зараз ваше ім/'я:",
-         wouldYou: "Ви бажаєте зарееструвати легкий логін?",
-         registerNew: "Зареєструвати новий",
-         recommended: "Рекомендована підписка на ці магазини",
-         connectExisting: "Підключити існуючий",
-         avatar: "Встановити аватарку",
-         chooseAvatar: "Обрати аватарку",
-         discoverCallOut: "Пошук сторінок на OpenBazaar (Англійською)",
-         Finished: "Завершено"
-       },
-       buyFlow: {
-         DirectPayment: "Прямий платіж",
-         SendDirectlyTo: "Відправити прямий платіж %{handle}",
-         MustAddAddress: "Ви маєте вказти адресу доставки",
-         VendorShipsTo: "Можлива відправка в ці країни",
-         DoesNotShipHere: "В ці країни доставка не здійснюється",
-         Send: "Відправити",
-         BTCto: "BTC to",
-         SendBTCtoAddress: "Надіслати %{amount} BTC",
-         OpenAddress: "Відкрити адресу в локальному гаманці Bitcoin",
-         CopyAddress: "Скопіювати в буфер обміну",
-         RefreshPayment: "Оновити статус платежу",
-         summaryMsg1: "Ваш платіж надіслано %{recipient}",
-         summaryMsg2: "Очікуваний час обробки замовлення складє",
-         summaryMsg3: "Щоб перевірити статус змовлення, зайдіть в",
-         purchasesPage: "Сторінка покупок",
-         returnAddress: "Адреса Повернення",
-         moderatorPaymentDisclaimer: "Використовується лише для спірних транзакцій",
-         directPaymentDisclaimer: "Будьте обачні при відправці коштів на пряму, повернути кошти не можливо.",
-         directPaymentTo: "Прамий плтіж",
-         paymentSent: "Платіж надіслно!",
-         total: "Загалом"
-       },
-       chat: {
-         noSearchResultsFound: "Нічого не знайдено" 
-       }        
-     }
-    ]
+  },
+         saveMessages: {
+           Saved: "Збереженно",
+           SaveSuccess: "Ваші зміни збереженно."
+         },
+         discover: {
+           searchDefaultText: "Сканую вашу мережу...",
+           searchingText: "Сканую вашу мережу на ",
+           noResults: "Не знайдено товарів в вашій мережі познчених як "
+         },
+         filters: {
+           pagesAllTypes: "Всі типи",
+           pagesStores: "Магазини",
+           pagesMods: "Сервіси модератора",
+           pagesBasic: "Звичайні користувачі",
+           listingsCurated: "Магазини що я слідкую",
+           listingsAll: "Зі всіх магазинів"
+     categoryAll: "Всі"
+         },
+         nav: {
+           searchPlaceholder: "Введіть OpenBazaar ID або тег...",
+           myPage: "Моя сторінка",
+           customizePage:"Налаштувати сторінку",
+           sellItem:"Додати товар",
+           createListing:"Створити товар",
+           purchases:"Покупки",
+           sales:"Продажі",
+           cases:"Історія",
+           notifications:"Повідомлення",
+           settings:"Налаштування",
+           about:"Про OpenBazaar",
+           support:"Підтримай OpenBazaar"
+         },
+         onboarding: {
+           intro: "Конфігурація OpenBazaar",
+           Introduction: "Ознайомлення",
+           IntroductionBody: "
+  OpenBazaar - це вільний, соціальний, децентралізований, глобалльний, P2P ринок товарів та послуг. 
+  \n\n 
+  Це технологія торгівлі за аналогом eBay, де довіра до продавця грунтуєтся на його попередній репутації та відгуках про нього.
+  Данні в мережі OpenBazaar, передаются безпосередньо між учасникам та зберігаються у самих учасників за технологіею P2P (Torrent).
+  OpenBazaar являєтся децентралізованим та глобальним ринком, що не має комісій та зборон на товари та послуги, це программа з відкритим кодом що створена суспільно 
+  та не має має власника. 
+  \n\n 
+  Переклад виконано Openbazzare.org.ua та Bitcoin.ua.
+  \n\n 
+  Користування OpenBazaar, може виглядати та здійснюватись трошки інакше від того як ви звикли купляти та продвати товари, 
+  тож будь ласка будьте стриманими, поки ви звикнете та навчитесь.",
+  
+           Theme: "Оберіть дизайн вашої сторінки",
+           chooseLanguage: "Оберіть мову",
+           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиків",
+           configure: "Налаштуйте ваш досвід",
+           disclaimer_title: "Відповідальність та Використання",
+           disclaimer_body: "
+  ПОПЕРЕДЖЕННЯ! - Шановні Українці !
+  \n\n
+  НЕ Використовуйте OpenBazaar для продажу або придбання товарів що заборонені законодавством, або можуть порушувати норми моралі.
+  Ви особисто несете відповідальність за всі ваші дії. 
+  \n\n
+  Майте на увазі що система Біткоін та OpenBazaar забезпечують лише умовну анонімнісмть, та потребують додаткових заходів 
+  для забезпечення повної анонімності. Ці сиситеми зберігають всю історію транзакцій, що відкрита та може бути переглянута будьким. 
+  Всі ваші дії що були вчинені анонімно зараз, потенційно можуть бути відстежені в майбутньому, 
+  та не лише через вас, а й через дії тих з ким ви торгуєте.
+  \n\n
+  Користувачі OpenBazaar мають знати та дотримуватись зконів тих територій на яких здійснюють торгівлю. 
+  Та несуть власну відповідальністю за порушення законів.
+  Розробники OpenBazaar, не несуть відповідальність за використання программи в протиправних цілях. 
+  Ви маєте самостійно переконатися в вашому праві, купувати чи продавати той чи інший товар чи послугу, 
+  та можливості доставки товару в ту чи іншу країну, згідно її законодавства.
+  \n\n
+  Спільнота OpenBazaar постійно працює для вдосконалення якості використання, вільної платформи для світової торгівлі.
+  Але, так як і з будь яким програмним продуктом можливі помилки в роботі прогрмми.
+  Розробники не несуть відповідальності з грошові втрати повязані з використанням прогрмми OpenBazaar.
+  Використовуючи программу OpenBazaar, ви чините на свій власний роззсуд, та власну відповідальність, 
+  программа надается як є, без зобовязань. Якщо це не є прийнятним для вас, відмовтесь від використання OpenBazaar.
+  ",
+  
+           yourCountry: "Оберіть вашу країну",
+           localCurrency: "Оберіть валюту",
+           LanguagePlaceholder: "Введіть мову",
+           CountryPlaceholder: "Введіть країну",
+           CurrencyPlaceholder: "Введіть валюту",
+           TimezonePlaceholder: "Введіть часовий пояс",
+           ShortDescriptionPlaceholder: "Напишіть щось про себе ... (160 літер максимум)",
+           timeZone: "Оберіть часовий пояс",
+           yourDetails: "Вкажіть вашу інформацію",
+           yourDescription: "Про Вас",
+           handle: "Логін",
+           chooseHandle: "Вкажіть Логін (Англійською)",
+           knownAs: "Зараз ваше ім/'я:",
+           wouldYou: "Ви бажаєте зарееструвати легкий логін?",
+           registerNew: "Зареєструвати новий",
+           recommended: "Рекомендована підписка на ці магазини",
+           connectExisting: "Підключити існуючий",
+           avatar: "Встановити аватарку",
+           chooseAvatar: "Обрати аватарку",
+           discoverCallOut: "Пошук сторінок на OpenBazaar (Англійською)",
+           Finished: "Завершено"
+         },
+         buyFlow: {
+           DirectPayment: "Прямий платіж",
+           SendDirectlyTo: "Відправити прямий платіж %{handle}",
+           MustAddAddress: "Ви маєте вказти адресу доставки",
+           VendorShipsTo: "Можлива відправка в ці країни",
+           DoesNotShipHere: "В ці країни доставка не здійснюється",
+           Send: "Відправити",
+           BTCto: "BTC to",
+           SendBTCtoAddress: "Надіслати %{amount} BTC",
+           OpenAddress: "Відкрити адресу в локальному гаманці Bitcoin",
+           CopyAddress: "Скопіювати в буфер обміну",
+           RefreshPayment: "Оновити статус платежу",
+           summaryMsg1: "Ваш платіж надіслано %{recipient}",
+           summaryMsg2: "Очікуваний час обробки замовлення складє",
+           summaryMsg3: "Щоб перевірити статус змовлення, зайдіть в",
+           purchasesPage: "Сторінка покупок",
+           returnAddress: "Адреса Повернення",
+           moderatorPaymentDisclaimer: "Використовується лише для спірних транзакцій",
+           directPaymentDisclaimer: "Будьте обачні при відправці коштів на пряму, повернути кошти не можливо.",
+           directPaymentTo: "Прамий плтіж",
+           paymentSent: "Платіж надіслно!",
+           total: "Загалом"
+         },
+         chat: {
+           noSearchResultsFound: "Нічого не знайдено" 
+         }        
+       }
+      ]
   }
 });
