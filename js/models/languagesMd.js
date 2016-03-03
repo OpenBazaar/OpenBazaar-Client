@@ -463,7 +463,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Would you like to register an easy to remember handle?",
           registerNew: "Register New",
           recommended: "Recommended Pages to Follow",
-          connectExisting: "Connect Existing",
           avatar: "Set an Avatar",
           chooseAvatar: "Select Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar",
@@ -995,7 +994,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Desea registrar un apodo f&aacute;cil de recordar?",
           registerNew: "Registrar Nuevo",
           recommended: "P&aacute;ginas Recomendadas a Seguir",
-          connectExisting: "Conectar Existente",
           avatar: "Establecer un Avatar",
           chooseAvatar: "Seleccione avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -1526,7 +1524,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Willst du dir einen leicht zu merkenden Handle registrieren?",
           registerNew: "Neu registrieren",
           recommended: "Empfohlene Seiten",
-          connectExisting: "Verbinde existierenden",
           avatar: "Setze einen Avatar",
           chooseAvatar: "W&auml;hle einen Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -2067,7 +2064,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Ti andrebbe di registrare un nickname facile da ricordare?",
           registerNew: "Registra nuovo",
           recommended: "Pagine raccomandate di seguire",
-          connectExisting: "Collega ad esistente",
           avatar: "Imposta un Avatar",
           chooseAvatar: "Seleziona Avatar",
           discoverCallOut: "Esplora i Listini e Pagine su OpenBazaar",
@@ -2619,7 +2615,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Voulez-vous enregistrer un identifiant facilement mémorisable ?",
           registerNew: "Enregistrer",
           recommended: "Pages recommandées à suivre",
-          connectExisting: "Connect Existing",
           avatar: "Définir un avatar",
           chooseAvatar: "Sélectionner un avatar",
           discoverCallOut: "Explorez les annonces et les pages sur OpenBazaar",
@@ -3152,7 +3147,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Doriți să înregistrați un nume ușor de reținut?",
           registerNew: "Înregistrați-vă Acum",
           recommended: "Pagini Recomandate pentru Urmărire",
-          connectExisting: "Conectare Existente",
           avatar: "Setați un Avatar",
           chooseAvatar: "Selectare Avatar",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -3684,7 +3678,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Вы желаете зарегистрировать простой логин?",
           registerNew: "Зарегистрировать новый",
           recommended: "Подпишитесь на популярные магазины",
-          connectExisting: "Подключить существующий",
           avatar: "Поставить аватарку",
           chooseAvatar: "Выбрать аватарку",
           discoverCallOut: "Найти объявления и страницы на OpenBazaar",
@@ -4216,7 +4209,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Chcete si zaregistrovať ľahko zapamätateľný handle (prezývku)?",
           registerNew: "Zaregistrovať nové",
           recommended: "Odporúčané stránky hodné sledovania",
-          connectExisting: "Pripojiť existujúci",
           avatar: "Vložiť avatara",
           chooseAvatar: "Zvoliť avatara",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -4752,7 +4744,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Akılda kalıcı bir Takma Ad kaydetmek ister misiniz?",
           registerNew: "Yeni Kaydet",
           recommended: "Takip Edilesi Sayfalar",
-          connectExisting: "Mevcuta Bağlan",
           avatar: "Avatar Ata",
           chooseAvatar: "Avatar Seç",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -5287,7 +5278,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "NgeD mach pong qaw toD vIvut SoH?",
           registerNew: "Suy qachmey chu'",
           recommended: "Chup tuq toblu'",
-          connectExisting: "NIv'e' rar",
           avatar: "MIllogh qab HIjmeH",
           chooseAvatar: "MIllogh qab wIv",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -5827,7 +5817,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "您想注册一个更易记的简称吗?",
           registerNew: "注册一个新的",
           recommended: "建议关注此网页",
-          connectExisting: "连接 Existing",
           avatar: "设置一个头像",
           chooseAvatar: "选择头像",
           discoverCallOut: "在OpenBazaar中查找商品和主页",
@@ -6363,7 +6352,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "당신은 기억하기 쉬운 핸들은 등록하겠습니까?",
           registerNew: "새로운 등록",
           recommended: "추천 페이지 팔로우",
-          connectExisting: "기존 연결",
           avatar: "화신 설정",
           chooseAvatar: "화신 선택",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -6884,7 +6872,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "ユーザ名を登録しますか?",
           registerNew: "登録する",
           recommended: "おすすめのページ",
-          connectExisting: "既存サーバーに接続する",
           avatar: "プロフィール画像",
           chooseAvatar: "プロフィール画像を選択",
           discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
@@ -7417,7 +7404,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Chciałbyś zarejestrować łatwy do zapamiętania pseudonim?",
           registerNew: "Zarejestruj nowy",
           recommended: "Proponowane strony do obserowania",
-          connectExisting: "Połącz istniejący",
           avatar: "Ustaw avatar",
           chooseAvatar: "Wybierz avatar",
           discoverCallOut: "Odkrywaj produkty i strony na OpenBazaar",
@@ -7931,7 +7917,6 @@ module.exports = Backbone.Model.extend({
           wouldYou: "Vil du registrere et brugernavn, der er nemt at huske?",
           registerNew: "Registrér nyt",
           recommended: "Anbefalede sider, der kan følges",
-          connectExisting: "Forbind til eksisterende", // Context?
           avatar: "Opsæt en avatar",
           chooseAvatar: "Vælg avatar",
           discoverCallOut: "Udforsk listiner og sider på OpenBazaar",
