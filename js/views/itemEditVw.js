@@ -17,7 +17,13 @@ module.exports = baseVw.extend({
   events: {
     'click #shippingFreeTrue': 'disableShippingPrice',
     'click #shippingFreeFalse': 'enableShippingPrice',
-    'change .js-itemImageUpload': 'resizeImage',
+    'change .js-itemImageUpload': 'onImageFileChange',
+    // 'drop form': 'onFormDrop',
+    // 'dragenter form': 'onFormDragging',
+    // 'dragover form': 'onFormDragging',
+    'dragover .js-photosModule': 'onPhotoDragOver',
+    'dragleave .js-photosModule': 'onPhotoDragLeave',    
+    'drop .js-photosModule': 'onPhotoDrop',
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
     'blur input': 'validateInput',
@@ -56,17 +62,6 @@ module.exports = baseVw.extend({
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
-
-    // prevent the body from picking up drag actions
-    $(document.body).on("dragover", this.onDragonover = function(e) {
-      e.preventDefault();
-      return false;
-    });
-
-    $(document.body).on("drop", this.onDrop = function(e){
-      e.preventDefault();
-      return false;
-    });    
   },
 
   render: function(){
@@ -76,6 +71,8 @@ module.exports = baseVw.extend({
 
       self.$el.html(loadedTemplate(context));
       self.setFormValues();
+
+      self.$photosModule = self.$('.js-photosModule');
 
       setTimeout(() => {
         var editor = new MediumEditor('#inputDescription', {
@@ -95,6 +92,7 @@ module.exports = baseVw.extend({
         this.$('.chosen').chosen({width: '100%'});
       }, 0);
     });
+
     return this;
   },
 
@@ -208,16 +206,38 @@ module.exports = baseVw.extend({
     this.$el.find('#inputExpirationDate').val('');
   },
 
-  resizeImage: function(){
+  onPhotoDragOver: function(e) {
+    this.$photosModule.addClass('dragOver');
+    e.preventDefault();
+  },
+
+  onPhotoDragLeave: function(e) {
+    this.$photosModule.removeClass('dragOver');
+    e.preventDefault();
+  },  
+
+  onPhotoDrop: function(e) {
+    this.$photosModule.removeClass('dragOver');
+    this.resizeImage(event.dataTransfer.files);
+    e.preventDefault();
+  },
+
+  onImageFileChange: function(e) {
+    this.resizeImage();
+  },
+
+  resizeImage: function(imageFiles){
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
-        imageFiles = Array.prototype.slice.call($imageInput[0].files, 0),
+        // imageFiles = Array.prototype.slice.call($imageInput[0].files, 0),
         curImages = this.model.get('combinedImagesArray'),
         maxH = 800,
         maxW = 800,
         imageList = [],
         loaded = 0,
         imageCount;
+
+    imageFiles = Array.prototype.slice.call(imageFiles || $imageInput[0].files, 0);
 
     $imageInput.val('');
 
@@ -326,7 +346,7 @@ module.exports = baseVw.extend({
           $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
           $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
-              .appendTo(self.$el.find('.js-editItemSubImagesWrapper'));
+              .appendTo(self.$('.js-editItemSubImagesWrapper'));
         }
       });
       uploadMsg.addClass('hide');
@@ -479,10 +499,5 @@ module.exports = baseVw.extend({
     this.validateDescription();
 
     return this.$('#contractForm')[0].checkValidity();
-  },
-
-  remove: function() {
-    $(document.body).off("dragover", this.onDragonover);
-    $(document.body).off("drop", this.onDrop);        
   }
 });
