@@ -17,6 +17,7 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
+    validateMediumEditor = require('../utils/validateMediumEditor'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     ServerConnectModal = require('./serverConnectModal');
 
@@ -52,6 +53,7 @@ module.exports = Backbone.View.extend({
     'click #moderatorNo': 'hideModeratorFeeHolder',
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
+    'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'input #pgp_key': 'showSignature'
@@ -203,8 +205,13 @@ module.exports = Backbone.View.extend({
           imageDragging: false
         }
       });
+      editor.subscribe('blur', self.validateDescription);
     });
     return this;
+  },
+
+  validateDescription: function(e) {
+    validateMediumEditor.checkVal(this.$('#about'));
   },
 
   patchAndFetchBlockedUsers: function(models) {
@@ -351,12 +358,16 @@ module.exports = Backbone.View.extend({
         timezone_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
-        notifications = user.notifications;
-        moderatorStatus = this.model.get('page').profile.moderator;
+        notifications = user.notifications,
+        moderatorStatus = this.model.get('page').profile.moderator,
+        vendorStatus = this.model.get('page').profile.vendor,
+        fancyStatus = window.localStorage.getItem('notFancy');
 
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
     this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
     this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
+    this.$("#storeForm input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
+    this.$("#advancedForm input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
@@ -686,7 +697,7 @@ module.exports = Backbone.View.extend({
     });
 
     settingsData.moderators = modList.length > 0 ? modList : "";
-    profileData.vendor = true;
+    //profileData.vendor = true;
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
@@ -842,6 +853,16 @@ module.exports = Backbone.View.extend({
   showSignature: function(){
     var targ = this.$('.js-settingsSignatureRow');
     targ.css("height", 50);
+  },
+
+  toggleFancyStyles: function(){
+    if($('#advancedForm input[name="notFancy"]').prop('checked')){
+      $('html').addClass('notFancy');
+      localStorage.setItem('notFancy', "true");
+    } else {
+      $('html').removeClass('notFancy');
+      localStorage.setItem('notFancy', "false");
+    }
   },
 
   close: function(){

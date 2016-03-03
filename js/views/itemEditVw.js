@@ -9,6 +9,7 @@ var loadTemplate = require('../utils/loadTemplate'),
     MediumEditor = require('medium-editor'),
     messageModal = require('../utils/messageModal'),
     chosen = require('../utils/chosen.jquery.min.js'),
+    validateMediumEditor = require('../utils/validateMediumEditor'),
     baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
@@ -135,8 +136,6 @@ module.exports = baseVw.extend({
     var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
     keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
     //activate tags plugin
-    //hacky fix for now, because DOM is not complete when taggle is called, resulting in a container size of zero
-    //TODO: find a fix for this, so taggle is initialized after reflow is complete
     window.setTimeout(function(){
       self.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
@@ -358,22 +357,15 @@ module.exports = baseVw.extend({
   },
 
   validateInput: function(e) {
+    var targ = $(e.target),
+        trimVal = targ.val().trim();
+    targ.val(trimVal);
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    targ.closest('.flexRow').addClass('formChecked');
   },
 
   validateDescription: function(e) {
-    var $field = self.$('#inputDescription');
-
-    if (!$($field.val()).text().length) {
-      $field.val('');
-    }
-
-    if (!$field[0].checkValidity()) {
-      $field.parent().addClass('invalid');
-    } else {
-      $field.parent().removeClass('invalid');
-    }
+    validateMediumEditor.checkVal(this.$('#inputDescription'));
   },  
 
   saveChanges: function(){
