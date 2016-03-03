@@ -8669,7 +8669,7 @@ module.exports = Backbone.Model.extend({
          PaymentPending: "Платіж обробляється",
          FinalizePurchase: "Підтвердити Покупку",
          LoadingImage: "Завантаження...",
-         UploadAvatar: "Оберіть Аватарку,
+         UploadAvatar: "Оберіть Аватарку",
          SaveAvatar: "Зберігти Аватарку",
          NewAvatar: "Обрати нову аватарку",
          NewCoverImage: "Обрати головне фото",
