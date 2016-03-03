@@ -453,6 +453,10 @@ form {
   flex-grow: 1;
 }
 
+.noPointerEvents {
+  pointer-events: none;
+}
+
 .gridItemControls {
   background: #106DA3;
   position: absolute;
@@ -3878,6 +3882,36 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 48px;
 }
 
+#userPage .photosModule .dropPanel {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+#userPage .photosModule.dragOver .dropPanel {
+  opacity: 1;
+  z-index: 2;
+}
+
+#userPage .photosModule .dropPanel .icon {
+  font-size: 50px;
+  margin-top: 50px;
+}
+
+#userPage .photosModule .editItemImageLoadPhotoMessage {
+  transition: opacity 0.3s;
+}
+
+#userPage .photosModule.dragOver .editItemImageLoadPhotoMessage {
+  opacity: 0;
+}
+
 .editItemImageHolder {
   height: 168px;
   overflow: auto;
@@ -3891,7 +3925,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   left: 0;
 }
-
 
 #transactionConfirmForm label {
   font-size: 12px;
