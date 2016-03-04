@@ -134,7 +134,6 @@ module.exports = baseVw.extend({
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
     //makde sure data is valid
-    console.log(this.model.attributes)
     if(this.model.get('invalidData')){
       messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
       return;
