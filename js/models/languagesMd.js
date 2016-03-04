@@ -396,6 +396,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down",
           tooManyPhotosTitle: "Too many photos",
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
+          badJSON: "The JSON data returned from the server was malformed"
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">support desk</a>.</p>",
@@ -902,6 +903,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1433,6 +1435,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -1973,6 +1976,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "Il server &egrave; stato spento",
           tooManyPhotosTitle: "Troppe foto",
           tooManyPhotosBody: "Ad alcune o a tutte le foto &egrave; stato impedito di essere caricate perch&egrave; avresti superato la massima quantit&agrave; consentita.",
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -2525,6 +2529,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "Le serveur a été arrêté",
           tooManyPhotosTitle: "Trop de photos",
           tooManyPhotosBody: "Toutes ou une partie de vos photos n'ont pas pu être mises en ligne parce que vous avez probablement dépassé la quantité maximale autorisée.",
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> ou sur notre <a href=\"http://www.reddit.com/r/openbazaar\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le   <a href=\"\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">centre d’aide</a>.</p>",
@@ -3059,6 +3064,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -3591,6 +3597,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "о нас",
@@ -4123,6 +4130,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -4659,6 +4667,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5194,6 +5203,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -5734,6 +5744,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "服务器已关闭",
           tooManyPhotosTitle: "照片过多",
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "",
@@ -6270,6 +6281,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -6791,6 +6803,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "The server has been shut down", //notTranslated
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -7838,6 +7851,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "Serveren er blevet lukket ned",
           tooManyPhotosTitle: "For mange billeder",
           tooManyPhotosBody: "Nogle eller alle dine billeder blev forhindret i at blive uploadet, da du ellers ville overskride det maksimalt tilladte antal.",
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a>-kanal e ller på vores <a href=\"http://www.reddit.com/r/openbazaar\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">support desk</a>.</p>",
@@ -8380,6 +8394,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "O servidor foi desligado",
           tooManyPhotosTitle: "Existem fotos em excesso",
           tooManyPhotosBody: "Algumas ou todas as suas fotos não puderam ser enviadas porque você excedeu a quantia máxima permitida.",
+          badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         aboutSection: {
           about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\">Github</a>.</p><p>O OpenBazaar é um projeto de uma comunidade, e nós aceitamos participações em nosso canal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> ou em nosso <a href=\"http://www.reddit.com/r/openbazaar\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"\">Tutorial</a> do OpenBazaar versão 1.0 .</p><p>Se você ainda tiver dúvidas, abra um protocolo em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">suporte técnico</a>.</p>",

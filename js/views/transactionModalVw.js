@@ -125,6 +125,11 @@ module.exports = baseVw.extend({
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
   },
@@ -133,6 +138,11 @@ module.exports = baseVw.extend({
     var self = this;
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
+    //makde sure data is valid
+    if(this.model.get('invalidData')){
+      messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
+      return;
+    }
 
     loadTemplate('./js/templates/transactionModal.html', function(loadedTemplate) {
       //hide the modal when it first loads

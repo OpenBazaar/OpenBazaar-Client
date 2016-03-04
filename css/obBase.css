@@ -1735,6 +1735,10 @@ margin: auto;
   transition: initial;
 }
 
+.fullscreen .btn.btn-win {
+  display: none;
+}
+
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
   position: relative;

@@ -224,6 +224,30 @@ app.on('ready', function() {
             }
           }
         },
+        {
+          label: 'Toggle Full Screen',
+          accelerator: (function() {
+            if (platform == 'mac') {
+              return 'Ctrl+Command+F';
+            } else {
+              return 'Ctrl+Shift+F';
+            }
+          })(),
+          click: function(item, focusedWindow) {
+            var fullScreen;
+
+            if (mainWindow) {
+              fullScreen = !mainWindow.isFullScreen();
+              mainWindow.setFullScreen(fullScreen);
+
+              if (fullScreen) {
+                mainWindow.webContents.send('fullscreen-enter');
+              } else {
+                mainWindow.webContents.send('fullscreen-exit');
+              }
+            }
+          }
+        },        
       ]
     },
     {

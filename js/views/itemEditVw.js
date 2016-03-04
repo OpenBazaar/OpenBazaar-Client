@@ -91,7 +91,10 @@ module.exports = baseVw.extend({
             imageDragging: false,
             sticky: true
           },
-          disableExtraSpaces: true
+          paste: {
+            forcePlainText: false,
+            cleanPastedHTML: false
+          }
         });
 
         editor.subscribe('blur', self.validateDescription);

@@ -315,6 +315,11 @@ module.exports = baseVw.extend({
         self.bindModalCloseHandler();
         self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
         self.render();
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
   },
@@ -594,6 +599,11 @@ module.exports = baseVw.extend({
       error: function(model, response){
         if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
     this.following.fetch({
@@ -637,6 +647,11 @@ module.exports = baseVw.extend({
       error: function(model, response){
         if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Following'));
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
   },
@@ -661,6 +676,11 @@ module.exports = baseVw.extend({
       error: function(model, response){
         if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Followers'));
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
   },
@@ -814,6 +834,11 @@ module.exports = baseVw.extend({
       error: function(model, response){
         if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
   },
