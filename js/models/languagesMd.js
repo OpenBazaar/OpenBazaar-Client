@@ -8596,7 +8596,7 @@ module.exports = Backbone.Model.extend({
          YourName: "Ваше ім'я",
          BitcoinReturnAddress: "Біткойн-адреса для повернення коштів",
          BitcoinReturnAddressPlaceholder: "Введіть Біткойн-адресу",
-         BitcoinReturnAddressInfo: "В разі повернення коштів, вони будуть надіслані на цю адресу, вона має бути постійною.", //not translated
+         BitcoinReturnAddressInfo: "В разі повернення коштів, вони будуть надіслані на цю адресу, вона має бути постійною.",
          LocalCurrency: "Ваша валюта",
          TimeZone: "Часовий пояс",
          ShipToName: "Ім'я",
@@ -8650,7 +8650,7 @@ module.exports = Backbone.Model.extend({
          NotificationFollow: "Слідкує за вами",
          NoNotifications: "Нема повідомлень",
          WelcomeToYourPage: "Вітаємо вас!",
-         SearchForCategory: "Пошук",
+         SearchForCategory: "Пошук Категорії",
          Moderators: "Модератори",
          CurrentModerators: "Дійсні модертори",
          AddModerators: "Додати модератора",
