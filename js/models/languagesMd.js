@@ -8650,7 +8650,7 @@ module.exports = Backbone.Model.extend({
          NotificationFollow: "Слідкує за вами",
          NoNotifications: "Нема повідомлень",
          WelcomeToYourPage: "Вітаємо вас!",
-         SearchForCategory: "Пошук категорії", 
+         SearchForCategory: "Пошук Категорії",
          Moderators: "Модератори",
          CurrentModerators: "Дійсні модертори",
          AddModerators: "Додати модератора",
