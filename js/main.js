@@ -135,7 +135,7 @@ window.addEventListener("drop",function(e){
 },false);
 
 //prevent enter from submitting forms
-window.addEventListener('keypress', function(event) {
+$('body').on('keypress', 'input', function(event) {
   if (event.keyCode == 13) {
     event.preventDefault();
   }

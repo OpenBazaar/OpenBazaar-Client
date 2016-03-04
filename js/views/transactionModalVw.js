@@ -125,6 +125,11 @@ module.exports = baseVw.extend({
         console.log(jqXHR);
         console.log(status);
         console.log(errorThrown);
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
   },
