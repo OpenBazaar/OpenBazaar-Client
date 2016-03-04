@@ -8908,6 +8908,6 @@ module.exports = Backbone.Model.extend({
            noSearchResultsFound: "Нічого не знайдено" 
          }        
        }
-      ]
+      ] 
   }
 });
