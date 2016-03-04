@@ -203,6 +203,10 @@ module.exports = Backbone.View.extend({
         },
         toolbar: {
           imageDragging: false
+        },
+        paste: {
+          forcePlainText: false,
+          cleanPastedHTML: false
         }
       });
       editor.subscribe('blur', self.validateDescription);

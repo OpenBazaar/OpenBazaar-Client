@@ -335,6 +335,14 @@ module.exports = Backbone.View.extend({
         var selected = data.attributes.shipping_addresses.length -1;
         //this will refresh the userModel, buyAddressView has a reference to it
         self.buyAddressesView.render(selected);
+      },
+      error: function(){
+        messageModal.show(window.polyglot.t('errorMessages.serverError'));
+      },
+      complete: function(xhr, textStatus) {
+        if(textStatus == 'parsererror'){
+          messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+        }
       }
     });
   },
