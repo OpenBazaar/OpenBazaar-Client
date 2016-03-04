@@ -22,6 +22,7 @@ window.onblur = function() {
 };
 
 var Polyglot = require('node-polyglot'),
+    ipcRenderer = require('ipc-renderer'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
     userModel = require('./models/userMd'),
@@ -139,6 +140,15 @@ window.addEventListener('keypress', function(event) {
   if (event.keyCode == 13) {
     event.preventDefault();
   }
+});
+
+//manage app being or not in fullscreen mode
+ipcRenderer.on('fullscreen-enter', (e) => {
+  $('body').addClass('fullscreen');
+});
+
+ipcRenderer.on('fullscreen-exit', (e) => {
+  $('body').removeClass('fullscreen');
 });
 
 var setCurrentBitCoin = function(cCode, userModel, callback) {
