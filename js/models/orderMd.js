@@ -164,8 +164,8 @@ module.exports = window.Backbone.Model.extend({
           newAttributes.shippingType = "International Shipping";
           if (self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international) {
             convertToUserCurrency(self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international,
-                self.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code,
                 btAve,
+                self.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code,
                 self.userCurrencyCode,
                 function (price, priceBTC, invalid, error) {
                   newAttributes.displayShippingPrice = price;
