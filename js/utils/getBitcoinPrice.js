@@ -14,7 +14,10 @@ module.exports = function (currency, callback) {
 
     //if this is the first check, show status
     if(!window.btcAverages){
-        showStatus = app.statusBar.pushMessage(polyglot.t('LoadingBitcoinPrices'));
+        showStatus = app.statusBar.pushMessage({
+            msg: polyglot.t('LoadingBitcoinPrices'),
+            duration: false
+        });
     }
 
     window.btcAverages = window.btcAverages || {};
