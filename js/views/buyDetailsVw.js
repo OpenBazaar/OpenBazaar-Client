@@ -71,6 +71,8 @@ module.exports = Backbone.View.extend({
         moderatorPrice = moderatorPercentage ? totalItemPrice * moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
         totalPrice = totalItemPrice + totalShipping,
+        newBTCDisplayPrice = (this.model.get('vendorBTCPrice') * quantity).toFixed(6),
+        newBTCShippingDisplayPrice = (this.model.get('currentShippingBTCPrice') * quantity).toFixed(6),
         newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
@@ -94,8 +96,13 @@ module.exports = Backbone.View.extend({
         moderatorPriceString = this.model.get('userCurrencyCode') == 'BTC' ?
                                moderatorPriceBTC.toFixed(8) + " BTC" : moderatorPriceBTC.toFixed(8) + " BTC (" + newDisplayModeratorPrice + ")";
 
-    this.$el.find('.js-buyWizardPrice').html(newDisplayPrice);
-    this.$el.find('.js-buyWizardShippingPrice').html(newDisplayShippingPrice);
+    this.$el.find('.js-buyWizardBTCPrice').html(newBTCDisplayPrice+"BTC");
+    this.$el.find('.js-buyWizardBTCShippingPrice').html(newBTCShippingDisplayPrice+"BTC");
+
+    if(userCurrency != 'BTC'){
+      this.$el.find('.js-buyWizardPrice').html("("+newDisplayPrice+")");
+      this.$el.find('.js-buyWizardShippingPrice').html("("+newDisplayShippingPrice+")");
+    }
     this.$('.js-buyWizardModeratorPrice').attr('data-tooltip', moderatorPriceString);
     newAttributes.quantity = quantity;
     newAttributes.totalPrice = totalPrice;
