@@ -33,6 +33,7 @@ var Polyglot = require('node-polyglot'),
     setTheme = require('./utils/setTheme.js'),
     pageNavView = require('./views/pageNavVw'),
     ChatVw = require('./views/chatVw'),
+    StatusBarView = require('./views/statusBarVw'),
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
@@ -150,6 +151,10 @@ ipcRenderer.on('fullscreen-enter', (e) => {
 ipcRenderer.on('fullscreen-exit', (e) => {
   $('body').removeClass('fullscreen');
 });
+
+//implement out statusBar view
+app.statusBar = new StatusBarView();
+$('#statusBar').html(app.statusBar.render().el);
 
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";

@@ -4091,21 +4091,31 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: fixed;
   bottom: 0;
   z-index: 2;
-  opacity: 0.4;
-  width: 100%;
-  box-sizing: border-box;
+  width: 100%;  
+}
+
+#statusBar .statusMessageWrap {
+  height: 0px;
+  overflow: hidden;
+  transition: opacity 1.5s, height 1s;   
+}
+
+#statusBar .statusMessageWrap.slideUp {
   height: 30px;
+}
+
+#statusBar .statusMessage {
+  opacity: 0.4;
+  box-sizing: border-box;
   padding: 0 10px;
   line-height: 30px;
   color: #fff;
-  font-style: 12px;
+  font-size: 12px;
   font-style: italic;
   background: #000;
-  transition: opacity 1.5s, bottom 1s;
-}
-
-#statusBar.fadeOut {
-  bottom: -30px;
+  border-bottom: 1px solid #222;
+  position: relative;
+  top: -1px; 
 }
 
 /*========== utility classes ==========*/
