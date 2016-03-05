@@ -8557,7 +8557,7 @@ module.exports = Backbone.Model.extend({
          /*
   
           Translator: Loderunner2, Bitcoin.ua
-          02/28/2016: ~ 5 untranslated strings
+          02/28/2016: ~ 12 untranslated strings
   
           Use capitalized keys for widely reused text that must be capitalized
   
@@ -8615,7 +8615,7 @@ module.exports = Backbone.Model.extend({
          DontDelete: "Не видаляти",
          ConfirmDelete: "Так, знищити",
          Website: "Веб-сайт",
-         Guid: "OpenBazaar ID",
+         Guid: "OpenBazaar ID", //notTranslated
          Welcome: "Вітаю",
          CreateStore: "Відкрити магазин",
          GoToMyPage: "Моя сторінка",
@@ -8644,12 +8644,12 @@ module.exports = Backbone.Model.extend({
          Categorization: "Ктегорізація",
          Expiration: "Дата закінчення продажу",
          Search: "Пошук",
-         Email: "E-Mail",
+         Email: "E-Mail", //notTranslated
          Facebook: "Сторінка Facebook",
          Instagram: "Сторінка Instagram",
-         Twitter: "Twitter",
+         Twitter: "Twitter", //notTranslated
          PGPKey: "PGP Ключ",
-         Snapchat: "Snapchat",
+         Snapchat: "Snapchat", //notTranslated
          BUYNOW: "Купити негайно",
          Description: "Опис",
          Reviews: "Відгуки",
@@ -8659,7 +8659,7 @@ module.exports = Backbone.Model.extend({
          CurrentAddress: "Дійсна адреса",
          Returns: "Повернення",
          ReturnsPolicy: "Умови повернення товару",
-         Ampersand: "&",
+         Ampersand: "&", //notTranslated
          Tags: "Tags, Теги",
          Keywords: "Пошукові слова",
          ShipsFrom: "Доставка з",
@@ -8753,7 +8753,7 @@ module.exports = Backbone.Model.extend({
          Purchases:"Покупки",
          Sales: "Продажі",
          Cases: "Кейсы",
-         Enter: "Enter", 
+         Enter: "Enter", //notTranslated
          Discover: "Перегляд",
          Block: "Зблокувати",
          Unblock: "Розблокувати",       
@@ -8791,16 +8791,16 @@ module.exports = Backbone.Model.extend({
          Support: "Підтримка",
          Licensing: "Ліцензування",
          Forward: "Далі",
-         On: "On", 
-         Off: "Off", 
+         On: "On", //notTranslated
+         Off: "Off", //notTranslated
          ClickToChange: "Натисніть для змін",
          NotProvided: "Не вказано", 
          NotFollowingAnyone: "Ні за ким не слідкуете",
          NoFollowers: "За вми ніхто не слідкує",
          Moderator: "Модератор",
-         Firewall: "Firewall", 
+         Firewall: "Firewall",  //notTranslated
          ReadOnly: "(Тільки перегляд)",
-         HandleResolver: "Handle Resolver",  
+         HandleResolver: "Handle Resolver",  //notTranslated
          moderatorSettings: { 
            ProvideResolution: "Забезпечити перегляд скарги",
            ServiceFee: "Вартість послуги",
@@ -8842,14 +8842,14 @@ module.exports = Backbone.Model.extend({
            EstimatedDeliveryPlaceholder: "Приблизна дата надходження замовлення",
            URL: "URL адреса",
            URLPlaceholder: "Посилання на завантаження, або додаткову інформацію", 
-           Password: "Password",
+           Password: "Пароль",
            PasswordPlaceholder: "Пароль необхідний для завантеження, якщо є",
            DirectTransaction: "Прямий переказ",
            ModeratedTransaction: "Угода що модеруется",
            Seller: "Продавець",
            Buyer: "Покупець",
-           transferReceipt: "transferReceipt",
-           copyTxid: "copy tx ID",
+           transferReceipt: "Підтвердження переказу (інформація)",
+           copyTxid: "copy tx ID", //notTranslated
            Close: "Закрити",
            FundOrder: "Сплатити замовлення",
            sortByDateNewest: "За датою, Новіші",
@@ -8964,7 +8964,7 @@ module.exports = Backbone.Model.extend({
            VendorShipsTo: "Можлива відправка в ці країни",
            DoesNotShipHere: "В ці країни доставка не здійснюється",
            Send: "Відправити",
-           BTCto: "BTC to",
+           BTCto: "BTC to", //notTranslated
            SendBTCtoAddress: "Надіслати %{amount} BTC",
            OpenAddress: "Відкрити адресу в локальному гаманці Bitcoin",
            CopyAddress: "Скопіювати в буфер обміну",
