@@ -52,6 +52,7 @@ module.exports = baseVw.extend({
       self.openOrderModal(orderID);
     });
     this.searchTransactions;
+    this.filterBy; //used for filtering the collections
 
     this.countries = new countriesMd();
     this.countriesArray = this.countries.get('countries');
@@ -164,7 +165,6 @@ module.exports = baseVw.extend({
   setState: function(state){
     "use strict";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
-    // $('#content').find('input:visible:first').focus();
     //add action to history
     Backbone.history.navigate("#transactions/" + state);
   },
@@ -175,6 +175,7 @@ module.exports = baseVw.extend({
         tabID = tab.data("tab"),
         showContent = this.$el.find('.js-'+tabID);
 
+    this.filterBy = '';
     this.setTab(tab, showContent);
     this.setState(tabID);
   },
@@ -194,18 +195,19 @@ module.exports = baseVw.extend({
   transactionFilter: function(e){
     "use strict";
     var tab = $(e.target),
-        tabTarget = tab.data("tab"),
-        filterBy = tab.val();
+        tabTarget = tab.data("tab");
+
+    this.filterBy = tab.val();
     this.$('.js-'+tabTarget+' .search').val("");
     switch(tabTarget){
       case "purchases":
-        this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper, filterBy);
+        this.renderTab("purchases", this.purchasesCol, this.purchasesWrapper);
         break;
       case "sales":
-        this.renderTab("sales", this.salesCol, this.salesWrapper, filterBy);
+        this.renderTab("sales", this.salesCol, this.salesWrapper);
         break;
       case "cases":
-        this.renderTab("cases", this.casesCol, this.casesWrapper, filterBy);
+        this.renderTab("cases", this.casesCol, this.casesWrapper);
         break;
     }
   },
@@ -213,6 +215,7 @@ module.exports = baseVw.extend({
   renderTab: function(tabName, tabCollection, tabWrapper, filterBy){
     "use strict";
     var self = this;
+    filterBy = filterBy || this.filterBy;
     tabWrapper.html('');
     if(!filterBy || filterBy == "all" || filterBy == "dateNewest"){
       tabCollection.comparator = function(model) {
