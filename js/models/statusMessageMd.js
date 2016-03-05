@@ -12,8 +12,8 @@ module.exports = window.Backbone.Model.extend({
 
     attrs = attrs || {};
 
-    if (attrs.type && ['msg', 'warning'].indexOf(attrs.type) === -1) {
-      err['type'] = `Type must be 'msg' or 'warning'`;
+    if (attrs.type && ['msg', 'warning', 'confirmed'].indexOf(attrs.type) === -1) {
+      err['type'] = `Type must be 'msg', 'warning' or 'confirmed'`;
     }
 
     if (attrs.duration && !__.isNumber(attrs.duration)) {

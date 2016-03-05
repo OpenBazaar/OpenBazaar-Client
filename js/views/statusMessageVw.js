@@ -7,10 +7,6 @@ var Backbone = require('backbone'),
 module.exports = baseVw.extend({
   className: 'statusMessageWrap',
 
-  events: {
-    // 'click .js-chatOpen': 'slideOut',
-  },
-
   initialize: function(options) {
     this.listenTo(this.model, 'change', this.render);
   },

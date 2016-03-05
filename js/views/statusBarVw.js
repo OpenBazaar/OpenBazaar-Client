@@ -8,10 +8,6 @@ var Backbone = require('backbone'),
   StatusMessageVw = require('./statusMessageVw');
 
 module.exports = baseVw.extend({
-  events: {
-    // 'click .js-chatOpen': 'slideOut',
-  },
-
   initialize: function(options) {
     this.collection = new StatusMessageCl();
     this.vwRemoveTimeouts = [];
@@ -64,7 +60,7 @@ module.exports = baseVw.extend({
   // the following options are available:
   //
   // msg:      message text (required)
-  // type:     'msg' or 'warning'  (optional)
+  // type:     'msg', 'warning', 'confirmed'  (optional)
   // duration: The length of time before status msg is removed. Pass in false if
   //           you would like to remove it yourself. This method will return an object
   //           with a remove() method that can be called at your leisure. (optional)
