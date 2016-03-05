@@ -9,6 +9,8 @@ module.exports = window.Backbone.Model.extend({
   parse: function(response) {
     "use strict";
     var self = this;
+    var countries = new countriesMd();
+    var countryArray = countries.get('countries');
     //when vendor currency code is in bitcoins, the json returned is different. Put the value in the expected place so the templates don't break.
     //check to make sure a blank result wasn't returned from the server
     if(response.vendor_offer &&
@@ -80,7 +82,7 @@ module.exports = window.Backbone.Model.extend({
       //add pretty country names to shipping regions
       response.vendor_offer.listing.shipping.shipping_regionsDisplay = [];
       __.each(response.vendor_offer.listing.shipping.shipping_regions, function (region, i) {
-        var matchedCountry = self.countryArray.filter(function (value) {
+        var matchedCountry = countryArray.filter(function (value) {
           return value.dataName == region;
         });
         response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
@@ -92,7 +94,7 @@ module.exports = window.Backbone.Model.extend({
     if (response.buyer_order && response.buyer_order.order) {
       //add pretty country name for the country being shipped to
       if (response.buyer_order.order.shipping) {
-        var matchedCountry      = self.countryArray.filter(function (value) {
+        var matchedCountry      = countryArray.filter(function (value) {
           return value.dataName == response.buyer_order.order.shipping.country;
         });
         response.displayCountry = matchedCountry[0].name;
@@ -125,6 +127,11 @@ module.exports = window.Backbone.Model.extend({
   updateAttributes: function(){
     //convert the currency
     var self = this;
+    if(!self.get('vendor_offer').listing.item.price_per_unit || !self.get('vendor_offer').listing.item.price_per_unit.fiat || !self.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code){
+      this.set('invalidData', true);
+      this.set('priceSet', Math.random());
+      return;
+    }
     getBTPrice(self.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code, function(btAve) {
       var newAttributes = {};
 
@@ -209,8 +216,8 @@ module.exports = window.Backbone.Model.extend({
     this.status = options.status;
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.transactionType = options.transactionType;
-    this.countries = new countriesMd();
-    this.countryArray = this.countries.get('countries');
+    //this.countries = new countriesMd();
+    //this.countryArray = this.countries.get('countries');
     this.avatarURL = options.avatarURL;
   }
 

@@ -98,8 +98,7 @@ module.exports = baseVw.extend({
       bitcoinValidationRegex: this.bitcoinValidationRegex,
       avatarURL: this.avatarURL,
       avatar_hash: this.userProfile.get('avatar_hash'),
-      orderID: this.orderID
-    });
+      orderID: this.orderID});
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
     this.getData();
@@ -113,7 +112,7 @@ module.exports = baseVw.extend({
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
         //TODO set 'payout' here if the user has a payout from a dispute
-        if(!response.invalidData){
+        if(!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
           messageModal.show(window.polyglot.t('errorMessages.serverError'));
