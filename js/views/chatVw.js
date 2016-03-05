@@ -290,6 +290,14 @@ module.exports = baseVw.extend({
 
         app.playNotificationSound();
       }
+    } else if(msg.message_type === 'ORDER' || msg.message_type === 'DISPUTE_OPEN' || msg.message_type === 'DISPUTE_CLOSE'){
+      new Notification(msg.handle || msg.sender + ':', {
+        body: msg.message,
+        icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
+        '&guid=' + msg.sender : '/imgs/defaultUser.png'
+      });
+
+      app.playNotificationSound();
     }
   },
 

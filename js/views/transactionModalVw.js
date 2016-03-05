@@ -98,8 +98,7 @@ module.exports = baseVw.extend({
       bitcoinValidationRegex: this.bitcoinValidationRegex,
       avatarURL: this.avatarURL,
       avatar_hash: this.userProfile.get('avatar_hash'),
-      orderID: this.orderID
-    });
+      orderID: this.orderID});
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
     this.getData();
@@ -113,14 +112,18 @@ module.exports = baseVw.extend({
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
         //TODO set 'payout' here if the user has a payout from a dispute
-        if(!response.invalidData){
+        if(!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
           messageModal.show(window.polyglot.t('errorMessages.serverError'));
         }
       },
       error: function (jqXHR, status, errorThrown) {
-        messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+        if(status.status == 500){
+          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
+        } else {
+          messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown.textStatus + "</i>");
+        }
         $('.js-loadingModal').addClass("hide");
         console.log(jqXHR);
         console.log(status);
