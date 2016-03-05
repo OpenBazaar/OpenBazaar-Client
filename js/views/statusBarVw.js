@@ -97,17 +97,5 @@ module.exports = baseVw.extend({
     });
 
     baseVw.prototype.remove.apply(this, arguments);
-  },
-
-  render: function() {
-    // loadTemplate('./js/templates/chat.html', (tmpl) => {
-    //   this.$el.html(tmpl());
-
-    //   this.$chatHeadsContainer = this.$('.chatConversationHeads');
-    //   this.$convoContainer = this.$('.chatConversationContainer');
-    //   this.$searchField = this.$('#chatSearchField');
-    // });
-
-    return this;
   }
 });

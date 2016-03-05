@@ -152,7 +152,7 @@ ipcRenderer.on('fullscreen-exit', (e) => {
   $('body').removeClass('fullscreen');
 });
 
-//implement out statusBar view
+//implement our statusBar view
 app.statusBar = new StatusBarView();
 $('#statusBar').html(app.statusBar.render().el);
 
