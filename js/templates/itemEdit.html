@@ -13,7 +13,10 @@
   <div class="flexCol-7 pad15"></div>
 
   <div class="flexCol-5 pad15">
-    <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary positionWrapper" style="opacity: 1;">
+    <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary positionWrapper js-photosModule photosModule" style="opacity: 1;">
+      <div class="dropPanel noPointerEvents">
+        <span class="icon ion-android-add-circle inlineBlock"></span>
+      </div>
       <div class="flexRow custCol-secondary border0 height50">
         <label for="itemImageUploadMain" class="fieldItem width100">
           <h5 class="floatLeft"><%= polyglot.t('Photos') %></h5>
@@ -28,13 +31,15 @@
         <div class="statusBar navBar fadeOut positionAbsolute js-itemEditImageLoading">
           <div class="pad20 rowTop20 width100"><h4 class="txt-center"><%= polyglot.t('LoadingImage') %></h4></div>
         </div>
-        <% _.each(ob.combinedImagesArray, function(data, i) { %>
-        <div class="itemImg itemImg-small js-dropImage js-editItemSubImage" style="background-image: url(<%= data %>);">
-          <div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage">
-            <i class="ion-android-close icon-centered icon-small"></i>
+        <div class="js-subImageWrap">
+          <% _.each(ob.combinedImagesArray, function(data, i) { %>
+          <div class="itemImg itemImg-small js-dropImage js-editItemSubImage floatLeft" style="background-image: url(<%= data %>);">
+            <div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage">
+              <i class="ion-android-close icon-centered icon-small"></i>
+            </div>
           </div>
+          <% }); %>
         </div>
-        <% }); %>
       </div>
       <label for="itemImageUploadMain" class="textSize14px editItemImageLoadPhotoMessage js-itemEditLoadPhotoMessage <%= ob.combinedImagesArray.length ? 'hide' : '' %>">
         <span class="fullCentered"><%= polyglot.t('NoPhotosAdded') %></span>

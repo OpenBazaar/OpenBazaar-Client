@@ -453,6 +453,10 @@ form {
   flex-grow: 1;
 }
 
+.noPointerEvents {
+  pointer-events: none;
+}
+
 .gridItemControls {
   background: #106DA3;
   position: absolute;
@@ -1729,6 +1733,10 @@ margin: auto;
 
 .btn.btn-win:hover {
   transition: initial;
+}
+
+.fullscreen .btn.btn-win {
+  display: none;
 }
 
 .btn.btn-win.btn-winClose {
@@ -3878,6 +3886,36 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 48px;
 }
 
+#userPage .photosModule .dropPanel {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+#userPage .photosModule.dragOver .dropPanel {
+  opacity: 1;
+  z-index: 2;
+}
+
+#userPage .photosModule .dropPanel .icon {
+  font-size: 50px;
+  margin-top: 50px;
+}
+
+#userPage .photosModule .editItemImageLoadPhotoMessage {
+  transition: opacity 0.3s;
+}
+
+#userPage .photosModule.dragOver .editItemImageLoadPhotoMessage {
+  opacity: 0;
+}
+
 .editItemImageHolder {
   height: 168px;
   overflow: auto;
@@ -3891,7 +3929,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   left: 0;
 }
-
 
 #transactionConfirmForm label {
   font-size: 12px;
@@ -4054,21 +4091,31 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: fixed;
   bottom: 0;
   z-index: 2;
-  opacity: 0.4;
-  width: 100%;
-  box-sizing: border-box;
+  width: 100%;  
+}
+
+#statusBar .statusMessageWrap {
+  height: 0px;
+  overflow: hidden;
+  transition: opacity 1.5s, height 1s;   
+}
+
+#statusBar .statusMessageWrap.slideUp {
   height: 30px;
+}
+
+#statusBar .statusMessage {
+  opacity: 0.4;
+  box-sizing: border-box;
   padding: 0 10px;
   line-height: 30px;
   color: #fff;
-  font-style: 12px;
+  font-size: 12px;
   font-style: italic;
   background: #000;
-  transition: opacity 1.5s, bottom 1s;
-}
-
-#statusBar.fadeOut {
-  bottom: -30px;
+  border-bottom: 1px solid #222;
+  position: relative;
+  top: -1px; 
 }
 
 /*========== utility classes ==========*/
@@ -5224,6 +5271,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+}
+
+#ov1 .foldIn {
+  height: 0;
+  overflow: hidden;
+  transition: height 1s;
 }
 
 #ov1 .underline {

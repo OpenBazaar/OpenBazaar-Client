@@ -22,7 +22,7 @@
       <div class="fontSize16">Order #<%- ob.orderID %></div>
       <div class="fontSize14 textOpacity75 marginTop2">
         <%= polyglot.t('transactions.OrderStatus'+ob.status) %>
-        <% if(ob.displayModerator){ %>
+        <% if(ob.displayModerator && ob.status < 3){ %>
           <%= polyglot.t('transactions.InEscrow') %>
         <% } %>        
       </div>

@@ -152,7 +152,7 @@
                 </div>
               </div>
 
-              <div class="flexCol-9 borderRight0 custCol-border">
+              <div class="flexCol-9 borderRight0 custCol-border positionWrapper">
                 <input name="refund_address"
                        type="text"
                        id="refund_address"
@@ -160,6 +160,11 @@
                        class="fieldItem"
                        pattern="<%= ob.user.bitcoinValidationRegex %>"
                        value="<%= ob.user.refund_address %>">
+                <div class="positionTopRight padding10">
+                  <span class="btn btn-txt custCol-secondary">
+                    During Testing This must be a testnet address <!--remove this in production-->
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -440,7 +445,7 @@
               </div>
             </div>
 
-            <div class="flexRow js-settingsSignatureRow" style="overflow: hidden; height: 0; transition: height 1s;">
+            <div class="flexRow foldIn js-settingsSignatureRow">
               <div class="flexCol-3 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="signature"><%= polyglot.t('Signature') %></label>
@@ -451,7 +456,7 @@
                 <input name="signature"
                        type="text"
                        id="signature"
-                       placeholder="<%= polyglot.t('Signature') %>"
+                       placeholder="<%= polyglot.t('SignaturePlaceholder') %>"
                        class="fieldItem">
               </div>
             </div>

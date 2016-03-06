@@ -56,7 +56,7 @@ module.exports = Backbone.View.extend({
     'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
-    'input #pgp_key': 'showSignature'
+    'input #pgp_key': 'checkPGPKey'
   },
 
   initialize: function(options){
@@ -203,6 +203,10 @@ module.exports = Backbone.View.extend({
         },
         toolbar: {
           imageDragging: false
+        },
+        paste: {
+          forcePlainText: false,
+          cleanPastedHTML: false
         }
       });
       editor.subscribe('blur', self.validateDescription);
@@ -548,7 +552,6 @@ module.exports = Backbone.View.extend({
   },
 
   saveGeneral: function() {
-    "use strict";
     var self = this,
         form = this.$el.find("#generalForm"),
         cCode = this.$('#currency_code').val();
@@ -556,8 +559,11 @@ module.exports = Backbone.View.extend({
     localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+
       self.setCurrentBitCoin(cCode);
       self.refreshView();
     });
@@ -594,7 +600,12 @@ module.exports = Backbone.View.extend({
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
         window.obEventBus.trigger("updateProfile");
-        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        
+        app.statusBar.pushMessage({
+          type: 'confirmed',
+          msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+        });
+        
         self.refreshView();
       }, "", pageData, skipKeys);
     };
@@ -684,7 +695,6 @@ module.exports = Backbone.View.extend({
   },
 
   saveStore: function(){
-    "use strict";
     var self = this,
         form = this.$el.find("#storeForm"),
         profileData = {},
@@ -701,8 +711,11 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
-        "use strict";
-        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        app.statusBar.pushMessage({
+          type: 'confirmed',
+          msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+        });        
+
         self.refreshView();
       }, "", settingsData);
     }, "", profileData);
@@ -743,8 +756,11 @@ module.exports = Backbone.View.extend({
     addressData.shipping_addresses = newAddresses;
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+
       self.refreshView();
     }, "", addressData);
   },
@@ -761,8 +777,11 @@ module.exports = Backbone.View.extend({
     moderatorData.location = self.model.get('page').profile.location;
 
     saveToAPI(form, '', self.serverUrl + "profile", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+      
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, '', moderatorData);
@@ -784,8 +803,11 @@ module.exports = Backbone.View.extend({
         form = this.$el.find("#advancedForm");
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+      
       self.refreshView();
     });
   },
@@ -850,9 +872,14 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  showSignature: function(){
-    var targ = this.$('.js-settingsSignatureRow');
-    targ.css("height", 50);
+  checkPGPKey: function(e){
+    if(!this.$(e.target).val().length){
+      this.$('.js-settingsSignatureRow').css("height", 0);
+      this.$('#signature').removeAttr("required");
+    } else {
+      this.$('.js-settingsSignatureRow').css("height", 50);
+      this.$('#signature').attr("required", '');
+    }
   },
 
   toggleFancyStyles: function(){

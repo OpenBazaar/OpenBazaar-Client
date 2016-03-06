@@ -11,8 +11,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
-    remote = require('remote'),
-    messageModal = require('../utils/messageModal.js');
+    remote = require('remote');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 

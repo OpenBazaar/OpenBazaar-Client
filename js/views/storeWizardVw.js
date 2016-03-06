@@ -107,6 +107,10 @@ module.exports = Backbone.View.extend({
         },
         toolbar: {
           imageDragging: false
+        },
+        paste: {
+          forcePlainText: false,
+          cleanPastedHTML: false
         }
       });
       editor.subscribe('blur', self.validateDescription);
@@ -132,7 +136,7 @@ module.exports = Backbone.View.extend({
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    if(data.id == this.socketModeratorID){
+    if(data.id == this.socketModeratorID && data.moderator.guid != this.model.get('user').guid){
       this.addModerator(data);
     }
   },
