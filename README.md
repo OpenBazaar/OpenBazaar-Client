@@ -8,7 +8,9 @@ You **must** be running the [OpenBazaar backend](https://github.com/OpenBazaar/O
 Dependencies
 -----------
 
-- [NodeJS](https://nodejs.org/en/) `sudo apt-get install nodejs-legacy`
+- [NodeJS](https://nodejs.org/en/) v4.x LTS
+  - Linux: `sudo apt-get install nodejs-legacy`
+  - OSX using [homebrew](http://brew.sh/): `brew install homebrew/versions/node4-lts`
 - Ensure that `npm` is added to your `PATH`!
 
 Running
@@ -23,20 +25,11 @@ Running
 4. Run the client
   - `npm start`
 
-Remember you must be running the [OpenBazaar-Server](https://github.com/drwasho/OpenBazaar-Server) for the client to function properly. If you want to access the test network (testnet), run the server using the `-t` flag (e.g. `$ python openbazaard.py start -t`).
+Remember you must be running the [OpenBazaar-Server](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to function properly. If you want to access the test network (testnet), run the server using the `-t` flag (e.g. `$ python openbazaard.py start -t`).
 
 If the server component has not generated a GUID (which happens only once, when the server is first started), then the client will not fully start up until the GUID is created.
 
-Features In Development
------------
-
-- [Block node](https://github.com/OpenBazaar/OpenBazaar-Client/issues/272)
-- [Search within Pages](https://github.com/OpenBazaar/OpenBazaar-Client/issues/467)
-- [Notifications](https://github.com/OpenBazaar/OpenBazaar-Client/issues/468) (what's left)
-- [Moderator functions](https://github.com/OpenBazaar/OpenBazaar-Client/issues/470)
-- [Transaction flow](https://github.com/OpenBazaar/OpenBazaar-Client/issues/471)
-- [Reputation functions](https://github.com/OpenBazaar/OpenBazaar-Client/issues/472)
-- [Blockchain ID](https://github.com/OpenBazaar/OpenBazaar-Client/issues/473)
+Current (v1 Mainnet) Release Tracker can be found here: [#965](https://github.com/OpenBazaar/OpenBazaar-Client/issues/965)
 
 API Documentation
 -----------
