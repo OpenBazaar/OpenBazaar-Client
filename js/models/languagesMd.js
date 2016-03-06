@@ -2245,7 +2245,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "Clé PGP",
         Signature: "Signature PGP",
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        SignaturePlaceholder: "Une signature PGP est requise si vous entrez une clé PGP",
         Snapchat: "Snapchat",
         BUYNOW: "Acheter Maintenant",
         Description: "Description",
@@ -2322,7 +2322,7 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Sélectionner une photo de couverture",
         AboutPlaceholder: "Description complète",
         BackgroundColor: "Couleur de fond",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
+        NotificationPaymentSent: "Paiement envoyé à",
         NotificationOrderFor: "a placé une commande pour",
         NotificationOrderConfirmed: "Votre commande a été confirmée / expédiée",
         NotificationFollow: "vous suit",
@@ -2404,10 +2404,10 @@ module.exports = Backbone.Model.extend({
         NotProvided: "Non renseigné",
         NotFollowingAnyone: "Aucun abonnement",
         NoFollowers: "Aucun abonné",
-        NoReviews: "No reviews", //notTranslated
+        NoReviews: "Aucun avis",
         Moderator: "Modérateur",
-        ActiveStore:"Store is Active", // not translated
-        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
+        ActiveStore:"Boutique active",
+        ActiveStoreDetails: "Les boutiques et les annonces inactives ne sont pas visibles aux autres personnes",
         Firewall: "Pare-feu",
         ServerSettings: "Paramètres du serveur",
         ReadOnly: "(Ce champ est en lecture seule)",
@@ -2610,7 +2610,7 @@ module.exports = Backbone.Model.extend({
         },
         guidStillCreating: {
           HangTight: "Veuillez patienter quelques instants...",
-          YourPersonal: "Vos clés personnelles et votre identifiant OpenBazaar sont en cours de création et devrait s'achever d'ici quelques secondes.\n\nVous serez automatiquement connecté au réseau d'OpenBazaar une fois la création terminée, alors tâchez d'être patient.",
+          YourPersonal: "Vos clés personnelles et votre identifiant OpenBazaar sont en cours de création et devrait s'achever d'ici quelques minutes.\n\nVous serez automatiquement connecté au réseau d'OpenBazaar une fois la création terminée, alors tâchez d'être patient.",
           LookingFor: "Vous souhaitez patienter autrement ? Vous pouvez lire le <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">blog d'OpenBazaar</a>."
         },
         buyFlow: {
