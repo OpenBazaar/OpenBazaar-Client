@@ -1,7 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
-Backbone.$ = $;
+    $ = require('jquery'),
+    app = require('../App').getApp();
 
 /*eslint no-use-before-define:0*/
 module.exports = function (currency, callback) {
@@ -14,11 +14,10 @@ module.exports = function (currency, callback) {
 
     //if this is the first check, show status
     if(!window.btcAverages){
-        showStatus = true;
-        var showStatusTimeout = window.setTimeout(function(){
-            $('#statusBar').removeClass('fadeOut').text(polyglot.t('LoadingBitcoinPrices'));
-        },1000);
-
+        showStatus = app.statusBar.pushMessage({
+            msg: polyglot.t('LoadingBitcoinPrices'),
+            duration: false
+        });
     }
 
     window.btcAverages = window.btcAverages || {};
@@ -171,11 +170,8 @@ module.exports = function (currency, callback) {
         } else {
             btAve = 1;
         }
-        if(showStatus){
-            showStatus = false;
-            window.clearTimeout(showStatusTimeout);
-            $('#statusBar').addClass('fadeOut').text("");
-        }
+
+        showStatus && showStatus.remove();
 
         typeof callback === 'function' && callback(btAve, currencyKeys);
     };
