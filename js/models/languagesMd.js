@@ -8758,7 +8758,7 @@ module.exports = Backbone.Model.extend({
         FreeShipping: "Frete Grátis",
         OrderDetails: "Detalhes do Pedido",
         OrderSummary: "Resumo do Pedido",
-        AllListings: "Todas os Anúncios",
+        AllListings: "Todos os Anúncios",
         ComingSoon: "Em Breve",
         PaymentPending: "Pagamento Pendente",
         FinalizePurchase: "Finalizar Compra",
@@ -8965,7 +8965,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Procurando na sua rede",
           searchingText: "Procurando na sua rede por",
-          noResults: "Nenhum anúncio foi encontrada na sua rede com a tag"
+          noResults: "Nenhum anúncio foi encontrado na sua rede com a tag"
         },
         filters: {
           pagesAllTypes: "Todos os tipos",
@@ -9021,7 +9021,7 @@ module.exports = Backbone.Model.extend({
           recommended: "Páginas Recomendadas para Seguir",
           avatar: "Escolha uma imagem de perfil",
           chooseAvatar: "Escolher Imagem de Perfil",
-          discoverCallOut: "Explore os Anúncios e Páginas do OpenBazaar",
+          discoverCallOut: "Explore os Anúncios e as Páginas do OpenBazaar",
           Finished: "Concluir"
         },
         guidStillCreating: {
