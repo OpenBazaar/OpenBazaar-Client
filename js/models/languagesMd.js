@@ -8116,7 +8116,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP-nøgle",
         Signature: "PGP-signatur",
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        SignaturePlaceholder: "En PGP-signatur er påkrævet, hvis du indtaster en PGP-nøgle",
         Snapchat: "Snapchat",
         BUYNOW: "Køb nu",
         Description: "Beskrivelse",
@@ -8402,7 +8402,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "Serveren er blevet lukket ned",
           tooManyPhotosTitle: "For mange billeder",
           tooManyPhotosBody: "Nogle eller alle dine billeder blev forhindret i at blive uploadet, da du ellers ville overskride det maksimalt tilladte antal.",
-          badJSON: "The JSON data returned from the server was malformed" // notTranslated
+          badJSON: "Den JSON-data, der blev sendt tilbage fra serveren, var ikke formatteret korrekt"
         },
         aboutSection: {
           about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a>-kanal e ller på vores <a href=\"http://www.reddit.com/r/openbazaar\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">support desk</a>.</p>",
@@ -8473,7 +8473,7 @@ module.exports = Backbone.Model.extend({
           recommended: "Anbefalede sider, der kan følges",
           avatar: "Opsæt en avatar",
           chooseAvatar: "Vælg avatar",
-          discoverCallOut: "Udforsk listiner og sider på OpenBazaar",
+          discoverCallOut: "Udforsk listinger og sider på OpenBazaar",
           Finished: "Færdig"
         },
         guidStillCreating: {
