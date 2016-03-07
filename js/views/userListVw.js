@@ -21,46 +21,26 @@ module.exports = Backbone.View.extend({
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
     this.subViews = [];
-    this.showPerScroll = 20;
-    this.nextUserToShow = 0;
     this.render();
   },
 
   render: function(){
     var self = this;
     this.listWrapper = $('<div class="list flexRow flexExpand border0 custCol-border"></div>');
-
     if(this.usersShort.models.length > 0)
     {
-      this.renderUserSet(0,20);
-
-      //listen to scrolling on container
-      this.scrollHandler = __.bind(
-          __.throttle(this.onScroll, 100), this
-      );
-      this.listWrapper.on('scroll', this.scrollHandler);
-
+      this.usersShort.each(function (user) {
+        user.set('avatarURL', self.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
+        if(self.options.ownFollowing.indexOf(user.get('guid')) != -1){
+          user.set("ownFollowing", true);
+        }
+        user.set('hideFollow', self.options.hideFollow);
+        self.renderUser(user);
+      }, this);
       this.$el.html(this.listWrapper);
-
     }else{
       self.renderNoneFound();
     }
-  },
-
-  renderUserSet: function(start, end){
-    var self = this,
-        renderSet = _.filter(this.usersShort.models, function(value, index){
-          return (index >= start) && (index <= end);
-        });
-
-    renderSet.each(function (user) {
-      user.set('avatarURL', self.options.serverUrl+"get_image?hash="+user.get('avatar_hash')+"&guid="+user.get('guid'));
-      if(self.options.ownFollowing.indexOf(user.get('guid')) != -1){
-        user.set("ownFollowing", true);
-      }
-      user.set('hideFollow', self.options.hideFollow);
-      self.renderUser(user);
-    }, this);
   },
 
   renderUser: function(item){
@@ -71,13 +51,6 @@ module.exports = Backbone.View.extend({
     this.listWrapper.prepend(storeShort.el);
   },
 
-  onScroll: function(){
-    console.log("scrollTop: " + this.listWrapper[0].scrollTop);
-    console.log("scrollHeight: " + this.listWrapper[0].scrollHeight);
-    if(this.listWrapper[0].scrollTop + this.listWrapper[0].clientHeight + 100 > this.listWrapper[0].scrollHeight) {
-      console.log("scroll")
-    }
-  },
   renderNoneFound: function(){
     var simpleMessage = new simpleMessageView({title: this.options.title, message: this.options.message, el: this.$el});
     this.subViews.push(simpleMessage);
@@ -94,7 +67,6 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    this.scrollHandler && this.listWrapper.off('scroll', this.scrollHandler);
   }
 });
 
