@@ -101,12 +101,6 @@ module.exports = baseVw.extend({
           )
         );
 
-        var description = sanitizeHTML(self.model.get('vendor_offer').listing.item.displayDescription, {
-          allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
-        });
-
-        self.$('.js-listingDescription').html(description);
-
         if (!self.reviewsVw) {
           self.reviewsVw = new ReviewsVw({ collection: self.ratingCl });
           self.registerChild(self.reviewsVw);
