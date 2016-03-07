@@ -7,8 +7,10 @@ var loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
     Taggle = require('taggle'),
     MediumEditor = require('medium-editor'),
+    Sortable = require('sortablejs'),
     messageModal = require('../utils/messageModal'),
     chosen = require('../utils/chosen.jquery.min.js'),
+    validateMediumEditor = require('../utils/validateMediumEditor'),
     baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
@@ -16,7 +18,10 @@ module.exports = baseVw.extend({
   events: {
     'click #shippingFreeTrue': 'disableShippingPrice',
     'click #shippingFreeFalse': 'enableShippingPrice',
-    'change .js-itemImageUpload': 'resizeImage',
+    'change .js-itemImageUpload': 'onImageFileChange',
+    'dragover .js-photosModule': 'onPhotoDragOver',
+    'dragleave .js-photosModule': 'onPhotoDragLeave',    
+    'drop .js-photosModule': 'onPhotoDrop',
     'change #inputType': 'changeType',
     'click .js-editItemDeleteImage': 'deleteImage',
     'blur input': 'validateInput',
@@ -56,17 +61,6 @@ module.exports = baseVw.extend({
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
-
-    // prevent the body from picking up drag actions
-    $(document.body).on("dragover", this.onDragonover = function(e) {
-      e.preventDefault();
-      return false;
-    });
-
-    $(document.body).on("drop", this.onDrop = function(e){
-      e.preventDefault();
-      return false;
-    });    
   },
 
   render: function(){
@@ -77,6 +71,18 @@ module.exports = baseVw.extend({
       self.$el.html(loadedTemplate(context));
       self.setFormValues();
 
+      self.$photosModule = self.$('.js-photosModule');
+
+      this.sortableImages && this.sortableImages.destroy();
+      this.sortableImages = Sortable.create(self.$('.js-subImageWrap')[0], {
+        onUpdate: function(e) {
+          var imagesArr = self.model.get('imageHashesToUpload');
+
+          imagesArr.splice(e.newIndex, 0, imagesArr.splice(e.oldIndex, 1)[0]);
+          self.model.set('imageHashesToUpload', imagesArr);
+        }
+      });
+
       setTimeout(() => {
         var editor = new MediumEditor('#inputDescription', {
           placeholder: {
@@ -86,7 +92,10 @@ module.exports = baseVw.extend({
             imageDragging: false,
             sticky: true
           },
-          disableExtraSpaces: true
+          paste: {
+            forcePlainText: false,
+            cleanPastedHTML: false
+          }
         });
 
         editor.subscribe('blur', self.validateDescription);
@@ -95,6 +104,7 @@ module.exports = baseVw.extend({
         this.$('.chosen').chosen({width: '100%'});
       }, 0);
     });
+
     return this;
   },
 
@@ -175,8 +185,6 @@ module.exports = baseVw.extend({
     var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
     keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
     //activate tags plugin
-    //hacky fix for now, because DOM is not complete when taggle is called, resulting in a container size of zero
-    //TODO: find a fix for this, so taggle is initialized after reflow is complete
     window.setTimeout(function(){
       self.inputKeyword = new Taggle('inputKeyword', {
         tags: keywordTags,
@@ -249,16 +257,44 @@ module.exports = baseVw.extend({
     this.$el.find('#inputExpirationDate').val('');
   },
 
-  resizeImage: function(){
+  onPhotoDragOver: function(e) {
+    if (!event.dataTransfer.files.length) return;
+
+    this.$photosModule.addClass('dragOver');
+    e.preventDefault();
+  },
+
+  onPhotoDragLeave: function(e) {
+    this.$photosModule.removeClass('dragOver');
+    e.preventDefault();
+  },  
+
+  onPhotoDrop: function(e) {
+    this.$photosModule.removeClass('dragOver');
+    this.resizeImage(event.dataTransfer.files);
+    e.preventDefault();
+  },
+
+  onImageFileChange: function(e) {
+    this.resizeImage();
+  },
+
+  resizeImage: function(imageFiles){
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
-        imageFiles = Array.prototype.slice.call($imageInput[0].files, 0),
         curImages = this.model.get('combinedImagesArray'),
         maxH = 800,
         maxW = 800,
         imageList = [],
         loaded = 0,
         imageCount;
+
+    imageFiles = Array.prototype.slice.call(imageFiles || $imageInput[0].files, 0);
+
+    // prune out any non-image files
+    imageFiles = imageFiles.filter((file) => {
+      return file.type.startsWith('image');
+    });
 
     $imageInput.val('');
 
@@ -276,6 +312,7 @@ module.exports = baseVw.extend({
           ctx;
 
       newImage.src = imageFile.path;
+
       newImage.onload = function() {
         var imgH = newImage.height,
             imgW = newImage.width,
@@ -301,9 +338,18 @@ module.exports = baseVw.extend({
         dataURI = canvas.toDataURL('image/jpeg', 0.45);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
+
         if(loaded === imageCount) {
           self.uploadImage(imageList);
         }
+      };
+
+      newImage.onerror = function() {
+        loaded += 1;
+
+        if(loaded === imageCount) {
+          self.uploadImage(imageList);
+        }        
       };
     });
   },
@@ -311,10 +357,16 @@ module.exports = baseVw.extend({
   uploadImage: function(imageList){
     var self = this,
         formData = new FormData();
+    
     __.each(imageList, function(dataURL){
       "use strict";
       formData.append('image', dataURL);
     });
+
+    if (!imageList.length) {
+      self.$el.find('.js-itemEditImageLoading').addClass("fadeOut");
+      return;
+    }
 
     $.ajax({
       type: "POST",
@@ -366,8 +418,8 @@ module.exports = baseVw.extend({
         if (i < subImageDivs.length){
           $(subImageDivs[i]).css('background-image', 'url(' + imageURL + ')');
         }else{
-          $('<div class="itemImg itemImg-small js-editItemSubImage" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
-              .appendTo(self.$el.find('.js-editItemSubImagesWrapper'));
+          $('<div class="itemImg itemImg-small js-editItemSubImage floatLeft" style="background-image: url(' + imageURL + ');"><div class="btn btn-corner btn-cornerTR btn-cornerTRSmall btn-flushTop btn-c1 fade btn-shadow1 js-editItemDeleteImage"><i class="ion-close-round icon-centered icon-small"></i></div></div>')
+              .appendTo(self.$('.js-subImageWrap'));
         }
       });
       uploadMsg.addClass('hide');
@@ -400,22 +452,15 @@ module.exports = baseVw.extend({
   },
 
   validateInput: function(e) {
+    var targ = $(e.target),
+        trimVal = targ.val().trim();
+    targ.val(trimVal);
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    targ.closest('.flexRow').addClass('formChecked');
   },
 
   validateDescription: function(e) {
-    var $field = self.$('#inputDescription');
-
-    if (!$($field.val()).text().length) {
-      $field.val('');
-    }
-
-    if (!$field[0].checkValidity()) {
-      $field.parent().addClass('invalid');
-    } else {
-      $field.parent().removeClass('invalid');
-    }
+    validateMediumEditor.checkVal(this.$('#inputDescription'));
   },  
 
   saveChanges: function(){
@@ -531,10 +576,5 @@ module.exports = baseVw.extend({
     this.validateDescription();
 
     return this.$('#contractForm')[0].checkValidity();
-  },
-
-  remove: function() {
-    $(document.body).off("dragover", this.onDragonover);
-    $(document.body).off("drop", this.onDrop);        
   }
 });

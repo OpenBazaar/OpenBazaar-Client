@@ -53,7 +53,7 @@
           </div>
         </li>
         <% if (ob.totalReviews) { %>
-        <li class="border0 alignCenter padding10 marginBottom12 js-itemRating">
+        <li class="border0 alignCenter padding10 marginBottom12 clickable js-itemRating">
           <span class="marginRight3"><%= ob.totalReviews %> Review</span><% print(ob.starsTemplate({ rating: ob.avgRating })) %><span class="marginLeft2">(<%= ob.avgRating %>/5)</span>
         </li>
         <% } %>

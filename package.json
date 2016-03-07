@@ -1,6 +1,6 @@
 {
   "name": "OpenBazaar",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "OpenBazaar Client",
   "main": "main.js",
   "repository": {
@@ -35,6 +35,7 @@
     "request": ">=2.67.0",
     "safestart": "0.8.0",
     "sanitize-html": "^1.11.2",
+    "sortablejs": "^1.4.2",
     "taggle": "1.6.1",
     "underscore": "1.8.3",
     "yargs": "^4.1.0"

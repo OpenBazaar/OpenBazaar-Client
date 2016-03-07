@@ -392,6 +392,11 @@
                          placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
                          pattern="<%= ob.user.bitcoinValidationRegex %>"
                          value="<%= ob.user.refund_address %>" required />
+                  <div class="positionTopRight padding10">
+                  <span class="btn btn-txt custCol-secondary">
+                    <i class="ion-android-arrow-back"></i> Testnet Address <!--remove this in production-->
+                  </span>
+                  </div>
                 </div>
               </form>
               <div class="width100 marginTop30 lineHeight21 alignCenter">

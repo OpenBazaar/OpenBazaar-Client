@@ -22,6 +22,7 @@ window.onblur = function() {
 };
 
 var Polyglot = require('node-polyglot'),
+    ipcRenderer = require('ipc-renderer'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
     userModel = require('./models/userMd'),
@@ -32,6 +33,7 @@ var Polyglot = require('node-polyglot'),
     setTheme = require('./utils/setTheme.js'),
     pageNavView = require('./views/pageNavVw'),
     ChatVw = require('./views/chatVw'),
+    StatusBarView = require('./views/statusBarVw'),
     user = new userModel(),
     userProfile = new userProfileModel(),
     languages = new languagesModel(),
@@ -43,6 +45,10 @@ var Polyglot = require('node-polyglot'),
     serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
+    startUpConnectMaxRetries = 2,
+    startUpConnectRetryDelay = 2 * 1000,
+    startUpConnectMaxTime = 6 * 1000,
+    startTime = Date.now(),
     extendPolyglot,
     newPageNavView,
     newSocketView,
@@ -100,7 +106,7 @@ if(platform === "linux") {
 }
 
 //open external links in a browser, not the app
-$('body').on('click', '.js-externalLink, .about a, .js-listingDescription a', function(e){
+$('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescription a', function(e){
   e.preventDefault();
   var extUrl = $(this).attr('href');
   if (!/^https?:\/\//i.test(extUrl)) {
@@ -115,6 +121,11 @@ $(window).bind('hashchange', function(){
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
+//set fancy styles class
+if(localStorage.getItem('notFancy') == "true"){
+  $('html').addClass('notFancy')
+}
+
 //prevent dragging a file to the window from loading that file
 window.addEventListener("dragover",function(e){
   e = e || event;
@@ -126,11 +137,24 @@ window.addEventListener("drop",function(e){
 },false);
 
 //prevent enter from submitting forms
-window.addEventListener('keypress', function(event) {
+$('body').on('keypress', 'input', function(event) {
   if (event.keyCode == 13) {
     event.preventDefault();
   }
 });
+
+//manage app being or not in fullscreen mode
+ipcRenderer.on('fullscreen-enter', (e) => {
+  $('body').addClass('fullscreen');
+});
+
+ipcRenderer.on('fullscreen-exit', (e) => {
+  $('body').removeClass('fullscreen');
+});
+
+//implement our statusBar view
+app.statusBar = new StatusBarView();
+$('#statusBar').html(app.statusBar.render().el);
 
 var setCurrentBitCoin = function(cCode, userModel, callback) {
   "use strict";
@@ -169,8 +193,6 @@ var loadProfile = function(landingRoute, onboarded) {
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
-              $loadingModal.addClass('hide');
-             
               newSocketView = new socketView({model: serverConfigMd});
 
               newPageNavView = new pageNavView({
@@ -247,8 +269,8 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.on('onboarding-complete', function(guid) {
     onboardingModal && onboardingModal.remove()
     onboardingModal = null;
-    $loadingModal.removeClass('hide');
     loadProfile('#userPage/' + guid + '/store', true);
+    $loadingModal.removeClass('hide');
   });
 };
 
@@ -284,12 +306,23 @@ heartbeat.on('open', function(e) {
     // appropriatally loadProfile or launch onboarding
     guidCreating = null;
     loadProfileNeeded = true;
+
+    onboardingModal && onboardingModal.remove();
   }
 });
 
 heartbeat.on('close', function(e) {
-  // server down
-  launchServerConnect();
+  if (
+    Date.now() - startTime < startUpConnectMaxTime &&
+    startUpConnectMaxRetries
+  ) {
+    setTimeout(() => {
+      startUpConnectMaxRetries--;
+      app.connectHeartbeatSocket();
+    }, startUpConnectRetryDelay);
+  } else {
+    launchServerConnect();
+  }
 });
 
 heartbeat.on('message', function(e) {
@@ -306,10 +339,17 @@ heartbeat.on('message', function(e) {
         launchOnboarding(guidCreating);
         break;
       case 'GUID generation complete':
-        serverConfigMd.save({
+        var creds = {
           username: e.jsonData.username,
           password: e.jsonData.password
-        });
+        };
+
+        if (app.serverConfig.isLocalServer()) {
+          creds.local_username = e.jsonData.username;
+          creds.local_password = e.jsonData.password;
+        }
+
+        serverConfigMd.save(creds);
 
         app.login().done(function() {
           guidCreating.resolve();

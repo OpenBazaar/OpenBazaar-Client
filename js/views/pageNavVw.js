@@ -11,8 +11,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
-    remote = require('remote'),
-    messageModal = require('../utils/messageModal.js');
+    remote = require('remote');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
@@ -223,7 +222,10 @@ module.exports = baseVw.extend({
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
-        self.addressInput.val(text ? "ob://" + text: "");
+        
+        text = text ? 'ob://' + text : '';
+        self._lastSetAddressBarText = text;
+        self.addressInput.val(text);
         self.closeStatusBar();
       });
       if(self.showDiscIntro){
@@ -438,7 +440,6 @@ module.exports = baseVw.extend({
     if (e.keyCode == 13){
       if (barText.startsWith('ob://')) {
         sliced = barText.length > 5 ? barText.slice(5) : '';
-        this.addressInput.val(sliced);        
         sliced && this.addressBarProcess(sliced);
       } else {
         this.addressBarProcess(barText);  
@@ -454,6 +455,10 @@ module.exports = baseVw.extend({
     // if new address text comes before another has been processed.
     app.router.translateRoute(addressBarText).done((route) => {
       Backbone.history.navigate(route, {trigger:true});
+    }).fail((reason) => {
+      if (reason === 'bad-handle') {
+        this.addressInput.val(this._lastSetAddressBarText || '');
+      }
     });
   },
 

@@ -20,7 +20,7 @@
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>
                             <% }else{ %>
-                                <span class="noOverflow width95 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
                             </span> <%= polyglot.t('NotificationDisputeClosed') %>
                         </div>
@@ -31,19 +31,19 @@
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>
                             <% }else{ %>
-                                <span class="noOverflow width95 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
                             </span> <%= polyglot.t('NotificationDispute') %>
                     </div>
                     <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "payment received") { %>
                         <div class="textSize12px hoverUnderline">
-                            <%= polyglot.t('NotificationPaymentReceived') %>
+                            <%= polyglot.t('NotificationPaymentSent') %>
                             <span>
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>.
                             <% }else{ %>
-                                <span class="noOverflow width95 inlineBlock top3 tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3 tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
                             </span>
                         </div>
@@ -54,7 +54,7 @@
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>
                             <% }else{ %>
-                                <span class="noOverflow width95 inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
                             </span> <%= polyglot.t('NotificationOrderFor') %> <%= ob.title %>.
                         </div>
@@ -65,9 +65,9 @@
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>
                             <% }else{ %>
-                                <span class="noOverflow width95 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
-                            </span> <%= polyglot.t('NotificationFollow') %>.
+                            </span><%= polyglot.t('NotificationFollow') %>.
                         </div>
                         <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "refund") { %>
@@ -76,7 +76,7 @@
                             <% if(ob.handle) { %>
                                 <%= ob.handle %>
                             <% }else{ %>
-                                <span class="noOverflow width95 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
                             </span> <%= polyglot.t('NotificationRefund') %>.
                     </div>

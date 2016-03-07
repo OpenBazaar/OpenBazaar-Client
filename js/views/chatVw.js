@@ -1,7 +1,7 @@
 var Backbone = require('backbone'),
   $ = require('jquery'),
   loadTemplate = require('../utils/loadTemplate'),
-  app = require('../App.js').getApp(),
+  app = require('../App').getApp(),
   ChatConversationsCl = require('../collections/chatConversationsCl'),
   ChatMessagesCl = require('../collections/chatMessagesCl'),
   baseVw = require('./baseVw'),
@@ -28,13 +28,7 @@ module.exports = baseVw.extend({
     }    
 
     this.socketView = options.socketView;
-
-    // cache some selectors which are outside of
-    // our el's scope
-    this.$sideBar = $('#sideBar');
-    this.$container = $('.container');
-    this.$obContainer = $('#obContainer');
-    this.$loadingSpinner = $('.spinner-with-logo');
+    this.$body = $('body');
 
     this.chatConversationsCl = new ChatConversationsCl();
     this.chatConversationsCl.fetch({
@@ -191,7 +185,7 @@ module.exports = baseVw.extend({
         message: msg,
         outgoing: true,
         read: true,
-        timestamp: Date.now()
+        timestamp: Date.now() / 1000
       });
 
       // update chat head
@@ -208,7 +202,7 @@ module.exports = baseVw.extend({
           last_message: msg,
           public_key: convoMd.get('public_key'),
           unread: 0,
-          timestamp: Date.now()
+          timestamp: Date.now() / 1000
         });
       }
     });
@@ -296,6 +290,14 @@ module.exports = baseVw.extend({
 
         app.playNotificationSound();
       }
+    } else if(msg.message_type === 'ORDER' || msg.message_type === 'DISPUTE_OPEN' || msg.message_type === 'DISPUTE_CLOSE'){
+      new Notification(msg.handle || msg.sender + ':', {
+        body: msg.message,
+        icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
+        '&guid=' + msg.sender : '/imgs/defaultUser.png'
+      });
+
+      app.playNotificationSound();
     }
   },
 
@@ -311,11 +313,7 @@ module.exports = baseVw.extend({
   },
 
   slideOut: function() {
-    this.$sideBar.addClass('sideBarSlid');
-    this.$container.addClass('compressed');
-    this.$loadingSpinner.addClass('modalCompressed');
-    this.$obContainer.addClass('noScrollBar');
-    $('#colorbox').addClass('marginLeftNeg115');
+    this.$body.addClass('chatOpen');
     self.$('.chatSearch').addClass('chatSearchOut');
     self.$('.btn-chatOpen')
         .addClass('hide')
@@ -325,11 +323,7 @@ module.exports = baseVw.extend({
 
   slideIn: function() {
     this.closeConversation();
-    this.$sideBar.removeClass('sideBarSlid');
-    this.$container.removeClass('compressed');
-    this.$loadingSpinner.removeClass('modalCompressed');
-    this.$obContainer.removeClass('noScrollBar');
-    $('#colorbox').removeClass('marginLeftNeg115');
+    this.$body.removeClass('chatOpen');
     self.$('.chatSearch').removeClass('chatSearchOut');
   },
 

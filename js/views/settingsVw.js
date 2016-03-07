@@ -1,7 +1,6 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    //userProfileModel = require('../models/userProfileMd'),
     loadTemplate = require('../utils/loadTemplate'),
     domUtils = require('../utils/dom'),
     app = require('../App.js').getApp(),
@@ -18,6 +17,7 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
+    validateMediumEditor = require('../utils/validateMediumEditor'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     ServerConnectModal = require('./serverConnectModal');
 
@@ -53,9 +53,10 @@ module.exports = Backbone.View.extend({
     'click #moderatorNo': 'hideModeratorFeeHolder',
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
+    'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
-    'input #pgp_key': 'showSignature'
+    'input #pgp_key': 'checkPGPKey'
   },
 
   initialize: function(options){
@@ -151,6 +152,7 @@ module.exports = Backbone.View.extend({
         maxZoom: 2,
         onFileReaderError: function(data){console.log(data);},
         onImageLoading: function(){
+          self.$('.cropit-image-zoom-input').removeClass('hide');
           self.newAvatar = true;
           self.$('.js-avatarLoading').removeClass('fadeOut');
         },
@@ -201,10 +203,19 @@ module.exports = Backbone.View.extend({
         },
         toolbar: {
           imageDragging: false
+        },
+        paste: {
+          forcePlainText: false,
+          cleanPastedHTML: false
         }
       });
+      editor.subscribe('blur', self.validateDescription);
     });
     return this;
+  },
+
+  validateDescription: function(e) {
+    validateMediumEditor.checkVal(this.$('#about'));
   },
 
   patchAndFetchBlockedUsers: function(models) {
@@ -351,12 +362,16 @@ module.exports = Backbone.View.extend({
         timezone_str = "",
         language_str = "",
         pageNSFW = this.model.get('page').profile.nsfw,
-        notifications = user.notifications;
-        moderatorStatus = this.model.get('page').profile.moderator;
+        notifications = user.notifications,
+        moderatorStatus = this.model.get('page').profile.moderator,
+        vendorStatus = this.model.get('page').profile.vendor,
+        fancyStatus = window.localStorage.getItem('notFancy');
 
     this.$el.find('#pageForm input[name=nsfw]').val([String(pageNSFW)]);
     this.$("#generalForm input[name=nsfw][value=" + localStorage.getItem('NSFWFilter') + "]").prop('checked', true);
     this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
+    this.$("#storeForm input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
+    this.$("#advancedForm input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
@@ -537,7 +552,6 @@ module.exports = Backbone.View.extend({
   },
 
   saveGeneral: function() {
-    "use strict";
     var self = this,
         form = this.$el.find("#generalForm"),
         cCode = this.$('#currency_code').val();
@@ -545,8 +559,11 @@ module.exports = Backbone.View.extend({
     localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+
       self.setCurrentBitCoin(cCode);
       self.refreshView();
     });
@@ -583,7 +600,12 @@ module.exports = Backbone.View.extend({
 
       saveToAPI(form, self.model.get('page').profile, self.serverUrl + "profile", function(){
         window.obEventBus.trigger("updateProfile");
-        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        
+        app.statusBar.pushMessage({
+          type: 'confirmed',
+          msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+        });
+        
         self.refreshView();
       }, "", pageData, skipKeys);
     };
@@ -673,7 +695,6 @@ module.exports = Backbone.View.extend({
   },
 
   saveStore: function(){
-    "use strict";
     var self = this,
         form = this.$el.find("#storeForm"),
         profileData = {},
@@ -686,12 +707,15 @@ module.exports = Backbone.View.extend({
     });
 
     settingsData.moderators = modList.length > 0 ? modList : "";
-    profileData.vendor = true;
+    //profileData.vendor = true;
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
-        "use strict";
-        messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+        app.statusBar.pushMessage({
+          type: 'confirmed',
+          msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+        });        
+
         self.refreshView();
       }, "", settingsData);
     }, "", profileData);
@@ -732,8 +756,11 @@ module.exports = Backbone.View.extend({
     addressData.shipping_addresses = newAddresses;
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+
       self.refreshView();
     }, "", addressData);
   },
@@ -750,8 +777,11 @@ module.exports = Backbone.View.extend({
     moderatorData.location = self.model.get('page').profile.location;
 
     saveToAPI(form, '', self.serverUrl + "profile", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+      
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, '', moderatorData);
@@ -773,8 +803,11 @@ module.exports = Backbone.View.extend({
         form = this.$el.find("#advancedForm");
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      "use strict";
-      messageModal.show(window.polyglot.t('saveMessages.Saved'), "<i>" + window.polyglot.t('saveMessages.SaveSuccess') + "</i>");
+      app.statusBar.pushMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+      });
+      
       self.refreshView();
     });
   },
@@ -839,9 +872,24 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  showSignature: function(){
-    var targ = this.$('.js-settingsSignatureRow');
-    targ.css("height", 50);
+  checkPGPKey: function(e){
+    if(!this.$(e.target).val().length){
+      this.$('.js-settingsSignatureRow').css("height", 0);
+      this.$('#signature').removeAttr("required");
+    } else {
+      this.$('.js-settingsSignatureRow').css("height", 50);
+      this.$('#signature').attr("required", '');
+    }
+  },
+
+  toggleFancyStyles: function(){
+    if($('#advancedForm input[name="notFancy"]').prop('checked')){
+      $('html').addClass('notFancy');
+      localStorage.setItem('notFancy', "true");
+    } else {
+      $('html').removeClass('notFancy');
+      localStorage.setItem('notFancy', "false");
+    }
   },
 
   close: function(){

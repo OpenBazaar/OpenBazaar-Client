@@ -195,11 +195,15 @@ form {
 #obContainer {
   transition: width 0.5s ease;
   width: calc(100% - 47px);
-
+  transition: width 0.5s ease;
 }
 
-#obContainer.compressed {
+#ov1 .chatOpen #obContainer {
   width: calc(100% - 231px);
+}
+
+#ov1 .chatOpen #obContainer::-webkit-scrollbar {
+  width: 0;
 }
 
 #pageNav {
@@ -245,23 +249,14 @@ form {
   background-color: #252525;
   border-left: 0;
   height: calc(100% - 50px);
-  z-index: 4;
+  z-index: 5;
   transition: right 0.5s ease;
   color: #DDD;
   -webkit-app-region: no-drag;
 }
 
-#sideBar.sideBarSlid {
+.chatOpen #sideBar {
   right: 0px;
-}
-
-#sideBar .sideBarSlidShow {
-  opacity: 0;
-  transition: opacity 1s;
-}
-
-#sideBar.sideBarSlid .sideBarSlidShow {
-  opacity: 1;
 }
 
 #sideBar input::-webkit-input-placeholder {
@@ -458,6 +453,10 @@ form {
   flex-grow: 1;
 }
 
+.noPointerEvents {
+  pointer-events: none;
+}
+
 .gridItemControls {
   background: #106DA3;
   position: absolute;
@@ -547,7 +546,7 @@ form {
   right: 15px;
   font-size: 12px;
   cursor: pointer;
-  z-index: 5;
+  z-index: 4;
 }
 
 .userPageAboutSection:hover .userPageEditBtn,
@@ -949,6 +948,7 @@ label.fieldItem {
   height: 100%;
   top: 0;
   left: 0;
+  right: 0;
   /* use fadeIn and fadeOut to change opacity */
   transition: opacity .05s cubic-bezier(0, 0, 0.2, 1);
   padding-top: 25px;
@@ -975,7 +975,13 @@ label.fieldItem {
   position: absolute;
   right: 0;
   left: 0;
+  transition: right 0.5s ease;
 }
+
+#ov1 .chatOpen .modal-child {
+  right: 230px;
+}
+
 
 .modal.modal-navOffset .modal-child {
   margin-top: 25px;
@@ -1115,6 +1121,11 @@ label.fieldItem {
   margin-top: 20px;
   transition: margin 0.5s ease;
   position: fixed;
+  transition: margin-left 0.5s ease;
+}
+
+#ov1 .chatOpen #colorbox {
+  margin-left: -115px;
 }
 
 #cboxOverlay {
@@ -1164,6 +1175,7 @@ h5 {
 
 [class *= "ion-"]:before {
   font-size: 1.2em;
+  pointer-events: none;
 }
 
 .txt-center {
@@ -1348,7 +1360,6 @@ h5 {
   border-radius: 3px;
   background-color: #327eb8;
   box-shadow: 0px 0px 10px #383838;
-  transition: left .1s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modal-hero {
@@ -1724,6 +1735,10 @@ margin: auto;
   transition: initial;
 }
 
+.fullscreen .btn.btn-win {
+  display: none;
+}
+
 .btn.btn-win.btn-winClose {
   background-color: #E45A5A;
   position: relative;
@@ -1910,7 +1925,7 @@ div.chatSearchOut .chatSearchIcon {
 .chatConversationHeads {
   clear: both;
   border-top: solid 1px #363636;
-  height: calc(100% - 88px);
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -1971,7 +1986,7 @@ div.chatSearchOut .chatSearchIcon {
   overflow: auto;
   padding: 6px 2px;
   margin-left: 2px;
-  width: 100%;
+  width: 222px;
 }
 
 .chatConversationTo {
@@ -1999,7 +2014,7 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessage {
   height: 75px;
-  padding: 0 5px;
+  padding: 0;
   border: 1px solid #565656;
   border-top: 0;
   margin-left: 2px;
@@ -2011,12 +2026,17 @@ div.chatSearchOut .chatSearchIcon {
   max-height: 145px;
 }
 
+.chatConversationMessage  .txtAreaField::-webkit-input-placeholder{
+  font-size: 13px;
+}
+
 .chatConversationMessage  .txtAreaField {
   height: 75px;
+  padding: 10px 10px;
 }
 
 .chatConversationMessage  .txtAreaField:focus {
-  outline: none;
+    outline: 2px solid #565656;
 }
 
 .chatConversationMessage  .txtAreaField:after {
@@ -2185,10 +2205,6 @@ div.chatSearchOut .chatSearchIcon {
 
 .chatConversationMessageTimestamp div {
   margin-top: 2px;
-}
-
-.modalCompressed {
-  left: calc(50% - 115.5px);
 }
 
 .testnetBadge {
@@ -3092,14 +3108,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   right: 45px;
   background-color: #252525;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   color: #fff;
   font-size: 15px;
   padding: 0;
   width: 390px;
-  transform: translateY(-100%);
+  transform: translateY(-440px);
   transition: transform 200ms;
 }
 
@@ -3176,16 +3192,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   right: 10px;
   background-color: #252525;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.60);
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   color: #fff;
   font-size: 13px;
   padding: 10px 0;
   width: 230px;
-  z-index: -1;
   overflow: hidden;
-  transform: translateY(-100%);
+  transform: translateY(-330px);
   transition: transform 200ms;
 }
 
@@ -3357,8 +3372,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: transparent;
   z-index: 5;
   padding: 0;
-  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1);
-  transition: top .4s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity .4s cubic-bezier(0, 0, 0.2, 1), top .4s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .user-page-header-slim-bg {
@@ -3481,6 +3495,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 215px;
   height: 215px;
   position: relative;
+  transition: left 0.5s ease;
 }
 
 .spinner-with-logo i {
@@ -3488,6 +3503,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 17px;
   left: 18px;
   opacity: .90;
+}
+
+#ov1 .chatOpen .spinner-with-logo {
+  left: calc(50% - 115.5px);
 }
 
 .spinnerWrapper {
@@ -3857,9 +3876,44 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: 0;
 }
 
+.cropit-image-preview.cropit-avatar {
+  background: url('../imgs/defaultUser.png');
+  background-size: cover;  
+}
+
 #userPage .headerCropper .bar.navBar {
   background: none;
   height: 48px;
+}
+
+#userPage .photosModule .dropPanel {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+#userPage .photosModule.dragOver .dropPanel {
+  opacity: 1;
+  z-index: 2;
+}
+
+#userPage .photosModule .dropPanel .icon {
+  font-size: 50px;
+  margin-top: 50px;
+}
+
+#userPage .photosModule .editItemImageLoadPhotoMessage {
+  transition: opacity 0.3s;
+}
+
+#userPage .photosModule.dragOver .editItemImageLoadPhotoMessage {
+  opacity: 0;
 }
 
 .editItemImageHolder {
@@ -3875,7 +3929,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   left: 0;
 }
-
 
 #transactionConfirmForm label {
   font-size: 12px;
@@ -4038,21 +4091,31 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: fixed;
   bottom: 0;
   z-index: 2;
-  opacity: 0.4;
-  width: 100%;
-  box-sizing: border-box;
+  width: 100%;  
+}
+
+#statusBar .statusMessageWrap {
+  height: 0px;
+  overflow: hidden;
+  transition: opacity 1.5s, height 1s;   
+}
+
+#statusBar .statusMessageWrap.slideUp {
   height: 30px;
+}
+
+#statusBar .statusMessage {
+  opacity: 0.4;
+  box-sizing: border-box;
   padding: 0 10px;
   line-height: 30px;
   color: #fff;
-  font-style: 12px;
+  font-size: 12px;
   font-style: italic;
   background: #000;
-  transition: opacity 1.5s, bottom 1s;
-}
-
-#statusBar.fadeOut {
-  bottom: -30px;
+  border-bottom: 1px solid #222;
+  position: relative;
+  top: -1px; 
 }
 
 /*========== utility classes ==========*/
@@ -4533,6 +4596,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: 3px;
 }
 
+#ov1  .marginRight4 {
+  margin-right: 4px;
+}
+
 #ov1  .marginRight5 {
   margin-right: 5px;
 }
@@ -4901,6 +4968,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .padding5 {
   padding: 5px;
 }
+#ov1  .padding10px6px {
+  padding: 10px 6px;
+}
 
 #ov1  .padding8 {
   padding: 8px;
@@ -5069,6 +5139,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .width80 {
   width: 80px;
 }
+#ov1 .width91 {
+  width: 91px;
+}
 #ov1 .width95 {
   width: 95px;
 }
@@ -5200,6 +5273,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   pointer-events: none;
 }
 
+#ov1 .foldIn {
+  height: 0;
+  overflow: hidden;
+  transition: height 1s;
+}
+
 #ov1 .underline {
   text-decoration: underline;
 }
@@ -5235,10 +5314,121 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: auto;
 }
 
+/* turn off animations and transitions with this style */
+
+#ov1.notFancy,
+#ov1.notFancy *,
+#ov1.notFancy * *,
+#ov1.notFancy * * *,
+#ov1.notFancy * * * *,
+#ov1.notFancy * * * * *,
+#ov1.notFancy * * * * * *,
+#ov1.notFancy * * * * * * *,
+#ov1.notFancy * * * * * * * *,
+#ov1.notFancy * * * * * * * * * ,
+#ov1.notFancy * * * * * * * * * *,
+#ov1.notFancy #userPage,
+#ov1.notFancy #userPage *,
+#ov1.notFancy #userPage * *,
+#ov1.notFancy #userPage * * *,
+#ov1.notFancy #userPage * * * *,
+#ov1.notFancy #userPage * * * * *,
+#ov1.notFancy #userPage * * * * * *,
+#ov1.notFancy #userPage * * * * * * *,
+#ov1.notFancy #userPage * * * * * * * *,
+#ov1.notFancy #userPage * * * * * * * * * ,
+#ov1.notFancy #userPage * * * * * * * * * *,
+#ov1.notFancy #obContainer,
+#ov1.notFancy #obContainer *,
+#ov1.notFancy #obContainer * *,
+#ov1.notFancy #obContainer * * *,
+#ov1.notFancy #obContainer * * * *,
+#ov1.notFancy #obContainer * * * * *,
+#ov1.notFancy #obContainer * * * * * *,
+#ov1.notFancy #obContainer * * * * * * *,
+#ov1.notFancy #obContainer * * * * * * * *,
+#ov1.notFancy #obContainer * * * * * * * * * ,
+#ov1.notFancy #obContainer * * * * * * * * * *,
+#ov1.notFancy #overlay,
+#ov1.notFancy #sideBar,
+#ov1.notFancy #pageNav,
+#ov1.notFancy #modalHolder,
+#ov1.notFancy #messageModal,
+#ov1.notFancy #statusBar {
+  transition: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+  transition-property: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+#ov1.notFancy #pageNav .popMenu.popMenu-navBar.popMenu-opened {
+  border-left: 1px solid #444;
+  border-right: 1px solid #444;
+  border-bottom: 1px solid #444;
+}
+
+#ov1.notFancy #pageNav .statusBar.fadeOut,
+#ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
+#ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
+  opacity: 0 !important;
+}
+
+#ov1.notFancy #sideBar .sideBarSlidShow {
+  display: none;
+}
+
+#ov1.notFancy #sideBar.sideBarSlid .sideBarSlidShow {
+  display: block;
+}
+
+#ov1.notFancy .gridItemControls {
+  display: none;
+}
+
+#ov1.notFancy .gridItemControls .btn-gridItemControl:hover,
+#ov1.notFancy .userPage-subViews .gridItem:hover .gridItemControls,
+#ov1.notFancy .homeView .gridItem:hover .gridItemControls {
+  display: block;
+}
+
+#ov1.notFancy .btn .postConfirm {
+  display: none;
+}
+
+#ov1.notFancy .confirm.btn .preConfirm {
+  display: none;
+}
+
+#ov1.notFancy .confirm.btn .postConfirm {
+  display: inline-block;
+}
+
+#ov1.notFancy #userPage #obContainer #content .labelWrap.fade {
+  opacity: 0 !important;
+}
+
+#ov1.notFancy #userPage #obContainer #content .labelWrap.fadeIn {
+  opacity: 1;
+}
+
+#ov1.notFancy #obContainer .taggle_placeholder,
+#ov1.notFancy #userPage #obContainer .taggle_placeholder {
+  display: none !important;
+}
+
+
+
 /* terrible hack, TODO: remove before production */
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   background: #535353;
   opacity: 0.2;
   pointer-events: none;
+}
+
+#ov1 .TODO.TODO.TODO.TODO.TODO {
+  display: none; /* hide when live */
 }

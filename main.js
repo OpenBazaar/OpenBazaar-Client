@@ -129,6 +129,9 @@ var start_local_server = function() {
     });
     subpy.unref();
   }
+  if (fs.existsSync(__dirname + path.sep + '..' + path.sep + 'gpg')) {
+       process.env.PATH = __dirname + path.sep + '..' + path.sep + 'gpg' + path.sep + 'pub' + path.sep + ';' + process.env.PATH;
+   }
 };
 
 // Check if we need to kick off the python server-daemon (Desktop app)
@@ -221,6 +224,30 @@ app.on('ready', function() {
             }
           }
         },
+        {
+          label: 'Toggle Full Screen',
+          accelerator: (function() {
+            if (platform == 'mac') {
+              return 'Ctrl+Command+F';
+            } else {
+              return 'Ctrl+Shift+F';
+            }
+          })(),
+          click: function(item, focusedWindow) {
+            var fullScreen;
+
+            if (mainWindow) {
+              fullScreen = !mainWindow.isFullScreen();
+              mainWindow.setFullScreen(fullScreen);
+
+              if (fullScreen) {
+                mainWindow.webContents.send('fullscreen-enter');
+              } else {
+                mainWindow.webContents.send('fullscreen-exit');
+              }
+            }
+          }
+        },        
       ]
     },
     {

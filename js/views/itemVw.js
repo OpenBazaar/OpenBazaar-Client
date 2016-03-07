@@ -16,7 +16,8 @@ module.exports = baseVw.extend({
     'click .js-reviewsTab': 'reviewsClick',
     'click .js-shippingTab': 'shippingClick',
     'click .js-buyButton': 'buyClick',
-    'click .js-photoGallery': 'photoGalleryClick'
+    'click .js-photoGallery': 'photoGalleryClick',
+    'click .js-itemRating': 'clickItemRating'
   },
 
   initialize: function(options){
@@ -35,13 +36,13 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.ratingCl, 'reset', function() {
       this.fetchingRatings = false;
-      this.reviewsVw && this.reviewsVw.render();
       this.render();
+      this.reviewsVw && this.reviewsVw.render();
     });
 
     this.listenTo(this.ratingCl, 'request', function() {
       this.fetchingRatings = true;
-    });    
+    });
   },
 
   onPriceSet: function() {
@@ -147,25 +148,25 @@ module.exports = baseVw.extend({
   },
 
   descriptionClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-description'));
-    this.activeTab = 'description';
+    this.setTab('description');
   },
 
   reviewsClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-reviews'));
-    this.activeTab = 'reviews';
+    this.setTab('reviews');
   },
 
   shippingClick: function(e){
-    this.tabClick($(e.target).closest('.js-tab'), this.$el.find('.js-shipping'));
-    this.activeTab = 'shipping';
+    this.setTab('shipping');
   },
 
-  tabClick: function(activeTab, showContent){
-    this.$el.find('.js-tab').removeClass('active');
-    activeTab.addClass('active');
-    this.$el.find('.js-tabTarg').addClass('hide');
-    showContent.removeClass('hide');
+  setTab: function(activeTab) {
+    if (activeTab) {
+      this.$('.js-tab').removeClass('active');
+      this.$(`.js-${activeTab}Tab`).addClass('active');
+      this.$('.js-tabTarg').addClass('hide');
+      this.$(`.js-${activeTab}`).removeClass('hide');
+      this.activeTab = activeTab;
+    }
   },
 
   buyClick: function(){
@@ -177,6 +178,13 @@ module.exports = baseVw.extend({
     this.subViews.push(this.buyWizardView);
     this.subModels.push(buyModel);
     $('#obContainer').addClass('overflowHidden').addClass('blur');  
+  },
+
+  clickItemRating: function(e) {
+    this.setTab('reviews');
+    $('#obContainer').animate({
+      scrollTop: this.$('.js-reviewsContainer').offset().top
+    }, 200);
   },
 
   remove: function() {
