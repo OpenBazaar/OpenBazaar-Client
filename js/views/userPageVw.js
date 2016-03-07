@@ -349,7 +349,8 @@ module.exports = baseVw.extend({
     loadTemplate('./js/templates/userPage.html', function(loadedTemplate) {
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
-      self.subRender();
+      self.fetchFollowing();
+      self.fetchListings();
       //save state of the page
       self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
       self.undoCustomAttributes.primary_color = self.model.get('page').profile.primary_color;
@@ -585,38 +586,40 @@ module.exports = baseVw.extend({
     }
   },
 
-  subRender: function() {
+  fetchListings: function() {
     "use strict";
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
       //timeout: 5000,
-      success: function(model){
+      success: function (model) {
         if (self.isRemoved()) return;
         self.cachedListings = model.get('listings'); //cache for rerendering
         self.renderItems(self.cachedListings);
       },
-      error: function(model, response){
+      error: function (model, response) {
         if (self.isRemoved()) return;
         messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Items'));
       },
-      complete: function(xhr, textStatus) {
-        if(textStatus == 'parsererror'){
+      complete: function (xhr, textStatus) {
+        if (textStatus == 'parsererror') {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
         }
       }
     });
+  },
+
+  fetchFollowing: function(){
+    var self = this;
     this.following.fetch({
       data: self.userProfileFetchParameters,
-      //timeout: 5000,
       success: function(model){
         if (self.isRemoved()) return;
 
         if(self.options.ownPage === true){
           self.ownFollowing = model.get('following') || [];
           self.ownFollowing = self.ownFollowing.map(function(followingObject){
-            var followingGuid = followingObject.guid;
-            return followingGuid;
+            return followingObject.guid;
           });
           self.renderFollowing(model.get('following'));
           //call followers 2nd so list of following is available
@@ -624,14 +627,13 @@ module.exports = baseVw.extend({
         } else {
           $.ajax({
             url: self.options.userModel.get('serverUrl') + "get_following",
-            dataType: "json",
+            dataType: "json"
             //timeout: 4000
           }).done(function(ownFollowingData){
             if (self.isRemoved()) return;
             self.ownFollowing = ownFollowingData.following || [];
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
-              var followingGuid = followingObject.guid;
-              return followingGuid;
+              return followingObject.guid;
             });
             self.renderFollowing(model.get('following'));
             //call followers 2nd so list of following is available
@@ -1270,7 +1272,7 @@ module.exports = baseVw.extend({
   saveNewDone: function(newHash) {
     "use strict";
     this.setState('listing', newHash);
-    this.subRender();
+    this.fetchListings();
   },
 
   cancelClick: function(){
@@ -1314,7 +1316,7 @@ module.exports = baseVw.extend({
 
           //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
           self.item.trigger('destroy', self.item);
-          self.subRender();
+          self.fetchListings();
           self.setState("store");
         },
         error: function (jqXHR, status, errorThrown) {
@@ -1389,7 +1391,7 @@ module.exports = baseVw.extend({
       url: this.options.userModel.get('serverUrl') + "follow",
       success: function(data) {
         if (self.isRemoved()) return;
-        self.subRender();
+        self.fetchFollowing();
       },
       error: function(jqXHR, status, errorThrown){
         if (self.isRemoved()) return;
@@ -1411,7 +1413,7 @@ module.exports = baseVw.extend({
       url: this.options.userModel.get('serverUrl') + "unfollow",
       success: function() {
         if (self.isRemoved()) return;
-        self.subRender();
+        self.fetchFollowing();
       },
       error: function(jqXHR, status, errorThrown){
         if (self.isRemoved()) return;
