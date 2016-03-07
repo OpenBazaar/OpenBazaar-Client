@@ -134,43 +134,14 @@ module.exports = baseVw.extend({
     }
     //add all countries to the Ships To select list
     var countries = new countriesModel();
-    var countryList = countries.get('countries');
+    //make a copy of the countries array
+    var countryList = countries.get('countries').slice(0);
     countryList.unshift(
         {
           "name": window.polyglot.t('WorldwideShipping'),
           "dataName": "ALL",
           "code": "ALL",
           "number": "1"
-        },
-        {
-          "name": "North America",
-          "dataName": "NORTH_AMERICA",
-          "code": "NORTH_AMERICA",
-          "number": "2"
-        },
-        {
-          "name": "South America",
-          "dataName": "SOUTH_AMERICA",
-          "code": "SOUTH_AMERICA",
-          "number": "3"
-        },
-        {
-          "name": "Europe",
-          "dataName": "EUROPE",
-          "code": "EUROPE",
-          "number": "4"
-        },
-        {
-          "name": "Africa",
-          "dataName": "AFRICA",
-          "code": "AFRICA",
-          "number": "5"
-        },
-        {
-          "name": "Asia",
-          "dataName": "ASIA",
-          "code": "ASIA",
-          "number": "6"
         });
     var shipsTo = this.$el.find('#shipsTo');
     __.each(countryList, function(countryFromList, i){

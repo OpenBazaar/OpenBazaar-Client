@@ -194,6 +194,23 @@
             <div class="flexRow custCol-border js-shippingRow">
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
+                  <label for="shipsTo"><%= polyglot.t('ShippingRegions') %></label>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <div class="fieldItem">
+                  <input type="checkbox"
+                         class="fieldItem"
+                         id="transactionsCloseDisputeCheckbox" >
+                  <label for="transactionsCloseDisputeCheckbox" class="clickable">
+                    <%= polyglot.t('transactions.CloseDispute') %>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow custCol-border js-shippingRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
                   <label for="shipsTo"><%= polyglot.t('ShipsTo') %></label>
                 </div>
               </div>
