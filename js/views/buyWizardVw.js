@@ -439,6 +439,7 @@ module.exports = Backbone.View.extend({
 
     this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
     this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
+    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
 
     formData.append("id", this.model.get('id'));
 
@@ -512,7 +513,6 @@ module.exports = Backbone.View.extend({
       var extUrl = payHREF;
       require("shell").openExternal(extUrl);
     });
-    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
     this.buyDetailsView.lockForm();
   },
 
