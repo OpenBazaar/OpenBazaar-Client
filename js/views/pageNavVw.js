@@ -45,6 +45,8 @@ module.exports = baseVw.extend({
     'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro'
   },
 
+  NOTIF_PER_FETCH: 10,
+
   initialize: function(options){
     var self = this;
     this.options = options || {};
@@ -78,11 +80,15 @@ module.exports = baseVw.extend({
 
     this.notificationsCl = new NotificationsCl();
     this.notificationsCl.comparator = function(notif) {
-      return -notif.get("timestamp");
+      return -notif.get('timestamp');
     };
-    this.notificationsFetch = this.notificationsCl.fetch();
+    this.notificationsFetch = this.notificationsCl.fetch({
+      data: {
+        limit: this.NOTIF_PER_FETCH
+      }
+    });
 
-    this.listenTo(this.notificationsCl, 'update', (cl, resp, options) => {
+    this.listenTo(this.notificationsCl, 'update', (cl, options) => {
       this.setNotificationCount(cl.getUnreadCount());
     });
 
@@ -200,7 +206,8 @@ module.exports = baseVw.extend({
         self.notificationsVw = new NotificationsVw({
           socketView: self.socketView,
           collection: self.notificationsCl,
-          fetch: self.notificationsFetch
+          fetch: self.notificationsFetch,
+          notifPerFetch: self.NOTIF_PER_FETCH
         });
         self.registerChild(self.notificationsVw);
 

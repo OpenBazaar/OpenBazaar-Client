@@ -75,7 +75,10 @@ module.exports = Backbone.View.extend({
   },
 
   onScroll: function(){
-    if(this.$container[0].scrollTop + this.$container[0].clientHeight + 200 > this.$container[0].scrollHeight) {
+    if (
+        !(this.fetch && this.fetch.state() === 'pending') &&
+        this.$container[0].scrollTop + this.$container[0].clientHeight + 200 > this.$container[0].scrollHeight
+      ) {
       this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
     }
   },
