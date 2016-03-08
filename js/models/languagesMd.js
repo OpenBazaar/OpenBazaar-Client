@@ -411,7 +411,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network",
           searchingText: "Scanning your network for",
-          noResults: "No listings found in your network tagged with"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with"
         },
         filters: {
           pagesAllTypes: "All types",
@@ -959,7 +960,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Uw netwerk wordt gescand",
           searchingText: "Uw netwerk wordt gescand naar",
-          noResults: "Geen aanbiedingen gevonden in uw netwerk met de tags"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Geen aanbiedingen gevonden in uw netwerk met de tags"
         },
         filters: {
           pagesAllTypes: "Alle types",
@@ -1466,7 +1468,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Todos los tipos",
@@ -1998,7 +2001,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Alle Arten",
@@ -2539,7 +2543,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scansione del tuo network",
           searchingText: "Scansionando il tuo network per",
-          noResults: "Nessun listino trovato sul tuo network taggato con"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Nessun listino trovato sul tuo network taggato con"
         },
         filters: {
           pagesAllTypes: "Tutti i tipi",
@@ -3092,7 +3097,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Analyse de votre réseau",
           searchingText: "Analyse de votre réseau pour",
-          noResults: "Aucune annonce trouvée dans votre réseau avec le mot-clé"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Aucune annonce trouvée dans votre réseau avec le mot-clé"
         },
         filters: {
           pagesAllTypes: "Tous les types",
@@ -3627,7 +3633,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Toate tipurile",
@@ -4160,7 +4167,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Все типы",
@@ -4693,7 +4701,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Všetky typy",
@@ -5230,7 +5239,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Tüm çeşitler",
@@ -5766,7 +5776,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Hoch Segh",
@@ -6307,7 +6318,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "正在扫描你的网络",
           searchingText: "正在你的网络中检索",
-          noResults: "你的网络中没有商品具有标签"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "你的网络中没有商品具有标签"
         },
         filters: {
           pagesAllTypes: "所有分类",
@@ -6844,7 +6856,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "모든종류",
@@ -7366,7 +7379,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "すべて",
@@ -7901,7 +7915,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Przeszukiwanie sieci",
           searchingText: "Przeszukiwanie sieci dla",
-          noResults: "Brak pozycji z tagiem"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Brak pozycji z tagiem"
         },
         filters: {
           pagesAllTypes: "Wszystkie typy",
@@ -8417,7 +8432,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Skanner dit netværk",
           searchingText: "Skanner dit netværk efter",
-          noResults: "Ingen listninger tagget med følgende blev fundet i dit netværk" // Note: Better (non-postfix) translation would be "Ingen listninger tagget med XXXXX blev fundet i dit netværk"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Ingen listninger tagget med følgende blev fundet i dit netværk" // Note: Better (non-postfix) translation would be "Ingen listninger tagget med XXXXX blev fundet i dit netværk"
         },
         filters: {
           pagesAllTypes: "Alle typer",
@@ -8965,7 +8981,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Procurando na sua rede",
           searchingText: "Procurando na sua rede por",
-          noResults: "Nenhum anúncio foi encontrado na sua rede com a tag"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Nenhum anúncio foi encontrado na sua rede com a tag"
         },
         filters: {
           pagesAllTypes: "Todos os tipos",
@@ -9455,7 +9472,8 @@ module.exports = Backbone.Model.extend({
          discover: {
            searchDefaultText: "Сканую вашу мережу...",
            searchingText: "Сканую вашу мережу на ",
-           noResults: "Не знайдено товарів в вашій мережі познчених як "
+           noResults: "No listings found in your network", //notTranslated
+           noTaggedResults: "Не знайдено товарів в вашій мережі познчених як"
          },
          filters: {
            pagesAllTypes: "Всі типи",
