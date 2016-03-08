@@ -194,17 +194,13 @@
             <div class="flexRow custCol-border js-shippingRow">
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="shipsTo"><%= polyglot.t('ShippingRegions') %></label>
+                  <label for="shipsTo"><%= polyglot.t('AddShipToRegion') %></label>
                 </div>
               </div>
               <div class="flexCol-8">
-                <div class="fieldItem">
-                  <input type="checkbox"
-                         class="fieldItem"
-                         id="transactionsCloseDisputeCheckbox" >
-                  <label for="transactionsCloseDisputeCheckbox" class="clickable">
-                    <%= polyglot.t('transactions.CloseDispute') %>
-                  </label>
+                <div class="padding10">
+                  <a class="btn btn-txt custCol-secondary js-region" data-region="EUROPEAN_UNION">European Union</a>
+                  <a class="btn btn-txt custCol-secondary js-region" data-region="EUROPEAN_ECONOMIC_AREA">European Economic Area</a>
                 </div>
               </div>
             </div>
@@ -245,16 +241,12 @@
               <div class="flexCol-4">
                 <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
                 <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
-                <input type="number" step="any" class="fieldItem js-priceLocal custCol-text" id="shippingPriceLocalLocal"  value="<%= ob.domesticShipping %>"
-                  <% if(ob.userCurrencyCode == "BTC"){ %>
-                  min="0.0001"
-                  <% } else { %>
-                  min="<% print((window.currentBitcoin * 0.0005).toFixed(2)) %>"
-                  <% } %>
-                >
-              </div>
-              <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0001 :  (window.currentBitcoin * 0.0005).toFixed(2) %></span>
+                <input type="number"
+                       step="any"
+                       min="0"
+                       class="fieldItem js-priceLocal custCol-text"
+                       id="shippingPriceLocalLocal"
+                       value="<%= ob.domesticShipping %>">
               </div>
             </div>
             <div class="flexRow custCol-border js-inputParent js-shippingPriceRow">
@@ -265,16 +257,12 @@
               </div>
               <div class="flexCol-4">
                 <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
-                <input type="number" step="any" class="fieldItem js-priceLocal custCol-text" id="shippingPriceInternationalLocal" value="<%= ob.internationalShipping %>"
-                  <% if(ob.userCurrencyCode == "BTC"){ %>
-                  min="0.0001"
-                  <% } else { %>
-                  min="<% print((window.currentBitcoin * 0.0005).toFixed(2)) %>"
-                  <% } %>
-                >
-              </div>
-              <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0001 :  (window.currentBitcoin * 0.0005).toFixed(2) %></span>
+                <input type="number"
+                       step="any"
+                       min="0"
+                       class="fieldItem js-priceLocal custCol-text"
+                       id="shippingPriceInternationalLocal"
+                       value="<%= ob.internationalShipping %>">
               </div>
             </div>
             <div class="flexRow custCol-border js-shippingRow">

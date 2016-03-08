@@ -27,7 +27,8 @@ module.exports = baseVw.extend({
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'focus #inputExpirationDate': 'addDefaultTime',
-    'click .js-itemEditClearDate': 'clearDate'
+    'click .js-itemEditClearDate': 'clearDate',
+    'click .js-region': 'selectRegions'
   },
 
   MAX_PHOTOS: 10,
@@ -47,6 +48,16 @@ module.exports = baseVw.extend({
         return "0" + val;
       }
     }
+
+    this.regions = {
+      "EUROPEAN_UNION": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK", "ESTONIA",
+        "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "IRELAND", "ITALY", "LATVIA", "LITHUANIA", "LUXEMBOURG",
+        "MALTA", "NETHERLANDS", "POLAND", "PORTUGAL", "ROMANIA", "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"],
+      "EUROPEAN_ECONOMIC_AREA": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK",
+        "ESTONIA", "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "ICELAND", "IRELAND", "ITALY", "LATVIA",
+        "LIECHTENSTEIN", "LITHUANIA", "LUXEMBOURG", "MALTA", "NETHERLANDS", "NORWAY", "POLAND", "PORTUGAL", "ROMANIA",
+        "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"]
+    };
 
     this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.combinedImagesArray = [];
@@ -156,11 +167,14 @@ module.exports = baseVw.extend({
     __.each(countryList, function(countryFromList, i){
       shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
     });
+    shipsTo.val('ALL');
 
+/*
     var shipsToValue = this.model.get('vendor_offer').listing.shipping.shipping_regions;
     //if shipsToValue is empty, set it to the user's country
     shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
     shipsTo.val(shipsToValue);
+    */
 
     var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
     keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
@@ -220,6 +234,12 @@ module.exports = baseVw.extend({
       this.disableShippingPrice();
       this.noShipping = true;
     }
+  },
+
+  selectRegions: function(e){
+    var setCountries = this.regions[$(e.target).data('region')];
+    this.$('#shipsTo').val(setCountries);
+    this.$('.chosen').trigger('chosen:updated');
   },
 
   addDefaultTime: function(e){

@@ -122,6 +122,7 @@ module.exports = Backbone.Model.extend({
         Keywords: "Keywords",
         ShipsFrom: "Ships From",
         ShipsTo: "Ships To",
+        AddShipToRegion: "Add Shipping Region",
         Optional: "Optional",
         Customize: "Customize",
         Save: "Save",
