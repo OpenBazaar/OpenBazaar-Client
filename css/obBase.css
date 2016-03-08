@@ -3264,8 +3264,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #notificationsPanel .popMenu-notificationsContent {
   overflow-y: scroll;
   overflow-x: hidden;
-  /*max-height: 390px;*/
-  max-height: 130px;
+  max-height: 390px;
 }
 
 #notificationsPanel .notification {
