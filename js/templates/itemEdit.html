@@ -211,7 +211,7 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <div class="fieldItem padding0">
+                <div class="fieldItem padding0 js-shipToWrapper">
                   <div class="fieldItem-selectWrapper noIcon">
                     <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple required>
                     </select>
@@ -239,8 +239,8 @@
                 </div>
               </div>
               <div class="flexCol-4">
-                <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
-                <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
+                <input type="text" name="shipping_domestic" id="inputShippingDomestic" required class="hide" />
+                <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" required class="hide" />
                 <input type="number"
                        step="any"
                        min="0"
@@ -272,7 +272,12 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="est_delivery_domestic" id="inputLocalShippingTime" type="text" class="fieldItem" value="<%= ob.vendor_offer.listing.shipping.est_delivery.domestic %>" placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
+                <input name="est_delivery_domestic"
+                       id="inputLocalShippingTime"
+                       type="text"
+                       class="fieldItem"
+                       value="<%= ob.vendor_offer.listing.shipping.est_delivery.domestic %>"
+                       placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
               </div>
             </div>
             <div class="flexRow custCol-border js-shippingRow">
@@ -282,7 +287,11 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="est_delivery_international" id="inputInternationalShippingTime" type="text" class="fieldItem custCol-text" value="<%= ob.vendor_offer.listing.shipping.est_delivery.international %>" placeholder="<%= polyglot.t('EstDeliveryInternationalPlaceholder') %>">
+                <input name="est_delivery_international"
+                       id="inputInternationalShippingTime"
+                       type="text" class="fieldItem custCol-text"
+                       value="<%= ob.vendor_offer.listing.shipping.est_delivery.international %>"
+                       placeholder="<%= polyglot.t('EstDeliveryInternationalPlaceholder') %>">
               </div>
             </div>
           </div>

@@ -32,9 +32,7 @@ module.exports = window.Backbone.Model.extend({
       "signature": "",
       "listing": {
         "shipping": {
-          "shipping_regions": [
-            ""
-          ],
+          "shipping_regions": [],
           "est_delivery": {
             "international": "",
             "domestic": ""
@@ -122,9 +120,7 @@ module.exports = window.Backbone.Model.extend({
       //if the shipping section is not returned it breaks the edit template. Restore it here
       if(!response.vendor_offer.listing.shipping){
         response.vendor_offer.listing.shipping = {
-          "shipping_regions": [
-            ""
-          ],
+          "shipping_regions": [],
               "est_delivery": {
             "international": "",
                 "domestic": ""

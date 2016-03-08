@@ -104,6 +104,8 @@ module.exports = baseVw.extend({
             imageDragging: false,
             sticky: true
           },
+          disableDoubleReturn: true,
+          disableExtraSpaces: true,
           paste: {
             cleanPastedHTML: true,
             cleanReplacements: [
@@ -172,16 +174,14 @@ module.exports = baseVw.extend({
     __.each(countryList, function(countryFromList, i){
       shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
     });
-    shipsTo.val('ALL');
-    this.prevShipsToVal = ['ALL'];
-    this.$('.chosen').trigger('chosen:updated');
 
-/*
     var shipsToValue = this.model.get('vendor_offer').listing.shipping.shipping_regions;
     //if shipsToValue is empty, set it to the user's country
-    shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
+    shipsToValue = shipsToValue.length > 0 ? shipsToValue : ["ALL"];
     shipsTo.val(shipsToValue);
-    */
+    this.prevShipsToVal = shipsToValue;
+    this.$('.chosen').trigger('chosen:updated');
+
 
     var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
     keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
@@ -287,6 +287,7 @@ module.exports = baseVw.extend({
     $(e.target).val(newVal);
     this.$('.chosen').trigger('chosen:updated');
     this.prevShipsToVal = newVal;
+    this.$('.js-shipToWrapper').removeClass('invalid');
   },
 
   clearDate: function(){
@@ -506,7 +507,8 @@ module.exports = baseVw.extend({
         //deleteThisItem,
         cCode = this.model.get('userCurrencyCode'),
         submitForm = this.$el.find('#contractForm')[0],
-        keywordsArray = this.inputKeyword.getTagValues();
+        keywordsArray = this.inputKeyword.getTagValues(),
+        shipsToInput = this.$('#shipsTo');
 
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;
@@ -520,11 +522,18 @@ module.exports = baseVw.extend({
     this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
     this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
     this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
-
+    
     formData = new FormData(submitForm);
 
     if(this.noShipping){
       formData.append('ships_to', 'NA');
+    }
+
+    //make sure a ships to value is entered
+    if(!shipsToInput.val() && !this.noShipping){
+      this.$('.js-shipToWrapper').addClass('invalid');
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
+      return
     }
 
     //add old and new image hashes
@@ -601,7 +610,8 @@ module.exports = baseVw.extend({
       var invalidInputList = "";
       $(submitForm).find('input, textarea').each(function() {
         if($(this).is(":invalid")){
-          invalidInputList += "<br/>"+$(this).attr('id');
+          var inputName = $("label[for='"+$(this).attr('id')+"']").text() || $(this).attr('id');
+          invalidInputList += "<br/>"+inputName;
         }
       });
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
