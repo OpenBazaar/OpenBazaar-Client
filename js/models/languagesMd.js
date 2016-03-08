@@ -8819,13 +8819,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Sem seguidores",
         NoReviews: "Sem avaliações",
         Moderator: "Moderador",
-<<<<<<< HEAD
 	ActiveStore:"Ativar Loja",
         ActiveStoreDetails: "As lojas e os anúncios inativos não são visíveis para outras pessoas",
-=======
-    ActiveStore:"Ativar Loja",
-        ActiveStoreDetails: "Lojas e listagens inativas não são visíveis para outras pessoas",
->>>>>>> refs/remotes/origin/master
         Firewall: "Firewall",
         ServerSettings: "Configurações do Servidor",
         ReadOnly: "(esse campo não pode ser editado)",
