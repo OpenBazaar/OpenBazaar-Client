@@ -4287,45 +4287,45 @@ module.exports = Backbone.Model.extend({
         }
       },
 
-      {
+	  {
 
-        langName: "Slovak",
+        langName: "Slovenský jazyk",
         langCode: "sk",
 
         /*
 
          Translator: @michalvalasek
-         02/28/2016: ~ 265 untranslated strings
+		 Translator: @mariodian
 
          Use capitalized keys for widely reused text that must be capitalized
 
          */
 
-        IHaveAWalletNow: "I have a Wallet now", //notTranslated
+        IHaveAWalletNow: "Mám peňaženku",
         Next: "Ďalej",
         IAgree: "Súhlasím",
         Back: "Späť",
         EnterMessage: "Vložte správu...",
-        Recommended: "Recommended", //notTranslated
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Recommended: "Odporúčané",
+        Reload: "Znovu načítať",
+        You: "Vy",
         Skip: "Preskočiť",
         Done: "Hotovo",
-        Status: "Status",
-        Navigation: "Navigation", //notTranslated
+        Status: "Stav",
+        Navigation: "Navigácia",
         Cancel: "Zrušiť",
         Yes: "Áno",
         No: "Nie",
         of: "z",
         Sell: "Predať",
-        New: "New",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        New: "Nové",
+        HighlightToStyle: "Označte text pre naštýlovanie",
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
-        StillValidating: "Your handle is still validating", //notTranslated
-        CheckStatus: "Check Status", //notTranslated
-        ChangeCurrency: "Change currency", //notTranslated
+        StillValidating: "Vaše meno sa ešte stále overuje",
+        CheckStatus: "Skontrolovať stav",
+        ChangeCurrency: "Zmeniť menu",
         SKU: "SKU",
         Refurbished: "Renovované",
         Physical: "Fyzické",
@@ -4337,21 +4337,21 @@ module.exports = Backbone.Model.extend({
         Stores: "Obchody",
         Follow: "Sleduj",
         Feed: "Feed",
-        FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete.",
-        ViewListing: "View Listing", //notTranslated
+        FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete",
+        ViewListing: "Zobraziť Katalóg",
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Žiadne ponuky",
         CoverPhoto: "Titulná fotka",
         AboutEmpty: "Stránka s informáciami je prázdna...",
         Followers: "Followeri",
         Following: "Sledované stránky",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Followuje vás",
         Message: "Správa",
         Store: "Obchod",
         Edit: "Upraviť",
-        Clone: "Clone", //notTranslated
+        Clone: "Klonovať",
         Used: "Použité",
         Delete: "Vymazať",
         DontDelete: "Nevymazávajte",
@@ -4361,12 +4361,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Vitajte",
         CreateStore: "Vytvorte si obchod",
         GoToMyPage: "Moja stránka",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Zadajte #hry, #topanky alebo iný #tag...",
         SearchForPagesPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
         SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
         SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
         SearchForUsersPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Zadajťe názov...",
         EstDeliveryDomesticPlaceholder: "3-5 pracovných dní",
         EstDeliveryInternationalPlaceholder: "7-15 pracovných dní",
         OrderProcessingTimePlaceholder: "1-2 pracovné dni",
@@ -4376,11 +4376,11 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Vložte pravidlá vrátenia tovaru...",
         CategoryPlaceholder: "Zadajte kategóriu",
         CategoryHelperText: "Kategórie slúžia na zoskupovanie a organizáciu položiek vo Vašom obchode.",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        KeywordsHelperText: "Pridaním tagu zvyšujete viditeľnosť Vašej ponuky na trhu.",
         ExpirationDateHelperText: "Zadajte dátum, kedy má byť tovar stiahnutý z Vášho obchodu.",
         ClearExpirationDate: "Zrušiť dátum stiahnutia tovaru.",
         ReturnPolicy: "Pravidlá vrátenie tovaru",
-        TermsAndConditions: "Obchodné podmienky",
+        TermsAndConditions: "Obchodné Podmienky",
         Photos: "Obrázky",
         Added: "Pridané",
         Categorization: "Kategorizácia",
@@ -4390,33 +4390,33 @@ module.exports = Backbone.Model.extend({
         Facebook: "Facebook",
         Instagram: "Instagram",
         Twitter: "Twitter",
-        PGPKey: "PGP Key",
-        Signature: "PGP Signature", //not translated
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        PGPKey: "PGP Kľúč",
+        Signature: "PGP Podpis",
+        SignaturePlaceholder: "Ak zadáte PGP kľúč je nutné použiť aj PGP podpis",
         Snapchat: "Snapchat",
         BUYNOW: "KÚPIŤ IHNEĎ",
         Description: "Popis",
-        Reviews: "Hodnotenia zákazníkov",
+        Reviews: "Hodnotenia",
         Shipping: "Doprava",
         Addresses: "Adresy",
-        Files: "Files", //notTranslated
-        NewAddress: "Nová adresa",
-        CurrentAddress: "Aktuálna adresa",
+        Files: "Súbory",
+        NewAddress: "Nová Adresa",
+        CurrentAddress: "Aktuálna Adresa",
         Returns: "Vrátenie",
-        ReturnsPolicy: "Pravidlá vrátenia",
+        ReturnsPolicy: "Pravidlá Vrátenia",
         Ampersand: "&",
         ShipsFrom: "Odosielané z",
         ShipsTo: "Odosielané do",
-        Optional: "Viliteľne",
+        Optional: "Voliteľné",
         Customize: "Upraviť",
         Save: "Uložiť",
         Changes: "Zmeny",
-        Change: "Change", //notTranslated
+        Change: "Zmeniť",
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
-        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinReturnAddress: "Zadajte Vašu Bitcoinovú Adresu",
+        BitcoinReturnAddressPlaceholder: "bitcoinová adresa na ktorú budú vrátené mince",
+        BitcoinReturnAddressInfo: "Pri žiadosti o vrátenie peňazí sa tieto prostriedky pošlú na Bitcoinovú adresu. Prosím zadajte nižšie adresu od Vašej peňaženky.",
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -4428,27 +4428,27 @@ module.exports = Backbone.Model.extend({
         ShipToCountry: "Krajina",
         EnableNotifications: "Povoliť notifikácie",
         EnableSSL: "Povoliť SSL (šifrované spojenie)",
-        LibbitcoinServerAddress: "Libbitcoin server address",
+        LibbitcoinServerAddress: "Libbitcoin adresa servera",
         ServerIPPort: "Server IP:Port",
         All: "Všetko",
         Name: "Meno",
         Price: "Cena",
         Available: "K dispozícii",
-        Tags: "Tags", //notTranslated
+        Tags: "Tagy",
         Keywords: "Kľúčové slová",
         Type: "Typ",
         Condition: "Podmienka",
         NSFW: "18+ (obsah pre dospelých)",
-        Select: "Select", //not translated
-        Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        ViewPage: "View page", //notTranslated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
-        Reset: "Reset", //not translated
+        Select: "Zvoliť",
+        Social: "Sociálne",
+        Theme: "Téma",
+        Listing: "Ponuka",
+        Listings: "Ponuky",
+        ViewPage: "Zobraziť stránku",
+        Pages: "Stránky",
+        Page: "Stránka",
+        Language: "Jazyk",
+        Reset: "Resetovať",
         Local: "Lokálne",
         Domestic: "Vnútroštátne",
         Location: "Lokalita",
@@ -4457,7 +4457,7 @@ module.exports = Backbone.Model.extend({
         Free: "Zdarma",
         Category: "Kategória",
         ProcessingTime: "Čas spracovania",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Vybrať obrázky",
         UploadPhotos: "Nahrajte obrázky",
         DragOrUploadPhotos: "Nahrať obrázky",
         ExpirationDate: "Dátum expirácie",
@@ -4470,15 +4470,15 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Zvoľte titulný obrázok",
         AboutPlaceholder: "Plný popis",
         BackgroundColor: "Farba pozadia",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
-        NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
-        NotificationFollow: "vás od teraz sleduje",
-        NotificationDispute: "has opened a dispute", //not translated
-        NotificationDisputeClosed: "this dispute is closed", //not translated
-        NotificationRefund: "has refunded your order", //not translated
-        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
-        NotificationNewOrder: "has made a purchase", //not translated
+        NotificationPaymentSent: "Platba bola odoslaná na",
+        NotificationOrderFor: "zadal objednávku na",
+        NotificationOrderConfirmed: "Vaša objednávka bola potvrdená/odoslaná",
+        NotificationFollow: "Vás od teraz sleduje",
+        NotificationDispute: "začal spor",
+        NotificationDisputeClosed: "tento spor je ukončený",
+        NotificationRefund: "Vám vrátil peniaze",
+        NoticationOrderStatus: "Stav objednávky sa zmenil, kupujúci bol notifikovaný",
+        NotificationNewOrder: "urobil objednávku",
         NoNotifications: "Žiadne notifikácie",
         WelcomeToYourPage: "Vitajte na svojej stránke!",
         SearchForCategory: "Hľadať kategóriu",
@@ -4492,174 +4492,174 @@ module.exports = Backbone.Model.extend({
         AboutYourStore: "Popis Vášho obchodu",
         PaymentType: "Typ platby",
         ShipTo: "Odoslať do",
-        OrderDetails: "Detaily objednávky",
-        OrderSummary: "Zhrnutie objednávky",
-        AllListings: "Listingy",
+        OrderDetails: "Detaily Objednávky",
+        OrderSummary: "Zhrnutie Objednávky",
+        AllListings: "Všetky Ponuky",
         ComingSoon: "Čoskoro",
         PaymentPending: "Čaká sa na prijatie platby...",
         FinalizePurchase: "Dokončuje sa nákup",
         LoadingImage: "Nahráva sa obrázok...",
-        UploadAvatar: "Nahrať avatara",
-        SaveAvatar: "Uložiť avatara",
+        UploadAvatar: "Nahrať Avatara",
+        SaveAvatar: "Uložiť Avatara",
         NewAvatar: "Zvoľte nového avatara",
         NewCoverImage: "Zvoľte nový titulný obrázok",
-        Loading: "Loading...", // not translated
+        Loading: "Načítavam...",
         Purchases:"Nákupy",
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
-        Enter: "Enter", //notTranslated
-        Discover: "Discover", // not translated
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated
-        Blocked: "Blocked", // not translated
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        AllItems: "All Items", // not translated
-        FreeShipping: "Free Shipping", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "max length 20 char", //not translated
-        maxLength80: "max length 80 char", //not translated
-        maxLength200: "max length 200 char", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        NoReviews: "No reviews", //notTranslated
-        Moderator: "Moderator", // not translated
-        ActiveStore:"Store is Active", // not translated
-        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
-        Firewall: "Firewall", //notTranslated
-        ServerSettings: "Server Settings", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
-        HandleResolver: "Handle Resolver",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
-        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
-        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
-        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
-        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
-        moderatorSettings: { // not translated
-          DisputeResolution: "Dispute Resolution", //notTranslated
-          ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
+        Sales: "Predaje",
+        Cases: "Prípady",
+        Enter: "Vložiť",
+        Discover: "Objaviť",
+        Block: "Zablokovať",
+        Unblock: "Odblokovať",
+        Blocked: "Zablokovaný",
+        NoBlockedList: "Momentálne nikoho neblokujete.",
+        Advanced: "Rozšírené",
+        General: "Hlavné",
+        AllItems: "Všetky Položky",
+        FreeShipping: "Poštovné Zdarma",
+        DomesticShippingPrice: "Cena Vnútroštátneho Poštovného",
+        InternationalShippingPrice: "Cena Medzinárodneho Poštovného",
+        MinimumIs: "Minimum je",
+        Title: "Názov",
+        DigitalItem: "Digitálna Položka",
+        PhysicalItem: "Fyzická Položka",
+        MinimumPrice: "Minimálna suma je potrebná na pokrytie ceny Bitcoin transakcie",
+        DomesticShippingTime: "Vnútroštátna Dodacia Doba",
+        InternationalShippingTime: "Medzinárodná Dodacia Doba",
+        DisplayNSFWcontent: "Zobraziť nevhodný obsah?",
+        Basic: "Základné",
+        Content: "Obsah",
+        StandardThemes: "Štandardné témy",
+        NoPhotosAdded: "Nebol pridaný žiaden obrázok",
+        Summary: "Zhrnutie",
+        Funds: "Zdroje",
+        Discussion: "Diskusia",
+        Quantity: "Počet",
+        ShippingTo: "Poštovné Do",
+        ModeratedBy: "Moderuje",
+        Submit: "Odoslať",
+        maxLength20: "maximálna dľžka 20 znakov",
+        maxLength80: "maximálna dľžka 80 znakov",
+        maxLength200: "maximálna dľžka 200 znakov",
+        StoreModeratorsOptional: "Moderátori Obchodu (Nepovinné)",
+        Searchformoderators: "Hľadať moderátorov",
+        Contributors: "Prispievatelia",
+        Support: "Podpora",
+        Licensing: "Licencovanie",
+        On: "Zapnúť",
+        Off: "Vypnúť",
+        ClickToChange: "Zmeniť kliknutím",
+        NotProvided: "neposkytnuté",
+        NotFollowingAnyone: "Nesleduje nikoho",
+        NoFollowers: "Žiadny followeri",
+        NoReviews: "Žiadne recenzie",
+        Moderator: "Moderátor",
+        ActiveStore:"Obchod je Aktívny",
+        ActiveStoreDetails: "Neaktívne obchody a tovary nie su viditeľné pre ďalších používateľov",
+        Firewall: "Firewall",
+        ServerSettings: "Nastavenia Servera",
+        ReadOnly: "(Toto pole nie je editovateľné)",
+        HandleResolver: "Handle Resolver",
+        ShutDownServer: "Vypnúť Server",
+        LoadingBitcoinPrices: "Načítavam cenu Bitcoinu...",
+        ThisUserIsBlocked: "Tento používateľ je skrytý, pretože sa nachádza na Vašom zozname zablokovaných používateľov",
+        ThisUserIsNSFW: "Tento používateľ je skrytý, pretože jeho stránka je v zozname NSFW (stránky s nevhodným obsahom)",
+        ShowBlockedUser: "Zobraziť stránku tohto používateľa okrem NFWS ponúk (ponuky s nevhodným obsahom)",
+        ShowNSFWContent: "Zobraziť stránku tohto používateľa a všetky jeho NSFW ponuky (ponuky s nevhodným obsahom)",
+        ServerChangeWarningHeadline: "Pozor: Nahrajte si Vaše nastavenia",
+        ServerChangeWarning: "Odporúčame Vám aby ste si urobili kópiu Vašich predchádzajúcih nastavení, tak ako je ukázané nižšie. Vaše predchádzajúce prihlasovacie meno a heslo už viac nebudú fungovať.",
+        moderatorSettings: {
+          DisputeResolution: "Riešenie sporov",
+          ServiceFee: "Poplatok za službu",
+          ServiceFeeNote: "Min: 0%, Max: 25%"
         },
-        BecomeModerator: "Become a Moderator",//notTranslated
-        EditModerator: "Moderator Settings",//notTranslated
+        BecomeModerator: "Staňte sa Moderátorom",
+        EditModerator: "Moderátorské Nastavenia",
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
-          ViewOnBlockchain: "View Details", //noTranslated
-          SoldBy: "Seller", // not translated
-          PurchasedBy: "Buyer", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Ready to process (Paid in full)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
-          OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Ready to process (Paid in full)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          OrderStatusopen: "Disputed", // not translated
-          OrderStatus5: "Dispute Closed", // not translated
-          OrderStatusclosed: "Dispute Closed", // not translated
-          OrderStatus6: "Dispute Finalized",// not translated
-          OrderStatus7: "Refunded", // not translated
-          InEscrow: "- In Escrow", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          NoMessages: "No messages", //notTranslated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ViewRating: "(View Rating)", // not translated
-          ContractDetails: "Contract Details", //notTranslated
-          HideDetails: "Hide Details", //notTranslated
-          ConfirmOrder: "Confirm Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
-          Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on this order", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "File URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link (optional)", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          Moderator: "Moderator", //not translated
-          transferReceipt: "Transfer Receipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          MarkAsShipped: "Mark as Shipped", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoFileProvided: "No file provided", //notTranslated
-          None: "None", //notTranslated
-          NoneSent: "None sent", // not translated
-          ModerationFee: "Moderation Fee:", // not translated
-          DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Enter message...", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
-          SendMessage: "Send",// not translated
-          CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:", // not translated
-          StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE", // not translated
-          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
+          OrderDetails: "Detaily Objednávky",
+          ViewOnBlockchain: "Zobraziť Detaily",
+          SoldBy: "Predajca",
+          PurchasedBy: "Kupujúci",
+          searchByOrder: "Vyhľadávať podla čísla objednávky alebo názvu položky",
+          sortByStatusAll: "Všetky",
+          sortByStatus0: "Kúpené",
+          sortByStatus1: "Pripravené na spracovanie (Plne uhradené)",
+          sortByStatus2: "Potvrdené/Odoslané",
+          sortByStatus3: "Skompletizované (Prostriedky boli uvoľnené)",
+          sortByStatus4: "Sporné",
+          OrderID: "Číslo Objednávky",
+          OrderDate: "Dátum Objednávky",
+          OrderStatus: "Stav Objednávky",
+          OrderStatus0: "Kúpené (Neuhradené)",
+          OrderStatus1: "Pripravené na spracovanie (Plne uhradené)",
+          OrderStatus2: "Potvrdené/Odoslané",
+          OrderStatus3: "Skompletizované (Prostriedky boli uvoľnené)",
+          OrderStatus4: "Sporné",
+          OrderStatusopen: "Sporné",
+          OrderStatus5: "Spor Uzavretý",
+          OrderStatusclosed: "Spor Uzavretý",
+          OrderStatus6: "Spor Ukončený",
+          OrderStatus7: "Peniaze Vrátené",
+          InEscrow: "- V Escrow",
+          OrderTotal: "Celková Suma Objednávky",
+          OrderTotalInBTC: "BTC Celkovo",
+          NoMessages: "Žiadne správy",
+          PaymentProtection: "Platobná Ochrana",
+          ShipTo: "Odoslať na",
+          ViewRating: "(Zobraziť Hodnotenie)",
+          ContractDetails: "Detaily Kontraktu",
+          HideDetails: "Skryť Detaily",
+          ConfirmOrder: "Potvrdiť Objednávku",
+          ReceivingAddress: "Adresa Príjemcu",
+          RecievingAddressPlaceholder: "Bitcoinová adresa na ktorú budú prijaté prostriedky",
+          Comments: "Komentáre",
+          CommentsPlaceHolder: "Komentáre k tejto objednávke",
+          Shipper: "Položka odoslaná cez",
+          ShipperPlaceholder: "Názov spoločnosti, ktorá doručuje objednávku",
+          TrackingNumber: "Sledovacie Číslo",
+          TrackingNumberPlaceholder: "Sledovacie číslo položky",
+          EstimatedDelivery: "Predpokladané Doručenie",
+          EstimatedDeliveryPlaceholder: "Predpokladaný datúm, kedy bude daná položka doručená",
+          URL: "URL Súboru",
+          URLPlaceholder: "Odkaz na stiahnutie, rozvrh, alebo viac informácií",
+          Password: "Heslo",
+          PasswordPlaceholder: "Heslo nevyhnutné pre odkaz (voliteľné)",
+          DirectTransaction: "Priama transakcia",
+          ModeratedTransaction: "Moderovaná transakcia",
+          Seller: "Predajca",
+          Buyer: "Kupujúci",
+          Moderator: "Moderátor",
+          transferReceipt: "Potvrdenka Prenosu",
+          copyTxid: "skopírovať číslo transakcie",
+          Close: "Zatvoriť",
+          FundOrder: "Zaplatiť Objednávku",
+          sortByDateNewest: "Podľa Dátumu, Najnovšie",
+          sortByDateOldest: "Podľa Dátumu, Najstaršie",
+          PayPurchase: "Zaplatiť za tento Nákup",
+          CompleteOrder: "Dokončiť túto Objednávku",
+          MarkAsShipped: "Označiť ako Odoslané",
+          RateThisTransaction: "Ohodnotiť túto Transakciu",
+          TransactionReview: "Hodnotenie Tranksacie",
+          OverallRating: "Celkové Hodnotenie",
+          Quality: "Kvalita",
+          MatchedDescription: "Súhlasilo s Popisom",
+          DeliverySpeed: "Rýchlosť Doručenia",
+          CustomerService: "Zákaznícky Servis",
+          Review: "Recenzia",
+          ReviewPlaceHolder: "Vaše hodnotenie tejto transakcie",
+          NoFileProvided: "Nebol poskytnutý žiaden súbor",
+          None: "Žiadne",
+          NoneSent: "Žiadne odoslané",
+          ModerationFee: "Moderátorsky Poplatok:",
+          DisputeTransaction: "Začať Spor",
+          sendMessagePlaceholder: "Zadať správu...",
+          DisputeInstructions: "Ak chete začať spor pre túto transakciu, zadajte dôvod nižšie a zaškrtnite okienko \"Spor\". Týmto pozvete moderátora do Vašej konverzácie až do chvíle, kým sa spor nevyrieši. Moderátor príjme konečné rozhodnutie, či Vám budú vrátené nejaké prostriedky a v akej výške. Poplatok za moderovanie bude zaplatený z Vami už odoslaných prostriedkov.",
+          SendMessage: "Odoslať",
+          CloseDispute: "Ukončiť Spor",
+          TotalInTransaction: "Transakcia:",
+          StartDisputeFlag: "ZAČAŤ SPOR",
+          CloseDisputeFlag: "UKONČIŤ SPOR",
+          PayoutOnlyBuyer: "Ukončením tohto sporu sa vráti 100% prostriedkov kupujúcemu."
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -4669,31 +4669,31 @@ module.exports = Backbone.Model.extend({
           userError: "Nepodarilo sa nájsť informácie pre toto ID",
           userNotFoundError: "Informácie o tejto osobe nie sú k dispozícii.",
           notFoundError: "Nepodarilo sa načítať údaje o:",
-          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
+          socketError: "Adresa WebSocketu zlyhala. Pripojenie na socket s prednastavenou adresou ws://localhost:18466",
           contractError: "Nákup položky neprebehol.",
-          sellerError: "Predajcov server odmietol žiadosť o nákup. This may be due to a connection issue.", // not translated
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
-          pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
-          serverDown: "The server has been shut down", //notTranslated
-          tooManyPhotosTitle: "Too many photos", //notTranslated
-          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
-          badJSON: "The JSON data returned from the server was malformed" // notTranslated
+          sellerError: "Predajcov server odmietol žiadosť o nákup. Môže to byť zapríčinené problémom s pripojením.",
+          checkPurchaseData: "Skontrolujte Vaše nákupné informácie, ako počet, a navrátová Bitcoinová adresa. Uistite sa, že je platná.",
+          pageUnavailable: "Táto stránka je momentálne nedostupná.",
+          badHandle: "Prezývka, ktorú ste zadali nie je platná",
+          serverDown: "Server bol vypnutý",
+          tooManyPhotosTitle: "Príliš veľa obrázkov",
+          tooManyPhotosBody: "Niektoré, alebo žiadna z Vašich fotiek neboli nahrané na server, pretože ste prekročili povolený limit na počet obrázkov.",
+          badJSON: "JSON dáta vrátené zo serveru sú chybné"
         },
         aboutSection: {
-          about: "", //notTranslated
-          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
-          support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
+			about: "<p>OpenBazaar je sieť používateľov, ktorí za Bitcoiny priamo medzi sebou kupujú a predávaju tovary a služby. Táto sieť je decentralizovaná a nie je kontrolovaná žiadnou organizáciou.</p><p>Tento software je open source a licencovaný pod MIT licenciou. Jeho kód si môžete pozrieť na <a href=\"https://github.com/OpenBazaar/\">Githube</a>.</p><p>OpenBazaar je komunitný projekt a preto vítame akýkoľvek spôsob spolupráce na našom <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> kanáli, alebo <a href=\"http://www.reddit.com/r/openbazaar\">subreddite</a>.</p><p>Ak potrebujete pomoc, prečítajte si <a href=\"https://blog.openbazaar.org/tag/tutorial/\">Používateľskú Príručku</a>.</p><p>Ak máte aj napriek tomu nejaké otázky, otvorte tiket u našej <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">podpori</a>.</p>",
+            contributors: "<p>OpenBazaar sa stal skutočnosťou vďaka medzinárodnej komunite vývojárov a dobrovoľníkov, ktorí prispeli svojim časom, aby pomohli oslobodiť trh. Toto je čiastkový zoznam prispievateľov, ktorí pomohli, či už kódom, alebo iným spôsobom.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
+            support: "<p>Na našej ceste za voľným trhom môžete podporiť OpenBazaar viacerými spôsobmi.</p><p>Kúpou a predajom tovaru a služieb pomáhate rozširovaniu našej komunity a robíte platformu atraktívnejšiu pre nových používateľov. Môžete sa spýtať firiem prijímajucích Bitcoiny, či by chceli predávať svoj tovar a služby na našej platforme. Pomôže nám to dostať sa do povedomia a ukáže, že existuje dopyt po obchodovaní na peer to peer platforme.</p><p>Ak ste vývojár, prosím choďte na <a href=\"https://github.com/OpenBazaar/\">náš Github</a> a zistite, či nám neviete s niečim pomôcť. Okrem pomoci s jadrom systému dúfame, že vďaka open source povahe projektu vytvoríte nové služby nad existujúcou sieťou.</p><p>Taktiež nám môžete <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\">prispieť Bitcoinami</a>, ktoré budú použité na úhradu nákladov spojených s návštevou konferencií, odmeňovaním dobrovoľníkov za vývoj a promovaním OpenBazaaru.</p><p>Ak máte nápady ako vylepšiť OpenBazaar, alebo máte otázky na našich hlavných vývojarov pridajte sa prosím k <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">nášmu Slack-u</a>.</p>",
+            licensing: "<p>OpenBazaar je softvér s otvoreným kódom licencovaný pod MIT licenciou. Táto licencia umožňuje ľuďom voľne používať kód v iných projektoch, alebo v proprietarnom softvéri. Plné znenie licencie nájdete nižšie.</p><h4MIT Licencia (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Týmto sa udeľuje povolenie, bez poplatku, ľubovolnej osobe získať kópiu tohto softvéru a pridružených dokumentov (Softvér), narábať so Softvérom bez obmedzení, vrátane práva používať, kopírovať, upravovať, zlučovať, uverejňovať, distribuovať, vytvárať podlicencie, predávať kópie Softvéru, a dávať takéto povolenie osobám, ktorým je Softvér poskytnutý,	za nasledovných podmienok:</p><p>Predošlé upozornenie autorského práva a povolenia musí byť zahrnuté vo všetkých kopiách alebo ucelených častiach Softvéru.</p><p>SOFTVÉR JE POSKYTOVANÝ \"TAK AKO JE\", BEZ AKEJKOĽVEK ZÁRUKY ČI UŽ VÝSLOVNEJ, ALEBO VYPLÝVAJÚCEJ, VRÁTANE, ALE NIE LEN, ZO ZÁRUKOU PREDAJNOSTI A VHODNOSTI PRE URČITÝ ÚČEL A NEZASAHOVANIA. V ŽIADNOM PRÍPADE VÁM NEBUDE AUTOR ALEBO ŽIADNY Z DRŽITEĽOV AUTORSKÝCH PRÁV ZODPOVEDAŤ ZA NÁROKY, ŠKODY, ALEBO INÉ RUČENIA, ČI UŽ VYPLÝVAJÚCICH Z ČINNOSTI ZMLUVY, PREČINU ALEBO INAK, ALEBO V SPOJENÍ SO SOFTVÉROM, POUŽÍVANÍM ALEBO INÝM NARÁBANÍM SO SOFTVÉROM.</p><h4>Knižnice</h4><p>OpenBazaar používa nasledovné knižnice:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Uložené",
           SaveSuccess: "Vaše zmeny boli uložené."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Prehľadávam Vašu sieť",
+          searchingText: "Prehľadávam Vašu sieť pre výraz",
+          noResults: "Neboli nájdené žiadne ponuky s tagom"
         },
         filters: {
           pagesAllTypes: "Všetky typy",
@@ -4704,30 +4704,30 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Zo všetkých obchodov"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
+          searchPlaceholder: "Zadajte @meno, OpenBazaar ID alebo #tag...",
           myPage: "Moja stránka",
-          testMode: "Test Mode", //notTranslated
-          customizePage:"Upraviť stránku",
-          sellItem:"Nová položka",
-          createListing:"Nový listing",
+          testMode: "Testovací Mód",
+          customizePage:"Upraviť Stránku",
+          sellItem:"Nová Položka",
+          createListing:"Nová Ponuka",
           purchases:"Nákupy",
           sales:"Predaje",
-          cases:"Prípady",
+          cases:"Udalosti",
           notifications:"Notifikácie",
           settings:"Nastavenia",
           about:"O OpenBazaari",
           support:"Podporte OpenBazaar",
-          Forward: "Forward", //notTranslated
+          Forward: "Dopredu",
           Back: "Späť"
         },
         onboarding: {
           intro: "Konfigurácia OpenBazaaru",
-          Introduction: "Introduction", //notTranslated
-          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
+          Introduction: "Úvod",
+          IntroductionBody: "OpenBazaar je peer-to-peer sociálny trh. Je to ako skombinovať eBay&trade;, Twitter&trade; a BitTorrent do jedného celku, no s tým rozdielom, že v OpenBazaare neexistujú poplatky, obmedzenia a ide o otvorený softvér. \n\nVezmite prosím na vedomie, že to tu na Vás zo začiatku môže pôsobiť trochu iným dojmom, než na čo zvyknutý. Dajte tomu čas.",
           Theme: "Zvoľte si grafickú tému Vašej stránky",
           chooseLanguage: "Zvoľte jazyk",
           contributors: "%{smart_count} prispievateľ |||| %{smart_count} prispievateľov",
-          configure: "Configure your experience",
+          configure: "Nastavte si Vaše rozhranie",
           disclaimer_title: "Upozornenie",
           disclaimer_body: "OpenBazaar je sieť umožňujúca ľuďom obchodovať s tovarmi a službami - prostredníctovm Bitcoinu - bez akejkoľvek centrálnej organizácie, ktorá by platformu ovládala. To znamená, že za svoju aktivitu v sieti ste zodpovední Vy sami.\n\nPoužívatelia OpenBazaaru nie sú anonymní. Väčšina komunikácie medzi používateľmi je šifrovaná, no IP adresy sú verejné a môžu byť spojené s aktivitou na sieti. Útočníci môžu tieto informácie použiť proti Vám; ochrana Vášho súkromia je Vaša vlastná zodpovednosť.\n\nPoužívatelia OpenBazaaru podliehajú zákonom platným v mieste ich pôsobenia, rovnako ako svojmu vlastnému svedomiu. Vývojári OpenBazaaru nenesú žiadnu vinu ani zodpovednosť za akékoľvek zneužitie platformy na nelegálnu činnosť.\n\nKomunita vývojárov OpenBazaaru tvrdo pracovala na tom, aby svetu priniesla slobodnú obchodnú platformu. Ale ako to už pri softvéri býva, určite sa vyskytnú nejaké chyby. Vývojári nie sú zodpovední za akékoľvek finančné škody spojené s problémami v tomto softvéri.\n\nPoužívaním OpenBazaaru príjmate zodpovednosť za všetky svoje činy na sieti OpenBazaar.",
           yourCountry: "Zvoľte svoju krajinu",
@@ -4739,84 +4739,84 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Napíšte o sebe niečo zaujímavé... (max 160 znakov)",
           timeZone: "Zvoľte svoje časové pásmo",
           yourDetails: "Zadajte detaily o sebe",
-          yourDescription: "Popis", // notTranslated
-          handle: "Handle",
-          chooseHandle: "Choose a handle", // not translated
+          yourDescription: "Popis",
+          handle: "Prezývka",
+          chooseHandle: "Zvoľte si prezývku",
           knownAs: "Momentálne ste známi ako:",
-          wouldYou: "Chcete si zaregistrovať ľahko zapamätateľný handle (prezývku)?",
+          wouldYou: "Chcete si zaregistrovať ľahko zapamätateľnú prezývku?",
           registerNew: "Zaregistrovať nové",
           recommended: "Odporúčané stránky hodné sledovania",
           avatar: "Vložiť avatara",
           chooseAvatar: "Zvoliť avatara",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
-          Finished: "Finished" //notTranslated
+          discoverCallOut: "Objavujte Ponuky a Stránky na OpenBazaari",
+          Finished: "Dokončené"
         },
         softwareUpdate: {
-          updateAvailable: "OpenBazaar Update Available", //notTranslated
-          installUpdate: "Install Update", //notTranslated
-          dismiss: "Dismiss" //notTranslated
+          updateAvailable: "Je dostupná aktualizácia pre OpenBazaar",
+          installUpdate: "Nainštalovať Aktualizáciu",
+          dismiss: "Odmietnuť"
         },
         guidStillCreating: {
-          HangTight: "Hang tight for a few...", //notTranslated
-          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
-          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
+          HangTight: "Vydržte chvíľu...",
+          YourPersonal: "Práve sa generujú Vaše osobné kľúče a OpenBazaar ID a malo by to trvať len okolo 30 sekúnd.\n\nBudete automaticky pripojený do siete len čo sa tento proces dokončí. Prosím vydržte chvíľu.",
+          LookingFor: "Chcete si zatiaľ prečítať <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>?"
         },
         buyFlow: {
-          PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
-          CantFindAddress: "I can't find my bitcoin address", //notTranslated
-          BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
-          ModeratedPayment: "Moderated Payment", //notTranslated
-          DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
-          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
-          DirectPayment: "Direct Payment", //notTranslated
-          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
+          PayForOrder: "Zaplatiť za Objednávku",
+          NeedTempAddress: "Potrebujem dočasnú Bitcoinovú adresu",
+          NeedTempAddressHelper: "Prosím uložte si odkaz k Vašej dočasnej bitcoinovej adrese",
+          CantFindAddress: "Nemôžem nájsť moju bitcoinovú adresu",
+          BitcoinWallet: "Bitcoinová Peňaženka",
+          ModeratedPaymentDescription: "Vaša platba je bezpečne uchovaná v peňaženke až do momentu, kým predávajúci nesplní jeho časť dohody. Moderátor Vám pomôže v prípade problémov.",
+          ModeratorFeeHelper: "Moderátor môže účtovať poplatok, ale iba vtedy ak dôjde k sporu.",
+          ModeratedPayment: "Moderovaná Platba",
+          DisputeFee: "Poplatok za spor",
+          HaveWallet: "Máte Bitcoinovú Peňaženku?",
+          QuickSetup: "Nastaviť si ju trvá len niekoľko minút",
+          CreateWallet: "Vytvoriť peňaženku",
+          DirectPaymentDescription: "Peniaze sú odoslané priamo predajcovi. Používajte iba na malé objednávky, alebo v prípade, že ide o dôveryhodného predajcu.",
+          DirectPayment: "Priama Platba",
+          SendDirectlyTo: "Poslať priamu platbu %{handle}",
           MustAddAddress: "Musíte zadať adresu pre doručenie",
-          VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín:",
-          DoesNotShipHere: "Does not ship here", //notTranslated
-          Send: "Semd", //notTranslated
-          BTCto: "BTC to", //notTranslated
-          SendBTCtoAddress: "Send %{amount} BTC to",
-          OpenAddress: "Open in Local Wallet", //notTranslated
-          CopyAddress: "Copy to Clipboard", //notTranslated
-          RefreshPayment: "Refresh Payment Status", //notTranslated
-          summaryMsg1: "Your payment has been sent to %{recipient}", //notTranslated
-          summaryMsg2: "The expected processing time for this order is", //notTranslated
-          summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page", //notTranslated
-          returnAddress: "Return Address", //notTranslated
-          moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
-          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín",
+          DoesNotShipHere: "Nedoručuje do tejto krajiny",
+          Send: "Odoslať",
+          BTCto: "Poslať BTC na",
+          SendBTCtoAddress: "Poslať %{amount} BTC na",
+          OpenAddress: "Otvoriť v Lokálnej Peňaženke",
+          CopyAddress: "Skopírovať do Schránky",
+          RefreshPayment: "Aktualizovať Stav Platby",
+          summaryMsg1: "Vaša platba bola odoslána %{recipient}",
+          summaryMsg2: "Očakávaný čas spracovania objednávky je",
+          summaryMsg3: "Môžete skontrolovať stav Vašej objednávky na",
+          purchasesPage: "stránka nákupov",
+          returnAddress: "Návratová Adresa",
+          moderatorPaymentDisclaimer: "Zaplatené z celkovej sumy ak sa transakcia dostane do sporu.",
+          directPaymentDisclaimer: "Dajte si pozor pri používaní priamej platby. Prostriedky sa nedajú vrátiť",
+          paymentSent: "Platba bola odoslaná!",
+          total: "Spolu"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "Neboji nájdené žiadne výsledky"
         },
         serverConnectModal: {
-          statusTryingToConnect: "Trying to connect to your server", //notTranslated
-          statusConnected: "Connected", //notTranslated
-          statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed", //notTranslated
-          statusTooManyAttempts: "Too many failed login attempts", //notTranslated
-          serverConfiguration: "Server Configuration", //notTranslated
-          connecting: "Connecting", //notTranslated
-          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
-          serverIP: "Server IP", //notTranslated
-          restApiPort: "Rest API port", //notTranslated
-          websocketApiPort: "Websocket API port", //notTranslated
-          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
-          username: "Username", //notTranslated
-          password: "Password", //notTranslated
-          restoreDefaults: "Restore defaults", //notTranslated
-          saveChanges: "Save Changes", //notTranslated
-          retry: "Retry connection", //notTranslated
+          statusTryingToConnect: "Snažím sa pripojiť na Váš server",
+          statusConnected: "Pripojené",
+          statusFailedConnection: "Nie je možné pripojiť sa na Váš server",
+          statusFailedAuthentication: "Autentifikácia zlyhala",
+          statusTooManyAttempts: "Príliš mnoho chybných pokusov o prihlásenie",
+          serverConfiguration: "Konfigurácia Servera",
+          connecting: "Pripája sa",
+          intro: "OpenBazaar je navrhnutý tak, že Vám umožňuje bežať server oddelene od klientskej aplikácie. Váš server bude štandardne bežať lokálne, ale toto nastavenie je možné zmeniť nižšie.",
+          serverIP: "IP adresa servera",
+          restApiPort: "Rest API port",
+          websocketApiPort: "Websocket API port",
+          heartbeatSocketApiPort: "Heartbeat socket port",
+          username: "Meno",
+          password: "Heslo",
+          restoreDefaults: "Obnoviť predvolené",
+          saveChanges: "Uložiť Zmeny",
+          retry: "Opakovať pripojenie",
         }
       },
 
@@ -8950,7 +8950,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "O servidor foi desligado",
           tooManyPhotosTitle: "Existem fotos em excesso",
           tooManyPhotosBody: "Algumas ou todas as suas fotos não puderam ser enviadas porque você excedeu a quantia máxima permitida.",
-          badJSON: "Os dados JSON que retornaram do servidor tinham formato incorreto" 
+          badJSON: "Os dados JSON que retornaram do servidor tinham formato incorreto"
         },
         aboutSection: {
           about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
@@ -9491,7 +9491,7 @@ module.exports = Backbone.Model.extend({
            disclaimer_title: "Відповідальність та Використання",
            disclaimer_body: "ПОПЕРЕДЖЕННЯ - Шановні Українці. \n\n НЕ Використовуйте OpenBazaar для продажу або придбання товарів що заборонені законодавством, або можуть порушувати норми моралі. Ви особисто несете відповідальність за всі ваші дії. \n\n Майте на увазі що система Біткоін та OpenBazaar забезпечують лише умовну анонімнісмть, та потребують додаткових заходів для забезпечення повної анонімності. Ці сиситеми зберігають всю історію транзакцій, що відкрита та може бути переглянута будьким. Всі ваші дії що були вчинені анонімно зараз, потенційно можуть бути відстежені в майбутньому, та не лише через вас, а й через дії тих з ким ви торгуєте. \n\n Користувачі OpenBazaar мають знати та дотримуватись зконів тих територій на яких здійснюють торгівлю. Та несуть власну відповідальністю за порушення законів. Розробники OpenBazaar, не несуть відповідальність за використання программи в протиправних цілях. Ви маєте самостійно переконатися в вашому праві, купувати чи продавати той чи інший товар чи послугу, та можливості доставки товару в ту чи іншу країну, згідно її законодавства. \n\n Спільнота OpenBazaar постійно працює для вдосконалення якості використання, вільної платформи для світової торгівлі. Але, так як і з будь яким програмним продуктом можливі помилки в роботі прогрмми. Розробники не несуть відповідальності з грошові втрати повязані з використанням прогрмми OpenBazaar. Використовуючи программу OpenBazaar, ви чините на свій власний роззсуд, та власну відповідальність, программа надается як є, без зобовязань. Якщо це не є прийнятним для вас, відмовтесь від використання OpenBazaar.",
 
-             yourCountry: "Оберіть вашу країну",
+	  	   yourCountry: "Оберіть вашу країну",
            localCurrency: "Оберіть валюту",
            LanguagePlaceholder: "Введіть мову",
            CountryPlaceholder: "Введіть країну",
