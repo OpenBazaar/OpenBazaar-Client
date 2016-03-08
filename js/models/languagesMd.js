@@ -2235,7 +2235,7 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "PGP Key",
         Signature: "Firma PGP",
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        SignaturePlaceholder: "Se si inserisce una chiave PGP &egrave; necessaria una firma PGP",
         Snapchat: "Snapchat",
         BUYNOW: "COMPRA ORA",
         Description: "Descrizione",
@@ -2396,8 +2396,8 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Nessun seguace",
         NoReviews: "Nessuna recensione",
         Moderator: "Moderatore",
-        ActiveStore:"Store is Active", // not translated
-        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
+        ActiveStore:"Il negozio &egrave; attivo",
+        ActiveStoreDetails: "Negozi e listini inattivi non sono visibili alle altre persone",
         Firewall: "Firewall",
         ServerSettings: "Impostazioni Server",
         ReadOnly: "(Questo campo &egrave; di sola lettura)",
@@ -2524,7 +2524,7 @@ module.exports = Backbone.Model.extend({
           serverDown: "Il server &egrave; stato spento",
           tooManyPhotosTitle: "Troppe foto",
           tooManyPhotosBody: "Ad alcune o a tutte le foto &egrave; stato impedito di essere caricate perch&egrave; avresti superato la massima quantit&agrave; consentita.",
-          badJSON: "The JSON data returned from the server was malformed" // notTranslated
+          badJSON: "I dati JSON restituiti dal server erano malformati"
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
