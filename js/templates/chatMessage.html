@@ -32,9 +32,9 @@
         
         <div class="chatConversationMessageBody flexExpand">
             <% if (ob.outgoing) { %>
-            <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %> floatRight"><%= ob.sanitizedMsg %></div>
+            <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %> floatRight"><%= ob.sanitizedMsg %></div>
             <% } else { %>
-            <div class="inner <% if(ob.message_type == 'ORDER'  || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= ob.sanitizedMsg %></div>
+            <div class="inner <% if(ob.message_type == 'ORDER'  || ob.message_type == 'DISPUTE_OPEN' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %>"><%= ob.sanitizedMsg %></div>
             <% } %>
         </div>
         

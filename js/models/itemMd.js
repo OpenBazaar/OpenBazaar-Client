@@ -186,6 +186,9 @@ module.exports = window.Backbone.Model.extend({
 
       });
 
+      //unescape any html
+      response.vendor_offer.listing.item.description = __.unescape(response.vendor_offer.listing.item.description);
+
       //change any plain text urls in the description into links
       response.vendor_offer.listing.item.displayDescription = autolinker.link(response.vendor_offer.listing.item.description, {'twitter': false, 'hashtag': false});
 

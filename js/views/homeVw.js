@@ -97,7 +97,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-loadingMessage').removeClass('fadeOut');
     this.socketTimeout = window.setTimeout(function(){
         self.$el.find('.js-loadingMessage').addClass('fadeOut');
-    }, 2000);
+    }, 8000);
 
     // after 8 seconds, if no listings are found, display the no results found message
     this.noResultsTimeout = window.setTimeout(function() {
@@ -106,7 +106,7 @@ module.exports = baseVw.extend({
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
         self.$el.find('.js-loadingText').html(self.$el.find('.js-loadingText').data('noResultsText'));
       }
-    }, 8000);
+    }, 10000);
   },
 
   clearSocketTimeout: function() {
