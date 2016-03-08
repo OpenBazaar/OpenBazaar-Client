@@ -49,7 +49,8 @@ module.exports = baseVw.extend({
 
     if (
         !this.fetchedAll &&
-        this.$scrollContainer[0].scrollTop + this.$scrollContainer[0].clientHeight + 200 > this.$scrollContainer[0].scrollHeight
+        !(this.fetch && this.fetch.state() === 'pending') &&
+        this.$jsNotifWrap[0].scrollTop + this.$jsNotifWrap[0].clientHeight + 200 > this.$jsNotifWrap[0].scrollHeight
       ) {
       this.collection.fetch({
         remove: false,
