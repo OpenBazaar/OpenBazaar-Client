@@ -1,4 +1,5 @@
-var Backbone = require('backbone');
+var __ = require('underscore'),
+    Backbone = require('backbone');
 
 var ShortItemModel = module.exports = Backbone.Model.extend({
   defaults: {
@@ -8,5 +9,10 @@ var ShortItemModel = module.exports = Backbone.Model.extend({
     avatar_hash: "",
     nsfw: false,
     short_description: ""
+  },
+
+  parse: function(response){
+    response.short_description = __.unescape(response.short_description);
+    return response;
   }
 });

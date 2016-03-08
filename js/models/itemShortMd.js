@@ -1,4 +1,5 @@
-var Backbone = require('backbone'),
+var __ = require('underscore'),
+    Backbone = require('backbone'),
     getBTPrice = require('../utils/getBitcoinPrice');
 
 module.exports = Backbone.Model.extend({
@@ -19,12 +20,17 @@ module.exports = Backbone.Model.extend({
     handle: 0,
     avatar_hash: "",
     priceSet: 0, //set in Update Attribute below, so view can listen for it
-    short_description: "",
+    short_description: ""
   },
 
   initialize: function(){
     this.updateAttributes();
     //this.on('change', this.updateAttributes, this);
+  },
+
+  parse: function(response){
+    response.short_description = __.unescape(response.short_description);
+    return response;
   },
 
   updateAttributes: function(){
