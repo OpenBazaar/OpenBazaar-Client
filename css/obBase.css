@@ -520,6 +520,12 @@ form {
     box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
 }
 
+/* if itemImg is nested, do not show box shadow */
+.userPage-subViews .gridItem:hover .itemImg .itemImg,
+.homeView .gridItem:hover .itemImg .itemImg {
+  box-shadow: none;
+}
+
 .userPage-subViews .gridItem .itemImg:active,
 .homeView .gridItem .itemImg:active {
     box-shadow: 0px 0px 67px -10px rgb(0, 0, 0);
@@ -5106,6 +5112,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .width100 {
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
 }
 
@@ -5288,6 +5295,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .inlineBlock {
   display: inline-block;
+}
+
+#ov1 .zIndex1 {
+  z-index: 1; /*use on absolutely positioned elemenets that need to stack above other elements with no z-index */
 }
 
 #ov1 .zIndex4 {

@@ -28,6 +28,7 @@ module.exports = baseVw.extend({
     userModel: this is set by main.js, then by a call to the settings API.
      */
     //don't render immediately, wait for the model to update itself with converted prices
+    this.userModel = options.userModel;
     this.listenTo(this.model, 'change:priceSet', this.onPriceSet);
     this.subViews = [];
     this.subModels = [];
@@ -96,7 +97,8 @@ module.exports = baseVw.extend({
               avgRating: self.getAverageRating(),
               starsTemplate: starsTemplate,
               activeTab: self.activeTab,
-              fetchingRatings: self.fetchingRatings
+              fetchingRatings: self.fetchingRatings,
+              userCountry: self.userModel.get('displayCountry')
             })
           )
         );

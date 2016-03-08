@@ -33,13 +33,13 @@ module.exports = window.Backbone.Model.extend({
       "listing": {
         "shipping": {
           "shipping_regions": [
-            "UNITED_STATES"
+            ""
           ],
           "est_delivery": {
-            "international": "N/A",
-            "domestic": "3-5 Business Days"
+            "international": "",
+            "domestic": ""
           },
-          "shipping_origin": "UNITED_STATES",
+          "shipping_origin": "",
           "flat_fee": {
               "fiat": {
                   "price": {
@@ -52,16 +52,16 @@ module.exports = window.Backbone.Model.extend({
         },
         "item": {
           "category": "",
-          "sku": "0",
+          "sku": "",
           "description": "",
           "price_per_unit": {
             "fiat": {
               "price": 0,
-              "currency_code": "usd"
+              "currency_code": ""
             }
           },
           "title": "",
-          "process_time": "0",
+          "process_time": "",
           "image_hashes": [],
           "nsfw": false,
           "keywords": [],
@@ -123,13 +123,13 @@ module.exports = window.Backbone.Model.extend({
       if(!response.vendor_offer.listing.shipping){
         response.vendor_offer.listing.shipping = {
           "shipping_regions": [
-            "UNITED_STATES"
+            ""
           ],
               "est_delivery": {
             "international": "",
                 "domestic": ""
           },
-          "shipping_origin": "UNITED_STATES",
+          "shipping_origin": "",
             "flat_fee": {
               "fiat": {
                 "price": {
@@ -177,6 +177,13 @@ module.exports = window.Backbone.Model.extend({
       //add pretty country names to shipping regions
       response.vendor_offer.listing.shipping.shipping_regionsDisplay = [];
       __.each(response.vendor_offer.listing.shipping.shipping_regions, function(region, i){
+        if(region == "ALL"){
+          response.vendor_offer.listing.shipping.shipping_regionsDisplay = [window.polyglot.t('WorldwideShipping')];
+          response.worldwide = true;
+          return;
+        } else {
+          response.worldwide = false;
+        }
         var matchedCountry = self.countryArray.filter(function(value){
           return value.dataName == region;
         });
@@ -185,6 +192,14 @@ module.exports = window.Backbone.Model.extend({
         }
 
       });
+
+      //find the human readable name for the country of origin
+      if(response.vendor_offer.listing.shipping && response.vendor_offer.listing.shipping.shipping_origin) {
+        var matchedCountry = self.countryArray.filter(function (value) {
+          return value.dataName == response.vendor_offer.listing.shipping.shipping_origin;
+        });
+        response.displayShippingOrigin = matchedCountry[0] ? matchedCountry[0].name : "";
+      }
 
       //unescape any html
       response.vendor_offer.listing.item.description = __.unescape(response.vendor_offer.listing.item.description);

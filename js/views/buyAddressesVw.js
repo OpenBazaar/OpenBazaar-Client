@@ -18,7 +18,7 @@ module.exports = Backbone.View.extend({
     this.userModel = options.userModel;
     //don't render on init, let parent trigger the render
     //add list of countries the vendor ships to
-    this.model.set('shipsToList', (this.model.get('vendor_offer').listing.shipping.shipping_regionsDisplay).join(","));
+    this.model.set('shipsToList', (this.model.get('vendor_offer').listing.shipping.shipping_regionsDisplay).join(", "));
   },
 
   render: function(selected){
@@ -48,7 +48,7 @@ module.exports = Backbone.View.extend({
   setAddress: function(index){
     "use strict";
     var selectedAddress = this.model.get('user').shipping_addresses[index];
-    if(selectedAddress && this.model.get('vendor_offer').listing.shipping.shipping_regions.indexOf(selectedAddress.country) > -1){
+    if(selectedAddress){
       this.trigger("setAddress", selectedAddress);
     }
   },

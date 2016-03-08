@@ -86,6 +86,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
+    this.listenTo(window.obEventBus, "closeBuyWizard", this.closeWizard);
 
     //make sure the model has a fresh copy of the user
     this.model.set('user', this.userModel.attributes);
@@ -436,6 +437,9 @@ module.exports = Backbone.View.extend({
       return;
     }
 
+    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
+    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
+
     formData.append("id", this.model.get('id'));
 
     formData.append("quantity", this.$el.find('.js-buyWizardQuantity').val());
@@ -456,7 +460,11 @@ module.exports = Backbone.View.extend({
 
     formData.append("refund_address", bitCoinReturnAddr);
 
-    $.ajax({
+    if(this.buyRequest){
+      this.buyRequest.abort();
+    }
+
+    this.buyRequest = $.ajax({
       type: "POST",
       url: self.model.get('serverUrl') + "purchase_contract",
       contentType: false,
@@ -495,8 +503,6 @@ module.exports = Backbone.View.extend({
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
-    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
-    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
     this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
     this.$el.find('.js-buyWizardPayPrice').text();
@@ -616,6 +622,9 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
+    if(this.buyRequest){
+      this.buyRequest.abort();
+    }
   }
 
 });

@@ -513,10 +513,6 @@ module.exports = baseVw.extend({
       return tag.replace(re, '');
     });
 
-    if(this.noShipping){
-      //do some clever stuff to insert value NA/0 if no shipping
-    }
-
     this.$el.find('#inputCurrencyCode').val(cCode);
     this.$el.find('#inputShippingCurrencyCode').val(cCode);
     this.$el.find('#inputShippingOrigin').val(this.model.get('userCountry'));
@@ -526,6 +522,10 @@ module.exports = baseVw.extend({
     this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
 
     formData = new FormData(submitForm);
+
+    if(this.noShipping){
+      formData.append('ships_to', 'NA');
+    }
 
     //add old and new image hashes
     __.each(this.model.get('imageHashesToUpload'), function(imHash){

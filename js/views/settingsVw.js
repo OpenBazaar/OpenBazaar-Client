@@ -384,7 +384,6 @@ module.exports = Backbone.View.extend({
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
-      console.log(a.name + " " + b.name)
       var cA = a.currency.toLowerCase(),
           cB = b.currency.toLowerCase();
         if (cA < cB){
