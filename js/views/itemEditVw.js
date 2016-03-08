@@ -59,6 +59,8 @@ module.exports = baseVw.extend({
         "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"]
     };
 
+    this.prevShipsToVal = [];
+
     this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.combinedImagesArray = [];
     __.each(hashArray, function(hash){
@@ -80,7 +82,6 @@ module.exports = baseVw.extend({
       var context = __.extend({}, self.model.toJSON(), { MAX_PHOTOS: self.MAX_PHOTOS });
 
       self.$el.html(loadedTemplate(context));
-      self.setFormValues();
 
       self.$photosModule = self.$('.js-photosModule');
 
@@ -121,8 +122,12 @@ module.exports = baseVw.extend({
         editor.subscribe('blur', self.validateDescription);
 
         //set chosen inputs
-        this.$('.chosen').chosen({width: '100%'});
+        this.$('.chosen').chosen({width: '100%'}).change(function(e){
+          self.shipsToChange(e);
+        });
       }, 0);
+
+      self.setFormValues();
     });
 
     return this;
@@ -168,6 +173,8 @@ module.exports = baseVw.extend({
       shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
     });
     shipsTo.val('ALL');
+    this.prevShipsToVal = ['ALL'];
+    this.$('.chosen').trigger('chosen:updated');
 
 /*
     var shipsToValue = this.model.get('vendor_offer').listing.shipping.shipping_regions;
@@ -237,9 +244,19 @@ module.exports = baseVw.extend({
   },
 
   selectRegions: function(e){
-    var setCountries = this.regions[$(e.target).data('region')];
-    this.$('#shipsTo').val(setCountries);
+    var setCountries = this.regions[$(e.target).data('region')],
+        shipsTo = this.$('#shipsTo'),
+        oldVal = shipsTo.val(),
+        wwIndex = oldVal.indexOf('ALL'),
+        newVal;
+
+    if(wwIndex > -1){
+      oldVal.splice(wwIndex, 1)
+    }
+    newVal = __.union(oldVal, setCountries);
+    this.$('#shipsTo').val(newVal);
     this.$('.chosen').trigger('chosen:updated');
+    this.prevShipsToVal = newVal;
   },
 
   addDefaultTime: function(e){
@@ -250,6 +267,26 @@ module.exports = baseVw.extend({
       timeInput.val(this.defaultDate);
     }
     this.$el.find('.js-itemEditClearDateWrapper').removeClass('hide');
+  },
+
+  shipsToChange: function(e){
+    var newVal = $(e.target).val() || [],
+        newSelection = __.difference(newVal, this.prevShipsToVal),
+        wwNewIndex = newVal.indexOf('ALL');
+
+    //is the new value different from ALL?
+    if(newSelection[0] != "ALL"){
+      //if ALL was selected, remove it
+      if(wwNewIndex > -1){
+        newVal.splice(wwNewIndex, 1);
+      }
+    } else {
+      //if the new value ALL, remove everything else
+      newVal = ["ALL"];
+    }
+    $(e.target).val(newVal);
+    this.$('.chosen').trigger('chosen:updated');
+    this.prevShipsToVal = newVal;
   },
 
   clearDate: function(){
@@ -305,7 +342,7 @@ module.exports = baseVw.extend({
 
     if (!imageFiles.length) return;
 
-    imageCount = imageFiles.length
+    imageCount = imageFiles.length;
 
     __.each(imageFiles, function(imageFile, i){
       var newImage = document.createElement("img"),
@@ -473,8 +510,7 @@ module.exports = baseVw.extend({
 
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;
-      var newTag = tag.replace(re, '');
-      return newTag;
+      return tag.replace(re, '');
     });
 
     if(this.noShipping){
