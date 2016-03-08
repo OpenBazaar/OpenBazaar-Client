@@ -106,6 +106,9 @@ module.exports = Backbone.Model.extend({
         response.avatar_hash = response.profile.avatar_hash;
       }
 
+      //unescape the text
+      response.profile.about = __.unescape(response.profile.about);
+
       //change any plain text urls in the about field into links
       response.profile.displayAbout = autolinker.link(response.profile.about, {'twitter': false, 'hashtag': false});
 

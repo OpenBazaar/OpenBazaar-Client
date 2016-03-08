@@ -243,9 +243,7 @@ module.exports = baseVw.extend({
     });    
 
     this.listenTo(window.obEventBus, "itemShortDelete", function(options){
-      this.setItem(options.contract_hash, function(){
-        self.deleteItem();
-      });
+      self.deleteItem(false, options.contract_hash);
     });
 
     this.listenTo(window.obEventBus, "moderatorStatus", function(options){
@@ -1300,9 +1298,10 @@ module.exports = baseVw.extend({
     this.deleteItem(true);
   },
 
-  deleteItem: function(confirm){
+  deleteItem: function(confirm, id){
     "use strict";
-    var self=this;
+    var self=this,
+        deleteID = id || this.item.get('id');
 
     if(this.confirmDelete === false && confirm){
       this.$el.find('.js-deleteItem').addClass('confirm');
@@ -1310,12 +1309,14 @@ module.exports = baseVw.extend({
     } else {
       $.ajax({
         type: "DELETE",
-        url: self.item.get('serverUrl') + "contracts/?id=" + self.item.get('id'),
+        url: self.model.get('user').serverUrl + "contracts/?id=" + deleteID,
         success: function () {
           if (self.isRemoved()) return;
 
           //destroy the model. Do it this way because the server can't accept a standard destroy call, and we don't want to call the server twice.
-          self.item.trigger('destroy', self.item);
+          if(self.item){
+            self.item.trigger('destroy', self.item);
+          }
           self.fetchListings();
           self.setState("store");
         },
