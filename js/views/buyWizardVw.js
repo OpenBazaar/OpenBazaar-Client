@@ -51,7 +51,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
-    'change input[name="radioPaymentType"]': 'changePaymentType',
+    'click input[name="radioPaymentType"]': 'changePaymentType',
     'blur .js-buyWizardPostalInput': 'updateMap',
     'blur input': 'validateInput'
   },
@@ -190,7 +190,7 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
 
       //auto select first payment type
-      self.$el.find("input:radio[name=radioPaymentType]:first").attr('checked', true);
+      self.$('#buyWizardPaymentTypeModerated').attr('checked', true).trigger('click');
 
       //randomize the bitcoin wallet providers 5 times
       for(var i = 0; i < 5; i++) {
