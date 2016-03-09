@@ -31,6 +31,7 @@
     "medium-editor": "^5.13.0",
     "moment": "2.10.6",
     "node-polyglot": "0.4.3",
+    "open": "0.0.5",
     "qr-encode": "^0.3.0",
     "request": ">=2.67.0",
     "safestart": "0.8.0",
