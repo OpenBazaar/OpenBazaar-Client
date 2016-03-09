@@ -365,7 +365,7 @@ module.exports = baseVw.extend({
       self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
-      self.setState(self.state, self.currentItemHash);
+      self.setState(self.state, self.currentItemHash, { replaceHistory: true });
 
       //check if user is blocked
       if(!self.options.ownPage && isBlocked) {
@@ -447,12 +447,14 @@ module.exports = baseVw.extend({
     }
   },
 
-  setState: function(state, hash) {
+  setState: function(state, hash, options) {
     "use strict";
     var currentAddress,
         addressState,
         currentHandle = this.model.get('page').profile.handle,
         isItemType = false;
+
+    options = options || {};
 
     if(state === "listing"){
       //clear old templates
@@ -465,19 +467,19 @@ module.exports = baseVw.extend({
     }else if(state === "listingNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(352);
-      this.addTabToHistory('listingNew');
+      this.addTabToHistory('listingNew', options.replaceHistory);
       this.sellItem();
     } else if(state === "createStore") {
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
-      this.addTabToHistory('about');
+      this.addTabToHistory('about', options.replaceHistory);
       this.createStore();
     } else if(state === "becomeModerator"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
-      this.addTabToHistory('about');
+      this.addTabToHistory('about', options.replaceHistory);
       this.showModeratorModal();
     } else if(state === "customize"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
-      this.addTabToHistory('about');
+      this.addTabToHistory('about', options.replaceHistory);
       this.customizePage();
     }else if(state == "store"){
       //if this page is not a vendor, don't go to their store
@@ -487,7 +489,7 @@ module.exports = baseVw.extend({
         state="about";
       }
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
-      this.addTabToHistory(state);
+      this.addTabToHistory(state, options.replaceHistory);
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
@@ -950,12 +952,10 @@ module.exports = baseVw.extend({
     showContent.removeClass('hide');
   },
 
-  addTabToHistory: function(state){
-    console.log('add madd');
-    
+  addTabToHistory: function(state, replace){
     "use strict";
     //add action to history if not an item
-    Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
+    Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state, { replace: true });
   },
 
   sellItem: function(){
