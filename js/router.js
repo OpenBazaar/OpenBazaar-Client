@@ -181,9 +181,13 @@ module.exports = Backbone.Router.extend({
     });
 
     config.promise.done(() => {
+      console.log('im a resolved');
+
       this.pageConnectModal && this.pageConnectModal.remove();
       this.pageConnectModal = null;
     }).fail(() => {
+      console.log('im a failed');
+
       this.pageConnectModal.setState({
         statusText: config.failedText,
         mode: 'failed-connect',
@@ -254,7 +258,11 @@ module.exports = Backbone.Router.extend({
       itemHash = subPath && subPath[1] || null;
       skipNSFWmodal = subPath && subPath[2] || null;
 
-      this.userPage(guid, state, itemHash, skipNSFWmodal, '@' + handle);
+      // we want this to happen after the launchPageConnectModal processes
+      // the resolution of the promise, hence the timeout.
+      setTimeout(() => {
+        this.userPage(guid, state, itemHash, skipNSFWmodal, '@' + handle);
+      }, 0);
     });
 
     this.launchPageConnectModal({
