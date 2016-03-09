@@ -334,6 +334,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details",
           ViewOnBlockchain: "View Details",
           SoldBy: "Vendor",
+          BuyerPayout: "Buyer Payout",
+          SellerPayout: "Seller Payout",
+          BuyerAmout: "Buyer Amout",
+          SellerAmout: "Seller Amout",
+          YouEarn: "You Earn",
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address",
           PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
           sortByStatusAll: "All",
@@ -598,7 +604,14 @@ module.exports = Backbone.Model.extend({
       {
         langName: "Dutch",
         langCode: "nl-NL",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        /*
+
+         Translator: @Dekker3D
+         03/09/2016: ~ 33 untranslated strings
+
+         Use capitalized keys for widely reused text that must be capitalized
+
+        */
         IHaveAWalletNow: "Ik heb nu een Wallet",
         Next: "Volgende",
         IAgree: "Akkoord",
@@ -921,6 +934,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Bestellingdetails",
           ViewOnBlockchain: "Bekijk Details",
           SoldBy: "Verkoper",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Koper",
           searchByOrder: "Zoek via bestellings-id of item naam",
           sortByStatusAll: "Alle",
@@ -1189,8 +1208,8 @@ module.exports = Backbone.Model.extend({
 
         /*
 
-         Translators: @jjeffryes @gubatron @PolyDeveloper
-         02/28/2016: ~ 263 untranslated strings
+         Translators: @jjeffryes @gubatron @PolyDeveloper @nanomo
+         03/09/2016: ~ 273 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -1469,6 +1488,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -1720,7 +1745,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translators: @z3ntu @johirner
-         02/28/2016: ~ 265 untranslated strings
+         03/09/2016: ~ 307 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -2041,6 +2066,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -2062,6 +2093,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -2291,7 +2323,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @HostFat
-         02/28/2016: ~ 195 untranslated strings
+         03/09/2016: ~ 32 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -2617,6 +2649,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Dettagli ordine",
           ViewOnBlockchain: "Mostra dettagli",
           SoldBy: "Venduto da",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Comprato da",
           searchByOrder: "Ricerca per ID di ordine o nome articolo",
           sortByStatusAll: "Tutti",
@@ -2888,7 +2926,7 @@ module.exports = Backbone.Model.extend({
          Translator: @Kirvx
          Reviewer  : @JustinDrake
 
-         02/28/2016: ~ 0 untranslated strings
+         03/09/2016: ~ 25 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -3214,6 +3252,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Détails de la commande",
           ViewOnBlockchain: "Voir les détails",
           SoldBy: "Vendu par",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
           sortByStatusAll: "Tout",
@@ -3235,6 +3279,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Litige clôturé",
           OrderStatus6: "Litige finalisé",
           OrderStatus7: "Remboursé",
+          AcceptDisputeResolution: "Accepter le paiement du litige",
           InEscrow: "- Sous séquestre",
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
@@ -3243,6 +3288,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Expédier à",
           ViewRating: "(Voir l'évaluation)",
           ContractDetails: "Détails du contrat",
+          HideDetails: "Masquer les détails",
           ConfirmOrder: "Confirmer cette commande",
           ReceivingAddress: "Adresse de réception",
           RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
@@ -3327,7 +3373,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Analyse de votre réseau",
           searchingText: "Analyse de votre réseau pour",
-          noResults: "No listings found in your network", //notTranslated
+          noResults: "Aucune annonce trouvée dans votre réseau",
           noTaggedResults: "Aucune annonce trouvée dans votre réseau avec le mot-clé"
         },
         filters: {
@@ -3465,7 +3511,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @moldcraft
-         02/28/2016: ~ 265 untranslated strings
+         03/09/2016: ~ 307 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -3787,6 +3833,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -3808,6 +3860,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -4037,7 +4090,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @Squirrel2020
-         02/28/2016: ~ 194 untranslated strings
+         03/09/2016: ~ 238 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -4359,6 +4412,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Продано",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Куплено",
           searchByOrder: "Искать по номеру заказа",
           sortByStatusAll: "Все",
@@ -4380,6 +4439,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -4601,15 +4661,15 @@ module.exports = Backbone.Model.extend({
         }
       },
 
-	  {
+      {
 
         langName: "Slovenský jazyk",
         langCode: "sk",
 
         /*
 
-         Translator: @michalvalasek
-		 Translator: @mariodian
+         Translators: @michalvalasek @mariodian
+         03/09/2016: ~ 32 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -4931,6 +4991,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Detaily Objednávky",
           ViewOnBlockchain: "Zobraziť Detaily",
           SoldBy: "Predajca",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Kupujúci",
           searchByOrder: "Vyhľadávať podla čísla objednávky alebo názvu položky",
           sortByStatusAll: "Všetky",
@@ -4952,6 +5018,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Spor Uzavretý",
           OrderStatus6: "Spor Ukončený",
           OrderStatus7: "Peniaze Vrátené",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- V Escrow",
           OrderTotal: "Celková Suma Objednávky",
           OrderTotalInBTC: "BTC Celkovo",
@@ -5033,10 +5100,10 @@ module.exports = Backbone.Model.extend({
           badJSON: "JSON dáta vrátené zo serveru sú chybné"
         },
         aboutSection: {
-			about: "<p>OpenBazaar je sieť používateľov, ktorí za Bitcoiny priamo medzi sebou kupujú a predávaju tovary a služby. Táto sieť je decentralizovaná a nie je kontrolovaná žiadnou organizáciou.</p><p>Tento software je open source a licencovaný pod MIT licenciou. Jeho kód si môžete pozrieť na <a href=\"https://github.com/OpenBazaar/\">Githube</a>.</p><p>OpenBazaar je komunitný projekt a preto vítame akýkoľvek spôsob spolupráce na našom <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> kanáli, alebo <a href=\"http://www.reddit.com/r/openbazaar\">subreddite</a>.</p><p>Ak potrebujete pomoc, prečítajte si <a href=\"https://blog.openbazaar.org/tag/tutorial/\">Používateľskú Príručku</a>.</p><p>Ak máte aj napriek tomu nejaké otázky, otvorte tiket u našej <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">podpori</a>.</p>",
+            about: "<p>OpenBazaar je sieť používateľov, ktorí za Bitcoiny priamo medzi sebou kupujú a predávaju tovary a služby. Táto sieť je decentralizovaná a nie je kontrolovaná žiadnou organizáciou.</p><p>Tento software je open source a licencovaný pod MIT licenciou. Jeho kód si môžete pozrieť na <a href=\"https://github.com/OpenBazaar/\">Githube</a>.</p><p>OpenBazaar je komunitný projekt a preto vítame akýkoľvek spôsob spolupráce na našom <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> kanáli, alebo <a href=\"http://www.reddit.com/r/openbazaar\">subreddite</a>.</p><p>Ak potrebujete pomoc, prečítajte si <a href=\"https://blog.openbazaar.org/tag/tutorial/\">Používateľskú Príručku</a>.</p><p>Ak máte aj napriek tomu nejaké otázky, otvorte tiket u našej <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">podpori</a>.</p>",
             contributors: "<p>OpenBazaar sa stal skutočnosťou vďaka medzinárodnej komunite vývojárov a dobrovoľníkov, ktorí prispeli svojim časom, aby pomohli oslobodiť trh. Toto je čiastkový zoznam prispievateľov, ktorí pomohli, či už kódom, alebo iným spôsobom.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
             support: "<p>Na našej ceste za voľným trhom môžete podporiť OpenBazaar viacerými spôsobmi.</p><p>Kúpou a predajom tovaru a služieb pomáhate rozširovaniu našej komunity a robíte platformu atraktívnejšiu pre nových používateľov. Môžete sa spýtať firiem prijímajucích Bitcoiny, či by chceli predávať svoj tovar a služby na našej platforme. Pomôže nám to dostať sa do povedomia a ukáže, že existuje dopyt po obchodovaní na peer to peer platforme.</p><p>Ak ste vývojár, prosím choďte na <a href=\"https://github.com/OpenBazaar/\">náš Github</a> a zistite, či nám neviete s niečim pomôcť. Okrem pomoci s jadrom systému dúfame, že vďaka open source povahe projektu vytvoríte nové služby nad existujúcou sieťou.</p><p>Taktiež nám môžete <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\">prispieť Bitcoinami</a>, ktoré budú použité na úhradu nákladov spojených s návštevou konferencií, odmeňovaním dobrovoľníkov za vývoj a promovaním OpenBazaaru.</p><p>Ak máte nápady ako vylepšiť OpenBazaar, alebo máte otázky na našich hlavných vývojarov pridajte sa prosím k <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">nášmu Slack-u</a>.</p>",
-            licensing: "<p>OpenBazaar je softvér s otvoreným kódom licencovaný pod MIT licenciou. Táto licencia umožňuje ľuďom voľne používať kód v iných projektoch, alebo v proprietarnom softvéri. Plné znenie licencie nájdete nižšie.</p><h4MIT Licencia (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Týmto sa udeľuje povolenie, bez poplatku, ľubovolnej osobe získať kópiu tohto softvéru a pridružených dokumentov (Softvér), narábať so Softvérom bez obmedzení, vrátane práva používať, kopírovať, upravovať, zlučovať, uverejňovať, distribuovať, vytvárať podlicencie, predávať kópie Softvéru, a dávať takéto povolenie osobám, ktorým je Softvér poskytnutý,	za nasledovných podmienok:</p><p>Predošlé upozornenie autorského práva a povolenia musí byť zahrnuté vo všetkých kopiách alebo ucelených častiach Softvéru.</p><p>SOFTVÉR JE POSKYTOVANÝ \"TAK AKO JE\", BEZ AKEJKOĽVEK ZÁRUKY ČI UŽ VÝSLOVNEJ, ALEBO VYPLÝVAJÚCEJ, VRÁTANE, ALE NIE LEN, ZO ZÁRUKOU PREDAJNOSTI A VHODNOSTI PRE URČITÝ ÚČEL A NEZASAHOVANIA. V ŽIADNOM PRÍPADE VÁM NEBUDE AUTOR ALEBO ŽIADNY Z DRŽITEĽOV AUTORSKÝCH PRÁV ZODPOVEDAŤ ZA NÁROKY, ŠKODY, ALEBO INÉ RUČENIA, ČI UŽ VYPLÝVAJÚCICH Z ČINNOSTI ZMLUVY, PREČINU ALEBO INAK, ALEBO V SPOJENÍ SO SOFTVÉROM, POUŽÍVANÍM ALEBO INÝM NARÁBANÍM SO SOFTVÉROM.</p><h4>Knižnice</h4><p>OpenBazaar používa nasledovné knižnice:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
+            licensing: "<p>OpenBazaar je softvér s otvoreným kódom licencovaný pod MIT licenciou. Táto licencia umožňuje ľuďom voľne používať kód v iných projektoch, alebo v proprietarnom softvéri. Plné znenie licencie nájdete nižšie.</p><h4MIT Licencia (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Týmto sa udeľuje povolenie, bez poplatku, ľubovolnej osobe získať kópiu tohto softvéru a pridružených dokumentov (Softvér), narábať so Softvérom bez obmedzení, vrátane práva používať, kopírovať, upravovať, zlučovať, uverejňovať, distribuovať, vytvárať podlicencie, predávať kópie Softvéru, a dávať takéto povolenie osobám, ktorým je Softvér poskytnutý,    za nasledovných podmienok:</p><p>Predošlé upozornenie autorského práva a povolenia musí byť zahrnuté vo všetkých kopiách alebo ucelených častiach Softvéru.</p><p>SOFTVÉR JE POSKYTOVANÝ \"TAK AKO JE\", BEZ AKEJKOĽVEK ZÁRUKY ČI UŽ VÝSLOVNEJ, ALEBO VYPLÝVAJÚCEJ, VRÁTANE, ALE NIE LEN, ZO ZÁRUKOU PREDAJNOSTI A VHODNOSTI PRE URČITÝ ÚČEL A NEZASAHOVANIA. V ŽIADNOM PRÍPADE VÁM NEBUDE AUTOR ALEBO ŽIADNY Z DRŽITEĽOV AUTORSKÝCH PRÁV ZODPOVEDAŤ ZA NÁROKY, ŠKODY, ALEBO INÉ RUČENIA, ČI UŽ VYPLÝVAJÚCICH Z ČINNOSTI ZMLUVY, PREČINU ALEBO INAK, ALEBO V SPOJENÍ SO SOFTVÉROM, POUŽÍVANÍM ALEBO INÝM NARÁBANÍM SO SOFTVÉROM.</p><h4>Knižnice</h4><p>OpenBazaar používa nasledovné knižnice:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Uložené",
@@ -5181,7 +5248,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @Kahpecuce
-         02/28/2016: ~ 259 untranslated strings
+         03/09/2016: ~ 300 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -5507,6 +5574,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -5528,6 +5601,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -5757,7 +5831,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @drwasho
-         02/28/2016: ~ 260 untranslated strings
+         03/09/2016: ~ 302 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -6082,6 +6156,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -6103,6 +6183,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -6332,7 +6413,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translators: Jingyi Yang | @saltduck
-         03/02/2016: ~ 55 untranslated strings
+         03/09/2016: ~ 92 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -6662,6 +6743,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "订单详细内容",
           ViewOnBlockchain: "查看细节",
           SoldBy: "卖家",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "买家",
           searchByOrder: "用订单ID或货物名称来检索",
           sortByStatusAll: "全部",
@@ -6683,6 +6770,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "争议已关闭",
           OrderStatus6: "争议终止",
           OrderStatus7: "已退款",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- 托管中",
           OrderTotal: "订单总计",
           OrderTotalInBTC: "BTC总计",
@@ -6912,7 +7000,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @mpatc
-         02/28/2016: ~ 261 untranslated strings
+         03/09/2016: ~ 303 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -7238,6 +7326,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -7259,6 +7353,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -7488,7 +7583,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @ayalan
-         02/28/2016: ~ 181 untranslated strings
+         03/09/2016: ~ 225 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -7799,6 +7894,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "出品者",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "購入者",
           searchByOrder: "注文ID・商品名で探す",
           sortByStatusAll: "すべて",
@@ -7820,6 +7921,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -8048,11 +8150,8 @@ module.exports = Backbone.Model.extend({
 
         /*
 
-         Translator: @Mido
-         02/28/2016: ~ 95 untranslated strings
-
-         Translator: @programmerpeter
-         03/04/2016: ~ 8 untranslated strings, improved translations
+         Translator: @Mido @programmerpeter
+         03/09/2016: ~ 43 untranslated strings, improved translations
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -8378,6 +8477,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Szczegóły zamówienia",
           ViewOnBlockchain: "Zobacz szczegóły",
           SoldBy: "Sprzedawca",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Nabywca",
           searchByOrder: "Szukaj po ID lub nazwie przedmiotu",
           sortByStatusAll: "Wszystko",
@@ -8399,6 +8504,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Spór zamknięty",
           OrderStatus6: "Spór sfinalizowany",
           OrderStatus7: "Zwrócone",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- w depozycie",
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
@@ -8602,7 +8708,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @pryds
-         02/28/2016: ~ 49 untranslated strings
+         03/09/2016: ~ 33 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -8928,6 +9034,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Ordredetaljer",
           ViewOnBlockchain: "Se detajler",
           SoldBy: "Sælger",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Køber",
           searchByOrder: "Søg ud fra ordre-ID eller varenavn",
           sortByStatusAll: "Alle",
@@ -8949,6 +9061,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Uenighed lukket",
           OrderStatus6: "Uenighed færdiggjort",
           OrderStatus7: "Refunderet",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "– i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
@@ -9185,7 +9298,14 @@ module.exports = Backbone.Model.extend({
       {
         langName: "Português do Brasil",
         langCode: "pt-BR",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        /*
+
+          Translator: @rhcastilhos
+          03/09/2016: ~ 34 untranslated strings
+
+          Use capitalized keys for widely reused text that must be capitalized
+
+        */
         IHaveAWalletNow: "Eu tenho uma Carteira agora",
         Next: "Próximo",
         IAgree: "Eu aceito",
@@ -9448,7 +9568,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Sem seguidores",
         NoReviews: "Sem avaliações",
         Moderator: "Moderador",
-	ActiveStore:"Ativar Loja",
+        ActiveStore:"Ativar Loja",
         ActiveStoreDetails: "As lojas e os anúncios inativos não são visíveis para outras pessoas",
         Firewall: "Firewall",
         ServerSettings: "Configurações do Servidor",
@@ -9511,6 +9631,12 @@ module.exports = Backbone.Model.extend({
           OrderDetails: "Detalhes do Pedido",
           ViewOnBlockchain: "Ver Detalhes",
           SoldBy: "Vendedor",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Comprador",
           searchByOrder: "Buscar por id do pedido ou nome do item",
           sortByStatusAll: "Todos",
@@ -9532,6 +9658,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Disputa Encerrada",
           OrderStatus6: "Disputa Finalizada",
           OrderStatus7: "Reembolsado",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           AcceptDisputeResolution: "Aceitar Pagamento da Disputa",
           InEscrow: "- Em Custódia",
           OrderTotal: "Total do Pedido",
@@ -9777,8 +9904,8 @@ module.exports = Backbone.Model.extend({
          langCode: "uk",
          /*
 
-          Translator: Loderunner2, Bitcoin.ua
-          02/28/2016: ~ 12 untranslated strings
+          Translators: Loderunner2, Bitcoin.ua
+          03/09/2016: ~ 44 untranslated strings
 
           Use capitalized keys for widely reused text that must be capitalized
 
@@ -10070,6 +10197,12 @@ module.exports = Backbone.Model.extend({
          transactions: {
            OrderDetails: "Інформація Замовлення",
            SoldBy: "Продано",
+           BuyerPayout: "Buyer Payout", // not translated
+           SellerPayout: "Seller Payout", // not translated
+           BuyerAmout: "Buyer Amout", // not translated
+           SellerAmout: "Seller Amout", // not translated
+           YouEarn: "You Earn", // not translated
+           YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
            PurchasedBy: "Куплено",
            searchByOrder: "Пошук за номером замовлення",
            sortByStatusAll: "Всі",
@@ -10195,7 +10328,7 @@ module.exports = Backbone.Model.extend({
            disclaimer_title: "Відповідальність та Використання",
            disclaimer_body: "ПОПЕРЕДЖЕННЯ - Шановні Українці. \n\n НЕ Використовуйте OpenBazaar для продажу або придбання товарів що заборонені законодавством, або можуть порушувати норми моралі. Ви особисто несете відповідальність за всі ваші дії. \n\n Майте на увазі що система Біткоін та OpenBazaar забезпечують лише умовну анонімнісмть, та потребують додаткових заходів для забезпечення повної анонімності. Ці сиситеми зберігають всю історію транзакцій, що відкрита та може бути переглянута будьким. Всі ваші дії що були вчинені анонімно зараз, потенційно можуть бути відстежені в майбутньому, та не лише через вас, а й через дії тих з ким ви торгуєте. \n\n Користувачі OpenBazaar мають знати та дотримуватись зконів тих територій на яких здійснюють торгівлю. Та несуть власну відповідальністю за порушення законів. Розробники OpenBazaar, не несуть відповідальність за використання программи в протиправних цілях. Ви маєте самостійно переконатися в вашому праві, купувати чи продавати той чи інший товар чи послугу, та можливості доставки товару в ту чи іншу країну, згідно її законодавства. \n\n Спільнота OpenBazaar постійно працює для вдосконалення якості використання, вільної платформи для світової торгівлі. Але, так як і з будь яким програмним продуктом можливі помилки в роботі прогрмми. Розробники не несуть відповідальності з грошові втрати повязані з використанням прогрмми OpenBazaar. Використовуючи программу OpenBazaar, ви чините на свій власний роззсуд, та власну відповідальність, программа надается як є, без зобовязань. Якщо це не є прийнятним для вас, відмовтесь від використання OpenBazaar.",
 
-	  	   yourCountry: "Оберіть вашу країну",
+           yourCountry: "Оберіть вашу країну",
            localCurrency: "Оберіть валюту",
            LanguagePlaceholder: "Введіть мову",
            CountryPlaceholder: "Введіть країну",
