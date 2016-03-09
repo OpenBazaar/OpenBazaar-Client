@@ -39,7 +39,8 @@ module.exports = baseModal.extend({
     }
   },
 
-  onBackClick: function() {
+  onBackClick: function(e) {
+    $(e.target).addClass('disabled');
     this.trigger('back');
   },
 
@@ -47,7 +48,8 @@ module.exports = baseModal.extend({
     this.trigger('retry');
   },
 
-  onCancelClick: function() {
+  onCancelClick: function(e) {
+    $(e.target).addClass('disabled');
     this.trigger('cancel');
   },    
 
