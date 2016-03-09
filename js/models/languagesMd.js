@@ -129,11 +129,12 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address",
         BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...",
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
-        LocalCurrency: "Local currency",
-        TimeZone: "Time zone",
+        LocalCurrency: "Local Currency",
+        TimeZone: "Time Zone",
         ShipToName: "Name",
         ShipToStreet: "Street",
         ShipToCity: "City",
@@ -141,9 +142,9 @@ module.exports = Backbone.Model.extend({
         ShipToPostalCode: "Postal code",
         PostalCode: "Postal code",
         ShipToCountry: "Country",
-        EnableNotifications: "Enable notifications",
+        EnableNotifications: "Enable Notifications",
         EnableSSL: "Enable SSL",
-        LibbitcoinServerAddress: "Libbitcoin server address",
+        LibbitcoinServerAddress: "Libbitcoin Server Address",
         ServerIPPort: "Server IP:Port",
         All: "All",
         Name: "Name",
@@ -241,7 +242,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?",
         Basic: "Basic",
         Content: "Content",
-        StandardThemes: "Standard themes",
+        StandardThemes: "Standard Themes",
         NoPhotosAdded: "No Photos Added",
         Summary: "Summary",
         Funds: "Funds",
@@ -289,6 +290,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",
         EditModerator: "Moderator Settings",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details",
           ViewOnBlockchain: "View Details",
@@ -354,7 +390,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest",
           sortByDateOldest: "By Date, Oldest",
           PayPurchase: "Pay for this Purchase",
-          CompleteOrder: "Complete this Order",
+          CompleteOrder: "Complete Order",
           MarkAsShipped: "Mark as Shipped",
           RateThisTransaction: "Rate this Transaction",
           TransactionReview: "Transaction Review",
@@ -454,7 +490,7 @@ module.exports = Backbone.Model.extend({
           LanguagePlaceholder: "Search for language",
           CountryPlaceholder: "Search for country",
           CurrencyPlaceholder: "Search for currency",
-          TimezonePlaceholder: "Search for time zone",
+          TimezonePlaceholder: "Search for time Zone",
           ShortDescriptionPlaceholder: "Say something interesting... (160 char max)",
           timeZone: "Select Your Time Zone",
           yourDetails: "Set Your Information",
@@ -677,6 +713,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Veranderingen",
         SaveChanges: "Sla Veranderingen Op",
         YourName: "Uw naam",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Vul uw Bitcoin adres in",
         BitcoinReturnAddressPlaceholder: "Vul uw Bitcoin adres in...",
         BitcoinReturnAddressInfo: "Als een terugbetaling verstuurd wordt, zal het geld naar een Bitcoin-adres verstuurd moeten worden. Vul hieronder alstublieft een adres voor uw Wallet in.",
@@ -837,6 +874,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Wordt een Moderator",
         EditModerator: "Moderator Instellingen",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Bestellingdetails",
           ViewOnBlockchain: "Bekijk Details",
@@ -1347,6 +1419,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -1409,7 +1516,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -1720,6 +1827,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "&Auml;nderungen speichern",
         YourName: "Dein Name",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -1834,7 +1942,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -1880,6 +1988,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -1941,7 +2084,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -2259,6 +2402,7 @@ module.exports = Backbone.Model.extend({
         Change: "Cambia",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Inserisci il tuo Indirizzo Bitcoin",
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
         BitcoinReturnAddressInfo: "Se sar&agrave; rilasciato un rimborso, i fondi dovranno essere inviati ad un indirizzo Bitcoin. Si prega di fornire qui sotto un indirizzo al vostro portafoglio.",
@@ -2417,6 +2561,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Diventa un moderatore",
         EditModerator: "Impostazioni moderatore",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Dettagli ordine",
           ViewOnBlockchain: "Mostra dettagli",
@@ -2817,6 +2996,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Modifications",
         SaveChanges: "Enregistrer les modifications",
         YourName: "Votre nom",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Entrez votre adresse Bitcoin",
         BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
         BitcoinReturnAddressInfo: "Si un remboursement est émis, les fonds devront être envoyés à une adresse Bitcoin. Veuillez fournir ci-dessous une adresse de votre portefeuille.",
@@ -2975,6 +3155,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Devenir modérateur",
         EditModerator: "Paramètres de modérateur",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Détails de la commande",
           ViewOnBlockchain: "Voir les détails",
@@ -3349,6 +3564,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "Salvare Modificări",
         YourName: "Numele dvs.",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -3463,7 +3679,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -3509,6 +3725,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -3570,7 +3821,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -3882,6 +4133,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "Применить",
         YourName: "Ваше имя",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -4042,6 +4294,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -4103,7 +4390,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -4414,6 +4701,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -4428,7 +4716,7 @@ module.exports = Backbone.Model.extend({
         ShipToCountry: "Krajina",
         EnableNotifications: "Povoliť notifikácie",
         EnableSSL: "Povoliť SSL (šifrované spojenie)",
-        LibbitcoinServerAddress: "Libbitcoin server address",
+        LibbitcoinServerAddress: "Libbitcoin Server Address",
         ServerIPPort: "Server IP:Port",
         All: "Všetko",
         Name: "Meno",
@@ -4529,7 +4817,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -4575,6 +4863,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -4636,7 +4959,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -4954,6 +5277,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "Değişiklikleri Kaydet",
         YourName: "Adınız",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -5066,7 +5390,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -5112,6 +5436,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -5173,7 +5532,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -5490,6 +5849,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "ChoH toD",
         YourName: "PonglIj'e'",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -5602,7 +5962,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -5648,6 +6008,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -5709,7 +6104,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -6026,6 +6421,7 @@ module.exports = Backbone.Model.extend({
         Change: "修改",
         SaveChanges: "保存更改",
         YourName: "您的姓名",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "输入你的比特币地址",
         BitcoinReturnAddressPlaceholder: "退款至该地址",
         BitcoinReturnAddressInfo: "如果发生退款情形，款项需要发送到一个比特币地址。请提供你钱包中的一个地址：",
@@ -6189,6 +6585,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "成为仲裁员",
         EditModerator: "仲裁员设置",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "订单详细内容",
           ViewOnBlockchain: "查看细节",
@@ -6250,7 +6681,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "按日期排序(倒序)",
           sortByDateOldest: "按日期排序(正序)",
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "标记为已送达",
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -6568,6 +6999,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "변경 사항 저장",
         YourName: "당신 이름",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -6680,7 +7112,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -6726,6 +7158,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -6787,7 +7254,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -7100,6 +7567,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "変更を保存",
         YourName: "氏名",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "返品用ビットコインアドレス",
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
@@ -7248,6 +7716,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
@@ -7309,7 +7812,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -7630,6 +8133,7 @@ module.exports = Backbone.Model.extend({
         Change: "Zmień",
         SaveChanges: "Zapisz wprowadzone zmiany",
         YourName: "Twoje imię",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Wprowadź swój adres Bitcoin",
         BitcoinReturnAddressPlaceholder: "Wprowadź adres Bitcoin...",
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
@@ -7788,6 +8292,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Zostań arbitrem",
         EditModerator: "Ustawienia arbitra",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Szczegóły zamówienia",
           ViewOnBlockchain: "Zobacz szczegóły",
@@ -8140,6 +8679,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Ændringer",
         SaveChanges: "Gem ændringer",
         YourName: "Dit navn",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Indtast din Bitcoin-adresse",
         BitcoinReturnAddressPlaceholder: "Indtast Bitcoin-adresse…",
         BitcoinReturnAddressInfo: "Hvis en returnering godkendes, skal pengene sendes til en Bitcoin-adresse. Angiv venligst en adresse i din tegnebog herunder.",
@@ -8299,6 +8839,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Bliv moderator",
         EditModerator: "Moderatorindstillinger",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Ordredetaljer",
           ViewOnBlockchain: "Se detajler",
@@ -8680,6 +9255,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Modificações",
         SaveChanges: "Salvar",
         YourName: "Seu nome",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Insira o seu Endereço Bitcoin",
         BitcoinReturnAddressPlaceholder: "Insira o endereço Bitcoin...",
         BitcoinReturnAddressInfo: "Se um reembolso for emitido, os fundos terão que ser enviados para um endereço Bitcoin. Por favor forneça abaixo um endereço para a sua Carteira.",
@@ -8843,6 +9419,41 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Tornar-se um Moderador",
         EditModerator: "Configurações do Moderador",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Detalhes do Pedido",
           ViewOnBlockchain: "Ver Detalhes",
@@ -9226,6 +9837,7 @@ module.exports = Backbone.Model.extend({
          Changes: "Зміни",
          SaveChanges: "Зберігти зміни",
          YourName: "Ваше ім'я",
+         BitcoinAddress: "Bitcoin Addresss", //notTranslated
          BitcoinReturnAddress: "Біткойн-адреса для повернення коштів",
          BitcoinReturnAddressPlaceholder: "Введіть Біткойн-адресу",
          BitcoinReturnAddressInfo: "В разі повернення коштів, вони будуть надіслані на цю адресу, вона має бути постійною.",
@@ -9364,6 +9976,41 @@ module.exports = Backbone.Model.extend({
          },
          BecomeModerator: "Стати Модертором",
          EditModerator: "Налаштування Модертора",
+         overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+         },
+         qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+         },
+         descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+         },
+         deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+         },
+         customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+         },
          transactions: {
            OrderDetails: "Інформація Замовлення",
            SoldBy: "Продано",

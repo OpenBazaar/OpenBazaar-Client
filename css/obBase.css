@@ -199,13 +199,13 @@ form {
 }
 
 #ov1 .chatOpen #obContainer {
-  width: calc(100% - 231px);
+  width: calc(100% - 230px);
 }
 
-#ov1 .chatOpen #obContainer::-webkit-scrollbar {
+/*#ov1 .chatOpen #obContainer::-webkit-scrollbar {
   width: 0;
 }
-
+*/
 #pageNav {
   position: fixed;
   top: 0;
@@ -3402,8 +3402,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 50px;
   height: 20px;
   z-index: 4;
-  width: 980px;
-  margin-left: -10px;
+  width: 963px;
+  margin-left: -6px;
+  background: transparent;
 }
 .user-page-header-slim-bg-cover-customize {
   position: fixed;
@@ -4824,6 +4825,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 43px;
 }
 
+#ov1  .height24 {
+  height: 24px;
+}
 #ov1  .height30 {
   height: 30px;
 }
