@@ -104,7 +104,9 @@ module.exports = baseVw.extend({
       if ($('.homeGridItems .gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
-        self.$el.find('.js-loadingText').html(self.$el.find('.js-loadingText').data('noResultsText'));
+        self.$el.find('.js-loadingText').html(
+          window.polyglot.t('discover.' + (self.searchItemsText ? 'noTaggedResults' : 'noResults'))
+        );
       }
     }, 10000);
   },
@@ -276,6 +278,8 @@ module.exports = baseVw.extend({
     this.$el.find('.js-' + state + 'Search').removeClass('hide');
 
     if(searchItemsText){
+      this.searchItemsText = searchItemsText;
+
       //add action to history
       Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""));
     } else {
