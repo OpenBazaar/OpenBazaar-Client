@@ -181,13 +181,9 @@ module.exports = Backbone.Router.extend({
     });
 
     config.promise.done(() => {
-      console.log('im a resolved');
-
       this.pageConnectModal && this.pageConnectModal.remove();
       this.pageConnectModal = null;
     }).fail(() => {
-      console.log('im a failed');
-
       this.pageConnectModal.setState({
         statusText: config.failedText,
         mode: 'failed-connect',

@@ -299,7 +299,6 @@ module.exports = baseVw.extend({
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
           self.render();
-          console.log('soul journ: ' + !!self.currentItemHash);
           !self.currentItemHash && self.loadingDeferred.resolve();
         }else{
           //model was returned as a blank object
@@ -857,10 +856,8 @@ module.exports = baseVw.extend({
     this.setItem(hash, function(model, response) {
           if (response.vendor_offer){
             self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
-            console.log('boom');
             self.loadingDeferred.resolve();
           }else{
-            console.log('bizzle');
             self.loadingDeferred.reject();
           }
         }
