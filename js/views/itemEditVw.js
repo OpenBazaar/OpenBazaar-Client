@@ -104,8 +104,6 @@ module.exports = baseVw.extend({
             imageDragging: false,
             sticky: true
           },
-          disableDoubleReturn: true,
-          disableExtraSpaces: true,
           paste: {
             cleanPastedHTML: true,
             cleanReplacements: [
@@ -522,7 +520,7 @@ module.exports = baseVw.extend({
     this.$el.find('#inputPrice').val(this.$el.find('#priceLocal').val());
     this.$el.find('#inputShippingDomestic').val(this.$el.find('#shippingPriceLocalLocal').val());
     this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
-    
+
     formData = new FormData(submitForm);
 
     if(this.noShipping){
