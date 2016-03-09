@@ -71,20 +71,20 @@
           <div class="positionAbsolute width100 itemMetaValue zIndex1 tooltip" data-tooltip="<%= ob.displayShippingOrigin || ob.userCountry %>"></div>
         </div>
         <% if(ob.vendor_offer.listing.metadata.category) { %>
-        <div class="flexExpand row10">
+        <div class="flexCol-6 row10">
           <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize15"></div>
           <div class="itemMetaValue"><%= ob.vendor_offer.listing.metadata.category %></div>
         </div>
         <% } %>
         <% if(ob.vendor_offer.listing.item.condition) { %>
-        <div class="flexExpand row10">
+        <div class="flexCol-6 row10">
           <div class="itemMetaCircle custCol-secondary floatLeft ion-android-star marginRight7 fontSize15"></div>
           <div class="itemMetaValue"><%= ob.vendor_offer.listing.item.condition %></div>
         </div>
         <% } %>
 
         <% if( ob.vendor_offer.listing.metadata.category === "physical good" && ob.vendor_offer.listing.shipping.free ) { %>
-        <div class="flexExpand row10">
+        <div class="flexCol-6 row10">
           <div class="itemMetaCircle custCol-secondary floatLeft ion-cube marginRight7 fontSize15"></div>
           <div class="itemMetaValue"><%= polyglot.t('FreeShipping') %></div>
         </div>
@@ -92,10 +92,10 @@
       </div>
       <div class="flexrow width100">
         <% if(ob.vendor_offer.listing.item.keywords != "") { %>
-        <div class="marginTop25 fontSize15 marginLeft10 textOpacity75 flexExpand row10">
+        <div class="marginTop25 fontSize15 marginLeft10 textOpacity75 flexCol-6 row10">
           <h4><%= polyglot.t('Tags') %></h4>
         </div>
-        <div class="marginBottom20 marginTop18 marginLeft7 flexExpand row10">
+        <div class="marginBottom20 marginTop18 marginLeft7 flexCol-6 row10">
           <% _.each(ob.vendor_offer.listing.item.keywords, function(data, i) {
             if(data.length < 100 && i < 11) {
           %>
