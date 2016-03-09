@@ -181,7 +181,6 @@ module.exports = Backbone.Router.extend({
     });
 
     config.promise.done(() => {
-      console.log('ive a been a resolved');
       this.pageConnectModal && this.pageConnectModal.remove();
       this.pageConnectModal = null;
     }).fail(() => {
@@ -242,7 +241,6 @@ module.exports = Backbone.Router.extend({
     this.newView(new userPageView(options),"userPage");
   },
 
-  // 2dab3d9de6da4efface672a3e33a37c5e29c0d89
   userPageViaHandle: function(handle, subPath) {
     var processHandle;
 
