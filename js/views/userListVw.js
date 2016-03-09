@@ -70,7 +70,7 @@ module.exports = Backbone.View.extend({
       model: item
     });
     this.subViews.push(storeShort);
-    this.listWrapper.prepend(storeShort.el);
+    this.listWrapper.append(storeShort.el);
   },
 
   onScroll: function(){
