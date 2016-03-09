@@ -318,7 +318,7 @@ module.exports = baseVw.extend({
     });
   },
 
-  loadingStatus: function() {
+  loadingConfig: function() {
     var config = {
       promise: this.loadingDeferred.promise(),
       cancel: () => {

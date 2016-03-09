@@ -125,7 +125,7 @@ module.exports = Backbone.Router.extend({
     this.pageConnectModal = null;
 
     if (
-      (loadingConfig = __.result(view, 'loadingStatus')) &&
+      (loadingConfig = __.result(view, 'loadingConfig')) &&
       loadingConfig.promise &&
       typeof loadingConfig.promise.then === 'function') {
       this.launchPageConnectModal(loadingConfig);
