@@ -520,6 +520,12 @@ form {
     box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
 }
 
+/* if itemImg is nested, do not show box shadow */
+.userPage-subViews .gridItem:hover .itemImg .itemImg,
+.homeView .gridItem:hover .itemImg .itemImg {
+  box-shadow: none;
+}
+
 .userPage-subViews .gridItem .itemImg:active,
 .homeView .gridItem .itemImg:active {
     box-shadow: 0px 0px 67px -10px rgb(0, 0, 0);
@@ -2947,15 +2953,19 @@ input[type="checkbox"].fieldItem + label {
  }
 
 input[type="checkbox"].fieldItem + label:before {
-  content: "\f371";
+  content: "";
   display: inline-block;
-  font-family: Ionicons;
   position: absolute;
   left: 10px;
-  top: 0;
-  font-size: 18px;
-  width: 15px;
-  text-align: center;
+  height: 16px;
+  width: 16px;
+  border-radius: 4px;
+  border: solid 1px #fff;
+  box-shadow: none;
+  opacity: 1;
+  transform: translateY(-50%) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  top: 50%;
 }
 
 input[type="checkbox"].fieldItem + label.compact {
@@ -2968,9 +2978,8 @@ input[type="checkbox"].fieldItem + label.compact:before {
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
-  content: "\f374";
-  font-family: Ionicons;
-  background: transparent;
+  background: #fff;
+  box-shadow: inset 0 0 0 4px #086A9E;
 }
 
 input[type="checkbox"].fieldItem + label div,
@@ -5107,6 +5116,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .width100 {
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
 }
 
@@ -5289,6 +5299,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .inlineBlock {
   display: inline-block;
+}
+
+#ov1 .zIndex1 {
+  z-index: 1; /*use on absolutely positioned elemenets that need to stack above other elements with no z-index */
 }
 
 #ov1 .zIndex4 {

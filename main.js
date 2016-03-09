@@ -18,6 +18,7 @@ var menu = require('menu');
 var tray = require('tray');
 var ipcMain = require('ipc-main');
 var ini = require('ini');
+var dialog = require('electron').dialog;
 
 var launched_from_installer = false;
 var platform = os.platform();
@@ -98,12 +99,15 @@ if(platform == "mac" || platform == "linux") {
   daemon = "openbazaard";
 }
 
+var serverPath = __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep;
+var serverOut = '';
+
 var start_local_server = function() {
-  if(fs.existsSync(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon)) {
+  if(fs.existsSync(serverPath)) {
 
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
-    subpy = require('child_process').spawn(__dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server' + path.sep + daemon, ['start', '--testnet', '--loglevel', 'debug', '-p', random_port], {
+    subpy = require('child_process').spawn(serverPath + daemon, ['start', '--testnet', '--loglevel', 'debug', '-p', random_port], {
       detach: false,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
@@ -114,6 +118,7 @@ var start_local_server = function() {
     subpy.stdout.on('data', function (buf) {
       console.log('[STR] stdout "%s"', String(buf));
       stdout += buf;
+      serverOut += buf;
     });
     subpy.stderr.on('data', function (buf) {
       console.log('[STR] stderr "%s"', String(buf));
@@ -300,8 +305,16 @@ app.on('ready', function() {
     },
     {type: 'separator'},
     {label: 'View Debug Log', type: 'normal', click: function() {
-      // Open Debug Log Wherever It Is
-      find_debug_log();
+      var debugPath = serverPath + path.sep + 'debug.txt';
+
+      fs.writeFile(debugPath, serverOut, (err) => {
+        if (err) {
+          dialog.showErrorBox('Unable To Open Debug Log',
+            'There was an error and we are unable to open the server debug log at this time.\n\n' + err);
+        }
+        
+        require('open')(debugPath);
+      });
     }},
     {type: 'separator'},
     {
@@ -310,19 +323,6 @@ app.on('ready', function() {
     }
     }
   ]);
-
-  function find_debug_log() {
-    var filename = "../OpenBazaar-Server/ob.cfg";
-    var config = ini.parse(fs.readFileSync(filename, 'utf-8'));
-    if(config.CONSTANTS.DATA_FOLDER) {
-      console.log('Using DATA_FOLDER: ' + config.CONSTANTS.DATA_FOLDER);
-      require('child_process').exec(config.CONSTANTS.DATA_FOLDER + '/debug.log');
-    } else {
-      console.log('Using default DATA_FOLDER location');
-      var home_folder = process.env.HOME || process.env.USERPROFILE;
-      require('child_process').exec(home_folder + '/OpenBazaar/debug.log');
-    }
-  }
 
   trayMenu.setContextMenu(contextMenu);
 
