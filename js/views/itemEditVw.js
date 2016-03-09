@@ -28,7 +28,7 @@ module.exports = baseVw.extend({
     'blur textarea': 'validateInput',
     'focus #inputExpirationDate': 'addDefaultTime',
     'click .js-itemEditClearDate': 'clearDate',
-    'click .js-region': 'selectRegions'
+    'change #shipsToRegions': 'selectRegions'
   },
 
   MAX_PHOTOS: 10,
@@ -125,6 +125,7 @@ module.exports = baseVw.extend({
         this.$('.chosen').chosen({width: '100%'}).change(function(e){
           self.shipsToChange(e);
         });
+        this.$('.chosenRegions').chosen({width: '100%', disable_search: true});
       }, 0);
 
       self.setFormValues();
@@ -242,9 +243,9 @@ module.exports = baseVw.extend({
   },
 
   selectRegions: function(e){
-    var setCountries = this.regions[$(e.target).data('region')],
+    var setCountries = this.regions[$(e.target).val()],
         shipsTo = this.$('#shipsTo'),
-        oldVal = shipsTo.val(),
+        oldVal = shipsTo.val() || [],
         wwIndex = oldVal.indexOf('ALL'),
         newVal;
 

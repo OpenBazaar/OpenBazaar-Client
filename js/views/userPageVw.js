@@ -790,6 +790,7 @@ module.exports = baseVw.extend({
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
+      userAddresses: self.options.userModel.get('shipping_addresses'),
       serverUrl: self.options.userModel.get('serverUrl'),
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,

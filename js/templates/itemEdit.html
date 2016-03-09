@@ -194,19 +194,6 @@
             <div class="flexRow custCol-border js-shippingRow">
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="shipsTo"><%= polyglot.t('AddShipToRegion') %></label>
-                </div>
-              </div>
-              <div class="flexCol-8">
-                <div class="padding10">
-                  <a class="btn btn-txt custCol-secondary js-region" data-region="EUROPEAN_UNION">European Union</a>
-                  <a class="btn btn-txt custCol-secondary js-region" data-region="EUROPEAN_ECONOMIC_AREA">European Economic Area</a>
-                </div>
-              </div>
-            </div>
-            <div class="flexRow custCol-border js-shippingRow">
-              <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">
                   <label for="shipsTo"><%= polyglot.t('ShipsTo') %></label>
                 </div>
               </div>
@@ -214,6 +201,23 @@
                 <div class="fieldItem padding0 js-shipToWrapper">
                   <div class="fieldItem-selectWrapper noIcon">
                     <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple required>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow custCol-border js-shippingRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="shipsToRegions"><%= polyglot.t('AddShipToRegion') %></label>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper noIcon">
+                    <select class="chosenRegions custCol-text" id="shipsToRegions">
+                      <option value="EUROPEAN_UNION">European Union</option>
+                      <option value="EUROPEAN_ECONOMIC_AREA">European Economic Area</option>
                     </select>
                   </div>
                 </div>
