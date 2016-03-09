@@ -82,10 +82,10 @@
       <hr>
       <div class="flexRow txt-center">
         <div class="flexExpand">
-          Buyer Payout: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %> BTC
+          <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %> BTC
         </div>
         <div class="flexExpand">
-          Seller Payout: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %> BTC
+          <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %> BTC
         </div>
       </div>
     </div>
@@ -1021,7 +1021,7 @@
                   <%= polyglot.t('transactions.TotalInTransaction') %>
                   <strong><%= ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC</strong>
                   <div class="pull-right">
-                    You earn: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
+                    <%= polyglot.t('transactions.YouEarn') %>: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
                   </div>
                 </div>
               </div>
@@ -1030,7 +1030,7 @@
             <% if(ob.vendor_order_confirmation){ %>
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">Buyer Amount:</div>
+                <div class="fieldItem"><%= polyglot.t('transactions.BuyerAmount') %>:</div>
               </div>
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
@@ -1045,7 +1045,7 @@
             </div>
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">Seller Amount:</div>
+                <div class="fieldItem"><%= polyglot.t('transactions.SellerAmount') %>:</div>
               </div>
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
@@ -1068,7 +1068,7 @@
 
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">Your Bitcoin Payment Address:</div>
+                <div class="fieldItem"><%= polyglot.t('transactions.YourBitcoinPaymentAddress') %>:</div>
               </div>
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <input name="moderator_address"
