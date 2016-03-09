@@ -951,6 +951,8 @@ module.exports = baseVw.extend({
   },
 
   addTabToHistory: function(state){
+    console.log('add madd');
+    
     "use strict";
     //add action to history if not an item
     Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
