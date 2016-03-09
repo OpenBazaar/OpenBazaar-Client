@@ -26,20 +26,17 @@ module.exports = baseModal.extend({
   },
 
   setState: function(state) {
-    var modes = ['connecting', 'failed-connect'];
+    var modes = ['connecting', 'failed-connect'],
+        newState;
 
     if (!state) return;
-    
-    if (state.mode && modes.indexOf(state.mode) !== -1) {
-      this.$el.removeClass(modes.map((mode) => `mode-${mode}`).join(' '));
-      this.$el.addClass(`mode-${state.mode}`);
-    }
 
-    if (state.statusText) {
-      this.$statusText && this.$statusText.html(state.statusText);
-    }
+    newState = __.extend({}, this._state, state);
 
-    this._state = state;
+    if (!__.isEqual(this._state, newState)) {
+      this._state = newState;
+      this.render();
+    }
   },
 
   onBackClick: function() {

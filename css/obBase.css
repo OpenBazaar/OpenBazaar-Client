@@ -4155,14 +4155,14 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   float: none;
 }
 
-.page-connect-modal.mode-connecting .btn-retry,
-.page-connect-modal.mode-connecting .btn-back,
-.page-connect-modal.mode-connecting .icon-no-connection {
+.page-connect-modal .mode-connecting .btn-retry,
+.page-connect-modal .mode-connecting .btn-back,
+.page-connect-modal .mode-connecting .icon-no-connection {
   display: none;
 }
 
-.page-connect-modal.mode-failed-connect .btn-cancel,
-.page-connect-modal.mode-failed-connect .spinner {
+.page-connect-modal .mode-failed-connect .btn-cancel,
+.page-connect-modal .mode-failed-connect .spinner {
   display: none;
 }
 

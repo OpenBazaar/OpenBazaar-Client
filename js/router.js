@@ -12,22 +12,6 @@ var ipcRenderer = require('ipc-renderer'),
     PageConnectModal = require('./views/pageConnectModal');
 
 module.exports = Backbone.Router.extend({
-  // routes: {
-  //   "": "index",
-  //   "home": "home",
-  //   "home/:state(/:searchText)": "home",
-  //   "myPage": "userPage",
-  //   "userPage": "userPage",
-  //   "userPage/:userID(/:state)(/:itemHash)(/:skipNSFWmodal)": "userPage",
-  //   "userPageViaHandle": "userPageViaHandle",
-  //   "transactions": "transactions",
-  //   "transactions/:state": "transactions",
-  //   "settings": "settings",
-  //   "settings/:state": "settings",
-  //   "about": "about",
-  //   "support": "donate"
-  // },  
-
   initialize: function(options){
     var routes;
 
@@ -40,7 +24,7 @@ module.exports = Backbone.Router.extend({
       ["myPage", "userPage"],
       ["userPage", "userPage"],
       ["userPage/:userID(/:state)(/:itemHash)(/:skipNSFWmodal)", "userPage"],
-      [/^@(.*\/?)(.*)$/, "userPageViaHandle"],
+      [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
       ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
       ["transactions/:state", "transactions"],
@@ -82,14 +66,6 @@ module.exports = Backbone.Router.extend({
     if(routeArray[0].charAt(0) == "@"){
       // user entered a handle
       deferred.resolve(route);
-
-
-      // handle = routeArray[0].replace('@', '');
-      // this.processHandle(handle, state, itemHash).done((route) => {
-      //   deferred.resolve(route);
-      // }).fail(() => {
-      //   deferred.reject('bad-handle');
-      // });
     } else if(!routeArray[0].length){
       // user trying to go back to discover
       deferred.resolve('#home');
@@ -109,20 +85,23 @@ module.exports = Backbone.Router.extend({
   },
 
   processHandle: function(handle, state, itemHash) {
-    var deferred = $.Deferred();
+    var deferred = $.Deferred(),
+        guidFetch;
 
     if (handle) {
-      app.getGuid(handle, this.userModel.get('resolver') + '/v2/users/')
+      guidFetch = app.getGuid(handle, this.userModel.get('resolver') + '/v2/users/')
         .done((guid) => {
-          // deferred.resolve('#userPage/' + guid + state + itemHash);
           deferred.resolve(guid);
         }).fail(() => {
-          // messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badHandle'));
           deferred.reject();          
         });
     } else {
       deferred.reject();
     }
+
+    deferred.cancel = () => {
+      guidFetch && guidFetch.abort();
+    };
 
     return deferred.promise();
   },  
@@ -135,17 +114,82 @@ module.exports = Backbone.Router.extend({
   },
 
   newView: function(view, bodyClass, addressBarText){
+    var loadingConfig;
+
     if($('body').attr('id') != bodyClass){
       $('body').attr("id", bodyClass || "");
     }
     $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
+    
     this.pageConnectModal && this.pageConnectModal.remove();
+    this.pageConnectModal = null;
+
+    if (
+      (loadingConfig = __.result(view, 'loadingStatus')) &&
+      loadingConfig.promise &&
+      typeof loadingConfig.promise.then === 'function') {
+      this.launchPageConnectModal(loadingConfig);
+    }
+    
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
     //clear address bar. This will be replaced on the user page
     addressBarText = addressBarText || "";
     window.obEventBus.trigger("setAddressBar", addressBarText);
     $('#obContainer')[0].scrollTop = 0;
+  },
+
+  launchPageConnectModal: function(config) {
+    if (!(
+        config &&
+        config.promise &&
+        typeof config.promise.then === 'function'
+      )) {
+      throw new Error('At a minimum, the config must contain a config.promise.');
+    }
+
+    var defaults = {
+      connectText: 'Connecting...',
+      failedText: 'Unable to Connect.'
+    };
+
+    config = __.extend({}, defaults, config);
+
+    this.pageConnectModal && this.pageConnectModal.remove();
+    this.pageConnectModal = new PageConnectModal({
+      initialState: {
+        statusText: config.connectText,
+        tooltip: config.connectTooltip
+      }
+    }).render().open();    
+
+    this.pageConnectModal.on('back', () => {
+      history.back();
+    });
+
+    this.pageConnectModal.on('retry', () => {
+      // recall the same route
+      var route = location.hash;
+
+      this.navigate('blah-blah', { replace: true });
+      this.navigate(route, { replace: true, trigger: true });
+    });
+
+    this.pageConnectModal.on('cancel', () => {
+      typeof config.promise.cancel === 'function' && config.promise.cancel();
+      history.back();
+    });
+
+    config.promise.done(() => {
+      this.pageConnectModal && this.pageConnectModal.remove();
+      this.pageConnectModal = null;
+    }).fail(() => {
+      this.pageConnectModal.setState({
+        statusText: config.failedText,
+        mode: 'failed-connect',
+        tooltip: config.failedTooltip
+      });
+    });
   },
 
   index: function(){
@@ -180,12 +224,8 @@ module.exports = Backbone.Router.extend({
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
   },
 
-  userPage: function(userID, state, itemHash, skipNSFWmodal){
-    var handle;
-
-    this.cleanup();
-
-    this.newView(new userPageView({
+  userPage: function(userID, state, itemHash, skipNSFWmodal, handle){
+    var options = {
       userModel: this.userModel,
       userProfile: this.userProfile,
       userID: userID,
@@ -193,34 +233,38 @@ module.exports = Backbone.Router.extend({
       itemHash: itemHash,
       socketView: this.socketView,
       skipNSFWmodal: skipNSFWmodal
-    }),"userPage");
+    };
+
+    if (handle) options.handle = handle;
+
+    this.cleanup();
+    this.newView(new userPageView(options),"userPage");
   },
 
+  // 2dab3d9de6da4efface672a3e33a37c5e29c0d89
   userPageViaHandle: function(handle, subPath) {
-    handle = handle && handle.endsWith('/') ? handle.substr(0, handle.length - 1) : handle || '';
+    var processHandle;
 
-    this.pageConnectModal && this.pageConnectModal.remove();
-    this.pageConnectModal = new PageConnectModal({
-      initialState: {
-        statusText: `Connecting to @${handle}`
-      }
-    }).render().open();    
+    processHandle = this.processHandle(handle).done((guid) => {
+      var state,
+          itemHash,
+          skipNSFWmodal;
 
-    this.pageConnectModal.on('back', () => {
-      history.back();
+      subPath = subPath && subPath.slice(1).split('/');
+      state = subPath && subPath[0] || null;
+      itemHash = subPath && subPath[1] || null;
+      skipNSFWmodal = subPath && subPath[2] || null;
+
+      this.userPage(guid, state, itemHash, skipNSFWmodal, '@' + handle);
     });
 
-    this.pageConnectModal.on('retry', () => {
-      this.userPageViaHandle.apply(this, arguments);
-    });    
-
-    this.processHandle(handle).done((guid) => {
-      this.userPage.apply(this, [guid].concat(subPath && subPath.split('/') || []));
-    }).fail(() => {
-      this.pageConnectModal.setState({
-        statusText: `The handle @${handle} is not connected to a page.`,
-        mode: 'failed-connect'
-      });
+    this.launchPageConnectModal({
+      promise: processHandle,
+      connectText: `Connecting to @${handle}`,
+      failedText: `The handle @${handle} is not connected to a page.`,
+      cancel: () => {
+        processHandle.cancel();
+      }
     });
   },
 

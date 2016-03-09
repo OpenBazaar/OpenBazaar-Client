@@ -450,15 +450,8 @@ module.exports = baseVw.extend({
   },
 
   addressBarProcess: function(addressBarText){
-    console.log('boom: ' + addressBarText);
-
     app.router.translateRoute(addressBarText).done((route) => {
-      console.log('resolved: ' + route);
       Backbone.history.navigate(route, {trigger:true});
-    }).fail((reason) => {
-      if (reason === 'bad-handle') {
-        this.addressInput.val(this._lastSetAddressBarText || '');
-      }
     });
   },
 

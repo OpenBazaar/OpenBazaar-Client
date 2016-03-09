@@ -168,6 +168,7 @@ module.exports = baseVw.extend({
 
     var self = this;
     this.options = options || {};
+
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
     userProfile: this is set by main.js, it is not the same as the page's userProfile, it belongs to the current user
@@ -219,7 +220,9 @@ module.exports = baseVw.extend({
     };
 
     //show loading modal before fetching user data
-    $('.js-loadingModal').removeClass('hide');
+    // $('.js-loadingModal').removeClass('hide');
+
+    this.loadingDeferred = $.Deferred();
 
     //listen to follow and unfollow events
     this.listenTo(window.obEventBus, "followUser", function(guid){
@@ -274,7 +277,7 @@ module.exports = baseVw.extend({
       this.userProfileFetchParameters = $.param({'guid': this.pageID});
     }
 
-    this.userProfile.fetch({
+    this.userProfileFetch = this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
       //timeout: 4000,
@@ -283,7 +286,7 @@ module.exports = baseVw.extend({
         if (self.isRemoved()) return;
 
         if (response.profile){
-          $('.js-loadingModal').addClass('hide');
+          // $('.js-loadingModal').addClass('hide');
           if (self.options.ownPage === true){
             model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash);
             model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash);
@@ -298,21 +301,24 @@ module.exports = baseVw.extend({
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
           self.render();
+          self.loadingDeferred.resolve();
         }else{
           //model was returned as a blank object
-          $('.js-loadingModal').addClass('hide');
-          messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
-          self.bindModalCloseHandler();
+          // $('.js-loadingModal').addClass('hide');
+          // messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+          // self.bindModalCloseHandler();
+          self.loadingDeferred.reject();
         }
       },
       error: function(model, response){
         if (self.isRemoved()) return;
 
-        $('.js-loadingModal').addClass('hide');
-        messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
-        self.bindModalCloseHandler();
-        self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
-        self.render();
+        // $('.js-loadingModal').addClass('hide');
+        // messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
+        // self.bindModalCloseHandler();
+        // self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
+        // self.render();
+        self.loadingDeferred.reject();
       },
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
@@ -320,6 +326,27 @@ module.exports = baseVw.extend({
         }
       }
     });
+  },
+
+  loadingStatus: function() {
+    var config = {
+      promise: this.loadingDeferred.promise(),
+      cancel: () => {
+        this.userProfileFetch && this.userProfileFetch.abort();
+      }
+    };
+    
+    if (this.currentItemHash) {
+      config.connectText = `Connecting to listing ${this.currentItemHash}`;
+      config.failedText = 'The listing you\'re trying to view is currently offline';
+    } else {
+      config.connectText = `Connecting to ${this.options.handle || this.pageID}`;
+      config.failedText = 'The page you\'re trying to view is currently offline';
+      config.connectTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
+      config.failedTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
+    }
+
+    return config;
   },
 
   bindModalCloseHandler: function(e) {
