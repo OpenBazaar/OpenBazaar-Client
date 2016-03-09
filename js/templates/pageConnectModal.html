@@ -4,7 +4,6 @@
     <i class="ion-flash icon-no-connection fontSize30"></i>
   </div>
 
-  <% console.log('boom: ' + ob.tooltip) %>
   <div class="content">
     <div class="statusText pad10 marginBottom12 inlineBlock <% ob.tooltip && print('tooltip') %>" <% ob.tooltip && print(`data-tooltip="${ob.tooltip}"`) %>><%= ob.statusText %></div>
 

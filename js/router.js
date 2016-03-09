@@ -181,6 +181,7 @@ module.exports = Backbone.Router.extend({
     });
 
     config.promise.done(() => {
+      console.log('ive a been a resolved');
       this.pageConnectModal && this.pageConnectModal.remove();
       this.pageConnectModal = null;
     }).fail(() => {
@@ -260,8 +261,8 @@ module.exports = Backbone.Router.extend({
 
     this.launchPageConnectModal({
       promise: processHandle,
-      connectText: `Connecting to @${handle}`,
-      failedText: `The handle @${handle} is not connected to a page.`,
+      connectText: window.polyglot.t('pageConnectingMessages.handleConnect').replace('${handle}', handle),
+      failedText: window.polyglot.t('pageConnectingMessages.handleFail'),
       cancel: () => {
         processHandle.cancel();
       }
