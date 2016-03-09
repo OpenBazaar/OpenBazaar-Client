@@ -1,3 +1,5 @@
+"use strict";
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -166,6 +168,7 @@ module.exports = baseVw.extend({
 
     var self = this;
     this.options = options || {};
+
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
     userProfile: this is set by main.js, it is not the same as the page's userProfile, it belongs to the current user
@@ -216,8 +219,7 @@ module.exports = baseVw.extend({
       }
     };
 
-    //show loading modal before fetching user data
-    $('.js-loadingModal').removeClass('hide');
+    this.loadingDeferred = $.Deferred();
 
     //listen to follow and unfollow events
     this.listenTo(window.obEventBus, "followUser", function(guid){
@@ -272,7 +274,7 @@ module.exports = baseVw.extend({
       this.userProfileFetchParameters = $.param({'guid': this.pageID});
     }
 
-    this.userProfile.fetch({
+    this.userProfileFetch = this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
       //timeout: 4000,
@@ -281,7 +283,6 @@ module.exports = baseVw.extend({
         if (self.isRemoved()) return;
 
         if (response.profile){
-          $('.js-loadingModal').addClass('hide');
           if (self.options.ownPage === true){
             model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash);
             model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash);
@@ -296,21 +297,16 @@ module.exports = baseVw.extend({
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
           self.render();
+          !self.currentItemHash && self.loadingDeferred.resolve();
         }else{
           //model was returned as a blank object
-          $('.js-loadingModal').addClass('hide');
-          messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
-          self.bindModalCloseHandler();
+          self.loadingDeferred.reject();
         }
       },
       error: function(model, response){
         if (self.isRemoved()) return;
 
-        $('.js-loadingModal').addClass('hide');
-        messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
-        self.bindModalCloseHandler();
-        self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
-        self.render();
+        self.loadingDeferred.reject();
       },
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
@@ -320,15 +316,29 @@ module.exports = baseVw.extend({
     });
   },
 
-  bindModalCloseHandler: function(e) {
-    if (this.modalCloseHandler) return;
-
-    this.modalCloseHandler = function() {
-      window.history.back();
+  loadingConfig: function() {
+    var config = {
+      promise: this.loadingDeferred.promise(),
+      cancel: () => {
+        this.userProfileFetch && this.userProfileFetch.abort();
+        this.itemFetch && this.itemFetch.abort();
+      }
     };
+    
+    if (this.currentItemHash) {
+      config.connectText = window.polyglot.t('pageConnectingMessages.listingConnect').replace('${listing}', this.currentItemHash);
+      config.failedText = window.polyglot.t('pageConnectingMessages.listingFail');
+    } else if (this.options.handle) {
+      config.connectText = window.polyglot.t('pageConnectingMessages.handleConnect').replace('${handle}', this.options.handle);
+      config.failedText = window.polyglot.t('pageConnectingMessages.handleFail');
+    } else {
+      config.connectText = window.polyglot.t('pageConnectingMessages.userConnect').replace('${guid}', this.pageID);
+      config.failedText = window.polyglot.t('pageConnectingMessages.userFail');
+      // config.connectTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
+      // config.failedTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
+    }
 
-    messageModal.$el.find('.js-closeIndexModal')
-      .one('click', this.modalCloseHandler);
+    return config;
   },
 
   render: function(){
@@ -570,7 +580,6 @@ module.exports = baseVw.extend({
   },
 
   toggleFollowButtons: function(followed) {
-    "use strict";
     var followBtn = this.$el.find('.js-follow'),
         unfollowBtn = this.$el.find('.js-unfollow');
     if(followed === true){
@@ -583,7 +592,6 @@ module.exports = baseVw.extend({
   },
 
   fetchListings: function() {
-    "use strict";
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
@@ -815,7 +823,7 @@ module.exports = baseVw.extend({
     } else {
       this.itemFetchParameters = $.param({'id': hash, 'guid': this.pageID});
     }
-    this.item.fetch({
+    this.itemFetch = this.item.fetch({
       data: self.itemFetchParameters,
       //timeout: 4000,
       success: function(model, response){
@@ -843,14 +851,13 @@ module.exports = baseVw.extend({
   },
 
   renderItem: function(hash){
-    "use strict";
     var self = this;
     this.setItem(hash, function(model, response) {
           if (response.vendor_offer){
             self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
+            self.loadingDeferred.resolve();
           }else{
-            messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
-            window.history.back();
+            self.loadingDeferred.reject();
           }
         }
     );

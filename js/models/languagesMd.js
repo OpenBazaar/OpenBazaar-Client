@@ -439,6 +439,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
           badJSON: "The JSON data returned from the server was malformed"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -1026,6 +1034,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Sommige of all uw foto's konden niet ge-upload worden omdat u hiermee de maximumhoeveelheid zou overschrijden.",
           badJSON: "De JSON data die ontvangen was van de server was misvormd"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -1570,6 +1586,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
+        },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -2141,6 +2165,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
+        },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -2721,6 +2753,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosTitle: "Troppe foto",
           tooManyPhotosBody: "Ad alcune o a tutte le foto &egrave; stato impedito di essere caricate perch&egrave; avresti superato la massima quantit&agrave; consentita.",
           badJSON: "I dati JSON restituiti dal server erano malformati"
+        },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -3314,6 +3354,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Toutes ou une partie de vos photos n'ont pas pu être mises en ligne parce que vous avez probablement dépassé la quantité maximale autorisée.",
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le   <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -3888,6 +3936,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -4460,6 +4516,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "о нас",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -5031,6 +5095,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosTitle: "Príliš veľa obrázkov",
           tooManyPhotosBody: "Niektoré, alebo žiadna z Vašich fotiek neboli nahrané na server, pretože ste prekročili povolený limit na počet obrázkov.",
           badJSON: "JSON dáta vrátené zo serveru sú chybné"
+        },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
         },
         aboutSection: {
 			about: "<p>OpenBazaar je sieť používateľov, ktorí za Bitcoiny priamo medzi sebou kupujú a predávaju tovary a služby. Táto sieť je decentralizovaná a nie je kontrolovaná žiadnou organizáciou.</p><p>Tento software je open source a licencovaný pod MIT licenciou. Jeho kód si môžete pozrieť na <a href=\"https://github.com/OpenBazaar/\">Githube</a>.</p><p>OpenBazaar je komunitný projekt a preto vítame akýkoľvek spôsob spolupráce na našom <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> kanáli, alebo <a href=\"http://www.reddit.com/r/openbazaar\">subreddite</a>.</p><p>Ak potrebujete pomoc, prečítajte si <a href=\"https://blog.openbazaar.org/tag/tutorial/\">Používateľskú Príručku</a>.</p><p>Ak máte aj napriek tomu nejaké otázky, otvorte tiket u našej <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">podpori</a>.</p>",
@@ -5608,6 +5680,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -6182,6 +6262,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
+        },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -6763,6 +6851,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -7339,6 +7435,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -7899,6 +8003,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosTitle: "Too many photos", //notTranslated
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
+        },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
         },
         aboutSection: {
           about: "", //notTranslated
@@ -8474,6 +8586,14 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Upewnij się, że wprowadziłeś poprawne dane. Sprawdź stan konta oraz adresu zwrotów.",
           pageUnavailable: "Ta strona jest obecnie niedostępna."
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },        
         aboutSection: {
           about: "<p>OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p><p>Oprogramowanie jest otwarte, udostępniane na licencji MIT. Kod dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githubie</a>.</p><p>OpenBazaar jest projektem społeczośniowym i zachęcamy do wejścia na nasz kanał <a href=\"https://openbazaar-slackin -drwasho.herokuapp.com/\">Slack</a> lub odwiedzenia naszego <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p><p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">poradnik</a> do OpenBazaar w wersji 1.0.</p><p>Jeśli nadaj masz jakieś pytania, kliknij <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">tutaj</a>.</p>",
           contributors: "<p>OpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy, którzy poświęcają swój czas, by uczynić handel wolnym. Oto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub inny rodzaj uczestnictwa.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li><li>Michał Pado</li><li>programmerpeter</li></ul>",
@@ -9029,6 +9149,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Nogle eller alle dine billeder blev forhindret i at blive uploadet, da du ellers ville overskride det maksimalt tilladte antal.",
           badJSON: "Den JSON-data, der blev sendt tilbage fra serveren, var ikke formatteret korrekt"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },        
         aboutSection: {
           about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a>-kanal e ller på vores <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar er muliggjort af et internationalt fællesskab af udviklere og frivillige, der bidrager med deres tid for at gøre handel fri. Dette er en delvis liste over folk, der har bidraget til projektet, enten gennem kode eller anden assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -9616,6 +9744,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Algumas ou todas as suas fotos não puderam ser enviadas porque você excedeu a quantia máxima permitida.",
           badJSON: "Os dados JSON que retornaram do servidor tinham formato incorreto"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },        
         aboutSection: {
           about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
           contributors: "<p>O OpenBazaar se tornou realidade graças a uma comunidade internacional de desenvolvedores e pessoas voluntárias que contribuíram o seu tempo para ajudar na missão de fazer com que o comércio seja livre. Essa é uma lista parcial das pessoas que contribuíram para o projeto, seja através de programação ou outro tipo de assistência.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -10142,6 +10278,14 @@ module.exports = Backbone.Model.extend({
            pageUnavailable: "Ця сторінка зараз не доступна.",
            badHandle: "Не правильний OpenBazaar ID"
          },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },         
         aboutSection: {
            about: "<p>OpenBazaar це мережа з користувачів котрі куплють та продають товари та послуги безпосередньо один одному, використовуючи Біткоін. Ця мережа не має власника, не управляєтся будь якою організаціею, являється розподіленою децентралізованою системою що існує в мережі.</p><p>OpenBazaar программа з відкритим кодом та MIT ліцензіею. Ви можете переглянути код за посиланням <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar це колективний поект, і ми запрошуемо всіх до участі у його розробці до каналу <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a>, або <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Якщо вам потрібна допомога, прочитайте OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">інструкцію</a>.</p><p>Якщо у вас залишились питання, звертайтесь до служби підтримки (Англійською) <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
            contributors: "<p>OpenBazaar став можливим завдяки міжнародному співтовариству розробників та волонтерів, що витратили свій час на розробку проекту, та допомогли зробити торгівлю вільною. Це частковий список тих хто допоміг проекту написанням коду та іншою допомогою</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
