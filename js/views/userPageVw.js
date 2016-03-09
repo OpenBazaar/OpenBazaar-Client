@@ -26,14 +26,12 @@ var defaultItem = {
     "signature": "",
     "listing": {
       "shipping": {
-        "shipping_regions": [
-          "UNITED_STATES"
-        ],
+        "shipping_regions": [],
         "est_delivery": {
           "international": "",
           "domestic": ""
         },
-        "shipping_origin": "UNITED_STATES",
+        "shipping_origin": "",
         "flat_fee": {
           "fiat": {
             "price": {
@@ -51,7 +49,7 @@ var defaultItem = {
         "price_per_unit": {
           "fiat": {
             "price": "",
-            "currency_code": "usd"
+            "currency_code": ""
           }
         },
         "title": "",
@@ -792,6 +790,7 @@ module.exports = baseVw.extend({
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
+      userAddresses: self.options.userModel.get('shipping_addresses'),
       serverUrl: self.options.userModel.get('serverUrl'),
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,

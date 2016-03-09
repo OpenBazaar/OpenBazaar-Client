@@ -27,7 +27,8 @@ module.exports = baseVw.extend({
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'focus #inputExpirationDate': 'addDefaultTime',
-    'click .js-itemEditClearDate': 'clearDate'
+    'click .js-itemEditClearDate': 'clearDate',
+    'change #shipsToRegions': 'selectRegions'
   },
 
   MAX_PHOTOS: 10,
@@ -36,7 +37,8 @@ module.exports = baseVw.extend({
     var self=this,
         hashArray = this.model.get('vendor_offer').listing.item.image_hashes,
         nowDate = new Date(),
-        nowMonth = nowDate.getMonth()+ 1;
+        nowMonth = nowDate.getMonth()+ 1,
+        noShipping = false;
 
     function padTime(val){
       "use strict";
@@ -46,6 +48,18 @@ module.exports = baseVw.extend({
         return "0" + val;
       }
     }
+
+    this.regions = {
+      "EUROPEAN_UNION": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK", "ESTONIA",
+        "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "IRELAND", "ITALY", "LATVIA", "LITHUANIA", "LUXEMBOURG",
+        "MALTA", "NETHERLANDS", "POLAND", "PORTUGAL", "ROMANIA", "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"],
+      "EUROPEAN_ECONOMIC_AREA": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK",
+        "ESTONIA", "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "ICELAND", "IRELAND", "ITALY", "LATVIA",
+        "LIECHTENSTEIN", "LITHUANIA", "LUXEMBOURG", "MALTA", "NETHERLANDS", "NORWAY", "POLAND", "PORTUGAL", "ROMANIA",
+        "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"]
+    };
+
+    this.prevShipsToVal = [];
 
     this.defaultDate = nowDate.getFullYear() + "-" + padTime(nowMonth) + "-" + padTime(nowDate.getDate()) + "T" + padTime(nowDate.getHours()) + ":" + padTime(nowDate.getMinutes());
     this.combinedImagesArray = [];
@@ -68,7 +82,6 @@ module.exports = baseVw.extend({
       var context = __.extend({}, self.model.toJSON(), { MAX_PHOTOS: self.MAX_PHOTOS });
 
       self.$el.html(loadedTemplate(context));
-      self.setFormValues();
 
       self.$photosModule = self.$('.js-photosModule');
 
@@ -109,8 +122,13 @@ module.exports = baseVw.extend({
         editor.subscribe('blur', self.validateDescription);
 
         //set chosen inputs
-        this.$('.chosen').chosen({width: '100%'});
+        this.$('.chosen').chosen({width: '100%'}).change(function(e){
+          self.shipsToChange(e);
+        });
+        this.$('.chosenRegions').chosen({width: '100%', disable_search: true});
       }, 0);
+
+      self.setFormValues();
     });
 
     return this;
@@ -125,8 +143,10 @@ module.exports = baseVw.extend({
     //hide or unhide shipping based on product type
     if(typeValue === "physical good") {
       this.enableShipping();
+      this.noShipping = false;
     } else {
       this.disableShipping();
+      this.noShipping = true;
     }
     //hide or unhide shipping based on free shipping
     if(this.model.get('vendor_offer').listing.shipping.free == true){
@@ -140,7 +160,15 @@ module.exports = baseVw.extend({
     }
     //add all countries to the Ships To select list
     var countries = new countriesModel();
-    var countryList = countries.get('countries');
+    //make a copy of the countries array
+    var countryList = countries.get('countries').slice(0);
+    countryList.unshift(
+        {
+          "name": window.polyglot.t('WorldwideShipping'),
+          "dataName": "ALL",
+          "code": "ALL",
+          "number": "1"
+        });
     var shipsTo = this.$el.find('#shipsTo');
     __.each(countryList, function(countryFromList, i){
       shipsTo.append('<option value="'+countryFromList.dataName+'">'+countryFromList.name+'</option>');
@@ -148,8 +176,11 @@ module.exports = baseVw.extend({
 
     var shipsToValue = this.model.get('vendor_offer').listing.shipping.shipping_regions;
     //if shipsToValue is empty, set it to the user's country
-    shipsToValue = shipsToValue.length > 0 ? shipsToValue : this.model.get('userCountry');
+    shipsToValue = shipsToValue.length > 0 ? shipsToValue : ["ALL"];
     shipsTo.val(shipsToValue);
+    this.prevShipsToVal = shipsToValue;
+    this.$('.chosen').trigger('chosen:updated');
+
 
     var keywordTags = this.model.get('vendor_offer').listing.item.keywords;
     keywordTags = keywordTags ? keywordTags.filter(Boolean) : [];
@@ -203,10 +234,34 @@ module.exports = baseVw.extend({
       if(this.$el.find('input[name=free_shipping]').val() == "false") {
         this.enableShippingPrice();
       }
+      this.noShipping = false;
     } else {
       this.disableShipping();
       this.disableShippingPrice();
+      this.noShipping = true;
     }
+  },
+
+  selectRegions: function(e){
+    var targ = this.$('#shipsToRegions'),
+        setCountries = this.regions[targ.val()],
+        shipsTo = this.$('#shipsTo'),
+        oldVal = shipsTo.val() || [],
+        wwIndex = oldVal.indexOf('ALL'),
+        newVal;
+
+    if(setCountries) {
+      if (wwIndex > -1) {
+        oldVal.splice(wwIndex, 1)
+      }
+      newVal = __.union(oldVal, setCountries);
+      this.$('#shipsTo').val(newVal);
+      this.$('.chosen').trigger('chosen:updated');
+      this.prevShipsToVal = newVal;
+    }
+    //reset to blank
+    targ.val("");
+    this.$('.chosenRegions').trigger('chosen:updated');
   },
 
   addDefaultTime: function(e){
@@ -217,6 +272,27 @@ module.exports = baseVw.extend({
       timeInput.val(this.defaultDate);
     }
     this.$el.find('.js-itemEditClearDateWrapper').removeClass('hide');
+  },
+
+  shipsToChange: function(e){
+    var newVal = $(e.target).val() || [],
+        newSelection = __.difference(newVal, this.prevShipsToVal),
+        wwNewIndex = newVal.indexOf('ALL');
+
+    //is the new value different from ALL?
+    if(newSelection[0] != "ALL"){
+      //if ALL was selected, remove it
+      if(wwNewIndex > -1){
+        newVal.splice(wwNewIndex, 1);
+      }
+    } else {
+      //if the new value ALL, remove everything else
+      newVal = ["ALL"];
+    }
+    $(e.target).val(newVal);
+    this.$('.chosen').trigger('chosen:updated');
+    this.prevShipsToVal = newVal;
+    this.$('.js-shipToWrapper').removeClass('invalid');
   },
 
   clearDate: function(){
@@ -272,7 +348,7 @@ module.exports = baseVw.extend({
 
     if (!imageFiles.length) return;
 
-    imageCount = imageFiles.length
+    imageCount = imageFiles.length;
 
     __.each(imageFiles, function(imageFile, i){
       var newImage = document.createElement("img"),
@@ -436,12 +512,12 @@ module.exports = baseVw.extend({
         //deleteThisItem,
         cCode = this.model.get('userCurrencyCode'),
         submitForm = this.$el.find('#contractForm')[0],
-        keywordsArray = this.inputKeyword.getTagValues();
+        keywordsArray = this.inputKeyword.getTagValues(),
+        shipsToInput = this.$('#shipsTo');
 
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;
-      var newTag = tag.replace(re, '');
-      return newTag;
+      return tag.replace(re, '');
     });
 
     this.$el.find('#inputCurrencyCode').val(cCode);
@@ -453,6 +529,17 @@ module.exports = baseVw.extend({
     this.$el.find('#inputShippingInternational').val(this.$el.find('#shippingPriceInternationalLocal').val());
 
     formData = new FormData(submitForm);
+
+    if(this.noShipping){
+      formData.append('ships_to', 'NA');
+    }
+
+    //make sure a ships to value is entered
+    if(!shipsToInput.val() && !this.noShipping){
+      this.$('.js-shipToWrapper').addClass('invalid');
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
+      return
+    }
 
     //add old and new image hashes
     __.each(this.model.get('imageHashesToUpload'), function(imHash){
@@ -528,7 +615,8 @@ module.exports = baseVw.extend({
       var invalidInputList = "";
       $(submitForm).find('input, textarea').each(function() {
         if($(this).is(":invalid")){
-          invalidInputList += "<br/>"+$(this).attr('id');
+          var inputName = $("label[for='"+$(this).attr('id')+"']").text() || $(this).attr('id');
+          invalidInputList += "<br/>"+inputName;
         }
       });
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");

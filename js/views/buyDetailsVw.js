@@ -8,7 +8,8 @@ Backbone.$ = $;
 module.exports = Backbone.View.extend({
 
   events: {
-    'change .js-buyWizardQuantity': 'changeQuantity'
+    'change .js-buyWizardQuantity': 'changeQuantity',
+    'click .js-goToPurchases': 'goToPurchases'
   },
 
   initialize: function() {
@@ -114,6 +115,11 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.$el.find('.js-buyWizardQuantity').prop('disabled', true);
     this.$el.find('#buyWizardQuantity .numberSpinnerUp, #buyWizardQuantity .numberSpinnerDown').addClass('hide');
+  },
+
+  goToPurchases: function(){
+    window.obEventBus.trigger('closeBuyWizard');
+    Backbone.history.navigate('#transactions/purchases', {trigger:true});
   },
 
   close: function(){
