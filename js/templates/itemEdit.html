@@ -92,9 +92,9 @@
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="priceLocal">
-                  <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>) 
-                  <a href="#settings" class="underline fontSize10 textOpacity50 noOverflow width80"><%= polyglot.t('ChangeCurrency') %></a>
+                  <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)
                 </label>
+                <a href="#settings" class="underline fontSize10 textOpacity50 noOverflow width80"><%= polyglot.t('ChangeCurrency') %></a>
               </div>
             </div>
             <div class="flexCol-5">
@@ -216,6 +216,7 @@
                 <div class="fieldItem padding0">
                   <div class="fieldItem-selectWrapper noIcon">
                     <select class="chosenRegions custCol-text" id="shipsToRegions">
+                      <option></option>
                       <option value="EUROPEAN_UNION">European Union</option>
                       <option value="EUROPEAN_ECONOMIC_AREA">European Economic Area</option>
                     </select>

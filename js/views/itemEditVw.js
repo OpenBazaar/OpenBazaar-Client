@@ -243,19 +243,25 @@ module.exports = baseVw.extend({
   },
 
   selectRegions: function(e){
-    var setCountries = this.regions[$(e.target).val()],
+    var targ = this.$('#shipsToRegions'),
+        setCountries = this.regions[targ.val()],
         shipsTo = this.$('#shipsTo'),
         oldVal = shipsTo.val() || [],
         wwIndex = oldVal.indexOf('ALL'),
         newVal;
 
-    if(wwIndex > -1){
-      oldVal.splice(wwIndex, 1)
+    if(setCountries) {
+      if (wwIndex > -1) {
+        oldVal.splice(wwIndex, 1)
+      }
+      newVal = __.union(oldVal, setCountries);
+      this.$('#shipsTo').val(newVal);
+      this.$('.chosen').trigger('chosen:updated');
+      this.prevShipsToVal = newVal;
     }
-    newVal = __.union(oldVal, setCountries);
-    this.$('#shipsTo').val(newVal);
-    this.$('.chosen').trigger('chosen:updated');
-    this.prevShipsToVal = newVal;
+    //reset to blank
+    targ.val("");
+    this.$('.chosenRegions').trigger('chosen:updated');
   },
 
   addDefaultTime: function(e){
