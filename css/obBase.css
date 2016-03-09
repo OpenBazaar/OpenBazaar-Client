@@ -4118,6 +4118,54 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: -1px; 
 }
 
+.page-connect-modal {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.page-connect-modal .modal-child {
+  width: 100%;
+  height: 100%;
+}
+
+.page-connect-modal .spinner-with-logo {
+  /*
+    so it lines up with the loading modal,
+    otherwise there's a jump when this guy loads
+    right after the loading one.
+  */
+  margin-top: -37px;
+}
+
+.page-connect-modal .spinner-with-logo .icon-no-connection {
+  left: 22px;
+}
+
+.page-connect-modal .content {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 50%;
+  margin-top: 90px;  
+  text-align: center;
+}
+
+.page-connect-modal .content .btn {
+  float: none;
+}
+
+.page-connect-modal.mode-connecting .btn-retry,
+.page-connect-modal.mode-connecting .btn-back,
+.page-connect-modal.mode-connecting .icon-no-connection {
+  display: none;
+}
+
+.page-connect-modal.mode-failed-connect .btn-cancel,
+.page-connect-modal.mode-failed-connect .spinner {
+  display: none;
+}
+
 /*========== utility classes ==========*/
 
 /* the #ov1 id is on the HTML tag. It is used to force specificity
