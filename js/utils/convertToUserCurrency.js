@@ -37,8 +37,6 @@ module.exports = function (priceIn, oneVendorCurrencyUnitInBTC, currencyCodeIn, 
         typeof callback === 'function' && callback(0, 0, true,'No currency code provided');
     }
 
-    console.log(currencyCodeIn)
-
     currencyCodeIn = currencyCodeIn.toUpperCase();
     currencyCodeOut = currencyCodeOut.toUpperCase();
 
