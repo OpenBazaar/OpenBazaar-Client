@@ -109,6 +109,8 @@ module.exports = baseVw.extend({
 
   remove: function(){
     this.scrollHandler && this.$headContainer.off('scroll', this.scrollHandler);
+
+    baseVw.prototype.remove.apply(this, arguments);
   }
 
 });
