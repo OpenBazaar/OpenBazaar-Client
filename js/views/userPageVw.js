@@ -65,7 +65,6 @@ var defaultItem = {
         {
           "fee": 0,
           "name": "",
-          "blockchain_id": "",
           "avatar": "",
           "short_description": "",
           "pubkeys": {
@@ -756,7 +755,8 @@ module.exports = baseVw.extend({
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
-      serverUrl: this.options.userModel.get('serverUrl')
+      serverUrl: this.options.userModel.get('serverUrl'),
+      reverse: true
     });
     this.subViews.push(this.followerList);
 
@@ -777,7 +777,8 @@ module.exports = baseVw.extend({
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
-      serverUrl: this.options.userModel.get('serverUrl')
+      serverUrl: this.options.userModel.get('serverUrl'),
+      reverse: true
     });
     this.subViews.push(this.followingList);
     
