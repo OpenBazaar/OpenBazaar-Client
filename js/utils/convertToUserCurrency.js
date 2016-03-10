@@ -42,7 +42,7 @@ module.exports = function (priceIn, oneVendorCurrencyUnitInBTC, currencyCodeIn, 
     currencyCodeIn = currencyCodeIn.toUpperCase();
     currencyCodeOut = currencyCodeOut.toUpperCase();
 
-    priceInBTC = (currencyCodeIn == "BTC") ? priceIn : Number(priceIn / oneVendorCurrencyUnitInBTC);
+    priceInBTC = (currencyCodeIn == "BTC") ? Number(priceIn) : Number(priceIn / oneVendorCurrencyUnitInBTC);
     inToOutBTCRatio = (currencyCodeIn == currencyCodeOut) ? 1 : window.currentBitcoin/oneVendorCurrencyUnitInBTC;
     priceToFormat = (currencyCodeIn == currencyCodeOut) ? priceIn : priceInBTC*inToOutBTCRatio;
 
