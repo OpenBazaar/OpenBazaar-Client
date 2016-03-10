@@ -141,17 +141,20 @@ module.exports = baseVw.extend({
       switch(notif.type) {
         case "follow":
           new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
-            icon: avatar
+            icon: avatar,
+            silent: true
           });
           break;
         case "dispute_open":
           new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
-            icon: avatar
+            icon: avatar,
+            silent: true
           });
           break;
         case "new order":
           new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
-            icon: avatar
+            icon: avatar,
+            silent: true
           });
           break;
       }

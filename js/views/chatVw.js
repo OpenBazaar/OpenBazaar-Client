@@ -285,7 +285,8 @@ module.exports = baseVw.extend({
         new Notification(msg.handle || msg.sender + ':', {
           body: msg.message,
           icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
-            '&guid=' + msg.sender : '/imgs/defaultUser.png'
+            '&guid=' + msg.sender : '/imgs/defaultUser.png',
+          silent: true
         });
 
         app.playNotificationSound();
@@ -294,7 +295,8 @@ module.exports = baseVw.extend({
       new Notification(msg.handle || msg.sender + ':', {
         body: msg.message,
         icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
-        '&guid=' + msg.sender : '/imgs/defaultUser.png'
+        '&guid=' + msg.sender : '/imgs/defaultUser.png',
+        silent: true
       });
 
       app.playNotificationSound();
