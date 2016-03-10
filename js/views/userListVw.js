@@ -65,6 +65,11 @@ module.exports = Backbone.View.extend({
       self.renderUser(user);
     }, this);
 
+    //if at least one user was added, trigger call so parent can refresh searches
+    if(renderSet.length > 0){
+      this.trigger('usersAdded');
+    }
+
     this.nextUserToShow = this.nextUserToShow >= this.totalUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
   },
 

@@ -740,7 +740,7 @@ module.exports = baseVw.extend({
     this.$('.js-listingCount').html(model.length);
 
     if (model.length) {
-      new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
+      this.storeSearch = new window.List('searchStore', {valueNames: ['js-searchTitle'], page: 1000});
     }
   },
 
@@ -763,8 +763,17 @@ module.exports = baseVw.extend({
     this.$('.js-userFollowerCount').html(model.length);
 
     if (model.length) {
-      new window.List('searchFollowers', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
+      this.followersSearch = new window.List('searchFollowers', {
+        valueNames: ['js-searchName', 'js-searchHandle'],
+        page: 1000
+      });
     }
+
+    this.listenTo(this.followerList, 'usersAdded', ()=>{
+      var searchTerms = this.$('#inputFollowers').val();
+      this.followersSearch.reIndex();
+      searchTerms && this.followersSearch.search(searchTerms);
+    });
   },
 
   renderFollowing: function (model) {
@@ -791,9 +800,19 @@ module.exports = baseVw.extend({
     }
 
     if (model.length) {
-      new window.List('searchFollowing', {valueNames: ['js-searchName', 'js-searchHandle'], page: 1000});
+      this.followingSearch = new window.List('searchFollowing', {
+        valueNames: ['js-searchName', 'js-searchHandle'],
+        page: 1000
+      });
     }
+
+    this.listenTo(this.followerList, 'usersAdded', ()=>{
+      var searchTerms = this.$('#inputFollowing').val();
+      this.followingSearch.reIndex()
+      searchTerms && this.followingSearch.search(searchTerms);
+    });
   },
+
 
   setItem: function(hash, onSucceed){
     "use strict";
