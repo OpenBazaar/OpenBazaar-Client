@@ -147,17 +147,20 @@ module.exports = baseVw.extend({
       switch(notif.type) {
         case "follow":
           new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
-            icon: avatar
+            icon: avatar,
+            silent: true
           });
           break;
         case "dispute_open":
           new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
-            icon: avatar
+            icon: avatar,
+            silent: true
           });
           break;
         case "new order":
           new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
-            icon: avatar
+            icon: avatar,
+            silent: true
           });
           break;
       }
@@ -457,15 +460,8 @@ module.exports = baseVw.extend({
   },
 
   addressBarProcess: function(addressBarText){
-    // todo: show small spinnerin address bar, since handle check
-    // could take a little bit of time. Also, cancel request
-    // if new address text comes before another has been processed.
     app.router.translateRoute(addressBarText).done((route) => {
       Backbone.history.navigate(route, {trigger:true});
-    }).fail((reason) => {
-      if (reason === 'bad-handle') {
-        this.addressInput.val(this._lastSetAddressBarText || '');
-      }
     });
   },
 

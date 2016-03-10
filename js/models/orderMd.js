@@ -85,7 +85,7 @@ module.exports = window.Backbone.Model.extend({
         var matchedCountry = countryArray.filter(function (value) {
           return value.dataName == region;
         });
-        response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
+        matchedCountry[0] && response.vendor_offer.listing.shipping.shipping_regionsDisplay.push(matchedCountry[0].name);
       });
     } else {
       response.invalidData = true;

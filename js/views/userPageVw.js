@@ -1,3 +1,5 @@
+"use strict";
+
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
@@ -26,14 +28,12 @@ var defaultItem = {
     "signature": "",
     "listing": {
       "shipping": {
-        "shipping_regions": [
-          "UNITED_STATES"
-        ],
+        "shipping_regions": [],
         "est_delivery": {
           "international": "",
           "domestic": ""
         },
-        "shipping_origin": "UNITED_STATES",
+        "shipping_origin": "",
         "flat_fee": {
           "fiat": {
             "price": {
@@ -51,7 +51,7 @@ var defaultItem = {
         "price_per_unit": {
           "fiat": {
             "price": "",
-            "currency_code": "usd"
+            "currency_code": ""
           }
         },
         "title": "",
@@ -65,7 +65,6 @@ var defaultItem = {
         {
           "fee": 0,
           "name": "",
-          "blockchain_id": "",
           "avatar": "",
           "short_description": "",
           "pubkeys": {
@@ -168,6 +167,7 @@ module.exports = baseVw.extend({
 
     var self = this;
     this.options = options || {};
+
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
     userProfile: this is set by main.js, it is not the same as the page's userProfile, it belongs to the current user
@@ -218,8 +218,7 @@ module.exports = baseVw.extend({
       }
     };
 
-    //show loading modal before fetching user data
-    $('.js-loadingModal').removeClass('hide');
+    this.loadingDeferred = $.Deferred();
 
     //listen to follow and unfollow events
     this.listenTo(window.obEventBus, "followUser", function(guid){
@@ -274,7 +273,7 @@ module.exports = baseVw.extend({
       this.userProfileFetchParameters = $.param({'guid': this.pageID});
     }
 
-    this.userProfile.fetch({
+    this.userProfileFetch = this.userProfile.fetch({
       data: self.userProfileFetchParameters,
       processData: true,
       //timeout: 4000,
@@ -283,7 +282,6 @@ module.exports = baseVw.extend({
         if (self.isRemoved()) return;
 
         if (response.profile){
-          $('.js-loadingModal').addClass('hide');
           if (self.options.ownPage === true){
             model.set('headerURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').header_hash);
             model.set('avatarURL', self.options.userModel.get('serverUrl') + "get_image?hash=" + model.get('profile').avatar_hash);
@@ -298,21 +296,16 @@ module.exports = baseVw.extend({
           self.model.set({user: self.options.userModel.toJSON(), page: model.toJSON()});
           self.model.set({ownPage: self.options.ownPage});
           self.render();
+          !self.currentItemHash && self.loadingDeferred.resolve();
         }else{
           //model was returned as a blank object
-          $('.js-loadingModal').addClass('hide');
-          messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
-          self.bindModalCloseHandler();
+          self.loadingDeferred.reject();
         }
       },
       error: function(model, response){
         if (self.isRemoved()) return;
 
-        $('.js-loadingModal').addClass('hide');
-        messageModal.show(window.polyglot.t('errorMessages.pageUnavailable'), window.polyglot.t('errorMessages.userError') + "<br/><br/>" + self.pageID);
-        self.bindModalCloseHandler();
-        self.model.set({user: self.options.userModel.toJSON(), page: {profile: ""}});
-        self.render();
+        self.loadingDeferred.reject();
       },
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
@@ -322,15 +315,29 @@ module.exports = baseVw.extend({
     });
   },
 
-  bindModalCloseHandler: function(e) {
-    if (this.modalCloseHandler) return;
-
-    this.modalCloseHandler = function() {
-      window.history.back();
+  loadingConfig: function() {
+    var config = {
+      promise: this.loadingDeferred.promise(),
+      cancel: () => {
+        this.userProfileFetch && this.userProfileFetch.abort();
+        this.itemFetch && this.itemFetch.abort();
+      }
     };
+    
+    if (this.currentItemHash) {
+      config.connectText = window.polyglot.t('pageConnectingMessages.listingConnect').replace('${listing}', this.currentItemHash);
+      config.failedText = window.polyglot.t('pageConnectingMessages.listingFail');
+    } else if (this.options.handle) {
+      config.connectText = window.polyglot.t('pageConnectingMessages.handleConnect').replace('${handle}', this.options.handle);
+      config.failedText = window.polyglot.t('pageConnectingMessages.handleFail');
+    } else {
+      config.connectText = window.polyglot.t('pageConnectingMessages.userConnect').replace('${guid}', this.pageID);
+      config.failedText = window.polyglot.t('pageConnectingMessages.userFail');
+      // config.connectTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
+      // config.failedTooltip = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere, lectus quis euismod vestibulum, sapien justo laoreet ante, sit amet mollis nibh diam cursus massa. Duis a eros dapibus, ultrices tortor nec, sodales magna.';
+    }
 
-    messageModal.$el.find('.js-closeIndexModal')
-      .one('click', this.modalCloseHandler);
+    return config;
   },
 
   render: function(){
@@ -355,7 +362,7 @@ module.exports = baseVw.extend({
       self.undoCustomAttributes.secondary_color = self.model.get('page').profile.secondary_color;
       self.undoCustomAttributes.text_color = self.model.get('page').profile.text_color;
       self.setCustomStyles();
-      self.setState(self.state, self.currentItemHash);
+      self.setState(self.state, self.currentItemHash, { replaceHistory: true });
 
       //check if user is blocked
       if(!self.options.ownPage && isBlocked) {
@@ -437,12 +444,14 @@ module.exports = baseVw.extend({
     }
   },
 
-  setState: function(state, hash) {
+  setState: function(state, hash, options) {
     "use strict";
     var currentAddress,
         addressState,
         currentHandle = this.model.get('page').profile.handle,
         isItemType = false;
+
+    options = options || {};
 
     if(state === "listing"){
       //clear old templates
@@ -455,19 +464,19 @@ module.exports = baseVw.extend({
     }else if(state === "listingNew"){
       this.tabClick(this.$el.find(".js-storeTab"), this.$el.find(".js-store"));
       $('#obContainer').scrollTop(352);
-      this.addTabToHistory('listingNew');
+      this.addTabToHistory('listingNew', options.replaceHistory);
       this.sellItem();
     } else if(state === "createStore") {
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
-      this.addTabToHistory('about');
+      this.addTabToHistory('about', options.replaceHistory);
       this.createStore();
     } else if(state === "becomeModerator"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
-      this.addTabToHistory('about');
+      this.addTabToHistory('about', options.replaceHistory);
       this.showModeratorModal();
     } else if(state === "customize"){
       this.tabClick(this.$el.find(".js-aboutTab"), this.$el.find(".js-about"));
-      this.addTabToHistory('about');
+      this.addTabToHistory('about', options.replaceHistory);
       this.customizePage();
     }else if(state == "store"){
       //if this page is not a vendor, don't go to their store
@@ -477,7 +486,7 @@ module.exports = baseVw.extend({
         state="about";
       }
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
-      this.addTabToHistory(state);
+      this.addTabToHistory(state, options.replaceHistory);
     }else if(state){
       this.tabClick(this.$el.find(".js-" + state + "Tab"), this.$el.find(".js-" + state));
     }else{
@@ -572,7 +581,6 @@ module.exports = baseVw.extend({
   },
 
   toggleFollowButtons: function(followed) {
-    "use strict";
     var followBtn = this.$el.find('.js-follow'),
         unfollowBtn = this.$el.find('.js-unfollow');
     if(followed === true){
@@ -585,7 +593,6 @@ module.exports = baseVw.extend({
   },
 
   fetchListings: function() {
-    "use strict";
     var self = this;
     this.listings.fetch({
       data: self.userProfileFetchParameters,
@@ -748,7 +755,8 @@ module.exports = baseVw.extend({
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
-      serverUrl: this.options.userModel.get('serverUrl')
+      serverUrl: this.options.userModel.get('serverUrl'),
+      reverse: true
     });
     this.subViews.push(this.followerList);
 
@@ -769,7 +777,8 @@ module.exports = baseVw.extend({
       message: "",
       ownFollowing: this.ownFollowing,
       hideFollow: true,
-      serverUrl: this.options.userModel.get('serverUrl')
+      serverUrl: this.options.userModel.get('serverUrl'),
+      reverse: true
     });
     this.subViews.push(this.followingList);
     
@@ -792,6 +801,7 @@ module.exports = baseVw.extend({
     this.item = new itemModel({
       userCurrencyCode: self.options.userModel.get('currency_code'),
       userCountry: self.options.userModel.get('country'),
+      userAddresses: self.options.userModel.get('shipping_addresses'),
       serverUrl: self.options.userModel.get('serverUrl'),
       showAvatar: false,
       avatar_hash: self.model.get('page').profile.avatar_hash,
@@ -816,7 +826,7 @@ module.exports = baseVw.extend({
     } else {
       this.itemFetchParameters = $.param({'id': hash, 'guid': this.pageID});
     }
-    this.item.fetch({
+    this.itemFetch = this.item.fetch({
       data: self.itemFetchParameters,
       //timeout: 4000,
       success: function(model, response){
@@ -844,14 +854,13 @@ module.exports = baseVw.extend({
   },
 
   renderItem: function(hash){
-    "use strict";
     var self = this;
     this.setItem(hash, function(model, response) {
           if (response.vendor_offer){
             self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-item'));
+            self.loadingDeferred.resolve();
           }else{
-            messageModal.show(window.polyglot.t('errorMessages.notFoundError'), window.polyglot.t('Item'));
-            window.history.back();
+            self.loadingDeferred.reject();
           }
         }
     );
@@ -943,10 +952,10 @@ module.exports = baseVw.extend({
     showContent.removeClass('hide');
   },
 
-  addTabToHistory: function(state){
+  addTabToHistory: function(state, replace){
     "use strict";
     //add action to history if not an item
-    Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state);
+    Backbone.history.navigate('#userPage/'+this.model.get('page').profile.guid + "/" + state, { replace: true });
   },
 
   sellItem: function(){

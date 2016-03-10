@@ -243,7 +243,7 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
       if (data.success) {
         // refresh the current route
         Backbone.history.navigate('blah-blah-blah');
-        Backbone.history.navigate(route, { trigger: true });
+        Backbone.history.navigate(route, { replace: true, trigger: true });
       } else {
         launchServerConnect();
       }

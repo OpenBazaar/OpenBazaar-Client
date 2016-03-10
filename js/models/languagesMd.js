@@ -111,6 +111,8 @@ module.exports = Backbone.Model.extend({
         Description: "Description",
         Reviews: "Reviews",
         Shipping: "Shipping",
+        CountryOfOrigin: "Country of Origin",
+        CanBeShippedTo: "Can Ship to You In:",
         Addresses: "Addresses",
         Files: "Files", //notTranslated
         NewAddress: "New Address",
@@ -122,6 +124,7 @@ module.exports = Backbone.Model.extend({
         Keywords: "Keywords",
         ShipsFrom: "Ships From",
         ShipsTo: "Ships To",
+        AddShipToRegion: "Add Shipping Region",
         Optional: "Optional",
         Customize: "Customize",
         Save: "Save",
@@ -129,11 +132,12 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address",
         BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...",
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
-        LocalCurrency: "Local currency",
-        TimeZone: "Time zone",
+        LocalCurrency: "Local Currency",
+        TimeZone: "Time Zone",
         ShipToName: "Name",
         ShipToStreet: "Street",
         ShipToCity: "City",
@@ -141,9 +145,9 @@ module.exports = Backbone.Model.extend({
         ShipToPostalCode: "Postal code",
         PostalCode: "Postal code",
         ShipToCountry: "Country",
-        EnableNotifications: "Enable notifications",
+        EnableNotifications: "Enable Notifications",
         EnableSSL: "Enable SSL",
-        LibbitcoinServerAddress: "Libbitcoin server address",
+        LibbitcoinServerAddress: "Libbitcoin Server Address",
         ServerIPPort: "Server IP:Port",
         All: "All",
         Name: "Name",
@@ -241,7 +245,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?",
         Basic: "Basic",
         Content: "Content",
-        StandardThemes: "Standard themes",
+        StandardThemes: "Standard Themes",
         NoPhotosAdded: "No Photos Added",
         Summary: "Summary",
         Funds: "Funds",
@@ -280,6 +284,8 @@ module.exports = Backbone.Model.extend({
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW",
         ShowBlockedUser: "Show this user's page except for NSFW listings",
         ShowNSFWContent: "Show this user's page, and all NSFW listings",
+        NoShipping: "Digital or Remote (No Shipping)",
+        WorldwideShipping: "Worldwide",
         ServerChangeWarningHeadline: "Caution: Record Your Settings",
         ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
         moderatorSettings: {
@@ -289,10 +295,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",
         EditModerator: "Moderator Settings",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details",
           ViewOnBlockchain: "View Details",
           SoldBy: "Vendor",
+          BuyerPayout: "Buyer Payout",
+          SellerPayout: "Seller Payout",
+          BuyerAmout: "Buyer Amout",
+          SellerAmout: "Seller Amout",
+          YouEarn: "You Earn",
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address",
           PurchasedBy: "Buyer",
           searchByOrder: "Search by order id or item name",
           sortByStatusAll: "All",
@@ -354,7 +401,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest",
           sortByDateOldest: "By Date, Oldest",
           PayPurchase: "Pay for this Purchase",
-          CompleteOrder: "Complete this Order",
+          CompleteOrder: "Complete Order",
           MarkAsShipped: "Mark as Shipped",
           RateThisTransaction: "Rate this Transaction",
           TransactionReview: "Transaction Review",
@@ -398,10 +445,18 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
           badJSON: "The JSON data returned from the server was malformed"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
-          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
+          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
+          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
           licensing: "<p>OpenBazaar is open source software under the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -411,7 +466,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network",
           searchingText: "Scanning your network for",
-          noResults: "No listings found in your network tagged with"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with"
         },
         filters: {
           pagesAllTypes: "All types",
@@ -454,7 +510,7 @@ module.exports = Backbone.Model.extend({
           LanguagePlaceholder: "Search for language",
           CountryPlaceholder: "Search for country",
           CurrencyPlaceholder: "Search for currency",
-          TimezonePlaceholder: "Search for time zone",
+          TimezonePlaceholder: "Search for time Zone",
           ShortDescriptionPlaceholder: "Say something interesting... (160 char max)",
           timeZone: "Select Your Time Zone",
           yourDetails: "Set Your Information",
@@ -556,7 +612,14 @@ module.exports = Backbone.Model.extend({
       {
         langName: "Dutch",
         langCode: "nl-NL",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        /*
+
+         Translator: @Dekker3D
+         03/09/2016: ~ 33 untranslated strings
+
+         Use capitalized keys for widely reused text that must be capitalized
+
+        */
         IHaveAWalletNow: "Ik heb nu een Wallet",
         Next: "Volgende",
         IAgree: "Akkoord",
@@ -659,6 +722,8 @@ module.exports = Backbone.Model.extend({
         Description: "Beschrijving",
         Reviews: "Reviews",
         Shipping: "Verzending",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Addressen",
         Files: "Bestanden",
         NewAddress: "Nieuw Adres",
@@ -677,6 +742,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Veranderingen",
         SaveChanges: "Sla Veranderingen Op",
         YourName: "Uw naam",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Vul uw Bitcoin adres in",
         BitcoinReturnAddressPlaceholder: "Vul uw Bitcoin adres in...",
         BitcoinReturnAddressInfo: "Als een terugbetaling verstuurd wordt, zal het geld naar een Bitcoin-adres verstuurd moeten worden. Vul hieronder alstublieft een adres voor uw Wallet in.",
@@ -837,10 +903,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Wordt een Moderator",
         EditModerator: "Moderator Instellingen",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Bestellingdetails",
           ViewOnBlockchain: "Bekijk Details",
           SoldBy: "Verkoper",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Koper",
           searchByOrder: "Zoek via bestellings-id of item naam",
           sortByStatusAll: "Alle",
@@ -946,10 +1053,18 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Sommige of all uw foto's konden niet ge-upload worden omdat u hiermee de maximumhoeveelheid zou overschrijden.",
           badJSON: "De JSON data die ontvangen was van de server was misvormd"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
-          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
+          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
+          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
           licensing: "<p>OpenBazaar is open source software under the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -959,7 +1074,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Uw netwerk wordt gescand",
           searchingText: "Uw netwerk wordt gescand naar",
-          noResults: "Geen aanbiedingen gevonden in uw netwerk met de tags"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Geen aanbiedingen gevonden in uw netwerk met de tags"
         },
         filters: {
           pagesAllTypes: "Alle types",
@@ -1108,8 +1224,8 @@ module.exports = Backbone.Model.extend({
 
         /*
 
-         Translators: @jjeffryes @gubatron @PolyDeveloper
-         02/28/2016: ~ 263 untranslated strings
+         Translators: @jjeffryes @gubatron @PolyDeveloper @nanomo
+         03/09/2016: ~ 273 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -1210,6 +1326,8 @@ module.exports = Backbone.Model.extend({
         Description: "Descripci&oacute;n",
         Reviews: "Cr&iacute;ticas",
         Shipping: "Envío",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Direcciones",
         Files: "Files", //notTranslated
         NewAddress: "Nueva Direcci&oacute;n",
@@ -1347,10 +1465,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -1409,7 +1568,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -1453,6 +1612,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -1466,7 +1633,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Todos los tipos",
@@ -1601,7 +1769,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translators: @z3ntu @johirner
-         02/28/2016: ~ 265 untranslated strings
+         03/09/2016: ~ 307 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -1705,6 +1873,8 @@ module.exports = Backbone.Model.extend({
         Description: "Beschreibung",
         Reviews: "Rezensionen",
         Shipping: "Versand",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adressen",
         NewAddress : "Neue Adresse",
         CurrentAddress : "Aktuelle Adressen",
@@ -1720,6 +1890,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "&Auml;nderungen speichern",
         YourName: "Dein Name",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -1834,7 +2005,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -1880,10 +2051,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -1905,6 +2117,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -1941,7 +2154,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -1985,6 +2198,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -1998,7 +2219,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Alle Arten",
@@ -2133,7 +2355,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @HostFat
-         02/28/2016: ~ 195 untranslated strings
+         03/09/2016: ~ 32 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -2241,6 +2463,8 @@ module.exports = Backbone.Model.extend({
         Description: "Descrizione",
         Reviews: "Recensioni",
         Shipping: "Spedizione",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Indirizzi",
         Files: "File",
         NewAddress: "Nuovo indirizzo",
@@ -2259,6 +2483,7 @@ module.exports = Backbone.Model.extend({
         Change: "Cambia",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Inserisci il tuo Indirizzo Bitcoin",
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
         BitcoinReturnAddressInfo: "Se sar&agrave; rilasciato un rimborso, i fondi dovranno essere inviati ad un indirizzo Bitcoin. Si prega di fornire qui sotto un indirizzo al vostro portafoglio.",
@@ -2417,10 +2642,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Diventa un moderatore",
         EditModerator: "Impostazioni moderatore",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Dettagli ordine",
           ViewOnBlockchain: "Mostra dettagli",
           SoldBy: "Venduto da",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Comprato da",
           searchByOrder: "Ricerca per ID di ordine o nome articolo",
           sortByStatusAll: "Tutti",
@@ -2526,10 +2792,18 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Ad alcune o a tutte le foto &egrave; stato impedito di essere caricate perch&egrave; avresti superato la massima quantit&agrave; consentita.",
           badJSON: "I dati JSON restituiti dal server erano malformati"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
-          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
+          about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar is made possible by an international community of developers and volunteers contributing their time to help make trade free. This is a partial list of people who have contributed to the project, either through code or other assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
+          support: "<p>You can help OpenBazaar in several ways on our mission to make trade free.</p><p>Buying and selling goods and services on the network helps grow our community and make the platform more attractive to new users. Politely asking Bitcoin-accepting businesses to sell on the platform helps spread the word and shows demand for peer to peer trade.</p><p>If you're a developer, check out <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">our Github</a> and see where you can help us. Beyond helping with the core code, we hope the permissionless and open source nature of the project means you will build new services on top of the existing network.</p><p>You can also <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donate Bitcoin</a> to the project, which will be used to defray costs for visiting conferences, offering bounties for development, and promoting OpenBazaar.</p><p>Please <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">join our Slack</a> if you have new ideas for OpenBazaar, or have questions for the core devs.</p>",
           licensing: "<p>OpenBazaar is open source software under the MIT license. This license is permissive and designed to allow people to freely reuse the code for other open source projects or for proprietary software. The full license text is below.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -2539,7 +2813,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scansione del tuo network",
           searchingText: "Scansionando il tuo network per",
-          noResults: "Nessun listino trovato sul tuo network taggato con"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Nessun listino trovato sul tuo network taggato con"
         },
         filters: {
           pagesAllTypes: "Tutti i tipi",
@@ -2639,13 +2914,13 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Pagamento diretto",
           SendDirectlyTo: "Invia pagamento diretto a %{handle}",
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
-          VendorShipsTo: "Questo fornitore navi a questi paesi",
-          DoesNotShipHere: "Questo venditore non invia qui",
+          VendorShipsTo: "Invia in",
+          DoesNotShipHere: "Non invia qui",
           Send: "Invia",
           BTCto: "BTC a",
           SendBTCtoAddress: "Invia %{amount} BTC a",
-          OpenAddress: "Apri indirizzo in portafoglio locale",
-          CopyAddress: "Copia indirizzo di pagamento negli appunti",
+          OpenAddress: "Apri indirizzo nel portafoglio locale",
+          CopyAddress: "Copia indirizzo negli appunti",
           RefreshPayment: "Aggiorna lo stato di pagamento",
           summaryMsg1: "Il tuo pagamento &egrave; stato trasmesso a %{recipient}",
           summaryMsg2: "Il tempo previsto per il processo di quest'ordine &egrave;",
@@ -2691,7 +2966,7 @@ module.exports = Backbone.Model.extend({
          Translator: @Kirvx
          Reviewer  : @JustinDrake
 
-         02/28/2016: ~ 0 untranslated strings
+         03/09/2016: ~ 25 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -2799,6 +3074,8 @@ module.exports = Backbone.Model.extend({
         Description: "Description",
         Reviews: "Avis",
         Shipping: "Expédition",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresses",
         Files: "Fichiers",
         NewAddress: "Nouvelle adresse",
@@ -2817,6 +3094,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Modifications",
         SaveChanges: "Enregistrer les modifications",
         YourName: "Votre nom",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Entrez votre adresse Bitcoin",
         BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
         BitcoinReturnAddressInfo: "Si un remboursement est émis, les fonds devront être envoyés à une adresse Bitcoin. Veuillez fournir ci-dessous une adresse de votre portefeuille.",
@@ -2975,10 +3253,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Devenir modérateur",
         EditModerator: "Paramètres de modérateur",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Détails de la commande",
           ViewOnBlockchain: "Voir les détails",
           SoldBy: "Vendu par",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
           sortByStatusAll: "Tout",
@@ -3000,6 +3319,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Litige clôturé",
           OrderStatus6: "Litige finalisé",
           OrderStatus7: "Remboursé",
+          AcceptDisputeResolution: "Accepter le paiement du litige",
           InEscrow: "- Sous séquestre",
           OrderTotal: "Total de la commande",
           OrderTotalInBTC: "Total BTC",
@@ -3008,6 +3328,7 @@ module.exports = Backbone.Model.extend({
           ShipTo: "Expédier à",
           ViewRating: "(Voir l'évaluation)",
           ContractDetails: "Détails du contrat",
+          HideDetails: "Masquer les détails",
           ConfirmOrder: "Confirmer cette commande",
           ReceivingAddress: "Adresse de réception",
           RecievingAddressPlaceholder: "L'adresse Bitcoin à laquelle vous recevrez le paiement",
@@ -3079,10 +3400,18 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Toutes ou une partie de vos photos n'ont pas pu être mises en ligne parce que vous avez probablement dépassé la quantité maximale autorisée.",
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
-          about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le   <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
+          about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le   <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>Vous pouvez aider OpenBazaar de plusieurs manières afin de faciliter les échanges commerciaux libres et gratuits.</p><p>Acheter et vendre des biens et services sur le réseau aide la communauté à s’agrandir et rend la plateforme plus attractive pour de nouveaux utilisateurs. Demandez poliment à des commerces qui acceptent Bitcoin de vendre sur la plateforme afin de faire passer le mot et démontrez la demande pour des échanges pair à pair.</p><p>Si vous êtes un développeur, allez sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">notre Github</a> et voyez où vous pouvez nous aider. En plus d’aider à coder, nous espérons que la nature open-source et sans permissions du projet vous donnera l’envie de construire de nouveaux services sur le réseau existant.</p><p>Vous pouvez également <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donner des Bitcoins</a> au projet, qui seront utilisés pour couvrir les frais des conférences, offrir des récompenses pour le développement, et promouvoir OpenBazaar.</p><p>Vous pouvez <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">rejoindre notre Slack</a> si vous avez de nouvelles idées pour OpenBazaar, ou si vous avez des questions sur le développement du logiciel.</p>",
+          support: "<p>Vous pouvez aider OpenBazaar de plusieurs manières afin de faciliter les échanges commerciaux libres et gratuits.</p><p>Acheter et vendre des biens et services sur le réseau aide la communauté à s’agrandir et rend la plateforme plus attractive pour de nouveaux utilisateurs. Demandez poliment à des commerces qui acceptent Bitcoin de vendre sur la plateforme afin de faire passer le mot et démontrez la demande pour des échanges pair à pair.</p><p>Si vous êtes un développeur, allez sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">notre Github</a> et voyez où vous pouvez nous aider. En plus d’aider à coder, nous espérons que la nature open-source et sans permissions du projet vous donnera l’envie de construire de nouveaux services sur le réseau existant.</p><p>Vous pouvez également <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donner des Bitcoins</a> au projet, qui seront utilisés pour couvrir les frais des conférences, offrir des récompenses pour le développement, et promouvoir OpenBazaar.</p><p>Vous pouvez <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">rejoindre notre Slack</a> si vous avez de nouvelles idées pour OpenBazaar, ou si vous avez des questions sur le développement du logiciel.</p>",
           licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -3092,7 +3421,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Analyse de votre réseau",
           searchingText: "Analyse de votre réseau pour",
-          noResults: "Aucune annonce trouvée dans votre réseau avec le mot-clé"
+          noResults: "Aucune annonce trouvée dans votre réseau",
+          noTaggedResults: "Aucune annonce trouvée dans votre réseau avec le mot-clé"
         },
         filters: {
           pagesAllTypes: "Tous les types",
@@ -3229,7 +3559,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @moldcraft
-         02/28/2016: ~ 265 untranslated strings
+         03/09/2016: ~ 307 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -3333,6 +3663,8 @@ module.exports = Backbone.Model.extend({
         Description: "Descriere",
         Reviews: "Recenzii",
         Shipping: "Livrare",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adrese",
         Files: "Files", //notTranslated
         NewAddress: "Adresă Nouă",
@@ -3349,6 +3681,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "Salvare Modificări",
         YourName: "Numele dvs.",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -3463,7 +3796,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -3509,10 +3842,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -3534,6 +3908,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -3570,7 +3945,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -3614,6 +3989,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -3627,7 +4010,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Toate tipurile",
@@ -3762,7 +4146,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @Squirrel2020
-         02/28/2016: ~ 194 untranslated strings
+         03/09/2016: ~ 238 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -3866,6 +4250,8 @@ module.exports = Backbone.Model.extend({
         Description: "Описание",
         Reviews: "Отзывы",
         Shipping: "Доставка",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Адреса",
         Files: "Files", //notTranslated
         NewAddress: "Новый адрес",
@@ -3882,6 +4268,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "Применить",
         YourName: "Ваше имя",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -4042,10 +4429,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Продано",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Куплено",
           searchByOrder: "Искать по номеру заказа",
           sortByStatusAll: "Все",
@@ -4067,6 +4495,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Всего заказов",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -4103,7 +4532,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -4147,6 +4576,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "о нас",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -4160,7 +4597,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Все типы",
@@ -4289,43 +4727,43 @@ module.exports = Backbone.Model.extend({
 
       {
 
-        langName: "Slovak",
+        langName: "Slovenský jazyk",
         langCode: "sk",
 
         /*
 
-         Translator: @michalvalasek
-         02/28/2016: ~ 265 untranslated strings
+         Translators: @michalvalasek @mariodian
+         03/09/2016: ~ 32 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
          */
 
-        IHaveAWalletNow: "I have a Wallet now", //notTranslated
+        IHaveAWalletNow: "Mám peňaženku",
         Next: "Ďalej",
         IAgree: "Súhlasím",
         Back: "Späť",
         EnterMessage: "Vložte správu...",
-        Recommended: "Recommended", //notTranslated
-        Reload: "Reload", //notTranslated
-        You: "You", //notTranslated
+        Recommended: "Odporúčané",
+        Reload: "Znovu načítať",
+        You: "Vy",
         Skip: "Preskočiť",
         Done: "Hotovo",
-        Status: "Status",
-        Navigation: "Navigation", //notTranslated
+        Status: "Stav",
+        Navigation: "Navigácia",
         Cancel: "Zrušiť",
         Yes: "Áno",
         No: "Nie",
         of: "z",
         Sell: "Predať",
-        New: "New",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        New: "Nové",
+        HighlightToStyle: "Označte text pre naštýlovanie",
         Excellent: "Výborné",
         Good: "Dobré",
         Poor: "Nič moc",
-        StillValidating: "Your handle is still validating", //notTranslated
-        CheckStatus: "Check Status", //notTranslated
-        ChangeCurrency: "Change currency", //notTranslated
+        StillValidating: "Vaše meno sa ešte stále overuje",
+        CheckStatus: "Skontrolovať stav",
+        ChangeCurrency: "Zmeniť menu",
         SKU: "SKU",
         Refurbished: "Renovované",
         Physical: "Fyzické",
@@ -4337,21 +4775,21 @@ module.exports = Backbone.Model.extend({
         Stores: "Obchody",
         Follow: "Sleduj",
         Feed: "Feed",
-        FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete.",
-        ViewListing: "View Listing", //notTranslated
+        FeedPlaceholder: "Feed updatov zo všetkých stránok, ktoré sledujete",
+        ViewListing: "Zobraziť Katalóg",
         Unfollow: "Zrušiť sledovanie",
         About: "Informácie",
         NoDescriptionAdded: "Bez popisu",
-        NoListings: "No listings", //notTranslated
+        NoListings: "Žiadne ponuky",
         CoverPhoto: "Titulná fotka",
         AboutEmpty: "Stránka s informáciami je prázdna...",
         Followers: "Followeri",
         Following: "Sledované stránky",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Followuje vás",
         Message: "Správa",
         Store: "Obchod",
         Edit: "Upraviť",
-        Clone: "Clone", //notTranslated
+        Clone: "Klonovať",
         Used: "Použité",
         Delete: "Vymazať",
         DontDelete: "Nevymazávajte",
@@ -4361,12 +4799,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Vitajte",
         CreateStore: "Vytvorte si obchod",
         GoToMyPage: "Moja stránka",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Zadajte #hry, #topanky alebo iný #tag...",
         SearchForPagesPlaceholder: "Vyhľadať podľa mena alebo kľúčového slova",
         SearchFeedPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
         SearchForFollowersPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
         SearchForUsersPlaceholder: "Vyhľadať podľa prezývky alebo OpenBazaar ID",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Zadajťe názov...",
         EstDeliveryDomesticPlaceholder: "3-5 pracovných dní",
         EstDeliveryInternationalPlaceholder: "7-15 pracovných dní",
         OrderProcessingTimePlaceholder: "1-2 pracovné dni",
@@ -4376,11 +4814,11 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Vložte pravidlá vrátenia tovaru...",
         CategoryPlaceholder: "Zadajte kategóriu",
         CategoryHelperText: "Kategórie slúžia na zoskupovanie a organizáciu položiek vo Vašom obchode.",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        KeywordsHelperText: "Pridaním tagu zvyšujete viditeľnosť Vašej ponuky na trhu.",
         ExpirationDateHelperText: "Zadajte dátum, kedy má byť tovar stiahnutý z Vášho obchodu.",
         ClearExpirationDate: "Zrušiť dátum stiahnutia tovaru.",
         ReturnPolicy: "Pravidlá vrátenie tovaru",
-        TermsAndConditions: "Obchodné podmienky",
+        TermsAndConditions: "Obchodné Podmienky",
         Photos: "Obrázky",
         Added: "Pridané",
         Categorization: "Kategorizácia",
@@ -4390,33 +4828,36 @@ module.exports = Backbone.Model.extend({
         Facebook: "Facebook",
         Instagram: "Instagram",
         Twitter: "Twitter",
-        PGPKey: "PGP Key",
-        Signature: "PGP Signature", //not translated
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        PGPKey: "PGP Kľúč",
+        Signature: "PGP Podpis",
+        SignaturePlaceholder: "Ak zadáte PGP kľúč je nutné použiť aj PGP podpis",
         Snapchat: "Snapchat",
         BUYNOW: "KÚPIŤ IHNEĎ",
         Description: "Popis",
-        Reviews: "Hodnotenia zákazníkov",
+        Reviews: "Hodnotenia",
         Shipping: "Doprava",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
-        Files: "Files", //notTranslated
-        NewAddress: "Nová adresa",
-        CurrentAddress: "Aktuálna adresa",
+        Files: "Súbory",
+        NewAddress: "Nová Adresa",
+        CurrentAddress: "Aktuálna Adresa",
         Returns: "Vrátenie",
-        ReturnsPolicy: "Pravidlá vrátenia",
+        ReturnsPolicy: "Pravidlá Vrátenia",
         Ampersand: "&",
         ShipsFrom: "Odosielané z",
         ShipsTo: "Odosielané do",
-        Optional: "Viliteľne",
+        Optional: "Voliteľné",
         Customize: "Upraviť",
         Save: "Uložiť",
         Changes: "Zmeny",
-        Change: "Change", //notTranslated
+        Change: "Zmeniť",
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
-        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinReturnAddress: "Zadajte Vašu Bitcoinovú Adresu",
+        BitcoinReturnAddressPlaceholder: "bitcoinová adresa na ktorú budú vrátené mince",
+        BitcoinReturnAddressInfo: "Pri žiadosti o vrátenie peňazí sa tieto prostriedky pošlú na Bitcoinovú adresu. Prosím zadajte nižšie adresu od Vašej peňaženky.",
         LocalCurrency: "Lokálna mena",
         TimeZone: "Časové pásmo",
         ShipToName: "Meno",
@@ -4428,27 +4869,27 @@ module.exports = Backbone.Model.extend({
         ShipToCountry: "Krajina",
         EnableNotifications: "Povoliť notifikácie",
         EnableSSL: "Povoliť SSL (šifrované spojenie)",
-        LibbitcoinServerAddress: "Libbitcoin server address",
+        LibbitcoinServerAddress: "Libbitcoin adresa servera",
         ServerIPPort: "Server IP:Port",
         All: "Všetko",
         Name: "Meno",
         Price: "Cena",
         Available: "K dispozícii",
-        Tags: "Tags", //notTranslated
+        Tags: "Tagy",
         Keywords: "Kľúčové slová",
         Type: "Typ",
         Condition: "Podmienka",
         NSFW: "18+ (obsah pre dospelých)",
-        Select: "Select", //not translated
-        Social: "Social", //not translated
-        Theme: "Theme", //not translated
-        Listing: "Listing", //not translated
-        Listings: "Listings", //not translated
-        ViewPage: "View page", //notTranslated
-        Pages: "Pages", //not translated
-        Page: "Page", //not translated
-        Language: "Language", //not translated
-        Reset: "Reset", //not translated
+        Select: "Zvoliť",
+        Social: "Sociálne",
+        Theme: "Téma",
+        Listing: "Ponuka",
+        Listings: "Ponuky",
+        ViewPage: "Zobraziť stránku",
+        Pages: "Stránky",
+        Page: "Stránka",
+        Language: "Jazyk",
+        Reset: "Resetovať",
         Local: "Lokálne",
         Domestic: "Vnútroštátne",
         Location: "Lokalita",
@@ -4457,7 +4898,7 @@ module.exports = Backbone.Model.extend({
         Free: "Zdarma",
         Category: "Kategória",
         ProcessingTime: "Čas spracovania",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Vybrať obrázky",
         UploadPhotos: "Nahrajte obrázky",
         DragOrUploadPhotos: "Nahrať obrázky",
         ExpirationDate: "Dátum expirácie",
@@ -4470,15 +4911,15 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Zvoľte titulný obrázok",
         AboutPlaceholder: "Plný popis",
         BackgroundColor: "Farba pozadia",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
-        NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
-        NotificationFollow: "vás od teraz sleduje",
-        NotificationDispute: "has opened a dispute", //not translated
-        NotificationDisputeClosed: "this dispute is closed", //not translated
-        NotificationRefund: "has refunded your order", //not translated
-        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
-        NotificationNewOrder: "has made a purchase", //not translated
+        NotificationPaymentSent: "Platba bola odoslaná na",
+        NotificationOrderFor: "zadal objednávku na",
+        NotificationOrderConfirmed: "Vaša objednávka bola potvrdená/odoslaná",
+        NotificationFollow: "Vás od teraz sleduje",
+        NotificationDispute: "začal spor",
+        NotificationDisputeClosed: "tento spor je ukončený",
+        NotificationRefund: "Vám vrátil peniaze",
+        NoticationOrderStatus: "Stav objednávky sa zmenil, kupujúci bol notifikovaný",
+        NotificationNewOrder: "urobil objednávku",
         NoNotifications: "Žiadne notifikácie",
         WelcomeToYourPage: "Vitajte na svojej stránke!",
         SearchForCategory: "Hľadať kategóriu",
@@ -4492,174 +4933,216 @@ module.exports = Backbone.Model.extend({
         AboutYourStore: "Popis Vášho obchodu",
         PaymentType: "Typ platby",
         ShipTo: "Odoslať do",
-        OrderDetails: "Detaily objednávky",
-        OrderSummary: "Zhrnutie objednávky",
-        AllListings: "Listingy",
+        OrderDetails: "Detaily Objednávky",
+        OrderSummary: "Zhrnutie Objednávky",
+        AllListings: "Všetky Ponuky",
         ComingSoon: "Čoskoro",
         PaymentPending: "Čaká sa na prijatie platby...",
         FinalizePurchase: "Dokončuje sa nákup",
         LoadingImage: "Nahráva sa obrázok...",
-        UploadAvatar: "Nahrať avatara",
-        SaveAvatar: "Uložiť avatara",
+        UploadAvatar: "Nahrať Avatara",
+        SaveAvatar: "Uložiť Avatara",
         NewAvatar: "Zvoľte nového avatara",
         NewCoverImage: "Zvoľte nový titulný obrázok",
-        Loading: "Loading...", // not translated
+        Loading: "Načítavam...",
         Purchases:"Nákupy",
-        Sales: "Sales", // not translated
-        Cases: "Cases", // not translated
-        Enter: "Enter", //notTranslated
-        Discover: "Discover", // not translated
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated
-        Blocked: "Blocked", // not translated
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
-        Advanced: "Advanced", // not translated
-        General: "General", // not translated
-        AllItems: "All Items", // not translated
-        FreeShipping: "Free Shipping", // not translated
-        DomesticShippingPrice: "Domestic Shipping Price", // not translated
-        InternationalShippingPrice: "International Shipping Price", // not translated
-        MinimumIs: "Minimum is", // not translated
-        Title: "Title", // not translated
-        DigitalItem: "Digital Item", // not translated
-        PhysicalItem: "Physical Item", // not translated
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
-        DomesticShippingTime: "Domestic Shipping Time", // not translated
-        InternationalShippingTime: "International Shipping Time", // not translated
-        DisplayNSFWcontent: "Display NSFW content?", // not translated
-        Basic: "Basic", // not translated
-        Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
-        NoPhotosAdded: "No Photos Added", // not translated
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "max length 20 char", //not translated
-        maxLength80: "max length 80 char", //not translated
-        maxLength200: "max length 200 char", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        NoReviews: "No reviews", //notTranslated
-        Moderator: "Moderator", // not translated
-        ActiveStore:"Store is Active", // not translated
-        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
-        Firewall: "Firewall", //notTranslated
-        ServerSettings: "Server Settings", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
-        HandleResolver: "Handle Resolver",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
-        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
-        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
-        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
-        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
-        moderatorSettings: { // not translated
-          DisputeResolution: "Dispute Resolution", //notTranslated
-          ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
+        Sales: "Predaje",
+        Cases: "Prípady",
+        Enter: "Vložiť",
+        Discover: "Objaviť",
+        Block: "Zablokovať",
+        Unblock: "Odblokovať",
+        Blocked: "Zablokovaný",
+        NoBlockedList: "Momentálne nikoho neblokujete.",
+        Advanced: "Rozšírené",
+        General: "Hlavné",
+        AllItems: "Všetky Položky",
+        FreeShipping: "Poštovné Zdarma",
+        DomesticShippingPrice: "Cena Vnútroštátneho Poštovného",
+        InternationalShippingPrice: "Cena Medzinárodneho Poštovného",
+        MinimumIs: "Minimum je",
+        Title: "Názov",
+        DigitalItem: "Digitálna Položka",
+        PhysicalItem: "Fyzická Položka",
+        MinimumPrice: "Minimálna suma je potrebná na pokrytie ceny Bitcoin transakcie",
+        DomesticShippingTime: "Vnútroštátna Dodacia Doba",
+        InternationalShippingTime: "Medzinárodná Dodacia Doba",
+        DisplayNSFWcontent: "Zobraziť nevhodný obsah?",
+        Basic: "Základné",
+        Content: "Obsah",
+        StandardThemes: "Štandardné témy",
+        NoPhotosAdded: "Nebol pridaný žiaden obrázok",
+        Summary: "Zhrnutie",
+        Funds: "Zdroje",
+        Discussion: "Diskusia",
+        Quantity: "Počet",
+        ShippingTo: "Poštovné Do",
+        ModeratedBy: "Moderuje",
+        Submit: "Odoslať",
+        maxLength20: "maximálna dľžka 20 znakov",
+        maxLength80: "maximálna dľžka 80 znakov",
+        maxLength200: "maximálna dľžka 200 znakov",
+        StoreModeratorsOptional: "Moderátori Obchodu (Nepovinné)",
+        Searchformoderators: "Hľadať moderátorov",
+        Contributors: "Prispievatelia",
+        Support: "Podpora",
+        Licensing: "Licencovanie",
+        On: "Zapnúť",
+        Off: "Vypnúť",
+        ClickToChange: "Zmeniť kliknutím",
+        NotProvided: "neposkytnuté",
+        NotFollowingAnyone: "Nesleduje nikoho",
+        NoFollowers: "Žiadny followeri",
+        NoReviews: "Žiadne recenzie",
+        Moderator: "Moderátor",
+        ActiveStore:"Obchod je Aktívny",
+        ActiveStoreDetails: "Neaktívne obchody a tovary nie su viditeľné pre ďalších používateľov",
+        Firewall: "Firewall",
+        ServerSettings: "Nastavenia Servera",
+        ReadOnly: "(Toto pole nie je editovateľné)",
+        HandleResolver: "Handle Resolver",
+        ShutDownServer: "Vypnúť Server",
+        LoadingBitcoinPrices: "Načítavam cenu Bitcoinu...",
+        ThisUserIsBlocked: "Tento používateľ je skrytý, pretože sa nachádza na Vašom zozname zablokovaných používateľov",
+        ThisUserIsNSFW: "Tento používateľ je skrytý, pretože jeho stránka je v zozname NSFW (stránky s nevhodným obsahom)",
+        ShowBlockedUser: "Zobraziť stránku tohto používateľa okrem NFWS ponúk (ponuky s nevhodným obsahom)",
+        ShowNSFWContent: "Zobraziť stránku tohto používateľa a všetky jeho NSFW ponuky (ponuky s nevhodným obsahom)",
+        ServerChangeWarningHeadline: "Pozor: Nahrajte si Vaše nastavenia",
+        ServerChangeWarning: "Odporúčame Vám aby ste si urobili kópiu Vašich predchádzajúcih nastavení, tak ako je ukázané nižšie. Vaše predchádzajúce prihlasovacie meno a heslo už viac nebudú fungovať.",
+        moderatorSettings: {
+          DisputeResolution: "Riešenie sporov",
+          ServiceFee: "Poplatok za službu",
+          ServiceFeeNote: "Min: 0%, Max: 25%"
         },
-        BecomeModerator: "Become a Moderator",//notTranslated
-        EditModerator: "Moderator Settings",//notTranslated
+        BecomeModerator: "Staňte sa Moderátorom",
+        EditModerator: "Moderátorské Nastavenia",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
-          ViewOnBlockchain: "View Details", //noTranslated
-          SoldBy: "Seller", // not translated
-          PurchasedBy: "Buyer", // not translated
-          searchByOrder: "Search by order id or item name", // not translated
-          sortByStatusAll: "All", // not translated
-          sortByStatus0: "Purchased", // not translated
-          sortByStatus1: "Ready to process (Paid in full)", // not translated
-          sortByStatus2: "Confirmed/Shipped", // not translated
-          sortByStatus3: "Completed (Funds Released)", // not translated
-          sortByStatus4: "Disputed", // not translated
-          OrderID: "Order ID", // not translated
-          OrderDate: "Order Date", // not translated
-          OrderStatus: "Order Status", // not translated
-          OrderStatus0: "Purchased (Not Funded)", // not translated
-          OrderStatus1: "Ready to process (Paid in full)", // not translated
-          OrderStatus2: "Confirmed/Shipped", // not translated
-          OrderStatus3: "Completed (Funds Released)", // not translated
-          OrderStatus4: "Disputed", // not translated
-          OrderStatusopen: "Disputed", // not translated
-          OrderStatus5: "Dispute Closed", // not translated
-          OrderStatusclosed: "Dispute Closed", // not translated
-          OrderStatus6: "Dispute Finalized",// not translated
-          OrderStatus7: "Refunded", // not translated
-          InEscrow: "- In Escrow", // not translated
-          OrderTotal: "Order Total", // not translated
-          OrderTotalInBTC: "BTC Total", // not translated
-          NoMessages: "No messages", //notTranslated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ViewRating: "(View Rating)", // not translated
-          ContractDetails: "Contract Details", //notTranslated
-          HideDetails: "Hide Details", //notTranslated
-          ConfirmOrder: "Confirm Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
-          Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on this order", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "File URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link (optional)", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          Moderator: "Moderator", //not translated
-          transferReceipt: "Transfer Receipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
-          MarkAsShipped: "Mark as Shipped", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoFileProvided: "No file provided", //notTranslated
-          None: "None", //notTranslated
-          NoneSent: "None sent", // not translated
-          ModerationFee: "Moderation Fee:", // not translated
-          DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Enter message...", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
-          SendMessage: "Send",// not translated
-          CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:", // not translated
-          StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE", // not translated
-          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
+          OrderDetails: "Detaily Objednávky",
+          ViewOnBlockchain: "Zobraziť Detaily",
+          SoldBy: "Predajca",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          PurchasedBy: "Kupujúci",
+          searchByOrder: "Vyhľadávať podla čísla objednávky alebo názvu položky",
+          sortByStatusAll: "Všetky",
+          sortByStatus0: "Kúpené",
+          sortByStatus1: "Pripravené na spracovanie (Plne uhradené)",
+          sortByStatus2: "Potvrdené/Odoslané",
+          sortByStatus3: "Skompletizované (Prostriedky boli uvoľnené)",
+          sortByStatus4: "Sporné",
+          OrderID: "Číslo Objednávky",
+          OrderDate: "Dátum Objednávky",
+          OrderStatus: "Stav Objednávky",
+          OrderStatus0: "Kúpené (Neuhradené)",
+          OrderStatus1: "Pripravené na spracovanie (Plne uhradené)",
+          OrderStatus2: "Potvrdené/Odoslané",
+          OrderStatus3: "Skompletizované (Prostriedky boli uvoľnené)",
+          OrderStatus4: "Sporné",
+          OrderStatusopen: "Sporné",
+          OrderStatus5: "Spor Uzavretý",
+          OrderStatusclosed: "Spor Uzavretý",
+          OrderStatus6: "Spor Ukončený",
+          OrderStatus7: "Peniaze Vrátené",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
+          InEscrow: "- V Escrow",
+          OrderTotal: "Celková Suma Objednávky",
+          OrderTotalInBTC: "BTC Celkovo",
+          NoMessages: "Žiadne správy",
+          PaymentProtection: "Platobná Ochrana",
+          ShipTo: "Odoslať na",
+          ViewRating: "(Zobraziť Hodnotenie)",
+          ContractDetails: "Detaily Kontraktu",
+          HideDetails: "Skryť Detaily",
+          ConfirmOrder: "Potvrdiť Objednávku",
+          ReceivingAddress: "Adresa Príjemcu",
+          RecievingAddressPlaceholder: "Bitcoinová adresa na ktorú budú prijaté prostriedky",
+          Comments: "Komentáre",
+          CommentsPlaceHolder: "Komentáre k tejto objednávke",
+          Shipper: "Položka odoslaná cez",
+          ShipperPlaceholder: "Názov spoločnosti, ktorá doručuje objednávku",
+          TrackingNumber: "Sledovacie Číslo",
+          TrackingNumberPlaceholder: "Sledovacie číslo položky",
+          EstimatedDelivery: "Predpokladané Doručenie",
+          EstimatedDeliveryPlaceholder: "Predpokladaný datúm, kedy bude daná položka doručená",
+          URL: "URL Súboru",
+          URLPlaceholder: "Odkaz na stiahnutie, rozvrh, alebo viac informácií",
+          Password: "Heslo",
+          PasswordPlaceholder: "Heslo nevyhnutné pre odkaz (voliteľné)",
+          DirectTransaction: "Priama transakcia",
+          ModeratedTransaction: "Moderovaná transakcia",
+          Seller: "Predajca",
+          Buyer: "Kupujúci",
+          Moderator: "Moderátor",
+          transferReceipt: "Potvrdenka Prenosu",
+          copyTxid: "skopírovať číslo transakcie",
+          Close: "Zatvoriť",
+          FundOrder: "Zaplatiť Objednávku",
+          sortByDateNewest: "Podľa Dátumu, Najnovšie",
+          sortByDateOldest: "Podľa Dátumu, Najstaršie",
+          PayPurchase: "Zaplatiť za tento Nákup",
+          CompleteOrder: "Dokončiť túto Objednávku",
+          MarkAsShipped: "Označiť ako Odoslané",
+          RateThisTransaction: "Ohodnotiť túto Transakciu",
+          TransactionReview: "Hodnotenie Tranksacie",
+          OverallRating: "Celkové Hodnotenie",
+          Quality: "Kvalita",
+          MatchedDescription: "Súhlasilo s Popisom",
+          DeliverySpeed: "Rýchlosť Doručenia",
+          CustomerService: "Zákaznícky Servis",
+          Review: "Recenzia",
+          ReviewPlaceHolder: "Vaše hodnotenie tejto transakcie",
+          NoFileProvided: "Nebol poskytnutý žiaden súbor",
+          None: "Žiadne",
+          NoneSent: "Žiadne odoslané",
+          ModerationFee: "Moderátorsky Poplatok:",
+          DisputeTransaction: "Začať Spor",
+          sendMessagePlaceholder: "Zadať správu...",
+          DisputeInstructions: "Ak chete začať spor pre túto transakciu, zadajte dôvod nižšie a zaškrtnite okienko \"Spor\". Týmto pozvete moderátora do Vašej konverzácie až do chvíle, kým sa spor nevyrieši. Moderátor príjme konečné rozhodnutie, či Vám budú vrátené nejaké prostriedky a v akej výške. Poplatok za moderovanie bude zaplatený z Vami už odoslaných prostriedkov.",
+          SendMessage: "Odoslať",
+          CloseDispute: "Ukončiť Spor",
+          TotalInTransaction: "Transakcia:",
+          StartDisputeFlag: "ZAČAŤ SPOR",
+          CloseDisputeFlag: "UKONČIŤ SPOR",
+          PayoutOnlyBuyer: "Ukončením tohto sporu sa vráti 100% prostriedkov kupujúcemu."
         },
         errorMessages: {
           saveError: "Nepodarilo sa uložiť údaje.",
@@ -4669,31 +5152,40 @@ module.exports = Backbone.Model.extend({
           userError: "Nepodarilo sa nájsť informácie pre toto ID",
           userNotFoundError: "Informácie o tejto osobe nie sú k dispozícii.",
           notFoundError: "Nepodarilo sa načítať údaje o:",
-          socketError: "URL for WebSocket failed. Connecting to socket with default address of ws://localhost:18466",
+          socketError: "Adresa WebSocketu zlyhala. Pripojenie na socket s prednastavenou adresou ws://localhost:18466",
           contractError: "Nákup položky neprebehol.",
-          sellerError: "Predajcov server odmietol žiadosť o nákup. This may be due to a connection issue.", // not translated
-          checkPurchaseData: "Check your purchase data, such as quantity and Bitcoin refund address, to make sure it is valid", //not translated
-          pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
-          serverDown: "The server has been shut down", //notTranslated
-          tooManyPhotosTitle: "Too many photos", //notTranslated
-          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
-          badJSON: "The JSON data returned from the server was malformed" // notTranslated
+          sellerError: "Predajcov server odmietol žiadosť o nákup. Môže to byť zapríčinené problémom s pripojením.",
+          checkPurchaseData: "Skontrolujte Vaše nákupné informácie, ako počet, a navrátová Bitcoinová adresa. Uistite sa, že je platná.",
+          pageUnavailable: "Táto stránka je momentálne nedostupná.",
+          badHandle: "Prezývka, ktorú ste zadali nie je platná",
+          serverDown: "Server bol vypnutý",
+          tooManyPhotosTitle: "Príliš veľa obrázkov",
+          tooManyPhotosBody: "Niektoré, alebo žiadna z Vašich fotiek neboli nahrané na server, pretože ste prekročili povolený limit na počet obrázkov.",
+          badJSON: "JSON dáta vrátené zo serveru sú chybné"
+        },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
         },
         aboutSection: {
-          about: "", //notTranslated
-          contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
-          support: "", //notTranslated
-          licensing: "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>", //notTranslated
+            about: "<p>OpenBazaar je sieť používateľov, ktorí za Bitcoiny priamo medzi sebou kupujú a predávaju tovary a služby. Táto sieť je decentralizovaná a nie je kontrolovaná žiadnou organizáciou.</p><p>Tento software je open source a licencovaný pod MIT licenciou. Jeho kód si môžete pozrieť na <a href=\"https://github.com/OpenBazaar/\">Githube</a>.</p><p>OpenBazaar je komunitný projekt a preto vítame akýkoľvek spôsob spolupráce na našom <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> kanáli, alebo <a href=\"http://www.reddit.com/r/openbazaar\">subreddite</a>.</p><p>Ak potrebujete pomoc, prečítajte si <a href=\"https://blog.openbazaar.org/tag/tutorial/\">Používateľskú Príručku</a>.</p><p>Ak máte aj napriek tomu nejaké otázky, otvorte tiket u našej <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">podpori</a>.</p>",
+            contributors: "<p>OpenBazaar sa stal skutočnosťou vďaka medzinárodnej komunite vývojárov a dobrovoľníkov, ktorí prispeli svojim časom, aby pomohli oslobodiť trh. Toto je čiastkový zoznam prispievateľov, ktorí pomohli, či už kódom, alebo iným spôsobom.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
+            support: "<p>Na našej ceste za voľným trhom môžete podporiť OpenBazaar viacerými spôsobmi.</p><p>Kúpou a predajom tovaru a služieb pomáhate rozširovaniu našej komunity a robíte platformu atraktívnejšiu pre nových používateľov. Môžete sa spýtať firiem prijímajucích Bitcoiny, či by chceli predávať svoj tovar a služby na našej platforme. Pomôže nám to dostať sa do povedomia a ukáže, že existuje dopyt po obchodovaní na peer to peer platforme.</p><p>Ak ste vývojár, prosím choďte na <a href=\"https://github.com/OpenBazaar/\">náš Github</a> a zistite, či nám neviete s niečim pomôcť. Okrem pomoci s jadrom systému dúfame, že vďaka open source povahe projektu vytvoríte nové služby nad existujúcou sieťou.</p><p>Taktiež nám môžete <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\">prispieť Bitcoinami</a>, ktoré budú použité na úhradu nákladov spojených s návštevou konferencií, odmeňovaním dobrovoľníkov za vývoj a promovaním OpenBazaaru.</p><p>Ak máte nápady ako vylepšiť OpenBazaar, alebo máte otázky na našich hlavných vývojarov pridajte sa prosím k <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">nášmu Slack-u</a>.</p>",
+            licensing: "<p>OpenBazaar je softvér s otvoreným kódom licencovaný pod MIT licenciou. Táto licencia umožňuje ľuďom voľne používať kód v iných projektoch, alebo v proprietarnom softvéri. Plné znenie licencie nájdete nižšie.</p><h4MIT Licencia (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Týmto sa udeľuje povolenie, bez poplatku, ľubovolnej osobe získať kópiu tohto softvéru a pridružených dokumentov (Softvér), narábať so Softvérom bez obmedzení, vrátane práva používať, kopírovať, upravovať, zlučovať, uverejňovať, distribuovať, vytvárať podlicencie, predávať kópie Softvéru, a dávať takéto povolenie osobám, ktorým je Softvér poskytnutý,    za nasledovných podmienok:</p><p>Predošlé upozornenie autorského práva a povolenia musí byť zahrnuté vo všetkých kopiách alebo ucelených častiach Softvéru.</p><p>SOFTVÉR JE POSKYTOVANÝ \"TAK AKO JE\", BEZ AKEJKOĽVEK ZÁRUKY ČI UŽ VÝSLOVNEJ, ALEBO VYPLÝVAJÚCEJ, VRÁTANE, ALE NIE LEN, ZO ZÁRUKOU PREDAJNOSTI A VHODNOSTI PRE URČITÝ ÚČEL A NEZASAHOVANIA. V ŽIADNOM PRÍPADE VÁM NEBUDE AUTOR ALEBO ŽIADNY Z DRŽITEĽOV AUTORSKÝCH PRÁV ZODPOVEDAŤ ZA NÁROKY, ŠKODY, ALEBO INÉ RUČENIA, ČI UŽ VYPLÝVAJÚCICH Z ČINNOSTI ZMLUVY, PREČINU ALEBO INAK, ALEBO V SPOJENÍ SO SOFTVÉROM, POUŽÍVANÍM ALEBO INÝM NARÁBANÍM SO SOFTVÉROM.</p><h4>Knižnice</h4><p>OpenBazaar používa nasledovné knižnice:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Uložené",
           SaveSuccess: "Vaše zmeny boli uložené."
         },
         discover: {
-          searchDefaultText: "Scanning your network", //notTranslated
-          searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          searchDefaultText: "Prehľadávam Vašu sieť",
+          searchingText: "Prehľadávam Vašu sieť pre výraz",
+          noResults: "Neboli nájdené žiadne ponuky s tagom",
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Všetky typy",
@@ -4704,30 +5196,30 @@ module.exports = Backbone.Model.extend({
           listingsAll: "Zo všetkých obchodov"
         },
         nav: {
-          searchPlaceholder: "Type a @handle, OpenBazaar ID or #tag...", //notTranslated
+          searchPlaceholder: "Zadajte @meno, OpenBazaar ID alebo #tag...",
           myPage: "Moja stránka",
-          testMode: "Test Mode", //notTranslated
-          customizePage:"Upraviť stránku",
-          sellItem:"Nová položka",
-          createListing:"Nový listing",
+          testMode: "Testovací Mód",
+          customizePage:"Upraviť Stránku",
+          sellItem:"Nová Položka",
+          createListing:"Nová Ponuka",
           purchases:"Nákupy",
           sales:"Predaje",
-          cases:"Prípady",
+          cases:"Udalosti",
           notifications:"Notifikácie",
           settings:"Nastavenia",
           about:"O OpenBazaari",
           support:"Podporte OpenBazaar",
-          Forward: "Forward", //notTranslated
+          Forward: "Dopredu",
           Back: "Späť"
         },
         onboarding: {
           intro: "Konfigurácia OpenBazaaru",
-          Introduction: "Introduction", //notTranslated
-          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
+          Introduction: "Úvod",
+          IntroductionBody: "OpenBazaar je peer-to-peer sociálny trh. Je to ako skombinovať eBay&trade;, Twitter&trade; a BitTorrent do jedného celku, no s tým rozdielom, že v OpenBazaare neexistujú poplatky, obmedzenia a ide o otvorený softvér. \n\nVezmite prosím na vedomie, že to tu na Vás zo začiatku môže pôsobiť trochu iným dojmom, než na čo zvyknutý. Dajte tomu čas.",
           Theme: "Zvoľte si grafickú tému Vašej stránky",
           chooseLanguage: "Zvoľte jazyk",
           contributors: "%{smart_count} prispievateľ |||| %{smart_count} prispievateľov",
-          configure: "Configure your experience",
+          configure: "Nastavte si Vaše rozhranie",
           disclaimer_title: "Upozornenie",
           disclaimer_body: "OpenBazaar je sieť umožňujúca ľuďom obchodovať s tovarmi a službami - prostredníctovm Bitcoinu - bez akejkoľvek centrálnej organizácie, ktorá by platformu ovládala. To znamená, že za svoju aktivitu v sieti ste zodpovední Vy sami.\n\nPoužívatelia OpenBazaaru nie sú anonymní. Väčšina komunikácie medzi používateľmi je šifrovaná, no IP adresy sú verejné a môžu byť spojené s aktivitou na sieti. Útočníci môžu tieto informácie použiť proti Vám; ochrana Vášho súkromia je Vaša vlastná zodpovednosť.\n\nPoužívatelia OpenBazaaru podliehajú zákonom platným v mieste ich pôsobenia, rovnako ako svojmu vlastnému svedomiu. Vývojári OpenBazaaru nenesú žiadnu vinu ani zodpovednosť za akékoľvek zneužitie platformy na nelegálnu činnosť.\n\nKomunita vývojárov OpenBazaaru tvrdo pracovala na tom, aby svetu priniesla slobodnú obchodnú platformu. Ale ako to už pri softvéri býva, určite sa vyskytnú nejaké chyby. Vývojári nie sú zodpovední za akékoľvek finančné škody spojené s problémami v tomto softvéri.\n\nPoužívaním OpenBazaaru príjmate zodpovednosť za všetky svoje činy na sieti OpenBazaar.",
           yourCountry: "Zvoľte svoju krajinu",
@@ -4739,84 +5231,84 @@ module.exports = Backbone.Model.extend({
           ShortDescriptionPlaceholder: "Napíšte o sebe niečo zaujímavé... (max 160 znakov)",
           timeZone: "Zvoľte svoje časové pásmo",
           yourDetails: "Zadajte detaily o sebe",
-          yourDescription: "Popis", // notTranslated
-          handle: "Handle",
-          chooseHandle: "Choose a handle", // not translated
+          yourDescription: "Popis",
+          handle: "Prezývka",
+          chooseHandle: "Zvoľte si prezývku",
           knownAs: "Momentálne ste známi ako:",
-          wouldYou: "Chcete si zaregistrovať ľahko zapamätateľný handle (prezývku)?",
+          wouldYou: "Chcete si zaregistrovať ľahko zapamätateľnú prezývku?",
           registerNew: "Zaregistrovať nové",
           recommended: "Odporúčané stránky hodné sledovania",
           avatar: "Vložiť avatara",
           chooseAvatar: "Zvoliť avatara",
-          discoverCallOut: "Explore Listings and Pages on OpenBazaar", //notTranslated
-          Finished: "Finished" //notTranslated
+          discoverCallOut: "Objavujte Ponuky a Stránky na OpenBazaari",
+          Finished: "Dokončené"
         },
         softwareUpdate: {
-          updateAvailable: "OpenBazaar Update Available", //notTranslated
-          installUpdate: "Install Update", //notTranslated
-          dismiss: "Dismiss" //notTranslated
+          updateAvailable: "Je dostupná aktualizácia pre OpenBazaar",
+          installUpdate: "Nainštalovať Aktualizáciu",
+          dismiss: "Odmietnuť"
         },
         guidStillCreating: {
-          HangTight: "Hang tight for a few...", //notTranslated
-          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
-          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
+          HangTight: "Vydržte chvíľu...",
+          YourPersonal: "Práve sa generujú Vaše osobné kľúče a OpenBazaar ID a malo by to trvať len okolo 30 sekúnd.\n\nBudete automaticky pripojený do siete len čo sa tento proces dokončí. Prosím vydržte chvíľu.",
+          LookingFor: "Chcete si zatiaľ prečítať <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>?"
         },
         buyFlow: {
-          PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
-          CantFindAddress: "I can't find my bitcoin address", //notTranslated
-          BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
-          ModeratedPayment: "Moderated Payment", //notTranslated
-          DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
-          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
-          DirectPayment: "Direct Payment", //notTranslated
-          SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
+          PayForOrder: "Zaplatiť za Objednávku",
+          NeedTempAddress: "Potrebujem dočasnú Bitcoinovú adresu",
+          NeedTempAddressHelper: "Prosím uložte si odkaz k Vašej dočasnej bitcoinovej adrese",
+          CantFindAddress: "Nemôžem nájsť moju bitcoinovú adresu",
+          BitcoinWallet: "Bitcoinová Peňaženka",
+          ModeratedPaymentDescription: "Vaša platba je bezpečne uchovaná v peňaženke až do momentu, kým predávajúci nesplní jeho časť dohody. Moderátor Vám pomôže v prípade problémov.",
+          ModeratorFeeHelper: "Moderátor môže účtovať poplatok, ale iba vtedy ak dôjde k sporu.",
+          ModeratedPayment: "Moderovaná Platba",
+          DisputeFee: "Poplatok za spor",
+          HaveWallet: "Máte Bitcoinovú Peňaženku?",
+          QuickSetup: "Nastaviť si ju trvá len niekoľko minút",
+          CreateWallet: "Vytvoriť peňaženku",
+          DirectPaymentDescription: "Peniaze sú odoslané priamo predajcovi. Používajte iba na malé objednávky, alebo v prípade, že ide o dôveryhodného predajcu.",
+          DirectPayment: "Priama Platba",
+          SendDirectlyTo: "Poslať priamu platbu %{handle}",
           MustAddAddress: "Musíte zadať adresu pre doručenie",
-          VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín:",
-          DoesNotShipHere: "Does not ship here", //notTranslated
-          Send: "Semd", //notTranslated
-          BTCto: "BTC to", //notTranslated
-          SendBTCtoAddress: "Send %{amount} BTC to",
-          OpenAddress: "Open in Local Wallet", //notTranslated
-          CopyAddress: "Copy to Clipboard", //notTranslated
-          RefreshPayment: "Refresh Payment Status", //notTranslated
-          summaryMsg1: "Your payment has been sent to %{recipient}", //notTranslated
-          summaryMsg2: "The expected processing time for this order is", //notTranslated
-          summaryMsg3: "You can check the status of your order on your", //notTranslated
-          purchasesPage: "purchases page", //notTranslated
-          returnAddress: "Return Address", //notTranslated
-          moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
-          directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
-          paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín",
+          DoesNotShipHere: "Nedoručuje do tejto krajiny",
+          Send: "Odoslať",
+          BTCto: "Poslať BTC na",
+          SendBTCtoAddress: "Poslať %{amount} BTC na",
+          OpenAddress: "Otvoriť v Lokálnej Peňaženke",
+          CopyAddress: "Skopírovať do Schránky",
+          RefreshPayment: "Aktualizovať Stav Platby",
+          summaryMsg1: "Vaša platba bola odoslána %{recipient}",
+          summaryMsg2: "Očakávaný čas spracovania objednávky je",
+          summaryMsg3: "Môžete skontrolovať stav Vašej objednávky na",
+          purchasesPage: "stránka nákupov",
+          returnAddress: "Návratová Adresa",
+          moderatorPaymentDisclaimer: "Zaplatené z celkovej sumy ak sa transakcia dostane do sporu.",
+          directPaymentDisclaimer: "Dajte si pozor pri používaní priamej platby. Prostriedky sa nedajú vrátiť",
+          paymentSent: "Platba bola odoslaná!",
+          total: "Spolu"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "Neboji nájdené žiadne výsledky"
         },
         serverConnectModal: {
-          statusTryingToConnect: "Trying to connect to your server", //notTranslated
-          statusConnected: "Connected", //notTranslated
-          statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed", //notTranslated
-          statusTooManyAttempts: "Too many failed login attempts", //notTranslated
-          serverConfiguration: "Server Configuration", //notTranslated
-          connecting: "Connecting", //notTranslated
-          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
-          serverIP: "Server IP", //notTranslated
-          restApiPort: "Rest API port", //notTranslated
-          websocketApiPort: "Websocket API port", //notTranslated
-          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
-          username: "Username", //notTranslated
-          password: "Password", //notTranslated
-          restoreDefaults: "Restore defaults", //notTranslated
-          saveChanges: "Save Changes", //notTranslated
-          retry: "Retry connection", //notTranslated
+          statusTryingToConnect: "Snažím sa pripojiť na Váš server",
+          statusConnected: "Pripojené",
+          statusFailedConnection: "Nie je možné pripojiť sa na Váš server",
+          statusFailedAuthentication: "Autentifikácia zlyhala",
+          statusTooManyAttempts: "Príliš mnoho chybných pokusov o prihlásenie",
+          serverConfiguration: "Konfigurácia Servera",
+          connecting: "Pripája sa",
+          intro: "OpenBazaar je navrhnutý tak, že Vám umožňuje bežať server oddelene od klientskej aplikácie. Váš server bude štandardne bežať lokálne, ale toto nastavenie je možné zmeniť nižšie.",
+          serverIP: "IP adresa servera",
+          restApiPort: "Rest API port",
+          websocketApiPort: "Websocket API port",
+          heartbeatSocketApiPort: "Heartbeat socket port",
+          username: "Meno",
+          password: "Heslo",
+          restoreDefaults: "Obnoviť predvolené",
+          saveChanges: "Uložiť Zmeny",
+          retry: "Opakovať pripojenie",
         }
       },
 
@@ -4828,7 +5320,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @Kahpecuce
-         02/28/2016: ~ 259 untranslated strings
+         03/09/2016: ~ 300 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -4936,6 +5428,8 @@ module.exports = Backbone.Model.extend({
         Description: "Tanım",
         Reviews: "Yorumlar",
         Shipping: "Gönderme",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresler",
         Files: "Files", //notTranslated
         NewAddress: "Yeni Adres",
@@ -4954,6 +5448,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "Değişiklikleri Kaydet",
         YourName: "Adınız",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -5066,7 +5561,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -5112,10 +5607,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -5137,6 +5673,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -5173,7 +5710,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -5217,6 +5754,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -5230,7 +5775,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Tüm çeşitler",
@@ -5365,7 +5911,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @drwasho
-         02/28/2016: ~ 260 untranslated strings
+         03/09/2016: ~ 302 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -5472,6 +6018,8 @@ module.exports = Backbone.Model.extend({
         Description: "Bang",
         Reviews: "YIqaw",
         Shipping: "NgeH Duj",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "SoQ",
         Files: "Files", //notTranslated
         NewAddress: "Chu' SoQ",
@@ -5490,6 +6038,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "ChoH toD",
         YourName: "PonglIj'e'",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -5602,7 +6151,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -5648,10 +6197,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -5673,6 +6263,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -5709,7 +6300,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -5753,6 +6344,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -5766,7 +6365,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "Hoch Segh",
@@ -5901,7 +6501,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translators: Jingyi Yang | @saltduck
-         03/02/2016: ~ 55 untranslated strings
+         03/09/2016: ~ 92 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -6008,6 +6608,8 @@ module.exports = Backbone.Model.extend({
         Description: "描述",
         Reviews: "评价",
         Shipping: "物流",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "地址",
         Files: "Files", //notTranslated
         NewAddress: "新地址",
@@ -6026,6 +6628,7 @@ module.exports = Backbone.Model.extend({
         Change: "修改",
         SaveChanges: "保存更改",
         YourName: "您的姓名",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "输入你的比特币地址",
         BitcoinReturnAddressPlaceholder: "退款至该地址",
         BitcoinReturnAddressInfo: "如果发生退款情形，款项需要发送到一个比特币地址。请提供你钱包中的一个地址：",
@@ -6189,10 +6792,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "成为仲裁员",
         EditModerator: "仲裁员设置",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "订单详细内容",
           ViewOnBlockchain: "查看细节",
           SoldBy: "卖家",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "买家",
           searchByOrder: "用订单ID或货物名称来检索",
           sortByStatusAll: "全部",
@@ -6214,6 +6858,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "争议已关闭",
           OrderStatus6: "争议终止",
           OrderStatus7: "已退款",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- 托管中",
           OrderTotal: "订单总计",
           OrderTotalInBTC: "BTC总计",
@@ -6250,7 +6895,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "按日期排序(倒序)",
           sortByDateOldest: "按日期排序(正序)",
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "标记为已送达",
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -6294,6 +6939,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "",
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
@@ -6307,7 +6960,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "正在扫描你的网络",
           searchingText: "正在你的网络中检索",
-          noResults: "你的网络中没有商品具有标签"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "你的网络中没有商品具有标签"
         },
         filters: {
           pagesAllTypes: "所有分类",
@@ -6442,7 +7096,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @mpatc
-         02/28/2016: ~ 261 untranslated strings
+         03/09/2016: ~ 303 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -6550,6 +7204,8 @@ module.exports = Backbone.Model.extend({
         Description: "설명",
         Reviews: "리뷰",
         Shipping: "배송",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "주소들",
         Files: "Files", //notTranslated
         NewAddress: "새로 주소",
@@ -6568,6 +7224,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "변경 사항 저장",
         YourName: "당신 이름",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
@@ -6680,7 +7337,7 @@ module.exports = Backbone.Model.extend({
         DisplayNSFWcontent: "Display NSFW content?", // not translated
         Basic: "Basic", // not translated
         Content: "Content", // not translated
-        StandardThemes: "Standard themes", // not translated
+        StandardThemes: "Standard Themes", // not translated
         NoPhotosAdded: "No Photos Added", // not translated
         Summary: "Summary", // not translated
         Funds: "Funds", // not translated
@@ -6726,10 +7383,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "Seller", // not translated
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Buyer", // not translated
           searchByOrder: "Search by order id or item name", // not translated
           sortByStatusAll: "All", // not translated
@@ -6751,6 +7449,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "Order Total", // not translated
           OrderTotalInBTC: "BTC Total", // not translated
@@ -6787,7 +7486,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -6831,6 +7530,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -6844,7 +7551,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "모든종류",
@@ -6979,7 +7687,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @ayalan
-         02/28/2016: ~ 181 untranslated strings
+         03/09/2016: ~ 225 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -7082,6 +7790,8 @@ module.exports = Backbone.Model.extend({
         Description: "商品の説明",
         Reviews: "レビュー",
         Shipping: "発送",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "住所",
         Files: "Files", //notTranslated
         NewAddress: "新しいお届け先住所",
@@ -7100,6 +7810,7 @@ module.exports = Backbone.Model.extend({
         Change: "Change", //notTranslated
         SaveChanges: "変更を保存",
         YourName: "氏名",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
         BitcoinReturnAddressPlaceholder: "返品用ビットコインアドレス",
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
@@ -7248,10 +7959,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Order Details", //notTranslated
           ViewOnBlockchain: "View Details", //noTranslated
           SoldBy: "出品者",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "購入者",
           searchByOrder: "注文ID・商品名で探す",
           sortByStatusAll: "すべて",
@@ -7273,6 +8025,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Dispute Closed", // not translated
           OrderStatus6: "Dispute Finalized",// not translated
           OrderStatus7: "Refunded", // not translated
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- In Escrow", // not translated
           OrderTotal: "注文合計",
           OrderTotalInBTC: "BTC Total", // not translated
@@ -7309,7 +8062,7 @@ module.exports = Backbone.Model.extend({
           sortByDateNewest: "By Date, Newest", // not translated
           sortByDateOldest: "By Date, Oldest", // not translated
           PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete this Order", // not translated
+          CompleteOrder: "Complete Order", // not translated
           MarkAsShipped: "Mark as Shipped", // not translated
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
@@ -7353,6 +8106,14 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },
         aboutSection: {
           about: "", //notTranslated
           contributors: "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>", //notTranslated
@@ -7366,7 +8127,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network", //notTranslated
           searchingText: "Scanning your network for", //notTranslated
-          noResults: "No listings found in your network tagged with" //notTranslated
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "No listings found in your network tagged with" //notTranslated
         },
         filters: {
           pagesAllTypes: "すべて",
@@ -7500,11 +8262,8 @@ module.exports = Backbone.Model.extend({
 
         /*
 
-         Translator: @Mido
-         02/28/2016: ~ 95 untranslated strings
-
-         Translator: @programmerpeter
-         03/04/2016: ~ 8 untranslated strings, improved translations
+         Translator: @Mido @programmerpeter
+         03/09/2016: ~ 43 untranslated strings, improved translations
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -7612,6 +8371,8 @@ module.exports = Backbone.Model.extend({
         Description: "Opis",
         Reviews: "Opinie",
         Shipping: "Wysyłka",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
         Files: "Pliki",
         NewAddress: "Nowy adres",
@@ -7630,6 +8391,7 @@ module.exports = Backbone.Model.extend({
         Change: "Zmień",
         SaveChanges: "Zapisz wprowadzone zmiany",
         YourName: "Twoje imię",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Wprowadź swój adres Bitcoin",
         BitcoinReturnAddressPlaceholder: "Wprowadź adres Bitcoin...",
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //notTranslated
@@ -7788,10 +8550,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Zostań arbitrem",
         EditModerator: "Ustawienia arbitra",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Szczegóły zamówienia",
           ViewOnBlockchain: "Zobacz szczegóły",
           SoldBy: "Sprzedawca",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Nabywca",
           searchByOrder: "Szukaj po ID lub nazwie przedmiotu",
           sortByStatusAll: "Wszystko",
@@ -7813,6 +8616,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Spór zamknięty",
           OrderStatus6: "Spór sfinalizowany",
           OrderStatus7: "Zwrócone",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "- w depozycie",
           OrderTotal: "Do zapłaty",
           OrderTotalInBTC: "Łącznie (BTC)",
@@ -7888,10 +8692,18 @@ module.exports = Backbone.Model.extend({
           checkPurchaseData: "Upewnij się, że wprowadziłeś poprawne dane. Sprawdź stan konta oraz adresu zwrotów.",
           pageUnavailable: "Ta strona jest obecnie niedostępna."
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },        
         aboutSection: {
           about: "<p>OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p><p>Oprogramowanie jest otwarte, udostępniane na licencji MIT. Kod dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githubie</a>.</p><p>OpenBazaar jest projektem społeczośniowym i zachęcamy do wejścia na nasz kanał <a href=\"https://openbazaar-slackin -drwasho.herokuapp.com/\">Slack</a> lub odwiedzenia naszego <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p><p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">poradnik</a> do OpenBazaar w wersji 1.0.</p><p>Jeśli nadaj masz jakieś pytania, kliknij <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">tutaj</a>.</p>",
           contributors: "<p>OpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy, którzy poświęcają swój czas, by uczynić handel wolnym. Oto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub inny rodzaj uczestnictwa.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li><li>Michał Pado</li><li>programmerpeter</li></ul>",
-          support: "<p>Możesz wesprzeć OpenBazaar na wiele sposobów, by wspomóc nas w naszej misji.</p><p>Kupowanie i sprzedawanie dóbr i usług przyczynia się do powiększenia naszej społeczności, a to z kolei zwiększa atrakcyjność platformy w oczach potencjalnych nowych użytkowników. Uprzejme prośby (kierowane do sprzedawców) o akceptację płatności w Bitcoinie za pośrednictwem naszej platformy pomaga docierać do kolejnych osób i pokazuje, że jest zapotrzebowanie na handel P2P.</p><p>Jeśli jesteś programistą, odwiedź naszego <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githuba</a> i zobacz, czy może nie ma czegoś, w czym mógłbyś nam pomóc. Oprócz pomocy z kodem źrodłowym mamy nadzieję, liberalna natura projektu zachęci was do tworzenia nowych usług bazujących na istniejącej sieci.</p><p>Możesz również <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">wspomóc nas finansowo</a>. Środki zostaną wykorzystane na pokrycie kosztów związanych z konferencjami, programem Bug Bounty oraz promocją //bounties.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Dołącz do naszego Slacka</a>, jeśli masz jakieś pomysły związane z projektem lub chciałbyś o coś zapytać deweloperów.</p>",
+          support: "<p>Możesz wesprzeć OpenBazaar na wiele sposobów, by wspomóc nas w naszej misji.</p><p>Kupowanie i sprzedawanie dóbr i usług przyczynia się do powiększenia naszej społeczności, a to z kolei zwiększa atrakcyjność platformy w oczach potencjalnych nowych użytkowników. Uprzejme prośby (kierowane do sprzedawców) o akceptację płatności w Bitcoinie za pośrednictwem naszej platformy pomaga docierać do kolejnych osób i pokazuje, że jest zapotrzebowanie na handel P2P.</p><p>Jeśli jesteś programistą, odwiedź naszego <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githuba</a> i zobacz, czy może nie ma czegoś, w czym mógłbyś nam pomóc. Oprócz pomocy z kodem źrodłowym mamy nadzieję, liberalna natura projektu zachęci was do tworzenia nowych usług bazujących na istniejącej sieci.</p><p>Możesz również <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">wspomóc nas finansowo</a>. Środki zostaną wykorzystane na pokrycie kosztów związanych z konferencjami, programem Bug Bounty oraz promocją //bounties.</p><p><a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Dołącz do naszego Slacka</a>, jeśli masz jakieś pomysły związane z projektem lub chciałbyś o coś zapytać deweloperów.</p>",
           licensing: "<p>OpenBazaar to otwarte oprogramowanie oparte na licencj MIT. To liberalna licencja, zezwala pozwala na wykorzystanie kodu przy innych otwartych projektach, jak i projektach prawnie zastrzeżonych. Pełna treść licencji dostępna jest pod poniższym linkiem.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -7901,7 +8713,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Przeszukiwanie sieci",
           searchingText: "Przeszukiwanie sieci dla",
-          noResults: "Brak pozycji z tagiem"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Brak pozycji z tagiem"
         },
         filters: {
           pagesAllTypes: "Wszystkie typy",
@@ -8015,7 +8828,7 @@ module.exports = Backbone.Model.extend({
         /*
 
          Translator: @pryds
-         02/28/2016: ~ 49 untranslated strings
+         03/09/2016: ~ 33 untranslated strings
 
          Use capitalized keys for widely reused text that must be capitalized
 
@@ -8122,6 +8935,8 @@ module.exports = Backbone.Model.extend({
         Description: "Beskrivelse",
         Reviews: "Anmeldelser",
         Shipping: "Forsendelse",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresser",
         Files: "Filer",
         NewAddress: "Ny adresse",
@@ -8140,6 +8955,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Ændringer",
         SaveChanges: "Gem ændringer",
         YourName: "Dit navn",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Indtast din Bitcoin-adresse",
         BitcoinReturnAddressPlaceholder: "Indtast Bitcoin-adresse…",
         BitcoinReturnAddressInfo: "Hvis en returnering godkendes, skal pengene sendes til en Bitcoin-adresse. Angiv venligst en adresse i din tegnebog herunder.",
@@ -8299,10 +9115,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Bliv moderator",
         EditModerator: "Moderatorindstillinger",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Ordredetaljer",
           ViewOnBlockchain: "Se detajler",
           SoldBy: "Sælger",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Køber",
           searchByOrder: "Søg ud fra ordre-ID eller varenavn",
           sortByStatusAll: "Alle",
@@ -8324,6 +9181,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Uenighed lukket",
           OrderStatus6: "Uenighed færdiggjort",
           OrderStatus7: "Refunderet",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           InEscrow: "– i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
@@ -8404,10 +9262,18 @@ module.exports = Backbone.Model.extend({
           tooManyPhotosBody: "Nogle eller alle dine billeder blev forhindret i at blive uploadet, da du ellers ville overskride det maksimalt tilladte antal.",
           badJSON: "Den JSON-data, der blev sendt tilbage fra serveren, var ikke formatteret korrekt"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },        
         aboutSection: {
-          about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a>-kanal e ller på vores <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
+          about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a>-kanal e ller på vores <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
           contributors: "<p>OpenBazaar er muliggjort af et internationalt fællesskab af udviklere og frivillige, der bidrager med deres tid for at gøre handel fri. Dette er en delvis liste over folk, der har bidraget til projektet, enten gennem kode eller anden assistance.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>Du kan hjælpe OpenBazaar på flere forskellige måder med vores mission om at gøre handel fri.</p><p>Køb og salg af varer og serviceydelser på netværket hjælper til at fællesskabet bliver større og gør platformen mere attraktiv for nye brugere. En venlig forespørgsel til eksisterende visksomheder, der modtager Bitcoin, om at sælge på platformen hjælper med at sprede kendskabet og viser efterspørgsel efter peer-to-peer-handel.</p><p>Hvis du er udvikler kan du tjekke <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">vores Github</a> og se, hvor du kan hjælpe os. Ud over at hjælpe med den centrale kode håber vi, at projektets tilladelsesfri og open source tilgang betyder, at du vil udvikle nye tjenester oven på det eksisterende netværk.</p><p>Du kan også <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donere Bitcoin</a> til projektet, hvilket vil blive brugt til at afholde omkostninger til besøg på konferencer, at tilbyde belønninger for udvikling og promovering af OpenBazaar.</p><p><a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Tilmeld dig venligst vores Slack</a>, hvis du har nye idéer til OpenBazaar eller har spørgsmål til kerneudviklerne.</p>",
+          support: "<p>Du kan hjælpe OpenBazaar på flere forskellige måder med vores mission om at gøre handel fri.</p><p>Køb og salg af varer og serviceydelser på netværket hjælper til at fællesskabet bliver større og gør platformen mere attraktiv for nye brugere. En venlig forespørgsel til eksisterende visksomheder, der modtager Bitcoin, om at sælge på platformen hjælper med at sprede kendskabet og viser efterspørgsel efter peer-to-peer-handel.</p><p>Hvis du er udvikler kan du tjekke <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">vores Github</a> og se, hvor du kan hjælpe os. Ud over at hjælpe med den centrale kode håber vi, at projektets tilladelsesfri og open source tilgang betyder, at du vil udvikle nye tjenester oven på det eksisterende netværk.</p><p>Du kan også <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">donere Bitcoin</a> til projektet, hvilket vil blive brugt til at afholde omkostninger til besøg på konferencer, at tilbyde belønninger for udvikling og promovering af OpenBazaar.</p><p><a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Tilmeld dig venligst vores Slack</a>, hvis du har nye idéer til OpenBazaar eller har spørgsmål til kerneudviklerne.</p>",
           licensing: "<p>OpenBazaar er open source software, der bruger MIT-licensen. Denne licens er tilladende og er designet til at tillade folk frit at genbruge koden til andre open source projekter eller til proprietær software. Den komplette licenstekst er herunder.</p><h4>The MIT License (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p><p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p><p>THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p><h4>Libraries</h4><p>The following libraries are used in OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -8417,7 +9283,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Skanner dit netværk",
           searchingText: "Skanner dit netværk efter",
-          noResults: "Ingen listninger tagget med følgende blev fundet i dit netværk" // Note: Better (non-postfix) translation would be "Ingen listninger tagget med XXXXX blev fundet i dit netværk"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Ingen listninger tagget med følgende blev fundet i dit netværk" // Note: Better (non-postfix) translation would be "Ingen listninger tagget med XXXXX blev fundet i dit netværk"
         },
         filters: {
           pagesAllTypes: "Alle typer",
@@ -8559,7 +9426,14 @@ module.exports = Backbone.Model.extend({
       {
         langName: "Português do Brasil",
         langCode: "pt-BR",
-        /* Use capitalized keys for widely reused text that must be capitalized */
+        /*
+
+          Translator: @rhcastilhos
+          03/09/2016: ~ 34 untranslated strings
+
+          Use capitalized keys for widely reused text that must be capitalized
+
+        */
         IHaveAWalletNow: "Eu tenho uma Carteira agora",
         Next: "Próximo",
         IAgree: "Eu aceito",
@@ -8662,6 +9536,8 @@ module.exports = Backbone.Model.extend({
         Description: "Descrição",
         Reviews: "Avaliações",
         Shipping: "Entrega",
+        CountryOfOrigin: "Country of Origin", //not translated
+        CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Endereços",
         Files: "Arquivos",
         NewAddress: "Novo Endereço",
@@ -8680,6 +9556,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Modificações",
         SaveChanges: "Salvar",
         YourName: "Seu nome",
+        BitcoinAddress: "Bitcoin Addresss", //notTranslated
         BitcoinReturnAddress: "Insira o seu Endereço Bitcoin",
         BitcoinReturnAddressPlaceholder: "Insira o endereço Bitcoin...",
         BitcoinReturnAddressInfo: "Se um reembolso for emitido, os fundos terão que ser enviados para um endereço Bitcoin. Por favor forneça abaixo um endereço para a sua Carteira.",
@@ -8819,7 +9696,7 @@ module.exports = Backbone.Model.extend({
         NoFollowers: "Sem seguidores",
         NoReviews: "Sem avaliações",
         Moderator: "Moderador",
-	ActiveStore:"Ativar Loja",
+        ActiveStore:"Ativar Loja",
         ActiveStoreDetails: "As lojas e os anúncios inativos não são visíveis para outras pessoas",
         Firewall: "Firewall",
         ServerSettings: "Configurações do Servidor",
@@ -8843,10 +9720,51 @@ module.exports = Backbone.Model.extend({
         },
         BecomeModerator: "Tornar-se um Moderador",
         EditModerator: "Configurações do Moderador",
+        overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
+        qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+        },
+        descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+        },
+        deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+        },
+        customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+        },
         transactions: {
           OrderDetails: "Detalhes do Pedido",
           ViewOnBlockchain: "Ver Detalhes",
           SoldBy: "Vendedor",
+          BuyerPayout: "Buyer Payout", // not translated
+          SellerPayout: "Seller Payout", // not translated
+          BuyerAmout: "Buyer Amout", // not translated
+          SellerAmout: "Seller Amout", // not translated
+          YouEarn: "You Earn", // not translated
+          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
           PurchasedBy: "Comprador",
           searchByOrder: "Buscar por id do pedido ou nome do item",
           sortByStatusAll: "Todos",
@@ -8868,6 +9786,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Disputa Encerrada",
           OrderStatus6: "Disputa Finalizada",
           OrderStatus7: "Reembolsado",
+          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           AcceptDisputeResolution: "Aceitar Pagamento da Disputa",
           InEscrow: "- Em Custódia",
           OrderTotal: "Total do Pedido",
@@ -8950,12 +9869,20 @@ module.exports = Backbone.Model.extend({
           serverDown: "O servidor foi desligado",
           tooManyPhotosTitle: "Existem fotos em excesso",
           tooManyPhotosBody: "Algumas ou todas as suas fotos não puderam ser enviadas porque você excedeu a quantia máxima permitida.",
-          badJSON: "Os dados JSON que retornaram do servidor tinham formato incorreto" 
+          badJSON: "Os dados JSON que retornaram do servidor tinham formato incorreto"
         },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },        
         aboutSection: {
-          about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
+          about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
           contributors: "<p>O OpenBazaar se tornou realidade graças a uma comunidade internacional de desenvolvedores e pessoas voluntárias que contribuíram o seu tempo para ajudar na missão de fazer com que o comércio seja livre. Essa é uma lista parcial das pessoas que contribuíram para o projeto, seja através de programação ou outro tipo de assistência.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>Você pode ajudar o OpenBazzar de diversas maneiras em nossa missão de tornar o comércio livre.</p><p>Comprar e vender bens e serviços na rede ajuda com o crescimento da comunidade e torna a plataforma mais atraente para novos usuários. Solicitar educadamente às empresas que já aceitam Bitcoin para que elas vendam na plataforma ajuda a divulgar o projeto e demonstra uma demanda por comércio ponto a ponto.</p><p>Se você é um desenvolvedor, verifique <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">nosso Github</a> e veja onde você pode nos ajudar. Além de ajudar com o código do core, você pode construir novos serviços no topo da rede já existente. O nosso código é aberto e você pode criar à vontade usando nosso software e nossa rede, sem ter que pedir permissão para ninguém.</p><p>Você também pode <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">doar Bitcoins</a> para esse projeto, que serão usados para custear visitas a conferências, oferecer recompensas para desenvolvedores e divulgar o OpenBazaar.</p><p>Se você tem novas ideias para o OpenBazaar, ou tem dúvidas para serem respondidas pelos desenvolvedores do core, por favor <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">entre no nosso Slack</a>.</p>",
+          support: "<p>Você pode ajudar o OpenBazzar de diversas maneiras em nossa missão de tornar o comércio livre.</p><p>Comprar e vender bens e serviços na rede ajuda com o crescimento da comunidade e torna a plataforma mais atraente para novos usuários. Solicitar educadamente às empresas que já aceitam Bitcoin para que elas vendam na plataforma ajuda a divulgar o projeto e demonstra uma demanda por comércio ponto a ponto.</p><p>Se você é um desenvolvedor, verifique <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">nosso Github</a> e veja onde você pode nos ajudar. Além de ajudar com o código do core, você pode construir novos serviços no topo da rede já existente. O nosso código é aberto e você pode criar à vontade usando nosso software e nossa rede, sem ter que pedir permissão para ninguém.</p><p>Você também pode <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">doar Bitcoins</a> para esse projeto, que serão usados para custear visitas a conferências, oferecer recompensas para desenvolvedores e divulgar o OpenBazaar.</p><p>Se você tem novas ideias para o OpenBazaar, ou tem dúvidas para serem respondidas pelos desenvolvedores do core, por favor <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">entre no nosso Slack</a>.</p>",
           licensing: "<p>O OpenBazaar é um software de código aberto sob a licença MIT. Essa licença é permissiva e é projetada para permitir que as pessoas reutilizem livremente o código para outros projetos de cógigo aberto ou para uso software de uso proprietário. O texto da licença completa está abaixo.</p><h4>A Licença MIT (MIT)</h4><h5>Copyright &#169 2016 Desenvolvedores do OpenBazaar</h5><p>A permissão é concedida, gratuitamente, para qualquer pessoa que obtenha uma cópia deste software e dos arquivos de documentação associados (o \"Software\"), para lidar com o Software sem restrição, incluindo, sem limitação dos direitos de uso, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do Software, e para permitir que as pessoas às quais o Software é fornecido a fazê-lo, mediante as seguintes condições:</p><p>O aviso de direito autoral acima e este aviso de permissão devem ser incluídos em todas as cópias ou partes substanciais do Software.</p><p>O SOFTWARE É FORNECIDO \"COMO ESTÁ\", SEM QUALQUER TIPO DE GARANTIA, EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO A, GARANTIAS DE COMERCIABILIDADE, ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU OS DETENTORES DOS DIREITOS AUTORAIS SE RESPONSABILIZARÃO POR QUALQUER RECLAMAÇÃO, DANOS OU QUALQUER OUTRA RESPONSABILIDADE, SEJA EM RAZÃO DE CONTRATO, ATO ILÍCITO OU DE OUTRA FORMA, RESULTANTES DE OU EM CONEXÃO COM O SOFTWARE OU A UTILIZAÇÃO OU OUTRAS NEGOCIAÇÕES NO SOFTWARE.</p><h4>Livrarias</h4><p>As seguintes livrarias são usadas no OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -8965,7 +9892,8 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Procurando na sua rede",
           searchingText: "Procurando na sua rede por",
-          noResults: "Nenhum anúncio foi encontrado na sua rede com a tag"
+          noResults: "No listings found in your network", //notTranslated
+          noTaggedResults: "Nenhum anúncio foi encontrado na sua rede com a tag"
         },
         filters: {
           pagesAllTypes: "Todos os tipos",
@@ -9112,8 +10040,8 @@ module.exports = Backbone.Model.extend({
          langCode: "uk",
          /*
 
-          Translator: Loderunner2, Bitcoin.ua
-          02/28/2016: ~ 12 untranslated strings
+          Translators: Loderunner2, Bitcoin.ua
+          03/09/2016: ~ 44 untranslated strings
 
           Use capitalized keys for widely reused text that must be capitalized
 
@@ -9210,6 +10138,8 @@ module.exports = Backbone.Model.extend({
          Description: "Опис",
          Reviews: "Відгуки",
          Shipping: "Доставка",
+          CountryOfOrigin: "Country of Origin", //not translated
+          CanBeShippedTo: "Can Ship to You In:", //not translated
          Addresses: "Адреса",
          NewAddress: "Нова адреса",
          CurrentAddress: "Дійсна адреса",
@@ -9226,6 +10156,7 @@ module.exports = Backbone.Model.extend({
          Changes: "Зміни",
          SaveChanges: "Зберігти зміни",
          YourName: "Ваше ім'я",
+         BitcoinAddress: "Bitcoin Addresss", //notTranslated
          BitcoinReturnAddress: "Біткойн-адреса для повернення коштів",
          BitcoinReturnAddressPlaceholder: "Введіть Біткойн-адресу",
          BitcoinReturnAddressInfo: "В разі повернення коштів, вони будуть надіслані на цю адресу, вона має бути постійною.",
@@ -9364,9 +10295,50 @@ module.exports = Backbone.Model.extend({
          },
          BecomeModerator: "Стати Модертором",
          EditModerator: "Налаштування Модертора",
+         overallRatingKeys: {
+          fiveStar: "Excellent all around", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+         },
+         qualityRatingKeys: {
+          fiveStar: "Excellent quality", //notTranslated
+          fourStar: "Good quality", //notTranslated
+          threeStar: "Average quality", //notTranslated
+          twoStar: "Poor quality", //notTranslated
+          oneStar: "Terrible quality", //notTranslated
+         },
+         descriptionRatingKeys: {
+          fiveStar: "Exactly as described", //notTranslated
+          fourStar: "Mostly as described", //notTranslated
+          threeStar: "Somewhat as described", //notTranslated
+          twoStar: "Mostly not as described", //notTranslated
+          oneStar: "Did not match description", //notTranslated
+         },
+         deliveryRatingKeys: {
+          fiveStar: "Extremly fast", //notTranslated
+          fourStar: "Relatively fast", //notTrasnalted
+          threeStar: "Average", //notTranslated
+          twoStar: "Slow", //notTranslated
+          oneStar: "Terribly slow", //notTranslated
+         },
+         customerServiceRatingKeys: {
+          fiveStar: "Excellent", //notTranslated
+          fourStar: "Good", //notTranslated
+          threeStar: "Average", //notTranslated
+          twoStar: "Poor", //notTranslated
+          oneStar: "Terrible", //notTranslated
+         },
          transactions: {
            OrderDetails: "Інформація Замовлення",
            SoldBy: "Продано",
+           BuyerPayout: "Buyer Payout", // not translated
+           SellerPayout: "Seller Payout", // not translated
+           BuyerAmout: "Buyer Amout", // not translated
+           SellerAmout: "Seller Amout", // not translated
+           YouEarn: "You Earn", // not translated
+           YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
            PurchasedBy: "Куплено",
            searchByOrder: "Пошук за номером замовлення",
            sortByStatusAll: "Всі",
@@ -9439,11 +10411,19 @@ module.exports = Backbone.Model.extend({
            pageUnavailable: "Ця сторінка зараз не доступна.",
            badHandle: "Не правильний OpenBazaar ID"
          },
+        pageConnectingMessages: {
+          listingConnect: "Connecting to listing ${listing}",  //not translated
+          listingFail: "The listing you're trying to view is currently offline",  //not translated
+          handleConnect: "Connecting to ${handle}",  //not translated
+          handleFail: "The page you're trying to view is currently offline",  //not translated
+          userConnect: "Connecting to ${guid}",  //not translated
+          userFail: "The page you're trying to view is currently offline",  //not translated
+        },         
         aboutSection: {
-           about: "<p>OpenBazaar це мережа з користувачів котрі куплють та продають товари та послуги безпосередньо один одному, використовуючи Біткоін. Ця мережа не має власника, не управляєтся будь якою організаціею, являється розподіленою децентралізованою системою що існує в мережі.</p><p>OpenBazaar программа з відкритим кодом та MIT ліцензіею. Ви можете переглянути код за посиланням <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar це колективний поект, і ми запрошуемо всіх до участі у його розробці до каналу <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a>, або <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Якщо вам потрібна допомога, прочитайте OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">інструкцію</a>.</p><p>Якщо у вас залишились питання, звертайтесь до служби підтримки (Англійською) <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
+           about: "<p>OpenBazaar це мережа з користувачів котрі куплють та продають товари та послуги безпосередньо один одному, використовуючи Біткоін. Ця мережа не має власника, не управляєтся будь якою організаціею, являється розподіленою децентралізованою системою що існує в мережі.</p><p>OpenBazaar программа з відкритим кодом та MIT ліцензіею. Ви можете переглянути код за посиланням <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar це колективний поект, і ми запрошуемо всіх до участі у його розробці до каналу <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a>, або <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Якщо вам потрібна допомога, прочитайте OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">інструкцію</a>.</p><p>Якщо у вас залишились питання, звертайтесь до служби підтримки (Англійською) <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
            contributors: "<p>OpenBazaar став можливим завдяки міжнародному співтовариству розробників та волонтерів, що витратили свій час на розробку проекту, та допомогли зробити торгівлю вільною. Це частковий список тих хто допоміг проекту написанням коду та іншою допомогою</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
 
-           support: "<p>Ви можете допомогти OpenBazaar в декілька способів та зробити торгівлю дійсно вільною.</p><p>Продаж або придбання товарів та послуг в мережі допомагає зростанню та розвитку товариства та робить платформу більш цікавою для нових користувачів. Порадьте тим хто приймає Bitcoin в бізнесі використовувати плтформу, допоможіть розповсюдженням інформації про можливості платформи, P2P торгівлі.</p><p>Якщо ви розробник, відвідайте нашу сторінку <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>, можливо ви зможете допомогти чимось. Під допомогою з розробкою ядра, ми надіємося що бездозвільна та відкрита природа проекту, дасть вам змогу будувати нові сервіси поверх вже існуючої мережі.</p><p>Ткож вы можете <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">допомогти з розробкою надавши трішки Bitcoin</a> що будуть використані для участі в конференціях, та як нагороди розробникам, та на рекламу та просування OpenBazaar.</p><p>Будьласка <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">приєднуйтесь до Slack</a> якщо ви маєте ідеї для OpenBazaar, або якщо маєте питання до ключових розробників.</p>",
+           support: "<p>Ви можете допомогти OpenBazaar в декілька способів та зробити торгівлю дійсно вільною.</p><p>Продаж або придбання товарів та послуг в мережі допомагає зростанню та розвитку товариства та робить платформу більш цікавою для нових користувачів. Порадьте тим хто приймає Bitcoin в бізнесі використовувати плтформу, допоможіть розповсюдженням інформації про можливості платформи, P2P торгівлі.</p><p>Якщо ви розробник, відвідайте нашу сторінку <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>, можливо ви зможете допомогти чимось. Під допомогою з розробкою ядра, ми надіємося що бездозвільна та відкрита природа проекту, дасть вам змогу будувати нові сервіси поверх вже існуючої мережі.</p><p>Ткож вы можете <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">допомогти з розробкою надавши трішки Bitcoin</a> що будуть використані для участі в конференціях, та як нагороди розробникам, та на рекламу та просування OpenBazaar.</p><p>Будьласка <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">приєднуйтесь до Slack</a> якщо ви маєте ідеї для OpenBazaar, або якщо маєте питання до ключових розробників.</p>",
 
          licensing: "<p>OpenBazaar це програма з відкритим кодом та ліцензіею MIT. Ця ліцензія  дозволяє, та розроблена для того щоб дозволити людям вільно використовувти код прогрмми для інших відкритих проектів, іншого програмного забезпечення. Повний текст ліцензії нведено нижче.</p><h4>MIT Ліцензія (MIT)</h4><h5>Права користування &#169 2015 OpenBazaar розробників.</h5><p>Ціею ліцензіею надано дозвіл, безкоштовно, для будь якої особи отримувати копію ціеї прогрми та асоційовних файлів документації. (the \"Software\"), використовувати програму без будь яких обмежень, використання, копіювання, модифікації, злияння, публікації, розповсюдження, субліцензування, продажу копій, за умови дотримання наступних вимог:</p><p>Наведенні вище прва користування та дозвіл на використання має бути зазначений в кожній копії программи або її частині.</p><p>ПРОГРАММА НАДАЄТЬСЯ \"ЯК Є\", БЕЗ БУДЬ ЯКИХ ГАРАНТІЙ, ЯВНИХ АБО УЯВНИХ, БЕЗ ГАРАНТІЇ НА ТОВАРИ ТА ПОСЛУГИ, БЕЗ ГРАНТІЇ ПРИДАТНОСТІ ДЛЯ ВИКОРИСТАННЯ В БУДЬЯКИХ ЦІЛЯХ, АБО НЕ ПОРУШЕННЯ ВАШИХ ПРАВ. АВТРОРИ ПРОГРММИ НІ В ЯКОМУ РАЗІ НЕ НЕСУТЬ ВІДПОВІДАЛЬНОСТІ ЗА БУДЬ ЯКІ ПРЕТЕНЗІЇ, ШКОДУ, ВТРАЧЕНІ КОШТИ, ТА ІНШЕ. ПРОГРАММА НАДАЕТСЯ БЕЗ ГАРАНТІЙ В РАЗІ ВИКОРИСТАННЯ ПРОГРАМИИ, ПРАВОПОРУШЕННЯ АБО ІНШИМ ЧИНОМ, ВИКЛИКАНИМ, ПРОГРММОЮ АБО ІНШИМИ УМОВАМИ В ПРОГРАММІ. Ви ВИКОРИСТОВУЄТЕ ПРОГРАММУ НА ВЛАСНУ ВІДПОВІДАЛЬНІСТЬ ТА РИЗИК. ТА МАЄТЕ ВЛАСНОРУЧ НЕСТИ ВІДПОВІДАЛЬНІСЬ ЗА ДїЇ СПРИЧИНЕНІ ПРОГРАМОЮ АБо В ПРОГРАМІ.</p><h4>Бібліотеки</h4><p>Нступні бібліотеки були використані в OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>autobahn</li><li>python-obelisk</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li></ul>",
      },
@@ -9455,7 +10435,8 @@ module.exports = Backbone.Model.extend({
          discover: {
            searchDefaultText: "Сканую вашу мережу...",
            searchingText: "Сканую вашу мережу на ",
-           noResults: "Не знайдено товарів в вашій мережі познчених як "
+           noResults: "No listings found in your network", //notTranslated
+           noTaggedResults: "Не знайдено товарів в вашій мережі познчених як"
          },
          filters: {
            pagesAllTypes: "Всі типи",
@@ -9491,7 +10472,7 @@ module.exports = Backbone.Model.extend({
            disclaimer_title: "Відповідальність та Використання",
            disclaimer_body: "ПОПЕРЕДЖЕННЯ - Шановні Українці. \n\n НЕ Використовуйте OpenBazaar для продажу або придбання товарів що заборонені законодавством, або можуть порушувати норми моралі. Ви особисто несете відповідальність за всі ваші дії. \n\n Майте на увазі що система Біткоін та OpenBazaar забезпечують лише умовну анонімнісмть, та потребують додаткових заходів для забезпечення повної анонімності. Ці сиситеми зберігають всю історію транзакцій, що відкрита та може бути переглянута будьким. Всі ваші дії що були вчинені анонімно зараз, потенційно можуть бути відстежені в майбутньому, та не лише через вас, а й через дії тих з ким ви торгуєте. \n\n Користувачі OpenBazaar мають знати та дотримуватись зконів тих територій на яких здійснюють торгівлю. Та несуть власну відповідальністю за порушення законів. Розробники OpenBazaar, не несуть відповідальність за використання программи в протиправних цілях. Ви маєте самостійно переконатися в вашому праві, купувати чи продавати той чи інший товар чи послугу, та можливості доставки товару в ту чи іншу країну, згідно її законодавства. \n\n Спільнота OpenBazaar постійно працює для вдосконалення якості використання, вільної платформи для світової торгівлі. Але, так як і з будь яким програмним продуктом можливі помилки в роботі прогрмми. Розробники не несуть відповідальності з грошові втрати повязані з використанням прогрмми OpenBazaar. Використовуючи программу OpenBazaar, ви чините на свій власний роззсуд, та власну відповідальність, программа надается як є, без зобовязань. Якщо це не є прийнятним для вас, відмовтесь від використання OpenBazaar.",
 
-             yourCountry: "Оберіть вашу країну",
+           yourCountry: "Оберіть вашу країну",
            localCurrency: "Оберіть валюту",
            LanguagePlaceholder: "Введіть мову",
            CountryPlaceholder: "Введіть країну",

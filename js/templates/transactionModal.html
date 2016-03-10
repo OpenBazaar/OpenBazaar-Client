@@ -82,10 +82,10 @@
       <hr>
       <div class="flexRow txt-center">
         <div class="flexExpand">
-          Buyer Payout: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %> BTC
+          <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %> BTC
         </div>
         <div class="flexExpand">
-          Seller Payout: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %> BTC
+          <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %> BTC
         </div>
       </div>
     </div>
@@ -376,15 +376,15 @@
             <div class="flexCol-8 positionWrapper">
               <div class="fieldItem">
                 <input name="feedback" id="feedback1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="feedback1"></label>
+                <label for="feedback1" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.oneStar') %>""></label>
                 <input name="feedback" id="feedback2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="feedback2"></label>
+                <label for="feedback2" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.twoStar') %>""></label>
                 <input name="feedback" id="feedback3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="feedback3"></label>
+                <label for="feedback3" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.threeStar') %>""></label>
                 <input name="feedback" id="feedback4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="feedback4"></label>
+                <label for="feedback4" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fourStar') %>""></label>
                 <input name="feedback" id="feedback5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="feedback5"></label>
+                <label for="feedback5" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fiveStar') %>"></label>
               </div>
             </div>
           </div>
@@ -398,15 +398,15 @@
             <div class="flexCol-8 positionWrapper">
               <div class="fieldItem">
                 <input name="quality" id="quality1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="quality1"></label>
+                <label for="quality1" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.oneStar') %>"></label>
                 <input name="quality" id="quality2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="quality2"></label>
+                <label for="quality2" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.twoStar') %>"></label>
                 <input name="quality" id="quality3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="quality3"></label>
+                <label for="quality3" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.threeStar') %>"></label>
                 <input name="quality" id="quality4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="quality4"></label>
+                <label for="quality4" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.fourStar') %>"></label>
                 <input name="quality" id="quality5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="quality5"></label>
+                <label for="quality5" class="tooltip height24" data-tooltip="<%= polyglot.t('qualityRatingKeys.fiveStar') %>"></label>
               </div>
             </div>
           </div>
@@ -420,15 +420,15 @@
             <div class="flexCol-8 positionWrapper">
               <div class="fieldItem">
                 <input name="description" id="description1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="description1"></label>
+                <label for="description1" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.oneStar') %>"></label>
                 <input name="description" id="description2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="description2"></label>
+                <label for="description2" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.twoStar') %>"></label>
                 <input name="description" id="description3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="description3"></label>
+                <label for="description3" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.threeStar') %>"></label>
                 <input name="description" id="description4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="description4"></label>
+                <label for="description4" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.fourStar') %>"></label>
                 <input name="description" id="description5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="description5"></label>
+                <label for="description5" class="tooltip height24" data-tooltip="<%= polyglot.t('descriptionRatingKeys.fiveStar') %>"></label>
               </div>
             </div>
           </div>
@@ -442,15 +442,15 @@
             <div class="flexCol-8 positionWrapper">
               <div class="fieldItem">
                 <input name="delivery_time" id="delivery_time1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="delivery_time1"></label>
+                <label for="delivery_time1" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.oneStar') %>"></label>
                 <input name="delivery_time" id="delivery_time2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="delivery_time2"></label>
+                <label for="delivery_time2" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.twoStar') %>"></label>
                 <input name="delivery_time" id="delivery_time3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="delivery_time3"></label>
+                <label for="delivery_time3" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.threeStar') %>"></label>
                 <input name="delivery_time" id="delivery_time4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="delivery_time4"></label>
+                <label for="delivery_time4" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.fourStar') %>"></label>
                 <input name="delivery_time" id="delivery_time5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="delivery_time5"></label>
+                <label for="delivery_time5" class="tooltip height24" data-tooltip="<%= polyglot.t('deliveryRatingKeys.fiveStar') %>"></label>
               </div>
             </div>
           </div>
@@ -464,15 +464,15 @@
             <div class="flexCol-8 positionWrapper">
               <div class="fieldItem">
                 <input name="customer_service" id="customer_service1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="customer_service1"></label>
+                <label for="customer_service1" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.oneStar') %>"></label>
                 <input name="customer_service" id="customer_service2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="customer_service2"></label>
+                <label for="customer_service2" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.twoStar') %>"></label>
                 <input name="customer_service" id="customer_service3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="customer_service3"></label>
+                <label for="customer_service3" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.threeStar') %>"></label>
                 <input name="customer_service" id="customer_service4" type="radio" class="fieldItem starRating" value = 4 checked> 
-                <label for="customer_service4"></label>
+                <label for="customer_service4" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.fourStar') %>"></label>
                 <input name="customer_service" id="customer_service5" type="radio" class="fieldItem starRating" value = 5 checked>
-                <label for="customer_service5"></label>
+                <label for="customer_service5" class="tooltip height24" data-tooltip="<%= polyglot.t('customerServiceRatingKeys.fiveStar') %>"></label>
               </div>
             </div>
           </div>
@@ -622,7 +622,7 @@
             <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
               <strong><%- ob.shippingType %></strong>
             </div>
-            <div class="noOverflow fontSize13 txt-fade marginTop5">
+            <div class="noOverflow fontSize13 txt-fade marginTop4">
               Shipped by:
               <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
                 <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
@@ -634,11 +634,11 @@
             </div>
           </div>
           <div class="flexCol-4">
-            <div class="pad10left txt-unleaded fontSize14 textOpacity1 marginTop12">
+            <div class="txt-unleaded fontSize14 textOpacity1 marginTop12">
               <% if(ob.displayShippingPrice){ %>
-              <strong><%= ob.displayShippingPrice %> <span class="noWrap">(<%= ob.displayShippingPriceBTC %> BTC)</span></strong>
+              <strong><%= ob.displayShippingPriceBTC.toFixed(4) %> BTC <span class="noWrap">(<%= ob.displayShippingPrice %>)</span></strong>
               <% } else if(ob.displayShippingPriceBTC){ %>
-              <strong><%= ob.displayShippingPriceBTC %> BTC</strong>
+              <strong><%= ob.displayShippingPriceBTC.toFixed(4) %> BTC</strong>
               <% } else { %>
               <strong><%= polyglot.t('Free') %></strong>
               <% } %>
@@ -685,9 +685,9 @@
       </div>
       <div class="flexCol-5 alignRight">
         <% if(ob.displayTotalPrice){ %>
-        <strong><span class="noWrap"><%= ob.buyer_order.order.payment.amount %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+        <strong><span class="noWrap"><%= ob.buyer_order.order.payment.amount.toFixed(4) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
         <% } else if(ob.buyer_order.order.payment.amount){ %>
-        <strong><%= ob.buyer_order.order.payment.amount %> BTC</strong>
+        <strong><%= ob.buyer_order.order.payment.amount.toFixed(4) %> BTC</strong>
         <% } else { %>
         <strong><%= polyglot.t('Free') %></strong>
         <% } %>
@@ -822,7 +822,7 @@
       </div>
       <div class="scrollOverflowY customThemeScrollbar width100 noOverflow height254">
         <div class="flexRow rowItem padding15 custCol-border borderBottom">
-          <div class="txt-unleaded">
+          <div class="txt-unleaded width100">
             <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
               <div class="thumbnail thumbnail-large-slim floatLeft marginRight10" style="background-image: url(imgs/defaultUser.png);">
               </div>
@@ -1021,7 +1021,7 @@
                   <%= polyglot.t('transactions.TotalInTransaction') %>
                   <strong><%= ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC</strong>
                   <div class="pull-right">
-                    You earn: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
+                    <%= polyglot.t('transactions.YouEarn') %>: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
                   </div>
                 </div>
               </div>
@@ -1030,7 +1030,7 @@
             <% if(ob.vendor_order_confirmation){ %>
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">Buyer Amount:</div>
+                <div class="fieldItem"><%= polyglot.t('transactions.BuyerAmount') %>:</div>
               </div>
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
@@ -1045,7 +1045,7 @@
             </div>
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">Seller Amount:</div>
+                <div class="fieldItem"><%= polyglot.t('transactions.SellerAmount') %>:</div>
               </div>
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <span class="marginRight10">
@@ -1068,7 +1068,7 @@
 
             <div class="flexRow">
               <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">Your Bitcoin Payment Address:</div>
+                <div class="fieldItem"><%= polyglot.t('transactions.YourBitcoinPaymentAddress') %>:</div>
               </div>
               <div class="flexCol-8 borderRight custCol-border padding10">
                 <input name="moderator_address"
