@@ -7,6 +7,7 @@ var __ = require('underscore'),
     app = require('../App.js').getApp(),
     Polyglot = require('node-polyglot'),
     NotificationsCl = require('../collections/notificationsCl.js'), 
+    NotificationMd = require('../models/notificationsMd'),
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
@@ -89,6 +90,7 @@ module.exports = baseVw.extend({
     });
 
     this.listenTo(this.notificationsCl, 'update', (cl, options) => {
+      console.log('update nation!');
       this.setNotificationCount(cl.getUnreadCount());
     });
 
@@ -136,7 +138,8 @@ module.exports = baseVw.extend({
     var data = JSON.parse(response.data),
         username,
         avatar,
-        notif;
+        notif,
+        notifMd;
 
     if (data.hasOwnProperty('notification')) {
       notif = data.notification;
@@ -165,9 +168,12 @@ module.exports = baseVw.extend({
           break;
       }
 
-      this.notificationsCl.add(
+      notifMd = new NotificationMd(
         __.extend({}, notif, { read: false })
       );
+      
+      notifMd.socketUnread = true;
+      this.notificationsCl.add(notifMd);
 
       app.playNotificationSound();
     }
@@ -318,6 +324,7 @@ module.exports = baseVw.extend({
   },
 
   setNotificationCount: function(count){
+    console.log('setting the count');
     if (isNaN(parseInt(count))) return;
 
     if (count > 99) {
@@ -334,6 +341,38 @@ module.exports = baseVw.extend({
   },
 
   onNotifMenuClose: function() {
+    console.log('on the close again');
+
+    // var unread = [],
+    //     formData = new FormData();
+
+    // this.notificationsVw.resetScroll();
+
+    // this.notificationsCl.forEach((notif) => {
+    //   if (!notif.get('read')) {
+    //     notif.set('read', true);
+    //     delete notif.socketUnread;
+    //     unread.push(notif.id);
+    //   }
+    // });
+
+    // if (unread.length) {
+    //   unread.forEach((id) => {
+    //     formData.append('id[]', id);
+    //   });
+
+    //   $.ajax({
+    //     url: app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read',
+    //     type: 'POST',
+    //     contentType: false,
+    //     processData: false,
+    //     dataType: 'json',
+    //     data: formData
+    //   });
+    // }
+
+    // this.setNotificationCount(0);    
+
     this.notificationsVw.resetScroll();
 
     this.notificationsCl.where({ read: false })
@@ -344,7 +383,7 @@ module.exports = baseVw.extend({
         });
       });
 
-    this.setNotificationCount(0);    
+    this.setNotificationCount(0);        
   },
 
   onPopMenuNavClick: function(e) {
