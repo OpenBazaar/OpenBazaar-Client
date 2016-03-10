@@ -580,12 +580,14 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardOrderSummary, .js-buyWizardCloseSummary').removeClass('hide');
 
     // alert the user in case they're not in the active window
-    new Notification(window.polyglot.t('buyFlow.paymentSent'));
+    new Notification(window.polyglot.t('buyFlow.paymentSent'), {
+      silent: true
+    });
     
     // play notification sound
-    var notifcationSound = document.createElement('audio');
-    notifcationSound.setAttribute('src', './audio/notification.mp3');
-    notifcationSound.play();
+    var notificationSound = document.createElement('audio');
+    notificationSound.setAttribute('src', './audio/notification.mp3');
+    notificationSound.play();
   },
 
   openCountrySelect: function(){
