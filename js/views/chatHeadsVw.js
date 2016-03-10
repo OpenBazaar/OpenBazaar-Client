@@ -13,16 +13,20 @@ module.exports = baseVw.extend({
       throw new Error('Please provide a collection.');
     }
 
+    if (!options.parentEl) {
+      throw new Error('Please provide a parent element');
+    }
+
     this.listenTo(this.collection, 'add', (md, cl, opts) => {
       this.$headContainer.prepend(
         this.createChatHead(md).render().el
       );
     });
 
-    this.$chatHeadsContainer = $('.chatConversationHeads');
+    this.$chatHeadsContainer = options.parentEl;
     this.$headContainer = $('<div />');
 
-    this.showPerScroll = 10;
+    this.showPerScroll = 12;
     this.nextChatToShow = 0;
 
     //listen to scrolling on container
@@ -72,13 +76,24 @@ module.exports = baseVw.extend({
     this.chatHeadViews = [];
     this.renderChatHeads(this.nextChatToShow, this.showPerScroll);
     this.$el.html(this.$headContainer);
+    this.checkIfFilled();
 
     return this;
   },
 
+  checkIfFilled: function(){
+    //check to see if parent is filled. If not, call onScroll a second time.
+    //use a zero second timeout to force the check to be after render is complete
+    setTimeout(() => {
+      if(this.$headContainer[0].childNodes.length < this.collection.length && this.$chatHeadsContainer[0].clientHeight > this.$headContainer[0].scrollHeight){
+        this.onScroll();
+        this.checkIfFilled();
+      }
+    },0);
+  },
+
   renderChatHeads: function(start, end) {
-    var totalChats = this.collection.models.length,
-        chatsToRender =  __.filter(this.collection.models, function(value, index){
+    var chatsToRender =  __.filter(this.collection.models, function(value, index){
                           return (index >= start) && (index < end);
                         });
 
@@ -88,7 +103,12 @@ module.exports = baseVw.extend({
       );
     });
 
-    this.nextChatToShow = this.nextChatToShow >= totalChats ? this.nextChatToShow : this.nextChatToShow + this.showPerScroll;
+
+    this.nextChatToShow = this.nextChatToShow >= this.collection.length ? this.nextChatToShow : this.nextChatToShow + this.showPerScroll;
+  },
+
+  remove: function(){
+    this.scrollHandler && this.$headContainer.off('scroll', this.scrollHandler);
   }
 
 });
