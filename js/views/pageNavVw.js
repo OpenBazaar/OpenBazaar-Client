@@ -7,7 +7,6 @@ var __ = require('underscore'),
     app = require('../App.js').getApp(),
     Polyglot = require('node-polyglot'),
     NotificationsCl = require('../collections/notificationsCl.js'), 
-    NotificationMd = require('../models/notificationsMd'),
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
@@ -89,9 +88,12 @@ module.exports = baseVw.extend({
       }
     });
 
+    this.unreadNotifsViaSocket = 0;
+
     this.listenTo(this.notificationsCl, 'update', (cl, options) => {
-      console.log('update nation!');
-      this.setNotificationCount(cl.getUnreadCount());
+      if (options.xhr) this.unreadNotifsViaSocket = 0;
+
+      this.setNotificationCount(this.getUnreadNotifCount());
     });
 
     this.listenTo(this.userProfile, 'change:avatar_hash', function(){
@@ -138,8 +140,7 @@ module.exports = baseVw.extend({
     var data = JSON.parse(response.data),
         username,
         avatar,
-        notif,
-        notifMd;
+        notif;
 
     if (data.hasOwnProperty('notification')) {
       notif = data.notification;
@@ -168,12 +169,11 @@ module.exports = baseVw.extend({
           break;
       }
 
-      notifMd = new NotificationMd(
+      this.unreadNotifsViaSocket++;
+
+      this.notificationsCl.add(
         __.extend({}, notif, { read: false })
       );
-      
-      notifMd.socketUnread = true;
-      this.notificationsCl.add(notifMd);
 
       app.playNotificationSound();
     }
@@ -324,7 +324,6 @@ module.exports = baseVw.extend({
   },
 
   setNotificationCount: function(count){
-    console.log('setting the count');
     if (isNaN(parseInt(count))) return;
 
     if (count > 99) {
@@ -340,50 +339,39 @@ module.exports = baseVw.extend({
     }
   },
 
+  getUnreadNotifCount: function() {
+    return (this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount()) || 0;  
+  },
+
   onNotifMenuClose: function() {
-    console.log('on the close again');
-
-    // var unread = [],
-    //     formData = new FormData();
-
-    // this.notificationsVw.resetScroll();
-
-    // this.notificationsCl.forEach((notif) => {
-    //   if (!notif.get('read')) {
-    //     notif.set('read', true);
-    //     delete notif.socketUnread;
-    //     unread.push(notif.id);
-    //   }
-    // });
-
-    // if (unread.length) {
-    //   unread.forEach((id) => {
-    //     formData.append('id[]', id);
-    //   });
-
-    //   $.ajax({
-    //     url: app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read',
-    //     type: 'POST',
-    //     contentType: false,
-    //     processData: false,
-    //     dataType: 'json',
-    //     data: formData
-    //   });
-    // }
-
-    // this.setNotificationCount(0);    
+    var unread = [],
+        formData = new FormData();
 
     this.notificationsVw.resetScroll();
 
-    this.notificationsCl.where({ read: false })
-      .forEach((notif) => {
+    this.notificationsCl.forEach((notif) => {
+      if (!notif.get('read')) {
         notif.set('read', true);
-        $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
-          'id': notif.get('id')
-        });
+        unread.push(notif.id);
+      }
+    });
+
+    if (unread.length) {
+      unread.forEach((id) => {
+        formData.append('id', id);
       });
 
-    this.setNotificationCount(0);        
+      $.ajax({
+        url: app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read',
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        data: formData
+      });
+    }
+
+    this.setNotificationCount(0);    
   },
 
   onPopMenuNavClick: function(e) {
@@ -428,7 +416,7 @@ module.exports = baseVw.extend({
         $target.parents('[data-popmenu]').length
       )) {
       app.hideOverlay();
-      $popMenu = self.$('.popMenu').removeClass('popMenu-opened');
+      $popMenu = self.$('.popMenu.popMenu-opened').removeClass('popMenu-opened');
       $popMenu.each((index, el) => {
         closeHandler = $(el).data('onclose');
         closeHandler && this[closeHandler] && this[closeHandler].call(this);
