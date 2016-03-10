@@ -110,8 +110,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Buy Now",
         Description: "Description",
         Reviews: "Reviews",
-        Shipping: "Shipping",
-        CountryOfOrigin: "Country of Origin",
+        Shipping: "Shipping:",
+        CountryOfOrigin: "Country of Origin:",
         CanBeShippedTo: "Can Ship to You In:",
         Addresses: "Addresses",
         Files: "Files", //notTranslated
@@ -167,7 +167,7 @@ module.exports = Backbone.Model.extend({
         Language: "Language",
         Reset: "Reset",
         Local: "Local",
-        Domestic: "Domestic",
+        Domestic: "Domestic:",
         Location: "Location",
         International: "International",
         Time: "Time",
@@ -383,7 +383,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item",
           TrackingNumber: "Tracking Number",
           TrackingNumberPlaceholder: "Tracking number of item",
-          EstimatedDelivery: "Estimated Delivery",
+          EstimatedDelivery: "Estimated Delivery:",
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered",
           URL: "File URL",
           URLPlaceholder: "Link to download, schedule, or more information",
@@ -406,10 +406,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction",
           TransactionReview: "Transaction Review",
           OverallRating: "Overall Rating",
-          Quality: "Quality",
-          MatchedDescription: "Matched Description",
-          DeliverySpeed: "Delivery Speed",
-          CustomerService: "Customer Service",
+          Quality: "Quality:",
+          MatchedDescription: "Matched Description:",
+          DeliverySpeed: "Delivery Speed:",
+          CustomerService: "Customer Service:",
           Review: "Review",
           ReviewPlaceHolder: "Your review of this transaction",
           NoFileProvided: "No file provided",
@@ -567,7 +567,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direct Payment",
           SendDirectlyTo: "Send direct payment to %{handle}",
           MustAddAddress: "You must add an address to ship to",
-          VendorShipsTo: "Ships to",
+          VendorShipsTo: "Ships to:",
           DoesNotShipHere: "Does not ship here",
           Send: "Send",
           BTCto: "BTC to",
@@ -583,7 +583,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.",
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible",
           paymentSent: "Payment Sent!",
-          total: "Total"
+          total: "Total:"
         },
         chat: {
           noSearchResultsFound: "No results found"
@@ -721,8 +721,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Koop Nu",
         Description: "Beschrijving",
         Reviews: "Reviews",
-        Shipping: "Verzending",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Verzending:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Addressen",
         Files: "Bestanden",
@@ -777,7 +777,7 @@ module.exports = Backbone.Model.extend({
         Language: "Taal",
         Reset: "Reset",
         Local: "Lokaal",
-        Domestic: "Binnenland",
+        Domestic: "Binnenland:",
         Location: "Locatie",
         International: "Buitenland",
         Time: "Tijd",
@@ -991,7 +991,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Naam van het bedrijf wat de bestelling afhandelt",
           TrackingNumber: "Tracking Nummer",
           TrackingNumberPlaceholder: "Tracking nummer van het item",
-          EstimatedDelivery: "Verwachtte Levertijd",
+          EstimatedDelivery: "Verwachtte Levertijd:",
           EstimatedDeliveryPlaceholder: "Verwachtte datum waarop item wordt geleverd",
           URL: "Bestand URL",
           URLPlaceholder: "Link om te downloaden, af te spreken, of voor meer informatie",
@@ -1014,10 +1014,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Beoordeel deze Transactie",
           TransactionReview: "Transactiereview",
           OverallRating: "Algemene Beoordeling",
-          Quality: "Kwaliteit",
-          MatchedDescription: "Overeenkomst Met Beschrijving",
-          DeliverySpeed: "Verzendingssnelheid",
-          CustomerService: "Klantenservice",
+          Quality: "Kwaliteit:",
+          MatchedDescription: "Overeenkomst Met Beschrijving:",
+          DeliverySpeed: "Verzendingssnelheid:",
+          CustomerService: "Klantenservice:",
           Review: "Review",
           ReviewPlaceHolder: "Uw review van deze transactie",
           NoFileProvided: "Geen bestand voorzien",
@@ -1175,7 +1175,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Directe Betaling",
           SendDirectlyTo: "Stuur directe betaling naar %{handle}",
           MustAddAddress: "U moet een adres toevoegen om naar te verzenden",
-          VendorShipsTo: "Verzendt naar",
+          VendorShipsTo: "Verzendt naar:",
           DoesNotShipHere: "Verzendt niet naar hier",
           Send: "Verzend",
           BTCto: "BTC naar",
@@ -1191,7 +1191,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Betaald van het totaal als de transactie in een dispuut raakt.",
           directPaymentDisclaimer: "Wees voorzichtig met directe betaling, deze betalingen zijn onomkeerbaar",
           paymentSent: "Betaling Verzonden!",
-          total: "Totaal"
+          total: "Totaal:"
         },
         chat: {
           noSearchResultsFound: "Geen resultaten gevonden"
@@ -1296,8 +1296,9 @@ module.exports = Backbone.Model.extend({
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchOnUserStorePlaceholder: "Introduzca un t&iacute;tulo...", //notTranslated
-        EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
-        EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
+        EstDeliveryDomesticPlaceholder: "3-5 d&iacute;s h&aacute;biles",
+        EstDeliveryInternationalPlaceholder: "7-15 d&iacute;s h&aacute;biles",
+        OrderProcessingTimePlaceholder: "Enter time needed to process order",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
         TitlePlaceholder: "Introduzca t&iacute;tulo",
         DescriptionPlaceholder: "Introduzca descripci&ooacute;n",
@@ -1325,8 +1326,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "COMPRAR AHORA",
         Description: "Descripci&oacute;n",
         Reviews: "Cr&iacute;ticas",
-        Shipping: "Envío",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Envío:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Direcciones",
         Files: "Files", //notTranslated
@@ -1380,7 +1381,7 @@ module.exports = Backbone.Model.extend({
         Language: "Lenguaje", //not translated
         Reset: "Restaurar", //not translated
         Local: "Local",
-        Domestic: "Interno",
+        Domestic: "Interno:",
         Location: "Ubicaci&oacute;n",
         International: "Internacional",
         Time: "Hora",
@@ -1550,7 +1551,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -1573,10 +1574,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -1719,7 +1720,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Usted debe agregar una dirección para env&iacute;os",
-          VendorShipsTo: "Este proveedor despacha a estos países",
+          VendorShipsTo: "Este proveedor despacha a estos países:",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
@@ -1735,7 +1736,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          total: "Total:" //notTranslated
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -1872,8 +1873,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "JETZT KAUFEN",
         Description: "Beschreibung",
         Reviews: "Rezensionen",
-        Shipping: "Versand",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Versand:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adressen",
         NewAddress : "Neue Adresse",
@@ -1927,7 +1928,7 @@ module.exports = Backbone.Model.extend({
         Language: "Language", //not translated
         Reset: "Reset", //not translated
         Local: "Lokal",
-        Domestic: "Inland",
+        Domestic: "Inland:",
         Location: "Standort",
         International: "International",
         Time: "Zeit",
@@ -2136,7 +2137,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -2159,10 +2160,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -2305,7 +2306,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Sie m&uuml;ssen eine Versandadresse hinzuzuf&uuml;gen",
-          VendorShipsTo: "Dieser Anbieter versendet nach",
+          VendorShipsTo: "Dieser Anbieter versendet nach:",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
@@ -2321,7 +2322,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          total: "Total:" //notTranslated
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -2462,8 +2463,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "COMPRA ORA",
         Description: "Descrizione",
         Reviews: "Recensioni",
-        Shipping: "Spedizione",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Spedizione:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Indirizzi",
         Files: "File",
@@ -2518,7 +2519,7 @@ module.exports = Backbone.Model.extend({
         Language: "Lingua",
         Reset: "Reset",
         Local: "Locale",
-        Domestic: "Nazionale",
+        Domestic: "Nazionale:",
         Location: "Locazione",
         International: "Internazionale",
         Time: "Tempo",
@@ -2730,7 +2731,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Nome della compagnia inviante l'articolo",
           TrackingNumber: "Numero di tracciamento",
           TrackingNumberPlaceholder: "Numero di tracciamento dell'articolo",
-          EstimatedDelivery: "Consegna stimata",
+          EstimatedDelivery: "Consegna stimata:",
           EstimatedDeliveryPlaceholder: "Data stimada per la consegna dell'articolo",
           URL: "File URL",
           URLPlaceholder: "Link per scaricare, calendario, o pi&ugrave; informazioni",
@@ -2753,10 +2754,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Valuta questa transazione",
           TransactionReview: "Analisi Transazione",
           OverallRating: "Valutazione complessiva",
-          Quality: "Qualit&agrave;",
-          MatchedDescription: "Descrizione combaciante",
-          DeliverySpeed: "Velocit&agrave; di consegna",
-          CustomerService: "Assistenza clienti",
+          Quality: "Qualit&agrave;:",
+          MatchedDescription: "Descrizione combaciante:",
+          DeliverySpeed: "Velocit&agrave; di consegna:",
+          CustomerService: "Assistenza clienti:",
           Review: "Analisi",
           ReviewPlaceHolder: "La tua analisi su questa transazione",
           NoFileProvided: "Nessun file fornito",
@@ -2914,7 +2915,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Pagamento diretto",
           SendDirectlyTo: "Invia pagamento diretto a %{handle}",
           MustAddAddress: "&Egrave; necessario aggiungere un indirizzo da spedire ai",
-          VendorShipsTo: "Invia in",
+          VendorShipsTo: "Invia in:",
           DoesNotShipHere: "Non invia qui",
           Send: "Invia",
           BTCto: "BTC a",
@@ -2930,7 +2931,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Pagato dal totale se la transazione si conclude in una disputa.",
           directPaymentDisclaimer: "Usa il pagamento diretto con cauzione, i fondi sono irreversibili",
           paymentSent: "Pagamento inviato!",
-          total: "Totale"
+          total: "Totale:"
         },
         chat: {
           noSearchResultsFound: "Nessun risultato trovato"
@@ -2997,7 +2998,7 @@ module.exports = Backbone.Model.extend({
         HighlightToStyle: "Sélectionnez votre texte pour lui appliquer un style",
         Excellent: "Excellent",
         Good: "Bon",
-        Poor: "Médiocre",
+        Poor: "Mauvais",
         StillValidating: "Votre identifiant est toujours en cours de validation",
         CheckStatus: "Vérifier l'état",
         ChangeCurrency: "Changer la devise",
@@ -3073,9 +3074,9 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Acheter Maintenant",
         Description: "Description",
         Reviews: "Avis",
-        Shipping: "Expédition",
-        CountryOfOrigin: "Country of Origin", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        Shipping: "Expédition :",
+        CountryOfOrigin: "Pays d'origine :",
+        CanBeShippedTo: "Peut vous être livré dans :",
         Addresses: "Adresses",
         Files: "Fichiers",
         NewAddress: "Nouvelle adresse",
@@ -3094,7 +3095,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Modifications",
         SaveChanges: "Enregistrer les modifications",
         YourName: "Votre nom",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Adresse Bitcoin",
         BitcoinReturnAddress: "Entrez votre adresse Bitcoin",
         BitcoinReturnAddressPlaceholder: "l'adresse bitcoin de remboursement",
         BitcoinReturnAddressInfo: "Si un remboursement est émis, les fonds devront être envoyés à une adresse Bitcoin. Veuillez fournir ci-dessous une adresse de votre portefeuille.",
@@ -3129,7 +3130,7 @@ module.exports = Backbone.Model.extend({
         Language: "Langue",
         Reset: "Réinitialiser",
         Local: "Local",
-        Domestic: "National",
+        Domestic: "National :",
         Location: "Emplacement",
         International: "International",
         Time: "Heure",
@@ -3254,50 +3255,50 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Devenir modérateur",
         EditModerator: "Paramètres de modérateur",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Excellent",
+          fourStar: "Bon",
+          threeStar: "Correct",
+          twoStar: "Mauvais",
+          oneStar: "Inacceptable",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Excellente qualité",
+          fourStar: "Bonne qualité",
+          threeStar: "Qualité correcte",
+          twoStar: "Mauvaise qualité",
+          oneStar: "Qualité inacceptable",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
+          fiveStar: "Parfaitement décrit",
+          fourStar: "Justement décrit",
           threeStar: "Somewhat as described", //notTranslated
           twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          oneStar: "Ne correspond pas",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Très rapide",
+          fourStar: "Rapide",
+          threeStar: "Correct",
+          twoStar: "Lent",
+          oneStar: "Très lent",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Excellent",
+          fourStar: "Bon",
+          threeStar: "Correct",
+          twoStar: "Mauvais",
+          oneStar: "Inacceptable",
         },
         transactions: {
           OrderDetails: "Détails de la commande",
           ViewOnBlockchain: "Voir les détails",
           SoldBy: "Vendu par",
-          BuyerPayout: "Buyer Payout", // not translated
-          SellerPayout: "Seller Payout", // not translated
-          BuyerAmout: "Buyer Amout", // not translated
-          SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          BuyerPayout: "Paiement pour l'acheteur",
+          SellerPayout: "Paiement pour le vendeur",
+          BuyerAmout: "Montant pour l'acheteur",
+          SellerAmout: "Montant pour le vendeur",
+          YouEarn: "Vous gagnez",
+          YourBitcoinPaymentAddress: "Votre adresse Bitcoin de paiement",
           PurchasedBy: "Acheté par",
           searchByOrder: "Rechercher par ID de commande ou par nom d'article",
           sortByStatusAll: "Tout",
@@ -3338,7 +3339,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Nom de l'entreprise expédiant l'article",
           TrackingNumber: "Numéro de suivi",
           TrackingNumberPlaceholder: "Numéro de suivi de cet article",
-          EstimatedDelivery: "Délai de livraison estimé",
+          EstimatedDelivery: "Délai de livraison estimé :",
           EstimatedDeliveryPlaceholder: "Date estimée de la livraison de l'article",
           URL: "URL du fichier",
           URLPlaceholder: "Lien pour télécharger, planifier, ou plus d'informations",
@@ -3361,10 +3362,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Noter cette transaction",
           TransactionReview: "Avis de transaction",
           OverallRating: "Note générale",
-          Quality: "Qualité",
-          MatchedDescription: "Conformité à l'annonce",
-          DeliverySpeed: "Vitesse de livraison",
-          CustomerService: "Service client",
+          Quality: "Qualité :",
+          MatchedDescription: "Conformité à l'annonce :",
+          DeliverySpeed: "Vitesse de livraison :",
+          CustomerService: "Service client :",
           Review: "Avis",
           ReviewPlaceHolder: "Votre avis sur cette transaction",
           NoFileProvided: "Aucun fichier fourni",
@@ -3508,7 +3509,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Paiement direct",
           SendDirectlyTo: "Envoyer un paiement direct à %{handle}",
           MustAddAddress: "Vous devez ajouter une adresse pour expédier",
-          VendorShipsTo: "Expédie vers",
+          VendorShipsTo: "Expédie vers :",
           DoesNotShipHere: "N'expédie pas ici",
           Send: "Envoyer",
           BTCto: "BTC à",
@@ -3524,7 +3525,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Payé depuis le total si la transaction se termine par un litige.",
           directPaymentDisclaimer: "Utilisez le paiement direct avec prudence, les fonds sont irréversibles",
           paymentSent: "Paiement envoyé !",
-          total: "Total"
+          total: "Total :"
         },
         chat: {
           noSearchResultsFound: "Aucun résultat trouvé"
@@ -3662,8 +3663,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "CUMPĂRAȚI ACUM",
         Description: "Descriere",
         Reviews: "Recenzii",
-        Shipping: "Livrare",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Livrare:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adrese",
         Files: "Files", //notTranslated
@@ -3718,7 +3719,7 @@ module.exports = Backbone.Model.extend({
         Language: "Language", //not translated
         Reset: "Reset", //not translated
         Local: "Local",
-        Domestic: "Domestic",
+        Domestic: "Domestic:",
         Location: "Locație",
         International: "Internațional",
         Time: "Timp",
@@ -3927,7 +3928,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -3950,10 +3951,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -4096,7 +4097,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Trebuie să adăugați o adesă pentru livrare",
-          VendorShipsTo: "Acest furnizor livrează către următoarele țări",
+          VendorShipsTo: "Acest furnizor livrează către următoarele țări:",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "Semd", //notTranslated
           BTCto: "BTC to", //notTranslated
@@ -4112,7 +4113,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          total: "Total:" //notTranslated
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -4249,8 +4250,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Купи сейчас",
         Description: "Описание",
         Reviews: "Отзывы",
-        Shipping: "Доставка",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Доставка:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Адреса",
         Files: "Files", //notTranslated
@@ -4305,7 +4306,7 @@ module.exports = Backbone.Model.extend({
         Language: "Язык", //not translated
         Reset: "Сброс", //not translated
         Local: "Местный",
-        Domestic: "Внутри страны",
+        Domestic: "Внутри страны:",
         Location: "Местонахождение",
         International: "Международный",
         Time: "Время",
@@ -4514,7 +4515,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -4537,10 +4538,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -4683,7 +4684,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Оплатить напрямую",
           SendDirectlyTo: "Отправка прямого платежа %{handle}",
           MustAddAddress: "Вы должны указать адрес для доставки",
-          VendorShipsTo: "Этот производитель отправляет в следующие страны",
+          VendorShipsTo: "Этот производитель отправляет в следующие страны:",
           DoesNotShipHere: "Выбранный производитель не производит доставку в указанный регион",
           Send: "Отправить",
           BTCto: "BTC to",
@@ -4699,7 +4700,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", // not translated
           directPaymentDisclaimer: "Будьте осторожны при отправке средств напрямую, средства невозвратимы",
           paymentSent: "Платёж отправлен!",
-          total: "Всего"
+          total: "Всего:"
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -4835,8 +4836,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "KÚPIŤ IHNEĎ",
         Description: "Popis",
         Reviews: "Hodnotenia",
-        Shipping: "Doprava",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Doprava:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
         Files: "Súbory",
@@ -4891,7 +4892,7 @@ module.exports = Backbone.Model.extend({
         Language: "Jazyk",
         Reset: "Resetovať",
         Local: "Lokálne",
-        Domestic: "Vnútroštátne",
+        Domestic: "Vnútroštátne:",
         Location: "Lokalita",
         International: "Medzinárodne",
         Time: "Čas",
@@ -5101,7 +5102,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Názov spoločnosti, ktorá doručuje objednávku",
           TrackingNumber: "Sledovacie Číslo",
           TrackingNumberPlaceholder: "Sledovacie číslo položky",
-          EstimatedDelivery: "Predpokladané Doručenie",
+          EstimatedDelivery: "Predpokladané Doručenie:",
           EstimatedDeliveryPlaceholder: "Predpokladaný datúm, kedy bude daná položka doručená",
           URL: "URL Súboru",
           URLPlaceholder: "Odkaz na stiahnutie, rozvrh, alebo viac informácií",
@@ -5124,10 +5125,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Ohodnotiť túto Transakciu",
           TransactionReview: "Hodnotenie Tranksacie",
           OverallRating: "Celkové Hodnotenie",
-          Quality: "Kvalita",
-          MatchedDescription: "Súhlasilo s Popisom",
-          DeliverySpeed: "Rýchlosť Doručenia",
-          CustomerService: "Zákaznícky Servis",
+          Quality: "Kvalita:",
+          MatchedDescription: "Súhlasilo s Popisom:",
+          DeliverySpeed: "Rýchlosť Doručenia:",
+          CustomerService: "Zákaznícky Servis:",
           Review: "Recenzia",
           ReviewPlaceHolder: "Vaše hodnotenie tejto transakcie",
           NoFileProvided: "Nebol poskytnutý žiaden súbor",
@@ -5270,7 +5271,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Priama Platba",
           SendDirectlyTo: "Poslať priamu platbu %{handle}",
           MustAddAddress: "Musíte zadať adresu pre doručenie",
-          VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín",
+          VendorShipsTo: "Tento predajca odosiela tovar do nasledujúcich krajín:",
           DoesNotShipHere: "Nedoručuje do tejto krajiny",
           Send: "Odoslať",
           BTCto: "Poslať BTC na",
@@ -5286,7 +5287,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Zaplatené z celkovej sumy ak sa transakcia dostane do sporu.",
           directPaymentDisclaimer: "Dajte si pozor pri používaní priamej platby. Prostriedky sa nedajú vrátiť",
           paymentSent: "Platba bola odoslaná!",
-          total: "Spolu"
+          total: "Spolu:"
         },
         chat: {
           noSearchResultsFound: "Neboji nájdené žiadne výsledky"
@@ -5427,8 +5428,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Hemen Al",
         Description: "Tanım",
         Reviews: "Yorumlar",
-        Shipping: "Gönderme",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Gönderme:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresler",
         Files: "Files", //notTranslated
@@ -5483,7 +5484,7 @@ module.exports = Backbone.Model.extend({
         Language: "Language", //not translated
         Reset: "Sıfırla", //not translated
         Local: "Yerel",
-        Domestic: "Yurt içi",
+        Domestic: "Yurt içi:",
         Location: "Konum",
         International: "Uluslararası",
         Time: "Zaman",
@@ -5692,7 +5693,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -5715,10 +5716,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -5861,7 +5862,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "Gönderilecek bir adres eklemelisiniz",
-          VendorShipsTo: "Satıcı şu ülkelere gönderim yapmaktadır",
+          VendorShipsTo: "Satıcı şu ülkelere gönderim yapmaktadır:",
           DoesNotShipHere: "Satıcı buraya gönderim yapmamaktadır",
           Send: "Gönder",
           BTCto: "BTC alıcısı",
@@ -5877,7 +5878,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          total: "Total:" //notTranslated
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -6017,8 +6018,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "DaH je'",
         Description: "Bang",
         Reviews: "YIqaw",
-        Shipping: "NgeH Duj",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "NgeH Duj:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "SoQ",
         Files: "Files", //notTranslated
@@ -6073,7 +6074,7 @@ module.exports = Backbone.Model.extend({
         Language: "Language", //not translated
         Reset: "Reset", //not translated
         Local: "Lutu'llu'bej",
-        Domestic: "JuH Dachegh Sep",
+        Domestic: "JuH Dachegh Sep:",
         Location: "NuqDaq SoH",
         International: "Latlh Sep",
         Time: "PoH",
@@ -6282,7 +6283,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -6305,10 +6306,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -6451,7 +6452,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "SoQ Duj ghob'e' chel SoH",
-          VendorShipsTo: "Daq Duj tuq",
+          VendorShipsTo: "Daq Duj tuq:",
           DoesNotShipHere: "Does not ship here", //notTranslated
           Send: "NgeH",
           BTCto: "BTC to",
@@ -6467,7 +6468,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          total: "Total:" //notTranslated
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -6607,8 +6608,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "立即购买",
         Description: "描述",
         Reviews: "评价",
-        Shipping: "物流",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "物流:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "地址",
         Files: "Files", //notTranslated
@@ -6666,7 +6667,7 @@ module.exports = Backbone.Model.extend({
         Language: "语言",
         Reset: "重置",
         Local: "本地",
-        Domestic: "本国",
+        Domestic: "本国:",
         Location: "地点",
         International: "国际",
         Time: "时间",
@@ -6877,7 +6878,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "预计运货天数",
+          EstimatedDelivery: "预计运货天数:",
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -6900,10 +6901,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -7046,7 +7047,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "直接支付",
           SendDirectlyTo: "将款项直接支付给 %{简称}",
           MustAddAddress: "务必添加送货地址",
-          VendorShipsTo: "此商家向以下国家/地区发货",
+          VendorShipsTo: "此商家向以下国家/地区发货:",
           DoesNotShipHere: "不向以下国家/地区发货",
           Send: "发送",
           BTCto: "BTC至",
@@ -7062,7 +7063,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "请谨慎使用直接支付方式，这是不可逆的。",
           paymentSent: "支付指令已发送!",
-          total: "总计"
+          total: "总计:"
         },
         chat: {
           noSearchResultsFound: "没有符合要求的结果"
@@ -7203,8 +7204,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "지금 구매",
         Description: "설명",
         Reviews: "리뷰",
-        Shipping: "배송",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "배송:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "주소들",
         Files: "Files", //notTranslated
@@ -7259,7 +7260,7 @@ module.exports = Backbone.Model.extend({
         Language: "Language", //not translated
         Reset: "Reset", //not translated
         Local: "지역",
-        Domestic: "국내",
+        Domestic: "국내:",
         Location: "위치",
         International: "국제",
         Time: "시간",
@@ -7468,7 +7469,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -7491,10 +7492,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -7637,7 +7638,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direct Payment", //notTranslated
           SendDirectlyTo: "Send direct payment to %{handle}", //notTranslated
           MustAddAddress: "당신 에게 제공할수 있는 배송지 주소를 추가",
-          VendorShipsTo: "공급업체 다른나라로 배송",
+          VendorShipsTo: "공급업체 다른나라로 배송:",
           DoesNotShipHere: "이업체는 여기에 배송되지 않습니다 ",
           Send: "보내다",
           BTCto: "비트코인 에게",
@@ -7653,7 +7654,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           paymentSent: "Payment Sent!", //notTranslated
-          total: "Total" //notTranslated
+          total: "Total:" //notTranslated
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -7789,8 +7790,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "今すぐ購入する",
         Description: "商品の説明",
         Reviews: "レビュー",
-        Shipping: "発送",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "発送:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "住所",
         Files: "Files", //notTranslated
@@ -7845,7 +7846,7 @@ module.exports = Backbone.Model.extend({
         Language: "言語",
         Reset: "リセット",
         Local: "ローカル",
-        Domestic: "国内",
+        Domestic: "国内:",
         Location: "住所",
         International: "国際",
         Time: "日時",
@@ -8044,7 +8045,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Name of the company shipping the item", // not translated
           TrackingNumber: "Tracking Number", // not translated
           TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery", // not translated
+          EstimatedDelivery: "Estimated Delivery:", // not translated
           EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
           URL: "File URL", // not translated
           URLPlaceholder: "Link to download, schedule, or more information", // not translated
@@ -8067,10 +8068,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Rate this Transaction", // not translated
           TransactionReview: "Transaction Review", // not translated
           OverallRating: "Overall Rating", // not translated
-          Quality: "Quality", // not translated
-          MatchedDescription: "Matched Description", // not translated
-          DeliverySpeed: "Delivery Speed", // not translated
-          CustomerService: "Customer Service", // not translated
+          Quality: "Quality:", // not translated
+          MatchedDescription: "Matched Description:", // not translated
+          DeliverySpeed: "Delivery Speed:", // not translated
+          CustomerService: "Customer Service:", // not translated
           Review: "Review", // not translated
           ReviewPlaceHolder: "Your review of this transaction", // not translated
           NoFileProvided: "No file provided", //notTranslated
@@ -8213,7 +8214,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "直接購入",
           SendDirectlyTo: "%{handle}に直接購入する",
           MustAddAddress: "お届け先住所を入力してください。",
-          VendorShipsTo: "配達可能エリア",
+          VendorShipsTo: "配達可能エリア:",
           DoesNotShipHere: "配達不能",
           Send: "送る",
           BTCto: "BTC to",
@@ -8229,7 +8230,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Use direct payment with caution, funds are irreversible", //notTranslated
           paymentSent: "送金しました！",
-          total: "注文合計"
+          total: "注文合計:"
         },
         chat: {
           noSearchResultsFound: "No results found" //notTranslated
@@ -8370,8 +8371,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Kup teraz",
         Description: "Opis",
         Reviews: "Opinie",
-        Shipping: "Wysyłka",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Wysyłka:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
         Files: "Pliki",
@@ -8426,7 +8427,7 @@ module.exports = Backbone.Model.extend({
         Language: "Język",
         Reset: "Reset",
         Local: "Lokalny",
-        Domestic: "Krajowy",
+        Domestic: "Krajowy:",
         Location: "Lokalizacja",
         International: "Międzynarodowy",
         Time: "Czas",
@@ -8635,7 +8636,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Firma przesyłkowa",
           TrackingNumber: "Numer śledzenia",
           TrackingNumberPlaceholder: "Numer śledzenia przesyłki",
-          EstimatedDelivery: "Przybliżona wysyłka",
+          EstimatedDelivery: "Przybliżona wysyłka:",
           EstimatedDeliveryPlaceholder: "Przybliżony czas dostarczenia",
           URL: "File URL",
           URLPlaceholder: "Link do pobrania, harmonogramu lub innych informacji",
@@ -8658,10 +8659,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Oceń transakcję",
           TransactionReview: "Opinia o transakcji",
           OverallRating: "Średnia ocen",
-          Quality: "Jakość",
-          MatchedDescription: "Pasujący opis",
-          DeliverySpeed: "Czas wysyłki",
-          CustomerService: "Obsługa klienta",
+          Quality: "Jakość:",
+          MatchedDescription: "Pasujący opis:",
+          DeliverySpeed: "Czas wysyłki:",
+          CustomerService: "Obsługa klienta:",
           Review: "Oceń",
           ReviewPlaceHolder: "Twoja opinia o tej transakcji",
           NoFileProvided: "Brak dostarczonego pliku",
@@ -8800,7 +8801,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Płatność bezpośrednia",
           SendDirectlyTo: "Wyślij bezpośrednią płatność do %{handle}",
           MustAddAddress: "Musisz wprowadzić adres wysyłki",
-          VendorShipsTo: "Wysyłka do",
+          VendorShipsTo: "Wysyłka do:",
           DoesNotShipHere: "Wysyłka niedostępna do",
           Send: "Wyślij",
           BTCto: "BTC do",
@@ -8816,7 +8817,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Paid from the total if the transaction ends in a dispute.", //notTranslated
           directPaymentDisclaimer: "Korzystaj z płatności bezpośredniej ostrożnie; środki nie są zwracane",
           paymentSent: "Dokonano płatności!",
-          total: "Suma"
+          total: "Suma:"
         }
       },
 
@@ -8934,8 +8935,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Køb nu",
         Description: "Beskrivelse",
         Reviews: "Anmeldelser",
-        Shipping: "Forsendelse",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Forsendelse:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresser",
         Files: "Filer",
@@ -8990,7 +8991,7 @@ module.exports = Backbone.Model.extend({
         Language: "Sprog",
         Reset: "Nulstil",
         Local: "Lokal",
-        Domestic: "Indenlands",
+        Domestic: "Indenlands:",
         Location: "Lokation",
         International: "International",
         Time: "Tid",
@@ -9200,7 +9201,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Navnet på virksomheden, der afsender varen",
           TrackingNumber: "Tracking-nummer",
           TrackingNumberPlaceholder: "Varens tracking-nummer",
-          EstimatedDelivery: "Estimeret levering",
+          EstimatedDelivery: "Estimeret levering:",
           EstimatedDeliveryPlaceholder: "Estimeret dato for levering af vare",
           URL: "Fil-URL",
           URLPlaceholder: "Link til download, plan eller mere information",
@@ -9223,10 +9224,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Bedøm denne handel",
           TransactionReview: "Handelsbedømmelse",
           OverallRating: "Overordnet bedømmelse",
-          Quality: "Kvalitet",
-          MatchedDescription: "Beskrivelsen passede",
-          DeliverySpeed: "Leveringstid",
-          CustomerService: "Kundeservice",
+          Quality: "Kvalitet:",
+          MatchedDescription: "Beskrivelsen passede:",
+          DeliverySpeed: "Leveringstid:",
+          CustomerService: "Kundeservice:",
           Review: "Bedøm",
           ReviewPlaceHolder: "Din bedømmelse af denne handel",
           NoFileProvided: "Ingen fil leveret",
@@ -9382,7 +9383,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Direkte betaling",
           SendDirectlyTo: "Send direkte betaling til %{handle}",
           MustAddAddress: "Du skal tilføje en adresse, der kan sendes til",
-          VendorShipsTo: "Afsendes til",
+          VendorShipsTo: "Afsendes til:",
           DoesNotShipHere: "Sendes ikke hertil",
           Send: "Send",
           BTCto: "BTC til",
@@ -9398,7 +9399,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Betales ud fra totalbeløbet, hvis handelen ender i en uenighed.",
           directPaymentDisclaimer: "Brug direkte betaling med forsigtighed; pengene kan ikke trækkes tilbage!",
           paymentSent: "Betaling afsendt!",
-          total: "Total"
+          total: "Total:"
         },
         chat: {
           noSearchResultsFound: "Ingen resultater fundet"
@@ -9535,8 +9536,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Comprar agora",
         Description: "Descrição",
         Reviews: "Avaliações",
-        Shipping: "Entrega",
-        CountryOfOrigin: "Country of Origin", //not translated
+        Shipping: "Entrega:",
+        CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Endereços",
         Files: "Arquivos",
@@ -9591,7 +9592,7 @@ module.exports = Backbone.Model.extend({
         Language: "Idioma",
         Reset: "Resetar",
         Local: "Local",
-        Domestic: "Doméstico",
+        Domestic: "Doméstico:",
         Location: "Localização",
         International: "Internacional",
         Time: "Horário",
@@ -9809,7 +9810,7 @@ module.exports = Backbone.Model.extend({
           ShipperPlaceholder: "Nome da companhia enviando o item",
           TrackingNumber: "Número de Rastreamento",
           TrackingNumberPlaceholder: "Número de rastreamento do item",
-          EstimatedDelivery: "Entrega estimada em",
+          EstimatedDelivery: "Entrega estimada em:",
           EstimatedDeliveryPlaceholder: "Data estimada para a entrega do item",
           URL: "URL do Arquivo",
           URLPlaceholder: "Link para download, horários ou maiores informações",
@@ -9832,10 +9833,10 @@ module.exports = Backbone.Model.extend({
           RateThisTransaction: "Avaliar essa Transação",
           TransactionReview: "Avaliação da Transação",
           OverallRating: "Avaliação Geral",
-          Quality: "Qualidade",
-          MatchedDescription: "Corresponde à Descrição",
-          DeliverySpeed: "Tempo de Entrega",
-          CustomerService: "Atendimento ao Consumidor",
+          Quality: "Qualidade:",
+          MatchedDescription: "Corresponde à Descrição:",
+          DeliverySpeed: "Tempo de Entrega:",
+          CustomerService: "Atendimento ao Consumidor:",
           Review: "Avaliar",
           ReviewPlaceHolder: "Sua Avaliação dessa transação",
           NoFileProvided: "Nenhum arquivo foi fornecido",
@@ -9993,7 +9994,7 @@ module.exports = Backbone.Model.extend({
           DirectPayment: "Pagamento Direto",
           SendDirectlyTo: "Enviar um pagamento direto para %{handle}",
           MustAddAddress: "Você precisa adicionar um endereço de entrega",
-          VendorShipsTo: "Envia para",
+          VendorShipsTo: "Envia para:",
           DoesNotShipHere: "Entrega não disponível para essa região",
           Send: "Enviar",
           BTCto: "BTC para",
@@ -10009,7 +10010,7 @@ module.exports = Backbone.Model.extend({
           moderatorPaymentDisclaimer: "Pago do total se a transação terminar em uma disputa.",
           directPaymentDisclaimer: "Seja cuidadoso ao usar o pagamento direto, pois as transações são irreversíveis",
           paymentSent: "Pagamento Enviado!",
-          total: "Total"
+          total: "Total:"
         },
         chat: {
           noSearchResultsFound: "Nenhum resultado foi encontrado"
@@ -10137,8 +10138,8 @@ module.exports = Backbone.Model.extend({
          BUYNOW: "Купити негайно",
          Description: "Опис",
          Reviews: "Відгуки",
-         Shipping: "Доставка",
-          CountryOfOrigin: "Country of Origin", //not translated
+         Shipping: "Доставка:",
+          CountryOfOrigin: "Country of Origin:", //not translated
           CanBeShippedTo: "Can Ship to You In:", //not translated
          Addresses: "Адреса",
          NewAddress: "Нова адреса",
@@ -10191,7 +10192,7 @@ module.exports = Backbone.Model.extend({
          Language: "Мова",
          Reset: "Сброс",
          Local: "Локльний",
-         Domestic: "В межах країни",
+         Domestic: "В межах країни:",
          Location: "Місцезнаходження",
          International: "Міжнродний",
          Time: "Час",
@@ -10366,7 +10367,7 @@ module.exports = Backbone.Model.extend({
            ShipperPlaceholder: "Назва компанії шо виконує доставку",
            TrackingNumber: "Номер відстеження відправлення",
            TrackingNumberPlaceholder: "Номер відстеження відправлення",
-           EstimatedDelivery: "Очікувана доставка",
+           EstimatedDelivery: "Очікувана доставка:",
            EstimatedDeliveryPlaceholder: "Приблизна дата надходження замовлення",
            URL: "URL адреса",
            URLPlaceholder: "Посилання на завантаження, або додаткову інформацію",
@@ -10388,7 +10389,7 @@ module.exports = Backbone.Model.extend({
            RateThisTransaction: "Оцінити це замовлення",
            TransactionReview: "Відгук про замовлення",
            OverallRating: "Загальний рейтинг",
-           Quality: "Якість",
+           Quality: "Якість:",
            Description: "Відповідність Опису",
            DeliveryTime: "Час доставки",
            CustomerService: "Підтримка та зворотній зв'язок",
@@ -10498,7 +10499,7 @@ module.exports = Backbone.Model.extend({
            DirectPayment: "Прямий платіж",
            SendDirectlyTo: "Відправити прямий платіж %{handle}",
            MustAddAddress: "Ви маєте вказти адресу доставки",
-           VendorShipsTo: "Можлива відправка в ці країни",
+           VendorShipsTo: "Можлива відправка в ці країни:",
            DoesNotShipHere: "В ці країни доставка не здійснюється",
            Send: "Відправити",
            BTCto: "BTC to", //notTranslated
@@ -10515,7 +10516,7 @@ module.exports = Backbone.Model.extend({
            directPaymentDisclaimer: "Будьте обачні при відправці коштів на пряму, повернути кошти не можливо.",
            directPaymentTo: "Прамий плтіж",
            paymentSent: "Платіж надіслно!",
-           total: "Загалом"
+           total: "Загалом:"
          },
          chat: {
            noSearchResultsFound: "Нічого не знайдено"
