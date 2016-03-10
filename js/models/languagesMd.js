@@ -114,7 +114,7 @@ module.exports = Backbone.Model.extend({
         CountryOfOrigin: "Country of Origin:",
         CanBeShippedTo: "Can Ship to You In:",
         Addresses: "Addresses",
-        Files: "Files", //notTranslated
+        Files: "Files",
         NewAddress: "New Address",
         CurrentAddress: "Current Addresses",
         Returns: "Returns",
@@ -132,7 +132,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Changes",
         SaveChanges: "Save Changes",
         YourName: "Your name",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Bitcoin Addresss",
         BitcoinReturnAddress: "Enter your Bitcoin Address",
         BitcoinReturnAddressPlaceholder: "Enter Bitcoin address...",
         BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
@@ -187,8 +187,8 @@ module.exports = Backbone.Model.extend({
         AboutPlaceholder: "Full description",
         BackgroundColor: "Background Color",
         NotificationPaymentSent: "Payment was sent to",
-        NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
+        NotificationOrderFor: "placed an order for",
+        NotificationOrderConfirmed: "Your order has been confirmed/shipped",
         NotificationFollow: "is now following you",
         NotificationDispute: "has opened a dispute",
         NotificationDisputeClosed: "this dispute is closed",
@@ -239,7 +239,7 @@ module.exports = Backbone.Model.extend({
         Title: "Title",
         DigitalItem: "Digital Item",
         PhysicalItem: "Physical Item",
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
+        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered",
         DomesticShippingTime: "Domestic Shipping Time",
         InternationalShippingTime: "International Shipping Time",
         DisplayNSFWcontent: "Display NSFW content?",
@@ -268,7 +268,7 @@ module.exports = Backbone.Model.extend({
         NotProvided: "not provided",
         NotFollowingAnyone: "Not following anyone",
         NoFollowers: "No followers",
-        NoReviews: "No reviews", //notTranslated
+        NoReviews: "No reviews",
         Moderator: "Moderator",
         ActiveStore:"Store is Active",
         ActiveStoreDetails: "Inactive stores and listings are not visible to other people",
@@ -296,39 +296,39 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Become a Moderator",
         EditModerator: "Moderator Settings",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Excellent all around",
+          fourStar: "Good",
+          threeStar: "Average",
+          twoStar: "Poor",
+          oneStar: "Terrible",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Excellent quality",
+          fourStar: "Good quality",
+          threeStar: "Average quality",
+          twoStar: "Poor quality",
+          oneStar: "Terrible quality",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Exactly as described",
+          fourStar: "Mostly as described",
+          threeStar: "Somewhat as described",
+          twoStar: "Mostly not as described",
+          oneStar: "Did not match description",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Extremly fast",
+          fourStar: "Relatively fast",
+          threeStar: "Average",
+          twoStar: "Slow",
+          oneStar: "Terribly slow",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Excellent",
+          fourStar: "Good",
+          threeStar: "Average",
+          twoStar: "Poor",
+          oneStar: "Terrible",
         },
         transactions: {
           OrderDetails: "Order Details",
@@ -446,12 +446,12 @@ module.exports = Backbone.Model.extend({
           badJSON: "The JSON data returned from the server was malformed"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Connecting to listing ${listing}",
+          listingFail: "The listing you're trying to view is currently offline",
+          handleConnect: "Connecting to ${handle}",
+          handleFail: "The page you're trying to view is currently offline",
+          userConnect: "Connecting to ${guid}",
+          userFail: "The page you're trying to view is currently offline",
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -466,7 +466,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scanning your network",
           searchingText: "Scanning your network for",
-          noResults: "No listings found in your network", //notTranslated
+          noResults: "No listings found in your network",
           noTaggedResults: "No listings found in your network tagged with"
         },
         filters: {
@@ -2038,6 +2038,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
@@ -2629,6 +2631,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(Questo campo &egrave; di sola lettura)",
         HandleResolver: "Recupero Nickname",
         ShutDownServer: "Spegni il server",
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Caricamento Prezzi Bitcoin...",
         ThisUserIsBlocked: "Questo utente &egrave; nascosto perch&egrave; si trova nella tua lista bloccati",
         ThisUserIsNSFW: "Questo utente &egrave; nascosto perch&egrave; la sua pagina &egrave; indicata come NSFW",
@@ -3240,6 +3244,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(Ce champ est en lecture seule)",
         HandleResolver: "Résolveur d'identifiant",
         ShutDownServer: "Arrêter le serveur",
+        NoFancyStyles: "Désactiver les effets visuels",
+        NoFancyStylesWarning: "Cela va désactiver les animations et les transparences. Peut améliorer les performances sur les systèmes lents.",
         LoadingBitcoinPrices: "Chargement des prix Bitcoin...",
         ThisUserIsBlocked: "Cet utilisateur est masqué parce que vous l'avez bloqué",
         ThisUserIsNSFW: "Cet utilisateur est masqué parce que sa page est listée comme NSFW",
@@ -3402,12 +3408,12 @@ module.exports = Backbone.Model.extend({
           badJSON: "The JSON data returned from the server was malformed" // notTranslated
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Connexion à l'annonce ${listing}",
+          listingFail: "L'annonce que vous essayez de voir est actuellement déconnectée",
+          handleConnect: "Connexion à ${handle}",
+          handleFail: "La page que vous essayez de voir est actuellement déconnectée",
+          userConnect: "Connexion à ${guid}",
+          userFail: "La page que vous essayez de voir est actuellement déconnectée",
         },
         aboutSection: {
           about: "<p>OpenBazaar est un réseau d’utilisateurs qui achètent et vendent directement entre eux des biens et services, en utilisant Bitcoin. Ce réseau est décentralisé et n’est pas contrôlé par une quelconque organisation.</p><p>Ce logiciel est open-source et sous licence MIT. Vous pouvez voir le code sur <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar est un projet communautaire, et les participations sont les bienvenues sur notre cannal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou sur notre <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Si vous avez besoin d’aide, lisez le   <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutoriel</a> d’OpenBazaar version 1.0.</p><p>Si vous avez encore des questions, créez une question sur notre <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">centre d’aide</a>.</p>",
@@ -3829,6 +3835,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
@@ -4416,6 +4424,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
@@ -5003,6 +5013,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(Toto pole nie je editovateľné)",
         HandleResolver: "Handle Resolver",
         ShutDownServer: "Vypnúť Server",
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Načítavam cenu Bitcoinu...",
         ThisUserIsBlocked: "Tento používateľ je skrytý, pretože sa nachádza na Vašom zozname zablokovaných používateľov",
         ThisUserIsNSFW: "Tento používateľ je skrytý, pretože jeho stránka je v zozname NSFW (stránky s nevhodným obsahom)",
@@ -5594,6 +5606,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
@@ -6184,6 +6198,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
@@ -6779,6 +6795,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(这个字段是只读的)",
         HandleResolver: "简称解析器",
         ShutDownServer: "关闭服务器",
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "正在载入比特币价格...",
         ThisUserIsBlocked: "该用户已隐藏，因为在你的屏蔽清单中",
         ThisUserIsNSFW: "该用户已隐藏，因为主页包含成人内容",
@@ -7370,6 +7388,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
@@ -7946,6 +7966,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(This Field is Read Only)", //notTranslated
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Shut Down the Server",  // not translated
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
         ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
         ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
@@ -8537,6 +8559,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(To pole jest tylko do odczytu)",
         HandleResolver: "Handle Resolver",  // not translated
         ShutDownServer: "Zatrzymaj serwer",
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Ładowanie kursu Bitcoina..",
         ThisUserIsBlocked: "Ten użytkownik jest ukryty, ponieważ znajduje się na Twojej liście zablokowanych użytkowników",
         ThisUserIsNSFW: "Ten użytkownik jest ukryty, ponieważ jego strona została oznaczona jako NSFW",
@@ -9102,6 +9126,8 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Håndtering af brugernavn", // This is related to the Handle phrase. A Handle is a unique name that starts with @ that users can register with OneName. For example, "@joshob1". If a user wants to use a different web service to resolve Handles, they can put in the URL of a Handle Resolver in this field.
         ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
+        NoFancyStyles: "Disable Visual Effects", // not translated
+        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
         ThisUserIsBlocked: "Denne bruger er skjult, da vedkommende er på din blokeringsliste",
         ThisUserIsNSFW: "Denne bruger er skjult, da vedkommendes side står opført som potentielt stødende",
