@@ -49,7 +49,8 @@ module.exports = baseVw.extend({
 
       if (!this.chatHeadsVw) {
         this.chatHeadsVw = new ChatHeadsVw({
-          collection: this.filterChatHeads(cl)
+          collection: this.filterChatHeads(cl),
+          parentEl: this.$chatHeadsContainer
         });
 
         this.$chatHeadsContainer.html(
