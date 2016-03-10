@@ -529,14 +529,14 @@ module.exports = Backbone.View.extend({
     var totalPrice = this.model.get('totalPrice'),
         totalBTCPrice = this.model.get('totalBTCDisplayPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
-        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
+        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalPrice);
     this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
-    this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(4));
+    this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(8));
   },
 
   copyPayAddress: function(){
