@@ -21,8 +21,7 @@ module.exports = baseVw.extend({
   },
 
   unblockUser: function(e) {
-    console.log('unblock click');
-    // this.trigger('unblockUserClick', { originalEvent: e, view: this });
+    this.trigger('unblockUserClick', { originalEvent: e, view: this });
   },
 
   render: function(){

@@ -261,6 +261,7 @@ module.exports = Backbone.View.extend({
       }
 
       $blockedContainer.html(this.blockedUsersVw.el);
+      this.blockedUsersVw.delegateEvents();
 
       if (!document.contains(this.$lazyLoadTrigger[0])) {
         $blockedContainer.append(this.$lazyLoadTrigger);

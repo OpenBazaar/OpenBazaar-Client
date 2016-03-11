@@ -73,7 +73,18 @@ module.exports = baseVw.extend({
     return this;
   },
 
-  checkIfEmpty: function(){
+  delegateEvents: function() {
+    if (this.subViews) {
+      this.subViews.forEach((view) => {
+        console.log('going for it');
+        view.delegateEvents();
+      });
+    }
+
+    baseVw.prototype.delegateEvents.apply(this, arguments);
+  },
+
+  checkIfEmpty: function() {
     if(this.collection.length == 0) {
       var noBlockSnippet = $('<div class="padding20 txt-center">' + polyglot.t('NoBlockedList') + '</div>');
       this.$el.html(noBlockSnippet);
