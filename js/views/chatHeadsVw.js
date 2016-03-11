@@ -85,7 +85,7 @@ module.exports = baseVw.extend({
   },
 
   checkIfFilled: function(){
-    if (this.$headContainer[0].childNodes.length < this.collection.length && this.$chatHeadsContainer[0].clientHeight > this.$headContainer[0].scrollHeight){
+    if (this.$headContainer[0].childNodes && this.$headContainer[0].childNodes.length < this.collection.length && this.$chatHeadsContainer[0].clientHeight > this.$headContainer[0].scrollHeight){
       this.onScroll();
       this.checkIfFilled();
     }
