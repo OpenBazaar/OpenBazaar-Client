@@ -55,12 +55,6 @@ module.exports = baseVw.extend({
       xhr.done(() => this.$pageSpinner.addClass('hide'));
     });    
 
-    // if (this.fetch) {
-    //   this.fetch.done(() => {
-    //     !this.collection.length && this.render()
-    //   });
-    // }
-
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
     );

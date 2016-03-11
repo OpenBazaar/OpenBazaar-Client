@@ -45,8 +45,6 @@ module.exports = baseVw.extend({
     'click .js-OnboardingIntroDiscover': 'hideDiscoverIntro'
   },
 
-  NOTIF_PER_FETCH: 10,
-
   initialize: function(options){
     var self = this;
     this.options = options || {};
@@ -84,7 +82,7 @@ module.exports = baseVw.extend({
     };
     this.notificationsFetch = this.notificationsCl.fetch({
       data: {
-        limit: this.NOTIF_PER_FETCH
+        limit: 6
       },
       reset: true
     });
@@ -216,7 +214,7 @@ module.exports = baseVw.extend({
         self.notificationsVw = new NotificationsVw({
           collection: self.notificationsCl,
           initialFetch: self.notificationsFetch,
-          notifPerFetch: self.NOTIF_PER_FETCH
+          notifPerFetch: 10
         });
         self.registerChild(self.notificationsVw);
 
