@@ -137,7 +137,7 @@
       <div class="flexContainer flex-border custCol-primary js-description js-tabTarg textOpacity75 minHeight300 <% ob.activeTab !== 'description' && print('hide') %>">
         <div class="flexRow">
           <div class="rowItem fontSize16 padding30 paddingTop10 lineHeight24 fontWeight400">
-            <p class="js-listingDescription"></p>
+            <%= ob.vendor_offer.listing.item.displayDescription %>
           </div>
         </div>
       </div>
