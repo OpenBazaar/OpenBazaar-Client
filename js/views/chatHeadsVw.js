@@ -27,7 +27,6 @@ module.exports = baseVw.extend({
     this.$headContainer = $('<div />');
 
     this.showPerScroll = 12;
-    this.nextChatToShow = 0;
 
     //listen to scrolling on container
     this.scrollHandler = __.bind(
@@ -59,9 +58,10 @@ module.exports = baseVw.extend({
   },
 
   onScroll: function(){
-    if(this.$chatHeadsContainer[0].scrollTop + this.$chatHeadsContainer[0].clientHeight + 200 > this.$chatHeadsContainer[0].scrollHeight &&
-        this.$headContainer && this.$headContainer[0].hasChildNodes()) {
-      this.renderChatHeads(this.nextChatToShow, this.nextChatToShow + this.showPerScroll);
+    if (this.$chatHeadsContainer[0].scrollTop + this.$chatHeadsContainer[0].clientHeight + 200 >
+          this.$chatHeadsContainer[0].scrollHeight &&
+        this.chatHeadViews.length < this.collection.length) {
+      this.renderChatHeads(this.chatHeadViews.length, this.chatHeadViews.length + this.showPerScroll);
     }
   },
 
@@ -74,37 +74,31 @@ module.exports = baseVw.extend({
     }
 
     this.chatHeadViews = [];
-    this.renderChatHeads(this.nextChatToShow, this.showPerScroll);
+    this.renderChatHeads(0, this.showPerScroll);
     this.$el.html(this.$headContainer);
-    this.checkIfFilled();
+    
+    setTimeout(() => {
+      this.checkIfFilled();
+    },0);
 
     return this;
   },
 
   checkIfFilled: function(){
-    //check to see if parent is filled. If not, call onScroll a second time.
-    //use a zero second timeout to force the check to be after render is complete
-    setTimeout(() => {
-      if(this.$headContainer[0].childNodes.length < this.collection.length && this.$chatHeadsContainer[0].clientHeight > this.$headContainer[0].scrollHeight){
-        this.onScroll();
-        this.checkIfFilled();
-      }
-    },0);
+    if (this.$headContainer[0].childNodes.length < this.collection.length && this.$chatHeadsContainer[0].clientHeight > this.$headContainer[0].scrollHeight){
+      this.onScroll();
+      this.checkIfFilled();
+    }
   },
 
   renderChatHeads: function(start, end) {
-    var chatsToRender =  __.filter(this.collection.models, function(value, index){
-                          return (index >= start) && (index < end);
-                        });
+    var chatsToRender = this.collection.slice(start, end);
 
     chatsToRender.forEach((md, index) => {
       this.$headContainer.append(
         this.createChatHead(md).render().el
       );
     });
-
-
-    this.nextChatToShow = this.nextChatToShow >= this.collection.length ? this.nextChatToShow : this.nextChatToShow + this.showPerScroll;
   },
 
   remove: function(){
