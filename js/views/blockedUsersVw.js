@@ -23,6 +23,7 @@ module.exports = baseVw.extend({
       if (options.add) {
         __.each(collection.models.slice(self.subViews.length), function(user) {
           self.renderNewUserView(user);
+          self.$('.js-noblocked').remove();
         });
       }
 
@@ -75,7 +76,7 @@ module.exports = baseVw.extend({
 
   checkIfEmpty: function() {
     if(this.collection.length == 0) {
-      var noBlockSnippet = $('<div class="padding20 txt-center">' + polyglot.t('NoBlockedList') + '</div>');
+      var noBlockSnippet = $('<div class="padding20 txt-center js-noblocked">' + polyglot.t('NoBlockedList') + '</div>');
       this.$el.html(noBlockSnippet);
     }
   },
