@@ -237,7 +237,7 @@ app.on('ready', function() {
             if (platform == 'mac') {
               return 'Ctrl+Command+F';
             } else {
-              return 'Ctrl+Shift+F';
+              return 'F11';
             }
           })(),
           click: function(item, focusedWindow) {
