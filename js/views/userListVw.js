@@ -17,32 +17,34 @@ module.exports = Backbone.View.extend({
      options.serverUrl: server url to pass into each user view
      options.ownFollowing: array of guids this user is following
      options.hideFollow: boolean, hide follow button
+     options.reverse; should the list of users be reversed?
      */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
+    this.options.reverse && this.usersShort.models.reverse();
     this.subViews = [];
     this.showPerScroll = 10;
     this.nextUserToShow = 0;
+    this.totalUsers = this.usersShort.length;
     this.$container = $('#obContainer');
+
+    //listen to scrolling on container
+    this.scrollHandler = __.bind(
+        __.throttle(this.onScroll, 100), this
+    );
+    this.$container.on('scroll', this.scrollHandler);
+
     this.render();
   },
 
   render: function(){
     var self = this;
-    this.listWrapper = $('<div class="list flexRow flexExpand border0 custCol-border"></div>');
 
     if(this.usersShort.models.length > 0)
     {
+      this.listWrapper = $('<div class="list flexRow flexExpand border0 custCol-border"></div>');
       this.renderUserSet(this.nextUserToShow, this.showPerScroll);
-
-      //listen to scrolling on container
-      this.scrollHandler = __.bind(
-          __.throttle(this.onScroll, 100), this
-      );
-      this.$container.on('scroll', this.scrollHandler);
-
       this.$el.html(this.listWrapper);
-
     }else{
       self.renderNoneFound();
     }
@@ -63,7 +65,12 @@ module.exports = Backbone.View.extend({
       self.renderUser(user);
     }, this);
 
-    this.nextUserToShow = this.nextUserToShow + this.showPerScroll;
+    //if at least one user was added, trigger call so parent can refresh searches
+    if(renderSet.length > 0){
+      this.trigger('usersAdded');
+    }
+
+    this.nextUserToShow = this.nextUserToShow >= this.totalUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
   },
 
   renderUser: function(item){
@@ -71,11 +78,12 @@ module.exports = Backbone.View.extend({
       model: item
     });
     this.subViews.push(storeShort);
-    this.listWrapper.prepend(storeShort.el);
+    this.listWrapper.append(storeShort.el);
   },
 
   onScroll: function(){
-    if(this.$container[0].scrollTop + this.$container[0].clientHeight + 200 > this.$container[0].scrollHeight) {
+    if(this.$container[0].scrollTop + this.$container[0].clientHeight + 200 > this.$container[0].scrollHeight &&
+        this.listWrapper && this.listWrapper[0].hasChildNodes() && this.listWrapper.is(":visible")) {
       this.renderUserSet(this.nextUserToShow, this.nextUserToShow + this.showPerScroll);
     }
   },
@@ -96,7 +104,7 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
-    this.scrollHandler && this.listWrapper.off('scroll', this.scrollHandler);
+    this.scrollHandler && this.$container.off('scroll', this.scrollHandler);
   }
 });
 

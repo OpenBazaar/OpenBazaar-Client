@@ -400,12 +400,14 @@ module.exports = baseModal.extend({
       });
     });
 
-    new Notification(window.polyglot.t('WelcomeToYourPage'));
+    new Notification(window.polyglot.t('WelcomeToYourPage'), {
+      silent: true
+    });
 
     // play notification sound
-    this.notifcationSound = document.createElement('audio');
-    this.notifcationSound.setAttribute('src', './audio/notification.mp3');
-    this.notifcationSound.play();
+    this.notificationSound = document.createElement('audio');
+    this.notificationSound.setAttribute('src', './audio/notification.mp3');
+    this.notificationSound.play();
   },
 
   postFollowing: function(followers) {

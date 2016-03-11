@@ -4,7 +4,7 @@
     <div class="rowItem padding2015">
       <%= polyglot.t('buyFlow.summaryMsg1', {recipient: ob.recipient}) %>.
       <%= polyglot.t('buyFlow.summaryMsg2') %> <%= ob.vendor_offer.listing.item.process_time %>. <%= polyglot.t('buyFlow.summaryMsg3') %>
-      <a href="#transactions/purchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
+      <a class="js-goToPurchases"><%= polyglot.t('buyFlow.purchasesPage') %>.</a>
     </div>
   </div>
   <div class="flexRow custCol-border borderBottom">
@@ -84,9 +84,9 @@
         <% } else { %>
           <span class="noOverflow fontSize13 js-buyWizardBTCShippingPrice">
             <% if(ob.shippingType === "domestic") { %>
-              <%= ob.domesticShippingBTC.toFixed(4) %> BTC
+              <%= ob.domesticShippingBTC.toFixed(8) %> BTC
             <% }else{ %>
-              <%= ob.internationalShippingBTC.toFixed(4) %> BTC
+              <%= ob.internationalShippingBTC.toFixed(8) %> BTC
             <% } %>
           </span>
           <span class="noOverflow js-buyWizardShippingPrice textOpacity75 fontSize13">

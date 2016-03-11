@@ -51,7 +51,7 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardCountryWrapper': 'openCountrySelect',
     'click .js-buyWizardPayCheck': 'checkPayment',
     'click .js-buyWizardCloseSummary': 'closeWizard',
-    'change input[name="radioPaymentType"]': 'changePaymentType',
+    'click input[name="radioPaymentType"]': 'changePaymentType',
     'blur .js-buyWizardPostalInput': 'updateMap',
     'blur input': 'validateInput'
   },
@@ -86,6 +86,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
+    this.listenTo(window.obEventBus, "closeBuyWizard", this.closeWizard);
 
     //make sure the model has a fresh copy of the user
     this.model.set('user', this.userModel.attributes);
@@ -187,6 +188,9 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-buyWizardAddresses').append(self.buyAddressesView.el);
       //add details view
       self.$el.find('.js-buyWizardInsertDetails').append(self.buyDetailsView.el);
+
+      //auto select first payment type
+      self.$el.find("input:radio[name=radioPaymentType]:first").attr('checked', true).trigger('click');
 
       //randomize the bitcoin wallet providers 5 times
       for(var i = 0; i < 5; i++) {
@@ -436,6 +440,10 @@ module.exports = Backbone.View.extend({
       return;
     }
 
+    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
+    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
+    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
+
     formData.append("id", this.model.get('id'));
 
     formData.append("quantity", this.$el.find('.js-buyWizardQuantity').val());
@@ -456,7 +464,11 @@ module.exports = Backbone.View.extend({
 
     formData.append("refund_address", bitCoinReturnAddr);
 
-    $.ajax({
+    if(this.buyRequest){
+      this.buyRequest.abort();
+    }
+
+    this.buyRequest = $.ajax({
       type: "POST",
       url: self.model.get('serverUrl') + "purchase_contract",
       contentType: false,
@@ -495,8 +507,6 @@ module.exports = Backbone.View.extend({
     payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
-    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
-    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
     this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
     this.$el.find('.js-buyWizardPayPrice').text();
@@ -506,7 +516,6 @@ module.exports = Backbone.View.extend({
       var extUrl = payHREF;
       require("shell").openExternal(extUrl);
     });
-    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
     this.buyDetailsView.lockForm();
   },
 
@@ -520,14 +529,14 @@ module.exports = Backbone.View.extend({
     var totalPrice = this.model.get('totalPrice'),
         totalBTCPrice = this.model.get('totalBTCDisplayPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
-        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
+        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalPrice);
     this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
-    this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(4));
+    this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(8));
   },
 
   copyPayAddress: function(){
@@ -571,12 +580,14 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardOrderSummary, .js-buyWizardCloseSummary').removeClass('hide');
 
     // alert the user in case they're not in the active window
-    new Notification(window.polyglot.t('buyFlow.paymentSent'));
+    new Notification(window.polyglot.t('buyFlow.paymentSent'), {
+      silent: true
+    });
     
     // play notification sound
-    var notifcationSound = document.createElement('audio');
-    notifcationSound.setAttribute('src', './audio/notification.mp3');
-    notifcationSound.play();
+    var notificationSound = document.createElement('audio');
+    notificationSound.setAttribute('src', './audio/notification.mp3');
+    notificationSound.play();
   },
 
   openCountrySelect: function(){
@@ -616,6 +627,9 @@ module.exports = Backbone.View.extend({
     });
     this.unbind();
     this.remove();
+    if(this.buyRequest){
+      this.buyRequest.abort();
+    }
   }
 
 });

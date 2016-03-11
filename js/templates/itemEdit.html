@@ -92,9 +92,9 @@
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="priceLocal">
-                  <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>) 
-                  <a href="#settings" class="underline fontSize10 textOpacity50 noOverflow width80"><%= polyglot.t('ChangeCurrency') %></a>
+                  <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)
                 </label>
+                <a href="#settings" class="underline fontSize10 textOpacity50 noOverflow width80"><%= polyglot.t('ChangeCurrency') %></a>
               </div>
             </div>
             <div class="flexCol-5">
@@ -198,9 +198,27 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <div class="fieldItem padding0">
+                <div class="fieldItem padding0 js-shipToWrapper">
                   <div class="fieldItem-selectWrapper noIcon">
                     <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple required>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flexRow custCol-border js-shippingRow">
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="shipsToRegions"><%= polyglot.t('AddShipToRegion') %></label>
+                </div>
+              </div>
+              <div class="flexCol-8">
+                <div class="fieldItem padding0">
+                  <div class="fieldItem-selectWrapper noIcon">
+                    <select class="chosenRegions custCol-text" id="shipsToRegions">
+                      <option></option>
+                      <option value="EUROPEAN_UNION">European Union</option>
+                      <option value="EUROPEAN_ECONOMIC_AREA">European Economic Area</option>
                     </select>
                   </div>
                 </div>
@@ -226,18 +244,14 @@
                 </div>
               </div>
               <div class="flexCol-4">
-                <input type="text" name="shipping_domestic" id="inputShippingDomestic" class="hide" />
-                <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" class="hide" />
-                <input type="number" step="any" class="fieldItem js-priceLocal custCol-text" id="shippingPriceLocalLocal"  value="<%= ob.domesticShipping %>"
-                  <% if(ob.userCurrencyCode == "BTC"){ %>
-                  min="0.0001"
-                  <% } else { %>
-                  min="<% print((window.currentBitcoin * 0.0005).toFixed(2)) %>"
-                  <% } %>
-                >
-              </div>
-              <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0001 :  (window.currentBitcoin * 0.0005).toFixed(2) %></span>
+                <input type="text" name="shipping_domestic" id="inputShippingDomestic" required class="hide" />
+                <input type="text" name="shipping_currency_code" id="inputShippingCurrencyCode" required class="hide" />
+                <input type="number"
+                       step="any"
+                       min="0"
+                       class="fieldItem js-priceLocal custCol-text"
+                       id="shippingPriceLocalLocal"
+                       value="<%= ob.domesticShipping %>">
               </div>
             </div>
             <div class="flexRow custCol-border js-inputParent js-shippingPriceRow">
@@ -248,16 +262,12 @@
               </div>
               <div class="flexCol-4">
                 <input type="text" name="shipping_international" id="inputShippingInternational" class="hide" />
-                <input type="number" step="any" class="fieldItem js-priceLocal custCol-text" id="shippingPriceInternationalLocal" value="<%= ob.internationalShipping %>"
-                  <% if(ob.userCurrencyCode == "BTC"){ %>
-                  min="0.0001"
-                  <% } else { %>
-                  min="<% print((window.currentBitcoin * 0.0005).toFixed(2)) %>"
-                  <% } %>
-                >
-              </div>
-              <div class="flexCol-4">
-                <span class="fieldItem txt-placeholder">Minimum is <%= ob.userCurrencyCode == "BTC" ? 0.0001 :  (window.currentBitcoin * 0.0005).toFixed(2) %></span>
+                <input type="number"
+                       step="any"
+                       min="0"
+                       class="fieldItem js-priceLocal custCol-text"
+                       id="shippingPriceInternationalLocal"
+                       value="<%= ob.internationalShipping %>">
               </div>
             </div>
             <div class="flexRow custCol-border js-shippingRow">
@@ -267,7 +277,12 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="est_delivery_domestic" id="inputLocalShippingTime" type="text" class="fieldItem" value="<%= ob.vendor_offer.listing.shipping.est_delivery.domestic %>" placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
+                <input name="est_delivery_domestic"
+                       id="inputLocalShippingTime"
+                       type="text"
+                       class="fieldItem"
+                       value="<%= ob.vendor_offer.listing.shipping.est_delivery.domestic %>"
+                       placeholder="<%= polyglot.t('EstDeliveryDomesticPlaceholder') %>">
               </div>
             </div>
             <div class="flexRow custCol-border js-shippingRow">
@@ -277,7 +292,11 @@
                 </div>
               </div>
               <div class="flexCol-8">
-                <input name="est_delivery_international" id="inputInternationalShippingTime" type="text" class="fieldItem custCol-text" value="<%= ob.vendor_offer.listing.shipping.est_delivery.international %>" placeholder="<%= polyglot.t('EstDeliveryInternationalPlaceholder') %>">
+                <input name="est_delivery_international"
+                       id="inputInternationalShippingTime"
+                       type="text" class="fieldItem custCol-text"
+                       value="<%= ob.vendor_offer.listing.shipping.est_delivery.international %>"
+                       placeholder="<%= polyglot.t('EstDeliveryInternationalPlaceholder') %>">
               </div>
             </div>
           </div>

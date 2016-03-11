@@ -2,14 +2,17 @@
   <%= polyglot.t('nav.notifications') %>
 </div>
 
-<div class="popMenu-notificationsContent flex-border js-notif-wrap">
-    <% if (ob.isFetching) { %>
-    <div class="padding10 width100 alignCenter spinnerWrapper">
-      <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
-    </div>
-    <% } else { %>
-        <% if (!ob.collection.length) { %>
+<div class="popMenu-notificationsContent flex-border js-notif-scroll-wrap">
+    <% if (ob.isFetching && !ob.collection.length) { %>
+        <div class="padding10 width100 alignCenter spinnerWrapper">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+        </div>
+    <% } else if (!ob.collection.length) { %>
         <div class="padding2010"><%= polyglot.t('NoNotifications') %></div>
-        <% } %>
+    <% } else { %>
+        <div class="border0 custCol-border-secondary flexRow marginLeft1 js-notif-container"></div>
+        <div class="padding10 width100 alignCenter spinnerWrapper hide js-page-spinner notifPageSpinner">
+          <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
+        </div>
     <% } %>
 </div>

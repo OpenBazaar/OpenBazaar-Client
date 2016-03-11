@@ -2,7 +2,7 @@ var sanitizeHTML = require('sanitize-html');
 
 function checkVal($field) {
   var fVal = $field.val().trim();
-  if (!fVal.length || fVal == "<p>&nbsp;</p>" || fVal == "&nbsp;") {
+  if (!fVal.length || fVal == "<p>&nbsp;</p>" || fVal == "&nbsp;" || fVal == "<p><br /></p>") {
     $field.val('');
   }
 
@@ -10,7 +10,10 @@ function checkVal($field) {
   fVal = fVal.replace(/\\([\s\S])|(")/g, "'");
 
   fVal = sanitizeHTML(fVal, {
-    allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
+    allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ],
+    exclusiveFilter: function(frame) {
+      return frame.tag === 'p' && !frame.text.trim();
+    }
   });
   
   $field.val(fVal);
