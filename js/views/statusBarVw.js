@@ -89,6 +89,7 @@ module.exports = baseVw.extend({
       if (typeof msg === 'string') {
         md.set('msg', msg);
       } else {
+        delete msg.duration;
         md.set(msg);
       }
     };
