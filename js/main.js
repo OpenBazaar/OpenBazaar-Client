@@ -117,10 +117,9 @@ $('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescrip
 
 // add the loading class to any button with the loader class when it is clicked.
 // The view must remove the loading class when loading is complete.
-// Be aware this relies on event bubbling, so events in the view will fire before the event reaches the body.
-// You may need a 0 second timeOut for the code to remove the loading class in response to view logic.
+// If logic in the view should prevent the loading class, just use stopPropagation
 $('body').on('click', '.loader', function(e){
-  $(e.target).addClass("loading");
+  $(e.target).closest('.loader').addClass("loading");
 });
 
 //record changes to the app state

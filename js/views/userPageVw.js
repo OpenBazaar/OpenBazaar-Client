@@ -1307,10 +1307,7 @@ module.exports = baseVw.extend({
   },
 
   removeItemLoading: function(){
-    setTimeout(()=>{
-      this.$('.js-saveItem').addClass('noLoad').removeClass('loading');
-    },0);
-    console.log(this.$('.js-saveItem'))
+    this.$('.js-saveItem').removeClass('loading');
   },
 
   cancelClick: function(){
@@ -1370,10 +1367,10 @@ module.exports = baseVw.extend({
     }
   },
 
-  saveItem: function(){
+  saveItem: function(e){
     "use strict";
     if(this.itemEditView){
-      this.itemEditView.saveChanges();
+      this.itemEditView.saveChanges(e);
     }
   },
 
