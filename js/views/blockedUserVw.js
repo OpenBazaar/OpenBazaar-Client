@@ -1,9 +1,10 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    loadTemplate = require('../utils/loadTemplate');
+    loadTemplate = require('../utils/loadTemplate'),
+    baseVw = require('./baseVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "flexRow borderBottom",
 
@@ -20,7 +21,8 @@ module.exports = Backbone.View.extend({
   },
 
   unblockUser: function(e) {
-    this.trigger('unblockUserClick', { originalEvent: e, view: this });
+    console.log('unblock click');
+    // this.trigger('unblockUserClick', { originalEvent: e, view: this });
   },
 
   render: function(){
@@ -33,18 +35,5 @@ module.exports = Backbone.View.extend({
     });
 
     return this;
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
 });
