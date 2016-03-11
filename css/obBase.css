@@ -2950,23 +2950,18 @@ input[type="checkbox"].fieldItem + label {
    cursor: pointer;
    position: relative;
    line-height: 53px;
-   padding: 0 10px 0 34px;
  }
 
 input[type="checkbox"].fieldItem + label:before {
   content: "";
-  display: inline-block;
-  position: absolute;
-  left: 10px;
+  display: inline;
+  line-height:inherit;
   height: 16px;
-  width: 16px;
+  padding: 0 8px; /*inline elements have no width, use padding */
   border-radius: 4px;
   border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
-  transform: translateY(-50%) translateZ(0);
-  -webkit-backface-visibility: hidden;
-  top: 50%;
 }
 
 input[type="checkbox"].fieldItem + label.compact {
