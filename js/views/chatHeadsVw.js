@@ -24,8 +24,6 @@ module.exports = baseVw.extend({
     });
 
     this.$chatHeadsContainer = options.parentEl;
-    this.$headContainer = $('<div />');
-
     this.showPerScroll = 12;
 
     //listen to scrolling on container
@@ -74,6 +72,7 @@ module.exports = baseVw.extend({
     }
 
     this.chatHeadViews = [];
+    this.$headContainer = $('<div />');
     this.renderChatHeads(0, this.showPerScroll);
     this.$el.html(this.$headContainer);
     
