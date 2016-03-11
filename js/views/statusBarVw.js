@@ -67,6 +67,7 @@ module.exports = baseVw.extend({
   //
   pushMessage: function(msg) {
     var md = new StatusMessageMd(),
+        updateMessage,
         errs;
 
     if (typeof msg === 'string') msg = { msg: msg };
@@ -80,10 +81,23 @@ module.exports = baseVw.extend({
     md.set(msg);
     this.collection.add(md);
 
+    updateMessage = (msg) => {
+      if (!msg) {
+        throw new Error('Please provide a msg.');
+      }
+
+      if (typeof msg === 'string') {
+        md.set('msg', msg);
+      } else {
+        md.set(msg);
+      }
+    };
+
     return {
       remove: () => {
         this.collection.remove(md);
-      }
+      },
+      updateMessage: updateMessage
     }
   },
 

@@ -173,6 +173,10 @@ module.exports = function (currency, callback) {
 
         showStatus && showStatus.remove();
 
+        setTimeout(() => {
+            showStatus.remove();
+        }, 3000);
+
         typeof callback === 'function' && callback(btAve, currencyKeys);
     };
 
