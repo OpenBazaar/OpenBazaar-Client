@@ -89,6 +89,9 @@ module.exports = baseVw.extend({
       if (typeof msg === 'string') {
         md.set('msg', msg);
       } else {
+        // Duration can't be updated. If you plan on updating the message,
+        // you should probably pass in a duration of `false` when you create
+        // the message and then remove it on your own.
         delete msg.duration;
         md.set(msg);
       }
