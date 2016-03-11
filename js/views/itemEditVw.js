@@ -609,6 +609,7 @@ module.exports = baseVw.extend({
         }
       });
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
+      this.trigger('removeLoading');
     }
   },
 

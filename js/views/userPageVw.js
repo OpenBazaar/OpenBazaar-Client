@@ -1307,7 +1307,10 @@ module.exports = baseVw.extend({
   },
 
   removeItemLoading: function(){
-    this.$('.js-saveItem').removeClass('loading');
+    setTimeout(()=>{
+      this.$('.js-saveItem').addClass('noLoad').removeClass('loading');
+    },0);
+    console.log(this.$('.js-saveItem'))
   },
 
   cancelClick: function(){
