@@ -89,7 +89,7 @@ module.exports = baseVw.extend({
 
     this.unreadNotifsViaSocket = 0;
 
-    this.listenTo(this.notificationsCl, 'update', (cl, options) => {
+    this.listenTo(this.notificationsCl, 'reset update', (cl, options) => {
       if (options.xhr) this.unreadNotifsViaSocket = 0;
 
       this.setNotificationCount(this.getUnreadNotifCount());
@@ -341,11 +341,13 @@ module.exports = baseVw.extend({
     return (this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount()) || 0;  
   },
 
+  onNotifMenuOpen: function() {
+    this.notificationsVw.resetScroll();
+  },
+
   onNotifMenuClose: function() {
     var unread = [],
         formData = new FormData();
-
-    this.notificationsVw.resetScroll();
 
     this.notificationsCl.forEach((notif) => {
       if (!notif.get('read')) {
