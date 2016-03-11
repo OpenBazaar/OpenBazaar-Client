@@ -1,0 +1,16 @@
+<div <% ob.mode && print(`class="mode-${ob.mode}"`) %>>
+  <div class="spinner-with-logo fullCentered">
+    <i class="ion-android-sync spinner fontSize30"></i>
+    <i class="ion-flash icon-no-connection fontSize30"></i>
+  </div>
+
+  <div class="content">
+    <div class="statusText pad10 marginBottom12 inlineBlock custCol-text <% ob.tooltip && print('tooltip') %>" <% ob.tooltip && print(`data-tooltip="${ob.tooltip}"`) %>><%= ob.statusText %></div>
+
+    <div>
+      <a class="btn btn-large custCol-secondary js-cancel btn-cancel">Cancel</a>
+      <a class="btn btn-large custCol-secondary js-back btn-back">Back</a>
+      <a class="btn btn-large custCol-secondary js-retry btn-retry">Try Again</a>
+    </div>
+  </div>
+</div>

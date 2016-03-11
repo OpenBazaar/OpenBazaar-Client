@@ -104,7 +104,9 @@ module.exports = baseVw.extend({
       if ($('.homeGridItems .gridItem').length === 0){
         self.$el.find('.js-loadingMessage').removeClass('fadeOut');
         self.$el.find('.js-loadingMessage .spinner').addClass('fadeOut');
-        self.$el.find('.js-loadingText').html(self.$el.find('.js-loadingText').data('noResultsText'));
+        self.$el.find('.js-loadingText').html(
+          window.polyglot.t('discover.' + (self.searchItemsText ? 'noTaggedResults' : 'noResults'))
+        );
       }
     }, 10000);
   },
@@ -125,14 +127,14 @@ module.exports = baseVw.extend({
 
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data);
-    if(data.id == this.socketItemsID){
+    if(data.id == this.socketSearchID) {
+      this.renderItem(data);
+    } else if(data.id == this.socketItemsID){
       this.loadingProducts = false;
       this.renderItem(data);
     } else if(data.id == this.socketUsersID) {
       this.loadingVendors = false;
       this.renderUser(data.vendor);
-    } else if(data.id == this.socketSearchID) {
-      this.renderItem(data);
     }
     
     this.resetLookingCount();
@@ -276,6 +278,8 @@ module.exports = baseVw.extend({
     this.$el.find('.js-' + state + 'Search').removeClass('hide');
 
     if(searchItemsText){
+      this.searchItemsText = searchItemsText;
+
       //add action to history
       Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""));
     } else {
@@ -413,6 +417,10 @@ module.exports = baseVw.extend({
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
     }
+
+    if(targetText == ""){
+      this.searchItemsClear();
+    }
   },
 
   searchItemsClear: function(){
@@ -431,9 +439,11 @@ module.exports = baseVw.extend({
   },
 
   searchItems: function(searchItemsText){
+    console.log("search items "+searchItemsText)
     if(searchItemsText){
       this.searchItemsText = searchItemsText;
       this.clearItems();
+      this.socketItemsID = "";
       this.socketSearchID = Math.random().toString(36).slice(2);
       this.socketView.search(this.socketSearchID, searchItemsText);
       this.setSocketTimeout();      

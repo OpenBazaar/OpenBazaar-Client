@@ -80,6 +80,8 @@ module.exports = Backbone.View.extend({
     this.moderatorFeeHolder;
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
+    this.firstLoadModerators = true;
+
     this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
     });
@@ -92,6 +94,7 @@ module.exports = Backbone.View.extend({
   fetchModel: function(){
     "use strict";
     var self = this;
+    this.firstLoadModerators = true;
     this.userProfile.fetch({
       success: function(model) {
         var profile = model.get('profile');
@@ -316,10 +319,11 @@ module.exports = Backbone.View.extend({
     });
 
     this.blockedUsersUnblockHandler && this.stopListening(window.obEventBus, null, this.blockedUsersUnblockHandler);
-    this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = function(e) {
+    this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = (e)=> {
       blockedUsersCl.remove(
           blockedUsersCl.findWhere({ guid: e.guid })
       );
+      this.firstLoadModerators = true;
     });
 
     // implement scroll based lazy loading of blocked users
@@ -434,14 +438,6 @@ module.exports = Backbone.View.extend({
     timezone.html(timezone_str);
     language.html(language_str);
 
-    __.each(this.userModel.get('moderators'), function(modID){
-      "use strict";
-      if(modID) {
-        modID.fromModel = true;
-        self.renderModerator(modID);
-      }
-    });
-
     //set moderator status
     this.$('#moderatorForm input[name=moderator]').val([String(moderatorStatus)]);
   },
@@ -473,7 +469,7 @@ module.exports = Backbone.View.extend({
         existingMods = this.userModel.get('moderator_guids'),
         isExistingMod = existingMods.indexOf(moderator.guid) > -1;
 
-    if(moderator.guid != this.model.get('page').profile.guid){
+    if(moderator.guid != this.model.get('page').profile.guid && this.userModel.get('blocked_guids').indexOf(moderator.guid) == -1){
       moderator.serverUrl = self.serverUrl;
       moderator.userID = moderator.guid;
       moderator.avatarURL = self.serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
@@ -522,8 +518,21 @@ module.exports = Backbone.View.extend({
       this._state = state;
       this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
       if(state == "store"){
-        this.$el.find('.js-settingsNewMods').html("");
-        this.socketView.getModerators(this.socketModeratorID);
+
+        if(this.firstLoadModerators) {
+          this.$('.js-settingsNewMods').html("");
+          this.$('.js-settingsCurrentMods').html("");
+          this.socketView.getModerators(this.socketModeratorID);
+
+          __.each(this.userModel.get('moderators'), (modID)=> {
+            "use strict";
+            if (modID) {
+              modID.fromModel = true;
+              this.renderModerator(modID);
+            }
+          });
+        }
+        this.firstLoadModerators = false;
       }
     } else {
       this._state = "general";
