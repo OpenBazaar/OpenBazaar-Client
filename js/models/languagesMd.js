@@ -1468,21 +1468,21 @@ module.exports = Backbone.Model.extend({
         maxLength20: "max length 20 char", //not translated
         maxLength80: "max length 80 char", //not translated
         maxLength200: "max length 200 char", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        Moderator: "Moderator", // not translated
-        Firewall: "Firewall", //notTranslated
-        ServerSettings: "Configuraci&oacute;n del servidor", //notTranslated
-        ReadOnly: "(Campo de solo lectura)", //notTranslated
+        StoreModeratorsOptional: "Moderadores de la tienda (Opcional)",
+        Searchformoderators: "Buscar moderadores",
+        Contributors: "Contribuyentes", 
+        Support: "Suporte",
+        Licensing: "Licencias",
+        On: "Encendido",
+        Off: "Apagado",
+        ClickToChange: "Click para cambiar",
+        NotProvided: "no provisto",
+        NotFollowingAnyone: "No sigue a nadie",
+        NoFollowers: "Sin seguidores",
+        Moderator: "Moderador",
+        Firewall: "Firewall",
+        ServerSettings: "Configuraci&oacute;n del servidor",
+        ReadOnly: "(Campo de solo lectura)",
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Configuraci&oacute;n del servidor",  // not translated duplicated?
         ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
