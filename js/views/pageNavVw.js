@@ -78,12 +78,21 @@ module.exports = baseVw.extend({
 
     this.notificationsCl = new NotificationsCl();
     this.notificationsCl.comparator = function(notif) {
-      return -notif.get("timestamp");
+      return -notif.get('timestamp');
     };
-    this.notificationsFetch = this.notificationsCl.fetch();
+    this.notificationsFetch = this.notificationsCl.fetch({
+      data: {
+        limit: 6
+      },
+      reset: true
+    });
 
-    this.listenTo(this.notificationsCl, 'update', (cl, resp, options) => {
-      this.setNotificationCount(cl.getUnreadCount());
+    this.unreadNotifsViaSocket = 0;
+
+    this.listenTo(this.notificationsCl, 'reset update', (cl, options) => {
+      if (options.xhr) this.unreadNotifsViaSocket = 0;
+
+      this.setNotificationCount(this.getUnreadNotifCount());
     });
 
     this.listenTo(this.userProfile, 'change:avatar_hash', function(){
@@ -159,6 +168,8 @@ module.exports = baseVw.extend({
           break;
       }
 
+      this.unreadNotifsViaSocket++;
+
       this.notificationsCl.add(
         __.extend({}, notif, { read: false })
       );
@@ -201,9 +212,9 @@ module.exports = baseVw.extend({
 
       if (!self.notificationsVw) {
         self.notificationsVw = new NotificationsVw({
-          socketView: self.socketView,
           collection: self.notificationsCl,
-          fetch: self.notificationsFetch
+          initialFetch: self.notificationsFetch,
+          notifPerFetch: 10
         });
         self.registerChild(self.notificationsVw);
 
@@ -326,16 +337,39 @@ module.exports = baseVw.extend({
     }
   },
 
-  onNotifMenuClose: function() {
-    this.notificationsVw.resetScroll();
+  getUnreadNotifCount: function() {
+    return (this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount()) || 0;  
+  },
 
-    this.notificationsCl.where({ read: false })
-      .forEach((notif) => {
+  onNotifMenuOpen: function() {
+    this.notificationsVw.resetScroll();
+  },
+
+  onNotifMenuClose: function() {
+    var unread = [],
+        formData = new FormData();
+
+    this.notificationsCl.forEach((notif) => {
+      if (!notif.get('read')) {
         notif.set('read', true);
-        $.post(app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read', {
-          'id': notif.get('id')
-        });
+        unread.push(notif.id);
+      }
+    });
+
+    if (unread.length) {
+      unread.forEach((id) => {
+        formData.append('id', id);
       });
+
+      $.ajax({
+        url: app.serverConfig.getServerBaseUrl() + '/mark_notification_as_read',
+        type: 'POST',
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        data: formData
+      });
+    }
 
     this.setNotificationCount(0);    
   },
@@ -382,7 +416,7 @@ module.exports = baseVw.extend({
         $target.parents('[data-popmenu]').length
       )) {
       app.hideOverlay();
-      $popMenu = self.$('.popMenu').removeClass('popMenu-opened');
+      $popMenu = self.$('.popMenu.popMenu-opened').removeClass('popMenu-opened');
       $popMenu.each((index, el) => {
         closeHandler = $(el).data('onclose');
         closeHandler && this[closeHandler] && this[closeHandler].call(this);
