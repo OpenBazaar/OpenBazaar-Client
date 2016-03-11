@@ -361,6 +361,7 @@ module.exports = baseVw.extend({
           self.updateImages();
         }else if (data.success === false){
           messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+          self.trigger('removeLoading');
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -498,24 +499,12 @@ module.exports = baseVw.extend({
         processData: false,
         data: formData,
         success: function (data) {
-          //var returnedId = self.model.get('id');
           data = JSON.parse(data);
-          /*
-          //if the itemEdit model has an id, it was cloned from an existing item
-          //if the id returned is the same, an edit was made with no changes, don't delete it
-          if (returnedId && data.success === true && returnedId != data.id){
-            deleteThisItem(data.id);
-          }else if (data.success === false){
-            messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-          }else{
-            //item is new or unchanged
-            */
-            //self.trigger('saveNewDone', data.id);
-          //}
           if (data.success === true) {
             self.trigger('saveNewDone', data.id);
           } else {
             messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
+            self.trigger('removeLoading');
           }
         },
         error: function (jqXHR, status, errorThrown) {

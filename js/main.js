@@ -115,6 +115,12 @@ $('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescrip
   require("shell").openExternal(extUrl);
 });
 
+//add the loading class to any button with the loader class when it is clicked.
+// The view must remove the loading class when loading is complete.
+$('body').on('click', '.loader', function(e){
+  $(e.target).addClass("loading");
+});
+
 //record changes to the app state
 $(window).bind('hashchange', function(){
   "use strict";
