@@ -1333,7 +1333,7 @@ module.exports = Backbone.Model.extend({
         Reviews: "Cr&iacute;ticas",
         Shipping: "Envío:",
         CountryOfOrigin: "Pa&iiacute;s de origen:",
-        CanBeShippedTo: "Puede ser env&iacute;ado a ti en:"
+        CanBeShippedTo: "Puede ser env&iacute;ado a ti en:",
         Addresses: "Direcciones",
         Files: "Archivos",
         NewAddress: "Nueva Direcci&oacute;n",
