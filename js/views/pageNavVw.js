@@ -85,7 +85,8 @@ module.exports = baseVw.extend({
     this.notificationsFetch = this.notificationsCl.fetch({
       data: {
         limit: this.NOTIF_PER_FETCH
-      }
+      },
+      reset: true
     });
 
     this.unreadNotifsViaSocket = 0;
@@ -213,9 +214,8 @@ module.exports = baseVw.extend({
 
       if (!self.notificationsVw) {
         self.notificationsVw = new NotificationsVw({
-          socketView: self.socketView,
           collection: self.notificationsCl,
-          fetch: self.notificationsFetch,
+          initialFetch: self.notificationsFetch,
           notifPerFetch: self.NOTIF_PER_FETCH
         });
         self.registerChild(self.notificationsVw);
