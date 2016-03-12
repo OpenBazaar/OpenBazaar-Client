@@ -111,6 +111,7 @@ module.exports = Backbone.Model.extend({
         Description: "Description",
         Reviews: "Reviews",
         Shipping: "Shipping:",
+        ShippingReturns: "Shipping & Returns",
         CountryOfOrigin: "Country of Origin:",
         CanBeShippedTo: "Can Ship to You In:",
         Addresses: "Addresses",
@@ -722,6 +723,7 @@ module.exports = Backbone.Model.extend({
         Description: "Beschrijving",
         Reviews: "Reviews",
         Shipping: "Verzending:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Addressen",
@@ -1332,6 +1334,7 @@ module.exports = Backbone.Model.extend({
         Description: "Descripci&oacute;n",
         Reviews: "Cr&iacute;ticas",
         Shipping: "Envío:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Pa&iiacute;s de origen:",
         CanBeShippedTo: "Puede ser env&iacute;ado a ti en:",
         Addresses: "Direcciones",
@@ -1904,6 +1907,7 @@ module.exports = Backbone.Model.extend({
         Description: "Beschreibung",
         Reviews: "Rezensionen",
         Shipping: "Versand:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adressen",
@@ -2496,6 +2500,7 @@ module.exports = Backbone.Model.extend({
         Description: "Descrizione",
         Reviews: "Recensioni",
         Shipping: "Spedizione:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Indirizzi",
@@ -3109,6 +3114,7 @@ module.exports = Backbone.Model.extend({
         Description: "Description",
         Reviews: "Avis",
         Shipping: "Expédition :",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Pays d'origine :",
         CanBeShippedTo: "Peut vous être livré dans :",
         Addresses: "Adresses",
@@ -3700,6 +3706,7 @@ module.exports = Backbone.Model.extend({
         Description: "Descriere",
         Reviews: "Recenzii",
         Shipping: "Livrare:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adrese",
@@ -4289,6 +4296,7 @@ module.exports = Backbone.Model.extend({
         Description: "Описание",
         Reviews: "Отзывы",
         Shipping: "Доставка:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Адреса",
@@ -4877,6 +4885,7 @@ module.exports = Backbone.Model.extend({
         Description: "Popis",
         Reviews: "Hodnotenia",
         Shipping: "Doprava:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
@@ -5471,6 +5480,7 @@ module.exports = Backbone.Model.extend({
         Description: "Tanım",
         Reviews: "Yorumlar",
         Shipping: "Gönderme:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresler",
@@ -6063,6 +6073,7 @@ module.exports = Backbone.Model.extend({
         Description: "Bang",
         Reviews: "YIqaw",
         Shipping: "NgeH Duj:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "SoQ",
@@ -6655,6 +6666,7 @@ module.exports = Backbone.Model.extend({
         Description: "描述",
         Reviews: "评价",
         Shipping: "物流:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "地址",
@@ -7253,6 +7265,7 @@ module.exports = Backbone.Model.extend({
         Description: "설명",
         Reviews: "리뷰",
         Shipping: "배송:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "주소들",
@@ -7841,6 +7854,7 @@ module.exports = Backbone.Model.extend({
         Description: "商品の説明",
         Reviews: "レビュー",
         Shipping: "発送:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "住所",
@@ -8424,6 +8438,7 @@ module.exports = Backbone.Model.extend({
         Description: "Opis",
         Reviews: "Opinie",
         Shipping: "Wysyłka:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
@@ -8990,6 +9005,7 @@ module.exports = Backbone.Model.extend({
         Description: "Beskrivelse",
         Reviews: "Anmeldelser",
         Shipping: "Forsendelse:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresser",
@@ -9593,6 +9609,7 @@ module.exports = Backbone.Model.extend({
         Description: "Descrição",
         Reviews: "Avaliações",
         Shipping: "Entrega:",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Endereços",
@@ -10195,8 +10212,9 @@ module.exports = Backbone.Model.extend({
          Description: "Опис",
          Reviews: "Відгуки",
          Shipping: "Доставка:",
-          CountryOfOrigin: "Country of Origin:", //not translated
-          CanBeShippedTo: "Can Ship to You In:", //not translated
+         ShippingReturns: "Shipping & Returns", //not translated
+         CountryOfOrigin: "Country of Origin:", //not translated
+         CanBeShippedTo: "Can Ship to You In:", //not translated
          Addresses: "Адреса",
          NewAddress: "Нова адреса",
          CurrentAddress: "Дійсна адреса",
