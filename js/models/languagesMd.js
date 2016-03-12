@@ -2496,8 +2496,8 @@ module.exports = Backbone.Model.extend({
         Description: "Descrizione",
         Reviews: "Recensioni",
         Shipping: "Spedizione:",
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        CountryOfOrigin: "Paese d'origine:",
+        CanBeShippedTo: "Pu&ograve; spedirti in",
         Addresses: "Indirizzi",
         Files: "File",
         NewAddress: "Nuovo indirizzo",
@@ -2516,7 +2516,7 @@ module.exports = Backbone.Model.extend({
         Change: "Cambia",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Indirizzo Bitcoin",
         BitcoinReturnAddress: "Inserisci il tuo Indirizzo Bitcoin",
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
         BitcoinReturnAddressInfo: "Se sar&agrave; rilasciato un rimborso, i fondi dovranno essere inviati ad un indirizzo Bitcoin. Si prega di fornire qui sotto un indirizzo al vostro portafoglio.",
@@ -2661,8 +2661,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(Questo campo &egrave; di sola lettura)",
         HandleResolver: "Recupero Nickname",
         ShutDownServer: "Spegni il server",
-        NoFancyStyles: "Disable Visual Effects", // not translated
-        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
+        NoFancyStyles: "Disattivare effetti visivi",
+        NoFancyStylesWarning: "Questo consente di disattivare le animazioni e trasparenze. Pu&ograve; migliorare le prestazioni su sistemi lenti.",
         LoadingBitcoinPrices: "Caricamento Prezzi Bitcoin...",
         ThisUserIsBlocked: "Questo utente &egrave; nascosto perch&egrave; si trova nella tua lista bloccati",
         ThisUserIsNSFW: "Questo utente &egrave; nascosto perch&egrave; la sua pagina &egrave; indicata come NSFW",
@@ -2678,50 +2678,50 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Diventa un moderatore",
         EditModerator: "Impostazioni moderatore",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Assolutamente eccellente",
+          fourStar: "Buono",
+          threeStar: "Sufficiente",
+          twoStar: "Scarso",
+          oneStar: "Terribile",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Qualit&agrave; eccellente",
+          fourStar: "Buona qualit&agrave;",
+          threeStar: "Qualit&agrave; sufficiente",
+          twoStar: "Qualit&agrave; scarsa",
+          oneStar: "Qualit&agrave; terribile",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Esattamente come descritto",
+          fourStar: "Per lo pi&ugrave; come descritto",
+          threeStar: "Un po' come descritto",
+          twoStar: "Per lo pi&ugrave; non come descritto",
+          oneStar: "Non corrispondeva con la descrizione",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Estremamente veloce",
+          fourStar: "Relativamente veloce",
+          threeStar: "Nella media",
+          twoStar: "Lento",
+          oneStar: "Terribilmente lento",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Eccellente",
+          fourStar: "Buono",
+          threeStar: "Sufficiente",
+          twoStar: "Scarso",
+          oneStar: "Terribile",
         },
         transactions: {
           OrderDetails: "Dettagli ordine",
           ViewOnBlockchain: "Mostra dettagli",
           SoldBy: "Venduto da",
-          BuyerPayout: "Buyer Payout", // not translated
-          SellerPayout: "Seller Payout", // not translated
-          BuyerAmout: "Buyer Amout", // not translated
-          SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          BuyerPayout: "Pagamento compratore",
+          SellerPayout: "pagamento venditore",
+          BuyerAmout: "Importo del compratore",
+          SellerAmout: "Importo del venditore",
+          YouEarn: "Il tuo guadagno",
+          YourBitcoinPaymentAddress: "Il tuo indirizzo bitcoin per il pagamento",
           PurchasedBy: "Comprato da",
           searchByOrder: "Ricerca per ID di ordine o nome articolo",
           sortByStatusAll: "Tutti",
@@ -2828,12 +2828,12 @@ module.exports = Backbone.Model.extend({
           badJSON: "I dati JSON restituiti dal server erano malformati"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Connessione al listino ${listing}",
+          listingFail: "Il listino che stai cercando di vedere &eacute; attualmente scollegato",
+          handleConnect: "Connessione a ${handle}",
+          handleFail: "La pagina che stai cercando di vedere &eacute; attualmente scollegata",
+          userConnect: "Connessione a ${guid}",
+          userFail: "La pagina che stai cercando di vedere &eacute; attualmente scollegata",
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -2848,7 +2848,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scansione del tuo network",
           searchingText: "Scansionando il tuo network per",
-          noResults: "No listings found in your network", //notTranslated
+          noResults: "Nessun listino trovato nel tuo network",
           noTaggedResults: "Nessun listino trovato sul tuo network taggato con"
         },
         filters: {
