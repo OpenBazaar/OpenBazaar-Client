@@ -8990,8 +8990,8 @@ module.exports = Backbone.Model.extend({
         Description: "Beskrivelse",
         Reviews: "Anmeldelser",
         Shipping: "Forsendelse:",
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        CountryOfOrigin: "Oprindelsesland:",
+        CanBeShippedTo: "Kan sendes til dig i:",
         Addresses: "Adresser",
         Files: "Filer",
         NewAddress: "Ny adresse",
@@ -9010,7 +9010,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Ændringer",
         SaveChanges: "Gem ændringer",
         YourName: "Dit navn",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Bitcoin-adresse",
         BitcoinReturnAddress: "Indtast din Bitcoin-adresse",
         BitcoinReturnAddressPlaceholder: "Indtast Bitcoin-adresse…",
         BitcoinReturnAddressInfo: "Hvis en returnering godkendes, skal pengene sendes til en Bitcoin-adresse. Angiv venligst en adresse i din tegnebog herunder.",
@@ -9156,8 +9156,8 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Håndtering af brugernavn", // This is related to the Handle phrase. A Handle is a unique name that starts with @ that users can register with OneName. For example, "@joshob1". If a user wants to use a different web service to resolve Handles, they can put in the URL of a Handle Resolver in this field.
         ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
-        NoFancyStyles: "Disable Visual Effects", // not translated
-        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
+        NoFancyStyles: "Deaktivér visuelle effekter",
+        NoFancyStylesWarning: "Dette vil deaktivere animationer og gennemsigtigheder. Det forbedrer måske ydelsen op langsomme systemer.",
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
         ThisUserIsBlocked: "Denne bruger er skjult, da vedkommende er på din blokeringsliste",
         ThisUserIsNSFW: "Denne bruger er skjult, da vedkommendes side står opført som potentielt stødende",
@@ -9173,39 +9173,39 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Bliv moderator",
         EditModerator: "Moderatorindstillinger",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Fortrinlig samlet set",
+          fourStar: "God",
+          threeStar: "Gennemsnitlig",
+          twoStar: "Dårlig",
+          oneStar: "Forfærdelig",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Fortrinlig kvalitet",
+          fourStar: "God kvalitet",
+          threeStar: "Gennemsnitlig kvalitet",
+          twoStar: "Dårlig kvalitet",
+          oneStar: "Forfærdelig kvalitet",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Fuldstændig som beskrevet",
+          fourStar: "Stort set som beskrevet",
+          threeStar: "Nogenlunde som beskrevet",
+          twoStar: "Stort set ikke som beskrevet",
+          oneStar: "Intet passede ikke med beskrivelsen",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Ekstremt hurtig",
+          fourStar: "Relativt hurtig",
+          threeStar: "Gennemsnitligt",
+          twoStar: "Langsom",
+          oneStar: "Forfærdeligt langsom",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Fortrinlig",
+          fourStar: "God",
+          threeStar: "Gennemsnitlig",
+          twoStar: "Dårlig",
+          oneStar: "Forfærdelig",
         },
         transactions: {
           OrderDetails: "Ordredetaljer",
@@ -9215,8 +9215,8 @@ module.exports = Backbone.Model.extend({
           SellerPayout: "Seller Payout", // not translated
           BuyerAmout: "Buyer Amout", // not translated
           SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          YouEarn: "Du tjener",
+          YourBitcoinPaymentAddress: "Din Bitcoin-betalingsadresse",
           PurchasedBy: "Køber",
           searchByOrder: "Søg ud fra ordre-ID eller varenavn",
           sortByStatusAll: "Alle",
@@ -9238,7 +9238,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Uenighed lukket",
           OrderStatus6: "Uenighed færdiggjort",
           OrderStatus7: "Refunderet",
-          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
+          AcceptDisputeResolution: "Acceptér udbetaling for uenighed",
           InEscrow: "– i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
@@ -9320,12 +9320,12 @@ module.exports = Backbone.Model.extend({
           badJSON: "Den JSON-data, der blev sendt tilbage fra serveren, var ikke formatteret korrekt"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Forbinder til listning ${listing}",
+          listingFail: "Den listning, du prøver at se, er p.t. offline",
+          handleConnect: "Forbinder til ${handle}",
+          handleFail: "Den side, du prøver at se, er p.t. offline",
+          userConnect: "Forbinder til ${guid}",
+          userFail: "Den side, du prøver at se, er p.t. offline",
         },        
         aboutSection: {
           about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a>-kanal e ller på vores <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -9340,7 +9340,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Skanner dit netværk",
           searchingText: "Skanner dit netværk efter",
-          noResults: "No listings found in your network", //notTranslated
+          noResults: "Ingen listninger blev fundet i dit netværk",
           noTaggedResults: "Ingen listninger tagget med følgende blev fundet i dit netværk" // Note: Better (non-postfix) translation would be "Ingen listninger tagget med XXXXX blev fundet i dit netværk"
         },
         filters: {
