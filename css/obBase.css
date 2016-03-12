@@ -5390,6 +5390,48 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: auto;
 }
 
+#ov1 .loading,
+#ov1 #userPage .loading {
+  position: relative;
+  pointer-events: none;
+}
+
+#ov1 .loading:after,
+#ov1 #userPage .loading:after {
+  /* load a loading image on top */
+  content: "\f3b3";
+  font-family: Ionicons;
+  font-size: 1.5em;
+  color: rgba(255,255,255,0);
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  background: rgb(0,0,0);
+  opacity: 0.2;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  animation-name: loaderAnimation;
+  animation-duration: 0.5s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+}
+
+
+@-webkit-keyframes loaderAnimation {
+  0% {
+    opacity: 0.2;
+    color: rgba(255,255,255,0);
+  }
+  100% {
+    opacity: 1;
+    color: rgba(255,255,255,1);
+  }
+}
+
 /* turn off animations and transitions with this style */
 
 #ov1.notFancy,

@@ -568,7 +568,7 @@ module.exports = Backbone.View.extend({
     this.newBanner = true;
   },
 
-  saveGeneral: function() {
+  saveGeneral: function(e) {
     var self = this,
         form = this.$el.find("#generalForm"),
         cCode = this.$('#currency_code').val();
@@ -583,10 +583,10 @@ module.exports = Backbone.View.extend({
 
       self.setCurrentBitCoin(cCode);
       self.refreshView();
-    });
+    }, '','','','',e);
   },
 
-  savePage: function(){
+  savePage: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#pageForm"),
@@ -624,7 +624,7 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, "", pageData, skipKeys);
+      }, "", pageData, skipKeys, '', e);
     };
 
     var checkSocialCount = function(){
@@ -641,7 +641,7 @@ module.exports = Backbone.View.extend({
               },
               function(data){
                 messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-              }, socialData);
+              }, socialData,'','',e);
         } else {
           checkSocialCount();
         }
@@ -672,7 +672,7 @@ module.exports = Backbone.View.extend({
             pageData.header = img_hash;
             checkSocialCount();
           }
-        },"", banner64Data);
+        },"", banner64Data,'','',e);
       } else {
         checkSocialCount();
       }
@@ -695,7 +695,7 @@ module.exports = Backbone.View.extend({
           pageData.avatar = img_hash;
           checkBanner();
         }
-      },"", img64Data);
+      },"", img64Data,'','',e);
     } else {
       checkBanner();
     }
@@ -711,7 +711,7 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  saveStore: function(){
+  saveStore: function(e){
     var self = this,
         form = this.$el.find("#storeForm"),
         profileData = {},
@@ -734,11 +734,11 @@ module.exports = Backbone.View.extend({
         });        
 
         self.refreshView();
-      }, "", settingsData);
-    }, "", profileData);
+      }, "", settingsData,'','',e);
+    }, "", profileData,'','',e);
   },
 
-  saveAddress: function(){
+  saveAddress: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#addressesForm"),
@@ -779,10 +779,10 @@ module.exports = Backbone.View.extend({
       });
 
       self.refreshView();
-    }, "", addressData);
+    }, "", addressData,'','',e);
   },
 
-  saveModerator: function(){
+  saveModerator: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#moderatorForm"),
@@ -801,7 +801,7 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, '', moderatorData);
+    }, '', moderatorData,'','',e);
 
     $.ajax({
       type: "POST",
@@ -814,7 +814,7 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  saveAdvanced: function(){
+  saveAdvanced: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#advancedForm");
@@ -823,7 +823,7 @@ module.exports = Backbone.View.extend({
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      });
+      },'','','','',e);
       
       self.refreshView();
     });
