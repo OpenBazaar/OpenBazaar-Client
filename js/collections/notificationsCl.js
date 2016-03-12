@@ -18,6 +18,12 @@ module.exports = Backbone.Collection.extend({
   },
 
   getUnreadCount: function() {
-    return this.where({ read: false }).length;
+    return this._unread || 0;
+  },
+
+  parse: function(response) {
+    this._unread = response.unread;
+
+    return response.notifications;
   }
 });

@@ -1,11 +1,12 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    baseVw = require('./baseVw'),
     blockedUserVw =  require('./blockedUserVw');
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
-  className: "flexCol-12 flex-border js-tabTarg js-blocked hide",
+  className: '',
 
   events: {
   },
@@ -22,6 +23,7 @@ module.exports = Backbone.View.extend({
       if (options.add) {
         __.each(collection.models.slice(self.subViews.length), function(user) {
           self.renderNewUserView(user);
+          self.$('.js-noblocked').remove();
         });
       }
 
@@ -53,6 +55,7 @@ module.exports = Backbone.View.extend({
 
     this.listenTo(view, 'unblockUserClick', this.unblockUserClick);
     this.subViews.push(view);
+    this.registerChild(view);
     this.$el.append(view.render().el);
   },
 
@@ -71,9 +74,9 @@ module.exports = Backbone.View.extend({
     return this;
   },
 
-  checkIfEmpty: function(){
+  checkIfEmpty: function() {
     if(this.collection.length == 0) {
-      var noBlockSnippet = $("<div class='padding20 txt-center'>" + polyglot.t('NoBlockedList') + "</div>");
+      var noBlockSnippet = $('<div class="padding20 txt-center js-noblocked">' + polyglot.t('NoBlockedList') + '</div>');
       this.$el.html(noBlockSnippet);
     }
   },
@@ -84,48 +87,18 @@ module.exports = Backbone.View.extend({
 
   clearSubViews: function() {
     __.each(this.subViews, function(view) {
-      view.close();
+      view.remove();
     });
 
     this.subViews = [];
   },
 
   removeSubView: function(view) {
-    var self = this,
-        index;
+    var index;
 
-    if (!view) return;
+    if (!view || (index = this.subViews.indexOf(view)) === -1) return;
 
-    __.every(this.subViews, function(subView, i) {
-      if (view === subView) {
-        index = i;
-
-        if(subView.close){
-          subView.close();
-        }else{
-          subView.unbind();
-          subView.remove();
-        }
-
-        self.subViews.splice(index, 1);
-
-        return false;        
-      }
-
-      return true;
-    });
-  },  
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
+    this.subViews[index].remove();
+    this.subViews.splice(index, 1);
   }
 });

@@ -1231,30 +1231,30 @@ module.exports = Backbone.Model.extend({
 
          */
 
-        IHaveAWalletNow: "I have a Wallet now", //notTranslated
+        IHaveAWalletNow: "Ya tengo un monedero",
         Next: "Siguiente",
         IAgree: "Estoy de acuerdo",
         Back: "Atr&aacute;s",
-        Recommended: "Recomendado", //notTranslated
-        Reload: "Refrescar", //notTranslated
-        You: "Tu", //notTranslated
+        Recommended: "Recomendado",
+        Reload: "Refrescar",
+        You: "Ud.",
         Skip: "Omitir",
         Done: "Hecho",
-        Status: "Estado",
-        Navigation: "Navegaci&oacute;n", //notTranslated
+        Status: "Status",
+        Navigation: "Navegaci&oacute;n",
         Cancel: "Cancelar",
         Yes: "S&iacute;",
         No: "No",
         of: "de",
         Sell: "Vender",
         New: "Nuevo",
-        HighlightToStyle: "Seleccionar texto para darle estilo", //notTranslated
+        HighlightToStyle: "Seleccionar texto para darle estilo",
         Excellent: "Excelente",
         Good: "Bueno",
         Poor: "Deteriorado",
-        StillValidating: "Tu apodo se est&aacute; validando", //notTranslated
-        CheckStatus: "Revisar estado", //notTranslated
-        ChangeCurrency: "Cambiar moneda", //notTranslated
+        StillValidating: "Tu apodo se est&aacute; validando",
+        CheckStatus: "Revisar Estado",
+        ChangeCurrency: "Cambiar moneda",
         SKU: "SKU",
         Refurbished: "Restaurado",
         Physical: "F&iacute;sico",
@@ -1267,20 +1267,23 @@ module.exports = Backbone.Model.extend({
         Follow: "Seguir",
         Feed: "Feed",
         FeedPlaceholder: "RSS de las p&aacute;ginas que sigue",
-        ViewListing: "Ver publicaciones", //notTranslated
-        Unfollow: "Dejar de seguir",
         About: "Acerca de",
         NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
-        NoListings: "Sin publicaciones", //notTranslated
+        AboutEmpty: "La secci&oacute;n Acerca de est&aacute; en blanco ...",
+        ViewListing: "Ver Listado",
+        Unfollow: "Abandonar",
+        About: "Acerca de",
+        NoDescriptionAdded: "No hay descripci&oacute;n a&ntilde;adida",
+        NoListings: "No hay listados",
         AboutEmpty: "La secci&oacute;n Acerca de est&aacute; en blanco ...",
         Followers: "Seguidores",
         Following: "Siguiendo a",
-        FollowsYou: "Te siguen", //notTranslated
+        FollowsYou: "Te sigue",
         Message: "Mensaje",
         Messages: "Mensajes",
         Store: "Tienda",
         Edit: "Editar",
-        Clone: "Duplicar", //notTranslated
+        Clone: "Duplicar",
         Used: "Usado",
         Delete: "Borrar",
         DontDelete: "No Borrar",
@@ -1290,22 +1293,24 @@ module.exports = Backbone.Model.extend({
         Welcome: "Bienvenido",
         CreateStore: "Crear Tienda",
         GoToMyPage: "Ir a mi p&aacute;gina",
-        SearchForItemsPlaceholder: "Ingresa #juegos, #zapatos u otra #etiqueta...", //notTranslated
+        SearchForItemsPlaceholder: "Escribe #juegos, #zapatos o cualquier #etiqueta...",
         SearchForPagesPlaceholder: "B&uacute;squeda por palabra clave",
         SearchFeedPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForFollowersPlaceholder: "B&uacute;squeda por nombre o apodo",
         SearchForUsersPlaceholder: "B&uacute;squeda por nombre o apodo",
-        SearchOnUserStorePlaceholder: "Introduzca un t&iacute;tulo...", //notTranslated
         EstDeliveryDomesticPlaceholder: "3-5 d&iacute;s h&aacute;biles",
         EstDeliveryInternationalPlaceholder: "7-15 d&iacute;s h&aacute;biles",
-        OrderProcessingTimePlaceholder: "Enter time needed to process order",
+        OrderProcessingTimePlaceholder: "Escriba el tiempo necesario para procesar la orden",
+        SearchOnUserStorePlaceholder: "Escribe un t&iacute;tulo...",
+        EstDeliveryDomestic: "3-5 d&iacute;s h&aacute;biles",
+        EstDeliveryInternational: "7-15 d&iacute;s h&aacute;biles",
         TermsAndConditionsPlaceholder: "Introduzca T&eacute;rminos y condiciones...",
         TitlePlaceholder: "Introduzca t&iacute;tulo",
         DescriptionPlaceholder: "Introduzca descripci&ooacute;n",
         ReturnPolicyPlaceholder: "Introduzca pol&iacute;ticas de devoluciones",
         CategoryPlaceholder: "Introduzca categor&iacute;a",
         CategoryHelperText: "Las categor&iacute;as se utilizan para agrupar y organizar art&iacute;culos dentro de su tienda.",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        KeywordsHelperText: "Agregar etiquetas ayuda a que tu listado sea encontrado en el mercado.",
         ExpirationDateHelperText : "Establecer una fecha para que el art&iacute;culo sea autom&aacute;ticammente retirado de su tienda.",
         ClearExpirationDate : "Limpiar Fecha de Vencimiento",
         ReturnPolicy: "Pol&iacute;tica de devoluciones",
@@ -1319,18 +1324,18 @@ module.exports = Backbone.Model.extend({
         Facebook: "Facebook",
         Instagram: "Instagram",
         Twitter: "Twitter",
-        PGPKey: "PGP Key",  //not translated
-        Signature: "PGP Signature",  //not translated
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        SignaturePlaceholder: "Una firma PGP es necesaria si desea introducir una llave PGP",
+        PGPKey: "Llave PGP",
+        Signature: "Firma PGP",
         Snapchat: "Snapchat",
         BUYNOW: "COMPRAR AHORA",
         Description: "Descripci&oacute;n",
         Reviews: "Cr&iacute;ticas",
         Shipping: "Envío:",
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        CountryOfOrigin: "Pa&iiacute;s de origen:",
+        CanBeShippedTo: "Puede ser env&iacute;ado a ti en:",
         Addresses: "Direcciones",
-        Files: "Files", //notTranslated
+        Files: "Archivos",
         NewAddress: "Nueva Direcci&oacute;n",
         CurrentAddress: "Direcciones actuales",
         Returns: "Devoluciones",
@@ -1342,12 +1347,14 @@ module.exports = Backbone.Model.extend({
         Customize: "Personalizar",
         Save: "Guardar",
         Changes: "Cambios",
-        Change: "Cambio", //notTranslated
         SaveChanges: "Guardar Cambios",
         YourNombre: "Su nombre",
-        BitcoinReturnAddress: "Introduzca su direcci&oacute;n Bitcoin", //notTranslated
-        BitcoinReturnAddressPlaceholder: "direcci&oacute;n Bitcoin para retornar las monedas", //not translated
-        BitcoinReturnAddressInfo: "Si se emite un reembolso, los fondos ser&aacute;n enviados a una direcci&oacute;n Bitcoin. Por favor, introduzca su billetera a continuaci&oacute;n.", //not translated
+        Change: "Cambiar",
+        SaveChanges: "Guardar Cambios",
+        YourNombre: "Su nombre",
+        BitcoinReturnAddress: "Escribe tu direcci&oacute;n bitcoin",
+        BitcoinReturnAddressPlaceholder: "direcci&oacute;n bitcoin para reembolsos",
+        BitcoinReturnAddressInfo: "Si se hace un reembolso, los fondos deben ser enviados a esta direcci&oacute;n Bitcoin. Por favor provea una direcci&oacute;n a su cartera abajo.", 
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -1365,21 +1372,21 @@ module.exports = Backbone.Model.extend({
         Name: "Nombre",
         Price: "Precio",
         Available: "Disponible",
-        Tags: "Etiquetas", //notTranslated
+        Tags: "Etiquetas",
         Keywords: "Palabras claves",
         Type: "Tipo",
         Condition: "Condici&oacute;n",
         NSFW: "18+ (contenido para adultos)",
-        Select: "Seleccionar", //not translated
-        Social: "Social", //not translated
-        Theme: "Template", //not translated
-        Listing: "Publicaci&oacute;n", //not translated
-        Listings: "Publicaciones", //not translated
-        ViewPage: "Ver p&aacute;gina", //notTranslated
-        Pages: " P&aacute;ginas", //not translated
-        Page: " P&aacute;gina", //not translated
-        Language: "Lenguaje", //not translated
-        Reset: "Restaurar", //not translated
+        Select: "Seleccionar",
+        Social: "Social",
+        Theme: "Tema",
+        Listing: "Listado",
+        Listings: "Listados",
+        ViewPage: "Ver p&aacute;gina",
+        Pages: "P&aacute;ginas",
+        Page: "P&aacute;gina",
+        Language: "Idioma",
+        Reset: "Restaurar",
         Local: "Local",
         Domestic: "Interno:",
         Location: "Ubicaci&oacute;n",
@@ -1388,7 +1395,7 @@ module.exports = Backbone.Model.extend({
         Free: "Gratis",
         Category: "Categor&iacute;a",
         ProcessingTime: "Tiempo de procesamiento",
-        SelectPhotos: "Seleccionar fotos", //notTranslated
+        SelectPhotos: "Seleccionar fotos",
         DragOrUploadPhotos: "Arrastre o suba fotos",
         UploadCoverPhoto: "Suba una foto de portada",
         ExpirationDate: "Fecha de vencimiento",
@@ -1421,38 +1428,61 @@ module.exports = Backbone.Model.extend({
         SaveAvatar: "Guardar Avatar ",
         NewAvatar: "Seleccione Nuevo Avatar",
         NewCoverImage: "Seleccione Nueva Imagen de la Cubierta",
-        Loading: "Cargando...", // not translated
+        ActiveStore: "La Tienda est&aacute; activa",
+        ActiveStoreDetails: "Las tiendas inactivas y listados inactivos no son visibles a otros",
+        Loading: "Cargando...",
         Purchases:"Compras",
-        Sales: "Ventas", // not translated
-        Cases: "Cases", // not translated
-        Enter: "Ingresar", //notTranslated
-        Discover: "Descubrir", // not translated
-        Block: "Bloquear", //notTranslated
-        Unblock: "Desbloquear", //notTranslated
-        Blocked: "Bloqueado", // not translated
-        NoBlockedList: "No bloqueaste a nadie.", // not translated
-        Advanced: "Avanzado", // not translated
-        General: "General", // not translated
-        AllItems: "Todos los items", // not translated
-        FreeShipping: "Env&iacute;o gratuito", // not translated
-        DomesticShippingPrice: "Precio de env&iacute;o nacional", // not translated
-        InternationalShippingPrice: "Precio de env&iacute;o internacional", // not translated
-        MinimumIs: "M&iacute;nimo", // not translated
-        Visibility: "Visibilidad", // not translated
-        Title: "T&iacute;tulo", // not translated
-        DigitalItem: "&Iacute;tem digital", // not translated
-        PhysicalItem: "&Iacute;tem  f&iacute;sico", // not translated
-        MinimumPrice: "Un m&iacute,nimo es necesario para cubrir los costos de la transacci&oacute;n Bitcoin", //notTranslated
-        DomesticShippingTime: "Tiempo de env&iacute;o nacional", // not translated
-        InternationalShippingTime: "Tiempo de env&iacute;o internacional", // not translated
-        DisplayNSFWcontent: "Mostrar contenido no apto para el trabajo?", // not translated
-        Basic: "B&aacute;sico", // not translated
-        Content: "Contenido", // not translated
-        ActiveStore:"Store is Active", // not translated
-        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
-        Firewall: "Firewall", //notTranslated
-        ServerSettings: "Configuraci&oacute;n del servidor", //notTranslated
-        ReadOnly: "(Campo de solo lectura)", //notTranslated
+        Sales: "Ventas",
+        Cases: "Casos", 
+        Enter: "Enter",
+        Discover: "Descubrir",
+        Block: "Bloquear",
+        Unblock: "Desbloquear",
+        Blocked: "Bloqueado",
+        NoBlockedList: "No est&aacute; bloqueando a nadie.",  
+        Advanced: "Avanzado",
+        General: "General", 
+        AllItems: "Todos los art&iacute;culos",
+        FreeShipping: "Env&iacute;o gratuito",
+        DomesticShippingPrice: "Precio de env&iacute;o nacional",
+        InternationalShippingPrice: "Precio de env&iacute;o internacional",
+        MinimumIs: "M&iacute;nimo es",
+        Visibility: "Visibilidad",
+        Title: "T&iacute;tulo",
+        DigitalItem: "Art&iacute;lo Digital",
+        PhysicalItem: "Art&iacute;lo F&iacute;sico",
+        DomesticShippingTime: "Tiempo de env&iacute;o nacional",
+        InternationalShippingTime: "Tiempo de env&iacute;o internacional",
+        DisplayNSFWcontent: "Mostrar contenido No apto para oficina?",
+        Basic: "B&aacute;sico",
+        Content: "Contenido",
+        StandardThemes: "Temas Estandar",
+        NoPhotosAdded: "No se agregaron fotos",
+        Summary: "Resumen",
+        Funds: "Fondos",
+        Discussion: "Discusi&oacute;n",
+        Quantity: "Cantidad",
+        ShippingTo: "Enviar a",
+        ModeratedBy: "Moderado por",
+        Submit: "Enviar",
+        maxLength20: "max length 20 char", //not translated
+        maxLength80: "max length 80 char", //not translated
+        maxLength200: "max length 200 char", //not translated
+        StoreModeratorsOptional: "Moderadores de la tienda (Opcional)",
+        Searchformoderators: "Buscar moderadores",
+        Contributors: "Contribuyentes", 
+        Support: "Suporte",
+        Licensing: "Licencias",
+        On: "Encendido",
+        Off: "Apagado",
+        ClickToChange: "Click para cambiar",
+        NotProvided: "no provisto",
+        NotFollowingAnyone: "No sigue a nadie",
+        NoFollowers: "Sin seguidores",
+        Moderator: "Moderador",
+        Firewall: "Firewall",
+        ServerSettings: "Configuraci&oacute;n del servidor",
+        ReadOnly: "(Campo de solo lectura)",
         HandleResolver: "Handle Resolver",  // not translated
         ServerSettings: "Configuraci&oacute;n del servidor",  // not translated duplicated?
         ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated

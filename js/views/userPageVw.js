@@ -523,6 +523,9 @@ module.exports = baseVw.extend({
       currentAddress = this.model.get('page').profile.guid;
     }
 
+    //clear loading buttons
+    this.$('.loader').removeClass('loading');
+
     window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress, 'handle': currentHandle});
   },
 
@@ -590,6 +593,8 @@ module.exports = baseVw.extend({
       followBtn.removeClass('hide');
       unfollowBtn.addClass('hide');
     }
+    followBtn.removeClass('loading');
+    unfollowBtn.removeClass('loading');
   },
 
   fetchListings: function() {
@@ -913,7 +918,7 @@ module.exports = baseVw.extend({
     this.$('.js-list5').html(this.itemEditView.render().el);
     this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
-    this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
+    this.listenTo(this.itemEditView, 'removeLoading', this.removeItemLoading);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
 
@@ -1301,6 +1306,10 @@ module.exports = baseVw.extend({
     this.fetchListings();
   },
 
+  removeItemLoading: function(){
+    this.$('.js-saveItem').removeClass('loading');
+  },
+
   cancelClick: function(){
     "use strict";
     this.setState(this.lastTab);
@@ -1358,10 +1367,10 @@ module.exports = baseVw.extend({
     }
   },
 
-  saveItem: function(){
+  saveItem: function(e){
     "use strict";
     if(this.itemEditView){
-      this.itemEditView.saveChanges();
+      this.itemEditView.saveChanges(e);
     }
   },
 

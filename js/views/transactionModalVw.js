@@ -47,8 +47,6 @@ module.exports = baseVw.extend({
     'click .js-transactionShowContract': 'showContract',
     'click .js-transactionHideContract': 'hideContract',
     'click .js-acceptResolution': 'acceptResolution',
-    //'click .js-refundTransaction': 'showRefundOrder',
-    //'click .js-refundOrder': 'refundOrder',
     'click .js-refundTransaction': 'refundOrder',
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
@@ -323,7 +321,7 @@ module.exports = baseVw.extend({
       self.getData();
       }, '', confirmData, '', function(){
       self.$('.js-transactionSpinner').addClass('hide');
-    });
+    }, e);
   },
 
   completeOrder: function(e){
@@ -344,7 +342,7 @@ module.exports = baseVw.extend({
           self.$el.find('.js-transactionSpinner').addClass('hide');
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
-        completeData);
+        completeData, '', '', e);
   },
 
   checkPayment: function(){
@@ -581,7 +579,7 @@ module.exports = baseVw.extend({
     }
   },
 
-  acceptResolution: function(){
+  acceptResolution: function(e){
     var self = this,
         resData = {};
     resData.order_id = this.orderID;
@@ -589,10 +587,10 @@ module.exports = baseVw.extend({
       self.status = 6;
       self.tabState = "summary";
       self.getData();
-    },'', resData);
+    },'', resData, '', '', e);
   },
 
-  refundOrder: function(){
+  refundOrder: function(e){
     //var targetForm = this.$('#transactionRefundForm'),
       var self = this,
           refData = {};
@@ -601,7 +599,7 @@ module.exports = baseVw.extend({
       self.status = 7;
       self.tabState = "summary";
       self.getData();
-    },'', refData);
+    },'', refData, '', '', e);
   },
 
   updateBuyerBTC: function(e) {

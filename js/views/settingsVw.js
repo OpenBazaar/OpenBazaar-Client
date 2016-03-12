@@ -133,18 +133,7 @@ module.exports = Backbone.View.extend({
 
       self.newAvatar = false;
       self.newBanner = false;
-
-      // Since the Blocked Users View kicks off many server calls (one
-      // for each blocked user) and since we are re-rendering the entire
-      // settings view often (after each save), we will cache the Blocked
-      // Users View.
-      if (!self.blockedRendered) {
-        self.renderBlocked();
-        self.blockedRendered = true;
-      } else {
-        self.renderBlocked({ useCached: true });
-      }
-
+      self.blockedTabAccessed = false;
       self.setState(self.options.state);
 
       $(".chosen").chosen({ width: '100%' });
@@ -255,10 +244,11 @@ module.exports = Backbone.View.extend({
 
   renderBlocked: function(options) {
     var self = this,
-        modelsPerBatch = 25,
+        modelsPerBatch = 5,
         $lazyLoadTrigger,
         $blockedForm,
-        blockedUsersCl;
+        blockedUsersCl,
+        $blockedContainer;
 
     options = options || {};
     $blockedContainer = this.$('#blockedForm > :first-child');
@@ -271,6 +261,7 @@ module.exports = Backbone.View.extend({
       }
 
       $blockedContainer.html(this.blockedUsersVw.el);
+      this.blockedUsersVw.delegateEvents();
 
       if (!document.contains(this.$lazyLoadTrigger[0])) {
         $blockedContainer.append(this.$lazyLoadTrigger);
@@ -294,9 +285,9 @@ module.exports = Backbone.View.extend({
       serverUrl: this.serverUrl
     });
 
-    this.$('#blockedForm').html(
+    $blockedContainer.html(
         this.blockedUsersVw.render().el
-    );
+    );    
 
     this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
       position: 'absolute',
@@ -319,7 +310,7 @@ module.exports = Backbone.View.extend({
     });
 
     this.blockedUsersUnblockHandler && this.stopListening(window.obEventBus, null, this.blockedUsersUnblockHandler);
-    this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = (e)=> {
+    this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = (e) => {
       blockedUsersCl.remove(
           blockedUsersCl.findWhere({ guid: e.guid })
       );
@@ -493,20 +484,17 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
   addTabToHistory: function(state){
-    "use strict";
     //add action to history
     Backbone.history.navigate("#settings/" + state);
     this.options.state = state;
   },
 
   setTab: function(activeTab, showContent){
-    "use strict";
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');
     this.$el.find('.js-tabTarg').addClass('hide');
@@ -517,15 +505,14 @@ module.exports = Backbone.View.extend({
     if(state){
       this._state = state;
       this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
-      if(state == "store"){
-
-        if(this.firstLoadModerators) {
+     
+      if (state == "store") {
+        if (this.firstLoadModerators) {
           this.$('.js-settingsNewMods').html("");
           this.$('.js-settingsCurrentMods').html("");
           this.socketView.getModerators(this.socketModeratorID);
 
           __.each(this.userModel.get('moderators'), (modID)=> {
-            "use strict";
             if (modID) {
               modID.fromModel = true;
               this.renderModerator(modID);
@@ -533,6 +520,18 @@ module.exports = Backbone.View.extend({
           });
         }
         this.firstLoadModerators = false;
+      } else if (state === 'blocked') {
+        // Since the Blocked Users View kicks off many server calls (one
+        // for each blocked user) and since we are re-rendering the entire
+        // settings view often (after each save), we will cache the Blocked
+        // Users View.
+        if (!this.blockedRendered && !this.blockedTabAccessed) {
+          this.renderBlocked();
+          this.blockedRendered = true;
+          this.blockedTabAccessed = true;
+        } else {
+          this.renderBlocked({ useCached: true });
+        }
       }
     } else {
       this._state = "general";
@@ -569,7 +568,7 @@ module.exports = Backbone.View.extend({
     this.newBanner = true;
   },
 
-  saveGeneral: function() {
+  saveGeneral: function(e) {
     var self = this,
         form = this.$el.find("#generalForm"),
         cCode = this.$('#currency_code').val();
@@ -584,10 +583,10 @@ module.exports = Backbone.View.extend({
 
       self.setCurrentBitCoin(cCode);
       self.refreshView();
-    });
+    }, '','','','',e);
   },
 
-  savePage: function(){
+  savePage: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#pageForm"),
@@ -625,7 +624,7 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, "", pageData, skipKeys);
+      }, "", pageData, skipKeys, '', e);
     };
 
     var checkSocialCount = function(){
@@ -642,7 +641,7 @@ module.exports = Backbone.View.extend({
               },
               function(data){
                 messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-              }, socialData);
+              }, socialData,'','',e);
         } else {
           checkSocialCount();
         }
@@ -673,7 +672,7 @@ module.exports = Backbone.View.extend({
             pageData.header = img_hash;
             checkSocialCount();
           }
-        },"", banner64Data);
+        },"", banner64Data,'','',e);
       } else {
         checkSocialCount();
       }
@@ -696,7 +695,7 @@ module.exports = Backbone.View.extend({
           pageData.avatar = img_hash;
           checkBanner();
         }
-      },"", img64Data);
+      },"", img64Data,'','',e);
     } else {
       checkBanner();
     }
@@ -712,7 +711,7 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  saveStore: function(){
+  saveStore: function(e){
     var self = this,
         form = this.$el.find("#storeForm"),
         profileData = {},
@@ -735,11 +734,11 @@ module.exports = Backbone.View.extend({
         });        
 
         self.refreshView();
-      }, "", settingsData);
-    }, "", profileData);
+      }, "", settingsData,'','',e);
+    }, "", profileData,'','',e);
   },
 
-  saveAddress: function(){
+  saveAddress: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#addressesForm"),
@@ -780,10 +779,10 @@ module.exports = Backbone.View.extend({
       });
 
       self.refreshView();
-    }, "", addressData);
+    }, "", addressData,'','',e);
   },
 
-  saveModerator: function(){
+  saveModerator: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#moderatorForm"),
@@ -802,7 +801,7 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, '', moderatorData);
+    }, '', moderatorData,'','',e);
 
     $.ajax({
       type: "POST",
@@ -815,7 +814,7 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  saveAdvanced: function(){
+  saveAdvanced: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#advancedForm");
@@ -824,7 +823,7 @@ module.exports = Backbone.View.extend({
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      });
+      },'','','','',e);
       
       self.refreshView();
     });
