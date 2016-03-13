@@ -923,7 +923,7 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    this.blockedUsersVw.remove();
+    this.blockedUsersVw && this.blockedUsersVw.remove();
 
     if (this.blockedUsersScrollHandler && this.$obContainer.length) {
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);

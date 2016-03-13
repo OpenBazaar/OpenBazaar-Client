@@ -110,7 +110,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Buy Now",
         Description: "Description",
         Reviews: "Reviews",
-        Shipping: "Shipping:",
+        Shipping: "Shipping",
+        ShippingReturns: "Shipping & Returns",
         CountryOfOrigin: "Country of Origin:",
         CanBeShippedTo: "Can Ship to You In:",
         Addresses: "Addresses",
@@ -721,7 +722,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Koop Nu",
         Description: "Beschrijving",
         Reviews: "Reviews",
-        Shipping: "Verzending:",
+        Shipping: "Verzending",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Addressen",
@@ -1331,7 +1333,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "COMPRAR AHORA",
         Description: "Descripci&oacute;n",
         Reviews: "Cr&iacute;ticas",
-        Shipping: "Envío:",
+        Shipping: "Envío",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Pa&iiacute;s de origen:",
         CanBeShippedTo: "Puede ser env&iacute;ado a ti en:",
         Addresses: "Direcciones",
@@ -1903,7 +1906,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "JETZT KAUFEN",
         Description: "Beschreibung",
         Reviews: "Rezensionen",
-        Shipping: "Versand:",
+        Shipping: "Versand",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adressen",
@@ -2496,8 +2500,12 @@ module.exports = Backbone.Model.extend({
         Description: "Descrizione",
         Reviews: "Recensioni",
         Shipping: "Spedizione:",
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        CountryOfOrigin: "Paese d'origine:",
+        CanBeShippedTo: "Pu&ograve; spedirti in",
+        Shipping: "Spedizione",
+        ShippingReturns: "Shipping & Returns", //not translated
+        CountryOfOrigin: "Paese d'origine:",
+        CanBeShippedTo: "Pu&ograve; spedirti in",
         Addresses: "Indirizzi",
         Files: "File",
         NewAddress: "Nuovo indirizzo",
@@ -2516,7 +2524,7 @@ module.exports = Backbone.Model.extend({
         Change: "Cambia",
         SaveChanges: "Salva modifiche",
         YourName: "Tuo nome",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Indirizzo Bitcoin",
         BitcoinReturnAddress: "Inserisci il tuo Indirizzo Bitcoin",
         BitcoinReturnAddressPlaceholder: "Inserire indirizzo bitcoin...",
         BitcoinReturnAddressInfo: "Se sar&agrave; rilasciato un rimborso, i fondi dovranno essere inviati ad un indirizzo Bitcoin. Si prega di fornire qui sotto un indirizzo al vostro portafoglio.",
@@ -2661,8 +2669,8 @@ module.exports = Backbone.Model.extend({
         ReadOnly: "(Questo campo &egrave; di sola lettura)",
         HandleResolver: "Recupero Nickname",
         ShutDownServer: "Spegni il server",
-        NoFancyStyles: "Disable Visual Effects", // not translated
-        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
+        NoFancyStyles: "Disattivare effetti visivi",
+        NoFancyStylesWarning: "Questo consente di disattivare le animazioni e trasparenze. Pu&ograve; migliorare le prestazioni su sistemi lenti.",
         LoadingBitcoinPrices: "Caricamento Prezzi Bitcoin...",
         ThisUserIsBlocked: "Questo utente &egrave; nascosto perch&egrave; si trova nella tua lista bloccati",
         ThisUserIsNSFW: "Questo utente &egrave; nascosto perch&egrave; la sua pagina &egrave; indicata come NSFW",
@@ -2678,50 +2686,50 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Diventa un moderatore",
         EditModerator: "Impostazioni moderatore",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Assolutamente eccellente",
+          fourStar: "Buono",
+          threeStar: "Sufficiente",
+          twoStar: "Scarso",
+          oneStar: "Terribile",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Qualit&agrave; eccellente",
+          fourStar: "Buona qualit&agrave;",
+          threeStar: "Qualit&agrave; sufficiente",
+          twoStar: "Qualit&agrave; scarsa",
+          oneStar: "Qualit&agrave; terribile",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Esattamente come descritto",
+          fourStar: "Per lo pi&ugrave; come descritto",
+          threeStar: "Un po' come descritto",
+          twoStar: "Per lo pi&ugrave; non come descritto",
+          oneStar: "Non corrispondeva con la descrizione",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Estremamente veloce",
+          fourStar: "Relativamente veloce",
+          threeStar: "Nella media",
+          twoStar: "Lento",
+          oneStar: "Terribilmente lento",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Eccellente",
+          fourStar: "Buono",
+          threeStar: "Sufficiente",
+          twoStar: "Scarso",
+          oneStar: "Terribile",
         },
         transactions: {
           OrderDetails: "Dettagli ordine",
           ViewOnBlockchain: "Mostra dettagli",
           SoldBy: "Venduto da",
-          BuyerPayout: "Buyer Payout", // not translated
-          SellerPayout: "Seller Payout", // not translated
-          BuyerAmout: "Buyer Amout", // not translated
-          SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          BuyerPayout: "Pagamento compratore",
+          SellerPayout: "pagamento venditore",
+          BuyerAmout: "Importo del compratore",
+          SellerAmout: "Importo del venditore",
+          YouEarn: "Il tuo guadagno",
+          YourBitcoinPaymentAddress: "Il tuo indirizzo bitcoin per il pagamento",
           PurchasedBy: "Comprato da",
           searchByOrder: "Ricerca per ID di ordine o nome articolo",
           sortByStatusAll: "Tutti",
@@ -2828,12 +2836,12 @@ module.exports = Backbone.Model.extend({
           badJSON: "I dati JSON restituiti dal server erano malformati"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Connessione al listino ${listing}",
+          listingFail: "Il listino che stai cercando di vedere &eacute; attualmente scollegato",
+          handleConnect: "Connessione a ${handle}",
+          handleFail: "La pagina che stai cercando di vedere &eacute; attualmente scollegata",
+          userConnect: "Connessione a ${guid}",
+          userFail: "La pagina che stai cercando di vedere &eacute; attualmente scollegata",
         },
         aboutSection: {
           about: "<p>OpenBazaar is a network of users who buy and sell goods and services directly with each other, using Bitcoin. This network is decentralized and isn't controlled by any organization.</p><p>The software is open source and MIT licensed. You can view the code on <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar is a community project, and we welcome participation in our <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> channel or on our <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>If you need help, read the OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">Tut  orial</a>.</p><p>If you still have questions, open an issue at our <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -2848,7 +2856,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Scansione del tuo network",
           searchingText: "Scansionando il tuo network per",
-          noResults: "No listings found in your network", //notTranslated
+          noResults: "Nessun listino trovato nel tuo network",
           noTaggedResults: "Nessun listino trovato sul tuo network taggato con"
         },
         filters: {
@@ -3108,7 +3116,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Acheter Maintenant",
         Description: "Description",
         Reviews: "Avis",
-        Shipping: "Expédition :",
+        Shipping: "Expédition",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Pays d'origine :",
         CanBeShippedTo: "Peut vous être livré dans :",
         Addresses: "Adresses",
@@ -3699,7 +3708,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "CUMPĂRAȚI ACUM",
         Description: "Descriere",
         Reviews: "Recenzii",
-        Shipping: "Livrare:",
+        Shipping: "Livrare",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adrese",
@@ -4288,7 +4298,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Купи сейчас",
         Description: "Описание",
         Reviews: "Отзывы",
-        Shipping: "Доставка:",
+        Shipping: "Доставка",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Страна происхождения:",
         CanBeShippedTo: "Возможна отправка в:",
         Addresses: "Адреса",
@@ -4876,7 +4887,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "KÚPIŤ IHNEĎ",
         Description: "Popis",
         Reviews: "Hodnotenia",
-        Shipping: "Doprava:",
+        Shipping: "Doprava",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
@@ -5470,7 +5482,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Hemen Al",
         Description: "Tanım",
         Reviews: "Yorumlar",
-        Shipping: "Gönderme:",
+        Shipping: "Gönderme",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresler",
@@ -6062,7 +6075,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "DaH je'",
         Description: "Bang",
         Reviews: "YIqaw",
-        Shipping: "NgeH Duj:",
+        Shipping: "NgeH Duj",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "SoQ",
@@ -6654,7 +6668,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "立即购买",
         Description: "描述",
         Reviews: "评价",
-        Shipping: "物流:",
+        Shipping: "物流",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "地址",
@@ -7252,7 +7267,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "지금 구매",
         Description: "설명",
         Reviews: "리뷰",
-        Shipping: "배송:",
+        Shipping: "배송",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "주소들",
@@ -7840,7 +7856,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "今すぐ購入する",
         Description: "商品の説明",
         Reviews: "レビュー",
-        Shipping: "発送:",
+        Shipping: "発送",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "住所",
@@ -8423,7 +8440,8 @@ module.exports = Backbone.Model.extend({
         BUYNOW: "Kup teraz",
         Description: "Opis",
         Reviews: "Opinie",
-        Shipping: "Wysyłka:",
+        Shipping: "Wysyłka",
+        ShippingReturns: "Shipping & Returns", //not translated
         CountryOfOrigin: "Country of Origin:", //not translated
         CanBeShippedTo: "Can Ship to You In:", //not translated
         Addresses: "Adresy",
@@ -8990,8 +9008,12 @@ module.exports = Backbone.Model.extend({
         Description: "Beskrivelse",
         Reviews: "Anmeldelser",
         Shipping: "Forsendelse:",
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        CountryOfOrigin: "Oprindelsesland:",
+        CanBeShippedTo: "Kan sendes til dig i:",
+        Shipping: "Forsendelse",
+        ShippingReturns: "Shipping & Returns", //not translated
+        CountryOfOrigin: "Oprindelsesland:",
+        CanBeShippedTo: "Kan sendes til dig i:",
         Addresses: "Adresser",
         Files: "Filer",
         NewAddress: "Ny adresse",
@@ -9010,7 +9032,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Ændringer",
         SaveChanges: "Gem ændringer",
         YourName: "Dit navn",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Bitcoin-adresse",
         BitcoinReturnAddress: "Indtast din Bitcoin-adresse",
         BitcoinReturnAddressPlaceholder: "Indtast Bitcoin-adresse…",
         BitcoinReturnAddressInfo: "Hvis en returnering godkendes, skal pengene sendes til en Bitcoin-adresse. Angiv venligst en adresse i din tegnebog herunder.",
@@ -9156,8 +9178,8 @@ module.exports = Backbone.Model.extend({
         HandleResolver: "Håndtering af brugernavn", // This is related to the Handle phrase. A Handle is a unique name that starts with @ that users can register with OneName. For example, "@joshob1". If a user wants to use a different web service to resolve Handles, they can put in the URL of a Handle Resolver in this field.
         ServerSettings: "Serverindstillinger",
         ShutDownServer: "Luk serveren ned",
-        NoFancyStyles: "Disable Visual Effects", // not translated
-        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
+        NoFancyStyles: "Deaktivér visuelle effekter",
+        NoFancyStylesWarning: "Dette vil deaktivere animationer og gennemsigtigheder. Det forbedrer måske ydelsen op langsomme systemer.",
         LoadingBitcoinPrices: "Indlæser Bitcoin-priser…",
         ThisUserIsBlocked: "Denne bruger er skjult, da vedkommende er på din blokeringsliste",
         ThisUserIsNSFW: "Denne bruger er skjult, da vedkommendes side står opført som potentielt stødende",
@@ -9173,39 +9195,39 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Bliv moderator",
         EditModerator: "Moderatorindstillinger",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Fortrinlig samlet set",
+          fourStar: "God",
+          threeStar: "Gennemsnitlig",
+          twoStar: "Dårlig",
+          oneStar: "Forfærdelig",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Fortrinlig kvalitet",
+          fourStar: "God kvalitet",
+          threeStar: "Gennemsnitlig kvalitet",
+          twoStar: "Dårlig kvalitet",
+          oneStar: "Forfærdelig kvalitet",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Fuldstændig som beskrevet",
+          fourStar: "Stort set som beskrevet",
+          threeStar: "Nogenlunde som beskrevet",
+          twoStar: "Stort set ikke som beskrevet",
+          oneStar: "Intet passede ikke med beskrivelsen",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Ekstremt hurtig",
+          fourStar: "Relativt hurtig",
+          threeStar: "Gennemsnitligt",
+          twoStar: "Langsom",
+          oneStar: "Forfærdeligt langsom",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Fortrinlig",
+          fourStar: "God",
+          threeStar: "Gennemsnitlig",
+          twoStar: "Dårlig",
+          oneStar: "Forfærdelig",
         },
         transactions: {
           OrderDetails: "Ordredetaljer",
@@ -9215,8 +9237,8 @@ module.exports = Backbone.Model.extend({
           SellerPayout: "Seller Payout", // not translated
           BuyerAmout: "Buyer Amout", // not translated
           SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          YouEarn: "Du tjener",
+          YourBitcoinPaymentAddress: "Din Bitcoin-betalingsadresse",
           PurchasedBy: "Køber",
           searchByOrder: "Søg ud fra ordre-ID eller varenavn",
           sortByStatusAll: "Alle",
@@ -9238,7 +9260,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Uenighed lukket",
           OrderStatus6: "Uenighed færdiggjort",
           OrderStatus7: "Refunderet",
-          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
+          AcceptDisputeResolution: "Acceptér udbetaling for uenighed",
           InEscrow: "– i depot",
           OrderTotal: "Ordretotal",
           OrderTotalInBTC: "BTC-total",
@@ -9320,12 +9342,12 @@ module.exports = Backbone.Model.extend({
           badJSON: "Den JSON-data, der blev sendt tilbage fra serveren, var ikke formatteret korrekt"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Forbinder til listning ${listing}",
+          listingFail: "Den listning, du prøver at se, er p.t. offline",
+          handleConnect: "Forbinder til ${handle}",
+          handleFail: "Den side, du prøver at se, er p.t. offline",
+          userConnect: "Forbinder til ${guid}",
+          userFail: "Den side, du prøver at se, er p.t. offline",
         },        
         aboutSection: {
           about: "<p>OpenBazaar er et netværk af brugere, der køber og sælger varer og serviceydelser direkte med hinanden ved hjælp af Bitcoin. Dette netværk er decentraliseret og kontrolleres ikke af nogen organization.</p><p>Softwaren har åben kildekode (open source) og er MIT-licenseret. Du kan se programkoden på <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar er et fællesskabsprojekt, og vi byder deltagelse i vores <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a>-kanal e ller på vores <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a> velkommen.</p><p>Hvis du har brug for hjælp, bør du læse <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Gennemgangen</a> af OpenBazaar version 1.0.</p><p>Hvis du stadig har spørgsmål, kan du åbne en sag på vores <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
@@ -9340,7 +9362,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Skanner dit netværk",
           searchingText: "Skanner dit netværk efter",
-          noResults: "No listings found in your network", //notTranslated
+          noResults: "Ingen listninger blev fundet i dit netværk",
           noTaggedResults: "Ingen listninger tagget med følgende blev fundet i dit netværk" // Note: Better (non-postfix) translation would be "Ingen listninger tagget med XXXXX blev fundet i dit netværk"
         },
         filters: {
@@ -9504,7 +9526,7 @@ module.exports = Backbone.Model.extend({
         Status: "Status",
         Navigation: "Navegação",
         Cancel: "Cancelar",
-        ClosingOpenBazaar: "Fechar (a sua página ficará offline))",
+        ClosingOpenBazaar: "Fechar (a sua página ficará offline)",
         Minimize: "Minimizar",
         Maximize: "Maximizar",
         Close: "Fechar",
@@ -9522,7 +9544,7 @@ module.exports = Backbone.Model.extend({
         ChangeCurrency: "Mudar moeda",
         SKU: "Unidade de Manutenção de Estoque (SKU)",
         Refurbished: "Recondicionado",
-        Physical: "Física",
+        Physical: "Físico",
         Digital: "Digital",
         Service: "Serviço",
         Visit: "Ver",
@@ -9538,7 +9560,7 @@ module.exports = Backbone.Model.extend({
         NoDescriptionAdded: "Sem descrição",
         NoListings: "Sem anúncios",
         CoverPhoto: "Foto da Capa",
-        AboutEmpty: "Sobre está vazio...",
+        AboutEmpty: "(Vazio)",
         Followers: "Seguidores",
         Following: "Seguindo",
         FollowsYou: "Segue você",
@@ -9579,7 +9601,7 @@ module.exports = Backbone.Model.extend({
         Photos: "Fotos",
         Added: "Adicionado",
         Categorization: "Categorização",
-        Expiration: "Expiração",
+        Expiration: "Validade",
         Search: "Busca",
         Email: "E-mail",
         Facebook: "Facebook",
@@ -9587,14 +9609,15 @@ module.exports = Backbone.Model.extend({
         Twitter: "Twitter",
         PGPKey: "Chave PGP",
         Signature: "Assinatura PGP",
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        SignaturePlaceholder: "Uma Assinatura PGP é necessária, caso você insira uma Chave PGP",
         Snapchat: "Snapchat",
         BUYNOW: "Comprar agora",
         Description: "Descrição",
         Reviews: "Avaliações",
-        Shipping: "Entrega:",
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        Shipping: "Entrega",
+        ShippingReturns: "Shipping & Returns", //not translated
+        CountryOfOrigin: "País de Origem:",
+        CanBeShippedTo: "Pode ser Enviado para Você Em:",
         Addresses: "Endereços",
         Files: "Arquivos",
         NewAddress: "Novo Endereço",
@@ -9613,7 +9636,7 @@ module.exports = Backbone.Model.extend({
         Changes: "Modificações",
         SaveChanges: "Salvar",
         YourName: "Seu nome",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Endereço Bitcoin",
         BitcoinReturnAddress: "Insira o seu Endereço Bitcoin",
         BitcoinReturnAddressPlaceholder: "Insira o endereço Bitcoin...",
         BitcoinReturnAddressInfo: "Se um reembolso for emitido, os fundos terão que ser enviados para um endereço Bitcoin. Por favor forneça abaixo um endereço para a sua Carteira.",
@@ -9670,7 +9693,7 @@ module.exports = Backbone.Model.extend({
         NotificationPaymentSent: "O pagamento foi enviado para",
         NotificationOrderFor: "fez um pedido de",
         NotificationOrderConfirmed: "Seu pedido foi confirmado/enviado",
-        NotificationFollow: "agora está seguindo você",
+        NotificationFollow: "passou a seguir você",
         NotificationDispute: "abriu uma disputa",
         NotificationDisputeClosed: "essa disputa está fechada",
         NotificationRefund: "reembolsou o seu pedido",
@@ -9762,12 +9785,12 @@ module.exports = Backbone.Model.extend({
         ServerSettings: "Configurações do Servidor",
         ShutDownServer: "Desligar o Servidor",
         NoFancyStyles: "Desativar Efeitos Visuais",
-        NoFancyStylesWarning: "Isso irá desativar animações e transparências, melhorando o desempenho em computadores lentos.",
+        NoFancyStylesWarning: "Desativa animações e transparências, melhorando o desempenho em computadores lentos.",
         LoadingBitcoinPrices: "Carregando Cotações do Bitcoin...",
         ThisUserIsBlocked: "Esse usuário está escondido porque ele está em sua lista de bloqueados",
         ThisUserIsNSFW: "Esse usuário está escondido porque a página dele está listada como conteúdo adulto",
         ShowBlockedUser: "Mostrar a página desse usuário, exceto os anúncios com conteúdo adulto",
-        ShowNSFWContent: "Mostras a página desse usuário, incluindo os anúncios com conteúdo adulto",
+        ShowNSFWContent: "Mostrar a página desse usuário, incluindo os anúncios com conteúdo adulto",
         ServerChangeWarningHeadline: "Aviso: Salve suas Configurações",
         ServerChangeWarning: "Nós recomendamos que você faça uma cópia das suas configurações anteriores, que estão sendo mostradas abaixo. Após esse ponto, o seu usuário e senha antigos não estarão mais disponíveis.",
         moderatorSettings: {
@@ -9778,62 +9801,62 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Tornar-se um Moderador",
         EditModerator: "Configurações do Moderador",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Excelente",
+          fourStar: "Bom",
+          threeStar: "Normal",
+          twoStar: "Ruim",
+          oneStar: "Péssimo",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Excelente qualidade",
+          fourStar: "Boa qualidade",
+          threeStar: "Qualidade regular",
+          twoStar: "Má qualidade",
+          oneStar: "Péssima qualidade",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Exatamente como descrito",
+          fourStar: "Quase como descrito",
+          threeStar: "De certa forma como descrito",
+          twoStar: "Diferente da descrição",
+          oneStar: "Completamente diferente da descrição",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Extremamente rápido",
+          fourStar: "Rápido",
+          threeStar: "Normal",
+          twoStar: "Lento",
+          oneStar: "Muito lento",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Excelente",
+          fourStar: "Bom",
+          threeStar: "Normal",
+          twoStar: "Ruim",
+          oneStar: "Péssimo",
         },
         transactions: {
           OrderDetails: "Detalhes do Pedido",
           ViewOnBlockchain: "Ver Detalhes",
           SoldBy: "Vendedor",
-          BuyerPayout: "Buyer Payout", // not translated
-          SellerPayout: "Seller Payout", // not translated
-          BuyerAmout: "Buyer Amout", // not translated
-          SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          BuyerPayout: "Pagamento do Comprador",
+          SellerPayout: "Pagamento do Vendedor",
+          BuyerAmout: "Quantia do Comprador",
+          SellerAmout: "Quantia do Vendedor",
+          YouEarn: "Seu Ganho",
+          YourBitcoinPaymentAddress: "Seu Endereço Bitcoin de Pagamento",
           PurchasedBy: "Comprador",
-          searchByOrder: "Buscar por id do pedido ou nome do item",
+          searchByOrder: "Buscar por ID do Pedido ou Nome do Item",
           sortByStatusAll: "Todos",
-          sortByStatus0: "Comprando (Pagamento pendente)",
-          sortByStatus1: "Pronto para processar (Pagamento efetuado)",
-          sortByStatus2: "Confirmado/Enviado",
-          sortByStatus3: "Finalizado (Pagamento liberado)",
+          sortByStatus0: "Em andamento (Pagamento pendente)",
+          sortByStatus1: "Pronta para processar (Pagamento efetuado)",
+          sortByStatus2: "Confirmada/Enviada",
+          sortByStatus3: "Finalizada (Pagamento liberado)",
           sortByStatus4: "Em disputa",
           OrderID: "ID do Pedido",
           OrderDate: "Data do Pedido",
           OrderStatus: "Status do Pedido",
-          OrderStatus0: "Comprando (Pagamento pendente)",
+          OrderStatus0: "Em andamento (Pagamento pendente)",
           OrderStatus1: "Pronto para processar (Pagamento efetuado)",
           OrderStatus2: "Confirmado/Enviado",
           OrderStatus3: "Finalizado (Pagamento liberado)",
@@ -9843,7 +9866,6 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Disputa Encerrada",
           OrderStatus6: "Disputa Finalizada",
           OrderStatus7: "Reembolsado",
-          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
           AcceptDisputeResolution: "Aceitar Pagamento da Disputa",
           InEscrow: "- Em Custódia",
           OrderTotal: "Total do Pedido",
@@ -9863,13 +9885,13 @@ module.exports = Backbone.Model.extend({
           Comments: "Comentários",
           CommentsPlaceHolder: "Comentários nesse pedido",
           Shipper: "Item Enviado Por",
-          ShipperPlaceholder: "Nome da companhia enviando o item",
+          ShipperPlaceholder: "Nome da empresa de entrega",
           TrackingNumber: "Número de Rastreamento",
           TrackingNumberPlaceholder: "Número de rastreamento do item",
           EstimatedDelivery: "Entrega estimada em:",
           EstimatedDeliveryPlaceholder: "Data estimada para a entrega do item",
           URL: "URL do Arquivo",
-          URLPlaceholder: "Link para download, horários ou maiores informações",
+          URLPlaceholder: "Link para download de arquivo(s), horários ou maiores informações",
           Password: "Senha",
           PasswordPlaceholder: "Senha necessária para o link (opcional)",
           DirectTransaction: "Transação direta",
@@ -9929,12 +9951,12 @@ module.exports = Backbone.Model.extend({
           badJSON: "Os dados JSON que retornaram do servidor tinham formato incorreto"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Conectando aos anúncios ${listing}",
+          listingFail: "Os anúncios que você está tentando ver estão offline neste momento",
+          handleConnect: "Conectando-se a ${handle}",
+          handleFail: "A página que você está tentando ver está offline neste momento",
+          userConnect: "Conectando-se a ${guid}",
+          userFail: "A página que você está tentando ver está offline neste momento",
         },        
         aboutSection: {
           about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
@@ -9949,7 +9971,7 @@ module.exports = Backbone.Model.extend({
         discover: {
           searchDefaultText: "Procurando na sua rede",
           searchingText: "Procurando na sua rede por",
-          noResults: "No listings found in your network", //notTranslated
+          noResults: "Nenhum anúncio foi encontrado na sua rede",
           noTaggedResults: "Nenhum anúncio foi encontrado na sua rede com a tag"
         },
         filters: {
@@ -10063,8 +10085,8 @@ module.exports = Backbone.Model.extend({
           summaryMsg3: "Você pode verificar o status do seu pedido na sua",
           purchasesPage: "página de compras",
           returnAddress: "Endereço de Devolução",
-          moderatorPaymentDisclaimer: "Pago do total se a transação terminar em uma disputa.",
-          directPaymentDisclaimer: "Seja cuidadoso ao usar o pagamento direto, pois as transações são irreversíveis",
+          moderatorPaymentDisclaimer: "Descontado do valor total, caso a transação termine em uma disputa.",
+          directPaymentDisclaimer: "Seja cuidadoso ao fazer pagamentos diretos, pois as transações são irreversíveis",
           paymentSent: "Pagamento Enviado!",
           total: "Total:"
         },
@@ -10194,9 +10216,10 @@ module.exports = Backbone.Model.extend({
          BUYNOW: "Купити негайно",
          Description: "Опис",
          Reviews: "Відгуки",
-         Shipping: "Доставка:",
-          CountryOfOrigin: "Country of Origin:", //not translated
-          CanBeShippedTo: "Can Ship to You In:", //not translated
+         Shipping: "Доставка",
+         ShippingReturns: "Shipping & Returns", //not translated
+         CountryOfOrigin: "Country of Origin:", //not translated
+         CanBeShippedTo: "Can Ship to You In:", //not translated
          Addresses: "Адреса",
          NewAddress: "Нова адреса",
          CurrentAddress: "Дійсна адреса",
