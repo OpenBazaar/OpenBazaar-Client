@@ -9767,7 +9767,7 @@ module.exports = Backbone.Model.extend({
         ThisUserIsBlocked: "Esse usuário está escondido porque ele está em sua lista de bloqueados",
         ThisUserIsNSFW: "Esse usuário está escondido porque a página dele está listada como conteúdo adulto",
         ShowBlockedUser: "Mostrar a página desse usuário, exceto os anúncios com conteúdo adulto",
-        ShowNSFWContent: "Mostras a página desse usuário, incluindo os anúncios com conteúdo adulto",
+        ShowNSFWContent: "Mostrar a página desse usuário, incluindo os anúncios com conteúdo adulto",
         ServerChangeWarningHeadline: "Aviso: Salve suas Configurações",
         ServerChangeWarning: "Nós recomendamos que você faça uma cópia das suas configurações anteriores, que estão sendo mostradas abaixo. Após esse ponto, o seu usuário e senha antigos não estarão mais disponíveis.",
         moderatorSettings: {
@@ -9933,7 +9933,7 @@ module.exports = Backbone.Model.extend({
           handleConnect: "Conectando-se a ${handle}",
           handleFail: "A página que você está tentando ver está offline neste momento",
           userConnect: "Conectando-se a ${guid}",
-          userFail: "A págian que você está tentanto ver está offline neste momento",
+          userFail: "A página que você está tentando ver está offline neste momento",
         },        
         aboutSection: {
           about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
