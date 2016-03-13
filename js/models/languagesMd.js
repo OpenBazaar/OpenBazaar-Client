@@ -1357,7 +1357,7 @@ module.exports = Backbone.Model.extend({
         YourNombre: "Su nombre",
         BitcoinReturnAddress: "Escribe tu direcci&oacute;n bitcoin",
         BitcoinReturnAddressPlaceholder: "direcci&oacute;n bitcoin para reembolsos",
-        BitcoinReturnAddressInfo: "Si se hace un reembolso, los fondos deben ser enviados a esta direcci&oacute;n Bitcoin. Por favor provea una direcci&oacute;n a su cartera abajo.", 
+        BitcoinReturnAddressInfo: "Si se hace un reembolso, los fondos deben ser enviados a esta direcci&oacute;n Bitcoin. Por favor provea una direcci&oacute;n a su cartera abajo.",
         LocalCurrency: "Moneda local",
         TimeZone: "Zona horaria",
         ShipToName: "Env&iacute;r a nombre de",
@@ -1436,15 +1436,15 @@ module.exports = Backbone.Model.extend({
         Loading: "Cargando...",
         Purchases:"Compras",
         Sales: "Ventas",
-        Cases: "Casos", 
+        Cases: "Casos",
         Enter: "Enter",
         Discover: "Descubrir",
         Block: "Bloquear",
         Unblock: "Desbloquear",
         Blocked: "Bloqueado",
-        NoBlockedList: "No est&aacute; bloqueando a nadie.",  
+        NoBlockedList: "No est&aacute; bloqueando a nadie.",
         Advanced: "Avanzado",
-        General: "General", 
+        General: "General",
         AllItems: "Todos los art&iacute;culos",
         FreeShipping: "Env&iacute;o gratuito",
         DomesticShippingPrice: "Precio de env&iacute;o nacional",
@@ -1473,7 +1473,7 @@ module.exports = Backbone.Model.extend({
         maxLength200: "max length 200 char", //not translated
         StoreModeratorsOptional: "Moderadores de la tienda (Opcional)",
         Searchformoderators: "Buscar moderadores",
-        Contributors: "Contribuyentes", 
+        Contributors: "Contribuyentes",
         Support: "Suporte",
         Licensing: "Licencias",
         On: "Encendido",
@@ -4804,6 +4804,10 @@ module.exports = Backbone.Model.extend({
         Status: "Stav",
         Navigation: "Navigácia",
         Cancel: "Zrušiť",
+        ClosingOpenBazaar: "Zavrieť (Vaša stránka bude nedostupná)",
+        Minimize: "Minimalizovať",
+        Maximize: "Maximalizovať",
+        Close: "Zavrieť",
         Yes: "Áno",
         No: "Nie",
         of: "z",
@@ -4889,8 +4893,8 @@ module.exports = Backbone.Model.extend({
         Reviews: "Hodnotenia",
         Shipping: "Doprava",
         ShippingReturns: "Shipping & Returns", //not translated
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        CountryOfOrigin: "Krajina Pôvodu:",
+        CanBeShippedTo: "Môže byť Doručené do:",
         Addresses: "Adresy",
         Files: "Súbory",
         NewAddress: "Nová Adresa",
@@ -4900,6 +4904,7 @@ module.exports = Backbone.Model.extend({
         Ampersand: "&",
         ShipsFrom: "Odosielané z",
         ShipsTo: "Odosielané do",
+        AddShipToRegion: "Pridať Oblasť Donášky",
         Optional: "Voliteľné",
         Customize: "Upraviť",
         Save: "Uložiť",
@@ -4907,7 +4912,7 @@ module.exports = Backbone.Model.extend({
         Change: "Zmeniť",
         SaveChanges: "Uložiť zmeny",
         YourName: "Vaše meno",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
+        BitcoinAddress: "Bitcoinové Adresy",
         BitcoinReturnAddress: "Zadajte Vašu Bitcoinovú Adresu",
         BitcoinReturnAddressPlaceholder: "bitcoinová adresa na ktorú budú vrátené mince",
         BitcoinReturnAddressInfo: "Pri žiadosti o vrátenie peňazí sa tieto prostriedky pošlú na Bitcoinovú adresu. Prosím zadajte nižšie adresu od Vašej peňaženky.",
@@ -4998,6 +5003,7 @@ module.exports = Backbone.Model.extend({
         NewAvatar: "Zvoľte nového avatara",
         NewCoverImage: "Zvoľte nový titulný obrázok",
         Loading: "Načítavam...",
+        Transactions: "Transakcie",
         Purchases:"Nákupy",
         Sales: "Predaje",
         Cases: "Prípady",
@@ -5053,10 +5059,10 @@ module.exports = Backbone.Model.extend({
         Firewall: "Firewall",
         ServerSettings: "Nastavenia Servera",
         ReadOnly: "(Toto pole nie je editovateľné)",
-        HandleResolver: "Handle Resolver",
+        HandleResolver: "Prekladač Prezývok",
         ShutDownServer: "Vypnúť Server",
-        NoFancyStyles: "Disable Visual Effects", // not translated
-        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
+        NoFancyStyles: "Zrušiť Vizuálne Efekty",
+        NoFancyStylesWarning: "Táto zmena vypne animácie a priesvitnosť. Môže to zlepšiť výkon na pomalých systémoch.",
         LoadingBitcoinPrices: "Načítavam cenu Bitcoinu...",
         ThisUserIsBlocked: "Tento používateľ je skrytý, pretože sa nachádza na Vašom zozname zablokovaných používateľov",
         ThisUserIsNSFW: "Tento používateľ je skrytý, pretože jeho stránka je v zozname NSFW (stránky s nevhodným obsahom)",
@@ -5072,50 +5078,50 @@ module.exports = Backbone.Model.extend({
         BecomeModerator: "Staňte sa Moderátorom",
         EditModerator: "Moderátorské Nastavenia",
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Vynikajúce",
+          fourStar: "Dobré",
+          threeStar: "Priemerné",
+          twoStar: "Zlé",
+          oneStar: "Hrozné",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Vynikajúca kvalita",
+          fourStar: "Dobrá kvalita",
+          threeStar: "Priemerna kvalita",
+          twoStar: "Zlá kvalita",
+          oneStar: "Hrozná kvalita",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Zodpovedá popisu",
+          fourStar: "Zväčša zodpovedá popisu",
+          threeStar: "Trochu zodpovedá popisu",
+          twoStar: "Zväčša nezodpovedá popisu",
+          oneStar: "Nezodpovedá popisu",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Extrémne rýchlo",
+          fourStar: "Relatívne rýchlo",
+          threeStar: "Priemer",
+          twoStar: "Pomaly",
+          oneStar: "Veľmi pomaly",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Vynikajúci",
+          fourStar: "Dobrý",
+          threeStar: "Priemerný",
+          twoStar: "Zlý",
+          oneStar: "Hrozný",
         },
         transactions: {
           OrderDetails: "Detaily Objednávky",
           ViewOnBlockchain: "Zobraziť Detaily",
           SoldBy: "Predajca",
-          BuyerPayout: "Buyer Payout", // not translated
-          SellerPayout: "Seller Payout", // not translated
-          BuyerAmout: "Buyer Amout", // not translated
-          SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          BuyerPayout: "Výplata Kupujúceho",
+          SellerPayout: "Výplata Predajcu",
+          BuyerAmout: "Čiastka Kupujúceho",
+          SellerAmout: "Čiastka Predajcu",
+          YouEarn: "Zarobíte",
+          YourBitcoinPaymentAddress: "Vaša Bitcoinová Platobná Adresa",
           PurchasedBy: "Kupujúci",
           searchByOrder: "Vyhľadávať podla čísla objednávky alebo názvu položky",
           sortByStatusAll: "Všetky",
@@ -5137,7 +5143,7 @@ module.exports = Backbone.Model.extend({
           OrderStatusclosed: "Spor Uzavretý",
           OrderStatus6: "Spor Ukončený",
           OrderStatus7: "Peniaze Vrátené",
-          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
+          AcceptDisputeResolution: "Akceptovať Výplatu zo Sporu",
           InEscrow: "- V Escrow",
           OrderTotal: "Celková Suma Objednávky",
           OrderTotalInBTC: "BTC Celkovo",
@@ -5219,17 +5225,17 @@ module.exports = Backbone.Model.extend({
           badJSON: "JSON dáta vrátené zo serveru sú chybné"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Pripájam sa k položke ${listing}",
+          listingFail: "Položka, ktorú chcete zobraziť je práve nedostupná",
+          handleConnect: "Pripájam sa k ${handle}",
+          handleFail: "Stránka, ktorú chcete zobraziť je práve nedostupná",
+          userConnect: "Pripájam sa k ${guid}",
+          userFail: "Stránka, ktorú chcete zobraziť je práve nedostupná",
         },
         aboutSection: {
-            about: "<p>OpenBazaar je sieť používateľov, ktorí za Bitcoiny priamo medzi sebou kupujú a predávaju tovary a služby. Táto sieť je decentralizovaná a nie je kontrolovaná žiadnou organizáciou.</p><p>Tento software je open source a licencovaný pod MIT licenciou. Jeho kód si môžete pozrieť na <a href=\"https://github.com/OpenBazaar/\">Githube</a>.</p><p>OpenBazaar je komunitný projekt a preto vítame akýkoľvek spôsob spolupráce na našom <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">Slack</a> kanáli, alebo <a href=\"http://www.reddit.com/r/openbazaar\">subreddite</a>.</p><p>Ak potrebujete pomoc, prečítajte si <a href=\"https://blog.openbazaar.org/tag/tutorial/\">Používateľskú Príručku</a>.</p><p>Ak máte aj napriek tomu nejaké otázky, otvorte tiket u našej <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\">podpori</a>.</p>",
+            about: "<p>OpenBazaar je sieť používateľov, ktorí za Bitcoiny priamo medzi sebou kupujú a predávaju tovary a služby. Táto sieť je decentralizovaná a nie je kontrolovaná žiadnou organizáciou.</p><p>Tento software je open source a licencovaný pod MIT licenciou. Jeho kód si môžete pozrieť na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githube</a>.</p><p>OpenBazaar je komunitný projekt a preto vítame akýkoľvek spôsob spolupráce na našom <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">Slack</a> kanáli, alebo <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddite</a>.</p><p>Ak potrebujete pomoc, prečítajte si <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Používateľskú Príručku</a>.</p><p>Ak máte aj napriek tomu nejaké otázky, otvorte tiket u našej <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">podpori</a>.</p>",
             contributors: "<p>OpenBazaar sa stal skutočnosťou vďaka medzinárodnej komunite vývojárov a dobrovoľníkov, ktorí prispeli svojim časom, aby pomohli oslobodiť trh. Toto je čiastkový zoznam prispievateľov, ktorí pomohli, či už kódom, alebo iným spôsobom.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-            support: "<p>Na našej ceste za voľným trhom môžete podporiť OpenBazaar viacerými spôsobmi.</p><p>Kúpou a predajom tovaru a služieb pomáhate rozširovaniu našej komunity a robíte platformu atraktívnejšiu pre nových používateľov. Môžete sa spýtať firiem prijímajucích Bitcoiny, či by chceli predávať svoj tovar a služby na našej platforme. Pomôže nám to dostať sa do povedomia a ukáže, že existuje dopyt po obchodovaní na peer to peer platforme.</p><p>Ak ste vývojár, prosím choďte na <a href=\"https://github.com/OpenBazaar/\">náš Github</a> a zistite, či nám neviete s niečim pomôcť. Okrem pomoci s jadrom systému dúfame, že vďaka open source povahe projektu vytvoríte nové služby nad existujúcou sieťou.</p><p>Taktiež nám môžete <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\">prispieť Bitcoinami</a>, ktoré budú použité na úhradu nákladov spojených s návštevou konferencií, odmeňovaním dobrovoľníkov za vývoj a promovaním OpenBazaaru.</p><p>Ak máte nápady ako vylepšiť OpenBazaar, alebo máte otázky na našich hlavných vývojarov pridajte sa prosím k <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\">nášmu Slack-u</a>.</p>",
+            support: "<p>Na našej ceste za voľným trhom môžete podporiť OpenBazaar viacerými spôsobmi.</p><p>Kúpou a predajom tovaru a služieb pomáhate rozširovaniu našej komunity a robíte platformu atraktívnejšiu pre nových používateľov. Môžete sa spýtať firiem prijímajucích Bitcoiny, či by chceli predávať svoj tovar a služby na našej platforme. Pomôže nám to dostať sa do povedomia a ukáže, že existuje dopyt po obchodovaní na peer to peer platforme.</p><p>Ak ste vývojár, prosím choďte na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">náš Github</a> a zistite, či nám neviete s niečim pomôcť. Okrem pomoci s jadrom systému dúfame, že vďaka open source povahe projektu vytvoríte nové služby nad existujúcou sieťou.</p><p>Taktiež nám môžete <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">prispieť Bitcoinami</a>, ktoré budú použité na úhradu nákladov spojených s návštevou konferencií, odmeňovaním dobrovoľníkov za vývoj a promovaním OpenBazaaru.</p><p>Ak máte nápady ako vylepšiť OpenBazaar, alebo máte otázky na našich hlavných vývojarov pridajte sa prosím k <a href=\"https://openbazaar-slackin-drwasho.herokuapp.com/\" target=\"_blank\">nášmu Slack-u</a>.</p>",
             licensing: "<p>OpenBazaar je softvér s otvoreným kódom licencovaný pod MIT licenciou. Táto licencia umožňuje ľuďom voľne používať kód v iných projektoch, alebo v proprietarnom softvéri. Plné znenie licencie nájdete nižšie.</p><h4MIT Licencia (MIT)</h4><h5>Copyright &#169 2016 OpenBazaar Developers</h5><p>Týmto sa udeľuje povolenie, bez poplatku, ľubovolnej osobe získať kópiu tohto softvéru a pridružených dokumentov (Softvér), narábať so Softvérom bez obmedzení, vrátane práva používať, kopírovať, upravovať, zlučovať, uverejňovať, distribuovať, vytvárať podlicencie, predávať kópie Softvéru, a dávať takéto povolenie osobám, ktorým je Softvér poskytnutý,    za nasledovných podmienok:</p><p>Predošlé upozornenie autorského práva a povolenia musí byť zahrnuté vo všetkých kopiách alebo ucelených častiach Softvéru.</p><p>SOFTVÉR JE POSKYTOVANÝ \"TAK AKO JE\", BEZ AKEJKOĽVEK ZÁRUKY ČI UŽ VÝSLOVNEJ, ALEBO VYPLÝVAJÚCEJ, VRÁTANE, ALE NIE LEN, ZO ZÁRUKOU PREDAJNOSTI A VHODNOSTI PRE URČITÝ ÚČEL A NEZASAHOVANIA. V ŽIADNOM PRÍPADE VÁM NEBUDE AUTOR ALEBO ŽIADNY Z DRŽITEĽOV AUTORSKÝCH PRÁV ZODPOVEDAŤ ZA NÁROKY, ŠKODY, ALEBO INÉ RUČENIA, ČI UŽ VYPLÝVAJÚCICH Z ČINNOSTI ZMLUVY, PREČINU ALEBO INAK, ALEBO V SPOJENÍ SO SOFTVÉROM, POUŽÍVANÍM ALEBO INÝM NARÁBANÍM SO SOFTVÉROM.</p><h4>Knižnice</h4><p>OpenBazaar používa nasledovné knižnice:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
@@ -5240,7 +5246,7 @@ module.exports = Backbone.Model.extend({
           searchDefaultText: "Prehľadávam Vašu sieť",
           searchingText: "Prehľadávam Vašu sieť pre výraz",
           noResults: "Neboli nájdené žiadne ponuky s tagom",
-          noTaggedResults: "No listings found in your network tagged with" //notTranslated
+          noTaggedResults: "Vo Vašej sieti neboli nájdené žiadne ponuky s tagom"
         },
         filters: {
           pagesAllTypes: "Všetky typy",
@@ -5306,7 +5312,7 @@ module.exports = Backbone.Model.extend({
         guidStillCreating: {
           HangTight: "Vydržte chvíľu...",
           YourPersonal: "Práve sa generujú Vaše osobné kľúče a OpenBazaar ID a malo by to trvať len okolo 30 sekúnd.\n\nBudete automaticky pripojený do siete len čo sa tento proces dokončí. Prosím vydržte chvíľu.",
-          LookingFor: "Chcete si zatiaľ prečítať <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>?"
+          LookingFor: "Chcete si zatiaľ prečítať <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\" target=\"_blank\">OpenBazaar blog</a>?"
         },
         buyFlow: {
           PayForOrder: "Zaplatiť za Objednávku",
@@ -8772,7 +8778,7 @@ module.exports = Backbone.Model.extend({
           handleFail: "The page you're trying to view is currently offline",  //not translated
           userConnect: "Connecting to ${guid}",  //not translated
           userFail: "The page you're trying to view is currently offline",  //not translated
-        },        
+        },
         aboutSection: {
           about: "<p>OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p><p>Oprogramowanie jest otwarte, udostępniane na licencji MIT. Kod dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Githubie</a>.</p><p>OpenBazaar jest projektem społeczośniowym i zachęcamy do wejścia na nasz kanał <a href=\"https://openbazaar-slackin -drwasho.herokuapp.com/\">Slack</a> lub odwiedzenia naszego <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p><p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">poradnik</a> do OpenBazaar w wersji 1.0.</p><p>Jeśli nadaj masz jakieś pytania, kliknij <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">tutaj</a>.</p>",
           contributors: "<p>OpenBazaar jest rozwijany przez międzynarodową społeczność, złożoną zarówno z deweloperów, jak i wolontariuszy, którzy poświęcają swój czas, by uczynić handel wolnym. Oto niepełna lista osób, które wsparły projekt poprzez pisanie kodu lub inny rodzaj uczestnictwa.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li><li>Michał Pado</li><li>programmerpeter</li></ul>",
@@ -9956,7 +9962,7 @@ module.exports = Backbone.Model.extend({
           handleConnect: "Conectando-se a ${handle}",
           handleFail: "A página que você está tentando ver está offline neste momento",
           userConnect: "Conectando-se a ${guid}",
-          userFail: "A página que você está tentando ver está offline neste momento",
+          userFail: "A página que você está tentando ver está offline neste momento"
         },        
         aboutSection: {
           about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
@@ -10498,7 +10504,7 @@ module.exports = Backbone.Model.extend({
           handleFail: "The page you're trying to view is currently offline",  //not translated
           userConnect: "Connecting to ${guid}",  //not translated
           userFail: "The page you're trying to view is currently offline",  //not translated
-        },         
+        },
         aboutSection: {
            about: "<p>OpenBazaar це мережа з користувачів котрі куплють та продають товари та послуги безпосередньо один одному, використовуючи Біткоін. Ця мережа не має власника, не управляєтся будь якою організаціею, являється розподіленою децентралізованою системою що існує в мережі.</p><p>OpenBazaar программа з відкритим кодом та MIT ліцензіею. Ви можете переглянути код за посиланням <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>OpenBazaar це колективний поект, і ми запрошуемо всіх до участі у його розробці до каналу <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a>, або <a href=\"http://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Якщо вам потрібна допомога, прочитайте OpenBazaar version 1.0 <a href=\"\" target=\"_blank\">інструкцію</a>.</p><p>Якщо у вас залишились питання, звертайтесь до служби підтримки (Англійською) <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>.</p>",
            contributors: "<p>OpenBazaar став можливим завдяки міжнародному співтовариству розробників та волонтерів, що витратили свій час на розробку проекту, та допомогли зробити торгівлю вільною. Це частковий список тих хто допоміг проекту написанням коду та іншою допомогою</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
