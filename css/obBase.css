@@ -4544,6 +4544,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #000;
 }
 
+#ov1 .txt-muted {
+  color: #818a91;
+}
+
 #ov1 input.placeholder-dark::-webkit-input-placeholder  {
   color: #000;
 }

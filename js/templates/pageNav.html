@@ -11,16 +11,19 @@
 <div class="popMenu popMenu-navBar js-navProfileMenu">
   <a href="#userPage">
     <span class="ion-document-text fontSize12 marginRight2 textOpacity1"></span>
-  <%= polyglot.t('nav.myPage') %>
+  	<%= polyglot.t('nav.myPage') %>
+  	<span class="pull-right txt-muted"><%= ob.ctrlCmdKey + keyShortcuts.myPage.toUpperCase() %></span>
   </a>
   <a href="#userPage/<%= ob.guid %>/customize">
     <span class="ion-paintbucket fontSize10  textOpacity1"></span>
     <%= polyglot.t('nav.customizePage') %>
+	<span class="pull-right txt-muted"><%= ob.ctrlCmdKey + keyShortcuts.customizePage.toUpperCase() %></span>
   </a>
   <% if(ob.vendor) { %>
-    <a href="#userPage/<%- ob.guid %>/listingNew" >
+    <a href="#userPage/<%= ob.guid %>/listingNew" >
       <span class="ion-ios-pricetag fontSize10 marginRight2 textOpacity1"></span>
       <%= polyglot.t('nav.createListing') %>
+	  <span class="pull-right txt-muted"><%= ob.ctrlCmdKey + keyShortcuts.create.toUpperCase() %></span>
     </a>
   <% }else{ %>
     <a href="#userPage/<%= ob.guid %>/createStore">
@@ -40,23 +43,27 @@
   <a href="#transactions/purchases">
     <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('nav.purchases') %>
+	<span class="pull-right txt-muted"><%= ob.ctrlCmdKey + keyShortcuts.purchases.toUpperCase() %></span>
   </a>
   <% if(ob.vendor) { %>
     <a href="#transactions/sales">
       <span class="ion-log-in fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('nav.sales') %>
+	  <span class="pull-right txt-muted"><%= ob.ctrlCmdKey + keyShortcuts.sales.toUpperCase() %></span>
     </a>
   <% } %>
   <% if(ob.moderator) { %>
     <a href="#transactions/cases">
       <span class="ion-briefcase fontSize11 marginRight2 textOpacity1"></span>
       <%= polyglot.t('nav.cases') %>
+	  <span class="pull-right txt-muted"><%= ob.ctrlCmdKey + keyShortcuts.cases.toUpperCase() %></span>
     </a>
   <% } %>
   <hr/>
   <a href="#settings">
     <span class="ion-toggle-filled fontSize11 marginRight2 textOpacity1"></span>
     <%= polyglot.t('nav.settings') %>
+	<span class="pull-right txt-muted"><%= ob.ctrlCmdKey + keyShortcuts.settings.toUpperCase() %></span>
   </a>
   <hr/>
   <a class="js-showAboutModal">
@@ -105,7 +112,7 @@
     </div>
   </div>
   <div class="ctrlGroup">
-    <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15 tooltip" href="#home" data-tooltip="<%= polyglot.t('Discover') %>"></a>
+    <a class="btn btn-home ion-eye custCol-primary custCol-text fontSize15 tooltip" href="#home" data-tooltip="<%= polyglot.t('Discover') %> (<%= ob.ctrlCmdKey + keyShortcuts.discover.toUpperCase() %>)"></a>
   </div>
   <div class="ctrlGroup">
     <div class="btn btn-notifications ion-android-notifications custCol-primary  custCol-text fontSize14 js-navNotifications tooltip" data-tooltip="<%= polyglot.t('Notifications') %>" data-popmenu=".popMenu-notifications">

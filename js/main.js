@@ -81,7 +81,7 @@ user.on('change:language', function(md, lang) {
 //keep user and profile urls synced with the server configuration
 (setServerUrl = function() {
   var baseServerUrl = serverConfigMd.getServerBaseUrl();
-  
+
   user.urlRoot = baseServerUrl + "/settings";
   user.set('serverUrl', baseServerUrl + '/');
   userProfile.urlRoot = baseServerUrl + "/profile";
@@ -143,6 +143,66 @@ $('body').on('keypress', 'input', function(event) {
   }
 });
 
+//keyboard shortucts
+window.keyShortcuts = {
+  discover:        'd',
+  myPage:          'h',
+  customizePage:   'e',
+  create:          'n',
+  purchases:       '1',
+  sales:           '2',
+  cases:           '3',
+  settings:        'g',
+  addressBar:      'l'
+}
+
+$(window).bind('keydown', function(e) {
+  if (e.ctrlKey || e.metaKey) {
+		var route = null,
+        char = String.fromCharCode(e.which).toLowerCase();
+
+		switch (char) {
+			case keyShortcuts.discover:
+				route = 'home';
+				break;
+			case keyShortcuts.myPage:
+				route = 'userPage';
+				break;
+			case keyShortcuts.customizePage:
+				route = 'userPage/' + user.get('guid') + '/customize';
+				break;
+			case keyShortcuts.create:
+				route = 'userPage/' + user.get('guid') + '/listingNew';
+				break;
+			case keyShortcuts.purchases:
+				route = 'transactions/purchases';
+				break;
+			case keyShortcuts.sales:
+				route = 'transactions/sales';
+				break;
+			case keyShortcuts.cases:
+				route = 'transactions/cases';
+				break;
+			case keyShortcuts.settings:
+				route = 'settings';
+				break;
+		}
+
+    if (route !== null) {
+      e.preventDefault();
+			Backbone.history.navigate(route, {
+        trigger: true
+      });
+		}
+
+    // Select all text in address bar
+    if (char === keyShortcuts.addressBar) {
+      // Select all text in address bar
+      $('.js-navAddressBar').select();
+    }
+  }
+});
+
 //manage app being or not in fullscreen mode
 ipcRenderer.on('fullscreen-enter', (e) => {
   $('body').addClass('fullscreen');
@@ -201,7 +261,7 @@ var loadProfile = function(landingRoute, onboarded) {
                 userProfile: userProfile,
                 showDiscIntro: onboarded
               }).render();
-              
+
               app.chatVw = new ChatVw({
                 model: user,
                 socketView: newSocketView
@@ -255,7 +315,7 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
 
 launchOnboarding = function(guidCreating) {
   serverConnectModal && serverConnectModal.remove();
-  serverConnectModal = null;  
+  serverConnectModal = null;
 
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
@@ -283,7 +343,7 @@ launchServerConnect = function() {
 
       if (authenticated) {
         serverConnectModal && serverConnectModal.remove();
-        serverConnectModal = null;        
+        serverConnectModal = null;
       }
     });
 
@@ -366,7 +426,7 @@ heartbeat.on('message', function(e) {
                 if (__.isEmpty(profile)) {
                   launchOnboarding(guidCreating = $.Deferred().resolve().promise());
                 } else {
-                  loadProfile();              
+                  loadProfile();
                 }
               });
             } else {
