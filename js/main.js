@@ -70,7 +70,12 @@ window.lang = user.get("language");
 window.polyglot = new Polyglot({locale: window.lang});
 
 (extendPolyglot = function(lang) {
-  window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
+  // Make sure the language exists in the languages model
+  if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
+    var language = require('./languages/' + window.lang + '.js');
+
+    window.polyglot.extend(language);
+  }
 })(window.lang);
 
 user.on('change:language', function(md, lang) {
@@ -81,7 +86,7 @@ user.on('change:language', function(md, lang) {
 //keep user and profile urls synced with the server configuration
 (setServerUrl = function() {
   var baseServerUrl = serverConfigMd.getServerBaseUrl();
-  
+
   user.urlRoot = baseServerUrl + "/settings";
   user.set('serverUrl', baseServerUrl + '/');
   userProfile.urlRoot = baseServerUrl + "/profile";
@@ -208,7 +213,7 @@ var loadProfile = function(landingRoute, onboarded) {
                 userProfile: userProfile,
                 showDiscIntro: onboarded
               }).render();
-              
+
               app.chatVw = new ChatVw({
                 model: user,
                 socketView: newSocketView
@@ -262,7 +267,7 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
 
 launchOnboarding = function(guidCreating) {
   serverConnectModal && serverConnectModal.remove();
-  serverConnectModal = null;  
+  serverConnectModal = null;
 
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
@@ -290,7 +295,7 @@ launchServerConnect = function() {
 
       if (authenticated) {
         serverConnectModal && serverConnectModal.remove();
-        serverConnectModal = null;        
+        serverConnectModal = null;
       }
     });
 
@@ -373,7 +378,7 @@ heartbeat.on('message', function(e) {
                 if (__.isEmpty(profile)) {
                   launchOnboarding(guidCreating = $.Deferred().resolve().promise());
                 } else {
-                  loadProfile();              
+                  loadProfile();
                 }
               });
             } else {
