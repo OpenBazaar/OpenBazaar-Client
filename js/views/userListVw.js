@@ -17,12 +17,15 @@ module.exports = Backbone.View.extend({
      options.serverUrl: server url to pass into each user view
      options.ownFollowing: array of guids this user is following
      options.hideFollow: boolean, hide follow button
+     options.reverse; should the list of users be reversed?
      */
     //the model must be passed in by the constructor
     this.usersShort = new usersShortCollection(this.model);
+    this.options.reverse && this.usersShort.models.reverse();
     this.subViews = [];
     this.showPerScroll = 10;
     this.nextUserToShow = 0;
+    this.totalUsers = this.usersShort.length;
     this.$container = $('#obContainer');
 
     //listen to scrolling on container
@@ -62,7 +65,12 @@ module.exports = Backbone.View.extend({
       self.renderUser(user);
     }, this);
 
-    this.nextUserToShow = this.nextUserToShow + this.showPerScroll;
+    //if at least one user was added, trigger call so parent can refresh searches
+    if(renderSet.length > 0){
+      this.trigger('usersAdded');
+    }
+
+    this.nextUserToShow = this.nextUserToShow >= this.totalUsers ? this.nextUserToShow : this.nextUserToShow + this.showPerScroll;
   },
 
   renderUser: function(item){
@@ -70,7 +78,7 @@ module.exports = Backbone.View.extend({
       model: item
     });
     this.subViews.push(storeShort);
-    this.listWrapper.prepend(storeShort.el);
+    this.listWrapper.append(storeShort.el);
   },
 
   onScroll: function(){

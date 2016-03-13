@@ -67,6 +67,7 @@ module.exports = baseVw.extend({
   //
   pushMessage: function(msg) {
     var md = new StatusMessageMd(),
+        updateMessage,
         errs;
 
     if (typeof msg === 'string') msg = { msg: msg };
@@ -80,10 +81,27 @@ module.exports = baseVw.extend({
     md.set(msg);
     this.collection.add(md);
 
+    updateMessage = (msg) => {
+      if (!msg) {
+        throw new Error('Please provide a msg.');
+      }
+
+      if (typeof msg === 'string') {
+        md.set('msg', msg);
+      } else {
+        // Duration can't be updated. If you plan on updating the message,
+        // you should probably pass in a duration of `false` when you create
+        // the message and then remove it on your own.
+        delete msg.duration;
+        md.set(msg);
+      }
+    };
+
     return {
       remove: () => {
         this.collection.remove(md);
-      }
+      },
+      updateMessage: updateMessage
     }
   },
 

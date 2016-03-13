@@ -5,7 +5,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
-  className: 'notification flexRow',
+  className: 'notification',
 
   events: {
     'click .js-notification': 'notificationClick'

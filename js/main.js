@@ -115,6 +115,13 @@ $('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescrip
   require("shell").openExternal(extUrl);
 });
 
+// add the loading class to any button with the loader class when it is clicked.
+// The view must remove the loading class when loading is complete.
+// If logic in the view should prevent the loading class, just use stopPropagation
+$('body').on('click', '.loader', function(e){
+  $(e.target).closest('.loader').addClass("loading");
+});
+
 //record changes to the app state
 $(window).bind('hashchange', function(){
   "use strict";
@@ -303,7 +310,7 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
       if (data.success) {
         // refresh the current route
         Backbone.history.navigate('blah-blah-blah');
-        Backbone.history.navigate(route, { trigger: true });
+        Backbone.history.navigate(route, { replace: true, trigger: true });
       } else {
         launchServerConnect();
       }

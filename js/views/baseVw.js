@@ -39,6 +39,17 @@ module.exports = Backbone.View.extend({
       }
     },
 
+    delegateEvents: function() {
+      if (this._childViews) {
+        this._childViews.forEach((view) => {
+          view.delegateEvents();
+        });
+      }
+
+      Backbone.View.prototype.delegateEvents.apply(this, arguments);
+    },
+
+
     // Will call the remove method of any child views.
     remove: function() {
       for (var i=0; i < this._childViews.length; i++) {

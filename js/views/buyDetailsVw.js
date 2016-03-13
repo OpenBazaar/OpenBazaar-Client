@@ -8,7 +8,8 @@ Backbone.$ = $;
 module.exports = Backbone.View.extend({
 
   events: {
-    'change .js-buyWizardQuantity': 'changeQuantity'
+    'change .js-buyWizardQuantity': 'changeQuantity',
+    'click .js-goToPurchases': 'goToPurchases'
   },
 
   initialize: function() {
@@ -71,15 +72,15 @@ module.exports = Backbone.View.extend({
         moderatorPrice = moderatorPercentage ? totalItemPrice * moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
         totalPrice = totalItemPrice + totalShipping,
-        newBTCDisplayPrice = (this.model.get('vendorBTCPrice') * quantity).toFixed(6),
-        newBTCShippingDisplayPrice = (this.model.get('currentShippingBTCPrice') * quantity).toFixed(6),
-        newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newBTCDisplayPrice = (this.model.get('vendorBTCPrice') * quantity).toFixed(8),
+        newBTCShippingDisplayPrice = (this.model.get('currentShippingBTCPrice') * quantity).toFixed(8),
+        newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalItemPrice),
-        newDisplayShippingPrice = (userCurrency == "BTC") ? totalShipping.toFixed(6) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayShippingPrice = (userCurrency == "BTC") ? totalShipping.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
@@ -114,6 +115,11 @@ module.exports = Backbone.View.extend({
     "use strict";
     this.$el.find('.js-buyWizardQuantity').prop('disabled', true);
     this.$el.find('#buyWizardQuantity .numberSpinnerUp, #buyWizardQuantity .numberSpinnerDown').addClass('hide');
+  },
+
+  goToPurchases: function(){
+    window.obEventBus.trigger('closeBuyWizard');
+    Backbone.history.navigate('#transactions/purchases', {trigger:true});
   },
 
   close: function(){
