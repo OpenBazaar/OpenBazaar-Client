@@ -4321,7 +4321,7 @@ module.exports = Backbone.Model.extend({
         BitcoinAddress: "Bitcoin адрес",
         BitcoinReturnAddress: "Введите ваш Bitcoin адрес",
         BitcoinReturnAddressPlaceholder: "bitcoin адрес для возврата койнов",
-        BitcoinReturnAddressInfo: "Если осуществлен возврат, средства должны будут вернуться на указанный Bitcoin адрес. Пожалуйста предоставьте адрес вашего кошелька ниже.", //not translated
+        BitcoinReturnAddressInfo: "Если осуществлен возврат, средства должны будут вернуться на указанный Bitcoin адрес. Пожалуйста предоставьте адрес вашего кошелька ниже.",
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -4339,7 +4339,7 @@ module.exports = Backbone.Model.extend({
         Name: "Имя",
         Price: "Цена",
         Available: "Доступно",
-        Tags: "Tags", //notTranslated
+        Tags: "Теги",
         Keywords: "Ключевые слова",
         Type: "Тип",
         Condition: "Состояние",
@@ -4349,7 +4349,7 @@ module.exports = Backbone.Model.extend({
         Theme: "Тема",
         Listing: "Объявление",
         Listings: "Объявления",
-        ViewPage: "View page", //notTranslated
+        ViewPage: "Просмотр страницы",
         Pages: "Страницы",
         Page: "Страница",
         Language: "Язык",
@@ -4479,53 +4479,53 @@ module.exports = Backbone.Model.extend({
           ServiceFee: "Сервисная комиссия",
           ServiceFeeNote: "Мин: 0%, Макс: 25%"
         },
-        BecomeModerator: "Become a Moderator",//notTranslated
-        EditModerator: "Moderator Settings",//notTranslated
+        BecomeModerator: "Стать модератором",//notTranslated
+        EditModerator: "Настройки модератора",//notTranslated
         overallRatingKeys: {
-          fiveStar: "Excellent all around", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Превосходно",
+          fourStar: "Хорошо",
+          threeStar: "Средне",
+          twoStar: "Низко",
+          oneStar: "Отвратительно",
         },
         qualityRatingKeys: {
-          fiveStar: "Excellent quality", //notTranslated
-          fourStar: "Good quality", //notTranslated
-          threeStar: "Average quality", //notTranslated
-          twoStar: "Poor quality", //notTranslated
-          oneStar: "Terrible quality", //notTranslated
+          fiveStar: "Превосходного качества",
+          fourStar: "Хорошего качества",
+          threeStar: "Среднего качества",
+          twoStar: "Низкого качества",
+          oneStar: "Отвратительного качества",
         },
         descriptionRatingKeys: {
-          fiveStar: "Exactly as described", //notTranslated
-          fourStar: "Mostly as described", //notTranslated
-          threeStar: "Somewhat as described", //notTranslated
-          twoStar: "Mostly not as described", //notTranslated
-          oneStar: "Did not match description", //notTranslated
+          fiveStar: "Точно как описано",
+          fourStar: "Почти как описано",
+          threeStar: "Не совсем так как описано",
+          twoStar: "Совсем не так как описано",
+          oneStar: "Совершенно не тот товар",
         },
         deliveryRatingKeys: {
-          fiveStar: "Extremly fast", //notTranslated
-          fourStar: "Relatively fast", //notTrasnalted
-          threeStar: "Average", //notTranslated
-          twoStar: "Slow", //notTranslated
-          oneStar: "Terribly slow", //notTranslated
+          fiveStar: "Невероятно быстро",
+          fourStar: "Относительно быстро",
+          threeStar: "Средняя скорость",
+          twoStar: "Медленно",
+          oneStar: "Ужасно медленно",
         },
         customerServiceRatingKeys: {
-          fiveStar: "Excellent", //notTranslated
-          fourStar: "Good", //notTranslated
-          threeStar: "Average", //notTranslated
-          twoStar: "Poor", //notTranslated
-          oneStar: "Terrible", //notTranslated
+          fiveStar: "Превосходно",
+          fourStar: "Хорошо",
+          threeStar: "Среднее",
+          twoStar: "Низкое",
+          oneStar: "Отвратительное",
         },
         transactions: {
-          OrderDetails: "Order Details", //notTranslated
-          ViewOnBlockchain: "View Details", //noTranslated
+          OrderDetails: "Детали заказа",
+          ViewOnBlockchain: "Браузер блокчейн",
           SoldBy: "Продано",
-          BuyerPayout: "Buyer Payout", // not translated
-          SellerPayout: "Seller Payout", // not translated
-          BuyerAmout: "Buyer Amout", // not translated
-          SellerAmout: "Seller Amout", // not translated
-          YouEarn: "You Earn", // not translated
-          YourBitcoinPaymentAddress: "Your Bitcoin Payment Address", // not translated
+          BuyerPayout: "Выплаты продавцу",
+          SellerPayout: "Выплаты продавцу",
+          BuyerAmout: "Выплаты покупателю",
+          SellerAmout: "Сумма выплат",
+          YouEarn: "Вы получаете",
+          YourBitcoinPaymentAddress: "Ваш Bitcoin адрес для выплат",
           PurchasedBy: "Куплено",
           searchByOrder: "Искать по номеру заказа",
           sortByStatusAll: "Все",
@@ -4542,72 +4542,72 @@ module.exports = Backbone.Model.extend({
           OrderStatus2: "Подтверждено/выслано",
           OrderStatus3: "Завершено (средства освобождены)",
           OrderStatus4: "Оспорено",
-          OrderStatusopen: "Disputed", // not translated
-          OrderStatus5: "Dispute Closed", // not translated
-          OrderStatusclosed: "Dispute Closed", // not translated
-          OrderStatus6: "Dispute Finalized",// not translated
-          OrderStatus7: "Refunded", // not translated
-          AcceptDisputeResolution: "Accept Dispute Payout", // not translated
-          InEscrow: "- In Escrow", // not translated
+          OrderStatusopen: "Оспорено",
+          OrderStatus5: "Спор закрыт",
+          OrderStatusclosed: "Спор закрыт",
+          OrderStatus6: "Спор финализован",
+          OrderStatus7: "Возмещено",
+          AcceptDisputeResolution: "Принять компенсацию по спору",
+          InEscrow: "- в Эскроу",
           OrderTotal: "Всего заказов",
-          OrderTotalInBTC: "BTC Total", // not translated
-          NoMessages: "No messages", //notTranslated
-          PaymentProtection: "Payment Protection", // not translated
-          ShipTo: "Ship To", // not translated
-          ViewRating: "(View Rating)", // not translated
-          ContractDetails: "Contract Details", //notTranslated
-          HideDetails: "Hide Details", //notTranslated
-          ConfirmOrder: "Confirm Order", // not translated
-          ReceivingAddress: "Receiving Address", // not translated
-          RecievingAddressPlaceholder: "Bitcoin address to receive funds at", // not translated
-          Comments: "Comments", // not translated
-          CommentsPlaceHolder: "Comments on this order", // not translated
-          Shipper: "Item Shipped By", // not translated
-          ShipperPlaceholder: "Name of the company shipping the item", // not translated
-          TrackingNumber: "Tracking Number", // not translated
-          TrackingNumberPlaceholder: "Tracking number of item", // not translated
-          EstimatedDelivery: "Estimated Delivery:", // not translated
-          EstimatedDeliveryPlaceholder: "Estimated date item will be delivered", // not translated
-          URL: "File URL", // not translated
-          URLPlaceholder: "Link to download, schedule, or more information", // not translated
-          Password: "Password", // not translated
-          PasswordPlaceholder: "Password required for link (optional)", // not translated
-          DirectTransaction: "Direct transaction", // not translated
-          ModeratedTransaction: "Moderated transaction", // not translated
-          Seller: "Seller", // not translated
-          Buyer: "Buyer", // not translated
-          Moderator: "Moderator", //not translated
-          transferReceipt: "Transfer Receipt", // not translated
-          copyTxid: "copy tx ID", // not translated
-          Close: "Close", // not translated
-          FundOrder: "Fund Order", // not translated
-          sortByDateNewest: "By Date, Newest", // not translated
-          sortByDateOldest: "By Date, Oldest", // not translated
-          PayPurchase: "Pay for this Purchase", // not translated
-          CompleteOrder: "Complete Order", // not translated
-          MarkAsShipped: "Mark as Shipped", // not translated
-          RateThisTransaction: "Rate this Transaction", // not translated
-          TransactionReview: "Transaction Review", // not translated
-          OverallRating: "Overall Rating", // not translated
-          Quality: "Quality:", // not translated
-          MatchedDescription: "Matched Description:", // not translated
-          DeliverySpeed: "Delivery Speed:", // not translated
-          CustomerService: "Customer Service:", // not translated
-          Review: "Review", // not translated
-          ReviewPlaceHolder: "Your review of this transaction", // not translated
-          NoFileProvided: "No file provided", //notTranslated
-          None: "None", //notTranslated
-          NoneSent: "None sent", // not translated
-          ModerationFee: "Moderation Fee:", // not translated
-          DisputeTransaction: "Start a Dispute", // not translated
-          sendMessagePlaceholder: "Enter message...", // not translated
-          DisputeInstructions: "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.", //not translated
-          SendMessage: "Send",// not translated
-          CloseDispute: "Close Dispute",// not translated
-          TotalInTransaction: "Transaction:", // not translated
-          StartDisputeFlag: "START DISPUTE", // not translated
-          CloseDisputeFlag: "END DISPUTE", // not translated
-          PayoutOnlyBuyer: "Closing this dispute will return 100% of the funds to the buyer." // not translated
+          OrderTotalInBTC: "Всего BTC",
+          NoMessages: "Нет сообщений",
+          PaymentProtection: "Протекция платежа",
+          ShipTo: "Отправить",
+          ViewRating: "(смотреть рейтинг)",
+          ContractDetails: "Детали контракта",
+          HideDetails: "Скрыть детали",
+          ConfirmOrder: "Подтвердить заказ",
+          ReceivingAddress: "Принимающий адрес",
+          RecievingAddressPlaceholder: "Bitcoin адрес для принятия средств",
+          Comments: "Комменты",
+          CommentsPlaceHolder: "Комменты к этому заказу",
+          Shipper: "Товар упаковывался",
+          ShipperPlaceholder: "Имя компании отправляющей товар",
+          TrackingNumber: "Трекинг",
+          TrackingNumberPlaceholder: "Трекинг товара",
+          EstimatedDelivery: "Планируемые сроки доставки:",
+          EstimatedDeliveryPlaceholder: "Планируемая дата доставки товара",
+          URL: "URL файла",
+          URLPlaceholder: "Ссылка на загрузку, организационная информация, или другие сведения",
+          Password: "Пароль",
+          PasswordPlaceholder: "Указать пароль для ссылки (необязательно)",
+          DirectTransaction: "Прямая сделка",
+          ModeratedTransaction: "Модерируемая сделка",
+          Seller: "Продавец",
+          Buyer: "Покупатель",
+          Moderator: "Модератор",
+          transferReceipt: "Чек оплаты",
+          copyTxid: "копировать tx ID",
+          Close: "Закрыть",
+          FundOrder: "Средства заказа",
+          sortByDateNewest: "По дате, новейший",
+          sortByDateOldest: "По дате, старейший",
+          PayPurchase: "Оплатить этот заказ",
+          CompleteOrder: "Завершить заказ",
+          MarkAsShipped: "Пометить как высланный",
+          RateThisTransaction: "Оцените сделку",
+          TransactionReview: "Оценка сделки",
+          OverallRating: "Общий рейтинг",
+          Quality: "Качество:",
+          MatchedDescription: "Соответствие описанию:",
+          DeliverySpeed: "Скорость доставки:",
+          CustomerService: "Качество сервиса:",
+          Review: "Оценка",
+          ReviewPlaceHolder: "Ваша оценка этой сделки",
+          NoFileProvided: "Файлов не предоставлено",
+          None: "Пусто",
+          NoneSent: "Не отправлено",
+          ModerationFee: "Комиссия модератора:",
+          DisputeTransaction: "Начать спор",
+          sendMessagePlaceholder: "Введите сообщение...",
+          DisputeInstructions: "Чтобы оформить спор для этой сделки, введите причину спора ниже, и выберите диалог НАЧАТЬ СПОР. Это вовлечёт модератора в вашу беседу до финальной стадии решения по вашему спору. Модератор вынесет свое конечное решение после слушания сторон, и определит размеры компенсации сторонам. Комиссия модератора является фиксированной и выплачивается из бюджета сделки.",
+          SendMessage: "Отправка",
+          CloseDispute: "Закрыть спор",
+          TotalInTransaction: "Транзакция:",
+          StartDisputeFlag: "НАЧАТЬ СПОР",
+          CloseDisputeFlag: "ОТМЕНИТЬ СПОР",
+          PayoutOnlyBuyer: "Закрытие этого спора означает 100% возврат средств покупателю."
         },
         errorMessages: {
           saveError: "Данные невозможно сохранить.",
@@ -4620,21 +4620,21 @@ module.exports = Backbone.Model.extend({
           socketError: "URL для WebSocket недоступен. Подключаемся к адресу по умолчанию ws://localhost:18466",
           contractError: "Этот товар недоступен для продажи",
           sellerError: "Сервер продавца отключил эту возможность. This may be due to a connection issue.", // not translated
-          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться ", //not translated
-          pageUnavailable: "This page is currently unavailable.",  //notTranslated
-          badHandle: "The handle you entered does not have a valid OpenBazaar ID", //notTranslated
-          serverDown: "The server has been shut down", //notTranslated
-          tooManyPhotosTitle: "Too many photos", //notTranslated
-          tooManyPhotosBody: "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.", //notTranslated
-          badJSON: "The JSON data returned from the server was malformed" // notTranslated
+          checkPurchaseData: "Проверьте пожалуйста данные ваших покупок, такие как кол-во и адрес возврата Биткойнов, чтобы убедиться ",
+          pageUnavailable: "Эта страница недоступна на текущий момент.",  //notTranslated
+          badHandle: "Введёный вами логин не соответствует валидному OpenBazaar ID",
+          serverDown: "Сервер выключен", //notTranslated
+          tooManyPhotosTitle: "Слишком много фотографий", //notTranslated
+          tooManyPhotosBody: "Некоторые из ваших фотографий не могут быть загружены, потому что превышают допустимый размер файла.",
+          badJSON: "Данные JSON возвращены с сервера"
         },
         pageConnectingMessages: {
-          listingConnect: "Connecting to listing ${listing}",  //not translated
-          listingFail: "The listing you're trying to view is currently offline",  //not translated
-          handleConnect: "Connecting to ${handle}",  //not translated
-          handleFail: "The page you're trying to view is currently offline",  //not translated
-          userConnect: "Connecting to ${guid}",  //not translated
-          userFail: "The page you're trying to view is currently offline",  //not translated
+          listingConnect: "Подключение к товару ${listing}",
+          listingFail: "Товар который вы пытаетесь открыть более не доступен в сети",
+          handleConnect: "Подключение к ${handle}",  //not translated
+          handleFail: "Страницу которую вы пытаетесь открыть более не доступна в сети",
+          userConnect: "Подключение к ${guid}",
+          userFail: "Страница которую вы пытаетесь просмотреть более не доступна в сети",
         },
         aboutSection: {
           about: "о нас",
@@ -4680,7 +4680,7 @@ module.exports = Backbone.Model.extend({
         onboarding: {
           intro: "Конфигурация OpenBazaar",
           Introduction: "Ознакомление",
-          IntroductionBody: "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
+          IntroductionBody: "OpenBazaar является общественным рынком peer-to-peer. Это всё равно что скрестить eBay&trade;, Twitter&trade; и BitTorrent в нечто единое. С одним отличием - мы не берём комиссий и не накладываем ограничений, а весь исходный код OpenBazaar открыт и доступен в режиме Open Source. \n\n Пожалуйста, не пытайтесь сравнивать старое с новым - чтобы привыкнуть к лучшему, может потребоваться время.",
           Theme: "Выберите оформление для вашей страницы",
           chooseLanguage: "Выберите ваш язык",
           contributors: "%{smart_count} вкладчик |||| %{smart_count} вкладчиков",
@@ -4709,29 +4709,29 @@ module.exports = Backbone.Model.extend({
           Finished: "Завершено"
         },
         softwareUpdate: {
-          updateAvailable: "OpenBazaar Update Available", //notTranslated
-          installUpdate: "Install Update", //notTranslated
-          dismiss: "Dismiss" //notTranslated
+          updateAvailable: "Доступно обновление OpenBazaar",
+          installUpdate: "Установить обновление",
+          dismiss: "Отказаться"
         },
         guidStillCreating: {
-          HangTight: "Hang tight for a few...", //notTranslated
-          YourPersonal: "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.", //notTranslated
-          LookingFor: "Looking for something to do in the meantime? Read the <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">OpenBazaar blog</a>." //notTranslated
+          HangTight: "Подождите немного...",
+          YourPersonal: "Ваши личные ключи и OpenBazaar ID генерируются и это не должно занять более 30 секунд.\n\nВы автоматически подключитесь к сети, как только процесс будет завершён, поэтому пожалуйста, не отключайтесь.", //notTranslated
+          LookingFor: "Хотите узнать что-нибудь полезное, пока ждёте? Прочтите наш <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">блог OpenBazaar</a>."
         },
         buyFlow: {
-          PayForOrder: "Pay for Order", //notTranslated
-          NeedTempAddress: "I need a temporary Bitcoin address", //notTranslated
-          NeedTempAddressHelper: "Please bookmark the url to your temporary bitcoin address", //notTranslated
-          CantFindAddress: "I can't find my bitcoin address", //notTranslated
-          BitcoinWallet: "Bitcoin Wallet", //notTranslated
-          ModeratedPaymentDescription: "Your payment is held in a secure wallet until the seller completes their end of the agreement. If issues arise, a Moderator will help.", //notTranslated
-          ModeratorFeeHelper: "The moderator may charge a fee, but only if a dispute arises.", //notTranslated
-          ModeratedPayment: "Moderated Payment", //notTranslated
-          DisputeFee: "Dispute fee", //notTranslated
-          HaveWallet: "Do you have a Bitcoin Wallet?", //notTranslated
-          QuickSetup: "It only takes a few minutes to set one up", //notTranslated
-          CreateWallet: "Create a Wallet", //notTranslated
-          DirectPaymentDescription: "Funds are sent directly to the seller. Only use on small purchases or when purchasing from a trusted seller.", //notTranslated
+          PayForOrder: "Оплатить заказ",
+          NeedTempAddress: "Мне нужен временный Bitcoin адрес",
+          NeedTempAddressHelper: "Пожалуйста добавьте в избранное ссылку на ваш временный bitcoin адрес",
+          CantFindAddress: "Я не могу найти мой bitcoin адрес",
+          BitcoinWallet: "Bitcoin кошелёк",
+          ModeratedPaymentDescription: "Ваш платёж хранится в безопасном кошельке до тех пор, пока продавец не выставит статус своей готовности. При возникновении противоречий, модератор сможет помочь разобраться.",
+          ModeratorFeeHelper: "Модераторы могут взымать небольшую комиссию, но только при возникновении спора.",
+          ModeratedPayment: "Модерируемый платёж",
+          DisputeFee: "Комиссия спора",
+          HaveWallet: "У вас имеется Bitcoin кошелёк?",
+          QuickSetup: "Чтобы завести кошелёк потребуется всего несколько минут",
+          CreateWallet: "Создать кошелёк",
+          DirectPaymentDescription: "Средства отправятся напрямую продавцу. Используйте эту функцию только для небольших покупок или при покупке только у надёжных продавцов.",
           DirectPayment: "Оплатить напрямую",
           SendDirectlyTo: "Отправка прямого платежа %{handle}",
           MustAddAddress: "Вы должны указать адрес для доставки",
@@ -4754,26 +4754,26 @@ module.exports = Backbone.Model.extend({
           total: "Всего:"
         },
         chat: {
-          noSearchResultsFound: "No results found" //notTranslated
+          noSearchResultsFound: "Результатов не найдено"
         },
         serverConnectModal: {
-          statusTryingToConnect: "Trying to connect to your server", //notTranslated
-          statusConnected: "Connected", //notTranslated
-          statusFailedConnection: "Unable to connect to your server", //notTranslated
-          statusFailedAuthentication: "Authentication failed", //notTranslated
-          statusTooManyAttempts: "Too many failed login attempts", //notTranslated
-          serverConfiguration: "Server Configuration", //notTranslated
-          connecting: "Connecting", //notTranslated
-          intro: "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.", //notTranslated
-          serverIP: "Server IP", //notTranslated
-          restApiPort: "Rest API port", //notTranslated
-          websocketApiPort: "Websocket API port", //notTranslated
-          heartbeatSocketApiPort: "Heartbeat socket port", //notTranslated
-          username: "Username", //notTranslated
-          password: "Password", //notTranslated
-          restoreDefaults: "Restore defaults", //notTranslated
-          saveChanges: "Save Changes", //notTranslated
-          retry: "Retry connection", //notTranslated
+          statusTryingToConnect: "Попытка подключиться к вашему серверу",
+          statusConnected: "Подключено",
+          statusFailedConnection: "Невозможно подключиться к вашему серверу",
+          statusFailedAuthentication: "Сбой аутентификации",
+          statusTooManyAttempts: "Слишком много попыток входа",
+          serverConfiguration: "Конфигурация сервера",
+          connecting: "Подключение",
+          intro: "OpenBazaar спроектирован, чтобы помочь вам держать сервер и клиент на разных компьютерах. По-умолчанию сервер запускается с клиентом на одном и том же компьютере, но вы также можете изменить это здесь.",
+          serverIP: "Сервер IP",
+          restApiPort: "Порт Rest API",
+          websocketApiPort: "Порт Websocket API",
+          heartbeatSocketApiPort: "Порт сокета Heartbeat",
+          username: "Имя пользователя сервера",
+          password: "Пароль сервера",
+          restoreDefaults: "Удалить настройки",
+          saveChanges: "Сохранить изменения",
+          retry: "Попробовать ещё раз",
         }
       },
 
