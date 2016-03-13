@@ -923,10 +923,7 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    // We haven't previously viewed the list of blocked users
-    if (typeof this.blockedUsersVw !== 'undefined') {
-      this.blockedUsersVw.remove();
-    }
+    this.blockedUsersVw && this.blockedUsersVw.remove();
 
     if (this.blockedUsersScrollHandler && this.$obContainer.length) {
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);
