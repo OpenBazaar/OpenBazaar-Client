@@ -200,10 +200,11 @@ module.exports = baseVw.extend({
     this.countryReady = false;
     this.currencyReady = false;
     this.languageReady = false;
-    
+
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
+	this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
