@@ -91,19 +91,19 @@ module.exports = baseVw.extend({
       success: function(models){
         //self.renderPurchases();
         self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
-        self.setSearchList('transactionsPurchases');
+        models.length && self.setSearchList('transactionsPurchases');
         self.salesCol.fetch({
           success: function(models){
             if(self.model.get('page').vendor) {
               self.renderTab("sales", self.salesCol, self.salesWrapper);
-              self.setSearchList('transactionsSales');
+              models.length && self.setSearchList('transactionsSales');
             }
             if(self.model.get('page').moderator){
               self.casesCol.fetch({
                 success: function(models) {
                   //self.renderCases();
                   self.renderTab("cases", self.casesCol, self.casesWrapper);
-                  self.setSearchList('transactionsCases');
+                  models.length && self.setSearchList('transactionsCases');
                 },
                 error: function(jqXHR, status, errorThrown){
                   messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
