@@ -4191,12 +4191,12 @@ module.exports = Backbone.Model.extend({
 
          */
 
-        IHaveAWalletNow: "I have a Wallet now", //notTranslated
+        IHaveAWalletNow: "У меня уже есть кошелёк",
         Next: "Далее",
         IAgree: "Согласен",
         Back: "Назад",
         EnterMessage: "Ввести сообщение...",
-        Recommended: "Recommended", //notTranslated
+        Recommended: "Рекомендуемые",
         Reload: "Обновить",
         You: "Вы",
         Skip: "Пропустить",
@@ -4209,13 +4209,13 @@ module.exports = Backbone.Model.extend({
         of: "из",
         Sell: "Продать",
         New: "Новый",
-        HighlightToStyle: "Highlight text to style", //notTranslated
+        HighlightToStyle: "Подсвечивание текста по стилю",
         Excellent: "Идеальное",
         Good: "Хорошее",
         Poor: "Плохое",
-        StillValidating: "Your handle is still validating", //notTranslated
-        CheckStatus: "Check Status", //notTranslated
-        ChangeCurrency: "Change currency", //notTranslated
+        StillValidating: "Ваш логин всё ещё валидируется",
+        CheckStatus: "Проверка статуса",
+        ChangeCurrency: "Изменить валюту",
         SKU: "SKU",
         Refurbished: "Восстановленный",
         Physical: "Физический",
@@ -4228,7 +4228,7 @@ module.exports = Backbone.Model.extend({
         Follow: "Подписан",
         Feed: "Лента",
         FeedPlaceholder: "Лента обновлений, за которыми я слежу",
-        ViewListing: "View Listing", //notTranslated
+        ViewListing: "Просмотреть листинг",
         Unfollow: "Отписаться",
         About: "О нас",
         NoDescriptionAdded: "Добавленные описания",
@@ -4237,12 +4237,12 @@ module.exports = Backbone.Model.extend({
         AboutEmpty: "Описание не заполнено...",
         Followers: "Читатели",
         Following: "Читаемые",
-        FollowsYou: "Follows You", //notTranslated
+        FollowsYou: "Подписан на вас",
         Message: "Сообщение",
         Messages: "Сообщений",
         Store: "Магазин",
         Edit: "Редактировать",
-        Clone: "Clone", //notTranslated
+        Clone: "Кланировать",
         Used: "В употреблении",
         Delete: "Удалить",
         DontDelete: "Не удалять",
@@ -4252,12 +4252,12 @@ module.exports = Backbone.Model.extend({
         Welcome: "Welcome",
         CreateStore: "Создать магазин",
         GoToMyPage: "Моя страница",
-        SearchForItemsPlaceholder: "Type #games, #shoes or any #tag...", //notTranslated
+        SearchForItemsPlaceholder: "Введите #игры, #обувь или любой #тег...",
         SearchForPagesPlaceholder: "Поиск по имени или ключевому слову",
         SearchFeedPlaceholder: "Поиск по имени или OpenBazaar ID",
         SearchForFollowersPlaceholder: "Поиск по имени или OpenBazaar ID",
         SearchForUsersPlaceholder: "Поиск по имени или OpenBazaar ID",
-        SearchOnUserStorePlaceholder: "Type a title...", //notTranslated
+        SearchOnUserStorePlaceholder: "Введите название...",
         EstDeliveryDomesticPlaceholder: "3-5 рабочих дней",
         EstDeliveryInternationalPlaceholder: "7-15 рабочих дней",
         OrderProcessingTimePlaceholder: "1-2 рабочих дней",
@@ -4267,7 +4267,7 @@ module.exports = Backbone.Model.extend({
         ReturnPolicyPlaceholder: "Введите ваши условия возврата...",
         CategoryPlaceholder: "Выберите категорию",
         CategoryHelperText: "Категории используются для сортировки выкладки товаров в вашем магазине.",
-        KeywordsHelperText: "Adding tags helps your listing to be discovered in the market.", //notTranslated
+        KeywordsHelperText: "Добавление тегов помогает вашему листингу быть найденым на рынке.",
         ExpirationDateHelperText: "Выберите дату для автоматического снятия с продажи.",
         ClearExpirationDate: "Точная дата для снятия с продажи",
         ReturnPolicy: "Политика возвратов",
@@ -4281,18 +4281,18 @@ module.exports = Backbone.Model.extend({
         Facebook: "Facebook",
         Instagram: "Instagram",
         Twitter: "Twitter",
-        PGPKey: "PGP Key",
-        Signature: "PGP Signature", //not translated
-        SignaturePlaceholder: "A PGP Signature is required if you enter a PGP Key", //not translated
+        PGPKey: "PGP ключ",
+        Signature: "PGP подпись",
+        SignaturePlaceholder: "PGP подпись требуется если вы используете PGP ключ",
         Snapchat: "Snapchat",
         BUYNOW: "Купи сейчас",
         Description: "Описание",
         Reviews: "Отзывы",
         Shipping: "Доставка:",
-        CountryOfOrigin: "Country of Origin:", //not translated
-        CanBeShippedTo: "Can Ship to You In:", //not translated
+        CountryOfOrigin: "Страна происхождения:",
+        CanBeShippedTo: "Возможна отправка в:",
         Addresses: "Адреса",
-        Files: "Files", //notTranslated
+        Files: "Файлы",
         NewAddress: "Новый адрес",
         CurrentAddress: "Текущие адреса",
         Returns: "Возвраты",
@@ -4304,13 +4304,13 @@ module.exports = Backbone.Model.extend({
         Customize: "Настроить",
         Save: "Сохранить",
         Changes: "Изменения",
-        Change: "Change", //notTranslated
+        Change: "Изменить",
         SaveChanges: "Применить",
         YourName: "Ваше имя",
-        BitcoinAddress: "Bitcoin Addresss", //notTranslated
-        BitcoinReturnAddress: "Enter your Bitcoin Address", //notTranslated
-        BitcoinReturnAddressPlaceholder: "bitcoin address to return coins to", //not translated
-        BitcoinReturnAddressInfo: "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.", //not translated
+        BitcoinAddress: "Bitcoin адрес",
+        BitcoinReturnAddress: "Введите ваш Bitcoin адрес",
+        BitcoinReturnAddressPlaceholder: "bitcoin адрес для возврата койнов",
+        BitcoinReturnAddressInfo: "Если осуществлен возврат, средства должны будут вернуться на указанный Bitcoin адрес. Пожалуйста предоставьте адрес вашего кошелька ниже.", //not translated
         LocalCurrency: "Местная валюта",
         TimeZone: "Часовой пояс",
         ShipToName: "Имя",
@@ -4333,16 +4333,16 @@ module.exports = Backbone.Model.extend({
         Type: "Тип",
         Condition: "Состояние",
         NSFW: "18+ (для взрослых)",
-        Select: "Выбор", //not translated
-        Social: "Социальный", //not translated
-        Theme: "Тема", //not translated
-        Listing: "Объявление", //not translated
-        Listings: "Объявления", //not translated
+        Select: "Выбор",
+        Social: "Социальный",
+        Theme: "Тема",
+        Listing: "Объявление",
+        Listings: "Объявления",
         ViewPage: "View page", //notTranslated
-        Pages: "Страницы", //not translated
-        Page: "Страница", //not translated
-        Language: "Язык", //not translated
-        Reset: "Сброс", //not translated
+        Pages: "Страницы",
+        Page: "Страница",
+        Language: "Язык",
+        Reset: "Сброс",
         Local: "Местный",
         Domestic: "Внутри страны:",
         Location: "Местонахождение",
@@ -4351,7 +4351,7 @@ module.exports = Backbone.Model.extend({
         Free: "Свободный",
         Category: "Категория",
         ProcessingTime: "Дней на упаковку",
-        SelectPhotos: "Select photos", //notTranslated
+        SelectPhotos: "Выбрать фотки",
         DragOrUploadPhotos: "Перетащите или выберите фото",
         ExpirationDate: "Заканчивается",
         UploadCoverPhoto: "Загрузить фото для фоновой картинки",
@@ -4363,15 +4363,15 @@ module.exports = Backbone.Model.extend({
         CoverPhotoButton: "Выберите обложку",
         AboutPlaceholder: "Полное описание",
         BackgroundColor: "Фоновый цвет",
-        NotificationPaymentSent: "Payment was sent to", //notTranslated
-        NotificationOrderFor: "placed an order for", //notTranslated
-        NotificationOrderConfirmed: "Your order has been confirmed/shipped", //notTranslated
+        NotificationPaymentSent: "Платеж был отправлен",
+        NotificationOrderFor: "разместили заказ",
+        NotificationOrderConfirmed: "Ваш заказ был подтвержден/выслан",
         NotificationFollow: "подписан на вас",
-        NotificationDispute: "has opened a dispute", //not translated
-        NotificationDisputeClosed: "this dispute is closed", //not translated
-        NotificationRefund: "has refunded your order", //not translated
-        NoticationOrderStatus: "Order status updated, buyer notified", //notTranslated
-        NotificationNewOrder: "has made a purchase", //not translated
+        NotificationDispute: "открыл спор",
+        NotificationDisputeClosed: "этот спор закрыт",
+        NotificationRefund: "вернул ваш ордер",
+        NoticationOrderStatus: "Статус ордера обновлен, продавец оповещен",
+        NotificationNewOrder: "совершил покупку",
         NoNotifications: "Нет уведомлений",
         WelcomeToYourPage: "Добро пожаловать!",
         SearchForCategory: "Поиск категории",
@@ -4401,11 +4401,11 @@ module.exports = Backbone.Model.extend({
         Sales: "Продажи",
         Cases: "Кейсы",
         Enter: "Enter",
-        Discover: "Обзор",
-        Block: "Block", //notTranslated
-        Unblock: "Unblock", //notTranslated
+        Discover: "Сёрфинг",
+        Block: "Блокировать",
+        Unblock: "Разблокировать",
         Blocked: "Заблокированно",
-        NoBlockedList: "You are not currently blocking anyone.", // not translated
+        NoBlockedList: "На текущий момент вы ни кого не заблокировали.",
         Advanced: "Дополнительно",
         General: "Общий",
         AllItems: "Все инструменты",
@@ -4416,7 +4416,7 @@ module.exports = Backbone.Model.extend({
         Title: "Название",
         DigitalItem: "Цифровой товар",
         PhysicalItem: "Физический товар",
-        MinimumPrice: "A minimum is necessary to ensure Bitcoin transaction costs are covered", //notTranslated
+        MinimumPrice: "Минимум необходим для того чтобы убедиться что все затраты по обслуживанию Bitcoin транзакции будут покрыты",
         DomesticShippingTime: "Внутреннее время доставки",
         InternationalShippingTime: "Международное время доставки",
         DisplayNSFWcontent: "Отображать NSFW контент?",
@@ -4424,49 +4424,49 @@ module.exports = Backbone.Model.extend({
         Content: "Контент",
         StandardThemes: "Стандартные темы",
         NoPhotosAdded: "Не добавлено фотографий",
-        Summary: "Summary", // not translated
-        Funds: "Funds", // not translated
-        Discussion: "Discussion", // not translated
-        Quantity: "Quantity", //not translated
-        ShippingTo: "Shipping To", //not translated
-        ModeratedBy: "Moderated by", //not translated
-        Submit: "Submit", //not translated
-        maxLength20: "max length 20 char", //not translated
-        maxLength80: "max length 80 char", //not translated
-        maxLength200: "max length 200 char", //not translated
-        StoreModeratorsOptional: "Store Moderators (Optional)", // not translated
-        Searchformoderators: "Search for moderators", // not translated
-        Contributors: "Contributors", // not translated
-        Support: "Support", // not translated
-        Licensing: "Licensing", // not translated
-        On: "On", // not translated
-        Off: "Off", // not translated
-        ClickToChange: "Click to change", // not translated
-        NotProvided: "not provided", // not translated
-        NotFollowingAnyone: "Not following anyone", // not translated
-        NoFollowers: "No followers", // not translated
-        NoReviews: "No reviews", //notTranslated
-        Moderator: "Moderator", // not translated
-        ActiveStore:"Store is Active", // not translated
-        ActiveStoreDetails: "Inactive stores and listings are not visible to other people", //not translated
-        Firewall: "Firewall", //notTranslated
-        ServerSettings: "Server Settings", //notTranslated
-        ReadOnly: "(This Field is Read Only)", //notTranslated
-        HandleResolver: "Handle Resolver",  // not translated
-        ShutDownServer: "Shut Down the Server",  // not translated
-        NoFancyStyles: "Disable Visual Effects", // not translated
-        NoFancyStylesWarning: "This will disable animations and transparencies. It may improve performance on slow systems.", // not translated
-        LoadingBitcoinPrices: "Loading Bitcoin Prices...", // not translated
-        ThisUserIsBlocked: "This user is hidden because they are on your blocked list", // not translated
-        ThisUserIsNSFW: "This user is hidden because their page is listed as NSFW", // not translated
-        ShowBlockedUser: "Show this user's page except for NSFW listings", // not translated
-        ShowNSFWContent: "Show this user's page, and all NSFW listings", // not translated
-        ServerChangeWarningHeadline: "Caution: Record Your Settings", // not translated
-        ServerChangeWarning: "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.", // not translated
-        moderatorSettings: { // not translated
-          DisputeResolution: "Dispute Resolution", //notTranslated
-          ServiceFee: "Service fee", // not translated
-          ServiceFeeNote: "Min: 0%, Max: 25%"//notTranslated
+        Summary: "Всего",
+        Funds: "Средства",
+        Discussion: "Дискуссия",
+        Quantity: "Количество",
+        ShippingTo: "Отправка",
+        ModeratedBy: "Модерируется",
+        Submit: "Подтвердить",
+        maxLength20: "макс. длина 20 знаков",
+        maxLength80: "макс. длина 80 знаков",
+        maxLength200: "макс. длина 200 знаков",
+        StoreModeratorsOptional: "Модераторы магазинов (необязательно)",
+        Searchformoderators: "Поиск модераторов",
+        Contributors: "Участники",
+        Support: "Поддержка",
+        Licensing: "Лицензирование",
+        On: "Вкл",
+        Off: "Выкл",
+        ClickToChange: "Щёлкнуть для изменения",
+        NotProvided: "не предоставлено",
+        NotFollowingAnyone: "Не подписан ни на кого",
+        NoFollowers: "Нет подписчиков",
+        NoReviews: "Нет обзоров",
+        Moderator: "Модератор",
+        ActiveStore:"Магазин ещё активен",
+        ActiveStoreDetails: "Неактивные магазины и листинги не отображаются другим людям",
+        Firewall: "Фаерволл",
+        ServerSettings: "Настройки сервера",
+        ReadOnly: "(Это поле доступно только для чтения)",
+        HandleResolver: "Синхронизатор логинов",
+        ShutDownServer: "Выключить сервер",
+        NoFancyStyles: "Выключить визуальные эффекты",
+        NoFancyStylesWarning: "Это выключит анимации и прозрачности. Помогает улучшить скорость работы на медленных компьютерах.",
+        LoadingBitcoinPrices: "Загрузка Bitcoin цен...",
+        ThisUserIsBlocked: "Этот пользователь скрыт, потому что он заблокирован в вашем списке",
+        ThisUserIsNSFW: "Этот пользователь скрыт, потому что он пометил содержимое своей страницы допустимым только для 18+",
+        ShowBlockedUser: "Отобразить страницу пользователя исключая товары с содержимым 18+",
+        ShowNSFWContent: "Показать страницу пользователя не ограничивая содержимое 18+",
+        ServerChangeWarningHeadline: "Внимание: сделайте резервную копию настроек",
+        ServerChangeWarning: "Мы рекомендуем вам сделать копии ваших предыдущих настроек, показанных ниже. Ваше имя пользователя и пароль к серверу программы больше не будут доступны с этого момента.",
+        moderatorSettings: {
+          DisputeResolution: "Исход спора",
+          ServiceFee: "Сервисная комиссия",
+          ServiceFeeNote: "Мин: 0%, Макс: 25%"
         },
         BecomeModerator: "Become a Moderator",//notTranslated
         EditModerator: "Moderator Settings",//notTranslated
