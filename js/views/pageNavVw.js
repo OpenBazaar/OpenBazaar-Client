@@ -253,15 +253,15 @@ module.exports = baseVw.extend({
   showAboutModal: function(e){
 
     // display the modal
-    $('.js-aboutModalHolder').fadeIn(300, function(){
-      // set the active tab
-      $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
-      $('.js-about-mainTab').addClass('active');
+    $('.js-aboutModalHolder').fadeIn(300);
 
-      // set the active section
-      $('.js-aboutModal .modal-section').addClass('hide');
-      $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
-    });
+    // set the active tab
+    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $('.js-about-mainTab').addClass('active');
+
+    // set the active section
+    $('.js-aboutModal .modal-section').addClass('hide');
+    $('.js-aboutModal .js-modalAboutMain').removeClass('hide');
 
     // blur the container for extra focus
     $('#obContainer').addClass('blur');
@@ -273,12 +273,11 @@ module.exports = baseVw.extend({
   },
 
   showSupportModal: function(e){
-    $('.js-aboutModalHolder').fadeIn(300, function() {
-      $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
-      $('.js-about-donationsTab').addClass('active');
-      $('.js-aboutModal .modal-section').addClass('hide');
-      $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
-    });
+    $('.js-aboutModalHolder').fadeIn(300);
+    $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
+    $('.js-about-donationsTab').addClass('active');
+    $('.js-aboutModal .modal-section').addClass('hide');
+    $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
   },
 
