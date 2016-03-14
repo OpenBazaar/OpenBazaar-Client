@@ -186,7 +186,8 @@ module.exports = baseVw.extend({
       msgCl = new ChatMessagesCl();
       initialFetch = msgCl.fetch({
         data: {
-          guid: model.get('guid')
+          guid: model.get('guid'),
+          limit: 5
         },
         reset: true        
       });

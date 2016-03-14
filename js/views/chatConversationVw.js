@@ -18,6 +18,8 @@ module.exports = baseVw.extend({
     'click .js-blockUser': 'onBlockClick'
   },
 
+  MESSAGES_PER_FETCH: 5,
+
   initialize: function(options) {
     this.options = options || {};
 
@@ -36,19 +38,13 @@ module.exports = baseVw.extend({
     this.user = this.options.user;
     this.fetch = this.options.initialFetch;
 
-    // this.collection.fetch({
-    //   data: {
-    //     guid: this.model.get('guid')
-    //   },
-    //   reset: true
-    // });
-
     this.listenTo(this.collection, 'reset', this.render);
 
-    // this.listenTo(this.collection, 'request', () => {
-    //   this.$messagesContainer.empty();
-    //   this.$loadingSpinner.removeClass('hide');
-    // });
+    this.listenTo(this.collection, 'request', (cl, xhr, options) => {
+      this.fetch = xhr;
+      this.$loadingSpinner.removeClass('hide');
+      xhr.done(() => this.$loadingSpinner.addClass('hide'));
+    });        
 
     this.listenTo(this.collection, 'add', (md) => {
       var el = this.$messagesScrollContainer[0],
@@ -62,6 +58,37 @@ module.exports = baseVw.extend({
         el.scrollTop = el.scrollHeight;
       };
     });
+
+    this.scrollHandler = __.bind(
+        __.throttle(this.onScroll, 100), this
+    );    
+  },
+
+  onScroll: function(e) {
+    var startId;
+
+    if (!this.collection.length) return;
+
+    startId = this.collection.at(0).id;
+
+    if (
+        !this.fetchedAll &&
+        !(this.fetch && this.fetch.state() === 'pending') &&
+        this.$messagesScrollContainer[0].scrollTop === 0
+      ) {
+      this.collection.fetch({
+        remove: false,
+        data: {
+          guid: this.model.get('guid'),
+          start: startId,
+          limit: (typeof this.options.messagesPerFetch === 'undefined' ? this.MESSAGES_PER_FETCH : this.options.messagesPerFetch) + 1
+        }
+      }).done(() => {
+        if (this.collection.at(0).id === startId) {
+          this.fetchedAll = true;
+        }
+      });
+    }    
   },
 
   onClickClose: function() {
@@ -137,12 +164,14 @@ module.exports = baseVw.extend({
 
       this.$el.html(
         tmpl(__.extend(this.model.toJSON(), {
+          isFetching: this.fetch && this.fetch.state() === 'pending',
           messages: this.collection.toJSON()
         }))
       );
 
       this.$('.chatConversationMessage textarea').focus()
       this.$messagesScrollContainer = this.$('.chatConversationContent');
+      this.$messagesScrollContainer.on('scroll', this.scrollHandler);
       this.$loadingSpinner = this.$messagesScrollContainer.find('.js-loadingSpinner');
       this.$messagesContainer = this.$messagesScrollContainer.find('.js-messagesContainer');
       this.$msgTextArea = this.$('textarea');
@@ -164,5 +193,11 @@ module.exports = baseVw.extend({
     });
 
     return this;
-  }
+  },
+
+  remove: function() {
+    this.$scrollContainer && this.$scrollContainer.off('scroll', this.scrollHandler);
+
+    baseVw.prototype.remove.apply(this, arguments);    
+  }  
 });

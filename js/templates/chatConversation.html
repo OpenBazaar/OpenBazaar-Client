@@ -19,7 +19,7 @@
  </div>
 
 <div class="chatConversationContent">
-    <div class="padding10 width100 alignCenter js-loadingSpinner spinnerWrapper <% ob.messages.length && print('hide') %>">
+    <div class="padding10 width100 alignCenter js-loadingSpinner spinnerWrapper <% !ob.isFetching && print('hide') %>">
       <i class="ion-android-sync spinner textSize24px textOpacity50"></i>
     </div>
     <div class="js-messagesContainer"></div>
