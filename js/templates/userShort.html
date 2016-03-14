@@ -51,38 +51,44 @@
         <div>
           <div class="marginLeft15 noOverflow marginTop2 clearFix">
             <% if(ob.name) { %>
-            <div class="floatLeft  marginBottom2 marginRight5">
-              <a class="textSize16px capitalize js-userShort js-searchName"><%= ob.name %></a>
+            <div class="floatLeft  marginBottom2 marginRight5 lineHeight21">
+              <a class="<% if(ob.micro){ %> textSize12 <% } else { %> textSize16px <% } %> capitalize js-userShort js-searchName"><%= ob.name %></a>
             </div>
             <% } %>
             <% if(ob.handle) { %>
-              <div class="pull-left lineHeight21">
-                <a class="textSize14px txt-fade js-userShort js-searchHandle"><%= ob.handle %></a>
+              <div class="pull-left marginBottom2 lineHeight21">
+                <a class="<% if(ob.micro){ %>textSize10<% }else{ %>textSize14px<% } %> txt-fade js-userShort js-searchHandle"><%= ob.handle %></a>
               </div>
             <% }else{ %>
-              <div class="pull-left lineHeight21
+              <div class="pull-left marginBottom2 lineHeight21
               <% if(ob.micro){ %>
               width110 noOverflow
               <% } %>
               ">
-                <a class="textSize14px txt-fade js-userShort"><%= ob.guid %></a>
+                <a class="<% if(ob.micro){ %>textSize10<% }else{ %>textSize14px<% } %> txt-fade js-userShort"><%= ob.guid %></a>
               </div>
             <% } %>
           </div>
-          <div class="marginLeft15 marginRight15 marginTop2">
+          <div class="marginLeft15 marginRight15 marginTop2 <% if(ob.micro){ %>textSize10<% }else{ %>fontSize14<% } %> txt-fade textWeightNormal">
             <% if(ob.short_description) { %>
-              <div class="fontSize14 txt-fade textWeightNormal clamp4"><%= ob.short_description %></div>
+              <div class="clamp2"><%= ob.short_description %></div>
             <% } else { %>
-              <div class="fontSize14 txt-fade textWeightNormal"><%= polyglot.t('NoDescriptionAdded') %></div>
+              <div><%= polyglot.t('NoDescriptionAdded') %></div>
             <% } %>
           </div>
         </div>
-
         <div style="width: 105px;">
-          <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-userShort">
-            <%= polyglot.t('Visit') %>
-            <span class="ion-chevron-right fontSize8 marginLeft2 textOpacity1"></span> 
-          </a>
+          <div>
+            <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 js-userShort">
+              <%= polyglot.t('Visit') %>
+              <span class="ion-chevron-right fontSize8 marginLeft2 textOpacity1"></span>
+            </a>
+          </div>
+          <% if(ob.isModerator){ %>
+          <div class="pull-right rowTop10 fontSize12 txt-fade">
+            <%= polyglot.t('ModeratorFee') %>: <%= ob.fee %>%
+          </div>
+          <% } %>
         </div>
       </div>
     </div>
