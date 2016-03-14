@@ -9621,7 +9621,7 @@ module.exports = Backbone.Model.extend({
         Description: "Descrição",
         Reviews: "Avaliações",
         Shipping: "Entrega",
-        ShippingReturns: "Shipping & Returns", //not translated
+        ShippingReturns: "Entrega & Devoluções",
         CountryOfOrigin: "País de Origem:",
         CanBeShippedTo: "Pode ser Enviado para Você Em:",
         Addresses: "Endereços",
@@ -9665,7 +9665,7 @@ module.exports = Backbone.Model.extend({
         Available: "Disponível",
         Type: "Tipo",
         Condition: "Condição",
-        NSFW: "18+ (conteúdo adulto)",
+        NSFW: "Conteúdo adulto (18+)",
         Select: "Selecionar",
         Social: "Social",
         Theme: "Tema",
@@ -9771,8 +9771,8 @@ module.exports = Backbone.Model.extend({
         maxLength200: "máx. de 200 caracteres",
         StoreModeratorsOptional: "Moderadores da Loja (Opcional)",
         Searchformoderators: "Procurar moderadores",
-        Contributors: "Contribuidores",
-        Support: "Suporte",
+        Contributors: "Colaboradores",
+        Support: "Apoias",
         Licensing: "Licença",
         On: "Ligado",
         Off: "Desligado",
@@ -9966,13 +9966,13 @@ module.exports = Backbone.Model.extend({
         },        
         aboutSection: {
           about: "<p>O OpenBazaar é uma rede de usuários que compram e vendem bens e serviços diretamente uns com os outros, utilizando Bitcoin. Essa rede é descentralizada e não é controlada por nenhuma organização.</p><p>O software tem código aberto e usa a licença MIT. Você pode ver o código no <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">Github</a>.</p><p>O OpenBazaar é um projeto feito por uma comunidade, e suas contribuições são bem-vindas em nosso canal <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> ou em nosso <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddit</a>.</p><p>Se você precisar de ajuda, leia o <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">Tutorial</a> do OpenBazaar versão 1.0.</p><p>Se você ainda tiver dúvidas, abra um chamado em nosso <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">suporte técnico</a>.</p>",
-          contributors: "<p>O OpenBazaar se tornou realidade graças a uma comunidade internacional de desenvolvedores e pessoas voluntárias que contribuíram o seu tempo para ajudar na missão de fazer com que o comércio seja livre. Essa é uma lista parcial das pessoas que contribuíram para o projeto, seja através de programação ou outro tipo de assistência.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-          support: "<p>Você pode ajudar o OpenBazzar de diversas maneiras em nossa missão de tornar o comércio livre.</p><p>Comprar e vender bens e serviços na rede ajuda com o crescimento da comunidade e torna a plataforma mais atraente para novos usuários. Solicitar educadamente às empresas que já aceitam Bitcoin para que elas vendam na plataforma ajuda a divulgar o projeto e demonstra uma demanda por comércio ponto a ponto.</p><p>Se você é um desenvolvedor, verifique <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">nosso Github</a> e veja onde você pode nos ajudar. Além de ajudar com o código do core, você pode construir novos serviços no topo da rede já existente. O nosso código é aberto e você pode criar à vontade usando nosso software e nossa rede, sem ter que pedir permissão para ninguém.</p><p>Você também pode <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">doar Bitcoins</a> para esse projeto, que serão usados para custear visitas a conferências, oferecer recompensas para desenvolvedores e divulgar o OpenBazaar.</p><p>Se você tem novas ideias para o OpenBazaar, ou tem dúvidas para serem respondidas pelos desenvolvedores do core, por favor <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">entre no nosso Slack</a>.</p>",
+          contributors: "<p>O OpenBazaar tornou-se realidade graças a uma comunidade internacional de desenvolvedores e pessoas voluntárias que contribuíram na missão de fazer com que o comércio seja livre. Essa é uma lista parcial das pessoas que contribuíram para o projeto, seja através de programação ou outro tipo de assistência.</p><ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
+          support: "<p>Você pode ajudar o OpenBazaar de diversas maneiras em nossa missão de tornar o comércio livre.</p><p>Comprar e vender bens e serviços na rede ajuda com o crescimento da comunidade e torna a plataforma mais atraente para novos usuários. Solicitar educadamente às empresas que já aceitam Bitcoin para que elas vendam na plataforma ajuda a divulgar o projeto e demonstra uma demanda por comércio ponto a ponto.</p><p>Se você é um desenvolvedor, verifique <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">nosso Github</a> e veja onde você pode nos ajudar. Além de ajudar com o código do core, você pode construir novos serviços no topo da rede já existente. O nosso código é aberto e você pode criar à vontade usando nosso software e nossa rede, sem ter que pedir permissão para ninguém.</p><p>Você também pode <a href=\"https://blockchain.info/address/3MXYUBLWNETa5HTewZp1xMTt7AW9kbFNqs\" target=\"_blank\">doar Bitcoins</a> para esse projeto, que serão usados para custear visitas a conferências, oferecer recompensas para desenvolvedores e divulgar o OpenBazaar.</p><p>Se você tem novas ideias para o OpenBazaar, ou tem dúvidas para serem respondidas pelos desenvolvedores do core, por favor <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">entre no nosso Slack</a>.</p>",
           licensing: "<p>O OpenBazaar é um software de código aberto sob a licença MIT. Essa licença é permissiva e é projetada para permitir que as pessoas reutilizem livremente o código para outros projetos de cógigo aberto ou para uso software de uso proprietário. O texto da licença completa está abaixo.</p><h4>A Licença MIT (MIT)</h4><h5>Copyright &#169 2016 Desenvolvedores do OpenBazaar</h5><p>A permissão é concedida, gratuitamente, para qualquer pessoa que obtenha uma cópia deste software e dos arquivos de documentação associados (o \"Software\"), para lidar com o Software sem restrição, incluindo, sem limitação dos direitos de uso, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do Software, e para permitir que as pessoas às quais o Software é fornecido a fazê-lo, mediante as seguintes condições:</p><p>O aviso de direito autoral acima e este aviso de permissão devem ser incluídos em todas as cópias ou partes substanciais do Software.</p><p>O SOFTWARE É FORNECIDO \"COMO ESTÁ\", SEM QUALQUER TIPO DE GARANTIA, EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO A, GARANTIAS DE COMERCIABILIDADE, ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU OS DETENTORES DOS DIREITOS AUTORAIS SE RESPONSABILIZARÃO POR QUALQUER RECLAMAÇÃO, DANOS OU QUALQUER OUTRA RESPONSABILIDADE, SEJA EM RAZÃO DE CONTRATO, ATO ILÍCITO OU DE OUTRA FORMA, RESULTANTES DE OU EM CONEXÃO COM O SOFTWARE OU A UTILIZAÇÃO OU OUTRAS NEGOCIAÇÕES NO SOFTWARE.</p><h4>Livrarias</h4><p>As seguintes livrarias são usadas no OpenBazaar:</p><ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>",
         },
         saveMessages: {
           Saved: "Salvo",
-          SaveSuccess: "Sua modificações foram salvas."
+          SaveSuccess: "Suas modificações foram salvas."
         },
         discover: {
           searchDefaultText: "Procurando na sua rede",
@@ -10064,7 +10064,7 @@ module.exports = Backbone.Model.extend({
         buyFlow: {
           PayForOrder: "Pagar o Pedido",
           NeedTempAddress: "Eu preciso de um endereço Bitcoin temporário",
-          NeedTempAddressHelper: "Por favor adicione aos favoritos essa url do seu endereço Bitcoin temporário",
+          NeedTempAddressHelper: "Por favor adicione aos seus favoritos essa URL do seu endereço Bitcoin temporário",
           CantFindAddress: "Não consigo encontrar meu endereço bitcoin",
           BitcoinWallet: "Carteira Bitcoin",
           ModeratedPaymentDescription: "O seu pagamento é mantido em uma carteira segura até que o vendedor cumpra a sua parte do acordo. Se surgir algum problema, um Moderador irá ajudar.",
