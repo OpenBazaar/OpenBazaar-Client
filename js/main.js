@@ -70,7 +70,12 @@ window.lang = user.get("language");
 window.polyglot = new Polyglot({locale: window.lang});
 
 (extendPolyglot = function(lang) {
-  window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
+  // Make sure the language exists in the languages model
+  if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
+    var language = require('./languages/' + window.lang + '.js');
+
+    window.polyglot.extend(language);
+  }
 })(window.lang);
 
 user.on('change:language', function(md, lang) {
