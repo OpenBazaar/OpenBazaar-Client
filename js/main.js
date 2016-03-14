@@ -72,7 +72,7 @@ window.polyglot = new Polyglot({locale: window.lang});
 (extendPolyglot = function(lang) {
   // Make sure the language exists in the languages model
   if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
-    var language = require('./languages/' + window.lang + '.js');
+    var language = require('./languages/' + window.lang + '.json');
 
     window.polyglot.extend(language);
   }
