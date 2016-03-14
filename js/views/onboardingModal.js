@@ -578,7 +578,6 @@ module.exports = baseModal.extend({
       // pre-select timezone
       var timeZoneOffset = new Date().getTimezoneOffset();
       timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
-      console.log(timeZoneOffset)
       var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
       selectedTimeZone.prop('checked', true);
       self.model.set('time_zone', selectedTimeZone.val());
