@@ -9772,7 +9772,7 @@ module.exports = Backbone.Model.extend({
         StoreModeratorsOptional: "Moderadores da Loja (Opcional)",
         Searchformoderators: "Procurar moderadores",
         Contributors: "Colaboradores",
-        Support: "Apoias",
+        Support: "Apoiar",
         Licensing: "Licença",
         On: "Ligado",
         Off: "Desligado",
