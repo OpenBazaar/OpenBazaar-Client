@@ -34,28 +34,27 @@ module.exports = baseVw.extend({
     }
 
     this.user = this.options.user;
+    this.fetch = this.options.initialFetch;
 
-    this.collection.fetch({
-      data: {
-        guid: this.model.get('guid')
-      },
-      reset: true
-    });
+    // this.collection.fetch({
+    //   data: {
+    //     guid: this.model.get('guid')
+    //   },
+    //   reset: true
+    // });
 
-    this.listenTo(this.collection, 'reset', () => {
-      this.renderMessages();
-    });
+    this.listenTo(this.collection, 'reset', this.render);
 
-    this.listenTo(this.collection, 'request', () => {
-      this.$messagesContainer.empty();
-      this.$loadingSpinner.removeClass('hide');
-    });
+    // this.listenTo(this.collection, 'request', () => {
+    //   this.$messagesContainer.empty();
+    //   this.$loadingSpinner.removeClass('hide');
+    // });
 
     this.listenTo(this.collection, 'add', (md) => {
       var el = this.$messagesScrollContainer[0],
           scolledToBot = el.scrollTop >= (el.scrollHeight - el.offsetHeight) - 5;
 
-      this.$msgWrap.append(
+      this.$messagesContainer.append(
         this.createMsg(md).render().el
       );
 
@@ -96,16 +95,8 @@ module.exports = baseVw.extend({
     return this.$msgTextArea;
   },
 
-  createMsg: function(md) {
-    var vw = new ChatMessageVw({
-      model: md,
-      user: this.user
-    });
-
-    this.msgViews.push(vw);
-    this.registerChild(vw);
-
-    return vw;
+  getScrollContainer: function() {
+    return this.$messagesScrollContainer[0];
   },
 
   closeConvoSettings: function() {
@@ -120,35 +111,33 @@ module.exports = baseVw.extend({
     this.user.blockUser(this.model.get('guid'));
   },
 
-  renderMessages: function() {
-    this.$msgWrap = $('<div />');
-
-    this.$loadingSpinner.addClass('hide');
-
-    if (this.msgViews) {
-      this.msgViews.forEach((vw, index) => {
-        vw.remove();
-      });
-    }
-
-    this.msgViews = [];
-
-    this.collection.forEach((md, index) => {
-      this.$msgWrap.append(
-        this.createMsg(md).render().el
-      );
+  createMsg: function(md) {
+    var vw = new ChatMessageVw({
+      model: md,
+      user: this.user
     });
 
-    this.$messagesContainer.html(this.$msgWrap);
-    this.$messagesScrollContainer[0].scrollTop = this.$messagesScrollContainer[0].scrollHeight;
-  },
+    this.msgViews.push(vw);
+    this.registerChild(vw);
+
+    return vw;
+  },  
 
   render: function() {
     loadTemplate('./js/templates/chatConversation.html', (tmpl) => {
+      var $msgWrap = $('<div />');
+
+      if (this.msgViews) {
+        this.msgViews.forEach((vw, index) => {
+          vw.remove();
+        });
+      }
+
+      this.msgViews = [];
+
       this.$el.html(
         tmpl(__.extend(this.model.toJSON(), {
-          serverUrl: app.serverConfig.getServerBaseUrl(),
-          moment: moment
+          messages: this.collection.toJSON()
         }))
       );
 
@@ -157,6 +146,21 @@ module.exports = baseVw.extend({
       this.$loadingSpinner = this.$messagesScrollContainer.find('.js-loadingSpinner');
       this.$messagesContainer = this.$messagesScrollContainer.find('.js-messagesContainer');
       this.$msgTextArea = this.$('textarea');
+
+      if (this.collection.length) {
+        this.collection.forEach((md) => {
+          $msgWrap.append(
+            this.createMsg(md).render().el
+          );
+        });
+
+        this.$messagesContainer.html($msgWrap);
+
+        setTimeout(() => {
+          this.$messagesScrollContainer[0].scrollTop = __.isNumber(this.options.initialScroll) ?
+            this.options.initialScroll : this.$messagesScrollContainer[0].scrollHeight;
+        }, 0);          
+      }
     });
 
     return this;
