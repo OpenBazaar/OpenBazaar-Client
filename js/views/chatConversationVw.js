@@ -71,19 +71,6 @@ module.exports = baseVw.extend({
       }
     });
 
-    // this.listenTo(this.collection, 'add', (md) => {
-    //   var el = this.$messagesScrollContainer[0],
-    //       scolledToBot = el.scrollTop >= (el.scrollHeight - el.offsetHeight) - 5;
-
-    //   this.$messagesContainer.append(
-    //     this.createMsg(md).render().el
-    //   );
-
-    //   if (scolledToBot) {
-    //     el.scrollTop = el.scrollHeight;
-    //   };
-    // });
-
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
     );    
@@ -231,13 +218,8 @@ module.exports = baseVw.extend({
           );
         });
 
-        // this.$messagesContainer.html($msgWrap);
-
         setTimeout(() => {
-          // this.$messagesScrollContainer[0].scrollTop = __.isNumber(this.options.initialScroll) ?
-          //   this.options.initialScroll : this.$messagesScrollContainer[0].scrollHeight;
-
-          this.addMessagesToDom($msgWrap);
+          this.addMessagesToDom($msgWrap, null, this.options.initialScroll);
         }, 0);          
       }
     });
