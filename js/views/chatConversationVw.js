@@ -46,18 +46,43 @@ module.exports = baseVw.extend({
       xhr.done(() => this.$loadingSpinner.addClass('hide'));
     });        
 
-    this.listenTo(this.collection, 'add', (md) => {
-      var el = this.$messagesScrollContainer[0],
-          scolledToBot = el.scrollTop >= (el.scrollHeight - el.offsetHeight) - 5;
+    this.listenTo(this.collection, 'update', (cl, options) => {
+      var $msgPage = $('<div />');
 
-      this.$messagesContainer.append(
-        this.createMsg(md).render().el
-      );
+      // we're assuming the only additions will either be a batch of
+      // models at the top (lazy loaded via scroll) -or- one new
+      // model at the bottom (new notification via socket) 
+      cl.forEach((md, index) => {
+        if (!md.viewCreated) {
+          if (cl.indexOf(md) === cl.length - 1) {
+            // new message via socket
+            this.addMessagesToDom(
+              this.createMsg(md).render().el
+            );            
+          } else {
+            // new page of messages
+            $msgPage.append(this.createMsg(md).render().el);
+          }
+        }
+      });
 
-      if (scolledToBot) {
-        el.scrollTop = el.scrollHeight;
-      };
+      if ($msgPage.children().length) {
+        this.addMessagesToDom($msgPage, true);
+      }
     });
+
+    // this.listenTo(this.collection, 'add', (md) => {
+    //   var el = this.$messagesScrollContainer[0],
+    //       scolledToBot = el.scrollTop >= (el.scrollHeight - el.offsetHeight) - 5;
+
+    //   this.$messagesContainer.append(
+    //     this.createMsg(md).render().el
+    //   );
+
+    //   if (scolledToBot) {
+    //     el.scrollTop = el.scrollHeight;
+    //   };
+    // });
 
     this.scrollHandler = __.bind(
         __.throttle(this.onScroll, 100), this
@@ -81,7 +106,8 @@ module.exports = baseVw.extend({
         data: {
           guid: this.model.get('guid'),
           start: startId,
-          limit: (typeof this.options.messagesPerFetch === 'undefined' ? this.MESSAGES_PER_FETCH : this.options.messagesPerFetch) + 1
+          // backend is hard-coding limit at 20 for now (SQLite issue)
+          limit: typeof this.options.messagesPerFetch === 'undefined' ? this.MESSAGES_PER_FETCH : this.options.messagesPerFetch
         }
       }).done(() => {
         if (this.collection.at(0).id === startId) {
@@ -144,11 +170,33 @@ module.exports = baseVw.extend({
       user: this.user
     });
 
+    md.viewCreated = true;
     this.msgViews.push(vw);
     this.registerChild(vw);
 
     return vw;
-  },  
+  },
+
+  addMessagesToDom: function($messages, prepend, scrollTop) {
+    var prevScroll = {},
+        $scroll = this.$messagesScrollContainer;
+
+    prevScroll.height = this.$messagesScrollContainer[0].scrollHeight;
+    prevScroll.top = this.$messagesScrollContainer[0].scrollTop;
+
+    if (!prepend) {
+      this.$messagesContainer.append($messages);
+
+      if (__.isNumber(scrollTop)) {
+        $scroll[0].scrollTop = scrollTop;  
+      } else if ($scroll[0].scrollTop <= $scroll[0].scrollHeight - 10) {
+        $scroll[0].scrollTop = $scroll[0].scrollHeight;
+      }
+    } else {
+      this.$messagesContainer.prepend($messages);
+      $scroll[0].scrollTop = prevScroll.top + ($scroll[0].scrollHeight - prevScroll.height);
+    }
+  },
 
   render: function() {
     loadTemplate('./js/templates/chatConversation.html', (tmpl) => {
@@ -183,11 +231,13 @@ module.exports = baseVw.extend({
           );
         });
 
-        this.$messagesContainer.html($msgWrap);
+        // this.$messagesContainer.html($msgWrap);
 
         setTimeout(() => {
-          this.$messagesScrollContainer[0].scrollTop = __.isNumber(this.options.initialScroll) ?
-            this.options.initialScroll : this.$messagesScrollContainer[0].scrollHeight;
+          // this.$messagesScrollContainer[0].scrollTop = __.isNumber(this.options.initialScroll) ?
+          //   this.options.initialScroll : this.$messagesScrollContainer[0].scrollHeight;
+
+          this.addMessagesToDom($msgWrap);
         }, 0);          
       }
     });

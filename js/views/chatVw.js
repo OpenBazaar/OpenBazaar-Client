@@ -169,7 +169,7 @@ module.exports = baseVw.extend({
         // so we can re-store if they return to the convo.
         if (
           this.chatConversationVw.getScrollContainer().scrollTop <=
-          this.chatConversationVw.getScrollContainer().scrollHeight - 20
+          this.chatConversationVw.getScrollContainer().scrollHeight - 10
         ) {
           this.chatMessagesCache[this.chatConversationVw.model.get('guid')].scrollPos =
             this.chatConversationVw.getScrollContainer().scrollTop;
