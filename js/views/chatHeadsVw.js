@@ -35,21 +35,6 @@ module.exports = baseVw.extend({
 
     if (cl) {
       this.collection = cl;
-
-      // this.listenTo(this.collection, 'add', (md, cl, opts) => {
-      //   this.$headContainer.prepend(
-      //     this.createChatHead(md).render().el
-      //   );
-      // });
-      
-      // this.listenTo(this.collection, 'remove', (md, cl, opts) => {
-      //   var vw = __.findWhere(this.chatHeadViews, { model: md });
-
-      //   if (vw) {
-      //     vw.remove();
-      //     this.chatHeadViews.splice(this.chatHeadViews.indexOf(vw), 1);
-      //   }
-      // });
     }
   },
 

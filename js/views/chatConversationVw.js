@@ -56,22 +56,6 @@ module.exports = baseVw.extend({
       var $msgPage = $('<div />'),
           md;
 
-      // we're assuming the only additions will either be a batch of
-      // models at the top (lazy loaded via scroll) -or- one new
-      // model at the bottom (new notification via socket)
-
-      // var notCreated = [];
-
-      // cl.forEach((md, index) => {
-      //   if (!md.viewCreated) notCreated.push(index);
-      // });
-
-      
-      // console.log(`not created: ${notCreated.join(', ')}`);
-      // console.log('====================================');
-      
-      // return;
-
       if (!cl.at(0).viewCreated) {
         // new page of messages
         cl.every((md) => {
@@ -83,11 +67,6 @@ module.exports = baseVw.extend({
         });
 
         this.addMessagesToDom($msgPage, true);
-      // } else if (!(md = cl.at(cl.length - 1)).viewCreated) {
-      //   // new socket message or via text area
-      //   this.addMessagesToDom(
-      //     this.createMsg(md).render().el
-      //   );
       } else {
         // new socket message or via text area
         __.filter(cl.models, (md) => {
@@ -98,30 +77,6 @@ module.exports = baseVw.extend({
           );
         });
       }
-
-      // cl.forEach((md, index) => {
-      //   if (!md.viewCreated) {
-      //     if (cl.indexOf(md) === 0) {
-      //       // new page of messages
-
-      //       console.log('nueva pagina');
-
-      //       $msgPage.append(this.createMsg(md).render().el);                        
-      //     } else {
-      //       // new message via socket
-
-      //       console.log('new socket rocket');
-            
-      //       this.addMessagesToDom(
-      //         this.createMsg(md).render().el
-      //       );
-      //     }
-      //   }
-      // });
-
-      // if ($msgPage.children().length) {
-      //   this.addMessagesToDom($msgPage, true);
-      // }
     });
 
     this.scrollHandler = __.bind(
