@@ -124,7 +124,7 @@
   "Changes": "Changes",
   "SaveChanges": "Save Changes",
   "YourName": "Your name",
-  "BitcoinAddress": "Bitcoin Addresss",
+  "BitcoinAddress": "Bitcoin Address",
   "BitcoinReturnAddress": "Enter your Bitcoin Address",
   "BitcoinReturnAddressPlaceholder": "Enter Bitcoin address...",
   "BitcoinReturnAddressInfo": "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
