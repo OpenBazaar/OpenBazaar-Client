@@ -13,7 +13,7 @@ module.exports = window.Backbone.Model.extend({
     attrs = attrs || {};
 
     if (attrs.type && ['msg', 'warning', 'confirmed', 'pending'].indexOf(attrs.type) === -1) {
-      err['type'] = 'Type must be "msg", "warning", "confirmed" or "pending"';
+      err['type'] = `Type must be 'msg', 'warning', 'confirmed', or 'pending'`;
     }
 
     if (attrs.duration && !__.isNumber(attrs.duration)) {
