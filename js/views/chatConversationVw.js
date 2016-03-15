@@ -189,16 +189,12 @@ module.exports = baseVw.extend({
     prevScroll.height = $scroll[0].scrollHeight;
     prevScroll.top = $scroll[0].scrollTop;
 
-    console.log('scream: ' + JSON.stringify(prevScroll));
-
     if (!prepend) {
       this.$messagesContainer.append($messages);
 
       if (__.isNumber(scrollTop)) {
-        console.log('charlie');
         $scroll[0].scrollTop = scrollTop;  
       } else if (prevScroll.top >= prevScroll.height - $scroll[0].clientHeight - 10) {
-        console.log('resetting to bot');
         $scroll[0].scrollTop = $scroll[0].scrollHeight;
       }
     } else {
