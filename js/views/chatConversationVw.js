@@ -19,7 +19,9 @@ module.exports = baseVw.extend({
     'click .js-clearConvo': 'onClearConvoClick'
   },
 
-  MESSAGES_PER_FETCH: 5,
+  // This is ignoered by the server. There is an issue with SQLite and
+  // it's using a hard-coded value of 20.
+  MESSAGES_PER_FETCH: 20,
 
   initialize: function(options) {
     this.options = options || {};
@@ -51,28 +53,75 @@ module.exports = baseVw.extend({
     });        
 
     this.listenTo(this.collection, 'update', (cl, options) => {
-      var $msgPage = $('<div />');
+      var $msgPage = $('<div />'),
+          md;
 
       // we're assuming the only additions will either be a batch of
       // models at the top (lazy loaded via scroll) -or- one new
-      // model at the bottom (new notification via socket) 
-      cl.forEach((md, index) => {
-        if (!md.viewCreated) {
-          if (cl.indexOf(md) === cl.length - 1) {
-            // new message via socket
-            this.addMessagesToDom(
-              this.createMsg(md).render().el
-            );            
-          } else {
-            // new page of messages
-            $msgPage.append(this.createMsg(md).render().el);
-          }
-        }
-      });
+      // model at the bottom (new notification via socket)
 
-      if ($msgPage.children().length) {
+      // var notCreated = [];
+
+      // cl.forEach((md, index) => {
+      //   if (!md.viewCreated) notCreated.push(index);
+      // });
+
+      
+      // console.log(`not created: ${notCreated.join(', ')}`);
+      // console.log('====================================');
+      
+      // return;
+
+      if (!cl.at(0).viewCreated) {
+        // new page of messages
+        cl.every((md) => {
+          var processed = md.viewCreated;
+
+          !processed && $msgPage.append(this.createMsg(md).render().el);
+
+          return !processed;
+        });
+
         this.addMessagesToDom($msgPage, true);
+      // } else if (!(md = cl.at(cl.length - 1)).viewCreated) {
+      //   // new socket message or via text area
+      //   this.addMessagesToDom(
+      //     this.createMsg(md).render().el
+      //   );
+      } else {
+        // new socket message or via text area
+        __.filter(cl.models, (md) => {
+          return !md.viewCreated;
+        }).forEach((md) => {
+          this.addMessagesToDom(
+            this.createMsg(md).render().el
+          );
+        });
       }
+
+      // cl.forEach((md, index) => {
+      //   if (!md.viewCreated) {
+      //     if (cl.indexOf(md) === 0) {
+      //       // new page of messages
+
+      //       console.log('nueva pagina');
+
+      //       $msgPage.append(this.createMsg(md).render().el);                        
+      //     } else {
+      //       // new message via socket
+
+      //       console.log('new socket rocket');
+            
+      //       this.addMessagesToDom(
+      //         this.createMsg(md).render().el
+      //       );
+      //     }
+      //   }
+      // });
+
+      // if ($msgPage.children().length) {
+      //   this.addMessagesToDom($msgPage, true);
+      // }
     });
 
     this.scrollHandler = __.bind(
