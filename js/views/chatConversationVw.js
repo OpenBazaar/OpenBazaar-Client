@@ -42,8 +42,11 @@ module.exports = baseVw.extend({
     this.listenTo(this.collection, 'reset', this.render);
 
     this.listenTo(this.collection, 'request', (cl, xhr, options) => {
+      var clLen = cl.length;
+
       this.fetch = xhr;
       this.$loadingSpinner.removeClass('hide');
+      
       xhr.done(() => this.$loadingSpinner.addClass('hide'));
     });        
 
@@ -183,15 +186,19 @@ module.exports = baseVw.extend({
     var prevScroll = {},
         $scroll = this.$messagesScrollContainer;
 
-    prevScroll.height = this.$messagesScrollContainer[0].scrollHeight;
-    prevScroll.top = this.$messagesScrollContainer[0].scrollTop;
+    prevScroll.height = $scroll[0].scrollHeight;
+    prevScroll.top = $scroll[0].scrollTop;
+
+    console.log('scream: ' + JSON.stringify(prevScroll));
 
     if (!prepend) {
       this.$messagesContainer.append($messages);
 
       if (__.isNumber(scrollTop)) {
+        console.log('charlie');
         $scroll[0].scrollTop = scrollTop;  
-      } else if ($scroll[0].scrollTop <= $scroll[0].scrollHeight - 10) {
+      } else if (prevScroll.top >= prevScroll.height - $scroll[0].clientHeight - 10) {
+        console.log('resetting to bot');
         $scroll[0].scrollTop = $scroll[0].scrollHeight;
       }
     } else {
@@ -234,7 +241,8 @@ module.exports = baseVw.extend({
         });
 
         setTimeout(() => {
-          this.addMessagesToDom($msgWrap, null, this.options.initialScroll);
+          this.addMessagesToDom($msgWrap, null,
+            __.isNumber(this.options.initialScroll) ? this.options.initialScroll : 9999);
         }, 0);          
       }
     });

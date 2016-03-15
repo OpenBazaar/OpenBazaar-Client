@@ -55,7 +55,7 @@ module.exports = baseVw.extend({
 
       if (!this.chatHeadsVw) {
         this.chatHeadsVw = new ChatHeadsVw({
-          collection: this.filterChatHeads(cl),
+          collection: this.filterChatHeads(false),
           parentEl: this.$chatHeadsContainer
         });
 
@@ -72,9 +72,6 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.chatConversationsCl, 'add remove', (md) => {
       this.filterChatHeads();
-      // if (this.filteredChatConvos) {
-      //   this.filteredChatConvos.add(md);
-      // };
     });
 
     this.listenTo(window.obEventBus, 'socketMessageReceived', (response) => {
@@ -94,9 +91,11 @@ module.exports = baseVw.extend({
     });
   },
 
-  filterChatHeads: function() {
+  filterChatHeads: function(render) {
     var searchText = this.$searchField.val(),
         guid;
+
+    render = typeof render === 'undefined' ? true : false;
 
     this.filteredChatConvos = new ChatConversationsCl(
       this.chatConversationsCl.filter((md) => {
@@ -110,7 +109,7 @@ module.exports = baseVw.extend({
       })
     );
 
-    if (this.chatHeadsVw) {
+    if (render && this.chatHeadsVw) {
       this.chatHeadsVw.setCollection(
         this.filteredChatConvos
       );
@@ -170,7 +169,8 @@ module.exports = baseVw.extend({
         // so we can re-store if they return to the convo.
         if (
           this.chatConversationVw.getScrollContainer().scrollTop <=
-          this.chatConversationVw.getScrollContainer().scrollHeight - 10
+          this.chatConversationVw.getScrollContainer().scrollHeight -
+          this.chatConversationVw.getScrollContainer().clientHeight - 10
         ) {
           this.chatMessagesCache[this.chatConversationVw.model.get('guid')].scrollPos =
             this.chatConversationVw.getScrollContainer().scrollTop;
@@ -287,11 +287,9 @@ module.exports = baseVw.extend({
     if (!msg) return;
 
     if (msg.message_type === 'CHAT') {
-      if (
-          this.chatConversationVw && msg.sender === this.chatConversationVw.model.get('guid') &&
-          this.isConvoOpen()
-        ) {
-        openlyChatting = true;
+      if (this.chatConversationVw && msg.sender === this.chatConversationVw.model.get('guid')) {
+        if (!this.isConvoOpen()) this.chatConversationVw.getScrollContainer().scrollTop = 999999;
+        if (this.isConvoOpen()) openlyChatting = true;
       }
 
       // if we've already been chatting with this person, update the messages cache

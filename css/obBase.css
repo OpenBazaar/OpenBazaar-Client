@@ -2116,6 +2116,8 @@ div.chatSearchOut .chatSearchIcon {
   padding: 7px 5px;
   border-bottom: solid 1px rgba(255,255,255,0.08);
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+  height: 200px;
+  border-bottom: 3px solid white;
 }
 
 .chatHead .thumbnail {

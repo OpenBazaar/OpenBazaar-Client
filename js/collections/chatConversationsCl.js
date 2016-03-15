@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
     app = require('../App.js').getApp(),
-    ChatConversationMd = require('../models/chatConversationMd');
+    ChatConversationMd = require('../models/chatConversationMd'),
+    __ = require('underscore');
 
 module.exports = Backbone.Collection.extend({
   url: function() {
@@ -11,8 +12,5 @@ module.exports = Backbone.Collection.extend({
 
   comparator: function(convo) {
     return -convo.get('timestamp');
-  },  
-
-  initialize: function(options) {
   }
 });
