@@ -154,6 +154,7 @@ module.exports = {
   Listing: "Listing",
   Listings: "Listings",
   ViewPage: "View page",
+  ClearConvo: "Clear conversation",
   Pages: "Pages",
   Page: "Page",
   Language: "Language",

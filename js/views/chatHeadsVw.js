@@ -17,12 +17,7 @@ module.exports = baseVw.extend({
       throw new Error('Please provide a parent element');
     }
 
-    this.listenTo(this.collection, 'add', (md, cl, opts) => {
-      this.$headContainer.prepend(
-        this.createChatHead(md).render().el
-      );
-    });
-
+    this.setCollection(this.collection);
     this.$chatHeadsContainer = options.parentEl;
     this.showPerScroll = 12;
 
@@ -34,8 +29,27 @@ module.exports = baseVw.extend({
   },
 
   setCollection: function(cl) {
+    if (this.collection) {
+      this.stopListening(this.collection);
+    }
+
     if (cl) {
       this.collection = cl;
+
+      this.listenTo(this.collection, 'add', (md, cl, opts) => {
+        this.$headContainer.prepend(
+          this.createChatHead(md).render().el
+        );
+      });
+      
+      this.listenTo(this.collection, 'remove', (md, cl, opts) => {
+        var vw = __.findWhere(this.chatHeadViews, { model: md });
+
+        if (vw) {
+          vw.remove();
+          this.chatHeadViews.splice(this.chatHeadViews.indexOf(vw), 1);
+        }
+      });
     }
   },
 

@@ -15,7 +15,8 @@ module.exports = baseVw.extend({
     'keyup textarea': 'onKeyupMessage',
     'click .js-conversationSettings': 'toggleConvoSettings',
     'click .chatConversationMenu': 'closeConvoSettings',
-    'click .js-blockUser': 'onBlockClick'
+    'click .js-blockUser': 'onBlockClick',
+    'click .js-clearConvo': 'onClearConvoClick'
   },
 
   MESSAGES_PER_FETCH: 5,
@@ -149,6 +150,20 @@ module.exports = baseVw.extend({
 
   onBlockClick: function() {
     this.user.blockUser(this.model.get('guid'));
+  },
+
+  onClearConvoClick: function() {
+    var formData = new FormData();
+
+    formData.append('guid', this.model.get('guid'));
+
+    $.ajax({
+      url: app.serverConfig.getServerBaseUrl() + '/chat_conversation?guid=' + this.model.get('guid'),
+      type: 'DELETE'
+    });
+
+    this.collection.reset();
+    this.trigger('clear-conversation');
   },
 
   createMsg: function(md) {

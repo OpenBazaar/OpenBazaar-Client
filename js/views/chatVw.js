@@ -70,10 +70,11 @@ module.exports = baseVw.extend({
       }
     });
 
-    this.listenTo(this.chatConversationsCl, 'add', (md) => {
-      if (this.filteredChatConvos) {
-        this.filteredChatConvos.add(md);
-      };
+    this.listenTo(this.chatConversationsCl, 'add remove', (md) => {
+      this.filterChatHeads();
+      // if (this.filteredChatConvos) {
+      //   this.filteredChatConvos.add(md);
+      // };
     });
 
     this.listenTo(window.obEventBus, 'socketMessageReceived', (response) => {
@@ -244,6 +245,13 @@ module.exports = baseVw.extend({
           timestamp: Date.now() / 1000
         });
       }
+    });
+
+    this.listenTo(this.chatConversationVw, 'clear-conversation', () => {
+      delete this.chatMessagesCache[model.get('guid')];
+      this.chatConversationsCl.remove(model.get('guid'));
+      this.chatConversationVw = null;
+      this.closeConversation();
     });
 
     this.$('.chatConversationContainer').html(
