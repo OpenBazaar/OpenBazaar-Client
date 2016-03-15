@@ -56,6 +56,7 @@ module.exports = Backbone.View.extend({
     'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
+    'change #handle': 'handleChange',
     'input #pgp_key': 'checkPGPKey'
   },
 
@@ -486,6 +487,13 @@ module.exports = Backbone.View.extend({
   validateInput: function(e) {
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
+  },
+
+  handleChange: function(e) {
+    var $field = $(e.target),
+        val = $field.val();
+
+    val && val.charAt(0) !== '@' && $field.val('@' + val);
   },
 
   addTabToHistory: function(state){
