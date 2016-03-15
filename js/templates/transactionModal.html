@@ -604,7 +604,7 @@
                 <strong><%- ob.shippingType %></strong>
               </div>
               <div class="noOverflow fontSize13 txt-fade marginTop4">
-                Shipped by:
+                <%= polyglot.t('transactions.ShippedBy') %>
                 <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>">
                   <% if(ob.vendor_offer.listing.id.blockchain_id){ %>
                     <%- ob.vendor_offer.listing.id.blockchain_id %>
