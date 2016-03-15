@@ -418,7 +418,11 @@
     "TotalInTransaction": "Transaction:",
     "StartDisputeFlag": "START DISPUTE",
     "CloseDisputeFlag": "END DISPUTE",
-    "PayoutOnlyBuyer": "Closing this dispute will return 100% of the funds to the buyer."
+    "PayoutOnlyBuyer": "Closing this dispute will return 100% of the funds to the buyer.",
+    "UpdatingOrder": "Updating your transaction",
+    "UpdateComplete": "Your transaction update is complete",
+    "UpdateFailed": "Your transaction update did not complete. Open the transaction and try again",
+    "UpdateInvalid": "Your transaction update returned invalid data. Open the transaction and try again"
   },
   "errorMessages": {
     "saveError": "Data could not be saved.",
