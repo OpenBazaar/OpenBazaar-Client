@@ -15,8 +15,13 @@ module.exports = baseVw.extend({
     'keyup textarea': 'onKeyupMessage',
     'click .js-conversationSettings': 'toggleConvoSettings',
     'click .chatConversationMenu': 'closeConvoSettings',
-    'click .js-blockUser': 'onBlockClick'
+    'click .js-blockUser': 'onBlockClick',
+    'click .js-clearConvo': 'onClearConvoClick'
   },
+
+  // This is ignoered by the server. There is an issue with SQLite and
+  // it's using a hard-coded value of 20.
+  MESSAGES_PER_FETCH: 20,
 
   initialize: function(options) {
     this.options = options || {};
@@ -34,35 +39,77 @@ module.exports = baseVw.extend({
     }
 
     this.user = this.options.user;
+    this.fetch = this.options.initialFetch;
 
-    this.collection.fetch({
-      data: {
-        guid: this.model.get('guid')
-      },
-      reset: true
-    });
+    this.listenTo(this.collection, 'reset', this.render);
 
-    this.listenTo(this.collection, 'reset', () => {
-      this.renderMessages();
-    });
+    this.listenTo(this.collection, 'request', (cl, xhr, options) => {
+      var clLen = cl.length;
 
-    this.listenTo(this.collection, 'request', () => {
-      this.$messagesContainer.empty();
+      this.fetch = xhr;
       this.$loadingSpinner.removeClass('hide');
+      
+      xhr.done(() => this.$loadingSpinner.addClass('hide'));
+    });        
+
+    this.listenTo(this.collection, 'update', (cl, options) => {
+      var $msgPage = $('<div />'),
+          md;
+
+      if (!cl.at(0).viewCreated) {
+        // new page of messages
+        cl.every((md) => {
+          var processed = md.viewCreated;
+
+          !processed && $msgPage.append(this.createMsg(md).render().el);
+
+          return !processed;
+        });
+
+        this.addMessagesToDom($msgPage, true);
+      } else {
+        // new socket message or via text area
+        __.filter(cl.models, (md) => {
+          return !md.viewCreated;
+        }).forEach((md) => {
+          this.addMessagesToDom(
+            this.createMsg(md).render().el
+          );
+        });
+      }
     });
 
-    this.listenTo(this.collection, 'add', (md) => {
-      var el = this.$messagesScrollContainer[0],
-          scolledToBot = el.scrollTop >= (el.scrollHeight - el.offsetHeight) - 5;
+    this.scrollHandler = __.bind(
+        __.throttle(this.onScroll, 100), this
+    );    
+  },
 
-      this.$msgWrap.append(
-        this.createMsg(md).render().el
-      );
+  onScroll: function(e) {
+    var startId;
 
-      if (scolledToBot) {
-        el.scrollTop = el.scrollHeight;
-      };
-    });
+    if (!this.collection.length) return;
+
+    startId = this.collection.at(0).id;
+
+    if (
+        !this.fetchedAll &&
+        !(this.fetch && this.fetch.state() === 'pending') &&
+        this.$messagesScrollContainer[0].scrollTop === 0
+      ) {
+      this.collection.fetch({
+        remove: false,
+        data: {
+          guid: this.model.get('guid'),
+          start: startId,
+          // backend is hard-coding limit at 20 for now (SQLite issue)
+          limit: typeof this.options.messagesPerFetch === 'undefined' ? this.MESSAGES_PER_FETCH : this.options.messagesPerFetch
+        }
+      }).done(() => {
+        if (this.collection.at(0).id === startId) {
+          this.fetchedAll = true;
+        }
+      });
+    }    
   },
 
   onClickClose: function() {
@@ -96,16 +143,8 @@ module.exports = baseVw.extend({
     return this.$msgTextArea;
   },
 
-  createMsg: function(md) {
-    var vw = new ChatMessageVw({
-      model: md,
-      user: this.user
-    });
-
-    this.msgViews.push(vw);
-    this.registerChild(vw);
-
-    return vw;
+  getScrollContainer: function() {
+    return this.$messagesScrollContainer[0];
   },
 
   closeConvoSettings: function() {
@@ -120,45 +159,100 @@ module.exports = baseVw.extend({
     this.user.blockUser(this.model.get('guid'));
   },
 
-  renderMessages: function() {
-    this.$msgWrap = $('<div />');
+  onClearConvoClick: function() {
+    var formData = new FormData();
 
-    this.$loadingSpinner.addClass('hide');
+    formData.append('guid', this.model.get('guid'));
 
-    if (this.msgViews) {
-      this.msgViews.forEach((vw, index) => {
-        vw.remove();
-      });
-    }
-
-    this.msgViews = [];
-
-    this.collection.forEach((md, index) => {
-      this.$msgWrap.append(
-        this.createMsg(md).render().el
-      );
+    $.ajax({
+      url: app.serverConfig.getServerBaseUrl() + '/chat_conversation?guid=' + this.model.get('guid'),
+      type: 'DELETE'
     });
 
-    this.$messagesContainer.html(this.$msgWrap);
-    this.$messagesScrollContainer[0].scrollTop = this.$messagesScrollContainer[0].scrollHeight;
+    this.collection.reset();
+    this.trigger('clear-conversation');
+  },
+
+  createMsg: function(md) {
+    var vw = new ChatMessageVw({
+      model: md,
+      user: this.user
+    });
+
+    md.viewCreated = true;
+    this.msgViews.push(vw);
+    this.registerChild(vw);
+
+    return vw;
+  },
+
+  addMessagesToDom: function($messages, prepend, scrollTop) {
+    var prevScroll = {},
+        $scroll = this.$messagesScrollContainer;
+
+    prevScroll.height = $scroll[0].scrollHeight;
+    prevScroll.top = $scroll[0].scrollTop;
+
+    if (!prepend) {
+      this.$messagesContainer.append($messages);
+
+      if (__.isNumber(scrollTop)) {
+        $scroll[0].scrollTop = scrollTop;  
+      } else if (prevScroll.top >= prevScroll.height - $scroll[0].clientHeight - 10) {
+        $scroll[0].scrollTop = $scroll[0].scrollHeight;
+      }
+    } else {
+      this.$messagesContainer.prepend($messages);
+      $scroll[0].scrollTop = prevScroll.top + ($scroll[0].scrollHeight - prevScroll.height);
+    }
   },
 
   render: function() {
     loadTemplate('./js/templates/chatConversation.html', (tmpl) => {
+      var $msgWrap = $('<div />');
+
+      if (this.msgViews) {
+        this.msgViews.forEach((vw, index) => {
+          vw.remove();
+        });
+      }
+
+      this.msgViews = [];
+
       this.$el.html(
         tmpl(__.extend(this.model.toJSON(), {
-          serverUrl: app.serverConfig.getServerBaseUrl(),
-          moment: moment
+          isFetching: this.fetch && this.fetch.state() === 'pending',
+          messages: this.collection.toJSON()
         }))
       );
 
       this.$('.chatConversationMessage textarea').focus()
       this.$messagesScrollContainer = this.$('.chatConversationContent');
+      this.$messagesScrollContainer.on('scroll', this.scrollHandler);
       this.$loadingSpinner = this.$messagesScrollContainer.find('.js-loadingSpinner');
       this.$messagesContainer = this.$messagesScrollContainer.find('.js-messagesContainer');
       this.$msgTextArea = this.$('textarea');
+
+      if (this.collection.length) {
+        this.collection.forEach((md) => {
+          $msgWrap.append(
+            this.createMsg(md).render().el
+          );
+        });
+
+        setTimeout(() => {
+          this.addMessagesToDom($msgWrap, null,
+            __.isNumber(this.options.initialScroll) ? this.options.initialScroll : 9999);
+        }, 0);          
+      }
     });
 
     return this;
-  }
+  },
+
+  remove: function() {
+    this.$scrollContainer && this.$scrollContainer.off('scroll', this.scrollHandler);
+
+    baseVw.prototype.remove.apply(this, arguments);    
+  }  
 });

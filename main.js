@@ -358,8 +358,13 @@ app.on('ready', function() {
     mainWindow = null;
 
     if(subpy) {
-      subpy.kill('SIGHUP');
+      if(platform == "mac" || platform == "linux") {
+        subpy.kill('SIGHUP');
+      } else {
+        require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
+      }
     }
+
   });
 
   mainWindow.on('close', function() {

@@ -11,6 +11,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
+    app = require('../App.js').getApp(),
     messageModal = require('../utils/messageModal'),
     discussionCl = require('../collections/discussionCl'),
     clipboard = require('clipboard');
@@ -310,18 +311,47 @@ module.exports = baseVw.extend({
   confirmOrder: function(e){
     var self = this,
         targetForm = this.$el.find('#transactionConfirmForm'),
-        confirmData = {};
+        confirmData = {},
+        confirmStatus;
 
     confirmData.id = this.orderID;
-    this.$('.js-transactionSpinner').removeClass('hide');
+    confirmStatus = app.statusBar.pushMessage({
+      type: 'pending',
+      msg: '<i>' + window.polyglot.t('transactions.UpdatingOrder') + '</i>',
+      duration: false
+    });
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
-      self.status = 2;
-      self.tabState = "summary";
-      self.getData();
-      }, '', confirmData, '', function(){
-      self.$('.js-transactionSpinner').addClass('hide');
+      confirmStatus.updateMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
+      });
+      setTimeout(function(){
+        confirmStatus && confirmStatus.remove();
+      },3000);
+      }, function(data){
+      //onFail
+      confirmStatus.updateMessage({
+        type: 'warning',
+        msg: '<i>' + window.polyglot.t('transactions.UpdateFailed') + '</i>',
+        duration: 3000
+      });
+      setTimeout(function(){
+        confirmStatus && confirmStatus.remove();
+      },3000);
+    }, confirmData, '', function(){
+      //onInvalid
+      confirmStatus.updateMessage({
+        type: 'warning',
+        msg: '<i>' + window.polyglot.t('transactions.UpdateInvalid') + '</i>',
+        duration: 3000
+      });
+      setTimeout(function(){
+        confirmStatus && confirmStatus.remove();
+      },3000);
     }, e);
+
+    this.closeModal();
   },
 
   completeOrder: function(e){
