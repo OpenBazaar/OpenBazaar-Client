@@ -1,7 +1,6 @@
 var Backbone = require('backbone'),
     app = require('../App.js').getApp(),
-    ChatConversationMd = require('../models/chatConversationMd'),
-    __ = require('underscore');
+    ChatConversationMd = require('../models/chatConversationMd');
 
 module.exports = Backbone.Collection.extend({
   url: function() {
