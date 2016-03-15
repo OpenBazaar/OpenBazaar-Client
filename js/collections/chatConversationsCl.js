@@ -11,8 +11,5 @@ module.exports = Backbone.Collection.extend({
 
   comparator: function(convo) {
     return -convo.get('timestamp');
-  },  
-
-  initialize: function(options) {
   }
 });
