@@ -5,7 +5,10 @@ var __ = require('underscore'),
 
 
 module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys, onInvalid, triggeringEvent) {
-  "use strict";
+  // TODO: obtain optional arguments via an options object with it being the last argument. This would
+  // prevent the user having to put a bunch of nulls if they only want to pass in one of the last
+  // optional args.
+  
   /* form[optional]: the form to pull data from, as a jQuery object
      modelJSON[optional]: model data in JSON format, any data not overwritten by the form will be added to the formData
      endPoint: the API endpoint, in string format, such as "settings"
