@@ -52,19 +52,6 @@ module.exports = Backbone.View.extend({
     if(selectedAddress){
       this.trigger("setAddress", selectedAddress);
     }
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
 
 });
