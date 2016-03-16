@@ -599,7 +599,7 @@ module.exports = Backbone.View.extend({
 
       self.setCurrentBitCoin(cCode);
       self.refreshView();
-    }, '','','','',e).fail((reason) => {
+    }, '','','','',e).fail(() => {
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#generalForm'));
     });
@@ -643,7 +643,7 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, "", pageData, skipKeys, '', e).fail((reason) => {
+      }, "", pageData, skipKeys, '', e).fail(() => {
         $(e.target).removeClass('loading');
         self.scrollToFirstError(self.$('#pageForm'));
       });
@@ -809,7 +809,7 @@ module.exports = Backbone.View.extend({
       });
 
       self.refreshView();
-    }, "", addressData,'','',e).fail((reason) => {
+    }, "", addressData,'','',e).fail(() => {
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#addressesForm'));
     });
@@ -834,7 +834,7 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, '', moderatorData,'','',e).fail((reason) => {
+    }, '', moderatorData,'','',e).fail(() => {
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#moderatorForm'));
     });
@@ -862,7 +862,7 @@ module.exports = Backbone.View.extend({
       },'','','','',e);
       
       self.refreshView();
-    }).fail((reason) => {
+    }).fail(() => {
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#advancedForm'));
     });
