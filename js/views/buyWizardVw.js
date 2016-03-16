@@ -496,7 +496,7 @@ module.exports = Backbone.View.extend({
     "use strict";
     var totalBTCPrice = 0,
         storeName = encodeURI(this.model.get('page').profile.name),
-        message = encodeURI(this.model.get('vendor_offer').listing.item.title + " "+data.order_id),
+        message = encodeURI(this.model.get('vendor_offer').listing.item.title.substring(1, 20) + " "+data.order_id),
         payHREF = "",
         dataURI;
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
