@@ -437,7 +437,6 @@ module.exports = baseVw.extend({
           self.updateImages();
         }else if (data.success === false){
           messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-          self.trigger('removeLoading');
         }
       },
       error: function(jqXHR, status, errorThrown){
@@ -539,7 +538,7 @@ module.exports = baseVw.extend({
     if(!shipsToInput.val() && !this.noShipping){
       this.$('.js-shipToWrapper').addClass('invalid');
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
-      return
+      return $.Deferred().reject('failed form validation').promise();
     }
 
     //add old and new image hashes
@@ -579,7 +578,7 @@ module.exports = baseVw.extend({
     this.$el.find('#contractForm').addClass('formChecked');
 
     if(this.checkFormValidity()){
-      $.ajax({
+      return $.ajax({
         type: "POST",
         url: self.model.get('serverUrl') + "contracts",
         contentType: false,
@@ -591,7 +590,6 @@ module.exports = baseVw.extend({
             self.trigger('saveNewDone', data.id);
           } else {
             messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-            self.trigger('removeLoading');
           }
         },
         error: function (jqXHR, status, errorThrown) {
@@ -609,7 +607,7 @@ module.exports = baseVw.extend({
         }
       });
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
-      e.stopPropagation(); //prevent original click from reaching delegated event on the body
+      return $.Deferred().reject('failed form validation').promise();
     }
   },
 

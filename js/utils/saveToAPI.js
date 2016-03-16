@@ -4,8 +4,11 @@ var __ = require('underscore'),
     messageModal = require('../utils/messageModal.js');
 
 
-module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys, onInvalid, triggeringEvent) {
-  "use strict";
+module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData, skipKeys, onInvalid) {
+  // TODO: obtain optional arguments via an options object with it being the last argument. This would
+  // prevent the user having to put a bunch of nulls if they only want to pass in one of the last
+  // optional args.
+  
   /* form[optional]: the form to pull data from, as a jQuery object
      modelJSON[optional]: model data in JSON format, any data not overwritten by the form will be added to the formData
      endPoint: the API endpoint, in string format, such as "settings"
@@ -13,7 +16,6 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
      onFail[optional]: a function to run on failure
      addData[optional]: insert this data into the formData object, must be an object
      skipKeys[optional]: keys to skip, and not send to the server
-     triggeringEvent[optional]: passed in event, so propagation can be cancelled if the save fails
    */
   var self = this,
       formData,
@@ -25,7 +27,6 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   if(form){
     form.addClass('formChecked');
     if (!form[0].checkValidity()){
-      triggeringEvent && triggeringEvent.stopPropagation();
       if(typeof onInvalid === 'function'){
         onInvalid();
       } else {
@@ -116,19 +117,16 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       if (data.success === true){
         typeof onSucceed === 'function' && onSucceed(data);
       }else if (data.success === false){
-        triggeringEvent && triggeringEvent.stopPropagation();
         if(onFail){
           onFail(data);
         } else{
           messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
         }
       } else {
-        triggeringEvent && triggeringEvent.stopPropagation();
         messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + window.polyglot.t('errorMessages.serverError') + "</i>");
       }
     },
     error: function(jqXHR, status, errorThrown){
-      triggeringEvent && triggeringEvent.stopPropagation();
       console.log(jqXHR);
       console.log(status);
       console.log(errorThrown);

@@ -523,9 +523,6 @@ module.exports = baseVw.extend({
       currentAddress = this.model.get('page').profile.guid;
     }
 
-    //clear loading buttons
-    this.$('.loader').removeClass('loading');
-
     window.obEventBus.trigger("setAddressBar", {'addressText': currentAddress, 'handle': currentHandle});
   },
 
@@ -918,7 +915,6 @@ module.exports = baseVw.extend({
     this.$('.js-list5').html(this.itemEditView.render().el);
     this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
-    this.listenTo(this.itemEditView, 'removeLoading', this.removeItemLoading);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
 
@@ -1306,10 +1302,6 @@ module.exports = baseVw.extend({
     this.fetchListings();
   },
 
-  removeItemLoading: function(){
-    this.$('.js-saveItem').removeClass('loading');
-  },
-
   cancelClick: function(){
     "use strict";
     this.setState(this.lastTab);
@@ -1368,9 +1360,15 @@ module.exports = baseVw.extend({
   },
 
   saveItem: function(e){
-    "use strict";
-    if(this.itemEditView){
-      this.itemEditView.saveChanges(e);
+    if(this.itemEditView) {
+      $(e.target).addClass('loading');
+      
+      this.itemEditView.saveChanges().always(() => $(e.target).removeClass('loading'))
+        .fail(() => {
+          var $firstErr = this.$('.js-itemEdit .invalid, .js-itemEdit :invalid').not('form').eq(0);
+
+          $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
+        });
     }
   },
 
@@ -1395,12 +1393,14 @@ module.exports = baseVw.extend({
     Backbone.history.loadUrl();
   },
 
-  followUserClick: function(){
-    this.followUser({'guid': this.pageID});
+  followUserClick: function(e){
+    $(e.target).addClass('loading');
+    this.followUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
   },
 
-  unfollowUserClick: function(){
-    this.unfollowUser({'guid': this.pageID});
+  unfollowUserClick: function(e){
+    $(e.target).addClass('loading');
+    this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
   },
 
   moreButtonsOwnPageClick: function(){
@@ -1423,10 +1423,9 @@ module.exports = baseVw.extend({
   },
 
   followUser: function(options){
-    "use strict";
     var self = this;
 
-    $.ajax({
+    return $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
@@ -1445,10 +1444,9 @@ module.exports = baseVw.extend({
   },
 
   unfollowUser: function(options){
-    "use strict";
     var self = this;
     
-    $.ajax({
+    return $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
