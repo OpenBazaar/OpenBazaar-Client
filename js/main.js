@@ -120,6 +120,24 @@ $('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescrip
   require("shell").openExternal(extUrl);
 });
 
+$(document).on('mouseenter',
+  `.js-userPageAboutSection a:not(.tooltip),
+   .js-item .js-description a:not(.tooltip)`,
+  function(e) {
+    console.log('boom selector what what');
+
+    $(this).attr({
+        'data-tooltip': $(this).attr('href'),
+        'data-href-tooltip': true
+      }).addClass('tooltip');
+  });
+
+$(document).on('mouseleave', 'a[data-href-tooltip]', function(e) {
+  $(this).removeAttr('data-tooltip')
+    .removeAttr('data-href-tooltip')
+    .removeClass('tooltip');
+});
+
 // add the loading class to any button with the loader class when it is clicked.
 // The view must remove the loading class when loading is complete.
 // If logic in the view should prevent the loading class, just use stopPropagation
