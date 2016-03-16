@@ -205,7 +205,7 @@ module.exports = baseVw.extend({
         payHREF,
         dataURI;
     if(this.model.get('buyer_order')){
-      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title;
+      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title.substring(1, 20);
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
@@ -359,6 +359,7 @@ module.exports = baseVw.extend({
         targetForm = this.$el.find('#transactionCompleteForm'),
         completeData = {};
 
+    $(e.target).addClass('loading');
     completeData.id = this.orderID;
     this.$el.find('.js-transactionSpinner').removeClass('hide');
 
@@ -372,7 +373,9 @@ module.exports = baseVw.extend({
           self.$el.find('.js-transactionSpinner').addClass('hide');
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
-        completeData, '', '', e);
+        completeData).always(() => {
+          $(e.target).removeClass('loading');
+        });
   },
 
   checkPayment: function(){
@@ -612,24 +615,34 @@ module.exports = baseVw.extend({
   acceptResolution: function(e){
     var self = this,
         resData = {};
+    
+    $(e.target).addClass('loading');
     resData.order_id = this.orderID;
+    
     saveToAPI(null, null, this.serverUrl + "release_funds", function(data){
       self.status = 6;
       self.tabState = "summary";
       self.getData();
-    },'', resData, '', '', e);
+    },'', resData).always(() => {
+      $(e.target).removeClass('loading');
+    });
   },
 
   refundOrder: function(e){
     //var targetForm = this.$('#transactionRefundForm'),
       var self = this,
           refData = {};
+
+    $(e.target).addClass('loading');
     refData.order_id = this.orderID;
+
     saveToAPI(null, null, this.serverUrl + "refund", function(data){
       self.status = 7;
       self.tabState = "summary";
       self.getData();
-    },'', refData, '', '', e);
+    },'', refData).always(() => {
+      $(e.target).removeClass('loading');
+    });
   },
 
   updateBuyerBTC: function(e) {

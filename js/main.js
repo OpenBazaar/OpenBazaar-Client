@@ -138,16 +138,8 @@ $(document).on('mouseleave', 'a[data-href-tooltip]', function(e) {
     .removeClass('tooltip');
 });
 
-// add the loading class to any button with the loader class when it is clicked.
-// The view must remove the loading class when loading is complete.
-// If logic in the view should prevent the loading class, just use stopPropagation
-$('body').on('click', '.loader', function(e){
-  $(e.target).closest('.loader').addClass("loading");
-});
-
 //record changes to the app state
 $(window).bind('hashchange', function(){
-  "use strict";
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
