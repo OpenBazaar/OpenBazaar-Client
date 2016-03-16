@@ -60,7 +60,7 @@
           <%= polyglot.t('transactions.MarkAsShipped') %>
         <% } %>         
       </a>
-      <a class="btn btn-txt custCol-secondary pull-left textOpacity1 loader js-refundTransaction tooltip" data-tooltip="Cancel order and release the funds back to the buyer" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+      <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransaction tooltip" data-tooltip="Cancel order and release the funds back to the buyer" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
         <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
         Refund Order
       </a>
@@ -75,7 +75,7 @@
     <% } else if(ob.status == 5 && ob.dispute_resolution){ %>
   <!-- needs code to tell if this user has a payout -->
     <div class="positionTop padding10 width100 custCol-primary">
-      <a class="btn btn-txt custCol-secondary pull-left row10 loader js-acceptResolution">
+      <a class="btn btn-txt custCol-secondary pull-left row10 js-acceptResolution">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('transactions.AcceptDisputeResolution') %>
       </a>
@@ -336,7 +336,7 @@
               <span><%= polyglot.t('transactions.RateThisTransaction') %></span>
             </div>    
             <div class="floatRight textOpacity1 marginLeft4">
-              <a class="btn btn-txt custCol-primary loader js-completeOrder">
+              <a class="btn btn-txt custCol-primary js-completeOrder">
                 <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
                 <%= polyglot.t('Save') %>
               </a>
