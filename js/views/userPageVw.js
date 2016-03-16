@@ -1541,7 +1541,7 @@ module.exports = baseVw.extend({
     this.$('.js-mainContainer').removeClass('blurMore');
   },
 
-  close: function(){
+  remove: function(){
     baseVw.prototype.remove.apply(this, arguments);
 
     // close colorbox to make sure the overlay doesnt remain open when going to a different page

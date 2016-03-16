@@ -163,11 +163,15 @@ module.exports = baseVw.extend({
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
       //add subviews
+      self.buyDetailsView && self.buyDetailsView.remove();
       self.buyDetailsView = new buyDetailsVw({model: self.model});
-      self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel});
-      self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
       self.registerChild(self.buyDetailsView);
+
+      self.buyAddressesView && self.buyAddressesView.remove();
+      self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel});
       self.registerChild(self.buyAddressesView);
+
+      self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
 
       //init the accordion
       self.initAccordion('.js-buyWizardAccordion');
