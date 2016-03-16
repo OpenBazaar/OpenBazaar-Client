@@ -30,8 +30,6 @@ module.exports = baseVw.extend({
     //don't render immediately, wait for the model to update itself with converted prices
     this.userModel = options.userModel;
     this.listenTo(this.model, 'change:priceSet', this.onPriceSet);
-    this.subViews = [];
-    this.subModels = [];
     this.activeTab = 'description';
     this.ratingCl = new RatingCl();
 
@@ -170,10 +168,11 @@ module.exports = baseVw.extend({
     var self = this,
         buyModel = new Backbone.Model();
     buyModel.set(this.model.attributes);
-    this.buyWizardView = new buyWizardVw({model:buyModel, parentEl: '#modalHolder', userModel: this.options.userModel});
-    this.subViews.push(this.buyWizardView);
-    this.subModels.push(buyModel);
-    $('#obContainer').addClass('overflowHidden').addClass('blur');  
+    this.buyWizardView = new buyWizardVw({model:buyModel, userModel: this.options.userModel});
+    this.registerChild(this.buyWizardView);
+    $('#modalHolder').html(this.buyWizardView.el); //add to DOM first, or accordion will have zero width when initialized
+    this.buyWizardView.render().el;
+    $('#obContainer').addClass('overflowHidden').addClass('blur');
   },
 
   clickItemRating: function(e) {

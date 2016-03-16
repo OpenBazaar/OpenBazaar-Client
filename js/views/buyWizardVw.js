@@ -3,6 +3,7 @@ var __ = require('underscore'),
     $ = require('jquery'),
     loadTemplate = require('../utils/loadTemplate'),
     countriesModel = require('../models/countriesMd'),
+    baseVw = require('./baseVw'),
     buyDetailsVw = require('./buyDetailsVw'),
     buyAddressesVw = require('./buyAddressesVw'),
     messageModal = require('../utils/messageModal.js'),
@@ -26,7 +27,7 @@ $.fn.randomize = function(selector){
     return this;
 };
 
-module.exports = Backbone.View.extend({
+module.exports = baseVw.extend({
 
   className: "buyView",
 
@@ -36,10 +37,12 @@ module.exports = Backbone.View.extend({
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
     'click .js-buyWizardModeratorRadio': 'modSelected',
     'click .js-buyWizardModNext': 'accNext',
+    'click .js-buyWizardModBack': 'modBack',
     'click .js-buyWizardReturnNext': 'returnNext',
     'click .js-buyWizardAddressBack': 'addressPrev',
     'click .js-buyWizardAddressNext': 'addressNext',
-    'click .js-buyWizardHasWallet': 'hasWallet',
+    'click .js-buyWizardWalletNext': 'walletNowClick',
+    'click .js-buyWizardHasWallet': 'hasWalletClick',
     'click .js-buyWizardDoesntHaveWallet': 'doesntHaveWallet',
     'click .js-buyWizardNewAddressCancel': 'hideNewAddress',
     'click .js-buyWizardNewAddressSave': 'saveNewAddress',
@@ -63,16 +66,12 @@ module.exports = Backbone.View.extend({
     this.options = options || {};
     /* expected options are:
     userModel: this is set by main.js, then by a call to the settings API.
-    parentEl: this is set by itemVw, and is the element this view is rendered into
     socketView: this is a reference to the socketView
      */
     this.userModel = this.options.userModel;
-    this.parentEl = $(options.parentEl);
     this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
-    this.subViews = [];
-    this.subModels = [];
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -90,8 +89,6 @@ module.exports = Backbone.View.extend({
 
     //make sure the model has a fresh copy of the user
     this.model.set('user', this.userModel.attributes);
-
-    this.render();
   },
 
   handleSocketMessage: function(response) {
@@ -165,14 +162,12 @@ module.exports = Backbone.View.extend({
     loadTemplate('./js/templates/buyWizard.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
-      //append the view to the passed in parent
-      self.parentEl.append(self.$el);
-
       //add subviews
       self.buyDetailsView = new buyDetailsVw({model: self.model});
       self.buyAddressesView = new buyAddressesVw({model: self.model, userModel: self.userModel});
       self.listenTo(self.buyAddressesView, 'setAddress', self.addressSelected);
-      self.subViews.push(self.buyDetailsView, self.buyAddressesView);
+      self.registerChild(self.buyDetailsView);
+      self.registerChild(self.buyAddressesView);
 
       //init the accordion
       self.initAccordion('.js-buyWizardAccordion');
@@ -252,13 +247,20 @@ module.exports = Backbone.View.extend({
     this.$el.find('.js-buyWizardAddressNext').removeClass('disabled');
   },
 
-  hasWallet: function(e){
-    "use strict";
+  hasWalletClick: function(e){
     this.accGoToID('#BuyWizardPaymentType');
   },
 
+  walletNowClick: function(){
+    this.accGoToID("#BuyWizardPaymentType");
+  },
+
+  modBack: function(){
+    this.accGoToID('#BuyWizardBitcoinWallet');
+  },
+
   doesntHaveWallet: function(e){
-    "use strict";
+    this.hasWallet = false;
     this.accNext();
   },
 
@@ -275,7 +277,7 @@ module.exports = Backbone.View.extend({
 
   changePaymentType: function(e) {
     "use strict";
-    var checked = $('[name="radioPaymentType"]:checked');
+    var checked = $(e.target);
 
     // uncheck prior selections
     $('.js-buyWizardModeratorRadio').prop('checked', false);
@@ -611,25 +613,10 @@ module.exports = Backbone.View.extend({
   },
 
   closeWizard: function() {
-    "use strict";
-    this.close();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
     if(this.buyRequest){
       this.buyRequest.abort();
     }
+    this.remove();
   }
-
 });

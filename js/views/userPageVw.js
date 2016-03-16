@@ -181,8 +181,6 @@ module.exports = baseVw.extend({
     this.userID = options.userModel.get('guid');
     this.userProfileFetchParameters = {};
     this.itemFetchParameters = {};
-    this.subViews = [];
-    this.subModels = [];
     this.model = new Backbone.Model();
     this.globalUserProfile = options.userProfile;
     this.userProfile = new userProfileModel();
@@ -194,7 +192,6 @@ module.exports = baseVw.extend({
     this.followers.urlRoot = options.userModel.get('serverUrl') + "get_followers";
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
-    this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
     this.socketView = options.socketView;
@@ -740,7 +737,7 @@ module.exports = baseVw.extend({
       userModel: this.options.userModel, 
       category: this.$el.find('.js-categories').val()
     });
-    this.subViews.push(this.itemList);
+    this.registerChild(this.itemList);
 
     this.$('.js-listingCount').html(model.length);
 
@@ -763,7 +760,7 @@ module.exports = baseVw.extend({
       serverUrl: this.options.userModel.get('serverUrl'),
       reverse: true
     });
-    this.subViews.push(this.followerList);
+    this.registerChild(this.followerList);
 
     this.$('.js-userFollowerCount').html(model.length);
 
@@ -794,7 +791,7 @@ module.exports = baseVw.extend({
       serverUrl: this.options.userModel.get('serverUrl'),
       reverse: true
     });
-    this.subViews.push(this.followingList);
+    this.registerChild(this.followingList);
     
     this.$('.js-userFollowingCount').html(model.length);
 
@@ -843,7 +840,7 @@ module.exports = baseVw.extend({
       this.itemView.undelegateEvents();
     }
     this.itemView = new itemVw({model:this.item, el: '.js-list4', userModel: self.options.userModel, socketView: this.socketView});
-    this.subViews.push(this.itemView);
+    this.registerChild(this.itemView);
     //set the parameters for the fetch
     if(this.options.ownPage === true){
       this.itemFetchParameters = $.param({'id': hash});
@@ -1385,8 +1382,7 @@ module.exports = baseVw.extend({
       socketView: this.socketView
     });
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
-    this.subViews.push(this.storeWizardView);
-    this.subModels.push(storeWizardModel);
+    this.registerChild(this.storeWizardView);
   },
 
   storeCreated: function() {
@@ -1476,7 +1472,7 @@ module.exports = baseVw.extend({
     var self = this;
 
     this.moderatorSettingsView = new moderatorSettingsVw({model:this.model, parentEl: '#modalHolder'});
-    this.subViews.push(this.moderatorSettingsView);
+    this.registerChild(this.moderatorSettingsView);
   },
 
   changeModeratorStatus: function(status, fee){
@@ -1546,22 +1542,7 @@ module.exports = baseVw.extend({
   },
 
   close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
-    this.model.off();
-    this.off();
-    this.remove();
+    baseVw.prototype.remove.apply(this, arguments);
 
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();

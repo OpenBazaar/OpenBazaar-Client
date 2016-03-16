@@ -263,7 +263,7 @@
                 <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
                 <%= polyglot.t('Back') %>
               </a>
-              <a class="btn btn-bar btn-half js-buyWizardModNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
+              <a class="btn btn-bar btn-half js-buyWizardWalletNext custCol-secondary custCol-border-primary borderBottomRightRaidus3">
                 <%= polyglot.t('IHaveAWalletNow') %>
                 <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
               </a>
@@ -364,14 +364,14 @@
           </div>
           <div class="bar barFlush custCol-secondary borderBottomLeftRaidus3 borderBottomRightRaidus3">
              <% if(ob.user.refund_address === ""){ %>
-              <a class="btn btn-bar btn-half js-accordionPrev custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border-primary">
+              <a class="btn btn-bar btn-half js-buyWizardModBack custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border-primary">
                 <span class="ion-chevron-left fontSize10 marginRight2 textOpacity75"></span>
                 <%= polyglot.t('Back') %>
               </a>
             <% }else{ %>
               <a class="btn btn-bar btn-half js-closeBuyWizardModal custCol-secondary borderBottomLeftRaidus3 borderRight custCol-border"><%= polyglot.t('Cancel') %></a>
             <% } %>
-            <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators && ob.vendor_offer.listing.moderators.length > 0){ %>disabled<% } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3  borderRight custCol-border">
+            <a class="btn btn-bar btn-half js-buyWizardModNext <% if(ob.vendor_offer.listing.moderators != null && ob.vendor_offer.listing.moderators.length > 0){ print('disabled'); } %> custCol-secondary custCol-border-primary borderBottomRightRaidus3  borderRight custCol-border">
               <%= polyglot.t('Next') %>
               <span class="ion-chevron-right fontSize10 marginLeft2 textOpacity75"></span>
             </a>
