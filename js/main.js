@@ -124,8 +124,6 @@ $(document).on('mouseenter',
   `.js-userPageAboutSection a:not(.tooltip),
    .js-item .js-description a:not(.tooltip)`,
   function(e) {
-    console.log('boom selector what what');
-
     $(this).attr({
         'data-tooltip': $(this).attr('href'),
         'data-href-tooltip': true
