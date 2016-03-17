@@ -120,6 +120,22 @@ $('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescrip
   require("shell").openExternal(extUrl);
 });
 
+$(document).on('mouseenter',
+  `.js-userPageAboutSection a:not(.tooltip),
+   .js-item .js-description a:not(.tooltip)`,
+  function(e) {
+    $(this).attr({
+        'data-tooltip': $(this).attr('href'),
+        'data-href-tooltip': true
+      }).addClass('tooltip');
+  });
+
+$(document).on('mouseleave', 'a[data-href-tooltip]', function(e) {
+  $(this).removeAttr('data-tooltip')
+    .removeAttr('data-href-tooltip')
+    .removeClass('tooltip');
+});
+
 //record changes to the app state
 $(window).bind('hashchange', function(){
   localStorage.setItem('route', Backbone.history.getFragment());
