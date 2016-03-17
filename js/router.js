@@ -27,7 +27,7 @@ module.exports = Backbone.Router.extend({
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
       ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
-      ["transactions/:state", "transactions"],
+      ["transactions/:state(/:orderID)", "transactions"],
       ["settings", "settings"],
       ["settings/:state", "settings"],
       ["about", "about"],
@@ -273,14 +273,15 @@ module.exports = Backbone.Router.extend({
     });
   },
 
-  transactions: function(state){
+  transactions: function(state, orderID){
     "use strict";
     this.cleanup();
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state
+      state: state,
+      orderID: orderID
     }),"userPage");
   },
 
