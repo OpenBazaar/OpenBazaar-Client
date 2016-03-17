@@ -29,7 +29,9 @@ function App() {
   this.connectHeartbeatSocket();
   
   $(window).blur(() => {
-    this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
+    setTimeout(() => {
+      this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
+    }, 0);
   });
 
   $(window).focus(() => {

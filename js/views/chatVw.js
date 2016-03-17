@@ -51,8 +51,6 @@ module.exports = baseVw.extend({
             filteredMd && filteredMd.set(md.attributes);
           }
 
-          console.log('foo');
-          window.foo = md.changedAttributes();
           md.hasChanged('unread') && this.setAggregateUnreadCount();          
         });
       });
@@ -77,6 +75,7 @@ module.exports = baseVw.extend({
     });
 
     this.listenTo(this.chatConversationsCl, 'add remove', (md) => {
+      this.setAggregateUnreadCount();
       this.filterChatHeads();
     });
 
@@ -97,6 +96,11 @@ module.exports = baseVw.extend({
       this.setAggregateUnreadCount();
       this.filterChatHeads();
     });
+
+    $(window).focus(() => {
+      this.chatConversationVw && this.isConvoOpen() &&
+        this.markConvoAsRead(this.chatConversationVw.model.get('guid'));
+    });    
   },
 
   setAggregateUnreadCount: function() {
@@ -108,7 +112,6 @@ module.exports = baseVw.extend({
       }
     });
 
-    console.log('gonna set chat with ' + unread);
     app.setUnreadChatMessageCount(unread);
   },
 
@@ -171,10 +174,11 @@ module.exports = baseVw.extend({
     this.slideOut();
 
     // mark as read
-    $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
+    // $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
+    this.markConvoAsRead(model.get('guid'));
 
     // mark as read on chat head
-    if (convoMd = this.chatConversationsCl.findWhere({ guid: model.get('guid') })) {
+    if (convoMd = this.chatConversationsCl.get(model.get('guid'))) {
       convoMd.set('unread', 0);
     }
 
@@ -333,16 +337,17 @@ module.exports = baseVw.extend({
       }
 
       // update chat head
-      if (conversationMd = this.chatConversationsCl.findWhere({ guid: msg.sender })) {
+      if (conversationMd = this.chatConversationsCl.get(msg.sender)) {
         conversationMd.set({
           last_message: msg.message,
-          unread: openlyChatting ? 0 : conversationMd.get('unread') + 1,
+          unread: openlyChatting && document.hasFocus() ? 0 : conversationMd.get('unread') + 1,
           timestamp: msg.timestamp,
           avatar_hash: msg.avatar_hash
         });
 
         if (openlyChatting) {
-          $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
+          // $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
+          this.markConvoAsRead(msg.sender);
         }
       } else {
         this.chatConversationsCl.add({
@@ -374,6 +379,18 @@ module.exports = baseVw.extend({
       });
 
       app.playNotificationSound();
+    }
+  },
+
+  markConvoAsRead: function(guid) {
+    var chatHead = this.chatConversationsCl.get(guid);
+
+    if (!guid) return;
+
+    if (document.hasFocus() && chatHead && chatHead.get('unread')) {
+      $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: guid});
+      chatHead.set('unread', 0);
+      this.setAggregateUnreadCount()
     }
   },
 
