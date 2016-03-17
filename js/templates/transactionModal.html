@@ -69,7 +69,10 @@
     <div class="positionTop padding10 width100">
       <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+        <% if ob.status == 2 { %>
         <%= polyglot.t('transactions.CompleteOrder') %>
+        <% } else { %>
+        <%= polyglot.t('transactions.LeaveReview') %>
       </a>
     </div>
     <% } else if(ob.status == 5 && ob.dispute_resolution){ %>
@@ -983,7 +986,7 @@
             <div class="js-startDisputeFlag">
               <input type="checkbox" class="fieldItem"
                      id="transactionStartDisputeCheckbox" >
-              <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable compact">
+              <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable compact marginRight2">
                 <%= polyglot.t('transactions.DisputeTransaction') %>
                 <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box"
                    data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
