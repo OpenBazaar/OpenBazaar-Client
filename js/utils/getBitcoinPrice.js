@@ -21,7 +21,7 @@ module.exports = function (currency, callback) {
     }
 
     window.btcAverages = window.btcAverages || {};
-
+/*
     var callBlockchain = function () {
         $.ajax({
             method: "GET",
@@ -115,6 +115,27 @@ module.exports = function (currency, callback) {
                 makeAveragePrice();
             });
     };
+    */
+
+    var getBTCPrices = function(){
+      $.ajax({
+        url: app.serverConfig.getServerBaseUrl() + '/btc_price',
+        dataType: 'json',
+            data: $.param({'currency': 'USD'})
+      })
+      .done(function(data, textStatus, jqXHR){
+        console.log(data)
+        console.log(jqXHR)
+        btPrices.push(BitcoinChartsCurrencies);
+      })
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        logAPIErrorInfo("Call to btc_price", jqXHR, textStatus, errorThrown);
+      })
+      .always(function () {
+        makeAveragePrice();
+      });
+
+    };
 
     if(currency == "BTC" && window.currencyKeys) {
         typeof callback === 'function' && callback(1, window.currencyKeys);
@@ -123,7 +144,8 @@ module.exports = function (currency, callback) {
         && window.currencyKeys) {
         typeof callback === 'function' && callback(window.btcAverages.rates[currency], window.currencyKeys);
     } else {
-        callBlockchain();
+        //callBlockchain();
+        getBTCPrices();
     }
 
     var makeAveragePrice = function () {
