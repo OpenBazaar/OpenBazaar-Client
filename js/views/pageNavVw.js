@@ -324,6 +324,8 @@ module.exports = baseVw.extend({
   setNotificationCount: function(count){
     if (isNaN(parseInt(count))) return;
 
+    app.setUnreadNotifCount(count);
+
     if (count > 99) {
       count = '..';
     }

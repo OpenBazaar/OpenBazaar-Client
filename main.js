@@ -406,7 +406,6 @@ app.on('ready', function() {
 });
 
 ipcMain.on('set-badge', function(event, text) {
-  // typeof text === 'string' && app.dock.setBadge(text);
   typeof text !== 'undefined' && app.dock.setBadge(String(text));
 });
 

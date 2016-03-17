@@ -50,6 +50,10 @@ module.exports = baseVw.extend({
             filteredMd = this.filteredChatConvos.findWhere({ guid: md.get('guid') });
             filteredMd && filteredMd.set(md.attributes);
           }
+
+          console.log('foo');
+          window.foo = md.changedAttributes();
+          md.hasChanged('unread') && this.setAggregateUnreadCount();          
         });
       });
 
@@ -68,6 +72,8 @@ module.exports = baseVw.extend({
       } else {
         this.filterChatHeads();
       }
+
+      this.setAggregateUnreadCount();
     });
 
     this.listenTo(this.chatConversationsCl, 'add remove', (md) => {
@@ -79,6 +85,7 @@ module.exports = baseVw.extend({
     });    
 
     this.listenTo(window.obEventBus, 'blockingUser', (e) => {
+      this.setAggregateUnreadCount();
       this.filterChatHeads();
 
       if (this.chatConversationVw && this.chatConversationVw.model.get('guid') === e.guid) {
@@ -87,8 +94,22 @@ module.exports = baseVw.extend({
     });    
 
     this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
+      this.setAggregateUnreadCount();
       this.filterChatHeads();
     });
+  },
+
+  setAggregateUnreadCount: function() {
+    var unread = 0;
+
+    this.chatConversationsCl.forEach((md) => {
+      if (!this.model.isBlocked(md.id)) {
+        unread += md.get('unread');
+      }
+    });
+
+    console.log('gonna set chat with ' + unread);
+    app.setUnreadChatMessageCount(unread);
   },
 
   filterChatHeads: function(render) {

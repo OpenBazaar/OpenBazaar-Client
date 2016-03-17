@@ -12,6 +12,8 @@ function App() {
 
   _app = this;
   this._awayCounts = null;
+  this._notifUnread = 0;
+  this._chatMessagesUnread = 0;
 
   // TODO: what is wrong with the localStorage adapter??? shouldn't need
   // to manually provide the data to the model. All that should be needed
@@ -27,16 +29,12 @@ function App() {
   this.connectHeartbeatSocket();
   
   $(window).blur(() => {
-    this._awayCounts !== null && ipcRenderer.send('set-badge', this._awayCounts);
+    this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
   });
 
   $(window).focus(() => {
     ipcRenderer.send('set-badge', '');
   });
-
-  setInterval(() => {
-    this.setUnreadChatMessageCount(Math.round(Math.random() * 1000));
-  }, 1000);  
 }
 
 App.prototype.connectHeartbeatSocket = function() {
@@ -126,11 +124,11 @@ App.prototype.hideOverlay = function() {
 };
 
 App.prototype.setUnreadCounts = function(notif, chat) {
-  notif = typeof notif === 'number' ? notif : 0;
-  chat = typeof chat === 'number' ? chat : 0;
+  this._notifUnread = typeof notif === 'number' ? notif : this._notifUnread;
+  this._chatMessagesUnread = typeof chat === 'number' ? chat : this._chatMessagesUnread;
 
-  this._awayCounts = notif + chat;
-  !document.hasFocus() && ipcRenderer.send('set-badge', this._awayCounts);
+  this._awayCounts = this._notifUnread + this._chatMessagesUnread;
+  !document.hasFocus() && this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
 };
 
 App.prototype.setUnreadNotifCount = function(count) {
