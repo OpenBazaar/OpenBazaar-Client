@@ -1,4 +1,6 @@
-var Socket = require('./utils/Socket'),
+var ipcRenderer = require('ipc-renderer'),
+    Socket = require('./utils/Socket'),
+    $ = require('jquery'),
     ServerConfigMd = require('./models/serverConfigMd'),
     _app;
 
@@ -9,6 +11,7 @@ function App() {
   if (_app) return _app;
 
   _app = this;
+  this._awayCounts = null;
 
   // TODO: what is wrong with the localStorage adapter??? shouldn't need
   // to manually provide the data to the model. All that should be needed
@@ -22,6 +25,18 @@ function App() {
   }  
 
   this.connectHeartbeatSocket();
+  
+  $(window).blur(() => {
+    this._awayCounts !== null && ipcRenderer.send('set-badge', this._awayCounts);
+  });
+
+  $(window).focus(() => {
+    ipcRenderer.send('set-badge', '');
+  });
+
+  setInterval(() => {
+    this.setUnreadChatMessageCount(Math.round(Math.random() * 1000));
+  }, 1000);  
 }
 
 App.prototype.connectHeartbeatSocket = function() {
@@ -98,17 +113,37 @@ App.prototype.playNotificationSound = function() {
   }
 
   this._notificationSound.play();
-},
+};
 
 App.prototype.showOverlay = function() {
   this._$overlay = this._$overlay || $('#overlay');
   this._$overlay.removeClass('hide');
-},
+};
 
 App.prototype.hideOverlay = function() {
   this._$overlay = this._$overlay || $('#overlay');
   this._$overlay.addClass('hide');
-},
+};
+
+App.prototype.setUnreadCounts = function(notif, chat) {
+  notif = typeof notif === 'number' ? notif : 0;
+  chat = typeof chat === 'number' ? chat : 0;
+
+  this._awayCounts = notif + chat;
+  !document.hasFocus() && ipcRenderer.send('set-badge', this._awayCounts);
+};
+
+App.prototype.setUnreadNotifCount = function(count) {
+  if (typeof count !== 'undefined' && count !== null) {
+    this.setUnreadCounts(parseInt(count));
+  }
+};
+
+App.prototype.setUnreadChatMessageCount = function(count) {
+  if (typeof count !== 'undefined' && count !== null) {
+    this.setUnreadCounts(null, parseInt(count));
+  }
+};
 
 App.getApp = function() {
   if (!_app) {
