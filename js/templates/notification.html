@@ -67,7 +67,7 @@
                             <% }else{ %>
                                 <span class="noOverflow width91 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
-                            </span><%= polyglot.t('NotificationFollow') %>.
+                            </span><%= polyglot.t('NotificationFollow') %>
                         </div>
                         <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "refund") { %>
@@ -78,7 +78,7 @@
                             <% }else{ %>
                                 <span class="noOverflow width91 inlineBlock top3  tooltip hoverUnderline" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
                             <% } %>
-                            </span> <%= polyglot.t('NotificationRefund') %>.
+                            </span> <%= polyglot.t('NotificationRefund') %>
                     </div>
                     <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% }  else { %>
