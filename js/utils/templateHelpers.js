@@ -11,6 +11,11 @@ function cssImageUrl(hash, guid, fallback) {
     if (fallback) url +=  ', '
   }
 
+  if (!hash && guid) {
+    url = `url(${localStorage.getItem('userAvatar-'+guid)})`;
+    if (fallback) url +=  ', '
+  }
+
   if (fallback) {
     url += `url(${fallback})`;
   }

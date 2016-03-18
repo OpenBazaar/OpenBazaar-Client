@@ -138,8 +138,6 @@ module.exports = baseVw.extend({
     var self = this;
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
-    this.model.set('vendorAvatarURL', localStorage.getItem('userAvatar-'+this.model.get('vendor_offer').listing.id.guid));
-    this.model.set('buyerAvatarURL', localStorage.getItem('userAvatar-'+this.model.get('buyer_order').order.id.guid));
     //makde sure data is valid
     if(this.model.get('invalidData')){
       messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
