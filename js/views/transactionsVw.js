@@ -152,6 +152,7 @@ module.exports = baseVw.extend({
       self.setState(self.state);
       self.getData();
     });
+    $('.js-mainSearchWrapper').removeClass('onPage');
   },
 
   setTab: function(activeTab, showContent){

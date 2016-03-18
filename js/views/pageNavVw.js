@@ -35,6 +35,8 @@ module.exports = baseVw.extend({
     'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
+    'mouseleave .js-navAddressBar': 'addressBarMouseLeave',
+    'blur .js-navAddressBar': 'addressBarBlur',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
     'blur input': 'validateInput',
@@ -238,7 +240,12 @@ module.exports = baseVw.extend({
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
         
-        text = text ? 'ob://' + text : '';
+        // if the address bar input is focused, we need to display the ob:// prefix
+        if(this.addressInput.is(":focus")){        
+          text = text ? 'ob://' + text : '';
+        }else{
+          text = text ? text : '';
+        }
         self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
@@ -463,10 +470,33 @@ module.exports = baseVw.extend({
   },
 
   addressBarFocus: function(e){
+    var barText = this.addressInput.val();
+
+    // on mouseEnter of the address bar input display the ob:// prefix if it doesn't already exist
+    if(barText !== '' && !barText.startsWith('ob://')){
+      this.addressInput.val('ob://' + barText);
+    }
+
     // on inital focus of input, select all text (this makes it easier to copy or delete the text)
     $(e.target).one('mouseup', function () {
       $('#addressBar').select();
     });
+  },
+
+  addressBarMouseLeave: function(e){
+    var barText = this.addressInput.val();
+
+    // on mouseLeave of the address bar input, if the input is not still selected, remove the ob:// prefix if it still 
+    if(!this.addressInput.is(":focus")){
+      this.addressInput.val(barText.replace('ob://', ''));
+    }
+  },
+
+  addressBarBlur: function(e){
+    var barText = this.addressInput.val();
+
+    // on blur of the address bar input remove the ob:// prefix
+    this.addressInput.val(barText.replace('ob://', ''));
   },
 
   addressBarKeyup: function(e){

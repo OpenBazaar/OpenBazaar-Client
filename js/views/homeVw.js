@@ -173,6 +173,8 @@ module.exports = baseVw.extend({
         $('#obContainer').scrollTop(0);
       }
     });
+    
+    $('.js-mainSearchWrapper').removeClass('onPage');
   },
 
   renderItem: function(item){
