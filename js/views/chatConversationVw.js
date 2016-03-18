@@ -114,6 +114,9 @@ module.exports = baseVw.extend({
 
   onClickClose: function() {
     this.trigger('close-click');
+    
+    //remove any existing selected state
+    self.$('.chatHead').parent().removeClass('chatHeadSelected');
   },
 
   onKeydownMessage: function(e) {

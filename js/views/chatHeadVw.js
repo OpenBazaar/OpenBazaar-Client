@@ -21,6 +21,12 @@ module.exports = baseVw.extend({
 
   chatHeadClick: function() {
     this.trigger('click', this);
+
+    //remove any existing selected state
+    self.$('.chatHead').parent().removeClass('chatHeadSelected');
+
+    //add selected state
+    this.$el.addClass('chatHeadSelected');
   },
 
   render: function() {

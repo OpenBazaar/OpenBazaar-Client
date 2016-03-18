@@ -390,6 +390,9 @@ module.exports = baseVw.extend({
         .removeClass('hide')
         .find('span')
         .addClass('hide');
+
+    //remove any existing selected state
+    self.$('.chatHead').parent().removeClass('chatHeadSelected');
   },      
 
   remove: function() {
