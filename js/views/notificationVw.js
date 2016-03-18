@@ -25,16 +25,19 @@ module.exports = baseVw.extend({
         Backbone.history.navigate('#userPage/'+ this.model.get('guid') + '/store', {trigger: true});
         break;
       case "new order":
-        Backbone.history.navigate('#transactions', {trigger: true});
+        Backbone.history.navigate('#transactions/sales/' + this.model.get('order_id'), {trigger: true});
         break;
       case "dispute_open":
-        Backbone.history.navigate('#transactions', {trigger: true});
+        Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
         break;
       case "payment received":
-        Backbone.history.navigate('#transactions', {trigger: true});
+        Backbone.history.navigate('#transactions/sales/' + this.model.get('order_id'), {trigger: true});
         break;
       case "order confirmation":
-        Backbone.history.navigate('#transactions', {trigger: true});
+        Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
+        break;
+      case "rating received":
+        Backbone.history.navigate('#transactions/sales/' + this.model.get('order_id'), {trigger: true});
         break;
     }
 
