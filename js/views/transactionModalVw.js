@@ -69,7 +69,6 @@ module.exports = baseVw.extend({
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
-    this.pageState = options.state; //state of the parent view
     this.tabState = options.tabState ;//active tab
     this.socketView = options.socketView;
     this.userModel = options.userModel;
@@ -110,7 +109,6 @@ module.exports = baseVw.extend({
       dataType: 'json',
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
-        //TODO set 'payout' here if the user has a payout from a dispute
         if(!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
@@ -140,6 +138,8 @@ module.exports = baseVw.extend({
     var self = this;
     $('.js-loadingModal').addClass("hide");
     this.model.set('status', this.status);
+    this.model.set('vendorAvatarURL', localStorage.getItem('userAvatar-'+this.model.get('vendor_offer').listing.id.guid));
+    this.model.set('buyerAvatarURL', localStorage.getItem('userAvatar-'+this.model.get('buyer_order').order.id.guid));
     //makde sure data is valid
     if(this.model.get('invalidData')){
       messageModal.show(window.polyglot.t('errorMessages.serverError', self.model.get('error')));
