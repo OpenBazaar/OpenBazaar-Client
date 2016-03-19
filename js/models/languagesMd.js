@@ -39,7 +39,7 @@ module.exports = Backbone.Model.extend({
         langCode: "pl"
       },
       {
-        langName: "Português do Brasil",
+        langName: "Português (Brasil)",
         langCode: "pt-BR"
       },
       {
