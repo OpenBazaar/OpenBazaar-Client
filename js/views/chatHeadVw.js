@@ -5,7 +5,8 @@ var Backbone = require('backbone'),
   baseVw = require('./baseVw');
 
 module.exports = baseVw.extend({
-  className: 'border0 custCol-border-secondary flexRow marginLeft1 marginTop1',
+
+  className: 'border0 custCol-border-secondary flexRow marginLeft1 marginTop1 js-chatHeadWrapper',
 
   events: {
     'click': 'chatHeadClick'
@@ -21,12 +22,6 @@ module.exports = baseVw.extend({
 
   chatHeadClick: function() {
     this.trigger('click', this);
-
-    //remove any existing selected state
-    self.$('.chatHead').parent().removeClass('chatHeadSelected');
-
-    //add selected state
-    this.$el.addClass('chatHeadSelected');
   },
 
   render: function() {
