@@ -1,5 +1,7 @@
 <div class="chatConversationHeader">
-    <a class="chatConversationAvatar thumbnail-small marginRight5 floatLeft js-username clickable" style="background-image: <%= ob.cssImageUrl(ob.avatar_hash, ob.guid, 'imgs/defaultUser.png') %>;" href="#userPage/<%= ob.guid %>/store"></a>
+    <a class="chatConversationAvatar thumbnail-small marginRight5 floatLeft js-username clickable"
+       style="background-image: <%= ob.cssImageUrl(ob.avatar_hash, ob.guid, 'imgs/defaultUser.png') %>;"
+       href="#userPage/<%= ob.guid %>/store"></a>
     <div class="chatConversationLabel floatLeft js-username"><%= ob.handle || ob.guid %></div>
     <div class="conversationHeader-btn floatRight marginTop4 textOpacity75">
         <a class="ion-close-round js-closeConversation"></a>

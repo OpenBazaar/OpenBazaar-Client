@@ -69,7 +69,6 @@ module.exports = baseVw.extend({
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
     this.bitcoinValidationRegex = options.bitcoinValidationRegex;
-    this.pageState = options.state; //state of the parent view
     this.tabState = options.tabState ;//active tab
     this.socketView = options.socketView;
     this.userModel = options.userModel;
@@ -110,7 +109,6 @@ module.exports = baseVw.extend({
       dataType: 'json',
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
-        //TODO set 'payout' here if the user has a payout from a dispute
         if(!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
