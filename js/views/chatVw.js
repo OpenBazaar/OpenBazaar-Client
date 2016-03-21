@@ -9,6 +9,9 @@ var Backbone = require('backbone'),
   ChatConversationVw = require('./chatConversationVw');
 
 module.exports = baseVw.extend({
+
+  class: 'chatView',
+
   events: {
     'click .js-chatOpen': 'slideOut',
     'click .js-chatSearch': 'onSearchClick',
@@ -367,6 +370,9 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       this.chatConversationVw.closeConvoSettings();
     }
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },
 
   slideOut: function() {
@@ -390,6 +396,11 @@ module.exports = baseVw.extend({
         .removeClass('hide')
         .find('span')
         .addClass('hide');
+
+    //remove any existing selected state
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },      
 
   remove: function() {

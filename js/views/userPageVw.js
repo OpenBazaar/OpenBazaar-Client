@@ -410,7 +410,7 @@ module.exports = baseVw.extend({
       });
 
       $('.js-userAbout').html(about);
-
+      
       self.$el.find('.js-userAbout a').on('click', function(e){
         e.preventDefault();
         var extUrl = $(this).attr('href');
