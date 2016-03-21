@@ -31,7 +31,7 @@ module.exports = baseVw.extend({
     }    
 
     this.socketView = options.socketView;
-    this.$body = $('body');
+    this.$html = $('html');
 
     // Here we will store the chat messages collections
     // of all the active conversations we've had. This way,
@@ -376,7 +376,7 @@ module.exports = baseVw.extend({
   },
 
   slideOut: function() {
-    this.$body.addClass('chatOpen');
+    this.$html.addClass('chatOpen');
     self.$('.chatSearch').addClass('chatSearchOut');
     self.$('.btn-chatOpen')
         .addClass('hide')
@@ -386,7 +386,7 @@ module.exports = baseVw.extend({
 
   slideIn: function() {
     this.closeConversation();
-    this.$body.removeClass('chatOpen');
+    this.$html.removeClass('chatOpen');
     self.$('.chatSearch').removeClass('chatSearchOut');
   },
 
