@@ -10,7 +10,7 @@ module.exports = Backbone.Model.extend({
           'rest_api_port': 18469,
           'api_socket_port': 18466,
           'heartbeat_socket_port': 18470,
-          'SSL': false
+          'SSL': true
         },
         localUsername = this.get('local_username'),
         localPassword = this.get('local_password');
@@ -127,11 +127,13 @@ module.exports = Backbone.Model.extend({
   },
 
   getHeartbeatSocketUrl: function() {
-    return 'ws://' + this.get('server_ip') + ':' + this.get('heartbeat_socket_port');
+    var prefix = this.get('SSL') ? "wss" : "ws";
+    return prefix + '://' + this.get('server_ip') + ':' + this.get('heartbeat_socket_port');
   },
 
   getApiSocketUrl: function() {
-    return 'ws://' + this.get('server_ip') + ':' + this.get('api_socket_port');
+    var prefix = this.get('SSL') ? "wss" : "ws";
+    return prefix + '://' + this.get('server_ip') + ':' + this.get('api_socket_port');
   },
 
   isLocalServer: function() {
