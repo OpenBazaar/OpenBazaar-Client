@@ -213,7 +213,6 @@ module.exports = Backbone.View.extend({
       });
       editor.subscribe('blur', self.validateDescription);
     });
-    $('.js-mainSearchWrapper').removeClass('onPage');
     return this;
   },
 
