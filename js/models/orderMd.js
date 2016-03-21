@@ -121,6 +121,9 @@ module.exports = window.Backbone.Model.extend({
     response.bitcoinValidationRegex = this.bitcoinValidationRegex;
     response.transactionType = this.transactionType;
 
+    response.vendorAvatarURL = localStorage.getItem('userAvatar-'+response.vendor_offer.listing.id.guid);
+    response.buyerAvatarURL = localStorage.getItem('userAvatar-'+response.buyer_order.order.id.guid);
+
     return response;
   },
 
