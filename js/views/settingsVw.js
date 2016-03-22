@@ -746,7 +746,6 @@ module.exports = Backbone.View.extend({
   saveStore: function(e){
     var self = this,
         form = this.$el.find("#storeForm"),
-        profileData = {},
         settingsData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [],
@@ -759,7 +758,6 @@ module.exports = Backbone.View.extend({
     });
 
     settingsData.moderators = modList.length > 0 ? modList : "";
-    //profileData.vendor = true;
 
     onFail = (reason) => {
       $(e.target).removeClass('loading');
@@ -775,7 +773,7 @@ module.exports = Backbone.View.extend({
 
         self.refreshView();
       }, "", settingsData).fail(onFail);
-    }, "", profileData).fail(onFail);
+    }, "").fail(onFail);
   },
 
   saveAddress: function(e){
