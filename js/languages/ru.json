@@ -254,7 +254,7 @@
   "NotProvided": "не предоставлено",
   "NotFollowingAnyone": "У Вас нет подписок",
   "NoFollowers": "Нет подписчиков",
-  "NoReviews": "Нет обзоров",
+  "NoReviews": "Нет отзывов",
   "Moderator": "Модератор",
   "ActiveStore":"Видимость магазина",
   "ActiveStoreDetails": "Выключите свой магазин, если желаете приостановить продажи",
@@ -445,10 +445,10 @@
     "SaveSuccess": "Ваши изменения сохранены."
   },
   "discover": {
-    "searchDefaultText": "Scanning your network",
-    "searchingText": "Scanning your network for",
-    "noResults": "No listings found in your network",
-    "noTaggedResults": "No listings found in your network tagged with"
+    "searchDefaultText": "Сканирование вашей сети",
+    "searchingText": "Сканирование сети в поиске",
+    "noResults": "Не найдено товаров в сети",
+    "noTaggedResults": "Не найдено товаров в сети с тегом"
   },
   "filters": {
     "pagesAllTypes": "Все типы",
@@ -459,9 +459,9 @@
     "listingsAll": "Со всех магазинов"
   },
   "nav": {
-    "searchPlaceholder": "Type a @handle, OpenBazaar ID or #tag...",
+    "searchPlaceholder": "Введите @никнейм, OpenBazaar ID или #тег...",
     "myPage": "Моя страница",
-    "testMode": "Test Mode",
+    "testMode": "Режим теста",
     "customizePage":"Настроить страницу",
     "sellItem":"Разместить товар",
     "createListing":"Подать объявление",
@@ -472,7 +472,7 @@
     "settings":"Настройки",
     "about":"Об OpenBazaar",
     "support":"Поддержка OpenBazaar",
-    "Forward": "Forward",
+    "Forward": "Вперед",
     "Back": "Назад"
   },
   "onboarding": {
@@ -536,7 +536,7 @@
     "VendorShipsTo": "География доставки выбранного продавца:",
     "DoesNotShipHere": "Выбранный производитель не производит доставку в указанный регион",
     "Send": "Отправить",
-    "BTCto": "BTC to",
+    "BTCto": "BTC по адресу",
     "SendBTCtoAddress": "Отправить %{amount} BTC",
     "OpenAddress": "Открывать адрес в кошельке по-умолчанию",
     "CopyAddress": "Скопировать адрес оплаты в буфер обмена",
