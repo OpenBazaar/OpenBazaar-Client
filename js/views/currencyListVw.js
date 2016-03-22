@@ -13,6 +13,8 @@ module.exports = baseVw.extend({
   initialize: function(options){
     var self = this;
     this.options = options || {};
+    this.availableCurrenciesList = [];
+
     this.countries = new countriesModel();
     //create a list of currencies from the country list, so we can maintain a single set of data
     var uniqueCurrencies = __.uniq(this.countries.get('countries'), function(item){return item.code;});
@@ -27,9 +29,10 @@ module.exports = baseVw.extend({
       }
       return 0;
     });
+
     orderedCurrencies.unshift({code: "BTC", currency: "Bitcoin", currencyUnits: "4"});
     this.chooseCurrencies = new chooseCurrenciesCollection(orderedCurrencies);
-
+/*
     //use default currency to return list of supported currencies
     getBTPrice("USD", function (btAve, currencyList) {
       if (self.isRemoved()) return;
@@ -39,6 +42,31 @@ module.exports = baseVw.extend({
       self.trigger("currencyListReady");
       self.ready = true;
     });
+     */
+
+    $.ajax({
+          method: "GET",
+          url: "https://api.bitcoinaverage.com/all"
+        })
+        .done(function (response) {
+          var BitcoinAvgCurrencies = {};
+          for (var bcaCurrency in response) {
+            if (response[bcaCurrency].averages) {
+              self.availableCurrenciesList.push(bcaCurrency);
+            }
+          }
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.log(APIname + " request failed: ");
+          console.log(jqXHR);
+          console.log(textStatus);
+          console.log(errorThrown);
+        })
+        .always(function () {
+          self.render();
+          self.trigger("currencyListReady");
+          self.ready = true;
+        });
   },
 
   render: function(){
