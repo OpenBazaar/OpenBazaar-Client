@@ -197,7 +197,6 @@ module.exports = baseVw.extend({
     this.socketView = options.socketView;
     this.slimVisible = false;
     this.confirmDelete = false;
-    this.confirmUnfollow = false;
     this.state = options.state;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
@@ -1397,33 +1396,15 @@ module.exports = baseVw.extend({
   },
 
   unfollowUserClick: function(e){
-    "use strict";
+    var $targ = $(e.target).closest('.js-unfollow');
 
-    if(this.confirmUnfollow === false && confirm){
-      this.$el.find('.js-unfollow').addClass('confirm');
-
-      this.confirmUnfollow = true;
-    } else {
-      $(e.target).addClass('loading');
-      this.resetUnfollow();
+    if($targ.hasClass('confirm')){
+      $targ.addClass('loading').removeClass('confirm');
       this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    } else {
+      $targ.addClass('confirm');
     }
 
-    var self = this;
-
-    //without timeout it gets triggered with the parent click
-    setTimeout(function(){
-      $(document).one('click.unfollow', function(event){
-        if (!$(event.target).hasClass('js-unfollow')) {
-          self.resetUnfollow();
-        }
-      });
-    }, 100);
-  },
-
-  resetUnfollow: function(){
-    this.confirmUnfollow = false;
-    this.$el.find('.js-unfollow').removeClass('confirm');
   },
 
   moreButtonsOwnPageClick: function(){
