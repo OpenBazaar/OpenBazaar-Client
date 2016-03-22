@@ -6,12 +6,13 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     Polyglot = require('node-polyglot'),
-    NotificationsCl = require('../collections/notificationsCl.js'), 
+    NotificationsCl = require('../collections/notificationsCl.js'),
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
-    remote = require('remote');
+    remote = require('remote'),
+    pjson = require('../../package.json');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
@@ -204,7 +205,8 @@ module.exports = baseVw.extend({
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
-	this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
+    this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
+    this.model.set('version', pjson.version);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
