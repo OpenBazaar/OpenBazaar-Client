@@ -205,7 +205,7 @@ module.exports = baseVw.extend({
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
-	  this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
+    this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
@@ -251,6 +251,7 @@ module.exports = baseVw.extend({
   },
 
   showAboutModal: function(e){
+    this.disableNav();
 
     // display the modal
     $('.js-aboutModalHolder').fadeIn(300);
@@ -268,11 +269,15 @@ module.exports = baseVw.extend({
   },
 
   hideAboutModal: function(e){
+    this.enableNav();
+    
     $('.js-aboutModalHolder').fadeOut(300);
     $('#obContainer').removeClass('blur');
   },
 
   showSupportModal: function(e){
+    this.disableNav();
+    
     $('.js-aboutModalHolder').fadeIn(300);
     $('.js-aboutModal .navBar .btn.btn-bar').removeClass('active');
     $('.js-about-donationsTab').addClass('active');
@@ -282,8 +287,18 @@ module.exports = baseVw.extend({
   },
 
   hideSupportModal: function(e){
+    this.enableNav();
+    
     $('.js-aboutModalHolder').fadeOut(300);
     $('#obContainer').removeClass('blur');
+  },
+  
+  enableNav: function(){
+    $('.js-navProfile,.js-navNotifications').removeClass('disabled');
+  },
+
+  disableNav: function(){
+    $('.js-navProfile,.js-navNotifications').addClass('disabled');
   },
 
   aboutModalTabClick: function(e){
