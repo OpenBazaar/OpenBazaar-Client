@@ -111,13 +111,18 @@ if(platform === "linux") {
 }
 
 //open external links in a browser, not the app
-$('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescription a', function(e){
-  e.preventDefault();
-  var extUrl = $(this).attr('href');
-  if (!/^https?:\/\//i.test(extUrl)) {
-    extUrl = 'http://' + extUrl;
+$('body').on('click', 'a', function(e){
+  var targUrl = $(e.target).attr("href"),
+      linkPattern = /^[a-zA-Z]+:\/\//;
+
+  if(linkPattern.test(targUrl)){
+    e.preventDefault();
+    var extUrl = $(this).attr('href');
+    if (!/^https?:\/\//i.test(extUrl)) {
+      extUrl = 'http://' + extUrl;
+    }
+    require("shell").openExternal(extUrl);
   }
-  require("shell").openExternal(extUrl);
 });
 
 $(document).on('mouseenter',
