@@ -418,7 +418,7 @@ module.exports = baseVw.extend({
       window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
     }
 
-    if(targetText == ""){
+    if(target.val() == ""){
       this.searchItemsClear();
     }
   },
