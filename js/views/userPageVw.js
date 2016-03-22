@@ -527,6 +527,7 @@ module.exports = baseVw.extend({
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
+    this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     document.getElementById('obContainer').classList.remove("noScrollBar");
@@ -1395,8 +1396,15 @@ module.exports = baseVw.extend({
   },
 
   unfollowUserClick: function(e){
-    $(e.target).addClass('loading');
-    this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    var $targ = $(e.target).closest('.js-unfollow');
+
+    if($targ.hasClass('confirm')){
+      $targ.addClass('loading').removeClass('confirm');
+      this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    } else {
+      $targ.addClass('confirm');
+    }
+
   },
 
   moreButtonsOwnPageClick: function(){
