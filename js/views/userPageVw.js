@@ -197,6 +197,7 @@ module.exports = baseVw.extend({
     this.socketView = options.socketView;
     this.slimVisible = false;
     this.confirmDelete = false;
+    this.confirmUnfollow = false;
     this.state = options.state;
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
@@ -527,6 +528,7 @@ module.exports = baseVw.extend({
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
+    this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     document.getElementById('obContainer').classList.remove("noScrollBar");
@@ -1395,8 +1397,33 @@ module.exports = baseVw.extend({
   },
 
   unfollowUserClick: function(e){
-    $(e.target).addClass('loading');
-    this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    "use strict";
+
+    if(this.confirmUnfollow === false && confirm){
+      this.$el.find('.js-unfollow').addClass('confirm');
+
+      this.confirmUnfollow = true;
+    } else {
+      $(e.target).addClass('loading');
+      this.resetUnfollow();
+      this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    }
+
+    var self = this;
+
+    //without timeout it gets triggered with the parent click
+    setTimeout(function(){
+      $(document).one('click.unfollow', function(event){
+        if (!$(event.target).hasClass('js-unfollow')) {
+          self.resetUnfollow();
+        }
+      });
+    }, 100);
+  },
+
+  resetUnfollow: function(){
+    this.confirmUnfollow = false;
+    this.$el.find('.js-unfollow').removeClass('confirm');
   },
 
   moreButtonsOwnPageClick: function(){
