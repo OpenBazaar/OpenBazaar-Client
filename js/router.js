@@ -110,9 +110,8 @@ module.exports = Backbone.Router.extend({
     "use strict";
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
-    app.hideOverlay();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
-    $('.js-navProfileMenu').removeClass('popMenu-opened');
+    obEventBus.trigger('cleanNav');
   },
 
   newView: function(view, bodyID, addressBarText, bodyClass){

@@ -29,7 +29,6 @@ module.exports = baseVw.extend({
     'click .js-showAboutModal': 'showAboutModal',
     'click .js-hideAboutModal': 'hideAboutModal',
     'click .js-showSupportModal': 'showSupportModal',
-    'click .js-hideSupportModal': 'hideSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
@@ -110,6 +109,10 @@ module.exports = baseVw.extend({
       this.showDiscoverIntro();
     });
 
+    this.listenTo(window.obEventBus, "cleanNav", function(){
+      this.cleanNav();
+    });
+
     //when language is changed, re-render
     this.listenTo(this.model, 'change:language', function(){
       this.render();
@@ -135,6 +138,14 @@ module.exports = baseVw.extend({
 
   dismissUpdate: function() {
     $('.js-softwareUpdate').addClass('softwareUpdateHidden');
+  },
+
+  cleanNav: function(){
+    this.hideAboutModal();
+    this.closeNav();
+    this.closeStatusBar();
+    this.hideDiscoverIntro();
+    obEventBus.trigger('closeBuyWizard');
   },
 
   handleSocketMessage: function(response) {
@@ -254,6 +265,8 @@ module.exports = baseVw.extend({
 
   showAboutModal: function(e){
 
+    this.cleanNav();
+
     // display the modal
     $('.js-aboutModalHolder').fadeIn(300);
 
@@ -281,11 +294,6 @@ module.exports = baseVw.extend({
     $('.js-aboutModal .modal-section').addClass('hide');
     $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
-  },
-
-  hideSupportModal: function(e){
-    $('.js-aboutModalHolder').fadeOut(300);
-    $('#obContainer').removeClass('blur');
   },
 
   aboutModalTabClick: function(e){
