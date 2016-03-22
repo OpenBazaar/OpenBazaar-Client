@@ -871,7 +871,7 @@ module.exports = Backbone.View.extend({
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      },'','','','',e);
+      },'','','','');
       
       self.refreshView();
     }).fail(() => {

@@ -100,6 +100,8 @@ module.exports = Backbone.Model.extend({
       response.blocked_guids = [];
     }
 
+    response.libbitcoin_server = response.libbitcoin_server != "null" ? response.libbitcoin_server : "";
+
     return response;
   },
 
