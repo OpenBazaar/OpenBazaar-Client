@@ -759,9 +759,10 @@ module.exports = Backbone.View.extend({
 
     settingsData.moderators = modList.length > 0 ? modList : "";
 
-    onFail = (reason) => {
+    onFail = (data) => {
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#storeForm'));
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
     };
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
@@ -772,8 +773,12 @@ module.exports = Backbone.View.extend({
         });        
 
         self.refreshView();
-      }, "", settingsData).fail(onFail);
-    }, "").fail(onFail);
+      }, function(data){
+        onFail(data);
+      }, settingsData);
+    }, function(data){
+      onFail(data);
+    });
   },
 
   saveAddress: function(e){
