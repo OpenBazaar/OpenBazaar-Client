@@ -1,7 +1,7 @@
 <div class="mainContainer custCol-background">
 
   <div class="userBar">
-    <div class="title-section custCol-primary shadow-inner1-ultra-light">
+    <div class="title-section custCol-primary-darken shadow-inner1-ultra-light">
       <div class="thumbnail pull-left"
         <% if(ob.page.profile.avatar_hash) { %>
         style="background-image: url(<%= ob.user.serverUrl %>get_image?hash=<%= ob.page.profile.avatar_hash %>), url(imgs/defaultUser.png);">
@@ -10,11 +10,11 @@
         <% } %>
       </div>
       <h1 class="fancy-heading fontSize20 vCentered colorWhiteForce textShadow"><%= polyglot.t('nav.settings') %></h1>
-      <a href="#userPage" class="btn btn-txt custCol-secondary positionWrapper pull-right right10 marginTop9 marginLeft6">
+      <a href="#userPage" class="btn btn-txt custCol-primary positionWrapper pull-right right10 marginTop9 marginLeft6">
         <span class="ion-document-text fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('GoToMyPage') %>
       </a>
-      <a href="#transactions" class="btn btn-txt custCol-secondary positionWrapper pull-right right10 marginTop9 marginLeft6">
+      <a href="#transactions" class="btn btn-txt custCol-primary positionWrapper pull-right right10 marginTop9 marginLeft6">
         <span class="ion-log-out fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('Transactions') %>
       </a>
@@ -716,7 +716,7 @@
                     <%= polyglot.t('ActiveStore') %>
                   </label>
                   <div>
-                    <label class="textSize11px txt-unleaded">
+                    <label class="textSize11px txt-unleaded textOpacity50 marginTop2">
                       <%= polyglot.t('ActiveStoreDetails') %>
                     </label>
                   </div>
@@ -740,7 +740,7 @@
                     <%= polyglot.t('CurrentModerators') %>
                   </label>
                   <div class="row20">
-                    <label class="textSize11px txt-unleaded"><%= polyglot.t('DeselectToRemoveModerator') %></label>
+                    <label class="textSize11px txt-unleaded textOpacity50 marginTop2"><%= polyglot.t('DeselectToRemoveModerator') %></label>
                   </div>
                 </div>
               </div>
@@ -759,7 +759,7 @@
                     <%= polyglot.t('AddModerators') %>
                   </label>
                   <div class="row20">
-                    <label class="textSize11px txt-unleaded"><%= polyglot.t('SelectToAddModerator') %></label>
+                    <label class="textSize11px txt-unleaded textOpacity50 marginTop2"><%= polyglot.t('SelectToAddModerator') %></label>
                   </div>
                 </div>
               </div>

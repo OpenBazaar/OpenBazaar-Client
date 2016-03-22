@@ -9,6 +9,9 @@ var Backbone = require('backbone'),
   ChatConversationVw = require('./chatConversationVw');
 
 module.exports = baseVw.extend({
+
+  class: 'chatView',
+
   events: {
     'click .js-chatOpen': 'slideOut',
     'click .js-chatSearch': 'onSearchClick',
@@ -28,7 +31,7 @@ module.exports = baseVw.extend({
     }    
 
     this.socketView = options.socketView;
-    this.$body = $('body');
+    this.$html = $('html');
 
     // Here we will store the chat messages collections
     // of all the active conversations we've had. This way,
@@ -367,10 +370,13 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       this.chatConversationVw.closeConvoSettings();
     }
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },
 
   slideOut: function() {
-    this.$body.addClass('chatOpen');
+    this.$html.addClass('chatOpen');
     self.$('.chatSearch').addClass('chatSearchOut');
     self.$('.btn-chatOpen')
         .addClass('hide')
@@ -380,7 +386,7 @@ module.exports = baseVw.extend({
 
   slideIn: function() {
     this.closeConversation();
-    this.$body.removeClass('chatOpen');
+    this.$html.removeClass('chatOpen');
     self.$('.chatSearch').removeClass('chatSearchOut');
   },
 
@@ -390,6 +396,11 @@ module.exports = baseVw.extend({
         .removeClass('hide')
         .find('span')
         .addClass('hide');
+
+    //remove any existing selected state
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },      
 
   remove: function() {

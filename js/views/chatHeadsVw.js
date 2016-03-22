@@ -5,6 +5,9 @@ var Backbone = require('backbone'),
   chatHeadVw = require('./chatHeadVw');
 
 module.exports = baseVw.extend({
+
+  class: 'chatHeads',
+
   events: {
   },
 
@@ -40,6 +43,15 @@ module.exports = baseVw.extend({
 
   chatHeadClick: function(vw) {
     this.trigger('chatHeadClick', vw);
+    this.chatHeadsRemoveSelectStyle(vw);
+  },
+
+  chatHeadsRemoveSelectStyle: function(vw){
+    //remove any existing selected state
+    this.$('.js-chatHeadWrapper').removeClass('chatHeadSelected');
+    if(vw){
+      vw.$el.addClass('chatHeadSelected');
+    }
   },
 
   createChatHead: function(md) {

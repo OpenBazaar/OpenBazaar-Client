@@ -36,6 +36,7 @@ module.exports = baseVw.extend({
     'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
+    'blur .js-navAddressBar': 'addressBarBlur',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
     'blur input': 'validateInput',
@@ -239,8 +240,6 @@ module.exports = baseVw.extend({
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
-        
-        text = text ? 'ob://' + text : '';
         self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
@@ -464,11 +463,32 @@ module.exports = baseVw.extend({
     this.currentWindow.reload();
   },
 
+  trimAddressBar: function() {
+    this.addressInput.val(function (i, value) {
+      return value.replace('ob://', '');
+    });
+  },
+
+  untrimAddressBar: function(){
+    this.addressInput.val(function (i, value) {
+      value = value.startsWith('ob://') ? value : 'ob://' + value;
+      return value;
+    });
+  },
+
   addressBarFocus: function(e){
+
+    // on mouseEnter of the address bar input display the ob:// prefix if it doesn't already exist
+    this.untrimAddressBar();
+
     // on inital focus of input, select all text (this makes it easier to copy or delete the text)
     $(e.target).one('mouseup', function () {
       $('#addressBar').select();
     });
+  },
+
+  addressBarBlur: function(e){
+    this.trimAddressBar();
   },
 
   addressBarKeyup: function(e){
