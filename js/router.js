@@ -113,6 +113,8 @@ module.exports = Backbone.Router.extend({
     app.hideOverlay();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
     $('.js-navProfileMenu').removeClass('popMenu-opened');
+    $('.js-navProfile,.js-navNotifications').removeClass('disabled');
+    $('.js-aboutModalHolder').hide();
   },
 
   newView: function(view, bodyID, addressBarText, bodyClass){
