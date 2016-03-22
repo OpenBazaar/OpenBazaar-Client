@@ -110,7 +110,7 @@
         </div>
       </div>
       <% } %>
-      <% if(ob.vendor_offer.listing.shipping && ob.vendor_offer.listing.shipping.shipping_regionsDisplay.length > 0){ %>
+      <% if(ob.vendor_offer.listing.shipping && ob.vendor_offer.listing.shipping.shipping_regionsDisplay && ob.vendor_offer.listing.shipping.shipping_regionsDisplay.length > 0){ %>
       <div class="flexRow width100">
         <div class="width100 fontSize15 marginLeft10 textOpacity75 row10">
           <h4><%= polyglot.t('CanBeShippedTo') %></h4>
@@ -209,7 +209,7 @@
           </div>
           <div class="flexCol-6">
             <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
-              <% if(ob.vendor_offer.listing.shipping.shipping_regionsDisplay[0]) { %>
+              <% if(ob.vendor_offer.listing.shipping && ob.vendor_offer.listing.shipping.shipping_regionsDisplay && ob.vendor_offer.listing.shipping.shipping_regionsDisplay[0]) { %>
               <h3><%= polyglot.t('ShipsTo') %></h3>
               <% _.each(ob.vendor_offer.listing.shipping.shipping_regionsDisplay, function(data, i) { %>
               <div class="row5">

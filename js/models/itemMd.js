@@ -69,7 +69,6 @@ module.exports = window.Backbone.Model.extend({
           {
             "fee": 0,
             "name": "",
-            "blockchain_id": "",
             "avatar": "",
             "short_description": "",
             "pubkeys": {

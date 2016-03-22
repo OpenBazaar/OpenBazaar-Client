@@ -156,7 +156,6 @@ module.exports = Backbone.View.extend({
   renderModerator: function(moderator){
     "use strict";
     var self = this;
-    console.log(moderator)
 
     moderator.serverUrl = this.model.get('user').serverUrl;
     moderator.userID = moderator.guid;
