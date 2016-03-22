@@ -55,13 +55,13 @@
                 <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="<%= ob.server_ip %>">
                 <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-locked
                             positionAbsolute tooltip <% if(!ob.SSL){ %> hide <% } %>  js-sslOn"
-                     data-tooltip="SSL is on">
-                  SSL on
+                     data-tooltip="<%= polyglot.t('SSLIsOn') %>">
+                  <%= polyglot.t('SSLOn') %>
                 </div>
                 <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-unlocked
                             positionAbsolute tooltip <% if(ob.SSL){ %> hide <% } %>  js-sslOff"
-                     data-tooltip="SSL is off">
-                  SSL off
+                     data-tooltip="<%= polyglot.t('SSLIsOff') %>">
+                  <%= polyglot.t('SSLOff') %>
                 </div>
               </div>
             </div>
