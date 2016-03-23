@@ -1,5 +1,6 @@
 var __ = require('underscore'),
-    Backbone = require('backbone');
+    Backbone = require('backbone'),
+    autolinker = require( '../utils/customLinker');
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -11,5 +12,12 @@ module.exports = window.Backbone.Model.extend({
     timestamp: "",
     message: "",
     public_key: ""
+  },
+
+  parse: function(response){
+    //change any plain text urls in the about field into links
+    response.message = autolinker(response.message);
+
+    return response;
   }
 });

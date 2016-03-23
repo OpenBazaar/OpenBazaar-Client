@@ -119,6 +119,7 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(model, response){
+        console.log(response);
         messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
@@ -607,7 +608,7 @@ module.exports = Backbone.View.extend({
 
       self.setCurrentBitCoin(cCode);
       self.refreshView();
-    }).fail(() => {
+    }, function(){
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#generalForm'));
     });
@@ -653,10 +654,10 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, "", pageData, skipKeys).fail(() => {
+      }, function(){
         $(e.target).removeClass('loading');
         self.scrollToFirstError(self.$('#pageForm'));
-      });
+      }, pageData, skipKeys);
     };
 
     var checkSocialCount = function(){
@@ -768,6 +769,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
+        $(e.target).removeClass('loading');
         app.statusBar.pushMessage({
           type: 'confirmed',
           msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
@@ -825,10 +827,10 @@ module.exports = Backbone.View.extend({
       });
 
       self.refreshView();
-    }, "", addressData).fail(() => {
+    }, function(){
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#addressesForm'));
-    });
+    }, addressData);
   },
 
   saveModerator: function(e){
@@ -851,10 +853,10 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, '', moderatorData).fail(() => {
+    }, function(){
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#moderatorForm'));
-    });
+    }, moderatorData);
 
     $.ajax({
       type: "POST",
@@ -877,12 +879,12 @@ module.exports = Backbone.View.extend({
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      },'','','','');
+      }, function(){
+        $(e.target).removeClass('loading');
+        self.scrollToFirstError(self.$('#advancedForm'));
+      },'','','');
       
       self.refreshView();
-    }).fail(() => {
-      $(e.target).removeClass('loading');
-      self.scrollToFirstError(self.$('#advancedForm'));
     });
   },
 
