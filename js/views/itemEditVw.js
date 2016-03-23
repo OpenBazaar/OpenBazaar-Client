@@ -102,7 +102,8 @@ module.exports = baseVw.extend({
           },
           toolbar: {
             imageDragging: false,
-            sticky: true
+            sticky: true,
+            buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
           },
           paste: {
             cleanPastedHTML: true,
