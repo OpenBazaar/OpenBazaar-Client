@@ -115,7 +115,7 @@ $('body').on('click', 'a', function(e){
   var targUrl = $(e.target).attr("href"),
       linkPattern = /^[a-zA-Z]+:\/\//;
 
-  if(linkPattern.test(targUrl)){
+  if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
     e.preventDefault();
     var extUrl = $(this).attr('href');
     if (!/^https?:\/\//i.test(extUrl)) {
