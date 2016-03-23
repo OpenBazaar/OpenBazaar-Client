@@ -6,7 +6,7 @@ var Backbone = require('backbone'),
   ChatMessagesCl = require('../collections/chatMessagesCl'),
   baseVw = require('./baseVw'),
   ChatHeadsVw = require('./chatHeadsVw'),
-  autolinker = require( 'autolinker' )
+  autolinker = require( '../utils/customLinker'),
   ChatConversationVw = require('./chatConversationVw');
 
 module.exports = baseVw.extend({
@@ -226,7 +226,7 @@ module.exports = baseVw.extend({
       this.chatConversationVw.collection.add({
         avatar_hash: this.model.avatar_hash,
         guid: this.model.guid,
-        message: autolinker.link(msg, {'twitter': false, 'hashtag': false}),
+        message: autolinker(msg),
         outgoing: true,
         read: true,
         timestamp: Date.now() / 1000
@@ -302,7 +302,7 @@ module.exports = baseVw.extend({
         this.chatMessagesCache[msg.sender].collection.add({
           avatar_hash: msg.avatar_hash,
           guid: msg.sender,
-          message: msg.message,
+          message: autolinker(msg.message),
           outgoing: false,
           read: true,
           timestamp: msg.timestamp

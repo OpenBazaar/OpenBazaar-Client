@@ -1,6 +1,6 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    autolinker = require( 'autolinker' );
+    autolinker = require( '../utils/customLinker');
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -15,9 +15,8 @@ module.exports = window.Backbone.Model.extend({
   },
 
   parse: function(response){
-    console.log(response)
     //change any plain text urls in the about field into links
-    response.message = autolinker.link(response.message, {'twitter': false, 'hashtag': false});
+    response.message = autolinker(response.message);
 
     return response;
   }
