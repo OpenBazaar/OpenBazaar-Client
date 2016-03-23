@@ -119,6 +119,7 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(model, response){
+        console.log(response);
         messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
@@ -767,6 +768,7 @@ module.exports = Backbone.View.extend({
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
+        $(e.target).removeClass('loading');
         app.statusBar.pushMessage({
           type: 'confirmed',
           msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'

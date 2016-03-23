@@ -311,8 +311,14 @@ var loadProfile = function(landingRoute, onboarded) {
             window.bitCoinPriceChecker = setInterval(function () {
               setCurrentBitCoin(model.get('currency_code'), user);
             }, 54000000);
+          },
+          error: function(model, response){
+            console.log(response);
+            alert("Your settings could not be loaded");
           }
         });
+      } else {
+        alert("Your profile could not be loaded.");
       }
     }
   });
@@ -447,13 +453,19 @@ heartbeat.on('message', function(e) {
 
           app.login().done(function(data) {
             if (data.success) {
-              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
-                if (__.isEmpty(profile)) {
-                  launchOnboarding(guidCreating = $.Deferred().resolve().promise());
-                } else {
-                  loadProfile();
-                }
-              });
+              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile')
+                  .done(function(profile) {
+                    if (__.isEmpty(profile)) {
+                      launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+                    } else {
+                      loadProfile();
+                    }
+                  })
+                  .always(function(data, textStatus){
+                    if(textStatus == 'parsererror'){
+                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                    }
+                  });
             } else {
               launchServerConnect();
             }

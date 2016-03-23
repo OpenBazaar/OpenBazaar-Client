@@ -210,7 +210,7 @@ form {
   position: fixed;
   top: 0;
   -webkit-app-region: drag;
-  z-index: 5;
+  z-index: 6;
 }
 
 
@@ -972,7 +972,7 @@ label.fieldItem {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 7;
 }
 
 .modal-child {
@@ -3969,12 +3969,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #modalHolder {
   position: fixed;
-  z-index: 3;
+  z-index: 9;
   -webkit-app-region: no-drag;
 }
 
 #messageModal {
-  z-index: 4;
+  z-index: 9;
+}
+
+#loadingModal {
+  z-index: 9;
+}
+
+.server-connect-modal {
+  z-index: 10;
+}
+
+#loadingModal .btn {
+  -webkit-app-region: no-drag;
 }
 
 .pill {
