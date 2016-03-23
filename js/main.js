@@ -121,11 +121,10 @@ $('body').on('click', 'a', function(e){
     });
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
     e.preventDefault();
-    var extUrl = $(this).attr('href');
-    if (!/^https?:\/\//i.test(extUrl)) {
-      extUrl = 'http://' + extUrl;
+    if (!/^https?:\/\//i.test(targUrl)) {
+      targUrl = 'http://' + targUrl;
     }
-    require("shell").openExternal(extUrl);
+    require("shell").openExternal(targUrl);
   }
 });
 
