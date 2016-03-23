@@ -4728,6 +4728,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-left: -115px;
 }
 
+#ov1  .marginLeft0 {
+  margin-left: 0;
+}
+
 #ov1  .marginLeft1 {
   margin-left: 1px;
 }
