@@ -198,14 +198,10 @@ form {
   transition: width 0.5s ease;
 }
 
-#ov1 .chatOpen #obContainer {
+#ov1.chatOpen #obContainer {
   width: calc(100% - 230px);
 }
 
-/*#ov1 .chatOpen #obContainer::-webkit-scrollbar {
-  width: 0;
-}
-*/
 #pageNav {
   position: fixed;
   top: 0;
@@ -985,7 +981,7 @@ label.fieldItem {
   transition: right 0.5s ease;
 }
 
-#ov1 .chatOpen .modal-child {
+#ov1.chatOpen .modal-child {
   right: 230px;
 }
 
@@ -1131,7 +1127,7 @@ label.fieldItem {
   transition: margin-left 0.5s ease;
 }
 
-#ov1 .chatOpen #colorbox {
+#ov1.chatOpen #colorbox {
   margin-left: -115px;
 }
 
@@ -3525,7 +3521,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .90;
 }
 
-#ov1 .chatOpen .spinner-with-logo {
+#ov1.chatOpen .spinner-with-logo {
   left: calc(50% - 115.5px);
 }
 
@@ -4189,7 +4185,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: transform 0.5s ease;
 }
 
-#ov1 .chatOpen .page-connect-modal .content {
+#ov1.chatOpen .page-connect-modal .content {
   transform: translateX(-115.5px);
 }
 
