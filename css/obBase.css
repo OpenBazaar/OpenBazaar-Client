@@ -1123,7 +1123,7 @@ label.fieldItem {
 
 /* colorbox styles */
 #colorbox {
-  z-index: 3;
+  z-index: 12;
   outline: none;
   margin-top: 20px;
   transition: margin 0.5s ease;
@@ -1136,7 +1136,7 @@ label.fieldItem {
 }
 
 #cboxOverlay {
-  z-index: 2;
+  z-index: 11;
   top: 50px;
   height: 100%;
   width: calc(100% - 30px);
@@ -4123,7 +4123,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #statusBar {
   position: fixed;
   bottom: 0;
-  z-index: 2;
+  z-index: 10;
   width: 100%;  
 }
 
