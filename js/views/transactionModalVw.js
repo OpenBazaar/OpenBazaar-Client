@@ -310,7 +310,8 @@ module.exports = baseVw.extend({
     var self = this,
         targetForm = this.$el.find('#transactionConfirmForm'),
         confirmData = {},
-        confirmStatus;
+        confirmStatus,
+        targBtn = $(e.target);
 
     confirmData.id = this.orderID;
     confirmStatus = app.statusBar.pushMessage({
@@ -319,37 +320,47 @@ module.exports = baseVw.extend({
       duration: false
     });
 
-    saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
-      confirmStatus.updateMessage({
-        type: 'confirmed',
-        msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
-      });
-      setTimeout(function(){
-        confirmStatus && confirmStatus.remove();
-      },3000);
-      }, function(data){
-      //onFail
-      confirmStatus.updateMessage({
-        type: 'warning',
-        msg: '<i>' + window.polyglot.t('transactions.UpdateFailed') + '</i>',
-        duration: 3000
-      });
-      setTimeout(function(){
-        confirmStatus && confirmStatus.remove();
-      },3000);
-    }, confirmData, '', function(){
-      //onInvalid
-      confirmStatus.updateMessage({
-        type: 'warning',
-        msg: '<i>' + window.polyglot.t('transactions.UpdateInvalid') + '</i>',
-        duration: 3000
-      });
-      setTimeout(function(){
-        confirmStatus && confirmStatus.remove();
-      },3000);
-    }, e);
+    targBtn.addClass("loading");
 
-    this.closeModal();
+    saveToAPI(targetForm, '', this.serverUrl + "confirm_order",
+        function(data){
+          self.closeModal();
+          confirmStatus.updateMessage({
+            type: 'confirmed',
+            msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
+          });
+          setTimeout(function(){
+            confirmStatus && confirmStatus.remove();
+          },3000);
+          },
+        /*(function(data){
+          //onFail
+          confirmStatus.updateMessage({
+            type: 'warning',
+            msg: '<i>' + window.polyglot.t('transactions.UpdateFailed') + '</i>',
+            duration: 3000
+          });
+          setTimeout(function(){
+            confirmStatus && confirmStatus.remove();
+          },3000);
+        }*/'',
+        confirmData, '',
+        /*function(){
+          //onInvalid
+          confirmStatus.updateMessage({
+            type: 'warning',
+            msg: '<i>' + window.polyglot.t('transactions.UpdateInvalid') + '</i>',
+            duration: 3000
+          });
+          setTimeout(function(){
+            confirmStatus && confirmStatus.remove();
+          },3000);
+        }*/'')
+        .always(function(){
+          targBtn.removeClass("loading");
+        });
+
+   // this.closeModal();
   },
 
   completeOrder: function(e){

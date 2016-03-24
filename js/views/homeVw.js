@@ -439,7 +439,6 @@ module.exports = baseVw.extend({
   },
 
   searchItems: function(searchItemsText){
-    console.log("search items "+searchItemsText)
     if(searchItemsText){
       this.searchItemsText = searchItemsText;
       this.clearItems();
