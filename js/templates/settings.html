@@ -1083,6 +1083,27 @@
                   <label for="libbitcoin_server">
                     <%= polyglot.t('LibbitcoinServerAddress') %>
                   </label>
+                  <div class="note">
+                    <%= polyglot.t('CurrentLibbitcoinAddress') %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <span class="fieldItem"><%= ob.user.libbitcoin_server %></span>
+              </div>
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight  custCol-border">
+                <div class="fieldItem">
+                  <label for="libbitcoin_server">
+                    <%= polyglot.t('LibbitcoinServerAddress') %>
+                  </label>
+                  <div class="note">
+                    <%= polyglot.t('NewLibbitcoinAddress') %>
+                  </div>
                 </div>
               </div>
 
@@ -1090,8 +1111,7 @@
                 <input name="libbitcoin_server"
                        id="libbitcoin_server"
                        type="text"
-                       class="fieldItem"
-                       value="<%= ob.user.libbitcoin_server %>">
+                       class="fieldItem">
               </div>
             </div>
 

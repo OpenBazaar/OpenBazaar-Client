@@ -149,6 +149,8 @@
   "SSLIsOn": "SSL is on",
   "SSLIsOff": "SSL is off",
   "LibbitcoinServerAddress": "Libbitcoin Server Address",
+  "CurrentLibbitcoinAddress": "Currently Connected Libbitcoin Server",
+  "NewLibbitcoinAddress": "Connect To a New Libbitcoin Server",
   "ServerIPPort": "Server IP:Port",
   "All": "All",
   "Name": "Name",
