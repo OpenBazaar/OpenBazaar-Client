@@ -310,7 +310,8 @@ module.exports = baseVw.extend({
     var self = this,
         targetForm = this.$el.find('#transactionConfirmForm'),
         confirmData = {},
-        confirmStatus;
+        confirmStatus,
+        targBtn = $(e.target);
 
     confirmData.id = this.orderID;
     confirmStatus = app.statusBar.pushMessage({
@@ -318,6 +319,8 @@ module.exports = baseVw.extend({
       msg: '<i>' + window.polyglot.t('transactions.UpdatingOrder') + '</i>',
       duration: false
     });
+
+    targBtn.addClass("loading");
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order",
         function(data){
@@ -352,7 +355,10 @@ module.exports = baseVw.extend({
           setTimeout(function(){
             confirmStatus && confirmStatus.remove();
           },3000);
-        }*/'');
+        }*/'')
+        .always(function(){
+          targBtn.removeClass("loading");
+        });
 
    // this.closeModal();
   },

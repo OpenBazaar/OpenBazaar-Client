@@ -189,6 +189,7 @@
   "AboutPlaceholder": "Full description",
   "BackgroundColor": "Background Color",
   "NotificationPaymentSent": "Payment was sent to",
+  "NotificationPaymentReceived": "Payment was received from",
   "NotificationOrderFor": "placed an order for",
   "NotificationOrderConfirmed": "Your order has been confirmed/shipped",
   "NotificationFollow": "is now following you",
