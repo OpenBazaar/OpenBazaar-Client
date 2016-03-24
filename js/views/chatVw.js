@@ -6,9 +6,13 @@ var Backbone = require('backbone'),
   ChatMessagesCl = require('../collections/chatMessagesCl'),
   baseVw = require('./baseVw'),
   ChatHeadsVw = require('./chatHeadsVw'),
+  autolinker = require( '../utils/customLinker'),
   ChatConversationVw = require('./chatConversationVw');
 
 module.exports = baseVw.extend({
+
+  class: 'chatView',
+
   events: {
     'click .js-chatOpen': 'slideOut',
     'click .js-chatSearch': 'onSearchClick',
@@ -28,7 +32,7 @@ module.exports = baseVw.extend({
     }    
 
     this.socketView = options.socketView;
-    this.$body = $('body');
+    this.$html = $('html');
 
     // Here we will store the chat messages collections
     // of all the active conversations we've had. This way,
@@ -222,7 +226,7 @@ module.exports = baseVw.extend({
       this.chatConversationVw.collection.add({
         avatar_hash: this.model.avatar_hash,
         guid: this.model.guid,
-        message: msg,
+        message: autolinker(msg),
         outgoing: true,
         read: true,
         timestamp: Date.now() / 1000
@@ -298,7 +302,7 @@ module.exports = baseVw.extend({
         this.chatMessagesCache[msg.sender].collection.add({
           avatar_hash: msg.avatar_hash,
           guid: msg.sender,
-          message: msg.message,
+          message: autolinker(msg.message),
           outgoing: false,
           read: true,
           timestamp: msg.timestamp
@@ -367,10 +371,13 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       this.chatConversationVw.closeConvoSettings();
     }
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },
 
   slideOut: function() {
-    this.$body.addClass('chatOpen');
+    this.$html.addClass('chatOpen');
     self.$('.chatSearch').addClass('chatSearchOut');
     self.$('.btn-chatOpen')
         .addClass('hide')
@@ -380,7 +387,7 @@ module.exports = baseVw.extend({
 
   slideIn: function() {
     this.closeConversation();
-    this.$body.removeClass('chatOpen');
+    this.$html.removeClass('chatOpen');
     self.$('.chatSearch').removeClass('chatSearchOut');
   },
 
@@ -390,6 +397,11 @@ module.exports = baseVw.extend({
         .removeClass('hide')
         .find('span')
         .addClass('hide');
+
+    //remove any existing selected state
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },      
 
   remove: function() {

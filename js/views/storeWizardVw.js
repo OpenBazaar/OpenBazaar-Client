@@ -109,7 +109,8 @@ module.exports = Backbone.View.extend({
           text: ''
         },
         toolbar: {
-          imageDragging: false
+          imageDragging: false,
+          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
         },
         paste: {
           cleanPastedHTML: true,
@@ -156,7 +157,6 @@ module.exports = Backbone.View.extend({
   renderModerator: function(moderator){
     "use strict";
     var self = this;
-    console.log(moderator)
 
     moderator.serverUrl = this.model.get('user').serverUrl;
     moderator.userID = moderator.guid;

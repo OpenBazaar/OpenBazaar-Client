@@ -7,59 +7,59 @@ module.exports = Backbone.Model.extend({
   defaults: {
     languages: [
       {
-        langName: "English",
+        langName: "English (English, America)",
         langCode: "en-US"
       },
       {
-        langName: "Dansk",
+        langName: "Dansk (Danish)",
         langCode: "da"
       },
       {
-        langName: "Deutsch",
+        langName: "Deutsch (German)",
         langCode: "de"
       },
       {
-        langName: "Dutch",
+        langName: "Dutch (Dutch, Netherlands)",
         langCode: "nl-NL"
       },
       {
-        langName: "Espa&ntilde;ol",
+        langName: "Espa&ntilde;ol (Spanish)",
         langCode: "sp"
       },
       {
-        langName: "Italiano",
+        langName: "Italiano (Italian)",
         langCode: "it"
       },
       {
-        langName: "Français",
+        langName: "Français (French, France)",
         langCode: "fr-FR"
       },
       {
-        langName: "Polski",
+        langName: "Polski (Polish)",
         langCode: "pl"
       },
       {
-        langName: "Português do Brasil",
+        langName: "Português (Portuguese, Brazil)",
         langCode: "pt-BR"
       },
       {
-        langName: "Română",
+        langName: "Română (Romanian)",
         langCode: "ro"
       },
       {
-        langName: "Russian",
+        langName: "Russian (Russian)",
         langCode: "ru"
       },
       {
-        langName: "Slovenský jazyk",
+        langName: "Slovenský jazyk (Slovak)",
         langCode: "sk"
       },
       {
-        langName: "Turkish",
+        langName: "Turkish (Turkish)",
         langCode: "tr"
       },
       {
-        langName: "中文",
+        langName: "中文 (Chinese, S)",
         langCode: "zh-CN"
       },
       {
@@ -67,15 +67,15 @@ module.exports = Backbone.Model.extend({
         langCode: "ko"
       },
       {
-        langName: "日本語 (Japanese)",
+        langName: "日本語 (Japanese, Japan)",
         langCode: "ja-JP"
       },
       {
         langName: "Українська (Ukrainian)",
-        langCode: "uk",
+        langCode: "uk"
       },
       {
-        langName: "Klingon",
+        langName: "Klingon (Klingon)",
         langCode: "tlh"
       }
     ]

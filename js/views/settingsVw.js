@@ -119,6 +119,7 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(model, response){
+        console.log(response);
         messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
@@ -195,7 +196,8 @@ module.exports = Backbone.View.extend({
           text: ''
         },
         toolbar: {
-          imageDragging: false
+          imageDragging: false,
+          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
         },
         paste: {
           cleanPastedHTML: true,
@@ -485,8 +487,14 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
+    var $input = $(e.target);
+
+    if ($input.is('#refund_address')) {
+      $input.val($input.val().trim());
+    }
+
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    $input.closest('.flexRow').addClass('formChecked');
   },
 
   handleChange: function(e) {
@@ -600,7 +608,7 @@ module.exports = Backbone.View.extend({
 
       self.setCurrentBitCoin(cCode);
       self.refreshView();
-    }).fail(() => {
+    }, function(){
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#generalForm'));
     });
@@ -646,10 +654,10 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, "", pageData, skipKeys).fail(() => {
+      }, function(){
         $(e.target).removeClass('loading');
         self.scrollToFirstError(self.$('#pageForm'));
-      });
+      }, pageData, skipKeys);
     };
 
     var checkSocialCount = function(){
@@ -740,7 +748,6 @@ module.exports = Backbone.View.extend({
   saveStore: function(e){
     var self = this,
         form = this.$el.find("#storeForm"),
-        profileData = {},
         settingsData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [],
@@ -753,23 +760,28 @@ module.exports = Backbone.View.extend({
     });
 
     settingsData.moderators = modList.length > 0 ? modList : "";
-    //profileData.vendor = true;
 
-    onFail = (reason) => {
+    onFail = (data) => {
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#storeForm'));
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
     };
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
+        $(e.target).removeClass('loading');
         app.statusBar.pushMessage({
           type: 'confirmed',
           msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
         });        
 
         self.refreshView();
-      }, "", settingsData).fail(onFail);
-    }, "", profileData).fail(onFail);
+      }, function(data){
+        onFail(data);
+      }, settingsData);
+    }, function(data){
+      onFail(data);
+    });
   },
 
   saveAddress: function(e){
@@ -815,10 +827,10 @@ module.exports = Backbone.View.extend({
       });
 
       self.refreshView();
-    }, "", addressData).fail(() => {
+    }, function(){
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#addressesForm'));
-    });
+    }, addressData);
   },
 
   saveModerator: function(e){
@@ -841,10 +853,10 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, '', moderatorData).fail(() => {
+    }, function(){
       $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#moderatorForm'));
-    });
+    }, moderatorData);
 
     $.ajax({
       type: "POST",
@@ -867,12 +879,12 @@ module.exports = Backbone.View.extend({
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      },'','','','',e);
+      }, function(){
+        $(e.target).removeClass('loading');
+        self.scrollToFirstError(self.$('#advancedForm'));
+      },'','','');
       
       self.refreshView();
-    }).fail(() => {
-      $(e.target).removeClass('loading');
-      self.scrollToFirstError(self.$('#advancedForm'));
     });
   },
 

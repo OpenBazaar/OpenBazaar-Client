@@ -612,8 +612,14 @@ module.exports = baseVw.extend({
 
   validateInput: function(e) {
     "use strict";
+    var $input = $(e.target);
+
+    if ($input.is('#buyWizardBitcoinAddressInput')) {
+      $input.val($input.val().trim());
+    }
+
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    $input.closest('.flexRow').addClass('formChecked');
   },
 
   closeWizard: function() {

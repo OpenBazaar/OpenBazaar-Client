@@ -27,7 +27,7 @@ module.exports = Backbone.Router.extend({
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
       ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
-      ["transactions/:state", "transactions"],
+      ["transactions/:state(/:orderID)", "transactions"],
       ["settings", "settings"],
       ["settings/:state", "settings"],
       ["about", "about"],
@@ -110,16 +110,18 @@ module.exports = Backbone.Router.extend({
     "use strict";
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
-    app.hideOverlay();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
-    $('.js-navProfileMenu').removeClass('popMenu-opened');
+    obEventBus.trigger('cleanNav');
   },
 
-  newView: function(view, bodyClass, addressBarText){
+  newView: function(view, bodyID, addressBarText, bodyClass){
     var loadingConfig;
 
-    if($('body').attr('id') != bodyClass){
-      $('body').attr("id", bodyClass || "");
+    if($('body').attr('id') != bodyID){
+      $('body').attr("id", bodyID || "");
+    }
+    if(bodyClass){
+      $('body').attr('class', bodyClass);
     }
     $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
     
@@ -240,7 +242,7 @@ module.exports = Backbone.Router.extend({
     if (handle) options.handle = handle;
 
     this.cleanup();
-    this.newView(new userPageView(options),"userPage");
+    this.newView(new userPageView(options),"userPage",'','onPage');
   },
 
   userPageViaHandle: function(handle, subPath) {
@@ -273,14 +275,15 @@ module.exports = Backbone.Router.extend({
     });
   },
 
-  transactions: function(state){
+  transactions: function(state, orderID){
     "use strict";
     this.cleanup();
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state
+      state: state,
+      orderID: orderID
     }),"userPage");
   },
 

@@ -210,7 +210,7 @@ form {
   position: fixed;
   top: 0;
   -webkit-app-region: drag;
-  z-index: 5;
+  z-index: 6;
 }
 
 
@@ -972,7 +972,7 @@ label.fieldItem {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 7;
 }
 
 .modal-child {
@@ -1556,6 +1556,15 @@ removed because I don't think we're using the trick to hide the borders any more
   color: #000;
   top: 5px;
   left: 6px;
+  content: "\f4a5"
+}
+
+.mainSearchWrapper.onPage:before {
+  color: #000;
+  top: 6px;
+  left: 9px;
+  content: "\f12f";
+  opacity: .75;
 }
 
 .mainSearchWrapper .txtField {
@@ -2278,8 +2287,8 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn.btn-bar.btn-tab {
   background: #327EB8;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   -webkit-user-select: none;
@@ -3960,12 +3969,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #modalHolder {
   position: fixed;
-  z-index: 3;
+  z-index: 9;
   -webkit-app-region: no-drag;
 }
 
 #messageModal {
-  z-index: 4;
+  z-index: 9;
+}
+
+#loadingModal {
+  z-index: 9;
+}
+
+.server-connect-modal {
+  z-index: 10;
+}
+
+#loadingModal .btn {
+  -webkit-app-region: no-drag;
 }
 
 .pill {
@@ -4159,7 +4180,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
   left: 0;
   top: 50%;
-  max-width: 400px;  
+  max-width: 600px;  
   margin-top: 90px;  
   margin-left: auto;
   margin-right: auto;
@@ -4370,12 +4391,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .borderBottomDashed {
+  border-bottom: dashed 1px rgba(255,255,255,0.08);
+}
+
 #ov1  .borderBottom2 {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
 #ov1  .borderTop {
   border-top: solid 1px rgba(255,255,255,0.08);
+}
+
+#ov1  .borderTopDashed {
+  border-top: dashed 1px rgba(255,255,255,0.08);
 }
 
 #ov1  .border1 {
@@ -4595,6 +4624,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1 .fontSize20 {
   font-size: 20px;
 }
+#ov1 .fontSize24 {
+  font-size: 24px;
+}
 
 #ov1 .fontSize30 {
   font-size: 30px;
@@ -4694,6 +4726,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginLeftNeg115 {
   margin-left: -115px;
+}
+
+#ov1  .marginLeft0 {
+  margin-left: 0;
 }
 
 #ov1  .marginLeft1 {
@@ -5053,6 +5089,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding10 {
   padding: 10px;
+}
+#ov1  .padding12 {
+  padding: 12px;
 }
 
 #ov1  .padding15 {

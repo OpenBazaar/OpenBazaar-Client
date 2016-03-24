@@ -77,7 +77,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
   if(modelJSON){
     __.each(modelJSON, function (value, key) {
       if (formKeys.indexOf(key) == -1 && skipKeys.indexOf(key) == -1){
-        if(value.constructor === Array && key != "shipping_addresses" && key != "moderators"){
+        if(value && value.constructor === Array && key != "shipping_addresses" && key != "moderators"){
           __.each(value, function (val) {
             formData.append(key, val);
           });

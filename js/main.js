@@ -111,13 +111,21 @@ if(platform === "linux") {
 }
 
 //open external links in a browser, not the app
-$('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescription a', function(e){
-  e.preventDefault();
-  var extUrl = $(this).attr('href');
-  if (!/^https?:\/\//i.test(extUrl)) {
-    extUrl = 'http://' + extUrl;
+$('body').on('click', 'a', function(e){
+  var targUrl = $(e.target).attr("href") || $(e.target).text(),
+      linkPattern = /^[a-zA-Z]+:\/\//;
+
+  if(targUrl.startsWith('ob') || targUrl.startsWith('@')){
+    app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
+      Backbone.history.navigate(route, {trigger:true});
+    });
+  } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
+    e.preventDefault();
+    if (!/^https?:\/\//i.test(targUrl)) {
+      targUrl = 'http://' + targUrl;
+    }
+    require("shell").openExternal(targUrl);
   }
-  require("shell").openExternal(extUrl);
 });
 
 $(document).on('mouseenter',
@@ -306,8 +314,14 @@ var loadProfile = function(landingRoute, onboarded) {
             window.bitCoinPriceChecker = setInterval(function () {
               setCurrentBitCoin(model.get('currency_code'), user);
             }, 54000000);
+          },
+          error: function(model, response){
+            console.log(response);
+            alert("Your settings could not be loaded");
           }
         });
+      } else {
+        alert("Your profile could not be loaded.");
       }
     }
   });
@@ -442,13 +456,19 @@ heartbeat.on('message', function(e) {
 
           app.login().done(function(data) {
             if (data.success) {
-              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
-                if (__.isEmpty(profile)) {
-                  launchOnboarding(guidCreating = $.Deferred().resolve().promise());
-                } else {
-                  loadProfile();
-                }
-              });
+              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile')
+                  .done(function(profile) {
+                    if (__.isEmpty(profile)) {
+                      launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+                    } else {
+                      loadProfile();
+                    }
+                  })
+                  .always(function(data, textStatus){
+                    if(textStatus == 'parsererror'){
+                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                    }
+                  });
             } else {
               launchServerConnect();
             }

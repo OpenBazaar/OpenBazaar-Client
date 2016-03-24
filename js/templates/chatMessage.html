@@ -1,9 +1,8 @@
+<!-- <%= ob.message_type %> -->
 <% if (ob.message_type == "DISPUTE_OPEN" || ob.message_type == "dispute_open") { %>
-<hr>
-<div class="pad10"><%= polyglot.t('transactions.StartDisputeFlag') %></div>
-<hr>
+<div class="padding12 textOpacity75 borderBottom width100 borderTopDashed borderBottomDashed custCol-border alignCenter"><%= polyglot.t('transactions.StartDisputeFlag') %></div>
 <% } %>
-<div class="chatConversationMessageLine <% if(ob.message_type == "ORDER") { %>padding2015 borderBottom1 custCol-border<% } %>">
+<div class="chatConversationMessageLine <% if(ob.message_type == "ORDER" || ob.message_type == "DISPUTE_OPEN" || ob.message_type == "dispute_open") { %>padding2015 borderBottom1 custCol-border<% } %>">
     <div class="flexRow">
         <div class="chatConversationMessageTimestamp paddingLeft2 <% if (ob.outgoing) { %>width100 alignRight<% } %>">
             <div><%= ob.moment(new Date(ob.timestamp * 1000)).format('MMM D, h:mm A') %></div>
