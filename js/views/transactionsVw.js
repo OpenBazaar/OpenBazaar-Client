@@ -287,6 +287,7 @@ module.exports = baseVw.extend({
     if(options.status == "open"){
       options.status = 4;
     }
+    var btcRegex = window.testnet ? this.userModel.get('bitcoinValidationRegexTestnet') : this.userModel.get('bitcoinValidationRegex');
     var orderModalView = new transactionModalVw({
       orderID: options.orderID,
       status: options.status,
@@ -297,7 +298,7 @@ module.exports = baseVw.extend({
       btAve: this.btAve,
       state: this.state,
       tabState: options.tabState,
-      bitcoinValidationRegex: this.userModel.get('bitcoinValidationRegex'),
+      bitcoinValidationRegex: btcRegex,
       transactionType: options.transactionType,
       userModel: this.userModel,
       userProfile: this.userProfile,

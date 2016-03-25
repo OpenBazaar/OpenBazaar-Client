@@ -11,6 +11,7 @@ window.$ = $;
 window.jQuery = $;
 window.Backbone.$ = $;
 window.focused = true;
+window.testnet = true; //change to false to use main net
 
 // we need to know this for notifications
 window.onfocus = function() {

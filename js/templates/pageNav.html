@@ -163,10 +163,12 @@
   <div class="ctrlGroup flexExpand">
     <div class="txtFieldWrapper searchWrapper mainSearchWrapper js-mainSearchWrapper">
       <input type="text" class="txtField js-navAddressBar borderRadius3" id="addressBar" placeholder="<%= polyglot.t('nav.searchPlaceholder') %>" />
+      <% if(window.testnet) { %>
       <div class="testnetBadge">
         <span class="ion-alert-circled fontSize9"></span>
         <%= polyglot.t('nav.testMode') %>
       </div>
+      <% } %>
     </div>
   </div>
   <div class="ctrlGroup">
