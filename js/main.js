@@ -113,15 +113,18 @@ if(platform === "linux") {
 
 //open external links in a browser, not the app
 $('body').on('click', 'a', function(e){
-  var targUrl = $(e.target).attr("href") || $(e.target).text(),
+  var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
       linkPattern = /^[a-zA-Z]+:\/\//;
 
+
   if(targUrl.startsWith('ob') || targUrl.startsWith('@')){
+    e.preventDefault();
     app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
       Backbone.history.navigate(route, {trigger:true});
     });
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
     e.preventDefault();
+
     if (!/^https?:\/\//i.test(targUrl)) {
       targUrl = 'http://' + targUrl;
     }
@@ -183,7 +186,7 @@ window.keyShortcuts = {
   cases:           '3',
   settings:        'g',
   addressBar:      'l'
-}
+};
 
 $(window).bind('keydown', function(e) {
   if (e.ctrlKey || e.metaKey) {
@@ -362,7 +365,7 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
-    onboardingModal && onboardingModal.remove()
+    onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
     $loadingModal.removeClass('hide');

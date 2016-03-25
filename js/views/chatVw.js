@@ -67,7 +67,7 @@ module.exports = baseVw.extend({
           this.chatHeadsVw.render().el
         );
 
-        this.listenTo(this.chatHeadsVw, 'chatHeadClick', this.onChatHeadClick)
+        this.listenTo(this.chatHeadsVw, 'chatHeadClick', this.onChatHeadClick);
         this.registerChild(this.chatHeadsVw);
       } else {
         this.filterChatHeads();
@@ -99,7 +99,7 @@ module.exports = baseVw.extend({
     var searchText = this.$searchField.val(),
         guid;
 
-    render = typeof render === 'undefined' ? true : false;
+    render = typeof render === 'undefined';
 
     this.filteredChatConvos = new ChatConversationsCl(
       this.chatConversationsCl.filter((md) => {

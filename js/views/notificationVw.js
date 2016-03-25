@@ -33,9 +33,6 @@ module.exports = baseVw.extend({
       case "payment received":
         Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
         break;
-      case "rating received":
-        Backbone.history.navigate('#transactions/sales/' + this.model.get('order_id'), {trigger: true});
-        break;
       case "order confirmation":
         Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
         break;
