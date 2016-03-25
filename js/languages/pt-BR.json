@@ -429,7 +429,7 @@
     "TotalInTransaction": "Transação:",
     "StartDisputeFlag": "Disputa Iniciada",
     "CloseDisputeFlag": "Disputa Finalizada",
-    "PayoutOnlyBuyer": "Ao finalizar essa disputa, 100% dos fundos serão reembolsados para o comprador."
+    "PayoutOnlyBuyer": "Ao finalizar essa disputa, 100% dos fundos serão reembolsados para o comprador.",
     "UpdatingOrder": "Atualizando sua transação",
     "UpdateComplete": "A atualização da sua transação foi concluída",
     "UpdateFailed": "A atualização da sua transação não foi concluída. Abra a transação e tente novamente",
