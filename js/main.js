@@ -113,15 +113,21 @@ if(platform === "linux") {
 
 //open external links in a browser, not the app
 $('body').on('click', 'a', function(e){
-  var targUrl = $(e.target).attr("href") || $(e.target).text(),
+  var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
       linkPattern = /^[a-zA-Z]+:\/\//;
 
+  console.log(targUrl)
+  console.log($(e.target))
+
   if(targUrl.startsWith('ob') || targUrl.startsWith('@')){
+    e.preventDefault();
     app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
       Backbone.history.navigate(route, {trigger:true});
     });
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
+    console.log("test true")
     e.preventDefault();
+
     if (!/^https?:\/\//i.test(targUrl)) {
       targUrl = 'http://' + targUrl;
     }

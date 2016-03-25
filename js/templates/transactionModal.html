@@ -797,7 +797,11 @@
             </div>
           </div>
           <% if(ob.bitcoin_txs && ob.bitcoin_txs[0]){ %>
-          <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+            <% if(window.testnet){ %>
+              <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+            <% }else{ %>
+              <a href="https://live.blockcypher.com/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+            <% } %>
             <div class="btn btn-txt floatRight custCol-secondary textOpacity1">
               <%= polyglot.t('transactions.ViewOnBlockchain') %>
               <span class="ion-android-open fontSize10"></span>
