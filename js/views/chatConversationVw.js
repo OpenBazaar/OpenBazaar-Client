@@ -226,7 +226,7 @@ module.exports = baseVw.extend({
         }))
       );
 
-      this.$('.chatConversationMessage textarea').focus()
+      this.$('.chatConversationMessage textarea').focus();
       this.$messagesScrollContainer = this.$('.chatConversationContent');
       this.$messagesScrollContainer.on('scroll', this.scrollHandler);
       this.$loadingSpinner = this.$messagesScrollContainer.find('.js-loadingSpinner');

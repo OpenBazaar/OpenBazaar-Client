@@ -212,7 +212,6 @@ module.exports = baseVw.extend({
   },
 
   showContract: function(){
-    console.log("show contract")
     this.$('.js-transactionsContractHolder').addClass('bottom0');
     this.$('.js-transactionShowContract').addClass('hide');
     this.$('.js-transactionHideContract').removeClass('hide');
@@ -605,7 +604,7 @@ module.exports = baseVw.extend({
       discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
       discussionData.vendor_percentage = this.$('#transactionsSellerPayoutPercent').val() * 0.01;
     } else {
-      discussionData.buyer_percentage = 1
+      discussionData.buyer_percentage = 1;
       discussionData.vendor_percentage = 0;
     }
 

@@ -116,8 +116,6 @@ $('body').on('click', 'a', function(e){
   var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
       linkPattern = /^[a-zA-Z]+:\/\//;
 
-  console.log(targUrl)
-  console.log($(e.target))
 
   if(targUrl.startsWith('ob') || targUrl.startsWith('@')){
     e.preventDefault();
@@ -125,7 +123,6 @@ $('body').on('click', 'a', function(e){
       Backbone.history.navigate(route, {trigger:true});
     });
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
-    console.log("test true")
     e.preventDefault();
 
     if (!/^https?:\/\//i.test(targUrl)) {
@@ -189,7 +186,7 @@ window.keyShortcuts = {
   cases:           '3',
   settings:        'g',
   addressBar:      'l'
-}
+};
 
 $(window).bind('keydown', function(e) {
   if (e.ctrlKey || e.metaKey) {
@@ -368,7 +365,7 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
-    onboardingModal && onboardingModal.remove()
+    onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
     $loadingModal.removeClass('hide');

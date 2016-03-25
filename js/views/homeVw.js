@@ -191,10 +191,8 @@ module.exports = baseVw.extend({
     item.discover = true;
     item.ownGuid = this.userModel.get('guid');
 
-    item.ownFollowing = false;
-    if(this.ownFollowing.indexOf(item.guid) != -1){
-      item.ownFollowing = true;
-    }
+
+    item.ownFollowing = this.ownFollowing.indexOf(item.guid) != -1;
 
     blocked = this.userModel.get('blocked_guids') || [];    
     item.isBlocked = blocked.indexOf(item.guid) !== -1;
