@@ -600,18 +600,21 @@ module.exports = Backbone.View.extend({
     $(e.target).addClass('loading');
     localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
 
-    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      app.statusBar.pushMessage({
-        type: 'confirmed',
-        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      });
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings",
+        function(){
+          app.statusBar.pushMessage({
+            type: 'confirmed',
+            msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+          });
 
-      self.setCurrentBitCoin(cCode);
-      self.refreshView();
-    }, function(){
-      $(e.target).removeClass('loading');
-      self.scrollToFirstError(self.$('#generalForm'));
-    });
+          self.setCurrentBitCoin(cCode);
+          self.refreshView();
+        },'', '','',
+        function(){
+          //on invalid
+          messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+          self.scrollToFirstError(self.$('#generalForm'));
+        }).always(function(){$(e.target).removeClass('loading');});
   },
 
   savePage: function(e){
@@ -654,10 +657,11 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, function(){
-        $(e.target).removeClass('loading');
+      },'', pageData, skipKeys, function(){
+        //on invalid
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
         self.scrollToFirstError(self.$('#pageForm'));
-      }, pageData, skipKeys);
+      }).always(function(){$(e.target).removeClass('loading');});
     };
 
     var checkSocialCount = function(){
@@ -768,19 +772,19 @@ module.exports = Backbone.View.extend({
     };
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
-      saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
-        $(e.target).removeClass('loading');
-        app.statusBar.pushMessage({
-          type: 'confirmed',
-          msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-        });        
+      saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings",
+          function () {
+            app.statusBar.pushMessage({
+              type: 'confirmed',
+              msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+            });
 
-        self.refreshView();
-      }, function(data){
-        onFail(data);
-      }, settingsData);
-    }, function(data){
-      onFail(data);
+            self.refreshView();
+            }, function(data){
+              onFail(data);
+            }, settingsData).always(function(){$(e.target).removeClass('loading');});
+          }, function(data){
+            onFail(data);
     });
   },
 
@@ -854,9 +858,8 @@ module.exports = Backbone.View.extend({
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
     }, function(){
-      $(e.target).removeClass('loading');
       self.scrollToFirstError(self.$('#moderatorForm'));
-    }, moderatorData);
+    }, moderatorData).always(function(){$(e.target).removeClass('loading');});;
 
     $.ajax({
       type: "POST",
@@ -880,12 +883,11 @@ module.exports = Backbone.View.extend({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
       }, function(){
-        $(e.target).removeClass('loading');
         self.scrollToFirstError(self.$('#advancedForm'));
       },'','','');
       
       self.refreshView();
-    });
+    }).always(function(){$(e.target).removeClass('loading');});;
   },
 
   refreshView: function(){

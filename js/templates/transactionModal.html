@@ -136,8 +136,15 @@
                          class="fieldItem custCol-text"
                          required
                          placeholder="<%= polyglot.t('transactions.RecievingAddressPlaceholder') %>"
-                         pattern="<%- ob.bitcoinValidationRegex %>"
+                         pattern="<%= ob.bitcoinValidationRegex %>"
                   >
+                  <% if(window.testnet) { %>
+                  <div class="positionTopRight padding10">
+                    <span class="btn btn-txt custCol-secondary fontSize9">
+                      <%= polyglot.t('TestnetAddress') %>
+                    </span>
+                  </div>
+                  <% } %>
                 </div>
               </div>
               <div class="flexRow custCol-border borderTop">
@@ -1050,7 +1057,15 @@
                          type="text"
                          placeholder="<%= polyglot.t('Address') %>"
                          class="fieldItem"
-                         pattern="<%= ob.bitcoinValidationRegex %>">
+                         pattern="<%= ob.bitcoinValidationRegex %>"
+                  >
+                  <% if(window.testnet) { %>
+                  <div class="positionTopRight padding10">
+                    <span class="btn btn-txt custCol-secondary fontSize9">
+                      <%= polyglot.t('TestnetAddress') %>
+                    </span>
+                  </div>
+                  <% } %>
                 </div>
               </div>
             </div>
