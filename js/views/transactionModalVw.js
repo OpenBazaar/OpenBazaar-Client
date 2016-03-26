@@ -68,7 +68,6 @@ module.exports = baseVw.extend({
     this.countriesArray = options.countriesArray;
     this.cCode = options.cCode;
     this.btAve = options.btAve; //average price in bitcoin for one unit of the user's currency
-    this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.tabState = options.tabState ;//active tab
     this.socketView = options.socketView;
     this.userModel = options.userModel;
@@ -93,7 +92,6 @@ module.exports = baseVw.extend({
       serverUrl: this.serverUrl,
       status: this.status,
       transactionType: this.transactionType,
-      bitcoinValidationRegex: this.bitcoinValidationRegex,
       avatarURL: this.avatarURL,
       avatar_hash: this.userProfile.get('avatar_hash'),
       orderID: this.orderID});

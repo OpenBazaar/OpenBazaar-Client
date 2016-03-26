@@ -158,9 +158,9 @@
                        id="refund_address"
                        placeholder="<%= polyglot.t('Address') %>"
                        class="fieldItem"
-                       pattern="<% if(window.testnet){ print(ob.user.bitcoinValidationRegexTestnet) }else{ print(ob.user.bitcoinValidationRegex)} %>"
+                       pattern="<% if(config.testnet){ print(config.bitcoinValidationRegexTestnet) }else{ print(config.bitcoinValidationRegex)} %>"
                        value="<%= ob.user.refund_address %>">
-                <% if(window.testnet) { %>
+                <% if(config.testnet) { %>
                 <div class="positionTopRight padding10">
                   <span class="btn btn-txt custCol-secondary">
                     <%= polyglot.t('MustTestnetAddress') %> <!--remove this in production-->
