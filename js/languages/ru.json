@@ -507,7 +507,7 @@
     "Finished": "Готово"
   },
   "softwareUpdate": {
-    "updateAvailable": "Доступно обновление OpenBazaar",
+    "updateAvailable": "Вышла новая версия OpenBazaar",
     "installUpdate": "Установить обновление",
     "dismiss": "Отказаться"
   },
