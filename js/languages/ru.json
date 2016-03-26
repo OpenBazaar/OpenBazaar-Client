@@ -167,11 +167,11 @@
   "ShortDescription": "Короткое описание",
   "UpTo140Characters": "До 140 знаков",
   "PrimaryColor": "Главный цвет",
-  "SecondaryColor": "Дополнительный цвет",
+  "SecondaryColor": "Цвет страницы",
   "TextColor": "Цвет текста",
   "CoverPhotoButton": "Выберите обложку",
   "AboutPlaceholder": "Полное описание",
-  "BackgroundColor": "Фоновый цвет",
+  "BackgroundColor": "Цвет заднего фона",
   "NotificationPaymentSent": "Платеж был отправлен",
   "NotificationOrderFor": "разместили заказ",
   "NotificationOrderConfirmed": "Ваш заказ был подтвержден/выслан",
@@ -245,9 +245,9 @@
   "maxLength200": "макс. длина 200 знаков",
   "StoreModeratorsOptional": "Модераторы магазинов (необязательно)",
   "Searchformoderators": "Поиск модераторов",
-  "Contributors": "Участники",
+  "Contributors": "Коллектив",
   "Support": "Поддержка",
-  "Licensing": "Лицензирование",
+  "Licensing": "Библиотеки",
   "On": "Вкл",
   "Off": "Выкл",
   "ClickToChange": "Выберите для изменения",
@@ -435,14 +435,14 @@
     "userFail": "Страница которую вы пытаетесь просмотреть более не доступна в сети"
   },
   "aboutSection": {
-    "about": "о нас",
+    "about": "OpenBazaar является общественным рынком peer-to-peer. Это всё равно что скрестить eBay&trade;, Twitter&trade; и BitTorrent в нечто единое. С одним отличием - мы не берём комиссий и не накладываем ограничений, а весь исходный код OpenBazaar открыт и доступен в режиме Open Source. \n\n Пожалуйста, не пытайтесь сравнивать старое с новым - чтобы привыкнуть к лучшему, может потребоваться время.",
     "contributors": "<ul><li>Giannis Adamopoulos</li><li>Ariadni-Karolina Alexiou</li><li>Tikhon Bernstam</li><li>Brad Burnham</li><li>George Chatzisofroniou</li><li>Patrick Connolly</li><li>Chris Dixon</li><li>Simon de la Rouviere</li><li>Braden Glasgow</li><li>Brian Hoffman</li><li>Ben Holden-Crowther</li><li>Joshua Jeffryes</li><li>Nikolas Korasidis</li><li>Regan Lawton</li><li>Sami Lehtinen</li><li>Angel Leon</li><li>Joye Lin</li><li>Joel Monegro</li><li>William Mougayar</li><li>Jonas David Nick</li><li>Onename</li><li>Chris Pacia</li><li>Sam Patterson</li><li>Chara Podimata</li><li>Samuel Reed</li><li>Washington Sanchez</li><li>Aeron Paul Sioson</li><li>Adrian Smith</li><li>Adam Snodgrass</li><li>Thomas Stilwell</li><li>Amir Taaki</li><li>Mike Wolf</li><li>Dionysis Zindros</li><li>secret-bitcoin-login</li><li>Rav3nPL</li><li>El--Presidente</li><li>Tinytin</li><li>ULRichard</li></ul>",
-    "support": "поддержка",
+    "support": "Наш проект не является коммерческим, а все наши труды доступны в Open Source, помогите нам проекту развиться быстрее, поддержав нас",
     "licensing": "<ul><li>protobuf</li><li>Twisted</li><li>txJSON-RPC</li><li>txrudp</li><li>pyelliptic</li><li>pystun</li><li>bitcoin</li><li>gnupg</li><li>pynacl</li><li>txrestapi</li><li>txws</li><li>python-libbitcoin client</li><li>requests</li><li>backbone</li><li>underscore</li><li>moment.js</li><li>jquery</li><li>electron.js</li><li>backbone.linear</li><li>list.js</li><li>polyglot.js</li><li>taggle.js</li><li>safestart</li><li>python-bitcoinlib</li></ul>"
   },
   "saveMessages": {
     "Saved": "Сохранено",
-    "SaveSuccess": "Ваши изменения сохранены."
+    "SaveSuccess": "Все изменения сохранены"
   },
   "discover": {
     "searchDefaultText": "Сканирование вашей сети",
