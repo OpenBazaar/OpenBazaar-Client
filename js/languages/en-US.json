@@ -335,6 +335,7 @@
     "oneStar": "Terrible"
   },
   "transactions": {
+    "Order": "Order",
     "OrderDetails": "Order Details",
     "ViewOnBlockchain": "View Details",
     "SoldBy": "Vendor",
