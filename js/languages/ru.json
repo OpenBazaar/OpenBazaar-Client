@@ -60,7 +60,7 @@
   "Welcome": "Welcome",
   "CreateStore": "Создать магазин",
   "GoToMyPage": "Моя страница",
-  "SearchForItemsPlaceholder": "Введите #игры, #обувь или любой #тег...",
+  "SearchForItemsPlaceholder": "Попробуйте найти #игры, #обувь или любой #тег...",
   "SearchForPagesPlaceholder": "Поиск по имени или ключевому слову",
   "SearchFeedPlaceholder": "Поиск по имени или OpenBazaar ID",
   "SearchForFollowersPlaceholder": "Поиск по имени или OpenBazaar ID",
