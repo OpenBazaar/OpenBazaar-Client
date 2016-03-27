@@ -135,7 +135,7 @@
   "BitcoinReturnAddressInfo": "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
   "LocalCurrency": "Local Currency",
   "TimeZone": "Time Zone",
-  "ShipToName": "Name",
+  "ShipToName": "Recipient Name",
   "ShipToStreet": "Street",
   "ShipToCity": "City",
   "ShipToState": "State/Province/Region",
