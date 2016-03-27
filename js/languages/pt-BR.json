@@ -169,7 +169,7 @@
   "Language": "Idioma",
   "Reset": "Resetar",
   "Local": "Local",
-  "Domestic": "Doméstico:",
+  "Domestic": "Nacional:",
   "Location": "Localização",
   "International": "Internacional",
   "Time": "Horário",
@@ -335,6 +335,7 @@
     "oneStar": "Péssimo"
   },
   "transactions": {
+    "Order": "Pedido",
     "OrderDetails": "Detalhes do Pedido",
     "ViewOnBlockchain": "Ver Detalhes",
     "SoldBy": "Vendedor",
