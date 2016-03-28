@@ -24,7 +24,12 @@
         <%= polyglot.t('transactions.OrderStatus'+ob.status) %>
         <% if(ob.displayModerator && ob.status < 3){ %>
           <%= polyglot.t('transactions.InEscrow') %>
-        <% } %>        
+        <% } %>
+        <% if(ob.dispute_resolution && ob.dispute_resolution.resolution){ %>
+          <br>
+            <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %>BTC<br>
+            <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %>BTC
+        <% } %>
       </div>
     </div>
     <% if(ob.status == 0 && ob.transactionType == "purchases"){ %>
@@ -65,15 +70,21 @@
         Refund Order
       </a>
     </div>
-    <% } else if(ob.transactionType == "purchases" && ob.status == 2 || ob.status > 5){ %>
+    <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
     <div class="positionTop padding10 width100">
       <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-        <% if (ob.status == 2) { %>
         <%= polyglot.t('transactions.CompleteOrder') %>
-        <% } else { %>
+      </a>
+    </div>
+    <% } else if(ob.transactionType == "purchases" &&
+                ob.dispute_resolution &&
+                ob.dispute_resolution.resolution &&
+                ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
+    <div class="positionTop padding10 width100">
+      <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
+        <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('transactions.LeaveReview') %>
-        <% } %>
       </a>
     </div>
     <% } else if(ob.status == 5 && ob.dispute_resolution){ %>
