@@ -393,6 +393,11 @@ form {
   justify-content: center;
 }
 
+.flexRow-vCenter {
+  align-items: center;
+  height: 100%;
+}
+
 .flexRow [class |= "flexCol"] {
   box-sizing: border-box;
   position: relative;
@@ -1524,7 +1529,8 @@ removed because I don't think we're using the trick to hide the borders any more
   padding-left: 2px;
   position: absolute;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
-  top: 13px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
 }
 
@@ -1550,14 +1556,12 @@ removed because I don't think we're using the trick to hide the borders any more
 
 .mainSearchWrapper:before {
   color: #000;
-  top: 5px;
   left: 6px;
   content: "\f4a5"
 }
 
 .mainSearchWrapper.onPage:before {
   color: #000;
-  top: 6px;
   left: 9px;
   content: "\f12f";
   opacity: .75;
@@ -1594,6 +1598,7 @@ input[type="text"].txtField-bar {
   box-shadow: none;
   color: #fff;
   height: 53px;
+  line-height:53px;
   font-size: 14px;
   letter-spacing: 0;
   opacity: 1;
@@ -1668,9 +1673,16 @@ input[type="text"].txtField-bar {
   line-height: 32px;
 }
 
-.btn:active {
-  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+.btn:active,
+.btn.active {
+  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
   opacity: .75;
+}
+
+.btn.btn-c1:active,
+.btn.btn-c1.active {
+  background-color: #215175;
+  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
 }
 
 .btn.btn-txt {
@@ -1717,7 +1729,7 @@ margin: auto;
 
 #userPage .btn.btn-c1,
 .btn.btn-dark {
-  background-color: rgb(37,37,37);
+  background-color: #215175;
 }
 
 .btn.btn-c1.fade {
@@ -2357,15 +2369,15 @@ div.chatSearchOut .chatSearchIcon {
   border: 1px solid rgb(74,72,72);
 }
 
-.btn-togWrapper .btn-togWrapper-light {
+.btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgba(255,255,255,0.08);
 }
 
-.btn-togWrapper .btn-togWrapper-c1 {
+.btn-togWrapper.btn-togWrapper-c1 {
   border: 1px solid rgb(50,126,184);
 }
 
-#userPage .btn-togWrapper.btn-togWrapper-c1 {
+#userPage .btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgb(87,87,87);
 }
 

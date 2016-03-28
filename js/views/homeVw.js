@@ -2,18 +2,14 @@
 
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    Moment = require('moment'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     baseVw = require('./baseVw'),
-    storeListView = require('./userListVw'),
-    userProfileModel = require('../models/userProfileMd'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
-    userShortModel = require('../models/userShortMd'),
-    simpleMessageView = require('./simpleMessageVw');
+    userShortModel = require('../models/userShortMd');
 
 module.exports = baseVw.extend({
 
@@ -27,7 +23,9 @@ module.exports = baseVw.extend({
     'click .js-homeCreateListing': 'createListing',
     'click .js-homeSearchItemsClear': 'searchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
-    'change .js-homeSelectFollowingFilter': 'setFollowingFilter'
+    'change .js-homeSelectFollowingFilter': 'setFollowingFilter',
+    'click .js-homeListingsFollowed': 'clickListingsFollowed',
+    'click .js-homeListingsAll': 'clickListingsAll'
   },
 
   initialize: function(options){
@@ -47,7 +45,7 @@ module.exports = baseVw.extend({
     this.loadingVendors = false;
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
-    this.onlyFollowing = false;
+    this.onlyFollowing = true;
     this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
@@ -459,7 +457,7 @@ module.exports = baseVw.extend({
     this.clearItems();
     this.socketItemsID = Math.random().toString(36).slice(2);
     this.loadingProducts = true;
-    this.socketView.getItems(this.socketItemsID);
+    this.socketView.getItems(this.socketItemsID, this.onlyFollowing);
     this.setSocketTimeout();
     this.searchItemsText = "";
     this.$el.find('.js-homeSearchItems').val("");
@@ -501,6 +499,20 @@ module.exports = baseVw.extend({
       this.onlyFollowing = false;
     }
     this.loadItemsOrSearch();
+  },
+
+  clickListingsFollowed: function(e){
+    this.onlyFollowing = true;
+    this.loadItems();
+    $(e.target).addClass('active');
+    this.$('.js-homeListingsAll').removeClass('active');
+  },
+
+  clickListingsAll: function(e){
+    this.onlyFollowing = false;
+    this.loadItems();
+    $(e.target).addClass('active');
+    this.$('.js-homeListingsFollowed').removeClass('active');
   },
 
   loadItemsOrSearch: function(){
