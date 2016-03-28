@@ -29,9 +29,7 @@ module.exports = Backbone.Router.extend({
       ["transactions", "transactions"],
       ["transactions/:state(/:orderID)", "transactions"],
       ["settings", "settings"],
-      ["settings/:state", "settings"],
-      ["about", "about"],
-      ["support", "donate"]
+      ["settings/:state", "settings"]
     ];
 
     routes.forEach((route) => {
@@ -108,7 +106,7 @@ module.exports = Backbone.Router.extend({
 
   cleanup: function(){
     "use strict";
-    $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
+    $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
     obEventBus.trigger('cleanNav');
@@ -116,6 +114,8 @@ module.exports = Backbone.Router.extend({
 
   newView: function(view, bodyID, addressBarText, bodyClass){
     var loadingConfig;
+
+    this.cleanup();
 
     if($('body').attr('id') != bodyID){
       $('body').attr("id", bodyID || "");
@@ -215,7 +215,6 @@ module.exports = Backbone.Router.extend({
     if(state == "products"){
       searchItemsText = searchText;
     }
-    this.cleanup();
     this.newView(new homeView({
       userModel: this.userModel,
       userProfile: this.userProfile,
@@ -241,7 +240,6 @@ module.exports = Backbone.Router.extend({
 
     if (handle) options.handle = handle;
 
-    this.cleanup();
     this.newView(new userPageView(options),"userPage",'','onPage');
   },
 
@@ -277,7 +275,6 @@ module.exports = Backbone.Router.extend({
 
   transactions: function(state, orderID){
     "use strict";
-    this.cleanup();
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
@@ -290,23 +287,11 @@ module.exports = Backbone.Router.extend({
   settings: function(state){
     "use strict";
     $('.js-loadingModal').addClass('show');
-    this.cleanup();
     this.newView(new settingsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       state: state,
       socketView: this.socketView
     }), "userPage");
-  },
-
-  about: function(){
-    "use strict";
-    this.cleanup();
-  },
-
-  donate: function(){
-    "use strict";
-    this.cleanup();
-    this.newView(new donateView());
   }
 });
