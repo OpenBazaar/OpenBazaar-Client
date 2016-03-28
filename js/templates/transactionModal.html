@@ -78,6 +78,7 @@
       </a>
     </div>
     <% } else if(ob.transactionType == "purchases" &&
+                !ob.buyer_receipt &&
                 ob.dispute_resolution &&
                 ob.dispute_resolution.resolution &&
                 ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
