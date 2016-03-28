@@ -115,6 +115,12 @@ module.exports = window.Backbone.Model.extend({
     } else {
       response.invalidData = true;
     }
+    
+    if(response.dispute_resolution && response.dispute_resolution.resolution){
+      //if a resolution exists, make sure both payouts have values
+      response.dispute_resolution.resolution.buyer_payout = response.dispute_resolution.resolution.buyer_payout || 0;
+      response.dispute_resolution.resolution.vendor_payout = response.dispute_resolution.resolution.vendor_payout || 0;
+    }
 
     response.serverUrl = this.serverUrl;
     response.status = this.status;

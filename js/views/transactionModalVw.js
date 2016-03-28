@@ -378,11 +378,11 @@ module.exports = baseVw.extend({
           self.getData();
         },
         function(data){
-          self.$el.find('.js-transactionSpinner').addClass('hide');
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
         completeData).always(() => {
           $(e.target).removeClass('loading');
+          self.$el.find('.js-transactionSpinner').addClass('hide');
         });
   },
 
