@@ -341,7 +341,7 @@ module.exports = baseVw.extend({
     "use strict";
     var self = this,
         blocked = this.options.userModel.get('blocked_guids') || [],
-        isBlocked = blocked.indexOf(this.pageID) !== -1 ? true : false;
+        isBlocked = blocked.indexOf(this.pageID) !== -1;
 
     //add blocked status to model
     this.model.set('isBlocked', isBlocked);
@@ -808,7 +808,7 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.followerList, 'usersAdded', ()=>{
       var searchTerms = this.$('#inputFollowing').val();
-      this.followingSearch.reIndex()
+      this.followingSearch.reIndex();
       searchTerms && this.followingSearch.search(searchTerms);
     });
   },

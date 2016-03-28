@@ -140,8 +140,15 @@
                          class="fieldItem custCol-text"
                          required
                          placeholder="<%= polyglot.t('transactions.RecievingAddressPlaceholder') %>"
-                         pattern="<%- ob.bitcoinValidationRegex %>"
+                         pattern="<%= ob.bitcoinValidationRegex %>"
                   >
+                  <% if(window.testnet) { %>
+                  <div class="positionTopRight padding10">
+                    <span class="btn btn-txt custCol-secondary fontSize9">
+                      <%= polyglot.t('TestnetAddress') %>
+                    </span>
+                  </div>
+                  <% } %>
                 </div>
               </div>
               <div class="flexRow custCol-border borderTop">
@@ -794,7 +801,11 @@
             </div>
           </div>
           <% if(ob.bitcoin_txs && ob.bitcoin_txs[0]){ %>
-          <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+            <% if(window.testnet){ %>
+              <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+            <% }else{ %>
+              <a href="https://live.blockcypher.com/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+            <% } %>
             <div class="btn btn-txt floatRight custCol-secondary textOpacity1">
               <%= polyglot.t('transactions.ViewOnBlockchain') %>
               <span class="ion-android-open fontSize10"></span>
@@ -1054,7 +1065,15 @@
                          type="text"
                          placeholder="<%= polyglot.t('Address') %>"
                          class="fieldItem"
-                         pattern="<%= ob.bitcoinValidationRegex %>">
+                         pattern="<%= ob.bitcoinValidationRegex %>"
+                  >
+                  <% if(window.testnet) { %>
+                  <div class="positionTopRight padding10">
+                    <span class="btn btn-txt custCol-secondary fontSize9">
+                      <%= polyglot.t('TestnetAddress') %>
+                    </span>
+                  </div>
+                  <% } %>
                 </div>
               </div>
             </div>

@@ -198,14 +198,10 @@ form {
   transition: width 0.5s ease;
 }
 
-#ov1 .chatOpen #obContainer {
+#ov1.chatOpen #obContainer {
   width: calc(100% - 230px);
 }
 
-/*#ov1 .chatOpen #obContainer::-webkit-scrollbar {
-  width: 0;
-}
-*/
 #pageNav {
   position: fixed;
   top: 0;
@@ -304,6 +300,21 @@ form {
   padding-right: 0;
 }
 
+.bar.barFlush.bottomBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.bar.barFlush.bottomBar .btn-bar {
+  border-radius: 0;
+}
+
 .barTxt {
   height: 50px;
   line-height: 50px;
@@ -395,6 +406,11 @@ form {
 
 .flexRow-center {
   justify-content: center;
+}
+
+.flexRow-vCenter {
+  align-items: center;
+  height: 100%;
 }
 
 .flexRow [class |= "flexCol"] {
@@ -985,7 +1001,7 @@ label.fieldItem {
   transition: right 0.5s ease;
 }
 
-#ov1 .chatOpen .modal-child {
+#ov1.chatOpen .modal-child {
   right: 230px;
 }
 
@@ -1123,7 +1139,7 @@ label.fieldItem {
 
 /* colorbox styles */
 #colorbox {
-  z-index: 3;
+  z-index: 12;
   outline: none;
   margin-top: 20px;
   transition: margin 0.5s ease;
@@ -1131,12 +1147,12 @@ label.fieldItem {
   transition: margin-left 0.5s ease;
 }
 
-#ov1 .chatOpen #colorbox {
+#ov1.chatOpen #colorbox {
   margin-left: -115px;
 }
 
 #cboxOverlay {
-  z-index: 2;
+  z-index: 11;
   top: 50px;
   height: 100%;
   width: calc(100% - 30px);
@@ -1380,6 +1396,12 @@ h5 {
   width: 525px;
 }
 
+.modal-msg {
+  /* use for bottom half of modal under a modal-hero element */
+  width: 525px;
+  height: 374px;
+}
+
 .modal-small {
   border-radius: 3px;
   min-height: 120px;
@@ -1394,6 +1416,20 @@ h5 {
 /*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
 .modal-hero.bg-dark-blue {
   background: #063753;
+}
+
+.modal-hero.iconBackground {
+  background-image: url(../imgs/openbazaar-icon-no-border.png);
+  background-position: 50% 30px;
+  background-size: 120px;
+  background-repeat: no-repeat;
+}
+
+.modal-hero.iconBackground h1 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .modal-hero-about {
@@ -1528,7 +1564,8 @@ removed because I don't think we're using the trick to hide the borders any more
   padding-left: 2px;
   position: absolute;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
-  top: 13px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
 }
 
@@ -1554,14 +1591,12 @@ removed because I don't think we're using the trick to hide the borders any more
 
 .mainSearchWrapper:before {
   color: #000;
-  top: 5px;
   left: 6px;
   content: "\f4a5"
 }
 
 .mainSearchWrapper.onPage:before {
   color: #000;
-  top: 6px;
   left: 9px;
   content: "\f12f";
   opacity: .75;
@@ -1598,6 +1633,7 @@ input[type="text"].txtField-bar {
   box-shadow: none;
   color: #fff;
   height: 53px;
+  line-height:53px;
   font-size: 14px;
   letter-spacing: 0;
   opacity: 1;
@@ -1672,9 +1708,16 @@ input[type="text"].txtField-bar {
   line-height: 32px;
 }
 
-.btn:active {
-  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
+.btn:active,
+.btn.active {
+  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
   opacity: .75;
+}
+
+.btn.btn-c1:active,
+.btn.btn-c1.active {
+  background-color: #215175;
+  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
 }
 
 .btn.btn-txt {
@@ -1721,7 +1764,7 @@ margin: auto;
 
 #userPage .btn.btn-c1,
 .btn.btn-dark {
-  background-color: rgb(37,37,37);
+  background-color: #215175;
 }
 
 .btn.btn-c1.fade {
@@ -2361,15 +2404,15 @@ div.chatSearchOut .chatSearchIcon {
   border: 1px solid rgb(74,72,72);
 }
 
-.btn-togWrapper .btn-togWrapper-light {
+.btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgba(255,255,255,0.08);
 }
 
-.btn-togWrapper .btn-togWrapper-c1 {
+.btn-togWrapper.btn-togWrapper-c1 {
   border: 1px solid rgb(50,126,184);
 }
 
-#userPage .btn-togWrapper.btn-togWrapper-c1 {
+#userPage .btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgb(87,87,87);
 }
 
@@ -3525,7 +3568,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .90;
 }
 
-#ov1 .chatOpen .spinner-with-logo {
+#ov1.chatOpen .spinner-with-logo {
   left: calc(50% - 115.5px);
 }
 
@@ -3807,6 +3850,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 16px;
   opacity: 1;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .tooltip.tooltip-left:hover:after{
@@ -4123,7 +4167,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #statusBar {
   position: fixed;
   bottom: 0;
-  z-index: 2;
+  z-index: 10;
   width: 100%;  
 }
 
@@ -4188,7 +4232,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: transform 0.5s ease;
 }
 
-#ov1 .chatOpen .page-connect-modal .content {
+#ov1.chatOpen .page-connect-modal .content {
   transform: translateX(-115.5px);
 }
 

@@ -479,7 +479,9 @@ module.exports = baseVw.extend({
 
   untrimAddressBar: function(){
     this.addressInput.val(function (i, value) {
-      value = value.startsWith('ob://') ? value : 'ob://' + value;
+      if(value) {
+        value = value.startsWith('ob://') ? value : 'ob://' + value;
+      }
       return value;
     });
   },

@@ -5,9 +5,25 @@
         <div class="marginLeft15 marginTop2">
         </div>
         <div class="marginLeft15 marginTop2">
-          <div>
+          <div class="clearfix">
+            <div class="pull-left">
               <% print(ob.starsTmpl({ rating: ob.feedback })) %>
               (<%= ob.feedback %>/5)
+            </div>
+            <% if(ob.address){ %>
+            <div class="pull-right">
+              <% if(window.testnet){ %>
+                <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.address %>" class="noWrap">
+              <% }else{ %>
+              <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.address %>" class="noWrap">
+                <% } %>
+                <div class="btn btn-txt floatRight custCol-secondary textOpacity1">
+                  <%= polyglot.t('transactions.ViewOnBlockchain') %>
+                  <span class="ion-android-open fontSize10"></span>
+                </div>
+              </a>
+            </div>
+            <% } %>
           </div>
           <p class="fontSize14 textWeightNormal clamp4 marginTop9"><%= ob.review %></p>
         </div>

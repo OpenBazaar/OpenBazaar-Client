@@ -390,13 +390,15 @@
                 <div class="flexCol-12 custCol-border positionWrapper">
                   <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
                          placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
-                         pattern="<%= ob.user.bitcoinValidationRegex %>"
+                         pattern="<% if(window.testnet){ print(ob.user.bitcoinValidationRegexTestnet) }else{ print(ob.user.bitcoinValidationRegex)} %>"
                          value="<%= ob.user.refund_address %>" required />
+                  <% if(window.testnet) { %>
                   <div class="positionTopRight padding10">
-                  <span class="btn btn-txt custCol-secondary">
-                    <i class="ion-android-arrow-back"></i> <%= polyglot.t('TestnetAddress') %> <!--remove this in production-->
-                  </span>
+                    <span class="btn btn-txt custCol-secondary">
+                      <i class="ion-android-arrow-back"></i> <%= polyglot.t('TestnetAddress') %> <!--remove this in production-->
+                    </span>
                   </div>
+                  <% } %>
                 </div>
               </form>
               <div class="width100 marginTop30 lineHeight21 alignCenter">

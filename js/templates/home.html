@@ -34,19 +34,26 @@
     </div>
   </div>
   <div class="bar home-page-navigation-filler hide custCol-primary"></div>
-  <div class="flexContainer flex-border color-primary height54 js-productsSearch">
+  <div class="flex-border color-primary height54 js-productsSearch">
     <div class="flexRow">
-      <div class="flexRow border0">
-        <div class="width100">
-          <div class="txtFieldWrapper searchWrapper searchWrapperWithPill borderBottom">
+      <div class="flexRow borderBottom">
+        <div class="flexCol-8">
+          <div class="txtFieldWrapper searchWrapper">
             <input type="text" class="txtField txtField-bar js-homeSearchItems" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
             <a class="btn-corner btn-cornerTR ion-ios-close vCentered icon-med hide js-homeSearchItemsClear textOpacity50"></a>
           </div>
-          <div class="selectPill pull-up43">
-            <select class="custCol-secondary js-homeSelectFollowingFilter">
-              <option value="network"><%= polyglot.t('filters.listingsAll') %></option>
-              <option value="following"><%= polyglot.t('filters.listingsCurated') %></option>
-            </select>
+        </div>
+        <div class="flexCol-4">
+          <div class="flexRow flexRow-vCenter">
+            <div class="flexExpand marginRight10 fontSize10">
+              <div class="pull-right">
+                <%= polyglot.t('ShowOnlyFollowerListings') %>
+              </div>
+            </div>
+            <div class="btn-togWrapper btn-togWrapper-c1 marginRight10">
+              <a class="btn btn-txt btn-c1 btn-togLeft active js-homeListingsFollowed"><%= polyglot.t('On') %></a>
+              <a class="btn btn-txt btn-c1  btn-togRight js-homeListingsAll"><%= polyglot.t('Off') %></a>
+            </div>
           </div>
         </div>
         <!--
