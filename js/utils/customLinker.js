@@ -5,6 +5,7 @@ module.exports = function(msg) {
   msg = msg.replace(/ob:\/\/@/gm, "ob://obHandleLinkToBeReplaced");
 
   msg = autolinker.link(msg, {
+    'hashtag': "twitter",
     replaceFn : function( autolinker, match ) {
 
       switch( match.getType() ) {
@@ -21,6 +22,7 @@ module.exports = function(msg) {
           return '<a>@' + match.getTwitterHandle() + '</a>';
 
         case 'hashtag' :
+          return '<a>#' + match.getHashtag() + '</a>';
 
       }
     }
