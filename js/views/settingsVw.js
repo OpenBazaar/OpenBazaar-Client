@@ -56,6 +56,7 @@ module.exports = Backbone.View.extend({
     'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
+    'change #handle': 'handleChange',
     'input #pgp_key': 'checkPGPKey'
   },
 
@@ -133,18 +134,7 @@ module.exports = Backbone.View.extend({
 
       self.newAvatar = false;
       self.newBanner = false;
-
-      // Since the Blocked Users View kicks off many server calls (one
-      // for each blocked user) and since we are re-rendering the entire
-      // settings view often (after each save), we will cache the Blocked
-      // Users View.
-      if (!self.blockedRendered) {
-        self.renderBlocked();
-        self.blockedRendered = true;
-      } else {
-        self.renderBlocked({ useCached: true });
-      }
-
+      self.blockedTabAccessed = false;
       self.setState(self.options.state);
 
       $(".chosen").chosen({ width: '100%' });
@@ -255,10 +245,11 @@ module.exports = Backbone.View.extend({
 
   renderBlocked: function(options) {
     var self = this,
-        modelsPerBatch = 25,
+        modelsPerBatch = 5,
         $lazyLoadTrigger,
         $blockedForm,
-        blockedUsersCl;
+        blockedUsersCl,
+        $blockedContainer;
 
     options = options || {};
     $blockedContainer = this.$('#blockedForm > :first-child');
@@ -271,6 +262,7 @@ module.exports = Backbone.View.extend({
       }
 
       $blockedContainer.html(this.blockedUsersVw.el);
+      this.blockedUsersVw.delegateEvents();
 
       if (!document.contains(this.$lazyLoadTrigger[0])) {
         $blockedContainer.append(this.$lazyLoadTrigger);
@@ -294,9 +286,9 @@ module.exports = Backbone.View.extend({
       serverUrl: this.serverUrl
     });
 
-    this.$('#blockedForm').html(
+    $blockedContainer.html(
         this.blockedUsersVw.render().el
-    );
+    );    
 
     this.$lazyLoadTrigger = $('<div id="blocked_user_lazy_load_trigger">').css({
       position: 'absolute',
@@ -319,7 +311,7 @@ module.exports = Backbone.View.extend({
     });
 
     this.blockedUsersUnblockHandler && this.stopListening(window.obEventBus, null, this.blockedUsersUnblockHandler);
-    this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = (e)=> {
+    this.listenTo(window.obEventBus, 'unblockingUser', this.blockedUsersUnblockHandler = (e) => {
       blockedUsersCl.remove(
           blockedUsersCl.findWhere({ guid: e.guid })
       );
@@ -493,20 +485,24 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
-    "use strict";
     e.target.checkValidity();
     $(e.target).closest('.flexRow').addClass('formChecked');
   },
 
+  handleChange: function(e) {
+    var $field = $(e.target),
+        val = $field.val();
+
+    val && val.charAt(0) !== '@' && $field.val('@' + val);
+  },
+
   addTabToHistory: function(state){
-    "use strict";
     //add action to history
     Backbone.history.navigate("#settings/" + state);
     this.options.state = state;
   },
 
   setTab: function(activeTab, showContent){
-    "use strict";
     this.$el.find('.js-tab').removeClass('active');
     activeTab.addClass('active');
     this.$el.find('.js-tabTarg').addClass('hide');
@@ -517,15 +513,14 @@ module.exports = Backbone.View.extend({
     if(state){
       this._state = state;
       this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
-      if(state == "store"){
-
-        if(this.firstLoadModerators) {
+     
+      if (state == "store") {
+        if (this.firstLoadModerators) {
           this.$('.js-settingsNewMods').html("");
           this.$('.js-settingsCurrentMods').html("");
           this.socketView.getModerators(this.socketModeratorID);
 
           __.each(this.userModel.get('moderators'), (modID)=> {
-            "use strict";
             if (modID) {
               modID.fromModel = true;
               this.renderModerator(modID);
@@ -533,6 +528,18 @@ module.exports = Backbone.View.extend({
           });
         }
         this.firstLoadModerators = false;
+      } else if (state === 'blocked') {
+        // Since the Blocked Users View kicks off many server calls (one
+        // for each blocked user) and since we are re-rendering the entire
+        // settings view often (after each save), we will cache the Blocked
+        // Users View.
+        if (!this.blockedRendered && !this.blockedTabAccessed) {
+          this.renderBlocked();
+          this.blockedRendered = true;
+          this.blockedTabAccessed = true;
+        } else {
+          this.renderBlocked({ useCached: true });
+        }
       }
     } else {
       this._state = "general";
@@ -569,11 +576,20 @@ module.exports = Backbone.View.extend({
     this.newBanner = true;
   },
 
-  saveGeneral: function() {
+  scrollToFirstError: function($container) {
+    var $firstErr;
+
+    $container = $container && $container.length ? $container : this.$el;
+    $firstErr = $container.find(':invalid, .invalid').eq(0);
+    $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
+  },  
+
+  saveGeneral: function(e) {
     var self = this,
         form = this.$el.find("#generalForm"),
         cCode = this.$('#currency_code').val();
 
+    $(e.target).addClass('loading');
     localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
@@ -584,10 +600,13 @@ module.exports = Backbone.View.extend({
 
       self.setCurrentBitCoin(cCode);
       self.refreshView();
+    }).fail(() => {
+      $(e.target).removeClass('loading');
+      self.scrollToFirstError(self.$('#generalForm'));
     });
   },
 
-  savePage: function(){
+  savePage: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#pageForm"),
@@ -609,6 +628,8 @@ module.exports = Backbone.View.extend({
         tColorVal = tColor.val(),
         skipKeys = ["avatar_hash", "header_hash"];
 
+    $(e.target).addClass('loading');
+
     var sendPage = function(){
       //change color inputs to hex values
       pageData.primary_color = parseInt(pColorVal.slice(1), 16);
@@ -625,7 +646,10 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, "", pageData, skipKeys);
+      }, "", pageData, skipKeys).fail(() => {
+        $(e.target).removeClass('loading');
+        self.scrollToFirstError(self.$('#pageForm'));
+      });
     };
 
     var checkSocialCount = function(){
@@ -641,6 +665,7 @@ module.exports = Backbone.View.extend({
                 checkSocialCount();
               },
               function(data){
+                $(e.target).removeClass('loading');
                 messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
               }, socialData);
         } else {
@@ -712,13 +737,16 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  saveStore: function(){
+  saveStore: function(e){
     var self = this,
         form = this.$el.find("#storeForm"),
         profileData = {},
         settingsData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
-        modList = [];
+        modList = [],
+        onFail;
+
+    $(e.target).addClass('loading');
 
     moderatorsChecked.each(function() {
       modList.push($(this).data('guid'));
@@ -726,6 +754,11 @@ module.exports = Backbone.View.extend({
 
     settingsData.moderators = modList.length > 0 ? modList : "";
     //profileData.vendor = true;
+
+    onFail = (reason) => {
+      $(e.target).removeClass('loading');
+      self.scrollToFirstError(self.$('#storeForm'));
+    };
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
@@ -735,11 +768,11 @@ module.exports = Backbone.View.extend({
         });        
 
         self.refreshView();
-      }, "", settingsData);
-    }, "", profileData);
+      }, "", settingsData).fail(onFail);
+    }, "", profileData).fail(onFail);
   },
 
-  saveAddress: function(){
+  saveAddress: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#addressesForm"),
@@ -747,6 +780,7 @@ module.exports = Backbone.View.extend({
         newAddresses = [],
         addressData = {};
 
+    $(e.target).addClass('loading');
     newAddress.name = this.$el.find('#settingsShipToName').val();
     newAddress.street = this.$el.find('#settingsShipToStreet').val();
     newAddress.city = this.$el.find('#settingsShipToCity').val();
@@ -759,6 +793,7 @@ module.exports = Backbone.View.extend({
     if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
         messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+        $(e.target).removeClass('loading');
         return;
       }
     }
@@ -780,10 +815,13 @@ module.exports = Backbone.View.extend({
       });
 
       self.refreshView();
-    }, "", addressData);
+    }, "", addressData).fail(() => {
+      $(e.target).removeClass('loading');
+      self.scrollToFirstError(self.$('#addressesForm'));
+    });
   },
 
-  saveModerator: function(){
+  saveModerator: function(e){
     "use strict";
     var self = this,
         form = this.$el.find("#moderatorForm"),
@@ -791,6 +829,7 @@ module.exports = Backbone.View.extend({
         moderatorStatus = this.$('#moderatorYes').is(':checked'),
         makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator";
 
+    $(e.target).addClass('loading');
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
 
@@ -802,7 +841,10 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, '', moderatorData);
+    }, '', moderatorData).fail(() => {
+      $(e.target).removeClass('loading');
+      self.scrollToFirstError(self.$('#moderatorForm'));
+    });
 
     $.ajax({
       type: "POST",
@@ -815,18 +857,22 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  saveAdvanced: function(){
-    "use strict";
+  saveAdvanced: function(e){
     var self = this,
         form = this.$el.find("#advancedForm");
+
+    $(e.target).addClass('loading');
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      });
+      },'','','','',e);
       
       self.refreshView();
+    }).fail(() => {
+      $(e.target).removeClass('loading');
+      self.scrollToFirstError(self.$('#advancedForm'));
     });
   },
 
@@ -924,7 +970,7 @@ module.exports = Backbone.View.extend({
       }
     });
 
-    this.blockedUsersVw.remove();
+    this.blockedUsersVw && this.blockedUsersVw.remove();
 
     if (this.blockedUsersScrollHandler && this.$obContainer.length) {
       this.$obContainer.off('scroll', this.blockedUsersScrollHandler);

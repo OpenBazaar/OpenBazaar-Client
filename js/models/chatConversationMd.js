@@ -6,5 +6,7 @@ module.exports = window.Backbone.Model.extend({
     unread: 0,
     avatar_hash: "",
     guid: ""
-  }
+  },
+
+  idAttribute: 'guid'
 });

@@ -70,7 +70,12 @@ window.lang = user.get("language");
 window.polyglot = new Polyglot({locale: window.lang});
 
 (extendPolyglot = function(lang) {
-  window.polyglot.extend(__.where(languages.get('languages'), {langCode: window.lang})[0]);
+  // Make sure the language exists in the languages model
+  if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
+    var language = require('./languages/' + window.lang + '.json');
+
+    window.polyglot.extend(language);
+  }
 })(window.lang);
 
 user.on('change:language', function(md, lang) {
@@ -81,7 +86,7 @@ user.on('change:language', function(md, lang) {
 //keep user and profile urls synced with the server configuration
 (setServerUrl = function() {
   var baseServerUrl = serverConfigMd.getServerBaseUrl();
-  
+
   user.urlRoot = baseServerUrl + "/settings";
   user.set('serverUrl', baseServerUrl + '/');
   userProfile.urlRoot = baseServerUrl + "/profile";
@@ -115,9 +120,24 @@ $('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescrip
   require("shell").openExternal(extUrl);
 });
 
+$(document).on('mouseenter',
+  `.js-userPageAboutSection a:not(.tooltip),
+   .js-item .js-description a:not(.tooltip)`,
+  function(e) {
+    $(this).attr({
+        'data-tooltip': $(this).attr('href'),
+        'data-href-tooltip': true
+      }).addClass('tooltip');
+  });
+
+$(document).on('mouseleave', 'a[data-href-tooltip]', function(e) {
+  $(this).removeAttr('data-tooltip')
+    .removeAttr('data-href-tooltip')
+    .removeClass('tooltip');
+});
+
 //record changes to the app state
 $(window).bind('hashchange', function(){
-  "use strict";
   localStorage.setItem('route', Backbone.history.getFragment());
 });
 
@@ -140,6 +160,66 @@ window.addEventListener("drop",function(e){
 $('body').on('keypress', 'input', function(event) {
   if (event.keyCode == 13) {
     event.preventDefault();
+  }
+});
+
+//keyboard shortucts
+window.keyShortcuts = {
+  discover:        'd',
+  myPage:          'h',
+  customizePage:   'e',
+  create:          'n',
+  purchases:       '1',
+  sales:           '2',
+  cases:           '3',
+  settings:        'g',
+  addressBar:      'l'
+}
+
+$(window).bind('keydown', function(e) {
+  if (e.ctrlKey || e.metaKey) {
+		var route = null,
+        char = String.fromCharCode(e.which).toLowerCase();
+
+		switch (char) {
+			case keyShortcuts.discover:
+				route = 'home';
+				break;
+			case keyShortcuts.myPage:
+				route = 'userPage';
+				break;
+			case keyShortcuts.customizePage:
+				route = 'userPage/' + user.get('guid') + '/customize';
+				break;
+			case keyShortcuts.create:
+				route = 'userPage/' + user.get('guid') + '/listingNew';
+				break;
+			case keyShortcuts.purchases:
+				route = 'transactions/purchases';
+				break;
+			case keyShortcuts.sales:
+				route = 'transactions/sales';
+				break;
+			case keyShortcuts.cases:
+				route = 'transactions/cases';
+				break;
+			case keyShortcuts.settings:
+				route = 'settings';
+				break;
+		}
+
+    if (route !== null) {
+      e.preventDefault();
+			Backbone.history.navigate(route, {
+        trigger: true
+      });
+		}
+
+    // Select all text in address bar
+    if (char === keyShortcuts.addressBar) {
+      // Select all text in address bar
+      $('.js-navAddressBar').select();
+    }
   }
 });
 
@@ -201,7 +281,7 @@ var loadProfile = function(landingRoute, onboarded) {
                 userProfile: userProfile,
                 showDiscIntro: onboarded
               }).render();
-              
+
               app.chatVw = new ChatVw({
                 model: user,
                 socketView: newSocketView
@@ -255,7 +335,7 @@ $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
 
 launchOnboarding = function(guidCreating) {
   serverConnectModal && serverConnectModal.remove();
-  serverConnectModal = null;  
+  serverConnectModal = null;
 
   onboardingModal && onboardingModal.remove();
   onboardingModal = new OnboardingModal({
@@ -283,7 +363,7 @@ launchServerConnect = function() {
 
       if (authenticated) {
         serverConnectModal && serverConnectModal.remove();
-        serverConnectModal = null;        
+        serverConnectModal = null;
       }
     });
 
@@ -366,7 +446,7 @@ heartbeat.on('message', function(e) {
                 if (__.isEmpty(profile)) {
                   launchOnboarding(guidCreating = $.Deferred().resolve().promise());
                 } else {
-                  loadProfile();              
+                  loadProfile();
                 }
               });
             } else {

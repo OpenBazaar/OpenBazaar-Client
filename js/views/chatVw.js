@@ -30,6 +30,12 @@ module.exports = baseVw.extend({
     this.socketView = options.socketView;
     this.$body = $('body');
 
+    // Here we will store the chat messages collections
+    // of all the active conversations we've had. This way,
+    // when we return to a previous conversation, we don't
+    // need to re-fetch the messages.
+    this.chatMessagesCache = {};
+
     this.chatConversationsCl = new ChatConversationsCl();
     this.chatConversationsCl.fetch({
       reset: true
@@ -49,7 +55,7 @@ module.exports = baseVw.extend({
 
       if (!this.chatHeadsVw) {
         this.chatHeadsVw = new ChatHeadsVw({
-          collection: this.filterChatHeads(cl),
+          collection: this.filterChatHeads(false),
           parentEl: this.$chatHeadsContainer
         });
 
@@ -64,10 +70,8 @@ module.exports = baseVw.extend({
       }
     });
 
-    this.listenTo(this.chatConversationsCl, 'add', (md) => {
-      if (this.filteredChatConvos) {
-        this.filteredChatConvos.add(md);
-      };
+    this.listenTo(this.chatConversationsCl, 'add remove', (md) => {
+      this.filterChatHeads();
     });
 
     this.listenTo(window.obEventBus, 'socketMessageReceived', (response) => {
@@ -87,9 +91,11 @@ module.exports = baseVw.extend({
     });
   },
 
-  filterChatHeads: function() {
+  filterChatHeads: function(render) {
     var searchText = this.$searchField.val(),
         guid;
+
+    render = typeof render === 'undefined' ? true : false;
 
     this.filteredChatConvos = new ChatConversationsCl(
       this.chatConversationsCl.filter((md) => {
@@ -103,7 +109,7 @@ module.exports = baseVw.extend({
       })
     );
 
-    if (this.chatHeadsVw) {
+    if (render && this.chatHeadsVw) {
       this.chatHeadsVw.setCollection(
         this.filteredChatConvos
       );
@@ -134,7 +140,9 @@ module.exports = baseVw.extend({
     // work as well (at least now it does). The latter could be useful when
     // calling this function from outside of this view.
 
-    var msgCl = new ChatMessagesCl(),
+    var msgCl,
+        initialFetch,
+        cachedMessagesObj,
         convoMd;
 
     this.$('.chatConversationHeads').addClass('chatConversationHeadsCompressed textOpacity50');
@@ -156,14 +164,43 @@ module.exports = baseVw.extend({
         this.$convoContainer.removeClass('chatConversationContainerHide');
         return;
       } else {
+        // Before removing an existing convo, if they are not scrolled
+        // at or near the bottom, we'll store the scroll position
+        // so we can re-store if they return to the convo.
+        if (
+          this.chatConversationVw.getScrollContainer().scrollTop <=
+          this.chatConversationVw.getScrollContainer().scrollHeight -
+          this.chatConversationVw.getScrollContainer().clientHeight - 10
+        ) {
+          this.chatMessagesCache[this.chatConversationVw.model.get('guid')].scrollPos =
+            this.chatConversationVw.getScrollContainer().scrollTop;
+        }
+
         this.chatConversationVw.remove();
       }
     }    
 
+    cachedMessagesObj = this.chatMessagesCache[model.get('guid')];
+    msgCl = cachedMessagesObj && cachedMessagesObj.collection;
+
+    if (!cachedMessagesObj) {
+      msgCl = new ChatMessagesCl();
+      initialFetch = msgCl.fetch({
+        data: {
+          guid: model.get('guid'),
+          limit: 5
+        },
+        reset: true        
+      });
+      this.chatMessagesCache[model.get('guid')] = { collection: msgCl };
+    }
+
     this.chatConversationVw = new ChatConversationVw({
       model: model,
       user: this.model,
-      collection: msgCl
+      collection: msgCl,
+      initialFetch: initialFetch,
+      initialScroll: cachedMessagesObj && cachedMessagesObj.scrollPos
     });
 
     this.registerChild(this.chatConversationVw);
@@ -176,6 +213,8 @@ module.exports = baseVw.extend({
 
       this.sendMessage(model.get('guid'), model.get('public_key'), msg);
       this.chatConversationVw.getMessageField().val('');
+      this.chatConversationVw.getScrollContainer().scrollTop = 
+        this.chatConversationVw.getScrollContainer().scrollHeight;
 
       // since messages sent by us won't come back via the socket,
       // to not have to call get_chat_messages to get the message
@@ -208,10 +247,17 @@ module.exports = baseVw.extend({
       }
     });
 
+    this.listenTo(this.chatConversationVw, 'clear-conversation', () => {
+      delete this.chatMessagesCache[model.get('guid')];
+      this.chatConversationsCl.remove(model.get('guid'));
+      this.chatConversationVw = null;
+      this.closeConversation();
+    });
+
     this.$('.chatConversationContainer').html(
       this.chatConversationVw.render().el
     ).removeClass('chatConversationContainerHide');   
-     
+
     this.$('.js-chatMessage').focus();
   },
 
@@ -241,15 +287,15 @@ module.exports = baseVw.extend({
     if (!msg) return;
 
     if (msg.message_type === 'CHAT') {
-      // if we're actively chatting with the person who sent the message,
-      // whether the view is hidden or not, update the conversation
       if (this.chatConversationVw && msg.sender === this.chatConversationVw.model.get('guid')) {
-        if (this.isConvoOpen()) {
-          openlyChatting = true;
-        }
+        if (!this.isConvoOpen()) this.chatConversationVw.getScrollContainer().scrollTop = 999999;
+        if (this.isConvoOpen()) openlyChatting = true;
+      }
 
+      // if we've already been chatting with this person, update the messages cache
+      if (this.chatMessagesCache[msg.sender]) {
         // add in new message
-        this.chatConversationVw.collection.add({
+        this.chatMessagesCache[msg.sender].collection.add({
           avatar_hash: msg.avatar_hash,
           guid: msg.sender,
           message: msg.message,
@@ -257,6 +303,12 @@ module.exports = baseVw.extend({
           read: true,
           timestamp: msg.timestamp
         });
+
+        if (!openlyChatting) {
+          // if we're not openly chatting with someone and a message from them
+          // comes in, we'll reset the scroll position
+          delete this.chatMessagesCache[msg.sender].scrollPos;
+        }
       }
 
       // update chat head
@@ -292,7 +344,7 @@ module.exports = baseVw.extend({
 
         app.playNotificationSound();
       }
-    } else if(msg.message_type === 'ORDER' || msg.message_type === 'DISPUTE_OPEN' || msg.message_type === 'DISPUTE_CLOSE'){
+    } else if (msg.message_type === 'ORDER' || msg.message_type === 'DISPUTE_OPEN' || msg.message_type === 'DISPUTE_CLOSE') {
       new Notification(msg.handle || msg.sender + ':', {
         body: msg.message,
         icon: avatar = msg.avatar_hash ? app.serverConfig.getServerBaseUrl() + '/get_image?hash=' + msg.avatar_hash +
@@ -312,7 +364,9 @@ module.exports = baseVw.extend({
     this.$('.chatConversationHeads').removeClass('chatConversationHeadsCompressed textOpacity50');
     this.$('.chatSearch').removeClass('textOpacity50');
     this.$convoContainer.addClass('chatConversationContainerHide');
-    this.chatConversationVw && this.chatConversationVw.closeConvoSettings();
+    if (this.chatConversationVw) {
+      this.chatConversationVw.closeConvoSettings();
+    }
   },
 
   slideOut: function() {

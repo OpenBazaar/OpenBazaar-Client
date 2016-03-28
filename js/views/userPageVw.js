@@ -181,8 +181,6 @@ module.exports = baseVw.extend({
     this.userID = options.userModel.get('guid');
     this.userProfileFetchParameters = {};
     this.itemFetchParameters = {};
-    this.subViews = [];
-    this.subModels = [];
     this.model = new Backbone.Model();
     this.globalUserProfile = options.userProfile;
     this.userProfile = new userProfileModel();
@@ -194,7 +192,6 @@ module.exports = baseVw.extend({
     this.followers.urlRoot = options.userModel.get('serverUrl') + "get_followers";
     this.following = new usersModel();
     this.following.urlRoot = options.userModel.get('serverUrl') + "get_following";
-    this.subModels.push(this.userProfile, this.listings,this.followers, this.following);
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
     this.socketView = options.socketView;
@@ -590,6 +587,8 @@ module.exports = baseVw.extend({
       followBtn.removeClass('hide');
       unfollowBtn.addClass('hide');
     }
+    followBtn.removeClass('loading');
+    unfollowBtn.removeClass('loading');
   },
 
   fetchListings: function() {
@@ -735,7 +734,7 @@ module.exports = baseVw.extend({
       userModel: this.options.userModel, 
       category: this.$el.find('.js-categories').val()
     });
-    this.subViews.push(this.itemList);
+    this.registerChild(this.itemList);
 
     this.$('.js-listingCount').html(model.length);
 
@@ -758,7 +757,7 @@ module.exports = baseVw.extend({
       serverUrl: this.options.userModel.get('serverUrl'),
       reverse: true
     });
-    this.subViews.push(this.followerList);
+    this.registerChild(this.followerList);
 
     this.$('.js-userFollowerCount').html(model.length);
 
@@ -789,7 +788,7 @@ module.exports = baseVw.extend({
       serverUrl: this.options.userModel.get('serverUrl'),
       reverse: true
     });
-    this.subViews.push(this.followingList);
+    this.registerChild(this.followingList);
     
     this.$('.js-userFollowingCount').html(model.length);
 
@@ -838,7 +837,7 @@ module.exports = baseVw.extend({
       this.itemView.undelegateEvents();
     }
     this.itemView = new itemVw({model:this.item, el: '.js-list4', userModel: self.options.userModel, socketView: this.socketView});
-    this.subViews.push(this.itemView);
+    this.registerChild(this.itemView);
     //set the parameters for the fetch
     if(this.options.ownPage === true){
       this.itemFetchParameters = $.param({'id': hash});
@@ -913,7 +912,6 @@ module.exports = baseVw.extend({
     this.$('.js-list5').html(this.itemEditView.render().el);
     this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
-    this.listenTo(this.itemEditView, 'deleteOldDone', this.deleteOldDone);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
   },
 
@@ -1358,10 +1356,16 @@ module.exports = baseVw.extend({
     }
   },
 
-  saveItem: function(){
-    "use strict";
-    if(this.itemEditView){
-      this.itemEditView.saveChanges();
+  saveItem: function(e){
+    if(this.itemEditView) {
+      $(e.target).addClass('loading');
+      
+      this.itemEditView.saveChanges().always(() => $(e.target).removeClass('loading'))
+        .fail(() => {
+          var $firstErr = this.$('.js-itemEdit .invalid, .js-itemEdit :invalid').not('form').eq(0);
+
+          $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
+        });
     }
   },
 
@@ -1370,10 +1374,13 @@ module.exports = baseVw.extend({
     var self = this,
         storeWizardModel = new Backbone.Model();
     storeWizardModel.set(this.model.attributes);
-    this.storeWizardView = new storeWizardVw({model:storeWizardModel, parentEl: '#modalHolder', socketView: this.socketView});
+    this.storeWizardView = new storeWizardVw({
+      model:storeWizardModel,
+      parentEl: '#modalHolder',
+      socketView: this.socketView
+    });
     this.listenTo(this.storeWizardView, 'storeCreated', this.storeCreated);
-    this.subViews.push(this.storeWizardView);
-    this.subModels.push(storeWizardModel);
+    this.registerChild(this.storeWizardView);
   },
 
   storeCreated: function() {
@@ -1382,12 +1389,14 @@ module.exports = baseVw.extend({
     Backbone.history.loadUrl();
   },
 
-  followUserClick: function(){
-    this.followUser({'guid': this.pageID});
+  followUserClick: function(e){
+    $(e.target).addClass('loading');
+    this.followUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
   },
 
-  unfollowUserClick: function(){
-    this.unfollowUser({'guid': this.pageID});
+  unfollowUserClick: function(e){
+    $(e.target).addClass('loading');
+    this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
   },
 
   moreButtonsOwnPageClick: function(){
@@ -1410,10 +1419,9 @@ module.exports = baseVw.extend({
   },
 
   followUser: function(options){
-    "use strict";
     var self = this;
 
-    $.ajax({
+    return $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
@@ -1432,10 +1440,9 @@ module.exports = baseVw.extend({
   },
 
   unfollowUser: function(options){
-    "use strict";
     var self = this;
     
-    $.ajax({
+    return $.ajax({
       type: "POST",
       data: {'guid': options.guid},
       dataType: 'json',
@@ -1463,7 +1470,7 @@ module.exports = baseVw.extend({
     var self = this;
 
     this.moderatorSettingsView = new moderatorSettingsVw({model:this.model, parentEl: '#modalHolder'});
-    this.subViews.push(this.moderatorSettingsView);
+    this.registerChild(this.moderatorSettingsView);
   },
 
   changeModeratorStatus: function(status, fee){
@@ -1532,23 +1539,8 @@ module.exports = baseVw.extend({
     this.$('.js-mainContainer').removeClass('blurMore');
   },
 
-  close: function(){
-    "use strict";
-    __.each(this.subModels, function(subModel) {
-      subModel.off();
-    });
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-
-    this.model.off();
-    this.off();
-    this.remove();
+  remove: function(){
+    baseVw.prototype.remove.apply(this, arguments);
 
     // close colorbox to make sure the overlay doesnt remain open when going to a different page
     $.colorbox.close();

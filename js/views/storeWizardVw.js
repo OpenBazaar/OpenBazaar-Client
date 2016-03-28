@@ -6,7 +6,9 @@ var __ = require('underscore'),
     saveToAPI = require('../utils/saveToAPI'),
     MediumEditor = require('medium-editor'),
     validateMediumEditor = require('../utils/validateMediumEditor'),
-    Taggle = require('taggle');
+    Taggle = require('taggle'),
+    userShortView = require('./userShortVw'),
+    userShortModel = require('../models/userShortMd');
 
 module.exports = Backbone.View.extend({
 
@@ -16,8 +18,9 @@ module.exports = Backbone.View.extend({
     'click .js-storeWizardModal': 'blockClicks',
     'click .js-closeStoreWizardModal': 'closeWizard',
     'click .js-storeWizardSave': 'saveWizard',
+    'click .js-accordionNext': 'validateDescription',
     'blur input': 'validateInput',
-    'blur textarea': 'validateInput',
+    'blur textarea': 'validateInput'
   },
 
   initialize: function(options) {
@@ -145,38 +148,27 @@ module.exports = Backbone.View.extend({
   handleSocketMessage: function(response) {
     "use strict";
     var data = JSON.parse(response.data);
-    if(data.id == this.socketModeratorID && data.moderator.guid != this.model.get('user').guid){
-      this.addModerator(data);
+    if(data.id == this.socketModeratorID && data.moderator.guid != this.model.get('user').guid && this.model.get('user').blocked_guids.indexOf(data.moderator.guid) == -1){
+      this.renderModerator(data.moderator);
     }
   },
 
-  addModerator: function(data){
+  renderModerator: function(moderator){
     "use strict";
-    var moderatorAvatarURL = this.model.get('user').serverUrl+"get_image?hash=" + data.moderator.avatar_hash;
-    var moderatorDescription = (data.moderator.short_description) ? data.moderator.short_description : window.polyglot.t('NoDescriptionAdded');
-    var moderatorHandle = (data.moderator.handle) ? data.moderator.handle : data.moderator.guid;
-    var newModerator = $(
-        '<div class="pad10 flexRow custCol-border">' +
-          '<input type="checkbox" id="inputModerator' + this.moderatorCount + '" class="fieldItem" data-guid="' + data.moderator.guid + '">' +
-          '<label for="inputModerator' + this.moderatorCount + '" class="row10 rowTop10 width100 table">' +
-            '<div>' +
-              '<div style="width: 80px;">' +
-                '<div class="thumbnail thumbnail-large-slim pull-left" style="background-image: url('+moderatorAvatarURL+'), url(imgs/defaultUser.png);">' +
-                '</div>' +
-              '</div>' +
-              '<div>' +
-                '<div class="clearfix">' +
-                  '<div class="capitalize marginBottom2 marginRight5 lineHeight21 textOpacity1 floatLeft">' + data.moderator.name + '</div> ' +
-                  '<div class="pull-left lineHeight21">' + moderatorHandle + '</div>' +
-                '</div>' +
-                '<div class="fontSize14 txt-fade textWeightNormal">' + moderatorDescription + '</div>' +
-               '</div>' +
-            '</div>' +
-          '</label>' +
-        '</div>'
-    );
+    var self = this;
+    console.log(moderator)
+
+    moderator.serverUrl = this.model.get('user').serverUrl;
+    moderator.userID = moderator.guid;
+    moderator.avatarURL = this.model.get('user').serverUrl + "get_image?hash=" + moderator.avatar_hash + "&guid=" + moderator.guid;
+    moderator.isModerator = true; //flag for template
+    moderator.micro = true; //flag for template
+    moderator.userCount = this.moderatorCount;
+    var newModModel = new userShortModel(moderator);
+    var modShort = new userShortView({model: newModModel});
+
+    this.$el.find('.js-storeWizardModeratorList').append(modShort.el);
     this.moderatorCount++;
-    this.$el.find('.js-storeWizardModeratorList').append(newModerator);
   },
   
   blockClicks: function(e) {

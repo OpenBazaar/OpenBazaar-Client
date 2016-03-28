@@ -120,19 +120,6 @@ module.exports = Backbone.View.extend({
   goToPurchases: function(){
     window.obEventBus.trigger('closeBuyWizard');
     Backbone.history.navigate('#transactions/purchases', {trigger:true});
-  },
-
-  close: function(){
-    __.each(this.subViews, function(subView) {
-      if(subView.close){
-        subView.close();
-      }else{
-        subView.unbind();
-        subView.remove();
-      }
-    });
-    this.unbind();
-    this.remove();
   }
 
 });

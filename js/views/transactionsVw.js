@@ -31,6 +31,7 @@ module.exports = baseVw.extend({
        userModel
        userProfile
        state (from router)
+       orderID (from router)
        socketView (from router)
      */
     var self = this,
@@ -39,6 +40,7 @@ module.exports = baseVw.extend({
 
     this.options = options;
     this.state = options.state || "purchases";
+    this.orderID = options.orderID;
     this.userModel = options.userModel;
     this.userProfile = options.userProfile;
     this.model = new Backbone.Model();
@@ -63,6 +65,7 @@ module.exports = baseVw.extend({
 
     this.listenTo(window.obEventBus, "socketMessageReceived", this.handleSocketMessage);
     this.listenTo(window.obEventBus, "orderModalClosed", function(){
+      this.orderID = "";
       this.getData();
     });
 
@@ -91,28 +94,55 @@ module.exports = baseVw.extend({
       success: function(models){
         //self.renderPurchases();
         self.renderTab("purchases", self.purchasesCol, self.purchasesWrapper);
-        self.setSearchList('transactionsPurchases');
+        models.length && self.setSearchList('transactionsPurchases');
         self.salesCol.fetch({
           success: function(models){
             if(self.model.get('page').vendor) {
               self.renderTab("sales", self.salesCol, self.salesWrapper);
-              self.setSearchList('transactionsSales');
+              models.length && self.setSearchList('transactionsSales');
             }
-            if(self.model.get('page').moderator){
-              self.casesCol.fetch({
-                success: function(models) {
-                  //self.renderCases();
-                  self.renderTab("cases", self.casesCol, self.casesWrapper);
-                  self.setSearchList('transactionsCases');
-                },
-                error: function(jqXHR, status, errorThrown){
-                  messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
-                  console.log(jqXHR);
-                  console.log(status);
-                  console.log(errorThrown);
+            self.casesCol.fetch({
+              success: function(models) {
+                //self.renderCases();
+                self.renderTab("cases", self.casesCol, self.casesWrapper);
+                models.length && self.setSearchList('transactionsCases');
+              },
+              error: function(jqXHR, status, errorThrown){
+                messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
+                console.log(jqXHR);
+                console.log(status);
+                console.log(errorThrown);
+              }
+            }).always(function(){
+              //if page was opened with an orderID, open that tab and open the order modal
+              //find the order
+              if(self.orderID){
+                var tType = '';
+                var orderModelP = self.purchasesCol.findWhere({ order_id: self.orderID});
+                var orderModelS = self.salesCol.findWhere({ order_id: self.orderID});
+                var orderModelC = self.casesCol.findWhere({ order_id: self.orderID});
+                var orderModel = orderModelP || orderModelS || orderModelC;
+
+                if(orderModelP){
+                  tType = "purchases";
+                  self.setState('purchases', self.orderID)
+                } else if(orderModelS){
+                  tType = "sales";
+                  self.setState('sales', self.orderID)
+                } else if(orderModelC){
+                  tType = "cases";
+                  self.setState('cases', self.orderID)
                 }
-              });
-            }
+
+                if(orderModel){
+                  self.openOrderModal({
+                    'orderID': self.orderID,
+                    'status': orderModel.get('status'),
+                    'transactionType': tType
+                  });
+                }
+              }
+            });
           },
           error: function(jqXHR, status, errorThrown){
             messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + errorThrown + "</i>");
@@ -162,11 +192,11 @@ module.exports = baseVw.extend({
     showContent.removeClass('hide');
   },
 
-  setState: function(state){
-    "use strict";
+  setState: function(state, orderID){
+    var addID = orderID ? "/" + orderID : "";
     this.setTab(this.$el.find('.js-' + state + 'Tab'), this.$el.find('.js-' + state));
     //add action to history
-    Backbone.history.navigate("#transactions/" + state);
+    Backbone.history.navigate("#transactions/" + state + addID);
   },
 
   tabHandler: function(e){

@@ -27,7 +27,7 @@ module.exports = Backbone.Router.extend({
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
       ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
-      ["transactions/:state", "transactions"],
+      ["transactions/:state(/:orderID)", "transactions"],
       ["settings", "settings"],
       ["settings/:state", "settings"],
       ["about", "about"],
@@ -93,7 +93,7 @@ module.exports = Backbone.Router.extend({
         .done((guid) => {
           deferred.resolve(guid);
         }).fail(() => {
-          deferred.reject();          
+          deferred.reject();
         });
     } else {
       deferred.reject();
@@ -104,13 +104,15 @@ module.exports = Backbone.Router.extend({
     };
 
     return deferred.promise();
-  },  
+  },
 
   cleanup: function(){
     "use strict";
     $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
+    app.hideOverlay();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    $('.js-navProfileMenu').removeClass('popMenu-opened');
   },
 
   newView: function(view, bodyClass, addressBarText){
@@ -220,7 +222,7 @@ module.exports = Backbone.Router.extend({
       searchItemsText: searchItemsText
     }),'',{'addressText': addressBarText});
 
-    // hide the discover onboarding callout 
+    // hide the discover onboarding callout
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
   },
 
@@ -271,14 +273,15 @@ module.exports = Backbone.Router.extend({
     });
   },
 
-  transactions: function(state){
+  transactions: function(state, orderID){
     "use strict";
     this.cleanup();
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state
+      state: state,
+      orderID: orderID
     }),"userPage");
   },
 

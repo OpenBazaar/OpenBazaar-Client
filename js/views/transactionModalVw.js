@@ -11,6 +11,7 @@ var __ = require('underscore'),
     baseVw = require('./baseVw'),
     chatMessageView = require('./chatMessageVw'),
     qr = require('qr-encode'),
+    app = require('../App.js').getApp(),
     messageModal = require('../utils/messageModal'),
     discussionCl = require('../collections/discussionCl'),
     clipboard = require('clipboard');
@@ -47,8 +48,6 @@ module.exports = baseVw.extend({
     'click .js-transactionShowContract': 'showContract',
     'click .js-transactionHideContract': 'hideContract',
     'click .js-acceptResolution': 'acceptResolution',
-    //'click .js-refundTransaction': 'showRefundOrder',
-    //'click .js-refundOrder': 'refundOrder',
     'click .js-refundTransaction': 'refundOrder',
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
@@ -206,7 +205,7 @@ module.exports = baseVw.extend({
         payHREF,
         dataURI;
     if(this.model.get('buyer_order')){
-      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title;
+      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title.substring(1, 20);
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
@@ -312,18 +311,47 @@ module.exports = baseVw.extend({
   confirmOrder: function(e){
     var self = this,
         targetForm = this.$el.find('#transactionConfirmForm'),
-        confirmData = {};
+        confirmData = {},
+        confirmStatus;
 
     confirmData.id = this.orderID;
-    this.$('.js-transactionSpinner').removeClass('hide');
+    confirmStatus = app.statusBar.pushMessage({
+      type: 'pending',
+      msg: '<i>' + window.polyglot.t('transactions.UpdatingOrder') + '</i>',
+      duration: false
+    });
 
     saveToAPI(targetForm, '', this.serverUrl + "confirm_order", function(data){
-      self.status = 2;
-      self.tabState = "summary";
-      self.getData();
-      }, '', confirmData, '', function(){
-      self.$('.js-transactionSpinner').addClass('hide');
-    });
+      confirmStatus.updateMessage({
+        type: 'confirmed',
+        msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
+      });
+      setTimeout(function(){
+        confirmStatus && confirmStatus.remove();
+      },3000);
+      }, function(data){
+      //onFail
+      confirmStatus.updateMessage({
+        type: 'warning',
+        msg: '<i>' + window.polyglot.t('transactions.UpdateFailed') + '</i>',
+        duration: 3000
+      });
+      setTimeout(function(){
+        confirmStatus && confirmStatus.remove();
+      },3000);
+    }, confirmData, '', function(){
+      //onInvalid
+      confirmStatus.updateMessage({
+        type: 'warning',
+        msg: '<i>' + window.polyglot.t('transactions.UpdateInvalid') + '</i>',
+        duration: 3000
+      });
+      setTimeout(function(){
+        confirmStatus && confirmStatus.remove();
+      },3000);
+    }, e);
+
+    this.closeModal();
   },
 
   completeOrder: function(e){
@@ -331,6 +359,7 @@ module.exports = baseVw.extend({
         targetForm = this.$el.find('#transactionCompleteForm'),
         completeData = {};
 
+    $(e.target).addClass('loading');
     completeData.id = this.orderID;
     this.$el.find('.js-transactionSpinner').removeClass('hide');
 
@@ -344,7 +373,9 @@ module.exports = baseVw.extend({
           self.$el.find('.js-transactionSpinner').addClass('hide');
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
-        completeData);
+        completeData).always(() => {
+          $(e.target).removeClass('loading');
+        });
   },
 
   checkPayment: function(){
@@ -581,27 +612,37 @@ module.exports = baseVw.extend({
     }
   },
 
-  acceptResolution: function(){
+  acceptResolution: function(e){
     var self = this,
         resData = {};
+    
+    $(e.target).addClass('loading');
     resData.order_id = this.orderID;
+    
     saveToAPI(null, null, this.serverUrl + "release_funds", function(data){
       self.status = 6;
       self.tabState = "summary";
       self.getData();
-    },'', resData);
+    },'', resData).always(() => {
+      $(e.target).removeClass('loading');
+    });
   },
 
-  refundOrder: function(){
+  refundOrder: function(e){
     //var targetForm = this.$('#transactionRefundForm'),
       var self = this,
           refData = {};
+
+    $(e.target).addClass('loading');
     refData.order_id = this.orderID;
+
     saveToAPI(null, null, this.serverUrl + "refund", function(data){
       self.status = 7;
       self.tabState = "summary";
       self.getData();
-    },'', refData);
+    },'', refData).always(() => {
+      $(e.target).removeClass('loading');
+    });
   },
 
   updateBuyerBTC: function(e) {

@@ -348,7 +348,7 @@ app.on('ready', function() {
 
   // Open the devtools.
   // Uncomment if you want tools to open on startup
-  // mainWindow.openDevTools({detach: true});
+  //mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -358,8 +358,13 @@ app.on('ready', function() {
     mainWindow = null;
 
     if(subpy) {
-      subpy.kill('SIGHUP');
+      if(platform == "mac" || platform == "linux") {
+        subpy.kill('SIGHUP');
+      } else {
+        require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
+      }
     }
+
   });
 
   mainWindow.on('close', function() {

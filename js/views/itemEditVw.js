@@ -506,7 +506,7 @@ module.exports = baseVw.extend({
     validateMediumEditor.checkVal(this.$('#inputDescription'));
   },  
 
-  saveChanges: function(){
+  saveChanges: function(e){
     var self = this,
         formData,
         //deleteThisItem,
@@ -538,7 +538,7 @@ module.exports = baseVw.extend({
     if(!shipsToInput.val() && !this.noShipping){
       this.$('.js-shipToWrapper').addClass('invalid');
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
-      return
+      return $.Deferred().reject('failed form validation').promise();
     }
 
     //add old and new image hashes
@@ -578,27 +578,14 @@ module.exports = baseVw.extend({
     this.$el.find('#contractForm').addClass('formChecked');
 
     if(this.checkFormValidity()){
-      $.ajax({
+      return $.ajax({
         type: "POST",
         url: self.model.get('serverUrl') + "contracts",
         contentType: false,
         processData: false,
         data: formData,
         success: function (data) {
-          //var returnedId = self.model.get('id');
           data = JSON.parse(data);
-          /*
-          //if the itemEdit model has an id, it was cloned from an existing item
-          //if the id returned is the same, an edit was made with no changes, don't delete it
-          if (returnedId && data.success === true && returnedId != data.id){
-            deleteThisItem(data.id);
-          }else if (data.success === false){
-            messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
-          }else{
-            //item is new or unchanged
-            */
-            //self.trigger('saveNewDone', data.id);
-          //}
           if (data.success === true) {
             self.trigger('saveNewDone', data.id);
           } else {
@@ -620,6 +607,7 @@ module.exports = baseVw.extend({
         }
       });
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ invalidInputList+"</i>");
+      return $.Deferred().reject('failed form validation').promise();
     }
   },
 
