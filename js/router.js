@@ -116,6 +116,9 @@ module.exports = Backbone.Router.extend({
     var loadingConfig;
 
     this.cleanup();
+    //clear address bar. This will be replaced on the user page
+    addressBarText = addressBarText || "";
+    window.obEventBus.trigger("setAddressBar", addressBarText);
 
     if($('body').attr('id') != bodyID){
       $('body').attr("id", bodyID || "");
@@ -137,9 +140,7 @@ module.exports = Backbone.Router.extend({
     
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
-    //clear address bar. This will be replaced on the user page
-    addressBarText = addressBarText || "";
-    window.obEventBus.trigger("setAddressBar", addressBarText);
+
     $('#obContainer')[0].scrollTop = 0;
   },
 

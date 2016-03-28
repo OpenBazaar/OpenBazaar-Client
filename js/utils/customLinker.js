@@ -19,10 +19,10 @@ module.exports = function(msg) {
           return;
 
         case 'twitter' : //pretend handles are twitter links
-          return '<a>@' + match.getTwitterHandle() + '</a>';
+          return '<a>ob://@' + match.getTwitterHandle() + '</a>';
 
         case 'hashtag' :
-          return '<a>#' + match.getHashtag() + '</a>';
+          return '<a>ob://#' + match.getHashtag() + '</a>';
 
       }
     }
