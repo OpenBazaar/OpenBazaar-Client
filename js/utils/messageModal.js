@@ -24,6 +24,9 @@ function showModal(errorTitle, errorMessage, titleClass, msgClass, onBtn1, onBtn
         return;
       }
       $el.find('.js-messageModal-btn2').off().on('click', onBtn2).text(onBtn2Msg).addClass(onBtn2Class);
+    } else {
+      //single button
+      $el.find('.js-messageModal-btn1').removeClass('btn-half borderRight').addClass('btn-wide');
     }
   }
 }
