@@ -9,7 +9,8 @@ var loadTemplate = require('../utils/loadTemplate'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
-    userShortModel = require('../models/userShortMd');
+    userShortModel = require('../models/userShortMd'),
+    messageModal = require('../utils/messageModal.js');
 
 module.exports = baseVw.extend({
 
@@ -229,7 +230,7 @@ module.exports = baseVw.extend({
       }
     } else {
       newItem();
-    }    
+    }
   },
 
   renderUser: function(user){
@@ -376,7 +377,7 @@ module.exports = baseVw.extend({
       if(this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
         this.loadingProducts = true;
-        this.socketView.getItems(this.socketItemsID);
+        this.socketView.getItems(this.socketItemsID, this.onlyFollowing);
       } else if(this.state == "vendors" && !this.loadingVendors){
         this.setSocketTimeout();
         this.loadingVendors = true;
@@ -502,17 +503,51 @@ module.exports = baseVw.extend({
   },
 
   clickListingsFollowed: function(e){
-    this.onlyFollowing = true;
-    this.loadItems();
     $(e.target).addClass('active');
     this.$('.js-homeListingsAll').removeClass('active');
+    this.loadFollowedItems();
   },
 
   clickListingsAll: function(e){
-    this.onlyFollowing = false;
+    if(localStorage.getItem('safeListingsWarningDissmissed')) {
+      $(e.target).addClass('active');
+      this.$('.js-homeListingsFollowed').removeClass('active');
+    }
+    this.loadAllItems();
+  },
+
+  loadFollowedItems: function(){
+    this.onlyFollowing = true;
     this.loadItems();
-    $(e.target).addClass('active');
-    this.$('.js-homeListingsFollowed').removeClass('active');
+  },
+
+  loadAllItems: function(){
+    var self = this;
+    if(localStorage.getItem('safeListingsWarningDissmissed')){
+      this.onlyFollowing = false;
+      this.loadItems();
+    } else {
+      messageModal.show(
+          polyglot.t('ViewUnfilteredListings'),
+          polyglot.t('AllListingsWarning'),
+          'modal-hero bg-dark-blue iconBackground',
+          'modal-msg custCol-secondary',
+          function(){
+            messageModal.hide();
+          },
+          polyglot.t('Cancel'),
+          'txt-center',
+          function(){
+            localStorage.setItem('safeListingsWarningDissmissed', true);
+            self.loadAllItems();
+            messageModal.hide();
+            self.$('.js-homeListingsAll').addClass('active');
+            self.$('.js-homeListingsFollowed').removeClass('active');
+          },
+          polyglot.t('ShowUnlfilteredListings'),
+          'txt-center'
+      );
+    }
   },
 
   loadItemsOrSearch: function(){

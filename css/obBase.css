@@ -300,6 +300,21 @@ form {
   padding-right: 0;
 }
 
+.bar.barFlush.bottomBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.bar.barFlush.bottomBar .btn-bar {
+  border-radius: 0;
+}
+
 .barTxt {
   height: 50px;
   line-height: 50px;
@@ -1381,6 +1396,12 @@ h5 {
   width: 525px;
 }
 
+.modal-msg {
+  /* use for bottom half of modal under a modal-hero element */
+  width: 525px;
+  height: 374px;
+}
+
 .modal-small {
   border-radius: 3px;
   min-height: 120px;
@@ -1395,6 +1416,20 @@ h5 {
 /*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
 .modal-hero.bg-dark-blue {
   background: #063753;
+}
+
+.modal-hero.iconBackground {
+  background-image: url(../imgs/openbazaar-icon-no-border.png);
+  background-position: 50% 30px;
+  background-size: 120px;
+  background-repeat: no-repeat;
+}
+
+.modal-hero.iconBackground h1 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .modal-hero-about {
