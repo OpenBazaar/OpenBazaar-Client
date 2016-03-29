@@ -1720,6 +1720,16 @@ input[type="text"].txtField-bar {
   box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
 }
 
+.btn.btn-c1 .toggle-txt {
+  opacity: .20;
+}
+
+.btn.btn-c1:active .toggle-txt,
+.btn.btn-c1.active .toggle-txt {
+  opacity: 1;
+}
+
+
 .btn.btn-txt {
   /* button with text */
   padding: 0 12px;
@@ -1760,6 +1770,8 @@ margin: auto;
 
 .btn.btn-c1 {
   background-color: rgb(50,126,184);
+  min-width: 50px;
+  box-shadow: none;
 }
 
 #userPage .btn.btn-c1,
@@ -2409,7 +2421,7 @@ div.chatSearchOut .chatSearchIcon {
 }
 
 .btn-togWrapper.btn-togWrapper-c1 {
-  border: 1px solid rgb(50,126,184);
+  border: 0;
 }
 
 #userPage .btn-togWrapper.btn-togWrapper-light {
