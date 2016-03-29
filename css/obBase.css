@@ -1425,13 +1425,6 @@ h5 {
   background-repeat: no-repeat;
 }
 
-.modal-hero.iconBackground h1 {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .modal-hero-about {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
