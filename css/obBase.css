@@ -1709,15 +1709,15 @@ input[type="text"].txtField-bar {
 }
 
 .btn:active,
-.btn.active {
-  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
-  opacity: .75;
+.btn.active,
+.btn.btn-c1:active,
+.btn.btn-c1.active {
+  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.4), inset 0px 0px 12px 0px rgba(255,255,255,0.1);
 }
 
 .btn.btn-c1:active,
 .btn.btn-c1.active {
   background-color: #215175;
-  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.2);
 }
 
 .btn.btn-c1 .toggle-txt {
