@@ -2,18 +2,15 @@
 
 var __ = require('underscore'),
     Backbone = require('backbone'),
-    Moment = require('moment'),
     $ = require('jquery');
 Backbone.$ = $;
 var loadTemplate = require('../utils/loadTemplate'),
     baseVw = require('./baseVw'),
-    storeListView = require('./userListVw'),
-    userProfileModel = require('../models/userProfileMd'),
     itemShortView = require('./itemShortVw'),
     itemShortModel = require('../models/itemShortMd'),
     userShortView = require('./userShortVw'),
     userShortModel = require('../models/userShortMd'),
-    simpleMessageView = require('./simpleMessageVw');
+    messageModal = require('../utils/messageModal.js');
 
 module.exports = baseVw.extend({
 
@@ -27,7 +24,9 @@ module.exports = baseVw.extend({
     'click .js-homeCreateListing': 'createListing',
     'click .js-homeSearchItemsClear': 'searchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
-    'change .js-homeSelectFollowingFilter': 'setFollowingFilter'
+    'change .js-homeSelectFollowingFilter': 'setFollowingFilter',
+    'click .js-homeListingsFollowed': 'clickListingsFollowed',
+    'click .js-homeListingsAll': 'clickListingsAll'
   },
 
   initialize: function(options){
@@ -47,7 +46,7 @@ module.exports = baseVw.extend({
     this.loadingVendors = false;
     //store a list of the viewing user's followees. They will be different from the page followers if this is not their own page.
     this.ownFollowing = [];
-    this.onlyFollowing = false;
+    this.onlyFollowing = true;
     this.showNSFW = JSON.parse(localStorage.getItem('NSFWFilter'));
 
     this.model.set({user: this.options.userModel.toJSON(), page: this.userProfile.toJSON()});
@@ -172,6 +171,14 @@ module.exports = baseVw.extend({
         self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
         $('#obContainer').scrollTop(0);
       }
+
+      //set the filter
+      if(localStorage.getItem('homeShowAll') == "yes"){
+        self.setListingsAll();
+      } else {
+        self.setListingsFollowed();
+      }
+
     });
   },
 
@@ -231,7 +238,7 @@ module.exports = baseVw.extend({
       }
     } else {
       newItem();
-    }    
+    }
   },
 
   renderUser: function(user){
@@ -378,7 +385,7 @@ module.exports = baseVw.extend({
       if(this.state == "products" && !this.loadingProducts){
         this.setSocketTimeout();
         this.loadingProducts = true;
-        this.socketView.getItems(this.socketItemsID);
+        this.socketView.getItems(this.socketItemsID, this.onlyFollowing);
       } else if(this.state == "vendors" && !this.loadingVendors){
         this.setSocketTimeout();
         this.loadingVendors = true;
@@ -459,7 +466,7 @@ module.exports = baseVw.extend({
     this.clearItems();
     this.socketItemsID = Math.random().toString(36).slice(2);
     this.loadingProducts = true;
-    this.socketView.getItems(this.socketItemsID);
+    this.socketView.getItems(this.socketItemsID, this.onlyFollowing);
     this.setSocketTimeout();
     this.searchItemsText = "";
     this.$el.find('.js-homeSearchItems').val("");
@@ -501,6 +508,64 @@ module.exports = baseVw.extend({
       this.onlyFollowing = false;
     }
     this.loadItemsOrSearch();
+  },
+
+  clickListingsFollowed: function(){
+    this.setListingsFollowed();
+    this.loadFollowedItems();
+  },
+
+  setListingsFollowed: function(){
+    this.$('.js-homeListingsFollowed').addClass('active');
+    this.$('.js-homeListingsAll').removeClass('active');
+    localStorage.setItem('homeShowAll', "no");
+  },
+
+  clickListingsAll: function(){
+    this.setListingsAll();
+    this.loadAllItems();
+  },
+
+  setListingsAll: function(){
+    if(localStorage.getItem('safeListingsWarningDissmissed')) {
+      this.$('.js-homeListingsAll').addClass('active');
+      this.$('.js-homeListingsFollowed').removeClass('active');
+    }
+
+    localStorage.setItem('homeShowAll', "yes");
+  },
+
+  loadFollowedItems: function(){
+    this.onlyFollowing = true;
+    this.loadItemsOrSearch();
+  },
+
+  loadAllItems: function(){
+    var self = this;
+    if(localStorage.getItem('safeListingsWarningDissmissed')){
+      this.onlyFollowing = false;
+      this.loadItemsOrSearch();
+    } else {
+      messageModal.show(
+          polyglot.t('ViewUnfilteredListings'),
+          polyglot.t('AllListingsWarning'),
+          'modal-hero bg-dark-blue iconBackground',
+          'modal-msg custCol-secondary',
+          function(){
+            messageModal.hide();
+          },
+          polyglot.t('Cancel'),
+          'txt-center',
+          function(){
+            localStorage.setItem('safeListingsWarningDissmissed', true);
+            self.loadAllItems();
+            messageModal.hide();
+            self.setListingsAll();
+          },
+          polyglot.t('ShowUnlfilteredListings'),
+          'txt-center'
+      );
+    }
   },
 
   loadItemsOrSearch: function(){

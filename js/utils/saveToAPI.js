@@ -39,7 +39,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
     form.find(":input:not(:disabled)").each(function(){
       if($(this).val() == "") {
         $(this).attr('disabled', true);
-        tempDisabledFields.push($(this).attr('id'));
+        tempDisabledFields.push($(this).attr('name'));
       }
     });
 
@@ -47,7 +47,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
     __.each(addData, function(value, key) {
       var disInp = form.find('input[name="'+key+'"]');
       disInp.attr('disabled', true);
-      tempDisabledFields.push(disInp.attr('id'));
+      tempDisabledFields.push(disInp.attr('name'));
     });
 
     __.each(form.serializeArray(), function (value) {
@@ -134,7 +134,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
     complete: function(){
       //re-enable any disabled fields
       __.each(tempDisabledFields, function(element){
-        form.find('#'+element).attr('disabled', false);
+        form.find('input[name="'+element+'"]').attr('disabled', false);
       });
     }
   });

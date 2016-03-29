@@ -2,10 +2,11 @@ var autolinker = require( 'autolinker');
 
 module.exports = function(msg) {
 
-  msg = msg.replace(/ob:\/\/@/gm, "ob://obHandleLinkToBeReplaced");
+  msg = msg.replace(/ob:\/\/@/gm, "@");
+  msg = msg.replace(/ob:\/\/#/gm, "#");
 
   msg = autolinker.link(msg, {
-    'hashtag': false,
+    'hashtag': "twitter",
     replaceFn : function( autolinker, match ) {
 
       switch( match.getType() ) {
@@ -19,14 +20,15 @@ module.exports = function(msg) {
           return;
 
         case 'twitter' : //pretend handles are twitter links
-          console.log( "Twitter Handle: ", match.getTwitterHandle() );
-          return '<a>@' + match.getTwitterHandle() + '</a>';
+          return '<a>ob://@' + match.getTwitterHandle() + '</a>';
+
+        case 'hashtag' :
+          return '<a>ob://#' + match.getHashtag() + '</a>';
+
       }
     }
   });
-
-  msg = msg.replace(/ob:\/\/obHandleLinkToBeReplaced/gm, "ob://@");
-
+  
   return msg;
 
 };
