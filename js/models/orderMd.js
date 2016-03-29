@@ -118,7 +118,7 @@ module.exports = window.Backbone.Model.extend({
 
     response.serverUrl = this.serverUrl;
     response.status = this.status;
-    response.bitcoinValidationRegex = this.bitcoinValidationRegex;
+    response.bitcoinValidationRegex = config.bitcoinValidationRegex;
     response.transactionType = this.transactionType;
 
     response.vendorAvatarURL = localStorage.getItem('userAvatar-'+response.vendor_offer.listing.id.guid);
@@ -217,7 +217,6 @@ module.exports = window.Backbone.Model.extend({
     this.userBTCAve = options.btAve;
     this.serverUrl = options.serverUrl;
     this.status = options.status;
-    this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.transactionType = options.transactionType;
     //this.countries = new countriesMd();
     //this.countryArray = this.countries.get('countries');

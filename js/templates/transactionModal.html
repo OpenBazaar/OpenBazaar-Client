@@ -136,9 +136,9 @@
                          class="fieldItem custCol-text"
                          required
                          placeholder="<%= polyglot.t('transactions.RecievingAddressPlaceholder') %>"
-                         pattern="<%= ob.bitcoinValidationRegex %>"
+                         pattern="<%= config.bitcoinValidationRegex %>"
                   >
-                  <% if(window.testnet) { %>
+                  <% if(config.testnet) { %>
                   <div class="positionTopRight padding10">
                     <span class="btn btn-txt custCol-secondary fontSize9">
                       <%= polyglot.t('TestnetAddress') %>
@@ -797,7 +797,7 @@
             </div>
           </div>
           <% if(ob.bitcoin_txs && ob.bitcoin_txs[0]){ %>
-            <% if(window.testnet){ %>
+            <% if(config.testnet){ %>
               <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
             <% }else{ %>
               <a href="https://live.blockcypher.com/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
@@ -1061,9 +1061,9 @@
                          type="text"
                          placeholder="<%= polyglot.t('Address') %>"
                          class="fieldItem"
-                         pattern="<%= ob.bitcoinValidationRegex %>"
+                         pattern="<%= config.bitcoinValidationRegex %>"
                   >
-                  <% if(window.testnet) { %>
+                  <% if(config.testnet) { %>
                   <div class="positionTopRight padding10">
                     <span class="btn btn-txt custCol-secondary fontSize9">
                       <%= polyglot.t('TestnetAddress') %>

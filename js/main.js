@@ -3,15 +3,16 @@ var App = require('./App'),
 
 var __ = window.__ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    Config = require('./config');
 Backbone.$ = $;
 //add to global scope for non-modular libraries
 window.Backbone = Backbone;
 window.$ = $;
 window.jQuery = $;
 window.Backbone.$ = $;
+window.config = Config;
 window.focused = true;
-window.testnet = true; //change to false to use main net
 
 // we need to know this for notifications
 window.onfocus = function() {
@@ -179,46 +180,34 @@ $('body').on('keypress', 'input', function(event) {
 });
 
 //keyboard shortucts
-window.keyShortcuts = {
-  discover:        'd',
-  myPage:          'h',
-  customizePage:   'e',
-  create:          'n',
-  purchases:       '1',
-  sales:           '2',
-  cases:           '3',
-  settings:        'g',
-  addressBar:      'l'
-};
-
 $(window).bind('keydown', function(e) {
   if (e.ctrlKey || e.metaKey) {
 		var route = null,
         char = String.fromCharCode(e.which).toLowerCase();
 
 		switch (char) {
-			case keyShortcuts.discover:
+			case config.keyShortcuts.discover:
 				route = 'home';
 				break;
-			case keyShortcuts.myPage:
+			case config.keyShortcuts.myPage:
 				route = 'userPage';
 				break;
-			case keyShortcuts.customizePage:
+			case config.keyShortcuts.customizePage:
 				route = 'userPage/' + user.get('guid') + '/customize';
 				break;
-			case keyShortcuts.create:
+			case config.keyShortcuts.create:
 				route = 'userPage/' + user.get('guid') + '/listingNew';
 				break;
-			case keyShortcuts.purchases:
+			case config.keyShortcuts.purchases:
 				route = 'transactions/purchases';
 				break;
-			case keyShortcuts.sales:
+			case config.keyShortcuts.sales:
 				route = 'transactions/sales';
 				break;
-			case keyShortcuts.cases:
+			case config.keyShortcuts.cases:
 				route = 'transactions/cases';
 				break;
-			case keyShortcuts.settings:
+			case config.keyShortcuts.settings:
 				route = 'settings';
 				break;
 		}
@@ -231,7 +220,7 @@ $(window).bind('keydown', function(e) {
 		}
 
     // Select all text in address bar
-    if (char === keyShortcuts.addressBar) {
+    if (char === config.keyShortcuts.addressBar) {
       // Select all text in address bar
       $('.js-navAddressBar').select();
     }
