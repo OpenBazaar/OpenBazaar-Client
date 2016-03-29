@@ -45,14 +45,14 @@
         </div>
         <div class="flexCol-4">
           <div class="flexRow flexRow-vCenter">
-            <div class="flexExpand marginRight10 fontSize10">
+            <div class="flexExpand marginRight10 fontSize13 textOpacity75">
               <div class="pull-right">
                 <%= polyglot.t('ShowOnlyFollowerListings') %>
               </div>
             </div>
             <div class="btn-togWrapper btn-togWrapper-c1 marginRight10">
-              <a class="btn btn-txt btn-c1 btn-togLeft active js-homeListingsFollowed"><%= polyglot.t('On') %></a>
-              <a class="btn btn-txt btn-c1  btn-togRight js-homeListingsAll"><%= polyglot.t('Off') %></a>
+              <a class="btn btn-txt btn-c1 btn-togLeft active js-homeListingsFollowed tooltip tooltip-left" data-tooltip="<%= polyglot.t('ShowOnlyFollowerListingsTooltip') %>"><span class="toggle-txt"><%= polyglot.t('On') %></span></a>
+              <a class="btn btn-txt btn-c1  btn-togRight js-homeListingsAll tooltip tooltip-left" data-tooltip="<%= polyglot.t('ShowAllListingsTooltip') %>"><span class="toggle-txt"><%= polyglot.t('Off') %></span></a>
             </div>
           </div>
         </div>
