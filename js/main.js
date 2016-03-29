@@ -137,8 +137,9 @@ $(document).on('mouseenter',
   `.js-userPageAboutSection a:not(.tooltip),
    .js-item .js-description a:not(.tooltip)`,
   function(e) {
-    var thisHref = $(this).attr('href');
-    if(thisHref){
+    var thisHref = $(this).attr('href'),
+        linkPattern = /^[a-zA-Z]+:\/\//;
+    if(thisHref && linkPattern.test(thisHref)){
       $(this).attr({
         'data-tooltip': thisHref,
         'data-href-tooltip': true
