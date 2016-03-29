@@ -292,7 +292,7 @@ module.exports = baseVw.extend({
       orderID: options.orderID,
       status: options.status,
       serverUrl: this.serverUrl,
-      parentEl: $('.js-transactionModalHolder'),
+      parentEl: $('#modalHolder'),
       countriesArray: this.countriesArray,
       cCode: this.userModel.get('currency_code'),
       btAve: this.btAve,

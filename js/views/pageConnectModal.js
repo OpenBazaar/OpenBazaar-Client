@@ -23,6 +23,7 @@ module.exports = baseModal.extend({
     this.options = options || {};
     this._state = {};
     this.setState(__.extend({}, defaultState, this.options.initialState || {}));
+    $('#loadingModal').addClass('hide'); //hide modal if it is still visible
   },
 
   setState: function(state) {

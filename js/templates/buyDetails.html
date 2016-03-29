@@ -23,7 +23,7 @@
             </div>
             <div class="pad10left txt-unleaded">
               <div class="marginTop12 marginBottom4 fontSize13 noOverflow"><strong><%= ob.vendor_offer.listing.item.title %></strong></div>
-              <div class="noOverflow fontSize13 txt-fade">Sold by <% if(ob.page.profile.handle){ %><%= ob.page.profile.handle %><% } else { %><%= ob.page.profile.guid %><% } %></div>
+              <div class="noOverflow fontSize13 txt-fade"><%= polyglot.t('transactions.SoldBy') %> <% if(ob.page.profile.handle){ %><%= ob.page.profile.handle %><% } else { %><%= ob.page.profile.guid %><% } %></div>
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@
             </div>
             <div class="pad10left txt-unleaded">
               <div class="marginTop6 marginBottom4 fontSize13 noOverflow marginBottom4">
-                Moderated by 
+                <%= polyglot.t('transactions.Moderator') %>
                 <% if(ob.selectedModerator.blockchain_id){ %>
                   <%= ob.selectedModerator.blockchain_id %>
                 <% } else { %>
