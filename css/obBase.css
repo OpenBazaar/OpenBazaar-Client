@@ -206,7 +206,7 @@ form {
   position: fixed;
   top: 0;
   -webkit-app-region: drag;
-  z-index: 6;
+  z-index: 13;
 }
 
 
