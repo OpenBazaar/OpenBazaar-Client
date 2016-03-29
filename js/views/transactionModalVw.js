@@ -301,6 +301,7 @@ module.exports = baseVw.extend({
   completeOrderHide: function(){
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-complete').removeClass('bottom0');
+    this.completeOrder.abort();
   },
 
   confirmOrder: function(e){
@@ -329,35 +330,11 @@ module.exports = baseVw.extend({
           setTimeout(function(){
             confirmStatus && confirmStatus.remove();
           },3000);
-          },
-        /*(function(data){
-          //onFail
-          confirmStatus.updateMessage({
-            type: 'warning',
-            msg: '<i>' + window.polyglot.t('transactions.UpdateFailed') + '</i>',
-            duration: 3000
-          });
-          setTimeout(function(){
-            confirmStatus && confirmStatus.remove();
-          },3000);
-        }*/'',
-        confirmData, '',
-        /*function(){
-          //onInvalid
-          confirmStatus.updateMessage({
-            type: 'warning',
-            msg: '<i>' + window.polyglot.t('transactions.UpdateInvalid') + '</i>',
-            duration: 3000
-          });
-          setTimeout(function(){
-            confirmStatus && confirmStatus.remove();
-          },3000);
-        }*/'')
+          }, '',
+        confirmData, '', '')
         .always(function(){
           targBtn.removeClass("loading");
         });
-
-   // this.closeModal();
   },
 
   completeOrder: function(e){
@@ -367,9 +344,9 @@ module.exports = baseVw.extend({
 
     $(e.target).addClass('loading');
     completeData.id = this.orderID;
-    this.$el.find('.js-transactionSpinner').removeClass('hide');
+    //this.$el.find('.js-transactionSpinner').removeClass('hide');
 
-    saveToAPI(targetForm, '', this.serverUrl + "complete_order",
+    this.completeOrder = saveToAPI(targetForm, '', this.serverUrl + "complete_order",
         function(data){
           self.status = 3;
           self.tabState = "summary";
@@ -380,7 +357,7 @@ module.exports = baseVw.extend({
         },
         completeData).always(() => {
           $(e.target).removeClass('loading');
-          self.$el.find('.js-transactionSpinner').addClass('hide');
+          //self.$el.find('.js-transactionSpinner').addClass('hide');
         });
   },
 
