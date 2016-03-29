@@ -12,7 +12,7 @@
             </div>
             <% if(ob.address){ %>
             <div class="pull-right">
-              <% if(window.testnet){ %>
+              <% if(config.testnet){ %>
                 <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.address %>" class="noWrap">
               <% }else{ %>
               <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.address %>" class="noWrap">
