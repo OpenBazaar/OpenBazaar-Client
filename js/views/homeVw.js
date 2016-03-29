@@ -512,17 +512,18 @@ module.exports = baseVw.extend({
 
   clickListingsFollowed: function(){
     this.setListingsFollowed();
+    this.loadFollowedItems();
   },
 
   setListingsFollowed: function(){
     this.$('.js-homeListingsFollowed').addClass('active');
     this.$('.js-homeListingsAll').removeClass('active');
-    this.loadFollowedItems();
     localStorage.setItem('homeShowAll', "no");
   },
 
   clickListingsAll: function(){
     this.setListingsAll();
+    this.loadAllItems();
   },
 
   setListingsAll: function(){
@@ -530,20 +531,20 @@ module.exports = baseVw.extend({
       this.$('.js-homeListingsAll').addClass('active');
       this.$('.js-homeListingsFollowed').removeClass('active');
     }
-    this.loadAllItems();
+
     localStorage.setItem('homeShowAll', "yes");
   },
 
   loadFollowedItems: function(){
     this.onlyFollowing = true;
-    this.loadItems();
+    this.loadItemsOrSearch();
   },
 
   loadAllItems: function(){
     var self = this;
     if(localStorage.getItem('safeListingsWarningDissmissed')){
       this.onlyFollowing = false;
-      this.loadItems();
+      this.loadItemsOrSearch();
     } else {
       messageModal.show(
           polyglot.t('ViewUnfilteredListings'),

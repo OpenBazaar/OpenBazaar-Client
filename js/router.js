@@ -210,19 +210,13 @@ module.exports = Backbone.Router.extend({
 
   home: function(state, searchText){
     "use strict";
-    var searchItemsText = "",
-        searchUserText = "", //placeholder for future functionality
-        addressBarText = searchText ? "#" + searchText : "";
-    if(state == "products"){
-      searchItemsText = searchText;
-    }
     this.newView(new homeView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
       state: state,
-      searchItemsText: searchItemsText
-    }),'',{'addressText': addressBarText});
+      searchItemsText: searchText
+    }),'',{'addressText': searchText ? "#" + searchText : ""});
 
     // hide the discover onboarding callout
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
