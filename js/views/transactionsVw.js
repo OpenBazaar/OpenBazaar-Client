@@ -297,7 +297,6 @@ module.exports = baseVw.extend({
       btAve: this.btAve,
       state: this.state,
       tabState: options.tabState,
-      bitcoinValidationRegex: btcRegex,
       transactionType: options.transactionType,
       userModel: this.userModel,
       userProfile: this.userProfile,
