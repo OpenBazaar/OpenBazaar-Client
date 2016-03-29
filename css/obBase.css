@@ -1421,7 +1421,7 @@ h5 {
 .modal-hero.iconBackground {
   background-image: url(../imgs/openbazaar-icon-no-border.png);
   background-position: 50% 30px;
-  background-size: 120px;
+  background-size: 136px;
   background-repeat: no-repeat;
 }
 
@@ -3387,6 +3387,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .color-secondary {
   background: #327EB8;
+}
+
+.color-secondary-darken {
+  background: #215175;
 }
 
 .homeView {
