@@ -1,10 +1,14 @@
 // App specific configuration
+var testnet = true, //change to false to use main net
+    bitcoinValidationRegexMainnet = "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",
+    bitcoinValidationRegexTestnet = "^[2mn][a-km-zA-HJ-NP-Z1-9]{25,34}$",
+    bitcoinValidationRegex = testnet ? bitcoinValidationRegexTestnet : bitcoinValidationRegexMainnet;
+
 module.exports = {
-  testnet: true, //change to false to use main net
   
-  bitcoinValidationRegex: "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",
-  //remove this when in production, this is for testNet addresses
-  bitcoinValidationRegexTestnet: "^[2mn][a-km-zA-HJ-NP-Z1-9]{25,34}$",
+  testnet: testnet,
+
+  bitcoinValidationRegex: bitcoinValidationRegex,
   
   keyShortcuts: {
     discover:        'd',

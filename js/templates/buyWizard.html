@@ -390,7 +390,7 @@
                 <div class="flexCol-12 custCol-border positionWrapper">
                   <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
                          placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
-                         pattern="<% if(config.testnet){ print(config.bitcoinValidationRegexTestnet) }else{ print(config.bitcoinValidationRegex)} %>"
+                         pattern="<%= config.bitcoinValidationRegex %>"
                          value="<%= ob.user.refund_address %>" required />
                   <% if(config.testnet) { %>
                   <div class="positionTopRight padding10">
