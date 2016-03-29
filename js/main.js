@@ -116,13 +116,13 @@ $('body').on('click', 'a', function(e){
   var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
       linkPattern = /^[a-zA-Z]+:\/\//;
 
-
-  if(targUrl.startsWith('ob') || targUrl.startsWith('@')){
+  if(targUrl.startsWith('ob')){
     e.preventDefault();
     app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
       Backbone.history.navigate(route, {trigger:true});
     });
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
+    console.log("foo")
     e.preventDefault();
 
     if (!/^https?:\/\//i.test(targUrl)) {
@@ -136,10 +136,13 @@ $(document).on('mouseenter',
   `.js-userPageAboutSection a:not(.tooltip),
    .js-item .js-description a:not(.tooltip)`,
   function(e) {
-    $(this).attr({
-        'data-tooltip': $(this).attr('href'),
+    var thisHref = $(this).attr('href');
+    if(thisHref){
+      $(this).attr({
+        'data-tooltip': thisHref,
         'data-href-tooltip': true
       }).addClass('tooltip');
+    }
   });
 
 $(document).on('mouseleave', 'a[data-href-tooltip]', function(e) {

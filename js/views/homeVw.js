@@ -171,6 +171,14 @@ module.exports = baseVw.extend({
         self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
         $('#obContainer').scrollTop(0);
       }
+
+      //set the filter
+      if(localStorage.getItem('homeShowAll') == "yes"){
+        self.setListingsAll();
+      } else {
+        self.setListingsFollowed();
+      }
+
     });
   },
 
@@ -502,30 +510,41 @@ module.exports = baseVw.extend({
     this.loadItemsOrSearch();
   },
 
-  clickListingsFollowed: function(e){
-    $(e.target).addClass('active');
-    this.$('.js-homeListingsAll').removeClass('active');
+  clickListingsFollowed: function(){
+    this.setListingsFollowed();
     this.loadFollowedItems();
   },
 
-  clickListingsAll: function(e){
+  setListingsFollowed: function(){
+    this.$('.js-homeListingsFollowed').addClass('active');
+    this.$('.js-homeListingsAll').removeClass('active');
+    localStorage.setItem('homeShowAll', "no");
+  },
+
+  clickListingsAll: function(){
+    this.setListingsAll();
+    this.loadAllItems();
+  },
+
+  setListingsAll: function(){
     if(localStorage.getItem('safeListingsWarningDissmissed')) {
-      $(e.target).addClass('active');
+      this.$('.js-homeListingsAll').addClass('active');
       this.$('.js-homeListingsFollowed').removeClass('active');
     }
-    this.loadAllItems();
+
+    localStorage.setItem('homeShowAll', "yes");
   },
 
   loadFollowedItems: function(){
     this.onlyFollowing = true;
-    this.loadItems();
+    this.loadItemsOrSearch();
   },
 
   loadAllItems: function(){
     var self = this;
     if(localStorage.getItem('safeListingsWarningDissmissed')){
       this.onlyFollowing = false;
-      this.loadItems();
+      this.loadItemsOrSearch();
     } else {
       messageModal.show(
           polyglot.t('ViewUnfilteredListings'),
@@ -541,8 +560,7 @@ module.exports = baseVw.extend({
             localStorage.setItem('safeListingsWarningDissmissed', true);
             self.loadAllItems();
             messageModal.hide();
-            self.$('.js-homeListingsAll').addClass('active');
-            self.$('.js-homeListingsFollowed').removeClass('active');
+            self.setListingsAll();
           },
           polyglot.t('ShowUnlfilteredListings'),
           'txt-center'
