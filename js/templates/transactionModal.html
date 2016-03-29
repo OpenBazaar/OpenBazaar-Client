@@ -78,6 +78,7 @@
       </a>
     </div>
     <% } else if(ob.transactionType == "purchases" &&
+                ob.status == 6 &&
                 !ob.buyer_receipt &&
                 ob.dispute_resolution &&
                 ob.dispute_resolution.resolution &&
@@ -1074,6 +1075,7 @@
                 </div>
                 <div class="flexCol-8 borderRight custCol-border padding10">
                   <input name="moderator_address"
+                         id="moderatorAddress"
                          type="text"
                          placeholder="<%= polyglot.t('Address') %>"
                          class="fieldItem"
