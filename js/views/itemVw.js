@@ -171,7 +171,7 @@ module.exports = baseVw.extend({
     this.buyWizardView && this.buyWizardView.remove();
     this.buyWizardView = new buyWizardVw({model:buyModel, userModel: this.options.userModel});
     this.registerChild(this.buyWizardView);
-    $('#modalHolder').html(this.buyWizardView.el); //add to DOM first, or accordion will have zero width when initialized
+    $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
     this.buyWizardView.render();
     $('#obContainer').addClass('overflowHidden blur');
   },
