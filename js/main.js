@@ -116,8 +116,7 @@ $('body').on('click', 'a', function(e){
   var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
       linkPattern = /^[a-zA-Z]+:\/\//;
 
-
-  if(targUrl.startsWith('ob') || targUrl.startsWith('@')){
+  if(targUrl.startsWith('ob')){
     e.preventDefault();
     app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
       Backbone.history.navigate(route, {trigger:true});

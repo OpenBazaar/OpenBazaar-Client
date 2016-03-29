@@ -2,7 +2,8 @@ var autolinker = require( 'autolinker');
 
 module.exports = function(msg) {
 
-  msg = msg.replace(/ob:\/\/@/gm, "ob://obHandleLinkToBeReplaced");
+  msg = msg.replace(/ob:\/\/@/gm, "@");
+  msg = msg.replace(/ob:\/\/#/gm, "#");
 
   msg = autolinker.link(msg, {
     'hashtag': "twitter",
@@ -27,9 +28,7 @@ module.exports = function(msg) {
       }
     }
   });
-
-  msg = msg.replace(/ob:\/\/obHandleLinkToBeReplaced/gm, "ob://@");
-
+  
   return msg;
 
 };
