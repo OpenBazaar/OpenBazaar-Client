@@ -3863,6 +3863,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 1;
   white-space: nowrap;
   pointer-events: none;
+  margin-top: 2px;
 }
 
 .tooltip.tooltip-left:hover:after{
@@ -3880,6 +3881,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: auto;
   width: 400px;
   white-space: normal;
+  bottom: auto;
+}
+
+.tooltip.tooltip-box.tooltip-boxUp:hover:after {
+  bottom: 120%;
 }
 
 .btn-notifications.tooltip:hover:after{

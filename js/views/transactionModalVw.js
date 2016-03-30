@@ -679,7 +679,7 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger("orderModalClosed");
     this.$el.parent().fadeOut(300);
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
-    this.confirmStatus.remove();
+    this.confirmStatus && this.confirmStatus.remove();
     this.remove();
   }
 });

@@ -385,6 +385,7 @@
     "HideDetails": "Hide Details",
     "ConfirmOrder": "Confirm Order",
     "ConfirmOrderResend": "Resend Order Confirmation",
+    "ConfirmOrderResendTooltip": "If the buyer has not received the order confirmation, this button will resend it. This may take several seconds to complete.",
     "RefundOrder": "Refund Order",
     "RefundReason": "Reason for refund",
     "RefundReasonPlaceholder": "Explain why you are sending a refund",
