@@ -154,9 +154,16 @@ module.exports = baseVw.extend({
       }
 
       //get vendors and items
-      self.loadItemsOrSearch();
       self.loadingVendors = true;
       self.socketView.getVendors(self.socketUsersID);
+      //set the filter
+      if(localStorage.getItem('homeShowAll') == "yes"){
+        self.setListingsAll();
+        self.loadAllItems();
+      } else {
+        self.setListingsFollowed();
+        self.loadFollowedItems();
+      }
 
       //listen to scrolling on container
       self.scrollHandler = __.bind(
@@ -171,12 +178,7 @@ module.exports = baseVw.extend({
         $('#obContainer').scrollTop(0);
       }
 
-      //set the filter
-      if(localStorage.getItem('homeShowAll') == "yes"){
-        self.setListingsAll();
-      } else {
-        self.setListingsFollowed();
-      }
+
 
     });
   },
