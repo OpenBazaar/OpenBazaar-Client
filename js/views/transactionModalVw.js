@@ -33,7 +33,8 @@ module.exports = baseVw.extend({
     'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
     'click .js-completeOrderHide': 'completeOrderHide',
-    'click .js-confirmOrder': 'confirmOrder',
+    'click .js-confirmOrder': 'clickConfirmOrder',
+    'click .js-confirmOrderResend': 'clickConfirmOrderResend',
     'click .js-completeOrder': 'completeOrder',
     'click .js-copyIncommingTx': 'copyTx',
     'click .js-copyOutgoingTx': 'copyTx',
@@ -304,15 +305,20 @@ module.exports = baseVw.extend({
     this.completeOrder.abort();
   },
 
-  confirmOrder: function(e){
+  clickConfirmOrder: function(e){
+    this.confirmOrder(this.$el.find('#transactionConfirmForm'), $(e.target));
+  },
+
+  clickConfirmOrderResend: function(e){
+    this.confirmOrder('', $(e.target));
+  },
+
+  confirmOrder: function(targForm, targBtn){
     var self = this,
-        targetForm = this.$el.find('#transactionConfirmForm'),
-        confirmData = {},
-        confirmStatus,
-        targBtn = $(e.target);
+        confirmData = {};
 
     confirmData.id = this.orderID;
-    confirmStatus = app.statusBar.pushMessage({
+    this.confirmStatus = app.statusBar.pushMessage({
       type: 'pending',
       msg: '<i>' + window.polyglot.t('transactions.UpdatingOrder') + '</i>',
       duration: false
@@ -320,15 +326,15 @@ module.exports = baseVw.extend({
 
     targBtn.addClass("loading");
 
-    saveToAPI(targetForm, '', this.serverUrl + "confirm_order",
+    saveToAPI(targForm, '', this.serverUrl + "confirm_order",
         function(data){
           self.closeModal();
-          confirmStatus.updateMessage({
+          self.confirmStatus.updateMessage({
             type: 'confirmed',
             msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
           });
           setTimeout(function(){
-            confirmStatus && confirmStatus.remove();
+            self.confirmStatus && self.confirmStatus.remove();
           },3000);
           }, '',
         confirmData, '', '')
@@ -673,6 +679,7 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger("orderModalClosed");
     this.$el.parent().fadeOut(300);
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    this.confirmStatus.remove();
     this.remove();
   }
 });

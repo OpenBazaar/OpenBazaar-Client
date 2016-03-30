@@ -384,6 +384,7 @@
     "ContractDetails": "Contract Details",
     "HideDetails": "Hide Details",
     "ConfirmOrder": "Confirm Order",
+    "ConfirmOrderResend": "Resend Order Confirmation",
     "RefundOrder": "Refund Order",
     "RefundReason": "Reason for refund",
     "RefundReasonPlaceholder": "Explain why you are sending a refund",
