@@ -24,7 +24,12 @@
         <%= polyglot.t('transactions.OrderStatus'+ob.status) %>
         <% if(ob.displayModerator && ob.status < 3){ %>
           <%= polyglot.t('transactions.InEscrow') %>
-        <% } %>        
+        <% } %>
+        <% if(ob.dispute_resolution && ob.dispute_resolution.resolution){ %>
+          <br>
+            <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %>BTC<br>
+            <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %>BTC
+        <% } %>
       </div>
     </div>
     <% if(ob.status == 0 && ob.transactionType == "purchases"){ %>
@@ -65,11 +70,23 @@
         Refund Order
       </a>
     </div>
-    <% } else if(ob.status == 2 && ob.transactionType == "purchases"){ %>
+    <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
     <div class="positionTop padding10 width100">
       <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
         <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
         <%= polyglot.t('transactions.CompleteOrder') %>
+      </a>
+    </div>
+    <% } else if(ob.transactionType == "purchases" &&
+                ob.status == 6 &&
+                !ob.buyer_receipt &&
+                ob.dispute_resolution &&
+                ob.dispute_resolution.resolution &&
+                ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
+    <div class="positionTop padding10 width100">
+      <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
+        <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+        <%= polyglot.t('transactions.LeaveReview') %>
       </a>
     </div>
     <% } else if(ob.status == 5 && ob.dispute_resolution){ %>
@@ -362,13 +379,13 @@
             <div class="flexCol-8 positionWrapper">
               <div class="fieldItem">
                 <input name="feedback" id="feedback1" type="radio" class="fieldItem starRating" value = 1 checked>
-                <label for="feedback1" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.oneStar') %>""></label>
+                <label for="feedback1" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.oneStar') %>"></label>
                 <input name="feedback" id="feedback2" type="radio" class="fieldItem starRating" value = 2 checked>
-                <label for="feedback2" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.twoStar') %>""></label>
+                <label for="feedback2" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.twoStar') %>"></label>
                 <input name="feedback" id="feedback3" type="radio" class="fieldItem starRating" value = 3 checked>
-                <label for="feedback3" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.threeStar') %>""></label>
+                <label for="feedback3" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.threeStar') %>"></label>
                 <input name="feedback" id="feedback4" type="radio" class="fieldItem starRating" value = 4 checked>
-                <label for="feedback4" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fourStar') %>""></label>
+                <label for="feedback4" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fourStar') %>"></label>
                 <input name="feedback" id="feedback5" type="radio" class="fieldItem starRating" value = 5 checked>
                 <label for="feedback5" class="tooltip height24" data-tooltip="<%= polyglot.t('overallRatingKeys.fiveStar') %>"></label>
               </div>
@@ -1057,6 +1074,7 @@
                 </div>
                 <div class="flexCol-8 borderRight custCol-border padding10">
                   <input name="moderator_address"
+                         id="moderatorAddress"
                          type="text"
                          placeholder="<%= polyglot.t('Address') %>"
                          class="fieldItem"

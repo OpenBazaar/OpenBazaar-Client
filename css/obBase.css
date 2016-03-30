@@ -206,7 +206,7 @@ form {
   position: fixed;
   top: 0;
   -webkit-app-region: drag;
-  z-index: 6;
+  z-index: 13;
 }
 
 
@@ -5521,16 +5521,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   animation-delay: 0.5s;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
 
 @-webkit-keyframes loaderAnimation {
-  0% {
+  from {
     opacity: 0.2;
     color: rgba(255,255,255,0);
   }
-  100% {
-    opacity: 1;
+  to {
+    opacity: 0.9;
     color: rgba(255,255,255,1);
   }
 }
