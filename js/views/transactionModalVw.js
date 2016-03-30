@@ -43,6 +43,7 @@ module.exports = baseVw.extend({
     'click .js-showFundOrder': 'showFundOrder',
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
+    'click .js-startDisputeResend': 'confirmDisputeResend',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
     'click .js-closeDisputeResend': 'closeDisputeResend',
@@ -98,7 +99,9 @@ module.exports = baseVw.extend({
       transactionType: this.transactionType,
       avatarURL: this.avatarURL,
       avatar_hash: this.userProfile.get('avatar_hash'),
-      orderID: this.orderID});
+      orderID: this.orderID,
+      userGuid: this.userModel.get('guid')
+    });
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
     this.getData();
@@ -475,7 +478,7 @@ module.exports = baseVw.extend({
 
     //is this a dispute?
     if(this.$('#transactionStartDisputeCheckbox').prop("checked")) {
-      this.confirmDispute();
+      this.confirmDispute(this.$('#transactionDiscussionForm'));
     } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
       this.closeDispute();
     } else if(this.status == 4 || this.transactionType == "cases"){
@@ -566,19 +569,22 @@ module.exports = baseVw.extend({
     this.setState("discussion");
   },
 
-  confirmDispute: function(){
+  confirmDispute: function(targForm){
     var self = this,
-        targetForm = this.$('#transactionDiscussionForm'),
         discussionData = {};
 
     discussionData.order_id = this.orderID;
 
-    saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
+    saveToAPI(targForm, '', this.serverUrl + "dispute_contract", function(data){
       self.status = 4;
       self.tabState = "discussion";
       self.$('.js-startDisputeFlag').addClass('hide');
       self.getData();
     }, '', discussionData);
+  },
+
+  confirmDisputeResend: function(){
+    this.confirmDispute();
   },
 
   closeDispute: function(){
