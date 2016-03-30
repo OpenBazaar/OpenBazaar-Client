@@ -51,6 +51,7 @@ module.exports = baseVw.extend({
     'click .js-transactionHideContract': 'hideContract',
     'click .js-acceptResolution': 'acceptResolution',
     'click .js-refundTransaction': 'refundOrder',
+    'click .js-refundTransactionResend': 'refundOrder',
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
