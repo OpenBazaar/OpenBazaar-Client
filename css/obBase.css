@@ -1209,6 +1209,10 @@ h5 {
   opacity: 0.75;
 }
 
+#ov1 .unfilled {
+  opacity: 0.35;
+}
+
 #ov1 .div-fade {
   opacity: 0.50;
 }
@@ -2999,7 +3003,6 @@ input[type="radio"].fieldItem.starRating:checked + label + input + label + input
   line-height: 24px;
   font-size: 18px;
 }
-
 
 .radioLabel {
   opacity: .75;
@@ -5641,9 +5644,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: none !important;
 }
 
+#ov1.notFancy #obContainer .unfilled,
+#ov1.notFancy #userPage .unfilled {
+  opacity: 0.35 !important;
+}
 
 
-/* terrible hack, TODO: remove before production */
+/* hide unfinished elements */
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   background: #535353;
@@ -5652,5 +5659,5 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
-  display: none; /* hide when live */
+  display: none; /* hide in production */
 }
