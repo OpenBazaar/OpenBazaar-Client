@@ -32,10 +32,11 @@ module.exports = baseVw.extend({
     'click .js-showFeedbackRating': 'showFeedbackRating',
     'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
+    'click .js-completeOrderResend': 'clickCompleteOrderResend',
     'click .js-completeOrderHide': 'completeOrderHide',
     'click .js-confirmOrder': 'clickConfirmOrder',
     'click .js-confirmOrderResend': 'clickConfirmOrderResend',
-    'click .js-completeOrder': 'completeOrder',
+    'click .js-completeOrder': 'clickCompleteOrder',
     'click .js-copyIncommingTx': 'copyTx',
     'click .js-copyOutgoingTx': 'copyTx',
     'click .js-closeOrderForm': 'closeOrderForm',
@@ -302,7 +303,7 @@ module.exports = baseVw.extend({
   completeOrderHide: function(){
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-complete').removeClass('bottom0');
-    this.completeOrder.abort();
+    this.sendCompleteOrder && this.sendCompleteOrder.abort();
   },
 
   clickConfirmOrder: function(e){
@@ -343,16 +344,22 @@ module.exports = baseVw.extend({
         });
   },
 
-  completeOrder: function(e){
+  clickCompleteOrder: function(e){
+    this.completeOrder(this.$el.find('#transactionCompleteForm'), $(e.target));
+  },
+
+  clickCompleteOrderResend: function(e){
+    this.completeOrder('', $(e.target));
+  },
+
+  completeOrder: function(targForm, targBtn){
     var self = this,
-        targetForm = this.$el.find('#transactionCompleteForm'),
         completeData = {};
 
-    $(e.target).addClass('loading');
+    targBtn.addClass('loading');
     completeData.id = this.orderID;
-    //this.$el.find('.js-transactionSpinner').removeClass('hide');
 
-    this.completeOrder = saveToAPI(targetForm, '', this.serverUrl + "complete_order",
+    this.sendCompleteOrder = saveToAPI(targForm, '', this.serverUrl + "complete_order",
         function(data){
           self.status = 3;
           self.tabState = "summary";
@@ -362,8 +369,7 @@ module.exports = baseVw.extend({
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
         completeData).always(() => {
-          $(e.target).removeClass('loading');
-          //self.$el.find('.js-transactionSpinner').addClass('hide');
+           targBtn.removeClass('loading');
         });
   },
 
