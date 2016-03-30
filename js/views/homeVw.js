@@ -24,7 +24,6 @@ module.exports = baseVw.extend({
     'click .js-homeCreateListing': 'createListing',
     'click .js-homeSearchItemsClear': 'searchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
-    'change .js-homeSelectFollowingFilter': 'setFollowingFilter',
     'click .js-homeListingsFollowed': 'clickListingsFollowed',
     'click .js-homeListingsAll': 'clickListingsAll'
   },
@@ -498,16 +497,6 @@ module.exports = baseVw.extend({
     this.loadingVendors = true;
     this.socketView.getVendors(this.socketUsersID);
     this.setSocketTimeout();
-  },
-
-  setFollowingFilter: function(e){
-    var filterBy = $(e.target).val();
-    if(filterBy == "following"){
-      this.onlyFollowing = true;
-    } else {
-      this.onlyFollowing = false;
-    }
-    this.loadItemsOrSearch();
   },
 
   clickListingsFollowed: function(){
