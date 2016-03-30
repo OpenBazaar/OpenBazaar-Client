@@ -1366,6 +1366,7 @@ module.exports = baseVw.extend({
     var self = this,
         storeWizardModel = new Backbone.Model();
     storeWizardModel.set(this.model.attributes);
+    $('#modalHolder').fadeIn(300);
     this.storeWizardView = new storeWizardVw({
       model:storeWizardModel,
       parentEl: '#modalHolder',

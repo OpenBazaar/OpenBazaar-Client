@@ -25,11 +25,6 @@
         <% if(ob.displayModerator && ob.status < 3){ %>
           <%= polyglot.t('transactions.InEscrow') %>
         <% } %>
-        <% if(ob.dispute_resolution && ob.dispute_resolution.resolution){ %>
-          <br>
-            <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %>BTC<br>
-            <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %>BTC
-        <% } %>
       </div>
       <% if( ob.buyer_receipt) { %>
       <div class="rowTop10">
@@ -67,54 +62,69 @@
       </div>
     <% } else { %>
       <div class="positionTop padding10 width100 custCol-primary">
-      <% if(ob.status == 1 && ob.transactionType == "sales"){ %>
-        <a class="btn btn-txt custCol-secondary pull-left borderRight textOpacity1 js-showConfirmForm custCol-border" style="border-top-right-radius: 0; border-bottom-right-radius: 0">
-          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-          <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
-            <%= polyglot.t('transactions.ConfirmOrder') %>
-          <% } else { %>
-            <%= polyglot.t('transactions.MarkAsShipped') %>
-          <% } %>
-        </a>
-        <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransaction tooltip"
-           data-tooltip="<%= polyglot.t('RefundOrderTooltip') %>" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+        <div class="clearfix">
+        <% if(ob.status == 1 && ob.transactionType == "sales"){ %>
+          <a class="btn btn-txt custCol-secondary pull-left borderRight textOpacity1 js-showConfirmForm custCol-border" style="border-top-right-radius: 0; border-bottom-right-radius: 0">
+            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+            <% if(ob.vendor_offer.listing.metadata.category == "digital good" || ob.vendor_offer.listing.metadata.category == "service") { %>
+              <%= polyglot.t('transactions.ConfirmOrder') %>
+            <% } else { %>
+              <%= polyglot.t('transactions.MarkAsShipped') %>
+            <% } %>
+          </a>
+          <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransaction tooltip"
+             data-tooltip="<%= polyglot.t('RefundOrderTooltip') %>" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+            <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.RefundOrder') %>
+          </a>
+        <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
+          <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
+            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.CompleteOrder') %>
+          </a>
+        <% } else if(ob.transactionType == "sales" && ob.status == 2){ %>
+          <a class="btn btn-txt custCol-secondary pull-left js-confirmOrderResend textOpacity1 tooltip tooltip-box"
+             data-tooltip="<%= polyglot.t('transactions.ConfirmOrderResendTooltip') %>">
+            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.ConfirmOrderResend') %>
+          </a>
+        <% } else if(ob.transactionType == "purchases" && ob.status == 3){ %>
+          <a class="btn btn-txt custCol-secondary pull-left js-completeOrderResend textOpacity1 tooltip tooltip-box marginRight5"
+             data-tooltip="<%= polyglot.t('transactions.CompleteOrderResendTooltip') %>">
+            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.CompleteOrderResend') %>
+          </a>
+        <% } else if(ob.transactionType == "purchases" &&
+                    ob.status == 6 &&
+                    !ob.buyer_receipt &&
+                    ob.dispute_resolution &&
+                    ob.dispute_resolution.resolution &&
+                    ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
+          <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
+            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.LeaveReview') %>
+          </a>
+        <% } else if(ob.status == 5 && ob.dispute_resolution && ob.transactionType != "cases"){ %>
+          <a class="btn btn-txt custCol-secondary pull-left row10 js-acceptResolution">
+            <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
+            <%= polyglot.t('transactions.AcceptDisputeResolution') %>
+          </a>
+        <% } else if(ob.status == 7 && ob.transactionType == "sales"){ %>
+        <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransactionResend tooltip"
+           data-tooltip="<%= polyglot.t('transactions.RefundOrderResendTooltip') %>">
           <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('transactions.RefundOrder') %>
+          <%= polyglot.t('transactions.RefundOrderResend') %>
         </a>
-      <% } else if(ob.transactionType == "purchases" && ob.status == 2){ %>
-        <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
-          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('transactions.CompleteOrder') %>
+        <% } %>
+        <% if(ob.status != 0){ %>
+        <a class="btn btn-txt custCol-secondary pull-right js-transactionShowContract textOpacity1">
+          <span class="fontSize12 ion-code"></span>
+          <%= polyglot.t('transactions.ContractDetails') %>
         </a>
-      <% } else if(ob.transactionType == "sales" && ob.status == 2){ %>
-        <a class="btn btn-txt custCol-secondary pull-left js-confirmOrderResend textOpacity1 tooltip tooltip-box"
-           data-tooltip="<%= polyglot.t('transactions.ConfirmOrderResendTooltip') %>">
-          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('transactions.ConfirmOrderResend') %>
-        </a>
-      <% } else if(ob.transactionType == "purchases" && ob.status == 3){ %>
-        <a class="btn btn-txt custCol-secondary pull-left js-completeOrderResend textOpacity1 tooltip tooltip-box marginRight5"
-           data-tooltip="<%= polyglot.t('transactions.CompleteOrderResendTooltip') %>">
-          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('transactions.CompleteOrderResend') %>
-        </a>
-      <% } else if(ob.transactionType == "purchases" &&
-                  ob.status == 6 &&
-                  !ob.buyer_receipt &&
-                  ob.dispute_resolution &&
-                  ob.dispute_resolution.resolution &&
-                  ob.dispute_resolution.resolution.buyer_payout > ob.dispute_resolution.resolution.vendor_payout){ %>
-        <a class="btn btn-txt custCol-secondary pull-left js-showCompleteForm textOpacity1">
-          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('transactions.LeaveReview') %>
-        </a>
-      <% } else if(ob.status == 5 && ob.dispute_resolution){ %>
-        <a class="btn btn-txt custCol-secondary pull-left row10 js-acceptResolution">
-          <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-          <%= polyglot.t('transactions.AcceptDisputeResolution') %>
-        </a>
-        <hr>
-        <div class="flexRow txt-center">
+        <% } %>
+      </div>
+      <% if(ob.dispute_resolution){ %>
+        <div class="flexRow txt-center rowTop10 borderTop custCol-border pad10Top">
           <div class="flexExpand">
             <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %> BTC
           </div>
@@ -122,18 +132,6 @@
             <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %> BTC
           </div>
         </div>
-      <% } else if(ob.status == 7 && ob.transactionType == "sales"){ %>
-      <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransactionResend tooltip"
-         data-tooltip="<%= polyglot.t('transactions.RefundOrderResendTooltip') %>">
-        <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
-        <%= polyglot.t('transactions.RefundOrderResend') %>
-      </a>
-      <% } %>
-      <% if(ob.status != 0){ %>
-        <a class="btn btn-txt custCol-secondary pull-right js-transactionShowContract textOpacity1">
-          <span class="fontSize12 ion-code"></span>
-          <%= polyglot.t('transactions.ContractDetails') %>
-        </a>
       <% } %>
       </div>
     <% } %>
@@ -1012,15 +1010,20 @@
               <%= polyglot.t('transactions.CloseDispute') %>
             </label>
           </div>
+          <% } else if(ob.transactionType == "cases" && ob.status > 4){ %>
+          <div>
+            <a class="btn btn-small rowTop5 row5 width100 custCol-primary tooltip tooltip-box tooltip-boxUp js-closeDisputeResend" data-tooltip="<%= polyglot.t('transactions.CloseDisputeResendTooltip') %>">
+              <%= polyglot.t('transactions.CloseDisputeResend') %>
+            </a>
+          </div>
           <% } else if(ob.status < 4  && ob.status != 0 && ob.displayModerator) { %>
             <% if(ob.status == 2 || ob.staus == 3 || ob.status == 1 && ob.transactionType == "purchases"){ %>
             <div class="js-startDisputeFlag">
               <input type="checkbox" class="fieldItem"
                      id="transactionStartDisputeCheckbox" >
-              <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable compact minWidth120 marginLeft0 paddingLeft5">
+              <label for="transactionStartDisputeCheckbox" class="fontSize10 clickable compact minWidth120 marginLeft0 padding0 tooltip-box tooltip-boxUp"
+                     data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>">
                 <%= polyglot.t('transactions.DisputeTransaction') %>
-                <i class="ion-help-circled tooltip tooltip-leftTop tooltip-box tooltip-boxUp"
-                   data-tooltip="<%= polyglot.t('transactions.DisputeInstructions') %>"></i>
               </label>
             </div>
             <% } %>

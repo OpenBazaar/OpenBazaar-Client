@@ -45,6 +45,7 @@ module.exports = baseVw.extend({
     'click .js-startDispute': 'startDispute',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
+    'click .js-closeDisputeResend': 'closeDisputeResend',
     'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
     'change #transactionsSellerPayoutPercent': 'updateSellerBTC',
     'click .js-transactionShowContract': 'showContract',
@@ -606,6 +607,19 @@ module.exports = baseVw.extend({
     } else {
       messageModal.show(window.polyglot.t('errorMessages.missingError'));
     }
+  },
+
+  closeDisputeResend: function(){
+    var self = this,
+        discussionData = {};
+
+    discussionData.order_id = this.orderID;
+
+    saveToAPI('', '', this.serverUrl + "close_dispute", function(data){
+      self.status = 5;
+      self.tabState = "summary";
+      self.getData();
+    }, '', discussionData);
   },
 
   acceptResolution: function(e){
