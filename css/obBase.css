@@ -1619,7 +1619,6 @@ removed because I don't think we're using the trick to hide the borders any more
 }
 
 .searchWrapperWithPill:before {
-  top: 17px;
   left: 168px;
 }
 

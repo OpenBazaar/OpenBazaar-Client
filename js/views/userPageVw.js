@@ -1382,7 +1382,7 @@ module.exports = baseVw.extend({
     var $targ = $(e.target).closest('.js-follow');
 
     $targ.addClass('loading');
-    this.followUser({'guid': this.pageID}).always(() => {
+    this.followUser({'guid': this.pageID}).fail(() => {
       $targ.removeClass('loading');
       console.log("remove loading follow")
     });
@@ -1393,7 +1393,7 @@ module.exports = baseVw.extend({
 
     if($targ.hasClass('confirm')){
       $targ.addClass('loading').removeClass('confirm');
-      this.unfollowUser({'guid': this.pageID}).always(() => {
+      this.unfollowUser({'guid': this.pageID}).fail(() => {
         $(e.target).removeClass('loading')
         console.log("remove loading unfollow")
       });
