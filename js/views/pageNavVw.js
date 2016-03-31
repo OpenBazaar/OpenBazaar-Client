@@ -56,6 +56,7 @@ module.exports = baseVw.extend({
     this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.languages = new languagesModel();
     this.showDiscIntro = options.showDiscIntro;
+    this.notificationsRecord = {}; //store notification timestamps to prevent too many from the same user
 
     this.currentWindow = remote.getCurrentWindow();
 
@@ -152,13 +153,30 @@ module.exports = baseVw.extend({
     var data = JSON.parse(response.data),
         username,
         avatar,
-        notif;
+        notif,
+        notifStamp;
 
     if (data.hasOwnProperty('notification')) {
       notif = data.notification;
       username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
       avatar = notif.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
         notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
+      notifStamp = Date.now();
+
+      this.unreadNotifsViaSocket++;
+
+      this.notificationsCl.add(
+          __.extend({}, notif, { read: false })
+      );
+
+      //prevent message spamming from one user
+      if(!this.notificationsRecord[username]){
+        this.notificationsRecord[username] = {};
+      }
+      if(this.notificationsRecord[username].notifStamp && notifStamp - this.notificationsRecord[username].notifStamp < 30000){
+        return;
+      }
+      this.notificationsRecord[username].notifStamp = notifStamp;
 
       switch(notif.type) {
         case "follow":
@@ -179,13 +197,25 @@ module.exports = baseVw.extend({
             silent: true
           });
           break;
+        case "payment received":
+          new Notification(username + " " + window.polyglot.t('NotificationPaymentReceived'), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "order confirmation":
+          new Notification(username + " " + window.polyglot.t('NotificationOrderConfirmed'), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "rating received":
+          new Notification(username + " " + window.polyglot.t('NotificationRatingRecieved'), {
+            icon: avatar,
+            silent: true
+          });
+          break;
       }
-
-      this.unreadNotifsViaSocket++;
-
-      this.notificationsCl.add(
-        __.extend({}, notif, { read: false })
-      );
 
       app.playNotificationSound();
     }
