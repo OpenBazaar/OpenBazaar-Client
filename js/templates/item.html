@@ -63,15 +63,17 @@
 
     <div class="width100 custCol-text borderBottom paddingBottom12 paddingLeft6 custCol-border">
       <div class="flexRow width100 row20">
-        <div class="flexExpand row10 positionWrapper">
-          <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7"></div>
-          <div class="itemMetaValue noOverflow">
-            <%= ob.displayShippingOrigin || ob.userCountry %>
+        <% if(ob.displayShippingOrigin) { %>
+          <div class="flexExpand row10 positionWrapper">
+            <div class="itemMetaCircle custCol-secondary floatLeft ion-location marginRight7"></div>
+            <div class="itemMetaValue noOverflow">
+              <%= ob.displayShippingOrigin %>
+            </div>
+            <div class="positionAbsolute width100 itemMetaValue zIndex1 tooltip"
+                 data-tooltip="<%= polyglot.t('CountryOfOrigin') %> <%= ob.displayShippingOrigin || ob.userCountry %>">
+            </div>
           </div>
-          <div class="positionAbsolute width100 itemMetaValue zIndex1 tooltip"
-               data-tooltip="<%= polyglot.t('CountryOfOrigin') %> <%= ob.displayShippingOrigin || ob.userCountry %>">
-          </div>
-        </div>
+        <% } %>
         <% if(ob.vendor_offer.listing.metadata.category) { %>
         <div class="flexCol-6 row10">
           <div class="itemMetaCircle custCol-secondary floatLeft ion-pricetag marginRight7 fontSize15"></div>

@@ -28,13 +28,13 @@ module.exports = window.Backbone.Model.extend({
       if (!response.vendor_offer.listing.shipping) {
         response.vendor_offer.listing.shipping = {
           "shipping_regions": [
-            "UNITED_STATES"
+            ""
           ],
           "est_delivery": {
             "international": "",
             "domestic": ""
           },
-          "shipping_origin": "UNITED_STATES",
+          "shipping_origin": "",
           "flat_fee": {
             "fiat": {
               "price": {
