@@ -93,6 +93,11 @@ module.exports = baseVw.extend({
     this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
       this.filterChatHeads();
     });
+
+    //when language is changed, re-render
+    this.listenTo(options.model, 'change:language', function(){
+      this.render();
+    });
   },
 
   filterChatHeads: function(render) {
