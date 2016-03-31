@@ -91,9 +91,7 @@ module.exports = function (currency, callback) {
         }
 
         showStatus && showStatus.remove();
-
-        console.log(currency + " " +btAve)
-
+        
         typeof callback === 'function' && callback(btAve, currencyKeys);
     };
 
