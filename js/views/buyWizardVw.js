@@ -72,6 +72,7 @@ module.exports = baseVw.extend({
     this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
+    this.model.updateAttributes();
 
     //create the country select list
     this.countryList = countries.get('countries');

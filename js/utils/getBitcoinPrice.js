@@ -41,10 +41,6 @@ module.exports = function (currency, callback) {
 
     if(currency == "BTC" && window.currencyKeys) {
         typeof callback === 'function' && callback(1, window.currencyKeys);
-    } else if (window.btcAverages.timeStamp
-        && Math.floor((new Date() - window.btcAverages.timeStamp) / 60000) < 15
-        && window.currencyKeys) {
-        typeof callback === 'function' && callback(window.btcAverages.rates[currency], window.currencyKeys);
     } else {
         getBTCPrices();
     }
@@ -95,7 +91,7 @@ module.exports = function (currency, callback) {
         }
 
         showStatus && showStatus.remove();
-
+        
         typeof callback === 'function' && callback(btAve, currencyKeys);
     };
 
