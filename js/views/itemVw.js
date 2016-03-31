@@ -165,11 +165,9 @@ module.exports = baseVw.extend({
 
   buyClick: function(){
     "use strict";
-    var self = this,
-        buyModel = new Backbone.Model();
-    buyModel.set(this.model.attributes);
+    var self = this;
     this.buyWizardView && this.buyWizardView.remove();
-    this.buyWizardView = new buyWizardVw({model:buyModel, userModel: this.options.userModel});
+    this.buyWizardView = new buyWizardVw({model:this.model, userModel: this.options.userModel});
     this.registerChild(this.buyWizardView);
     $('#modalHolder').html(this.buyWizardView.el).fadeIn(300); //add to DOM first, or accordion will have zero width when initialized
     this.buyWizardView.render();
