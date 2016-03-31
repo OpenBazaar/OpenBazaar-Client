@@ -1384,7 +1384,6 @@ module.exports = baseVw.extend({
     $targ.addClass('loading');
     this.followUser({'guid': this.pageID}).fail(() => {
       $targ.removeClass('loading');
-      console.log("remove loading follow")
     });
   },
 
@@ -1395,7 +1394,6 @@ module.exports = baseVw.extend({
       $targ.addClass('loading').removeClass('confirm');
       this.unfollowUser({'guid': this.pageID}).fail(() => {
         $(e.target).removeClass('loading')
-        console.log("remove loading unfollow")
       });
     } else {
       $targ.addClass('confirm');
