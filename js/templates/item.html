@@ -124,7 +124,7 @@
           <h4><%= polyglot.t('CanBeShippedTo') %></h4>
         </div>
         <div class="marginBottom20  marginLeft7 row10">
-          <% var matchedItemShippableCountries = _.intersection(_.pluck(ob.userAddresses, 'displayCountry'), ob.vendor_offer.listing.shipping.shipping_regionsDisplay);
+          <% var matchedItemShippableCountries = _.uniq(_.intersection(_.pluck(ob.userAddresses, 'displayCountry'), ob.vendor_offer.listing.shipping.shipping_regionsDisplay));
           if(matchedItemShippableCountries.length > 0){
             _.each(matchedItemShippableCountries, function(data){
               print("<p>" + data + "</p>");
@@ -132,7 +132,7 @@
           } else if(!ob.worldwide){
             print("---");
           } else {
-            _.each(_.pluck(ob.userAddresses, 'displayCountry'), function(data){
+            _.each(_.uniq(_.pluck(ob.userAddresses, 'displayCountry')), function(data){
             print("<p>" + data + "</p>");
             });
           }
