@@ -38,3 +38,13 @@ The client uses the following REST API calls.
 - [POST calls](https://gist.github.com/drwasho/bd4b28a5a07c5a952e2f)
 
 Websocket API calls are yet to be documented.
+
+Translations
+-----------
+Translators around the world are welcomed.
+
+You can start translating at our Transifex project:
+
+- https://www.transifex.com/ob1/openbazaar/
+
+Many thanks!
