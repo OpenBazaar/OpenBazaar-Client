@@ -570,14 +570,17 @@ module.exports = baseVw.extend({
   },
 
   toggleFollowButtons: function(followed) {
-    var followBtn = this.$el.find('.js-follow'),
-        unfollowBtn = this.$el.find('.js-unfollow');
+    var followBtn = this.$('.js-follow'),
+        unfollowBtn = this.$('.js-unfollow'),
+        followedTxt = this.$('.js-followsMe');
     if(followed === true){
       followBtn.addClass('hide');
       unfollowBtn.removeClass('hide');
+      followedTxt.removeClass('hide');
     } else {
       followBtn.removeClass('hide');
       unfollowBtn.addClass('hide');
+      followedTxt.addClass('hide');
     }
     followBtn.removeClass('loading');
     unfollowBtn.removeClass('loading');
@@ -783,12 +786,6 @@ module.exports = baseVw.extend({
     this.registerChild(this.followingList);
     
     this.$('.js-userFollowingCount').html(model.length);
-
-    if (__.findWhere(model, { guid: this.model.get('user').guid })) {
-      this.$('.js-followsMe').removeClass('hide');
-    } else {
-      this.$('.js-followsMe').addClass('hide');
-    }
 
     if (model.length) {
       this.followingSearch = new window.List('searchFollowing', {
@@ -1382,8 +1379,12 @@ module.exports = baseVw.extend({
   },
 
   followUserClick: function(e){
-    $(e.target).addClass('loading');
-    this.followUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    var $targ = $(e.target).closest('.js-follow');
+
+    $targ.addClass('loading');
+    this.followUser({'guid': this.pageID}).fail(() => {
+      $targ.removeClass('loading');
+    });
   },
 
   unfollowUserClick: function(e){
@@ -1391,7 +1392,9 @@ module.exports = baseVw.extend({
 
     if($targ.hasClass('confirm')){
       $targ.addClass('loading').removeClass('confirm');
-      this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+      this.unfollowUser({'guid': this.pageID}).fail(() => {
+        $(e.target).removeClass('loading')
+      });
     } else {
       $targ.addClass('confirm');
     }
