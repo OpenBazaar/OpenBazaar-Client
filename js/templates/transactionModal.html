@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-    <% } else { %>
+    <% } else if(ob.status > 0) { %>
       <div class="positionTop padding10 width100 custCol-primary">
         <div class="clearfix">
         <% if(ob.status == 1 && ob.transactionType == "sales"){ %>
@@ -126,10 +126,10 @@
       <% if(ob.dispute_resolution){ %>
         <div class="flexRow txt-center rowTop10 borderTop custCol-border pad10Top">
           <div class="flexExpand">
-            <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout || 0 %> BTC
+            <%= polyglot.t('transactions.BuyerPayout') %>: <%= ob.dispute_resolution.resolution.buyer_payout.toFixed(8) || 0 %> BTC
           </div>
           <div class="flexExpand">
-            <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout || 0 %> BTC
+            <%= polyglot.t('transactions.SellerPayout') %>: <%= ob.dispute_resolution.resolution.vendor_payout.toFixed(8) || 0 %> BTC
           </div>
         </div>
       <% } %>
@@ -1043,9 +1043,11 @@
                 <div class="flexCol-12 borderRight custCol-border">
                   <div class="fieldItem fontSize11">
                     <%= polyglot.t('transactions.TotalInTransaction') %>
-                    <strong><%= ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC</strong>
+                    <strong>
+                      <%= (ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal).toFixed(8) %> BTC
+                    </strong>
                     <div class="pull-right">
-                      <%= polyglot.t('transactions.YouEarn') %>: <%= ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal %> BTC
+                      <%= polyglot.t('transactions.YouEarn') %>: <%= (ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal).toFixed(8) %> BTC
                     </div>
                   </div>
                 </div>
