@@ -4634,6 +4634,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-shadow: 0px 1px 5px #000;
 }
 
+#ov1 .textShadow2 {
+  text-shadow: 0 0 2px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.7);
+}
+
 #ov1 .fontSize8 {
   font-size: 8px;
 }
