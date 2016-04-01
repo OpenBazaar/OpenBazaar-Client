@@ -73,7 +73,7 @@
             <% } %>
           </a>
           <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransaction tooltip"
-             data-tooltip="<%= polyglot.t('RefundOrderTooltip') %>" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
+             data-tooltip="<%= polyglot.t('transactions.RefundOrderTooltip') %>" style="border-top-left-radius: 0; border-bottom-left-radius: 0">
             <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
             <%= polyglot.t('transactions.RefundOrder') %>
           </a>
@@ -110,7 +110,7 @@
             <%= polyglot.t('transactions.AcceptDisputeResolution') %>
           </a>
         <% } else if(ob.status == 7 && ob.transactionType == "sales"){ %>
-        <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransactionResend tooltip"
+        <a class="btn btn-txt custCol-secondary pull-left textOpacity1 js-refundTransactionResend tooltip tooltip-box"
            data-tooltip="<%= polyglot.t('transactions.RefundOrderResendTooltip') %>">
           <span class="ion-arrow-return-left fontSize11 marginRight2 textOpacity1"></span>
           <%= polyglot.t('transactions.RefundOrderResend') %>

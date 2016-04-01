@@ -394,11 +394,12 @@
     "ConfirmOrderResend": "Resend Order Confirmation",
     "ConfirmOrderResendTooltip": "If the buyer has not received the order confirmation, this button will resend it. This may take several seconds to complete.",
     "RefundOrder": "Refund Order",
+    "ConfirmRefundOrder": "Confirm Refund Order",
     "RefundOrderTooltip": "Cancel order and release the funds back to the buyer",
     "RefundReason": "Reason for refund",
     "RefundReasonPlaceholder": "Explain why you are sending a refund",
     "RefundOrderResend": "Resend Order Refund",
-    "RefundOrderResentTooltip": "If the buyer has not received the refund, this button will resend it. This may take several seconds to complete.",
+    "RefundOrderResendTooltip": "If the buyer has not received the refund, this button will resend it. This may take several seconds to complete.",
     "ReceivingAddress": "Receiving Address",
     "RecievingAddressPlaceholder": "Bitcoin address to receive funds at",
     "Comments": "Comments",
@@ -479,7 +480,8 @@
     "serverDown": "The server has been shut down",
     "tooManyPhotosTitle": "Too many photos",
     "tooManyPhotosBody": "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
-    "badJSON": "The JSON data returned from the server was malformed"
+    "badJSON": "The JSON data returned from the server was malformed",
+    "refundAlreadySent": "The refund has already been successfully sent for this order"
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",

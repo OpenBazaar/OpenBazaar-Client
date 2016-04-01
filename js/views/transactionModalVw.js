@@ -674,7 +674,14 @@ module.exports = baseVw.extend({
       self.status = 7;
       self.tabState = "summary";
       self.getData();
-    },'', refData).always(() => {
+    }, function(data){
+      if(data.reason == "Refund already processed for this order"){
+        messageModal.show(window.polyglot.t('errorMessages.refundAlreadySent'));
+        $(e.target).addClass('hide'); //hide the button so it can't be pressed again
+      } else {
+        messageModal.show(window.polyglot.t('errorMessages.serverError'));
+      }
+    }, refData).always(() => {
       $(e.target).removeClass('loading');
     });
   },
