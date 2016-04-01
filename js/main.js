@@ -66,7 +66,8 @@ var Polyglot = require('node-polyglot'),
     after401LoginRequest;
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
-window.lang = user.get("language");
+//retrieve the stored value, since user is a blank model at this point
+window.lang = localStorage.getItem('lang') || "en-US";
 
 //put polyglot in the window so all templates can reach it
 window.polyglot = new Polyglot({locale: window.lang});
@@ -83,6 +84,7 @@ window.polyglot = new Polyglot({locale: window.lang});
 user.on('change:language', function(md, lang) {
   window.lang = lang;
   extendPolyglot(lang);
+  localStorage.setItem('lang', lang);
 });
 
 //keep user and profile urls synced with the server configuration
