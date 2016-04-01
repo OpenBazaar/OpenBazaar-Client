@@ -29,7 +29,7 @@
             <% } %>
         <% } %>
         
-        <div class="chatConversationMessageBody flexExpand">
+        <div class="chatConversationMessageBody flexExpand flexContainer">
             <% if (ob.outgoing) { %>
             <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %> floatRight"><%= ob.sanitizedMsg %></div>
             <% } else { %>
