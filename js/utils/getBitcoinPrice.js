@@ -25,7 +25,8 @@ module.exports = function (currency, callback) {
     var getBTCPrices = function(){
       $.ajax({
         url: app.serverConfig.getServerBaseUrl() + '/btc_price',
-        dataType: 'json'
+        dataType: 'json',
+        cache: false //just in case
       })
       .done(function(data, textStatus, jqXHR){
         btPrices.push(data.currencyCodes);
@@ -39,11 +40,9 @@ module.exports = function (currency, callback) {
 
     };
 
-    if(currency == "BTC" && window.currencyKeys) {
-        typeof callback === 'function' && callback(1, window.currencyKeys);
-    } else {
-        getBTCPrices();
-    }
+
+    getBTCPrices();
+
 
     var makeAveragePrice = function () {
         var sum,
