@@ -40,9 +40,13 @@ module.exports = function (currency, callback) {
 
     };
 
-
-    getBTCPrices();
-
+   if (window.btcAverages.timeStamp
+        && Math.floor((new Date() - window.btcAverages.timeStamp) / 60000) < 15
+        && window.currencyKeys) {
+        typeof callback === 'function' && callback(window.btcAverages.rates[currency], window.currencyKeys);
+    } else {
+        getBTCPrices();
+    }
 
     var makeAveragePrice = function () {
         var sum,
