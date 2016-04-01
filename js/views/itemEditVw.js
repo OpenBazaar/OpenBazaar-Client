@@ -516,6 +516,13 @@ module.exports = baseVw.extend({
         keywordsArray = this.inputKeyword.getTagValues(),
         shipsToInput = this.$('#shipsTo');
 
+    if(keywordsArray.length < 1){
+      this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
+      return $.Deferred().reject('failed form validation').promise();
+    } else {
+      this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');
+    }
+
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;
       return tag.replace(re, '');
