@@ -82,6 +82,7 @@ module.exports = baseVw.extend({
     this.discussionCount = 0;
     this.discussionCol = new discussionCl();
     this.discussionCol.url = this.serverUrl + "order_messages";
+    this.resendComplete = false; //don't show the resend complete order button again if the call is successful
 
     if(this.userProfile.get('avatar_hash')){
       this.avatarURL = this.userModel.get('serverUrl') + "get_image?hash=" + this.userProfile.get('avatar_hash');
@@ -114,6 +115,7 @@ module.exports = baseVw.extend({
       dataType: 'json',
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
+        self.model.set('resendComplete', self.resendComplete);
         if(!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {
@@ -383,6 +385,7 @@ module.exports = baseVw.extend({
         function(data){
           self.status = 3;
           self.tabState = "summary";
+          self.resendComplete = "true";
           self.getData();
         },
         function(data){
