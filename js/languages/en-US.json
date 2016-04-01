@@ -447,7 +447,7 @@
     "SendMessage": "Send",
     "CloseDispute": "Close Dispute",
     "CloseDisputeResend": "Resend Close Dispute",
-    "CloseDisputeResendTooltip": "If one or more of the parties involved in this dispute did not receive the dispute close button, check this box and send a message to resend the dispute resolution.",
+    "CloseDisputeResendTooltip": "If one or more of the parties involved in this dispute did not receive the dispute close message, click this button to resend the dispute resolution.",
     "TotalInTransaction": "Transaction:",
     "StartDisputeFlag": "Dispute Started",
     "CloseDisputeFlag": "Dispute Ended",
