@@ -28,6 +28,7 @@ module.exports = Backbone.View.extend({
         this.model.set('shippingType', 'domestic');
       }
     }
+    this.model.updateAttributes();
 
     this.model.set('currentShippingPrice', currentShippingPrice);
     this.model.set('currentShippingBTCPrice', currentShippingBTCPrice);
