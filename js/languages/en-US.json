@@ -126,6 +126,7 @@
   "ShipsFrom": "Ships From",
   "ShipsTo": "Ships To",
   "AddShipToRegion": "Add Shipping Region",
+  "AddShipToRegionNote": "Optional. Quickly adds multiple countries.",
   "Optional": "Optional",
   "Customize": "Customize",
   "Save": "Save",

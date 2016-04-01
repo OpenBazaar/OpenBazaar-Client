@@ -94,7 +94,9 @@
                 <label for="priceLocal">
                   <%= polyglot.t('Price') %> (<%= ob.userCurrencyCode %>)
                 </label>
-                <a href="#settings" class="underline fontSize10 textOpacity50 noOverflow width80"><%= polyglot.t('ChangeCurrency') %></a>
+                <div class="underline note rowTop5">
+                  <a href="#settings"><%= polyglot.t('ChangeCurrency') %></a>
+                </div>
               </div>
             </div>
             <div class="flexCol-5">
@@ -159,7 +161,7 @@
             <div class="flexCol-3  borderRight custCol-border">
               <div class="fieldItem">
                 <label for="inputDescription"><%= polyglot.t('Description') %></label>
-                <span class="fontSize10 textOpacity50"><%= polyglot.t('HighlightToStyle') %></span>
+                <div class="note rowTop5"><%= polyglot.t('HighlightToStyle') %></div>
               </div>
             </div>
             <div class="flexCol-9">
@@ -210,6 +212,7 @@
               <div class="flexCol-4 borderRight custCol-border">
                 <div class="fieldItem">
                   <label for="shipsToRegions"><%= polyglot.t('AddShipToRegion') %></label>
+                  <div class="note rowTop5"><%= polyglot.t('AddShipToRegionNote') %></div>
                 </div>
               </div>
               <div class="flexCol-8">
