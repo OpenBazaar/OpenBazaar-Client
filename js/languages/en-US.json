@@ -393,7 +393,7 @@
     "RefundReason": "Reason for refund",
     "RefundReasonPlaceholder": "Explain why you are sending a refund",
     "RefundOrderResend": "Resend Order Refund",
-    "RefundOrderResentTooltip": "If the buyer has not recieved the refund, this button will resend it. This may take several seconds to complete.",
+    "RefundOrderResentTooltip": "If the buyer has not received the refund, this button will resend it. This may take several seconds to complete.",
     "ReceivingAddress": "Receiving Address",
     "RecievingAddressPlaceholder": "Bitcoin address to receive funds at",
     "Comments": "Comments",
