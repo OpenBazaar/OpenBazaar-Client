@@ -30,6 +30,12 @@ module.exports = baseVw.extend({
       case "dispute_open":
         Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
         break;
+      case "dispute_close":
+        Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
+        break;
+      case "refund":
+        Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
+        break;
       case "payment received":
         Backbone.history.navigate('#transactions/purchases/' + this.model.get('order_id'), {trigger: true});
         break;
