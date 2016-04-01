@@ -227,9 +227,10 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    this.unbind();
-    this.remove();
     $('#obContainer').removeClass('blur');
+    $('#modalHolder').fadeOut(300, ()=> {
+      this.remove();
+    });
   }
 
 });

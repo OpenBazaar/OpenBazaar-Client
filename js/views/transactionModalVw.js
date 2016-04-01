@@ -32,23 +32,28 @@ module.exports = baseVw.extend({
     'click .js-showFeedbackRating': 'showFeedbackRating',
     'click .js-hideFeedbackRating': 'hideFeedbackRating',
     'click .js-showCompleteForm': 'showCompleteForm',
+    'click .js-completeOrderResend': 'clickCompleteOrderResend',
     'click .js-completeOrderHide': 'completeOrderHide',
-    'click .js-confirmOrder': 'confirmOrder',
-    'click .js-completeOrder': 'completeOrder',
+    'click .js-confirmOrder': 'clickConfirmOrder',
+    'click .js-confirmOrderResend': 'clickConfirmOrderResend',
+    'click .js-completeOrder': 'clickCompleteOrder',
     'click .js-copyIncommingTx': 'copyTx',
     'click .js-copyOutgoingTx': 'copyTx',
     'click .js-closeOrderForm': 'closeOrderForm',
     'click .js-showFundOrder': 'showFundOrder',
     'click .js-transactionPayCheck':'checkPayment',
     'click .js-startDispute': 'startDispute',
+    'click .js-startDisputeResend': 'confirmDisputeResend',
     'click .js-sendDiscussionMessage': 'sendDiscussionMessageClick',
     'click #transactionsCloseDisputeCheckbox': 'showCloseDispute',
+    'click .js-closeDisputeResend': 'closeDisputeResend',
     'change #transactionsBuyerPayoutPercent': 'updateBuyerBTC',
     'change #transactionsSellerPayoutPercent': 'updateSellerBTC',
     'click .js-transactionShowContract': 'showContract',
     'click .js-transactionHideContract': 'hideContract',
     'click .js-acceptResolution': 'acceptResolution',
     'click .js-refundTransaction': 'refundOrder',
+    'click .js-refundTransactionResend': 'refundOrder',
     'focus .js-transactionDiscussionSendText': 'highlightInput',
     'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
@@ -94,7 +99,9 @@ module.exports = baseVw.extend({
       transactionType: this.transactionType,
       avatarURL: this.avatarURL,
       avatar_hash: this.userProfile.get('avatar_hash'),
-      orderID: this.orderID});
+      orderID: this.orderID,
+      userGuid: this.userModel.get('guid')
+    });
     this.model.urlRoot = options.serverUrl + "get_order";
     this.listenTo(this.model, 'change:priceSet', this.render);
     this.getData();
@@ -301,18 +308,23 @@ module.exports = baseVw.extend({
   completeOrderHide: function(){
     this.$('.js-transactionShowContract').removeClass('hide');
     this.$('.js-complete').removeClass('bottom0');
-    this.completeOrder.abort();
+    this.sendCompleteOrder && this.sendCompleteOrder.abort();
   },
 
-  confirmOrder: function(e){
+  clickConfirmOrder: function(e){
+    this.confirmOrder(this.$el.find('#transactionConfirmForm'), $(e.target));
+  },
+
+  clickConfirmOrderResend: function(e){
+    this.confirmOrder('', $(e.target));
+  },
+
+  confirmOrder: function(targForm, targBtn){
     var self = this,
-        targetForm = this.$el.find('#transactionConfirmForm'),
-        confirmData = {},
-        confirmStatus,
-        targBtn = $(e.target);
+        confirmData = {};
 
     confirmData.id = this.orderID;
-    confirmStatus = app.statusBar.pushMessage({
+    this.confirmStatus = app.statusBar.pushMessage({
       type: 'pending',
       msg: '<i>' + window.polyglot.t('transactions.UpdatingOrder') + '</i>',
       duration: false
@@ -320,15 +332,15 @@ module.exports = baseVw.extend({
 
     targBtn.addClass("loading");
 
-    saveToAPI(targetForm, '', this.serverUrl + "confirm_order",
+    saveToAPI(targForm, '', this.serverUrl + "confirm_order",
         function(data){
           self.closeModal();
-          confirmStatus.updateMessage({
+          self.confirmStatus.updateMessage({
             type: 'confirmed',
             msg: '<i>' + window.polyglot.t('transactions.UpdateComplete') + '</i>'
           });
           setTimeout(function(){
-            confirmStatus && confirmStatus.remove();
+            self.confirmStatus && self.confirmStatus.remove();
           },3000);
           }, '',
         confirmData, '', '')
@@ -337,16 +349,22 @@ module.exports = baseVw.extend({
         });
   },
 
-  completeOrder: function(e){
+  clickCompleteOrder: function(e){
+    this.completeOrder(this.$el.find('#transactionCompleteForm'), $(e.target));
+  },
+
+  clickCompleteOrderResend: function(e){
+    this.completeOrder('', $(e.target));
+  },
+
+  completeOrder: function(targForm, targBtn){
     var self = this,
-        targetForm = this.$el.find('#transactionCompleteForm'),
         completeData = {};
 
-    $(e.target).addClass('loading');
+    targBtn.addClass('loading');
     completeData.id = this.orderID;
-    //this.$el.find('.js-transactionSpinner').removeClass('hide');
 
-    this.completeOrder = saveToAPI(targetForm, '', this.serverUrl + "complete_order",
+    this.sendCompleteOrder = saveToAPI(targForm, '', this.serverUrl + "complete_order",
         function(data){
           self.status = 3;
           self.tabState = "summary";
@@ -356,8 +374,7 @@ module.exports = baseVw.extend({
           messageModal.show(window.polyglot.t('errorMessages.getError'), "<i>" + data.reason + "</i>");
         },
         completeData).always(() => {
-          $(e.target).removeClass('loading');
-          //self.$el.find('.js-transactionSpinner').addClass('hide');
+           targBtn.removeClass('loading');
         });
   },
 
@@ -461,7 +478,7 @@ module.exports = baseVw.extend({
 
     //is this a dispute?
     if(this.$('#transactionStartDisputeCheckbox').prop("checked")) {
-      this.confirmDispute();
+      this.confirmDispute(this.$('#transactionDiscussionForm'));
     } else if(this.$('#transactionsCloseDisputeCheckbox').prop("checked")){
       this.closeDispute();
     } else if(this.status == 4 || this.transactionType == "cases"){
@@ -552,19 +569,22 @@ module.exports = baseVw.extend({
     this.setState("discussion");
   },
 
-  confirmDispute: function(){
+  confirmDispute: function(targForm){
     var self = this,
-        targetForm = this.$('#transactionDiscussionForm'),
         discussionData = {};
 
     discussionData.order_id = this.orderID;
 
-    saveToAPI(targetForm, '', this.serverUrl + "dispute_contract", function(data){
+    saveToAPI(targForm, '', this.serverUrl + "dispute_contract", function(data){
       self.status = 4;
       self.tabState = "discussion";
       self.$('.js-startDisputeFlag').addClass('hide');
       self.getData();
     }, '', discussionData);
+  },
+
+  confirmDisputeResend: function(){
+    this.confirmDispute();
   },
 
   closeDispute: function(){
@@ -593,6 +613,19 @@ module.exports = baseVw.extend({
     } else {
       messageModal.show(window.polyglot.t('errorMessages.missingError'));
     }
+  },
+
+  closeDisputeResend: function(){
+    var self = this,
+        discussionData = {};
+
+    discussionData.order_id = this.orderID;
+
+    saveToAPI('', '', this.serverUrl + "close_dispute", function(data){
+      self.status = 5;
+      self.tabState = "summary";
+      self.getData();
+    }, '', discussionData);
   },
 
   acceptResolution: function(e){
@@ -673,6 +706,7 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger("orderModalClosed");
     this.$el.parent().fadeOut(300);
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
+    this.confirmStatus && this.confirmStatus.remove();
     this.remove();
   }
 });

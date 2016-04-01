@@ -126,6 +126,7 @@ module.exports = window.Backbone.Model.extend({
     response.status = this.status;
     response.bitcoinValidationRegex = config.bitcoinValidationRegex;
     response.transactionType = this.transactionType;
+    response.userGuid = this.userGuid;
 
     response.vendorAvatarURL = localStorage.getItem('userAvatar-'+response.vendor_offer.listing.id.guid);
     response.buyerAvatarURL = localStorage.getItem('userAvatar-'+response.buyer_order.order.id.guid);
@@ -227,6 +228,7 @@ module.exports = window.Backbone.Model.extend({
     //this.countries = new countriesMd();
     //this.countryArray = this.countries.get('countries');
     this.avatarURL = options.avatarURL;
+    this.userGuid = options.userGuid;
   }
 
 });
