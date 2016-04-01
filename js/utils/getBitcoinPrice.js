@@ -42,7 +42,8 @@ module.exports = function (currency, callback) {
 
    if (window.btcAverages.timeStamp
         && Math.floor((new Date() - window.btcAverages.timeStamp) / 60000) < 15
-        && window.currencyKeys) {
+        && window.currencyKeys
+        && window.btcAverages.rates[currency]) {
         typeof callback === 'function' && callback(window.btcAverages.rates[currency], window.currencyKeys);
     } else {
         getBTCPrices();
