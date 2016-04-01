@@ -366,8 +366,8 @@ module.exports = baseVw.extend({
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
       addressString = encodeURIComponent(addressString);
       var hideClass = this.hideMap ? "hide" : "";
-      var newMap = '<div class="overflowHidden"><iframe class="' + hideClass + ' js-buyWizardMap"' +
-          'width="525" height="350" frameborder="0" style="border:0; margin-top: -100px"' +
+      var newMap = '<div class="flexContainer"><iframe class="' + hideClass + ' js-buyWizardMap"' +
+          'width="525" height="350" frameborder="0" style="border:0; margin-top: 0"' +
           'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
       this.$el.find('.js-buyWizardMap').html(newMap);
     }

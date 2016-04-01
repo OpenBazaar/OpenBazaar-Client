@@ -208,7 +208,7 @@ module.exports = baseVw.extend({
         payHREF,
         dataURI;
     if(this.model.get('buyer_order')){
-      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title.substring(1, 20);
+      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title.substring(0, 20);
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {

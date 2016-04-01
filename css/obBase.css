@@ -903,7 +903,15 @@ label.fieldItem {
 }
 
 .rowTop30 {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+.rowTop40 {
+  margin-top: 40px;
+}
+
+.rowTop50 {
+  margin-top: 50px;
 }
 
 .rowTop241 {
@@ -1455,6 +1463,13 @@ h5 {
 .modal-hero.modal-heroFullHeight {
   height: 573px;
   z-index: 1;
+}
+
+.modal-hero.modal-heroFullHeightNoButtons {
+  height: 624px;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 3px;
 }
 
 .background1 {
@@ -3507,6 +3522,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 140px;
 }
 
+.icon-gigantic {
+  font-size: 250px;
+}
+
 .icon-large {
   font-size: 32px;
 }
@@ -3536,6 +3555,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .icon-huge.icon-circle-background1:before {
   line-height:140px;
+  font-size:0.8em;
+}
+
+.icon-gigantic.icon-circle-background1 {
+  width: 250px;
+  height: 250px;
+}
+
+.icon-gigantic.icon-circle-background1:before {
+  line-height:250px;
   font-size:0.8em;
 }
 
@@ -5503,6 +5532,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .alignCenter {
   text-align: center;
+}
+
+#ov1 .blockCenter {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 #ov1 .heightAuto {
