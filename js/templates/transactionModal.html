@@ -834,6 +834,17 @@
               <span class="ion-android-open fontSize10"></span>
             </div>
           </a>
+          <% } else if(ob.buyer_order.order.payment.address){ %>
+            <% if(config.testnet){ %>
+            <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap js-externalLink positionAbsolute right10">
+              <% }else{ %>
+              <a href="https://live.blockcypher.com/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap js-externalLink positionAbsolute right10">
+                <% } %>
+                <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
+                  <%= polyglot.t('transactions.ViewOnBlockchain') %>
+                  <span class="ion-android-open fontSize10"></span>
+                </div>
+              </a>
           <% } %>
         </div>
         <div class="scrollOverflowY customThemeScrollbar width100 noOverflow height254">
@@ -872,7 +883,7 @@
             </div>
           </div>
           <div class="flexRow rowItem padding15 custCol-border borderBottom">
-            <div class="txt-unleaded">
+            <div class="txt-unleaded width100">
               <a href="#userPage/<%- ob.buyer_order.order.id.guid %>">
                 <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
                   <% if(ob.avatarURL && ob.transactionType == "purchases"){ %>

@@ -230,14 +230,29 @@ module.exports = baseVw.extend({
 
   setState: function(state){
     if(!state){
-      state = "summary";
+      switch(this.status){
+        case 2:
+          state = "shipping";
+          break;
+        case 3:
+          state = "funds";
+          break;
+        case 4:
+          state = "discussion";
+          break;
+        case 5:
+          state = "discussion";
+          break;
+        default:
+          state = "summary";
+      }
     }
     this.$el.find('.js-main').addClass('hide');
     this.$el.find('.js-tab').removeClass('active');
     this.$el.find('.js-' + state).removeClass('hide');
     this.$el.find('.js-' + state + 'Tab').addClass('active').removeClass('hide');
 
-    if(state == "discussion"){
+    if(state == "discussion" && this.discussionScroller){
       this.discussionScroller[0].scrollTop = this.discussionScroller[0].scrollHeight;
     }
 
