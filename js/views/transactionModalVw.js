@@ -711,9 +711,9 @@ module.exports = baseVw.extend({
       updatedVal = 1;
       targ1.val(100);
     }
-    targ2.text(updatedVal * adjustedTotal);
+    targ2.text((updatedVal * adjustedTotal).toFixed(8));
     targ3.val(100 - updatedVal * 100);
-    targ4.text(adjustedTotal - updatedVal * adjustedTotal);
+    targ4.text((adjustedTotal - updatedVal * adjustedTotal).toFixed(8));
   },
 
   closeOrderForm: function(e){
