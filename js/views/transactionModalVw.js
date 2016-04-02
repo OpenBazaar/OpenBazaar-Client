@@ -96,7 +96,6 @@ module.exports = baseVw.extend({
       cCode: this.cCode,
       btAve: this.btAve,
       serverUrl: this.serverUrl,
-      status: this.status,
       transactionType: this.transactionType,
       avatarURL: this.avatarURL,
       avatar_hash: this.userProfile.get('avatar_hash'),
@@ -116,6 +115,7 @@ module.exports = baseVw.extend({
       success: function (model, response, options) {
         self.model.set('displayJSON', JSON.stringify(model.toJSON(), null, 2));
         self.model.set('resendComplete', self.resendComplete);
+        self.model.set('status', self.status);
         if(!response.invalidData && response.vendor_offer.listing){
           self.model.updateAttributes();
         } else {

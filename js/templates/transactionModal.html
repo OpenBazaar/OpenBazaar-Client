@@ -1038,7 +1038,7 @@
               </label>
             </div>
             <% } %>
-          <% } else if(ob.status = 4 && ob.dispute && ob.dispute.info.guid == ob.userGuid) {%>
+          <% } else if(ob.status == 4 && ob.dispute && ob.dispute.info.guid == ob.userGuid) {%>
           <div>
             <a class="btn btn-small rowTop5 row5 width100 custCol-primary tooltip tooltip-box tooltip-boxUp js-startDisputeResend" data-tooltip="<%= polyglot.t('transactions.DisputeTransactionResendTooltip') %>">
               <%= polyglot.t('transactions.DisputeTransactionResend') %>
