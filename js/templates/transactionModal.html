@@ -785,10 +785,10 @@
           </div>
           <% if( ob.vendor_order_confirmation.invoice.content_source && ob.vendor_order_confirmation.invoice.content_source.url ) { %>
           <div class="flexCol-4">
-            <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>" class="js-externalLink">
-              <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
+            <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>"
+               class="btn btn-txt pull-right custCol-secondary textOpacity1 js-externalLink tooltip"
+               data-tooltip="<%= ob.vendor_order_confirmation.invoice.content_source.url %>">
                 Open File <span class="ion-android-open fontSize10"></span>
-              </div>
             </a>
           </div>
           <% } %>
