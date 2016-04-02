@@ -116,7 +116,7 @@ if(platform === "linux") {
 
 //open external links in a browser, not the app
 $('body').on('click', 'a', function(e){
-  var targUrl = $(e.target).closest("a").attr("href"),
+  var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
       linkPattern = /^[a-zA-Z]+:\/\//;
 
   if(targUrl.startsWith('ob')){

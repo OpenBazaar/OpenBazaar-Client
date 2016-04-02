@@ -827,7 +827,7 @@
             <% if(config.testnet){ %>
               <a href="https://live.blockcypher.com/btc-testnet/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
             <% }else{ %>
-              <a href="https://live.blockcypher.com/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
+              <a href="https://live.blockcypher.com/btc/tx/<%- ob.bitcoin_txs[0].txid %>" class="noWrap js-externalLink positionAbsolute right10">
             <% } %>
             <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
               <%= polyglot.t('transactions.ViewOnBlockchain') %>
@@ -836,15 +836,15 @@
           </a>
           <% } else if(ob.buyer_order.order.payment.address){ %>
             <% if(config.testnet){ %>
-            <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap js-externalLink positionAbsolute right10">
-              <% }else{ %>
-              <a href="https://live.blockcypher.com/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap js-externalLink positionAbsolute right10">
-                <% } %>
-                <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
-                  <%= polyglot.t('transactions.ViewOnBlockchain') %>
-                  <span class="ion-android-open fontSize10"></span>
-                </div>
-              </a>
+              <a href="https://live.blockcypher.com/btc-testnet/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap positionAbsolute right10">
+            <% }else{ %>
+              <a href="https://live.blockcypher.com/address/<%- ob.buyer_order.order.payment.address %>" class="noWrap positionAbsolute right10">
+            <% } %>
+              <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
+                <%= polyglot.t('transactions.ViewOnBlockchain') %>
+                <span class="ion-android-open fontSize10"></span>
+              </div>
+            </a>
           <% } %>
         </div>
         <div class="scrollOverflowY customThemeScrollbar width100 noOverflow height254">
@@ -919,7 +919,7 @@
                   <div class="noOverflow width100 fontSize13 txt-fade">
                     <div class="marginTop12 marginBottom4"><%= polyglot.t('transactions.transferReceipt') %>:</div>
                     <div class="marginTop12 marginBottom4 fontSize10">
-                      <a href="https://blockchain.info/tx/<%= ob.bitcoin_txs[i].txid %>" class="noWrap js-externalLink">
+                      <a href="https://blockchain.info/btc/tx/<%= ob.bitcoin_txs[i].txid %>" class="noWrap js-externalLink">
                         <%= ob.bitcoin_txs[i].txid %>
                       </a>
                     </div>
