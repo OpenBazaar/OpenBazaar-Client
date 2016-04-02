@@ -785,7 +785,7 @@
           </div>
           <% if( ob.vendor_order_confirmation.invoice.content_source && ob.vendor_order_confirmation.invoice.content_source.url ) { %>
           <div class="flexCol-4">
-            <a href="<%- ob.vendor_order_confirmation.invoice.content_source.url %>" class="js-externalLink">
+            <a href="<%= ob.vendor_order_confirmation.invoice.content_source.url %>" class="js-externalLink">
               <div class="btn btn-txt pull-right custCol-secondary textOpacity1">
                 Open File <span class="ion-android-open fontSize10"></span>
               </div>
