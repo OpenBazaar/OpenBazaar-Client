@@ -123,7 +123,6 @@ module.exports = window.Backbone.Model.extend({
     }
 
     response.serverUrl = this.serverUrl;
-    response.status = this.status;
     response.bitcoinValidationRegex = config.bitcoinValidationRegex;
     response.transactionType = this.transactionType;
     response.userGuid = this.userGuid;
@@ -223,7 +222,6 @@ module.exports = window.Backbone.Model.extend({
     this.userCurrencyCode = options.cCode;
     this.userBTCAve = options.btAve;
     this.serverUrl = options.serverUrl;
-    this.status = options.status;
     this.transactionType = options.transactionType;
     //this.countries = new countriesMd();
     //this.countryArray = this.countries.get('countries');

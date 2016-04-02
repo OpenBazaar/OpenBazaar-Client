@@ -22,16 +22,16 @@
           <h3 class="txt-bright padding30"><%= polyglot.t('CheckExchanges') %> </h3>
         </div>
       </div>
-      <div class="modal-hero modal-heroFullHeightNoButtons js-buyWizardPay hide background1">
-        <div class="positionTop width100 padding20 rowTop10">
-          <img class="blockCenter qrCode js-buyWizardPayQRCode" height="320" width="320" src="imgs/defaultItem.png"/>
+      <div class="modal-hero modal-heroFullHeightNoButtons padding40 js-buyWizardPay hide background1">
+        <div class="width100 padding20">
+          <img class="blockCenter qrCode js-buyWizardPayQRCode" height="250" width="250" src="imgs/defaultItem.png"/>
         </div>
-        <div class="positionBottom txt-bright padding20">
-          <div class="txt-center row20 textSize16px">
+        <div class="txt-bright pad20">
+          <div class="txt-center row10 textSize20px">
             <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: '<span class="js-buyWizardDetailsTotalBTC"></span>'}) %>
           </div>
           <div class="txt-center row20">
-            <a class="textSize11px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
+            <a class="textSize16px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
           </div>
           <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
           <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>

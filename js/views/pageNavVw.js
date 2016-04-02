@@ -89,11 +89,7 @@ module.exports = baseVw.extend({
       reset: true
     });
 
-    this.unreadNotifsViaSocket = 0;
-
     this.listenTo(this.notificationsCl, 'reset update', (cl, options) => {
-      if (options.xhr) this.unreadNotifsViaSocket = 0;
-
       this.setNotificationCount(this.getUnreadNotifCount());
     });
 
@@ -163,11 +159,9 @@ module.exports = baseVw.extend({
         notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notifStamp = Date.now();
 
-      this.unreadNotifsViaSocket++;
-
       this.notificationsCl.add(
           __.extend({}, notif, { read: false })
-      );
+      )
 
       //prevent message spamming from one user
       if(!this.notificationsRecord[username]){
@@ -377,7 +371,7 @@ module.exports = baseVw.extend({
   },
 
   getUnreadNotifCount: function() {
-    return (this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount()) || 0;  
+    return (this.notificationsCl.getUnreadCount()) || 0;
   },
 
   onNotifMenuOpen: function() {

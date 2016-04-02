@@ -1411,6 +1411,7 @@ h5 {
   height: 250px;
   position: relative;
   width: 525px;
+  box-sizing: border-box;
 }
 
 .modal-msg {
@@ -5209,6 +5210,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding30 {
   padding: 30px;
+}
+
+#ov1  .padding40 {
+  padding: 40px;
 }
 
 #ov1  .padding015 {
