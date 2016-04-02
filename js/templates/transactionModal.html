@@ -579,13 +579,13 @@
 
         <div class="flexRow custCol-border borderBottom">
           <div class="flexRow rowItem padding15">
-            <div class="flexCol-8">
+            <div class="flexCol-7">
               <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
               <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
                           <% if(ob.vendor_offer.listing.item.image_hashes){ %>
-                          style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
+                          style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultItem.png);"
                           <% } else { %>
-                          style="background-image: url(imgs/defaultBanner.png);"
+                          style="background-image: url(imgs/defaultItem.png);"
                           <% } %>>
                         </div>
                 </a>
@@ -607,14 +607,14 @@
                 </div>
               </div>
             </div>
-            <div class="flexCol-4">
+            <div class="flexCol-5">
               <div class="txt-unleaded">
                 <div class="marginTop12 marginBottom4 fontSize14">
                   <% if(ob.displayUnitPrice){ %>
-                  <strong><span class="noWrap"><%= ob.displayUnitPriceBTC.toFixed(4) %> BTC</span> (<%= ob.displayUnitPrice %>)</strong>
+                  <strong><span class="noWrap"><%= ob.displayUnitPriceBTC.toFixed(8) %> BTC</span> (<%= ob.displayUnitPrice %>)</strong>
                   <% } else if(ob.displayUnitPriceBTC){ %>
-                  <strong><%= ob.displayUnitPriceBTC.toFixed(6) %> BTC</strong>
-                  <% } %>
+                  <strong><%= ob.displayUnitPriceBTC.toFixed(8) %> BTC</strong>
+                  <% } %>*
                 </div>
                 <div class="noOverflow fontSize13 txt-fade">
                   <%= polyglot.t('Quantity') %>: <%= ob.buyer_order.order.quantity %>
@@ -628,7 +628,7 @@
         <% if(ob.buyer_order.order.shipping) { %>
         <div class="flexRow custCol-border borderBottom">
           <div class="flexRow rowItem padding15">
-            <div class="flexCol-8">
+            <div class="flexCol-7">
               <div class="thumbnail-large-slim pull-left marginRight10">
                 <div class="thumbnail thumbnail-large-slim custCol-secondary alignCenter" >
                   <span class="ion-cube textOpacity1 fontSize20 positionAbsolute" style="left: 33%; top: 27%;"></span>
@@ -648,12 +648,12 @@
                 </a>
               </div>
             </div>
-            <div class="flexCol-4">
+            <div class="flexCol-5">
               <div class="txt-unleaded fontSize14 textOpacity1 marginTop12">
                 <% if(ob.displayShippingPrice){ %>
-                <strong><%= ob.displayShippingPriceBTC.toFixed(4) %> BTC <span class="noWrap">(<%= ob.displayShippingPrice %>)</span></strong>
+                <strong><%= ob.displayShippingPriceBTC.toFixed(8) %> BTC <span class="noWrap">(<%= ob.displayShippingPrice %>)</span></strong>
                 <% } else if(ob.displayShippingPriceBTC){ %>
-                <strong><%= ob.displayShippingPriceBTC.toFixed(4) %> BTC</strong>
+                <strong><%= ob.displayShippingPriceBTC.toFixed(8) %> BTC</strong>
                 <% } else { %>
                 <strong><%= polyglot.t('Free') %></strong>
                 <% } %>
@@ -691,7 +691,7 @@
           </div>
         </div>
         <% } %>
-
+        <div class="note rowTop10 marginLeft10">*<%= polyglot.t('PriceForOne') %></div>
       </div>
 
       <div class="flexRow rowItem padding2015 width100 positionBottom custCol-secondary fontSize14 borderBottomLeftRaidus3 borderBottomRightRaidus3">
@@ -700,9 +700,9 @@
         </div>
         <div class="flexCol-5 alignRight">
           <% if(ob.displayTotalPrice){ %>
-          <strong><span class="noWrap"><%= ob.buyer_order.order.payment.amount.toFixed(4) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+          <strong><span class="noWrap"><%= ob.buyer_order.order.payment.amount.toFixed(8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
           <% } else if(ob.buyer_order.order.payment.amount){ %>
-          <strong><%= ob.buyer_order.order.payment.amount.toFixed(4) %> BTC</strong>
+          <strong><%= ob.buyer_order.order.payment.amount.toFixed(8) %> BTC</strong>
           <% } else { %>
           <strong><%= polyglot.t('Free') %></strong>
           <% } %>
