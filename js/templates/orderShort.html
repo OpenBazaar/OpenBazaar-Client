@@ -46,11 +46,11 @@
               </td>
               <td class="padding2">
                 <% if(ob.vendor){ %>
-                  <a href="#userPage/<%= ob.vendor %>" class="textOpacity75">               
+                  <a href="ob://<%= ob.vendor %>" class="textOpacity75">
                       <%= ob.vendor %>
                   </a>
                 <% } else if(ob.buyer) { %>
-                  <a href="#userPage/<%= ob.buyer %>" class="textOpacity75"><%= ob.buyer %></a>
+                  <a href="ob://<%= ob.buyer %>" class="textOpacity75"><%= ob.buyer %></a>
                 <% } %>                
               </td>
             </tr>
