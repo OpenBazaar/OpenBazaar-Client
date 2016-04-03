@@ -435,7 +435,7 @@ module.exports = baseVw.extend({
     var newAttributes = {},
         wrapper = this.$('.js-discussionWrapper');
 
-    newAttributes.moderatorGuid = this.model.get('displayModerator').guid;
+    newAttributes.moderatorGuid = this.model.get('displayModerator') ? this.model.get('displayModerator').guid : "";
     newAttributes.transactionType = this.transactionType;
     newAttributes.vendorGuid = this.model.get('vendor_offer').listing.id.guid;
     newAttributes.buyerGuid = this.model.get('buyer_order').order.id.guid;
@@ -563,7 +563,7 @@ module.exports = baseVw.extend({
   },
 
   showCloseDispute: function(e){
-    var closeDisputeForm = this.$('#transationCloseDispute');
+    var closeDisputeForm = this.$('#transactionCloseDispute');
     if($(e.target).prop('checked')){
       closeDisputeForm.removeClass('hide');
       this.percentToBTC(
@@ -607,11 +607,13 @@ module.exports = baseVw.extend({
 
   closeDispute: function(){
     var self = this,
-        targetForm = this.$('#transationCloseDispute'),
-        discussionData = {};
+        targetForm = this.$('#transactionCloseDispute'),
+        discussionData = {},
+        closeMsgField = this.$('#transactionDiscussionSendText');
 
+    closeMsgField.removeClass('invalid');
     discussionData.order_id = this.orderID;
-    discussionData.resolution = this.$('#transactionDiscussionSendText').val();
+    discussionData.resolution = closeMsgField.val();
     discussionData.moderator_percentage = this.moderatorPercentage;
     if(this.model.get('vendor_order_confirmation')){
       discussionData.buyer_percentage = this.$('#transactionsBuyerPayoutPercent').val() * 0.01;
@@ -629,7 +631,8 @@ module.exports = baseVw.extend({
         self.getData();
       }, '', discussionData);
     } else {
-      messageModal.show(window.polyglot.t('errorMessages.missingError'));
+      this.$('#transactionDiscussionSendText').addClass("invalid");
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
     }
   },
 

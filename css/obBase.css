@@ -2715,24 +2715,6 @@ input[type="datetime-local"].fieldItem:focus {
   outline: 1px solid #565656;
 }
 
-/* add formChecked class after form has been checked for validity */
-.invalid,
-.formChecked input[type="text"].fieldItem:invalid,
-.formChecked input[type="email"].fieldItem:invalid,
-.formChecked input[type="url"].fieldItem:invalid,
-.formChecked .fieldItem-textarea:invalid,
-.formChecked input[type="number"].fieldItem:invalid,
-.formChecked input[type="text"].fieldItem:focus:invalid,
-.formChecked input[type="email"].fieldItem:focus:invalid,
-.formChecked input[type="url"].fieldItem:focus:invalid,
-.formChecked .fieldItem-textarea:focus:invalid,
-.formChecked input[type="number"].fieldItem:focus:invalid,
-.formChecked .validatable:invalid {
-  border: 2px dashed rgba(89,1,1,0.8);;
-  background-color: rgba(89,1,1,0.2);
-  transition: border 0.3s, background-color 0.4s;
-}
-
 input[type="text"].fieldItem.fieldItem-withButton,
 input[type="email"].fieldItem.fieldItem-withButton,
 input[type="url"].fieldItem.fieldItem-withButton,
@@ -5547,6 +5529,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .heightAuto {
   height: auto;
+}
+
+/* add formChecked class after form has been checked for validity */
+#ov1 .invalid,
+#ov1 .formChecked input[type="text"].fieldItem:invalid,
+#ov1 .formChecked input[type="email"].fieldItem:invalid,
+#ov1 .formChecked input[type="url"].fieldItem:invalid,
+#ov1 .formChecked .fieldItem-textarea:invalid,
+#ov1 .formChecked input[type="number"].fieldItem:invalid,
+#ov1 .formChecked input[type="text"].fieldItem:focus:invalid,
+#ov1 .formChecked input[type="email"].fieldItem:focus:invalid,
+#ov1 .formChecked input[type="url"].fieldItem:focus:invalid,
+#ov1 .formChecked .fieldItem-textarea:focus:invalid,
+#ov1 .forvmChecked input[type="number"].fieldItem:focus:invalid,
+#ov1 .formChecked .validatable:invalid {
+  border: 2px dashed rgba(89,1,1,0.8);;
+  background-color: rgba(89,1,1,0.2);
+  transition: border 0.3s, background-color 0.4s;
 }
 
 #ov1 .loading,

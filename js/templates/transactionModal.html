@@ -1047,7 +1047,7 @@
           <% } %>
         </div>
 
-        <form class="width100 hide" id="transationCloseDispute">
+        <form class="width100 hide" id="transactionCloseDispute">
           <div class="flexCol-12 flex-border custCol-border">
             <div class="flexRow">
               <div class="flexRow">
@@ -1114,6 +1114,7 @@
                          placeholder="<%= polyglot.t('Address') %>"
                          class="fieldItem"
                          pattern="<%= config.bitcoinValidationRegex %>"
+                         required
                   >
                   <% if(config.testnet) { %>
                   <div class="positionTopRight padding10">
