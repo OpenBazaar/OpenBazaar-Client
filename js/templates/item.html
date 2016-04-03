@@ -185,7 +185,7 @@
       </div>
       <div class="flexContainer flex-border custCol-primary minHeight300 textOpacity75 js-shipping js-tabTarg <% ob.activeTab !== 'shipping' && print('hide') %>">
         <div class="flexRow">
-        <% if(ob.vendor_offer.listing.shipping.shipping_regions.length) { %>
+        <% if(ob.vendor_offer.listing.shipping.shipping_regions.length || ob.vendor_offer.listing.policy.returns || ob.vendor_offer.listing.policy.terms_conditions) { %>
           <div class="flexCol-6">
             <div class="rowItem fontSize16 padding30 lineHeight24 fontWeight400">
               <% if(ob.vendor_offer.listing.shipping.free == false) { %>
