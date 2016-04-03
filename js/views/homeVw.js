@@ -354,7 +354,8 @@ module.exports = baseVw.extend({
             });
           }
         } else if (self.state == 'vendors') {
-          self.loadItemsOrSearch();
+          //self.loadItemsOrSearch();
+          //do nothing, stay on page
         }
       },
       error: function(jqXHR, status, errorThrown){
