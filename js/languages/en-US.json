@@ -114,6 +114,7 @@
   "ShippingReturns": "Shipping & Returns",
   "CountryOfOrigin": "Country of Origin:",
   "CanBeShippedTo": "Can Ship to You In:",
+  "NoShippableAddress": "None of your saved addresses are in a country this listing can be shipped to.",
   "Addresses": "Addresses",
   "Files": "Files",
   "NewAddress": "New Address",

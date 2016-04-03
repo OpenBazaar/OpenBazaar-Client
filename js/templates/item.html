@@ -132,7 +132,7 @@
               print("<p>" + data + "</p>");
             });
           } else if(!ob.worldwide){
-            print("---");
+            print(polyglot.t('NoShippableAddress'));
           } else {
             _.each(_.uniq(_.pluck(ob.userAddresses, 'displayCountry')), function(data){
             print("<p>" + data + "</p>");
