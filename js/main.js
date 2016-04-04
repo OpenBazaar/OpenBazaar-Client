@@ -125,7 +125,6 @@ $('body').on('click', 'a', function(e){
       Backbone.history.navigate(route, {trigger:true});
     });
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
-    console.log("foo")
     e.preventDefault();
 
     if (!/^https?:\/\//i.test(targUrl)) {
