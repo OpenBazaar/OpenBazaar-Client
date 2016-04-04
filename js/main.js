@@ -117,7 +117,7 @@ if(platform === "linux") {
 //open external links in a browser, not the app
 $('body').on('click', 'a', function(e){
   var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
-      linkPattern = /^[a-zA-Z]+:\/\//;
+      linkPattern = /^\"?[a-zA-Z]+:\/\//; //optionally match a quote at the beginning, the editor allows an extra quote
 
   if(targUrl.startsWith('ob')){
     e.preventDefault();
