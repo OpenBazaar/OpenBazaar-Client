@@ -83,13 +83,17 @@
             <%}%>
           </div>
           <div class="pad15 push-down5 noOverflow textShadow2">
-            <span class="h1 page-userNameLarge fancy-heading colorWhiteForce">
-              <%= ob.page.profile.name %> <span class="hide js-followsMe allCaps fontSize12"><%= polyglot.t('FollowsYou') %></span>
-            </span>
-            <br />
-            <span class="textSize16px colorWhiteForce">
-            <% if(ob.page.profile.handle) { %><%= ob.page.profile.handle %><% }else{ %><%= ob.page.profile.guid %><% } %>
-            </span>
+            <div>
+              <span class="h1 page-userNameLarge fancy-heading colorWhiteForce">
+                <%= ob.page.profile.name %>
+              </span>
+              <span class="hide js-followsMe allCaps fontSize12"><%= polyglot.t('FollowsYou') %></span>
+            </div>
+            <div>
+              <span class="textSize16px colorWhiteForce">
+              <% if(ob.page.profile.handle) { %><%= ob.page.profile.handle %><% }else{ %><%= ob.page.profile.guid %><% } %>
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -571,16 +571,13 @@ module.exports = baseVw.extend({
 
   toggleFollowButtons: function(followed) {
     var followBtn = this.$('.js-follow'),
-        unfollowBtn = this.$('.js-unfollow'),
-        followedTxt = this.$('.js-followsMe');
+        unfollowBtn = this.$('.js-unfollow');
     if(followed === true){
       followBtn.addClass('hide');
       unfollowBtn.removeClass('hide');
-      followedTxt.removeClass('hide');
     } else {
       followBtn.removeClass('hide');
       unfollowBtn.addClass('hide');
-      followedTxt.addClass('hide');
     }
     followBtn.removeClass('loading');
     unfollowBtn.removeClass('loading');
@@ -613,14 +610,15 @@ module.exports = baseVw.extend({
     this.following.fetch({
       data: self.userProfileFetchParameters,
       success: function(model){
+        var followingArray = model.get('following');
         if (self.isRemoved()) return;
 
         if(self.options.ownPage === true){
-          self.ownFollowing = model.get('following') || [];
+          self.ownFollowing = followingArray || [];
           self.ownFollowing = self.ownFollowing.map(function(followingObject){
             return followingObject.guid;
           });
-          self.renderFollowing(model.get('following'));
+          self.renderFollowing(followingArray);
           //call followers 2nd so list of following is available
           self.fetchFollowers();
         } else {
@@ -634,9 +632,14 @@ module.exports = baseVw.extend({
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
               return followingObject.guid;
             });
-            self.renderFollowing(model.get('following'));
+            self.renderFollowing(followingArray);
             //call followers 2nd so list of following is available
             self.fetchFollowers();
+            //mark whether page is following you
+            if(Boolean(__.findWhere(followingArray, {guid: self.userID}))){
+              self.$('.js-followsMe').removeClass('hide')
+            }
+
           }).fail(function(jqXHR, status, errorThrown){
             if (self.isRemoved()) return;
             console.log(jqXHR);
