@@ -752,7 +752,7 @@
               </div>
               <% if( ob.vendor_order_confirmation.invoice.shipping) { %>
               <div class="txt-unleaded fontSize13 textOpacity1 marginTop12">
-                <strong><%= polyglot.t('transactions.EstimatedDelivery') %>:</strong>
+                <strong><%= polyglot.t('transactions.EstimatedDelivery') %></strong>
                 <%= ob.vendor_order_confirmation.invoice.shipping.est_delivery ?
                 ob.vendor_order_confirmation.invoice.shipping.est_delivery : polyglot.t('transactions.None') %>
               </div>
