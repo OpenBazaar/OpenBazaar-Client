@@ -74,6 +74,8 @@ module.exports = baseVw.extend({
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
+
+    this.listenTo(this.model, 'change:priceSet', this.render());
   },
 
   render: function(){
