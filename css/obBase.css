@@ -5668,6 +5668,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 1px solid #444;
 }
 
+#ov1.notFancy .statusBar.fadeOut,
 #ov1.notFancy #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
