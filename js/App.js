@@ -44,7 +44,7 @@ App.prototype.connectHeartbeatSocket = function() {
     if (self._heartbeatSocket.getReadyState() !== 1) {
       self._heartbeatSocket._socket.close();
     }
-  }, 3000);  
+  }, 15000); //wait for 15 seconds, sometimes the server stalls
 };
 
 App.prototype.getHeartbeatSocket = function() {

@@ -117,7 +117,7 @@ if(platform === "linux") {
 //open external links in a browser, not the app
 $('body').on('click', 'a', function(e){
   var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
-      linkPattern = /^\"?[a-zA-Z]+:\/\//; //optionally match a quote at the beginning, the editor allows an extra quote
+      linkPattern = /[a-zA-Z]+:\/\//; //find any text:// in link. It may not start at the first character of href
 
   if(targUrl.startsWith('ob')){
     e.preventDefault();
@@ -131,6 +131,8 @@ $('body').on('click', 'a', function(e){
       targUrl = 'http://' + targUrl;
     }
     require("shell").openExternal(targUrl);
+  } else if ($(e.target).closest("a").attr("href") && !targUrl.startsWith('#')){ //internal links should start with #
+    e.preventDefault(); //just ignore any anchor with an href that is not a valid internal link
   }
 });
 
