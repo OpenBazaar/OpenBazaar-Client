@@ -117,7 +117,7 @@ if(platform === "linux") {
 //open external links in a browser, not the app
 $('body').on('click', 'a', function(e){
   var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
-      linkPattern = /^[a-zA-Z]+:\/\//;
+      linkPattern = /^\"?[a-zA-Z]+:\/\//; //optionally match a quote at the beginning, the editor allows an extra quote
 
   if(targUrl.startsWith('ob')){
     e.preventDefault();
@@ -125,7 +125,6 @@ $('body').on('click', 'a', function(e){
       Backbone.history.navigate(route, {trigger:true});
     });
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
-    console.log("foo")
     e.preventDefault();
 
     if (!/^https?:\/\//i.test(targUrl)) {

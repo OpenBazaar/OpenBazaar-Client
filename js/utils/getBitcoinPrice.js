@@ -29,7 +29,9 @@ module.exports = function (currency, callback) {
         cache: false //just in case
       })
       .done(function(data, textStatus, jqXHR){
-        btPrices.push(data.currencyCodes);
+        if(!__.isEmpty(data.currencyCodes)){
+          btPrices.push(data.currencyCodes);
+        }
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         logAPIErrorInfo("Call to btc_price", jqXHR, textStatus, errorThrown);
@@ -64,7 +66,7 @@ module.exports = function (currency, callback) {
             }
         }
         if (btPrices.length === 0) {
-            alert("Bitcoin exchange rates are not available.");
+            console.log("Bitcoin exchange rates are not available.");
         }
         currencyKeys = Object.keys(keys);
         for (var index in currencyKeys) {
