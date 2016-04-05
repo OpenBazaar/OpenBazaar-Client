@@ -262,8 +262,8 @@ app.on('ready', function() {
     submenu: [
       {
         label: 'Minimize',
-        accelerator: 'Command+M',
-        selector: 'performMiniaturize:'
+        selector: 'performMiniaturize:',
+        accelerator: 'Command+M'
       },
       {
         label: 'Close',
