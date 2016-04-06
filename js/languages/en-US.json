@@ -306,6 +306,12 @@
   "ServerChangeWarning": "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
   "ModeratorFee": "Fee:",
   "PriceForOne": "Price per single item, file, or service.",
+  "Avatar": "Avatar",
+  "firewall": {
+    "Open": "Open",
+    "Restricted": "Restricted",
+    "SeverelyRestricted": "Severely Restricted"
+  },
   "moderatorSettings": {
     "DisputeResolution": "Dispute Resolution",
     "ServiceFee": "Service fee",

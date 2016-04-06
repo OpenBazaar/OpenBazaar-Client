@@ -1128,7 +1128,7 @@
 
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem">
-                  <%= ob.user.network_connection %>  <span class="txt-fade"><%= polyglot.t('ReadOnly') %></span>
+                  <%= polyglot.t('firewall.' + ob.user.network_connection.replace(" ", "")) %>  <span class="txt-fade"><%= polyglot.t('ReadOnly') %></span>
                 </div>
               </div>
 
