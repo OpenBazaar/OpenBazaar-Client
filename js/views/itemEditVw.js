@@ -98,6 +98,7 @@ module.exports = baseVw.extend({
       });
 
       setTimeout(() => {
+        /*
         var editor = new MediumEditor('#inputDescription', {
           placeholder: {
             text: window.polyglot.t('DescriptionPlaceholder')
@@ -123,6 +124,7 @@ module.exports = baseVw.extend({
         });
 
         editor.subscribe('blur', self.validateDescription);
+        */
 
         //set chosen inputs
         this.$('.chosen').chosen({width: '100%'}).change(function(e){
@@ -517,6 +519,8 @@ module.exports = baseVw.extend({
         submitForm = this.$el.find('#contractForm')[0],
         keywordsArray = this.inputKeyword.getTagValues(),
         shipsToInput = this.$('#shipsTo');
+
+    validateMediumEditor.checkVal(this.$('#inputDescription'));
 
     if(keywordsArray.length < 1){
       this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
