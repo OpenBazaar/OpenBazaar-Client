@@ -10,12 +10,14 @@ function checkVal($field) {
   fVal = fVal.replace(/\\([\s\S])|(")/g, "'");
 
   fVal = sanitizeHTML(fVal, {
-    allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ],
+    //allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ],
+    allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'blockquote' ],
+    allowedAttributes: [],
     exclusiveFilter: function(frame) {
       return frame.tag === 'p' && !frame.text.trim();
     }
   });
-
+  
   $field.val(fVal);
 
   if (!$field[0].checkValidity()) {

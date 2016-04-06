@@ -104,6 +104,7 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
       self.socketView.getModerators(self.socketModeratorID);
+      /*
       var editor = new MediumEditor('#aboutInput', {
         placeholder: {
           text: ''
@@ -127,6 +128,7 @@ module.exports = Backbone.View.extend({
         }
       });
       editor.subscribe('blur', self.validateDescription);
+      */
     });
   },
 
@@ -198,6 +200,8 @@ module.exports = Backbone.View.extend({
         modList = [],
         wizData = {},
         modData = {};
+
+    validateMediumEditor.checkVal($('#aboutInput'));
 
     //convert taggle tags to data in the form
     this.$el.find('#realCategoriesInput').val(this.categoriesInput.getTagValues().join(","));
