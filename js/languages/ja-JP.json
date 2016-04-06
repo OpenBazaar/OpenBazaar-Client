@@ -469,7 +469,7 @@
     "intro": "OpenBazaarの設定",
     "theme": "マイページのテーマを選択",
     "chooseLanguage": "言語",
-    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're used to, so please be patient as you adjust.",
+    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than you are used to, so please be patient as you adjust.",
     "contributors": "投稿者: %{smart_count}人 |||| 投稿者: %{smart_count}人",
     "configure": "ユーザーエクスペリエンスの構成",
     "disclaimer_title": "担保文言",

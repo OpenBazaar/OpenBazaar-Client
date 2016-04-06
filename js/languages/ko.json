@@ -482,7 +482,7 @@
   "onboarding": {
     "intro": "오픈바자 구서",
     "Introduction": "Introduction",
-    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're used to, so please be patient as you adjust.",
+    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than you are used to, so please be patient as you adjust.",
     "theme": "내 페이지 테마 선택",
     "chooseLanguage": "언어 선택",
     "contributors": "%{smart_count} Contributor |||| %{smart_count} Contributors",

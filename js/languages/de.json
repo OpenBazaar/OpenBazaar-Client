@@ -516,7 +516,7 @@
   "onboarding": {
     "intro": "OpenBazaar Konfiguration",
     "Introduction": "Einf&uuml;hrung",
-    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're used to, so please be patient as you adjust.",
+    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than you are used to, so please be patient as you adjust.",
     "theme": "W&auml;hle ein Farbschema f&uuml;r deine Seite",
     "chooseLanguage": "W&auml;hle deine Sprache",
     "contributors": "%{smart_count} Mitwirkeder |||| %{smart_count} Mitwirkende",
