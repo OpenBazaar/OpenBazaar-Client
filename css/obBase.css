@@ -5702,6 +5702,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0.35 !important;
 }
 
+#ov1.notFancy .notFancyDarkBackground,
+#ov1.notFancy #obContainer .notFancyDarkBackground {
+  background: #262626;
+}
+
 
 /* hide unfinished elements */
 
