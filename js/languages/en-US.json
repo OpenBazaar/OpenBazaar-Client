@@ -484,7 +484,8 @@
     "tooManyPhotosTitle": "Too many photos",
     "tooManyPhotosBody": "Some or all of your photos were prevented from being uploaded because you would exceeded the maximum allowable amount.",
     "badJSON": "The JSON data returned from the server was malformed",
-    "refundAlreadySent": "The refund has already been successfully sent for this order"
+    "refundAlreadySent": "The refund has already been successfully sent for this order",
+    "serverTimeout": "No response was received from the server. It may be unreachable or taking a very long time to responsd."
   },
   "pageConnectingMessages": {
     "listingConnect": "Connecting to listing ${listing}",

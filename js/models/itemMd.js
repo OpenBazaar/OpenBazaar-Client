@@ -214,7 +214,7 @@ module.exports = window.Backbone.Model.extend({
     this.countryArray = this.countries.get('countries');
   },
 
-  updateAttributes: function(){
+  updateAttributes: function(callback){
     var self = this,
         userCCode = this.get("userCurrencyCode"),
         vendorCCode = this.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code,
@@ -278,6 +278,7 @@ module.exports = window.Backbone.Model.extend({
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
         self.set(newAttributes);
+        typeof callback == 'function' && callback();
       });
     }else{
       this.set({displayPrice: "Price Unavailable"});

@@ -89,7 +89,11 @@ module.exports = baseVw.extend({
       reset: true
     });
 
+    this.unreadNotifsViaSocket = 0;
+
     this.listenTo(this.notificationsCl, 'reset update', (cl, options) => {
+      if (options.xhr) this.unreadNotifsViaSocket = 0;
+
       this.setNotificationCount(this.getUnreadNotifCount());
     });
 
@@ -120,12 +124,10 @@ module.exports = baseVw.extend({
 
   showDiscoverIntro: function(){
     this.$('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
-    this.showDiscIntro = true;
   },
 
   hideDiscoverIntro: function(){
     this.$('.js-OnboardingIntroDiscoverHolder').addClass('hide');
-    this.showDiscIntro = false;
   },
 
   sendInstallUpdate: function() {
@@ -141,7 +143,6 @@ module.exports = baseVw.extend({
     this.hideAboutModal();
     this.closeNav();
     this.closeStatusBar();
-    this.hideDiscoverIntro();
     obEventBus.trigger('closeBuyWizard');
   },
 
@@ -158,6 +159,8 @@ module.exports = baseVw.extend({
       avatar = notif.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
         notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
       notifStamp = Date.now();
+
+      this.unreadNotifsViaSocket++;
 
       this.notificationsCl.add(
           __.extend({}, notif, { read: false })
@@ -371,7 +374,7 @@ module.exports = baseVw.extend({
   },
 
   getUnreadNotifCount: function() {
-    return (this.notificationsCl.getUnreadCount()) || 0;
+    return (this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount()) || 0;
   },
 
   onNotifMenuOpen: function() {

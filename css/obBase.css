@@ -928,6 +928,10 @@ label.fieldItem {
   padding-right: 5px;
 }
 
+.pad5Top {
+  padding-top: 5px;
+}
+
 .pad10 {
   padding-left: 10px;
   padding-right: 10px;
@@ -1733,28 +1737,6 @@ input[type="text"].txtField-bar {
   line-height: 32px;
 }
 
-.btn:active,
-.btn.active,
-.btn.btn-c1:active,
-.btn.btn-c1.active {
-  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.4), inset 0px 0px 12px 0px rgba(255,255,255,0.1);
-}
-
-.btn.btn-c1:active,
-.btn.btn-c1.active {
-  background-color: #215175;
-}
-
-.btn.btn-c1 .toggle-txt {
-  opacity: .20;
-}
-
-.btn.btn-c1:active .toggle-txt,
-.btn.btn-c1.active .toggle-txt {
-  opacity: 1;
-}
-
-
 .btn.btn-txt {
   /* button with text */
   padding: 0 12px;
@@ -1815,6 +1797,44 @@ margin: auto;
 .btn.btn-c2,
 #userPage .btn.btn-c2 {
   background-color: rgba(200,25,25,1);
+}
+
+.btn.btn-c3,
+#userPage .btn.btn-c3 {
+  background-color: rgba(33,117,47,1);
+}
+
+.btn:active,
+.btn.active,
+.btn.btn-c1:active,
+.btn.btn-c1.active,
+.btn.btn-c2:active,
+.btn.btn-c2.active {
+  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.4), inset 0px 0px 12px 0px rgba(255,255,255,0.1);
+}
+
+.btn.btn-c1:active,
+.btn.btn-c1.active {
+  background-color: #215175;
+}
+
+.btn.btn-c2:active,
+.btn.btn-c2.active {
+  background-color: #752121;
+}
+
+.btn.btn-c3:active,
+.btn.btn-c3.active {
+  background-color: #19C836;
+}
+
+.btn.btn-c1 .toggle-txt {
+  opacity: .20;
+}
+
+.btn.btn-c1:active .toggle-txt,
+.btn.btn-c1.active .toggle-txt {
+  opacity: 1;
 }
 
 .btn.btn-win {
@@ -5648,6 +5668,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 1px solid #444;
 }
 
+#ov1.notFancy .statusBar.fadeOut,
 #ov1.notFancy #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
@@ -5660,6 +5681,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy #sideBar.sideBarSlid .sideBarSlidShow {
   display: block;
+}
+
+#ov1.notFancy #sideBar .chatConversation textarea,
+#ov1.notFancy #sideBar .chatConversation textarea::-webkit-input-placeholder,
+#ov1.notFancy #sideBar .chatConversation input,
+#ov1.notFancy #sideBar .chatConversation input::-webkit-input-placeholder {
+  color: #fff;
 }
 
 #ov1.notFancy .gridItemControls {

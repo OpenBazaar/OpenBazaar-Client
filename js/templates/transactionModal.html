@@ -22,7 +22,7 @@
       <div class="fontSize16">Order #<%- ob.orderID %></div>
       <div class="fontSize14 textOpacity75 marginTop2">
         <%= polyglot.t('transactions.OrderStatus'+ob.status) %>
-        <% if(ob.displayModerator && ob.status < 3){ %>
+        <% if(ob.displayModerator && ob.status > 0 && ob.status < 3){ %>
           <%= polyglot.t('transactions.InEscrow') %>
         <% } %>
       </div>
@@ -625,7 +625,7 @@
         </div>
 
         <!-- only display shipping if shipping data exists -->
-        <% if(ob.buyer_order.order.shipping) { %>
+        <% if(ob.buyer_order.order.shipping && ob.status > 0) { %>
         <div class="flexRow custCol-border borderBottom">
           <div class="flexRow rowItem padding15">
             <div class="flexCol-7">
@@ -711,7 +711,7 @@
     </div>
 
     <div class="js-main js-shipping hide" style="height:319px">
-      <% if(ob.buyer_order.order.shipping) { %>
+      <% if(ob.buyer_order.order.shipping && ob.status > 0) { %>
       <div class="flexRow custCol-border borderBottom">
         <div class="flexRow rowItem padding15">
           <div class="thumbnail-large-slim pull-left marginRight10">
