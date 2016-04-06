@@ -481,7 +481,7 @@
   "onboarding": {
     "intro": "OpenBazaar bang",
     "Introduction": "Introduction",
-    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than what you're use to, so please be patient as you adjust.",
+    "IntroductionBody": "OpenBazaar is a peer-to-peer social market. It's like combining eBay&trade;, Twitter&trade; and BitTorrent into one. Only, there are no fees or restrictions and OpenBazaar is open-source. \n\n Please note that it may look and feel a bit different than you are used to, so please be patient as you adjust.",
     "Theme": "Hoch tuqwIj wIv",
     "chooseLanguage": "Hol wIv",
     "contributors": "%{smart_count} 'ach yIn nuvpu' 'Iv ghaq |||| %{smart_count} 'ach yIn nuvpu' 'Iv ghaq",
