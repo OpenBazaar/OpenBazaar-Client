@@ -227,13 +227,13 @@ module.exports = baseVw.extend({
     });
 
     this.listenTo(window.obEventBus, "itemShortEdit", function(options){
-      this.setItem(options.contract_hash, function(){
+      this.setItem(options.contract_hash, null, function(){
         self.editItem();
       });
     });
 
     this.listenTo(window.obEventBus, "itemShortClone", function(options){
-      this.setItem(options.contract_hash, function(){
+      this.setItem(options.contract_hash, null, function(){
         self.cloneItem();
       });
     });    
@@ -805,7 +805,7 @@ module.exports = baseVw.extend({
   },
 
 
-  setItem: function(hash, onSucceed){
+  setItem: function(hash, onSucceed, afterUpdate){
     "use strict";
     var self = this;
     this.item = new itemModel({
@@ -847,9 +847,11 @@ module.exports = baseVw.extend({
         if (self.options.ownPage === false){
           model.set('imageExtension', "&guid=" + model.get('vendor_offer').listing.id.guid);
         }
+        
         //model may arrive empty, set this flag to trigger a change event
-        model.set({fetched: true});
-        onSucceed(model, response);
+        model.updateAttributes(afterUpdate);
+        onSucceed && onSucceed(model, response);
+
       },
       error: function(model, response){
         if (self.isRemoved()) return;
@@ -876,12 +878,12 @@ module.exports = baseVw.extend({
     );
   },
 
-  renderItemEdit: function(model, clone){
+  renderItemEdit: function(useCurrentItem, clone){
     var self = this,
         hash = "";
-    if(model) {
+    if(useCurrentItem) {
       //if editing existing product, clone the model
-      this.itemEdit = model.clone();
+      this.itemEdit = this.item.clone();
 
       if (clone) {
         this.itemEdit.unset('id');
@@ -901,7 +903,8 @@ module.exports = baseVw.extend({
       this.itemEditView.remove();
     }
     this.itemEditView = new itemEditVw({model:this.itemEdit});
-    this.$('.js-list5').html(this.itemEditView.render().el);
+    this.$('.js-list5').html('');
+    this.$('.js-list5').append(this.itemEditView.$el);
     this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
@@ -1298,7 +1301,7 @@ module.exports = baseVw.extend({
   },
 
   editItem: function(clone){
-    this.renderItemEdit(this.item, clone);
+    this.renderItemEdit(true, clone);
     this.setControls("listingEdit");
     this.lastTab = "listingOld";
   },

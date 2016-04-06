@@ -928,6 +928,10 @@ label.fieldItem {
   padding-right: 5px;
 }
 
+.pad5Top {
+  padding-top: 5px;
+}
+
 .pad10 {
   padding-left: 10px;
   padding-right: 10px;
@@ -5664,6 +5668,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 1px solid #444;
 }
 
+#ov1.notFancy .statusBar.fadeOut,
 #ov1.notFancy #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
@@ -5676,6 +5681,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy #sideBar.sideBarSlid .sideBarSlidShow {
   display: block;
+}
+
+#ov1.notFancy #sideBar .chatConversation textarea,
+#ov1.notFancy #sideBar .chatConversation textarea::-webkit-input-placeholder,
+#ov1.notFancy #sideBar .chatConversation input,
+#ov1.notFancy #sideBar .chatConversation input::-webkit-input-placeholder {
+  color: #fff;
 }
 
 #ov1.notFancy .gridItemControls {
@@ -5716,6 +5728,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.notFancy #obContainer .unfilled,
 #ov1.notFancy #userPage .unfilled {
   opacity: 0.35 !important;
+}
+
+#ov1.notFancy #obContainer .notFancyDarkBackground {
+  background: #262626;
 }
 
 
