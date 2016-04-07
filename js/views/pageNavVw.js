@@ -90,9 +90,13 @@ module.exports = baseVw.extend({
     });
 
     this.unreadNotifsViaSocket = 0;
+    this.fetchNotifsMarkedAsRead = 0;
 
-    this.listenTo(this.notificationsCl, 'reset update', (cl, options) => {
-      if (options.xhr) this.unreadNotifsViaSocket = 0;
+    this.listenTo(this.notificationsCl, 'reset update', function(cl, options) {
+      if (options.xhr) {
+        this.fetchNotifsMarkedAsRead = 0;
+        this.unreadNotifsViaSocket = 0;
+      }
 
       this.setNotificationCount(this.getUnreadNotifCount());
     });
@@ -164,7 +168,7 @@ module.exports = baseVw.extend({
 
       this.notificationsCl.add(
           __.extend({}, notif, { read: false })
-      )
+      );
 
       //prevent message spamming from one user
       if(!this.notificationsRecord[username]){
@@ -374,7 +378,8 @@ module.exports = baseVw.extend({
   },
 
   getUnreadNotifCount: function() {
-    return (this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount()) || 0;
+    return this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount() -
+      this.fetchNotifsMarkedAsRead || 0;
   },
 
   onNotifMenuOpen: function() {
@@ -407,7 +412,9 @@ module.exports = baseVw.extend({
       });
     }
 
-    this.setNotificationCount(0);    
+    this.fetchNotifsMarkedAsRead += unread.length - this.unreadNotifsViaSocket;
+    this.unreadNotifsViaSocket = 0;
+    this.setNotificationCount(this.getUnreadNotifCount());
   },
 
   onPopMenuNavClick: function(e) {
