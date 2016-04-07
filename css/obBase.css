@@ -1018,6 +1018,10 @@ label.fieldItem {
   transition: right 0.5s ease;
 }
 
+.modal-opaque .modal-child {
+  height: 574px;
+}
+
 #ov1.chatOpen .modal-child {
   right: 230px;
 }
