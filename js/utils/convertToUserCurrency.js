@@ -5,7 +5,7 @@ var __ = require('underscore'),
 module.exports = function (priceIn, oneVendorCurrencyUnitInBTC, currencyCodeIn, currencyCodeOut, callback) {
     var self = this,
         priceInBTC = 0,
-        inToOutBTCRatio = 0,
+        //inToOutBTCRatio = 0,
         priceToFormat = 0,
         priceOut = 0;
 
@@ -29,8 +29,8 @@ module.exports = function (priceIn, oneVendorCurrencyUnitInBTC, currencyCodeIn, 
     currencyCodeOut = currencyCodeOut.toUpperCase();
 
     priceInBTC = (currencyCodeIn == "BTC") ? Number(priceIn) : Number(priceIn / oneVendorCurrencyUnitInBTC);
-    inToOutBTCRatio = (currencyCodeIn == currencyCodeOut) ? 1 : window.currentBitcoin/oneVendorCurrencyUnitInBTC;
-    priceToFormat = (currencyCodeIn == currencyCodeOut) ? priceIn : priceInBTC*inToOutBTCRatio;
+    //inToOutBTCRatio = (currencyCodeIn == currencyCodeOut) ? 1 : window.currentBitcoin/oneVendorCurrencyUnitInBTC;
+    priceToFormat = (currencyCodeIn == currencyCodeOut) ? priceIn : priceInBTC*window.currentBitcoin;
 
     if(currencyCodeOut != "BTC"){
         priceOut = new Intl.NumberFormat(window.lang, {
