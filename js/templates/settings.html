@@ -252,14 +252,18 @@
                        class="fieldItem"
                        pattern="@[a-zA-Z0-9_]+"
                        value="<%= ob.page.profile.temp_handle || ob.page.profile.handle %>">
-                <% if(ob.page.profile.temp_handle && !ob.page.profile.handle){ %>
-                <a class="positionTopRight padding10 js-externalLink" href="https://onename.com/">
-                  <span class="btn btn-txt custCol-secondary tooltip tooltip-left"
-                        data-tooltip="<%= polyglot.t('StillValidating') %>">
-                    <%= polyglot.t('CheckStatus') %> <span class="ion-android-open fontSize10"></span>
-                  </span>
-                </a>
-                <% } %>
+                <div class="positionTopRight padding10">
+                  <% if(ob.page.profile.temp_handle && !ob.page.profile.handle){ %>
+                    <a class="btn btn-txt custCol-secondary tooltip tooltip-left tooltip-box js-savePage"
+                       data-tooltip="<%= polyglot.t('StillValidating') %>">
+                      <%= polyglot.t('RefreshHandleStatus') %>
+                    </a>
+                  <% } %>
+                  <a class="btn btn-txt custCol-secondary tooltip tooltip-left tooltip-box"
+                     data-tooltip="<%= polyglot.t('GoToOneNameTooltip') %>" href="https://onename.com/">
+                    <%= polyglot.t('GoToOneName') %> <i class="ion-android-open fontSize10"></i>
+                  </a>
+                </div>
               </div>
             </div>
 

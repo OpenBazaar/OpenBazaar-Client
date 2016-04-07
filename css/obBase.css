@@ -4090,7 +4090,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .server-connect-modal {
-  z-index: 10;
+  z-index: 15;
 }
 
 #loadingModal .btn {
