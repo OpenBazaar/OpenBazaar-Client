@@ -22,6 +22,11 @@ module.exports = baseVw.extend({
     this.fetch = this.options.initialFetch;
     
     this.listenTo(this.collection, 'update', (cl, options) => {
+      if (!options.add) return;
+
+      // on first notification, we'll re-render
+      if (cl.length === 1) this.render();
+
       var $notifPage = $('<div />');
 
       // we're assuming the only additions will either be a batch of
