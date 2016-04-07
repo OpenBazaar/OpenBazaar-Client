@@ -8,7 +8,6 @@
                  style="background-image: <%= ob.cssImageUrl(ob.image_hash, ob.guid, 'imgs/defaultUser.png') %>; height: 50px; width: 50px"></div>
             <div class="txt-lowleading">
                 <div class="marginLeft10 marginTop2 clearfix">
-
                     <% if(ob.type == "order confirmation") { %>
                         <div class="textSize12px floatLeft">
                             <%= polyglot.t('NotificationOrderConfirmed') %>
@@ -16,90 +15,98 @@
                         <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "dispute_close") { %>
                         <div class="textSize12px">
-                            <span>
                             <% if(ob.handle) { %>
-                                <%= ob.handle %>
+                            <%= polyglot.t('NotificationDisputeClosed',{name: ob.handle}) %>
                             <% }else{ %>
-                                <span class="noOverflow width91 inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>">
+                                    <%= polyglot.t('NotificationDisputeClosed',{name: ob.guid}) %>
+                                </span>
                             <% } %>
-                            </span> <%= polyglot.t('NotificationDisputeClosed') %>
                         </div>
                         <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "dispute_open") { %>
                     <div class="textSize12px">
-                            <span>
-                            <% if(ob.handle) { %>
-                                <%= ob.handle %>
-                            <% }else{ %>
-                                <span class="noOverflow width91 inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
-                            <% } %>
-                            </span> <%= polyglot.t('NotificationDispute') %>
+                        <% if(ob.handle) { %>
+                            <%= polyglot.t('NotificationDispute',{name:ob.handle}) %>
+                        <% }else{ %>
+                            <span class="noOverflow width91 inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>">
+                                <%= polyglot.t('NotificationDispute',{name:ob.guid}) %>
+                            </span>
+                        <% } %>
                     </div>
                     <div class="textSize11px floatLeft txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "payment received") { %>
                         <div class="textSize12px">
-                            <%= polyglot.t('NotificationPaymentSent') %>
-                            <span>
                             <% if(ob.handle) { %>
-                                <%= ob.handle %>.
+                                <%= polyglot.t('NotificationPaymentSent',{name: ob.handle}) %>
                             <% }else{ %>
-                                <span class="noOverflow width91 inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>">
+                                    <%= polyglot.t('NotificationPaymentSent',{name: ob.guid}) %>
+                                </span>
                             <% } %>
-                            </span>
                         </div>
                         <div class="textSize11px  txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "rating received") { %>
                     <div class="textSize12px">
-                        <%= polyglot.t('NotificationRatingRecieved') %>
-                            <span>
-                            <% if(ob.handle) { %>
-                                <%= ob.handle %>.
-                            <% }else{ %>
-                                <span class="noOverflow width91 inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
-                            <% } %>
+                        <% if(ob.handle) { %>
+                            <%= polyglot.t('NotificationRatingRecieved',{name: ob.handle}) %>
+                        <% }else{ %>
+                            <span class="noOverflow width91 inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>">
+                                <%= polyglot.t('NotificationRatingRecieved',{name: ob.guid}) %>
                             </span>
+                        <% } %>
                     </div>
                     <div class="textSize11px  txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "new order") { %>
                         <div class="textSize12px clearFix">
-                            <span>
                             <% if(ob.handle) { %>
-                                <%= ob.handle %>
+                                <%= polyglot.t('NotificationOrderFor',{name: ob.handle, title: ob.title}) %>
                             <% }else{ %>
-                                <span class="noOverflow width91 inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3 tooltip" data-tooltip="<%= ob.guid %>">
+                                    <%= polyglot.t('NotificationOrderFor',{name: ob.guid, title: ob.title}) %>
+                                </span>
                             <% } %>
-                            </span> <%= polyglot.t('NotificationOrderFor') %> <%= ob.title %>.
                         </div>
                         <div class="textSize11px clearFix txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "follow") { %>
-                        <div class="textSize12px">
-                            <span>
+                        <div class="textSize12px row5">
                             <% if(ob.handle) { %>
-                                <%= ob.handle %>
+                                <%= polyglot.t('NotificationFollow',{name: ob.handle}) %>
                             <% }else{ %>
-                                <span class="noOverflow width91 inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>">
+                                    <%= polyglot.t('NotificationFollow',{name: ob.guid}) %>
+                                </span>
                             <% } %>
-                            </span><%= polyglot.t('NotificationFollow') %>
                         </div>
                         <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% } else if(ob.type == "refund") { %>
                     <div class="textSize12px">
-                            <span>
                             <% if(ob.handle) { %>
-                                <%= ob.handle %>
+                                <%= polyglot.t('NotificationRefund',{name: ob.handle}) %>
                             <% }else{ %>
-                                <span class="noOverflow width91 inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>"><%= ob.guid %></span>
+                                <span class="noOverflow width91 inlineBlock top3  tooltip" data-tooltip="<%= ob.guid %>">
+                                    <%= polyglot.t('NotificationRefund',{name: ob.guid}) %>
+                                </span>
                             <% } %>
-                            </span> <%= polyglot.t('NotificationRefund') %>
                     </div>
                     <div class="textSize11px txt-fade"><%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
                     <% }  else { %>
                         <span class="textSize11px marginRight5 marginBottom2 noOverflow" title="<%= ob.title %>">
-                            <strong>Title: <%= ob.title %></strong>
+                            <strong><%= polyglot.t('NotificationTitle',{title: ob.title}) %></strong>
                         </span>
-                        <div class="textSize11px txt-fade textWeightNormal">From: <%= ob.handle || ob.guid %></div>
-                        <div class="textSize11px txt-fade">Type: <%= ob.type %></div>
-                        <div class="textSize11px txt-fade">Time: <%= ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A') %></div>
+                        <div class="textSize11px txt-fade textWeightNormal">
+                            <% if(ob.handle){ %>
+                                <%= polyglot.t('NotificationFrom',{name: ob.handle}) %>
+                            <% }else{ %>
+                                <%= polyglot.t('NotificationFrom',{name: ob.guid}) %>
+                            <% } %>
+                        </div>
+                        <div class="textSize11px txt-fade">
+                            <%= polyglot.t('NotificationType',{type: ob.type}) %>
+                        </div>
+                        <div class="textSize11px txt-fade">
+                            <%= polyglot.t('NotificationTime', {time: ob.moment(new Date(ob.timestamp*1000)).format('MMM D, h:mm A')}) %>
+                        </div>
                         <% if (ob.order_id) { %>
                             <div class="textSize11px txt-fade"><%= ob.order_id %></div>
                         <% } %>
