@@ -40,14 +40,6 @@
       </div>
     </div>
   </div>
-  <div id="loadingModal" class="modal modal-opaque js-loadingModal top0">
-    <div class="spinner-with-logo fullCentered">
-      <i class="ion-android-sync spinner fontSize30"></i>
-    </div>
-    <div class="rowTop20">
-      <a class="btn btn-txt btn-corner btn-cornerTR js-indexReload"><i class="ion-android-sync"></i> Reload</a>
-    </div>
-  </div>
   <div class="modal modal-opaque hide js-loadingMessageModal">
     <div class="modal-child modal-childMain">
       <div class="btn-corner btn-cornerTR js-closeIndexModal">
@@ -81,6 +73,15 @@
   </div>
   <div id="statusBar"></div>
   <div id="pageNav" class="bar navBar navBar-main custCol-secondary padding0"></div>
+  <!-- the loading modal must be on top of the page nav or the reload button is hidden -->
+  <div id="loadingModal" class="modal modal-opaque js-loadingModal top0">
+    <div class="spinner-with-logo fullCentered">
+      <i class="ion-android-sync spinner fontSize30"></i>
+    </div>
+    <div class="rowTop20">
+      <a class="btn btn-txt btn-corner btn-cornerTR js-indexReload"><i class="ion-android-sync"></i> Reload</a>
+    </div>
+  </div>
 
   <!--TODO: modularize non-modular scripts -->
   <script src="js/utils/list.min.js"></script>

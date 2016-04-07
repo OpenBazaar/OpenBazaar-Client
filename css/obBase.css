@@ -4086,7 +4086,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #loadingModal {
-  z-index: 9;
+  z-index: 14;
 }
 
 .server-connect-modal {
