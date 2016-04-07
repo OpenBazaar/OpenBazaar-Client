@@ -634,7 +634,8 @@
     "moderatorPaymentDisclaimer": "Paid from the total if the transaction ends in a dispute.",
     "directPaymentDisclaimer": "Use direct payment with caution, funds are irreversible",
     "paymentSent": "Payment Sent!",
-    "total": "Total:"
+    "total": "Total:",
+    "paymentNote": "Payment can take several minutes or more to complete. You can leave this screen, and go to the Purchases section to see if your payment has completed later."
   },
   "chat": {
     "noSearchResultsFound": "No results found"
