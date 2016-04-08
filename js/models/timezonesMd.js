@@ -52,79 +52,79 @@ module.exports = Backbone.Model.extend({
             "offset": -2
         },
         {
-            "name":"(GMT -1:00 hour) Azores, Cape Verde Islands",
+            "name":"(GMT -1:00) Azores, Cape Verde Islands",
             "offset": -1
         },
         {
-            "name":"(gmt) western europe time, london, lisbon, casablanca",
+            "name":"(GMT) Western Europe Time, London, Lisbon, Casablanca",
             "offset": 0
         },
         {
-            "name":"(gmt +1:00 hour) brussels, copenhagen, madrid, paris",
+            "name":"(GMT +1:00) Brussels, Copenhagen, Madrid, Paris",
             "offset": 1
         },
         {
-            "name":"(gmt +2:00) kaliningrad, south africa",
+            "name":"(GMT +2:00) Kaliningrad, South Africa",
             "offset": 2
         },
         {
-            "name":"(gmt +3:00) baghdad, riyadh, moscow, st. petersburg",
+            "name":"(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg",
             "offset": 3
         },
         {
-            "name":"(gmt +3:30) tehran",
+            "name":"(GMT +3:30) Tehran",
             "offset": 3.5
         },
         {
-            "name":"(gmt +4:00) abu dhabi, muscat, baku, tbilisi",
+            "name":"(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi",
             "offset": 4
         },
         {
-            "name":"(gmt +4:30) kabul",
+            "name":"(GMT +4:30) Kabul",
             "offset": 4.5
         },
         {
-            "name":"(gmt +5:00) ekaterinburg, islamabad, karachi, tashkent",
+            "name":"(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent",
             "offset": 5
         },
         {
-            "name":"(gmt +5:30) bombay, calcutta, madras, new delhi",
+            "name":"(GMT +5:30) Bombay, Calcutta, Madras, New Delhi",
             "offset": 5.5
         },
         {
-            "name":"(gmt +5:45) kathmandu",
+            "name":"(GMT +5:45) Kathmandu",
             "offset": 5.75
         },
         {
-            "name":"(gmt +6:00) almaty, dhaka, colombo",
+            "name":"(GMT +6:00) Almaty, Dhaka, Colombo",
             "offset": 6
         },
         {
-            "name":"(gmt +7:00) bangkok, hanoi, jakarta",
+            "name":"(GMT +7:00) Bangkok, Hanoi, Jakarta",
             "offset": 7
         },
         {
-            "name":"(gmt +8:00) beijing, perth, singapore, hong kong",
+            "name":"(GMT +8:00) Beijing, Perth, Singapore, Hong Kong",
             "offset": 8
         },
         {
-            "name":"(gmt +9:00) tokyo, seoul, osaka, sapporo, yakutsk",
+            "name":"(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk",
             "offset": 9
         },
         {
-            "name":"(gmt +9:30) adelaide, darwin",
+            "name":"(GMT +9:30) Adelaide, Darwin",
             "offset": 9.5
         },
         {
-            "name":"(gmt +10:00) eastern australia, guam, vladivostok",
+            "name":"(GMT +10:00) Eastern Australia, Guam, Vladivostok",
             "offset": 10
         },
         {
-            "name":"(gmt +11:00) magadan, solomon islands, new caledonia",
+            "name":"(GMT +11:00) Magadan, Solomon Islands, New Caledonia",
             "offset": 11
         },
         {
-            "name":"(gmt +12:00) auckland, wellington, fiji, kamchatka<f37>",
+            "name":"(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka",
             "offset": 12
         }
     ]

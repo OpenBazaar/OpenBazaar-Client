@@ -1018,6 +1018,10 @@ label.fieldItem {
   transition: right 0.5s ease;
 }
 
+.modal-opaque .modal-child {
+  height: 574px;
+}
+
 #ov1.chatOpen .modal-child {
   right: 230px;
 }
@@ -4082,11 +4086,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #loadingModal {
-  z-index: 9;
+  z-index: 14;
 }
 
 .server-connect-modal {
-  z-index: 10;
+  z-index: 15;
 }
 
 #loadingModal .btn {
