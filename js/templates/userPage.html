@@ -331,9 +331,11 @@
                 <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
-                  <%= ob.page.profile.social_accounts.facebook.username %>
+                    <a href="http://facebook.com/<%= ob.page.profile.social_accounts.facebook.username %>">
+                      <%= ob.page.profile.social_accounts.facebook.username %>
+                    </a> <i class="ion-android-open fontSize10"></i>
                   <%}else{%>
-                  <%= polyglot.t('NotProvided') %>
+                    <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
@@ -351,7 +353,9 @@
                 <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
-                  <%= ob.page.profile.social_accounts.twitter.username %>
+                    <a href="http://twitter.com/<%= ob.page.profile.social_accounts.twitter.username %>">
+                      <%= ob.page.profile.social_accounts.twitter.username %>
+                    </a> <i class="ion-android-open fontSize10"></i>
                   <%}else{%>
                   <%= polyglot.t('NotProvided') %>
                   <%}%>
@@ -371,9 +375,9 @@
                 <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
-                  <%= ob.page.profile.social_accounts.instagram.username %>
+                    <%= ob.page.profile.social_accounts.instagram.username %>
                   <%}else{%>
-                  <%= polyglot.t('NotProvided') %>
+                    <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
@@ -391,9 +395,9 @@
                 <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
                 <div>
                   <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
-                  <%= ob.page.profile.social_accounts.snapchat.username %>
+                    <%= ob.page.profile.social_accounts.snapchat.username %>
                   <%}else{%>
-                  <%= polyglot.t('NotProvided') %>
+                    <%= polyglot.t('NotProvided') %>
                   <%}%>
                 </div>
               </div>
