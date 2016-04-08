@@ -13,7 +13,7 @@
     "Navigation": "Nawigacja",
     "Cancel": "Anuluj",
     "TryAgain": "Ponów",
-    "ClosingOpenBazaar": "Ciekawostka: Twoja strona pozostaje online, póki nie zamkniesz programu.",
+    "ClosingOpenBazaar": "Zamknij (Twoja strona będzie niedostępna jeśli nie podłączyłeś zdalnego serwera)",
     "Minimize": "Minimalizuj",
     "Maximize": "Maksymalizuj",
     "Close": "Zamknij",
@@ -26,7 +26,7 @@
     "Excellent": "Doskonały",
     "Good": "W dobrym stanie",
     "Poor": "W złym stanie",
-    "StillValidating": "Your handle is still validating",
+    "StillValidating": "Twoja nazwa jest nadal sprawdzana",
     "CheckStatus": "Sprawdź status",
     "ChangeCurrency": "Zmień walutę",
     "SKU": "Na stanie",
@@ -96,8 +96,8 @@
     "TermsAndConditions": "Regulamin",
     "Photos": "Zdjęcia",
     "Added": "Dodane",
-    "Categorization": "Categorization",
-    "Expiration": "Expiration",
+    "Categorization": "Kategoryzacja",
+    "Expiration": "Wygaśnięcie",
     "Search": "Wyszukaj",
     "Email": "E-mail",
     "Facebook": "Facebook",
@@ -111,9 +111,9 @@
     "Description": "Opis",
     "Reviews": "Opinie",
     "Shipping": "Wysyłka",
-    "ShippingReturns": "Shipping & Returns",
-    "CountryOfOrigin": "Country of Origin:",
-    "CanBeShippedTo": "Can Ship to You In:",
+    "ShippingReturns": "Wysyłka i zwroty",
+    "CountryOfOrigin": "Kraj pochodzenia:",
+    "CanBeShippedTo": "Może zostać wysłany do Ciebie:",
     "NoShippableAddress": "Żaden z Twoich zapisanych adresów nie znajduje się na terenie kraju do którego może zostać wysłany ten przedmiot",
     "Addresses": "Adresy",
     "Files": "Pliki",
@@ -140,7 +140,7 @@
     "BitcoinAddress": "Adres Bitcoin",
     "BitcoinReturnAddress": "Wprowadź swój adres Bitcoin",
     "BitcoinReturnAddressPlaceholder": "Wprowadź adres Bitcoin...",
-    "BitcoinReturnAddressInfo": "If a refund is issued, the funds will need to be sent to a Bitcoin address. Please provide an address to your Wallet below.",
+    "BitcoinReturnAddressInfo": "W przypadku zwrotu kosztów środki zostaną wysłane na podany poniżej adres Bitcoin.",
     "LocalCurrency": "Lokalna waluta",
     "TimeZone": "Strefa czasowa",
     "ShipToName": "Nazwa odbiorcy",
@@ -291,11 +291,11 @@
     "Firewall": "Firewall",
     "ServerSettings": "Ustawienia serwera",
     "ReadOnly": "(To pole jest tylko do odczytu)",
-    "HandleResolver": "Handle Resolver",
+    "HandleResolver": "Serwis rozpoznający nazwy",
     "ShutDownServer": "Zatrzymaj serwer",
-    "NoFancyStyles": "Disable Visual Effects",
+    "NoFancyStyles": "Wyłącz efekty wizualne",
     "NoFancyStylesWarning": "Ta opcja wyłączy animacje i przezroczystość. Może zwiększyć wydajność na słabym komputerze.",
-    "LoadingBitcoinPrices": "Ładowanie kursu Bitcoina..",
+    "LoadingBitcoinPrices": "Ładowanie kursu Bitcoina...",
     "ThisUserIsBlocked": "Ten użytkownik jest ukryty, ponieważ znajduje się na Twojej liście zablokowanych użytkowników",
     "ThisUserIsNSFW": "Ten użytkownik jest ukryty, ponieważ jego strona została oznaczona jako NSFW",
     "ShowBlockedUser": "Pokaż stronę tego użytkownika wykluczając oferty NSFW",
@@ -320,39 +320,39 @@
     "BecomeModerator": "Zostań arbitrem",
     "EditModerator": "Ustawienia arbitra",
     "overallRatingKeys": {
-        "fiveStar": "Excellent all around",
-        "fourStar": "Good",
-        "threeStar": "Average",
-        "twoStar": "Poor",
-        "oneStar": "Terrible"
+        "fiveStar": "Wszystko doskonale",
+        "fourStar": "Dobrze",
+        "threeStar": "Średnio",
+        "twoStar": "Kiepsko",
+        "oneStar": "Okropnie"
     },
     "qualityRatingKeys": {
-        "fiveStar": "Excellent quality",
-        "fourStar": "Good quality",
-        "threeStar": "Average quality",
-        "twoStar": "Poor quality",
-        "oneStar": "Terrible quality"
+        "fiveStar": "Doskonała jakość",
+        "fourStar": "Dobra jakość",
+        "threeStar": "Średnia jakość",
+        "twoStar": "Kiepska jakość",
+        "oneStar": "Okropna jakość"
     },
     "descriptionRatingKeys": {
-        "fiveStar": "Exactly as described",
-        "fourStar": "Mostly as described",
-        "threeStar": "Somewhat as described",
-        "twoStar": "Mostly not as described",
-        "oneStar": "Did not match description"
+        "fiveStar": "W całości zgodny z opisem",
+        "fourStar": "W większości zgodny z opisem",
+        "threeStar": "Mniej więcej zgodny z opisem",
+        "twoStar": "Niezbyt zgodny z opisem",
+        "oneStar": "Całkowicie niezgodny z opisem"
     },
     "deliveryRatingKeys": {
-        "fiveStar": "Extremly fast",
-        "fourStar": "Relatively fast",
-        "threeStar": "Average",
-        "twoStar": "Slow",
-        "oneStar": "Terribly slow"
+        "fiveStar": "Bardzo szybko",
+        "fourStar": "W miarę szybko",
+        "threeStar": "Średnio",
+        "twoStar": "Wolno",
+        "oneStar": "Okropnie wolno"
     },
     "customerServiceRatingKeys": {
-        "fiveStar": "Excellent",
-        "fourStar": "Good",
-        "threeStar": "Average",
-        "twoStar": "Poor",
-        "oneStar": "Terrible"
+        "fiveStar": "Doskonale",
+        "fourStar": "Dobrze",
+        "threeStar": "Średnio",
+        "twoStar": "Kiepsko",
+        "oneStar": "Okropnie"
     },
     "transactions": {
         "Order": "Zamówienie",
@@ -458,7 +458,7 @@
         "DisputeTransactionResend": "Wyślij ponownie informację o rozpoczęciu sporu",
         "DisputeTransactionResendTooltip": "Jeśli arbiter nie otrzymał informacji o sporze kliknij ten przycisk, aby wysłać ją ponownie.",
         "sendMessagePlaceholder": "Wprowadź wiadomość...",
-        "DisputeInstructions": "To file a dispute for this transaction, type the reason for the dispute below, and check the Start a Dispute box. This will include the moderator in your conversation until the dispute is resolved. The moderator will make the final decision as to whether any funds are returned to you, and how much. The moderator's fee will be paid out of the funds you have already sent.",
+        "DisputeInstructions": "Aby rozpocząć spór do tej transakcji wpisz powód poniżej i zaznacz pole \"rozpocznij spór\". Arbiter dołączy do konwersacji na czas rozwiązywania sporu. Podejmie on także finalną decyzję czy zwrócić do Ciebie środki i w jakiej ilości. Prowizja arbitra zostanie pobrana z już wysłanych środków.",
         "SendMessage": "Wyślij",
         "CloseDispute": "Zakończ spór",
         "CloseDisputeResend": "Wyślij ponownie informację o zakończeniu sporu",
@@ -478,7 +478,7 @@
         "missingError": "Wypełnij poprawnie pola.",
         "serverError": "Nieprawidłowa odpowiedź serwera.",
         "userError": "Brak danych dla tego ID",
-        "userNotFoundError": "Dane tej osoby są obecnie niedostępne. Możliwe, że jest offline.",
+        "userNotFoundError": "Dane tej osoby są obecnie niedostępne, prawdopodobnie jest offline.",
         "notFoundError": "Nie można załadować danych dla:",
         "socketError": "URL dla WebSocket nieprawidłowy. Łączę z domyślnym adresem ws://localhost:18466",
         "contractError": "Nie można kupić tego przedmiotu",
@@ -495,11 +495,11 @@
     },
     "pageConnectingMessages": {
         "listingConnect": "Łączenie z ofertą ${listing}",
-        "listingFail": "Oferta, którą próbujesz zobaczyć jest obecnie offline",
-        "handleConnect": "Connecting to ${handle}",
-        "handleFail": "The page you're trying to view is currently offline",
-        "userConnect": "Connecting to ${guid}",
-        "userFail": "The page you're trying to view is currently offline"
+        "listingFail": "Oferta jest obecnie niedostępna",
+        "handleConnect": "Łączenie z ${handle}",
+        "handleFail": "Strona jest obecnie niedostępna",
+        "userConnect": "Łączenie z ${guid}",
+        "userFail": "Strona jest obecnie niedostępna"
     },
     "aboutSection": {
         "about": "<p>OpenBazaar to sieć osób, które kupują i sprzedają dobra oraz usługi bez pośredników, przy użyciu Bitcoina. Sieć ta jest zdecentralizowana i nie podlega żadnej organizacji.</p><p>Oprogramowanie jest otwarte, udostępniane na licencji MIT. Kod dostępny jest na <a href=\"https://github.com/OpenBazaar/\" target=\"_blank\">GitHubie</a>.</p><p>OpenBazaar to projekt społeczośniowy, zachęcamy do wejścia na nasz kanał <a href=\"https://slack.openbazaar.org/\" target=\"_blank\">Slack</a> odwiedzenia naszego <a href=\"https://www.reddit.com/r/openbazaar\" target=\"_blank\">subreddita</a>.</p><p>Jeśli potrzebujesz pomocy, przeczytaj <a href=\"https://blog.openbazaar.org/tag/tutorial/\" target=\"_blank\">poradnik</a> do OpenBazaar.</p><p>IJeśli nadaj masz jakieś pytania, kliknij <a href=\"https://openbazaar.zendesk.com/hc/en-us/articles/203219995-Question-not-answered-Read-this-post\" target=\"_blank\">support desk</a>tutaj.</p>",
@@ -575,8 +575,8 @@
         "Finished": "Gotowe"
     },
     "guidStillCreating": {
-        "HangTight": "Hang tight for a few...",
-        "YourPersonal": "Your personal keys and OpenBazaar ID are generating and should only take about 30 seconds to finish.\n\nYou'll be automatically connected to the network once the process is finished, so please hang tight.",
+        "HangTight": "Poczekaj chwilę...",
+        "YourPersonal": "Twoje osobiste klucze i ID OpenBazaar są generowane, to potrwa około 30 sekund,\n\nPo zakończeniu tego procesu zostaniesz automatycznie połączony z siecią.",
         "LookingFor": "Nie masz co robić? Zerknij na naszego<a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">bloga</a>."
     },
     "walletProviders": {
