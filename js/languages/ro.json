@@ -369,7 +369,7 @@
         "sortByStatus0": "Cumpărare (În așteptarea plății)",
         "sortByStatus1": "Gata pentru procesare (Plătită integral)",
         "sortByStatus2": "Confirmată/Trimisă",
-        "sortByStatus3": "Finisată (Fondurile Eliberate)",
+        "sortByStatus3": "Terminată (Fondurile Eliberate)",
         "sortByStatus4": "Dispută",
         "sortByStatus5": "Dispute Closed",
         "sortByStatus6": "Dispute Resolved",
@@ -380,7 +380,7 @@
         "OrderStatus0": "Cumpărare (În așteptarea plății)",
         "OrderStatus1": "Gata pentru procesare (Plătită integral)",
         "OrderStatus2": "Confirmată/Trimisă",
-        "OrderStatus3": "Finisată (Fondurile Eliberate)",
+        "OrderStatus3": "Terminată (Fondurile Eliberate)",
         "OrderStatus4": "Dispută",
         "OrderStatusopen": "Dispută",
         "OrderStatus5": "Dispută Închisă",
@@ -572,11 +572,11 @@
         "avatar": "Setați un Avatar",
         "chooseAvatar": "Selectare Avatar",
         "discoverCallOut": "Explorare Listări și Pagini pe OpenBazaar",
-        "Finished": "Finisat"
+        "Finished": "Terminat"
     },
     "guidStillCreating": {
         "HangTight": "Așteptați cîteva...",
-        "YourPersonal": "Cheile dvs. personale și OpenBazaar ID se generează și ar trebui să dureze doar aproximativ 30 de secunde pînă la finisare.\n\nVeți fi conectat automat la rețea odată ce procesul va fi finisat, deci vă rugăm răbdare.",
+        "YourPersonal": "Cheile dvs. personale și OpenBazaar ID se generează și ar trebui să dureze aproximativ 30 de secunde.\n\nVeți fi conectat automat la rețea odată ce procesul va fi terminat, deci vă rugăm să aveţi răbdare.",
         "LookingFor": "Căutați să faceți ceva între timp? Citiți <a class=\"js-externalLink\" href=\"https://blog.openbazaar.org/\">blogul OpenBazaar</a>."
     },
     "walletProviders": {
