@@ -96,7 +96,7 @@ module.exports = baseVw.extend({
 
     //when language is changed, re-render
     this.listenTo(options.model, 'change:language', function(){
-      this.render();
+      this.render(true);
     });
   },
 
@@ -135,6 +135,7 @@ module.exports = baseVw.extend({
 
   onChatHeadClick: function(vw) {
     this.openConversation(vw.model);
+    this.currentConversation = vw.model;
   },
 
   onSearchClick: function() {
@@ -142,7 +143,7 @@ module.exports = baseVw.extend({
     this.slideOut();
   },
 
-  openConversation: function(model) {
+  openConversation: function(model, refresh) {
     // Model is the model of the user you want to converse with.
     // When calling this function from inside our view, we are passing
     // in a chatConversation model, but passing in a profile model should probably
@@ -169,7 +170,7 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       // if we were already chatting with this person and that
       // conversation is just hidden, show it
-      if (this.chatConversationVw.model.get('guid') === model.get('guid')) {
+      if (this.chatConversationVw.model.get('guid') === model.get('guid') && !refresh) {
         this.$convoContainer.removeClass('chatConversationContainerHide');
         return;
       } else {
@@ -415,13 +416,22 @@ module.exports = baseVw.extend({
     baseVw.prototype.remove.apply(this, arguments);
   },
 
-  render: function() {
+  render: function(refreshConversations) {
+    var self = this;
     loadTemplate('./js/templates/chat.html', (tmpl) => {
       this.$el.html(tmpl());
 
       this.$chatHeadsContainer = this.$('.chatConversationHeads');
       this.$convoContainer = this.$('.chatConversationContainer');
       this.$searchField = this.$('#chatSearchField');
+      if(refreshConversations){
+        //re-render the conversations
+        self.$chatHeadsContainer.html(
+            self.chatHeadsVw.render().el
+        );
+        //re-open the current conversation if one exists
+        self.currentConversation && self.openConversation(self.currentConversation, true);
+      }
     });
 
     return this;
