@@ -181,37 +181,37 @@ module.exports = baseVw.extend({
 
       switch(notif.type) {
         case "follow":
-          new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
+          new Notification(window.polyglot.t('NotificationFollow', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
         case "dispute_open":
-          new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
+          new Notification(window.polyglot.t('NotificationDispute', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
         case "new order":
-          new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
+          new Notification(window.polyglot.t('NotificationNewOrder', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
         case "payment received":
-          new Notification(username + " " + window.polyglot.t('NotificationPaymentReceived'), {
+          new Notification(window.polyglot.t('NotificationPaymentReceived', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
         case "order confirmation":
-          new Notification(username + " " + window.polyglot.t('NotificationOrderConfirmed'), {
+          new Notification(window.polyglot.t('NotificationOrderConfirmed', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
         case "rating received":
-          new Notification(username + " " + window.polyglot.t('NotificationRatingRecieved'), {
+          new Notification(window.polyglot.t('NotificationRatingRecieved', {name: username}), {
             icon: avatar,
             silent: true
           });

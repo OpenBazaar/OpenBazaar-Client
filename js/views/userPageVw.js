@@ -848,7 +848,6 @@ module.exports = baseVw.extend({
           model.set('imageExtension', "&guid=" + model.get('vendor_offer').listing.id.guid);
         }
         
-        //model may arrive empty, set this flag to trigger a change event
         model.updateAttributes(afterUpdate);
         onSucceed && onSucceed(model, response);
 

@@ -22,12 +22,12 @@
   </div>
   <div id="messageModal" class="modal modal-opaque js-messageModal hide">
     <!-- modal for messages -->
-    <div class="modal-child modal-childMain color-primary custCol-secondary custCol-text">
-      <div class="js-messageModalTitleWrapper">
-        <p class="js-messageModal-title h6 homeModal-heroText fancy-heading"></p>
+    <div class="modal-child modal-childMain color-primary custCol-secondary padding20 custCol-text">
+      <div class="txt-center row10 js-messageModalTitleWrapper">
+        <h1 class="js-messageModal-title"></h1>
       </div>
-      <div class="js-messageModalMsgWrapper">
-        <p class="padding20 fontSize14 js-messageModal-message"></p>
+      <div class="txt-center row10 js-messageModalMsgWrapper">
+        <p class="fontSize14 js-messageModal-message"></p>
         <div class="bar barFlush bottomBar js-messageModal-btnBar hide">
           <a class="btn btn-bar btn-half borderRight custCol-border textOpacity90 custCol-primary js-messageModal-btn1">
           </a>
@@ -38,14 +38,6 @@
       <div class="btn-corner btn-cornerTR btn-cornerTROutR btn-flushTop js-closeIndexModal">
         <h2 class="ion-android-close custCol-text clickable"></h2>
       </div>
-    </div>
-  </div>
-  <div id="loadingModal" class="modal modal-opaque js-loadingModal top0">
-    <div class="spinner-with-logo fullCentered">
-      <i class="ion-android-sync spinner fontSize30"></i>
-    </div>
-    <div class="rowTop20">
-      <a class="btn btn-txt btn-corner btn-cornerTR js-indexReload"><i class="ion-android-sync"></i> Reload</a>
     </div>
   </div>
   <div class="modal modal-opaque hide js-loadingMessageModal">
@@ -81,6 +73,15 @@
   </div>
   <div id="statusBar"></div>
   <div id="pageNav" class="bar navBar navBar-main custCol-secondary padding0"></div>
+  <!-- the loading modal must be on top of the page nav or the reload button is hidden -->
+  <div id="loadingModal" class="modal modal-opaque js-loadingModal top0">
+    <div class="spinner-with-logo fullCentered">
+      <i class="ion-android-sync spinner fontSize30"></i>
+    </div>
+    <div class="rowTop20">
+      <a class="btn btn-txt btn-corner btn-cornerTR js-indexReload"><i class="ion-android-sync"></i> Reload</a>
+    </div>
+  </div>
 
   <!--TODO: modularize non-modular scripts -->
   <script src="js/utils/list.min.js"></script>

@@ -15,9 +15,9 @@ module.exports = {
     myPage:          'h',
     customizePage:   'e',
     create:          'n',
-    purchases:       'r',
-    sales:           't',
-    cases:           'y',
+    purchases:       't',
+    sales:           'y',
+    cases:           'j',
     settings:        'g',
     addressBar:      'l'
   }
