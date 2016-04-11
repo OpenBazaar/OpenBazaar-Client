@@ -336,7 +336,7 @@ app.on('ready', function() {
     "title": "OpenBazaar",
     "frame": false,
     "icon": "imgs/openbazaar-icon.png",
-    "title-bar-style": "hidden"
+    "titleBarStyle": "hidden"
   });
 
   // and load the index.html of the app.
