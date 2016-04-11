@@ -507,7 +507,6 @@ form {
   box-sizing: border-box;
   padding: 34px 32px;
   cursor: pointer;
-  width: 100%;
   height: 340px;
   position: relative;
 }
