@@ -488,8 +488,10 @@ module.exports = baseVw.extend({
   navMaxClick: function(){
     if(this.currentWindow.isMaximized()){
       this.currentWindow.unmaximize();
+      $('.js-navMax').attr('data-tooltip', window.polyglot.t('Maximize'));
     } else {
       this.currentWindow.maximize();
+      $('.js-navMax').attr('data-tooltip', window.polyglot.t('Restore'));
     }
   },
 
