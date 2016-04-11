@@ -507,7 +507,6 @@ form {
   box-sizing: border-box;
   padding: 34px 32px;
   cursor: pointer;
-  width: 317px;
   height: 340px;
   position: relative;
 }
@@ -840,10 +839,6 @@ label.fieldItem {
 
 .thumbnail-large:hover .userPageEditBtn {
   display: block;
-}
-
-.thumbnail-largeTrimmed {
-  height: 70px;
 }
 
 .thumbnail-large-slim {
