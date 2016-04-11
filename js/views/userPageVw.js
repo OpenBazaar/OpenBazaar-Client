@@ -694,6 +694,7 @@ module.exports = baseVw.extend({
     
     var self = this;
     var select = this.$el.find('.js-categories');
+    var selectOptions = [];
     skipNSFWmodal = skipNSFWmodal || this.skipNSFWmodal;
     model = model || [];
     __.each(model, function (arrayItem) {
@@ -713,10 +714,7 @@ module.exports = baseVw.extend({
       arrayItem.onUserPage = true;
       arrayItem.skipNSFWmodal = skipNSFWmodal;
       if (arrayItem.category != "" && self.$el.find('.js-categories option[value="' + arrayItem.category + '"]').length == 0){
-        var opt = document.createElement('option');
-        opt.value = arrayItem.category;
-        opt.innerHTML = arrayItem.category;
-        select.append(opt);
+        selectOptions[arrayItem.category] = true;
       }
       if(self.options.ownPage === true){
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash;
@@ -724,6 +722,14 @@ module.exports = baseVw.extend({
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
+    
+    Object.keys(selectOptions).sort().forEach(function(selectOption) {
+      var opt = document.createElement('option');
+      opt.value = selectOption;
+      opt.innerHTML = selectOption;
+      select.append(opt);
+    });
+    
     this.itemList = new itemListView({
       model: model, 
       el: '.js-list3', 
@@ -732,6 +738,7 @@ module.exports = baseVw.extend({
       userModel: this.options.userModel, 
       category: this.$el.find('.js-categories').val()
     });
+    
     this.registerChild(this.itemList);
 
     this.$('.js-listingCount').html(model.length);
