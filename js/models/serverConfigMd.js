@@ -127,11 +127,13 @@ module.exports = Backbone.Model.extend({
   },
 
   getHeartbeatSocketUrl: function() {
-    return 'ws://' + this.get('server_ip') + ':' + this.get('heartbeat_socket_port');
+    var prefix = this.get('SSL') ? "wss" : "ws";
+    return prefix + '://' + this.get('server_ip') + ':' + this.get('heartbeat_socket_port');
   },
 
   getApiSocketUrl: function() {
-    return 'ws://' + this.get('server_ip') + ':' + this.get('api_socket_port');
+    var prefix = this.get('SSL') ? "wss" : "ws";
+    return prefix + '://' + this.get('server_ip') + ':' + this.get('api_socket_port');
   },
 
   isLocalServer: function() {

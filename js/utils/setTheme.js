@@ -74,6 +74,7 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .chosen-results li { border-bottom: solid 1px " + secondaryColor + "}" +
       "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-single, #ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li { color:" + textColor + " }" +
       "#ov1 #userPage .fieldItem .fieldItem-selectWrapper .chosen-drop .chosen-results li.highlighted { background:" + secondaryColor + " }" +
+      "#ov1 #userPage .fieldItem .fieldItem-selectWrapper option { background:" + primaryColor + " }" +
       "#ov1 #userPage .custCol-primary-darken { background: " + shadeColor2(primaryColor, -0.15) + ";}" +
       "#ov1 #userPage .custCol-secondary-darken { background: " + shadeColor2(secondaryColor, -0.15) + ";}" +
       "#ov1 #userPage .custCol-text, #ov1 #userPage .search-field input { color: " + textColor + ";}" +
@@ -86,18 +87,24 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage .modal-childMain { box-shadow: 0px 0px 15px " + shadeColor2(backgroundColor, -0.15)  + ";}" +
       "#ov1 #userPage #overlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 0.70);}";
       
-    // Medium Editor stuffs
+    // Medium Editor
     customStyleTag.innerHTML += 
       "#ov1 #userPage .medium-editor-toolbar li button { background-color: " + secondaryColor + "; color: " + textColor + "; border: 0}" +
       "#ov1 #userPage .medium-editor-toolbar li button:hover { opacity: .75}" +
       "#ov1 #userPage .medium-editor-toolbar:after { border-top-color: " + secondaryColor + "; border-left-color: transparent; border-right-color: transparent}";
 
-    // colorbox stuffs
+    // colorbox
     customStyleTag.innerHTML +=
       "#ov1 #userPage #cboxContent { background-color: " + primaryColor + "; color: " + textColor + ";}" +
       "#ov1 #userPage #cboxCurrent { color: " + textColor + ";}" +
       "#ov1 #userPage #cboxClose { background-color: " + secondaryColor + "; color: " + textColor + "}" +
       "#ov1 #userPage #cboxOverlay { background-color: rgba(" + opaque.r + ", " + opaque.g + ", " + opaque.b + ", 1);}";
+
+  // taggle
+     customStyleTag.innerHTML +=
+      "#ov1 #userPage .taggle_list .taggle { background-color: " + secondaryColor + "; color: " + textColor + ";}" +
+      "#ov1 #userPage .taggle_list .taggle .taggle_text { color: " + textColor + ";}" +
+      "#ov1 #userPage .taggle_list .taggle .close { color: " + textColor + ";}";
 
   document.body.appendChild(customStyleTag);
 };

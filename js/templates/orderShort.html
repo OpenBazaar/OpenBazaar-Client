@@ -5,7 +5,7 @@
         <div class="clearFix">
           <div class="floatLeft noOverflow marginBottom2 marginRight5 textSize15px js-searchOrderID js-orderShort">
             <span class="noOverflow letterSpacing0"><%= ob.order_date %> — </span>
-            <span class="clickable hoverUnderline "><%= polyglot.t('Order') %> #<%= ob.order_id %></span>
+            <span class="clickable hoverUnderline "><%= polyglot.t('transactions.Order') %> #<%= ob.order_id %></span>
           </div>
         </div>
         <div class="flexCol-8 clearFix marginTop2">
@@ -39,18 +39,18 @@
             <tr>
               <td class="textOpacity50 padding2">
                 <% if(ob.vendor){ %>
-                  <%= polyglot.t('transactions.SoldBy') %> 
+                  <%= polyglot.t('transactions.Vendor') %> 
                 <% } else if(ob.buyer) { %>
-                  <%= polyglot.t('transactions.PurchasedBy') %>
+                  <%= polyglot.t('transactions.Buyer') %>
                 <% } %>                
               </td>
               <td class="padding2">
                 <% if(ob.vendor){ %>
-                  <a href="#userPage/<%= ob.vendor %>" class="textOpacity75">               
+                  <a href="ob://<%= ob.vendor %>" class="textOpacity75">
                       <%= ob.vendor %>
                   </a>
                 <% } else if(ob.buyer) { %>
-                  <a href="#userPage/<%= ob.buyer %>" class="textOpacity75"><%= ob.buyer %></a>
+                  <a href="ob://<%= ob.buyer %>" class="textOpacity75"><%= ob.buyer %></a>
                 <% } %>                
               </td>
             </tr>

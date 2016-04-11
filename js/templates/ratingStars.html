@@ -1,7 +1,7 @@
 <% for (var i=0; i < ob.rating; i++) { %>
 <div class="inlineBlock positionRelative">
   <% if (Math.floor(ob.rating) === i) { %>
-    <span class="ion-android-star textOpacity35"></span>
+    <span class="ion-android-star unfilled"></span>
     <span class="ion-android-star textOpacity1 positionAbsolute noOverflow" style="top:0;bottom:0;left:0;right:0;width:<%= ((ob.rating % 1) * 100) + '%'%>"></span>
   <% } else { %>
     <span class="ion-android-star textOpacity1"></span>
@@ -10,6 +10,6 @@
 <% } %>
 <% for (var i=0; i < 5 - ob.rating; i++) { %>
 <div class="inlineBlock positionRelative">
-  <span class="ion-android-star textOpacity35"></span>
+  <span class="ion-android-star unfilled"></span>
 </div>
 <% } %>

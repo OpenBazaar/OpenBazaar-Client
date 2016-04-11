@@ -28,13 +28,13 @@ module.exports = window.Backbone.Model.extend({
       if (!response.vendor_offer.listing.shipping) {
         response.vendor_offer.listing.shipping = {
           "shipping_regions": [
-            "UNITED_STATES"
+            ""
           ],
           "est_delivery": {
             "international": "",
             "domestic": ""
           },
-          "shipping_origin": "UNITED_STATES",
+          "shipping_origin": "",
           "flat_fee": {
             "fiat": {
               "price": {
@@ -115,11 +115,20 @@ module.exports = window.Backbone.Model.extend({
     } else {
       response.invalidData = true;
     }
+    
+    if(response.dispute_resolution && response.dispute_resolution.resolution){
+      //if a resolution exists, make sure both payouts have values
+      response.dispute_resolution.resolution.buyer_payout = response.dispute_resolution.resolution.buyer_payout || 0;
+      response.dispute_resolution.resolution.vendor_payout = response.dispute_resolution.resolution.vendor_payout || 0;
+    }
 
     response.serverUrl = this.serverUrl;
-    response.status = this.status;
-    response.bitcoinValidationRegex = this.bitcoinValidationRegex;
+    response.bitcoinValidationRegex = config.bitcoinValidationRegex;
     response.transactionType = this.transactionType;
+    response.userGuid = this.userGuid;
+
+    response.vendorAvatarURL = localStorage.getItem('userAvatar-'+response.vendor_offer.listing.id.guid);
+    response.buyerAvatarURL = localStorage.getItem('userAvatar-'+response.buyer_order.order.id.guid);
 
     return response;
   },
@@ -151,7 +160,7 @@ module.exports = window.Backbone.Model.extend({
 
       var convertShipping = function (btAve) {
         if (self.get('buyer_order').order.shipping.country == self.get('vendor_offer').listing.shipping.shipping_origin) {
-          newAttributes.shippingType = "Domestic Shipping";
+          newAttributes.shippingType = polyglot.t('DomesticShippingPrice');
           if (self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic) {
             convertToUserCurrency(self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.domestic,
                 btAve,
@@ -168,7 +177,7 @@ module.exports = window.Backbone.Model.extend({
             convertTotal();
           }
         } else {
-          newAttributes.shippingType = "International Shipping";
+          newAttributes.shippingType = polyglot.t('InternationalShippingPrice');
           if (self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international) {
             convertToUserCurrency(self.get('vendor_offer').listing.shipping.flat_fee.fiat.price.international,
                 btAve,
@@ -213,12 +222,11 @@ module.exports = window.Backbone.Model.extend({
     this.userCurrencyCode = options.cCode;
     this.userBTCAve = options.btAve;
     this.serverUrl = options.serverUrl;
-    this.status = options.status;
-    this.bitcoinValidationRegex = options.bitcoinValidationRegex;
     this.transactionType = options.transactionType;
     //this.countries = new countriesMd();
     //this.countryArray = this.countries.get('countries');
     this.avatarURL = options.avatarURL;
+    this.userGuid = options.userGuid;
   }
 
 });

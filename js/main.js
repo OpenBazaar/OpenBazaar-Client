@@ -3,13 +3,15 @@ var App = require('./App'),
 
 var __ = window.__ = require('underscore'),
     Backbone = require('backbone'),
-    $ = require('jquery');
+    $ = require('jquery'),
+    Config = require('./config');
 Backbone.$ = $;
 //add to global scope for non-modular libraries
 window.Backbone = Backbone;
 window.$ = $;
 window.jQuery = $;
 window.Backbone.$ = $;
+window.config = Config;
 window.focused = true;
 
 // we need to know this for notifications
@@ -64,7 +66,8 @@ var Polyglot = require('node-polyglot'),
     after401LoginRequest;
 
 //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
-window.lang = user.get("language");
+//retrieve the stored value, since user is a blank model at this point
+window.lang = localStorage.getItem('lang') || "en-US";
 
 //put polyglot in the window so all templates can reach it
 window.polyglot = new Polyglot({locale: window.lang});
@@ -81,6 +84,7 @@ window.polyglot = new Polyglot({locale: window.lang});
 user.on('change:language', function(md, lang) {
   window.lang = lang;
   extendPolyglot(lang);
+  localStorage.setItem('lang', lang);
 });
 
 //keep user and profile urls synced with the server configuration
@@ -111,13 +115,45 @@ if(platform === "linux") {
 }
 
 //open external links in a browser, not the app
-$('body').on('click', '.js-externalLink, .js-externalLinks a, .js-listingDescription a', function(e){
-  e.preventDefault();
-  var extUrl = $(this).attr('href');
-  if (!/^https?:\/\//i.test(extUrl)) {
-    extUrl = 'http://' + extUrl;
+$('body').on('click', 'a', function(e){
+  var targUrl = $(e.target).closest("a").attr("href") || $(e.target).text(),
+      linkPattern = /[a-zA-Z]+:\/\//; //find any text:// in link. It may not start at the first character of href
+
+  if(targUrl.startsWith('ob')){
+    e.preventDefault();
+    app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
+      Backbone.history.navigate(route, {trigger:true});
+    });
+  } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
+    e.preventDefault();
+
+    if (!/^https?:\/\//i.test(targUrl)) {
+      targUrl = 'http://' + targUrl;
+    }
+    require("shell").openExternal(targUrl);
+  } else if ($(e.target).closest("a").attr("href") && !targUrl.startsWith('#')){ //internal links should start with #
+    e.preventDefault(); //just ignore any anchor with an href that is not a valid internal link
   }
-  require("shell").openExternal(extUrl);
+});
+
+$(document).on('mouseenter',
+  `.js-userPageAboutSection a:not(.tooltip),
+   .js-item .js-description a:not(.tooltip)`,
+  function(e) {
+    var thisHref = $(this).attr('href'),
+        linkPattern = /^[a-zA-Z]+:\/\//;
+    if(thisHref && linkPattern.test(thisHref)){
+      $(this).attr({
+        'data-tooltip': thisHref,
+        'data-href-tooltip': true
+      }).addClass('tooltip');
+    }
+  });
+
+$(document).on('mouseleave', 'a[data-href-tooltip]', function(e) {
+  $(this).removeAttr('data-tooltip')
+    .removeAttr('data-href-tooltip')
+    .removeClass('tooltip');
 });
 
 //record changes to the app state
@@ -148,46 +184,34 @@ $('body').on('keypress', 'input', function(event) {
 });
 
 //keyboard shortucts
-window.keyShortcuts = {
-  discover:        'd',
-  myPage:          'h',
-  customizePage:   'e',
-  create:          'n',
-  purchases:       '1',
-  sales:           '2',
-  cases:           '3',
-  settings:        'g',
-  addressBar:      'l'
-}
-
 $(window).bind('keydown', function(e) {
-  if (e.ctrlKey || e.metaKey) {
+  if ((e.ctrlKey || e.metaKey) && !e.altKey) { //test for alt key to prevent international keyboard issues
 		var route = null,
         char = String.fromCharCode(e.which).toLowerCase();
 
 		switch (char) {
-			case keyShortcuts.discover:
+			case config.keyShortcuts.discover:
 				route = 'home';
 				break;
-			case keyShortcuts.myPage:
+			case config.keyShortcuts.myPage:
 				route = 'userPage';
 				break;
-			case keyShortcuts.customizePage:
+			case config.keyShortcuts.customizePage:
 				route = 'userPage/' + user.get('guid') + '/customize';
 				break;
-			case keyShortcuts.create:
+			case config.keyShortcuts.create:
 				route = 'userPage/' + user.get('guid') + '/listingNew';
 				break;
-			case keyShortcuts.purchases:
+			case config.keyShortcuts.purchases:
 				route = 'transactions/purchases';
 				break;
-			case keyShortcuts.sales:
+			case config.keyShortcuts.sales:
 				route = 'transactions/sales';
 				break;
-			case keyShortcuts.cases:
+			case config.keyShortcuts.cases:
 				route = 'transactions/cases';
 				break;
-			case keyShortcuts.settings:
+			case config.keyShortcuts.settings:
 				route = 'settings';
 				break;
 		}
@@ -200,7 +224,7 @@ $(window).bind('keydown', function(e) {
 		}
 
     // Select all text in address bar
-    if (char === keyShortcuts.addressBar) {
+    if (char === config.keyShortcuts.addressBar) {
       // Select all text in address bar
       $('.js-navAddressBar').select();
     }
@@ -290,8 +314,14 @@ var loadProfile = function(landingRoute, onboarded) {
             window.bitCoinPriceChecker = setInterval(function () {
               setCurrentBitCoin(model.get('currency_code'), user);
             }, 54000000);
+          },
+          error: function(model, response){
+            console.log(response);
+            alert("Your settings could not be loaded");
           }
         });
+      } else {
+        alert("Your profile could not be loaded.");
       }
     }
   });
@@ -331,7 +361,7 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
-    onboardingModal && onboardingModal.remove()
+    onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
     $loadingModal.removeClass('hide');
@@ -426,13 +456,19 @@ heartbeat.on('message', function(e) {
 
           app.login().done(function(data) {
             if (data.success) {
-              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile').done(function(profile) {
-                if (__.isEmpty(profile)) {
-                  launchOnboarding(guidCreating = $.Deferred().resolve().promise());
-                } else {
-                  loadProfile();
-                }
-              });
+              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile')
+                  .done(function(profile) {
+                    if (__.isEmpty(profile)) {
+                      launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+                    } else {
+                      loadProfile();
+                    }
+                  })
+                  .always(function(data, textStatus){
+                    if(textStatus == 'parsererror'){
+                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                    }
+                  });
             } else {
               launchServerConnect();
             }

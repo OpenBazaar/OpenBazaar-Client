@@ -1,9 +1,8 @@
+<!-- <%= ob.message_type %> -->
 <% if (ob.message_type == "DISPUTE_OPEN" || ob.message_type == "dispute_open") { %>
-<hr>
-<div class="pad10"><%= polyglot.t('transactions.StartDisputeFlag') %></div>
-<hr>
+<div class="padding12 textOpacity75 borderBottom width100 borderTopDashed borderBottomDashed custCol-border alignCenter"><%= polyglot.t('transactions.StartDisputeFlag') %></div>
 <% } %>
-<div class="chatConversationMessageLine <% if(ob.message_type == "ORDER") { %>padding2015 borderBottom1 custCol-border<% } %>">
+<div class="chatConversationMessageLine <% if(ob.message_type == "ORDER" || ob.message_type == "DISPUTE_OPEN" || ob.message_type == "dispute_open") { %>padding2015 borderBottom1 custCol-border<% } %>">
     <div class="flexRow">
         <div class="chatConversationMessageTimestamp paddingLeft2 <% if (ob.outgoing) { %>width100 alignRight<% } %>">
             <div><%= ob.moment(new Date(ob.timestamp * 1000)).format('MMM D, h:mm A') %></div>
@@ -17,11 +16,11 @@
             </a>
             <% if(ob.guid == ob.moderatorGuid || ob.sender && ob.sender == ob.moderatorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Moderator') %></div>
+                <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %>"><%= polyglot.t('Moderator') %></div>
             </div>
             <% } else if(ob.guid == ob.vendorGuid || ob.sender && ob.sender == ob.vendorGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
-                <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Seller') %></div>
+                <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Vendor') %></div>
             </div>
             <% } else if(ob.guid == ob.buyerGuid || ob.sender && ob.sender == ob.buyerGuid){ %>
             <div class="chatConversationMessageBody marginRight2 flexSizeFixed">
@@ -30,7 +29,7 @@
             <% } %>
         <% } %>
         
-        <div class="chatConversationMessageBody flexExpand">
+        <div class="chatConversationMessageBody flexExpand flexContainer">
             <% if (ob.outgoing) { %>
             <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %> floatRight"><%= ob.sanitizedMsg %></div>
             <% } else { %>
@@ -41,11 +40,11 @@
         <% if (ob.outgoing) { %>
             <% if(ob.transactionType == "cases"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Moderator') %></div>
+                    <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_CLOSE') { %>custCol-secondary<% } %>"><%= polyglot.t('Moderator') %></div>
                 </div>
                 <% } else if(ob.transactionType == "sales"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">
-                    <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Seller') %></div>
+                    <div class="inner <% if(ob.message_type == 'ORDER' || ob.message_type == 'DISPUTE_OPEN') { %>custCol-secondary<% } %>"><%= polyglot.t('transactions.Vendor') %></div>
                 </div>
                 <% } else if(ob.transactionType == "purchases"){ %>
                 <div class="chatConversationMessageBody marginLeft2 flexSizeFixed">

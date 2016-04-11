@@ -227,13 +227,13 @@ module.exports = baseVw.extend({
     });
 
     this.listenTo(window.obEventBus, "itemShortEdit", function(options){
-      this.setItem(options.contract_hash, function(){
+      this.setItem(options.contract_hash, null, function(){
         self.editItem();
       });
     });
 
     this.listenTo(window.obEventBus, "itemShortClone", function(options){
-      this.setItem(options.contract_hash, function(){
+      this.setItem(options.contract_hash, null, function(){
         self.cloneItem();
       });
     });    
@@ -341,7 +341,7 @@ module.exports = baseVw.extend({
     "use strict";
     var self = this,
         blocked = this.options.userModel.get('blocked_guids') || [],
-        isBlocked = blocked.indexOf(this.pageID) !== -1 ? true : false;
+        isBlocked = blocked.indexOf(this.pageID) !== -1;
 
     //add blocked status to model
     this.model.set('isBlocked', isBlocked);
@@ -410,15 +410,6 @@ module.exports = baseVw.extend({
       });
 
       $('.js-userAbout').html(about);
-
-      self.$el.find('.js-userAbout a').on('click', function(e){
-        e.preventDefault();
-        var extUrl = $(this).attr('href');
-        if (!/^https?:\/\//i.test(extUrl)) {
-          extUrl = 'http://' + extUrl;
-        }
-        require("shell").openExternal(extUrl);
-      });
     });
 
     return this;
@@ -527,6 +518,7 @@ module.exports = baseVw.extend({
     //hide all the state controls
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
+    this.$el.find('.js-unfollow').removeClass('confirm');
     this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     document.getElementById('obContainer').classList.remove("noScrollBar");
@@ -578,8 +570,8 @@ module.exports = baseVw.extend({
   },
 
   toggleFollowButtons: function(followed) {
-    var followBtn = this.$el.find('.js-follow'),
-        unfollowBtn = this.$el.find('.js-unfollow');
+    var followBtn = this.$('.js-follow'),
+        unfollowBtn = this.$('.js-unfollow');
     if(followed === true){
       followBtn.addClass('hide');
       unfollowBtn.removeClass('hide');
@@ -618,14 +610,15 @@ module.exports = baseVw.extend({
     this.following.fetch({
       data: self.userProfileFetchParameters,
       success: function(model){
+        var followingArray = model.get('following');
         if (self.isRemoved()) return;
 
         if(self.options.ownPage === true){
-          self.ownFollowing = model.get('following') || [];
+          self.ownFollowing = followingArray || [];
           self.ownFollowing = self.ownFollowing.map(function(followingObject){
             return followingObject.guid;
           });
-          self.renderFollowing(model.get('following'));
+          self.renderFollowing(followingArray);
           //call followers 2nd so list of following is available
           self.fetchFollowers();
         } else {
@@ -639,9 +632,14 @@ module.exports = baseVw.extend({
             self.ownFollowing = self.ownFollowing.map(function(followingObject){
               return followingObject.guid;
             });
-            self.renderFollowing(model.get('following'));
+            self.renderFollowing(followingArray);
             //call followers 2nd so list of following is available
             self.fetchFollowers();
+            //mark whether page is following you
+            if(Boolean(__.findWhere(followingArray, {guid: self.userID}))){
+              self.$('.js-followsMe').removeClass('hide')
+            }
+
           }).fail(function(jqXHR, status, errorThrown){
             if (self.isRemoved()) return;
             console.log(jqXHR);
@@ -792,12 +790,6 @@ module.exports = baseVw.extend({
     
     this.$('.js-userFollowingCount').html(model.length);
 
-    if (__.findWhere(model, { guid: this.model.get('user').guid })) {
-      this.$('.js-followsMe').removeClass('hide');
-    } else {
-      this.$('.js-followsMe').addClass('hide');
-    }
-
     if (model.length) {
       this.followingSearch = new window.List('searchFollowing', {
         valueNames: ['js-searchName', 'js-searchHandle'],
@@ -807,13 +799,13 @@ module.exports = baseVw.extend({
 
     this.listenTo(this.followerList, 'usersAdded', ()=>{
       var searchTerms = this.$('#inputFollowing').val();
-      this.followingSearch.reIndex()
+      this.followingSearch.reIndex();
       searchTerms && this.followingSearch.search(searchTerms);
     });
   },
 
 
-  setItem: function(hash, onSucceed){
+  setItem: function(hash, onSucceed, afterUpdate){
     "use strict";
     var self = this;
     this.item = new itemModel({
@@ -855,9 +847,10 @@ module.exports = baseVw.extend({
         if (self.options.ownPage === false){
           model.set('imageExtension', "&guid=" + model.get('vendor_offer').listing.id.guid);
         }
-        //model may arrive empty, set this flag to trigger a change event
-        model.set({fetched: true});
-        onSucceed(model, response);
+        
+        model.updateAttributes(afterUpdate);
+        onSucceed && onSucceed(model, response);
+
       },
       error: function(model, response){
         if (self.isRemoved()) return;
@@ -884,12 +877,12 @@ module.exports = baseVw.extend({
     );
   },
 
-  renderItemEdit: function(model, clone){
+  renderItemEdit: function(useCurrentItem, clone){
     var self = this,
         hash = "";
-    if(model) {
+    if(useCurrentItem) {
       //if editing existing product, clone the model
-      this.itemEdit = model.clone();
+      this.itemEdit = this.item.clone();
 
       if (clone) {
         this.itemEdit.unset('id');
@@ -909,7 +902,8 @@ module.exports = baseVw.extend({
       this.itemEditView.remove();
     }
     this.itemEditView = new itemEditVw({model:this.itemEdit});
-    this.$('.js-list5').html(this.itemEditView.render().el);
+    this.$('.js-list5').html('');
+    this.$('.js-list5').append(this.itemEditView.$el);
     this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
@@ -1306,7 +1300,7 @@ module.exports = baseVw.extend({
   },
 
   editItem: function(clone){
-    this.renderItemEdit(this.item, clone);
+    this.renderItemEdit(true, clone);
     this.setControls("listingEdit");
     this.lastTab = "listingOld";
   },
@@ -1374,6 +1368,7 @@ module.exports = baseVw.extend({
     var self = this,
         storeWizardModel = new Backbone.Model();
     storeWizardModel.set(this.model.attributes);
+    $('#modalHolder').fadeIn(300);
     this.storeWizardView = new storeWizardVw({
       model:storeWizardModel,
       parentEl: '#modalHolder',
@@ -1390,13 +1385,26 @@ module.exports = baseVw.extend({
   },
 
   followUserClick: function(e){
-    $(e.target).addClass('loading');
-    this.followUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    var $targ = $(e.target).closest('.js-follow');
+
+    $targ.addClass('loading');
+    this.followUser({'guid': this.pageID}).fail(() => {
+      $targ.removeClass('loading');
+    });
   },
 
   unfollowUserClick: function(e){
-    $(e.target).addClass('loading');
-    this.unfollowUser({'guid': this.pageID}).always(() => $(e.target).removeClass('loading'));
+    var $targ = $(e.target).closest('.js-unfollow');
+
+    if($targ.hasClass('confirm')){
+      $targ.addClass('loading').removeClass('confirm');
+      this.unfollowUser({'guid': this.pageID}).fail(() => {
+        $(e.target).removeClass('loading')
+      });
+    } else {
+      $targ.addClass('confirm');
+    }
+
   },
 
   moreButtonsOwnPageClick: function(){

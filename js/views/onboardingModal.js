@@ -304,6 +304,7 @@ module.exports = baseModal.extend({
 
     var nsfwVal = this.$("input[name='nsfw']:checked").val();
     this.model.set('nsfw', nsfwVal);
+    localStorage.setItem('NSFWFilter',  nsfwVal); //the server ignores the nsfw value currently
 
     $.each(this.model.attributes,
         function(i,el) {
@@ -545,7 +546,7 @@ module.exports = baseModal.extend({
             deferred.reject();
           }
         });
-      }
+      };
       
       reader.readAsDataURL(file)
     };
@@ -553,7 +554,7 @@ module.exports = baseModal.extend({
     xhr.onerror = function (e) {
       console.log(e);
       deferred.reject();
-    }
+    };
 
     xhr.send();
 

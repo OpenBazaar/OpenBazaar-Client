@@ -32,6 +32,10 @@ module.exports = baseVw.extend({
       this.render();
     }
 
+    //store avatar reference in localStorage for other views
+    var localAvatar = this.model.get('avatarURL') || this.model.get('serverUrl')+"get_image?hash="+this.model.avatar_hash+"&guid="+this.model.get('guid');
+    localAvatar && localStorage.setItem('userAvatar-'+this.model.get('guid'), localAvatar);
+
     this.listenTo(window.obEventBus, "followUser", function(options){
       if (options.view === this || options.guid !== this.model.get('guid')) {
         return;

@@ -74,6 +74,8 @@ module.exports = baseVw.extend({
     var anotherHashArray = __.clone(self.model.get("vendor_offer").listing.item.image_hashes);
     self.model.set("imageHashesToUpload", anotherHashArray);
     self.model.set('expTime', self.model.get('vendor_offer').listing.metadata.expiry.replace(" UTC", ""));
+
+    this.listenTo(this.model, 'change:priceSet', this.render());
   },
 
   render: function(){
@@ -96,13 +98,15 @@ module.exports = baseVw.extend({
       });
 
       setTimeout(() => {
+        /*
         var editor = new MediumEditor('#inputDescription', {
           placeholder: {
             text: window.polyglot.t('DescriptionPlaceholder')
           },
           toolbar: {
             imageDragging: false,
-            sticky: true
+            sticky: true,
+            buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
           },
           paste: {
             cleanPastedHTML: true,
@@ -120,6 +124,7 @@ module.exports = baseVw.extend({
         });
 
         editor.subscribe('blur', self.validateDescription);
+        */
 
         //set chosen inputs
         this.$('.chosen').chosen({width: '100%'}).change(function(e){
@@ -514,6 +519,15 @@ module.exports = baseVw.extend({
         submitForm = this.$el.find('#contractForm')[0],
         keywordsArray = this.inputKeyword.getTagValues(),
         shipsToInput = this.$('#shipsTo');
+
+    validateMediumEditor.checkVal(this.$('#inputDescription'));
+
+    if(keywordsArray.length < 1){
+      this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
+      return $.Deferred().reject('failed form validation').promise();
+    } else {
+      this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');
+    }
 
     keywordsArray = keywordsArray.map(function(tag){
       var re = /#/g;

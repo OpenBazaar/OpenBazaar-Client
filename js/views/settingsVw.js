@@ -119,6 +119,7 @@ module.exports = Backbone.View.extend({
         });
       },
       error: function(model, response){
+        console.log(response);
         messageModal.show(window.polyglot.t('errorMessages.getError'), window.polyglot.t('errorMessages.userError'));
       }
     });
@@ -190,12 +191,13 @@ module.exports = Backbone.View.extend({
         self.newBanner = false;
       }
 
-      var editor = new MediumEditor('#about', {
+      /*var editor = new MediumEditor('#about', {
         placeholder: {
           text: ''
         },
         toolbar: {
-          imageDragging: false
+          imageDragging: false,
+          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
         },
         paste: {
           cleanPastedHTML: true,
@@ -211,7 +213,7 @@ module.exports = Backbone.View.extend({
           cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
         }
       });
-      editor.subscribe('blur', self.validateDescription);
+      editor.subscribe('blur', self.validateDescription);*/
     });
     return this;
   },
@@ -485,8 +487,14 @@ module.exports = Backbone.View.extend({
   },
 
   validateInput: function(e) {
+    var $input = $(e.target);
+
+    if ($input.is('#refund_address')) {
+      $input.val($input.val().trim());
+    }
+
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    $input.closest('.flexRow').addClass('formChecked');
   },
 
   handleChange: function(e) {
@@ -587,23 +595,27 @@ module.exports = Backbone.View.extend({
   saveGeneral: function(e) {
     var self = this,
         form = this.$el.find("#generalForm"),
-        cCode = this.$('#currency_code').val();
+        cCode = this.$('#currency_code').val(),
+        saveBtn = $(e.target).closest('.btn');
 
-    $(e.target).addClass('loading');
+    saveBtn.addClass('loading');
     localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
 
-    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
-      app.statusBar.pushMessage({
-        type: 'confirmed',
-        msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      });
+    saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings",
+        function(){
+          app.statusBar.pushMessage({
+            type: 'confirmed',
+            msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+          });
 
-      self.setCurrentBitCoin(cCode);
-      self.refreshView();
-    }).fail(() => {
-      $(e.target).removeClass('loading');
-      self.scrollToFirstError(self.$('#generalForm'));
-    });
+          self.setCurrentBitCoin(cCode);
+          self.refreshView();
+        },'', '','',
+        function(){
+          //on invalid
+          messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
+          self.scrollToFirstError(self.$('#generalForm'));
+        }).always(function(){saveBtn.removeClass('loading');});
   },
 
   savePage: function(e){
@@ -626,9 +638,13 @@ module.exports = Backbone.View.extend({
         bColorVal = bColor.val(),
         sColorVal = sColor.val(),
         tColorVal = tColor.val(),
-        skipKeys = ["avatar_hash", "header_hash"];
+        skipKeys = ["avatar_hash", "header_hash"],
+        saveBtn = $(e.target).closest('.btn');
 
-    $(e.target).addClass('loading');
+    saveBtn.addClass('loading');
+
+    //make sure about data is clean
+    validateMediumEditor.checkVal(this.$('#about'));
 
     var sendPage = function(){
       //change color inputs to hex values
@@ -646,10 +662,11 @@ module.exports = Backbone.View.extend({
         });
         
         self.refreshView();
-      }, "", pageData, skipKeys).fail(() => {
-        $(e.target).removeClass('loading');
+      },'', pageData, skipKeys, function(){
+        //on invalid
+        messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
         self.scrollToFirstError(self.$('#pageForm'));
-      });
+      }).always(function(){saveBtn.removeClass('loading');});
     };
 
     var checkSocialCount = function(){
@@ -665,7 +682,7 @@ module.exports = Backbone.View.extend({
                 checkSocialCount();
               },
               function(data){
-                $(e.target).removeClass('loading');
+                saveBtn.removeClass('loading');
                 messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
               }, socialData);
         } else {
@@ -740,36 +757,41 @@ module.exports = Backbone.View.extend({
   saveStore: function(e){
     var self = this,
         form = this.$el.find("#storeForm"),
-        profileData = {},
         settingsData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [],
-        onFail;
+        onFail,
+        saveBtn = $(e.target).closest('.btn');
 
-    $(e.target).addClass('loading');
+    saveBtn.addClass('loading');
 
     moderatorsChecked.each(function() {
       modList.push($(this).data('guid'));
     });
 
     settingsData.moderators = modList.length > 0 ? modList : "";
-    //profileData.vendor = true;
 
-    onFail = (reason) => {
-      $(e.target).removeClass('loading');
+    onFail = (data) => {
+      saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#storeForm'));
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
     };
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
-      saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings", function () {
-        app.statusBar.pushMessage({
-          type: 'confirmed',
-          msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-        });        
+      saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings",
+          function () {
+            app.statusBar.pushMessage({
+              type: 'confirmed',
+              msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
+            });
 
-        self.refreshView();
-      }, "", settingsData).fail(onFail);
-    }, "", profileData).fail(onFail);
+            self.refreshView();
+            }, function(data){
+              onFail(data);
+            }, settingsData).always(function(){saveBtn.removeClass('loading');});
+          }, function(data){
+            onFail(data);
+    });
   },
 
   saveAddress: function(e){
@@ -778,9 +800,10 @@ module.exports = Backbone.View.extend({
         form = this.$el.find("#addressesForm"),
         newAddress = {},
         newAddresses = [],
-        addressData = {};
+        addressData = {},
+        saveBtn = $(e.target).closest('.btn');
 
-    $(e.target).addClass('loading');
+    saveBtn.addClass('loading');
     newAddress.name = this.$el.find('#settingsShipToName').val();
     newAddress.street = this.$el.find('#settingsShipToStreet').val();
     newAddress.city = this.$el.find('#settingsShipToCity').val();
@@ -793,7 +816,7 @@ module.exports = Backbone.View.extend({
     if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
         messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-        $(e.target).removeClass('loading');
+        saveBtn.removeClass('loading');
         return;
       }
     }
@@ -815,10 +838,10 @@ module.exports = Backbone.View.extend({
       });
 
       self.refreshView();
-    }, "", addressData).fail(() => {
-      $(e.target).removeClass('loading');
+    }, function(){
+      saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#addressesForm'));
-    });
+    }, addressData);
   },
 
   saveModerator: function(e){
@@ -827,9 +850,10 @@ module.exports = Backbone.View.extend({
         form = this.$el.find("#moderatorForm"),
         moderatorData = {},
         moderatorStatus = this.$('#moderatorYes').is(':checked'),
-        makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator";
+        makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator",
+        saveBtn = $(e.target).closest('.btn');
 
-    $(e.target).addClass('loading');
+    saveBtn.addClass('loading');
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
 
@@ -841,10 +865,9 @@ module.exports = Backbone.View.extend({
       
       window.obEventBus.trigger("updateProfile");
       self.refreshView();
-    }, '', moderatorData).fail(() => {
-      $(e.target).removeClass('loading');
+    }, function(){
       self.scrollToFirstError(self.$('#moderatorForm'));
-    });
+    }, moderatorData).always(function(){saveBtn.removeClass('loading');});;
 
     $.ajax({
       type: "POST",
@@ -859,21 +882,21 @@ module.exports = Backbone.View.extend({
 
   saveAdvanced: function(e){
     var self = this,
-        form = this.$el.find("#advancedForm");
+        form = this.$el.find("#advancedForm"),
+        saveBtn = $(e.target).closest('.btn');
 
-    $(e.target).addClass('loading');
+    saveBtn.addClass('loading');
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
         type: 'confirmed',
         msg: '<i>' + window.polyglot.t('saveMessages.SaveSuccess') + '</i>'
-      },'','','','',e);
+      }, function(){
+        self.scrollToFirstError(self.$('#advancedForm'));
+      },'','','');
       
       self.refreshView();
-    }).fail(() => {
-      $(e.target).removeClass('loading');
-      self.scrollToFirstError(self.$('#advancedForm'));
-    });
+    }).always(function(){saveBtn.removeClass('loading');});;
   },
 
   refreshView: function(){

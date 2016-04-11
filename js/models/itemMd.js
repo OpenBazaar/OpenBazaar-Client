@@ -2,7 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     getBTPrice = require('../utils/getBitcoinPrice'),
     countriesMd = require('./countriesMd'),
-    autolinker = require( 'autolinker' );
+    autolinker = require( '../utils/customLinker');
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -69,7 +69,6 @@ module.exports = window.Backbone.Model.extend({
           {
             "fee": 0,
             "name": "",
-            "blockchain_id": "",
             "avatar": "",
             "short_description": "",
             "pubkeys": {
@@ -201,7 +200,7 @@ module.exports = window.Backbone.Model.extend({
       response.vendor_offer.listing.item.description = __.unescape(response.vendor_offer.listing.item.description);
 
       //change any plain text urls in the description into links
-      response.vendor_offer.listing.item.displayDescription = autolinker.link(response.vendor_offer.listing.item.description, {'twitter': false, 'hashtag': false});
+      response.vendor_offer.listing.item.displayDescription = autolinker(response.vendor_offer.listing.item.description);
 
     }
 
@@ -215,7 +214,7 @@ module.exports = window.Backbone.Model.extend({
     this.countryArray = this.countries.get('countries');
   },
 
-  updateAttributes: function(){
+  updateAttributes: function(callback){
     var self = this,
         userCCode = this.get("userCurrencyCode"),
         vendorCCode = this.get('vendor_offer').listing.item.price_per_unit.fiat.currency_code,
@@ -279,6 +278,7 @@ module.exports = window.Backbone.Model.extend({
         //set to random so a change event is always fired
         newAttributes.priceSet = Math.random();
         self.set(newAttributes);
+        typeof callback == 'function' && callback();
       });
     }else{
       this.set({displayPrice: "Price Unavailable"});

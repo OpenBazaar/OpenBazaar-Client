@@ -57,9 +57,10 @@ App.prototype.connectHeartbeatSocket = function() {
   // give up if it takes to long
   this._heartbeatSocketTimesup = setTimeout(function() {
     if (self._heartbeatSocket.getReadyState() !== 1) {
-      self._heartbeatSocket._socket.close();
+      //self._heartbeatSocket._socket.close(); //turn off for now, until server issues are fixed
+      alert(polyglot.t('errorMessages.serverTimeout'));
     }
-  }, 3000);  
+  }, 30000); //wait for 30 seconds, sometimes the server stalls
 };
 
 App.prototype.getHeartbeatSocket = function() {

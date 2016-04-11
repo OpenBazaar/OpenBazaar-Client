@@ -18,4 +18,4 @@ function isInPage(node) {
 module.exports = {
   isScrolledIntoView: isScrolledIntoView,
   isInPage: isInPage
-}
+};

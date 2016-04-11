@@ -1,6 +1,6 @@
 var __ = require('underscore'),
     fs = require('fs'),
-    path = require('path')
+    path = require('path'),
     templateHelpers = require('./templateHelpers');
 
 module.exports = function(templateFile, callback){
@@ -16,7 +16,7 @@ module.exports = function(templateFile, callback){
     var mergedContext = __.extend({}, templateHelpers, context || {});
 
     return compiledTmpl(mergedContext); 
-  }
+  };
   
   callback(wrappedTmpl);
 };

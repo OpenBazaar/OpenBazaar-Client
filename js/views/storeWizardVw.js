@@ -104,12 +104,14 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
       self.socketView.getModerators(self.socketModeratorID);
+      /*
       var editor = new MediumEditor('#aboutInput', {
         placeholder: {
           text: ''
         },
         toolbar: {
-          imageDragging: false
+          imageDragging: false,
+          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
         },
         paste: {
           cleanPastedHTML: true,
@@ -126,6 +128,7 @@ module.exports = Backbone.View.extend({
         }
       });
       editor.subscribe('blur', self.validateDescription);
+      */
     });
   },
 
@@ -156,7 +159,6 @@ module.exports = Backbone.View.extend({
   renderModerator: function(moderator){
     "use strict";
     var self = this;
-    console.log(moderator)
 
     moderator.serverUrl = this.model.get('user').serverUrl;
     moderator.userID = moderator.guid;
@@ -199,6 +201,8 @@ module.exports = Backbone.View.extend({
         wizData = {},
         modData = {};
 
+    validateMediumEditor.checkVal($('#aboutInput'));
+
     //convert taggle tags to data in the form
     this.$el.find('#realCategoriesInput').val(this.categoriesInput.getTagValues().join(","));
 
@@ -227,9 +231,10 @@ module.exports = Backbone.View.extend({
   },
 
   close: function(){
-    this.unbind();
-    this.remove();
     $('#obContainer').removeClass('blur');
+    $('#modalHolder').fadeOut(300, ()=> {
+      this.remove();
+    });
   }
 
 });

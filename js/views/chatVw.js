@@ -6,9 +6,13 @@ var Backbone = require('backbone'),
   ChatMessagesCl = require('../collections/chatMessagesCl'),
   baseVw = require('./baseVw'),
   ChatHeadsVw = require('./chatHeadsVw'),
+  autolinker = require( '../utils/customLinker'),
   ChatConversationVw = require('./chatConversationVw');
 
 module.exports = baseVw.extend({
+
+  class: 'chatView',
+
   events: {
     'click .js-chatOpen': 'slideOut',
     'click .js-chatSearch': 'onSearchClick',
@@ -28,7 +32,7 @@ module.exports = baseVw.extend({
     }    
 
     this.socketView = options.socketView;
-    this.$body = $('body');
+    this.$html = $('html');
 
     // Here we will store the chat messages collections
     // of all the active conversations we've had. This way,
@@ -65,7 +69,7 @@ module.exports = baseVw.extend({
           this.chatHeadsVw.render().el
         );
 
-        this.listenTo(this.chatHeadsVw, 'chatHeadClick', this.onChatHeadClick)
+        this.listenTo(this.chatHeadsVw, 'chatHeadClick', this.onChatHeadClick);
         this.registerChild(this.chatHeadsVw);
       } else {
         this.filterChatHeads();
@@ -100,6 +104,11 @@ module.exports = baseVw.extend({
     $(window).focus(() => {
       this.chatConversationVw && this.isConvoOpen() &&
         this.markConvoAsRead(this.chatConversationVw.model.get('guid'));
+    });
+
+    //when language is changed, re-render
+    this.listenTo(options.model, 'change:language', function(){
+      this.render(true);
     });    
   },
 
@@ -119,7 +128,7 @@ module.exports = baseVw.extend({
     var searchText = this.$searchField.val(),
         guid;
 
-    render = typeof render === 'undefined' ? true : false;
+    render = typeof render === 'undefined';
 
     this.filteredChatConvos = new ChatConversationsCl(
       this.chatConversationsCl.filter((md) => {
@@ -150,6 +159,7 @@ module.exports = baseVw.extend({
 
   onChatHeadClick: function(vw) {
     this.openConversation(vw.model);
+    this.currentConversation = vw.model;
   },
 
   onSearchClick: function() {
@@ -157,7 +167,7 @@ module.exports = baseVw.extend({
     this.slideOut();
   },
 
-  openConversation: function(model) {
+  openConversation: function(model, refresh) {
     // Model is the model of the user you want to converse with.
     // When calling this function from inside our view, we are passing
     // in a chatConversation model, but passing in a profile model should probably
@@ -185,7 +195,7 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       // if we were already chatting with this person and that
       // conversation is just hidden, show it
-      if (this.chatConversationVw.model.get('guid') === model.get('guid')) {
+      if (this.chatConversationVw.model.get('guid') === model.get('guid') && !refresh) {
         this.$convoContainer.removeClass('chatConversationContainerHide');
         return;
       } else {
@@ -247,7 +257,7 @@ module.exports = baseVw.extend({
       this.chatConversationVw.collection.add({
         avatar_hash: this.model.avatar_hash,
         guid: this.model.guid,
-        message: msg,
+        message: autolinker(msg),
         outgoing: true,
         read: true,
         timestamp: Date.now() / 1000
@@ -323,7 +333,7 @@ module.exports = baseVw.extend({
         this.chatMessagesCache[msg.sender].collection.add({
           avatar_hash: msg.avatar_hash,
           guid: msg.sender,
-          message: msg.message,
+          message: autolinker(msg.message),
           outgoing: false,
           read: true,
           timestamp: msg.timestamp
@@ -405,10 +415,13 @@ module.exports = baseVw.extend({
     if (this.chatConversationVw) {
       this.chatConversationVw.closeConvoSettings();
     }
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },
 
   slideOut: function() {
-    this.$body.addClass('chatOpen');
+    this.$html.addClass('chatOpen');
     self.$('.chatSearch').addClass('chatSearchOut');
     self.$('.btn-chatOpen')
         .addClass('hide')
@@ -418,7 +431,7 @@ module.exports = baseVw.extend({
 
   slideIn: function() {
     this.closeConversation();
-    this.$body.removeClass('chatOpen');
+    this.$html.removeClass('chatOpen');
     self.$('.chatSearch').removeClass('chatSearchOut');
   },
 
@@ -428,6 +441,11 @@ module.exports = baseVw.extend({
         .removeClass('hide')
         .find('span')
         .addClass('hide');
+
+    //remove any existing selected state
+    if(this.chatHeadsVw){
+      this.chatHeadsVw.chatHeadsRemoveSelectStyle();
+    }
   },      
 
   remove: function() {
@@ -436,13 +454,22 @@ module.exports = baseVw.extend({
     baseVw.prototype.remove.apply(this, arguments);
   },
 
-  render: function() {
+  render: function(refreshConversations) {
     loadTemplate('./js/templates/chat.html', (tmpl) => {
       this.$el.html(tmpl());
 
       this.$chatHeadsContainer = this.$('.chatConversationHeads');
       this.$convoContainer = this.$('.chatConversationContainer');
       this.$searchField = this.$('#chatSearchField');
+      
+      if(refreshConversations){
+        //re-render the conversations
+        this.$chatHeadsContainer.html(
+            this.chatHeadsVw.render().el
+        );
+        //re-open the current conversation if one exists
+        this.currentConversation && this.openConversation(this.currentConversation, true);
+      }
     });
 
     return this;

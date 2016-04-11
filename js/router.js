@@ -27,11 +27,9 @@ module.exports = Backbone.Router.extend({
       [/^@([^\/]+)(.*)$/, "userPageViaHandle"],
       ["userPageViaHandle", "userPageViaHandle"],
       ["transactions", "transactions"],
-      ["transactions/:state", "transactions"],
+      ["transactions/:state(/:orderID)", "transactions"],
       ["settings", "settings"],
-      ["settings/:state", "settings"],
-      ["about", "about"],
-      ["support", "donate"]
+      ["settings/:state", "settings"]
     ];
 
     routes.forEach((route) => {
@@ -108,18 +106,25 @@ module.exports = Backbone.Router.extend({
 
   cleanup: function(){
     "use strict";
-    $('.js-loadingModal').addClass('hide'); //hide modal if it is still visible
+    $('#loadingModal').addClass('hide'); //hide modal if it is still visible
     messageModal.hide();
-    app.hideOverlay();
     $('#obContainer').removeClass('overflowHidden').removeClass('blur');
-    $('.js-navProfileMenu').removeClass('popMenu-opened');
+    obEventBus.trigger('cleanNav');
   },
 
-  newView: function(view, bodyClass, addressBarText){
+  newView: function(view, bodyID, addressBarText, bodyClass){
     var loadingConfig;
 
-    if($('body').attr('id') != bodyClass){
-      $('body').attr("id", bodyClass || "");
+    this.cleanup();
+    //clear address bar. This will be replaced on the user page
+    addressBarText = addressBarText || "";
+    window.obEventBus.trigger("setAddressBar", addressBarText);
+
+    if($('body').attr('id') != bodyID){
+      $('body').attr("id", bodyID || "");
+    }
+    if(bodyClass){
+      $('body').attr('class', bodyClass);
     }
     $('#obContainer').removeClass("box-borderDashed noScrollBar overflowHidden"); //remove customization styling if present
     
@@ -135,9 +140,7 @@ module.exports = Backbone.Router.extend({
     
     this.view && (this.view.close ? this.view.close() : this.view.remove());
     this.view = view;
-    //clear address bar. This will be replaced on the user page
-    addressBarText = addressBarText || "";
-    window.obEventBus.trigger("setAddressBar", addressBarText);
+
     $('#obContainer')[0].scrollTop = 0;
   },
 
@@ -207,20 +210,13 @@ module.exports = Backbone.Router.extend({
 
   home: function(state, searchText){
     "use strict";
-    var searchItemsText = "",
-        searchUserText = "", //placeholder for future functionality
-        addressBarText = searchText ? "#" + searchText : "";
-    if(state == "products"){
-      searchItemsText = searchText;
-    }
-    this.cleanup();
     this.newView(new homeView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
       state: state,
-      searchItemsText: searchItemsText
-    }),'',{'addressText': addressBarText});
+      searchItemsText: searchText
+    }),'',{'addressText': searchText ? "#" + searchText : ""});
 
     // hide the discover onboarding callout
     $('.js-OnboardingIntroDiscoverHolder').addClass('hide');
@@ -239,8 +235,7 @@ module.exports = Backbone.Router.extend({
 
     if (handle) options.handle = handle;
 
-    this.cleanup();
-    this.newView(new userPageView(options),"userPage");
+    this.newView(new userPageView(options),"userPage",'','onPage');
   },
 
   userPageViaHandle: function(handle, subPath) {
@@ -273,37 +268,25 @@ module.exports = Backbone.Router.extend({
     });
   },
 
-  transactions: function(state){
+  transactions: function(state, orderID){
     "use strict";
-    this.cleanup();
     this.newView(new transactionsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       socketView: this.socketView,
-      state: state
+      state: state,
+      orderID: orderID
     }),"userPage");
   },
 
   settings: function(state){
     "use strict";
     $('.js-loadingModal').addClass('show');
-    this.cleanup();
     this.newView(new settingsView({
       userModel: this.userModel,
       userProfile: this.userProfile,
       state: state,
       socketView: this.socketView
     }), "userPage");
-  },
-
-  about: function(){
-    "use strict";
-    this.cleanup();
-  },
-
-  donate: function(){
-    "use strict";
-    this.cleanup();
-    this.newView(new donateView());
   }
 });

@@ -198,19 +198,15 @@ form {
   transition: width 0.5s ease;
 }
 
-#ov1 .chatOpen #obContainer {
+#ov1.chatOpen #obContainer {
   width: calc(100% - 230px);
 }
 
-/*#ov1 .chatOpen #obContainer::-webkit-scrollbar {
-  width: 0;
-}
-*/
 #pageNav {
   position: fixed;
   top: 0;
   -webkit-app-region: drag;
-  z-index: 5;
+  z-index: 13;
 }
 
 
@@ -304,6 +300,21 @@ form {
   padding-right: 0;
 }
 
+.bar.barFlush.bottomBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.bar.barFlush.bottomBar .btn-bar {
+  border-radius: 0;
+}
+
 .barTxt {
   height: 50px;
   line-height: 50px;
@@ -382,6 +393,7 @@ form {
   width: 100%;
   /* reset styles if applied to a list item */
   padding: 0;
+  box-sizing: border-box;
 }
 
 .flexRow.noFlexWrap {
@@ -395,6 +407,11 @@ form {
 
 .flexRow-center {
   justify-content: center;
+}
+
+.flexRow-vCenter {
+  align-items: center;
+  height: 100%;
 }
 
 .flexRow [class |= "flexCol"] {
@@ -869,6 +886,10 @@ label.fieldItem {
   margin-bottom: 100px;
 }
 
+.rowTop5 {
+  margin-top: 5px;
+}
+
 .rowTop10 {
   margin-top: 10px;
 }
@@ -882,7 +903,15 @@ label.fieldItem {
 }
 
 .rowTop30 {
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+.rowTop40 {
+  margin-top: 40px;
+}
+
+.rowTop50 {
+  margin-top: 50px;
 }
 
 .rowTop241 {
@@ -897,6 +926,10 @@ label.fieldItem {
 .pad5 {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.pad5Top {
+  padding-top: 5px;
 }
 
 .pad10 {
@@ -972,7 +1005,7 @@ label.fieldItem {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 7;
 }
 
 .modal-child {
@@ -985,7 +1018,11 @@ label.fieldItem {
   transition: right 0.5s ease;
 }
 
-#ov1 .chatOpen .modal-child {
+.modal-opaque .modal-child {
+  height: 574px;
+}
+
+#ov1.chatOpen .modal-child {
   right: 230px;
 }
 
@@ -1123,7 +1160,7 @@ label.fieldItem {
 
 /* colorbox styles */
 #colorbox {
-  z-index: 3;
+  z-index: 12;
   outline: none;
   margin-top: 20px;
   transition: margin 0.5s ease;
@@ -1131,12 +1168,12 @@ label.fieldItem {
   transition: margin-left 0.5s ease;
 }
 
-#ov1 .chatOpen #colorbox {
+#ov1.chatOpen #colorbox {
   margin-left: -115px;
 }
 
 #cboxOverlay {
-  z-index: 2;
+  z-index: 11;
   top: 50px;
   height: 100%;
   width: calc(100% - 30px);
@@ -1191,6 +1228,10 @@ h5 {
 
 #ov1 .txt-fade {
   opacity: 0.75;
+}
+
+#ov1 .unfilled {
+  opacity: 0.35;
 }
 
 #ov1 .div-fade {
@@ -1378,6 +1419,13 @@ h5 {
   height: 250px;
   position: relative;
   width: 525px;
+  box-sizing: border-box;
+}
+
+.modal-msg {
+  /* use for bottom half of modal under a modal-hero element */
+  width: 525px;
+  height: 374px;
 }
 
 .modal-small {
@@ -1394,6 +1442,13 @@ h5 {
 /*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
 .modal-hero.bg-dark-blue {
   background: #063753;
+}
+
+.modal-hero.iconBackground {
+  background-image: url(../imgs/openbazaar-icon-no-border.png);
+  background-position: 50% 30px;
+  background-size: 136px;
+  background-repeat: no-repeat;
 }
 
 .modal-hero-about {
@@ -1417,6 +1472,13 @@ h5 {
 .modal-hero.modal-heroFullHeight {
   height: 573px;
   z-index: 1;
+}
+
+.modal-hero.modal-heroFullHeightNoButtons {
+  height: 624px;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 3px;
 }
 
 .background1 {
@@ -1528,7 +1590,8 @@ removed because I don't think we're using the trick to hide the borders any more
   padding-left: 2px;
   position: absolute;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
-  top: 13px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
 }
 
@@ -1554,8 +1617,15 @@ removed because I don't think we're using the trick to hide the borders any more
 
 .mainSearchWrapper:before {
   color: #000;
-  top: 5px;
   left: 6px;
+  content: "\f4a5"
+}
+
+.mainSearchWrapper.onPage:before {
+  color: #000;
+  left: 9px;
+  content: "\f12f";
+  opacity: .75;
 }
 
 .mainSearchWrapper .txtField {
@@ -1578,7 +1648,6 @@ removed because I don't think we're using the trick to hide the borders any more
 }
 
 .searchWrapperWithPill:before {
-  top: 17px;
   left: 168px;
 }
 
@@ -1589,6 +1658,7 @@ input[type="text"].txtField-bar {
   box-shadow: none;
   color: #fff;
   height: 53px;
+  line-height:53px;
   font-size: 14px;
   letter-spacing: 0;
   opacity: 1;
@@ -1637,12 +1707,20 @@ input[type="text"].txtField-bar {
   pointer-events: none; /* don't fire clicks on icon */
 }
 
+.btn-small {
+  font-size: 10px;
+  line-height: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 3px;
+  opacity: .80;
+  box-sizing: border-box;
+}
+
 .btn-large {
   height: 42px;
   font-size: 15px;
   line-height: 42px;
-  float: left;
-  background-color: #086A9E; /* default color */
   padding: 0 20px;
   border-radius: 3px;
   opacity: .80;
@@ -1661,11 +1739,6 @@ input[type="text"].txtField-bar {
 
 .btn:before {
   line-height: 32px;
-}
-
-.btn:active {
-  -webkit-box-shadow: inset 0px 0px 6px 0px rgb(13, 84, 123);
-  opacity: .75;
 }
 
 .btn.btn-txt {
@@ -1708,11 +1781,13 @@ margin: auto;
 
 .btn.btn-c1 {
   background-color: rgb(50,126,184);
+  min-width: 50px;
+  box-shadow: none;
 }
 
 #userPage .btn.btn-c1,
 .btn.btn-dark {
-  background-color: rgb(37,37,37);
+  background-color: #215175;
 }
 
 .btn.btn-c1.fade {
@@ -1726,6 +1801,44 @@ margin: auto;
 .btn.btn-c2,
 #userPage .btn.btn-c2 {
   background-color: rgba(200,25,25,1);
+}
+
+.btn.btn-c3,
+#userPage .btn.btn-c3 {
+  background-color: rgba(33,117,47,1);
+}
+
+.btn:active,
+.btn.active,
+.btn.btn-c1:active,
+.btn.btn-c1.active,
+.btn.btn-c2:active,
+.btn.btn-c2.active {
+  box-shadow: inset 0px 0px 6px 0px rgba(0,0,0,0.4), inset 0px 0px 12px 0px rgba(255,255,255,0.1);
+}
+
+.btn.btn-c1:active,
+.btn.btn-c1.active {
+  background-color: #215175;
+}
+
+.btn.btn-c2:active,
+.btn.btn-c2.active {
+  background-color: #752121;
+}
+
+.btn.btn-c3:active,
+.btn.btn-c3.active {
+  background-color: #19C836;
+}
+
+.btn.btn-c1 .toggle-txt {
+  opacity: .20;
+}
+
+.btn.btn-c1:active .toggle-txt,
+.btn.btn-c1.active .toggle-txt {
+  opacity: 1;
 }
 
 .btn.btn-win {
@@ -2278,8 +2391,8 @@ div.chatSearchOut .chatSearchIcon {
 
 .btn.btn-bar.btn-tab {
   background: #327EB8;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
   -webkit-user-select: none;
@@ -2352,15 +2465,15 @@ div.chatSearchOut .chatSearchIcon {
   border: 1px solid rgb(74,72,72);
 }
 
-.btn-togWrapper .btn-togWrapper-light {
+.btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgba(255,255,255,0.08);
 }
 
-.btn-togWrapper .btn-togWrapper-c1 {
-  border: 1px solid rgb(50,126,184);
+.btn-togWrapper.btn-togWrapper-c1 {
+  border: 0;
 }
 
-#userPage .btn-togWrapper.btn-togWrapper-c1 {
+#userPage .btn-togWrapper.btn-togWrapper-light {
   border: 1px solid rgb(87,87,87);
 }
 
@@ -2624,24 +2737,6 @@ input[type="datetime-local"].fieldItem:focus {
 
 .txtAreaField:focus {
   outline: 1px solid #565656;
-}
-
-/* add formChecked class after form has been checked for validity */
-.invalid,
-.formChecked input[type="text"].fieldItem:invalid,
-.formChecked input[type="email"].fieldItem:invalid,
-.formChecked input[type="url"].fieldItem:invalid,
-.formChecked .fieldItem-textarea:invalid,
-.formChecked input[type="number"].fieldItem:invalid,
-.formChecked input[type="text"].fieldItem:focus:invalid,
-.formChecked input[type="email"].fieldItem:focus:invalid,
-.formChecked input[type="url"].fieldItem:focus:invalid,
-.formChecked .fieldItem-textarea:focus:invalid,
-.formChecked input[type="number"].fieldItem:focus:invalid,
-.formChecked .validatable:invalid {
-  border: 2px dashed rgba(89,1,1,0.8);;
-  background-color: rgba(89,1,1,0.2);
-  transition: border 0.3s, background-color 0.4s;
 }
 
 input[type="text"].fieldItem.fieldItem-withButton,
@@ -2936,7 +3031,6 @@ input[type="radio"].fieldItem.starRating:checked + label + input + label + input
   font-size: 18px;
 }
 
-
 .radioLabel {
   opacity: .75;
 }
@@ -2953,15 +3047,14 @@ input[type="checkbox"].fieldItem + label {
  }
 
 input[type="checkbox"].fieldItem + label:before {
-  content: "";
   display: inline;
+  content: "\f372";
+  font-family: Ionicons;
   line-height:inherit;
-  height: 16px;
-  padding: 0 8px; /*inline elements have no width, use padding */
-  border-radius: 4px;
-  border: solid 1px #fff;
   box-shadow: none;
   opacity: 1;
+  font-family: Ionicons;
+  font-size: 1.5em;
 }
 
 input[type="checkbox"].fieldItem + label.compact {
@@ -2974,8 +3067,7 @@ input[type="checkbox"].fieldItem + label.compact:before {
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
-  background: #fff;
-  box-shadow: inset 0 0 0 4px #086A9E;
+  content: "\f373";
 }
 
 input[type="checkbox"].fieldItem + label div,
@@ -3325,6 +3417,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #327EB8;
 }
 
+.color-secondary-darken {
+  background: #215175;
+}
+
 .homeView {
   margin-top: 8px;
 }
@@ -3433,6 +3529,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   font-size: 140px;
 }
 
+.icon-gigantic {
+  font-size: 250px;
+}
+
 .icon-large {
   font-size: 32px;
 }
@@ -3462,6 +3562,16 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .icon-huge.icon-circle-background1:before {
   line-height:140px;
+  font-size:0.8em;
+}
+
+.icon-gigantic.icon-circle-background1 {
+  width: 250px;
+  height: 250px;
+}
+
+.icon-gigantic.icon-circle-background1:before {
+  line-height:250px;
   font-size:0.8em;
 }
 
@@ -3516,7 +3626,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: .90;
 }
 
-#ov1 .chatOpen .spinner-with-logo {
+#ov1.chatOpen .spinner-with-logo {
   left: calc(50% - 115.5px);
 }
 
@@ -3798,6 +3908,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   line-height: 16px;
   opacity: 1;
   white-space: nowrap;
+  pointer-events: none;
+  margin-top: 2px;
 }
 
 .tooltip.tooltip-left:hover:after{
@@ -3815,6 +3927,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: auto;
   width: 400px;
   white-space: normal;
+  bottom: auto;
+}
+
+.tooltip.tooltip-box.tooltip-boxUp:hover:after {
+  bottom: 120%;
 }
 
 .btn-notifications.tooltip:hover:after{
@@ -3960,12 +4077,24 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #modalHolder {
   position: fixed;
-  z-index: 3;
+  z-index: 9;
   -webkit-app-region: no-drag;
 }
 
 #messageModal {
-  z-index: 4;
+  z-index: 9;
+}
+
+#loadingModal {
+  z-index: 14;
+}
+
+.server-connect-modal {
+  z-index: 15;
+}
+
+#loadingModal .btn {
+  -webkit-app-region: no-drag;
 }
 
 .pill {
@@ -4102,7 +4231,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #statusBar {
   position: fixed;
   bottom: 0;
-  z-index: 2;
+  z-index: 10;
   width: 100%;  
 }
 
@@ -4159,7 +4288,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
   left: 0;
   top: 50%;
-  max-width: 400px;  
+  max-width: 600px;  
   margin-top: 90px;  
   margin-left: auto;
   margin-right: auto;
@@ -4167,7 +4296,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: transform 0.5s ease;
 }
 
-#ov1 .chatOpen .page-connect-modal .content {
+#ov1.chatOpen .page-connect-modal .content {
   transform: translateX(-115.5px);
 }
 
@@ -4370,12 +4499,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: solid 1px rgba(255,255,255,0.08);
 }
 
+#ov1  .borderBottomDashed {
+  border-bottom: dashed 1px rgba(255,255,255,0.08);
+}
+
 #ov1  .borderBottom2 {
   border-bottom: solid 2px rgba(255,255,255,0.08);
 }
 
 #ov1  .borderTop {
   border-top: solid 1px rgba(255,255,255,0.08);
+}
+
+#ov1  .borderTopDashed {
+  border-top: dashed 1px rgba(255,255,255,0.08);
 }
 
 #ov1  .border1 {
@@ -4549,6 +4686,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-shadow: 0px 1px 5px #000;
 }
 
+#ov1 .textShadow2 {
+  text-shadow: 0 0 2px rgba(0,0,0,1), 0 0 8px rgba(0,0,0,1), 0 0 30px rgba(0,0,0,0.7);
+}
+
 #ov1 .fontSize8 {
   font-size: 8px;
 }
@@ -4594,6 +4735,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .fontSize20 {
   font-size: 20px;
+}
+#ov1 .fontSize24 {
+  font-size: 24px;
 }
 
 #ov1 .fontSize30 {
@@ -4694,6 +4838,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginLeftNeg115 {
   margin-left: -115px;
+}
+
+#ov1  .marginLeft0 {
+  margin-left: 0;
 }
 
 #ov1  .marginLeft1 {
@@ -5054,6 +5202,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1  .padding10 {
   padding: 10px;
 }
+#ov1  .padding12 {
+  padding: 12px;
+}
 
 #ov1  .padding15 {
   padding: 15px;
@@ -5065,6 +5216,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .padding30 {
   padding: 30px;
+}
+
+#ov1  .padding40 {
+  padding: 40px;
 }
 
 #ov1  .padding015 {
@@ -5390,8 +5545,32 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   text-align: center;
 }
 
+#ov1 .blockCenter {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 #ov1 .heightAuto {
   height: auto;
+}
+
+/* add formChecked class after form has been checked for validity */
+#ov1 .invalid,
+#ov1 .formChecked input[type="text"].fieldItem:invalid,
+#ov1 .formChecked input[type="email"].fieldItem:invalid,
+#ov1 .formChecked input[type="url"].fieldItem:invalid,
+#ov1 .formChecked .fieldItem-textarea:invalid,
+#ov1 .formChecked input[type="number"].fieldItem:invalid,
+#ov1 .formChecked input[type="text"].fieldItem:focus:invalid,
+#ov1 .formChecked input[type="email"].fieldItem:focus:invalid,
+#ov1 .formChecked input[type="url"].fieldItem:focus:invalid,
+#ov1 .formChecked .fieldItem-textarea:focus:invalid,
+#ov1 .forvmChecked input[type="number"].fieldItem:focus:invalid,
+#ov1 .formChecked .validatable:invalid {
+  border: 2px dashed rgba(89,1,1,0.8);;
+  background-color: rgba(89,1,1,0.2);
+  transition: border 0.3s, background-color 0.4s;
 }
 
 #ov1 .loading,
@@ -5422,16 +5601,17 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   animation-delay: 0.5s;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
 }
 
 
 @-webkit-keyframes loaderAnimation {
-  0% {
+  from {
     opacity: 0.2;
     color: rgba(255,255,255,0);
   }
-  100% {
-    opacity: 1;
+  to {
+    opacity: 0.9;
     color: rgba(255,255,255,1);
   }
 }
@@ -5492,6 +5672,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 1px solid #444;
 }
 
+#ov1.notFancy .statusBar.fadeOut,
 #ov1.notFancy #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
@@ -5504,6 +5685,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy #sideBar.sideBarSlid .sideBarSlidShow {
   display: block;
+}
+
+#ov1.notFancy #sideBar .chatConversation textarea,
+#ov1.notFancy #sideBar .chatConversation textarea::-webkit-input-placeholder,
+#ov1.notFancy #sideBar .chatConversation input,
+#ov1.notFancy #sideBar .chatConversation input::-webkit-input-placeholder {
+  color: #fff;
 }
 
 #ov1.notFancy .gridItemControls {
@@ -5541,9 +5729,18 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   display: none !important;
 }
 
+#ov1.notFancy #obContainer .unfilled,
+#ov1.notFancy #userPage .unfilled {
+  opacity: 0.35 !important;
+}
+
+#ov1.notFancy .notFancyDarkBackground,
+#ov1.notFancy #obContainer .notFancyDarkBackground {
+  background: #262626;
+}
 
 
-/* terrible hack, TODO: remove before production */
+/* hide unfinished elements */
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
   background: #535353;
@@ -5552,5 +5749,5 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1 .TODO.TODO.TODO.TODO.TODO {
-  display: none; /* hide when live */
+  display: none; /* hide in production */
 }

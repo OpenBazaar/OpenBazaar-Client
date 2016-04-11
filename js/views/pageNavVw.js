@@ -6,12 +6,13 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),
     Polyglot = require('node-polyglot'),
-    NotificationsCl = require('../collections/notificationsCl.js'), 
+    NotificationsCl = require('../collections/notificationsCl.js'),
     languagesModel = require('../models/languagesMd'),
     baseVw = require('./baseVw'),
     //adminPanelView = require('../views/adminPanelVw'),
     NotificationsVw = require('../views/notificationsVw'),
-    remote = require('remote');
+    remote = require('remote'),
+    pjson = require('../../package.json');
 
 var ipcRenderer = require('ipc-renderer');  // Allows to talk Electon main process
 
@@ -28,13 +29,13 @@ module.exports = baseVw.extend({
     'click .js-showAboutModal': 'showAboutModal',
     'click .js-hideAboutModal': 'hideAboutModal',
     'click .js-showSupportModal': 'showSupportModal',
-    'click .js-hideSupportModal': 'hideSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navRefresh': 'navRefreshClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
     'keyup .js-navAddressBar': 'addressBarKeyup',
+    'blur .js-navAddressBar': 'addressBarBlur',
     'click .js-closeStatus': 'closeStatusBar',
     'click .js-homeModal-themeSelected': 'setSelectedTheme',
     'blur input': 'validateInput',
@@ -55,6 +56,7 @@ module.exports = baseVw.extend({
     this.model.set('moderator', this.userProfile.get('profile').moderator);
     this.languages = new languagesModel();
     this.showDiscIntro = options.showDiscIntro;
+    this.notificationsRecord = {}; //store notification timestamps to prevent too many from the same user
 
     this.currentWindow = remote.getCurrentWindow();
 
@@ -88,9 +90,13 @@ module.exports = baseVw.extend({
     });
 
     this.unreadNotifsViaSocket = 0;
+    this.fetchNotifsMarkedAsRead = 0;
 
-    this.listenTo(this.notificationsCl, 'reset update', (cl, options) => {
-      if (options.xhr) this.unreadNotifsViaSocket = 0;
+    this.listenTo(this.notificationsCl, 'reset update', function(cl, options) {
+      if (options.xhr) {
+        this.fetchNotifsMarkedAsRead = 0;
+        this.unreadNotifsViaSocket = 0;
+      }
 
       this.setNotificationCount(this.getUnreadNotifCount());
     });
@@ -108,6 +114,10 @@ module.exports = baseVw.extend({
       this.showDiscoverIntro();
     });
 
+    this.listenTo(window.obEventBus, "cleanNav", function(){
+      this.cleanNav();
+    });
+
     //when language is changed, re-render
     this.listenTo(this.model, 'change:language', function(){
       this.render();
@@ -118,12 +128,10 @@ module.exports = baseVw.extend({
 
   showDiscoverIntro: function(){
     this.$('.js-OnboardingIntroDiscoverHolder').removeClass('hide');
-    this.showDiscIntro = true;
   },
 
   hideDiscoverIntro: function(){
     this.$('.js-OnboardingIntroDiscoverHolder').addClass('hide');
-    this.showDiscIntro = false;
   },
 
   sendInstallUpdate: function() {
@@ -135,44 +143,80 @@ module.exports = baseVw.extend({
     $('.js-softwareUpdate').addClass('softwareUpdateHidden');
   },
 
+  cleanNav: function(){
+    this.hideAboutModal();
+    this.closeNav();
+    this.closeStatusBar();
+    obEventBus.trigger('closeBuyWizard');
+  },
+
   handleSocketMessage: function(response) {
     var data = JSON.parse(response.data),
         username,
         avatar,
-        notif;
+        notif,
+        notifStamp;
 
     if (data.hasOwnProperty('notification')) {
       notif = data.notification;
       username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
       avatar = notif.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
         notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
+      notifStamp = Date.now();
+
+      this.unreadNotifsViaSocket++;
+
+      this.notificationsCl.add(
+          __.extend({}, notif, { read: false })
+      );
+
+      //prevent message spamming from one user
+      if(!this.notificationsRecord[username]){
+        this.notificationsRecord[username] = {};
+      }
+      if(this.notificationsRecord[username].notifStamp && notifStamp - this.notificationsRecord[username].notifStamp < 30000){
+        return;
+      }
+      this.notificationsRecord[username].notifStamp = notifStamp;
 
       switch(notif.type) {
         case "follow":
-          new Notification(username + " " + window.polyglot.t('NotificationFollow'), {
+          new Notification(window.polyglot.t('NotificationFollow', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
         case "dispute_open":
-          new Notification(username + " " + window.polyglot.t('NotificationDispute'), {
+          new Notification(window.polyglot.t('NotificationDispute', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
         case "new order":
-          new Notification(username + " " + window.polyglot.t('NotificationNewOrder'), {
+          new Notification(window.polyglot.t('NotificationNewOrder', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "payment received":
+          new Notification(window.polyglot.t('NotificationPaymentReceived', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "order confirmation":
+          new Notification(window.polyglot.t('NotificationOrderConfirmed', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "rating received":
+          new Notification(window.polyglot.t('NotificationRatingRecieved', {name: username}), {
             icon: avatar,
             silent: true
           });
           break;
       }
-
-      this.unreadNotifsViaSocket++;
-
-      this.notificationsCl.add(
-        __.extend({}, notif, { read: false })
-      );
 
       app.playNotificationSound();
     }
@@ -204,7 +248,8 @@ module.exports = baseVw.extend({
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
-	this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
+    this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
+    this.model.set('version', pjson.version);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
 
@@ -237,8 +282,6 @@ module.exports = baseVw.extend({
       //listen for address bar set events
       self.listenTo(window.obEventBus, "setAddressBar", function(options){
         var text = options.handle || options.addressText;
-        
-        text = text ? 'ob://' + text : '';
         self._lastSetAddressBarText = text;
         self.addressInput.val(text);
         self.closeStatusBar();
@@ -252,6 +295,8 @@ module.exports = baseVw.extend({
   },
 
   showAboutModal: function(e){
+
+    this.cleanNav();
 
     // display the modal
     $('.js-aboutModalHolder').fadeIn(300);
@@ -280,11 +325,6 @@ module.exports = baseVw.extend({
     $('.js-aboutModal .modal-section').addClass('hide');
     $('.js-aboutModal .js-modalAboutSupport').removeClass('hide');
     $('#obContainer').addClass('blur');
-  },
-
-  hideSupportModal: function(e){
-    $('.js-aboutModalHolder').fadeOut(300);
-    $('#obContainer').removeClass('blur');
   },
 
   aboutModalTabClick: function(e){
@@ -340,7 +380,8 @@ module.exports = baseVw.extend({
   },
 
   getUnreadNotifCount: function() {
-    return (this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount()) || 0;  
+    return this.unreadNotifsViaSocket + this.notificationsCl.getUnreadCount() -
+      this.fetchNotifsMarkedAsRead || 0;
   },
 
   onNotifMenuOpen: function() {
@@ -373,7 +414,9 @@ module.exports = baseVw.extend({
       });
     }
 
-    this.setNotificationCount(0);    
+    this.fetchNotifsMarkedAsRead += unread.length - this.unreadNotifsViaSocket;
+    this.unreadNotifsViaSocket = 0;
+    this.setNotificationCount(this.getUnreadNotifCount());
   },
 
   onPopMenuNavClick: function(e) {
@@ -464,11 +507,34 @@ module.exports = baseVw.extend({
     this.currentWindow.reload();
   },
 
+  trimAddressBar: function() {
+    this.addressInput.val(function (i, value) {
+      return value.replace('ob://', '');
+    });
+  },
+
+  untrimAddressBar: function(){
+    this.addressInput.val(function (i, value) {
+      if(value) {
+        value = value.startsWith('ob://') ? value : 'ob://' + value;
+      }
+      return value;
+    });
+  },
+
   addressBarFocus: function(e){
+
+    // on mouseEnter of the address bar input display the ob:// prefix if it doesn't already exist
+    this.untrimAddressBar();
+
     // on inital focus of input, select all text (this makes it easier to copy or delete the text)
     $(e.target).one('mouseup', function () {
       $('#addressBar').select();
     });
+  },
+
+  addressBarBlur: function(e){
+    this.trimAddressBar();
   },
 
   addressBarKeyup: function(e){

@@ -6,7 +6,7 @@
     <div class="modal-hero js-buyWizardHero shadow-inner1-light"
          style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>), url(imgs/defaultBanner.png);">
       <div class="js-buyWizardMapPlaceholder hide">
-        <div class="overflowhide">
+        <div class="flexContainer">
           <iframe
             width="525"
             height="290"
@@ -16,25 +16,28 @@
         </div>
       </div>
       <div class="js-buyWizardMap positionTop"></div>
-      <div class="modal-hero js-buyWizardSpinner hide background1">
-        <div class="width100 txt-center">
-          <div class="txt-col1 ion-android-sync spinner spinner-slow icon-huge icon-circle-background1 rowTop30 row20"></div>
-          <h3 class="txt-bright"><%= polyglot.t('Loading') %> </h3>
+      <div class="modal-hero modal-heroFullHeightNoButtons js-buyWizardSpinner hide background1">
+        <div class="width100 txt-center vCentered">
+          <div class="txt-col1 ion-android-sync spinner spinner-slow icon-gigantic icon-circle-background1 rowTop50 row20"></div>
+          <h3 class="txt-bright padding30"><%= polyglot.t('CheckExchanges') %> </h3>
         </div>
       </div>
-      <div class="modal-hero js-buyWizardPay hide background1">
-        <div class="positionTop width100 padding20">
-          <img class="pull-left qrCode js-buyWizardPayQRCode" height="180" width="180" src="imgs/defaultItem.png"/>
-          <div class="pull-left rowtop20 pad20Left txt-bright" style="width:255px;">
-            <div class="txt-center row20 textSize16px">
-              <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: '<span class="js-buyWizardDetailsTotalBTC"></span>'}) %>
-            </div>
-            <div class="txt-center row20">
-              <a class="textSize11px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
-            </div>
-            <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
-            <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
-            <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+      <div class="modal-hero modal-heroFullHeightNoButtons padding40 js-buyWizardPay hide background1">
+        <div class="width100 padding20">
+          <img class="blockCenter qrCode js-buyWizardPayQRCode" height="250" width="250" src="imgs/defaultItem.png"/>
+        </div>
+        <div class="txt-bright pad20">
+          <div class="txt-center row10 textSize20px">
+            <%= polyglot.t('buyFlow.SendBTCtoAddress', {amount: '<span class="js-buyWizardDetailsTotalBTC"></span>'}) %>
+          </div>
+          <div class="txt-center row20">
+            <a class="textSize16px js-buyWizardPayLink"><span class="js-buyWizardPayURL"></span></a>
+          </div>
+          <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+          <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
+          <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+          <div class="rowTop10 txt-center note">
+            <%= polyglot.t('buyFlow.paymentNote') %>
           </div>
         </div>
       </div>
@@ -390,13 +393,15 @@
                 <div class="flexCol-12 custCol-border positionWrapper">
                   <input type="text" name="refund_address" class="fieldItem custCol-text" id="buyWizardBitcoinAddressInput"
                          placeholder="<%= polyglot.t('BitcoinReturnAddressPlaceholder') %>"
-                         pattern="<%= ob.user.bitcoinValidationRegex %>"
+                         pattern="<%= config.bitcoinValidationRegex %>"
                          value="<%= ob.user.refund_address %>" required />
+                  <% if(config.testnet) { %>
                   <div class="positionTopRight padding10">
-                  <span class="btn btn-txt custCol-secondary">
-                    <i class="ion-android-arrow-back"></i> Testnet Address <!--remove this in production-->
-                  </span>
+                    <span class="btn btn-txt custCol-secondary">
+                      <i class="ion-android-arrow-back"></i> <%= polyglot.t('TestnetAddress') %> <!--remove this in production-->
+                    </span>
                   </div>
+                  <% } %>
                 </div>
               </form>
               <div class="width100 marginTop30 lineHeight21 alignCenter">

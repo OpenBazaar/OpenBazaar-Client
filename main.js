@@ -108,7 +108,7 @@ var start_local_server = function() {
 
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
-    subpy = require('child_process').spawn(serverPath + daemon, ['start', '--testnet', '--loglevel', 'debug', '-p', random_port], {
+    subpy = require('child_process').spawn(serverPath + daemon, ['start', '--loglevel', 'debug', '-p', random_port], {
       detach: false,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
@@ -263,8 +263,8 @@ app.on('ready', function() {
     submenu: [
       {
         label: 'Minimize',
-        accelerator: 'Command+M',
-        selector: 'performMiniaturize:'
+        selector: 'performMiniaturize:',
+        accelerator: 'Command+M'
       },
       {
         label: 'Close',
@@ -349,7 +349,7 @@ app.on('ready', function() {
 
   // Open the devtools.
   // Uncomment if you want tools to open on startup
-  // mainWindow.openDevTools({detach: true});
+  //mainWindow.openDevTools({detach: true});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

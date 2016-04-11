@@ -72,6 +72,7 @@ module.exports = baseVw.extend({
     this.hideMap = true;
     this.orderID = "";
     this.model.set('selectedModerator', "");
+    this.model.updateAttributes();
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -365,8 +366,8 @@ module.exports = baseVw.extend({
       addressString = address.street + ", " + address.city + ", " + address.state + " " + address.postal_code + " " + address.displayCountry;
       addressString = encodeURIComponent(addressString);
       var hideClass = this.hideMap ? "hide" : "";
-      var newMap = '<div class="overflowHidden"><iframe class="' + hideClass + ' js-buyWizardMap"' +
-          'width="525" height="350" frameborder="0" style="border:0; margin-top: -100px"' +
+      var newMap = '<div class="flexContainer"><iframe class="' + hideClass + ' js-buyWizardMap"' +
+          'width="525" height="350" frameborder="0" style="border:0; margin-top: 0"' +
           'src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBoWGMeVZpy9qc7H418Jk2Sq2NWedJgp_4&q=' + addressString + '"></iframe></div>';
       this.$el.find('.js-buyWizardMap').html(newMap);
     }
@@ -502,7 +503,7 @@ module.exports = baseVw.extend({
     "use strict";
     var totalBTCPrice = 0,
         storeName = encodeURI(this.model.get('page').profile.name),
-        message = encodeURI(this.model.get('vendor_offer').listing.item.title.substring(1, 20) + " "+data.order_id),
+        message = encodeURI(this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " "+data.order_id),
         payHREF = "",
         dataURI;
     this.$el.find('.js-buyWizardSpinner').addClass('hide');
@@ -510,18 +511,14 @@ module.exports = baseVw.extend({
     totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
-    payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
+    payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
     this.$el.find('.js-buyWizardPayQRCode').attr('src', dataURI);
     this.$el.find('.js-buyWizardPayPrice').text();
     this.$el.find('.js-buyWizardPayURL').text(data.payment_address);
-    this.$el.find('.js-buyWizardPayLink').attr('href', payHREF).on('click', function(e){
-      e.preventDefault();
-      var extUrl = payHREF;
-      require("shell").openExternal(extUrl);
-    });
+    this.$el.find('.js-buyWizardPayLink').attr('href', payHREF);
     this.buyDetailsView.lockForm();
   },
 
@@ -612,8 +609,14 @@ module.exports = baseVw.extend({
 
   validateInput: function(e) {
     "use strict";
+    var $input = $(e.target);
+
+    if ($input.is('#buyWizardBitcoinAddressInput')) {
+      $input.val($input.val().trim());
+    }
+
     e.target.checkValidity();
-    $(e.target).closest('.flexRow').addClass('formChecked');
+    $input.closest('.flexRow').addClass('formChecked');
   },
 
   closeWizard: function() {

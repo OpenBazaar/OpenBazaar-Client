@@ -1,9 +1,9 @@
 <div class="modal-hero modal-shadow-inner1 bg-dark-blue custCol-secondary-darken">
   <div class="modal-hero-icon"></div>
   <% if (ob.status == 'trying') { %>
-    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusTryingToConnect') %>...</p>
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusTryingToConnect') %></p>
   <% } else if (ob.status == 'connected') { %>
-    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusConnected') %>.</p>  
+    <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusConnected') %></p>  
   <% } else if (ob.status == 'failed') { %>  
     <p class="h6 homeModal-heroText fancy-heading"><%= polyglot.t('serverConnectModal.statusFailedConnection') %></p>
   <% } else if (ob.status == 'failed-auth') { %>  
@@ -19,7 +19,7 @@
       <%= polyglot.t('serverConnectModal.serverConfiguration') %>
       <span class="fontSize14 floatRight">
         <% if (ob.status == 'trying') { %>
-          <i class="ion-android-sync spinner"></i> <%= polyglot.t('serverConnectModal.connecting') %>...
+          <i class="ion-android-sync spinner"></i> <%= polyglot.t('serverConnectModal.connecting') %>
         <% } else if (ob.status === 'failed' || ob.status === 'failed-auth') { %>
           <a class="btn btn-txt marginTop9 textOpacity90 color-primary custCol-primary js-retry">
             <span class="ion-android-sync fontSize12"></span>
@@ -55,14 +55,58 @@
                 <input name="server_ip" type="text" id="fld_server" placeholder="" class="fieldItem" required="" value="<%= ob.server_ip %>">
                 <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-locked
                             positionAbsolute tooltip <% if(!ob.SSL){ %> hide <% } %>  js-sslOn"
-                     data-tooltip="SSL is on">
-                  SSL on
+                     data-tooltip="<%= polyglot.t('SSLIsOn') %>">
+                  <%= polyglot.t('SSLOn') %>
                 </div>
                 <div class="btn btn-txt btn-corner btn-cornerTR custCol-secondary ion-unlocked
                             positionAbsolute tooltip <% if(ob.SSL){ %> hide <% } %>  js-sslOff"
-                     data-tooltip="SSL is off">
-                  SSL off
+                     data-tooltip="<%= polyglot.t('SSLIsOff') %>">
+                  <%= polyglot.t('SSLOff') %>
                 </div>
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <% if (ob.errors.username) { %>
+              <div class="flexCol-12">
+                <ul class="padding2015">
+                  <% ob.errors.username.forEach(function(err) {
+                  print('<li class="list-style-none">' + err + '</li>');
+                  }); %>
+                </ul>
+              </div>
+              <% } %>
+
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="fld_username"><%= polyglot.t('serverConnectModal.username') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.username && print('invalid') %>">
+                <input name="username" type="text" id="fld_username" class="fieldItem" value="<%= ob.username %>">
+              </div>
+            </div>
+
+            <div class="flexRow">
+              <% if (ob.errors.password) { %>
+              <div class="flexCol-12">
+                <ul class="padding2015">
+                  <% ob.errors.password.forEach(function(err) {
+                  print('<li class="list-style-none">' + err + '</li>');
+                  }); %>
+                </ul>
+              </div>
+              <% } %>
+
+              <div class="flexCol-4 borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="fld_password"><%= polyglot.t('serverConnectModal.password') %></label>
+                </div>
+              </div>
+
+              <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.password && print('invalid') %>">
+                <input name="password" type="password" id="fld_password" class="fieldItem" value="<%= ob.password %>">
               </div>
             </div>
 
@@ -132,49 +176,6 @@
               </div>
             </div>            
 
-            <div class="flexRow">
-              <% if (ob.errors.username) { %>
-              <div class="flexCol-12">
-                <ul class="padding2015">
-                  <% ob.errors.username.forEach(function(err) {
-                       print('<li class="list-style-none">' + err + '</li>');
-                     }); %>
-                </ul>
-              </div>
-              <% } %>
-
-              <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">
-                  <label for="fld_username"><%= polyglot.t('serverConnectModal.username') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.username && print('invalid') %>">
-                <input name="username" type="text" id="fld_username" class="fieldItem" value="<%= ob.username %>">
-              </div>
-            </div>
-
-            <div class="flexRow">
-              <% if (ob.errors.password) { %>
-              <div class="flexCol-12">
-                <ul class="padding2015">
-                  <% ob.errors.password.forEach(function(err) {
-                       print('<li class="list-style-none">' + err + '</li>');
-                     }); %>
-                </ul>
-              </div>
-              <% } %>
-
-              <div class="flexCol-4 borderRight custCol-border">
-                <div class="fieldItem">
-                  <label for="fld_password"><%= polyglot.t('serverConnectModal.password') %></label>
-                </div>
-              </div>
-
-              <div class="flexCol-8 borderRight0 custCol-border <% ob.errors.password && print('invalid') %>">
-                <input name="password" type="password" id="fld_password" class="fieldItem" value="<%= ob.password %>">
-              </div>
-            </div>                        
            </div>
         </form>
     </div>
