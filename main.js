@@ -406,7 +406,8 @@ app.on('ready', function() {
 });
 
 ipcMain.on('set-badge', function(event, text) {
-  typeof text !== 'undefined' && app.dock.setBadge(String(text));
+  typeof text !== 'undefined' && process.platform === 'darwin' &&
+    app.dock.setBadge(String(text));
 });
 
 app.on('open-url', function(event, uri) {
