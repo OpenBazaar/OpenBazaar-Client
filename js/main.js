@@ -185,22 +185,21 @@ $('body').on('keypress', 'input', function(event) {
 
 //keyboard shortucts
 $(window).bind('keydown', function(e) {
-  var char = String.fromCharCode(e.which).toLowerCase();
-  var ctrl = (e.ctrlKey || e.metaKey) && !e.altKey; //test for alt key to prevent international keyboard issues
+  var char = String.fromCharCode(e.which).toLowerCase(),
+      ctrl = (e.ctrlKey || e.metaKey) && !e.altKey, //test for alt key to prevent international keyboard issues
+      route = null;
     
   if (event.keyCode == 116) { //on F5 press
     location.reload();
   }
-  
-  if (ctrl && char == 'z') { //run undo programmatically to avoid crash
-    e.preventDefault();
-    document.execCommand('undo');
-  }
-  
-  if (ctrl) {
-    var route = null;
 
+  if (ctrl) {
     switch (char) {
+      case 'z':
+        //run undo programmatically to avoid crash
+        e.preventDefault();
+        document.execCommand('undo');
+        break;
       case config.keyShortcuts.discover:
         route = 'home';
         break;
@@ -225,6 +224,10 @@ $(window).bind('keydown', function(e) {
       case config.keyShortcuts.settings:
         route = 'settings';
         break;
+      case config.keyShortcuts.addressBar:
+        // Select all text in address bar
+        $('.js-navAddressBar').select();
+        break;
     }
 
     if (route !== null) {
@@ -232,13 +235,7 @@ $(window).bind('keydown', function(e) {
 	  Backbone.history.navigate(route, {
         trigger: true
       });
-	}
-
-    // Select all text in address bar
-    if (char === config.keyShortcuts.addressBar) {
-      // Select all text in address bar
-      $('.js-navAddressBar').select();
-    }
+	  }
   }
 });
 
