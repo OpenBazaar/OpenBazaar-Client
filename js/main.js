@@ -185,12 +185,20 @@ $('body').on('keypress', 'input', function(event) {
 
 //keyboard shortucts
 $(window).bind('keydown', function(e) {
+  var char = String.fromCharCode(e.which).toLowerCase();
+  var ctrl = (e.ctrlKey || e.metaKey) && !e.altKey; //test for alt key to prevent international keyboard issues
+    
   if (event.keyCode == 116) { //on F5 press
     location.reload();
   }
-  if ((e.ctrlKey || e.metaKey) && !e.altKey) { //test for alt key to prevent international keyboard issues
-    var route = null,
-    char = String.fromCharCode(e.which).toLowerCase();
+  
+  if (ctrl && char == 'z') { //run undo programmatically to avoid crash
+    e.preventDefault();
+    document.execCommand('undo');
+  }
+  
+  if (ctrl) {
+    var route = null;
 
     switch (char) {
       case config.keyShortcuts.discover:
@@ -221,7 +229,7 @@ $(window).bind('keydown', function(e) {
 
     if (route !== null) {
       e.preventDefault();
-			Backbone.history.navigate(route, {
+	  Backbone.history.navigate(route, {
         trigger: true
       });
 	}
