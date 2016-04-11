@@ -185,43 +185,46 @@ $('body').on('keypress', 'input', function(event) {
 
 //keyboard shortucts
 $(window).bind('keydown', function(e) {
+  if (event.keyCode == 116) { //on F5 press
+    location.reload();
+  }
   if ((e.ctrlKey || e.metaKey) && !e.altKey) { //test for alt key to prevent international keyboard issues
-		var route = null,
-        char = String.fromCharCode(e.which).toLowerCase();
+    var route = null,
+    char = String.fromCharCode(e.which).toLowerCase();
 
-		switch (char) {
-			case config.keyShortcuts.discover:
-				route = 'home';
-				break;
-			case config.keyShortcuts.myPage:
-				route = 'userPage';
-				break;
-			case config.keyShortcuts.customizePage:
-				route = 'userPage/' + user.get('guid') + '/customize';
-				break;
-			case config.keyShortcuts.create:
-				route = 'userPage/' + user.get('guid') + '/listingNew';
-				break;
-			case config.keyShortcuts.purchases:
-				route = 'transactions/purchases';
-				break;
-			case config.keyShortcuts.sales:
-				route = 'transactions/sales';
-				break;
-			case config.keyShortcuts.cases:
-				route = 'transactions/cases';
-				break;
-			case config.keyShortcuts.settings:
-				route = 'settings';
-				break;
-		}
+    switch (char) {
+      case config.keyShortcuts.discover:
+        route = 'home';
+        break;
+      case config.keyShortcuts.myPage:
+        route = 'userPage';
+        break;
+      case config.keyShortcuts.customizePage:
+        route = 'userPage/' + user.get('guid') + '/customize';
+        break;
+      case config.keyShortcuts.create:
+        route = 'userPage/' + user.get('guid') + '/listingNew';
+        break;
+      case config.keyShortcuts.purchases:
+        route = 'transactions/purchases';
+        break;
+      case config.keyShortcuts.sales:
+        route = 'transactions/sales';
+        break;
+      case config.keyShortcuts.cases:
+        route = 'transactions/cases';
+        break;
+      case config.keyShortcuts.settings:
+        route = 'settings';
+        break;
+    }
 
     if (route !== null) {
       e.preventDefault();
 			Backbone.history.navigate(route, {
         trigger: true
       });
-		}
+	}
 
     // Select all text in address bar
     if (char === config.keyShortcuts.addressBar) {
