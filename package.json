@@ -42,7 +42,7 @@
     "yargs": "^4.1.0"
   },
   "devDependencies": {
-    "electron-prebuilt": "0.36.9",
+    "electron-prebuilt": "0.37.5",
     "eslint": "1.9.0",
     "pre-commit": "^1.1.2",
     "valiquire": "0.3.0"

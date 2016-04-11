@@ -330,8 +330,8 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     "width": 1200,
     "height": 720,
-    "min-width": 1024,
-    "min-height": 700,
+    "minWidth": 1024,
+    "minHeight": 700,
     "center": true,
     "title": "OpenBazaar",
     "frame": false,
