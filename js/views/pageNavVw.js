@@ -270,6 +270,8 @@ module.exports = baseVw.extend({
       self.$notifMenu.find('#notificationsPanel')
           .html(self.notificationsVw.render().el);
 
+      self.setNotificationCount(self.getUnreadNotifCount());          
+
       //add the admin panel
       /*
       self.adminPanel && self.adminPanel.remove();
