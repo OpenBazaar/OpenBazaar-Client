@@ -46,18 +46,7 @@ module.exports = baseVw.extend({
     });
 
     this.listenTo(this.chatConversationsCl, 'reset', (cl) => {
-      cl.forEach((md) => {
-        this.listenTo(md, 'change', () => {
-          var filteredMd;
-
-          if (this.filteredChatConvos) {
-            filteredMd = this.filteredChatConvos.findWhere({ guid: md.get('guid') });
-            filteredMd && filteredMd.set(md.attributes);
-          }
-
-          md.hasChanged('unread') && this.setAggregateUnreadCount();          
-        });
-      });
+      cl.forEach((md) => this.bindChatConvoMdChangeHandler(md));
 
       if (!this.chatHeadsVw) {
         this.chatHeadsVw = new ChatHeadsVw({
@@ -78,7 +67,11 @@ module.exports = baseVw.extend({
       this.setAggregateUnreadCount();
     });
 
-    this.listenTo(this.chatConversationsCl, 'add remove', (md) => {
+    this.listenTo(this.chatConversationsCl, 'add remove', (md, cl, opts) => {
+      if (opts.add) {
+        this.bindChatConvoMdChangeHandler(md);
+      }
+
       this.setAggregateUnreadCount();
       this.filterChatHeads();
     });
@@ -110,6 +103,19 @@ module.exports = baseVw.extend({
     this.listenTo(options.model, 'change:language', function(){
       this.render(true);
     });    
+  },
+
+  bindChatConvoMdChangeHandler: function(md) {
+    this.listenTo(md, 'change', () => {
+      var filteredMd;
+
+      if (this.filteredChatConvos) {
+        filteredMd = this.filteredChatConvos.findWhere({ guid: md.get('guid') });
+        filteredMd && filteredMd.set(md.attributes);
+      }
+
+      md.hasChanged('unread') && this.setAggregateUnreadCount();          
+    });      
   },
 
   setAggregateUnreadCount: function() {
