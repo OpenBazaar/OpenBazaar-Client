@@ -1171,7 +1171,12 @@ label.fieldItem {
   z-index: 11;
   top: 50px;
   height: 100%;
-  width: calc(100% - 30px);
+  width: calc(100% - 47px);
+  transition: width 0.5s ease;
+}
+
+#ov1.chatOpen #cboxOverlay {
+  width: calc(100% - 230px);
 }
 
 /*========== typography ==========*/
