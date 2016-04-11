@@ -27,16 +27,6 @@ function App() {
   }  
 
   this.connectHeartbeatSocket();
-  
-  $(window).blur(() => {
-    setTimeout(() => {
-      this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
-    }, 0);
-  });
-
-  $(window).focus(() => {
-    ipcRenderer.send('set-badge', '');
-  });
 }
 
 App.prototype.connectHeartbeatSocket = function() {
@@ -131,7 +121,7 @@ App.prototype.setUnreadCounts = function(notif, chat) {
   this._chatMessagesUnread = typeof chat === 'number' ? chat : this._chatMessagesUnread;
 
   this._awayCounts = this._notifUnread + this._chatMessagesUnread;
-  !document.hasFocus() && this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
+  this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
 };
 
 App.prototype.setUnreadNotifCount = function(count) {
