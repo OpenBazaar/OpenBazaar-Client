@@ -67,6 +67,10 @@ module.exports = Backbone.Model.extend({
         langCode: "tr"
       },
       {
+        langName: "Uzbek (Uzbek)",
+        langCode: "uz"
+      },
+      {
         langName: "中文 (Chinese, S)",
         langCode: "zh-CN"
       },
