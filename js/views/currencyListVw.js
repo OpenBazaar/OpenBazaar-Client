@@ -46,13 +46,14 @@ module.exports = baseVw.extend({
 
     $.ajax({
           method: "GET",
-          url: "https://api.bitcoinaverage.com/all"
+          url: "https://api.bitcoinaverage.com/ticker/global/all"
         })
         .done(function (response) {
           var BitcoinAvgCurrencies = {};
           for (var bcaCurrency in response) {
-            if (response[bcaCurrency].averages) {
+            if (response[bcaCurrency].last) {
               self.availableCurrenciesList.push(bcaCurrency);
+              console.log(bcaCurrency)
             }
           }
         })

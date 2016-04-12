@@ -1502,7 +1502,6 @@ removed because I don't think we're using the trick to hide the borders any more
 .flex-border > .flexRow > [class |= "flexCol"] {
   border-right: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 0 1px 1px 0;
 }
 
 .flex-border > .flexRow > [class |= "flexCol"].pad10 {
