@@ -49,14 +49,23 @@ module.exports = baseVw.extend({
       }
     }
 
+    var countryList = new countriesModel().get('countries'), allRegions = [];
+    countryList.forEach(function(country) {
+      allRegions.push(country.dataName);
+    });
+    
+    var europeanUnion = [
+      'AUSTRIA', 'BELGIUM', 'BULGARIA', 'CROATIA', 'CYPRUS', 'CZECH_REPUBLIC', 'DENMARK', 'ESTONIA',
+      'FINLAND', 'FRANCE', 'GERMANY', 'GREECE', 'HUNGARY', 'IRELAND', 'ITALY', 'LATVIA', 'LITHUANIA', 'LUXEMBOURG',
+      'MALTA', 'NETHERLANDS', 'POLAND', 'PORTUGAL', 'ROMANIA', 'SLOVAKIA', 'SLOVENIA', 'SPAIN', 'SWEDEN', 'UNITED_KINGDOM' 
+    ];
+    
+    var europeanEconomicArea = europeanUnion.concat(['ICELAND', 'LIECHTENSTEIN', 'NORWAY']);
+    
     this.regions = {
-      "EUROPEAN_UNION": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK", "ESTONIA",
-        "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "IRELAND", "ITALY", "LATVIA", "LITHUANIA", "LUXEMBOURG",
-        "MALTA", "NETHERLANDS", "POLAND", "PORTUGAL", "ROMANIA", "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"],
-      "EUROPEAN_ECONOMIC_AREA": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK",
-        "ESTONIA", "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "ICELAND", "IRELAND", "ITALY", "LATVIA",
-        "LIECHTENSTEIN", "LITHUANIA", "LUXEMBOURG", "MALTA", "NETHERLANDS", "NORWAY", "POLAND", "PORTUGAL", "ROMANIA",
-        "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"]
+      'ALL': allRegions,
+      'EUROPEAN_UNION': europeanUnion,
+      'EUROPEAN_ECONOMIC_AREA': europeanEconomicArea
     };
 
     this.prevShipsToVal = [];

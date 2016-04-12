@@ -146,33 +146,6 @@
             <div class="flexRow">
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
-                  <label for="refund_address">
-                    <%= polyglot.t('BitcoinAddress') %>
-                  </label>
-                </div>
-              </div>
-
-              <div class="flexCol-9 borderRight0 custCol-border positionWrapper">
-                <input name="refund_address"
-                       type="text"
-                       id="refund_address"
-                       placeholder="<%= polyglot.t('Address') %>"
-                       class="fieldItem"
-                       pattern="<%= config.bitcoinValidationRegex %>"
-                       value="<%= ob.user.refund_address %>">
-                <% if(config.testnet) { %>
-                <div class="positionTopRight padding10">
-                  <span class="btn btn-txt custCol-secondary">
-                    <%= polyglot.t('MustTestnetAddress') %> <!--remove this in production-->
-                  </span>
-                </div>
-                <% } %>
-              </div>
-            </div>
-
-            <div class="flexRow">
-              <div class="flexCol-3  borderRight custCol-border">
-                <div class="fieldItem">
                   <label>
                     <%= polyglot.t('EnableNotifications') %>
                   </label>
@@ -1136,6 +1109,34 @@
                 </div>
               </div>
 
+            </div>
+
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
+                  <label for="refund_address">
+                    <%= polyglot.t('BitcoinAddress') %>
+                  </label>
+                  <i class="ion-help-circled tooltip tooltip-box" data-tooltip="<%= polyglot.t('BitcoinReturnAddressInfo') %>"></i>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border positionWrapper">
+                <input name="refund_address"
+                       type="text"
+                       id="refund_address"
+                       placeholder="<%= polyglot.t('Address') %>"
+                       class="fieldItem"
+                       pattern="<%= config.bitcoinValidationRegex %>"
+                       value="<%= ob.user.refund_address %>">
+                <% if(config.testnet) { %>
+                <div class="positionTopRight padding10">
+                  <span class="btn btn-txt custCol-secondary">
+                    <%= polyglot.t('MustTestnetAddress') %> <!--remove this in production-->
+                  </span>
+                </div>
+                <% } %>
+              </div>
             </div>
 
             <div class="flexRow">
