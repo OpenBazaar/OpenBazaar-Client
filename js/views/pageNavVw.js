@@ -355,6 +355,7 @@ module.exports = baseVw.extend({
   closeNotificationsMenu: function() {
     app.hideOverlay();
     this.$notifMenu.removeClass('popMenu-opened');
+    this.onNotifMenuClose();
   },
 
   isNotifMenuOpen: function() {
