@@ -138,6 +138,8 @@ module.exports = baseVw.extend({
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUserClick',
     'click .js-unfollow': 'unfollowUserClick',
+    'click .js-addmoderator': 'addModeratorClick',
+    'click .js-removemoderator': 'removeModeratorClick',
     'click .js-moreButtonsOwnPage': 'moreButtonsOwnPageClick',
     'click .js-moreButtonsNotOwnPage': 'moreButtonsNotOwnPageClick',
     'click .js-message': 'sendMessage',
@@ -179,6 +181,7 @@ module.exports = baseVw.extend({
     this.pageID = options.userID;
     //set view's userID from the userModel;
     this.userID = options.userModel.get('guid');
+    this.globalUserModel = options.userModel;
     this.userProfileFetchParameters = {};
     this.itemFetchParameters = {};
     this.model = new Backbone.Model();
@@ -236,7 +239,7 @@ module.exports = baseVw.extend({
       this.setItem(options.contract_hash, null, function(){
         self.cloneItem();
       });
-    });    
+    });
 
     this.listenTo(window.obEventBus, "itemShortDelete", function(options){
       self.deleteItem(false, options.contract_hash);
@@ -250,13 +253,13 @@ module.exports = baseVw.extend({
       if (e.guid === this.model.get('page').profile.guid) {
         this.renderUserBlocked();
       }
-    });    
+    });
 
     this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
       if (e.guid === this.model.get('page').profile.guid) {
         this.renderUserUnblocked();
       }
-    });        
+    });
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -320,7 +323,7 @@ module.exports = baseVw.extend({
         this.itemFetch && this.itemFetch.abort();
       }
     };
-    
+
     if (this.currentItemHash) {
       config.connectText = window.polyglot.t('pageConnectingMessages.listingConnect').replace('${listing}', this.currentItemHash);
       config.failedText = window.polyglot.t('pageConnectingMessages.listingFail');
@@ -352,6 +355,7 @@ module.exports = baseVw.extend({
       self.setCustomStyles();
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.fetchFollowing();
+      self.getIsModerator();
       self.fetchListings();
       //save state of the page
       self.undoCustomAttributes.background_color = self.model.get('page').profile.background_color;
@@ -519,6 +523,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-userPageControls, #customizeControls, .js-itemCustomizationButtons, .js-pageCustomizationButtons').addClass('hide');
     this.$el.find('.js-deleteItem').removeClass('confirm');
     this.$el.find('.js-unfollow').removeClass('confirm');
+    this.$el.find('.js-removemoderator').removeClass('confirm');
     this.$el.find('.user-page-header-slim-bg-cover').removeClass('user-page-header-slim-bg-cover-customize');
     document.getElementById('obContainer').classList.remove("box-borderDashed");
     document.getElementById('obContainer').classList.remove("noScrollBar");
@@ -581,6 +586,20 @@ module.exports = baseVw.extend({
     }
     followBtn.removeClass('loading');
     unfollowBtn.removeClass('loading');
+  },
+
+  toggleModeratorButtons: function(moderated) {
+    var addBtn = this.$('.js-addmoderator'),
+        removeBtn = this.$('.js-removemoderator');
+    if(moderated === true){
+      addBtn.addClass('hide');
+      removeBtn.removeClass('hide');
+    } else {
+      addBtn.removeClass('hide');
+      removeBtn.addClass('hide');
+    }
+    addBtn.removeClass('loading');
+    removeBtn.removeClass('loading');
   },
 
   fetchListings: function() {
@@ -689,9 +708,28 @@ module.exports = baseVw.extend({
     });
   },
 
+  getIsModerator: function () {
+  	console.log(this.model.get('user').vendor);
+  	if(this.userProfile.get('profile').moderator == true && this.options.ownPage == false && this.model.get('user').vendor) {
+  	  var pageGuid = this.userProfile.get('profile').guid;
+  	  var mods = this.model.get('user').moderators;
+  	  var found = false;
+      var self = this;
+  	  this.toggleModeratorButtons(false);
+      __.each(mods, function(mod) {
+    		if(mod.guid == pageGuid) {
+    		  found = true;
+    		}
+      });
+      if(found == true) {
+        this.toggleModeratorButtons(true);
+      }
+    }
+  },
+
   renderItems: function (model, skipNSFWmodal) {
     "use strict";
-    
+
     var self = this;
     var select = this.$el.find('.js-categories');
     var selectOptions = [];
@@ -722,23 +760,23 @@ module.exports = baseVw.extend({
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
-    
+
     Object.keys(selectOptions).sort().forEach(function(selectOption) {
       var opt = document.createElement('option');
       opt.value = selectOption;
       opt.innerHTML = selectOption;
       select.append(opt);
     });
-    
+
     this.itemList = new itemListView({
-      model: model, 
-      el: '.js-list3', 
-      title: window.polyglot.t('NoListings'), 
+      model: model,
+      el: '.js-list3',
+      title: window.polyglot.t('NoListings'),
       message: "",
-      userModel: this.options.userModel, 
+      userModel: this.options.userModel,
       category: this.$el.find('.js-categories').val()
     });
-    
+
     this.registerChild(this.itemList);
 
     this.$('.js-listingCount').html(model.length);
@@ -794,7 +832,7 @@ module.exports = baseVw.extend({
       reverse: true
     });
     this.registerChild(this.followingList);
-    
+
     this.$('.js-userFollowingCount').html(model.length);
 
     if (model.length) {
@@ -854,7 +892,7 @@ module.exports = baseVw.extend({
         if (self.options.ownPage === false){
           model.set('imageExtension', "&guid=" + model.get('vendor_offer').listing.id.guid);
         }
-        
+
         model.updateAttributes(afterUpdate);
         onSucceed && onSucceed(model, response);
 
@@ -954,7 +992,7 @@ module.exports = baseVw.extend({
         this.categoryChanged();
     }
 
-    this.storeClick(e);    
+    this.storeClick(e);
   },
 
   storeCatClick: function(e) {
@@ -1116,7 +1154,7 @@ module.exports = baseVw.extend({
       // set recommendations
       this.$el.find('.customColorChoice').css('background','#fff');  // reset to white to give a cool transition
       this.$el.find('.customizeTextColorRecommendations .customColorChoice:first').css('background','transparent'); // set to transparent
-      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#ffffff'); 
+      this.$el.find('.customizeTextColorRecommendations .customColorChoice:nth-child(2)').css('background', '#ffffff');
       this.$el.find('.customizeTextColorRecommendations .customColorChoice:last').css('background', '#000000');
 
       // slide background_color recommendations out + hide others
@@ -1360,7 +1398,7 @@ module.exports = baseVw.extend({
   saveItem: function(e){
     if(this.itemEditView) {
       $(e.target).addClass('loading');
-      
+
       this.itemEditView.saveChanges().always(() => $(e.target).removeClass('loading'))
         .fail(() => {
           var $firstErr = this.$('.js-itemEdit .invalid, .js-itemEdit :invalid').not('form').eq(0);
@@ -1414,6 +1452,29 @@ module.exports = baseVw.extend({
 
   },
 
+  addModeratorClick: function(e){
+    var $targ = $(e.target).closest('.js-addmoderator');
+
+    $targ.addClass('loading');
+    /*this.followUser({'guid': this.pageID}).fail(() => {
+      $targ.removeClass('loading');
+    });*/
+  },
+
+  removeModeratorClick: function(e){
+    var $targ = $(e.target).closest('.js-removemoderator');
+
+    if($targ.hasClass('confirm')){
+      $targ.addClass('loading').removeClass('confirm');
+      /*this.unfollowUser({'guid': this.pageID}).fail(() => {
+        $(e.target).removeClass('loading')
+      });*/
+    } else {
+      $targ.addClass('confirm');
+    }
+
+  },
+
   moreButtonsOwnPageClick: function(){
     if ($('.js-extraButtonsOwnPage').hasClass('hide')){
       $('.js-extraButtonsOwnPage').removeClass('hide');
@@ -1456,7 +1517,7 @@ module.exports = baseVw.extend({
 
   unfollowUser: function(options){
     var self = this;
-    
+
     return $.ajax({
       type: "POST",
       data: {'guid': options.guid},
@@ -1525,7 +1586,7 @@ module.exports = baseVw.extend({
   renderUserUnblocked: function() {
     this.$('.js-unblock').addClass('hide');
     this.$('.js-block').removeClass('hide');
-  },  
+  },
 
   hideThisUser: function(reason){
     this.$('.js-blockedWarning').fadeIn(100);
