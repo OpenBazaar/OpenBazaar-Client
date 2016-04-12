@@ -37,27 +37,22 @@
   <div class="flex-border color-primary height54 js-productsSearch">
     <div class="flexRow">
       <div class="flexRow borderBottom">
-        <div class="flexCol-8">
+        <div class="flexCol-12">
           <div class="txtFieldWrapper searchWrapper">
             <input type="text" class="txtField txtField-bar js-homeSearchItems" placeholder="<%= polyglot.t('SearchForItemsPlaceholder') %>" />
             <a class="btn-corner btn-cornerTR ion-ios-close vCentered icon-med hide js-homeSearchItemsClear textOpacity50"></a>
           </div>
-        </div>
-        <div class="flexCol-4">
-          <div class="flexRow flexRow-vCenter">
-            <div class="flexExpand marginRight10 fontSize13 textOpacity75">
-              <div class="pull-right">
-                <%= polyglot.t('ShowOnlyFollowerListings') %>
-              </div>
-            </div>
-            <div class="btn-togWrapper btn-togWrapper-c1 marginRight10">
+          <div class="flexRow positionAbsolute">
+            <div class="btn-togWrapper btn-togWrapper-c1 marginRight20 js-homeListingToggle">
               <a class="btn btn-txt btn-c3 btn-togLeft active js-homeListingsFollowed tooltip tooltip-left"
                  data-tooltip="<%= polyglot.t('ShowOnlyFollowerListingsTooltip') %>">
-                <span class="toggle-txt"><%= polyglot.t('On') %></span>
+                <span class="ion-person fontSize11 marginRight2 textOpacity1"></span>
+                <span class="toggle-txt"><%= polyglot.t('ShowOnlyFollowerListings') %></span>
               </a>
               <a class="btn btn-txt btn-c3 btn-togRight js-homeListingsAll tooltip tooltip-left"
                  data-tooltip="<%= polyglot.t('ShowAllListingsTooltip') %>">
-                <span class="toggle-txt"><%= polyglot.t('Off') %></span>
+                <span class="ion-android-options fontSize11 marginRight2 textOpacity1"></span>
+                <span class="toggle-txt"><%= polyglot.t('Random') %></span>
               </a>
             </div>
           </div>
