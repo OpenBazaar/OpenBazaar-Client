@@ -6,7 +6,7 @@ function checkVal($field) {
     $field.val('');
   }
 
-  //replace double quotes with single quotes to avoid invalid json
+  // replace double quotes with single quotes to avoid invalid json
   fVal = fVal.replace(/\\([\s\S])|(")/g, "'");
 
   fVal = sanitizeHTML(fVal, {
