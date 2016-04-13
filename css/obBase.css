@@ -3597,6 +3597,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: 50%;
   right: 50%;
+  padding-top: 1px;
   animation: spinnerAnimation 1.15s infinite linear;
 }
 
@@ -4006,7 +4007,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .cropit-image-preview.cropit-avatar {
   background: url('../imgs/defaultUser.png');
-  background-size: cover;  
+  background-size: cover;
 }
 
 #userPage .headerCropper .bar.navBar {
@@ -4232,13 +4233,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: fixed;
   bottom: 0;
   z-index: 10;
-  width: 100%;  
+  width: 100%;
 }
 
 #statusBar .statusMessageWrap {
   height: 0px;
   overflow: hidden;
-  transition: opacity 1.5s, height 1s;   
+  transition: opacity 1.5s, height 1s;
 }
 
 #statusBar .statusMessageWrap.slideUp {
@@ -4256,7 +4257,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #000;
   border-bottom: 1px solid #222;
   position: relative;
-  top: -1px; 
+  top: -1px;
 }
 
 .page-connect-modal {
@@ -4288,8 +4289,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   right: 0;
   left: 0;
   top: 50%;
-  max-width: 600px;  
-  margin-top: 90px;  
+  max-width: 600px;
+  margin-top: 90px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
