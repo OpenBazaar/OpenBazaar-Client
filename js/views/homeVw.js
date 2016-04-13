@@ -564,6 +564,7 @@ module.exports = baseVw.extend({
           'txt-center',
           function(){
             localStorage.setItem('safeListingsWarningDissmissed', true);
+            self.$('.js-discoverToggleHelper').addClass('hide');
             self.loadAllItems();
             messageModal.hide();
             self.setListingsAll();
