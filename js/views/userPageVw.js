@@ -638,7 +638,7 @@ module.exports = baseVw.extend({
             //call followers 2nd so list of following is available
             self.fetchFollowers();
             //mark whether page is following you
-            if(Boolean(__.findWhere(followingArray, {guid: self.userID}))){
+            if(self.options.ownPage === false && Boolean(__.findWhere(followingArray, {guid: self.userID}))){
               self.$('.js-followsMe').removeClass('hide')
             }
 
