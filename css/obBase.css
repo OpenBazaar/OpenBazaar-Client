@@ -1855,8 +1855,6 @@ margin: auto;
 
 .btn.btn-c3:hover,
 .btn.btn-c3.hover {
-  border-bottom: solid 2px #CBDEED;
-  box-shadow: none;
   opacity: 1;
 }
 
