@@ -1812,14 +1812,26 @@ margin: auto;
   box-shadow: none;
   border-radius: 0;
   border: solid 1px #2378AA;
-  opacity: .50;
+  opacity: 1;
   font-weight: 500;
   font-size: 13px;
   transition: none;
   letter-spacing: 0;
   height: auto;
   padding: 4px 22px;
+}
+
+.btn.btn-c3-discoverToggle .toggle-txt {
+  opacity: .45;
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn.btn-c3-discoverToggle:hover > .toggle-txt {
+  opacity: 1;
+}
+
+.btn.btn-c3-discoverToggle.active .toggle-txt {
+  opacity: 1;
 }
 
 .btn:active,
