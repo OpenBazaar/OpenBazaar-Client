@@ -54,6 +54,7 @@ module.exports = Backbone.View.extend({
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
     'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
+    'click #advancedForm input[name="useTestnet"]': 'toggleTestnet',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'change #handle': 'handleChange',
@@ -973,6 +974,11 @@ module.exports = Backbone.View.extend({
       $('html').removeClass('notFancy');
       localStorage.setItem('notFancy', "false");
     }
+  },
+
+  toggleTestnet: function(){
+    window.config.setTestnet($('#advancedForm input[name="useTestnet"]').prop('checked'));
+    window.location.reload();
   },
 
   close: function(){

@@ -143,6 +143,8 @@
   "Changes": "Changes",
   "SaveChanges": "Save Changes",
   "YourName": "Your name",
+  "UseTestnet": "Use Testnet",
+  "UseTestnetHelp": "If set to true, your client will use TestNet bitcoin addresses. Only set to true if your server was started with the -t testnet flag.",
   "TestnetAddress": "Testnet Address",
   "MustTestnetAddress": "Must be a Testnet Address",
   "BitcoinAddress": "Current Refund Address",
