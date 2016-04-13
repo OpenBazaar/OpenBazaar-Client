@@ -3621,8 +3621,8 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 .spinner-with-logo i {
   position: absolute;
-  top: 17px;
-  left: 18px;
+  top: 16px;
+  left: 17px;
   opacity: .90;
 }
 
@@ -4281,6 +4281,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 .page-connect-modal .spinner-with-logo .icon-no-connection {
+  top: 18px;
   left: 22px;
 }
 
