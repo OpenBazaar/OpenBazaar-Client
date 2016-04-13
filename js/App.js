@@ -121,7 +121,7 @@ App.prototype.setUnreadCounts = function(notif, chat) {
   this._chatMessagesUnread = typeof chat === 'number' ? chat : this._chatMessagesUnread;
 
   this._awayCounts = this._notifUnread + this._chatMessagesUnread;
-  this._awayCounts && ipcRenderer.send('set-badge', this._awayCounts);
+  ipcRenderer.send('set-badge', this._awayCounts || '');
 };
 
 App.prototype.setUnreadNotifCount = function(count) {
