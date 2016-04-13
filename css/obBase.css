@@ -3928,6 +3928,38 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
 }
 
+.discoverToggleHelper {
+  top: -40px;
+  width: auto;
+  max-width: 200px;
+  background: rgba(37,37,37,.95);
+  border-radius: 3px;
+  color: #fff;
+  padding: 8px 10px;
+  position: absolute;
+  z-index: 10;
+  height: 16px;
+  font-size: 11px;
+  right: 0;
+  line-height: 16px;
+  opacity: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  margin-top: 2px;
+}
+
+.discoverToggleHelper:after {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 0 10px;
+  border-color: rgba(37,37,37,.95) transparent transparent transparent;
+  position: absolute; 
+  bottom: -10px;
+  left: 70%;
+}
+
 .tooltip {
   position: relative;
 }
