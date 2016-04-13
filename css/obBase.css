@@ -1806,6 +1806,9 @@ margin: auto;
 .btn.btn-c3,
 #userPage .btn.btn-c3 {
   background-color: transparent;
+}
+
+.btn.btn-c3-discoverToggle {
   box-shadow: none;
   border-radius: 0;
   border: solid 1px #2378AA;
@@ -2478,7 +2481,9 @@ div.chatSearchOut .chatSearchIcon {
 .btn-togWrapper {
   border: 1px solid #086A9E;
   border-radius: 5px;
-  float: right;
+}
+
+.btn-toWrapper-discoverToggle {
   position: absolute;
   right: 0;
   bottom: -2px;
