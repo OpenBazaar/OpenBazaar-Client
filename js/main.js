@@ -124,6 +124,7 @@ $('body').on('click', 'a', function(e){
     app.router.translateRoute(targUrl.replace('ob://', '')).done((translatedRoute) => {
       app.router.navigate(translatedRoute, {trigger:true});
     });
+
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
     e.preventDefault();
 
