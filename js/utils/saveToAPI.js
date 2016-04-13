@@ -35,6 +35,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       return $.Deferred().reject('failed form validation').promise();
     }
 
+    /*
     //temporarily disable any blank fields so they aren't picked up by the serializeArray
     form.find(":input:not(:disabled)").each(function(){
       if($(this).val() == "") {
@@ -42,6 +43,7 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
         tempDisabledFields.push($(this).attr('name'));
       }
     });
+    */
 
     //temporarily disable any form fields overriden by manual data so they aren't double submitted
     __.each(addData, function(value, key) {
@@ -132,10 +134,12 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       console.log(errorThrown);
     },
     complete: function(){
+      /*
       //re-enable any disabled fields
       __.each(tempDisabledFields, function(element){
         form.find('input[name="'+element+'"]').attr('disabled', false);
       });
+      */
     }
   });
 };

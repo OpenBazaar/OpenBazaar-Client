@@ -173,7 +173,7 @@ app.on('before-quit', function (e) {
     }
 });
 
-app.commandLine.appendSwitch('ignore-certificate-errors', true);
+//app.commandLine.appendSwitch('ignore-certificate-errors', true);
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
