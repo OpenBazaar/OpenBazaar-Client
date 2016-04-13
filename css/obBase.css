@@ -2897,6 +2897,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding: 15px;
   border: 2px solid transparent;
   color: #fff;
+  resize: vertical;
 }
 
 .fieldItem-textarea:focus {
