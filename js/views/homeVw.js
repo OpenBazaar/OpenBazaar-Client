@@ -417,12 +417,12 @@ module.exports = baseVw.extend({
   },
 
   searchItemsFocus: function(e){
-    this.$el.find('.js-homeListingToggle').addClass('hide');
+    this.$('.js-homeListingToggle').addClass('hide');
   },
 
   searchItemsBlur: function(e){
     if(!this.searchItemsText){
-      this.$el.find('.js-homeListingToggle').removeClass('hide');
+      this.$('.js-homeListingToggle').removeClass('hide');
     }
   },
 
@@ -435,7 +435,6 @@ module.exports = baseVw.extend({
       this.searchItems(targetText);
       addressText = addressText ? "#" + addressText.replace(/\s+/g, '') : "";
       target.val(addressText);
-      this.$el.find('.js-homeListingToggle').addClass('hide');
       window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
     }
 
