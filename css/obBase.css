@@ -3931,7 +3931,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .discoverToggleHelper {
   top: -40px;
   width: auto;
-  max-width: 200px;
+  max-width: 300px;
   background: rgba(37,37,37,.95);
   border-radius: 3px;
   color: #fff;
