@@ -53,7 +53,6 @@ module.exports = baseVw.extend({
           for (var bcaCurrency in response) {
             if (response[bcaCurrency].last) {
               self.availableCurrenciesList.push(bcaCurrency);
-              console.log(bcaCurrency)
             }
           }
         })

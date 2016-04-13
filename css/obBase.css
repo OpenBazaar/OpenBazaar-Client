@@ -1807,6 +1807,44 @@ margin: auto;
   background-color: rgba(33,117,47,1);
 }
 
+.btn.btn-discoverToggle {
+  box-shadow: none;
+  border-radius: 0;
+  border: solid 1px #2378AA;
+  opacity: 1;
+  font-weight: 500;
+  font-size: 13px;
+  transition: none;
+  letter-spacing: 0;
+  height: auto;
+  padding: 4px 22px;
+  background-color: transparent;
+}
+
+.btn.btn-discoverToggle .toggle-txt {
+  opacity: .25;
+  transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn.btn-discoverToggle:active,
+.btn.btn-discoverToggle.active {
+  border-bottom: solid 2px #106DA3;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.btn.btn-discoverToggle:hover {
+  opacity: 1;
+}
+
+.btn.btn-discoverToggle:hover > .toggle-txt {
+  opacity: 1;
+}
+
+.btn.btn-discoverToggle.active .toggle-txt {
+  opacity: 1;
+}
+
 .btn:active,
 .btn.active,
 .btn.btn-c1:active,
@@ -2460,6 +2498,13 @@ div.chatSearchOut .chatSearchIcon {
   float: left;
 }
 
+.btn-togWrapper.btn-toWrapper-discoverToggle {
+  float: none;
+  position: absolute;
+  right: 0;
+  bottom: -2px;
+}
+
 #userPage .btn-togWrapper {
   border: 1px solid rgb(74,72,72);
 }
@@ -2503,6 +2548,19 @@ div.chatSearchOut .chatSearchIcon {
 .btn.btn-togRight {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.btn-toWrapper-discoverToggle .btn.btn-togLeft {
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-right: 0;
+}
+
+.btn-toWrapper-discoverToggle .btn.btn-togRight {
+  border-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .btn.btn-flushTop {
@@ -3887,6 +3945,38 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
 }
 
+.discoverToggleHelper {
+  top: -40px;
+  width: auto;
+  max-width: 300px;
+  background: rgba(37,37,37,.95);
+  border-radius: 3px;
+  color: #fff;
+  padding: 8px 10px;
+  position: absolute;
+  z-index: 10;
+  height: 16px;
+  font-size: 11px;
+  right: 0;
+  line-height: 16px;
+  opacity: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  margin-top: 2px;
+}
+
+.discoverToggleHelper:after {
+  content: " ";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 0 10px;
+  border-color: rgba(37,37,37,.95) transparent transparent transparent;
+  position: absolute; 
+  bottom: -10px;
+  right: 48px;
+}
+
 .tooltip {
   position: relative;
 }
@@ -4834,6 +4924,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .marginRight15 {
   margin-right: 15px;
+}
+
+#ov1  .marginRight20 {
+  margin-right: 20px;
 }
 
 #ov1  .marginLeftNeg115 {
