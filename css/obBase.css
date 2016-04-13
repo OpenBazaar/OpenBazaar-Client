@@ -1821,7 +1821,7 @@ margin: auto;
 }
 
 .btn.btn-c3-discoverToggle .toggle-txt {
-  opacity: .45;
+  opacity: .25;
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
