@@ -3597,7 +3597,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   position: absolute;
   top: 50%;
   right: 50%;
-  padding-top: 1px;
   animation: spinnerAnimation 1.15s infinite linear;
 }
 
@@ -3619,11 +3618,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   transition: left 0.5s ease;
 }
 
-.spinner-with-logo i {
+.spinner-with-logo .spinner-with-logo-icon {
   position: absolute;
   top: 16px;
   left: 17px;
   opacity: .90;
+}
+
+.spinner-with-logo .spinner-with-logo-icon:before {
+  padding-top: 1px;
 }
 
 #ov1.chatOpen .spinner-with-logo {
