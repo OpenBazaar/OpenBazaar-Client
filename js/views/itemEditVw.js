@@ -107,7 +107,6 @@ module.exports = baseVw.extend({
       });
 
       setTimeout(() => {
-        /*
         var editor = new MediumEditor('#inputDescription', {
           placeholder: {
             text: window.polyglot.t('DescriptionPlaceholder')
@@ -133,7 +132,7 @@ module.exports = baseVw.extend({
         });
 
         editor.subscribe('blur', self.validateDescription);
-        */
+        
 
         //set chosen inputs
         this.$('.chosen').chosen({width: '100%'}).change(function(e){

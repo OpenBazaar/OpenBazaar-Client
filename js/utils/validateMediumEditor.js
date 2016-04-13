@@ -6,7 +6,7 @@ function checkVal($field) {
     $field.val('');
   }
 
-  //replace double quotes with single quotes to avoid invalid json
+  // replace double quotes with single quotes to avoid invalid json
   fVal = fVal.replace(/\\([\s\S])|(")/g, "'");
 
   fVal = sanitizeHTML(fVal, {
@@ -19,6 +19,8 @@ function checkVal($field) {
   });
   
   $field.val(fVal);
+
+  console.log(`slippy ${fVal}`);
 
   if (!$field[0].checkValidity()) {
     $field.parent().addClass('invalid');

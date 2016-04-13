@@ -191,7 +191,7 @@ module.exports = Backbone.View.extend({
         self.newBanner = false;
       }
 
-      /*var editor = new MediumEditor('#about', {
+      var editor = new MediumEditor('#about', {
         placeholder: {
           text: ''
         },
@@ -213,7 +213,7 @@ module.exports = Backbone.View.extend({
           cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
         }
       });
-      editor.subscribe('blur', self.validateDescription);*/
+      editor.subscribe('blur', self.validateDescription);
     });
     return this;
   },

@@ -104,7 +104,7 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
       self.socketView.getModerators(self.socketModeratorID);
-      /*
+      
       var editor = new MediumEditor('#aboutInput', {
         placeholder: {
           text: ''
@@ -128,7 +128,7 @@ module.exports = Backbone.View.extend({
         }
       });
       editor.subscribe('blur', self.validateDescription);
-      */
+      
     });
   },
 
