@@ -20,8 +20,6 @@ function checkVal($field) {
   
   $field.val(fVal);
 
-  console.log(`slippy ${fVal}`);
-
   if (!$field[0].checkValidity()) {
     $field.parent().addClass('invalid');
   } else {
