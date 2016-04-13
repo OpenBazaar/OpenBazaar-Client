@@ -478,7 +478,7 @@
     "TotalInTransaction": "Transaction:",
     "StartDisputeFlag": "Dispute Started",
     "CloseDisputeFlag": "Dispute Ended",
-    "PayoutOnlyBuyer": "Closing this dispute will return 100% of the funds to the buyer.",
+    "PayoutOnlyBuyer": "Closing this dispute will return all of the funds to the buyer, minus the Moderator fee, because the seller has not yet given their bitcoin payout address.",
     "UpdatingOrder": "Updating your transaction",
     "UpdateComplete": "Your transaction update is complete",
     "UpdateFailed": "Your transaction update did not complete. Open the transaction and try again",
