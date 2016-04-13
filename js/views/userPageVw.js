@@ -307,6 +307,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The user profile data returned from the API has a parsing error.");
         }
       }
     });
@@ -600,6 +601,7 @@ module.exports = baseVw.extend({
       complete: function (xhr, textStatus) {
         if (textStatus == 'parsererror') {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The listings data returned from the API has a parsing error.");
         }
       }
     });
@@ -655,6 +657,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The following data returned from the API has a parsing error.");
         }
       }
     });
@@ -684,6 +687,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The followers data returned from the API has a parsing error.");
         }
       }
     });
@@ -866,6 +870,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The contract data returned from the API has a parsing error.");
         }
       }
     });

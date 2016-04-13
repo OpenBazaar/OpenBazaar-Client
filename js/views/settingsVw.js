@@ -489,10 +489,6 @@ module.exports = Backbone.View.extend({
   validateInput: function(e) {
     var $input = $(e.target);
 
-    if ($input.is('#refund_address')) {
-      $input.val($input.val().trim());
-    }
-
     e.target.checkValidity();
     $input.closest('.flexRow').addClass('formChecked');
   },
