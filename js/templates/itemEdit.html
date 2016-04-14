@@ -314,7 +314,10 @@
             </div>
             <div class="flexRow custCol-border">
               <div class="flexCol-12 custCol-border">
-                <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
+                <textarea name="terms_conditions"
+                        rows="6"
+                        placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>"
+                        class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
               </div>
             </div>
           </div>
@@ -328,7 +331,10 @@
             </div>
             <div class="flexRow">
               <div class="flexCol-12">
-                <textarea name="returns" rows="6" placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.returns %></textarea>
+                <textarea name="returns"
+                          rows="6"
+                          placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>"
+                          class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.returns %></textarea>
               </div>
             </div>
         </div>
