@@ -10,7 +10,10 @@ module.exports = {
 
   bitcoinValidationRegex: bitcoinValidationRegex,
   
+  keyShortcutPrefix: window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+',
+  
   keyShortcuts: {
+    undo:            'z',
     discover:        'd',
     myPage:          'h',
     customizePage:   'e',
@@ -19,7 +22,8 @@ module.exports = {
     sales:           'y',
     cases:           'j',
     settings:        'g',
-    addressBar:      'l'
+    addressBar:      'l',
+    save:            's'
   },
   
   setTestnet: function(testNetBoolean){

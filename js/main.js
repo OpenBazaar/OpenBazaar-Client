@@ -196,7 +196,7 @@ $(window).bind('keydown', function(e) {
 
   if (ctrl) {
     switch (char) {
-      case 'z':
+      case config.keyShortcuts.undo:
         //run undo programmatically to avoid crash
         e.preventDefault();
         document.execCommand('undo');
@@ -229,11 +229,14 @@ $(window).bind('keydown', function(e) {
         // Select all text in address bar
         $('.js-navAddressBar').select();
         break;
+      case config.keyShortcuts.save:
+        window.obEventBus.trigger('saveCurrentForm');
+        break;
     }
 
     if (route !== null) {
       e.preventDefault();
-	  Backbone.history.navigate(route, {
+      Backbone.history.navigate(route, {
         trigger: true
       });
 	  }
