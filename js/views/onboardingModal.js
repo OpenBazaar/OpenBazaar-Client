@@ -6,6 +6,7 @@ var Backbone = require('backbone'),
     cropit = require('../utils/jquery.cropit'),
     app = require('../App').getApp(),    
     baseModal = require('./baseModal'),
+    timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
@@ -43,6 +44,7 @@ module.exports = baseModal.extend({
     this.$el.attr('tabIndex', 0);
     this.$loadingModal = $('.js-loadingModal');
     this.languages = new languagesModel();
+    this.timezones = new timezonesModel();
 
     // pre-select lauguage.
     var localLanguage = window.navigator.language;
@@ -573,7 +575,9 @@ module.exports = baseModal.extend({
       var timeZoneOffset,
           $themeInputs;
 
-      self.$el.html(t());
+      self.$el.html(t({
+        timezones: self.timezones.toJSON().timezones
+      }));
 
       baseModal.prototype.render.apply(self, arguments);
 
