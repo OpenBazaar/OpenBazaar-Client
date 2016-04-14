@@ -1211,6 +1211,14 @@ h5 {
   font-size: 15px;
 }
 
+.fieldItem-textarea h2, .fieldItem-textarea h3, .editableContent h2, .editableContent h3 {
+  margin-top: 30px;
+}
+
+.fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
+  margin-top: 0px;
+}
+
 .note {
   /* use for instructions and incidental text */
   /*font-style: italic;*/
