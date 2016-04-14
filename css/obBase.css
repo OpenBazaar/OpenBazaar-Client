@@ -1,6 +1,6 @@
 /*========== scroll bars ==========*/
 #obContainer::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 #obContainer::-webkit-scrollbar-thumb {
@@ -25,7 +25,7 @@
 }
 
 .customThemeScrollbar::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .customThemeScrollbar::-webkit-scrollbar-thumb {
@@ -38,7 +38,7 @@
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .popMenu-notificationsContent::-webkit-scrollbar-thumb {
@@ -417,7 +417,6 @@ form {
 .flexRow [class |= "flexCol"] {
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
 }
 
 .flexRow.pad [class |= "flexCol"] {
@@ -1443,11 +1442,12 @@ h5 {
 /*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
 .modal-hero.bg-dark-blue {
   background: #063753;
+  padding-top: 20px;
 }
 
 .modal-hero.iconBackground {
   background-image: url(../imgs/openbazaar-icon-no-border.png);
-  background-position: 50% 30px;
+  background-position: 50% 75px;
   background-size: 136px;
   background-repeat: no-repeat;
 }
@@ -1672,7 +1672,7 @@ input[type="text"].txtField-bar {
 
 .txtFieldWrapper-bar:before {
   color: #fff;
-  top: 17px;
+  top: 27px;
   left: 15px;
   opacity: 1;
 }
@@ -1814,7 +1814,7 @@ margin: auto;
   border: solid 1px #2378AA;
   opacity: 1;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 15px;
   transition: none;
   letter-spacing: 0;
   height: auto;
@@ -1823,7 +1823,7 @@ margin: auto;
 }
 
 .btn.btn-discoverToggle .toggle-txt {
-  opacity: .25;
+  opacity: .40;
   transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -3106,12 +3106,11 @@ input[type="checkbox"].fieldItem + label {
 
 input[type="checkbox"].fieldItem + label:before {
   display: inline;
-  content: "\f372";
+  content: "\f371";
   font-family: Ionicons;
   line-height:inherit;
   box-shadow: none;
   opacity: 1;
-  font-family: Ionicons;
   font-size: 1.5em;
 }
 
@@ -3125,7 +3124,7 @@ input[type="checkbox"].fieldItem + label.compact:before {
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
-  content: "\f373";
+  content: "\f374";
 }
 
 input[type="checkbox"].fieldItem + label div,
@@ -3171,6 +3170,12 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .btn input[type="checkbox"].fieldItem + label:before {
   top: 0;
   left: 0;
+}
+
+.homeModal-settings input[type="checkbox"].fieldItem + label:before {
+  float: left;
+  margin-left: 8px;
+  margin-right: 10px;
 }
 
 #userPage .fieldItem-selectWrapper select option {

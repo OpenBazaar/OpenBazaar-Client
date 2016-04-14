@@ -8,7 +8,7 @@ module.exports = Backbone.Model.extend({
     languages: [
       {
         langName: "English (English, America)",
-        langCode: "en-US"
+        langCode: "en_US"
       },
       {
         langName: "Dansk (Danish)",
@@ -19,8 +19,12 @@ module.exports = Backbone.Model.extend({
         langCode: "de"
       },
       {
+        langName: "Deutsch (German, Germany)",
+        langCode: "de_DE"
+      },
+      {
         langName: "Dutch (Dutch, Netherlands)",
-        langCode: "nl-NL"
+        langCode: "nl_NL"
       },
       {
         langName: "Espa&ntilde;ol (Spanish)",
@@ -32,11 +36,11 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Français (French, Canada)",
-        langCode: "fr-CA"
+        langCode: "fr_CA"
       },
       {
         langName: "Français (French, France)",
-        langCode: "fr-FR"
+        langCode: "fr"
       },
       {
         langName: "Greek (Greek)",
@@ -48,7 +52,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Português (Portuguese, Brazil)",
-        langCode: "pt-BR"
+        langCode: "pt_BR"
       },
       {
         langName: "Română (Romanian)",
@@ -72,7 +76,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "中文 (Chinese, S)",
-        langCode: "zh-CN"
+        langCode: "zh_CN"
       },
       {
         langName: "한국어 (Korean)",
@@ -80,7 +84,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "日本語 (Japanese, Japan)",
-        langCode: "ja-JP"
+        langCode: "ja_JP"
       },
       {
         langName: "Українська (Ukrainian)",
