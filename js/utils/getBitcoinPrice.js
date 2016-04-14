@@ -42,7 +42,9 @@ module.exports = function (currency, callback) {
 
     };
 
-   if (window.btcAverages.timeStamp
+  if(currency == "BTC" && window.currencyKeys) {
+    typeof callback === 'function' && callback(1, window.currencyKeys);
+  } else if(window.btcAverages.timeStamp
         && Math.floor((new Date() - window.btcAverages.timeStamp) / 60000) < 15
         && window.currencyKeys
         && window.btcAverages.rates[currency]) {
