@@ -134,12 +134,10 @@ module.exports = function(form, modelJSON, endPoint, onSucceed, onFail, addData,
       console.log(errorThrown);
     },
     complete: function(){
-      /*
       //re-enable any disabled fields
       __.each(tempDisabledFields, function(element){
         form.find('input[name="'+element+'"]').attr('disabled', false);
       });
-      */
     }
   });
 };
