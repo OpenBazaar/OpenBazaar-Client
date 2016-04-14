@@ -417,6 +417,7 @@ form {
 .flexRow [class |= "flexCol"] {
   box-sizing: border-box;
   position: relative;
+  overflow: hidden;
 }
 
 .flexRow.pad [class |= "flexCol"] {

@@ -198,28 +198,19 @@ module.exports = Backbone.View.extend({
         },
         toolbar: {
           imageDragging: false,
-          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
+         //buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
         },
         paste: {
-          cleanPastedHTML: true,
-          cleanReplacements: [
-            [new RegExp(/<div>/gi), '<p>'],
-            [new RegExp(/<\/div>/gi), '</p>'],
-            [new RegExp(/<font>/gi), ""],
-            [new RegExp(/<\/font>/gi), ""],
-            [new RegExp(/<code>/gi), '<pre>'],
-            [new RegExp(/<\/code>/gi), '</pre>']
-          ],
-          cleanAttrs: ['class', 'style', 'dir', 'color', 'face', 'size', 'align', 'border', 'background', 'opacity'],
-          cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
+          cleanPastedHTML: false,
+          forcePlainText: false
         }
       });
-      editor.subscribe('blur', self.validateDescription);
     });
     return this;
   },
 
   validateDescription: function(e) {
+    console.log("settings validator")
     validateMediumEditor.checkVal(this.$('#about'));
   },
 
