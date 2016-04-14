@@ -2,6 +2,7 @@
 
 var Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
+    moment = require('moment'),
     cropit = require('../utils/jquery.cropit'),
     app = require('../App').getApp(),    
     baseModal = require('./baseModal'),
@@ -578,7 +579,9 @@ module.exports = baseModal.extend({
 
       // pre-select timezone
       var timeZoneOffset = new Date().getTimezoneOffset();
-      timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
+      timeZoneOffset = parseInt(Math.abs(timeZoneOffset/60));
+      timeZoneOffset = moment().isDST() ? timeZoneOffset + 1 : timeZoneOffset;      
+      timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + timeZoneOffset + ':00)';
       var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
       selectedTimeZone.prop('checked', true);
       self.model.set('time_zone', selectedTimeZone.val());
