@@ -5660,6 +5660,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: auto;
 }
 
+#ov1 .editableContent img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* add formChecked class after form has been checked for validity */
 #ov1 .invalid,
 #ov1 .formChecked input[type="text"].fieldItem:invalid,
