@@ -396,7 +396,7 @@ module.exports = baseModal.extend({
     ).always(() => {
       submit().always(() => {
         if (followHandles.length) {
-          this.postFollowing(followHandles);
+          setTimeout( ()=> this.postFollowing(followHandles), 3000); //following fails if it happens too soon after the guid is generated
         }
       });
     });
