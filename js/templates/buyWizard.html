@@ -474,13 +474,13 @@
                     <input type="text" name="new_ship_to_street" class="fieldItem custCol-text js-buyWizardPostalInput" id="buyWizardPostalInput" required/>
                   </div>
                 </div>
-                <div class="flexRow overflowVisible">
+                <div class="flexRow">
                   <div class="flexCol-5 custCol-border">
                     <div class="fieldItem">
                       <label for="buyWizardStreetInput"><%= polyglot.t('ShipToCountry') %></label>
                     </div>
                   </div>
-                  <div class="flexCol-7 custCol-border positionWrapper">
+                  <div class="flexCol-7 custCol-border overflowHidden"><!-- overflow hidden prevents a layout bug due to the columns adding up to more than 100% wide -->
                     <div class="fieldItem padding0">
                       <div class="fieldItem-selectWrapper chosen-relative noIcon js-buyWizardCountryWrapper"></div>
                     </div>
