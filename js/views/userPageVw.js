@@ -21,6 +21,7 @@ var __ = require('underscore'),
     setTheme = require('../utils/setTheme.js'),
     sanitizeHTML = require('sanitize-html'),
     storeWizardVw = require('./storeWizardVw'),
+    saveToAPI = require('../utils/saveToAPI'),
     moderatorSettingsVw = require('./moderatorSettingsVw');
 
 var defaultItem = {
@@ -709,7 +710,6 @@ module.exports = baseVw.extend({
   },
 
   getIsModerator: function () {
-  	console.log(this.model.get('user').vendor);
   	if(this.userProfile.get('profile').moderator == true && this.options.ownPage == false && this.model.get('user').vendor) {
   	  var pageGuid = this.userProfile.get('profile').guid;
   	  var mods = this.model.get('user').moderators;
@@ -717,7 +717,7 @@ module.exports = baseVw.extend({
       var self = this;
   	  this.toggleModeratorButtons(false);
       __.each(mods, function(mod) {
-    		if(mod.guid == pageGuid) {
+    		if(mod.guid == pageGuid || mod == pageGuid) {
     		  found = true;
     		}
       });
@@ -1456,9 +1456,29 @@ module.exports = baseVw.extend({
     var $targ = $(e.target).closest('.js-addmoderator');
 
     $targ.addClass('loading');
-    /*this.followUser({'guid': this.pageID}).fail(() => {
-      $targ.removeClass('loading');
-    });*/
+
+    var user = this.model.get('user');
+    var self = this;
+
+    var modList = {};
+    modList.moderators = user.moderators;
+    modList.moderators[modList.moderators.length] = this.userProfile.get('profile').guid;
+    user.moderators = modList.moderators;
+
+    saveToAPI('', user, user.serverUrl + "settings",
+        function(){
+          // confirmed
+          $targ.removeClass('loading');
+        },
+        function(){
+          // failed
+        }, modList,'',
+        function(){
+          // invalid
+        }).always(function(){
+          $targ.removeClass('loading');
+          self.getIsModerator();
+        });
   },
 
   removeModeratorClick: function(e){
@@ -1466,9 +1486,36 @@ module.exports = baseVw.extend({
 
     if($targ.hasClass('confirm')){
       $targ.addClass('loading').removeClass('confirm');
-      /*this.unfollowUser({'guid': this.pageID}).fail(() => {
-        $(e.target).removeClass('loading')
-      });*/
+
+
+      var user = this.model.get('user');
+      var self = this;
+
+      var modList = {};
+      modList.moderators = [];
+      var guid = this.userProfile.get('profile').guid;
+
+      __.each(user.moderators, function(mod) {
+        if(mod != guid && (typeof(mod) !== 'object' || mod.guid != guid)) {
+          modList.moderators[modList.moderators.length] = mod;
+        }
+      })
+      user.moderators = modList.moderators;
+
+      saveToAPI('', user, user.serverUrl + "settings",
+          function(){
+            // confirmed
+            $targ.removeClass('loading');
+          },
+          function(){
+            // failed
+          }, modList,'',
+          function(){
+            // invalid
+          }).always(function(){
+            $targ.removeClass('loading');
+            self.getIsModerator();
+          });
     } else {
       $targ.addClass('confirm');
     }
