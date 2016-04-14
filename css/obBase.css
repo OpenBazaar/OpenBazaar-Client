@@ -2842,7 +2842,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
 }
 
 .fieldItem .fieldItem-selectWrapper {
-  position: relative;
+  position: absolute;
 }
 
 .fieldItem .fieldItem-selectWrapper select {
