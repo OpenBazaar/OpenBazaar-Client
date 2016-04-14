@@ -2956,6 +2956,10 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding: 15px;
   border: 2px solid transparent;
   color: #fff;
+  overflow-y: scroll;
+}
+.fieldItem-textarea p:last-of-type {
+  margin: 0;
 }
 
 .fieldItem-textarea:focus {
