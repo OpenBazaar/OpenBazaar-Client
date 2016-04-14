@@ -270,6 +270,8 @@ module.exports = baseVw.extend({
       self.$notifMenu.find('#notificationsPanel')
           .html(self.notificationsVw.render().el);
 
+      self.setNotificationCount(self.getUnreadNotifCount());          
+
       //add the admin panel
       /*
       self.adminPanel && self.adminPanel.remove();
@@ -355,6 +357,7 @@ module.exports = baseVw.extend({
   closeNotificationsMenu: function() {
     app.hideOverlay();
     this.$notifMenu.removeClass('popMenu-opened');
+    this.onNotifMenuClose();
   },
 
   isNotifMenuOpen: function() {
@@ -363,6 +366,8 @@ module.exports = baseVw.extend({
 
   setNotificationCount: function(count){
     if (isNaN(parseInt(count))) return;
+
+    app.setUnreadNotifCount(count);
 
     if (count > 99) {
       count = '..';

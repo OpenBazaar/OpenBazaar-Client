@@ -19,6 +19,7 @@ var tray = require('tray');
 var ipcMain = require('ipc-main');
 var ini = require('ini');
 var dialog = require('electron').dialog;
+var ipcMain = require('electron').ipcMain;
 
 var launched_from_installer = false;
 var platform = os.platform();
@@ -264,18 +265,6 @@ app.on('ready', function() {
         label: 'Minimize',
         selector: 'performMiniaturize:',
         accelerator: 'Command+M'
-      },
-      {
-        label: 'Close',
-        accelerator: 'Command+W',
-        selector: 'performClose:'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Bring All to Front',
-        selector: 'arrangeInFront:'
       }
     ]
   }
@@ -402,6 +391,11 @@ app.on('ready', function() {
   mainWindow.webContents.executeJavaScript("console.log('Checking for new versions at " + feedURL + " ...')");
   autoUpdater.checkForUpdates();
 
+});
+
+ipcMain.on('set-badge', function(event, text) {
+  typeof text !== 'undefined' && process.platform === 'darwin' &&
+    app.dock.setBadge(String(text));
 });
 
 app.on('open-url', function(event, uri) {

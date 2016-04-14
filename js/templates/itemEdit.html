@@ -220,8 +220,9 @@
                   <div class="fieldItem-selectWrapper noIcon">
                     <select class="chosenRegions custCol-text" id="shipsToRegions" data-placeholder="<%= polyglot.t('SelectRegion') %>">
                       <option></option>
-                      <option value="EUROPEAN_UNION">European Union</option>
-                      <option value="EUROPEAN_ECONOMIC_AREA">European Economic Area</option>
+                      <option value="ALL"><%= polyglot.t('AllRegions') %></option>
+                      <option value="EUROPEAN_UNION"><%= polyglot.t('EuropeanUnion') %></option>
+                      <option value="EUROPEAN_ECONOMIC_AREA"><%= polyglot.t('EuropeanEconomicArea') %></option>
                     </select>
                   </div>
                 </div>
@@ -362,7 +363,7 @@
         <div class="flexRow marginTop20 podBorder borderRadiusTop custCol-border custCol-primary">
           <div class="flexRow custCol-secondary border0">
             <div class="fieldItem">
-              <h5><%= polyglot.t('Discover') %> (<%= polyglot.t('Optional') %>)</h5>
+              <h5><%= polyglot.t('Discover') %></h5>
             </div>
           </div>
           <div class="flexRow custCol-border">

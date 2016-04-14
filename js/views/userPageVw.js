@@ -311,6 +311,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The user profile data returned from the API has a parsing error.");
         }
       }
     });
@@ -409,12 +410,6 @@ module.exports = baseVw.extend({
           $('.user-page-navigation-buttons').removeClass('positionFixed positionTop68');
         }
       });
-
-      var about = sanitizeHTML(self.model.get('page').profile.displayAbout, {
-        allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ]
-      });
-
-      $('.js-userAbout').html(about);
     });
 
     return this;
@@ -620,6 +615,7 @@ module.exports = baseVw.extend({
       complete: function (xhr, textStatus) {
         if (textStatus == 'parsererror') {
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The listings data returned from the API has a parsing error.");
         }
       }
     });
@@ -656,7 +652,7 @@ module.exports = baseVw.extend({
             //call followers 2nd so list of following is available
             self.fetchFollowers();
             //mark whether page is following you
-            if(Boolean(__.findWhere(followingArray, {guid: self.userID}))){
+            if(self.options.ownPage === false && Boolean(__.findWhere(followingArray, {guid: self.userID}))){
               self.$('.js-followsMe').removeClass('hide')
             }
 
@@ -675,6 +671,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The following data returned from the API has a parsing error.");
         }
       }
     });
@@ -704,6 +701,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The followers data returned from the API has a parsing error.");
         }
       }
     });
@@ -904,6 +902,7 @@ module.exports = baseVw.extend({
       complete: function(xhr, textStatus) {
         if(textStatus == 'parsererror'){
           messageModal.show(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+          throw new Error("The contract data returned from the API has a parsing error.");
         }
       }
     });

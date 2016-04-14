@@ -24,6 +24,8 @@ module.exports = baseVw.extend({
     'click .js-homeCreateListing': 'createListing',
     'click .js-homeSearchItemsClear': 'searchItemsClear',
     'keyup .js-homeSearchItems': 'searchItemsKeyup',
+    'focus .js-homeSearchItems': 'searchItemsFocus',
+    'blur .js-homeSearchItems': 'searchItemsBlur',
     'click .js-homeListingsFollowed': 'clickListingsFollowed',
     'click .js-homeListingsAll': 'clickListingsAll'
   },
@@ -175,6 +177,7 @@ module.exports = baseVw.extend({
       //populate search field
       if(self.searchItemsText){
         self.$el.find('.js-homeSearchItems').val("#" + self.searchItemsText);
+        self.$el.find('.js-homeListingToggle').addClass('hide');
         $('#obContainer').scrollTop(0);
       }
 
@@ -413,6 +416,16 @@ module.exports = baseVw.extend({
     this.userViews = [];
   },
 
+  searchItemsFocus: function(e){
+    this.$('.js-homeListingToggle').addClass('hide');
+  },
+
+  searchItemsBlur: function(e){
+    if(!this.searchItemsText){
+      this.$('.js-homeListingToggle').removeClass('hide');
+    }
+  },
+
   searchItemsKeyup: function(e){
     var target = $(e.target),
         targetText = target.val().replace("#",'').replace(/ /g, ""),
@@ -438,6 +451,7 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger("setAddressBar", {'addressText': ""});
     
     this.$el.find('.js-discoverHeading').html(window.polyglot.t('Discover'));
+    this.$el.find('.js-homeListingToggle').removeClass('hide');
 
     // change loading text copy
     this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));
@@ -550,6 +564,7 @@ module.exports = baseVw.extend({
           'txt-center',
           function(){
             localStorage.setItem('safeListingsWarningDissmissed', true);
+            self.$('.js-discoverToggleHelper').addClass('hide');
             self.loadAllItems();
             messageModal.hide();
             self.setListingsAll();

@@ -49,14 +49,23 @@ module.exports = baseVw.extend({
       }
     }
 
+    var countryList = new countriesModel().get('countries'), allRegions = [];
+    countryList.forEach(function(country) {
+      allRegions.push(country.dataName);
+    });
+    
+    var europeanUnion = [
+      'AUSTRIA', 'BELGIUM', 'BULGARIA', 'CROATIA', 'CYPRUS', 'CZECH_REPUBLIC', 'DENMARK', 'ESTONIA',
+      'FINLAND', 'FRANCE', 'GERMANY', 'GREECE', 'HUNGARY', 'IRELAND', 'ITALY', 'LATVIA', 'LITHUANIA', 'LUXEMBOURG',
+      'MALTA', 'NETHERLANDS', 'POLAND', 'PORTUGAL', 'ROMANIA', 'SLOVAKIA', 'SLOVENIA', 'SPAIN', 'SWEDEN', 'UNITED_KINGDOM' 
+    ];
+    
+    var europeanEconomicArea = europeanUnion.concat(['ICELAND', 'LIECHTENSTEIN', 'NORWAY']);
+    
     this.regions = {
-      "EUROPEAN_UNION": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK", "ESTONIA",
-        "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "IRELAND", "ITALY", "LATVIA", "LITHUANIA", "LUXEMBOURG",
-        "MALTA", "NETHERLANDS", "POLAND", "PORTUGAL", "ROMANIA", "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"],
-      "EUROPEAN_ECONOMIC_AREA": ["AUSTRIA", "BELGIUM", "BULGARIA", "CROATIA", "CYPRUS", "CZECH_REPUBLIC", "DENMARK",
-        "ESTONIA", "FINLAND", "FRANCE", "GERMANY", "GREECE", "HUNGARY", "ICELAND", "IRELAND", "ITALY", "LATVIA",
-        "LIECHTENSTEIN", "LITHUANIA", "LUXEMBOURG", "MALTA", "NETHERLANDS", "NORWAY", "POLAND", "PORTUGAL", "ROMANIA",
-        "SLOVAKIA", "SLOVENIA", "SPAIN", "SWEDEN", "UNITED_KINGDOM"]
+      'ALL': allRegions,
+      'EUROPEAN_UNION': europeanUnion,
+      'EUROPEAN_ECONOMIC_AREA': europeanEconomicArea
     };
 
     this.prevShipsToVal = [];
@@ -98,33 +107,22 @@ module.exports = baseVw.extend({
       });
 
       setTimeout(() => {
-        /*
         var editor = new MediumEditor('#inputDescription', {
           placeholder: {
             text: window.polyglot.t('DescriptionPlaceholder')
           },
           toolbar: {
             imageDragging: false,
-            sticky: true,
-            buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
+            sticky: true
           },
           paste: {
-            cleanPastedHTML: true,
-            cleanReplacements: [
-              [new RegExp(/<div>/gi), '<p>'],
-              [new RegExp(/<\/div>/gi), '</p>'],
-              [new RegExp(/<font>/gi), ""],
-              [new RegExp(/<\/font>/gi), ""],
-              [new RegExp(/<code>/gi), '<pre>'],
-              [new RegExp(/<\/code>/gi), '</pre>']
-            ],
-            cleanAttrs: ['class', 'style', 'dir', 'color', 'face', 'size', 'align', 'border', 'background', 'opacity'],
-            cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
+            cleanPastedHTML: false,
+            forcePlainText: false
           }
         });
 
         editor.subscribe('blur', self.validateDescription);
-        */
+        
 
         //set chosen inputs
         this.$('.chosen').chosen({width: '100%'}).change(function(e){

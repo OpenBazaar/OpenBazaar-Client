@@ -2,7 +2,7 @@ var autolinker = require( 'autolinker');
 
 module.exports = function(msg) {
 
-  msg = msg.replace(/ob:\/\/@/gm, "@");
+  msg = msg.replace(/ob:\/\/@/gm, "ob://------");
   msg = msg.replace(/ob:\/\/#/gm, "#");
 
   msg = autolinker.link(msg, {
@@ -28,6 +28,8 @@ module.exports = function(msg) {
       }
     }
   });
+
+  msg = msg.replace(/ob:\/\/------/gm, "ob://@");
   
   return msg;
 

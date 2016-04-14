@@ -121,9 +121,10 @@ $('body').on('click', 'a', function(e){
 
   if(targUrl.startsWith('ob')){
     e.preventDefault();
-    app.router.translateRoute(targUrl.replace('ob://', '')).done((route) => {
-      Backbone.history.navigate(route, {trigger:true});
+    app.router.translateRoute(targUrl.replace('ob://', '')).done((translatedRoute) => {
+      app.router.navigate(translatedRoute, {trigger:true});
     });
+
   } else if(linkPattern.test(targUrl) || $(this).is('.js-externalLink, .js-externalLinks a, .js-listingDescription')){
     e.preventDefault();
 

@@ -46,16 +46,7 @@ module.exports = baseVw.extend({
     });
 
     this.listenTo(this.chatConversationsCl, 'reset', (cl) => {
-      cl.forEach((md) => {
-        this.listenTo(md, 'change', () => {
-          var filteredMd;
-
-          if (this.filteredChatConvos) {
-            filteredMd = this.filteredChatConvos.findWhere({ guid: md.get('guid') });
-            filteredMd && filteredMd.set(md.attributes);
-          }
-        });
-      });
+      cl.forEach((md) => this.bindChatConvoMdChangeHandler(md));
 
       if (!this.chatHeadsVw) {
         this.chatHeadsVw = new ChatHeadsVw({
@@ -72,9 +63,16 @@ module.exports = baseVw.extend({
       } else {
         this.filterChatHeads();
       }
+
+      this.setAggregateUnreadCount();
     });
 
-    this.listenTo(this.chatConversationsCl, 'add remove', (md) => {
+    this.listenTo(this.chatConversationsCl, 'add remove', (md, cl, opts) => {
+      if (opts.add) {
+        this.bindChatConvoMdChangeHandler(md);
+      }
+
+      this.setAggregateUnreadCount();
       this.filterChatHeads();
     });
 
@@ -83,6 +81,7 @@ module.exports = baseVw.extend({
     });    
 
     this.listenTo(window.obEventBus, 'blockingUser', (e) => {
+      this.setAggregateUnreadCount();
       this.filterChatHeads();
 
       if (this.chatConversationVw && this.chatConversationVw.model.get('guid') === e.guid) {
@@ -91,13 +90,44 @@ module.exports = baseVw.extend({
     });    
 
     this.listenTo(window.obEventBus, 'unblockingUser', (e) => {
+      this.setAggregateUnreadCount();
       this.filterChatHeads();
+    });
+
+    $(window).focus(() => {
+      this.chatConversationVw && this.isConvoOpen() &&
+        this.markConvoAsRead(this.chatConversationVw.model.get('guid'));
     });
 
     //when language is changed, re-render
     this.listenTo(options.model, 'change:language', function(){
       this.render(true);
+    });    
+  },
+
+  bindChatConvoMdChangeHandler: function(md) {
+    this.listenTo(md, 'change', () => {
+      var filteredMd;
+
+      if (this.filteredChatConvos) {
+        filteredMd = this.filteredChatConvos.findWhere({ guid: md.get('guid') });
+        filteredMd && filteredMd.set(md.attributes);
+      }
+
+      md.hasChanged('unread') && this.setAggregateUnreadCount();          
+    });      
+  },
+
+  setAggregateUnreadCount: function() {
+    var unread = 0;
+
+    this.chatConversationsCl.forEach((md) => {
+      if (!this.model.isBlocked(md.id)) {
+        unread += md.get('unread');
+      }
     });
+
+    app.setUnreadChatMessageCount(unread);
   },
 
   filterChatHeads: function(render) {
@@ -160,10 +190,11 @@ module.exports = baseVw.extend({
     this.slideOut();
 
     // mark as read
-    $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
+    // $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', { guid: model.get('guid') });
+    this.markConvoAsRead(model.get('guid'));
 
     // mark as read on chat head
-    if (convoMd = this.chatConversationsCl.findWhere({ guid: model.get('guid') })) {
+    if (convoMd = this.chatConversationsCl.get(model.get('guid'))) {
       convoMd.set('unread', 0);
     }
 
@@ -322,16 +353,17 @@ module.exports = baseVw.extend({
       }
 
       // update chat head
-      if (conversationMd = this.chatConversationsCl.findWhere({ guid: msg.sender })) {
+      if (conversationMd = this.chatConversationsCl.get(msg.sender)) {
         conversationMd.set({
           last_message: msg.message,
-          unread: openlyChatting ? 0 : conversationMd.get('unread') + 1,
+          unread: openlyChatting && document.hasFocus() ? 0 : conversationMd.get('unread') + 1,
           timestamp: msg.timestamp,
           avatar_hash: msg.avatar_hash
         });
 
         if (openlyChatting) {
-          $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
+          // $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: msg.sender});
+          this.markConvoAsRead(msg.sender);
         }
       } else {
         this.chatConversationsCl.add({
@@ -363,6 +395,18 @@ module.exports = baseVw.extend({
       });
 
       app.playNotificationSound();
+    }
+  },
+
+  markConvoAsRead: function(guid) {
+    var chatHead = this.chatConversationsCl.get(guid);
+
+    if (!guid) return;
+
+    if (document.hasFocus() && chatHead && chatHead.get('unread')) {
+      $.post(app.serverConfig.getServerBaseUrl() + '/mark_chat_message_as_read', {guid: guid});
+      chatHead.set('unread', 0);
+      this.setAggregateUnreadCount()
     }
   },
 
@@ -417,20 +461,20 @@ module.exports = baseVw.extend({
   },
 
   render: function(refreshConversations) {
-    var self = this;
     loadTemplate('./js/templates/chat.html', (tmpl) => {
       this.$el.html(tmpl());
 
       this.$chatHeadsContainer = this.$('.chatConversationHeads');
       this.$convoContainer = this.$('.chatConversationContainer');
       this.$searchField = this.$('#chatSearchField');
+      
       if(refreshConversations){
         //re-render the conversations
-        self.$chatHeadsContainer.html(
-            self.chatHeadsVw.render().el
+        this.$chatHeadsContainer.html(
+            this.chatHeadsVw.render().el
         );
         //re-open the current conversation if one exists
-        self.currentConversation && self.openConversation(self.currentConversation, true);
+        this.currentConversation && this.openConversation(this.currentConversation, true);
       }
     });
 
