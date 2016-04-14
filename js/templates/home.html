@@ -49,9 +49,9 @@
                 <span class="ion-person fontSize11 marginRight2 toggle-txt"></span>
                 <span class="toggle-txt"><%= polyglot.t('ShowOnlyFollowerListings') %></span>
               </a>
-              <!-- <% if(!localStorage.getItem('safeListingsWarningDissmissed')){ %> -->
-              <div class="discoverToggleHelper js-discoverToggleHelper"><%= polyglot.t('TryRandom') %></div>
-              <!-- <% } %> -->
+              <% if(!localStorage.getItem('safeListingsWarningDissmissed')){ %>
+                <div class="discoverToggleHelper js-discoverToggleHelper"><%= polyglot.t('TryRandom') %></div>
+              <% } %>
               <a class="btn btn-txt btn-discoverToggle borderRadiusBottom0 btn-togRight js-homeListingsAll tooltip tooltip-left"
                  data-tooltip="<%= polyglot.t('ShowAllListingsTooltip') %>">
                 <span class="ion-earth fontSize11 marginRight2 toggle-txt"></span>

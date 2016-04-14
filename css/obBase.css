@@ -1442,11 +1442,12 @@ h5 {
 /*.modal-hero..homeModal-hero, .modal.server-connect-modal .modal-hero*/
 .modal-hero.bg-dark-blue {
   background: #063753;
+  padding-top: 20px;
 }
 
 .modal-hero.iconBackground {
   background-image: url(../imgs/openbazaar-icon-no-border.png);
-  background-position: 50% 30px;
+  background-position: 50% 75px;
   background-size: 136px;
   background-repeat: no-repeat;
 }
