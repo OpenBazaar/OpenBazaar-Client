@@ -2956,6 +2956,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   padding: 15px;
   border: 2px solid transparent;
   color: #fff;
+  overflow: auto; /* use customThemeScrollbar to add a scrolbar */
 }
 
 .fieldItem-textarea:focus {
