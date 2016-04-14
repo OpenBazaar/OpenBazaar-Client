@@ -396,7 +396,6 @@ module.exports = baseModal.extend({
     ).always(() => {
       submit().always(() => {
         if (followHandles.length) {
-          this.postFollowing(followHandles);
         }
       });
     });
