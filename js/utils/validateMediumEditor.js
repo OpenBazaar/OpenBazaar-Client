@@ -18,19 +18,16 @@ function checkVal($field) {
   fVal = sanitizeHTML(fVal, {
     allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p', 'a','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'img', 'blockquote' ],
     //allowedTags: [ 'h2','h3', 'h4', 'h5', 'h6', 'p','u','ul', 'ol', 'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'blockquote' ],
-    allowedAttributes: [],
+    allowedAttributes: {
+      'a': [ 'href', 'title', 'alt' ],
+      'img': [ 'src', 'style']
+    },
     exclusiveFilter: function(frame) {
       return frame.tag === 'p' && !frame.text.trim();
     }
   });
-
-  console.log(fVal)
-
   //decode text the medium editor encodes, or  the medium editor will remove it the second time
   fVal = decodeHtml(fVal);
-
-  console.log(fVal)
-
   
   $field.val(fVal);
 

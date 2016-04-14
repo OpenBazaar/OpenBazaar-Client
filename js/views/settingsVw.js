@@ -198,19 +198,18 @@ module.exports = Backbone.View.extend({
         },
         toolbar: {
           imageDragging: false,
-         //buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
         },
         paste: {
           cleanPastedHTML: false,
           forcePlainText: false
         }
       });
+      editor.subscribe('blur', self.validateDescription);
     });
     return this;
   },
 
   validateDescription: function(e) {
-    console.log("settings validator")
     validateMediumEditor.checkVal(this.$('#about'));
   },
 
@@ -630,9 +629,6 @@ module.exports = Backbone.View.extend({
         saveBtn = $(e.target).closest('.btn');
 
     saveBtn.addClass('loading');
-
-    //make sure about data is clean
-    validateMediumEditor.checkVal(this.$('#about'));
 
     var sendPage = function(){
       //change color inputs to hex values
