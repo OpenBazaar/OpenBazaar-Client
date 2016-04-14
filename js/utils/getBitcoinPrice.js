@@ -59,8 +59,7 @@ module.exports = function (currency, callback) {
             currency_code,
             currencyKeys,
             averagePrice,
-            keys = {},
-            btAve;
+            keys = {};
         btcAverages.timeStamp = new Date();
         for (var i in btPrices) {
             if (btPrices.hasOwnProperty(i)) {
@@ -92,15 +91,18 @@ module.exports = function (currency, callback) {
         }
         window.btcAverages = btcAverages;
         window.currencyKeys = currencyKeys;
-        if(currency != "BTC"){
-            btAve = btcAverages.rates[currency];
-        } else {
-            btAve = 1;
-        }
 
         showStatus && showStatus.remove();
+
+        if(currency != "BTC"){
+          typeof callback === 'function' && callback(btcAverages.rates[currency], currencyKeys);
+        } else {
+          typeof callback === 'function' && callback(1, currencyKeys);
+        }
+
+
         
-        typeof callback === 'function' && callback(btAve, currencyKeys);
+
     };
 
     
