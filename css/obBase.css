@@ -3720,7 +3720,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 /*========== one-off classes ==========*/
 
-.modal .homeModal-heroText {
+.modal .homeModal-heroText, .modal.server-connect-modal .heroText {
   position: absolute;
   bottom: 0px;
   top: 180px;
@@ -3730,6 +3730,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   width: 70%;
   margin: 0 15%;
   text-align: center;
+}
+
+.modal.server-connect-modal .heroText {
+  top: 200px;
 }
 
 .modal .homeModal-accordion,
