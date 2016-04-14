@@ -3723,7 +3723,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .modal .homeModal-heroText {
   position: absolute;
   bottom: 0px;
-  top: 180px;
+  top: 210px;
   color: #fff;
   font-size: 20px;
   line-height: 22px;

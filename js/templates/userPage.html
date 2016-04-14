@@ -263,12 +263,12 @@
             <%}%>
           </div>
         </div>
-        <div class="flexCol-4 flex-border border0 userPageSocialAccounts">
+        <div class="flexCol-4 flex-border border0 userPageSocialAccounts overflowHidden">
           <div class="flexRow">
             <div class="flexRow borderBottom custCol-border">
               <div class="rowItem positionWrapper">
                 <div class="textOpacity75"><%= polyglot.t('Guid') %></div>
-                <div class="textSize11px">
+                <div class="textSize11px noOverflow">
                   <%= ob.page.profile.guid %>
                 </div>
               </div>
@@ -276,7 +276,7 @@
             <div class="flexRow custCol-border">
               <div class="rowItem positionWrapper">
                 <div class="textOpacity75"><%= polyglot.t('Website') %></div>
-                <div>
+                <div class="noOverflow">
                   <% if(ob.ownPage) { %>
                     <a href="#settings/page" class="userPageEditBtn">
                       <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
@@ -296,7 +296,7 @@
             <div class="flexRow custCol-border">
               <div class="rowItem positionWrapper">
                 <div class="textOpacity75"><%= polyglot.t('Email') %></div>
-                <div>
+                <div class="noOverflow">
                   <% if(ob.ownPage) { %>
                     <a href="#settings/page" class="userPageEditBtn">
                       <div class="btn btn-txt custCol-secondary fontSize12 js-editPage">
@@ -324,7 +324,7 @@
                   </a>
                 <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Facebook') %></div>
-                <div>
+                <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.facebook && ob.page.profile.social_accounts.facebook.username) { %>
                     <a href="https://facebook.com/<%= ob.page.profile.social_accounts.facebook.username %>">
                       <%= ob.page.profile.social_accounts.facebook.username %>
@@ -346,7 +346,7 @@
                   </a>
                 <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Twitter') %></div>
-                <div>
+                <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.twitter && ob.page.profile.social_accounts.twitter.username) { %>
                     <a href="https://twitter.com/<%= ob.page.profile.social_accounts.twitter.username %>">
                       <%= ob.page.profile.social_accounts.twitter.username %>
@@ -368,7 +368,7 @@
                   </a>
                 <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Instagram') %></div>
-                <div>
+                <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.instagram && ob.page.profile.social_accounts.instagram.username) { %>
                     <a href="https://instagram.com/<%= ob.page.profile.social_accounts.instagram.username %>">
                       <%= ob.page.profile.social_accounts.instagram.username %>
@@ -390,7 +390,7 @@
                   </a>
                 <%}%>
                 <div class="textOpacity75"><%= polyglot.t('Snapchat') %></div>
-                <div>
+                <div class="noOverflow">
                   <% if(ob.page.profile.social_accounts.snapchat && ob.page.profile.social_accounts.snapchat.username) { %>
                     <a href="https://snapchat.com/add/<%= ob.page.profile.social_accounts.snapchat.username %>">
                       <%= ob.page.profile.social_accounts.snapchat.username %>
@@ -412,7 +412,7 @@
                   </a>
                 <%}%>
                 <div class="textOpacity75"><%= polyglot.t('PGPKey') %></div>
-                <div>
+                <div class="noOverflow">
                   <%= polyglot.t('NotProvided') %>
                 </div>
               </div>
