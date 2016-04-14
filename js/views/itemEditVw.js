@@ -107,33 +107,22 @@ module.exports = baseVw.extend({
       });
 
       setTimeout(() => {
-        /*
         var editor = new MediumEditor('#inputDescription', {
           placeholder: {
             text: window.polyglot.t('DescriptionPlaceholder')
           },
           toolbar: {
             imageDragging: false,
-            sticky: true,
-            buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
+            sticky: true
           },
           paste: {
-            cleanPastedHTML: true,
-            cleanReplacements: [
-              [new RegExp(/<div>/gi), '<p>'],
-              [new RegExp(/<\/div>/gi), '</p>'],
-              [new RegExp(/<font>/gi), ""],
-              [new RegExp(/<\/font>/gi), ""],
-              [new RegExp(/<code>/gi), '<pre>'],
-              [new RegExp(/<\/code>/gi), '</pre>']
-            ],
-            cleanAttrs: ['class', 'style', 'dir', 'color', 'face', 'size', 'align', 'border', 'background', 'opacity'],
-            cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
+            cleanPastedHTML: false,
+            forcePlainText: false
           }
         });
 
         editor.subscribe('blur', self.validateDescription);
-        */
+        
 
         //set chosen inputs
         this.$('.chosen').chosen({width: '100%'}).change(function(e){

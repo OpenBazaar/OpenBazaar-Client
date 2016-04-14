@@ -1172,6 +1172,30 @@
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
                   <label>
+                    <%= polyglot.t('UseTestnet') %>
+                  </label>
+                  <i class="ion-help-circled tooltip tooltip-box" data-tooltip="<%= polyglot.t('UseTestnetHelp') %>"></i>
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem flexRow">
+                  <div class="flexRow">
+                    <div class="flexCol-4">
+                      <input type="radio" class="fieldItem" id="useTestnetYes" name="useTestnet" value="true" <% if(window.config.testnet){ %>checked<% } %> /><label for="useTestnetYes" class="radioLabel"><%= polyglot.t('Yes') %></label>
+                      <input type="radio" class="fieldItem" id="useTestnetNo" name="useTestnet" value="false" <% if(!window.config.testnet){ %>checked<% } %> /><label for="useTestnetNo" class="radioLabel"><%= polyglot.t('No') %></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="flexRow">
+
+              <div class="flexCol-3  borderRight custCol-border">
+                <div class="fieldItem">
+                  <label>
                     <%= polyglot.t('ServerSettings') %>
                   </label>
                 </div>

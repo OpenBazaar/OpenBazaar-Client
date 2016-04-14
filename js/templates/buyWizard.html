@@ -379,8 +379,8 @@
                          value="<%= ob.user.refund_address %>" required />
                   <% if(config.testnet) { %>
                   <div class="positionTopRight padding10">
-                    <span class="btn btn-txt custCol-secondary">
-                      <i class="ion-android-arrow-back"></i> <%= polyglot.t('TestnetAddress') %> <!--remove this in production-->
+                    <span class="btn btn-txt custCol-secondary tooltip tooltip-left tooltip-box" data-tooltip="<%= polyglot.t('TestnetAddressHelp') %>">
+                      <i class="ion-android-arrow-back"></i> <%= polyglot.t('TestnetAddress') %>
                     </span>
                   </div>
                   <% } %>

@@ -104,31 +104,21 @@ module.exports = Backbone.View.extend({
       self.$el.find('.js-storeWizardModal').removeClass('fadeOut');
       self.$el.find('#storeNameInput').focus();
       self.socketView.getModerators(self.socketModeratorID);
-      /*
+      
       var editor = new MediumEditor('#aboutInput', {
         placeholder: {
           text: ''
         },
         toolbar: {
-          imageDragging: false,
-          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
+          imageDragging: false
         },
         paste: {
-          cleanPastedHTML: true,
-          cleanReplacements: [
-            [new RegExp(/<div>/gi), '<p>'],
-            [new RegExp(/<\/div>/gi), '</p>'],
-            [new RegExp(/<font>/gi), ""],
-            [new RegExp(/<\/font>/gi), ""],
-            [new RegExp(/<code>/gi), '<pre>'],
-            [new RegExp(/<\/code>/gi), '</pre>']
-          ],
-          cleanAttrs: ['class', 'style', 'dir', 'color', 'face', 'size', 'align', 'border', 'background', 'opacity'],
-          cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
+          cleanPastedHTML: false,
+          forcePlainText: false
         }
       });
       editor.subscribe('blur', self.validateDescription);
-      */
+      
     });
   },
 

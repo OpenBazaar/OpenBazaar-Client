@@ -265,18 +265,6 @@ app.on('ready', function() {
         label: 'Minimize',
         selector: 'performMiniaturize:',
         accelerator: 'Command+M'
-      },
-      {
-        label: 'Close',
-        accelerator: 'Command+W',
-        selector: 'performClose:'
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Bring All to Front',
-        selector: 'arrangeInFront:'
       }
     ]
   }

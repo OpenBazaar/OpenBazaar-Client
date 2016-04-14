@@ -54,6 +54,7 @@ module.exports = Backbone.View.extend({
     'click .js-shutDownServer': 'shutdownServer',
     'keyup #moderatorFeeInput': 'keypressFeeInput',
     'click #advancedForm input[name="notFancy"]': 'toggleFancyStyles',
+    'click #advancedForm input[name="useTestnet"]': 'toggleTestnet',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
     'change #handle': 'handleChange',
@@ -191,29 +192,19 @@ module.exports = Backbone.View.extend({
         self.newBanner = false;
       }
 
-      /*var editor = new MediumEditor('#about', {
+      var editor = new MediumEditor('#about', {
         placeholder: {
           text: ''
         },
         toolbar: {
           imageDragging: false,
-          buttons: ['bold', 'italic', 'underline', 'h2', 'h3']
         },
         paste: {
-          cleanPastedHTML: true,
-          cleanReplacements: [
-            [new RegExp(/<div>/gi), '<p>'],
-            [new RegExp(/<\/div>/gi), '</p>'],
-            [new RegExp(/<font>/gi), ""],
-            [new RegExp(/<\/font>/gi), ""],
-            [new RegExp(/<code>/gi), '<pre>'],
-            [new RegExp(/<\/code>/gi), '</pre>']
-          ],
-          cleanAttrs: ['class', 'style', 'dir', 'color', 'face', 'size', 'align', 'border', 'background', 'opacity'],
-          cleanTags: ['meta', 'style', 'script', 'center', 'basefont', 'frame', 'iframe', 'frameset' ]
+          cleanPastedHTML: false,
+          forcePlainText: false
         }
       });
-      editor.subscribe('blur', self.validateDescription);*/
+      editor.subscribe('blur', self.validateDescription);
     });
     return this;
   },
@@ -639,9 +630,6 @@ module.exports = Backbone.View.extend({
 
     saveBtn.addClass('loading');
 
-    //make sure about data is clean
-    validateMediumEditor.checkVal(this.$('#about'));
-
     var sendPage = function(){
       //change color inputs to hex values
       pageData.primary_color = parseInt(pColorVal.slice(1), 16);
@@ -973,6 +961,11 @@ module.exports = Backbone.View.extend({
       $('html').removeClass('notFancy');
       localStorage.setItem('notFancy', "false");
     }
+  },
+
+  toggleTestnet: function(){
+    window.config.setTestnet($('#advancedForm input[name="useTestnet"]').prop('checked'));
+    window.location.reload();
   },
 
   close: function(){
