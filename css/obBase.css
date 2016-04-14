@@ -2843,6 +2843,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
 
 .fieldItem .fieldItem-selectWrapper {
   position: absolute;
+  width: 100%;
 }
 
 .fieldItem .fieldItem-selectWrapper select {
