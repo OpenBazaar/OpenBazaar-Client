@@ -2,9 +2,11 @@
 
 var Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
+    moment = require('moment'),
     cropit = require('../utils/jquery.cropit'),
     app = require('../App').getApp(),    
     baseModal = require('./baseModal'),
+    timezonesModel = require('../models/timezonesMd'),
     languagesModel = require('../models/languagesMd'),
     countryListView = require('../views/countryListVw'),
     currencyListView = require('../views/currencyListVw'),
@@ -42,6 +44,7 @@ module.exports = baseModal.extend({
     this.$el.attr('tabIndex', 0);
     this.$loadingModal = $('.js-loadingModal');
     this.languages = new languagesModel();
+    this.timezones = new timezonesModel();
 
     // pre-select lauguage.
     var localLanguage = window.navigator.language;
@@ -572,13 +575,17 @@ module.exports = baseModal.extend({
       var timeZoneOffset,
           $themeInputs;
 
-      self.$el.html(t());
+      self.$el.html(t({
+        timezones: self.timezones.toJSON().timezones
+      }));
 
       baseModal.prototype.render.apply(self, arguments);
 
       // pre-select timezone
       var timeZoneOffset = new Date().getTimezoneOffset();
-      timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + parseInt(Math.abs(timeZoneOffset/60)) + ':00)';
+      timeZoneOffset = parseInt(Math.abs(timeZoneOffset/60));
+      timeZoneOffset = moment().isDST() ? timeZoneOffset + 1 : timeZoneOffset;      
+      timeZoneOffset = '(GMT ' + (timeZoneOffset < 0 ? '+' : '-') + timeZoneOffset + ':00)';
       var selectedTimeZone = self.$("[id*='" + timeZoneOffset + "']");
       selectedTimeZone.prop('checked', true);
       self.model.set('time_zone', selectedTimeZone.val());

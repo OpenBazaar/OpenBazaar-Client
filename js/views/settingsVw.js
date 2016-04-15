@@ -406,7 +406,7 @@ module.exports = Backbone.View.extend({
     });
 
     __.each(timezoneList, function(t, i){
-      var timezone_option = $('<option value="'+t.offset+'">'+t.name+'</option>');
+      var timezone_option = $('<option value="'+t.offset+'">'+ polyglot.t('timezones.' + t.offset) + '</option>');
       timezone_option.attr("selected",user.time_zone == t.offset);
       timezone_str += timezone_option[0].outerHTML;
     });
