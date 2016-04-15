@@ -167,7 +167,7 @@
             <div class="flexCol-9">
               <textarea name="description"
                         rows="8"
-                        class="fieldItem-textarea custCol-text height130 overflowHidden"
+                        class="fieldItem-textarea custCol-text height130 customThemeScrollbar"
                         id="inputDescription"
                         required
                         placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%- ob.vendor_offer.listing.item.description %></textarea>
@@ -314,7 +314,10 @@
             </div>
             <div class="flexRow custCol-border">
               <div class="flexCol-12 custCol-border">
-                <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
+                <textarea name="terms_conditions"
+                        rows="6"
+                        placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>"
+                        class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
               </div>
             </div>
           </div>
@@ -328,7 +331,10 @@
             </div>
             <div class="flexRow">
               <div class="flexCol-12">
-                <textarea name="returns" rows="6" placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.returns %></textarea>
+                <textarea name="returns"
+                          rows="6"
+                          placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>"
+                          class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.returns %></textarea>
               </div>
             </div>
         </div>

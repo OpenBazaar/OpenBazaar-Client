@@ -19,6 +19,10 @@ module.exports = Backbone.Model.extend({
         langCode: "de"
       },
       {
+        langName: "Deutsch (German, Germany)",
+        langCode: "de-DE"
+      },
+      {
         langName: "Dutch (Dutch, Netherlands)",
         langCode: "nl-NL"
       },
@@ -36,7 +40,7 @@ module.exports = Backbone.Model.extend({
       },
       {
         langName: "Français (French, France)",
-        langCode: "fr-FR"
+        langCode: "fr"
       },
       {
         langName: "Greek (Greek)",
