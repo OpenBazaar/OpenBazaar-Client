@@ -3442,10 +3442,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 0;
 }
 
-.capitalize {
-  text-transform: capitalize;
-}
-
 .shadow-inner1-ultra-light {
   box-shadow: inset 0px -130px 112px -52px rgba(25,25,25,.35);
 }
