@@ -3678,6 +3678,7 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 .spinner-with-logo {
   background: url('../imgs/icon-with-opening.png') 100% 100%;
   background-size: cover;
+  background-repeat: no-repeat;
   width: 215px;
   height: 215px;
   position: relative;
