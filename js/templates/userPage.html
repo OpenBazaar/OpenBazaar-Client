@@ -137,26 +137,28 @@
                     </span>
                   </a>
                 </div>
-			          <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
-                <a class="btn btn-txt custCol-primary hide js-addmoderator">
-                  <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>
-                  <%= polyglot.t('AddModerator') %>
-                </a>
-                <a class="btn btn-txt custCol-primary hide confirmable js-removemoderator">
-                  <span class="preSpacer">
-                    <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('RemoveModerator') %>
-                  </span>
-                  <span class="preConfirm">
-                    <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('RemoveModerator') %>
-                  </span>
-                  <span class="postConfirm">
-                    <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('ConfirmRemoveModerator') %>
-                  </span>
-                </a>
-              </div>
+                <% if(ob.page.profile.moderator) { %>
+  			          <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
+                  <a class="btn btn-txt custCol-primary hide js-addmoderator">
+                    <span class="ion-person-add fontSize11 marginRight2 textOpacity1"></span>
+                    <%= polyglot.t('AddModerator') %>
+                  </a>
+                  <a class="btn btn-txt custCol-primary hide confirmable js-removemoderator">
+                    <span class="preSpacer">
+                      <span class="ion-eye-disabled fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('RemoveModerator') %>
+                    </span>
+                    <span class="preConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('RemoveModerator') %>
+                    </span>
+                    <span class="postConfirm">
+                      <span class="ion-trash-b fontSize11 marginRight2 textOpacity1"></span>
+                      <%= polyglot.t('ConfirmRemoveModerator') %>
+                    </span>
+                  </a>
+                </div>
+              <% } %>
                 <div class="ctrlGroup hide js-notOwnPageButtons js-userPageControls">
                   <a class="btn btn-txt custCol-primary js-message">
                     <span class="ion-email fontSize11 marginRight2 textOpacity1"></span>

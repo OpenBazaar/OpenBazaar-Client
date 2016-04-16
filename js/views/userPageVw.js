@@ -708,20 +708,8 @@ module.exports = baseVw.extend({
   },
 
   getIsModerator: function () {
-  	if(this.userProfile.get('profile').moderator == true && this.options.ownPage == false && this.model.get('user').vendor) {
-  	  var pageGuid = this.userProfile.get('profile').guid;
-  	  var mods = this.model.get('user').moderators;
-  	  var found = false;
-      var self = this;
-  	  this.toggleModeratorButtons(false);
-      __.each(mods, function(mod) {
-    		if(mod.guid == pageGuid || mod == pageGuid) {
-    		  found = true;
-    		}
-      });
-      if(found == true) {
-        this.toggleModeratorButtons(true);
-      }
+  	if(this.options.ownPage == false && this.model.get('user').vendor) {
+      this.toggleModeratorButtons(Boolean(__.findWhere(this.model.get('user').moderators, {guid: this.pageID})));
     }
   },
 
@@ -1465,19 +1453,27 @@ module.exports = baseVw.extend({
     user.moderators = modList.moderators;
 
     saveToAPI('', user, user.serverUrl + "settings",
-        function(){
-          // confirmed
-          $targ.removeClass('loading');
-        },
-        function(){
-          // failed
-        }, modList,'',
-        function(){
-          // invalid
-        }).always(function(){
-          $targ.removeClass('loading');
-          self.getIsModerator();
+      function(){
+        // confirmed
+        $targ.removeClass('loading');
+      },
+      function(){
+        // failed
+      }, modList,'',
+      function(){
+        // invalid
+      }).always(function(){
+        $targ.removeClass('loading');
+        self.options.userModel.fetch({
+          success: function(model, response) {
+            if (self.isRemoved()) return;
+            var user = self.model.get('user');
+            user.moderators = model.get('moderators');
+            user.moderator_guids = model.get('moderator_guids');
+            self.getIsModerator();
+          }
         });
+      });
   },
 
   removeModeratorClick: function(e){
@@ -1513,7 +1509,15 @@ module.exports = baseVw.extend({
             // invalid
           }).always(function(){
             $targ.removeClass('loading');
-            self.getIsModerator();
+            self.options.userModel.fetch({
+              success: function(model, response) {
+                if (self.isRemoved()) return;
+                var user = self.model.get('user');
+                user.moderators = model.get('moderators');
+                user.moderator_guids = model.get('moderator_guids');
+                self.getIsModerator();
+              }
+            });
           });
     } else {
       $targ.addClass('confirm');
