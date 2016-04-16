@@ -708,9 +708,7 @@ module.exports = baseVw.extend({
   },
 
   getIsModerator: function () {
-  	if(this.options.ownPage == false && this.model.get('user').vendor) {
-      this.toggleModeratorButtons(Boolean(__.findWhere(this.model.get('user').moderators, {guid: this.pageID})));
-    }
+    this.toggleModeratorButtons(Boolean(__.findWhere(this.model.get('user').moderators, {guid: this.pageID})));
   },
 
   renderItems: function (model, skipNSFWmodal) {
