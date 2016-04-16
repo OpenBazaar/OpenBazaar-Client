@@ -31,6 +31,7 @@ module.exports = baseVw.extend({
     'click .js-showSupportModal': 'showSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navRefresh': 'navRefreshClick',
+    'click .js-navRestart': 'navRestartClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
@@ -509,7 +510,11 @@ module.exports = baseVw.extend({
   },
 
   navRefreshClick: function(){
-    this.currentWindow.reload();
+    Backbone.history.loadUrl();
+  },
+  
+  navRestartClick: function(){
+    location.reload();
   },
 
   trimAddressBar: function() {

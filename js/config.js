@@ -19,7 +19,8 @@ module.exports = {
     sales:           'y',
     cases:           'j',
     settings:        'g',
-    addressBar:      'l'
+    addressBar:      'l',
+    restart:         'r'
   },
   
   setTestnet: function(testNetBoolean){
