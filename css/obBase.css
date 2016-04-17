@@ -414,6 +414,12 @@ form {
   height: 100%;
 }
 
+.flexRow-grid {
+  /* use for wrapping grids of objects with 10px margins on the right side */
+  margin-right: -10px;
+  width: auto;
+}
+
 .flexRow [class |= "flexCol"] {
   box-sizing: border-box;
   position: relative;
