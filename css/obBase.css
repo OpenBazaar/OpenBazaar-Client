@@ -5847,7 +5847,9 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.notFancy #obContainer .notFancyDarkBackground {
   background: #262626;
 }
-
+#ov1 .medium-editor-toolbar {
+    background: #353443;
+}
 
 /* hide unfinished elements */
 
