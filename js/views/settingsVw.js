@@ -34,17 +34,17 @@ module.exports = Backbone.View.extend({
     'click .js-moderatorTab': 'tabClick',
     'click .js-advancedTab': 'tabClick',
     'click .js-cancelGeneral': 'cancelView',
-    'click .js-saveGeneral': 'saveGeneral',
+    'click .js-saveGeneral': 'saveGeneralClick',
     'click .js-cancelPage': 'cancelView',
-    'click .js-savePage': 'savePage',
+    'click .js-savePage': 'savePageClick',
     'click .js-cancelAddress': 'cancelView',
-    'click .js-saveAddress': 'saveAddress',
+    'click .js-saveAddress': 'saveAddressClick',
     'click .js-cancelStore': 'cancelView',
-    'click .js-saveStore': 'saveStore',
+    'click .js-saveStore': 'saveStoreClick',
     'click .js-cancelModerator': 'cancelView',
-    'click .js-saveModerator': 'saveModerator',
+    'click .js-saveModerator': 'saveModeratorClick',
     'click .js-cancelAdvanced': 'cancelView',
-    'click .js-saveAdvanced': 'saveAdvanced',
+    'click .js-saveAdvanced': 'saveAdvancedClick',
     'click .js-changeServerSettings': 'launchServerConfig',
     'change .js-settingsThemeSelection': 'themeClick',
     'click .js-settingsAddressDelete': 'addressDelete',
@@ -83,6 +83,29 @@ module.exports = Backbone.View.extend({
     this.oldFeeValue = options.userProfile.get('profile').moderation_fee || 0;
 
     this.firstLoadModerators = true;
+    
+    this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
+      switch (self._state) {
+        case 'general':
+          self.saveGeneral();
+          break;
+        case 'page':
+          self.savePage();
+          break;
+        case 'store':
+          self.saveStore();
+          break;
+        case 'addresses':
+          self.saveAddress();
+          break;
+        case 'moderator':
+          self.saveModerator();
+          break;
+        case 'advanced':
+          self.saveAdvanced();
+          break;
+      }
+    });
 
     this.listenTo(window.obEventBus, "socketMessageReceived", function(response){
       this.handleSocketMessage(response);
@@ -129,6 +152,7 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     $('#content').html(self.$el);
+    
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       self.delegateEvents(); //delegate again for re-render
@@ -579,14 +603,39 @@ module.exports = Backbone.View.extend({
     $firstErr = $container.find(':invalid, .invalid').eq(0);
     $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
   },  
+  
+  saveGeneralClick: function() {
+    this.saveGeneral();
+  },
+  
+  savePageClick: function() {
+    this.savePage();
+  },
+  
+  saveStoreClick: function() {
+    this.saveStore();
+  },
+  
+  saveAddressClick: function() {
+    this.saveAddress();
+  },
+  
+  saveModeratorClick: function() {
+    this.saveModerator();
+  },
+  
+  saveAdvancedClick: function() {
+    this.saveAdvanced();
+  },
 
-  saveGeneral: function(e) {
+  saveGeneral: function() {
     var self = this,
         form = this.$el.find("#generalForm"),
         cCode = this.$('#currency_code').val(),
-        saveBtn = $(e.target).closest('.btn');
+        $saveBtn = this.$('.js-saveGeneral');
+        
+    $saveBtn.addClass('loading');
 
-    saveBtn.addClass('loading');
     localStorage.setItem('NSFWFilter',  this.$("#generalForm input[name=nsfw]:checked").val());
 
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings",
@@ -603,10 +652,12 @@ module.exports = Backbone.View.extend({
           //on invalid
           messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
           self.scrollToFirstError(self.$('#generalForm'));
-        }).always(function(){saveBtn.removeClass('loading');});
+        }).always(function(){
+          $saveBtn.removeClass('loading');
+        });
   },
 
-  savePage: function(e){
+  savePage: function(){
     "use strict";
     var self = this,
         form = this.$el.find("#pageForm"),
@@ -627,9 +678,9 @@ module.exports = Backbone.View.extend({
         sColorVal = sColor.val(),
         tColorVal = tColor.val(),
         skipKeys = ["avatar_hash", "header_hash"],
-        saveBtn = $(e.target).closest('.btn');
+        $saveBtn = this.$('.js-savePage');
 
-    saveBtn.addClass('loading');
+    $saveBtn.addClass('loading');
 
     var sendPage = function(){
       //change color inputs to hex values
@@ -651,7 +702,9 @@ module.exports = Backbone.View.extend({
         //on invalid
         messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
         self.scrollToFirstError(self.$('#pageForm'));
-      }).always(function(){saveBtn.removeClass('loading');});
+      }).always(function(){
+        $saveBtn.removeClass('loading');
+      });
     };
 
     var checkSocialCount = function(){
@@ -667,7 +720,7 @@ module.exports = Backbone.View.extend({
                 checkSocialCount();
               },
               function(data){
-                saveBtn.removeClass('loading');
+                $saveBtn.removeClass('loading');
                 messageModal.show(window.polyglot.t('errorMessages.saveError'), "<i>" + data.reason + "</i>");
               }, socialData);
         } else {
@@ -739,16 +792,16 @@ module.exports = Backbone.View.extend({
     }
   },
 
-  saveStore: function(e){
+  saveStore: function(){
     var self = this,
         form = this.$el.find("#storeForm"),
         settingsData = {},
         moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
         modList = [],
         onFail,
-        saveBtn = $(e.target).closest('.btn');
+        $saveBtn = this.$('.js-saveStore');
 
-    saveBtn.addClass('loading');
+    $saveBtn.addClass('loading');
 
     moderatorsChecked.each(function() {
       modList.push($(this).data('guid'));
@@ -757,7 +810,7 @@ module.exports = Backbone.View.extend({
     settingsData.moderators = modList.length > 0 ? modList : "";
 
     onFail = (data) => {
-      saveBtn.removeClass('loading');
+      $saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#storeForm'));
       messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
     };
@@ -773,22 +826,25 @@ module.exports = Backbone.View.extend({
             self.refreshView();
             }, function(data){
               onFail(data);
-            }, settingsData).always(function(){saveBtn.removeClass('loading');});
+            }, settingsData).always(function(){
+              $saveBtn.removeClass('loading');
+            });
           }, function(data){
             onFail(data);
-    });
+          });
   },
 
-  saveAddress: function(e){
+  saveAddress: function(){
     "use strict";
     var self = this,
         form = this.$el.find("#addressesForm"),
         newAddress = {},
         newAddresses = [],
         addressData = {},
-        saveBtn = $(e.target).closest('.btn');
+        $saveBtn = this.$('.js-saveAddress');
 
-    saveBtn.addClass('loading');
+    $saveBtn.addClass('loading');
+    
     newAddress.name = this.$el.find('#settingsShipToName').val();
     newAddress.street = this.$el.find('#settingsShipToStreet').val();
     newAddress.city = this.$el.find('#settingsShipToCity').val();
@@ -801,7 +857,7 @@ module.exports = Backbone.View.extend({
     if(newAddress.name || newAddress.street || newAddress.city || newAddress.state || newAddress.postal_code) {
       if(!newAddress.name || !newAddress.street || !newAddress.city || !newAddress.state || !newAddress.postal_code){
         messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
-        saveBtn.removeClass('loading');
+        $saveBtn.removeClass('loading');
         return;
       }
     }
@@ -824,21 +880,21 @@ module.exports = Backbone.View.extend({
 
       self.refreshView();
     }, function(){
-      saveBtn.removeClass('loading');
+      $saveBtn.removeClass('loading');
       self.scrollToFirstError(self.$('#addressesForm'));
     }, addressData);
   },
 
-  saveModerator: function(e){
+  saveModerator: function(){
     "use strict";
     var self = this,
         form = this.$el.find("#moderatorForm"),
         moderatorData = {},
         moderatorStatus = this.$('#moderatorYes').is(':checked'),
         makeModeratorUrl = moderatorStatus ? self.serverUrl + "make_moderator" : self.serverUrl + "unmake_moderator",
-        saveBtn = $(e.target).closest('.btn');
+        $saveBtn = this.$('.js-saveModerator');
 
-    saveBtn.addClass('loading');
+    $saveBtn.addClass('loading');
     moderatorData.name = self.model.get('page').profile.name;
     moderatorData.location = self.model.get('page').profile.location;
 
@@ -852,7 +908,9 @@ module.exports = Backbone.View.extend({
       self.refreshView();
     }, function(){
       self.scrollToFirstError(self.$('#moderatorForm'));
-    }, moderatorData).always(function(){saveBtn.removeClass('loading');});;
+    }, moderatorData).always(function(){
+      $saveBtn.removeClass('loading');}
+    );
 
     $.ajax({
       type: "POST",
@@ -865,12 +923,12 @@ module.exports = Backbone.View.extend({
     });
   },
 
-  saveAdvanced: function(e){
+  saveAdvanced: function(){
     var self = this,
         form = this.$el.find("#advancedForm"),
-        saveBtn = $(e.target).closest('.btn');
+        $saveBtn = this.$('.js-saveAdvanced');
 
-    saveBtn.addClass('loading');
+    $saveBtn.addClass('loading');
 
     localStorage.setItem('AdditionalPaymentData',  this.$('#advancedForm input[name=additionalPaymentData]:checked').val());
     
@@ -883,7 +941,9 @@ module.exports = Backbone.View.extend({
       },'','','');
       
       self.refreshView();
-    }).always(function(){saveBtn.removeClass('loading');});;
+    }).always(function(){
+      $saveBtn.removeClass('loading');
+    });
   },
 
   refreshView: function(){

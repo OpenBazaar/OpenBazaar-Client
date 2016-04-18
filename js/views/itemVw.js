@@ -85,6 +85,7 @@ module.exports = baseVw.extend({
       "use strict";
       var imageExtension = self.model.get('imageExtension') || "";
     });
+    
     //el must be passed in from the parent view
     loadTemplate('./js/templates/item.html', function(loadedTemplate) {
       loadTemplate('./js/templates/ratingStars.html', function(starsTemplate) {

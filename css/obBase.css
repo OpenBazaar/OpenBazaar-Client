@@ -414,6 +414,12 @@ form {
   height: 100%;
 }
 
+.flexRow-grid {
+  /* use for wrapping grids of objects with 10px margins on the right side */
+  margin-right: -10px;
+  width: auto;
+}
+
 .flexRow [class |= "flexCol"] {
   box-sizing: border-box;
   position: relative;
@@ -2958,6 +2964,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 2px solid transparent;
   color: #fff;
   overflow: auto; /* use customThemeScrollbar to add a scrolbar */
+  word-break: break-all; /* prevent urls from making the text area grow */
 }
 
 .fieldItem-textarea:focus {
