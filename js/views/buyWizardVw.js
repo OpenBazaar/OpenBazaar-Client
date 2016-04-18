@@ -56,6 +56,7 @@ module.exports = baseVw.extend({
     'click .js-buyWizardCloseSummary': 'closeWizard',
     'click input[name="radioPaymentType"]': 'changePaymentType',
     'blur .js-buyWizardPostalInput': 'updateMap',
+    'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'blur input': 'validateInput'
   },
 
@@ -73,6 +74,7 @@ module.exports = baseVw.extend({
     this.orderID = "";
     this.model.set('selectedModerator', "");
     this.model.updateAttributes();
+    this.cachePayData = "";
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -197,6 +199,9 @@ module.exports = baseVw.extend({
         $(".js-BuyWizardWallets").randomize();
       }
 
+      //set the QR details checkbox
+      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false" ? true : false;
+      this.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
     });
     return this;
   },
@@ -485,6 +490,7 @@ module.exports = baseVw.extend({
       success: function(data){
         if(data.success == true){
           self.showPayAddress(data);
+          self.cachePayData = data; //cache the data for the QR Details toggle
         } else {
           messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " +
               window.polyglot.t('errorMessages.checkPurchaseData') + "\n\n Reason: " + data.reason);
@@ -499,8 +505,21 @@ module.exports = baseVw.extend({
     });
   },
 
+  toggleQRDetails: function(){
+    var toggleInput = this.$('#BuyWizardQRDetailsInput'),
+        toggleVal = toggleInput.prop('checked');
+    localStorage.setItem('AdditionalPaymentData',  toggleVal);
+    this.showPayAddress();
+  },
+
   showPayAddress: function(data){
-    "use strict";
+    data = data || this.cachePayData;
+
+    if(!data) {
+      throw new Error('Data must be provided to the showPayAddress function');
+      return;
+    }
+
     var totalBTCPrice = 0,
         storeName = encodeURI(this.model.get('page').profile.name),
         message = encodeURI(this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " "+data.order_id),
@@ -515,7 +534,9 @@ module.exports = baseVw.extend({
     payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice;
     if(localStorage.getItem('AdditionalPaymentData') != "false") {
         payHREF += "&label="+storeName+"&message="+message;
-    }    
+    }
+
+    console.log(payHREF)
     
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
