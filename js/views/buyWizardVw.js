@@ -201,7 +201,7 @@ module.exports = baseVw.extend({
 
       //set the QR details checkbox
       var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false" ? true : false;
-      this.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
+      self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
     });
     return this;
   },
@@ -535,8 +535,6 @@ module.exports = baseVw.extend({
     if(localStorage.getItem('AdditionalPaymentData') != "false") {
         payHREF += "&label="+storeName+"&message="+message;
     }
-
-    console.log(payHREF)
     
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');

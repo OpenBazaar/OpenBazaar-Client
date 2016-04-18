@@ -58,6 +58,7 @@ module.exports = baseVw.extend({
     'blur .js-transactionDiscussionSendText': 'blurInput',
     'blur input': 'validateInput',
     'blur textarea': 'validateInput',
+    'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'keydown #transactionDiscussionSendText': 'onKeydownDiscussion',
     'keyup #transactionDiscussionSendText': 'onKeyupDiscussion'
   },
@@ -166,6 +167,9 @@ module.exports = baseVw.extend({
       self.getDiscussion();
       self.discussionScroller = self.$('.js-discussionScroller');
       self.moderatorPercentage = self.model.get('displayModerator').feeDecimal;
+      //set the QR details checkbox
+      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false" ? true : false;
+      self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
     });
   },
 
@@ -205,12 +209,24 @@ module.exports = baseVw.extend({
     }
   },
 
+  toggleQRDetails: function(){
+    var toggleInput = this.$('#BuyWizardQRDetailsInput'),
+        toggleVal = toggleInput.prop('checked');
+    localStorage.setItem('AdditionalPaymentData',  toggleVal);
+    this.showPayment();
+  },
+
   showPayment: function(){
     var totalBTCPrice = 0,
         payHREF,
         dataURI;
     if(this.model.get('buyer_order')){
-      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount + "&message=" + this.model.get('vendor_offer').listing.item.title.substring(0, 20);
+      payHREF = "bitcoin:" + this.model.get('buyer_order').order.payment.address + "?amount=" + this.model.get('buyer_order').order.payment.amount;
+
+      if(localStorage.getItem('AdditionalPaymentData') != "false") {
+        payHREF += "&message=" + this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " " + this.orderID;
+      }
+      
       dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
       this.$el.find('.js-transactionPayQRCode').attr('src', dataURI);
     } else {
