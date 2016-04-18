@@ -10,7 +10,10 @@ module.exports = {
 
   bitcoinValidationRegex: bitcoinValidationRegex,
   
+  keyShortcutPrefix: window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+',
+  
   keyShortcuts: {
+    undo:            'z',
     discover:        'd',
     myPage:          'h',
     customizePage:   'e',
@@ -20,6 +23,7 @@ module.exports = {
     cases:           'j',
     settings:        'g',
     addressBar:      'l',
+    save:            's',
     restart:         'r'
   },
   

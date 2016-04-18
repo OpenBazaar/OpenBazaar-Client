@@ -132,8 +132,8 @@ module.exports = baseVw.extend({
     'click .js-cloneItem': 'cloneItem',
     'click .js-deleteItem': 'deleteItemClick',
     'click .js-cancelItem': 'cancelClick',
-    'click .js-saveItem': 'saveItem',
-    'click .js-saveCustomization': 'saveCustomizePage',
+    'click .js-saveItem': 'saveItemClick',
+    'click .js-saveCustomization': 'saveCustomizePageClick',
     'click .js-cancelCustomization': 'cancelCustomizePage',
     'click .js-createStore': 'createStore',
     'click .js-follow': 'followUserClick',
@@ -201,6 +201,7 @@ module.exports = baseVw.extend({
     this.lastTab = "about"; //track the last tab clicked
     //flag to hold state when customizing
     this.customizing = false;
+    this.editing = false;
     this.skipNSFWmodal = options.skipNSFWmodal;
     this.showNSFW = options.skipNSFWmodal ? options.skipNSFWmodal : JSON.parse(localStorage.getItem('NSFWFilter'));
     this.showNSFWContent = this.showNSFW;
@@ -256,7 +257,15 @@ module.exports = baseVw.extend({
       if (e.guid === this.model.get('page').profile.guid) {
         this.renderUserUnblocked();
       }
-    });        
+    });  
+    
+    this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
+      if (self.editing) {
+        self.saveItem();
+      } else if (self.customizing) {
+        self.saveCustomizePage();
+      }
+    });   
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -344,8 +353,8 @@ module.exports = baseVw.extend({
         blocked = this.options.userModel.get('blocked_guids') || [],
         isBlocked = blocked.indexOf(this.pageID) !== -1;
 
-    //add blocked status to model
-    this.model.set('isBlocked', isBlocked);
+    this.model.set('isBlocked', isBlocked); //add blocked status to model
+    
     //make sure container is cleared
     $('#content').html(this.$el);
 
@@ -886,6 +895,7 @@ module.exports = baseVw.extend({
   renderItemEdit: function(useCurrentItem, clone){
     var self = this,
         hash = "";
+        
     if(useCurrentItem) {
       //if editing existing product, clone the model
       this.itemEdit = this.item.clone();
@@ -913,6 +923,8 @@ module.exports = baseVw.extend({
     this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
+    
+    this.editing = true;
   },
 
   aboutClick: function(e){
@@ -967,6 +979,9 @@ module.exports = baseVw.extend({
     activeTab.addClass('active');
     this.$('.js-userPageSubViews > .js-tabTarg').addClass('hide');
     showContent.removeClass('hide');
+
+    this.customizing = false;
+    this.editing = false;
   },
 
   addTabToHistory: function(state, replace){
@@ -1226,6 +1241,10 @@ module.exports = baseVw.extend({
       self.saveUserPageModel();
     }
   },
+  
+  saveCustomizePageClick: function() {
+    this.saveCustomizePage();
+  },
 
   saveCustomizePage: function() {
     "use strict";
@@ -1295,14 +1314,20 @@ module.exports = baseVw.extend({
 
   saveNewDone: function(newHash) {
     "use strict";
+    
     this.setState('listing', newHash);
     this.fetchListings();
+    
+    this.editing = false;
   },
 
   cancelClick: function(){
     "use strict";
+  
     this.setState(this.lastTab);
     $('#obContainer').animate({ scrollTop: 0 });
+
+    this.editing = false;
   },
 
   editItem: function(clone){
@@ -1355,17 +1380,23 @@ module.exports = baseVw.extend({
       });
     }
   },
+  
+  saveItemClick: function() {
+    this.saveItem();
+  },
 
   saveItem: function(e){
     if(this.itemEditView) {
-      $(e.target).addClass('loading');
+      var $saveBtn = $('.js-saveItem');
       
-      this.itemEditView.saveChanges().always(() => $(e.target).removeClass('loading'))
-        .fail(() => {
-          var $firstErr = this.$('.js-itemEdit .invalid, .js-itemEdit :invalid').not('form').eq(0);
+      $saveBtn.addClass('loading');
+      
+      this.itemEditView.saveChanges().always(() => $saveBtn.removeClass('loading'))
+      .fail(() => {
+        var $firstErr = this.$('.js-itemEdit .invalid, .js-itemEdit :invalid').not('form').eq(0);
 
-          $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
-        });
+        $firstErr.length && $firstErr[0].scrollIntoViewIfNeeded();
+      });
     }
   },
 

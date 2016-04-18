@@ -89,6 +89,7 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
+    
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       var context = __.extend({}, self.model.toJSON(), { MAX_PHOTOS: self.MAX_PHOTOS });
 
