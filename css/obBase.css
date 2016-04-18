@@ -2964,6 +2964,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 2px solid transparent;
   color: #fff;
   overflow: auto; /* use customThemeScrollbar to add a scrolbar */
+  word-break: break-all; /* prevent urls from making the text area grow */
 }
 
 .fieldItem-textarea:focus {
