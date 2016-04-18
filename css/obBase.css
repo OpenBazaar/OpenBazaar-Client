@@ -3121,6 +3121,7 @@ input[type="checkbox"].fieldItem + label:before {
   box-shadow: none;
   opacity: 1;
   font-size: 1.5em;
+  vertical-align: middle;
 }
 
 input[type="checkbox"].fieldItem + label.compact {
@@ -3130,6 +3131,10 @@ input[type="checkbox"].fieldItem + label.compact {
 
 input[type="checkbox"].fieldItem + label.compact:before {
   left: 0;
+}
+
+input[type="checkbox"].fieldItem.thin + label {
+  line-height: inherit;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {

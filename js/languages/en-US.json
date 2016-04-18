@@ -325,7 +325,7 @@
   "PriceForOne": "Price per single item, file, or service.",
   "Avatar": "Avatar",
   "AdditionalPaymentData": "Additional payment data",
-  "AdditionalPaymentDataInfo": "Include message and label in payment QR code.",
+  "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
   "firewall": {
     "Open": "Open",
     "Restricted": "Restricted",
