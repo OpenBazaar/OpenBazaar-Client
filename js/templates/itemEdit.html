@@ -167,7 +167,7 @@
             <div class="flexCol-9">
               <textarea name="description"
                         rows="8"
-                        class="fieldItem-textarea custCol-text height130 overflowHidden"
+                        class="fieldItem-textarea custCol-text height130 customThemeScrollbar"
                         id="inputDescription"
                         required
                         placeholder="<%= polyglot.t('DescriptionPlaceholder') %>"><%- ob.vendor_offer.listing.item.description %></textarea>
@@ -201,7 +201,7 @@
               </div>
               <div class="flexCol-8">
                 <div class="fieldItem padding0 js-shipToWrapper">
-                  <div class="fieldItem-selectWrapper noIcon">
+                  <div class="fieldItem-selectWrapper noIcon positionWrapper">
                     <select name="ships_to" class="chosen custCol-text" id="shipsTo" multiple required>
                     </select>
                   </div>
@@ -314,7 +314,10 @@
             </div>
             <div class="flexRow custCol-border">
               <div class="flexCol-12 custCol-border">
-                <textarea name="terms_conditions" rows="6" placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
+                <textarea name="terms_conditions"
+                        rows="6"
+                        placeholder="<%= polyglot.t('TermsAndConditionsPlaceholder') %>"
+                        class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.terms_conditions %></textarea>
               </div>
             </div>
           </div>
@@ -328,7 +331,10 @@
             </div>
             <div class="flexRow">
               <div class="flexCol-12">
-                <textarea name="returns" rows="6" placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>" class="fieldItem-textarea custCol-text"><%= ob.vendor_offer.listing.policy.returns %></textarea>
+                <textarea name="returns"
+                          rows="6"
+                          placeholder="<%= polyglot.t('ReturnPolicyPlaceholder') %>"
+                          class="fieldItem-textarea custCol-text customThemeScrollbar"><%= ob.vendor_offer.listing.policy.returns %></textarea>
               </div>
             </div>
         </div>
@@ -413,7 +419,7 @@
         <div class="ctrlGroup js-itemEditButtons floatRight">
           <a class="btn btn-large custCol-secondary js-saveItem">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('SaveChanges') %>
+            <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
           </a>
         </div>
         <div class="ctrlGroup js-itemEditButtons textOpacity1 floatRight marginRight5">

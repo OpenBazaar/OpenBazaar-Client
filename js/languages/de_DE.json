@@ -1,5 +1,5 @@
 {
-    "IHaveAWalletNow": "Ich habe jetzt ein Wallet",
+    "IHaveAWalletNow": "Ich habe jetzt eine Wallet",
     "Next": "Weiter",
     "IAgree": "Akzeptieren",
     "Back": "Zur&uuml;ck",
@@ -29,7 +29,7 @@
     "Poor": "Mangelhaft",
     "StillValidating": "Your handle is still validating. Click to save any changes on this page, and recheck your handle.",
     "RefreshHandleStatus": "Recheck Your Handle Status",
-    "GoToOneName": "Go to Onename.com",
+    "GoToOneName": "Gehe zu Onename.com",
     "GoToOneNameTooltip": "Create an ID at Onename.com, and under App Accounts enter openbazaar as the app name and your guid as the account identifier (your guid is on your page, in the About tab). Verification can take up to several days.",
     "ChangeCurrency": "W&auml;hrung wechseln",
     "SKU": "SKU",

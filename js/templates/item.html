@@ -24,10 +24,10 @@
         <button class="fullscreen js-photoGallery" href="<%= ob.serverUrl %>get_image?hash=<%= ob.vendor_offer.listing.item.image_hashes[0] %><%= ob.imageExtension %>"></button>
       <% } %>
     </div>
-    <div class="flexRow row20">
+    <div class="flexRow row20 flexRow-grid">
       <% _.each(ob.vendor_offer.listing.item.image_hashes, function(data, i) {
       if(i != 0){%>
-      <div class="itemImg itemImg-small overflowHidden <% if(i > 4){%>hide<% } %>">
+      <div class="itemImg itemImg-small overflowHidden">
         <div class="itemImg itemImg-small <% if(!ob.showNSFWContent && !ob.skipNSFWmodal && ob.vendor_offer.listing.item.nsfw){ %> nsfw <% } %>"
              style="background-image: url(<%= ob.serverUrl %>get_image?hash=<%= data %><%= ob.imageExtension %>), url(imgs/defaultItem.png);">
         </div>
