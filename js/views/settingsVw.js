@@ -394,6 +394,7 @@ module.exports = Backbone.View.extend({
     this.$("#generalForm input[name=notifications][value=" + notifications + "]").prop('checked', true);
     this.$("#storeForm input[name=vendor][value=" + vendorStatus + "]").prop('checked', true);
     this.$("#advancedForm input[name=notFancy][value=" + fancyStatus + "]").prop('checked', true);
+    this.$("#advancedForm input[name=additionalPaymentData][value=" + localStorage.getItem('AdditionalPaymentData') + "]").prop('checked', true);
 
     currecyList = __.uniq(currecyList, function(item){return item.code;});
     currecyList = currecyList.sort(function(a,b){
@@ -929,6 +930,8 @@ module.exports = Backbone.View.extend({
 
     $saveBtn.addClass('loading');
 
+    localStorage.setItem('AdditionalPaymentData',  this.$('#advancedForm input[name=additionalPaymentData]:checked').val());
+    
     saveToAPI(form, this.userModel.toJSON(), self.serverUrl + "settings", function(){
       app.statusBar.pushMessage({
         type: 'confirmed',

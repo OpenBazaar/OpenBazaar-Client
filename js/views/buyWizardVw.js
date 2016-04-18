@@ -511,7 +511,12 @@ module.exports = baseVw.extend({
     totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
-    payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
+    
+    payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice;
+    if(localStorage.getItem('AdditionalPaymentData') != "false") {
+        payHREF += "&label="+storeName+"&message="+message;
+    }    
+    
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});

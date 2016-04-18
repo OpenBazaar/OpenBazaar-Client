@@ -324,6 +324,8 @@
     "ModeratorFee": "Prowizja:",
     "PriceForOne": "Cena za pojedynczy przedmiot, plik lub usługę.",
     "Avatar": "Awatar",
+    "AdditionalPaymentData": "Dodatkowe informacje o płatności",
+    "AdditionalPaymentDataInfo": "Umieszczaj wiadomość i etykietę w kodzie QR płatności.",
     "firewall": {
         "Open": "Otwarty",
         "Restricted": "Ograniczony",
