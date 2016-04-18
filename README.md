@@ -1,7 +1,7 @@
 # OpenBazaar-Client
 
 [![Build Status](https://travis-ci.org/OpenBazaar/OpenBazaar-Client.svg)](https://travis-ci.org/OpenBazaar/OpenBazaar-Client)
-[![Slack Status](http://slack.openbazaar.org/badge.svg)](https://slack.openbazaar.org)
+[![Slack Status](http://slack.openbazaar.org/badge.svg)](https://openbazaar-slackin-drwasho.herokuapp.com/)
 
 You **must** be running the [OpenBazaar backend](https://github.com/OpenBazaar/OpenBazaar-Server) for the client to work!
 

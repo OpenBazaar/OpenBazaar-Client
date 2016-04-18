@@ -191,7 +191,7 @@ $(window).bind('keydown', function(e) {
       route = null;
     
   if (event.keyCode == 116) { //on F5 press
-    location.reload();
+    Backbone.history.loadUrl();
   }
 
   if (ctrl) {

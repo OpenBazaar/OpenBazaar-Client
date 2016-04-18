@@ -23,7 +23,8 @@ module.exports = {
     cases:           'j',
     settings:        'g',
     addressBar:      'l',
-    save:            's'
+    save:            's',
+    restart:         'r'
   },
   
   setTestnet: function(testNetBoolean){

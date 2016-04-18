@@ -523,6 +523,7 @@ module.exports = baseVw.extend({
 
     if(keywordsArray.length < 1){
       this.$('#inputKeyword').closest('.flexRow').addClass('invalid');
+      messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError') + "<br><i>"+ polyglot.t('Tags')+"</i>");
       return $.Deferred().reject('failed form validation').promise();
     } else {
       this.$('#inputKeyword').closest('.flexRow').removeClass('invalid');
