@@ -531,7 +531,7 @@ module.exports = baseVw.extend({
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
     
-    payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice;
+    payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;
     if(localStorage.getItem('AdditionalPaymentData') != "false") {
         payHREF += "&label="+storeName+"&message="+message;
     }
