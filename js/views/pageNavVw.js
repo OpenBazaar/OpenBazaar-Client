@@ -156,15 +156,18 @@ module.exports = baseVw.extend({
         username,
         avatar,
         notif,
+        message,
         notifStamp;
 
-    if (data.hasOwnProperty('notification')) {
-      notif = data.notification;
+    if (data.hasOwnProperty('notification') || data.hasOwnProperty('message') && data.message.subject) {
+      notif = data.notification || data.message;
       username = notif.handle ? notif.handle : notif.guid.substring(0,10) + '...';
-      avatar = notif.image_hash ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
-        notif.image_hash + '&guid=' + notif.guid : 'imgs/defaultUser.png';
+      avatar = notif.image_hash || notif.avatar_hash;
+      avatar = avatar ? app.serverConfig.getServerBaseUrl + '/get_image?hash=' +
+        avatar + '&guid=' + notif.guid : 'imgs/defaultUser.png';
+      notif.type = notif.type || notif.message_type;
       notifStamp = Date.now();
-
+      
       this.unreadNotifsViaSocket++;
 
       this.notificationsCl.add(
@@ -193,6 +196,12 @@ module.exports = baseVw.extend({
             silent: true
           });
           break;
+        case "dispute_close":
+          new Notification(window.polyglot.t('NotificationDisputeClosed', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
         case "new order":
           new Notification(window.polyglot.t('NotificationNewOrder', {name: username}), {
             icon: avatar,
@@ -213,6 +222,12 @@ module.exports = baseVw.extend({
           break;
         case "rating received":
           new Notification(window.polyglot.t('NotificationRatingRecieved', {name: username}), {
+            icon: avatar,
+            silent: true
+          });
+          break;
+        case "ORDER":
+          new Notification(window.polyglot.t('NotificationNewTransactionMessage', {name: username}), {
             icon: avatar,
             silent: true
           });
