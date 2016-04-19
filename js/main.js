@@ -381,27 +381,29 @@ launchOnboarding = function(guidCreating) {
 };
 
 launchServerConnect = function() {
-  if (!serverConnectModal) {
-    serverConnectModal = new ServerConnectModal();
+  // if (!serverConnectModal) {
+  //   serverConnectModal = new ServerConnectModal();
 
-    serverConnectModal.on('connected', function(authenticated) {
-      $loadingModal.removeClass('hide');
+  //   serverConnectModal.on('connected', function(authenticated) {
+  //     $loadingModal.removeClass('hide');
 
-      if (authenticated) {
-        serverConnectModal && serverConnectModal.remove();
-        serverConnectModal = null;
-      }
-    });
+  //     if (authenticated) {
+  //       serverConnectModal && serverConnectModal.remove();
+  //       serverConnectModal = null;
+  //     }
+  //   });
 
-    serverConnectModal.render()
-      .open()
-      .start();
-  } else {
-    if (!serverConnectModal.isOpen()) {
-      serverConnectModal.open();
-      if (!serverConnectModal.isStarted()) serverConnectModal.start();
-    }
-  }
+  //   serverConnectModal.render()
+  //     .open()
+  //     .start();
+  // } else {
+  //   if (!serverConnectModal.isOpen()) {
+  //     serverConnectModal.open();
+  //     if (!serverConnectModal.isStarted()) serverConnectModal.start();
+  //   }
+  // }
+
+  new ServerConnectModal().render().open();
 };
 
 heartbeat.on('open', function(e) {
@@ -488,10 +490,6 @@ heartbeat.on('message', function(e) {
             launchServerConnect();
           });
         }
-
-        // todo: check for edge case where guid creating
-        // is still pending here, meaning the GUID generation
-        // complete message never arrived. Auth will fail.
     }
   }
 });

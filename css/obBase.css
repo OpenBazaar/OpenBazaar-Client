@@ -4212,6 +4212,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 15;
 }
 
+.server-connect-modal .modal-child {
+  height: 625px;
+  overflow: hidden;
+}
+
+.server-config-form {
+  transition: transform 250ms;
+}
+
+.server-config-form.slide-out {
+  transform: translateY(372px);
+}
+
+
 #loadingModal .btn {
   -webkit-app-region: no-drag;
 }
@@ -5867,7 +5881,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.notFancy #obContainer .notFancyDarkBackground {
   background: #262626;
 }
-
 
 /* hide unfinished elements */
 

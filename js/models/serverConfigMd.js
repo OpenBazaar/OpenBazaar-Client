@@ -78,6 +78,10 @@ module.exports = Backbone.Model.extend({
 
     attrs = this.castIntegerFields(attrs);
 
+    if (is.empty(attrs.name)) {
+      this._addError(err, 'name', 'Please provide a value.');
+    }
+
     if (is.empty(attrs.server_ip)) {
       this._addError(err, 'server_ip', 'Please provide a value.');
     } else {
