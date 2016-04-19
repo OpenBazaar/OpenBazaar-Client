@@ -74,9 +74,11 @@ module.exports = Backbone.View.extend({
     this.serverUrl = options.userModel.get('serverUrl');
     this.userModel = this.options.userModel;
     this.model = new Backbone.Model();
-    this.subViews = [];
+    this.subViews = []; //TODO: get rid of subviews, submodels, use proper remove method
     this.subModels = [];
     this.subModels.push(this.userProfile);
+
+    this.shownMods = []; //array of mods that have been shown, used to prevent duplicates
 
     this.moderatorFeeInput;
     this.moderatorFeeHolder;
@@ -479,6 +481,13 @@ module.exports = Backbone.View.extend({
         existingMods = this.userModel.get('moderator_guids'),
         isExistingMod = existingMods.indexOf(moderator.guid) > -1;
 
+    //make sure this moderator is not a duplicate
+    if(this.shownMods.indexOf(moderator.guid) > -1){
+      return;
+    } else {
+      this.shownMods.push(moderator.guid);
+    }
+
     if(moderator.guid != this.model.get('page').profile.guid && this.userModel.get('blocked_guids').indexOf(moderator.guid) == -1){
       moderator.serverUrl = self.serverUrl;
       moderator.userID = moderator.guid;
@@ -547,6 +556,10 @@ module.exports = Backbone.View.extend({
             }
           });
         }
+        //hide spinners after a while
+        setTimeout(()=> {
+          this.$('.js-loadingMsg').addClass('foldIn');
+        },3000);
         this.firstLoadModerators = false;
       } else if (state === 'blocked') {
         // Since the Blocked Users View kicks off many server calls (one
@@ -796,18 +809,27 @@ module.exports = Backbone.View.extend({
     var self = this,
         form = this.$el.find("#storeForm"),
         settingsData = {},
-        moderatorsChecked = this.$el.find('.js-userShortView input:checked'),
-        modList = [],
+        moderatorsNew = this.$el.find('#storeForm .js-settingsNewMods .js-userShortView input:checked'),
+        moderatorList = this.userModel.get('moderators').map(function(moderatorObject){
+          return moderatorObject.guid;
+        }),
+        moderatorsUnChecked = this.$('#storeForm .js-settingsCurrentMods .js-userShortView input:not(:checked)'),
         onFail,
         $saveBtn = this.$('.js-saveStore');
 
     $saveBtn.addClass('loading');
 
-    moderatorsChecked.each(function() {
-      modList.push($(this).data('guid'));
+    //first, remove any existing moderators that have been unchecked. This prevents removing saved moderators that don't show up in the UI for some reason
+    moderatorsUnChecked.each(function() {
+      moderatorList = __.without(moderatorList, ($(this).data('guid')));
     });
 
-    settingsData.moderators = modList.length > 0 ? modList : "";
+    //add any new moderators that have been checked
+    moderatorsNew.each(function() {
+      moderatorList.push($(this).data('guid'));
+    });
+
+    settingsData.moderators = moderatorList.length > 0 ? moderatorList : "";
 
     onFail = (data) => {
       $saveBtn.removeClass('loading');
