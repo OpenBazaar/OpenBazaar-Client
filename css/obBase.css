@@ -5623,15 +5623,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 #ov1 .foldIn {
   height: 0;
+  padding: 0;
   overflow: hidden;
-  transition: height 1s;
+  transition: height 1s, padding 1s;
+  pointer-events: none;
 }
 
 #ov1 .underline {
@@ -5801,8 +5805,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 1px solid #444;
 }
 
+#ov1.notFancy .fadeOut,
 #ov1.notFancy .statusBar.fadeOut,
 #ov1.notFancy #pageNav .statusBar.fadeOut,
+#ov1.notFancy #userPage .fadeOut,
+#ov1.notFancy #userPage #pageNav .fadeOut,
 #ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
   opacity: 0 !important;
