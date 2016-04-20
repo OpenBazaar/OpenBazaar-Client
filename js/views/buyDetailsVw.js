@@ -72,21 +72,21 @@ module.exports = Backbone.View.extend({
         moderatorPrice = moderatorPercentage ? totalItemPrice * moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
         totalPrice = totalItemPrice + totalShipping,
-        newBTCDisplayPrice = (this.model.get('vendorBTCPrice') * quantity).toFixed(8),
-        newBTCShippingDisplayPrice = (this.model.get('currentShippingBTCPrice') * quantity).toFixed(8),
-        newDisplayPrice = (userCurrency == "BTC") ? totalItemPrice.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newBTCDisplayPrice = Number((this.model.get('vendorBTCPrice') * quantity).toFixed(8)),
+        newBTCShippingDisplayPrice = Number((this.model.get('currentShippingBTCPrice') * quantity).toFixed(8)),
+        newDisplayPrice = (userCurrency == "BTC") ? Number(totalItemPrice.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalItemPrice),
-        newDisplayShippingPrice = (userCurrency == "BTC") ? totalShipping.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayShippingPrice = (userCurrency == "BTC") ? Number(totalShipping.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalShipping),
-        newDisplayModeratorPrice = (userCurrency == "BTC") ? moderatorTotal.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayModeratorPrice = (userCurrency == "BTC") ? Number(moderatorTotal.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
