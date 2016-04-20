@@ -5875,6 +5875,20 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   background: #262626;
 }
 
+/* add a shadow and a glow, so modal close buttons are still barely visible if the user picks a bad color */
+#ov1 .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #messageModal .js-closeIndexModal [class *= "ion-"]:before {
+  text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
+}
+
 
 /* hide unfinished elements */
 
