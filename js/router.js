@@ -57,13 +57,13 @@ module.exports = Backbone.Router.extend({
         itemHash = "",
         routeArray = route.replace("ob://","").replace(/ /g, "").split("/"),
         deferred = $.Deferred();
-
+    
     state = routeArray[1] ? "/" + routeArray[1] : "";
     itemHash = routeArray[2] ? "/" + routeArray[2] : "";
 
     if(routeArray[0].charAt(0) == "@"){
       // user entered a handle
-      deferred.resolve(route);
+      deferred.resolve(routeArray[0] + state + itemHash);
     } else if(!routeArray[0].length){
       // user trying to go back to discover
       deferred.resolve('#home');

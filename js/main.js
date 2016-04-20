@@ -276,6 +276,8 @@ var profileLoaded;
 var loadProfile = function(landingRoute, onboarded) {
   var externalRoute = remote.getGlobal('externalRoute');
 
+  landingRoute = landingRoute && landingRoute != undefined ? landingRoute : '#';
+
   profileLoaded = true;
 
   //get the guid from the user profile to put in the user model
@@ -317,7 +319,7 @@ var loadProfile = function(landingRoute, onboarded) {
                   Backbone.history.start();
                 });
               } else {
-                location.hash = landingRoute || '#';
+                location.hash = landingRoute;
                 Backbone.history.start();
               }
             });
