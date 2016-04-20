@@ -670,8 +670,8 @@
         "heartbeatSocketApiPort": "Порт сокета Heartbeat",
         "username": "Имя пользователя сервера",
         "password": "Пароль сервера",
-        "restoreDefaults": "Удалить настройки",
+        "restoreDefaults": "Сбросить настройки",
         "saveChanges": "Сохранить изменения",
-        "retry": "Попробовать ещё раз"
+        "retry": "Повторная попытка"
     }
 }
