@@ -436,10 +436,10 @@ module.exports = baseVw.extend({
       addressText = addressText ? "#" + addressText.replace(/\s+/g, '') : "";
       target.val(addressText);
       window.obEventBus.trigger("setAddressBar", {'addressText': addressText});
-    }
-
-    if(target.val() == ""){
-      this.searchItemsClear();
+    } else if(e.keyCode == 8 || e.keyCode == 46) {
+      if(target.val() == "") {
+        this.searchItemsClear();
+      }
     }
   },
 
@@ -451,7 +451,6 @@ module.exports = baseVw.extend({
     window.obEventBus.trigger("setAddressBar", {'addressText': ""});
     
     this.$el.find('.js-discoverHeading').html(window.polyglot.t('Discover'));
-    this.$el.find('.js-homeListingToggle').removeClass('hide');
 
     // change loading text copy
     this.$el.find('.js-loadingText').html(this.$el.find('.js-loadingText').data('defaultText'));
