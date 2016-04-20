@@ -4319,6 +4319,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-color: #616161;
 }
 
+#ov1 .medium-editor-toolbar {
+  background: #353443;
+}
+
 #ov1::-webkit-scrollbar {
   display: none;
   box-sizing: border-box;
@@ -5898,7 +5902,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.notFancy #messageModal .js-modal-close [class *= "ion-"]:before{
   text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
 }
-
 
 /* hide unfinished elements */
 
