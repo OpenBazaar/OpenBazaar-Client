@@ -154,6 +154,7 @@ module.exports = Backbone.View.extend({
   render: function(){
     var self = this;
     $('#content').html(self.$el);
+    this.shownMods = []; //reset to blank 
     
     loadTemplate('./js/templates/settings.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
