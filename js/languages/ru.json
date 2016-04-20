@@ -658,7 +658,7 @@
     "serverConnectModal": {
         "statusTryingToConnect": "Попытка подключения к серверу ...",
         "statusConnected": "Подключение.",
-        "statusFailedConnection": "Невозможно подключиться к вашему серверу",
+        "statusFailedConnection": "Связь с нодой потеряна",
         "statusFailedAuthentication": "Сбой аутентификации",
         "statusTooManyAttempts": "Слишком много попыток входа",
         "serverConfiguration": "Конфигурация сервера",
