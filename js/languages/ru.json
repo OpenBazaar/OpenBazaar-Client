@@ -330,9 +330,9 @@
         "SeverelyRestricted": "Серьёзные ограничения"
     },
     "moderatorSettings": {
-        "DisputeResolution": "Исход спора",
-        "ServiceFee": "Сервисная комиссия",
-        "ServiceFeeNote": "Мин: 0%, Макс: 25%"
+        "DisputeResolution": "Готов к работе",
+        "ServiceFee": "Моя комиссия",
+        "ServiceFeeNote": "Минимум: 0%, Максимум: 25%"
     },
     "BecomeModerator": "Стать модератором",
     "EditModerator": "Настройки модератора",
