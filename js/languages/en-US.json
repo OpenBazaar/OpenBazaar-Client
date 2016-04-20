@@ -131,6 +131,7 @@
   "Tags": "Tags",
   "Keywords": "Keywords",
   "ShipsFrom": "Ships From",
+  "ShipsFrom2": "Ships From %{country}",
   "ShipsTo": "Ships To",
   "AddShipToRegion": "Shipping Region",
   "AddShipToRegionNote": "Adds All Nations in a Region",
