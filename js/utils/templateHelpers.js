@@ -24,7 +24,12 @@ function cssImageUrl(hash, guid, fallback) {
   return url;
 }
 
+function intlNumFormat(numberToFormat, maxDigits){
+  return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
+}
+
 module.exports = {
   cssImageUrl: cssImageUrl,
+  intlNumFormat: intlNumFormat,
   moment: moment
 };
