@@ -16,13 +16,13 @@
         </div>
       </div>
       <div class="js-buyWizardMap positionTop"></div>
-      <div class="modal-hero modal-heroFullHeightNoButtons js-buyWizardSpinner hide background1">
+      <div class="modal-hero modal-heroFullHeightNoButtons js-buyWizardSpinner hide background1 custCol-primary">
         <div class="width100 txt-center vCentered">
           <div class="txt-col1 ion-android-sync spinner spinner-slow icon-gigantic icon-circle-background1 rowTop50 row20"></div>
           <h3 class="txt-bright padding30"><%= polyglot.t('CheckExchanges') %> </h3>
         </div>
       </div>
-      <div class="modal-hero modal-heroFullHeightNoButtons padding40 js-buyWizardPay hide background1">
+      <div class="modal-hero modal-heroFullHeightNoButtons padding40 js-buyWizardPay hide background1 custCol-primary">
         <div class="width100 row20">
           <img class="blockCenter qrCode js-buyWizardPayQRCode" height="250" width="250" src="imgs/defaultItem.png"/>
         </div>
@@ -37,9 +37,9 @@
             <input type="checkbox" class="textSize11px fieldItem thin" id="BuyWizardQRDetailsInput">
             <label for="BuyWizardQRDetailsInput" class="textSize11px"> <%= polyglot.t('AdditionalPaymentDataInfo') %></label>
           </div>
-          <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
-          <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
-          <a class="btn btn-txt btn-wide js-buyWizardPayCheck"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
+          <a class="btn btn-txt btn-wide row10 js-buyWizardPayCopy custCol-secondary"><i class="ion-clipboard"></i> <%= polyglot.t('buyFlow.CopyAddress') %></a>
+          <a class="btn btn-txt btn-wide row10 js-buyWizardPayLink custCol-secondary"><i class="ion-link"></i> <%= polyglot.t('buyFlow.OpenAddress') %></a>
+          <a class="btn btn-txt btn-wide js-buyWizardPayCheck custCol-secondary"><i class="ion-refresh"></i> <%= polyglot.t('buyFlow.RefreshPayment') %></a>
           <div class="rowTop10 txt-center note">
             <%= polyglot.t('buyFlow.paymentNote') %>
           </div>
@@ -84,7 +84,7 @@
               
                 <!-- Airbitz -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://airbitz.co/bitcoin-wallet/" target="_blank"> 
                       <img src="imgs/wallet-providers/airbitz.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -102,7 +102,7 @@
 
                 <!-- Coinbase -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://www.coinbase.com/signup" target="_blank"> 
                       <img src="imgs/wallet-providers/coinbase.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -120,7 +120,7 @@
                       
                 <!-- Samourai Wallet -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="http://samouraiwallet.com/" target="_blank"> 
                       <img src="imgs/wallet-providers/samourai-wallet.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -138,7 +138,7 @@
 
                 <!-- RushWallet -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://rushwallet.com/" target="_blank"> 
                       <img src="imgs/wallet-providers/rush-wallet.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -156,7 +156,7 @@
                       
                 <!-- Breadwallet -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="http://breadwallet.com/" target="_blank"> 
                       <img src="imgs/wallet-providers/bread-wallet.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -174,7 +174,7 @@
 
                 <!-- Mycelium -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://mycelium.com/mycelium-wallet.html" target="_blank"> 
                       <img src="imgs/wallet-providers/mycelium.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -193,7 +193,7 @@
 
                 <!-- Blockchain.info -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://blockchain.info/wallet" target="_blank"> 
                       <img src="imgs/wallet-providers/blockchaininfo.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -211,7 +211,7 @@
 
                 <!-- Coinkite -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://coinkite.com/promo/nwt1" target="_blank"> 
                       <img src="imgs/wallet-providers/coinkite.png" class="thumbnail thumbnail-large-slim " />
                     </a>
@@ -229,7 +229,7 @@
 
                 <!-- BitGo -->
                 <div class="width100 table padding15 borderBottom1 custCol-border js-bitcoinWalletProvider">
-                  <div class="floatLeft marginRight10">
+                  <div class="floatLeft marginRight8">
                     <a href="https://www.bitgo.com/wallet" target="_blank">
                       <img src="imgs/wallet-providers/bitgo.png" class="thumbnail thumbnail-large-slim " />
                     </a>

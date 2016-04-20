@@ -4664,10 +4664,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 }
 
 #ov1  .borderRadiusTop {
-  border-radius: 3px;
-}
-
-#ov1  .borderRadiusTop {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 }
