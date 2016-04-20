@@ -97,12 +97,12 @@ module.exports = Backbone.View.extend({
         moderatorPriceString = this.model.get('userCurrencyCode') == 'BTC' ?
                                moderatorPriceBTC.toFixed(8) + " BTC" : moderatorPriceBTC.toFixed(8) + " BTC (" + newDisplayModeratorPrice + ")";
 
-    this.$el.find('.js-buyWizardBTCPrice').html(newBTCDisplayPrice+"BTC");
-    this.$el.find('.js-buyWizardBTCShippingPrice').html(newBTCShippingDisplayPrice+"BTC");
+    this.$('.js-buyWizardBTCPrice').html(newBTCDisplayPrice+"BTC");
+    this.$('.js-buyWizardBTCShippingPrice').html(newBTCShippingDisplayPrice+"BTC");
 
     if(userCurrency != 'BTC'){
-      this.$el.find('.js-buyWizardPrice').html("("+newDisplayPrice+")");
-      this.$el.find('.js-buyWizardShippingPrice').html("("+newDisplayShippingPrice+")");
+      this.$('.js-buyWizardPrice').html("("+newDisplayPrice+")");
+      this.$('.js-buyWizardShippingPrice').html("("+newDisplayShippingPrice+")");
     }
     this.$('.js-buyWizardModeratorPrice').attr('data-tooltip', moderatorPriceString);
     newAttributes.quantity = quantity;
@@ -113,8 +113,8 @@ module.exports = Backbone.View.extend({
 
   lockForm: function(){
     "use strict";
-    this.$el.find('.js-buyWizardQuantity').prop('disabled', true);
-    this.$el.find('#buyWizardQuantity .numberSpinnerUp, #buyWizardQuantity .numberSpinnerDown').addClass('hide');
+    this.$('.js-buyWizardQuantity').prop('disabled', true);
+    this.$('#buyWizardQuantity .numberSpinnerUp, #buyWizardQuantity .numberSpinnerDown').addClass('hide');
   },
 
   goToPurchases: function(){
