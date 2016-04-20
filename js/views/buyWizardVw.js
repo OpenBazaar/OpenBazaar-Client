@@ -437,6 +437,7 @@ module.exports = baseVw.extend({
     "use strict";
     this.accNext();
     this.hideMaps();
+    this.setTotalPrice(); //in case it isn't set yet
   },
 
   sendPurchase: function(){
@@ -445,16 +446,16 @@ module.exports = baseVw.extend({
         formData = new FormData(),
         moderatorID = this.model.get('selectedModerator').guid || "",
         selectedAddress = this.model.get('selectedAddress'),
-        bitCoinReturnAddr = this.$el.find('#buyWizardBitcoinAddressInput').val();
+        bitCoinReturnAddr = this.$('#buyWizardBitcoinAddressInput').val();
 
-    if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
+    if (!this.$('#buyWizardQuantity')[0].checkValidity()){
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return;
     }
 
-    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
-    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
-    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
+    this.$('.js-buyWizardSendPurchase').addClass('hide');
+    this.$('.js-buyWizardPendingMsg').removeClass('hide');
+    this.$('.js-buyWizardPurchaseBack').addClass('disabled');
 
     formData.append("id", this.model.get('id'));
 
@@ -472,7 +473,7 @@ module.exports = baseVw.extend({
       formData.append("moderator", moderatorID);
     }
 
-    this.$el.find('.js-buyWizardSpinner').removeClass('hide');
+    this.$('.js-buyWizardSpinner').removeClass('hide');
 
     formData.append("refund_address", bitCoinReturnAddr);
 
@@ -494,7 +495,11 @@ module.exports = baseVw.extend({
         } else {
           messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " +
               window.polyglot.t('errorMessages.checkPurchaseData') + "\n\n Reason: " + data.reason);
-          self.$el.find('.js-buyWizardSpinner').addClass('hide');
+          self.$('.js-buyWizardSpinner').addClass('hide');
+          //re-enable form so they can try again
+          self.$('.js-buyWizardSendPurchase').removeClass('hide');
+          self.$('.js-buyWizardPendingMsg').addClass('hide');
+          self.$('.js-buyWizardPurchaseBack').removeClass('disabled');
         }
       },
       error: function (jqXHR, status, errorThrown) {
@@ -562,8 +567,8 @@ module.exports = baseVw.extend({
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalPrice);
-    this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
-    this.$el.find('.js-buyWizardDetailsBTCTotal').text(Number(totalBTCPrice.toFixed(8)));
+    this.$('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
+    this.$('.js-buyWizardDetailsBTCTotal').text(Number(totalBTCPrice.toFixed(8)));
   },
 
   copyPayAddress: function(){
