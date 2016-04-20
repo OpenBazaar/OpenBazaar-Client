@@ -5,7 +5,6 @@ var Backbone = require('backbone'),
 module.exports = Backbone.Model.extend({
   defaults: function() {
     var defaultsObj = {
-          'id': 1,
           'server_ip': 'localhost',
           'rest_api_port': 18469,
           'api_socket_port': 18466,
@@ -22,8 +21,6 @@ module.exports = Backbone.Model.extend({
   },
 
   sync: localStorageSync.sync,
-
-  localStorage: new localStorageSync('_serverConfig'),
 
   _addError: function(errObj, fieldName, error) {
     errObj = errObj || {};
