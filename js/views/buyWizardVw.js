@@ -36,7 +36,7 @@ module.exports = baseVw.extend({
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
     'click .js-buyWizardModeratorRadio': 'modSelected',
-    'click .js-buyWizardModNext': 'accNext',
+    'click .js-buyWizardModNext': 'modNext',
     'click .js-buyWizardModBack': 'modBack',
     'click .js-buyWizardReturnNext': 'returnNext',
     'click .js-buyWizardAddressBack': 'addressPrev',
@@ -265,6 +265,11 @@ module.exports = baseVw.extend({
     this.accGoToID("#BuyWizardPaymentType");
   },
 
+  modNext: function(){
+    this.accNext();
+    this.setTotalPrice(); //in case it isn't set yet
+  },
+
   modBack: function(){
     this.accGoToID('#BuyWizardBitcoinWallet');
   },
@@ -437,7 +442,6 @@ module.exports = baseVw.extend({
     "use strict";
     this.accNext();
     this.hideMaps();
-    this.setTotalPrice(); //in case it isn't set yet
   },
 
   sendPurchase: function(){
