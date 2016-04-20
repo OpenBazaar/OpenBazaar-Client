@@ -1,3 +1,4 @@
+
 var App = require('./App'),
     app = new App();
 

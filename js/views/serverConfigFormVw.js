@@ -8,6 +8,10 @@ module.exports = BaseVw.extend({
   className: 'accordion-window',
 
   events: {
+    'click .js-save': 'saveForm',
+    'input input': 'inputEntered',
+    'click .js-sslOn': 'sslOn',
+    'click .js-sslOff': 'sslOff'    
   },
 
   initialize: function(options) {
@@ -24,12 +28,27 @@ module.exports = BaseVw.extend({
     this.listenTo(this.model, 'change:SSL', function() {
       this.render();
     });
+
+    console.log('hooba');
+    window.hooba = this.model;
   },
 
-  setModel: function(md) {
-    this.model = md;
-    this.render();
+  inputEntered: function(e) {
+    this.model.set(e.target.name, e.target.value);
+  },  
+
+  saveForm: function() {
+    console.log('just savin away');
+    this.model.save();
   },
+
+  sslOn: function(){
+    this.model.set('SSL', false);
+  },
+
+  sslOff: function(){
+    this.model.set('SSL', true);
+  },  
 
   remove: function() {
     BaseVw.prototype.remove.apply(this, arguments);

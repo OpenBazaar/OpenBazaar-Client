@@ -4208,21 +4208,21 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   z-index: 14;
 }
 
-.server-connect-modal {
+#ov1 .server-connect-modal {
   z-index: 15;
 }
 
-.server-connect-modal .modal-child {
+#ov1 .server-connect-modal .modal-child {
   height: 625px;
   overflow: hidden;
 }
 
-.server-config-form {
-  transition: transform 250ms;
+#ov1 .server-config-form {
+  transition: top 250ms;
 }
 
-.server-config-form.slide-out {
-  transform: translateY(372px);
+#ov1 .server-config-form.slide-out {
+  top: 372px;
 }
 
 

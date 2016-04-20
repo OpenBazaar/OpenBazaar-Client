@@ -4,15 +4,19 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     loadTemplate = require('../utils/loadTemplate'),
     app = require('../App.js').getApp(),        
+    ServerConfigMd = require('../models/serverConfigMd'),
+    ServerConfigsCl = require('../collections/serverConfigsCl'),
     BaseModal = require('./baseModal'),
     ServerConnectHeaderVw = require('./serverConnectHeaderVw'),
-    ServerConfigFormVw = require('./serverConfigFormVw');
+    ServerConfigFormVw = require('./serverConfigFormVw'),
+    ServerConfigsVw = require('./serverConfigsVw');
 
 module.exports = BaseModal.extend({
   className: 'server-connect-modal',
 
   events: {
-    'click .js-close': 'closeConfigForm'
+    'click .js-close': 'closeConfigForm',
+    'click .js-new': 'newConfigForm'
   },
 
   // todo: poly-gluttonize!
@@ -40,9 +44,22 @@ module.exports = BaseModal.extend({
 
   initialize: function(options) {
     this.options = options || {};
-    this.headerVw = new ServerConnectHeaderVw();
-    this.serverConfigFormVw = new ServerConfigFormVw({
-      model: app.serverConfig
+
+    this.headerVw = new ServerConnectHeaderVw({
+      initialState: {
+        title: 'Server Configuration',
+        showNew: true
+      }
+    });
+
+    this.serverConfigs = new ServerConfigsCl();
+    this.serverConfigs.fetch();
+
+    console.log('sugar');
+    window.sugar = this.serverConfigs;
+
+    this.serverConfigsVw = new ServerConfigsVw({
+      collection: this.serverConfigs
     });
   },
 
@@ -52,10 +69,40 @@ module.exports = BaseModal.extend({
 
   closeConfigForm: function() {
     this.$jsConfigFormWrap.addClass('slide-out');
+    this.headerVw.setState({
+      title: 'Server Configuration',
+      showNew: true
+    });
   },  
 
-  openConfigForm: function() {
-    this.$jsConfigFormWrap.removeClass('slide-out');
+  newConfigForm: function() {
+    var configMd = new ServerConfigMd();
+
+    this.headerVw.setState({
+      title: 'New Configuration',
+      showNew: false
+    });
+
+    this.renderServerConfigForm(configMd);
+
+    configMd.on('sync', (md) => {
+      this.serverConfigs.add(md);
+      this.headerVw.setState({
+        title: md.get('name')
+      });      
+    });
+    
+    this.$jsConfigFormWrap.removeClass('slide-out');    
+  },
+
+  renderServerConfigForm: function(md) {
+    this.serverConfigFormVw && this.serverConfigFormVw.remove();
+    this.serverConfigFormVw = new ServerConfigFormVw({
+      model: md
+    });    
+
+    this.$jsConfigFormWrap = this.$jsConfigFormWrap || this.$('.js-config-form-wrap');
+    this.$jsConfigFormWrap.html(this.serverConfigFormVw.render().el);
   },  
 
   render: function() {
@@ -64,10 +111,6 @@ module.exports = BaseModal.extend({
       BaseModal.prototype.render.apply(this, arguments);      
 
       this.$('.js-header-wrap').html(this.headerVw.render().el);
-
-      this.$('.js-header-wrap').click(() => {
-        this.openConfigForm();
-      });
 
       if (!this.moo) {
         this.moo = true;
@@ -87,8 +130,9 @@ module.exports = BaseModal.extend({
         }, 1000);
       }
 
-      this.$jsConfigFormWrap = this.$jsConfigFormWrap || this.$('.js-config-form-wrap');
-      this.$jsConfigFormWrap.html(this.serverConfigFormVw.render().el);
+      this.$('.js-config-list-wrap').html(
+        this.serverConfigsVw.render().el
+      );
     });
 
     return this;

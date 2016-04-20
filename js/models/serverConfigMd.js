@@ -22,17 +22,19 @@ module.exports = Backbone.Model.extend({
 
   sync: localStorageSync.sync,
 
+  // localStorage: new localStorageSync('_serverConfig'),
+
   _addError: function(errObj, fieldName, error) {
     errObj = errObj || {};
     errObj[fieldName] = errObj[fieldName] || [];
     errObj[fieldName].push(error);
   },
 
-  parse: function(response) {
-    response = this.castIntegerFields(response);
+  // parse: function(response) {
+  //   response = this.castIntegerFields(response);
 
-    Backbone.Model.prototype.parse.apply(this, arguments);
-  },
+  //   Backbone.Model.prototype.parse.apply(this, arguments);
+  // },
 
   castIntegerFields: function(attrs) {
     var parsed;
@@ -75,11 +77,11 @@ module.exports = Backbone.Model.extend({
 
     attrs = this.castIntegerFields(attrs);
 
-    if (is.empty(attrs.name)) {
+    if (!is.existy(attrs.name) || is.empty(attrs.name)) {
       this._addError(err, 'name', 'Please provide a value.');
     }
 
-    if (is.empty(attrs.server_ip)) {
+    if (!is.existy(attrs.server_ip) || is.empty(attrs.server_ip)) {
       this._addError(err, 'server_ip', 'Please provide a value.');
     } else {
       if (!is.ip(attrs.server_ip)) {
@@ -87,7 +89,7 @@ module.exports = Backbone.Model.extend({
       }      
     }
 
-    if (is.empty(attrs.rest_api_port)) {
+    if (!is.existy(attrs.rest_api_port) || is.empty(attrs.rest_api_port)) {
       this._addError(err, 'rest_api_port', 'Please provide a value.');
     } else {
       if (!is.within(attrs.rest_api_port, -1, 65536)) {
@@ -95,7 +97,7 @@ module.exports = Backbone.Model.extend({
       }
     }
 
-    if (is.empty(attrs.api_socket_port)) {
+    if (!is.existy(attrs.api_socket_port) || is.empty(attrs.api_socket_port)) {
       this._addError(err, 'api_socket_port', 'Please provide a value.');
     } else {
       if (!is.within(attrs.api_socket_port, -1, 65536)) {
@@ -103,7 +105,7 @@ module.exports = Backbone.Model.extend({
       }
     }    
 
-    if (is.empty(attrs.heartbeat_socket_port)) {
+    if (!is.existy(attrs.heartbeat_socket_port) || is.empty(attrs.heartbeat_socket_port)) {
       this._addError(err, 'heartbeat_socket_port', 'Please provide a value.');
     } else {
       if (!is.within(attrs.heartbeat_socket_port, -1, 65536)) {
@@ -111,11 +113,11 @@ module.exports = Backbone.Model.extend({
       }
     }    
 
-    if (is.empty(attrs.username)) {
+    if (!is.existy(attrs.username) || is.empty(attrs.username)) {
       this._addError(err, 'username', 'Please provide a value.');
     }
 
-    if (is.empty(attrs.password)) {
+    if (!is.existy(attrs.password) || is.empty(attrs.password)) {
       this._addError(err, 'password', 'Please provide a value.');
     }    
 

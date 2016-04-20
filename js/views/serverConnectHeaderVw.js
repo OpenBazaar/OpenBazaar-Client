@@ -4,7 +4,7 @@ var BaseVw = require('./baseVw'),
     loadTemplate = require('../utils/loadTemplate');
 
 module.exports = BaseVw.extend({
-  className: 'modal-hero modal-shadow-inner1 bg-dark-blue custCol-secondary-darken',
+  className: '',
 
   initialize: function(options) {
     this.options = options || {};
