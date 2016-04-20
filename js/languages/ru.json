@@ -94,7 +94,7 @@
     "ReturnPolicyPlaceholder": "Введите Ваши условия возврата...",
     "CategoryPlaceholder": "Выберите категорию",
     "CategoryHelperText": "Категории используются для сортировки выкладки товаров в вашем магазине.",
-    "KeywordsHelperText": "Adding tags helps your listing to be discovered in the market. You can only have one of each tag, and a maximum of 10 tags",
+    "KeywordsHelperText": "Добавление тегов поможет людям находить ваш товар на рынке. Вы можете иметь минимум один тег, и максимум десять тегов",
     "ExpirationDateHelperText": "Выберите дату для автоматического снятия с продажи.",
     "ClearExpirationDate": "Точная дата для снятия с продажи",
     "ReturnPolicy": "Политика возвратов",
@@ -532,7 +532,7 @@
         "searchDefaultText": "Сканирование сети",
         "searchingText": "Сканирование сети для",
         "noResults": "Ничего не найдено",
-        "noTaggedResults": "По тэгам ничего не найдено"
+        "noTaggedResults": "По тегам ничего не найдено"
     },
     "filters": {
         "pagesAllTypes": "Все типы",
@@ -544,7 +544,7 @@
         "categoryAll": "Все"
     },
     "nav": {
-        "searchPlaceholder": "Введите @handle, OpenBazaar ID или #тэг...",
+        "searchPlaceholder": "Введите @handle, OpenBazaar ID или #tag...",
         "myPage": "Моя страница",
         "testMode": "Тестовый режим",
         "customizePage": "Настроить страницу",
