@@ -123,7 +123,7 @@
     "NoShippableAddress": "None of your saved addresses are in a country this listing can be shipped to.",
     "Addresses": "Адреса",
     "Files": "Файлы",
-    "NewAddress": "Новый адрес",
+    "NewAddress": "Новый адрес доставки",
     "CurrentAddress": "Текущие адреса",
     "Returns": "Возвраты",
     "ReturnsPolicy": "Политика возвратов",
@@ -194,7 +194,7 @@
     "Location": "Местонахождение",
     "International": "Международный",
     "Time": "Время",
-    "Free": "Свободный",
+    "Free": "Бесплатно",
     "Category": "Категория",
     "ProcessingTime": "Дней на упаковку",
     "SelectPhotos": "Выбрать фотки",
@@ -318,7 +318,7 @@
     "ShowBlockedUser": "Отобразить страницу пользователя исключая товары с содержимым 18+",
     "ShowNSFWContent": "Показать страницу пользователя не ограничивая содержимое 18+",
     "NoShipping": "Цифровой или дистанционный (без доставки)",
-    "WorldwideShipping": "Мировой",
+    "WorldwideShipping": "Весь мир",
     "ServerChangeWarningHeadline": "Внимание: сделайте резервную копию настроек",
     "ServerChangeWarning": "Мы рекомендуем вам сделать копии ваших предыдущих настроек, показанных ниже. Ваше имя пользователя и пароль к серверу программы больше не будут доступны с этого момента.",
     "ModeratorFee": "Комиссия:",
@@ -638,8 +638,8 @@
         "Send": "Отправить",
         "BTCto": "в BTC",
         "SendBTCtoAddress": "Отправить %{amount} BTC",
-        "OpenAddress": "Открывать адрес в кошельке по-умолчанию",
-        "CopyAddress": "Скопировать адрес оплаты в буфер обмена",
+        "OpenAddress": "Открыть адрес в кошельке по-умолчанию",
+        "CopyAddress": "Скопировать адрес оплаты",
         "RefreshPayment": "Обновить статус платежа",
         "summaryMsg1": "Ваш платёж был отправлен на %{recipient}",
         "summaryMsg2": "Ожидаемое время обработки вашего заказа составляет",
@@ -650,7 +650,7 @@
         "directPaymentDisclaimer": "Будьте осторожны при отправке средств напрямую, средства невозвратимы",
         "paymentSent": "Платёж отправлен!",
         "total": "Всего:",
-        "paymentNote": "Payment can take several minutes or more to complete. You can leave this screen, and go to the Purchases section to see if your payment has completed later."
+        "paymentNote": "Получение подтверждений о Биткойн-платеже сетью займёт около часа. Вы можете спокойно закрывать это окошко, потому что Вы всегда сможете отследить состояние вашего платежа в секции меню Покупки."
     },
     "chat": {
         "noSearchResultsFound": "Результатов не найдено"
