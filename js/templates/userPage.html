@@ -26,7 +26,7 @@
         <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary js-saveCustomization">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('SaveChanges') %>
+            <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
           </a>
         </div>
       </div>
@@ -203,13 +203,13 @@
                 <div class="ctrlGroup hide js-itemEditButtons js-userPageControls hide">
                   <a class="btn btn-txt custCol-primary js-saveItem">
                     <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('SaveChanges') %>
+                    <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
                   </a>
                 </div>
                 <div class="ctrlGroup hide js-itemCustomizationButtons js-userPageControls hide">
                   <a class="btn btn-txt custCol-primary js-saveCustomization">
                     <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('SaveChanges') %>
+                    <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
                   </a>
                 </div>
               </div>
@@ -257,7 +257,7 @@
               </a>
             <%}%>
             <% if(ob.page.profile.about) { %>
-             <p class="js-userAbout margin0 flexContainer editableContent"><%= ob.page.profile.displayAbout %></p>
+             <div class="js-userAbout margin0 flexContainer editableContent"><%= ob.page.profile.displayAbout %></div>
             <%}else{%>
               <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
             <%}%>

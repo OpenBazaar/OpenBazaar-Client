@@ -1216,6 +1216,14 @@ h5 {
   font-size: 15px;
 }
 
+.fieldItem-textarea h2, .fieldItem-textarea h3, .editableContent h2, .editableContent h3 {
+  margin-top: 30px;
+}
+
+.fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
+  margin-top: 0px;
+}
+
 .note {
   /* use for instructions and incidental text */
   /*font-style: italic;*/
@@ -3121,6 +3129,7 @@ input[type="checkbox"].fieldItem + label:before {
   box-shadow: none;
   opacity: 1;
   font-size: 1.5em;
+  vertical-align: middle;
 }
 
 input[type="checkbox"].fieldItem + label.compact {
@@ -3130,6 +3139,10 @@ input[type="checkbox"].fieldItem + label.compact {
 
 input[type="checkbox"].fieldItem + label.compact:before {
   left: 0;
+}
+
+input[type="checkbox"].fieldItem.thin + label {
+  line-height: inherit;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
@@ -4304,6 +4317,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   color: #B5B5B5;
   font-weight: 400;
   border-color: #616161;
+}
+
+#ov1 .medium-editor-toolbar {
+  background: #353443;
 }
 
 #ov1::-webkit-scrollbar {
@@ -5610,15 +5627,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 #ov1 .foldIn {
   height: 0;
+  padding: 0;
   overflow: hidden;
-  transition: height 1s;
+  transition: height 1s, padding 1s;
+  pointer-events: none;
 }
 
 #ov1 .underline {
@@ -5788,8 +5809,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 1px solid #444;
 }
 
+#ov1.notFancy .fadeOut,
 #ov1.notFancy .statusBar.fadeOut,
 #ov1.notFancy #pageNav .statusBar.fadeOut,
+#ov1.notFancy #userPage .fadeOut,
+#ov1.notFancy #userPage #pageNav .fadeOut,
 #ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
   opacity: 0 !important;
@@ -5854,7 +5878,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 #ov1.notFancy #obContainer .notFancyDarkBackground {
   background: #262626;
 }
-
 
 /* hide unfinished elements */
 
