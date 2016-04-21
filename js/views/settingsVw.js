@@ -528,7 +528,7 @@ module.exports = Backbone.View.extend({
 
   addTabToHistory: function(state){
     //add action to history
-    Backbone.history.navigate("#settings/" + state);
+    Backbone.history.navigate("#settings/" + state, { replace: true });
     this.options.state = state;
   },
 

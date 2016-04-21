@@ -5867,7 +5867,31 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy .notFancyDarkBackground,
 #ov1.notFancy #obContainer .notFancyDarkBackground {
-  background: #262626;
+  background: #262626 !important;
+}
+
+#ov1.notFancy .disabled,
+#ov1.notFancy #userPage .disabled,
+#ov1.notFancy #obContainer .disabled,
+#ov1.notFancy #overlay .disabled,
+#ov1.notFancy #sideBar .disabled,
+#ov1.notFancy #pageNav .disabled,
+#ov1.notFancy #modalHolder .disabled,
+#ov1.notFancy #messageModal .disabled,
+#ov1.notFancy #statusBar .disabled {
+  opacity: 0.2 !important;
+}
+
+#ov1.notFancy .disabled2,
+#ov1.notFancy #userPage .disabled2,
+#ov1.notFancy #obContainer .disabled2,
+#ov1.notFancy #overlay .disabled2,
+#ov1.notFancy #sideBar .disabled2,
+#ov1.notFancy #pageNav .disabled2,
+#ov1.notFancy #modalHolder .disabled2,
+#ov1.notFancy #messageModal .disabled2,
+#ov1.notFancy #statusBar .disabled2 {
+  opacity: 0.7 !important;
 }
 
 /* add a shadow and a glow, so modal close buttons are still barely visible if the user picks a bad color */
