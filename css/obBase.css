@@ -587,6 +587,7 @@ form {
   position: relative;
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
   border-radius: 2px;
   height: 230px;
   width: 250px;
@@ -595,12 +596,12 @@ form {
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
   height: 472px;
-  width: 100%;
+  width: 514px;
   border-radius: 0;
 }
 
 .itemImg.itemImg-small {
-  height: 82px;
+  height: 111px;
   width: 121px;
   margin: 0 10px 10px 0;
   border-radius: 1px;
