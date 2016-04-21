@@ -136,16 +136,14 @@ module.exports = Backbone.Router.extend({
     this.historyAction = 'default';
 
     if (this.historyPosition == this.historySize)
-        $('.js-navFwd').addClass('disabled');
+        $('.js-navFwd').addClass('disabled-icon');
     else
-        $('.js-navFwd').removeClass('disabled');
+        $('.js-navFwd').removeClass('disabled-icon');
     
     if (this.historyPosition == 1)
-        $('.js-navBack').addClass('disabled');
+        $('.js-navBack').addClass('disabled-icon');
     else
-        $('.js-navBack').removeClass('disabled');
-    
-    console.log('position: ' + this.historyPosition + '; size: ' + this.historySize);
+        $('.js-navBack').removeClass('disabled-icon');
     
     if (callback) callback.apply(this, args);
   },

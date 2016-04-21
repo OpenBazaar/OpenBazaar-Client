@@ -5599,6 +5599,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0.7;
 }
 
+#ov1 .disabled-icon {
+  pointer-events: none;
+}
+
+#ov1 .disabled-icon:before,
+#ov1 .disabled [class *= "ion-"]:before {
+  opacity: 0.2;
+}
+
 #ov1 .overflowVisible {
   overflow: visible;
 }
