@@ -85,6 +85,9 @@ user.on('change:language', function(md, lang) {
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);
+  //trigger translation function on index
+  window.translateIndex();
+
 });
 
 //keep user and profile urls synced with the server configuration
