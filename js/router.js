@@ -48,8 +48,8 @@ module.exports = Backbone.Router.extend({
         this.navigate(translatedRoute, { trigger: true });
       });
     });
-    history.size = -1;
-    history.position = -1;
+    window.historySize = -1;
+    window.historyPosition = -1;
     window.historyAction = 'default';
   },
 
@@ -109,23 +109,23 @@ module.exports = Backbone.Router.extend({
   
   execute: function(callback, args, name) {
     if (historyAction == 'default') {
-      history.position += 1;
-      history.size = history.position;
+      historyPosition += 1;
+      historySize = historyPosition;
     } else if (historyAction == 'back') {
-      history.position -= 1;
+      historyPosition -= 1;
     } else if(historyAction == 'forward' && this.previousName != name && name != "index") {
       //don't increment if the same state is navigated to twice
       //don't increment on index since that isn't a real state
-        history.position += 1;
+      historyPosition += 1;
     }
-    window.historyAction = 'default';
+    historyAction = 'default';
 
-    if (history.position == history.size)
+    if (historyPosition == historySize)
         $('.js-navFwd').addClass('disabled');
     else
         $('.js-navFwd').removeClass('disabled');
     
-    if (history.position == 1)
+    if (historyPosition == 1)
         $('.js-navBack').addClass('disabled');
     else
         $('.js-navBack').removeClass('disabled');
