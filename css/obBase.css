@@ -513,7 +513,7 @@ form {
   box-sizing: border-box;
   padding: 34px 32px;
   cursor: pointer;
-  height: 340px;
+  height: 275px;
   position: relative;
 }
 
@@ -523,24 +523,31 @@ form {
   border-right: 1px solid #327EB8;
   opacity: .9;
   transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
-  transition: padding-top .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .userPage-subViews .gridItem:hover,
 .homeView .gridItem:hover {
   box-shadow: 0px 0px 37px -17px rgb(0, 0, 0);
   opacity: 1;
-  padding-top: 20px;
+}
+
+.userPage-subViews .gridItem .gridItemControls,
+.homeView .gridItem .gridItemControls{
+  transition: height .5s cubic-bezier(0, 0, 0.2, 1), opacity .5s cubic-bezier(0, 0, 0.2, 1);
+  overflow: hidden;
+  height: 0;
 }
 
 .userPage-subViews .gridItem:hover .gridItemControls,
 .homeView .gridItem:hover .gridItemControls{
   opacity: 1;
+  height: 40px;
 }
 
 .userPage-subViews .gridItem:hover .itemImg,
 .homeView .gridItem:hover .itemImg {
-    box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
+  box-shadow: 0px 0px 37px -10px rgb(0, 0, 0);
+  height: 148px;
 }
 
 /* if itemImg is nested, do not show box shadow */
@@ -588,8 +595,9 @@ form {
   background-position: center;
   background-size: cover;
   border-radius: 3px;
-  height: 230px;
+  height: 185px;
   width: 250px;
+  transition: height .5s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .itemImg.itemImg-large {
