@@ -587,14 +587,14 @@ form {
   position: relative;
   background-position: center;
   background-size: cover;
-  border-radius: 3px;
+  border-radius: 2px;
   height: 230px;
   width: 250px;
 }
 
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
-  height: 380px;
+  height: 472px;
   width: 100%;
   border-radius: 0;
 }
