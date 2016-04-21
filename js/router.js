@@ -13,6 +13,8 @@ var ipcRenderer = require('ipc-renderer'),
 
 module.exports = Backbone.Router.extend({
   initialize: function(options){
+    var self = this;
+      
     var routes;
 
     this.options = options || {};
@@ -48,6 +50,22 @@ module.exports = Backbone.Router.extend({
         this.navigate(translatedRoute, { trigger: true });
       });
     });
+    
+    var originalHistoryBack = history.back;
+    history.back = function() {
+        self.historyAction = 'back';
+        return originalHistoryBack(arguments);
+    }
+
+    var originalHistoryForward = history.forward;
+    history.forward = function() {
+        self.historyAction = 'forward';
+        return originalHistoryForward(arguments);
+    }
+    
+    this.historySize = -1;
+    this.historyPosition = -1;
+    this.historyAction = 'default';
   },
 
   translateRoute: function(route) {
@@ -102,6 +120,32 @@ module.exports = Backbone.Router.extend({
     };
 
     return deferred.promise();
+  },
+  
+  execute: function(callback, args, name) {
+    if (this.historyAction == 'default') {
+      this.historyPosition += 1;
+      this.historySize = this.historyPosition;
+    } else if (this.historyAction == 'back') {
+      this.historyPosition -= 1;
+    } else if(this.historyAction == 'forward' && this.previousName != name && name != "index") {
+      //don't increment if the same state is navigated to twice
+      //don't increment on index since that isn't a real state
+      this.historyPosition += 1;
+    }
+    this.historyAction = 'default';
+
+    if (this.historyPosition == this.historySize)
+        $('.js-navFwd').addClass('disabled-icon');
+    else
+        $('.js-navFwd').removeClass('disabled-icon');
+    
+    if (this.historyPosition == 1)
+        $('.js-navBack').addClass('disabled-icon');
+    else
+        $('.js-navBack').removeClass('disabled-icon');
+    
+    if (callback) callback.apply(this, args);
   },
 
   cleanup: function(){
