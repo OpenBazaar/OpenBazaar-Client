@@ -13,6 +13,8 @@ var ipcRenderer = require('ipc-renderer'),
 
 module.exports = Backbone.Router.extend({
   initialize: function(options){
+    var self = this;
+      
     var routes;
 
     this.options = options || {};
@@ -51,19 +53,19 @@ module.exports = Backbone.Router.extend({
     
     var originalHistoryBack = history.back;
     history.back = function() {
-        historyAction = 'back';
+        self.historyAction = 'back';
         originalHistoryBack();
     }
 
     var originalHistoryForward = history.forward;
     history.forward = function() {
-        historyAction = 'forward';
+        self.historyAction = 'forward';
         originalHistoryForward();
     }
     
-    window.historySize = -1;
-    window.historyPosition = -1;
-    window.historyAction = 'default';
+    this.historySize = -1;
+    this.historyPosition = -1;
+    this.historyAction = 'default';
   },
 
   translateRoute: function(route) {
@@ -121,27 +123,29 @@ module.exports = Backbone.Router.extend({
   },
   
   execute: function(callback, args, name) {
-    if (historyAction == 'default') {
-      historyPosition += 1;
-      historySize = historyPosition;
-    } else if (historyAction == 'back') {
-      historyPosition -= 1;
-    } else if(historyAction == 'forward' && this.previousName != name && name != "index") {
+    if (this.historyAction == 'default') {
+      this.historyPosition += 1;
+      this.historySize = this.historyPosition;
+    } else if (this.historyAction == 'back') {
+      this.historyPosition -= 1;
+    } else if(this.historyAction == 'forward' && this.previousName != name && name != "index") {
       //don't increment if the same state is navigated to twice
       //don't increment on index since that isn't a real state
-      historyPosition += 1;
+      this.historyPosition += 1;
     }
-    historyAction = 'default';
+    this.historyAction = 'default';
 
-    if (historyPosition == historySize)
+    if (this.historyPosition == this.historySize)
         $('.js-navFwd').addClass('disabled');
     else
         $('.js-navFwd').removeClass('disabled');
     
-    if (historyPosition == 1)
+    if (this.historyPosition == 1)
         $('.js-navBack').addClass('disabled');
     else
         $('.js-navBack').removeClass('disabled');
+    
+    console.log('position: ' + this.historyPosition + '; size: ' + this.historySize);
     
     if (callback) callback.apply(this, args);
   },
