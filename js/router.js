@@ -48,6 +48,19 @@ module.exports = Backbone.Router.extend({
         this.navigate(translatedRoute, { trigger: true });
       });
     });
+    
+    var originalHistoryBack = history.back;
+    history.back = function() {
+        historyAction = 'back';
+        originalHistoryBack();
+    }
+
+    var originalHistoryForward = history.forward;
+    history.forward = function() {
+        historyAction = 'forward';
+        originalHistoryForward();
+    }
+    
     window.historySize = -1;
     window.historyPosition = -1;
     window.historyAction = 'default';

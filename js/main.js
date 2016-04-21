@@ -497,15 +497,3 @@ heartbeat.on('message', function(e) {
     }
   }
 });
-
-var originalHistoryBack = history.back;
-history.back = function() {
-    historyAction = 'back';
-    originalHistoryBack();
-}
-
-var originalHistoryForward = history.forward;
-history.forward = function() {
-    historyAction = 'forward';
-    originalHistoryForward();
-}
