@@ -81,8 +81,8 @@
       <i class="ion-android-sync spinner fontSize30 spinner-with-logo-icon"></i>
     </div>
     <div class="width100 positionTop">
-      <a class="btn btn-txt rowTop10 marginRight10 pull-right js-indexReload"><i class="ion-android-sync"></i> <t>Reload</t></a>
-      <a class="btn btn-txt rowTop10 marginRight10 pull-right" href="#home"><i class="ion-home"></i> <t>LoadIndex</t></a>
+      <a class="btn btn-txt rowTop10 marginRight10 pull-right js-indexReload"><i class="ion-android-sync"></i> <span class="js-translate">Reload</span></a>
+      <a class="btn btn-txt rowTop10 marginRight10 pull-right" href="#home"><i class="ion-home"></i> <span class="js-translate">LoadIndex</span></a>
     </div>
   </div>
 
@@ -114,7 +114,7 @@
     $('.js-defaultServerIndexApp').on('click', function(){
       app.loadNewServer("http://localhost:18469/api/v1/");
     });
-    $('t').each(function() {
+    $('.js-translate').each(function() {
       var translationKey = $(this).html();
       $(this).replaceWith(polyglot.t(translationKey));
     });
