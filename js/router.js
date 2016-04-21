@@ -50,7 +50,7 @@ module.exports = Backbone.Router.extend({
     });
     history.size = -1;
     history.position = -1;
-    history.action = 'default';
+    window.historyAction = 'default';
   },
 
   translateRoute: function(route) {
@@ -108,17 +108,17 @@ module.exports = Backbone.Router.extend({
   },
   
   execute: function(callback, args, name) {
-    if (history.action == 'default') {
+    if (historyAction == 'default') {
       history.position += 1;
       history.size = history.position;
-    } else if (history.action == 'back') {
+    } else if (historyAction == 'back') {
       history.position -= 1;
-    } else if(history.action == 'forward' && this.previousName != name && name != "index") {
+    } else if(historyAction == 'forward' && this.previousName != name && name != "index") {
       //don't increment if the same state is navigated to twice
       //don't increment on index since that isn't a real state
         history.position += 1;
     }
-    history.action = 'default';
+    window.historyAction = 'default';
 
     if (history.position == history.size)
         $('.js-navFwd').addClass('disabled');
