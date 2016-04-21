@@ -61,9 +61,9 @@ module.exports = function(primaryColor, secondaryColor, backgroundColor, textCol
       "#ov1 #userPage input[type='number'].spinButtons::-webkit-inner-spin-button:before { color: " + textColor + ";}" +
       "#ov1 #userPage input[type='number'].spinButtons::-webkit-inner-spin-button:after { color: " + textColor + ";}" +
       "#ov1 #userPage #obContainer input::-webkit-input-placeholder { color: " + textColor + ";}" +
-      "#ov1 #userPage #pageNav input::-webkit-input-placeholder { color: " + textColor + ";}" +
+      //"#ov1 #userPage #pageNav input::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage #obContainer textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
-      "#ov1 #userPage #pageNav textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
+      //"#ov1 #userPage #pageNav textarea::-webkit-input-placeholder { color: " + textColor + ";}" +
       "#ov1 #userPage .txtFieldWrapper-bar:before { color: " + textColor + ";}" +
       "#ov1 #userPage .mainContainer { box-shadow: 0px 10px 20px " + shadeColor2(backgroundColor, -0.3)  + ";  }" +
       "#ov1 #userPage .mainContainer .txtFieldWrapper:before { color: " + textColor + ";  }" +
