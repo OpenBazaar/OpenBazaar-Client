@@ -290,10 +290,10 @@ module.exports = baseVw.extend({
       this.searchItemsText = searchItemsText;
 
       //add action to history
-      Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""));
+      Backbone.history.navigate("#home/" + state + "/" + searchItemsText.replace(/ /g, ""), { replace: true });
     } else {
       //add action to history
-      Backbone.history.navigate("#home/" + state);
+      Backbone.history.navigate("#home/" + state, { replace: true });
     }
 
     this.state = state;
