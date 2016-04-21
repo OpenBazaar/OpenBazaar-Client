@@ -28,17 +28,23 @@ module.exports = BaseVw.extend({
     this.listenTo(this.model, 'change:SSL', function() {
       this.render();
     });
-
-    console.log('hooba');
-    window.hooba = this.model;
   },
 
   inputEntered: function(e) {
-    this.model.set(e.target.name, e.target.value);
+    var val = e.target.value;
+
+    if ([
+      'rest_api_port',
+      'heartbeat_socket_port',
+      'api_socket_port'
+      ].indexOf(e.target.name) !== -1) {
+      if (String(parseInt(val)) === val) val = parseInt(val);
+    }
+
+    this.model.set(e.target.name, val);
   },  
 
   saveForm: function() {
-    console.log('just savin away');
     this.model.save();
   },
 

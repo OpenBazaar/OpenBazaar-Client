@@ -22,7 +22,7 @@ module.exports = Backbone.Model.extend({
 
   sync: localStorageSync.sync,
 
-  // localStorage: new localStorageSync('_serverConfig'),
+  localStorage: new localStorageSync('_serverConfig'),
 
   _addError: function(errObj, fieldName, error) {
     errObj = errObj || {};
@@ -36,46 +36,46 @@ module.exports = Backbone.Model.extend({
   //   Backbone.Model.prototype.parse.apply(this, arguments);
   // },
 
-  castIntegerFields: function(attrs) {
-    var parsed;
+  // castIntegerFields: function(attrs) {
+  //   var parsed;
 
-    if (typeof attrs.rest_api_port !== undefined) {
-      parsed = parseInt(attrs.rest_api_port);
+  //   if (typeof attrs.rest_api_port !== undefined) {
+  //     parsed = parseInt(attrs.rest_api_port);
       
-      if (isNaN(parsed)) {
-        delete attrs.rest_api_port;
-      } else {
-        attrs.rest_api_port = parsed;
-      }
-    }
+  //     if (isNaN(parsed)) {
+  //       delete attrs.rest_api_port;
+  //     } else {
+  //       attrs.rest_api_port = parsed;
+  //     }
+  //   }
 
-    if (typeof attrs.api_socket_port !== undefined) {
-      parsed = parseInt(attrs.api_socket_port);
+  //   if (typeof attrs.api_socket_port !== undefined) {
+  //     parsed = parseInt(attrs.api_socket_port);
       
-      if (isNaN(parsed)) {
-        delete attrs.api_socket_port;
-      } else {
-        attrs.api_socket_port = parsed;
-      }
-    }
+  //     if (isNaN(parsed)) {
+  //       delete attrs.api_socket_port;
+  //     } else {
+  //       attrs.api_socket_port = parsed;
+  //     }
+  //   }
 
-    if (typeof attrs.heartbeat_socket_port !== undefined) {
-      parsed = parseInt(attrs.heartbeat_socket_port);
+  //   if (typeof attrs.heartbeat_socket_port !== undefined) {
+  //     parsed = parseInt(attrs.heartbeat_socket_port);
       
-      if (isNaN(parsed)) {
-        delete attrs.heartbeat_socket_port;
-      } else {
-        attrs.heartbeat_socket_port = parsed;
-      }
-    }    
+  //     if (isNaN(parsed)) {
+  //       delete attrs.heartbeat_socket_port;
+  //     } else {
+  //       attrs.heartbeat_socket_port = parsed;
+  //     }
+  //   }    
 
-    return attrs;
-  },
+  //   return attrs;
+  // },
 
   validate: function(attrs, options) {
     var err = {};
 
-    attrs = this.castIntegerFields(attrs);
+    // attrs = this.castIntegerFields(attrs);
 
     if (!is.existy(attrs.name) || is.empty(attrs.name)) {
       this._addError(err, 'name', 'Please provide a value.');
@@ -89,24 +89,24 @@ module.exports = Backbone.Model.extend({
       }      
     }
 
-    if (!is.existy(attrs.rest_api_port) || is.empty(attrs.rest_api_port)) {
-      this._addError(err, 'rest_api_port', 'Please provide a value.');
+    if (!is.number(attrs.rest_api_port)) {
+      this._addError(err, 'rest_api_port', 'Please provide a number.');
     } else {
       if (!is.within(attrs.rest_api_port, -1, 65536)) {
         this._addError(err, 'rest_api_port', 'Please provide a number between 0 and 65535.');
       }
     }
 
-    if (!is.existy(attrs.api_socket_port) || is.empty(attrs.api_socket_port)) {
-      this._addError(err, 'api_socket_port', 'Please provide a value.');
+    if (!is.number(attrs.api_socket_port)) {
+      this._addError(err, 'api_socket_port', 'Please provide a number.');
     } else {
       if (!is.within(attrs.api_socket_port, -1, 65536)) {
         this._addError(err, 'api_socket_port', 'Please provide a number between 0 and 65535.');
       }
     }    
 
-    if (!is.existy(attrs.heartbeat_socket_port) || is.empty(attrs.heartbeat_socket_port)) {
-      this._addError(err, 'heartbeat_socket_port', 'Please provide a value.');
+    if (!is.number(attrs.heartbeat_socket_port)) {
+      this._addError(err, 'heartbeat_socket_port', 'Please provide a number.');
     } else {
       if (!is.within(attrs.heartbeat_socket_port, -1, 65536)) {
         this._addError(err, 'heartbeat_socket_port', 'Please provide a number between 0 and 65535.');

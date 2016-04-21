@@ -4214,7 +4214,31 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1 .server-connect-modal .modal-child {
   height: 625px;
-  overflow: hidden;
+}
+
+#ov1 .server-connect-modal .message-bar {
+  top: 50px;
+  left: 25px;
+  right: 25px;
+  z-index: 1;
+  transition: top .2s, opacity .2s;
+}
+
+#ov1 .server-connect-modal .message-bar > div {
+  background-color: red;
+  padding: 8px 10px;
+  line-height: 2.2;
+  display: inline-block;
+}
+
+#ov1 .server-connect-modal .message-bar .message-bar-close {
+  top: -12px;
+  right: -3px;
+}
+
+#ov1 .server-connect-modal .message-bar.slide-out {
+  top: -45px;
+  opacity: 0;
 }
 
 #ov1 .server-config-form {
@@ -4586,6 +4610,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   overflow-x: hidden;
 }
 
+#ov1 .autoOverflowYHideX {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+#ov1 .vertAlignMid {
+  vertical-align: middle;
+}
 
 #ov1 .vCentered {
   /* must be inside a relatively positioned containing element */
@@ -5210,8 +5243,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   height: 46px;
 }
 
-
-
 #ov1  .height30 {
   height: 30px;
   line-height: 30px;
@@ -5688,6 +5719,13 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   margin-right: auto;
   display: block;
 }
+
+#ov1 .marginCenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 #ov1 .heightAuto {
   height: auto;

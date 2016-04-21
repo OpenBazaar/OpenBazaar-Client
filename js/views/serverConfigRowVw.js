@@ -8,6 +8,8 @@ module.exports = BaseVw.extend({
   className: 'flexRow borderBottom custCol-border',
 
   events: {
+    'click .js-delete-config': 'onClickDelete',
+    'click .js-edit-config': 'onClickEdit'
   },
 
   initialize: function(options) {
@@ -19,6 +21,14 @@ module.exports = BaseVw.extend({
 
     this.listenTo(this.model, 'change', this.render);
   },
+
+  onClickDelete: function(e) {
+    this.trigger('delete', { view: this });
+  },
+
+  onClickEdit: function(e) {
+    this.trigger('edit', { view: this });
+  },  
 
   remove: function() {
     BaseVw.prototype.remove.apply(this, arguments);

@@ -4,7 +4,7 @@ var __ = require('underscore'),
     loadTemplate = require('../utils/loadTemplate'),
     // app = require('../App.js').getApp(),        
     BaseVw = require('./baseVw'),
-    ServerConfigRowVw = ('./serverConfigRowVw');
+    ServerConfigRowVw = require('./serverConfigRowVw');
 
 module.exports = BaseVw.extend({
   className: 'accordion-window',
@@ -20,16 +20,8 @@ module.exports = BaseVw.extend({
       throw new Error('Please provide a ServerConfigs collection.');
     }
 
-    this.listenTo(this.collection, 'update', this.onUpdateConfigs);
+    this.listenTo(this.collection, 'update', this.render);
     this.listenTo(this.collection, 'remove', this.onRemoveConfig);
-  },
-
-  onUpdateConfigs: function(cl, opts) {
-    if (!this.rendered) return;
-
-    cl.length ?
-      this.$('.js-zero-configs').addClass('hide') :
-      this.$('.js-zero-configs').removeClass('hide');
   },
 
   onRemoveConfig: function(md, cl, opts) {
@@ -50,8 +42,11 @@ module.exports = BaseVw.extend({
   },  
 
   render: function() {
+    var scrollTop;
+
     this.rendered = true;
     this.configRowViews = [];
+    scrollTop = this.$rowsWrap ? this.$rowsWrap[0].scrollTop : 0;
 
     loadTemplate('./js/templates/serverConfigs.html', (t) => {
       var $rows = $('<div />');
@@ -61,12 +56,22 @@ module.exports = BaseVw.extend({
       this.collection.forEach((md) => {
         var vw = new ServerConfigRowVw({ model: md });
 
+        this.listenTo(vw, 'delete', (e) => {
+          e.view.model.destroy();
+        });
+
+        this.listenTo(vw, 'edit', (e) => {
+          this.trigger('edit-config', { model: e.view.model });
+        });        
 
         $rows.append( vw.render().el );
         this.configRowViews.push(vw);
       });
-
+      
       this.collection.length && this.$('.js-zero-configs').addClass('hide');
+      this.$rowsWrap = this.$('.js-rows-wrap');
+      this.$rowsWrap.append($rows);
+      this.$rowsWrap[0].scrollTop = scrollTop;
     });
 
     return this;

@@ -16,30 +16,15 @@ module.exports = BaseModal.extend({
 
   events: {
     'click .js-close': 'closeConfigForm',
-    'click .js-new': 'newConfigForm'
+    'click .js-new': 'newConfigForm',
+    'click .js-msg-bar-close': 'hideMessageBar'
   },
 
   // todo: poly-gluttonize!
   headerMessages: {
-    serverConfigsTitle: { msg: 'Your Server Configurations'},
-    newConfigTitle: { msg: 'Enter Server Details' },
-    editConfigTitle: { msg: 'Configuration Settings' },
-    connecting: { msg: 'Connecting to ${name}' },
-    failed: {
-      msg: 'Connection Failed',
-      msgClass: 'connect-error',
-      showRetry: true,
-    },
-    failedAuth: {
-      msg: 'Authentication Failed',
-      msgClass: 'connect-error',
-      showRetry: true,
-    },
-    failedTooManyAttempts: {
-      msg: 'Too many failed login attemps.',
-      msgClass: 'connect-error',
-      showRetry: true,
-    }
+    serverConfigsTitle: 'Your Server Configurations',
+    newConfigTitle: 'Enter Server Details',
+    editConfigTitle: 'Configuration Settings',
   },
 
   initialize: function(options) {
@@ -47,7 +32,8 @@ module.exports = BaseModal.extend({
 
     this.headerVw = new ServerConnectHeaderVw({
       initialState: {
-        title: 'Server Configuration',
+        msg: 'Your Server Configurations',
+        title: 'Server Configurations',
         showNew: true
       }
     });
@@ -55,51 +41,73 @@ module.exports = BaseModal.extend({
     this.serverConfigs = new ServerConfigsCl();
     this.serverConfigs.fetch();
 
-    console.log('sugar');
-    window.sugar = this.serverConfigs;
-
     this.serverConfigsVw = new ServerConfigsVw({
       collection: this.serverConfigs
     });
+
+    this.listenTo(this.serverConfigsVw, 'edit-config', this.onEditConfig);
   },
 
   remove: function() {
     BaseModal.prototype.remove.apply(this, arguments);
   },
 
+  hideMessageBar: function() {
+    this.$jsMsgBar.addClass('slide-out');
+  },
+
+  showMessageBar: function(msg) {
+    this.$jsMsgBar.html(msg)
+      .removeClass('slide-out');
+  },  
+
   closeConfigForm: function() {
     this.$jsConfigFormWrap.addClass('slide-out');
     this.headerVw.setState({
-      title: 'Server Configuration',
+      msg: 'Your Server Configurations',
+      title: 'Server Configurations',
       showNew: true
     });
   },  
 
-  newConfigForm: function() {
-    var configMd = new ServerConfigMd();
+  showConfigForm: function(configMd) {
+    var model = configMd || new ServerConfigMd();
 
     this.headerVw.setState({
-      title: 'New Configuration',
+      title: model.get('name') || 'New Configuration',
+      msg:  configMd ? 'Configuration Settings' : 'Enter Server Details',
       showNew: false
     });
 
-    this.renderServerConfigForm(configMd);
+    this.renderServerConfigForm(model);
 
-    configMd.on('sync', (md) => {
-      this.serverConfigs.add(md);
+    this.listenTo(model, 'change:name', (md) => {
       this.headerVw.setState({
         title: md.get('name')
-      });      
+      });
+    });
+
+    this.listenTo(model, 'sync', (md) => {
+      this.serverConfigs.add(md);
+      this.closeConfigForm();
     });
     
     this.$jsConfigFormWrap.removeClass('slide-out');    
+  },
+
+  newConfigForm: function() {
+    this.showConfigForm();
+  },
+
+  onEditConfig: function(e) {
+    this.showConfigForm(e.model);
   },
 
   renderServerConfigForm: function(md) {
     this.serverConfigFormVw && this.serverConfigFormVw.remove();
     this.serverConfigFormVw = new ServerConfigFormVw({
       model: md
-    });    
+    });
 
     this.$jsConfigFormWrap = this.$jsConfigFormWrap || this.$('.js-config-form-wrap');
     this.$jsConfigFormWrap.html(this.serverConfigFormVw.render().el);
@@ -112,27 +120,11 @@ module.exports = BaseModal.extend({
 
       this.$('.js-header-wrap').html(this.headerVw.render().el);
 
-      if (!this.moo) {
-        this.moo = true;
-        setTimeout(() => {
-          var msgKeys = Object.keys(this.headerMessages),
-            randomMsgIdx = Math.floor(Math.random() * ((msgKeys.length - 1) - 0 + 1)) + 0,
-            m,
-            i = 0,
-            self = this;
-
-          for (var key in this.headerMessages) {
-            if (i === randomMsgIdx) m = self.headerMessages[key];
-            i++;
-          }
-
-          this.headerVw.setState(m);
-        }, 1000);
-      }
-
       this.$('.js-config-list-wrap').html(
         this.serverConfigsVw.render().el
       );
+
+      this.$jsMsgBar = this.$jsMsgBar || this.$('.js-msg-bar');
     });
 
     return this;
