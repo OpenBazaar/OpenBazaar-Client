@@ -2583,11 +2583,6 @@ div.chatSearchOut .chatSearchIcon {
   border-top-right-radius: 0;
 }
 
-.btn.btn-back:before,
-.btn.btn-fwd:before {
-  opacity: 0.3;
-}
-
 .btn.btn-back.active:before,
 .btn.btn-fwd.active:before {
   opacity: 1;

@@ -48,6 +48,10 @@ module.exports = Backbone.Router.extend({
         this.navigate(translatedRoute, { trigger: true });
       });
     });
+    
+    history.size = -1;
+    history.position = -1;
+    history.action = 'default';
   },
 
   translateRoute: function(route) {
@@ -102,6 +106,30 @@ module.exports = Backbone.Router.extend({
     };
 
     return deferred.promise();
+  },
+  
+  execute: function(callback, args) {
+    if (history.action == 'default') {
+        history.position += 1;
+        history.size = history.position;
+    } else if (history.action == 'back') {
+        history.position -= 1;
+    } else if (history.action == 'forward') {
+        history.position += 1;
+    }
+    history.action = 'default';
+    
+    if (history.position == history.size)
+        $('.js-navFwd').addClass('disabled');
+    else
+        $('.js-navFwd').removeClass('disabled');
+    
+    if (history.position == 1)
+        $('.js-navBack').addClass('disabled');
+    else
+        $('.js-navBack').removeClass('disabled');
+    
+    if (callback) callback.apply(this, args);
   },
 
   cleanup: function(){
