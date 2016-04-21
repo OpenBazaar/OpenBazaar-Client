@@ -10,6 +10,7 @@ var __ = require('underscore'),
     saveToAPI = require('../utils/saveToAPI'),
     chosen = require('../utils/chosen.jquery.min.js'),
     qr = require('qr-encode'),
+    app = require('../App').getApp(),
     clipboard = require('clipboard');
 Backbone.$ = $;
 
@@ -565,14 +566,14 @@ module.exports = baseVw.extend({
     var totalPrice = this.model.get('totalPrice'),
         totalBTCPrice = this.model.get('totalBTCDisplayPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
-        totalDisplayPrice = (userCurrency == "BTC") ? Number(totalPrice.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
+        totalDisplayPrice = (userCurrency == "BTC") ? app.intlNumFormat(totalPrice, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalPrice);
     this.$('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
-    this.$('.js-buyWizardDetailsBTCTotal').text(Number(totalBTCPrice.toFixed(8)));
+    this.$('.js-buyWizardDetailsBTCTotal').text(app.intlNumFormat(totalBTCPrice, 8));
   },
 
   copyPayAddress: function(){

@@ -2,6 +2,7 @@ var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     numberSpinners = require('../utils/numberSpinners'),
+    app = require('../App').getApp(),
     loadTemplate = require('../utils/loadTemplate');
 Backbone.$ = $;
 
@@ -72,21 +73,21 @@ module.exports = Backbone.View.extend({
         moderatorPrice = moderatorPercentage ? totalItemPrice * moderatorPercentage : 0,
         moderatorTotal = moderatorPrice * quantity,
         totalPrice = totalItemPrice + totalShipping,
-        newBTCDisplayPrice = Number((this.model.get('vendorBTCPrice') * quantity).toFixed(8)),
-        newBTCShippingDisplayPrice = Number((this.model.get('currentShippingBTCPrice') * quantity).toFixed(8)),
-        newDisplayPrice = (userCurrency == "BTC") ? Number(totalItemPrice.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newBTCDisplayPrice = app.intlNumFormat((this.model.get('vendorBTCPrice') * quantity), 8),
+        newBTCShippingDisplayPrice = app.intlNumFormat((this.model.get('currentShippingBTCPrice') * quantity), 8),
+        newDisplayPrice = (userCurrency == "BTC") ? app.intlNumFormat(totalItemPrice, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalItemPrice),
-        newDisplayShippingPrice = (userCurrency == "BTC") ? Number(totalShipping.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayShippingPrice = (userCurrency == "BTC") ? app.intlNumFormat(totalShipping, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalShipping),
-        newDisplayModeratorPrice = (userCurrency == "BTC") ? Number(moderatorTotal.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
+        newDisplayModeratorPrice = (userCurrency == "BTC") ? app.intlNumFormat(moderatorTotal, 8) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
@@ -95,7 +96,7 @@ module.exports = Backbone.View.extend({
         totalBTCDisplayPrice = (this.model.get('vendorBTCPrice') + this.model.get('currentShippingBTCPrice')) * quantity,
         moderatorPriceBTC = moderatorPercentage ? totalBTCDisplayPrice * moderatorPercentage : 0,
         moderatorPriceString = this.model.get('userCurrencyCode') == 'BTC' ?
-                               moderatorPriceBTC.toFixed(8) + " BTC" : moderatorPriceBTC.toFixed(8) + " BTC (" + newDisplayModeratorPrice + ")";
+        app.intlNumFormat(moderatorPriceBTC, 8) + " BTC" : app.intlNumFormat(moderatorPriceBTC, 8) + " BTC (" + newDisplayModeratorPrice + ")";
 
     this.$('.js-buyWizardBTCPrice').html(newBTCDisplayPrice+"BTC");
     this.$('.js-buyWizardBTCShippingPrice').html(newBTCShippingDisplayPrice+"BTC");

@@ -25,7 +25,7 @@ function cssImageUrl(hash, guid, fallback) {
 }
 
 function intlNumFormat(numberToFormat, maxDigits){
-  return new Intl.NumberFormat(window.lang, {maximumFractionDigits: maxDigits}).format(numberToFormat);
+  return app.intlNumFormat(numberToFormat, maxDigits);
 }
 
 module.exports = {
