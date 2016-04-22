@@ -587,7 +587,7 @@ module.exports = baseVw.extend({
   toggleModeratorButtons: function(moderated) {
     var addBtn = this.$('.js-addmoderator'),
         removeBtn = this.$('.js-removemoderator');
-    if(moderated === true){
+    if(moderated == true){
       addBtn.addClass('hide');
       removeBtn.removeClass('hide');
     } else {
@@ -1442,26 +1442,15 @@ module.exports = baseVw.extend({
 
     $targ.addClass('loading');
 
-    var user = this.model.get('user');
     var self = this;
 
     var modList = {};
-    modList.moderators = user.moderators;
-    modList.moderators[modList.moderators.length] = this.userProfile.get('profile').guid;
-    user.moderators = modList.moderators;
+    modList.moderators = this.model.get('user').moderators;
+    modList.moderators.push(this.pageID);
 
-    saveToAPI('', user, user.serverUrl + "settings",
+    saveToAPI('', this.model.get('user'), this.model.get('user').serverUrl + "settings",
       function(){
         // confirmed
-        $targ.removeClass('loading');
-      },
-      function(){
-        // failed
-      }, modList,'',
-      function(){
-        // invalid
-      }).always(function(){
-        $targ.removeClass('loading');
         self.options.userModel.fetch({
           success: function(model, response) {
             if (self.isRemoved()) return;
@@ -1471,6 +1460,8 @@ module.exports = baseVw.extend({
             self.getIsModerator();
           }
         });
+      }, '', modList,'', '').always(function(){
+        $targ.removeClass('loading');
       });
   },
 
@@ -1480,43 +1471,32 @@ module.exports = baseVw.extend({
     if($targ.hasClass('confirm')){
       $targ.addClass('loading').removeClass('confirm');
 
-
-      var user = this.model.get('user');
       var self = this;
 
       var modList = {};
       modList.moderators = [];
-      var guid = this.userProfile.get('profile').guid;
 
-      __.each(user.moderators, function(mod) {
-        if(mod != guid && (typeof(mod) !== 'object' || mod.guid != guid)) {
-          modList.moderators[modList.moderators.length] = mod;
+      __.each(this.model.get('user').moderators, function(mod) {
+        if(mod != guid && (typeof(mod) !== 'object' || mod.guid != this.pageID)) {
+          modList.moderators.push(mod);
         }
       })
-      user.moderators = modList.moderators;
 
-      saveToAPI('', user, user.serverUrl + "settings",
-          function(){
-            // confirmed
-            $targ.removeClass('loading');
-          },
-          function(){
-            // failed
-          }, modList,'',
-          function(){
-            // invalid
-          }).always(function(){
-            $targ.removeClass('loading');
-            self.options.userModel.fetch({
-              success: function(model, response) {
-                if (self.isRemoved()) return;
-                var user = self.model.get('user');
-                user.moderators = model.get('moderators');
-                user.moderator_guids = model.get('moderator_guids');
-                self.getIsModerator();
-              }
-            });
+      saveToAPI('', this.model.get('user'), this.model.get('user').serverUrl + "settings",
+        function(){
+          // confirmed
+          self.options.userModel.fetch({
+            success: function(model, response) {
+              if (self.isRemoved()) return;
+              var user = self.model.get('user');
+              user.moderators = model.get('moderators');
+              user.moderator_guids = model.get('moderator_guids');
+              self.getIsModerator();
+            }
           });
+        }, '', modList,'', '').always(function(){
+          $targ.removeClass('loading');
+        });
     } else {
       $targ.addClass('confirm');
     }
