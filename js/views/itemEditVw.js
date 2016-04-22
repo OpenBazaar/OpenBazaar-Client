@@ -89,6 +89,7 @@ module.exports = baseVw.extend({
 
   render: function(){
     var self = this;
+    
     loadTemplate('./js/templates/itemEdit.html', function(loadedTemplate) {
       var context = __.extend({}, self.model.toJSON(), { MAX_PHOTOS: self.MAX_PHOTOS });
 
@@ -329,8 +330,8 @@ module.exports = baseVw.extend({
     var self = this,
         $imageInput = this.$el.find('.js-itemImageUpload'),
         curImages = this.model.get('combinedImagesArray'),
-        maxH = 800,
-        maxW = 800,
+        maxH = 944,
+        maxW = 1028,
         imageList = [],
         loaded = 0,
         imageCount;
@@ -381,7 +382,7 @@ module.exports = baseVw.extend({
         canvas.height = imgH;
         ctx = canvas.getContext('2d');
         ctx.drawImage(newImage, 0, 0, imgW, imgH);
-        dataURI = canvas.toDataURL('image/jpeg', 0.45);
+        dataURI = canvas.toDataURL('image/jpeg', 0.7);
         dataURI = dataURI.replace(/^data:image\/(png|jpeg);base64,/, "");
         imageList.push(dataURI);
 

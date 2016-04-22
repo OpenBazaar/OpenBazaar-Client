@@ -414,6 +414,12 @@ form {
   height: 100%;
 }
 
+.flexRow-grid {
+  /* use for wrapping grids of objects with 10px margins on the right side */
+  margin-right: -10px;
+  width: auto;
+}
+
 .flexRow [class |= "flexCol"] {
   box-sizing: border-box;
   position: relative;
@@ -581,20 +587,21 @@ form {
   position: relative;
   background-position: center;
   background-size: cover;
-  border-radius: 3px;
+  background-repeat: no-repeat;
+  border-radius: 2px;
   height: 230px;
   width: 250px;
 }
 
 .itemImg.itemImg-large {
   /* flex row collapses unless a specific height is set */
-  height: 380px;
-  width: 100%;
+  height: 472px;
+  width: 514px;
   border-radius: 0;
 }
 
 .itemImg.itemImg-small {
-  height: 82px;
+  height: 111px;
   width: 121px;
   margin: 0 10px 10px 0;
   border-radius: 1px;
@@ -1208,6 +1215,14 @@ h5 {
 
 .h6, h6 {
   font-size: 15px;
+}
+
+.fieldItem-textarea h2, .fieldItem-textarea h3, .editableContent h2, .editableContent h3 {
+  margin-top: 30px;
+}
+
+.fieldItem-textarea h2:first-child, .fieldItem-textarea h3:first-child, .editableContent h2:first-child, .editableContent h3:first-child {
+  margin-top: 0px;
 }
 
 .note {
@@ -2569,11 +2584,6 @@ div.chatSearchOut .chatSearchIcon {
   border-top-right-radius: 0;
 }
 
-.btn.btn-back:before,
-.btn.btn-fwd:before {
-  opacity: 0.3;
-}
-
 .btn.btn-back.active:before,
 .btn.btn-fwd.active:before {
   opacity: 1;
@@ -2958,6 +2968,7 @@ input[type="number"].fieldItem.fieldItem-withButton {
   border: 2px solid transparent;
   color: #fff;
   overflow: auto; /* use customThemeScrollbar to add a scrolbar */
+  word-break: break-all; /* prevent urls from making the text area grow */
 }
 
 .fieldItem-textarea:focus {
@@ -3114,6 +3125,7 @@ input[type="checkbox"].fieldItem + label:before {
   box-shadow: none;
   opacity: 1;
   font-size: 1.5em;
+  vertical-align: middle;
 }
 
 input[type="checkbox"].fieldItem + label.compact {
@@ -3123,6 +3135,10 @@ input[type="checkbox"].fieldItem + label.compact {
 
 input[type="checkbox"].fieldItem + label.compact:before {
   left: 0;
+}
+
+input[type="checkbox"].fieldItem.thin + label {
+  line-height: inherit;
 }
 
 input[type="checkbox"].fieldItem:checked + label:before {
@@ -4299,6 +4315,10 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-color: #616161;
 }
 
+#ov1 .medium-editor-toolbar {
+  background: #353443;
+}
+
 #ov1::-webkit-scrollbar {
   display: none;
   box-sizing: border-box;
@@ -4637,10 +4657,6 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1  .outline2 {
   outline: 2px solid #fff;
-}
-
-#ov1  .borderRadiusTop {
-  border-radius: 3px;
 }
 
 #ov1  .borderRadiusTop {
@@ -5583,6 +5599,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   opacity: 0.7;
 }
 
+#ov1 .disabled-icon {
+  pointer-events: none;
+}
+
+#ov1 .disabled-icon:before,
+#ov1 .disabled [class *= "ion-"]:before {
+  opacity: 0.2;
+}
+
 #ov1 .overflowVisible {
   overflow: visible;
 }
@@ -5603,15 +5628,19 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   -webkit-filter: blur(20px) grayscale(1) contrast(0.5);
 }
 
+
 #ov1 .fadeOut {
   opacity: 0;
   pointer-events: none;
+  transition: opacity .3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 #ov1 .foldIn {
   height: 0;
+  padding: 0;
   overflow: hidden;
-  transition: height 1s;
+  transition: height 1s, padding 1s;
+  pointer-events: none;
 }
 
 #ov1 .underline {
@@ -5781,8 +5810,11 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   border-bottom: 1px solid #444;
 }
 
+#ov1.notFancy .fadeOut,
 #ov1.notFancy .statusBar.fadeOut,
 #ov1.notFancy #pageNav .statusBar.fadeOut,
+#ov1.notFancy #userPage .fadeOut,
+#ov1.notFancy #userPage #pageNav .fadeOut,
 #ov1.notFancy #userPage #pageNav .statusBar.fadeOut,
 #ov1.notFancy #userPage #obContainer #content .statusBar.fadeOut {
   opacity: 0 !important;
@@ -5845,9 +5877,56 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
 
 #ov1.notFancy .notFancyDarkBackground,
 #ov1.notFancy #obContainer .notFancyDarkBackground {
-  background: #262626;
+  background: #262626 !important;
 }
 
+#ov1.notFancy .disabled,
+#ov1.notFancy #userPage .disabled,
+#ov1.notFancy #obContainer .disabled,
+#ov1.notFancy #overlay .disabled,
+#ov1.notFancy #sideBar .disabled,
+#ov1.notFancy #pageNav .disabled,
+#ov1.notFancy #modalHolder .disabled,
+#ov1.notFancy #messageModal .disabled,
+#ov1.notFancy #statusBar .disabled {
+  opacity: 0.2 !important;
+}
+
+#ov1.notFancy .disabled2,
+#ov1.notFancy #userPage .disabled2,
+#ov1.notFancy #obContainer .disabled2,
+#ov1.notFancy #overlay .disabled2,
+#ov1.notFancy #sideBar .disabled2,
+#ov1.notFancy #pageNav .disabled2,
+#ov1.notFancy #modalHolder .disabled2,
+#ov1.notFancy #messageModal .disabled2,
+#ov1.notFancy #statusBar .disabled2 {
+  opacity: 0.7 !important;
+}
+
+/* add a shadow and a glow, so modal close buttons are still barely visible if the user picks a bad color */
+#ov1 .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #userPage .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #obContainer .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #modalHolder .js-closeIndexModal [class *= "ion-"]:before,
+#ov1.notFancy #messageModal .js-closeIndexModal [class *= "ion-"]:before,
+#ov1 .js-modal-close [class *= "ion-"]:before,
+#ov1 #userPage .js-modal-close [class *= "ion-"]:before,
+#ov1 #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1 #modalHolder .js-modal-close [class *= "ion-"]:before,
+#ov1 #messageModal .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #userPage .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #obContainer .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #modalHolder .js-modal-close [class *= "ion-"]:before,
+#ov1.notFancy #messageModal .js-modal-close [class *= "ion-"]:before{
+  text-shadow: 0 0 1px rgba(0,0,0,1), 0 0 2px rgba(255,255,255, 1) !important;
+}
 
 /* hide unfinished elements */
 

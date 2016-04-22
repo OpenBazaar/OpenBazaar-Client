@@ -13,9 +13,9 @@
       <div class="pad20 rowTop20 width100"><h2 class="txt-center"><% polyglot.t('LoadingImage') %></h2></div>
     </div>
     <input type="range" class="cropit-image-zoom-input hCentered rowTop20 js-bannerRangeInput hide" />
-    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce btn-upload-cover-photo">
+    <label for="headerImageInput" class="btn btn-c1 btn-txt rowTop20 fullCentered js-pageCustomizationButtons colorWhiteForce btn-upload-cover-photo custCol-primary">
       <span class="ion-qr-scanner fontSize11 marginRight2 textOpacity1"></span>
-      <%= polyglot.t('UploadCoverPhoto') %> (959px x 400px)
+      <%= polyglot.t('UploadCoverPhoto') %> (950px x 400px)
     </label>
     <input id="headerImageInput" type="file" class="cropit-image-input hide" />
     <div class="bar navBar barFlush user-page-navigation positionBottom">
@@ -26,7 +26,7 @@
         <div class="ctrlGroup js-pageCustomizationButtons js-userPageControls hide">
           <a class="btn btn-txt custCol-primary js-saveCustomization">
             <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-            <%= polyglot.t('SaveChanges') %>
+            <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
           </a>
         </div>
       </div>
@@ -225,13 +225,13 @@
                 <div class="ctrlGroup hide js-itemEditButtons js-userPageControls hide">
                   <a class="btn btn-txt custCol-primary js-saveItem">
                     <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('SaveChanges') %>
+                    <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
                   </a>
                 </div>
                 <div class="ctrlGroup hide js-itemCustomizationButtons js-userPageControls hide">
                   <a class="btn btn-txt custCol-primary js-saveCustomization">
                     <span class="ion-checkmark fontSize11 marginRight2 textOpacity1"></span>
-                    <%= polyglot.t('SaveChanges') %>
+                    <%= polyglot.t('SaveChanges') %> (<%= config.keyShortcutPrefix + config.keyShortcuts.save.toUpperCase() %>)
                   </a>
                 </div>
               </div>
@@ -279,7 +279,7 @@
               </a>
             <%}%>
             <% if(ob.page.profile.about) { %>
-             <p class="js-userAbout margin0 flexContainer editableContent"><%= ob.page.profile.displayAbout %></p>
+             <div class="js-userAbout margin0 flexContainer editableContent"><%= ob.page.profile.displayAbout %></div>
             <%}else{%>
               <span class="textOpacity75"><%= polyglot.t('AboutEmpty') %></span>
             <%}%>

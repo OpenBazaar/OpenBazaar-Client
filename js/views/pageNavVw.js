@@ -31,6 +31,7 @@ module.exports = baseVw.extend({
     'click .js-showSupportModal': 'showSupportModal',
     'click .js-aboutModal .js-tab': 'aboutModalTabClick',
     'click .js-navRefresh': 'navRefreshClick',
+    'click .js-navRestart': 'navRestartClick',
     'click .js-navAdminPanel': 'navAdminPanel',
     'click .js-navProfileMenu a': 'closeNav',
     'focus .js-navAddressBar': 'addressBarFocus',
@@ -248,7 +249,6 @@ module.exports = baseVw.extend({
     //load userProfile data into model
     this.model.set('guid', this.userProfile.get('profile').guid);
     this.model.set('avatar_hash', this.userProfile.get('profile').avatar_hash);
-    this.model.set('ctrlCmdKey', window.navigator.platform === 'MacIntel' ? '&#8984;' : 'Ctrl+');
     this.model.set('version', pjson.version);
     loadTemplate('./js/templates/pageNav.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
@@ -501,15 +501,19 @@ module.exports = baseVw.extend({
   },
 
   navBackClick: function(){
-    window.history.back();
+    history.back();
   },
 
   navFwdClick: function(){
-    window.history.forward();
+    history.forward();
   },
 
   navRefreshClick: function(){
-    this.currentWindow.reload();
+    Backbone.history.loadUrl();
+  },
+  
+  navRestartClick: function(){
+    location.reload();
   },
 
   trimAddressBar: function() {

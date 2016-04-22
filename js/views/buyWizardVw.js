@@ -36,7 +36,7 @@ module.exports = baseVw.extend({
     'click .js-closeBuyWizardModal': 'closeWizard',
     'click .js-buyWizardNewAddressBtn': 'createNewAddress',
     'click .js-buyWizardModeratorRadio': 'modSelected',
-    'click .js-buyWizardModNext': 'accNext',
+    'click .js-buyWizardModNext': 'modNext',
     'click .js-buyWizardModBack': 'modBack',
     'click .js-buyWizardReturnNext': 'returnNext',
     'click .js-buyWizardAddressBack': 'addressPrev',
@@ -56,6 +56,7 @@ module.exports = baseVw.extend({
     'click .js-buyWizardCloseSummary': 'closeWizard',
     'click input[name="radioPaymentType"]': 'changePaymentType',
     'blur .js-buyWizardPostalInput': 'updateMap',
+    'click #BuyWizardQRDetailsInput': 'toggleQRDetails',
     'blur input': 'validateInput'
   },
 
@@ -73,6 +74,7 @@ module.exports = baseVw.extend({
     this.orderID = "";
     this.model.set('selectedModerator', "");
     this.model.updateAttributes();
+    this.cachePayData = "";
 
     //create the country select list
     this.countryList = countries.get('countries');
@@ -197,6 +199,9 @@ module.exports = baseVw.extend({
         $(".js-BuyWizardWallets").randomize();
       }
 
+      //set the QR details checkbox
+      var QRtoggleVal = localStorage.getItem('AdditionalPaymentData') != "false" ? true : false;
+      self.$('#BuyWizardQRDetailsInput').prop('checked', QRtoggleVal);
     });
     return this;
   },
@@ -258,6 +263,11 @@ module.exports = baseVw.extend({
 
   walletNowClick: function(){
     this.accGoToID("#BuyWizardPaymentType");
+  },
+
+  modNext: function(){
+    this.accNext();
+    this.setTotalPrice(); //in case it isn't set yet
   },
 
   modBack: function(){
@@ -440,16 +450,16 @@ module.exports = baseVw.extend({
         formData = new FormData(),
         moderatorID = this.model.get('selectedModerator').guid || "",
         selectedAddress = this.model.get('selectedAddress'),
-        bitCoinReturnAddr = this.$el.find('#buyWizardBitcoinAddressInput').val();
+        bitCoinReturnAddr = this.$('#buyWizardBitcoinAddressInput').val();
 
-    if (!this.$el.find('#buyWizardQuantity')[0].checkValidity()){
+    if (!this.$('#buyWizardQuantity')[0].checkValidity()){
       messageModal.show(window.polyglot.t('errorMessages.saveError'), window.polyglot.t('errorMessages.missingError'));
       return;
     }
 
-    this.$el.find('.js-buyWizardSendPurchase').addClass('hide');
-    this.$el.find('.js-buyWizardPendingMsg').removeClass('hide');
-    this.$el.find('.js-buyWizardPurchaseBack').addClass('disabled');
+    this.$('.js-buyWizardSendPurchase').addClass('hide');
+    this.$('.js-buyWizardPendingMsg').removeClass('hide');
+    this.$('.js-buyWizardPurchaseBack').addClass('disabled');
 
     formData.append("id", this.model.get('id'));
 
@@ -467,7 +477,7 @@ module.exports = baseVw.extend({
       formData.append("moderator", moderatorID);
     }
 
-    this.$el.find('.js-buyWizardSpinner').removeClass('hide');
+    this.$('.js-buyWizardSpinner').removeClass('hide');
 
     formData.append("refund_address", bitCoinReturnAddr);
 
@@ -485,10 +495,15 @@ module.exports = baseVw.extend({
       success: function(data){
         if(data.success == true){
           self.showPayAddress(data);
+          self.cachePayData = data; //cache the data for the QR Details toggle
         } else {
           messageModal.show(window.polyglot.t('errorMessages.contractError'), window.polyglot.t('errorMessages.sellerError') +" " +
               window.polyglot.t('errorMessages.checkPurchaseData') + "\n\n Reason: " + data.reason);
-          self.$el.find('.js-buyWizardSpinner').addClass('hide');
+          self.$('.js-buyWizardSpinner').addClass('hide');
+          //re-enable form so they can try again
+          self.$('.js-buyWizardSendPurchase').removeClass('hide');
+          self.$('.js-buyWizardPendingMsg').addClass('hide');
+          self.$('.js-buyWizardPurchaseBack').removeClass('disabled');
         }
       },
       error: function (jqXHR, status, errorThrown) {
@@ -499,8 +514,21 @@ module.exports = baseVw.extend({
     });
   },
 
+  toggleQRDetails: function(){
+    var toggleInput = this.$('#BuyWizardQRDetailsInput'),
+        toggleVal = toggleInput.prop('checked');
+    localStorage.setItem('AdditionalPaymentData',  toggleVal);
+    this.showPayAddress();
+  },
+
   showPayAddress: function(data){
-    "use strict";
+    data = data || this.cachePayData;
+
+    if(!data) {
+      throw new Error('Data must be provided to the showPayAddress function');
+      return;
+    }
+
     var totalBTCPrice = 0,
         storeName = encodeURI(this.model.get('page').profile.name),
         message = encodeURI(this.model.get('vendor_offer').listing.item.title.substring(0, 20) + " "+data.order_id),
@@ -511,7 +539,12 @@ module.exports = baseVw.extend({
     totalBTCPrice = data.amount;
     this.$el.find('.js-buyWizardDetailsTotalBTC').text(totalBTCPrice);
     this.payURL = data.payment_address;
-    payHREF = "bitcoin://"+ data.payment_address+"?amount="+totalBTCPrice+"&label="+storeName+"&message="+message;
+    
+    payHREF = "bitcoin:"+ data.payment_address+"?amount="+totalBTCPrice;
+    if(localStorage.getItem('AdditionalPaymentData') != "false") {
+        payHREF += "&label="+storeName+"&message="+message;
+    }
+    
     this.hideMaps();
     this.$el.find('.js-buyWizardPay').removeClass('hide');
     dataURI = qr(payHREF, {type: 10, size: 10, level: 'M'});
@@ -532,14 +565,14 @@ module.exports = baseVw.extend({
     var totalPrice = this.model.get('totalPrice'),
         totalBTCPrice = this.model.get('totalBTCDisplayPrice'),
         userCurrency = this.model.get('userCurrencyCode'),
-        totalDisplayPrice = (userCurrency == "BTC") ? totalPrice.toFixed(8) + " BTC" : new Intl.NumberFormat(window.lang, {
+        totalDisplayPrice = (userCurrency == "BTC") ? Number(totalPrice.toFixed(8)) + " BTC" : new Intl.NumberFormat(window.lang, {
           style: 'currency',
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
           currency: userCurrency
         }).format(totalPrice);
-    this.$el.find('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
-    this.$el.find('.js-buyWizardDetailsBTCTotal').text(totalBTCPrice.toFixed(8));
+    this.$('.js-buyWizardDetailsTotal').text(totalDisplayPrice);
+    this.$('.js-buyWizardDetailsBTCTotal').text(Number(totalBTCPrice.toFixed(8)));
   },
 
   copyPayAddress: function(){

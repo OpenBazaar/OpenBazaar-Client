@@ -85,6 +85,9 @@ user.on('change:language', function(md, lang) {
   window.lang = lang;
   extendPolyglot(lang);
   localStorage.setItem('lang', lang);
+  //trigger translation function on index
+  window.translateIndex();
+
 });
 
 //keep user and profile urls synced with the server configuration
@@ -191,12 +194,12 @@ $(window).bind('keydown', function(e) {
       route = null;
     
   if (event.keyCode == 116) { //on F5 press
-    location.reload();
+    Backbone.history.loadUrl();
   }
 
   if (ctrl) {
     switch (char) {
-      case 'z':
+      case config.keyShortcuts.undo:
         //run undo programmatically to avoid crash
         e.preventDefault();
         document.execCommand('undo');
@@ -229,11 +232,14 @@ $(window).bind('keydown', function(e) {
         // Select all text in address bar
         $('.js-navAddressBar').select();
         break;
+      case config.keyShortcuts.save:
+        window.obEventBus.trigger('saveCurrentForm');
+        break;
     }
 
     if (route !== null) {
       e.preventDefault();
-	  Backbone.history.navigate(route, {
+      Backbone.history.navigate(route, {
         trigger: true
       });
 	  }
@@ -272,6 +278,8 @@ var setCurrentBitCoin = function(cCode, userModel, callback) {
 var profileLoaded;
 var loadProfile = function(landingRoute, onboarded) {
   var externalRoute = remote.getGlobal('externalRoute');
+
+  landingRoute = landingRoute && landingRoute != undefined ? landingRoute : '#';
 
   profileLoaded = true;
 
@@ -314,7 +322,7 @@ var loadProfile = function(landingRoute, onboarded) {
                   Backbone.history.start();
                 });
               } else {
-                location.hash = landingRoute || '#';
+                location.hash = landingRoute;
                 Backbone.history.start();
               }
             });
