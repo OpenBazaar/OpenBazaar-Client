@@ -1,12 +1,14 @@
 var ipcRenderer = require('ipc-renderer'),
     Socket = require('./utils/Socket'),
     $ = require('jquery'),
-    ServerConfigsCl = require('./collections/serverConfigsCl'),
+    // ServerConfigMd = require('./models/serverConfigMd'),
+    // ServerConnection = require('./ServerConnection'),
+    ServerConfigsCl = require('../collections/serverConfigsCl'),
+    ServerConnectModal = require('./views/ServerConnectModal'),
     _app;
 
 function App() {
-  var self = this,
-      serverConfig;
+  var activeServerConfig;
 
   // ensure we're a singleton
   if (_app) return _app;
@@ -16,25 +18,44 @@ function App() {
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
 
+  // TODO: what is wrong with the localStorage adapter??? shouldn't need
+  // to manually provide the data to the model. All that should be needed
+  // is an ID and then a subsequent fetch, but that doesn't return the data.
+  // Investigate!
+  // this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
+
+  // serverConfigMd.fetch();
+  // if (!localStorage['_serverConfig-1']) {
+  //   this.serverConfig.save();
+  // }  
+
+  // this.connectHeartbeatSocket();
+
+  // this.server = new Server();
+  // this.serverConnectModal = new ServerConnectModal({ server: this.server });
+
+  // if (this.server.getConfig()) {
+  //   this.server.connect(this.server.getConfig());
+  // } else {
+  //   if (remote.getGlobal('installerLaunched')) {
+  //     this.server.connect(
+  //       this.serverConfigs.create()
+  //     );
+  //   } else {
+
+  //   }
+  // }
+  this._heartbeatSocket = new Socket();
+
   this.serverConfigs = new ServerConfigsCl();
   this.serverConfigs.fetch();
-
-  if (!(serverConfig = this.getServerConfig())) {
-    this.setServerConfig(
-      this.serverConfigs.create({ name: 'default' }).id
-    );
-  }
-
-  console.log(localStorage._serverConfig);
-  this.connectHeartbeatSocket();
 }
 
 App.prototype.getServerConfig = function() {
   var config = this.serverConfigs.get(localStorage.activeServer);
 
-  if ((!localStorage.activeServer || !config) && this.serverConfigs.length) {
+  if ((!localStorage.activeServer !! !config) && this.serverConfigs.length) {
     localStorage.activeServer = this.serverConfigs.at(this.serverConfigs.length - 1).id;
-    config = this.serverConfigs.get(localStorage.activeServer);
   }
 
   return config;  
@@ -56,30 +77,96 @@ App.prototype.connectHeartbeatSocket = function() {
     throw new Error(`No server config is set. Please set one via setServerConfig().`);
   }
 
-  if (this._heartbeatSocket) {
-    this._heartbeatSocket.connect(config.getHeartbeatSocketUrl());
-  } else {
-    this._heartbeatSocket = new Socket(config.getHeartbeatSocketUrl());
-  }
+  this._heartbeatSocket.connect(config.getHeartbeatSocketUrl());
 };
 
 App.prototype.getHeartbeatSocket = function() {
   return this._heartbeatSocket;
 };
 
-App.prototype.login = function() {
+App.prototype.connect: function() {
+  var self = this,
+      deferred = $.Deferred(),
+      promise = deferred.promise(),
+      loginRequest,
+      login,
+      onClose;
+
+  login = function() {
+    // check authentication
+    loginRequest = this.login().done(function(data) {
+      if (data.success) {
+        deferred.resolve();
+        // self.trigger('connected', true);
+      } else {
+        if (data.reason === 'too many attempts') {
+          deferred.reject('failed-auth-too-many');  
+        } else {
+          deferred.reject('failed-auth');  
+        }
+
+        // self.trigger('connected', false);
+      }
+    }).fail(function(jqxhr) {
+      if (jqxhr.statusText === 'abort') return;
+      
+      // assuming rest server is down or
+      // wrong port set
+      deferred.reject();
+    });
+  };
+
+  app.connectHeartbeatSocket();
+
+  promise.cleanup = function() {
+    loginRequest && loginRequest.abort();
+    app.getHeartbeatSocket().off(null, login);
+    app.getHeartbeatSocket().off(null, onClose);
+  };
+
+  promise.cancel = function() {
+    deferred.reject('canceled');
+  };
+
+  promise.always(function() {
+    promise.cleanup();
+  });
+
+  app.getHeartbeatSocket().on('open', login);
+
+  app.getHeartbeatSocket().on('close', (onClose = function() {
+    deferred.reject();
+  }));    
+
+  return promise;
+};
+
+App.prototype.loginOLD = function() {
+  return $.ajax({
+    url: this.serverConfig.getServerBaseUrl() + '/login',
+    method: 'POST',
+    data: {
+      username: this.serverConfig.get('username'),
+      password: this.serverConfig.get('password')
+    },
+    timeout: 3000
+  });  
+};
+
+App.prototype.login = function(url) {
   var config;
 
   if (!(config = this.getServerConfig())) {
     throw new Error(`No server config is set. Please set one via setServerConfig().`);
   }
 
+  // todo ensure url
   return $.ajax({
-    url: config + '/login',
+    url: config.getServerBaseUrl() + '/login',
     method: 'POST',
     data: {
-      username: config.get('username'),
-      password: config.get('password')
+      username: this.serverConfig.get('username'),
+      password: this.serverConfig.get('password')
     },
     timeout: 3000
   });  

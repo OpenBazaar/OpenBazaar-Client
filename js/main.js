@@ -45,7 +45,6 @@ var Polyglot = require('node-polyglot'),
     $loadingModal = $('.js-loadingModal'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
-    serverConfigMd = app.serverConfig,
     heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
     startUpConnectMaxRetries = 2,
@@ -90,16 +89,16 @@ user.on('change:language', function(md, lang) {
 
 //keep user and profile urls synced with the server configuration
 (setServerUrl = function() {
-  var baseServerUrl = serverConfigMd.getServerBaseUrl();
+  var baseServerUrl = app.getServerConfig().getServerBaseUrl();
 
   user.urlRoot = baseServerUrl + "/settings";
   user.set('serverUrl', baseServerUrl + '/');
   userProfile.urlRoot = baseServerUrl + "/profile";
 })();
 
-serverConfigMd.on('sync', function(md) {
-  setServerUrl();
-});
+// serverConfigMd.on('sync', function(md) {
+//   setServerUrl();
+// });
 
 //put the event bus into the window so it's available everywhere
 window.obEventBus =  __.extend({}, Backbone.Events);
@@ -294,7 +293,7 @@ var loadProfile = function(landingRoute, onboarded) {
 
             //get user bitcoin price before loading pages
             setCurrentBitCoin(cCode, user, function() {
-              newSocketView = new socketView({model: serverConfigMd});
+              newSocketView = new socketView();
 
               newPageNavView = new pageNavView({
                 model: user,
@@ -368,7 +367,6 @@ launchOnboarding = function(guidCreating) {
   onboardingModal = new OnboardingModal({
     model: user,
     userProfile: userProfile,
-    serverConfig: serverConfigMd,
     guidCreationPromise: guidCreating
   });
   onboardingModal.render().open();
@@ -404,7 +402,12 @@ launchServerConnect = function() {
   //   }
   // }
 
-  new ServerConnectModal().render().open();
+  if (!window.moo) {
+    window.moo = new ServerConnectModal();
+    window.moo.render().open();  
+  } else {
+    window.moo.open();
+  }  
 };
 
 heartbeat.on('open', function(e) {
@@ -423,7 +426,8 @@ heartbeat.on('open', function(e) {
 heartbeat.on('close', function(e) {
   if (
     Date.now() - startTime < startUpConnectMaxTime &&
-    startUpConnectMaxRetries
+    startUpConnectMaxRetries &&
+    !profileLoaded
   ) {
     setTimeout(() => {
       startUpConnectMaxRetries--;
@@ -435,6 +439,8 @@ heartbeat.on('close', function(e) {
 });
 
 heartbeat.on('message', function(e) {
+  var serverConfig = app.getServerConfig();
+
   if (e.jsonData && e.jsonData.status) {
     switch (e.jsonData.status) {
       case 'generating GUID':
@@ -453,12 +459,12 @@ heartbeat.on('message', function(e) {
           password: e.jsonData.password
         };
 
-        if (app.serverConfig.isLocalServer()) {
+        if (serverConfig.isLocalServer()) {
           creds.local_username = e.jsonData.username;
           creds.local_password = e.jsonData.password;
         }
 
-        serverConfigMd.save(creds);
+        serverConfig.save(creds);
 
         app.login().done(function() {
           guidCreating.resolve();
@@ -471,7 +477,7 @@ heartbeat.on('message', function(e) {
 
           app.login().done(function(data) {
             if (data.success) {
-              $.getJSON(serverConfigMd.getServerBaseUrl() + '/profile')
+              $.getJSON(serverConfig.getServerBaseUrl() + '/profile')
                   .done(function(profile) {
                     if (__.isEmpty(profile)) {
                       launchOnboarding(guidCreating = $.Deferred().resolve().promise());

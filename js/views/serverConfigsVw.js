@@ -37,6 +37,25 @@ module.exports = BaseVw.extend({
     if (index > -1) this.configRowViews.splice(index, 1);
   },
 
+  setConnectionState: function(state) {
+    // 'state' should be in the form:
+    // { id: 31 (id of server config model), status: 'connecting' }
+
+    var index = -1;
+
+    __.every(this.configRowViews, (vw) => {
+      index++;
+      if (vw.id === state.id) return false;
+
+      return true;
+    });
+
+    if (index > -1) {
+      this.configRowViews[index]
+        .setState(__.omit(state, 'id'));
+    }
+  },
+
   remove: function() {
     BaseVw.prototype.remove.apply(this, arguments);
   },  
@@ -62,6 +81,14 @@ module.exports = BaseVw.extend({
 
         this.listenTo(vw, 'edit', (e) => {
           this.trigger('edit-config', { model: e.view.model });
+        });
+
+        this.listenTo(vw, 'connect', (e) => {
+          this.trigger('connect', { model: e.view.model });
+        });        
+
+        this.listenTo(vw, 'cancel', (e) => {
+          this.trigger('cancel', { model: e.view.model });
         });        
 
         $rows.append( vw.render().el );

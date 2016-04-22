@@ -42,15 +42,14 @@ module.exports = BaseModal.extend({
       }
     });
 
-    // this.serverConfigs = options.server.serverConfigs;
-    this.serverConfigs = options.server.serverConfigs;
-    this.serverConfigs.fetch();
-
+    this.serverConfigs = app.serverConfigs;
     this.serverConfigsVw = new ServerConfigsVw({
       collection: this.serverConfigs
     });
 
     this.listenTo(this.serverConfigsVw, 'edit-config', this.onEditConfig);
+    this.listenTo(this.serverConfigsVw, 'connect', this.onConnectClick);
+    this.listenTo(this.serverConfigsVw, 'cancel', this.onCancelClick);
   },
 
   remove: function() {
@@ -107,6 +106,121 @@ module.exports = BaseModal.extend({
   onEditConfig: function(e) {
     this.showConfigForm(e.model);
   },
+
+  onCancelClick: function(e) {
+    this.connectAttempt && this.connectAttempt.cancel();
+    console.log('you clicka cancel');
+  },  
+
+  onConnectClick: function(e) {
+    this.connect(e.model);
+  },
+
+  connect: function(configMd) {
+    var connect;
+
+    this.connectAttempt && this.connectAttempt.cancel();
+    app.setServerConfig(configMd.id);
+    this.serverConfigsVw.setConnectionState({
+      id: configMd.id,
+      status: 'connecting'
+    });
+
+    this.connectAttempt = this.attemptConnection().done(() => {
+      this.serverConfigsVw.setConnectionState({
+        id: configMd.id,
+        status: 'connected'
+      });
+    }).fail((reason) => {
+      console.log('i have failed my son');
+      this.serverConfigsVw.setConnectionState({
+        id: configMd.id,
+        status: reason === 'canceled' ? 'not-connected' : 'failed'
+      });      
+    }).always(() => {
+      this.connectAttempt = null;
+    });    
+  },
+
+  attemptConnection: function() {
+    var self = this,
+        deferred = $.Deferred(),
+        promise = deferred.promise(),
+        loginRequest,
+        timesup,
+        rejectLater,
+        rejectLogin,
+        rejectLoginLater,
+        login,
+        onClose;
+
+    rejectLogin = function(reason) {
+      rejectLoginLater = setTimeout(function() {
+        deferred.reject(reason);
+      }, 1000);
+    };
+
+    login = function() {
+      // check authentication
+      loginRequest = app.login().done(function(data) {
+        if (data.success) {
+          deferred.resolve();
+          self.trigger('connected', true);
+        } else {
+          if (data.reason === 'too many attempts') {
+            rejectLogin('failed-auth-too-many');  
+          } else {
+            rejectLogin('failed-auth');  
+          }
+
+          self.trigger('connected', false);
+        }
+      }).fail(function(jqxhr) {
+        if (jqxhr.statusText === 'abort') return;
+        
+        // assuming rest server is down or
+        // wrong port set
+        rejectLogin();
+      });
+    };
+
+    app.connectHeartbeatSocket();
+
+    promise.cleanup = function() {
+      clearTimeout(timesup);
+      clearTimeout(rejectLater);
+      clearTimeout(rejectLoginLater);
+      loginRequest && loginRequest.abort();
+      app.getHeartbeatSocket().off(null, login);
+      app.getHeartbeatSocket().off(null, onClose);
+    };
+
+    promise.cancel = function() {
+      deferred.reject('canceled');
+    };
+
+    promise.always(function() {
+      promise.cleanup();
+    });
+
+    app.getHeartbeatSocket().on('open', login);
+
+    app.getHeartbeatSocket().on('close', (onClose = function() {
+      // On local servers the close event on a down server is
+      // almost instantaneous and the UI can't even show the
+      // user we're attempting to connect. So we'll put up a bit
+      // of a facade.
+      rejectLater = setTimeout(function() {
+        deferred.reject();
+      }, 1000);
+    }));    
+
+    timesup = setTimeout(function() {
+      deferred.reject('timedout');
+    }, 10000);
+
+    return promise;
+  }, 
 
   renderServerConfigForm: function(md) {
     this.serverConfigFormVw && this.serverConfigFormVw.remove();

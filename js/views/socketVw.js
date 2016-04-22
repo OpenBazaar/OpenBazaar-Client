@@ -1,6 +1,7 @@
 var __ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
+    app = require('../App.js').getApp(),
     messageModal = require('../utils/messageModal.js');
 Backbone.$ = $;
 
@@ -13,7 +14,7 @@ module.exports = Backbone.View.extend({
   initialize: function(){
     "use strict";
     var self = this,
-        socketAddress = this.model.getApiSocketUrl();
+        socketAddress = app.getServerConfig().getApiSocketUrl();
 
     //socket should be opened when view is created, and stay open
     try{

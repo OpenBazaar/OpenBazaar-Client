@@ -113,7 +113,8 @@ module.exports = Backbone.Model.extend({
       }
     }    
 
-    if (!(remote.getGlobal('installerLaunched') && this.get('name') === 'default')) {
+    // if (!(remote.getGlobal('MOMOMOinstallerLaunched') && this.get('name') === 'default')) {
+    if (this.get('name') !== 'default') {
       if (!is.existy(attrs.username) || is.empty(attrs.username)) {
         this._addError(err, 'username', 'Please provide a value.');
       }
