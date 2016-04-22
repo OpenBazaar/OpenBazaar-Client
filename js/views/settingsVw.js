@@ -811,23 +811,35 @@ module.exports = Backbone.View.extend({
         form = this.$el.find("#storeForm"),
         settingsData = {},
         moderatorsNew = this.$el.find('#storeForm .js-settingsNewMods .js-userShortView input:checked'),
-        moderatorList = this.userModel.get('moderators').map(function(moderatorObject){
-          return moderatorObject.guid;
-        }),
+        moderatorList = this.userModel.get('moderator_guids'),
+        manualModList,
         moderatorsUnChecked = this.$('#storeForm .js-settingsCurrentMods .js-userShortView input:not(:checked)'),
         onFail,
         $saveBtn = this.$('.js-saveStore');
 
     $saveBtn.addClass('loading');
 
+    console.log(moderatorList)
+
     //first, remove any existing moderators that have been unchecked. This prevents removing saved moderators that don't show up in the UI for some reason
     moderatorsUnChecked.each(function() {
       moderatorList = __.without(moderatorList, ($(this).data('guid')));
     });
 
+    console.log(moderatorList)
+
     //add any new moderators that have been checked
     moderatorsNew.each(function() {
       moderatorList.push($(this).data('guid'));
+    });
+    
+    //add any manually entered mods
+    manualModList = this.$('#addManualMods').val().split(',');
+    console.log(manualModList);
+    __.each(manualModList, function(mod){
+      if(mod.length === 40){
+        moderatorList.push(mod);
+      }
     });
 
     settingsData.moderators = moderatorList.length > 0 ? moderatorList : "";
@@ -837,6 +849,8 @@ module.exports = Backbone.View.extend({
       self.scrollToFirstError(self.$('#storeForm'));
       messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
     };
+
+    return;
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings",

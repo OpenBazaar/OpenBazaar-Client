@@ -756,6 +756,26 @@
               </div>
             </div>
 
+            <div class="flexRow">
+              <div class="flexCol-3  borderRight custCol-border zIndex1"><!-- add z-index so help box overlaps next column-->
+                <div class="fieldItem">
+                  <label for="addManualMods" class="tooltip tooltip-box" data-tooltip="<%= polyglot.t('ManualAddModeratorHelp') %>">
+                    <%= polyglot.t('ManualAddModerator') %> <i class="ion-help-circled"></i>
+                  </label>
+
+                </div>
+              </div>
+
+              <div class="flexCol-9 borderRight0 custCol-border">
+                <div class="fieldItem padding0">
+                  <input name="manualMods"
+                         type="text"
+                         id="addManualMods"
+                         class="fieldItem">
+                </div>
+              </div>
+            </div>
+
             <div class="flexRow TODO">
               <div class="flexCol-3  borderRight custCol-border">
                 <div class="fieldItem">
@@ -768,6 +788,7 @@
               <div class="flexCol-9 borderRight0 custCol-border">
                 <div class="fieldItem padding0">
                   <!--TODO: keywords input here -->
+                  <input id="store-keywords">
                 </div>
               </div>
             </div>
