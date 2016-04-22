@@ -182,7 +182,6 @@ module.exports = baseVw.extend({
     this.pageID = options.userID;
     //set view's userID from the userModel;
     this.userID = options.userModel.get('guid');
-    this.globalUserModel = options.userModel;
     this.userProfileFetchParameters = {};
     this.itemFetchParameters = {};
     this.model = new Backbone.Model();
@@ -261,15 +260,15 @@ module.exports = baseVw.extend({
       if (e.guid === this.model.get('page').profile.guid) {
         this.renderUserUnblocked();
       }
-    });  
-    
+    });
+
     this.listenTo(window.obEventBus, 'saveCurrentForm', function(){
       if (self.editing) {
         self.saveItem();
       } else if (self.customizing) {
         self.saveCustomizePage();
       }
-    });   
+    });
 
     //determine if this is the user's own page or another profile's page
     //if no userID is passed in, or it matches the user's ID, then this is their page
@@ -358,7 +357,7 @@ module.exports = baseVw.extend({
         isBlocked = blocked.indexOf(this.pageID) !== -1;
 
     this.model.set('isBlocked', isBlocked); //add blocked status to model
-    
+
     //make sure container is cleared
     $('#content').html(this.$el);
 
@@ -722,7 +721,7 @@ module.exports = baseVw.extend({
 
   renderItems: function (model, skipNSFWmodal) {
     "use strict";
-    
+
     var self = this;
     var select = this.$el.find('.js-categories');
     var selectOptions = [];
@@ -753,14 +752,14 @@ module.exports = baseVw.extend({
         arrayItem.imageURL = self.options.userModel.get('serverUrl')+"get_image?hash="+arrayItem.thumbnail_hash+"&guid="+self.pageID;
       }
     });
-    
+
     Object.keys(selectOptions).sort().forEach(function(selectOption) {
       var opt = document.createElement('option');
       opt.value = selectOption;
       opt.innerHTML = selectOption;
       select.append(opt);
     });
-    
+
     this.itemList = new itemListView({
       model: model,
       el: '.js-list3',
@@ -919,7 +918,7 @@ module.exports = baseVw.extend({
   renderItemEdit: function(useCurrentItem, clone){
     var self = this,
         hash = "";
-        
+
     if(useCurrentItem) {
       //if editing existing product, clone the model
       this.itemEdit = this.item.clone();
@@ -947,7 +946,7 @@ module.exports = baseVw.extend({
     this.registerChild(this.itemEditView);
     this.listenTo(this.itemEditView, 'saveNewDone', this.saveNewDone);
     self.tabClick(self.$el.find('.js-storeTab'), self.$el.find('.js-itemEdit'));
-    
+
     this.editing = true;
   },
 
@@ -1265,7 +1264,7 @@ module.exports = baseVw.extend({
       self.saveUserPageModel();
     }
   },
-  
+
   saveCustomizePageClick: function() {
     this.saveCustomizePage();
   },
@@ -1338,16 +1337,16 @@ module.exports = baseVw.extend({
 
   saveNewDone: function(newHash) {
     "use strict";
-    
+
     this.setState('listing', newHash);
     this.fetchListings();
-    
+
     this.editing = false;
   },
 
   cancelClick: function(){
     "use strict";
-  
+
     this.setState(this.lastTab);
     $('#obContainer').animate({ scrollTop: 0 });
 
@@ -1404,7 +1403,7 @@ module.exports = baseVw.extend({
       });
     }
   },
-  
+
   saveItemClick: function() {
     this.saveItem();
   },
@@ -1414,7 +1413,7 @@ module.exports = baseVw.extend({
       var $saveBtn = $('.js-saveItem');
 
       $saveBtn.addClass('loading');
-      
+
       this.itemEditView.saveChanges().always(() => $saveBtn.removeClass('loading'))
       .fail(() => {
         var $firstErr = this.$('.js-itemEdit .invalid, .js-itemEdit :invalid').not('form').eq(0);
@@ -1508,10 +1507,10 @@ module.exports = baseVw.extend({
       modList.moderators = [];
 
       __.each(this.model.get('user').moderators, function(mod) {
-        if(mod != guid && (typeof(mod) !== 'object' || mod.guid != this.pageID)) {
+        if(mod != self.pageID && (typeof(mod) !== 'object' || mod.guid != self.pageID)) {
           modList.moderators.push(mod);
         }
-      })
+      });
 
       saveToAPI('', this.model.get('user'), this.model.get('user').serverUrl + "settings",
         function(){
