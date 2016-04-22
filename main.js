@@ -441,7 +441,7 @@ app.on('ready', function() {
 
     if(subpy) {
       if(platform == "mac" || platform == "linux") {
-        subpy.kill('SIGHUP');
+        subpy.kill('SIGINT');
       } else {
         require('child_process').spawn("taskkill", ["/pid", subpy.pid, '/f', '/t']);
       }
