@@ -108,7 +108,7 @@ var start_local_server = function() {
 
     var random_port = Math.floor((Math.random() * 10000) + 30000);
 
-    subpy = require('child_process').spawn(serverPath + daemon, ['start', '--loglevel', 'debug', '-p', random_port, '-t'], {
+    subpy = require('child_process').spawn(serverPath + daemon, ['start', '--loglevel', 'debug', '-p', random_port], {
       detach: false,
       cwd: __dirname + path.sep + '..' + path.sep + 'OpenBazaar-Server'
     });
