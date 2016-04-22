@@ -32,10 +32,11 @@
     "safestart": "0.8.0",
     "sanitize-html": "^1.11.2",
     "taggle": "1.6.1",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "winreg": "^1.1.1"
   },
   "devDependencies": {
-    "electron-prebuilt": "0.36.2",
+    "electron-prebuilt": "0.37.7",
     "eslint": "1.9.0",
     "pre-commit": "^1.1.2",
     "valiquire": "0.3.0"
