@@ -1,4 +1,5 @@
-var ServerConfigsCl = require('../collections/serverConfigsCl');
+var Socket = require('./utils/Socket'),
+    ServerConfigsCl = require('../collections/serverConfigsCl');
 
 function Server() {
   // ensure we're a singleton
@@ -16,6 +17,24 @@ Server.prototype.getConfig = function() {
   }
 
   return this.serverConfigs.get(localStorage.activeServer);
+}
+
+Server.prototype.connect = function(configMd, options) {
+  if (!configMd && !this._config) {
+    throw new Error('Since I have no stored config, please provide a configMd');
+  }
+
+  if (configMd) this._config = configMd;
+
+  if (this._heartbeatSocket) {
+    this._heartbeatSocket.connect(this._config.getHeartbeatSocketUrl());
+  } else {
+    this._heartbeatSocket = new Socket(this.serverConfig.getHeartbeatSocketUrl());
+
+    this._heartbeatSocket.on('close', function() {
+      clearTimeout(self._heartbeatSocketTimesup);
+    });
+  }
 }
 
 // Server.getServer = function() {

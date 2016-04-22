@@ -2,14 +2,9 @@ var __ = require('underscore'),
     Backbone = require('backbone');
 
 function Socket(url) {
-  if (!url) {
-    throw new Error('Please provide an url.');
-  }
-
   __.extend(this, Backbone.Events);
   
   this.url = url;
-  this.connect();
 }
 
 Socket.prototype.connect = function(url) {

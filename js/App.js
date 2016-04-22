@@ -2,7 +2,8 @@ var ipcRenderer = require('ipc-renderer'),
     Socket = require('./utils/Socket'),
     $ = require('jquery'),
     // ServerConfigMd = require('./models/serverConfigMd'),
-    ServerConnection = require('./ServerConnection'),
+    // ServerConnection = require('./ServerConnection'),
+    ServerConfigsCl = require('../collections/serverConfigsCl'),
     ServerConnectModal = require('./views/ServerConnectModal'),
     _app;
 
@@ -30,51 +31,135 @@ function App() {
 
   // this.connectHeartbeatSocket();
 
-  this.server = new Server();
-  this.serverConnectModal = new ServerConnectModal({ server: this.server });
+  // this.server = new Server();
+  // this.serverConnectModal = new ServerConnectModal({ server: this.server });
 
-  if (this.server.getConfig()) {
-    this.server.connect(this.server.getConfig());
-  } else {
-    if (remote.getGlobal('installerLaunched')) {
-      this.server.connect(
-        this.serverConfigs.create()
-      );
-    } else {
+  // if (this.server.getConfig()) {
+  //   this.server.connect(this.server.getConfig());
+  // } else {
+  //   if (remote.getGlobal('installerLaunched')) {
+  //     this.server.connect(
+  //       this.serverConfigs.create()
+  //     );
+  //   } else {
 
-    }
-  }
+  //   }
+  // }
+  this._heartbeatSocket = new Socket();
+
+  this.serverConfigs = new ServerConfigsCl();
+  this.serverConfigs.fetch();
 }
 
-App.prototype.connectHeartbeatSocket = function() {
-  var self = this;
+App.prototype.getServerConfig = function() {
+  var config = this.serverConfigs.get(localStorage.activeServer);
 
-  clearTimeout(this.heartbeatSocketTimesup);
-
-  if (this._heartbeatSocket) {
-    this._heartbeatSocket.connect(this.serverConfig.getHeartbeatSocketUrl());
-  } else {
-    this._heartbeatSocket = new Socket(this.serverConfig.getHeartbeatSocketUrl());
-
-    this._heartbeatSocket.on('close', function() {
-      clearTimeout(self._heartbeatSocketTimesup);
-    });
+  if ((!localStorage.activeServer !! !config) && this.serverConfigs.length) {
+    localStorage.activeServer = this.serverConfigs.at(this.serverConfigs.length - 1).id;
   }
 
-  // give up if it takes to long
-  this._heartbeatSocketTimesup = setTimeout(function() {
-    if (self._heartbeatSocket.getReadyState() !== 1) {
-      //self._heartbeatSocket._socket.close(); //turn off for now, until server issues are fixed
-      alert(polyglot.t('errorMessages.serverTimeout'));
-    }
-  }, 30000); //wait for 30 seconds, sometimes the server stalls
+  return config;  
+};
+
+App.prototype.setServerConfig = function(id) {
+  if (!this.serverConfigs.get(id)) {
+    throw new Error(`Unable to set the server config. It must be an id of one of the available
+        server configs stored via the ServerConfigs collection.`)
+  }
+
+  localStorage.activeServer = id;
+};
+
+App.prototype.connectHeartbeatSocket = function() {
+  var config;
+
+  if (!(config = this.getServerConfig())) {
+    throw new Error(`No server config is set. Please set one via setServerConfig().`);
+  }
+
+  this._heartbeatSocket.connect(config.getHeartbeatSocketUrl());
 };
 
 App.prototype.getHeartbeatSocket = function() {
   return this._heartbeatSocket;
 };
 
-App.prototype.login = function() {
+App.prototype.connect: function() {
+  var self = this,
+      deferred = $.Deferred(),
+      promise = deferred.promise(),
+      loginRequest,
+      login,
+      onClose,
+      config;
+
+  if (!(config = this.getServerConfig())) {
+    throw new Error(`No server config is set. Please set one via setServerConfig().`);
+  }
+
+  login = function() {
+    // check authentication
+    loginRequest = this.login().done(function(data) {
+      if (data.success) {
+        deferred.resolve();
+        // self.trigger('connected', true);
+      } else {
+        if (data.reason === 'too many attempts') {
+          deferred.reject('failed-auth-too-many');  
+        } else {
+          deferred.reject('failed-auth');  
+        }
+
+        // self.trigger('connected', false);
+      }
+    }).fail(function(jqxhr) {
+      if (jqxhr.statusText === 'abort') return;
+      
+      // assuming rest server is down or
+      // wrong port set
+      deferred.reject();
+    });
+  };
+
+  app.connectHeartbeatSocket(config.getHeartbeatSocketUrl());
+
+  promise.cleanup = function() {
+    loginRequest && loginRequest.abort();
+    app.getHeartbeatSocket().off(null, login);
+    app.getHeartbeatSocket().off(null, onClose);
+  };
+
+  promise.cancel = function() {
+    deferred.reject('canceled');
+  };
+
+  promise.always(function() {
+    promise.cleanup();
+  });
+
+  app.getHeartbeatSocket().on('open', login);
+
+  app.getHeartbeatSocket().on('close', (onClose = function() {
+    deferred.reject();
+  }));    
+
+  return promise;
+};
+
+App.prototype.loginOLD = function() {
+  return $.ajax({
+    url: this.serverConfig.getServerBaseUrl() + '/login',
+    method: 'POST',
+    data: {
+      username: this.serverConfig.get('username'),
+      password: this.serverConfig.get('password')
+    },
+    timeout: 3000
+  });  
+};
+
+App.prototype.login = function(url) {
+  // todo ensure url
   return $.ajax({
     url: this.serverConfig.getServerBaseUrl() + '/login',
     method: 'POST',
