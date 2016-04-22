@@ -1474,7 +1474,7 @@ module.exports = baseVw.extend({
 
     $targ.addClass('loading');
 
-    modList.moderators = this.model.get('user').moderators;
+    modList.moderators = this.model.get('user').moderator_guids;
     modList.moderators.push(this.pageID);
 
     saveToAPI('', this.model.get('user'), this.model.get('user').serverUrl + "settings",
@@ -1504,7 +1504,7 @@ module.exports = baseVw.extend({
 
       modList.moderators = [];
 
-      __.each(this.model.get('user').moderators, function(mod) {
+      __.each(this.model.get('user').moderator_guids, function(mod) {
         if(mod != self.pageID && (typeof(mod) !== 'object' || mod.guid != self.pageID)) {
           modList.moderators.push(mod);
         }
