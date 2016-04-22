@@ -1468,13 +1468,12 @@ module.exports = baseVw.extend({
   },
 
   addModeratorClick: function(e){
-    var $targ = $(e.target).closest('.js-addmoderator');
+    var $targ = $(e.target).closest('.js-addmoderator'),
+        self = this,
+        modList = {};
 
     $targ.addClass('loading');
 
-    var self = this;
-
-    var modList = {};
     modList.moderators = this.model.get('user').moderators;
     modList.moderators.push(this.pageID);
 
@@ -1496,14 +1495,13 @@ module.exports = baseVw.extend({
   },
 
   removeModeratorClick: function(e){
-    var $targ = $(e.target).closest('.js-removemoderator');
+    var $targ = $(e.target).closest('.js-removemoderator'),
+        self = this,
+        modList = {};
 
     if($targ.hasClass('confirm')){
       $targ.addClass('loading').removeClass('confirm');
 
-      var self = this;
-
-      var modList = {};
       modList.moderators = [];
 
       __.each(this.model.get('user').moderators, function(mod) {
