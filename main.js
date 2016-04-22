@@ -237,7 +237,7 @@ var iShouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory)
     uri = commandLine[1];
     openURL(uri);
   }
-  mainWindow.webContents.executeJavaScript("console.log("+uri+")");
+
   if (mainWindow) {
     if (mainWindow.isMinimized()) mainWindow.restore();
     mainWindow.show();
