@@ -503,9 +503,21 @@ module.exports = Backbone.View.extend({
         //don't add unless it comes from the model
         if(moderator.fromModel){
           this.$el.find('.js-settingsCurrentMods').append(modShort.el);
+          if(!this.$('.js-loadingMsgOld').hasClass('foldIn')){
+            //hide spinners after a while
+            setTimeout(()=> {
+              this.$('.js-loadingMsgOld').addClass('foldIn');
+            },2000);
+          }
         }
       }else{
         this.$el.find('.js-settingsNewMods').append(modShort.el);
+        if(!this.$('.js-loadingMsgNew').hasClass('foldIn')){
+          //hide spinners after a while
+          setTimeout(()=> {
+            this.$('.js-loadingMsgNew').addClass('foldIn');
+          },2000);
+        }
       }
       this.moderatorCount++;
       this.subViews.push(modShort);
@@ -557,10 +569,6 @@ module.exports = Backbone.View.extend({
             }
           });
         }
-        //hide spinners after a while
-        setTimeout(()=> {
-          this.$('.js-loadingMsg').addClass('foldIn');
-        },3000);
         this.firstLoadModerators = false;
       } else if (state === 'blocked') {
         // Since the Blocked Users View kicks off many server calls (one
@@ -819,23 +827,18 @@ module.exports = Backbone.View.extend({
 
     $saveBtn.addClass('loading');
 
-    console.log(moderatorList)
-
     //first, remove any existing moderators that have been unchecked. This prevents removing saved moderators that don't show up in the UI for some reason
     moderatorsUnChecked.each(function() {
       moderatorList = __.without(moderatorList, ($(this).data('guid')));
     });
 
-    console.log(moderatorList)
-
     //add any new moderators that have been checked
     moderatorsNew.each(function() {
       moderatorList.push($(this).data('guid'));
     });
-    
+
     //add any manually entered mods
     manualModList = this.$('#addManualMods').val().split(',');
-    console.log(manualModList);
     __.each(manualModList, function(mod){
       if(mod.length === 40){
         moderatorList.push(mod);
@@ -849,8 +852,6 @@ module.exports = Backbone.View.extend({
       self.scrollToFirstError(self.$('#storeForm'));
       messageModal.show(window.polyglot.t('errorMessages.saveError'), data.reason);
     };
-
-    return;
 
     saveToAPI(form, "", self.serverUrl + "profile", function() {
       saveToAPI(form, self.userModel.toJSON(), self.serverUrl + "settings",
