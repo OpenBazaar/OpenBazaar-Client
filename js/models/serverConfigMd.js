@@ -113,13 +113,15 @@ module.exports = Backbone.Model.extend({
       }
     }    
 
-    if (!is.existy(attrs.username) || is.empty(attrs.username)) {
-      this._addError(err, 'username', 'Please provide a value.');
-    }
+    if (!(remote.getGlobal('installerLaunched') && this.get('name') === 'default')) {
+      if (!is.existy(attrs.username) || is.empty(attrs.username)) {
+        this._addError(err, 'username', 'Please provide a value.');
+      }
 
-    if (!is.existy(attrs.password) || is.empty(attrs.password)) {
-      this._addError(err, 'password', 'Please provide a value.');
-    }    
+      if (!is.existy(attrs.password) || is.empty(attrs.password)) {
+        this._addError(err, 'password', 'Please provide a value.');
+      }
+    }
 
     return Object.keys(err).length && err || undefined;
   },

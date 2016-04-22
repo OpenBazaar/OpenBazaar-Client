@@ -1,11 +1,13 @@
 var ipcRenderer = require('ipc-renderer'),
     Socket = require('./utils/Socket'),
     $ = require('jquery'),
-    ServerConfigMd = require('./models/serverConfigMd'),
+    // ServerConfigMd = require('./models/serverConfigMd'),
+    ServerConnection = require('./ServerConnection'),
+    ServerConnectModal = require('./views/ServerConnectModal'),
     _app;
 
 function App() {
-  var self = this;
+  var activeServerConfig;
 
   // ensure we're a singleton
   if (_app) return _app;
@@ -19,14 +21,29 @@ function App() {
   // to manually provide the data to the model. All that should be needed
   // is an ID and then a subsequent fetch, but that doesn't return the data.
   // Investigate!
-  this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
+  // this.serverConfig = new ServerConfigMd( JSON.parse(localStorage['_serverConfig-1'] || '{}') );
 
   // serverConfigMd.fetch();
-  if (!localStorage['_serverConfig-1']) {
-    this.serverConfig.save();
-  }  
+  // if (!localStorage['_serverConfig-1']) {
+  //   this.serverConfig.save();
+  // }  
 
-  this.connectHeartbeatSocket();
+  // this.connectHeartbeatSocket();
+
+  this.server = new Server();
+  this.serverConnectModal = new ServerConnectModal({ server: this.server });
+
+  if (this.server.getConfig()) {
+    this.server.connect(this.server.getConfig());
+  } else {
+    if (remote.getGlobal('installerLaunched')) {
+      this.server.connect(
+        this.serverConfigs.create()
+      );
+    } else {
+
+    }
+  }
 }
 
 App.prototype.connectHeartbeatSocket = function() {
@@ -144,7 +161,4 @@ App.getApp = function() {
   return _app;
 };
 
-
 module.exports = App;
-
-

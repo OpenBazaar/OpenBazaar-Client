@@ -30,6 +30,10 @@ module.exports = BaseModal.extend({
   initialize: function(options) {
     this.options = options || {};
 
+    if (!options.server) {
+      throw new Error('Please provide a server option referencing a Server instance.');
+    }
+
     this.headerVw = new ServerConnectHeaderVw({
       initialState: {
         msg: 'Your Server Configurations',
@@ -38,7 +42,7 @@ module.exports = BaseModal.extend({
       }
     });
 
-    this.serverConfigs = new ServerConfigsCl();
+    this.serverConfigs = options.server.serverConfigs;
     this.serverConfigs.fetch();
 
     this.serverConfigsVw = new ServerConfigsVw({
