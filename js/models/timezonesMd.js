@@ -88,7 +88,7 @@ module.exports = Backbone.Model.extend({
             "offset": 5
         },
         {
-            "name":"(GMT +5:30) Bombay, Calcutta, Madras, New Delhi",
+            "name":"(GMT +5:30) Mumbai, Kolkata, Chennai, New Delhi",
             "offset": 5.5
         },
         {
