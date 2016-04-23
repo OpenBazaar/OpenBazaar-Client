@@ -14,18 +14,34 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     "use strict";
-    var currentShippingPrice = 0,
+    var recipient = this.model.get('page').profile.handle || this.model.get('page').profile.guid;
+
+    this.model.set('recipient', recipient);
+
+    this.listenTo(this.model, 'change:selectedModerator change:selectedAddress', this.render);
+    this.render();
+  },
+
+  render: function(){
+    var self = this,
+        currentShippingPrice = 0,
         currentShippingBTCPrice = 0,
-        recipient = this.model.get('page').profile.handle || this.model.get('page').profile.guid;
-    if(this.model.get('vendor_offer').listing.shipping.free !== true) {
-      if(this.model.get('userCountry') != this.model.get('vendor_offer').listing.shipping.shipping_origin) {
+        shippingType = "",
+        templJSON = {};
+    console.log(this.model)
+
+    //set prices before each render
+    if(this.model.get('vendor_offer').listing.shipping.free !== true && this.model.get('selectedAddress')) {
+      if(this.model.get('selectedAddress').country != this.model.get('vendor_offer').listing.shipping.shipping_origin) {
         currentShippingPrice = this.model.get('internationalShipping');
         currentShippingBTCPrice = this.model.get('internationalShippingBTC');
         this.model.set('shippingType', 'international');
+        shippingType = 'international';
       } else {
         currentShippingPrice = this.model.get('domesticShipping');
         currentShippingBTCPrice = this.model.get('domesticShippingBTC');
         this.model.set('shippingType', 'domestic');
+        shippingType = 'domestic';
       }
     }
 
@@ -39,14 +55,6 @@ module.exports = Backbone.View.extend({
       currency: this.model.get('userCurrencyCode')
     }).format(currentShippingPrice));
 
-    this.model.set('recipient', recipient);
-
-    this.listenTo(this.model, 'change:selectedModerator change:selectedAddress', this.render);
-    this.render();
-  },
-
-  render: function(){
-    var self = this;
     loadTemplate('./js/templates/buyDetails.html', function(loadedTemplate) {
       self.$el.html(loadedTemplate(self.model.toJSON()));
       //this does not add it to the DOM, that is done by the parent view
