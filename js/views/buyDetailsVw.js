@@ -17,17 +17,6 @@ module.exports = Backbone.View.extend({
     var currentShippingPrice = 0,
         currentShippingBTCPrice = 0,
         recipient = this.model.get('page').profile.handle || this.model.get('page').profile.guid;
-    if(this.model.get('vendor_offer').listing.shipping.free !== true) {
-      if(this.model.get('userCountry') != this.model.get('vendor_offer').listing.shipping.shipping_origin) {
-        currentShippingPrice = this.model.get('internationalShipping');
-        currentShippingBTCPrice = this.model.get('internationalShippingBTC');
-        this.model.set('shippingType', 'international');
-      } else {
-        currentShippingPrice = this.model.get('domesticShipping');
-        currentShippingBTCPrice = this.model.get('domesticShippingBTC');
-        this.model.set('shippingType', 'domestic');
-      }
-    }
 
     this.model.set('currentShippingPrice', currentShippingPrice);
     this.model.set('currentShippingBTCPrice', currentShippingBTCPrice);
@@ -41,16 +30,47 @@ module.exports = Backbone.View.extend({
 
     this.model.set('recipient', recipient);
 
-    this.listenTo(this.model, 'change:selectedModerator change:selectedAddress', this.render);
+    this.listenTo(this.model, 'change:selectedModerator change:selectedAddress', function(){
+      this.render();
+    });
+
     this.render();
   },
+
 
   render: function(){
     var self = this;
     loadTemplate('./js/templates/buyDetails.html', function(loadedTemplate) {
+      var currentShippingPrice = 0,
+          currentShippingBTCPrice = 0,
+          shipToCountry = self.model.get('selectedAddress') ? self.model.get('selectedAddress').country : "";
+
+      if(shipToCountry && self.model.get('vendor_offer').listing.shipping.free !== true) {
+        if(shipToCountry != self.model.get('vendor_offer').listing.shipping.shipping_origin) {
+          currentShippingPrice = self.model.get('internationalShipping');
+          currentShippingBTCPrice = self.model.get('internationalShippingBTC');
+          self.model.set('shippingType', 'international');
+        } else {
+          currentShippingPrice = self.model.get('domesticShipping');
+          currentShippingBTCPrice = self.model.get('domesticShippingBTC');
+          self.model.set('shippingType', 'domestic');
+        }
+      }
+      self.model.set('currentShippingPrice', currentShippingPrice);
+      self.model.set('currentShippingBTCPrice', currentShippingBTCPrice);
+
+      self.model.set('currentShippingDisplayPrice', new Intl.NumberFormat(window.lang, {
+        style: 'currency',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        currency: this.model.get('userCurrencyCode')
+      }).format(currentShippingPrice));
+
       self.$el.html(loadedTemplate(self.model.toJSON()));
+
       //this does not add it to the DOM, that is done by the parent view
       self.setQuantity(1);
+
       numberSpinners(self.$el);
     });
     return this;
@@ -63,6 +83,7 @@ module.exports = Backbone.View.extend({
 
   setQuantity: function(quantity){
     "use strict";
+    console.log(this.model.get('currentShippingBTCPrice'))
     var self = this,
         newAttributes = {},
         userCurrency = this.model.get('userCurrencyCode'),
