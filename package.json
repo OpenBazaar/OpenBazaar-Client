@@ -39,11 +39,10 @@
     "sortablejs": "^1.4.2",
     "taggle": "1.6.1",
     "underscore": "1.8.3",
-    "yargs": "^4.1.0",
-    "winreg": "^1.1.1"
+    "yargs": "^4.1.0"
   },
   "devDependencies": {
-    "electron-prebuilt": "0.37.7",
+    "electron-prebuilt": "0.37.5",
     "eslint": "1.9.0",
     "pre-commit": "^1.1.2",
     "valiquire": "0.3.0"
