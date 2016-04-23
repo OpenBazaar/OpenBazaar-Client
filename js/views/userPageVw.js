@@ -1483,9 +1483,7 @@ module.exports = baseVw.extend({
         self.options.userModel.fetch({
           success: function(model, response) {
             if (self.isRemoved()) return;
-            var user = self.model.get('user');
-            user.moderators = model.get('moderators');
-            user.moderator_guids = model.get('moderator_guids');
+            self.model.set('user', model.toJSON());
             self.getIsModerator();
           }
         });
@@ -1502,13 +1500,7 @@ module.exports = baseVw.extend({
     if($targ.hasClass('confirm')){
       $targ.addClass('loading').removeClass('confirm');
 
-      modList.moderators = [];
-
-      __.each(this.model.get('user').moderator_guids, function(mod) {
-        if(mod != self.pageID && (typeof(mod) !== 'object' || mod.guid != self.pageID)) {
-          modList.moderators.push(mod);
-        }
-      });
+      modList.moderators = __.without(this.model.get('user').moderator_guids, self.pageID);
 
       saveToAPI('', this.model.get('user'), this.model.get('user').serverUrl + "settings",
         function(){
@@ -1516,9 +1508,7 @@ module.exports = baseVw.extend({
           self.options.userModel.fetch({
             success: function(model, response) {
               if (self.isRemoved()) return;
-              var user = self.model.get('user');
-              user.moderators = model.get('moderators');
-              user.moderator_guids = model.get('moderator_guids');
+              self.model.set('user', model.toJSON());
               self.getIsModerator();
             }
           });
