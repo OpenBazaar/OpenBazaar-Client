@@ -154,6 +154,99 @@ if(fs.existsSync(__dirname + path.sep + ".." + path.sep + "OpenBazaar-Server" + 
 // be closed automatically when the JavaScript object is GCed.
 var mainWindow = null;
 
+if (process.platform === "win32") {
+  initWin32();
+}
+
+function initWin32() {
+  var Registry = require('winreg');
+
+  var iconPath = path.join(process.env.LOCALAPPDATA, "app.ico");
+  registerProtocolHandlerWin32('ob', 'URL:OpenBazaar URL', iconPath, process.execPath);
+
+  /**
+   * To add a protocol handler, the following keys must be added to the Windows registry:
+   *
+   * HKEY_CLASSES_ROOT
+   *   $PROTOCOL
+   *     (Default) = "$NAME"
+   *     URL Protocol = ""
+   *     DefaultIcon
+   *       (Default) = "$ICON"
+   *     shell
+   *       open
+   *         command
+   *           (Default) = "$COMMAND" "%1"
+   *
+   * Source: https://msdn.microsoft.com/en-us/library/aa767914.aspx
+   *
+   * However, the "HKEY_CLASSES_ROOT" key can only be written by the Administrator user.
+   * So, we instead write to "HKEY_CURRENT_USER\Software\Classes", which is inherited by
+   * "HKEY_CLASSES_ROOT" anyway, and can be written by unprivileged users.
+   */
+
+  function registerProtocolHandlerWin32 (protocol, name, icon, command) {
+    var protocolKey = new Registry({
+      hive: Registry.HKCU, // HKEY_CURRENT_USER
+      key: '\\Software\\Classes\\' + protocol
+    })    
+
+    setProtocol()
+
+    function setProtocol (err) {
+      if (err) log.error(err.message)
+      console.log(protocolKey);
+      protocolKey.set('', Registry.REG_SZ, name, setURLProtocol)
+    }
+
+    function setURLProtocol (err) {
+      if (err) log.error(err.message)
+      console.log(protocolKey);
+      protocolKey.set('URL Protocol', Registry.REG_SZ, '', setIcon)
+    }
+
+    function setIcon (err) {
+      if (err) log.error(err.message)
+
+      var iconKey = new Registry({
+        hive: Registry.HKCU,
+        key: '\\Software\\Classes\\' + protocol + '\\DefaultIcon'
+      })
+      iconKey.set('', Registry.REG_SZ, icon, setCommand)
+    }
+
+    function setCommand (err) {
+      if (err) log.error(err.message)
+
+      var commandKey = new Registry({
+        hive: Registry.HKCU,
+        key: '\\Software\\Classes\\' + protocol + '\\shell\\open\\command'
+      })
+      commandKey.set('', Registry.REG_SZ, '"' + command + '" "%1"', done)
+    }
+
+    function done (err) {
+      if (err) log.error(err.message)
+    }
+  }
+}
+
+var iShouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory) {
+  var uri = "";
+  if (commandLine.length == 2) {
+    uri = commandLine[1];
+    openURL(uri);
+  }
+
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.show();
+    mainWindow.focus();
+  }
+  return true;       
+});
+if(iShouldQuit){app.quit();return;}
+
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
@@ -398,7 +491,7 @@ ipcMain.on('set-badge', function(event, text) {
     app.dock.setBadge(String(text));
 });
 
-app.on('open-url', function(event, uri) {
+function openURL(uri) {
   var split_uri = uri.split('://');
   uri = split_uri[1];
 
@@ -410,5 +503,9 @@ app.on('open-url', function(event, uri) {
     mainWindow.webContents.send('external-route', uri);
   }  
 
+}
+
+app.on('open-url', function(event, uri) {
+  openURL(uri);
   event.preventDefault();
 });
