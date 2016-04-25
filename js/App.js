@@ -1,6 +1,10 @@
 var ipcRenderer = require('ipc-renderer'),
-    Socket = require('./utils/Socket'),
+    Polyglot = require('node-polyglot'),
+    __ = require('underscore'),
     $ = require('jquery'),
+    Socket = require('./utils/Socket'),
+    LanguagesMd = require('./models/languagesMd'),
+    languages = new LanguagesMd(),
     ServerConfigsCl = require('./collections/serverConfigsCl'),
     _app;
 
@@ -16,18 +20,40 @@ function App() {
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
 
+  this.initLang();
+
   this.serverConfigs = new ServerConfigsCl();
   this.serverConfigs.fetch();
 
   if (!(serverConfig = this.getServerConfig())) {
     this.setServerConfig(
-      this.serverConfigs.create({ name: 'default' }).id
+      this.serverConfigs.create({
+        name: polyglot.t('serverConnectModal.defaultServerName'),
+        default: true
+      }).id
     );
   }
 
-  console.log(localStorage._serverConfig);
   this.connectHeartbeatSocket();
 }
+
+App.prototype.initLang = function() {
+  //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
+  //retrieve the stored value, since user is a blank model at this point
+  window.lang = localStorage.getItem('lang') || "en-US";
+
+  //put polyglot in the window so all templates can reach it
+  window.polyglot = new Polyglot({locale: window.lang});
+
+  (extendPolyglot = function(lang) {
+    // Make sure the language exists in the languages model
+    if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
+      var language = require('./languages/' + window.lang + '.json');
+
+      window.polyglot.extend(language);
+    }
+  })(window.lang);
+};
 
 App.prototype.getServerConfig = function() {
   var config = this.serverConfigs.get(localStorage.activeServer);
@@ -56,11 +82,25 @@ App.prototype.connectHeartbeatSocket = function() {
     throw new Error(`No server config is set. Please set one via setServerConfig().`);
   }
 
+  clearTimeout(this.heartbeatSocketTimesup);
+
   if (this._heartbeatSocket) {
     this._heartbeatSocket.connect(config.getHeartbeatSocketUrl());
   } else {
     this._heartbeatSocket = new Socket(config.getHeartbeatSocketUrl());
+
+    this._heartbeatSocket.on('close', () => {
+      clearTimeout(this._heartbeatSocketTimesup);
+    });    
   }
+
+  // give up if it takes to long
+  this._heartbeatSocketTimesup = setTimeout(() => {
+    if (this._heartbeatSocket.getReadyState() !== 1) {
+      this._heartbeatSocket._socket.close(); //turn off for now, until server issues are fixed
+      // alert(polyglot.t('errorMessages.serverTimeout'));
+    }
+  }, 3000); //wait for 30 seconds, sometimes the server stalls  
 };
 
 App.prototype.getHeartbeatSocket = function() {

@@ -4,6 +4,6 @@ var Backbone = require('backbone'),
 
 module.exports = Backbone.Collection.extend({
   sync: localStorageSync.sync,
-  localStorage: new localStorageSync('_serverConfig'),  
+  localStorage: new localStorageSync('__serverConfig'),  
   model: ServerConfigMd
 });

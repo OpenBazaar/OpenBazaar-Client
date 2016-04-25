@@ -43,9 +43,11 @@ module.exports = BaseVw.extend({
 
     var index = -1;
 
-    __.every(this.configRowViews, (vw) => {
-      index++;
-      if (vw.id === state.id) return false;
+    __.every(this.configRowViews, (vw, i) => {
+      if (vw.model.id === state.id) {
+        index = i;
+        return false;
+      }
 
       return true;
     });

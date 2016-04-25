@@ -4249,6 +4249,15 @@ input[type="checkbox"].fieldItem:checked + label .togLabelOff {
   top: 372px;
 }
 
+#ov1 .server-config-row .connection-failed::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  background-color: red;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
 
 #loadingModal .btn {
   -webkit-app-region: no-drag;

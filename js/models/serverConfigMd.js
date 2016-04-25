@@ -3,26 +3,35 @@ var Backbone = require('backbone'),
     is = require('is_js');
 
 module.exports = Backbone.Model.extend({
-  defaults: function() {
-    var defaultsObj = {
-          'server_ip': 'localhost',
-          'rest_api_port': 18469,
-          'api_socket_port': 18466,
-          'heartbeat_socket_port': 18470,
-          'SSL': false
-        },
-        localUsername = this.get('local_username'),
-        localPassword = this.get('local_password');
+  // defaults: function() {
+  //   var defaultsObj = {
+  //         'server_ip': 'localhost',
+  //         'rest_api_port': 18469,
+  //         'api_socket_port': 18466,
+  //         'heartbeat_socket_port': 18470,
+  //         'SSL': false
+  //       },
+  //       localUsername = this.get('local_username'),
+  //       localPassword = this.get('local_password');
 
-    defaultsObj['username'] = localUsername || '';
-    defaultsObj['password'] = localPassword || '';
+  //   defaultsObj['username'] = localUsername || '';
+  //   defaultsObj['password'] = localPassword || '';
 
-    return defaultsObj;
-  },
+  //   return defaultsObj;
+  // },
+
+  defaults: {
+    'server_ip': 'localhost',
+    'rest_api_port': 18469,
+    'api_socket_port': 18466,
+    'heartbeat_socket_port': 18470,
+    'SSL': false,
+    'default': false
+  },  
 
   sync: localStorageSync.sync,
 
-  localStorage: new localStorageSync('_serverConfig'),
+  localStorage: new localStorageSync('__serverConfig'),
 
   _addError: function(errObj, fieldName, error) {
     errObj = errObj || {};
@@ -113,8 +122,7 @@ module.exports = Backbone.Model.extend({
       }
     }    
 
-    // if (!(remote.getGlobal('MOMOMOinstallerLaunched') && this.get('name') === 'default')) {
-    if (this.get('name') !== 'default') {
+    if (!attrs.default) {
       if (!is.existy(attrs.username) || is.empty(attrs.username)) {
         this._addError(err, 'username', 'Please provide a value.');
       }

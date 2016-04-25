@@ -1,5 +1,4 @@
-<% console.log('====');console.log(JSON.stringify(ob));console.log('===='); %>
-<div class="rowItem padding2015">
+<div class="rowItem padding2015 positionRelative <% ob.status === 'failed' && print('connection-failed') %>">
   <div class="flexRow">
     <div class="table">
       <div>
@@ -9,27 +8,27 @@
         <div class="vertAlignMid">
           <%= ob.server_ip %>
         </div>
-        <div style="width: 190px;">
-          <div>
+        <div style="width: 190px;" class="alignRight">
             <% if (ob.status === 'not-connected' || ob.status === 'failed') { %>
             <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 marginLeft5 js-connect">
               <% print(ob.status === 'not-connected' ? 'Connect' : 'Retry') %>
             </a>
-            <a class="btn btn-txt btn-secondary custCol-secondary pull-right marginLeft5 positionWrapper js-edit-config">
-              <span class="ion-ios-gear textOpacity1 fullCentered"></span>
-            </a>
-            <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 positionWrapper js-delete-config">
-              <span class="ion-ios-trash textOpacity1 fullCentered"></span>
-            </a>
+              <% if (!ob.default) { %>
+              <a class="btn btn-txt btn-secondary custCol-secondary pull-right marginLeft5 positionWrapper js-edit-config">
+                <span class="ion-ios-gear textOpacity1 fullCentered"></span>
+              </a>
+              <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 positionWrapper js-delete-config">
+                <span class="ion-ios-trash textOpacity1 fullCentered"></span>
+              </a>
+              <% } %>
             <% } else if (ob.status === 'connected') { %>
             <span class="ion-connection-bars textOpacity1 fullCentered"></span> Connected
             <% } else if (ob.status === 'connecting') { %>
             <span class="vertAlignMid">Connecting...</span> 
-            <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 marginLeft5 js-cancel">
+            <a class="btn btn-txt btn-secondary custCol-secondary fontSize13 marginLeft10 js-cancel">
               Cancel
             </a>            
             <% } %>
-          </div>
         </div>
       </div>
     </div>

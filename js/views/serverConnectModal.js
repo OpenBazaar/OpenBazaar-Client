@@ -61,7 +61,10 @@ module.exports = BaseModal.extend({
   },
 
   showMessageBar: function(msg) {
-    this.$jsMsgBar.html(msg)
+    this.$jsMsgBar
+      .find('.js-message-bar-content')
+      .html(msg)
+      .end()
       .removeClass('slide-out');
   },  
 
@@ -109,7 +112,6 @@ module.exports = BaseModal.extend({
 
   onCancelClick: function(e) {
     this.connectAttempt && this.connectAttempt.cancel();
-    console.log('you clicka cancel');
   },  
 
   onConnectClick: function(e) {
@@ -126,17 +128,32 @@ module.exports = BaseModal.extend({
       status: 'connecting'
     });
 
+    this.hideMessageBar();
+
     this.connectAttempt = this.attemptConnection().done(() => {
       this.serverConfigsVw.setConnectionState({
         id: configMd.id,
         status: 'connected'
       });
     }).fail((reason) => {
-      console.log('i have failed my son');
+      var msg;
+
       this.serverConfigsVw.setConnectionState({
         id: configMd.id,
         status: reason === 'canceled' ? 'not-connected' : 'failed'
-      });      
+      });
+
+      if (reason !== 'canceled') {
+        msg = polyglot.t('serverConnectModal.connectionFailed', { serverName: configMd.get('name') });
+      }
+
+      if (reason === 'failed-auth-too-many') {
+        msg += `&mdash; ${polyglot.t('serverConnectModal.authFailedTooManyAttempts')}`;
+      } else if (reason === 'failed-auth') {
+        msg += `&mdash; ${polyglot.t('serverConnectModal.authFailed')}`;
+      }
+
+      this.showMessageBar(msg)
     }).always(() => {
       this.connectAttempt = null;
     });    

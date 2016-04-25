@@ -6,7 +6,7 @@ var __ = require('underscore'),
     BaseVw = require('./baseVw');
 
 module.exports = BaseVw.extend({
-  className: 'flexRow borderBottom custCol-border',
+  className: 'flexRow borderBottom custCol-border server-config-row',
 
   events: {
     'click .js-delete-config': 'onClickDelete',
@@ -16,8 +16,6 @@ module.exports = BaseVw.extend({
   },
 
   initialize: function(options) {
-    console.log('construct yourself');
-    
     this.options = options || {};
     this._state = {
       status: 'not-connected'

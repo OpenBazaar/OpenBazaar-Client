@@ -1,4 +1,3 @@
-
 var App = require('./App'),
     app = new App();
 
@@ -6,6 +5,7 @@ var __ = window.__ = require('underscore'),
     Backbone = require('backbone'),
     $ = require('jquery'),
     Config = require('./config');
+
 Backbone.$ = $;
 //add to global scope for non-modular libraries
 window.Backbone = Backbone;
@@ -24,13 +24,11 @@ window.onblur = function() {
   window.focused = false;
 };
 
-var Polyglot = require('node-polyglot'),
-    ipcRenderer = require('ipc-renderer'),
+var ipcRenderer = require('ipc-renderer'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
-    languagesModel = require('./models/languagesMd'),
     mouseWheel = require('jquery-mousewheel'),
     mCustomScrollbar = require('./utils/jquery.mCustomScrollbar.js'),
     setTheme = require('./utils/setTheme.js'),
@@ -39,7 +37,6 @@ var Polyglot = require('node-polyglot'),
     StatusBarView = require('./views/statusBarVw'),
     user = new userModel(),
     userProfile = new userProfileModel(),
-    languages = new languagesModel(),
     socketView = require('./views/socketVw'),
     cCode = "",
     $loadingModal = $('.js-loadingModal'),
@@ -65,22 +62,7 @@ var Polyglot = require('node-polyglot'),
     guidCreating,
     after401LoginRequest;
 
-//put language in the window so all templates and models can reach it. It's especially important in formatting currency.
-//retrieve the stored value, since user is a blank model at this point
-window.lang = localStorage.getItem('lang') || "en-US";
-
-//put polyglot in the window so all templates can reach it
-window.polyglot = new Polyglot({locale: window.lang});
-
-(extendPolyglot = function(lang) {
-  // Make sure the language exists in the languages model
-  if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
-    var language = require('./languages/' + window.lang + '.json');
-
-    window.polyglot.extend(language);
-  }
-})(window.lang);
-
+// update plyglot as lang changes
 user.on('change:language', function(md, lang) {
   window.lang = lang;
   extendPolyglot(lang);

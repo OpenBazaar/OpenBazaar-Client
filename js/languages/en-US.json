@@ -659,13 +659,7 @@
     "noSearchResultsFound": "No results found"
   },
   "serverConnectModal": {
-    "statusTryingToConnect": "Trying to connect to your server...",
-    "statusConnected": "Connected.",
-    "statusFailedConnection": "Unable to connect to your server",
-    "statusFailedAuthentication": "Authentication failed",
-    "statusTooManyAttempts": "Too many failed login attempts",
     "serverConfiguration": "Server Configuration",
-    "connecting": "Connecting...",
     "intro": "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.",
     "serverIP": "Server IP",
     "restApiPort": "Rest API port",
@@ -673,9 +667,12 @@
     "heartbeatSocketApiPort": "Heartbeat socket port",
     "username": "Username",
     "password": "Password",
-    "restoreDefaults": "Restore defaults",
     "saveChanges": "Save Changes",
-    "retry": "Retry connection"
+    "retry": "Retry",
+    "defaultServerName": "default",
+    "connectionFailed": "Connection failed to %{serverName}",
+    "authFailed": "authentication failed",
+    "authFailedTooManyAttempts": "too many failed authentication attempts"
   },
   "timezones": {
     "-12": "(GMT -12:00) Eniwetok, Kwajalein",
