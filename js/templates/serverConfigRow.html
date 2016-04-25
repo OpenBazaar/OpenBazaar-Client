@@ -11,7 +11,7 @@
         <div style="width: 190px;" class="alignRight">
             <% if (ob.status === 'not-connected' || ob.status === 'failed') { %>
             <a class="btn btn-txt btn-secondary custCol-secondary pull-right fontSize13 marginLeft5 js-connect">
-              <% print(ob.status === 'not-connected' ? 'Connect' : 'Retry') %>
+              <% print(ob.status === 'not-connected' ? polyglot.t('serverConnectModal.connect') : polyglot.t('Retry')) %>
             </a>
               <% if (!ob.default) { %>
               <a class="btn btn-txt btn-secondary custCol-secondary pull-right marginLeft5 positionWrapper js-edit-config">
@@ -22,11 +22,11 @@
               </a>
               <% } %>
             <% } else if (ob.status === 'connected') { %>
-            <span class="ion-connection-bars textOpacity1 fullCentered"></span> Connected
+            <span class="ion-connection-bars textOpacity1 fullCentered"></span> <%= polyglot.t('serverConnectModal.connected') %>
             <% } else if (ob.status === 'connecting') { %>
-            <span class="vertAlignMid">Connecting...</span> 
+            <span class="vertAlignMid"><%= polyglot.t('serverConnectModal.connecting') %>...</span> 
             <a class="btn btn-txt btn-secondary custCol-secondary fontSize13 marginLeft10 js-cancel">
-              Cancel
+              <%= polyglot.t('Cancel') %>
             </a>            
             <% } %>
         </div>

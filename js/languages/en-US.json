@@ -23,6 +23,7 @@
   "of": "of",
   "Sell": "Sell",
   "New": "New",
+  "Retry": "Retry",
   "HighlightToStyle": "Highlight text to style",
   "Excellent": "Excellent",
   "Good": "Good",
@@ -659,6 +660,9 @@
     "noSearchResultsFound": "No results found"
   },
   "serverConnectModal": {
+    "connect": "Connect",
+    "connected": "Connected",
+    "connecting": "Connecting",
     "serverConfiguration": "Server Configuration",
     "intro": "OpenBazaar is designed to allow you to host your server separate from the client. By default, your server will run locally, but you can override it below.",
     "serverIP": "Server IP",
@@ -668,11 +672,15 @@
     "username": "Username",
     "password": "Password",
     "saveChanges": "Save Changes",
-    "retry": "Retry",
     "defaultServerName": "default",
     "connectionFailed": "Connection failed to %{serverName}",
     "authFailed": "authentication failed",
-    "authFailedTooManyAttempts": "too many failed authentication attempts"
+    "authFailedTooManyAttempts": "too many failed authentication attempts",
+    "serverConfigsHeaderMsg": "Your Server Configurations",
+    "newConfigHeaderMsg": "Enter Server Details",
+    "editConfigHeaderMsg": "Configuration Settings",
+    "serverConfigsTitle": "Server Configurations",
+    "newConfigTitle": "New Configuration"    
   },
   "timezones": {
     "-12": "(GMT -12:00) Eniwetok, Kwajalein",

@@ -20,24 +20,13 @@ module.exports = BaseModal.extend({
     'click .js-msg-bar-close': 'hideMessageBar'
   },
 
-  // todo: poly-gluttonize!
-  headerMessages: {
-    serverConfigsTitle: 'Your Server Configurations',
-    newConfigTitle: 'Enter Server Details',
-    editConfigTitle: 'Configuration Settings',
-  },
-
   initialize: function(options) {
     this.options = options || {};
 
-    // if (!options.server) {
-    //   throw new Error('Please provide a server option referencing a Server instance.');
-    // }
-
     this.headerVw = new ServerConnectHeaderVw({
       initialState: {
-        msg: 'Your Server Configurations',
-        title: 'Server Configurations',
+        msg: polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
+        title: polyglot.t('serverConnectModal.serverConfigsTitle'),
         showNew: true
       }
     });
@@ -71,8 +60,8 @@ module.exports = BaseModal.extend({
   closeConfigForm: function() {
     this.$jsConfigFormWrap.addClass('slide-out');
     this.headerVw.setState({
-      msg: 'Your Server Configurations',
-      title: 'Server Configurations',
+      msg: polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
+      title: polyglot.t('serverConnectModal.serverConfigsTitle'),
       showNew: true
     });
   },  
@@ -81,8 +70,10 @@ module.exports = BaseModal.extend({
     var model = configMd || new ServerConfigMd();
 
     this.headerVw.setState({
-      title: model.get('name') || 'New Configuration',
-      msg:  configMd ? 'Configuration Settings' : 'Enter Server Details',
+      title: model.get('name') || polyglot.t('serverConnectModal.newConfigTitle'),
+      msg:  configMd ?
+        polyglot.t('serverConnectModal.editConfigHeaderMsg') :
+        polyglot.t('serverConnectModal.newConfigHeaderMsg'),
       showNew: false
     });
 
@@ -153,7 +144,7 @@ module.exports = BaseModal.extend({
         msg += `&mdash; ${polyglot.t('serverConnectModal.authFailed')}`;
       }
 
-      this.showMessageBar(msg)
+      msg && this.showMessageBar(msg);
     }).always(() => {
       this.connectAttempt = null;
     });    
