@@ -1,5 +1,6 @@
 var __ = require('underscore'),
-    Backbone = require('backbone');
+    Backbone = require('backbone'),
+    app = require('../App').getApp();
 
 module.exports = window.Backbone.Model.extend({
   defaults: {
@@ -25,10 +26,7 @@ module.exports = window.Backbone.Model.extend({
         maximumFractionDigits: 2,
         currency: response.cCode
       }).format(response.btc_total*response.btAve);
-    } else {
-      response.displayPrice = response.btc_total.toFixed(4) + " BTC";
     }
-
     return response;
   }
 });

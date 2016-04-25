@@ -29,7 +29,6 @@ module.exports = Backbone.View.extend({
         currentShippingBTCPrice = 0,
         shippingType = "",
         templJSON = {};
-    console.log(this.model)
 
     //set prices before each render
     if(this.model.get('vendor_offer').listing.shipping.free !== true && this.model.get('selectedAddress')) {
