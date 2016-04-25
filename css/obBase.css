@@ -707,7 +707,7 @@ label.fieldItem {
 }
 
 [class |= "flexCol"] > .fieldItem {
-  margin: 0 -1px -1px 0;
+  margin: 0 -2px -2px 0; /* prevent collum overflows */
 }
 
 .table {

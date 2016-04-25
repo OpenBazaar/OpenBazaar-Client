@@ -130,10 +130,10 @@
       <% if(ob.dispute_resolution){ %>
         <div class="flexRow txt-center rowTop10 borderTop custCol-border pad10Top">
           <div class="flexExpand">
-            <%= polyglot.t('transactions.BuyerPayout') %> <%= ob.dispute_resolution.resolution.buyer_payout.toFixed(8) || 0 %> BTC
+            <%= polyglot.t('transactions.BuyerPayout') %> <%= ob.intlNumFormat(ob.dispute_resolution.resolution.buyer_payout, 8) || 0 %> BTC
           </div>
           <div class="flexExpand">
-            <%= polyglot.t('transactions.SellerPayout') %> <%= ob.dispute_resolution.resolution.vendor_payout.toFixed(8) || 0 %> BTC
+            <%= polyglot.t('transactions.SellerPayout') %> <%= ob.intlNumFormat(ob.dispute_resolution.resolution.vendor_payout, 8) || 0 %> BTC
           </div>
         </div>
       <% } %>
@@ -583,15 +583,15 @@
 
         <div class="flexRow custCol-border borderBottom">
           <div class="flexRow rowItem padding15">
-            <div class="flexCol-7">
+            <div class="flexCol-7 overflowHidden">
               <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
-              <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
-                          <% if(ob.vendor_offer.listing.item.image_hashes){ %>
-                          style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultItem.png);"
-                          <% } else { %>
-                          style="background-image: url(imgs/defaultItem.png);"
-                          <% } %>>
-                        </div>
+                <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
+                            <% if(ob.vendor_offer.listing.item.image_hashes){ %>
+                            style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultItem.png);"
+                            <% } else { %>
+                            style="background-image: url(imgs/defaultItem.png);"
+                            <% } %>>
+                          </div>
                 </a>
               <div class="txt-unleaded">
                 <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
@@ -615,9 +615,9 @@
               <div class="txt-unleaded">
                 <div class="marginTop12 marginBottom4 fontSize14">
                   <% if(ob.displayUnitPrice){ %>
-                  <strong><span class="noWrap"><%= ob.displayUnitPriceBTC.toFixed(8) %> BTC</span> (<%= ob.displayUnitPrice %>)</strong>
+                  <strong><span class="noWrap"><%= ob.intlNumFormat(ob.displayUnitPriceBTC, 8) %> BTC</span> (<%= ob.displayUnitPrice %>)</strong>
                   <% } else if(ob.displayUnitPriceBTC){ %>
-                  <strong><%= ob.displayUnitPriceBTC.toFixed(8) %> BTC</strong>
+                  <strong><%= ob.intlNumFormat(ob.displayUnitPriceBTC, 8) %> BTC</strong>
                   <% } %>*
                 </div>
                 <div class="noOverflow fontSize13 txt-fade">
@@ -655,9 +655,9 @@
             <div class="flexCol-5">
               <div class="txt-unleaded fontSize14 textOpacity1 marginTop12">
                 <% if(ob.displayShippingPrice){ %>
-                <strong><%= ob.displayShippingPriceBTC.toFixed(8) %> BTC <span class="noWrap">(<%= ob.displayShippingPrice %>)</span></strong>
+                <strong><%= ob.intlNumFormat(ob.displayShippingPriceBTC, 8) %> BTC <span class="noWrap">(<%= ob.displayShippingPrice %>)</span></strong>
                 <% } else if(ob.displayShippingPriceBTC){ %>
-                <strong><%= ob.displayShippingPriceBTC.toFixed(8) %> BTC</strong>
+                <strong><%= ob.intlNumFormat(ob.displayShippingPriceBTC, 8) %> BTC</strong>
                 <% } else { %>
                 <strong><%= polyglot.t('Free') %></strong>
                 <% } %>
@@ -704,9 +704,9 @@
         </div>
         <div class="flexCol-5 alignRight">
           <% if(ob.displayTotalPrice){ %>
-          <strong><span class="noWrap"><%= ob.buyer_order.order.payment.amount.toFixed(8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
+          <strong><span class="noWrap"><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</span> (<%= ob.displayTotalPrice %>)</strong>
           <% } else if(ob.buyer_order.order.payment.amount){ %>
-          <strong><%= ob.buyer_order.order.payment.amount.toFixed(8) %> BTC</strong>
+          <strong><%= ob.intlNumFormat(ob.buyer_order.order.payment.amount, 8) %> BTC</strong>
           <% } else { %>
           <strong><%= polyglot.t('Free') %></strong>
           <% } %>
@@ -1059,10 +1059,10 @@
                   <div class="fieldItem fontSize11">
                     <%= polyglot.t('transactions.TotalInTransaction') %>
                     <strong>
-                      <%= (ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal).toFixed(8) %> BTC
+                      <%= ob.intlNumFormat(ob.buyer_order.order.payment.amount - ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal, 8) %> BTC
                     </strong>
                     <div class="pull-right">
-                      <%= polyglot.t('transactions.YouEarn') %> <%= (ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal).toFixed(8) %> BTC
+                      <%= polyglot.t('transactions.YouEarn') %> <%= ob.intlNumFormat(ob.buyer_order.order.payment.amount * ob.displayModerator.feeDecimal, 8) %> BTC
                     </div>
                   </div>
                 </div>
