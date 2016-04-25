@@ -327,7 +327,7 @@
   "ServerChangeWarningHeadline": "Caution: Record Your Settings",
   "ServerChangeWarning": "We recommend you make a copy of your previous settings, shown below. Your previous username and password will no longer be available beyond this point.",
   "ModeratorFee": "Fee:",
-  "PriceForOne": "Price per single item, file, or service.",
+  "PriceForOne": "Price per single item, file, or service. Based on the listing's base price and the current exchange rate of BTC. This may not match the order total, which is based on the exchange rate of BTC at the time you purchased this listing.",
   "Avatar": "Avatar",
   "AdditionalPaymentData": "Additional payment data",
   "AdditionalPaymentDataInfo": "Include name of purchase and order number in payment QR code?",
