@@ -584,7 +584,7 @@
         <div class="flexRow custCol-border borderBottom">
           <div class="flexRow rowItem padding15">
             <div class="flexCol-7 overflowHidden">
-              <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
+              <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
                 <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
                             <% if(ob.vendor_offer.listing.item.image_hashes){ %>
                             style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultItem.png);"
@@ -595,7 +595,7 @@
                 </a>
               <div class="txt-unleaded">
                 <div class="marginTop12 marginBottom4 fontSize14 noOverflow">
-                  <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
+                  <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
                     <strong><%- ob.vendor_offer.listing.item.title %></strong>
                   </a>
                 </div>
@@ -741,7 +741,7 @@
       <div class="flexRow custCol-border borderBottom">
         <div class="flexRow rowItem padding15">
           <div class="flexCol-8">
-            <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/item/<%- ob.vendor_offer.listing.contract_id %>">
+            <a href="#userPage/<%- ob.vendor_offer.listing.id.guid %>/listing/<%- ob.vendor_offer.listing.contract_id %>">
               <div class="thumbnail thumbnail-large-slim pull-left marginRight10"
                   <% if(ob.vendor_offer.listing.item.image_hashes){ %>
                   style="background-image: url(<%- ob.serverUrl %>get_image?hash=<%- ob.vendor_offer.listing.item.image_hashes[0] %>&guid=<%-ob.vendor_offer.listing.id.guid %>), url(imgs/defaultBanner.png);"
