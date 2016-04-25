@@ -1,10 +1,11 @@
-var App = require('./App'),
-    app = new App();
-
 var __ = window.__ = require('underscore'),
+    Polyglot = require('node-polyglot'),
     Backbone = require('backbone'),
     $ = require('jquery'),
-    Config = require('./config');
+    LanguagesMd = require('./models/languagesMd'),
+    languages = new LanguagesMd(),
+    App = require('./App'),
+    app = new App();    
 
 Backbone.$ = $;
 //add to global scope for non-modular libraries
@@ -24,9 +25,26 @@ window.onblur = function() {
   window.focused = false;
 };
 
+//put language in the window so all templates and models can reach it. It's especially important in formatting currency.
+//retrieve the stored value, since user is a blank model at this point
+window.lang = localStorage.getItem('lang') || "en-US";
+
+//put polyglot in the window so all templates can reach it
+window.polyglot = new Polyglot({locale: window.lang});
+
+(extendPolyglot = function(lang) {
+  // Make sure the language exists in the languages model
+  if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
+    var language = require('./languages/' + window.lang + '.json');
+
+    window.polyglot.extend(language);
+  }
+})(window.lang);
+
 var ipcRenderer = require('ipc-renderer'),
     getBTPrice = require('./utils/getBitcoinPrice'),
     router = require('./router'),
+    Config = require('./config'),
     userModel = require('./models/userMd'),
     userProfileModel = require('./models/userProfileMd'),
     mouseWheel = require('jquery-mousewheel'),
@@ -42,7 +60,6 @@ var ipcRenderer = require('ipc-renderer'),
     $loadingModal = $('.js-loadingModal'),
     ServerConnectModal = require('./views/serverConnectModal'),
     OnboardingModal = require('./views/onboardingModal'),
-    heartbeat = app.getHeartbeatSocket(),
     loadProfileNeeded = true,
     startUpConnectMaxRetries = 2,
     startUpConnectRetryDelay = 2 * 1000,
@@ -322,23 +339,23 @@ var loadProfile = function(landingRoute, onboarded) {
 };
 
 $(document).ajaxError(function(event, jqxhr, settings, thrownError) {
-  if (jqxhr.status === 401) {
-    if (after401LoginRequest && after401LoginRequest.state() === 'pending') return;
+  // if (jqxhr.status === 401) {
+  //   if (after401LoginRequest && after401LoginRequest.state() === 'pending') return;
 
-    after401LoginRequest = app.login().done(function(data) {
-      var route = location.hash;
+  //   after401LoginRequest = app.login().done(function(data) {
+  //     var route = location.hash;
 
-      if (data.success) {
-        // refresh the current route
-        Backbone.history.navigate('blah-blah-blah');
-        Backbone.history.navigate(route, { replace: true, trigger: true });
-      } else {
-        launchServerConnect();
-      }
-    }).fail(function() {
-      launchServerConnect();
-    });
-  }
+  //     if (data.success) {
+  //       // refresh the current route
+  //       Backbone.history.navigate('blah-blah-blah');
+  //       Backbone.history.navigate(route, { replace: true, trigger: true });
+  //     } else {
+  //       launchServerConnect();
+  //     }
+  //   }).fail(function() {
+  //     launchServerConnect();
+  //   });
+  // }
 });
 
 launchOnboarding = function(guidCreating) {
@@ -384,15 +401,17 @@ launchServerConnect = function() {
   //   }
   // }
 
-  if (!window.moo) {
-    window.moo = new ServerConnectModal();
-    window.moo.render().open();  
-  } else {
-    window.moo.open();
-  }  
+  // if (!window.moo) {
+  //   window.moo = new ServerConnectModal();
+  //   window.moo.render().open();  
+  // } else {
+  //   window.moo.open();
+  // }  
 };
 
-heartbeat.on('open', function(e) {
+app.serverConnectModal = new ServerConnectModal().render();
+
+app.getHeartbeatSocket().on('open', function(e) {
   if (profileLoaded) {
     location.reload();
   } else {
@@ -405,22 +424,20 @@ heartbeat.on('open', function(e) {
   }
 });
 
-heartbeat.on('close', function(e) {
-  if (
-    Date.now() - startTime < startUpConnectMaxTime &&
-    startUpConnectMaxRetries &&
-    !profileLoaded
-  ) {
-    setTimeout(() => {
-      startUpConnectMaxRetries--;
-      app.connectHeartbeatSocket();
-    }, startUpConnectRetryDelay);
-  } else {
-    launchServerConnect();
-  }
+app.getHeartbeatSocket().on('close', function(e) {
+  // if (
+  //   Date.now() - startTime < startUpConnectMaxTime &&
+  //   startUpConnectMaxRetries &&
+  //   !profileLoaded
+  // ) {
+  //   setTimeout(() => {
+  //     startUpConnectMaxRetries--;
+  //     app.connectHeartbeatSocket();
+  //   }, startUpConnectRetryDelay);
+  // }
 });
 
-heartbeat.on('message', function(e) {
+app.getHeartbeatSocket().on('message', function(e) {
   var serverConfig = app.getServerConfig();
 
   if (e.jsonData && e.jsonData.status) {
@@ -448,36 +465,36 @@ heartbeat.on('message', function(e) {
 
         serverConfig.save(creds);
 
-        app.login().done(function() {
-          guidCreating.resolve();
-        });
+        app.serverConnectModal.connect(app.getServerConfig())
+          .done(() => {
+            guidCreating.resolve();
+          }).fail(() => {
+            app.serverConnectModal.open();
+          });
 
         break;
       case 'online':
         if (loadProfileNeeded && !guidCreating) {
           loadProfileNeeded = false;
 
-          app.login().done(function(data) {
-            if (data.success) {
+          app.serverConnectModal.connect(app.getServerConfig())
+            .done((profileData) => {
               $.getJSON(serverConfig.getServerBaseUrl() + '/profile')
-                  .done(function(profile) {
-                    if (__.isEmpty(profile)) {
-                      launchOnboarding(guidCreating = $.Deferred().resolve().promise());
-                    } else {
-                      loadProfile();
-                    }
-                  })
-                  .always(function(data, textStatus){
-                    if(textStatus == 'parsererror'){
-                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
-                    }
-                  });
-            } else {
-              launchServerConnect();
-            }
-          }).fail(function() {
-            launchServerConnect();
-          });
+                .done(function(profile) {
+                  if (__.isEmpty(profile)) {
+                    launchOnboarding(guidCreating = $.Deferred().resolve().promise());
+                  } else {
+                    loadProfile();
+                  }
+                }).always(function(data, textStatus) {
+                  if (textStatus == 'parsererror') {
+                    alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                  }
+                });
+            }).fail(() => {
+              console.log('shout it out');
+              app.serverConnectModal.open();
+            });
         }
     }
   }

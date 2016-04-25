@@ -39,6 +39,16 @@ module.exports = BaseModal.extend({
     this.listenTo(this.serverConfigsVw, 'edit-config', this.onEditConfig);
     this.listenTo(this.serverConfigsVw, 'connect', this.onConnectClick);
     this.listenTo(this.serverConfigsVw, 'cancel', this.onCancelClick);
+
+    // In case connection drops outside of this modal's connect() flow.
+    app.getHeartbeatSocket().on('close', (e) => {
+      if (!this.connectAttempt) {
+        console.log('west end feel good');
+        this.failConnectionAttempt(null, app.getServerConfig().id);
+
+        !this.isOpen && this.open();
+      }
+    });
   },
 
   remove: function() {
@@ -109,45 +119,52 @@ module.exports = BaseModal.extend({
     this.connect(e.model);
   },
 
+  failConnectionAttempt: function(reason, configMd) {
+    var msg;
+
+    this.serverConfigsVw.setConnectionState({
+      id: configMd.id,
+      status: reason === 'canceled' ? 'not-connected' : 'failed'
+    });
+
+    msg = polyglot.t('serverConnectModal.connectionFailed', {
+      serverName: configMd.get('name')
+    });
+
+    if (reason === 'failed-auth-too-many') {
+      msg += `&mdash; ${polyglot.t('serverConnectModal.authFailedTooManyAttempts')}`;
+    } else if (reason === 'failed-auth') {
+      msg += `&mdash; ${polyglot.t('serverConnectModal.authFailed')}`;
+    }
+
+    reason !== 'canceled' && this.showMessageBar(msg);
+  },
+
   connect: function(configMd) {
-    var connect;
+    var connect,
+        connectAttempt;
 
     this.connectAttempt && this.connectAttempt.cancel();
     app.setServerConfig(configMd.id);
+    this.hideMessageBar();
+
     this.serverConfigsVw.setConnectionState({
       id: configMd.id,
       status: 'connecting'
     });
 
-    this.hideMessageBar();
-
-    this.connectAttempt = this.attemptConnection().done(() => {
+    connectAttempt = this.connectAttempt = this.attemptConnection().done(() => {
       this.serverConfigsVw.setConnectionState({
         id: configMd.id,
         status: 'connected'
       });
     }).fail((reason) => {
-      var msg;
-
-      this.serverConfigsVw.setConnectionState({
-        id: configMd.id,
-        status: reason === 'canceled' ? 'not-connected' : 'failed'
-      });
-
-      if (reason !== 'canceled') {
-        msg = polyglot.t('serverConnectModal.connectionFailed', { serverName: configMd.get('name') });
-      }
-
-      if (reason === 'failed-auth-too-many') {
-        msg += `&mdash; ${polyglot.t('serverConnectModal.authFailedTooManyAttempts')}`;
-      } else if (reason === 'failed-auth') {
-        msg += `&mdash; ${polyglot.t('serverConnectModal.authFailed')}`;
-      }
-
-      msg && this.showMessageBar(msg);
+      this.failConnectionAttempt(reason, configMd)
     }).always(() => {
       this.connectAttempt = null;
-    });    
+    });
+
+    return connectAttempt;    
   },
 
   attemptConnection: function() {
@@ -165,15 +182,15 @@ module.exports = BaseModal.extend({
     rejectLogin = function(reason) {
       rejectLoginLater = setTimeout(function() {
         deferred.reject(reason);
-      }, 1000);
+      }, 500);
     };
 
     login = function() {
       // check authentication
       loginRequest = app.login().done(function(data) {
         if (data.success) {
-          deferred.resolve();
-          self.trigger('connected', true);
+          deferred.resolve(data);
+          // self.trigger('connected', true);
         } else {
           if (data.reason === 'too many attempts') {
             rejectLogin('failed-auth-too-many');  
@@ -181,7 +198,7 @@ module.exports = BaseModal.extend({
             rejectLogin('failed-auth');  
           }
 
-          self.trigger('connected', false);
+          // self.trigger('connected', false);
         }
       }).fail(function(jqxhr) {
         if (jqxhr.statusText === 'abort') return;
@@ -224,7 +241,10 @@ module.exports = BaseModal.extend({
     }));    
 
     timesup = setTimeout(function() {
-      deferred.reject('timedout');
+      // not time-ing our connections for now, due to
+      // server issue where valid connections may take
+      // 1 min. +
+      // deferred.reject('timedout');
     }, 10000);
 
     return promise;

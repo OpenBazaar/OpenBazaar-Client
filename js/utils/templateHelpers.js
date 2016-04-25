@@ -1,4 +1,4 @@
-var app = require('../App.js').getApp(),
+var app = require('../App').getApp(),
     moment = require('moment');
 
 function cssImageUrl(hash, guid, fallback) {

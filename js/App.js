@@ -20,8 +20,6 @@ function App() {
   this._notifUnread = 0;
   this._chatMessagesUnread = 0;
 
-  this.initLang();
-
   this.serverConfigs = new ServerConfigsCl();
   this.serverConfigs.fetch();
 
@@ -35,24 +33,6 @@ function App() {
   }
 
   this.connectHeartbeatSocket();
-}
-
-App.prototype.initLang = function() {
-  //put language in the window so all templates and models can reach it. It's especially important in formatting currency.
-  //retrieve the stored value, since user is a blank model at this point
-  window.lang = localStorage.getItem('lang') || "en-US";
-
-  //put polyglot in the window so all templates can reach it
-  window.polyglot = new Polyglot({locale: window.lang});
-
-  (extendPolyglot = function(lang) {
-    // Make sure the language exists in the languages model
-    if (__.where(languages.get('languages'), {langCode: window.lang}).length) {
-      var language = require('./languages/' + window.lang + '.json');
-
-      window.polyglot.extend(language);
-    }
-  })(window.lang);
 };
 
 App.prototype.getServerConfig = function() {
@@ -115,7 +95,7 @@ App.prototype.login = function() {
   }
 
   return $.ajax({
-    url: config + '/login',
+    url: config.getServerBaseUrl() + '/login',
     method: 'POST',
     data: {
       username: config.get('username'),
