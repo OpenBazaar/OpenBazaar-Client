@@ -49,6 +49,8 @@
   "ViewListing": "View Listing",
   "Unfollow": "Unfollow",
   "ConfirmUnfollow": "Confirm Unfollow",
+  "AddModerator": "Add as Moderator",
+  "RemoveModerator": "Remove as Moderator",
   "About": "About",
   "Version": "Version %{version}",
   "NoDescriptionAdded": "No description added",
