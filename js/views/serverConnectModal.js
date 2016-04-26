@@ -54,7 +54,7 @@ module.exports = BaseModal.extend({
 
       if (!this.connectAttempt) {
         // console.log('you be bringin it straight fleece out style');
-        this.failConnectionAttempt(null, this.serverConfigs.getActive());
+        this.failConnection(null, this.serverConfigs.getActive());
 
         // !this.isOpen() && this.open();
       }
@@ -79,7 +79,7 @@ module.exports = BaseModal.extend({
           (activeConfig = this.serverConfigs.getActive()) &&
           activeConfig.id === failedConfig.id           
         ) {
-          this.failConnectionAttempt(
+          this.failConnection(
             jqXhr.responseJSON.reason === 'too many attempts' ?
               'failed-auth-too-many' : 'failed-auth',
             activeConfig
@@ -108,6 +108,8 @@ module.exports = BaseModal.extend({
   },  
 
   closeConfigForm: function() {
+    if (!this.$jsConfigFormWrap) return;
+    
     this.$jsConfigFormWrap.addClass('slide-out');
     this.headerVw.setState({
       msg: polyglot.t('serverConnectModal.serverConfigsHeaderMsg'),
@@ -117,7 +119,12 @@ module.exports = BaseModal.extend({
   },  
 
   showConfigForm: function(configMd) {
-    var model = configMd || new ServerConfigMd();
+    var model = configMd;
+
+    if (!model) {
+      model = new ServerConfigMd();
+      model.__collection = this.serverConfigs;
+    }
 
     this.headerVw.setState({
       title: model.get('name') || polyglot.t('serverConnectModal.newConfigTitle'),
@@ -160,7 +167,10 @@ module.exports = BaseModal.extend({
     this.connect(e.model);
   },
 
-  succeedConnectionAttempt: function(configMd) {
+  succeedConnection: function(configMd) {
+    // Sets the state of the modal to reflect a successful connection
+    // for the given config.
+
     // todo: validate args
 
     if (this.connectAttempt && this.connectAttempt.state() === 'pending') return this;
@@ -178,7 +188,10 @@ module.exports = BaseModal.extend({
     return this;
   },
 
-  failConnectionAttempt: function(reason, configMd) {
+  failConnection: function(reason, configMd) {
+    // Sets the state of the modal to reflect a failed connection
+    // for the given config.
+
     // todo: validate args
 
     var msg;
@@ -242,10 +255,10 @@ module.exports = BaseModal.extend({
       //   status: 'connected'
       // });
 
-      this.succeedConnectionAttempt(configMd);
+      this.succeedConnection(configMd);
     }).fail((reason) => {
       console.log(`yuo be rejected because ${reason}`);
-      this.failConnectionAttempt(reason, configMd)
+      this.failConnection(reason, configMd)
     }).always(() => {
       this.connectAttempt = null;
     });
@@ -334,6 +347,11 @@ module.exports = BaseModal.extend({
     }, 10000);
 
     return promise;
+  },
+
+  close: function() {
+    this.closeConfigForm();
+    BaseModal.prototype.close.apply(this, arguments);
   }, 
 
   renderServerConfigForm: function(md) {

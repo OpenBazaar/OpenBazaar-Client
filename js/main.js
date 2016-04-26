@@ -390,6 +390,7 @@ launchOnboarding = function(guidCreating) {
   onboardingModal.render().open();
 
   onboardingModal.on('onboarding-complete', function(guid) {
+    app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
     onboardingModal && onboardingModal.remove();
     onboardingModal = null;
     loadProfile('#userPage/' + guid + '/store', true);
@@ -426,6 +427,8 @@ launchServerConnect = function() {
 app.connectHeartbeatSocket();
 app.serverConnectModal = new ServerConnectModal().render();
 app.serverConnectModal.on('connected', (authenticated) => {
+  $loadingModal.removeClass('hide');
+
   if (authenticated) {
     profileLoaded && location.reload();
     app.serverConnectModal.close();
@@ -466,8 +469,8 @@ app.getHeartbeatSocket().on('close', function(e) {
   // }
 
   // launchServerConnect();
-  console.log('heartbeat close yall');
-  app.serverConnectModal.failConnectionAttempt(null, app.serverConfigs.getActive())
+
+  app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
     .open();
 });
 
@@ -503,29 +506,40 @@ app.getHeartbeatSocket().on('message', function(e) {
 
         break;
       case 'online':
+        console.log(`1: ${!!loadProfileNeeded}, 2: ${!!guidCreating}`);
+
         if (loadProfileNeeded && !guidCreating) {
           loadProfileNeeded = false;
 
           app.login().done(function(data) {
             if (data.success) {
               $.getJSON(app.serverConfigs.getActive().getServerBaseUrl() + '/profile')
-                  .done(function(profile) {
+                  .done(function(profile, textStatus) {
+                    if (textStatus == 'parsererror') {
+                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                      app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+                        .open();
+                      return;
+                    }
+
                     if (__.isEmpty(profile)) {
                       launchOnboarding(guidCreating = $.Deferred().resolve().promise());
                     } else {
+                      console.log('bu');
+                      app.serverConnectModal.succeedConnection(app.serverConfigs.getActive());
                       loadProfile();
-                    }
-                  })
-                  .always(function(data, textStatus){
-                    if(textStatus == 'parsererror'){
-                      alert(window.polyglot.t('errorMessages.serverError'), window.polyglot.t('errorMessages.badJSON'));
+                      console.log('lones');
                     }
                   });
             } else {
-              launchServerConnect();
+              app.serverConnectModal.failConnection(
+                data.reason === 'too many attempts' ? 'failed-auth-too-many' : 'failed-auth',
+                app.serverConfigs.getActive()
+              ).open();              
             }
           }).fail(function() {
-            launchServerConnect();
+            app.serverConnectModal.failConnection(null, app.serverConfigs.getActive())
+              .open();
           });
         }
     }
